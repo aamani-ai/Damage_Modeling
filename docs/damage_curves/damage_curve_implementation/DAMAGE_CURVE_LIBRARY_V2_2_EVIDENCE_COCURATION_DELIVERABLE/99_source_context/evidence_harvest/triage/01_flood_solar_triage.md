@@ -39,10 +39,10 @@ total-loss). Record as independent corroboration.
 ## Ingestion (standard 16) + version call
 
 v1 ingestion = **references + the cross-validation note → docs revision only** (no DR change → no
-cell-model bump, per [standard 17](../../../damage_curves/damage_curve_implementation/)).
+cell-model bump, per [standard 17](../../../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_1_EVIDENCE_UPDATE_AND_VERSIONING_DELIVERABLE/00_global_method/17_versioning_policy.md)).
 The transformer-selector / salinity / duration items are logged as **candidate model v1.1** changes for a
-separate pass. One [standard-16](../../../damage_curves/damage_curve_implementation/)
-update to the [flood×solar dossier](../../../damage_curves/damage_curve_implementation/).
+separate pass. One [standard-16](../../../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_1_EVIDENCE_UPDATE_AND_VERSIONING_DELIVERABLE/00_global_method/16_reference_ingestion_and_curve_update_protocol.md)
+update to the [flood×solar dossier](../../../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_1_EVIDENCE_UPDATE_AND_VERSIONING_DELIVERABLE/01_cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md).
 
 ---
 *Stage B · facts → [`research/flood_solar.md`](research/flood_solar.md) · workstream → [`README.md`](README.md).*

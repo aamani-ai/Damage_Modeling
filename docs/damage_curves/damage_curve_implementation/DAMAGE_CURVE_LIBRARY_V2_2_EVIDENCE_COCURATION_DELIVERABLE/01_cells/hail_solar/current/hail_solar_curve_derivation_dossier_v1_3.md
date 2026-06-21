@@ -920,3 +920,30 @@ Value link, if needed:
 | NREL Extreme Weather and PV Performance | https://research-hub.nrel.gov/en/publications/extreme-weather-and-pv-performance-2 |
 | VDE Americas hail stow memo | https://www.vde.com/en/vde-americas/newsroom/hail-stow-tech-memo |
 | FTC Solar 80° hail stow announcement | https://investor.ftcsolar.com/news-releases/news-release-details/ftc-solar-launches-automated-80deg-high-angle-stow-1p-pioneer/ |
+
+---
+
+## Evidence co-curation update · package v2.2 · model v1.0 docs r4
+
+A legacy evidence triage pass was reviewed under the global reference-ingestion protocol. This pass does **not**
+change the semantic hail × solar damage model. The active runtime curve remains the model v1.0 PVEL/Kiwa-anchored
+bounded logistic curve.
+
+```text
+Adopted evidence roles:
+    VU Amsterdam 2024      → independent field validation / field-vs-lab caveat
+    Ha et al. 2020         → glass-thickness / fragile-vs-hardened direction
+    NREL field monitoring  → latent cracking vs glass-breakage seam
+    VDE / Maugeri stow     → direction of stow benefit; magnitude still not calibrated
+
+Version call:
+    same inputs before update → same DR after update
+    cell damage-model version unchanged at hail_solar model v1.0
+    documentation revision: docs r4
+```
+
+See:
+
+```text
+02_evidence_ingestion/hail_solar_evidence_update_memo__model_v1_0__docs_r4.md
+```

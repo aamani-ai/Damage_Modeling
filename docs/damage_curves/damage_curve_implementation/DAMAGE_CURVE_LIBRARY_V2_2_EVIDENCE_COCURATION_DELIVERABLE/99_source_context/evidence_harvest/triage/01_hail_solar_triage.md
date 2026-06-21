@@ -41,9 +41,9 @@ We take what's useful (P3 — reference is input, not authority), nothing more.
 ## Ingestion (standard 16) — and the version call
 
 The adopt items are **references + notes**, not parameter changes. So under
-[standard 17 (versioning)](../../../damage_curves/damage_curve_implementation/):
+[standard 17 (versioning)](../../../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_1_EVIDENCE_UPDATE_AND_VERSIONING_DELIVERABLE/00_global_method/17_versioning_policy.md):
 **docs revision only — NO cell-damage-model version bump** (same inputs → same DR). Concretely, one
-[standard-16](../../../damage_curves/damage_curve_implementation/)
+[standard-16](../../../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_1_EVIDENCE_UPDATE_AND_VERSIONING_DELIVERABLE/00_global_method/16_reference_ingestion_and_curve_update_protocol.md)
 pass: add the 4 cross-validation refs + the field>lab caveat to the hail×solar dossier's evidence map &
 assumption register, with an evidence-update memo. Small, traceable, no curve movement.
 

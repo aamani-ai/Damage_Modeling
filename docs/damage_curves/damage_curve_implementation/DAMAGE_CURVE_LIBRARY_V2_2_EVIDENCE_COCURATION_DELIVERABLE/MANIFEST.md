@@ -1,4 +1,4 @@
-# Manifest — Damage Curve Library package v2.1
+# Manifest — Damage Curve Library package v2.2
 
 Generated package contents:
 
@@ -74,6 +74,11 @@ Generated package contents:
 - `01_cells/wind_tornado_wind/previews/wind_tornado_wind_v0_1_dashboard_preview.png`
 - `01_cells/wind_tornado_wind/previews/wind_tornado_wind_v1_0_coverage_preview.png`
 - `01_cells/wind_tornado_wind/previews/wind_tornado_wind_v1_0_dashboard_preview.png`
+- `02_evidence_ingestion/README_evidence_cocuration_v2_2.md`
+- `02_evidence_ingestion/evidence_ingestion_register_v2_2.xlsx`
+- `02_evidence_ingestion/flood_solar_evidence_update_memo__model_v1_0__docs_r2.md`
+- `02_evidence_ingestion/hail_solar_evidence_update_memo__model_v1_0__docs_r4.md`
+- `02_evidence_ingestion/wind_tornado_wind_evidence_update_memo__model_v1_0__docs_r2.md`
 - `99_source_context/03_valuation_guide.md`
 - `99_source_context/damage_curve_context_digest.md`
 - `99_source_context/damage_curve_foundations/00_assembled_curve_record.md`
@@ -87,6 +92,10 @@ Generated package contents:
 - `99_source_context/damage_curve_foundations/questions/04_curation_derivation.md`
 - `99_source_context/damage_curve_foundations/questions/05_emit_object.md`
 - `99_source_context/damage_curve_foundations/questions/06_metrics_and_tail_honesty.md`
+- `99_source_context/evidence_harvest/README_evidence_cocuration_kickoff.md`
+- `99_source_context/evidence_harvest/triage/01_flood_solar_triage.md`
+- `99_source_context/evidence_harvest/triage/01_hail_solar_triage.md`
+- `99_source_context/evidence_harvest/triage/01_wind_tornado_wind_triage.md`
 - `99_source_context/solar_wind_value_breakdown.xlsx`
 - `99_source_context/substrate_decomposition.md`
 - `MANIFEST.md`

@@ -388,3 +388,40 @@ It does claim:
 - explicit assumptions and update triggers,
 - and a runtime-ready damage-code interface.
 ```
+
+---
+
+## Evidence co-curation update · package v2.2 · model v1.0 docs r2
+
+A legacy evidence triage pass was reviewed under the global reference-ingestion protocol. This pass does **not**
+change the semantic wind/tornado × wind damage model. The active runtime structure remains the model v1.0
+design-normalized logistic fragility-style curve family.
+
+```text
+Adopted evidence roles:
+    Typhoon Usagi 2013      → second empirical validation point / cross-check
+    Rose et al. 2012        → tower fragility cross-validation
+    Kareem et al. 2023      → physics support for tornado-shift seam
+    Kapoor et al. 2020      → yaw / feather conditioner support, numeric adoption deferred
+    Punta Lima / Maria 2017 → high-severity total-loss plausibility
+    UTM 2024 review         → tower failure-mechanism context
+
+Candidate model v1.1 items, not adopted now:
+    numeric yaw-error conditioner
+    tornado D50-shift refinement
+    IEC Class II / III offsets
+
+Honest gap:
+    measured tornado-on-turbine fragility remains sparse
+
+Version call:
+    same inputs before update → same DR after update
+    cell damage-model version unchanged at wind_tornado_wind model v1.0
+    documentation revision: docs r2
+```
+
+See:
+
+```text
+02_evidence_ingestion/wind_tornado_wind_evidence_update_memo__model_v1_0__docs_r2.md
+```

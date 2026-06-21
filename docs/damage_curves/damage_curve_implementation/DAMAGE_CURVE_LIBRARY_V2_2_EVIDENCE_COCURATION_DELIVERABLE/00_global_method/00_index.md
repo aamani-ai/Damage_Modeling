@@ -1,4 +1,4 @@
-# 00 · Global Method Index — Damage Curve Library package v2.1
+# 00 · Global Method Index — Damage Curve Library package v2.2
 
 This folder contains the reusable **documentation and modeling standard** for every hazard × asset damage-curve cell.
 
@@ -53,13 +53,19 @@ SUBSYSTEM / COMPONENT
   = e.g. PV_ARRAY / PV_MODULE, INVERTER_SYSTEM / INVERTER
 ```
 
-## New in v2.1 — evidence ingestion and versioning policy
+## New in v2.2 — evidence co-curation ingestion
 
-v2.1 adds two global governance documents:
+v2.2 keeps the evidence-ingestion and versioning governance from v2.1 and adds an actual evidence co-curation pass:
 
 ```text
 16_reference_ingestion_and_curve_update_protocol.md
+    expanded with validation / caveat / curve-changing evidence rules
+
 17_versioning_policy.md
+    unchanged semantic-versioning rule
+
+../02_evidence_ingestion/
+    evidence update memos and structured register for hail_solar, flood_solar, and wind_tornado_wind
 ```
 
 Use `16_reference_ingestion_and_curve_update_protocol.md` when a new public source, research paper, proprietary claim set, vendor test result, standard, or forensic study arrives and you need to decide whether it should:
@@ -89,19 +95,19 @@ The root `VERSION_REGISTRY.md` summarizes the current semantic damage-model vers
 
 ```text
 hail_solar
-    semantic model v1.0; current docs carry legacy v1.3 labels
+    semantic model v1.0; docs r4; current docs carry legacy v1.3 labels
     single-primary failure-unit
     PV module hail damage
     MESH-equivalent hail diameter axis
 
 flood_solar
-    semantic model v1.0
+    semantic model v1.0; docs r2
     multi-failure-unit cell
     local water depth above component datum
     piecewise/state electrical inundation curves
 
 wind_tornado_wind
-    semantic model v1.0
+    semantic model v1.0; docs r2
     repeated-unit structural wind-farm cell
     hub-height gust / tornado proxy axes
     blade, tower, nacelle, foundation curves
@@ -117,6 +123,7 @@ wind_tornado_wind
 14_coverage_role_taxonomy.md
 16_reference_ingestion_and_curve_update_protocol.md
 17_versioning_policy.md
+../02_evidence_ingestion/README_evidence_cocuration_v2_2.md
 02_cell_package_standard.md
 03_failure_unit_coverage_standard.md
 04_x_axis_decision_standard.md

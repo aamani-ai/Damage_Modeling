@@ -1,17 +1,22 @@
-# Version registry — Damage Curve Library package v2.1
+# Version registry — Damage Curve Library package v2.2
 
 This registry separates **package release labels** from **semantic damage-model versions**.
 
-The current package is a framework/documentation release. It adds:
+The current package is an evidence co-curation documentation release. It adds:
 
 ```text
 00_global_method/16_reference_ingestion_and_curve_update_protocol.md
-00_global_method/17_versioning_policy.md
-00_global_method/_templates/TEMPLATE_evidence_update_memo.md
+    expanded with validation / caveat / curve-changing evidence rules
+
+02_evidence_ingestion/
+    evidence update memos and structured register for hail_solar, flood_solar, and wind_tornado_wind
+
+99_source_context/evidence_harvest/
+    uploaded legacy evidence co-curation kickoff and triage files
 ```
 
-No curve parameters, curve forms, failure-unit outputs, or runtime damage-code logic were changed in
-this package release.
+No curve parameters, curve forms, failure-unit outputs, or runtime damage-code logic were changed in this
+package release.
 
 ---
 
@@ -19,9 +24,9 @@ this package release.
 
 | Cell folder | Current semantic damage-model version | Current documentation revision | Current status | Notes |
 |---|---:|---:|---|---|
-| `hail_solar` | **model v1.0** | docs r3 | Current cell files still carry legacy `v1_3` labels | Hail curve was derived earlier; v1.2/v1.3 labels mainly reflect packaging, derivation dossier, and audit improvements. |
-| `flood_solar` | **model v1.0** | docs r1 | Current | Derived multi-failure-unit flood model. |
-| `wind_tornado_wind` | **model v1.0** | docs r1 | Current | Derived repeated-unit structural wind/tornado model. |
+| `hail_solar` | **model v1.0** | docs r4 | Current cell files still carry legacy `v1_3` labels | v2.2 adds validation/caveats only; no DR change. |
+| `flood_solar` | **model v1.0** | docs r2 | Current | v2.2 adds reference anchors and candidate v1.1 flags; no DR change. |
+| `wind_tornado_wind` | **model v1.0** | docs r2 | Current | v2.2 adds cross-validation/physics support and candidate v1.1 flags; no DR change. |
 
 ---
 
@@ -33,6 +38,7 @@ this package release.
 | v1.6 | Flood × solar v1.0 derived cell | Yes: flood_solar model v1.0 introduced. |
 | v2.0 | Wind/tornado × wind v1.0 derived cell | Yes: wind_tornado_wind model v1.0 introduced. |
 | v2.1 | Evidence-ingestion and versioning governance | No. |
+| v2.2 | Legacy evidence co-curation ingestion; validation/caveat/model-change distinction added to standard 16 | No. |
 
 ---
 
@@ -47,13 +53,13 @@ Use this semantic form in future cell files when possible:
 Example:
 
 ```text
-hail_solar__model_v1_0__docs_r3__curve_derivation_dossier.md
+hail_solar__model_v1_0__docs_r4__curve_derivation_dossier.md
 ```
 
 The package itself can still use a simple release version:
 
 ```text
-DAMAGE_CURVE_LIBRARY_V2_1_...
+DAMAGE_CURVE_LIBRARY_V2_2_...
 ```
 
 ---

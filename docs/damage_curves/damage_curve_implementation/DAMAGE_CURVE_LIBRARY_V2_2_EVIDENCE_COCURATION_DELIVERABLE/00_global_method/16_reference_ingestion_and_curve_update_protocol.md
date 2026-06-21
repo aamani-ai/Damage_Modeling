@@ -239,7 +239,177 @@ If only the explanation or packaging improves, bump only the documentation/packa
 
 ---
 
-## 7. New curve vs adjustment vs exposure scaling
+## 7. Validation, caveat, and curve-changing evidence
+
+A useful source does **not** automatically change a curve. Many strong references improve the
+library by validating the current model, exposing a limitation, or strengthening an assumption
+without changing the runtime damage function.
+
+The first test is always:
+
+```text
+If the same hazard input + same asset metadata gives the same DR after adding the reference:
+    documentation / validation / caveat update only
+
+If the same hazard input + same asset metadata gives a different DR after adding the reference:
+    model update / curve change
+```
+
+### 7.1 One-screen distinction
+
+| Role | What the reference does | Runtime DR changes? | Version action | Example |
+|---|---|---:|---|---|
+| **Validation** | Supports that the existing mechanism, curve shape, or order of magnitude is plausible | No | Docs revision only | Field claims show hail loss rises with hail size, broadly consistent with the lab-based sigmoid |
+| **Caveat** | Warns that the current curve may be incomplete or biased under certain conditions | No, not yet | Docs revision + update trigger | Field losses appear higher than lab breakage, but the data are not clean enough to refit |
+| **Open-seam support** | Strengthens a known unresolved assumption, but does not yet provide a parameter | No | Docs revision / assumption-register update | Stow studies support direction of hail-stow benefit, but not the exact `+8 mm` shift |
+| **Parameter anchor** | Provides compatible numeric data for a curve parameter or ordinate | Yes, if adopted | Model version bump | Same-axis claims data show 50% module replacement at a different hail diameter |
+| **Curve-form evidence** | Shows that the current functional form is wrong or insufficient | Yes, if adopted | Model version bump, often major/minor | Flood evidence supports state transitions rather than a smooth logistic curve |
+| **Selector / conditioner evidence** | Adds a runtime branch based on asset attributes or event-time state | Yes, if adopted | Model version bump | Transformer type changes flood salvageability; yaw error numerically modifies wind fragility |
+| **Coverage evidence** | Adds or removes a failure-unit from the modeled cell | Yes, if adopted | Model version bump | New evidence shows combiner boxes are a material direct-hail failure-unit |
+
+### 7.2 Validation references
+
+A **validation reference** says:
+
+```text
+The current curve is directionally plausible.
+The mechanism and shape are not contradicted by independent evidence.
+```
+
+It is adopted into the dossier, evidence map, or assumption register, but it does not move the
+curve. A validation source can increase confidence, explain why the current model is reasonable, or
+show that independent lab/field/forensic evidence points in the same direction.
+
+Example:
+
+```text
+Current hail curve:
+    MESH-equivalent hail diameter → PV module replacement DR
+
+New source:
+    Field claims also show higher damage for larger hail sizes.
+
+Ingestion:
+    Add to evidence map as field validation.
+    Do not refit D50/k unless the source is clean enough to become a parameter anchor.
+```
+
+### 7.3 Caveat references
+
+A **caveat reference** says:
+
+```text
+The current curve may be limited, biased, or incomplete in a known way,
+but the source is not clean enough to change the curve safely.
+```
+
+Caveats are valuable. They prevent overclaiming and create explicit update triggers. They should be
+written into the derivation dossier and assumption register, especially when the curve is based on
+lab data, standards, sparse forensic cases, or engineering judgment.
+
+Example:
+
+```text
+Current hail curve:
+    lab/test-based module replacement sigmoid
+
+New source:
+    field claim losses appear higher than lab glass-breakage rates.
+
+Ingestion:
+    Add caveat: lab curve may underpredict field loss.
+    Add update trigger: claims-calibration workstream needed.
+    Do not change D50/k until claims data are mapped to the same x-axis, damage definition, and value basis.
+```
+
+### 7.4 Curve-changing references
+
+A reference becomes **curve-changing** only when it is strong and compatible enough to alter the
+runtime damage-code behavior.
+
+Curve-changing evidence can change:
+
+```text
+curve parameters      D50, slope, threshold, max_DR, state ordinates
+curve form            logistic → empirical table, step curve → state curve, etc.
+selectors             new archetype / class / equipment type branch
+conditioners          numeric adjustment for event-time state
+exposure logic        geometry or footprint treatment that changes affected value
+coverage map          new primary failure-unit or removal of an old one
+x-axis                new required hazard variable or bridge
+```
+
+The adoption gate is strict:
+
+```text
+A source can change the model only when it maps to a specific failure-unit,
+uses the same or bridgeable x-axis, has a understood damage metric,
+and produces a traceable old-vs-new change.
+```
+
+### 7.5 Practical examples from current cells
+
+| Cell | Useful source role now | Why it is not automatically a model change |
+|---|---|---|
+| `hail_solar` | VU Amsterdam / field claims as validation and caveat | Supports shape and field-vs-lab warning, but does not give a clean same-basis refit for `D50`, `k`, or `f_hail` |
+| `hail_solar` | VDE / stow evidence as open-seam support | Supports direction of stow benefit, not the exact generic numeric shift |
+| `flood_solar` | NERC / Ketjoy / scour evidence as anchors and cross-validation | Strengthens assumed states, but v1 ingestion can remain docs-only until exact ordinates/selectors are formally adopted |
+| `flood_solar` | IEEE C57 / salinity / duration | Candidate v1.1 model changes because transformer type, salinity, and duration would change DR for the same flood depth |
+| `wind_tornado_wind` | Usagi / Rose / Kareem / Kapoor as cross-validation and physics support | Supports current structure and open seams; numeric yaw or tornado-shift adoption would be a separate model update |
+
+### 7.6 Decision tree
+
+```text
+new reference
+      │
+      ▼
+Does it apply to an existing cell and failure-unit?
+      │
+      ├─ no → park or route to new-cell intake
+      │
+      └─ yes
+          │
+          ▼
+Does it change a specific runtime parameter, selector, conditioner, exposure rule, or coverage item?
+          │
+          ├─ no
+          │    │
+          │    ├─ supports current mechanism/shape → validation
+          │    ├─ warns of limitation/bias       → caveat
+          │    └─ supports unresolved seam       → open-seam support
+          │         
+          │         Action: docs revision only
+          │
+          └─ yes
+               │
+               ▼
+        Does it pass axis/basis/definition/conflict checks?
+               │
+               ├─ no → park as candidate model update
+               └─ yes → model update proposal + old-vs-new comparison + version bump
+```
+
+### 7.7 Versioning consequence
+
+Use the versioning policy directly:
+
+```text
+same inputs → same DR:
+    cell damage-model version does not change
+    documentation revision changes
+
+same inputs → different DR:
+    cell damage-model version changes
+    documentation revision also changes
+```
+
+This distinction is especially important for evidence co-curation workstreams. Adding five better
+references can be a major improvement to auditability while still leaving the damage model at the
+same semantic version.
+
+---
+
+## 8. New curve vs adjustment vs exposure scaling
 
 When new evidence arrives, do not automatically create a new curve.
 
@@ -271,7 +441,7 @@ Examples:
 
 ---
 
-## 8. Conflict handling
+## 9. Conflict handling
 
 New sources will conflict. The library should not hide that.
 
@@ -294,7 +464,7 @@ Do not average conflicting sources unless they truly measure the same thing on t
 
 ---
 
-## 9. Proprietary evidence handling
+## 10. Proprietary evidence handling
 
 Proprietary evidence is often the best curve-improvement source, but it can damage auditability if handled casually.
 
@@ -322,7 +492,7 @@ adoption_status: adopted_parameter_update
 
 ---
 
-## 10. The curve update memo
+## 11. The curve update memo
 
 Any adopted model-changing evidence should have a short update memo.
 
@@ -345,7 +515,7 @@ This memo can live in the cell folder, or as a tab/sheet in the workbook, but it
 
 ---
 
-## 11. Workbook update locations
+## 12. Workbook update locations
 
 When adopting new evidence, update the relevant workbook sheets.
 
@@ -363,7 +533,7 @@ When adopting new evidence, update the relevant workbook sheets.
 
 ---
 
-## 12. Documentation update locations
+## 13. Documentation update locations
 
 Update the cell documents in this order:
 
@@ -389,7 +559,7 @@ Update the cell documents in this order:
 
 ---
 
-## 13. Acceptance gates before adoption
+## 14. Acceptance gates before adoption
 
 A source should not change a curve until these checks pass:
 
@@ -422,7 +592,7 @@ TRACEABILITY CHECK
 
 ---
 
-## 14. Final principle
+## 15. Final principle
 
 The curve library should get better when new information arrives, but it should not become unstable.
 

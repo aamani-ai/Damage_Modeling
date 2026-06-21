@@ -63,4 +63,4 @@ GCube · Xweather · CLIMADA/Schmid · FM Global.
 
 ---
 *Stage A (facts) · decisions → [`../01_hail_solar_triage.md`](../01_hail_solar_triage.md) · our cell →
-[hail×solar dossier](../../../../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_1_EVIDENCE_UPDATE_AND_VERSIONING_DELIVERABLE/01_cells/hail_solar/current/hail_solar_curve_derivation_dossier_v1_3.md).*
+[hail×solar dossier](../../../../damage_curves/damage_curve_implementation/).*

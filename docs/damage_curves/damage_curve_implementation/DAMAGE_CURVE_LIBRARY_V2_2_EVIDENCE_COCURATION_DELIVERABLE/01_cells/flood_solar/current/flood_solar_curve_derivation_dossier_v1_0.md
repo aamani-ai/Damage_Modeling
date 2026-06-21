@@ -405,3 +405,37 @@ flow velocity / scour risk
 ```
 
 This is the value of the damage-code design: it tells future data ingestion what metadata actually matters.
+
+---
+
+## Evidence co-curation update · package v2.2 · model v1.0 docs r2
+
+A legacy evidence triage pass was reviewed under the global reference-ingestion protocol. This pass does **not**
+change the semantic flood × solar damage model. The active runtime structure remains the model v1.0 multi-failure-unit
+piecewise/state depth-damage model.
+
+```text
+Adopted evidence roles:
+    Ketjoy et al. 2022      → empirical module depth-percent context
+    NERC 2022 substation    → shallow-depth switchgear / SCADA case evidence
+    DOE/FEMP conduit path   → conduit water-ingress mechanism support
+    ANZGeo 2023 scour       → velocity/scour mechanism validation
+    IEEE C57                → future transformer-type selector support
+    IEC 61701 + duration    → future salinity / duration conditioner support
+
+Candidate model v1.1 items, not adopted now:
+    transformer-type selector
+    salinity multiplier
+    duration conditioner
+
+Version call:
+    same inputs before update → same DR after update
+    cell damage-model version unchanged at flood_solar model v1.0
+    documentation revision: docs r2
+```
+
+See:
+
+```text
+02_evidence_ingestion/flood_solar_evidence_update_memo__model_v1_0__docs_r2.md
+```
