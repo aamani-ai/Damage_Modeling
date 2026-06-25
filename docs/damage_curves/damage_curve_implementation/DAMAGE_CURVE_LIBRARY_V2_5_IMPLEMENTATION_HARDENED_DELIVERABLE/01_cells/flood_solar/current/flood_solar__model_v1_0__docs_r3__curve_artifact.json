@@ -1,0 +1,992 @@
+{
+  "schema_version": "damage_curve_record_bundle.v1",
+  "cell_id": "flood_solar",
+  "damage_code_id": "FLOOD_SOLAR_ELECTRICAL_INUNDATION_V1",
+  "semantic_damage_model_version": "model v1.0",
+  "documentation_revision": "docs r3",
+  "package_release": "library v2.5",
+  "canonical_runtime_artifact": true,
+  "source_dossier": "01_cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+  "source_workbook": "01_cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+  "hazard_axis": {
+    "id": "FLOOD_LOCAL_DEPTH_COMPONENT_DATUM",
+    "input_field_preferred": "water_surface_elevation_m",
+    "fallback_input_field": "site_flood_depth_m",
+    "internal_axis": "local_depth_above_component_datum_m",
+    "formula": "h_i = max(0, WSE - z_i_crit)",
+    "unit": "m",
+    "valid_range": [
+      0,
+      2.0
+    ],
+    "extrapolation_policy": "clamp_or_warn"
+  },
+  "failure_units": [
+    {
+      "id": "FS_INV",
+      "subsystem": "INVERTER_SYSTEM",
+      "component": "INVERTER",
+      "treatment": "primary_nonzero",
+      "axis": "local_depth_above_component_datum_m",
+      "y_axis": "failure_unit_damage_ratio",
+      "f_kind": "site_geometry"
+    },
+    {
+      "id": "FS_SWG",
+      "subsystem": "SUBSTATION",
+      "component": "SWITCHGEAR",
+      "treatment": "primary_nonzero",
+      "axis": "local_depth_above_component_datum_m",
+      "y_axis": "failure_unit_damage_ratio",
+      "f_kind": "site_geometry"
+    },
+    {
+      "id": "FS_XFMR",
+      "subsystem": "SUBSTATION",
+      "component": "TRANSFORMER_MAIN",
+      "treatment": "primary_nonzero",
+      "axis": "local_depth_above_component_datum_m",
+      "y_axis": "failure_unit_damage_ratio",
+      "f_kind": "site_geometry"
+    },
+    {
+      "id": "FS_COMB",
+      "subsystem": "INVERTER_SYSTEM",
+      "component": "COMBINER_BOX + DC_PROTECTION",
+      "treatment": "primary_secondary",
+      "axis": "local_depth_above_component_datum_m",
+      "y_axis": "failure_unit_damage_ratio",
+      "f_kind": "site_geometry"
+    },
+    {
+      "id": "FS_SCADA",
+      "subsystem": "SCADA",
+      "component": "MONITORING_SYSTEM",
+      "treatment": "secondary",
+      "axis": "local_depth_above_component_datum_m",
+      "y_axis": "failure_unit_damage_ratio",
+      "f_kind": "site_geometry"
+    },
+    {
+      "id": "FS_CABLE",
+      "subsystem": "ELECTRICAL_COLLECTION",
+      "component": "CABLE_AC + CABLE_DC",
+      "treatment": "conditional_secondary",
+      "axis": "depth_pathway_termination_exposure",
+      "y_axis": "failure_unit_damage_ratio",
+      "f_kind": "site_geometry"
+    },
+    {
+      "id": "FS_PVMOD",
+      "subsystem": "PV_ARRAY",
+      "component": "PV_MODULE",
+      "treatment": "conditional_secondary",
+      "axis": "depth_above_module_lower_edge_m",
+      "y_axis": "failure_unit_damage_ratio",
+      "f_kind": "site_geometry"
+    },
+    {
+      "id": "FS_FOUND",
+      "subsystem": "FOUNDATION",
+      "component": "FOUNDATION_BASE",
+      "treatment": "conditional_secondary",
+      "axis": "flow_velocity_or_scour_proxy",
+      "y_axis": "failure_unit_damage_ratio",
+      "f_kind": "site_geometry"
+    }
+  ],
+  "curve_records": [
+    {
+      "curve_id": "FS_INV",
+      "failure_unit_id": "FS_INV",
+      "curve_form": "piecewise_linear",
+      "x_axis": "local_depth_above_component_datum_m",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.02,
+            0.05
+          ],
+          [
+            0.05,
+            0.25
+          ],
+          [
+            0.15,
+            0.75
+          ],
+          [
+            0.3,
+            0.95
+          ],
+          [
+            0.6,
+            1.0
+          ],
+          [
+            1.0,
+            1.0
+          ],
+          [
+            1.5,
+            1.0
+          ],
+          [
+            2.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    {
+      "curve_id": "FS_SWG",
+      "failure_unit_id": "FS_SWG",
+      "curve_form": "piecewise_linear",
+      "x_axis": "local_depth_above_component_datum_m",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.02,
+            0.1
+          ],
+          [
+            0.05,
+            0.4
+          ],
+          [
+            0.15,
+            0.85
+          ],
+          [
+            0.3,
+            1.0
+          ],
+          [
+            0.6,
+            1.0
+          ],
+          [
+            1.0,
+            1.0
+          ],
+          [
+            1.5,
+            1.0
+          ],
+          [
+            2.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    {
+      "curve_id": "FS_XFMR",
+      "failure_unit_id": "FS_XFMR",
+      "curve_form": "piecewise_linear",
+      "x_axis": "local_depth_above_component_datum_m",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.02,
+            0.03
+          ],
+          [
+            0.05,
+            0.1
+          ],
+          [
+            0.15,
+            0.25
+          ],
+          [
+            0.3,
+            0.45
+          ],
+          [
+            0.6,
+            0.65
+          ],
+          [
+            1.0,
+            0.8
+          ],
+          [
+            1.5,
+            0.95
+          ],
+          [
+            2.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    {
+      "curve_id": "FS_COMB",
+      "failure_unit_id": "FS_COMB",
+      "curve_form": "piecewise_linear",
+      "x_axis": "local_depth_above_component_datum_m",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.02,
+            0.1
+          ],
+          [
+            0.05,
+            0.35
+          ],
+          [
+            0.15,
+            0.8
+          ],
+          [
+            0.3,
+            1.0
+          ],
+          [
+            0.6,
+            1.0
+          ],
+          [
+            1.0,
+            1.0
+          ],
+          [
+            1.5,
+            1.0
+          ],
+          [
+            2.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    {
+      "curve_id": "FS_SCADA",
+      "failure_unit_id": "FS_SCADA",
+      "curve_form": "piecewise_linear",
+      "x_axis": "local_depth_above_component_datum_m",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.02,
+            0.15
+          ],
+          [
+            0.05,
+            0.45
+          ],
+          [
+            0.15,
+            0.9
+          ],
+          [
+            0.3,
+            1.0
+          ],
+          [
+            0.6,
+            1.0
+          ],
+          [
+            1.0,
+            1.0
+          ],
+          [
+            1.5,
+            1.0
+          ],
+          [
+            2.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    {
+      "curve_id": "FS_CABLE",
+      "failure_unit_id": "FS_CABLE",
+      "curve_form": "piecewise_linear",
+      "x_axis": "depth_pathway_termination_exposure",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.02,
+            0.02
+          ],
+          [
+            0.05,
+            0.05
+          ],
+          [
+            0.15,
+            0.1
+          ],
+          [
+            0.3,
+            0.15
+          ],
+          [
+            0.6,
+            0.25
+          ],
+          [
+            1.0,
+            0.4
+          ],
+          [
+            1.5,
+            0.55
+          ],
+          [
+            2.0,
+            0.65
+          ]
+        ]
+      }
+    },
+    {
+      "curve_id": "FS_PVMOD",
+      "failure_unit_id": "FS_PVMOD",
+      "curve_form": "piecewise_linear",
+      "x_axis": "depth_above_module_lower_edge_m",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.02,
+            0.05
+          ],
+          [
+            0.05,
+            0.1
+          ],
+          [
+            0.15,
+            0.3
+          ],
+          [
+            0.3,
+            0.6
+          ],
+          [
+            0.6,
+            0.85
+          ],
+          [
+            1.0,
+            1.0
+          ],
+          [
+            1.5,
+            1.0
+          ],
+          [
+            2.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    {
+      "curve_id": "FS_FOUND",
+      "failure_unit_id": "FS_FOUND",
+      "curve_form": "piecewise_linear",
+      "x_axis": "flow_velocity_mps_or_scour_proxy",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.5,
+            0.0
+          ],
+          [
+            1.0,
+            0.05
+          ],
+          [
+            1.5,
+            0.15
+          ],
+          [
+            2.0,
+            0.35
+          ],
+          [
+            3.0,
+            0.7
+          ],
+          [
+            4.0,
+            1.0
+          ]
+        ]
+      }
+    }
+  ],
+  "selector_logic": [
+    {
+      "field": "enclosure_rating",
+      "aliases": [
+        "equipment_ip_or_nema_rating"
+      ],
+      "required": "recommended",
+      "effect": "selects_curve_variant_or_flags_submersion_resistance",
+      "canonical": true
+    },
+    {
+      "field": "enclosure_rating_system",
+      "required": false,
+      "effect": "distinguishes NEMA versus IP rating basis"
+    },
+    {
+      "field": "transformer_type",
+      "required": false,
+      "effect": "future transformer curve variant"
+    },
+    {
+      "field": "cable_location_rating",
+      "aliases": [
+        "cable_wet_location_rating"
+      ],
+      "required": false,
+      "effect": "future cable curve variant"
+    }
+  ],
+  "conditioner_logic": [
+    {
+      "adjustment_id": "FLOOD_CONDUIT_PATH_FLAG_V1",
+      "field": "conduit_water_path_present",
+      "adjustment_type": "open_seam_flag_or_variant_selection",
+      "form": "flag; no universal numeric multiplier in v1.0",
+      "source_ids": [
+        "DOE_FEMP_PV_FLOOD"
+      ],
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "reasoning": "Mechanism is source-supported but site-specific routing controls magnitude.",
+      "open_seam": "site conduit and pull-box layout"
+    },
+    {
+      "adjustment_id": "FLOOD_ELEVATION_SHIFT_V1",
+      "field": "component_critical_elevation_m",
+      "adjustment_type": "horizontal_shift",
+      "form": "h_i = max(0, WSE - z_i_crit)",
+      "source_ids": [
+        "DOE_FEMP_PV_FLOOD",
+        "FEMA_P348"
+      ],
+      "tier": "T2_public_lab_standard_or_physics",
+      "reasoning": "Elevation/freeboard changes local exposure rather than intrinsic fragility.",
+      "open_seam": "surveyed component datum"
+    }
+  ],
+  "exposure_logic": [
+    {
+      "field": "fraction_value_exposed",
+      "required": true,
+      "effect": "scales affected value in flood swath"
+    }
+  ],
+  "parameter_tier_table": [
+    {
+      "parameter": "depth_damage_points",
+      "curve_id": "FS_INV",
+      "value": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.02,
+          0.05
+        ],
+        [
+          0.05,
+          0.25
+        ],
+        [
+          0.15,
+          0.75
+        ],
+        [
+          0.3,
+          0.95
+        ],
+        [
+          0.6,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          1.5,
+          1.0
+        ],
+        [
+          2.0,
+          1.0
+        ]
+      ],
+      "param_role": "curve_fit_shape",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "DOE_FEMP_PV_FLOOD",
+        "NEMA_GD1_2019",
+        "USACE_HEC_FIA"
+      ],
+      "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+      "update_trigger": "claims/OEM/forensic depth-damage data"
+    },
+    {
+      "parameter": "depth_damage_points",
+      "curve_id": "FS_SWG",
+      "value": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.02,
+          0.1
+        ],
+        [
+          0.05,
+          0.4
+        ],
+        [
+          0.15,
+          0.85
+        ],
+        [
+          0.3,
+          1.0
+        ],
+        [
+          0.6,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          1.5,
+          1.0
+        ],
+        [
+          2.0,
+          1.0
+        ]
+      ],
+      "param_role": "curve_fit_shape",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "DOE_FEMP_PV_FLOOD",
+        "NEMA_GD1_2019",
+        "USACE_HEC_FIA"
+      ],
+      "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+      "update_trigger": "claims/OEM/forensic depth-damage data"
+    },
+    {
+      "parameter": "depth_damage_points",
+      "curve_id": "FS_XFMR",
+      "value": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.02,
+          0.03
+        ],
+        [
+          0.05,
+          0.1
+        ],
+        [
+          0.15,
+          0.25
+        ],
+        [
+          0.3,
+          0.45
+        ],
+        [
+          0.6,
+          0.65
+        ],
+        [
+          1.0,
+          0.8
+        ],
+        [
+          1.5,
+          0.95
+        ],
+        [
+          2.0,
+          1.0
+        ]
+      ],
+      "param_role": "curve_fit_shape",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "DOE_FEMP_PV_FLOOD",
+        "NEMA_GD1_2019",
+        "USACE_HEC_FIA"
+      ],
+      "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+      "update_trigger": "claims/OEM/forensic depth-damage data"
+    },
+    {
+      "parameter": "depth_damage_points",
+      "curve_id": "FS_COMB",
+      "value": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.02,
+          0.1
+        ],
+        [
+          0.05,
+          0.35
+        ],
+        [
+          0.15,
+          0.8
+        ],
+        [
+          0.3,
+          1.0
+        ],
+        [
+          0.6,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          1.5,
+          1.0
+        ],
+        [
+          2.0,
+          1.0
+        ]
+      ],
+      "param_role": "curve_fit_shape",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "DOE_FEMP_PV_FLOOD",
+        "NEMA_GD1_2019",
+        "USACE_HEC_FIA"
+      ],
+      "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+      "update_trigger": "claims/OEM/forensic depth-damage data"
+    },
+    {
+      "parameter": "depth_damage_points",
+      "curve_id": "FS_SCADA",
+      "value": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.02,
+          0.15
+        ],
+        [
+          0.05,
+          0.45
+        ],
+        [
+          0.15,
+          0.9
+        ],
+        [
+          0.3,
+          1.0
+        ],
+        [
+          0.6,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          1.5,
+          1.0
+        ],
+        [
+          2.0,
+          1.0
+        ]
+      ],
+      "param_role": "curve_fit_shape",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "DOE_FEMP_PV_FLOOD",
+        "NEMA_GD1_2019",
+        "USACE_HEC_FIA"
+      ],
+      "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+      "update_trigger": "claims/OEM/forensic depth-damage data"
+    },
+    {
+      "parameter": "depth_damage_points",
+      "curve_id": "FS_CABLE",
+      "value": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.02,
+          0.02
+        ],
+        [
+          0.05,
+          0.05
+        ],
+        [
+          0.15,
+          0.1
+        ],
+        [
+          0.3,
+          0.15
+        ],
+        [
+          0.6,
+          0.25
+        ],
+        [
+          1.0,
+          0.4
+        ],
+        [
+          1.5,
+          0.55
+        ],
+        [
+          2.0,
+          0.65
+        ]
+      ],
+      "param_role": "curve_fit_shape",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "DOE_FEMP_PV_FLOOD",
+        "NEMA_GD1_2019",
+        "USACE_HEC_FIA"
+      ],
+      "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+      "update_trigger": "claims/OEM/forensic depth-damage data"
+    },
+    {
+      "parameter": "depth_damage_points",
+      "curve_id": "FS_PVMOD",
+      "value": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.02,
+          0.05
+        ],
+        [
+          0.05,
+          0.1
+        ],
+        [
+          0.15,
+          0.3
+        ],
+        [
+          0.3,
+          0.6
+        ],
+        [
+          0.6,
+          0.85
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          1.5,
+          1.0
+        ],
+        [
+          2.0,
+          1.0
+        ]
+      ],
+      "param_role": "curve_fit_shape",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "DOE_FEMP_PV_FLOOD",
+        "NEMA_GD1_2019",
+        "USACE_HEC_FIA"
+      ],
+      "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+      "update_trigger": "claims/OEM/forensic depth-damage data"
+    },
+    {
+      "parameter": "foundation_velocity_scour_points",
+      "curve_id": "FS_FOUND",
+      "value": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.5,
+          0.0
+        ],
+        [
+          1.0,
+          0.05
+        ],
+        [
+          1.5,
+          0.15
+        ],
+        [
+          2.0,
+          0.35
+        ],
+        [
+          3.0,
+          0.7
+        ],
+        [
+          4.0,
+          1.0
+        ]
+      ],
+      "param_role": "open_seam_placeholder",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "ANZGEO_2023_SCOUR_CONTEXT"
+      ],
+      "reasoning": "Scour is site-geotechnical; generic velocity proxy is retained only as conditional placeholder.",
+      "update_trigger": "hydraulic/geotechnical model or forensic scour dataset"
+    },
+    {
+      "parameter": "local_depth_transform",
+      "curve_id": "all_depth_curves",
+      "value": "h_i=max(0,WSE-z_i_crit)",
+      "param_role": "axis_bridge",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "DOE_FEMP_PV_FLOOD",
+        "FEMA_P348"
+      ],
+      "reasoning": "Component freeboard/elevation controls local exposure.",
+      "update_trigger": "none; replace only if cell axis changes"
+    }
+  ],
+  "derivation_rationale": {
+    "source_spine": "DOE/FEMP solar flood mechanisms plus NEMA water-damaged electrical-equipment replacement/evaluation framing.",
+    "form_reasoning": "Flood electrical damage is state/threshold-like by local component datum, so piecewise depth-percent curves are more auditable than logistics.",
+    "demoted_sources": "USACE depth-percent precedent supports tabular form, not solar values; scour and duration/salinity are carried as open seams.",
+    "tier_mix": "Depth transform and mechanism are T2; numeric DR ordinates are mostly T3; foundation scour proxy is T4."
+  },
+  "emit_contract": {
+    "schema_version": "damage_emit.v1",
+    "supported_emit_modes": [
+      "scalar_mean",
+      "scalar_mean_plus_bounds",
+      "discrete_state_table",
+      "parametric_distribution",
+      "state_ensemble"
+    ],
+    "populated_emit_modes_for_this_cell": [
+      "scalar_mean",
+      "discrete_state_table"
+    ],
+    "primary_grain": "failure_unit",
+    "distribution_fields_present_even_when_null": true,
+    "discrete_state_table_note": "Piecewise depth-damage ordinates are deterministic state/curve tables, not uncertainty distributions."
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v1",
+    "cell_id": "flood_solar",
+    "spread_carried": false,
+    "emit_modes_populated_by_cell": [
+      "scalar_mean",
+      "discrete_state_table"
+    ],
+    "metrics_supportable": {
+      "failure_unit_scalar_dr": "supported",
+      "scenario_loss_given_value_basis": "supported_with_explicit_value_and_exposure_basis",
+      "scalar_eal": "conditional_require_cap_binding_preflight",
+      "pml": "withheld_no_tail_distribution",
+      "var": "withheld_no_tail_distribution",
+      "tvar": "withheld_no_tail_distribution"
+    },
+    "cap_binding": {
+      "policy": "fail_closed",
+      "preflight_status": "not_executed_no_downstream_frequency_or_state_distribution",
+      "required_before_scalar_eal": true,
+      "tolerance_pct": 2.5,
+      "action_if_fail": "require_mean_plus_spread_emit",
+      "reason": "Current package contains severity curves but not downstream hazard/state distributions or project-specific cap tests."
+    }
+  }
+}

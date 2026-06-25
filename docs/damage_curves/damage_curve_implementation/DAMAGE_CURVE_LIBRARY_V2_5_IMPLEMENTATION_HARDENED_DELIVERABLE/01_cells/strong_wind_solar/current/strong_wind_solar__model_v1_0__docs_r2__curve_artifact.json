@@ -1,0 +1,557 @@
+{
+  "schema_version": "damage_curve_record_bundle.v1",
+  "cell_id": "strong_wind_solar",
+  "damage_code_id": "STRONG_WIND_SOLAR_V1",
+  "semantic_damage_model_version": "model v1.0",
+  "documentation_revision": "docs r2",
+  "package_release": "library v2.5",
+  "canonical_runtime_artifact": true,
+  "source_dossier": "01_cells/strong_wind_solar/current/strong_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md",
+  "source_workbook": "01_cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+  "hazard_axis": {
+    "id": "SWS_GUST_3S_ARRAY_HEIGHT",
+    "input_field": "gust_3s_mph",
+    "unit": "mph",
+    "native_curve_axis": "effective_demand_ratio",
+    "formula": "R_eff = (V_3s / V_design)^2 * demand_multipliers",
+    "valid_range": [
+      0,
+      200
+    ],
+    "extrapolation_policy": "warn_or_clamp"
+  },
+  "failure_units": [
+    {
+      "id": "SWS_TRACKER_STRUCT",
+      "subsystem": "MOUNTING",
+      "component": "TRACKER",
+      "treatment": "primary_nonzero",
+      "y_axis": "failure_unit_damage_ratio",
+      "default_value_share_physical_base": 0.08
+    },
+    {
+      "id": "SWS_RACKING_STRUCT",
+      "subsystem": "MOUNTING",
+      "component": "RACKING_STRUCTURE",
+      "treatment": "primary_nonzero",
+      "y_axis": "failure_unit_damage_ratio",
+      "default_value_share_physical_base": 0.06
+    },
+    {
+      "id": "SWS_MODULE_ATTACH",
+      "subsystem": "PV_ARRAY",
+      "component": "PV_MODULE",
+      "treatment": "primary_nonzero",
+      "y_axis": "failure_unit_damage_ratio",
+      "default_value_share_physical_base": 0.4
+    },
+    {
+      "id": "SWS_FOUNDATION_UPLIFT",
+      "subsystem": "FOUNDATION",
+      "component": "FOUNDATION_BASE",
+      "treatment": "primary_nonzero",
+      "y_axis": "failure_unit_damage_ratio",
+      "default_value_share_physical_base": 0.08
+    },
+    {
+      "id": "SWS_SCADA_EXPOSED",
+      "subsystem": "SCADA",
+      "component": "MET_STATION | MONITORING_SYSTEM",
+      "treatment": "secondary",
+      "y_axis": "failure_unit_damage_ratio",
+      "default_value_share_physical_base": 0.02
+    }
+  ],
+  "curve_records": [
+    {
+      "curve_id": "SWS_TRACKER_STRUCT",
+      "failure_unit_id": "SWS_TRACKER_STRUCT",
+      "curve_form": "thresholded_logistic_demand",
+      "x_axis": "R_eff",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "max_DR": 0.8,
+        "R0": 0.75,
+        "R50": 1.15,
+        "k": 9.0
+      }
+    },
+    {
+      "curve_id": "SWS_RACKING_STRUCT",
+      "failure_unit_id": "SWS_RACKING_STRUCT",
+      "curve_form": "thresholded_logistic_demand",
+      "x_axis": "R_eff",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "max_DR": 0.75,
+        "R0": 0.8,
+        "R50": 1.25,
+        "k": 8.0
+      }
+    },
+    {
+      "curve_id": "SWS_MODULE_ATTACH",
+      "failure_unit_id": "SWS_MODULE_ATTACH",
+      "curve_form": "thresholded_logistic_demand",
+      "x_axis": "R_eff",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "max_DR": 0.65,
+        "R0": 0.7,
+        "R50": 1.05,
+        "k": 10.0
+      }
+    },
+    {
+      "curve_id": "SWS_FOUNDATION_UPLIFT",
+      "failure_unit_id": "SWS_FOUNDATION_UPLIFT",
+      "curve_form": "thresholded_logistic_demand",
+      "x_axis": "R_eff",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "max_DR": 0.45,
+        "R0": 0.9,
+        "R50": 1.35,
+        "k": 7.0
+      }
+    },
+    {
+      "curve_id": "SWS_SCADA_EXPOSED",
+      "failure_unit_id": "SWS_SCADA_EXPOSED",
+      "curve_form": "thresholded_logistic_demand",
+      "x_axis": "R_eff",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "max_DR": 0.15,
+        "R0": 0.7,
+        "R50": 0.95,
+        "k": 6.0
+      }
+    }
+  ],
+  "selector_logic": [
+    {
+      "field": "design_gust_mph",
+      "required": true,
+      "effect": "normalizes gust into demand ratio"
+    },
+    {
+      "field": "mounting_type",
+      "required": true,
+      "effect": "determines stow applicability and active structural emphasis"
+    },
+    {
+      "field": "module_clamp_type",
+      "required": false,
+      "effect": "future curve family selector"
+    },
+    {
+      "field": "foundation_type",
+      "required": false,
+      "effect": "future foundation variant"
+    }
+  ],
+  "conditioner_logic": [
+    {
+      "adjustment_id": "SWS_STOW_DEMAND_MULTIPLIER_V1",
+      "field": "stow_state",
+      "adjustment_type": "demand_multiplier_or_probability_blend",
+      "form": "confirmed_stowed=0.80; unstowed_or_failed=1.25; probabilistic=p*0.80+(1-p)*1.25",
+      "source_ids": [
+        "CPP_TORSIONAL_TRACKER",
+        "DOE_FEMP_SEVERE_WEATHER_PV"
+      ],
+      "tier": "T4_placeholder_or_expert_judgment",
+      "reasoning": "Stow changes aerodynamic demand; sources support direction and mechanism but not universal multiplier.",
+      "open_seam": "tracker-specific aeroelastic/stow data"
+    }
+  ],
+  "exposure_logic": [
+    {
+      "field": "array_exposure_fraction",
+      "required": true,
+      "effect": "scales affected value"
+    },
+    {
+      "field": "zone_multiplier",
+      "required": "conditional",
+      "default": 1.0,
+      "effect": "local demand multiplier for edge/corner/perimeter zones"
+    }
+  ],
+  "parameter_tier_table": [
+    {
+      "parameter": "R_eff_formula",
+      "curve_id": "all",
+      "value": "(V_3s/V_design)^2 * multipliers",
+      "param_role": "axis_bridge",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "WIND_PRESSURE_PHYSICS",
+        "CPP_PV_WIND_LOAD"
+      ],
+      "reasoning": "Wind pressure/demand scales approximately with speed squared; normalization to design speed improves portability.",
+      "update_trigger": "site/vendor structural model"
+    },
+    {
+      "parameter": "max_DR",
+      "curve_id": "SWS_TRACKER_STRUCT",
+      "value": 0.8,
+      "param_role": "boundary_or_cap",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "DOE_FEMP_SEVERE_WEATHER_PV",
+        "NREL_STORM_RESILIENCE",
+        "SOLAR_WIND_VALUE_BREAKDOWN"
+      ],
+      "reasoning": "Bounded engineering-fit cap for generic failure-unit value bucket; not claims-calibrated.",
+      "update_trigger": "claims/forensic/failure-unit calibration"
+    },
+    {
+      "parameter": "R0",
+      "curve_id": "SWS_TRACKER_STRUCT",
+      "value": 0.75,
+      "param_role": "boundary_or_cap",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "CPP_PV_WIND_LOAD"
+      ],
+      "reasoning": "Threshold avoids false low-wind damage; value is engineering fit.",
+      "update_trigger": "structural test or claims calibration"
+    },
+    {
+      "parameter": "R50",
+      "curve_id": "SWS_TRACKER_STRUCT",
+      "value": 1.15,
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "CPP_PV_WIND_LOAD",
+        "NREL_STORM_RESILIENCE"
+      ],
+      "reasoning": "Engineering-fit transition point on normalized demand ratio.",
+      "update_trigger": "claims/forensic/aeroelastic calibration"
+    },
+    {
+      "parameter": "k",
+      "curve_id": "SWS_TRACKER_STRUCT",
+      "value": 9.0,
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "CPP_PV_WIND_LOAD"
+      ],
+      "reasoning": "Engineering-fit steepness; public sources support mechanism not numeric slope.",
+      "update_trigger": "claims/forensic/aeroelastic calibration"
+    },
+    {
+      "parameter": "default_value_share_physical_base",
+      "curve_id": "SWS_TRACKER_STRUCT",
+      "value": 0.08,
+      "param_role": "exposure_or_value",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "SOLAR_WIND_VALUE_BREAKDOWN"
+      ],
+      "reasoning": "Illustrative default value link; should be replaced with asset-specific valuation.",
+      "update_trigger": "project-specific cost breakdown"
+    },
+    {
+      "parameter": "max_DR",
+      "curve_id": "SWS_RACKING_STRUCT",
+      "value": 0.75,
+      "param_role": "boundary_or_cap",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "DOE_FEMP_SEVERE_WEATHER_PV",
+        "NREL_STORM_RESILIENCE",
+        "SOLAR_WIND_VALUE_BREAKDOWN"
+      ],
+      "reasoning": "Bounded engineering-fit cap for generic failure-unit value bucket; not claims-calibrated.",
+      "update_trigger": "claims/forensic/failure-unit calibration"
+    },
+    {
+      "parameter": "R0",
+      "curve_id": "SWS_RACKING_STRUCT",
+      "value": 0.8,
+      "param_role": "boundary_or_cap",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "CPP_PV_WIND_LOAD"
+      ],
+      "reasoning": "Threshold avoids false low-wind damage; value is engineering fit.",
+      "update_trigger": "structural test or claims calibration"
+    },
+    {
+      "parameter": "R50",
+      "curve_id": "SWS_RACKING_STRUCT",
+      "value": 1.25,
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "CPP_PV_WIND_LOAD",
+        "NREL_STORM_RESILIENCE"
+      ],
+      "reasoning": "Engineering-fit transition point on normalized demand ratio.",
+      "update_trigger": "claims/forensic/aeroelastic calibration"
+    },
+    {
+      "parameter": "k",
+      "curve_id": "SWS_RACKING_STRUCT",
+      "value": 8.0,
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "CPP_PV_WIND_LOAD"
+      ],
+      "reasoning": "Engineering-fit steepness; public sources support mechanism not numeric slope.",
+      "update_trigger": "claims/forensic/aeroelastic calibration"
+    },
+    {
+      "parameter": "default_value_share_physical_base",
+      "curve_id": "SWS_RACKING_STRUCT",
+      "value": 0.06,
+      "param_role": "exposure_or_value",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "SOLAR_WIND_VALUE_BREAKDOWN"
+      ],
+      "reasoning": "Illustrative default value link; should be replaced with asset-specific valuation.",
+      "update_trigger": "project-specific cost breakdown"
+    },
+    {
+      "parameter": "max_DR",
+      "curve_id": "SWS_MODULE_ATTACH",
+      "value": 0.65,
+      "param_role": "boundary_or_cap",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "DOE_FEMP_SEVERE_WEATHER_PV",
+        "NREL_STORM_RESILIENCE",
+        "SOLAR_WIND_VALUE_BREAKDOWN"
+      ],
+      "reasoning": "Bounded engineering-fit cap for generic failure-unit value bucket; not claims-calibrated.",
+      "update_trigger": "claims/forensic/failure-unit calibration"
+    },
+    {
+      "parameter": "R0",
+      "curve_id": "SWS_MODULE_ATTACH",
+      "value": 0.7,
+      "param_role": "boundary_or_cap",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "CPP_PV_WIND_LOAD"
+      ],
+      "reasoning": "Threshold avoids false low-wind damage; value is engineering fit.",
+      "update_trigger": "structural test or claims calibration"
+    },
+    {
+      "parameter": "R50",
+      "curve_id": "SWS_MODULE_ATTACH",
+      "value": 1.05,
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "CPP_PV_WIND_LOAD",
+        "NREL_STORM_RESILIENCE"
+      ],
+      "reasoning": "Engineering-fit transition point on normalized demand ratio.",
+      "update_trigger": "claims/forensic/aeroelastic calibration"
+    },
+    {
+      "parameter": "k",
+      "curve_id": "SWS_MODULE_ATTACH",
+      "value": 10.0,
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "CPP_PV_WIND_LOAD"
+      ],
+      "reasoning": "Engineering-fit steepness; public sources support mechanism not numeric slope.",
+      "update_trigger": "claims/forensic/aeroelastic calibration"
+    },
+    {
+      "parameter": "default_value_share_physical_base",
+      "curve_id": "SWS_MODULE_ATTACH",
+      "value": 0.4,
+      "param_role": "exposure_or_value",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "SOLAR_WIND_VALUE_BREAKDOWN"
+      ],
+      "reasoning": "Illustrative default value link; should be replaced with asset-specific valuation.",
+      "update_trigger": "project-specific cost breakdown"
+    },
+    {
+      "parameter": "max_DR",
+      "curve_id": "SWS_FOUNDATION_UPLIFT",
+      "value": 0.45,
+      "param_role": "boundary_or_cap",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "DOE_FEMP_SEVERE_WEATHER_PV",
+        "NREL_STORM_RESILIENCE",
+        "SOLAR_WIND_VALUE_BREAKDOWN"
+      ],
+      "reasoning": "Bounded engineering-fit cap for generic failure-unit value bucket; not claims-calibrated.",
+      "update_trigger": "claims/forensic/failure-unit calibration"
+    },
+    {
+      "parameter": "R0",
+      "curve_id": "SWS_FOUNDATION_UPLIFT",
+      "value": 0.9,
+      "param_role": "boundary_or_cap",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "CPP_PV_WIND_LOAD"
+      ],
+      "reasoning": "Threshold avoids false low-wind damage; value is engineering fit.",
+      "update_trigger": "structural test or claims calibration"
+    },
+    {
+      "parameter": "R50",
+      "curve_id": "SWS_FOUNDATION_UPLIFT",
+      "value": 1.35,
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "CPP_PV_WIND_LOAD",
+        "NREL_STORM_RESILIENCE"
+      ],
+      "reasoning": "Engineering-fit transition point on normalized demand ratio.",
+      "update_trigger": "claims/forensic/aeroelastic calibration"
+    },
+    {
+      "parameter": "k",
+      "curve_id": "SWS_FOUNDATION_UPLIFT",
+      "value": 7.0,
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "CPP_PV_WIND_LOAD"
+      ],
+      "reasoning": "Engineering-fit steepness; public sources support mechanism not numeric slope.",
+      "update_trigger": "claims/forensic/aeroelastic calibration"
+    },
+    {
+      "parameter": "default_value_share_physical_base",
+      "curve_id": "SWS_FOUNDATION_UPLIFT",
+      "value": 0.08,
+      "param_role": "exposure_or_value",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "SOLAR_WIND_VALUE_BREAKDOWN"
+      ],
+      "reasoning": "Illustrative default value link; should be replaced with asset-specific valuation.",
+      "update_trigger": "project-specific cost breakdown"
+    },
+    {
+      "parameter": "max_DR",
+      "curve_id": "SWS_SCADA_EXPOSED",
+      "value": 0.15,
+      "param_role": "boundary_or_cap",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "DOE_FEMP_SEVERE_WEATHER_PV",
+        "NREL_STORM_RESILIENCE",
+        "SOLAR_WIND_VALUE_BREAKDOWN"
+      ],
+      "reasoning": "Bounded engineering-fit cap for generic failure-unit value bucket; not claims-calibrated.",
+      "update_trigger": "claims/forensic/failure-unit calibration"
+    },
+    {
+      "parameter": "R0",
+      "curve_id": "SWS_SCADA_EXPOSED",
+      "value": 0.7,
+      "param_role": "boundary_or_cap",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "CPP_PV_WIND_LOAD"
+      ],
+      "reasoning": "Threshold avoids false low-wind damage; value is engineering fit.",
+      "update_trigger": "structural test or claims calibration"
+    },
+    {
+      "parameter": "R50",
+      "curve_id": "SWS_SCADA_EXPOSED",
+      "value": 0.95,
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "CPP_PV_WIND_LOAD",
+        "NREL_STORM_RESILIENCE"
+      ],
+      "reasoning": "Engineering-fit transition point on normalized demand ratio.",
+      "update_trigger": "claims/forensic/aeroelastic calibration"
+    },
+    {
+      "parameter": "k",
+      "curve_id": "SWS_SCADA_EXPOSED",
+      "value": 6.0,
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "CPP_PV_WIND_LOAD"
+      ],
+      "reasoning": "Engineering-fit steepness; public sources support mechanism not numeric slope.",
+      "update_trigger": "claims/forensic/aeroelastic calibration"
+    },
+    {
+      "parameter": "default_value_share_physical_base",
+      "curve_id": "SWS_SCADA_EXPOSED",
+      "value": 0.02,
+      "param_role": "exposure_or_value",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "SOLAR_WIND_VALUE_BREAKDOWN"
+      ],
+      "reasoning": "Illustrative default value link; should be replaced with asset-specific valuation.",
+      "update_trigger": "project-specific cost breakdown"
+    }
+  ],
+  "derivation_rationale": {
+    "source_spine": "Wind-pressure physics and public PV wind-load/storm-hardening sources support the axis, mechanisms, and thresholded logistic form.",
+    "form_reasoning": "Structural wind damage is threshold-like but heterogeneous; thresholded logistic avoids false low-wind damage and caps failure-unit loss.",
+    "demoted_sources": "Public sources do not provide a generic claims-calibrated wind-speed-to-DR table, so numeric parameters remain engineering-fit.",
+    "tier_mix": "Axis bridge is T2; all v1.0 numeric structural parameters and stow multipliers are T4 engineering fits; tail metrics are withheld."
+  },
+  "emit_contract": {
+    "schema_version": "damage_emit.v1",
+    "supported_emit_modes": [
+      "scalar_mean",
+      "scalar_mean_plus_bounds",
+      "discrete_state_table",
+      "parametric_distribution",
+      "state_ensemble"
+    ],
+    "populated_emit_modes_for_this_cell": [
+      "scalar_mean"
+    ],
+    "primary_grain": "failure_unit",
+    "distribution_fields_present_even_when_null": true
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v1",
+    "cell_id": "strong_wind_solar",
+    "spread_carried": false,
+    "emit_modes_populated_by_cell": [
+      "scalar_mean"
+    ],
+    "metrics_supportable": {
+      "failure_unit_scalar_dr": "supported",
+      "scenario_loss_given_value_basis": "supported_with_explicit_value_and_exposure_basis",
+      "scalar_eal": "conditional_require_cap_binding_preflight",
+      "pml": "withheld_no_tail_distribution",
+      "var": "withheld_no_tail_distribution",
+      "tvar": "withheld_no_tail_distribution"
+    },
+    "cap_binding": {
+      "policy": "fail_closed",
+      "preflight_status": "not_executed_no_downstream_frequency_or_state_distribution",
+      "required_before_scalar_eal": true,
+      "tolerance_pct": 2.5,
+      "action_if_fail": "require_mean_plus_spread_emit",
+      "reason": "Current package contains severity curves but not downstream hazard/state distributions or project-specific cap tests."
+    }
+  }
+}

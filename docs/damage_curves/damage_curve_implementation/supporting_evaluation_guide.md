@@ -193,7 +193,7 @@ Same asset. Different valid bases.
 | **Original installed capex** | What was paid to build the project originally | Historical project cost, EPC comparison | Includes soft/sunk costs that may not be physically damageable |
 | **Replacement cost new** | What it would cost to rebuild the asset today | Insurance and physical damage | May differ from original capex due to inflation/deflation |
 | **Physical replaceable base** | Only the physical, repairable/replaceable portion | Clean hazard loss modeling | Requires stripping or parking soft/sunk/nonphysical costs |
-| **Insured TIV** | What the insurance policy declares as insured value | Policy analytics and claims comparison | May be scheduled differently than engineering replacement value |
+| **Insured TIV** | What the insurance policy declares as insured value | Policy analytics and claims comparison | May be scheduled differently than engineering replacement value (see §5.4) |
 | **Book value** | Accounting value after depreciation | Financial statements | Not a physical damage basis |
 | **Fair market value** | What a buyer would pay | M&A / transaction analysis | Includes cash-flow and market expectations |
 | **Enterprise value** | DCF / business value | Investor valuation | Can be much higher or lower than replacement value |
@@ -288,6 +288,29 @@ SUNK / SOFT / NONPHYSICAL VALUE
 ```
 
 For physical damage modeling, these should usually be represented as explicit `DR ≈ 0` or nonphysical slices, not silently left inside the denominator.
+
+### 5.4 Insured TIV vs physical replaceable base
+
+Insured TIV (Total Insured Value) is **what the policy schedule declares**, not what our engineering ledger computes. The two are related but not identical — and the gap is usually *policy structure*, not physics.
+
+```text
+PHYSICAL REPLACEABLE BASE   = our model of repairable/replaceable equipment value
+INSURED TIV                 = the value declared in the policy's schedule of values
+```
+
+The schedule can sit **above or below** our physical base:
+
+- **TIV above base** — it bundles non-physical / add-on coverage: business interruption, extra expense, debris removal, escalation, owner-supplied equipment.
+- **TIV below base** — sublimits, exclusions, agreed/depreciated values, or blanket limits that don't reach full replacement.
+
+So we keep **two denominators for two questions**:
+
+```text
+engineering loss model        → physical replaceable base   (the clean physical denominator)
+policy / claims / deductible   → insured TIV                (compare modeled loss to limits/deductibles)
+```
+
+The same modeled loss reads differently against each (see §19 for the worked numbers — e.g. $9.45M is 10.7% of the physical base but 9.9% of insured TIV). This is why every reported `% of TIV` must name *which* TIV: the insurer's scheduled value, or our physical replaceable base. It is the §4 basis-label rule applied to the one basis **we don't control** — the insurer's, not ours.
 
 ---
 
@@ -1094,11 +1117,28 @@ The guide should always preserve this separation.
 
 ## 23. Source anchors
 
+### Internal method anchors (ours)
+
 This guide is intended to sit beside:
 
 - `03_valuation_guide.md` — method for assigning dollar value to subsystems/components, with the key distinction between allocation, at-risk fraction, and basis.
 - `substrate_decomposition.md` — engineering vocabulary for plant/generator → subsystem → component decomposition across solar, wind, BESS, and thermal assets.
-- `solar_wind_value_breakdown.xlsx` — sourced default value breakdown workbook for solar and wind, including physical replaceable basis and installed capex reconciliation.
+- `solar_wind_value_breakdown.xlsx` — sourced default value breakdown workbook for solar and wind (physical replaceable basis + installed-capex reconciliation), which **maps the public cost data below** into subsystem/component buckets.
+
+### Public data sources (the raw cost benchmarks the workbook is built from)
+
+- **Solar** — NREL *Q1-2025 Solar Photovoltaic System Cost Benchmarks* (dataset):
+  <https://data.nrel.gov/submissions/304>. The workbook ingests the PVSCM raw cost-model file
+  (`UPV 2025Q1.txt`; `System.Size=100000 kWdc`; line items Module / Inverter / SBOS / EBOS / Fieldwork / …).
+- **Wind** — NREL *Cost of Wind Energy Review: 2024 Edition* (report 91775):
+  <https://docs.nrel.gov/docs/fy25osti/91775.pdf>. Land-based wind CapEx breakdown
+  (rotor, nacelle, tower, foundation, electrical infrastructure, transport, soft costs).
+
+> **Three kinds of "reference" in the workbook** (so a first-time reader isn't confused): *raw source* = the
+> public NREL data/files above (real, external — note the solar one is a raw `.txt` PVSCM model file, not a
+> report) · *internal method* = this guide + substrate decomposition (ours) · *mapped ledger rows* = **our
+> interpretation** mapping raw source lines into subsystem/component buckets (e.g. `Module.Front Glass` →
+> `PV_ARRAY / PV_MODULE`; `Electrical infrastructure` → `ELECTRICAL_COLLECTION + SUBSTATION`).
 
 ---
 

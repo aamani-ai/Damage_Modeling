@@ -1,0 +1,287 @@
+{
+  "schema_version": "damage_curve_record_bundle.v1",
+  "cell_id": "hail_solar",
+  "damage_code_id": "HAIL_SOLAR_PV_MODULE_V1",
+  "semantic_damage_model_version": "model v1.0",
+  "documentation_revision": "docs r5",
+  "package_release": "library v2.5",
+  "canonical_runtime_artifact": true,
+  "source_dossier": "01_cells/hail_solar/current/hail_solar_curve_derivation_dossier_v1_3.md",
+  "source_workbook": "01_cells/hail_solar/current/damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx",
+  "known_noncanonical_legacy_artifacts": [
+    {
+      "artifact": "Hazard_modeling/data/hail/damage_curves/hail_solar_asset_capex_weighted.json",
+      "status": "non_canonical_legacy_placeholder",
+      "reason": "Asset-level capex-weighted blend; does not match failure-unit grain or dossier parameters."
+    }
+  ],
+  "hazard_axis": {
+    "id": "HAIL_DIAMETER_MESH_EQUIV",
+    "input_field": "mesh_diameter_mm",
+    "unit": "mm",
+    "source_units_allowed": [
+      "mm",
+      "in"
+    ],
+    "valid_range": [
+      0,
+      100
+    ],
+    "extrapolation_policy": "clamp_or_warn"
+  },
+  "failure_units": [
+    {
+      "id": "PV_MODULE_GLASS_CELL",
+      "subsystem": "PV_ARRAY",
+      "component": "PV_MODULE",
+      "treatment": "primary_nonzero",
+      "y_axis": "module replacement damage ratio approximated by glass breakage probability",
+      "value_bucket": "PV_ARRAY_MODULE_EXPOSED",
+      "f_kind": "material_share"
+    }
+  ],
+  "curve_records": [
+    {
+      "curve_id": "HAIL_SOLAR_FRAGILE_THIN_GG",
+      "failure_unit_id": "PV_MODULE_GLASS_CELL",
+      "curve_form": "logistic",
+      "x_axis": "mesh_diameter_mm",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "D50_mm": 41.074,
+        "k_per_mm": 0.220633,
+        "max_DR": 1.0
+      },
+      "selector_match": {
+        "module_archetype": "fragile_thin_glass_glass"
+      }
+    },
+    {
+      "curve_id": "HAIL_SOLAR_DEFAULT_3P2_GBS",
+      "failure_unit_id": "PV_MODULE_GLASS_CELL",
+      "curve_form": "logistic",
+      "x_axis": "mesh_diameter_mm",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "D50_mm": 52.696,
+        "k_per_mm": 0.165912,
+        "max_DR": 1.0
+      },
+      "selector_match": {
+        "module_archetype": "default_3_2mm_glass_backsheet"
+      }
+    },
+    {
+      "curve_id": "HAIL_SOLAR_HARDENED_THICKER",
+      "failure_unit_id": "PV_MODULE_GLASS_CELL",
+      "curve_form": "logistic",
+      "x_axis": "mesh_diameter_mm",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "D50_mm": 64.114,
+        "k_per_mm": 0.135331,
+        "max_DR": 1.0
+      },
+      "selector_match": {
+        "module_archetype": "hail_hardened_thicker_glass"
+      }
+    }
+  ],
+  "selector_logic": [
+    {
+      "field": "module_archetype",
+      "required": true,
+      "default": "default_3_2mm_glass_backsheet",
+      "effect": "chooses_curve_family",
+      "missing_data_flag": "DEFAULT_SELECTOR_USED"
+    },
+    {
+      "field": "front_glass_thickness_mm",
+      "required": false,
+      "effect": "maps_to_module_archetype"
+    },
+    {
+      "field": "glass_glass_vs_backsheet",
+      "required": false,
+      "effect": "maps_to_module_archetype"
+    },
+    {
+      "field": "hail_test_rating",
+      "required": false,
+      "effect": "can_create_exact_override"
+    }
+  ],
+  "conditioner_logic": [
+    {
+      "adjustment_id": "HAIL_STOW_HORIZONTAL_SHIFT_V1",
+      "field": "stow_state",
+      "adjustment_type": "probability_blend_of_unstowed_and_stowed_curves",
+      "form": "DR = P_stowed * [0.90 * logistic(D; D50+8mm, k)] + (1-P_stowed) * logistic(D; D50, k)",
+      "source_ids": [
+        "E_VDE_HAIL_STOW",
+        "DOE_FEMP_HAIL_GUIDANCE"
+      ],
+      "tier": "T4_placeholder_or_expert_judgment",
+      "reasoning": "Public sources support high-tilt/stow reducing normal impact severity, but do not provide a universal numeric shift. Horizontal shift preserves hail-size threshold semantics better than multiplying annual frequency.",
+      "open_seam": "replace with tracker/BOM-specific hail-stow test data"
+    }
+  ],
+  "exposure_logic": [
+    {
+      "field": "array_exposure_fraction",
+      "required": true,
+      "default": 1.0,
+      "effect": "scales affected PV module value"
+    }
+  ],
+  "parameter_tier_table": [
+    {
+      "parameter": "D50_mm",
+      "curve_id": "HAIL_SOLAR_FRAGILE_THIN_GG",
+      "value": 41.074,
+      "param_role": "curve_fit_shape",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "PVEL_2023_HSS",
+        "KIWA_PVEL_HSS"
+      ],
+      "reasoning": "Fit from public aggregate lab breakage anchors for thin glass/glass modules.",
+      "update_trigger": "module-specific BOM or larger public lab dataset"
+    },
+    {
+      "parameter": "k_per_mm",
+      "curve_id": "HAIL_SOLAR_FRAGILE_THIN_GG",
+      "value": 0.220633,
+      "param_role": "curve_fit_shape",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "PVEL_2023_HSS",
+        "KIWA_PVEL_HSS"
+      ],
+      "reasoning": "Logit-space fit to public lab anchors.",
+      "update_trigger": "module-specific BOM or larger public lab dataset"
+    },
+    {
+      "parameter": "D50_mm",
+      "curve_id": "HAIL_SOLAR_DEFAULT_3P2_GBS",
+      "value": 52.696,
+      "param_role": "curve_fit_shape",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "IEC_61215_BASELINE",
+        "PVEL_2023_HSS"
+      ],
+      "reasoning": "Two-anchor fit using IEC near-zero baseline and public PVEL 50mm glass/backsheet aggregate.",
+      "update_trigger": "claims/OEM/BOM-specific calibration"
+    },
+    {
+      "parameter": "k_per_mm",
+      "curve_id": "HAIL_SOLAR_DEFAULT_3P2_GBS",
+      "value": 0.165912,
+      "param_role": "curve_fit_shape",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "IEC_61215_BASELINE",
+        "PVEL_2023_HSS"
+      ],
+      "reasoning": "Two-anchor logistic slope.",
+      "update_trigger": "claims/OEM/BOM-specific calibration"
+    },
+    {
+      "parameter": "D50_mm",
+      "curve_id": "HAIL_SOLAR_HARDENED_THICKER",
+      "value": 64.114,
+      "param_role": "curve_fit_shape",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "IEC_61215_BASELINE",
+        "PVEL_KIWA_HARDENED_PUBLIC_RESULT"
+      ],
+      "reasoning": "Sparse-anchor hardened extrapolation; requires evidence of hardened module design.",
+      "update_trigger": "hardened module-specific lab/claims data"
+    },
+    {
+      "parameter": "k_per_mm",
+      "curve_id": "HAIL_SOLAR_HARDENED_THICKER",
+      "value": 0.135331,
+      "param_role": "curve_fit_shape",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "IEC_61215_BASELINE",
+        "PVEL_KIWA_HARDENED_PUBLIC_RESULT"
+      ],
+      "reasoning": "Sparse two-anchor logistic slope; tail is extrapolated.",
+      "update_trigger": "hardened module-specific lab/claims data"
+    },
+    {
+      "parameter": "stowed_D50_shift_mm",
+      "curve_id": "all_hail_archetypes",
+      "value": 8.0,
+      "param_role": "conditioner_adjustment",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "E_VDE_HAIL_STOW",
+        "DOE_FEMP_HAIL_GUIDANCE"
+      ],
+      "reasoning": "Directional support for high-tilt mitigation; magnitude not publicly calibrated.",
+      "update_trigger": "tracker-specific stow-angle impact testing"
+    },
+    {
+      "parameter": "stowed_max_DR",
+      "curve_id": "all_hail_archetypes",
+      "value": 0.9,
+      "param_role": "boundary_or_cap",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "E_VDE_HAIL_STOW"
+      ],
+      "reasoning": "Cap acknowledges residual high-severity breakage under extreme hail; not claims calibrated.",
+      "update_trigger": "claims/lab stow performance data"
+    }
+  ],
+  "derivation_rationale": {
+    "source_spine": "Public PVEL/Kiwa hail stress sequence breakage anchors, with IEC baseline as near-zero certification anchor.",
+    "form_reasoning": "Logistic form is a bounded monotone threshold-like model appropriate to sparse breakage probability anchors.",
+    "demoted_sources": "Field performance and stow guidance inform mechanism/adjustment direction but do not supply universal numeric DR parameters.",
+    "tier_mix": "Core unstowed archetype curves are mostly T2/T3; stow adjustment is T4 and must not support tail metrics."
+  },
+  "emit_contract": {
+    "schema_version": "damage_emit.v1",
+    "supported_emit_modes": [
+      "scalar_mean",
+      "scalar_mean_plus_bounds",
+      "discrete_state_table",
+      "parametric_distribution",
+      "state_ensemble"
+    ],
+    "populated_emit_modes_for_this_cell": [
+      "scalar_mean"
+    ],
+    "primary_grain": "failure_unit",
+    "distribution_fields_present_even_when_null": true
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v1",
+    "cell_id": "hail_solar",
+    "spread_carried": false,
+    "emit_modes_populated_by_cell": [
+      "scalar_mean"
+    ],
+    "metrics_supportable": {
+      "failure_unit_scalar_dr": "supported",
+      "scenario_loss_given_value_basis": "supported_with_explicit_value_and_exposure_basis",
+      "scalar_eal": "conditional_require_cap_binding_preflight",
+      "pml": "withheld_no_tail_distribution",
+      "var": "withheld_no_tail_distribution",
+      "tvar": "withheld_no_tail_distribution"
+    },
+    "cap_binding": {
+      "policy": "fail_closed",
+      "preflight_status": "not_executed_no_downstream_frequency_or_state_distribution",
+      "required_before_scalar_eal": true,
+      "tolerance_pct": 2.5,
+      "action_if_fail": "require_mean_plus_spread_emit",
+      "reason": "Current package contains severity curves but not downstream hazard/state distributions or project-specific cap tests."
+    }
+  }
+}

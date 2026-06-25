@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "damage_curve_library.capability_declaration.v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "cell_id",
+    "spread_carried",
+    "metrics_supportable",
+    "cap_binding"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "capability_declaration.v1"
+    },
+    "cell_id": {
+      "type": "string"
+    },
+    "spread_carried": {
+      "type": "boolean"
+    },
+    "emit_modes_populated_by_cell": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "metrics_supportable": {
+      "type": "object",
+      "required": [
+        "failure_unit_scalar_dr",
+        "scenario_loss_given_value_basis",
+        "scalar_eal",
+        "pml",
+        "var",
+        "tvar"
+      ]
+    },
+    "cap_binding": {
+      "type": "object",
+      "required": [
+        "policy",
+        "preflight_status",
+        "required_before_scalar_eal"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

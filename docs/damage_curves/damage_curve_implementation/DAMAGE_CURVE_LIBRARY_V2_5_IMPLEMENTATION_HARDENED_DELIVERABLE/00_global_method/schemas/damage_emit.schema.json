@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "damage_curve_library.damage_emit.v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "cell_id",
+    "damage_code_id",
+    "model_version",
+    "emit_mode",
+    "failure_unit_results"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "damage_emit.v1"
+    },
+    "cell_id": {
+      "type": "string"
+    },
+    "damage_code_id": {
+      "type": "string"
+    },
+    "model_version": {
+      "type": "string"
+    },
+    "emit_mode": {
+      "enum": [
+        "scalar_mean",
+        "scalar_mean_plus_bounds",
+        "discrete_state_table",
+        "parametric_distribution",
+        "state_ensemble"
+      ]
+    },
+    "hazard_input_used": {
+      "type": "object"
+    },
+    "selectors_used": {
+      "type": "object"
+    },
+    "conditioners_used": {
+      "type": "object"
+    },
+    "exposure_used": {
+      "type": "object"
+    },
+    "failure_unit_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "failure_unit_id",
+          "curve_id",
+          "subsystem",
+          "component"
+        ],
+        "properties": {
+          "failure_unit_id": {
+            "type": "string"
+          },
+          "curve_id": {
+            "type": "string"
+          },
+          "subsystem": {
+            "type": "string"
+          },
+          "component": {
+            "type": "string"
+          },
+          "scalar_mean_dr": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "distribution": {
+            "type": "object"
+          },
+          "metadata_flags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "capability_declaration_ref": {
+      "type": [
+        "string",
+        "object"
+      ]
+    },
+    "cap_binding_preflight_ref": {
+      "type": [
+        "string",
+        "object",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": true
+}
