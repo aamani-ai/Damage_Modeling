@@ -2,8 +2,18 @@
 
 Index for durable damage-modeling method docs.
 
-This is an index-only surface for now. The authoritative files remain in their current locations until a
-reviewed migration is planned.
+This is mostly an index surface for now. The `value_basis/` folder contains reader-facing method support
+files; the foundations and global standards still remain in their current locations until a reviewed
+migration is planned.
+
+## Value Basis
+
+- [`value_basis/README.md`](value_basis/README.md)
+- [`value_basis/supporting_evaluation_guide.md`](value_basis/supporting_evaluation_guide.md)
+- [`value_basis/solar_wind_value_breakdown.xlsx`](value_basis/solar_wind_value_breakdown.xlsx)
+
+The value-basis workbook is a method support artifact. A byte-identical copy is also preserved in the v2.5
+extracted deliverable's `99_source_context/` folder as part of the source/provenance trail.
 
 ## Foundations
 

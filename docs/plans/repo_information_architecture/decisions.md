@@ -4,6 +4,44 @@ Running record of non-obvious design decisions for the repo information-architec
 
 ---
 
+## IA-D7 · Preserve the v2.5 ZIP, but move value-basis support to method
+
+**Date:** 2026-07-06 · **Status:** decided.
+
+**Context.** The original downloaded file is
+`DOWNLOAD_THIS_damage_curve_library_v2_5_implementation_hardened.zip`. Its extracted root is
+`DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/`. The extracted bundle is mixed: it contains
+current cell packages, contracts, method standards, source context, schemas, helper scripts, and evidence
+material.
+
+Separately, `supporting_evaluation_guide.md` and `solar_wind_value_breakdown.xlsx` were sitting under
+`docs/damage_curves/damage_curve_implementation/`, outside the extracted bundle. They are not raw ZIP/source
+drops. They are value-basis method support.
+
+**Decision.**
+
+```text
+docs/source_drops/raw_zips/
+  DOWNLOAD_THIS_damage_curve_library_v2_5_implementation_hardened.zip
+
+docs/source_drops/manifests/
+  2026-07-06_v2_5_implementation_hardened_zip.md
+
+docs/method/value_basis/
+  supporting_evaluation_guide.md
+  solar_wind_value_breakdown.xlsx
+```
+
+Keep the extracted v2.5 deliverable bundle in place for now. Do not move it wholesale into source drops.
+
+**Why.** The raw ZIP is provenance. The extracted bundle is the current versioned implementation package. The
+value-basis guide/workbook are reader-facing method support and should be shallow under `docs/method/`.
+
+**Revisit trigger.** If the extracted v2.5 bundle is split later, do it with a file-level mapping and preserve
+JSON artifact hashes and consumer-facing links.
+
+---
+
 ## IA-D6 · Source drops are a real landing zone, not current docs
 
 **Date:** 2026-07-06 · **Status:** decided.

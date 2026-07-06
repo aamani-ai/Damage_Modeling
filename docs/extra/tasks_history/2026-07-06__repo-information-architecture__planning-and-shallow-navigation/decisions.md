@@ -42,13 +42,25 @@ docs/source_drops/manifests/
 The v2.5 deliverable bundle remains in place for now because it is mixed: it contains current artifacts,
 method standards, source context, schemas, helper scripts, and evidence ingestion material.
 
-## 5. First file move is scope only
+## 5. Value-basis support belongs under method
+
+`supporting_evaluation_guide.md` and `solar_wind_value_breakdown.xlsx` are method support, not raw source
+drops. They now live under:
+
+```text
+docs/method/value_basis/
+```
+
+The original downloaded v2.5 ZIP is preserved under `docs/source_drops/raw_zips/` with a manifest. The
+extracted v2.5 deliverable bundle remains in place.
+
+## 6. First low-risk file move was scope
 
 Move only the repo-level scope anchor to `docs/scope/SCOPE_AND_STORY.md`. Leave a compatibility stub at
 `docs/damage_curves/SCOPE_AND_STORY.md`. Update the old `docs/damage_curves/README.md` into a compatibility
 index.
 
-## 6. Link debt is tracked, not hidden
+## 7. Link debt is tracked, not hidden
 
 A full-repo Markdown link check has existing debt from relocated/deep docs. Baseline captured:
 

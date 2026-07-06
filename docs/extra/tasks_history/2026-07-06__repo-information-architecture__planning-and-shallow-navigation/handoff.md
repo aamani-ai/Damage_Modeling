@@ -14,6 +14,8 @@ ZIP/deep-research source drops now have an explicit landing-zone shape under `do
 - [`../../../cells/README.md`](../../../cells/README.md)
 - [`../../../contracts/README.md`](../../../contracts/README.md)
 - [`../../../source_drops/README.md`](../../../source_drops/README.md)
+- [`../../../method/value_basis/README.md`](../../../method/value_basis/README.md)
+- [`../../../source_drops/manifests/2026-07-06_v2_5_implementation_hardened_zip.md`](../../../source_drops/manifests/2026-07-06_v2_5_implementation_hardened_zip.md)
 - [`../../../plans/repo_information_architecture/link_debt.md`](../../../plans/repo_information_architecture/link_debt.md)
 
 ## Next actions
@@ -24,7 +26,9 @@ ZIP/deep-research source drops now have an explicit landing-zone shape under `do
 4. Keep `docs/damage_curves/SCOPE_AND_STORY.md` as a compatibility stub until downstream links are normalized.
 5. When raw ZIP/deep-research drops are added, place originals under `docs/source_drops/raw_zips/` or record
    external storage in `docs/source_drops/manifests/`.
-6. Start a separate runtime artifact publishing plan when cloud bucket/versioning/Hazard loading decisions are ready.
+6. Keep value-basis method support under `docs/method/value_basis/`; do not bury it under extracted source
+   drops.
+7. Start a separate runtime artifact publishing plan when cloud bucket/versioning/Hazard loading decisions are ready.
 
 ## Current guardrails
 
@@ -34,4 +38,5 @@ schemas stay in v2.5 package for now
 detailed evidence stays with cells
 cross-cell evidence protocol is indexed at docs/evidence/
 raw source drops go under docs/source_drops/raw_zips/ or manifests, not into canonical docs
+value-basis guide/workbook live under docs/method/value_basis/
 ```

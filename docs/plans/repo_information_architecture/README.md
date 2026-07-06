@@ -121,6 +121,7 @@ docs/contracts/README.md
 docs/method/README.md
   -> foundations
   -> global method standards
+  -> value_basis/ guide and workbook
   -> versioning
   -> evidence ingestion
 

@@ -21,6 +21,9 @@
   `README.md`, `AGENTS.md`, `docs/README.md`, and the active evidence-harvest README.
 - Clarified that `DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/` is a mixed versioned
   deliverable bundle, not the canonical navigation layer and not a pure raw-source folder.
+- Preserved the original downloaded v2.5 ZIP under `docs/source_drops/raw_zips/` with a checksum manifest.
+- Moved the physical-damage valuation support guide and solar/wind value-breakdown workbook into
+  `docs/method/value_basis/`.
 
 ## Verification
 
@@ -32,6 +35,8 @@ full-repo missing-link count 131 <= baseline 131
 canonical JSON hashes ok
 no src/ directory found
 no runtime/data/notebook/schema/artifact moves
+v2.5 raw ZIP SHA recorded in source-drop manifest
+value-basis workbook SHA matches the preserved v2.5 source-context copy
 ```
 
 The full-repo link check still has pre-existing debt in deeper relocated/source-context docs. That debt is

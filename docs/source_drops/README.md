@@ -26,6 +26,7 @@ move it casually; record it here and migrate only after a reviewed mapping.
 
 | Source material | Current location | Treatment |
 |---|---|---|
+| v2.5 raw ZIP | [`raw_zips/DOWNLOAD_THIS_damage_curve_library_v2_5_implementation_hardened.zip`](raw_zips/DOWNLOAD_THIS_damage_curve_library_v2_5_implementation_hardened.zip) | Preserved unchanged. Manifest: [`2026-07-06_v2_5_implementation_hardened_zip.md`](manifests/2026-07-06_v2_5_implementation_hardened_zip.md). |
 | Google Drive document copies | [`../google_drive_docs/`](../google_drive_docs/) | Source material. Candidate for `source_drops/extracted/google_drive_docs/` after review. |
 | v2.5 deliverable bundle | [`DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/`](../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/) | Mixed versioned package. It contains current artifacts plus source context; do not make it the canonical navigation layer. |
 | v2.5 source context bundle | [`99_source_context/`](../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/99_source_context/) | Source/provenance material packaged with v2.5. Candidate for `source_drops/extracted/v2_5_source_context/` after review. |
@@ -41,6 +42,7 @@ move it casually; record it here and migrate only after a reviewed mapping.
   checksum, owner, date received, and notes.
 - Put extracted copies under `extracted/`; never mix extracted source material into canonical cell docs.
 - Put current cell summaries under `docs/cells/`, not here.
+- Put method support material such as the value-basis guide/workbook under `docs/method/`, not here.
 - Put cross-cell evidence protocol/register links under `docs/evidence/`, not here.
 - Keep runtime JSON/artifact publishing decisions out of this folder until the cloud/Hazard loading path is
   designed.
