@@ -195,7 +195,7 @@ Pinning the shape so it's unambiguous:
    PER failure unit i, at a univariate intensity x (doc-00x):
 
    emit_i(x) = a distribution-capable object over the damage ratio DRᵢ ∈ [0, capᵢ]
-               v1 content: a scalar E[DRᵢ](x)   (where the path is linear)
+               v1 content: a scalar E{DRᵢ}(x)   (where the path is linear)
                            OR a spread/states   (where a nonlinearity bites)
 
    loss_i = ( emit_i applied to value_i )  [capped at capᵢ]
@@ -227,7 +227,7 @@ distribution; v1 *content* may be a point mass; the discipline is never to colla
 
 **Parked / downstream:** which metrics ship under scalar + the caveat language ([`06`](06_metrics_and_tail_honesty.md));
 the spread *form* per hazard (the climb, when N forces it); financial terms N-fin
-([financial-terms (parked)](06_financial_terms_and_scope_edges.md)).
+([financial-terms (parked)](../../../extra/discussion/archive/06_financial_terms_and_scope_edges.md)).
 
 ---
 
@@ -261,5 +261,5 @@ EAL-safety is conditional on the cap rarely binding — the explicit hinge to
 *Links:* [`01` grain](01_granularity.md) (emit is per-unit, summed) ·
 [`00x x-axis`](02_x_axis_intensity_variable.md) (univariate input) ·
 [`06` metrics](06_metrics_and_tail_honesty.md) (the consumer — which metrics are honest) ·
-[financial-terms (parked)](06_financial_terms_and_scope_edges.md) (N-fin) · `basics_spot_on` (this is its
+[financial-terms (parked)](../../../extra/discussion/archive/06_financial_terms_and_scope_edges.md) (N-fin) · `basics_spot_on` (this is its
 incident; Axiom 3) · `system_coherence_over_local_elegance` · `hazard_asset_specificity`.

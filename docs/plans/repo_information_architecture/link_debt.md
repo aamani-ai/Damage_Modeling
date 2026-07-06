@@ -1,6 +1,6 @@
 # Repo Information Architecture — Legacy Link Debt
 
-Status: baseline captured before Phase 4 moves.
+Status: baseline updated after the foundations move.
 
 A full-repo Markdown link check currently fails because deeper relocated docs still contain old relative links
 from before the `damage_modeling` spin-out. This is known cleanup, not a regression introduced by the shallow
@@ -8,10 +8,11 @@ index work.
 
 ## Baseline
 
-Command summary run during IA planning:
+Command summary after moving canonical foundations to `docs/method/foundations/` and fixing their live
+cross-references:
 
 ```text
-total missing local Markdown links: 131
+total missing local Markdown links: 104
 ```
 
 Grouped by source area:
@@ -19,7 +20,6 @@ Grouped by source area:
 | Source area | Missing links | Notes |
 |---|---:|---|
 | `docs/damage_curves/damage_curve_implementation` | 82 | Mostly copied source-context and old package-relative links. |
-| `docs/damage_curves/damage_curve_foundations` | 27 | Mostly links to archived or Hazard_modeling principles/discussion docs. |
 | `docs/extra/discussion` | 21 | Mostly archived discussion links inherited from Hazard_modeling. |
 | `docs/google_drive_docs/damage_foundation_README.md` | 1 | Local README path mismatch. |
 
@@ -34,5 +34,5 @@ no src/ directory exists
 full-repo missing-link count does not increase above the captured baseline unless the increase is explicitly explained
 ```
 
-Do not treat the current 131-link baseline as acceptable forever. It is a tracked cleanup item. It should be
+Do not treat the current 104-link baseline as acceptable forever. It is a tracked cleanup item. It should be
 addressed in a separate link-normalization phase after the low-risk information-architecture moves prove out.

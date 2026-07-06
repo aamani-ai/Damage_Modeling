@@ -2,9 +2,9 @@
 
 Index for durable damage-modeling method docs.
 
-This is mostly an index surface for now. The `value_basis/` folder contains reader-facing method support
-files; the foundations and global standards still remain in their current locations until a reviewed
-migration is planned.
+This is the durable method surface. `foundations/` contains the canonical principles and question docs;
+`value_basis/` contains reader-facing valuation support; global method standards remain in the v2.5 package
+for now and are indexed here until a reviewed migration is planned.
 
 ## Value Basis
 
@@ -17,21 +17,21 @@ extracted deliverable's `99_source_context/` folder as part of the source/proven
 
 ## Foundations
 
-- [`damage_curve_foundations/README.md`](../damage_curves/damage_curve_foundations/README.md)
-- [`00_assembled_curve_record.md`](../damage_curves/damage_curve_foundations/00_assembled_curve_record.md)
+- [`foundations/README.md`](foundations/README.md)
+- [`00_assembled_curve_record.md`](foundations/00_assembled_curve_record.md)
 - Principles:
-  [`P1`](../damage_curves/damage_curve_foundations/principles/P1_system_coherence_over_local_elegance.md),
-  [`P2`](../damage_curves/damage_curve_foundations/principles/P2_discussion_before_commitment.md),
-  [`P3`](../damage_curves/damage_curve_foundations/principles/P3_reference_is_input_not_authority.md)
+  [`P1`](foundations/principles/P1_system_coherence_over_local_elegance.md),
+  [`P2`](foundations/principles/P2_discussion_before_commitment.md),
+  [`P3`](foundations/principles/P3_reference_is_input_not_authority.md)
 
 ## Question docs
 
-- [`01_granularity.md`](../damage_curves/damage_curve_foundations/questions/01_granularity.md)
-- [`02_x_axis_intensity_variable.md`](../damage_curves/damage_curve_foundations/questions/02_x_axis_intensity_variable.md)
-- [`03_valuation_guide.md`](../damage_curves/damage_curve_foundations/questions/03_valuation_guide.md)
-- [`04_curation_derivation.md`](../damage_curves/damage_curve_foundations/questions/04_curation_derivation.md)
-- [`05_emit_object.md`](../damage_curves/damage_curve_foundations/questions/05_emit_object.md)
-- [`06_metrics_and_tail_honesty.md`](../damage_curves/damage_curve_foundations/questions/06_metrics_and_tail_honesty.md)
+- [`01_granularity.md`](foundations/questions/01_granularity.md)
+- [`02_x_axis_intensity_variable.md`](foundations/questions/02_x_axis_intensity_variable.md)
+- [`03_valuation_guide.md`](foundations/questions/03_valuation_guide.md)
+- [`04_curation_derivation.md`](foundations/questions/04_curation_derivation.md)
+- [`05_emit_object.md`](foundations/questions/05_emit_object.md)
+- [`06_metrics_and_tail_honesty.md`](foundations/questions/06_metrics_and_tail_honesty.md)
 
 ## Global method standards
 

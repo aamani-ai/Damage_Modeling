@@ -1121,7 +1121,8 @@ The guide should always preserve this separation.
 
 This guide is intended to sit beside:
 
-- `03_valuation_guide.md` — method for assigning dollar value to subsystems/components, with the key distinction between allocation, at-risk fraction, and basis.
+- [`03_valuation_guide.md`](../foundations/questions/03_valuation_guide.md) — method for assigning dollar
+  value to subsystems/components, with the key distinction between allocation, at-risk fraction, and basis.
 - `substrate_decomposition.md` — engineering vocabulary for plant/generator → subsystem → component decomposition across solar, wind, BESS, and thermal assets.
 - `solar_wind_value_breakdown.xlsx` — sourced default value breakdown workbook for solar and wind (physical replaceable basis + installed-capex reconciliation), which **maps the public cost data below** into subsystem/component buckets.
 

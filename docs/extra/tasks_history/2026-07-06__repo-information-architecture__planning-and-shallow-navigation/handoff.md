@@ -13,6 +13,7 @@ ZIP/deep-research source drops now have an explicit landing-zone shape under `do
 - [`../../../scope/SCOPE_AND_STORY.md`](../../../scope/SCOPE_AND_STORY.md)
 - [`../../../cells/README.md`](../../../cells/README.md)
 - [`../../../contracts/README.md`](../../../contracts/README.md)
+- [`../../../method/foundations/README.md`](../../../method/foundations/README.md)
 - [`../../../source_drops/README.md`](../../../source_drops/README.md)
 - [`../../../method/value_basis/README.md`](../../../method/value_basis/README.md)
 - [`../../../source_drops/manifests/2026-07-06_v2_5_implementation_hardened_zip.md`](../../../source_drops/manifests/2026-07-06_v2_5_implementation_hardened_zip.md)
@@ -28,7 +29,9 @@ ZIP/deep-research source drops now have an explicit landing-zone shape under `do
    external storage in `docs/source_drops/manifests/`.
 6. Keep value-basis method support under `docs/method/value_basis/`; do not bury it under extracted source
    drops.
-7. Start a separate runtime artifact publishing plan when cloud bucket/versioning/Hazard loading decisions are ready.
+7. Keep canonical foundations under `docs/method/foundations/`; the old damage-curves path is compatibility
+   only.
+8. Start a separate runtime artifact publishing plan when cloud bucket/versioning/Hazard loading decisions are ready.
 
 ## Current guardrails
 
@@ -39,4 +42,5 @@ detailed evidence stays with cells
 cross-cell evidence protocol is indexed at docs/evidence/
 raw source drops go under docs/source_drops/raw_zips/ or manifests, not into canonical docs
 value-basis guide/workbook live under docs/method/value_basis/
+canonical foundations live under docs/method/foundations/
 ```

@@ -7,7 +7,7 @@ This is the first time we step back and put the whole damage-curve effort togeth
 *durable anchor* for the damage-modeling work: it explains what we are building, why it earns its own home,
 where it stops, and how the next person (or the next session) should reason about it without re-litigating
 the boundaries. Everything below sits atop two bodies of work already produced — the
-[`damage_curve_foundations/`](../damage_curves/damage_curve_foundations/README.md) (principles + the six
+[`foundations/`](../method/foundations/README.md) (principles + the six
 question-docs) and the [`damage_curve_implementation/`](../damage_curves/damage_curve_implementation/)
 library (the global method + current worked cells).
 
@@ -167,7 +167,7 @@ EAL-% incident was version drift). The defense is a **published, versioned contr
   hazard always knows exactly which damage behavior it is on.
 - **The artifact format:** package v2.5 now ships canonical **machine-readable JSON** curve artifacts (a direct
   serialization of the foundations'
-  [`00_assembled_curve_record`](../damage_curves/damage_curve_foundations/00_assembled_curve_record.md)
+  [`00_assembled_curve_record`](../method/foundations/00_assembled_curve_record.md)
   schema). Excel remains a derivation/audit view. The durable cloud/storage and Hazard loading path is still a
   separate design decision.
 
@@ -275,7 +275,7 @@ damage artifacts; it should not maintain a second copy of the curve library.
 
 ---
 
-*Links:* [`damage_curve_foundations/`](../damage_curves/damage_curve_foundations/README.md) (principles + 6
+*Links:* [`foundations/`](../method/foundations/README.md) (principles + 6
 questions) ·
 [`damage_curve_implementation/`](../damage_curves/damage_curve_implementation/) (global method + current
 cells) ·

@@ -284,5 +284,5 @@ basis must be labeled and normalized before any number is trusted. Ready to hand
 or to move to the next reasoning topic (x-axis framing → [`05`](05_emit_object.md)).
 
 *Links:* [`01` granularity](01_granularity.md) (sets the grain) · [`05` emit](05_emit_object.md) ·
-[context §5 (parked)](00_context_and_scope.md) · risk-metrics reference (basis choice) ·
+[context §5 (parked)](../../../extra/discussion/archive/00_context_and_scope.md) · risk-metrics reference (basis choice) ·
 `system_coherence_over_local_elegance` · `basics_spot_on` · substrate (NULL capex_weight → this is its frame).

@@ -7,7 +7,7 @@ This doc is two things at once: a **guide** (how to choose the grain for any haz
 transferable, and it saved a real cost.
 
 It does **not** decide the emit-object shape ([`05`](05_emit_object.md)) or the value-weight
-*computation* ([value-allocation (parked)](03_value_allocation_and_tiv.md)); those are parked.
+*computation* ([value-allocation (parked)](../../../extra/discussion/archive/03_value_allocation_and_tiv.md)); those are parked.
 
 *Source key:* substrate = dev `subsystem_code_lookup` / `component_code_lookup` (asset vocabulary,
 **ref not truth**); catalog = `Hazard_Data_Reference` (**authoritative on scope**); principles =
@@ -23,7 +23,7 @@ It does **not** decide the emit-object shape ([`05`](05_emit_object.md)) or the 
 > intensity variable*. Cap each curve at its at-risk fraction of value, and *sum* the losses. Do
 > NOT build a grouped "failure unit" aggregation object** — because summation already composes
 > losses across the asset tree, so grouping only earns its keep when parts genuinely **interact**
-> (joint ≠ sum), and no in-scope hazard does that outside of cascade (which is [cascade (parked)](05_aggregation_dependence.md),
+> (joint ≠ sum), and no in-scope hazard does that outside of cascade (which is [cascade (parked)](../../../extra/discussion/archive/05_aggregation_dependence.md),
 > parked). The existing subsystem/component decomposition is **enough**.
 
 ```
@@ -235,8 +235,8 @@ cheaper.
 - Partitions are **exhaustive and non-overlapping** per hazard (§6).
 
 **Still parked (not solving everything at once):** emit shape ([`05`](05_emit_object.md)) · value
-*computation* ([value-allocation (parked)](03_value_allocation_and_tiv.md)) · stow mechanism
-([component-depth (parked)](07_component_attribute_depth.md)) · **cascade / interaction** ([cascade (parked)](05_aggregation_dependence.md))
+*computation* ([value-allocation (parked)](../../../extra/discussion/archive/03_value_allocation_and_tiv.md)) · stow mechanism
+([component-depth (parked)](../../../extra/discussion/archive/07_component_attribute_depth.md)) · **cascade / interaction** ([cascade (parked)](../../../extra/discussion/archive/05_aggregation_dependence.md))
 — the *one* place a grouping could still be forced, and the place to revisit K3.
 
 ---
@@ -260,7 +260,7 @@ cheaper.
 
 ## 10 · Open / revisit triggers
 
-- **Cascade / interaction ([cascade (parked)](05_aggregation_dependence.md)).** The *only* door left open. If a
+- **Cascade / interaction ([cascade (parked)](../../../extra/discussion/archive/05_aggregation_dependence.md)).** The *only* door left open. If a
   hazard makes parts genuinely interact (joint ≠ sum) in a way that is **not** cascade, the K3 bar
   fires and we revisit a grouping object. Wildfire ember-propagation is the nearest case — and it's
   cascade, so it's cascade's (parked), not this doc's.
@@ -279,8 +279,8 @@ survived a scope-grounded misstep (lightning, rejected), and was then retired by
 (**joint ≠ sum**, which no in-scope pair meets). The existing subsystem/component decomposition is
 sufficient; the exploration is kept as a reusable grain guide + learning record. **Ready to move
 on** — next live questions: the emit-object shape ([`05`](05_emit_object.md)) and value basis
-([value-allocation (parked)](03_value_allocation_and_tiv.md)).
+([value-allocation (parked)](../../../extra/discussion/archive/03_value_allocation_and_tiv.md)).
 
-*Links:* [context (parked)](00_context_and_scope.md) · [`05`](05_emit_object.md) · [value-allocation (parked)](03_value_allocation_and_tiv.md) ·
-[cascade (parked)](05_aggregation_dependence.md) · `system_coherence_over_local_elegance` ·
+*Links:* [context (parked)](../../../extra/discussion/archive/00_context_and_scope.md) · [`05`](05_emit_object.md) · [value-allocation (parked)](../../../extra/discussion/archive/03_value_allocation_and_tiv.md) ·
+[cascade (parked)](../../../extra/discussion/archive/05_aggregation_dependence.md) · `system_coherence_over_local_elegance` ·
 `basics_spot_on` · `Hazard_Data_Reference` (scope authority) · substrate (asset vocabulary, ref-not-truth).

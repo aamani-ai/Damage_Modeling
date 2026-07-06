@@ -144,9 +144,9 @@ under which you would *abandon* the idea — and to mean it.
 
 | Principle | Connection |
 |-----------|------------|
-| [**Basics spot-on**](basics_spot_on.md) | Same epistemic spine, scaled up: `basics_spot_on` checks a *number* against a known answer; this checks a *design choice* against the whole system. The lightning near-miss is its worked example at the design level — plausible-but-wrong, caught by a system-level known answer (the scope catalog). |
-| [**Standard interface, not standard physics**](hazard_asset_specificity.md) | That principle says *specialize the physics, standardize the interface*; this one supplies the test for *when a specialization is worth it* — only when it pays off end-to-end. Together they prevent both false generality and unjustified specialization. |
-| [**Modular from day one**](modularity_and_scaling.md) | Modularity is *how* a departure stays cheap (adopt the interface now, fill implementations one cell at a time); this principle is *whether* the departure is warranted at all. Structure and justification, the two halves of a sound change. |
+| [**Basics spot-on**](../../../../Hazard_modeling/docs/principles/basics_spot_on.md) | Same epistemic spine, scaled up: `basics_spot_on` checks a *number* against a known answer; this checks a *design choice* against the whole system. The lightning near-miss is its worked example at the design level — plausible-but-wrong, caught by a system-level known answer (the scope catalog). |
+| [**Standard interface, not standard physics**](../../../../Hazard_modeling/docs/principles/hazard_asset_specificity.md) | That principle says *specialize the physics, standardize the interface*; this one supplies the test for *when a specialization is worth it* — only when it pays off end-to-end. Together they prevent both false generality and unjustified specialization. |
+| [**Modular from day one**](../../../../Hazard_modeling/docs/principles/modularity_and_scaling.md) | Modularity is *how* a departure stays cheap (adopt the interface now, fill implementations one cell at a time); this principle is *whether* the departure is warranted at all. Structure and justification, the two halves of a sound change. |
 
 ---
 

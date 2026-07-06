@@ -8,7 +8,7 @@ Also archived here: **`damage_curve_library_delivery_architecture_v1_2.md`** —
 draft, superseded by the bundle's `00_global_method/01_delivery_architecture.md`.
 
 **The live, canonical versions are in the foundations:**
-[`damage_curve_foundations/`](../../../damage_curves/damage_curve_foundations/README.md) (principles + the six
+[`foundations/`](../../../method/foundations/README.md) (principles + the six
 question-docs + the assembled-curve-record) and the anchor
 [`SCOPE_AND_STORY.md`](../../../damage_curves/SCOPE_AND_STORY.md).
 

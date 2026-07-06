@@ -24,6 +24,8 @@
 - Preserved the original downloaded v2.5 ZIP under `docs/source_drops/raw_zips/` with a checksum manifest.
 - Moved the physical-damage valuation support guide and solar/wind value-breakdown workbook into
   `docs/method/value_basis/`.
+- Moved canonical foundation docs into `docs/method/foundations/` and left a compatibility pointer at the old
+  `docs/damage_curves/damage_curve_foundations/` path.
 
 ## Verification
 
@@ -37,6 +39,8 @@ no src/ directory found
 no runtime/data/notebook/schema/artifact moves
 v2.5 raw ZIP SHA recorded in source-drop manifest
 value-basis workbook SHA matches the preserved v2.5 source-context copy
+canonical JSON hashes unchanged
+full-repo missing-link count did not increase over the tracked baseline
 ```
 
 The full-repo link check still has pre-existing debt in deeper relocated/source-context docs. That debt is

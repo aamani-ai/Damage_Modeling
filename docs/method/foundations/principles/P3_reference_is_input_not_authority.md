@@ -135,9 +135,9 @@ prior decision is strongest.
 
 | Principle | Connection |
 |-----------|------------|
-| [**Standard interface, not standard physics**](hazard_asset_specificity.md) | A reference's vocabulary is often a good *interface* even when its content is wrong for you — borrow the typed names, specialize the content. The substrate-as-vocabulary move is this principle and that one together. |
-| [**Basics spot-on**](basics_spot_on.md) | Inheriting a reference's answer unexamined is how a plausible-but-wrong basic enters: it *looks* authoritative. Provenance — naming the source and basis — is the known-answer check applied to inherited values. |
-| [**Discussion before commitment**](discussion_before_commitment.md) | Treating your own prior draft as a reference-to-re-examine rather than a decision-to-defend is what lets a discussion reverse its own earlier conclusion. The two principles guard the same drift from opposite sides. |
+| [**Standard interface, not standard physics**](../../../../Hazard_modeling/docs/principles/hazard_asset_specificity.md) | A reference's vocabulary is often a good *interface* even when its content is wrong for you — borrow the typed names, specialize the content. The substrate-as-vocabulary move is this principle and that one together. |
+| [**Basics spot-on**](../../../../Hazard_modeling/docs/principles/basics_spot_on.md) | Inheriting a reference's answer unexamined is how a plausible-but-wrong basic enters: it *looks* authoritative. Provenance — naming the source and basis — is the known-answer check applied to inherited values. |
+| [**Discussion before commitment**](P2_discussion_before_commitment.md) | Treating your own prior draft as a reference-to-re-examine rather than a decision-to-defend is what lets a discussion reverse its own earlier conclusion. The two principles guard the same drift from opposite sides. |
 
 ---
 

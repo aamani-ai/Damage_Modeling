@@ -26,7 +26,7 @@ part that might still be useful.
 
 We take the old repo's **sources/references and the evidence behind them** — not its curve fits or parameters
 wholesale. *A reference is input, not authority*
-([P3](../../../damage_curves/damage_curve_foundations/principles/P3_reference_is_input_not_authority.md)). Any
+([P3](../../../method/foundations/principles/P3_reference_is_input_not_authority.md)). Any
 old number is a hypothesis to test against our cell's own derivation, re-mapped to our failure-unit / x-axis /
 form / provenance structure.
 
@@ -95,5 +95,5 @@ Tornado-specific *measured* fragility is sparse in **both** repos (an honest, sh
 
 *Links:* [SCOPE_AND_STORY](../../../scope/SCOPE_AND_STORY.md) ·
 [standard 16](../../../damage_curves/damage_curve_implementation/) ·
-[P3](../../../damage_curves/damage_curve_foundations/principles/P3_reference_is_input_not_authority.md) ·
+[P3](../../../method/foundations/principles/P3_reference_is_input_not_authority.md) ·
 the legacy repo [`infrasure-damage-curves`](../../../../infrasure-damage-curves).

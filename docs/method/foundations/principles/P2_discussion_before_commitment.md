@@ -127,9 +127,9 @@ where the obvious answer was already on the table and the right answer was one m
 
 | Principle | Connection |
 |-----------|------------|
-| [**Basics spot-on**](basics_spot_on.md) | The reason the slow path is worth it: foundational wrongness is inherited invisibly, so it must be caught *before* the build — and discussion is where it's caught. Discussion is how a basic gets verified as a *choice* before it's verified as a number. |
-| [**System-coherence over local elegance**](system_coherence_over_local_elegance.md) | That principle supplies the *content* of a good foundational discussion (does this pay off end-to-end?) and the *willingness to come back empty*; this one is the practice of holding that discussion before committing. |
-| [**Modular from day one**](modularity_and_scaling.md) | Discussion produces the *method* and the *interface*; modularity is how that method gets filled one cell at a time. Reason out the seam, then build the implementations. |
+| [**Basics spot-on**](../../../../Hazard_modeling/docs/principles/basics_spot_on.md) | The reason the slow path is worth it: foundational wrongness is inherited invisibly, so it must be caught *before* the build — and discussion is where it's caught. Discussion is how a basic gets verified as a *choice* before it's verified as a number. |
+| [**System-coherence over local elegance**](P1_system_coherence_over_local_elegance.md) | That principle supplies the *content* of a good foundational discussion (does this pay off end-to-end?) and the *willingness to come back empty*; this one is the practice of holding that discussion before committing. |
+| [**Modular from day one**](../../../../Hazard_modeling/docs/principles/modularity_and_scaling.md) | Discussion produces the *method* and the *interface*; modularity is how that method gets filled one cell at a time. Reason out the seam, then build the implementations. |
 
 ---
 

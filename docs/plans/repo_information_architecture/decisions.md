@@ -4,6 +4,31 @@ Running record of non-obvious design decisions for the repo information-architec
 
 ---
 
+## IA-D8 · Foundations are canonical method docs
+
+**Date:** 2026-07-06 · **Status:** executed.
+
+**Context.** The foundation docs were still under `docs/damage_curves/damage_curve_foundations/`, even though
+they are not source drops, discussion notes, or cell deliverables. They define durable modeling principles:
+P1-P3, the six question docs, and the assembled-curve-record spec.
+
+**Decision.** Move the canonical foundation docs to:
+
+```text
+docs/method/foundations/
+```
+
+Leave `docs/damage_curves/damage_curve_foundations/README.md` as a compatibility pointer only. Keep the copy
+inside the v2.5 `99_source_context/` bundle untouched as source/provenance context.
+
+**Why.** Foundations are method, not archive. Keeping them under `docs/method/` avoids double-counting and
+keeps the durable reader path shallow.
+
+**Revisit trigger.** Before moving global method standards out of the v2.5 bundle, create a file-level link
+map because those files sit closer to runtime contracts and packaged provenance.
+
+---
+
 ## IA-D7 · Preserve the v2.5 ZIP, but move value-basis support to method
 
 **Date:** 2026-07-06 · **Status:** decided.

@@ -29,7 +29,7 @@ bundle into `docs/source_drops/` as if it were only raw research.
 | Item | Current treatment |
 |---|---|
 | `99_source_context/solar_wind_value_breakdown.xlsx` | Preserved inside the extracted deliverable. A byte-identical reader-facing copy lives at `docs/method/value_basis/solar_wind_value_breakdown.xlsx`. |
-| `99_source_context/damage_curve_foundations/` | Source-context copy of foundation material bundled into v2.5. Canonical foundation docs remain under `docs/damage_curves/damage_curve_foundations/` until a reviewed move to `docs/method/foundations/`. |
+| `99_source_context/damage_curve_foundations/` | Source-context copy of foundation material bundled into v2.5. Canonical foundation docs now live under `docs/method/foundations/`. |
 | `99_source_context/evidence_harvest/` | Source-context evidence-harvest copy bundled into v2.5. Current discussion history remains under `docs/extra/discussion/evidence_harvest/`. |
 
 ## Placement Rule

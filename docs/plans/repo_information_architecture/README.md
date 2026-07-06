@@ -68,7 +68,7 @@ This is a target architecture, not the current tree.
 | 1 | done | Create this planning home. | `docs/plans/repo_information_architecture/` has README, decisions, assumptions. |
 | 2 | done | Inventory and classify every current docs asset by role. | [`inventory_mapping.md`](inventory_mapping.md) covers canonical docs, contracts, cell docs, evidence, source drops, archives, notebooks, scripts/helpers. |
 | 3 | done | Create shallow docs indexes without moving heavy/canonical artifacts. | `docs/scope/`, `docs/cells/`, `docs/contracts/`, `docs/method/`, `docs/evidence/`, and `docs/source_drops/` have entry pages that point to current authoritative files. |
-| 4 | partial done | Move only low-risk current docs after mapping is reviewed. | Batch 4A/4B executed: scope anchor moved and `damage_curves/README.md` is a compatibility index. Batch 4C/4D remain deferred in [`phase_4_migration_plan.md`](phase_4_migration_plan.md). |
+| 4 | partial done | Move low-risk current docs after mapping is reviewed. | Batch 4A/4B executed: scope anchor moved and `damage_curves/README.md` is a compatibility index. Batch 4C foundations move executed. Batch 4D contracts/global standards remain deferred in [`phase_4_migration_plan.md`](phase_4_migration_plan.md). |
 | 5 | later | Decide artifact storage/publishing separately. | Cloud bucket/versioning/Hazard load path is documented before any `data/` or `src/` promotion. |
 
 ## Phase 2 inventory requirements

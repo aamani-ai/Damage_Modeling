@@ -54,13 +54,30 @@ docs/method/value_basis/
 The original downloaded v2.5 ZIP is preserved under `docs/source_drops/raw_zips/` with a manifest. The
 extracted v2.5 deliverable bundle remains in place.
 
-## 6. First low-risk file move was scope
+## 6. Foundations belong under method
+
+The canonical foundation docs moved from:
+
+```text
+docs/damage_curves/damage_curve_foundations/
+```
+
+to:
+
+```text
+docs/method/foundations/
+```
+
+The old path now has only a compatibility README. The v2.5 `99_source_context/damage_curve_foundations/`
+copy remains untouched as source/provenance context.
+
+## 7. First low-risk file move was scope
 
 Move only the repo-level scope anchor to `docs/scope/SCOPE_AND_STORY.md`. Leave a compatibility stub at
 `docs/damage_curves/SCOPE_AND_STORY.md`. Update the old `docs/damage_curves/README.md` into a compatibility
 index.
 
-## 7. Link debt is tracked, not hidden
+## 8. Link debt is tracked, not hidden
 
 A full-repo Markdown link check has existing debt from relocated/deep docs. Baseline captured:
 

@@ -76,10 +76,10 @@ are not curves).
 | `docs/scope/SCOPE_AND_STORY.md` | **The anchor** — scope, phases, tier/contract boundary, migration. |
 | `docs/cells/` | Shallow entrypoints for current hazard × asset cells and canonical runtime artifacts. |
 | `docs/contracts/` | Repo-level damage-code, artifact, capability, and Hazard handoff contracts. |
-| `docs/method/` | Index for durable foundations and global method standards. |
+| `docs/method/` | Durable foundations, value-basis support, and global method standards. |
 | `docs/evidence/` | Cross-cell evidence-ingestion protocol/register. |
 | `docs/source_drops/` | Raw ZIP/source-drop landing zone: `raw_zips/`, `extracted/`, `manifests/`. |
-| `docs/damage_curves/damage_curve_foundations/` | Principles (P1–P3) + the 6 question-docs + the assembled-curve-record spec. |
+| `docs/method/foundations/` | Principles (P1–P3) + the 6 question-docs + the assembled-curve-record spec. |
 | `docs/damage_curves/damage_curve_implementation/` | The global method (standards + templates) + current worked cells. |
 | `data/` | Curve-record artifacts + manifests (large/binary gitignored). [README](data/README.md). |
 | `notebooks/` | Curve-derivation / fitting / evidence notebooks (TBD). [README](notebooks/README.md). |

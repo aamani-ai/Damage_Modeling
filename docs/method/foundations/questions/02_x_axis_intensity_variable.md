@@ -249,7 +249,7 @@ A conditioner acts on the curve in one of three ways (the §07 question, parked 
 fork the curve, or scale DR. The point *here* is only: **it is not a second x-axis.** It's a
 parameter *of* the curve, not an *input dimension* of it. And the nasty case — stow angle correlates
 with the hazard (you stow *because* hail is forecast) — is a *conditioning* problem, not an
-axis-dimensionality problem, so it stays out of this doc and lives in [component-depth (parked)](07_component_attribute_depth.md).
+axis-dimensionality problem, so it stays out of this doc and lives in [component-depth (parked)](../../../extra/discussion/archive/07_component_attribute_depth.md).
 
 > Keeping Q-x3 off the x-axis is what stops the dimensionality from exploding. If conditioners were
 > axes, every curve would be 5-D. They're not axes; they're modifiers.
@@ -290,7 +290,7 @@ residence time) is deferred.*
 - **Chain-position rule (Q-x2b):** the x-axis sits at the **most-downstream node the hazard data can
   deliver**; downstream physics lives inside the curve. Wildfire → fireline intensity (FSim-emitted).
 - **Conditioners (stow, age, prior damage) are NOT axes** — they're curve modifiers (§6), parked to
-  [component-depth (parked)](07_component_attribute_depth.md). Whatever the axis folds away upstream must be tracked as a
+  [component-depth (parked)](../../../extra/discussion/archive/07_component_attribute_depth.md). Whatever the axis folds away upstream must be tracked as a
   conditioner, not lost.
 - **Payoff for [`05`](05_emit_object.md):** representation can assume a **univariate** input, keeping
   "scalar vs. modes vs. distribution" a clean 1-D question — with one flagged 2-D exception (wildfire)
@@ -326,6 +326,6 @@ a clean univariate input. Remaining open items (§9) are refinements, not blocke
 wildfire residence-time is material enough to pull its deferred 2-D extension forward.
 
 *Links:* [`05` emit object](05_emit_object.md) (the consumer) · [`01` grain](01_granularity.md)
-(does the heavy lifting via E2) · [component-depth (parked)](07_component_attribute_depth.md) (conditioners) ·
-[scope-edges (parked)](06_financial_terms_and_scope_edges.md) (duration/disruption boundary) ·
+(does the heavy lifting via E2) · [component-depth (parked)](../../../extra/discussion/archive/07_component_attribute_depth.md) (conditioners) ·
+[scope-edges (parked)](../../../extra/discussion/archive/06_financial_terms_and_scope_edges.md) (duration/disruption boundary) ·
 `hazard_asset_specificity` (dual test + standard interface) · `Hazard_Data_Reference` (two-track scope).

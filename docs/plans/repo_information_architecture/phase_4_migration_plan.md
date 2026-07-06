@@ -81,15 +81,22 @@ new/touched IA Markdown links resolve
 full-repo missing-link count does not increase above the baseline in link_debt.md
 ```
 
-## Batch 4C — method docs move, deferred
+## Batch 4C — foundations move, executed
 
-Do not execute this batch until Batch 4A and 4B are stable.
+Status: foundations executed; global method standards still deferred.
 
-Candidate future moves:
+Executed move:
 
 ```text
 docs/damage_curves/damage_curve_foundations/
   -> docs/method/foundations/
+```
+
+The old `docs/damage_curves/damage_curve_foundations/README.md` remains as a compatibility pointer only.
+
+Still-deferred candidate moves:
+
+```text
 
 selected non-runtime global method standards
   -> docs/method/standards/
@@ -98,12 +105,11 @@ selected non-runtime global method standards
 Reason to defer:
 
 ```text
-the foundations docs have many relative links
 the implementation standards are bundled with v2.5 source context
 moving them may blur package provenance unless redirects are explicit
 ```
 
-Before this batch, create a file-level link map.
+Before moving global method standards, create a file-level link map.
 
 ## Batch 4D — contracts move, deferred
 
