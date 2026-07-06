@@ -2,7 +2,7 @@
 
 The cap is set by **allocation, not physics** (`Asset_DR` caps at `Σ wᵢ·Lᵢ`). So how we allocate value across
 subsystems, and what TIV we divide by, silently drives **every % -of-TIV metric** we report (%-of-TIV is the
-[house display](../../../plans/hail/assumptions.md)).
+[house display](../../../../Hazard_modeling/docs/plans/hail/assumptions.md)).
 
 ```
    TIV |<================================ 100% ================================>|
@@ -34,7 +34,7 @@ subsystems, and what TIV we divide by, silently drives **every % -of-TIV metric*
 
 Generic capex defaults, user-overridable (library `aggregation-model.md`); TIV = canonical per-kW × capacity,
 basis unstated. 🔴 **Open** — flagged as the "sleeper" financial decision in
-[learning-log 05](../../../learning_logs/05_damage_curve_three_coupled_choices.md).
+[learning-log 05](../../../../Hazard_modeling/docs/learning_logs/05_damage_curve_three_coupled_choices.md).
 
 ## To decide
 
@@ -42,5 +42,5 @@ basis unstated. 🔴 **Open** — flagged as the "sleeper" financial decision in
 2. Pin the valuation basis (TIV vs replacement vs insured).
 3. If reconciling: which cost lines are "at-risk physical" vs "sunk/soft".
 
-*Links:* [`00 §3/§5`](00_context_and_scope.md) · [LL05](../../../learning_logs/05_damage_curve_three_coupled_choices.md) ·
-[hail A19](../../../plans/hail/assumptions.md).
+*Links:* [`00 §3/§5`](00_context_and_scope.md) · [LL05](../../../../Hazard_modeling/docs/learning_logs/05_damage_curve_three_coupled_choices.md) ·
+[hail A19](../../../../Hazard_modeling/docs/plans/hail/assumptions.md).

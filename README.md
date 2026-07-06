@@ -7,8 +7,9 @@ downstream systems consume.
 > **Shared substrate** — feeds the **Hazard** tier's M3 (damage) stage; does **not** own EAL/PML/financial
 > metrics. Spun out of [`Hazard_modeling`](Hazard_modeling) so the curve can be built as its own discipline.
 
-> **🟡 New repo, docs-first.** The foundations + implementation library live under `docs/`; durable runtime
-> publishing is step two. **Start at [`docs/scope/SCOPE_AND_STORY.md`](docs/scope/SCOPE_AND_STORY.md).**
+> **🟡 New repo, docs-first.** Foundations, standards, contracts, cells, and evidence now live in shallow
+> docs folders. The v2.5 ZIP is preserved as the raw source drop. Durable runtime publishing is step two.
+> **Start at [`docs/scope/SCOPE_AND_STORY.md`](docs/scope/SCOPE_AND_STORY.md).**
 
 ## The idea in one picture
 
@@ -27,8 +28,8 @@ docs/
   contracts/                      # damage-code / artifact / capability / handoff contracts
   method/                         # foundations and global method indexes
   evidence/                       # cross-cell evidence ingestion protocol/register
-  source_drops/                   # raw ZIPs/source drops, extracted reviews, manifests
-  damage_curves/                  # current source package location and compatibility tree
+  source_drops/                   # raw ZIPs/source drops, manifests, source context
+scripts/                          # reference/helper scripts; not a stable package API
 data/                             # curve-record artifacts + manifests (large/binary gitignored)
 notebooks/                        # curve-derivation / fitting / evidence notebooks (TBD)
 AGENTS.md / CLAUDE.md             # contributor + agent guidance (single source = AGENTS.md)

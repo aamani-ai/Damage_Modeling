@@ -35,5 +35,5 @@ the built cells**. Surfaced as a block, not scattered.
 🔴 **Open, none built.** The highest-severity *gap* (vs decision) — fine to defer for v1, but it must be a
 named workstream, not an afterthought.
 
-*Links:* [`00 §1 scope`](00_context_and_scope.md) · [wildfire decisions](../../../plans/wildfire/decisions.md) ·
-[convective-wind decisions](../../../plans/convective_wind/decisions.md).
+*Links:* [`00 §1 scope`](00_context_and_scope.md) · [wildfire decisions](../../../../Hazard_modeling/docs/plans/wildfire/decisions.md) ·
+[convective-wind decisions](../../../../Hazard_modeling/docs/plans/convective_wind/decisions.md).

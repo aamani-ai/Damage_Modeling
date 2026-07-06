@@ -63,7 +63,7 @@ The calls we build *on*, not the ones we're debating.
 
 - **Subsystem-decomposed, capex-weighted blend** `Asset_DR = Σ wᵢ·DRᵢ` is the architecture. Fixes the old
   "one curve per (hazard × asset)" failure that had nowhere to put stow angle (hail A15; library
-  `aggregation-model.md`; `[Porter et al. 2001]`; [`hazard_asset_specificity.md`](../../../principles/hazard_asset_specificity.md)).
+  `aggregation-model.md`; `[Porter et al. 2001]`; [`hazard_asset_specificity.md`](../../../../Hazard_modeling/docs/principles/hazard_asset_specificity.md)).
 - **Logistic functional form per subsystem** `DR(x) = L/(1+exp(−k(x−x₀)))` — all 42 library curves, all three
   cells. Parameters are physical: `L` = cap, `x₀` = 50 %-damage midpoint, `k` = steepness. (The Methodology's
   PCHIP / physics / linear menu is the *construction-from-knots* fallback, not what the cells do.)
@@ -126,7 +126,7 @@ No universal rule (Methodology §11: "reason through the factors first; the tabl
    mean); **VaR/PML/TVaR live in the tail** → you need the spread ([`01`](01_emit_object.md), [`02`](02_metrics_and_tail_honesty.md)).
 4. **Dominant-uncertainty discipline.** The curve is the dominant uncertainty; "more simulation is not more
    truth." Get the curve + representation right, verify against absolute known-answers
-   ([`basics_spot_on.md`](../../../principles/basics_spot_on.md)).
+   ([`basics_spot_on.md`](../../../../Hazard_modeling/docs/principles/basics_spot_on.md)).
 5. **Treat value-allocation as a financial decision** — allocate at-risk replaceable value, reconcile to TIV;
    the cap is set by allocation, not physics ([`03`](03_value_allocation_and_tiv.md)).
 6. **Defer richness until the metric demands it.** v1 = simplest *correct* frame; Phase 2 = richest

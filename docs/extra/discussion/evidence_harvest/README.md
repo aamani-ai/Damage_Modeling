@@ -6,7 +6,7 @@ repo might offer is **evidence** — references, sources, data anchors — worth
 already have**. This is **co-curation of existing cells**, not new-cell creation.
 
 > **Status — 🔴 open / in progress.** Scope: the **existing** cells. First focus: **hail × solar.** Mechanism:
-> [standard 16 · reference ingestion](../../../damage_curves/damage_curve_implementation/).
+> [standard 16 · reference ingestion](../../../method/standards/16_reference_ingestion_and_curve_update_protocol.md).
 
 ---
 
@@ -94,6 +94,6 @@ Tornado-specific *measured* fragility is sparse in **both** repos (an honest, sh
 ---
 
 *Links:* [SCOPE_AND_STORY](../../../scope/SCOPE_AND_STORY.md) ·
-[standard 16](../../../damage_curves/damage_curve_implementation/) ·
+[standard 16](../../../method/standards/16_reference_ingestion_and_curve_update_protocol.md) ·
 [P3](../../../method/foundations/principles/P3_reference_is_input_not_authority.md) ·
 the legacy repo [`infrasure-damage-curves`](../../../../infrasure-damage-curves).

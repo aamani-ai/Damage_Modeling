@@ -3,8 +3,8 @@
 Index for durable damage-modeling method docs.
 
 This is the durable method surface. `foundations/` contains the canonical principles and question docs;
-`value_basis/` contains reader-facing valuation support; global method standards remain in the v2.5 package
-for now and are indexed here until a reviewed migration is planned.
+`standards/` contains the global method standards; `templates/` contains package templates; `value_basis/`
+contains reader-facing valuation support.
 
 ## Value Basis
 
@@ -12,8 +12,7 @@ for now and are indexed here until a reviewed migration is planned.
 - [`value_basis/supporting_evaluation_guide.md`](value_basis/supporting_evaluation_guide.md)
 - [`value_basis/solar_wind_value_breakdown.xlsx`](value_basis/solar_wind_value_breakdown.xlsx)
 
-The value-basis workbook is a method support artifact. A byte-identical copy is also preserved in the v2.5
-extracted deliverable's `99_source_context/` folder as part of the source/provenance trail.
+The value-basis workbook is a method support artifact. The original source-drop copy remains in the raw ZIP.
 
 ## Foundations
 
@@ -35,13 +34,13 @@ extracted deliverable's `99_source_context/` folder as part of the source/proven
 
 ## Global method standards
 
-- [`00_index.md`](../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/00_global_method/00_index.md)
-- [`03_failure_unit_coverage_standard.md`](../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/00_global_method/03_failure_unit_coverage_standard.md)
-- [`04_x_axis_decision_standard.md`](../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/00_global_method/04_x_axis_decision_standard.md)
-- [`05_curve_derivation_dossier_standard.md`](../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/00_global_method/05_curve_derivation_dossier_standard.md)
-- [`06_curve_form_and_adjustment_standard.md`](../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/00_global_method/06_curve_form_and_adjustment_standard.md)
-- [`07_selector_conditioner_exposure_standard.md`](../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/00_global_method/07_selector_conditioner_exposure_standard.md)
-- [`08_evidence_provenance_and_links_standard.md`](../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/00_global_method/08_evidence_provenance_and_links_standard.md)
-- [`16_reference_ingestion_and_curve_update_protocol.md`](../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/00_global_method/16_reference_ingestion_and_curve_update_protocol.md)
-- [`17_versioning_policy.md`](../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/00_global_method/17_versioning_policy.md)
-- [`18_hazard_pathway_scope_splitting_standard.md`](../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/00_global_method/18_hazard_pathway_scope_splitting_standard.md)
+- [`00_index.md`](standards/00_index.md)
+- [`03_failure_unit_coverage_standard.md`](standards/03_failure_unit_coverage_standard.md)
+- [`04_x_axis_decision_standard.md`](standards/04_x_axis_decision_standard.md)
+- [`05_curve_derivation_dossier_standard.md`](standards/05_curve_derivation_dossier_standard.md)
+- [`06_curve_form_and_adjustment_standard.md`](standards/06_curve_form_and_adjustment_standard.md)
+- [`07_selector_conditioner_exposure_standard.md`](standards/07_selector_conditioner_exposure_standard.md)
+- [`08_evidence_provenance_and_links_standard.md`](standards/08_evidence_provenance_and_links_standard.md)
+- [`16_reference_ingestion_and_curve_update_protocol.md`](standards/16_reference_ingestion_and_curve_update_protocol.md)
+- [`17_versioning_policy.md`](../contracts/standards/17_versioning_policy.md)
+- [`18_hazard_pathway_scope_splitting_standard.md`](standards/18_hazard_pathway_scope_splitting_standard.md)

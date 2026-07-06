@@ -2,8 +2,8 @@
 
 Shallow entrypoints for the current hazard x asset damage-curve cells.
 
-These pages do not replace the v2.5 deliverable bundle. They point to the current authoritative files so a
-reader does not need to dig through the full package tree to find the active curve.
+These pages are the current cell entrypoints. Current packages, archives, previews, and runtime JSON artifacts
+live under each cell folder.
 
 | Cell | Model/docs | Damage code | Entry point |
 |---|---|---|---|
@@ -13,7 +13,7 @@ reader does not need to dig through the full package tree to find the active cur
 | `strong_wind_solar` | model v1.0 / docs r2 | `STRONG_WIND_SOLAR_V1` | [`strong_wind_solar/`](strong_wind_solar/README.md) |
 
 Authoritative package registry:
-[`VERSION_REGISTRY.md`](../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/VERSION_REGISTRY.md).
+[`VERSION_REGISTRY.md`](VERSION_REGISTRY.md).
 
 Runtime artifact index:
-[`MACHINE_READABLE_ARTIFACTS.md`](../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/MACHINE_READABLE_ARTIFACTS.md).
+[`MACHINE_READABLE_ARTIFACTS.md`](../contracts/MACHINE_READABLE_ARTIFACTS.md).

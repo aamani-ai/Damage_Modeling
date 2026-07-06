@@ -1,7 +1,7 @@
 # Damage-curve discussion — assumptions register (draft)
 
 The `DC*` assumptions this discussion takes as given while the open calls (`01`–`07`) are argued. The analogue
-of the [conus_grid `G*` register](../conus_grid/assumptions.md), but for the **damage-curve layer**. An
+of the [conus_grid `G*` register](../../../../Hazard_modeling/docs/extra/discussion/conus_grid/assumptions.md), but for the **damage-curve layer**. An
 assumption here is an input/simplification we hold fixed to make the discussion tractable; per-peril curve
 assumptions (the actual `A*` / `DD-*` ids) live in each peril's register and are linked, not duplicated.
 
@@ -32,7 +32,7 @@ component depth ([`07`](07_component_attribute_depth.md) / Q8).
 
 | # | Item | Where | Action |
 |---|---|---|---|
-| **DC-c1** | Hail "immune-share" wording is inconsistent — the notebook mixes **~36 %** and **~64 %**, while the weights imply cap **34 %**, modelled **42 %**, immune **58 %** (four different quantities). | hail M3 notebook §2 / findings + [hail A15](../../../plans/hail/assumptions.md) | reconcile to one clear statement, checked against the curve spec JSON (`data/hail/damage_curves/…json`). |
+| **DC-c1** | Hail "immune-share" wording is inconsistent — the notebook mixes **~36 %** and **~64 %**, while the weights imply cap **34 %**, modelled **42 %**, immune **58 %** (four different quantities). | hail M3 notebook §2 / findings + [hail A15](../../../../Hazard_modeling/docs/plans/hail/assumptions.md) | reconcile to one clear statement, checked against the curve spec JSON (`data/hail/damage_curves/…json`). |
 | **DC-c2** | A `0.3416` max-DR "known-answer" is referenced in a handoff but **not present** in the hail M3 notebook. | hail handoff vs M3 notebook | source it or drop it; don't cite an unverified known-answer. |
 
 ---

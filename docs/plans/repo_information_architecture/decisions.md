@@ -4,6 +4,44 @@ Running record of non-obvious design decisions for the repo information-architec
 
 ---
 
+## IA-D9 · Remove duplicate implementation trees and promote v2.5 contents
+
+**Date:** 2026-07-06 · **Status:** executed.
+
+**Context.** The raw ZIP
+`docs/source_drops/raw_zips/DOWNLOAD_THIS_damage_curve_library_v2_5_implementation_hardened.zip` and the
+newly opened folder under `docs/source_drops/raw_zips/` were compared byte-for-byte: 139 files, 0 missing, 0
+extra, 0 changed. The older tracked folder under
+`docs/damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/`
+was not a clean extraction anymore: it had 6 generated `__pycache__` files and 24 edited markdown files.
+
+**Decision.** Remove the old `docs/damage_curves/` tree and do not keep the opened ZIP as a second extraction
+tree. Promote useful v2.5 contents into role-based homes:
+
+```text
+docs/method/standards/
+docs/method/templates/
+docs/contracts/standards/
+docs/contracts/schemas/
+docs/contracts/hazard_handoff/
+docs/cells/
+docs/evidence/ingestion/
+scripts/reference_helpers/
+docs/source_drops/context/v2_5/
+docs/source_drops/manifests/v2_5_implementation_hardened/
+```
+
+Preserve the untouched ZIP at `docs/source_drops/raw_zips/`.
+
+**Why.** A drifted duplicate under an "implementation" path incorrectly suggests canonical architecture.
+Keeping a full opened extraction would also create a second navigation tree. The raw ZIP is provenance;
+working docs live in `docs/scope/`, `docs/method/`, `docs/contracts/`, `docs/cells/`, and `docs/evidence/`.
+
+**Revisit trigger.** Start a separate runtime-publishing plan before moving JSON artifacts into `data/`,
+creating `src/`, or defining cloud/Hazard loading paths.
+
+---
+
 ## IA-D8 · Foundations are canonical method docs
 
 **Date:** 2026-07-06 · **Status:** executed.
@@ -18,14 +56,13 @@ P1-P3, the six question docs, and the assembled-curve-record spec.
 docs/method/foundations/
 ```
 
-Leave `docs/damage_curves/damage_curve_foundations/README.md` as a compatibility pointer only. Keep the copy
-inside the v2.5 `99_source_context/` bundle untouched as source/provenance context.
+Remove the old `docs/damage_curves/damage_curve_foundations/` path after links are rewritten. The copy inside
+the raw v2.5 ZIP remains provenance source material.
 
 **Why.** Foundations are method, not archive. Keeping them under `docs/method/` avoids double-counting and
 keeps the durable reader path shallow.
 
-**Revisit trigger.** Before moving global method standards out of the v2.5 bundle, create a file-level link
-map because those files sit closer to runtime contracts and packaged provenance.
+**Revisit trigger.** None for docs placement. Runtime publication is separate.
 
 ---
 
@@ -40,8 +77,7 @@ current cell packages, contracts, method standards, source context, schemas, hel
 material.
 
 Separately, `supporting_evaluation_guide.md` and `solar_wind_value_breakdown.xlsx` were sitting under
-`docs/damage_curves/damage_curve_implementation/`, outside the extracted bundle. They are not raw ZIP/source
-drops. They are value-basis method support.
+the old implementation staging area. They are not raw ZIP/source drops. They are value-basis method support.
 
 **Decision.**
 
@@ -57,13 +93,14 @@ docs/method/value_basis/
   solar_wind_value_breakdown.xlsx
 ```
 
-Keep the extracted v2.5 deliverable bundle in place for now. Do not move it wholesale into source drops.
+Do not keep the whole extracted v2.5 deliverable as a second tree. Preserve the raw ZIP and promote useful
+files into canonical folders.
 
-**Why.** The raw ZIP is provenance. The extracted bundle is the current versioned implementation package. The
-value-basis guide/workbook are reader-facing method support and should be shallow under `docs/method/`.
+**Why.** The raw ZIP is provenance. The value-basis guide/workbook are reader-facing method support and should
+be shallow under `docs/method/`.
 
-**Revisit trigger.** If the extracted v2.5 bundle is split later, do it with a file-level mapping and preserve
-JSON artifact hashes and consumer-facing links.
+**Revisit trigger.** If new raw source drops arrive, preserve originals first and promote only reviewed
+contents into canonical folders.
 
 ---
 
@@ -79,13 +116,12 @@ contracts.
 
 ```text
 docs/source_drops/raw_zips/   -> untouched ZIPs/original uploads
-docs/source_drops/extracted/  -> extracted review copies
 docs/source_drops/manifests/  -> source-drop indexes/checksums/provenance
+docs/source_drops/context/    -> reviewed source-context files worth inspecting directly
 ```
 
-The existing v2.5 bundle stays where it is until a reviewed migration maps its mixed contents. Current docs
-should be surfaced through `docs/cells/`, `docs/contracts/`, `docs/method/`, `docs/evidence/`, and
-`docs/scope/`; raw source drops should preserve provenance, not define navigation.
+Current docs should be surfaced through `docs/cells/`, `docs/contracts/`, `docs/method/`, `docs/evidence/`,
+and `docs/scope/`; raw source drops should preserve provenance, not define navigation.
 
 **Why.** A source drop is input evidence. It is not automatically canonical documentation, and it is not a
 runtime package contract.
@@ -103,9 +139,8 @@ and decide whether the binary belongs in git or external storage.
 step is file movement, but moving foundations, contracts, schemas, or cell packages can damage provenance or
 imply runtime-contract changes.
 
-**Decision.** The first migration batch moves only the repo-level scope anchor, with a compatibility stub at
-the old path and full link/hash verification. The old `damage_curves/README.md` becomes a compatibility index.
-Method docs, contracts, schemas, cell packages, source drops, notebooks, and helper code stay in place.
+**Decision.** Superseded by IA-D9. The final docs architecture removes `docs/damage_curves/` rather than
+keeping compatibility stubs.
 
 **Why.** This tests the redirect/link-check pattern on the lowest-risk canonical doc before touching any
 package-bound or runtime-adjacent material.

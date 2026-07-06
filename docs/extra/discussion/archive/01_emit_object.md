@@ -2,7 +2,7 @@
 
 **The headline decision.** Everything downstream — which metrics are honest, what the library must produce,
 how much sourcing is needed — hangs on this. Deeper prior treatment:
-[`../gpt/04_damage_representation_scalar_vector_distribution.md`](../gpt/04_damage_representation_scalar_vector_distribution.md).
+[`../gpt/04_damage_representation_scalar_vector_distribution.md`](../../../../Hazard_modeling/docs/extra/discussion/gpt/04_damage_representation_scalar_vector_distribution.md).
 The Methodology explicitly **refuses to decide** it ("would over-constrain the build before the per-peril
 evidence is in") — so it's ours to close.
 
@@ -17,7 +17,7 @@ What object does the M3 damage stage emit per event?
 | **Damage-state vector** | P(state) | natural for **fragility-derived** curves; carries uncertainty natively | discrete; needs a state→cost map |
 | **Discretized distribution** | full distribution over bins | strongest for VaR/PML/TVaR (OASIS-style) | most fidelity, most sourcing |
 
-**The sharp version** ([`../gpt/04`](../gpt/04_damage_representation_scalar_vector_distribution.md)): *"Scalar
+**The sharp version** ([`../gpt/04`](../../../../Hazard_modeling/docs/extra/discussion/gpt/04_damage_representation_scalar_vector_distribution.md)): *"Scalar
 preserves the center. Distribution preserves the tail. And VaR/PML/TVaR live in the tail."* Same 60 mm hail
 event: scalar → $30M every time; distribution → $8M / $28M / $54M / $110M sampled.
 
@@ -76,4 +76,4 @@ emit fragility/state today (Gen-2 plan). 🔴 **Open — the decision that unblo
    research-priority score?).
 
 *Links:* [`00`](00_context_and_scope.md) · [`02 metrics`](02_metrics_and_tail_honesty.md) ·
-[`../gpt/04`](../gpt/04_damage_representation_scalar_vector_distribution.md).
+[`../gpt/04`](../../../../Hazard_modeling/docs/extra/discussion/gpt/04_damage_representation_scalar_vector_distribution.md).

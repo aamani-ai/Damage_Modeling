@@ -9,20 +9,20 @@ Current cell: **flood x solar**, semantic damage-model `model v1.0`, documentati
 - Failure-unit grain: electrical/module/foundation failure units
 - Curve form: piecewise-linear deterministic state/depth curves
 - Canonical JSON:
-  [`flood_solar__model_v1_0__docs_r3__curve_artifact.json`](../../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/01_cells/flood_solar/current/flood_solar__model_v1_0__docs_r3__curve_artifact.json)
+  [`flood_solar__model_v1_0__docs_r3__curve_artifact.json`](current/flood_solar__model_v1_0__docs_r3__curve_artifact.json)
 
 ## Current package docs
 
 - Cell README:
-  [`README_flood_solar_v1_0.md`](../../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/01_cells/flood_solar/current/README_flood_solar_v1_0.md)
+  [`README_flood_solar_v1_0.md`](current/README_flood_solar_v1_0.md)
 - Derivation dossier:
-  [`flood_solar_curve_derivation_dossier_v1_0.md`](../../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/01_cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md)
+  [`flood_solar_curve_derivation_dossier_v1_0.md`](current/flood_solar_curve_derivation_dossier_v1_0.md)
 - Metadata spec:
-  [`flood_solar_damage_code_metadata_spec_v1_0.md`](../../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/01_cells/flood_solar/current/flood_solar_damage_code_metadata_spec_v1_0.md)
+  [`flood_solar_damage_code_metadata_spec_v1_0.md`](current/flood_solar_damage_code_metadata_spec_v1_0.md)
 - Workbook/audit view:
-  [`damage_curve_records_v1_0_flood_solar.xlsx`](../../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/01_cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx)
+  [`damage_curve_records_v1_0_flood_solar.xlsx`](current/damage_curve_records_v1_0_flood_solar.xlsx)
 - Evidence update memo:
-  [`flood_solar_evidence_update_memo__model_v1_0__docs_r2.md`](../../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/02_evidence_ingestion/flood_solar_evidence_update_memo__model_v1_0__docs_r2.md)
+  [`flood_solar_evidence_update_memo__model_v1_0__docs_r2.md`](../../evidence/ingestion/flood_solar_evidence_update_memo__model_v1_0__docs_r2.md)
 
 ## Companion notebooks
 

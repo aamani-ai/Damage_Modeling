@@ -28,7 +28,7 @@
 - `docs/damage_curves/SCOPE_AND_STORY.md` — the anchor (start here).
 - `AGENTS.md` — repo guidance + the symlink set + the "known cleanup" note.
 - `docs/extra/discussion/evidence_harvest/README.md` + the 3 `01_*_triage.md` files — the pending ingestion.
-- `docs/damage_curves/damage_curve_implementation/…/00_global_method/16_…` and `17_…` — the ingestion +
+- `docs/source_drops/extracted/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/…/00_global_method/16_…` and `17_…` — the ingestion +
   versioning standards.
 
 ## Repro / verify current state

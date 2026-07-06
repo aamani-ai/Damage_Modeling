@@ -56,5 +56,5 @@ the seam where they re-attach. The curve must not be silently read as covering t
 2. The occurrence → claims-made mapping owner.
 3. Confirm disruption / derating / BI is out-of-curve, and where it re-enters (this tier's BI stage vs `model-gpr`).
 
-*Links:* [`02 metrics`](02_metrics_and_tail_honesty.md) · [Methodology §7/§9](../../../google_drive_docs/README.md) ·
-[convective-wind decisions (AWN-31)](../../../plans/convective_wind/decisions.md).
+*Links:* [`02 metrics`](02_metrics_and_tail_honesty.md) · [Methodology §7/§9](../../../../Hazard_modeling/docs/google_drive_docs/README.md) ·
+[convective-wind decisions (AWN-31)](../../../../Hazard_modeling/docs/plans/convective_wind/decisions.md).

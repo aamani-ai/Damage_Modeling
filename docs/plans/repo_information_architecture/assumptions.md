@@ -5,15 +5,15 @@ artifact changes.
 
 ---
 
-## IA-A1 · v2.5 deliverable remains authoritative until a migration is reviewed
+## IA-A1 · v2.5 ZIP is source-of-record; useful files are promoted
 
 **Status:** active.
 
-The current authoritative implementation bundle is still
-`docs/damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/`.
+The untouched v2.5 ZIP is preserved at
+`docs/source_drops/raw_zips/DOWNLOAD_THIS_damage_curve_library_v2_5_implementation_hardened.zip`.
 
-Shallow future docs may point into it. Do not move or rewrite it until a mapping table and link/sha checks are
-ready.
+The whole opened extraction is not kept as a second tree. Useful files were promoted into role-based folders.
+The raw ZIP remains the provenance source.
 
 ## IA-A2 · JSON runtime artifacts are canonical, but storage/publishing is undecided
 
@@ -28,8 +28,8 @@ artifact promotion, and Hazard loading are designed.
 **Status:** active.
 
 `src/` means a stable importable library/API that Hazard can depend on. Current helper `.py` files are
-reference implementations, not the published API. They may be indexed or later moved to `scripts/`, but not
-promoted to `src/` under this workstream.
+reference implementations, not the published API. They now live under `scripts/reference_helpers/`, but are
+not promoted to `src/` under this workstream.
 
 ## IA-A4 · Evidence is cell-specific unless it is the ingestion machinery
 

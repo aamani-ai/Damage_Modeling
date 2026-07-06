@@ -49,4 +49,4 @@ both.**
 
 ---
 *Stage A (facts) · decisions → [`../01_flood_solar_triage.md`](../01_flood_solar_triage.md) · our cell →
-[flood×solar dossier](../../../../damage_curves/damage_curve_implementation/).*
+[flood×solar dossier](../../../../cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md).*

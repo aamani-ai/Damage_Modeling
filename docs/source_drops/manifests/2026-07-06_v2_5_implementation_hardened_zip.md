@@ -1,6 +1,6 @@
 # Source Drop Manifest — v2.5 Implementation Hardened ZIP
 
-Status: raw ZIP preserved in repo.
+Status: raw ZIP preserved in repo; useful contents promoted into canonical docs/source-context paths.
 
 ## Source Drop
 
@@ -18,19 +18,18 @@ Status: raw ZIP preserved in repo.
 
 The ZIP is the raw source drop. Preserve it unchanged.
 
-The extracted directory currently under
-`docs/damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/`
-is a mixed extracted deliverable bundle. It contains current cell packages, method standards, contracts,
-schemas, helper scripts, evidence-ingestion material, and source context. Do not move the whole extracted
-bundle into `docs/source_drops/` as if it were only raw research.
+The ZIP was opened and compared byte-for-byte during cleanup. The opened copy matched the ZIP exactly. The
+opened folder was not kept as a second tree; useful contents were promoted into `docs/method/`,
+`docs/contracts/`, `docs/cells/`, `docs/evidence/`, `scripts/reference_helpers/`, and
+`docs/source_drops/context/`.
 
 ## Notable Source-Context Items
 
 | Item | Current treatment |
 |---|---|
-| `99_source_context/solar_wind_value_breakdown.xlsx` | Preserved inside the extracted deliverable. A byte-identical reader-facing copy lives at `docs/method/value_basis/solar_wind_value_breakdown.xlsx`. |
-| `99_source_context/damage_curve_foundations/` | Source-context copy of foundation material bundled into v2.5. Canonical foundation docs now live under `docs/method/foundations/`. |
-| `99_source_context/evidence_harvest/` | Source-context evidence-harvest copy bundled into v2.5. Current discussion history remains under `docs/extra/discussion/evidence_harvest/`. |
+| `99_source_context/solar_wind_value_breakdown.xlsx` | Reader-facing copy lives at `docs/method/value_basis/solar_wind_value_breakdown.xlsx`; original remains in the ZIP. |
+| `99_source_context/damage_curve_foundations/` | Canonical foundation docs live under `docs/method/foundations/`; original source-context copy remains in the ZIP. |
+| `99_source_context/evidence_harvest/` | Current discussion history remains under `docs/extra/discussion/evidence_harvest/`; original source-context copy remains in the ZIP. |
 
 ## Placement Rule
 
@@ -39,10 +38,11 @@ Raw ZIP stays in `docs/source_drops/raw_zips/`.
 Extracted/canonical material should be split only by role:
 
 ```text
-method/foundations/standards -> docs/method/
-Hazard-facing contracts      -> docs/contracts/
-current cell navigation      -> docs/cells/
-cross-cell evidence protocol -> docs/evidence/
-source/provenance context    -> docs/source_drops/extracted/ after reviewed mapping
+method foundations/standards -> docs/method/
+Hazard-facing contracts       -> docs/contracts/
+current cell packages         -> docs/cells/
+cross-cell evidence protocol  -> docs/evidence/
+reference helper scripts      -> scripts/reference_helpers/
+source/provenance context     -> docs/source_drops/context/
 runtime artifacts            -> deferred until publishing/loading design
 ```

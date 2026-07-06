@@ -3,7 +3,7 @@
 Today the curve is **subsystem-grain**. Component attributes — solar **stow angle** (flagged "the single most
 physics-active input for hail"), tilt, module age, glass thickness beyond spec-match — have no home yet. The
 old model's lack of exactly this was a load-bearing failure
-([`hazard_asset_specificity.md`](../../../principles/hazard_asset_specificity.md)).
+([`hazard_asset_specificity.md`](../../../../Hazard_modeling/docs/principles/hazard_asset_specificity.md)).
 
 ## The decision (Q8)
 
@@ -50,5 +50,5 @@ glass)?
 1. (a) / (b) for now.
 2. If (b): the mechanism (x₀-shift / fork / multiplier) and the pipeline location (M2 vs M3).
 
-*Links:* [`00 §3`](00_context_and_scope.md) · [LL05](../../../learning_logs/05_damage_curve_three_coupled_choices.md) ·
-[`hazard_asset_specificity`](../../../principles/hazard_asset_specificity.md).
+*Links:* [`00 §3`](00_context_and_scope.md) · [LL05](../../../../Hazard_modeling/docs/learning_logs/05_damage_curve_three_coupled_choices.md) ·
+[`hazard_asset_specificity`](../../../../Hazard_modeling/docs/principles/hazard_asset_specificity.md).

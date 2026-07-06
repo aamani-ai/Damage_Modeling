@@ -30,7 +30,7 @@ are structurally understated**, while **EAL is preserved** (linearity of expecta
 
 ## Why this matters here specifically
 
-The rebuild exists because the **old model broke the tail** ([`basics_spot_on.md`](../../../principles/basics_spot_on.md)) —
+The rebuild exists because the **old model broke the tail** ([`basics_spot_on.md`](../../../../Hazard_modeling/docs/principles/basics_spot_on.md)) —
 shipping a confident-but-understated VaR is the exact failure mode to avoid. "More simulation is not more
 truth." This decision is the discipline that keeps us from re-paying that price. Always report metrics in **%
 of TIV alongside dollars** (house display).
@@ -47,5 +47,5 @@ metrics carry a known-answer check and which are extrapolations.
 2. Exactly which metrics are "EAL-class" (honest under scalar) vs "tail-class" (need the spread)?
 3. The caveat language + where it travels (the per-cell summary JSON, the report).
 
-*Links:* [`01 emit object`](01_emit_object.md) · [risk-metrics reference](../../../google_drive_docs/README.md) ·
-[`basics_spot_on`](../../../principles/basics_spot_on.md).
+*Links:* [`01 emit object`](01_emit_object.md) · [risk-metrics reference](../../../../Hazard_modeling/docs/google_drive_docs/README.md) ·
+[`basics_spot_on`](../../../../Hazard_modeling/docs/principles/basics_spot_on.md).

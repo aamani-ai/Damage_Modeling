@@ -42,10 +42,10 @@ DR-changing, so model-version (not docs) changes — flag now, decide later:
 ## Ingestion (standard 16) + version call
 
 v1 ingestion = **references + the Usagi/Rose cross-checks + the honest-gap statement → docs revision only**
-(per [standard 17](../../../damage_curves/damage_curve_implementation/)).
+(per [standard 17](../../../contracts/standards/17_versioning_policy.md)).
 The yaw-conditioner / tornado-shift / class-offset items are logged as **candidate model v1.1** changes. One
-[standard-16](../../../damage_curves/damage_curve_implementation/)
-update to the [wind/tornado dossier](../../../damage_curves/damage_curve_implementation/).
+[standard-16](../../../method/standards/16_reference_ingestion_and_curve_update_protocol.md)
+update to the [wind/tornado dossier](../../../cells/wind_tornado_wind/current/wind_tornado_wind_curve_derivation_dossier_v1_0.md).
 
 ---
 *Stage B · facts → [`research/wind_tornado_wind.md`](research/wind_tornado_wind.md) · workstream → [`README.md`](README.md).*

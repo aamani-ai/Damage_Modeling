@@ -10,7 +10,7 @@ draft, superseded by the bundle's `00_global_method/01_delivery_architecture.md`
 **The live, canonical versions are in the foundations:**
 [`foundations/`](../../../method/foundations/README.md) (principles + the six
 question-docs + the assembled-curve-record) and the anchor
-[`SCOPE_AND_STORY.md`](../../../damage_curves/SCOPE_AND_STORY.md).
+[`SCOPE_AND_STORY.md`](../../../scope/SCOPE_AND_STORY.md).
 
 Topic mapping (old → live): `01_emit_object` → foundations **Q05** · `02_metrics_and_tail_honesty` → **Q06** ·
 `03_value_allocation_and_tiv` → **Q03** · `04`–`07` (portfolio / cascade / financial / component-depth) →

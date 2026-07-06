@@ -2,15 +2,12 @@
 
 Scope, platform boundary, and repo story for `damage_modeling`.
 
-This is the shallow scope surface for the repo. The main anchor now lives here; the old
-`docs/damage_curves/SCOPE_AND_STORY.md` path is a compatibility stub.
+This is the shallow scope surface for the repo. The main anchor now lives here.
 
 ## Start here
 
 - [`SCOPE_AND_STORY.md`](SCOPE_AND_STORY.md) — the durable anchor for what this repo owns,
   where it sits relative to `Hazard_modeling`, and why damage modeling is a separate substrate.
-- [`damage_curves/README.md`](../damage_curves/README.md) — current index for the relocated damage-curve
-  section.
 - [`repo information architecture decision`](../extra/discussion/repo_information_architecture.md) — why the
   repo is moving toward shallow docs surfaces before any migration.
 
@@ -37,7 +34,7 @@ portfolio accumulation
 BI / downtime
 ```
 
-## Migration warning
+## Migration status
 
-Do not delete the compatibility stub at `docs/damage_curves/SCOPE_AND_STORY.md` until downstream links have
-been normalized and the information-architecture plan records the removal.
+The old `docs/damage_curves/` tree has been removed. Use this folder for scope, `docs/method/` for method,
+`docs/contracts/` for Hazard-facing contracts, and `docs/cells/` for current cell packages.

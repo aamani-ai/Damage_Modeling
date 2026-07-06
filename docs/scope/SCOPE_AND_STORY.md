@@ -8,8 +8,8 @@ This is the first time we step back and put the whole damage-curve effort togeth
 where it stops, and how the next person (or the next session) should reason about it without re-litigating
 the boundaries. Everything below sits atop two bodies of work already produced — the
 [`foundations/`](../method/foundations/README.md) (principles + the six
-question-docs) and the [`damage_curve_implementation/`](../damage_curves/damage_curve_implementation/)
-library (the global method + current worked cells).
+question-docs), the role-based method/contract/cell docs, and the raw v2.5
+[`source-drop manifest`](../source_drops/manifests/2026-07-06_v2_5_implementation_hardened_zip.md).
 
 > **Status — 🟡 spun out, docs-first, implementation-hardened.** `damage_modeling` is now the separate
 > damage-curve repo. Method is mature (principles + global standards + current worked cells); evidence is
@@ -115,7 +115,7 @@ one shared principle: *never fabricate a tail from a mean.*)
 ## 5 · The internal architecture, in one screen
 
 So this doc is self-contained for a reader landing in the new repo. Full detail lives in
-[`damage_curve_implementation/.../13_end_to_end_damage_work_architecture.md`](../damage_curves/damage_curve_implementation/).
+[`13_end_to_end_damage_work_architecture.md`](../method/standards/13_end_to_end_damage_work_architecture.md).
 
 ```
    CELL  =  hazard × asset            (project-management unit; e.g. hail × solar)
@@ -200,7 +200,7 @@ The whole plan exists to manage one imbalance:
   **evidence/reference collection** (42 curves, 8 hazard×asset pairs, ~280 references), including pairs we
   have not built yet (wildfire×solar, hurricane, winter).
 
-**The bridge is standard [16 · reference ingestion](../damage_curves/damage_curve_implementation/).** It is the protocol to
+**The bridge is standard [16 · reference ingestion](../method/standards/16_reference_ingestion_and_curve_update_protocol.md).** It is the protocol to
 absorb the old repo's references *the right way*: intake record → triage → axis-compatibility check →
 source-to-parameter map → impact assessment → version bump. It handles confidential/proprietary evidence
 (secure pointer + redacted public summary) — which is how the hidden reference file plugs in later. The
@@ -277,8 +277,7 @@ damage artifacts; it should not maintain a second copy of the curve library.
 
 *Links:* [`foundations/`](../method/foundations/README.md) (principles + 6
 questions) ·
-[`damage_curve_implementation/`](../damage_curves/damage_curve_implementation/) (global method + current
-cells) ·
+[`v2.5 source-drop manifest`](../source_drops/manifests/2026-07-06_v2_5_implementation_hardened_zip.md) ·
 [`README`](README.md) (this folder's index) ·
 inherited principles `basics_spot_on` · `hazard_asset_specificity` · `modularity_and_scaling`
 ([`../../../principles/`](../../Hazard_modeling/docs/principles/README.md)) ·

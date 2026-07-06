@@ -8,7 +8,7 @@ material is available offline and to agents working in this repo.
 > re-export from Drive when in doubt. The set is **shared with the team**, so edits belong in
 > Drive, not here.
 
-This set sits one layer *below* the [InfraSure Hazard](./README.md) set: the hazard set turns
+This set sits one layer *below* the [InfraSure Hazard](../../Hazard_modeling/docs/google_drive_docs/README.md) set: the hazard set turns
 events into a loss distribution and reads metrics off it; the damage set builds the **damage
 callable** the hazard pipeline binds to at its M3 (per-event loss generation) stage. The damage
 side's job ends at SHIP — annual aggregation, financial application, and tail metrics are all

@@ -62,4 +62,4 @@ curves: absent in both.
 
 ---
 *Stage A (facts) · decisions → [`../01_wind_tornado_wind_triage.md`](../01_wind_tornado_wind_triage.md) · our
-cell → [wind/tornado dossier](../../../../damage_curves/damage_curve_implementation/).*
+cell → [wind/tornado dossier](../../../../cells/wind_tornado_wind/current/wind_tornado_wind_curve_derivation_dossier_v1_0.md).*

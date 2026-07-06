@@ -1,10 +1,11 @@
 # Repo Information Architecture Decision Note
 
-Status: proposed target architecture, no migration yet.
+Status: original target-architecture decision. Migration execution is now tracked in
+[`docs/plans/repo_information_architecture/`](../../plans/repo_information_architecture/README.md).
 
 This note records the first information-architecture decision for `damage_modeling`. It is a governance note
-only. It does not move files, rename deliverables, create package code, change schemas, or decide cloud
-storage.
+only. It did not move files, rename deliverables, create package code, change schemas, or decide cloud
+storage at the time it was written.
 
 ## 1. Why this note exists
 
@@ -23,13 +24,10 @@ Which files are raw source material versus canonical working docs?
 The target architecture should make current concepts shallow and obvious while preserving the full source
 trail.
 
-The current package directory
-`docs/damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/`
-is therefore treated as an existing versioned deliverable bundle. It may contain current implementation
-records, source context, schemas, helper scripts, and packaged evidence material, but it is not the target
-navigation layer for the repo. This note does not reclassify or move it; a later migration plan must decide
-which parts become canonical docs, which stay as source/provenance material, and which remain runtime
-artifacts.
+The v2.5 implementation bundle is therefore treated as source material, not the target navigation layer. The
+later execution plan removed the duplicate opened tree, preserved the raw ZIP, and promoted useful contents
+into role-based docs folders: `docs/method/`, `docs/contracts/`, `docs/cells/`, `docs/evidence/`,
+`scripts/reference_helpers/`, and `docs/source_drops/`.
 
 ## 2. Locked rule for src/
 

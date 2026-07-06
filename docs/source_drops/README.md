@@ -11,25 +11,25 @@ they are not the canonical navigation layer for current cells, contracts, or run
 ```text
 docs/source_drops/
   raw_zips/       # untouched ZIPs/original uploads; may be gitignored if too large
-  extracted/      # extracted review copies, kept separate from canonical docs
   manifests/      # source-drop indexes, checksums, provenance notes
+  context/        # reviewed source-context files worth keeping outside the raw ZIP
 ```
 
 Do not bury raw ZIPs or original research uploads inside current cell docs. Do not use a versioned
 deliverable bundle as the reader's main path. The shallow docs surfaces should point to current canonical
 material; this folder should preserve the source trail.
 
-## Current source-context locations
+## Current source-drop locations
 
-Some source material already exists elsewhere because it arrived before this architecture was defined. Do not
-move it casually; record it here and migrate only after a reviewed mapping.
+Some source material arrived before this architecture was defined. It is recorded here so it does not get
+confused with canonical docs or runtime publishing.
 
 | Source material | Current location | Treatment |
 |---|---|---|
 | v2.5 raw ZIP | [`raw_zips/DOWNLOAD_THIS_damage_curve_library_v2_5_implementation_hardened.zip`](raw_zips/DOWNLOAD_THIS_damage_curve_library_v2_5_implementation_hardened.zip) | Preserved unchanged. Manifest: [`2026-07-06_v2_5_implementation_hardened_zip.md`](manifests/2026-07-06_v2_5_implementation_hardened_zip.md). |
-| Google Drive document copies | [`../google_drive_docs/`](../google_drive_docs/) | Source material. Candidate for `source_drops/extracted/google_drive_docs/` after review. |
-| v2.5 deliverable bundle | [`DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/`](../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/) | Mixed versioned package. It contains current artifacts plus source context; do not make it the canonical navigation layer. |
-| v2.5 source context bundle | [`99_source_context/`](../damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/99_source_context/) | Source/provenance material packaged with v2.5. Candidate for `source_drops/extracted/v2_5_source_context/` after review. |
+| Google Drive document copies | [`../google_drive_docs/`](../google_drive_docs/) | Source material. Review before moving into source-drop context. |
+| v2.5 package metadata | [`manifests/v2_5_implementation_hardened/`](manifests/v2_5_implementation_hardened/) | Package-level manifest, changed-files note, start-here note, hardening summary, and validation report from the opened ZIP. |
+| v2.5 source context | [`context/v2_5/`](context/v2_5/) | Source/provenance context kept outside the raw ZIP because it is useful to inspect directly. |
 | Evidence-harvest discussion | [`../extra/discussion/evidence_harvest/`](../extra/discussion/evidence_harvest/README.md) | Reasoning history. Keep in `extra/`; link from manifests if it explains a source-drop decision. |
 | Drive docs review | [`../extra/discussion/drive_docs_review/`](../extra/discussion/drive_docs_review/README.md) | Review notes. Keep in `extra/`; link from manifests as needed. |
 | Presentations | [`../presentations/`](../presentations/) | Presentation outputs. Do not touch without an explicit request. |
@@ -40,7 +40,6 @@ move it casually; record it here and migrate only after a reviewed mapping.
 - Preserve original uploads/ZIPs unchanged in `raw_zips/` when they are small enough and appropriate for git.
 - If a ZIP or raw bundle is too large for git, keep it outside git and add a manifest entry with path,
   checksum, owner, date received, and notes.
-- Put extracted copies under `extracted/`; never mix extracted source material into canonical cell docs.
 - Put current cell summaries under `docs/cells/`, not here.
 - Put method support material such as the value-basis guide/workbook under `docs/method/`, not here.
 - Put cross-cell evidence protocol/register links under `docs/evidence/`, not here.

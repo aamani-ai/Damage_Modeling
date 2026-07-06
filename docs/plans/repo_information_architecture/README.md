@@ -1,6 +1,6 @@
 # Plan: Repo Information Architecture
 
-> **Status: phases 0-4B executed; deeper moves deferred.** The discussion decision lives in
+> **Status: docs information architecture executed; runtime publishing deferred.** The discussion decision lives in
 > [`../../extra/discussion/repo_information_architecture.md`](../../extra/discussion/repo_information_architecture.md).
 > This folder turns that decision into a staged execution plan.
 
@@ -58,7 +58,7 @@ docs/
   extra/                 # discussion, task history, archive
 ```
 
-This is a target architecture, not the current tree.
+This is now the current docs architecture, except runtime artifact publishing remains undecided.
 
 ## Execution phases
 
@@ -68,7 +68,7 @@ This is a target architecture, not the current tree.
 | 1 | done | Create this planning home. | `docs/plans/repo_information_architecture/` has README, decisions, assumptions. |
 | 2 | done | Inventory and classify every current docs asset by role. | [`inventory_mapping.md`](inventory_mapping.md) covers canonical docs, contracts, cell docs, evidence, source drops, archives, notebooks, scripts/helpers. |
 | 3 | done | Create shallow docs indexes without moving heavy/canonical artifacts. | `docs/scope/`, `docs/cells/`, `docs/contracts/`, `docs/method/`, `docs/evidence/`, and `docs/source_drops/` have entry pages that point to current authoritative files. |
-| 4 | partial done | Move low-risk current docs after mapping is reviewed. | Batch 4A/4B executed: scope anchor moved and `damage_curves/README.md` is a compatibility index. Batch 4C foundations move executed. Batch 4D contracts/global standards remain deferred in [`phase_4_migration_plan.md`](phase_4_migration_plan.md). |
+| 4 | done | Move current docs into role-based homes. | `docs/damage_curves/` and the whole extracted duplicate tree were removed; useful contents now live under `docs/method/`, `docs/contracts/`, `docs/cells/`, `docs/evidence/`, `scripts/reference_helpers/`, and `docs/source_drops/`. |
 | 5 | later | Decide artifact storage/publishing separately. | Cloud bucket/versioning/Hazard load path is documented before any `data/` or `src/` promotion. |
 
 ## Phase 2 inventory requirements
@@ -96,7 +96,7 @@ Use these roles:
 | Runtime artifacts | JSON artifacts consumers pin/load | Index only for now; storage decision deferred. |
 | Evidence protocol | Cross-cell standard-16 machinery | Expose under `docs/evidence/`. |
 | Cell evidence | Cell-specific proof trail and memos | Keep with/expose from cell docs. |
-| Raw source drops | Original ZIP/deep-research/Drive material | Preserve originals under `docs/source_drops/raw_zips/`, extracted review copies under `docs/source_drops/extracted/`, and manifests under `docs/source_drops/manifests/`; do not treat as canonical navigation. |
+| Raw source drops | Original ZIP/deep-research/Drive material | Preserve originals under `docs/source_drops/raw_zips/`, manifests under `docs/source_drops/manifests/`, and reviewed source context under `docs/source_drops/context/`; do not treat as canonical navigation. |
 | Discussion/history | Working notes, task handoffs, superseded docs | Keep under `docs/extra/`. |
 | Helper scripts | Reference implementation snippets | Keep as package-local helpers or later move to `scripts/`; do not call them stable API. |
 

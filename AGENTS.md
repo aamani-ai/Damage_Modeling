@@ -1,9 +1,9 @@
 # AGENTS.md — damage_modeling
 
-> **Status — 🟡 new repo, docs-first (just spun out of `Hazard_modeling`).** It currently holds the
-> **foundations + the implementation library** (method + current worked cells) under `docs/`; durable runtime
-> publishing is **step two**. Start at **[`docs/scope/SCOPE_AND_STORY.md`](docs/scope/SCOPE_AND_STORY.md)**
-> — the end-to-end anchor.
+> **Status — 🟡 new repo, docs-first (just spun out of `Hazard_modeling`).** It now holds the foundations,
+> standards, contracts, cells, evidence, and source-drop records in shallow docs folders. The v2.5 ZIP is
+> preserved as the raw source drop. Durable runtime publishing is **step two**. Start at
+> **[`docs/scope/SCOPE_AND_STORY.md`](docs/scope/SCOPE_AND_STORY.md)** — the end-to-end anchor.
 
 **damage_modeling** is the **damage-curve / vulnerability layer** of InfraSure's risk platform. It turns
 **hazard intensity → a damage ratio** at the right granularity, with full provenance, and emits a clean
@@ -78,9 +78,13 @@ are not curves).
 | `docs/contracts/` | Repo-level damage-code, artifact, capability, and Hazard handoff contracts. |
 | `docs/method/` | Durable foundations, value-basis support, and global method standards. |
 | `docs/evidence/` | Cross-cell evidence-ingestion protocol/register. |
-| `docs/source_drops/` | Raw ZIP/source-drop landing zone: `raw_zips/`, `extracted/`, `manifests/`. |
+| `docs/source_drops/` | Raw ZIP/source-drop landing zone: raw ZIPs, manifests, and source context. |
 | `docs/method/foundations/` | Principles (P1–P3) + the 6 question-docs + the assembled-curve-record spec. |
-| `docs/damage_curves/damage_curve_implementation/` | The global method (standards + templates) + current worked cells. |
+| `docs/method/standards/` | Global method standards from the v2.5 deliverable. |
+| `docs/contracts/standards/` | Hazard-facing interface, artifact, capability, and versioning standards. |
+| `docs/contracts/schemas/` | JSON schemas for curve bundles, damage emit, and capability declarations. |
+| `docs/contracts/hazard_handoff/` | Hazard M2/M3 handoff notes. |
+| `scripts/reference_helpers/` | Reference helper scripts only; not a stable `src/` API. |
 | `data/` | Curve-record artifacts + manifests (large/binary gitignored). [README](data/README.md). |
 | `notebooks/` | Curve-derivation / fitting / evidence notebooks (TBD). [README](notebooks/README.md). |
 | `.github/workflows/` | CI (starter). |
@@ -112,17 +116,16 @@ The boundary (and the EAL/PML resolution) is in [`SCOPE_AND_STORY.md`](docs/scop
 - **Single source of agent guidance = this file** (`AGENTS.md`); `CLAUDE.md` imports it.
 - Mirror the house style of `Hazard_modeling` / `model-gpr`: `docs/` layout, gitignored local-only symlinks,
   plain `venv` + `requirements.txt`, a README per folder, `python3.12` for venvs.
-- **The cell-package standard** governs every new cell (implementation `00_global_method/`): README +
+- **The cell-package standard** governs every new cell (`docs/method/standards/02_cell_package_standard.md`): README +
   derivation dossier + metadata spec + workbook + version registry.
 - **Versioning** (standard 17): package version ≠ cell-damage-model version ≠ docs revision. The consumer
   pins the *cell-damage-model version*.
 - **Provenance discipline** (standard 08 + P3): a reference is *input, not authority*; no orphan claims.
 
-> **Known cleanup — the first task.** The docs under `docs/damage_curves/` were relocated from
-> `Hazard_modeling`. Internal links resolve; the **anchor docs** (SCOPE_AND_STORY, the docs READMEs) have
-> their cross-repo links fixed to route via the [`Hazard_modeling/`](Hazard_modeling) symlink. The **deeper
-> docs** (foundations, implementation, the `00`–`07` scaffold) still carry their original links and need a
-> normalization pass — tracked, and the kind of "proper system" work deferred to step two.
+> **Known cleanup.** The old `docs/damage_curves/` tree and the drifted
+> `damage_curve_implementation/` copy were removed. Current docs now live under `docs/scope/`, `docs/method/`,
+> `docs/contracts/`, `docs/cells/`, and `docs/evidence/`. The untouched raw ZIP remains under
+> `docs/source_drops/raw_zips/`.
 
 ## Getting started
 
@@ -133,6 +136,6 @@ pip install -r requirements.txt
 
 ## Status
 
-🟡 **New repo, docs-first.** Method mature (foundations + ~17 standards + 3 cells at model v1.0,
-public-source-derived). Next: harvest the old repo's **evidence** (standard 16) → a machine-readable curve
-artifact (Excel → JSON) → wire the consumer (`Hazard_modeling` M3) to the versioned contract.
+🟡 **New repo, docs-first.** Method mature (foundations + global standards + 4 current cells at model v1.0,
+public-source-derived). v2.5 includes machine-readable artifacts; durable artifact publishing and Hazard M3
+loading remain future system work.

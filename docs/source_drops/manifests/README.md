@@ -9,3 +9,5 @@ curve package.
 ## Manifests
 
 - [`2026-07-06_v2_5_implementation_hardened_zip.md`](2026-07-06_v2_5_implementation_hardened_zip.md)
+- [`v2_5_implementation_hardened/`](v2_5_implementation_hardened/) — package-level manifest, start-here,
+  change log, hardening summary, and validation report from the v2.5 source drop.
