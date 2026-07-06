@@ -18,7 +18,7 @@ already have**. This is **co-curation of existing cells**, not new-cell creation
 | Co-curation: our cell's evidence **+** the old repo's evidence, jointly | A method or structure change — the new implementation's method is the one we keep |
 | Per-cell, starting with **hail × solar** | A broad 8-pair inventory of the old repo |
 
-The central tension this addresses ([SCOPE_AND_STORY §7](../../../scope/SCOPE_AND_STORY.md)): **method
+The central tension this addresses ([SCOPE_AND_STORY §7](../../../damage_curves/SCOPE_AND_STORY.md)): **method
 mature, evidence young.** The old repo's *method* is the part we replaced; its **evidence collection** is the
 part that might still be useful.
 
@@ -93,7 +93,7 @@ Tornado-specific *measured* fragility is sparse in **both** repos (an honest, sh
 
 ---
 
-*Links:* [SCOPE_AND_STORY](../../../scope/SCOPE_AND_STORY.md) ·
+*Links:* [SCOPE_AND_STORY](../../../damage_curves/SCOPE_AND_STORY.md) ·
 [standard 16](../../../damage_curves/damage_curve_implementation/) ·
 [P3](../../../damage_curves/damage_curve_foundations/principles/P3_reference_is_input_not_authority.md) ·
 the legacy repo [`infrasure-damage-curves`](../../../../infrasure-damage-curves).

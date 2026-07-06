@@ -23,6 +23,14 @@ Which files are raw source material versus canonical working docs?
 The target architecture should make current concepts shallow and obvious while preserving the full source
 trail.
 
+The current package directory
+`docs/damage_curves/damage_curve_implementation/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/`
+is therefore treated as an existing versioned deliverable bundle. It may contain current implementation
+records, source context, schemas, helper scripts, and packaged evidence material, but it is not the target
+navigation layer for the repo. This note does not reclassify or move it; a later migration plan must decide
+which parts become canonical docs, which stay as source/provenance material, and which remain runtime
+artifacts.
+
 ## 2. Locked rule for src/
 
 `src/` should mean "this is now a stable importable library/API that Hazard can depend on." We are not there

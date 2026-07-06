@@ -1,8 +1,8 @@
 # AGENTS.md — damage_modeling
 
 > **Status — 🟡 new repo, docs-first (just spun out of `Hazard_modeling`).** It currently holds the
-> **foundations + the implementation library** (method + current worked cells) under `docs/`; durable runtime
-> publishing is **step two**. Start at **[`docs/scope/SCOPE_AND_STORY.md`](docs/scope/SCOPE_AND_STORY.md)**
+> **foundations + the implementation library** (method + 3 worked cells) under `docs/`; the code/data system
+> is **step two**. Start at **[`docs/damage_curves/SCOPE_AND_STORY.md`](docs/damage_curves/SCOPE_AND_STORY.md)**
 > — the end-to-end anchor.
 
 **damage_modeling** is the **damage-curve / vulnerability layer** of InfraSure's risk platform. It turns
@@ -44,7 +44,7 @@ published `damage_code()`; this repo **owns the curve**.
    damage = assumed                  damage = built   ◄── we are here        damage = adjusted (NO separate repo)
 ```
 
-Full story + tier/contract/migration detail: [`docs/scope/SCOPE_AND_STORY.md`](docs/scope/SCOPE_AND_STORY.md).
+Full story + tier/contract/migration detail: [`docs/damage_curves/SCOPE_AND_STORY.md`](docs/damage_curves/SCOPE_AND_STORY.md).
 
 ---
 
@@ -73,13 +73,9 @@ are not curves).
 | Path | What |
 |---|---|
 | `docs/` | All damage-curve docs. Index: [`docs/README.md`](docs/README.md). |
-| `docs/scope/SCOPE_AND_STORY.md` | **The anchor** — scope, phases, tier/contract boundary, migration. |
-| `docs/cells/` | Shallow entrypoints for current hazard × asset cells and canonical runtime artifacts. |
-| `docs/contracts/` | Repo-level damage-code, artifact, capability, and Hazard handoff contracts. |
-| `docs/method/` | Index for durable foundations and global method standards. |
-| `docs/evidence/` | Cross-cell evidence-ingestion protocol/register. |
+| `docs/damage_curves/SCOPE_AND_STORY.md` | **The anchor** — scope, phases, tier/contract boundary, migration. |
 | `docs/damage_curves/damage_curve_foundations/` | Principles (P1–P3) + the 6 question-docs + the assembled-curve-record spec. |
-| `docs/damage_curves/damage_curve_implementation/` | The global method (standards + templates) + current worked cells. |
+| `docs/damage_curves/damage_curve_implementation/` | The global method (~17 standards + templates) + 3 worked cells (hail_solar · flood_solar · wind_tornado_wind). |
 | `data/` | Curve-record artifacts + manifests (large/binary gitignored). [README](data/README.md). |
 | `notebooks/` | Curve-derivation / fitting / evidence notebooks (TBD). [README](notebooks/README.md). |
 | `.github/workflows/` | CI (starter). |
@@ -102,7 +98,7 @@ are not curves).
 |---|---|
 | granularity · x-axis · curve form · coverage roles · provenance · value-linkage · the **emit object** + a capability declaration | hazard frequency · exposure · **EAL / PML / VaR / TVaR** · financial terms · portfolio accumulation · the ship/withhold decision |
 
-The boundary (and the EAL/PML resolution) is in [`SCOPE_AND_STORY.md`](docs/scope/SCOPE_AND_STORY.md) §4 and §6.
+The boundary (and the EAL/PML resolution) is in [`SCOPE_AND_STORY.md`](docs/damage_curves/SCOPE_AND_STORY.md) §4 and §6.
 
 ---
 
