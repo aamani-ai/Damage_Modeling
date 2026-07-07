@@ -14,6 +14,7 @@ for method, contracts, cells, evidence, and source drops.
 | [`scope/SCOPE_AND_STORY.md`](scope/SCOPE_AND_STORY.md) | **Anchor** — end-to-end scope, the three-phase arc, the tier/contract boundary, and migration state. |
 | [`method/foundations/`](method/foundations/README.md) | Principles (P1–P3) + the 6 question-docs + the assembled-curve-record spec. |
 | [`plans/`](plans/README.md) | Build-facing plans that have graduated from discussion into staged execution. First plan: repo information architecture. |
+| [`extra/guides/`](extra/guides/README.md) | Practical walkthroughs for common repo operations and requests. |
 | [`extra/discussion/`](extra/discussion/evidence_harvest/README.md) | Thinking-out-loud *before* building (P2). First topic: the **evidence harvest** from the legacy `infrasure-damage-curves` repo. |
 
 > **Relocation note.** The old deliverable-shaped `docs/damage_curves/` tree has been removed. The current

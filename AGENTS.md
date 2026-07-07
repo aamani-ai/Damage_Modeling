@@ -117,7 +117,7 @@ The boundary (and the EAL/PML resolution) is in [`SCOPE_AND_STORY.md`](docs/scop
 - Mirror the house style of `Hazard_modeling` / `model-gpr`: `docs/` layout, gitignored local-only symlinks,
   plain `venv` + `requirements.txt`, a README per folder, `python3.12` for venvs.
 - For any new ZIP/source drop, follow
-  [`docs/source_drops/SOURCE_DROP_INGESTION_GUIDE.md`](docs/source_drops/SOURCE_DROP_INGESTION_GUIDE.md):
+  [`docs/extra/guides/source_drop_ingestion_guide.md`](docs/extra/guides/source_drop_ingestion_guide.md):
   preserve raw first, use `extracted/` only as a local mirror/staging area, inventory before moving, and
   promote only reviewed canonical material.
 - **The cell-package standard** governs every new cell (`docs/method/standards/02_cell_package_standard.md`): README +

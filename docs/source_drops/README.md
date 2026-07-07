@@ -6,7 +6,7 @@ This is where raw ZIPs, deep-research uploads, original bundles, copied Drive ex
 belong once we decide to bring them into this repo. Source drops are evidence inputs and provenance support;
 they are not the canonical navigation layer for current cells, contracts, or runtime artifacts.
 
-Process guide: [`SOURCE_DROP_INGESTION_GUIDE.md`](SOURCE_DROP_INGESTION_GUIDE.md).
+Process guide: [`../extra/guides/source_drop_ingestion_guide.md`](../extra/guides/source_drop_ingestion_guide.md).
 
 ## Intended shape
 
@@ -33,7 +33,7 @@ confused with canonical docs or runtime publishing.
 
 | Source material | Current location | Treatment |
 |---|---|---|
-| Source-drop workflow | [`SOURCE_DROP_INGESTION_GUIDE.md`](SOURCE_DROP_INGESTION_GUIDE.md) | Required flow for new ZIP/source-drop intake, classification, promotion, and validation. |
+| Source-drop workflow | [`../extra/guides/source_drop_ingestion_guide.md`](../extra/guides/source_drop_ingestion_guide.md) | Required flow for new ZIP/source-drop intake, classification, promotion, and validation. |
 | v2.5 raw ZIP | [`raw_zips/DOWNLOAD_THIS_damage_curve_library_v2_5_implementation_hardened.zip`](raw_zips/DOWNLOAD_THIS_damage_curve_library_v2_5_implementation_hardened.zip) | Preserved unchanged. Manifest: [`2026-07-06_v2_5_implementation_hardened_zip.md`](manifests/2026-07-06_v2_5_implementation_hardened_zip.md). |
 | Local extracted source mirrors | [`extracted/`](extracted/README.md) | Optional local/staging copies recreated from raw ZIPs. Contents are gitignored and are not canonical navigation. |
 | Google Drive document copies | [`../google_drive_docs/`](../google_drive_docs/) | Source material. Review before moving into source-drop context. |
