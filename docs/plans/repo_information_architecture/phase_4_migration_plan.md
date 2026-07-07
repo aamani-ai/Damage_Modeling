@@ -24,7 +24,7 @@ Status: executed for docs information architecture. Runtime publishing remains d
 
 ```text
 docs/damage_curves/
-docs/source_drops/extracted/
+tracked duplicate source-drop extraction contents
 ```
 
 The raw ZIP remains unchanged at:
@@ -32,6 +32,9 @@ The raw ZIP remains unchanged at:
 ```text
 docs/source_drops/raw_zips/DOWNLOAD_THIS_damage_curve_library_v2_5_implementation_hardened.zip
 ```
+
+`docs/source_drops/extracted/` remains available as a local, gitignored extraction/staging area. It is not
+canonical navigation and should not be used to satisfy docs links.
 
 ## Still Out Of Scope
 

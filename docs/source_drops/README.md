@@ -11,6 +11,7 @@ they are not the canonical navigation layer for current cells, contracts, or run
 ```text
 docs/source_drops/
   raw_zips/       # untouched ZIPs/original uploads; may be gitignored if too large
+  extracted/      # local extracted source mirrors/staging; contents gitignored by default
   manifests/      # source-drop indexes, checksums, provenance notes
   context/        # reviewed source-context files worth keeping outside the raw ZIP
 ```
@@ -18,6 +19,10 @@ docs/source_drops/
 Do not bury raw ZIPs or original research uploads inside current cell docs. Do not use a versioned
 deliverable bundle as the reader's main path. The shallow docs surfaces should point to current canonical
 material; this folder should preserve the source trail.
+
+An extracted folder is allowed when it is a clearly labeled source mirror or staging area. It should not be
+treated as canonical docs, and extracted contents are ignored by Git unless a file is intentionally promoted
+into a canonical location.
 
 ## Current source-drop locations
 
@@ -27,6 +32,7 @@ confused with canonical docs or runtime publishing.
 | Source material | Current location | Treatment |
 |---|---|---|
 | v2.5 raw ZIP | [`raw_zips/DOWNLOAD_THIS_damage_curve_library_v2_5_implementation_hardened.zip`](raw_zips/DOWNLOAD_THIS_damage_curve_library_v2_5_implementation_hardened.zip) | Preserved unchanged. Manifest: [`2026-07-06_v2_5_implementation_hardened_zip.md`](manifests/2026-07-06_v2_5_implementation_hardened_zip.md). |
+| Local extracted source mirrors | [`extracted/`](extracted/README.md) | Optional local/staging copies recreated from raw ZIPs. Contents are gitignored and are not canonical navigation. |
 | Google Drive document copies | [`../google_drive_docs/`](../google_drive_docs/) | Source material. Review before moving into source-drop context. |
 | v2.5 package metadata | [`manifests/v2_5_implementation_hardened/`](manifests/v2_5_implementation_hardened/) | Package-level manifest, changed-files note, start-here note, hardening summary, and validation report from the opened ZIP. |
 | v2.5 source context | [`context/v2_5/`](context/v2_5/) | Source/provenance context kept outside the raw ZIP because it is useful to inspect directly. |
@@ -38,6 +44,8 @@ confused with canonical docs or runtime publishing.
 ## Rules
 
 - Preserve original uploads/ZIPs unchanged in `raw_zips/` when they are small enough and appropriate for git.
+- Use `extracted/` for local inspection/staging when browsing the exact source-package structure is useful.
+  Keep extracted contents out of Git by default.
 - If a ZIP or raw bundle is too large for git, keep it outside git and add a manifest entry with path,
   checksum, owner, date received, and notes.
 - Put current cell summaries under `docs/cells/`, not here.

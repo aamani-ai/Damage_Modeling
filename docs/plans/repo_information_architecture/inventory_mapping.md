@@ -23,6 +23,7 @@ package contents into role-based folders.
 | `docs/evidence/ingestion/` | Cross-cell evidence machinery | Canonical evidence protocol/register | Standard-16 co-curation README, evidence register, and update memos. |
 | `scripts/reference_helpers/` | Helper scripts | Reference only | Not a stable package API and not `src/`. |
 | `docs/source_drops/raw_zips/` | Raw source drops | Original provenance | Untouched v2.5 ZIP lives here. |
+| `docs/source_drops/extracted/` | Local extracted source mirrors | Staging/source mirror only | Contents are gitignored by default; use for inspection/comparison, not canonical navigation. |
 | `docs/source_drops/manifests/` | Source-drop manifests | Provenance docs | ZIP checksum and package-level source-drop metadata. |
 | `docs/source_drops/context/v2_5/` | Source context | Directly useful source context | Context digest, valuation guide, and substrate decomposition from v2.5. |
 
@@ -31,7 +32,7 @@ package contents into role-based folders.
 | Removed path | Why removed |
 |---|---|
 | `docs/damage_curves/` | Replaced by direct links to `docs/scope/`, `docs/method/`, `docs/contracts/`, `docs/cells/`, and `docs/evidence/`. No compatibility stubs remain. |
-| `docs/source_drops/extracted/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/` | The opened folder was useful for comparison, but keeping the whole extraction would be a second navigation tree. Useful contents were promoted; the raw ZIP remains the source drop. |
+| tracked `docs/source_drops/extracted/DAMAGE_CURVE_LIBRARY_V2_5_IMPLEMENTATION_HARDENED_DELIVERABLE/` contents | The opened folder was useful for comparison, but tracking the whole extraction would be a second navigation tree. Useful contents were promoted; raw ZIP remains provenance; ignored local extraction is allowed. |
 
 ## Current Cells
 

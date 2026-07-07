@@ -78,7 +78,7 @@ are not curves).
 | `docs/contracts/` | Repo-level damage-code, artifact, capability, and Hazard handoff contracts. |
 | `docs/method/` | Durable foundations, value-basis support, and global method standards. |
 | `docs/evidence/` | Cross-cell evidence-ingestion protocol/register. |
-| `docs/source_drops/` | Raw ZIP/source-drop landing zone: raw ZIPs, manifests, and source context. |
+| `docs/source_drops/` | Raw ZIP/source-drop landing zone: raw ZIPs, optional local extracted mirrors, manifests, and source context. |
 | `docs/method/foundations/` | Principles (P1–P3) + the 6 question-docs + the assembled-curve-record spec. |
 | `docs/method/standards/` | Global method standards from the v2.5 deliverable. |
 | `docs/contracts/standards/` | Hazard-facing interface, artifact, capability, and versioning standards. |

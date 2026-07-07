@@ -1,6 +1,7 @@
 # Source Drop Manifest — v2.5 Implementation Hardened ZIP
 
-Status: raw ZIP preserved in repo; useful contents promoted into canonical docs/source-context paths.
+Status: raw ZIP preserved in repo; useful contents promoted into canonical docs/source-context paths. A local
+extracted source mirror may be recreated for inspection, but extracted contents are not canonical docs.
 
 ## Source Drop
 
@@ -19,9 +20,18 @@ Status: raw ZIP preserved in repo; useful contents promoted into canonical docs/
 The ZIP is the raw source drop. Preserve it unchanged.
 
 The ZIP was opened and compared byte-for-byte during cleanup. The opened copy matched the ZIP exactly. The
-opened folder was not kept as a second tree; useful contents were promoted into `docs/method/`,
+tracked duplicate deliverable tree was removed after useful contents were promoted into `docs/method/`,
 `docs/contracts/`, `docs/cells/`, `docs/evidence/`, `scripts/reference_helpers/`, and
 `docs/source_drops/context/`.
+
+A local extracted mirror is allowed under:
+
+```text
+docs/source_drops/extracted/v2_5_implementation_hardened/
+```
+
+That mirror is for inspection and comparison only. It should be recreated from the raw ZIP when needed and is
+ignored by Git by default.
 
 ## Notable Source-Context Items
 
@@ -34,6 +44,8 @@ opened folder was not kept as a second tree; useful contents were promoted into 
 ## Placement Rule
 
 Raw ZIP stays in `docs/source_drops/raw_zips/`.
+
+Extracted source mirrors may live under `docs/source_drops/extracted/` as ignored local staging copies.
 
 Extracted/canonical material should be split only by role:
 

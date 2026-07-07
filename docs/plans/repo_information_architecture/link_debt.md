@@ -32,4 +32,6 @@ no src/ directory exists
 full-repo local Markdown link check passes or any residual failure is explicitly documented
 ```
 
-Do not reintroduce a duplicate extracted docs tree to hide broken links.
+Do not reintroduce a duplicate tracked extracted docs tree to hide broken links. Ignored local extracted
+source mirrors are allowed under `docs/source_drops/extracted/`, but canonical link checks should skip those
+mirror contents.

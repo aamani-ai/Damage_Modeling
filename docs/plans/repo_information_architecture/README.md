@@ -51,7 +51,7 @@ docs/
     wind_tornado_wind/
     strong_wind_solar/
   evidence/              # cross-cell protocol/register only
-  source_drops/          # raw deep-research ZIPs / original uploads
+  source_drops/          # raw deep-research ZIPs / original uploads and local source mirrors
     raw_zips/
     extracted/
     manifests/
@@ -68,7 +68,7 @@ This is now the current docs architecture, except runtime artifact publishing re
 | 1 | done | Create this planning home. | `docs/plans/repo_information_architecture/` has README, decisions, assumptions. |
 | 2 | done | Inventory and classify every current docs asset by role. | [`inventory_mapping.md`](inventory_mapping.md) covers canonical docs, contracts, cell docs, evidence, source drops, archives, notebooks, scripts/helpers. |
 | 3 | done | Create shallow docs indexes without moving heavy/canonical artifacts. | `docs/scope/`, `docs/cells/`, `docs/contracts/`, `docs/method/`, `docs/evidence/`, and `docs/source_drops/` have entry pages that point to current authoritative files. |
-| 4 | done | Move current docs into role-based homes. | `docs/damage_curves/` and the whole extracted duplicate tree were removed; useful contents now live under `docs/method/`, `docs/contracts/`, `docs/cells/`, `docs/evidence/`, `scripts/reference_helpers/`, and `docs/source_drops/`. |
+| 4 | done | Move current docs into role-based homes. | `docs/damage_curves/` and the tracked duplicate deliverable tree were removed; useful contents now live under `docs/method/`, `docs/contracts/`, `docs/cells/`, `docs/evidence/`, `scripts/reference_helpers/`, and `docs/source_drops/`. Ignored local extracted mirrors are allowed under `docs/source_drops/extracted/`. |
 | 5 | later | Decide artifact storage/publishing separately. | Cloud bucket/versioning/Hazard load path is documented before any `data/` or `src/` promotion. |
 
 ## Phase 2 inventory requirements
@@ -96,7 +96,7 @@ Use these roles:
 | Runtime artifacts | JSON artifacts consumers pin/load | Index only for now; storage decision deferred. |
 | Evidence protocol | Cross-cell standard-16 machinery | Expose under `docs/evidence/`. |
 | Cell evidence | Cell-specific proof trail and memos | Keep with/expose from cell docs. |
-| Raw source drops | Original ZIP/deep-research/Drive material | Preserve originals under `docs/source_drops/raw_zips/`, manifests under `docs/source_drops/manifests/`, and reviewed source context under `docs/source_drops/context/`; do not treat as canonical navigation. |
+| Raw source drops | Original ZIP/deep-research/Drive material | Preserve originals under `docs/source_drops/raw_zips/`, optional local extracted mirrors under `docs/source_drops/extracted/`, manifests under `docs/source_drops/manifests/`, and reviewed source context under `docs/source_drops/context/`; do not treat source drops as canonical navigation. |
 | Discussion/history | Working notes, task handoffs, superseded docs | Keep under `docs/extra/`. |
 | Helper scripts | Reference implementation snippets | Keep as package-local helpers or later move to `scripts/`; do not call them stable API. |
 
@@ -137,12 +137,15 @@ docs/scope/README.md
 
 docs/source_drops/README.md
   -> raw/source-context material index
-  -> raw_zips/, extracted/, manifests/
+  -> raw_zips/, extracted/, manifests/, context/
   -> Drive docs, source context, presentations, legacy evidence
 ```
 
 These pages may link into the current v2.5 deliverable paths. That is acceptable in Phase 3 because the goal
 is discoverability without provenance risk.
+
+After Phase 4, canonical docs should not link into extracted source mirrors. Use `extracted/` for local
+inspection and comparison only.
 
 ## Verification gates
 

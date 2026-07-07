@@ -108,7 +108,7 @@ docs/
     wind_tornado_wind/
     strong_wind_solar/
   evidence/              # cross-cell protocol/register only
-  source_drops/          # raw deep-research ZIPs / original uploads
+  source_drops/          # raw deep-research ZIPs / original uploads, plus optional local extracted mirrors
   extra/                 # discussion, task history, archive
 ```
 
@@ -125,6 +125,7 @@ Use these roles when deciding where future material belongs.
 | Runtime artifacts | JSON artifacts consumers pin and load | Not decided; wait for cloud bucket and publishing design |
 | Derivation workbooks | Human audit/derivation views, not the runtime contract | Cell package or archival derivation area |
 | Raw source drops | Deep-research ZIPs, uploaded bundles, original context | `docs/source_drops/` or a future source archive |
+| Extracted source mirrors | Local inspection/staging copies of raw drops | `docs/source_drops/extracted/`, ignored by Git unless files are promoted |
 | Discussion/history | Thinking, triage, decisions, handoffs, superseded docs | `docs/extra/` |
 | Helper scripts | Reference validation/evaluation utilities, not stable API | `scripts/` or package-local reference helpers until `src/` is justified |
 | Future src | Stable importable library/API depended on by Hazard | Deferred |

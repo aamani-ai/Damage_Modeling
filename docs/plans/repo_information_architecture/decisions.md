@@ -42,6 +42,27 @@ creating `src/`, or defining cloud/Hazard loading paths.
 
 ---
 
+## IA-D10 · Keep extracted source mirrors as local staging, not tracked docs
+
+**Date:** 2026-07-07 · **Status:** decided.
+
+**Context.** The previous cleanup correctly removed a tracked duplicate deliverable tree, but the docs were
+too broad if read as "extracted folders are bad." That is not the rule. Extracted source folders can be
+useful for inspection, comparison, and owner review.
+
+**Decision.** Keep `docs/source_drops/extracted/` as the repo's labeled extraction/staging area. Track only
+its README; ignore extracted contents by default. A local extraction may be recreated from a raw ZIP when
+needed, but canonical docs should live under `docs/scope/`, `docs/method/`, `docs/contracts/`, `docs/cells/`,
+and `docs/evidence/`.
+
+**Why.** This preserves the exact source-package shape for human review without creating a second current-docs
+tree. The raw ZIP remains permanent provenance; the extracted mirror is a local convenience.
+
+**Revisit trigger.** If a future source drop needs a tracked extracted mirror, require a manifest entry that
+explains why the raw ZIP is insufficient and which extracted files are authoritative.
+
+---
+
 ## IA-D8 · Foundations are canonical method docs
 
 **Date:** 2026-07-06 · **Status:** executed.
@@ -116,6 +137,7 @@ contracts.
 
 ```text
 docs/source_drops/raw_zips/   -> untouched ZIPs/original uploads
+docs/source_drops/extracted/  -> optional local extracted source mirrors/staging
 docs/source_drops/manifests/  -> source-drop indexes/checksums/provenance
 docs/source_drops/context/    -> reviewed source-context files worth inspecting directly
 ```

@@ -10,7 +10,7 @@ for method, contracts, cells, evidence, and source drops.
 | [`contracts/`](contracts/README.md) | Repo-level damage-code, artifact, capability, and Hazard handoff contracts. |
 | [`method/`](method/README.md) | Durable foundations, value-basis support, and global method standards. |
 | [`evidence/`](evidence/README.md) | Cross-cell evidence-ingestion protocol/register. Detailed evidence remains cell-owned. |
-| [`source_drops/`](source_drops/README.md) | Landing zone/index for raw ZIPs, deep-research uploads, source context, and source-drop manifests. |
+| [`source_drops/`](source_drops/README.md) | Landing zone/index for raw ZIPs, optional local extracted source mirrors, source context, and source-drop manifests. |
 | [`scope/SCOPE_AND_STORY.md`](scope/SCOPE_AND_STORY.md) | **Anchor** — end-to-end scope, the three-phase arc, the tier/contract boundary, and migration state. |
 | [`method/foundations/`](method/foundations/README.md) | Principles (P1–P3) + the 6 question-docs + the assembled-curve-record spec. |
 | [`plans/`](plans/README.md) | Build-facing plans that have graduated from discussion into staged execution. First plan: repo information architecture. |

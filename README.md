@@ -28,7 +28,7 @@ docs/
   contracts/                      # damage-code / artifact / capability / handoff contracts
   method/                         # foundations and global method indexes
   evidence/                       # cross-cell evidence ingestion protocol/register
-  source_drops/                   # raw ZIPs/source drops, manifests, source context
+  source_drops/                   # raw ZIPs/source drops, local extracted mirrors, manifests, context
 scripts/                          # reference/helper scripts; not a stable package API
 data/                             # curve-record artifacts + manifests (large/binary gitignored)
 notebooks/                        # curve-derivation / fitting / evidence notebooks (TBD)
