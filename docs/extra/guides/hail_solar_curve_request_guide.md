@@ -86,6 +86,71 @@ apply stow/exposure logic if inputs exist
 return failure-unit damage ratio + flags
 ```
 
+## What A User Can Specify
+
+The hail x solar artifact has four practical input groups. They do different jobs.
+
+```text
+hazard input
+  mesh_diameter_mm
+  |
+  v
+selector inputs
+  module_archetype / glass specs / hail test rating
+  -> choose the base archetype curve
+  |
+  v
+conditioner inputs
+  mounting_type / stow_state / stow_success_probability
+  -> adjust the event-time curve
+  |
+  v
+exposure + value inputs
+  array_exposure_fraction / f_hail_material_share / value_bucket
+  -> convert DR into loss; does not change fragility
+```
+
+### Knobs that change the base curve
+
+| User input | What it does | Example |
+|---|---|---|
+| `module_archetype` | Directly chooses one of the three archetype curves. | `default_3_2mm_glass_backsheet` |
+| `front_glass_thickness_mm` | Helps map to an archetype when `module_archetype` is not explicit. | `3.2` |
+| `glass_glass_vs_backsheet` | Helps map to fragile/default archetype. | `glass_backsheet` |
+| `hail_test_rating` | High-value override if a real BOM/test rating exists. | `enhanced_hail_50mm` |
+| `manufacturer_model` / `bom_test_report_id` | Provenance for exact overrides. | `<module model>` / `<report id>` |
+
+### Knobs that condition the event
+
+| User input | What it does | Notes |
+|---|---|---|
+| `mounting_type` | Determines whether stow can apply. | `single_axis_tracker` generally means stow can apply. |
+| `stow_state` | Chooses unstowed, stowed, or probabilistic blend. | `not_applicable`, `unstowed`, `stowed`, `unknown_probabilistic`. |
+| `stow_success_probability` | Blends stowed and unstowed curves when actual state is unknown. | Use only with `stow_state: unknown_probabilistic`. |
+| `stow_angle_deg` | Records explicit stow angle. | Stored for provenance; v1.3 does not continuously calibrate by angle. |
+| `stow_confirmation` | Separates commanded stow from confirmed stow. | Useful when SCADA confirms actual state. |
+
+The current stow adjustment is a low-confidence placeholder:
+
+```text
+DR = P_stowed * [0.90 * logistic(D; D50 + 8mm, k)]
+   + (1 - P_stowed) * logistic(D; D50, k)
+```
+
+It is useful for scenario sensitivity, but it should be labeled as `stow_adjustment_placeholder` until
+tracker/BOM-specific hail-stow data replaces it.
+
+### Knobs that change exposure or loss, not fragility
+
+| User input | What it does | Example |
+|---|---|---|
+| `array_exposure_fraction` | Scales the affected PV array value. | `0.72` if only 72% of the array is hit by damaging hail. |
+| `exposure_basis` | Explains where exposure fraction came from. | `full_site_default`, `footprint_overlay`, `scenario`. |
+| `f_hail_material_share` | Share of PV array value exposed to module glass/cell replacement damage. | `0.75` |
+| `value_bucket` | Links the DR to the valuation ledger. | `PV_ARRAY_MODULE_EXPOSED` |
+
+These inputs are important for loss, but they do not choose the logistic fragility curve.
+
 ## Archetype Choice
 
 The artifact contains one failure unit and three selectable logistic archetype curves:
@@ -131,6 +196,139 @@ Example values:
 | 55 mm | 0.594 |
 | 65 mm | 0.885 |
 | 75 mm | 0.976 |
+
+## Example Requests
+
+### 1. Generic solar hail curve
+
+Use when the user has no asset-specific module or tracker information.
+
+```yaml
+mesh_diameter_mm: 50
+module_archetype: default_3_2mm_glass_backsheet
+mounting_type: fixed_tilt
+stow_state: not_applicable
+array_exposure_fraction: 1.00
+```
+
+Resulting base curve:
+
+```text
+curve_id = HAIL_SOLAR_DEFAULT_3P2_GBS
+DR_50mm  ~= 0.390
+flags    = generic/default selector if module data was missing
+```
+
+### 2. Single-axis tracker, unstowed
+
+Use when the asset is a tracker site but was not stowed for the event.
+
+```yaml
+mesh_diameter_mm: 50
+module_archetype: default_3_2mm_glass_backsheet
+mounting_type: single_axis_tracker
+stow_state: unstowed
+array_exposure_fraction: 1.00
+```
+
+Result:
+
+```text
+curve_id = HAIL_SOLAR_DEFAULT_3P2_GBS
+DR_50mm  ~= 0.390
+```
+
+The tracker mounting type matters for metadata, but without stow the event curve is the unstowed base curve.
+
+### 3. Single-axis tracker, confirmed stowed
+
+Use when the tracker was actually stowed for the event.
+
+```yaml
+mesh_diameter_mm: 50
+module_archetype: default_3_2mm_glass_backsheet
+mounting_type: single_axis_tracker
+stow_state: stowed
+stow_angle_deg: 60
+stow_confirmation: confirmed_by_SCADA
+array_exposure_fraction: 1.00
+```
+
+Result with current placeholder adjustment:
+
+```text
+base DR_50mm       ~= 0.390
+stowed DR_50mm     ~= 0.130
+flags              = stow_adjustment_placeholder
+```
+
+### 4. Single-axis tracker, stow state unknown
+
+Use when stow was possible but actual event state is uncertain.
+
+```yaml
+mesh_diameter_mm: 50
+module_archetype: default_3_2mm_glass_backsheet
+mounting_type: single_axis_tracker
+stow_state: unknown_probabilistic
+stow_success_probability: 0.60
+array_exposure_fraction: 1.00
+```
+
+Result with current placeholder adjustment:
+
+```text
+DR_50mm ~= 0.60 * stowed_DR + 0.40 * unstowed_DR
+        ~= 0.234
+flags   = stow_unknown, stow_adjustment_placeholder
+```
+
+Important: `stow_success_probability` is an event-time state probability. It is not hail frequency.
+
+### 5. Hail-hardened module
+
+Use when module specs or a hail test rating justify the hardened archetype.
+
+```yaml
+mesh_diameter_mm: 50
+module_archetype: hail_hardened_thicker_glass
+mounting_type: single_axis_tracker
+stow_state: unstowed
+hail_test_rating: enhanced_hail_50mm
+array_exposure_fraction: 1.00
+```
+
+Result:
+
+```text
+curve_id = HAIL_SOLAR_HARDENED_THICKER
+DR_50mm  ~= 0.129
+```
+
+### 6. Partial hail swath / exposure overlay
+
+Use when the curve DR applies only to the portion of the array hit by damaging hail.
+
+```yaml
+mesh_diameter_mm: 50
+module_archetype: default_3_2mm_glass_backsheet
+mounting_type: single_axis_tracker
+stow_state: unstowed
+array_exposure_fraction: 0.72
+exposure_basis: footprint_overlay
+f_hail_material_share: 0.75
+value_bucket: PV_ARRAY_MODULE_EXPOSED
+```
+
+Interpretation:
+
+```text
+base failure-unit DR ~= 0.390
+array exposure       = 72% of array value touched
+material share       = module glass/cell replacement share
+```
+
+The curve gives the physical failure-unit DR. The consumer/value layer converts that into dollars or TIV loss.
 
 ## Version Meaning
 
