@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Damage curve change event",
+  "type": "object",
+  "required": [
+    "change_class",
+    "version_impacts"
+  ],
+  "properties": {
+    "change_class": {
+      "type": "string"
+    },
+    "cell_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "outputs_can_change_for_same_inputs": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "primary_workflow": {
+      "type": "string"
+    },
+    "version_impacts": {
+      "type": "object"
+    },
+    "required_gates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "explicit_non_changes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

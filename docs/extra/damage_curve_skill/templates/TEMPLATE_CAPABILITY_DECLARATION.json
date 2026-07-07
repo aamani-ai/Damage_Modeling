@@ -1,0 +1,23 @@
+{
+  "schema_version": "capability_declaration.v1",
+  "cell_id": "<cell_id>",
+  "spread_carried": false,
+  "emit_modes_populated_by_cell": [
+    "scalar_mean"
+  ],
+  "metrics_supportable": {
+    "failure_unit_scalar_dr": "supported",
+    "scenario_loss_given_value_basis": "supported_with_explicit_value_and_exposure_basis",
+    "scalar_eal": "conditional_require_cap_binding_preflight",
+    "pml": "withheld_no_tail_distribution",
+    "var": "withheld_no_tail_distribution",
+    "tvar": "withheld_no_tail_distribution"
+  },
+  "cap_binding": {
+    "policy": "fail_closed",
+    "preflight_status": "not_executed_no_distribution",
+    "required_before_scalar_eal": true,
+    "tolerance_pct": 2.5,
+    "action_if_fail": "require_mean_plus_spread_emit"
+  }
+}

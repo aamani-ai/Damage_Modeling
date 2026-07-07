@@ -1,0 +1,18 @@
+# 02_design_guides
+
+These guides help design or update the contents of a damage cell.
+
+Read in this order for new cells:
+
+```text
+1. HAZARD_ASSET_SCOPE.md
+2. FAILURE_UNIT_SELECTION.md
+3. ENGINEERING_SUBSTRATE_MAPPING.md
+4. VALUE_CROSSWALK_GUIDE.md
+5. X_AXIS_SELECTION.md
+6. CURVE_FORM_SELECTION.md
+7. SELECTOR_CONDITIONER_EXPOSURE_GUIDE.md
+8. PARAMETER_TIER_AND_RATIONALE.md
+9. CAPS_AND_SATURATION.md
+10. HAZARD_PATHWAY_SPLITTING.md
+```

@@ -1,0 +1,65 @@
+{
+  "schema_version": "damage_curve_record_bundle.v1",
+  "cell_id": "<cell_id>",
+  "damage_code_id": "<DAMAGE_CODE_ID>",
+  "semantic_damage_model_version": "model v0.1 or model v1.0",
+  "documentation_revision": "docs r0",
+  "package_release": "library vX.Y",
+  "canonical_runtime_artifact": false,
+  "source_dossier": "<path>",
+  "source_workbook": null,
+  "hazard_axis": {
+    "id": "<axis_id>",
+    "input_field": "<field>",
+    "unit": "<unit>",
+    "valid_range": [
+      null,
+      null
+    ],
+    "extrapolation_policy": "warn_or_clamp"
+  },
+  "failure_units": [],
+  "curve_records": [],
+  "selector_logic": [],
+  "conditioner_logic": [],
+  "exposure_logic": [],
+  "parameter_tier_table": [],
+  "derivation_rationale": {
+    "chosen_spine": null,
+    "supporting_sources": [],
+    "demoted_or_rejected_sources": [],
+    "open_seams": []
+  },
+  "emit_contract": {
+    "schema_version": "damage_emit.v1",
+    "supported_emit_modes": [
+      "scalar_mean",
+      "scalar_mean_plus_bounds",
+      "discrete_state_table",
+      "parametric_distribution",
+      "state_ensemble"
+    ],
+    "populated_emit_modes_for_this_cell": []
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v1",
+    "cell_id": "<cell_id>",
+    "spread_carried": false,
+    "emit_modes_populated_by_cell": [],
+    "metrics_supportable": {
+      "failure_unit_scalar_dr": "withheld",
+      "scenario_loss_given_value_basis": "withheld",
+      "scalar_eal": "withheld",
+      "pml": "withheld",
+      "var": "withheld",
+      "tvar": "withheld"
+    },
+    "cap_binding": {
+      "policy": "fail_closed",
+      "preflight_status": "not_executed_no_distribution",
+      "required_before_scalar_eal": true,
+      "tolerance_pct": 2.5,
+      "action_if_fail": "require_mean_plus_spread_emit"
+    }
+  }
+}

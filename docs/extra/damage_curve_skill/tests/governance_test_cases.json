@@ -1,0 +1,104 @@
+[
+  {
+    "case_id": "docs_evidence_update_hail_solar",
+    "description": "Add a new supporting hail claims source to the hail_solar dossier without changing adopted parameters or logic.",
+    "signals": {
+      "adds_new_cell": false,
+      "releases_runtime_model": false,
+      "changes_schema": false,
+      "changes_outputs": false,
+      "changes_evidence": true,
+      "changes_docs": true,
+      "marks_deprecation": false,
+      "package_only": false
+    },
+    "expected": {
+      "change_class": "EVIDENCE_ONLY_NO_OUTPUT_CHANGE",
+      "cell_model_version": "no_change",
+      "docs_revision": "bump",
+      "schema_version": "no_change"
+    }
+  },
+  {
+    "case_id": "new_cell_scaffold_tornado_solar",
+    "description": "Create tornado_solar folder with scope, failure-unit candidates, and withheld capability declaration, but no reviewed runtime curve.",
+    "signals": {
+      "adds_new_cell": true,
+      "releases_runtime_model": false,
+      "changes_schema": false,
+      "changes_outputs": false,
+      "changes_evidence": false,
+      "changes_docs": true,
+      "marks_deprecation": false,
+      "package_only": false
+    },
+    "expected": {
+      "change_class": "NEW_CELL_SCAFFOLD",
+      "cell_model_version": "new_scaffold_no_v1_0",
+      "docs_revision": "initial_or_bump",
+      "schema_version": "no_change"
+    }
+  },
+  {
+    "case_id": "strong_wind_solar_parameter_update",
+    "description": "Revise a stow demand multiplier in strong_wind_solar based on new evidence.",
+    "signals": {
+      "adds_new_cell": false,
+      "releases_runtime_model": false,
+      "changes_schema": false,
+      "changes_outputs": true,
+      "changes_evidence": true,
+      "changes_docs": true,
+      "marks_deprecation": false,
+      "package_only": false,
+      "output_change_scale": "minor"
+    },
+    "expected": {
+      "change_class": "MODEL_BEHAVIOR_CHANGE",
+      "cell_model_version": "bump_minor_or_patch",
+      "docs_revision": "bump",
+      "schema_version": "no_change"
+    }
+  },
+  {
+    "case_id": "damage_emit_required_field",
+    "description": "Add a required uncertainty_basis field to damage_emit schema.",
+    "signals": {
+      "adds_new_cell": false,
+      "releases_runtime_model": false,
+      "changes_schema": true,
+      "changes_outputs": false,
+      "changes_evidence": false,
+      "changes_docs": true,
+      "marks_deprecation": false,
+      "package_only": false,
+      "schema_compatibility": "additive_required"
+    },
+    "expected": {
+      "change_class": "SCHEMA_CONTRACT_CHANGE",
+      "cell_model_version": "maybe_no_change_if_outputs_same",
+      "docs_revision": "maybe_bump",
+      "schema_version": "bump"
+    }
+  },
+  {
+    "case_id": "legacy_curve_deprecation",
+    "description": "Mark a legacy capex-weighted curve as non-canonical placeholder and point runtime consumers to canonical JSON.",
+    "signals": {
+      "adds_new_cell": false,
+      "releases_runtime_model": false,
+      "changes_schema": false,
+      "changes_outputs": false,
+      "changes_evidence": false,
+      "changes_docs": true,
+      "marks_deprecation": true,
+      "package_only": false
+    },
+    "expected": {
+      "change_class": "DEPRECATION_OR_LEGACY_STATUS_CHANGE",
+      "cell_model_version": "no_change_unless_runtime_routing_changes",
+      "docs_revision": "bump",
+      "schema_version": "no_change"
+    }
+  }
+]

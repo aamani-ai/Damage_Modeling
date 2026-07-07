@@ -120,6 +120,11 @@ The boundary (and the EAL/PML resolution) is in [`SCOPE_AND_STORY.md`](docs/scop
   [`docs/extra/guides/source_drop_ingestion_guide.md`](docs/extra/guides/source_drop_ingestion_guide.md):
   preserve raw first, use `extracted/` only as a local mirror/staging area, inventory before moving, and
   promote only reviewed canonical material.
+- For governed damage-curve changes, use
+  [`docs/extra/guides/damage_curve_skill_usage_guide.md`](docs/extra/guides/damage_curve_skill_usage_guide.md)
+  and the draft-operational skill bundle at [`docs/extra/damage_curve_skill/`](docs/extra/damage_curve_skill/):
+  inside this repo, edit canonical folders directly; outside this repo, return a package/ZIP and ingest it
+  through `docs/source_drops/`.
 - **The cell-package standard** governs every new cell (`docs/method/standards/02_cell_package_standard.md`): README +
   derivation dossier + metadata spec + workbook + version registry.
 - **Versioning** (standard 17): package version ≠ cell-damage-model version ≠ docs revision. The consumer

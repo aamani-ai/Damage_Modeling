@@ -1,0 +1,14 @@
+# 03_contracts
+
+Machine-readable and runtime interface contracts.
+
+Read order:
+
+```text
+1. JSON_CURVE_ARTIFACT_CONTRACT.md
+2. DAMAGE_CODE_CONTRACT.md
+3. DISTRIBUTION_READY_EMIT.md
+4. CAPABILITY_DECLARATION.md
+5. FIELD_NAME_AND_ALIAS_POLICY.md
+6. MACHINE_READABLE_REGISTRIES.md
+```

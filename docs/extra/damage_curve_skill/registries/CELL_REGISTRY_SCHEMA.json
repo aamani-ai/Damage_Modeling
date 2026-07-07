@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Damage curve cell registry",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "cells"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "source_package": {
+      "type": "string"
+    },
+    "cells": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "cell_id",
+          "status",
+          "canonical",
+          "semantic_damage_model_version",
+          "documentation_revision"
+        ],
+        "properties": {
+          "cell_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "canonical": {
+            "type": "boolean"
+          },
+          "semantic_damage_model_version": {
+            "type": "string"
+          },
+          "documentation_revision": {
+            "type": "string"
+          },
+          "damage_code_id": {
+            "type": "string"
+          },
+          "current_artifact_path": {
+            "type": "string"
+          },
+          "first_introduced_package": {
+            "type": "string"
+          },
+          "last_updated_package": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
