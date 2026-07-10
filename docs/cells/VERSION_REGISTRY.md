@@ -1,22 +1,29 @@
-# Version registry — Damage Curve Library package v2.5
+# Version registry — portable package v2.5 + repository-current contracts
 
 This registry separates **package release labels** from **semantic damage-model versions**.
 
-The current package is an implementation-hardening release. It adds machine-readable JSON artifacts, capability declarations, cap-binding preflight gates, derivation-rationale addenda, and downstream handoff notes. It does **not** change the damage-code behavior of any current cell.
+The latest portable package remains the v2.5 implementation-hardening release. Repository-current runtime
+state has advanced to `2026-07-10.wildfire-screening-v1`: bundle schema v2, capability schema v2, normalized
+paths, pollable cell pins/changelogs, hail value/KAT publication, and the first canonical wildfire_solar
+screening model. Existing four cells' intrinsic damage-ratio functions are unchanged; wildfire_solar changes
+from a zero-curve scaffold to model v1.0.
 
-> Note: v2.5 increments documentation revisions because addenda and runtime contracts were appended. Some current source filenames still carry earlier labels (`v1_3`, `v1_0`, or `docs_r1`) for continuity; the registry and JSON artifacts are the authoritative current docs-revision references.
+> Some source dossiers and workbooks still carry earlier labels (`v1_3`, `v1_0`, or `docs_r1`) for continuity.
+> The artifact index is the authoritative repository-current runtime pointer. Package v2.5 remains the portable
+> baseline and must not be used by itself as a cell-runtime pin.
 
 
 ---
 
 ## Current cells
 
-| Cell folder | Current semantic damage-model version | Current documentation revision | Current status | v2.5 implementation note |
+| Cell folder | Current semantic damage-model version | Current documentation revision | Current status | Repository-current contract note |
 |---|---:|---:|---|---|
-| `hail_solar` | **model v1.0** | docs r5 | Current; current source filenames still carry legacy `v1_3` labels | Canonical JSON artifact now exposes the dossier curve and marks the legacy capex-weighted M3 curve as non-canonical. |
-| `flood_solar` | **model v1.0** | docs r3 | Current | Canonical JSON artifact serializes the piecewise/state depth curves and capability gate. |
-| `wind_tornado_wind` | **model v1.0** | docs r3 | Current | Canonical JSON artifact includes the hub-height axis, 10m→hub bridge contract, and capability gate. |
-| `strong_wind_solar` | **model v1.0** | docs r2 | Current derived cell | Canonical JSON artifact serializes the thresholded logistic demand-ratio curves and capability gate. |
+| `hail_solar` | **model v1.0** | docs r7 | Current; source docs retain `v1_3` labels | Docs r7 publishes explicit denominator/value profiles, strict logistic payload validation, KATs, and consumer-scoped tail capability. D50/k/max_DR and stow behavior are unchanged. |
+| `flood_solar` | **model v1.0** | docs r4 | Current | Docs r4 normalizes artifact paths and adopts bundle/capability v2; piecewise curves are unchanged. |
+| `wind_tornado_wind` | **model v1.0** | docs r4 | Current | Docs r4 normalizes artifact paths and adopts bundle/capability v2; curve parameters and bridge behavior are unchanged. |
+| `strong_wind_solar` | **model v1.0** | docs r3 | Current derived cell | Docs r3 normalizes artifact paths and adopts bundle/capability v2; thresholded-logistic curves are unchanged. |
+| `wildfire_solar` | **model v1.0** | docs r3 | Current screening engineering proxy | First runtime release: exact FSim-class state tables for ten failure units, explicit physical/installed value linkage, KATs, and screening/not-calibrated flags. |
 
 ---
 
@@ -33,15 +40,21 @@ The current package is an implementation-hardening release. It adds machine-read
 | v2.4 | Strong wind × solar model v1.0 derived curve package | Yes: strong_wind_solar model v1.0 introduced. |
 | v2.5 | Implementation hardening: JSON runtime artifacts, capability declarations, cap-binding gates, field-name alignment, handoff notes | No semantic DR changes. |
 
+Post-package repository contract history is pollable from each cell's `CHANGELOG.json` and the v2 artifact
+index. It is not assigned a new package number until a portable release is deliberately assembled.
+
 ---
 
-## Proposed cells outside package v2.5
+## Repository-current cells outside portable package v2.5
 
 | Cell folder | Semantic model version | Documentation revision | Lifecycle / promotion / review state | Canonical runtime artifact? |
 |---|---:|---:|---|---:|
-| `wildfire_solar` | model v0.1 | docs r1 | scaffold / proposed / pressure-tested; numeric FIL-to-DR ordinates withdrawn | No |
+| `wildfire_solar` | model v1.0 | docs r3 | released repository-current screening proxy; model v0.1 scaffold retained as research/rejection audit | Yes, repository-current |
 
-The proposed cell is intentionally excluded from the current runtime artifact index. Promotion to model v1.0 requires a calibrated/site-conditioned failure-unit response, approved exposed/protected value allocation, reviewed known-answer tests, and a release event.
+The portable v2.5 package does not contain `wildfire_solar`. The repository-current artifact index now does.
+Model v1.0 is deliberately a Tier 4 absolute engineering proxy constrained by Tier 2/3 evidence; it uses exact
+source-native categorical states and does not claim a physical FSim-to-heat-flux converter. A future
+site-calibrated model remains dependent on local-attack, inspected-disposition, cost, and coverage evidence.
 
 ---
 

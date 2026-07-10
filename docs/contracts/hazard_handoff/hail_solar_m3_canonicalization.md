@@ -1,5 +1,9 @@
 # Hail × solar M3 canonicalization handoff
 
+> Superseded consumer instructions: use
+> [`hail_solar_consumer_contract_v2.md`](hail_solar_consumer_contract_v2.md). This file is retained as the
+> v2.5 historical handoff.
+
 ## Problem
 
 The curated hail × solar damage-library cell is a failure-unit curve:
@@ -12,7 +16,7 @@ The known legacy M3 implementation path used an asset-level capex-weighted blend
 
 ## Required external M3 behavior
 
-M3 should load:
+The v2.5 handoff originally instructed M3 to load:
 
 ```text
 01_cells/hail_solar/current/hail_solar__model_v1_0__docs_r5__curve_artifact.json

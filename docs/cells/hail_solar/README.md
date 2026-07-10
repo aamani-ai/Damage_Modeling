@@ -1,6 +1,8 @@
 # hail_solar
 
-Current cell: **hail x solar**, semantic damage-model `model v1.0`, documentation revision `docs r5`.
+Current cell: **hail x solar**, semantic damage-model `model v1.0`, repository documentation revision
+`docs r7`. Docs r6 remains the evidence-only wind-driven-hail addendum; docs r7 hardens the consumer contract
+without changing the logistic curves or failure-unit DRs.
 
 ## Runtime artifact
 
@@ -9,7 +11,11 @@ Current cell: **hail x solar**, semantic damage-model `model v1.0`, documentatio
 - Failure-unit grain: `PV_MODULE_GLASS_CELL`
 - Curve form: logistic module-archetype curves
 - Canonical JSON:
-  [`hail_solar__model_v1_0__docs_r5__curve_artifact.json`](current/hail_solar__model_v1_0__docs_r5__curve_artifact.json)
+  [`hail_solar__model_v1_0__docs_r7__curve_artifact.json`](current/hail_solar__model_v1_0__docs_r7__curve_artifact.json)
+- Known-answer tests:
+  [`known_answer_tests_hail_solar__model_v1_0__docs_r7.json`](current/known_answer_tests_hail_solar__model_v1_0__docs_r7.json)
+- Pollable cell changelog:
+  [`CHANGELOG.json`](CHANGELOG.json)
 
 ## Current package docs
 
@@ -23,6 +29,8 @@ Current cell: **hail x solar**, semantic damage-model `model v1.0`, documentatio
   [`damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx`](current/damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx)
 - Evidence update memo:
   [`hail_solar_evidence_update_memo__model_v1_0__docs_r4.md`](../../evidence/ingestion/hail_solar_evidence_update_memo__model_v1_0__docs_r4.md)
+- Wind-driven hail evidence memo:
+  [`hail_solar_wind_driven_hail_evidence_update_memo__model_v1_0__docs_r6.md`](../../evidence/ingestion/hail_solar_wind_driven_hail_evidence_update_memo__model_v1_0__docs_r6.md)
 
 ## Companion notebooks
 
@@ -31,6 +39,7 @@ Current cell: **hail x solar**, semantic damage-model `model v1.0`, documentatio
 
 ## Capability
 
-The v2.5 artifact supports failure-unit scalar damage ratios and scenario loss with an explicit value/exposure
-basis. Scalar EAL is conditional on cap-binding preflight. PML, VaR, and TVaR are withheld because the cell
-does not carry a tail distribution.
+The repository-current artifact supports deterministic failure-unit DR and scenario loss with an explicitly
+selected value profile/exposure basis. It does not carry curve-intrinsic vulnerability spread. A downstream
+consumer may still compute EAL/PML/VaR/TVaR from a validated frequency-driven annual loss distribution and
+must label the result as conditional on deterministic vulnerability.

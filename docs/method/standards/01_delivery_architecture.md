@@ -7,19 +7,19 @@ This document defines the expected structure for the damage-curve library and ea
 One global method folder plus one self-contained package per hazard × asset cell:
 
 ```text
-DAMAGE_CURVE_LIBRARY/
-├─ START_HERE.md
-├─ MANIFEST.md
-├─ 00_global_method/
-│  ├─ method standards
-│  └─ templates
-├─ 01_cells/
-│  ├─ hail_solar/
-│  ├─ flood_solar/
-│  ├─ wind_wind/
-│  └─ wildfire_solar/
-└─ 99_source_context/
-   └─ reference docs used by the library
+DAMAGE_MODELING/
+├─ AGENTS.md
+└─ docs/
+   ├─ method/
+   │  ├─ standards/
+   │  └─ templates/
+   ├─ cells/
+   │  ├─ hail_solar/
+   │  ├─ flood_solar/
+   │  ├─ wind_tornado_wind/
+   │  └─ wildfire_solar/
+   └─ source_drops/
+      └─ preserved source packages and manifests
 ```
 
 This makes every cell portable. A reviewer can open one cell folder and understand the curve without searching across a pile of loose files.
@@ -27,7 +27,7 @@ This makes every cell portable. A reviewer can open one cell folder and understa
 ## 2. Required cell folder structure
 
 ```text
-01_cells/<cell_id>/
+docs/cells/<cell_id>/
 ├─ current/
 │  ├─ README_<cell_id>_<version>.md
 │  ├─ curve_derivation_dossier_<cell_id>_<version>.md

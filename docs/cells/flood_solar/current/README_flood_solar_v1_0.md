@@ -81,12 +81,12 @@ The v1.0 curves are **public-source-anchored engineering parameterizations**, no
 
 ---
 
-## v2.5 runtime artifact
+## Repository-current runtime artifact
 
 Canonical machine-readable curve artifact:
 
 ```text
-flood_solar__model_v1_0__docs_r3__curve_artifact.json
+flood_solar__model_v1_0__docs_r4__curve_artifact.json
 ```
 
 Use the JSON artifact for runtime/M3 integration. Use the workbook for derivation audit and dashboard review.

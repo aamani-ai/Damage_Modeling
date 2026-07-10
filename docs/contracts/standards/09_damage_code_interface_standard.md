@@ -80,19 +80,25 @@ emit_contract:
     - scalar_mean
 
 capability_declaration:
-  schema_version: capability_declaration.v1
-  spread_carried: true | false
-  metrics_supportable:
-    failure_unit_scalar_dr: supported
-    scenario_loss_given_value_basis: supported | conditional
-    scalar_eal: conditional_require_cap_binding_preflight | withheld | supported
-    pml: withheld | supported
-    var: withheld | supported
-    tvar: withheld | supported
+  schema_version: capability_declaration.v2
+  vulnerability_emit:
+    failure_unit_scalar_dr: supported | withheld
+    scenario_loss_given_value_basis: supported_with_explicit_value_and_exposure_basis | withheld
+    curve_intrinsic_spread: carried | not_carried | not_applicable_no_runtime_curve
+    populated_emit_modes: [scalar_mean]
+  consumer_annual_metrics:
+    computation_owner: downstream_consumer
+    frequency_driven_annual_loss_distribution: supported_if_consumer_samples_frequency_intensity_coupling_and_applies_caps | withheld_no_runtime_curve
+    vulnerability_uncertainty_distribution: supported_by_curve_emit | not_supported_curve_intrinsic_spread_not_carried | withheld_no_runtime_curve
+    eal: consumer_computable_with_prerequisites | withheld
+    pml: consumer_computable_from_validated_annual_loss_distribution | withheld
+    var: consumer_computable_from_validated_annual_loss_distribution | withheld
+    tvar: consumer_computable_from_validated_annual_loss_distribution | withheld
   cap_binding:
-    policy: pass_required | fail_closed | not_applicable
-    preflight_status: pass | fail | not_executed_no_distribution
-    required_before_scalar_eal: true | false
+    policy: consumer_enforced_fail_closed | not_applicable
+    enforcement_owner: downstream_consumer | not_applicable
+    status: not_evaluated_by_damage_artifact | consumer_pass | consumer_fail | not_applicable
+    checks_required: [...]
 ```
 
 ## 3. Output grain
@@ -112,6 +118,10 @@ TIV_loss_fraction
 ```
 
 But those require a value basis and should be clearly labeled as convenience views, not the primary vulnerability output.
+
+For any value-linked view, the artifact must name the denominator and allocation profile. A field such as
+`value_share = 0.35` is invalid without saying whether the denominator is physical replaceable value,
+installed capex, or insured TIV and which support-cost rows are included.
 
 ## 4. Distribution-ready emit object
 
@@ -179,7 +189,7 @@ hazard input outside range
   → clamp or extrapolate with warning, depending cell policy
 ```
 
-## 7. No hidden EAL
+## 7. No hidden annual metrics
 
 The damage code may be run over a hazard frequency curve by another system. It should not internally hard-code frequency assumptions unless the cell explicitly includes a site-adaptation utility sheet.
 
@@ -194,17 +204,29 @@ failure-unit DR / emit object
    │
    ▼
 financial / risk engine
-   ├─ EAL       only if frequency layer + cap-binding gate pass
-   ├─ PML       only if spread/tail support exists
+   ├─ EAL       from an explicit frequency/intensity/value/coupling object
+   ├─ PML       from the consumer-built annual loss distribution
+   ├─ VaR/TVaR  from that same annual loss distribution
    ├─ return-period loss
    └─ portfolio metrics
 ```
 
+A deterministic curve may be applied to sampled event counts and intensities to form a frequency-driven annual
+loss distribution. That consumer distribution can support tail metrics even when the curve carries no
+intrinsic vulnerability spread. The consumer must then label the result
+`CURVE_INTRINSIC_SPREAD_NOT_CARRIED`; it must not claim that vulnerability uncertainty was sampled.
+
+What remains prohibited is deriving PML/VaR/TVaR from one expected loss or inventing a distribution around a
+scalar DR.
+
 ## 8. Withhold-not-caveat enforcement
 
-A downstream consumer must check `capability_declaration.metrics_supportable` before emitting metrics. If the requested metric is `withheld` or `conditional_require_cap_binding_preflight` without a passing preflight result, the value should be absent/null with a reason code.
+A downstream consumer must check `capability_declaration.v2`. If a runtime curve, value/exposure basis,
+hazard/event distribution, correct-grain cap treatment, or return-period support is absent, the affected value
+must be null with a reason code.
 
 ```text
 unsupported metric emitted with caveat  → not allowed
 unsupported metric withheld by contract → required
+frequency-driven tail with deterministic vulnerability → allowed with limitation flag
 ```

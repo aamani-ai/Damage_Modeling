@@ -1,0 +1,342 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "damage_curve_library.damage_curve_record_bundle.v2",
+  "title": "Damage-curve record bundle v2",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "cell_id",
+    "damage_code_id",
+    "semantic_damage_model_version",
+    "documentation_revision",
+    "package_release",
+    "package_baseline",
+    "package_inclusion_status",
+    "canonical_runtime_artifact",
+    "source_dossier",
+    "source_workbook",
+    "hazard_axis",
+    "failure_units",
+    "curve_records",
+    "parameter_tier_table",
+    "emit_contract",
+    "capability_declaration"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "damage_curve_record_bundle.v2"
+    },
+    "cell_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "damage_code_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "semantic_damage_model_version": {
+      "type": "string",
+      "pattern": "^model v[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$"
+    },
+    "documentation_revision": {
+      "type": "string",
+      "pattern": "^docs r[0-9]+$"
+    },
+    "package_release": {
+      "type": "string"
+    },
+    "package_baseline": {
+      "type": "string"
+    },
+    "package_inclusion_status": {
+      "enum": [
+        "included",
+        "repository_canonical_not_in_portable_package",
+        "not_included"
+      ]
+    },
+    "canonical_runtime_artifact": {
+      "type": "boolean"
+    },
+    "source_dossier": {
+      "type": "string",
+      "pattern": "^docs/cells/"
+    },
+    "source_workbook": {
+      "type": ["string", "null"],
+      "pattern": "^docs/cells/"
+    },
+    "known_answer_tests": {
+      "type": "string",
+      "pattern": "^docs/cells/"
+    },
+    "hazard_axis": {
+      "type": "object",
+      "required": ["id", "unit", "extrapolation_policy"],
+      "properties": {
+        "id": {"type": "string"},
+        "input_field": {"type": "string"},
+        "preferred_input_field": {"type": "string"},
+        "input_field_preferred": {"type": "string"},
+        "unit": {"type": "string"},
+        "source_units_allowed": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        },
+        "valid_range": {
+          "type": "array",
+          "prefixItems": [
+            {"type": "number"},
+            {"type": "number"}
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "extrapolation_policy": {"type": "string"}
+      },
+      "anyOf": [
+        {
+          "properties": {"input_field": {"type": "string"}},
+          "required": ["input_field"]
+        },
+        {
+          "properties": {"preferred_input_field": {"type": "string"}},
+          "required": ["preferred_input_field"]
+        },
+        {
+          "properties": {"input_field_preferred": {"type": "string"}},
+          "required": ["input_field_preferred"]
+        }
+      ],
+      "additionalProperties": true
+    },
+    "failure_units": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "subsystem", "component", "treatment", "y_axis"],
+        "properties": {
+          "id": {"type": "string"},
+          "subsystem": {"type": "string"},
+          "component": {"type": "string"},
+          "treatment": {"type": "string"},
+          "y_axis": {"type": "string"},
+          "default_value_share_physical_base": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "curve_records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {"$ref": "#/$defs/hailLogisticRecord"},
+          {"$ref": "#/$defs/piecewiseLinearRecord"},
+          {"$ref": "#/$defs/thresholdedLogisticDemandRecord"},
+          {"$ref": "#/$defs/windTornadoLogisticRatioRecord"}
+        ]
+      }
+    },
+    "parameter_tier_table": {
+      "type": "array"
+    },
+    "derivation_rationale": {
+      "type": "object"
+    },
+    "evaluation_contract": {
+      "type": "object"
+    },
+    "value_linkage": {
+      "type": "object"
+    },
+    "emit_contract": {
+      "type": "object",
+      "required": ["schema_version", "populated_emit_modes_for_this_cell"],
+      "properties": {
+        "schema_version": {"type": "string"},
+        "populated_emit_modes_for_this_cell": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "capability_declaration": {
+      "$ref": "damage_curve_library.capability_declaration.v2"
+    }
+  },
+  "$defs": {
+    "baseRecord": {
+      "type": "object",
+      "required": [
+        "curve_id",
+        "failure_unit_id",
+        "curve_form",
+        "x_axis",
+        "y_axis",
+        "parameters"
+      ],
+      "properties": {
+        "curve_id": {"type": "string"},
+        "failure_unit_id": {"type": "string"},
+        "curve_form": {"type": "string"},
+        "x_axis": {"type": "string"},
+        "y_axis": {"const": "failure_unit_damage_ratio"},
+        "include_in_default_structural_aggregate": {"type": "boolean"}
+      }
+    },
+    "hailLogisticRecord": {
+      "type": "object",
+      "required": [
+        "curve_id",
+        "failure_unit_id",
+        "curve_form",
+        "x_axis",
+        "y_axis",
+        "parameters",
+        "selector_match"
+      ],
+      "properties": {
+        "curve_id": {"type": "string"},
+        "failure_unit_id": {"type": "string"},
+        "curve_form": {"const": "logistic"},
+        "x_axis": {"const": "mesh_diameter_mm"},
+        "y_axis": {"const": "failure_unit_damage_ratio"},
+        "parameters": {
+          "type": "object",
+          "required": ["D50_mm", "k_per_mm", "max_DR"],
+          "properties": {
+            "D50_mm": {"type": "number", "exclusiveMinimum": 0},
+            "k_per_mm": {"type": "number", "exclusiveMinimum": 0},
+            "max_DR": {"type": "number", "minimum": 0, "maximum": 1}
+          },
+          "additionalProperties": false
+        },
+        "selector_match": {
+          "type": "object",
+          "required": ["module_archetype"],
+          "properties": {
+            "module_archetype": {"type": "string", "minLength": 1}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "piecewiseLinearRecord": {
+      "type": "object",
+      "required": [
+        "curve_id",
+        "failure_unit_id",
+        "curve_form",
+        "x_axis",
+        "y_axis",
+        "parameters"
+      ],
+      "properties": {
+        "curve_id": {"type": "string"},
+        "failure_unit_id": {"type": "string"},
+        "curve_form": {"const": "piecewise_linear"},
+        "x_axis": {"type": "string"},
+        "y_axis": {"const": "failure_unit_damage_ratio"},
+        "parameters": {
+          "type": "object",
+          "required": ["points"],
+          "properties": {
+            "points": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {"type": "number"},
+                  {"type": "number", "minimum": 0, "maximum": 1}
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "thresholdedLogisticDemandRecord": {
+      "type": "object",
+      "required": [
+        "curve_id",
+        "failure_unit_id",
+        "curve_form",
+        "x_axis",
+        "y_axis",
+        "parameters"
+      ],
+      "properties": {
+        "curve_id": {"type": "string"},
+        "failure_unit_id": {"type": "string"},
+        "curve_form": {"const": "thresholded_logistic_demand"},
+        "x_axis": {"const": "R_eff"},
+        "y_axis": {"const": "failure_unit_damage_ratio"},
+        "parameters": {
+          "type": "object",
+          "required": ["R0", "R50", "k", "max_DR"],
+          "properties": {
+            "R0": {"type": "number"},
+            "R50": {"type": "number"},
+            "k": {"type": "number", "exclusiveMinimum": 0},
+            "max_DR": {"type": "number", "minimum": 0, "maximum": 1}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "windTornadoLogisticRatioRecord": {
+      "type": "object",
+      "required": [
+        "curve_id",
+        "failure_unit_id",
+        "curve_form",
+        "x_axis",
+        "y_axis",
+        "parameters",
+        "include_in_default_structural_aggregate"
+      ],
+      "properties": {
+        "curve_id": {"type": "string"},
+        "failure_unit_id": {"type": "string"},
+        "curve_form": {"const": "wind_tornado_logistic_ratio"},
+        "x_axis": {"const": "V_3s_hub / Ve50"},
+        "y_axis": {"const": "failure_unit_damage_ratio"},
+        "parameters": {
+          "type": "object",
+          "required": [
+            "D50_ratio_straight_line",
+            "k_ratio",
+            "max_DR",
+            "tornado_D50_shift"
+          ],
+          "properties": {
+            "D50_ratio_straight_line": {"type": "number"},
+            "k_ratio": {"type": "number", "exclusiveMinimum": 0},
+            "max_DR": {"type": "number", "minimum": 0, "maximum": 1},
+            "tornado_D50_shift": {"type": "number"}
+          },
+          "additionalProperties": false
+        },
+        "include_in_default_structural_aggregate": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

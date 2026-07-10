@@ -352,7 +352,7 @@ and produces a traceable old-vs-new change.
 | Cell | Useful source role now | Why it is not automatically a model change |
 |---|---|---|
 | `hail_solar` | VU Amsterdam / field claims as validation and caveat | Supports shape and field-vs-lab warning, but does not give a clean same-basis refit for `D50`, `k`, or `f_hail` |
-| `hail_solar` | VDE / stow evidence as open-seam support | Supports direction of stow benefit, not the exact generic numeric shift |
+| `hail_solar` | VDE / stow and wind-driven hail evidence as open-seam support | Supports direction of stow benefit and wind-vector caveat, not the exact generic numeric shift or a runtime wind conditioner |
 | `flood_solar` | NERC / Ketjoy / scour evidence as anchors and cross-validation | Strengthens assumed states, but v1 ingestion can remain docs-only until exact ordinates/selectors are formally adopted |
 | `flood_solar` | IEEE C57 / salinity / duration | Candidate v1.1 model changes because transformer type, salinity, and duration would change DR for the same flood depth |
 | `wind_tornado_wind` | Usagi / Rose / Kareem / Kapoor as cross-validation and physics support | Supports current structure and open seams; numeric yaw or tornado-shift adoption would be a separate model update |
@@ -434,6 +434,7 @@ Examples:
 |---|---|
 | Hail-hardened module test shows lower breakage at same diameter | New module-archetype curve or horizontal shift. |
 | Tracker stow reduces effective hail impact angle | Conditioner adjustment / blend. |
+| Wind-driven hail changes impact angle for the same diameter | Caveat/open seam now; future conditioner/contact-intensity bridge only if event wind vector and stow orientation are sourceable. |
 | Hail swath hits only 40% of array | Exposure multiplier, not new curve. |
 | Inverter and switchgear have different inundation replacement behavior | Separate failure-unit curves. |
 | Substation is elevated above flood depth | Exposure/local-depth adjustment, not new curve. |

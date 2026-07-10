@@ -1,6 +1,7 @@
 # flood_solar
 
-Current cell: **flood x solar**, semantic damage-model `model v1.0`, documentation revision `docs r3`.
+Current cell: **flood x solar**, semantic damage-model `model v1.0`, repository documentation revision
+`docs r4`.
 
 ## Runtime artifact
 
@@ -9,7 +10,8 @@ Current cell: **flood x solar**, semantic damage-model `model v1.0`, documentati
 - Failure-unit grain: electrical/module/foundation failure units
 - Curve form: piecewise-linear deterministic state/depth curves
 - Canonical JSON:
-  [`flood_solar__model_v1_0__docs_r3__curve_artifact.json`](current/flood_solar__model_v1_0__docs_r3__curve_artifact.json)
+  [`flood_solar__model_v1_0__docs_r4__curve_artifact.json`](current/flood_solar__model_v1_0__docs_r4__curve_artifact.json)
+- Pollable cell changelog: [`CHANGELOG.json`](CHANGELOG.json)
 
 ## Current package docs
 
@@ -31,6 +33,6 @@ Current cell: **flood x solar**, semantic damage-model `model v1.0`, documentati
 
 ## Capability
 
-The v2.5 artifact supports failure-unit scalar damage ratios and scenario loss with an explicit value/exposure
-basis. Scalar EAL is conditional on cap-binding preflight. PML, VaR, and TVaR are withheld because the cell
-does not carry a tail distribution.
+The repository-current artifact supports deterministic failure-unit DR and scenario loss with an explicit
+value/exposure basis. It does not carry curve-intrinsic vulnerability spread. A downstream consumer may compute
+annual metrics from its validated frequency-driven loss distribution and must preserve that limitation flag.

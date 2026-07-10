@@ -38,10 +38,10 @@ package contents into role-based folders.
 
 | Cell | Model/docs | Canonical JSON path |
 |---|---|---|
-| `hail_solar` | model v1.0 / docs r5 | `docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r5__curve_artifact.json` |
-| `flood_solar` | model v1.0 / docs r3 | `docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r3__curve_artifact.json` |
-| `wind_tornado_wind` | model v1.0 / docs r3 | `docs/cells/wind_tornado_wind/current/wind_tornado_wind__model_v1_0__docs_r3__curve_artifact.json` |
-| `strong_wind_solar` | model v1.0 / docs r2 | `docs/cells/strong_wind_solar/current/strong_wind_solar__model_v1_0__docs_r2__curve_artifact.json` |
+| `hail_solar` | model v1.0 / docs r7 | `docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json` |
+| `flood_solar` | model v1.0 / docs r4 | `docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json` |
+| `wind_tornado_wind` | model v1.0 / docs r4 | `docs/cells/wind_tornado_wind/current/wind_tornado_wind__model_v1_0__docs_r4__curve_artifact.json` |
+| `strong_wind_solar` | model v1.0 / docs r3 | `docs/cells/strong_wind_solar/current/strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json` |
 
 ## Still Deferred
 

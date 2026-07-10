@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "damage_curve_library.cell_runtime_changelog.v1",
+  "type": "object",
+  "required": ["schema_version", "cell_id", "current_pin", "entries"],
+  "properties": {
+    "schema_version": {"const": "cell_runtime_changelog.v1"},
+    "cell_id": {"type": "string"},
+    "current_pin": {"type": "string"},
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "consumer_pin",
+          "published_on",
+          "semantic_damage_model_version",
+          "documentation_revision",
+          "runtime_behavior_changed",
+          "contract_changed",
+          "summary"
+        ],
+        "properties": {
+          "consumer_pin": {"type": "string"},
+          "published_on": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+          "semantic_damage_model_version": {"type": "string"},
+          "documentation_revision": {"type": "string"},
+          "artifact_schema_version": {"type": ["string", "null"]},
+          "capability_schema_version": {"type": ["string", "null"]},
+          "artifact_path": {"type": ["string", "null"]},
+          "runtime_behavior_changed": {"type": "boolean"},
+          "contract_changed": {"type": "boolean"},
+          "summary": {"type": "string"},
+          "consumer_action": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

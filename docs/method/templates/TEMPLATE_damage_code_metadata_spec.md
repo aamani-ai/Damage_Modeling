@@ -121,19 +121,26 @@ emit_contract:
     - scalar_mean
 
 capability_declaration:
-  schema_version: capability_declaration.v1
-  spread_carried: false
-  metrics_supportable:
+  schema_version: capability_declaration.v2
+  vulnerability_emit:
     failure_unit_scalar_dr: supported
-    scenario_loss_given_value_basis: supported
-    scalar_eal: conditional_require_cap_binding_preflight
-    pml: withheld
-    var: withheld
-    tvar: withheld
+    scenario_loss_given_value_basis: supported_with_explicit_value_and_exposure_basis
+    curve_intrinsic_spread: not_carried
+    populated_emit_modes: [scalar_mean]
+  consumer_annual_metrics:
+    computation_owner: downstream_consumer
+    frequency_driven_annual_loss_distribution: supported_if_consumer_samples_frequency_intensity_coupling_and_applies_caps
+    vulnerability_uncertainty_distribution: not_supported_curve_intrinsic_spread_not_carried
+    eal: consumer_computable_with_prerequisites
+    pml: consumer_computable_from_validated_annual_loss_distribution
+    var: consumer_computable_from_validated_annual_loss_distribution
+    tvar: consumer_computable_from_validated_annual_loss_distribution
+    prerequisites: [<cell-specific prerequisites>]
+    limitation_flags: [CURVE_INTRINSIC_SPREAD_NOT_CARRIED]
   cap_binding:
-    policy: fail_closed
-    preflight_status: not_executed_no_distribution
-    required_before_scalar_eal: true
-    tolerance_pct: 2.5
-    action_if_fail: require_mean_plus_spread_emit
+    policy: consumer_enforced_fail_closed
+    enforcement_owner: downstream_consumer
+    status: not_evaluated_by_damage_artifact
+    checks_required: [<correct-grain cap checks>]
+    action_if_fail: withhold_affected_metric_or_use_full_capped_simulation
 ```

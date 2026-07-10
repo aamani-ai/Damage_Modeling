@@ -74,7 +74,7 @@ DR≈0 record rather than being dropped.
    bridge                   proximate→distal derivation             doc 04  (curation §6) + doc 02
    emit_object              scalar | spread | states | distribution doc 05  (emit: nonlinearity rule)
    uncertainty / spread     dominant drivers + ± band (if carried)  doc 04 ↔ doc 05  (the open seam)
-   metrics_shippable        which metrics are honest from this      doc 06  (metrics: EAL vs tail)
+   consumer_metric_prereqs  what the consumer must provide/label    doc 06  (metric boundary)
    ──────────────────────────────────────────────────────────────────────────────────
 
    every field traces to a doc. NO field is ungoverned. that traceability IS the deliverable's value.
@@ -98,10 +98,10 @@ Fill the record in dependency order — each step needs the previous. This is th
    3. VALUE     (doc 03)  → value_share + basis → sets cap_L. (placeholders-with-provenance ok.)
    4. CURATION  (doc 04)  → gather evidence by class → anchor with standards → bridge → choose FORM
                             by the parsimony rule → parameters + evidence_log. (form usually emerges.)
-   5. EMIT      (doc 05)  → find the first nonlinearity on the metric's path → set emit_object
-                            (scalar where linear; spread where a nonlinearity bites).
-   6. METRICS   (doc 06)  → declare metrics_shippable: EAL where cap rarely binds; tail only if the
-                            emit carries a spread — else withhold (structural absence, not caveat).
+   5. EMIT      (doc 05)  → declare whether vulnerability is deterministic or carries a supported
+                            conditional spread/state distribution; keep the seam distribution-ready.
+   6. METRICS   (doc 06)  → declare consumer_metric_prereqs: runtime curve availability, required
+                            annual event distribution, and flags for omitted curve-intrinsic spread.
 ```
 
 If step 5 needs more than step 4's form provides (e.g. metric wants the tail, form gives only a
@@ -118,23 +118,25 @@ Running the checklist end-to-end on the most-built cell:
    ─────────────────────────────────────────────────────────────────────────────────
    cell               hail × solar                                   —
    failure_unit       module (glass + cells)                         1 / doc 01  (concentration → finer than PV_ARRAY)
-   x_axis             kinetic energy                                 2 / doc 02  (composite escape: dia+density+speed → KE)
-   chain_node         hazard-output                                  2 / doc 02  (KE is what the hazard layer delivers)
-   value_share        module ≈ 0.40 of PV_ARRAY  (placeholder)       3 / doc 03  (industry split, labeled)
-   basis              physical replaceable                           3 / doc 03  (not full capex)
-   cap_L              ≈ 0.34 at asset level                          3→4
+   x_axis             MESH hail diameter (mm)                        2 / doc 02  (runtime hazard handoff)
+   chain_node         site hazard intensity                          2 / doc 02
+   value_share        explicit named profile; no implicit default    3 / doc 03
+   basis              physical base OR installed capex, declared     3 / doc 03
+   cap_L              profile share × max_DR; denominator-specific   3→4
    form               smooth sigmoid (logistic)                      4 / doc 04  (empirical-led; EMERGES from aggregation)
-   parameters         L, x₀, k  (KE-parameterized)                   4 / doc 04
-   evidence_log       empirical(claims) + IEC-anchor + KE-physics    4 / doc 04  (each labeled by class)
+   parameters         max_DR, D50_mm, k_per_mm                       4 / doc 04
+   evidence_log       empirical claims + standards anchors           4 / doc 04  (each labeled by class)
    anchors            IEC 61215 ice-ball → low-damage region         4 / doc 04 §4
-   bridge             KE→glass stress baked into the KE curve         4 / doc 04 §6
-   emit_object        SCALAR (for EAL); spread needed for tail        5 / doc 05  (path linear, cap rarely binds)
-   uncertainty        spread NOT yet sourced (the open seam)          4↔5
-   metrics_shippable  EAL ✓   |   VaR/PML withheld (no spread)         6 / doc 06
+   bridge             MESH → archetype-specific logistic response    4 / doc 04 §6
+   emit_object        deterministic scalar DR per sampled event      5 / doc 05
+   uncertainty        curve-intrinsic spread NOT yet sourced          4↔5
+   metric_prereqs     annual event distribution supplied by Hazard;  6 / doc 06
+                      label tail conditional on deterministic vuln.
    ─────────────────────────────────────────────────────────────────────────────────
 
-   READING IT: a smooth sigmoid on KE, capped at ~0.34, scalar emit, EAL ships honestly,
-   tail metrics withheld until secondary uncertainty is curated. Every field traceable.
+   READING IT: an archetype-selected logistic on MESH. The consumer explicitly selects a named
+   value profile (or supplies site values), evaluates each event, and may build annual metrics from
+   its frequency engine. Those metrics disclose that conditional vulnerability spread is absent.
 ```
 
 Contrast — **wildfire × solar** would differ at `form` (threshold/temperature evidence could support
@@ -154,10 +156,10 @@ record shape, different content, each field still governed by the same doc.* Tha
 - This doc is the **map to the deliverable**; the filled records are built separately (like
   [`03`](questions/03_valuation_guide.md)'s value table).
 
-**The one open seam** (carried from docs 04/05): the `uncertainty/spread` field — curation (04) is
-strong on the mean, thin on the spread; emit (05) needs the spread for tail metrics. Until sourced,
-most cells fill `emit=scalar`, `metrics_shippable=EAL-only`. That's the path correctly reporting
-where evidence runs out, not a defect.
+**The one open seam** (carried from docs 04/05) is the `uncertainty/spread` field: curation is strong
+on deterministic response and thin on damage variability conditional on the same event intensity.
+That absence must be disclosed. It does not erase the separate annual distribution produced by the
+consumer's stochastic hazard-frequency engine.
 
 ---
 

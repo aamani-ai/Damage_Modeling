@@ -1,4 +1,4 @@
-# 00 · Global Method Index — Damage Curve Library package v2.5
+# 00 · Global Method Index — portable baseline v2.5 + repository contract 2026-07-10
 
 This folder contains the reusable **documentation, modeling, and runtime-contract standard** for every hazard × asset damage-curve cell.
 
@@ -29,7 +29,8 @@ v2.5 adds runtime-facing standards and artifacts:
     defines the canonical JSON curve artifact and param_role / tier / source schema.
 
 21_capability_and_cap_binding_standard.md
-    defines metrics_supportable, spread_carried, cap_binding, and fail-closed EAL gating.
+    separates curve-intrinsic uncertainty from consumer-built annual loss distributions and
+    defines capability-v2 labels and cap-binding behavior.
 
 schemas/
     JSON schemas for curve artifacts, emit objects, and capability declarations.
@@ -47,27 +48,27 @@ The semantic damage-model versions did not change in v2.5; docs revisions change
 
 ```text
 hail_solar
-    semantic model v1.0; docs r5; current docs carry legacy v1.3 labels
+    semantic model v1.0; repository-current docs r7; portable v2.5 carried docs r5
     single-primary failure-unit
     PV module hail damage
     MESH-equivalent hail diameter axis
     canonical JSON now supersedes any legacy capex-weighted asset-blend curve
 
 flood_solar
-    semantic model v1.0; docs r3
+    semantic model v1.0; repository-current docs r4; portable v2.5 carried docs r3
     multi-failure-unit cell
     local water depth above component datum
     piecewise/state electrical inundation curves
 
 wind_tornado_wind
-    semantic model v1.0; docs r3
+    semantic model v1.0; repository-current docs r4; portable v2.5 carried docs r3
     repeated-unit structural wind-farm cell
     hub-height gust / tornado proxy axes
     blade, tower, nacelle, foundation curves
     explicit 10m→hub-height handoff bridge
 
 strong_wind_solar
-    semantic model v1.0; docs r2
+    semantic model v1.0; repository-current docs r3; portable v2.5 carried docs r2
     solar structural/aerodynamic wind cell
     3-sec gust at array/tracker height
     tracker, racking, module attachment, foundation, exposed-SCADA records

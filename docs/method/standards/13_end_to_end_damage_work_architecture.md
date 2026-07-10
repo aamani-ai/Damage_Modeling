@@ -7,7 +7,7 @@
 This document is the system-level map for the whole damage-curve library. It is not a curve derivation dossier for any one cell. It explains the reusable workflow that produced the current worked cells:
 
 ```text
-01_cells/
+docs/cells/
 ├─ hail_solar/   current worked example: single-primary failure-unit cell
 └─ flood_solar/  current worked example: multi-failure-unit geometry/exposure cell
 ```
@@ -1123,20 +1123,20 @@ The package should answer these audit questions:
 This file is a global method document:
 
 ```text
-00_global_method/13_end_to_end_damage_work_architecture.md
+docs/method/standards/13_end_to_end_damage_work_architecture.md
 ```
 
 It should be read after the global index and before diving into any one cell:
 
 ```text
-1. START_HERE.md
-2. 00_global_method/00_index.md
-3. 00_global_method/13_end_to_end_damage_work_architecture.md
-4. 00_global_method/02_cell_package_standard.md
-5. 00_global_method/05_curve_derivation_dossier_standard.md
-6. 01_cells/<cell>/current/README_*.md
-7. 01_cells/<cell>/current/*_curve_derivation_dossier_*.md
-8. 01_cells/<cell>/current/damage_curve_records_*.xlsx
+1. AGENTS.md
+2. docs/method/standards/00_index.md
+3. docs/method/standards/13_end_to_end_damage_work_architecture.md
+4. docs/method/standards/02_cell_package_standard.md
+5. docs/method/standards/05_curve_derivation_dossier_standard.md
+6. docs/cells/<cell>/current/README_*.md
+7. docs/cells/<cell>/current/*_curve_derivation_dossier_*.md
+8. docs/cells/<cell>/current/damage_curve_records_*.xlsx
 ```
 
 It complements, rather than replaces, the detailed standards:

@@ -1,0 +1,212 @@
+{
+  "schema_version": "known_answer_tests.v2",
+  "cell_id": "wildfire_solar",
+  "semantic_damage_model_version": "model v1.0",
+  "documentation_revision": "docs r3",
+  "artifact_schema_version": "damage_curve_record_bundle.v2",
+  "equations": {
+    "event_class": "DR_u = exact_lookup(state_index, curve_u.points)",
+    "conditional_distribution": "E[DR_u|burn] = sum_s(FLP_s * DR_u(s))",
+    "reference_physical_loss": "sum_u(DR_u*value_u)/sum_u(value_u); support is allocated once at the same aggregate DR",
+    "reference_installed_loss": "physical_loss * 877.7957023626668 / 1120"
+  },
+  "absolute_tolerance": 1e-12,
+  "class_map": {
+    "lt_2_ft": 1,
+    "gte_2_lt_4_ft": 2,
+    "gte_4_lt_6_ft": 3,
+    "gte_6_lt_8_ft": 4,
+    "gte_8_lt_12_ft": 5,
+    "gte_12_ft": 6
+  },
+  "failure_unit_state_tests": [
+    {
+      "test_id": "WSV1_NO_EVENT_MODULE_ZERO",
+      "input": {"failure_unit_id": "WSV1_MODULE_THERMAL", "state_index": 0},
+      "expected_failure_unit_damage_ratio": 0
+    },
+    {
+      "test_id": "WSV1_MODULE_CLASS1",
+      "input": {"failure_unit_id": "WSV1_MODULE_THERMAL", "conditional_flame_length_class": "lt_2_ft"},
+      "expected_failure_unit_damage_ratio": 0.002
+    },
+    {
+      "test_id": "WSV1_MODULE_CLASS4",
+      "input": {"failure_unit_id": "WSV1_MODULE_THERMAL", "conditional_flame_length_class": "gte_6_lt_8_ft"},
+      "expected_failure_unit_damage_ratio": 0.12
+    },
+    {
+      "test_id": "WSV1_MODULE_CLASS6",
+      "input": {"failure_unit_id": "WSV1_MODULE_THERMAL", "conditional_flame_length_class": "gte_12_ft"},
+      "expected_failure_unit_damage_ratio": 0.65
+    },
+    {
+      "test_id": "WSV1_RACKING_CLASS6",
+      "input": {"failure_unit_id": "WSV1_RACKING_THERMAL", "conditional_flame_length_class": "gte_12_ft"},
+      "expected_failure_unit_damage_ratio": 0.25
+    },
+    {
+      "test_id": "WSV1_FOUNDATION_CLASS6",
+      "input": {"failure_unit_id": "WSV1_FOUNDATION_THERMAL", "conditional_flame_length_class": "gte_12_ft"},
+      "expected_failure_unit_damage_ratio": 0.04
+    },
+    {
+      "test_id": "WSV1_INVERTER_CLASS6",
+      "input": {"failure_unit_id": "WSV1_INVERTER_THERMAL", "conditional_flame_length_class": "gte_12_ft"},
+      "expected_failure_unit_damage_ratio": 0.8
+    },
+    {
+      "test_id": "WSV1_COMBINER_CLASS6",
+      "input": {"failure_unit_id": "WSV1_COMBINER_THERMAL", "conditional_flame_length_class": "gte_12_ft"},
+      "expected_failure_unit_damage_ratio": 0.85
+    },
+    {
+      "test_id": "WSV1_CABLE_CLASS1",
+      "input": {"failure_unit_id": "WSV1_CABLE_EXPOSED", "conditional_flame_length_class": "lt_2_ft"},
+      "expected_failure_unit_damage_ratio": 0.005
+    },
+    {
+      "test_id": "WSV1_CABLE_CLASS4",
+      "input": {"failure_unit_id": "WSV1_CABLE_EXPOSED", "conditional_flame_length_class": "gte_6_lt_8_ft"},
+      "expected_failure_unit_damage_ratio": 0.25
+    },
+    {
+      "test_id": "WSV1_CABLE_CLASS6",
+      "input": {"failure_unit_id": "WSV1_CABLE_EXPOSED", "conditional_flame_length_class": "gte_12_ft"},
+      "expected_failure_unit_damage_ratio": 0.9
+    },
+    {
+      "test_id": "WSV1_MV_CLASS6",
+      "input": {"failure_unit_id": "WSV1_MV_EQUIPMENT_THERMAL", "conditional_flame_length_class": "gte_12_ft"},
+      "expected_failure_unit_damage_ratio": 0.7
+    },
+    {
+      "test_id": "WSV1_GROUNDING_CLASS6",
+      "input": {"failure_unit_id": "WSV1_GROUNDING_THERMAL", "conditional_flame_length_class": "gte_12_ft"},
+      "expected_failure_unit_damage_ratio": 0.12
+    },
+    {
+      "test_id": "WSV1_SCADA_CLASS6",
+      "input": {"failure_unit_id": "WSV1_SCADA_THERMAL", "conditional_flame_length_class": "gte_12_ft"},
+      "expected_failure_unit_damage_ratio": 0.9
+    },
+    {
+      "test_id": "WSV1_CIVIL_CLASS6",
+      "input": {"failure_unit_id": "WSV1_CIVIL_DIRECT", "conditional_flame_length_class": "gte_12_ft"},
+      "expected_failure_unit_damage_ratio": 0.4
+    }
+  ],
+  "aggregate_reference_profile_tests": [
+    {
+      "test_id": "WSV1_REFERENCE_STATE0",
+      "state_index": 0,
+      "value_profile_id": "WILDFIRE_SOLAR_REFERENCE_100MWDC_V1",
+      "expected_physical_base_loss_fraction": 0,
+      "expected_installed_capex_loss_fraction": 0
+    },
+    {
+      "test_id": "WSV1_REFERENCE_STATE1",
+      "state_index": 1,
+      "value_profile_id": "WILDFIRE_SOLAR_REFERENCE_100MWDC_V1",
+      "expected_physical_base_loss_fraction": 0.0016813156184346569,
+      "expected_installed_capex_loss_fraction": 0.0013177246644439028
+    },
+    {
+      "test_id": "WSV1_REFERENCE_STATE2",
+      "state_index": 2,
+      "value_profile_id": "WILDFIRE_SOLAR_REFERENCE_100MWDC_V1",
+      "expected_physical_base_loss_fraction": 0.008229710539821399,
+      "expected_installed_capex_loss_fraction": 0.006450004056735685
+    },
+    {
+      "test_id": "WSV1_REFERENCE_STATE3",
+      "state_index": 3,
+      "value_profile_id": "WILDFIRE_SOLAR_REFERENCE_100MWDC_V1",
+      "expected_physical_base_loss_fraction": 0.03452186093921706,
+      "expected_installed_capex_loss_fraction": 0.02705637604464853
+    },
+    {
+      "test_id": "WSV1_REFERENCE_STATE4",
+      "state_index": 4,
+      "value_profile_id": "WILDFIRE_SOLAR_REFERENCE_100MWDC_V1",
+      "expected_physical_base_loss_fraction": 0.1121306126921576,
+      "expected_installed_capex_loss_fraction": 0.0878819374325613
+    },
+    {
+      "test_id": "WSV1_REFERENCE_STATE5",
+      "state_index": 5,
+      "value_profile_id": "WILDFIRE_SOLAR_REFERENCE_100MWDC_V1",
+      "expected_physical_base_loss_fraction": 0.2992485213232008,
+      "expected_installed_capex_loss_fraction": 0.23453488031775763
+    },
+    {
+      "test_id": "WSV1_REFERENCE_STATE6",
+      "state_index": 6,
+      "value_profile_id": "WILDFIRE_SOLAR_REFERENCE_100MWDC_V1",
+      "expected_physical_base_loss_fraction": 0.5831044761134819,
+      "expected_installed_capex_loss_fraction": 0.45700589567932925
+    }
+  ],
+  "conditional_distribution_tests": [
+    {
+      "test_id": "WSV1_SAMPLE_FLP_VECTOR",
+      "input": {
+        "conditional_flame_length_probability_by_bin": {
+          "lt_2_ft": 0.25,
+          "gte_2_lt_4_ft": 0.25,
+          "gte_4_lt_6_ft": 0.2,
+          "gte_6_lt_8_ft": 0.15,
+          "gte_8_lt_12_ft": 0.1,
+          "gte_12_ft": 0.05
+        },
+        "value_profile_id": "WILDFIRE_SOLAR_REFERENCE_100MWDC_V1"
+      },
+      "expected_failure_unit_damage_ratios": {
+        "WSV1_MODULE_THERMAL": 0.0935,
+        "WSV1_RACKING_THERMAL": 0.02475,
+        "WSV1_FOUNDATION_THERMAL": 0.00365,
+        "WSV1_INVERTER_THERMAL": 0.12500000000000003,
+        "WSV1_COMBINER_THERMAL": 0.139,
+        "WSV1_CABLE_EXPOSED": 0.16475,
+        "WSV1_MV_EQUIPMENT_THERMAL": 0.09574999999999999,
+        "WSV1_GROUNDING_THERMAL": 0.0143,
+        "WSV1_SCADA_THERMAL": 0.1645,
+        "WSV1_CIVIL_DIRECT": 0.054000000000000006
+      },
+      "expected_physical_base_loss_fraction": 0.08528179656922524,
+      "expected_installed_capex_loss_fraction": 0.06683928081985102
+    }
+  ],
+  "contract_tests": [
+    {
+      "test_id": "WSV1_REJECT_UNKNOWN_CLASS",
+      "input": {"conditional_flame_length_class": "gte_12_lt_20_ft"},
+      "expected": {"status": "rejected", "error_code": "FSIM_CLASS_NOT_RECOGNIZED"}
+    },
+    {
+      "test_id": "WSV1_REJECT_FRACTIONAL_STATE",
+      "input": {"state_index": 3.5},
+      "expected": {"status": "rejected", "error_code": "EXACT_STATE_LOOKUP_REQUIRED"}
+    },
+    {
+      "test_id": "WSV1_REJECT_NONNORMALIZED_FLP",
+      "input": {"conditional_flame_length_probability_by_bin": {"lt_2_ft": 0.2, "gte_2_lt_4_ft": 0.2, "gte_4_lt_6_ft": 0.2, "gte_6_lt_8_ft": 0.2, "gte_8_lt_12_ft": 0.2, "gte_12_ft": 0.2}},
+      "expected": {"status": "rejected", "error_code": "FLP_VECTOR_MUST_SUM_TO_ONE"}
+    },
+    {
+      "test_id": "WSV1_REJECT_BURN_PROBABILITY_IN_DAMAGE_CALL",
+      "input": {"burn_probability": 0.01, "conditional_flame_length_class": "gte_4_lt_6_ft"},
+      "expected": {"status": "rejected", "error_code": "FREQUENCY_FIELD_NOT_ALLOWED_IN_DAMAGE_CALL"}
+    },
+    {
+      "test_id": "WSV1_VALUE_PROFILE_REQUIRED_FOR_LOSS",
+      "input": {"conditional_flame_length_class": "gte_4_lt_6_ft"},
+      "expected": {"failure_unit_damage_ratio_status": "supported", "scenario_loss_status": "withheld", "error_code": "EXPLICIT_VALUE_PROFILE_OR_SITE_VALUE_BASIS_REQUIRED"}
+    },
+    {
+      "test_id": "WSV1_UNKNOWN_MITIGATION_NO_CREDIT",
+      "input": {"conditional_flame_length_class": "gte_8_lt_12_ft", "barrier_state": "unknown"},
+      "expected": {"curve_change": 0, "metadata_flag": "UNKNOWN_MITIGATION_NO_CREDIT"}
+    }
+  ]
+}

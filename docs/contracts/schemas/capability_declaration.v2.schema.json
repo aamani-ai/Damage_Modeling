@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "damage_curve_library.capability_declaration.v2",
+  "title": "Damage-curve capability declaration v2",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "cell_id",
+    "vulnerability_emit",
+    "consumer_annual_metrics",
+    "cap_binding"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "capability_declaration.v2"
+    },
+    "cell_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "vulnerability_emit": {
+      "type": "object",
+      "required": [
+        "failure_unit_scalar_dr",
+        "scenario_loss_given_value_basis",
+        "curve_intrinsic_spread",
+        "populated_emit_modes"
+      ],
+      "properties": {
+        "failure_unit_scalar_dr": {
+          "enum": ["supported", "withheld"]
+        },
+        "scenario_loss_given_value_basis": {
+          "enum": [
+            "supported_with_explicit_value_and_exposure_basis",
+            "withheld"
+          ]
+        },
+        "curve_intrinsic_spread": {
+          "enum": ["carried", "not_carried", "not_applicable_no_runtime_curve"]
+        },
+        "populated_emit_modes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "scalar_mean",
+              "scalar_mean_plus_bounds",
+              "discrete_state_table",
+              "parametric_distribution",
+              "state_ensemble"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "withheld_reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "consumer_annual_metrics": {
+      "type": "object",
+      "required": [
+        "computation_owner",
+        "frequency_driven_annual_loss_distribution",
+        "vulnerability_uncertainty_distribution",
+        "eal",
+        "pml",
+        "var",
+        "tvar",
+        "prerequisites",
+        "limitation_flags"
+      ],
+      "properties": {
+        "computation_owner": {
+          "const": "downstream_consumer"
+        },
+        "frequency_driven_annual_loss_distribution": {
+          "enum": [
+            "supported_if_consumer_samples_frequency_intensity_coupling_and_applies_caps",
+            "withheld_no_runtime_curve"
+          ]
+        },
+        "vulnerability_uncertainty_distribution": {
+          "enum": [
+            "supported_by_curve_emit",
+            "not_supported_curve_intrinsic_spread_not_carried",
+            "withheld_no_runtime_curve"
+          ]
+        },
+        "eal": {
+          "enum": [
+            "consumer_computable_with_prerequisites",
+            "withheld"
+          ]
+        },
+        "pml": {
+          "enum": [
+            "consumer_computable_from_validated_annual_loss_distribution",
+            "withheld"
+          ]
+        },
+        "var": {
+          "enum": [
+            "consumer_computable_from_validated_annual_loss_distribution",
+            "withheld"
+          ]
+        },
+        "tvar": {
+          "enum": [
+            "consumer_computable_from_validated_annual_loss_distribution",
+            "withheld"
+          ]
+        },
+        "prerequisites": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitation_flags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "cap_binding": {
+      "type": "object",
+      "required": [
+        "policy",
+        "enforcement_owner",
+        "status",
+        "checks_required"
+      ],
+      "properties": {
+        "policy": {
+          "enum": ["consumer_enforced_fail_closed", "not_applicable"]
+        },
+        "enforcement_owner": {
+          "enum": ["downstream_consumer", "not_applicable"]
+        },
+        "status": {
+          "enum": [
+            "not_evaluated_by_damage_artifact",
+            "consumer_pass",
+            "consumer_fail",
+            "not_applicable"
+          ]
+        },
+        "checks_required": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "action_if_fail": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

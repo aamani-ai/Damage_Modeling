@@ -156,7 +156,7 @@ Each source must be mapped to the exact parameter/rule it supports.
 The current reference implementation is located at:
 
 ```text
-01_cells/flood_solar/current/
+docs/cells/flood_solar/current/
 ```
 
 The v1.0 implementation follows this reference pattern and adds actual v1.0 curve ordinates:

@@ -79,6 +79,7 @@ Example for hail × solar:
 |---|---|---|---|
 | MESH-equivalent hail diameter | Provider-native, operational, common in historical data | Proxy for actual impact energy | Selected primary x-axis |
 | Per-stone kinetic energy | More physical for glass breakage | Requires mass/velocity assumptions rarely available from providers | Physics bridge |
+| Contact-normal impact energy with event wind vector | Captures wind-driven hail trajectory and stow-orientation interaction | Requires event wind speed/direction plus tracker orientation; not generally provider-native | Future conditioner / contact-intensity bridge, not v1 primary axis |
 | Kinetic energy flux J/m² | Captures aggregate storm exposure | Needs stone concentration and duration; not usually available | Future / not v1 |
 | Hail reports by county/event | Easy to obtain | Too coarse for site overlay | Evidence/context, not curve x-axis |
 
@@ -104,6 +105,9 @@ Examples:
 ```text
 hail size + velocity
   → diameter primary, KE proxy bridge for derivation
+
+hail size + event wind vector + tracker orientation
+  → keep diameter as source-native x-axis; document wind-driven impact angle as conditioner/contact-intensity seam until runtime data and calibration exist
 
 flood depth + velocity
   → depth for electrical ingress, velocity for scour/foundation

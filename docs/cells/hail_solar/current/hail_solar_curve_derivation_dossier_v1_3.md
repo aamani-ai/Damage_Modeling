@@ -494,6 +494,38 @@ velocity_mps(D) = 4.812461 × D^0.486643
 
 This gives a per-stone impact energy proxy. It is used for interpretation and future physics-based conditioning; it is not the required input axis.
 
+### 10.1 Wind-driven hail contact-intensity caveat
+
+The bridge above is a **vertical-fall / no-event-wind reference bridge**. It should not be read as a complete impact-vector model.
+
+Recent VDE Americas material strengthens a known limitation: wind speed and direction during hail can modify both hail fall angle and impact energy at the module surface. The modeling implication is:
+
+```text
+primary x-axis:
+    remains HAIL_DIAMETER_MESH_EQUIV / mesh_diameter_mm
+
+current KE bridge:
+    diameter -> mass(D), terminal velocity(D), per-stone KE proxy
+
+missing contact-intensity term:
+    event wind vector + tracker tilt/orientation -> normal impact energy at module face
+```
+
+Treatment in the current model:
+
+```text
+wind vector / tracker orientation unknown
+    -> documented caveat, residual spread, and update trigger
+
+wind vector / tracker orientation available in a future runtime
+    -> candidate event-time conditioner or derived contact-intensity bridge
+
+not adopted in v1.0
+    -> no change to D50, k, max_DR, or the current +8 mm stow placeholder
+```
+
+This is **not** a reason to replace the hail-size x-axis. It is a reason to avoid overclaiming the diameter-only curve under wind-driven, face-on impact conditions, especially for stowed tracker events.
+
 ---
 
 ## 11. Module archetype selector logic
@@ -677,7 +709,7 @@ plus small vertical multiplier
 
 ### 13.4 Why this is a placeholder
 
-DOE/FEMP and VDE support the direction of the effect: higher tilt / tracker stow reduces the direct impact angle and normal kinetic energy. FTC Solar’s 80° hail stow release shows that high-angle automated stow is an operational design being commercialized. But those public sources do not provide a generic, sourceable percentage reduction that applies to all trackers and all angles.
+DOE/FEMP and VDE support the direction of the effect: higher tilt / tracker stow reduces the direct impact angle and normal kinetic energy. VDE's 2026 wind-driven hail update also sharpens the caveat: event wind can change the hail trajectory and can partly defeat stow's glancing-impact logic when hail is driven into the module face. FTC Solar’s 80° hail stow release shows that high-angle automated stow is an operational design being commercialized. But those public sources do not provide a generic, sourceable percentage reduction that applies to all trackers, all angles, and all wind-vector/stow-orientation combinations.
 
 So the numeric stow adjustment is explicitly a placeholder. It should be replaced when available with:
 
@@ -777,30 +809,45 @@ This does not change module fragility. It changes how much array value is hit.
 The damage code produces a failure-unit DR. If value linkage is available:
 
 ```text
-loss_$ = DR_module(D)
-       × physical_base_$
-       × PV_ARRAY_value_share
-       × f_hail_material_share
-       × array_exposure_fraction
+physical_base_loss_$ = DR_module(D)
+                     × physical_base_$
+                     × selected_profile.failure_unit_share_physical_base
+                     × array_exposure_fraction
+
+installed_capex_loss_fraction = DR_module(D)
+                              × selected_profile.failure_unit_share_installed_capex
+                              × array_exposure_fraction
 ```
 
-v1.3 keeps these separate:
+Docs r7 keeps these separate:
 
 ```text
 DR_module(D)
     engineering damage output
 
-PV_ARRAY_value_share
-    valuation allocation
-
-f_hail_material_share
-    concentration inside PV_ARRAY
+value_profile_id
+    explicit valuation allocation and denominator
 
 array_exposure_fraction
     spatial/event exposure
 ```
 
 This prevents accidentally applying module damage to the whole project TIV.
+
+Two reference profiles are published in the runtime artifact:
+
+| Profile | Physical-base share | Installed-capex share | Role |
+|---|---:|---:|---|
+| `HAIL_DIRECT_MODULE_HARDWARE_ONLY_V1` | 0.3317569801903719 | 0.2600132602142186 | Direct hardware floor. |
+| `HAIL_HAZARD_REFERENCE_ADAPTER_V1` | 0.4535037224398962 | 0.3554318022885826 | Hazard-compatible scenario: module hardware plus all general replacement fieldwork. |
+
+The 35.543% installed-capex cap is therefore a value-profile result, not the logistic curve's intrinsic
+`max_DR`. The second profile is T4 because it assigns all `Solar_Map!15` support cost to module damage and
+scales it linearly. No value profile is selected implicitly.
+
+The former `f_hail_material_share = 0.75/0.8` examples are deprecated: the bucket is already module hardware,
+so another generic material share double-concentrates value and was inconsistent across prose and workbook
+views.
 
 ---
 
@@ -836,15 +883,18 @@ Priority upgrades:
    → calibrate P_break to actual replacement DR
 
 3. Module BOM / cost allocation
-   → improve f_hail_material_share and cap_L
+   → replace the reference support-cost profile with site/claims-backed module replacement allocation
 
 4. Tracker/stow angle testing
    → replace +8mm D50 and 0.90 max multiplier
 
-5. SCADA/event logs
+5. Hail-event wind vector and tracker orientation
+   → replace the vertical-fall stow placeholder with a contact-normal impact bridge when event wind data are available
+
+6. SCADA/event logs
    → replace assumed P(stowed) with observed event-time state
 
-6. Site MESH swath overlay
+7. Site MESH swath overlay
    → replace exposure_fraction=1.0 default
 ```
 
@@ -860,6 +910,7 @@ Before using or approving the hail × solar curve, check:
 [ ] Are glass thickness and construction known?
 [ ] Is the stow state known, or is probabilistic stow clearly labeled?
 [ ] Is stow probability being confused with hail frequency? It should not be.
+[ ] If event wind speed/direction and tracker orientation are unknown, is wind-driven hail treated as an open seam rather than silently folded into D?
 [ ] Is exposure_fraction site-specific or default full-site?
 [ ] Is f_hail_material_share sourced or placeholder?
 [ ] Are secondary subsystems explicitly reviewed?
@@ -892,6 +943,10 @@ Conditioner:
         stowed   → D50 + 8mm, max_DR × 0.90 placeholder
         unknown  → probability-weighted blend
 
+Open contact-intensity seam:
+    wind-driven hail can modify impact angle and normal impact energy
+    especially when tracker stow orientation and event wind direction interact
+
 Exposure:
     array_exposure_fraction
         multiplies value-linked loss, not module DR
@@ -901,7 +956,7 @@ Output:
         PV_MODULE glass/cell replacement DR
 
 Value link, if needed:
-    loss = DR × physical_base × PV_ARRAY_share × f_hail × exposure_fraction
+    loss = DR × physical_base × named_profile_share × exposure_fraction
 ```
 
 ---
@@ -919,6 +974,8 @@ Value link, if needed:
 | PVEL Hail Stress Sequence whitepaper | https://www.pvel.com/wp-content/uploads/PVEL_White-Paper_Hail-Stress-Sequence-for-PV-Modules.pdf |
 | NREL Extreme Weather and PV Performance | https://research-hub.nrel.gov/en/publications/extreme-weather-and-pv-performance-2 |
 | VDE Americas hail stow memo | https://www.vde.com/en/vde-americas/newsroom/hail-stow-tech-memo |
+| VDE Americas 2026 hail model wind-speed update | https://www.vde.com/en/vde-americas/newsroom/return-of-hail-season |
+| VDE Americas / RETC Hail Resiliency Curve Test | https://www.vde.com/en/vde-americas/newsroom/hail-resiliency-curve-test-press-release |
 | FTC Solar 80° hail stow announcement | https://investor.ftcsolar.com/news-releases/news-release-details/ftc-solar-launches-automated-80deg-high-angle-stow-1p-pioneer/ |
 
 ---
@@ -994,7 +1051,7 @@ non-canonical legacy artifact:
 
 The full parameter table is serialized in the canonical JSON artifact.
 
-### Capability declaration
+### Historical capability declaration at portable package v2.5
 
 ```text
 failure-unit scalar DR: supported
@@ -1002,3 +1059,71 @@ scenario loss with explicit value basis: supported
 scalar EAL: conditional; requires downstream frequency layer and cap-binding preflight
 PML/VaR/TVaR: withheld; no tail distribution is carried
 ```
+
+This historical statement is superseded for repository-current consumers by capability v2 in docs r7.
+A downstream consumer may compute frequency-driven annual metrics from a validated annual loss
+distribution, with the absence of curve-intrinsic spread explicitly flagged.
+
+---
+
+## Evidence update · model v1.0 docs r6 — wind-driven hail / stow interaction
+
+This update records VDE's March 2026 wind-driven hail model update as a caveat and future-conditioner candidate.
+It does **not** change the active hail × solar runtime damage model.
+
+```text
+Change class:
+    EVIDENCE_ONLY_NO_OUTPUT_CHANGE
+
+Preserved model behavior:
+    primary x-axis remains HAIL_DIAMETER_MESH_EQUIV
+    curve form remains logistic
+    D50/k parameters unchanged
+    stow placeholder remains +8 mm D50 and 0.90 max_DR
+    runtime JSON curve records unchanged
+
+New documented interpretation:
+    wind-driven hail is not a replacement x-axis
+    wind-driven hail is a missing contact-intensity conditioner / spread term
+    strongest interaction is with stow angle and tracker orientation
+```
+
+See:
+
+```text
+docs/evidence/ingestion/hail_solar_wind_driven_hail_evidence_update_memo__model_v1_0__docs_r6.md
+```
+
+---
+
+## Consumer-seam correction · model v1.0 docs r7
+
+This contract revision responds to downstream implementation audit without changing the hail fragility.
+
+```yaml
+change_classes:
+  - SCHEMA_CONTRACT_CHANGE
+  - DOCS_ONLY
+semantic_damage_model_version: model v1.0
+documentation_revision: docs r7
+intrinsic_DR_behavior_changed: false
+portable_package_baseline: library v2.5
+repository_current_artifact: hail_solar__model_v1_0__docs_r7__curve_artifact.json
+```
+
+Docs r7 adds:
+
+```text
+- strict bundle-v2 validation for D50_mm, k_per_mm, max_DR, and module_archetype selector_match;
+- exact logistic evaluation equation and machine-readable known-answer tests;
+- physical-base and installed-capex denominators;
+- direct-hardware and Hazard-compatible named value profiles;
+- explicit deprecation of the inconsistent 0.75/0.8 material-share examples;
+- normalized docs/cells self-references and stable legacy-artifact identity;
+- a model+docs+schema+SHA consumer pin and pollable per-cell changelog;
+- capability v2: consumer frequency-driven tail allowed, curve-intrinsic spread still absent.
+```
+
+The consumer-compatible profile reproduces 0.3554318022885826 of installed capex at `module_DR=1` and full
+exposure. It is not a universal asset cap; underwriting must replace it with a site-specific schedule of
+values and support-cost rule.

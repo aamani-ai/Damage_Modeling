@@ -2,7 +2,8 @@
 
 > **Status — 🟡 new repo, docs-first (just spun out of `Hazard_modeling`).** It now holds the foundations,
 > standards, contracts, cells, evidence, and source-drop records in shallow docs folders. The v2.5 ZIP is
-> preserved as the raw source drop. Durable runtime publishing is **step two**. Start at
+> preserved as the raw source drop; repository-current runtime contracts now use bundle/capability v2 with
+> pollable model+docs+schema+SHA pins. Durable runtime publishing is **step two**. Start at
 > **[`docs/scope/SCOPE_AND_STORY.md`](docs/scope/SCOPE_AND_STORY.md)** — the end-to-end anchor.
 
 **damage_modeling** is the **damage-curve / vulnerability layer** of InfraSure's risk platform. It turns
@@ -145,6 +146,7 @@ pip install -r requirements.txt
 
 ## Status
 
-🟡 **New repo, docs-first.** Method mature (foundations + global standards + 4 current cells at model v1.0,
-public-source-derived). v2.5 includes machine-readable artifacts; durable artifact publishing and Hazard M3
-loading remain future system work.
+🟡 **New repo, docs-first.** Method mature (foundations + global standards + 5 current cells at model v1.0;
+four public-source-derived cells plus the explicitly screening-grade wildfire_solar engineering proxy).
+Portable v2.5 remains preserved; repository-current artifacts use the stricter v2 consumer seam. Durable
+artifact publishing and automated Hazard M3 loading remain future system work.

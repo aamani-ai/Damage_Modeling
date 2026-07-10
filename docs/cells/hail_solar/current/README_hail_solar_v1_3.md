@@ -14,6 +14,8 @@ Read in this order:
 3. damage_code_metadata_spec_hail_solar_v1_3.md
 4. damage_curve_method_guide_v1_3_hail_solar_consolidated.md
 5. damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx
+6. hail_solar__model_v1_0__docs_r7__curve_artifact.json
+7. known_answer_tests_hail_solar__model_v1_0__docs_r7.json
 ```
 
 ---
@@ -101,19 +103,27 @@ The core sheets for proof are:
 ```text
 1. The curve is public-source-derived, not private claims-calibrated.
 2. The stow adjustment is a placeholder transformation, not tracker-specific test calibration.
-3. f_hail material share remains a load-bearing value-link open seam.
-4. Secondary non-module direct-hail curves are not modeled in v1; they are reviewed and tagged.
-5. EAL/PML/tail metrics belong downstream and require hazard frequency plus uncertainty.
+3. Wind-driven hail is a contact-intensity/stow-interaction open seam, not a replacement x-axis.
+4. The Hazard-compatible support-cost allocation is a T4 reference profile; site-specific value allocation remains open.
+5. Secondary non-module direct-hail curves are not modeled in v1; they are reviewed and tagged.
+6. EAL/PML/tail metrics belong downstream. Frequency-driven tails are allowed from a validated annual loss distribution, but curve-intrinsic vulnerability spread is not carried.
 ```
 
 ---
 
-## v2.5 runtime artifact
+## Repository-current runtime artifact
 
 Canonical machine-readable curve artifact:
 
 ```text
-hail_solar__model_v1_0__docs_r5__curve_artifact.json
+hail_solar__model_v1_0__docs_r7__curve_artifact.json
 ```
 
-Use the JSON artifact for runtime/M3 integration. Use the workbook for derivation audit and dashboard review.
+Use the JSON artifact plus
+`known_answer_tests_hail_solar__model_v1_0__docs_r7.json` for runtime/M3 integration. Use the workbook for
+derivation audit and dashboard review; its older 0.8 at-risk scenario is not the repository-current value
+contract.
+
+The docs r6 wind-driven hail memo remains evidence/proof-trail only. Docs r7 publishes strict payload, value,
+KAT, path, polling, and capability semantics. Neither revision changes `hail_solar model v1.0` failure-unit
+DR behavior.

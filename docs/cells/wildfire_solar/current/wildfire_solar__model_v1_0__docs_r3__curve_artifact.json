@@ -1,0 +1,498 @@
+{
+  "schema_version": "damage_curve_record_bundle.v2",
+  "cell_id": "wildfire_solar",
+  "damage_code_id": "WILDFIRE_SOLAR_FSIM_SCREENING_V1",
+  "semantic_damage_model_version": "model v1.0",
+  "documentation_revision": "docs r3",
+  "lifecycle_state": "released_v1_0",
+  "promotion_status": "released",
+  "review_status": "reviewed",
+  "documentation_status": "released",
+  "model_grade": "screening_engineering_proxy",
+  "package_release": "unreleased",
+  "package_baseline": "library v2.5",
+  "package_inclusion_status": "repository_canonical_not_in_portable_package",
+  "canonical_runtime_artifact": true,
+  "source_dossier": "docs/cells/wildfire_solar/current/wildfire_solar_curve_derivation_dossier__model_v1_0__docs_r3.md",
+  "source_workbook": "docs/cells/wildfire_solar/current/damage_curve_records_wildfire_solar__model_v1_0__docs_r3.xlsx",
+  "known_answer_tests": "docs/cells/wildfire_solar/current/known_answer_tests_wildfire_solar__model_v1_0__docs_r3.json",
+  "source_registers": [
+    "docs/cells/wildfire_solar/proposed/SOURCE_REGISTER_wildfire_solar__model_v0_1__docs_r1.csv",
+    "docs/cells/wildfire_solar/proposed/SOURCE_REGISTER_ADDENDUM_wildfire_solar__model_v0_1__docs_r2.csv"
+  ],
+  "claim_registers": [
+    "docs/cells/wildfire_solar/proposed/CLAIM_PARAMETER_REGISTER_wildfire_solar__model_v0_1__docs_r1.csv",
+    "docs/cells/wildfire_solar/proposed/CLAIM_PARAMETER_REGISTER_ADDENDUM_wildfire_solar__model_v0_1__docs_r2.csv"
+  ],
+  "hazard_axis": {
+    "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE",
+    "input_field": "conditional_flame_length_class",
+    "alternate_distribution_field": "conditional_flame_length_probability_by_bin",
+    "unit": "source_native_categorical_class",
+    "source_product": "USFS FSim RDS-2016-0034-3",
+    "state_index_range": [
+      0,
+      6
+    ],
+    "state_0_semantics": "damage-code no-event control state; not an FSim conditional class",
+    "native_class_map": {
+      "lt_2_ft": 1,
+      "gte_2_lt_4_ft": 2,
+      "gte_4_lt_6_ft": 3,
+      "gte_6_lt_8_ft": 4,
+      "gte_8_lt_12_ft": 5,
+      "gte_12_ft": 6
+    },
+    "valid_range": [
+      0,
+      6
+    ],
+    "extrapolation_policy": "reject_non_integer_unknown_or_interpolated_states",
+    "frequency_separation": "Burn probability is a downstream Hazard frequency input and is prohibited in the damage call.",
+    "guardrail": "The class state is not fireline-intensity-to-heat-flux conversion and does not imply local exposure duration."
+  },
+  "failure_units": [
+    {
+      "id": "WSV1_MODULE_THERMAL",
+      "subsystem": "PV_ARRAY",
+      "component": "PV_MODULE",
+      "treatment": "primary_nonzero_screening_proxy",
+      "y_axis": "failure_unit_damage_ratio",
+      "default_value_share_physical_base": 0.3317569801903719,
+      "value_source": "Solar_Map!2"
+    },
+    {
+      "id": "WSV1_RACKING_THERMAL",
+      "subsystem": "MOUNTING",
+      "component": "TRACKER_AND_RACKING",
+      "treatment": "secondary_nonzero_screening_proxy",
+      "y_axis": "failure_unit_damage_ratio",
+      "default_value_share_physical_base": 0.12530219244791235,
+      "value_source": "Solar_Map!3"
+    },
+    {
+      "id": "WSV1_FOUNDATION_THERMAL",
+      "subsystem": "FOUNDATION",
+      "component": "PILE_AND_INVERTER_PAD",
+      "treatment": "reviewed_low_nonzero_screening_proxy",
+      "y_axis": "failure_unit_damage_ratio",
+      "default_value_share_physical_base": 0.03545755244585994,
+      "value_source": "Solar_Map!4"
+    },
+    {
+      "id": "WSV1_INVERTER_THERMAL",
+      "subsystem": "INVERTER_SYSTEM",
+      "component": "CENTRAL_INVERTER",
+      "treatment": "primary_nonzero_screening_proxy",
+      "y_axis": "failure_unit_damage_ratio",
+      "default_value_share_physical_base": 0.03680396967473965,
+      "value_source": "Solar_Map!5"
+    },
+    {
+      "id": "WSV1_COMBINER_THERMAL",
+      "subsystem": "INVERTER_SYSTEM",
+      "component": "COMBINER_BOX",
+      "treatment": "primary_nonzero_screening_proxy",
+      "y_axis": "failure_unit_damage_ratio",
+      "default_value_share_physical_base": 0.007776581705317682,
+      "value_source": "Solar_Map!6"
+    },
+    {
+      "id": "WSV1_CABLE_EXPOSED",
+      "subsystem": "ELECTRICAL_COLLECTION",
+      "component": "EXPOSED_CABLE_AC_DC",
+      "treatment": "primary_nonzero_reference_profile_exposed",
+      "y_axis": "failure_unit_damage_ratio",
+      "default_value_share_physical_base": 0.07897066681201233,
+      "value_source": "Solar_Map!7",
+      "value_guardrail": "Reference profile treats the row as exposed; site profiles must remove buried, conduit, or otherwise protected value."
+    },
+    {
+      "id": "WSV1_MV_EQUIPMENT_THERMAL",
+      "subsystem": "SUBSTATION",
+      "component": "TRANSFORMER_SWITCHGEAR",
+      "treatment": "primary_nonzero_screening_proxy",
+      "y_axis": "failure_unit_damage_ratio",
+      "default_value_share_physical_base": 0.12133194989726824,
+      "value_source": "Solar_Map!8"
+    },
+    {
+      "id": "WSV1_GROUNDING_THERMAL",
+      "subsystem": "GROUNDING_LIGHTNING",
+      "component": "GROUNDING_GRID_AND_LIGHTNING_PROTECTION",
+      "treatment": "reviewed_low_nonzero_screening_proxy",
+      "y_axis": "failure_unit_damage_ratio",
+      "default_value_share_physical_base": 0.009552336582909908,
+      "value_source": "Solar_Map!9"
+    },
+    {
+      "id": "WSV1_SCADA_THERMAL",
+      "subsystem": "SCADA",
+      "component": "MONITORING_AND_COMMUNICATIONS",
+      "treatment": "secondary_nonzero_screening_proxy",
+      "y_axis": "failure_unit_damage_ratio",
+      "default_value_share_physical_base": 0.0014923745883854479,
+      "value_source": "Solar_Map!10"
+    },
+    {
+      "id": "WSV1_CIVIL_DIRECT",
+      "subsystem": "CIVIL_INFRA",
+      "component": "FENCING_ROADS_BUILDINGS_SITE_PREP",
+      "treatment": "mixed_bucket_screening_proxy",
+      "y_axis": "failure_unit_damage_ratio",
+      "default_value_share_physical_base": 0.035570627890061324,
+      "value_source": "Solar_Map!14",
+      "value_guardrail": "Reference profile treats the mixed row as a direct civil bucket; site schedules should split direct assets from support and post-fire consequences."
+    }
+  ],
+  "curve_records": [
+    {
+      "curve_id": "WSV1_MODULE_THERMAL",
+      "failure_unit_id": "WSV1_MODULE_THERMAL",
+      "curve_form": "piecewise_linear",
+      "x_axis": "fsim_screening_fire_state_index_exact_integer_only",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [[0, 0], [1, 0.002], [2, 0.01], [3, 0.04], [4, 0.12], [5, 0.32], [6, 0.65]]
+      }
+    },
+    {
+      "curve_id": "WSV1_RACKING_THERMAL",
+      "failure_unit_id": "WSV1_RACKING_THERMAL",
+      "curve_form": "piecewise_linear",
+      "x_axis": "fsim_screening_fire_state_index_exact_integer_only",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [[0, 0], [1, 0], [2, 0.001], [3, 0.005], [4, 0.02], [5, 0.08], [6, 0.25]]
+      }
+    },
+    {
+      "curve_id": "WSV1_FOUNDATION_THERMAL",
+      "failure_unit_id": "WSV1_FOUNDATION_THERMAL",
+      "curve_form": "piecewise_linear",
+      "x_axis": "fsim_screening_fire_state_index_exact_integer_only",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [[0, 0], [1, 0], [2, 0], [3, 0.001], [4, 0.003], [5, 0.01], [6, 0.04]]
+      }
+    },
+    {
+      "curve_id": "WSV1_INVERTER_THERMAL",
+      "failure_unit_id": "WSV1_INVERTER_THERMAL",
+      "curve_form": "piecewise_linear",
+      "x_axis": "fsim_screening_fire_state_index_exact_integer_only",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [[0, 0], [1, 0.002], [2, 0.01], [3, 0.05], [4, 0.18], [5, 0.45], [6, 0.8]]
+      }
+    },
+    {
+      "curve_id": "WSV1_COMBINER_THERMAL",
+      "failure_unit_id": "WSV1_COMBINER_THERMAL",
+      "curve_form": "piecewise_linear",
+      "x_axis": "fsim_screening_fire_state_index_exact_integer_only",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [[0, 0], [1, 0.003], [2, 0.015], [3, 0.06], [4, 0.2], [5, 0.5], [6, 0.85]]
+      }
+    },
+    {
+      "curve_id": "WSV1_CABLE_EXPOSED",
+      "failure_unit_id": "WSV1_CABLE_EXPOSED",
+      "curve_form": "piecewise_linear",
+      "x_axis": "fsim_screening_fire_state_index_exact_integer_only",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [[0, 0], [1, 0.005], [2, 0.02], [3, 0.08], [4, 0.25], [5, 0.6], [6, 0.9]]
+      }
+    },
+    {
+      "curve_id": "WSV1_MV_EQUIPMENT_THERMAL",
+      "failure_unit_id": "WSV1_MV_EQUIPMENT_THERMAL",
+      "curve_form": "piecewise_linear",
+      "x_axis": "fsim_screening_fire_state_index_exact_integer_only",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [[0, 0], [1, 0.001], [2, 0.006], [3, 0.03], [4, 0.12], [5, 0.35], [6, 0.7]]
+      }
+    },
+    {
+      "curve_id": "WSV1_GROUNDING_THERMAL",
+      "failure_unit_id": "WSV1_GROUNDING_THERMAL",
+      "curve_form": "piecewise_linear",
+      "x_axis": "fsim_screening_fire_state_index_exact_integer_only",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [[0, 0], [1, 0], [2, 0.001], [3, 0.004], [4, 0.015], [5, 0.05], [6, 0.12]]
+      }
+    },
+    {
+      "curve_id": "WSV1_SCADA_THERMAL",
+      "failure_unit_id": "WSV1_SCADA_THERMAL",
+      "curve_form": "piecewise_linear",
+      "x_axis": "fsim_screening_fire_state_index_exact_integer_only",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [[0, 0], [1, 0.004], [2, 0.02], [3, 0.08], [4, 0.25], [5, 0.6], [6, 0.9]]
+      }
+    },
+    {
+      "curve_id": "WSV1_CIVIL_DIRECT",
+      "failure_unit_id": "WSV1_CIVIL_DIRECT",
+      "curve_form": "piecewise_linear",
+      "x_axis": "fsim_screening_fire_state_index_exact_integer_only",
+      "y_axis": "failure_unit_damage_ratio",
+      "parameters": {
+        "points": [[0, 0], [1, 0.001], [2, 0.005], [3, 0.02], [4, 0.07], [5, 0.18], [6, 0.4]]
+      }
+    }
+  ],
+  "selector_logic": [
+    {
+      "field": "model_grade",
+      "required": false,
+      "default": "screening_engineering_proxy",
+      "effect": "Only the released central screening table exists in model v1.0."
+    },
+    {
+      "field": "value_profile_id",
+      "required": "for scenario loss only",
+      "default": null,
+      "effect": "Select the explicit reference profile or supply complete site values; never use an implicit value constant."
+    }
+  ],
+  "conditioner_logic": [
+    {
+      "fields": [
+        "vegetation_management_state",
+        "barrier_state",
+        "suppression_system_state",
+        "firefighter_access_state",
+        "deenergization_state"
+      ],
+      "numeric_effect": "none_in_model_v1_0",
+      "default_policy": "no_credit",
+      "reason": "Guidance supports causal relevance but not universal calibrated modifiers."
+    }
+  ],
+  "exposure_logic": [
+    {
+      "field": "screening_exposure_basis",
+      "required": true,
+      "allowed_value": "integrated_reference_archetype_conditional_on_FSim_class",
+      "effect": "Declares that local attack and population heterogeneity are integrated into the Tier 4 class ordinate."
+    },
+    {
+      "field": "site_failure_unit_values_usd",
+      "required": "alternative to reference value profile for scenario loss",
+      "effect": "Replaces reference values without changing failure-unit DRs."
+    }
+  ],
+  "evaluation_contract": {
+    "state_table_container": "piecewise_linear",
+    "state_lookup": "exact_integer_only",
+    "interpolation_between_states": "prohibited",
+    "extrapolation": "prohibited",
+    "event_class_formula": "DR_u = lookup_exact(curve_u.points, state_index)",
+    "distribution_formula": "expected_DR_u_given_burn = sum_s(FLP_s * DR_u(s))",
+    "distribution_validation": "all six probabilities in [0,1] and sum to one",
+    "no_event_rule": "state_index=0 returns zero for every failure unit; burn probability remains outside the damage call",
+    "metadata_flags_always": [
+      "SCREENING_ENGINEERING_PROXY",
+      "NOT_FIELD_CALIBRATED",
+      "NOT_CLAIMS_CALIBRATED",
+      "FSIM_CLASS_IS_NOT_LOCAL_HEAT_FLUX"
+    ]
+  },
+  "value_linkage": {
+    "implicit_default_profile": null,
+    "reference_basis": {
+      "value_vintage": "2024 USD basis from the governed NREL/NLR Q1-2025 benchmark crosswalk",
+      "installed_capex_usd_per_kwdc": 1120.0,
+      "physical_replaceable_usd_per_kwdc": 877.7957023626668,
+      "direct_and_civil_usd_per_kwdc": 688.2052014426097,
+      "support_usd_per_kwdc": 189.59050092005714,
+      "excluded_soft_nonphysical_usd_per_kwdc": 242.20429763733296,
+      "physical_to_installed_ratio": 0.7837461628238097
+    },
+    "value_profiles": [
+      {
+        "value_profile_id": "WILDFIRE_SOLAR_REFERENCE_100MWDC_V1",
+        "profile_grade": "screening_reference_not_site_appraisal",
+        "failure_unit_values_usd_per_kwdc": {
+          "WSV1_MODULE_THERMAL": 291.21485143992487,
+          "WSV1_RACKING_THERMAL": 109.98972602739727,
+          "WSV1_FOUNDATION_THERMAL": 31.12448715327472,
+          "WSV1_INVERTER_THERMAL": 32.306366410372384,
+          "WSV1_COMBINER_THERMAL": 6.82625,
+          "WSV1_CABLE_EXPOSED": 69.3201119402985,
+          "WSV1_MV_EQUIPMENT_THERMAL": 106.50466417910448,
+          "WSV1_GROUNDING_THERMAL": 8.385,
+          "WSV1_SCADA_THERMAL": 1.31,
+          "WSV1_CIVIL_DIRECT": 31.223744292237445
+        },
+        "support_cost_allocation": {
+          "support_value_usd_per_kwdc": 189.59050092005714,
+          "rule": "allocate_once_in_proportion_to_aggregate_direct_and_civil_damage_ratio",
+          "tier": "T4_placeholder_or_expert_judgment"
+        },
+        "physical_base_loss_formula": "(sum_u(DR_u * value_u) + support_value * aggregate_direct_and_civil_DR) / physical_replaceable_value",
+        "installed_capex_loss_formula": "physical_base_loss_fraction * physical_to_installed_ratio",
+        "prohibited_use": "site appraisal, claim settlement, or automatic inclusion of buried/protected cable and mixed civil value"
+      }
+    ]
+  },
+  "parameter_tier_table": [
+    {
+      "parameter": "FSim class definitions and conditional probability semantics",
+      "curve_id": "all",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": ["USFS_FSIM_RDS_2023", "FINNEY_2011_FSIM"],
+      "reasoning": "Official source-native hazard contract.",
+      "update_trigger": "FSim product/version change"
+    },
+    {
+      "parameter": "relative radiant/convective severity ordering",
+      "curve_id": "all",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": ["FRANKMAN_2012_WILDLAND_HEAT", "BUTLER_2010_CROWN_HEAT", "MUELLER_2018_FIELD_FIRE"],
+      "reasoning": "Field measurements support strong environment- and pathway-dependent heat exposure but not an FSim converter.",
+      "update_trigger": "validated regional-to-site solar transfer model"
+    },
+    {
+      "parameter": "module state-table ordinates",
+      "curve_id": "WSV1_MODULE_THERMAL",
+      "value": [0, 0.002, 0.01, 0.04, 0.12, 0.32, 0.65],
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": ["WANG_2025_PV_THERMAL", "ZHAO_2026_PV_POOL_FIRE", "KIEE_JANG_2026_WILDFIRE_PV", "DOE_FEMP_PV_WILDFIRE"],
+      "reasoning": "Evidence constrains mechanism, selector sensitivity, and inspection endpoint; absolute class DR is engineering judgment.",
+      "update_trigger": "paired local exposure, inspection disposition, and module replacement cost"
+    },
+    {
+      "parameter": "racking and foundation state-table ordinates",
+      "curve_id": "WSV1_RACKING_THERMAL;WSV1_FOUNDATION_THERMAL",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": ["DOE_FEMP_PV_WILDFIRE", "FRANKMAN_2012_WILDLAND_HEAT"],
+      "reasoning": "Low-response metal/concrete-dominant engineering proxy; no immunity assumption.",
+      "update_trigger": "forensic structural inspection and cost cohort"
+    },
+    {
+      "parameter": "electrical and control state-table ordinates",
+      "curve_id": "WSV1_INVERTER_THERMAL;WSV1_COMBINER_THERMAL;WSV1_MV_EQUIPMENT_THERMAL;WSV1_SCADA_THERMAL",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": ["NEMA_GD2_2016", "DOE_FEMP_PV_WILDFIRE", "YONHAP_UISEONG_PV_2025"],
+      "reasoning": "Disposition guidance and field materiality support replacement endpoints; absolute class DR remains engineering judgment.",
+      "update_trigger": "OEM/forensic exposure, disposition, and cost records"
+    },
+    {
+      "parameter": "exposed cable state-table ordinates",
+      "curve_id": "WSV1_CABLE_EXPOSED",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": ["ZHANG_2022_XLPE", "NEMA_GD2_2016", "NREL_PV_OM_2018"],
+      "reasoning": "Material tests support high heat sensitivity but not installed-population economic DR.",
+      "update_trigger": "installed cable fire testing and routing-specific claims"
+    },
+    {
+      "parameter": "grounding and civil state-table ordinates",
+      "curve_id": "WSV1_GROUNDING_THERMAL;WSV1_CIVIL_DIRECT",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": ["NEMA_GD2_2016", "FM_DS_7_106_2026", "DOE_FEMP_PV_WILDFIRE"],
+      "reasoning": "Inspection/control guidance supports inclusion and lower response; absolute DR is engineering judgment.",
+      "update_trigger": "site schedule split and direct-fire civil/grounding claims"
+    },
+    {
+      "parameter": "reference failure-unit values",
+      "curve_id": "all",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": ["NREL_NLR_Q1_2025_PV_BENCHMARK", "VALUE_SOLAR_WORKBOOK"],
+      "reasoning": "Governed row-level crosswalk from the official cost benchmark.",
+      "update_trigger": "new cost vintage or project-specific schedule of values"
+    },
+    {
+      "parameter": "proportional support-cost allocation",
+      "curve_id": "aggregate",
+      "value": "support DR equals aggregate direct-and-civil DR",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": ["VALUE_SOLAR_WORKBOOK", "GOVERNANCE_CONTRACT"],
+      "reasoning": "Transparent allocate-once reference rule; not claims-calibrated.",
+      "update_trigger": "claims/work-order support-cost allocation"
+    }
+  ],
+  "derivation_rationale": {
+    "adopted_form": "exact categorical screening state table by failure unit",
+    "why_not_continuous_FLI_curve": "No validated FSim/fireline-intensity to component heat-flux/time bridge exists; a smooth curve would imply unsupported physical precision.",
+    "why_release_is_permitted": "The user authorized a transparent approximation; all absolute ordinates are exposed as Tier 4, pressure-tested, versioned, and restricted to screening use.",
+    "sensitivity_only_not_distribution": "A 0.6x/1.5x ordinate stress is documented outside the runtime emit and is not a confidence interval."
+  },
+  "emit_contract": {
+    "schema_version": "damage_emit.v1",
+    "populated_emit_modes_for_this_cell": ["scalar_mean"],
+    "failure_unit_output": "conditional_failure_unit_damage_ratio",
+    "scenario_output": "optional physical-base and installed-capex loss fractions with explicit value profile",
+    "required_metadata_flags": [
+      "SCREENING_ENGINEERING_PROXY",
+      "NOT_FIELD_CALIBRATED",
+      "NOT_CLAIMS_CALIBRATED",
+      "CURVE_INTRINSIC_SPREAD_NOT_CARRIED"
+    ]
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v2",
+    "cell_id": "wildfire_solar",
+    "vulnerability_emit": {
+      "failure_unit_scalar_dr": "supported",
+      "scenario_loss_given_value_basis": "supported_with_explicit_value_and_exposure_basis",
+      "curve_intrinsic_spread": "not_carried",
+      "populated_emit_modes": ["scalar_mean"],
+      "withheld_reason_codes": ["EXPLICIT_VALUE_PROFILE_OR_SITE_VALUE_BASIS_REQUIRED"]
+    },
+    "consumer_annual_metrics": {
+      "computation_owner": "downstream_consumer",
+      "frequency_driven_annual_loss_distribution": "supported_if_consumer_samples_frequency_intensity_coupling_and_applies_caps",
+      "vulnerability_uncertainty_distribution": "not_supported_curve_intrinsic_spread_not_carried",
+      "eal": "consumer_computable_with_prerequisites",
+      "pml": "consumer_computable_from_validated_annual_loss_distribution",
+      "var": "consumer_computable_from_validated_annual_loss_distribution",
+      "tvar": "consumer_computable_from_validated_annual_loss_distribution",
+      "prerequisites": [
+        "source-native FSim burn probability in the frequency layer",
+        "six-bin conditional flame-length distribution or one sampled exact class",
+        "explicit wildfire_solar value profile or complete site failure-unit values",
+        "consumer event sampling and aggregation validated",
+        "financial caps and terms applied after physical loss with cap-binding checks"
+      ],
+      "limitation_flags": [
+        "SCREENING_ENGINEERING_PROXY",
+        "NOT_FIELD_CALIBRATED",
+        "NOT_CLAIMS_CALIBRATED",
+        "FSIM_CLASS_IS_NOT_LOCAL_HEAT_FLUX",
+        "CURVE_INTRINSIC_SPREAD_NOT_CARRIED"
+      ]
+    },
+    "cap_binding": {
+      "policy": "consumer_enforced_fail_closed",
+      "enforcement_owner": "downstream_consumer",
+      "status": "not_evaluated_by_damage_artifact",
+      "checks_required": [
+        "validate annual event sampling and FSim frequency/severity separation",
+        "compare uncapped and capped annual loss on the selected value basis",
+        "verify per-event and aggregate caps against the physical value exposed",
+        "withhold reportable annual metrics if consumer cap-binding validation fails"
+      ],
+      "action_if_fail": "withhold reportable annual metrics until the downstream cap-binding and aggregation checks pass"
+    }
+  },
+  "legacy_or_deprecated_artifacts": [
+    {
+      "identity": "wildfire_solar model v0.1 docs r1/r2 research scaffold",
+      "status": "superseded_for_runtime_but_retained_as_research_and_rejection_audit",
+      "runtime_use": "prohibited"
+    },
+    {
+      "identity": "legacy capex-weighted FLI logistic proxy",
+      "status": "rejected_for_canonical_use",
+      "runtime_use": "prohibited",
+      "reason": "unsupported continuous converter, inconsistent legacy equations/tables, and pooled whole-asset grain"
+    }
+  ]
+}

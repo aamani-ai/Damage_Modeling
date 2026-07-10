@@ -8,7 +8,7 @@ Hazard M3 should use for hail x solar.
 The current solar hail curve is the `hail_solar` cell's canonical runtime artifact:
 
 ```text
-docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r5__curve_artifact.json
+docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json
 ```
 
 It is indexed from:
@@ -25,7 +25,7 @@ curve_id:       HAIL_SOLAR_DEFAULT_3P2_GBS
 hazard axis:    mesh_diameter_mm
 failure unit:   PV_MODULE_GLASS_CELL
 model version:  model v1.0
-docs revision:  docs r5
+docs revision:  docs r7
 ```
 
 ## Where The Current Curve Is Stored
@@ -34,7 +34,8 @@ docs revision:  docs r5
 docs/cells/hail_solar/
   README.md
   current/
-    hail_solar__model_v1_0__docs_r5__curve_artifact.json   # runtime contract
+    hail_solar__model_v1_0__docs_r7__curve_artifact.json   # runtime contract
+    known_answer_tests_hail_solar__model_v1_0__docs_r7.json
     damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx
     hail_solar_curve_derivation_dossier_v1_3.md
     damage_code_metadata_spec_hail_solar_v1_3.md
@@ -59,7 +60,7 @@ open artifact index
   |
   v
 select current canonical artifact
-  docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r5__curve_artifact.json
+  docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json
   |
   v
 verify artifact
@@ -106,7 +107,7 @@ conditioner inputs
   |
   v
 exposure + value inputs
-  array_exposure_fraction / f_hail_material_share / value_bucket
+  array_exposure_fraction / value_profile_id or site value basis / denominator
   -> convert DR into loss; does not change fragility
 ```
 
@@ -140,16 +141,29 @@ DR = P_stowed * [0.90 * logistic(D; D50 + 8mm, k)]
 It is useful for scenario sensitivity, but it should be labeled as `stow_adjustment_placeholder` until
 tracker/BOM-specific hail-stow data replaces it.
 
+Wind-driven hail is a documented caveat to this placeholder, not an active runtime knob. Keep `mesh_diameter_mm`
+as the curve x-axis. If event wind speed/direction and tracker orientation are available, treat them as candidate
+future conditioner inputs for a model update, not as current v1.0 inputs.
+
 ### Knobs that change exposure or loss, not fragility
 
 | User input | What it does | Example |
 |---|---|---|
 | `array_exposure_fraction` | Scales the affected PV array value. | `0.72` if only 72% of the array is hit by damaging hail. |
 | `exposure_basis` | Explains where exposure fraction came from. | `full_site_default`, `footprint_overlay`, `scenario`. |
-| `f_hail_material_share` | Share of PV array value exposed to module glass/cell replacement damage. | `0.75` |
-| `value_bucket` | Links the DR to the valuation ledger. | `PV_ARRAY_MODULE_EXPOSED` |
+| `value_profile_id` | Selects a published value allocation and denominator pair. | `HAIL_HAZARD_REFERENCE_ADAPTER_V1` |
+| `site_value_basis` | Replaces the reference profile with project-specific values. | Schedule of values + support allocation. |
+| `at_risk_fraction` | Optional share of the selected module inventory that is applicable. | `0.90`; do not reuse the old generic 0.75/0.8 examples. |
+| `denominator` | Labels the requested percentage. | `physical_replaceable_base` or `installed_capex`. |
+| `value_bucket` | Links the DR to the failure-unit valuation ledger. | `PV_ARRAY_MODULE_EXPOSED` |
 
 These inputs are important for loss, but they do not choose the logistic fragility curve.
+
+The artifact publishes two reference profiles. `HAIL_DIRECT_MODULE_HARDWARE_ONLY_V1` is the direct module
+hardware floor: 33.176% of physical base / 26.001% of installed capex. The Hazard-compatible
+`HAIL_HAZARD_REFERENCE_ADAPTER_V1` also assigns all general replacement fieldwork to module damage: 45.350%
+of physical base / 35.543% of installed capex. The latter reproduces Hazard's former hardcoded `0.3554`, but
+it is a T4 allocation scenario and must be selected explicitly.
 
 ## Archetype Choice
 
@@ -316,7 +330,8 @@ mounting_type: single_axis_tracker
 stow_state: unstowed
 array_exposure_fraction: 0.72
 exposure_basis: footprint_overlay
-f_hail_material_share: 0.75
+value_profile_id: HAIL_HAZARD_REFERENCE_ADAPTER_V1
+denominator: installed_capex
 value_bucket: PV_ARRAY_MODULE_EXPOSED
 ```
 
@@ -325,7 +340,7 @@ Interpretation:
 ```text
 base failure-unit DR ~= 0.390
 array exposure       = 72% of array value touched
-material share       = module glass/cell replacement share
+value profile        = module hardware + named support-cost allocation
 ```
 
 The curve gives the physical failure-unit DR. The consumer/value layer converts that into dollars or TIV loss.
@@ -333,13 +348,14 @@ The curve gives the physical failure-unit DR. The consumer/value layer converts 
 ## Version Meaning
 
 ```text
-package release v2.5
-  = library/package delivery label
+portable package baseline v2.5
+  = latest assembled library/package delivery
+  = not the repository-current cell pin
 
 semantic damage-model version model v1.0
   = damage behavior version
 
-documentation revision docs r5
+documentation revision docs r7
   = proof trail / contract / wrapper revision
 ```
 
@@ -366,14 +382,20 @@ Hazard M2/M3 input
 load pinned hail_solar JSON artifact
   |
   v
+validate bundle v2 + SHA and run known-answer tests
+  |
+  v
 evaluate failure-unit damage ratio
   |
   v
-return DR + flags
+select explicit value profile or site basis; return DR/loss + flags
   |
   v
-Hazard computes EAL/PML/portfolio metrics
+Hazard computes EAL/PML/VaR/TVaR from its annual loss distribution
 ```
+
+The annual metrics may be frequency-driven even though the curve carries no intrinsic vulnerability spread.
+Hazard must attach `CURVE_INTRINSIC_SPREAD_NOT_CARRIED` and may not claim vulnerability uncertainty was sampled.
 
 Do not create `src/` just to answer this request. The current stable contract is the JSON artifact. `src/`
 waits until artifact publishing, version pinning, cloud/storage layout, and Hazard loading are designed.
@@ -381,8 +403,11 @@ waits until artifact publishing, version pinning, cloud/storage layout, and Haza
 ## Canonical Files
 
 - Cell entrypoint: [`../../cells/hail_solar/README.md`](../../cells/hail_solar/README.md)
-- Runtime artifact: [`../../cells/hail_solar/current/hail_solar__model_v1_0__docs_r5__curve_artifact.json`](../../cells/hail_solar/current/hail_solar__model_v1_0__docs_r5__curve_artifact.json)
+- Runtime artifact: [`../../cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json`](../../cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json)
+- Known-answer tests: [`../../cells/hail_solar/current/known_answer_tests_hail_solar__model_v1_0__docs_r7.json`](../../cells/hail_solar/current/known_answer_tests_hail_solar__model_v1_0__docs_r7.json)
+- Cell changelog: [`../../cells/hail_solar/CHANGELOG.json`](../../cells/hail_solar/CHANGELOG.json)
 - Metadata spec: [`../../cells/hail_solar/current/damage_code_metadata_spec_hail_solar_v1_3.md`](../../cells/hail_solar/current/damage_code_metadata_spec_hail_solar_v1_3.md)
 - Artifact index: [`../../contracts/machine_readable_artifact_index.json`](../../contracts/machine_readable_artifact_index.json)
 - Handoff note: [`../../contracts/hazard_handoff/hail_solar_m3_canonicalization.md`](../../contracts/hazard_handoff/hail_solar_m3_canonicalization.md)
+- Consumer contract v2: [`../../contracts/hazard_handoff/hail_solar_consumer_contract_v2.md`](../../contracts/hazard_handoff/hail_solar_consumer_contract_v2.md)
 - Version registry: [`../../cells/VERSION_REGISTRY.md`](../../cells/VERSION_REGISTRY.md)

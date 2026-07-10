@@ -2,27 +2,34 @@
 
 ## 1. Purpose
 
-Every current cell must ship a canonical JSON artifact that serializes the assembled curve records. The workbook remains the derivation/audit view; JSON is the runtime contract.
+Every current cell ships a canonical JSON artifact that serializes the assembled curve records. The workbook
+remains the derivation/audit view; JSON is the runtime contract.
 
 ```text
 workbook          = human derivation view / dashboard / QA view
 JSON artifact     = version-pinned runtime curve contract
 dossier           = proof trail and reviewer explanation
 metadata spec     = input/output contract
+known-answer JSON = executable consumer agreement
 ```
 
-## 2. Required top-level fields
+## 2. Bundle schema v2
+
+Repository-current artifacts use:
 
 ```yaml
-schema_version: damage_curve_record_bundle.v1
+schema_version: damage_curve_record_bundle.v2
 cell_id: <cell_id>
 damage_code_id: <runtime_code_id>
 semantic_damage_model_version: model v1.0
 documentation_revision: docs rN
-package_release: library vX.Y
+package_release: unreleased | library vX.Y
+package_baseline: library vX.Y
+package_inclusion_status: included | repository_canonical_not_in_portable_package | not_included
 canonical_runtime_artifact: true
-source_dossier: <relative path>
-source_workbook: <relative path or null>
+source_dossier: docs/cells/<cell>/...
+source_workbook: docs/cells/<cell>/... | null
+known_answer_tests: docs/cells/<cell>/... | optional
 hazard_axis: {...}
 failure_units: [...]
 curve_records: [...]
@@ -35,75 +42,129 @@ emit_contract: {...}
 capability_declaration: {...}
 ```
 
-## 3. Parameter nature / role grouping
+The `package_baseline` and `package_inclusion_status` fields separate the latest portable ZIP from a newer
+repository-current contract. A consumer must not infer artifact currency from package release alone.
 
-Each load-bearing parameter must be tagged with `param_role`:
+## 3. Curve-form payload pinning
+
+Schema v1 validated only the envelope; a parameter rename could pass validation and break a consumer. Schema
+v2 validates the payload used by each supported evaluator.
+
+| `curve_form` | Required parameter keys | Other load-bearing fields |
+|---|---|---|
+| `logistic` on `mesh_diameter_mm` | `D50_mm`, `k_per_mm`, `max_DR` | `selector_match.module_archetype` |
+| `piecewise_linear` | `points` as ordered `[x, DR]` pairs | DR values in `[0,1]` |
+| `thresholded_logistic_demand` | `R0`, `R50`, `k`, `max_DR` | `x_axis = R_eff` |
+| `wind_tornado_logistic_ratio` | `D50_ratio_straight_line`, `k_ratio`, `max_DR`, `tornado_D50_shift` | aggregate-inclusion flag |
+
+For a recognized form, `parameters` must not contain renamed or extra keys. A payload change requires a new
+artifact schema version or an explicit compatible schema extension.
+
+## 4. Self-reference and dependency rules
+
+Artifact pointers resolve from the repository root:
+
+```text
+correct: docs/cells/hail_solar/current/...
+wrong:   01_cells/hail_solar/current/...
+```
+
+An artifact must not embed a downstream consumer's filesystem path. Legacy objects are identified by stable
+artifact ID, origin repository, and former filename—not by a path such as `Hazard_modeling/data/...`.
+
+Validation must fail on:
+
+```text
+dangling source_dossier or source_workbook
+01_cells/ self-reference in a repository-current artifact
+Hazard_modeling/ or another consumer path in a damage artifact
+```
+
+## 5. Value linkage
+
+If a curve artifact publishes an asset-loss convenience view, it must serialize:
+
+```text
+- denominator identity and units;
+- physical-base and installed-capex values or their conversion;
+- failure-unit value share on each reported denominator;
+- included and excluded source rows;
+- support-cost allocation rule;
+- evidence/assumption tier;
+- whether profile selection is required;
+- the asymptotic asset-loss cap for each denominator when applicable.
+```
+
+The curve's `max_DR` is a failure-unit cap. It is not automatically a `%TIV` cap. The latter is produced only
+after applying an explicit value profile and exposure basis.
+
+## 6. Known-answer contract
+
+Every new or refreshed runtime artifact should carry a machine-readable known-answer file. At minimum it
+contains:
+
+```text
+- representative inputs for every curve family/archetype;
+- expected failure-unit DR and tolerance;
+- selector default and rejection behavior;
+- unit-conversion checks when alternate units are accepted;
+- value-linkage checks when the artifact publishes value profiles;
+- cap checks at the denominator actually reported.
+```
+
+A consumer runs these tests against its evaluator before using a newly pinned artifact.
+
+## 7. Parameter nature / role grouping
+
+Each load-bearing parameter is tagged with `param_role`:
 
 | `param_role` | Meaning | Examples |
 |---|---|---|
 | `curve_fit_shape` | Shape parameter specific to the selected curve form. | `k`, `D50`, `R50`, state-table ordinate. |
-| `boundary_or_cap` | Boundary, cap, threshold, or maximum loss parameter that could survive a different curve form. | `max_DR`, `R0`, saturation cap. |
+| `boundary_or_cap` | Boundary, threshold, or maximum failure-unit loss. | `max_DR`, `R0`, saturation cap. |
 | `axis_bridge` | Converts source-native hazard to the curve-native axis. | `Ve50 = 1.4 × Vref`, `R_eff = (V/V_design)^2`. |
-| `selector_default` | Default used when asset metadata is missing or generic. | `module_archetype = default_3_2mm_glass_backsheet`. |
-| `conditioner_adjustment` | Event-time adjustment form and magnitude. | stow shift, demand multiplier, tornado shift. |
-| `exposure_or_value` | Affects amount of value exposed, not fragility. | exposed fraction, value share. |
-| `open_seam_placeholder` | Known weak placeholder retained for structure only. | generic foundation scour proxy. |
+| `selector_default` | Default used when asset metadata is missing. | module archetype. |
+| `conditioner_adjustment` | Event-time adjustment form and magnitude. | stow shift, demand multiplier. |
+| `exposure_or_value` | Affects value or exposure, not intrinsic fragility. | named value profile, exposed fraction. |
+| `open_seam_placeholder` | Known weak placeholder retained for structure only. | generic scour proxy. |
 
-## 4. Evidence tiers
+## 8. Capability declaration
 
-Use the following canonical tiers unless a future evidence-reference decision replaces them:
+Repository-current artifacts use `capability_declaration.v2`. It separates curve-intrinsic spread from a
+consumer-built frequency-driven annual loss distribution. See standard 21.
 
-| Tier | Meaning | Metric implication |
-|---|---|---|
-| `T1_claims_or_field_calibrated` | Claims, forensic, OEM, or field dataset directly calibrates the target parameter at the failure-unit grain. | Can support stronger metric claims if spread/cap gates also pass. |
-| `T2_public_lab_standard_or_physics` | Public lab data, standard, deterministic physics bridge, or method source constrains the parameter or anchor. | Supports generic scalar severity; not enough by itself for tail spread. |
-| `T3_engineering_proxy_or_adjacent_empirical` | Adjacent-source proxy, engineering fit, or transferred curve form. | Use with explicit caveat and update trigger. |
-| `T4_placeholder_or_expert_judgment` | Placeholder or expert-selected value with weak public numeric support. | Must not support tail metrics; scalar EAL requires fail-closed preflight and labeling. |
+## 9. Canonical naming and consumer pin
 
-A parameter can list multiple source tiers. The row must still expose the weakest load-bearing tier that materially controls the output.
-
-## 5. Adjustment provenance
-
-Every selector/conditioner adjustment must record:
-
-```yaml
-adjustment_id: <id>
-field: <input field>
-adjustment_type: horizontal_shift | vertical_multiplier | demand_multiplier | curve_variant | probability_blend | state_selection | exposure_multiplier
-form: <formula or rule>
-source_ids: [<evidence ids>]
-tier: <T1-T4>
-reasoning: <why this form rather than another>
-open_seam: <what would replace it>
-```
-
-Directional evidence without numeric magnitude is allowed, but the magnitude must then be tiered as `T4_placeholder_or_expert_judgment`.
-
-## 6. Canonical file naming
-
-Preferred naming:
+Preferred artifact naming:
 
 ```text
 <cell_id>__model_v<MAJOR_MINOR>__docs_r<N>__curve_artifact.json
 ```
 
-Example:
+Consumers pin the full tuple published in the artifact index:
 
 ```text
-strong_wind_solar__model_v1_0__docs_r2__curve_artifact.json
-```
-
-## 7. Runtime rule
-
-A downstream M3/M4 pipeline should pin to the JSON artifact and validate:
-
-```text
-schema_version
 cell_id
-damage_code_id
 semantic_damage_model_version
-canonical_runtime_artifact = true
-capability_declaration.metrics_supportable
+documentation_revision
+artifact_schema_version
+sha256
 ```
 
-The pipeline should not scrape parameters from workbooks unless explicitly operating in derivation/audit mode.
+Package release alone is not a valid cell-runtime pin.
+
+## 10. Polling and release discovery
+
+`docs/contracts/machine_readable_artifact_index.json` is the repository polling surface. A consumer:
+
+```text
+1. polls the index;
+2. finds its cell_id;
+3. compares consumer_pin + artifact schema + SHA-256;
+4. reads the per-cell CHANGELOG.json;
+5. validates the artifact and runs known-answer tests;
+6. deliberately promotes the new pin.
+```
+
+This is a pull-based contract. Push notifications and durable object-store publishing remain future system
+work.

@@ -1,0 +1,212 @@
+{
+  "schema_version": "known_answer_tests.v2",
+  "cell_id": "hail_solar",
+  "semantic_damage_model_version": "model v1.0",
+  "documentation_revision": "docs r7",
+  "artifact_schema_version": "damage_curve_record_bundle.v2",
+  "equation": "DR(D) = max_DR / (1 + exp(-k_per_mm * (D - D50_mm)))",
+  "absolute_tolerance": 1e-12,
+  "runtime_curve_known_answer_tests": [
+    {
+      "test_id": "HAIL_FRAGILE_25MM",
+      "input": {
+        "mesh_diameter_mm": 25.0,
+        "module_archetype": "fragile_thin_glass_glass"
+      },
+      "expected": {
+        "curve_id": "HAIL_SOLAR_FRAGILE_THIN_GG",
+        "failure_unit_damage_ratio": 0.028018960877552106
+      }
+    },
+    {
+      "test_id": "HAIL_FRAGILE_50MM",
+      "input": {
+        "mesh_diameter_mm": 50.0,
+        "module_archetype": "fragile_thin_glass_glass"
+      },
+      "expected": {
+        "curve_id": "HAIL_SOLAR_FRAGILE_THIN_GG",
+        "failure_unit_damage_ratio": 0.8775434458525238
+      }
+    },
+    {
+      "test_id": "HAIL_FRAGILE_75MM",
+      "input": {
+        "mesh_diameter_mm": 75.0,
+        "module_archetype": "fragile_thin_glass_glass"
+      },
+      "expected": {
+        "curve_id": "HAIL_SOLAR_FRAGILE_THIN_GG",
+        "failure_unit_damage_ratio": 0.9994389813081112
+      }
+    },
+    {
+      "test_id": "HAIL_DEFAULT_25MM",
+      "input": {
+        "mesh_diameter_mm": 25.0,
+        "module_archetype": "default_3_2mm_glass_backsheet"
+      },
+      "expected": {
+        "curve_id": "HAIL_SOLAR_DEFAULT_3P2_GBS",
+        "failure_unit_damage_ratio": 0.010000208873691786
+      }
+    },
+    {
+      "test_id": "HAIL_DEFAULT_50MM",
+      "input": {
+        "mesh_diameter_mm": 50.0,
+        "module_archetype": "default_3_2mm_glass_backsheet"
+      },
+      "expected": {
+        "curve_id": "HAIL_SOLAR_DEFAULT_3P2_GBS",
+        "failure_unit_damage_ratio": 0.39000320357653323
+      }
+    },
+    {
+      "test_id": "HAIL_DEFAULT_75MM",
+      "input": {
+        "mesh_diameter_mm": 75.0,
+        "module_archetype": "default_3_2mm_glass_backsheet"
+      },
+      "expected": {
+        "curve_id": "HAIL_SOLAR_DEFAULT_3P2_GBS",
+        "failure_unit_damage_ratio": 0.9758847776058313
+      }
+    },
+    {
+      "test_id": "HAIL_HARDENED_25MM",
+      "input": {
+        "mesh_diameter_mm": 25.0,
+        "module_archetype": "hail_hardened_thicker_glass"
+      },
+      "expected": {
+        "curve_id": "HAIL_SOLAR_HARDENED_THICKER",
+        "failure_unit_damage_ratio": 0.004999841253861766
+      }
+    },
+    {
+      "test_id": "HAIL_HARDENED_50MM",
+      "input": {
+        "mesh_diameter_mm": 50.0,
+        "module_archetype": "hail_hardened_thicker_glass"
+      },
+      "expected": {
+        "curve_id": "HAIL_SOLAR_HARDENED_THICKER",
+        "failure_unit_damage_ratio": 0.1289739168117034
+      }
+    },
+    {
+      "test_id": "HAIL_HARDENED_75MM",
+      "input": {
+        "mesh_diameter_mm": 75.0,
+        "module_archetype": "hail_hardened_thicker_glass"
+      },
+      "expected": {
+        "curve_id": "HAIL_SOLAR_HARDENED_THICKER",
+        "failure_unit_damage_ratio": 0.8135452954066228
+      }
+    },
+    {
+      "test_id": "HAIL_DEFAULT_SELECTOR_50MM",
+      "input": {
+        "mesh_diameter_mm": 50.0
+      },
+      "expected": {
+        "curve_id": "HAIL_SOLAR_DEFAULT_3P2_GBS",
+        "module_archetype": "default_3_2mm_glass_backsheet",
+        "failure_unit_damage_ratio": 0.39000320357653323,
+        "metadata_flags": [
+          "DEFAULT_SELECTOR_USED"
+        ]
+      }
+    },
+    {
+      "test_id": "HAIL_TWO_INCH_UNIT_CONVERSION",
+      "input": {
+        "hail_diameter": 2.0,
+        "source_unit": "in",
+        "module_archetype": "default_3_2mm_glass_backsheet"
+      },
+      "expected": {
+        "mesh_diameter_mm_used": 50.8,
+        "curve_id": "HAIL_SOLAR_DEFAULT_3P2_GBS",
+        "failure_unit_damage_ratio": 0.4219998542934585
+      }
+    }
+  ],
+  "selector_contract_tests": [
+    {
+      "test_id": "HAIL_UNKNOWN_SELECTOR_REJECTED",
+      "input": {
+        "mesh_diameter_mm": 50.0,
+        "module_archetype": "unknown_unregistered_archetype"
+      },
+      "expected": {
+        "status": "rejected",
+        "error_code": "CURVE_SELECTOR_MATCH_NOT_FOUND"
+      }
+    },
+    {
+      "test_id": "HAIL_DUPLICATE_SELECTOR_REJECTED",
+      "fixture_mutation": "duplicate the default module_archetype selector_match",
+      "expected": {
+        "status": "rejected",
+        "error_code": "CURVE_SELECTOR_MATCH_NOT_UNIQUE"
+      }
+    }
+  ],
+  "value_linkage_known_answer_tests": [
+    {
+      "test_id": "HAIL_REFERENCE_PROFILE_50MM",
+      "input": {
+        "mesh_diameter_mm": 50.0,
+        "module_archetype": "default_3_2mm_glass_backsheet",
+        "value_profile_id": "HAIL_HAZARD_REFERENCE_ADAPTER_V1",
+        "array_exposure_fraction": 1.0
+      },
+      "expected": {
+        "failure_unit_damage_ratio": 0.39000320357653323,
+        "physical_base_loss_fraction": 0.17686790458544244,
+        "installed_capex_loss_fraction": 0.1386195415455282
+      }
+    },
+    {
+      "test_id": "HAIL_DIRECT_HARDWARE_PROFILE_50MM",
+      "input": {
+        "mesh_diameter_mm": 50.0,
+        "module_archetype": "default_3_2mm_glass_backsheet",
+        "value_profile_id": "HAIL_DIRECT_MODULE_HARDWARE_ONLY_V1",
+        "array_exposure_fraction": 1.0
+      },
+      "expected": {
+        "failure_unit_damage_ratio": 0.39000320357653323,
+        "physical_base_loss_fraction": 0.12938628508312153,
+        "installed_capex_loss_fraction": 0.10140600445592401
+      }
+    },
+    {
+      "test_id": "HAIL_REFERENCE_PROFILE_CAPS",
+      "input": {
+        "failure_unit_damage_ratio": 1.0,
+        "value_profile_id": "HAIL_HAZARD_REFERENCE_ADAPTER_V1",
+        "array_exposure_fraction": 1.0
+      },
+      "expected": {
+        "asymptotic_asset_loss_cap_physical_base": 0.4535037224398962,
+        "asymptotic_asset_loss_cap_installed_capex": 0.3554318022885826
+      }
+    },
+    {
+      "test_id": "HAIL_VALUE_PROFILE_REQUIRED",
+      "input": {
+        "failure_unit_damage_ratio": 0.5,
+        "array_exposure_fraction": 1.0
+      },
+      "expected": {
+        "failure_unit_damage_ratio_status": "supported",
+        "asset_loss_status": "withheld",
+        "error_code": "EXPLICIT_VALUE_PROFILE_OR_SITE_VALUE_BASIS_REQUIRED"
+      }
+    }
+  ]
+}

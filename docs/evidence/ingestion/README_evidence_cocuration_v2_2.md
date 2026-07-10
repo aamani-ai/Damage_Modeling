@@ -23,8 +23,10 @@ v1 adoption.
 |---|---|
 | `README_evidence_cocuration_v2_2.md` | This overview. |
 | `hail_solar_evidence_update_memo__model_v1_0__docs_r4.md` | Hail × solar evidence ingestion memo. |
+| `hail_solar_wind_driven_hail_evidence_update_memo__model_v1_0__docs_r6.md` | Hail × solar wind-driven hail / stow-interaction caveat memo. |
 | `flood_solar_evidence_update_memo__model_v1_0__docs_r2.md` | Flood × solar evidence ingestion memo. |
 | `wind_tornado_wind_evidence_update_memo__model_v1_0__docs_r2.md` | Wind/tornado × wind evidence ingestion memo. |
+| `wildfire_solar_deep_research_update__model_v0_1__docs_r2.md` | Deep public-evidence update, transferability decisions, field-data program, and v1.0 promotion boundary for the proposed wildfire × solar scaffold. |
 | `evidence_ingestion_register_v2_2.xlsx` | Structured register of adopt / park / reject / candidate model-change decisions. |
 
 The source triage files are stored in:
@@ -66,9 +68,14 @@ triage-level decisions.
 
 | Cell | Current semantic model version | Evidence ingestion outcome | Model version change? | Candidate future model changes |
 |---|---:|---|---:|---|
-| `hail_solar` | model v1.0 | Validation + caveats only | No | None adopted; `f_hail` remains open |
+| `hail_solar` | model v1.0 | Validation + caveats only; docs r6 adds wind-driven hail / stow-interaction caveat | No | Wind-vector/stow-orientation conditioner candidate; `f_hail` remains open |
 | `flood_solar` | model v1.0 | References + anchors into evidence map | No | Transformer-type selector; salinity; duration conditioner |
 | `wind_tornado_wind` | model v1.0 | Cross-validation + physics support + honest gap statement | No | Numeric yaw-error conditioner; tornado D50-shift refinement; IEC class offsets |
+| `wildfire_solar` | model v0.1 | New field/physics/guidance evidence sharpens the research program but does not close local-attack or economic-DR calibration | No | Component-zone transfer, BOM-specific inspected response, same-unit cost linkage, coverage and uncertainty |
+
+The wildfire row records the outcome of that evidence-ingestion event. The repository later released
+`wildfire_solar` model v1.0 docs r3 as an explicitly Tier 4 screening engineering proxy; the empirical and
+site-calibration gaps named here remain open.
 
 ---
 

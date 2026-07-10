@@ -298,7 +298,7 @@ flowchart TD
 Future cell folders can stay clean:
 
 ```text
-01_cells/hail_solar/current/
+docs/cells/hail_solar/current/
     README.md
     damage_code_metadata_spec.md
     curve_derivation_dossier.md

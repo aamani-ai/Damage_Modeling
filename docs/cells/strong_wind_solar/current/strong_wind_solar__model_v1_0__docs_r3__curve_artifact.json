@@ -1,13 +1,15 @@
 {
-  "schema_version": "damage_curve_record_bundle.v1",
+  "schema_version": "damage_curve_record_bundle.v2",
   "cell_id": "strong_wind_solar",
   "damage_code_id": "STRONG_WIND_SOLAR_V1",
   "semantic_damage_model_version": "model v1.0",
-  "documentation_revision": "docs r2",
-  "package_release": "library v2.5",
+  "documentation_revision": "docs r3",
+  "package_release": "unreleased",
+  "package_baseline": "library v2.5",
+  "package_inclusion_status": "repository_canonical_not_in_portable_package",
   "canonical_runtime_artifact": true,
-  "source_dossier": "01_cells/strong_wind_solar/current/strong_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md",
-  "source_workbook": "01_cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+  "source_dossier": "docs/cells/strong_wind_solar/current/strong_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md",
+  "source_workbook": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
   "hazard_axis": {
     "id": "SWS_GUST_3S_ARRAY_HEIGHT",
     "input_field": "gust_3s_mph",
@@ -513,7 +515,7 @@
     "source_spine": "Wind-pressure physics and public PV wind-load/storm-hardening sources support the axis, mechanisms, and thresholded logistic form.",
     "form_reasoning": "Structural wind damage is threshold-like but heterogeneous; thresholded logistic avoids false low-wind damage and caps failure-unit loss.",
     "demoted_sources": "Public sources do not provide a generic claims-calibrated wind-speed-to-DR table, so numeric parameters remain engineering-fit.",
-    "tier_mix": "Axis bridge is T2; all v1.0 numeric structural parameters and stow multipliers are T4 engineering fits; tail metrics are withheld."
+    "tier_mix": "Axis bridge is T2; all v1.0 numeric structural parameters and stow multipliers are T4 engineering fits. Curve-intrinsic spread is not carried; downstream frequency-driven tail metrics remain conditional on the consumer-built annual loss distribution."
   },
   "emit_contract": {
     "schema_version": "damage_emit.v1",
@@ -531,27 +533,31 @@
     "distribution_fields_present_even_when_null": true
   },
   "capability_declaration": {
-    "schema_version": "capability_declaration.v1",
+    "schema_version": "capability_declaration.v2",
     "cell_id": "strong_wind_solar",
-    "spread_carried": false,
-    "emit_modes_populated_by_cell": [
-      "scalar_mean"
-    ],
-    "metrics_supportable": {
+    "vulnerability_emit": {
       "failure_unit_scalar_dr": "supported",
       "scenario_loss_given_value_basis": "supported_with_explicit_value_and_exposure_basis",
-      "scalar_eal": "conditional_require_cap_binding_preflight",
-      "pml": "withheld_no_tail_distribution",
-      "var": "withheld_no_tail_distribution",
-      "tvar": "withheld_no_tail_distribution"
+      "curve_intrinsic_spread": "not_carried",
+      "populated_emit_modes": ["scalar_mean"]
+    },
+    "consumer_annual_metrics": {
+      "computation_owner": "downstream_consumer",
+      "frequency_driven_annual_loss_distribution": "supported_if_consumer_samples_frequency_intensity_coupling_and_applies_caps",
+      "vulnerability_uncertainty_distribution": "not_supported_curve_intrinsic_spread_not_carried",
+      "eal": "consumer_computable_with_prerequisites",
+      "pml": "consumer_computable_from_validated_annual_loss_distribution",
+      "var": "consumer_computable_from_validated_annual_loss_distribution",
+      "tvar": "consumer_computable_from_validated_annual_loss_distribution",
+      "prerequisites": ["explicit_value_basis", "explicit_exposure_basis", "sampled_hazard_frequency_and_intensity", "coupling_model", "caps_applied_inside_simulation"],
+      "limitation_flags": ["CURVE_INTRINSIC_SPREAD_NOT_CARRIED", "TAIL_CONDITIONAL_ON_DETERMINISTIC_VULNERABILITY"]
     },
     "cap_binding": {
-      "policy": "fail_closed",
-      "preflight_status": "not_executed_no_downstream_frequency_or_state_distribution",
-      "required_before_scalar_eal": true,
-      "tolerance_pct": 2.5,
-      "action_if_fail": "require_mean_plus_spread_emit",
-      "reason": "Current package contains severity curves but not downstream hazard/state distributions or project-specific cap tests."
+      "policy": "consumer_enforced_fail_closed",
+      "enforcement_owner": "downstream_consumer",
+      "status": "not_evaluated_by_damage_artifact",
+      "checks_required": ["failure_unit_caps_applied_per_event", "annual_aggregate_cap_applied_inside_simulation_when_applicable"],
+      "action_if_fail": "withhold_affected_metric_or_use_full_capped_simulation"
     }
   }
 }

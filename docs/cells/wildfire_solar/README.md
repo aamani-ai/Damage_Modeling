@@ -1,47 +1,67 @@
 # Wildfire × solar PV
 
-## Status
+## Current state
 
 ```yaml
 cell_id: wildfire_solar
-semantic_damage_model_version: model v0.1
-documentation_revision: docs r1
-lifecycle_state: scaffold
-promotion_status: proposed
-review_status: pressure_tested
-documentation_status: working_revision
-canonical_runtime_artifact: false
-curve_records: 0
-curve_ordinates: withheld
-runtime_reason: NO_RUNTIME_CURVE
+damage_code_id: WILDFIRE_SOLAR_FSIM_SCREENING_V1
+semantic_damage_model_version: model v1.0
+documentation_revision: docs r3
+lifecycle_state: released_v1_0
+promotion_status: released
+model_grade: screening_engineering_proxy
+canonical_runtime_artifact: true
+curve_records: 10
 package_release: unreleased
 package_baseline: library v2.5
-package_inclusion_status: not_included
+package_inclusion_status: repository_canonical_not_in_portable_package
 ```
 
-The evidence review did not find a defensible calibration from source-native FSim conditional flame-length classes to utility-scale solar economic damage ratio. The initial numerical proposals were withdrawn, and the legacy wildfire–solar work is retained only as a source-discovery and rejection-audit input. No production DR, scenario loss, EAL, or tail metric is reportable.
+Model v1.0 is the first usable numerical wildfire × solar model. It evaluates exact source-native FSim
+conditional flame-length classes against ten failure-unit state tables and publishes explicit physical and
+installed-CAPEX value linkage.
 
-The scaffold does preserve a rigorous next-model contract: exact source-native hazard semantics, candidate failure units, a row-level value crosswalk, a proposed same-unit direct replacement-cost y-axis, test-specific component constraints, and a site-condition adapter covering fuels, fences, walls, firebreaks, burial/enclosures, geometry, access, suppression, and double-counting controls.
+The model is intentionally approximate. Absolute ordinates are Tier 4 engineering proxies constrained by
+public hazard, field-physics, PV thermal, electrical-disposition, event, diagnostic, and value evidence. It is
+not claims- or field-calibrated and must carry the screening flags in every consumer output.
 
-## Governed artifacts
+## Current runtime package
 
-- [Research scaffold overview](proposed/README_wildfire_solar__model_v0_1__docs_r1.md)
-- [Derivation and evidence dossier](proposed/wildfire_solar_curve_derivation_dossier__model_v0_1__docs_r1.md)
-- [Pressure test](proposed/PRESSURE_TEST_wildfire_solar__model_v0_1__docs_r1.md)
-- [Bounded evidence search log](proposed/BOUNDED_EVIDENCE_SEARCH_LOG_wildfire_solar__model_v0_1__docs_r1.md)
-- [Seven-step audit](proposed/SEVEN_STEP_AUDIT_wildfire_solar__model_v0_1__docs_r1.md)
-- [Site-condition adapter](proposed/SITE_CONDITION_ADAPTER_wildfire_solar__model_v0_1__docs_r1.md)
-- [Source register](proposed/SOURCE_REGISTER_wildfire_solar__model_v0_1__docs_r1.csv)
-- [Claim/parameter register](proposed/CLAIM_PARAMETER_REGISTER_wildfire_solar__model_v0_1__docs_r1.csv)
-- [Parameter-tier table](proposed/PARAMETER_TIER_TABLE_wildfire_solar__model_v0_1__docs_r1.csv)
-- [Value crosswalk](proposed/VALUE_CROSSWALK_wildfire_solar__model_v0_1__docs_r1.csv)
-- [Legacy evidence ingestion](proposed/LEGACY_EVIDENCE_INGESTION_wildfire_solar__model_v0_1__docs_r1.md)
-- [Metadata specification](proposed/wildfire_solar_damage_code_metadata_spec__model_v0_1__docs_r1.md)
-- [Noncanonical scaffold JSON](proposed/wildfire_solar__model_v0_1__docs_r1__curve_artifact.json)
-- [Capability declaration](proposed/wildfire_solar__model_v0_1__docs_r1__capability.json)
-- [Known-answer tests](proposed/known_answer_tests_wildfire_solar__model_v0_1__docs_r1.json)
-- [Research audit workbook](proposed/damage_curve_records_wildfire_solar__model_v0_1__docs_r1.xlsx)
-- [Workbook manifest](proposed/workbook_sheet_manifest_wildfire_solar__model_v0_1__docs_r1.md)
-- [Decision log](proposed/DECISION_LOG_wildfire_solar__model_v0_1__docs_r1.md)
-- [Change classification](proposed/CHANGE_CLASSIFICATION_wildfire_solar__model_v0_1__docs_r1.md)
-- [Validation report](proposed/VALIDATION_REPORT_wildfire_solar__model_v0_1__docs_r1.md)
+- [Cell overview](current/README_wildfire_solar__model_v1_0__docs_r3.md)
+- [Canonical JSON artifact](current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json)
+- [Capability declaration](current/wildfire_solar__model_v1_0__docs_r3__capability.json)
+- [Known-answer tests](current/known_answer_tests_wildfire_solar__model_v1_0__docs_r3.json)
+- [Derivation dossier](current/wildfire_solar_curve_derivation_dossier__model_v1_0__docs_r3.md)
+- [Metadata specification](current/wildfire_solar_damage_code_metadata_spec__model_v1_0__docs_r3.md)
+- [Ordinate table](current/ORDINATE_TABLE_wildfire_solar__model_v1_0__docs_r3.csv)
+- [Value linkage](current/VALUE_LINKAGE_wildfire_solar__model_v1_0__docs_r3.csv)
+- [Audit workbook](current/damage_curve_records_wildfire_solar__model_v1_0__docs_r3.xlsx)
+- [Workbook manifest](current/workbook_sheet_manifest_wildfire_solar__model_v1_0__docs_r3.md)
+- [Change classification](current/CHANGE_CLASSIFICATION_wildfire_solar__model_v1_0__docs_r3.md)
+- [Validation report](current/VALIDATION_REPORT_wildfire_solar__model_v1_0__docs_r3.md)
+- [Runtime changelog](CHANGELOG.json)
+- [Hazard migration handoff](../../contracts/hazard_handoff/wildfire_solar_model_v1_0_hazard_migration.md)
+
+## Reference aggregate
+
+| FSim conditional class | Physical-base DR | Installed-CAPEX DR |
+|---|---:|---:|
+| `<2 ft` | 0.1681% | 0.1318% |
+| `2–<4 ft` | 0.8230% | 0.6450% |
+| `4–<6 ft` | 3.4522% | 2.7056% |
+| `6–<8 ft` | 11.2131% | 8.7882% |
+| `8–<12 ft` | 29.9249% | 23.4535% |
+| `≥12 ft` | 58.3104% | 45.7006% |
+
+These are reference-assembly outputs, not one hidden whole-plant curve. Runtime evaluates each failure unit
+separately, applies the matching value bucket, and allocates support cost once.
+
+## Preserved research history
+
+The complete model v0.1 docs r1/r2 scaffold remains under [`proposed/`](proposed/). It records the rejected
+legacy continuous converter/logistic approach, bounded evidence search, source and claim registers, site
+adapter, value crosswalk, and the original fail-closed decision. It is superseded for runtime but remains the
+scientific and governance audit trail.
+
+The portable library v2.5 is unchanged. Consumers must poll the repository artifact index and pin
+`wildfire_solar@model_v1_0__docs_r3` plus artifact schema and SHA-256.

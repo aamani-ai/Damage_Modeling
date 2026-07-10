@@ -2,105 +2,172 @@
 
 ## 1. Purpose
 
-The library must not rely on prose caveats to prevent unsupported metrics. Every cell must carry a machine-readable capability declaration.
-
-The goal is:
+Every runtime cell must state what its damage emit contains and what a downstream consumer must supply. The
+declaration prevents two opposite errors:
 
 ```text
-unsupported metric → withheld by code
-not: unsupported metric → emitted with a footnote
+unsupported metric -> emitted with a footnote
+valid consumer-built metric -> blocked because the curve itself has no annual distribution
 ```
 
-## 2. Required capability block
+Capability schema v2 separates the curve's intrinsic vulnerability information from the annual loss
+distribution built by Hazard or another consumer.
+
+## 2. The boundary that v1 blurred
+
+A scalar damage curve cannot create a tail distribution by itself. That statement remains true.
+
+It does not follow that a consumer must withhold every PML, VaR, or TVaR. A consumer can build a valid annual
+loss distribution by sampling hazard frequency, event intensity, coupling, and exposure, then applying the
+deterministic curve to each sampled event.
+
+```text
+curve-intrinsic vulnerability spread
+  DR | fixed intensity, asset state
+  -> carried only if the damage emit contains bounds, states, parameters, or an ensemble
+
+frequency-driven annual loss distribution
+  sampled event count + intensity + coupling + deterministic DR + value + caps
+  -> built and owned by the downstream consumer
+```
+
+The second distribution is conditional on deterministic vulnerability when the first is absent. It may support
+annual tail metrics, but it must carry a limitation flag saying vulnerability spread was not modeled.
+
+## 3. Required capability block
 
 ```yaml
 capability_declaration:
-  schema_version: capability_declaration.v1
+  schema_version: capability_declaration.v2
   cell_id: <cell_id>
-  spread_carried: true | false
-  emit_modes_populated_by_cell:
-    - scalar_mean
-    - discrete_state_table
-    - parametric_distribution
-    - state_ensemble
-  metrics_supportable:
-    failure_unit_scalar_dr: supported | conditional | withheld
-    scenario_loss_given_value_basis: supported | conditional | withheld
-    scalar_eal: supported | conditional_require_cap_binding_preflight | withheld
-    pml: supported | withheld
-    var: supported | withheld
-    tvar: supported | withheld
+
+  vulnerability_emit:
+    failure_unit_scalar_dr: supported | withheld
+    scenario_loss_given_value_basis: supported_with_explicit_value_and_exposure_basis | withheld
+    curve_intrinsic_spread: carried | not_carried | not_applicable_no_runtime_curve
+    populated_emit_modes:
+      - scalar_mean
+
+  consumer_annual_metrics:
+    computation_owner: downstream_consumer
+    frequency_driven_annual_loss_distribution: supported_if_consumer_samples_frequency_intensity_coupling_and_applies_caps | withheld_no_runtime_curve
+    vulnerability_uncertainty_distribution: supported_by_curve_emit | not_supported_curve_intrinsic_spread_not_carried | withheld_no_runtime_curve
+    eal: consumer_computable_with_prerequisites | withheld
+    pml: consumer_computable_from_validated_annual_loss_distribution | withheld
+    var: consumer_computable_from_validated_annual_loss_distribution | withheld
+    tvar: consumer_computable_from_validated_annual_loss_distribution | withheld
+    prerequisites: [...]
+    limitation_flags: [...]
+
   cap_binding:
-    policy: pass_required | fail_closed | not_applicable
-    preflight_status: pass | fail | not_executed_no_distribution | not_executed_no_value_basis
-    required_before_scalar_eal: true | false
-    tolerance_pct: <number>
-    action_if_fail: require_mean_plus_spread_emit
+    policy: consumer_enforced_fail_closed | not_applicable
+    enforcement_owner: downstream_consumer | not_applicable
+    status: not_evaluated_by_damage_artifact | consumer_pass | consumer_fail | not_applicable
+    checks_required: [...]
+    action_if_fail: <rule>
 ```
 
-## 3. Metric support definitions
+## 4. Metric support matrix
 
-| Metric | Support rule |
-|---|---|
-| Failure-unit scalar DR | Supported when the cell has a deterministic curve for the requested input and metadata. |
-| Scenario loss | Supported only with an explicit value basis and exposure basis. |
-| Scalar EAL | Conditional unless the cell has a hazard frequency layer, value basis, and a passing cap-binding preflight. |
-| PML / VaR / TVaR | Withheld unless the emitted object actually carries a distribution/spread relevant to that metric. |
+| Available objects | EAL | PML / VaR / TVaR | Required interpretation |
+|---|---|---|---|
+| Damage artifact alone; no frequency object | Withhold | Withhold | The damage repo does not own annual frequency or metrics. |
+| One scalar expected loss with no event/annual distribution | Mean only if its probability weighting is explicit and the path is linear | Withhold | Never assume a tail shape around one mean. |
+| Sampled hazard count/intensity/coupling + deterministic curve + value/exposure | Consumer-computable | Consumer-computable from the resulting annual vector | Flag `CURVE_INTRINSIC_SPREAD_NOT_CARRIED`. |
+| Same consumer distribution + curve-intrinsic states/spread | Consumer-computable | Consumer-computable with vulnerability spread represented | State which uncertainty sources were sampled. |
+| No runtime curve | Withhold | Withhold | `NO_RUNTIME_CURVE` remains load-bearing. |
 
-## 4. Cap-binding preflight
+The damage declaration authorizes or withholds inputs to consumer computation. It does not compute EAL, PML,
+VaR, or TVaR.
 
-When downstream code wants scalar EAL from a cell that has saturation caps, replacement caps, value caps, or bounded failure-unit aggregation, it must compare the scalar/collapsed calculation against a capped spread calculation.
+## 5. Minimum consumer prerequisites
 
-Minimum known-answer check:
+For frequency-driven annual metrics, the consumer must bind:
 
 ```text
-uncapped_or_scalar_mean = loss_function(E[state])
-capped_MC_mean          = E[min(loss_function(state_j), cap)]
-relative_bias           = (uncapped_or_scalar_mean - capped_MC_mean) / capped_MC_mean
+- a hazard occurrence/count model;
+- an event-intensity or state distribution;
+- a coupling/exposure model;
+- a pinned damage artifact and passing known-answer tests;
+- an explicit value basis and loss denominator;
+- any failure-unit, occurrence, annual, or TIV cap inside the simulation;
+- enough simulated or analytical support for the requested return period;
+- provenance for every approximation and limitation flag.
 ```
 
-Because `min(loss, cap)` is concave, a scalar mean applied before the cap can overstate capped expected loss when the cap binds within the spread. The sign/magnitude must be checked rather than assumed away.
+If any load-bearing item is missing, the affected metric is withheld. The absence of curve-intrinsic spread by
+itself does not veto a tail that is honestly generated by the other sampled dimensions.
 
-Pass condition:
+## 6. Cap-binding rule
+
+Caps must act at their actual grain:
 
 ```text
-abs(relative_bias) <= tolerance_pct
+failure-unit cap -> apply to each failure-unit event loss
+occurrence cap   -> apply to each occurrence
+annual/TIV cap   -> apply to the simulated annual aggregate
+financial terms -> consumer layer, applied at the policy-defined grain
 ```
 
-Default tolerance for generic v1 cells:
+Do not replace a capped simulation with a calculation that applies a cap after averaging. If a consumer uses
+an analytic or scalar shortcut, it must compare that shortcut with the fully capped event/annual calculation.
 
 ```text
-2.5% of capped expected loss
+shortcut_mean  = shortcut calculation
+capped_mean    = mean of losses with caps applied at the correct grain
+relative_bias  = (shortcut_mean - capped_mean) / capped_mean
 ```
 
-Fail action:
+The tolerance is consumer- and use-case-specific. A legacy 2.5% screening tolerance may be retained only when
+declared; it is no longer an implicit universal standard.
+
+Failure action:
 
 ```text
-scalar_eal = withheld
-emit must climb to mean+spread or state ensemble
+withhold the affected shortcut metric or use the full capped simulation
 ```
 
-## 5. Fail-closed rule
+## 7. Withhold-not-caveat rule
 
-If the package does not contain the downstream hazard frequency distribution, state distribution, or value cap needed to run the preflight, the cell must declare:
-
-```yaml
-preflight_status: not_executed_no_distribution
-scalar_eal: conditional_require_cap_binding_preflight
-```
-
-That is not a model failure. It is an honesty gate.
-
-## 6. Distribution-ready seam
-
-The damage-code output object must be able to carry any of the following without schema change:
+Withholding remains mandatory when the requested number is structurally unsupported:
 
 ```text
-scalar_mean
-scalar_mean_plus_bounds
-discrete_state_table
-parametric_distribution
-state_ensemble
+NO_RUNTIME_CURVE
+MISSING_VALUE_BASIS
+MISSING_EXPOSURE_OR_COUPLING
+MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION
+CAPS_NOT_APPLIED_AT_CORRECT_GRAIN
+RETURN_PERIOD_NOT_RESOLVED
 ```
 
-A v1 cell may populate only scalar means. The seam must still be wide enough for future cells that need spread.
+A limitation is different from a structural absence. For example:
+
+```text
+CURVE_INTRINSIC_SPREAD_NOT_CARRIED
+  -> annual tail may still be computed from sampled hazard events
+  -> label it conditional on deterministic vulnerability
+  -> do not claim it represents vulnerability uncertainty
+```
+
+This keeps the reliability principle without blocking a valid downstream compound-Poisson or event-catalog
+simulation.
+
+## 8. Schema v1 migration
+
+`capability_declaration.v1` used `metrics_supportable.pml/var/tvar = withheld_no_tail_distribution`. Read
+literally, that field blocked a consumer even when the consumer had a full annual loss distribution from
+frequency and event severity.
+
+Migration:
+
+```text
+v1 spread_carried=false
+  -> v2 vulnerability_emit.curve_intrinsic_spread=not_carried
+
+v1 pml/var/tvar=withheld_no_tail_distribution
+  -> v2 consumer metric is allowed only from a validated consumer-built annual loss distribution
+  -> attach CURVE_INTRINSIC_SPREAD_NOT_CARRIED
+```
+
+Proposed cells with no runtime curve remain withheld in v2; this migration does not weaken
+`NO_RUNTIME_CURVE`.

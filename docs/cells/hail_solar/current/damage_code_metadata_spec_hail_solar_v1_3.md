@@ -35,6 +35,8 @@ curve_output_grain: failure_unit_damage_ratio
 | `bridge_assumption_version` | Conditional | string | n/a | Required if KE proxy is used. |
 | `bridge_notes` | Conditional | text | n/a | Mass/velocity assumptions. |
 
+The current KE bridge is a vertical-fall reference bridge. It does not include event wind vector, tracker orientation, or contact-normal impact energy.
+
 ---
 
 ## 4. Selectors — fixed asset attributes
@@ -77,6 +79,19 @@ DR_conditioned(D)
 
 `P(stowed)` is not hail frequency. It is event-time state uncertainty.
 
+### 5.1 Deferred wind-driven hail conditioner
+
+Wind-driven hail is documented as a future conditioner / contact-intensity bridge candidate, not as a current required input. These candidate fields are intentionally **not** active in v1.3 runtime logic:
+
+| Candidate field | Current status | Intended future role |
+|---|---|---|
+| `hail_event_wind_speed_mps` | Deferred | Event wind speed during damaging hail. |
+| `hail_event_wind_direction_deg` | Deferred | Event wind direction during damaging hail. |
+| `tracker_stow_orientation_deg` | Deferred | Direction the module face/back was oriented during stow. |
+| `normal_ke_multiplier` | Deferred / derived | Contact-normal energy modifier from wind vector, hail trajectory, stow angle, and orientation. |
+
+Adding any of these as output-changing runtime fields would be a `MODEL_BEHAVIOR_CHANGE`, not a docs-only update.
+
 ---
 
 ## 6. Exposure geometry
@@ -88,13 +103,27 @@ DR_conditioned(D)
 
 ---
 
-## 7. Value concentration
+## 7. Value linkage and denominator
 
 | Field | Required | Type | Example | Notes |
 |---|---:|---|---|---|
-| `f_hail_material_share` | Required for loss application | number 0–1 | `0.75` | Share of PV_ARRAY value exposed to module glass/cell replacement damage. |
-| `f_kind` | Yes | enum | `material_share` | Hail f is a material share, not flood-style geometry. |
-| `value_bucket` | Yes for loss application | enum/string | `PV_ARRAY_MODULE_EXPOSED` | Links to valuation ledger. |
+| `value_profile_id` | Required for reference asset-loss application | enum/string | `HAIL_HAZARD_REFERENCE_ADAPTER_V1` | Selects an artifact-published profile; there is no implicit default. |
+| `site_value_basis` | Alternative to profile | object | site schedule of values | Supplies site-specific direct module value, denominator, and support-cost allocation. |
+| `value_bucket` | Yes for loss application | enum/string | `PV_ARRAY_MODULE_EXPOSED` | Links DR to the module failure-unit value bucket. |
+| `at_risk_fraction` | Optional / site-specific | number 0–1 | `0.90` | Use only when part of the module inventory is inapplicable; default 1.0 for the selected failure-unit bucket. |
+| `denominator` | Yes for reported percentage | enum | `physical_replaceable_base` | Also supports `installed_capex` or a named insured TIV; the label travels with the number. |
+
+Published profiles:
+
+| Profile | Physical-base share | Installed-capex share | Allocation meaning |
+|---|---:|---:|---|
+| `HAIL_DIRECT_MODULE_HARDWARE_ONLY_V1` | 0.3317569801903719 | 0.2600132602142186 | Direct module hardware only. |
+| `HAIL_HAZARD_REFERENCE_ADAPTER_V1` | 0.4535037224398962 | 0.3554318022885826 | Module hardware plus all general replacement fieldwork in `Solar_Map!15`; T4 compatibility scenario. |
+
+The former `f_hail_material_share = 0.75/0.8` examples are deprecated. They double-concentrated value after
+the bucket had already been narrowed to module hardware and created inconsistent 19.5%/20.8% TIV caps. The
+35.543% Hazard-compatible view is explicit and reproducible but remains a support-cost allocation scenario,
+not an intrinsic fragility cap.
 
 ---
 
@@ -136,6 +165,8 @@ DR_conditioned(D)
 | `subsystem_loss_fraction` | Optional | PV_ARRAY loss fraction if value linkage is available. |
 | `physical_base_loss_fraction` | Optional | Loss fraction of physical replaceable base if valuation inputs are supplied. |
 | `tiv_loss_fraction` | Optional | Loss fraction of installed capex/TIV if basis inputs are supplied. |
+| `value_profile_id_used` | Required for reference value-linked outputs | Named profile used to produce the asset-loss view. |
+| `loss_denominator_used` | Required for percentage outputs | `physical_replaceable_base`, `installed_capex`, or named insured TIV. |
 | `metadata_flags` | Yes | Flags such as `cap_sensitive`, `stow_unknown`, `curve_public_source_derived`, `stow_adjustment_placeholder`. |
 | `reviewed_secondary_units` | Yes | List of other reviewed subsystems and v1 treatment. |
 
@@ -172,40 +203,48 @@ stow_angle_deg: 60
 stow_confirmation: confirmed_by_SCADA
 array_exposure_fraction: 0.72
 exposure_basis: footprint_overlay
-f_hail_material_share: 0.75
+value_profile_id: HAIL_HAZARD_REFERENCE_ADAPTER_V1
+denominator: installed_capex
 value_bucket: PV_ARRAY_MODULE_EXPOSED
 ```
 
 ---
 
-## v2.5 machine-readable artifact and capability declaration
+## Repository-current machine-readable artifact and capability declaration
 
 Canonical runtime artifact:
 
 ```text
-hail_solar__model_v1_0__docs_r5__curve_artifact.json
+hail_solar__model_v1_0__docs_r7__curve_artifact.json
 ```
 
-The JSON artifact is the preferred machine-readable source for M3/runtime consumers. The workbook remains a derivation/audit view.
+The JSON artifact and its known-answer file are the preferred machine-readable sources for M3/runtime
+consumers. The workbook remains a derivation/audit view; its older 0.8 at-risk example is not the runtime value
+contract.
 
 ```yaml
 capability_declaration:
-  schema_version: capability_declaration.v1
+  schema_version: capability_declaration.v2
   cell_id: hail_solar
-  spread_carried: false
-  metrics_supportable:
+  vulnerability_emit:
     failure_unit_scalar_dr: supported
     scenario_loss_given_value_basis: supported_with_explicit_value_and_exposure_basis
-    scalar_eal: conditional_require_cap_binding_preflight
-    pml: withheld_no_tail_distribution
-    var: withheld_no_tail_distribution
-    tvar: withheld_no_tail_distribution
+    curve_intrinsic_spread: not_carried
+    populated_emit_modes: [scalar_mean]
+  consumer_annual_metrics:
+    computation_owner: downstream_consumer
+    frequency_driven_annual_loss_distribution: supported_if_consumer_samples_frequency_intensity_coupling_and_applies_caps
+    vulnerability_uncertainty_distribution: not_supported_curve_intrinsic_spread_not_carried
+    eal: consumer_computable_with_prerequisites
+    pml: consumer_computable_from_validated_annual_loss_distribution
+    var: consumer_computable_from_validated_annual_loss_distribution
+    tvar: consumer_computable_from_validated_annual_loss_distribution
   cap_binding:
-    policy: fail_closed
-    preflight_status: not_executed_no_downstream_frequency_or_state_distribution
-    required_before_scalar_eal: true
-    tolerance_pct: 2.5
-    action_if_fail: require_mean_plus_spread_emit
+    policy: consumer_enforced_fail_closed
+    enforcement_owner: downstream_consumer
+    status: not_evaluated_by_damage_artifact
 ```
 
-Runtime consumers must withhold scalar EAL unless a downstream frequency/value/cap-binding preflight result is attached and passing.
+Runtime consumers may compute annual metrics only from a validated annual loss distribution with explicit
+frequency, intensity, coupling, value, exposure, and correct-grain caps. They must flag that curve-intrinsic
+vulnerability spread is not carried.

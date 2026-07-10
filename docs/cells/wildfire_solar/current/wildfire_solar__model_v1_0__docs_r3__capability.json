@@ -1,0 +1,50 @@
+{
+  "schema_version": "capability_declaration.v2",
+  "cell_id": "wildfire_solar",
+  "vulnerability_emit": {
+    "failure_unit_scalar_dr": "supported",
+    "scenario_loss_given_value_basis": "supported_with_explicit_value_and_exposure_basis",
+    "curve_intrinsic_spread": "not_carried",
+    "populated_emit_modes": [
+      "scalar_mean"
+    ],
+    "withheld_reason_codes": [
+      "EXPLICIT_VALUE_PROFILE_OR_SITE_VALUE_BASIS_REQUIRED"
+    ]
+  },
+  "consumer_annual_metrics": {
+    "computation_owner": "downstream_consumer",
+    "frequency_driven_annual_loss_distribution": "supported_if_consumer_samples_frequency_intensity_coupling_and_applies_caps",
+    "vulnerability_uncertainty_distribution": "not_supported_curve_intrinsic_spread_not_carried",
+    "eal": "consumer_computable_with_prerequisites",
+    "pml": "consumer_computable_from_validated_annual_loss_distribution",
+    "var": "consumer_computable_from_validated_annual_loss_distribution",
+    "tvar": "consumer_computable_from_validated_annual_loss_distribution",
+    "prerequisites": [
+      "source-native FSim burn probability in the frequency layer",
+      "six-bin conditional flame-length distribution or one sampled exact class",
+      "explicit wildfire_solar value profile or complete site failure-unit values",
+      "consumer event sampling and aggregation validated",
+      "financial caps and terms applied after physical loss with cap-binding checks"
+    ],
+    "limitation_flags": [
+      "SCREENING_ENGINEERING_PROXY",
+      "NOT_FIELD_CALIBRATED",
+      "NOT_CLAIMS_CALIBRATED",
+      "FSIM_CLASS_IS_NOT_LOCAL_HEAT_FLUX",
+      "CURVE_INTRINSIC_SPREAD_NOT_CARRIED"
+    ]
+  },
+  "cap_binding": {
+    "policy": "consumer_enforced_fail_closed",
+    "enforcement_owner": "downstream_consumer",
+    "status": "not_evaluated_by_damage_artifact",
+    "checks_required": [
+      "validate annual event sampling and FSim frequency/severity separation",
+      "compare uncapped and capped annual loss on the selected value basis",
+      "verify per-event and aggregate caps against the physical value exposed",
+      "withhold reportable annual metrics if consumer cap-binding validation fails"
+    ],
+    "action_if_fail": "withhold reportable annual metrics until the downstream cap-binding and aggregation checks pass"
+  }
+}

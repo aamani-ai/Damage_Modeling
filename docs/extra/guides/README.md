@@ -10,6 +10,7 @@ the canonical files and explain the normal process.
 | Guide | Use when |
 |---|---|
 | [`hail_solar_curve_request_guide.md`](hail_solar_curve_request_guide.md) | Someone asks for the current solar hail curve or how Hazard should consume it. |
+| [`wildfire_solar_curve_request_guide.md`](wildfire_solar_curve_request_guide.md) | Someone asks for a wildfire x solar curve, multi-subsystem damage treatment, or why the current scaffold must withhold numerical outputs. |
 | [`source_drop_ingestion_guide.md`](source_drop_ingestion_guide.md) | A new ZIP/source drop arrives and needs inventory, classification, promotion, or staging. |
 | [`damage_curve_skill_usage_guide.md`](damage_curve_skill_usage_guide.md) | Deciding whether `damage_curve_skill` should operate directly in-repo or through an outside package/ZIP flow. |
 

@@ -105,6 +105,19 @@ E_proxy = 0.5 × m(D) × v(D)^2
 
 but it is not required as the native hazard input because most hazard catalogs and provider data supply hail size/MESH rather than mass, velocity, and stone concentration.
 
+Wind-driven hail does not change that x-axis decision. VDE's 2026 hail model update supports a more precise caveat: event wind speed/direction can modify the hail trajectory and the normal impact energy at the module face. In v1.0, that effect remains an open contact-intensity seam / spread term, not a replacement for `mesh_diameter_mm`.
+
+```text
+diameter/MESH
+    selected operational x-axis
+
+diameter -> KE
+    vertical-fall reference bridge
+
+event wind vector + stow orientation
+    future conditioner / contact-intensity bridge candidate
+```
+
 ---
 
 ## 5. Base curve form
@@ -187,7 +200,7 @@ D50_stowed = D50_selected + 8 mm
 max_DR_stowed = 0.90
 ```
 
-This is explicitly a placeholder until tracker/stow-specific evidence is available.
+This is explicitly a placeholder until tracker/stow-specific evidence is available. Wind-driven hail is now called out as part of that same placeholder: the stow adjustment should eventually account for event wind direction/speed and tracker orientation because face-on wind-driven impacts can reduce the intended glancing-impact benefit.
 
 ---
 
@@ -205,7 +218,7 @@ For this cell:
 failure_unit_damage_ratio = PV_MODULE glass/cell replacement DR
 ```
 
-If valuation inputs are present, the workbook can also show:
+If valuation inputs are present, the repository-current JSON can also show:
 
 ```text
 PV_ARRAY loss %
@@ -214,7 +227,9 @@ TIV loss %
 loss dollars
 ```
 
-But those are downstream value-linked views, not the core damage-code requirement.
+But those are downstream value-linked views, not the core damage-code requirement. Docs r7 requires a named
+value profile or site-specific value basis and reports the denominator explicitly. The old workbook's generic
+0.8 at-risk example is retained as scenario history, not a runtime default.
 
 ---
 
@@ -229,6 +244,6 @@ flood × solar
 because it exercises the next major modeling seam:
 
 ```text
-hail f  = material-share within PV_ARRAY
+hail value link = named module/support-cost profile plus optional site-specific at-risk fraction
 flood f = geometry/elevation share based on what equipment is below waterline
 ```

@@ -163,12 +163,12 @@ with asset-specific values.
 
 ---
 
-## v2.5 runtime artifact
+## Repository-current runtime artifact
 
 Canonical machine-readable curve artifact:
 
 ```text
-strong_wind_solar__model_v1_0__docs_r2__curve_artifact.json
+strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json
 ```
 
 Use the JSON artifact for runtime/M3 integration. Use the workbook for derivation audit and dashboard review.

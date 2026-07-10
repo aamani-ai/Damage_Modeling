@@ -29,7 +29,10 @@ damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx
 | Parameter derivation | dossier derivation section; workbook `Hail_Base_Curve_Fit` |
 | Selector rules | `damage_code_metadata_spec_hail_solar_v1_3.md`; workbook `Hail_Variant_Catalog` |
 | Conditioner rules | `damage_code_metadata_spec_hail_solar_v1_3.md`; workbook `Hail_Adjustment_Rules` |
-| Exposure/value scaling | workbook `Value_Link`, `Hail_Site_Loss`, `Hail_Sensitivity` |
+| Wind-driven hail / stow-interaction caveat | `hail_solar_curve_derivation_dossier_v1_3.md`; `damage_code_metadata_spec_hail_solar_v1_3.md`; docs r6 evidence memo |
+| Exposure/value scaling | docs r7 JSON `value_linkage`; workbook `Value_Link`, `Hail_Site_Loss`, `Hail_Sensitivity` retained as derivation/scenario history |
+| Evaluator equation and KATs | docs r7 JSON `evaluation_contract`; `known_answer_tests_hail_solar__model_v1_0__docs_r7.json` |
+| Consumer pin / changelog | `../CHANGELOG.json`; repo artifact index |
 | Assumption register | workbook `Hail_Assumption_Register` |
 | Open seams | workbook `Open_Seams_Index`; dossier open seams section |
 | Damage-code interface | `damage_code_metadata_spec_hail_solar_v1_3.md` |

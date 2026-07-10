@@ -27,20 +27,31 @@ parametric_distribution
 state_ensemble
 ```
 
-## Metric gate
+## Metric gate — capability v2
 
 M4 must inspect:
 
 ```text
-capability_declaration.metrics_supportable
+capability_declaration.vulnerability_emit
+capability_declaration.consumer_annual_metrics
+capability_declaration.cap_binding
 ```
 
 before computing or publishing EAL, PML, VaR, TVaR, or return-period metrics.
 
-If the cell says:
+A deterministic `scalar_mean` vulnerability response may be applied separately to every event in
+Hazard's frequency simulation. M4 may then compute an annual loss distribution and its metrics when
+`consumer_annual_metrics` allows them. The result must carry the capability's required label that
+curve-intrinsic spread is not represented.
+
+Withhold annual metrics when either of these load-bearing inputs is absent:
 
 ```text
-scalar_eal: conditional_require_cap_binding_preflight
+- no runtime curve/ordinate is available for the selected cell; or
+- the consumer has no event/annual loss distribution for a distributional metric.
 ```
 
-then M4 must attach a passing cap-binding preflight result or withhold scalar EAL.
+Do not infer a blanket tail veto from missing curve-intrinsic spread. Conversely, do not describe a
+frequency-driven annual tail as including vulnerability uncertainty when the capability says it does
+not. If a cell publishes a true conditional damage distribution and `cap_binding` requires a
+preflight, M4 must preserve that distribution through the cap or withhold the affected calculation.

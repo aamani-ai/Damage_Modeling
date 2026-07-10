@@ -157,34 +157,35 @@ flags:
 
 ---
 
-## v2.5 machine-readable artifact and capability declaration
+## Repository-current machine-readable artifact and capability declaration
 
 Canonical runtime artifact:
 
 ```text
-strong_wind_solar__model_v1_0__docs_r2__curve_artifact.json
+strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json
 ```
 
 The JSON artifact is the preferred machine-readable source for M3/runtime consumers. The workbook remains a derivation/audit view.
 
 ```yaml
 capability_declaration:
-  schema_version: capability_declaration.v1
+  schema_version: capability_declaration.v2
   cell_id: strong_wind_solar
-  spread_carried: false
-  metrics_supportable:
+  vulnerability_emit:
     failure_unit_scalar_dr: supported
     scenario_loss_given_value_basis: supported_with_explicit_value_and_exposure_basis
-    scalar_eal: conditional_require_cap_binding_preflight
-    pml: withheld_no_tail_distribution
-    var: withheld_no_tail_distribution
-    tvar: withheld_no_tail_distribution
+    curve_intrinsic_spread: not_carried
+  consumer_annual_metrics:
+    frequency_driven_annual_loss_distribution: supported_if_consumer_samples_frequency_intensity_coupling_and_applies_caps
+    vulnerability_uncertainty_distribution: not_supported_curve_intrinsic_spread_not_carried
+    eal: consumer_computable_with_prerequisites
+    pml: consumer_computable_from_validated_annual_loss_distribution
+    var: consumer_computable_from_validated_annual_loss_distribution
+    tvar: consumer_computable_from_validated_annual_loss_distribution
   cap_binding:
-    policy: fail_closed
-    preflight_status: not_executed_no_downstream_frequency_or_state_distribution
-    required_before_scalar_eal: true
-    tolerance_pct: 2.5
-    action_if_fail: require_mean_plus_spread_emit
+    policy: consumer_enforced_fail_closed
+    enforcement_owner: downstream_consumer
 ```
 
-Runtime consumers must withhold scalar EAL unless a downstream frequency/value/cap-binding preflight result is attached and passing.
+Runtime consumers may compute annual metrics from a validated frequency-driven loss distribution and must
+flag that curve-intrinsic vulnerability spread is not carried.

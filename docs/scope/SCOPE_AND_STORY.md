@@ -100,15 +100,16 @@ metrics").
 | **Curve form** + parameters + anchoring/saturation | **EAL / PML / VaR / TVaR** computation |
 | **Coverage roles** (primary / conditioner / exposure / DR≈0) | **Financial terms** (deductibles, limits, claims-made) |
 | **Evidence / provenance** (source cards, assumption register) | **Portfolio** accumulation across sites |
-| **Value linkage** (subsystem value share, basis, at-risk `f`) | The **ship / withhold** decision for tail metrics |
-| The **emit object** + a **capability declaration** *(see §6)* | Enforcing that declaration when computing metrics |
+| **Value linkage** (subsystem value share, denominator, named allocation profile, at-risk fraction) | The **annual distribution and metric calculation** |
+| The **emit object** + a **capability declaration** *(see §6)* | Enforcing prerequisites, caps, and limitation flags when computing metrics |
 
-**The EAL/PML boundary, resolved.** Metric *computation* is the consumer's job. What stays on the damage side
-is only the **emit object** (scalar / spread / state / distribution) and a one-line **capability declaration**
-per curve — `metrics_supportable`, `cap_binding`, `spread_carried` — because only the curve knows whether it
-*can* support an honest tail. The damage curve **declares**; the hazard repo **computes and enforces**. (This
-demotes the old "metrics & tail-honesty" question from a deep damage-modeling section to a contract field plus
-one shared principle: *never fabricate a tail from a mean.*)
+**The EAL/PML boundary, refined by the consumer.** Metric *computation* is the consumer's job. The damage side
+declares what vulnerability object it emits, whether curve-intrinsic spread is carried, which value/exposure
+bases are valid, and which caps must be enforced. A deterministic curve cannot manufacture a tail by itself,
+but Hazard can build a valid **frequency-driven annual loss distribution** by sampling event counts,
+intensities, and coupling and applying the curve to every event. That distribution may support EAL/PML/VaR/
+TVaR while carrying `CURVE_INTRINSIC_SPREAD_NOT_CARRIED`. The prohibited shortcut is one mean loss plus an
+assumed tail shape—not a consumer Monte Carlo with real sampled hazard states.
 
 ---
 
@@ -155,10 +156,10 @@ EAL-% incident was version drift). The defense is a **published, versioned contr
      · curve params (JSON)                              damage_code(
      · damage_code() API                                   intensity,        ← from M1/M2
      · capability declaration                              selectors,        ← fixed asset attrs
-         metrics_supportable: [EAL]                        conditioners,     ← event-time states
-         cap_binding: <where>                              exposure )        ← fraction touched
-         spread_carried: no                             → { DR, damage_state, flags,
-     · cell_damage_model_version: v1.0                       confidence, metrics_supportable }
+         curve_intrinsic_spread: no                        conditioners,     ← event-time states
+         consumer annual metrics: conditional              exposure )        ← fraction touched
+         cap enforcement: consumer                      → { DR, damage_state, flags,
+     · cell damage-model + docs pin                          confidence, limitation flags }
 ```
 
 - **Versioning (standard 17 / VERSION_REGISTRY):** three separate streams — *package version* ≠ *cell
@@ -272,10 +273,11 @@ damage artifacts; it should not maintain a second copy of the curve library.
   site-conditioned delivered-exposure and economic-loss bridge is supported.
 - **Parked** (carried, not lost): portfolio accumulation · cascade / conditional subsystem failure ·
   financial terms · component-attribute depth (stow-angle physics, Phase-3).
-- **The one cross-cutting open seam:** **secondary uncertainty / the spread.** Runtime-capable cells are
-  strong on the mean and thin on the spread; where scalar EAL is supportable they declare it explicitly.
-  Proposed scaffolds may fail earlier and withhold every metric—as wildfire×solar currently does when
-  the local-exposure bridge is absent. Both behaviors report where evidence runs out.
+- **The one cross-cutting open seam:** **secondary uncertainty / curve-intrinsic spread.** Runtime-capable
+  cells are strong on deterministic mean vulnerability and thin on vulnerability spread. Consumers may still
+  build frequency-driven annual distributions from sampled hazards, with an explicit limitation flag.
+  Proposed scaffolds may fail earlier and withhold every metric—as wildfire×solar currently does when the
+  local-exposure bridge and runtime curve are absent. Both behaviors report where evidence runs out.
 
 ---
 

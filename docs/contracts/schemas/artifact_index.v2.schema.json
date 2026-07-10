@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "damage_curve_library.damage_curve_artifact_index.v2",
+  "title": "Damage-curve artifact index v2",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "portable_package_baseline",
+    "repository_contract_revision",
+    "polling_contract",
+    "artifacts",
+    "runtime_preference"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "damage_curve_artifact_index.v2"
+    },
+    "portable_package_baseline": {
+      "type": "string"
+    },
+    "repository_contract_revision": {
+      "type": "string"
+    },
+    "polling_contract": {
+      "type": "object",
+      "required": ["strategy", "consumer_pin_fields"],
+      "properties": {
+        "strategy": {
+          "const": "poll_index_then_compare_cell_pin_and_sha256"
+        },
+        "consumer_pin_fields": {
+          "type": "array",
+          "const": [
+            "cell_id",
+            "semantic_damage_model_version",
+            "documentation_revision",
+            "artifact_schema_version",
+            "sha256"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "cell_id",
+          "damage_code_id",
+          "semantic_damage_model_version",
+          "documentation_revision",
+          "consumer_pin",
+          "artifact_schema_version",
+          "capability_schema_version",
+          "publication_status",
+          "path",
+          "sha256",
+          "changelog_path"
+        ],
+        "properties": {
+          "cell_id": {"type": "string"},
+          "damage_code_id": {"type": "string"},
+          "semantic_damage_model_version": {"type": "string"},
+          "documentation_revision": {"type": "string"},
+          "consumer_pin": {"type": "string"},
+          "artifact_schema_version": {"type": "string"},
+          "capability_schema_version": {"type": "string"},
+          "publication_status": {
+            "enum": [
+              "repository_canonical_not_in_portable_package",
+              "portable_package_canonical"
+            ]
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^docs/cells/"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "changelog_path": {
+            "type": "string",
+            "pattern": "^docs/cells/"
+          },
+          "known_answer_tests_path": {
+            "type": "string",
+            "pattern": "^docs/cells/"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "runtime_preference": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

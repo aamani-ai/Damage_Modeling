@@ -1,215 +1,225 @@
-# 06 · Metrics & tail honesty — what ships, and what we refuse to ship  🟢 DECIDED (v1)
+# 06 · Metrics & tail honesty — separate the vulnerability spread from the consumer tail  🟢 REFINED
 
-The direct consumer of [`05`](05_emit_object.md), and the last of the foundational decisions. Given
-that v1 emits a **scalar** where the path is linear, *which risk metrics may we report, and how
-honestly?* This is where the whole damage layer either keeps faith with `basics_spot_on` or quietly
-re-commits the old model's exact sin. The decision: **ship what the emit object can honestly
-produce, and treat what it can't as a structural absence — never a caveat-able shortfall.**
+The direct consumer of [`05`](05_emit_object.md), and the last foundational boundary. The reliability rule
+still stands: **never fabricate a tail from a mean**. The consumer audit clarified what that sentence does and
+does not prohibit.
 
-*Source key:* consumes [`05`](05_emit_object.md) (the emit object + the first-nonlinearity rule) and
-its `cap-rarely-binds` condition; principles = `basics_spot_on` (this is the metric side of its
-incident), `system_coherence_over_local_elegance`, `reference_is_input_not_authority`. `[OURS]`
-derived; `[REF]` inherited.
+*Source key:* consumes [`05`](05_emit_object.md), the first-nonlinearity rule, and the consumer boundary in
+the damage-code contract. Principles = `basics_spot_on`, `system_coherence_over_local_elegance`, and
+`reference_is_input_not_authority`. `[OURS]` derived; `[REF]` inherited.
 
 ---
 
-## 1 · The question, framed by the nonlinearity rule
+## 1 · The distinction the original v1 decision missed
 
-Doc [`05`](05_emit_object.md) established: a scalar mean survives only a **linear** path; the moment
-a nonlinearity sits between the curve and the metric, `E[f(L)] ≠ f(E[L])` and the scalar is wrong.
-The three nonlinearities are **N-cap** (saturation), **N-fin** (financial terms, parked), and
-**N-quant** (the quantile operator — VaR/PML/TVaR *are* quantiles). So the metric you price decides
-whether a scalar can honestly produce it.
+There are two different distributions:
 
-This doc turns that into a *shipping policy*: for each metric, is it honestly producible from the v1
-emit, and if not, what do we do about it?
+```text
+A. curve-intrinsic vulnerability distribution
+   DR | fixed hazard intensity, asset selectors, and event state
+
+B. consumer annual loss distribution
+   event count + event intensity + coupling + exposure + DR + value + caps
+```
+
+A scalar curve does not contain distribution A. That is a real limitation.
+
+But a consumer may have full distributions for event count, intensity, footprint, and coupling. Applying the
+deterministic curve to each sampled event produces distribution B. PML/VaR/TVaR read from B are not fabricated
+from a mean; they are conditional on deterministic vulnerability.
+
+The old v1 wording collapsed A and B and therefore over-withheld downstream metrics.
 
 ---
 
-## 2 · The metric partition — EAL-class vs tail-class `[OURS]`
+## 2 · What “never fabricate a tail from a mean” means
 
-```
-   EAL-CLASS  (a MEAN of the loss — survives a scalar on a linear path)
-        EAL / expected annual loss / average annual loss
-        -> producible from a scalar  *iff*  the path is linear (cap rarely binds, no terms)
+Prohibited:
 
-   TAIL-CLASS  (a QUANTILE or tail integral — needs the distribution's SHAPE)
-        VaR (a quantile) · PML / OEP / AEP (tail quantiles) · TVaR (tail conditional expectation)
-        · any "1-in-N year" number
-        -> NOT producible from a scalar. a mean carries no quantiles. (N-quant, always on path.)
+```text
+one expected DR or one expected annual loss
+  -> assume lognormal/beta/other shape without evidence
+  -> report VaR/PML/TVaR
 ```
 
-The partition is sharp because it's mechanical, not a matter of degree: a mean *is* the EAL-class
-answer and *contains no* tail-class answer. So this isn't "scalar gives a rough tail" — it gives
-**no** tail.
+Allowed, when validated:
+
+```text
+sample event counts
+  + sample event intensity/state/footprint
+  + apply coupling
+  + evaluate deterministic DR for each event
+  + apply explicit value/exposure and caps at the correct grain
+  -> annual AEP/OEP vectors
+  -> EAL/PML/VaR/TVaR
+```
+
+The allowed path must say:
+
+```text
+CURVE_INTRINSIC_SPREAD_NOT_CARRIED
+TAIL_CONDITIONAL_ON_DETERMINISTIC_VULNERABILITY
+```
+
+It may not claim that same-intensity vulnerability uncertainty was sampled.
 
 ---
 
-## 3 · The 2×2 — the real structure (not a 1-D choice) `[OURS]`
+## 3 · Ownership
 
-The existing framing offered three options (EAL-only / ship-all-caveated / block-everything). But
-doc 05 §2 sharpened it: **EAL itself is only honest while the cap rarely binds.** So the honest
-structure is a 2×2 over (metric class) × (cap behaviour):
+| Object or decision | Damage modeling owns | Consumer owns |
+|---|---:|---:|
+| Failure-unit DR function and selectors/conditioners | Yes | Pins and evaluates it. |
+| Curve-intrinsic spread/state object | Declares whether carried | Samples it when supplied. |
+| Value profile fields and denominator semantics | Yes | Chooses a named profile or supplies site values. |
+| Event frequency/intensity/coupling | No | Yes. |
+| Annual loss distribution | No | Yes. |
+| EAL/PML/VaR/TVaR calculation | No | Yes. |
+| Capability/prerequisite declaration | Yes | Enforces it. |
+| Failure-unit/occurrence/annual/financial caps | Declares relevant physical caps | Applies all caps at their actual grain. |
 
-```
-                        cap RARELY binds              cap BINDS materially
-                  ┌──────────────────────────┬──────────────────────────────┐
-   EAL-class      │  SHIP (honest, checked    │  DON'T ship as-is — BIASED   │
-                  │  by the known-answer test)│  (doc 05 §2). climb emit to   │
-                  │                           │  rung 2 (spread) for EAL, or  │
-                  │                           │  flag the cell. EAL is NOT    │
-                  │                           │  automatically safe.          │
-                  ├──────────────────────────┼──────────────────────────────┤
-   tail-class     │  WITHHOLD                 │  WITHHOLD                     │
-                  │  (N-quant: scalar has no  │  (doubly wrong: no quantiles  │
-                  │  quantiles — STRUCTURAL   │  AND the cap nonlinearity).    │
-                  │  absence, not a shortfall)│                               │
-                  └──────────────────────────┴──────────────────────────────┘
-```
-
-The two insights the 2×2 forces that a 1-D choice hides: **(a)** tail metrics are withheld
-*regardless* of the cap — they're structurally absent under a scalar; **(b)** even EAL is conditional
-— a binding cap makes a cell's *EAL* biased, so a binding cap is the first thing that forces a cell
-to climb the emit object, *for EAL itself*, before anyone even asks for the tail.
+The damage artifact declares what the consumer has and lacks. It does not issue annual metrics.
 
 ---
 
-## 4 · The decision — withhold the tail, don't caveat it `[OURS]`
+## 4 · Metric decision table
 
-The load-bearing call, stated plainly and defended, because it's the one place the doc could go
-wrong.
+| Available information | EAL | PML / VaR / TVaR | Decision |
+|---|---|---|---|
+| Damage artifact only; no frequency object | Withhold | Withhold | Annual metrics are outside the artifact. |
+| One mean annual loss; no annual distribution | Mean may be reportable if construction is explicit and linear | Withhold | A mean has no quantiles. |
+| Sampled event count/intensity/coupling + deterministic curve | Consumer-computable | Consumer-computable from annual vectors | Label missing curve-intrinsic spread. |
+| Same plus curve states/spread | Consumer-computable | Consumer-computable | State every sampled uncertainty source. |
+| No runtime curve | Withhold | Withhold | `NO_RUNTIME_CURVE`. |
 
-> **Decision.** Under a scalar emit, tail-class metrics are **withheld** — not shipped with a
-> caveat. They are reported as *not yet available* (with the reason: the emit object doesn't carry
-> the spread), never as a number-with-an-asterisk.
-
-**Why withhold beats caveat — three reasons, in order of force:**
-
-```
-   1. CAVEAT IS THE OLD MODEL'S EXACT SIN.
-      the old model's named failure was shipping a confident-but-understated VaR (~12x low).
-      "ship the tail with an 'understated' flag" is RE-COMMITTING that, with a sticky note.
-      basics_spot_on, verbatim: "a clamp that makes a bad number look reasonable is worse than
-      the obviously-bad number, because it buys false confidence and ships."
-
-   2. THE NUMBER TRAVELS; THE CAVEAT DOES NOT.
-      a number in a cell/JSON gets priced against. a caveat in a doc/footnote gets dropped at the
-      first hand-off downstream. you cannot bind a warning to a number across systems reliably.
-      a withheld number creates no false anchor; a caveated number does.
-
-   3. STRUCTURAL ABSENCE ≠ SHORTFALL.
-      a scalar doesn't UNDERSTATE the tail — it has NO tail. shipping a "tail metric" from it means
-      FABRICATING the quantile from an assumed shape we didn't source. that's not a caveat-worthy
-      approximation; it's invention. withholding is the honest report of "not sourced yet."
-```
-
-**The honest counter-argument (documented, per P3, not buried):** a withheld tail can create a
-*vacuum* — a risk team that needs a 1-in-100 number will substitute *their own* guess, possibly
-worse than a loudly-caveated model number. This is a real concern from the consumer side. **Our
-answer:** the vacuum is the *correct signal* — it says "this requires the spread, which isn't
-sourced," which is true and actionable (it points at the work). A fabricated-but-caveated number
-hides that signal under false precision. If a screening-grade tail placeholder is ever genuinely
-needed, it must be a *separate, explicitly-labeled, never-externalized* artifact with its own
-provenance — never the model's reported VaR. (This is the one place a reviewer might overrule us;
-the call is recorded so it can be.)
+This is not permission to ship any tail the consumer happens to calculate. The annual distribution must still
+be supported at the requested return period and must apply caps/terms correctly.
 
 ---
 
-## 5 · The known-answer check is the EAL boundary `[OURS]`
+## 5 · Nonlinearity and cap placement
 
-EAL is shippable *where it's checkable*, and the check defines the boundary:
+The first-nonlinearity rule remains load-bearing. A cap after averaging is not the same as a cap inside the
+event or annual calculation.
 
-```
-   the known-answer check (hail A22):  capped-MC-mean  ≈  uncapped-analytic-EAL
-        holds  ONLY WHILE:  the cap rarely binds  AND  no financial terms apply.
-
-   => the check isn't just a test — it DRAWS THE LINE where EAL is honest.
-      inside the line: EAL ships, with a passing known-answer check attached.
-      outside it (cap binds / terms apply): EAL is an EXTRAPOLATION → climb or flag.
-```
-
-> **The labeling rule `[OURS]`.** Every shipped metric declares whether it carries a *passing
-> known-answer check* or is an *extrapolation*. EAL-with-a-check and EAL-where-the-cap-might-bite are
-> different epistemic objects and must not look identical in the output. (This is `basics_spot_on`'s
-> "verify against known answers" applied to what we ship, not just what we compute.)
-
----
-
-## 6 · House display rules `[REF + OURS]`
-
-Two presentation disciplines that travel with every metric:
-
-- **Report % of TIV alongside dollars** — always. A dollar loss without its fraction-of-value is hard
-  to sanity-check across cells `[REF]`.
-- **State the basis** (doc 03): % of *what* TIV — the **physical replaceable base**, not full capex.
-  A %-of-TIV on full capex reads artificially low (doc 03 §2). The basis label travels *with* the
-  percentage, or the percentage is ambiguous `[OURS]`.
-
----
-
-## 7 · What ships at v1 — the summary table
-
-```
-   metric            v1 status (scalar emit, cap rarely binds, no financial terms)
-   ─────────────────────────────────────────────────────────────────────────────
-   EAL               SHIP — with passing known-answer check, % of TIV (physical basis), $ alongside
-   EAL (cap binds)   DON'T ship as scalar — climb emit to rung 2, or flag cell as extrapolation
-   VaR / PML / TVaR  WITHHOLD — structural absence under scalar; report "needs spread, not sourced"
-   net-of-terms      OUT OF v1 SCOPE — N-fin parked (doc 06-financial / scope-edges)
-   ─────────────────────────────────────────────────────────────────────────────
+```text
+failure-unit cap -> each failure-unit event loss
+occurrence cap   -> each occurrence loss
+annual/TIV cap   -> each simulated annual aggregate
+financial terms -> consumer layer at policy-defined grain
 ```
 
-This is a *narrow, honest* v1 deliverable: EAL, checked and labeled, in dollars and physical-%-TIV —
-and an explicit, non-fabricated "not yet" on the tail. It is exactly the deliverable that refuses to
-re-pay the old model's price.
+If a consumer uses a shortcut, it compares the shortcut mean with the fully capped calculation:
+
+```text
+relative_bias = (shortcut_mean - capped_simulation_mean) / capped_simulation_mean
+```
+
+If the difference is material for the use case, the shortcut is withheld and the full simulation is used.
+There is no universal 2.5% tolerance; a consumer may declare that screening threshold explicitly.
 
 ---
 
-## 8 · What this commits us to
+## 6 · Known-answer checks
 
-- Metrics split **EAL-class (mean) vs tail-class (quantile)**; the split is mechanical, not a degree.
-- The decision is a **2×2**: EAL ships where the cap rarely binds (and is *checked*); a binding cap
-  makes even EAL an extrapolation that forces an emit climb.
-- **Tail-class metrics are withheld under a scalar — not caveated.** Withholding beats caveating
-  (old-model sin; number-travels-caveat-doesn't; absence≠shortfall). The counter-argument (vacuum) is
-  recorded and answerable.
-- **Every shipped metric is labeled** check-backed vs extrapolation, and reported in **$ and
-  physical-%-TIV** with the basis stated.
+Two check families are now distinct:
 
-**Parked / downstream:** financial terms N-fin and net-of-terms metrics (scope-edges doc); the *climb*
-mechanics (the spread form) when a binding cap or a tail request forces rung 2 ([`05`](05_emit_object.md)
-§7 / [`04`](04_curation_derivation.md) §11 — the spread-sourcing seam).
+```text
+curve evaluator KAT
+  known input + selector -> known failure-unit DR
+  protects equations, parameter names, unit conversion, and selection
 
----
+consumer distribution KAT
+  known event/frequency/value fixture -> known annual mean/quantile/cap behavior
+  protects coupling, aggregation, cap grain, and metric extraction
+```
 
-## 9 · Open / revisit triggers
-
-- **Does any runtime-capable cell's cap bind materially?** (Carried from [`05`](05_emit_object.md)
-  §7.) If hail/wind saturation bites inside the spread, that cell's *EAL* is already biased and must
-  climb — the highest-priority check, because it changes a number we'd otherwise ship today. A
-  proposed cell with no runtime curve, including wildfire×solar, withholds metrics before this test.
-- **The withhold-vs-caveat call.** Decided as *withhold*; the consumer-vacuum counter-argument (§4) is
-  the one a reviewer might reopen. If reopened, the resolution must still never let a fabricated tail
-  become the *reported* VaR.
-- **When financial terms arrive (N-fin).** They make the cap bind more often and break the
-  known-answer check (doc 05 §2) — at which point the EAL boundary (§5) tightens and more cells need
-  the climb. A scope-edge trigger to watch.
+A curve KAT cannot validate a compound-Poisson engine. A consumer Monte Carlo cannot prove it parsed D50/k or
+selected the right archetype. Both are required at the seam.
 
 ---
 
-## 10 · Status
+## 7 · Value-basis honesty
 
-🟢 **Decided for v1.** Metrics partition into EAL-class and tail-class; the shipping policy is a 2×2
-over metric-class × cap-behaviour; **EAL ships where checkable, the tail is withheld (not caveated)
-under a scalar**, every metric labeled check-backed-vs-extrapolation and shown in $ and
-physical-%-TIV. This keeps faith with `basics_spot_on` by refusing to ship the exact
-confident-but-understated tail that broke the old model. The one reviewer-reopenable call is
-withhold-vs-caveat (§4), recorded honestly. With this, the foundational damage-layer discussions
-(01–06) are complete; what remains is parked extension work (portfolio, cascade, financial terms,
-component depth) and the separate, run-the-guides build of the actual curve records
-([`00`](../00_assembled_curve_record.md)).
+Every reported percentage states its denominator:
 
-*Links:* [`05 emit object`](05_emit_object.md) (the producer of the constraint) ·
-[`04 curation`](04_curation_derivation.md) (the spread-sourcing seam) ·
-[`03 valuation`](03_valuation_guide.md) (the %-TIV basis) · [`00 deliverable`](../00_assembled_curve_record.md)
-(where metrics_shippable lands) · `basics_spot_on` (this is the metric side of its incident).
+```text
+% of physical replaceable base
+% of installed capex
+% of named insured TIV
+```
+
+The damage repo publishes denominator semantics and reference allocation profiles. The consumer chooses a
+profile or supplies site values. A value share with no basis label is invalid.
+
+For hail, for example, `max_DR=1.0` caps the module failure-unit response. A 35.543% installed-capex asset cap
+exists only after selecting the reference profile that includes module hardware plus all general replacement
+fieldwork. It is not an intrinsic logistic cap.
+
+---
+
+## 8 · Withhold-not-caveat, retained and narrowed
+
+Withholding remains the correct response to structural absence:
+
+```text
+NO_RUNTIME_CURVE
+MISSING_VALUE_BASIS
+MISSING_EXPOSURE_OR_COUPLING
+MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION
+CAPS_NOT_APPLIED_AT_CORRECT_GRAIN
+RETURN_PERIOD_NOT_RESOLVED
+```
+
+Missing curve-intrinsic spread is ordinarily a **limitation**, not a blanket annual-tail veto, when the consumer
+has a valid frequency-driven distribution. The number and its limitation flags must travel together in machine
+metadata.
+
+This preserves the original reliability concern: a number with no structural support is withheld, while a
+supported consumer metric is not blocked merely because one uncertainty source remains deterministic.
+
+---
+
+## 9 · What ships at v1
+
+```text
+damage artifact:
+  failure-unit deterministic DR where supported
+  explicit value/exposure contract
+  curve-intrinsic-spread status
+  cap requirements
+  evaluator known-answer tests
+
+consumer, when prerequisites pass:
+  EAL/PML/VaR/TVaR from one validated annual loss distribution
+  dollars + explicitly named percentage denominator
+  limitation flags identifying deterministic vulnerability or other omissions
+```
+
+Proposed scaffolds such as wildfire×solar still withhold all numerical outputs because they fail earlier at
+`NO_RUNTIME_CURVE`. The refined rule does not turn a scaffold into a model.
+
+---
+
+## 10 · Open / revisit triggers
+
+- A current cell adds curve-intrinsic states, bounds, or a parametric distribution.
+- A consumer uses an analytic shortcut instead of event-level capped simulation.
+- A requested return period exceeds the event catalog or simulation's resolved tail.
+- Financial terms introduce new nonlinearities or aggregation grains.
+- A value profile's support-cost allocation becomes claims/site calibrated.
+- A limitation flag is dropped between damage emit and final metric output.
+
+---
+
+## 11 · Status
+
+🟢 **Refined after downstream audit.** A scalar vulnerability curve has no curve-intrinsic spread, but it may
+be one deterministic transform inside a valid consumer-built annual loss distribution. Annual metrics are
+consumer-owned and may ship when frequency, intensity, coupling, value, caps, return-period support, and known
+answers pass. They must state that vulnerability spread is absent. A tail inferred from one mean remains
+prohibited.
+
+*Links:* [`05 emit object`](05_emit_object.md) · [`04 curation`](04_curation_derivation.md) ·
+[`03 valuation`](03_valuation_guide.md) · [`00 deliverable`](../00_assembled_curve_record.md) ·
+[`capability standard`](../../../contracts/standards/21_capability_and_cap_binding_standard.md)

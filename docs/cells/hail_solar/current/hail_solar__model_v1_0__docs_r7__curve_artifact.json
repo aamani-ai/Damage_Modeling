@@ -1,18 +1,24 @@
 {
-  "schema_version": "damage_curve_record_bundle.v1",
+  "schema_version": "damage_curve_record_bundle.v2",
   "cell_id": "hail_solar",
   "damage_code_id": "HAIL_SOLAR_PV_MODULE_V1",
   "semantic_damage_model_version": "model v1.0",
-  "documentation_revision": "docs r5",
-  "package_release": "library v2.5",
+  "documentation_revision": "docs r7",
+  "package_release": "unreleased",
+  "package_baseline": "library v2.5",
+  "package_inclusion_status": "repository_canonical_not_in_portable_package",
   "canonical_runtime_artifact": true,
-  "source_dossier": "01_cells/hail_solar/current/hail_solar_curve_derivation_dossier_v1_3.md",
-  "source_workbook": "01_cells/hail_solar/current/damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx",
+  "source_dossier": "docs/cells/hail_solar/current/hail_solar_curve_derivation_dossier_v1_3.md",
+  "source_workbook": "docs/cells/hail_solar/current/damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx",
+  "known_answer_tests": "docs/cells/hail_solar/current/known_answer_tests_hail_solar__model_v1_0__docs_r7.json",
   "known_noncanonical_legacy_artifacts": [
     {
-      "artifact": "Hazard_modeling/data/hail/damage_curves/hail_solar_asset_capex_weighted.json",
+      "artifact_id": "hail_solar_asset_capex_weighted_legacy",
+      "origin_repository": "infrasure-damage-curves",
+      "former_filename": "hail_solar_asset_capex_weighted.json",
       "status": "non_canonical_legacy_placeholder",
-      "reason": "Asset-level capex-weighted blend; does not match failure-unit grain or dossier parameters."
+      "reason": "Asset-level capex-weighted blend; does not match failure-unit grain or dossier parameters.",
+      "consumer_path_policy": "Identify by artifact_id and origin; do not embed a downstream repository filesystem path."
     }
   ],
   "hazard_axis": {
@@ -37,7 +43,10 @@
       "treatment": "primary_nonzero",
       "y_axis": "module replacement damage ratio approximated by glass breakage probability",
       "value_bucket": "PV_ARRAY_MODULE_EXPOSED",
-      "f_kind": "material_share"
+      "f_kind": "failure_unit_value_share",
+      "direct_hardware_value_share_physical_base": 0.3317569801903719,
+      "direct_hardware_value_share_installed_capex": 0.2600132602142186,
+      "value_profile_selection_required_for_asset_loss": true
     }
   ],
   "curve_records": [
@@ -134,6 +143,81 @@
       "effect": "scales affected PV module value"
     }
   ],
+  "evaluation_contract": {
+    "curve_form": "logistic",
+    "equation": "DR(D) = max_DR / (1 + exp(-k_per_mm * (D - D50_mm)))",
+    "input_field": "mesh_diameter_mm",
+    "parameter_fields": [
+      "D50_mm",
+      "k_per_mm",
+      "max_DR"
+    ],
+    "selector_field": "module_archetype",
+    "selector_source": "curve_records[].selector_match.module_archetype",
+    "missing_selector_policy": "use default_3_2mm_glass_backsheet and emit DEFAULT_SELECTOR_USED",
+    "record_match_cardinality": "exactly_one",
+    "asset_loss_equations": {
+      "physical_base_loss_fraction": "failure_unit_DR * array_exposure_fraction * selected_value_profile.failure_unit_share_physical_base",
+      "installed_capex_loss_fraction": "failure_unit_DR * array_exposure_fraction * selected_value_profile.failure_unit_share_installed_capex"
+    }
+  },
+  "value_linkage": {
+    "selection_policy": "consumer_must_select_named_profile_or_supply_site_specific_value_basis",
+    "implicit_default_profile": null,
+    "reference_basis": {
+      "basis_id": "NLR_Q1_2025_UPV_PV_ONLY_2024_USD",
+      "capacity_basis": "kWdc",
+      "installed_capex_usd_per_kwdc": 1120.0,
+      "physical_replaceable_usd_per_kwdc": 877.7957023626668,
+      "physical_to_installed_ratio": 0.7837461628238097,
+      "source": "docs/method/value_basis/solar_wind_value_breakdown.xlsx"
+    },
+    "value_profiles": [
+      {
+        "value_profile_id": "HAIL_DIRECT_MODULE_HARDWARE_ONLY_V1",
+        "role": "direct_hardware_floor",
+        "failure_unit_id": "PV_MODULE_GLASS_CELL",
+        "included_value_rows": [
+          "Solar_Map!2"
+        ],
+        "excluded_support_rows": [
+          "Solar_Map!12",
+          "Solar_Map!13",
+          "Solar_Map!15"
+        ],
+        "failure_unit_share_physical_base": 0.3317569801903719,
+        "failure_unit_share_installed_capex": 0.2600132602142186,
+        "asymptotic_asset_loss_cap_physical_base": 0.3317569801903719,
+        "asymptotic_asset_loss_cap_installed_capex": 0.2600132602142186,
+        "allocation_tier": "T2_public_lab_standard_or_physics",
+        "interpretation": "Direct PV module hardware only; general replacement fieldwork is not preallocated."
+      },
+      {
+        "value_profile_id": "HAIL_HAZARD_REFERENCE_ADAPTER_V1",
+        "role": "consumer_compatibility_scenario",
+        "failure_unit_id": "PV_MODULE_GLASS_CELL",
+        "included_value_rows": [
+          "Solar_Map!2",
+          "Solar_Map!15"
+        ],
+        "failure_unit_share_physical_base": 0.4535037224398962,
+        "failure_unit_share_installed_capex": 0.3554318022885826,
+        "asymptotic_asset_loss_cap_physical_base": 0.4535037224398962,
+        "asymptotic_asset_loss_cap_installed_capex": 0.3554318022885826,
+        "allocation_tier": "T4_placeholder_or_expert_judgment",
+        "interpretation": "Reproduces the current Hazard hail adapter by assigning all general site-management, equipment-rental, and inspection fieldwork in Solar_Map!15 to module replacement and scaling it linearly with module DR.",
+        "guardrail": "This is an explicit reference scenario, not an intrinsic curve cap or a universal site value share; replace with a site schedule of values and support-cost allocation for underwriting."
+      }
+    ],
+    "deprecated_ungoverned_inputs": [
+      {
+        "field": "f_hail_material_share",
+        "former_examples": [0.75, 0.8],
+        "reason": "The examples double-counted value concentration after the value bucket had already been narrowed to PV module hardware and were inconsistent across prose and workbook views.",
+        "replacement": "Use a named value_profile_id plus an optional site-specific at_risk_fraction when the module inventory itself is only partly applicable."
+      }
+    ]
+  },
   "parameter_tier_table": [
     {
       "parameter": "D50_mm",
@@ -243,7 +327,7 @@
     "source_spine": "Public PVEL/Kiwa hail stress sequence breakage anchors, with IEC baseline as near-zero certification anchor.",
     "form_reasoning": "Logistic form is a bounded monotone threshold-like model appropriate to sparse breakage probability anchors.",
     "demoted_sources": "Field performance and stow guidance inform mechanism/adjustment direction but do not supply universal numeric DR parameters.",
-    "tier_mix": "Core unstowed archetype curves are mostly T2/T3; stow adjustment is T4 and must not support tail metrics."
+    "tier_mix": "Core unstowed archetype curves are mostly T2/T3; stow adjustment and the Hazard-compatible support-cost allocation profile are T4. Curve-intrinsic spread is not carried, but a downstream consumer may compute a frequency-driven annual loss distribution from sampled events."
   },
   "emit_contract": {
     "schema_version": "damage_emit.v1",
@@ -261,27 +345,48 @@
     "distribution_fields_present_even_when_null": true
   },
   "capability_declaration": {
-    "schema_version": "capability_declaration.v1",
+    "schema_version": "capability_declaration.v2",
     "cell_id": "hail_solar",
-    "spread_carried": false,
-    "emit_modes_populated_by_cell": [
-      "scalar_mean"
-    ],
-    "metrics_supportable": {
+    "vulnerability_emit": {
       "failure_unit_scalar_dr": "supported",
       "scenario_loss_given_value_basis": "supported_with_explicit_value_and_exposure_basis",
-      "scalar_eal": "conditional_require_cap_binding_preflight",
-      "pml": "withheld_no_tail_distribution",
-      "var": "withheld_no_tail_distribution",
-      "tvar": "withheld_no_tail_distribution"
+      "curve_intrinsic_spread": "not_carried",
+      "populated_emit_modes": [
+        "scalar_mean"
+      ]
+    },
+    "consumer_annual_metrics": {
+      "computation_owner": "downstream_consumer",
+      "frequency_driven_annual_loss_distribution": "supported_if_consumer_samples_frequency_intensity_coupling_and_applies_caps",
+      "vulnerability_uncertainty_distribution": "not_supported_curve_intrinsic_spread_not_carried",
+      "eal": "consumer_computable_with_prerequisites",
+      "pml": "consumer_computable_from_validated_annual_loss_distribution",
+      "var": "consumer_computable_from_validated_annual_loss_distribution",
+      "tvar": "consumer_computable_from_validated_annual_loss_distribution",
+      "prerequisites": [
+        "explicit_value_profile_or_site_value_basis",
+        "explicit_exposure_basis",
+        "sampled_hazard_frequency_and_intensity",
+        "coupling_model",
+        "caps_applied_inside_event_or_annual_simulation",
+        "known_answer_tests_pass"
+      ],
+      "limitation_flags": [
+        "CURVE_INTRINSIC_SPREAD_NOT_CARRIED",
+        "TAIL_CONDITIONAL_ON_DETERMINISTIC_VULNERABILITY",
+        "STOW_ADJUSTMENT_PLACEHOLDER_IF_USED"
+      ]
     },
     "cap_binding": {
-      "policy": "fail_closed",
-      "preflight_status": "not_executed_no_downstream_frequency_or_state_distribution",
-      "required_before_scalar_eal": true,
-      "tolerance_pct": 2.5,
-      "action_if_fail": "require_mean_plus_spread_emit",
-      "reason": "Current package contains severity curves but not downstream hazard/state distributions or project-specific cap tests."
+      "policy": "consumer_enforced_fail_closed",
+      "enforcement_owner": "downstream_consumer",
+      "status": "not_evaluated_by_damage_artifact",
+      "checks_required": [
+        "failure_unit_or_value_profile_cap_applied_per_event",
+        "annual_aggregate_cap_applied_inside_simulation_when_applicable",
+        "analytic_or_scalar_shortcut_compared_with_capped_simulation_if_used"
+      ],
+      "action_if_fail": "withhold_affected_metric_or_use_full_capped_simulation"
     }
   }
 }

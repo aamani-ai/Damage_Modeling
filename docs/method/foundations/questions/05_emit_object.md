@@ -1,4 +1,4 @@
-# 05 · The emit object — what M3 puts on the wire  🟢 DECIDED (v1)
+# 05 · The emit object — what M3 puts on the wire  🟢 DECIDED (contract v2 clarification)
 
 The headline of the damage layer. What object does the damage stage emit, per event, per failure
 unit? Everything downstream hangs on it — which risk metrics are honest, what the library must
@@ -19,14 +19,19 @@ inherited.
 
 ## 0 · Why this is the basics-spot-on decision, not a fidelity dial
 
-The old model stored each event's loss as `damage% × value × spatial_factor` — i.e. the **expected**
-loss, the random variable collapsed to its mean. By the Law of Total Variance that preserves the mean
-and **discards the dominant variance term**; VaR₉₉ came out **~12× understated** `[REF]`. EAL
-survived (linearity of expectation); every shape-dependent metric broke.
+The old model collapsed a stochastic event-loss process to an expected loss before asking it for a
+quantile. By the Law of Total Variance that preserved the mean and **discarded a dominant variance
+term**; VaR₉₉ came out **~12× understated** `[REF]`. EAL survived (linearity of expectation); the
+shape-dependent metric broke.
 
-The emit-object choice is *exactly* that decision, at *exactly* that spot. "Emit a scalar mean DR" is
-the modern spelling of "store the expected loss." So this is not a question of how much fidelity we'd
-*like* — it is the question of whether we re-commit the original sin. That reframes everything below.
+The precise lesson is not that every deterministic damage curve must invent a conditional spread.
+It is that **whichever random variable is present must remain stochastic until the last nonlinearity
+that acts on it**. Hazard supplies a stochastic event/annual process. Evaluating a deterministic
+`DR(x)` separately for every sampled event preserves that process and can produce an annual loss
+distribution. A curve-intrinsic spread is a second, different source of uncertainty: variation in
+damage conditional on the same intensity and selectors. If that spread is not supported, the
+consumer must label the annual result as conditional on deterministic vulnerability; it need not
+withhold the frequency-driven tail.
 
 > **`basics_spot_on` Axiom 3 `[REF]`.** *Stochastic must stay stochastic past every nonlinearity.*
 > The moment you replace a random variable with its expectation **upstream of a nonlinearity**, you
@@ -73,9 +78,9 @@ The metric you price decides which of these are on your path:
 
 | Metric | Nonlinearities on path | Scalar mean survives? |
 |---|---|---|
-| **EAL** | N-cap only (if it binds) | **Yes — iff the cap rarely binds** (§2) |
-| **VaR / PML / TVaR** | N-quant (always) + N-cap | **No** — quantiles need the distribution |
-| **net-of-terms EAL or tail** | N-fin + N-cap (+N-quant for tail) | **No** — terms are nonlinear |
+| **EAL** | N-cap only (if it binds) | **Yes** for a deterministic curve evaluated per event; conditional-spread means require §2's check |
+| **VaR / PML / TVaR** | N-quant (always) + N-cap | **No from the curve scalar alone; yes from the consumer's retained event/annual distribution** |
+| **net-of-terms EAL or tail** | N-fin + N-cap (+N-quant for tail) | **Yes only when the random event-loss object is retained through the terms** |
 
 ---
 
@@ -96,13 +101,14 @@ is nonlinear:
    and the scalar OVERSTATES (the cap clips the high tail the mean didn't know about).
 ```
 
-So the honest statement is **not** "scalar mean gives correct EAL." It is:
+This Jensen issue exists only if `DR(x)` denotes the mean of a real conditional damage distribution.
+For a declared deterministic vulnerability response, there is no hidden conditional mass for the cap
+to clip; the cap is applied to each event's deterministic result. So the honest statement is:
 
-> **Scalar mean gives correct EAL *only while the cap rarely binds.* `[OURS]`** This is precisely the
-> condition the hail A22 known-answer check encodes (capped-MC-mean ≈ uncapped-analytic EAL holds
-> *only* when the cap rarely binds and no financial terms apply). The emit object and the
-> known-answer check are the same fact seen twice — which is why this doc and [`06`](06_metrics_and_tail_honesty.md)
-> are tightly coupled.
+> **A deterministic scalar curve can be applied event-by-event through caps and terms. A scalar that
+> summarizes an unresolved conditional damage spread is safe for EAL only while the nonlinear cap is
+> immaterial. `[OURS]`** A cap-binding preflight is therefore a conditional-spread diagnostic, not a
+> blanket veto on deterministic curves or consumer-built annual tails.
 
 This matters because it means "scalar for EAL" is not unconditionally safe — it carries a *checkable
 condition*, and stating that condition is part of being basics-spot-on rather than plausibly-wrong.
@@ -119,7 +125,7 @@ Three sub-decisions, cleanly separable.
    decision: the SEAM (the parquet schema, the M4 consumer contract) is DISTRIBUTION-CAPABLE.
              it can carry a scalar OR a spread OR a discretized distribution.
    why:      modularity (build the interface up front, fill implementations per cell). a
-             distribution-ready interface with scalar v1 CONTENT is cheap insurance against
+             distribution-ready interface with scalar current CONTENT is cheap insurance against
              re-plumbing M4 when the first tail metric or financial term arrives.
    cost:     ~nil. it's a schema decision, not a sourcing decision. you reserve the column;
              you don't have to fill it.
@@ -132,20 +138,26 @@ mean.
 ### 3.2 · Q-b — the CONTENT: emit the simplest object that survives the path's nonlinearities
 
 ```
-   v1 CONTENT rule (the forcing rule applied):
+   current CONTENT rule (the forcing rule applied):
 
-   IF deliverable = EAL  AND  cap rarely binds  AND  no financial terms:
-        -> emit SCALAR MEAN DR.  (correct, not merely convenient — §1, §2)
+   IF the curve is declared DETERMINISTIC CONDITIONAL VULNERABILITY:
+        -> emit scalar DR per sampled event.
+        -> the consumer may carry those event losses through caps, terms, occurrence aggregation,
+           annual simulation, and quantiles.
+        -> label annual metrics "conditional on deterministic vulnerability" and disclose that
+           curve-intrinsic spread is not represented.
 
-   IF deliverable includes VaR/PML/TVaR  (N-quant)  OR  cap binds materially (N-cap)
-   OR  financial terms apply (N-fin):
-        -> emit a SPREAD (≥ rung 2: mean + a dispersion, or states, or a discretized dist).
-           a scalar is structurally wrong here; no caveat rescues it.
+   IF the curve claims or the use case requires a CONDITIONAL DAMAGE SPREAD at fixed intensity:
+        -> carry a spread/states/distribution through every cap or financial nonlinearity that acts
+           on it; a scalar conditional mean is structurally wrong there.
+
+   IF the consumer has already collapsed its event/annual distribution to a mean:
+        -> do not compute VaR/PML/TVaR from that scalar. Restore the event/annual distribution.
 ```
 
-So v1 fills **scalar where the path is effectively linear** and **a spread where any nonlinearity
-bites**. This is the same earn-the-complexity discipline as docs 08 and 00x, but with a *precise*
-trigger (a nonlinearity) rather than a judgment of appetite.
+The forcing rule is applied **per source of randomness**. The annual hazard-frequency distribution
+belongs to the consumer; the conditional vulnerability distribution belongs here. Neither layer may
+collapse the random object it owns before a downstream nonlinearity.
 
 ### 3.3 · Q-c — UNIFORM vs PER-PERIL: uniform interface, per-source content `[OURS]`
 
@@ -172,18 +184,19 @@ what each peril's evidence actually supports.
 The ladder isn't a fidelity preference; it's a map of *which nonlinearities each object can pass
 through intact.*
 
-| Rung | Object | Passes N-cap? | Passes N-fin? | Passes N-quant? | When it's the right fill |
-|---|---|---|---|---|---|
-| **1** | scalar mean DR | only if cap rarely binds | no | **no** (no quantiles) | EAL, linear path, no terms |
-| **2** | mean + dispersion | yes (carries spread) | yes | yes (approx tail) | tail metrics, cheap upgrade; must assume a spread form |
-| **3** | damage-state vector P(state) | yes | yes | yes | **fragility-derived** sources; needs state→cost map |
-| **4** | discretized distribution | yes | yes | yes (best) | strongest tail (OASIS-style); most sourcing |
+| Rung | Vulnerability object | Preserves curve-intrinsic uncertainty through N-cap/N-fin? | Carries curve-intrinsic quantiles? | When it's the right fill |
+|---|---|---|---|---|
+| **1** | deterministic scalar DR | no intrinsic spread to preserve | no | deterministic vulnerability; consumer may still form frequency-driven annual quantiles |
+| **2** | mean + dispersion | yes, approximately | yes, approximately | conditional damage variability is supported; spread form must be declared |
+| **3** | damage-state vector P(state) | yes | yes | **fragility-derived** sources; needs state→cost map |
+| **4** | discretized distribution | yes | yes (best) | strongest conditional-damage representation; most sourcing |
 
-The honest cost of climbing (why scalar is the v1 default where it's *correct*): moving off scalar
+The honest cost of climbing (why scalar is the current default where it is evidence-supported): moving off scalar
 costs (i) **choosing the spread's form** per hazard (beta on [0,1]? lognormal? elicited min/mode/max?),
 (ii) **re-parameterizing** the library curves that today emit only a mean, and (iii) **finding
-validation data to calibrate the spread** — scarcer than data for the mean. So we climb **only where a
-nonlinearity forces it**, not everywhere.
+validation data to calibrate the spread** — scarcer than data for the mean. We climb when evidence or
+the use case requires conditional vulnerability uncertainty. The consumer's possession of an annual
+hazard distribution is not, by itself, such a trigger.
 
 ---
 
@@ -195,34 +208,33 @@ Pinning the shape so it's unambiguous:
    PER failure unit i, at a univariate intensity x (doc-00x):
 
    emit_i(x) = a distribution-capable object over the damage ratio DRᵢ ∈ [0, capᵢ]
-               v1 content: a scalar E{DRᵢ}(x)   (where the path is linear)
-                           OR a spread/states   (where a nonlinearity bites)
+               current content: a declared deterministic scalar DRᵢ(x)
+                                OR a conditional spread/states when supported
 
    loss_i = ( emit_i applied to value_i )  [capped at capᵢ]
    asset loss = Σ_i loss_i                  (doc-08 summation; NO grouping object)
 
-   KEY: keep emit_i STOCHASTIC (a distribution, even if degenerate-scalar in v1) all the way
-   to wherever the FIRST nonlinearity sits, and only then collapse. never collapse upstream of N-cap,
-   N-fin, or N-quant. (Axiom 3.)
+   KEY: keep each ACTUAL stochastic object alive to its last nonlinearity. The consumer retains
+   stochastic events/years; this repo retains conditional vulnerability spread when one is claimed.
+   A deterministic scalar curve is a declared response, not a counterfeit distribution.
 ```
 
-The phrase "even if degenerate-scalar in v1" is the bridge: the *interface* always speaks
-distribution; v1 *content* may be a point mass; the discipline is never to collapse the point mass
-*before* a nonlinearity that would have seen its spread.
+The interface remains distribution-capable so a later cell revision can carry conditional spread
+without replumbing M4. Capability metadata says which uncertainty sources are and are not represented.
 
 ---
 
 ## 6 · What this commits us to
 
-- **The emit object is decided by the first nonlinearity, not by fidelity appetite.** Enumerate
-  N-cap / N-fin / N-quant on the metric's path; emit the simplest object that survives all of them.
+- **The emit object is decided by supported uncertainty and the nonlinearities acting on it, not by
+  fidelity appetite.** Enumerate each random source separately.
 - **Interface is distribution-ready, built up front** (Q-a) — cheap insurance, a schema decision.
-- **v1 content is scalar where the path is linear** (EAL, cap rarely binds, no terms) **and a spread
-  where any nonlinearity bites** (Q-b).
+- **A deterministic scalar curve may feed a consumer annual distribution.** It does not, by itself,
+  provide curve-intrinsic uncertainty.
 - **Uniform interface, per-source content** (Q-c) — scalar for published-MDR sources, state-vector for
   fragility-derived, into the same seam.
-- **Scalar's EAL-safety is conditional** ("cap rarely binds") and that condition is the A22
-  known-answer check — the hinge to [`06`](06_metrics_and_tail_honesty.md).
+- **A conditional mean's EAL-safety through a cap is conditional**; a declared deterministic response
+  is evaluated and capped per event.
 - **Never collapse the random variable upstream of a nonlinearity** (Axiom 3) — the whole point.
 
 **Parked / downstream:** which metrics ship under scalar + the caveat language ([`06`](06_metrics_and_tail_honesty.md));
@@ -233,11 +245,9 @@ the spread *form* per hazard (the climb, when N forces it); financial terms N-fi
 
 ## 7 · Open / revisit triggers
 
-- **Does the cap bind materially in any runtime-capable cell?** If hail/wind caps bite inside the
-  spread, scalar EAL is already biased there (§2) and that cell must climb to rung 2 *for EAL itself*,
-  not just for the tail. Needs a per-cell check against the curve's saturation behavior. **The most
-  decision-relevant open item.** Proposed cells with no runtime curve, including wildfire×solar, are
-  excluded from this cap-binding test and withhold metrics upstream.
+- **Does any runtime cell claim a conditional damage distribution whose mass crosses a downstream
+  cap?** If yes, a conditional mean is insufficient for EAL and the cell must carry that distribution.
+  Proposed cells with no runtime curve, including wildfire×solar, withhold metrics upstream.
 - **The spread form, when we climb.** Beta-on-[0,1] is the natural default for a bounded DR, but
   per-hazard validation data may favor lognormal or elicited three-point. Deferred until a nonlinearity
   forces the climb (don't choose a form we're not yet using).
@@ -250,14 +260,11 @@ the spread *form* per hazard (the climb, when N forces it); financial terms N-fi
 
 ## 8 · Status
 
-🟢 **Decided for v1.** The emit object is reframed off the fidelity ladder and onto the **first-
-nonlinearity** forcing rule — the basics-spot-on decision at the spot the old model broke. v1: a
-**distribution-ready interface built up front**, filled with **scalar content where the path is
-linear** (EAL, cap rarely binds, no financial terms) and a **spread where any nonlinearity (cap,
-terms, or the quantile operator) bites**; **uniform interface, per-source content**. Scalar's
-EAL-safety is conditional on the cap rarely binding — the explicit hinge to
-[`06`](06_metrics_and_tail_honesty.md), the natural next doc. The one open item that could change a
-*built* cell today is whether its cap binds materially (§7).
+🟢 **Decided; clarified for contract v2.** The seam is distribution-ready, while content remains
+source-supported. A deterministic scalar vulnerability curve can be evaluated for each sampled event
+and can therefore feed the consumer's frequency-driven annual distribution. It does not represent
+curve-intrinsic uncertainty. Each layer retains the stochastic object it owns through the
+nonlinearities that act on it; capability metadata makes the boundary explicit.
 
 *Links:* [`01` grain](01_granularity.md) (emit is per-unit, summed) ·
 [`00x x-axis`](02_x_axis_intensity_variable.md) (univariate input) ·

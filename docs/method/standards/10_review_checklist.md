@@ -91,12 +91,16 @@ Use this checklist before calling a hazard × asset cell package ready.
 ## 8. Cap-binding / metrics honesty
 
 ```text
-[ ] metrics_supportable is populated.
-[ ] spread_carried is true only when an actual distribution/spread is emitted.
-[ ] scalar EAL is supported only with frequency layer + value basis + cap-binding preflight pass.
-[ ] cap-binding preflight status is recorded as pass/fail/not_executed.
-[ ] A failed or missing cap-binding preflight with relevant caps causes scalar EAL to be withheld.
-[ ] PML/VaR/TVaR are withheld unless the emitted object carries a tail-supporting distribution.
+[ ] capability_declaration.v2 is populated.
+[ ] vulnerability_emit states whether the curve is deterministic or carries conditional spread/states.
+[ ] consumer_annual_metrics identifies the required event/annual distribution and required labels.
+[ ] spread_carried is true only when an actual curve-intrinsic distribution/spread is emitted.
+[ ] A deterministic curve is evaluated separately for every sampled event before annual aggregation.
+[ ] PML/VaR/TVaR are withheld when no annual loss distribution exists—not merely because the curve
+    lacks intrinsic spread.
+[ ] Frequency-driven tail results disclose when vulnerability uncertainty is not represented.
+[ ] cap_binding preflight is required only where an unresolved conditional damage distribution can
+    cross a downstream cap.
 ```
 
 ## 9. Machine-readable artifact QA

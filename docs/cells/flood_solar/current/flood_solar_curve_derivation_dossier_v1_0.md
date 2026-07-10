@@ -489,3 +489,8 @@ scenario loss with explicit value basis: supported
 scalar EAL: conditional; requires downstream frequency layer and cap-binding preflight
 PML/VaR/TVaR: withheld; no tail distribution is carried
 ```
+
+The v2.5 statement above is superseded for repository-current consumers by capability v2. The deterministic
+curve still carries no intrinsic vulnerability spread, but a downstream consumer may compute frequency-driven
+annual metrics from a validated annual loss distribution with that limitation flagged. Repository-current pin:
+`flood_solar@model_v1_0__docs_r4`.

@@ -6,6 +6,11 @@ M3.
 These files are the current Hazard-facing contract surface. They do not create a stable importable API; that
 remains deferred until runtime publishing and Hazard loading are designed.
 
+Repository-current change records:
+
+- [`REPOSITORY_CONTRACT_RELEASE_2026_07_10.md`](REPOSITORY_CONTRACT_RELEASE_2026_07_10.md) — consumer seam r1.
+- [`REPOSITORY_WILDFIRE_SOLAR_MODEL_V1_0_RELEASE_2026_07_10.md`](REPOSITORY_WILDFIRE_SOLAR_MODEL_V1_0_RELEASE_2026_07_10.md) — first canonical wildfire_solar screening model.
+
 ## Runtime contract
 
 | Contract | Authoritative file |
@@ -17,15 +22,21 @@ remains deferred until runtime publishing and Hazard loading are designed.
 
 ## Schemas
 
-- [`curve_artifact_bundle.schema.json`](schemas/curve_artifact_bundle.schema.json)
+- [`curve_artifact_bundle.v2.schema.json`](schemas/curve_artifact_bundle.v2.schema.json) — repository-current, curve-form-specific payload validation
+- [`curve_artifact_bundle.schema.json`](schemas/curve_artifact_bundle.schema.json) — portable v2.5 / bundle-v1 compatibility
 - [`damage_emit.schema.json`](schemas/damage_emit.schema.json)
-- [`capability_declaration.schema.json`](schemas/capability_declaration.schema.json)
+- [`capability_declaration.v2.schema.json`](schemas/capability_declaration.v2.schema.json) — consumer-distribution-aware capability contract
+- [`capability_declaration.schema.json`](schemas/capability_declaration.schema.json) — v1 compatibility
+- [`artifact_index.v2.schema.json`](schemas/artifact_index.v2.schema.json)
+- [`cell_runtime_changelog.v1.schema.json`](schemas/cell_runtime_changelog.v1.schema.json)
 
 ## Hazard handoff notes
 
 - [`hail_solar_m3_canonicalization.md`](hazard_handoff/hail_solar_m3_canonicalization.md)
+- [`hail_solar_consumer_contract_v2.md`](hazard_handoff/hail_solar_consumer_contract_v2.md)
 - [`wind_tornado_wind_m2_height_bridge.md`](hazard_handoff/wind_tornado_wind_m2_height_bridge.md)
 - [`m3_to_m4_distribution_ready_emit.md`](hazard_handoff/m3_to_m4_distribution_ready_emit.md)
+- [`wildfire_solar_model_v1_0_hazard_migration.md`](hazard_handoff/wildfire_solar_model_v1_0_hazard_migration.md)
 
 ## Guardrail
 
