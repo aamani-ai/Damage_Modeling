@@ -92,6 +92,29 @@ behavior check:  old and new behavior hashes match
 Remaining before full canonical promotion:
 
 ```text
-[ ] One reviewed new-cell scaffold application, preferably tornado_solar.
+[x] One controlled new-cell scaffold application (`wildfire_solar`) completed fail-closed.
 [ ] Reviewer sign-off that version-bump outcomes are correct.
+```
+
+## Controlled application completed — `wildfire_solar` fail-closed scaffold
+
+Test B has now been applied to a deeply researched, site-conditioned new cell:
+
+```text
+cell:                  wildfire_solar
+classification:        NEW_CELL_SCAFFOLD + nested EVIDENCE_ONLY_NO_OUTPUT_CHANGE
+lifecycle:             scaffold; semantic model v0.1; proposed; no released model v1.0
+package status:        unreleased; baseline library v2.5; not included
+runtime curve records: 0
+capability:            all dependent metrics withheld with NO_RUNTIME_CURVE
+```
+
+The controlled application added a seven-step audit, exact source and claim registers, legacy numerical reproduction, row-level value crosswalk, site-condition adapter with fence/wall and double-counting controls, denominator pressure tests, and no-curve known-answer tests. This validates that the skill can stop a weak curve from being promoted while preserving useful research.
+
+Current promotion state:
+
+```text
+[x] Test A passed: docs/evidence-only update without model bump.
+[x] Test B passed: new-cell scaffold without false v1.0 or runtime curve.
+[ ] Independent reviewer sign-off on classifications and version consequences.
 ```

@@ -1,6 +1,6 @@
 ---
 name: damage-curve-library-governance
-description: Govern, extend, validate, and release the damage-curve library. Use for adding or updating hazard x asset damage cells, classifying change types, deciding version bumps, enforcing machine-readable artifacts, capability declarations, cap-binding gates, source-drop/package ingestion, in-repo canonical edits, and release ZIP packaging.
+description: Govern, extend, validate, and release the damage-curve library. Use for adding or updating hazard x asset damage cells; pressure-testing evidence and legacy numbers; governing source/claim provenance, seven-step audits, site-condition adapters, value crosswalks, and fail-closed no-curve outcomes; classifying changes; deciding version bumps; enforcing machine-readable artifacts, capability declarations, and cap-binding gates; handling source drops or in-repo edits; and packaging releases.
 ---
 
 # Damage Curve Library Governance Skill
@@ -37,12 +37,15 @@ If the user is asking how to use or install the skill, or if the operator is unf
 4. **Choose the workflow.** Use one of `01_workflows/`: add new cell, update existing cell, docs/evidence-only update, schema/contract change, release packaging, or evidence ingestion.
 5. **Preserve separate version streams.** Package release version, cell damage-model version, cell docs revision, schema/artifact version, and skill upload version are different things.
 6. **Never silently overwrite the current cell.** Archive prior current artifacts before replacing them, or create a clearly named proposed/draft folder.
-7. **Keep the grain correct.** Damage curves are hazard × asset cells made of failure-unit records. Avoid whole-asset curves unless the dossier proves that the failure mechanism is genuinely whole-asset.
-8. **Maintain the M3 boundary.** The damage-code layer emits vulnerability/severity: failure-unit DRs and scenario loss views with explicit value basis. It does not own hazard frequency, EAL aggregation, insurance terms, BI, VaR, PML, or TVaR unless those are downstream objects consuming the emit.
-9. **Use JSON as the runtime artifact.** Workbooks are derivation/audit views. Runtime M3 should pin to canonical JSON artifacts.
-10. **Enforce withhold-not-caveat.** If `capability_declaration` says a metric is withheld or conditional and the gate is not satisfied, do not emit the metric with a caveat. Withhold it with a reason code.
-11. **Run validation/QC before packaging or committing.** Use `04_validation_qc/` and `tools/validate_skill_bundle.py` or equivalent package validation logic. In `inside_repo` mode, also run repo link/hash/no-`src` checks when relevant.
-12. **Write the release or change reason.** Every release or canonical repo change must say why the package/repo changed, which cells changed, which model versions changed, which docs revisions changed, whether schemas changed, and what is explicitly not changed.
+7. **Run the seven-step audit.** Define the asset, decompose failure units, choose the y-axis/value basis, split value rows, allocate physical value, specify the site adapter, then apply qualified curves or withhold.
+8. **Pressure-test evidence and legacy numbers.** Use a stable source register, claim-level provenance, exact locators, canonical tiers, reproducible equation/table checks, endpoint transfer limits, and explicit denominators.
+9. **Keep the grain correct.** Damage curves are hazard × asset cells made of failure-unit records. Avoid whole-asset curves unless the dossier proves that the failure mechanism is genuinely whole-asset.
+10. **Govern site conditions causally.** Separate bridge inputs, derived exposure, vulnerability, and value allocation. Fences, walls, barriers, protection, maintenance, access, and response receive no blanket credit and cannot be double-counted.
+11. **Maintain the M3 boundary.** The damage-code layer emits vulnerability/severity: failure-unit DRs and scenario loss views with explicit value basis. It does not own hazard frequency, EAL aggregation, insurance terms, BI, VaR, PML, or TVaR unless those are downstream objects consuming the emit.
+12. **Use JSON as the runtime artifact.** Workbooks are derivation/audit views. Runtime M3 should pin to canonical JSON artifacts.
+13. **Enforce withhold-not-caveat.** If `capability_declaration` says a metric is withheld or conditional and the gate is not satisfied, do not emit the metric with a caveat. Withhold it with a reason code. A rigorous `NO_RUNTIME_CURVE` scaffold is an acceptable outcome.
+14. **Run validation/QC before packaging or committing.** Use `04_validation_qc/` and `tools/validate_skill_bundle.py` or equivalent package validation logic. In `inside_repo` mode, also run repo link/hash/no-`src` checks when relevant.
+15. **Write the release or change reason.** Every release or canonical repo change must say why the package/repo changed, which cells changed, which model versions changed, which docs revisions changed, whether schemas changed, and what is explicitly not changed.
 
 ## Quick decision tree
 
@@ -70,7 +73,7 @@ Does it only improve proof trail, wording, evidence narrative, or reviewer clari
 - First-time human onboarding: `FIRST_TIME_READER_GUIDE.md` and `CODEX_SKILL_ONBOARDING.md`.
 - First-time reader: `START_HERE_FOR_FIRST_READER.md`, then this `SKILL.md`.
 - Start every task: `00_governance/CHANGE_CLASSIFIER.md`, `00_governance/VERSIONING_POLICY.md`, `00_governance/RELEASE_DECISION_TREE.md`.
-- New cell: `01_workflows/ADD_NEW_CELL_WORKFLOW.md`, then `02_design_guides/`.
+- New cell: `01_workflows/ADD_NEW_CELL_WORKFLOW.md`, then `02_design_guides/EVIDENCE_PRESSURE_TEST_AND_FAIL_CLOSED_CHECKLIST.md` and the remaining `02_design_guides/`.
 - Existing cell update: `01_workflows/UPDATE_EXISTING_CELL_WORKFLOW.md`.
 - Evidence-only update: `01_workflows/DOCS_EVIDENCE_ONLY_WORKFLOW.md`, `01_workflows/EVIDENCE_INGESTION_WORKFLOW.md`.
 - Runtime/schema work: `03_contracts/` and `01_workflows/SCHEMA_CONTRACT_CHANGE_WORKFLOW.md`.
@@ -85,3 +88,7 @@ Does it only improve proof trail, wording, evidence narrative, or reviewer clari
 - Tail metrics remain withheld unless an annual loss distribution or equivalent tail-supporting object exists.
 - Cap-binding preflight is fail-closed for scalar EAL when caps can bind.
 - Record every material assumption, default, alias, open seam, and update trigger.
+- Every new cell completes the seven-step audit, source/claim registers, row-level value crosswalk, and evidence pressure test; add legacy and site-condition controls when applicable.
+- A load-bearing “no evidence located” decision carries a bounded, reproducible search log and never becomes a universal absence claim.
+- Guidance or a plausible mechanism does not become a numeric modifier without calibration at the intended endpoint and grain.
+- Repository presence does not promote a proposed artifact into the released package or runtime.

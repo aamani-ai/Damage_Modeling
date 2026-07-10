@@ -198,7 +198,8 @@ The whole plan exists to manage one imbalance:
   load-bearing placeholders (hail stow `+8 mm`, flood scour proxy, wind `D50/k` partly off one EF4 case).
 - **The old `infrasure-damage-curves` repo is the mirror image** — weak method, but a genuinely good
   **evidence/reference collection** (42 curves, 8 hazard×asset pairs, ~280 references), including pairs we
-  have not built yet (wildfire×solar, hurricane, winter).
+  have not promoted to runtime (the current wildfire×solar work is a proposed, noncanonical research
+  scaffold; hurricane and winter remain unbuilt).
 
 **The bridge is standard [16 · reference ingestion](../method/standards/16_reference_ingestion_and_curve_update_protocol.md).** It is the protocol to
 absorb the old repo's references *the right way*: intake record → triage → axis-compatibility check →
@@ -265,13 +266,16 @@ damage artifacts; it should not maintain a second copy of the curve library.
 - **Status:** 🟡 spun out and docs-first; current cells at model v1.0 are public-source-derived, with v2.5
   machine-readable artifacts. Durable artifact publishing and Hazard M3 loading remain future work.
 - **Cells vs notebooks:** hail×solar and wind/tornado×wind align (wind uses a different method — D50-shift
-  variant vs the notebook's co-sampled distribution); **flood×solar is new**; the notebooks' **wildfire×solar
-  is not yet a library cell** (an evidence-harvest target via step 4).
+  variant vs the notebook's co-sampled distribution); **flood×solar is new**; the notebooks'
+  **wildfire×solar is now represented only by a proposed, noncanonical research scaffold**. It retains
+  source-native FSim flame-length bins as upstream inputs but emits no runtime curve or metric until a
+  site-conditioned delivered-exposure and economic-loss bridge is supported.
 - **Parked** (carried, not lost): portfolio accumulation · cascade / conditional subsystem failure ·
   financial terms · component-attribute depth (stow-angle physics, Phase-3).
-- **The one open seam:** **secondary uncertainty / the spread.** Curation is strong on the mean, thin on the
-  spread; until sourced, cells emit `scalar` and declare `metrics_supportable: [EAL]`. That is the path
-  honestly reporting where evidence runs out — not a defect.
+- **The one cross-cutting open seam:** **secondary uncertainty / the spread.** Runtime-capable cells are
+  strong on the mean and thin on the spread; where scalar EAL is supportable they declare it explicitly.
+  Proposed scaffolds may fail earlier and withhold every metric—as wildfire×solar currently does when
+  the local-exposure bridge is absent. Both behaviors report where evidence runs out.
 
 ---
 

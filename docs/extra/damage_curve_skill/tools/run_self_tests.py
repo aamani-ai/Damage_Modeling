@@ -21,6 +21,19 @@ def main() -> int:
         for key, expected_value in exp.items():
             if key == "change_class":
                 actual = got.get("change_class")
+            elif key == "required_gates_include":
+                actual_gates = set(got.get("required_gates", []))
+                missing = sorted(set(expected_value) - actual_gates)
+                if missing:
+                    failures.append({
+                        "case_id": case["case_id"],
+                        "field": key,
+                        "expected_subset": expected_value,
+                        "missing": missing,
+                        "actual": sorted(actual_gates),
+                        "full_result": got,
+                    })
+                continue
             else:
                 actual = got.get("version_impacts", {}).get(key)
             if actual != expected_value:

@@ -56,3 +56,23 @@ A cell is a hazard × asset pair such as `hail_solar`, `flood_solar`, or `strong
 ## New-cell version rule
 
 Do not call a new cell `model v1.0` merely because a folder exists. `model v1.0` means the cell has its first released runtime curve behavior.
+
+A scaffold may use a pre-release semantic model version such as `model v0.1`, but lifecycle, promotion, review, documentation, and release state must remain separate fields:
+
+```yaml
+lifecycle_state: scaffold
+semantic_damage_model_version: model v0.1
+released_model_version: null
+promotion_status: proposed
+review_status: pressure_tested
+documentation_revision: docs r1
+documentation_status: working_revision
+package_release: unreleased
+package_baseline: library vX.Y
+package_inclusion_status: not_included
+canonical_runtime_artifact: false
+```
+
+Extensive research does not require promotion to `draft`, `reviewable`, or `released_v1_0`. If no numerical curve passes the evidence chain, a rigorously documented scaffold can remain the correct terminal state until new evidence arrives.
+
+Do not encode lifecycle or promotion words inside `semantic_damage_model_version` or `documentation_revision`. For example, avoid `model v0.1 proposed` and `docs r1 working revision`; use the separate fields above.

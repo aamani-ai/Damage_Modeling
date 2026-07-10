@@ -1,31 +1,60 @@
 # <cell_id> curve derivation dossier
 
-## 1. Scope and failure mechanism
+## 1. Scope, asset boundary, and failure mechanisms
 
-## 2. Failure-unit selection
+Name included physical value and excluded BI, revenue, insurance, land, soft/sunk value, and deferred pathways.
 
-## 3. Hazard x-axis
+## 2. Failure-unit decomposition and coverage
 
-## 4. Evidence inventory
+| Failure unit | Subsystem/component | Mechanism | Protection/BOM split | Value row/bucket | Treatment | Evidence status |
+|---|---|---|---|---|---|---|
+
+Do not precommit the curve count before every material value row has a treatment.
+
+## 3. Source-native hazard axis and local exposure bridge
+
+Distinguish the source-native hazard variable from delivered failure-unit demand and duration. Name every missing bridge.
+
+## 4. Source register summary
 
 | source_id | source | role | tier | used_for | notes |
 |---|---|---|---|---|---|
 
-## 5. Source-to-parameter map
+Point to the machine-readable source register with exact locators and transfer limits.
 
-| parameter | curve_id | source_ids | param_role | tier | reasoning |
-|---|---|---|---|---|---|
+## 5. Claim/parameter provenance map
 
-## 6. Curve form selection
+| claim/parameter | failure unit/curve | source IDs and locators | claim type/role | tier | decision | permitted/prohibited inference | update trigger |
+|---|---|---|---|---|---|---|---|
 
-## 7. Parameter derivation
+## 6. Evidence and legacy numerical pressure test
 
-## 8. Selector / conditioner / exposure adjustments
+Reproduce equations/tables, verify endpoints and units, test boundary/zero/asymptotic behavior, and record rejected/demoted material. Point to the legacy-ingestion memo when applicable.
 
-## 9. Value linkage
+## 7. Y-axis and row-level value crosswalk
 
-## 10. Derivation rationale / combination narrative
+Define same-unit numerator/denominator, direct value, mixed/support/excluded rows, allocation rules, and reconciliation difference.
 
-## 11. Open seams and update triggers
+## 8. Site-condition adapter and double-counting matrix
 
-## 12. Validation/QC
+Separate selector, conditioner, bridge input, derived exposure, allocation, and deferred pathway. Address barriers such as fences/walls and bypass pathways when applicable. Assign no blanket mitigation credit.
+
+## 9. Curve-form decision
+
+State why each adopted form is supportable. If none is supportable, say `NO_RUNTIME_CURVE`; a curve form is not mandatory.
+
+## 10. Parameter derivation and tiers
+
+## 11. Seven-step audit
+
+Summarize the outcome and blocker for all seven steps using `TEMPLATE_SEVEN_STEP_AUDIT.md`.
+
+## 12. Derivation rationale / combination narrative
+
+## 13. Capability and fail-closed decision
+
+Record `curve_records`, every metric status, reason codes, canonical/runtime/package status, and promotion evidence. No-curve KATs must assert no numeric DR/loss.
+
+## 14. Open seams and update triggers
+
+## 15. Validation/QC

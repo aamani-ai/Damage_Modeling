@@ -51,3 +51,5 @@ The cell is not reviewable until the reviewer can answer:
 ```text
 Which source supports each load-bearing number, and what would cause us to update it?
 ```
+
+The same requirement applies to non-numeric rules: disabled mitigation credits, missing-value behavior, selector eligibility, exposure defaults, cap rules, and withholding reasons. A T4 placeholder remains visibly non-calibrated and cannot silently become a runtime default.

@@ -32,6 +32,28 @@ Bump when any shipped package content changes:
 
 A package version change does **not** necessarily mean any damage curve changed.
 
+### Repository presence is not package promotion
+
+A proposed/scaffold cell may be merged into the repository for transparent research and review without being included in the current runtime/package release. Use this convention in proposed artifacts and status blocks:
+
+```yaml
+package_release: unreleased
+package_baseline: library vX.Y
+package_inclusion_status: not_included
+canonical_runtime_artifact: false
+```
+
+Meaning:
+
+```text
+package_release: no package has shipped this artifact;
+package_baseline: the released library state against which it was researched;
+package_inclusion_status: the artifact is not in the released runtime/package;
+canonical_runtime_artifact: downstream runtime must not load it.
+```
+
+Merging a proposed folder to `main` improves traceability. It does not by itself bump the package, release a cell model, change runtime routing, or make a proposed artifact canonical. When a later package deliberately includes the cell, replace these fields through the release workflow and record the promotion.
+
 ## Cell damage-model version
 
 Bump when runtime behavior changes, including:

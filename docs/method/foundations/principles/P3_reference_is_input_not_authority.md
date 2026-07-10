@@ -47,10 +47,12 @@ This is the observed pattern of how the damage-layer work actually treated its i
 > basis, vintage, trust) rather than a well to draw final values from is what surfaced the basis
 > problem instead of burying it.
 
-> **The built cells → evidence, not authority.** The three built damage cells (hail, wildfire, wind)
-> already improvised methods — a 6-subsystem blend, a two-curve fork. Treating those as *evidence of
-> what the physics demanded* (the wildfire blend reaching across subsystems was a real signal) rather
-> than as *the settled method* let us name the underlying concept the cells had only improvised.
+> **Built cells and legacy drafts → evidence, not authority.** Earlier runtime-cell work (including
+> hail and wind) improvised useful methods. The legacy wildfire draft's six-subsystem blend was an
+> input hypothesis, not a built curve: independent review found its exposure conversions and curve
+> values unfit for promotion, and the proposed wildfire×solar scaffold emits no runtime curve.
+> Treating both successful artifacts and rejected drafts as evidence—rather than settled method—is
+> what lets useful scope/mechanism insights survive without inheriting unsupported numbers.
 
 > **Our own prior drafts → checkpoints, not conclusions.** The granularity doc's first two drafts
 > recommended building a primitive. Treating our *own* prior reasoning as a reference to be

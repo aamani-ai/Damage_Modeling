@@ -18,8 +18,10 @@ unknown
 
 ## Required crosswalk table
 
-| Failure unit | Subsystem/component | Value bucket | Default $/MW or share | Basis | Included fieldwork? | Included soft cost? | Notes |
-|---|---|---|---:|---|---|---|---|
+| Source location/row | Failure unit | Value bucket | Default $/MW or share | Financial class | Role in loss | Direct denominator? | Allocation/double-count rule | Status |
+|---|---|---|---:|---|---|---:|---|---|
+
+Use `../templates/TEMPLATE_VALUE_CROSSWALK.csv` for a row-level machine-readable view.
 
 ## Rule
 
@@ -45,3 +47,19 @@ Can this external $/MW number be compared to a module-only damage curve?
 Does it include labor/fieldwork beyond hardware cap?
 Does it exceed installed TIV or only failure-unit value?
 ```
+
+## Reconciliation and overestimation controls
+
+```text
+- Map every material source row; do not crosswalk only the convenient rows.
+- Split mixed rows or mark them unresolved.
+- Separate direct vulnerable hardware from civil/support/logistics.
+- Allocate support, mobilization, site management, rental, and inspection once
+  after damaged failure units are known; do not give those rows an independent DR.
+- Separate protected/exposed or applicable/inapplicable value before applying a pathway.
+- Unknown at-risk or attack fractions do not default to one.
+- Label arithmetic on a broader denominator as a pressure test, not an estimate,
+  unless the curve y-axis and allocation rules support that denominator.
+```
+
+The crosswalk must include a reconciliation equation and unresolved difference. A cell cannot emit scenario loss merely because a whole-site installed-cost number exists.

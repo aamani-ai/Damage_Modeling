@@ -109,7 +109,10 @@ flood depth + velocity
   → depth for electrical ingress, velocity for scour/foundation
 
 wildfire intensity + duration
-  → fireline intensity v1, residence time documented as deferred axis unless evidence supports 2-D
+  → retain FSim conditional flame-length probability bins as source-native upstream inputs
+  → do not call them continuous fireline intensity or equipment-level demand
+  → select no runtime x-axis until site conditions map them to delivered heat/ember exposure and
+    evidence determines whether duration requires a second axis
 ```
 
 ## 6. Unit handling

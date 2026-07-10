@@ -48,6 +48,8 @@ validation gates
 release output checklist
 ```
 
+For a new or deeply re-researched cell, the agent must also apply the seven-step audit, source and claim registers, numerical/legacy pressure test, row-level value crosswalk, site-condition/double-counting controls where applicable, and the fail-closed no-curve path. It must not interpret the request to “create a curve” as permission to manufacture one.
+
 ## Minimal install/package shape
 
 ```text
@@ -75,4 +77,6 @@ Do not use a ZIP round-trip for ordinary in-repo canonical edits.
 Do not bump a model version for docs-only work.
 Do not promote a new hazard × asset scaffold to v1.0 without a reviewed runtime artifact.
 Do not emit tail metrics from scalar-only damage output.
+Do not give fences, walls, barriers, maintenance, or response controls blanket numeric credit.
+Do not treat merging a proposed folder to main as package or runtime promotion.
 ```

@@ -164,7 +164,7 @@ Read in this order:
 7. 01_workflows/ADD_NEW_CELL_WORKFLOW.md
 8. 01_workflows/UPDATE_EXISTING_CELL_WORKFLOW.md
 9. 04_validation_qc/REPORTABILITY_RULES.md
-10. 05_release/RELEASE_CHECKLIST.md
+10. 00_governance/RELEASE_CHECKLIST.md
 ```
 
 ---

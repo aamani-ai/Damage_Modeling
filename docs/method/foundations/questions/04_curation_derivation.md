@@ -127,7 +127,9 @@ curve's regions** but do **not** give you the curve.
 - **Wind** — ASCE 7 design wind / certified mount ratings anchor the low-damage region `[SRC]`.
 - **Flood** — IP ingress ratings anchor the ingress threshold — but say nothing about
   duration/corrosion above it `[SRC]`.
-- **Wildfire** — certified operating temperature ranges (IEC 61215/62109) anchor the no-damage region `[SRC]`.
+- **Wildfire** — equipment temperature ratings may bound an equipment-specific operating region, but
+  they do not establish an external-fire exposure threshold or a no-damage region for the assembled
+  solar plant `[OURS]`.
 
 > **The anchor rule `[OURS]`.** Use a standard to pin the region it certifies (usually "no/low
 > damage up to the rated level"); derive the shape *above* that from analytical/empirical evidence.
@@ -185,15 +187,16 @@ The mechanism that makes the chain-position rule ([`02`](02_x_axis_intensity_var
    DERIVE at a PROXIMATE node (close to damage, where physics is clean):
         e.g. "component fails when T > 200°C"  (analytical, Level 4)
                               |
-                              v   bake the physics in
+                              v   calibrate and validate the bridge
    PARAMETERIZE at a DISTAL node (where the hazard data lives, doc 02):
-        DR(fireline_intensity) = L / (1 + exp(-k(I - I₀)))   (the curve M3 actually uses)
+        DR(source_native_axis | selectors, conditioners)     (only after the bridge is supported)
 ```
 
 You reason about failure where the physics is honest (component temperature, fracture stress), then
 **express the result as a function of the variable your hazard layer delivers** (intensity, gust,
-depth). The proximate physics is *baked into* the distal curve. This is how step E and step H connect:
-derive at Level 4, parameterize at Level 2.
+depth) **only when the intervening bridge is calibrated or otherwise defensibly bounded for the
+stated domain**. Do not hide an assumed universal conversion inside a polished distal curve. This is
+how step E and step H connect: derive at Level 4, validate the bridge, then parameterize at Level 2.
 
 ---
 
@@ -206,7 +209,7 @@ leads where — it does **not** give the curves (those are run later):
 |---|---|---|---|
 | **Hail × solar** | empirical (common events, claims data) + lab (IEC ice-ball) + clean physics (KE→fracture) | **empirical-led**, physics-supported | med-high |
 | **Wind × {s,w}** | mature structural eng (ASCE, wind tunnel) + adaptable HAZUS curves | **analytical/standards-led**, empirically validated | med-high |
-| **Wildfire × solar** | component temp standards (IEC) + heat-transfer physics; **few RE loss events** | **analytical-led** (component aggregation), expert-refined | medium |
+| **Wildfire × solar** | source-native FSim flame-length probability bins + component-scale fire tests and heat-transfer mechanisms; no validated site-exposure→component-damage→economic-loss chain | **research scaffold only**; exposure bridge and loss calibration withheld | low |
 | **Flood × solar** | IP ratings (ingress anchor) + depth-damage literature; duration poorly captured | **standards-anchored + analytical**; duration is the gap | med-low |
 | **Tornado × wind** | sparse; extreme-intensity → near-total, physics-bounded | **analytical/bounding** | low-med |
 
@@ -224,7 +227,8 @@ The eventual per-curve artifact (produced by running this guide) should carry:
    a per-(hazard × failure-unit) CURVE record:
 
    scope            hazard, failure-unit (doc 01), use-case, physical-damage-only
-   x-axis           the intensity variable + chain node (doc 02): e.g. fireline intensity
+   x-axis           the intensity variable + chain node (doc 02): e.g. 3-s gust; unresolved when the
+                    source-native hazard output is still upstream of delivered component exposure
    form             step | sigmoid | states | distribution  -- chosen by §5 rule, justified
    parameters       L (cap, from value-allocation doc 03), x₀, k  (or state thresholds)
    evidence_log     each parameter -> its class (empirical/analytical/standards/expert) + source

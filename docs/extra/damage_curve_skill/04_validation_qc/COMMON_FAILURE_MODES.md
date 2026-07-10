@@ -23,7 +23,33 @@
 - 10 m gust fed into hub-height curve;
 - feet/meters or mph/mps mismatch;
 - water depth datum not tied to component datum;
-- source-native hazard variable differs from curve-native demand.
+- source-native hazard variable differs from curve-native demand;
+- coarse hazard class is silently converted to local component demand;
+- a universal converter hides geometry, duration, shielding, contact, or event state.
+- metadata, JSON, site-adapter, and known-answer-test inputs use different field names without an explicit alias/group mapping.
+```
+
+## Evidence failures
+
+```text
+- bibliography exists but load-bearing claims have no exact locators;
+- source observation is promoted from ignition to failure, replacement, or economic DR;
+- legacy equation is adopted without reproducing its own table;
+- citation identity or endpoint does not match the claim;
+- plausible-looking low/base/high values are called uncertainty without calibration;
+- an unsupported curve is merely lowered and labeled conservative.
+```
+
+## Site-condition and value failures
+
+```text
+- fence, wall, firebreak, vegetation, burial, enclosure, or suppression gets blanket credit;
+- a control is applied in both delivered exposure and vulnerability/value allocation;
+- code/guidance requirement is treated as a measured efficacy coefficient;
+- unknown mitigation receives credit or unknown exposure defaults to one;
+- protected and exposed value are pooled silently;
+- support/logistics receive a DR and are also scaled with direct loss;
+- whole-site value is used as a component-curve denominator.
 ```
 
 ## Reportability failures
@@ -32,5 +58,7 @@
 - scalar EAL reported without cap preflight;
 - PML/VaR emitted from scalar DR;
 - insurance premium treated as expected loss;
-- BI/downtime mixed with physical damage.
+- BI/downtime mixed with physical damage;
+- no-curve scaffold contains numeric DR/loss fixtures that downstream users can mistake for outputs;
+- caveated numbers are emitted where capability should be withheld.
 ```

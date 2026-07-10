@@ -56,3 +56,15 @@ The damage-code layer is a component of M3. It should not embed M1 frequency, M4
 ## 10. Build for future spread even when v1 is scalar
 
 V1 cells may emit scalar means, but the schema must remain distribution-ready so that future tail-supporting models can be added without re-plumbing the pipeline.
+
+## 11. Pressure-test before smoothing
+
+Reproduce equations, tables, units, endpoints, boundary behavior, and dollar denominators before adopting a number. A smooth curve is not evidence, and lowering an unsupported curve does not make it conservative.
+
+## 12. Site controls are causal fields, not blanket credits
+
+For site-conditioned hazards, separate site-transfer inputs, derived exposure, vulnerability, and value allocation. Fences, walls, barriers, maintenance, protection, access, and response can be beneficial, neutral, or adverse depending on conditions. Unknown controls receive no credit, and one causal effect is applied once.
+
+## 13. A governed no-curve result is productive
+
+Deep research may correctly end with `curve_records: []` and `NO_RUNTIME_CURVE`. Preserve the evidence map, failure units, value crosswalk, site adapter, rejected legacy arithmetic, and promotion triggers without allowing provisional numbers into runtime-shaped artifacts.

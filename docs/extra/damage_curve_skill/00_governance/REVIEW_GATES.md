@@ -12,11 +12,26 @@
 ## Gate B — evidence
 
 ```text
-[ ] source inventory complete enough for v-state;
+[ ] source register has stable IDs, exact locators, roles, tiers, transfer limits, and decisions;
+[ ] load-bearing claims have claim-level provenance;
 [ ] chosen spine explained;
 [ ] rejected/demoted sources explained;
 [ ] parameter tier table populated;
-[ ] T3/T4 update triggers listed.
+[ ] T3/T4 update triggers listed;
+[ ] legacy equations/tables/citations reproduced when legacy material is used;
+[ ] proposed numbers pressure-tested at boundaries and on explicit denominators.
+```
+
+## Gate B2 — seven-step, site, and value integrity
+
+```text
+[ ] seven-step audit records pass/partial/withheld status and blocking seam for every step;
+[ ] row-level value crosswalk reconciles direct, mixed, support, and excluded rows;
+[ ] support/logistics are allocated once, not assigned an independent DR;
+[ ] site-conditioned hazards have a site adapter;
+[ ] fences/walls/barriers and bypass pathways receive no blanket credit;
+[ ] adapter includes a double-counting matrix;
+[ ] unknown at-risk/exposure/mitigation states do not silently become one/full credit.
 ```
 
 ## Gate C — runtime contract
@@ -35,7 +50,8 @@
 [ ] failure-unit DR support stated;
 [ ] scenario loss support requires value basis;
 [ ] scalar EAL requires downstream frequency + value basis + cap-binding pass;
-[ ] PML/VaR/TVaR withheld unless spread exists.
+[ ] PML/VaR/TVaR withheld unless spread exists;
+[ ] no-curve scaffold emits no numeric DR/loss and uses NO_RUNTIME_CURVE.
 ```
 
 ## Gate E — release

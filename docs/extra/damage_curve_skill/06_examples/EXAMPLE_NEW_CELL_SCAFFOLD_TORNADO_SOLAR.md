@@ -32,8 +32,15 @@ in/out split from strong_wind_solar
 placeholder metadata spec
 capability declaration withholding metrics
 open evidence plan
+seven-step audit
+source and claim register skeletons
+row-level value crosswalk attempt
+site-condition adapter when site transfer matters
+no-curve known-answer tests using NO_RUNTIME_CURVE
 ```
 
 ## Important guardrail
 
 Do not reuse straight-line wind solar curves for tornado debris/missiles without a dossier-backed pathway. Tornado_solar may be related to strong_wind_solar, but it is not automatically the same cell.
+
+Use `EXAMPLE_FAIL_CLOSED_WILDFIRE_SOLAR_SCAFFOLD.md` for the full evidence-pressure-test pattern.

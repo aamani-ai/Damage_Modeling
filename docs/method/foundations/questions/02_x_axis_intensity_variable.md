@@ -119,15 +119,16 @@ both depth and velocity. But doc 08 already told us not to model at the asset le
 
 This is a strong simplifier: the x-axis question is *mostly already answered* by getting the grain
 right. True 2-D surfaces are the exception we handle case by case, not the rule we design for. §5
-applies the duration test and finds the exception count for v1 is **at most one** (wildfire
-residence time), which is deferred — so v1 is univariate throughout.
+applies the duration test and leaves **one unresolved candidate** (wildfire residence time). The
+wildfire×solar scaffold therefore withholds a runtime curve rather than treating a one-dimensional
+shortcut as established.
 
 ---
 
-## 5 · The one surviving candidate is duration — and it resolves to univariate for v1
+## 5 · The one surviving candidate is duration — resolved where supported, withheld for wildfire
 
 Both escapes dispose of the obvious multivariate cases. The *only* candidate left for a genuine
-second axis is **duration**, and resolving it is what lets v1 be univariate throughout. The key is
+second axis is **duration**. Supported v1 cells can resolve it; wildfire×solar cannot yet. The key is
 to not conflate two things both called "duration":
 
 ```
@@ -147,7 +148,7 @@ Sorting the in-scope pairs by process:
 | **Hail** | 2a peak | impact is instantaneous; "storm length" = stone *count* = **frequency**, not duration | univariate (KE); no axis |
 | **Flood** | 2a threshold | shorting is set by *reaching* the equipment (depth); longer submersion → corrosion is 2nd-order / maintenance | univariate (depth) + univariate (velocity), per §4 |
 | **Wind** | 2a per event; 2b cross-event | a single extreme *event* does **peak-load** damage (gust exceeds threshold *now*); **fatigue** is slow accumulation over *years* of normal operation — not an event, belongs to the lifetime/disruption track (AWN-31) | univariate (gust); fatigue → out of event-damage scope |
-| **Wildfire** | **2c burn-through** | flame **residence time** plausibly drives damage beyond what fireline intensity alone captures — a slow front delivers more heat than a fast flash at equal intensity; and this is *per-event*, so it does **not** escape to the disruption track | the **one** genuine 2-D candidate — **deferred** (§5a) |
+| **Wildfire** | **2c burn-through** | flame **residence time** plausibly changes thermal dose beyond what a flame-length class alone captures; it is a per-event exposure variable, not a disruption-track duration | unresolved multivariate candidate; no runtime curve (§5a) |
 
 The decisive move for **wind**: our pipeline models discrete *events* (compound-Poisson). Fatigue
 isn't an event — it's the erosion of capacity *between* events — so it leaves the per-event damage
@@ -155,26 +156,28 @@ curve by the same logic that puts feathering and derating on the disruption trac
 physical distinction, not a dodge. So wind is **peak-driven, univariate on gust**, for event-based
 damage.
 
-### 5a · Wildfire residence time — the one real 2-D case, deferred (not denied) `[OURS]`
+### 5a · Wildfire residence time — a material candidate, not yet parameterized `[OURS]`
 
-Wildfire burn-through (2c) is genuine and *in scope* (per-event, physical). It is the single honest
-exception to "everything is univariate." We **defer** it from v1 rather than build 2-D machinery:
+Wildfire burn-through (2c) is in scope, and duration may be first-order. That does not by itself prove
+that a two-dimensional surface is required, nor does it justify collapsing duration into a
+one-dimensional fireline-intensity curve. The proposed wildfire×solar cell remains noncanonical and
+emits no runtime curve while the local-exposure bridge is missing:
 
-- it's a **single** pair — building general 2-D curve machinery for one case violates
-  `system_coherence` (don't build the cathedral for one mass);
-- the built wildfire cell already uses **fireline intensity as a univariate axis** and works, bounding
-  the marginal truth residence-time adds;
-- `modularity_and_scaling` says: ship univariate v1, **document the wall**, build the 2-D extension
-  *when* the wildfire cell's error demands it — not pre-emptively.
+- FSim landscape products provide burn probability and **conditional flame-length probability bins**,
+  not a continuous fireline-intensity time series at the equipment;
+- flame length is still upstream of the delivered radiant/convective exposure, ember assault, and
+  exposure duration that act on solar components;
+- distance, intervening fuels, wind, terrain, equipment geometry, and barriers such as walls or fences
+  can change that bridge and cannot be hidden inside an uncalibrated universal curve.
 
-> **The documented wall `[OURS]`.** Wildfire residence-time is a known, real, in-scope second
-> physical axis, *deliberately excluded from v1*. When wildfire fidelity demands it, the migration is
-> a 2-D fireline-intensity × residence-time surface for the fire-exposed failure unit — and *only*
-> that unit. Until then: univariate on fireline intensity. (Practical note: pre-computed FSim
-> simulations make a fireline-intensity-keyed univariate curve directly buildable today.)
+> **The documented wall `[OURS]`.** FSim's source-native flame-length bins may feed an exposure
+> selector, but they are not themselves component demand. Promotion requires a defensible mapping to
+> delivered local exposure (including time/dose where material), followed by a component-response and
+> economic-loss mapping. Whether the promoted representation is one-dimensional, two-dimensional, or
+> state-based is an evidence decision, not a v1 presumption.
 
-So the v1 result is clean: **every in-scope damage curve is univariate**, with wildfire residence
-time the one named, deferred exception.
+So the v1 interface may remain one-dimensional for supported cells, but wildfire×solar is an explicit
+withheld exception until its exposure representation is earned.
 
 ---
 
@@ -187,8 +190,8 @@ Wildfire makes this vivid, but it **generalizes to every pair**:
 ```
    the causal chain (wildfire shown; every hazard has one):
 
-   fireline intensity  -->  heat flux at equipment  -->  component temperature  -->  DAMAGE
-   (kW/m, hazard output)   (kW/m^2, after geometry)    (deg C of the part)         (DR)
+   FSim conditional     -->  realized local fire    -->  delivered heat/ember  -->  component   --> DAMAGE
+   flame-length bins         conditions                  exposure + duration        response        (DR)
 
    hail:   stone kinetic energy  -->  impact force at panel  -->  glass stress  -->  DAMAGE
    flood:  water depth           -->  hydrostatic load/ingress -->  equipment short --> DAMAGE
@@ -201,7 +204,8 @@ Wildfire makes this vivid, but it **generalizes to every pair**:
    UPSTREAM (hazard output)        <---------------->     DOWNSTREAM (at the component)
 
    + matches the HAZARD data you have      |   + closer to the actual DAMAGE physics
-     (FSim emits fireline intensity)       |     (temperature/stress IS what breaks the part)
+     (FSim supplies conditional            |     (delivered exposure and component
+      flame-length probabilities)          |      response drive damage)
    + one curve travels across equipment    |   + more mechanistically honest
    - hides the coupling (geometry,         |   - REQUIRES a coupling model to reach the node
      exposure, material) inside the curve  |     (intensity -> temp needs assumptions + data)
@@ -210,23 +214,26 @@ Wildfire makes this vivid, but it **generalizes to every pair**:
 > **The chain-position rule `[OURS]`.** Put the x-axis at the **most-downstream node on the causal
 > chain that your hazard layer can actually deliver as data.** Go as close to the damage as the data
 > lets you; no closer. Everything between that node and the damage is absorbed into the *curve* (and
-> its conditioners) — not the axis. You pick the axis the data can *speak*.
+> its conditioners) — not the axis — **only after that intervening bridge is supported for the stated
+> domain**. You pick the axis the data can *speak* without inventing the missing coupling.
 
 This is the `hazard_asset_specificity` standard-interface idea applied to the x-axis: the axis sits
 at the **seam where hazard data is emitted**, and the downstream physics lives *inside* the curve.
 
-**Worked — wildfire `[OURS]`.** FSim emits **fireline intensity**, so fireline intensity *is* the
-axis — not because component temperature wouldn't be more honest (it would), but because temperature
-is downstream of a coupling model (intensity → heat-flux → temp) we'd have to build *and feed*,
-while fireline intensity is handed to us. The intensity→temperature physics lives inside the curve.
+**Worked — wildfire `[OURS]`.** FSim supplies source-native conditional flame-length probability
+classes, which are appropriate upstream hazard inputs. It does **not** hand us continuous fireline
+intensity, equipment-level heat flux, ember dose, or residence time. The wildfire×solar scaffold
+therefore records the FSim classes without declaring them the damage-curve x-axis. A local-exposure
+model must first connect those classes and site conditions to the demand experienced by each failure
+unit; until that bridge is supported, damage and loss outputs are withheld.
 
 **The coherence consequence (ties to §6) `[OURS]`.** Whatever node you pick, the variables *upstream*
-of it that you folded away must not silently become forgotten conditioners. Wildfire-on-fireline-
-intensity means distance-from-flame and exposure-geometry now live *inside* the curve — so either the
-curve is calibrated for a representative geometry (flag it as a conditioner, §6) or you've hidden a
-variable. Moving the axis **upstream** increases what's hidden in the curve and the conditioner list;
-moving it **downstream** decreases it but demands more coupling. Same "where does the complexity live"
-trade as everywhere else.
+of it that you folded away must not silently become forgotten conditioners. For wildfire, distance
+from flame, fuel continuity, wind/terrain, exposure geometry, barriers, and ember pathways must be
+explicit selectors, conditioners, or exposure-model inputs. They may be absorbed into a curve only
+after calibration for the stated domain. Moving the axis **upstream** increases what the curve would
+hide; moving it **downstream** decreases hidden coupling but demands more exposure data. Same "where
+does the complexity live" trade as everywhere else.
 
 ---
 
@@ -259,22 +266,22 @@ axis-dimensionality problem, so it stays out of this doc and lives in [component
 ## 7 · Per-hazard map (resolved for v1)
 
 Both rules applied to the in-scope damage hazards. Q-x1 (how many) and a first Q-x2b (where on the
-chain, data-driven). These are the v1 axis assignments, not hypotheses.
+chain, data-driven). These are v1 assignments for supported cells; wildfire×solar is deliberately
+shown as an unresolved proposed scaffold rather than a runtime assignment.
 
 | Hazard × asset | Q-x1: axes | Escape / reason | x-axis (v1) + chain node |
 |---|---|---|---|
 | **Hail × solar** | univariate | E1 composite KE; count→frequency | **kinetic energy / MESH** (hazard-output node) |
 | **Tornado/strong wind × wind** | univariate | E1 gust as peak; fatigue→cross-event→disruption | **3-s gust** (hazard-output node) |
 | **Flood × solar** | two univariate | E2 split: depth→electricals, velocity→foundation | **depth** & **velocity**, summed |
-| **Wildfire × solar** | univariate (v1) | E1 fireline intensity; residence-time 2-D **deferred** (§5a) | **fireline intensity** (FSim-emitted node) |
+| **Wildfire × solar** | unresolved; no runtime curve | source-native FSim flame-length bins are upstream of delivered local exposure; duration/embers/site geometry remain unresolved (§5a) | **not selected**; FSim conditional flame-length probability bins retained as upstream inputs |
 | **Hurricane × {s,w}** | split | E2: wind→structure, surge/rain→flood pathway | **gust** + flood pathway (cross-linked, per catalog) |
 | **Winter ice/snow × {s,w}** | univariate | E1 gravity load as composite | **areal load (kPa)** (hazard-output node) |
 
-The recurring pattern, now confirmed: **E1 collapses most, E2 splits the rest, and every leftover
-"second axis" candidate resolves to duration (→ disruption or deferred) or count (→ frequency).** The
-v1 conclusion is therefore clean: *in-scope physical damage curves are univariate, on the doc-08
-grain, with at most a per-part axis split (flood) — and the single genuine 2-D surface (wildfire
-residence time) is deferred.*
+The recurring pattern remains useful: **E1 collapses most, E2 splits many others, and count often
+belongs in frequency.** It is not a license to force every pair into one dimension. Wildfire×solar
+is the named fail-closed case: its upstream hazard descriptor is known, but the dimensionality and
+chain position of a defensible damage response are not.
 
 ---
 
@@ -284,28 +291,29 @@ residence time) is deferred.*
   part-split) to earn its place.
 - **Most apparent multivariate-ness dissolves at the doc-08 grain** — different parts respond to
   different variables → separate univariate curves, summed.
-- **Duration is peak-captured or disruption-side** for every in-scope pair except wildfire
-  burn-through, which is the **one genuine 2-D case, deferred from v1** (§5a) — so **v1 is univariate
-  throughout.**
+- **Duration is peak-captured or disruption-side** for many in-scope pairs. Wildfire burn-through is
+  the unresolved exception; it receives no runtime curve until its materiality and exposure bridge
+  are supported (§5a).
 - **Chain-position rule (Q-x2b):** the x-axis sits at the **most-downstream node the hazard data can
-  deliver**; downstream physics lives inside the curve. Wildfire → fireline intensity (FSim-emitted).
+  deliver**. FSim's flame-length bins are an upstream wildfire input, not a substitute for delivered
+  local exposure or component response.
 - **Conditioners (stow, age, prior damage) are NOT axes** — they're curve modifiers (§6), parked to
   [component-depth (parked)](../../../extra/discussion/archive/07_component_attribute_depth.md). Whatever the axis folds away upstream must be tracked as a
   conditioner, not lost.
-- **Payoff for [`05`](05_emit_object.md):** representation can assume a **univariate** input, keeping
-  "scalar vs. modes vs. distribution" a clean 1-D question — with one flagged 2-D exception (wildfire)
-  it can ignore for v1.
+- **Payoff for [`05`](05_emit_object.md):** supported curves may retain a clean one-dimensional emit
+  interface. A pair that cannot earn its axis, such as wildfire×solar, withholds its runtime object;
+  the interface does not manufacture a scalar merely to preserve uniformity.
 
 ---
 
 ## 9 · Open / revisit triggers
 
-- **Wildfire residence-time materiality.** Is residence-time a *first-order* lever on fire damage, or
-  second-order like flood corrosion? If second-order, wildfire is cleanly univariate and the 2-D case
-  vanishes entirely; if first-order, the deferred 2-D extension (§5a) becomes higher priority. A fire-
-  physics / FSim-data question — the one genuinely open item.
-- **Composite metric validity (Q-x2a).** When E1 collapses to a composite (hail KE, fireline
-  intensity, areal load), is the combiner *real physics* (KE = ½mv²) or a convenient average that
+- **Wildfire exposure bridge and residence-time materiality.** Establish how source-native FSim
+  flame-length classes, local fuels, wind/terrain, separation, barriers, and ember pathways map to
+  delivered component exposure, and then test whether duration is first-order. FSim alone does not
+  answer that component-demand question.
+- **Composite metric validity (Q-x2a).** When E1 collapses to a composite (hail KE, areal load, or a
+  future calibrated fire metric), is the combiner *real physics* (KE = ½mv²) or a convenient average that
   hides a metric choice? E1 is only a clean escape if the combiner is principled.
 - **Chain-position vs the conditioner ledger.** Each upstream-axis choice (§5b) pushes variables into
   the curve as implicit conditioners. Confirm per cell that none are silently dropped (the §6 tie-in).
@@ -317,13 +325,12 @@ residence time) is deferred.*
 
 ## 10 · Status
 
-🟢 **Near-final.** Two rules established and applied across all in-scope pairs: **Q-x1 parsimony**
-(univariate by default; a second axis survives only by failing both escapes — and after the duration
-analysis, *none* do for v1) and **Q-x2b chain-position** (axis at the most-downstream node the hazard
-data delivers). Result: **every v1 damage curve is univariate**, with wildfire residence-time the one
-named, deferred 2-D case. Conditioners are kept off the axis (§6). This hands [`05`](05_emit_object.md)
-a clean univariate input. Remaining open items (§9) are refinements, not blockers — chiefly whether
-wildfire residence-time is material enough to pull its deferred 2-D extension forward.
+🟢 **Near-final as a decision standard.** Two rules are established: **Q-x1 parsimony** (univariate by
+default, with dimensionality earned from evidence) and **Q-x2b chain-position** (axis at the most-
+downstream node the hazard data can actually deliver). Supported v1 curves can use the resulting
+univariate interface. Wildfire×solar is a deliberate blocker, not a counterexample to hide: FSim
+provides upstream conditional flame-length bins, while the local exposure bridge and response
+dimensionality remain unresolved, so the proposed cell emits no runtime curve.
 
 *Links:* [`05` emit object](05_emit_object.md) (the consumer) · [`01` grain](01_granularity.md)
 (does the heavy lifting via E2) · [component-depth (parked)](../../../extra/discussion/archive/07_component_attribute_depth.md) (conditioners) ·

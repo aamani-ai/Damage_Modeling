@@ -107,3 +107,51 @@ The skill now contains an explicit bridge for someone who has no prior context: 
 - Clarified that ZIP/source-drop ingestion is for outside-package work that needs to be preserved, inventoried,
   compared, and promoted back into canonical repo folders.
 - Governance logic unchanged.
+
+## 0.5 — evidence rigor and fail-closed new-cell hardening — 2026-07-09
+
+Added:
+
+```text
+- Hazard-neutral seven-step audit and evidence pressure-test checklist.
+- Controlled wildfire_solar no-curve worked example.
+- Source-register, claim/parameter-register, row-level value-crosswalk,
+  legacy-ingestion, site-condition-adapter, and seven-step templates.
+- Required exact locators, endpoint transfer limits, canonical parameter tiers,
+  reproducible legacy equation/table checks, and explicit update triggers.
+- Site-condition controls for fences, walls, barriers, bypass pathways,
+  no-credit defaults, and exposure/vulnerability/value double-count prevention.
+- No-curve known-answer tests and NO_RUNTIME_CURVE reportability checks.
+- Rectangular CSV-register validation so missing or extra fields cannot silently shift provenance columns.
+- Canonical input-field alignment across metadata, JSON, site adapters, and known-answer tests, with explicit alias and documentation-group rules.
+- Bounded evidence-search logging for load-bearing negative-evidence claims, including cutoff, queries, endpoint tests, scope limits, and update triggers.
+- Expanded NEW_CELL_SCAFFOLD gates and an executable governance self-test.
+```
+
+Changed:
+
+```text
+- Normalized capability statuses to supported | conditional | withheld, with
+  conditions and withholding explanations carried as reason codes.
+- Clarified that repository presence is not package/runtime promotion. Proposed
+  artifacts use package_release=unreleased, package_baseline=<current release>,
+  package_inclusion_status=not_included, and canonical_runtime_artifact=false.
+- Kept model/document revisions atomic and moved scaffold, promotion, review,
+  and documentation state into separate lifecycle/status fields.
+- Marked controlled Test B complete using the wildfire_solar scaffold.
+```
+
+Version impact:
+
+```yaml
+skill_revision: 0.4 -> 0.5
+damage_library_package_release: unchanged
+cell_model_versions: unchanged
+cell_documentation_revisions: unchanged_by_this_skill_update
+schema_artifact_version: unchanged
+runtime_outputs_can_change: false
+cells_used_as_controlled_examples:
+  - wildfire_solar
+```
+
+Status remains `controlled-use` until independent reviewer sign-off. The stable folder name remains `damage_curve_skill/`.

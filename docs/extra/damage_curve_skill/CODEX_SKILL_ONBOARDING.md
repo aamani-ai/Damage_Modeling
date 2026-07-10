@@ -64,7 +64,7 @@ parameter tier table, derivation rationale, and validation/QC trail.
 3. 00_governance/CHANGE_CLASSIFIER.md
 4. 00_governance/VERSIONING_POLICY.md
 5. 01_workflows/<workflow that matches the classified change>.md
-6. 05_release/RELEASE_CHECKLIST.md
+6. 00_governance/RELEASE_CHECKLIST.md
 ```
 
 Then Codex should read the current library state.

@@ -184,9 +184,10 @@ mechanics (the spread form) when a binding cap or a tail request forces rung 2 (
 
 ## 9 · Open / revisit triggers
 
-- **Does any built cell's cap bind materially?** (Carried from [`05`](05_emit_object.md) §7.) If
-  hail/wildfire/wind saturation bites inside the spread, that cell's *EAL* is already biased and must
-  climb — the highest-priority check, because it changes a number we'd otherwise ship today.
+- **Does any runtime-capable cell's cap bind materially?** (Carried from [`05`](05_emit_object.md)
+  §7.) If hail/wind saturation bites inside the spread, that cell's *EAL* is already biased and must
+  climb — the highest-priority check, because it changes a number we'd otherwise ship today. A
+  proposed cell with no runtime curve, including wildfire×solar, withholds metrics before this test.
 - **The withhold-vs-caveat call.** Decided as *withhold*; the consumer-vacuum counter-argument (§4) is
   the one a reviewer might reopen. If reopened, the resolution must still never let a fabricated tail
   become the *reported* VaR.

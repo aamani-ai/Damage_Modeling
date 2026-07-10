@@ -8,4 +8,4 @@ Run:
 python tools/run_self_tests.py
 ```
 
-The tests check that representative change requests are classified with the expected change class and version impacts.
+The tests check that representative change requests are classified with the expected change class and version impacts. The fail-closed new-cell case also asserts that the expanded evidence, site-condition, value, capability, and no-curve gates are present.

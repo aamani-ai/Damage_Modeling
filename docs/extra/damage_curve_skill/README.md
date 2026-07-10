@@ -84,6 +84,18 @@ The damage-curve library now has multiple independent version streams:
 
 The skill keeps those streams separate so that a docs improvement does not look like a curve change, and a new hazard × asset scaffold does not look like a calibrated runtime model.
 
+## Current skill status
+
+```yaml
+skill_revision: 0.5
+status: controlled-use
+library_package_version_impact: none
+cell_model_version_impact: none
+schema_version_impact: none
+```
+
+Revision 0.5 codifies the rigorous fail-closed research workflow demonstrated by the controlled `wildfire_solar` scaffold. It changes this evergreen operating manual, not any released damage curve.
+
 ## Folder map
 
 ```text
@@ -121,9 +133,10 @@ damage_curve_skill/
 3. 00_governance/CHANGE_CLASSIFIER.md
 4. 00_governance/VERSIONING_POLICY.md
 5. 01_workflows/ADD_NEW_CELL_WORKFLOW.md
-6. 01_workflows/UPDATE_EXISTING_CELL_WORKFLOW.md
-7. 04_validation_qc/REPORTABILITY_RULES.md
-8. 05_release/RELEASE_CHECKLIST.md
+6. 02_design_guides/EVIDENCE_PRESSURE_TEST_AND_FAIL_CLOSED_CHECKLIST.md
+7. 01_workflows/UPDATE_EXISTING_CELL_WORKFLOW.md
+8. 04_validation_qc/REPORTABILITY_RULES.md
+9. 00_governance/RELEASE_CHECKLIST.md
 ```
 
 ## Promotion path
@@ -138,4 +151,4 @@ Test B - new-cell scaffold
   expected: new scaffold state, no false v1.0 release.
 ```
 
-After those pass, use it as the default operating workflow for future damage-curve-library changes.
+Both controlled workflow tests have now been exercised. Reviewer sign-off remains the final promotion gate; see `ROADMAP_AND_PROMOTION.md`.

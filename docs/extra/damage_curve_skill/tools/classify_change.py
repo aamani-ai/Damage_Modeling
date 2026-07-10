@@ -48,7 +48,20 @@ def classify(signals: Dict[str, Any]) -> Dict[str, Any]:
                 "docs_revision": "initial_or_bump",
                 "schema_version": "no_change",
             },
-            "required_gates": ["scope_boundary", "failure_unit_candidates", "withheld_capability_declaration"],
+            "required_gates": [
+                "scope_boundary",
+                "failure_unit_candidates",
+                "seven_step_audit",
+                "source_register",
+                "claim_level_provenance",
+                "parameter_tier_table",
+                "evidence_pressure_test",
+                "legacy_numerical_audit_if_applicable",
+                "site_condition_adapter_if_site_conditioned",
+                "value_crosswalk",
+                "withheld_capability_declaration",
+                "no_curve_known_answer_tests",
+            ],
         }
 
     if changes_schema:

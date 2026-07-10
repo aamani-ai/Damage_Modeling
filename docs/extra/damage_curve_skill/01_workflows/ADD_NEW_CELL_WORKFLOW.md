@@ -14,6 +14,17 @@ Use for a new hazard × asset pair.
 
 Do not call the cell `model v1.0` unless the runtime curve artifact is ready.
 
+For a proposed artifact stored in the repository but not released in a package, record:
+
+```yaml
+package_release: unreleased
+package_baseline: library vX.Y
+package_inclusion_status: not_included
+canonical_runtime_artifact: false
+```
+
+Repository presence supports review; it does not promote runtime/package status.
+
 ## Phase 1 — scope dossier
 
 Create a cell README and scope note that answer:
@@ -71,18 +82,41 @@ Use:
 Create:
 
 ```text
-source inventory
+source register with exact locators and transfer limits
+claim-level provenance register
 source-to-parameter map
 parameter tier table
 derivation rationale
+evidence pressure test
+legacy numerical audit, when legacy material exists
 open seams/update triggers
 ```
+
+Use `02_design_guides/EVIDENCE_PRESSURE_TEST_AND_FAIL_CLOSED_CHECKLIST.md`. Reproduce proposed equations and tables before adopting them. A source can support a mechanism without supporting a converter, threshold, curve ordinate, economic endpoint, or whole-asset transfer.
 
 ## Phase 5 — value crosswalk
 
 Use `02_design_guides/VALUE_CROSSWALK_GUIDE.md`.
 
 Map each failure unit to engineering substrate and value workbook buckets. If no value bucket exists, create an explicit placeholder and update trigger.
+
+The crosswalk must reconcile every material row and distinguish direct vulnerable value, mixed rows, support/logistics allocated once, and excluded soft/sunk/nonphysical value. Unknown at-risk or exposure shares do not default to one.
+
+## Phase 5A — seven-step and site-condition audit
+
+Complete `templates/TEMPLATE_SEVEN_STEP_AUDIT.md`:
+
+```text
+1. define the asset and boundary;
+2. decompose into failure units;
+3. choose the y-axis and value basis;
+4. split the value basis row by row;
+5. allocate physical value by failure unit and zone;
+6. specify site-condition exposure logic;
+7. apply qualified curves and reconcile loss, or withhold.
+```
+
+When site conditions can materially change delivered demand or affected value, also complete `templates/TEMPLATE_SITE_CONDITION_ADAPTER.md`. Include fences, walls, barriers, vegetation/fuels, protection, access/response, and bypass pathways when applicable. Include a double-counting matrix and assign no blanket mitigation credit.
 
 ## Phase 6 — artifact creation
 
@@ -97,6 +131,8 @@ workbook or derivation/audit view, if useful
 previews, if workbook/dashboard exists
 ```
 
+If no curve passes the evidence chain, a proposed non-canonical artifact may preserve scope, inputs, evidence, and `curve_records: []`. Rejected or withdrawn numeric arrays belong only in a labeled audit memo/workbook, not in runtime-shaped curve records.
+
 ## Phase 7 — capability declaration
 
 Every new cell, even a scaffold, needs a capability stance.
@@ -104,10 +140,11 @@ Every new cell, even a scaffold, needs a capability stance.
 For scaffold/draft:
 
 ```text
-failure_unit_scalar_dr: withheld_or_not_implemented
+failure_unit_scalar_dr: withheld
 scenario_loss: withheld
 scalar_eal: withheld
 pml/var/tvar: withheld
+standard_reason: NO_RUNTIME_CURVE
 ```
 
 For released v1.0:
@@ -115,7 +152,8 @@ For released v1.0:
 ```text
 failure_unit_scalar_dr: supported if deterministic curves are complete
 scenario_loss: supported only with explicit value/exposure basis
-scalar_eal: conditional_require_cap_binding_preflight unless distribution gate passes
+scalar_eal: conditional unless distribution and cap-binding gates pass
+scalar_eal reason while conditional: CAP_BINDING_PREFLIGHT_NOT_EXECUTED
 pml/var/tvar: withheld unless spread exists
 ```
 
@@ -133,3 +171,5 @@ CHANGED_FILES updated
 VALIDATION_REPORT added
 release note added
 ```
+
+For a no-curve scaffold, known-answer tests must assert that valid inputs emit no numeric DR or loss and return `NO_RUNTIME_CURVE`. A smooth provisional curve is not a required scaffold output.

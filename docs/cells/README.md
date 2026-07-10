@@ -12,6 +12,12 @@ live under each cell folder.
 | `wind_tornado_wind` | model v1.0 / docs r3 | `WIND_TORNADO_WIND_V1` | [`wind_tornado_wind/`](wind_tornado_wind/README.md) |
 | `strong_wind_solar` | model v1.0 / docs r2 | `STRONG_WIND_SOLAR_V1` | [`strong_wind_solar/`](strong_wind_solar/README.md) |
 
+## Proposed cells — not part of package v2.5
+
+| Cell | Candidate/docs | Damage code | Entry point |
+|---|---|---|---|
+| `wildfire_solar` | pressure-tested research scaffold v0.1 / docs r1 | `WILDFIRE_SOLAR_PROPOSED_V0_1` | [`wildfire_solar/`](wildfire_solar/README.md) |
+
 Authoritative package registry:
 [`VERSION_REGISTRY.md`](VERSION_REGISTRY.md).
 

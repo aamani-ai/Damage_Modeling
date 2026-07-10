@@ -8,6 +8,13 @@ Keep these separate.
 | Conditioner | Event-time or operational state that shifts/blends vulnerability | tracker stow state, flood protection deployed, turbine parked state |
 | Exposure | Affected value/quantity/local demand modifier | array exposure fraction, local zone multiplier, component elevation |
 
+For site-conditioned hazards, add two explicit roles before the final exposure:
+
+| Type | Definition | Examples |
+|---|---|---|
+| Bridge input | Measured site/event input used once to derive local demand | fuel class, distance, terrain, barrier geometry, wind direction |
+| Derived exposure | Output of a qualified transfer model or measurement | local heat flux and duration, component flood depth, impact demand |
+
 ## Required fields
 
 ```yaml
@@ -33,3 +40,18 @@ metadata_flag_if_default_used:
 - Unknown metadata must create flags.
 - Aliases are allowed, but canonical names must be declared.
 ```
+
+## Site-control rules
+
+Fences, walls, berms, firebreaks, vegetation treatment, drainage, burial, enclosures, access, suppression, and other controls must be represented at their actual causal role. For each applicable control:
+
+```text
+capture construction/material, geometry, continuity/gaps, relative location,
+condition/maintenance, event availability, and bypass pathways;
+do not convert code/guidance language into an efficacy coefficient;
+do not give unknown mitigation credit;
+do not assume a control is always protective;
+do not apply the same effect in the site bridge, vulnerability, and value allocation.
+```
+
+Every site-conditioned adapter needs a double-counting matrix showing related inputs, the one permitted treatment, the prohibited duplicate treatment, and missing/default behavior. Use `../templates/TEMPLATE_SITE_CONDITION_ADAPTER.md`.

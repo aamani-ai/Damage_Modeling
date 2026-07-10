@@ -233,10 +233,11 @@ the spread *form* per hazard (the climb, when N forces it); financial terms N-fi
 
 ## 7 · Open / revisit triggers
 
-- **Does the cap bind materially in any built cell?** If hail/wildfire/wind caps bite inside the
+- **Does the cap bind materially in any runtime-capable cell?** If hail/wind caps bite inside the
   spread, scalar EAL is already biased there (§2) and that cell must climb to rung 2 *for EAL itself*,
   not just for the tail. Needs a per-cell check against the curve's saturation behavior. **The most
-  decision-relevant open item.**
+  decision-relevant open item.** Proposed cells with no runtime curve, including wildfire×solar, are
+  excluded from this cap-binding test and withhold metrics upstream.
 - **The spread form, when we climb.** Beta-on-[0,1] is the natural default for a bounded DR, but
   per-hazard validation data may favor lognormal or elicited three-point. Deferred until a nonlinearity
   forces the climb (don't choose a form we're not yet using).

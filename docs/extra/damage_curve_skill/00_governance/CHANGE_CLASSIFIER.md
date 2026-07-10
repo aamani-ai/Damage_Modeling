@@ -106,3 +106,28 @@ required_gates:
   - capability_declaration_review
   - cap_binding_policy_review
 ```
+
+## Expanded gates for `NEW_CELL_SCAFFOLD`
+
+A deeply researched scaffold is not allowed to skip evidence governance merely because it emits no curve. Required gates are:
+
+```text
+scope_boundary
+failure_unit_candidates
+seven_step_audit
+source_register
+claim_level_provenance
+parameter_tier_table
+evidence_pressure_test
+legacy_numerical_audit_if_applicable
+site_condition_adapter_if_site_conditioned
+value_crosswalk
+withheld_capability_declaration
+no_curve_known_answer_tests
+```
+
+If no curve passes, the cell remains a scaffold and `NO_RUNTIME_CURVE` is the successful fail-closed outcome.
+
+## Changes to this evergreen skill
+
+The classes above govern damage-library content. A change only to `damage_curve_skill/` updates the separate skill revision/changelog. It does not bump a package, cell model, cell docs revision, or library schema unless the same change also modifies those governed artifacts or is deliberately included in a released package.

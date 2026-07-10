@@ -40,6 +40,37 @@
     }
   },
   {
+    "case_id": "fail_closed_site_conditioned_scaffold",
+    "description": "Research a new site-conditioned hazard and asset pair deeply, but release no runtime curve because the local exposure-to-replacement calibration chain is incomplete.",
+    "signals": {
+      "adds_new_cell": true,
+      "releases_runtime_model": false,
+      "changes_schema": false,
+      "changes_outputs": false,
+      "changes_evidence": true,
+      "changes_docs": true,
+      "marks_deprecation": false,
+      "package_only": false
+    },
+    "expected": {
+      "change_class": "NEW_CELL_SCAFFOLD",
+      "cell_model_version": "new_scaffold_no_v1_0",
+      "docs_revision": "initial_or_bump",
+      "schema_version": "no_change",
+      "required_gates_include": [
+        "seven_step_audit",
+        "source_register",
+        "claim_level_provenance",
+        "evidence_pressure_test",
+        "legacy_numerical_audit_if_applicable",
+        "site_condition_adapter_if_site_conditioned",
+        "value_crosswalk",
+        "withheld_capability_declaration",
+        "no_curve_known_answer_tests"
+      ]
+    }
+  },
+  {
     "case_id": "strong_wind_solar_parameter_update",
     "description": "Revise a stow demand multiplier in strong_wind_solar based on new evidence.",
     "signals": {

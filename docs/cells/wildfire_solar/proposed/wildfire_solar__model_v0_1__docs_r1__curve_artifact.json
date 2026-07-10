@@ -1,0 +1,1112 @@
+{
+  "schema_version": "damage_curve_record_bundle.v1",
+  "cell_id": "wildfire_solar",
+  "damage_code_id": "WILDFIRE_SOLAR_PROPOSED_V0_1",
+  "semantic_damage_model_version": "model v0.1",
+  "documentation_revision": "docs r1",
+  "package_release": "unreleased",
+  "package_baseline": "library v2.5",
+  "lifecycle_state": "scaffold",
+  "promotion_status": "proposed",
+  "review_status": "pressure_tested",
+  "documentation_status": "working_revision",
+  "package_inclusion_status": "not_included",
+  "canonical_runtime_artifact": false,
+  "ordinate_status": "withheld",
+  "withheld_reason_codes": [
+    "NO_RUNTIME_CURVE"
+  ],
+  "source_dossier": "docs/cells/wildfire_solar/proposed/wildfire_solar_curve_derivation_dossier__model_v0_1__docs_r1.md",
+  "source_workbook": "docs/cells/wildfire_solar/proposed/damage_curve_records_wildfire_solar__model_v0_1__docs_r1.xlsx",
+  "source_register": "docs/cells/wildfire_solar/proposed/SOURCE_REGISTER_wildfire_solar__model_v0_1__docs_r1.csv",
+  "claim_parameter_register": "docs/cells/wildfire_solar/proposed/CLAIM_PARAMETER_REGISTER_wildfire_solar__model_v0_1__docs_r1.csv",
+  "bounded_evidence_search_log": "docs/cells/wildfire_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_wildfire_solar__model_v0_1__docs_r1.md",
+  "parameter_tier_table_ref": "docs/cells/wildfire_solar/proposed/PARAMETER_TIER_TABLE_wildfire_solar__model_v0_1__docs_r1.csv",
+  "value_crosswalk_ref": "docs/cells/wildfire_solar/proposed/VALUE_CROSSWALK_wildfire_solar__model_v0_1__docs_r1.csv",
+  "site_condition_adapter_ref": "docs/cells/wildfire_solar/proposed/SITE_CONDITION_ADAPTER_wildfire_solar__model_v0_1__docs_r1.md",
+  "pressure_test_ref": "docs/cells/wildfire_solar/proposed/PRESSURE_TEST_wildfire_solar__model_v0_1__docs_r1.md",
+  "known_answer_tests": "docs/cells/wildfire_solar/proposed/known_answer_tests_wildfire_solar__model_v0_1__docs_r1.json",
+  "asset_archetype": {
+    "asset": "ground_mounted_utility_scale_solar_pv",
+    "reference_capacity_mw_dc": 100,
+    "reference_configuration": "generic_single_axis_tracker_central_inverter_value_archetype",
+    "configuration_is_vulnerability_selector": false,
+    "scope_included": [
+      "exogenous_wildfire_direct_physical_damage"
+    ],
+    "scope_excluded": [
+      "battery_energy_storage_system",
+      "smoke_or_aerosol_optical_generation_loss",
+      "ash_cleaning",
+      "public_safety_power_shutoff",
+      "business_interruption",
+      "equipment_origin_fire"
+    ]
+  },
+  "value_basis": {
+    "status": "reference_archetype_only_not_enabled_for_loss",
+    "source_workbook": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "crosswalk": "docs/cells/wildfire_solar/proposed/VALUE_CROSSWALK_wildfire_solar__model_v0_1__docs_r1.csv",
+    "value_rows": "Solar_Map rows 2:17",
+    "site_override_required_for_loss": true,
+    "values_embedded_in_artifact": false,
+    "prohibited_use": "The reference archetype cannot produce scenario loss while component-zone exposure and failure-unit curves are withheld."
+  },
+  "hazard_axis": {
+    "id": "FSIM_CONDITIONAL_FLAME_LENGTH_PROBABILITY",
+    "source_product": "USFS_FSIM_RDS_2023",
+    "native_spatial_resolution_m": 270,
+    "native_probability_object": "six conditional flame-length probabilities given burning",
+    "native_bins": [
+      {
+        "id": "lt_2_ft",
+        "label": "<2 ft"
+      },
+      {
+        "id": "gte_2_lt_4_ft",
+        "label": "2 to <4 ft"
+      },
+      {
+        "id": "gte_4_lt_6_ft",
+        "label": "4 to <6 ft"
+      },
+      {
+        "id": "gte_6_lt_8_ft",
+        "label": "6 to <8 ft"
+      },
+      {
+        "id": "gte_8_lt_12_ft",
+        "label": "8 to <12 ft"
+      },
+      {
+        "id": "gte_12_ft",
+        "label": ">=12 ft"
+      }
+    ],
+    "accepted_research_fields": [
+      "conditional_flame_length_probability_by_bin",
+      "conditional_flame_length_class"
+    ],
+    "probability_validation": {
+      "each_bin_range": "closed interval from zero to one",
+      "sum_rule": "six probabilities must sum to one conditional on burning",
+      "missing_or_imputed_cell_rule": "preserve or detect the metadata-defined imputation state; do not infer equipment exposure"
+    },
+    "extrapolation_policy": "reject_non_source_native_bins_or_midpoint_reconstruction",
+    "frequency_separation": "Burn probability belongs to the downstream frequency layer and is not a damage ordinate.",
+    "unit_guardrail": "Flame-length class and fireline intensity in kW/m are not incident heat flux in kW/m2, exposure duration, or component damage.",
+    "runtime_damage_mapping_status": "withheld_no_validated_site_local_transfer_and_no_runtime_curve"
+  },
+  "input_field_contract": {
+    "canonical_contract_ref": "docs/cells/wildfire_solar/proposed/wildfire_solar_damage_code_metadata_spec__model_v0_1__docs_r1.md",
+    "canonical_hazard_fields": [
+      "conditional_flame_length_class",
+      "conditional_flame_length_probability_by_bin"
+    ],
+    "frequency_only_prohibited_m3_field": "burn_probability",
+    "canonical_direct_fields_include": [
+      "module_glass_integrity",
+      "at_risk_fraction_basis",
+      "zone_id",
+      "local_fire_state_basis",
+      "solid_barrier_material",
+      "solid_barrier_height_m",
+      "solid_barrier_continuity",
+      "barrier_component_distance_m",
+      "solid_barrier_geometry_model_id",
+      "component_setback_m",
+      "component_elevation_m",
+      "firebrand_or_ember_attack_state"
+    ],
+    "documentation_group_records": {
+      "solid_barrier_geometry": [
+        "solid_barrier_material",
+        "solid_barrier_height_m",
+        "solid_barrier_continuity",
+        "barrier_component_distance_m",
+        "solid_barrier_geometry_model_id"
+      ],
+      "component_setback_and_elevation_geometry": [
+        "component_setback_m",
+        "component_elevation_m"
+      ],
+      "local_wind_slope_and_fuel_state": [
+        "slope_pct",
+        "wind_direction_relative_to_row_deg",
+        "fuel_surface_class",
+        "fuel_continuity_to_component"
+      ]
+    },
+    "legacy_aliases_not_accepted_without_explicit_migration": {
+      "fire_intensity_level": "conditional_flame_length_class",
+      "flame_length_probability_1..6": "conditional_flame_length_probability_by_bin",
+      "front_glass_integrity": "module_glass_integrity",
+      "ember_attack_state": "firebrand_or_ember_attack_state",
+      "qualified_geometry_model": "solid_barrier_geometry_model_id"
+    },
+    "group_record_policy": "documentation group names are not callable input fields; callers use the canonical component fields in the metadata contract",
+    "runtime_status": "research_fields_validated_but_all_numeric_damage_outputs_withheld"
+  },
+  "proposed_future_y_axis": {
+    "id": "conditional_direct_replacement_cost_ratio",
+    "status": "withheld",
+    "reason_codes": [
+      "NO_RUNTIME_CURVE"
+    ],
+    "definition": "Expected direct repair-or-replacement cost divided by the direct replacement cost of the same failure unit, conditional on a documented delivered local exposure and matching bill of materials.",
+    "denominator_rule": "Use the same failure unit in numerator and denominator; do not use whole-site installed value for a component response.",
+    "support_cost_rule": "Fieldwork and support costs are allocated once after damaged units are identified and are not an independent damage-ratio ordinate.",
+    "excluded_from_ordinate": [
+      "business_interruption",
+      "generation_shortfall",
+      "ash_cleaning",
+      "public_safety_power_shutoff",
+      "unallocated_site_support_cost"
+    ]
+  },
+  "failure_units": [
+    {
+      "id": "WS_MODULE_THERMAL",
+      "subsystem": "PV_ARRAY",
+      "component": "PV_MODULE_GLASS_LAMINATE_FRAME_JUNCTION_BOX",
+      "pathway": "radiant_convective_or_direct_flame_thermal_attack",
+      "treatment": "candidate_failure_unit_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 2",
+      "open_split": "module construction, front-glass integrity, frame, junction box and lead damage"
+    },
+    {
+      "id": "WS_DC_CABLE_EXPOSED",
+      "subsystem": "ELECTRICAL_COLLECTION",
+      "component": "EXPOSED_DC_CABLE_SEGMENT",
+      "pathway": "thermal_attack_on_exposed_cable",
+      "treatment": "candidate_failure_unit_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 7 requires site allocation",
+      "open_split": "buried, conduit, tray, connector, combiner, AC, MV and grounding states"
+    },
+    {
+      "id": "WS_COMBINER_CONNECTOR",
+      "subsystem": "ELECTRICAL_COLLECTION",
+      "component": "COMBINER_CONNECTOR_JUNCTION_BOX",
+      "pathway": "enclosure_and_connection_thermal_attack",
+      "treatment": "candidate_failure_unit_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 6 plus unresolved shares",
+      "open_split": "connector, junction-box and combiner replacement units"
+    },
+    {
+      "id": "WS_INVERTER_CONTROL_DIRECT",
+      "subsystem": "INVERTER_SYSTEM",
+      "component": "INVERTER_AND_ASSOCIATED_CONTROL_ENCLOSURE",
+      "pathway": "enclosure_direct_thermal_attack",
+      "treatment": "candidate_failure_unit_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 5",
+      "open_split": "power electronics, internal controls, enclosure construction and tracker-drive allocation"
+    },
+    {
+      "id": "WS_SCADA_CONTROL_DIRECT",
+      "subsystem": "SCADA",
+      "component": "MONITORING_AND_COMMUNICATION_SYSTEM",
+      "pathway": "enclosure_direct_thermal_attack",
+      "treatment": "candidate_failure_unit_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 10",
+      "open_split": "field electronics, communications, sensors, control cabinets and tracker-drive controls"
+    },
+    {
+      "id": "WS_GROUNDING_LIGHTNING_REVIEW",
+      "subsystem": "GROUNDING_LIGHTNING",
+      "component": "GROUNDING_GRID_AND_LIGHTNING_PROTECTION",
+      "pathway": "direct_thermal_or_consequential_electrical_damage",
+      "treatment": "deferred_exception_review_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 9",
+      "open_split": "credible failure mode, construction, inspection endpoint and replacement decision"
+    },
+    {
+      "id": "WS_MV_EQUIPMENT_SPLIT_REQUIRED",
+      "subsystem": "SUBSTATION_AND_MV",
+      "component": "TRANSFORMER_SWITCHGEAR_BREAKER",
+      "pathway": "direct_external_thermal_attack",
+      "treatment": "decomposition_gate_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 8",
+      "open_split": "transformer fluid and enclosure BOM, switchgear, breaker and MV routing"
+    },
+    {
+      "id": "WS_RACKING_THERMAL",
+      "subsystem": "MOUNTING",
+      "component": "STEEL_OR_ALUMINUM_RACKING_AND_TRACKER",
+      "pathway": "thermal_deformation_or_connection_damage",
+      "treatment": "candidate_failure_unit_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map rows 3 and 12 require support-cost separation",
+      "open_split": "material, member geometry, fasteners, bearings and tracker actuation"
+    },
+    {
+      "id": "WS_FOUNDATION_REVIEW",
+      "subsystem": "FOUNDATION",
+      "component": "PILE_OR_CONCRETE_PAD",
+      "pathway": "direct_thermal_or_consequential_support_damage",
+      "treatment": "deferred_exception_review_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 4",
+      "open_split": "credible physical damage mode and replacement decision"
+    },
+    {
+      "id": "WS_CIVIL_INFRA_SPLIT_REQUIRED",
+      "subsystem": "CIVIL_INFRA",
+      "component": "ROADS_FENCING_BUILDINGS_AND_SITE_PREP",
+      "pathway": "direct_fire_damage_or_post_fire_site_consequence",
+      "treatment": "decomposition_and_consequence_gate_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 14",
+      "open_split": "physical asset, exposure-control function, direct-fire damage and post-fire geotechnical consequence"
+    },
+    {
+      "id": "WS_SUPPORT_COST_ALLOCATION",
+      "subsystem": "REPLACEMENT_FIELDWORK",
+      "component": "FIELD_LABOR_SITE_MANAGEMENT_EQUIPMENT_AND_INSPECTION",
+      "pathway": "cost_allocation_after_physical_damage",
+      "treatment": "allocation_rule_not_a_failure_unit_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map rows 12, 13 and 15",
+      "open_split": "claims-backed allocation once damaged physical units and work scope are known"
+    }
+  ],
+  "curve_records": [],
+  "selector_logic": [
+    {
+      "field": "failure_unit_id",
+      "required": true,
+      "default_policy": "no_default",
+      "effect": "selects a separately governed component/BOM response object when one exists",
+      "runtime_numeric_effect": "none_no_curves_exist",
+      "source_ids": [
+        "VALUE_SOLAR_WORKBOOK",
+        "NREL_PV_OM_2018"
+      ],
+      "tier": "T2_public_lab_standard_or_physics"
+    },
+    {
+      "field": "module_construction",
+      "required": "future_conditional",
+      "default_policy": "unknown_no_cross_bom_transfer",
+      "effect": "selects only a response model tested for the documented module construction",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "WANG_2025_PV_THERMAL",
+        "YANG_2015_PV_IGNITION",
+        "ZHAO_2026_PV_POOL_FIRE"
+      ],
+      "tier": "T2_public_lab_standard_or_physics"
+    },
+    {
+      "field": "module_glass_integrity",
+      "required": "future_conditional",
+      "default_policy": "unknown_no_credit",
+      "effect": "selects intact or pre-cracked module evidence only when documented",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "ZHAO_2026_PV_POOL_FIRE"
+      ],
+      "tier": "T2_public_lab_standard_or_physics"
+    },
+    {
+      "field": "module_tilt_deg",
+      "required": "future_conditional",
+      "default_policy": "measured_or_unknown",
+      "effect": "records tested geometry; no universal stow or tilt credit",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "WANG_2025_PV_THERMAL",
+        "ZHAO_2026_PV_POOL_FIRE"
+      ],
+      "tier": "T2_public_lab_standard_or_physics"
+    },
+    {
+      "field": "cable_installation",
+      "required": "future_conditional",
+      "default_policy": "unknown_withhold_exposed_value_allocation",
+      "effect": "separates exposed, buried, conduit, tray and enclosed cable value before applying any future response",
+      "runtime_numeric_effect": "none_no_curves_exist",
+      "source_ids": [
+        "DOE_FEMP_PV_WILDFIRE",
+        "NREL_PV_OM_2018"
+      ],
+      "tier": "T2_public_lab_standard_or_physics"
+    },
+    {
+      "field": "equipment_enclosure",
+      "required": "future_conditional",
+      "default_policy": "unknown_no_credit",
+      "effect": "selects matching enclosure/BOM evidence only; ingress ratings are not fire ratings",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "DOE_FEMP_PV_WILDFIRE"
+      ],
+      "tier": "T2_public_lab_standard_or_physics"
+    },
+    {
+      "field": "perimeter_fence_material",
+      "required": "site_adapter_conditional",
+      "default_policy": "unknown_no_mitigation_credit",
+      "effect": "identifies a possible combustible fuel bridge; open metal is not a radiant shield",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "NIST_TN_2228"
+      ],
+      "tier": "T3_engineering_proxy_or_adjacent_empirical"
+    },
+    {
+      "field_group": "solid_barrier_geometry",
+      "fields": [
+        "solid_barrier_material",
+        "solid_barrier_height_m",
+        "solid_barrier_continuity",
+        "barrier_component_distance_m",
+        "solid_barrier_geometry_model_id"
+      ],
+      "required": "site_adapter_conditional",
+      "default_policy": "no_credit_without_qualified_geometry_and_bypass_model",
+      "effect": "may select a qualified local transfer model; does not modify intrinsic component fragility",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "DOE_FEMP_PV_WILDFIRE",
+        "COHEN_USDA_2000"
+      ],
+      "tier": "T4_placeholder_or_expert_judgment"
+    }
+  ],
+  "conditioner_logic": [
+    {
+      "adjustment_id": "WS_VEGETATION_STATE_CAPTURE_V0_1",
+      "field": "vegetation_management_state",
+      "adjustment_type": "state_selection",
+      "form": "capture_only_no_numeric_adjustment",
+      "required": "site_adapter_conditional",
+      "unknown_policy": "no_credit",
+      "effect": "conditions local fuel state when supported by event-time inspection; regulatory controls are not loss coefficients",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "DOE_FEMP_PV_WILDFIRE",
+        "ENERGY_SAFE_VICTORIA_SOLAR"
+      ],
+      "tier": "T2_public_lab_standard_or_physics",
+      "reasoning": "Official solar guidance supports vegetation-state capture, but it does not calibrate a universal damage adjustment.",
+      "open_seam": "event-time vegetation measurement joined to local fire transfer and component outcomes"
+    },
+    {
+      "adjustment_id": "WS_FENCE_FUEL_CAPTURE_V0_1",
+      "field": "fuel_accumulation_at_fence",
+      "adjustment_type": "state_selection",
+      "form": "capture_only_no_numeric_adjustment",
+      "required": "site_adapter_conditional",
+      "unknown_policy": "no_credit_and_flag_possible_fuel_bridge",
+      "effect": "conditions fence/mulch/debris propagation pathway",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "NIST_TN_2228"
+      ],
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "reasoning": "NIST experiments establish a directional fence/fuel interaction in a transferred WUI setting, not a solar-site coefficient.",
+      "open_seam": "solar-facility fence and adjacent-fuel experiments or validated local fire model"
+    },
+    {
+      "adjustment_id": "WS_PARALLEL_FENCE_CAPTURE_V0_1",
+      "field": "parallel_combustible_fence_state",
+      "adjustment_type": "state_selection",
+      "form": "capture_only_no_numeric_adjustment",
+      "required": "site_adapter_conditional",
+      "unknown_policy": "flag_unknown",
+      "effect": "conditions a possible channel or fire-spread pathway without an invented multiplier",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "NIST_TN_2228"
+      ],
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "reasoning": "Parallel-fence effects are configuration-specific in the transferred NIST experiments.",
+      "open_seam": "site geometry and event data sufficient to model the channel pathway"
+    },
+    {
+      "adjustment_id": "WS_SUPPRESSION_STATE_CAPTURE_V0_1",
+      "field": "suppression_system_state",
+      "adjustment_type": "state_selection",
+      "form": "capture_only_no_numeric_adjustment",
+      "required": "future_event_conditional",
+      "unknown_policy": "no_credit",
+      "effect": "conditions exposure duration only through a separately validated event-response model",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "DOE_FEMP_PV_WILDFIRE",
+        "NIST_TN_1796"
+      ],
+      "tier": "T2_public_lab_standard_or_physics",
+      "reasoning": "Sources support capturing suppression and exposure-time state but do not provide a generic success probability or loss reduction.",
+      "open_seam": "event-specific suppression response and delivered-exposure reconstruction"
+    },
+    {
+      "adjustment_id": "WS_FIREFIGHTER_ACCESS_CAPTURE_V0_1",
+      "field": "firefighter_access_state",
+      "adjustment_type": "state_selection",
+      "form": "capture_only_no_numeric_adjustment",
+      "required": "future_event_conditional",
+      "unknown_policy": "no_credit",
+      "effect": "records operational access; no generic suppression-success probability is assumed",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "DOE_FEMP_PV_WILDFIRE",
+        "NSW_RFS_OP_1_2_22"
+      ],
+      "tier": "T2_public_lab_standard_or_physics",
+      "reasoning": "Access and electrical-safety constraints can affect response, but official guidance does not calibrate damage reduction.",
+      "open_seam": "incident records linking access state to intervention timing and delivered exposure"
+    },
+    {
+      "adjustment_id": "WS_DEENERGIZATION_STATE_CAPTURE_V0_1",
+      "field": "deenergization_state",
+      "adjustment_type": "state_selection",
+      "form": "capture_only_no_numeric_adjustment",
+      "required": "future_event_conditional",
+      "unknown_policy": "no_response_credit",
+      "effect": "conditions responder access and electrical-safety pathway, not radiant fragility by itself",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "NSW_RFS_OP_1_2_22",
+        "DOE_FEMP_PV_WILDFIRE"
+      ],
+      "tier": "T2_public_lab_standard_or_physics",
+      "reasoning": "De-energization is an operational state, not a universal modifier of thermal component resistance.",
+      "open_seam": "incident response model linking de-energization assurance to intervention and exposure duration"
+    },
+    {
+      "adjustment_id": "WS_LOCAL_FIRE_STATE_CAPTURE_V0_1",
+      "field_group": "local_wind_slope_and_fuel_state",
+      "fields": [
+        "slope_pct",
+        "wind_direction_relative_to_row_deg",
+        "fuel_surface_class",
+        "fuel_continuity_to_component"
+      ],
+      "adjustment_type": "state_selection",
+      "form": "qualified_site_local_model_only_no_default_adjustment",
+      "required": "qualified_site_local_model_only",
+      "unknown_policy": "no_site_local_transfer",
+      "effect": "conditions local fire behavior; do not reapply factors already represented in the upstream fire-behavior product",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "USFS_FSIM_RDS_2023",
+        "USFS_FARSITE_1998",
+        "NIST_TN_2228"
+      ],
+      "tier": "T2_public_lab_standard_or_physics",
+      "reasoning": "Fire behavior depends on wind, slope and fuels, but double-counting upstream modeled inputs would bias local demand.",
+      "open_seam": "validated source-to-site transfer with an explicit input ownership and double-counting matrix"
+    }
+  ],
+  "exposure_logic": [
+    {
+      "field": "zone_id",
+      "required": "future_loss_assembly",
+      "default_policy": "no_whole_site_default",
+      "effect": "sets component-zone spatial grain",
+      "runtime_numeric_effect": "none_no_curves_exist",
+      "source_ids": [
+        "NIST_TN_1796",
+        "NIST_TN_2205"
+      ],
+      "tier": "T2_public_lab_standard_or_physics"
+    },
+    {
+      "field": "local_fire_state_basis",
+      "required": "future_component_response_and_loss",
+      "default_policy": "unknown_or_unsupported_withhold",
+      "effect": "records whether delivered local fire state is measured, physics-modelled, event-modelled, screening, or unknown",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "NIST_TN_1796",
+        "GOVERNANCE_CONTRACT"
+      ],
+      "tier": "T4_placeholder_or_expert_judgment"
+    },
+    {
+      "field": "at_risk_fraction_by_failure_unit_zone",
+      "basis_field": "at_risk_fraction_basis",
+      "required": "future_loss_assembly",
+      "default_policy": "missing_withhold_loss",
+      "effect": "allocates failure-unit value to a documented zone before damage is evaluated",
+      "runtime_numeric_effect": "none_no_curves_exist",
+      "source_ids": [
+        "VALUE_SOLAR_WORKBOOK",
+        "NIST_TN_1796"
+      ],
+      "tier": "T4_placeholder_or_expert_judgment"
+    },
+    {
+      "field": "component_burned_fraction_by_zone",
+      "required": "future_loss_assembly",
+      "default_policy": "missing_withhold_loss",
+      "effect": "records component quantity inside a reconstructed burn footprint; it is not damage",
+      "runtime_numeric_effect": "none_no_curves_exist",
+      "source_ids": [
+        "NIST_TN_1796"
+      ],
+      "tier": "T4_placeholder_or_expert_judgment"
+    },
+    {
+      "field": "component_attack_fraction_by_zone",
+      "required": "future_loss_assembly",
+      "default_policy": "missing_withhold_loss",
+      "effect": "records component quantity reached by a documented damaging load; it remains separate from burned fraction",
+      "runtime_numeric_effect": "none_no_curves_exist",
+      "source_ids": [
+        "NIST_TN_1796"
+      ],
+      "tier": "T4_placeholder_or_expert_judgment"
+    },
+    {
+      "field_group": "component_setback_and_elevation_geometry",
+      "fields": [
+        "component_setback_m",
+        "component_elevation_m"
+      ],
+      "required": "qualified_site_local_model_only",
+      "default_policy": "measured_or_no_site_local_transfer",
+      "effect": "supports local view, flame-contact and distance geometry without a universal clearance credit",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "COHEN_USDA_2000",
+        "DOE_FEMP_PV_WILDFIRE"
+      ],
+      "tier": "T2_public_lab_standard_or_physics"
+    },
+    {
+      "field": "incident_heat_flux_kw_m2",
+      "required": "future_component_response",
+      "default_policy": "measured_or_qualified_model_no_default",
+      "effect": "delivered local thermal demand; cannot be substituted by fireline intensity in kW/m",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "COHEN_USDA_2000",
+        "WANG_2025_PV_THERMAL",
+        "YANG_2015_PV_IGNITION",
+        "ZHANG_2022_XLPE"
+      ],
+      "tier": "T2_public_lab_standard_or_physics"
+    },
+    {
+      "field": "exposure_duration_s",
+      "required": "future_component_response",
+      "default_policy": "measured_or_qualified_model_no_default",
+      "effect": "delivered local exposure duration paired with flux/contact state",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "COHEN_USDA_2000",
+        "YANG_2015_PV_IGNITION",
+        "ZHANG_2022_XLPE"
+      ],
+      "tier": "T2_public_lab_standard_or_physics"
+    },
+    {
+      "field": "direct_flame_contact_state",
+      "required": "future_component_response",
+      "default_policy": "unknown_withhold_direct_contact_pathway",
+      "effect": "separates flame contact from remote radiant exposure",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "ZHAO_2026_PV_POOL_FIRE",
+        "NIST_TN_1796"
+      ],
+      "tier": "T2_public_lab_standard_or_physics"
+    },
+    {
+      "field": "firebrand_or_ember_attack_state",
+      "required": "separate_future_pathway",
+      "default_policy": "do_not_fold_into_direct_thermal_pathway",
+      "effect": "records ember assault for a separately governed ignition/penetration model",
+      "runtime_numeric_effect": "withheld",
+      "source_ids": [
+        "NIST_TN_1796",
+        "NIST_TN_2228"
+      ],
+      "tier": "T3_engineering_proxy_or_adjacent_empirical"
+    }
+  ],
+  "evidence_constraint_records": [
+    {
+      "record_id": "PV_THERMAL_FAILURE_TEST_RANGE",
+      "failure_unit_id": "WS_MODULE_THERMAL",
+      "source_id": "WANG_2025_PV_THERMAL",
+      "source_locator": "International Journal of Thermal Sciences 208 (2025) 109489; experimental specimen and results sections",
+      "observed_incident_heat_flux_kw_m2_range": [
+        8,
+        15
+      ],
+      "observed_max_temperature_difference_c_range": [
+        61,
+        84
+      ],
+      "specimen_note": "15 four-edge-shielded 300 x 300 x 4.7 mm PV specimens at five inclinations",
+      "tier": "T2_public_lab_standard_or_physics",
+      "permitted_use": "future_test_specific_flux_time_model_constraint",
+      "prohibited_use": "universal_threshold_FIL_to_DR_or_replacement_cost_ratio"
+    },
+    {
+      "record_id": "PV_MODULE_IGNITION_TEST",
+      "failure_unit_id": "WS_MODULE_THERMAL",
+      "source_id": "YANG_2015_PV_IGNITION",
+      "source_locator": "Section 4.2, Figure 5 and Table 2",
+      "critical_heat_flux_kw_m2": 26,
+      "ignition_time_s_by_flux_kw_m2": {
+        "28": 913,
+        "30": 636,
+        "35": 218,
+        "40": 133,
+        "45": 83
+      },
+      "tier": "T2_public_lab_standard_or_physics",
+      "permitted_use": "tested_small_specimen_ignition_constraint",
+      "prohibited_use": "first_functional_damage_full_size_population_fragility_or_economic_DR"
+    },
+    {
+      "record_id": "XLPE_CABLE_IGNITION_TEST",
+      "failure_unit_id": "WS_DC_CABLE_EXPOSED",
+      "source_id": "ZHANG_2022_XLPE",
+      "source_locator": "Sections 2.1 and 3.1, Figure 4 and Table 2",
+      "critical_heat_flux_kw_m2": 16.24,
+      "mean_ignition_time_s_by_flux_kw_m2": {
+        "20": 83.5,
+        "30": 25,
+        "40": 13.3
+      },
+      "tier": "T2_public_lab_standard_or_physics",
+      "permitted_use": "tested_9_mm_XLPE_material_constraint",
+      "prohibited_use": "all_PV_cables_installed_system_or_economic_DR"
+    }
+  ],
+  "parameter_tier_table": [
+    {
+      "parameter_id": "WS-P001",
+      "parameter": "FSim flame-length probability bins",
+      "value_or_status": "source_native_six_bin_contract",
+      "param_role": "axis_bridge",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "USFS_FSIM_RDS_2023",
+        "FINNEY_2011_FSIM"
+      ],
+      "runtime_status": "RETAINED_INPUT_CONTRACT"
+    },
+    {
+      "parameter_id": "WS-P002",
+      "parameter": "conditional flame-length probability normalization",
+      "value_or_status": "six_probabilities_sum_to_one_given_burning",
+      "param_role": "axis_bridge",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "USFS_FSIM_RDS_2023"
+      ],
+      "runtime_status": "RETAINED_VALIDATION_RULE"
+    },
+    {
+      "parameter_id": "WS-P003",
+      "parameter": "continuous fireline-intensity-to-component-exposure converter",
+      "value_or_status": "WITHHELD",
+      "param_role": "axis_bridge",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "LEGACY_DIVI_WILDFIRE_SOLAR_2026",
+        "USFS_FARSITE_1998",
+        "COHEN_USDA_2000"
+      ],
+      "runtime_status": "NO_RUNTIME_EFFECT"
+    },
+    {
+      "parameter_id": "WS-P004",
+      "parameter": "incident heat flux at component zone",
+      "value_or_status": "measured_or_qualified_model_required_no_default",
+      "param_role": "exposure_or_value",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "NIST_TN_1796",
+        "COHEN_USDA_2000"
+      ],
+      "runtime_status": "REQUIRED_FUTURE_INPUT"
+    },
+    {
+      "parameter_id": "WS-P005",
+      "parameter": "exposure duration at component zone",
+      "value_or_status": "measured_or_qualified_model_required_no_default",
+      "param_role": "exposure_or_value",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "NIST_TN_1796",
+        "COHEN_USDA_2000",
+        "YANG_2015_PV_IGNITION",
+        "ZHANG_2022_XLPE"
+      ],
+      "runtime_status": "REQUIRED_FUTURE_INPUT"
+    },
+    {
+      "parameter_id": "WS-P006",
+      "parameter": "PV thermal-failure laboratory range",
+      "value_or_status": "test_specific_evidence_constraint_only",
+      "param_role": "boundary_or_cap",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "WANG_2025_PV_THERMAL"
+      ],
+      "runtime_status": "EVIDENCE_CONSTRAINT_ONLY"
+    },
+    {
+      "parameter_id": "WS-P007",
+      "parameter": "PV module ignition critical heat flux",
+      "value_or_status": "test_specific_evidence_constraint_only",
+      "param_role": "boundary_or_cap",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "YANG_2015_PV_IGNITION"
+      ],
+      "runtime_status": "EVIDENCE_CONSTRAINT_ONLY"
+    },
+    {
+      "parameter_id": "WS-P008",
+      "parameter": "PV ignition-time observations",
+      "value_or_status": "test_specific_evidence_constraint_only",
+      "param_role": "curve_fit_shape",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "YANG_2015_PV_IGNITION"
+      ],
+      "runtime_status": "EVIDENCE_CONSTRAINT_ONLY"
+    },
+    {
+      "parameter_id": "WS-P009",
+      "parameter": "XLPE cable ignition observations",
+      "value_or_status": "test_specific_evidence_constraint_only",
+      "param_role": "boundary_or_cap",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "ZHANG_2022_XLPE"
+      ],
+      "runtime_status": "EVIDENCE_CONSTRAINT_ONLY"
+    },
+    {
+      "parameter_id": "WS-P010",
+      "parameter": "module construction and front-glass condition",
+      "value_or_status": "selector_candidate_numeric_effect_withheld",
+      "param_role": "selector_default",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "ZHAO_2026_PV_POOL_FIRE",
+        "WANG_2025_PV_THERMAL"
+      ],
+      "runtime_status": "SELECTOR_CAPTURE_ONLY"
+    },
+    {
+      "parameter_id": "WS-P011",
+      "parameter": "grass-height and firebreak regulatory controls",
+      "value_or_status": "control_fields_only_no_DR_credit",
+      "param_role": "conditioner_adjustment",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "ENERGY_SAFE_VICTORIA_SOLAR",
+        "PLANNING_VICTORIA_SOLAR_GUIDE"
+      ],
+      "runtime_status": "CONTROL_CHECK_ONLY"
+    },
+    {
+      "parameter_id": "WS-P012",
+      "parameter": "fence material and fuel accumulation direction",
+      "value_or_status": "categorical_numeric_effect_withheld",
+      "param_role": "conditioner_adjustment",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "NIST_TN_2228"
+      ],
+      "runtime_status": "ADAPTER_FIELD_ONLY"
+    },
+    {
+      "parameter_id": "WS-P013",
+      "parameter": "solid wall or barrier mitigation credit",
+      "value_or_status": "disabled_without_qualified_geometry_and_bypass_model",
+      "param_role": "conditioner_adjustment",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "DOE_FEMP_PV_WILDFIRE",
+        "COHEN_USDA_2000"
+      ],
+      "runtime_status": "NO_CREDIT"
+    },
+    {
+      "parameter_id": "WS-P014",
+      "parameter": "open-metal fence radiant shield credit",
+      "value_or_status": "disabled",
+      "param_role": "conditioner_adjustment",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "NIST_TN_2228"
+      ],
+      "runtime_status": "NO_CREDIT"
+    },
+    {
+      "parameter_id": "WS-P015",
+      "parameter": "whole-site exposure default",
+      "value_or_status": "prohibited",
+      "param_role": "exposure_or_value",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "NIST_TN_1796",
+        "VALUE_SOLAR_WORKBOOK"
+      ],
+      "runtime_status": "FAIL_CLOSED"
+    },
+    {
+      "parameter_id": "WS-P016",
+      "parameter": "cable exposed, buried and protected allocation",
+      "value_or_status": "site_split_required_no_default",
+      "param_role": "exposure_or_value",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "DOE_FEMP_PV_WILDFIRE",
+        "NREL_PV_OM_2018",
+        "VALUE_SOLAR_WORKBOOK"
+      ],
+      "runtime_status": "FAIL_CLOSED"
+    },
+    {
+      "parameter_id": "WS-P017",
+      "parameter": "reference installed, physical and excluded value basis",
+      "value_or_status": "reference_only_see_value_crosswalk",
+      "param_role": "exposure_or_value",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "NREL_NLR_Q1_2025_PV_BENCHMARK",
+        "VALUE_SOLAR_WORKBOOK"
+      ],
+      "runtime_status": "RETAINED_REFERENCE_ONLY"
+    },
+    {
+      "parameter_id": "WS-P018",
+      "parameter": "replacement fieldwork and support-cost allocation",
+      "value_or_status": "allocate_once_after_damaged_units_are_known",
+      "param_role": "exposure_or_value",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "VALUE_SOLAR_WORKBOOK"
+      ],
+      "runtime_status": "FAIL_CLOSED"
+    },
+    {
+      "parameter_id": "WS-P019",
+      "parameter": "legacy universal fireline-intensity-to-flux converter",
+      "value_or_status": "REJECTED",
+      "param_role": "axis_bridge",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "LEGACY_DIVI_WILDFIRE_SOLAR_2026",
+        "COHEN_USDA_2000"
+      ],
+      "runtime_status": "NO_RUNTIME_EFFECT"
+    },
+    {
+      "parameter_id": "WS-P020",
+      "parameter": "legacy logistic parameters and damage tables",
+      "value_or_status": "REJECTED",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "LEGACY_DIVI_WILDFIRE_SOLAR_2026"
+      ],
+      "runtime_status": "NO_RUNTIME_EFFECT"
+    },
+    {
+      "parameter_id": "WS-P021",
+      "parameter": "legacy component, BOM and civil weights",
+      "value_or_status": "REJECTED",
+      "param_role": "exposure_or_value",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "LEGACY_DIVI_WILDFIRE_SOLAR_2026",
+        "VALUE_SOLAR_WORKBOOK"
+      ],
+      "runtime_status": "NO_RUNTIME_EFFECT"
+    },
+    {
+      "parameter_id": "WS-P022",
+      "parameter": "legacy uncertainty bands",
+      "value_or_status": "REJECTED",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "LEGACY_DIVI_WILDFIRE_SOLAR_2026"
+      ],
+      "runtime_status": "NO_RUNTIME_EFFECT"
+    },
+    {
+      "parameter_id": "WS-P023",
+      "parameter": "failure-unit economic damage-ratio curves",
+      "value_or_status": "WITHHELD",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "SOURCE_REVIEW_2026_07_09"
+      ],
+      "runtime_status": "NO_RUNTIME_CURVE"
+    }
+  ],
+  "derivation_rationale": {
+    "chosen_spine": null,
+    "spine_decision": "No vulnerability or damage spine is promoted. The source-native FSim severity object is retained only as an upstream hazard contract.",
+    "supporting_sources": [
+      "USFS_FSIM_RDS_2023",
+      "FINNEY_2011_FSIM",
+      "USFS_FARSITE_1998",
+      "NIST_TN_1796",
+      "WANG_2025_PV_THERMAL",
+      "YANG_2015_PV_IGNITION",
+      "ZHANG_2022_XLPE",
+      "ZHAO_2026_PV_POOL_FIRE",
+      "DOE_FEMP_PV_WILDFIRE",
+      "NIST_TN_2228",
+      "COHEN_USDA_2000"
+    ],
+    "demoted_or_rejected_sources": [
+      {
+        "source_id": "LEGACY_DIVI_WILDFIRE_SOLAR_2026",
+        "decision": "rejected_for_converter_curve_weights_credits_and_uncertainty",
+        "retained_role": "scope_mechanism_inventory_source_discovery_and_research_agenda_only"
+      }
+    ],
+    "open_seams": [
+      "validated landscape or event fire behavior to component-zone heat-flux, contact and duration transfer",
+      "separately governed firebrand and ember pathway",
+      "representative utility-module and installed-cable response by BOM and duration",
+      "inverter, enclosure, connector, transformer, control and racking response data",
+      "inspection endpoints tied to repair or replacement decisions",
+      "component-zone inventory and protected/exposed value allocation",
+      "paired site exposure, unaffected-unit, component damage and invoice data",
+      "calibrated uncertainty or structured elicitation"
+    ],
+    "overestimation_controls": [
+      "no continuous fireline-intensity midpoint reconstruction",
+      "no universal fireline-intensity-to-heat-flux converter",
+      "no whole-site exposure default",
+      "no cross-BOM or cross-endpoint promotion",
+      "no fence, wall, vegetation, firebreak or suppression percentage credit",
+      "no aggregate mean exposure multiplication without a validated failure-unit curve and spatial dependence treatment",
+      "no support-cost damage ratio"
+    ],
+    "promotion_gate": "A reviewed calibration must connect documented local exposure and matched component/BOM state to repair or replacement cost at the declared failure-unit denominator."
+  },
+  "loss_assembly_contract": {
+    "status": "withheld",
+    "reason_codes": [
+      "NO_RUNTIME_CURVE"
+    ],
+    "proposed_grain": "failure_unit_by_component_zone_by_delivered_local_state",
+    "component_damage_ratio_input_status": "unavailable",
+    "whole_site_exposure_default": "prohibited",
+    "aggregate_mean_times_aggregate_exposure": "prohibited_without_independence_demonstration",
+    "support_cost_rule": "allocate_rows_12_13_15_once_after_damaged_units_are_known_no_independent_DR",
+    "mixed_civil_row_14_rule": "split_direct_civil_failure_units_from_support_or_pathway_costs_before_loss"
+  },
+  "emit_contract": {
+    "schema_version": "damage_emit.v1",
+    "supported_emit_modes": [
+      "scalar_mean",
+      "scalar_mean_plus_bounds",
+      "discrete_state_table",
+      "parametric_distribution",
+      "state_ensemble"
+    ],
+    "populated_emit_modes_for_this_cell": [],
+    "runtime_emit_status": "withheld",
+    "withheld_reason_codes": [
+      "NO_RUNTIME_CURVE"
+    ]
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v1",
+    "cell_id": "wildfire_solar",
+    "spread_carried": false,
+    "emit_modes_populated_by_cell": [],
+    "metrics_supportable": {
+      "failure_unit_scalar_dr": "withheld",
+      "scenario_loss_given_value_basis": "withheld",
+      "scalar_eal": "withheld",
+      "pml": "withheld",
+      "var": "withheld",
+      "tvar": "withheld"
+    },
+    "withheld_reason_by_metric": {
+      "failure_unit_scalar_dr": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_LOAD_BEARING_SITE_STATE"
+      ],
+      "scenario_loss_given_value_basis": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_VALUE_BASIS",
+        "MISSING_LOAD_BEARING_SITE_STATE"
+      ],
+      "scalar_eal": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_VALUE_BASIS",
+        "MISSING_LOAD_BEARING_SITE_STATE",
+        "MISSING_HAZARD_FREQUENCY",
+        "CAP_BINDING_PREFLIGHT_NOT_EXECUTED"
+      ],
+      "pml": [
+        "NO_RUNTIME_CURVE",
+        "NO_TAIL_DISTRIBUTION"
+      ],
+      "var": [
+        "NO_RUNTIME_CURVE",
+        "NO_TAIL_DISTRIBUTION"
+      ],
+      "tvar": [
+        "NO_RUNTIME_CURVE",
+        "NO_TAIL_DISTRIBUTION"
+      ]
+    },
+    "withheld_reason_codes": [
+      "NO_RUNTIME_CURVE",
+      "MISSING_VALUE_BASIS",
+      "MISSING_LOAD_BEARING_SITE_STATE",
+      "MISSING_HAZARD_FREQUENCY",
+      "CAP_BINDING_PREFLIGHT_NOT_EXECUTED",
+      "NO_TAIL_DISTRIBUTION"
+    ],
+    "cap_binding": {
+      "policy": "fail_closed",
+      "preflight_status": "not_executed_no_distribution",
+      "required_before_scalar_eal": true,
+      "tolerance_pct": 2.5,
+      "action_if_fail": "withhold_scalar_eal_and_require_tail_capable_emit"
+    }
+  },
+  "legacy_or_deprecated_artifacts": [
+    {
+      "artifact_id": "LEGACY_DIVI_WILDFIRE_SOLAR_2026",
+      "artifact_type": "external_legacy_research_narrative",
+      "locator": "https://github.com/Divi-patel/infrasure-damage-curves/blob/12653b2c3d5a013c9524228243ea666c35bb3814/research/WILDFIRE_x_SOLAR.md",
+      "source_commit_sha": "12653b2c3d5a013c9524228243ea666c35bb3814",
+      "source_file_blob_sha": "64142f9873256fc6b09deb497af795b310a47985",
+      "status": "rejected_for_runtime_calibration",
+      "runtime_load_prohibited": true,
+      "retained_use": "source discovery, scope, mechanism inventory, site hypotheses and research agenda",
+      "audit_record": "docs/cells/wildfire_solar/proposed/LEGACY_EVIDENCE_INGESTION_wildfire_solar__model_v0_1__docs_r1.md"
+    },
+    {
+      "artifact_id": "WS_WITHDRAWN_WORKING_ORDINATES",
+      "artifact_type": "unreleased_pressure_test_values",
+      "status": "withdrawn_audit_only",
+      "runtime_load_prohibited": true,
+      "numeric_values_embedded": false,
+      "audit_record": "docs/cells/wildfire_solar/proposed/PRESSURE_TEST_wildfire_solar__model_v0_1__docs_r1.md",
+      "reason": "No direct calibration connects FSim severity classes or local thermal demand to failure-unit economic damage ratio."
+    }
+  ]
+}

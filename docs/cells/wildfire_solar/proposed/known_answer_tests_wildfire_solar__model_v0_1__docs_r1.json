@@ -1,0 +1,414 @@
+{
+  "schema_version": "known_answer_tests.v1",
+  "status": "research_scaffold_fail_closed_contract_tests",
+  "cell_id": "wildfire_solar",
+  "semantic_damage_model_version": "model v0.1",
+  "documentation_revision": "docs r1",
+  "runtime_curve_count": 0,
+  "runtime_curve_known_answer_tests": [],
+  "test_invariant": "No valid input may produce a numeric damage ratio or loss while curve_records is empty.",
+  "tests": [
+    {
+      "test_id": "WS_VALID_FLP_VECTOR_WITHHOLDS",
+      "category": "axis_validation_and_withholding",
+      "curve_id": null,
+      "input": {
+        "conditional_flame_length_probability_by_bin": {
+          "lt_2_ft": 0.2,
+          "gte_2_lt_4_ft": 0.3,
+          "gte_4_lt_6_ft": 0.2,
+          "gte_6_lt_8_ft": 0.1,
+          "gte_8_lt_12_ft": 0.1,
+          "gte_12_ft": 0.1
+        }
+      },
+      "expected_output": {
+        "axis_contract": "accepted",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "USFS_FSIM_RDS_2023",
+      "notes": "The six probabilities are conditional on burning and sum to one; acceptance of the hazard object does not authorize a damage emit."
+    },
+    {
+      "test_id": "WS_VALID_EVENT_CLASS_WITHHOLDS",
+      "category": "axis_validation_and_withholding",
+      "curve_id": null,
+      "input": {
+        "conditional_flame_length_class": "gte_8_lt_12_ft"
+      },
+      "expected_output": {
+        "axis_contract": "accepted_research_state",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "USFS_FSIM_RDS_2023",
+      "notes": "A source-native class is a hazard descriptor only; it is not a component demand or loss ordinate."
+    },
+    {
+      "test_id": "WS_REJECT_NONNORMALIZED_FLP_VECTOR",
+      "category": "axis_validation",
+      "curve_id": null,
+      "input": {
+        "conditional_flame_length_probability_by_bin": {
+          "lt_2_ft": 0.2,
+          "gte_2_lt_4_ft": 0.2,
+          "gte_4_lt_6_ft": 0.2,
+          "gte_6_lt_8_ft": 0.2,
+          "gte_8_lt_12_ft": 0.2,
+          "gte_12_ft": 0.2
+        }
+      },
+      "expected_output": {
+        "axis_contract": "rejected",
+        "error_code": "FLP_VECTOR_MUST_SUM_TO_ONE",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        },
+        "scenario_loss": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "USFS_FSIM_RDS_2023",
+      "notes": "Invalid source-native probability vectors are rejected before any damage operation."
+    },
+    {
+      "test_id": "WS_BURN_PROBABILITY_REMAINS_OUTSIDE_DAMAGE_INPUT",
+      "category": "frequency_separation",
+      "curve_id": null,
+      "input": {
+        "burn_probability": 0.004,
+        "conditional_flame_length_class": "gte_4_lt_6_ft"
+      },
+      "expected_output": {
+        "burn_probability_handling": "rejected_from_damage_input_frequency_layer_only",
+        "downstream_frequency_binding_status": "not_bound_by_this_m3_call",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scalar_eal": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": [
+            "NO_RUNTIME_CURVE",
+            "MISSING_HAZARD_FREQUENCY",
+            "CAP_BINDING_PREFLIGHT_NOT_EXECUTED"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "USFS_FSIM_RDS_2023",
+      "notes": "A burn-probability field supplied beside severity is rejected from the M3 damage input and is not silently multiplied. Because this call does not bind a downstream hazard-frequency object, MISSING_HAZARD_FREQUENCY remains an honest scalar-EAL reason."
+    },
+    {
+      "test_id": "WS_COMPLETE_SITE_STATE_STILL_WITHHOLDS",
+      "category": "withholding_precedence",
+      "curve_id": null,
+      "input": {
+        "conditional_flame_length_class": "gte_12_ft"
+      },
+      "fixture_context": {
+        "site_state_completeness": "complete",
+        "value_basis_status": "site_specific"
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "Complete selectors, exposure fields and value basis cannot bypass the absence of a calibrated curve."
+    },
+    {
+      "test_id": "WS_MISSING_LOAD_BEARING_SITE_STATE_WITHHOLDS",
+      "category": "site_missing_state_fail_closed",
+      "curve_id": null,
+      "input": {
+        "conditional_flame_length_class": "gte_8_lt_12_ft",
+        "zone_id": "zone_a",
+        "local_fire_state_basis": "unknown",
+        "at_risk_fraction_by_failure_unit_zone": null,
+        "at_risk_fraction_basis": null,
+        "component_burned_fraction_by_zone": null,
+        "component_attack_fraction_by_zone": null
+      },
+      "expected_output": {
+        "site_state_validation": "withheld_missing_load_bearing_state",
+        "whole_site_or_full_exposure_default_applied": false,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": [
+            "NO_RUNTIME_CURVE",
+            "MISSING_LOAD_BEARING_SITE_STATE"
+          ]
+        },
+        "scenario_loss": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": [
+            "NO_RUNTIME_CURVE",
+            "MISSING_LOAD_BEARING_SITE_STATE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "NIST_TN_1796;VALUE_SOLAR_WORKBOOK;GOVERNANCE_CONTRACT",
+      "notes": "Unknown or null load-bearing site/allocation fields withhold; they never default to whole-site or full exposure."
+    },
+    {
+      "test_id": "WS_CHAIN_LINK_CREDIT_DISABLED",
+      "category": "site_adapter_invariant",
+      "curve_id": null,
+      "input": {
+        "perimeter_fence_material": "open_metal"
+      },
+      "expected_output": {
+        "radiant_shield_credit_application": "disabled_no_qualified_geometry_model",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "NIST_TN_2228",
+      "notes": "Disabled credit is a governance guardrail, not a numeric damage or loss result."
+    },
+    {
+      "test_id": "WS_SOLID_WALL_UNQUALIFIED_CREDIT_DISABLED",
+      "category": "site_adapter_invariant",
+      "curve_id": null,
+      "input": {
+        "solid_barrier_material": "concrete",
+        "solid_barrier_geometry_model_id": null
+      },
+      "expected_output": {
+        "barrier_credit_application": "disabled_geometry_and_bypass_model_required",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "DOE_FEMP_PV_WILDFIRE;COHEN_USDA_2000",
+      "notes": "A wall cannot receive a universal shield coefficient; gaps, geometry, wind and ember bypass remain site-specific."
+    },
+    {
+      "test_id": "WS_COMBUSTIBLE_FENCE_IS_NOT_MITIGATION",
+      "category": "site_adapter_invariant",
+      "curve_id": null,
+      "input": {
+        "perimeter_fence_material": "wood",
+        "fuel_accumulation_at_fence": "present"
+      },
+      "expected_output": {
+        "site_pathway_flag": "possible_fuel_bridge",
+        "mitigation_credit_application": "disabled",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "NIST_TN_2228",
+      "notes": "Fence and nearby fuels select/condition an exposure pathway; this scaffold does not invent an uplift or discount."
+    },
+    {
+      "test_id": "WS_BURIED_CABLE_NOT_IN_EXPOSED_PATHWAY",
+      "category": "site_adapter_invariant",
+      "curve_id": null,
+      "input": {
+        "failure_unit_id": "WS_DC_CABLE_EXPOSED",
+        "cable_installation": "buried"
+      },
+      "expected_output": {
+        "exposed_pathway_value_allocation": "exclude_unless_direct_attack_is_documented",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "DOE_FEMP_PV_WILDFIRE;NREL_PV_OM_2018",
+      "notes": "This prevents exposed-cable evidence from being applied to protected value; it does not assert zero cable loss."
+    },
+    {
+      "test_id": "WS_LEGACY_FLI_FLUX_CONVERTER_REJECTED",
+      "category": "legacy_rejection",
+      "curve_id": null,
+      "input": {},
+      "attempted_noncanonical_request": {
+        "converter_id": "LEGACY_Q_EQUALS_POINT35_I_OVER_D"
+      },
+      "expected_output": {
+        "converter_status": "rejected_not_loadable",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "LEGACY_DIVI_WILDFIRE_SOLAR_2026;COHEN_USDA_2000",
+      "notes": "No calibrated universal bridge from fireline intensity and distance to component flux/time is present."
+    },
+    {
+      "test_id": "WS_LEGACY_LOGISTIC_CURVES_REJECTED",
+      "category": "legacy_rejection",
+      "curve_id": null,
+      "input": {},
+      "attempted_noncanonical_request": {
+        "curve_family": "legacy_six_logistic_curves"
+      },
+      "expected_output": {
+        "curve_family_status": "rejected_not_loadable",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "LEGACY_DIVI_WILDFIRE_SOLAR_2026",
+      "notes": "The legacy equations are internally inconsistent and have no calibration target; no parameters are copied here."
+    },
+    {
+      "test_id": "WS_EMBER_PATHWAY_DEFERRED",
+      "category": "pathway_separation",
+      "curve_id": null,
+      "input": {
+        "firebrand_or_ember_attack_state": "present"
+      },
+      "expected_output": {
+        "pathway_status": "deferred_separate_model_required",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "NIST_TN_1796;NIST_TN_2228",
+      "notes": "Ember assault is not silently folded into the direct-flame/radiant pathway."
+    }
+  ]
+}

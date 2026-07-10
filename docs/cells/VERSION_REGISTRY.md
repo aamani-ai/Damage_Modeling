@@ -35,6 +35,16 @@ The current package is an implementation-hardening release. It adds machine-read
 
 ---
 
+## Proposed cells outside package v2.5
+
+| Cell folder | Semantic model version | Documentation revision | Lifecycle / promotion / review state | Canonical runtime artifact? |
+|---|---:|---:|---|---:|
+| `wildfire_solar` | model v0.1 | docs r1 | scaffold / proposed / pressure-tested; numeric FIL-to-DR ordinates withdrawn | No |
+
+The proposed cell is intentionally excluded from the current runtime artifact index. Promotion to model v1.0 requires a calibrated/site-conditioned failure-unit response, approved exposed/protected value allocation, reviewed known-answer tests, and a release event.
+
+---
+
 ## Practical rule
 
 ```text
