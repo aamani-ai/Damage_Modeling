@@ -21,6 +21,13 @@ canonical_runtime_artifact: true | false
 
 Keep these fields atomic. Do not encode `proposed`, `scaffold`, `pressure_tested`, or `working_revision` inside the model-version or documentation-revision strings.
 
+## Pathways
+
+| pathway_id | physical mechanism | axis/bridge | supported failure units | withheld failure units | neighboring-cell boundary |
+|---|---|---|---|---|---|
+
+For a multi-pathway cell, `pathway_id` is a required runtime field. Do not model it as a boolean, selector, conditioner, exposure, alias, or inferred intensity class.
+
 ## Inputs
 
 ### Hazard inputs
@@ -45,8 +52,8 @@ Keep these fields atomic. Do not encode `proposed`, `scaffold`, `pressure_tested
 
 ## Outputs
 
-| output | failure_unit_id | y-axis | notes |
-|---|---|---|---|
+| output | pathway_id | failure_unit_id | y-axis | support state / notes |
+|---|---|---|---|---|
 
 ## Capability declaration
 

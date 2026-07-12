@@ -10,6 +10,8 @@ Minimum checks before release:
 [ ] governed CSV registers are rectangular: every row has exactly the header column count, with no missing or extra fields;
 [ ] schemas/required fields present;
 [ ] metadata, JSON, site adapter, and known-answer tests use one canonical input-field contract; aliases and documentation groups are explicit;
+[ ] multi-pathway artifacts declare unique pathway IDs and pathway-specific axes/bridges;
+[ ] every curve record, failure-unit output fixture, capability row, and KAT resolves to one declared pathway ID;
 [ ] exactly one canonical runtime artifact per released cell;
 [ ] deprecated artifacts are blocked or marked non-canonical.
 ```
@@ -28,7 +30,9 @@ Minimum checks before release:
 [ ] exact locators and permitted/prohibited inference are present;
 [ ] legacy numerical claims reproduce or are explicitly rejected;
 [ ] site adapter includes missing/default rules and a double-counting matrix;
-[ ] row-level value crosswalk reconciles direct/support/excluded value.
+[ ] row-level value crosswalk reconciles direct/support/excluded value;
+[ ] pathway-filtered evidence and parameter decisions resolve independently for every supported pair;
+[ ] neighboring and compound pathways have an explicit ownership/double-count boundary.
 ```
 
 ## Runtime checks
@@ -41,7 +45,11 @@ Minimum checks before release:
 [ ] cap-binding policy is fail-closed where required;
 [ ] no-curve scaffold returns NO_RUNTIME_CURVE with no numeric DR/loss;
 [ ] embedded and standalone capability declarations match;
-[ ] rejected or withdrawn numbers are absent from runtime-shaped artifacts.
+[ ] rejected or withdrawn numbers are absent from runtime-shaped artifacts;
+[ ] missing/unknown pathway_id fails closed without a default;
+[ ] unsupported pathway × failure-unit pairs return no numeric fallback;
+[ ] pathway-specific KATs and cross-pathway negative tests pass;
+[ ] consumer fixture verifies the exact cell-model/docs/schema/SHA pin.
 ```
 
 ## Numerical pressure-test checks
@@ -52,7 +60,9 @@ Minimum checks before release:
 [ ] source endpoint matches the modeled failure/replacement endpoint;
 [ ] dollar stress tests name the denominator and remain labeled audit-only when synthetic;
 [ ] support/logistics are not independently damaged and scaled again;
-[ ] uncertainty bands have a calibration/elicitation basis or are rejected.
+[ ] uncertainty bands have a calibration/elicitation basis or are rejected;
+[ ] identical intensity values on different pathways do not imply identical demand, records, or output;
+[ ] a legacy boolean/shift maps only when semantics are exact; otherwise it is audit-only.
 ```
 
 ## Release checks
@@ -61,5 +71,7 @@ Minimum checks before release:
 [ ] old-vs-new comparison for behavior changes;
 [ ] no model bump for docs-only changes;
 [ ] release notes include explicit non-changes;
+[ ] consumer migration, dual-read/cutover, and rollback rules are tested before canonical promotion;
+[ ] hurricane/tropical-cyclone scope is explicitly delivered or explicitly excluded;
 [ ] zip integrity test passes.
 ```

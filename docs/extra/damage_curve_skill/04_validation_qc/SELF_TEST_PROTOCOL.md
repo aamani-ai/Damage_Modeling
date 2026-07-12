@@ -14,4 +14,4 @@ Expected:
 all governance test cases pass
 ```
 
-The self-tests do not validate a damage model. They validate that the skill classifies representative change requests correctly.
+The self-tests do not validate a damage model. They validate that the skill classifies representative change requests and includes the required fail-closed and multi-pathway governance gates.

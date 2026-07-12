@@ -1,6 +1,6 @@
 ---
 name: damage-curve-library-governance
-description: Govern, extend, validate, and release the damage-curve library. Use for adding or updating hazard x asset damage cells; pressure-testing evidence and legacy numbers; governing source/claim provenance, seven-step audits, site-condition adapters, value crosswalks, and fail-closed no-curve outcomes; classifying changes; deciding version bumps; enforcing machine-readable artifacts, capability declarations, and cap-binding gates; handling source drops or in-repo edits; and packaging releases.
+description: Govern, extend, validate, and release the damage-curve library. Use for adding or updating hazard x asset damage cells; rebuilding multi-pathway cells with explicit pathway IDs, pathway-specific axes, evidence, curves, capabilities, and tests; pressure-testing evidence and legacy numbers; governing source/claim provenance, seven-step audits, site-condition adapters, value crosswalks, and fail-closed outcomes; classifying changes; deciding version bumps; enforcing machine-readable artifacts, consumer migrations, and cap-binding gates; handling source drops or in-repo edits; and packaging releases.
 ---
 
 # Damage Curve Library Governance Skill
@@ -38,14 +38,15 @@ If the user is asking how to use or install the skill, or if the operator is unf
 5. **Preserve separate version streams.** Package release version, cell damage-model version, cell docs revision, schema/artifact version, and skill upload version are different things.
 6. **Never silently overwrite the current cell.** Archive prior current artifacts before replacing them, or create a clearly named proposed/draft folder.
 7. **Run the seven-step audit.** Define the asset, decompose failure units, choose the y-axis/value basis, split value rows, allocate physical value, specify the site adapter, then apply qualified curves or withhold.
-8. **Pressure-test evidence and legacy numbers.** Use a stable source register, claim-level provenance, exact locators, canonical tiers, reproducible equation/table checks, endpoint transfer limits, and explicit denominators.
-9. **Keep the grain correct.** Damage curves are hazard × asset cells made of failure-unit records. Avoid whole-asset curves unless the dossier proves that the failure mechanism is genuinely whole-asset.
-10. **Govern site conditions causally.** Separate bridge inputs, derived exposure, vulnerability, and value allocation. Fences, walls, barriers, protection, maintenance, access, and response receive no blanket credit and cannot be double-counted.
-11. **Maintain the M3 boundary.** The damage-code layer emits vulnerability/severity: failure-unit DRs and scenario loss views with explicit value basis. It does not own hazard frequency, EAL aggregation, insurance terms, BI, VaR, PML, or TVaR unless those are downstream objects consuming the emit.
-12. **Use JSON as the runtime artifact.** Workbooks are derivation/audit views. Runtime M3 should pin to canonical JSON artifacts.
-13. **Enforce withhold-not-caveat.** If `capability_declaration` says a metric is withheld or conditional and the gate is not satisfied, do not emit the metric with a caveat. Withhold it with a reason code. A rigorous `NO_RUNTIME_CURVE` scaffold is an acceptable outcome.
-14. **Run validation/QC before packaging or committing.** Use `04_validation_qc/` and `tools/validate_skill_bundle.py` or equivalent package validation logic. In `inside_repo` mode, also run repo link/hash/no-`src` checks when relevant.
-15. **Write the release or change reason.** Every release or canonical repo change must say why the package/repo changed, which cells changed, which model versions changed, which docs revisions changed, whether schemas changed, and what is explicitly not changed.
+8. **Declare pathway architecture before fitting.** Keep one cell only when the asset/value substrate is shared and each mechanism can be independently governed. Require a stable `pathway_id`; never encode a pathway as a boolean, selector, conditioner, or undocumented branch. Give each pathway its own axis/bridge, evidence disposition, curve records, capabilities, and known-answer tests.
+9. **Pressure-test evidence and legacy numbers.** Use a stable source register, claim-level provenance, exact locators, canonical tiers, reproducible equation/table checks, endpoint transfer limits, and explicit denominators.
+10. **Keep the grain correct.** Damage curves are hazard × asset cells made of pathway × failure-unit records. Avoid whole-asset curves unless the dossier proves that the failure mechanism is genuinely whole-asset.
+11. **Govern site conditions causally.** Separate bridge inputs, derived exposure, vulnerability, and value allocation. Fences, walls, barriers, protection, maintenance, access, and response receive no blanket credit and cannot be double-counted.
+12. **Maintain the M3 boundary.** The damage-code layer emits vulnerability/severity: failure-unit DRs and scenario loss views with explicit value basis. It does not own hazard frequency, EAL aggregation, insurance terms, BI, VaR, PML, or TVaR unless those are downstream objects consuming the emit.
+13. **Use JSON as the runtime artifact.** Workbooks are derivation/audit views. Runtime M3 should pin to canonical JSON artifacts and an exact cell-model/docs/schema/SHA tuple.
+14. **Enforce withhold-not-caveat.** If a requested pathway × failure-unit pair is unsupported, withhold that pair with a reason code; do not substitute a neighboring pathway. If `capability_declaration` says a metric is withheld or conditional and the gate is not satisfied, do not emit it with a caveat. A rigorous `NO_RUNTIME_CURVE` or partial-pathway outcome is acceptable.
+15. **Run validation/QC before packaging or committing.** Use `04_validation_qc/` and `tools/validate_skill_bundle.py` or equivalent package validation logic. In `inside_repo` mode, also run repo link/hash/no-`src` checks when relevant.
+16. **Write the release or change reason.** Every release or canonical repo change must say why the package/repo changed, which cells/pathways changed, which model versions changed, which docs revisions changed, whether schemas changed, what consumers must migrate, and what is explicitly not changed.
 
 ## Quick decision tree
 
@@ -74,7 +75,7 @@ Does it only improve proof trail, wording, evidence narrative, or reviewer clari
 - First-time reader: `START_HERE_FOR_FIRST_READER.md`, then this `SKILL.md`.
 - Start every task: `00_governance/CHANGE_CLASSIFIER.md`, `00_governance/VERSIONING_POLICY.md`, `00_governance/RELEASE_DECISION_TREE.md`.
 - New cell: `01_workflows/ADD_NEW_CELL_WORKFLOW.md`, then `02_design_guides/EVIDENCE_PRESSURE_TEST_AND_FAIL_CLOSED_CHECKLIST.md` and the remaining `02_design_guides/`.
-- Existing cell update: `01_workflows/UPDATE_EXISTING_CELL_WORKFLOW.md`.
+- Existing cell update: `01_workflows/UPDATE_EXISTING_CELL_WORKFLOW.md`; for a multi-pathway rebuild also read `02_design_guides/HAZARD_PATHWAY_SPLITTING.md` and `06_examples/EXAMPLE_MULTI_PATHWAY_REVAMP_WIND_TORNADO_WIND.md`.
 - Evidence-only update: `01_workflows/DOCS_EVIDENCE_ONLY_WORKFLOW.md`, `01_workflows/EVIDENCE_INGESTION_WORKFLOW.md`.
 - Runtime/schema work: `03_contracts/` and `01_workflows/SCHEMA_CONTRACT_CHANGE_WORKFLOW.md`.
 - Validation/reportability: `04_validation_qc/`.
@@ -91,4 +92,7 @@ Does it only improve proof trail, wording, evidence narrative, or reviewer clari
 - Every new cell completes the seven-step audit, source/claim registers, row-level value crosswalk, and evidence pressure test; add legacy and site-condition controls when applicable.
 - A load-bearing “no evidence located” decision carries a bounded, reproducible search log and never becomes a universal absence claim.
 - Guidance or a plausible mechanism does not become a numeric modifier without calibration at the intended endpoint and grain.
+- `pathway_id` is a required first-class runtime dimension for multi-pathway cells. It is not a selector, conditioner, boolean variant, or inferred alias, and each curve record/output/test must carry it.
+- A shared cell does not imply shared numerical behavior: qualify support and fail closed at pathway × failure-unit grain. Keep neighboring mechanisms such as tropical-cyclone wind in a separately governed cell unless the pathway-splitting test proves otherwise.
+- A required pathway contract or meaning change follows the schema-contract workflow, including a consumer migration, exact pin verification, and dual-read/rollback rule when needed.
 - Repository presence does not promote a proposed artifact into the released package or runtime.

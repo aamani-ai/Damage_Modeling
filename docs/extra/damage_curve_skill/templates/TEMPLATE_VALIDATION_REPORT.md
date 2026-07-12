@@ -21,7 +21,10 @@ change_class:
 | Test | Status | Notes |
 |---|---|---|
 | known-answer tests |  |  |
+| pathway-specific KATs |  |  |
+| cross-pathway negative tests |  |  |
 | old-vs-new comparison |  |  |
+| consumer model/docs/schema/SHA pin |  |  |
 | cap-binding policy |  |  |
 
 ## Reportability checks

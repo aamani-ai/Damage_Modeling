@@ -23,6 +23,18 @@ def classify(signals: Dict[str, Any]) -> Dict[str, Any]:
     changes_docs = bool(signals.get("changes_docs"))
     marks_deprecation = bool(signals.get("marks_deprecation"))
     package_only = bool(signals.get("package_only"))
+    multi_pathway_cell = bool(signals.get("multi_pathway_cell"))
+
+    pathway_gates = [
+        "preserve_current_pin_during_research",
+        "pathway_architecture_decision",
+        "pathway_specific_axis_and_evidence",
+        "pathway_failure_unit_support_matrix",
+        "pathway_specific_known_answer_tests",
+        "cross_pathway_negative_tests",
+        "neighboring_cell_boundary",
+        "consumer_migration_and_pin_verification",
+    ] if multi_pathway_cell else []
 
     if adds_new_cell:
         if releases_runtime_model:
@@ -75,7 +87,12 @@ def classify(signals: Dict[str, Any]) -> Dict[str, Any]:
                 "docs_revision": "maybe_bump",
                 "schema_version": "bump",
             },
-            "required_gates": ["compatibility_decision", "migration_plan", "consumer_action_note", "schema_validation"],
+            "required_gates": [
+                "compatibility_decision",
+                "migration_plan",
+                "consumer_action_note",
+                "schema_validation",
+            ] + pathway_gates,
         }
 
     if changes_outputs:
@@ -91,7 +108,13 @@ def classify(signals: Dict[str, Any]) -> Dict[str, Any]:
                 "docs_revision": "bump",
                 "schema_version": "no_change",
             },
-            "required_gates": ["archive_prior_current", "old_vs_new_behavior_comparison", "JSON_artifact_QA", "known_answer_tests", "capability_declaration_review"],
+            "required_gates": [
+                "archive_prior_current",
+                "old_vs_new_behavior_comparison",
+                "JSON_artifact_QA",
+                "known_answer_tests",
+                "capability_declaration_review",
+            ] + pathway_gates,
         }
 
     if marks_deprecation:

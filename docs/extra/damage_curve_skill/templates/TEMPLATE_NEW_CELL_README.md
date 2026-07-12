@@ -35,17 +35,22 @@ Keep lifecycle, promotion, review, and documentation state separate from version
 
 ## Failure-unit coverage
 
-| Failure unit | Subsystem | Component | Role | Value bucket | v1 treatment |
-|---|---|---|---|---|---|
+| pathway_id | Failure unit | Subsystem | Component | Role | Value bucket | treatment/support |
+|---|---|---|---|---|---|---|
 
-## Hazard axis
+## Pathways and hazard axes
 
 ```yaml
-axis_id:
-input_field:
-unit:
-bridge:
+- pathway_id:
+  physical_mechanism:
+  axis_id:
+  input_field:
+  unit:
+  bridge:
+  neighboring_cell_boundaries: []
 ```
+
+For a multi-pathway cell, `pathway_id` is required and explicit. Do not encode it as a boolean, selector, conditioner, exposure, alias, or inferred intensity class.
 
 ## Capability declaration summary
 

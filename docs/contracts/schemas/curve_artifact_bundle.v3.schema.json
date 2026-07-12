@@ -1,0 +1,440 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "damage_curve_library.damage_curve_record_bundle.v3",
+  "title": "Pathway-aware damage-curve record bundle v3",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "schema_status",
+    "cell_id",
+    "damage_code_id",
+    "semantic_damage_model_version",
+    "documentation_revision",
+    "lifecycle_state",
+    "promotion_status",
+    "package_release",
+    "package_baseline",
+    "package_inclusion_status",
+    "canonical_runtime_artifact",
+    "source_dossier",
+    "source_workbook",
+    "known_answer_tests",
+    "source_register",
+    "claim_parameter_register",
+    "value_crosswalk",
+    "failure_units",
+    "pathways",
+    "value_linkage",
+    "parameter_tier_table",
+    "evaluation_contract",
+    "emit_contract",
+    "capability_declaration"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "damage_curve_record_bundle.v3"
+    },
+    "schema_status": {
+      "enum": [
+        "proposed_draft",
+        "released"
+      ]
+    },
+    "cell_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "damage_code_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "semantic_damage_model_version": {
+      "type": "string",
+      "pattern": "^model v[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$"
+    },
+    "documentation_revision": {
+      "type": "string",
+      "pattern": "^docs r[0-9]+$"
+    },
+    "lifecycle_state": {
+      "type": "string"
+    },
+    "promotion_status": {
+      "type": "string"
+    },
+    "review_status": {
+      "type": "string"
+    },
+    "model_grade": {
+      "type": "string"
+    },
+    "package_release": {
+      "type": "string"
+    },
+    "package_baseline": {
+      "type": "string"
+    },
+    "package_inclusion_status": {
+      "enum": [
+        "included",
+        "repository_canonical_not_in_portable_package",
+        "not_included"
+      ]
+    },
+    "canonical_runtime_artifact": {
+      "type": "boolean"
+    },
+    "source_dossier": {
+      "$ref": "#/$defs/repoPath"
+    },
+    "source_workbook": {
+      "$ref": "#/$defs/repoPath"
+    },
+    "known_answer_tests": {
+      "$ref": "#/$defs/repoPath"
+    },
+    "source_register": {
+      "$ref": "#/$defs/repoPath"
+    },
+    "claim_parameter_register": {
+      "$ref": "#/$defs/repoPath"
+    },
+    "value_crosswalk": {
+      "$ref": "#/$defs/repoPath"
+    },
+    "failure_units": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "subsystem",
+          "component",
+          "treatment",
+          "y_axis",
+          "denominator"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subsystem": {
+            "type": "string"
+          },
+          "component": {
+            "type": "string"
+          },
+          "treatment": {
+            "enum": [
+              "primary_nonzero",
+              "secondary_conditional",
+              "conditioner_only",
+              "exposure_modifier",
+              "dr_near_zero",
+              "withheld"
+            ]
+          },
+          "y_axis": {
+            "type": "string"
+          },
+          "denominator": {
+            "type": "string"
+          },
+          "withheld_reason_codes": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "pathways": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/pathway"
+      }
+    },
+    "value_linkage": {
+      "type": "object"
+    },
+    "parameter_tier_table": {
+      "type": "array"
+    },
+    "evaluation_contract": {
+      "type": "object"
+    },
+    "emit_contract": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "populated_emit_modes_for_this_cell"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "damage_emit.v2"
+        },
+        "populated_emit_modes_for_this_cell": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "scalar_mean",
+              "scalar_mean_plus_bounds",
+              "discrete_state_table",
+              "parametric_distribution",
+              "state_ensemble"
+            ]
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "capability_declaration": {
+      "$ref": "damage_curve_library.capability_declaration.v3"
+    },
+    "derivation_rationale": {
+      "type": "object"
+    },
+    "legacy_comparison": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "repoPath": {
+      "type": "string",
+      "pattern": "^docs/"
+    },
+    "hazardAxis": {
+      "type": "object",
+      "required": [
+        "id",
+        "preferred_input_field",
+        "unit",
+        "valid_range",
+        "extrapolation_policy"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "preferred_input_field": {
+          "type": "string"
+        },
+        "permitted_proxy_fields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "unit": {
+          "type": "string"
+        },
+        "valid_range": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "extrapolation_policy": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "orderedDamageStateRecord": {
+      "type": "object",
+      "required": [
+        "curve_id",
+        "pathway_id",
+        "failure_unit_id",
+        "curve_form",
+        "x_axis",
+        "y_axis",
+        "parameters"
+      ],
+      "properties": {
+        "curve_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pathway_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "failure_unit_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "curve_form": {
+          "const": "ordered_damage_state_lognormal"
+        },
+        "x_axis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "y_axis": {
+          "const": "failure_unit_damage_ratio"
+        },
+        "parameters": {
+          "type": "object",
+          "required": [
+            "beta_ln",
+            "damage_states",
+            "capacity_scenarios"
+          ],
+          "properties": {
+            "beta_ln": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "zero_below": {
+              "type": "number",
+              "minimum": 0
+            },
+            "damage_states": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "object",
+                "required": [
+                  "state_id",
+                  "cost_ratio",
+                  "affected_subsystems"
+                ],
+                "properties": {
+                  "state_id": {
+                    "type": "string"
+                  },
+                  "cost_ratio": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "affected_subsystems": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "tier": {
+                    "type": "string"
+                  },
+                  "source_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "capacity_scenarios": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": [
+                  "scenario_id",
+                  "state_medians"
+                ],
+                "properties": {
+                  "scenario_id": {
+                    "type": "string"
+                  },
+                  "state_medians": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    }
+                  },
+                  "tier": {
+                    "type": "string"
+                  },
+                  "source_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "interpretation": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "pathway": {
+      "type": "object",
+      "required": [
+        "pathway_id",
+        "hazard_scope",
+        "hazard_axis",
+        "selector_logic",
+        "conditioner_logic",
+        "exposure_contract",
+        "failure_unit_coverage",
+        "curve_records"
+      ],
+      "properties": {
+        "pathway_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hazard_scope": {
+          "type": "object"
+        },
+        "hazard_axis": {
+          "$ref": "#/$defs/hazardAxis"
+        },
+        "selector_logic": {
+          "type": "array"
+        },
+        "conditioner_logic": {
+          "type": "array"
+        },
+        "exposure_contract": {
+          "type": "object"
+        },
+        "failure_unit_coverage": {
+          "type": "array"
+        },
+        "curve_records": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/orderedDamageStateRecord"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

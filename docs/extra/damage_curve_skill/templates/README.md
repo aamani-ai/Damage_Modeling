@@ -22,3 +22,5 @@ TEMPLATE_VALIDATION_REPORT.md
 ```
 
 The templates do not require a numerical curve. A no-curve scaffold keeps `curve_records: []` and uses `NO_RUNTIME_CURVE` consistently.
+
+For multi-pathway cells, preserve the `pathway_id`, `pathway_ids`, and `applicable_pathway_ids` fields/columns. Use `all_shared` only for genuinely shared asset/value facts. The curve/capability templates use placeholder schema labels because adopting required pathway fields in live artifacts is a separately governed schema-contract change; replace those labels only after that migration is classified and approved.

@@ -1,0 +1,959 @@
+{
+  "$schema": "../../../contracts/schemas/curve_artifact_bundle.v3.schema.json",
+  "schema_version": "damage_curve_record_bundle.v3",
+  "schema_status": "proposed_draft",
+  "cell_id": "wind_tornado_wind",
+  "damage_code_id": "WIND_TORNADO_WIND_PATHWAY_V2_PROPOSED",
+  "semantic_damage_model_version": "model v2.0",
+  "documentation_revision": "docs r1",
+  "lifecycle_state": "candidate",
+  "promotion_status": "proposed",
+  "review_status": "pressure_tested_screening_proxy",
+  "model_grade": "screening_engineering_proxy",
+  "package_release": "unreleased",
+  "package_baseline": "library v2.5",
+  "package_inclusion_status": "not_included",
+  "canonical_runtime_artifact": false,
+  "source_dossier": "docs/cells/wind_tornado_wind/proposed/wind_tornado_wind_curve_derivation_dossier__model_v2_0__docs_r1.md",
+  "source_workbook": "docs/cells/wind_tornado_wind/proposed/damage_curve_records_wind_tornado_wind__model_v2_0__docs_r1.xlsx",
+  "known_answer_tests": "docs/cells/wind_tornado_wind/proposed/known_answer_tests_wind_tornado_wind__model_v2_0__docs_r1.json",
+  "source_register": "docs/cells/wind_tornado_wind/proposed/SOURCE_REGISTER_wind_tornado_wind__model_v2_0__docs_r1.csv",
+  "claim_parameter_register": "docs/cells/wind_tornado_wind/proposed/CLAIM_PARAMETER_REGISTER_wind_tornado_wind__model_v2_0__docs_r1.csv",
+  "value_crosswalk": "docs/cells/wind_tornado_wind/proposed/VALUE_CROSSWALK_wind_tornado_wind__model_v2_0__docs_r1.csv",
+  "failure_units": [
+    {
+      "id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "subsystem": "ROTOR_ASSEMBLY | PITCH_SYSTEM | NACELLE | POWER_ELECTRONICS | TOWER",
+      "component": "BLADE | HUB | PITCH_DRIVE | NACELLE_STRUCTURE | GEARBOX_GENERATOR | POWER_CONVERTER | YAW_SYSTEM | TOWER_SECTION",
+      "treatment": "primary_nonzero",
+      "y_axis": "conditional expected direct replacement-cost ratio of the same turbine-equipment assembly",
+      "denominator": "1090 2023_USD_per_kW direct turbine equipment; Wind_Map rows 2-9",
+      "repeated_unit_grain": "one turbine"
+    },
+    {
+      "id": "WT_FOUNDATION",
+      "subsystem": "FOUNDATION",
+      "component": "FOUNDATION_BASE",
+      "treatment": "withheld",
+      "y_axis": "same-unit direct replacement-cost ratio",
+      "denominator": "120 2023_USD_per_kW; Wind_Map row 10",
+      "withheld_reason_codes": [
+        "NO_UNIT_SPECIFIC_DAMAGE_CALIBRATION",
+        "POST_COLLAPSE_DISPOSITION_UNRESOLVED"
+      ]
+    },
+    {
+      "id": "WT_EXTERNAL_ELECTRICAL",
+      "subsystem": "ELECTRICAL_COLLECTION | SUBSTATION",
+      "component": "CABLE_AC | TRANSFORMER_MAIN | SWITCHGEAR",
+      "treatment": "withheld",
+      "y_axis": "same-unit direct replacement-cost ratio after row and exposure split",
+      "denominator": "72 2023_USD_per_kW rollup; Wind_Map row 12",
+      "withheld_reason_codes": [
+        "COLLECTION_SUBSTATION_VALUE_SPLIT_REQUIRED",
+        "LINE_POINT_EXPOSURE_SPLIT_REQUIRED",
+        "NO_UNIT_SPECIFIC_DAMAGE_CALIBRATION"
+      ]
+    },
+    {
+      "id": "WT_CIVIL_INFRA",
+      "subsystem": "CIVIL_INFRA",
+      "component": "SITE_ACCESS_STAGING_FACILITIES",
+      "treatment": "withheld",
+      "y_axis": "same-unit direct replacement-cost ratio after civil asset split",
+      "denominator": "47 2023_USD_per_kW mixed civil rollup; Wind_Map row 11",
+      "withheld_reason_codes": [
+        "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT",
+        "NO_UNIT_SPECIFIC_DAMAGE_CALIBRATION"
+      ]
+    },
+    {
+      "id": "WT_REPLACEMENT_SUPPORT",
+      "subsystem": "REPLACEMENT_FIELDWORK | REPLACEMENT_LOGISTICS",
+      "component": "ASSEMBLY_INSTALLATION | WIND_TURBINE_TRANSPORT",
+      "treatment": "exposure_modifier",
+      "y_axis": "not an intrinsic damage ratio",
+      "denominator": "294 2023_USD_per_kW support total; Wind_Map rows 13-14",
+      "withheld_reason_codes": [
+        "ALLOCATE_ONCE_AFTER_DIRECT_DAMAGE",
+        "CLAIMS_OR_SITE_ALLOCATION_RULE_REQUIRED"
+      ]
+    }
+  ],
+  "pathways": [
+    {
+      "pathway_id": "straight_line_convective",
+      "hazard_scope": {
+        "included": [
+          "downburst_microburst",
+          "downburst_macroburst",
+          "gust_front",
+          "derecho_local_outflow"
+        ],
+        "excluded": [
+          "tornado_direct_hit",
+          "synoptic_nonconvective_wind",
+          "tropical_cyclone_wind",
+          "downslope_windstorm",
+          "hail",
+          "lightning"
+        ],
+        "damage_boundary": "single-occurrence direct physical destruction only"
+      },
+      "hazard_axis": {
+        "id": "X_CONVECTIVE_ROTOR_EFFECTIVE_GUST_RATIO_TO_VE50",
+        "preferred_input_field": "rotor_effective_3s_gust_mps",
+        "permitted_proxy_fields": [
+          "hub_height_3s_gust_mps"
+        ],
+        "unit": "dimensionless",
+        "formula": "x = delivered_rotor_or_hub_3s_gust_mps / iec_ve50_mps",
+        "valid_range": [
+          0,
+          2
+        ],
+        "delivered_wind_valid_range_mps": [
+          0,
+          70
+        ],
+        "evidence_load_anchor_range_mps": [
+          28,
+          55
+        ],
+        "extrapolation_policy": "flag below 28 mps; flag above 55 mps; withhold above 70 mps",
+        "rotor_effective_definition": "maximum 3-second rotor-area RMS horizontal speed preserving first-order V-squared pressure equivalence",
+        "ten_meter_input_rule": "requires named convective profile bridge; no silent power-law default"
+      },
+      "selector_logic": [
+        {
+          "field": "iec_ve50_mps",
+          "required": true,
+          "default": null,
+          "effect": "normalizes delivered local convective speed by documented turbine design extreme"
+        },
+        {
+          "field": "turbine_archetype",
+          "required": true,
+          "allowed": [
+            "generic_modern_onshore_tubular_multi_mw_screening_v1"
+          ],
+          "default": null,
+          "effect": "limits transfer of screening capacity scenarios"
+        }
+      ],
+      "conditioner_logic": [
+        {
+          "field": "operational_state",
+          "required": "required_or_unknown",
+          "allowed": [
+            "operating",
+            "controlled_shutdown",
+            "parked_feathered",
+            "parked_unfeathered",
+            "unknown"
+          ],
+          "numeric_effect": "not calibrated; unresolved state preserves all resistance scenarios"
+        },
+        {
+          "field": "pitch_availability",
+          "required": "required_or_unknown",
+          "numeric_effect": "not calibrated; metadata and scenario flag only"
+        },
+        {
+          "field": "yaw_availability",
+          "required": "required_or_unknown",
+          "numeric_effect": "not calibrated; metadata and scenario flag only"
+        },
+        {
+          "field": "grid_and_backup_power_state",
+          "required": "required_or_unknown",
+          "numeric_effect": "not physical damage; informs control availability"
+        },
+        {
+          "field": "wind_speed_rise_rate_max_mps2",
+          "required": "required_or_unknown",
+          "numeric_effect": "not calibrated; load-bearing research field"
+        },
+        {
+          "field": "wind_direction_change_total_deg",
+          "required": "required_or_unknown",
+          "numeric_effect": "not calibrated; load-bearing research field"
+        },
+        {
+          "field": "wind_direction_change_rate_max_degps",
+          "required": "required_or_unknown",
+          "numeric_effect": "not calibrated; load-bearing research field"
+        },
+        {
+          "field": "yaw_error_max_deg",
+          "required": "required_or_unknown",
+          "numeric_effect": "not calibrated; load-bearing research field"
+        },
+        {
+          "field": "vertical_velocity_max_mps",
+          "required": "required_or_unknown",
+          "numeric_effect": "not calibrated; load-bearing research field"
+        },
+        {
+          "field": "duration_above_cutout_s",
+          "required": "required_or_unknown",
+          "numeric_effect": "not calibrated; local duration only"
+        },
+        {
+          "field": "turbulence_descriptor",
+          "required": "required_or_unknown",
+          "numeric_effect": "not calibrated; provenance field"
+        }
+      ],
+      "exposure_contract": {
+        "owner": "downstream_Hazard_M2",
+        "required_for_loss": [
+          "event_id",
+          "parent_convective_event_id",
+          "turbine_id_or_archetype_group",
+          "exposed_turbine_count_or_fraction",
+          "turbine_equipment_value_per_unit"
+        ],
+        "curve_evaluation_grain": "one delivered turbine",
+        "prohibited": [
+          "derecho_wide_duration_applied_to_each_turbine",
+          "one_exposure_scalar_applied_to_substation_collection_and_civil",
+          "frequency_inside_damage_curve"
+        ]
+      },
+      "failure_unit_coverage": [
+        {
+          "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+          "status": "conditional_screening_curve"
+        },
+        {
+          "failure_unit_id": "WT_FOUNDATION",
+          "status": "withheld"
+        },
+        {
+          "failure_unit_id": "WT_EXTERNAL_ELECTRICAL",
+          "status": "withheld"
+        },
+        {
+          "failure_unit_id": "WT_CIVIL_INFRA",
+          "status": "withheld"
+        },
+        {
+          "failure_unit_id": "WT_REPLACEMENT_SUPPORT",
+          "status": "allocate_once_outside_curve"
+        }
+      ],
+      "curve_records": [
+        {
+          "curve_id": "WTW2_SLC_TURBINE_EQUIPMENT_ORDERED_STATES",
+          "pathway_id": "straight_line_convective",
+          "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+          "curve_form": "ordered_damage_state_lognormal",
+          "x_axis": "X_CONVECTIVE_ROTOR_EFFECTIVE_GUST_RATIO_TO_VE50",
+          "y_axis": "failure_unit_damage_ratio",
+          "parameters": {
+            "beta_ln": 0.1,
+            "zero_below": 0.35,
+            "damage_states": [
+              {
+                "state_id": "DS0_NO_DIRECT_DAMAGE",
+                "cost_ratio": 0,
+                "affected_subsystems": [],
+                "description": "No occurrence physical-destruction cost on turbine equipment.",
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "SLC-S003",
+                  "SLC-S008"
+                ]
+              },
+              {
+                "state_id": "DS1_CONTROL_PITCH_REPAIR_PROXY",
+                "cost_ratio": 0.0119266055045872,
+                "affected_subsystems": [
+                  "PITCH_SYSTEM"
+                ],
+                "description": "Pitch/control physical repair proxy; grid loss or curtailment alone is excluded.",
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "VAL-S001",
+                  "SLC-S002",
+                  "SLC-S008"
+                ]
+              },
+              {
+                "state_id": "DS2_ROTOR_ASSEMBLY_REPLACEMENT",
+                "cost_ratio": 0.309174311926606,
+                "affected_subsystems": [
+                  "ROTOR_ASSEMBLY",
+                  "PITCH_SYSTEM"
+                ],
+                "description": "Blades, hub and pitch assembly replacement on the turbine-equipment denominator.",
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "VAL-S001",
+                  "SLC-S001",
+                  "SLC-S013"
+                ]
+              },
+              {
+                "state_id": "DS3_TERMINAL_TURBINE_EQUIPMENT_REPLACEMENT",
+                "cost_ratio": 1,
+                "affected_subsystems": [
+                  "ROTOR_ASSEMBLY",
+                  "PITCH_SYSTEM",
+                  "NACELLE",
+                  "POWER_ELECTRONICS",
+                  "TOWER"
+                ],
+                "description": "Terminal tower/support failure requiring replacement of turbine equipment; foundation and support remain separate.",
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "VAL-S001",
+                  "SLC-S001"
+                ]
+              }
+            ],
+            "capacity_scenarios": [
+              {
+                "scenario_id": "lower_resistance",
+                "state_medians": [
+                  0.75,
+                  0.9,
+                  1.15
+                ],
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "SLC-S001",
+                  "SLC-S003",
+                  "SLC-S004"
+                ],
+                "interpretation": "Higher-damage engineering bound; no probability weight."
+              },
+              {
+                "scenario_id": "central_screening",
+                "state_medians": [
+                  0.9,
+                  1.05,
+                  1.3
+                ],
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "SLC-S003",
+                  "SLC-S005",
+                  "SLC-S009"
+                ],
+                "interpretation": "Central screening judgment constrained by design/load evidence; not a fitted median."
+              },
+              {
+                "scenario_id": "upper_resistance",
+                "state_medians": [
+                  1.05,
+                  1.2,
+                  1.45
+                ],
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "SLC-S003",
+                  "SLC-S005",
+                  "SLC-S009"
+                ],
+                "interpretation": "Lower-damage engineering bound; no probability weight."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "pathway_id": "tornado_direct_hit",
+      "hazard_scope": {
+        "included": [
+          "tornado_direct_hit_after_turbine_intersection"
+        ],
+        "excluded": [
+          "tornado_frequency",
+          "tornado_track_or_swath_probability",
+          "farm_lease_intersection_without_turbine_hit",
+          "straight_line_convective",
+          "tropical_cyclone_wind",
+          "tropical_cyclone_spawned_tornado_without_event_partition"
+        ],
+        "damage_boundary": "conditional direct physical severity for one turbine after Hazard resolves hit and local wind"
+      },
+      "hazard_axis": {
+        "id": "X_TORNADO_ROTOR_EFFECTIVE_PEAK_HORIZONTAL_SPEED",
+        "preferred_input_field": "tornado_rotor_effective_peak_horizontal_speed_mps",
+        "permitted_proxy_fields": [
+          "tornado_hub_height_peak_3s_gust_mps"
+        ],
+        "unit": "m/s",
+        "formula": "x = delivered tornado rotor-effective peak horizontal speed",
+        "valid_range": [
+          0,
+          100
+        ],
+        "extrapolation_policy": "zero below 25 mps; flag above 80 mps as terminal-saturation extrapolation; reject EF class without a qualified wind proxy",
+        "height_profile_rule": "carry radar/field-model/reference height and tornado profile bridge provenance",
+        "ef_rule": "EF rating is context only and cannot be evaluated as speed"
+      },
+      "selector_logic": [
+        {
+          "field": "turbine_archetype",
+          "required": true,
+          "allowed": [
+            "generic_modern_onshore_tubular_multi_mw_screening_v1"
+          ],
+          "default": null,
+          "effect": "limits transfer from Jacksboro/Greenfield and reference turbine evidence"
+        }
+      ],
+      "conditioner_logic": [
+        {
+          "field": "tornado_input_basis",
+          "required": true,
+          "allowed": [
+            "rotor_resolved_wind_field",
+            "qualified_hub_height_proxy",
+            "radar_profile_bridge"
+          ],
+          "numeric_effect": "quality/provenance flag; EF-only is prohibited"
+        },
+        {
+          "field": "operational_state",
+          "required": "required_or_unknown",
+          "numeric_effect": "not calibrated; unresolved state preserves all resistance scenarios"
+        },
+        {
+          "field": "pitch_availability",
+          "required": "required_or_unknown",
+          "numeric_effect": "not calibrated; tornado-position dependence prevents a universal modifier"
+        },
+        {
+          "field": "yaw_availability",
+          "required": "required_or_unknown",
+          "numeric_effect": "not calibrated; a vortex cannot be represented by steady yaw alignment"
+        },
+        {
+          "field": "debris_environment",
+          "required": "required_or_unknown",
+          "numeric_effect": "not separately modeled; integrated uncertainty flag only"
+        },
+        {
+          "field": "tornado_profile_bridge_id",
+          "required": true,
+          "numeric_effect": "documents reference-height to rotor/hub transfer"
+        }
+      ],
+      "exposure_contract": {
+        "owner": "downstream_Hazard_M2",
+        "required_for_loss": [
+          "event_id",
+          "event_family_id",
+          "tornado_track_id",
+          "turbine_id",
+          "turbine_intersection_or_exposed_count",
+          "turbine_equipment_value_per_unit"
+        ],
+        "curve_evaluation_grain": "one struck/exposed turbine",
+        "prohibited": [
+          "farm_lease_overlap_used_as_turbine_hit",
+          "one_swept_fraction_applied_to_full_TIV",
+          "tornado_frequency_inside_damage_curve",
+          "tropical_cyclone_spawned_tornado_double_count"
+        ]
+      },
+      "failure_unit_coverage": [
+        {
+          "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+          "status": "conditional_screening_curve"
+        },
+        {
+          "failure_unit_id": "WT_FOUNDATION",
+          "status": "withheld"
+        },
+        {
+          "failure_unit_id": "WT_EXTERNAL_ELECTRICAL",
+          "status": "withheld"
+        },
+        {
+          "failure_unit_id": "WT_CIVIL_INFRA",
+          "status": "withheld"
+        },
+        {
+          "failure_unit_id": "WT_REPLACEMENT_SUPPORT",
+          "status": "allocate_once_outside_curve"
+        }
+      ],
+      "curve_records": [
+        {
+          "curve_id": "WTW2_TOR_TURBINE_EQUIPMENT_ORDERED_STATES",
+          "pathway_id": "tornado_direct_hit",
+          "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+          "curve_form": "ordered_damage_state_lognormal",
+          "x_axis": "X_TORNADO_ROTOR_EFFECTIVE_PEAK_HORIZONTAL_SPEED",
+          "y_axis": "failure_unit_damage_ratio",
+          "parameters": {
+            "beta_ln": 0.08,
+            "zero_below": 25,
+            "damage_states": [
+              {
+                "state_id": "DS0_NO_DIRECT_DAMAGE",
+                "cost_ratio": 0,
+                "affected_subsystems": [],
+                "description": "No occurrence physical-destruction cost on turbine equipment.",
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "TOR-S007",
+                  "TOR-S008"
+                ]
+              },
+              {
+                "state_id": "DS1_CONTROL_PITCH_REPAIR_PROXY",
+                "cost_ratio": 0.0119266055045872,
+                "affected_subsystems": [
+                  "PITCH_SYSTEM"
+                ],
+                "description": "Control/pitch physical repair proxy; outage and curtailment are excluded.",
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "VAL-S001",
+                  "TOR-S007",
+                  "TOR-S008"
+                ]
+              },
+              {
+                "state_id": "DS2_ROTOR_ASSEMBLY_REPLACEMENT",
+                "cost_ratio": 0.309174311926606,
+                "affected_subsystems": [
+                  "ROTOR_ASSEMBLY",
+                  "PITCH_SYSTEM"
+                ],
+                "description": "Blades, hub and pitch assembly replacement; Jacksboro anchors the central transition.",
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "VAL-S001",
+                  "TOR-S006",
+                  "TOR-S007"
+                ]
+              },
+              {
+                "state_id": "DS3_TERMINAL_TURBINE_EQUIPMENT_REPLACEMENT",
+                "cost_ratio": 1,
+                "affected_subsystems": [
+                  "ROTOR_ASSEMBLY",
+                  "PITCH_SYSTEM",
+                  "NACELLE",
+                  "POWER_ELECTRONICS",
+                  "TOWER"
+                ],
+                "description": "Terminal tower/support failure requiring replacement of turbine equipment; Greenfield anchors the central transition; foundation remains separate.",
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "VAL-S001",
+                  "TOR-S003",
+                  "TOR-S005",
+                  "TOR-S007"
+                ]
+              }
+            ],
+            "capacity_scenarios": [
+              {
+                "scenario_id": "lower_resistance",
+                "state_medians": [
+                  32,
+                  45,
+                  58
+                ],
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "TOR-S007",
+                  "TOR-S008"
+                ],
+                "interpretation": "Higher-damage bound informed by proposed DOD resistance values; no probability weight."
+              },
+              {
+                "scenario_id": "central_screening",
+                "state_medians": [
+                  36,
+                  51,
+                  67
+                ],
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "TOR-S003",
+                  "TOR-S006",
+                  "TOR-S007"
+                ],
+                "interpretation": "Central screening transition using Jacksboro rotor damage and Greenfield terminal bracket; not a statistical fit."
+              },
+              {
+                "scenario_id": "upper_resistance",
+                "state_medians": [
+                  40,
+                  56,
+                  80
+                ],
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "TOR-S003",
+                  "TOR-S006"
+                ],
+                "interpretation": "Lower-damage bound reflecting speed, height, archetype and capacity uncertainty; no probability weight."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "value_linkage": {
+    "implicit_default_profile": null,
+    "reference_basis": {
+      "source_id": "VAL-S001",
+      "currency_vintage": "2023_USD",
+      "reference_capacity_mw": 200,
+      "installed_capex_usd_per_kw": 1968,
+      "physical_replaceable_usd_per_kw": 1623,
+      "excluded_soft_sunk_nonphysical_usd_per_kw": 345,
+      "physical_to_installed_ratio": 0.82469512195122,
+      "turbine_equipment_direct_usd_per_kw": 1090,
+      "turbine_equipment_share_physical_base": 0.671595810227973,
+      "turbine_equipment_share_installed_capex": 0.553861788617886,
+      "withheld_other_direct_usd_per_kw": 239,
+      "support_fieldwork_logistics_usd_per_kw": 294
+    },
+    "state_consequence_basis": {
+      "DS0_NO_DIRECT_DAMAGE": 0,
+      "DS1_CONTROL_PITCH_REPAIR_PROXY": 0.0119266055045872,
+      "DS2_ROTOR_ASSEMBLY_REPLACEMENT": 0.309174311926606,
+      "DS3_TERMINAL_TURBINE_EQUIPMENT_REPLACEMENT": 1
+    },
+    "support_cost_allocation_rule": "allocate Wind_Map rows 13-14 once after damaged turbine/unit scope is known; no implicit proportional default",
+    "asset_loss_rule": "failure-unit DR remains available; reference or site loss requires explicit turbine equipment value and exposed turbine count/fraction",
+    "prohibited": [
+      "apply_turbine_equipment_DR_to_full_physical_or_installed_TIV",
+      "apply_support_as_independent_fragility",
+      "apply_one_turbine_exposure_fraction_to_foundation_substation_collection_and_civil",
+      "interpret_reference_share_as_intrinsic_curve_cap"
+    ]
+  },
+  "parameter_tier_table": [
+    {
+      "parameter": "straight_line beta_ln",
+      "value": 0.1,
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "SLC-S001",
+        "SLC-S003"
+      ]
+    },
+    {
+      "parameter": "straight_line capacity scenarios",
+      "value": "[0.75,0.90,1.15]; [0.90,1.05,1.30]; [1.05,1.20,1.45]",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "SLC-S001",
+        "SLC-S003",
+        "SLC-S004",
+        "SLC-S005",
+        "SLC-S009"
+      ]
+    },
+    {
+      "parameter": "straight_line upper delivered-wind bound",
+      "value": "70 m/s",
+      "param_role": "boundary_or_cap",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "SLC-S003",
+        "SLC-S005"
+      ]
+    },
+    {
+      "parameter": "tornado beta_ln",
+      "value": 0.08,
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "TOR-S003",
+        "TOR-S006",
+        "TOR-S007"
+      ]
+    },
+    {
+      "parameter": "tornado central state medians",
+      "value": "[36,51,67] m/s",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "TOR-S003",
+        "TOR-S006",
+        "TOR-S007"
+      ]
+    },
+    {
+      "parameter": "tornado lower/upper resistance medians",
+      "value": "[32,45,58] and [40,56,80] m/s",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "TOR-S003",
+        "TOR-S006",
+        "TOR-S007",
+        "TOR-S008"
+      ]
+    },
+    {
+      "parameter": "damage-state cost ratios",
+      "value": "[0,13/1090,337/1090,1]",
+      "param_role": "exposure_or_value",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "VAL-S001"
+      ]
+    }
+  ],
+  "evaluation_contract": {
+    "equation": "q_j = Phi(ln(x/theta_j)/beta_ln); p0=1-q1; pj=qj-q(j+1); plast=qlast; EDR=sum(pj*cost_ratio_j)",
+    "state_probability_rule": "exact states are mutually exclusive and must sum to one",
+    "scenario_rule": "evaluate each named capacity scenario independently; no probabilities or averaging are authorized",
+    "central_scenario_id": "central_screening",
+    "result_bounds_rule": "lower_resistance is the higher-DR bound and upper_resistance is the lower-DR bound",
+    "pathway_rule": "pathway_id required and must match both selected pathway and curve record",
+    "straight_line_domain_rule": "withhold delivered speed above 70 m/s; flag below 28 and above 55 m/s",
+    "tornado_input_rule": "reject EF-only input; require rotor-effective speed or qualified hub/radar bridge",
+    "exposure_rule": "do not multiply exposure inside the intrinsic curve evaluator",
+    "failure_codes": [
+      "PATHWAY_ID_REQUIRED",
+      "PATHWAY_ID_UNKNOWN",
+      "PATHWAY_ID_MISMATCH",
+      "IEC_VE50_REQUIRED",
+      "CONVECTIVE_PROFILE_BRIDGE_REQUIRED",
+      "CONVECTIVE_SPEED_ABOVE_70_MPS_WITHHELD",
+      "AXIS_OUTSIDE_VALID_RANGE",
+      "TORNADO_EFFECTIVE_SPEED_REQUIRED",
+      "EF_ONLY_INPUT_PROHIBITED",
+      "TORNADO_PROFILE_BRIDGE_REQUIRED",
+      "CONDITIONER_VALUE_UNSUPPORTED",
+      "FAILURE_UNIT_ID_UNKNOWN",
+      "TURBINE_ARCHETYPE_UNSUPPORTED",
+      "EXPLICIT_VALUE_AND_EXPOSURE_REQUIRED_FOR_LOSS"
+    ]
+  },
+  "emit_contract": {
+    "schema_version": "damage_emit.v2",
+    "populated_emit_modes_for_this_cell": [
+      "scalar_mean_plus_bounds",
+      "state_ensemble"
+    ],
+    "pathway_id_required_at": [
+      "emit_object",
+      "failure_unit_result"
+    ],
+    "central_field": "scalar_central_dr",
+    "scenario_field": "scenario_drs",
+    "withheld_units_remain_null": true
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v3",
+    "cell_id": "wind_tornado_wind",
+    "canonical_runtime_artifact": false,
+    "pathway_capabilities": [
+      {
+        "pathway_id": "straight_line_convective",
+        "failure_unit_scalar_dr": "conditional",
+        "scenario_loss_given_value_basis": "conditional",
+        "curve_intrinsic_spread": "nonprobabilistic_epistemic_envelope",
+        "populated_emit_modes": [
+          "scalar_mean_plus_bounds",
+          "state_ensemble"
+        ],
+        "conditions": [
+          "exact_pathway_id",
+          "rotor_effective_or_explicit_hub_proxy_3s_gust",
+          "positive_iec_ve50_mps_without_default",
+          "supported_turbine_archetype",
+          "delivered_wind_at_or_below_70_mps",
+          "explicit_turbine_equipment_value_and_exposed_turbine_count_for_loss",
+          "unresolved_control_state_preserves_all_resistance_scenarios"
+        ],
+        "limitation_flags": [
+          "SCREENING_ENGINEERING_PROXY",
+          "NOT_FIELD_OR_CLAIMS_CALIBRATED",
+          "NONPROBABILISTIC_EPISTEMIC_ENVELOPE",
+          "CONVECTIVE_LOAD_TO_DR_TIER4",
+          "CONDITIONERS_NOT_NUMERICALLY_CALIBRATED",
+          "HUB_GUST_PROXY_LOWER_FIDELITY",
+          "BELOW_28_MPS_NEAR_ZERO_EXTRAPOLATION",
+          "ABOVE_55_MPS_HIGH_EXTRAPOLATION",
+          "ABOVE_70_MPS_WITHHELD",
+          "TURBINE_EQUIPMENT_ONLY",
+          "FOUNDATION_EXTERNAL_PLANT_AND_SUPPORT_WITHHELD",
+          "NO_IMPLICIT_VALUE_PROFILE"
+        ],
+        "withheld_failure_units": [
+          {
+            "failure_unit_id": "WT_FOUNDATION",
+            "reason_codes": [
+              "NO_CONVECTIVE_FOUNDATION_DAMAGE_CALIBRATION"
+            ]
+          },
+          {
+            "failure_unit_id": "WT_EXTERNAL_ELECTRICAL",
+            "reason_codes": [
+              "COLLECTION_AND_SUBSTATION_SPLIT_REQUIRED",
+              "NO_UNIT_SPECIFIC_CURVE"
+            ]
+          },
+          {
+            "failure_unit_id": "WT_CIVIL_INFRA",
+            "reason_codes": [
+              "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT",
+              "NO_UNIT_SPECIFIC_CURVE"
+            ]
+          },
+          {
+            "failure_unit_id": "WT_REPLACEMENT_SUPPORT",
+            "reason_codes": [
+              "SUPPORT_ALLOCATED_ONCE_OUTSIDE_INTRINSIC_DR",
+              "CLAIMS_OR_SITE_ALLOCATION_RULE_REQUIRED"
+            ]
+          }
+        ]
+      },
+      {
+        "pathway_id": "tornado_direct_hit",
+        "failure_unit_scalar_dr": "conditional",
+        "scenario_loss_given_value_basis": "conditional",
+        "curve_intrinsic_spread": "nonprobabilistic_epistemic_envelope",
+        "populated_emit_modes": [
+          "scalar_mean_plus_bounds",
+          "state_ensemble"
+        ],
+        "conditions": [
+          "exact_pathway_id",
+          "tornado_rotor_effective_peak_horizontal_speed_or_qualified_hub_proxy",
+          "ef_class_alone_is_not_accepted",
+          "supported_turbine_archetype",
+          "Hazard_supplies_turbine_intersection_and_exposed_count",
+          "explicit_turbine_equipment_value_for_loss",
+          "unresolved_control_debris_and_profile_state_preserves_all_resistance_scenarios"
+        ],
+        "limitation_flags": [
+          "SCREENING_ENGINEERING_PROXY",
+          "PARTIALLY_FIELD_ANCHORED_NOT_POPULATION_CALIBRATED",
+          "NONPROBABILISTIC_EPISTEMIC_ENVELOPE",
+          "CONDITIONERS_NOT_NUMERICALLY_CALIBRATED",
+          "EF_ONLY_INPUT_PROHIBITED",
+          "TORNADO_EFFECTIVE_SPEED_PROXY",
+          "TORNADO_DEBRIS_AND_PRESSURE_NOT_SEPARATELY_MODELED",
+          "GREENFIELD_AND_JACKSBORO_ARCHETYPE_TRANSFER_LIMIT",
+          "ABOVE_80_MPS_TERMINAL_SATURATION_EXTRAPOLATION",
+          "TURBINE_EQUIPMENT_ONLY",
+          "FOUNDATION_EXTERNAL_PLANT_AND_SUPPORT_WITHHELD",
+          "NO_IMPLICIT_VALUE_PROFILE"
+        ],
+        "withheld_failure_units": [
+          {
+            "failure_unit_id": "WT_FOUNDATION",
+            "reason_codes": [
+              "POST_COLLAPSE_FOUNDATION_DISPOSITION_UNRESOLVED",
+              "NO_TORNADO_FOUNDATION_DAMAGE_CALIBRATION"
+            ]
+          },
+          {
+            "failure_unit_id": "WT_EXTERNAL_ELECTRICAL",
+            "reason_codes": [
+              "COLLECTION_LINE_AND_SUBSTATION_POINT_EXPOSURE_REQUIRED",
+              "NO_UNIT_SPECIFIC_CURVE"
+            ]
+          },
+          {
+            "failure_unit_id": "WT_CIVIL_INFRA",
+            "reason_codes": [
+              "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT",
+              "NO_UNIT_SPECIFIC_CURVE"
+            ]
+          },
+          {
+            "failure_unit_id": "WT_REPLACEMENT_SUPPORT",
+            "reason_codes": [
+              "SUPPORT_ALLOCATED_ONCE_OUTSIDE_INTRINSIC_DR",
+              "CLAIMS_OR_SITE_ALLOCATION_RULE_REQUIRED"
+            ]
+          }
+        ]
+      }
+    ],
+    "consumer_annual_metrics": {
+      "computation_owner": "downstream_consumer",
+      "status_before_promotion": "withheld_noncanonical_proposal",
+      "status_after_promotion": "consumer_computable_from_validated_frequency_intensity_coupling_value_and_cap_model",
+      "prerequisites": [
+        "canonical_model_docs_schema_sha_pin",
+        "passing_pathway_specific_known_answer_tests",
+        "pathway_aware_event_identity_without_tropical_cyclone_double_count",
+        "validated_occurrence_and_intensity_model",
+        "turbine_point_exposure_and_separate_external_asset_exposure",
+        "explicit_site_value_and_support_allocation",
+        "correct_grain_occurrence_and_annual_caps",
+        "return_period_resolution_and_tail_convergence"
+      ],
+      "limitation_flags": [
+        "DAMAGE_MODELING_DOES_NOT_OWN_FREQUENCY_OR_ANNUAL_METRICS",
+        "SCREENING_VULNERABILITY_CONDITIONAL_TAIL_ONLY",
+        "NONPROBABILISTIC_EPISTEMIC_ENVELOPE_REQUIRES_SCENARIO_REPORTING"
+      ]
+    },
+    "cap_binding": {
+      "policy": "consumer_enforced_fail_closed",
+      "enforcement_owner": "downstream_consumer",
+      "checks_required": [
+        "failure_unit_cap_applied_to_turbine_equipment_only",
+        "exposure_applied_once_per_turbine",
+        "foundation_external_electrical_and_civil_not_scaled_by_turbine_dr",
+        "support_cost_allocated_once",
+        "occurrence_and_annual_caps_applied_inside_simulation",
+        "resistance_scenarios_not_averaged_without_weights"
+      ],
+      "action_if_fail": "withhold the affected loss or annual metric and return the failing reason code"
+    },
+    "promotion_gate": {
+      "status": "blocked",
+      "required_before_canonical_use": [
+        "complete_workbook_and_independent_formula_verification",
+        "bundle_v3_emit_v2_capability_v3_schema_review",
+        "all_pathway_value_and_rejection_known_answer_tests_pass",
+        "Hazard_adapter_loads_one_pinned_artifact_and_removes_hardcoded_curves",
+        "Hazard_corrects_height_profile_exposure_frequency_and_event_overlap_seams",
+        "old_vs_new_results_reviewed_without_calibration_to_legacy_headlines",
+        "explicit_repository_promotion_decision"
+      ]
+    }
+  },
+  "derivation_rationale": {
+    "source_spine": [
+      "SLC-S003",
+      "SLC-S005",
+      "TOR-S003",
+      "TOR-S005",
+      "TOR-S006",
+      "TOR-S007",
+      "VAL-S001"
+    ],
+    "why_ordered_states": "observations distinguish rotor damage with intact tower from terminal tower collapse, and terminal collapse makes independent component sums invalid",
+    "why_two_axes": "convective design-normalized transient demand and tornado field-supported absolute effective speed do not share a validated conversion",
+    "why_screening_only": "capacity and same-unit repair data are incomplete; all resistance and consequence shapes remain Tier 4",
+    "why_hurricane_excluded": "duration, veer, turbulence, control/grid state and possible offshore combined loading require separate governance"
+  },
+  "legacy_comparison": {
+    "current_canonical_pin": "wind_tornado_wind@model_v1_0__docs_r4",
+    "current_artifact_preserved": true,
+    "v1_boolean_tornado_variant_removed_in_v2": true,
+    "v1_component_sum_replaced_by_ordered_assembly_states": true,
+    "Hazard_hardcoded_curves_are_comparison_only": true,
+    "calibration_to_old_EAL_or_PML": "prohibited"
+  }
+}

@@ -13,6 +13,11 @@ live under each cell folder.
 | `strong_wind_solar` | model v1.0 / docs r3 | `STRONG_WIND_SOLAR_V1` | [`strong_wind_solar/`](strong_wind_solar/README.md) |
 | `wildfire_solar` | model v1.0 / docs r3; screening engineering proxy | `WILDFIRE_SOLAR_FSIM_SCREENING_V1` | [`wildfire_solar/`](wildfire_solar/README.md) |
 
+Active research proposal: `wind_tornado_wind` has a noncanonical
+[`model v2.0 / docs r1` pathway-aware package](wind_tornado_wind/proposed/README_wind_tornado_wind__model_v2_0__docs_r1.md).
+It does not change the current model/docs row above, is absent from the artifact index, and excludes
+hurricane/tropical-cyclone wind.
+
 ## Portable-package boundary
 
 `wildfire_solar` is repository-current and canonical but is not included in the preserved portable package

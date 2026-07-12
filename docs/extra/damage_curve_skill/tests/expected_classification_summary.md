@@ -7,4 +7,6 @@
 | fail_closed_site_conditioned_scaffold | NEW_CELL_SCAFFOLD | rigorous evidence package and no-curve withholding gates required |
 | strong_wind_solar_parameter_update | MODEL_BEHAVIOR_CHANGE | model bump required |
 | damage_emit_required_field | SCHEMA_CONTRACT_CHANGE | schema bump required |
+| wind_tornado_wind_multi_pathway_model_revamp | MODEL_BEHAVIOR_CHANGE | major model bump plus pathway-specific evidence/KAT/consumer gates |
+| required_pathway_id_schema_contract | SCHEMA_CONTRACT_CHANGE | schema bump plus pathway migration/pin gates |
 | legacy_curve_deprecation | DEPRECATION_OR_LEGACY_STATUS_CHANGE | no model bump unless runtime routing changes |

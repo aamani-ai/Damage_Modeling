@@ -29,6 +29,18 @@
 - metadata, JSON, site-adapter, and known-answer-test inputs use different field names without an explicit alias/group mapping.
 ```
 
+## Pathway failures
+
+```text
+- tornado, straight-line wind, or another mechanism is represented by a boolean/curve shift;
+- pathway_id is treated as a selector, conditioner, exposure, or inferred from intensity;
+- one global axis/bridge/evidence chain is reused across physically different pathways;
+- unsupported pathway × failure-unit pairs borrow a neighboring curve;
+- KATs cover one pathway but the cell is declared globally supported;
+- a hurricane/tropical-cyclone pathway is implied by a high-wind/tornado cell without separate governance;
+- consumer cutover occurs without exact model/docs/schema/SHA pin verification.
+```
+
 ## Evidence failures
 
 ```text

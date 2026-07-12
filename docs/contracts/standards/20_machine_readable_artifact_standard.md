@@ -168,3 +168,16 @@ Package release alone is not a valid cell-runtime pin.
 
 This is a pull-based contract. Push notifications and durable object-store publishing remain future system
 work.
+
+## 11. Proposed pathway-aware v3 extension
+
+Bundle v2 remains the repository-current canonical contract. Cells that require multiple first-class hazard
+pathways with independent axes and record families use the proposed bundle-v3 design during research. See
+[`22_pathway_aware_artifact_and_emit_standard.md`](22_pathway_aware_artifact_and_emit_standard.md).
+
+```yaml
+bundle_v3_status: proposed_draft
+emit_v2_status: proposed_draft
+capability_v3_status: proposed_draft
+automatic_migration_from_v2: prohibited
+```

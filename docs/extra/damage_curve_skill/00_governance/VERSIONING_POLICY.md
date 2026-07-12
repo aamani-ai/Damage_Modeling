@@ -79,6 +79,8 @@ Use when a conceptual or breaking change occurs:
 - hazard-axis basis changes in a non-compatible way;
 - cell splits/merges substantially;
 - runtime interface breaks downstream assumptions.
+- an implicit/boolean mechanism variant becomes a required first-class pathway contract;
+- a combined cell is repartitioned into independently governed pathways or neighboring cells.
 ```
 
 ### Minor
@@ -128,7 +130,11 @@ Bump when machine contract changes:
 - enum values change in a way consumers must handle;
 - emit object structure changes;
 - capability declaration semantics change.
+- `pathway_id` becomes required or changes meaning;
+- pathway-specific axes, records, outputs, capability matrices, or KAT references become required.
 ```
+
+A model and schema version may both bump in one delivery, but for different reasons. Record separate change events and prove whether the new pathway architecture changes numerical behavior. A skill revision that introduces this workflow does not itself bump either live version stream.
 
 ## Skill version
 

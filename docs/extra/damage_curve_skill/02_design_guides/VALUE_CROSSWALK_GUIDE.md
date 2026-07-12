@@ -63,3 +63,5 @@ Does it exceed installed TIV or only failure-unit value?
 ```
 
 The crosswalk must include a reconciliation equation and unresolved difference. A cell cannot emit scenario loss merely because a whole-site installed-cost number exists.
+
+For a multi-pathway cell, map each value row to `applicable_pathway_ids` (or `all_shared`) and keep event exposure separate from value identity. Sharing a value ledger does not authorize one pathway's exposed fraction or DR to be reused by another, and the same row may not be charged twice when compound event records overlap.

@@ -113,6 +113,72 @@
     }
   },
   {
+    "case_id": "wind_tornado_wind_multi_pathway_model_revamp",
+    "description": "Rebuild wind_tornado_wind from an implicit tornado shift into independently governed straight-line-convective and tornado-direct-hit pathways while leaving hurricane wind in a neighboring cell.",
+    "signals": {
+      "adds_new_cell": false,
+      "releases_runtime_model": false,
+      "changes_schema": false,
+      "changes_outputs": true,
+      "changes_evidence": true,
+      "changes_docs": true,
+      "marks_deprecation": false,
+      "package_only": false,
+      "multi_pathway_cell": true,
+      "output_change_scale": "major"
+    },
+    "expected": {
+      "change_class": "MODEL_BEHAVIOR_CHANGE",
+      "cell_model_version": "bump_major",
+      "docs_revision": "bump",
+      "schema_version": "no_change",
+      "required_gates_include": [
+        "preserve_current_pin_during_research",
+        "old_vs_new_behavior_comparison",
+        "pathway_architecture_decision",
+        "pathway_specific_axis_and_evidence",
+        "pathway_failure_unit_support_matrix",
+        "pathway_specific_known_answer_tests",
+        "cross_pathway_negative_tests",
+        "neighboring_cell_boundary",
+        "consumer_migration_and_pin_verification"
+      ]
+    }
+  },
+  {
+    "case_id": "required_pathway_id_schema_contract",
+    "description": "Make pathway_id and pathway-specific records, outputs, capabilities, and KAT identity required in the machine contract.",
+    "signals": {
+      "adds_new_cell": false,
+      "releases_runtime_model": false,
+      "changes_schema": true,
+      "changes_outputs": false,
+      "changes_evidence": false,
+      "changes_docs": true,
+      "marks_deprecation": false,
+      "package_only": false,
+      "multi_pathway_cell": true,
+      "schema_compatibility": "additive_required"
+    },
+    "expected": {
+      "change_class": "SCHEMA_CONTRACT_CHANGE",
+      "cell_model_version": "maybe_no_change_if_outputs_same",
+      "docs_revision": "maybe_bump",
+      "schema_version": "bump",
+      "required_gates_include": [
+        "preserve_current_pin_during_research",
+        "compatibility_decision",
+        "migration_plan",
+        "schema_validation",
+        "pathway_architecture_decision",
+        "pathway_failure_unit_support_matrix",
+        "cross_pathway_negative_tests",
+        "neighboring_cell_boundary",
+        "consumer_migration_and_pin_verification"
+      ]
+    }
+  },
+  {
     "case_id": "legacy_curve_deprecation",
     "description": "Mark a legacy capex-weighted curve as non-canonical placeholder and point runtime consumers to canonical JSON.",
     "signals": {

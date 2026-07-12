@@ -27,6 +27,19 @@ from a zero-curve scaffold to model v1.0.
 
 ---
 
+## Active noncanonical proposals
+
+| Cell folder | Proposed semantic model | Proposed documentation | Status | Current-runtime effect |
+|---|---:|---:|---|---|
+| `wind_tornado_wind` | model v2.0 | docs r1 | Pressure-tested pathway-aware screening proposal; promotion gates remain blocked | None. Model v1.0/docs r4 remains canonical and is still the artifact-index pin. |
+
+The wind proposal introduces separate `straight_line_convective` and `tornado_direct_hit` pathways, proposed
+bundle v3 / emit v2 / capability v3 contracts, an equipment-only ordered-state curve, and explicit withheld
+external units. It is not a portable package release, current changelog event, or hurricane curve. See
+[`wind_tornado_wind/proposed/README_wind_tornado_wind__model_v2_0__docs_r1.md`](wind_tornado_wind/proposed/README_wind_tornado_wind__model_v2_0__docs_r1.md).
+
+---
+
 ## Package release history summary
 
 | Package release | Main change | Cell model changes? |

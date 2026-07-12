@@ -1,0 +1,177 @@
+{
+  "schema_version": "capability_declaration.v3",
+  "cell_id": "wind_tornado_wind",
+  "canonical_runtime_artifact": false,
+  "pathway_capabilities": [
+    {
+      "pathway_id": "straight_line_convective",
+      "failure_unit_scalar_dr": "conditional",
+      "scenario_loss_given_value_basis": "conditional",
+      "curve_intrinsic_spread": "nonprobabilistic_epistemic_envelope",
+      "populated_emit_modes": [
+        "scalar_mean_plus_bounds",
+        "state_ensemble"
+      ],
+      "conditions": [
+        "exact_pathway_id",
+        "rotor_effective_or_explicit_hub_proxy_3s_gust",
+        "positive_iec_ve50_mps_without_default",
+        "supported_turbine_archetype",
+        "delivered_wind_at_or_below_70_mps",
+        "explicit_turbine_equipment_value_and_exposed_turbine_count_for_loss",
+        "unresolved_control_state_preserves_all_resistance_scenarios"
+      ],
+      "limitation_flags": [
+        "SCREENING_ENGINEERING_PROXY",
+        "NOT_FIELD_OR_CLAIMS_CALIBRATED",
+        "NONPROBABILISTIC_EPISTEMIC_ENVELOPE",
+        "CONVECTIVE_LOAD_TO_DR_TIER4",
+        "CONDITIONERS_NOT_NUMERICALLY_CALIBRATED",
+        "HUB_GUST_PROXY_LOWER_FIDELITY",
+        "BELOW_28_MPS_NEAR_ZERO_EXTRAPOLATION",
+        "ABOVE_55_MPS_HIGH_EXTRAPOLATION",
+        "ABOVE_70_MPS_WITHHELD",
+        "TURBINE_EQUIPMENT_ONLY",
+        "FOUNDATION_EXTERNAL_PLANT_AND_SUPPORT_WITHHELD",
+        "NO_IMPLICIT_VALUE_PROFILE"
+      ],
+      "withheld_failure_units": [
+        {
+          "failure_unit_id": "WT_FOUNDATION",
+          "reason_codes": [
+            "NO_CONVECTIVE_FOUNDATION_DAMAGE_CALIBRATION"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_EXTERNAL_ELECTRICAL",
+          "reason_codes": [
+            "COLLECTION_AND_SUBSTATION_SPLIT_REQUIRED",
+            "NO_UNIT_SPECIFIC_CURVE"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_CIVIL_INFRA",
+          "reason_codes": [
+            "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT",
+            "NO_UNIT_SPECIFIC_CURVE"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_REPLACEMENT_SUPPORT",
+          "reason_codes": [
+            "SUPPORT_ALLOCATED_ONCE_OUTSIDE_INTRINSIC_DR",
+            "CLAIMS_OR_SITE_ALLOCATION_RULE_REQUIRED"
+          ]
+        }
+      ]
+    },
+    {
+      "pathway_id": "tornado_direct_hit",
+      "failure_unit_scalar_dr": "conditional",
+      "scenario_loss_given_value_basis": "conditional",
+      "curve_intrinsic_spread": "nonprobabilistic_epistemic_envelope",
+      "populated_emit_modes": [
+        "scalar_mean_plus_bounds",
+        "state_ensemble"
+      ],
+      "conditions": [
+        "exact_pathway_id",
+        "tornado_rotor_effective_peak_horizontal_speed_or_qualified_hub_proxy",
+        "ef_class_alone_is_not_accepted",
+        "supported_turbine_archetype",
+        "Hazard_supplies_turbine_intersection_and_exposed_count",
+        "explicit_turbine_equipment_value_for_loss",
+        "unresolved_control_debris_and_profile_state_preserves_all_resistance_scenarios"
+      ],
+      "limitation_flags": [
+        "SCREENING_ENGINEERING_PROXY",
+        "PARTIALLY_FIELD_ANCHORED_NOT_POPULATION_CALIBRATED",
+        "NONPROBABILISTIC_EPISTEMIC_ENVELOPE",
+        "CONDITIONERS_NOT_NUMERICALLY_CALIBRATED",
+        "EF_ONLY_INPUT_PROHIBITED",
+        "TORNADO_EFFECTIVE_SPEED_PROXY",
+        "TORNADO_DEBRIS_AND_PRESSURE_NOT_SEPARATELY_MODELED",
+        "GREENFIELD_AND_JACKSBORO_ARCHETYPE_TRANSFER_LIMIT",
+        "ABOVE_80_MPS_TERMINAL_SATURATION_EXTRAPOLATION",
+        "TURBINE_EQUIPMENT_ONLY",
+        "FOUNDATION_EXTERNAL_PLANT_AND_SUPPORT_WITHHELD",
+        "NO_IMPLICIT_VALUE_PROFILE"
+      ],
+      "withheld_failure_units": [
+        {
+          "failure_unit_id": "WT_FOUNDATION",
+          "reason_codes": [
+            "POST_COLLAPSE_FOUNDATION_DISPOSITION_UNRESOLVED",
+            "NO_TORNADO_FOUNDATION_DAMAGE_CALIBRATION"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_EXTERNAL_ELECTRICAL",
+          "reason_codes": [
+            "COLLECTION_LINE_AND_SUBSTATION_POINT_EXPOSURE_REQUIRED",
+            "NO_UNIT_SPECIFIC_CURVE"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_CIVIL_INFRA",
+          "reason_codes": [
+            "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT",
+            "NO_UNIT_SPECIFIC_CURVE"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_REPLACEMENT_SUPPORT",
+          "reason_codes": [
+            "SUPPORT_ALLOCATED_ONCE_OUTSIDE_INTRINSIC_DR",
+            "CLAIMS_OR_SITE_ALLOCATION_RULE_REQUIRED"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumer_annual_metrics": {
+    "computation_owner": "downstream_consumer",
+    "status_before_promotion": "withheld_noncanonical_proposal",
+    "status_after_promotion": "consumer_computable_from_validated_frequency_intensity_coupling_value_and_cap_model",
+    "prerequisites": [
+      "canonical_model_docs_schema_sha_pin",
+      "passing_pathway_specific_known_answer_tests",
+      "pathway_aware_event_identity_without_tropical_cyclone_double_count",
+      "validated_occurrence_and_intensity_model",
+      "turbine_point_exposure_and_separate_external_asset_exposure",
+      "explicit_site_value_and_support_allocation",
+      "correct_grain_occurrence_and_annual_caps",
+      "return_period_resolution_and_tail_convergence"
+    ],
+    "limitation_flags": [
+      "DAMAGE_MODELING_DOES_NOT_OWN_FREQUENCY_OR_ANNUAL_METRICS",
+      "SCREENING_VULNERABILITY_CONDITIONAL_TAIL_ONLY",
+      "NONPROBABILISTIC_EPISTEMIC_ENVELOPE_REQUIRES_SCENARIO_REPORTING"
+    ]
+  },
+  "cap_binding": {
+    "policy": "consumer_enforced_fail_closed",
+    "enforcement_owner": "downstream_consumer",
+    "checks_required": [
+      "failure_unit_cap_applied_to_turbine_equipment_only",
+      "exposure_applied_once_per_turbine",
+      "foundation_external_electrical_and_civil_not_scaled_by_turbine_dr",
+      "support_cost_allocated_once",
+      "occurrence_and_annual_caps_applied_inside_simulation",
+      "resistance_scenarios_not_averaged_without_weights"
+    ],
+    "action_if_fail": "withhold the affected loss or annual metric and return the failing reason code"
+  },
+  "promotion_gate": {
+    "status": "blocked",
+    "required_before_canonical_use": [
+      "complete_workbook_and_independent_formula_verification",
+      "bundle_v3_emit_v2_capability_v3_schema_review",
+      "all_pathway_value_and_rejection_known_answer_tests_pass",
+      "Hazard_adapter_loads_one_pinned_artifact_and_removes_hardcoded_curves",
+      "Hazard_corrects_height_profile_exposure_frequency_and_event_overlap_seams",
+      "old_vs_new_results_reviewed_without_calibration_to_legacy_headlines",
+      "explicit_repository_promotion_decision"
+    ]
+  }
+}

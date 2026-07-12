@@ -57,6 +57,7 @@ Update hail_solar with this new report.
 Decide if this parameter change requires a model bump.
 Promote this scaffold to v1.0.
 Add a new required JSON field.
+Rebuild wind_tornado_wind with separate straight-line-convective and tornado pathways.
 Package the next release zip.
 ```
 
@@ -87,14 +88,14 @@ The skill keeps those streams separate so that a docs improvement does not look 
 ## Current skill status
 
 ```yaml
-skill_revision: 0.5
+skill_revision: 0.6
 status: controlled-use
 library_package_version_impact: none
 cell_model_version_impact: none
 schema_version_impact: none
 ```
 
-Revision 0.5 codifies the rigorous fail-closed research workflow demonstrated by the controlled `wildfire_solar` scaffold. It changes this evergreen operating manual, not any released damage curve.
+Revision 0.6 adds the governed multi-pathway rebuild workflow demonstrated by the proposed `wind_tornado_wind` v2.0 research program. It requires an explicit `pathway_id`, pathway-specific axes/evidence/records/capabilities/tests, consumer migration and pin checks, and fail-closed support at pathway × failure-unit grain. It changes this evergreen operating manual, not any released damage curve, artifact schema, or runtime by itself.
 
 ## Folder map
 
@@ -135,8 +136,9 @@ damage_curve_skill/
 5. 01_workflows/ADD_NEW_CELL_WORKFLOW.md
 6. 02_design_guides/EVIDENCE_PRESSURE_TEST_AND_FAIL_CLOSED_CHECKLIST.md
 7. 01_workflows/UPDATE_EXISTING_CELL_WORKFLOW.md
-8. 04_validation_qc/REPORTABILITY_RULES.md
-9. 00_governance/RELEASE_CHECKLIST.md
+8. 02_design_guides/HAZARD_PATHWAY_SPLITTING.md
+9. 04_validation_qc/REPORTABILITY_RULES.md
+10. 00_governance/RELEASE_CHECKLIST.md
 ```
 
 ## Promotion path

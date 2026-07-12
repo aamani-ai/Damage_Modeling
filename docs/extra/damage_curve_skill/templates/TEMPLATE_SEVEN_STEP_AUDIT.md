@@ -31,3 +31,10 @@ Define the failure-unit numerator, denominator, conditioning state, exclusions, 
 | 7. Curves/loss | | | | |
 
 If Step 7 is blocked, record `curve_records: []`, withhold every dependent metric, and use `NO_RUNTIME_CURVE` rather than publishing a caveated number.
+
+For a multi-pathway cell, repeat Step 3, Step 6, and Step 7 decisions at pathway × failure-unit grain. Add this matrix:
+
+| pathway_id | failure_unit_id | axis/bridge status | evidence/curve status | value status | final support | reason code |
+|---|---|---|---|---|---|---|
+
+If every pair is blocked, use `NO_RUNTIME_CURVE`. If only some pairs are blocked, keep supported records, omit unsupported records, and use `NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT` for those pairs. Never borrow another pathway's curve.

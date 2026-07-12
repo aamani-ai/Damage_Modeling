@@ -14,6 +14,7 @@ height_or_datum_basis:
 valid_range:
 extrapolation_policy:
 physics_bridge:
+pathway_id:
 ```
 
 ## Selection rules
@@ -24,6 +25,8 @@ physics_bridge:
 3. Do not hide height/datum/terrain conversions in prose.
 4. Avoid multivariate axes unless source and runtime support them.
 5. If multivariate behavior is real but not v1, split into failure units or state an open seam.
+6. For a multi-pathway cell, choose and validate the axis/bridge independently for each pathway.
+7. Do not infer pathway identity from an axis value or reuse a height/duration/profile bridge merely because units match.
 ```
 
 ## Examples
@@ -36,7 +39,9 @@ strong_wind_solar:
   3-sec gust at array/tracker height -> effective demand ratio
 
 wind_tornado_wind:
-  hub-height 3-sec gust -> speed ratio to IEC class; 10m gust requires bridge
+  straight_line_convective -> source-native gust/downburst demand -> governed turbine demand bridge
+  tornado_direct_hit -> tornado wind-field demand -> separately governed local turbine demand bridge
+  tropical_cyclone_wind -> separate neighboring cell/workstream; not implied by either pathway above
 
 flood_solar:
   water surface elevation/depth -> local depth above component datum

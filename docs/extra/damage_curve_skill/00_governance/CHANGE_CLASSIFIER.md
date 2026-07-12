@@ -24,6 +24,15 @@ If yes, it is a **cell damage-model change**. If no, it may be docs-only, eviden
 | `DEPRECATION_OR_LEGACY_STATUS_CHANGE` | Mark old artifact non-canonical, superseded, blocked, or archived | `UPDATE_EXISTING_CELL_WORKFLOW.md` plus `DEPRECATION_POLICY.md` | Usually no, unless runtime routing changes outputs |
 | `TRIAGE_REQUIRED` | Ambiguous or mixed change | Read all relevant workflows; split into separate change events | Unknown |
 
+A change from an implicit/boolean hazard variant to required `pathway_id` normally contains at least two events:
+
+```text
+1. MODEL_BEHAVIOR_CHANGE — pathway-specific axes/records/coverage can change outputs.
+2. SCHEMA_CONTRACT_CHANGE — consumers must provide and carry the required pathway identity.
+```
+
+Keep the events separate in the change record even if one proposed release implements both. A revision to this skill is a third, independent `SKILL_REVISION` event.
+
 ## Decision tree
 
 ```text
@@ -86,6 +95,21 @@ Split into:
 
 Only the second event bumps the cell model version.
 
+Multi-pathway example:
+
+```text
+Replace wind_tornado_wind tornado_variant with explicit straight_line_convective and
+tornado_direct_hit pathways, while leaving tropical_cyclone_wind out of scope.
+```
+
+Split into:
+
+```text
+1. MODEL_BEHAVIOR_CHANGE: proposed cell model major bump; per-pathway old/new and KAT gates.
+2. SCHEMA_CONTRACT_CHANGE: required pathway_id; migration, dual-read/rollback, and consumer-pin gates.
+3. DOCS/EVIDENCE changes carried with those events; no separate model bump.
+```
+
 ## Required classification output
 
 Every task should produce a short block like:
@@ -105,6 +129,19 @@ required_gates:
   - JSON_artifact_QA
   - capability_declaration_review
   - cap_binding_policy_review
+```
+
+Add these gates when `multi_pathway_cell: true`:
+
+```text
+preserve_current_pin_during_research
+pathway_architecture_decision
+pathway_specific_axis_and_evidence
+pathway_failure_unit_support_matrix
+pathway_specific_known_answer_tests
+cross_pathway_negative_tests
+neighboring_cell_boundary
+consumer_migration_and_pin_verification
 ```
 
 ## Expanded gates for `NEW_CELL_SCAFFOLD`

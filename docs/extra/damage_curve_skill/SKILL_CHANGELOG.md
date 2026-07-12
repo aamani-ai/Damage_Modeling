@@ -155,3 +155,47 @@ cells_used_as_controlled_examples:
 ```
 
 Status remains `controlled-use` until independent reviewer sign-off. The stable folder name remains `damage_curve_skill/`.
+
+## 0.6 — governed multi-pathway cell rebuilds — 2026-07-11
+
+Added:
+
+```text
+- A first-class pathway contract: stable pathway_id values are explicit runtime inputs and
+  appear on pathway definitions, curve records, failure-unit outputs, capabilities, and KATs.
+- A test for deciding when related mechanisms share one cell while retaining independently
+  governed axes, bridges, evidence chains, numerical behavior, and support states.
+- Partial-pathway fail-closed rules at pathway × failure-unit grain; an unsupported pair cannot
+  borrow a curve from a neighboring pathway or silently default to a supported pathway.
+- Required per-pathway old-vs-new comparisons, cross-pathway negative tests, consumer migration,
+  exact model/docs/schema/SHA pin verification, and rollback/readiness checks.
+- An explicit neighboring-cell boundary: tropical-cyclone/hurricane wind is not delivered by a
+  straight-line-convective/tornado run unless separately classified, researched, and governed.
+- A worked wind_tornado_wind model-v2.0 proposal example covering separate model-behavior and
+  schema-contract change events without prematurely replacing the current v1.0 artifact.
+```
+
+Changed:
+
+```text
+- Tightened the artifact, damage-code, capability, KAT, workflow, review, and validation guidance
+  so pathway is never represented by a boolean, selector, conditioner, inferred alias, or prose branch.
+- Extended governance tests and bundle validation markers for multi-pathway rebuilds.
+- Updated templates to expose pathway architecture and pathway-specific support without asserting
+  that a skill-only revision has migrated the repository's live schemas.
+```
+
+Version impact:
+
+```yaml
+skill_revision: 0.5 -> 0.6
+damage_library_package_release: unchanged_by_this_skill_update
+cell_model_versions: unchanged_by_this_skill_update
+cell_documentation_revisions: unchanged_by_this_skill_update
+schema_artifact_version: unchanged_by_this_skill_update
+runtime_outputs_can_change: false
+controlled_example_cell: wind_tornado_wind
+controlled_example_target: proposed model v2.0 / docs r1
+```
+
+The workflow requires a separate schema-contract change event when a live bundle/emit/capability schema adopts required pathway fields. Skill revision 0.6 does not perform that runtime migration by itself.

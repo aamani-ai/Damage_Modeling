@@ -5,7 +5,7 @@ JSON is the canonical runtime curve artifact. Workbooks are derivation/audit vie
 ## Required top-level fields
 
 ```yaml
-schema_version: damage_curve_record_bundle.v1
+schema_version: <governed_bundle_schema_after_review>
 cell_id: <cell_id>
 damage_code_id: <runtime_code_id>
 semantic_damage_model_version: model vX.Y
@@ -21,7 +21,8 @@ package_inclusion_status: included | not_included
 canonical_runtime_artifact: true | false
 source_dossier: <path>
 source_workbook: <path or null>
-hazard_axis: {...}
+pathways: [...]
+hazard_axes_by_pathway: {...}
 failure_units: [...]
 curve_records: [...]
 selector_logic: [...]
@@ -34,6 +35,23 @@ capability_declaration: {...}
 legacy_or_deprecated_artifacts: [...]
 ```
 
+Do not assign a concrete new schema version in a skill-only revision. When `pathways`, required `pathway_id`, or pathway-specific support semantics are added to the live artifact, follow the schema-contract workflow and bump the repository schema deliberately.
+
+## Pathway registry minimum
+
+```yaml
+pathway_id:
+physical_mechanism:
+hazard_axis_id:
+runtime_input_fields: []
+failure_unit_ids_supported: []
+failure_unit_ids_withheld: []
+neighboring_cell_boundaries: []
+event_identity_note:
+```
+
+Pathway IDs are unique within the cell and stable across docs revisions. They are not booleans, selectors, conditioners, aliases, or labels inferred from intensity. A multi-pathway runtime request must supply one explicitly.
+
 Keep version and status atomic: do not put `proposed`, `scaffold`, `pressure_tested`, or `working_revision` inside version strings.
 
 ## Input field-name contract
@@ -44,6 +62,7 @@ The metadata specification, JSON artifact, site adapter, and known-answer tests 
 
 ```yaml
 curve_id:
+pathway_id:
 failure_unit_id:
 curve_form:
 x_axis:
@@ -54,6 +73,8 @@ extrapolation_policy:
 source_parameter_refs:
 metadata_flags:
 ```
+
+Every `pathway_id` on a curve record must resolve to the top-level pathway registry, and its `x_axis` must resolve to that pathway's declared axis/bridge. One record may not serve several physically different pathways through a shift flag. If two pathways adopt numerically equal parameters, retain separate records and provenance so they can diverge under governance.
 
 ## Runtime rule
 
@@ -72,3 +93,5 @@ curve_records: []
 ```
 
 Its capability declaration must withhold DR and dependent metrics with `NO_RUNTIME_CURVE`. Rejected, withdrawn, or synthetic numerical arrays remain in audit-only documents and are absent from runtime-shaped records.
+
+For a partially supported multi-pathway proposal, declare every pathway and its pathway × failure-unit capability. Keep unsupported pairs out of `curve_records` and return `NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT`; do not empty or withhold the supported pathway merely because another pair is unsupported.

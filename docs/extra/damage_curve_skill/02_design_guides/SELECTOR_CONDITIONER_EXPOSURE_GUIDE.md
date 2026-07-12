@@ -8,6 +8,8 @@ Keep these separate.
 | Conditioner | Event-time or operational state that shifts/blends vulnerability | tracker stow state, flood protection deployed, turbine parked state |
 | Exposure | Affected value/quantity/local demand modifier | array exposure fraction, local zone multiplier, component elevation |
 
+`pathway_id` is none of these. It identifies the physical hazard/load pathway selected by the upstream event record. In a multi-pathway cell it is a separate required runtime field; do not encode it as a selector, conditioner, exposure, or boolean variant.
+
 For site-conditioned hazards, add two explicit roles before the final exposure:
 
 | Type | Definition | Examples |
@@ -39,6 +41,7 @@ metadata_flag_if_default_used:
 - Probability blends are for uncertain states, not hazard frequency.
 - Unknown metadata must create flags.
 - Aliases are allowed, but canonical names must be declared.
+- A missing pathway ID never receives a default pathway, even when one pathway is more common.
 ```
 
 ## Site-control rules

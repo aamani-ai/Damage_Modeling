@@ -1,0 +1,650 @@
+{
+  "schema_version": "known_answer_tests.v3",
+  "cell_id": "wind_tornado_wind",
+  "semantic_damage_model_version": "model v2.0",
+  "documentation_revision": "docs r1",
+  "artifact_schema_version": "damage_curve_record_bundle.v3",
+  "emit_schema_version": "damage_emit.v2",
+  "equation": "q_j=Phi(ln(x/theta_j)/beta_ln); p0=1-q1; pj=qj-q(j+1); plast=qlast; EDR=sum_j(pj*cost_ratio_j)",
+  "absolute_tolerance": 1e-12,
+  "scenario_semantics": "lower_resistance is the higher-DR engineering bound; central_screening is the central screening judgment; upper_resistance is the lower-DR engineering bound; no probability weights are authorized",
+  "runtime_curve_known_answer_tests": [
+    {
+      "test_id": "WTW2_SLC_BELOW_ZERO_BOUNDARY",
+      "category": "low_no_damage",
+      "source": "WTW2-P009; proposed artifact straight-line zero_below",
+      "notes": "Tests the declared screening hard boundary; it is not evidence of universal no damage.",
+      "pathway_id": "straight_line_convective",
+      "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "rotor_effective_3s_gust_mps": 20,
+        "iec_ve50_mps": 59.5
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "WTW2_SLC_TURBINE_EQUIPMENT_ORDERED_STATES",
+        "axis_value": 0.33613445378151263,
+        "scalar_central_dr": 0,
+        "scenario_drs": {
+          "lower_resistance": 0,
+          "central_screening": 0,
+          "upper_resistance": 0
+        },
+        "metadata_flags_include": [
+          "BELOW_28_MPS_EVIDENCE_ANCHOR_RANGE",
+          "NO_FINANCIAL_SCALING_APPLIED"
+        ]
+      }
+    },
+    {
+      "test_id": "WTW2_SLC_CENTRAL_AT_VE50",
+      "category": "transition_and_exact_state_probabilities",
+      "source": "WTW2-P008; WTW2-P011; proposed artifact ordered-state equation",
+      "notes": "Pins the central screening equation and mutually exclusive state probabilities at x=1.",
+      "pathway_id": "straight_line_convective",
+      "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "rotor_effective_3s_gust_mps": 59.5,
+        "iec_ve50_mps": 59.5
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "WTW2_SLC_TURBINE_EQUIPMENT_ORDERED_STATES",
+        "axis_value": 1,
+        "scalar_central_dr": 0.1061718428482847,
+        "scenario_drs": {
+          "lower_resistance": 0.3217781420905228,
+          "central_screening": 0.1061718428482847,
+          "upper_resistance": 0.013947433158386252
+        },
+        "central_state_probabilities": {
+          "DS0_NO_DIRECT_DAMAGE": 0.1460318636790745,
+          "DS1_CONTROL_PITCH_REPAIR_PROXY": 0.5411583805125382,
+          "DS2_ROTOR_ASSEMBLY_REPLACEMENT": 0.30846000540926294,
+          "DS3_TERMINAL_TURBINE_EQUIPMENT_REPLACEMENT": 0.00434975039912433
+        },
+        "metadata_flags_include": [
+          "ABOVE_55_MPS_HIGH_EXTRAPOLATION",
+          "NONPROBABILISTIC_EPISTEMIC_ENVELOPE"
+        ]
+      }
+    },
+    {
+      "test_id": "WTW2_SLC_UPPER_VALID_BOUNDARY",
+      "category": "upper_valid_range",
+      "source": "WTW2-P006; WTW2-P007; proposed artifact straight-line domain rule",
+      "notes": "Seventy m/s remains evaluable but is explicitly high extrapolation.",
+      "pathway_id": "straight_line_convective",
+      "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "rotor_effective_3s_gust_mps": 70,
+        "iec_ve50_mps": 59.5
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "WTW2_SLC_TURBINE_EQUIPMENT_ORDERED_STATES",
+        "axis_value": 1.1764705882352942,
+        "scalar_central_dr": 0.38103089732872697,
+        "scenario_drs": {
+          "lower_resistance": 0.7156699653292332,
+          "central_screening": 0.38103089732872697,
+          "upper_resistance": 0.14833143885780992
+        },
+        "metadata_flags_include": [
+          "ABOVE_55_MPS_HIGH_EXTRAPOLATION"
+        ]
+      }
+    },
+    {
+      "test_id": "WTW2_SLC_HUB_PROXY_50_MPS",
+      "category": "permitted_proxy",
+      "source": "WTW2-P004; WTW2-P005; proposed artifact ten-meter bridge rule",
+      "notes": "The evaluator consumes the delivered 50 m/s hub proxy; it does not calculate the named upstream bridge.",
+      "pathway_id": "straight_line_convective",
+      "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "ten_meter_3s_gust_mps": 45,
+        "convective_profile_bridge_id": "KAT_CONVECTIVE_PROFILE_V1",
+        "hub_height_3s_gust_mps": 50,
+        "iec_ve50_mps": 59.5
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "WTW2_SLC_TURBINE_EQUIPMENT_ORDERED_STATES",
+        "axis_value": 0.8403361344537815,
+        "scalar_central_dr": 0.0067949641854111046,
+        "scenario_drs": {
+          "lower_resistance": 0.08422841237387155,
+          "central_screening": 0.0067949641854111046,
+          "upper_resistance": 0.00020911895086642767
+        },
+        "metadata_flags_include": [
+          "HUB_HEIGHT_GUST_PROXY_USED",
+          "CONVECTIVE_PROFILE_BRIDGE_USED"
+        ]
+      }
+    },
+    {
+      "test_id": "WTW2_TOR_BELOW_ZERO_BOUNDARY",
+      "category": "low_no_damage",
+      "source": "WTW2-P018; proposed artifact tornado zero_below",
+      "notes": "Tests the declared screening hard boundary; it is not a universal tornado no-damage claim.",
+      "pathway_id": "tornado_direct_hit",
+      "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "input": {
+        "pathway_id": "tornado_direct_hit",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "tornado_rotor_effective_peak_horizontal_speed_mps": 20,
+        "tornado_input_basis": "rotor_resolved_wind_field",
+        "tornado_profile_bridge_id": "KAT_ROTOR_FIELD_V1"
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "WTW2_TOR_TURBINE_EQUIPMENT_ORDERED_STATES",
+        "axis_value": 20,
+        "scalar_central_dr": 0,
+        "scenario_drs": {
+          "lower_resistance": 0,
+          "central_screening": 0,
+          "upper_resistance": 0
+        },
+        "metadata_flags_include": [
+          "NO_FINANCIAL_SCALING_APPLIED"
+        ]
+      }
+    },
+    {
+      "test_id": "WTW2_TOR_EQUAL_INTENSITY_50_MPS",
+      "category": "cross_pathway_identity",
+      "source": "WTW2-P001; WTW2-P013; pathway-aware contract standard 22",
+      "notes": "Pairs with the straight-line 50 m/s fixture to prove numeric intensity does not collapse mechanism identity.",
+      "pathway_id": "tornado_direct_hit",
+      "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "input": {
+        "pathway_id": "tornado_direct_hit",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "tornado_rotor_effective_peak_horizontal_speed_mps": 50,
+        "tornado_input_basis": "rotor_resolved_wind_field",
+        "tornado_profile_bridge_id": "KAT_ROTOR_FIELD_V1"
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "WTW2_TOR_TURBINE_EQUIPMENT_ORDERED_STATES",
+        "axis_value": 50,
+        "scalar_central_dr": 0.1315813172688886,
+        "scenario_drs": {
+          "lower_resistance": 0.3032119546109179,
+          "central_screening": 0.1315813172688886,
+          "upper_resistance": 0.035169216372137595
+        }
+      }
+    },
+    {
+      "test_id": "WTW2_TOR_ROTOR_REPLACEMENT_TRANSITION_51_MPS",
+      "category": "transition_and_exact_state_probabilities",
+      "source": "TOR-S006; WTW2-P017; WTW2-P020",
+      "notes": "Pins the Jacksboro-informed central rotor transition without treating one event as a population fit.",
+      "pathway_id": "tornado_direct_hit",
+      "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "input": {
+        "pathway_id": "tornado_direct_hit",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "tornado_rotor_effective_peak_horizontal_speed_mps": 51,
+        "tornado_input_basis": "rotor_resolved_wind_field",
+        "tornado_profile_bridge_id": "KAT_ROTOR_FIELD_V1"
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "WTW2_TOR_TURBINE_EQUIPMENT_ORDERED_STATES",
+        "axis_value": 51,
+        "scalar_central_dr": 0.16077408113516298,
+        "scenario_drs": {
+          "lower_resistance": 0.3289516785566465,
+          "central_screening": 0.16077408113516298,
+          "upper_resistance": 0.047934782096925296
+        },
+        "central_state_probabilities": {
+          "DS0_NO_DIRECT_DAMAGE": 0.000006688860898829141,
+          "DS1_CONTROL_PITCH_REPAIR_PROXY": 0.49999331113910117,
+          "DS2_ROTOR_ASSEMBLY_REPLACEMENT": 0.4996761814176374,
+          "DS3_TERMINAL_TURBINE_EQUIPMENT_REPLACEMENT": 0.0003238185823625783
+        }
+      }
+    },
+    {
+      "test_id": "WTW2_TOR_TERMINAL_TRANSITION_67_MPS",
+      "category": "field_anchor_transition",
+      "source": "TOR-S003; TOR-S005; WTW2-P020",
+      "notes": "Pins the Greenfield-informed central terminal transition inside the reported 65-69 m/s bracket.",
+      "pathway_id": "tornado_direct_hit",
+      "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "input": {
+        "pathway_id": "tornado_direct_hit",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "tornado_rotor_effective_peak_horizontal_speed_mps": 67,
+        "tornado_input_basis": "rotor_resolved_wind_field",
+        "tornado_profile_bridge_id": "KAT_ROTOR_FIELD_V1"
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "WTW2_TOR_TURBINE_EQUIPMENT_ORDERED_STATES",
+        "axis_value": 67,
+        "scalar_central_dr": 0.6544909016323989,
+        "scenario_drs": {
+          "lower_resistance": 0.9753480118635485,
+          "central_screening": 0.6544909016323989,
+          "upper_resistance": 0.31466579331117944
+        }
+      }
+    },
+    {
+      "test_id": "WTW2_TOR_80_MPS_TERMINAL_BOUNDARY",
+      "category": "terminal_saturation_boundary",
+      "source": "WTW2-P021; WTW2-P022; proposed artifact tornado domain rule",
+      "notes": "Eighty m/s is the boundary above which terminal-saturation extrapolation is flagged.",
+      "pathway_id": "tornado_direct_hit",
+      "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "input": {
+        "pathway_id": "tornado_direct_hit",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "tornado_rotor_effective_peak_horizontal_speed_mps": 80,
+        "tornado_input_basis": "rotor_resolved_wind_field",
+        "tornado_profile_bridge_id": "KAT_ROTOR_FIELD_V1"
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "WTW2_TOR_TURBINE_EQUIPMENT_ORDERED_STATES",
+        "axis_value": 80,
+        "scalar_central_dr": 0.9907963700578989,
+        "scenario_drs": {
+          "lower_resistance": 0.9999798801406359,
+          "central_screening": 0.9907963700578989,
+          "upper_resistance": 0.6545859289317331
+        }
+      }
+    },
+    {
+      "test_id": "WTW2_TOR_HUB_PROXY_58_MPS",
+      "category": "permitted_proxy",
+      "source": "TOR-S001; WTW2-P014; WTW2-P016",
+      "notes": "Requires a qualified hub-height basis and named tornado profile bridge.",
+      "pathway_id": "tornado_direct_hit",
+      "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "input": {
+        "pathway_id": "tornado_direct_hit",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "tornado_hub_height_peak_3s_gust_mps": 58,
+        "tornado_input_basis": "qualified_hub_height_proxy",
+        "tornado_profile_bridge_id": "KAT_HUB_PROXY_V1"
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "WTW2_TOR_TURBINE_EQUIPMENT_ORDERED_STATES",
+        "axis_value": 58,
+        "scalar_central_dr": 0.31779011682456754,
+        "scenario_drs": {
+          "lower_resistance": 0.6543623485028274,
+          "central_screening": 0.31779011682456754,
+          "upper_resistance": 0.21096573771918628
+        },
+        "metadata_flags_include": [
+          "TORNADO_HUB_HEIGHT_PROXY_USED"
+        ]
+      }
+    },
+    {
+      "test_id": "WTW2_TOR_ABOVE_80_MPS_FLAGGED",
+      "category": "flagged_extrapolation",
+      "source": "WTW2-P022; proposed artifact tornado extrapolation policy",
+      "notes": "The 85 m/s output is a flagged terminal-saturation extrapolation, not field calibration.",
+      "pathway_id": "tornado_direct_hit",
+      "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "input": {
+        "pathway_id": "tornado_direct_hit",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "tornado_rotor_effective_peak_horizontal_speed_mps": 85,
+        "tornado_input_basis": "radar_profile_bridge",
+        "tornado_profile_bridge_id": "KAT_RADAR_PROFILE_V1"
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "WTW2_TOR_TURBINE_EQUIPMENT_ORDERED_STATES",
+        "axis_value": 85,
+        "scalar_central_dr": 0.9989862728545089,
+        "scenario_drs": {
+          "lower_resistance": 0.9999993872475591,
+          "central_screening": 0.9989862728545089,
+          "upper_resistance": 0.8450594913905943
+        },
+        "metadata_flags_include": [
+          "TORNADO_RADAR_PROFILE_BRIDGE_USED",
+          "ABOVE_80_MPS_TERMINAL_SATURATION_EXTRAPOLATION"
+        ]
+      }
+    },
+    {
+      "test_id": "WTW2_SLC_FOUNDATION_WITHHELD",
+      "category": "unsupported_pathway_failure_unit",
+      "source": "WTW2-P026; straight-line pathway capability declaration",
+      "notes": "A supported turbine-equipment curve must not become a fallback foundation curve.",
+      "pathway_id": "straight_line_convective",
+      "failure_unit_id": "WT_FOUNDATION",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "failure_unit_id": "WT_FOUNDATION",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "rotor_effective_3s_gust_mps": 59.5,
+        "iec_ve50_mps": 59.5
+      },
+      "expected": {
+        "status": "withheld",
+        "curve_id": null,
+        "scalar_central_dr": null,
+        "reason_codes_include": [
+          "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+          "NO_CONVECTIVE_FOUNDATION_DAMAGE_CALIBRATION"
+        ]
+      }
+    },
+    {
+      "test_id": "WTW2_TOR_EXTERNAL_ELECTRICAL_WITHHELD",
+      "category": "unsupported_pathway_failure_unit",
+      "source": "WTW2-P026; tornado pathway capability declaration",
+      "notes": "Turbine intersection/exposure cannot be reused for collection lines or the substation.",
+      "pathway_id": "tornado_direct_hit",
+      "failure_unit_id": "WT_EXTERNAL_ELECTRICAL",
+      "input": {
+        "pathway_id": "tornado_direct_hit",
+        "failure_unit_id": "WT_EXTERNAL_ELECTRICAL",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "tornado_rotor_effective_peak_horizontal_speed_mps": 67,
+        "tornado_input_basis": "rotor_resolved_wind_field",
+        "tornado_profile_bridge_id": "KAT_ROTOR_FIELD_V1"
+      },
+      "expected": {
+        "status": "withheld",
+        "curve_id": null,
+        "scalar_central_dr": null,
+        "reason_codes_include": [
+          "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+          "NO_UNIT_SPECIFIC_CURVE"
+        ]
+      }
+    }
+  ],
+  "contract_rejection_tests": [
+    {
+      "test_id": "WTW2_REJECT_MISSING_PATHWAY_ID",
+      "source": "pathway-aware contract standard 22 section 2",
+      "notes": "No pathway default or inference is authorized.",
+      "input": {
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "rotor_effective_3s_gust_mps": 50,
+        "iec_ve50_mps": 59.5
+      },
+      "expected": {
+        "status": "withheld",
+        "error_code": "PATHWAY_ID_REQUIRED"
+      }
+    },
+    {
+      "test_id": "WTW2_REJECT_HURRICANE_AS_PATHWAY_ALIAS",
+      "source": "HURRICANE_AND_NEIGHBORING_WIND_BOUNDARY; WTW2-P001",
+      "notes": "Tropical-cyclone wind remains a neighboring workstream, not an alias.",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "rotor_effective_3s_gust_mps": 50,
+        "iec_ve50_mps": 59.5
+      },
+      "expected": {
+        "status": "withheld",
+        "error_code": "PATHWAY_ID_UNKNOWN"
+      }
+    },
+    {
+      "test_id": "WTW2_REJECT_TORNADO_INPUT_ON_SLC_PATHWAY",
+      "source": "pathway-aware contract standard 22 sections 2 and 5",
+      "notes": "Tornado-native inputs cannot route to the convective record.",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "tornado_rotor_effective_peak_horizontal_speed_mps": 50,
+        "tornado_input_basis": "rotor_resolved_wind_field",
+        "tornado_profile_bridge_id": "KAT_ROTOR_FIELD_V1",
+        "iec_ve50_mps": 59.5
+      },
+      "expected": {
+        "status": "withheld",
+        "error_code": "PATHWAY_ID_MISMATCH"
+      }
+    },
+    {
+      "test_id": "WTW2_REJECT_SLC_INPUT_ON_TORNADO_PATHWAY",
+      "source": "pathway-aware contract standard 22 sections 2 and 5",
+      "notes": "Convective-native inputs cannot route to the tornado record.",
+      "input": {
+        "pathway_id": "tornado_direct_hit",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "rotor_effective_3s_gust_mps": 50,
+        "iec_ve50_mps": 59.5,
+        "tornado_input_basis": "rotor_resolved_wind_field",
+        "tornado_profile_bridge_id": "KAT_ROTOR_FIELD_V1"
+      },
+      "expected": {
+        "status": "withheld",
+        "error_code": "PATHWAY_ID_MISMATCH"
+      }
+    },
+    {
+      "test_id": "WTW2_REJECT_UNBRIDGED_10M_CONVECTIVE_GUST",
+      "source": "SLC-S008; SLC-S011; WTW2-P005",
+      "notes": "The evaluator never applies an ordinary ABL height conversion by default.",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "ten_meter_3s_gust_mps": 45,
+        "iec_ve50_mps": 59.5
+      },
+      "expected": {
+        "status": "withheld",
+        "error_code": "CONVECTIVE_PROFILE_BRIDGE_REQUIRED"
+      }
+    },
+    {
+      "test_id": "WTW2_REJECT_BRIDGE_NAME_WITHOUT_DELIVERED_CONVECTIVE_SPEED",
+      "source": "WTW2-P003; WTW2-P005",
+      "notes": "Naming a bridge does not execute it; a declared delivered rotor/hub speed is still required.",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "ten_meter_3s_gust_mps": 45,
+        "convective_profile_bridge_id": "UNEXECUTED_BRIDGE_NAME_ONLY",
+        "iec_ve50_mps": 59.5
+      },
+      "expected": {
+        "status": "withheld",
+        "error_code": "CONVECTIVE_PROFILE_BRIDGE_REQUIRED"
+      }
+    },
+    {
+      "test_id": "WTW2_REJECT_SLC_ABOVE_70_MPS",
+      "source": "WTW2-P007; proposed artifact straight-line domain rule",
+      "notes": "The Tier-4 convective screening curve is withheld beyond its hard domain.",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "rotor_effective_3s_gust_mps": 70.0001,
+        "iec_ve50_mps": 59.5
+      },
+      "expected": {
+        "status": "withheld",
+        "error_code": "CONVECTIVE_SPEED_ABOVE_70_MPS_WITHHELD"
+      }
+    },
+    {
+      "test_id": "WTW2_REJECT_SLC_AXIS_RATIO_ABOVE_TWO",
+      "source": "WTW2-P003; proposed artifact straight-line valid_range",
+      "notes": "A speed under 70 m/s can still violate the normalized demand-axis contract.",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "rotor_effective_3s_gust_mps": 50,
+        "iec_ve50_mps": 20
+      },
+      "expected": {
+        "status": "withheld",
+        "error_code": "AXIS_OUTSIDE_VALID_RANGE"
+      }
+    },
+    {
+      "test_id": "WTW2_REJECT_EF_ONLY_TORNADO_INPUT",
+      "source": "TOR-S002; WTW2-P015",
+      "notes": "EF class remains damage-estimated event context rather than turbine-local demand.",
+      "input": {
+        "pathway_id": "tornado_direct_hit",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "ef_class": "EF3",
+        "tornado_input_basis": "radar_profile_bridge",
+        "tornado_profile_bridge_id": "KAT_RADAR_PROFILE_V1"
+      },
+      "expected": {
+        "status": "withheld",
+        "error_code": "EF_ONLY_INPUT_PROHIBITED"
+      }
+    },
+    {
+      "test_id": "WTW2_REJECT_TORNADO_WITHOUT_PROFILE_BRIDGE",
+      "source": "TOR-S001; WTW2-P016",
+      "notes": "Even a rotor-effective field carries named profile/reference provenance in this proposal.",
+      "input": {
+        "pathway_id": "tornado_direct_hit",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "tornado_rotor_effective_peak_horizontal_speed_mps": 67,
+        "tornado_input_basis": "rotor_resolved_wind_field"
+      },
+      "expected": {
+        "status": "withheld",
+        "error_code": "TORNADO_PROFILE_BRIDGE_REQUIRED"
+      }
+    },
+    {
+      "test_id": "WTW2_REJECT_TORNADO_BASIS_FIELD_MISMATCH",
+      "source": "WTW2-P014; WTW2-P016",
+      "notes": "A hub proxy cannot claim a rotor-resolved input basis.",
+      "input": {
+        "pathway_id": "tornado_direct_hit",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "tornado_hub_height_peak_3s_gust_mps": 58,
+        "tornado_input_basis": "rotor_resolved_wind_field",
+        "tornado_profile_bridge_id": "KAT_HUB_PROXY_V1"
+      },
+      "expected": {
+        "status": "withheld",
+        "error_code": "TORNADO_PROFILE_BRIDGE_REQUIRED"
+      }
+    },
+    {
+      "test_id": "WTW2_REJECT_TORNADO_ABOVE_AXIS_MAX",
+      "source": "proposed artifact tornado valid_range; WTW2-P022",
+      "notes": "The reference evaluator rejects demand above the declared 100 m/s axis maximum.",
+      "input": {
+        "pathway_id": "tornado_direct_hit",
+        "turbine_archetype": "generic_modern_onshore_tubular_multi_mw_screening_v1",
+        "tornado_rotor_effective_peak_horizontal_speed_mps": 100.0001,
+        "tornado_input_basis": "rotor_resolved_wind_field",
+        "tornado_profile_bridge_id": "KAT_ROTOR_FIELD_V1"
+      },
+      "expected": {
+        "status": "withheld",
+        "error_code": "AXIS_OUTSIDE_VALID_RANGE"
+      }
+    },
+    {
+      "test_id": "WTW2_REJECT_UNSUPPORTED_ARCHETYPE",
+      "source": "WTW2-P002; proposed artifact selector logic",
+      "notes": "The broad onshore screening proxy cannot be transferred to an offshore floating turbine.",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "turbine_archetype": "offshore_floating_15mw",
+        "rotor_effective_3s_gust_mps": 50,
+        "iec_ve50_mps": 59.5
+      },
+      "expected": {
+        "status": "withheld",
+        "error_code": "TURBINE_ARCHETYPE_UNSUPPORTED"
+      }
+    }
+  ],
+  "cross_pathway_assertions": [
+    {
+      "test_id": "WTW2_EQUAL_50_MPS_DOES_NOT_COLLAPSE_PATHWAYS",
+      "source": "pathway-aware contract standard 22 sections 2 and 5",
+      "notes": "The two fixtures share a 50 m/s numeric value but retain different mechanisms, axes, records, and responses.",
+      "left_test_id": "WTW2_SLC_HUB_PROXY_50_MPS",
+      "right_test_id": "WTW2_TOR_EQUAL_INTENSITY_50_MPS",
+      "assertions": [
+        "pathway_id_differs",
+        "curve_id_differs",
+        "axis_id_differs",
+        "scalar_central_dr_differs"
+      ]
+    }
+  ],
+  "consumer_pin_tests": [
+    {
+      "test_id": "WTW2_EXACT_COMPUTED_ARTIFACT_PIN_ACCEPTED",
+      "source": "pathway-aware contract standard 22 section 9",
+      "notes": "The validator computes SHA-256 from the exact proposal artifact bytes at test time.",
+      "pin_fixture": "exact_values_plus_sha256_computed_from_artifact_bytes",
+      "expected": {
+        "status": "accepted"
+      }
+    },
+    {
+      "test_id": "WTW2_STALE_ARTIFACT_SHA_REJECTED",
+      "source": "pathway-aware contract standard 22 section 9",
+      "notes": "A stale artifact byte pin must fail even when model, docs, and schema strings match.",
+      "pin_fixture": "exact_values_with_artifact_sha256_replaced_by_64_zeroes",
+      "expected": {
+        "status": "withheld",
+        "error_code": "ARTIFACT_PIN_MISMATCH"
+      }
+    },
+    {
+      "test_id": "WTW2_STALE_MODEL_VERSION_REJECTED",
+      "source": "pathway-aware contract standard 22 section 9",
+      "notes": "A model-v1 consumer pin cannot load the proposed model-v2 semantics.",
+      "pin_fixture": "exact_values_with_semantic_damage_model_version_replaced_by_model_v1_0",
+      "expected": {
+        "status": "withheld",
+        "error_code": "ARTIFACT_PIN_MISMATCH"
+      }
+    },
+    {
+      "test_id": "WTW2_INCOMPLETE_PIN_REJECTED",
+      "source": "pathway-aware contract standard 22 section 9",
+      "notes": "The exact pin is atomic across cell, model, docs, schema, and SHA.",
+      "pin_fixture": "exact_values_with_documentation_revision_removed",
+      "expected": {
+        "status": "withheld",
+        "error_code": "ARTIFACT_PIN_INCOMPLETE"
+      }
+    }
+  ],
+  "global_output_assertions": [
+    "every emit and failure-unit result repeats the exact requested pathway_id",
+    "every supported result carries the exact pathway-specific curve_id",
+    "scenario resistance bounds are not averaged or assigned weights",
+    "state probabilities for every scenario sum to one",
+    "intrinsic evaluator output contains no scenario loss, exposure scaling, support cost, frequency, EAL, PML, VaR, or TVaR"
+  ]
+}

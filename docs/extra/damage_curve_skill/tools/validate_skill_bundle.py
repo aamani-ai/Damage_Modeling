@@ -36,6 +36,7 @@ REQUIRED = [
     "templates/TEMPLATE_SITE_CONDITION_ADAPTER.md",
     "templates/TEMPLATE_SEVEN_STEP_AUDIT.md",
     "06_examples/EXAMPLE_FAIL_CLOSED_WILDFIRE_SOLAR_SCAFFOLD.md",
+    "06_examples/EXAMPLE_MULTI_PATHWAY_REVAMP_WIND_TORNADO_WIND.md",
     "tests/governance_test_cases.json",
     "tools/run_self_tests.py",
 ]
@@ -43,23 +44,23 @@ REQUIRED = [
 CSV_TEMPLATE_HEADERS = {
     "templates/TEMPLATE_SOURCE_REGISTER.csv": [
         "source_id", "citation", "url", "accessed_on", "exact_locator",
-        "source_type", "source_role", "evidence_tier", "target_asset_match",
+        "source_type", "source_role", "pathway_ids", "evidence_tier", "target_asset_match",
         "target_failure_unit_match", "measured_or_modeled_endpoint",
         "permitted_inference", "prohibited_inference", "decision", "status", "notes",
     ],
     "templates/TEMPLATE_CLAIM_PARAMETER_REGISTER.csv": [
-        "claim_id", "claim_text", "claim_type", "source_ids", "exact_locator",
+        "claim_id", "pathway_id", "claim_text", "claim_type", "source_ids", "exact_locator",
         "evidence_tier", "parameter_or_rule", "adoption_status", "permitted_inference",
         "prohibited_inference", "reasoning", "update_trigger",
     ],
     "templates/TEMPLATE_VALUE_CROSSWALK.csv": [
         "value_source_id", "source_location", "row_or_bucket_id", "row_or_bucket_label",
-        "value", "unit", "financial_class", "failure_unit_id", "role_in_loss",
+        "value", "unit", "financial_class", "failure_unit_id", "applicable_pathway_ids", "role_in_loss",
         "include_in_direct_denominator", "allocation_rule", "double_count_guardrail",
         "status", "notes",
     ],
     "templates/TEMPLATE_PARAMETER_TIER_TABLE.csv": [
-        "parameter", "curve_id", "value", "param_role", "tier", "source_ids",
+        "parameter", "pathway_id", "curve_id", "value", "param_role", "tier", "source_ids",
         "reasoning", "status", "update_trigger",
     ],
 }
@@ -155,12 +156,30 @@ def main() -> int:
             "package_baseline",
             "package_inclusion_status",
             "canonical_runtime_artifact",
+            "pathways",
+            "hazard_axes_by_pathway",
         ]:
             if field not in artifact:
                 errors.append(f"Curve artifact template missing atomic status/version field: {field}")
         model_version = str(artifact.get("semantic_damage_model_version", "")).lower()
         if any(token in model_version for token in ["proposed", "scaffold", "review"]):
             errors.append("Curve artifact template conflates status with semantic_damage_model_version")
+        capability = artifact.get("capability_declaration", {})
+        if "pathway_unit_support" not in capability:
+            errors.append("Curve artifact template capability declaration missing pathway_unit_support")
+
+    pathway_guide = root / "02_design_guides" / "HAZARD_PATHWAY_SPLITTING.md"
+    if pathway_guide.is_file():
+        guide_text = pathway_guide.read_text(encoding="utf-8")
+        for marker in [
+            "## First-class pathway contract",
+            "## One-cell versus separate-cell test",
+            "## Partial-pathway fail-closed rule",
+            "tropical_cyclone_wind",
+            "consumer",
+        ]:
+            if marker not in guide_text:
+                errors.append(f"Pathway guide missing required marker: {marker}")
 
     if errors:
         print(json.dumps({"status": "FAIL", "errors": errors}, indent=2))

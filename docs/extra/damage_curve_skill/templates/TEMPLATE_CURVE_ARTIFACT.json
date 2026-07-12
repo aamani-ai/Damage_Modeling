@@ -1,5 +1,5 @@
 {
-  "schema_version": "damage_curve_record_bundle.v1",
+  "schema_version": "<governed_bundle_schema_after_review>",
   "cell_id": "<cell_id>",
   "damage_code_id": "<DAMAGE_CODE_ID>",
   "semantic_damage_model_version": "model v0.1",
@@ -14,15 +14,29 @@
   "canonical_runtime_artifact": false,
   "source_dossier": "<path>",
   "source_workbook": null,
-  "hazard_axis": {
-    "id": "<axis_id>",
-    "input_field": "<field>",
-    "unit": "<unit>",
-    "valid_range": [
-      null,
-      null
-    ],
-    "extrapolation_policy": "warn_or_clamp"
+  "pathways": [
+    {
+      "pathway_id": "<pathway_id>",
+      "physical_mechanism": "<mechanism>",
+      "hazard_axis_id": "<axis_id>",
+      "failure_unit_ids_supported": [],
+      "failure_unit_ids_withheld": [],
+      "neighboring_cell_boundaries": []
+    }
+  ],
+  "hazard_axes_by_pathway": {
+    "<pathway_id>": {
+      "id": "<axis_id>",
+      "input_field": "<field>",
+      "unit": "<unit>",
+      "height_or_datum_basis": "<basis>",
+      "valid_range": [
+        null,
+        null
+      ],
+      "physics_bridge": "<bridge_or_withhold>",
+      "extrapolation_policy": "warn_or_clamp"
+    }
   },
   "failure_units": [],
   "curve_records": [],
@@ -37,7 +51,7 @@
     "open_seams": []
   },
   "emit_contract": {
-    "schema_version": "damage_emit.v1",
+    "schema_version": "<governed_damage_emit_schema_after_review>",
     "supported_emit_modes": [
       "scalar_mean",
       "scalar_mean_plus_bounds",
@@ -48,10 +62,21 @@
     "populated_emit_modes_for_this_cell": []
   },
   "capability_declaration": {
-    "schema_version": "capability_declaration.v1",
+    "schema_version": "<governed_capability_schema_after_review>",
     "cell_id": "<cell_id>",
     "spread_carried": false,
     "emit_modes_populated_by_cell": [],
+    "pathway_unit_support": [
+      {
+        "pathway_id": "<pathway_id>",
+        "failure_unit_id": "<failure_unit_id>",
+        "status": "withheld",
+        "reason_codes": [
+          "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+        ],
+        "curve_ids": []
+      }
+    ],
     "metrics_supportable": {
       "failure_unit_scalar_dr": "withheld",
       "scenario_loss_given_value_basis": "withheld",

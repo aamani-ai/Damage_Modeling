@@ -3,6 +3,10 @@
 Current cell: **wind/tornado x wind**, semantic damage-model `model v1.0`, repository documentation revision
 `docs r4`.
 
+> **Current-runtime rule:** model v1.0/docs r4 remains canonical. A pressure-tested, pathway-aware model v2.0
+> research package exists under [`proposed/`](proposed/README_wind_tornado_wind__model_v2_0__docs_r1.md), but
+> it is not indexed, released, or approved for Hazard execution.
+
 ## Runtime artifact
 
 - Damage code: `WIND_TORNADO_WIND_V1`
@@ -29,6 +33,29 @@ Current cell: **wind/tornado x wind**, semantic damage-model `model v1.0`, repos
 ## Handoff note
 
 - [`wind_tornado_wind_m2_height_bridge.md`](../../contracts/hazard_handoff/wind_tornado_wind_m2_height_bridge.md)
+
+## Proposed model v2.0 research package
+
+The proposal rebuilds the cell around two required first-class pathways—`straight_line_convective` and
+`tornado_direct_hit`—with independent axes, evidence, ordered damage states, and capability gates. It narrows
+the supported y-axis to one repeated turbine-equipment assembly with an explicit `1,090 2023 USD/kW` reference
+denominator. Foundation, external electrical, civil, and support rows are withheld or allocated separately.
+
+- Proposal entrypoint:
+  [`README_wind_tornado_wind__model_v2_0__docs_r1.md`](proposed/README_wind_tornado_wind__model_v2_0__docs_r1.md)
+- Derivation dossier:
+  [`wind_tornado_wind_curve_derivation_dossier__model_v2_0__docs_r1.md`](proposed/wind_tornado_wind_curve_derivation_dossier__model_v2_0__docs_r1.md)
+- Seven-step audit:
+  [`SEVEN_STEP_AUDIT_wind_tornado_wind__model_v2_0__docs_r1.md`](proposed/SEVEN_STEP_AUDIT_wind_tornado_wind__model_v2_0__docs_r1.md)
+- Pressure test:
+  [`PRESSURE_TEST_wind_tornado_wind__model_v2_0__docs_r1.md`](proposed/PRESSURE_TEST_wind_tornado_wind__model_v2_0__docs_r1.md)
+- Promotion gates:
+  [`PROMOTION_GATE_MATRIX_wind_tornado_wind__model_v2_0__docs_r1.md`](proposed/PROMOTION_GATE_MATRIX_wind_tornado_wind__model_v2_0__docs_r1.md)
+- Hazard migration proposal:
+  [`wind_tornado_wind_model_v2_0_hazard_migration_proposal.md`](../../contracts/hazard_handoff/wind_tornado_wind_model_v2_0_hazard_migration_proposal.md)
+
+Tropical-cyclone/hurricane wind remains a separate neighboring workstream; neither proposed pathway is a
+hurricane curve.
 
 ## Capability
 

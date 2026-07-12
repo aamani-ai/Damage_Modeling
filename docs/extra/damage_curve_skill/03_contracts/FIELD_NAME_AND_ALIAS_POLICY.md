@@ -34,3 +34,5 @@ enclosure_rating
 ```
 
 Aliases should be temporary bridges, not parallel standards.
+
+`pathway_id` values are governed identities, not free-form aliases. A legacy field such as `tornado_variant` may map to a pathway only in a documented, time-bounded schema migration when the old semantics are exact. Do not accept hurricane, high-wind, tornado, or similar prose labels as interchangeable aliases, and do not infer a pathway from an axis value.

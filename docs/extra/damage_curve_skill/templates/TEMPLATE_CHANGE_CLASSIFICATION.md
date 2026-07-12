@@ -16,4 +16,10 @@ explicit_non_changes:
   -
 reviewer_notes:
   -
+related_change_events:
+  - event_id:
+    change_class:
+    coupling_reason:
 ```
+
+For a multi-pathway rebuild that changes behavior and makes `pathway_id` required, record separate `MODEL_BEHAVIOR_CHANGE` and `SCHEMA_CONTRACT_CHANGE` events even when they ship together.

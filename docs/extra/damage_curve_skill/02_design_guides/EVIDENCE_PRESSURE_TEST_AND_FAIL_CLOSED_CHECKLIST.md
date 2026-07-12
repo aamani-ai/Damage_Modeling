@@ -214,3 +214,5 @@ Remove rejected numeric arrays from runtime-shaped artifacts. Preserve them only
 ```
 
 Use the templates in `../templates/` and the controlled example in `../06_examples/EXAMPLE_FAIL_CLOSED_WILDFIRE_SOLAR_SCAFFOLD.md`.
+
+For a multi-pathway cell, complete the evidence package at pathway grain. Populate `pathway_ids` / `pathway_id` in source, claim, parameter-tier, and value-crosswalk registers; do not let a source or parameter adopted for one mechanism silently qualify another. A row may use `all_shared` only when the same asset/value fact genuinely applies to every declared pathway. Apply `NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT` when the evidence chain fails for one pathway × failure-unit pair while other pairs remain supportable.

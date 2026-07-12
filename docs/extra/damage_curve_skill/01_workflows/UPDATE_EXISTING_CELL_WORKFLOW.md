@@ -31,8 +31,9 @@ relevant workbook/audit view if present
 If behavior can change:
 
 ```text
-[ ] copy prior current artifacts to archive with current model/docs labels;
-[ ] create proposed new current artifacts;
+[ ] preserve the current canonical artifact and consumer pin while research is incomplete;
+[ ] create a clearly named proposed model/docs folder;
+[ ] copy prior current artifacts to archive only at promotion time;
 [ ] document old-vs-new behavior at representative inputs;
 [ ] update semantic damage-model version.
 ```
@@ -74,6 +75,35 @@ Minimum table:
 
 For multi-failure-unit cells, compare by failure unit and aggregate convenience views separately.
 
+For a multi-pathway rebuild, compare at `pathway_id × failure_unit_id` grain and include:
+
+```text
+[ ] prior branch/boolean/shift behavior mapped to its claimed pathway, or marked unmappable;
+[ ] new pathway-specific output at low, transition, high, and boundary inputs;
+[ ] aggregate view using the same value basis and exposure assumptions;
+[ ] unsupported pair returning no numeric fallback;
+[ ] cross-pathway negative test showing one pathway is not selected from the other's input;
+[ ] explicit statement that neighboring cells/pathways are not delivered.
+```
+
+Do not treat an old boolean variant as a stable pathway identity. If the mapping is ambiguous, preserve it only in the legacy audit and require an explicit new `pathway_id` from consumers.
+
+## Step 5A — multi-pathway architecture gate
+
+Before fitting or translating curves, use `../02_design_guides/HAZARD_PATHWAY_SPLITTING.md` and record:
+
+```text
+[ ] one-cell versus separate-cell decision;
+[ ] stable pathway IDs and physical definitions;
+[ ] pathway-specific axes, units, heights/durations/datums, and bridges;
+[ ] pathway-filtered source/claim/parameter registers;
+[ ] pathway × failure-unit coverage and withholding matrix;
+[ ] neighboring-cell and compound-event boundary;
+[ ] value/exposure double-count guardrails.
+```
+
+If a required pathway field or its meaning changes the machine contract, open a separate `SCHEMA_CONTRACT_CHANGE` event and follow `SCHEMA_CONTRACT_CHANGE_WORKFLOW.md`. The behavior-change and schema-change records must remain separately reviewable even when delivered together.
+
 ## Step 6 — capability and reportability review
 
 Re-check:
@@ -92,3 +122,20 @@ A parameter update can change cap-binding behavior even if the schema is unchang
 ## Step 7 — package release
 
 Use `05_release/RELEASE_PACKAGE_WORKFLOW.md`.
+
+Before promotion, require a consumer migration check:
+
+```yaml
+consumer:
+prior_pin:
+new_pin:
+pin_fields: [cell_model_version, documentation_revision, schema_version, sha256]
+pathway_selection_field: pathway_id
+legacy_mapping_rule:
+dual_read_or_cutover_rule:
+rollback_rule:
+fixture_or_integration_test:
+status:
+```
+
+Do not replace `current/`, update the canonical index, or deprecate the prior model until validation passes and the named consumer can explicitly select every released pathway and verify the exact new pin.
