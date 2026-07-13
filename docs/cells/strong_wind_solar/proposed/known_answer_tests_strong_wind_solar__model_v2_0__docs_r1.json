@@ -1,0 +1,473 @@
+{
+  "schema_version": "known_answer_tests.v3",
+  "cell_id": "strong_wind_solar",
+  "semantic_damage_model_version": "model v2.0",
+  "documentation_revision": "docs r1",
+  "artifact_schema_version": "damage_curve_record_bundle.v3",
+  "absolute_tolerance": 1e-12,
+  "monetary_absolute_tolerance": 1e-6,
+  "runtime_curve_known_answer_tests": [
+    {
+      "test_id": "fixed_direct_x1_module",
+      "pathway_id": "straight_line_convective",
+      "failure_unit_id": "PV_FIXED_TILT_MODULE_FIELD",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "array_architecture": "fixed_tilt_ground_mount_screening_v1",
+        "fixed_tilt_event_to_design_net_pressure_ratio": 1.0,
+        "aerodynamic_demand_bridge_id": "qualified_fixed_bridge_v1"
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "SWS2_SLC_FIXED_MODULE_ORDERED_STATES",
+        "axis_value": 1.0,
+        "scalar_central_dr": 0.13542526918149927,
+        "scenario_drs": {
+          "lower_resistance": 0.3369614817679642,
+          "central_screening": 0.13542526918149927,
+          "upper_resistance": 0.055243766267495054
+        },
+        "central_state_probabilities": {
+          "MODULE_DS0_NO_DIRECT_DAMAGE": 0.29400234088438193,
+          "MODULE_DS1_LOCALIZED_REPLACEMENT": 0.6339693221490209,
+          "MODULE_DS2_FIELD_REPLACEMENT": 0.07202833696659716
+        },
+        "metadata_flags_include": [
+          "SCREENING_ENGINEERING_PROXY",
+          "NONPROBABILISTIC_EPISTEMIC_ENVELOPE"
+        ]
+      },
+      "source": "direct equation fixture from the governed proposed artifact",
+      "notes": "Tests fixed-tilt direct-pressure routing, the central equation, all scenario bounds, and probability closure."
+    },
+    {
+      "test_id": "fixed_direct_x1_structure",
+      "pathway_id": "straight_line_convective",
+      "failure_unit_id": "PV_FIXED_TILT_SUPPORT_STRUCTURE",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "array_architecture": "fixed_tilt_ground_mount_screening_v1",
+        "fixed_tilt_event_to_design_net_pressure_ratio": 1.0,
+        "aerodynamic_demand_bridge_id": "qualified_fixed_bridge_v1"
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "SWS2_SLC_FIXED_STRUCTURE_ORDERED_STATES",
+        "axis_value": 1.0,
+        "scalar_central_dr": 0.10932205947512846,
+        "scenario_drs": {
+          "lower_resistance": 0.3265206097954517,
+          "central_screening": 0.10932205947512846,
+          "upper_resistance": 0.02721678851657102
+        },
+        "central_state_probabilities": {
+          "STRUCT_DS0_NO_DIRECT_DAMAGE": 0.6793468463098608,
+          "STRUCT_DS1_LOCALIZED_REPAIR": 0.24862481672354209,
+          "STRUCT_DS2_REPLACE_STRUCTURE_MODULES_SALVAGEABLE": 0.05583126299421981,
+          "STRUCT_DS3_DESTRUCTIVE_COLLAPSE_MODULES_NONSALVAGEABLE": 0.01619707397237735
+        }
+      },
+      "source": "direct equation fixture from the governed proposed artifact",
+      "notes": "Tests the separate fixed-tilt structural value atom; it must not inherit module DR."
+    },
+    {
+      "test_id": "fixed_speed_proxy_30_over_40",
+      "pathway_id": "straight_line_convective",
+      "failure_unit_id": "PV_FIXED_TILT_MODULE_FIELD",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "array_architecture": "fixed_tilt_ground_mount_screening_v1",
+        "array_height_3s_gust_mps": 30.0,
+        "qualified_design_array_height_3s_gust_mps": 40.0,
+        "convective_profile_bridge_id": "qualified_downburst_profile_v1",
+        "aerodynamic_demand_bridge_id": "fixed_proxy_bridge_v1",
+        "ten_meter_3s_gust_mps": 32.0
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "SWS2_SLC_FIXED_MODULE_ORDERED_STATES",
+        "axis_value": 0.5625,
+        "scalar_central_dr": 0.00876644520396121,
+        "scenario_drs": {
+          "lower_resistance": 0.03668977937799179,
+          "central_screening": 0.00876644520396121,
+          "upper_resistance": 0.001889278914755571
+        },
+        "metadata_flags_include": [
+          "QUASI_STEADY_GUST_PROXY_USED",
+          "CONVECTIVE_PROFILE_BRIDGE_USED"
+        ]
+      },
+      "source": "screening proxy equation in the governed proposed artifact",
+      "notes": "Tests the only permitted fixed-tilt speed proxy and preserves the 10 m source lineage."
+    },
+    {
+      "test_id": "tracker_qualified_eta_0_75",
+      "pathway_id": "straight_line_convective",
+      "failure_unit_id": "PV_TRACKER_MODULE_FIELD",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "array_architecture": "single_axis_tracker_qualified_screening_v1",
+        "tracker_normal_3s_gust_mps": 30.0,
+        "critical_instability_3s_gust_mps": 40.0,
+        "aeroelastic_qualification_id": "third_party_tracker_test_A",
+        "convective_profile_bridge_id": "qualified_downburst_profile_A",
+        "tracker_module_configuration": "1P",
+        "tracker_layout_id": "layout_A",
+        "tracker_position_state": "confirmed_wind_stow",
+        "tracker_angle_deg": 0.0,
+        "tracker_drive_lock_state": "mechanically_locked",
+        "array_zone": "edge",
+        "stow_confirmation_basis": "position_sensor_and_scada",
+        "control_power_state": "available",
+        "qualification_tracker_module_configuration": "1P",
+        "qualification_tracker_layout_id": "layout_A",
+        "qualification_tracker_position_state": "confirmed_wind_stow",
+        "qualification_tracker_angle_deg": 0.0,
+        "qualification_array_zone": "edge",
+        "qualification_drive_lock_state": "mechanically_locked",
+        "qualification_speed_averaging_s": 3.0,
+        "qualification_speed_reference": "array_height_tracker_normal_3s_gust",
+        "qualification_convective_profile_bridge_id": "qualified_downburst_profile_A"
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "SWS2_SLC_TRACKER_MODULE_ORDERED_STATES",
+        "axis_value": 0.75,
+        "scalar_central_dr": 0.02995351801943045,
+        "scenario_drs": {
+          "lower_resistance": 0.09476894171413572,
+          "central_screening": 0.02995351801943045,
+          "upper_resistance": 0.009501095004545468
+        },
+        "central_state_probabilities": {
+          "MODULE_DS0_NO_DIRECT_DAMAGE": 0.8049939873810652,
+          "MODULE_DS1_LOCALIZED_REPLACEMENT": 0.183391660666116,
+          "MODULE_DS2_FIELD_REPLACEMENT": 0.011614351952818847
+        },
+        "metadata_flags_include": [
+          "QUALIFIED_TRACKER_INSTABILITY_AXIS",
+          "STOW_ACTION_THRESHOLD_EXCEEDED"
+        ]
+      },
+      "source": "qualified tracker-axis equation; 0.75 operational flag anchored by FM DS 7-106",
+      "notes": "The 0.75 flag is not a damage threshold and does not choose a favorable curve."
+    },
+    {
+      "test_id": "tracker_qualified_eta_1_structure",
+      "pathway_id": "straight_line_convective",
+      "failure_unit_id": "PV_TRACKER_SBOS_ASSEMBLY",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "array_architecture": "single_axis_tracker_qualified_screening_v1",
+        "tracker_normal_3s_gust_mps": 40.0,
+        "critical_instability_3s_gust_mps": 40.0,
+        "aeroelastic_qualification_id": "third_party_tracker_test_B",
+        "convective_profile_bridge_id": "qualified_downburst_profile_B",
+        "tracker_module_configuration": "2P",
+        "tracker_layout_id": "layout_B",
+        "tracker_position_state": "normal_tracking",
+        "tracker_angle_deg": 5.0,
+        "tracker_drive_lock_state": "drive_engaged",
+        "array_zone": "interior",
+        "stow_confirmation_basis": "position_sensor_and_scada",
+        "control_power_state": "available",
+        "qualification_tracker_module_configuration": "2P",
+        "qualification_tracker_layout_id": "layout_B",
+        "qualification_tracker_position_state": "normal_tracking",
+        "qualification_tracker_angle_deg": 5.0,
+        "qualification_array_zone": "interior",
+        "qualification_drive_lock_state": "drive_engaged",
+        "qualification_speed_averaging_s": 3.0,
+        "qualification_speed_reference": "array_height_tracker_normal_3s_gust",
+        "qualification_convective_profile_bridge_id": "qualified_downburst_profile_B"
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "SWS2_SLC_TRACKER_SBOS_ORDERED_STATES",
+        "axis_value": 1.0,
+        "scalar_central_dr": 0.13982635857839754,
+        "scenario_drs": {
+          "lower_resistance": 0.34589782836005506,
+          "central_screening": 0.13982635857839754,
+          "upper_resistance": 0.04344214577128501
+        },
+        "central_state_probabilities": {
+          "STRUCT_DS0_NO_DIRECT_DAMAGE": 0.6943523057312759,
+          "STRUCT_DS1_LOCALIZED_REPAIR": 0.19508392434156063,
+          "STRUCT_DS2_REPLACE_STRUCTURE_MODULES_SALVAGEABLE": 0.07626042106740644,
+          "STRUCT_DS3_DESTRUCTIVE_COLLAPSE_MODULES_NONSALVAGEABLE": 0.034303348859757
+        },
+        "metadata_flags_include": [
+          "QUALIFIED_TRACKER_INSTABILITY_AXIS",
+          "STOW_ACTION_THRESHOLD_EXCEEDED"
+        ]
+      },
+      "source": "direct equation fixture from the governed proposed artifact",
+      "notes": "A 2P tracker is supported only through its exact named aeroelastic Ucrit; 2P receives no generic modifier."
+    },
+    {
+      "test_id": "foundation_is_withheld",
+      "pathway_id": "straight_line_convective",
+      "failure_unit_id": "PV_FOUNDATION",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "array_architecture": "fixed_tilt_ground_mount_screening_v1",
+        "fixed_tilt_event_to_design_net_pressure_ratio": 1.0,
+        "aerodynamic_demand_bridge_id": "qualified_fixed_bridge_v1",
+        "failure_unit_id": "PV_FOUNDATION"
+      },
+      "expected": {
+        "status": "withheld",
+        "curve_id": null,
+        "reason_codes_include": [
+          "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+          "NO_CONVECTIVE_FOUNDATION_FRAGILITY"
+        ]
+      },
+      "source": "failure-unit coverage and capability declaration",
+      "notes": "Withheld is null, never zero and never inherited from structure."
+    }
+  ],
+  "loss_assembly_known_answer_tests": [
+    {
+      "test_id": "fixed_x1_terminal_cascade_once",
+      "source_runtime_test_id": "fixed_direct_x1_module",
+      "input_values": {
+        "value_basis": {
+          "basis_id": "NLR_Q1_2025_UPV_PV_ONLY_2024_USD_AUDIT",
+          "currency": "USD",
+          "price_year": 2024,
+          "value_unit": "currency_per_kwdc",
+          "module_value": 291.21485143992487,
+          "structure_value": 109.98972602739727,
+          "capacity_kwdc": 100000.0
+        },
+        "exposure": {
+          "event_id": "event-A",
+          "parent_convective_event_id": "parent-A",
+          "array_zone_id_or_group": "zone-A",
+          "exposure_basis": "colocated_common_array_zone",
+          "exposed_fraction": 0.25
+        }
+      },
+      "expected_central_screening": {
+        "structure_replacement_probability": 0.07202833696659716,
+        "destructive_collapse_probability": 0.01619707397237735,
+        "effective_module_dr_full_salvage_bound": 0.13542526918149927,
+        "effective_module_dr_central_t4": 0.14942885005121476,
+        "effective_module_dr_no_salvage_on_replacement_bound": 0.19769914922569928,
+        "module_loss": 1087897.509212583,
+        "structure_loss": 300607.58426050525,
+        "direct_array_loss": 1388505.0934730882
+      },
+      "source": "governed terminal-structure cascade and repository reference values",
+      "notes": "The central T4 salvage assumption forces module non-salvage only in DS3 destructive collapse; full-salvage and no-salvage-on-any-replacement bounds remain visible."
+    }
+  ],
+  "loss_assembly_rejection_tests": [
+    {
+      "test_id": "loss_reject_missing_currency",
+      "source_runtime_test_id": "fixed_direct_x1_module",
+      "input_values": {
+        "value_basis": {"basis_id": "bad", "price_year": 2024, "value_unit": "currency_per_kwdc", "module_value": 291.21485143992487, "structure_value": 109.98972602739727, "capacity_kwdc": 100000.0},
+        "exposure": {"event_id": "event-A", "parent_convective_event_id": "parent-A", "array_zone_id_or_group": "zone-A", "exposure_basis": "colocated_common_array_zone", "exposed_fraction": 0.25}
+      },
+      "expected_error_code": "EXPLICIT_VALUE_AND_EXPOSURE_REQUIRED",
+      "notes": "Currency is part of the atomic value basis."
+    },
+    {
+      "test_id": "loss_reject_per_kw_without_capacity",
+      "source_runtime_test_id": "fixed_direct_x1_module",
+      "input_values": {
+        "value_basis": {"basis_id": "bad", "currency": "USD", "price_year": 2024, "value_unit": "currency_per_kwdc", "module_value": 291.21485143992487, "structure_value": 109.98972602739727},
+        "exposure": {"event_id": "event-A", "parent_convective_event_id": "parent-A", "array_zone_id_or_group": "zone-A", "exposure_basis": "colocated_common_array_zone", "exposed_fraction": 0.25}
+      },
+      "expected_error_code": "EXPLICIT_VALUE_AND_EXPOSURE_REQUIRED",
+      "notes": "Per-kWdc values cannot become currency loss without capacity."
+    },
+    {
+      "test_id": "loss_reject_missing_parent_event",
+      "source_runtime_test_id": "fixed_direct_x1_module",
+      "input_values": {
+        "value_basis": {"basis_id": "audit", "currency": "USD", "price_year": 2024, "value_unit": "total_replacement_cost", "module_value": 29121485.143992487, "structure_value": 10998972.602739727},
+        "exposure": {"event_id": "event-A", "array_zone_id_or_group": "zone-A", "exposure_basis": "colocated_common_array_zone", "exposed_fraction": 0.25}
+      },
+      "expected_error_code": "EXPLICIT_VALUE_AND_EXPOSURE_REQUIRED",
+      "notes": "Parent convective identity is required for event-family deduplication."
+    },
+    {
+      "test_id": "loss_reject_noncolocated_common_fraction",
+      "source_runtime_test_id": "fixed_direct_x1_module",
+      "input_values": {
+        "value_basis": {"basis_id": "audit", "currency": "USD", "price_year": 2024, "value_unit": "total_replacement_cost", "module_value": 29121485.143992487, "structure_value": 10998972.602739727},
+        "exposure": {"event_id": "event-A", "parent_convective_event_id": "parent-A", "array_zone_id_or_group": "zone-A", "exposure_basis": "different_failure_unit_footprints", "exposed_fraction": 0.25}
+      },
+      "expected_error_code": "EXPLICIT_VALUE_AND_EXPOSURE_REQUIRED",
+      "notes": "Different module/structure footprints require separate exposure objects outside the common-zone helper."
+    }
+  ],
+  "consumer_pin_known_answer_tests": [
+    {
+      "test_id": "pin_exact_computed_sha",
+      "pin": {
+        "cell_id": "strong_wind_solar",
+        "semantic_damage_model_version": "model v2.0",
+        "documentation_revision": "docs r1",
+        "schema_version": "damage_curve_record_bundle.v3",
+        "artifact_sha256": "__COMPUTED__"
+      },
+      "expected": "pass",
+      "notes": "The validator substitutes the exact current artifact byte SHA."
+    },
+    {
+      "test_id": "pin_missing_docs",
+      "pin": {
+        "cell_id": "strong_wind_solar",
+        "semantic_damage_model_version": "model v2.0",
+        "schema_version": "damage_curve_record_bundle.v3",
+        "artifact_sha256": "__COMPUTED__"
+      },
+      "expected_error_code": "ARTIFACT_PIN_INCOMPLETE",
+      "notes": "Partial pins reject."
+    },
+    {
+      "test_id": "pin_wrong_sha",
+      "pin": {
+        "cell_id": "strong_wind_solar",
+        "semantic_damage_model_version": "model v2.0",
+        "documentation_revision": "docs r1",
+        "schema_version": "damage_curve_record_bundle.v3",
+        "artifact_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expected_error_code": "ARTIFACT_PIN_MISMATCH",
+      "notes": "A different byte artifact rejects."
+    },
+    {
+      "test_id": "pin_wrong_model",
+      "pin": {
+        "cell_id": "strong_wind_solar",
+        "semantic_damage_model_version": "model v1.0",
+        "documentation_revision": "docs r1",
+        "schema_version": "damage_curve_record_bundle.v3",
+        "artifact_sha256": "__COMPUTED__"
+      },
+      "expected_error_code": "ARTIFACT_PIN_MISMATCH",
+      "notes": "Model/docs/schema/SHA identity is atomic."
+    }
+  ],
+  "contract_rejection_tests": [
+    {
+      "test_id": "reject_missing_pathway",
+      "input": {"array_architecture": "fixed_tilt_ground_mount_screening_v1"},
+      "expected_error_code": "PATHWAY_ID_REQUIRED",
+      "source": "pathway contract",
+      "notes": "Pathway has no default."
+    },
+    {
+      "test_id": "reject_hurricane_pathway",
+      "input": {"pathway_id": "tropical_cyclone_wind", "array_architecture": "fixed_tilt_ground_mount_screening_v1"},
+      "expected_error_code": "PATHWAY_ID_UNKNOWN",
+      "source": "neighboring-wind boundary",
+      "notes": "Hurricane/TC wind cannot inherit the convective curve."
+    },
+    {
+      "test_id": "reject_missing_architecture",
+      "input": {"pathway_id": "straight_line_convective"},
+      "expected_error_code": "ARRAY_ARCHITECTURE_REQUIRED",
+      "source": "asset architecture contract",
+      "notes": "Fixed tilt and tracker cannot share an implicit default."
+    },
+    {
+      "test_id": "reject_rooftop",
+      "input": {"pathway_id": "straight_line_convective", "array_architecture": "roof_mount"},
+      "expected_error_code": "ARRAY_ARCHITECTURE_UNSUPPORTED",
+      "source": "asset scope",
+      "notes": "Rooftop building interaction requires a different curve."
+    },
+    {
+      "test_id": "reject_unbridged_10m_fixed",
+      "input": {"pathway_id": "straight_line_convective", "array_architecture": "fixed_tilt_ground_mount_screening_v1", "ten_meter_3s_gust_mps": 35.0, "aerodynamic_demand_bridge_id": "bridge"},
+      "expected_error_code": "PRESSURE_INDEX_REQUIRED",
+      "source": "convective height/profile boundary",
+      "notes": "A 10 m gust is never the fixed-tilt axis."
+    },
+    {
+      "test_id": "reject_fixed_proxy_without_profile_bridge",
+      "input": {"pathway_id": "straight_line_convective", "array_architecture": "fixed_tilt_ground_mount_screening_v1", "array_height_3s_gust_mps": 30.0, "qualified_design_array_height_3s_gust_mps": 40.0, "aerodynamic_demand_bridge_id": "bridge"},
+      "expected_error_code": "CONVECTIVE_PROFILE_BRIDGE_REQUIRED",
+      "source": "convective height/profile boundary",
+      "notes": "The speed proxy requires a named non-synoptic bridge."
+    },
+    {
+      "test_id": "reject_fixed_direct_without_demand_bridge",
+      "input": {"pathway_id": "straight_line_convective", "array_architecture": "fixed_tilt_ground_mount_screening_v1", "fixed_tilt_event_to_design_net_pressure_ratio": 1.0},
+      "expected_error_code": "AERODYNAMIC_DEMAND_BRIDGE_REQUIRED",
+      "source": "fixed-tilt demand bridge contract",
+      "notes": "Even a delivered pressure index must identify its qualified bridge."
+    },
+    {
+      "test_id": "reject_tracker_without_ucrit",
+      "input": {"pathway_id": "straight_line_convective", "array_architecture": "single_axis_tracker_qualified_screening_v1", "tracker_normal_3s_gust_mps": 30.0},
+      "expected_error_code": "AERODYNAMIC_DEMAND_BRIDGE_REQUIRED",
+      "source": "tracker axis contract",
+      "notes": "There is no universal tracker critical speed."
+    },
+    {
+      "test_id": "reject_tracker_without_1p_2p_identity",
+      "input": {"pathway_id": "straight_line_convective", "array_architecture": "single_axis_tracker_qualified_screening_v1", "tracker_normal_3s_gust_mps": 30.0, "critical_instability_3s_gust_mps": 40.0, "aeroelastic_qualification_id": "test", "convective_profile_bridge_id": "profile"},
+      "expected_error_code": "ARRAY_ARCHITECTURE_UNSUPPORTED",
+      "source": "tracker selector contract",
+      "notes": "1P/2P identity is mandatory even though Ucrit carries its numeric effect."
+    },
+    {
+      "test_id": "reject_fixed_unit_on_tracker",
+      "input": {"pathway_id": "straight_line_convective", "array_architecture": "single_axis_tracker_qualified_screening_v1", "tracker_normal_3s_gust_mps": 30.0, "critical_instability_3s_gust_mps": 40.0, "aeroelastic_qualification_id": "test", "convective_profile_bridge_id": "profile", "tracker_module_configuration": "1P", "tracker_layout_id": "layout", "tracker_position_state": "normal_tracking", "tracker_angle_deg": 0.0, "tracker_drive_lock_state": "drive_engaged", "array_zone": "interior", "stow_confirmation_basis": "position_sensor_and_scada", "qualification_tracker_module_configuration": "1P", "qualification_tracker_layout_id": "layout", "qualification_tracker_position_state": "normal_tracking", "qualification_tracker_angle_deg": 0.0, "qualification_array_zone": "interior", "qualification_drive_lock_state": "drive_engaged", "qualification_speed_averaging_s": 3.0, "qualification_speed_reference": "array_height_tracker_normal_3s_gust", "qualification_convective_profile_bridge_id": "profile", "failure_unit_id": "PV_FIXED_TILT_MODULE_FIELD"},
+      "expected_error_code": "FAILURE_UNIT_NOT_APPLICABLE_TO_ARCHITECTURE",
+      "source": "selector routing contract",
+      "notes": "Cross-architecture numerical fallback is prohibited."
+    },
+    {
+      "test_id": "reject_axis_above_two",
+      "input": {"pathway_id": "straight_line_convective", "array_architecture": "fixed_tilt_ground_mount_screening_v1", "fixed_tilt_event_to_design_net_pressure_ratio": 2.1, "aerodynamic_demand_bridge_id": "bridge"},
+      "expected_error_code": "AXIS_OUTSIDE_VALID_RANGE",
+      "source": "bounded extrapolation policy",
+      "notes": "The screening model is withheld outside its declared range."
+    },
+    {
+      "test_id": "reject_bad_array_zone",
+      "input": {"pathway_id": "straight_line_convective", "array_architecture": "fixed_tilt_ground_mount_screening_v1", "fixed_tilt_event_to_design_net_pressure_ratio": 1.0, "aerodynamic_demand_bridge_id": "bridge", "array_zone": "whole_site_default"},
+      "expected_error_code": "CONDITIONER_VALUE_UNSUPPORTED",
+      "source": "conditioner contract",
+      "notes": "The whole site cannot silently stand in for an array zone."
+    },
+    {
+      "test_id": "reject_tracker_stow_state_on_fixed_tilt",
+      "input": {"pathway_id": "straight_line_convective", "array_architecture": "fixed_tilt_ground_mount_screening_v1", "fixed_tilt_event_to_design_net_pressure_ratio": 1.0, "aerodynamic_demand_bridge_id": "bridge", "tracker_position_state": "confirmed_wind_stow"},
+      "expected_error_code": "CONDITIONER_VALUE_UNSUPPORTED",
+      "source": "selector/conditioner routing contract",
+      "notes": "Fixed tilt must materialize tracker-only state as not_applicable, never as a stow condition."
+    },
+    {
+      "test_id": "reject_tracker_qualification_angle_mismatch",
+      "input": {"pathway_id": "straight_line_convective", "array_architecture": "single_axis_tracker_qualified_screening_v1", "tracker_normal_3s_gust_mps": 30.0, "critical_instability_3s_gust_mps": 40.0, "aeroelastic_qualification_id": "test", "convective_profile_bridge_id": "profile", "tracker_module_configuration": "1P", "tracker_layout_id": "layout", "tracker_position_state": "confirmed_wind_stow", "tracker_angle_deg": 0.0, "tracker_drive_lock_state": "mechanically_locked", "array_zone": "edge", "stow_confirmation_basis": "position_sensor_and_scada", "qualification_tracker_module_configuration": "1P", "qualification_tracker_layout_id": "layout", "qualification_tracker_position_state": "confirmed_wind_stow", "qualification_tracker_angle_deg": 10.0, "qualification_array_zone": "edge", "qualification_drive_lock_state": "mechanically_locked", "qualification_speed_averaging_s": 3.0, "qualification_speed_reference": "array_height_tracker_normal_3s_gust", "qualification_convective_profile_bridge_id": "profile"},
+      "expected_error_code": "TRACKER_QUALIFICATION_BASIS_MISMATCH",
+      "source": "exact-system tracker qualification contract",
+      "notes": "The event attained angle must match the Ucrit qualification basis before DR or the FM action flag is emitted."
+    },
+    {
+      "test_id": "reject_negative_transient_rise_time",
+      "input": {"pathway_id": "straight_line_convective", "array_architecture": "fixed_tilt_ground_mount_screening_v1", "fixed_tilt_event_to_design_net_pressure_ratio": 1.0, "aerodynamic_demand_bridge_id": "bridge", "transient_rise_time_s": -1.0},
+      "expected_error_code": "CONDITIONER_VALUE_UNSUPPORTED",
+      "source": "typed conditioner contract",
+      "notes": "A duration descriptor must be nonnegative or explicitly unknown."
+    },
+    {
+      "test_id": "reject_command_only_tracker_position",
+      "input": {"pathway_id": "straight_line_convective", "array_architecture": "single_axis_tracker_qualified_screening_v1", "tracker_normal_3s_gust_mps": 30.0, "critical_instability_3s_gust_mps": 40.0, "aeroelastic_qualification_id": "test", "convective_profile_bridge_id": "profile", "tracker_module_configuration": "1P", "tracker_layout_id": "layout", "tracker_position_state": "commanded_not_confirmed", "tracker_angle_deg": 0.0},
+      "expected_error_code": "TRACKER_QUALIFICATION_BASIS_MISMATCH",
+      "source": "attained-state qualification contract",
+      "notes": "A command log does not prove the physical tracker position and cannot earn a favorable Ucrit basis."
+    }
+  ]
+}

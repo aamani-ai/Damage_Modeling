@@ -1,0 +1,702 @@
+{
+  "schema_version": "damage_curve_record_bundle.v3",
+  "schema_status": "proposed_draft",
+  "cell_id": "strong_wind_solar",
+  "damage_code_id": "STRONG_WIND_SOLAR_CONVECTIVE_V2_PROPOSED",
+  "semantic_damage_model_version": "model v2.0",
+  "documentation_revision": "docs r1",
+  "lifecycle_state": "candidate",
+  "promotion_status": "proposed",
+  "review_status": "pressure_tested_screening_proxy",
+  "model_grade": "screening_engineering_proxy",
+  "package_release": "unreleased",
+  "package_baseline": "library v2.5",
+  "package_inclusion_status": "not_included",
+  "canonical_runtime_artifact": false,
+  "source_dossier": "docs/cells/strong_wind_solar/proposed/strong_wind_solar_curve_derivation_dossier__model_v2_0__docs_r1.md",
+  "source_workbook": "docs/cells/strong_wind_solar/proposed/damage_curve_records_strong_wind_solar__model_v2_0__docs_r1.xlsx",
+  "known_answer_tests": "docs/cells/strong_wind_solar/proposed/known_answer_tests_strong_wind_solar__model_v2_0__docs_r1.json",
+  "source_register": "docs/cells/strong_wind_solar/proposed/SOURCE_REGISTER_strong_wind_solar__model_v2_0__docs_r1.csv",
+  "claim_parameter_register": "docs/cells/strong_wind_solar/proposed/CLAIM_PARAMETER_REGISTER_strong_wind_solar__model_v2_0__docs_r1.csv",
+  "value_crosswalk": "docs/cells/strong_wind_solar/proposed/VALUE_CROSSWALK_strong_wind_solar__model_v2_0__docs_r1.csv",
+  "failure_units": [
+    {
+      "id": "PV_FIXED_TILT_MODULE_FIELD",
+      "subsystem": "PV array",
+      "component": "modules, frames, clamps, and module-to-rail retention on fixed-tilt ground mount",
+      "treatment": "primary_nonzero",
+      "y_axis": "same-failure-unit direct repair or replacement cost divided by fixed-tilt module-field replacement value",
+      "denominator": "explicit site module-field value; repository reference 291.21485143992487 2024 USD/kWdc is informational only"
+    },
+    {
+      "id": "PV_FIXED_TILT_SUPPORT_STRUCTURE",
+      "subsystem": "mounting",
+      "component": "fixed-tilt rails, posts, braces, connections, and structural hardware excluding foundations",
+      "treatment": "primary_nonzero",
+      "y_axis": "same-failure-unit direct repair or replacement cost divided by fixed-tilt support-structure replacement value",
+      "denominator": "explicit site fixed-tilt structural value; no implicit repository default"
+    },
+    {
+      "id": "PV_TRACKER_MODULE_FIELD",
+      "subsystem": "PV array",
+      "component": "modules, frames, clamps, and module-to-torque-tube retention on qualified single-axis tracker",
+      "treatment": "primary_nonzero",
+      "y_axis": "same-failure-unit direct repair or replacement cost divided by tracker module-field replacement value",
+      "denominator": "explicit site module-field value; repository reference 291.21485143992487 2024 USD/kWdc is informational only"
+    },
+    {
+      "id": "PV_TRACKER_SBOS_ASSEMBLY",
+      "subsystem": "mounting",
+      "component": "qualified single-axis tracker torque tube, bearings, drive, racking, and structural hardware excluding foundations",
+      "treatment": "primary_nonzero",
+      "y_axis": "same-failure-unit direct repair or replacement cost divided by tracker structural-BOS replacement value",
+      "denominator": "explicit site tracker structural-BOS value; repository reference mounting-hardware row 109.98972602739727 2024 USD/kWdc is informational only"
+    },
+    {
+      "id": "PV_FOUNDATION",
+      "subsystem": "foundation",
+      "component": "piles, posts below governed structural boundary, anchors, and inverter pads",
+      "treatment": "withheld",
+      "y_axis": "withheld",
+      "denominator": "31.12448715327472 2024 USD/kWdc reference bucket; architecture and geotechnical split required",
+      "withheld_reason_codes": [
+        "NO_CONVECTIVE_FOUNDATION_FRAGILITY",
+        "FOUNDATION_ARCHETYPE_AND_GEOTECHNICAL_STATE_REQUIRED"
+      ]
+    },
+    {
+      "id": "PV_POWER_CONVERSION_AND_ELECTRICAL",
+      "subsystem": "power conversion and electrical collection",
+      "component": "inverter, combiner, exposed and buried cable, MV equipment, and substation",
+      "treatment": "withheld",
+      "y_axis": "withheld",
+      "denominator": "row split and exposure-specific values required",
+      "withheld_reason_codes": [
+        "DIRECT_AERODYNAMIC_CURVE_UNSUPPORTED",
+        "DEBRIS_AND_INGRESS_PATHWAYS_NOT_MODELED"
+      ]
+    },
+    {
+      "id": "PV_SCADA_COMMUNICATIONS",
+      "subsystem": "SCADA and communications",
+      "component": "monitoring, communications, tracker control, and exposed sensors",
+      "treatment": "withheld",
+      "y_axis": "withheld",
+      "denominator": "1.31 2024 USD/kWdc reference bucket; location and exposure split required",
+      "withheld_reason_codes": [
+        "DIRECT_AERODYNAMIC_CURVE_UNSUPPORTED",
+        "VALUE_AND_EXPOSURE_GRAIN_UNRESOLVED"
+      ]
+    },
+    {
+      "id": "PV_CIVIL_INFRA",
+      "subsystem": "civil infrastructure",
+      "component": "roads, fencing, grading, drainage, and buildings",
+      "treatment": "withheld",
+      "y_axis": "withheld",
+      "denominator": "31.223744292237445 2024 USD/kWdc mixed reference bucket; asset split required",
+      "withheld_reason_codes": [
+        "MIXED_ASSET_BUCKET_REQUIRES_SPLIT",
+        "NO_CONVECTIVE_CIVIL_FRAGILITY"
+      ]
+    },
+    {
+      "id": "PV_REPLACEMENT_SUPPORT",
+      "subsystem": "replacement support",
+      "component": "mounting/electrical field labor, site management, rental, and inspection",
+      "treatment": "exposure_modifier",
+      "y_axis": "no intrinsic damage ratio",
+      "denominator": "189.59050092005714 2024 USD/kWdc reference pool; allocate once after direct damage with a qualified rule",
+      "withheld_reason_codes": [
+        "ALLOCATION_ONLY_NO_INTRINSIC_DR",
+        "ALLOCATE_ONCE_AFTER_DIRECT_DAMAGE"
+      ]
+    }
+  ],
+  "pathways": [
+    {
+      "pathway_id": "straight_line_convective",
+      "hazard_scope": {
+        "included": [
+          "downburst",
+          "microburst",
+          "macroburst",
+          "non-tornadic thunderstorm outflow",
+          "gust front",
+          "local derecho outflow when local array demand is supplied"
+        ],
+        "excluded": [
+          "tornado direct hit or tornado debris swath",
+          "tropical-cyclone or hurricane wind",
+          "nonconvective synoptic or downslope wind",
+          "hail impact",
+          "lightning",
+          "wind-driven rain ingress",
+          "flood or surge",
+          "business interruption or downtime"
+        ],
+        "event_partition_rule": "one local convective outflow realization per array zone; nested gusts retain the parent convective event ID and are not independent occurrences"
+      },
+      "hazard_axis": {
+        "id": "architecture_specific_convective_demand_index",
+        "preferred_input_field": "architecture_input_contracts[selected_by_array_architecture].preferred_input_field",
+        "permitted_proxy_fields": [
+          "array_height_3s_gust_mps"
+        ],
+        "unit": "dimensionless",
+        "valid_range": [
+          0.0,
+          2.0
+        ],
+        "extrapolation_policy": "fixed tilt: flag above 1.60 and withhold above 2.00; tracker: flag above 1.70 and withhold above 2.00; both flag below 0.20",
+        "routing_field": "array_architecture",
+        "architecture_input_contracts": {
+          "fixed_tilt_ground_mount_screening_v1": {
+            "axis_field": "fixed_tilt_event_to_design_net_pressure_ratio",
+            "preferred_input_field": "fixed_tilt_event_to_design_net_pressure_ratio",
+            "accepted_payloads": [
+              {
+                "mode": "preferred",
+                "required_fields": [
+                  "fixed_tilt_event_to_design_net_pressure_ratio",
+                  "aerodynamic_demand_bridge_id"
+                ]
+              },
+              {
+                "mode": "screening_proxy",
+                "required_fields": [
+                  "array_height_3s_gust_mps",
+                  "qualified_design_array_height_3s_gust_mps",
+                  "convective_profile_bridge_id",
+                  "aerodynamic_demand_bridge_id"
+                ]
+              }
+            ],
+            "definition": "peak transient event net-pressure demand divided by the comparable same-zone design net-pressure demand after geometry, zone, direction, and non-synoptic treatment; T4 curve medians represent the unresolved resistance transition",
+            "permitted_screening_proxy": "(array_height_3s_gust_mps / qualified_design_array_height_3s_gust_mps)^2 only with named convective-profile and aerodynamic-demand bridge IDs",
+            "valid_range": [0.0, 2.0]
+          },
+          "single_axis_tracker_qualified_screening_v1": {
+            "axis_field": "tracker_instability_speed_ratio",
+            "preferred_input_field": "tracker_normal_3s_gust_mps",
+            "accepted_payloads": [
+              {
+                "mode": "preferred_qualified",
+                "required_fields": [
+                  "tracker_normal_3s_gust_mps",
+                  "critical_instability_3s_gust_mps",
+                  "aeroelastic_qualification_id",
+                  "convective_profile_bridge_id",
+                  "tracker_module_configuration",
+                  "tracker_layout_id",
+                  "tracker_position_state",
+                  "tracker_angle_deg",
+                  "tracker_drive_lock_state",
+                  "array_zone",
+                  "qualification_tracker_module_configuration",
+                  "qualification_tracker_layout_id",
+                  "qualification_tracker_position_state",
+                  "qualification_tracker_angle_deg",
+                  "qualification_array_zone",
+                  "qualification_drive_lock_state",
+                  "qualification_speed_averaging_s",
+                  "qualification_speed_reference",
+                  "qualification_convective_profile_bridge_id"
+                ]
+              }
+            ],
+            "definition": "tracker-normal local 3-second gust divided by exact-system critical-instability 3-second gust from named third-party aeroelastic test or qualified model at the attained angle/configuration",
+            "equation": "tracker_normal_3s_gust_mps / critical_instability_3s_gust_mps",
+            "valid_range": [0.0, 2.0],
+            "stow_action_flag": "emit STOW_ACTION_THRESHOLD_EXCEEDED at ratio >= 0.75 only after event/test speed-basis and attained-state matching; this is an operational flag, not a damage threshold",
+            "qualification_basis_required_match": [
+              "3-second averaging period",
+              "array-height tracker-normal speed reference",
+              "convective-profile bridge",
+              "1P/2P module configuration",
+              "tracker layout",
+              "attained angle and position state",
+              "array zone",
+              "drive/lock state"
+            ]
+          }
+        },
+        "prohibited_input": "unbridged 10 m gust, raw regional design wind speed, tracker speed without exact-system Ucrit, EF class, hurricane category, or derecho footprint-average speed"
+      },
+      "selector_logic": [
+        {
+          "field": "array_architecture",
+          "required": true,
+          "allowed": [
+            "fixed_tilt_ground_mount_screening_v1",
+            "single_axis_tracker_qualified_screening_v1"
+          ],
+          "routing": {
+            "fixed_tilt_ground_mount_screening_v1": [
+              "PV_FIXED_TILT_MODULE_FIELD",
+              "PV_FIXED_TILT_SUPPORT_STRUCTURE"
+            ],
+            "single_axis_tracker_qualified_screening_v1": [
+              "PV_TRACKER_MODULE_FIELD",
+              "PV_TRACKER_SBOS_ASSEMBLY"
+            ]
+          },
+          "no_default": true
+        },
+        {
+          "field": "tracker_module_configuration",
+          "required_when": "array_architecture=single_axis_tracker_qualified_screening_v1",
+          "allowed": ["1P", "2P"],
+          "numeric_effect": "resolved through the exact-system critical-instability input; no generic 1P/2P multiplier"
+        },
+        {
+          "field": "aeroelastic_qualification_id",
+          "required_when": "array_architecture=single_axis_tracker_qualified_screening_v1",
+          "numeric_effect": "names the third-party test or qualified model that supplies critical_instability_3s_gust_mps"
+        },
+        {
+          "field": "tracker_layout_id",
+          "required_when": "array_architecture=single_axis_tracker_qualified_screening_v1",
+          "numeric_effect": "must exactly match qualification_tracker_layout_id"
+        }
+      ],
+      "conditioner_logic": [
+        {
+          "field": "array_zone",
+          "required": "required_or_unknown",
+          "allowed": [
+            "interior",
+            "edge",
+            "corner_or_end_row",
+            "unknown"
+          ],
+          "numeric_effect": "fixed tilt may use unknown with flags; tracker numerical evaluation requires a known zone exactly matched to the qualification basis"
+        },
+        {
+          "field": "fastener_and_clamp_audit_state",
+          "required": "required_or_unknown",
+          "allowed": [
+            "qualified_current",
+            "known_deficiency",
+            "unknown"
+          ],
+          "numeric_effect": "none; unknown or qualified state does not select a favorable resistance scenario"
+        },
+        {
+          "field": "tracker_position_state",
+          "required": "tracker_required_known_and_qualification_matched",
+          "allowed": [
+            "confirmed_wind_stow",
+            "commanded_not_confirmed",
+            "normal_tracking",
+            "drive_or_power_fault",
+            "not_applicable_fixed_tilt"
+          ],
+          "numeric_effect": "commanded_not_confirmed is context-only and rejects numerical tracker evaluation; other states must be attained/known and qualification matched"
+        },
+        {
+          "field": "tracker_angle_deg",
+          "required": "tracker_required_known_and_qualification_matched",
+          "numeric_effect": "numeric attained angle required for tracker and must match qualification; fixed tilt uses not_applicable_fixed_tilt"
+        },
+        {
+          "field": "stow_confirmation_basis",
+          "required": "tracker_required_or_unknown",
+          "allowed": [
+            "position_sensor_and_scada",
+            "command_log_only",
+            "field_observation",
+            "unknown",
+            "not_applicable_fixed_tilt"
+          ],
+          "numeric_effect": "tracker numerical evaluation requires position_sensor_and_scada or field_observation; command-log-only/unknown does not prove attained state"
+        },
+        {
+          "field": "control_power_state",
+          "required": "tracker_required_or_unknown",
+          "allowed": [
+            "available",
+            "unavailable",
+            "unknown",
+            "not_applicable_fixed_tilt"
+          ],
+          "numeric_effect": "metadata only"
+        },
+        {
+          "field": "tracker_drive_lock_state",
+          "required": "tracker_required_known_and_qualification_matched",
+          "allowed": [
+            "drive_engaged",
+            "mechanically_locked",
+            "unlocked_or_free",
+            "not_applicable_fixed_tilt"
+          ],
+          "numeric_effect": "must be known and match the exact-system qualification basis for tracker evaluation"
+        },
+        {
+          "field": "wind_direction_change_descriptor",
+          "required": "required_or_unknown",
+          "numeric_effect": "metadata or qualified bridge input; no default modifier"
+        },
+        {
+          "field": "transient_rise_time_s",
+          "required": "required_or_unknown",
+          "numeric_effect": "metadata or qualified bridge input; no default modifier"
+        },
+        {
+          "field": "terrain_topography_wake_descriptor",
+          "required": "required_or_unknown",
+          "numeric_effect": "metadata or qualified bridge input; no default modifier"
+        }
+      ],
+      "exposure_contract": {
+        "required_for_loss": [
+          "event_id",
+          "parent_convective_event_id",
+          "array_zone_id_or_group",
+          "exposed_module_and_structure_count_or_fraction",
+          "explicit_failure_unit_values"
+        ],
+        "no_default_exposed_fraction": true,
+        "rules": [
+          "evaluate each qualified array zone once",
+          "do not multiply a local downburst footprint by full plant TIV",
+          "do not reuse array exposure for inverter, EBOS, SCADA, foundation, or civil units",
+          "do not apply a downstream zone multiplier when the delivered pressure index already contains zoning",
+          "preserve hail and wind loss atoms separately and reconcile shared module disposition before summing"
+        ]
+      },
+      "failure_unit_coverage": [
+        {
+          "failure_unit_id": "PV_FIXED_TILT_MODULE_FIELD",
+          "status": "conditional_screening_curve",
+          "architecture": "fixed_tilt_ground_mount_screening_v1"
+        },
+        {
+          "failure_unit_id": "PV_FIXED_TILT_SUPPORT_STRUCTURE",
+          "status": "conditional_screening_curve",
+          "architecture": "fixed_tilt_ground_mount_screening_v1"
+        },
+        {
+          "failure_unit_id": "PV_TRACKER_MODULE_FIELD",
+          "status": "conditional_screening_curve",
+          "architecture": "single_axis_tracker_qualified_screening_v1"
+        },
+        {
+          "failure_unit_id": "PV_TRACKER_SBOS_ASSEMBLY",
+          "status": "conditional_screening_curve",
+          "architecture": "single_axis_tracker_qualified_screening_v1"
+        },
+        {
+          "failure_unit_id": "PV_FOUNDATION",
+          "status": "withheld"
+        },
+        {
+          "failure_unit_id": "PV_POWER_CONVERSION_AND_ELECTRICAL",
+          "status": "withheld"
+        },
+        {
+          "failure_unit_id": "PV_SCADA_COMMUNICATIONS",
+          "status": "withheld"
+        },
+        {
+          "failure_unit_id": "PV_CIVIL_INFRA",
+          "status": "withheld"
+        },
+        {
+          "failure_unit_id": "PV_REPLACEMENT_SUPPORT",
+          "status": "allocation_only"
+        }
+      ],
+      "curve_records": [
+        {
+          "curve_id": "SWS2_SLC_FIXED_MODULE_ORDERED_STATES",
+          "pathway_id": "straight_line_convective",
+          "failure_unit_id": "PV_FIXED_TILT_MODULE_FIELD",
+          "curve_form": "ordered_damage_state_lognormal",
+          "x_axis": "architecture_specific_convective_demand_index",
+          "y_axis": "failure_unit_damage_ratio",
+          "parameters": {
+            "beta_ln": 0.30,
+            "zero_below": 0.10,
+            "damage_states": [
+              {
+                "state_id": "MODULE_DS0_NO_DIRECT_DAMAGE",
+                "cost_ratio": 0.0,
+                "affected_subsystems": [],
+                "description": "no direct physical module-field repair",
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": ["NO_DIRECT_CALIBRATION_SOURCE"]
+              },
+              {
+                "state_id": "MODULE_DS1_LOCALIZED_REPLACEMENT",
+                "cost_ratio": 0.10,
+                "affected_subsystems": ["modules", "frames", "clamps"],
+                "description": "localized module, frame, or retention replacement",
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": ["DOE_PV_OWNER_GUIDE_2021", "NREL_WEATHER_IMPACTS_2021"]
+              },
+              {
+                "state_id": "MODULE_DS2_FIELD_REPLACEMENT",
+                "cost_ratio": 1.0,
+                "affected_subsystems": ["module field"],
+                "description": "replace the exposed module-field failure unit",
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": ["NO_DIRECT_CALIBRATION_SOURCE"]
+              }
+            ],
+            "capacity_scenarios": [
+              {"scenario_id": "lower_resistance", "state_medians": [0.65, 1.20], "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["DOE_PV_OWNER_GUIDE_2021", "NREL_WEATHER_IMPACTS_2021"], "interpretation": "latent connection or clamp weakness; not a percentile"},
+              {"scenario_id": "central_screening", "state_medians": [0.85, 1.55], "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["ASCE_7_22", "DOE_PV_OWNER_GUIDE_2021"], "interpretation": "screening midpoint around qualified design demand; not fitted"},
+              {"scenario_id": "upper_resistance", "state_medians": [1.05, 1.95], "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["ASCE_7_22", "DOE_FEMP_STORM_HARDENING_2020"], "interpretation": "hardened/qualified screening bound; not a percentile"}
+            ]
+          }
+        },
+        {
+          "curve_id": "SWS2_SLC_FIXED_STRUCTURE_ORDERED_STATES",
+          "pathway_id": "straight_line_convective",
+          "failure_unit_id": "PV_FIXED_TILT_SUPPORT_STRUCTURE",
+          "curve_form": "ordered_damage_state_lognormal",
+          "x_axis": "architecture_specific_convective_demand_index",
+          "y_axis": "failure_unit_damage_ratio",
+          "parameters": {
+            "beta_ln": 0.30,
+            "zero_below": 0.10,
+            "damage_states": [
+              {"state_id": "STRUCT_DS0_NO_DIRECT_DAMAGE", "cost_ratio": 0.0, "affected_subsystems": [], "description": "no direct structural repair", "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["NO_DIRECT_CALIBRATION_SOURCE"]},
+              {"state_id": "STRUCT_DS1_LOCALIZED_REPAIR", "cost_ratio": 0.15, "affected_subsystems": ["rails", "braces", "connections"], "description": "localized connection, rail, brace, or post repair", "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["DOE_PV_OWNER_GUIDE_2021", "DOE_FEMP_STORM_HARDENING_2020"]},
+              {"state_id": "STRUCT_DS2_REPLACE_STRUCTURE_MODULES_SALVAGEABLE", "cost_ratio": 1.0, "affected_subsystems": ["exposed fixed-tilt support structure"], "description": "replace the exposed support structure while module hardware is assumed salvageable/reinstallable", "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["NO_DIRECT_CALIBRATION_SOURCE"]},
+              {"state_id": "STRUCT_DS3_DESTRUCTIVE_COLLAPSE_MODULES_NONSALVAGEABLE", "cost_ratio": 1.0, "affected_subsystems": ["exposed fixed-tilt support structure", "colocated module field"], "description": "destructive collapse state in which colocated module hardware is assumed nonsalvageable; this T4 state alone triggers the central cascade", "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["DOE_PV_OWNER_GUIDE_2021", "NO_DIRECT_CALIBRATION_SOURCE"]}
+            ],
+            "capacity_scenarios": [
+              {"scenario_id": "lower_resistance", "state_medians": [0.90, 1.20, 1.50], "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["DOE_PV_OWNER_GUIDE_2021", "NREL_WEATHER_IMPACTS_2021", "NO_DIRECT_CALIBRATION_SOURCE"], "interpretation": "latent weakness, structure replacement and destructive-collapse/non-salvage assumptions; not percentiles"},
+              {"scenario_id": "central_screening", "state_medians": [1.15, 1.55, 1.90], "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["ASCE_7_22", "DOE_PV_OWNER_GUIDE_2021", "NO_DIRECT_CALIBRATION_SOURCE"], "interpretation": "screening midpoint with separately visible destructive-collapse state; not a design-code failure probability"},
+              {"scenario_id": "upper_resistance", "state_medians": [1.45, 1.95, 2.35], "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["ASCE_7_22", "ASCE_49_21", "NO_DIRECT_CALIBRATION_SOURCE"], "interpretation": "qualified screening bound with module-salvage uncertainty; not a percentile"}
+            ]
+          }
+        },
+        {
+          "curve_id": "SWS2_SLC_TRACKER_MODULE_ORDERED_STATES",
+          "pathway_id": "straight_line_convective",
+          "failure_unit_id": "PV_TRACKER_MODULE_FIELD",
+          "curve_form": "ordered_damage_state_lognormal",
+          "x_axis": "architecture_specific_convective_demand_index",
+          "y_axis": "failure_unit_damage_ratio",
+          "parameters": {
+            "beta_ln": 0.275,
+            "zero_below": 0.10,
+            "damage_states": [
+              {"state_id": "MODULE_DS0_NO_DIRECT_DAMAGE", "cost_ratio": 0.0, "affected_subsystems": [], "description": "no direct physical module-field repair", "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["NO_DIRECT_CALIBRATION_SOURCE"]},
+              {"state_id": "MODULE_DS1_LOCALIZED_REPLACEMENT", "cost_ratio": 0.10, "affected_subsystems": ["modules", "frames", "clamps"], "description": "localized module, frame, or retention replacement", "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["IEA_PVPS_EXTREME_WEATHER_2025", "DOE_PV_OWNER_GUIDE_2021"]},
+              {"state_id": "MODULE_DS2_FIELD_REPLACEMENT", "cost_ratio": 1.0, "affected_subsystems": ["module field"], "description": "replace the exposed tracker module-field failure unit", "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["NO_DIRECT_CALIBRATION_SOURCE"]}
+            ],
+            "capacity_scenarios": [
+              {"scenario_id": "lower_resistance", "state_medians": [0.80, 1.15], "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["IEA_PVPS_EXTREME_WEATHER_2025", "NREL_WEATHER_IMPACTS_2021"], "interpretation": "instability or latent-retention weakness screening bound; not a percentile"},
+              {"scenario_id": "central_screening", "state_medians": [0.95, 1.40], "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["IEA_PVPS_EXTREME_WEATHER_2025", "PV_TRACKER_DOWNBURST_2025"], "interpretation": "screening midpoint on qualified instability ratio; not fitted"},
+              {"scenario_id": "upper_resistance", "state_medians": [1.10, 1.70], "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["IEC_62817", "PV_TRACKER_AEROELASTIC_2024"], "interpretation": "qualified/stable tracker screening bound; not a percentile"}
+            ]
+          }
+        },
+        {
+          "curve_id": "SWS2_SLC_TRACKER_SBOS_ORDERED_STATES",
+          "pathway_id": "straight_line_convective",
+          "failure_unit_id": "PV_TRACKER_SBOS_ASSEMBLY",
+          "curve_form": "ordered_damage_state_lognormal",
+          "x_axis": "architecture_specific_convective_demand_index",
+          "y_axis": "failure_unit_damage_ratio",
+          "parameters": {
+            "beta_ln": 0.275,
+            "zero_below": 0.10,
+            "damage_states": [
+              {"state_id": "STRUCT_DS0_NO_DIRECT_DAMAGE", "cost_ratio": 0.0, "affected_subsystems": [], "description": "no direct tracker structural repair", "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["NO_DIRECT_CALIBRATION_SOURCE"]},
+              {"state_id": "STRUCT_DS1_LOCALIZED_REPAIR", "cost_ratio": 0.15, "affected_subsystems": ["torque tube", "bearings", "drive", "connections"], "description": "localized tracker structural or drive-row repair", "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["IEA_PVPS_EXTREME_WEATHER_2025", "DOE_PV_OWNER_GUIDE_2021"]},
+              {"state_id": "STRUCT_DS2_REPLACE_STRUCTURE_MODULES_SALVAGEABLE", "cost_ratio": 1.0, "affected_subsystems": ["exposed tracker structural-BOS assembly"], "description": "replace the exposed tracker structure while module hardware is assumed salvageable/reinstallable", "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["NO_DIRECT_CALIBRATION_SOURCE"]},
+              {"state_id": "STRUCT_DS3_DESTRUCTIVE_COLLAPSE_MODULES_NONSALVAGEABLE", "cost_ratio": 1.0, "affected_subsystems": ["exposed tracker structural-BOS assembly", "colocated module field"], "description": "destructive collapse state in which colocated module hardware is assumed nonsalvageable; this T4 state alone triggers the central cascade", "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["VALENTIN_TRACKER_FAILURE_2022", "NO_DIRECT_CALIBRATION_SOURCE"]}
+            ],
+            "capacity_scenarios": [
+              {"scenario_id": "lower_resistance", "state_medians": [0.95, 1.15, 1.35], "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["IEA_PVPS_EXTREME_WEATHER_2025", "PV_TRACKER_AEROELASTIC_2024", "NO_DIRECT_CALIBRATION_SOURCE"], "interpretation": "instability/repair/replacement and destructive-collapse screening states; not percentiles"},
+              {"scenario_id": "central_screening", "state_medians": [1.15, 1.40, 1.65], "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["IEA_PVPS_EXTREME_WEATHER_2025", "PV_TRACKER_DOWNBURST_2025", "NO_DIRECT_CALIBRATION_SOURCE"], "interpretation": "screening midpoint on qualified instability ratio with separate destructive-collapse state; not fitted"},
+              {"scenario_id": "upper_resistance", "state_medians": [1.35, 1.70, 2.00], "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["IEC_62817", "ASCE_49_21", "NO_DIRECT_CALIBRATION_SOURCE"], "interpretation": "qualified/stable screening bound with module-salvage uncertainty; not a percentile"}
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "value_linkage": {
+    "implicit_default_profile": null,
+    "primary_reference_basis": {
+      "basis_id": "NLR_Q1_2025_UPV_PV_ONLY_2024_USD",
+      "source": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "installed_capex_usd_per_kwdc": 1120.0,
+      "physical_replaceable_usd_per_kwdc": 877.7957023626668,
+      "direct_hardware_usd_per_kwdc": 656.9814571503722,
+      "replacement_support_usd_per_kwdc": 189.59050092005714,
+      "excluded_soft_nonphysical_usd_per_kwdc": 242.20429763733296,
+      "module_reference_usd_per_kwdc": 291.21485143992487,
+      "mounting_hardware_reference_usd_per_kwdc": 109.98972602739727,
+      "module_plus_mounting_reference_usd_per_kwdc": 401.2045774673221,
+      "module_plus_mounting_share_physical": 0.4570591726382843,
+      "module_plus_mounting_share_installed": 0.35821837273868046,
+      "currency_basis": "2024 USD"
+    },
+    "tracker_sensitivity_basis": {
+      "basis_id": "NREL_Q1_2024_MMP_TRACKER_2023_USD",
+      "module_usd_per_kwdc": 336.0,
+      "structural_bos_usd_per_kwdc": 140.0,
+      "array_direct_hardware_usd_per_kwdc": 476.0,
+      "installed_capex_usd_per_kwdc": 1119.0,
+      "fieldwork_support_usd_per_kwdc": 229.0,
+      "currency_basis": "2023 USD",
+      "use_rule": "sensitivity and source-native architecture cross-check only; never blend with the primary reference. The 140 SBOS row includes unresolved pile/foundation content and cannot be the foundation-excluding tracker curve denominator without a governed BOM reconciliation."
+    },
+    "fixed_tilt_structural_reference": {
+      "range_usd_per_kwdc": [90.0, 120.0],
+      "currency_basis": "2020 USD",
+      "source_id": "NREL_Q1_2021_COST_BENCHMARK",
+      "status": "screening_range_only_no_point_default"
+    },
+    "loss_requirements": [
+      "explicit architecture-specific module and structure values",
+      "explicit exposed count or fraction for each array zone",
+      "central T4 salvage assumption treats only DS3 destructive collapse as making colocated modules nonsalvageable; full-salvage and no-salvage-on-any-structure-replacement bounds remain visible",
+      "the module curve is conditionally applied outside DS3 under an explicitly flagged T4 dependence assumption",
+      "replacement support allocated once outside intrinsic DR",
+      "no full-physical or installed-TIV DR inferred from array-only output"
+    ]
+  },
+  "parameter_tier_table": [
+    {"parameter": "architecture-specific demand-axis design", "pathway_id": "straight_line_convective", "tier": "T3_engineering_proxy_or_adjacent_empirical", "source_ids": ["NIST_THUNDERSTORM_PROFILES_2011", "PV_TRACKER_DOWNBURST_2025", "ASCE_49_21"]},
+    {"parameter": "squared-speed proxy equation", "pathway_id": "straight_line_convective", "tier": "T2_public_lab_standard_or_physics", "source_ids": ["ASCE_7_22", "ASCE_49_21"]},
+    {"parameter": "fixed-tilt versus tracker split", "pathway_id": "straight_line_convective", "tier": "T2_public_lab_standard_or_physics", "source_ids": ["ASCE_7_22", "IEC_62817", "IEA_PVPS_EXTREME_WEATHER_2025"]},
+    {"parameter": "all beta_ln values", "pathway_id": "straight_line_convective", "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["NO_DIRECT_CALIBRATION_SOURCE"]},
+    {"parameter": "all state medians", "pathway_id": "straight_line_convective", "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["NO_DIRECT_CALIBRATION_SOURCE", "IEA_PVPS_EXTREME_WEATHER_2025", "DOE_PV_OWNER_GUIDE_2021"]},
+    {"parameter": "localized module cost ratio 0.10", "pathway_id": "straight_line_convective", "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["NO_DIRECT_CALIBRATION_SOURCE"]},
+    {"parameter": "localized structure cost ratio 0.15", "pathway_id": "straight_line_convective", "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["NO_DIRECT_CALIBRATION_SOURCE"]},
+    {"parameter": "zero_below 0.10", "pathway_id": "straight_line_convective", "tier": "T4_placeholder_or_expert_judgment", "source_ids": ["NO_DIRECT_CALIBRATION_SOURCE"]},
+    {"parameter": "tracker stow numeric effect withheld", "pathway_id": "straight_line_convective", "tier": "T2_public_lab_standard_or_physics", "source_ids": ["PV_TRACKER_AEROELASTIC_2024", "PV_TRACKER_DOWNBURST_2025"]},
+    {"parameter": "primary value basis", "pathway_id": "straight_line_convective", "tier": "T2_public_lab_standard_or_physics", "source_ids": ["NREL_NLR_Q1_2025_PV_BENCHMARK", "VALUE_SOLAR_WORKBOOK"]}
+  ],
+  "evaluation_contract": {
+    "pathway_id_required": true,
+    "architecture_required": true,
+    "no_cross_pathway_fallback": true,
+    "active_architecture_only": true,
+    "central_scenario_id": "central_screening",
+    "scenario_semantics": "unweighted epistemic resistance scenarios, not percentiles or a probability distribution",
+    "terminal_cascade_rule": "for a given scenario, central screening assumes only STRUCT_DS3_DESTRUCTIVE_COLLAPSE_MODULES_NONSALVAGEABLE makes colocated module hardware nonsalvageable; STRUCT_DS2_REPLACE_STRUCTURE_MODULES_SALVAGEABLE does not. Also emit full-salvage and no-salvage-on-any-structure-replacement bounds. This salvage and conditional-dependence treatment is T4 and must not be presented as observed certainty.",
+    "unsupported_architectures": [
+      "single_axis_tracker_without_exact_aeroelastic_qualification",
+      "dual_axis_tracker",
+      "roof_mount",
+      "carport_or_canopy",
+      "floating_pv",
+      "agrivoltaic_elevated_or_vertical",
+      "concentrating_solar"
+    ],
+    "failure_codes": [
+      "ARTIFACT_PIN_INCOMPLETE",
+      "ARTIFACT_PIN_MISMATCH",
+      "PATHWAY_ID_REQUIRED",
+      "PATHWAY_ID_UNKNOWN",
+      "PATHWAY_ID_MISMATCH",
+      "ARRAY_ARCHITECTURE_REQUIRED",
+      "ARRAY_ARCHITECTURE_UNSUPPORTED",
+      "FAILURE_UNIT_ID_UNKNOWN",
+      "FAILURE_UNIT_NOT_APPLICABLE_TO_ARCHITECTURE",
+      "CONVECTIVE_PROFILE_BRIDGE_REQUIRED",
+      "AERODYNAMIC_DEMAND_BRIDGE_REQUIRED",
+      "QUALIFIED_DESIGN_GUST_REQUIRED",
+      "PRESSURE_INDEX_REQUIRED",
+      "AXIS_OUTSIDE_VALID_RANGE",
+      "CONDITIONER_VALUE_UNSUPPORTED",
+      "TRACKER_QUALIFICATION_BASIS_MISMATCH",
+      "EXPLICIT_VALUE_AND_EXPOSURE_REQUIRED",
+      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+    ]
+  },
+  "emit_contract": {
+    "schema_version": "damage_emit.v2",
+    "populated_emit_modes_for_this_cell": [
+      "scalar_mean_plus_bounds",
+      "state_ensemble"
+    ],
+    "result_grain": "pathway_id x array_architecture x failure_unit_id x array_zone",
+    "required_metadata": [
+      "pathway_id",
+      "array_architecture",
+      "axis input and bridge provenance",
+      "scenario identities",
+      "failure-unit denominator",
+      "limitation flags"
+    ],
+    "prohibited_outputs": [
+      "full-plant physical DR",
+      "installed-TIV DR",
+      "frequency",
+      "EAL",
+      "PML",
+      "VaR",
+      "TVaR",
+      "business interruption",
+      "downtime"
+    ]
+  },
+  "derivation_rationale": {
+    "summary": "Mechanism and design evidence support a convective transient-pressure axis, an architecture split, and explicit conditioners. Public evidence does not calibrate damage probabilities, dispersions, or economic damage states; therefore all numerical curve parameters are broad T4 screening assumptions bounded by field observations and standards without being fitted to them.",
+    "rejected_models": [
+      "current v1 combined straight-line/hurricane/derecho pathway",
+      "one curve shared by fixed tilt and trackers",
+      "universal stow multiplier",
+      "five independently summed component logistics",
+      "unbridged 10 m gust-to-array transfer",
+      "standards or hardening costs treated as fragility data"
+    ]
+  },
+  "legacy_comparison": {
+    "current_canonical_pin": "strong_wind_solar@model_v1_0__docs_r3",
+    "current_artifact_sha256": "832f47d69372ec54723a61b8a956addccef07bb39338c3ec99907e116f1855ca",
+    "status": "current remains canonical; proposal is intentionally absent from artifact index and changelog",
+    "known_defect": "current workbook Dashboard!G7 reads mounting_type B7 rather than stow_state B8"
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v3",
+    "cell_id": "strong_wind_solar",
+    "canonical_runtime_artifact": false,
+    "pathway_capabilities": [
+      {
+        "pathway_id": "straight_line_convective",
+        "failure_unit_scalar_dr": "conditional",
+        "scenario_loss_given_value_basis": "conditional",
+        "curve_intrinsic_spread": "nonprobabilistic_epistemic_envelope",
+        "populated_emit_modes": ["scalar_mean_plus_bounds", "state_ensemble"],
+        "conditions": ["exact supported ground-mount architecture selected", "tracker calls pass exact 3-second/reference/profile/configuration/layout/angle/zone/drive qualification-basis matching before DR or the FM action flag", "architecture-specific qualified demand supplied: fixed event/design pressure-demand ratio or qualified speed proxy, or tracker-normal gust plus exact-system Ucrit", "source-height and aerodynamic bridges explicitly identified when proxy inputs are used", "module and structure values and structured colocated array-zone exposure supplied for monetary loss", "T4 module-salvage/dependence bounds and support-allocation rules applied once"],
+        "limitation_flags": ["SCREENING_ENGINEERING_PROXY", "PUBLIC_EVIDENCE_DOES_NOT_CALIBRATE_DAMAGE_PROBABILITIES", "NONPROBABILISTIC_EPISTEMIC_ENVELOPE", "CONVECTIVE_TRANSIENT_AND_AEROELASTIC_EFFECTS_REQUIRE_QUALIFIED_BRIDGE", "TRACKER_STOW_EFFECT_UNCALIBRATED", "NONTERMINAL_MODULE_STRUCTURE_DEPENDENCE_UNCALIBRATED", "MODULE_SALVAGE_AND_CONDITIONAL_DEPENDENCE_T4_ASSUMPTION", "FULL_PLANT_PHYSICAL_LOSS_INCOMPLETE"],
+        "withheld_failure_units": [
+          {"failure_unit_id": "PV_FOUNDATION", "reason_codes": ["NO_CONVECTIVE_FOUNDATION_FRAGILITY", "FOUNDATION_ARCHETYPE_AND_GEOTECHNICAL_STATE_REQUIRED"]},
+          {"failure_unit_id": "PV_POWER_CONVERSION_AND_ELECTRICAL", "reason_codes": ["DIRECT_AERODYNAMIC_CURVE_UNSUPPORTED", "DEBRIS_AND_INGRESS_PATHWAYS_NOT_MODELED"]},
+          {"failure_unit_id": "PV_SCADA_COMMUNICATIONS", "reason_codes": ["DIRECT_AERODYNAMIC_CURVE_UNSUPPORTED", "VALUE_AND_EXPOSURE_GRAIN_UNRESOLVED"]},
+          {"failure_unit_id": "PV_CIVIL_INFRA", "reason_codes": ["MIXED_ASSET_BUCKET_REQUIRES_SPLIT", "NO_CONVECTIVE_CIVIL_FRAGILITY"]},
+          {"failure_unit_id": "PV_REPLACEMENT_SUPPORT", "reason_codes": ["ALLOCATION_ONLY_NO_INTRINSIC_DR", "ALLOCATE_ONCE_AFTER_DIRECT_DAMAGE"]}
+        ]
+      }
+    ],
+    "consumer_annual_metrics": {
+      "computation_owner": "downstream_consumer",
+      "status_before_promotion": "withheld_noncanonical_proposal",
+      "status_after_promotion": "consumer_computable_from_validated_frequency_intensity_coupling_value_and_cap_model",
+      "prerequisites": ["canonical artifact promotion and exact model/docs/schema/SHA pin", "convective-event frequency and local-demand model", "architecture-aware exposure and value basis", "bounded cascade/salvage and support-allocation implementation", "consumer cap-binding validation"],
+      "limitation_flags": ["FREQUENCY_DRIVEN_TAIL_IS_CONSUMER_OWNED", "ENGINEERING_SCENARIOS_ARE_NOT_A_PROBABILITY_DISTRIBUTION", "FULL_PLANT_LOSS_REQUIRES_SEPARATELY_QUALIFIED_FAILURE_UNITS"]
+    },
+    "cap_binding": {
+      "policy": "consumer_enforced_fail_closed",
+      "enforcement_owner": "downstream_consumer",
+      "checks_required": ["exact model/docs/schema/SHA pin", "pathway and architecture match", "axis and bridge provenance", "explicit values and exposure", "terminal module-structure cascade applied once", "support costs not embedded and re-added", "withheld units remain null"],
+      "action_if_fail": "withhold the affected DR, loss, or annual metric; do not substitute the current v1 curve or another wind pathway"
+    },
+    "promotion_gate": {
+      "status": "blocked",
+      "required_before_canonical_use": ["independent engineering review of architecture, axis, proxy, and scenario bounds", "formal bundle, emit, capability, KAT, and workbook validation", "matched field or qualified structural evidence sufficient to review the T4 parameter envelope", "Hazard dual-read and rejection-path tests", "explicit maintainer promotion decision and atomic registry/index/changelog update"]
+    }
+  }
+}

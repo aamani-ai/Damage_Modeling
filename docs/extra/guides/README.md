@@ -12,6 +12,7 @@ the canonical files and explain the normal process.
 | [`hail_solar_curve_request_guide.md`](hail_solar_curve_request_guide.md) | Someone asks for the current solar hail curve or how Hazard should consume it. |
 | [`wildfire_solar_curve_request_guide.md`](wildfire_solar_curve_request_guide.md) | Someone asks for a wildfire x solar curve, multi-subsystem damage treatment, or why the current scaffold must withhold numerical outputs. |
 | [`wind_tornado_wind_curve_request_guide.md`](wind_tornado_wind_curve_request_guide.md) | Someone asks for an onshore-wind curve for convective wind, tornado, generic “strong wind,” or hurricane and needs the correct pathway, lifecycle version, inputs, limits, and fail-closed rule. |
+| [`strong_wind_solar_curve_request_guide.md`](strong_wind_solar_curve_request_guide.md) | Someone asks for convective/strong wind × solar, fixed-tilt versus tracker treatment, stow/Ucrit, a derecho/hurricane/tornado boundary, value linkage, or how to request and interpret the proposed v2 screening curves. |
 | [`source_drop_ingestion_guide.md`](source_drop_ingestion_guide.md) | A new ZIP/source drop arrives and needs inventory, classification, promotion, or staging. |
 | [`damage_curve_skill_usage_guide.md`](damage_curve_skill_usage_guide.md) | Deciding whether `damage_curve_skill` should operate directly in-repo or through an outside package/ZIP flow. |
 

@@ -1,0 +1,113 @@
+{
+  "schema_version": "capability_declaration.v3",
+  "cell_id": "strong_wind_solar",
+  "canonical_runtime_artifact": false,
+  "pathway_capabilities": [
+    {
+      "pathway_id": "straight_line_convective",
+      "failure_unit_scalar_dr": "conditional",
+      "scenario_loss_given_value_basis": "conditional",
+      "curve_intrinsic_spread": "nonprobabilistic_epistemic_envelope",
+      "populated_emit_modes": [
+        "scalar_mean_plus_bounds",
+        "state_ensemble"
+      ],
+      "conditions": [
+        "exact supported ground-mount architecture selected",
+        "tracker calls pass exact 3-second/reference/profile/configuration/layout/angle/zone/drive qualification-basis matching before DR or the FM action flag",
+        "architecture-specific qualified demand supplied: fixed event/design pressure-demand ratio or qualified speed proxy, or tracker-normal gust plus exact-system Ucrit",
+        "source-height and aerodynamic bridges explicitly identified when proxy inputs are used",
+        "module and structure values and structured colocated array-zone exposure supplied for monetary loss",
+        "T4 module-salvage/dependence bounds and support-allocation rules applied once"
+      ],
+      "limitation_flags": [
+        "SCREENING_ENGINEERING_PROXY",
+        "PUBLIC_EVIDENCE_DOES_NOT_CALIBRATE_DAMAGE_PROBABILITIES",
+        "NONPROBABILISTIC_EPISTEMIC_ENVELOPE",
+        "CONVECTIVE_TRANSIENT_AND_AEROELASTIC_EFFECTS_REQUIRE_QUALIFIED_BRIDGE",
+        "TRACKER_STOW_EFFECT_UNCALIBRATED",
+        "NONTERMINAL_MODULE_STRUCTURE_DEPENDENCE_UNCALIBRATED",
+        "MODULE_SALVAGE_AND_CONDITIONAL_DEPENDENCE_T4_ASSUMPTION",
+        "FULL_PLANT_PHYSICAL_LOSS_INCOMPLETE"
+      ],
+      "withheld_failure_units": [
+        {
+          "failure_unit_id": "PV_FOUNDATION",
+          "reason_codes": [
+            "NO_CONVECTIVE_FOUNDATION_FRAGILITY",
+            "FOUNDATION_ARCHETYPE_AND_GEOTECHNICAL_STATE_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_POWER_CONVERSION_AND_ELECTRICAL",
+          "reason_codes": [
+            "DIRECT_AERODYNAMIC_CURVE_UNSUPPORTED",
+            "DEBRIS_AND_INGRESS_PATHWAYS_NOT_MODELED"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_SCADA_COMMUNICATIONS",
+          "reason_codes": [
+            "DIRECT_AERODYNAMIC_CURVE_UNSUPPORTED",
+            "VALUE_AND_EXPOSURE_GRAIN_UNRESOLVED"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_CIVIL_INFRA",
+          "reason_codes": [
+            "MIXED_ASSET_BUCKET_REQUIRES_SPLIT",
+            "NO_CONVECTIVE_CIVIL_FRAGILITY"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_REPLACEMENT_SUPPORT",
+          "reason_codes": [
+            "ALLOCATION_ONLY_NO_INTRINSIC_DR",
+            "ALLOCATE_ONCE_AFTER_DIRECT_DAMAGE"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumer_annual_metrics": {
+    "computation_owner": "downstream_consumer",
+    "status_before_promotion": "withheld_noncanonical_proposal",
+    "status_after_promotion": "consumer_computable_from_validated_frequency_intensity_coupling_value_and_cap_model",
+    "prerequisites": [
+      "canonical artifact promotion and exact model/docs/schema/SHA pin",
+      "convective-event frequency and local-demand model",
+      "architecture-aware exposure and value basis",
+      "bounded cascade/salvage and support-allocation implementation",
+      "consumer cap-binding validation"
+    ],
+    "limitation_flags": [
+      "FREQUENCY_DRIVEN_TAIL_IS_CONSUMER_OWNED",
+      "ENGINEERING_SCENARIOS_ARE_NOT_A_PROBABILITY_DISTRIBUTION",
+      "FULL_PLANT_LOSS_REQUIRES_SEPARATELY_QUALIFIED_FAILURE_UNITS"
+    ]
+  },
+  "cap_binding": {
+    "policy": "consumer_enforced_fail_closed",
+    "enforcement_owner": "downstream_consumer",
+    "checks_required": [
+      "exact model/docs/schema/SHA pin",
+      "pathway and architecture match",
+      "axis and bridge provenance",
+      "explicit values and exposure",
+      "terminal module-structure cascade applied once",
+      "support costs not embedded and re-added",
+      "withheld units remain null"
+    ],
+    "action_if_fail": "withhold the affected DR, loss, or annual metric; do not substitute the current v1 curve or another wind pathway"
+  },
+  "promotion_gate": {
+    "status": "blocked",
+    "required_before_canonical_use": [
+      "independent engineering review of architecture, axis, proxy, and scenario bounds",
+      "formal bundle, emit, capability, KAT, and workbook validation",
+      "matched field or qualified structural evidence sufficient to review the T4 parameter envelope",
+      "Hazard dual-read and rejection-path tests",
+      "explicit maintainer promotion decision and atomic registry/index/changelog update"
+    ]
+  }
+}

@@ -18,6 +18,11 @@ Active research proposal: `wind_tornado_wind` has a noncanonical
 It does not change the current model/docs row above, is absent from the artifact index, and excludes
 hurricane/tropical-cyclone wind.
 
+`strong_wind_solar` also has a noncanonical
+[`model v2.0 / docs r1` convective-wind package](strong_wind_solar/proposed/README_strong_wind_solar__model_v2_0__docs_r1.md).
+It separates fixed tilt from exact-system-qualified trackers, excludes hurricane/tornado/synoptic wind, and
+leaves model v1.0/docs r3 canonical.
+
 ## Portable-package boundary
 
 `wildfire_solar` is repository-current and canonical but is not included in the preserved portable package

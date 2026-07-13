@@ -6,8 +6,8 @@ Bundle v2 protects the payloads used by the current single-axis evaluators. It c
 which two hazard mechanisms share an asset substrate but require different axes, evidence, curve families,
 capabilities, and consumer routing.
 
-This standard defines the proposed v3 contract for that case. It is introduced by the
-`wind_tornado_wind` model v2.0 proposal and remains a draft until that model and its Hazard migration pass
+This standard defines the proposed v3 contract for that case. It is used by the `wind_tornado_wind` and
+`strong_wind_solar` model v2.0 proposals and remains a draft until a v3 model and its Hazard migration pass
 promotion review. Existing canonical artifacts remain bundle v2 and emit v1.
 
 ```yaml
@@ -125,6 +125,24 @@ derecho label  -> not a local turbine intensity
 
 The artifact specifies its preferred input and permitted proxies. The consumer supplies the bridge; Damage
 Modeling evaluates the delivered failure-unit demand. Missing a load-bearing bridge withholds the result.
+
+When one pathway serves materially different asset architectures, `hazard_axis` may additionally carry:
+
+```yaml
+routing_field: array_architecture
+architecture_input_contracts:
+  <architecture_id>:
+    axis_field: <normalized scalar evaluated by curve records>
+    preferred_input_field: <source field>
+    accepted_payloads:
+      - mode: <preferred or proxy>
+        required_fields: [<complete payload>]
+    valid_range: [min, max]
+```
+
+The bundle v3 schema validates this optional structure; the cell validator must also cross-check the exact
+architecture IDs and payload fields against evaluator and KAT behavior. A generic top-level preferred field
+does not authorize cross-architecture fallback.
 
 ## 6. Selector, conditioner, and exposure separation
 

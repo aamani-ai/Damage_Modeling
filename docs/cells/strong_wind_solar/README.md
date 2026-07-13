@@ -30,3 +30,14 @@ Current cell: **strong wind x solar**, semantic damage-model `model v1.0`, repos
 The repository-current artifact supports deterministic failure-unit DR and scenario loss with an explicit
 value/exposure basis. It does not carry curve-intrinsic vulnerability spread. A downstream consumer may compute
 annual metrics from its validated frequency-driven loss distribution and must preserve that limitation flag.
+
+## Active noncanonical convective proposal
+
+A pressure-tested [`model v2.0 / docs r1` proposal](proposed/README_strong_wind_solar__model_v2_0__docs_r1.md)
+rebuilds the cell for an explicit `straight_line_convective` pathway with separate rigid fixed-tilt and
+exact-system-qualified single-axis-tracker records, architecture-specific demand axes, state-aware
+module/structure dependency, explicit value linkage, KATs, and fail-closed neighboring-hazard rules.
+
+It is a screening engineering proxy with T4 numerical envelopes. It is not canonical, is absent from the
+artifact index and changelog, and does not create hurricane or tornado solar curves. Current v1 remains the
+runtime pin.
