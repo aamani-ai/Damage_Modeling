@@ -1,0 +1,434 @@
+{
+  "schema_version": "damage_curve_record_bundle.v1",
+  "cell_id": "tropical_cyclone_wind_wind",
+  "damage_code_id": "TROPICAL_CYCLONE_WIND_WIND_PROPOSED_V0_1",
+  "semantic_damage_model_version": "model v0.1",
+  "documentation_revision": "docs r1",
+  "package_release": "unreleased",
+  "package_baseline": "library v2.5",
+  "lifecycle_state": "scaffold",
+  "promotion_status": "proposed",
+  "review_status": "pressure_tested",
+  "documentation_status": "working_revision",
+  "package_inclusion_status": "not_included",
+  "canonical_runtime_artifact": false,
+  "schema_envelope_status": {
+    "selected_schema": "damage_curve_record_bundle.v1",
+    "use": "noncanonical_zero_curve_scaffold_only",
+    "reason": "Repository-current v2 and v3 bundle schemas require at least one curve record and cannot represent an honest fail-closed scaffold with curve_records empty.",
+    "runtime_publication_allowed": false,
+    "promotion_rule": "A published runtime bundle must use the repository-current schema and contain reviewed output-bearing records."
+  },
+  "ordinate_status": "withheld",
+  "withheld_reason_codes": [
+    "NO_RUNTIME_CURVE"
+  ],
+  "source_dossier": "docs/cells/tropical_cyclone_wind_wind/proposed/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v0_1__docs_r1.md",
+  "source_workbook": "docs/cells/tropical_cyclone_wind_wind/proposed/damage_curve_records_tropical_cyclone_wind_wind__model_v0_1__docs_r1.xlsx",
+  "source_register": "docs/cells/tropical_cyclone_wind_wind/proposed/SOURCE_REGISTER_tropical_cyclone_wind_wind__model_v0_1__docs_r1.csv",
+  "claim_parameter_register": "docs/cells/tropical_cyclone_wind_wind/proposed/CLAIM_PARAMETER_REGISTER_tropical_cyclone_wind_wind__model_v0_1__docs_r1.csv",
+  "bounded_evidence_search_log": "docs/cells/tropical_cyclone_wind_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md",
+  "parameter_tier_table_ref": "docs/cells/tropical_cyclone_wind_wind/proposed/PARAMETER_TIER_TABLE_tropical_cyclone_wind_wind__model_v0_1__docs_r1.csv",
+  "value_crosswalk_ref": "docs/cells/tropical_cyclone_wind_wind/proposed/VALUE_CROSSWALK_tropical_cyclone_wind_wind__model_v0_1__docs_r1.csv",
+  "site_condition_adapter_ref": "docs/cells/tropical_cyclone_wind_wind/proposed/SITE_CONDITION_ADAPTER_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md",
+  "pressure_test_ref": "docs/cells/tropical_cyclone_wind_wind/proposed/PRESSURE_TEST_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md",
+  "known_answer_tests": "docs/cells/tropical_cyclone_wind_wind/proposed/known_answer_tests_tropical_cyclone_wind_wind__model_v0_1__docs_r1.json",
+  "pathway": {
+    "pathway_id": "tropical_cyclone_wind",
+    "exact_match_required": true,
+    "fallback_allowed": false,
+    "event_family_id_required": true,
+    "neighboring_routes": [
+      {
+        "mechanism": "tropical_cyclone_spawned_tornado",
+        "governed_pathway_id": "tornado_direct_hit",
+        "status": "proposed_noncanonical_no_current_cutover"
+      },
+      {
+        "mechanism": "storm_surge_or_flood",
+        "governed_pathway_id": null,
+        "status": "TBD_not_a_runtime_pathway_id_in_this_artifact"
+      },
+      {
+        "mechanism": "windborne_debris",
+        "governed_pathway_id": null,
+        "status": "TBD_not_a_runtime_pathway_id_in_this_artifact"
+      },
+      {
+        "mechanism": "wind_driven_rain_ingress",
+        "governed_pathway_id": null,
+        "status": "TBD_not_a_runtime_pathway_id_in_this_artifact"
+      }
+    ],
+    "compound_event_rule": "Preserve one event_family_id and prevent duplicate failure-unit/value charges downstream."
+  },
+  "asset_archetype": {
+    "asset": "land_based_multi_megawatt_horizontal_axis_wind_farm",
+    "reference_configuration": "generic_modern_onshore_reference_value_archetype",
+    "configuration_is_vulnerability_selector": true,
+    "target_applicability_status": "not_frozen",
+    "scope_included": [
+      "direct_tropical_cyclone_wind_physical_destruction"
+    ],
+    "scope_excluded": [
+      "tropical_cyclone_spawned_tornado",
+      "storm_surge",
+      "pluvial_flood",
+      "scour_or_saturated_soil_failure",
+      "debris_impact",
+      "wind_driven_rain_ingress",
+      "offshore_wave_or_support_structure_loading",
+      "business_interruption",
+      "curtailment",
+      "frequency_and_annual_or_tail_metrics"
+    ]
+  },
+  "value_basis": {
+    "status": "reference_archetype_only_not_enabled_for_loss",
+    "source_workbook": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "source_register_id": "TCWW-S010",
+    "crosswalk": "docs/cells/tropical_cyclone_wind_wind/proposed/VALUE_CROSSWALK_tropical_cyclone_wind_wind__model_v0_1__docs_r1.csv",
+    "unit": "2023_USD_per_kW",
+    "turbine_equipment_direct": 1090,
+    "other_direct_withheld": 239,
+    "support_once": 294,
+    "physical_reference": 1623,
+    "excluded_soft_sunk_nonphysical": 345,
+    "installed_reference": 1968,
+    "reconciliation": "1090 + 239 + 294 = 1623; 1623 + 345 = 1968",
+    "site_override_required_for_loss": true,
+    "values_embedded_as_curve_denominators": false,
+    "prohibited_use": "Reference shares are denominator conversions, not damage caps or whole-site exposure defaults."
+  },
+  "hazard_axis": {
+    "id": "WITHHELD_PENDING_QUALIFIED_TC_BRIDGE",
+    "status": "not_frozen",
+    "runtime_damage_mapping_status": "withheld_no_runtime_curve",
+    "source_native_objects": [
+      {
+        "id": "NHC_MAXIMUM_SUSTAINED_SURFACE_WIND",
+        "speed_unit": "m_per_s",
+        "averaging_period_s": 60,
+        "height_m": 10,
+        "role": "upstream_storm_field_descriptor",
+        "runtime_curve_compatible": false,
+        "source_id": "TCWW-S001"
+      }
+    ],
+    "candidate_axis_evidence": {
+      "numeric_values_embedded": false,
+      "audit_record": "docs/cells/tropical_cyclone_wind_wind/proposed/NUMERICAL_CANDIDATE_AUDIT_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md",
+      "runtime_use": "prohibited"
+    },
+    "required_future_bridge_outputs": [
+      "hub_height_10min_wind_mps",
+      "hub_height_3s_gust_mps",
+      "rotor_effective_3s_gust_mps",
+      "duration_above_threshold_s_with_threshold_id",
+      "direction_change_deg_with_window",
+      "turbulence_descriptor",
+      "bridge_uncertainty"
+    ],
+    "extrapolation_policy": "reject_no_runtime_axis",
+    "category_guardrail": "Saffir-Simpson category is metadata only and cannot be used as a damage x-axis.",
+    "conversion_guardrail": "No global power-law exponent, gust factor, or height/time conversion is adopted."
+  },
+  "input_field_contract": {
+    "canonical_contract_ref": "docs/cells/tropical_cyclone_wind_wind/proposed/tropical_cyclone_wind_wind_damage_code_metadata_spec__model_v0_1__docs_r1.md",
+    "identity_required": [
+      "event_id",
+      "event_family_id",
+      "pathway_id"
+    ],
+    "source_wind_required_for_research_state": [
+      "source_wind_speed_mps",
+      "source_wind_height_m",
+      "source_wind_averaging_period_s",
+      "source_wind_exposure_standard",
+      "source_wind_product_id",
+      "source_wind_valid_time"
+    ],
+    "fixed_selectors_capture_only": [
+      "turbine_make_model",
+      "rated_power_mw",
+      "hub_height_m",
+      "rotor_diameter_m",
+      "tower_geometry_id",
+      "tower_material",
+      "foundation_type",
+      "iec_design_class",
+      "tropical_cyclone_design_class",
+      "tuned_mass_damper",
+      "design_vintage"
+    ],
+    "event_conditioners_capture_only": [
+      "operating_state",
+      "yaw_state",
+      "pitch_state",
+      "brake_state",
+      "grid_state",
+      "backup_power_state",
+      "control_history_basis",
+      "duration_above_threshold_s",
+      "direction_change_deg",
+      "turbulence_descriptor"
+    ],
+    "runtime_status": "field_validation_only_all_numeric_damage_outputs_withheld"
+  },
+  "proposed_future_y_axis": {
+    "id": "conditional_direct_repair_or_replacement_cost_ratio",
+    "status": "withheld",
+    "reason_codes": [
+      "NO_RUNTIME_CURVE"
+    ],
+    "definition": "Expected direct repair-or-replacement cost divided by pre-event direct replacement value of the same failure unit conditional on delivered TC-wind demand and verified selector/conditioner state.",
+    "denominator_rule": "Use the same failure unit in numerator and denominator; do not use whole-site installed or physical reference value for a component response.",
+    "support_cost_rule": "Allocate fieldwork and transport once after damaged units and dispositions are identified; no independent support DR.",
+    "excluded_from_ordinate": [
+      "business_interruption",
+      "revenue_or_curtailment",
+      "frequency",
+      "insurance_or_financial_terms",
+      "unrelated_site_value"
+    ]
+  },
+  "failure_units": [
+    {
+      "id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "subsystem": "REPEATED_TURBINE",
+      "component": "ROTOR_NACELLE_TOWER_DEPENDENCY_SAFE_ASSEMBLY",
+      "pathway": "tropical_cyclone_wind",
+      "treatment": "candidate_mutually_exclusive_state_model_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Wind_Map rows 2:9; 1090 2023 USD/kW reference",
+      "exposure_grain": "per_turbine_point_or_rotor",
+      "open_split": "all-severity serviceability, repair, major replacement and terminal states with same-unit cost"
+    },
+    {
+      "id": "WT_FOUNDATION",
+      "subsystem": "FOUNDATION",
+      "component": "TURBINE_FOUNDATION_OR_BASE",
+      "pathway": "tropical_cyclone_wind",
+      "treatment": "candidate_failure_unit_no_curve_not_zero",
+      "ordinate_status": "withheld",
+      "value_lineage": "Wind_Map row 10; 120 2023 USD/kW reference",
+      "exposure_grain": "per_turbine_point",
+      "open_split": "wind-only capacity and post-collapse inspection/repair disposition"
+    },
+    {
+      "id": "WT_EXTERNAL_ELECTRICAL",
+      "subsystem": "PLANT_ELECTRICAL",
+      "component": "PAD_EQUIPMENT_COLLECTION_SUBSTATION_CONTROL_ROLLUP",
+      "pathway": "tropical_cyclone_wind",
+      "treatment": "decomposition_gate_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Wind_Map row 12; 72 2023 USD/kW reference",
+      "exposure_grain": "point_line_network_and_shared_point_split_required",
+      "open_split": "pad transformer/switchgear, collection segments, substation and control building"
+    },
+    {
+      "id": "WT_CIVIL_INFRA",
+      "subsystem": "PLANT_CIVIL",
+      "component": "ACCESS_STAGING_FACILITIES_MIXED_ROLLUP",
+      "pathway": "tropical_cyclone_wind",
+      "treatment": "decomposition_gate_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Wind_Map row 11; 47 2023 USD/kW reference",
+      "exposure_grain": "line_network_polygon_split_required",
+      "open_split": "roads, crane pads, buildings, fences and facilities"
+    },
+    {
+      "id": "SUPPORT_FIELDWORK",
+      "subsystem": "SUPPORT",
+      "component": "ASSEMBLY_AND_INSTALLATION",
+      "pathway": "all_shared",
+      "treatment": "support_cost_allocate_once_no_curve",
+      "ordinate_status": "not_applicable",
+      "value_lineage": "Wind_Map row 13; 100 2023 USD/kW reference",
+      "exposure_grain": "post_damage_repair_scope",
+      "open_split": "claims/site rule"
+    },
+    {
+      "id": "SUPPORT_TRANSPORT_LOGISTICS",
+      "subsystem": "SUPPORT",
+      "component": "WIND_TURBINE_TRANSPORT",
+      "pathway": "all_shared",
+      "treatment": "support_cost_allocate_once_no_curve",
+      "ordinate_status": "not_applicable",
+      "value_lineage": "Wind_Map row 14; 194 2023 USD/kW reference",
+      "exposure_grain": "post_damage_replacement_scope",
+      "open_split": "distance, crane, access and replacement rule"
+    }
+  ],
+  "candidate_fragility_evidence": {
+    "status": "audit_only_not_runtime_shaped",
+    "numeric_values_embedded": false,
+    "runtime_enabled": false,
+    "source_ids": [
+      "TCWW-S003",
+      "TCWW-S005"
+    ],
+    "audit_record": "docs/cells/tropical_cyclone_wind_wind/proposed/NUMERICAL_CANDIDATE_AUDIT_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md",
+    "workbook_sheet": "Candidate_Fragility",
+    "prohibited_use": "Candidate structural probabilities and parameters cannot populate a damage emit or be interpreted as economic damage ratios."
+  },
+  "curve_records": [],
+  "parameter_tier_table": [
+    {
+      "parameter": "NHC source averaging and height semantics",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "TCWW-S001"
+      ],
+      "status": "adopt_source_metadata_only"
+    },
+    {
+      "parameter": "Jaimes DS3 parameters",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "TCWW-S005"
+      ],
+      "status": "defer_candidate_audit_only"
+    },
+    {
+      "parameter": "Rose tower-buckling parameters",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "TCWW-S003"
+      ],
+      "status": "defer_candidate_validation_only"
+    },
+    {
+      "parameter": "NREL reference value ledger",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "TCWW-S010"
+      ],
+      "status": "adopt_reference_only"
+    },
+    {
+      "parameter": "runtime curve count",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "GOVERNANCE_CONTRACT"
+      ],
+      "status": "adopt_zero_fail_closed"
+    }
+  ],
+  "derivation_rationale": {
+    "decision": "withhold_all_runtime_damage_curves",
+    "reason": "No public matched evidence chain connects representative turbine-local TC demand through exhaustive mutually exclusive dispositions to same-unit direct repair or replacement cost.",
+    "retained_evidence": "Narrow source-native tower-collapse fragilities, mechanism/conditioner evidence, case-study selectors and a reference value ledger remain audit inputs.",
+    "promotion_gate": "Approve a target axis and bridge, target-fleet applicability, all-severity state/cost model, unit-specific value and exposure, uncertainty, validation, independent review and consumer cutover."
+  },
+  "loss_assembly_contract": {
+    "status": "withheld",
+    "reason_codes": [
+      "NO_RUNTIME_CURVE"
+    ],
+    "proposed_grain": "failure_unit_by_asset_subject_by_delivered_TC_demand_and_state",
+    "component_damage_ratio_input_status": "unavailable",
+    "whole_site_exposure_default": "prohibited",
+    "terminal_state_double_count": "prohibited",
+    "support_cost_rule": "allocate_fieldwork_and_transport_once_after_damaged_units_and_dispositions_are_known",
+    "coastal_peril_overlap_rule": "do_not_add_hurricane_inclusive_coastal_strong_wind_and_TC_wind_without_governed_partition"
+  },
+  "emit_contract": {
+    "schema_version": "damage_emit.v1",
+    "supported_emit_modes": [
+      "scalar_mean",
+      "scalar_mean_plus_bounds",
+      "discrete_state_table",
+      "parametric_distribution",
+      "state_ensemble"
+    ],
+    "populated_emit_modes_for_this_cell": [],
+    "runtime_emit_status": "withheld",
+    "withheld_reason_codes": [
+      "NO_RUNTIME_CURVE"
+    ],
+    "candidate_fragility_emit_prohibited": true
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v1",
+    "cell_id": "tropical_cyclone_wind_wind",
+    "spread_carried": false,
+    "emit_modes_populated_by_cell": [],
+    "metrics_supportable": {
+      "failure_unit_scalar_dr": "withheld",
+      "scenario_loss_given_value_basis": "withheld",
+      "scalar_eal": "withheld",
+      "pml": "withheld",
+      "var": "withheld",
+      "tvar": "withheld"
+    },
+    "withheld_reason_by_metric": {
+      "failure_unit_scalar_dr": [
+        "NO_RUNTIME_CURVE"
+      ],
+      "scenario_loss_given_value_basis": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_VALUE_BASIS",
+        "MISSING_EXPOSURE_OR_COUPLING"
+      ],
+      "scalar_eal": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_VALUE_BASIS",
+        "MISSING_EXPOSURE_OR_COUPLING",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "pml": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "var": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "tvar": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ]
+    },
+    "withheld_reason_codes": [
+      "NO_RUNTIME_CURVE",
+      "MISSING_VALUE_BASIS",
+      "MISSING_EXPOSURE_OR_COUPLING",
+      "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+    ],
+    "cap_binding": {
+      "policy": "fail_closed",
+      "preflight_status": "not_executed_no_distribution",
+      "required_before_scalar_eal": true,
+      "tolerance_pct": null,
+      "tolerance_status": "not_applicable_no_distribution",
+      "action_if_fail": "withhold_scalar_eal_and_require_tail_capable_emit"
+    }
+  },
+  "legacy_or_deprecated_artifacts": [
+    {
+      "artifact_id": "LEGACY_HURRICANE_X_WIND_RESEARCH_MEMO",
+      "artifact_type": "external_legacy_research_narrative",
+      "origin_repository": "infrasure-damage-curves",
+      "former_filename": "research/HURRICANE_x_WIND.md",
+      "source_commit_sha": "12653b2c3d5a013c9524228243ea666c35bb3814",
+      "source_file_blob_sha": "d94162e593acc33dde914d9ebedb6256e4772dae",
+      "status": "rejected_for_runtime_calibration",
+      "runtime_load_prohibited": true,
+      "retained_use": "source discovery and numerical rejection audit",
+      "audit_record": "docs/cells/tropical_cyclone_wind_wind/proposed/LEGACY_EVIDENCE_INGESTION_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md"
+    },
+    {
+      "artifact_id": "HAZARD_HURRICANE_WIND_FARM_M3_PLACEHOLDER",
+      "artifact_type": "consumer_legacy_placeholder",
+      "origin_repository": "Hazard_modeling",
+      "former_filename": "Notebooks/hurricane/wind_farm/m3_damage/01_damage.py",
+      "source_commit_sha": "63a01ca190d14fc87ecf9879abcfb7dad21625be",
+      "source_file_blob_sha": "5f673dc941290ca4d1607f59f73a803103855441",
+      "status": "regression_fixture_only",
+      "runtime_load_prohibited_by_this_cell": true,
+      "retained_use": "future consumer migration comparison",
+      "audit_record": "docs/cells/tropical_cyclone_wind_wind/proposed/LEGACY_EVIDENCE_INGESTION_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md"
+    }
+  ]
+}

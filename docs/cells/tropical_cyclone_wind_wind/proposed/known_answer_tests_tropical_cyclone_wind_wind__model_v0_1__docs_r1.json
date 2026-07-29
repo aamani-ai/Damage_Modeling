@@ -1,0 +1,401 @@
+{
+  "schema_version": "known_answer_tests.v1",
+  "status": "research_scaffold_fail_closed_contract_tests",
+  "cell_id": "tropical_cyclone_wind_wind",
+  "semantic_damage_model_version": "model v0.1",
+  "documentation_revision": "docs r1",
+  "runtime_curve_count": 0,
+  "runtime_curve_known_answer_tests": [],
+  "test_invariant": "No valid input may produce a numeric damage ratio or loss while curve_records is empty; candidate structural fragility calculations are excluded from this runtime contract fixture.",
+  "canonical_rejection_codes": [
+    "EVENT_ID_REQUIRED",
+    "EVENT_FAMILY_ID_REQUIRED",
+    "PATHWAY_ID_REQUIRED",
+    "UNSUPPORTED_PATHWAY_ID",
+    "CATEGORY_NOT_DAMAGE_AXIS",
+    "SOURCE_WIND_METADATA_INCOMPLETE",
+    "SOURCE_AXIS_MISMATCH",
+    "EXPOSURE_GRAIN_MISMATCH",
+    "COASTAL_PERIL_OVERLAP_REQUIRES_PARTITION"
+  ],
+  "tests": [
+    {
+      "test_id": "TCWW_VALID_NHC_UPSTREAM_WITHHOLDS",
+      "category": "identity_axis_validation_and_withholding",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_001",
+        "event_family_id": "family_fixture_001",
+        "pathway_id": "tropical_cyclone_wind",
+        "source_wind_speed_mps": 50,
+        "source_wind_height_m": 10,
+        "source_wind_averaging_period_s": 60,
+        "source_wind_exposure_standard": "NHC_UNOBSTRUCTED_EXPOSURE_FIXTURE",
+        "source_wind_product_id": "NHC_COMPATIBLE_FIXTURE",
+        "source_wind_valid_time": "2026-01-01T00:00:00Z"
+      },
+      "expected_output": {
+        "identity_contract": "accepted",
+        "source_axis_contract": "accepted_research_state",
+        "runtime_demand_mapping": "withheld",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "TCWW-S001;GOVERNANCE_CONTRACT",
+      "notes": "Acceptance of an upstream storm-field object does not authorize a damage emit."
+    },
+    {
+      "test_id": "TCWW_COMPLETE_SITE_AND_VALUE_STILL_WITHHOLDS",
+      "category": "withholding_precedence",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_002",
+        "event_family_id": "family_fixture_002",
+        "pathway_id": "tropical_cyclone_wind",
+        "source_wind_speed_mps": 60,
+        "source_wind_height_m": 10,
+        "source_wind_averaging_period_s": 60,
+        "source_wind_exposure_standard": "NHC_UNOBSTRUCTED_EXPOSURE_FIXTURE",
+        "source_wind_product_id": "NHC_COMPATIBLE_FIXTURE",
+        "source_wind_valid_time": "2026-01-01T00:00:00Z",
+        "asset_id": "wind_farm_fixture",
+        "asset_subject_id": "turbine_fixture_01",
+        "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+        "asset_subject_grain": "turbine_point",
+        "value_basis_id": "site_specific_fixture",
+        "direct_replacement_value_usd": 1000000,
+        "at_risk_fraction": 1,
+        "at_risk_fraction_basis": "fixture_inventory"
+      },
+      "expected_output": {
+        "site_value_contract": "accepted_fixture",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "Complete class-template value and exposure cannot bypass an empty curve array."
+    },
+    {
+      "test_id": "TCWW_MISSING_PATHWAY_REJECTS",
+      "category": "pathway_routing",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_003",
+        "event_family_id": "family_fixture_003"
+      },
+      "expected_output": {
+        "identity_contract": "rejected",
+        "error_code": "PATHWAY_ID_REQUIRED",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "Pathway is never inferred from wind speed."
+    },
+    {
+      "test_id": "TCWW_WRONG_PATHWAY_REJECTS",
+      "category": "pathway_routing",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_004",
+        "event_family_id": "family_fixture_004",
+        "pathway_id": "straight_line_convective"
+      },
+      "expected_output": {
+        "identity_contract": "rejected",
+        "error_code": "UNSUPPORTED_PATHWAY_ID",
+        "fallback_curve_used": false,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "No convective/tornado numerical fallback is allowed."
+    },
+    {
+      "test_id": "TCWW_MISSING_EVENT_ID_REJECTS",
+      "category": "event_identity",
+      "curve_id": null,
+      "input": {
+        "event_family_id": "family_fixture_005",
+        "pathway_id": "tropical_cyclone_wind"
+      },
+      "expected_output": {
+        "identity_contract": "rejected",
+        "error_code": "EVENT_ID_REQUIRED",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "Occurrence identity is required before compound-pathway coordination."
+    },
+    {
+      "test_id": "TCWW_MISSING_EVENT_FAMILY_REJECTS",
+      "category": "event_identity",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_006",
+        "pathway_id": "tropical_cyclone_wind"
+      },
+      "expected_output": {
+        "identity_contract": "rejected",
+        "error_code": "EVENT_FAMILY_ID_REQUIRED",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "TC child pathways need one parent identity."
+    },
+    {
+      "test_id": "TCWW_CATEGORY_ONLY_REJECTS_AS_AXIS",
+      "category": "axis_validation",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_007",
+        "event_family_id": "family_fixture_007",
+        "pathway_id": "tropical_cyclone_wind",
+        "saffir_simpson_category": 3
+      },
+      "expected_output": {
+        "source_axis_contract": "rejected",
+        "error_code": "CATEGORY_NOT_DAMAGE_AXIS",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "TCWW-S001;GOVERNANCE_CONTRACT",
+      "notes": "Category may be context but cannot replace numerical wind and reference metadata."
+    },
+    {
+      "test_id": "TCWW_SOURCE_WIND_METADATA_INCOMPLETE_REJECTS",
+      "category": "axis_validation",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_008",
+        "event_family_id": "family_fixture_008",
+        "pathway_id": "tropical_cyclone_wind",
+        "source_wind_speed_mps": 50
+      },
+      "expected_output": {
+        "source_axis_contract": "rejected",
+        "error_code": "SOURCE_WIND_METADATA_INCOMPLETE",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "TCWW-S001;GOVERNANCE_CONTRACT",
+      "notes": "Height, averaging period, exposure convention, product, and valid time are load-bearing lineage."
+    },
+    {
+      "test_id": "TCWW_CANDIDATE_CROSS_AXIS_REJECTS",
+      "category": "candidate_audit_separation",
+      "curve_id": null,
+      "input": {
+        "audit_context": true,
+        "candidate_id": "JAIMES_DS3_EXACT_ARCHETYPE",
+        "source_native_axis_id": "ROSE_10MIN_HUB_WIND"
+      },
+      "expected_output": {
+        "candidate_audit_contract": "rejected",
+        "error_code": "SOURCE_AXIS_MISMATCH",
+        "runtime_damage_emit_allowed": false,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "TCWW-S003;TCWW-S005;GOVERNANCE_CONTRACT",
+      "notes": "The KAT contains no candidate formula or expected probability; numerical reproduction stays in the audit workbook."
+    },
+    {
+      "test_id": "TCWW_UNKNOWN_CONTROL_STATE_NO_DEFAULT",
+      "category": "conditioner_guardrail",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_010",
+        "event_family_id": "family_fixture_010",
+        "pathway_id": "tropical_cyclone_wind",
+        "source_wind_speed_mps": 50,
+        "source_wind_height_m": 10,
+        "source_wind_averaging_period_s": 60,
+        "source_wind_exposure_standard": "NHC_UNOBSTRUCTED_EXPOSURE_FIXTURE",
+        "source_wind_product_id": "NHC_COMPATIBLE_FIXTURE",
+        "source_wind_valid_time": "2026-01-01T00:00:00Z",
+        "yaw_state": "unknown",
+        "pitch_state": "unknown",
+        "grid_state": "unknown",
+        "backup_power_state": "unknown"
+      },
+      "expected_output": {
+        "conditioner_default_applied": false,
+        "protective_credit_applied": false,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "TCWW-S003;TCWW-S006;TCWW-S007;GOVERNANCE_CONTRACT",
+      "notes": "Unknown state does not select the aligned, non-yaw, favorable, or worst response."
+    },
+    {
+      "test_id": "TCWW_FOUNDATION_WITHHELD_NOT_ZERO",
+      "category": "coverage_guardrail",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_011",
+        "event_family_id": "family_fixture_011",
+        "pathway_id": "tropical_cyclone_wind",
+        "source_wind_speed_mps": 50,
+        "source_wind_height_m": 10,
+        "source_wind_averaging_period_s": 60,
+        "source_wind_exposure_standard": "NHC_UNOBSTRUCTED_EXPOSURE_FIXTURE",
+        "source_wind_product_id": "NHC_COMPATIBLE_FIXTURE",
+        "source_wind_valid_time": "2026-01-01T00:00:00Z",
+        "failure_unit_id": "WT_FOUNDATION"
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "zero_immunity_assumption_applied": false
+      },
+      "tolerance": null,
+      "source": "TCWW-S006;TCWW-S009;GOVERNANCE_CONTRACT",
+      "notes": "Unmodeled is not zero."
+    },
+    {
+      "test_id": "TCWW_COLLECTION_TURBINE_FRACTION_REJECTS",
+      "category": "exposure_grain",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_012",
+        "event_family_id": "family_fixture_012",
+        "pathway_id": "tropical_cyclone_wind",
+        "source_wind_speed_mps": 50,
+        "source_wind_height_m": 10,
+        "source_wind_averaging_period_s": 60,
+        "source_wind_exposure_standard": "NHC_UNOBSTRUCTED_EXPOSURE_FIXTURE",
+        "source_wind_product_id": "NHC_COMPATIBLE_FIXTURE",
+        "source_wind_valid_time": "2026-01-01T00:00:00Z",
+        "failure_unit_id": "WT_EXTERNAL_ELECTRICAL",
+        "asset_subject_id": "collection_network_fixture",
+        "asset_subject_grain": "network",
+        "at_risk_fraction": 0.25,
+        "at_risk_fraction_basis": "turbine_count_fraction"
+      },
+      "expected_output": {
+        "exposure_contract": "rejected",
+        "error_code": "EXPOSURE_GRAIN_MISMATCH",
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "TCWW-S010;GOVERNANCE_CONTRACT",
+      "notes": "Collection requires line/network allocation, not a turbine-count fraction."
+    },
+    {
+      "test_id": "TCWW_SPAWNED_TORNADO_ROUTES_SEPARATELY",
+      "category": "compound_event_routing",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_013_child_tornado",
+        "event_family_id": "family_fixture_013",
+        "pathway_id": "tornado_direct_hit"
+      },
+      "expected_output": {
+        "identity_contract": "rejected_by_this_cell_proposed_neighboring_route_not_current_runtime",
+        "error_code": "UNSUPPORTED_PATHWAY_ID",
+        "parent_event_family_preserved": true,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "The child occurrence shares family identity but cannot use the TC-wind cell. tornado_direct_hit is a proposed noncanonical neighboring route ID with no current consumer cutover."
+    },
+    {
+      "test_id": "TCWW_COASTAL_OVERLAP_REQUIRES_PARTITION",
+      "category": "peril_overlap",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_014",
+        "event_family_id": "family_fixture_014",
+        "pathway_id": "tropical_cyclone_wind",
+        "source_wind_speed_mps": 50,
+        "source_wind_height_m": 10,
+        "source_wind_averaging_period_s": 60,
+        "source_wind_exposure_standard": "NHC_UNOBSTRUCTED_EXPOSURE_FIXTURE",
+        "source_wind_product_id": "NHC_COMPATIBLE_FIXTURE",
+        "source_wind_valid_time": "2026-01-01T00:00:00Z",
+        "existing_coastal_strong_wind_surface_includes_hurricane": true,
+        "peril_partition_id": null
+      },
+      "expected_output": {
+        "overlap_contract": "rejected",
+        "error_code": "COASTAL_PERIL_OVERLAP_REQUIRES_PARTITION",
+        "additive_loss_allowed": false,
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "HAZARD_CONSUMER_AUDIT;GOVERNANCE_CONTRACT",
+      "notes": "A future TC result cannot be added to a hurricane-inclusive coastal wind result without a governed partition."
+    }
+  ]
+}

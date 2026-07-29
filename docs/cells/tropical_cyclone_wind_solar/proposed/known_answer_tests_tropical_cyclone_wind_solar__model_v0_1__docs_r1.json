@@ -1,0 +1,392 @@
+{
+  "schema_version": "known_answer_tests.v1",
+  "status": "research_scaffold_fail_closed_contract_tests",
+  "cell_id": "tropical_cyclone_wind_solar",
+  "semantic_damage_model_version": "model v0.1",
+  "documentation_revision": "docs r1",
+  "runtime_curve_count": 0,
+  "runtime_curve_known_answer_tests": [],
+  "test_invariant": "No valid input may produce a numeric damage ratio or loss while curve_records is empty; site-level structural fragility candidates and legacy placeholder calculations are excluded from the runtime contract fixture.",
+  "canonical_rejection_codes": [
+    "EVENT_ID_REQUIRED",
+    "EVENT_FAMILY_ID_REQUIRED",
+    "PATHWAY_ID_REQUIRED",
+    "UNSUPPORTED_PATHWAY_ID",
+    "CATEGORY_NOT_DAMAGE_AXIS",
+    "SOURCE_WIND_METADATA_INCOMPLETE",
+    "SOURCE_AXIS_MISMATCH",
+    "ARRAY_ARCHITECTURE_REQUIRED",
+    "UNSUPPORTED_ARRAY_ARCHITECTURE",
+    "EXPOSURE_GRAIN_MISMATCH",
+    "WHOLE_PLANT_EXPOSURE_DEFAULT_PROHIBITED",
+    "COMPOUND_ROUTE_SEPARATE"
+  ],
+  "tests": [
+    {
+      "test_id": "TCWS_VALID_NHC_UPSTREAM_WITHHOLDS",
+      "category": "identity_axis_validation_and_withholding",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_001",
+        "event_family_id": "family_fixture_001",
+        "pathway_id": "tropical_cyclone_wind",
+        "source_wind_speed_mps": 50,
+        "source_wind_height_m": 10,
+        "source_wind_averaging_period_s": 60,
+        "source_wind_exposure_standard": "NHC_UNOBSTRUCTED_EXPOSURE_FIXTURE",
+        "source_wind_product_id": "NHC_COMPATIBLE_FIXTURE",
+        "source_wind_valid_time": "2026-01-01T00:00:00Z"
+      },
+      "expected_output": {
+        "identity_contract": "accepted",
+        "source_axis_contract": "accepted_research_state",
+        "runtime_demand_mapping": "withheld",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": ["NO_RUNTIME_CURVE"]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": ["NO_RUNTIME_CURVE"]
+        }
+      },
+      "tolerance": null,
+      "source": "TCWS-S001;GOVERNANCE_CONTRACT",
+      "notes": "Acceptance of an upstream storm-field object does not authorize a damage emit."
+    },
+    {
+      "test_id": "TCWS_FIXED_TILT_COMPLETE_SITE_STILL_WITHHOLDS",
+      "category": "withholding_precedence",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_002",
+        "event_family_id": "family_fixture_002",
+        "pathway_id": "tropical_cyclone_wind",
+        "source_wind_speed_mps": 60,
+        "source_wind_height_m": 10,
+        "source_wind_averaging_period_s": 60,
+        "source_wind_exposure_standard": "NHC_UNOBSTRUCTED_EXPOSURE_FIXTURE",
+        "source_wind_product_id": "NHC_COMPATIBLE_FIXTURE",
+        "source_wind_valid_time": "2026-01-01T00:00:00Z",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "asset_id": "solar_farm_fixture",
+        "asset_subject_id": "fixed_block_fixture_01",
+        "failure_unit_id": "PV_FIXED_TILT_MODULE_FIELD",
+        "asset_subject_grain": "array_block_polygon",
+        "value_basis_id": "site_specific_fixture",
+        "direct_replacement_value_usd": 1000000,
+        "at_risk_fraction": 1,
+        "at_risk_fraction_basis": "fixture_inventory"
+      },
+      "expected_output": {
+        "site_value_contract": "accepted_fixture",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": ["NO_RUNTIME_CURVE"]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": ["NO_RUNTIME_CURVE"]
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "Complete fixed-tilt value and exposure cannot bypass an empty curve array."
+    },
+    {
+      "test_id": "TCWS_TRACKER_QUALIFIED_STATE_STILL_WITHHOLDS",
+      "category": "withholding_precedence",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_003",
+        "event_family_id": "family_fixture_003",
+        "pathway_id": "tropical_cyclone_wind",
+        "source_wind_speed_mps": 55,
+        "source_wind_height_m": 10,
+        "source_wind_averaging_period_s": 60,
+        "source_wind_exposure_standard": "NHC_UNOBSTRUCTED_EXPOSURE_FIXTURE",
+        "source_wind_product_id": "NHC_COMPATIBLE_FIXTURE",
+        "source_wind_valid_time": "2026-01-01T00:00:00Z",
+        "array_architecture": "single_axis_tracker",
+        "tracker_system_id": "exact_fixture",
+        "qualification_standard_id": "exact_fixture",
+        "attained_angle_deg": 0,
+        "drive_lock_state": "verified_locked"
+      },
+      "expected_output": {
+        "tracker_state_contract": "accepted_research_state",
+        "protection_credit_applied": false,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": ["NO_RUNTIME_CURVE"]
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "Even a documented attained tracker state does not create a TC-wind curve."
+    },
+    {
+      "test_id": "TCWS_MISSING_PATHWAY_REJECTS",
+      "category": "pathway_routing",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_004",
+        "event_family_id": "family_fixture_004"
+      },
+      "expected_output": {
+        "identity_contract": "rejected",
+        "error_code": "PATHWAY_ID_REQUIRED",
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "Pathway is never inferred from speed or a hurricane label."
+    },
+    {
+      "test_id": "TCWS_STRONG_WIND_PATHWAY_REJECTS",
+      "category": "pathway_routing",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_005",
+        "event_family_id": "family_fixture_005",
+        "pathway_id": "straight_line_convective"
+      },
+      "expected_output": {
+        "identity_contract": "rejected",
+        "error_code": "UNSUPPORTED_PATHWAY_ID",
+        "fallback_curve_used": false,
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "The strong-wind solar model is not a numerical fallback for a tropical cyclone."
+    },
+    {
+      "test_id": "TCWS_MISSING_EVENT_ID_REJECTS",
+      "category": "event_identity",
+      "curve_id": null,
+      "input": {
+        "event_family_id": "family_fixture_006",
+        "pathway_id": "tropical_cyclone_wind"
+      },
+      "expected_output": {
+        "identity_contract": "rejected",
+        "error_code": "EVENT_ID_REQUIRED",
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "Occurrence identity is required before compound-pathway coordination."
+    },
+    {
+      "test_id": "TCWS_MISSING_EVENT_FAMILY_REJECTS",
+      "category": "event_identity",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_007",
+        "pathway_id": "tropical_cyclone_wind"
+      },
+      "expected_output": {
+        "identity_contract": "rejected",
+        "error_code": "EVENT_FAMILY_ID_REQUIRED",
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "TC child pathways need one parent identity."
+    },
+    {
+      "test_id": "TCWS_CATEGORY_ONLY_REJECTS_AS_AXIS",
+      "category": "axis_validation",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_008",
+        "event_family_id": "family_fixture_008",
+        "pathway_id": "tropical_cyclone_wind",
+        "saffir_simpson_category": 3
+      },
+      "expected_output": {
+        "source_axis_contract": "rejected",
+        "error_code": "CATEGORY_NOT_DAMAGE_AXIS",
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "TCWS-S001;GOVERNANCE_CONTRACT",
+      "notes": "Category may be context but cannot replace numerical wind and reference metadata."
+    },
+    {
+      "test_id": "TCWS_SOURCE_WIND_METADATA_INCOMPLETE_REJECTS",
+      "category": "axis_validation",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_009",
+        "event_family_id": "family_fixture_009",
+        "pathway_id": "tropical_cyclone_wind",
+        "source_wind_speed_mps": 50
+      },
+      "expected_output": {
+        "source_axis_contract": "rejected",
+        "error_code": "SOURCE_WIND_METADATA_INCOMPLETE",
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "TCWS-S001;GOVERNANCE_CONTRACT",
+      "notes": "Height, averaging period, exposure convention, product, and valid time are load-bearing lineage."
+    },
+    {
+      "test_id": "TCWS_CEFERINO_CROSS_AXIS_REJECTS",
+      "category": "candidate_audit_separation",
+      "curve_id": null,
+      "input": {
+        "audit_context": true,
+        "candidate_id": "CEFERINO_GROUND_MOUNT_EXTENSIVE_FAILURE",
+        "source_native_axis_id": "NHC_1MIN_10M_SURFACE_WIND"
+      },
+      "expected_output": {
+        "candidate_audit_contract": "rejected",
+        "error_code": "SOURCE_AXIS_MISMATCH",
+        "runtime_damage_emit_allowed": false,
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "TCWS-S002;GOVERNANCE_CONTRACT",
+      "notes": "The candidate uses a paper-defined 3-second-gust axis and cannot accept unbridged NHC source wind."
+    },
+    {
+      "test_id": "TCWS_ARRAY_ARCHITECTURE_REQUIRED",
+      "category": "selector_guardrail",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_011",
+        "event_family_id": "family_fixture_011",
+        "pathway_id": "tropical_cyclone_wind",
+        "asset_subject_id": "array_fixture"
+      },
+      "expected_output": {
+        "selector_contract": "rejected",
+        "error_code": "ARRAY_ARCHITECTURE_REQUIRED",
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "Fixed tilt and tracker are separate future vulnerability pathways."
+    },
+    {
+      "test_id": "TCWS_UNSUPPORTED_ARCHITECTURE_REJECTS",
+      "category": "selector_guardrail",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_012",
+        "event_family_id": "family_fixture_012",
+        "pathway_id": "tropical_cyclone_wind",
+        "array_architecture": "roof_mounted_residential"
+      },
+      "expected_output": {
+        "selector_contract": "rejected",
+        "error_code": "UNSUPPORTED_ARRAY_ARCHITECTURE",
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "The cell is limited to utility-scale ground-mounted PV."
+    },
+    {
+      "test_id": "TCWS_UNKNOWN_TRACKER_STATE_NO_CREDIT",
+      "category": "conditioner_guardrail",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_013",
+        "event_family_id": "family_fixture_013",
+        "pathway_id": "tropical_cyclone_wind",
+        "array_architecture": "single_axis_tracker",
+        "commanded_stow_state": "unknown",
+        "attained_angle_deg": null,
+        "drive_lock_state": "unknown",
+        "grid_state": "unknown",
+        "backup_power_state": "unknown"
+      },
+      "expected_output": {
+        "conditioner_default_applied": false,
+        "protective_credit_applied": false,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": ["NO_RUNTIME_CURVE"]
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "Commanded stow is not attained stow, and unknown state receives no favorable default."
+    },
+    {
+      "test_id": "TCWS_WHOLE_PLANT_EXPOSURE_DEFAULT_REJECTS",
+      "category": "exposure_guardrail",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_014",
+        "event_family_id": "family_fixture_014",
+        "pathway_id": "tropical_cyclone_wind",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "failure_unit_id": "PV_GSU_SUBSTATION",
+        "asset_subject_grain": "whole_plant_polygon",
+        "at_risk_fraction": 1
+      },
+      "expected_output": {
+        "exposure_contract": "rejected",
+        "error_code": "WHOLE_PLANT_EXPOSURE_DEFAULT_PROHIBITED",
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "Array exposure cannot be copied to a shared GSU/substation point or yard polygon."
+    },
+    {
+      "test_id": "TCWS_SURGE_ROUTES_SEPARATELY",
+      "category": "compound_pathway_routing",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_015",
+        "event_family_id": "family_fixture_015",
+        "pathway_id": "storm_surge_or_flood"
+      },
+      "expected_output": {
+        "identity_contract": "rejected_route_elsewhere",
+        "error_code": "COMPOUND_ROUTE_SEPARATE",
+        "same_event_family_preserved": true,
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "Surge and flood remain separate physical pathways even when caused by the same cyclone."
+    },
+    {
+      "test_id": "TCWS_UNMODELED_GSU_WITHHELD_NOT_ZERO",
+      "category": "coverage_guardrail",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_fixture_016",
+        "event_family_id": "family_fixture_016",
+        "pathway_id": "tropical_cyclone_wind",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "failure_unit_id": "PV_GSU_SUBSTATION",
+        "asset_subject_grain": "shared_point_or_yard_polygon"
+      },
+      "expected_output": {
+        "coverage_role": "withheld_not_zero",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": ["NO_RUNTIME_CURVE"]
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT",
+      "notes": "The GSU/substation remains an explicit solar-plant unit; absent TC-wind evidence is not immunity."
+    }
+  ]
+}

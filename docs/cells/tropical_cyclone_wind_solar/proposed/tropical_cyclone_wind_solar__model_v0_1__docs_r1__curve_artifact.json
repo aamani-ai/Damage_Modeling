@@ -1,0 +1,512 @@
+{
+  "schema_version": "damage_curve_record_bundle.v1",
+  "cell_id": "tropical_cyclone_wind_solar",
+  "damage_code_id": "TROPICAL_CYCLONE_WIND_SOLAR_PROPOSED_V0_1",
+  "semantic_damage_model_version": "model v0.1",
+  "documentation_revision": "docs r1",
+  "package_release": "unreleased",
+  "package_baseline": "library v2.5",
+  "lifecycle_state": "scaffold",
+  "promotion_status": "proposed",
+  "review_status": "pressure_tested",
+  "documentation_status": "working_revision",
+  "package_inclusion_status": "not_included",
+  "canonical_runtime_artifact": false,
+  "schema_envelope_status": {
+    "selected_schema": "damage_curve_record_bundle.v1",
+    "use": "noncanonical_zero_curve_scaffold_only",
+    "reason": "Repository-current v2 and v3 bundle schemas require at least one curve record and cannot represent an honest fail-closed scaffold with curve_records empty.",
+    "runtime_publication_allowed": false,
+    "promotion_rule": "A published runtime bundle must use the repository-current schema and contain reviewed output-bearing records."
+  },
+  "ordinate_status": "withheld",
+  "withheld_reason_codes": [
+    "NO_RUNTIME_CURVE"
+  ],
+  "source_dossier": "docs/cells/tropical_cyclone_wind_solar/proposed/tropical_cyclone_wind_solar_curve_derivation_dossier__model_v0_1__docs_r1.md",
+  "source_workbook": "docs/cells/tropical_cyclone_wind_solar/proposed/damage_curve_records_tropical_cyclone_wind_solar__model_v0_1__docs_r1.xlsx",
+  "source_register": "docs/cells/tropical_cyclone_wind_solar/proposed/SOURCE_REGISTER_tropical_cyclone_wind_solar__model_v0_1__docs_r1.csv",
+  "claim_parameter_register": "docs/cells/tropical_cyclone_wind_solar/proposed/CLAIM_PARAMETER_REGISTER_tropical_cyclone_wind_solar__model_v0_1__docs_r1.csv",
+  "bounded_evidence_search_log": "docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md",
+  "parameter_tier_table_ref": "docs/cells/tropical_cyclone_wind_solar/proposed/PARAMETER_TIER_TABLE_tropical_cyclone_wind_solar__model_v0_1__docs_r1.csv",
+  "value_crosswalk_ref": "docs/cells/tropical_cyclone_wind_solar/proposed/VALUE_CROSSWALK_tropical_cyclone_wind_solar__model_v0_1__docs_r1.csv",
+  "site_condition_adapter_ref": "docs/cells/tropical_cyclone_wind_solar/proposed/SITE_CONDITION_ADAPTER_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md",
+  "pressure_test_ref": "docs/cells/tropical_cyclone_wind_solar/proposed/PRESSURE_TEST_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md",
+  "known_answer_tests": "docs/cells/tropical_cyclone_wind_solar/proposed/known_answer_tests_tropical_cyclone_wind_solar__model_v0_1__docs_r1.json",
+  "pathway": {
+    "pathway_id": "tropical_cyclone_wind",
+    "exact_match_required": true,
+    "fallback_allowed": false,
+    "event_family_id_required": true,
+    "neighboring_routes": [
+      {
+        "mechanism": "tropical_cyclone_spawned_tornado",
+        "governed_pathway_id": "tornado_direct_hit",
+        "status": "proposed_noncanonical_no_current_cutover"
+      },
+      {
+        "mechanism": "storm_surge_or_flood",
+        "governed_pathway_id": null,
+        "status": "TBD_not_a_runtime_pathway_id_in_this_artifact"
+      },
+      {
+        "mechanism": "windborne_debris",
+        "governed_pathway_id": null,
+        "status": "TBD_not_a_runtime_pathway_id_in_this_artifact"
+      },
+      {
+        "mechanism": "wind_driven_rain_ingress",
+        "governed_pathway_id": null,
+        "status": "TBD_not_a_runtime_pathway_id_in_this_artifact"
+      },
+      {
+        "mechanism": "hail_or_lightning",
+        "governed_pathway_id": null,
+        "status": "separate_existing_or_future_cell_not_a_runtime_pathway_id_here"
+      }
+    ],
+    "compound_event_rule": "Preserve one event_family_id and prevent duplicate failure-unit/value charges downstream."
+  },
+  "asset_archetype": {
+    "asset": "utility_scale_ground_mounted_solar_photovoltaic_facility",
+    "reference_configuration": "generic_US_utility_scale_reference_value_archetype",
+    "configuration_is_vulnerability_selector": true,
+    "target_applicability_status": "not_frozen",
+    "supported_research_configurations": [
+      "rigid_fixed_tilt_ground_mount",
+      "exact_system_qualified_single_axis_tracker"
+    ],
+    "scope_included": [
+      "direct_tropical_cyclone_wind_physical_destruction"
+    ],
+    "scope_excluded": [
+      "tropical_cyclone_spawned_tornado",
+      "storm_surge",
+      "pluvial_or_riverine_flood",
+      "windborne_debris_as_independent_pathway",
+      "wind_driven_rain_or_water_ingress",
+      "hail",
+      "lightning",
+      "business_interruption",
+      "curtailment_or_derating",
+      "frequency_and_annual_or_tail_metrics"
+    ]
+  },
+  "value_basis": {
+    "status": "reference_archetype_only_not_enabled_for_loss",
+    "source_workbook": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "source_register_id": "TCWS-S013",
+    "value_source_id": "NLR_Q1_2025_UPV_PV_ONLY_2024_USD",
+    "crosswalk": "docs/cells/tropical_cyclone_wind_solar/proposed/VALUE_CROSSWALK_tropical_cyclone_wind_solar__model_v0_1__docs_r1.csv",
+    "unit": "2024_USD_per_kWdc",
+    "module_hardware": 291.21485143992487,
+    "mounting_hardware": 109.98972602739727,
+    "foundation": 31.12448715327472,
+    "power_conversion_and_collection": 116.83772835067089,
+    "GSU_substation_mixed_row": 106.50466417910448,
+    "SCADA_communications": 1.31,
+    "direct_hardware": 656.9814571503722,
+    "civil_mixed_row": 31.223744292237445,
+    "replacement_support": 189.59050092005714,
+    "physical_reference": 877.7957023626668,
+    "excluded_soft_sunk_nonphysical": 242.20429763733296,
+    "installed_reference": 1120.0,
+    "module_plus_mounting_candidate_subtotal": 401.2045774673221,
+    "reconciliation": "656.9814571503722 + 31.223744292237445 + 189.59050092005714 = 877.7957023626668 within source floating-point precision; 877.7957023626668 + 242.20429763733296 = 1120.0 within source floating-point precision",
+    "site_override_required_for_loss": true,
+    "values_embedded_as_curve_denominators": false,
+    "prohibited_use": "Reference shares are denominator anatomy and reconciliation, not damage caps or whole-site exposure defaults."
+  },
+  "hazard_axis": {
+    "id": "WITHHELD_PENDING_ARCHITECTURE_SPECIFIC_TC_BRIDGES",
+    "status": "not_frozen",
+    "runtime_damage_mapping_status": "withheld_no_runtime_curve",
+    "source_native_objects": [
+      {
+        "id": "NHC_MAXIMUM_SUSTAINED_SURFACE_WIND",
+        "speed_unit": "m_per_s",
+        "averaging_period_s": 60,
+        "height_m": 10,
+        "role": "upstream_storm_field_descriptor",
+        "runtime_curve_compatible": false,
+        "source_id": "TCWS-S001"
+      }
+    ],
+    "candidate_axis_evidence": {
+      "numeric_values_embedded": false,
+      "audit_record": "docs/cells/tropical_cyclone_wind_solar/proposed/NUMERICAL_CANDIDATE_AUDIT_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md",
+      "runtime_use": "prohibited"
+    },
+    "required_future_fixed_tilt_bridge_outputs": [
+      "local_3s_gust_mps_with_height_terrain_and_exposure",
+      "event_net_pressure_with_zone_direction_and_load_case",
+      "qualified_design_net_pressure_capacity_on_matching_basis",
+      "duration_and_directional_history",
+      "bridge_uncertainty_and_validity_domain"
+    ],
+    "required_future_tracker_bridge_outputs": [
+      "tracker_normal_wind_mps_on_qualified_basis",
+      "exact_system_tracker_ucrit_mps_and_qualification_id",
+      "attained_angle_drive_lock_and_control_state",
+      "duration_cycling_direction_and_turbulence_history",
+      "bridge_uncertainty_and_validity_domain"
+    ],
+    "extrapolation_policy": "reject_no_runtime_axis",
+    "category_guardrail": "Saffir-Simpson category is metadata only and cannot be used as a damage x-axis.",
+    "conversion_guardrail": "No global power-law exponent, gust factor, pressure coefficient, Ucrit, height/time conversion, or convective-to-TC curve transfer is adopted."
+  },
+  "input_field_contract": {
+    "canonical_contract_ref": "docs/cells/tropical_cyclone_wind_solar/proposed/tropical_cyclone_wind_solar_damage_code_metadata_spec__model_v0_1__docs_r1.md",
+    "identity_required": [
+      "event_id",
+      "event_family_id",
+      "pathway_id"
+    ],
+    "source_wind_required_for_research_state": [
+      "source_wind_speed_mps",
+      "source_wind_height_m",
+      "source_wind_averaging_period_s",
+      "source_wind_exposure_standard",
+      "source_wind_product_id",
+      "source_wind_valid_time"
+    ],
+    "fixed_selectors_capture_only": [
+      "array_architecture",
+      "array_system_id",
+      "module_make_model",
+      "module_frame_and_clamp_id",
+      "row_or_table_geometry_id",
+      "tilt_or_operating_angle_deg",
+      "ground_clearance_m",
+      "foundation_type",
+      "design_standard_and_edition",
+      "design_wind_basis",
+      "construction_and_modification_date",
+      "tracker_system_id",
+      "qualification_standard_id",
+      "tracker_ucrit_mps",
+      "drive_and_lock_design_id",
+      "stow_strategy_id"
+    ],
+    "event_conditioners_capture_only": [
+      "commanded_stow_state",
+      "attained_angle_deg",
+      "attained_state_basis",
+      "drive_lock_state",
+      "grid_state",
+      "backup_power_state",
+      "control_communications_state",
+      "duration_above_threshold_s",
+      "direction_change_deg",
+      "turbulence_descriptor"
+    ],
+    "runtime_status": "field_validation_only_all_numeric_damage_outputs_withheld"
+  },
+  "proposed_future_y_axis": {
+    "id": "conditional_direct_repair_or_replacement_cost_ratio",
+    "status": "withheld",
+    "reason_codes": [
+      "NO_RUNTIME_CURVE"
+    ],
+    "definition": "Expected direct repair-or-replacement cost divided by pre-event direct replacement value of the same failure unit conditional on delivered local TC-wind demand and verified architecture/event state.",
+    "denominator_rule": "Use the same failure unit in numerator and denominator; do not use whole-site installed or physical reference value for a component response.",
+    "support_cost_rule": "Allocate eligible fieldwork and logistics once after damaged units and dispositions are identified; no independent support DR.",
+    "excluded_from_ordinate": [
+      "business_interruption",
+      "revenue_or_curtailment",
+      "frequency",
+      "insurance_or_financial_terms",
+      "unrelated_site_value"
+    ]
+  },
+  "failure_units": [
+    {
+      "id": "PV_FIXED_TILT_MODULE_FIELD",
+      "subsystem": "PV_ARRAY",
+      "component": "MODULES_FRAMES_CLAMPS_AND_RETENTION_ON_FIXED_TILT",
+      "pathway": "tropical_cyclone_wind",
+      "treatment": "candidate_primary_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 2; 291.21485143992487 2024 USD/kWdc reference",
+      "exposure_grain": "module_row_or_array_block_polygon",
+      "open_split": "all-severity disposition, module/support dependency and same-unit cost"
+    },
+    {
+      "id": "PV_FIXED_TILT_SUPPORT_STRUCTURE",
+      "subsystem": "MOUNTING",
+      "component": "FIXED_TILT_RAILS_POSTS_BRACES_CONNECTIONS_AND_HARDWARE_ABOVE_FOUNDATION_BOUNDARY",
+      "pathway": "tropical_cyclone_wind",
+      "treatment": "candidate_primary_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 3; 109.98972602739727 2024 USD/kWdc architecture-generic reference",
+      "exposure_grain": "row_or_array_block_polygon",
+      "open_split": "fixed-tilt BOM, qualified demand/capacity, mutually exclusive states and same-unit cost"
+    },
+    {
+      "id": "PV_TRACKER_MODULE_FIELD",
+      "subsystem": "PV_ARRAY",
+      "component": "MODULES_FRAMES_CLAMPS_AND_RETENTION_ON_EXACT_TRACKER_SYSTEM",
+      "pathway": "tropical_cyclone_wind",
+      "treatment": "candidate_primary_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 2; 291.21485143992487 2024 USD/kWdc reference",
+      "exposure_grain": "module_row_or_array_block_polygon",
+      "open_split": "tracker-specific module/support dependency, disposition and same-unit cost"
+    },
+    {
+      "id": "PV_TRACKER_SBOS_ASSEMBLY",
+      "subsystem": "MOUNTING",
+      "component": "TORQUE_TUBE_BEARINGS_DRIVE_RACKING_AND_STRUCTURAL_HARDWARE_ABOVE_FOUNDATION_BOUNDARY",
+      "pathway": "tropical_cyclone_wind",
+      "treatment": "candidate_primary_exact_system_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 3; 109.98972602739727 2024 USD/kWdc architecture-generic reference",
+      "exposure_grain": "row_or_array_block_polygon",
+      "open_split": "exact-system qualification, attained state, duration/cycling, economic states and site BOM"
+    },
+    {
+      "id": "PV_FOUNDATION",
+      "subsystem": "FOUNDATION",
+      "component": "PILES_POSTS_ANCHORS_AND_INVERTER_PADS_BELOW_STRUCTURAL_BOUNDARY",
+      "pathway": "tropical_cyclone_wind",
+      "treatment": "decomposition_gate_no_curve_not_zero",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 4; 31.12448715327472 2024 USD/kWdc mixed reference",
+      "exposure_grain": "row_point_or_zone_after_split",
+      "open_split": "architecture/geotechnical boundary, wind-only capacity, disposition and dependency precedence"
+    },
+    {
+      "id": "PV_POWER_CONVERSION_AND_COLLECTION",
+      "subsystem": "POWER_CONVERSION_AND_COLLECTION",
+      "component": "INVERTER_COMBINER_CONDUCTORS_GROUNDING_AND_COLLECTION",
+      "pathway": "tropical_cyclone_wind",
+      "treatment": "decomposition_gate_no_curve_not_zero",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map rows 5, 6, 7 and 9; 116.83772835067089 2024 USD/kWdc reference",
+      "exposure_grain": "point_line_and_network_split_required",
+      "open_split": "direct wind, enclosure, debris/ingress routing, component disposition and same-unit cost"
+    },
+    {
+      "id": "PV_GSU_SUBSTATION",
+      "subsystem": "SHARED_PLANT_ELECTRICAL",
+      "component": "GSU_TRANSFORMER_SWITCHGEAR_BREAKERS_PROTECTION_CONTROL_AND_YARD_SYSTEMS",
+      "pathway": "tropical_cyclone_wind",
+      "treatment": "shared_component_binding_no_curve_not_zero",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 8; 106.50466417910448 2024 USD/kWdc mixed MV/substation reference",
+      "exposure_grain": "shared_point_or_yard_polygon",
+      "open_split": "site ownership/BOM/value, direct-wind subject, debris/rain/flood routing, disposition and cost"
+    },
+    {
+      "id": "PV_SCADA_COMMUNICATIONS",
+      "subsystem": "SCADA_AND_COMMUNICATIONS",
+      "component": "MONITORING_COMMUNICATIONS_TRACKER_CONTROL_AND_EXPOSED_SENSORS",
+      "pathway": "tropical_cyclone_wind",
+      "treatment": "decomposition_gate_no_curve_not_zero",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 10; 1.31 2024 USD/kWdc reference",
+      "exposure_grain": "point_or_network_after_split",
+      "open_split": "location, exposure, control dependency, disposition and cost"
+    },
+    {
+      "id": "PV_CIVIL_INFRA",
+      "subsystem": "CIVIL_INFRASTRUCTURE",
+      "component": "ROADS_FENCING_GRADING_DRAINAGE_AND_BUILDINGS",
+      "pathway": "tropical_cyclone_wind",
+      "treatment": "decomposition_gate_no_curve_not_zero",
+      "ordinate_status": "withheld",
+      "value_lineage": "Solar_Map row 14; 31.223744292237445 2024 USD/kWdc mixed reference",
+      "exposure_grain": "line_network_polygon_or_point_after_split",
+      "open_split": "asset-specific subject, direct-wind mechanism, disposition and cost"
+    },
+    {
+      "id": "PV_REPLACEMENT_SUPPORT",
+      "subsystem": "REPLACEMENT_SUPPORT",
+      "component": "FIELD_LABOR_SITE_MANAGEMENT_RENTAL_AND_INSPECTION",
+      "pathway": "all_shared",
+      "treatment": "support_cost_allocate_once_no_curve",
+      "ordinate_status": "not_applicable",
+      "value_lineage": "Solar_Map rows 12, 13 and 15; 189.59050092005714 2024 USD/kWdc reference pool",
+      "exposure_grain": "post_damage_repair_scope",
+      "open_split": "claims/site reinstatement allocation rule"
+    }
+  ],
+  "candidate_fragility_evidence": {
+    "status": "audit_only_not_runtime_shaped",
+    "numeric_values_embedded": false,
+    "runtime_enabled": false,
+    "source_ids": [
+      "TCWS-S002",
+      "TCWS-S003",
+      "TCWS-S004"
+    ],
+    "primary_candidate": "CEFERINO_GROUND_MOUNT_EXTENSIVE_FAILURE",
+    "candidate_endpoint": "site_level_extensive_structural_failure_probability_not_economic_DR",
+    "audit_record": "docs/cells/tropical_cyclone_wind_solar/proposed/NUMERICAL_CANDIDATE_AUDIT_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md",
+    "workbook_sheet": "Candidate_Fragility",
+    "prohibited_use": "Candidate probabilities, parameters and field percentages cannot populate a damage emit or be interpreted as component or whole-site economic damage ratios."
+  },
+  "parameter_tier_table": [
+    {
+      "parameter": "NHC source averaging and height semantics",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": ["TCWS-S001"],
+      "status": "adopt_source_metadata_only"
+    },
+    {
+      "parameter": "Ceferino site extensive-failure posterior summaries",
+      "tier": "T1_claims_or_field_calibrated",
+      "source_ids": ["TCWS-S002"],
+      "status": "defer_candidate_audit_only"
+    },
+    {
+      "parameter": "Perry visible-damage prevalence",
+      "tier": "T1_claims_or_field_calibrated",
+      "source_ids": ["TCWS-S003"],
+      "status": "adopt_field_constraint_not_curve"
+    },
+    {
+      "parameter": "St_Croix mechanisms and compound-peril boundary",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": ["TCWS-S004"],
+      "status": "adopt_mechanism_and_selector_evidence_only"
+    },
+    {
+      "parameter": "fixed_tilt_and_tracker_demand_design_fields",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": ["TCWS-S005", "TCWS-S006", "TCWS-S007", "TCWS-S010", "TCWS-S011", "TCWS-S012", "TCWS-S014"],
+      "status": "adopt_fields_and_review_gates_no_numeric_response"
+    },
+    {
+      "parameter": "NLR_Q1_2025_reference_value_ledger",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": ["TCWS-S013"],
+      "status": "adopt_reference_only"
+    },
+    {
+      "parameter": "runtime_curve_count",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": ["GOVERNANCE_CONTRACT"],
+      "status": "adopt_zero_fail_closed"
+    }
+  ],
+  "derivation_rationale": {
+    "decision": "withhold_all_runtime_damage_curves",
+    "reason": "No public matched evidence chain connects representative local TC demand and architecture/event state through exhaustive failure-unit dispositions to same-unit direct repair or replacement cost.",
+    "retained_evidence": "Source wind semantics, architecture-specific demand concepts, site-level extensive-failure probability, visible-damage prevalence, mechanism cases, selector/conditioner fields and a row-level reference value ledger remain audit inputs.",
+    "promotion_gate": "Approve architecture-specific target axes and bridges, target-system applicability, all-severity state/cost models, unit-specific site value and exposure, uncertainty, validation, independent review and consumer cutover."
+  },
+  "loss_assembly_contract": {
+    "status": "withheld",
+    "reason_codes": [
+      "NO_RUNTIME_CURVE"
+    ],
+    "proposed_grain": "failure_unit_by_asset_subject_or_array_zone_by_delivered_TC_demand_and_attained_state",
+    "component_damage_ratio_input_status": "unavailable",
+    "whole_site_exposure_default": "prohibited",
+    "cross_architecture_fallback": "prohibited",
+    "module_structure_terminal_double_count": "prohibited",
+    "support_cost_rule": "allocate_replacement_support_once_after_damaged_units_and_dispositions_are_known",
+    "GSU_rule": "bind_shared_anatomy_to_one_site_owned_subject_and_value_once; no cross_hazard_numeric_inheritance",
+    "compound_peril_overlap_rule": "route_TC_wind_surge_flood_tornado_debris_rain_hail_and_lightning_separately_under_one_event_family_and_prevent_duplicate_value_charges"
+  },
+  "emit_contract": {
+    "schema_version": "damage_emit.v1",
+    "supported_emit_modes": [
+      "scalar_mean",
+      "scalar_mean_plus_bounds",
+      "discrete_state_table",
+      "parametric_distribution",
+      "state_ensemble"
+    ],
+    "populated_emit_modes_for_this_cell": [],
+    "runtime_emit_status": "withheld",
+    "withheld_reason_codes": [
+      "NO_RUNTIME_CURVE"
+    ],
+    "candidate_fragility_emit_prohibited": true
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v1",
+    "cell_id": "tropical_cyclone_wind_solar",
+    "spread_carried": false,
+    "emit_modes_populated_by_cell": [],
+    "metrics_supportable": {
+      "failure_unit_scalar_dr": "withheld",
+      "scenario_loss_given_value_basis": "withheld",
+      "scalar_eal": "withheld",
+      "pml": "withheld",
+      "var": "withheld",
+      "tvar": "withheld"
+    },
+    "withheld_reason_by_metric": {
+      "failure_unit_scalar_dr": [
+        "NO_RUNTIME_CURVE"
+      ],
+      "scenario_loss_given_value_basis": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_VALUE_BASIS",
+        "MISSING_EXPOSURE_OR_COUPLING"
+      ],
+      "scalar_eal": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_VALUE_BASIS",
+        "MISSING_EXPOSURE_OR_COUPLING",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "pml": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "var": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "tvar": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ]
+    },
+    "withheld_reason_codes": [
+      "NO_RUNTIME_CURVE",
+      "MISSING_VALUE_BASIS",
+      "MISSING_EXPOSURE_OR_COUPLING",
+      "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+    ],
+    "cap_binding": {
+      "policy": "fail_closed",
+      "preflight_status": "not_executed_no_distribution",
+      "required_before_scalar_eal": true,
+      "tolerance_pct": null,
+      "tolerance_status": "not_applicable_no_distribution",
+      "action_if_fail": "withhold_scalar_eal_and_require_tail_capable_emit"
+    }
+  },
+  "legacy_or_deprecated_artifacts": [
+    {
+      "artifact_id": "LEGACY_HURRICANE_X_SOLAR_RESEARCH_MEMO",
+      "artifact_type": "external_legacy_research_narrative_and_index",
+      "origin_repository": "infrasure-damage-curves",
+      "former_filename": "research/HURRICANE_x_SOLAR.md",
+      "source_commit_sha": "12653b2c3d5a013c9524228243ea666c35bb3814",
+      "source_file_blob_sha": "ea9febd74f91e79a41b5f7aca5ebd58d36a7230d",
+      "status": "rejected_for_runtime_calibration",
+      "runtime_load_prohibited": true,
+      "retained_use": "source discovery and numerical rejection audit",
+      "audit_record": "docs/cells/tropical_cyclone_wind_solar/proposed/LEGACY_EVIDENCE_INGESTION_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md"
+    },
+    {
+      "artifact_id": "HAZARD_HURRICANE_SOLAR_M3_PLACEHOLDER",
+      "artifact_type": "consumer_legacy_placeholder",
+      "origin_repository": "Hazard_modeling",
+      "former_filename": "Notebooks/hurricane/solar/m3_damage/01_damage.py",
+      "source_commit_sha": "5033169cfed315dfe8575520a44f84404e89ecda",
+      "source_file_blob_sha": "d5cba3db1ed9f55bd2e8d1884b4a1f2fc144c3d2",
+      "status": "regression_fixture_only",
+      "runtime_load_prohibited_by_this_cell": true,
+      "retained_use": "future consumer migration comparison",
+      "audit_record": "docs/cells/tropical_cyclone_wind_solar/proposed/LEGACY_EVIDENCE_INGESTION_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md"
+    }
+  ],
+  "curve_records": []
+}
