@@ -131,6 +131,30 @@ The boundary (and the EAL/PML resolution) is in [`SCOPE_AND_STORY.md`](docs/scop
 - **Versioning** (standard 17): package version ≠ cell-damage-model version ≠ docs revision. The consumer
   pins the *cell-damage-model version*.
 - **Provenance discipline** (standard 08 + P3): a reference is *input, not authority*; no orphan claims.
+- **Validators need the `python3.12` venv.** Run `.venv/bin/python scripts/reference_helpers/validate_*.py`.
+  A bare `python3` may be a Homebrew build without `expat`, which cannot read the `.xlsx` workbooks — every
+  workbook-reading validator then fails with a misleading `No module named expat` ImportError.
+- **`outputs/` is gitignored** — a regenerable render target. The canonical workbook for a cell always lives
+  under `docs/cells/<cell>/{current,proposed}/`, never in `outputs/`.
+
+### Syncing with the fork — check the direction first
+
+`aamani-ai/Damage_Modeling` (remote `origin`) and `Divi-patel/Damage_Modeling` (remote `divi`) are **the same
+project as this checkout**, not separate ones. Work happens on the fork because the work GitHub org has access
+issues.
+
+Do **not** assume the fork is ahead. Skill and agent runs write straight into this working tree, so the local
+checkout is frequently the newer side with the work merely uncommitted. Before syncing, run:
+
+```bash
+git status --porcelain                              # uncommitted local work?
+git rev-list --left-right --count main...origin/main # who is actually ahead?
+```
+
+On 2026-07-29 this mattered: both remotes sat at `f8b5ec3` from 2026-07-13 while the tree held ~180 files of
+uncommitted work, including the tropical-cyclone (hurricane) cells. They looked missing only because they had
+never been committed. The correct action was commit + push, not pull. If recent file mtimes are only minutes
+old, a generation run may still be in flight — let the tree go quiet before staging.
 
 > **Known cleanup.** The old `docs/damage_curves/` tree and the drifted
 > `damage_curve_implementation/` copy were removed. Current docs now live under `docs/scope/`, `docs/method/`,
