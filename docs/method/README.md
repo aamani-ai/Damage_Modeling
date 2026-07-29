@@ -6,6 +6,14 @@ This is the durable method surface. `foundations/` contains the canonical princi
 `standards/` contains the global method standards; `templates/` contains package templates; `value_basis/`
 contains reader-facing valuation support.
 
+## Shared component substrates
+
+- [`shared_components/README.md`](shared_components/README.md)
+- [`shared_components/flood_electrical/`](shared_components/flood_electrical/README.md) — non-runtime
+  equipment/mechanism vocabulary and binding rules shared by flood-solar and proposed flood-wind work.
+- Governing standard:
+  [`20_shared_component_substrate_standard.md`](standards/20_shared_component_substrate_standard.md).
+
 ## Value Basis
 
 - [`value_basis/README.md`](value_basis/README.md)
@@ -35,6 +43,7 @@ The value-basis workbook is a method support artifact. The original source-drop 
 ## Global method standards
 
 - [`00_index.md`](standards/00_index.md)
+- [`02_cell_package_standard.md`](standards/02_cell_package_standard.md)
 - [`03_failure_unit_coverage_standard.md`](standards/03_failure_unit_coverage_standard.md)
 - [`04_x_axis_decision_standard.md`](standards/04_x_axis_decision_standard.md)
 - [`05_curve_derivation_dossier_standard.md`](standards/05_curve_derivation_dossier_standard.md)
@@ -44,3 +53,13 @@ The value-basis workbook is a method support artifact. The original source-drop 
 - [`16_reference_ingestion_and_curve_update_protocol.md`](standards/16_reference_ingestion_and_curve_update_protocol.md)
 - [`17_versioning_policy.md`](../contracts/standards/17_versioning_policy.md)
 - [`18_hazard_pathway_scope_splitting_standard.md`](standards/18_hazard_pathway_scope_splitting_standard.md)
+- [`20_shared_component_substrate_standard.md`](standards/20_shared_component_substrate_standard.md)
+
+## Cell basics templates
+
+- [`TEMPLATE_cell_basics_README.md`](templates/TEMPLATE_cell_basics_README.md) — first-reader concepts,
+  terminology, ASCII physical picture, and worked example.
+- [`TEMPLATE_cell_basics_HOW_THE_MODEL_IS_BUILT.md`](templates/TEMPLATE_cell_basics_HOW_THE_MODEL_IS_BUILT.md)
+  — evidence-to-SHIP reasoning chain.
+- [`TEMPLATE_cell_basics_MODEL_REFERENCE.md`](templates/TEMPLATE_cell_basics_MODEL_REFERENCE.md) — exact
+  curves/state tables, fields, value links, capability, tests, and sources.
