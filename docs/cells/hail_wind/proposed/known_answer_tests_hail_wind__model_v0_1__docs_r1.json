@@ -1,0 +1,861 @@
+{
+  "schema_version": "known_answer_tests.v1",
+  "cell_id": "hail_wind",
+  "semantic_damage_model_version": "model v0.1",
+  "documentation_revision": "docs r1",
+  "runtime_curve_count": 0,
+  "runtime_curve_known_answer_tests": [],
+  "tests": [
+    {
+      "test_id": "HW_VALID_OBSERVED_HAIL_WITHHOLDS",
+      "cell_id": "hail_wind",
+      "pathway_id": "hail_impact",
+      "failure_unit_id": "WT_BLADE_ASSEMBLY",
+      "input": {
+        "event_id": "e1",
+        "event_family_id": "f1",
+        "pathway_id": "hail_impact",
+        "failure_unit_id": "WT_BLADE_ASSEMBLY",
+        "maximum_reported_hail_diameter_mm": 50
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scalar_eal": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "pml": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "var": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "tvar": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract",
+      "notes": "No numeric output is permitted in model v0.1."
+    },
+    {
+      "test_id": "HW_VALID_MESH_WITHHOLDS",
+      "cell_id": "hail_wind",
+      "pathway_id": "hail_impact",
+      "failure_unit_id": "WT_BLADE_ASSEMBLY",
+      "input": {
+        "event_id": "e2",
+        "event_family_id": "f2",
+        "pathway_id": "hail_impact",
+        "failure_unit_id": "WT_BLADE_ASSEMBLY",
+        "mesh_mm": 50
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scalar_eal": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "pml": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "var": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "tvar": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract",
+      "notes": "No numeric output is permitted in model v0.1."
+    },
+    {
+      "test_id": "HW_COMPLETE_BLADE_STATE_STILL_WITHHOLDS",
+      "cell_id": "hail_wind",
+      "pathway_id": "hail_impact",
+      "failure_unit_id": "WT_BLADE_ASSEMBLY",
+      "input": {
+        "event_id": "e3",
+        "event_family_id": "f3",
+        "pathway_id": "hail_impact",
+        "failure_unit_id": "WT_BLADE_ASSEMBLY",
+        "mesh_mm": 75,
+        "turbine_make_model": "verified",
+        "blade_model": "verified",
+        "operating_state": "operating",
+        "rotor_speed_rpm": 12
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scalar_eal": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "pml": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "var": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "tvar": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract",
+      "notes": "No numeric output is permitted in model v0.1."
+    },
+    {
+      "test_id": "HW_MISSING_PATHWAY_REJECTS",
+      "cell_id": "hail_wind",
+      "pathway_id": null,
+      "failure_unit_id": "WT_BLADE_ASSEMBLY",
+      "input": {
+        "event_id": "e4",
+        "event_family_id": "f4",
+        "failure_unit_id": "WT_BLADE_ASSEMBLY",
+        "mesh_mm": 40
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scalar_eal": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "pml": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "var": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "tvar": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract",
+      "notes": "No numeric output is permitted in model v0.1."
+    },
+    {
+      "test_id": "HW_UNKNOWN_PATHWAY_REJECTS",
+      "cell_id": "hail_wind",
+      "pathway_id": "unknown",
+      "failure_unit_id": "WT_BLADE_ASSEMBLY",
+      "input": {
+        "event_id": "e5",
+        "event_family_id": "f5",
+        "pathway_id": "unknown",
+        "failure_unit_id": "WT_BLADE_ASSEMBLY",
+        "mesh_mm": 40
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scalar_eal": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "pml": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "var": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "tvar": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract",
+      "notes": "No numeric output is permitted in model v0.1."
+    },
+    {
+      "test_id": "HW_SOLAR_HAIL_FALLBACK_REJECTS",
+      "cell_id": "hail_wind",
+      "pathway_id": "hail_solar",
+      "failure_unit_id": "WT_BLADE_ASSEMBLY",
+      "input": {
+        "event_id": "e6",
+        "event_family_id": "f6",
+        "pathway_id": "hail_solar",
+        "failure_unit_id": "WT_BLADE_ASSEMBLY",
+        "mesh_mm": 40
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scalar_eal": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "pml": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "var": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "tvar": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract",
+      "notes": "No numeric output is permitted in model v0.1."
+    },
+    {
+      "test_id": "HW_CONVECTIVE_WIND_PATHWAY_REJECTS",
+      "cell_id": "hail_wind",
+      "pathway_id": "straight_line_convective",
+      "failure_unit_id": "WT_BLADE_ASSEMBLY",
+      "input": {
+        "event_id": "e7",
+        "event_family_id": "f7",
+        "pathway_id": "straight_line_convective",
+        "failure_unit_id": "WT_BLADE_ASSEMBLY",
+        "source_wind_speed_mps": 45
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scalar_eal": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "pml": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "var": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "tvar": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract",
+      "notes": "No numeric output is permitted in model v0.1."
+    },
+    {
+      "test_id": "HW_RAIN_EROSION_PATHWAY_REJECTS",
+      "cell_id": "hail_wind",
+      "pathway_id": "rain_induced_leading_edge_erosion",
+      "failure_unit_id": "WT_BLADE_ASSEMBLY",
+      "input": {
+        "event_id": "e8",
+        "event_family_id": "f8",
+        "pathway_id": "rain_induced_leading_edge_erosion",
+        "failure_unit_id": "WT_BLADE_ASSEMBLY"
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scalar_eal": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "pml": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "var": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "tvar": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract",
+      "notes": "No numeric output is permitted in model v0.1."
+    },
+    {
+      "test_id": "HW_MESH_OBSERVATION_ALIAS_REJECTS",
+      "cell_id": "hail_wind",
+      "pathway_id": "hail_impact",
+      "failure_unit_id": "WT_BLADE_ASSEMBLY",
+      "input": {
+        "event_id": "e9",
+        "event_family_id": "f9",
+        "pathway_id": "hail_impact",
+        "failure_unit_id": "WT_BLADE_ASSEMBLY",
+        "mesh_in": 2
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scalar_eal": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "pml": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "var": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "tvar": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract",
+      "notes": "No numeric output is permitted in model v0.1."
+    },
+    {
+      "test_id": "HW_UNKNOWN_OPERATING_STATE_NO_CREDIT",
+      "cell_id": "hail_wind",
+      "pathway_id": "hail_impact",
+      "failure_unit_id": "WT_BLADE_ASSEMBLY",
+      "input": {
+        "event_id": "e10",
+        "event_family_id": "f10",
+        "pathway_id": "hail_impact",
+        "failure_unit_id": "WT_BLADE_ASSEMBLY",
+        "mesh_mm": 50,
+        "operating_state": "unknown"
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scalar_eal": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "pml": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "var": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "tvar": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract",
+      "notes": "No numeric output is permitted in model v0.1."
+    },
+    {
+      "test_id": "HW_LEASE_FULL_EXPOSURE_DEFAULT_REJECTS",
+      "cell_id": "hail_wind",
+      "pathway_id": "hail_impact",
+      "failure_unit_id": "WT_BLADE_ASSEMBLY",
+      "input": {
+        "event_id": "e11",
+        "event_family_id": "f11",
+        "pathway_id": "hail_impact",
+        "failure_unit_id": "WT_BLADE_ASSEMBLY",
+        "exposure_geometry_role": "wind_farm_lease_polygon",
+        "at_risk_fraction": 1
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scalar_eal": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "pml": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "var": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "tvar": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract",
+      "notes": "No numeric output is permitted in model v0.1."
+    },
+    {
+      "test_id": "HW_GSU_WITHHELD_NOT_ZERO",
+      "cell_id": "hail_wind",
+      "pathway_id": "hail_impact",
+      "failure_unit_id": "WT_GSU_SUBSTATION",
+      "input": {
+        "event_id": "e12",
+        "event_family_id": "f12",
+        "pathway_id": "hail_impact",
+        "failure_unit_id": "WT_GSU_SUBSTATION",
+        "mesh_mm": 50
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scalar_eal": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "pml": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "var": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "tvar": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract",
+      "notes": "No numeric output is permitted in model v0.1."
+    },
+    {
+      "test_id": "HW_REFERENCE_VALUE_CANNOT_UNLOCK_LOSS",
+      "cell_id": "hail_wind",
+      "pathway_id": "hail_impact",
+      "failure_unit_id": "WT_BLADE_ASSEMBLY",
+      "input": {
+        "event_id": "e13",
+        "event_family_id": "f13",
+        "pathway_id": "hail_impact",
+        "failure_unit_id": "WT_BLADE_ASSEMBLY",
+        "mesh_mm": 50,
+        "direct_replacement_value_usd": 282000
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scalar_eal": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "pml": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "var": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "tvar": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract",
+      "notes": "No numeric output is permitted in model v0.1."
+    },
+    {
+      "test_id": "HW_ANNUAL_TAIL_METRICS_WITHHOLD",
+      "cell_id": "hail_wind",
+      "pathway_id": "hail_impact",
+      "failure_unit_id": "WT_BLADE_ASSEMBLY",
+      "input": {
+        "event_id": "e14",
+        "event_family_id": "f14",
+        "pathway_id": "hail_impact",
+        "failure_unit_id": "WT_BLADE_ASSEMBLY",
+        "mesh_mm": 50,
+        "requested_metrics": [
+          "scalar_eal",
+          "pml",
+          "var",
+          "tvar"
+        ]
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scalar_eal": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "pml": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "var": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "tvar": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract",
+      "notes": "No numeric output is permitted in model v0.1."
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Flood × wind and shared flood-electrical substrate
 
-> Status: decision framing accepted for implementation on 2026-07-28. Runtime curve promotion remains unapproved.
+> Status: phase-2 evidence update accepted on 2026-07-28. A flood-wind-local legacy screening assembly is supported for noncanonical v1 work; runtime/canonical promotion remains unapproved.
 
 This thread answers a deceptively simple question: if a wind farm and a solar plant use materially the same generator step-up substation equipment, should flood damage depend on the asset label?
 
@@ -24,4 +24,11 @@ Short answer: no. The asset label is not an intrinsic vulnerability selector for
           presence/exposure/value      presence/exposure/value
           ownership/selectors          ownership/selectors
 
-The first implementation keeps the common layer as method/reference material. It does not change schemas, runtime indexes, the canonical `flood_solar` artifact, or Hazard consumer pins.
+    legacy source-native alternative
+      Hazus-MH 2.1 whole-substation assembly
+        -> flood_wind-local screening only
+        -> mutually exclusive with component mode
+
+Phase 2 found FEMA Hazus-MH 2.1 Table 7.9's identical low-/medium-/high-voltage whole-substation series. Current Hazus 7.0 makes electric-power facilities mapping-only and says its default electric curves are disabled, so the legacy series is retained only as a source-native screening candidate. The shared layer remains method/reference material; any numerical curve is materialized in a separately governed `flood_wind` noncanonical proposal.
+
+This update does not change schemas, runtime indexes, the canonical `flood_solar` artifact, Hazard consumer pins, or canonical status.

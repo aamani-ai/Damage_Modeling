@@ -1,0 +1,180 @@
+{
+  "schema_version": "capability_declaration.v3",
+  "cell_id": "flood_wind",
+  "canonical_runtime_artifact": false,
+  "pathway_capabilities": [
+    {
+      "pathway_id": "flood_inundation_contact",
+      "failure_unit_scalar_dr": "conditional",
+      "scenario_loss_given_value_basis": "conditional",
+      "curve_intrinsic_spread": "not_carried",
+      "populated_emit_modes": [
+        "scalar_mean"
+      ],
+      "conditions": [
+        "exact FEMA Hazus ESSL ESSM or ESSH substation class is required",
+        "source_assumption_set_id must acknowledge FEMA Hazus-MH 2.1 Table 7.9",
+        "water quality must be freshwater_non_contaminated",
+        "delivered depth must represent unprotected or internal post-bypass substation-grade depth",
+        "depth must be within the source table range of 0 through 10 ft",
+        "the scalar applies only to the mutually exclusive whole-substation source atom",
+        "canonical promotion is required before any scenario-loss value binding"
+      ],
+      "limitation_flags": [
+        "NONCANONICAL_PROPOSAL",
+        "SCREENING_SOURCE_NATIVE_LEGACY_FEMA_PROXY",
+        "FEMA_HAZUS_ELECTRIC_POWER_LOSS_DISABLED_IN_CURRENT_VERSION",
+        "NOT_FIELD_OR_CLAIMS_CALIBRATED",
+        "WHOLE_SUBSTATION_SOURCE_ATOM",
+        "PARTIAL_FAILURE_UNIT_COVERAGE",
+        "SALINE_CONTAMINATED_AND_UNKNOWN_WATER_WITHHELD",
+        "CURVE_INTRINSIC_SPREAD_NOT_CARRIED"
+      ],
+      "withheld_failure_units": [
+        {
+          "failure_unit_id": "FW_GSU_SWITCHGEAR",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "COMPONENT_LEVEL_ECONOMIC_RESPONSE_NOT_CALIBRATED"
+          ]
+        },
+        {
+          "failure_unit_id": "FW_GSU_TRANSFORMER_MAIN",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "TRANSFORMER_MAIN_AUXILIARY_STATE_MODEL_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "FW_GSU_TRANSFORMER_AUX_CONTROLS",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "DEPENDENCY_SAFE_VALUE_SPLIT_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "FW_GSU_PROTECTION_SCADA",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "PROTECTION_CONTROL_ECONOMIC_RESPONSE_NOT_CALIBRATED"
+          ]
+        },
+        {
+          "failure_unit_id": "FW_GSU_STATION_SERVICE_DC",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "STATION_SERVICE_DC_DECOMPOSITION_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "FW_GSU_CABLE_TERMINATIONS",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "CABLE_BODY_TERMINATION_PATHWAY_SPLIT_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "FW_TURBINE_BASE_ELECTRICAL",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "WIND_SPECIFIC_EQUIPMENT_DECOMPOSITION_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "FW_PADMOUNT_STEPUP_TRANSFORMER",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "PAD_TRANSFORMER_CONSTRUCTION_AND_VALUE_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "FW_COLLECTION_CABLE_TERMINATIONS",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "LINE_NETWORK_EXPOSURE_AND_VALUE_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "FW_TURBINE_FOUNDATION",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "SEPARATE_FLOOD_SCOUR_EROSION_PATHWAY_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "FW_CIVIL_ACCESS_DRAINAGE",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
+          ]
+        },
+        {
+          "failure_unit_id": "FW_ELEVATED_TURBINE_EQUIPMENT",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "GEOMETRY_SCREENED_NOT_UNIVERSAL_ZERO"
+          ]
+        },
+        {
+          "failure_unit_id": "SUPPORT_FIELDWORK",
+          "reason_codes": [
+            "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+            "NO_INDEPENDENT_FRAGILITY"
+          ]
+        },
+        {
+          "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+          "reason_codes": [
+            "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+            "NO_INDEPENDENT_FRAGILITY"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumer_annual_metrics": {
+    "computation_owner": "downstream_consumer",
+    "status_before_promotion": "withheld_noncanonical_proposal",
+    "status_after_promotion": "withheld",
+    "prerequisites": [
+      "canonical promotion and exact model docs schema and SHA pin",
+      "validated flood frequency intensity and spatial coupling",
+      "complete project-owned same-substation value and exposure binding",
+      "explicitly partial covered-loss reporting product",
+      "compound-event partition across flood tropical-cyclone wind tornado and other pathways",
+      "consumer cap-binding and aggregation validation"
+    ],
+    "limitation_flags": [
+      "NONCANONICAL_PROPOSAL",
+      "PARTIAL_FAILURE_UNIT_COVERAGE",
+      "ANNUAL_AND_TAIL_METRICS_WITHHELD",
+      "CURVE_INTRINSIC_SPREAD_NOT_CARRIED"
+    ]
+  },
+  "cap_binding": {
+    "policy": "consumer_enforced_fail_closed",
+    "enforcement_owner": "downstream_consumer",
+    "checks_required": [
+      "reject annual and portfolio metrics from the noncanonical proposal",
+      "bind DR only to the same physical substation assembly value",
+      "prohibit full-project TIV and mixed 72 USD/kW electrical defaults",
+      "represent a shared or hybrid-site substation once",
+      "preserve null values for every withheld failure unit"
+    ],
+    "action_if_fail": "withhold scenario loss and all annual or tail metrics"
+  },
+  "promotion_gate": {
+    "status": "blocked",
+    "required_before_canonical_use": [
+      "independent FEMA Table 7.9 transcription and interpolation review",
+      "independent review of the legacy and currently disabled Hazus electric-power method",
+      "engineering applicability review for the intended wind-facility substation population",
+      "acquisition and technical review of NEMA CS 70006-2026",
+      "approval of the proposed bundle-v3 pathway-aware piecewise-linear extension",
+      "Hazard adapter for exact pathway axis selector conditioner and artifact pin",
+      "same-substation value ownership and no-double-count fixtures",
+      "M3 and independent M4 no-bypass shadow comparison and rollback",
+      "explicit promotion decision"
+    ]
+  }
+}

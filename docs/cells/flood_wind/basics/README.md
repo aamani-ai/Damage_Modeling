@@ -1,262 +1,101 @@
-# Flood × wind — basics
+# Flood × onshore wind basics
 
-**Start here.** This page explains what can flood at a land-based wind facility, why the facility GSU is a
-component system rather than “the wind farm,” and why the current package deliberately returns no damage
-ratio.
+**Start here.** Proposed model v1.0/docs r1 answers one narrow question: given qualified freshwater depth
+above the grade of one facility-level GSU/substation, what whole-substation screening damage ratio does the
+legacy FEMA Hazus-MH 2.1 Table 7.9 assign?
 
 ```yaml
 cell_id: flood_wind
-audience: first-time reader
-basics_set_revision: r1
-cell_model_version: model v0.1
+cell_model_version: model v1.0
 human_documentation_revision: docs r1
-runtime_documentation_revision: none
-canonical_runtime_pin: none
-research_artifact_schema: damage_curve_record_bundle.v1 (zero-curve envelope only)
-research_artifact_sha256: 8dde717bee7fb12db21b4a9b3b81f9927978edb7e2dc3e77691a64c578a6c9b3
-change_class: initial_noncanonical_scaffold_documentation
-runtime_behavior_changed: false
+damage_code_id: FLOOD_WIND_FEMA_HAZUS_SUBSTATION_SCREENING_V1
+change_class: MODEL_BEHAVIOR_CHANGE + SCHEMA_CONTRACT_CHANGE
+canonical_runtime_artifact: false
+consumer_cutover: none
 ```
 
-Every number in the examples below is labeled `class_template`: it is fictional teaching data, not a
-surveyed asset fact or universal default. The governed proposed package is the technical authority; this
-folder is a reader view. Any later Google Drive or DOCX publication is also a derived view.
+## Five ideas to remember
 
-## How to use this folder
+1. **The main screened risk is a low facility-level substation, not the elevated turbine rotor.** Floodwater
+   can reach control-room, cable, transformer, and switchgear functions at the GSU/substation while most
+   turbine equipment remains above water.
+2. **The v1 number belongs to one whole-substation source atom.** It is not a switchgear, transformer,
+   control, cable, turbine, or whole-wind-farm curve.
+3. **Solar and wind may share one physical GSU identity, but not duplicate value.** A shared hybrid-site
+   substation is represented once. The reusable asset-neutral layer records identity and binding rules; the
+   flood-wind cell owns the hazard response and release decision.
+4. **The legacy table is screening evidence, not current Hazus runtime authority.** Hazus 7.0 marks electric
+   power mapping-only and disables its default electric-power loss functions.
+5. **A numerical DR still does not authorize loss.** No scenario loss is bound before canonical promotion;
+   full-project TIV, mixed `72 USD/kW`, and per-turbine GSU repetition are prohibited.
 
-| Need | File |
-|---|---|
-| Plain-language physical and calculation view | This page |
-| Evidence-to-SHIP reasoning | [How the model is built](HOW_THE_MODEL_IS_BUILT.md) |
-| Exact fields, inventory, candidates, sources, tests, and versions | [Model reference](MODEL_REFERENCE.md) |
-| Governed cell entrypoint | [Cell README](../README.md) |
-
-## 1. Five ideas to remember
-
-1. Flood risk at a wind site often sits in low electrical equipment, not the elevated rotor or nacelle.
-2. The curve-driving quantity is water depth above each component’s **first vulnerable point**, not one site
-   depth applied to every asset.
-3. A GSU transformer, switchgear, relay/control equipment, station DC, and cable terminations are different
-   failure and value units even when people casually call all of them “the substation.”
-4. Solar and wind may share an intrinsic component response only when equipment, mechanism, axis, ordinate,
-   selectors, conditioners, and evidence endpoint match; the site still supplies exposure, owner, and value.
-5. Model v0.1 has zero approved curves. Complete input still produces `NO_RUNTIME_CURVE`, not zero and not a
-   borrowed solar or legacy result.
-
-## 2. What question does this workstream answer?
-
-The target question is:
+## Supported flow
 
 ```text
-For one flood event, which physical wind-facility component was contacted by water,
-what same-unit direct repair/replacement ratio follows, and what value was actually touched?
+freshwater depth above one substation's grade
+                 |
+                 +-- exact ESSL / ESSM / ESSH source class
+                 +-- explicit legacy-source acknowledgement
+                 +-- unprotected or internal post-bypass depth
+                 v
+linear interpolation on FEMA Table 7.9, 0–10 ft
+                 v
+FW_HAZUS_GSU_SUBSTATION_ASSEMBLY conditional scalar DR
+                 |
+                 `-- no component, whole-farm, dollar, EAL, or PML output
 ```
 
-The intended future chain is:
+## Curve at a glance
+
+| Depth (ft) | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| DR | 0 | .02 | .04 | .06 | .07 | .08 | .09 | .10 | .12 | .14 | .15 |
+
+At `7.5 ft`, exact linear interpolation yields `DR = 0.11`. At `10.0001 ft`, the result is withheld; the
+endpoint is not clamped. A negative depth is rejected.
+
+## Worked example
+
+```yaml
+pathway_id: flood_inundation_contact
+failure_unit_id: FW_HAZUS_GSU_SUBSTATION_ASSEMBLY
+substation_hazus_class: ESSM
+source_assumption_set_id: FEMA_HAZUS_MH_2_1_TABLE_7_9_UNPROTECTED_SUBSTATION
+water_quality_class: freshwater_non_contaminated
+delivered_depth_basis: unprotected_or_internal_post_bypass_depth
+flood_depth_above_substation_grade_ft: 7.5
+```
+
+The review evaluator returns:
 
 ```text
-event water state + component geometry
-        -> local component intensity
-        -> qualified failure-unit response
-        -> DR × same-unit value × exposure fraction
-        -> conditional direct physical event loss
+status: conditional
+curve_id: FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL
+scalar_central_dr: 0.11
+scenario_loss_status: withheld_noncanonical_proposal
 ```
 
-The **current** v0.1 chain stops after input/axis validation because no response is approved. Outage,
-restoration, BI, revenue, frequency, EAL/PML/VaR/TVaR, insurance terms, and portfolio aggregation remain
-downstream or outside scope.
+If WSE and grade are supplied instead, both elevations must use the same vertical datum. For example,
+`100.3048 m - 100.0000 m = 0.3048 m = 1 ft`, which yields `DR = 0.02`.
 
-## 3. Physical picture and measurement
+## What still withholds
 
-```text
-                         land-based wind facility
+- all six GSU component units;
+- turbine-base and pad/turbine electrical equipment;
+- collection cables and terminations;
+- turbine foundation/scour and mixed civil subjects;
+- salt, brackish, contaminated, chemically contaminated, and unknown water states;
+- any value binding before promotion;
+- whole-wind-farm, annual, tail, portfolio, insurance, and financial outputs.
 
-        rotor/nacelle                              usually high above water
-             |
-           tower
-             |
-      [base controls]  z_crit differs by component
-             |
-      [pad transformer]
-             |
-   ===== MV collection ===== [joint / termination / pull box]
-             |
-      facility substation — one physical shared system
-      ├─ switchgear
-      ├─ Plant GSU main transformer
-      ├─ transformer auxiliaries/controls
-      ├─ protection/SCADA/control
-      ├─ station service/DC
-      └─ cable terminations and water paths
+Withheld means unknown/not supported, never zero.
 
-WSE  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ event water-surface elevation
-     ↑ h_i = max(0, WSE - z_i_crit), metres, common vertical datum
-```
+## Read next
 
-Preferred axis bridge:
-
-```text
-h_i = max(0, WSE - z_i_crit)
-```
-
-`WSE` and `z_i_crit` are absolute elevations in the same documented vertical datum. The fact that both
-numbers use metres does not make them compatible if one is NAVD88 and the other is local grade. Duration,
-contamination/salinity, energized/isolation state, enclosure, and water path remain separate event or
-equipment state; they are not hidden inside `h_i`.
-
-## 4. Essential terminology
-
-| Term | Plain-language meaning | Example here | Common mistake |
-|---|---|---|---|
-| Facility/collector substation | Plant-side bus and associated GSU/electrical systems | One site facility serving its generating units | Duplicating it beneath every turbine or technology |
-| Plant GSU | Main high-voltage generator step-up transformer | `FW_GSU_TRANSFORMER_MAIN` | Treating “GSU” as the whole substation |
-| Pad/turbine step-up transformer | Transformer near or in a turbine feeding MV collection | `FW_PADMOUNT_STEPUP_TRANSFORMER` | Using the Plant GSU curve/value |
-| Vulnerable datum | First point where the modeled contact mechanism begins | Lowest control connection or cable entry | Using equipment top, centroid, or grade automatically |
-| WSE | Absolute floodwater elevation | `101.20 m NAVD88` | Calling it depth |
-| Local depth `h_i` | Water above one component datum | `0.30 m` above switchgear contact point | Applying one grade depth to every component |
-| Failure unit | Atomic response and value subject | Switchgear, not aggregate “substation” | Applying one response to mixed equipment/value |
-| Direct physical DR | Same-unit repair/replacement cost divided by same-unit pre-event replacement value | Future switchgear cost ratio | Treating outage MW as DR |
-| Exposure fraction | Share of that value reached by the event | Fraction of component inventory contacted | Altering intrinsic fragility |
-| Selector | Fixed equipment attribute choosing a compatible response | Construction, voltage, enclosure | Letting the asset label “wind” select a curve |
-| Conditioner | Event-time state that may qualify a response | Duration, contamination, isolation | Giving unknown protection credit |
-| Disruption | Outage, derating, restoration, or revenue consequence | GSU trip | Putting it in the physical DR ordinate |
-
-Evidence/status labels are also contractual:
-
-| Label | Meaning |
-|---|---|
-| `observed` | Measured or recorded for the actual asset, with source/date |
-| `designed` | From a controlled drawing/specification; may still need as-built confirmation |
-| `derived` | Reproducibly calculated from documented inputs |
-| `class_template` | Representative teaching/screening assumption, never a claimed site fact |
-| `placeholder` | Explicit temporary value/rule awaiting stronger evidence |
-| `unknown` | Not established; must not be converted into dry, protected, owned, or zero damage |
-
-## 5. Where do inputs come from?
-
-| Input | Preferred evidence | Required context | Main limitation |
-|---|---|---|---|
-| Component identity/construction | OEM nameplate, BOM, one-line, equipment schedule | make/model, function, voltage, enclosure, vintage | Generic “substation” label is insufficient |
-| Geometry and vulnerable point | As-built survey/drawing plus equipment inspection | horizontal/vertical CRS, datum, date, accuracy, selected contact point | Terrain or pad elevation may not equal entry elevation |
-| Event WSE | Versioned hazard product or surveyed high-water level | product ID, valid time, datum, spatial support | Site-wide depth may miss local grading/pathways |
-| Conditioner state | Event log, relay/operations record, inspection | duration, contamination, energized/isolation state, provenance | Unknown state gets no modifier |
-| Ownership/inclusion | Executed agreement, one-line, asset register, policy schedule | owner, project-owned flag, insured inclusion | Functional association is not ownership proof |
-| Same-unit value | SOV, valuation ledger, OEM/EPC split | value basis/version/date, quantity, non-overlap | The public `72 USD/kW` electrical row is mixed, not GSU value |
-
-Spatial records preserve subject grain, geometry role, CRS/datum, date, resolution, accuracy, provenance, and
-transformation. A turbine-cloud centroid cannot stand in for the facility GSU point.
-
-## 6. Which point or state is evaluated?
-
-| Failure-unit family | Candidate vulnerable point/state | Qualification |
-|---|---|---|
-| Switchgear | Lowest opening, breaker/control section, or cable entry | Indoor/outdoor and construction matter |
-| Main GSU transformer | Construction-specific active/main-system contact state | Keep lower auxiliaries and controls separate unless dependency-safe |
-| Transformer auxiliaries/control | Cabinet, terminal, cooler control, marshalling equipment | Do not charge full main-transformer value automatically |
-| Protection/SCADA and station DC | Lowest sensitive connection, cabinet entry, battery/charger/control point | Operational sensitivity is not repair-cost calibration |
-| Cable/terminations/pathways | Joint, termination, pull box, trench, or conduit entry | Water can travel beyond the mapped footprint |
-| Turbine-base electrical | Lowest cabinet/converter/switchgear/control vulnerability | Resolve per turbine or verified cluster |
-| Pad/turbine transformer | Construction-specific terminal/control/body point | Distinct from Plant GSU |
-| Foundation/supporting soil | Scour/erosion state, not cabinet local depth | Route to a separate hydraulic/geotechnical pathway |
-
-## 7. Worked example — complete input still withholds
-
-All values below are `class_template` and fictional:
-
-| Step | Input or result | Value/status |
-|---|---|---|
-| 1 | Event WSE | `101.20 m NAVD88` |
-| 2 | Switchgear vulnerable elevation | `100.90 m NAVD88` |
-| 3 | Derived axis | `h = max(0, 101.20 - 100.90) = 0.30 m` |
-| 4 | Fixed selectors | indoor metal-clad switchgear; fixture voltage/enclosure states |
-| 5 | Event conditioners | 8 hr, freshwater/contamination fixture, de-energized and isolated |
-| 6 | Same-unit value and exposure | `$500,000 × 0.80 = $400,000` at-risk value |
-| 7 | Curve lookup | no record: `curve_records = []` |
-| 8 | Failure-unit DR | `null / withheld / NO_RUNTIME_CURVE` |
-| 9 | Conditional direct loss | `null / withheld / NO_RUNTIME_CURVE` |
-
-There are no neighboring runtime ordinates to interpolate. The solar `FS_SWG` points are an audit candidate,
-not a flood-wind curve.
-
-```text
-FAIL-CLOSED STATE VIEW (model v0.1)
-
-complete identity + exposure + value
-                |
-                v
-datum match? -- no --> REJECT; h = null; dry not assumed
-      |
-     yes
-      v
-derive h = 0.30 m
-      |
-      v
-runtime curve lookup --> EMPTY
-      |
-      +--> DR   = null / NO_RUNTIME_CURVE
-      `--> loss = null / NO_RUNTIME_CURVE
-
-runtime DR
-1.0 |                 no approved series
-0.5 |                 no interpolation
-0.0 +------------------------------- local depth (m)
-     0       0.5       1.0       2.0
-```
-
-The [model reference](MODEL_REFERENCE.md#9-complete-illustrative-class-template-event-assembly) extends the
-same event across every proposed failure/support unit.
-
-## 8. Assumptions, open states, and unsupported shortcuts
-
-| Class | Current treatment |
-|---|---|
-| Source-anchored method | Component-local depth, equipment decomposition, transparent tabular future form |
-| Engineering candidates | Pinned solar ordinates are audit-only T3 neighbors; none is inherited |
-| Class-template examples | Geometry/value examples teach assembly only |
-| Placeholders/open seams | Exact response, valid range, transformer state split, numerical conditioner effects |
-| Unknowns | Inventory, elevations, ownership, value, and conditioner state remain explicit |
-| Unsupported | Aggregate plant curve, grade-depth default, outage-to-DR conversion, scour-by-depth fallback |
-
-For CONUS screening, a future approved intrinsic response may bind class-template distributions. Per-asset
-work binds observed/design component facts. Scale alone does not select a different curve, and missing site
-facts do not silently fall back to CONUS assumptions.
-
-## 9. Fail-closed checks and common mistakes
-
-- Missing or mismatched datum is rejected; it is not dry.
-- Unknown component identity cannot use an aggregate-substation alias.
-- `substation=generation` does not prove owner or insured inclusion.
-- One physical GSU and each component value are counted once.
-- Component DR is never applied to the mixed `72 USD/kW` row or total project TIV.
-- Exposure fraction scales value touched; it is not fragility.
-- Scour, erosion, debris, and inundation contact do not substitute for one another.
-- Unknown protection/isolation gets no favorable default.
-- Solar and legacy curves are not fallbacks.
-- Class-template numbers must never be relabeled observed.
-
-## 10. Short reusable explanation
-
-`flood_wind` evaluates water contact at the physical component that can actually get wet. A wind facility’s
-GSU/substation equipment may eventually share intrinsic flood-response logic with matching solar equipment,
-but each site still owns component identity, elevation, exposure, value, and ownership. Model v0.1 is a
-noncanonical, zero-curve scaffold, so it validates the boundary and then withholds every numerical damage and
-loss output.
-
-## 11. Read next
-
-- [Evidence-to-SHIP reasoning](HOW_THE_MODEL_IS_BUILT.md)
+- [How the model is built](HOW_THE_MODEL_IS_BUILT.md)
 - [Exact model reference](MODEL_REFERENCE.md)
-- [Derivation dossier](../proposed/flood_wind_curve_derivation_dossier__model_v0_1__docs_r1.md)
-- [Metadata specification](../proposed/flood_wind_damage_code_metadata_spec__model_v0_1__docs_r1.md)
-- [Zero-curve artifact](../proposed/flood_wind__model_v0_1__docs_r1__curve_artifact.json)
-- [Audit workbook](../proposed/damage_curve_records_flood_wind__model_v0_1__docs_r1.xlsx)
-- [Known-answer contract tests](../proposed/known_answer_tests_flood_wind__model_v0_1__docs_r1.json)
-- [Hazard handoff boundary](../../../contracts/hazard_handoff/flood_wind_model_v0_1_boundary.md)
-
-## 12. Version and non-change statement
-
-These basics complete the human explanation of proposed `model v0.1 / docs r1`; they do not change the
-semantic model, axis, curve form/parameters (none), selectors, conditioners, exposure/value rules, emit
-meaning, schemas, artifact bytes/SHA, capability, package release, artifact index, runtime docs, consumer pin,
-or Hazard outputs. No consumer action is authorized. Promotion requires a new governed model release rather
-than treating this prose as runtime authority.
+- [Cell anchor](../README.md)
+- [Derivation dossier](../proposed/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md)
+- [Proposed artifact](../proposed/flood_wind__model_v1_0__docs_r1__curve_artifact.json)
+- [Review workbook](../proposed/damage_curve_records_flood_wind__model_v1_0__docs_r1.xlsx)
+- [Historical model-v0.1 package](../proposed/README_flood_wind__model_v0_1__docs_r1.md)

@@ -1,0 +1,156 @@
+{
+  "schema_version": "capability_declaration.v3",
+  "cell_id": "tropical_cyclone_wind_solar",
+  "canonical_runtime_artifact": false,
+  "pathway_capabilities": [
+    {
+      "pathway_id": "tropical_cyclone_wind",
+      "failure_unit_scalar_dr": "conditional",
+      "scenario_loss_given_value_basis": "withheld",
+      "curve_intrinsic_spread": "not_carried",
+      "populated_emit_modes": [
+        "scalar_mean"
+      ],
+      "conditions": [
+        "array_architecture_id must equal PERRY_GROUND_NONTRACKING_SOURCE_COHORT_V1",
+        "source_population_match_id must acknowledge PERRY_MANUAL_GROUND_NONTRACKING_MIXED_SCALE_V1",
+        "module_value_distribution_assumption_id must equal UNIFORM_MODULE_HARDWARE_VALUE",
+        "visible_damage_disposition_assumption_id must equal FULL_REPLACEMENT_IF_VISIBLE_OR_MISSING",
+        "source_wind_product_id must equal PERRY_DATASET_REPORTED_EVENT_MAX_GUST",
+        "causal_scope_acknowledgement_id must equal SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS",
+        "perry_event_max_gust_mps must be finite and inside 17.4 through 39.1 m/s",
+        "the scalar applies only to PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT"
+      ],
+      "limitation_flags": [
+        "NONCANONICAL_PROPOSAL",
+        "SCREENING_REMOTE_SENSING_LABELED_VISIBLE_FRACTION_WITH_T4_ECONOMIC_BRIDGE",
+        "SOURCE_COHORT_MIXED_SCALE",
+        "SOURCE_AXIS_PRODUCT_QUERY_SEMANTICS_UNRESOLVED",
+        "SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS",
+        "VISIBLE_DAMAGE_ONLY_HIDDEN_DAMAGE_UNOBSERVED",
+        "SPARSE_SEVERE_TAIL_WITHHELD",
+        "EVENT_CLUSTERED_SAMPLE",
+        "PAVA_DERIVED_KNOTS",
+        "EQUAL_SITE_WEIGHT_NOT_MODULE_WEIGHTED",
+        "CROSS_METHOD_SAME_EVENT_ENDPOINT_CONFLICT",
+        "NO_EXTRAPOLATION",
+        "PARTIAL_FAILURE_UNIT_COVERAGE",
+        "CURVE_INTRINSIC_SPREAD_NOT_CARRIED",
+        "SCENARIO_DOLLAR_LOSS_WITHHELD"
+      ],
+      "withheld_failure_units": [
+        {
+          "failure_unit_id": "PV_FIXED_TILT_MODULE_FIELD",
+          "reason_codes": [
+            "SOURCE_SPECIFIC_ATOM_NOT_GENERIC_MODULE_FIELD",
+            "HIDDEN_DAMAGE_AND_DISPOSITION_NOT_OBSERVED"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_FIXED_TILT_SUPPORT_STRUCTURE",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_TRACKER_MODULE_FIELD",
+          "reason_codes": [
+            "TRACKER_POPULATION_NOT_SUPPORTED",
+            "NO_FIXED_TO_TRACKER_FALLBACK"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_TRACKER_SBOS_ASSEMBLY",
+          "reason_codes": [
+            "TRACKER_POPULATION_NOT_SUPPORTED",
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_FOUNDATION",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_POWER_CONVERSION_AND_COLLECTION",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "POINT_LINE_NETWORK_SPLIT_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_GSU_SUBSTATION",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "FACILITY_LEVEL_SHARED_SUBASSET_REQUIRES_CELL_LOCAL_BINDING"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_SCADA_COMMUNICATIONS",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_CIVIL_INFRA",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_REPLACEMENT_SUPPORT",
+          "reason_codes": [
+            "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+            "NO_INDEPENDENT_FRAGILITY"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumer_annual_metrics": {
+    "computation_owner": "downstream_consumer",
+    "status_before_promotion": "withheld_noncanonical_proposal",
+    "status_after_promotion": "withheld",
+    "prerequisites": [
+      "canonical promotion and exact model plus docs plus schema plus SHA pin",
+      "validated tropical-cyclone frequency coupling to the exact Perry source-axis semantics",
+      "approved site-specific module-hardware value and ownership binding",
+      "complete failure-unit coverage or an explicitly partial covered-loss product",
+      "compound-event partition across wind, debris, tornado, flood or surge, and rain",
+      "consumer cap binding and aggregation validation"
+    ],
+    "limitation_flags": [
+      "NONCANONICAL_PROPOSAL",
+      "PARTIAL_FAILURE_UNIT_COVERAGE",
+      "SCENARIO_AND_WHOLE_PLANT_LOSS_WITHHELD",
+      "SOURCE_AXIS_NOT_FREQUENCY_READY",
+      "CURVE_INTRINSIC_SPREAD_NOT_CARRIED"
+    ]
+  },
+  "cap_binding": {
+    "policy": "consumer_enforced_fail_closed",
+    "enforcement_owner": "downstream_consumer",
+    "checks_required": [
+      "reject scenario, portfolio, annual, and tail metrics from the noncanonical proposal",
+      "never multiply the curve by full plant TIV or a generic installed-cost benchmark",
+      "apply no extra spatial exposure fraction to the observed site-fraction response",
+      "preserve null for every withheld failure unit",
+      "reject tracker and every unstated axis or selector fallback"
+    ],
+    "action_if_fail": "withhold scalar DR, scenario loss, and all annual or tail metrics"
+  },
+  "promotion_gate": {
+    "status": "blocked",
+    "required_before_canonical_use": [
+      "independent source-file hash, cohort-filter, percent-conversion, PAVA, and knot reproduction",
+      "independent review of the uniform-value and full-replacement economic bridge",
+      "engineering applicability review for utility-scale fixed-tilt transfer",
+      "source-axis bridge or exact source-product delivery contract",
+      "cluster-aware and leave-one-hurricane-out validation with an expanded severe tail",
+      "Hazard adapter for exact axis, selectors, pin, partial capability, and compound-event partition",
+      "explicit maintainer promotion decision"
+    ]
+  }
+}

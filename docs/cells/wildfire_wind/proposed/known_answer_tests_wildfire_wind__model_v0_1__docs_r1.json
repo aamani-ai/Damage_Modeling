@@ -1,0 +1,453 @@
+{
+  "schema_version": "known_answer_tests.v1",
+  "cell_id": "wildfire_wind",
+  "semantic_damage_model_version": "model v0.1",
+  "documentation_revision": "docs r1",
+  "runtime_curve_count": 0,
+  "runtime_curve_known_answer_tests": [],
+  "pathway_ids": [
+    "wildfire_thermal_attack",
+    "wildfire_firebrand_ignition",
+    "wildfire_residue_destructive_contamination"
+  ],
+  "failure_unit_ids": [
+    "WT_TURBINE_FIRE_ASSEMBLY",
+    "WT_PAD_ELECTRICAL",
+    "WT_COLLECTION_NETWORK",
+    "WT_GSU_MAIN_TRANSFORMER",
+    "WT_GSU_SWITCHGEAR_BUS",
+    "WT_GSU_PROTECTION_CONTROL_DC",
+    "WT_GSU_CABLE_TERMINATIONS",
+    "WT_CONTROL_MET_OM",
+    "WT_FOUNDATION",
+    "WT_CIVIL_INFRA",
+    "SUPPORT_FIELDWORK",
+    "SUPPORT_TRANSPORT_LOGISTICS"
+  ],
+  "tests": [
+    {
+      "test_id": "WW_THERMAL_COMPLETE_INPUT_STILL_WITHHOLDS",
+      "category": "no_curve_withholding",
+      "curve_id": null,
+      "pathway_id": "wildfire_thermal_attack",
+      "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+      "input": {
+        "event_id": "ww_event_thermal_001",
+        "event_family_id": "ww_family_001",
+        "pathway_id": "wildfire_thermal_attack",
+        "asset_id": "wind_fixture",
+        "asset_subject_id": "turbine_001",
+        "asset_subject_grain": "per_turbine_point_with_vertical_zones",
+        "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+        "incident_radiant_heat_flux_time_history_kw_m2": [[0, 0], [60, 15], [120, 0]],
+        "incident_convective_heat_flux_time_history_kw_m2": [[0, 0], [60, 5], [120, 0]],
+        "gas_temperature_time_history_c": [[0, 25], [60, 500], [120, 25]],
+        "gas_velocity_time_history_m_s": [[0, 0], [60, 8], [120, 0]],
+        "direct_flame_contact_time_history": [[0, false], [60, true], [120, false]],
+        "same_unit_direct_replacement_value_usd": 5000000,
+        "exposure_fraction": 1
+      },
+      "expected_output": {
+        "identity_contract": "accepted",
+        "axis_contract": "accepted_research_state",
+        "failure_unit_scalar_dr": {"value": null, "status": "withheld", "reason_codes": ["NO_RUNTIME_CURVE"]},
+        "scenario_loss_given_value_basis": {"value": null, "status": "withheld", "reason_codes_include": ["NO_RUNTIME_CURVE"]}
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract"
+    },
+    {
+      "test_id": "WW_FIREBRAND_COMPLETE_INPUT_STILL_WITHHOLDS",
+      "category": "no_curve_withholding",
+      "curve_id": null,
+      "pathway_id": "wildfire_firebrand_ignition",
+      "failure_unit_id": "WT_GSU_CABLE_TERMINATIONS",
+      "input": {
+        "event_id": "ww_event_firebrand_001",
+        "event_family_id": "ww_family_002",
+        "pathway_id": "wildfire_firebrand_ignition",
+        "asset_id": "wind_fixture",
+        "asset_subject_id": "gsu_termination_001",
+        "asset_subject_grain": "termination_point",
+        "failure_unit_id": "WT_GSU_CABLE_TERMINATIONS",
+        "firebrand_number_flux_time_history_m2_s": [[0, 0], [30, 12], [90, 0]],
+        "firebrand_count_by_size_mass_and_combustion_state": [{"size_mm": 10, "mass_g": 0.8, "state": "flaming", "count": 20}],
+        "firebrand_deposition_accumulation_state": "verified_fixture",
+        "firebrand_ingress_or_penetration_state": "verified_fixture",
+        "firebrand_contact_and_wind_history": "verified_fixture",
+        "same_unit_direct_replacement_value_usd": 250000,
+        "exposure_fraction": 1
+      },
+      "expected_output": {
+        "identity_contract": "accepted",
+        "axis_contract": "accepted_research_state",
+        "failure_unit_scalar_dr": {"value": null, "status": "withheld", "reason_codes": ["NO_RUNTIME_CURVE"]},
+        "scenario_loss_given_value_basis": {"value": null, "status": "withheld", "reason_codes_include": ["NO_RUNTIME_CURVE"]}
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract"
+    },
+    {
+      "test_id": "WW_RESIDUE_COMPLETE_INPUT_STILL_WITHHOLDS",
+      "category": "no_curve_withholding",
+      "curve_id": null,
+      "pathway_id": "wildfire_residue_destructive_contamination",
+      "failure_unit_id": "WT_GSU_SWITCHGEAR_BUS",
+      "input": {
+        "event_id": "ww_event_residue_001",
+        "event_family_id": "ww_family_003",
+        "pathway_id": "wildfire_residue_destructive_contamination",
+        "asset_id": "wind_fixture",
+        "asset_subject_id": "gsu_switchgear_001",
+        "asset_subject_grain": "named_component",
+        "failure_unit_id": "WT_GSU_SWITCHGEAR_BUS",
+        "residue_deposition_mass_loading_g_m2": 2.5,
+        "residue_composition_and_combustion_state": "verified_fixture",
+        "surface_conductivity_or_insulation_resistance_change": "verified_fixture",
+        "moisture_and_energization_state": "energized_wet_fixture",
+        "verified_flashover_insulation_failure_or_material_damage_state": "verified_destructive_fixture",
+        "same_unit_direct_replacement_value_usd": 1000000,
+        "exposure_fraction": 1
+      },
+      "expected_output": {
+        "identity_contract": "accepted",
+        "axis_contract": "accepted_research_state",
+        "failure_unit_scalar_dr": {"value": null, "status": "withheld", "reason_codes": ["NO_RUNTIME_CURVE"]},
+        "scenario_loss_given_value_basis": {"value": null, "status": "withheld", "reason_codes_include": ["NO_RUNTIME_CURVE"]}
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract"
+    },
+    {
+      "test_id": "WW_MISSING_PATHWAY_REJECTS",
+      "category": "pathway_routing",
+      "curve_id": null,
+      "input": {
+        "event_id": "ww_event_pathway_missing",
+        "event_family_id": "ww_family_pathway_missing",
+        "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY"
+      },
+      "expected_output": {
+        "pathway_contract": "rejected",
+        "error_code": "PATHWAY_ID_REQUIRED",
+        "fallback_curve_used": false,
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract"
+    },
+    {
+      "test_id": "WW_UNKNOWN_PATHWAY_REJECTS",
+      "category": "pathway_routing",
+      "curve_id": null,
+      "input": {
+        "event_id": "ww_event_pathway_unknown",
+        "event_family_id": "ww_family_pathway_unknown",
+        "pathway_id": "wildfire_unregistered_pathway",
+        "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY"
+      },
+      "expected_output": {
+        "pathway_contract": "rejected",
+        "error_code": "UNSUPPORTED_PATHWAY_ID",
+        "fallback_curve_used": false,
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract"
+    },
+    {
+      "test_id": "WW_FSIM_CLASS_ALONE_CANNOT_UNLOCK_DAMAGE",
+      "category": "axis_validation",
+      "curve_id": null,
+      "pathway_id": "wildfire_thermal_attack",
+      "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+      "input": {
+        "event_id": "ww_event_fsim_only",
+        "event_family_id": "ww_family_fsim_only",
+        "pathway_id": "wildfire_thermal_attack",
+        "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+        "conditional_flame_length_class": "gte_8_lt_12_ft"
+      },
+      "expected_output": {
+        "axis_contract": "rejected",
+        "error_code": "PATHWAY_SPECIFIC_DELIVERED_LOAD_REQUIRED",
+        "fsim_class_used_as_damage_axis": false,
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "shared_wildfire_method_contract"
+    },
+    {
+      "test_id": "WW_NO_WILDFIRE_SOLAR_NUMERICAL_FALLBACK",
+      "category": "neighboring_cell_isolation",
+      "curve_id": null,
+      "pathway_id": "wildfire_thermal_attack",
+      "failure_unit_id": "WT_GSU_MAIN_TRANSFORMER",
+      "input": {
+        "event_id": "ww_event_solar_fallback",
+        "event_family_id": "ww_family_solar_fallback",
+        "pathway_id": "wildfire_thermal_attack",
+        "failure_unit_id": "WT_GSU_MAIN_TRANSFORMER",
+        "requested_fallback_curve_id": "WSV1_MV_EQUIPMENT_THERMAL",
+        "conditional_flame_length_class": "gte_12_ft"
+      },
+      "expected_output": {
+        "fallback_curve_used": false,
+        "neighboring_cell_curve_used": false,
+        "failure_unit_scalar_dr": {"value": null, "status": "withheld", "reason_codes": ["NO_RUNTIME_CURVE"]}
+      },
+      "tolerance": null,
+      "source": "fail_closed_contract"
+    },
+    {
+      "test_id": "WW_NO_LEGACY_THREE_CURVE_FALLBACK",
+      "category": "legacy_isolation",
+      "curve_id": null,
+      "pathway_id": "wildfire_thermal_attack",
+      "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+      "input": {
+        "event_id": "ww_event_legacy_fallback",
+        "event_family_id": "ww_family_legacy_fallback",
+        "pathway_id": "wildfire_thermal_attack",
+        "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+        "requested_fallback_curve_id": "legacy_wildfire_wind_rotor_nacelle_tower_logistic",
+        "legacy_fixed_distance_m": 30,
+        "legacy_height_attenuation": 0.25
+      },
+      "expected_output": {
+        "fallback_curve_used": false,
+        "legacy_curve_used": false,
+        "failure_unit_scalar_dr": {"value": null, "status": "withheld", "reason_codes": ["NO_RUNTIME_CURVE"]}
+      },
+      "tolerance": null,
+      "source": "legacy_rejection_contract"
+    },
+    {
+      "test_id": "WW_ENDOGENOUS_TURBINE_FIRE_REJECTS",
+      "category": "cell_boundary",
+      "curve_id": null,
+      "input": {
+        "event_id": "ww_event_endogenous",
+        "event_family_id": "ww_family_endogenous",
+        "pathway_id": "wildfire_thermal_attack",
+        "source_fire_origin": "turbine_internal_electrical",
+        "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY"
+      },
+      "expected_output": {
+        "cell_boundary_contract": "rejected",
+        "error_code": "OUT_OF_CELL_ENDOGENOUS_FIRE",
+        "fallback_curve_used": false,
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "scope_boundary_contract"
+    },
+    {
+      "test_id": "WW_LEASE_POLYGON_FULL_EXPOSURE_REJECTS",
+      "category": "spatial_exposure",
+      "curve_id": null,
+      "pathway_id": "wildfire_thermal_attack",
+      "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+      "input": {
+        "event_id": "ww_event_lease_polygon",
+        "event_family_id": "ww_family_lease_polygon",
+        "pathway_id": "wildfire_thermal_attack",
+        "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+        "asset_subject_grain": "wind_farm_lease_polygon",
+        "at_risk_fraction": 1
+      },
+      "expected_output": {
+        "exposure_contract": "rejected",
+        "error_code": "LEASE_POLYGON_NOT_ASSET_VALUE_FOOTPRINT",
+        "at_risk_fraction_accepted": false,
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "spatial_contract"
+    },
+    {
+      "test_id": "WW_UNKNOWN_CLEARANCE_OR_MITIGATION_GETS_NO_CREDIT",
+      "category": "site_condition_default",
+      "curve_id": null,
+      "pathway_id": "wildfire_thermal_attack",
+      "failure_unit_id": "WT_PAD_ELECTRICAL",
+      "input": {
+        "event_id": "ww_event_unknown_mitigation",
+        "event_family_id": "ww_family_unknown_mitigation",
+        "pathway_id": "wildfire_thermal_attack",
+        "failure_unit_id": "WT_PAD_ELECTRICAL",
+        "vegetation_clearance_state": "unknown",
+        "barrier_state": "unknown",
+        "suppression_availability": "unknown"
+      },
+      "expected_output": {
+        "mitigation_credit_applied": false,
+        "full_protection_assumed": false,
+        "failure_unit_scalar_dr": {"value": null, "status": "withheld", "reason_codes": ["NO_RUNTIME_CURVE"]}
+      },
+      "tolerance": null,
+      "source": "site_condition_contract"
+    },
+    {
+      "test_id": "WW_TURBINE_ASSEMBLY_STATES_MUST_BE_DEPENDENCY_SAFE",
+      "category": "double_count_control",
+      "curve_id": null,
+      "pathway_id": "wildfire_thermal_attack",
+      "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+      "input": {
+        "event_id": "ww_event_turbine_double_count",
+        "event_family_id": "ww_family_turbine_double_count",
+        "pathway_id": "wildfire_thermal_attack",
+        "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+        "component_state_charges_requested": ["rotor_replacement", "nacelle_replacement", "tower_replacement"],
+        "same_turbine_instance_id": "turbine_001"
+      },
+      "expected_output": {
+        "assembly_contract": "rejected",
+        "error_code": "DEPENDENT_TURBINE_STATES_MUST_BE_MUTUALLY_EXCLUSIVE",
+        "accepted_independent_damage_charges": 0,
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "dependency_safe_assembly_contract"
+    },
+    {
+      "test_id": "WW_AGGREGATE_GSU_FAILURE_UNIT_REJECTS",
+      "category": "failure_unit_grain",
+      "curve_id": null,
+      "pathway_id": "wildfire_firebrand_ignition",
+      "input": {
+        "event_id": "ww_event_gsu_aggregate",
+        "event_family_id": "ww_family_gsu_aggregate",
+        "pathway_id": "wildfire_firebrand_ignition",
+        "failure_unit_id": "WT_GSU_SUBSTATION"
+      },
+      "expected_output": {
+        "failure_unit_contract": "rejected",
+        "error_code": "AGGREGATE_FAILURE_UNIT_REJECTED",
+        "accepted_gsu_failure_unit_ids": [
+          "WT_GSU_MAIN_TRANSFORMER",
+          "WT_GSU_SWITCHGEAR_BUS",
+          "WT_GSU_PROTECTION_CONTROL_DC",
+          "WT_GSU_CABLE_TERMINATIONS"
+        ],
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "failure_unit_contract"
+    },
+    {
+      "test_id": "WW_SHARED_GSU_VALUE_IS_COUNTED_ONCE",
+      "category": "double_count_control",
+      "curve_id": null,
+      "input": {
+        "asset_id": "hybrid_or_multi_unit_fixture",
+        "component_instance_id": "facility_gsu_main_transformer_001",
+        "failure_unit_id": "WT_GSU_MAIN_TRANSFORMER",
+        "serves": ["wind_asset_01", "solar_asset_01"],
+        "same_unit_direct_replacement_value_usd": 5000000,
+        "attempted_value_instances": 2
+      },
+      "expected_output": {
+        "value_contract": "rejected",
+        "error_code": "DUPLICATE_SHARED_VALUE",
+        "accepted_component_value_instances": 1,
+        "scenario_loss_given_value_basis": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "shared_gsu_value_contract"
+    },
+    {
+      "test_id": "WW_NONDESTRUCTIVE_SMOKE_CLEANING_IS_OUT_OF_ORDINATE",
+      "category": "physical_damage_boundary",
+      "curve_id": null,
+      "pathway_id": "wildfire_residue_destructive_contamination",
+      "failure_unit_id": "WT_GSU_SWITCHGEAR_BUS",
+      "input": {
+        "event_id": "ww_event_smoke_cleaning",
+        "event_family_id": "ww_family_smoke_cleaning",
+        "pathway_id": "wildfire_residue_destructive_contamination",
+        "failure_unit_id": "WT_GSU_SWITCHGEAR_BUS",
+        "smoke_or_soot_present": true,
+        "inspection_disposition": "cleaning_only_no_destructive_physical_damage",
+        "temporary_outage_hr": 24
+      },
+      "expected_output": {
+        "ordinate_contract": "rejected",
+        "error_code": "OUT_OF_SCOPE_NONDESTRUCTIVE_CLEANING_OR_OUTAGE",
+        "cleaning_or_outage_embedded_in_damage_ratio": false,
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "physical_destruction_scope_contract"
+    },
+    {
+      "test_id": "WW_REFERENCE_VALUE_CANNOT_UNLOCK_LOSS",
+      "category": "value_basis_guardrail",
+      "curve_id": null,
+      "pathway_id": "wildfire_thermal_attack",
+      "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+      "input": {
+        "event_id": "ww_event_reference_value",
+        "event_family_id": "ww_family_reference_value",
+        "pathway_id": "wildfire_thermal_attack",
+        "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+        "reference_value_basis_usd_per_kw": 1090,
+        "reference_physical_value_usd_per_kw": 1623
+      },
+      "expected_output": {
+        "reference_value_used_as_site_value": false,
+        "failure_unit_scalar_dr": {"value": null, "status": "withheld", "reason_codes": ["NO_RUNTIME_CURVE"]},
+        "scenario_loss_given_value_basis": {"value": null, "status": "withheld", "reason_codes_include": ["NO_RUNTIME_CURVE", "MISSING_VALUE_BASIS"]}
+      },
+      "tolerance": null,
+      "source": "value_basis_contract"
+    },
+    {
+      "test_id": "WW_SUPPORT_ROWS_CANNOT_RECEIVE_INDEPENDENT_DR",
+      "category": "support_cost_boundary",
+      "curve_id": null,
+      "pathway_id": "wildfire_thermal_attack",
+      "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+      "input": {
+        "event_id": "ww_event_support_dr",
+        "event_family_id": "ww_family_support_dr",
+        "pathway_id": "wildfire_thermal_attack",
+        "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+        "requested_independent_damage_ratio": true
+      },
+      "expected_output": {
+        "support_cost_contract": "rejected",
+        "error_code": "SUPPORT_COST_REQUIRES_PRIOR_PHYSICAL_DISPOSITION",
+        "independent_support_damage_ratio_allowed": false,
+        "failure_unit_scalar_dr": {"value": null, "status": "not_evaluated"}
+      },
+      "tolerance": null,
+      "source": "support_allocation_contract"
+    },
+    {
+      "test_id": "WW_ANNUAL_AND_TAIL_METRICS_WITHHOLD",
+      "category": "reportability",
+      "curve_id": null,
+      "pathway_id": "wildfire_thermal_attack",
+      "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+      "input": {
+        "event_id": "ww_event_annual_tail",
+        "event_family_id": "ww_family_annual_tail",
+        "pathway_id": "wildfire_thermal_attack",
+        "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+        "requested_metrics": ["failure_unit_scalar_dr", "scenario_loss_given_value_basis", "scalar_eal", "pml", "var", "tvar"]
+      },
+      "expected_output": {
+        "failure_unit_scalar_dr": {"value": null, "status": "withheld", "reason_codes": ["NO_RUNTIME_CURVE"]},
+        "scenario_loss_given_value_basis": {"value": null, "status": "withheld", "reason_codes_include": ["NO_RUNTIME_CURVE"]},
+        "scalar_eal": {"value": null, "status": "withheld", "reason_codes_include": ["NO_RUNTIME_CURVE"]},
+        "pml": {"value": null, "status": "withheld", "reason_codes_include": ["NO_RUNTIME_CURVE"]},
+        "var": {"value": null, "status": "withheld", "reason_codes_include": ["NO_RUNTIME_CURVE"]},
+        "tvar": {"value": null, "status": "withheld", "reason_codes_include": ["NO_RUNTIME_CURVE"]}
+      },
+      "tolerance": null,
+      "source": "reportability_contract"
+    }
+  ]
+}

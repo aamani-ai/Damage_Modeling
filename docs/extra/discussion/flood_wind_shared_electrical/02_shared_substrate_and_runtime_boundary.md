@@ -13,6 +13,8 @@ The common layer owns reusable intrinsic concepts:
 - shared evidence lineage;
 - candidate response lineage and its limitations.
 
+At v0.2 it also records `FE_HAZUS_SUBSTATION_SCREENING_ASSEMBLY` and source-native response `FE_HAZUS21_SUBSTATION_ASSEMBLY_SCREENING_V1`: a legacy whole-substation candidate, exact ordinates, full-assembly denominator, current-Hazus negative authority, and assembly/component exclusivity. This is an alternative screening representation, not a shared component curve.
+
 The cell binding owns:
 
 - whether the component exists and is material;
@@ -30,13 +32,15 @@ Current bundle schemas expect self-contained cell artifacts and do not define an
 So the first release boundary is:
 
     docs/method/shared_components/flood_electrical/
-      = non-runtime vocabulary + compatibility rules + crosswalk
+      = non-runtime vocabulary + compatibility rules + evidence/candidate lineage
 
     docs/cells/flood_wind/proposed/
-      = governed fail-closed cell package
+      = governed cell packages; a v1 proposal may materialize the Hazus assembly locally
 
     docs/contracts/schemas/
       = unchanged
+
+The local materialization does not make the shared folder loadable, change canonical `flood_solar`, or create an implicit external join. The Hazus assembly's full-substation denominator also prevents it from being combined with component-level GSU curves.
 
 ## Recommended future runtime shape
 
@@ -53,3 +57,5 @@ This keeps Hazard runtime loading simple while eliminating independent manual cu
 ## Promotion trigger
 
 A runtime migration begins only when at least two cells demonstrate exact compatibility across equipment class, failure mechanism, x-axis, y-axis/denominator, selectors, and disposition endpoint. It is a `SCHEMA_CONTRACT_CHANGE`, with dual-read shadowing, rollback, artifact-index changes, and semantic-version review for every affected cell.
+
+The Hazus assembly does not satisfy this trigger. It is a legacy whole-substation screening response, not a two-cell component response; Hazus 7.0 now treats electric-power facilities as mapping-only and disables the default electric curves. Component curves and external shared-runtime migration remain deferred.

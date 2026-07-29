@@ -1,0 +1,219 @@
+{
+  "schema_version": "known_answer_tests.v3",
+  "cell_id": "tropical_cyclone_wind_solar",
+  "semantic_damage_model_version": "model v1.0",
+  "documentation_revision": "docs r1",
+  "artifact_schema_version": "damage_curve_record_bundle.v3",
+  "artifact_status": "noncanonical_coverage_first_screening_exception",
+  "absolute_tolerance": 1e-12,
+  "equation": {
+    "source_response": "pct_modules_damaged divided by 100",
+    "runtime_fit": "unweighted site-level PAVA over 34 source-cohort rows, then linear interpolation between pooled-block edges",
+    "runtime_range": "17.4 through 39.1 m/s inclusive; outside withheld; 48.2 m/s severe observation audit-only",
+    "ordinate_bridge": "uniform module-hardware value plus full replacement if visible or missing",
+    "scope": "one source-specific visible-module-hardware material replacement proxy only"
+  },
+  "source_data_known_answers": [
+    {
+      "test_id": "TCWS_PERCENT_CONVERSION_HIGH",
+      "input_percent": 41.42383192,
+      "expected_damage_ratio": 0.4142383192
+    },
+    {
+      "test_id": "TCWS_PERCENT_CONVERSION_LOW",
+      "input_percent": 0.810955181,
+      "expected_damage_ratio": 0.00810955181
+    },
+    {
+      "test_id": "TCWS_PERCENT_CONVERSION_ZERO",
+      "input_percent": 0,
+      "expected_damage_ratio": 0
+    },
+    {
+      "test_id": "TCWS_SOURCE_COHORT_COUNTS",
+      "expected": {
+        "manual_rows": 47,
+        "ground_rows": 37,
+        "ground_tracking_false_rows": 35,
+        "ground_tracking_true_rows": 2,
+        "runtime_fit_rows": 34,
+        "sparse_tail_audit_rows": 1
+      }
+    },
+    {
+      "test_id": "TCWS_SOURCE_FILE_HASH",
+      "expected_manual_csv_sha256": "edb34e74cc078bba1fdbe34463abadc794fd416caa66eb64ac3d0ed176ac5e00"
+    }
+  ],
+  "formula_known_answer_tests": [
+    {
+      "test_id": "TCWS_KNOT_MIN",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT",
+        "array_architecture_id": "PERRY_GROUND_NONTRACKING_SOURCE_COHORT_V1",
+        "source_population_match_id": "PERRY_MANUAL_GROUND_NONTRACKING_MIXED_SCALE_V1",
+        "module_value_distribution_assumption_id": "UNIFORM_MODULE_HARDWARE_VALUE",
+        "visible_damage_disposition_assumption_id": "FULL_REPLACEMENT_IF_VISIBLE_OR_MISSING",
+        "source_wind_product_id": "PERRY_DATASET_REPORTED_EVENT_MAX_GUST",
+        "causal_scope_acknowledgement_id": "SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS",
+        "perry_event_max_gust_mps": 17.4
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1",
+        "failure_unit_damage_ratio": 0
+      }
+    },
+    {
+      "test_id": "TCWS_KNOT_B03",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT",
+        "array_architecture_id": "PERRY_GROUND_NONTRACKING_SOURCE_COHORT_V1",
+        "source_population_match_id": "PERRY_MANUAL_GROUND_NONTRACKING_MIXED_SCALE_V1",
+        "module_value_distribution_assumption_id": "UNIFORM_MODULE_HARDWARE_VALUE",
+        "visible_damage_disposition_assumption_id": "FULL_REPLACEMENT_IF_VISIBLE_OR_MISSING",
+        "source_wind_product_id": "PERRY_DATASET_REPORTED_EVENT_MAX_GUST",
+        "causal_scope_acknowledgement_id": "SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS",
+        "perry_event_max_gust_mps": 24.6
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1",
+        "failure_unit_damage_ratio": 0.00027276656
+      }
+    },
+    {
+      "test_id": "TCWS_KNOT_B05",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT",
+        "array_architecture_id": "PERRY_GROUND_NONTRACKING_SOURCE_COHORT_V1",
+        "source_population_match_id": "PERRY_MANUAL_GROUND_NONTRACKING_MIXED_SCALE_V1",
+        "module_value_distribution_assumption_id": "UNIFORM_MODULE_HARDWARE_VALUE",
+        "visible_damage_disposition_assumption_id": "FULL_REPLACEMENT_IF_VISIBLE_OR_MISSING",
+        "source_wind_product_id": "PERRY_DATASET_REPORTED_EVENT_MAX_GUST",
+        "causal_scope_acknowledgement_id": "SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS",
+        "perry_event_max_gust_mps": 29.5
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1",
+        "failure_unit_damage_ratio": 0.001853190692857
+      }
+    },
+    {
+      "test_id": "TCWS_KNOT_MAX",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT",
+        "array_architecture_id": "PERRY_GROUND_NONTRACKING_SOURCE_COHORT_V1",
+        "source_population_match_id": "PERRY_MANUAL_GROUND_NONTRACKING_MIXED_SCALE_V1",
+        "module_value_distribution_assumption_id": "UNIFORM_MODULE_HARDWARE_VALUE",
+        "visible_damage_disposition_assumption_id": "FULL_REPLACEMENT_IF_VISIBLE_OR_MISSING",
+        "source_wind_product_id": "PERRY_DATASET_REPORTED_EVENT_MAX_GUST",
+        "causal_scope_acknowledgement_id": "SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS",
+        "perry_event_max_gust_mps": 39.1
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1",
+        "failure_unit_damage_ratio": 0.0182729376325
+      }
+    },
+    {
+      "test_id": "TCWS_INTERPOLATE_19P5",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT",
+        "array_architecture_id": "PERRY_GROUND_NONTRACKING_SOURCE_COHORT_V1",
+        "source_population_match_id": "PERRY_MANUAL_GROUND_NONTRACKING_MIXED_SCALE_V1",
+        "module_value_distribution_assumption_id": "UNIFORM_MODULE_HARDWARE_VALUE",
+        "visible_damage_disposition_assumption_id": "FULL_REPLACEMENT_IF_VISIBLE_OR_MISSING",
+        "source_wind_product_id": "PERRY_DATASET_REPORTED_EVENT_MAX_GUST",
+        "causal_scope_acknowledgement_id": "SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS",
+        "perry_event_max_gust_mps": 19.5
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1",
+        "failure_unit_damage_ratio": 0.00013638328
+      }
+    },
+    {
+      "test_id": "TCWS_INTERPOLATE_24P7",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT",
+        "array_architecture_id": "PERRY_GROUND_NONTRACKING_SOURCE_COHORT_V1",
+        "source_population_match_id": "PERRY_MANUAL_GROUND_NONTRACKING_MIXED_SCALE_V1",
+        "module_value_distribution_assumption_id": "UNIFORM_MODULE_HARDWARE_VALUE",
+        "visible_damage_disposition_assumption_id": "FULL_REPLACEMENT_IF_VISIBLE_OR_MISSING",
+        "source_wind_product_id": "PERRY_DATASET_REPORTED_EVENT_MAX_GUST",
+        "causal_scope_acknowledgement_id": "SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS",
+        "perry_event_max_gust_mps": 24.7
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1",
+        "failure_unit_damage_ratio": 0.0006139711975
+      }
+    },
+    {
+      "test_id": "TCWS_INTERPOLATE_30P75",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT",
+        "array_architecture_id": "PERRY_GROUND_NONTRACKING_SOURCE_COHORT_V1",
+        "source_population_match_id": "PERRY_MANUAL_GROUND_NONTRACKING_MIXED_SCALE_V1",
+        "module_value_distribution_assumption_id": "UNIFORM_MODULE_HARDWARE_VALUE",
+        "visible_damage_disposition_assumption_id": "FULL_REPLACEMENT_IF_VISIBLE_OR_MISSING",
+        "source_wind_product_id": "PERRY_DATASET_REPORTED_EVENT_MAX_GUST",
+        "causal_scope_acknowledgement_id": "SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS",
+        "perry_event_max_gust_mps": 30.75
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1",
+        "failure_unit_damage_ratio": 0.0042346619775
+      }
+    },
+    {
+      "test_id": "TCWS_INTERPOLATE_38P4",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT",
+        "array_architecture_id": "PERRY_GROUND_NONTRACKING_SOURCE_COHORT_V1",
+        "source_population_match_id": "PERRY_MANUAL_GROUND_NONTRACKING_MIXED_SCALE_V1",
+        "module_value_distribution_assumption_id": "UNIFORM_MODULE_HARDWARE_VALUE",
+        "visible_damage_disposition_assumption_id": "FULL_REPLACEMENT_IF_VISIBLE_OR_MISSING",
+        "source_wind_product_id": "PERRY_DATASET_REPORTED_EVENT_MAX_GUST",
+        "causal_scope_acknowledgement_id": "SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS",
+        "perry_event_max_gust_mps": 38.4
+      },
+      "expected": {
+        "status": "conditional",
+        "curve_id": "TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1",
+        "failure_unit_damage_ratio": 0.01134374284125
+      }
+    }
+  ],
+  "rejection_tests": [
+    {"test_id": "TCWS_BELOW_RANGE", "mutation": {"perry_event_max_gust_mps": 17.3999}, "expected_error_code": "AXIS_OUTSIDE_VALID_RANGE"},
+    {"test_id": "TCWS_ABOVE_RANGE", "mutation": {"perry_event_max_gust_mps": 39.1001}, "expected_error_code": "AXIS_OUTSIDE_VALID_RANGE"},
+    {"test_id": "TCWS_SPARSE_TAIL_REJECTED", "mutation": {"perry_event_max_gust_mps": 48.2}, "expected_error_code": "AXIS_OUTSIDE_VALID_RANGE"},
+    {"test_id": "TCWS_TRACKER_REJECTED", "mutation": {"array_architecture_id": "single_axis_tracker"}, "expected_error_code": "SELECTOR_MISMATCH"},
+    {"test_id": "TCWS_WRONG_WIND_PRODUCT_REJECTED", "mutation": {"source_wind_product_id": "NHC_MAX_SUSTAINED_WIND"}, "expected_error_code": "SELECTOR_MISMATCH"},
+    {"test_id": "TCWS_MISSING_ECONOMIC_BRIDGE_REJECTED", "remove_field": "module_value_distribution_assumption_id", "expected_error_code": "SELECTOR_REQUIRED"},
+    {"test_id": "TCWS_EXTRA_EXPOSURE_REJECTED", "mutation": {"at_risk_fraction": 0.5}, "expected_error_code": "EXTRA_EXPOSURE_FRACTION_PROHIBITED"},
+    {"test_id": "TCWS_VALUE_INPUT_REJECTED", "mutation": {"direct_replacement_value_usd": 1000000}, "expected_error_code": "SCENARIO_LOSS_WITHHELD_NONCANONICAL_PROPOSAL"},
+    {"test_id": "TCWS_WRONG_PATHWAY_REJECTED", "mutation": {"pathway_id": "strong_wind"}, "expected_error_code": "UNSUPPORTED_PATHWAY_ID"}
+  ],
+  "withheld_unit_tests": [
+    {"test_id": "TCWS_GENERIC_MODULE_WITHHELD", "failure_unit_id": "PV_FIXED_TILT_MODULE_FIELD", "expected_reason_code": "SOURCE_SPECIFIC_ATOM_NOT_GENERIC_MODULE_FIELD"},
+    {"test_id": "TCWS_TRACKER_MODULE_WITHHELD", "failure_unit_id": "PV_TRACKER_MODULE_FIELD", "expected_reason_code": "TRACKER_POPULATION_NOT_SUPPORTED"},
+    {"test_id": "TCWS_SUPPORT_WITHHELD", "failure_unit_id": "PV_FIXED_TILT_SUPPORT_STRUCTURE", "expected_reason_code": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"},
+    {"test_id": "TCWS_GSU_WITHHELD", "failure_unit_id": "PV_GSU_SUBSTATION", "expected_reason_code": "FACILITY_LEVEL_SHARED_SUBASSET_REQUIRES_CELL_LOCAL_BINDING"}
+  ]
+}

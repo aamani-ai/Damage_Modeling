@@ -438,20 +438,35 @@ def validate_registers(
         [row["flood_solar_source_record"] for row in numeric_candidates] == ["FS_SWG"],
         "numeric candidate isolation changed",
     )
+    v0_shared_evidence_rows = [
+        row
+        for row in shared_evidence_rows
+        if row["shared_evidence_id"]
+        not in {
+            "FEMA_HAZUS_MH_2_1_TABLE_7_9",
+            "FEMA_HAZUS_7_0_ELECTRIC_MAPPING_ONLY_DISABLED",
+        }
+    ]
     shared_evidence_ids = {
-        row["shared_evidence_id"] for row in shared_evidence_rows
+        row["shared_evidence_id"] for row in v0_shared_evidence_rows
     }
-    require(len(shared_evidence_rows) == 7, "shared evidence row count changed")
+    require(len(v0_shared_evidence_rows) == 7, "v0.1 shared evidence subset changed")
     require(
-        len(shared_evidence_ids) == len(shared_evidence_rows),
-        "duplicate shared evidence ID",
+        len({row["shared_evidence_id"] for row in shared_evidence_rows})
+        == len(shared_evidence_rows),
+        "duplicate shared evidence ID across additive substrate versions",
     )
     require(
-        all(row["source_register_id"] in source_ids for row in shared_evidence_rows),
-        "shared evidence does not resolve to the governed source register",
+        all(row["source_register_id"] in source_ids for row in v0_shared_evidence_rows),
+        "v0.1 shared evidence does not resolve to its governed source register",
     )
-    require(len(shared_catalog_rows) == 6, "shared failure catalog row count changed")
-    for row in shared_catalog_rows:
+    v0_shared_catalog_rows = [
+        row
+        for row in shared_catalog_rows
+        if row["shared_failure_unit_id"] != "FE_HAZUS_SUBSTATION_SCREENING_ASSEMBLY"
+    ]
+    require(len(v0_shared_catalog_rows) == 6, "v0.1 shared failure catalog subset changed")
+    for row in v0_shared_catalog_rows:
         unresolved = split_ids(row["evidence_ids"]) - shared_evidence_ids
         require(
             not unresolved,
@@ -461,6 +476,13 @@ def validate_registers(
             row["runtime_loadable"] == "false",
             f"{row['shared_failure_unit_id']}: shared catalog became runtime-loadable",
         )
+    additive_rows = [
+        row
+        for row in shared_catalog_rows
+        if row["shared_failure_unit_id"] == "FE_HAZUS_SUBSTATION_SCREENING_ASSEMBLY"
+    ]
+    require(len(additive_rows) == 1, "additive shared screening assembly missing")
+    require(additive_rows[0]["runtime_loadable"] == "false", "additive shared assembly became runtime-loadable")
 
 
 def validate_axis_shared_and_candidate(

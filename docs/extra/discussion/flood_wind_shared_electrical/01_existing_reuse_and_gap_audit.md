@@ -23,6 +23,21 @@ Reusable method facts are stronger than the reusable numbers:
 - duration, contamination/salinity, and energized/shutdown state as conditioners;
 - component value and exposed fraction outside intrinsic fragility.
 
+## Phase-2 FEMA Hazus finding
+
+FEMA Hazus-MH 2.1 Table 7.9 provides one source-native whole-substation screening series for low-, medium-, and high-voltage substations (`ESSL`, `ESSM`, and `ESSH`). All three classes use the same values:
+
+| Flood depth above substation grade (ft) | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Percent damage | 0 | 2 | 4 | 6 | 7 | 8 | 9 | 10 | 12 | 14 | 15 |
+| Damage ratio | 0 | .02 | .04 | .06 | .07 | .08 | .09 | .10 | .12 | .14 | .15 |
+
+The source frames lifeline percent damage relative to full replacement cost. For this implementation, the denominator is therefore the full direct replacement value of the same physical substation assembly. Table 7.9's comments combine control-room damage, cabling, and incidental transformer/switchgear damage; they do not allocate component DRs. Its separate 4 ft functionality threshold is operational, not a physical-damage breakpoint. Section 7.2.4 also says electric-power implementation was deferred, creating a legacy implementation conflict that must remain visible.
+
+Current FEMA Hazus 7.0 materially limits the legacy source: the Flood Model lists electric-power plants and substations as mapping-only and says that its viewable default electric-power damage functions are not enabled and produce no results. The Inventory Manual likewise says these electric classes are not analyzed in the Flood Model. The 2.1 series is therefore a **legacy source-native screening reference**, not current calibration or runtime endorsement. A local record may interpolate only within 0–10 ft and must withhold negative, nonfinite, or above-range depth rather than clamp or extrapolate.
+
+Decision: preserve `FE_HAZUS_SUBSTATION_SCREENING_ASSEMBLY` and source-native response `FE_HAZUS21_SUBSTATION_ASSEMBLY_SCREENING_V1` in the shared method layer, and permit a self-contained `FW_HAZUS_GSU_SUBSTATION_ASSEMBLY` only in a flood-wind-local noncanonical v1 proposal. It must be mutually exclusive with all GSU component units and use one same-substation value; it does not become shared runtime authority.
+
 ## Hazard consumer placeholder
 
 The current Hazard flood/wind M3 code is a useful regression fixture, not calibration. It uses fixed project shares and four anchored logistics:
@@ -38,7 +53,7 @@ The code subtracts the logistic value at zero but does not renormalize. Therefor
 
 The fixed substation share of 9% is also not supported by the current CWER ledger. That ledger contains one mixed external-electrical row of 72 2023 USD/kW and requires a split. A mapped substation location or OSM role proves neither ownership nor insured-value inclusion.
 
-## Gap that blocks a runtime curve
+## Gap that still blocks component curves and shared runtime
 
 No reviewed public chain currently joins, for representative wind-farm electrical equipment:
 
@@ -47,4 +62,4 @@ No reviewed public chain currently joins, for representative wind-farm electrica
       -> same-unit direct repair/replacement cost
       -> selector-qualified population response
 
-`flood_wind` therefore begins as a noncanonical zero-curve scaffold. Candidate solar ordinates remain visible and pinned in the audit layer; they cannot populate a damage emit.
+`flood_wind` therefore began as a noncanonical zero-curve scaffold. Phase 2 now supports one narrow legacy whole-substation screening assembly for a separately governed, noncanonical v1 proposal, but it does not close the component evidence chain above. Candidate solar ordinates remain audit-only; no component response or external shared-runtime migration is approved.

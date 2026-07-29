@@ -7,8 +7,9 @@ which two hazard mechanisms share an asset substrate but require different axes,
 capabilities, and consumer routing.
 
 This standard defines the proposed v3 contract for that case. It is used by the `wind_tornado_wind` and
-`strong_wind_solar` model v2.0 proposals and remains a draft until a v3 model and its Hazard migration pass
-promotion review. Existing canonical artifacts remain bundle v2 and emit v1.
+`strong_wind_solar` model-v2.0 proposals and the `tropical_cyclone_wind_wind` and `flood_wind` model-v1.0
+proposals. It remains a draft until a v3 model and its Hazard migration pass promotion review. Existing
+canonical artifacts remain bundle v2 and emit v1.
 
 ```yaml
 artifact_schema: damage_curve_record_bundle.v3
@@ -65,7 +66,9 @@ capability_declaration:
 Every `(pathway_id, failure_unit_id)` combination receives either a curve record or an explicit withheld
 treatment with reason codes. A shared failure-unit list does not authorize parameter sharing.
 
-## 4. Ordered damage-state lognormal form
+## 4. Pinned curve forms
+
+### 4.1 Ordered damage-state lognormal
 
 The initial v3 evaluator pins one pathway-aware form:
 
@@ -111,6 +114,62 @@ Semantic validation additionally requires:
 
 An engineering envelope is not a confidence interval, percentile band, or sampled distribution merely
 because it has three scenarios.
+
+### 4.2 Thresholded Weibull expected damage
+
+The draft v3 schema also pins the source-derived form used by the tropical-cyclone wind × wind proposal:
+
+```text
+curve_form = thresholded_weibull_expected_damage
+
+DR(V) = 0                                                   if V <= V_zero
+DR(V) = max_dr * {1 - exp[-ln(2) * ((V - V_zero) / delta_V50)^rho]}
+                                                            if V > V_zero
+```
+
+The record requires:
+
+```yaml
+parameters:
+  V_zero_kmh: <nonnegative source threshold>
+  delta_V50_kmh: <positive offset above V_zero>
+  rho: <positive shape parameter>
+  V_at_DR50_kmh: <V_zero + delta_V50>
+  max_dr: <0..1>
+selector_match:
+  turbine_archetype_id: <exact source archetype>
+  rated_power_mw: <positive>
+  hub_height_m: <positive>
+  rotor_diameter_m: <positive>
+```
+
+The absolute 50%-damage wind is `V_zero_kmh + delta_V50_kmh`; the `delta` parameter must not be interpreted
+as an absolute wind speed. A cell validator must check that identity, monotonicity, bounds, exact selectors,
+the source-supported intensity range, and all fail-closed branches.
+
+The form does not itself authorize extrapolation, generic asset transfer, denominator/value conversion, or
+whole-asset coverage. Those remain cell-level pathway, selector, failure-unit, value, and capability rules.
+
+### 4.3 Pathway-aware piecewise-linear damage
+
+Source-tabulated depth/state relationships use:
+
+```text
+curve_form = piecewise_linear
+DR(x)      = linear interpolation between adjacent source knots
+```
+
+The record pins `parameters.points`, `valid_range`, `interpolation_policy`, `extrapolation_policy`, an exact
+`selector_match`, `source_parameter_refs`, and `metadata_flags`. The cell validator must prove that the record
+pathway, `x_axis`, `valid_range`, and selector match agree with the containing pathway contract. Knots must be
+strictly increasing in `x`; DR must remain in
+`[0,1]`; and the cell validator must test every knot, interior interpolation, monotonicity where claimed,
+boundaries, and all out-of-range branches. The schema deliberately does not choose whether an endpoint is
+clamped, zeroed, or withheld—the source and cell contract must make that decision explicitly.
+
+The initial pathway-aware use is the `flood_wind` FEMA-Hazus whole-substation screening record. That source
+atom is not interchangeable with a component-local switchgear, transformer, relay, cable, or whole-wind-farm
+record merely because all use water depth.
 
 ## 5. Axis and proxy rules
 

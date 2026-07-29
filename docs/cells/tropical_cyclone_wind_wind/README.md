@@ -5,228 +5,193 @@
 ```yaml
 cell_id: tropical_cyclone_wind_wind
 pathway_id: tropical_cyclone_wind
-damage_code_id: TROPICAL_CYCLONE_WIND_WIND_PROPOSED_V0_1
-semantic_damage_model_version: model v0.1
+damage_code_id: TROPICAL_CYCLONE_WIND_WIND_JAIMES_SCREENING_V1
+semantic_damage_model_version: model v1.0
 human_documentation_revision: docs r1
-runtime_documentation_revision: none
-lifecycle_state: scaffold
+lifecycle_state: release_candidate
 promotion_status: proposed
-review_status: pressure_tested
-model_grade: no_runtime_curve_research_scaffold
+review_status: pressure_tested_pending_independent_review
+model_grade: screening_source_derived_engineering_proxy
+artifact_schema_version: damage_curve_record_bundle.v3
+artifact_schema_status: proposed_draft
 canonical_runtime_artifact: false
-curve_records: 0
-runtime_reason: NO_RUNTIME_CURVE
+current_runtime_pointer: none
 package_release: unreleased
 ```
 
-This is the first governed tropical-cyclone/hurricane wind model workstream for a land-based wind farm. It
-reuses the wind-turbine anatomy, repeated-unit exposure pattern, and row-level value ledger developed for
-`wind_tornado_wind`; it does **not** reuse that cell's convective or tornado curve parameters. Model v0.1 is a
-noncanonical, fail-closed research scaffold: it defines the cell boundary and candidate units without
-publishing a numeric damage curve.
+This page is the current **cell-documentation anchor**. It describes the proposed model v1.0/docs r1
+release candidate, not a current production curve. The proposal is absent from the artifact index, has no
+`current/` folder or consumer pin, and makes no Hazard cutover.
 
-## 2. Snapshot tree
+Model v1.0 changes one conclusion from the historical v0.1 scaffold. Jaimes et al. publish an expected
+economic damage-ratio function, not only a DS3 collapse fragility. The function can be retained honestly for
+the paper's own source-native turbine-tower exposure unit and three exact source archetypes. It still cannot
+be presented as a generic whole-turbine, wind-farm, CWER-value, or claims-calibrated curve.
 
-```text
-tropical-cyclone wind × onshore wind
-├─ primary candidates — all numeric DR withheld in model v0.1
-│  ├─ WT_TURBINE_EQUIPMENT_ASSEMBLY / rotor + nacelle + tower
-│  ├─ WT_FOUNDATION / turbine foundation and base
-│  └─ WT_EXTERNAL_ELECTRICAL / split required before modeling
-│     ├─ pad or cluster equipment
-│     ├─ collection line or network
-│     └─ substation and control point or polygon
-│
-├─ conditioner-only systems and states
-│  ├─ yaw, pitch, brake, grid, and backup-power state
-│  └─ control history, operating state, duration, veer, and turbulence
-│
-├─ reviewed secondary / unresolved units
-│  ├─ WT_CIVIL_INFRA / roads, crane pads, buildings, and fences
-│  ├─ SUPPORT_FIELDWORK / allocate once after qualified damage
-│  └─ SUPPORT_TRANSPORT_LOGISTICS / allocate once when required
-│
-└─ no DR≈0 direct-TC-wind bucket is asserted in model v0.1
-   └─ absent evidence is withheld, never converted to zero
-```
-
-## 3. Scope and exclusions
-
-In scope is occurrence-based direct physical destruction from the tropical-cyclone boundary layer, eyewall,
-and rainband wind field acting on modern land-based, multi-megawatt, horizontal-axis turbines. The intended
-future grain includes repeated turbine equipment and foundations plus appropriately split electrical and
-civil plant units.
-
-Routed elsewhere or deferred are TC-spawned tornadoes; storm surge, pluvial flooding, scour, saturated-soil
-or slope failure; debris impact and wind-driven-rain ingress as independent pathways; offshore wind systems;
-fatigue, rain erosion, lightning, and fire; and business interruption, curtailment, revenue, insurance,
-frequency, EAL, PML, VaR, TVaR, and portfolio accumulation. Compound child pathways must retain the same
-`event_family_id` so the consumer can coordinate occurrence loss without duplicate charges.
-
-## 4. Primary nonzero failure-unit(s)
-
-There are **no released nonzero failure units in model v0.1**. The following are primary candidates, but every
-numeric DR remains withheld:
-
-| Candidate unit | Intended mechanism or role | Model v0.1 treatment | Release blocker |
-|---|---|---|---|
-| `WT_TURBINE_EQUIPMENT_ASSEMBLY` | Dependency-safe rotor, nacelle, and tower damage states | Primary candidate; no curve | No representative all-severity probability-to-cost chain |
-| `WT_FOUNDATION` | Wind-driven overturning, capacity loss, and post-collapse disposition | Primary/exception review; withheld, not DR≈0 | Wind-only demand, state precedence, and disposition unresolved |
-| `WT_EXTERNAL_ELECTRICAL` | Pad equipment, collection, and substation/control damage | Primary candidates after required split; no curve | Different point, line, network, and shared-asset exposure grains |
-
-Tower collapse can destroy or force replacement of rotor and nacelle, and foundation replacement can force
-equipment replacement. A future model must use mutually exclusive states or another precedence-safe
-construction rather than summing independent terminal component losses.
-
-## 5. Conditioner-only equipment
-
-Yaw, pitch, brake, grid, backup-power, and control systems are conditioner-only in this scaffold when their
-event-time state changes turbine response. They do not receive independent TC-wind curves or universal
-protection multipliers. Operating state, control-history basis, duration, direction change, veer, and
-turbulence are also retained as conditioners. Unknown state receives no protective or worst-case default.
-
-The complete field-role contract lives in the
-[site and event-condition adapter](proposed/SITE_CONDITION_ADAPTER_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md).
-
-## 6. Reviewed secondary / low-materiality equipment
-
-| Unit | Coverage role | Why no model v0.1 curve | Update trigger |
-|---|---|---|---|
-| `WT_CIVIL_INFRA` | Reviewed secondary; split required | Roads, crane pads, buildings, fences, and facilities mix different mechanisms and exposure grains | Asset-specific split plus matched demand, disposition, and cost evidence |
-| `SUPPORT_FIELDWORK` | Post-damage support allocation | Support is consequence cost, not a wind-fragility subject | Reviewed rule linking qualified repair scope to fieldwork once |
-| `SUPPORT_TRANSPORT_LOGISTICS` | Post-damage support allocation | Distance, crane, access, and replacement scope are unresolved | Reviewed rule linking qualified replacement scope to transport once |
-
-These roles are not permanent low-materiality judgments. They prevent unsupported aggregation while the
-required unit splits and evidence are developed.
-
-## 7. DR≈0 / not-directly-affected buckets
-
-Model v0.1 assigns **no physical bucket DR≈0 merely because evidence is missing**. Foundation, electrical,
-and civil units remain explicitly withheld. Soft, sunk, financing, development, tax, insurance, and other
-nonphysical installed-cost rows are outside the direct-physical damage denominator; they are excluded rather
-than assigned a physical zero curve.
-
-| Bucket type | Model v0.1 disposition |
-|---|---|
-| Primary nonzero | None released; candidate units withheld |
-| Conditioner-only | Turbine control and event-time response states |
-| Secondary / unresolved | Civil units and post-damage support allocation |
-| DR≈0 direct effect | None asserted |
-| Out of scope | Neighboring hazards, offshore mechanisms, disruption, finance, and annual/tail analytics |
-
-## 8. Hazard x-axis decision
-
-No runtime x-axis is frozen. NHC one-minute sustained surface wind at 10 m is a valid upstream storm-field
-quantity, not turbine-local demand. The Jaimes candidate uses a 3-second peak gust at 10 m; the Rose candidate
-uses 10-minute hub-height wind. Saffir–Simpson category is context only, and those quantities are not
-interchangeable.
-
-The preferred research direction is a versioned TC bridge that preserves source height, averaging period,
-exposure, terrain/topography, gust treatment, hub/rotor demand, duration, direction/veer, turbulence,
-validity, and uncertainty. No global power-law exponent or gust factor is adopted.
-
-## 9. Curve form and y-axis meaning
-
-There is no runtime curve form or damage-ratio y-axis in model v0.1. The proposed artifact has
-`curve_records: []`; numeric damage and loss outputs are withheld with `NO_RUNTIME_CURVE`.
-
-Two source-native candidate fragilities are retained for audit only: Jaimes lognormal probability of DS3
-tower-wall buckling/collapse and Rose logistic probability of tower buckling for narrowly specified turbine
-and control states. Probability of a structural state is not expected repair-or-replacement cost divided by
-same-unit value. A future economic curve must assemble mutually exclusive states and same-unit consequences:
+## 2. What model v1.0 supports
 
 ```text
-DR = sum_s P(state_s | delivered demand, verified conditions)
-             × E(same-unit cost ratio | state_s, selectors)
+source-native 3-second peak gust at 10 m, in km/h
+                         |
+                         v
+             exact Jaimes archetype selector
+                         |
+                         v
+ WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT, one turbine point
+                         |
+                         v
+ conditional scalar mean DR only; no dollar or plant-loss binding
 ```
 
-## 10. Selector / conditioner / exposure map
+The only numeric failure unit is:
 
-| Role | Examples | Model v0.1 rule |
+`WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT`
+
+It is a quarantined, source-defined unit. It is mutually exclusive with the standard
+`WT_TURBINE_EQUIPMENT_ASSEMBLY`; it is neither a CWER tower bucket nor an extra value row to add beside the
+standard turbine assembly.
+
+## 3. Exact curve records
+
+All three records use `curve_form: thresholded_weibull_expected_damage`:
+
+```text
+DR(V) = 0,                                                        V <= V_zero
+DR(V) = max_dr * [1 - 0.5^(((V - V_zero) / delta_V50)^rho)],     V > V_zero
+```
+
+`V_zero_kmh = 90` and `max_dr = 1` for every record.
+
+| Exact selector ID | Rating / hub / rotor | `delta_V50_kmh` | `rho` | `V_at_DR50_kmh` |
+|---|---|---:|---:|---:|
+| `TCWW_JAIMES_GENERIC_1MW_HH44_V1` | 1 MW / 44 m / 50 m | 106.77 | 8.94 | 196.77 |
+| `TCWW_JAIMES_GENERIC_2P5MW_HH80_V1` | 2.5 MW / 80 m / 90 m | 82.52 | 4.54 | 172.52 |
+| `TCWW_JAIMES_GENERIC_3P3MW_HH100_V1` | 3.3 MW / 100 m / 114 m | 73.30 | 4.99 | 163.30 |
+
+Selection is exact. There is no default, alias, nearest-neighbor selection, interpolation, or implicit
+transfer to a modern fleet or actual make/model. The 1 MW selector follows the paper's Table 2 value of 44 m
+and carries the documented 44 m versus 40 m source discrepancy.
+
+## 4. Native axis and domain behavior
+
+```yaml
+hazard_axis_id: TC_PEAK_GUST_3S_10M_KMH_JAIMES
+input_field: tc_peak_gust_3s_10m_kmh
+quantity: three-second peak gust
+reference_height_m: 10
+unit: km/h
+source_simulation_range_kmh: [108, 252]
+```
+
+| Delivered `V` | Result |
+|---:|---|
+| nonfinite or `< 0` | reject |
+| `0 <= V <= 90` | emit DR `0` with `SOURCE_ASSUMED_NO_DAMAGE_THRESHOLD_NOT_EMPIRICAL` |
+| `90 < V < 108` | withhold `BELOW_SOURCE_SIMULATION_RANGE` |
+| `108 <= V <= 252` | evaluate the selected curve |
+| `V > 252` | withhold `ABOVE_SOURCE_SIMULATION_RANGE` |
+
+NHC one-minute sustained wind, Saffir-Simpson category, hub-height wind, knots, mph, m/s, and Rose's
+10-minute hub-height wind are not accepted aliases. Model v1.0 includes no height, averaging-period, terrain,
+gust, or rotor bridge.
+
+## 5. Source-state and exposure guardrails
+
+Every supported request must acknowledge:
+
+```yaml
+source_model_assumption_set_id: JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED
+```
+
+That identifier preserves the source's generic fixed-base steel-tower model and its internally inconsistent
+feathered/minimum-drag versus parked/no-pitch wording, with wind parallel to the rotor and no yawing. It is
+not a protection credit. A known-inconsistent actual control state withholds; an unknown state may be
+evaluated only with an explicit flag and no numeric adjustment.
+
+Evaluation is per qualifying turbine point and local source-native gust. The turbine exposure fraction is
+not reusable for foundations, collection lines, a shared GSU yard, control buildings, or civil assets. In
+particular, `WT_GSU_SUBSTATION` is one facility-level exposure and is never multiplied by turbine count.
+
+## 6. Coverage beyond the source-native atom
+
+| Failure unit | Model v1.0 treatment | Key reason |
 |---|---|---|
-| Selector | make/model, rating, hub/rotor dimensions, tower, foundation, design class, TMD, vintage | Select only a verified archetype; no generic transfer or automatic resilience credit |
-| Conditioner | operating, yaw, pitch, brake, grid, backup, duration, veer, turbulence | Capture state; no universal multiplier or favorable unknown default |
-| Axis bridge | height, averaging, gust, terrain, duration, direction, turbulence | Produce delivered demand with named method, provenance, uncertainty, and validity |
-| Exposure | turbine/cluster point, collection line/network, substation point/polygon, civil geometry | Match local demand and value at the same subject grain; no whole-site default |
-| Value | same-unit direct replacement value | Convert qualified DR to cost; never substitute for fragility or exposure |
-| Support | fieldwork and transport | Allocate once after qualified repair/replacement scope; never use as a wind curve |
+| `WT_TURBINE_EQUIPMENT_ASSEMBLY` | withheld, not zero | source denominator is not harmonized and non-tower failure modes are omitted |
+| `WT_FOUNDATION` | withheld, not zero | no qualified direct TC-wind curve |
+| `WT_PAD_MOUNTED_ELECTRICAL` | withheld, not zero | electrical value/exposure split required |
+| `WT_COLLECTION_SYSTEM` | withheld, not zero | line/network exposure and response required |
+| `WT_GSU_SUBSTATION` | withheld, not zero | facility-level curve, exposure, and value split required |
+| `WT_CONTROL_BUILDING_AND_SCADA` | withheld, not zero | no qualified subject-specific curve |
+| `WT_CIVIL_INFRA` | withheld, not zero | mixed civil bucket requires a subject split |
+| `SUPPORT_FIELDWORK` | no intrinsic DR | allocate once after qualified disposition |
+| `SUPPORT_TRANSPORT_LOGISTICS` | no intrinsic DR | allocate once after qualified disposition |
 
-## 11. Value-link basis
+Withheld means unsupported or unknown. It never means physically immune, zero loss, or permission to inherit
+the Jaimes curve.
 
-The reference NREL CWER ledger, in 2023 USD/kW, is reusable for structure and reconciliation but is not a
-site appraisal:
+## 7. Y-axis, value, and reportability
 
-| Value layer | Reference value |
-|---|---:|
-| Turbine equipment | 1,090 |
-| Other direct | 239 |
-| Support | 294 |
-| Physical | 1,623 |
-| Excluded nonphysical | 345 |
-| Installed | 1,968 |
+The numeric ordinate is the conditional expected direct repair-or-replacement cost ratio for the
+source-defined Jaimes turbine-tower exposure unit relative to the paper's replacement-cost proxy. The paper
+constructs it from modeled tower damage-state probabilities and assumed state cost ratios. That supports a
+Tier-4 screening proxy; it does not establish a field- or claims-calibrated curve.
 
-The turbine-equipment assembly is 67.1596% of physical value and 55.3862% of installed value. Those are
-denominator conversions, not DR caps. Exact site/OEM value, matching exposed subject, and a support-allocation
-rule are required before loss can be reported.
+The source denominator is internally ambiguous across “selected structure,” “turbine tower,” and “total cost
+of the turbine.” It is not approved as CWER turbine equipment, plant physical value, installed value, or TIV.
+Therefore model v1.0 supports only a conditional scalar mean DR for the source-native unit. It does not emit:
 
-## 12. Evidence and derivation pointer
+- source-unit or site dollar loss;
+- standard turbine-equipment, wind-farm, or full-TIV DR;
+- scenario or plant loss;
+- curve spread or state probabilities; or
+- EAL, PML, VaR, TVaR, or portfolio metrics.
 
-Curve and withholding proof lives in the
-[model v0.1 derivation dossier](proposed/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v0_1__docs_r1.md).
-The `BOUNDED_EVIDENCE_SEARCH_LOG`, `NUMERICAL_CANDIDATE_AUDIT`, source/claim/parameter registers,
-`PRESSURE_TEST`, and `PROMOTION_GATE_MATRIX` in `proposed/`
-carry the evidence limits and release decision.
+## 8. Scope exclusions
 
-The evidence supports source-wind semantics, required selectors/conditioners, and narrow structural
-fragility candidates. It does not yet join representative modern turbine-local TC demand, all-severity
-inspection/disposition, and same-unit repair or replacement cost.
+The proposal covers direct aerodynamic tropical-cyclone wind loading only. TC-spawned tornado, surge,
+pluvial flood, scour, saturated-soil failure, debris, rain ingress, lightning, fire, offshore loading,
+fatigue, disruption, insurance, and finance are separate or downstream pathways. Related child pathways
+must retain the same `event_family_id` so a consumer can coordinate occurrence loss without duplicate value
+charges.
 
-## 13. Workbook map
+## 9. Governed package
 
-Workbook:
-[damage_curve_records_tropical_cyclone_wind_wind__model_v0_1__docs_r1.xlsx](proposed/damage_curve_records_tropical_cyclone_wind_wind__model_v0_1__docs_r1.xlsx)
+Start with the [model v1.0 package overview](proposed/README_tropical_cyclone_wind_wind__model_v1_0__docs_r1.md),
+then use:
 
-| Question | Workbook sheet |
-|---|---|
-| What is the scaffold status and where should I look? | `README` |
-| Which seven modeling gates are open or closed? | `Seven_Steps` |
-| How do physical, support, excluded, and installed values reconcile? | `Asset_Value`, `Value_Crosswalk` |
-| Which failure units and spatial grains are proposed? | `Failure_Units` |
-| How are Jaimes and Rose candidates reproduced without becoming DR? | `Candidate_Fragility` |
-| Which selectors, conditioners, bridge fields, and missing-state rules apply? | `Site_Adapter` |
-| Why are legacy numbers rejected? | `Legacy_Audit` |
-| Which claims, sources, and parameter tiers govern the decision? | `Claim_Register`, `Source_Register`, `Parameter_Tiers` |
-| Do value, formula, count, and withholding checks pass? | `QA_Checks` |
+- [derivation dossier](proposed/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_0__docs_r1.md);
+- [metadata specification](proposed/tropical_cyclone_wind_wind_damage_code_metadata_spec__model_v1_0__docs_r1.md);
+- [curve artifact](proposed/tropical_cyclone_wind_wind__model_v1_0__docs_r1__curve_artifact.json);
+- [capability declaration](proposed/tropical_cyclone_wind_wind__model_v1_0__docs_r1__capability.json);
+- [known-answer tests](proposed/known_answer_tests_tropical_cyclone_wind_wind__model_v1_0__docs_r1.json);
+- [validation report](proposed/VALIDATION_REPORT_tropical_cyclone_wind_wind__model_v1_0__docs_r1.md);
+- [promotion gates](proposed/PROMOTION_GATE_MATRIX_tropical_cyclone_wind_wind__model_v1_0__docs_r1.md); and
+- [workbook](proposed/damage_curve_records_tropical_cyclone_wind_wind__model_v1_0__docs_r1.xlsx).
 
-The workbook is an audit companion. The proposed JSON, governed registers, dossier, and metadata contract
-remain authoritative.
+The JSON artifact and capability file define proposal behavior. The dossier, registers, and workbook explain
+its evidence and derivation. Production consumers must reject this proposal while
+`canonical_runtime_artifact=false`.
 
-## 14. Open seams and update triggers
+## 10. Version history
 
-Promotion remains blocked until all of the following close:
+| Version | Status | Meaning |
+|---|---|---|
+| model v0.1/docs r1 | preserved historical scaffold | zero curve records and fail-closed `NO_RUNTIME_CURVE`; retained the candidate evidence and correctly blocked generic turbine transfer |
+| model v1.0/docs r1 | current documentation anchor; proposed, noncanonical | three source-native Jaimes expected-DR records for one quarantined unit; all broader asset and loss outputs remain withheld |
 
-1. a reviewed turbine-local TC demand bridge with height, averaging, terrain, gust, duration, direction/veer,
-   and uncertainty lineage;
-2. target-fleet applicability for turbine design, controls, tower/foundation archetype, and operating state;
-3. all-severity, mutually exclusive disposition evidence rather than collapse probability alone;
-4. same-unit repair/replacement cost evidence and a reviewed support-allocation rule;
-5. site/OEM value plus point, line, network, and shared-asset exposure data; and
-6. compound-event coordination for tornado, surge/flood/scour, debris, rain ingress, and coastal strong-wind
-   overlap.
+The [v0.1 package overview](proposed/README_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md),
+[v0.1 pressure test](proposed/PRESSURE_TEST_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md), and
+[v0.1 numerical candidate audit](proposed/NUMERICAL_CANDIDATE_AUDIT_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md)
+remain part of the audit trail. Their “no economic DR” conclusion is superseded only for the narrow
+source-native Jaimes unit adopted in v1.0; their transfer, denominator, coverage, and fail-closed cautions
+remain in force.
 
-If suitable private data remain unavailable, a separately approved Tier-4 elicitation may create a clearly
-labelled screening model. It must not be described as claims-calibrated.
+## 11. Promotion boundary
 
-## 15. Implementation notes
+Promotion remains blocked pending independent equation/KAT reproduction, valuation review of the Jaimes
+denominator, engineering applicability review, approval of the bundle-v3 curve-form extension, a Hazard
+adapter with exact axis/selector/pin/partial-capability behavior, compound-event testing, shadow comparison,
+and an explicit promotion decision.
 
-Start with the [first-reader basics](basics/README.md), then the
-[build reasoning](basics/HOW_THE_MODEL_IS_BUILT.md) and [exact model reference](basics/MODEL_REFERENCE.md).
-The proposed package overview and metadata specification in `proposed/`, the
-[fail-closed artifact](proposed/tropical_cyclone_wind_wind__model_v0_1__docs_r1__curve_artifact.json), and
-[validation report](proposed/VALIDATION_REPORT_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md) define the
-governed implementation boundary.
-
-No artifact index, package release, canonical cell pin, or Hazard runtime is changed. The existing Hazard
-hurricane/wind-farm implementation remains a legacy regression fixture and must not be treated as this cell's
-curve. A future cutover requires a reviewed model v1.0 artifact using the repository-current runtime schema,
-exact model/docs/schema/SHA pinning, and explicit pathway-aware consumer migration.
+No artifact index, `current/` pointer, package release, canonical pin, or Hazard runtime behavior is changed
+by model v1.0/docs r1.

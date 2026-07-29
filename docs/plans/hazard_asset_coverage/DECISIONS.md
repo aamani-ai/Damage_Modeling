@@ -68,3 +68,60 @@ then curate the five model-v0.1 cells one at a time in the recorded queue.
 
 **Reason:** coverage and numerical maturity answer different questions. Deep curation must attempt to close
 the promotion gates, but model v1.0 is released only when an output-bearing curve is honestly supported.
+
+## D-009 — TC-wind × wind advances narrowly to proposed model v1.0
+
+**Decision:** accept `tropical_cyclone_wind_wind` model v1.0/docs r1 as a noncanonical partial-coverage
+release candidate, then continue the coverage-first depth queue with `flood_wind` rather than treating the
+remaining promotion seams as a reason to broaden the curve.
+
+**Reason:** deeper review established that Jaimes et al. publish three fitted expected-DR equations, but only
+for exact source archetypes and an ambiguous paper-native turbine/tower exposure denominator. The honest v1
+therefore quarantines those curves to `WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT`, leaves every standard
+wind-farm unit and all dollar/scenario/annual metrics withheld, and requires independent schema, valuation,
+engineering, and Hazard-consumer review before promotion. This earns numeric depth without claiming generic
+wind-farm coverage or changing the 5/10 canonical runtime count.
+
+## D-010 — Flood × wind advances with one whole-substation screening atom
+
+**Decision:** accept `flood_wind` model v1.0/docs r1 as a noncanonical partial-coverage proposal and move the
+one-at-a-time deep-curation queue to `tropical_cyclone_wind_solar`.
+
+**Reason:** FEMA Hazus-MH 2.1 Table 7.9 supplies an exact legacy whole-substation depth-damage series, but it
+does not supply component curves. The proposal therefore preserves one mutually exclusive
+`FW_HAZUS_GSU_SUBSTATION_ASSEMBLY` record on its source-native 0–10 ft grade-depth axis while leaving every
+GSU component, turbine, collection, foundation, civil, support, value-binding, annual, and tail output
+withheld. Hazus 7.0's mapping-only/disabled status makes the record screening-only; no canonical artifact,
+package release, or Hazard cutover is authorized. This improves numerical coverage without decomposing a
+facility-level source table by assumption or changing the 5/10 canonical runtime count.
+
+## D-011 — TC-wind × solar advances only as a coverage-first screening exception
+
+**Decision:** accept `tropical_cyclone_wind_solar` model v1.0/docs r1 as a noncanonical, partial-coverage
+screening proposal and move the one-at-a-time deep-curation queue to `hail_wind`. Preserve the independently
+valid model-v0.1 package as the strict fail-closed execution alternative.
+
+**Reason:** the recovered Perry manual dataset supports a reproducible, monotone relationship between its
+dataset-reported event maximum gust and visible/missing module fraction for a mixed-scale ground/nontracking
+source cohort. It does not observe economic DR. The proposal therefore quarantines the fit to
+`PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT` and requires explicit uniform-module-value,
+full-visible-replacement, source-population, source-wind-product, architecture, and composite-causation
+acknowledgements. The strict evidence-earned gate remains **NO-GO / retain model v0.1** because wind-product
+semantics, utility-scale transfer, disposition/cost, severe-tail stability, uncertainty, independent
+validation, and broader unit/value coverage remain unresolved. No canonical artifact, `current/` package,
+scenario/annual/tail output, or Hazard cutover is authorized; the 5/10 canonical runtime count is unchanged.
+
+## D-012 — Hail × wind deep curation retains model v0.1/docs r2
+
+**Decision:** classify the `hail_wind` deep pass as `EVIDENCE_ONLY_NO_OUTPUT_CHANGE`, retain model v0.1 and
+its unchanged docs-r1 machine-shaped scaffold, advance the human/evidence package to docs r2, and move the
+one-at-a-time queue to `wildfire_wind`.
+
+**Reason:** two independent reviews found materially better blade-impact physics, field-observation,
+simulation, test-method, inspection, and migration evidence, but no source-native occurrence chain from
+delivered blade contact through mutually exclusive inspected disposition to same-blade direct economic
+damage ratio. Unlike the owner-authorized Perry solar exception, even a narrow hail/blade atom would require
+unsupported mappings from source hail to contact history, coupon/simulation response to field state
+probability, and field state to repair/replacement cost. No numerical record, bundle-v3 artifact, canonical
+package, schema change, or Hazard cutover is therefore created. A future Tier-4 structured-elicitation model
+requires a separate explicit owner decision and would be a `MODEL_BEHAVIOR_CHANGE`.

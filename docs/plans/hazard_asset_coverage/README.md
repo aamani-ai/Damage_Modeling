@@ -1,6 +1,6 @@
 # Hazard × asset coverage plan
 
-> **Plan of record — coverage before depth. Steps 1–3 implemented on 2026-07-28.** Establish each intended
+> **Plan of record — coverage before depth. Steps 1–7 are complete.** Establish each intended
 > hazard × asset cell honestly, one at a time, before starting another model-v2 deep-curation cycle.
 > “Established” may mean a validated, fail-closed model v0.1 scaffold; it does not mean that a numerical curve
 > exists.
@@ -9,8 +9,13 @@
 
 The portfolio has ten visible hazard × asset pairs. Before this work, five had canonical model-v1 curves,
 two had governed model-v0.1 scaffolds, one active pair had no governed cell, and two pairs were explicitly
-deferred. `tropical_cyclone_wind_solar`, `hail_wind`, and `wildfire_wind` are now governed model-v0.1
-scaffolds. Structural breadth is complete; runtime depth remains deliberately separate.
+deferred. `tropical_cyclone_wind_solar`, `hail_wind`, and `wildfire_wind` first gained governed model-v0.1
+scaffolds, completing structural breadth. Three one-at-a-time depth passes then advanced
+`tropical_cyclone_wind_wind`, `flood_wind`, and `tropical_cyclone_wind_solar` to honest, noncanonical
+model-v1.0 partial-coverage proposals. The solar proposal is an explicit coverage-first screening exception;
+its strict evidence-earned gate remains NO-GO. A fourth deep pass independently reopened `hail_wind` and
+retained model v0.1 while advancing its human/evidence documentation to docs r2; stronger physics,
+inspection, and migration evidence still did not support an economic damage atom.
 
 The coverage-first sequence is:
 
@@ -18,15 +23,18 @@ The coverage-first sequence is:
 1. tropical_cyclone_wind_solar  COMPLETE — model v0.1/docs r1 scaffold
 2. hail_wind                    COMPLETE — model v0.1/docs r1 scaffold
 3. wildfire_wind                COMPLETE — model v0.1/docs r1 scaffold
-4. tropical_cyclone_wind_wind   deep curation toward model v1.0
-5. flood_wind                   deep curation toward model v1.0
-6. existing model-v2 proposals  resume only after breadth is explicit
+4. tropical_cyclone_wind_wind   COMPLETE — proposed model v1.0/docs r1, partial source-native coverage
+5. flood_wind                   COMPLETE — proposed model v1.0/docs r1, whole-substation screening only
+6. tropical_cyclone_wind_solar  COMPLETE — proposed model v1.0/docs r1, one source-specific screening atom
+7. hail_wind                    COMPLETE — model v0.1/docs r2; strict model-v1 gate remains NO-GO
+8. wildfire_wind                next — deep-curate without forcing promotion
+9. existing model-v2 proposals  resume after the remaining model-v0.1 cells
 ```
 
-Steps 1–3 are complete. Each pair received its own change classification, evidence search, package, tests,
-and review before the following pair began. Deep curation can now start from the queue below, one cell at a
-time. A version bump is an earned scientific outcome, not the task definition: if a deep pass still cannot
-close the demand → disposition → same-unit cost chain, the honest result remains model v0.1.
+Steps 1–7 are complete. Each pair received its own change classification, evidence search, package, tests,
+and review before the following pair began. Deep curation continues from the queue below, one cell at a time.
+A version bump is an earned scientific outcome, not the task definition: if a deep pass cannot close a
+defensible numeric seam, the honest result remains model v0.1.
 
 ## Counting rules
 
@@ -35,6 +43,7 @@ close the demand → disposition → same-unit cost chain, the honest result rem
 | Canonical model v1.0+ | Yes | Output-bearing runtime artifact is published and pinned |
 | Governed model v0.1 scaffold | Yes, structurally | Cell boundary, units, evidence, value, contract, KATs, and promotion gates exist; numeric output fails closed |
 | Proposal for a cell that already has v1 | Yes | Runtime coverage comes from v1; the proposal is a separate depth track |
+| Noncanonical model-v1 partial-coverage proposal for a new cell | Yes, structurally; no canonical runtime count | Numeric response exists only for its governed atom and cannot be counted as a published cell runtime |
 | Placeholder in Hazard or a legacy memo | No | Useful only as a migration/evidence audit unless governed here |
 | `Later` with no cell folder | No | Deliberately deferred and not yet modeled |
 
@@ -46,28 +55,30 @@ placeholder is not counted as Damage Modeling coverage.
 | Hazard | Asset | Current repo truth | Runtime curve? | Coverage disposition |
 |---|---|---|---:|---|
 | Hail | Solar | [`hail_solar`](../../cells/hail_solar/README.md), canonical model v1.0 | Yes | Covered |
-| Hail | Wind | [`hail_wind`](../../cells/hail_wind/README.md), governed model v0.1 scaffold | No | Structurally covered; deep calibration later |
+| Hail | Wind | [`hail_wind`](../../cells/hail_wind/README.md), governed model v0.1/docs r2 scaffold | No | Structurally covered and independently deep-curated; strict numerical v1 gate is NO-GO |
 | Wildfire | Solar | [`wildfire_solar`](../../cells/wildfire_solar/README.md), canonical screening model v1.0 | Yes, screening | Covered with explicit grade |
 | Wildfire | Wind | [`wildfire_wind`](../../cells/wildfire_wind/README.md), governed model v0.1 scaffold | No | Structurally covered; deep calibration later |
 | Convective wind | Solar | [`strong_wind_solar`](../../cells/strong_wind_solar/README.md), canonical v1 plus noncanonical v2 proposal | Yes | Covered; v2 depth parked |
 | Convective/tornado wind | Wind | [`wind_tornado_wind`](../../cells/wind_tornado_wind/README.md), canonical v1 plus noncanonical v2 proposal | Yes | Covered; v2 depth parked |
 | Flood | Solar | [`flood_solar`](../../cells/flood_solar/README.md), canonical model v1.0 | Yes | Covered |
-| Flood | Wind | [`flood_wind`](../../cells/flood_wind/README.md), governed model v0.1 scaffold | No | Structurally covered; deep calibration later |
-| Tropical-cyclone wind | Solar | [`tropical_cyclone_wind_solar`](../../cells/tropical_cyclone_wind_solar/README.md), governed model v0.1 scaffold | No | Structurally covered; deep calibration later |
-| Tropical-cyclone wind | Wind | [`tropical_cyclone_wind_wind`](../../cells/tropical_cyclone_wind_wind/README.md), governed model v0.1 scaffold | No | Structurally covered; deep calibration later |
+| Flood | Wind | [`flood_wind`](../../cells/flood_wind/README.md), noncanonical model v1.0 whole-substation screening proposal | Proposal only | One legacy source-native assembly curve; components/value/consumer promotion blocked |
+| Tropical-cyclone wind | Solar | [`tropical_cyclone_wind_solar`](../../cells/tropical_cyclone_wind_solar/README.md), noncanonical model v1.0 screening proposal | Proposal only | One source-specific Perry visible-module atom; generic array/value/consumer promotion blocked |
+| Tropical-cyclone wind | Wind | [`tropical_cyclone_wind_wind`](../../cells/tropical_cyclone_wind_wind/README.md), noncanonical model v1.0 partial-coverage release candidate | Proposal only | Three exact source-native curves; broader asset/value/consumer promotion blocked |
 
 The portfolio is now **10/10 structurally governed**, including **5/10 with canonical runtime curves**.
-The five model-v0.1 cells are explicit fail-closed research packages, not implied zeros or borrowed curves.
+Two cells remain explicit fail-closed model-v0.1 packages; three additional cells now have numeric but
+noncanonical model-v1.0 proposals. Neither status is an implied zero, borrowed curve, or canonical publication.
 
-## Why tropical-cyclone wind × solar is first
+## Why tropical-cyclone wind × solar was the first coverage cell
 
 1. It is the only pair shown as active in the planning table that had no cell package.
 2. A legacy Hazard hurricane/solar placeholder exists, so leaving the boundary ungoverned creates migration
    and accidental-reuse risk.
 3. Solar asset/value anatomy is already mature enough to reuse structurally.
 4. Tropical-cyclone event-family and pathway semantics are already defined by the wind-asset scaffold.
-5. Public evidence supports mechanisms and narrow structural-failure candidates, but not same-unit economic
-   DR; a fail-closed scaffold is therefore the accurate v0.1 result.
+5. Public evidence supports mechanisms and a narrow source-cohort visible-module proxy, but not observed
+   same-unit economic DR. Model v0.1 therefore remains the strict-gate result; proposed model v1.0 is a
+   separately labeled, owner-authorized coverage-first exception.
 
 ## GSU/substation rule
 
@@ -103,23 +114,36 @@ A pair is structurally established only when all of the following exist and vali
 9. pressure test, promotion gates, validation report, and validator; and
 10. registry and Hazard handoff updates.
 
-If numerical evidence does not close the demand → state/disposition → same-unit cost chain, the compliant
-result is `curve_records: []`, `canonical_runtime_artifact: false`, and `NO_RUNTIME_CURVE`.
+If numerical evidence does not close the demand → state/disposition → same-unit cost chain, the default
+compliant result is `curve_records: []`, `canonical_runtime_artifact: false`, and `NO_RUNTIME_CURVE`. Any
+owner-authorized screening exception must remain noncanonical, expose its assumption bridge and exact source
+population in machine-enforced selectors, withhold unsupported units and metrics, and retain the strict-gate
+package as the execution alternative.
 
 ## Deep-curation queue after breadth
 
 Once all intended pairs have a governed home, depth should prioritize consequence and reuse leverage:
 
-1. `tropical_cyclone_wind_wind`: freeze the shared TC source-to-local-demand bridge and close turbine
-   state/cost evidence;
-2. `flood_wind`: close component-local GSU/substation disposition/cost and site ownership/value evidence;
-3. `tropical_cyclone_wind_solar`: use the same governed TC field semantics, but derive solar-specific
-   architecture/state/cost response independently;
-4. `hail_wind`: qualify turbine-local contact demand and inspected blade/BOP disposition/cost before deriving
-   any economic response;
-5. `wildfire_wind`: prioritize exogenous-attribution field cases and ground-level pad/GSU evidence before
+Completed first: `tropical_cyclone_wind_wind` earned a narrow source-native model-v1.0 proposal. Completed
+second: `flood_wind` earned one legacy source-native whole-substation screening record while retaining every
+component/wind unit, value binding, and consumer gate as withheld. Completed third:
+`tropical_cyclone_wind_solar` added one source-specific visible-module screening atom under an explicit
+coverage-first exception; the strict gate still retains model v0.1.
+
+Completed fourth: `hail_wind` added seven reviewed source records and nine governed claims in docs r2, but
+both independent reviews found that a numerical atom would still require unsupported contact, state, and
+same-blade economic mappings. The model therefore remains v0.1 with `NO_RUNTIME_CURVE`.
+
+1. `wildfire_wind`: prioritize exogenous-attribution field cases and ground-level pad/GSU evidence before
    elevated turbine assembly response; do not force a screening curve merely to change the version label;
-6. `strong_wind_solar` and `wind_tornado_wind` v2 proposals: resume their documented promotion queues.
+2. `hail_wind`: reopen numerical promotion only when event-resolved hail, turbine operating/contact state,
+   inspected mutually exclusive disposition, and same-blade direct cost are linked—or when the owner
+   explicitly authorizes a separately labeled Tier-4 elicitation model;
+3. `tropical_cyclone_wind_solar`: close the exact wind-product, utility-transfer, disposition/cost, severe-
+   tail, uncertainty, value, and Hazard-adapter gates before any canonical release;
+4. `flood_wind`: later deepen component-local GSU/substation disposition/cost and site ownership/value
+   evidence without decomposing the legacy assembly curve by assumption;
+5. `strong_wind_solar` and `wind_tornado_wind` v2 proposals: resume their documented promotion queues.
 
 The queue can change when private claims, OEM tests, or site inventories arrive. Evidence availability is a
 valid reprioritization input; it is not permission to publish a weak curve.

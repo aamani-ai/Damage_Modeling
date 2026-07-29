@@ -454,6 +454,215 @@
       },
       "additionalProperties": false
     },
+    "thresholdedWeibullExpectedDamageRecord": {
+      "type": "object",
+      "required": [
+        "curve_id",
+        "pathway_id",
+        "failure_unit_id",
+        "curve_form",
+        "x_axis",
+        "y_axis",
+        "parameters",
+        "selector_match"
+      ],
+      "properties": {
+        "curve_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pathway_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "failure_unit_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "curve_form": {
+          "const": "thresholded_weibull_expected_damage"
+        },
+        "x_axis": {
+          "const": "tc_peak_gust_3s_10m_kmh"
+        },
+        "y_axis": {
+          "const": "failure_unit_damage_ratio"
+        },
+        "parameters": {
+          "type": "object",
+          "required": [
+            "V_zero_kmh",
+            "delta_V50_kmh",
+            "rho",
+            "V_at_DR50_kmh",
+            "max_dr"
+          ],
+          "properties": {
+            "V_zero_kmh": {
+              "type": "number",
+              "minimum": 0
+            },
+            "delta_V50_kmh": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "rho": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "V_at_DR50_kmh": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "max_dr": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        "selector_match": {
+          "type": "object",
+          "required": [
+            "turbine_archetype_id",
+            "rated_power_mw",
+            "hub_height_m",
+            "rotor_diameter_m"
+          ],
+          "properties": {
+            "turbine_archetype_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "rated_power_mw": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "hub_height_m": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "rotor_diameter_m": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "pathwayPiecewiseLinearRecord": {
+      "type": "object",
+      "required": [
+        "curve_id",
+        "pathway_id",
+        "failure_unit_id",
+        "curve_form",
+        "x_axis",
+        "y_axis",
+        "parameters",
+        "valid_range",
+        "interpolation_policy",
+        "extrapolation_policy",
+        "selector_match",
+        "source_parameter_refs",
+        "metadata_flags"
+      ],
+      "properties": {
+        "curve_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pathway_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "failure_unit_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "curve_form": {
+          "const": "piecewise_linear"
+        },
+        "x_axis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "y_axis": {
+          "const": "failure_unit_damage_ratio"
+        },
+        "parameters": {
+          "type": "object",
+          "required": [
+            "points"
+          ],
+          "properties": {
+            "points": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "valid_range": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "interpolation_policy": {
+          "const": "linear_between_source_knots"
+        },
+        "extrapolation_policy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "selector_match": {
+          "type": "object"
+        },
+        "source_parameter_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "metadata_flags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "pathway": {
       "type": "object",
       "required": [
@@ -493,7 +702,11 @@
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "#/$defs/orderedDamageStateRecord"
+            "oneOf": [
+              {"$ref": "#/$defs/orderedDamageStateRecord"},
+              {"$ref": "#/$defs/thresholdedWeibullExpectedDamageRecord"},
+              {"$ref": "#/$defs/pathwayPiecewiseLinearRecord"}
+            ]
           }
         }
       },

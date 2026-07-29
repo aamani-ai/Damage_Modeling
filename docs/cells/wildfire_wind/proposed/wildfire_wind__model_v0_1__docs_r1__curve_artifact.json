@@ -1,0 +1,528 @@
+{
+  "schema_version": "damage_curve_record_bundle.v1",
+  "cell_id": "wildfire_wind",
+  "damage_code_id": "WILDFIRE_WIND_PROPOSED_V0_1",
+  "semantic_damage_model_version": "model v0.1",
+  "documentation_revision": "docs r1",
+  "package_release": "unreleased",
+  "package_baseline": "library v2.5",
+  "lifecycle_state": "scaffold",
+  "promotion_status": "proposed",
+  "review_status": "pressure_tested",
+  "documentation_status": "working_revision",
+  "package_inclusion_status": "not_included",
+  "canonical_runtime_artifact": false,
+  "schema_envelope_status": {
+    "selected_schema": "damage_curve_record_bundle.v1",
+    "use": "noncanonical_zero_curve_scaffold_only",
+    "reason": "Repository-current v2 and v3 bundle schemas require output-bearing records; this zero-curve scaffold is not publishable.",
+    "runtime_publication_allowed": false,
+    "promotion_rule": "A runtime bundle must use the repository-current schema and contain reviewed output-bearing pathway and failure-unit records."
+  },
+  "ordinate_status": "withheld",
+  "withheld_reason_codes": [
+    "NO_RUNTIME_CURVE"
+  ],
+  "source_dossier": "docs/cells/wildfire_wind/proposed/wildfire_wind_curve_derivation_dossier__model_v0_1__docs_r1.md",
+  "source_workbook": "docs/cells/wildfire_wind/proposed/damage_curve_records_wildfire_wind__model_v0_1__docs_r1.xlsx",
+  "source_register": "docs/cells/wildfire_wind/proposed/SOURCE_REGISTER_wildfire_wind__model_v0_1__docs_r1.csv",
+  "claim_parameter_register": "docs/cells/wildfire_wind/proposed/CLAIM_PARAMETER_REGISTER_wildfire_wind__model_v0_1__docs_r1.csv",
+  "bounded_evidence_search_log": "docs/cells/wildfire_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_wildfire_wind__model_v0_1__docs_r1.md",
+  "parameter_tier_table_ref": "docs/cells/wildfire_wind/proposed/PARAMETER_TIER_TABLE_wildfire_wind__model_v0_1__docs_r1.csv",
+  "value_crosswalk_ref": "docs/cells/wildfire_wind/proposed/VALUE_CROSSWALK_wildfire_wind__model_v0_1__docs_r1.csv",
+  "site_condition_adapter_ref": "docs/cells/wildfire_wind/proposed/SITE_CONDITION_ADAPTER_wildfire_wind__model_v0_1__docs_r1.md",
+  "pressure_test_ref": "docs/cells/wildfire_wind/proposed/PRESSURE_TEST_wildfire_wind__model_v0_1__docs_r1.md",
+  "known_answer_tests": "docs/cells/wildfire_wind/proposed/known_answer_tests_wildfire_wind__model_v0_1__docs_r1.json",
+  "pathways": [
+    {
+      "pathway_id": "wildfire_thermal_attack",
+      "physical_mechanism": "exogenous_wildfire_radiant_convective_or_direct_flame_thermal_attack",
+      "hazard_axis_id": "DELIVERED_WILDFIRE_THERMAL_LOAD_HISTORY",
+      "exact_match_required": true,
+      "fallback_allowed": false,
+      "event_family_id_required": true,
+      "failure_unit_ids_supported": [],
+      "failure_unit_ids_withheld": [
+        "WT_TURBINE_FIRE_ASSEMBLY",
+        "WT_PAD_ELECTRICAL",
+        "WT_COLLECTION_NETWORK",
+        "WT_GSU_MAIN_TRANSFORMER",
+        "WT_GSU_SWITCHGEAR_BUS",
+        "WT_GSU_PROTECTION_CONTROL_DC",
+        "WT_GSU_CABLE_TERMINATIONS",
+        "WT_CONTROL_MET_OM",
+        "WT_FOUNDATION",
+        "WT_CIVIL_INFRA"
+      ],
+      "neighboring_cell_boundaries": [
+        "turbine_origin_fire",
+        "lightning_origin_fire",
+        "post_fire_flood_or_erosion",
+        "business_interruption_or_shutdown"
+      ],
+      "event_identity_note": "Preserve exogenous wildfire event and family identity; consequential internal spread is a dependent state, not a second occurrence."
+    },
+    {
+      "pathway_id": "wildfire_firebrand_ignition",
+      "physical_mechanism": "exogenous_wildfire_firebrand_deposition_ingress_and_ignition_attack",
+      "hazard_axis_id": "DELIVERED_WILDFIRE_FIREBRAND_LOAD_HISTORY",
+      "exact_match_required": true,
+      "fallback_allowed": false,
+      "event_family_id_required": true,
+      "failure_unit_ids_supported": [],
+      "failure_unit_ids_withheld": [
+        "WT_TURBINE_FIRE_ASSEMBLY",
+        "WT_PAD_ELECTRICAL",
+        "WT_COLLECTION_NETWORK",
+        "WT_GSU_MAIN_TRANSFORMER",
+        "WT_GSU_SWITCHGEAR_BUS",
+        "WT_GSU_PROTECTION_CONTROL_DC",
+        "WT_GSU_CABLE_TERMINATIONS",
+        "WT_CONTROL_MET_OM",
+        "WT_FOUNDATION",
+        "WT_CIVIL_INFRA"
+      ],
+      "neighboring_cell_boundaries": [
+        "turbine_origin_fire",
+        "lightning_origin_fire",
+        "post_fire_flood_or_erosion",
+        "business_interruption_or_shutdown"
+      ],
+      "event_identity_note": "Firebrand attack remains distinct from uniform thermal load even when both belong to one wildfire event family."
+    },
+    {
+      "pathway_id": "wildfire_residue_destructive_contamination",
+      "physical_mechanism": "wildfire_smoke_soot_or_residue_causing_verified_destructive_electrical_or_material_damage",
+      "hazard_axis_id": "DELIVERED_WILDFIRE_DESTRUCTIVE_RESIDUE_LOAD",
+      "exact_match_required": true,
+      "fallback_allowed": false,
+      "event_family_id_required": true,
+      "failure_unit_ids_supported": [],
+      "failure_unit_ids_withheld": [
+        "WT_TURBINE_FIRE_ASSEMBLY",
+        "WT_PAD_ELECTRICAL",
+        "WT_COLLECTION_NETWORK",
+        "WT_GSU_MAIN_TRANSFORMER",
+        "WT_GSU_SWITCHGEAR_BUS",
+        "WT_GSU_PROTECTION_CONTROL_DC",
+        "WT_GSU_CABLE_TERMINATIONS",
+        "WT_CONTROL_MET_OM",
+        "WT_FOUNDATION",
+        "WT_CIVIL_INFRA"
+      ],
+      "neighboring_cell_boundaries": [
+        "nondestructive_cleaning",
+        "temporary_smoke_derating",
+        "business_interruption_or_shutdown",
+        "post_fire_flood_or_erosion"
+      ],
+      "event_identity_note": "Only verified destructive physical contamination is in scope; cleaning, outage, and derating alone are excluded."
+    }
+  ],
+  "asset_archetype": {
+    "asset": "land_based_multi_megawatt_horizontal_axis_wind_facility",
+    "reference_configuration": "generic_modern_onshore_reference_value_archetype",
+    "target_applicability_status": "not_frozen",
+    "spatial_grain": "per_turbine_points_and_vertical_zones_plus_separately_located_BOP_points_lines_and_polygons",
+    "scope_included": [
+      "exogenous_wildfire_direct_occurrence_physical_destruction",
+      "thermal_attack",
+      "firebrand_attack",
+      "verified_destructive_residue_or_electrical_contamination"
+    ],
+    "scope_excluded": [
+      "turbine_origin_internal_fire",
+      "lightning_origin_fire",
+      "nondestructive_cleaning",
+      "temporary_shutdown",
+      "business_interruption",
+      "derating_or_revenue",
+      "post_fire_erosion_or_flood_without_a_separate_destructive_pathway",
+      "frequency_and_annual_or_tail_metrics"
+    ]
+  },
+  "value_basis": {
+    "status": "reference_archetype_only_not_enabled_for_loss",
+    "source_workbook": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "crosswalk": "docs/cells/wildfire_wind/proposed/VALUE_CROSSWALK_wildfire_wind__model_v0_1__docs_r1.csv",
+    "unit": "2023_USD_per_kW",
+    "turbine_equipment_total": 1090,
+    "other_direct_withheld": 239,
+    "support_once": 294,
+    "physical_reference": 1623,
+    "excluded_soft_sunk_nonphysical": 345,
+    "installed_reference": 1968,
+    "reconciliation": "1090 + 239 + 294 = 1623; 1623 + 345 = 1968",
+    "site_override_required_for_loss": true,
+    "values_embedded_as_curve_denominators": false,
+    "prohibited_use": "Reference shares establish anatomy and reconciliation only; they are not damage ratios, caps, exposure fractions, or site appraisals."
+  },
+  "hazard_axis": {
+    "id": "WITHHELD_PENDING_PATHWAY_SPECIFIC_DELIVERED_WILDFIRE_LOAD_BRIDGES",
+    "status": "not_frozen",
+    "runtime_damage_mapping_status": "withheld_no_runtime_curve",
+    "input_field": "pathway_id",
+    "unit": "pathway_specific_delivered_load_object",
+    "valid_range": null,
+    "extrapolation_policy": "reject_no_runtime_axis",
+    "conversion_guardrail": "FSim flame-length class, burn probability, clearance distance, solar ordinates, and legacy fixed-distance or height proxies cannot populate a wind-component economic damage axis."
+  },
+  "hazard_axes_by_pathway": {
+    "wildfire_thermal_attack": {
+      "id": "DELIVERED_WILDFIRE_THERMAL_LOAD_HISTORY",
+      "status": "candidate_contract_not_parameterized",
+      "field_group": "thermal_zone_load",
+      "canonical_component_fields": [
+        "incident_radiant_heat_flux_time_history_kw_m2",
+        "incident_convective_heat_flux_time_history_kw_m2",
+        "gas_temperature_time_history_c",
+        "gas_velocity_time_history_m_s",
+        "direct_flame_contact_time_history"
+      ],
+      "required_bridge_context": [
+        "fuel_and_flame_geometry",
+        "slope_and_distance",
+        "view_factor_and_shielding",
+        "component_elevation_orientation_and_enclosure",
+        "wind_history_and_duration",
+        "model_or_measurement_provenance_and_uncertainty"
+      ],
+      "runtime_curve_compatible": false
+    },
+    "wildfire_firebrand_ignition": {
+      "id": "DELIVERED_WILDFIRE_FIREBRAND_LOAD_HISTORY",
+      "status": "candidate_contract_not_parameterized",
+      "field_group": "firebrand_zone_load",
+      "canonical_component_fields": [
+        "firebrand_number_flux_time_history_m2_s",
+        "firebrand_count_by_size_mass_and_combustion_state",
+        "firebrand_deposition_accumulation_state",
+        "firebrand_ingress_or_penetration_state",
+        "firebrand_contact_and_wind_history"
+      ],
+      "required_bridge_context": [
+        "component_openings_and_enclosure",
+        "combustible_material_inventory",
+        "component_orientation_and_elevation",
+        "local_wind_and_contact_duration",
+        "suppression_or_response_availability",
+        "model_or_measurement_provenance_and_uncertainty"
+      ],
+      "runtime_curve_compatible": false
+    },
+    "wildfire_residue_destructive_contamination": {
+      "id": "DELIVERED_WILDFIRE_DESTRUCTIVE_RESIDUE_LOAD",
+      "status": "candidate_contract_not_parameterized",
+      "field_group": "destructive_residue_zone_load",
+      "canonical_component_fields": [
+        "residue_deposition_mass_loading_g_m2",
+        "residue_composition_and_combustion_state",
+        "surface_conductivity_or_insulation_resistance_change",
+        "moisture_and_energization_state",
+        "verified_flashover_insulation_failure_or_material_damage_state"
+      ],
+      "required_bridge_context": [
+        "component_enclosure_and_filtration",
+        "insulation_and_material_family",
+        "energization_shutdown_and_isolation_history",
+        "cleaning_and_inspection_disposition",
+        "model_or_measurement_provenance_and_uncertainty"
+      ],
+      "runtime_curve_compatible": false,
+      "guardrail": "Cleaning need, smoke presence, temporary outage, or derating without destructive physical damage is outside the ordinate."
+    }
+  },
+  "proposed_future_y_axis": {
+    "id": "conditional_direct_repair_or_replacement_cost_ratio",
+    "status": "withheld",
+    "definition": "Expected direct repair-or-replacement cost divided by pre-event direct replacement value of the same dependency-safe failure unit, conditional on delivered local wildfire load and verified state.",
+    "denominator_rule": "Same failure unit in numerator and denominator; no whole-farm lease polygon or installed-TIV substitution.",
+    "support_cost_rule": "Allocate eligible inspection, access, fieldwork, transport, and crane cost once after disposition; no independent support damage ratio.",
+    "excluded_from_ordinate": [
+      "business_interruption",
+      "temporary_shutdown",
+      "derating_or_revenue",
+      "frequency",
+      "insurance_terms",
+      "nondestructive_cleaning",
+      "unrelated_site_value"
+    ]
+  },
+  "failure_units": [
+    {
+      "id": "WT_TURBINE_FIRE_ASSEMBLY",
+      "subsystem": "REPEATED_TURBINE",
+      "component": "ROTOR_NACELLE_TOWER_SHELL_BASE_AND_INTERNAL_SERVICES_DEPENDENCY_SAFE_ASSEMBLY",
+      "pathway_ids": [
+        "wildfire_thermal_attack",
+        "wildfire_firebrand_ignition",
+        "wildfire_residue_destructive_contamination"
+      ],
+      "treatment": "candidate_primary_dependency_safe_assembly_no_curve",
+      "ordinate_status": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "value_lineage": "Wind_Map rows 2:9; 1090 2023 USD/kW reference turbine equipment total",
+      "exposure_grain": "per_turbine_point_with_named_vertical_component_zones",
+      "open_split": "Mutually exclusive repair, major repair, and replacement states plus zone-specific local attack."
+    },
+    {
+      "id": "WT_PAD_ELECTRICAL",
+      "subsystem": "PLANT_ELECTRICAL",
+      "component": "TURBINE_PAD_TRANSFORMER_SWITCHGEAR_ENCLOSURES_AND_EXPOSED_APPARATUS",
+      "pathway_ids": [
+        "wildfire_thermal_attack",
+        "wildfire_firebrand_ignition",
+        "wildfire_residue_destructive_contamination"
+      ],
+      "treatment": "decomposition_and_local_exposure_gate_no_curve",
+      "ordinate_status": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "value_lineage": "Wind_Map row 12 mixed electrical allocation required",
+      "exposure_grain": "per_turbine_point_or_pad_polygon",
+      "open_split": "BOM, enclosure, ownership, value, delivered load, and disposition."
+    },
+    {
+      "id": "WT_COLLECTION_NETWORK",
+      "subsystem": "PLANT_ELECTRICAL",
+      "component": "BURIED_EXPOSED_OR_OVERHEAD_COLLECTION_SEGMENTS_JOINTS_AND_TERMINATIONS",
+      "pathway_ids": [
+        "wildfire_thermal_attack",
+        "wildfire_firebrand_ignition",
+        "wildfire_residue_destructive_contamination"
+      ],
+      "treatment": "topology_and_construction_split_required_no_curve",
+      "ordinate_status": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "value_lineage": "Wind_Map row 12 mixed electrical allocation required",
+      "exposure_grain": "named_point_and_line_network_segments",
+      "open_split": "Buried, exposed, and overhead construction, direct attack, and segment value."
+    },
+    {
+      "id": "WT_GSU_MAIN_TRANSFORMER",
+      "subsystem": "GSU_SUBSTATION",
+      "component": "PROJECT_GSU_MAIN_POWER_TRANSFORMER_AND_INTRINSIC_AUXILIARIES",
+      "pathway_ids": [
+        "wildfire_thermal_attack",
+        "wildfire_firebrand_ignition",
+        "wildfire_residue_destructive_contamination"
+      ],
+      "treatment": "component_inventory_ownership_and_state_gate_no_curve",
+      "ordinate_status": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "value_lineage": "Wind_Map row 12 mixed electrical allocation required; site SOV required",
+      "exposure_grain": "actual_transformer_point_or_footprint_in_shared_yard",
+      "open_split": "Main tank, bushings, cooling, oil containment, auxiliaries, disposition, and value."
+    },
+    {
+      "id": "WT_GSU_SWITCHGEAR_BUS",
+      "subsystem": "GSU_SUBSTATION",
+      "component": "SWITCHGEAR_BREAKERS_DISCONNECTS_BUS_AND_EXPOSED_YARD_APPARATUS",
+      "pathway_ids": [
+        "wildfire_thermal_attack",
+        "wildfire_firebrand_ignition",
+        "wildfire_residue_destructive_contamination"
+      ],
+      "treatment": "component_inventory_ownership_and_state_gate_no_curve",
+      "ordinate_status": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "value_lineage": "Wind_Map row 12 mixed electrical allocation required; site SOV required",
+      "exposure_grain": "named_component_points_or_yard_subpolygons",
+      "open_split": "Voltage class, enclosure, exposed/indoor construction, disposition, and value."
+    },
+    {
+      "id": "WT_GSU_PROTECTION_CONTROL_DC",
+      "subsystem": "GSU_SUBSTATION",
+      "component": "PROTECTION_RELAY_CONTROL_SCADA_COMMUNICATIONS_STATION_SERVICE_AND_DC_POWER",
+      "pathway_ids": [
+        "wildfire_thermal_attack",
+        "wildfire_firebrand_ignition",
+        "wildfire_residue_destructive_contamination"
+      ],
+      "treatment": "component_inventory_building_state_and_dependency_gate_no_curve",
+      "ordinate_status": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "value_lineage": "Wind_Map row 12 mixed electrical allocation required; site SOV required",
+      "exposure_grain": "control_building_room_cabinet_or_named_component",
+      "open_split": "Building protection, HVAC/filtration, cabinets, station service, DC system, dependency, and value."
+    },
+    {
+      "id": "WT_GSU_CABLE_TERMINATIONS",
+      "subsystem": "GSU_SUBSTATION",
+      "component": "CABLE_TERMINATIONS_PULL_BOXES_CONDUIT_ENTRIES_AND_INGRESS_PATHS",
+      "pathway_ids": [
+        "wildfire_thermal_attack",
+        "wildfire_firebrand_ignition",
+        "wildfire_residue_destructive_contamination"
+      ],
+      "treatment": "construction_ingress_path_and_value_gate_no_curve",
+      "ordinate_status": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "value_lineage": "Wind_Map row 12 mixed electrical allocation required; site SOV required",
+      "exposure_grain": "termination_point_or_named_pathway_segment",
+      "open_split": "Construction, openings, cable material, exposure, inspected disposition, and value."
+    },
+    {
+      "id": "WT_CONTROL_MET_OM",
+      "subsystem": "PLANT_CONTROLS_AND_OPERATIONS",
+      "component": "CONTROL_BUILDING_MET_STATIONS_OM_BUILDINGS_AND_EXPOSED_INSTRUMENTS",
+      "pathway_ids": [
+        "wildfire_thermal_attack",
+        "wildfire_firebrand_ignition",
+        "wildfire_residue_destructive_contamination"
+      ],
+      "treatment": "subject_inventory_and_building_protection_split_no_curve",
+      "ordinate_status": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "value_lineage": "Wind_Map row 12 mixed electrical allocation required",
+      "exposure_grain": "separate_points_or_building_polygons",
+      "open_split": "Met, control, O&M, stored spares, dependencies, ownership, value, and response."
+    },
+    {
+      "id": "WT_FOUNDATION",
+      "subsystem": "FOUNDATION",
+      "component": "TURBINE_FOUNDATION_AND_BASE_INTERFACE",
+      "pathway_ids": [
+        "wildfire_thermal_attack",
+        "wildfire_firebrand_ignition",
+        "wildfire_residue_destructive_contamination"
+      ],
+      "treatment": "geometry_screened_no_curve_not_zero",
+      "ordinate_status": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "value_lineage": "Wind_Map row 10; 120 2023 USD/kW reference",
+      "exposure_grain": "per_turbine_point_and_base_interface",
+      "open_split": "Direct wildfire path remains unqualified; post-fire erosion or flood is a separate pathway."
+    },
+    {
+      "id": "WT_CIVIL_INFRA",
+      "subsystem": "PLANT_CIVIL",
+      "component": "ROADS_CRANE_PADS_BUILDINGS_FENCES_DRAINAGE_AND_VEGETATION_CONTROL_MIXED",
+      "pathway_ids": [
+        "wildfire_thermal_attack",
+        "wildfire_firebrand_ignition",
+        "wildfire_residue_destructive_contamination"
+      ],
+      "treatment": "mixed_subject_split_and_pathway_gate_no_curve",
+      "ordinate_status": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "value_lineage": "Wind_Map row 11; 47 2023 USD/kW reference",
+      "exposure_grain": "named_line_network_point_or_polygon_subjects",
+      "open_split": "Direct physical subjects versus mitigation controls, access, and post-fire consequences."
+    },
+    {
+      "id": "SUPPORT_FIELDWORK",
+      "subsystem": "SUPPORT",
+      "component": "INSPECTION_ACCESS_ASSEMBLY_INSTALLATION_AND_SITE_FIELDWORK",
+      "pathway_ids": [
+        "all_shared"
+      ],
+      "treatment": "support_cost_allocate_once_after_disposition_no_curve",
+      "ordinate_status": "not_applicable",
+      "y_axis": "not_applicable_support_allocation",
+      "value_lineage": "Wind_Map row 13; 100 2023 USD/kW reference",
+      "exposure_grain": "post_damage_repair_or_replacement_scope",
+      "open_split": "Claims or site allocation rule; never assign an independent wildfire damage ratio."
+    },
+    {
+      "id": "SUPPORT_TRANSPORT_LOGISTICS",
+      "subsystem": "SUPPORT",
+      "component": "TRANSPORT_CRANE_HEAVY_LIFT_AND_REPLACEMENT_LOGISTICS",
+      "pathway_ids": [
+        "all_shared"
+      ],
+      "treatment": "support_cost_allocate_once_after_disposition_no_curve",
+      "ordinate_status": "not_applicable",
+      "y_axis": "not_applicable_support_allocation",
+      "value_lineage": "Wind_Map row 14; 194 2023 USD/kW reference",
+      "exposure_grain": "post_damage_replacement_scope",
+      "open_split": "Distance, crane, access, heavy-lift, and replacement rule; no independent wildfire DR."
+    }
+  ],
+  "candidate_evidence": {
+    "status": "audit_only_not_runtime_shaped",
+    "numeric_values_embedded": false,
+    "runtime_enabled": false,
+    "candidate_families": [
+      "wildland_fire_site_clearance_and_protection_guidance",
+      "thermal_exposure_and_material_or_component_response",
+      "firebrand_generation_deposition_and_ingress",
+      "electrical_flashover_or_destructive_contamination",
+      "wind_facility_and_GSU_component_anatomy"
+    ],
+    "audit_record": "docs/cells/wildfire_wind/proposed/NUMERICAL_CANDIDATE_AUDIT_wildfire_wind__model_v0_1__docs_r1.md",
+    "legacy_rejection": "docs/cells/wildfire_wind/proposed/LEGACY_EVIDENCE_INGESTION_wildfire_wind__model_v0_1__docs_r1.md"
+  },
+  "curve_records": [],
+  "parameter_tier_table": [],
+  "derivation_rationale": {
+    "decision": "NO_RUNTIME_CURVE",
+    "reason": "No matched public occurrence chain connects pathway-specific delivered wildfire load at wind turbine or BOP component grain to inspected mutually exclusive physical disposition and same-unit direct economic cost.",
+    "transfer_guardrail": "Wildfire-solar ordinates, generic building thresholds, turbine-origin fire statistics, and legacy rotor/nacelle/tower logistics are not numerical fallbacks.",
+    "update_trigger": "Site or product-specific delivered-load measurements plus inspected disposition, work-order or claims cost, value, and exposure data close all promotion gates for at least one pathway and failure unit."
+  },
+  "emit_contract": {
+    "runtime_status": "withheld",
+    "populated_emit_modes_for_this_cell": [],
+    "valid_input_behavior": "Return no numeric DR or loss and stable NO_RUNTIME_CURVE reason.",
+    "missing_or_unknown_pathway_behavior": "Reject or withhold; never default to another wildfire pathway.",
+    "neighboring_cell_behavior": "Reject turbine-origin fire, lightning-origin fire, solar curves, and legacy numeric fallbacks.",
+    "spatial_behavior": "Require per-turbine and separately located BOP subjects; never treat the lease polygon as a solid value footprint.",
+    "annual_tail_boundary": "Frequency, EAL, PML, VaR and TVaR remain downstream and withheld."
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v1",
+    "cell_id": "wildfire_wind",
+    "spread_carried": false,
+    "emit_modes_populated_by_cell": [],
+    "metrics_supportable": {
+      "failure_unit_scalar_dr": "withheld",
+      "scenario_loss_given_value_basis": "withheld",
+      "scalar_eal": "withheld",
+      "pml": "withheld",
+      "var": "withheld",
+      "tvar": "withheld"
+    },
+    "withheld_reason_by_metric": {
+      "failure_unit_scalar_dr": [
+        "NO_RUNTIME_CURVE"
+      ],
+      "scenario_loss_given_value_basis": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_VALUE_BASIS",
+        "MISSING_EXPOSURE_OR_COUPLING"
+      ],
+      "scalar_eal": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_VALUE_BASIS",
+        "MISSING_EXPOSURE_OR_COUPLING",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "pml": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "var": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "tvar": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ]
+    },
+    "withheld_reason_codes": [
+      "NO_RUNTIME_CURVE",
+      "MISSING_VALUE_BASIS",
+      "MISSING_EXPOSURE_OR_COUPLING",
+      "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+    ],
+    "cap_binding": {
+      "policy": "fail_closed",
+      "preflight_status": "not_executed_no_distribution",
+      "required_before_scalar_eal": true,
+      "tolerance_pct": null,
+      "tolerance_status": "not_applicable_no_distribution",
+      "action_if_fail": "withhold_scalar_eal_and_require_tail_capable_emit"
+    }
+  }
+}

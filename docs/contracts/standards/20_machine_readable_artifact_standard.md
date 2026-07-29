@@ -175,6 +175,22 @@ Bundle v2 remains the repository-current canonical contract. Cells that require 
 pathways with independent axes and record families use the proposed bundle-v3 design during research. See
 [`22_pathway_aware_artifact_and_emit_standard.md`](22_pathway_aware_artifact_and_emit_standard.md).
 
+The draft v3 schema also supports the exact source-derived
+`thresholded_weibull_expected_damage` form used by the noncanonical
+`tropical_cyclone_wind_wind` model-v1.0 proposal. Its pinned parameters are `V_zero_kmh`,
+`delta_V50_kmh`, `rho`, `V_at_DR50_kmh`, and `max_dr`; each record also requires an exact turbine-archetype
+selector match. This additive draft extension does not add the form to bundle v2 or authorize a canonical
+consumer.
+
+The same proposed schema carries a pathway-aware `piecewise_linear` record for source-tabulated damage
+relationships. It pins ordered `[x, DR]` points, a two-value valid range, linear interpolation between source
+knots, explicit extrapolation behavior, an exact `selector_match`, source-parameter references, and metadata
+flags. The cell validator must also bind the record's `x_axis`, `valid_range`, pathway, and selector match to
+the containing pathway contract; the generic schema cannot prove those cross-object equalities. The first user is the
+noncanonical `flood_wind` model-v1.0 FEMA-Hazus screening proposal. Its presence in draft v3 does not make a
+table transferable across cells or authorize endpoint clamping, unit conversion, or consumer use without the
+cell evaluator and KAT contract.
+
 ```yaml
 bundle_v3_status: proposed_draft
 emit_v2_status: proposed_draft

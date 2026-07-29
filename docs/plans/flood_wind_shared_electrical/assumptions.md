@@ -41,3 +41,21 @@ The pinned code is reproducible and useful for old-versus-new characterization. 
 **Status:** active.
 
 Validation of the scaffold proves governance coherence and fail-closed behavior only. Numeric promotion requires a separately reviewed semantic model v1.0 or later.
+
+## FWSE-A8 — the Hazus-MH 2.1 series is source-native but legacy screening-grade
+
+**Status:** active with strict limits.
+
+The exact Table 7.9 ordinates may be reproduced without re-fitting, but their publication does not establish renewable-specific calibration, modern equipment applicability, conditioner effects, or component-level causation. Hazus-MH 2.1 itself says electric-power implementation was deferred; current Hazus 7.0 mapping-only treatment and disabled default electric curves reinforce that negative authority signal. The grade cannot be upgraded by calling the numbers FEMA-derived.
+
+## FWSE-A9 — the Hazus ordinate uses one whole-substation denominator
+
+**Status:** active.
+
+The percentage applies to the full replacement cost of one physical substation assembly. A binding requires the same substation's direct replacement value and ownership/inclusion evidence. The mixed CWER `72 USD/kW` electrical row, total project TIV, and a controls-only value are not valid denominators.
+
+## FWSE-A10 — assembly and component modes do not coexist
+
+**Status:** active.
+
+For one substation and event, the model may evaluate either the legacy whole-substation screening assembly or separately qualified switchgear, transformer, auxiliary/control, protection/SCADA, station-service/DC, and termination units. It may not emit or value both. Component deep curation is intended to replace or demote the assembly, not accumulate on top of it.

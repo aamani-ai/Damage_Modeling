@@ -1,0 +1,351 @@
+{
+  "schema_version": "damage_curve_record_bundle.v1",
+  "cell_id": "hail_wind",
+  "damage_code_id": "HAIL_WIND_PROPOSED_V0_1",
+  "semantic_damage_model_version": "model v0.1",
+  "documentation_revision": "docs r1",
+  "package_release": "unreleased",
+  "package_baseline": "library v2.5",
+  "lifecycle_state": "scaffold",
+  "promotion_status": "proposed",
+  "review_status": "pressure_tested",
+  "documentation_status": "working_revision",
+  "package_inclusion_status": "not_included",
+  "canonical_runtime_artifact": false,
+  "schema_envelope_status": {
+    "selected_schema": "damage_curve_record_bundle.v1",
+    "use": "noncanonical_zero_curve_scaffold_only",
+    "reason": "Repository-current v2 and v3 schemas require output-bearing records; this zero-curve scaffold is not publishable.",
+    "runtime_publication_allowed": false,
+    "promotion_rule": "A runtime bundle must use the repository-current schema and contain reviewed output-bearing records."
+  },
+  "ordinate_status": "withheld",
+  "withheld_reason_codes": [
+    "NO_RUNTIME_CURVE"
+  ],
+  "source_dossier": "docs/cells/hail_wind/proposed/hail_wind_curve_derivation_dossier__model_v0_1__docs_r1.md",
+  "source_workbook": "docs/cells/hail_wind/proposed/damage_curve_records_hail_wind__model_v0_1__docs_r1.xlsx",
+  "source_register": "docs/cells/hail_wind/proposed/SOURCE_REGISTER_hail_wind__model_v0_1__docs_r1.csv",
+  "claim_parameter_register": "docs/cells/hail_wind/proposed/CLAIM_PARAMETER_REGISTER_hail_wind__model_v0_1__docs_r1.csv",
+  "bounded_evidence_search_log": "docs/cells/hail_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_hail_wind__model_v0_1__docs_r1.md",
+  "parameter_tier_table_ref": "docs/cells/hail_wind/proposed/PARAMETER_TIER_TABLE_hail_wind__model_v0_1__docs_r1.csv",
+  "value_crosswalk_ref": "docs/cells/hail_wind/proposed/VALUE_CROSSWALK_hail_wind__model_v0_1__docs_r1.csv",
+  "site_condition_adapter_ref": "docs/cells/hail_wind/proposed/SITE_CONDITION_ADAPTER_hail_wind__model_v0_1__docs_r1.md",
+  "pressure_test_ref": "docs/cells/hail_wind/proposed/PRESSURE_TEST_hail_wind__model_v0_1__docs_r1.md",
+  "known_answer_tests": "docs/cells/hail_wind/proposed/known_answer_tests_hail_wind__model_v0_1__docs_r1.json",
+  "pathway": {
+    "pathway_id": "hail_impact",
+    "physical_mechanism": "direct_atmospheric_hail_impact",
+    "exact_match_required": true,
+    "fallback_allowed": false,
+    "event_family_id_required": true,
+    "deferred_neighboring_pathways": [
+      "straight_line_convective_wind",
+      "tornado_direct_hit",
+      "lightning",
+      "rain_induced_leading_edge_erosion",
+      "ice_accretion",
+      "hail_accumulation_or_meltwater_flood"
+    ],
+    "compound_event_rule": "Preserve one event_family_id and prevent duplicate physical-state/value charges downstream."
+  },
+  "asset_archetype": {
+    "asset": "land_based_multi_megawatt_horizontal_axis_wind_facility",
+    "reference_configuration": "generic_modern_onshore_reference_value_archetype",
+    "target_applicability_status": "not_frozen",
+    "scope_included": [
+      "direct_occurrence_hail_impact_physical_destruction"
+    ],
+    "scope_excluded": [
+      "chronic_multi_year_leading_edge_degradation",
+      "rain_only_erosion",
+      "convective_wind",
+      "tornado",
+      "lightning",
+      "ice",
+      "hail_accumulation_flood",
+      "business_interruption",
+      "derating_or_revenue",
+      "frequency_and_annual_or_tail_metrics"
+    ]
+  },
+  "value_basis": {
+    "status": "reference_archetype_only_not_enabled_for_loss",
+    "source_workbook": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "source_register_id": "HW-S015",
+    "crosswalk": "docs/cells/hail_wind/proposed/VALUE_CROSSWALK_hail_wind__model_v0_1__docs_r1.csv",
+    "unit": "2023_USD_per_kW",
+    "blade_hardware": 282,
+    "other_turbine_equipment": 808,
+    "turbine_equipment_total": 1090,
+    "other_direct_withheld": 239,
+    "support_once": 294,
+    "physical_reference": 1623,
+    "excluded_soft_sunk_nonphysical": 345,
+    "installed_reference": 1968,
+    "reconciliation": "282 + 808 = 1090; 1090 + 239 + 294 = 1623; 1623 + 345 = 1968",
+    "site_override_required_for_loss": true,
+    "values_embedded_as_curve_denominators": false,
+    "prohibited_use": "Reference shares are denominator anatomy, not DR caps, exposure fractions, or site appraisals."
+  },
+  "hazard_axis": {
+    "id": "WITHHELD_PENDING_QUALIFIED_BLADE_CONTACT_DEMAND_BRIDGE",
+    "status": "not_frozen",
+    "runtime_damage_mapping_status": "withheld_no_runtime_curve",
+    "source_native_objects": [
+      {
+        "id": "OBSERVED_MAXIMUM_HAIL_DIAMETER",
+        "input_field": "maximum_reported_hail_diameter_mm",
+        "unit": "mm",
+        "role": "source_event_descriptor",
+        "runtime_curve_compatible": false,
+        "source_id": "HW-S001"
+      },
+      {
+        "id": "MRMS_MESH",
+        "input_field": "mesh_mm",
+        "unit": "mm",
+        "role": "radar_estimated_source_event_descriptor",
+        "runtime_curve_compatible": false,
+        "source_id": "HW-S002"
+      }
+    ],
+    "required_future_bridge_inputs": [
+      "hail_size_distribution_id",
+      "hail_density_basis_kg_m3",
+      "hail_duration_s",
+      "hail_event_wind_vector_and_basis",
+      "turbine_and_blade_model",
+      "operating_state",
+      "rotor_speed_rpm",
+      "pitch_and_azimuth_history"
+    ],
+    "candidate_future_outputs": [
+      "contact_normal_energy_j_by_blade_zone_and_size_bin",
+      "strike_count_by_energy_bin",
+      "event_impact_energy_density_j_per_m2"
+    ],
+    "extrapolation_policy": "reject_no_runtime_axis",
+    "conversion_guardrail": "No diameter-only, MESH-only, solar, rain-erosion, or legacy real-estate converter is adopted."
+  },
+  "proposed_future_y_axis": {
+    "id": "conditional_direct_repair_or_replacement_cost_ratio",
+    "status": "withheld",
+    "definition": "Expected direct repair-or-replacement cost divided by pre-event direct replacement value of the same blade/failure unit conditional on delivered local hail-impact history and verified state.",
+    "denominator_rule": "Same failure unit in numerator and denominator; no whole-farm or installed-TIV substitution.",
+    "support_cost_rule": "Allocate eligible inspection/access/fieldwork/transport once after disposition; no independent support DR.",
+    "excluded_from_ordinate": [
+      "business_interruption",
+      "derating_or_revenue",
+      "frequency",
+      "insurance_terms",
+      "unrelated_site_value"
+    ]
+  },
+  "failure_units": [
+    {
+      "id": "WT_BLADE_ASSEMBLY",
+      "subsystem": "ROTOR",
+      "component": "LEADING_EDGE_COATING_SHELL_LAMINATE_AND_BLADE_STRUCTURE",
+      "pathway": "hail_impact",
+      "treatment": "candidate_primary_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Wind_Map row 2; 282 2023 USD/kW reference",
+      "exposure_grain": "per_blade_or_rotor_at_turbine_point",
+      "open_split": "mutually exclusive coating repair, structural repair and replacement states"
+    },
+    {
+      "id": "WT_NACELLE_EXPOSED_ASSEMBLY",
+      "subsystem": "NACELLE",
+      "component": "COVER_COOLERS_SENSORS_AND_PROTECTED_INTERNAL_EQUIPMENT_SPLIT",
+      "pathway": "hail_impact",
+      "treatment": "decomposition_gate_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Wind_Map rows 3:8; 532 2023 USD/kW reference",
+      "exposure_grain": "per_turbine_point_and_exposed_subject",
+      "open_split": "exposed/protected split and hail response"
+    },
+    {
+      "id": "WT_TOWER_AND_EXTERNAL_FIXTURES",
+      "subsystem": "TOWER",
+      "component": "TOWER_SHELL_COATING_AND_EXTERNAL_FIXTURES",
+      "pathway": "hail_impact",
+      "treatment": "decomposition_gate_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Wind_Map row 9; 276 2023 USD/kW reference",
+      "exposure_grain": "per_turbine_vertical_subject",
+      "open_split": "tower/appurtenance split and response"
+    },
+    {
+      "id": "WT_PAD_ELECTRICAL",
+      "subsystem": "PLANT_ELECTRICAL",
+      "component": "PAD_TRANSFORMER_SWITCHGEAR_ENCLOSURES_AND_EXPOSED_APPARATUS",
+      "pathway": "hail_impact",
+      "treatment": "decomposition_gate_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Wind_Map row 12 mixed electrical allocation required",
+      "exposure_grain": "per_turbine_point_or_pad_polygon",
+      "open_split": "BOM, protection, value and response"
+    },
+    {
+      "id": "WT_COLLECTION_NETWORK",
+      "subsystem": "PLANT_ELECTRICAL",
+      "component": "BURIED_OR_OVERHEAD_COLLECTION_SEGMENTS_AND_COMPONENTS",
+      "pathway": "hail_impact",
+      "treatment": "decomposition_gate_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Wind_Map row 12 mixed electrical allocation required",
+      "exposure_grain": "line_or_network",
+      "open_split": "topology, component split and direct-impact evidence"
+    },
+    {
+      "id": "WT_GSU_SUBSTATION",
+      "subsystem": "PLANT_ELECTRICAL",
+      "component": "GSU_SWITCHYARD_CONTROL_BUILDING_AND_EXPOSED_APPARATUS",
+      "pathway": "hail_impact",
+      "treatment": "decomposition_gate_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Wind_Map row 12 mixed electrical allocation required",
+      "exposure_grain": "shared_point_or_yard_polygon",
+      "open_split": "ownership, BOM/SOV, protection, exposure and response"
+    },
+    {
+      "id": "WT_CONTROL_AND_MET_STATION",
+      "subsystem": "PLANT_CONTROLS",
+      "component": "CONTROL_BUILDING_MET_MAST_AND_EXPOSED_INSTRUMENTS",
+      "pathway": "hail_impact",
+      "treatment": "decomposition_gate_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Wind_Map rows 11:12 mixed allocation required",
+      "exposure_grain": "point_or_polygon",
+      "open_split": "subject inventory, dependency, value and response"
+    },
+    {
+      "id": "WT_FOUNDATION",
+      "subsystem": "FOUNDATION",
+      "component": "TURBINE_FOUNDATION_OR_BASE",
+      "pathway": "hail_impact",
+      "treatment": "geometry_screened_no_curve_not_zero",
+      "ordinate_status": "withheld",
+      "value_lineage": "Wind_Map row 10; 120 2023 USD/kW reference",
+      "exposure_grain": "per_turbine_point",
+      "open_split": "direct hail path unqualified; accumulation/flood separate"
+    },
+    {
+      "id": "WT_CIVIL_INFRA",
+      "subsystem": "PLANT_CIVIL",
+      "component": "ROADS_CRANE_PADS_BUILDINGS_FENCES_AND_DRAINAGE",
+      "pathway": "hail_impact",
+      "treatment": "decomposition_gate_no_curve",
+      "ordinate_status": "withheld",
+      "value_lineage": "Wind_Map row 11; 47 2023 USD/kW reference",
+      "exposure_grain": "line_network_or_polygon_split_required",
+      "open_split": "subject split and neighboring accumulation/flood routing"
+    },
+    {
+      "id": "SUPPORT_FIELDWORK",
+      "subsystem": "SUPPORT",
+      "component": "INSPECTION_ACCESS_ASSEMBLY_AND_INSTALLATION",
+      "pathway": "all_shared",
+      "treatment": "support_cost_allocate_once_no_curve",
+      "ordinate_status": "not_applicable",
+      "value_lineage": "Wind_Map row 13; 100 2023 USD/kW reference",
+      "exposure_grain": "post_damage_repair_scope",
+      "open_split": "claims/site allocation rule"
+    },
+    {
+      "id": "SUPPORT_TRANSPORT_LOGISTICS",
+      "subsystem": "SUPPORT",
+      "component": "TRANSPORT_CRANE_AND_REPLACEMENT_LOGISTICS",
+      "pathway": "all_shared",
+      "treatment": "support_cost_allocate_once_no_curve",
+      "ordinate_status": "not_applicable",
+      "value_lineage": "Wind_Map row 14; 194 2023 USD/kW reference",
+      "exposure_grain": "post_damage_replacement_scope",
+      "open_split": "distance, crane, access and replacement rule"
+    }
+  ],
+  "candidate_evidence": {
+    "status": "audit_only_not_runtime_shaped",
+    "numeric_values_embedded": false,
+    "runtime_enabled": false,
+    "candidate_families": [
+      "repeated_simulated_hail_GFRP",
+      "blade_impingement_simulation",
+      "cumulative_coating_ADF",
+      "leading_edge_condition_states",
+      "generic_blade_repair_cost_anatomy"
+    ],
+    "audit_record": "docs/cells/hail_wind/proposed/NUMERICAL_CANDIDATE_AUDIT_hail_wind__model_v0_1__docs_r1.md",
+    "legacy_rejection": "docs/cells/hail_wind/proposed/LEGACY_EVIDENCE_INGESTION_hail_wind__model_v0_1__docs_r1.md"
+  },
+  "curve_records": [],
+  "parameter_tier_table": [],
+  "derivation_rationale": {
+    "decision": "NO_RUNTIME_CURVE",
+    "reason": "No matched public occurrence chain from local hail/blade demand through inspected mutually exclusive disposition to same-unit direct cost and site exposure/value.",
+    "update_trigger": "Product-specific tests or field/claims/work-order data close all promotion gates."
+  },
+  "emit_contract": {
+    "runtime_status": "withheld",
+    "valid_input_behavior": "Return no numeric DR or loss and stable NO_RUNTIME_CURVE reason.",
+    "unknown_or_neighboring_pathway_behavior": "Reject or withhold; never default to hail_impact.",
+    "annual_tail_boundary": "Frequency, EAL, PML, VaR and TVaR remain downstream and withheld."
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v1",
+    "cell_id": "hail_wind",
+    "spread_carried": false,
+    "emit_modes_populated_by_cell": [],
+    "metrics_supportable": {
+      "failure_unit_scalar_dr": "withheld",
+      "scenario_loss_given_value_basis": "withheld",
+      "scalar_eal": "withheld",
+      "pml": "withheld",
+      "var": "withheld",
+      "tvar": "withheld"
+    },
+    "withheld_reason_by_metric": {
+      "failure_unit_scalar_dr": [
+        "NO_RUNTIME_CURVE"
+      ],
+      "scenario_loss_given_value_basis": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_VALUE_BASIS",
+        "MISSING_EXPOSURE_OR_COUPLING"
+      ],
+      "scalar_eal": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_VALUE_BASIS",
+        "MISSING_EXPOSURE_OR_COUPLING",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "pml": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "var": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "tvar": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ]
+    },
+    "withheld_reason_codes": [
+      "NO_RUNTIME_CURVE",
+      "MISSING_VALUE_BASIS",
+      "MISSING_EXPOSURE_OR_COUPLING",
+      "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+    ],
+    "cap_binding": {
+      "policy": "fail_closed",
+      "preflight_status": "not_executed_no_distribution",
+      "required_before_scalar_eal": true,
+      "tolerance_pct": null,
+      "tolerance_status": "not_applicable_no_distribution",
+      "action_if_fail": "withhold_scalar_eal_and_require_tail_capable_emit"
+    }
+  }
+}

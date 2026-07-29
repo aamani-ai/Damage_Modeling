@@ -8,9 +8,19 @@ These notes are the implementation-side contract for external M2/M3 notebooks. T
 | `wind_tornado_wind_m2_height_bridge.md` | Convert 10m gusts to hub-height gusts before evaluating the wind/tornado wind-farm damage curve. |
 | `wind_tornado_wind_model_v2_0_hazard_migration_proposal.md` | Shadow-test the proposed pathway-aware model v2 contract; repair event, height/profile, turbine exposure, value, frequency, hardcoded-curve, and rollback seams before any cutover. Model v1 remains canonical. |
 | `strong_wind_solar_model_v2_0_convective_migration_proposal.md` | Shadow-test the proposed convective solar v2 contract with fixed-pressure versus tracker-Ucrit routing, local event/zone exposure, state-aware module/structure cascade, explicit value basis, negative tests, and v1 rollback. |
+| `tropical_cyclone_wind_wind_model_v0_1_boundary.md` | Preserve the new TC-wind pathway boundary and fail closed with `NO_RUNTIME_CURVE`; do not load the noncanonical scaffold, reuse convective/tornado curves, or create an ungoverned coastal overlap. |
+| `tropical_cyclone_wind_wind_model_v1_0_proposal.md` | Shadow-test the three exact Jaimes expected-DR curves on their source-native axis and atom while withholding value conversion, standard wind-farm units, and scenario/annual/tail loss. No cutover is authorized. |
+| `tropical_cyclone_wind_solar_model_v0_1_boundary.md` | Preserve architecture-specific solar demand, separate GSU/substation binding, compound-event routing, and fail-closed `NO_RUNTIME_CURVE`; do not load the scaffold or reuse strong-wind/legacy curves. |
+| `tropical_cyclone_wind_solar_model_v1_0_proposal.md` | Shadow-test the one Perry source-cohort visible-module-hardware screening proxy with exact axis, selector, range, limitation-flag, and withholding rules. Strict evidence review still favors v0.1; no cutover is authorized. |
+| `flood_wind_model_v0_1_boundary.md` | Preserve component-local flood exposure, ownership/value separation, and fail-closed `NO_RUNTIME_CURVE`; do not load the scaffold, reuse flood-solar/legacy curves, or leave the independent M4 bypass out of a future migration. |
+| `flood_wind_model_v1_0_proposal.md` | Shadow-test the exact legacy FEMA whole-substation screening table on its source-native grade-depth axis while keeping component/wind-unit coverage, value binding, annual/tail outputs, and consumer cutover withheld. |
+| `hail_wind_model_v0_1_boundary.md` | Apply the docs-r2 strict NO-GO decision while preserving the unchanged docs-r1 machine scaffold, source-hail versus blade-contact-demand semantics, per-turbine/BOP/GSU spatial grains, and fail-closed `NO_RUNTIME_CURVE`; do not load the scaffold or reuse solar, chronic-erosion, or legacy real-estate curves. |
+| `wildfire_wind_model_v0_1_boundary.md` | Preserve regional-wildfire versus delivered thermal/firebrand/residue demand, one shared event across per-turbine and separately located BOP/GSU subjects, and fail-closed `NO_RUNTIME_CURVE`; do not load the scaffold or reuse solar, building, internal-fire, or legacy wind curves. |
 | `m3_to_m4_distribution_ready_emit.md` | Ensure the parquet/schema seam can carry scalar and distribution emit objects. |
 | `wildfire_solar_research_to_runtime_handoff__model_v0_1__docs_r2.md` | Keep FSim wildfire screening separate from physical solar loss; isolate the current legacy proxy and fail closed until a canonical wildfire_solar model is released. |
 | `wildfire_solar_model_v1_0_hazard_migration.md` | Replace the legacy midpoint/Byram/logistic proxy with the canonical exact-FSim-state screening model, explicit value linkage, KATs, SHA pin, and limitation flags. |
 
-The v1.0 migration file supersedes the v0.1 no-runtime instruction for execution; the v0.1 file remains the
-research and promotion audit.
+The canonical `wildfire_solar_model_v1_0_hazard_migration.md` supersedes that cell's v0.1 no-runtime
+instruction for execution; its v0.1 file remains the research and promotion audit. For every explicitly
+noncanonical v1 proposal listed above, the corresponding v0.1 boundary remains the operational execution
+rule until a separate canonical promotion and cutover decision.

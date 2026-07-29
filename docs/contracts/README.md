@@ -40,6 +40,9 @@ Repository-current change records:
 - [`hail_solar_consumer_contract_v2.md`](hazard_handoff/hail_solar_consumer_contract_v2.md)
 - [`wind_tornado_wind_m2_height_bridge.md`](hazard_handoff/wind_tornado_wind_m2_height_bridge.md)
 - [`wind_tornado_wind_model_v2_0_hazard_migration_proposal.md`](hazard_handoff/wind_tornado_wind_model_v2_0_hazard_migration_proposal.md) — noncanonical v2 shadow/migration plan; v1 remains current
+- [`tropical_cyclone_wind_wind_model_v1_0_proposal.md`](hazard_handoff/tropical_cyclone_wind_wind_model_v1_0_proposal.md) — noncanonical source-native screening v1 shadow contract; no consumer cutover
+- [`flood_wind_model_v1_0_proposal.md`](hazard_handoff/flood_wind_model_v1_0_proposal.md) — noncanonical legacy FEMA whole-substation screening shadow contract; no value binding or consumer cutover
+- [`tropical_cyclone_wind_solar_model_v1_0_proposal.md`](hazard_handoff/tropical_cyclone_wind_solar_model_v1_0_proposal.md) — noncanonical Perry source-cohort visible-module screening shadow contract; strict execution remains v0.1 and no consumer cutover is authorized
 - [`m3_to_m4_distribution_ready_emit.md`](hazard_handoff/m3_to_m4_distribution_ready_emit.md)
 - [`wildfire_solar_model_v1_0_hazard_migration.md`](hazard_handoff/wildfire_solar_model_v1_0_hazard_migration.md)
 

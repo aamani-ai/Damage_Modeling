@@ -47,7 +47,17 @@ pip install -r requirements.txt
 
 ## Status
 
-Method mature — foundations + global standards + 4 current worked cells (hail×solar, flood×solar,
-wind/tornado×wind, strong-wind×solar), all at damage-model v1.0, public-source-derived. v2.5 ships
-machine-readable JSON artifacts and capability declarations. Durable artifact publishing and Hazard M3 loading
-remain future system work. See [`AGENTS.md`](AGENTS.md).
+Method mature — foundations + global standards + 5 current worked cells, all at damage-model v1.0: four
+public-source-derived cells (hail×solar, flood×solar, wind/tornado×wind, strong-wind×solar) plus the explicitly
+screening-grade wildfire×solar engineering proxy. Of the five additional structurally complete hazard × asset
+pairs, tropical-cyclone wind×wind, flood×wind, and tropical-cyclone wind×solar now have noncanonical,
+partial-coverage model-v1.0 proposals; hail×wind remains a fail-closed model-v0.1 scaffold after an
+independent docs-r2 deep pass, and wildfire×wind remains a fail-closed model-v0.1/docs-r1 scaffold. The
+tropical-cyclone wind×solar proposal is a deliberately quarantined coverage-first screening
+exception, not an evidence-earned or canonical release. Each cell has a three-file first-reader basics set.
+The [coverage plan](docs/plans/hazard_asset_coverage/README.md) reports **10/10 structural coverage** and
+**5/10 canonical runtime coverage**, and records the one-cell-at-a-time deep-curation queue. v2.5 ships
+machine-readable JSON
+artifacts and capability declarations; wildfire×solar is repository-current but outside that preserved
+portable package. Durable artifact publishing and Hazard M3 loading remain future system work. See
+[`AGENTS.md`](AGENTS.md).

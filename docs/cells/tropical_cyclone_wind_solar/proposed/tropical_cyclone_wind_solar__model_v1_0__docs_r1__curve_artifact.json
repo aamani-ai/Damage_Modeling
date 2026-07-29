@@ -1,0 +1,612 @@
+{
+  "schema_version": "damage_curve_record_bundle.v3",
+  "schema_status": "proposed_draft",
+  "cell_id": "tropical_cyclone_wind_solar",
+  "damage_code_id": "TROPICAL_CYCLONE_WIND_SOLAR_PERRY_MODULE_SCREENING_V1",
+  "semantic_damage_model_version": "model v1.0",
+  "documentation_revision": "docs r1",
+  "lifecycle_state": "release_candidate",
+  "promotion_status": "proposed",
+  "review_status": "pressure_tested_pending_independent_review",
+  "model_grade": "screening_remote_sensing_labeled_visible_fraction_with_T4_economic_bridge",
+  "package_release": "unreleased",
+  "package_baseline": "library v2.5",
+  "package_inclusion_status": "not_included",
+  "canonical_runtime_artifact": false,
+  "source_dossier": "docs/cells/tropical_cyclone_wind_solar/proposed/tropical_cyclone_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md",
+  "source_workbook": "docs/cells/tropical_cyclone_wind_solar/proposed/damage_curve_records_tropical_cyclone_wind_solar__model_v1_0__docs_r1.xlsx",
+  "known_answer_tests": "docs/cells/tropical_cyclone_wind_solar/proposed/known_answer_tests_tropical_cyclone_wind_solar__model_v1_0__docs_r1.json",
+  "source_register": "docs/cells/tropical_cyclone_wind_solar/proposed/SOURCE_REGISTER_tropical_cyclone_wind_solar__model_v1_0__docs_r1.csv",
+  "claim_parameter_register": "docs/cells/tropical_cyclone_wind_solar/proposed/CLAIM_PARAMETER_REGISTER_tropical_cyclone_wind_solar__model_v1_0__docs_r1.csv",
+  "value_crosswalk": "docs/cells/tropical_cyclone_wind_solar/proposed/VALUE_CROSSWALK_tropical_cyclone_wind_solar__model_v1_0__docs_r1.csv",
+  "failure_units": [
+    {
+      "id": "PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT",
+      "subsystem": "PV_ARRAY_MODULES_SOURCE_COHORT",
+      "component": "VISIBLE_OR_MISSING_MODULE_HARDWARE_MATERIAL_ONLY",
+      "treatment": "primary_nonzero",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "same source-compatible module-hardware material acquisition value under uniform per-module value and full replacement of every visibly damaged or missing module",
+      "exposure_grain": "one complete source-compatible ground-mounted non-tracking site module population",
+      "mutually_exclusive_with": [
+        "PV_FIXED_TILT_MODULE_FIELD"
+      ]
+    },
+    {
+      "id": "PV_FIXED_TILT_MODULE_FIELD",
+      "subsystem": "PV_ARRAY_MODULES",
+      "component": "GENERIC_FIXED_TILT_MODULE_FIELD_ALL_DAMAGE",
+      "treatment": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "same-unit fixed-tilt module-field replacement value",
+      "withheld_reason_codes": [
+        "SOURCE_SPECIFIC_ATOM_NOT_GENERIC_MODULE_FIELD",
+        "HIDDEN_DAMAGE_AND_DISPOSITION_NOT_OBSERVED"
+      ]
+    },
+    {
+      "id": "PV_FIXED_TILT_SUPPORT_STRUCTURE",
+      "subsystem": "PV_ARRAY_SUPPORT",
+      "component": "RACKS_POSTS_BRACES_CLAMPS_AND_CONNECTIONS",
+      "treatment": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "same-unit fixed-tilt support replacement value",
+      "withheld_reason_codes": [
+        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+      ]
+    },
+    {
+      "id": "PV_TRACKER_MODULE_FIELD",
+      "subsystem": "PV_ARRAY_MODULES",
+      "component": "TRACKER_MODULES_FRAMES_AND_RETENTION",
+      "treatment": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "same-unit tracker module-field replacement value",
+      "withheld_reason_codes": [
+        "TRACKER_POPULATION_NOT_SUPPORTED",
+        "NO_FIXED_TO_TRACKER_FALLBACK"
+      ]
+    },
+    {
+      "id": "PV_TRACKER_SBOS_ASSEMBLY",
+      "subsystem": "PV_ARRAY_SUPPORT",
+      "component": "TRACKER_TORQUE_TUBE_BEARING_DRIVE_AND_RACKING",
+      "treatment": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "same-unit tracker structural BOS replacement value",
+      "withheld_reason_codes": [
+        "TRACKER_POPULATION_NOT_SUPPORTED",
+        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+      ]
+    },
+    {
+      "id": "PV_FOUNDATION",
+      "subsystem": "FOUNDATION",
+      "component": "PILES_POSTS_ANCHORS_AND_PADS",
+      "treatment": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "same-unit foundation replacement value",
+      "withheld_reason_codes": [
+        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+      ]
+    },
+    {
+      "id": "PV_POWER_CONVERSION_AND_COLLECTION",
+      "subsystem": "PLANT_ELECTRICAL",
+      "component": "INVERTER_COMBINER_CABLE_AND_COLLECTION_SCOPE",
+      "treatment": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "split point, line, and network replacement value",
+      "withheld_reason_codes": [
+        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+        "POINT_LINE_NETWORK_SPLIT_REQUIRED"
+      ]
+    },
+    {
+      "id": "PV_GSU_SUBSTATION",
+      "subsystem": "SUBSTATION",
+      "component": "GSU_TRANSFORMER_SWITCHYARD_PROTECTION_AND_CONTROL",
+      "treatment": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "same facility-level GSU/substation replacement value",
+      "withheld_reason_codes": [
+        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+        "FACILITY_LEVEL_SHARED_SUBASSET_REQUIRES_CELL_LOCAL_BINDING"
+      ]
+    },
+    {
+      "id": "PV_SCADA_COMMUNICATIONS",
+      "subsystem": "CONTROL",
+      "component": "SCADA_MONITORING_AND_COMMUNICATIONS",
+      "treatment": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "same-unit control and communications replacement value",
+      "withheld_reason_codes": [
+        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+      ]
+    },
+    {
+      "id": "PV_CIVIL_INFRA",
+      "subsystem": "PLANT_CIVIL",
+      "component": "ROADS_FENCES_DRAINAGE_AND_BUILDINGS",
+      "treatment": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "split direct civil replacement value",
+      "withheld_reason_codes": [
+        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+        "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
+      ]
+    },
+    {
+      "id": "PV_REPLACEMENT_SUPPORT",
+      "subsystem": "SUPPORT",
+      "component": "REMOVAL_REINSTALL_FIELDWORK_FREIGHT_AND_LOGISTICS",
+      "treatment": "withheld",
+      "y_axis": "not_applicable_support_cost",
+      "denominator": "post-damage repair work scope",
+      "withheld_reason_codes": [
+        "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+        "NO_INDEPENDENT_FRAGILITY"
+      ]
+    }
+  ],
+  "pathways": [
+    {
+      "pathway_id": "tropical_cyclone_wind",
+      "hazard_scope": {
+        "included": [
+          "source-observed visible or missing module outcome after named hurricanes for the Perry manual ground-mounted non-tracking cohort"
+        ],
+        "excluded": [
+          "pure aerodynamic mechanism attribution",
+          "TC-spawned tornado",
+          "storm surge, flood, scour, or water ingress",
+          "hidden module or electrical damage",
+          "business interruption, derating, curtailment, or restoration"
+        ],
+        "source_overlap_caveat": "The remote-sensing endpoint does not separate direct wind uplift, attachment cascade, or debris-driven visible module loss; output is flagged SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS.",
+        "compound_event_rule": "Preserve one event_family_id and do not combine this proxy with another visible-module wind or debris curve without an overlap review."
+      },
+      "hazard_axis": {
+        "id": "PERRY_DATASET_REPORTED_EVENT_MAX_GUST_MPS",
+        "preferred_input_field": "perry_event_max_gust_mps",
+        "permitted_proxy_fields": [],
+        "unit": "m/s",
+        "valid_range": [
+          17.4,
+          39.1
+        ],
+        "extrapolation_policy": "withhold below 17.4 m/s or above 39.1 m/s; the 48.2 m/s record is audit-only and no endpoint clamp is permitted",
+        "source_semantics": "dataset-reported event maximum gust; the full manual multi-hurricane cohort does not pin provider, station, height, averaging period, exposure, or query semantics",
+        "category_guardrail": "Saffir-Simpson category, NHC sustained wind, and ASCE 3-second gust are not accepted aliases.",
+        "bridge_policy": "No height, averaging-period, terrain, or weather-product bridge is included in model v1.0."
+      },
+      "selector_logic": [
+        {
+          "field": "array_architecture_id",
+          "required": true,
+          "default": null,
+          "allowed": [
+            "PERRY_GROUND_NONTRACKING_SOURCE_COHORT_V1"
+          ],
+          "routing": "exact match only; tracker and generic fixed-tilt fallback prohibited"
+        },
+        {
+          "field": "source_population_match_id",
+          "required": true,
+          "default": null,
+          "allowed": [
+            "PERRY_MANUAL_GROUND_NONTRACKING_MIXED_SCALE_V1"
+          ],
+          "effect": "Acknowledges mixed or unknown site scale and source-cohort transfer limitations."
+        },
+        {
+          "field": "module_value_distribution_assumption_id",
+          "required": true,
+          "default": null,
+          "allowed": [
+            "UNIFORM_MODULE_HARDWARE_VALUE"
+          ]
+        },
+        {
+          "field": "visible_damage_disposition_assumption_id",
+          "required": true,
+          "default": null,
+          "allowed": [
+            "FULL_REPLACEMENT_IF_VISIBLE_OR_MISSING"
+          ]
+        },
+        {
+          "field": "source_wind_product_id",
+          "required": true,
+          "default": null,
+          "allowed": [
+            "PERRY_DATASET_REPORTED_EVENT_MAX_GUST"
+          ]
+        },
+        {
+          "field": "causal_scope_acknowledgement_id",
+          "required": true,
+          "default": null,
+          "allowed": [
+            "SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS"
+          ]
+        }
+      ],
+      "conditioner_logic": [],
+      "exposure_contract": {
+        "required_subject_grain": "one complete source-compatible ground-mounted non-tracking site module population",
+        "whole_plant_default": "prohibited",
+        "extra_spatial_exposure_fraction": "prohibited because response already measures the realized visible site fraction",
+        "value_rule": "Scalar DR only before promotion; future loss may bind only exact site module-hardware material value, never full TIV or a generic benchmark.",
+        "gsu_rule": "PV_GSU_SUBSTATION remains one separate facility-level exposure and receives no array-module DR."
+      },
+      "failure_unit_coverage": [
+        {
+          "failure_unit_id": "PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT",
+          "status": "conditional_numeric_screening_curve",
+          "reason_codes": []
+        },
+        {
+          "failure_unit_id": "PV_FIXED_TILT_MODULE_FIELD",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "SOURCE_SPECIFIC_ATOM_NOT_GENERIC_MODULE_FIELD"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_FIXED_TILT_SUPPORT_STRUCTURE",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_TRACKER_MODULE_FIELD",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "TRACKER_POPULATION_NOT_SUPPORTED"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_TRACKER_SBOS_ASSEMBLY",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "TRACKER_POPULATION_NOT_SUPPORTED"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_FOUNDATION",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_POWER_CONVERSION_AND_COLLECTION",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_GSU_SUBSTATION",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_SCADA_COMMUNICATIONS",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_CIVIL_INFRA",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_REPLACEMENT_SUPPORT",
+          "status": "withheld_non_curve_support",
+          "reason_codes": [
+            "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION"
+          ]
+        }
+      ],
+      "curve_records": [
+        {
+          "curve_id": "TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1",
+          "pathway_id": "tropical_cyclone_wind",
+          "failure_unit_id": "PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT",
+          "curve_form": "piecewise_linear",
+          "x_axis": "perry_event_max_gust_mps",
+          "y_axis": "failure_unit_damage_ratio",
+          "parameters": {
+            "points": [
+              [17.4, 0.0],
+              [18.3, 0.0],
+              [20.7, 0.00027276656],
+              [24.6, 0.00027276656],
+              [24.8, 0.000955175835],
+              [25.1, 0.000955175835],
+              [25.9, 0.001853190692857],
+              [29.5, 0.001853190692857],
+              [29.8, 0.004054775905],
+              [31.7, 0.00441454805],
+              [37.9, 0.00441454805],
+              [38.9, 0.0182729376325],
+              [39.1, 0.0182729376325]
+            ]
+          },
+          "valid_range": [
+            17.4,
+            39.1
+          ],
+          "interpolation_policy": "linear_between_source_knots",
+          "extrapolation_policy": "withhold outside 17.4 through 39.1 m/s; no endpoint clamp and no use of the 48.2 m/s audit-only observation",
+          "selector_match": {
+            "array_architecture_id": "PERRY_GROUND_NONTRACKING_SOURCE_COHORT_V1",
+            "source_population_match_id": "PERRY_MANUAL_GROUND_NONTRACKING_MIXED_SCALE_V1",
+            "module_value_distribution_assumption_id": "UNIFORM_MODULE_HARDWARE_VALUE",
+            "visible_damage_disposition_assumption_id": "FULL_REPLACEMENT_IF_VISIBLE_OR_MISSING",
+            "source_wind_product_id": "PERRY_DATASET_REPORTED_EVENT_MAX_GUST",
+            "causal_scope_acknowledgement_id": "SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS"
+          },
+          "source_parameter_refs": [
+            "TCWS-S020#manual_csv_ground_tracking_false_x_le_39_1",
+            "TCWS-S021#manual_endpoint_definition",
+            "FIT_SUFFICIENT_STATISTICS_tropical_cyclone_wind_solar__model_v1_0__docs_r1.csv"
+          ],
+          "metadata_flags": [
+            "SCREENING_REMOTE_SENSING_LABELED_VISIBLE_FRACTION_WITH_T4_ECONOMIC_BRIDGE",
+            "SOURCE_COHORT_MIXED_SCALE",
+            "SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS",
+            "VISIBLE_DAMAGE_ONLY_HIDDEN_DAMAGE_UNOBSERVED",
+            "SPARSE_SEVERE_TAIL_WITHHELD",
+            "EVENT_CLUSTERED_SAMPLE",
+            "PAVA_DERIVED_KNOTS",
+            "EQUAL_SITE_WEIGHT_NOT_MODULE_WEIGHTED",
+            "CROSS_METHOD_SAME_EVENT_ENDPOINT_CONFLICT",
+            "NO_EXTRAPOLATION",
+            "CURVE_INTRINSIC_SPREAD_NOT_CARRIED"
+          ]
+        }
+      ]
+    }
+  ],
+  "value_linkage": {
+    "supported_failure_unit": "PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT",
+    "runtime_loss_status": "withheld_before_canonical_promotion",
+    "future_same_unit_denominator": "exact site-specific module-hardware material acquisition value for the compatible source-cohort subject",
+    "required_assumptions": [
+      "uniform module-hardware value",
+      "full material replacement for every visibly damaged or missing module"
+    ],
+    "prohibited_denominators": [
+      "full plant TIV",
+      "installed PV cost",
+      "generic module plus mounting subtotal",
+      "NLR benchmark used as an unknown-site default",
+      "racking, removal, reinstall, freight, electrical, GSU, civil, support, BI, or soft cost"
+    ]
+  },
+  "parameter_tier_table": [
+    {
+      "parameter": "visible module percent observations and source cohort",
+      "curve_id": "TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1",
+      "value": "35 ground non-tracking rows; 34 runtime fit rows",
+      "param_role": "curve_fit_shape",
+      "tier": "T1_claims_or_field_calibrated",
+      "source_ids": [
+        "TCWS-S020",
+        "TCWS-S021"
+      ],
+      "reasoning": "Public field remote-sensing observations directly measure graded visible physical severity, not economic cost.",
+      "update_trigger": "revised or expanded architecture-labeled field data"
+    },
+    {
+      "parameter": "PAVA block-edge piecewise-linear fit",
+      "curve_id": "TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1",
+      "value": "13 knots over 17.4-39.1 m/s",
+      "param_role": "curve_fit_shape",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "TCWS-S020"
+      ],
+      "reasoning": "Transparent monotone screening fit with equal site weights and no sparse-tail extrapolation.",
+      "update_trigger": "independently validated cluster-aware predictive model"
+    },
+    {
+      "parameter": "uniform module value and full visible-module replacement",
+      "curve_id": "TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1",
+      "value": "required exact selector acknowledgements",
+      "param_role": "ordinate_bridge",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "TCWS-S020",
+        "TCWS-S021"
+      ],
+      "reasoning": "These assumptions make the observed physical fraction a same-unit module-hardware material replacement proxy.",
+      "update_trigger": "module-level value and repair-versus-replace evidence"
+    },
+    {
+      "parameter": "valid source range",
+      "curve_id": "TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1",
+      "value": "17.4-39.1 m/s; 48.2 m/s point audit-only",
+      "param_role": "boundary_or_cap",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "TCWS-S020"
+      ],
+      "reasoning": "Prevents a 9.1 m/s severe-tail interval from being interpolated from one observation.",
+      "update_trigger": "expanded severe-tail evidence"
+    }
+  ],
+  "evaluation_contract": {
+    "supported_pathway_id": "tropical_cyclone_wind",
+    "supported_failure_unit_id": "PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT",
+    "required_selector_fields": [
+      "array_architecture_id",
+      "source_population_match_id",
+      "module_value_distribution_assumption_id",
+      "visible_damage_disposition_assumption_id",
+      "source_wind_product_id",
+      "causal_scope_acknowledgement_id"
+    ],
+    "accepted_axis_payloads": [
+      {
+        "mode": "source_native_perry_gust",
+        "required_fields": [
+          "perry_event_max_gust_mps"
+        ]
+      }
+    ],
+    "metadata_flags_always": [
+      "NONCANONICAL_PROPOSAL",
+      "SCREENING_REMOTE_SENSING_LABELED_VISIBLE_FRACTION_WITH_T4_ECONOMIC_BRIDGE",
+      "SOURCE_COHORT_MIXED_SCALE",
+      "SOURCE_AXIS_PRODUCT_QUERY_SEMANTICS_UNRESOLVED",
+      "SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS",
+      "VISIBLE_DAMAGE_ONLY_HIDDEN_DAMAGE_UNOBSERVED",
+      "PAVA_DERIVED_KNOTS",
+      "EQUAL_SITE_WEIGHT_NOT_MODULE_WEIGHTED",
+      "EVENT_CLUSTERED_SAMPLE",
+      "SPARSE_SEVERE_TAIL_WITHHELD",
+      "CROSS_METHOD_SAME_EVENT_ENDPOINT_CONFLICT",
+      "PARTIAL_FAILURE_UNIT_COVERAGE",
+      "CURVE_INTRINSIC_SPREAD_NOT_CARRIED",
+      "NO_EXTRAPOLATION",
+      "SCENARIO_DOLLAR_LOSS_WITHHELD"
+    ],
+    "out_of_range_behavior": "withhold without numeric fallback",
+    "unsupported_unit_behavior": "return null DR with governed reason codes",
+    "scenario_loss_behavior": "withheld before canonical promotion even when a value is supplied"
+  },
+  "emit_contract": {
+    "schema_version": "damage_emit.v2",
+    "populated_emit_modes_for_this_cell": [
+      "scalar_mean"
+    ],
+    "supported_output": "conditional scalar mean visible-module-hardware material replacement proxy DR for the source-specific unit only",
+    "scenario_loss": "withheld before canonical promotion",
+    "annual_and_tail_metrics": "withheld",
+    "withheld_units_emit": "Return explicit null DR plus reason codes; never convert missing curves to zero."
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v3",
+    "cell_id": "tropical_cyclone_wind_solar",
+    "canonical_runtime_artifact": false,
+    "pathway_capabilities": [
+      {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_scalar_dr": "conditional",
+        "scenario_loss_given_value_basis": "withheld",
+        "curve_intrinsic_spread": "not_carried",
+        "populated_emit_modes": [
+          "scalar_mean"
+        ],
+        "conditions": [
+          "array_architecture_id must equal PERRY_GROUND_NONTRACKING_SOURCE_COHORT_V1",
+          "source_population_match_id must acknowledge PERRY_MANUAL_GROUND_NONTRACKING_MIXED_SCALE_V1",
+          "module_value_distribution_assumption_id must equal UNIFORM_MODULE_HARDWARE_VALUE",
+          "visible_damage_disposition_assumption_id must equal FULL_REPLACEMENT_IF_VISIBLE_OR_MISSING",
+          "source_wind_product_id must equal PERRY_DATASET_REPORTED_EVENT_MAX_GUST",
+          "causal_scope_acknowledgement_id must equal SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS",
+          "perry_event_max_gust_mps must be finite and inside 17.4 through 39.1 m/s",
+          "the scalar applies only to PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT"
+        ],
+        "limitation_flags": [
+          "NONCANONICAL_PROPOSAL",
+          "SCREENING_REMOTE_SENSING_LABELED_VISIBLE_FRACTION_WITH_T4_ECONOMIC_BRIDGE",
+          "SOURCE_COHORT_MIXED_SCALE",
+          "SOURCE_AXIS_PRODUCT_QUERY_SEMANTICS_UNRESOLVED",
+          "SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS",
+          "VISIBLE_DAMAGE_ONLY_HIDDEN_DAMAGE_UNOBSERVED",
+          "SPARSE_SEVERE_TAIL_WITHHELD",
+          "EVENT_CLUSTERED_SAMPLE",
+          "PAVA_DERIVED_KNOTS",
+          "EQUAL_SITE_WEIGHT_NOT_MODULE_WEIGHTED",
+          "CROSS_METHOD_SAME_EVENT_ENDPOINT_CONFLICT",
+          "NO_EXTRAPOLATION",
+          "PARTIAL_FAILURE_UNIT_COVERAGE",
+          "CURVE_INTRINSIC_SPREAD_NOT_CARRIED",
+          "SCENARIO_DOLLAR_LOSS_WITHHELD"
+        ],
+        "withheld_failure_units": [
+          {"failure_unit_id": "PV_FIXED_TILT_MODULE_FIELD", "reason_codes": ["SOURCE_SPECIFIC_ATOM_NOT_GENERIC_MODULE_FIELD", "HIDDEN_DAMAGE_AND_DISPOSITION_NOT_OBSERVED"]},
+          {"failure_unit_id": "PV_FIXED_TILT_SUPPORT_STRUCTURE", "reason_codes": ["NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"]},
+          {"failure_unit_id": "PV_TRACKER_MODULE_FIELD", "reason_codes": ["TRACKER_POPULATION_NOT_SUPPORTED", "NO_FIXED_TO_TRACKER_FALLBACK"]},
+          {"failure_unit_id": "PV_TRACKER_SBOS_ASSEMBLY", "reason_codes": ["TRACKER_POPULATION_NOT_SUPPORTED", "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"]},
+          {"failure_unit_id": "PV_FOUNDATION", "reason_codes": ["NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"]},
+          {"failure_unit_id": "PV_POWER_CONVERSION_AND_COLLECTION", "reason_codes": ["NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT", "POINT_LINE_NETWORK_SPLIT_REQUIRED"]},
+          {"failure_unit_id": "PV_GSU_SUBSTATION", "reason_codes": ["NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT", "FACILITY_LEVEL_SHARED_SUBASSET_REQUIRES_CELL_LOCAL_BINDING"]},
+          {"failure_unit_id": "PV_SCADA_COMMUNICATIONS", "reason_codes": ["NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"]},
+          {"failure_unit_id": "PV_CIVIL_INFRA", "reason_codes": ["NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT", "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"]},
+          {"failure_unit_id": "PV_REPLACEMENT_SUPPORT", "reason_codes": ["SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION", "NO_INDEPENDENT_FRAGILITY"]}
+        ]
+      }
+    ],
+    "consumer_annual_metrics": {
+      "computation_owner": "downstream_consumer",
+      "status_before_promotion": "withheld_noncanonical_proposal",
+      "status_after_promotion": "withheld",
+      "prerequisites": [
+        "canonical promotion and exact model plus docs plus schema plus SHA pin",
+        "validated tropical-cyclone frequency coupling to the exact Perry source-axis semantics",
+        "approved site-specific module-hardware value and ownership binding",
+        "complete failure-unit coverage or an explicitly partial covered-loss product",
+        "compound-event partition across wind, debris, tornado, flood or surge, and rain",
+        "consumer cap binding and aggregation validation"
+      ],
+      "limitation_flags": [
+        "NONCANONICAL_PROPOSAL",
+        "PARTIAL_FAILURE_UNIT_COVERAGE",
+        "SCENARIO_AND_WHOLE_PLANT_LOSS_WITHHELD",
+        "SOURCE_AXIS_NOT_FREQUENCY_READY",
+        "CURVE_INTRINSIC_SPREAD_NOT_CARRIED"
+      ]
+    },
+    "cap_binding": {
+      "policy": "consumer_enforced_fail_closed",
+      "enforcement_owner": "downstream_consumer",
+      "checks_required": [
+        "reject scenario, portfolio, annual, and tail metrics from the noncanonical proposal",
+        "never multiply the curve by full plant TIV or a generic installed-cost benchmark",
+        "apply no extra spatial exposure fraction to the observed site-fraction response",
+        "preserve null for every withheld failure unit",
+        "reject tracker and every unstated axis or selector fallback"
+      ],
+      "action_if_fail": "withhold scalar DR, scenario loss, and all annual or tail metrics"
+    },
+    "promotion_gate": {
+      "status": "blocked",
+      "required_before_canonical_use": [
+        "independent source-file hash, cohort-filter, percent-conversion, PAVA, and knot reproduction",
+        "independent review of the uniform-value and full-replacement economic bridge",
+        "engineering applicability review for utility-scale fixed-tilt transfer",
+        "source-axis bridge or exact source-product delivery contract",
+        "cluster-aware and leave-one-hurricane-out validation with an expanded severe tail",
+        "Hazard adapter for exact axis, selectors, pin, partial capability, and compound-event partition",
+        "explicit maintainer promotion decision"
+      ]
+    }
+  },
+  "derivation_rationale": {
+    "source_population": "Perry manual CSV, ground plus tracking false, n=35",
+    "runtime_fit_population": "n=34 after quarantining the lone 48.2 m/s severe-tail point",
+    "response_conversion": "pct_modules_damaged divided by 100",
+    "fit": "unweighted site-level PAVA; pooled means linearized at block edges",
+    "economic_bridge": "uniform module-hardware value and full material replacement of every visibly damaged or missing module",
+    "why_not_generic": "site scale is mixed or missing; hidden damage, disposition, and architecture detail are incomplete"
+  },
+  "legacy_comparison": {
+    "model_v0_1": "zero runtime curves; all scalar DR withheld",
+    "model_v1_0": "one conditional source-specific visible-module-hardware material replacement proxy curve",
+    "unchanged": "no canonical pin, package release, Hazard cutover, scenario loss, annual metric, tracker response, support response, electrical response, or GSU response"
+  }
+}
