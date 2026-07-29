@@ -48,10 +48,11 @@ rows form the retained fit. The source cohort is named mixed scale because the r
 The x-axis is exactly `PERRY_DATASET_REPORTED_EVENT_MAX_GUST_MPS`, supplied as
 `perry_event_max_gust_mps`. The retained numeric range is 17.4–39.1 m/s.
 
-The full manual cohort does not resolve one provider, station/grid location, height, averaging period,
-exposure convention, query method, or uncertainty. NHC sustained wind, ASCE gust, Saffir-Simpson category,
-array-height wind, and other products are rejected rather than converted into the source field. There is no
-source-to-Hazard bridge in the proposal.
+Perry identifies Visual Crossing API at study level. The released manual rows do not preserve the
+contributing station/product, query settings, height/exposure, exact gust duration, retrieval version,
+time-of-maximum, or uncertainty. NHC sustained wind, Hazard or ASCE 3-second gust, Saffir-Simpson category,
+array-height wind, a new Visual Crossing query, and other products are rejected rather than converted into
+the source field. There is no source-to-Hazard bridge in the proposal.
 
 ## 4. Convert the observed endpoint without hiding assumptions
 
@@ -74,9 +75,10 @@ freight, inspection, racking, electrical work, support, and hidden damage are ou
 
 ## 5. Fit only the retained source domain
 
-The 34 retained rows are fitted with equal-site-weighted PAVA. The monotone fit has eight pooled blocks,
+The 34 retained rows are fitted with equal-record-weighted PAVA. At least one physical site recurs across
+storms, so the rows are not 34 unique or independent sites. The monotone fit has eight pooled blocks,
 serialized at 13 block edges and connected by ordinary linear interpolation. It is not module weighted,
-hurricane weighted, or a source-published method.
+hurricane weighted, a source-published method, or a validated predictive relationship.
 
 One `(48.2 m/s, 0.4142383192)` source observation is retained for audit but excluded from runtime fitting.
 There are no selected observations between 39.1 and 48.2 m/s. The proposal withholds beyond 39.1 rather than
@@ -106,9 +108,11 @@ selector/assumption acknowledgements. No selector has a default. The evaluator:
 - rejects value input and scenario-loss calculation; and
 - returns explicit nulls for every unsupported unit.
 
-Every numeric result remains labeled noncanonical, source-cohort mixed scale, composite-mechanism,
-visible-only, PAVA-derived, equal-site weighted, event clustered, sparse-tail withheld, partial coverage,
-without intrinsic spread, and without extrapolation.
+Every numeric result retains the historical machine flag for equal-site-not-module weighting, but docs r2
+narrows that interpretation to equal-record weighting with repeated physical sites. It also remains labeled
+noncanonical, source-cohort mixed scale, composite-mechanism, visible-only, PAVA-derived, event clustered,
+sparse-tail withheld, partial coverage, predictively unvalidated, without intrinsic spread, and without
+extrapolation.
 
 ## 8. Keep value outside the active proposal
 

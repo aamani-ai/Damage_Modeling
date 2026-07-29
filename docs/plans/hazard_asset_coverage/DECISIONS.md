@@ -125,3 +125,18 @@ unsupported mappings from source hail to contact history, coupon/simulation resp
 probability, and field state to repair/replacement cost. No numerical record, bundle-v3 artifact, canonical
 package, schema change, or Hazard cutover is therefore created. A future Tier-4 structured-elicitation model
 requires a separate explicit owner decision and would be a `MODEL_BEHAVIOR_CHANGE`.
+
+## D-013 — TC-wind × solar deep curation retains model v1.0/docs r2
+
+**Decision:** classify the reopened `tropical_cyclone_wind_solar` pass as
+`EVIDENCE_ONLY_NO_OUTPUT_CHANGE`, retain the noncanonical model-v1.0/docs-r1 runtime proposal byte-for-byte,
+advance human/evidence documentation to docs r2, and return the one-at-a-time queue to `wildfire_wind`.
+
+**Reason:** independent sampling/fit, axis, tracker/tail, economic/value, and failure-unit reviews found no
+computational defect in the pinned Perry transformation, but no validated prediction even for an unseen
+source-compatible site, portable Hazard 3-second-gust bridge, tracker calibration, severe-tail law, or
+same-unit economic response for another unit. Perry identifies
+Visual Crossing at study level, yet its released rows omit the query/station/reference-frame lineage needed
+for transfer. New Mawar, Yagi, FPL, FEMA, owner, SEC, DOE/NLR, and OEM evidence strengthens occurrence
+coverage and acquisition design without supplying an adopted parameter. A future portable fixed/tracker
+contract is expected to be a major model-v2 change and requires the recorded owner/adjuster evidence package.

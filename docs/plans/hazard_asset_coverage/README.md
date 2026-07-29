@@ -1,6 +1,6 @@
 # Hazard × asset coverage plan
 
-> **Plan of record — coverage before depth. Steps 1–7 are complete.** Establish each intended
+> **Plan of record — coverage before depth. Steps 1–8 are complete.** Establish each intended
 > hazard × asset cell honestly, one at a time, before starting another model-v2 deep-curation cycle.
 > “Established” may mean a validated, fail-closed model v0.1 scaffold; it does not mean that a numerical curve
 > exists.
@@ -15,7 +15,10 @@ scaffolds, completing structural breadth. Three one-at-a-time depth passes then 
 model-v1.0 partial-coverage proposals. The solar proposal is an explicit coverage-first screening exception;
 its strict evidence-earned gate remains NO-GO. A fourth deep pass independently reopened `hail_wind` and
 retained model v0.1 while advancing its human/evidence documentation to docs r2; stronger physics,
-inspection, and migration evidence still did not support an economic damage atom.
+inspection, and migration evidence still did not support an economic damage atom. A fifth deep pass then
+reopened `tropical_cyclone_wind_solar`: it corrected the study-level wind-provider wording and added severe,
+tracker, failure-unit, and economic evidence, but earned only model-v1.0/docs-r2 documentation. The Perry
+runtime proposal remains docs r1 and numerically unchanged.
 
 The coverage-first sequence is:
 
@@ -27,11 +30,12 @@ The coverage-first sequence is:
 5. flood_wind                   COMPLETE — proposed model v1.0/docs r1, whole-substation screening only
 6. tropical_cyclone_wind_solar  COMPLETE — proposed model v1.0/docs r1, one source-specific screening atom
 7. hail_wind                    COMPLETE — model v0.1/docs r2; strict model-v1 gate remains NO-GO
-8. wildfire_wind                next — deep-curate without forcing promotion
-9. existing model-v2 proposals  resume after the remaining model-v0.1 cells
+8. tropical_cyclone_wind_solar  COMPLETE — model v1.0/docs r2 evidence revision; runtime docs r1 unchanged
+9. wildfire_wind                next — deep-curate without forcing promotion
+10. existing model-v2 proposals resume after the remaining model-v0.1 cells
 ```
 
-Steps 1–7 are complete. Each pair received its own change classification, evidence search, package, tests,
+Steps 1–8 are complete. Each pair received its own change classification, evidence search, package, tests,
 and review before the following pair began. Deep curation continues from the queue below, one cell at a time.
 A version bump is an earned scientific outcome, not the task definition: if a deep pass cannot close a
 defensible numeric seam, the honest result remains model v0.1.
@@ -62,7 +66,7 @@ placeholder is not counted as Damage Modeling coverage.
 | Convective/tornado wind | Wind | [`wind_tornado_wind`](../../cells/wind_tornado_wind/README.md), canonical v1 plus noncanonical v2 proposal | Yes | Covered; v2 depth parked |
 | Flood | Solar | [`flood_solar`](../../cells/flood_solar/README.md), canonical model v1.0 | Yes | Covered |
 | Flood | Wind | [`flood_wind`](../../cells/flood_wind/README.md), noncanonical model v1.0 whole-substation screening proposal | Proposal only | One legacy source-native assembly curve; components/value/consumer promotion blocked |
-| Tropical-cyclone wind | Solar | [`tropical_cyclone_wind_solar`](../../cells/tropical_cyclone_wind_solar/README.md), noncanonical model v1.0 screening proposal | Proposal only | One source-specific Perry visible-module atom; generic array/value/consumer promotion blocked |
+| Tropical-cyclone wind | Solar | [`tropical_cyclone_wind_solar`](../../cells/tropical_cyclone_wind_solar/README.md), noncanonical model v1.0/docs r2 screening proposal | Proposal only | One unchanged source-specific Perry visible-module atom; portable axis/tracker/tail/economics/value/consumer promotion blocked |
 | Tropical-cyclone wind | Wind | [`tropical_cyclone_wind_wind`](../../cells/tropical_cyclone_wind_wind/README.md), noncanonical model v1.0 partial-coverage release candidate | Proposal only | Three exact source-native curves; broader asset/value/consumer promotion blocked |
 
 The portfolio is now **10/10 structurally governed**, including **5/10 with canonical runtime curves**.
@@ -134,13 +138,20 @@ Completed fourth: `hail_wind` added seven reviewed source records and nine gover
 both independent reviews found that a numerical atom would still require unsupported contact, state, and
 same-blade economic mappings. The model therefore remains v0.1 with `NO_RUNTIME_CURVE`.
 
+Completed fifth: `tropical_cyclone_wind_solar` added docs-r2 axis and equal-record corrections, an explicit
+no-predictive-validation decision, primary occurrence evidence, tracker and severe-tail audits, a
+failure-unit/economic gap matrix, and a v2 acquisition plan. It found no computational defect in the pinned
+finite-sample transformation, but no evidence-supported way to generalize or validate it predictively. Model
+v1.0 and every docs-r1 runtime output therefore remain unchanged and noncanonical.
+
 1. `wildfire_wind`: prioritize exogenous-attribution field cases and ground-level pad/GSU evidence before
    elevated turbine assembly response; do not force a screening curve merely to change the version label;
 2. `hail_wind`: reopen numerical promotion only when event-resolved hail, turbine operating/contact state,
    inspected mutually exclusive disposition, and same-blade direct cost are linked—or when the owner
    explicitly authorizes a separately labeled Tier-4 elicitation model;
-3. `tropical_cyclone_wind_solar`: close the exact wind-product, utility-transfer, disposition/cost, severe-
-   tail, uncertainty, value, and Hazard-adapter gates before any canonical release;
+3. `tropical_cyclone_wind_solar`: execute the docs-r2 acquisition blueprint only when owner/adjuster data can
+   close portable wind, architecture/state, disposition/cost, severe-tail, uncertainty, value, and
+   Hazard-adapter gates;
 4. `flood_wind`: later deepen component-local GSU/substation disposition/cost and site ownership/value
    evidence without decomposing the legacy assembly curve by assumption;
 5. `strong_wind_solar` and `wind_tornado_wind` v2 proposals: resume their documented promotion queues.

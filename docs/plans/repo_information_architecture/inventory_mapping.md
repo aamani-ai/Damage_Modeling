@@ -54,7 +54,7 @@ gates without entering the canonical artifact index.
 |---|---|---|
 | `tropical_cyclone_wind_wind` | model v1.0 / docs r1 | Three exact source-native screening curves for one quarantined atom; noncanonical, partial coverage, no scenario loss, not in artifact index |
 | `flood_wind` | model v1.0 / docs r1 | One legacy source-native whole-substation screening curve; noncanonical partial coverage; no value binding; not in artifact index |
-| `tropical_cyclone_wind_solar` | model v1.0 / docs r1 | One Perry source-cohort visible-module screening curve under a deliberate coverage-first exception; strict execution remains model v0.1/`NO_RUNTIME_CURVE`; noncanonical partial coverage; not in artifact index |
+| `tropical_cyclone_wind_solar` | model v1.0 / human docs r2 / runtime proposal docs r1 | One unchanged Perry source-cohort visible-module screening curve under a deliberate coverage-first exception; strict execution remains model v0.1/`NO_RUNTIME_CURVE`; portable axis/tracker/tail/economic promotion blocked; not in artifact index |
 | `hail_wind` | model v0.1 / human docs r2 / runtime scaffold docs r1 | Independently deep-curated strict NO-GO; `NO_RUNTIME_CURVE`; not in artifact index |
 | `wildfire_wind` | model v0.1 / docs r1 | `NO_RUNTIME_CURVE`; not in artifact index |
 

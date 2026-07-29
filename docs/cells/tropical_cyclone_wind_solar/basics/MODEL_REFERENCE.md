@@ -7,13 +7,14 @@ cell_id: tropical_cyclone_wind_solar
 pathway_id: tropical_cyclone_wind
 damage_code_id: TROPICAL_CYCLONE_WIND_SOLAR_PERRY_MODULE_SCREENING_V1
 semantic_damage_model_version: model v1.0
-documentation_revision: docs r1
+human_documentation_revision: docs r2
+runtime_proposal_revision: docs r1
 artifact_schema_version: damage_curve_record_bundle.v3
 emit_schema_version: damage_emit.v2
 capability_schema_version: capability_declaration.v3
 lifecycle_state: release_candidate
-promotion_status: proposed
-review_status: pressure_tested_pending_independent_review
+promotion_status: proposed_blocked
+review_status: deep_curated_noncanonical_no_model_bump
 model_grade: screening_remote_sensing_labeled_visible_fraction_with_T4_economic_bridge
 strict_evidence_earned_gate: NO_GO_RETAIN_V0_1
 coverage_first_exception: deliberate_noncanonical_screening_proposal
@@ -24,8 +25,9 @@ curve_record_count: 1
 consumer_cutover: none
 ```
 
-This is the exact reference for the lead research proposal. It is not a canonical artifact, runtime pin,
-package release, or authorization for Hazard consumption. The preserved strict alternative is
+This is the exact reference for the lead human/evidence state and unchanged docs-r1 runtime proposal. It is
+not a canonical artifact, runtime pin, package release, or authorization for Hazard consumption. The
+preserved strict alternative is
 [model v0.1/docs r1](../proposed/README_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md), which has zero
 curves and returns `NO_RUNTIME_CURVE` for every numeric request.
 
@@ -68,7 +70,8 @@ event clusters                          6
 
 The fit rows come from Dorian (3), Florence (20), Ian (2), Idalia (1), Maria (4), and Michael (4). The cohort
 is explicitly mixed scale because the released manual CSV has no `site_type` column and some system-power
-values are missing.
+values are missing. At least one physical site recurs across storm records, so the 34 fit rows are neither 34
+unique sites nor independent event/site realizations.
 
 ## Hazard-axis contract
 
@@ -83,9 +86,10 @@ extrapolation_policy: withhold
 48_2_mps_source_row: audit_only_not_runtime
 ```
 
-The full cohort's provider, station/grid location, height, averaging period, exposure standard, query
-semantics, and uncertainty are unresolved. NHC sustained wind, ASCE 3-second gust, Saffir-Simpson category,
-Visual Crossing generally, array-height wind, and other gust products are not aliases.
+Perry identifies Visual Crossing API as the study-level provider. The full cohort's row-level station/product,
+height, averaging period, exposure standard, query settings, retrieval version, time-of-maximum, and
+uncertainty are unresolved. NHC sustained wind, Hazard or ASCE 3-second gust, Saffir-Simpson category, a new
+Visual Crossing query, array-height wind, and other gust products are not aliases.
 
 ## Required selectors and acknowledgements
 
@@ -106,7 +110,9 @@ Tier-4 economic bridges, not observed source facts.
 
 ## Curve record
 
-The curve is an equal-site-weighted PAVA fit, serialized at pooled-block edges and linearly interpolated:
+The curve is an equal-record-weighted PAVA fit, serialized at pooled-block edges and linearly interpolated.
+The historical `EQUAL_SITE_WEIGHT_NOT_MODULE_WEIGHTED` flag distinguishes row weighting from module
+weighting; it does not establish unique-site independence or predictive validity.
 
 | Knot | x (m/s) | Proxy DR |
 |---:|---:|---:|
@@ -126,6 +132,10 @@ The curve is an equal-site-weighted PAVA fit, serialized at pooled-block edges a
 
 The isolated source observation at 48.2 m/s has fraction `0.4142383192`; it is excluded from runtime fitting
 and retained in audit lineage. There is no clamp, asymptote, tail law, or curve-intrinsic spread.
+
+The transformation is computationally reproducible but not a scientifically validated prediction for an
+unseen source-compatible site. The convenience cohort lacks a sampling frame, architecture/design controls,
+cluster-aware inference, and an independent validation event; PAVA and the block-edge ramps impose shape.
 
 ## Ordinate meaning
 
@@ -200,8 +210,8 @@ cross-method-conflict, partial-coverage, no-spread, no-extrapolation, and scenar
 
 ## Validation and promotion status
 
-The internal validator reports `PASS_INTERNAL_NONCANONICAL_SCREENING_PROPOSAL`, including source
-reproduction, schemas, capability parity, evaluator/KAT checks, workbook QA, v0.1 regression, and canonical
+The docs-r2 validator reports `PASS` for the evidence revision, including source and claim addenda, schemas,
+capability parity, evaluator/KAT checks, workbook QA, unchanged runtime hashes, v0.1 regression, and canonical
 artifact-index exclusion.
 
 The strict evidence-earned gate remains `NO_GO_RETAIN_V0_1`. Canonical runtime, scenario dollars,
@@ -210,6 +220,9 @@ matrix.
 
 ## Authoritative model-v1 files
 
+- [Docs-r2 overview](../proposed/README_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md)
+- [Docs-r2 deep-curation decision](../proposed/DEEP_CURATION_DECISION_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md)
+- [Docs-r2 validation report](../proposed/VALIDATION_REPORT_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md)
 - [Proposal overview](../proposed/README_tropical_cyclone_wind_solar__model_v1_0__docs_r1.md)
 - [Curve artifact](../proposed/tropical_cyclone_wind_solar__model_v1_0__docs_r1__curve_artifact.json)
 - [Capability](../proposed/tropical_cyclone_wind_solar__model_v1_0__docs_r1__capability.json)

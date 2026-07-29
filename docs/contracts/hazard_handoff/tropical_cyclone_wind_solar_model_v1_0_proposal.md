@@ -4,6 +4,9 @@
 > coverage-first screening exception. The strict evidence-earned gate would retain model v0.1. The proposal
 > is absent from the canonical artifact index, has no `current/` folder, and authorizes no Hazard cutover.
 
+> **Docs-r2 correction.** The [deep-curation no-cutover addendum](tropical_cyclone_wind_solar_model_v1_0_docs_r2_no_cutover.md)
+> supersedes the earlier provider and equal-site wording while leaving the runtime proposal unchanged.
+
 ## What the proposal adds
 
 Model v0.1 remains the fail-closed execution boundary. Model v1.0 adds one narrower research record for the
@@ -13,7 +16,7 @@ source-specific atom `PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT`
 Perry manually labeled hurricane data
   -> ground-mounted + tracking=False source cohort
   -> percent visibly missing/damaged modules / 100
-  -> equal-site-weighted PAVA
+  -> equal-record-weighted PAVA (historical machine flag says equal-site-not-module-weighted)
   -> linear interpolation between 13 governed block-edge knots
   -> module-hardware material full-replacement screening proxy
 ```
@@ -50,10 +53,11 @@ event_family_id: <compound-event parent identifier>
 ```
 
 The pinned artifact/adapter must separately verify
-`hazard_axis.id=PERRY_DATASET_REPORTED_EVENT_MAX_GUST_MPS`. The source provider, reference height, averaging
-period, exposure convention, and query semantics are unresolved for the full manual multi-hurricane cohort.
-NHC sustained wind, ASCE 3-second gust, Saffir-Simpson category, array-height wind, Visual Crossing generally,
-or another gust product is not an accepted alias.
+`hazard_axis.id=PERRY_DATASET_REPORTED_EVENT_MAX_GUST_MPS`. Perry identifies Visual Crossing API at study
+level, while row-level station/product, reference height, averaging period, exposure convention, query,
+retrieval version, time-of-maximum, and uncertainty semantics remain unresolved for the manual cohort. NHC
+sustained wind, Hazard or ASCE 3-second gust, Saffir-Simpson category, array-height wind, a new Visual Crossing
+query, or another gust product is not an accepted alias.
 
 Range handling is contractual:
 
@@ -78,10 +82,11 @@ DR    = [0, 0, 0.000272766560000, 0.000272766560000,
          0.018272937632500]
 ```
 
-These are analyst-derived PAVA block-edge knots, not source-published curve points. The fit uses 34
-equal-site-weighted rows from six clustered hurricanes; it is not module weighted and carries no intrinsic
-spread. The isolated 48.2 m/s / 0.4142383192 observation is excluded from the fit, which prevents one row from
-creating a 9.1 m/s tail ramp but biases severe-event response downward.
+These are analyst-derived PAVA block-edge knots, not source-published curve points. The fit gives equal weight
+to 34 rows from six clustered hurricanes; at least one physical site recurs across storms, so those are not
+34 unique or independent sites. It is not module weighted, has no validated predictive relationship, and
+carries no intrinsic spread. The isolated 48.2 m/s / 0.4142383192 observation is excluded from the fit, which
+prevents one row from creating a 9.1 m/s tail ramp but biases severe-event response downward.
 
 ## Required limitation flags
 

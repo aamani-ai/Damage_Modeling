@@ -22,6 +22,8 @@ CAPABILITY = PROPOSED / "tropical_cyclone_wind_solar__model_v1_0__docs_r1__capab
 KATS = PROPOSED / "known_answer_tests_tropical_cyclone_wind_solar__model_v1_0__docs_r1.json"
 SOURCES = PROPOSED / "SOURCE_REGISTER_tropical_cyclone_wind_solar__model_v1_0__docs_r1.csv"
 CLAIMS = PROPOSED / "CLAIM_PARAMETER_REGISTER_tropical_cyclone_wind_solar__model_v1_0__docs_r1.csv"
+R2_SOURCES = PROPOSED / "SOURCE_REGISTER_ADDENDUM_tropical_cyclone_wind_solar__model_v1_0__docs_r2.csv"
+R2_CLAIMS = PROPOSED / "CLAIM_PARAMETER_REGISTER_ADDENDUM_tropical_cyclone_wind_solar__model_v1_0__docs_r2.csv"
 PARAMETERS = PROPOSED / "PARAMETER_TIER_TABLE_tropical_cyclone_wind_solar__model_v1_0__docs_r1.csv"
 VALUES = PROPOSED / "VALUE_CROSSWALK_tropical_cyclone_wind_solar__model_v1_0__docs_r1.csv"
 FIT_STATS = PROPOSED / "FIT_SUFFICIENT_STATISTICS_tropical_cyclone_wind_solar__model_v1_0__docs_r1.csv"
@@ -34,6 +36,8 @@ BUNDLE_SCHEMA = ROOT / "docs/contracts/schemas/curve_artifact_bundle.v3.schema.j
 CAPABILITY_SCHEMA = ROOT / "docs/contracts/schemas/capability_declaration.v3.schema.json"
 EMIT_SCHEMA = ROOT / "docs/contracts/schemas/damage_emit.v2.schema.json"
 V0_VALIDATOR = ROOT / "scripts/reference_helpers/validate_tropical_cyclone_wind_solar_v0_1_scaffold.py"
+EVALUATOR = ROOT / "scripts/reference_helpers/tropical_cyclone_wind_solar_curve_eval.py"
+DERIVER = ROOT / "scripts/reference_helpers/derive_tropical_cyclone_wind_solar_v1_fit.py"
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from derive_tropical_cyclone_wind_solar_v1_fit import derive  # noqa: E402
@@ -78,7 +82,7 @@ EXPECTED_SHEETS = [
     "Parameter_Tiers",
     "QA",
 ]
-EXPECTED_DOCS = [
+BASE_EXPECTED_DOCS = [
     "README_tropical_cyclone_wind_solar__model_v1_0__docs_r1.md",
     "CHANGE_CLASSIFICATION_tropical_cyclone_wind_solar__model_v1_0__docs_r1.md",
     "SEVEN_STEP_AUDIT_tropical_cyclone_wind_solar__model_v1_0__docs_r1.md",
@@ -91,11 +95,45 @@ EXPECTED_DOCS = [
     "workbook_sheet_manifest_tropical_cyclone_wind_solar__model_v1_0__docs_r1.md",
     "VALIDATION_REPORT_tropical_cyclone_wind_solar__model_v1_0__docs_r1.md",
 ]
+R2_REQUIRED_DOCS = [
+    PROPOSED / "README_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md",
+    PROPOSED / "CHANGE_CLASSIFICATION_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md",
+    PROPOSED / "DEEP_CURATION_DECISION_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md",
+    PROPOSED / "BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md",
+    PROPOSED / "STRONG_WIND_REUSE_AND_V2_ACQUISITION_BLUEPRINT_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md",
+    PROPOSED / "PROMOTION_GATE_MATRIX_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md",
+    PROPOSED / "VALIDATION_REPORT_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md",
+    ROOT / "docs/cells/tropical_cyclone_wind_solar/README.md",
+    ROOT / "docs/cells/tropical_cyclone_wind_solar/basics/README.md",
+    ROOT / "docs/cells/tropical_cyclone_wind_solar/basics/HOW_THE_MODEL_IS_BUILT.md",
+    ROOT / "docs/cells/tropical_cyclone_wind_solar/basics/MODEL_REFERENCE.md",
+    ROOT / "docs/cells/README.md",
+    ROOT / "docs/cells/VERSION_REGISTRY.md",
+    ROOT / "docs/contracts/README.md",
+    ROOT / "docs/contracts/hazard_handoff/README.md",
+    ROOT / "docs/plans/README.md",
+    ROOT / "docs/plans/hazard_asset_coverage/README.md",
+    ROOT / "docs/plans/hazard_asset_coverage/DECISIONS.md",
+    ROOT / "docs/plans/tropical_cyclone_wind_solar_completion/README.md",
+    ROOT / "docs/plans/tropical_cyclone_wind_solar_completion/decisions.md",
+    ROOT / "docs/plans/tropical_cyclone_wind_solar_completion/assumptions.md",
+    ROOT / "docs/plans/repo_information_architecture/inventory_mapping.md",
+    ROOT / "docs/contracts/hazard_handoff/tropical_cyclone_wind_solar_model_v1_0_docs_r2_no_cutover.md",
+    ROOT / "docs/contracts/hazard_handoff/tropical_cyclone_wind_solar_model_v1_0_proposal.md",
+]
 ALLOWED_TIERS = {
     "T1_claims_or_field_calibrated",
     "T2_public_lab_standard_or_physics",
     "T3_engineering_proxy_or_adjacent_empirical",
     "T4_placeholder_or_expert_judgment",
+}
+ALLOWED_ADOPTION_STATUSES = {
+    "adopt",
+    "adopt_as_limitation",
+    "adopt_with_limits",
+    "audit_only",
+    "withhold",
+    "withhold_runtime",
 }
 EXPECTED_SOURCE_SHA = "edb34e74cc078bba1fdbe34463abadc794fd416caa66eb64ac3d0ed176ac5e00"
 EXPECTED_AGGREGATE_SHA = "c1ab48731f875142c571efcfd6323d7e048b35b2d2525418e25e6fefb3487062"
@@ -116,6 +154,19 @@ EXPECTED_ALWAYS_FLAGS = {
     "CURVE_INTRINSIC_SPREAD_NOT_CARRIED",
     "NO_EXTRAPOLATION",
     "SCENARIO_DOLLAR_LOSS_WITHHELD",
+}
+EXPECTED_RUNTIME_HASHES = {
+    ARTIFACT: "bb01300d3e76114203dd826be5bff4bb9f2b98490880327dd57575007a180840",
+    CAPABILITY: "5cd4f5501961a9d7f2c21259b4cfabd9e74eef30b5fdd9ceff72729b83ffc4fc",
+    KATS: "2e18603a9efb5cbb8bdd1c7f3b162e1a3e0c4b0723df5e1afbdc27def84f7cd2",
+    WORKBOOK: "748031c226187e3b43d83f6a57b2dbd5554457edc01a06debe16b7ef640f3105",
+}
+EXPECTED_HELPER_SCHEMA_HASHES = {
+    EVALUATOR: "a483b00df1e8f7647945f1e69daf8eb8e9c473bb27cf282e68ab46667868e7b5",
+    DERIVER: "cf6c244eb8e86fda12c53bc0afb008822385d8632d69a00dead08e430734f03e",
+    BUNDLE_SCHEMA: "a2287a7dc6d5ec19a04a1e25c4d130c282af5956318dcee6d3c137a1a50e33cb",
+    CAPABILITY_SCHEMA: "73e76744b6ae5c39f5503d2be454e5407674f301c24b0de0f586ade0980fd5b9",
+    EMIT_SCHEMA: "9dda3b0dd831d14668526f9ed5aa653a98c7230412410f0286e9eedabc526060",
 }
 
 
@@ -169,6 +220,27 @@ def rows(path: Path) -> list[dict[str, str]]:
         require(None not in row, f"{path}:{line_number}: extra fields")
         require(all(value is not None for value in row.values()), f"{path}:{line_number}: missing field")
     return result
+
+
+def csv_header(path: Path) -> list[str]:
+    with path.open(newline="") as handle:
+        reader = csv.reader(handle)
+        try:
+            return next(reader)
+        except StopIteration as exc:
+            raise ValidationFailure(f"{path}: empty CSV") from exc
+
+
+def fenced_yaml_value(text: str, key: str) -> str:
+    values: list[str] = []
+    pattern = re.compile(rf"^\s*{re.escape(key)}\s*:\s*(.*?)\s*$")
+    for block in re.findall(r"```yaml\s*\n(.*?)```", text, flags=re.DOTALL):
+        for line in block.splitlines():
+            match = pattern.match(line)
+            if match:
+                values.append(match.group(1).strip().strip("\"'"))
+    require(len(values) == 1, f"expected one fenced-YAML value for {key}, found {len(values)}")
+    return values[0]
 
 
 def optional_schema_checks(
@@ -288,6 +360,22 @@ def validate_curve(artifact: Mapping[str, Any]) -> None:
     require(capability_flags == EXPECTED_ALWAYS_FLAGS, "capability limitation flags changed")
     emitted = evaluate_damage_call(artifact, base_request(17.4))
     emitted_result = result_for_request(emitted, SUPPORTED_FAILURE_UNIT)
+    require(emitted["cell_id"] == "tropical_cyclone_wind_solar", "evaluator emit cell changed")
+    require(emitted["model_version"] == "model v1.0", "evaluator emit model changed")
+    require(emitted["pathway_id"] == "tropical_cyclone_wind", "evaluator emit pathway changed")
+    require(emitted["emit_mode"] == "scalar_mean", "evaluator emit mode changed")
+    require(emitted["selectors_used"] == EXPECTED_SELECTORS, "evaluator selector echo changed")
+    require(
+        emitted["hazard_input_used"]
+        == {
+            "axis_id": "PERRY_DATASET_REPORTED_EVENT_MAX_GUST_MPS",
+            "input_field": "perry_event_max_gust_mps",
+            "value": 17.4,
+            "unit": "m/s",
+            "source_height_and_averaging_period": "unspecified_in_source_package",
+        },
+        "evaluator hazard-input emit changed",
+    )
     require(set(emitted_result["metadata_flags"]) == EXPECTED_ALWAYS_FLAGS, "evaluator emit flags changed")
     actual = [(float(x), float(y)) for x, y in record["parameters"]["points"]]
     require(len(actual) == len(EXPECTED_POINTS), "knot count changed")
@@ -472,24 +560,89 @@ def validate_cross_method_match_audit() -> tuple[int, float]:
     return len(audit_rows), mean_difference
 
 
-def validate_registers(artifact: Mapping[str, Any]) -> tuple[int, int, int, int, int]:
-    source_rows = rows(SOURCES)
-    claim_rows = rows(CLAIMS)
+def validate_registers(
+    artifact: Mapping[str, Any],
+) -> tuple[int, int, int, int, int, int, int]:
+    base_source_rows = rows(SOURCES)
+    base_claim_rows = rows(CLAIMS)
+    r2_source_rows = rows(R2_SOURCES)
+    r2_claim_rows = rows(R2_CLAIMS)
+    require(csv_header(SOURCES) == csv_header(R2_SOURCES), "docs-r2 source-register header drifted")
+    require(csv_header(CLAIMS) == csv_header(R2_CLAIMS), "docs-r2 claim-register header drifted")
+    require(len(base_source_rows) == 10, "docs-r1 source count changed")
+    require(len(base_claim_rows) == 18, "docs-r1 claim count changed")
+    require(len(r2_source_rows) == 18, "docs-r2 source addendum count changed")
+    require(len(r2_claim_rows) == 21, "docs-r2 claim addendum count changed")
+    source_rows = base_source_rows + r2_source_rows
+    claim_rows = base_claim_rows + r2_claim_rows
     parameter_rows = rows(PARAMETERS)
     value_rows = rows(VALUES)
     old_rows = rows(OLD_VS_NEW)
     source_ids = {row["source_id"] for row in source_rows}
-    require(len(source_ids) == len(source_rows) and len(source_rows) >= 10, "source register")
-    require({"TCWS-S020", "TCWS-S021", "TCWS-S022", "GOVERNANCE_CONTRACT"} <= source_ids, "new primary/governance sources missing")
+    require(len(source_ids) == len(source_rows), "duplicate effective source ID")
+    required_r2_sources = {f"TCWS-S{number:03d}" for number in range(23, 41)}
+    r2_source_ids = {row["source_id"] for row in r2_source_rows}
+    require(r2_source_ids == required_r2_sources, "docs-r2 source ID set changed")
+    require({"TCWS-S020", "TCWS-S021", "TCWS-S022", "GOVERNANCE_CONTRACT"} <= source_ids, "base primary/governance sources missing")
     for row in source_rows:
         require(row["evidence_tier"] in ALLOWED_TIERS, f"{row['source_id']}: bad tier")
         require(bool(row["exact_locator"] and row["permitted_inference"] and row["prohibited_inference"]), f"{row['source_id']}: incomplete")
+    required_source_fields = {
+        "citation",
+        "url",
+        "accessed_on",
+        "exact_locator",
+        "source_type",
+        "source_role",
+        "pathway_ids",
+        "evidence_tier",
+        "target_asset_match",
+        "target_failure_unit_match",
+        "measured_or_modeled_endpoint",
+        "permitted_inference",
+        "prohibited_inference",
+        "decision",
+        "status",
+        "notes",
+    }
+    for row in r2_source_rows:
+        require(all(row[field].strip() for field in required_source_fields), f"{row['source_id']}: incomplete docs-r2 source row")
+        require(row["pathway_ids"] == "tropical_cyclone_wind", f"{row['source_id']}: bad pathway")
+        require(row["decision"] in {"adopt_with_limits", "audit_only"}, f"{row['source_id']}: bad decision")
+        require(row["status"] == "reviewed", f"{row['source_id']}: bad review status")
     claim_ids = {row["claim_id"] for row in claim_rows}
-    require(len(claim_ids) == len(claim_rows) and len(claim_rows) >= 18, "claim register")
-    require({"TCWS-C115", "TCWS-C116", "TCWS-C117", "TCWS-C118"} <= claim_ids, "strict-gate claims missing")
+    require(len(claim_ids) == len(claim_rows), "duplicate effective claim ID")
+    required_r2_claims = {f"TCWS-C{number}" for number in range(201, 222)}
+    r2_claim_ids = {row["claim_id"] for row in r2_claim_rows}
+    require(r2_claim_ids == required_r2_claims, "docs-r2 claim ID set changed")
+    require({"TCWS-C115", "TCWS-C116", "TCWS-C117", "TCWS-C118"} <= claim_ids, "strict-gate base claims missing")
+    required_claim_fields = {
+        "claim_text",
+        "claim_type",
+        "source_ids",
+        "exact_locator",
+        "evidence_tier",
+        "parameter_or_rule",
+        "adoption_status",
+        "permitted_inference",
+        "prohibited_inference",
+        "reasoning",
+        "update_trigger",
+    }
     for row in claim_rows:
         require(not (split_ids(row["source_ids"]) - source_ids), f"{row['claim_id']}: unresolved source")
         require(row["evidence_tier"] in ALLOWED_TIERS, f"{row['claim_id']}: bad tier")
+        require(row["pathway_id"] == "tropical_cyclone_wind", f"{row['claim_id']}: bad pathway")
+        require(row["adoption_status"] in ALLOWED_ADOPTION_STATUSES, f"{row['claim_id']}: bad adoption status")
+        require(all(row[field].strip() for field in required_claim_fields), f"{row['claim_id']}: incomplete claim row")
+    by_source = {row["source_id"]: row for row in r2_source_rows}
+    by_claim = {row["claim_id"]: row for row in r2_claim_rows}
+    require(by_source["TCWS-S037"]["url"] == "https://doi.org/10.2172/1659785", "NREL 75804 DOI drifted")
+    require("Solar Photovoltaics in Severe Weather" in by_source["TCWS-S037"]["citation"], "NREL 75804 title drifted")
+    require(by_claim["TCWS-C220"]["parameter_or_rule"] == "fit_weighting_interpretation", "fit-weighting claim drifted")
+    require(by_claim["TCWS-C220"]["adoption_status"] == "adopt_as_limitation", "fit-weighting adoption drifted")
+    require(by_claim["TCWS-C221"]["parameter_or_rule"] == "predictive_use_status", "predictive-use claim drifted")
+    require(by_claim["TCWS-C221"]["adoption_status"] == "withhold", "predictive-use adoption drifted")
     require(len(parameter_rows) >= 17, "parameter table incomplete")
     for row in parameter_rows:
         require(not (split_ids(row["source_ids"]) - source_ids), f"{row['parameter']}: unresolved source")
@@ -500,7 +653,15 @@ def validate_registers(artifact: Mapping[str, Any]) -> tuple[int, int, int, int,
     require(not (embedded_sources - source_ids), f"unresolved embedded sources {sorted(embedded_sources-source_ids)}")
     require(len(value_rows) >= 11, "value crosswalk incomplete")
     require(len(old_rows) >= 6, "old-vs-new comparison incomplete")
-    return len(source_rows), len(claim_rows), len(parameter_rows), len(value_rows), len(old_rows)
+    return (
+        len(base_source_rows),
+        len(base_claim_rows),
+        len(source_rows),
+        len(claim_rows),
+        len(parameter_rows),
+        len(value_rows),
+        len(old_rows),
+    )
 
 
 def workbook_inventory(path: Path) -> tuple[list[str], int, list[str], set[str], set[str], set[str]]:
@@ -582,8 +743,8 @@ def iter_markdown_links(text: str) -> Iterable[str]:
 
 def validate_local_links(allow_incomplete: bool) -> int:
     count = 0
-    for name in EXPECTED_DOCS:
-        path = PROPOSED / name
+    paths = [PROPOSED / name for name in BASE_EXPECTED_DOCS] + R2_REQUIRED_DOCS
+    for path in dict.fromkeys(paths):
         if not path.exists():
             if allow_incomplete:
                 continue
@@ -596,6 +757,45 @@ def validate_local_links(allow_incomplete: bool) -> int:
             count += 1
             require((path.parent / target).resolve().exists(), f"dangling link in {path.name}: {target}")
     return count
+
+
+def validate_docs_r2_state() -> tuple[int, int]:
+    for path in [R2_SOURCES, R2_CLAIMS, *R2_REQUIRED_DOCS]:
+        require(path.is_file(), f"docs-r2 required file missing: {path}")
+    classification = (PROPOSED / "CHANGE_CLASSIFICATION_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md").read_text()
+    decision = (PROPOSED / "DEEP_CURATION_DECISION_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md").read_text()
+    blueprint = (PROPOSED / "STRONG_WIND_REUSE_AND_V2_ACQUISITION_BLUEPRINT_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md").read_text()
+    root_readme = (ROOT / "docs/cells/tropical_cyclone_wind_solar/README.md").read_text()
+    handoff = (ROOT / "docs/contracts/hazard_handoff/tropical_cyclone_wind_solar_model_v1_0_docs_r2_no_cutover.md").read_text()
+    require(fenced_yaml_value(classification, "primary_change_class") == "EVIDENCE_ONLY_NO_OUTPUT_CHANGE", "docs-r2 change class drifted")
+    require(fenced_yaml_value(classification, "outputs_can_change_for_same_inputs") == "false", "docs-r2 output-change flag drifted")
+    require(fenced_yaml_value(classification, "runtime_proposal_revision") == "docs r1", "docs-r1 runtime boundary missing")
+    require(fenced_yaml_value(decision, "portable_Hazard_axis_bridge") == "NO_GO", "axis bridge decision drifted")
+    require(fenced_yaml_value(decision, "tracker_route") == "NO_GO", "tracker decision drifted")
+    require(fenced_yaml_value(decision, "severe_tail_extension") == "NO_GO", "tail decision drifted")
+    require(fenced_yaml_value(decision, "same_unit_economic_DR_expansion") == "NO_GO", "economic decision drifted")
+    require(fenced_yaml_value(decision, "predictive_relationship_validated") == "false", "predictive-validity decision drifted")
+    require(fenced_yaml_value(decision, "model_v1_1_earned") == "false", "model-v1.1 decision drifted")
+    require(fenced_yaml_value(decision, "model_v2_0_earned") == "false", "model-v2.0 decision drifted")
+    require("equal-record weighting" in decision, "equal-record weighting correction missing")
+    require("no scientifically validated" in decision, "predictive-use prohibition missing")
+    require("direct material, direct labor" in blueprint, "v2 economic acquisition field missing")
+    require("command and attained tracker state" in blueprint, "v2 tracker-state acquisition field missing")
+    require(fenced_yaml_value(root_readme, "human_documentation_revision") == "docs r2", "cell entrypoint docs revision stale")
+    require(fenced_yaml_value(handoff, "consumer_cutover") == "prohibited", "no-cutover handoff drifted")
+    require(fenced_yaml_value(handoff, "ordinary_Hazard_3s_gust_compatible") == "false", "Hazard-axis rejection missing")
+    prohibited_r2_runtime_files = [
+        PROPOSED / "tropical_cyclone_wind_solar__model_v1_0__docs_r2__curve_artifact.json",
+        PROPOSED / "tropical_cyclone_wind_solar__model_v1_0__docs_r2__capability.json",
+        PROPOSED / "known_answer_tests_tropical_cyclone_wind_solar__model_v1_0__docs_r2.json",
+        PROPOSED / "damage_curve_records_tropical_cyclone_wind_solar__model_v1_0__docs_r2.xlsx",
+    ]
+    require(not [path for path in prohibited_r2_runtime_files if path.exists()], "docs-only revision created runtime-shaped docs-r2 files")
+    for path, expected in EXPECTED_RUNTIME_HASHES.items():
+        require(sha256(path) == expected, f"unchanged runtime-shaped file drifted: {path.name}")
+    for path, expected in EXPECTED_HELPER_SCHEMA_HASHES.items():
+        require(sha256(path) == expected, f"unchanged helper/schema file drifted: {path.name}")
+    return len(EXPECTED_RUNTIME_HASHES), len(EXPECTED_HELPER_SCHEMA_HASHES)
 
 
 def validate_index_and_raw_guard() -> None:
@@ -635,6 +835,8 @@ def validate_pin(artifact: Mapping[str, Any]) -> str:
 
 def main() -> None:
     allow_incomplete = "--allow-incomplete" in sys.argv[1:]
+    if allow_incomplete:
+        raise SystemExit("--allow-incomplete is not supported for the finalized docs-r2 evidence package")
     source_path: Path | None = None
     if "--source-csv" in sys.argv[1:]:
         index = sys.argv.index("--source-csv")
@@ -653,13 +855,23 @@ def main() -> None:
     validate_capability_and_value(artifact)
     cross_match_count, cross_match_mean = validate_cross_method_match_audit()
     formula_kats, rejection_kats, withheld_kats = validate_kats(artifact)
-    source_count, claim_count, parameter_count, value_count, old_count = validate_registers(artifact)
+    (
+        base_source_count,
+        base_claim_count,
+        effective_source_count,
+        effective_claim_count,
+        parameter_count,
+        value_count,
+        old_count,
+    ) = validate_registers(artifact)
     sheet_count, formula_count, workbook_qa_count = validate_workbook(allow_incomplete)
     link_count = validate_local_links(allow_incomplete)
+    unchanged_runtime_hash_count, unchanged_helper_schema_hash_count = validate_docs_r2_state()
     validate_index_and_raw_guard()
     digest = validate_pin(artifact)
 
-    print("PASS tropical_cyclone_wind_solar model v1.0/docs r1 noncanonical screening exception")
+    print("PASS tropical_cyclone_wind_solar model v1.0/docs r2 evidence revision")
+    print("runtime_proposal_revision=docs_r1_unchanged")
     print(f"checks={CHECKS.value}")
     print(f"schema_validation={schema_note}")
     print(f"source_derivation={source_note}")
@@ -670,8 +882,10 @@ def main() -> None:
     print(f"event_sensitivity_rows={sensitivity_count}")
     print(f"cross_method_matches={cross_match_count}")
     print(f"cross_method_mean_absolute_difference_pp={cross_match_mean:.10f}")
-    print(f"sources={source_count}")
-    print(f"claims={claim_count}")
+    print(f"base_sources={base_source_count}")
+    print(f"base_claims={base_claim_count}")
+    print(f"effective_sources={effective_source_count}")
+    print(f"effective_claims={effective_claim_count}")
     print(f"parameters={parameter_count}")
     print(f"value_rows={value_count}")
     print(f"old_vs_new_rows={old_count}")
@@ -679,6 +893,8 @@ def main() -> None:
     print(f"workbook_formulas={formula_count}")
     print(f"workbook_qa_passes={workbook_qa_count}")
     print(f"local_links={link_count}")
+    print(f"unchanged_runtime_hashes={unchanged_runtime_hash_count}")
+    print(f"unchanged_helper_schema_hashes={unchanged_helper_schema_hash_count}")
     print(f"missing_allowed={len(missing)}")
     print(f"artifact_sha256={digest}")
     print(f"capability_sha256={sha256(CAPABILITY)}")

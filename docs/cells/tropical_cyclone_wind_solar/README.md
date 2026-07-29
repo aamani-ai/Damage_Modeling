@@ -5,13 +5,14 @@
 ```yaml
 cell_id: tropical_cyclone_wind_solar
 pathway_id: tropical_cyclone_wind
-documentation_lead: model v1.0 / docs r1 noncanonical screening proposal
+documentation_lead: model v1.0 / docs r2 deep-curation evidence revision
 damage_code_id: TROPICAL_CYCLONE_WIND_SOLAR_PERRY_MODULE_SCREENING_V1
 semantic_damage_model_version: model v1.0
-human_documentation_revision: docs r1
+human_documentation_revision: docs r2
+runtime_proposal_revision: docs r1
 lifecycle_state: release_candidate
 promotion_status: proposed_blocked
-review_status: pressure_tested_pending_independent_review
+review_status: deep_curated_noncanonical_no_model_bump
 model_grade: screening_remote_sensing_labeled_visible_fraction_with_T4_economic_bridge
 strict_evidence_earned_gate: NO_GO_RETAIN_V0_1
 coverage_first_exception: deliberate_noncanonical_screening_proposal
@@ -25,26 +26,30 @@ annual_and_tail_metrics: withheld
 strict_fail_closed_alternative: model v0.1 / docs r1 / NO_RUNTIME_CURVE
 ```
 
-The lead research state is proposed model v1.0/docs r1. It adds one narrowly quarantined scalar screening
-proxy because portfolio coverage was prioritized ahead of deeper calibration. The ordinary evidence-earned
-decision remains **NO-GO**: model v0.1 is preserved as the strict alternative and withholds every numeric
-damage and loss output.
+The lead human/evidence state is model v1.0/docs r2. It retains the docs-r1 runtime-shaped proposal's one
+narrowly quarantined scalar screening proxy because portfolio coverage was prioritized ahead of deeper
+calibration. The ordinary evidence-earned decision remains **NO-GO**: model v0.1 is preserved as the strict
+alternative and withholds every numeric damage and loss output.
 
-The v1 package passed its internal noncanonical validation. That does not make it canonical, place it in the
-artifact index, create a `current/` pointer, include it in a package release, or authorize Hazard or another
-runtime consumer to load it.
+The docs-r2 deep-curation pass found no computational defect in the pinned Perry finite-sample
+transformation, but it also found no scientifically validated predictive relationship, portable Hazard-axis
+bridge, tracker route, severe-tail extension, or same-unit economic DR expansion. It therefore changes no
+runtime value. Passing internal noncanonical validation does not make the proposal canonical, place it in
+the artifact index, create a `current/` pointer, include it in a package release, or authorize Hazard or
+another runtime consumer to load it.
 
 ## 2. Snapshot tree
 
 ```text
 tropical-cyclone wind × solar
-├─ model v1.0/docs r1 — lead research proposal
-│  └─ one conditional source-specific atom
-│     └─ PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT
-│        ├─ Perry manual CSV: ground + tracking=False
-│        ├─ mixed-scale source cohort; no utility-scale transfer claim
-│        ├─ dataset-reported event maximum gust only
-│        └─ visible/missing module-material full-replacement proxy
+├─ model v1.0/docs r2 — lead human/evidence state
+│  └─ docs-r1 runtime proposal unchanged
+│     └─ one conditional source-specific atom
+│        └─ PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT
+│           ├─ Perry manual CSV: ground + tracking=False
+│           ├─ mixed-scale source cohort; no utility-scale transfer claim
+│           ├─ dataset-reported event maximum gust only
+│           └─ visible/missing module-material full-replacement proxy
 │
 ├─ every standard solar unit remains withheld, not zero
 │  ├─ generic fixed-tilt module field and support structure
@@ -150,17 +155,21 @@ interpolation: linear_between_governed_PAVA_block_edge_knots
 extrapolation: prohibited
 ```
 
-The released source does not resolve one provider, station/grid location, reference height, averaging period,
-exposure convention, query method, or uncertainty for the full manual cohort. NHC sustained wind, ASCE
-3-second gust, array-height wind, Saffir-Simpson category, Visual Crossing generally, and other wind products
-are not aliases. Below 17.4 m/s and above 39.1 m/s the proposal withholds without clamping or fallback.
+Perry identifies Visual Crossing API as the study-level hurricane-gust provider. The released rows do not
+preserve the contributing station/product, query settings, reference height/exposure, exact gust duration,
+retrieval version, time of maximum, or uncertainty needed for a portable transfer. NHC sustained wind, ASCE
+3-second gust, array-height wind, Saffir-Simpson category, a new Visual Crossing query, and other wind
+products are not aliases. Below 17.4 m/s and above 39.1 m/s the proposal withholds without clamping or
+fallback.
 
 ## 9. Curve form and y-axis meaning
 
 The public manual CSV yields 35 ground/nontracking source-cohort records. Thirty-four records from
-17.4–39.1 m/s form an equal-site-weighted isotonic fit. Eight pooled blocks are serialized as 13 block-edge
-knots and connected linearly. The isolated `(48.2 m/s, 0.4142383192)` observation remains audit-only and is
-not a runtime knot.
+17.4–39.1 m/s form an equal-record-weighted isotonic fit. The historical machine flag says “equal-site” to
+distinguish the fit from module weighting, but at least one physical site recurs across storms; the 34 rows
+are not 34 unique or independent sites. Eight pooled blocks are serialized as 13 block-edge knots and
+connected linearly. The isolated `(48.2 m/s, 0.4142383192)` observation remains audit-only and is not a
+runtime knot.
 
 The ordinate is:
 
@@ -171,9 +180,10 @@ visible/missing module fraction
   = source-specific module-material replacement proxy DR
 ```
 
-The fit is PAVA-derived, equal-site weighted rather than module weighted, clustered across six hurricanes,
-and carries no curve-intrinsic spread. It is not a source-published fragility, a pure wind-pressure curve, a
-claims-calibrated curve, or observed repair cost.
+The fit is PAVA-derived, equal-record weighted rather than module weighted, clustered across six hurricanes,
+and carries no curve-intrinsic spread. It has no probability sampling frame, selection model, or independent
+predictive validation. It is not a source-published fragility, population expectation, pure wind-pressure
+curve, claims-calibrated curve, or observed repair cost.
 
 ## 10. Selector, conditioner, exposure, and value map
 
@@ -207,13 +217,22 @@ source file, cohort filter, percent conversion, PAVA blocks, knots, range, tail 
 sensitivity are reproducible from pinned sufficient statistics and hashes.
 
 The evidence still fails the ordinary economic-DR release gate. The source population is mixed scale; the
-wind-product semantics are incomplete; two Tier-4 assumptions create the economic meaning; Perry and
-Ceferino give materially different correlated same-event/site endpoint views; the sample is event clustered;
-the severe tail is sparse; and no independent validation or spread is available.
+row-level wind-product semantics are incomplete; two Tier-4 assumptions create the economic meaning; Perry
+and Ceferino give materially different correlated same-event/site endpoint views; the sample is event
+clustered and contains repeated physical sites; the severe tail is sparse; and no independent predictive
+validation or spread is available.
 
-Start with the [model-v1 derivation dossier](proposed/tropical_cyclone_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md),
-[pressure test](proposed/PRESSURE_TEST_tropical_cyclone_wind_solar__model_v1_0__docs_r1.md), and
-[validation report](proposed/VALIDATION_REPORT_tropical_cyclone_wind_solar__model_v1_0__docs_r1.md).
+The docs-r2 audit adds Typhoon Mawar and Yagi external severity checks; FPL owner/regulatory panel,
+restoration, and cost-scope observations; FEMA and owner U.S. Virgin Islands cases; DOE/NLR inspected
+failure-unit evidence; and tracker case reviews. Those sources materially strengthen mechanism, disposition,
+cost-boundary, and acquisition design. None closes portable wind demand through inspected same-unit state to
+direct cost and replacement value.
+
+Start with the [docs-r2 overview](proposed/README_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md),
+[deep-curation decision](proposed/DEEP_CURATION_DECISION_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md),
+and [v2 acquisition blueprint](proposed/STRONG_WIND_REUSE_AND_V2_ACQUISITION_BLUEPRINT_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md).
+The unchanged numerical lineage remains in the
+[docs-r1 derivation dossier](proposed/tropical_cyclone_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md).
 
 ## 13. Workbook map
 
@@ -233,7 +252,7 @@ The 13-sheet workbook is an audit view, not canonical runtime truth. Its 18 form
 
 ## 14. Open seams and update triggers
 
-Canonical promotion remains blocked until the promotion matrix closes, including:
+Canonical promotion remains blocked until the docs-r2 promotion matrix closes, including:
 
 1. independent acceptance or replacement of the two Tier-4 economic bridges;
 2. authoritative source-axis semantics or a reviewed Hazard bridge;
@@ -249,7 +268,17 @@ requires governed model-version review.
 
 ## 15. Implementation notes
 
-The proposed model-v1 package is internally consistent for research review:
+The proposed model-v1 package is internally consistent for its declared source-specific research use. The
+latest human/evidence boundary is:
+
+- [docs-r2 overview](proposed/README_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md)
+- [change classification](proposed/CHANGE_CLASSIFICATION_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md)
+- [deep-curation decision](proposed/DEEP_CURATION_DECISION_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md)
+- [updated bounded search](proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md)
+- [docs-r2 promotion gates](proposed/PROMOTION_GATE_MATRIX_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md)
+- [docs-r2 validation](proposed/VALIDATION_REPORT_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md)
+
+The unchanged docs-r1 runtime proposal remains:
 
 - [proposal overview](proposed/README_tropical_cyclone_wind_solar__model_v1_0__docs_r1.md)
 - [curve artifact](proposed/tropical_cyclone_wind_solar__model_v1_0__docs_r1__curve_artifact.json)
@@ -264,5 +293,5 @@ The strict alternative remains independently available:
 - [model-v0.1 zero-curve artifact](proposed/tropical_cyclone_wind_solar__model_v0_1__docs_r1__curve_artifact.json)
 - [model-v0.1 validation](proposed/VALIDATION_REPORT_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md)
 
-Neither proposal is canonical. The artifact index, package release, `current/` pointer, and Hazard consumer
-pin remain unchanged.
+Neither proposal is canonical. Docs r2 creates no artifact, capability, KAT, workbook, schema, package,
+`current/` pointer, or consumer pin. The artifact index and Hazard runtime remain unchanged.
