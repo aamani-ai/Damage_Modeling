@@ -1,0 +1,503 @@
+{
+  "schema_version": "damage_curve_record_bundle.v1",
+  "cell_id": "flood_wind",
+  "damage_code_id": "FLOOD_WIND_PROPOSED_V0_1",
+  "semantic_damage_model_version": "model v0.1",
+  "documentation_revision": "docs r1",
+  "package_release": "unreleased",
+  "package_baseline": "library v2.5",
+  "lifecycle_state": "scaffold",
+  "promotion_status": "proposed",
+  "review_status": "pressure_tested",
+  "documentation_status": "working_revision",
+  "package_inclusion_status": "not_included",
+  "canonical_runtime_artifact": false,
+  "schema_envelope_status": {
+    "selected_schema": "damage_curve_record_bundle.v1",
+    "use": "noncanonical_zero_curve_scaffold_only",
+    "reason": "Repository-current output-bearing bundle schemas require at least one curve record and cannot represent an honest fail-closed scaffold with curve_records empty.",
+    "runtime_publication_allowed": false,
+    "promotion_rule": "A published runtime bundle must use the repository-current schema and contain reviewed output-bearing records."
+  },
+  "ordinate_status": "withheld",
+  "withheld_reason_codes": [
+    "NO_RUNTIME_CURVE"
+  ],
+  "source_dossier": "docs/cells/flood_wind/proposed/flood_wind_curve_derivation_dossier__model_v0_1__docs_r1.md",
+  "source_workbook": "docs/cells/flood_wind/proposed/damage_curve_records_flood_wind__model_v0_1__docs_r1.xlsx",
+  "source_register": "docs/cells/flood_wind/proposed/SOURCE_REGISTER_flood_wind__model_v0_1__docs_r1.csv",
+  "claim_parameter_register": "docs/cells/flood_wind/proposed/CLAIM_PARAMETER_REGISTER_flood_wind__model_v0_1__docs_r1.csv",
+  "bounded_evidence_search_log": "docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
+  "parameter_tier_table_ref": "docs/cells/flood_wind/proposed/PARAMETER_TIER_TABLE_flood_wind__model_v0_1__docs_r1.csv",
+  "value_crosswalk_ref": "docs/cells/flood_wind/proposed/VALUE_CROSSWALK_flood_wind__model_v0_1__docs_r1.csv",
+  "shared_component_crosswalk_ref": "docs/cells/flood_wind/proposed/SHARED_COMPONENT_REUSE_CROSSWALK_flood_wind__model_v0_1__docs_r1.csv",
+  "site_condition_adapter_ref": "docs/cells/flood_wind/proposed/SITE_CONDITION_ADAPTER_flood_wind__model_v0_1__docs_r1.md",
+  "pressure_test_ref": "docs/cells/flood_wind/proposed/PRESSURE_TEST_flood_wind__model_v0_1__docs_r1.md",
+  "known_answer_tests": "docs/cells/flood_wind/proposed/known_answer_tests_flood_wind__model_v0_1__docs_r1.json",
+  "pathway": {
+    "pathway_id": "flood_inundation_contact",
+    "exact_match_required": true,
+    "fallback_allowed": false,
+    "event_family_id_required": true,
+    "accepted_source_perils_if_delivered_state_complete": [
+      "riverine_flood",
+      "pluvial_flood",
+      "coastal_flood_or_storm_surge"
+    ],
+    "neighboring_routes": [
+      {
+        "mechanism": "foundation_scour_erosion_or_saturated_soil_support_loss",
+        "governed_pathway_id": "flood_scour_erosion",
+        "status": "deferred_no_runtime_curve"
+      },
+      {
+        "mechanism": "debris_impact",
+        "governed_pathway_id": null,
+        "status": "deferred_separate_pathway"
+      },
+      {
+        "mechanism": "wave_loading",
+        "governed_pathway_id": null,
+        "status": "out_of_scope_onshore_reference"
+      }
+    ],
+    "compound_event_rule": "Preserve one event_family_id, source-peril provenance, and prevent duplicate failure-unit or value charges downstream."
+  },
+  "asset_archetype": {
+    "asset": "land_based_wind_generation_facility",
+    "reference_configuration": "repeated_turbines_collection_system_and_zero_or_one_project_associated_facility_gsu",
+    "configuration_is_vulnerability_selector": true,
+    "target_applicability_status": "not_frozen",
+    "scope_included": [
+      "direct_physical_destruction_from_flood_inundation_contact"
+    ],
+    "scope_excluded": [
+      "foundation_scour_erosion_and_saturated_soil_support_loss",
+      "debris_impact",
+      "wave_loading",
+      "business_interruption",
+      "operational_unavailability",
+      "curtailment_or_revenue",
+      "frequency_and_annual_or_tail_metrics",
+      "insurance_and_financial_terms"
+    ]
+  },
+  "hazard_axis": {
+    "id": "FLOOD_LOCAL_DEPTH_COMPONENT_DATUM",
+    "status": "method_frozen_no_runtime_curve",
+    "quantity": "local_depth_above_component_vulnerable_datum",
+    "unit": "m",
+    "formula": "max(0, water_surface_elevation_m - component_vulnerable_elevation_m)",
+    "vertical_datum_match_required": true,
+    "spatial_support": "component_instance",
+    "runtime_valid_range_m": null,
+    "runtime_damage_mapping_status": "withheld_no_runtime_curve",
+    "candidate_grid_range_m": [
+      0,
+      2
+    ],
+    "candidate_grid_status": "audit_only_from_pinned_flood_solar_neighbor",
+    "required_conditioners_capture_only": [
+      "duration_hr",
+      "water_quality_or_contamination_class",
+      "salinity_class",
+      "energized_state",
+      "shutdown_or_isolation_state",
+      "velocity_or_debris_indicator",
+      "water_ingress_path",
+      "temporary_protection_state"
+    ],
+    "missing_policy": "withhold_not_dry",
+    "datum_mismatch_policy": "reject",
+    "extrapolation_policy": "reject_no_runtime_curve"
+  },
+  "input_field_contract": {
+    "canonical_contract_ref": "docs/cells/flood_wind/proposed/flood_wind_damage_code_metadata_spec__model_v0_1__docs_r1.md",
+    "identity_required": [
+      "event_id",
+      "event_family_id",
+      "pathway_id",
+      "source_peril_id",
+      "hazard_product_id",
+      "hazard_valid_time",
+      "asset_id",
+      "component_instance_id",
+      "failure_unit_id"
+    ],
+    "exposure_required_for_contact_evaluation": [
+      "component_geometry",
+      "geometry_provenance",
+      "water_surface_elevation_m",
+      "component_vulnerable_elevation_m",
+      "vertical_datum_id"
+    ],
+    "value_required_for_future_scenario_loss": [
+      "owner_entity_id",
+      "project_owned",
+      "insured_inclusion",
+      "value_basis_id",
+      "same_unit_direct_replacement_value_usd",
+      "quantity",
+      "exposure_fraction",
+      "exposure_fraction_basis"
+    ],
+    "runtime_status": "field_validation_only_all_numeric_damage_outputs_withheld"
+  },
+  "shared_component_substrate": {
+    "id": "flood_electrical_v0_1",
+    "ref": "docs/method/shared_components/flood_electrical/README.md",
+    "runtime_authority": false,
+    "asset_label_is_intrinsic_selector": false,
+    "compatibility_key_required": [
+      "equipment_and_construction",
+      "failure_mechanism",
+      "axis_and_datum",
+      "ordinate_and_same_unit_denominator",
+      "fixed_selectors",
+      "event_conditioners",
+      "evidence_endpoint"
+    ],
+    "flood_solar_candidate_pin": "flood_solar@model_v1_0__docs_r4",
+    "flood_solar_candidate_artifact_sha256": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
+    "numeric_runtime_inheritance_allowed": false,
+    "future_runtime_change_class": "SCHEMA_CONTRACT_CHANGE"
+  },
+  "proposed_future_y_axis": {
+    "id": "conditional_direct_repair_or_replacement_cost_ratio",
+    "status": "withheld",
+    "reason_codes": [
+      "NO_RUNTIME_CURVE"
+    ],
+    "definition": "Expected direct repair-or-replacement cost divided by pre-event direct replacement value of the same failure unit, conditional on delivered flood-contact state and verified selectors and conditioners.",
+    "denominator_rule": "The numerator and denominator use the same failure unit; never use whole-site TIV or the mixed electrical rollup.",
+    "support_cost_rule": "Allocate fieldwork and transport once after damaged units and dispositions are identified; no independent support damage curve.",
+    "excluded_from_ordinate": [
+      "outage_or_unavailability",
+      "business_interruption",
+      "revenue_or_curtailment",
+      "frequency",
+      "insurance_or_financial_terms",
+      "unrelated_site_value"
+    ]
+  },
+  "value_basis": {
+    "status": "reference_archetype_only_not_enabled_for_loss",
+    "source_workbook": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "source_register_id": "FW-S008",
+    "crosswalk": "docs/cells/flood_wind/proposed/VALUE_CROSSWALK_flood_wind__model_v0_1__docs_r1.csv",
+    "unit": "2023_USD_per_kW",
+    "turbine_equipment_direct": 1090,
+    "foundation_direct": 120,
+    "civil_mixed": 47,
+    "external_electrical_mixed": 72,
+    "support_once": 294,
+    "physical_reference": 1623,
+    "excluded_soft_sunk_nonphysical": 345,
+    "installed_reference": 1968,
+    "reconciliation": "1090 + 120 + 47 + 72 + 294 = 1623; 1623 + 345 = 1968",
+    "site_override_required_for_loss": true,
+    "ownership_required_for_baseline_loss": true,
+    "values_embedded_as_curve_denominators": false,
+    "prohibited_use": "The 72 USD/kW row is not a substation value; reference shares are not damage caps, ownership evidence, or site exposure defaults."
+  },
+  "failure_units": [
+    {
+      "id": "FW_GSU_SWITCHGEAR",
+      "subsystem": "FACILITY_GSU_SUBSTATION",
+      "component": "SWITCHGEAR",
+      "pathway": "flood_inundation_contact",
+      "coverage_role": "primary_candidate",
+      "treatment": "pinned_neighbor_candidate_no_curve",
+      "ordinate_status": "withheld",
+      "shared_failure_unit_id": "FE_SUBSTATION_SWITCHGEAR",
+      "exposure_grain": "facility_component_point_or_polygon",
+      "main_blocker": "equipment applicability and same-unit economic validation"
+    },
+    {
+      "id": "FW_GSU_TRANSFORMER_MAIN",
+      "subsystem": "FACILITY_GSU_SUBSTATION",
+      "component": "PLANT_GSU_MAIN_TRANSFORMER",
+      "pathway": "flood_inundation_contact",
+      "coverage_role": "primary_candidate",
+      "treatment": "dependency_safe_state_model_required_no_curve",
+      "ordinate_status": "withheld",
+      "shared_failure_unit_id": "FE_GSU_TRANSFORMER_MAIN",
+      "exposure_grain": "facility_component_point_or_polygon",
+      "main_blocker": "main versus auxiliary exposure disposition and value split"
+    },
+    {
+      "id": "FW_GSU_TRANSFORMER_AUX_CONTROLS",
+      "subsystem": "FACILITY_GSU_SUBSTATION",
+      "component": "TRANSFORMER_AUXILIARIES_AND_CONTROLS",
+      "pathway": "flood_inundation_contact",
+      "coverage_role": "primary_candidate",
+      "treatment": "decomposition_required_no_curve",
+      "ordinate_status": "withheld",
+      "shared_failure_unit_id": "FE_GSU_TRANSFORMER_AUX_CONTROLS",
+      "exposure_grain": "facility_component_or_dependency_safe_assembly",
+      "main_blocker": "inventory disposition and same-unit value"
+    },
+    {
+      "id": "FW_GSU_PROTECTION_SCADA",
+      "subsystem": "FACILITY_GSU_SUBSTATION",
+      "component": "PROTECTION_RELAY_CONTROL_SCADA_COMMUNICATIONS",
+      "pathway": "flood_inundation_contact",
+      "coverage_role": "primary_candidate",
+      "treatment": "partial_neighbor_match_no_curve",
+      "ordinate_status": "withheld",
+      "shared_failure_unit_id": "FE_PROTECTION_SCADA_CONTROL",
+      "exposure_grain": "control_room_cabinet_or_dependency_safe_assembly",
+      "main_blocker": "equipment crosswalk and direct cost endpoint"
+    },
+    {
+      "id": "FW_GSU_STATION_SERVICE_DC",
+      "subsystem": "FACILITY_GSU_SUBSTATION",
+      "component": "STATION_SERVICE_AND_DC_POWER",
+      "pathway": "flood_inundation_contact",
+      "coverage_role": "primary_candidate",
+      "treatment": "new_common_concept_no_curve",
+      "ordinate_status": "withheld",
+      "shared_failure_unit_id": "FE_STATION_SERVICE_DC",
+      "exposure_grain": "station_service_or_dc_component",
+      "main_blocker": "same-unit flood disposition and value"
+    },
+    {
+      "id": "FW_GSU_CABLE_TERMINATIONS",
+      "subsystem": "FACILITY_GSU_SUBSTATION",
+      "component": "CABLE_TERMINATIONS_PULL_BOXES_AND_WATER_PATHS",
+      "pathway": "flood_inundation_contact",
+      "coverage_role": "secondary_candidate",
+      "treatment": "mechanism_only_neighbor_no_curve",
+      "ordinate_status": "withheld",
+      "shared_failure_unit_id": "FE_CABLE_TERMINATIONS",
+      "exposure_grain": "termination_point_or_pathway_segment",
+      "main_blocker": "construction disposition and value subject"
+    },
+    {
+      "id": "FW_TURBINE_BASE_ELECTRICAL",
+      "subsystem": "REPEATED_TURBINE_ELECTRICAL",
+      "component": "BASE_CABINET_CONVERTER_SWITCHGEAR_OR_CONTROL",
+      "pathway": "flood_inundation_contact",
+      "coverage_role": "primary_candidate",
+      "treatment": "wind_specific_inventory_required_no_curve",
+      "ordinate_status": "withheld",
+      "exposure_grain": "per_turbine_or_verified_cluster_point",
+      "main_blocker": "equipment inventory local datum disposition and value"
+    },
+    {
+      "id": "FW_PADMOUNT_STEPUP_TRANSFORMER",
+      "subsystem": "REPEATED_TURBINE_ELECTRICAL",
+      "component": "PAD_OR_TURBINE_STEPUP_TRANSFORMER",
+      "pathway": "flood_inundation_contact",
+      "coverage_role": "primary_candidate",
+      "treatment": "wind_specific_inventory_required_no_curve",
+      "ordinate_status": "withheld",
+      "exposure_grain": "per_transformer_or_verified_cluster_point",
+      "main_blocker": "construction count ownership disposition and value"
+    },
+    {
+      "id": "FW_COLLECTION_CABLE_TERMINATIONS",
+      "subsystem": "PLANT_COLLECTION",
+      "component": "MV_CABLE_JOINT_TERMINATION_PULL_BOX_OR_CONDUIT_PATH",
+      "pathway": "flood_inundation_contact",
+      "coverage_role": "secondary_candidate",
+      "treatment": "network_decomposition_required_no_curve",
+      "ordinate_status": "withheld",
+      "exposure_grain": "point_and_line_network",
+      "main_blocker": "segment construction exposure disposition and value"
+    },
+    {
+      "id": "FW_TURBINE_FOUNDATION",
+      "subsystem": "FOUNDATION",
+      "component": "TURBINE_FOUNDATION_AND_SUPPORTING_SOIL",
+      "pathway": "flood_scour_erosion",
+      "coverage_role": "out_of_primary_pathway",
+      "treatment": "separate_pathway_required_no_curve",
+      "ordinate_status": "withheld",
+      "exposure_grain": "per_turbine_hydraulic_geotechnical_point",
+      "main_blocker": "separate hydraulic geotechnical response"
+    },
+    {
+      "id": "FW_CIVIL_ACCESS_DRAINAGE",
+      "subsystem": "PLANT_CIVIL",
+      "component": "ROADS_PADS_DRAINAGE_BUILDINGS_AND_FENCES_MIXED",
+      "pathway": "flood_scour_erosion",
+      "coverage_role": "out_of_primary_pathway",
+      "treatment": "split_and_separate_pathway_required_no_curve",
+      "ordinate_status": "withheld",
+      "exposure_grain": "line_network_and_polygon_split",
+      "main_blocker": "mixed subjects values and mechanisms"
+    },
+    {
+      "id": "FW_ELEVATED_TURBINE_EQUIPMENT",
+      "subsystem": "REPEATED_TURBINE",
+      "component": "ELEVATED_ROTOR_NACELLE_AND_TOWER_EQUIPMENT",
+      "pathway": "flood_inundation_contact",
+      "coverage_role": "geometry_screened",
+      "treatment": "withheld_not_universal_zero",
+      "ordinate_status": "withheld",
+      "exposure_grain": "per_turbine",
+      "main_blocker": "site-specific water path and vulnerable elevation"
+    },
+    {
+      "id": "SUPPORT_FIELDWORK",
+      "subsystem": "SUPPORT",
+      "component": "ASSEMBLY_AND_INSTALLATION",
+      "pathway": "all_shared",
+      "coverage_role": "support_once",
+      "treatment": "post_disposition_allocation_no_curve",
+      "ordinate_status": "not_applicable",
+      "exposure_grain": "post_damage_repair_scope",
+      "main_blocker": "claims-backed allocation rule"
+    },
+    {
+      "id": "SUPPORT_TRANSPORT_LOGISTICS",
+      "subsystem": "SUPPORT",
+      "component": "WIND_TURBINE_TRANSPORT_AND_LOGISTICS",
+      "pathway": "all_shared",
+      "coverage_role": "support_once",
+      "treatment": "post_disposition_allocation_no_curve",
+      "ordinate_status": "not_applicable",
+      "exposure_grain": "post_damage_replacement_scope",
+      "main_blocker": "distance crane access and replacement rule"
+    }
+  ],
+  "candidate_numeric_evidence": {
+    "status": "audit_only_not_runtime_shaped",
+    "numeric_values_embedded": false,
+    "runtime_enabled": false,
+    "source_ids": [
+      "FW-S010",
+      "LEG-FW-001",
+      "LEG-FW-002"
+    ],
+    "audit_record": "docs/cells/flood_wind/proposed/NUMERICAL_CANDIDATE_AUDIT_flood_wind__model_v0_1__docs_r1.md",
+    "workbook_sheets": [
+      "Candidate_Audit",
+      "Legacy_Audit"
+    ],
+    "prohibited_use": "Candidate ordinates and legacy logistics cannot populate a damage emit or serve as fallback."
+  },
+  "curve_records": [],
+  "parameter_tier_table": [
+    {
+      "parameter": "local depth component-datum transform",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "FW-S005",
+        "FW-S006",
+        "FW-S007",
+        "FW-S010"
+      ],
+      "status": "adopt_method_only"
+    },
+    {
+      "parameter": "flood-solar numeric candidates",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "FW-S010"
+      ],
+      "status": "audit_only"
+    },
+    {
+      "parameter": "wind reference value ledger",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": [
+        "FW-S008"
+      ],
+      "status": "reference_only_loss_disabled"
+    },
+    {
+      "parameter": "legacy anchored logistics and fixed shares",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "LEG-FW-001",
+        "LEG-FW-002"
+      ],
+      "status": "rejected_runtime_regression_only"
+    }
+  ],
+  "derivation_rationale": {
+    "decision": "withhold_all_numeric_outputs",
+    "reason": "No representative component-local flood state to same-unit disposition and direct-cost response passed the evidence, compatibility, value, and ownership gates.",
+    "bounded_search_ref": "docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
+    "promotion_gate_ref": "docs/cells/flood_wind/proposed/PROMOTION_GATE_MATRIX_flood_wind__model_v0_1__docs_r1.md"
+  },
+  "emit_contract": {
+    "runtime_function_published": false,
+    "valid_input_damage_behavior": "return_null_withheld_NO_RUNTIME_CURVE",
+    "fallback_curve_allowed": false,
+    "solar_curve_fallback_allowed": false,
+    "legacy_curve_fallback_allowed": false,
+    "missing_exposure_as_zero_allowed": false,
+    "unknown_ownership_baseline_loss_allowed": false,
+    "numeric_damage_emit_allowed": false,
+    "numeric_loss_emit_allowed": false,
+    "downstream_consumer_pin": null
+  },
+  "legacy_characterization": {
+    "hazard_commit": "d876ef7190ef6baf7339cb32cb95a77bde89af4d",
+    "m3_blob": "1c50b845064a1f168090bfe3180bf23779375d90",
+    "m3_sha256": "b45fba70544d348638be4f3ad6af65193a272bbe2b4b25098128fa8b810a159e",
+    "m4_blob": "11a28fd72557847dd2fe12a48bdc5972d9f58352",
+    "m4_sha256": "7f91344b4495a2899be6475350728dd8d5f114052270f6221e2c4c7b82f7adfa",
+    "runtime_use": "rejected",
+    "permitted_use": "regression_characterization_and_future_shadow_migration_only"
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v1",
+    "cell_id": "flood_wind",
+    "spread_carried": false,
+    "emit_modes_populated_by_cell": [],
+    "metrics_supportable": {
+      "failure_unit_scalar_dr": "withheld",
+      "scenario_loss_given_value_basis": "withheld",
+      "scalar_eal": "withheld",
+      "pml": "withheld",
+      "var": "withheld",
+      "tvar": "withheld"
+    },
+    "withheld_reason_by_metric": {
+      "failure_unit_scalar_dr": [
+        "NO_RUNTIME_CURVE"
+      ],
+      "scenario_loss_given_value_basis": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_VALUE_BASIS",
+        "MISSING_EXPOSURE_OR_COUPLING"
+      ],
+      "scalar_eal": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_VALUE_BASIS",
+        "MISSING_EXPOSURE_OR_COUPLING",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "pml": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "var": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "tvar": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ]
+    },
+    "withheld_reason_codes": [
+      "NO_RUNTIME_CURVE",
+      "MISSING_VALUE_BASIS",
+      "MISSING_EXPOSURE_OR_COUPLING",
+      "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+    ],
+    "cap_binding": {
+      "policy": "fail_closed",
+      "preflight_status": "not_executed_no_distribution",
+      "required_before_scalar_eal": true,
+      "tolerance_pct": null,
+      "tolerance_status": "not_applicable_no_distribution",
+      "action_if_fail": "withhold_scalar_eal_and_require_tail_capable_emit"
+    }
+  }
+}

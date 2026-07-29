@@ -1,0 +1,461 @@
+{
+  "schema_version": "known_answer_tests.v1",
+  "status": "research_scaffold_fail_closed_contract_tests",
+  "cell_id": "flood_wind",
+  "semantic_damage_model_version": "model v0.1",
+  "documentation_revision": "docs r1",
+  "runtime_curve_count": 0,
+  "runtime_curve_known_answer_tests": [],
+  "test_invariant": "No valid input may produce a numeric damage ratio or loss while curve_records is empty; neighboring-cell and legacy candidates are excluded from runtime.",
+  "canonical_rejection_codes": [
+    "EVENT_ID_REQUIRED",
+    "EVENT_FAMILY_ID_REQUIRED",
+    "PATHWAY_ID_REQUIRED",
+    "UNSUPPORTED_PATHWAY_ID",
+    "FAILURE_UNIT_ID_REQUIRED",
+    "AGGREGATE_FAILURE_UNIT_REJECTED",
+    "COMPONENT_IDENTITY_REQUIRED",
+    "EXPOSURE_METADATA_INCOMPLETE",
+    "VERTICAL_DATUM_MISMATCH",
+    "EXPOSURE_GRAIN_MISMATCH",
+    "OWNERSHIP_UNRESOLVED",
+    "DUPLICATE_SHARED_VALUE",
+    "DIRECT_PHYSICAL_SCOPE_ONLY"
+  ],
+  "tests": [
+    {
+      "test_id": "FW_COMPLETE_COMPONENT_INPUT_STILL_WITHHOLDS",
+      "category": "withholding_precedence",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_001",
+        "event_family_id": "family_001",
+        "pathway_id": "flood_inundation_contact",
+        "source_peril_id": "riverine_flood",
+        "hazard_product_id": "fixture_wse_v1",
+        "hazard_valid_time": "2026-01-01T00:00:00Z",
+        "asset_id": "wind_fixture",
+        "component_instance_id": "gsu_swg_01",
+        "failure_unit_id": "FW_GSU_SWITCHGEAR",
+        "component_geometry": {
+          "type": "Point",
+          "coordinates": [
+            -100,
+            40
+          ]
+        },
+        "geometry_provenance": "observed",
+        "water_surface_elevation_m": 101.2,
+        "component_vulnerable_elevation_m": 101.0,
+        "vertical_datum_id": "NAVD88",
+        "equipment_family": "metal_clad_switchgear_fixture",
+        "voltage_class": "medium_voltage_fixture",
+        "indoor_outdoor": "indoor",
+        "enclosure_or_submersion_listing": "not_submersion_listed_fixture",
+        "duration_hr": 8,
+        "water_quality_or_contamination_class": "freshwater_fixture",
+        "salinity_class": "freshwater_low_salinity_fixture",
+        "energized_state": "deenergized_fixture",
+        "shutdown_or_isolation_state": "isolated_fixture",
+        "velocity_or_debris_indicator": "low_velocity_no_debris_fixture",
+        "water_ingress_path": "direct_floor_level_ingress_fixture",
+        "temporary_protection_state": "none_fixture",
+        "owner_entity_id": "project_owner_fixture",
+        "project_owned": true,
+        "insured_inclusion": true,
+        "value_basis_id": "site_specific_fixture_v1",
+        "same_unit_direct_replacement_value_usd": 500000,
+        "quantity": 1,
+        "exposure_fraction": 1,
+        "exposure_fraction_basis": "fixture_component_footprint"
+      },
+      "expected_output": {
+        "identity_contract": "accepted",
+        "axis_contract": "accepted_research_state",
+        "local_depth_above_component_datum_m": 0.2,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        },
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes_include": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT"
+    },
+    {
+      "test_id": "FW_NO_FLOOD_SOLAR_FALLBACK",
+      "category": "neighboring_cell_isolation",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_002",
+        "event_family_id": "family_002",
+        "pathway_id": "flood_inundation_contact",
+        "failure_unit_id": "FW_GSU_SWITCHGEAR",
+        "requested_fallback_curve_id": "FS_SWG",
+        "local_depth_above_component_datum_m": 0.15
+      },
+      "expected_output": {
+        "fallback_curve_used": false,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "FW-S010;GOVERNANCE_CONTRACT"
+    },
+    {
+      "test_id": "FW_NO_LEGACY_FALLBACK",
+      "category": "legacy_isolation",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_003",
+        "event_family_id": "family_003",
+        "pathway_id": "flood_inundation_contact",
+        "failure_unit_id": "FW_GSU_SWITCHGEAR",
+        "requested_fallback_curve_id": "legacy_substation_logistic",
+        "grade_depth_ft": 2
+      },
+      "expected_output": {
+        "fallback_curve_used": false,
+        "legacy_curve_used": false,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "LEG-FW-001;GOVERNANCE_CONTRACT"
+    },
+    {
+      "test_id": "FW_MISSING_PATHWAY_REJECTS",
+      "category": "pathway_routing",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_pathway_missing",
+        "event_family_id": "family_pathway_missing",
+        "failure_unit_id": "FW_GSU_SWITCHGEAR"
+      },
+      "expected_output": {
+        "pathway_contract": "rejected",
+        "error_code": "PATHWAY_ID_REQUIRED",
+        "fallback_curve_used": false,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT"
+    },
+    {
+      "test_id": "FW_UNKNOWN_PATHWAY_REJECTS",
+      "category": "pathway_routing",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_pathway_unknown",
+        "event_family_id": "family_pathway_unknown",
+        "pathway_id": "flood_unregistered_pathway",
+        "failure_unit_id": "FW_GSU_SWITCHGEAR"
+      },
+      "expected_output": {
+        "pathway_contract": "rejected",
+        "error_code": "UNSUPPORTED_PATHWAY_ID",
+        "fallback_curve_used": false,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT"
+    },
+    {
+      "test_id": "FW_MISSING_DATUM_NOT_DRY",
+      "category": "missing_exposure",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_004",
+        "event_family_id": "family_004",
+        "pathway_id": "flood_inundation_contact",
+        "failure_unit_id": "FW_GSU_SWITCHGEAR",
+        "water_surface_elevation_m": 101.2,
+        "component_vulnerable_elevation_m": null,
+        "vertical_datum_id": "NAVD88"
+      },
+      "expected_output": {
+        "axis_contract": "rejected",
+        "error_code": "EXPOSURE_METADATA_INCOMPLETE",
+        "local_depth_above_component_datum_m": null,
+        "dry_assumed": false,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT"
+    },
+    {
+      "test_id": "FW_VERTICAL_DATUM_MISMATCH_REJECTS",
+      "category": "axis_validation",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_005",
+        "event_family_id": "family_005",
+        "pathway_id": "flood_inundation_contact",
+        "failure_unit_id": "FW_GSU_SWITCHGEAR",
+        "water_surface_elevation_m": 101.2,
+        "water_surface_vertical_datum_id": "NAVD88",
+        "component_vulnerable_elevation_m": 100.8,
+        "component_vertical_datum_id": "LOCAL_GRADE"
+      },
+      "expected_output": {
+        "axis_contract": "rejected",
+        "error_code": "VERTICAL_DATUM_MISMATCH",
+        "local_depth_above_component_datum_m": null,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT"
+    },
+    {
+      "test_id": "FW_AGGREGATE_SUBSTATION_REJECTS",
+      "category": "failure_unit_grain",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_006",
+        "event_family_id": "family_006",
+        "pathway_id": "flood_inundation_contact",
+        "failure_unit_id": "SUBSTATION"
+      },
+      "expected_output": {
+        "failure_unit_contract": "rejected",
+        "error_code": "AGGREGATE_FAILURE_UNIT_REJECTED",
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT"
+    },
+    {
+      "test_id": "FW_SCOUR_WRONG_PATHWAY_REJECTS",
+      "category": "pathway_routing",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_007",
+        "event_family_id": "family_007",
+        "pathway_id": "flood_inundation_contact",
+        "failure_unit_id": "FW_TURBINE_FOUNDATION",
+        "scour_depth_m": 0.5
+      },
+      "expected_output": {
+        "pathway_contract": "rejected",
+        "error_code": "UNSUPPORTED_PATHWAY_ID",
+        "fallback_curve_used": false,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT"
+    },
+    {
+      "test_id": "FW_UNKNOWN_OWNERSHIP_WITHHOLDS_BASELINE",
+      "category": "ownership_and_value",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_008",
+        "event_family_id": "family_008",
+        "pathway_id": "flood_inundation_contact",
+        "failure_unit_id": "FW_GSU_SWITCHGEAR",
+        "component_instance_id": "gsu_swg_unknown_owner",
+        "project_owned": "unknown"
+      },
+      "expected_output": {
+        "baseline_project_physical_loss": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "OWNERSHIP_UNRESOLVED"
+          ]
+        },
+        "dependency_view_allowed": true,
+        "labeled_sensitivity_allowed": true
+      },
+      "tolerance": null,
+      "source": "FW-S009;GOVERNANCE_CONTRACT"
+    },
+    {
+      "test_id": "FW_UTILITY_OWNED_POI_EXCLUDED",
+      "category": "ownership_and_value",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_009",
+        "event_family_id": "family_009",
+        "pathway_id": "flood_inundation_contact",
+        "failure_unit_id": "FW_GSU_SWITCHGEAR",
+        "component_instance_id": "utility_poi_swg",
+        "project_owned": false,
+        "owner_entity_id": "transmission_owner_fixture",
+        "same_unit_direct_replacement_value_usd": 500000
+      },
+      "expected_output": {
+        "project_physical_value_included_usd": 0,
+        "dependency_view_allowed": true,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "FW-S009;GOVERNANCE_CONTRACT"
+    },
+    {
+      "test_id": "FW_SHARED_GSU_VALUED_ONCE",
+      "category": "double_count_control",
+      "curve_id": null,
+      "input": {
+        "asset_id": "hybrid_or_multi_unit_fixture",
+        "component_instance_id": "facility_gsu_01",
+        "serves": [
+          "wind_asset_01",
+          "solar_asset_01"
+        ],
+        "same_unit_direct_replacement_value_usd": 1000000,
+        "attempted_value_instances": 2
+      },
+      "expected_output": {
+        "value_contract": "rejected",
+        "error_code": "DUPLICATE_SHARED_VALUE",
+        "accepted_component_value_instances": 1,
+        "scenario_loss_given_value_basis": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "SHARED_SUBSTRATE;GOVERNANCE_CONTRACT"
+    },
+    {
+      "test_id": "FW_ASSET_LABEL_DOES_NOT_SELECT_CURVE",
+      "category": "shared_component_compatibility",
+      "curve_id": null,
+      "input": {
+        "failure_unit_id": "FW_GSU_SWITCHGEAR",
+        "equipment_compatibility_key": "fixture_exact_match",
+        "asset_labels": [
+          "wind",
+          "solar"
+        ]
+      },
+      "expected_output": {
+        "asset_label_used_as_intrinsic_selector": false,
+        "shared_definition_eligible": true,
+        "numeric_runtime_inheritance_allowed": false,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "FW-S001;SHARED_SUBSTRATE;GOVERNANCE_CONTRACT"
+    },
+    {
+      "test_id": "FW_DIRECT_DR_EXCLUDES_OUTAGE_AND_BI",
+      "category": "ordinate_scope",
+      "curve_id": null,
+      "input": {
+        "failure_unit_id": "FW_GSU_PROTECTION_SCADA",
+        "mw_removed_from_service": 495,
+        "business_interruption_usd": 10000000
+      },
+      "expected_output": {
+        "ordinate_contract": "rejected",
+        "error_code": "DIRECT_PHYSICAL_SCOPE_ONLY",
+        "mw_used_as_damage_ratio": false,
+        "business_interruption_included": false,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "FW-S003;GOVERNANCE_CONTRACT"
+    },
+    {
+      "test_id": "FW_UNKNOWN_CONDITIONER_NO_PROTECTION_CREDIT",
+      "category": "conditioner_guardrail",
+      "curve_id": null,
+      "input": {
+        "event_id": "event_013",
+        "event_family_id": "family_013",
+        "pathway_id": "flood_inundation_contact",
+        "failure_unit_id": "FW_GSU_SWITCHGEAR",
+        "energized_state": "unknown",
+        "isolation_state": "unknown",
+        "temporary_protection_state": "unknown"
+      },
+      "expected_output": {
+        "conditioner_default_applied": false,
+        "protective_credit_applied": false,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "withheld",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE"
+          ]
+        }
+      },
+      "tolerance": null,
+      "source": "GOVERNANCE_CONTRACT"
+    },
+    {
+      "test_id": "FW_M3_M4_NO_BYPASS_MIGRATION_GATE",
+      "category": "consumer_migration",
+      "curve_id": null,
+      "input": {
+        "future_m3_loader_pin": "fixture_model_docs_schema_sha",
+        "future_m4_loader_pin": "local_hardcoded_reconstruction"
+      },
+      "expected_output": {
+        "migration_status": "rejected",
+        "legacy_bypass_present": true,
+        "runtime_cutover_allowed": false,
+        "failure_unit_scalar_dr": {
+          "value": null,
+          "status": "not_evaluated"
+        }
+      },
+      "tolerance": null,
+      "source": "LEG-FW-001;LEG-FW-002;GOVERNANCE_CONTRACT"
+    }
+  ]
+}
