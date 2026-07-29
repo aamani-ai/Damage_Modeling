@@ -140,3 +140,32 @@ Visual Crossing at study level, yet its released rows omit the query/station/ref
 for transfer. New Mawar, Yagi, FPL, FEMA, owner, SEC, DOE/NLR, and OEM evidence strengthens occurrence
 coverage and acquisition design without supplying an adopted parameter. A future portable fixed/tracker
 contract is expected to be a major model-v2 change and requires the recorded owner/adjuster evidence package.
+
+**Later scope note:** D-013 remains the evidence-earned conclusion and promotion standard. D-014 records a
+subsequent owner-authorized synthetic exception that supersedes only the instruction to wait before creating
+a v2 research candidate; it does not supersede any blocked evidence or promotion gate.
+
+## D-014 — TC-wind × solar receives an out-of-queue synthetic model-v2 candidate
+
+**Decision:** accept `tropical_cyclone_wind_solar` model v2.0/docs r1 as a noncanonical research/interface
+candidate with five records: one unchanged Perry source-compatibility record and four cell-local
+synthetic-T4 fixed-tilt/tracker records. Preserve model v0.1 and model v1.0 as the strict no-curve and narrow
+source-derived alternatives. Keep `wildfire_wind` next in the coverage queue.
+
+**Reason:** after the docs-r2 evidence audit correctly concluded that public evidence had not earned a
+portable v2, the owner explicitly authorized a coverage-first Tier-4 assumption build. That authority
+permits an honest, machine-governed proposal; it does not turn assumptions into hurricane calibration.
+Unsupported units and all value/full-plant/scenario/annual/tail outputs remain withheld. No `current/`,
+artifact-index, changelog, package-release, canonical-promotion, or Hazard-cutover action is authorized, so
+the portfolio remains 10/10 structurally governed and 5/10 canonical runtime.
+
+## D-015 — Numerical identity is an audit comparison, not shared evidence
+
+**Decision:** treat the v2 cell-local synthetic parameters' byte equality to the solar-wind normalized
+response candidate as a post-adoption audit fingerprint only. The comparison profile is not tropical-cyclone
+evidence, does not populate the TC artifact, and is not a runtime shared dependency.
+
+**Reason:** the comparison values originated with the neighboring strong-wind proposal, but similar solar
+equipment and normalized numbers do not make convective and tropical-cyclone hazard histories
+interchangeable. The TC cell independently owns its Tier-4 adoption decision, axis bridges, selectors,
+failure-unit binding, artifact, capability, release, and promotion evidence.

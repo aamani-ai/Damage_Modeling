@@ -1,0 +1,131 @@
+{
+  "schema_version": "capability_declaration.v3",
+  "cell_id": "tropical_cyclone_wind_solar",
+  "canonical_runtime_artifact": false,
+  "pathway_capabilities": [
+    {
+      "pathway_id": "tropical_cyclone_wind",
+      "failure_unit_scalar_dr": "conditional",
+      "scenario_loss_given_value_basis": "withheld",
+      "curve_intrinsic_spread": "nonprobabilistic_epistemic_envelope",
+      "populated_emit_modes": [
+        "scalar_mean",
+        "state_ensemble"
+      ],
+      "conditions": [
+        "exact supported architecture selected with no default for Perry/fixed/tracker numerical routes; direct common-withheld-unit queries prohibit architecture",
+        "Perry compatibility calls retain all six source acknowledgements and the source-native axis",
+        "curve_intrinsic_spread is a pathway-level union: Perry carries no intrinsic spread; only generic fixed/tracker emit the nonprobabilistic envelope",
+        "generic fixed calls supply a qualified TC event/design pressure ratio or bridged array-height speed proxy",
+        "tracker calls exactly match attained state, exact-system Ucrit, layout, angle, zone, lock, duration, direction, and speed basis",
+        "event and event-family identities are present",
+        "compound pathways are separated and acknowledged",
+        "no value payload or scenario-dollar request is supplied"
+      ],
+      "limitation_flags": [
+        "EXPERIMENTAL_SYNTHETIC_T4_SCENARIO",
+        "TC_NUMERICAL_RESPONSE_NOT_CALIBRATED",
+        "CELL_LOCAL_SYNTHETIC_PARAMETER_DECISION",
+        "NONPROBABILISTIC_EPISTEMIC_ENVELOPE",
+        "TC_BRIDGE_CONTENT_NOT_RESOLVED_BY_REFERENCE_EVALUATOR",
+        "TC_DURATION_DIRECTION_AND_CYCLING_NOT_NUMERICALLY_MODELED",
+        "DEBRIS_RAIN_AND_COMPOUND_PATHWAYS_EXCLUDED",
+        "SCENARIO_DOLLAR_LOSS_WITHHELD",
+        "FULL_PLANT_PHYSICAL_LOSS_INCOMPLETE",
+        "PERRY_SOURCE_COMPATIBILITY_ROUTE",
+        "SOURCE_SPECIFIC_VISIBLE_MODULE_MATERIAL_PROXY",
+        "SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS",
+        "SOURCE_AXIS_PRODUCT_QUERY_SEMANTICS_UNRESOLVED",
+        "PREDICTIVE_RELATIONSHIP_NOT_VALIDATED"
+      ],
+      "withheld_failure_units": [
+        {
+          "failure_unit_id": "PV_FOUNDATION",
+          "reason_codes": [
+            "NO_TC_WIND_FOUNDATION_FRAGILITY",
+            "FOUNDATION_ARCHETYPE_AND_GEOTECHNICAL_STATE_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_POWER_CONVERSION_AND_COLLECTION",
+          "reason_codes": [
+            "DIRECT_TC_WIND_CURVE_UNSUPPORTED",
+            "POINT_LINE_NETWORK_SPLIT_REQUIRED",
+            "DEBRIS_RAIN_AND_INGRESS_PATHWAYS_NOT_MODELED"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_GSU_SUBSTATION",
+          "reason_codes": [
+            "NO_TC_WIND_GSU_FRAGILITY",
+            "FACILITY_LEVEL_YARD_EXPOSURE_AND_VALUE_REQUIRED",
+            "NO_ARRAY_DR_OR_EXPOSURE_INHERITANCE"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_SCADA_COMMUNICATIONS",
+          "reason_codes": [
+            "DIRECT_TC_WIND_CURVE_UNSUPPORTED",
+            "CONTROL_DEPENDENCY_IS_NOT_DIRECT_DAMAGE"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_CIVIL_INFRA",
+          "reason_codes": [
+            "MIXED_ASSET_BUCKET_REQUIRES_SPLIT",
+            "NO_TC_WIND_CIVIL_FRAGILITY"
+          ]
+        },
+        {
+          "failure_unit_id": "PV_REPLACEMENT_SUPPORT",
+          "reason_codes": [
+            "ALLOCATION_ONLY_NO_INTRINSIC_DR",
+            "ALLOCATE_ONCE_AFTER_DIRECT_DAMAGE"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumer_annual_metrics": {
+    "computation_owner": "downstream_consumer",
+    "status_before_promotion": "withheld_noncanonical_proposal",
+    "status_after_promotion": "withheld",
+    "prerequisites": [
+      "canonical artifact promotion and exact model/docs/schema/SHA pin",
+      "calibrated TC demand-response and same-unit economic consequence",
+      "architecture-aware exposure and value basis",
+      "complete physical-unit coverage or explicit partial-loss contract",
+      "consumer cap-binding and compound-event validation"
+    ],
+    "limitation_flags": [
+      "FREQUENCY_DRIVEN_TAIL_IS_CONSUMER_OWNED",
+      "SYNTHETIC_SCENARIOS_ARE_NOT_A_PROBABILITY_DISTRIBUTION",
+      "FULL_PLANT_LOSS_INCOMPLETE"
+    ]
+  },
+  "cap_binding": {
+    "policy": "consumer_enforced_fail_closed",
+    "enforcement_owner": "downstream_consumer",
+    "checks_required": [
+      "exact model/docs/schema/SHA pin",
+      "pathway and architecture match",
+      "TC wind-field, direction-history, duration-cycling, and aerodynamic bridge provenance",
+      "withheld units remain null rather than zero",
+      "GSU retains independent yard exposure and value",
+      "Perry and generic routes are mutually exclusive",
+      "no synthetic scenario is treated as calibrated frequency or uncertainty"
+    ],
+    "action_if_fail": "withhold the affected DR or downstream metric; do not substitute model v1, strong-wind response, legacy logistics, or another architecture"
+  },
+  "promotion_gate": {
+    "status": "blocked",
+    "required_before_canonical_use": [
+      "formal expert elicitation or matched TC field/claims calibration for every synthetic parameter",
+      "validated portable TC demand bridge and held-out prediction",
+      "same-unit disposition, cost, replacement-value, and support-allocation evidence",
+      "independent fixed/tracker/GSU engineering and economic review",
+      "Hazard dual-read, rejection-path, compound-event, pin, shadow, and rollback tests",
+      "explicit maintainer promotion and atomic registry/index/changelog update"
+    ]
+  }
+}

@@ -24,6 +24,9 @@ These files are reference implementations for downstream notebooks/services. The
 | `tropical_cyclone_wind_solar_curve_eval.py` | Exact axis/selector/range/value fail-closed evaluator for the source-specific Perry visible-module screening atom. |
 | `validate_tropical_cyclone_wind_solar_v1_proposal.py` | Schema/source-reproduction/KAT/register/value/workbook/link/index validator for the noncanonical TC-wind × solar model-v1 screening exception. |
 | `build_tropical_cyclone_wind_solar_v1_workbook.mjs` | `@oai/artifact-tool` builder, renderer, and QA inspector for the TC-wind × solar model-v1 audit workbook. |
+| `tropical_cyclone_wind_solar_v2_curve_eval.py` | Fail-closed reference evaluator for the noncanonical model-v2 Perry compatibility, fixed-tilt synthetic Tier-4, qualified-tracker synthetic Tier-4, and directly queried withheld-unit routes. |
+| `build_tropical_cyclone_wind_solar_v2_package.py` | Deterministic builder for the noncanonical model-v2 artifact, capability, KAT, registers, audit comparison profile, and governed workbook. |
+| `validate_tropical_cyclone_wind_solar_v2_proposal.py` | Schema/semantic/KAT/register/workbook/pin/link/non-promotion validator for the five-record model-v2 proposal. |
 | `validate_hail_wind_v0_1_scaffold.py` | Fail-closed source/contact/value/workbook/link validator for hail × wind model v0.1. |
 | `validate_wildfire_wind_v0_1_scaffold.py` | Fail-closed JSON/register/value/workbook/link validator for the noncanonical wildfire x wind model-v0.1 scaffold. |
 

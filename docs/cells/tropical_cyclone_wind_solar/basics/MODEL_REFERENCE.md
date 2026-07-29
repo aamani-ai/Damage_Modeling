@@ -1,101 +1,79 @@
-# Tropical-cyclone wind × solar — proposed model-v1 reference
+# Tropical-cyclone wind × solar — proposed model-v2 reference
 
-## Identity and authorization state
+## Identity and authorization
 
 ```yaml
 cell_id: tropical_cyclone_wind_solar
 pathway_id: tropical_cyclone_wind
-damage_code_id: TROPICAL_CYCLONE_WIND_SOLAR_PERRY_MODULE_SCREENING_V1
-semantic_damage_model_version: model v1.0
-human_documentation_revision: docs r2
-runtime_proposal_revision: docs r1
+damage_code_id: TROPICAL_CYCLONE_WIND_SOLAR_SYNTHETIC_T4_V2_PROPOSED
+semantic_damage_model_version: model v2.0
+documentation_revision: docs r1
 artifact_schema_version: damage_curve_record_bundle.v3
 emit_schema_version: damage_emit.v2
 capability_schema_version: capability_declaration.v3
-lifecycle_state: release_candidate
+lifecycle_state: candidate
 promotion_status: proposed_blocked
-review_status: deep_curated_noncanonical_no_model_bump
-model_grade: screening_remote_sensing_labeled_visible_fraction_with_T4_economic_bridge
-strict_evidence_earned_gate: NO_GO_RETAIN_V0_1
-coverage_first_exception: deliberate_noncanonical_screening_proposal
+model_grade: experimental_synthetic_T4_scenario
 canonical_runtime_artifact: false
 package_release: unreleased
 package_inclusion_status: not_included
-curve_record_count: 1
-consumer_cutover: none
+curve_record_count: 5
+generic_synthetic_record_count: 4
+consumer_cutover: prohibited
 ```
 
-This is the exact reference for the lead human/evidence state and unchanged docs-r1 runtime proposal. It is
-not a canonical artifact, runtime pin, package release, or authorization for Hazard consumption. The
-preserved strict alternative is
-[model v0.1/docs r1](../proposed/README_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md), which has zero
-curves and returns `NO_RUNTIME_CURVE` for every numeric request.
+This is a noncanonical research proposal. The exact machine identity is carried by the artifact and its
+SHA-256 pin; no hash in narrative documentation authorizes production use.
 
-## Frozen proposal digests
+## Architecture and failure-unit matrix
 
-```text
-curve artifact SHA-256  bb01300d3e76114203dd826be5bff4bb9f2b98490880327dd57575007a180840
-capability SHA-256      5cd4f5501961a9d7f2c21259b4cfabd9e74eef30b5fdd9ceff72729b83ffc4fc
-known-answer tests      2e18603a9efb5cbb8bdd1c7f3b162e1a3e0c4b0723df5e1afbdc27def84f7cd2
-audit workbook          748031c226187e3b43d83f6a57b2dbd5554457edc01a06debe16b7ef640f3105
-Perry manual CSV        edb34e74cc078bba1fdbe34463abadc794fd416caa66eb64ac3d0ed176ac5e00
-```
+| Architecture | Failure unit | Curve status |
+|---|---|---|
+| `perry_ground_nontracking_source_cohort_v1_compat` | `PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT` | unchanged v1 source-specific piecewise-linear proxy |
+| `fixed_tilt_ground_mount_tc_synthetic_t4_v1` | `PV_FIXED_TILT_MODULE_FIELD` | synthetic ordered-state scenario |
+| `fixed_tilt_ground_mount_tc_synthetic_t4_v1` | `PV_FIXED_TILT_SUPPORT_STRUCTURE` | synthetic ordered-state scenario |
+| `single_axis_tracker_tc_qualified_synthetic_t4_v1` | `PV_TRACKER_MODULE_FIELD` | synthetic ordered-state scenario |
+| `single_axis_tracker_tc_qualified_synthetic_t4_v1` | `PV_TRACKER_SBOS_ASSEMBLY` | synthetic ordered-state scenario |
 
-## Supported source-specific atom
+The following are withheld: `PV_FOUNDATION`, `PV_POWER_CONVERSION_AND_COLLECTION`,
+`PV_GSU_SUBSTATION`, `PV_SCADA_COMMUNICATIONS`, and `PV_CIVIL_INFRA`. `PV_REPLACEMENT_SUPPORT` is an
+allocation-only exposure modifier with no curve and is emitted as withheld until a qualified downstream
+allocation exists.
 
-| Field | Exact model-v1 value |
-|---|---|
-| `failure_unit_id` | `PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT` |
-| subsystem | `PV_ARRAY_MODULES_SOURCE_COHORT` |
-| component | `VISIBLE_OR_MISSING_MODULE_HARDWARE_MATERIAL_ONLY` |
-| subject grain | one complete Perry-compatible ground-mounted nontracking site module population |
-| curve ID | `TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1` |
-| output | conditional scalar mean visible-module-hardware material replacement proxy DR |
-| mutually exclusive standard unit | `PV_FIXED_TILT_MODULE_FIELD` |
+## Fixed-tilt request contract
 
-The atom excludes racking, attachments, labor, freight, inspection, hidden module damage, electrical work,
-support, and every other plant unit. It is source-cohort specific and makes no utility-scale, CONUS, generic
-fixed-tilt, or pure-aerodynamic claim.
-
-## Source cohort
-
-```text
-source file rows                       47
-ground-mounted rows                    37
-ground + tracking=False cohort         35
-runtime fit rows                       34
-audit-only sparse-tail rows             1
-event clusters                          6
-```
-
-The fit rows come from Dorian (3), Florence (20), Ian (2), Idalia (1), Maria (4), and Michael (4). The cohort
-is explicitly mixed scale because the released manual CSV has no `site_type` column and some system-power
-values are missing. At least one physical site recurs across storm records, so the 34 fit rows are neither 34
-unique sites nor independent event/site realizations.
-
-## Hazard-axis contract
+Provide exactly one of:
 
 ```yaml
-axis_id: PERRY_DATASET_REPORTED_EVENT_MAX_GUST_MPS
-input_field: perry_event_max_gust_mps
-unit: m/s
-source_wind_product_id: PERRY_DATASET_REPORTED_EVENT_MAX_GUST
-valid_range_mps: [17.4, 39.1]
-interpolation_policy: linear_between_source_knots
-extrapolation_policy: withhold
-48_2_mps_source_row: audit_only_not_runtime
+preferred:
+  tc_fixed_event_to_design_net_pressure_ratio: number in [0, 2]
+
+screening_proxy:
+  tc_array_height_3s_gust_mps: nonnegative number
+  qualified_design_array_height_3s_gust_mps: positive number
+  computed_axis: (event/design)^2 in [0, 2]
 ```
 
-Perry identifies Visual Crossing API as the study-level provider. The full cohort's row-level station/product,
-height, averaging period, exposure standard, query settings, retrieval version, time-of-maximum, and
-uncertainty are unresolved. NHC sustained wind, Hazard or ASCE 3-second gust, Saffir-Simpson category, a new
-Visual Crossing query, array-height wind, and other gust products are not aliases.
+Both require nonempty `tc_wind_field_bridge_id`, `tc_directional_history_bridge_id`,
+`tc_duration_cycling_bridge_id`, and `aerodynamic_demand_bridge_id`. If a 10 m gust is supplied, it is
+context only and the separately bridged array-height input remains mandatory.
 
-## Required selectors and acknowledgements
+## Tracker request contract
 
-Every numeric research request must exactly provide:
+Required event fields include local tracker-normal 3-second gust, exact-system Ucrit, aeroelastic
+qualification ID and SHA, tracker system, 1P/2P configuration, layout, attained angle and position, position
+confirmation basis, array zone, drive/lock state, and the three TC bridge IDs.
+
+The request must repeat a qualification basis that exactly matches system, configuration, layout, angle,
+position, zone, drive/lock state, 3-second averaging, speed reference, TC wind-field bridge, direction
+basis, and duration basis. Unknown, commanded-only, or mismatched state returns
+`TRACKER_QUALIFICATION_BASIS_MISMATCH`.
+
+## Perry compatibility contract
 
 ```yaml
+array_architecture: perry_ground_nontracking_source_cohort_v1_compat
+perry_event_max_gust_mps: 17.4 through 39.1
 array_architecture_id: PERRY_GROUND_NONTRACKING_SOURCE_COHORT_V1
 source_population_match_id: PERRY_MANUAL_GROUND_NONTRACKING_MIXED_SCALE_V1
 module_value_distribution_assumption_id: UNIFORM_MODULE_HARDWARE_VALUE
@@ -104,136 +82,87 @@ source_wind_product_id: PERRY_DATASET_REPORTED_EVENT_MAX_GUST
 causal_scope_acknowledgement_id: SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS
 ```
 
-No field has a default. The final acknowledgement prevents the associated imagery endpoint from being
-described as pure wind-pressure fragility. The uniform-value and full-replacement acknowledgements are
-Tier-4 economic bridges, not observed source facts.
+The Perry record is exactly the model-v1 13-knot curve. Its output is a visible/missing module-hardware
+material replacement proxy, not generic fixed-tilt DR, pure aerodynamic damage, installed-cost loss, or
+whole-plant DR.
 
-## Curve record
+## Common request fields
 
-The curve is an equal-record-weighted PAVA fit, serialized at pooled-block edges and linearly interpolated.
-The historical `EQUAL_SITE_WEIGHT_NOT_MODULE_WEIGHTED` flag distinguishes row weighting from module
-weighting; it does not establish unique-site independence or predictive validity.
-
-| Knot | x (m/s) | Proxy DR |
-|---:|---:|---:|
-| 1 | 17.4 | 0.000000000000000 |
-| 2 | 18.3 | 0.000000000000000 |
-| 3 | 20.7 | 0.000272766560000 |
-| 4 | 24.6 | 0.000272766560000 |
-| 5 | 24.8 | 0.000955175835000 |
-| 6 | 25.1 | 0.000955175835000 |
-| 7 | 25.9 | 0.001853190692857 |
-| 8 | 29.5 | 0.001853190692857 |
-| 9 | 29.8 | 0.004054775905000 |
-| 10 | 31.7 | 0.004414548050000 |
-| 11 | 37.9 | 0.004414548050000 |
-| 12 | 38.9 | 0.018272937632500 |
-| 13 | 39.1 | 0.018272937632500 |
-
-The isolated source observation at 48.2 m/s has fraction `0.4142383192`; it is excluded from runtime fitting
-and retained in audit lineage. There is no clamp, asymptote, tail law, or curve-intrinsic spread.
-
-The transformation is computationally reproducible but not a scientifically validated prediction for an
-unseen source-compatible site. The convenience cohort lacks a sampling frame, architecture/design controls,
-cluster-aware inference, and an independent validation event; PAVA and the block-edge ramps impose shape.
-
-## Ordinate meaning
-
-```text
-source visible/missing module percentage / 100
-  × uniform module-hardware material value assumption
-  × full replacement of every visibly affected module-area assumption
-  = source-specific module-material replacement proxy DR
-```
-
-The proxy can overstate material loss when visible modules are reusable or repairable and understate it when
-imagery misses hidden damage. Its bias direction is not known. It excludes installed module cost and all
-nonmodule value.
-
-## Withheld units
-
-| Failure unit | Model-v1 result |
-|---|---|
-| `PV_FIXED_TILT_MODULE_FIELD` | withheld, not zero; source atom is not generic all-damage module response |
-| `PV_FIXED_TILT_SUPPORT_STRUCTURE` | withheld, not zero |
-| `PV_TRACKER_MODULE_FIELD` | withheld, not zero; tracker population unsupported |
-| `PV_TRACKER_SBOS_ASSEMBLY` | withheld, not zero |
-| `PV_FOUNDATION` | withheld, not zero |
-| `PV_POWER_CONVERSION_AND_COLLECTION` | withheld, not zero; point/line/network split required |
-| `PV_GSU_SUBSTATION` | withheld, not zero; facility-level cell-local binding required |
-| `PV_SCADA_COMMUNICATIONS` | withheld, not zero |
-| `PV_CIVIL_INFRA` | withheld, not zero; mixed bucket requires split |
-| `PV_REPLACEMENT_SUPPORT` | withheld; no independent fragility; allocate once after disposition |
-
-Unsupported units return explicit null DR and reason codes. None receives zero or the source-unit curve.
-
-## Value and exposure rules
-
-The scalar response already represents a realized source-site module-field fraction. A second
-`at_risk_fraction` is prohibited. Scenario value input is rejected before promotion.
-
-Only a future promoted contract could bind exact site-specific module-hardware material acquisition value,
-with currency/vintage, ownership, subject identity, and source-population proof. The NLR module benchmark,
-installed cost, array value, physical value, insured value, and full TIV are prohibited runtime denominators.
-
-## Capability
+Every request needs nonempty `event_id`, `event_family_id`, exact
+`pathway_id=tropical_cyclone_wind`, and an exact artifact pin containing only:
 
 ```yaml
-failure_unit_scalar_dr: conditional_for_exact_source_atom_only
-populated_emit_modes: [scalar_mean]
-scenario_loss_given_value_basis: withheld
-curve_intrinsic_spread: not_carried
-generic_fixed_tilt_module_dr: withheld
-tracker_and_all_other_failure_unit_dr: withheld
-full_array_damage_ratio: withheld
-full_plant_damage_ratio: withheld
-scalar_eal: withheld
-pml: withheld
-var: withheld
-tvar: withheld
+cell_id: tropical_cyclone_wind_solar
+semantic_damage_model_version: model v2.0
+documentation_revision: docs r1
+schema_version: damage_curve_record_bundle.v3
+artifact_sha256: exact artifact digest
 ```
 
-Every conditional scalar result must carry the proposal's noncanonical, remote-sensing, mixed-population,
-source-axis, composite-mechanism, visible-only, PAVA, equal-site-weight, event-cluster, sparse-tail,
-cross-method-conflict, partial-coverage, no-spread, no-extrapolation, and scenario-dollar-withheld flags.
+Compound indicators accept `true`, `false`, or `unknown`. If rain, debris, flood/surge, or TC tornado is
+present, `compound_reconciliation_acknowledgement_id` must equal
+`SEPARATE_PATHWAYS_AND_NO_DOUBLE_COUNT`.
+
+## Generic state and DR semantics
+
+The generic records use `ordered_damage_state_lognormal`. Each record carries ordered damage states,
+explicit state-cost ratios, a positive `beta_ln`, and lower/central/upper unweighted capacity scenarios.
+
+At `x=0`, all probability is in the no-damage state and DR is exactly zero. At positive demand there is no
+invented hard-zero interval. Exact-state probabilities are nonnegative and sum to one; each scenario DR is
+their cost-weighted expectation. `scalar_central_dr` is a convenient central synthetic scenario, not a
+statistical mean or best estimate.
+
+## Emit behavior
+
+The Perry route emits `scalar_mean`; generic routes emit `state_ensemble`. Generic results contain
+`scenario_drs` and `state_probabilities_by_scenario`. Every result retains limitation flags. Unsupported
+units contain `scalar_central_dr: null`, empty scenario objects, and explicit reason codes.
+
+Perry outputs carry source-specific, source-composite, and predictive-unvalidated flags. Generic outputs
+carry synthetic-T4, cell-local-parameter-decision, uncalibrated-TC, nonprobabilistic-envelope, no-hard-zero,
+and no-cutover flags. Both
+routes withhold scenario dollars and full-plant loss.
 
 ## Stable fail-closed behavior
 
-- below 17.4 or above 39.1 m/s: `AXIS_OUTSIDE_VALID_RANGE`;
-- wrong or missing selector: `SELECTOR_MISMATCH` or `SELECTOR_REQUIRED`;
-- wrong wind product: `SELECTOR_MISMATCH`;
-- extra module exposure fraction: `EXTRA_EXPOSURE_FRACTION_PROHIBITED`;
-- value input: `SCENARIO_LOSS_WITHHELD_NONCANONICAL_PROPOSAL`;
-- wrong pathway: `UNSUPPORTED_PATHWAY_ID`;
-- unsupported unit: explicit null plus unit-specific reason code; and
-- no neighboring, tracker, generic-unit, v0.1, or endpoint-clamp fallback.
+- missing/wrong artifact pin: `ARTIFACT_PIN_INCOMPLETE` or `ARTIFACT_PIN_MISMATCH`;
+- missing/wrong pathway: `PATHWAY_ID_REQUIRED` or `PATHWAY_ID_UNKNOWN`;
+- missing/unsupported architecture: `ARRAY_ARCHITECTURE_REQUIRED` or `ARRAY_ARCHITECTURE_UNSUPPORTED`;
+- mixed architecture axis: `ARCHITECTURE_AXIS_MISMATCH`;
+- fixed input absent/duplicated: `PRESSURE_INDEX_REQUIRED`;
+- missing wind/aerodynamic bridge: `TC_WIND_BRIDGE_REQUIRED` or `AERODYNAMIC_DEMAND_BRIDGE_REQUIRED`;
+- tracker state/qualification mismatch: `TRACKER_QUALIFICATION_BASIS_MISMATCH`;
+- compound pathway without reconciliation: `COMPOUND_RECONCILIATION_REQUIRED`;
+- value input: `SCENARIO_LOSS_WITHHELD_SYNTHETIC_T4_PROPOSAL`;
+- wrong unit for architecture: `FAILURE_UNIT_NOT_APPLICABLE_TO_ARCHITECTURE`; and
+- demand outside supported range: `AXIS_OUTSIDE_VALID_RANGE`.
 
-## Validation and promotion status
+## Capability boundary
 
-The docs-r2 validator reports `PASS` for the evidence revision, including source and claim addenda, schemas,
-capability parity, evaluator/KAT checks, workbook QA, unchanged runtime hashes, v0.1 regression, and canonical
-artifact-index exclusion.
+```yaml
+failure_unit_scalar_dr: conditional
+populated_emit_modes: [scalar_mean, state_ensemble]
+generic_curve_spread: nonprobabilistic_epistemic_envelope
+scenario_loss_given_value_basis: withheld
+full_plant_damage_ratio: withheld
+annual_and_tail_metrics: withheld
+GSU_response: withheld
+consumer_cutover: prohibited
+```
 
-The strict evidence-earned gate remains `NO_GO_RETAIN_V0_1`. Canonical runtime, scenario dollars,
-annual/tail metrics, and consumer cutover remain blocked. Internal validity does not override the promotion
-matrix.
+## Authoritative proposal files
 
-## Authoritative model-v1 files
+- [Overview](../proposed/README_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md)
+- [Curve artifact](../proposed/tropical_cyclone_wind_solar__model_v2_0__docs_r1__curve_artifact.json)
+- [Capability](../proposed/tropical_cyclone_wind_solar__model_v2_0__docs_r1__capability.json)
+- [Known-answer tests](../proposed/known_answer_tests_tropical_cyclone_wind_solar__model_v2_0__docs_r1.json)
+- [Metadata contract](../proposed/tropical_cyclone_wind_solar_damage_code_metadata_spec__model_v2_0__docs_r1.md)
+- [Derivation dossier](../proposed/tropical_cyclone_wind_solar_curve_derivation_dossier__model_v2_0__docs_r1.md)
+- [Promotion gates](../proposed/PROMOTION_GATE_MATRIX_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md)
+- [Request guide](../../../extra/guides/tropical_cyclone_wind_solar_v2_curve_request_guide.md)
 
-- [Docs-r2 overview](../proposed/README_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md)
-- [Docs-r2 deep-curation decision](../proposed/DEEP_CURATION_DECISION_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md)
-- [Docs-r2 validation report](../proposed/VALIDATION_REPORT_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md)
-- [Proposal overview](../proposed/README_tropical_cyclone_wind_solar__model_v1_0__docs_r1.md)
-- [Curve artifact](../proposed/tropical_cyclone_wind_solar__model_v1_0__docs_r1__curve_artifact.json)
-- [Capability](../proposed/tropical_cyclone_wind_solar__model_v1_0__docs_r1__capability.json)
-- [Known-answer tests](../proposed/known_answer_tests_tropical_cyclone_wind_solar__model_v1_0__docs_r1.json)
-- [Metadata contract](../proposed/tropical_cyclone_wind_solar_damage_code_metadata_spec__model_v1_0__docs_r1.md)
-- [Derivation dossier](../proposed/tropical_cyclone_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md)
-- [Validation report](../proposed/VALIDATION_REPORT_tropical_cyclone_wind_solar__model_v1_0__docs_r1.md)
-- [Promotion gates](../proposed/PROMOTION_GATE_MATRIX_tropical_cyclone_wind_solar__model_v1_0__docs_r1.md)
+## Preserved alternatives
 
-## Strict model-v0.1 alternative
-
-- [Fail-closed overview](../proposed/README_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md)
-- [Zero-curve artifact](../proposed/tropical_cyclone_wind_solar__model_v0_1__docs_r1__curve_artifact.json)
-- [Validation report](../proposed/VALIDATION_REPORT_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md)
+- [Model-v1 source-derived alternative](../proposed/README_tropical_cyclone_wind_solar__model_v1_0__docs_r2.md)
+- [Model-v0.1 strict no-curve alternative](../proposed/README_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md)

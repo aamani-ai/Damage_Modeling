@@ -191,6 +191,13 @@ noncanonical `flood_wind` model-v1.0 FEMA-Hazus screening proposal. Its presence
 table transferable across cells or authorize endpoint clamping, unit conversion, or consumer use without the
 cell evaluator and KAT contract.
 
+The noncanonical `tropical_cyclone_wind_solar` model-v2.0/docs-r1 candidate also uses the draft-v3 seam. It
+preserves one model-v1 Perry `piecewise_linear` compatibility record and adds four cell-local synthetic
+Tier-4 `ordered_damage_state_lognormal` records behind mutually exclusive fixed-tilt and qualified-tracker
+routes. Those records authorize neither parameter transfer from another hazard nor value/full-plant,
+scenario-dollar, annual, or tail outputs. Model v0.1 and model v1.0 remain preserved, and no artifact-index,
+`current/`, changelog, package-release, or consumer-cutover change follows from schema validation alone.
+
 ```yaml
 bundle_v3_status: proposed_draft
 emit_v2_status: proposed_draft

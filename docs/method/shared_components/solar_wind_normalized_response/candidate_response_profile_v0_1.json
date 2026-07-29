@@ -1,0 +1,332 @@
+{
+  "schema_version": "shared_solar_wind_normalized_response_candidate.v0.1",
+  "shared_response_id": "SHARED_SOLAR_WIND_NORMALIZED_RESPONSE_SYNTHETIC_T4_V0_1",
+  "shared_response_version": "candidate v0.1",
+  "status": "non_runtime_candidate_curve",
+  "reuse_level": "candidate_curve",
+  "comparison_only": true,
+  "canonical_runtime_artifact": false,
+  "runtime_approved": false,
+  "purpose": "Record a hazard-label-neutral, solar-specific numerical comparison fingerprint; it does not supply parameters to an output-bearing cell bundle.",
+  "origin": "The comparison values are derived from the SHA-pinned strong_wind_solar model-v2.0/docs-r1 Tier-4 assumptions, with the synthetic hard-zero threshold removed. The TC cell separately adopts byte-equal values as cell-local Tier-4 assumptions by owner decision.",
+  "origin_strong_wind_artifact_sha256": "32fe982548139cda846fb2e1da63568bcdcc689a87d6b21bd0110f23676c58fb",
+  "evidence_status": "All beta, state-cost, and median values are synthetic Tier-4 assumptions. No source calibrates them for tropical cyclones or convective wind.",
+  "compatibility_key": [
+    "ground-mounted architecture and failure-unit identity",
+    "same normalized delivered-demand semantics",
+    "same same-unit direct-replacement DR ordinate",
+    "same state taxonomy and denominator",
+    "cell-local bridge proves mechanism-specific input compatibility"
+  ],
+  "prohibited_uses": [
+    "loading this file as a runtime curve bundle",
+    "bypassing a cell artifact or cell-local capability",
+    "calling the envelope empirical, calibrated, conservative, or probabilistic",
+    "using asset label alone as a compatibility key",
+    "applying a TC, convective, stow, duration, rain, or debris multiplier without calibration",
+    "populating any output-bearing cell bundle from this candidate profile"
+  ],
+  "comparison_records": [
+    {
+      "profile_record_id": "SOLAR_WIND_PV_FIXED_TILT_MODULE_FIELD",
+      "solar_architecture_family": "fixed_tilt_ground_mount",
+      "failure_unit_id": "PV_FIXED_TILT_MODULE_FIELD",
+      "normalized_axis_id": "normalized_delivered_wind_demand_to_qualified_capacity_ratio",
+      "y_axis": "failure_unit_damage_ratio",
+      "curve_form": "ordered_damage_state_lognormal",
+      "parameters": {
+        "beta_ln": 0.3,
+        "damage_states": [
+          {
+            "state_id": "MODULE_DS0_NO_DIRECT_DAMAGE",
+            "cost_ratio": 0.0,
+            "affected_subsystems": [],
+            "description": "no direct physical module-field repair; synthetic coverage state cost, not an observed or calibrated hazard consequence",
+            "tier": "T4_placeholder_or_expert_judgment"
+          },
+          {
+            "state_id": "MODULE_DS1_LOCALIZED_REPLACEMENT",
+            "cost_ratio": 0.1,
+            "affected_subsystems": [
+              "modules",
+              "frames",
+              "clamps"
+            ],
+            "description": "localized module, frame, or retention replacement; synthetic coverage state cost, not an observed or calibrated hazard consequence",
+            "tier": "T4_placeholder_or_expert_judgment"
+          },
+          {
+            "state_id": "MODULE_DS2_FIELD_REPLACEMENT",
+            "cost_ratio": 1.0,
+            "affected_subsystems": [
+              "module field"
+            ],
+            "description": "replace the exposed module-field failure unit; synthetic coverage state cost, not an observed or calibrated hazard consequence",
+            "tier": "T4_placeholder_or_expert_judgment"
+          }
+        ],
+        "capacity_scenarios": [
+          {
+            "scenario_id": "lower_resistance",
+            "state_medians": [
+              0.65,
+              1.2
+            ],
+            "tier": "T4_placeholder_or_expert_judgment",
+            "interpretation": "unweighted synthetic normalized-demand response scenario; not fitted, not a percentile, and not a hazard-specific calibration"
+          },
+          {
+            "scenario_id": "central_screening",
+            "state_medians": [
+              0.85,
+              1.55
+            ],
+            "tier": "T4_placeholder_or_expert_judgment",
+            "interpretation": "unweighted synthetic normalized-demand response scenario; not fitted, not a percentile, and not a hazard-specific calibration"
+          },
+          {
+            "scenario_id": "upper_resistance",
+            "state_medians": [
+              1.05,
+              1.95
+            ],
+            "tier": "T4_placeholder_or_expert_judgment",
+            "interpretation": "unweighted synthetic normalized-demand response scenario; not fitted, not a percentile, and not a hazard-specific calibration"
+          }
+        ]
+      }
+    },
+    {
+      "profile_record_id": "SOLAR_WIND_PV_FIXED_TILT_SUPPORT_STRUCTURE",
+      "solar_architecture_family": "fixed_tilt_ground_mount",
+      "failure_unit_id": "PV_FIXED_TILT_SUPPORT_STRUCTURE",
+      "normalized_axis_id": "normalized_delivered_wind_demand_to_qualified_capacity_ratio",
+      "y_axis": "failure_unit_damage_ratio",
+      "curve_form": "ordered_damage_state_lognormal",
+      "parameters": {
+        "beta_ln": 0.3,
+        "damage_states": [
+          {
+            "state_id": "STRUCT_DS0_NO_DIRECT_DAMAGE",
+            "cost_ratio": 0.0,
+            "affected_subsystems": [],
+            "description": "no direct structural repair; synthetic coverage state cost, not an observed or calibrated hazard consequence",
+            "tier": "T4_placeholder_or_expert_judgment"
+          },
+          {
+            "state_id": "STRUCT_DS1_LOCALIZED_REPAIR",
+            "cost_ratio": 0.15,
+            "affected_subsystems": [
+              "rails",
+              "braces",
+              "connections"
+            ],
+            "description": "localized connection, rail, brace, or post repair; synthetic coverage state cost, not an observed or calibrated hazard consequence",
+            "tier": "T4_placeholder_or_expert_judgment"
+          },
+          {
+            "state_id": "STRUCT_DS2_FULL_UNIT_REPLACEMENT",
+            "cost_ratio": 1.0,
+            "affected_subsystems": [
+              "exposed fixed-tilt support structure"
+            ],
+            "description": "full replacement of the support/SBOS failure unit; module disposition is outside this unit and excluded pending a governed joint-state model; synthetic coverage state cost, not an observed or calibrated hazard consequence",
+            "tier": "T4_placeholder_or_expert_judgment"
+          },
+          {
+            "state_id": "STRUCT_DS3_TERMINAL_UNIT_FAILURE",
+            "cost_ratio": 1.0,
+            "affected_subsystems": [
+              "exposed fixed-tilt support structure"
+            ],
+            "description": "terminal destructive failure of the support/SBOS failure unit only; module disposition and any cascade are excluded pending a governed joint-state model; synthetic coverage state cost, not an observed or calibrated hazard consequence",
+            "tier": "T4_placeholder_or_expert_judgment"
+          }
+        ],
+        "capacity_scenarios": [
+          {
+            "scenario_id": "lower_resistance",
+            "state_medians": [
+              0.9,
+              1.2,
+              1.5
+            ],
+            "tier": "T4_placeholder_or_expert_judgment",
+            "interpretation": "unweighted synthetic normalized-demand response scenario; not fitted, not a percentile, and not a hazard-specific calibration"
+          },
+          {
+            "scenario_id": "central_screening",
+            "state_medians": [
+              1.15,
+              1.55,
+              1.9
+            ],
+            "tier": "T4_placeholder_or_expert_judgment",
+            "interpretation": "unweighted synthetic normalized-demand response scenario; not fitted, not a percentile, and not a hazard-specific calibration"
+          },
+          {
+            "scenario_id": "upper_resistance",
+            "state_medians": [
+              1.45,
+              1.95,
+              2.35
+            ],
+            "tier": "T4_placeholder_or_expert_judgment",
+            "interpretation": "unweighted synthetic normalized-demand response scenario; not fitted, not a percentile, and not a hazard-specific calibration"
+          }
+        ]
+      }
+    },
+    {
+      "profile_record_id": "SOLAR_WIND_PV_TRACKER_MODULE_FIELD",
+      "solar_architecture_family": "single_axis_tracker",
+      "failure_unit_id": "PV_TRACKER_MODULE_FIELD",
+      "normalized_axis_id": "normalized_delivered_wind_demand_to_qualified_capacity_ratio",
+      "y_axis": "failure_unit_damage_ratio",
+      "curve_form": "ordered_damage_state_lognormal",
+      "parameters": {
+        "beta_ln": 0.275,
+        "damage_states": [
+          {
+            "state_id": "MODULE_DS0_NO_DIRECT_DAMAGE",
+            "cost_ratio": 0.0,
+            "affected_subsystems": [],
+            "description": "no direct physical module-field repair; synthetic coverage state cost, not an observed or calibrated hazard consequence",
+            "tier": "T4_placeholder_or_expert_judgment"
+          },
+          {
+            "state_id": "MODULE_DS1_LOCALIZED_REPLACEMENT",
+            "cost_ratio": 0.1,
+            "affected_subsystems": [
+              "modules",
+              "frames",
+              "clamps"
+            ],
+            "description": "localized module, frame, or retention replacement; synthetic coverage state cost, not an observed or calibrated hazard consequence",
+            "tier": "T4_placeholder_or_expert_judgment"
+          },
+          {
+            "state_id": "MODULE_DS2_FIELD_REPLACEMENT",
+            "cost_ratio": 1.0,
+            "affected_subsystems": [
+              "module field"
+            ],
+            "description": "replace the exposed tracker module-field failure unit; synthetic coverage state cost, not an observed or calibrated hazard consequence",
+            "tier": "T4_placeholder_or_expert_judgment"
+          }
+        ],
+        "capacity_scenarios": [
+          {
+            "scenario_id": "lower_resistance",
+            "state_medians": [
+              0.8,
+              1.15
+            ],
+            "tier": "T4_placeholder_or_expert_judgment",
+            "interpretation": "unweighted synthetic normalized-demand response scenario; not fitted, not a percentile, and not a hazard-specific calibration"
+          },
+          {
+            "scenario_id": "central_screening",
+            "state_medians": [
+              0.95,
+              1.4
+            ],
+            "tier": "T4_placeholder_or_expert_judgment",
+            "interpretation": "unweighted synthetic normalized-demand response scenario; not fitted, not a percentile, and not a hazard-specific calibration"
+          },
+          {
+            "scenario_id": "upper_resistance",
+            "state_medians": [
+              1.1,
+              1.7
+            ],
+            "tier": "T4_placeholder_or_expert_judgment",
+            "interpretation": "unweighted synthetic normalized-demand response scenario; not fitted, not a percentile, and not a hazard-specific calibration"
+          }
+        ]
+      }
+    },
+    {
+      "profile_record_id": "SOLAR_WIND_PV_TRACKER_SBOS_ASSEMBLY",
+      "solar_architecture_family": "single_axis_tracker",
+      "failure_unit_id": "PV_TRACKER_SBOS_ASSEMBLY",
+      "normalized_axis_id": "normalized_delivered_wind_demand_to_qualified_capacity_ratio",
+      "y_axis": "failure_unit_damage_ratio",
+      "curve_form": "ordered_damage_state_lognormal",
+      "parameters": {
+        "beta_ln": 0.275,
+        "damage_states": [
+          {
+            "state_id": "STRUCT_DS0_NO_DIRECT_DAMAGE",
+            "cost_ratio": 0.0,
+            "affected_subsystems": [],
+            "description": "no direct tracker structural repair; synthetic coverage state cost, not an observed or calibrated hazard consequence",
+            "tier": "T4_placeholder_or_expert_judgment"
+          },
+          {
+            "state_id": "STRUCT_DS1_LOCALIZED_REPAIR",
+            "cost_ratio": 0.15,
+            "affected_subsystems": [
+              "torque tube",
+              "bearings",
+              "drive",
+              "connections"
+            ],
+            "description": "localized tracker structural or drive-row repair; synthetic coverage state cost, not an observed or calibrated hazard consequence",
+            "tier": "T4_placeholder_or_expert_judgment"
+          },
+          {
+            "state_id": "STRUCT_DS2_FULL_UNIT_REPLACEMENT",
+            "cost_ratio": 1.0,
+            "affected_subsystems": [
+              "exposed tracker structural-BOS assembly"
+            ],
+            "description": "full replacement of the support/SBOS failure unit; module disposition is outside this unit and excluded pending a governed joint-state model; synthetic coverage state cost, not an observed or calibrated hazard consequence",
+            "tier": "T4_placeholder_or_expert_judgment"
+          },
+          {
+            "state_id": "STRUCT_DS3_TERMINAL_UNIT_FAILURE",
+            "cost_ratio": 1.0,
+            "affected_subsystems": [
+              "exposed tracker structural-BOS assembly"
+            ],
+            "description": "terminal destructive failure of the support/SBOS failure unit only; module disposition and any cascade are excluded pending a governed joint-state model; synthetic coverage state cost, not an observed or calibrated hazard consequence",
+            "tier": "T4_placeholder_or_expert_judgment"
+          }
+        ],
+        "capacity_scenarios": [
+          {
+            "scenario_id": "lower_resistance",
+            "state_medians": [
+              0.95,
+              1.15,
+              1.35
+            ],
+            "tier": "T4_placeholder_or_expert_judgment",
+            "interpretation": "unweighted synthetic normalized-demand response scenario; not fitted, not a percentile, and not a hazard-specific calibration"
+          },
+          {
+            "scenario_id": "central_screening",
+            "state_medians": [
+              1.15,
+              1.4,
+              1.65
+            ],
+            "tier": "T4_placeholder_or_expert_judgment",
+            "interpretation": "unweighted synthetic normalized-demand response scenario; not fitted, not a percentile, and not a hazard-specific calibration"
+          },
+          {
+            "scenario_id": "upper_resistance",
+            "state_medians": [
+              1.35,
+              1.7,
+              2.0
+            ],
+            "tier": "T4_placeholder_or_expert_judgment",
+            "interpretation": "unweighted synthetic normalized-demand response scenario; not fitted, not a percentile, and not a hazard-specific calibration"
+          }
+        ]
+      }
+    }
+  ]
+}

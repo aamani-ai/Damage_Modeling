@@ -10,10 +10,14 @@
 | TCSS-A06 | New-build benchmarks are value anatomy, not reinstatement values | Use for ledger structure only | Site event-date replacement-value schedule arrives |
 | TCSS-A07 | GSU/substation identity can reuse common anatomy but response/release remains cell-local | Keep separate withheld subject | Exact local wind, ownership, disposition, cost/value evidence arrives |
 | TCSS-A08 | Strong-wind work supplies structure but no TC numerical transfer | Reuse controls and design patterns only | Qualified cross-hazard transfer study passes review |
+| TCSS-A09 | The owner-authorized v2 fixed/tracker parameters are cell-local Tier-4 assumptions | Allow proposal research and interface testing only; do not call them calibrated or conservative | Architecture/state-resolved TC demand, disposition, cost/value, and independent validation evidence supports replacement or recalibration |
+| TCSS-A10 | Byte equality to the strong-wind-derived comparison profile is an audit fingerprint | Store/check the profile as a non-runtime comparison; never load it into the TC bundle | A separately governed shared-runtime substrate is approved and each cell passes transfer gates |
+| TCSS-A11 | Proposal-level validator success is not promotion evidence | Keep canonical release and Hazard cutover blocked | All evidence, consumer, review, and maintainer promotion gates pass explicitly |
 
 ## Watchlist
 
 - Do not let `model v1.0` imply canonical or generic hurricane-solar coverage.
+- Do not let `model v2.0` imply evidence-earned, canonical, full-plant, or consumer-ready coverage.
 - Do not let study-level provider recovery be misread as an approved Hazard-axis bridge.
 - Do not interpolate across the 39.1-48.2 m/s evidence gap or clamp above range.
 - Do not convert panel, module, or post count fractions into economic DR.
@@ -21,5 +25,6 @@
   financing, or hardening premium as replacement value.
 - Do not add module, rack, array, GSU, civil, and support loss without terminal-state and value precedence.
 - Do not describe an OEM survival case as a generic zero-damage curve.
-- Do not start an implementation bump before the evidence package and change classification are approved.
-
+- Do not use the comparison profile as TC evidence or a runtime shared dependency.
+- Do not create another implementation bump or promote the existing v2 before its evidence package and
+  change classification are approved.

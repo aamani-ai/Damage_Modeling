@@ -1,154 +1,105 @@
-# Tropical-cyclone wind × solar — how the model-v1 screening proposal is built
+# Tropical-cyclone wind × solar — how proposed model v2 is built
 
-## The decision before the math
+## 1. Classify the change honestly
 
-The ordinary evidence-earned decision is `NO_GO_RETAIN_V0_1`. Proposed model v1.0 exists because portfolio
-coverage was prioritized before deeper calibration. The exception is deliberately narrow, noncanonical, and
-source specific. It does not relax the promotion gate.
+Model v2 changes supported architectures, x-axis contracts, curve records, emitted state information, and
+consumer behavior relative to v1. It is therefore a semantic model bump, not a documentation revision.
+Because public evidence did not calibrate generic TC response, every new generic numerical parameter is
+Tier 4 and the proposal is blocked from canonical promotion.
 
-```text
-strict evidence gate  -> model v0.1: no runtime curve
-coverage-first choice -> model v1.0: one quarantined screening atom
-canonical release     -> blocked
-```
+## 2. Preserve the source-derived compatibility route
 
-## 1. Freeze the pathway and source atom
+The Perry model-v1 record is copied exactly, including its 13 knots, 17.4–39.1 m/s source-native range, six
+fixed acknowledgements, composite-hurricane limitation, and value/scenario-loss withholding. It remains a
+source-cohort visible-module material proxy and is not generalized to utility-scale fixed tilt.
 
-The pathway is exactly `tropical_cyclone_wind`. The only numeric unit is:
+## 3. Split the generic architectures
 
-```text
-PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT
-```
+The generic routes are:
 
-It represents one complete Perry-compatible ground-mounted, explicitly nontracking site module population.
-It is mutually exclusive with generic `PV_FIXED_TILT_MODULE_FIELD` and does not cover racks, trackers,
-foundations, electrical equipment, GSU/substation, SCADA, civil assets, support, or hidden module damage.
+- `fixed_tilt_ground_mount_tc_synthetic_t4_v1` for module field and support structure; and
+- `single_axis_tracker_tc_qualified_synthetic_t4_v1` for tracker module field and SBOS assembly.
 
-The source endpoint is associated with a hurricane occurrence but does not isolate wind pressure from
-attachment cascade, debris, or other unobserved causal contributors. The exact
-`SOURCE_COMPOSITE_HURRICANE_MODULE_LOSS` acknowledgement is therefore mandatory.
+They are mutually exclusive. No default, nearest archetype, or cross-architecture fallback exists.
 
-## 2. Pin and filter the source
+## 4. Build qualified normalized-demand axes
 
-The Perry manual CSV is hash pinned. Its governed filter is:
+Fixed tilt prefers a same-zone event/design net-pressure ratio. A squared array-height gust ratio is allowed
+only as a flagged screening proxy with named TC wind-field, direction-history, duration-cycling, and
+aerodynamic bridges.
 
-```text
-mounting_type == "ground"
-tracking == "False"
-finite max_wind_gust_(m/s)
-finite pct_modules_damaged (%)
-```
+Tracker demand is `Vnormal/Ucrit`. The event and qualification must exactly match system, configuration,
+layout, attained angle/position, zone, drive/lock state, reference, averaging period, direction basis, and
+duration basis. A command-only stow state rejects.
 
-The released file contains 47 rows, including 37 ground rows and 35 ground/nontracking rows. Thirty-four
-rows form the retained fit. The source cohort is named mixed scale because the released CSV has no
-`site_type` field and some system-power values are missing; no utility-scale transfer is claimed.
+The normalized research domain is `[0, 2]`. Values outside it withhold. No evidence-anchor or
+high-extrapolation threshold is asserted inside that synthetic domain. The tracker-only `0.75 Ucrit`
+threshold is an action flag, not a damage threshold.
 
-## 3. Preserve the source-native axis
+## 5. Keep probability and DR as different objects
 
-The x-axis is exactly `PERRY_DATASET_REPORTED_EVENT_MAX_GUST_MPS`, supplied as
-`perry_event_max_gust_mps`. The retained numeric range is 17.4–39.1 m/s.
-
-Perry identifies Visual Crossing API at study level. The released manual rows do not preserve the
-contributing station/product, query settings, height/exposure, exact gust duration, retrieval version,
-time-of-maximum, or uncertainty. NHC sustained wind, Hazard or ASCE 3-second gust, Saffir-Simpson category,
-array-height wind, a new Visual Crossing query, and other products are rejected rather than converted into
-the source field. There is no source-to-Hazard bridge in the proposal.
-
-## 4. Convert the observed endpoint without hiding assumptions
-
-For each source record:
+Each generic failure-unit record has ordered damage states with explicit same-unit state-cost ratios. For
+each unweighted resistance scenario:
 
 ```text
-visible module fraction = pct_modules_damaged / 100
+state exceedance Q_j(x) = Phi(ln(x/theta_j) / beta_ln)
+exact-state probabilities = ordered differences of Q_j
+expected same-unit DR = sum(exact-state probability × state-cost ratio)
 ```
 
-Two explicit Tier-4 assumptions create the material replacement proxy:
+The validator checks probability closure, nonnegative exact-state probabilities, `[0,1]` DR bounds,
+monotonicity, scenario ordering, and exact zero at zero demand on a dense grid. There is no positive
+hard-zero threshold and no intercept subtraction.
 
-```yaml
-module_value_distribution_assumption_id: UNIFORM_MODULE_HARDWARE_VALUE
-visible_damage_disposition_assumption_id: FULL_REPLACEMENT_IF_VISIBLE_OR_MISSING
-```
+## 6. Adopt cell-local values and audit their shared fingerprint
 
-The first maps visible area/count-like fraction to module-hardware value fraction. The second maps visible or
-missing condition to full material replacement. Neither is observed repair cost. Labor, removal/reinstall,
-freight, inspection, racking, electrical work, support, and hidden damage are outside the ordinate.
+The owner adopts the four records as cell-local Tier-4 assumptions. Their numerical payload is then compared
+with
+[`SHARED_SOLAR_WIND_NORMALIZED_RESPONSE_SYNTHETIC_T4_V0_1`](../../../method/shared_components/solar_wind_normalized_response/README.md).
+This is a non-runtime, audit-only method substrate derived from the existing strong-wind synthetic scenario
+envelope. It does not populate the bundle or act as a runtime dependency. Every median, dispersion, and
+state-cost ratio remains a cell-local Tier-4 decision; no strong-wind observation is cited as hurricane
+calibration.
 
-## 5. Fit only the retained source domain
+## 7. Preserve incomplete coverage as null
 
-The 34 retained rows are fitted with equal-record-weighted PAVA. At least one physical site recurs across
-storms, so the rows are not 34 unique or independent sites. The monotone fit has eight pooled blocks,
-serialized at 13 block edges and connected by ordinary linear interpolation. It is not module weighted,
-hurricane weighted, a source-published method, or a validated predictive relationship.
+Foundation, power conversion/collection, GSU/substation, SCADA, and civil infrastructure remain withheld.
+Replacement support is allocation-only and has no intrinsic fragility. The GSU retains separate yard/point
+exposure and value. Missing units cannot be assigned zero or absorbed into an implicit whole-plant cap.
 
-One `(48.2 m/s, 0.4142383192)` source observation is retained for audit but excluded from runtime fitting.
-There are no selected observations between 39.1 and 48.2 m/s. The proposal withholds beyond 39.1 rather than
-letting one observation define a 9.1 m/s severe-tail ramp. That decision also biases the retained severe
-response downward, so the curve is not hurricane-tail coverage.
+## 8. Keep value and annual metrics outside the proposal
 
-## 6. Keep clustering and disagreement visible
+The curves emit conditional same-unit DR scenarios and state probabilities. They reject value payloads and
+do not calculate scenario dollars, full-plant DR, EAL, PML, VaR, TVaR, BI, downtime, or portfolio results.
+Those outputs require calibrated same-unit consequence/value, complete or explicitly partial coverage, and
+a promoted consumer contract.
 
-The 34 fit rows come from six hurricanes; Florence contributes 20. Leaving Maria out reduces the highest
-fitted block by about 5.41 times. The proposal therefore carries `EVENT_CLUSTERED_SAMPLE` and no
-curve-intrinsic uncertainty distribution.
+## 9. Fail closed at every routing seam
 
-Perry and Ceferino contain overlapping Caribbean sites/events but use different endpoint methods and show
-materially different values. They are correlated cross-method evidence, not independent validation, and are
-not pooled. The unresolved disagreement is a promotion blocker.
+The reference evaluator requires event and event-family identity, exact pathway, exact artifact pin, and
+either an exact numerical architecture route or a direct common-withheld-unit route. It rejects
+wrong/missing pins, unbridged ordinary gust, mixed axes, unknown tracker state, qualification mismatch,
+unknown or cross-architecture units, neighboring pathways, compound-pathway ambiguity, value input, and
+out-of-range demand. A known common-withheld unit such as GSU is accepted directly and emits null without an
+array architecture or axis.
 
-## 7. Require exact selectors and fail closed
+## 10. Separate validation from promotion
 
-Numeric research evaluation requires exact pathway, source unit, source-axis product, and all six fixed
-selector/assumption acknowledgements. No selector has a default. The evaluator:
+The package includes a v3 artifact, v3 capability declaration, v2 emit fixtures, workbook, source/claim/
+parameter/value registers, known-answer and rejection tests, pressure test, promotion matrix, Hazard
+handoff, builder, evaluator, and validator. These prove internal consistency and reproducibility only.
 
-- withholds below 17.4 or above 39.1 m/s;
-- rejects NHC/generic wind-product aliases;
-- rejects tracker and generic fixed-tilt fallback;
-- rejects missing economic-bridge acknowledgements;
-- rejects a second array exposure fraction;
-- rejects value input and scenario-loss calculation; and
-- returns explicit nulls for every unsupported unit.
-
-Every numeric result retains the historical machine flag for equal-site-not-module weighting, but docs r2
-narrows that interpretation to equal-record weighting with repeated physical sites. It also remains labeled
-noncanonical, source-cohort mixed scale, composite-mechanism, visible-only, PAVA-derived, event clustered,
-sparse-tail withheld, partial coverage, predictively unvalidated, without intrinsic spread, and without
-extrapolation.
-
-## 8. Keep value outside the active proposal
-
-The curve can emit only a conditional scalar proxy DR for its exact source unit. Scenario dollars are
-withheld. A future promoted value binding would need exact site-specific module-hardware material value,
-currency/vintage, ownership, and source-population proof.
-
-The NLR module benchmark is anatomy-only. It cannot substitute for site value or be expanded to installed
-module cost, array value, physical value, insured value, or full TIV. The observed source response already
-contains the module-field affected fraction, so another array exposure fraction is prohibited.
-
-## 9. Preserve all other units as withheld
-
-Generic fixed-tilt modules, fixed support structure, tracker modules, tracker SBOS, foundation, power
-conversion and collection, GSU/substation, SCADA, civil infrastructure, and replacement support remain
-withheld rather than zero. Support has no independent fragility and can be allocated only once after a
-qualified repair disposition.
-
-Full-array and full-plant DR, scenario loss, EAL, PML, VaR, TVaR, and portfolio metrics are unavailable.
-
-## 10. Separate validation from authorization
-
-The v1 proposal passes internal source, fit, schema, capability, evaluator, KAT, workbook, link, and canonical
-regression checks. Those checks establish reproducibility and fail-closed behavior only.
-
-The artifact remains noncanonical, absent from the artifact index and `current/`, excluded from the package
-release, and unpinned by Hazard. Independent review, evidence-gate closure, a named consumer migration,
-shadow/rollback testing, and an explicit promotion decision are still required.
+Canonical promotion still requires calibrated or formally accepted parameters, validated portable TC
+demand bridges, same-unit economics, complete/explicit partial coverage, independent engineering/economic
+review, Hazard dual-read and rollback tests, and a deliberate atomic registry/index/changelog update.
 
 ## Binding package
 
-- [Model-v1 seven-step audit](../proposed/SEVEN_STEP_AUDIT_tropical_cyclone_wind_solar__model_v1_0__docs_r1.md)
-- [Model-v1 derivation dossier](../proposed/tropical_cyclone_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md)
-- [Model-v1 metadata contract](../proposed/tropical_cyclone_wind_solar_damage_code_metadata_spec__model_v1_0__docs_r1.md)
-- [Model-v1 pressure test](../proposed/PRESSURE_TEST_tropical_cyclone_wind_solar__model_v1_0__docs_r1.md)
-- [Model-v1 promotion gates](../proposed/PROMOTION_GATE_MATRIX_tropical_cyclone_wind_solar__model_v1_0__docs_r1.md)
-- [Model-v1 validation](../proposed/VALIDATION_REPORT_tropical_cyclone_wind_solar__model_v1_0__docs_r1.md)
-- [Strict model-v0.1 alternative](../proposed/README_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md)
+- [Model-v2 overview](../proposed/README_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md)
+- [Derivation dossier](../proposed/tropical_cyclone_wind_solar_curve_derivation_dossier__model_v2_0__docs_r1.md)
+- [Metadata contract](../proposed/tropical_cyclone_wind_solar_damage_code_metadata_spec__model_v2_0__docs_r1.md)
+- [Seven-step audit](../proposed/SEVEN_STEP_AUDIT_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md)
+- [Pressure test](../proposed/PRESSURE_TEST_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md)
+- [Promotion gates](../proposed/PROMOTION_GATE_MATRIX_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md)
+- [Request guide](../../../extra/guides/tropical_cyclone_wind_solar_v2_curve_request_guide.md)
 - [Exact model reference](MODEL_REFERENCE.md)

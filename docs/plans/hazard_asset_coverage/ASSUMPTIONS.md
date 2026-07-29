@@ -10,11 +10,16 @@
 | COV-A06 | GSU/substation is currently a facility subasset, not a top-level portfolio asset | Split as a failure unit within each cell; reuse only common substrate | Portfolio adopts component-first release units |
 | COV-A07 | Private claims/OEM/site evidence is not presently available | Preserve public-evidence boundary and withhold curves | Suitable data are supplied with reuse rights and lineage |
 | COV-A08 | Coverage and numerical maturity must be reported as two separate counts | Show structural and runtime counts together | Governance standard changes |
+| COV-A09 | The owner-authorized TC-solar v2 generic records are cell-local Tier-4 assumptions, not evidence-earned calibration | Permit bounded proposal research while keeping promotion gates blocked | TC architecture/state-resolved demand, disposition, cost, value, and independent validation evidence passes review |
+| COV-A10 | Equality to the strong-wind-derived normalized-response profile is an audit fingerprint only | No parameter loading, evidence transfer, runtime dependency, or shared release authority | A separately governed shared-runtime substrate is approved under the shared-component standard |
 
 ## Watchlist
 
 - Do not let “10/10 structurally covered” be read as “10/10 calibrated”; canonical runtime coverage is 5/10.
+- Do not count the TC-solar model-v2 candidate as a sixth canonical runtime cell or as a queue completion.
 - Do not create placeholder parameters merely to move a row from `Later` to `Planned`.
+- Do not cite strong-wind numerical identity as tropical-cyclone evidence; the four generic records remain
+  cell-local synthetic-T4 assumptions.
 - Do not allow the TC bridge to become a universal solar/wind response model; it only delivers hazard state.
 - Do not allocate one whole-plant exposure fraction to arrays, turbines, collection, and shared substations.
 - Do not sum surge/flood, wind, debris, rain ingress, and spawned-tornado losses without one event-family

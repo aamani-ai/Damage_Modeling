@@ -12,6 +12,12 @@ On 2026-07-20, all five cells gained the complete cell-owned basics set. Human d
 hail r8, flood r5, wind/tornado r5, strong-wind solar r4, and wildfire r4. No runtime artifact or contract was
 published for these docs-only changes; consumers remain pinned to the artifact-index versions below.
 
+On 2026-07-29, `tropical_cyclone_wind_solar` gained a noncanonical model-v2.0/docs-r1 coverage-first
+candidate. It carries five records: one preserved Perry model-v1 compatibility record and four cell-local
+synthetic Tier-4 fixed/tracker records. This research package does not publish value/full-plant,
+scenario-dollar, annual, or tail outputs. Model v0.1 and model v1.0 remain preserved; `current/`, the artifact
+index, the cell changelog, package releases, and Hazard runtime remain unchanged.
+
 > Some source dossiers and workbooks still carry earlier labels (`v1_3`, `v1_0`, or `docs_r1`) for continuity.
 > The artifact index is the authoritative repository-current runtime pointer. Package v2.5 remains the portable
 > baseline and must not be used by itself as a cell-runtime pin.
@@ -39,7 +45,7 @@ published for these docs-only changes; consumers remain pinned to the artifact-i
 | `strong_wind_solar` | model v2.0 | docs r1 | Convective pathway/architecture-aware screening proposal; T4 numerical envelopes and promotion gates remain blocked | None. Model v1.0/docs r3 remains canonical and is still the artifact-index pin. |
 | `tropical_cyclone_wind_wind` | model v1.0 | docs r1 | Pressure-tested source-derived screening release candidate; three exact Jaimes archetype curves cover only the quarantined source-native turbine/tower atom; denominator, modern-fleet, remaining-unit, and consumer gates remain blocked | None. No canonical cell, artifact-index entry, `current/` package, package release, or consumer cutover exists. |
 | `flood_wind` | model v1.0 | docs r1 | Pressure-tested legacy FEMA whole-substation screening proposal; one source-native assembly curve is conditional, while every component/wind unit, value binding, and promotion gate remains blocked | None. No canonical cell, artifact-index entry, `current/` package, package release, or consumer cutover exists. |
-| `tropical_cyclone_wind_solar` | model v1.0 | human docs r2; runtime proposal docs r1 | Deep-curated coverage-first screening exception; one unchanged Perry source-cohort visible-module-hardware curve is conditional on six exact acknowledgements, while portable axis, generic fixed tilt, trackers, every other unit, value binding, severe tail, and promotion gates remain blocked | None. The strict evidence gate still retains model v0.1 for execution; docs-r1 machine files are unchanged and no canonical cell, artifact-index entry, `current/` package, package release, or consumer cutover exists. |
+| `tropical_cyclone_wind_solar` | model v2.0 | docs r1 | Coverage-first experimental synthetic-T4 candidate; five records comprise one preserved Perry source-compatibility record plus four cell-local fixed/tracker ordered-state records. Remaining units and all value/full-plant, scenario-dollar, annual, and tail outputs are withheld. | None. Model v0.1 and model v1.0 remain preserved; no canonical cell, artifact-index entry, `current/` package, changelog event, package release, or consumer cutover exists. |
 | `hail_wind` | model v0.1 | docs r2 | Independently deep-curated, zero-curve research scaffold; seven-source and nine-claim evidence addenda strengthen mechanism, field-observation, inspection, migration, and acquisition controls, but the strict model-v1 gate remains NO-GO | None. The docs-r1 machine-shaped scaffold is unchanged; no canonical cell, artifact-index entry, package release, schema change, or consumer cutover exists. |
 | `wildfire_wind` | model v0.1 | docs r1 | Pressure-tested, zero-curve research scaffold; local thermal/firebrand demand, destructive-residue disposition, exogenous attribution, site BOM/value/exposure, and dependency-safe state/cost gates remain blocked | None. No canonical cell, artifact-index entry, package release, schema change, or consumer cutover exists. |
 
@@ -66,18 +72,17 @@ one quarantined, mutually exclusive screening atom; component-local disposition/
 and current Hazus 7.0 disables electric-power loss results. Site exposure, ownership, value, capability, and
 release remain cell responsibilities. See [`flood_wind/`](flood_wind/README.md).
 
-The tropical-cyclone wind × solar proposal reuses solar anatomy/value and TC event/pathway semantics without
-reusing neighboring numerical response. Model v1.0 is a deliberate, noncanonical coverage-first exception:
-it fits one equal-record-weighted monotone descriptive curve to Perry's ground/nontracking visible-module fraction and
-quarantines it to `PV_PERRY_GROUND_FIXED_VISIBLE_MODULE_HARDWARE_SOURCE_UNIT`. Its mixed-scale population,
-dataset-native wind field, two Tier-4 economic bridge assumptions, event clustering, endpoint conflict, and
-sparse severe tail prevent an evidence-earned or canonical release. Generic fixed tilt, trackers, rack,
-foundation, electrical/GSU/control, civil, support, dollar loss, and annual/tail metrics remain withheld. The
-independently valid model-v0.1 package remains the strict fail-closed alternative. Docs r2 corrects the
-study-level provider and equal-record wording, records that no predictive relationship is validated even for
-unseen source-compatible sites, adds severe/tracker/failure-unit/economic evidence and a v2 acquisition
-design, but changes no docs-r1 runtime file or output. See
-[`tropical_cyclone_wind_solar/`](tropical_cyclone_wind_solar/README.md).
+The tropical-cyclone wind × solar lead proposal reuses solar anatomy and TC event/pathway semantics while
+keeping every parameter decision cell-owned. Model v2.0/docs r1 has three mutually exclusive routes and five
+records: the unchanged Perry model-v1 source-cohort visible-module proxy, two fixed-tilt synthetic Tier-4
+ordered-state records, and two exact-system-qualified tracker synthetic Tier-4 ordered-state records. A
+non-runtime shared profile is used only as a post-adoption audit fingerprint; it does not populate the cell
+or transfer strong-wind evidence. Generic outputs are same-failure-unit DR scenarios only. Foundation,
+electrical/GSU/control, civil, replacement support, value/full-plant loss, scenario dollars, and annual/tail
+metrics remain withheld. Model v0.1 remains the strict fail-closed alternative and model v1.0 remains the
+narrow source-derived alternative. No canonical promotion surface changed. See
+[`tropical_cyclone_wind_solar/`](tropical_cyclone_wind_solar/README.md) and the
+[`model-v2 proposal package`](tropical_cyclone_wind_solar/proposed/README_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md).
 
 The hail × wind proposal separates observed/radar hail descriptors from the future blade-contact demand
 bridge and keeps blades, exposed nacelle subjects, towers, turbine-pad electrical, collection, GSU, controls,

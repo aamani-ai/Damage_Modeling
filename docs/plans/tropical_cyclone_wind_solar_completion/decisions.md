@@ -62,3 +62,37 @@ model v2.0.
 
 **Reason:** accepted inputs, selectors, target population, and output applicability would change materially.
 A compatible new exact-source atom could be minor, but none is currently earned.
+
+**Later scope note:** this remains the correct semantic classification and evidence conclusion. TCSS-D09
+records the owner's subsequent authority to build an explicitly synthetic model-v2 candidate before the
+promotion evidence arrives; it does not recast that candidate as evidence-earned.
+
+## TCSS-D09 - Build v2 as a noncanonical synthetic-T4 exception
+
+**Decision:** create model v2.0/docs r1 with five records: one unchanged Perry source-compatibility record
+and four cell-local synthetic-T4 records for fixed-tilt module/support and qualified-tracker
+module/structural-BOS failure units.
+
+**Reason:** after reviewing the docs-r2 NO-GO, the owner explicitly chose bounded coverage and interface
+testing now. The generic parameters are therefore governed assumptions, not TC calibration. Model v0.1 and
+model v1.0 stay preserved as separate strict and source-specific choices, and the normal one-cell-at-a-time
+queue still proceeds to `wildfire_wind`.
+
+## TCSS-D10 - Compare strong-wind numerical identity without transferring authority
+
+**Decision:** record byte equality between the TC cell-local synthetic parameters and the
+strong-wind-derived solar normalized-response candidate only as a post-adoption audit fingerprint.
+
+**Reason:** numerical identity makes the synthetic assumption visible and avoids an invented TC adjustment;
+it does not supply tropical-cyclone evidence. The shared comparison candidate never populates the TC bundle,
+is not a runtime dependency, and owns no TC axis, selectors, value, capability, or release decision.
+
+## TCSS-D11 - Keep proposal validation separate from promotion
+
+**Decision:** permit the v2 package to pass internal machine, contract, and adversarial proposal checks while
+leaving portable-axis, tracker validation, calibration, severe-tail, economics, remaining-unit, compound,
+consumer, and maintainer promotion gates blocked.
+
+**Reason:** validated implementation means the synthetic research contract behaves as declared; it does not
+make the underlying assumptions empirical. Do not create `current/`, update the artifact index or changelog,
+ship a package, or authorize Hazard cutover without a later explicit promotion action.

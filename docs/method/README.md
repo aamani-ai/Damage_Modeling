@@ -11,6 +11,10 @@ contains reader-facing valuation support.
 - [`shared_components/README.md`](shared_components/README.md)
 - [`shared_components/flood_electrical/`](shared_components/flood_electrical/README.md) — non-runtime
   equipment/mechanism vocabulary and binding rules shared by flood-solar and proposed flood-wind work.
+- [`shared_components/solar_wind_normalized_response/`](shared_components/solar_wind_normalized_response/README.md)
+  — comparison-only, solar-specific synthetic normalized-response fingerprint. It is not runtime approved and
+  cannot populate a cell bundle; the tropical-cyclone wind × solar v2 candidate adopts its parameters
+  independently as cell-local Tier-4 decisions and checks equality only for audit.
 - Governing standard:
   [`20_shared_component_substrate_standard.md`](standards/20_shared_component_substrate_standard.md).
 

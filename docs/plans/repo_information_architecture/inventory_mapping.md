@@ -12,6 +12,7 @@ package contents into role-based folders.
 | `docs/method/standards/` | Method standards | Canonical docs | General standards from the v2.5 package. |
 | `docs/method/templates/` | Method templates | Canonical templates | Cell README, three-file basics set, dossier, metadata, review, evidence memo, and workbook manifest templates. |
 | `docs/method/value_basis/` | Value-basis support | Canonical method support | Supporting evaluation guide and solar/wind value-basis workbook. |
+| `docs/method/shared_components/` | Shared-component governance | Mixed; each substrate declares its authority | Includes audit-only candidates as well as any separately approved substrate. The solar-wind normalized-response candidate is comparison-only, not runtime authority. |
 | `docs/contracts/standards/` | Hazard-facing standards | Canonical contracts | Damage-code interface, versioning, machine-readable artifact, and capability/cap-binding standards. |
 | `docs/contracts/schemas/` | JSON schemas | Canonical contracts | Schemas are moved but runtime publishing/storage remains undecided. |
 | `docs/contracts/hazard_handoff/` | Hazard handoff | Canonical contracts | M2/M3 handoff notes. |
@@ -22,6 +23,7 @@ package contents into role-based folders.
 | `docs/cells/<cell>/previews/` | Cell preview assets | Supporting visuals | Kept beside the relevant cell. |
 | `docs/cells/VERSION_REGISTRY.md` | Cell version registry | Canonical current registry | Package version, cell model version, and docs revision tracking. |
 | `docs/evidence/ingestion/` | Cross-cell evidence machinery | Canonical evidence protocol/register | Standard-16 co-curation README, evidence register, and update memos. |
+| `docs/plans/` | Build-facing plan records | Planning only | Records execution order, decisions, assumptions, and non-runtime shared-candidate governance; never supplies curve parameters to a bundle. |
 | `scripts/reference_helpers/` | Helper scripts | Reference only | Not a stable package API and not `src/`. |
 | `docs/source_drops/raw_zips/` | Raw source drops | Original provenance | Untouched v2.5 ZIP lives here. |
 | `docs/source_drops/extracted/` | Local extracted source mirrors | Staging/source mirror only | Contents are gitignored by default; use for inspection/comparison, not canonical navigation. |
@@ -54,11 +56,13 @@ gates without entering the canonical artifact index.
 |---|---|---|
 | `tropical_cyclone_wind_wind` | model v1.0 / docs r1 | Three exact source-native screening curves for one quarantined atom; noncanonical, partial coverage, no scenario loss, not in artifact index |
 | `flood_wind` | model v1.0 / docs r1 | One legacy source-native whole-substation screening curve; noncanonical partial coverage; no value binding; not in artifact index |
-| `tropical_cyclone_wind_solar` | model v1.0 / human docs r2 / runtime proposal docs r1 | One unchanged Perry source-cohort visible-module screening curve under a deliberate coverage-first exception; strict execution remains model v0.1/`NO_RUNTIME_CURVE`; portable axis/tracker/tail/economic promotion blocked; not in artifact index |
+| `tropical_cyclone_wind_solar` | model v2.0 / docs r1 candidate; model v0.1 and v1.0 preserved | Five proposal records: one unchanged Perry source-compatibility record plus four cell-local synthetic-T4 fixed/tracker records; no value/full-plant/scenario/annual/tail output; promotion evidence remains blocked; no `current/`, index, changelog, package, or cutover action |
 | `hail_wind` | model v0.1 / human docs r2 / runtime scaffold docs r1 | Independently deep-curated strict NO-GO; `NO_RUNTIME_CURVE`; not in artifact index |
 | `wildfire_wind` | model v0.1 / docs r1 | `NO_RUNTIME_CURVE`; not in artifact index |
 
 ## Still Deferred
 
 Do not create `src/`, move runtime JSON into `data/`, decide cloud bucket paths, or change Hazard loading
-contracts until the runtime publishing plan is written.
+contracts until the runtime publishing plan is written. The comparison-only
+`docs/method/shared_components/solar_wind_normalized_response/` candidate does not resolve that publication
+decision and is not a runtime dependency for the TC-solar v2 proposal.

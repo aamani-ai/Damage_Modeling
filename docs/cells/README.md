@@ -37,15 +37,15 @@ assembly atom. All component and wind-specific units remain withheld; current Ha
 power loss results, and the proposal has no artifact-index entry, `current/` package, value binding, or
 consumer cutover. The model-v0.1 zero-curve scaffold remains the component-level evidence audit.
 
-`tropical_cyclone_wind_solar` now has a noncanonical
-[`model v1.0 / human docs r2 / runtime docs r1` screening proposal](tropical_cyclone_wind_solar/README.md). It exposes one
-source-specific Perry ground/nontracking visible-module-hardware atom on the dataset-native 17.4–39.1 m/s
-gust field, conditional on explicit uniform-value and full-visible-replacement assumptions. The source cohort
-is mixed scale; Visual Crossing is identified at study level while row-level product/query semantics remain
-unresolved; and the strict evidence-earned gate remains **NO-GO / retain model v0.1**. Deep curation earned no
-axis bridge, tracker route, severe-tail extension, economic expansion, or model bump. Generic fixed tilt,
-trackers, rack, foundation, electrical, GSU, SCADA, civil, support, scenario dollars, and annual/tail metrics
-remain withheld. The proposal has no artifact-index entry, `current/` package, or consumer cutover.
+`tropical_cyclone_wind_solar` now leads with a noncanonical
+[`model v2.0 / docs r1` coverage-first candidate](tropical_cyclone_wind_solar/proposed/README_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md). Its five records are
+one unchanged Perry model-v1 compatibility record plus four cell-local synthetic Tier-4 records for
+fixed-tilt module/support and qualified-tracker module/SBOS failure units. The generic routes use qualified
+architecture-specific normalized demand and exact attained tracker state; they are not hurricane
+calibration. Foundation, electrical/collection, GSU, SCADA, civil, support allocation, value/full-plant loss,
+scenario dollars, and annual/tail metrics remain withheld. Model v0.1 remains the strict no-curve
+alternative and model v1.0 remains the narrow source-derived alternative. The v2 candidate has no
+artifact-index entry, `current/` package, changelog event, package release, or consumer cutover.
 
 `hail_wind` is a new, noncanonical
 [`model v0.1 / docs r2` research scaffold](hail_wind/README.md). It keeps source hail descriptors separate
@@ -96,7 +96,7 @@ references, ASCII diagrams, worked examples, exact tables, and caveats with the 
 | `wildfire_solar` | [Complete](wildfire_solar/basics/README.md) |
 | `tropical_cyclone_wind_wind` | [Complete for proposed model v1.0](tropical_cyclone_wind_wind/basics/README.md) — source-native partial-coverage release candidate; noncanonical |
 | `flood_wind` | [Complete for proposed model v1.0](flood_wind/basics/README.md) — legacy source-native whole-substation screening proposal; noncanonical partial coverage |
-| `tropical_cyclone_wind_solar` | [Complete for model v1.0/docs r2](tropical_cyclone_wind_solar/basics/README.md) — one unchanged source-specific visible-module screening atom; deep-curated noncanonical exception |
+| `tropical_cyclone_wind_solar` | [Complete for proposed model v2.0/docs r1](tropical_cyclone_wind_solar/basics/README.md) — one preserved Perry compatibility record plus four cell-local synthetic Tier-4 fixed/tracker records; noncanonical and no-cutover |
 | `hail_wind` | [Complete for model v0.1/docs r2](hail_wind/basics/README.md) — independently deep-curated, fail-closed turbine/blade and BOP research scaffold |
 | `wildfire_wind` | [Complete for proposed model v0.1](wildfire_wind/basics/README.md) — fail-closed pathway-aware turbine/BOP/GSU research scaffold |
 

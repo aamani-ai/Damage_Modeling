@@ -6,10 +6,10 @@ Bundle v2 protects the payloads used by the current single-axis evaluators. It c
 which two hazard mechanisms share an asset substrate but require different axes, evidence, curve families,
 capabilities, and consumer routing.
 
-This standard defines the proposed v3 contract for that case. It is used by the `wind_tornado_wind` and
-`strong_wind_solar` model-v2.0 proposals and the `tropical_cyclone_wind_wind` and `flood_wind` model-v1.0
-proposals. It remains a draft until a v3 model and its Hazard migration pass promotion review. Existing
-canonical artifacts remain bundle v2 and emit v1.
+This standard defines the proposed v3 contract for that case. It is used by the `wind_tornado_wind`,
+`strong_wind_solar`, and `tropical_cyclone_wind_solar` model-v2.0 proposals and the
+`tropical_cyclone_wind_wind` and `flood_wind` model-v1.0 proposals. It remains a draft until a v3 model and
+its Hazard migration pass promotion review. Existing canonical artifacts remain bundle v2 and emit v1.
 
 ```yaml
 artifact_schema: damage_curve_record_bundle.v3
@@ -171,6 +171,12 @@ The initial pathway-aware use is the `flood_wind` FEMA-Hazus whole-substation sc
 atom is not interchangeable with a component-local switchgear, transformer, relay, cable, or whole-wind-farm
 record merely because all use water depth.
 
+The `tropical_cyclone_wind_solar` model-v2.0/docs-r1 candidate also preserves one exact model-v1 Perry
+piecewise-linear record, but only within its source-compatible ground/nontracking route and native axis. It
+cannot be selected as the generic fixed-tilt route, transferred to trackers, or interpreted as full-plant
+loss. The other four records use the ordered-state form in §4.1 and remain cell-local synthetic Tier-4
+assumptions.
+
 ## 5. Axis and proxy rules
 
 Each pathway owns its axis. A source-native field may be accepted only through a named bridge with provenance,
@@ -202,6 +208,12 @@ architecture_input_contracts:
 The bundle v3 schema validates this optional structure; the cell validator must also cross-check the exact
 architecture IDs and payload fields against evaluator and KAT behavior. A generic top-level preferred field
 does not authorize cross-architecture fallback.
+
+For the `tropical_cyclone_wind_solar` model-v2 candidate, the Perry compatibility, fixed-tilt, and qualified
+single-axis-tracker routes are mutually exclusive. Fixed tilt requires a qualified TC pressure ratio or a
+fully bridged array-height gust proxy; the tracker route requires exact attained state and qualification-basis
+matching. An ordinary 10 m Hazard gust, commanded-but-unconfirmed stow, or another architecture's input must
+fail closed.
 
 ## 6. Selector, conditioner, and exposure separation
 

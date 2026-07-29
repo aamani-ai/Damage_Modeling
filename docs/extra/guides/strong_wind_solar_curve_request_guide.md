@@ -24,7 +24,7 @@ Is the local mechanism non-tornadic thunderstorm outflow?
 │   ├─ gust front / thunderstorm outflow
 │   └─ local derecho outflow after mechanism partition
 └─ no
-    ├─ tropical cyclone / hurricane → future hurricane_wind_solar
+    ├─ tropical cyclone / hurricane → tropical_cyclone_wind_solar v2 research path
     ├─ tornado / tornado debris → future tornado_solar
     ├─ synoptic / downslope wind → separate future pathway
     ├─ hail → hail_solar
@@ -33,6 +33,12 @@ Is the local mechanism non-tornadic thunderstorm outflow?
 
 A derecho is a parent event, not a sufficient local loading identity. Preserve the parent event ID and resolve
 embedded tornadoes/mesovortices/downbursts. High wind speed does not establish a pathway.
+
+The tropical-cyclone route now has its own noncanonical
+[`model-v2.0/docs-r1 request guide`](tropical_cyclone_wind_solar_v2_curve_request_guide.md). It contains one
+preserved Perry compatibility record and four cell-local synthetic Tier-4 fixed/tracker records; it is not a
+fallback from this convective model and publishes no full-plant/value, scenario-dollar, annual, or tail
+output.
 
 ## 3. Route the asset architecture
 

@@ -781,7 +781,21 @@ def validate_docs_r2_state() -> tuple[int, int]:
     require("no scientifically validated" in decision, "predictive-use prohibition missing")
     require("direct material, direct labor" in blueprint, "v2 economic acquisition field missing")
     require("command and attained tracker state" in blueprint, "v2 tracker-state acquisition field missing")
-    require(fenced_yaml_value(root_readme, "human_documentation_revision") == "docs r2", "cell entrypoint docs revision stale")
+    # Model v2 is now the noncanonical lead.  Historical model-v1 validation
+    # must keep checking its own docs-r2 evidence package without requiring the
+    # cell entrypoint to masquerade as the current v1 lead.
+    require(
+        fenced_yaml_value(root_readme, "semantic_damage_model_version") == "model v2.0",
+        "cell entrypoint does not identify the later model-v2 lead",
+    )
+    require(
+        fenced_yaml_value(root_readme, "documentation_revision") == "docs r1",
+        "cell entrypoint model-v2 docs revision stale",
+    )
+    require(
+        "model v1.0/docs r2 human, r1 runtime" in root_readme,
+        "cell entrypoint no longer preserves the model-v1/docs-r2 alternative",
+    )
     require(fenced_yaml_value(handoff, "consumer_cutover") == "prohibited", "no-cutover handoff drifted")
     require(fenced_yaml_value(handoff, "ordinary_Hazard_3s_gust_compatible") == "false", "Hazard-axis rejection missing")
     prohibited_r2_runtime_files = [

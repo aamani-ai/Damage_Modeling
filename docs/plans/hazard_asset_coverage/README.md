@@ -18,7 +18,11 @@ retained model v0.1 while advancing its human/evidence documentation to docs r2;
 inspection, and migration evidence still did not support an economic damage atom. A fifth deep pass then
 reopened `tropical_cyclone_wind_solar`: it corrected the study-level wind-provider wording and added severe,
 tracker, failure-unit, and economic evidence, but earned only model-v1.0/docs-r2 documentation. The Perry
-runtime proposal remains docs r1 and numerically unchanged.
+runtime proposal remained docs r1 and numerically unchanged at the close of that evidence pass. The owner
+subsequently authorized an out-of-queue, coverage-first model-v2.0/docs-r1 synthetic-T4 candidate. It has
+five records: the unchanged Perry source-compatibility record plus four cell-local fixed-tilt/tracker
+synthetic records. That deliberate assumption build does not reverse the evidence NO-GO, increase canonical
+runtime coverage, or replace model v0.1 or model v1.0.
 
 The coverage-first sequence is:
 
@@ -40,6 +44,9 @@ and review before the following pair began. Deep curation continues from the que
 A version bump is an earned scientific outcome, not the task definition: if a deep pass cannot close a
 defensible numeric seam, the honest result remains model v0.1.
 
+The later TC-wind × solar v2 build is an explicitly owner-authorized exception to that execution order, not
+a queue rewrite or an evidence-earned promotion. `wildfire_wind` remains next under this plan.
+
 ## Counting rules
 
 | Term | Counts as covered? | Meaning |
@@ -48,6 +55,7 @@ defensible numeric seam, the honest result remains model v0.1.
 | Governed model v0.1 scaffold | Yes, structurally | Cell boundary, units, evidence, value, contract, KATs, and promotion gates exist; numeric output fails closed |
 | Proposal for a cell that already has v1 | Yes | Runtime coverage comes from v1; the proposal is a separate depth track |
 | Noncanonical model-v1 partial-coverage proposal for a new cell | Yes, structurally; no canonical runtime count | Numeric response exists only for its governed atom and cannot be counted as a published cell runtime |
+| Noncanonical synthetic model-v2 candidate | No additional coverage count | Research/interface records remain proposal-only until explicit promotion and publication; preserved earlier versions remain separate alternatives |
 | Placeholder in Hazard or a legacy memo | No | Useful only as a migration/evidence audit unless governed here |
 | `Later` with no cell folder | No | Deliberately deferred and not yet modeled |
 
@@ -66,12 +74,14 @@ placeholder is not counted as Damage Modeling coverage.
 | Convective/tornado wind | Wind | [`wind_tornado_wind`](../../cells/wind_tornado_wind/README.md), canonical v1 plus noncanonical v2 proposal | Yes | Covered; v2 depth parked |
 | Flood | Solar | [`flood_solar`](../../cells/flood_solar/README.md), canonical model v1.0 | Yes | Covered |
 | Flood | Wind | [`flood_wind`](../../cells/flood_wind/README.md), noncanonical model v1.0 whole-substation screening proposal | Proposal only | One legacy source-native assembly curve; components/value/consumer promotion blocked |
-| Tropical-cyclone wind | Solar | [`tropical_cyclone_wind_solar`](../../cells/tropical_cyclone_wind_solar/README.md), noncanonical model v1.0/docs r2 screening proposal | Proposal only | One unchanged source-specific Perry visible-module atom; portable axis/tracker/tail/economics/value/consumer promotion blocked |
+| Tropical-cyclone wind | Solar | [`tropical_cyclone_wind_solar`](../../cells/tropical_cyclone_wind_solar/README.md), noncanonical model v2.0/docs r1 synthetic candidate; v0.1 and v1 preserved | Proposal only | Five records: one unchanged Perry source-compatibility atom plus four cell-local synthetic-T4 fixed/tracker atoms; promotion evidence, value, consumer, and remaining-unit gates stay blocked |
 | Tropical-cyclone wind | Wind | [`tropical_cyclone_wind_wind`](../../cells/tropical_cyclone_wind_wind/README.md), noncanonical model v1.0 partial-coverage release candidate | Proposal only | Three exact source-native curves; broader asset/value/consumer promotion blocked |
 
 The portfolio is now **10/10 structurally governed**, including **5/10 with canonical runtime curves**.
-Two cells remain explicit fail-closed model-v0.1 packages; three additional cells now have numeric but
-noncanonical model-v1.0 proposals. Neither status is an implied zero, borrowed curve, or canonical publication.
+Two cells remain explicit fail-closed model-v0.1 packages; three additional cells have numeric but
+noncanonical model-v1.0 proposals, and TC-wind × solar also has the later noncanonical model-v2.0 synthetic
+candidate. None of these statuses is an implied zero, borrowed curve, canonical publication, or an increase
+over the **5/10 canonical runtime** count.
 
 ## Why tropical-cyclone wind × solar was the first coverage cell
 
@@ -82,7 +92,8 @@ noncanonical model-v1.0 proposals. Neither status is an implied zero, borrowed c
 4. Tropical-cyclone event-family and pathway semantics are already defined by the wind-asset scaffold.
 5. Public evidence supports mechanisms and a narrow source-cohort visible-module proxy, but not observed
    same-unit economic DR. Model v0.1 therefore remains the strict-gate result; proposed model v1.0 is a
-   separately labeled, owner-authorized coverage-first exception.
+   separately labeled, owner-authorized coverage-first exception. The later v2 candidate is a second,
+   explicitly synthetic-T4 owner decision; it does not close the evidence gate.
 
 ## GSU/substation rule
 
@@ -144,14 +155,20 @@ failure-unit/economic gap matrix, and a v2 acquisition plan. It found no computa
 finite-sample transformation, but no evidence-supported way to generalize or validate it predictively. Model
 v1.0 and every docs-r1 runtime output therefore remain unchanged and noncanonical.
 
+After that queue pass, the owner explicitly authorized a bounded, out-of-queue model-v2.0/docs-r1 research
+candidate. Its generic fixed/tracker values are cell-local Tier-4 assumptions; their numerical identity to
+the strong-wind-derived comparison profile is an audit fingerprint only, not tropical-cyclone evidence or a
+runtime shared dependency. Model v0.1 and v1.0 remain available, no `current/`, artifact-index, changelog,
+package, or cutover action occurred, and `wildfire_wind` remains next.
+
 1. `wildfire_wind`: prioritize exogenous-attribution field cases and ground-level pad/GSU evidence before
    elevated turbine assembly response; do not force a screening curve merely to change the version label;
 2. `hail_wind`: reopen numerical promotion only when event-resolved hail, turbine operating/contact state,
    inspected mutually exclusive disposition, and same-blade direct cost are linked—or when the owner
    explicitly authorizes a separately labeled Tier-4 elicitation model;
-3. `tropical_cyclone_wind_solar`: execute the docs-r2 acquisition blueprint only when owner/adjuster data can
-   close portable wind, architecture/state, disposition/cost, severe-tail, uncertainty, value, and
-   Hazard-adapter gates;
+3. `tropical_cyclone_wind_solar`: use the noncanonical v2 candidate only for its bounded research/interface
+   purpose; promotion still requires the docs-r2 acquisition blueprint to close portable wind,
+   architecture/state, disposition/cost, severe-tail, uncertainty, value, and Hazard-adapter gates;
 4. `flood_wind`: later deepen component-local GSU/substation disposition/cost and site ownership/value
    evidence without decomposing the legacy assembly curve by assumption;
 5. `strong_wind_solar` and `wind_tornado_wind` v2 proposals: resume their documented promotion queues.
