@@ -169,3 +169,15 @@ evidence, does not populate the TC artifact, and is not a runtime shared depende
 equipment and normalized numbers do not make convective and tropical-cyclone hazard histories
 interchangeable. The TC cell independently owns its Tier-4 adoption decision, axis bridges, selectors,
 failure-unit binding, artifact, capability, release, and promotion evidence.
+
+## D-016 — TC-wind × solar must be usable as a complete screening curve
+
+**Decision:** advance the lead proposal from model v2.0 to model v2.1. Preserve v2.0's five records, add
+numeric Tier-4 foundation, power/collection, GSU, SCADA, and civil records, and assemble the complete named
+physical replacement-value profile into plant DR, loss per kWdc, installed-capex physical loss fraction, and
+optional scenario dollars.
+
+**Reason:** v2.0 optimized withholding and auditability to the point that the requested end-to-end screening
+use case was unavailable. Proxy grade should control labeling, review, and update priority; it should not
+eliminate the output the proxy was commissioned to provide. Frequency, EAL, tails, BI, and compound mechanisms
+remain outside this wind-only damage-cell output. No canonical cutover is authorized by this decision.

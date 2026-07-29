@@ -28,6 +28,7 @@ Repository-current change records:
 - [`curve_artifact_bundle.schema.json`](schemas/curve_artifact_bundle.schema.json) — portable v2.5 / bundle-v1 compatibility
 - [`damage_emit.schema.json`](schemas/damage_emit.schema.json)
 - [`damage_emit.v2.schema.json`](schemas/damage_emit.v2.schema.json) — proposed required-pathway emit
+- [`physical_damage_assembly.v1.schema.json`](schemas/physical_damage_assembly.v1.schema.json) — optional named-value plant physical-DR/scenario-loss companion view over failure-unit emits
 - [`capability_declaration.v2.schema.json`](schemas/capability_declaration.v2.schema.json) — consumer-distribution-aware capability contract
 - [`capability_declaration.v3.schema.json`](schemas/capability_declaration.v3.schema.json) — proposed per-pathway capability contract
 - [`capability_declaration.schema.json`](schemas/capability_declaration.schema.json) — v1 compatibility

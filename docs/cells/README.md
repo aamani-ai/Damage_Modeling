@@ -38,13 +38,7 @@ power loss results, and the proposal has no artifact-index entry, `current/` pac
 consumer cutover. The model-v0.1 zero-curve scaffold remains the component-level evidence audit.
 
 `tropical_cyclone_wind_solar` now leads with a noncanonical
-[`model v2.0 / docs r1` coverage-first candidate](tropical_cyclone_wind_solar/proposed/README_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md). Its five records are
-one unchanged Perry model-v1 compatibility record plus four cell-local synthetic Tier-4 records for
-fixed-tilt module/support and qualified-tracker module/SBOS failure units. The generic routes use qualified
-architecture-specific normalized demand and exact attained tracker state; they are not hurricane
-calibration. Foundation, electrical/collection, GSU, SCADA, civil, support allocation, value/full-plant loss,
-scenario dollars, and annual/tail metrics remain withheld. Model v0.1 remains the strict no-curve
-alternative and model v1.0 remains the narrow source-derived alternative. The v2 candidate has no
+[`model v2.1 / docs r1` coverage-complete screening candidate](tropical_cyclone_wind_solar/proposed/README_tropical_cyclone_wind_solar__model_v2_1__docs_r1.md). It preserves v2.0's Perry and four array records, adds five Tier-4 site-facility records, and reconciles a named 100%-physical-value profile into plant DR, loss per kWdc, and optional scenario dollars. The qualified fixed/tracker/site axes and attained-state controls remain; annual/tail metrics remain consumer-owned. Models v0.1, v1.0, and v2.0 remain preserved alternatives. The v2.1 candidate has no
 artifact-index entry, `current/` package, changelog event, package release, or consumer cutover.
 
 `hail_wind` is a new, noncanonical
@@ -96,7 +90,7 @@ references, ASCII diagrams, worked examples, exact tables, and caveats with the 
 | `wildfire_solar` | [Complete](wildfire_solar/basics/README.md) |
 | `tropical_cyclone_wind_wind` | [Complete for proposed model v1.0](tropical_cyclone_wind_wind/basics/README.md) — source-native partial-coverage release candidate; noncanonical |
 | `flood_wind` | [Complete for proposed model v1.0](flood_wind/basics/README.md) — legacy source-native whole-substation screening proposal; noncanonical partial coverage |
-| `tropical_cyclone_wind_solar` | [Complete for proposed model v2.0/docs r1](tropical_cyclone_wind_solar/basics/README.md) — one preserved Perry compatibility record plus four cell-local synthetic Tier-4 fixed/tracker records; noncanonical and no-cutover |
+| `tropical_cyclone_wind_solar` | [Complete for proposed model v2.1/docs r1](tropical_cyclone_wind_solar/basics/README.md) — ten records plus complete named-value plant physical-damage assembly; noncanonical and no-cutover |
 | `hail_wind` | [Complete for model v0.1/docs r2](hail_wind/basics/README.md) — independently deep-curated, fail-closed turbine/blade and BOP research scaffold |
 | `wildfire_wind` | [Complete for proposed model v0.1](wildfire_wind/basics/README.md) — fail-closed pathway-aware turbine/BOP/GSU research scaffold |
 

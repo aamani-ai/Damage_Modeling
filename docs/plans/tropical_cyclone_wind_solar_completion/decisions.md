@@ -93,6 +93,17 @@ is not a runtime dependency, and owns no TC axis, selectors, value, capability, 
 leaving portable-axis, tracker validation, calibration, severe-tail, economics, remaining-unit, compound,
 consumer, and maintainer promotion gates blocked.
 
+## TCSS-D12 — Correct v2 into a usable coverage-complete screening model
+
+**Decision:** advance the lead from model v2.0 to model v2.1. Preserve the five v2.0 records, add five
+site-facility Tier-4 curves for foundation, power/collection, GSU, SCADA, and civil, and assemble the complete
+named physical replacement-value profile into plant DR, loss per kWdc, installed-capex physical loss
+fraction, and optional scenario dollars.
+
+**Reason:** v2.0's withholding discipline made the commissioned screening product unusable. A proxy should
+carry an honest grade and update trigger, not suppress the result it was built to provide. Annual/tail metrics,
+BI, and compound rain/debris/surge/tornado mechanisms remain outside the v2.1 wind-only damage output.
+
 **Reason:** validated implementation means the synthetic research contract behaves as declared; it does not
 make the underlying assumptions empirical. Do not create `current/`, update the artifact index or changelog,
 ship a package, or authorize Hazard cutover without a later explicit promotion action.

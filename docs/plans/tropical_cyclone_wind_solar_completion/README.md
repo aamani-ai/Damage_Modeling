@@ -1,28 +1,37 @@
 # Tropical-cyclone wind x solar completion plan
 
-> **Plan of record - owner-authorized model-v2.0/docs-r1 synthetic candidate built; promotion blocked.** The
-> candidate is noncanonical and contains one unchanged Perry source-compatibility record plus four cell-local
-> synthetic-T4 fixed/tracker records. Model v0.1 and model v1.0 remain preserved alternatives. The next
-> promotion step waits for the minimum paired owner/adjuster evidence package.
+> **Plan of record — model-v2.1/docs-r1 coverage-complete screening candidate built; promotion pending.**
+> The candidate is noncanonical, preserves v2.0's five records, adds five common-unit Tier-4 records, and
+> delivers a named-value plant physical DR/scenario-loss assembly. Model v0.1, v1.0, and v2.0 remain preserved.
+> The next step is Hazard integration/review, not removal of screening outputs.
 
 ## Current decision
 
 ```yaml
-semantic_damage_model_version: model v2.0 proposal
+semantic_damage_model_version: model v2.1 proposal
 proposal_documentation_revision: docs r1
 preserved_strict_alternative: model v0.1/docs r1
 preserved_source_compatibility_alternative: model v1.0/runtime docs r1; human evidence docs r2
 current_change_class: MODEL_BEHAVIOR_CHANGE
-curve_records: 5
+curve_records: 10
 portable_axis: synthetic qualified contract present; evidence validation blocked
 tracker_route: exact-state qualified synthetic contract present; evidence validation blocked
 severe_tail: blocked
-same_unit_economic_DR: synthetic T4 only; evidence validation blocked
-canonical_release: blocked
+same_unit_economic_DR: coverage-complete screening; common-unit parameters remain Tier 4
+full_plant_physical_DR: supported_with_named_value_profile
+scenario_physical_loss: supported; dollars require capacity_kwdc
+canonical_release: ready_for_review_not_promoted
 Hazard_cutover: blocked
 ```
 
-The governed decision and evidence live in the cell package:
+The governed usability revision lives in the cell package:
+
+- [v2.1 proposal overview](../../cells/tropical_cyclone_wind_solar/proposed/README_tropical_cyclone_wind_solar__model_v2_1__docs_r1.md)
+- [v2.1 change classification](../../cells/tropical_cyclone_wind_solar/proposed/CHANGE_CLASSIFICATION_tropical_cyclone_wind_solar__model_v2_1__docs_r1.md)
+- [v2.1 decisions](../../cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_1__docs_r1.md)
+- [v2.1 validation](../../cells/tropical_cyclone_wind_solar/proposed/VALIDATION_REPORT_tropical_cyclone_wind_solar__model_v2_1__docs_r1.md)
+
+Preserved prior records:
 
 - [v2 proposal overview](../../cells/tropical_cyclone_wind_solar/proposed/README_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md)
 - [v2 change classification](../../cells/tropical_cyclone_wind_solar/proposed/CHANGE_CLASSIFICATION_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md)
@@ -48,25 +57,25 @@ units. The generic values are an owner-authorized assumption set, not newly earn
 identity to the strong-wind-derived solar comparison profile is an audit fingerprint only; the profile does
 not populate the artifact and is not a runtime dependency.
 
-It must not be renamed or exposed as a generic hurricane-solar curve. Ordinary Hazard 3-second gust,
-utility-scale fixed tilt, trackers, severe tail, full plant, value-bound, scenario, annual, and portfolio uses
-remain unsupported for canonical use. V2 also withholds unsupported units, including GSU, and all value,
-full-plant, scenario-dollar, annual, and tail outputs.
+Model v2.1 preserves those five records and deliberately completes the screening use case with five
+site-facility curves plus an explicit value assembly. Full-plant physical DR and scenario physical loss are
+now supported for fixed/tracker screening requests. Frequency, annual/tail, and portfolio aggregation remain
+downstream concerns; they are not curve outputs.
 
 ## Execution sequence
 
 ### Phase 0 - preserve current truth
 
 - keep model v0.1 and model v1.0 artifacts, capabilities, KATs, and workbooks unchanged;
-- keep model v2.0/docs-r1 proposal-only and label its four generic records synthetic Tier 4;
+- keep model v2.0/docs-r1 as the preserved partial baseline and model v2.1/docs-r1 as the lead screening proposal;
 - keep the artifact index, `current/`, changelog, package release, and Hazard pin unchanged; and
 - enforce the no-cutover handoff and 5/10 canonical-runtime portfolio count.
 
-### Candidate-build checkpoint - complete outside the queue
+### Candidate-build checkpoint — complete outside the queue
 
-- five governed records exist: one Perry compatibility record plus four cell-local synthetic-T4 records;
-- exact fixed/tracker request contracts, qualification/state controls, withheld units, KATs, and workbook
-  checks exist for proposal research;
+- ten governed records exist: one Perry compatibility record, four array records, and five common-unit records;
+- exact fixed/tracker/site-facility request contracts, qualification/state controls, KATs, complete value
+  assembly, scenario-loss output, and workbook checks exist for screening use;
 - the strong-wind-derived normalized-response file is comparison-only, not TC evidence or a runtime shared
   dependency; and
 - this owner-authorized exception did not change the breadth queue: `wildfire_wind` remains next.

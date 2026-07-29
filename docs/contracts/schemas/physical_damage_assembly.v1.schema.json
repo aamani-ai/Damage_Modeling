@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "damage_curve_library.physical_damage_assembly.v1",
+  "title": "Physical damage assembly v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "cell_id",
+    "damage_code_id",
+    "model_version",
+    "documentation_revision",
+    "artifact_schema_version",
+    "artifact_sha256",
+    "pathway_id",
+    "array_architecture",
+    "value_profile",
+    "coverage",
+    "support_allocation_rule",
+    "scenario_results",
+    "limitation_flags"
+  ],
+  "properties": {
+    "schema_version": {"const": "physical_damage_assembly.v1"},
+    "cell_id": {"type": "string", "minLength": 1},
+    "damage_code_id": {"type": "string", "minLength": 1},
+    "model_version": {"type": "string", "pattern": "^model v[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$"},
+    "documentation_revision": {"type": "string", "pattern": "^docs r[0-9]+$"},
+    "artifact_schema_version": {"type": "string", "minLength": 1},
+    "artifact_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "pathway_id": {"type": "string", "minLength": 1},
+    "array_architecture": {"type": "string", "minLength": 1},
+    "value_profile": {
+      "type": "object",
+      "required": [
+        "value_profile_id",
+        "currency_basis",
+        "value_unit",
+        "unit_values",
+        "replacement_support_value",
+        "physical_replacement_value",
+        "installed_capex",
+        "capacity_kwdc"
+      ],
+      "properties": {
+        "value_profile_id": {"type": "string", "minLength": 1},
+        "currency_basis": {"type": "string", "minLength": 1},
+        "value_unit": {"const": "USD_per_kWdc"},
+        "unit_values": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"type": "number", "minimum": 0}
+        },
+        "replacement_support_value": {"type": "number", "minimum": 0},
+        "physical_replacement_value": {"type": "number", "exclusiveMinimum": 0},
+        "installed_capex": {"type": "number", "exclusiveMinimum": 0},
+        "capacity_kwdc": {"type": ["number", "null"], "exclusiveMinimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "coverage": {
+      "type": "object",
+      "required": [
+        "physical_replacement_value_fraction",
+        "intrinsic_curve_value_fraction",
+        "derived_support_value_fraction",
+        "excluded_soft_nonphysical_value_2024_usd_per_kwdc"
+      ],
+      "properties": {
+        "physical_replacement_value_fraction": {"const": 1.0},
+        "intrinsic_curve_value_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+        "derived_support_value_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+        "excluded_soft_nonphysical_value_2024_usd_per_kwdc": {"type": "number", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "support_allocation_rule": {"type": "string", "minLength": 1},
+    "scenario_results": {
+      "type": "object",
+      "required": ["lower_resistance", "central_screening", "upper_resistance"],
+      "additionalProperties": {"$ref": "#/$defs/scenarioResult"}
+    },
+    "limitation_flags": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "scenarioResult": {
+      "type": "object",
+      "required": [
+        "unit_loss_2024_usd_per_kwdc",
+        "direct_and_civil_loss_2024_usd_per_kwdc",
+        "replacement_support_dr",
+        "replacement_support_loss_2024_usd_per_kwdc",
+        "physical_loss_2024_usd_per_kwdc",
+        "physical_replacement_dr",
+        "installed_capex_physical_loss_fraction"
+      ],
+      "properties": {
+        "unit_loss_2024_usd_per_kwdc": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"type": "number", "minimum": 0}
+        },
+        "direct_and_civil_loss_2024_usd_per_kwdc": {"type": "number", "minimum": 0},
+        "replacement_support_dr": {"type": "number", "minimum": 0, "maximum": 1},
+        "replacement_support_loss_2024_usd_per_kwdc": {"type": "number", "minimum": 0},
+        "physical_loss_2024_usd_per_kwdc": {"type": "number", "minimum": 0},
+        "physical_replacement_dr": {"type": "number", "minimum": 0, "maximum": 1},
+        "installed_capex_physical_loss_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+        "scenario_physical_loss_2024_usd": {"type": "number", "minimum": 0}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

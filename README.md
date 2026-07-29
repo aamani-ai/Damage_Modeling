@@ -53,10 +53,7 @@ screening-grade wildfire×solar engineering proxy. Of the five additional struct
 pairs, tropical-cyclone wind×wind and flood×wind have noncanonical partial-coverage model-v1.0 proposals;
 hail×wind and wildfire×wind remain fail-closed model-v0.1 research cells. Tropical-cyclone wind×solar now
 leads with a noncanonical
-[`model-v2.0/docs-r1` coverage-first candidate](docs/cells/tropical_cyclone_wind_solar/proposed/README_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md): one preserved Perry compatibility
-record plus four cell-local synthetic Tier-4 fixed/tracker records. It publishes no full-plant/value,
-scenario-dollar, annual, or tail output; model v0.1 and model v1.0 remain preserved alternatives, and no
-`current/`, artifact-index, changelog, package-release, or Hazard cutover change was made. Each cell has a
+[`model-v2.1/docs-r1` coverage-complete screening candidate](docs/cells/tropical_cyclone_wind_solar/proposed/README_tropical_cyclone_wind_solar__model_v2_1__docs_r1.md): ten governed records plus a named 100%-physical-value assembly emit plant DR, loss per kWdc, and optional scenario dollars. Uncalibrated records remain explicit Tier 4; annual/tail metrics remain consumer-owned. Model v0.1, v1.0, and v2.0 remain preserved, and no `current/`, artifact-index, changelog, package-release, or Hazard cutover change was made. Each cell has a
 three-file first-reader basics set.
 The [coverage plan](docs/plans/hazard_asset_coverage/README.md) reports **10/10 structural coverage** and
 **5/10 canonical runtime coverage**, and records the one-cell-at-a-time deep-curation queue. v2.5 ships
