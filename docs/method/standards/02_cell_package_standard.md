@@ -125,3 +125,67 @@ Reason:
 Consequence:
   The damage code emits state probabilities and expected DR, not a single direct curve.
 ```
+
+## 7. Cell-owned basics set
+
+Each hazard × asset cell should expose a three-page reader layer:
+
+```text
+docs/cells/<cell_id>/basics/
+├── README.md                  first-reader explanation
+├── HOW_THE_MODEL_IS_BUILT.md  evidence-to-SHIP reasoning
+└── MODEL_REFERENCE.md         exact lookup, tables, tests, and sources
+```
+
+An optional `assets/` folder may hold generated diagrams. Do not split the prose into many small fragments.
+The three pages together form the complete human manuscript and may be compiled or selectively reused in a
+later Google Drive, DOCX, presentation, or review artifact.
+
+### `README.md` -- understand it
+
+Explain the physical system, hazard measurement, spatial/temporal references, terminology, critical failure
+point/state, one step-by-step numerical example, assumptions, fail-closed checks, common mistakes, and a short
+reusable explanation. A first-time reader should not need to understand the governance tree before this page.
+
+### `HOW_THE_MODEL_IS_BUILT.md` -- understand the reasoning
+
+Walk through:
+
+```text
+QUESTION -> EVIDENCE -> GRAIN -> AXIS -> FORM -> ADJUSTMENTS -> EMIT -> SHIP
+```
+
+Include source limits, coverage roles, rejected alternatives, selector/conditioner/exposure/value separation,
+current capability, the exact consumer pin, and proposed/noncanonical boundaries.
+
+### `MODEL_REFERENCE.md` -- look it up
+
+Collect exact failure-unit records, parameter/ordinate tables, ASCII plots, field dictionaries, value
+crosswalks, parameter tiers, update triggers, capability/reportability rules, a complete class-template event
+assembly, validation/KAT status, reviewer checks, source register, and version history.
+
+### Shared rules
+
+Every basics set must:
+
+```text
+- distinguish observed, designed, derived, class_template, placeholder, and unknown values;
+- use at least one ASCII physical diagram and one ASCII curve/state view;
+- include terminology, tables, formulas, and worked examples at the cell's natural grain;
+- state missing/default/withhold behavior rather than inventing precision;
+- cross-reference the canonical dossier, metadata spec, JSON artifact, workbook, tests, and handoff;
+- record the semantic model, human docs, runtime docs, schemas, full SHA, and non-change status;
+- treat the Google Drive/DOCX layer as a derived publication view, not technical authority.
+```
+
+Illustrative values may teach the calculation but must never become silent asset observations or universal
+runtime defaults. Runtime truth remains in the canonical JSON artifact; derivation truth remains in the
+dossier/workbook. If basics conflicts with either, correct basics or open a governed model/contract change.
+
+Use:
+
+- [`TEMPLATE_cell_basics_README.md`](../templates/TEMPLATE_cell_basics_README.md)
+- [`TEMPLATE_cell_basics_HOW_THE_MODEL_IS_BUILT.md`](../templates/TEMPLATE_cell_basics_HOW_THE_MODEL_IS_BUILT.md)
+- [`TEMPLATE_cell_basics_MODEL_REFERENCE.md`](../templates/TEMPLATE_cell_basics_MODEL_REFERENCE.md)
+
+`flood_solar` is the first complete reference implementation.

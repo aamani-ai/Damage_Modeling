@@ -6,7 +6,8 @@
 cell_id: wildfire_solar
 damage_code_id: WILDFIRE_SOLAR_FSIM_SCREENING_V1
 semantic_damage_model_version: model v1.0
-documentation_revision: docs r3
+human_documentation_revision: docs r4
+canonical_runtime_documentation_revision: docs r3
 lifecycle_state: released_v1_0
 promotion_status: released
 model_grade: screening_engineering_proxy
@@ -24,6 +25,18 @@ installed-CAPEX value linkage.
 The model is intentionally approximate. Absolute ordinates are Tier 4 engineering proxies constrained by
 public hazard, field-physics, PV thermal, electrical-disposition, event, diagnostic, and value evidence. It is
 not claims- or field-calibrated and must carry the screening flags in every consumer output.
+
+Docs r4 adds the cell-owned basics set only. Runtime remains pinned to
+`wildfire_solar@model_v1_0__docs_r3`; curves, contract, and screening flags are unchanged.
+
+## Start here
+
+- [`basics/README.md`](basics/README.md) — first-reader wildfire/FSim terminology, categorical-state
+  intuition, physical pathways, and a worked value/exposure example.
+- [`basics/HOW_THE_MODEL_IS_BUILT.md`](basics/HOW_THE_MODEL_IS_BUILT.md) — the seven-stage reasoning chain
+  from evidence through failure-unit grain, categorical axis, state tables, emit, and SHIP.
+- [`basics/MODEL_REFERENCE.md`](basics/MODEL_REFERENCE.md) — exact ten-unit state tables, fields, value
+  linkage, capability limits, screening flags, known-answer tests, and source register.
 
 ## Current runtime package
 

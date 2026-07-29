@@ -1,7 +1,17 @@
 # flood_solar
 
-Current cell: **flood x solar**, semantic damage-model `model v1.0`, repository documentation revision
-`docs r4`.
+Current cell: **flood x solar**, semantic damage-model `model v1.0`, human documentation revision
+`docs r5`. The canonical runtime artifact remains pinned at `docs r4`; docs r5 adds first-reader explanation
+only and does not change runtime behavior.
+
+## Start here
+
+- [`basics/README.md`](basics/README.md) — first-reader flood/elevation terminology, ASCII diagrams, datum
+  rules, worked local-depth examples, and common mistakes.
+- [`basics/HOW_THE_MODEL_IS_BUILT.md`](basics/HOW_THE_MODEL_IS_BUILT.md) — the seven-stage reasoning chain
+  from scope and evidence through grain, axis, curve form, adjustments, emit, and SHIP.
+- [`basics/MODEL_REFERENCE.md`](basics/MODEL_REFERENCE.md) — exact failure units, curve ordinates, fields,
+  value linkage, capability rules, source register, and complete event assembly.
 
 ## Runtime artifact
 
@@ -11,6 +21,7 @@ Current cell: **flood x solar**, semantic damage-model `model v1.0`, repository 
 - Curve form: piecewise-linear deterministic state/depth curves
 - Canonical JSON:
   [`flood_solar__model_v1_0__docs_r4__curve_artifact.json`](current/flood_solar__model_v1_0__docs_r4__curve_artifact.json)
+- Canonical runtime pin: `flood_solar@model_v1_0__docs_r4`
 - Pollable cell changelog: [`CHANGELOG.json`](CHANGELOG.json)
 
 ## Current package docs

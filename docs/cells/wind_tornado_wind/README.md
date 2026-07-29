@@ -1,11 +1,21 @@
 # wind_tornado_wind
 
-Current cell: **wind/tornado x wind**, semantic damage-model `model v1.0`, repository documentation revision
-`docs r4`.
+Current cell: **wind/tornado x wind**, semantic damage-model `model v1.0`, human documentation revision
+`docs r5`. The canonical runtime artifact remains pinned at `docs r4`; docs r5 adds the cell-owned basics set
+without changing runtime behavior.
 
 > **Current-runtime rule:** model v1.0/docs r4 remains canonical. A pressure-tested, pathway-aware model v2.0
 > research package exists under [`proposed/`](proposed/README_wind_tornado_wind__model_v2_0__docs_r1.md), but
 > it is not indexed, released, or approved for Hazard execution.
+
+## Start here
+
+- [`basics/README.md`](basics/README.md) — first-reader gust, height-reference, IEC speed-ratio, tornado-shift,
+  and turbine-component terminology with a worked example.
+- [`basics/HOW_THE_MODEL_IS_BUILT.md`](basics/HOW_THE_MODEL_IS_BUILT.md) — the seven-stage reasoning chain
+  for canonical v1.0, including evidence limits and the proposed-v2 boundary.
+- [`basics/MODEL_REFERENCE.md`](basics/MODEL_REFERENCE.md) — exact v1.0 curve parameters, bridge behavior,
+  fields, value/capability limits, validation status, sources, and proposal separation.
 
 ## Runtime artifact
 
@@ -15,6 +25,7 @@ Current cell: **wind/tornado x wind**, semantic damage-model `model v1.0`, repos
 - Curve form: wind/tornado logistic speed-ratio curves
 - Canonical JSON:
   [`wind_tornado_wind__model_v1_0__docs_r4__curve_artifact.json`](current/wind_tornado_wind__model_v1_0__docs_r4__curve_artifact.json)
+- Canonical runtime pin: `wind_tornado_wind@model_v1_0__docs_r4`
 - Pollable cell changelog: [`CHANGELOG.json`](CHANGELOG.json)
 
 ## Current package docs

@@ -1,8 +1,17 @@
 # hail_solar
 
-Current cell: **hail x solar**, semantic damage-model `model v1.0`, repository documentation revision
-`docs r7`. Docs r6 remains the evidence-only wind-driven-hail addendum; docs r7 hardens the consumer contract
-without changing the logistic curves or failure-unit DRs.
+Current cell: **hail x solar**, semantic damage-model `model v1.0`, human documentation revision `docs r8`.
+The canonical runtime artifact remains pinned at `docs r7`; docs r8 adds the cell-owned basics set without
+changing the logistic curves, contract, or failure-unit DRs.
+
+## Start here
+
+- [`basics/README.md`](basics/README.md) — first-reader hail/MESH terminology, physical picture, logistic
+  intuition, and a complete stow/exposure/value example.
+- [`basics/HOW_THE_MODEL_IS_BUILT.md`](basics/HOW_THE_MODEL_IS_BUILT.md) — the seven-stage reasoning chain
+  from evidence through failure-unit grain, axis, curve form, adjustments, emit, and SHIP.
+- [`basics/MODEL_REFERENCE.md`](basics/MODEL_REFERENCE.md) — exact archetype parameters, known-answer values,
+  fields, value profiles, capability limits, sources, and validation checks.
 
 ## Runtime artifact
 
@@ -14,6 +23,7 @@ without changing the logistic curves or failure-unit DRs.
   [`hail_solar__model_v1_0__docs_r7__curve_artifact.json`](current/hail_solar__model_v1_0__docs_r7__curve_artifact.json)
 - Known-answer tests:
   [`known_answer_tests_hail_solar__model_v1_0__docs_r7.json`](current/known_answer_tests_hail_solar__model_v1_0__docs_r7.json)
+- Canonical runtime pin: `hail_solar@model_v1_0__docs_r7`
 - Pollable cell changelog:
   [`CHANGELOG.json`](CHANGELOG.json)
 

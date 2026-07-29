@@ -1,7 +1,17 @@
 # strong_wind_solar
 
-Current cell: **strong wind x solar**, semantic damage-model `model v1.0`, repository documentation revision
-`docs r3`.
+Current cell: **strong wind x solar**, semantic damage-model `model v1.0`, human documentation revision
+`docs r4`. The canonical runtime artifact remains pinned at `docs r3`; docs r4 adds the cell-owned basics set
+without changing runtime behavior.
+
+## Start here
+
+- [`basics/README.md`](basics/README.md) — first-reader gust, height/reference, demand-ratio, stow, and damage
+  terminology with a worked event example.
+- [`basics/HOW_THE_MODEL_IS_BUILT.md`](basics/HOW_THE_MODEL_IS_BUILT.md) — the seven-stage reasoning chain
+  from evidence through failure-unit grain, axis, curve form, adjustments, emit, and SHIP.
+- [`basics/MODEL_REFERENCE.md`](basics/MODEL_REFERENCE.md) — exact thresholded-logistic parameters, fields,
+  value linkage, capability limits, validation gaps, sources, and proposal boundary.
 
 ## Runtime artifact
 
@@ -12,6 +22,7 @@ Current cell: **strong wind x solar**, semantic damage-model `model v1.0`, repos
 - Curve form: thresholded logistic demand-ratio curves
 - Canonical JSON:
   [`strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json`](current/strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json)
+- Canonical runtime pin: `strong_wind_solar@model_v1_0__docs_r3`
 - Pollable cell changelog: [`CHANGELOG.json`](CHANGELOG.json)
 
 ## Current package docs
