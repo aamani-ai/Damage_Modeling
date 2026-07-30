@@ -40,6 +40,9 @@ v2.5 adds runtime-facing standards and artifacts:
 
 ../../contracts/hazard_handoff/
     cross-repo handoff notes for M2/M3 consumers.
+
+../../contracts/resiliency_handoff/
+    Damage producer boundary for measure scenarios and link to the canonical three-repository contract.
 ```
 
 The semantic damage-model versions did not change in v2.5; docs revisions changed because the contracts and audit artifacts became stricter.
@@ -136,6 +139,7 @@ SUBSYSTEM / COMPONENT
 07_selector_conditioner_exposure_standard.md
 08_evidence_provenance_and_links_standard.md
 ../../contracts/hazard_handoff/README.md
+../../contracts/resiliency_handoff/README.md
 ```
 
 Basics templates live in:
@@ -169,6 +173,7 @@ Basics templates live in:
 | `14_coverage_role_taxonomy.md` | Detailed taxonomy of primary, secondary, conditioner-only, modifier, and DR≈0 roles. |
 | `16_reference_ingestion_and_curve_update_protocol.md` | How to ingest new evidence and decide whether to update curves. |
 | [`17_versioning_policy.md`](../../contracts/standards/17_versioning_policy.md) | How to version packages, damage models, docs, and workbooks separately. |
+| [`Resiliency handoff`](../../contracts/resiliency_handoff/README.md) | Which physical-response objects Damage owns and how Resiliency scenarios pin them without duplicating measure or runtime logic. |
 
 ## Supportive standard, not a straitjacket
 

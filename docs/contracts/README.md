@@ -1,10 +1,10 @@
 # docs/contracts/
 
 Repo-level contracts for the damage-modeling seam consumed by downstream systems such as `Hazard_modeling`
-M3.
+M3 and pinned by `resiliency_modeling` scenarios.
 
-These files are the current Hazard-facing contract surface. They do not create a stable importable API; that
-remains deferred until runtime publishing and Hazard loading are designed.
+These files are the current consumer-facing contract surface. They do not create a stable importable API;
+that remains deferred until runtime publishing and Hazard loading are designed.
 
 Repository-current change records:
 
@@ -48,6 +48,12 @@ Repository-current change records:
 - [`tropical_cyclone_wind_solar_model_v2_0_synthetic_proposal.md`](hazard_handoff/tropical_cyclone_wind_solar_model_v2_0_synthetic_proposal.md) — bounded adapter contract for the noncanonical five-record candidate: one Perry compatibility record plus four cell-local synthetic Tier-4 fixed/tracker records; no value/full-plant, annual/tail, or cutover authorization
 - [`m3_to_m4_distribution_ready_emit.md`](hazard_handoff/m3_to_m4_distribution_ready_emit.md)
 - [`wildfire_solar_model_v1_0_hazard_migration.md`](hazard_handoff/wildfire_solar_model_v1_0_hazard_migration.md)
+
+## Resiliency handoff
+
+- [`resiliency_handoff/README.md`](resiliency_handoff/README.md) — Damage's thin producer-side boundary:
+  what a Resiliency scenario may pin, which semantics remain Damage-owned, and why a mean curve is not
+  automatically tail-equivalent. It links to the canonical three-repository execution contract.
 
 ## Guardrail
 

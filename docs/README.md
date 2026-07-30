@@ -7,7 +7,7 @@ for method, contracts, cells, evidence, and source drops.
 |---|---|
 | [`scope/`](scope/README.md) | Scope/story and repo boundary. Index-only surface over the current anchor docs. |
 | [`cells/`](cells/README.md) | Shallow entrypoints for all 10 structurally governed hazard × asset cells: 5 canonical runtime cells, 2 fail-closed model-v0.1 research cells, and 3 cells with noncanonical numerical proposal histories. The tropical-cyclone wind × solar lead is now a [`model-v2.1/docs-r1` coverage-complete screening candidate](cells/tropical_cyclone_wind_solar/proposed/README_tropical_cyclone_wind_solar__model_v2_1__docs_r1.md); its v0.1/v1/v2.0 alternatives remain preserved. |
-| [`contracts/`](contracts/README.md) | Repo-level damage-code, artifact, capability, and Hazard handoff contracts. |
+| [`contracts/`](contracts/README.md) | Repo-level damage-code, artifact, capability, Hazard handoff, and Resiliency producer-boundary contracts. |
 | [`method/`](method/README.md) | Durable foundations, value-basis support, and global method standards. |
 | [`evidence/`](evidence/README.md) | Cross-cell evidence-ingestion protocol/register. Detailed evidence remains cell-owned. |
 | [`source_drops/`](source_drops/README.md) | Landing zone/index for raw ZIPs, optional local extracted source mirrors, source context, and source-drop manifests. |

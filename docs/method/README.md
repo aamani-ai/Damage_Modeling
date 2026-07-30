@@ -59,6 +59,10 @@ The value-basis workbook is a method support artifact. The original source-drop 
 - [`18_hazard_pathway_scope_splitting_standard.md`](standards/18_hazard_pathway_scope_splitting_standard.md)
 - [`20_shared_component_substrate_standard.md`](standards/20_shared_component_substrate_standard.md)
 
+The selector/conditioner/exposure taxonomy describes Damage input semantics, not an end-to-end resiliency
+framework. The producer boundary is in
+[`contracts/resiliency_handoff/README.md`](../contracts/resiliency_handoff/README.md).
+
 ## Cell basics templates
 
 - [`TEMPLATE_cell_basics_README.md`](templates/TEMPLATE_cell_basics_README.md) — first-reader concepts,

@@ -4,8 +4,10 @@
 damage ratio** at the right granularity, with full provenance, emitted as a clean **damage-code** object that
 downstream systems consume.
 
-> **Shared substrate** — feeds the **Hazard** tier's M3 (damage) stage; does **not** own EAL/PML/financial
-> metrics. Spun out of [`Hazard_modeling`](Hazard_modeling) so the curve can be built as its own discipline.
+> **Shared substrate** — feeds the **Hazard** tier's M3 (damage) stage and is pinned by
+> **Resiliency** scenarios; it does **not** own the measure, runtime, EAL/PML, cost, or financial-effect
+> models. Spun out of [`Hazard_modeling`](Hazard_modeling) so vulnerability can be built as its own
+> discipline.
 
 > **🟡 New repo, docs-first.** Foundations, standards, contracts, cells, and evidence now live in shallow
 > docs folders. The v2.5 ZIP is preserved as the raw source drop. Durable runtime publishing is step two.
@@ -14,10 +16,17 @@ downstream systems consume.
 ## The idea in one picture
 
 ```
-   intensity ──►  DAMAGE CURVE (this repo)  ──►  damage ratio + flags  ──►  Hazard M3 (consumer)
-                  per failure-unit,                                          → EAL / PML / VaR
+   Resiliency scenario ── pins measure state/operator + this Damage artifact
+                                      │
+   intensity ──►  PHYSICAL RESPONSE (this repo)  ──►  DR + flags  ──►  Hazard runtime
+                  per failure-unit,                                      → EAL / PML / VaR
                   provenance-carried, versioned
 ```
+
+Damage owns the response and supported input semantics. Resiliency owns measure applicability,
+state/failure/dependence, composition, scenario choices, direct cost, and ancillary-effect declarations;
+Hazard owns execution and annual risk metrics. Start at the
+[`Resiliency handoff`](docs/contracts/resiliency_handoff/README.md) for the cross-repository seam.
 
 ## Layout
 
@@ -25,7 +34,7 @@ downstream systems consume.
 docs/
   scope/                          # scope/story and repo boundary
   cells/                          # shallow current cell entrypoints
-  contracts/                      # damage-code / artifact / capability / handoff contracts
+  contracts/                      # damage-code / artifact / capability / Hazard + Resiliency handoffs
   method/                         # foundations and global method indexes
   evidence/                       # cross-cell evidence ingestion protocol/register
   source_drops/                   # raw ZIPs/source drops, local extracted mirrors, manifests, context

@@ -33,7 +33,11 @@ and should not clutter the hazard engine that merely consumes its outputs.
 ```
 
 The damage curve used to live *inside* hazard M3 as a few borrowed curves. Now M3 **consumes** this repo's
-published `damage_code()`; this repo **owns the curve**.
+published `damage_code()`; this repo **owns the physical vulnerability response**. The separate
+`resiliency_modeling` discipline pins that response when a measure scenario needs it; it owns the measure
+profile, applicability, operational state/failure/dependence, composition, scenario, and direct cost. Hazard
+still owns execution and annual risk metrics. See the
+[`Resiliency handoff`](docs/contracts/resiliency_handoff/README.md).
 
 ---
 
@@ -41,9 +45,13 @@ published `damage_code()`; this repo **owns the curve**.
 
 ```
    PHASE 1  hazard-first ("IDF")  →  PHASE 2  damage from the ground up  →  PHASE 3  adaptation & resiliency
-   a few borrowed curves             THIS REPO — build it properly          turn the knobs the curve exposes
-   damage = assumed                  damage = built   ◄── we are here        damage = adjusted (NO separate repo)
+   a few borrowed curves             THIS REPO — build it properly          separate scenario discipline
+   damage = assumed                  damage = built                         measures pin Damage + Hazard
 ```
+
+This is a historical work arc, not a repository-ownership rule. Phase 3 now has its own
+`resiliency_modeling` home because measure evidence, state/failure logic, composition, cost, and decisions
+change independently from vulnerability artifacts and the Hazard engine.
 
 Full story + tier/contract/migration detail: [`docs/scope/SCOPE_AND_STORY.md`](docs/scope/SCOPE_AND_STORY.md).
 
@@ -85,6 +93,7 @@ are not curves).
 | `docs/contracts/standards/` | Hazard-facing interface, artifact, capability, and versioning standards. |
 | `docs/contracts/schemas/` | JSON schemas for curve bundles, damage emit, and capability declarations. |
 | `docs/contracts/hazard_handoff/` | Hazard M2/M3 handoff notes. |
+| `docs/contracts/resiliency_handoff/` | Damage producer boundary for Resiliency scenarios; links to the canonical cross-repo contract. |
 | `scripts/reference_helpers/` | Reference helper scripts only; not a stable `src/` API. |
 | `data/` | Curve-record artifacts + manifests (large/binary gitignored). [README](data/README.md). |
 | `notebooks/` | Curve-derivation / fitting / evidence notebooks (TBD). [README](notebooks/README.md). |
@@ -104,11 +113,14 @@ are not curves).
 
 ## What this repo owns — and does not
 
-| OWNS | does **NOT** own (the consumer does) |
+| OWNS | does **NOT** own |
 |---|---|
-| granularity · x-axis · curve form · coverage roles · provenance · value-linkage · the **emit object** + a capability declaration | hazard frequency · exposure · **EAL / PML / VaR / TVaR** · financial terms · portfolio accumulation · the ship/withhold decision |
+| failure-unit granularity · x-axis · physical vulnerability response · supported selector/conditioner/exposure input semantics · provenance · value/assembly linkage · valid domains · KATs · the **emit object** + capability declaration | measure profile/applicability · measure state/failure/dependence · operator composition · scenario choices · direct cost · ancillary financing effects · hazard frequency/runtime · **EAL / PML / VaR / TVaR** · portfolio accumulation |
 
-The boundary (and the EAL/PML resolution) is in [`SCOPE_AND_STORY.md`](docs/scope/SCOPE_AND_STORY.md) §4 and §6.
+Damage declaring a conditioner input does not make it the owner of the process that sets that conditioner.
+The boundary (and the EAL/PML resolution) is in
+[`SCOPE_AND_STORY.md`](docs/scope/SCOPE_AND_STORY.md) §4, §6, and §8; the canonical three-repository contract
+is linked from the [`Resiliency handoff`](docs/contracts/resiliency_handoff/README.md).
 
 ---
 

@@ -1,6 +1,8 @@
 # 07 · Selector, Conditioner, Exposure, and Value-Modifier Standard
 
-This document defines the metadata categories that every damage code should declare.
+This document defines the metadata categories that every damage code should declare. These categories specify
+the Damage interface; they do not make Damage the owner of the resiliency measure or scenario that supplies
+an input. See the [`Resiliency handoff`](../../contracts/resiliency_handoff/README.md).
 
 ## 1. Four different roles
 
@@ -12,7 +14,7 @@ SELECTOR
   fixed asset attribute that chooses a curve family or parameter set
 
 CONDITIONER
-  event-time state that shifts or blends a curve
+  event-time state supplied to a supported physical response
 
 EXPOSURE / VALUE MODIFIER
   determines how much of the value bucket the curve applies to
@@ -63,7 +65,7 @@ exposure/value modifiers
 | Selector | `front_glass_thickness_mm` | More detailed module selector if available |
 | Selector | `glass_construction` | glass//glass vs glass//backsheet |
 | Conditioner | `stow_state` | event-time tracker state: stowed/unstowed/unknown |
-| Conditioner | `stow_success_probability` | optional expected-state blend when actual state is unknown |
+| Scenario/state input | `stow_success_probability` | consumer-supplied probability; may compile to an expected-state blend only for outputs that pass the equivalence gate |
 | Exposure | `array_exposure_fraction` | fraction of PV array footprint affected by hail swath |
 | Value modifier | `f_hail_material_share` | exposed value share inside PV_ARRAY/PV_MODULE bucket |
 
@@ -94,6 +96,11 @@ It is not:
 - or probability that the site experiences hail.
 ```
 
+Damage may declare that it can accept this field and may implement an explicitly supported mean-response
+view. The value, evidence, failure model, and dependence scope are owned by the Resiliency profile/scenario,
+not by the Damage artifact. A mean blend is not automatically valid for tail metrics or nonlinear financial
+terms.
+
 If actual state is known:
 
 ```text
@@ -101,6 +108,9 @@ confirmed stowed   → P(stowed) = 1
 confirmed unstowed → P(stowed) = 0
 unknown            → use scenario or default probability, with flag
 ```
+
+Here `default probability` means an explicit, versioned consumer scenario value. Damage must not invent a
+measure-success probability when the consumer omits it; the affected response/output fails closed.
 
 ## 5. Flood × solar example
 
@@ -144,6 +154,24 @@ Value modifiers change caps or denominators.
 ```
 
 If a variable changes more than one thing, split it into separate fields or document the combined effect explicitly.
+
+## 9. Cross-repository ownership rule
+
+```text
+Damage declares:
+  field meaning + units + valid values + response effect + evidence + capability
+
+Resiliency supplies:
+  measure applicability + target facts + event state/probability + failure/dependence + composition
+
+Hazard executes:
+  those resolved inputs against events and produces annual risk metrics
+```
+
+A fixed installed attribute such as module archetype may be a target fact, while the decision to replace
+modules is a Resiliency scenario choice. Likewise, `stow_state` is a supported Damage conditioner, while the
+logic and probability that creates that state belong to Resiliency. Do not duplicate the physical response
+in Resiliency or the measure state model in Damage.
 
 ---
 

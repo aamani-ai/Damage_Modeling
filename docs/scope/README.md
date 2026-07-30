@@ -29,10 +29,16 @@ It does not own:
 ```text
 hazard frequency
 EAL / PML / VaR / TVaR computation
+resiliency measure profiles, applicability, state/failure/dependence, or composition
+scenario choices, direct measure cost, or ancillary financing effects
 financial terms
 portfolio accumulation
 BI / downtime
 ```
+
+Damage can expose selector, conditioner, and exposure inputs without owning the measure that changes them.
+See the [`Resiliency handoff`](../contracts/resiliency_handoff/README.md) and its link to the canonical
+cross-repository execution contract.
 
 ## Migration status
 

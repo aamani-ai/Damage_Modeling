@@ -20,7 +20,10 @@ What is the insurance premium?
 What is the full financial return-period loss?
 ```
 
-Those are downstream applications that consume the damage code.
+Those are downstream applications that consume the damage code. For a Resiliency scenario, the measure
+profile and scenario also remain downstream of this interface: they pin the Damage artifact and supply
+measure-owned state/failure assumptions through Hazard's execution seam. See the
+[`Resiliency handoff`](../resiliency_handoff/README.md).
 
 ## 2. Standard damage-code object
 
@@ -183,7 +186,8 @@ module_archetype unknown
   → use default_3_2mm_glass_backsheet, flag DEFAULT_SELECTOR_USED
 
 stow_state unknown
-  → use probabilistic/default scenario, flag UNKNOWN_CONDITIONER_STATE
+  → require an explicit versioned consumer scenario state/distribution;
+    otherwise withhold/fail closed with UNKNOWN_CONDITIONER_STATE
 
 hazard input outside range
   → clamp or extrapolate with warning, depending cell policy
