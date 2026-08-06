@@ -166,8 +166,9 @@ Package release alone is not a valid cell-runtime pin.
 6. deliberately promotes the new pin.
 ```
 
-This is a pull-based contract. Push notifications and durable object-store publishing remain future system
-work.
+This is a pull-based contract. **Durable object-store publishing shipped 2026-08-06** — see
+[standard 23](23_durable_publication_standard.md) (the `damage_artifacts/<env>/…` GCS namespace mirrors this
+index cell-by-cell, pinned by the same SHA). Push notifications remain future system work.
 
 ## 11. Proposed pathway-aware v3 extension
 

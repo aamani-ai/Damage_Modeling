@@ -19,6 +19,8 @@ Repository-current change records:
 | Machine-readable artifact standard | [`20_machine_readable_artifact_standard.md`](standards/20_machine_readable_artifact_standard.md) |
 | Capability and cap-binding standard | [`21_capability_and_cap_binding_standard.md`](standards/21_capability_and_cap_binding_standard.md) |
 | Pathway-aware artifact/emit draft | [`22_pathway_aware_artifact_and_emit_standard.md`](standards/22_pathway_aware_artifact_and_emit_standard.md) |
+| **Durable publication standard** (GCS namespace · write protocol · publish→register→load) | [`23_durable_publication_standard.md`](standards/23_durable_publication_standard.md) |
+| **Asset→artifact mapping standard** (the four governed stages · alias governance · no-invention rule · basis-coherence guard · T4 round-trip) | [`24_asset_to_artifact_mapping_standard.md`](standards/24_asset_to_artifact_mapping_standard.md) |
 | Versioning policy | [`17_versioning_policy.md`](standards/17_versioning_policy.md) |
 
 ## Schemas
@@ -57,5 +59,9 @@ Repository-current change records:
 
 ## Guardrail
 
-This folder does not create a stable importable API. Do not add `src/` until the runtime publishing and Hazard
-loading path are designed.
+This folder does not create a stable importable API for *evaluators* — a consumer never imports curve math
+from here. **The former "no `src/`" guardrail is superseded (owner ruling 2026-08-06):** the runtime publishing
+path is now designed and built — `src/damage_modeling/publishing/` (the `damage-publish` release CLI) under
+[standard 23](standards/23_durable_publication_standard.md), which durably publishes the canonical cells to
+the governed GCS namespace (`damage_artifacts/<env>/…`). Authoring remains docs-first in `docs/cells/`;
+nothing in `src/` may alter an artifact.

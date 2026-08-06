@@ -68,5 +68,7 @@ The [coverage plan](docs/plans/hazard_asset_coverage/README.md) reports **10/10 
 **5/10 canonical runtime coverage**, and records the one-cell-at-a-time deep-curation queue. v2.5 ships
 machine-readable JSON
 artifacts and capability declarations; wildfire×solar is repository-current but outside that preserved
-portable package. Durable artifact publishing and Hazard M3 loading remain future system work. See
-[`AGENTS.md`](AGENTS.md).
+portable package. **Durable artifact publishing shipped 2026-08-06** — all five canonical cells live on the
+governed GCS namespace via the `damage-publish` release CLI (`src/damage_modeling/publishing/`,
+[standard 23](docs/contracts/standards/23_durable_publication_standard.md)); Hazard M3 *loading* is the
+consumer's next step (its deep-slice CAP-2). See [`AGENTS.md`](AGENTS.md).
