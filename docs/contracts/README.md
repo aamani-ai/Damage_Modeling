@@ -57,6 +57,12 @@ Repository-current change records:
   what a Resiliency scenario may pin, which semantics remain Damage-owned, and why a mean curve is not
   automatically tail-equivalent. It links to the canonical three-repository execution contract.
 
+## Operating guides
+
+The **steps** twin of these standards lives in [`../guides/`](../guides/README.md) — start with
+[`releasing_a_damage_artifact.md`](../guides/releasing_a_damage_artifact.md) (author → index → publish →
+consumer handshake → promotion).
+
 ## Guardrail
 
 This folder does not create a stable importable API for *evaluators* — a consumer never imports curve math

@@ -68,7 +68,9 @@ The [coverage plan](docs/plans/hazard_asset_coverage/README.md) reports **10/10 
 **5/10 canonical runtime coverage**, and records the one-cell-at-a-time deep-curation queue. v2.5 ships
 machine-readable JSON
 artifacts and capability declarations; wildfire×solar is repository-current but outside that preserved
-portable package. **Durable artifact publishing shipped 2026-08-06** — all five canonical cells live on the
+portable package. **Durable artifact publishing shipped 2026-08-06** (runbook: [`docs/guides/releasing_a_damage_artifact.md`](docs/guides/releasing_a_damage_artifact.md)) — all five canonical cells live on the
 governed GCS namespace via the `damage-publish` release CLI (`src/damage_modeling/publishing/`,
-[standard 23](docs/contracts/standards/23_durable_publication_standard.md)); Hazard M3 *loading* is the
-consumer's next step (its deep-slice CAP-2). See [`AGENTS.md`](AGENTS.md).
+[standard 23](docs/contracts/standards/23_durable_publication_standard.md)); Hazard M3 *loading* shipped on the consumer side the same day
+(`drivers/deep/damage_loader.py`: registry → SHA → schema → KATs @1e-12 → compose; first observed-asset run
+served 2026-08-06), and Hazard's DD-G20 makes registry-fed consumption the rule for every future cut — this
+namespace is now the only path new science runs read. See [`AGENTS.md`](AGENTS.md).
