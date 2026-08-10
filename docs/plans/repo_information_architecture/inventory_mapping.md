@@ -46,6 +46,8 @@ package contents into role-based folders.
 | `wind_tornado_wind` | model v1.0 / human r5 / runtime r4 | `docs/cells/wind_tornado_wind/current/wind_tornado_wind__model_v1_0__docs_r4__curve_artifact.json` |
 | `strong_wind_solar` | model v1.0 / human r4 / runtime r3 | `docs/cells/strong_wind_solar/current/strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json` |
 | `wildfire_solar` | model v1.0 / human r4 / runtime r3 | `docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json` |
+| `flood_wind` | model v1.0 / docs r1 | `docs/cells/flood_wind/current/flood_wind__model_v1_0__docs_r1__curve_artifact.json` |
+| `wildfire_wind` | model v1.0 / docs r1 | `docs/cells/wildfire_wind/current/wildfire_wind__model_v1_0__docs_r1__curve_artifact.json` |
 
 ## Structurally governed noncanonical cells
 
@@ -54,11 +56,9 @@ gates without entering the canonical artifact index.
 
 | Cell | Proposed model/docs | Runtime status |
 |---|---|---|
-| `tropical_cyclone_wind_wind` | model v1.0 / docs r1 | Three exact source-native screening curves for one quarantined atom; noncanonical, partial coverage, no scenario loss, not in artifact index |
-| `flood_wind` | model v1.0 / docs r1 | One legacy source-native whole-substation screening curve; noncanonical partial coverage; no value binding; not in artifact index |
+| `tropical_cyclone_wind_wind` | model v1.0 / docs r1 | Current source-native partial-screening release: three exact Jaimes selectors for one quarantined atom; no scenario loss or generic wind-farm transfer; indexed under bundle v3 |
 | `tropical_cyclone_wind_solar` | model v2.1 / docs r1 candidate; model v0.1, v1.0, and v2.0 preserved | Ten proposal records plus named 100%-physical-value plant assembly; plant DR/loss per kWdc/optional scenario dollars supported, annual/tail consumer-owned; no `current/`, index, changelog, package, or cutover action |
 | `hail_wind` | model v0.1 / human docs r2 / runtime scaffold docs r1 | Independently deep-curated strict NO-GO; `NO_RUNTIME_CURVE`; not in artifact index |
-| `wildfire_wind` | model v0.1 / docs r1 | `NO_RUNTIME_CURVE`; not in artifact index |
 
 ## Still Deferred
 

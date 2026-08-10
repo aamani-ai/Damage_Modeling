@@ -12,6 +12,9 @@ live under each cell folder.
 | `wind_tornado_wind` | model v1.0 / human docs r5; runtime pin docs r4 | `WIND_TORNADO_WIND_V1` | [`wind_tornado_wind/`](wind_tornado_wind/README.md) |
 | `strong_wind_solar` | model v1.0 / human docs r4; runtime pin docs r3 | `STRONG_WIND_SOLAR_V1` | [`strong_wind_solar/`](strong_wind_solar/README.md) |
 | `wildfire_solar` | model v1.0 / human docs r4; runtime pin docs r3; screening engineering proxy | `WILDFIRE_SOLAR_FSIM_SCREENING_V1` | [`wildfire_solar/`](wildfire_solar/README.md) |
+| `flood_wind` | model v1.0 / docs r1; partial screening | `FLOOD_WIND_FEMA_HAZUS_SUBSTATION_SCREENING_V1` | [`flood_wind/`](flood_wind/README.md) |
+| `wildfire_wind` | model v1.0 / docs r1; Tier-4 partial screening | `WILDFIRE_WIND_PARTIAL_ELECTRICAL_SCREENING_V1` | [`wildfire_wind/`](wildfire_wind/README.md) |
+| `tropical_cyclone_wind_wind` | model v1.0 / docs r1; source-native partial screening | `TROPICAL_CYCLONE_WIND_WIND_JAIMES_SCREENING_V1` | [`tropical_cyclone_wind_wind/`](tropical_cyclone_wind_wind/README.md) |
 
 Active research proposal: `wind_tornado_wind` has a noncanonical
 [`model v2.0 / docs r1` pathway-aware package](wind_tornado_wind/proposed/README_wind_tornado_wind__model_v2_0__docs_r1.md).
@@ -23,19 +26,19 @@ hurricane/tropical-cyclone wind. Model v1.0/docs r4 remains the runtime pin; hum
 It separates fixed tilt from exact-system-qualified trackers, excludes hurricane/tornado/synoptic wind, and
 leaves model v1.0/docs r3 as the canonical runtime pin; human docs r4 only add basics.
 
-`tropical_cyclone_wind_wind` now has a noncanonical
-[`model v1.0 / docs r1` release candidate](tropical_cyclone_wind_wind/README.md). It publishes three exact
+`tropical_cyclone_wind_wind` now has a canonical
+[`model v1.0 / docs r1` source-native partial-screening release](tropical_cyclone_wind_wind/current/README.md). It publishes three exact
 Jaimes source-family expected-DR equations only for a quarantined turbine/tower exposure atom on the native
 3-second-gust-at-10-m axis. Standard wind-farm units, dollar/scenario loss, and annual/tail metrics remain
-withheld; the proposal has no artifact-index entry, `current/` package, or consumer cutover. The model-v0.1
-zero-curve scaffold remains the historical evidence and rejection audit.
+withheld. Exact source-native selectors and wind-axis semantics are mandatory. The model-v0.1 zero-curve
+scaffold and pre-promotion v1 package remain the historical evidence and audit records.
 
-`flood_wind` now has a noncanonical
-[`model v1.0 / docs r1` screening proposal](flood_wind/README.md). It preserves the exact legacy FEMA
+`flood_wind` now has a canonical
+[`model v1.0 / docs r1` partial-screening release](flood_wind/current/README.md). It preserves the exact legacy FEMA
 Hazus-MH 2.1 whole-substation depth-damage table for one mutually exclusive source-native GSU/substation
 assembly atom. All component and wind-specific units remain withheld; current Hazus 7.0 disables electric-
-power loss results, and the proposal has no artifact-index entry, `current/` package, value binding, or
-consumer cutover. The model-v0.1 zero-curve scaffold remains the component-level evidence audit.
+power loss results. Same-unit scenario loss requires explicit substation value and exposure. The model-v0.1
+zero-curve scaffold remains the component-level evidence audit.
 
 `tropical_cyclone_wind_solar` now leads with a noncanonical
 [`model v2.1 / docs r1` coverage-complete screening candidate](tropical_cyclone_wind_solar/proposed/README_tropical_cyclone_wind_solar__model_v2_1__docs_r1.md). It preserves v2.0's Perry and four array records, adds five Tier-4 site-facility records, and reconciles a named 100%-physical-value profile into plant DR, loss per kWdc, and optional scenario dollars. The qualified fixed/tracker/site axes and attained-state controls remain; annual/tail metrics remain consumer-owned. Models v0.1, v1.0, and v2.0 remain preserved alternatives. The v2.1 candidate has no
@@ -48,18 +51,16 @@ pooling nacelle/BOP subjects, and rejects the mislabeled legacy real-estate curv
 added seven sources and nine claims but found no source-native disposition/economic atom; the package
 publishes zero runtime records and withholds every numeric output with `NO_RUNTIME_CURVE`.
 
-`wildfire_wind` is a new, noncanonical
-[`model v0.1 / docs r1` research scaffold](wildfire_wind/README.md). It separates thermal attack, firebrand
-ignition, and destructive residue/contamination; uses one dependency-safe repeated-turbine assembly; and
-keeps pad, collection, control/O&M, civil, foundation, and four shared-GSU apparatus groups at their natural
-spatial grains. Regional wildfire classes, material tests, internal-fire cases, and legacy logistics remain
-audit evidence only. The package publishes zero runtime records and withholds every numeric output with
-`NO_RUNTIME_CURVE`.
+`wildfire_wind` now has a canonical
+[`model v1.0 / docs r1` Tier-4 partial-screening release](wildfire_wind/current/README.md). It publishes exact
+FSim-class tables for `WT_PAD_ELECTRICAL` and `WT_GSU_PROTECTION_CONTROL_DC` only. Every other unit remains
+withheld, source/assumption acknowledgement is mandatory, and whole-farm or annual defaults are prohibited.
+The model-v0.1 zero-curve scaffold remains the strict evidence-earned alternative and audit history.
 
 ## Portable-package boundary
 
-`wildfire_solar` is repository-current and canonical but is not included in the preserved portable package
-v2.5. Its model v0.1 scaffold remains under `wildfire_solar/proposed/` as the research and rejection audit.
+`wildfire_solar`, `flood_wind`, `wildfire_wind`, and `tropical_cyclone_wind_wind` are repository-current and canonical but are not included
+in preserved portable package v2.5. Their proposal/scaffold packages remain as research and rejection audits.
 
 Authoritative package registry:
 [`VERSION_REGISTRY.md`](VERSION_REGISTRY.md).
@@ -88,11 +89,11 @@ references, ASCII diagrams, worked examples, exact tables, and caveats with the 
 | `wind_tornado_wind` | [Complete](wind_tornado_wind/basics/README.md) |
 | `strong_wind_solar` | [Complete](strong_wind_solar/basics/README.md) |
 | `wildfire_solar` | [Complete](wildfire_solar/basics/README.md) |
-| `tropical_cyclone_wind_wind` | [Complete for proposed model v1.0](tropical_cyclone_wind_wind/basics/README.md) — source-native partial-coverage release candidate; noncanonical |
-| `flood_wind` | [Complete for proposed model v1.0](flood_wind/basics/README.md) — legacy source-native whole-substation screening proposal; noncanonical partial coverage |
+| `tropical_cyclone_wind_wind` | [Complete for current model v1.0](tropical_cyclone_wind_wind/basics/README.md) — source-native turbine/tower partial-screening release |
+| `flood_wind` | [Complete for current model v1.0](flood_wind/basics/README.md) — legacy source-native whole-substation partial-screening release |
 | `tropical_cyclone_wind_solar` | [Complete for proposed model v2.1/docs r1](tropical_cyclone_wind_solar/basics/README.md) — ten records plus complete named-value plant physical-damage assembly; noncanonical and no-cutover |
 | `hail_wind` | [Complete for model v0.1/docs r2](hail_wind/basics/README.md) — independently deep-curated, fail-closed turbine/blade and BOP research scaffold |
-| `wildfire_wind` | [Complete for proposed model v0.1](wildfire_wind/basics/README.md) — fail-closed pathway-aware turbine/BOP/GSU research scaffold |
+| `wildfire_wind` | [Complete for current model v1.0/docs r1](wildfire_wind/basics/README.md) — two-unit Tier-4 electrical partial-screening release; v0.1 strict alternative preserved |
 
 Reusable authoring templates:
 

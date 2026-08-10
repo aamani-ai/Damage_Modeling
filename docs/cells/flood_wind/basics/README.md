@@ -10,7 +10,7 @@ cell_model_version: model v1.0
 human_documentation_revision: docs r1
 damage_code_id: FLOOD_WIND_FEMA_HAZUS_SUBSTATION_SCREENING_V1
 change_class: MODEL_BEHAVIOR_CHANGE + SCHEMA_CONTRACT_CHANGE
-canonical_runtime_artifact: false
+canonical_runtime_artifact: true
 consumer_cutover: none
 ```
 
@@ -72,7 +72,7 @@ The review evaluator returns:
 status: conditional
 curve_id: FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL
 scalar_central_dr: 0.11
-scenario_loss_status: withheld_noncanonical_proposal
+scenario_loss_status: supported_with_explicit_same_substation_value_and_exposure_only
 ```
 
 If WSE and grade are supplied instead, both elevations must use the same vertical datum. For example,
@@ -95,7 +95,7 @@ Withheld means unknown/not supported, never zero.
 - [How the model is built](HOW_THE_MODEL_IS_BUILT.md)
 - [Exact model reference](MODEL_REFERENCE.md)
 - [Cell anchor](../README.md)
-- [Derivation dossier](../proposed/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md)
-- [Proposed artifact](../proposed/flood_wind__model_v1_0__docs_r1__curve_artifact.json)
-- [Review workbook](../proposed/damage_curve_records_flood_wind__model_v1_0__docs_r1.xlsx)
+- [Derivation dossier](../current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md)
+- [Canonical artifact](../current/flood_wind__model_v1_0__docs_r1__curve_artifact.json)
+- [Audit workbook](../current/damage_curve_records_flood_wind__model_v1_0__docs_r1.xlsx)
 - [Historical model-v0.1 package](../proposed/README_flood_wind__model_v0_1__docs_r1.md)

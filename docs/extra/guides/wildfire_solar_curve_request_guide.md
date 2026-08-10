@@ -7,6 +7,7 @@ Use the repository-current canonical screening model:
 ```text
 cell_id:          wildfire_solar
 consumer pin:     wildfire_solar@model_v1_0__docs_r3
+artifact SHA:     598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8
 damage_code_id:   WILDFIRE_SOLAR_FSIM_SCREENING_V1
 artifact:         docs/cells/wildfire_solar/current/
                   wildfire_solar__model_v1_0__docs_r3__curve_artifact.json

@@ -6,16 +6,17 @@ Bundle v2 protects the payloads used by the current single-axis evaluators. It c
 which two hazard mechanisms share an asset substrate but require different axes, evidence, curve families,
 capabilities, and consumer routing.
 
-This standard defines the proposed v3 contract for that case. It is used by the `wind_tornado_wind`,
-`strong_wind_solar`, and `tropical_cyclone_wind_solar` model-v2.0 proposals and the
-`tropical_cyclone_wind_wind` and `flood_wind` model-v1.0 proposals. It remains a draft until a v3 model and
-its Hazard migration pass promotion review. Existing canonical artifacts remain bundle v2 and emit v1.
+This standard defines the v3 contract for that case. It became released on 2026-08-08 when `flood_wind` and
+`wildfire_wind` model v1.0 passed repository promotion plus the common Damage-publisher/Hazard-loader KAT
+seam. Other v3 packages remain noncanonical until their own cell gates pass. The five older canonical
+artifacts remain bundle v2 and emit v1; release of v3 does not migrate them.
 
 ```yaml
 artifact_schema: damage_curve_record_bundle.v3
 emit_schema: damage_emit.v2
 capability_schema: capability_declaration.v3
-current_canonical_contracts_changed: false
+contract_status: released_for_individually_promoted_cells
+automatic_v2_migration: prohibited
 ```
 
 ## 2. First-class pathway identity
@@ -259,7 +260,7 @@ Capability is stated per pathway because axis quality and failure-unit coverage 
 - value/exposure requirements for scenario loss;
 - whether spread is probabilistic, a nonprobabilistic envelope, or absent;
 - limitation flags and extrapolation bounds;
-- the pre-promotion noncanonical gate;
+- the pre-promotion gate and its explicit released disposition;
 - consumer prerequisites after promotion.
 
 A proposed artifact cannot authorize reportable consumer annual metrics. After promotion, a consumer may

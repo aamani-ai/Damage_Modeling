@@ -29,21 +29,26 @@ The NREL reference ledger reconciles 1,623 USD/kW of physical value and 345 USD/
 not a site SOV. Electrical and civil rows need allocation, and support/logistics are charged once after final
 disposition.
 
-## 6. Audit, do not inherit, numerical candidates
+## 6. Admit a bounded owner-authorized screening exception
 
 - The old rotor/nacelle/tower logistics use invented transfer and response assumptions and contradict their
   own tables; they are rejected.
-- Wildfire-solar uses the same FSim source semantics but solar-specific Tier-4 screening ordinates; no
-  numerical transfer is permitted.
+- Primary substation and equipment evidence supports nonzero electrical vulnerability and places steel-
+  enclosed pad apparatus below polymeric/electronic control packages, but does not calibrate ordinates.
+- Under explicit owner authorization, two cell-local Tier-4 categorical profiles are adopted for those exact
+  units. Their numerical identity to wildfire-solar profiles is an audit fingerprint, not evidence transfer
+  or a shared runtime dependency.
 - Internal turbine-fire cases describe dependencies and inspection, not external-wildfire probability.
 - Wind-farm fire guidance supplies selectors and controls, not mitigation multipliers.
 
-## 7. Fail closed and name the data program
+## 7. Emit partially and fail closed everywhere else
 
-The artifact contains zero curve records and the tests require null/withheld outputs. Promotion requires
-local delivered-load evidence, affected/unaffected inventories, inspected dispositions, same-unit costs and
-values, and dependency-safe assembly validation.
+The model-v1 artifact contains two records and fourteen numerical KATs. Exact product, assumption set, class,
+pathway, and failure unit are mandatory. Noninteger states, firebrand fallback, unsupported units, implicit
+values, and whole-farm aggregation fail closed. Model v0.1 remains the no-curve alternative. Promotion still
+requires local delivered-load evidence or explicit continued proxy approval, affected/unaffected
+inventories, inspected dispositions, same-unit costs and values, and dependency-safe validation.
 
-See the [derivation dossier](../proposed/wildfire_wind_curve_derivation_dossier__model_v0_1__docs_r1.md),
-[site adapter](../proposed/SITE_CONDITION_ADAPTER_wildfire_wind__model_v0_1__docs_r1.md), and
-[Hazard handoff](../../../contracts/hazard_handoff/wildfire_wind_model_v0_1_boundary.md).
+See the [current model-v1 dossier](../current/wildfire_wind_curve_derivation_dossier__model_v1_0__docs_r1.md),
+[deep-research memo](../proposed/DEEP_RESEARCH_AND_DECISION_MEMO_wildfire_wind__model_v1_0__docs_r1.md), and
+[Hazard proposal](../../../contracts/hazard_handoff/wildfire_wind_model_v1_0_partial_screening_proposal.md).

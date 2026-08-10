@@ -1,6 +1,25 @@
 # Wildfire × wind — model reference
 
-## Identity and release state
+## Current partial-screening release
+
+| Field | Value |
+|---|---|
+| Model/docs | `model v1.0 / docs r1` |
+| Damage code | `WILDFIRE_WIND_PARTIAL_ELECTRICAL_SCREENING_V1` |
+| Numerical units | `WT_PAD_ELECTRICAL`, `WT_GSU_PROTECTION_CONTROL_DC` |
+| Runtime curves | `2`, exact categorical screening state tables |
+| Grade | cell-local Tier-4 engineering proxy |
+| Canonical | `false` |
+| Scenario/annual/tail outputs | withheld |
+| Consumer action | review/shadow only; do not cut over |
+
+The current release returns conditional unit-level DR, not whole-farm DR. The mixed NREL electrical value row,
+implicit value shares, and all unmodeled-unit zeros are prohibited. See the
+[v1 overview](../current/README.md),
+[artifact](../current/wildfire_wind__model_v1_0__docs_r1__curve_artifact.json), and
+[validation](../current/VALIDATION_REPORT_wildfire_wind__model_v1_0__docs_r1.md).
+
+## Preserved model-v0.1 identity and release state
 
 | Field | Value |
 |---|---|

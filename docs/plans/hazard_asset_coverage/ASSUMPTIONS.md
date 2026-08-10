@@ -15,7 +15,8 @@
 
 ## Watchlist
 
-- Do not let “10/10 structurally covered” be read as “10/10 calibrated”; canonical runtime coverage is 5/10.
+- Do not let “10/10 structurally covered” be read as “10/10 calibrated”; repository-current canonical runtime coverage is 8/10,
+  including two explicitly partial screening releases.
 - Do not count the TC-solar model-v2 candidate as a sixth canonical runtime cell or as a queue completion.
 - Do not create placeholder parameters merely to move a row from `Later` to `Planned`.
 - Do not cite strong-wind numerical identity as tropical-cyclone evidence; the four generic records remain

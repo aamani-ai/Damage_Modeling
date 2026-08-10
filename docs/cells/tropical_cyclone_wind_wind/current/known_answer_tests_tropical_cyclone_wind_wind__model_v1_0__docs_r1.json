@@ -1,0 +1,733 @@
+{
+  "schema_version": "known_answer_tests.v3",
+  "cell_id": "tropical_cyclone_wind_wind",
+  "semantic_damage_model_version": "model v1.0",
+  "documentation_revision": "docs r1",
+  "artifact_schema_version": "damage_curve_record_bundle.v3",
+  "artifact_status": "repository_canonical_partial_screening",
+  "absolute_tolerance": 1e-12,
+  "equation": {
+    "runtime": "DR=0 if V<=90; else 1-exp(-ln(2)*((V-90)/delta_V50)^rho)",
+    "source_equivalent": "1-pow(0.5,pow((V-90)/delta_V50,rho))",
+    "runtime_range": "V<=90 source-assumed zero; 90<V<108 withheld; 108<=V<=252 supported; V>252 withheld"
+  },
+  "formula_known_answer_tests": [
+    {
+      "test_id": "TCWW_JAIMES_1MW_44M_SCREENING_V90",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_1MW_HH44_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 90
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_1MW_44M_SCREENING",
+        "failure_unit_damage_ratio": 0
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_1MW_44M_SCREENING_V108",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_1MW_HH44_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 108
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_1MW_44M_SCREENING",
+        "failure_unit_damage_ratio": 8.484483482451566e-8
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_1MW_44M_SCREENING_V160",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_1MW_HH44_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 160
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_1MW_44M_SCREENING",
+        "failure_unit_damage_ratio": 0.015783943301410974
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_1MW_44M_SCREENING_V180",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_1MW_HH44_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 180
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_1MW_44M_SCREENING",
+        "failure_unit_damage_ratio": 0.13968672798459847
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_1MW_44M_SCREENING_V200",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_1MW_HH44_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 200
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_1MW_44M_SCREENING",
+        "failure_unit_damage_ratio": 0.595366445773527
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_1MW_44M_SCREENING_V220",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_1MW_HH44_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 220
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_1MW_44M_SCREENING",
+        "failure_unit_damage_ratio": 0.9821988948782603
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_1MW_44M_SCREENING_V252",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_1MW_HH44_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 252
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_1MW_44M_SCREENING",
+        "failure_unit_damage_ratio": 0.9999999999996926
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_1MW_44M_SCREENING_ABSOLUTE_D50",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_1MW_HH44_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 196.77
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_1MW_44M_SCREENING",
+        "failure_unit_damage_ratio": 0.5
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_2P5MW_80M_SCREENING_V90",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_2P5MW_HH80_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 90
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_2P5MW_80M_SCREENING",
+        "failure_unit_damage_ratio": 0
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_2P5MW_80M_SCREENING_V108",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_2P5MW_HH80_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 108
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_2P5MW_80M_SCREENING",
+        "failure_unit_damage_ratio": 0.0006893409004211648
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_2P5MW_80M_SCREENING_V160",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_2P5MW_HH80_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 160
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_2P5MW_80M_SCREENING",
+        "failure_unit_damage_ratio": 0.2799188381327462
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_2P5MW_80M_SCREENING_V180",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_2P5MW_HH80_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 180
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_2P5MW_80M_SCREENING",
+        "failure_unit_damage_ratio": 0.6422059000083215
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_2P5MW_80M_SCREENING_V200",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_2P5MW_HH80_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 200
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_2P5MW_80M_SCREENING",
+        "failure_unit_damage_ratio": 0.9223893252796812
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_2P5MW_80M_SCREENING_V220",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_2P5MW_HH80_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 220
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_2P5MW_80M_SCREENING",
+        "failure_unit_damage_ratio": 0.9957334216400757
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_2P5MW_80M_SCREENING_V252",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_2P5MW_HH80_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 252
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_2P5MW_80M_SCREENING",
+        "failure_unit_damage_ratio": 0.9999996337255346
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_2P5MW_80M_SCREENING_ABSOLUTE_D50",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_2P5MW_HH80_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 172.52
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_2P5MW_80M_SCREENING",
+        "failure_unit_damage_ratio": 0.5
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_3P3MW_100M_SCREENING_V90",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 90
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_3P3MW_100M_SCREENING",
+        "failure_unit_damage_ratio": 0
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_3P3MW_100M_SCREENING_V108",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 108
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_3P3MW_100M_SCREENING",
+        "failure_unit_damage_ratio": 0.0006275236923301009
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_3P3MW_100M_SCREENING_V160",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 160
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_3P3MW_100M_SCREENING",
+        "failure_unit_damage_ratio": 0.4235129655179889
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_3P3MW_100M_SCREENING_V180",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 180
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_3P3MW_100M_SCREENING",
+        "failure_unit_damage_ratio": 0.8548965899961662
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_3P3MW_100M_SCREENING_V200",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 200
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_3P3MW_100M_SCREENING",
+        "failure_unit_damage_ratio": 0.9947744450209641
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_3P3MW_100M_SCREENING_V220",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 220
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_3P3MW_100M_SCREENING",
+        "failure_unit_damage_ratio": 0.9999944014184746
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_3P3MW_100M_SCREENING_V252",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 252
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_3P3MW_100M_SCREENING",
+        "failure_unit_damage_ratio": 0.9999999999999998
+      }
+    },
+    {
+      "test_id": "TCWW_JAIMES_3P3MW_100M_SCREENING_ABSOLUTE_D50",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 163.3
+      },
+      "expected": {
+        "status": "supported",
+        "curve_id": "TCWW_JAIMES_3P3MW_100M_SCREENING",
+        "failure_unit_damage_ratio": 0.5
+      }
+    }
+  ],
+  "contract_tests": [
+    {
+      "test_id": "TCWW1_MISSING_ARCHETYPE",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 180
+      },
+      "expected": {
+        "status": "rejected",
+        "error_code": "TURBINE_ARCHETYPE_REQUIRED"
+      }
+    },
+    {
+      "test_id": "TCWW1_UNKNOWN_ARCHETYPE",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "GENERIC_MODERN_5MW",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 180
+      },
+      "expected": {
+        "status": "rejected",
+        "error_code": "TURBINE_ARCHETYPE_UNSUPPORTED"
+      }
+    },
+    {
+      "test_id": "TCWW1_NEAREST_NEIGHBOR_PROHIBITED",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_NEAREST_FROM_4MW",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 180
+      },
+      "expected": {
+        "status": "rejected",
+        "error_code": "TURBINE_ARCHETYPE_UNSUPPORTED"
+      }
+    },
+    {
+      "test_id": "TCWW1_MISSING_SOURCE_ASSUMPTION_ACK",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "tc_peak_gust_3s_10m_kmh": 180
+      },
+      "expected": {
+        "status": "rejected",
+        "error_code": "SOURCE_MODEL_ASSUMPTION_SET_REQUIRED"
+      }
+    },
+    {
+      "test_id": "TCWW1_WRONG_SOURCE_ASSUMPTION_ACK",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "HEALTHY_ACTIVE_YAW",
+        "tc_peak_gust_3s_10m_kmh": 180
+      },
+      "expected": {
+        "status": "rejected",
+        "error_code": "SOURCE_MODEL_ASSUMPTION_SET_UNSUPPORTED"
+      }
+    },
+    {
+      "test_id": "TCWW1_CATEGORY_NOT_AXIS",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "saffir_simpson_category": 4
+      },
+      "expected": {
+        "status": "rejected",
+        "error_code": "TC_SOURCE_NATIVE_AXIS_REQUIRED"
+      }
+    },
+    {
+      "test_id": "TCWW1_NHC_1MIN_NOT_AXIS",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "nhc_maximum_sustained_surface_wind_mps": 60
+      },
+      "expected": {
+        "status": "rejected",
+        "error_code": "TC_SOURCE_NATIVE_AXIS_REQUIRED"
+      }
+    },
+    {
+      "test_id": "TCWW1_HUB_WIND_NOT_AXIS",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "hub_height_3s_gust_mps": 70
+      },
+      "expected": {
+        "status": "rejected",
+        "error_code": "TC_SOURCE_NATIVE_AXIS_REQUIRED"
+      }
+    },
+    {
+      "test_id": "TCWW1_MPS_NOT_IMPLICITLY_CONVERTED",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_mps": 50
+      },
+      "expected": {
+        "status": "rejected",
+        "error_code": "TC_SOURCE_NATIVE_AXIS_REQUIRED"
+      }
+    },
+    {
+      "test_id": "TCWW1_NEGATIVE_REJECTED",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": -1
+      },
+      "expected": {
+        "status": "rejected",
+        "error_code": "AXIS_OUTSIDE_VALID_RANGE"
+      }
+    },
+    {
+      "test_id": "TCWW1_LOWER_GAP_WITHHELD",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 100
+      },
+      "expected": {
+        "status": "withheld",
+        "reason_codes": [
+          "BELOW_SOURCE_SIMULATION_RANGE"
+        ]
+      }
+    },
+    {
+      "test_id": "TCWW1_UPPER_EXTRAPOLATION_WITHHELD",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 260
+      },
+      "expected": {
+        "status": "withheld",
+        "reason_codes": [
+          "ABOVE_SOURCE_SIMULATION_RANGE"
+        ]
+      }
+    },
+    {
+      "test_id": "TCWW1_ZERO_BRANCH_FLAGGED",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 80
+      },
+      "expected": {
+        "status": "supported",
+        "failure_unit_damage_ratio": 0,
+        "metadata_flags_include": [
+          "SOURCE_ASSUMED_NO_DAMAGE_THRESHOLD_NOT_EMPIRICAL"
+        ]
+      }
+    },
+    {
+      "test_id": "TCWW1_WRONG_PATHWAY",
+      "input": {
+        "pathway_id": "straight_line_convective",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 180
+      },
+      "expected": {
+        "status": "rejected",
+        "error_code": "PATHWAY_ID_UNKNOWN"
+      }
+    },
+    {
+      "test_id": "TCWW1_TORNADO_ROUTES_SEPARATELY",
+      "input": {
+        "pathway_id": "tornado_direct_hit",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 180
+      },
+      "expected": {
+        "status": "rejected",
+        "error_code": "PATHWAY_ID_UNKNOWN"
+      }
+    },
+    {
+      "test_id": "TCWW1_STANDARD_EQUIPMENT_UNIT_WITHHELD",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 180
+      },
+      "expected": {
+        "status": "withheld",
+        "reason_codes_include": [
+          "SOURCE_NATIVE_ATOM_NOT_HARMONIZED_TO_STANDARD_EQUIPMENT_ASSEMBLY"
+        ]
+      }
+    },
+    {
+      "test_id": "TCWW1_FOUNDATION_WITHHELD_NOT_ZERO",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_FOUNDATION",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 180
+      },
+      "expected": {
+        "status": "withheld",
+        "failure_unit_damage_ratio": null,
+        "reason_codes_include": [
+          "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+        ]
+      }
+    },
+    {
+      "test_id": "TCWW1_GSU_WITHHELD_FACILITY_GRAIN",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_GSU_SUBSTATION",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 180,
+        "asset_subject_grain": "facility_point"
+      },
+      "expected": {
+        "status": "withheld",
+        "failure_unit_damage_ratio": null,
+        "reason_codes_include": [
+          "FACILITY_LEVEL_EXPOSURE_REQUIRED"
+        ]
+      }
+    },
+    {
+      "test_id": "TCWW1_SCENARIO_LOSS_WITHHELD_WITH_CWER",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 180,
+        "value_basis_id": "NREL_CWER_2024",
+        "direct_replacement_value_usd": 3597000
+      },
+      "expected": {
+        "failure_unit_scalar_dr_status": "supported",
+        "scenario_loss_status": "withheld",
+        "error_code": "SOURCE_DENOMINATOR_CROSSWALK_NOT_APPROVED"
+      }
+    },
+    {
+      "test_id": "TCWW1_SOURCE_NATIVE_VALUE_STILL_WITHHELD",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 180,
+        "value_basis_id": "JAIMES_CT_H_SOURCE_NATIVE_REPLACEMENT_PROXY",
+        "direct_replacement_value_usd": 5709190.569869134
+      },
+      "expected": {
+        "failure_unit_scalar_dr_status": "supported",
+        "scenario_loss_status": "withheld",
+        "error_code": "SOURCE_DENOMINATOR_CROSSWALK_NOT_APPROVED"
+      }
+    },
+    {
+      "test_id": "TCWW1_UNKNOWN_CONTROL_STATE_FLAG_ONLY",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 180,
+        "actual_operating_control_state": "unknown"
+      },
+      "expected": {
+        "status": "supported",
+        "metadata_flags_include": [
+          "SOURCE_MODEL_CONTROL_STATE_UNKNOWN"
+        ],
+        "control_credit_applied": false
+      }
+    },
+    {
+      "test_id": "TCWW1_INCONSISTENT_CONTROL_STATE_WITHHELD",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 180,
+        "actual_operating_control_state": "known_inconsistent_with_source_assumption"
+      },
+      "expected": {
+        "status": "withheld",
+        "reason_codes": [
+          "SOURCE_MODEL_CONTROL_STATE_MISMATCH"
+        ]
+      }
+    },
+    {
+      "test_id": "TCWW1_1MW_HEIGHT_DISCREPANCY_FLAG",
+      "input": {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "TCWW_JAIMES_GENERIC_1MW_HH44_V1",
+        "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
+        "tc_peak_gust_3s_10m_kmh": 180
+      },
+      "expected": {
+        "status": "supported",
+        "metadata_flags_include": [
+          "SOURCE_1MW_HUB_HEIGHT_TABLE_44M_FIGURE_CAPTION_40M"
+        ]
+      }
+    }
+  ],
+  "invariants": [
+    "Each supported curve is finite, monotone nondecreasing, and bounded in [0,1] across 108-252 km/h.",
+    "V_at_DR50_kmh equals V_zero_kmh + delta_V50_kmh for every record.",
+    "Exactly one record matches each permitted turbine_archetype_id and there is no default.",
+    "Only WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT can return a numeric DR.",
+    "Scenario loss, whole-plant loss, EAL, PML, VaR, and TVaR remain withheld.",
+    "The canonical release is present in the machine-readable artifact index while the preserved proposal remains noncanonical."
+  ]
+}

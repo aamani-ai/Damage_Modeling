@@ -181,3 +181,45 @@ optional scenario dollars.
 use case was unavailable. Proxy grade should control labeling, review, and update priority; it should not
 eliminate the output the proxy was commissioned to provide. Frequency, EAL, tails, BI, and compound mechanisms
 remain outside this wind-only damage-cell output. No canonical cutover is authorized by this decision.
+
+## D-017 — Wildfire × wind advances as a two-unit Tier-4 screening proposal
+
+**Decision:** accept `wildfire_wind` model v1.0/docs r1 as a noncanonical partial-coverage proposal with two
+records: `WT_PAD_ELECTRICAL` and `WT_GSU_PROTECTION_CONTROL_DC`. Preserve model v0.1 as the strict
+evidence-earned zero-curve alternative. Do not create `current/`, publish a package, add an artifact-index
+entry, or authorize Hazard cutover.
+
+**Reason:** the owner explicitly requested a visible risk output even if only one or two subsystems can be
+supported. New primary substation modeling, NEMA fire/heat disposition guidance, and USFS infrastructure
+evidence make nonzero electrical vulnerability and the relative ordering physically credible, but they do
+not calibrate FSim-class economic DR. The arrays are therefore cell-local Tier-4 assumptions with an exact
+assumption acknowledgement, categorical-state guards, no implicit value, and all unsupported units and
+metrics withheld. Their numerical identity to two wildfire-solar profiles is an audit fingerprint only—not
+shared evidence or a runtime dependency.
+
+## D-018 — Promote flood × wind and wildfire × wind as canonical partial-screening v1
+
+**Decision:** on 2026-08-08, promote both model-v1.0/docs-r1 packages into `current/`, add bundle-v3 artifact-
+index pins and changelogs, release the bundle-v3/capability-v3/emit-v2 producer seam, and validate both through
+the common Hazard loader. Preserve every proposal and model-v0.1 package as audit history.
+
+**Reason:** the owner explicitly wants bounded risk representation even when only one or two subsystems are
+supportable and accepts screening-grade accuracy. Canonical here means governed and executable, not complete
+or calibrated. Flood remains one legacy FEMA whole-substation atom; wildfire remains two Tier-4 electrical
+units. Unsupported units are null/withheld, scenario dollars require exact same-unit value and exposure, and
+annual/tail/portfolio completeness remains withheld. Canonical runtime coverage changes from 5/10 to 7/10.
+
+## D-019 — Promote tropical-cyclone wind × wind as source-native partial-screening v1
+
+**Decision:** on 2026-08-09, promote the existing model-v1.0/docs-r1 Jaimes package into `current/`, add its
+bundle-v3 artifact-index pin and changelog, and support it in the common Hazard loader. Preserve model v0.1
+and the noncanonical v1 package as audit history. Do not widen the released selectors, failure unit, axis,
+value basis, or output capability.
+
+**Reason:** the two-phase scientific work was already complete: v0.1 established an honest no-curve boundary,
+then v1 recovered three exact source-published expected-DR functions for one quarantined turbine/tower atom.
+The bounded result is useful as conditional severity even when a seasonal outlook is below normal, because
+frequency and damage conditional on intensity are separate. Canonical means governed and executable, not a
+generic modern-fleet or whole-farm claim. Unmatched assets, including the Gamesa G114-2.0 MW example, standard
+wind-farm units, dollars, EAL, and tail outputs remain withheld. Repository-current canonical coverage changes
+from 7/10 to 8/10; external object-store/registry activation remains a separate release act.

@@ -552,8 +552,11 @@ def validate_local_links(allow_incomplete: bool) -> int:
 def validate_index() -> None:
     index = load(INDEX)
     require(index["schema_version"] == "damage_curve_artifact_index.v2", "index schema changed")
-    require(not [item for item in index["artifacts"] if item["cell_id"] == "flood_wind"], "proposal entered canonical index")
-    require(not (ROOT / "docs/cells/flood_wind/current").exists(), "current folder created before promotion")
+    entries = [item for item in index["artifacts"] if item["cell_id"] == "flood_wind"]
+    require(len(entries) == 1, "released cell must have one canonical index entry")
+    require("/current/" in entries[0]["path"], "canonical index must never point at proposal history")
+    require("/proposed/" not in entries[0]["path"], "proposal entered canonical index")
+    require((ROOT / entries[0]["path"]).is_file(), "canonical current artifact is missing")
 
 
 def main() -> None:

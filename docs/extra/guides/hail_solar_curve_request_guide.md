@@ -26,6 +26,8 @@ hazard axis:    mesh_diameter_mm
 failure unit:   PV_MODULE_GLASS_CELL
 model version:  model v1.0
 docs revision:  docs r7
+consumer pin:   hail_solar@model_v1_0__docs_r7
+artifact SHA:   8c52f3442eb606f55aa0502fbb2738df70076f8a181de463c029061020b3cf32
 ```
 
 ## Where The Current Curve Is Stored

@@ -15,6 +15,15 @@ This is a navigation/decision guide. The proposed JSON artifact and dossier rema
 Do not call the proposed model “released,” “current,” “canonical,” “v1,” “empirical” or “claims calibrated.” Do
 not pin consumers to it until the registry/index/changelog promotion is performed.
 
+Current canonical artifact SHA:
+
+```text
+832f47d69372ec54723a61b8a956addccef07bb39338c3ec99907e116f1855ca
+```
+
+Canonical artifact:
+[`strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json`](../../cells/strong_wind_solar/current/strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json).
+
 ## 2. Route the hazard before discussing a number
 
 ```text
@@ -24,7 +33,7 @@ Is the local mechanism non-tornadic thunderstorm outflow?
 │   ├─ gust front / thunderstorm outflow
 │   └─ local derecho outflow after mechanism partition
 └─ no
-    ├─ tropical cyclone / hurricane → tropical_cyclone_wind_solar v2 research path
+    ├─ tropical cyclone / hurricane → tropical_cyclone_wind_solar v2.1 research path
     ├─ tornado / tornado debris → future tornado_solar
     ├─ synoptic / downslope wind → separate future pathway
     ├─ hail → hail_solar
@@ -35,10 +44,10 @@ A derecho is a parent event, not a sufficient local loading identity. Preserve t
 embedded tornadoes/mesovortices/downbursts. High wind speed does not establish a pathway.
 
 The tropical-cyclone route now has its own noncanonical
-[`model-v2.0/docs-r1 request guide`](tropical_cyclone_wind_solar_v2_curve_request_guide.md). It contains one
-preserved Perry compatibility record and four cell-local synthetic Tier-4 fixed/tracker records; it is not a
-fallback from this convective model and publishes no full-plant/value, scenario-dollar, annual, or tail
-output.
+[`model-v2.1/docs-r1 request guide`](tropical_cyclone_wind_solar_v2_1_curve_request_guide.md). It preserves the
+five v2 array records, adds five site-facility records, and assembles a named full-plant physical-damage view.
+It is not a fallback from this convective model, remains screening/Tier-4 where declared, and does not provide
+annual or tail outputs.
 
 ## 3. Route the asset architecture
 

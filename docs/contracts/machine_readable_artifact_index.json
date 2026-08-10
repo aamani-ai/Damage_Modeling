@@ -1,7 +1,7 @@
 {
   "schema_version": "damage_curve_artifact_index.v2",
   "portable_package_baseline": "library v2.5",
-  "repository_contract_revision": "2026-07-10.wildfire-screening-v1",
+  "repository_contract_revision": "2026-08-09.hurricane-wind-partial-screening-v1-v3",
   "polling_contract": {
     "strategy": "poll_index_then_compare_cell_pin_and_sha256",
     "consumer_pin_fields": [
@@ -79,6 +79,48 @@
       "sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
       "changelog_path": "docs/cells/wildfire_solar/CHANGELOG.json",
       "known_answer_tests_path": "docs/cells/wildfire_solar/current/known_answer_tests_wildfire_solar__model_v1_0__docs_r3.json"
+    },
+    {
+      "cell_id": "flood_wind",
+      "damage_code_id": "FLOOD_WIND_FEMA_HAZUS_SUBSTATION_SCREENING_V1",
+      "semantic_damage_model_version": "model v1.0",
+      "documentation_revision": "docs r1",
+      "consumer_pin": "flood_wind@model_v1_0__docs_r1",
+      "artifact_schema_version": "damage_curve_record_bundle.v3",
+      "capability_schema_version": "capability_declaration.v3",
+      "publication_status": "repository_canonical_not_in_portable_package",
+      "path": "docs/cells/flood_wind/current/flood_wind__model_v1_0__docs_r1__curve_artifact.json",
+      "sha256": "37da745d87a4722e13118319bd30d9d2bcfd18dabc2a198ac6b8b1422bc3e1c1",
+      "changelog_path": "docs/cells/flood_wind/CHANGELOG.json",
+      "known_answer_tests_path": "docs/cells/flood_wind/current/known_answer_tests_flood_wind__model_v1_0__docs_r1.json"
+    },
+    {
+      "cell_id": "wildfire_wind",
+      "damage_code_id": "WILDFIRE_WIND_PARTIAL_ELECTRICAL_SCREENING_V1",
+      "semantic_damage_model_version": "model v1.0",
+      "documentation_revision": "docs r1",
+      "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
+      "artifact_schema_version": "damage_curve_record_bundle.v3",
+      "capability_schema_version": "capability_declaration.v3",
+      "publication_status": "repository_canonical_not_in_portable_package",
+      "path": "docs/cells/wildfire_wind/current/wildfire_wind__model_v1_0__docs_r1__curve_artifact.json",
+      "sha256": "3f923f506a2082dd2f074c8b3cc3d696288097072eb8b6f803f3eb7d3f2b4e0d",
+      "changelog_path": "docs/cells/wildfire_wind/CHANGELOG.json",
+      "known_answer_tests_path": "docs/cells/wildfire_wind/current/known_answer_tests_wildfire_wind__model_v1_0__docs_r1.json"
+    },
+    {
+      "cell_id": "tropical_cyclone_wind_wind",
+      "damage_code_id": "TROPICAL_CYCLONE_WIND_WIND_JAIMES_SCREENING_V1",
+      "semantic_damage_model_version": "model v1.0",
+      "documentation_revision": "docs r1",
+      "consumer_pin": "tropical_cyclone_wind_wind@model_v1_0__docs_r1",
+      "artifact_schema_version": "damage_curve_record_bundle.v3",
+      "capability_schema_version": "capability_declaration.v3",
+      "publication_status": "repository_canonical_not_in_portable_package",
+      "path": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_0__docs_r1__curve_artifact.json",
+      "sha256": "6feb461a0fdda21521178ea5b38633261a2a4da9fdf7a64fa80b7930660847f6",
+      "changelog_path": "docs/cells/tropical_cyclone_wind_wind/CHANGELOG.json",
+      "known_answer_tests_path": "docs/cells/tropical_cyclone_wind_wind/current/known_answer_tests_tropical_cyclone_wind_wind__model_v1_0__docs_r1.json"
     }
   ],
   "runtime_preference": "Poll this index, pin cell model + docs + artifact schema + SHA-256, validate the artifact, and run cell known-answer tests. Do not pin only the portable package release."

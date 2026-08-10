@@ -6,8 +6,10 @@ This cell asks how much direct physical repair or replacement an **external wild
 onshore wind facility. It does not price turbine-origin fires, lightning, PSPS, outage, smoke-related
 derating, routine cleaning, or post-fire erosion.
 
-Model v0.1 has no numerical curve. That is intentional: we can identify what must be measured and what may
-fail, but public evidence does not yet join local wildfire attack to inspected disposition and same-unit cost.
+The current model-v1 release carries two deliberately partial Tier-4 screening curves: turbine/pad
+electrical and the shared GSU protection-control-DC package. Public evidence supports nonzero vulnerability
+and the relative ordering, but it still does not join local wildfire attack to inspected disposition and
+same-unit cost. Model v0.1 therefore remains preserved as the strict zero-curve alternative.
 
 ## Three things that must stay separate
 
@@ -38,11 +40,25 @@ cable-termination subjects. It has its own geometry, ownership, value, protectio
 equipment anatomy may be reused across solar and wind facilities, but the wildfire exposure and release
 decision remain cell local.
 
-## Valid model-v0.1 result
+## Valid current-screening result
+
+```yaml
+curve_records: 2
+supported_units:
+  - WT_PAD_ELECTRICAL
+  - WT_GSU_PROTECTION_CONTROL_DC
+axis: exact FSim conditional flame-length class state 0..6
+output: conditional same-unit screening DR
+whole_farm_DR: withheld
+scenario_loss: withheld
+canonical_runtime_artifact: true
+```
+
+Every other failure unit remains withheld-not-zero. Model v0.1 continues to provide the stricter result:
 
 ```yaml
 curve_records: []
-canonical_runtime_artifact: false
+canonical_runtime_artifact: true
 all_damage_and_loss_metrics: withheld
 reason: NO_RUNTIME_CURVE
 ```

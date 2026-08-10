@@ -13,9 +13,11 @@ metadata spec     = input/output contract
 known-answer JSON = executable consumer agreement
 ```
 
-## 2. Bundle schema v2
+## 2. Released bundle schemas v2 and v3
 
-Repository-current artifacts use:
+Repository-current artifacts use bundle v2 for the original single-axis cells and bundle v3 for individually
+promoted pathway-aware cells. The consumer selects the declared schema; neither is silently flattened into
+the other.
 
 ```yaml
 schema_version: damage_curve_record_bundle.v2
@@ -130,8 +132,9 @@ Each load-bearing parameter is tagged with `param_role`:
 
 ## 8. Capability declaration
 
-Repository-current artifacts use `capability_declaration.v2`. It separates curve-intrinsic spread from a
-consumer-built frequency-driven annual loss distribution. See standard 21.
+Bundle-v2 artifacts use `capability_declaration.v2`; bundle-v3 artifacts use pathway-scoped
+`capability_declaration.v3` and `damage_emit.v2`. Both separate curve-intrinsic spread from a consumer-built
+frequency-driven annual loss distribution. See standards 21 and 22.
 
 ## 9. Canonical naming and consumer pin
 
@@ -170,27 +173,31 @@ This is a pull-based contract. **Durable object-store publishing shipped 2026-08
 [standard 23](23_durable_publication_standard.md) (the `damage_artifacts/<env>/…` GCS namespace mirrors this
 index cell-by-cell, pinned by the same SHA). Push notifications remain future system work.
 
-## 11. Proposed pathway-aware v3 extension
+## 11. Released pathway-aware v3 extension
 
-Bundle v2 remains the repository-current canonical contract. Cells that require multiple first-class hazard
-pathways with independent axes and record families use the proposed bundle-v3 design during research. See
+Bundle v2 remains released for the five original canonical cells. Bundle v3 became released on 2026-08-08
+for the individually promoted `flood_wind` and `wildfire_wind` model-v1.0 packages. Other v3 packages remain
+proposals until their own cell reviews pass. See
 [`22_pathway_aware_artifact_and_emit_standard.md`](22_pathway_aware_artifact_and_emit_standard.md).
 
-The draft v3 schema also supports the exact source-derived
+The v3 schema also supports the exact source-derived
 `thresholded_weibull_expected_damage` form used by the noncanonical
 `tropical_cyclone_wind_wind` model-v1.0 proposal. Its pinned parameters are `V_zero_kmh`,
 `delta_V50_kmh`, `rho`, `V_at_DR50_kmh`, and `max_dr`; each record also requires an exact turbine-archetype
-selector match. This additive draft extension does not add the form to bundle v2 or authorize a canonical
-consumer.
+selector match. This additive extension does not add the form to bundle v2 or by itself authorize a cell.
 
-The same proposed schema carries a pathway-aware `piecewise_linear` record for source-tabulated damage
+The same schema carries a pathway-aware `piecewise_linear` record for source-tabulated damage
 relationships. It pins ordered `[x, DR]` points, a two-value valid range, linear interpolation between source
 knots, explicit extrapolation behavior, an exact `selector_match`, source-parameter references, and metadata
 flags. The cell validator must also bind the record's `x_axis`, `valid_range`, pathway, and selector match to
-the containing pathway contract; the generic schema cannot prove those cross-object equalities. The first user is the
-noncanonical `flood_wind` model-v1.0 FEMA-Hazus screening proposal. Its presence in draft v3 does not make a
+the containing pathway contract; the generic schema cannot prove those cross-object equalities. The first
+canonical user is the partial-screening `flood_wind` model-v1.0 FEMA-Hazus release. Its presence in v3 does not make a
 table transferable across cells or authorize endpoint clamping, unit conversion, or consumer use without the
 cell evaluator and KAT contract.
+
+The second canonical v3 user is `wildfire_wind` model v1.0, with two Tier-4 source-native categorical-state
+records. The released common loader rejects noninteger/unknown states, requires exact source and assumption
+acknowledgements, and preserves all remaining units as withheld.
 
 The noncanonical `tropical_cyclone_wind_solar` model-v2.0/docs-r1 candidate also uses the draft-v3 seam. It
 preserves one model-v1 Perry `piecewise_linear` compatibility record and adds four cell-local synthetic
@@ -200,8 +207,8 @@ scenario-dollar, annual, or tail outputs. Model v0.1 and model v1.0 remain prese
 `current/`, changelog, package-release, or consumer-cutover change follows from schema validation alone.
 
 ```yaml
-bundle_v3_status: proposed_draft
-emit_v2_status: proposed_draft
-capability_v3_status: proposed_draft
+bundle_v3_status: released_for_individually_promoted_cells
+emit_v2_status: released_for_individually_promoted_cells
+capability_v3_status: released_for_individually_promoted_cells
 automatic_migration_from_v2: prohibited
 ```

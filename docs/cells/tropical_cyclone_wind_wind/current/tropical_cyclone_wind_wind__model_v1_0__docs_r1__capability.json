@@ -1,0 +1,139 @@
+{
+  "schema_version": "capability_declaration.v3",
+  "cell_id": "tropical_cyclone_wind_wind",
+  "canonical_runtime_artifact": true,
+  "pathway_capabilities": [
+    {
+      "pathway_id": "tropical_cyclone_wind",
+      "failure_unit_scalar_dr": "conditional",
+      "scenario_loss_given_value_basis": "withheld",
+      "curve_intrinsic_spread": "not_carried",
+      "populated_emit_modes": [
+        "scalar_mean"
+      ],
+      "conditions": [
+        "exact Jaimes turbine_archetype_id is required with no default or nearest-neighbor selection",
+        "tc_peak_gust_3s_10m_kmh must be supplied on the source-native axis",
+        "source_model_assumption_set_id must acknowledge the documented generic fixed-base steel-tower and parked-rotor source state",
+        "runtime numeric evaluation is limited to 108-252 km/h; V<=90 is the source-assumed zero branch; 90<V<108 is withheld",
+        "the scalar applies only to WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT"
+      ],
+      "limitation_flags": [
+        "CANONICAL_SCREENING_RELEASE",
+        "SCREENING_SOURCE_DERIVED_ENGINEERING_PROXY",
+        "NOT_FIELD_CALIBRATED",
+        "NOT_CLAIMS_CALIBRATED",
+        "SOURCE_ASSUMED_NO_DAMAGE_THRESHOLD_NOT_EMPIRICAL",
+        "SOURCE_DENOMINATOR_SCOPE_AMBIGUOUS",
+        "PARTIAL_FAILURE_UNIT_COVERAGE",
+        "SOURCE_MODEL_CONTROL_STATE_INTERNALLY_INCONSISTENT",
+        "CURVE_INTRINSIC_SPREAD_NOT_CARRIED",
+        "NO_NHC_OR_HUB_HEIGHT_BRIDGE"
+      ],
+      "withheld_failure_units": [
+        {
+          "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+          "reason_codes": [
+            "SOURCE_NATIVE_ATOM_NOT_HARMONIZED_TO_STANDARD_EQUIPMENT_ASSEMBLY",
+            "OMITTED_NON_TOWER_FAILURE_MODES"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_FOUNDATION",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_PAD_MOUNTED_ELECTRICAL",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "ELECTRICAL_VALUE_SPLIT_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_COLLECTION_SYSTEM",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "LINE_NETWORK_EXPOSURE_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_GSU_SUBSTATION",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "FACILITY_LEVEL_EXPOSURE_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_CONTROL_BUILDING_AND_SCADA",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_CIVIL_INFRA",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
+          ]
+        },
+        {
+          "failure_unit_id": "SUPPORT_FIELDWORK",
+          "reason_codes": [
+            "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+            "NO_INDEPENDENT_FRAGILITY"
+          ]
+        },
+        {
+          "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+          "reason_codes": [
+            "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+            "NO_INDEPENDENT_FRAGILITY"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumer_annual_metrics": {
+    "computation_owner": "downstream_consumer",
+    "status_before_promotion": "withheld_noncanonical_proposal",
+    "status_after_promotion": "withheld",
+    "prerequisites": [
+      "released canonical model docs schema and SHA pin",
+      "validated tropical-cyclone frequency and source-native 3-second gust coupling",
+      "approved source-native-to-site value denominator crosswalk",
+      "complete failure-unit coverage or an explicitly partial covered-loss reporting product",
+      "compound-event partition across TC wind, tornado, flood/surge/scour, debris, and rain",
+      "consumer cap-binding and aggregation validation"
+    ],
+    "limitation_flags": [
+      "CANONICAL_SCREENING_RELEASE",
+      "PARTIAL_FAILURE_UNIT_COVERAGE",
+      "SCENARIO_AND_WHOLE_PLANT_LOSS_WITHHELD",
+      "CURVE_INTRINSIC_SPREAD_NOT_CARRIED"
+    ]
+  },
+  "cap_binding": {
+    "policy": "consumer_enforced_fail_closed",
+    "enforcement_owner": "downstream_consumer",
+    "checks_required": [
+      "reject scenario, portfolio, and annual metrics from the canonical partial-screening release",
+      "apply no full-TIV, CWER tower, or turbine-equipment scaling",
+      "bind any future cap to an approved source-compatible failure-unit value",
+      "preserve null values for every withheld unit"
+    ],
+    "action_if_fail": "withhold scenario loss and all annual or tail metrics"
+  },
+  "promotion_gate": {
+    "status": "passed",
+    "required_before_canonical_use": [
+      "owner-approved source-native partial-screening scope with no value conversion",
+      "independent equation and KAT replay in the common Damage/Hazard consumer",
+      "released bundle-v3 thresholded_weibull_expected_damage support",
+      "Hazard adapter for exact axis selector pin and partial capability",
+      "compound-event boundary preserved and unsupported units remain null",
+      "explicit release decision with fail-closed rollback"
+    ]
+  }
+}

@@ -1,0 +1,658 @@
+{
+  "schema_version": "damage_curve_record_bundle.v3",
+  "schema_status": "released",
+  "cell_id": "tropical_cyclone_wind_wind",
+  "damage_code_id": "TROPICAL_CYCLONE_WIND_WIND_JAIMES_SCREENING_V1",
+  "semantic_damage_model_version": "model v1.0",
+  "documentation_revision": "docs r1",
+  "lifecycle_state": "released_v1_0",
+  "promotion_status": "released",
+  "review_status": "reviewed_partial_screening_release",
+  "model_grade": "screening_source_derived_engineering_proxy",
+  "package_release": "unreleased",
+  "package_baseline": "library v2.5",
+  "package_inclusion_status": "repository_canonical_not_in_portable_package",
+  "canonical_runtime_artifact": true,
+  "source_dossier": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_0__docs_r1.md",
+  "source_workbook": "docs/cells/tropical_cyclone_wind_wind/current/damage_curve_records_tropical_cyclone_wind_wind__model_v1_0__docs_r1.xlsx",
+  "known_answer_tests": "docs/cells/tropical_cyclone_wind_wind/current/known_answer_tests_tropical_cyclone_wind_wind__model_v1_0__docs_r1.json",
+  "source_register": "docs/cells/tropical_cyclone_wind_wind/current/SOURCE_REGISTER_tropical_cyclone_wind_wind__model_v1_0__docs_r1.csv",
+  "claim_parameter_register": "docs/cells/tropical_cyclone_wind_wind/current/CLAIM_PARAMETER_REGISTER_tropical_cyclone_wind_wind__model_v1_0__docs_r1.csv",
+  "value_crosswalk": "docs/cells/tropical_cyclone_wind_wind/current/VALUE_CROSSWALK_tropical_cyclone_wind_wind__model_v1_0__docs_r1.csv",
+  "failure_units": [
+    {
+      "id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+      "subsystem": "REPEATED_TURBINE_SOURCE_NATIVE",
+      "component": "TOWER_TRIGGERED_SINGLE_TURBINE_RECORD_JAIMES",
+      "treatment": "primary_nonzero",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "Jaimes paper-defined per-turbine/turbine-tower replacement-cost proxy Ct(h); not CWER tower, standard turbine-equipment assembly, BOS, physical plant, or TIV",
+      "exposure_grain": "one modeled turbine point",
+      "mutually_exclusive_with": [
+        "WT_TURBINE_EQUIPMENT_ASSEMBLY"
+      ]
+    },
+    {
+      "id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "subsystem": "REPEATED_TURBINE",
+      "component": "ROTOR_NACELLE_TOWER_DEPENDENCY_SAFE_ASSEMBLY",
+      "treatment": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "same-unit turbine-equipment replacement value",
+      "withheld_reason_codes": [
+        "SOURCE_NATIVE_ATOM_NOT_HARMONIZED_TO_STANDARD_EQUIPMENT_ASSEMBLY",
+        "OMITTED_NON_TOWER_FAILURE_MODES"
+      ]
+    },
+    {
+      "id": "WT_FOUNDATION",
+      "subsystem": "FOUNDATION",
+      "component": "TURBINE_FOUNDATION_OR_BASE",
+      "treatment": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "same-unit foundation replacement value",
+      "withheld_reason_codes": [
+        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+      ]
+    },
+    {
+      "id": "WT_PAD_MOUNTED_ELECTRICAL",
+      "subsystem": "PLANT_ELECTRICAL",
+      "component": "PAD_TRANSFORMER_AND_SWITCHGEAR",
+      "treatment": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "same-unit pad-electrical replacement value",
+      "withheld_reason_codes": [
+        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+        "ELECTRICAL_VALUE_SPLIT_REQUIRED"
+      ]
+    },
+    {
+      "id": "WT_COLLECTION_SYSTEM",
+      "subsystem": "PLANT_ELECTRICAL",
+      "component": "COLLECTION_CABLE_AND_POLES",
+      "treatment": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "same-unit line/network replacement value",
+      "withheld_reason_codes": [
+        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+        "LINE_NETWORK_EXPOSURE_REQUIRED"
+      ]
+    },
+    {
+      "id": "WT_GSU_SUBSTATION",
+      "subsystem": "SUBSTATION",
+      "component": "GSU_TRANSFORMER_SWITCHYARD_AND_CONTROL",
+      "treatment": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "same facility-level GSU/substation replacement value",
+      "withheld_reason_codes": [
+        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+        "FACILITY_LEVEL_EXPOSURE_REQUIRED"
+      ]
+    },
+    {
+      "id": "WT_CONTROL_BUILDING_AND_SCADA",
+      "subsystem": "CONTROL",
+      "component": "CONTROL_BUILDING_SCADA_AND_COMMUNICATIONS",
+      "treatment": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "same-unit control and communications replacement value",
+      "withheld_reason_codes": [
+        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+      ]
+    },
+    {
+      "id": "WT_CIVIL_INFRA",
+      "subsystem": "PLANT_CIVIL",
+      "component": "ACCESS_ROADS_CRANE_PADS_BUILDINGS_AND_FENCES",
+      "treatment": "withheld",
+      "y_axis": "failure_unit_damage_ratio",
+      "denominator": "split direct civil replacement value",
+      "withheld_reason_codes": [
+        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+        "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
+      ]
+    },
+    {
+      "id": "SUPPORT_FIELDWORK",
+      "subsystem": "SUPPORT",
+      "component": "ASSEMBLY_INSTALLATION_AND_CRANE_SCOPE",
+      "treatment": "withheld",
+      "y_axis": "not_applicable_support_cost",
+      "denominator": "post-damage repair work scope",
+      "withheld_reason_codes": [
+        "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+        "NO_INDEPENDENT_FRAGILITY"
+      ]
+    },
+    {
+      "id": "SUPPORT_TRANSPORT_LOGISTICS",
+      "subsystem": "SUPPORT",
+      "component": "TRANSPORT_AND_REPLACEMENT_LOGISTICS",
+      "treatment": "withheld",
+      "y_axis": "not_applicable_support_cost",
+      "denominator": "post-damage replacement logistics scope",
+      "withheld_reason_codes": [
+        "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+        "NO_INDEPENDENT_FRAGILITY"
+      ]
+    }
+  ],
+  "pathways": [
+    {
+      "pathway_id": "tropical_cyclone_wind",
+      "hazard_scope": {
+        "included": [
+          "direct aerodynamic loading from tropical-cyclone wind on land-based turbine records"
+        ],
+        "excluded": [
+          "TC-spawned tornado",
+          "windborne debris impact",
+          "wind-driven rain ingress",
+          "storm surge",
+          "pluvial flood",
+          "scour or saturated-soil failure",
+          "lightning or fire",
+          "offshore wave and support loading",
+          "business interruption or curtailment"
+        ],
+        "compound_event_rule": "Preserve one event_family_id and route each causal pathway separately without duplicate value charges."
+      },
+      "hazard_axis": {
+        "id": "TC_PEAK_GUST_3S_10M_KMH_JAIMES",
+        "preferred_input_field": "tc_peak_gust_3s_10m_kmh",
+        "permitted_proxy_fields": [],
+        "unit": "km/h",
+        "valid_range": [
+          0,
+          252
+        ],
+        "extrapolation_policy": "V<0 reject; V<=90 return source-assumed zero with flag; 90<V<108 withhold; 108<=V<=252 evaluate; V>252 withhold",
+        "source_simulation_range": [
+          108,
+          252
+        ],
+        "averaging_period_s": 3,
+        "reference_height_m": 10,
+        "category_guardrail": "Saffir-Simpson category and NHC one-minute sustained wind are not accepted damage inputs.",
+        "bridge_policy": "No averaging-period, height, terrain, or hub/rotor bridge is included in model v1.0."
+      },
+      "selector_logic": [
+        {
+          "field": "turbine_archetype_id",
+          "required": true,
+          "default": null,
+          "allowed": [
+            "TCWW_JAIMES_GENERIC_1MW_HH44_V1",
+            "TCWW_JAIMES_GENERIC_2P5MW_HH80_V1",
+            "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1"
+          ],
+          "routing": "exact selector_match only",
+          "interpolation": "prohibited",
+          "nearest_neighbor": "prohibited",
+          "modern_fleet_transfer": "prohibited"
+        },
+        {
+          "field": "source_model_assumption_set_id",
+          "required": true,
+          "default": null,
+          "allowed": [
+            "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED"
+          ],
+          "effect": "Acknowledges the source-model state; it is not a protective control credit."
+        }
+      ],
+      "conditioner_logic": [
+        {
+          "field": "actual_operating_control_state",
+          "required": "capture_if_known",
+          "allowed": [
+            "known_consistent_with_source_assumption",
+            "known_inconsistent_with_source_assumption",
+            "unknown"
+          ],
+          "numeric_effect": "none",
+          "withhold_when": [
+            "known_inconsistent_with_source_assumption"
+          ],
+          "flag_when": [
+            "unknown"
+          ],
+          "reason": "The paper contains feathered/minimum-drag versus parked/no-pitch wording and assumes wind parallel to the rotor with no yawing."
+        }
+      ],
+      "exposure_contract": {
+        "required_subject_grain": "one turbine point",
+        "whole_farm_default": "prohibited",
+        "repeated_turbine_rule": "Evaluate each qualifying turbine separately with its local source-native gust.",
+        "gsu_rule": "WT_GSU_SUBSTATION is one facility-level exposure and is never repeated by turbine count.",
+        "value_rule": "No dollar loss is emitted until the source-native denominator is independently harmonized."
+      },
+      "failure_unit_coverage": [
+        {
+          "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+          "status": "conditional_numeric_screening_curve",
+          "reason_codes": []
+        },
+        {
+          "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "SOURCE_NATIVE_ATOM_NOT_HARMONIZED_TO_STANDARD_EQUIPMENT_ASSEMBLY",
+            "OMITTED_NON_TOWER_FAILURE_MODES"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_FOUNDATION",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_PAD_MOUNTED_ELECTRICAL",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "ELECTRICAL_VALUE_SPLIT_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_COLLECTION_SYSTEM",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "LINE_NETWORK_EXPOSURE_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_GSU_SUBSTATION",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "FACILITY_LEVEL_EXPOSURE_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_CONTROL_BUILDING_AND_SCADA",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_CIVIL_INFRA",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
+          ]
+        },
+        {
+          "failure_unit_id": "SUPPORT_FIELDWORK",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+            "NO_INDEPENDENT_FRAGILITY"
+          ]
+        },
+        {
+          "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+          "status": "withheld_not_zero",
+          "reason_codes": [
+            "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+            "NO_INDEPENDENT_FRAGILITY"
+          ]
+        }
+      ],
+      "curve_records": [
+        {
+          "curve_id": "TCWW_JAIMES_1MW_44M_SCREENING",
+          "pathway_id": "tropical_cyclone_wind",
+          "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+          "curve_form": "thresholded_weibull_expected_damage",
+          "x_axis": "tc_peak_gust_3s_10m_kmh",
+          "y_axis": "failure_unit_damage_ratio",
+          "parameters": {
+            "V_zero_kmh": 90,
+            "delta_V50_kmh": 106.77,
+            "rho": 8.94,
+            "V_at_DR50_kmh": 196.77,
+            "max_dr": 1
+          },
+          "selector_match": {
+            "turbine_archetype_id": "TCWW_JAIMES_GENERIC_1MW_HH44_V1",
+            "rated_power_mw": 1,
+            "hub_height_m": 44,
+            "rotor_diameter_m": 50
+          }
+        },
+        {
+          "curve_id": "TCWW_JAIMES_2P5MW_80M_SCREENING",
+          "pathway_id": "tropical_cyclone_wind",
+          "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+          "curve_form": "thresholded_weibull_expected_damage",
+          "x_axis": "tc_peak_gust_3s_10m_kmh",
+          "y_axis": "failure_unit_damage_ratio",
+          "parameters": {
+            "V_zero_kmh": 90,
+            "delta_V50_kmh": 82.52,
+            "rho": 4.54,
+            "V_at_DR50_kmh": 172.52,
+            "max_dr": 1
+          },
+          "selector_match": {
+            "turbine_archetype_id": "TCWW_JAIMES_GENERIC_2P5MW_HH80_V1",
+            "rated_power_mw": 2.5,
+            "hub_height_m": 80,
+            "rotor_diameter_m": 90
+          }
+        },
+        {
+          "curve_id": "TCWW_JAIMES_3P3MW_100M_SCREENING",
+          "pathway_id": "tropical_cyclone_wind",
+          "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+          "curve_form": "thresholded_weibull_expected_damage",
+          "x_axis": "tc_peak_gust_3s_10m_kmh",
+          "y_axis": "failure_unit_damage_ratio",
+          "parameters": {
+            "V_zero_kmh": 90,
+            "delta_V50_kmh": 73.3,
+            "rho": 4.99,
+            "V_at_DR50_kmh": 163.3,
+            "max_dr": 1
+          },
+          "selector_match": {
+            "turbine_archetype_id": "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1",
+            "rated_power_mw": 3.3,
+            "hub_height_m": 100,
+            "rotor_diameter_m": 114
+          }
+        }
+      ]
+    }
+  ],
+  "value_linkage": {
+    "implicit_default_profile": null,
+    "scenario_loss_status": "withheld",
+    "source_native_value_basis": {
+      "id": "JAIMES_CT_H_SOURCE_NATIVE_REPLACEMENT_PROXY",
+      "formula": "Ct(h) = 1307.9 * h^1.82 USD per source turbine/turbine-tower record",
+      "vintage": "not stated as a runtime-compatible modern site value",
+      "denominator_scope": "internally ambiguous between selected structure, turbine tower, and total turbine cost",
+      "source_values_by_archetype_usd": {
+        "TCWW_JAIMES_GENERIC_1MW_HH44_V1": 1281322.377752261,
+        "TCWW_JAIMES_GENERIC_2P5MW_HH80_V1": 3803630.4553727144,
+        "TCWW_JAIMES_GENERIC_3P3MW_HH100_V1": 5709190.569869134
+      }
+    },
+    "cwer_comparison_basis": {
+      "turbine_equipment_direct_usd_per_kw": 1090,
+      "tower_module_usd_per_kw": 276,
+      "physical_reference_usd_per_kw": 1623,
+      "installed_reference_usd_per_kw": 1968,
+      "runtime_crosswalk_status": "not_approved",
+      "prohibited_use": "Do not multiply the source-native DR by CWER tower, equipment, physical, installed, or site TIV."
+    },
+    "approval_required": "independent valuation review and an exact source-native-to-site denominator crosswalk"
+  },
+  "parameter_tier_table": [
+    {
+      "parameter": "Eq. 1 structural-response shape and fitted archetype parameters",
+      "curve_id": "all_three",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "TCWW-S005"
+      ],
+      "reasoning": "Peer-reviewed analytical wind-field and finite-element fragility basis for three generic source archetypes.",
+      "update_trigger": "independent reproduction failure or better matched structural evidence"
+    },
+    {
+      "parameter": "V_zero_kmh = 90",
+      "curve_id": "all_three",
+      "value": 90,
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "TCWW-S005"
+      ],
+      "reasoning": "Explicit author assumption tied to typical cut-out speed; not an empirical immunity threshold.",
+      "update_trigger": "matched low-severity damage evidence"
+    },
+    {
+      "parameter": "DS1/DS2/DS3 economic consequence ratios",
+      "curve_id": "all_three",
+      "value": "1MW 2/43/100%; 2.5MW 4/48/100%; 3.3MW 5/50/100%",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "TCWW-S005"
+      ],
+      "reasoning": "Source-author assumptions used to construct the analytical mean vulnerability.",
+      "update_trigger": "claims, inspection disposition, and same-unit repair-cost calibration"
+    },
+    {
+      "parameter": "source model assumption set",
+      "curve_id": "all_three",
+      "value": "generic fixed-base steel tower; source-modelled parked rotor state; wind parallel to rotor; no yaw",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": [
+        "TCWW-S005"
+      ],
+      "reasoning": "Direct model configuration with an internal pitch/feathering wording inconsistency.",
+      "update_trigger": "author clarification or matched control-state evidence"
+    },
+    {
+      "parameter": "source-native denominator quarantine",
+      "curve_id": "all_three",
+      "value": "JAIMES_CT_H_SOURCE_NATIVE_REPLACEMENT_PROXY",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "TCWW-S005",
+        "TCWW-S010",
+        "GOVERNANCE_CONTRACT"
+      ],
+      "reasoning": "Prevents ambiguous source value scope from being silently mapped to modern CWER or TIV.",
+      "update_trigger": "independent valuation crosswalk approval"
+    },
+    {
+      "parameter": "all non-source-native failure units",
+      "curve_id": "none",
+      "value": "withheld_not_zero",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": [
+        "TCWW-S008",
+        "TCWW-S014",
+        "GOVERNANCE_CONTRACT"
+      ],
+      "reasoning": "Field cases show omitted blade/component and BOP modes are material.",
+      "update_trigger": "unit-specific TC-wind vulnerability and value evidence"
+    }
+  ],
+  "evaluation_contract": {
+    "formula": "DR=0 if V<=V_zero; otherwise max_dr * (1 - exp(-ln(2) * ((V-V_zero)/delta_V50)^rho))",
+    "equivalent_source_notation": "1 - pow(0.5, pow((V-V_zero)/delta_V50, rho))",
+    "source_fit_status": "Eq. 1 fitted continuous expected-damage curve; do not substitute the Eq. 12 state mixture",
+    "input_range_behavior": {
+      "negative": "reject",
+      "zero_through_90": "return_zero_with_SOURCE_ASSUMED_NO_DAMAGE_THRESHOLD_NOT_EMPIRICAL",
+      "above_90_below_108": "withhold_BELOW_SOURCE_SIMULATION_RANGE",
+      "from_108_through_252": "evaluate",
+      "above_252": "withhold_ABOVE_SOURCE_SIMULATION_RANGE"
+    },
+    "selector_behavior": "exactly one selector_match; no default, interpolation, or nearest neighbor",
+    "output_bounds": [
+      0,
+      1
+    ],
+    "metadata_flags_always": [
+      "CANONICAL_SCREENING_RELEASE",
+      "SCREENING_SOURCE_DERIVED_ENGINEERING_PROXY",
+      "NOT_FIELD_CALIBRATED",
+      "NOT_CLAIMS_CALIBRATED",
+      "PARTIAL_FAILURE_UNIT_COVERAGE",
+      "SOURCE_DENOMINATOR_SCOPE_AMBIGUOUS",
+      "CURVE_INTRINSIC_SPREAD_NOT_CARRIED"
+    ]
+  },
+  "emit_contract": {
+    "schema_version": "damage_emit.v2",
+    "populated_emit_modes_for_this_cell": [
+      "scalar_mean"
+    ],
+    "supported_output": "conditional scalar mean DR for WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT only",
+    "scenario_loss": "withheld",
+    "annual_and_tail_metrics": "withheld",
+    "withheld_units_emit": "Return explicit null DR plus reason codes; never convert missing curves to zero."
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v3",
+    "cell_id": "tropical_cyclone_wind_wind",
+    "canonical_runtime_artifact": true,
+    "pathway_capabilities": [
+      {
+        "pathway_id": "tropical_cyclone_wind",
+        "failure_unit_scalar_dr": "conditional",
+        "scenario_loss_given_value_basis": "withheld",
+        "curve_intrinsic_spread": "not_carried",
+        "populated_emit_modes": [
+          "scalar_mean"
+        ],
+        "conditions": [
+          "exact Jaimes turbine_archetype_id is required with no default or nearest-neighbor selection",
+          "tc_peak_gust_3s_10m_kmh must be supplied on the source-native axis",
+          "source_model_assumption_set_id must acknowledge the documented generic fixed-base steel-tower and parked-rotor source state",
+          "runtime numeric evaluation is limited to 108-252 km/h; V<=90 is the source-assumed zero branch; 90<V<108 is withheld",
+          "the scalar applies only to WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT"
+        ],
+        "limitation_flags": [
+          "CANONICAL_SCREENING_RELEASE",
+          "SCREENING_SOURCE_DERIVED_ENGINEERING_PROXY",
+          "NOT_FIELD_CALIBRATED",
+          "NOT_CLAIMS_CALIBRATED",
+          "SOURCE_ASSUMED_NO_DAMAGE_THRESHOLD_NOT_EMPIRICAL",
+          "SOURCE_DENOMINATOR_SCOPE_AMBIGUOUS",
+          "PARTIAL_FAILURE_UNIT_COVERAGE",
+          "SOURCE_MODEL_CONTROL_STATE_INTERNALLY_INCONSISTENT",
+          "CURVE_INTRINSIC_SPREAD_NOT_CARRIED",
+          "NO_NHC_OR_HUB_HEIGHT_BRIDGE"
+        ],
+        "withheld_failure_units": [
+          {
+            "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+            "reason_codes": [
+              "SOURCE_NATIVE_ATOM_NOT_HARMONIZED_TO_STANDARD_EQUIPMENT_ASSEMBLY",
+              "OMITTED_NON_TOWER_FAILURE_MODES"
+            ]
+          },
+          {
+            "failure_unit_id": "WT_FOUNDATION",
+            "reason_codes": [
+              "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+            ]
+          },
+          {
+            "failure_unit_id": "WT_PAD_MOUNTED_ELECTRICAL",
+            "reason_codes": [
+              "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+              "ELECTRICAL_VALUE_SPLIT_REQUIRED"
+            ]
+          },
+          {
+            "failure_unit_id": "WT_COLLECTION_SYSTEM",
+            "reason_codes": [
+              "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+              "LINE_NETWORK_EXPOSURE_REQUIRED"
+            ]
+          },
+          {
+            "failure_unit_id": "WT_GSU_SUBSTATION",
+            "reason_codes": [
+              "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+              "FACILITY_LEVEL_EXPOSURE_REQUIRED"
+            ]
+          },
+          {
+            "failure_unit_id": "WT_CONTROL_BUILDING_AND_SCADA",
+            "reason_codes": [
+              "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+            ]
+          },
+          {
+            "failure_unit_id": "WT_CIVIL_INFRA",
+            "reason_codes": [
+              "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+              "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
+            ]
+          },
+          {
+            "failure_unit_id": "SUPPORT_FIELDWORK",
+            "reason_codes": [
+              "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+              "NO_INDEPENDENT_FRAGILITY"
+            ]
+          },
+          {
+            "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+            "reason_codes": [
+              "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+              "NO_INDEPENDENT_FRAGILITY"
+            ]
+          }
+        ]
+      }
+    ],
+    "consumer_annual_metrics": {
+      "computation_owner": "downstream_consumer",
+      "status_before_promotion": "withheld_noncanonical_proposal",
+      "status_after_promotion": "withheld",
+      "prerequisites": [
+        "released canonical model docs schema and SHA pin",
+        "validated tropical-cyclone frequency and source-native 3-second gust coupling",
+        "approved source-native-to-site value denominator crosswalk",
+        "complete failure-unit coverage or an explicitly partial covered-loss reporting product",
+        "compound-event partition across TC wind, tornado, flood/surge/scour, debris, and rain",
+        "consumer cap-binding and aggregation validation"
+      ],
+      "limitation_flags": [
+        "CANONICAL_SCREENING_RELEASE",
+        "PARTIAL_FAILURE_UNIT_COVERAGE",
+        "SCENARIO_AND_WHOLE_PLANT_LOSS_WITHHELD",
+        "CURVE_INTRINSIC_SPREAD_NOT_CARRIED"
+      ]
+    },
+    "cap_binding": {
+      "policy": "consumer_enforced_fail_closed",
+      "enforcement_owner": "downstream_consumer",
+      "checks_required": [
+        "reject scenario, portfolio, and annual metrics from the canonical partial-screening release",
+        "apply no full-TIV, CWER tower, or turbine-equipment scaling",
+        "bind any future cap to an approved source-compatible failure-unit value",
+        "preserve null values for every withheld unit"
+      ],
+      "action_if_fail": "withhold scenario loss and all annual or tail metrics"
+    },
+    "promotion_gate": {
+      "status": "passed",
+      "required_before_canonical_use": [
+        "owner-approved source-native partial-screening scope with no value conversion",
+        "independent equation and KAT replay in the common Damage/Hazard consumer",
+        "released bundle-v3 thresholded_weibull_expected_damage support",
+        "Hazard adapter for exact axis selector pin and partial capability",
+        "compound-event boundary preserved and unsupported units remain null",
+        "explicit release decision with fail-closed rollback"
+      ]
+    }
+  },
+  "derivation_rationale": {
+    "decision": "propose_three_exact_source_archetype_screening_curves",
+    "correction_to_v0_1": "No claims-calibrated matched chain was found, but Jaimes does publish a reproducible analytical economic vulnerability whose consequence ratios are source-author assumptions.",
+    "why_v1_is_partial": "The released scalar remains quarantined to the paper-native turbine/tower exposure unit because the source denominator is ambiguous and non-tower wind-farm units are unsupported.",
+    "why_source_native_atom": "Tower structural states trigger the loss model while independent blade and other turbine modes are omitted and the paper's value wording is internally ambiguous."
+  },
+  "legacy_comparison": {
+    "v0_1": "zero-curve fail-closed research scaffold retained unchanged",
+    "legacy_hurricane_memo": "rejected numerical component curves remain prohibited",
+    "hazard_placeholder": "hardcoded convective curves and full-TIV shares remain prohibited",
+    "canonical_index": "model v1.0/docs r1 is repository-current; the preserved proposed artifact remains noncanonical audit history"
+  }
+}

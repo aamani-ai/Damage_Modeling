@@ -35,7 +35,7 @@ request says “strong/high wind”
             |      -> proposed pathway: tornado_direct_hit
             |
             +-- mechanism is hurricane / tropical cyclone
-            |      -> no curve in this cell; separate future workstream
+            |      -> route to current tropical_cyclone_wind_wind v1; never this cell
             |
             +-- mechanism is synoptic, downslope, offshore, or unknown
                    -> do not infer a pathway; clarify or withhold
@@ -57,7 +57,7 @@ state, and structural load path.
 | EF rating | Context only | EF class is damage-estimated context and cannot substitute for numeric turbine-local wind. |
 | Nonconvective synoptic wind | Not covered | A common 3-second-gust unit does not prove equivalent loading. |
 | Downslope windstorm | Not covered | Needs a separate duration/profile/control-state equivalence decision. |
-| Hurricane, typhoon, or tropical cyclone | Not covered | Requires a separate neighboring cell/workstream. Neither proposed pathway is an alias. |
+| Hurricane, typhoon, or tropical cyclone | Not covered here | Route to the separately governed `tropical_cyclone_wind_wind` cell; neither pathway in this cell is an alias. |
 | Tropical-cyclone-spawned tornado | Not automatically covered | It can enter a future tornado route only after the occurrence is explicitly partitioned and turbine-local demand is resolved; never double count it with the parent cyclone. |
 | Offshore fixed or floating wind | Not covered | The proposed archetype is onshore; wave, surge, corrosion, and offshore-foundation interactions are absent. |
 | Hail or lightning | Not covered | Separate hazard mechanisms and cells are required. |
@@ -69,7 +69,7 @@ state, and structural load path.
 | Archived v0.1 | Scaffold only | Coverage tree, candidate axes, and research plan; no final runtime curve | No. It is historical context only. |
 | **Model v1.0/docs r4** | **Current canonical repository artifact** | Five failure-unit logistic-ratio records; straight wind plus a tornado D50-shift variant | Yes, when a canonical/current result is required. |
 | **Proposed model v2.0/docs r1** | **Pressure-tested, noncanonical screening proposal** | Two first-class pathway records, ordered states, explicit equipment denominator, KATs, and rejection tests | Research/review/shadow comparison only. Not a runtime replacement. |
-| Future tropical-cyclone workstream | Not created | No hurricane/TC numerical curve exists here | No. |
+| `tropical_cyclone_wind_wind` model v1.0/docs r1 | Separate current cell | Three exact Jaimes source-native turbine/tower selectors; partial coverage | Use only through its own request guide and exact pin. |
 
 ### 2.1 Current canonical pin
 
@@ -138,7 +138,8 @@ selected merely from that package label.
 | “Show me the pressure-tested rebuild” | Proposed model v2.0/docs r1 | Label every result proposed, noncanonical, screening, and equipment-only. |
 | Research comparison or shadow run | Proposed model v2.0/docs r1, alongside v1 | Do not replace the canonical pin or call the proposal released. |
 | Generic “strong wind” with no mechanism | Neither yet | Ask for or determine the physical mechanism; do not default. |
-| Hurricane/TC, synoptic, downslope, or offshore request | Neither | Return an unsupported/routing decision, not a zero-damage result. |
+| Hurricane/TC request | Separate `tropical_cyclone_wind_wind` current cell | Follow its [request guide](tropical_cyclone_wind_wind_curve_request_guide.md); do not reuse either curve in this cell. |
+| Synoptic, downslope, or offshore request | Neither | Return an unsupported/routing decision, not a zero-damage result. |
 
 Internal construction validation passing does not make proposed v2 canonical. Until a separate promotion
 decision updates the index, changelog, schemas, and consumer pin atomically, the canonical selection remains
@@ -809,7 +810,7 @@ Before returning a wind/tornado × onshore-wind curve or result, verify:
 [ ] The request names canonical v1 or proposed/noncanonical v2 intent.
 [ ] The model/docs/schema/SHA identity is stated and matches the selected lifecycle state.
 [ ] “Strong wind” has been resolved to an exact physical mechanism.
-[ ] Hurricane/TC, synoptic, downslope, and offshore requests are not aliased into this cell.
+[ ] Hurricane/TC requests are routed to `tropical_cyclone_wind_wind`; synoptic, downslope, and offshore requests are not aliased into this cell.
 [ ] The exact pathway is supplied for proposed v2; no default or inference was used.
 [ ] The asset is the supported onshore archetype or v1’s selector limitations are disclosed.
 [ ] The wind field has the right duration, height/profile, unit, and bridge provenance.

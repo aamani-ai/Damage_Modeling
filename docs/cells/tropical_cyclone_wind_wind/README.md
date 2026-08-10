@@ -8,20 +8,23 @@ pathway_id: tropical_cyclone_wind
 damage_code_id: TROPICAL_CYCLONE_WIND_WIND_JAIMES_SCREENING_V1
 semantic_damage_model_version: model v1.0
 human_documentation_revision: docs r1
-lifecycle_state: release_candidate
-promotion_status: proposed
-review_status: pressure_tested_pending_independent_review
+lifecycle_state: released_v1_0
+promotion_status: released
+review_status: reviewed_partial_screening_release
 model_grade: screening_source_derived_engineering_proxy
 artifact_schema_version: damage_curve_record_bundle.v3
-artifact_schema_status: proposed_draft
-canonical_runtime_artifact: false
-current_runtime_pointer: none
+artifact_schema_status: released
+canonical_runtime_artifact: true
+current_runtime_pointer: tropical_cyclone_wind_wind@model_v1_0__docs_r1
 package_release: unreleased
 ```
 
-This page is the current **cell-documentation anchor**. It describes the proposed model v1.0/docs r1
-release candidate, not a current production curve. The proposal is absent from the artifact index, has no
-`current/` folder or consumer pin, and makes no Hazard cutover.
+This page is the current **cell-documentation anchor**. Model v1.0/docs r1 is now a repository-current,
+source-native partial-screening release. The preserved proposal remains audit history; the canonical bytes,
+capability, KATs, and release decision live in [`current/`](current/README.md).
+
+For the shortest Hazard-facing request, exact selector example, and range behavior, start with the
+[hurricane × wind curve request guide](../../extra/guides/tropical_cyclone_wind_wind_curve_request_guide.md).
 
 Model v1.0 changes one conclusion from the historical v0.1 scaffold. Jaimes et al. publish an expected
 economic damage-ratio function, not only a DS3 collapse fragility. The function can be retained honestly for
@@ -148,7 +151,7 @@ Therefore model v1.0 supports only a conditional scalar mean DR for the source-n
 
 ## 8. Scope exclusions
 
-The proposal covers direct aerodynamic tropical-cyclone wind loading only. TC-spawned tornado, surge,
+The release covers direct aerodynamic tropical-cyclone wind loading only. TC-spawned tornado, surge,
 pluvial flood, scour, saturated-soil failure, debris, rain ingress, lightning, fire, offshore loading,
 fatigue, disruption, insurance, and finance are separate or downstream pathways. Related child pathways
 must retain the same `event_family_id` so a consumer can coordinate occurrence loss without duplicate value
@@ -156,28 +159,27 @@ charges.
 
 ## 9. Governed package
 
-Start with the [model v1.0 package overview](proposed/README_tropical_cyclone_wind_wind__model_v1_0__docs_r1.md),
+Start with the [current model v1.0 package](current/README.md),
 then use:
 
-- [derivation dossier](proposed/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_0__docs_r1.md);
-- [metadata specification](proposed/tropical_cyclone_wind_wind_damage_code_metadata_spec__model_v1_0__docs_r1.md);
-- [curve artifact](proposed/tropical_cyclone_wind_wind__model_v1_0__docs_r1__curve_artifact.json);
-- [capability declaration](proposed/tropical_cyclone_wind_wind__model_v1_0__docs_r1__capability.json);
-- [known-answer tests](proposed/known_answer_tests_tropical_cyclone_wind_wind__model_v1_0__docs_r1.json);
-- [validation report](proposed/VALIDATION_REPORT_tropical_cyclone_wind_wind__model_v1_0__docs_r1.md);
-- [promotion gates](proposed/PROMOTION_GATE_MATRIX_tropical_cyclone_wind_wind__model_v1_0__docs_r1.md); and
-- [workbook](proposed/damage_curve_records_tropical_cyclone_wind_wind__model_v1_0__docs_r1.xlsx).
+- [derivation dossier](current/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_0__docs_r1.md);
+- [metadata specification](current/tropical_cyclone_wind_wind_damage_code_metadata_spec__model_v1_0__docs_r1.md);
+- [curve artifact](current/tropical_cyclone_wind_wind__model_v1_0__docs_r1__curve_artifact.json);
+- [capability declaration](current/tropical_cyclone_wind_wind__model_v1_0__docs_r1__capability.json);
+- [known-answer tests](current/known_answer_tests_tropical_cyclone_wind_wind__model_v1_0__docs_r1.json);
+- [validation report](current/VALIDATION_REPORT_tropical_cyclone_wind_wind__model_v1_0__docs_r1.md);
+- [release decision](current/RELEASE_DECISION_tropical_cyclone_wind_wind__model_v1_0__docs_r1.md); and
+- [workbook](current/damage_curve_records_tropical_cyclone_wind_wind__model_v1_0__docs_r1.xlsx).
 
-The JSON artifact and capability file define proposal behavior. The dossier, registers, and workbook explain
-its evidence and derivation. Production consumers must reject this proposal while
-`canonical_runtime_artifact=false`.
+The current JSON artifact and capability file define runtime behavior. The dossier, registers, and workbook
+explain the evidence and derivation. The pre-promotion package under `proposed/` remains noncanonical.
 
 ## 10. Version history
 
 | Version | Status | Meaning |
 |---|---|---|
 | model v0.1/docs r1 | preserved historical scaffold | zero curve records and fail-closed `NO_RUNTIME_CURVE`; retained the candidate evidence and correctly blocked generic turbine transfer |
-| model v1.0/docs r1 | current documentation anchor; proposed, noncanonical | three source-native Jaimes expected-DR records for one quarantined unit; all broader asset and loss outputs remain withheld |
+| model v1.0/docs r1 | repository-current partial-screening release | three source-native Jaimes expected-DR records for one quarantined unit; all broader asset and loss outputs remain withheld |
 
 The [v0.1 package overview](proposed/README_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md),
 [v0.1 pressure test](proposed/PRESSURE_TEST_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md), and
@@ -186,12 +188,12 @@ remain part of the audit trail. Their “no economic DR” conclusion is superse
 source-native Jaimes unit adopted in v1.0; their transfer, denominator, coverage, and fail-closed cautions
 remain in force.
 
-## 11. Promotion boundary
+## 11. Release boundary
 
-Promotion remains blocked pending independent equation/KAT reproduction, valuation review of the Jaimes
-denominator, engineering applicability review, approval of the bundle-v3 curve-form extension, a Hazard
-adapter with exact axis/selector/pin/partial-capability behavior, compound-event testing, shadow comparison,
-and an explicit promotion decision.
+Promotion is complete only for the exact source-native scalar product. The common Hazard loader replays all
+47 formula and contract KATs and enforces exact pathway, axis, selector, source assumption, domain, and
+partial-capability behavior.
 
-No artifact index, `current/` pointer, package release, canonical pin, or Hazard runtime behavior is changed
-by model v1.0/docs r1.
+Valuation transfer, modern-fleet mapping, additional failure units, whole-farm aggregation, and annual/tail
+metrics remain blocked. The portable package remains v2.5; this release is polled through the repository
+artifact index and exact SHA pin.

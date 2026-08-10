@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Validate the noncanonical tropical-cyclone-wind × wind model-v0.1 scaffold.
+"""Validate the preserved tropical-cyclone-wind × wind model-v0.1 scaffold.
 
 The package intentionally contains no runtime curve.  This validator therefore
 checks the fail-closed contract, evidence/value registries, candidate-isolation
-rules, workbook integrity, local links, and absence from the canonical artifact
-index.  It uses only the Python standard library.
+rules, workbook integrity, local links, and isolation from the later canonical
+model-v1.0 release. It uses only the Python standard library.
 """
 
 from __future__ import annotations
@@ -478,12 +478,16 @@ def validate_workbook() -> None:
     require("'Asset_Value'!B15=C5" in worksheet_xml, "QA formula lost quoted cross-sheet reference")
 
 
-def validate_index_absence() -> None:
+def validate_index_isolation() -> None:
     index = load_json(ARTIFACT_INDEX_PATH)
     matching = [
         row for row in index["artifacts"] if row["cell_id"] == "tropical_cyclone_wind_wind"
     ]
-    require(not matching, "noncanonical scaffold appears in runtime artifact index")
+    require(len(matching) == 1, "expected one later canonical TC-wind release")
+    row = matching[0]
+    require(row["semantic_damage_model_version"] == "model v1.0", "unexpected indexed TC-wind model")
+    require("/current/" in row["path"], "indexed TC-wind release is not current")
+    require("model_v0_1" not in row["path"], "v0.1 scaffold appears in runtime artifact index")
 
 
 def main() -> int:
@@ -502,7 +506,7 @@ def main() -> int:
     validate_known_answers(kats)
     validate_candidate_isolation_and_math(artifact)
     validate_workbook()
-    validate_index_absence()
+    validate_index_isolation()
 
     print("PASS tropical_cyclone_wind_wind model v0.1/docs r1 scaffold")
     print(f"checks={CHECKS.count}")

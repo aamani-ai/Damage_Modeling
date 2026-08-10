@@ -69,7 +69,7 @@ downstream concerns; they are not curve outputs.
 - keep model v0.1 and model v1.0 artifacts, capabilities, KATs, and workbooks unchanged;
 - keep model v2.0/docs-r1 as the preserved partial baseline and model v2.1/docs-r1 as the lead screening proposal;
 - keep the artifact index, `current/`, changelog, package release, and Hazard pin unchanged; and
-- enforce the no-cutover handoff and 5/10 canonical-runtime portfolio count.
+- enforce the no-cutover handoff; that cell still does not add to the now-8/10 repository-current canonical-runtime portfolio count.
 
 ### Candidate-build checkpoint — complete outside the queue
 

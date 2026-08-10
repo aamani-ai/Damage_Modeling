@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Reference evaluator for the noncanonical TC-wind × wind model-v1 proposal.
+"""Reference evaluator for the TC-wind × wind model-v1 curve records.
 
-The helper implements the proposed bundle-v3
+The helper implements the current and preserved-proposal bundle-v3
 ``thresholded_weibull_expected_damage`` record exactly.  It emits only a
 conditional scalar damage ratio for the quarantined Jaimes source-native
 exposure atom.  It never assembles dollar, whole-plant, annual, or financial
-loss.  This is a review implementation, not a promoted runtime API.
+loss. This remains an authoring/review helper; production Hazard uses the
+registry-fed common loader.
 """
 
 from __future__ import annotations
@@ -174,7 +175,7 @@ def _select_record(
     if len(matches) != 1:
         raise TropicalCycloneWindEvaluationError(
             "TURBINE_ARCHETYPE_UNSUPPORTED",
-            "archetype must match exactly one proposed Jaimes record",
+            "archetype must match exactly one Jaimes record",
         )
     return matches[0]
 
@@ -217,7 +218,7 @@ def _withheld_result(
 def evaluate_damage_call(
     artifact: Mapping[str, Any], request: Mapping[str, Any]
 ) -> dict[str, Any]:
-    """Evaluate one proposed TC-wind request and return damage-emit-v2."""
+    """Evaluate one governed TC-wind request and return damage-emit-v2."""
 
     pathway_id = request.get("pathway_id")
     if pathway_id is None or pathway_id == "":
@@ -410,11 +411,14 @@ def main() -> None:
     parser.add_argument("request", help="JSON object or path to a JSON file")
     args = parser.parse_args()
     request_text = args.request
-    request_path = Path(request_text)
-    if request_path.exists():
-        request = json.loads(request_path.read_text())
-    else:
+    if request_text.lstrip().startswith("{"):
         request = json.loads(request_text)
+    else:
+        request_path = Path(request_text)
+        if request_path.exists():
+            request = json.loads(request_path.read_text())
+        else:
+            request = json.loads(request_text)
     artifact = load_artifact(args.artifact)
     print(json.dumps(evaluate_damage_call(artifact, request), indent=2))
 

@@ -42,7 +42,7 @@ from typing import Any, Optional
 
 import jsonschema
 
-PUBLISHER_VERSION = "damage-publish/0.1.0"
+PUBLISHER_VERSION = "damage-publish/0.2.0"
 MANIFEST_SCHEMA_VERSION = "damage-artifact-publication-manifest/v1"
 DEFAULT_BUCKET = "infrasure-benchmark"
 DEFAULT_ENV = "dev"
@@ -55,13 +55,16 @@ SCHEMA_DIR = REPO_ROOT / "docs/contracts/schemas"
 # artifact_schema_version → the schema file that validates it
 _SCHEMA_FILES = {
     "damage_curve_record_bundle.v2": "curve_artifact_bundle.v2.schema.json",
+    "damage_curve_record_bundle.v3": "curve_artifact_bundle.v3.schema.json",
 }
 # schemas the above cross-$ref — published alongside so a consumer can build
 # a complete resolver registry from _schemas/ alone (no repo checkout)
 _SCHEMA_SIBLINGS = [
     "capability_declaration.v2.schema.json",
+    "capability_declaration.v3.schema.json",
     "cell_runtime_changelog.v1.schema.json",
     "damage_emit.schema.json",
+    "damage_emit.v2.schema.json",
 ]
 
 
@@ -251,6 +254,7 @@ def _hazard_type(cell_id: str) -> str:
     for prefix, hazard in (
         ("hail", "hail"), ("flood", "flood"), ("wildfire", "wildfire"),
         ("wind_tornado", "convective_wind"), ("strong_wind", "convective_wind"),
+        ("tropical_cyclone_wind", "hurricane"),
     ):
         if cell_id.startswith(prefix):
             return hazard
@@ -275,7 +279,10 @@ def publish_schemas(*, client=None, bucket: str = DEFAULT_BUCKET,
     client = client or storage.Client()
     bucket_obj = client.bucket(bucket)
     uploaded = []
-    for schema_file in list(_SCHEMA_FILES.values()) + _SCHEMA_SIBLINGS:
+    # Preserve declaration order while avoiding duplicate uploads if a future
+    # bundle schema becomes a sibling of another released bundle.
+    schema_files = list(dict.fromkeys(list(_SCHEMA_FILES.values()) + _SCHEMA_SIBLINGS))
+    for schema_file in schema_files:
         schema_path = SCHEMA_DIR / schema_file
         blob = bucket_obj.blob(f"{NAMESPACE}/{env}/_schemas/{schema_file}")
         if blob.exists():

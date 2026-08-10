@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate repository-current damage artifacts and the hail consumer seam.
+"""Validate repository-current v2/v3 damage artifacts and selected consumer seams.
 
 This is a dependency-free semantic validator. JSON Schema validation remains the
 structural contract; these checks cover cross-file hashes, path resolution,
@@ -95,6 +95,69 @@ def validate_capability(artifact: dict) -> None:
         capability["cap_binding"]["enforcement_owner"] == "downstream_consumer",
         "cap enforcement owner mismatch",
     )
+
+
+def validate_v3_curve_record(record: dict) -> None:
+    form = record["curve_form"]
+    parameters = record["parameters"]
+    require(record["y_axis"] == "failure_unit_damage_ratio", "unexpected v3 y_axis")
+    if form == "piecewise_linear":
+        require(set(parameters) == {"points"}, f"{record['curve_id']}: invalid piecewise payload")
+        points = parameters["points"]
+        require(len(points) >= 2, f"{record['curve_id']}: too few points")
+        require(all(len(point) == 2 for point in points), "piecewise point must be [x, DR]")
+        require(all(left[0] < right[0] for left, right in zip(points, points[1:])), "v3 axis not increasing")
+        require(all(0 <= point[1] <= 1 for point in points), "v3 piecewise DR outside [0,1]")
+        return
+    if form == "thresholded_weibull_expected_damage":
+        require(
+            set(parameters) == {"V_zero_kmh", "delta_V50_kmh", "rho", "V_at_DR50_kmh", "max_dr"},
+            f"{record['curve_id']}: invalid thresholded-Weibull payload",
+        )
+        require(parameters["V_zero_kmh"] >= 0, f"{record['curve_id']}: negative threshold")
+        require(parameters["delta_V50_kmh"] > 0, f"{record['curve_id']}: nonpositive delta")
+        require(parameters["rho"] > 0, f"{record['curve_id']}: nonpositive rho")
+        require(0 < parameters["max_dr"] <= 1, f"{record['curve_id']}: invalid max_dr")
+        require(
+            math.isclose(
+                parameters["V_at_DR50_kmh"],
+                parameters["V_zero_kmh"] + parameters["delta_V50_kmh"],
+                rel_tol=0,
+                abs_tol=1e-12,
+            ),
+            f"{record['curve_id']}: D50 identity mismatch",
+        )
+        return
+    raise AssertionError(f"unsupported v3 curve_form {form!r}")
+
+
+def validate_v3_artifact(artifact: dict) -> int:
+    capability = artifact["capability_declaration"]
+    require(capability["schema_version"] == "capability_declaration.v3", "capability v3 required")
+    require(capability["cell_id"] == artifact["cell_id"], "v3 capability cell mismatch")
+    require(capability["canonical_runtime_artifact"] is True, "v3 capability is noncanonical")
+    require(
+        capability["consumer_annual_metrics"]["computation_owner"] == "downstream_consumer",
+        "v3 metric owner mismatch",
+    )
+    require(
+        capability["cap_binding"]["enforcement_owner"] == "downstream_consumer",
+        "v3 cap enforcement owner mismatch",
+    )
+    pathways = artifact["pathways"]
+    require(pathways, "v3 artifact has no pathways")
+    ids = [pathway["pathway_id"] for pathway in pathways]
+    require(len(ids) == len(set(ids)), "duplicate v3 pathway_id")
+    capability_ids = [item["pathway_id"] for item in capability["pathway_capabilities"]]
+    require(capability_ids == ids, "v3 artifact/capability pathway mismatch")
+    record_count = 0
+    for pathway in pathways:
+        records = pathway["curve_records"]
+        for record in records:
+            validate_v3_curve_record(record)
+            record_count += 1
+    require(record_count > 0, "indexed v3 artifact has no curve records")
+    return record_count
 
 
 def logistic(record: dict, diameter_mm: float) -> float:
@@ -377,12 +440,18 @@ def main() -> None:
     wildfire_aggregate_kats = 0
     wildfire_distribution_kats = 0
     wildfire_contract_tests = 0
+    v3_artifact_count = 0
+    v3_curve_record_count = 0
     for entry in index["artifacts"]:
         path = ROOT / entry["path"]
         require(path.exists(), f"artifact missing: {entry['path']}")
         require(sha256(path) == entry["sha256"], f"SHA mismatch: {entry['cell_id']}")
         artifact = load(path)
-        require(artifact["schema_version"] == "damage_curve_record_bundle.v2", "bundle v2 required")
+        schema_version = artifact["schema_version"]
+        require(
+            schema_version in {"damage_curve_record_bundle.v2", "damage_curve_record_bundle.v3"},
+            "bundle v2 or v3 required",
+        )
         require(artifact["cell_id"] == entry["cell_id"], "index cell mismatch")
         require(artifact["semantic_damage_model_version"] == entry["semantic_damage_model_version"], "model pin mismatch")
         require(artifact["documentation_revision"] == entry["documentation_revision"], "docs pin mismatch")
@@ -394,9 +463,13 @@ def main() -> None:
         serialized = json.dumps(artifact)
         require("01_cells/" not in serialized, f"legacy source path in {entry['cell_id']}")
         require("Hazard_modeling/" not in serialized, f"downstream path in {entry['cell_id']}")
-        for record in artifact["curve_records"]:
-            validate_curve_record(record)
-        validate_capability(artifact)
+        if schema_version == "damage_curve_record_bundle.v2":
+            for record in artifact["curve_records"]:
+                validate_curve_record(record)
+            validate_capability(artifact)
+        else:
+            v3_artifact_count += 1
+            v3_curve_record_count += validate_v3_artifact(artifact)
         changelog = load(ROOT / entry["changelog_path"])
         require(changelog["current_pin"] == entry["consumer_pin"], "changelog pin mismatch")
         if entry["cell_id"] == "hail_solar":
@@ -423,6 +496,8 @@ def main() -> None:
                 "wildfire_aggregate_kats": wildfire_aggregate_kats,
                 "wildfire_distribution_kats": wildfire_distribution_kats,
                 "wildfire_contract_tests": wildfire_contract_tests,
+                "v3_artifact_count": v3_artifact_count,
+                "v3_curve_record_count": v3_curve_record_count,
             },
             indent=2,
         )

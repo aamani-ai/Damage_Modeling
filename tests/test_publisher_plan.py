@@ -12,7 +12,7 @@ from damage_modeling.publishing.publisher import (
 
 def test_all_index_cells_plan_clean():
     plans = plan_publications()
-    assert len(plans) == 5
+    assert len(plans) == 8
     problems = {p.cell_id: p.problems for p in plans if not p.ok}
     assert not problems, f"planning failures: {problems}"
 
@@ -28,6 +28,7 @@ def test_prefix_and_registry_mapping():
     assert hail.damage_code_id == "HAIL_SOLAR_PV_MODULE_V1"
     assert _hazard_type("wind_tornado_wind") == "convective_wind"
     assert _hazard_type("strong_wind_solar") == "convective_wind"
+    assert _hazard_type("tropical_cyclone_wind_wind") == "hurricane"
     assert _tech_class("wind_tornado_wind") == "wind"
     assert _tech_class("hail_solar") == "solar"
 
@@ -36,7 +37,10 @@ def test_kats_only_where_the_index_says():
     plans = {p.cell_id: p for p in plan_publications()}
     with_kats = {c for c, p in plans.items()
                  if any(f.name == "known_answer_tests.json" for f in p.files)}
-    assert with_kats == {"hail_solar", "wildfire_solar"}
+    assert with_kats == {
+        "hail_solar", "wildfire_solar", "flood_wind", "wildfire_wind",
+        "tropical_cyclone_wind_wind",
+    }
     for p in plans.values():
         assert any(f.name == "curve_artifact.json" for f in p.files)
         assert any(f.name == "changelog.json" for f in p.files)

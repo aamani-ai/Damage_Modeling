@@ -182,7 +182,8 @@ pip install -r requirements.txt
 
 ## Status
 
-🟡 **New repo, docs-first.** Method mature (foundations + global standards + 5 current cells at model v1.0;
-four public-source-derived cells plus the explicitly screening-grade wildfire_solar engineering proxy).
+🟡 **New repo, docs-first.** Method mature (foundations + global standards + 8 current cells at model v1.0;
+the original five plus canonical partial-screening `flood_wind`, Tier-4 `wildfire_wind`, and source-native
+`tropical_cyclone_wind_wind` releases).
 Portable v2.5 remains preserved; repository-current artifacts use the stricter v2 consumer seam. Durable
 artifact publishing and automated Hazard M3 loading remain future system work.

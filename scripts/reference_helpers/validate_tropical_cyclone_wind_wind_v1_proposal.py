@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Validate the noncanonical TC-wind × wind model-v1 proposal.
+"""Validate the preserved noncanonical TC-wind × wind model-v1 proposal.
 
 Checks the proposed bundle-v3 curve-form extension, exact Jaimes Eq. 1
 implementation, selector/range/value fail-closed behavior, governed registers,
-known answers, workbook structure, links, and preservation of the canonical
-artifact index.  The validator is dependency-free except for optional JSON
+known answers, workbook structure, links, and isolation from the canonical
+current copy. The validator is dependency-free except for optional JSON
 Schema execution when ``jsonschema`` and ``referencing`` are available.
 """
 
@@ -541,8 +541,16 @@ def validate_index() -> None:
     index = load(INDEX)
     require(index["schema_version"] == "damage_curve_artifact_index.v2", "index schema changed")
     matches = [item for item in index["artifacts"] if item["cell_id"] == "tropical_cyclone_wind_wind"]
-    require(not matches, "noncanonical TC-wind proposal entered the canonical index")
-    require(not (ROOT / "docs/cells/tropical_cyclone_wind_wind/current").exists(), "current folder created before promotion")
+    require(len(matches) == 1, "expected one canonical TC-wind current entry")
+    row = matches[0]
+    require("/current/" in row["path"], "canonical TC-wind entry does not point to current")
+    require("/proposed/" not in row["path"], "noncanonical proposal entered the canonical index")
+    current_path = ROOT / row["path"]
+    require(current_path.exists(), "canonical TC-wind current artifact is missing")
+    current = load(current_path)
+    require(current["canonical_runtime_artifact"] is True, "indexed TC-wind artifact is not canonical")
+    require(current["semantic_damage_model_version"] == "model v1.0", "unexpected current TC-wind model")
+    require(artifact_sha256(current_path) == row["sha256"], "canonical TC-wind index SHA mismatch")
 
 
 def main() -> None:
@@ -590,7 +598,7 @@ def main() -> None:
     else:
         raise ValidationFailure("bad artifact pin was accepted")
 
-    print("PASS tropical_cyclone_wind_wind model v1.0/docs r1 noncanonical proposal")
+    print("PASS preserved tropical_cyclone_wind_wind model v1.0/docs r1 noncanonical proposal")
     print(f"checks={CHECKS.value}")
     print(f"schema_validation={schema_note}")
     print(f"formula_kats={formula_kats}")

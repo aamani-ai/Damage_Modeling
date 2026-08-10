@@ -56,21 +56,26 @@ pip install -r requirements.txt
 
 ## Status
 
-Method mature — foundations + global standards + 5 current worked cells, all at damage-model v1.0: four
-public-source-derived cells (hail×solar, flood×solar, wind/tornado×wind, strong-wind×solar) plus the explicitly
-screening-grade wildfire×solar engineering proxy. Of the five additional structurally complete hazard × asset
-pairs, tropical-cyclone wind×wind and flood×wind have noncanonical partial-coverage model-v1.0 proposals;
-hail×wind and wildfire×wind remain fail-closed model-v0.1 research cells. Tropical-cyclone wind×solar now
+Method mature — foundations + global standards + **8 current worked cells**, all at damage-model v1.0. The
+original five remain unchanged; `flood_wind`, `wildfire_wind`, and `tropical_cyclone_wind_wind` are canonical
+partial-screening releases under bundle v3. Flood covers one whole facility GSU/substation source atom;
+wildfire covers two named electrical failure units; tropical-cyclone wind×wind covers one quarantined
+source-native turbine/tower atom with three exact Jaimes selectors. Unsupported units remain null/withheld.
+Hail×wind remains the one fail-closed research-only cell.
+Tropical-cyclone wind×solar now
 leads with a noncanonical
 [`model-v2.1/docs-r1` coverage-complete screening candidate](docs/cells/tropical_cyclone_wind_solar/proposed/README_tropical_cyclone_wind_solar__model_v2_1__docs_r1.md): ten governed records plus a named 100%-physical-value assembly emit plant DR, loss per kWdc, and optional scenario dollars. Uncalibrated records remain explicit Tier 4; annual/tail metrics remain consumer-owned. Model v0.1, v1.0, and v2.0 remain preserved, and no `current/`, artifact-index, changelog, package-release, or Hazard cutover change was made. Each cell has a
 three-file first-reader basics set.
 The [coverage plan](docs/plans/hazard_asset_coverage/README.md) reports **10/10 structural coverage** and
-**5/10 canonical runtime coverage**, and records the one-cell-at-a-time deep-curation queue. v2.5 ships
+**8/10 canonical runtime coverage**, and records the one-cell-at-a-time deep-curation queue. v2.5 ships
 machine-readable JSON
-artifacts and capability declarations; wildfire×solar is repository-current but outside that preserved
-portable package. **Durable artifact publishing shipped 2026-08-06** (runbook: [`docs/guides/releasing_a_damage_artifact.md`](docs/guides/releasing_a_damage_artifact.md)) — all five canonical cells live on the
+artifacts and capability declarations; four repository-current cells are outside that preserved portable
+package. **Durable artifact publishing shipped 2026-08-06** (runbook: [`docs/guides/releasing_a_damage_artifact.md`](docs/guides/releasing_a_damage_artifact.md)) — the original five canonical cells live on the
 governed GCS namespace via the `damage-publish` release CLI (`src/damage_modeling/publishing/`,
 [standard 23](docs/contracts/standards/23_durable_publication_standard.md)); Hazard M3 *loading* shipped on the consumer side the same day
-(`drivers/deep/damage_loader.py`: registry → SHA → schema → KATs @1e-12 → compose; first observed-asset run
+(`drivers/deep/damage_loader.py`: registry → SHA → schema → KATs @1e-12 → compose; bundle-v3 loading and
+explicit same-unit scenario loss were added for the partial-screening releases; first observed-asset run
 served 2026-08-06), and Hazard's DD-G20 makes registry-fed consumption the rule for every future cut — this
-namespace is now the only path new science runs read. See [`AGENTS.md`](AGENTS.md).
+namespace is now the only path new science runs read. The three newly promoted wind-asset packages are
+repository-current and publish-ready; external object-store/registry activation remains a deliberate release
+act. See [`AGENTS.md`](AGENTS.md).

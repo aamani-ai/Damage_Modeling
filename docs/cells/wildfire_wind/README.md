@@ -1,6 +1,38 @@
 # Exogenous wildfire × onshore wind
 
-## 1. Cell identity
+## Current model — partial electrical screening
+
+```yaml
+damage_code_id: WILDFIRE_WIND_PARTIAL_ELECTRICAL_SCREENING_V1
+semantic_damage_model_version: model v1.0
+human_documentation_revision: docs r1
+model_grade: screening_engineering_proxy_t4
+supported_failure_units:
+  - WT_PAD_ELECTRICAL
+  - WT_GSU_PROTECTION_CONTROL_DC
+curve_records: 2
+canonical_runtime_artifact: true
+runtime_pin: wildfire_wind@model_v1_0__docs_r1
+scenario_loss: supported_only_with_explicit_same_unit_value_and_exposure
+annual_and_tail_metrics: withheld
+```
+
+The current screening model makes two real physical risks visible: turbine/pad electrical equipment and the
+shared GSU protection-control-DC package. It is deliberately **partial**. It does not publish a whole-wind-
+farm curve, infer zero for unmodeled units, bind the mixed 72 USD/kW electrical value, or auto-activate a
+Hazard registry row.
+
+The exact FSim-class state tables are cell-local Tier-4 assumptions adopted under explicit owner direction.
+Primary research and equipment guidance support the mechanism and relative ordering, not numerical
+calibration. Start with the [curve request guide](../../extra/guides/wildfire_wind_curve_request_guide.md),
+[current model-v1 package](current/README.md),
+[deep-research memo](proposed/DEEP_RESEARCH_AND_DECISION_MEMO_wildfire_wind__model_v1_0__docs_r1.md), and
+[Hazard proposal](../../contracts/hazard_handoff/wildfire_wind_model_v1_0_partial_screening_proposal.md).
+
+The remainder of this page preserves the strict evidence-earned model-v0.1 baseline. It remains the
+strict fail-closed alternative and audit baseline; it is no longer the current runtime pointer.
+
+## Preserved strict baseline — model v0.1/docs r1
 
 ```yaml
 cell_id: wildfire_wind

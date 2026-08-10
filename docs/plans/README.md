@@ -8,7 +8,7 @@ and assumptions register.
 
 | Plan | Status | What |
 |---|---|---|
-| [`hazard_asset_coverage/`](hazard_asset_coverage/README.md) | breadth complete: 10/10 structural, 5/10 canonical runtime; TC-wind-solar now also has a noncanonical synthetic model-v2 candidate | Continue with `wildfire_wind`, one cell at a time without forcing a version promotion; the out-of-queue TC-solar v2 work does not change the queue or counts. |
+| [`hazard_asset_coverage/`](hazard_asset_coverage/README.md) | breadth complete: 10/10 structural, 8/10 repository-current canonical runtime after partial-screening flood_wind, wildfire_wind, and tropical_cyclone_wind_wind v1 releases; TC-wind-solar also has a noncanonical model-v2.1 candidate | Continue depth work one cell at a time; partial canonical status is not complete calibration, and the out-of-queue TC-solar work does not change current pins. |
 | [`repo_information_architecture/`](repo_information_architecture/README.md) | initial plan-of-record | Normalize the repo from deliverable-shaped navigation into a shallow, durable documentation architecture without losing provenance. |
 | [`flood_wind_shared_electrical/`](flood_wind_shared_electrical/README.md) | phase 2 complete; local v1 proposal noncanonical; shared runtime deferred | Govern the flood-wind cell and asset-neutral flood-electrical substrate while preserving an explicit future migration path. |
 | [`strong_wind_solar_completion/`](strong_wind_solar_completion/README.md) | step 1 audit complete; promotion blocked | Harden the existing convective-wind × solar v2 proposal without rebuilding it, close scientific and consumer gates in order, and preserve v1 as canonical until an explicit release decision. |

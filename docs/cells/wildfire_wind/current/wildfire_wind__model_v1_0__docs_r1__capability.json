@@ -1,0 +1,149 @@
+{
+  "schema_version": "capability_declaration.v3",
+  "cell_id": "wildfire_wind",
+  "canonical_runtime_artifact": true,
+  "pathway_capabilities": [
+    {
+      "pathway_id": "wildfire_thermal_attack",
+      "failure_unit_scalar_dr": "conditional",
+      "scenario_loss_given_value_basis": "supported_with_explicit_failure_unit_value_and_exposure_basis",
+      "curve_intrinsic_spread": "not_carried",
+      "populated_emit_modes": [
+        "scalar_mean"
+      ],
+      "conditions": [
+        "exact USFS FSim RDS-2016-0034-3 product identity and source-native conditional flame-length class are required",
+        "class state must be an exact integer from 1 through 6; state 0 is a damage-code no-event control only",
+        "screening_assumption_set_id must equal WW_T4_PARTIAL_ELECTRICAL_SCREENING_2026_08_08",
+        "the output applies only to the named failure unit and is not a whole-wind-farm damage ratio",
+        "firebrand, destructive residue, internal turbine fire, BI, frequency, and tail metrics are outside this pathway"
+      ],
+      "limitation_flags": [
+        "CANONICAL_SCREENING_RELEASE",
+        "SCREENING_ENGINEERING_PROXY_T4",
+        "PARTIAL_FAILURE_UNIT_COVERAGE",
+        "FSIM_CLASS_IS_NOT_LOCAL_EQUIPMENT_HEAT_FLUX",
+        "NOT_FIELD_OR_CLAIMS_CALIBRATED",
+        "NO_AUTOMATIC_MITIGATION_CREDIT",
+        "CURVE_INTRINSIC_SPREAD_NOT_CARRIED",
+        "NUMERICAL_IDENTITY_TO_WILDFIRE_SOLAR_IS_AUDIT_FINGERPRINT_ONLY"
+      ],
+      "withheld_failure_units": [
+        {
+          "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "FULL_TURBINE_ECONOMIC_RESPONSE_NOT_CALIBRATED"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_COLLECTION_NETWORK",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "LINE_EXPOSURE_AND_CONSTRUCTION_STATE_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_GSU_MAIN_TRANSFORMER",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "TRANSFORMER_THERMAL_STATE_AND_DISPOSITION_MODEL_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_GSU_SWITCHGEAR_BUS",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "SWITCHGEAR_RECONDITION_OR_REPLACE_MODEL_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_GSU_CABLE_TERMINATIONS",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "CABLE_BODY_TERMINATION_AND_INGRESS_SPLIT_REQUIRED"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_CONTROL_MET_OM",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "MIXED_BUILDING_AND_INSTRUMENT_INVENTORY_REQUIRES_SPLIT"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_FOUNDATION",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "DIRECT_THERMAL_RESPONSE_NOT_CALIBRATED"
+          ]
+        },
+        {
+          "failure_unit_id": "WT_CIVIL_INFRA",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
+          ]
+        },
+        {
+          "failure_unit_id": "SUPPORT_FIELDWORK",
+          "reason_codes": [
+            "NO_INDEPENDENT_FRAGILITY",
+            "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION"
+          ]
+        },
+        {
+          "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+          "reason_codes": [
+            "NO_INDEPENDENT_FRAGILITY",
+            "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumer_annual_metrics": {
+    "computation_owner": "downstream_consumer",
+    "status_before_promotion": "withheld_noncanonical_proposal",
+    "status_after_promotion": "withheld",
+    "prerequisites": [
+      "released canonical model docs schema and SHA pin",
+      "validated wildfire frequency and source-class spatial coupling",
+      "reviewed local-attack bridge or explicit continued screening-use approval",
+      "complete same-unit value ownership and exposure binding",
+      "compound-event and dependent-spread aggregation controls"
+    ],
+    "limitation_flags": [
+      "CANONICAL_SCREENING_RELEASE",
+      "SCREENING_ENGINEERING_PROXY_T4",
+      "PARTIAL_FAILURE_UNIT_COVERAGE",
+      "FSIM_CLASS_IS_NOT_LOCAL_EQUIPMENT_HEAT_FLUX",
+      "NOT_FIELD_OR_CLAIMS_CALIBRATED",
+      "NO_AUTOMATIC_MITIGATION_CREDIT",
+      "CURVE_INTRINSIC_SPREAD_NOT_CARRIED",
+      "ANNUAL_AND_TAIL_METRICS_WITHHELD"
+    ]
+  },
+  "cap_binding": {
+    "policy": "consumer_enforced_fail_closed",
+    "enforcement_owner": "downstream_consumer",
+    "checks_required": [
+      "reject whole-plant DR and annual or tail metrics from this partial screening model",
+      "bind each DR only to the same named failure-unit value and local exposure fraction",
+      "prohibit the mixed 72 USD/kW electrical row and full-project TIV as implicit values",
+      "represent a shared GSU protection-control-DC package once",
+      "preserve nulls and reason codes for every withheld unit and pathway"
+    ],
+    "action_if_fail": "withhold scenario loss and all annual or tail metrics"
+  },
+  "promotion_gate": {
+    "status": "passed",
+    "required_before_canonical_use": [
+      "owner-approved screening release with evidence grade and partial coverage visible in every result",
+      "released bundle-v3 schema plus common producer and Hazard consumer validation",
+      "exact model docs schema and SHA pin with runtime known-answer tests",
+      "explicit same-unit value ownership exposure and no-double-count checks before dollar loss",
+      "unsupported failure units remain null and reason-coded rather than zero-filled"
+    ]
+  }
+}

@@ -30,18 +30,30 @@ Before the current build:
 
 This supports a coverage-first choice: establish tropical-cyclone wind × solar honestly, then reopen the two
 deferred wind-asset pairs one at a time before another deep model-v2 cycle. Tropical-cyclone wind × solar,
-hail × wind, and wildfire × wind are now complete model-v0.1 scaffolds. The portfolio is 10/10 structurally
-governed and 5/10 output-bearing at runtime; the remaining work is depth, not an unnamed coverage gap.
+hail × wind, and wildfire × wind are now complete model-v0.1 scaffolds. A later 2026-08-08 release promoted
+flood × wind and wildfire × wind as explicitly partial screening models, bringing canonical output-bearing
+coverage to 7/10; the remaining work is depth, not an unnamed coverage gap.
+
+**Release update, 2026-08-09:** the pressure-tested tropical-cyclone wind × wind v1 package is now canonical
+for three exact Jaimes selectors on one source-native turbine/tower atom. No generic turbine transfer,
+whole-farm value, or annual/tail claim was added. Repository-current canonical coverage is now 8/10.
+
+**Release update, 2026-08-08:** explicit owner authorization advanced wildfire × wind to model v1.0 for two
+electrical failure units and promoted it together with flood × wind after common bundle-v3 consumer tests.
+Wildfire ordinates remain Tier-4; flood remains a legacy source-native assembly proxy; all other units are
+withheld-not-zero. Canonical runtime coverage was then 7/10.
 
 **Depth update, 2026-07-28:** the first one-cell deep pass advanced tropical-cyclone wind × wind from its
 v0.1 scaffold to a noncanonical model-v1.0 proposal with three exact source-native Jaimes curves for one
 quarantined turbine/tower exposure unit. Standard wind-farm units, value binding, scenario loss, and consumer
-promotion remain withheld, so the canonical runtime count stays 5/10.
+promotion remained withheld; at that stage the canonical runtime count stayed 5/10. The 2026-08-09 release
+promoted the exact same bounded science without resolving or relaxing those wider coverage gaps.
 
-The second deep pass advanced flood × wind to a noncanonical model-v1.0 proposal with one exact legacy FEMA
+The second deep pass first advanced flood × wind to a noncanonical model-v1.0 proposal with one exact legacy FEMA
 whole-substation screening curve. It does not create component curves: all GSU components and wind-specific
 units remain withheld, the full same-substation value may bind only after promotion, and current Hazus 7.0's
-mapping-only/disabled status remains an explicit limitation. The canonical runtime count still stays 5/10.
+mapping-only/disabled status remains an explicit limitation. The later partial-screening release promoted this
+exact bounded model without changing the curve or claiming component completeness.
 
 The third deep pass advanced tropical-cyclone wind × solar only as an owner-authorized, noncanonical
 coverage-first screening exception. One Perry ground/nontracking source-cohort visible-module-hardware atom
@@ -49,13 +61,14 @@ is conditionally numeric on the dataset-native 17.4–39.1 m/s gust field and si
 strict evidence-earned result remains model v0.1/`NO_RUNTIME_CURVE`: the cohort is mixed scale, wind-product
 semantics are unresolved, two Tier-4 assumptions create the economic meaning, the severe tail is sparse, and
 every generic module, tracker, rack, foundation, electrical, GSU, civil, support, dollar, annual, and tail
-output remains withheld. The canonical runtime count remains 5/10.
+output remains withheld. At that stage the canonical runtime count remained 5/10; the later two-cell release
+raised the current count to 7/10; the later TC-wind × wind release raised it to 8/10.
 
 The fourth deep pass completed `hail_wind` as an evidence-only docs-r2 revision. Independent primary-source
 and repository/legacy reviews found stronger coated-coupon, operational-field, simulation, test-method, and
 inspection material, but still no occurrence contact → disposition → same-blade cost chain. Model v0.1 and
 `NO_RUNTIME_CURVE` remain the strict execution truth; no source-specific screening atom or canonical runtime
-count was added. `wildfire_wind` is next.
+count was added. `wildfire_wind` was next and has since completed its partial-screening release.
 
 ## Why not publish a quick curve?
 
@@ -73,9 +86,9 @@ correct coverage product is a complete v0.1 package with `curve_records: []` and
 package still eliminates ungoverned placeholders, names the missing data, and creates a safe consumer seam.
 
 If the portfolio owner deliberately authorizes a screening exception, it does not erase that strict result.
-The exception must be noncanonical, source-population-specific, machine-enforced through its assumption
-bridge and selectors, explicit about unsupported units/metrics, and paired with the retained v0.1 operational
-alternative.
+The exception may become canonical only when its screening grade is load-bearing, its exact source/
+assumption bridge and selectors are machine-enforced, unsupported units/metrics remain explicit, the v0.1
+alternative is retained, and the common consumer seam passes.
 
 ## Shared-component implication
 

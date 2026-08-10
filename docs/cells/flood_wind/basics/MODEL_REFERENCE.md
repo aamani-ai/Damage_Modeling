@@ -1,6 +1,6 @@
 # Flood × wind — model reference
 
-This is the compact reviewer reference for proposed `model v1.0 / docs r1`. The machine-readable artifact,
+This is the compact reviewer reference for current `model v1.0 / docs r1`. The machine-readable artifact,
 capability declaration, and evaluator remain authoritative for exact behavior.
 
 ## Identity and status
@@ -10,9 +10,9 @@ capability declaration, and evaluator remain authoritative for exact behavior.
 | Cell | `flood_wind` |
 | Damage code | `FLOOD_WIND_FEMA_HAZUS_SUBSTATION_SCREENING_V1` |
 | Model/docs | `model v1.0 / docs r1` |
-| Bundle/capability/emit | proposed v3 / v3 / v2 |
+| Bundle/capability/emit | released v3 / v3 / v2 |
 | Grade | `screening_source_native_legacy_fema_proxy` |
-| Lifecycle | release candidate, proposed |
+| Lifecycle | released canonical partial screening |
 | Canonical/runtime/package | no / no / unreleased |
 | Supported pathway | `flood_inundation_contact` |
 | Supported failure unit | `FW_HAZUS_GSU_SUBSTATION_ASSEMBLY` |
@@ -172,13 +172,13 @@ canonical promotion.
 - 16 stable error-code KATs;
 - schema, semantic-curve, capability, value, register, shared-substrate, workbook, link, index, and pin checks;
 - 13 workbook sheets and 18 formula-driven QA assertions;
-- no `current/` folder, canonical artifact-index row, package release, or consumer cutover.
+- no automatic registry activation, whole-farm completion, annual/tail completion, or portable-package bump.
 
 ## Authoritative files
 
-- [Curve artifact](../proposed/flood_wind__model_v1_0__docs_r1__curve_artifact.json)
-- [Capability](../proposed/flood_wind__model_v1_0__docs_r1__capability.json)
-- [Known-answer tests](../proposed/known_answer_tests_flood_wind__model_v1_0__docs_r1.json)
-- [Metadata specification](../proposed/flood_wind_damage_code_metadata_spec__model_v1_0__docs_r1.md)
-- [Derivation dossier](../proposed/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md)
-- [Validation report](../proposed/VALIDATION_REPORT_flood_wind__model_v1_0__docs_r1.md)
+- [Curve artifact](../current/flood_wind__model_v1_0__docs_r1__curve_artifact.json)
+- [Capability](../current/flood_wind__model_v1_0__docs_r1__capability.json)
+- [Known-answer tests](../current/known_answer_tests_flood_wind__model_v1_0__docs_r1.json)
+- [Metadata specification](../current/flood_wind_damage_code_metadata_spec__model_v1_0__docs_r1.md)
+- [Derivation dossier](../current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md)
+- [Validation report](../current/VALIDATION_REPORT_flood_wind__model_v1_0__docs_r1.md)

@@ -3,13 +3,15 @@
 Repo-level contracts for the damage-modeling seam consumed by downstream systems such as `Hazard_modeling`
 M3 and pinned by `resiliency_modeling` scenarios.
 
-These files are the current consumer-facing contract surface. They do not create a stable importable API;
-that remains deferred until runtime publishing and Hazard loading are designed.
+These files are the current consumer-facing contract surface. Runtime publication is owned by the small
+producer package under `src/damage_modeling/publishing/`; evaluators remain consumer-owned.
 
 Repository-current change records:
 
 - [`REPOSITORY_CONTRACT_RELEASE_2026_07_10.md`](REPOSITORY_CONTRACT_RELEASE_2026_07_10.md) — consumer seam r1.
 - [`REPOSITORY_WILDFIRE_SOLAR_MODEL_V1_0_RELEASE_2026_07_10.md`](REPOSITORY_WILDFIRE_SOLAR_MODEL_V1_0_RELEASE_2026_07_10.md) — first canonical wildfire_solar screening model.
+- [`REPOSITORY_WIND_PARTIAL_SCREENING_MODEL_V1_RELEASE_2026_08_08.md`](REPOSITORY_WIND_PARTIAL_SCREENING_MODEL_V1_RELEASE_2026_08_08.md) — flood_wind + wildfire_wind v1 and released bundle-v3 seam.
+- [`REPOSITORY_TROPICAL_CYCLONE_WIND_WIND_MODEL_V1_RELEASE_2026_08_09.md`](REPOSITORY_TROPICAL_CYCLONE_WIND_WIND_MODEL_V1_RELEASE_2026_08_09.md) — source-native hurricane-wind × wind partial-screening v1 release.
 
 ## Runtime contract
 
@@ -18,7 +20,7 @@ Repository-current change records:
 | Damage-code interface | [`09_damage_code_interface_standard.md`](standards/09_damage_code_interface_standard.md) |
 | Machine-readable artifact standard | [`20_machine_readable_artifact_standard.md`](standards/20_machine_readable_artifact_standard.md) |
 | Capability and cap-binding standard | [`21_capability_and_cap_binding_standard.md`](standards/21_capability_and_cap_binding_standard.md) |
-| Pathway-aware artifact/emit draft | [`22_pathway_aware_artifact_and_emit_standard.md`](standards/22_pathway_aware_artifact_and_emit_standard.md) |
+| Pathway-aware artifact/emit standard | [`22_pathway_aware_artifact_and_emit_standard.md`](standards/22_pathway_aware_artifact_and_emit_standard.md) |
 | **Durable publication standard** (GCS namespace · write protocol · publish→register→load) | [`23_durable_publication_standard.md`](standards/23_durable_publication_standard.md) |
 | **Asset→artifact mapping standard** (the four governed stages · alias governance · no-invention rule · basis-coherence guard · T4 round-trip) | [`24_asset_to_artifact_mapping_standard.md`](standards/24_asset_to_artifact_mapping_standard.md) |
 | Versioning policy | [`17_versioning_policy.md`](standards/17_versioning_policy.md) |
@@ -26,13 +28,13 @@ Repository-current change records:
 ## Schemas
 
 - [`curve_artifact_bundle.v2.schema.json`](schemas/curve_artifact_bundle.v2.schema.json) — repository-current, curve-form-specific payload validation
-- [`curve_artifact_bundle.v3.schema.json`](schemas/curve_artifact_bundle.v3.schema.json) — proposed pathway-aware bundle; not yet canonical
+- [`curve_artifact_bundle.v3.schema.json`](schemas/curve_artifact_bundle.v3.schema.json) — released pathway-aware bundle for individually promoted cells
 - [`curve_artifact_bundle.schema.json`](schemas/curve_artifact_bundle.schema.json) — portable v2.5 / bundle-v1 compatibility
 - [`damage_emit.schema.json`](schemas/damage_emit.schema.json)
-- [`damage_emit.v2.schema.json`](schemas/damage_emit.v2.schema.json) — proposed required-pathway emit
+- [`damage_emit.v2.schema.json`](schemas/damage_emit.v2.schema.json) — released required-pathway emit
 - [`physical_damage_assembly.v1.schema.json`](schemas/physical_damage_assembly.v1.schema.json) — optional named-value plant physical-DR/scenario-loss companion view over failure-unit emits
 - [`capability_declaration.v2.schema.json`](schemas/capability_declaration.v2.schema.json) — consumer-distribution-aware capability contract
-- [`capability_declaration.v3.schema.json`](schemas/capability_declaration.v3.schema.json) — proposed per-pathway capability contract
+- [`capability_declaration.v3.schema.json`](schemas/capability_declaration.v3.schema.json) — released per-pathway capability contract
 - [`capability_declaration.schema.json`](schemas/capability_declaration.schema.json) — v1 compatibility
 - [`artifact_index.v2.schema.json`](schemas/artifact_index.v2.schema.json)
 - [`cell_runtime_changelog.v1.schema.json`](schemas/cell_runtime_changelog.v1.schema.json)
@@ -44,7 +46,10 @@ Repository-current change records:
 - [`wind_tornado_wind_m2_height_bridge.md`](hazard_handoff/wind_tornado_wind_m2_height_bridge.md)
 - [`wind_tornado_wind_model_v2_0_hazard_migration_proposal.md`](hazard_handoff/wind_tornado_wind_model_v2_0_hazard_migration_proposal.md) — noncanonical v2 shadow/migration plan; v1 remains current
 - [`tropical_cyclone_wind_wind_model_v1_0_proposal.md`](hazard_handoff/tropical_cyclone_wind_wind_model_v1_0_proposal.md) — noncanonical source-native screening v1 shadow contract; no consumer cutover
+- [`tropical_cyclone_wind_wind_model_v1_0_hazard_migration.md`](hazard_handoff/tropical_cyclone_wind_wind_model_v1_0_hazard_migration.md) — canonical source-native partial-screening bundle-v3 consumer contract
 - [`flood_wind_model_v1_0_proposal.md`](hazard_handoff/flood_wind_model_v1_0_proposal.md) — noncanonical legacy FEMA whole-substation screening shadow contract; no value binding or consumer cutover
+- [`flood_wind_model_v1_0_hazard_migration.md`](hazard_handoff/flood_wind_model_v1_0_hazard_migration.md) — canonical partial-screening bundle-v3 consumer contract
+- [`wildfire_wind_model_v1_0_hazard_migration.md`](hazard_handoff/wildfire_wind_model_v1_0_hazard_migration.md) — canonical two-unit Tier-4 bundle-v3 consumer contract
 - [`tropical_cyclone_wind_solar_model_v1_0_proposal.md`](hazard_handoff/tropical_cyclone_wind_solar_model_v1_0_proposal.md) — noncanonical Perry source-cohort visible-module screening shadow contract; strict execution remains v0.1 and no consumer cutover is authorized
 - [`tropical_cyclone_wind_solar_model_v1_0_docs_r2_no_cutover.md`](hazard_handoff/tropical_cyclone_wind_solar_model_v1_0_docs_r2_no_cutover.md) — deep-curation no-cutover addendum; no ordinary Hazard gust bridge, tracker/tail/value expansion, or model bump was earned
 - [`tropical_cyclone_wind_solar_model_v2_0_synthetic_proposal.md`](hazard_handoff/tropical_cyclone_wind_solar_model_v2_0_synthetic_proposal.md) — bounded adapter contract for the noncanonical five-record candidate: one Perry compatibility record plus four cell-local synthetic Tier-4 fixed/tracker records; no value/full-plant, annual/tail, or cutover authorization

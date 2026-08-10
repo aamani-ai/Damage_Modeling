@@ -8,22 +8,25 @@ pathway_id: flood_inundation_contact
 damage_code_id: FLOOD_WIND_FEMA_HAZUS_SUBSTATION_SCREENING_V1
 semantic_damage_model_version: model v1.0
 human_documentation_revision: docs r1
-lifecycle_state: release_candidate
-promotion_status: proposed
-review_status: pressure_tested_pending_independent_review
+lifecycle_state: released_v1_0
+promotion_status: released
+review_status: reviewed_screening_release
 model_grade: screening_source_native_legacy_fema_proxy
 artifact_schema_version: damage_curve_record_bundle.v3
-artifact_schema_status: proposed_draft
-canonical_runtime_artifact: false
-current_runtime_pointer: none
+artifact_schema_status: released
+canonical_runtime_artifact: true
+current_runtime_pointer: flood_wind@model_v1_0__docs_r1
 package_release: unreleased
-consumer_cutover: none
+consumer_cutover: shared_loader_ready_registration_deliberate
 ```
 
-This is the current cell-documentation anchor. Model v1.0 adds one narrowly admissible numerical screening
-record to the historical model-v0.1 research scaffold. It does **not** create a production flood model for a
-whole wind farm. The proposal has no `current/` folder, artifact-index row, canonical pin, package release, or
-Hazard cutover.
+This is the current cell-documentation anchor. Model v1.0 releases one narrowly admissible numerical
+screening record from the historical model-v0.1 research scaffold. It does **not** create a complete flood
+model for a whole wind farm. The current package is SHA-pinned in the artifact index and supported by the
+shared bundle-v3 Hazard loader; durable registry activation remains a deliberate consumer step.
+
+For the shortest Hazard-facing request and same-substation value rule, start with the
+[curve request guide](../../extra/guides/flood_wind_curve_request_guide.md).
 
 ## What changed from model v0.1
 
@@ -109,7 +112,7 @@ A later scenario-loss binding would be:
 loss = DR × same_substation_direct_replacement_value × exposure_fraction
 ```
 
-That binding remains unavailable before canonical promotion and requires value basis/date/currency,
+That binding is supported only with explicit value basis/date/currency,
 ownership, project-owned status, insured inclusion where relevant, and one non-overlapping physical instance.
 The following are prohibited:
 
@@ -123,12 +126,12 @@ The following are prohibited:
 
 The table is official but legacy. Hazus-MH 2.1 also says electric-power implementation was deferred, and
 current Hazus 7.0 classifies electric-power substations as mapping-only; its visible default electric-power
-damage functions are disabled and produce no results. The proposal therefore remains a
+damage functions are disabled and produce no results. The release therefore remains a
 `screening_source_native_legacy_fema_proxy`, not a claim that current Hazus enables or validates the curve.
 
 NEMA GD 1-2016 is retained only as historical equipment-disposition context. NEMA's April 2026 publication
-register identifies the successor `NEMA CS 70006-2026`; its technical content must be acquired and reviewed
-before promotion. Neither NEMA edition supplies the FEMA ordinates.
+register identifies the successor `NEMA CS 70006-2026`; its technical content remains an open model-
+improvement review. Neither NEMA edition supplies the FEMA ordinates.
 
 ## CONUS and per-asset use
 
@@ -139,13 +142,13 @@ CONUS default.
 
 ## Package map
 
-- [Model-v1 proposal index](proposed/README_flood_wind__model_v1_0__docs_r1.md)
-- [Derivation dossier](proposed/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md)
-- [Metadata specification](proposed/flood_wind_damage_code_metadata_spec__model_v1_0__docs_r1.md)
-- [Proposed artifact](proposed/flood_wind__model_v1_0__docs_r1__curve_artifact.json)
-- [Capability declaration](proposed/flood_wind__model_v1_0__docs_r1__capability.json)
-- [Known-answer tests](proposed/known_answer_tests_flood_wind__model_v1_0__docs_r1.json)
-- [Review workbook](proposed/damage_curve_records_flood_wind__model_v1_0__docs_r1.xlsx)
+- [Current model-v1 package](current/README.md)
+- [Derivation dossier](current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md)
+- [Metadata specification](current/flood_wind_damage_code_metadata_spec__model_v1_0__docs_r1.md)
+- [Canonical artifact](current/flood_wind__model_v1_0__docs_r1__curve_artifact.json)
+- [Capability declaration](current/flood_wind__model_v1_0__docs_r1__capability.json)
+- [Known-answer tests](current/known_answer_tests_flood_wind__model_v1_0__docs_r1.json)
+- [Audit workbook](current/damage_curve_records_flood_wind__model_v1_0__docs_r1.xlsx)
 - [Workbook manifest](proposed/workbook_sheet_manifest_flood_wind__model_v1_0__docs_r1.md)
 - [Shared flood-electrical substrate](../../method/shared_components/flood_electrical/README.md)
 - [Hazard handoff proposal](../../contracts/hazard_handoff/flood_wind_model_v1_0_proposal.md)
@@ -153,9 +156,7 @@ CONUS default.
 
 ## Release decision
 
-Model v1.0/docs r1 is complete as a pressure-tested, noncanonical review proposal. It is deliberately useful
-for transparent screening while remaining unavailable for production scenario, annual, tail, portfolio, or
-financial loss. Promotion still requires independent FEMA transcription/method review, wind-substation
-engineering applicability review, the current NEMA guide review, schema approval, exact consumer adapter and
-pinning, same-substation value/no-double-count tests, M3/M4 shadow comparison, rollback, and an explicit SHIP
-decision.
+Model v1.0/docs r1 is released for transparent partial screening. It supports conditional unit DR and
+explicit-value scenario loss for the one source-native assembly; annual, tail, portfolio, and financial
+metrics remain consumer-owned and incomplete. The [release decision](current/RELEASE_DECISION_flood_wind__model_v1_0__docs_r1.md)
+records the consciously accepted evidence limitations and future improvement triggers.

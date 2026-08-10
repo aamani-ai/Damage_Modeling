@@ -78,8 +78,9 @@ own default-value governance: methodology never lives in the DB), and makes each
 
 ## 6 · Progression semantics — how versions move
 
-The five cells were deliberately published **at their different maturities** (r7 · r4 · r4 · r3 · r3) so the
-progression path is exercised, not theorized:
+The original five cells were deliberately published **at their different maturities** (r7 · r4 · r4 · r3 ·
+r3). The 2026-08-08 flood_wind and wildfire_wind releases add bundle-v3 plans without altering those prefixes.
+The progression path is:
 
 1. Author the next revision in `docs/cells/<cell>/current/` (standard 20 rules unchanged).
 2. Update the machine-readable index (new SHA, new docs revision) — the index remains the discovery truth.

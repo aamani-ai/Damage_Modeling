@@ -1,6 +1,6 @@
 # Flood × wind — how the model is built
 
-This page explains the evidence-to-SHIP reasoning for proposed model v1.0/docs r1. For a quick introduction,
+This page explains the evidence-to-SHIP reasoning for current model v1.0/docs r1. For a quick introduction,
 start with the [basics README](README.md). For exact machine fields and branch behavior, use the
 [model reference](MODEL_REFERENCE.md).
 
@@ -16,8 +16,8 @@ FEMA Hazus 7.0
 electrical-equipment, event, protection, ownership, and value evidence
     -> failure-unit anatomy, conditioners, exposure, and guardrails only
 
-governed proposed JSON + evaluator + KATs
-    -> exact noncanonical model-v1 behavior
+governed current JSON + common evaluator + KATs
+    -> exact canonical partial-screening model-v1 behavior
 ```
 
 No source is authority merely because it contains a number. The package preserves the exact table and also
@@ -33,7 +33,7 @@ preserves the evidence that limits its use.
 | 4 | Freeze hazard axis | depth above substation facility grade, source-native feet; optional exact same-datum WSE bridge |
 | 5 | Separate selector, conditioner, exposure, and value | no implicit class, water state, protection credit, ownership, or value default |
 | 6 | Fit/admit numerical response | reproduce 11 FEMA knots; linear interpolation only; withhold outside range |
-| 7 | Validate and release | noncanonical proposal only; promotion gate remains blocked |
+| 7 | Validate and release | canonical partial-screening release; explicit limitations remain |
 
 ## Why the whole-substation atom is separate
 
@@ -131,7 +131,7 @@ used silently. The mixed NREL `72 USD/kW` electrical row, legacy 9% substation a
 and turbine-count multiplication are all prohibited. One shared hybrid-site GSU is represented and valued
 once across solar and wind.
 
-## Why the proposal is noncanonical
+## Why the release remains screening-grade
 
 The exact table can be reproduced, but the following remain open:
 
@@ -142,7 +142,7 @@ The exact table can be reproduced, but the following remain open:
 - NEMA CS 70006-2026 has not been acquired and technically reviewed;
 - site value, ownership, geometry, consumer adapter, and M3/M4 migration are not approved.
 
-Those limitations support a transparent screening proposal, not a production SHIP decision.
+Those limitations support a transparent canonical screening result, not a complete wind-farm truth claim.
 
 ## Release path
 
@@ -150,7 +150,7 @@ Those limitations support a transparent screening proposal, not a production SHI
 model v0.1 zero-curve scaffold
           |
           v
-model v1.0 noncanonical whole-substation screening proposal  <- current
+model v1.0 canonical whole-substation partial screening      <- current
           |
           +-- independent source/method and engineering review
           +-- current NEMA guide review
@@ -161,4 +161,5 @@ model v1.0 noncanonical whole-substation screening proposal  <- current
 explicit canonical promotion decision, if every gate passes
 ```
 
-Until then, the proposal is absent from `current/` and the canonical artifact index.
+Until better evidence arrives, the current pin remains screening-grade and every unsupported unit stays
+withheld. A future curve/evidence change requires a deliberate model-version review.
