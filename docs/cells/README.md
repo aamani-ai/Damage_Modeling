@@ -14,7 +14,7 @@ live under each cell folder.
 | `wildfire_solar` | model v1.0 / human docs r4; runtime pin docs r3; screening engineering proxy | `WILDFIRE_SOLAR_FSIM_SCREENING_V1` | [`wildfire_solar/`](wildfire_solar/README.md) |
 | `flood_wind` | model v1.0 / docs r1; partial screening | `FLOOD_WIND_FEMA_HAZUS_SUBSTATION_SCREENING_V1` | [`flood_wind/`](flood_wind/README.md) |
 | `wildfire_wind` | model v1.0 / docs r1; Tier-4 partial screening | `WILDFIRE_WIND_PARTIAL_ELECTRICAL_SCREENING_V1` | [`wildfire_wind/`](wildfire_wind/README.md) |
-| `tropical_cyclone_wind_wind` | model v1.0 / docs r1; source-native partial screening | `TROPICAL_CYCLONE_WIND_WIND_JAIMES_SCREENING_V1` | [`tropical_cyclone_wind_wind/`](tropical_cyclone_wind_wind/README.md) |
+| `tropical_cyclone_wind_wind` | model v1.1 / docs r1; owner-approved partial screening | `TROPICAL_CYCLONE_WIND_WIND_JAIMES_SCREENING_V1_1` | [`tropical_cyclone_wind_wind/`](tropical_cyclone_wind_wind/README.md) |
 
 Active research proposal: `wind_tornado_wind` has a noncanonical
 [`model v2.0 / docs r1` pathway-aware package](wind_tornado_wind/proposed/README_wind_tornado_wind__model_v2_0__docs_r1.md).
@@ -27,11 +27,10 @@ It separates fixed tilt from exact-system-qualified trackers, excludes hurricane
 leaves model v1.0/docs r3 as the canonical runtime pin; human docs r4 only add basics.
 
 `tropical_cyclone_wind_wind` now has a canonical
-[`model v1.0 / docs r1` source-native partial-screening release](tropical_cyclone_wind_wind/current/README.md). It publishes three exact
-Jaimes source-family expected-DR equations only for a quarantined turbine/tower exposure atom on the native
-3-second-gust-at-10-m axis. Standard wind-farm units, dollar/scenario loss, and annual/tail metrics remain
-withheld. Exact source-native selectors and wind-axis semantics are mandatory. The model-v0.1 zero-curve
-scaffold and pre-promotion v1 package remain the historical evidence and audit records.
+[`model v1.1 / docs r1` owner-approved partial-screening release](tropical_cyclone_wind_wind/current/README.md).
+It preserves the three source-native Jaimes selectors and adds one exact 3.3-MW-source → canonical-5-MW
+screening route with no capacity scaling. Rotor+nacelle+tower bind to 63% of project TIV; the other 37% stays
+withheld. Model v1.0 remains an exact offline reproduction archive, not a live GCS pin.
 
 `flood_wind` now has a canonical
 [`model v1.0 / docs r1` partial-screening release](flood_wind/current/README.md). It preserves the exact legacy FEMA
@@ -89,7 +88,7 @@ references, ASCII diagrams, worked examples, exact tables, and caveats with the 
 | `wind_tornado_wind` | [Complete](wind_tornado_wind/basics/README.md) |
 | `strong_wind_solar` | [Complete](strong_wind_solar/basics/README.md) |
 | `wildfire_solar` | [Complete](wildfire_solar/basics/README.md) |
-| `tropical_cyclone_wind_wind` | [Complete for current model v1.0](tropical_cyclone_wind_wind/basics/README.md) — source-native turbine/tower partial-screening release |
+| `tropical_cyclone_wind_wind` | [Complete for current model v1.1](tropical_cyclone_wind_wind/basics/README.md) — canonical-Wind-Farm partial-screening proxy; 63% covered value |
 | `flood_wind` | [Complete for current model v1.0](flood_wind/basics/README.md) — legacy source-native whole-substation partial-screening release |
 | `tropical_cyclone_wind_solar` | [Complete for proposed model v2.1/docs r1](tropical_cyclone_wind_solar/basics/README.md) — ten records plus complete named-value plant physical-damage assembly; noncanonical and no-cutover |
 | `hail_wind` | [Complete for model v0.1/docs r2](hail_wind/basics/README.md) — independently deep-curated, fail-closed turbine/blade and BOP research scaffold |

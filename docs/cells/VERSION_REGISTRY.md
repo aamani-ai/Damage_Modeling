@@ -45,7 +45,7 @@ artifact index, the cell changelog, package releases, and Hazard runtime remain 
 | `wildfire_solar` | **model v1.0** | human docs r4; runtime docs r3 | Current screening engineering proxy | Docs r4 adds the three-file basics set; runtime docs r3 retain exact FSim-class tables, value linkage, KATs, and screening flags. |
 | `flood_wind` | **model v1.0** | docs r1 | Current partial screening | One exact FEMA Hazus-MH 2.1 facility-substation atom; all component/wind units withheld; bundle v3 pin and KATs. |
 | `wildfire_wind` | **model v1.0** | docs r1 | Current Tier-4 partial screening | Two exact FSim-state electrical-unit curves; all other units withheld; bundle v3 pin and KATs. |
-| `tropical_cyclone_wind_wind` | **model v1.0** | docs r1 | Current source-native partial screening | Three exact Jaimes turbine/tower selectors; all standard wind-farm units and dollar/annual outputs withheld; bundle v3 pin and KATs. |
+| `tropical_cyclone_wind_wind` | **model v1.1** | docs r1 | Current owner-approved partial screening | Three model-v1.0 Jaimes selectors reproduce; one exact canonical-5-MW proxy covers 63% of TIV; remaining 37% withheld; bundle v3 pin and KATs. |
 
 ---
 
@@ -130,7 +130,7 @@ index. It is not assigned a new package number until a portable release is delib
 | `wildfire_solar` | model v1.0 | human docs r4; runtime docs r3 | released repository-current screening proxy; model v0.1 scaffold retained as research/rejection audit | Yes, repository-current |
 | `flood_wind` | model v1.0 | docs r1 | released repository-current partial screening; legacy FEMA source and all limits retained | Yes, repository-current |
 | `wildfire_wind` | model v1.0 | docs r1 | released repository-current Tier-4 partial screening; v0.1 strict scaffold retained | Yes, repository-current |
-| `tropical_cyclone_wind_wind` | model v1.0 | docs r1 | released repository-current source-native partial screening; v0.1 scaffold and pre-promotion v1 retained | Yes, repository-current |
+| `tropical_cyclone_wind_wind` | model v1.1 | docs r1 | released repository-current canonical-Wind-Farm partial screening; v1.0 exact offline archive and earlier proposals retained | Yes, repository-current |
 
 The portable v2.5 package does not contain these four later repository-current cells. The artifact index does.
 Model v1.0 is deliberately a Tier 4 absolute engineering proxy constrained by Tier 2/3 evidence; it uses exact

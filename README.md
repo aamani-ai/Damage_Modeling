@@ -56,11 +56,13 @@ pip install -r requirements.txt
 
 ## Status
 
-Method mature — foundations + global standards + **8 current worked cells**, all at damage-model v1.0. The
+Method mature — foundations + global standards + **8 current worked cells**. Seven remain at model v1.0;
+`tropical_cyclone_wind_wind` is model v1.1. The
 original five remain unchanged; `flood_wind`, `wildfire_wind`, and `tropical_cyclone_wind_wind` are canonical
 partial-screening releases under bundle v3. Flood covers one whole facility GSU/substation source atom;
-wildfire covers two named electrical failure units; tropical-cyclone wind×wind covers one quarantined
-source-native turbine/tower atom with three exact Jaimes selectors. Unsupported units remain null/withheld.
+wildfire covers two named electrical failure units; tropical-cyclone wind×wind preserves three exact Jaimes
+selectors and adds one owner-approved canonical-5-MW proxy covering 63% of project TIV. Unsupported units and
+the remaining 37% stay null/withheld.
 Hail×wind remains the one fail-closed research-only cell.
 Tropical-cyclone wind×solar now
 leads with a noncanonical

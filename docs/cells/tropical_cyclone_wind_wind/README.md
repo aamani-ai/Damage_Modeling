@@ -5,49 +5,49 @@
 ```yaml
 cell_id: tropical_cyclone_wind_wind
 pathway_id: tropical_cyclone_wind
-damage_code_id: TROPICAL_CYCLONE_WIND_WIND_JAIMES_SCREENING_V1
-semantic_damage_model_version: model v1.0
+damage_code_id: TROPICAL_CYCLONE_WIND_WIND_JAIMES_SCREENING_V1_1
+semantic_damage_model_version: model v1.1
 human_documentation_revision: docs r1
-lifecycle_state: released_v1_0
+lifecycle_state: released_v1_1
 promotion_status: released
-review_status: reviewed_partial_screening_release
-model_grade: screening_source_derived_engineering_proxy
+review_status: reviewed_owner_approved_partial_screening_release
+model_grade: screening_owner_approved_target_mismatch_proxy
 artifact_schema_version: damage_curve_record_bundle.v3
 artifact_schema_status: released
 canonical_runtime_artifact: true
-current_runtime_pointer: tropical_cyclone_wind_wind@model_v1_0__docs_r1
+current_runtime_pointer: tropical_cyclone_wind_wind@model_v1_1__docs_r1
 package_release: unreleased
 ```
 
-This page is the current **cell-documentation anchor**. Model v1.0/docs r1 is now a repository-current,
-source-native partial-screening release. The preserved proposal remains audit history; the canonical bytes,
-capability, KATs, and release decision live in [`current/`](current/README.md).
-
-> **Active proposal:** [model v1.1 / docs r1](proposed/README_tropical_cyclone_wind_wind__model_v1_1__docs_r1.md)
-> adds one explicit owner-approved 3.3 MW-source → canonical-5-MW screening bridge and a 0.63
-> rotor+nacelle+tower value scope. It is not current until the Hurricane consumer gates pass.
+This page is the current **cell-documentation anchor**. Model v1.1/docs r1 is the repository-current release.
+It preserves every model-v1.0 source-native result and adds one exact owner-approved
+3.3 MW-source → canonical-5-MW screening bridge with a 0.63 rotor+nacelle+tower value scope. Canonical bytes,
+capability, KATs, and the release decision live in [`current/`](current/README.md).
 
 For the shortest Hazard-facing request, exact selector example, and range behavior, start with the
 [hurricane × wind curve request guide](../../extra/guides/tropical_cyclone_wind_wind_curve_request_guide.md).
 
-Model v1.0 changes one conclusion from the historical v0.1 scaffold. Jaimes et al. publish an expected
+Model v1.0 changed one conclusion from the historical v0.1 scaffold. Jaimes et al. publish an expected
 economic damage-ratio function, not only a DS3 collapse fragility. The function can be retained honestly for
 the paper's own source-native turbine-tower exposure unit and three exact source archetypes. It still cannot
 be presented as a generic whole-turbine, wind-farm, CWER-value, or claims-calibrated curve.
 
-## 2. What model v1.0 supports
+Model v1.1 does not weaken that finding. It adds one named target-use assumption: the 3.3 MW numerical record
+may screen the canonical 5 MW target when the exact proxy, asset-profile and partial-value identities match.
+There is no capacity-ratio scaling and no generic nearest-neighbor behavior.
+
+## 2. What model v1.1 supports
 
 ```text
 source-native 3-second peak gust at 10 m, in km/h
                          |
                          v
-             exact Jaimes archetype selector
-                         |
-                         v
- WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT, one turbine point
-                         |
-                         v
- conditional scalar mean DR only; no dollar or plant-loss binding
+             exact request-contract selector
+                  /                    \
+                 v                      v
+ source-native Jaimes atom       named canonical-5-MW proxy
+ conditional scalar DR           unchanged 3.3 MW equation
+ no dollar binding               0.63-of-TIV covered-value binding
 ```
 
 The only numeric failure unit is:
@@ -74,10 +74,12 @@ DR(V) = max_dr * [1 - 0.5^(((V - V_zero) / delta_V50)^rho)],     V > V_zero
 | `TCWW_JAIMES_GENERIC_1MW_HH44_V1` | 1 MW / 44 m / 50 m | 106.77 | 8.94 | 196.77 |
 | `TCWW_JAIMES_GENERIC_2P5MW_HH80_V1` | 2.5 MW / 80 m / 90 m | 82.52 | 4.54 | 172.52 |
 | `TCWW_JAIMES_GENERIC_3P3MW_HH100_V1` | 3.3 MW / 100 m / 114 m | 73.30 | 4.99 | 163.30 |
+| `CONUS_WIND_FARM_5MW_HH100_PROXY_V1` | canonical target 5 MW / 100 m; source rotor 114 m | 73.30 | 4.99 | 163.30 |
 
-Selection is exact. There is no default, alias, nearest-neighbor selection, interpolation, or implicit
-transfer to a modern fleet or actual make/model. The 1 MW selector follows the paper's Table 2 value of 44 m
-and carries the documented 44 m versus 40 m source discrepancy.
+Selection is exact. There is no default, alias, interpolation, implicit fleet transfer or generic nearest
+neighbor. The fourth row is admitted only through its named proxy policy, shared asset profile and covered
+value basis. The 1 MW selector follows the paper's Table 2 value of 44 m and carries the documented 44 m
+versus 40 m source discrepancy.
 
 ## 4. Native axis and domain behavior
 
@@ -94,9 +96,9 @@ source_simulation_range_kmh: [108, 252]
 |---:|---|
 | nonfinite or `< 0` | reject |
 | `0 <= V <= 90` | emit DR `0` with `SOURCE_ASSUMED_NO_DAMAGE_THRESHOLD_NOT_EMPIRICAL` |
-| `90 < V < 108` | withhold `BELOW_SOURCE_SIMULATION_RANGE` |
+| `90 < V < 108` | named 5 MW proxy returns flagged zero; source-native selectors withhold |
 | `108 <= V <= 252` | evaluate the selected curve |
-| `V > 252` | withhold `ABOVE_SOURCE_SIMULATION_RANGE` |
+| `V > 252` | named 5 MW proxy returns flagged `max_dr=1`; source-native selectors withhold |
 
 NHC one-minute sustained wind, Saffir-Simpson category, hub-height wind, knots, mph, m/s, and Rose's
 10-minute hub-height wind are not accepted aliases. Model v1.0 includes no height, averaging-period, terrain,
@@ -123,7 +125,7 @@ particular, `WT_GSU_SUBSTATION` is one facility-level exposure and is never mult
 
 | Failure unit | Model v1.0 treatment | Key reason |
 |---|---|---|
-| `WT_TURBINE_EQUIPMENT_ASSEMBLY` | withheld, not zero | source denominator is not harmonized and non-tower failure modes are omitted |
+| `WT_TURBINE_EQUIPMENT_ASSEMBLY` | conditional named proxy | rotor+nacelle+tower screening scope only; 0.63 of TIV; target mismatch disclosed |
 | `WT_FOUNDATION` | withheld, not zero | no qualified direct TC-wind curve |
 | `WT_PAD_MOUNTED_ELECTRICAL` | withheld, not zero | electrical value/exposure split required |
 | `WT_COLLECTION_SYSTEM` | withheld, not zero | line/network exposure and response required |
@@ -145,10 +147,12 @@ Tier-4 screening proxy; it does not establish a field- or claims-calibrated curv
 
 The source denominator is internally ambiguous across “selected structure,” “turbine tower,” and “total cost
 of the turbine.” It is not approved as CWER turbine equipment, plant physical value, installed value, or TIV.
-Therefore model v1.0 supports only a conditional scalar mean DR for the source-native unit. It does not emit:
+The source-native selectors still support only a conditional scalar mean DR with no value binding. The named
+canonical-5-MW proxy additionally supports consumer-computed scenario loss for the 0.63 covered value. It
+does not emit or authorize:
 
-- source-unit or site dollar loss;
-- standard turbine-equipment, wind-farm, or full-TIV DR;
+- source-unit dollars for the original Jaimes selectors;
+- full-plant or full-TIV DR;
 - scenario or plant loss;
 - curve spread or state probabilities; or
 - EAL, PML, VaR, TVaR, or portfolio metrics.
@@ -163,17 +167,16 @@ charges.
 
 ## 9. Governed package
 
-Start with the [current model v1.0 package](current/README.md),
+Start with the [current model v1.1 package](current/README.md),
 then use:
 
-- [derivation dossier](current/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_0__docs_r1.md);
-- [metadata specification](current/tropical_cyclone_wind_wind_damage_code_metadata_spec__model_v1_0__docs_r1.md);
-- [curve artifact](current/tropical_cyclone_wind_wind__model_v1_0__docs_r1__curve_artifact.json);
-- [capability declaration](current/tropical_cyclone_wind_wind__model_v1_0__docs_r1__capability.json);
-- [known-answer tests](current/known_answer_tests_tropical_cyclone_wind_wind__model_v1_0__docs_r1.json);
-- [validation report](current/VALIDATION_REPORT_tropical_cyclone_wind_wind__model_v1_0__docs_r1.md);
-- [release decision](current/RELEASE_DECISION_tropical_cyclone_wind_wind__model_v1_0__docs_r1.md); and
-- [workbook](current/damage_curve_records_tropical_cyclone_wind_wind__model_v1_0__docs_r1.xlsx).
+- [derivation dossier](current/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_1__docs_r1.md);
+- [curve artifact](current/tropical_cyclone_wind_wind__model_v1_1__docs_r1__curve_artifact.json);
+- [capability declaration](current/tropical_cyclone_wind_wind__model_v1_1__docs_r1__capability.json);
+- [known-answer tests](current/known_answer_tests_tropical_cyclone_wind_wind__model_v1_1__docs_r1.json);
+- [validation report](current/VALIDATION_REPORT_tropical_cyclone_wind_wind__model_v1_1__docs_r1.md);
+- [release decision](current/RELEASE_DECISION_tropical_cyclone_wind_wind__model_v1_1__docs_r1.md); and
+- [workbook](current/damage_curve_records_tropical_cyclone_wind_wind__model_v1_1__docs_r1.xlsx).
 
 The current JSON artifact and capability file define runtime behavior. The dossier, registers, and workbook
 explain the evidence and derivation. The pre-promotion package under `proposed/` remains noncanonical.
@@ -183,7 +186,8 @@ explain the evidence and derivation. The pre-promotion package under `proposed/`
 | Version | Status | Meaning |
 |---|---|---|
 | model v0.1/docs r1 | preserved historical scaffold | zero curve records and fail-closed `NO_RUNTIME_CURVE`; retained the candidate evidence and correctly blocked generic turbine transfer |
-| model v1.0/docs r1 | repository-current partial-screening release | three source-native Jaimes expected-DR records for one quarantined unit; all broader asset and loss outputs remain withheld |
+| model v1.0/docs r1 | exact repository archive / offline reproduction | three source-native Jaimes expected-DR records for one quarantined unit; not a live GCS pin |
+| model v1.1/docs r1 | repository-current partial-screening release | v1.0 reproduces exactly; one named canonical-5-MW bridge and 0.63 covered-value contract added |
 
 The [v0.1 package overview](proposed/README_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md),
 [v0.1 pressure test](proposed/PRESSURE_TEST_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md), and
@@ -194,10 +198,10 @@ remain in force.
 
 ## 11. Release boundary
 
-Promotion is complete only for the exact source-native scalar product. The common Hazard loader replays all
-47 formula and contract KATs and enforces exact pathway, axis, selector, source assumption, domain, and
-partial-capability behavior.
+Promotion is complete for the source-native scalar product and the single named canonical-Wind-Farm proxy.
+The consumer replays all source reproduction, proxy, negative-contract and value KATs and enforces exact
+pathway, axis, selector, source assumption, proxy identity, domain and partial-capability behavior.
 
-Valuation transfer, modern-fleet mapping, additional failure units, whole-farm aggregation, and annual/tail
-metrics remain blocked. The portable package remains v2.5; this release is polled through the repository
-artifact index and exact SHA pin.
+Generic modern-fleet mapping, target-matched 5 MW evidence, additional failure units and the uncovered 0.37
+remain blocked. The portable package remains v2.5; this release is polled through the repository artifact
+index and exact SHA pin.

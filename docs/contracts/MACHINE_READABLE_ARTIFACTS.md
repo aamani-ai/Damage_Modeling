@@ -16,7 +16,7 @@ the full cell tuple, not `package_release` alone.
 | `wildfire_solar` | `wildfire_solar@model_v1_0__docs_r3` | bundle v2 | capability v2 | `docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json` | `598512fbe2f0a3c…` |
 | `flood_wind` | `flood_wind@model_v1_0__docs_r1` | bundle v3 | capability v3 | `docs/cells/flood_wind/current/flood_wind__model_v1_0__docs_r1__curve_artifact.json` | `37da745d87a4722e…` |
 | `wildfire_wind` | `wildfire_wind@model_v1_0__docs_r1` | bundle v3 | capability v3 | `docs/cells/wildfire_wind/current/wildfire_wind__model_v1_0__docs_r1__curve_artifact.json` | `3f923f506a2082dd…` |
-| `tropical_cyclone_wind_wind` | `tropical_cyclone_wind_wind@model_v1_0__docs_r1` | bundle v3 | capability v3 | `docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_0__docs_r1__curve_artifact.json` | `6feb461a0fdda215…` |
+| `tropical_cyclone_wind_wind` | `tropical_cyclone_wind_wind@model_v1_1__docs_r1` | bundle v3 | capability v3 | `docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_1__docs_r1__curve_artifact.json` | `0c33499183deb517…` |
 
 ## Consumer sequence
 

@@ -56,7 +56,7 @@ gates without entering the canonical artifact index.
 
 | Cell | Proposed model/docs | Runtime status |
 |---|---|---|
-| `tropical_cyclone_wind_wind` | model v1.0 / docs r1 | Current source-native partial-screening release: three exact Jaimes selectors for one quarantined atom; no scenario loss or generic wind-farm transfer; indexed under bundle v3 |
+| `tropical_cyclone_wind_wind` | model v1.1 / docs r1 | Current owner-approved partial-screening release: v1.0 source selectors preserved plus one exact canonical-5-MW route and 63% covered-value contract; indexed under bundle v3 |
 | `tropical_cyclone_wind_solar` | model v2.1 / docs r1 candidate; model v0.1, v1.0, and v2.0 preserved | Ten proposal records plus named 100%-physical-value plant assembly; plant DR/loss per kWdc/optional scenario dollars supported, annual/tail consumer-owned; no `current/`, index, changelog, package, or cutover action |
 | `hail_wind` | model v0.1 / human docs r2 / runtime scaffold docs r1 | Independently deep-curated strict NO-GO; `NO_RUNTIME_CURVE`; not in artifact index |
 

@@ -44,7 +44,7 @@ The coverage-first sequence is:
 8. tropical_cyclone_wind_solar  COMPLETE — model v1.0/docs r2 evidence revision; runtime docs r1 unchanged
 9. tropical_cyclone_wind_solar  COMPLETE — model v2.1/docs r1 usable screening assembly
 10. wildfire_wind               COMPLETE — current model v1.0/docs r1, two-unit Tier-4 electrical screening
-11. tropical_cyclone_wind_wind  COMPLETE — current model v1.0/docs r1, source-native turbine/tower screening
+11. tropical_cyclone_wind_wind  COMPLETE — current model v1.1/docs r1, named canonical-Wind-Farm partial screen
 12. existing model-v2 proposals resume after the remaining model-v0.1 cell
 ```
 
@@ -86,7 +86,7 @@ placeholder is not counted as Damage Modeling coverage.
 | Flood | Solar | [`flood_solar`](../../cells/flood_solar/README.md), canonical model v1.0 | Yes | Covered |
 | Flood | Wind | [`flood_wind`](../../cells/flood_wind/current/README.md), canonical model v1.0 whole-substation screening | Yes, partial screening | One legacy source-native assembly curve; components withheld; same-substation value/exposure required |
 | Tropical-cyclone wind | Solar | [`tropical_cyclone_wind_solar`](../../cells/tropical_cyclone_wind_solar/README.md), noncanonical model v2.1/docs r1 screening candidate; v0.1, v1, and v2.0 preserved | Proposal only | Ten records plus named 100%-physical-value plant DR/loss assembly; common-unit parameters remain Tier 4 and canonical promotion remains pending |
-| Tropical-cyclone wind | Wind | [`tropical_cyclone_wind_wind`](../../cells/tropical_cyclone_wind_wind/current/README.md), canonical model v1.0 source-native partial screening | Yes, partial screening | Three exact Jaimes selectors for one turbine/tower atom; generic transfer, other units, value, and annual outputs withheld |
+| Tropical-cyclone wind | Wind | [`tropical_cyclone_wind_wind`](../../cells/tropical_cyclone_wind_wind/current/README.md), canonical model v1.1 owner-approved partial screening | Yes, partial screening | Three v1.0 Jaimes selectors preserved; one named canonical-5-MW route covers rotor+nacelle+tower = 63% of TIV; remaining 37% withheld |
 
 The portfolio is now **10/10 structurally governed**, including **8/10 with repository-current canonical
 runtime curves**. One cell remains only an explicit fail-closed model-v0.1 package; TC-wind × solar remains a

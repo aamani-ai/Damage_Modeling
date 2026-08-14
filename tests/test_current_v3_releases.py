@@ -62,5 +62,10 @@ def test_v3_changelogs_validate_and_point_at_current():
             (ROOT / "docs/cells" / cell_id / "CHANGELOG.json").read_text()
         )
         jsonschema.Draft202012Validator(schema).validate(changelog)
-        assert changelog["current_pin"] == f"{cell_id}@model_v1_0__docs_r1"
+        expected_pin = (
+            "tropical_cyclone_wind_wind@model_v1_1__docs_r1"
+            if cell_id == "tropical_cyclone_wind_wind"
+            else f"{cell_id}@model_v1_0__docs_r1"
+        )
+        assert changelog["current_pin"] == expected_pin
         assert "/current/" in changelog["entries"][0]["artifact_path"]

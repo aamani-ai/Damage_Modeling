@@ -24,14 +24,15 @@ from tropical_cyclone_wind_wind_curve_eval import (
 
 
 ROOT = Path(__file__).resolve().parents[2]
-CURRENT = ROOT / "docs/cells/tropical_cyclone_wind_wind/current"
 PROPOSED = ROOT / "docs/cells/tropical_cyclone_wind_wind/proposed"
-CURRENT_ARTIFACT = CURRENT / "tropical_cyclone_wind_wind__model_v1_0__docs_r1__curve_artifact.json"
-ARTIFACT = PROPOSED / "tropical_cyclone_wind_wind__model_v1_1__docs_r1__curve_artifact.json"
-CAPABILITY = PROPOSED / "tropical_cyclone_wind_wind__model_v1_1__docs_r1__capability.json"
-KATS = PROPOSED / "known_answer_tests_tropical_cyclone_wind_wind__model_v1_1__docs_r1.json"
-VALUES = PROPOSED / "VALUE_CROSSWALK_tropical_cyclone_wind_wind__model_v1_1__docs_r1.csv"
-WORKBOOK = PROPOSED / "damage_curve_records_tropical_cyclone_wind_wind__model_v1_1__docs_r1.xlsx"
+CURRENT = ROOT / "docs/cells/tropical_cyclone_wind_wind/current"
+BASELINE = ROOT / "docs/cells/tropical_cyclone_wind_wind/archive/model_v1_0__docs_r1"
+CURRENT_ARTIFACT = BASELINE / "tropical_cyclone_wind_wind__model_v1_0__docs_r1__curve_artifact.json"
+ARTIFACT = CURRENT / "tropical_cyclone_wind_wind__model_v1_1__docs_r1__curve_artifact.json"
+CAPABILITY = CURRENT / "tropical_cyclone_wind_wind__model_v1_1__docs_r1__capability.json"
+KATS = CURRENT / "known_answer_tests_tropical_cyclone_wind_wind__model_v1_1__docs_r1.json"
+VALUES = CURRENT / "VALUE_CROSSWALK_tropical_cyclone_wind_wind__model_v1_1__docs_r1.csv"
+WORKBOOK = CURRENT / "damage_curve_records_tropical_cyclone_wind_wind__model_v1_1__docs_r1.xlsx"
 BUNDLE_SCHEMA = ROOT / "docs/contracts/schemas/curve_artifact_bundle.v3.schema.json"
 CAPABILITY_SCHEMA = ROOT / "docs/contracts/schemas/capability_declaration.v3.schema.json"
 EMIT_SCHEMA = ROOT / "docs/contracts/schemas/damage_emit.v2.schema.json"
@@ -62,8 +63,10 @@ def validate_structure(
     require(artifact["schema_version"] == "damage_curve_record_bundle.v3", "bundle schema changed")
     require(artifact["semantic_damage_model_version"] == "model v1.1", "model version mismatch")
     require(artifact["documentation_revision"] == "docs r1", "docs revision mismatch")
-    require(artifact["canonical_runtime_artifact"] is False, "proposal became current")
-    require(artifact["promotion_status"] == "proposed", "proposal status mismatch")
+    require(artifact["canonical_runtime_artifact"] is True, "release is not canonical")
+    require(artifact["promotion_status"] == "released", "release status mismatch")
+    require(capability["canonical_runtime_artifact"] is True, "capability is not canonical")
+    require(capability["promotion_gate"]["status"] == "passed", "promotion gate is not closed")
     require(capability == artifact["capability_declaration"], "embedded/external capability drift")
     current_records = current["pathways"][0]["curve_records"]
     proposed_records = artifact["pathways"][0]["curve_records"]
@@ -196,7 +199,7 @@ def main() -> None:
     negative = validate_negative(artifact, kats)
     value = validate_value(kats)
     schema = validate_schemas(artifact, capability)
-    print("PASS tropical_cyclone_wind_wind model v1.1 owner-approved proxy proposal")
+    print("PASS tropical_cyclone_wind_wind model v1.1 owner-approved proxy release")
     print(f"v1_0_reproduction={reproduction}")
     print(f"proxy_known_answers={proxy}")
     print(f"negative_contract_tests={negative}")

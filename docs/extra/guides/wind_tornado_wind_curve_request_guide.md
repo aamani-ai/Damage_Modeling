@@ -69,7 +69,7 @@ state, and structural load path.
 | Archived v0.1 | Scaffold only | Coverage tree, candidate axes, and research plan; no final runtime curve | No. It is historical context only. |
 | **Model v1.0/docs r4** | **Current canonical repository artifact** | Five failure-unit logistic-ratio records; straight wind plus a tornado D50-shift variant | Yes, when a canonical/current result is required. |
 | **Proposed model v2.0/docs r1** | **Pressure-tested, noncanonical screening proposal** | Two first-class pathway records, ordered states, explicit equipment denominator, KATs, and rejection tests | Research/review/shadow comparison only. Not a runtime replacement. |
-| `tropical_cyclone_wind_wind` model v1.0/docs r1 | Separate current cell | Three exact Jaimes source-native turbine/tower selectors; partial coverage | Use only through its own request guide and exact pin. |
+| `tropical_cyclone_wind_wind` model v1.1/docs r1 | Separate current cell | Exact Jaimes source selectors plus one named canonical-5-MW partial-value proxy | Use only through its own request guide and exact pin. |
 
 ### 2.1 Current canonical pin
 
