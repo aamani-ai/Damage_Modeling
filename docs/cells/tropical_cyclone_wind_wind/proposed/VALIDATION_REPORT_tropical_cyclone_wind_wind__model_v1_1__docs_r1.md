@@ -1,7 +1,8 @@
 # Validation report — tropical_cyclone_wind_wind model v1.1
 
 **Validation date:** 2026-08-14  
-**State:** Damage proposal checks pass; consumer promotion gates remain open.
+**State:** pre-promotion Damage checks passed; the later 13,085-row Hazard consumer run closed cap/full-grid
+gates and model v1.1 is now current. This report preserves the proposal-stage evidence.
 
 ## Executed checks
 

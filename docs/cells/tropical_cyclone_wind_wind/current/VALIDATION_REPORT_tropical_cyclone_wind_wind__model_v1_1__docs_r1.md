@@ -19,3 +19,18 @@ branches are explicit; and loss cannot exceed the 0.63 covered-value boundary.
 
 They do not prove the source curve is predictive for a modern 5 MW turbine. That is the owner-approved
 screening assumption and the reason the release remains partial and replacement-ready.
+
+## Durable Damage publication
+
+```text
+gs://infrasure-benchmark/damage_artifacts/dev/
+  tropical_cyclone_wind_wind/model_v1_1__docs_r1/
+    curve_artifact.json
+    known_answer_tests.json
+    changelog.json
+    manifest.json                 written last
+```
+
+The manifest pins artifact SHA `0c33499183deb5179cb29c8a53e30571311b3b7690bc98289b0cd91dc0889e5a`
+and source commit `b5e38bf80e6d82b76a5478426e4c0c90a48f2bec`. Remote hashes were rechecked
+before the completion marker was accepted.

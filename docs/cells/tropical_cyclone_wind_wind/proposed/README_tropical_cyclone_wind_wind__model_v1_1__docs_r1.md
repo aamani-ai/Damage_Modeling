@@ -1,10 +1,10 @@
-# tropical_cyclone_wind_wind — proposed model v1.1, docs r1
+# tropical_cyclone_wind_wind — model v1.1 pre-promotion record, docs r1
 
-> **Status: proposed owner-approved screening proxy; not current.** The repository-current pin remains
-> [`model v1.0 / docs r1`](../current/README.md) until the exact Hazard consumer, cap, full-grid and rollback
-> gates pass.
+> **Outcome: promoted 2026-08-14.** The canonical package is now
+> [`model v1.1 / docs r1`](../current/README.md). This folder preserves the noncanonical review bytes and
+> pre-promotion reasoning; consumers must not load it.
 
-## What this proposal does
+## What the reviewed proposal introduced
 
 Model v1.1 adds one deliberately narrow route for Hazard's canonical Wind Farm:
 
@@ -95,6 +95,6 @@ of the `$88.2M` covered value and percent of the full `$140M` project TIV.
 
 ## Allowed use
 
-Screening and investigation only, conditional on the exact target asset and proxy IDs. This proposal is not
-field-calibrated, claims-calibrated, a generic modern-turbine curve, a full-plant damage model or a bankable
-loss estimate.
+Screening and investigation only, conditional on the exact target asset and proxy IDs. Promotion did not
+make the method field-calibrated, claims-calibrated, a generic modern-turbine curve, a full-plant damage
+model or a bankable loss estimate.
