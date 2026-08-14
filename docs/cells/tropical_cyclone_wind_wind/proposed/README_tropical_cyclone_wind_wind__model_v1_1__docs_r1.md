@@ -44,11 +44,26 @@ source record.
 - `rho = 4.99`
 - `V_at_DR50 = 163.3 km/h`
 - `max_dr = 1`
-- valid and withheld speed regions from model v1.0
+- valid and withheld speed regions for every exact model-v1.0 source selector
 - every exact 1 MW, 2.5 MW and 3.3 MW model-v1.0 result
 
 There is no `5 / 3.3` multiplier. Rated capacity identifies the target; it is not a supported damage-ratio
 scaler.
+
+## Proxy-only speed completion
+
+The exact 5 MW proxy is complete across nonnegative gusts so a Hurricane event is never silently dropped:
+
+| 10 m, 3-second gust | Proxy behavior |
+|---|---|
+| `0–90 km/h` | source-assumed zero |
+| `90–108 km/h` | zero, explicitly flagged as a conservative screening completion |
+| `108–252 km/h` | unchanged Jaimes equation |
+| above `252 km/h` | cap at `max_dr = 1`, explicitly flagged |
+
+This does not redraw the source evidence range. Across all 1,773 active Hurricane cells and 113,526 M1 events,
+the low-wind zero rule's summed placement-EAL upper bound is `$10,564.85`; the extreme-wind rule prevents
+unbounded extrapolation and respects the curve's declared maximum.
 
 ## Covered value
 
@@ -83,4 +98,3 @@ of the `$88.2M` covered value and percent of the full `$140M` project TIV.
 Screening and investigation only, conditional on the exact target asset and proxy IDs. This proposal is not
 field-calibrated, claims-calibrated, a generic modern-turbine curve, a full-plant damage model or a bankable
 loss estimate.
-

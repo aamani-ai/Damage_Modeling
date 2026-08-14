@@ -30,8 +30,22 @@ DR = 0                                           when V <= 90 km/h
 DR = 1 - exp[-ln(2) ((V - 90) / 73.3)^4.99]     otherwise
 ```
 
-The released range rules still apply: `90 < V < 108 km/h` is withheld, `108–252 km/h` is evaluated, and
-`V > 252 km/h` is withheld. The proxy adds no new tail and no wind-field transformation.
+Exact source-native selectors keep the released rules: `90 < V < 108 km/h` is withheld,
+`108–252 km/h` is evaluated, and `V > 252 km/h` is withheld. The named 5 MW proxy adds two explicit screening
+completion branches:
+
+| Proxy input | Runtime treatment | Why |
+|---|---|---|
+| `V <= 90 km/h` | source-assumed zero with the existing flag | unchanged source equation branch |
+| `90 < V < 108 km/h` | zero with `SCREENING_TRANSITION_BAND_ASSIGNED_ZERO` | conservative completion; not source evidence |
+| `108 <= V <= 252 km/h` | unchanged Jaimes equation | source-supported simulation range |
+| `V > 252 km/h` | `max_dr = 1` with `SCREENING_ABOVE_SOURCE_RANGE_CAPPED_AT_MAX_DR` | bounded cap; no tail extrapolation |
+
+The full-population Hazard comparison evaluated 113,526 governed M1 events in all 1,773 active cells at 20
+turbine nodes. The transition-zero branch has a `$10,564.85` upper bound on summed placement EAL—about
+`0.00037%` of the `$2.8527B` centroid screening-EAL sum across those placements. The cap keeps extreme events
+in scope without claiming response beyond the model's bounded maximum. Neither rule changes the wind axis or
+the source-native records.
 
 ## Why the proxy is useful now
 
@@ -55,4 +69,3 @@ receive a zero DR; they receive no result from this model.
 Revisit when target-matched modern 5 MW evidence, a reviewed physical transfer model, component-specific
 curves or better value data becomes available. Replacement requires a new governed Damage model version and
 a Hurricane rerun; it cannot be applied as silent cleanup.
-

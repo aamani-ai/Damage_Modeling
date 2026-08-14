@@ -32,3 +32,14 @@ package until Hazard passes exact-pin, M2, cap, full-grid, publication and rollb
 
 **Reason:** source-package validation alone does not prove a downstream annual-loss product.
 
+## TCWW11-D05 · Complete only the named proxy at the source-range boundaries
+
+**Decision:** for the exact canonical-5-MW proxy, assign a flagged zero DR in the unsupported `90–108 km/h`
+transition and a flagged `max_dr = 1` cap above `252 km/h`. Exact source-native selectors retain model-v1.0
+withholding outside the simulated range.
+
+**Reason:** all 1,773 active CONUS cells and 113,526 governed Hurricane M1 events were evaluated at the 20
+canonical turbine nodes. The conservative transition-zero rule omits at most `$10,564.85` of summed placement
+EAL across the full active grid. Above the source ceiling, the bounded source equation already approaches
+one; capping at its declared maximum avoids extrapolation while keeping extreme events in the screening
+product. Both branches remain explicit owner-approved completion rules, not source-derived evidence.

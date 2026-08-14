@@ -525,7 +525,18 @@
       "PARTIAL_FAILURE_UNIT_COVERAGE",
       "SOURCE_DENOMINATOR_SCOPE_AMBIGUOUS",
       "CURVE_INTRINSIC_SPREAD_NOT_CARRIED"
-    ]
+    ],
+    "proxy_screening_completion": {
+      "applies_only_when_proxy_policy_id": "TCWW_OWNER_APPROVED_3P3MW_FOR_CANONICAL_5MW_V1",
+      "transition_band_kmh": [
+        90,
+        108
+      ],
+      "transition_treatment": "return DR=0 with SCREENING_TRANSITION_BAND_ASSIGNED_ZERO",
+      "source_ceiling_kmh": 252,
+      "above_ceiling_treatment": "return max_dr with SCREENING_ABOVE_SOURCE_RANGE_CAPPED_AT_MAX_DR",
+      "source_native_selectors_unchanged": true
+    }
   },
   "emit_contract": {
     "schema_version": "damage_emit.v2",
@@ -556,7 +567,8 @@
           "the proxy evaluates the unchanged Jaimes 3.3 MW / 100 m parameters on tc_peak_gust_3s_10m_kmh",
           "the proxy applies only to WT_TURBINE_EQUIPMENT_ASSEMBLY rotor+nacelle+tower screening scope",
           "covered value is 0.63 of project TIV; the remaining 0.37 is withheld, not zero",
-          "runtime numeric evaluation remains limited to the v1.0 source range behavior"
+          "source-native selectors retain v1.0 withheld-range behavior",
+          "the named 5 MW proxy alone assigns zero in 90\u2013108 km/h and caps DR at max_dr above 252 km/h, with explicit flags"
         ],
         "limitation_flags": [
           "OWNER_APPROVED_SCREENING_PROXY",
@@ -568,7 +580,9 @@
           "PARTIAL_STRUCTURAL_VALUE_COVERAGE_63PCT",
           "UNCOVERED_PROJECT_VALUE_37PCT_WITHHELD_NOT_ZERO",
           "CURVE_INTRINSIC_SPREAD_NOT_CARRIED",
-          "NO_NHC_OR_HUB_HEIGHT_BRIDGE"
+          "NO_NHC_OR_HUB_HEIGHT_BRIDGE",
+          "PROXY_SCREENING_TRANSITION_BAND_ZERO_RULE",
+          "PROXY_SCREENING_ABOVE_RANGE_MAX_DR_CAP"
         ],
         "withheld_failure_units": [
           {
@@ -653,6 +667,7 @@
         "covered loss <= 0.63 * project TIV for every occurrence",
         "uncovered 0.37 remains withheld and is never emitted as zero loss",
         "no 5/3.3 multiplier or generic nearest-neighbour selector",
+        "proxy boundary completion is exactly zero for 90\u2013108 km/h and max_dr above 252 km/h, with flags",
         "annual/TIV cap is applied inside the annual calculation"
       ],
       "action_if_fail": "withhold scenario loss and all annual or tail metrics"
@@ -683,6 +698,17 @@
       "source_evidence_identity": "Jaimes 3.3 MW / 100 m / 114 m record",
       "target_identity": "canonical 5 MW / 100 m turbine",
       "numeric_rule": "evaluate unchanged source parameters; no 5/3.3 scaling",
+      "screening_completion_rule": {
+        "transition_band_kmh": [
+          90,
+          108
+        ],
+        "transition_treatment": "zero_with_explicit_flag",
+        "transition_eal_upper_bound_all_active_conus_placements_usd": 10564.849317568538,
+        "source_ceiling_kmh": 252,
+        "above_ceiling_treatment": "cap_at_max_dr_with_explicit_flag",
+        "measurement_scope": "1773 active cells; 113526 governed M1 events; 20 canonical turbine nodes"
+      },
       "covered_value_basis_id": "CONUS_WIND_FARM_ROTOR_NACELLE_TOWER_63PCT_V1",
       "covered_value_share_of_project_tiv": 0.63,
       "uncovered_value_share_of_project_tiv": 0.37

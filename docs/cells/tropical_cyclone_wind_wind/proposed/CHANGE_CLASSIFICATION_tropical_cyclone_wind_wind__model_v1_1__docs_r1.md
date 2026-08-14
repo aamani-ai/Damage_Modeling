@@ -24,7 +24,7 @@ be dishonest.
 ## What is unchanged
 
 - the three Jaimes curve records and their parameters;
-- the `tc_peak_gust_3s_10m_kmh` axis and valid-range behavior;
+- the `tc_peak_gust_3s_10m_kmh` axis and all exact source-selector range behavior;
 - exact v1.0 selectors and their outputs;
 - the ban on generic nearest-neighbour or capacity-ratio scaling; and
 - withholding for foundation, electrical, collection, substation, controls, civil and support scopes.
@@ -36,6 +36,7 @@ be dishonest.
 - an approved 0.63 project-TIV value crosswalk for rotor, nacelle and tower;
 - partial scenario-loss capability capped at the covered value; and
 - machine-readable flags distinguishing source evidence, target asset and owner-approved proxy use.
+- a proxy-only completion rule: flagged zero in `90–108 km/h` and a flagged `max_dr` cap above `252 km/h`.
 
 ## Required evidence before promotion
 
@@ -43,8 +44,8 @@ be dishonest.
 2. proxy equivalence KATs showing no `5 / 3.3` numerical scaling;
 3. negative tests for missing opt-in, wrong asset profile and unsupported turbine sizes;
 4. value-crosswalk and cap KATs at the canonical `$140M` TIV and at arbitrary valid TIV inputs;
-5. exact Hazard cell/model/docs/schema/SHA pinning; and
-6. a consumer rollback test that restores the model-v1.0 withholding behavior.
+5. full-population evidence bounding the proxy-only speed-range completion;
+6. exact Hazard cell/model/docs/schema/SHA pinning; and
+7. a consumer rollback test that restores the model-v1.0 withholding behavior.
 
 The current v1.0 package and registry pointer remain unchanged until those gates pass.
-

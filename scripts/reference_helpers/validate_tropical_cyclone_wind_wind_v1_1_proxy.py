@@ -80,6 +80,9 @@ def validate_structure(
     require(contract["canonical_asset_profile_id"] == PROXY_ASSET_PROFILE_ID, "asset profile changed")
     require(contract["covered_value_basis_id"] == PROXY_VALUE_BASIS_ID, "value basis changed")
     require(contract["numeric_rule"].endswith("no 5/3.3 scaling"), "no-scaling rule missing")
+    completion = contract["screening_completion_rule"]
+    require(completion["transition_band_kmh"] == [90, 108], "transition band changed")
+    require(completion["above_ceiling_treatment"] == "cap_at_max_dr_with_explicit_flag", "ceiling rule changed")
 
 
 def validate_reproduction(
@@ -133,6 +136,9 @@ def validate_proxy(artifact: Mapping[str, Any], kats: Mapping[str, Any]) -> int:
         flags = set(result["metadata_flags"])
         require("NO_CAPACITY_RATIO_SCALING" in flags, "no-scaling flag missing")
         require("OWNER_APPROVED_SCREENING_PROXY" in flags, "proxy flag missing")
+        boundary_flag = expected.get("boundary_flag")
+        if boundary_flag:
+            require(boundary_flag in flags, f"boundary flag missing: {test['test_id']}")
     return len(kats["proxy_known_answer_tests"])
 
 

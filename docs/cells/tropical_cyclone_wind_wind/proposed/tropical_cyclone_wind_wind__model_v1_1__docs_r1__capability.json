@@ -17,7 +17,8 @@
         "the proxy evaluates the unchanged Jaimes 3.3 MW / 100 m parameters on tc_peak_gust_3s_10m_kmh",
         "the proxy applies only to WT_TURBINE_EQUIPMENT_ASSEMBLY rotor+nacelle+tower screening scope",
         "covered value is 0.63 of project TIV; the remaining 0.37 is withheld, not zero",
-        "runtime numeric evaluation remains limited to the v1.0 source range behavior"
+        "source-native selectors retain v1.0 withheld-range behavior",
+        "the named 5 MW proxy alone assigns zero in 90\u2013108 km/h and caps DR at max_dr above 252 km/h, with explicit flags"
       ],
       "limitation_flags": [
         "OWNER_APPROVED_SCREENING_PROXY",
@@ -29,7 +30,9 @@
         "PARTIAL_STRUCTURAL_VALUE_COVERAGE_63PCT",
         "UNCOVERED_PROJECT_VALUE_37PCT_WITHHELD_NOT_ZERO",
         "CURVE_INTRINSIC_SPREAD_NOT_CARRIED",
-        "NO_NHC_OR_HUB_HEIGHT_BRIDGE"
+        "NO_NHC_OR_HUB_HEIGHT_BRIDGE",
+        "PROXY_SCREENING_TRANSITION_BAND_ZERO_RULE",
+        "PROXY_SCREENING_ABOVE_RANGE_MAX_DR_CAP"
       ],
       "withheld_failure_units": [
         {
@@ -114,6 +117,7 @@
       "covered loss <= 0.63 * project TIV for every occurrence",
       "uncovered 0.37 remains withheld and is never emitted as zero loss",
       "no 5/3.3 multiplier or generic nearest-neighbour selector",
+      "proxy boundary completion is exactly zero for 90\u2013108 km/h and max_dr above 252 km/h, with flags",
       "annual/TIV cap is applied inside the annual calculation"
     ],
     "action_if_fail": "withhold scenario loss and all annual or tail metrics"

@@ -8,7 +8,8 @@
 | axis | exact 10 m, 3-second, km/h input; incompatible axes fail closed | **pass** |
 | value | rotor+nacelle+tower = 0.63; remainder = 0.37 withheld | **pass** |
 | schema | bundle v3, capability v3 and emit v2 execute | **pass** |
-| consumer M2 | centroid-versus-node decision measured | open |
+| proxy speed completion | full active-grid boundary exposure measured; zero/cap branches flagged and KAT-gated | **pass** |
+| consumer M2 | all 1,773 active cells measured; node-aware selected | **pass** |
 | consumer cap | occurrence and annual loss cannot exceed covered value | open |
 | consumer full grid | all governed cells, zeros, geography and event identities pass | open |
 | durable publication | create-only Damage artifact and Hazard output, manifest last | open |
@@ -16,4 +17,3 @@
 
 **Promotion rule:** the source package passing does not move `current/`. Promotion occurs only with the exact
 Hazard consumer in the same controlled cutover and with model v1.0 retained as rollback.
-

@@ -30,6 +30,8 @@ PROXY_POLICY_ID = "TCWW_OWNER_APPROVED_3P3MW_FOR_CANONICAL_5MW_V1"
 PROXY_ASSET_PROFILE_ID = "CONUS_WIND_FARM_REFERENCE_V1"
 PROXY_VALUE_BASIS_ID = "CONUS_WIND_FARM_ROTOR_NACELLE_TOWER_63PCT_V1"
 PROXY_COVERED_VALUE_SHARE = 0.63
+PROXY_TRANSITION_ZERO_UPPER_KMH = 108.0
+PROXY_SOURCE_CEILING_KMH = 252.0
 AXIS_ID = "TC_PEAK_GUST_3S_10M_KMH_JAIMES"
 AXIS_FIELD = "tc_peak_gust_3s_10m_kmh"
 INCOMPATIBLE_AXIS_FIELDS = frozenset(
@@ -148,6 +150,27 @@ def evaluate_thresholded_weibull_expected_damage_record(
             "CURVE_PAYLOAD_INVALID", "curve evaluation is not finite"
         )
     return min(1.0, max(0.0, damage_ratio))
+
+
+def evaluate_proxy_screening_completion(
+    record: Mapping[str, Any], speed_kmh: float
+) -> tuple[float, str | None]:
+    """Complete the named proxy outside the source-supported simulation band.
+
+    The source curve itself is not rewritten: the named canonical-5-MW proxy
+    alone assigns zero in the 90–108 km/h transition and caps DR at ``max_dr``
+    above 252 km/h.  The second return value is the disclosure flag.
+    """
+    if 90.0 < speed_kmh < PROXY_TRANSITION_ZERO_UPPER_KMH:
+        return 0.0, "SCREENING_TRANSITION_BAND_ASSIGNED_ZERO"
+    if speed_kmh > PROXY_SOURCE_CEILING_KMH:
+        max_dr = _finite_number(
+            record["parameters"].get("max_dr"),
+            "CURVE_PAYLOAD_INVALID",
+            "max_dr",
+        )
+        return max_dr, "SCREENING_ABOVE_SOURCE_RANGE_CAPPED_AT_MAX_DR"
+    return evaluate_thresholded_weibull_expected_damage_record(record, speed_kmh), None
 
 
 def _pathway(artifact: Mapping[str, Any]) -> Mapping[str, Any]:
@@ -391,7 +414,7 @@ def evaluate_damage_call(
                 )
             )
             continue
-        if 90 < speed < 108:
+        if 90 < speed < 108 and not proxy_route:
             results.append(
                 _withheld_result(
                     pathway_id=pathway_id,
@@ -401,7 +424,7 @@ def evaluate_damage_call(
                 )
             )
             continue
-        if speed > 252:
+        if speed > 252 and not proxy_route:
             results.append(
                 _withheld_result(
                     pathway_id=pathway_id,
@@ -414,9 +437,16 @@ def evaluate_damage_call(
         result_flags = list(base_flags)
         if speed <= 90:
             result_flags.append("SOURCE_ASSUMED_NO_DAMAGE_THRESHOLD_NOT_EMPIRICAL")
-        damage_ratio = evaluate_thresholded_weibull_expected_damage_record(
-            record, speed
-        )
+        if proxy_route:
+            damage_ratio, completion_flag = evaluate_proxy_screening_completion(
+                record, speed
+            )
+            if completion_flag:
+                result_flags.append(completion_flag)
+        else:
+            damage_ratio = evaluate_thresholded_weibull_expected_damage_record(
+                record, speed
+            )
         results.append(
             {
                 "pathway_id": pathway_id,
@@ -447,6 +477,16 @@ def evaluate_damage_call(
         "input_quality": {
             "source_simulation_range_kmh": [108, 252],
             "source_assumed_zero_branch_kmh": [0, 90],
+            "proxy_screening_completion": (
+                {
+                    "transition_band_kmh": [90, 108],
+                    "transition_treatment": "zero_with_explicit_flag",
+                    "above_source_ceiling_kmh": 252,
+                    "above_ceiling_treatment": "cap_at_max_dr_with_explicit_flag",
+                }
+                if proxy_route
+                else None
+            ),
             "scenario_loss_status": (
                 "consumer_computable_with_explicit_0p63_covered_value_cap"
                 if proxy_route

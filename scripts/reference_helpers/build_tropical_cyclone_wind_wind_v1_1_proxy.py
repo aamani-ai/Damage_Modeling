@@ -50,7 +50,7 @@ def write_json(path: Path, value: Mapping[str, Any]) -> None:
 
 def write_csv(path: Path, header: list[str], rows: Iterable[Iterable[Any]]) -> None:
     with path.open("w", newline="") as handle:
-        writer = csv.writer(handle)
+        writer = csv.writer(handle, lineterminator="\n")
         writer.writerow(header)
         writer.writerows(rows)
 
@@ -87,7 +87,8 @@ def build_capability(current: Mapping[str, Any]) -> dict[str, Any]:
                 "the proxy evaluates the unchanged Jaimes 3.3 MW / 100 m parameters on tc_peak_gust_3s_10m_kmh",
                 "the proxy applies only to WT_TURBINE_EQUIPMENT_ASSEMBLY rotor+nacelle+tower screening scope",
                 "covered value is 0.63 of project TIV; the remaining 0.37 is withheld, not zero",
-                "runtime numeric evaluation remains limited to the v1.0 source range behavior",
+                "source-native selectors retain v1.0 withheld-range behavior",
+                "the named 5 MW proxy alone assigns zero in 90–108 km/h and caps DR at max_dr above 252 km/h, with explicit flags",
             ],
             "limitation_flags": [
                 "OWNER_APPROVED_SCREENING_PROXY",
@@ -100,6 +101,8 @@ def build_capability(current: Mapping[str, Any]) -> dict[str, Any]:
                 "UNCOVERED_PROJECT_VALUE_37PCT_WITHHELD_NOT_ZERO",
                 "CURVE_INTRINSIC_SPREAD_NOT_CARRIED",
                 "NO_NHC_OR_HUB_HEIGHT_BRIDGE",
+                "PROXY_SCREENING_TRANSITION_BAND_ZERO_RULE",
+                "PROXY_SCREENING_ABOVE_RANGE_MAX_DR_CAP",
             ],
             "withheld_failure_units": [
                 item
@@ -133,6 +136,7 @@ def build_capability(current: Mapping[str, Any]) -> dict[str, Any]:
             "covered loss <= 0.63 * project TIV for every occurrence",
             "uncovered 0.37 remains withheld and is never emitted as zero loss",
             "no 5/3.3 multiplier or generic nearest-neighbour selector",
+            "proxy boundary completion is exactly zero for 90–108 km/h and max_dr above 252 km/h, with flags",
             "annual/TIV cap is applied inside the annual calculation",
         ],
         "action_if_fail": "withhold scenario loss and all annual or tail metrics",
@@ -235,6 +239,14 @@ def build_artifact() -> tuple[dict[str, Any], dict[str, Any]]:
                 "source_evidence_identity": "Jaimes 3.3 MW / 100 m / 114 m record",
                 "target_identity": "canonical 5 MW / 100 m turbine",
                 "numeric_rule": "evaluate unchanged source parameters; no 5/3.3 scaling",
+                "screening_completion_rule": {
+                    "transition_band_kmh": [90, 108],
+                    "transition_treatment": "zero_with_explicit_flag",
+                    "transition_eal_upper_bound_all_active_conus_placements_usd": 10564.849317568538,
+                    "source_ceiling_kmh": 252,
+                    "above_ceiling_treatment": "cap_at_max_dr_with_explicit_flag",
+                    "measurement_scope": "1773 active cells; 113526 governed M1 events; 20 canonical turbine nodes",
+                },
                 "covered_value_basis_id": evaluator.PROXY_VALUE_BASIS_ID,
                 "covered_value_share_of_project_tiv": evaluator.PROXY_COVERED_VALUE_SHARE,
                 "uncovered_value_share_of_project_tiv": 1.0
@@ -245,6 +257,14 @@ def build_artifact() -> tuple[dict[str, Any], dict[str, Any]]:
     artifact["evaluation_contract"].update(
         {
             "selector_behavior": "exact source selectors plus one exact owner-approved 5 MW bridge; no inferred nearest neighbour",
+            "proxy_screening_completion": {
+                "applies_only_when_proxy_policy_id": evaluator.PROXY_POLICY_ID,
+                "transition_band_kmh": [90, 108],
+                "transition_treatment": "return DR=0 with SCREENING_TRANSITION_BAND_ASSIGNED_ZERO",
+                "source_ceiling_kmh": 252,
+                "above_ceiling_treatment": "return max_dr with SCREENING_ABOVE_SOURCE_RANGE_CAPPED_AT_MAX_DR",
+                "source_native_selectors_unchanged": True,
+            },
         }
     )
     artifact["value_linkage"].update(
@@ -296,7 +316,8 @@ def build_kats(artifact: Mapping[str, Any]) -> dict[str, Any]:
         if item["selector_match"]["turbine_archetype_id"] == evaluator.PROXY_ARCHETYPE_ID
     )
     proxy_tests = []
-    for speed in (90.0, 108.0, 160.0, 163.3, 180.0, 200.0, 252.0):
+    for speed in (90.0, 100.0, 108.0, 160.0, 163.3, 180.0, 200.0, 252.0, 300.0):
+        expected_dr, boundary_flag = evaluator.evaluate_proxy_screening_completion(record, speed)
         proxy_tests.append(
             {
                 "test_id": f"TCWW11_CANONICAL_5MW_PROXY_V{str(speed).replace('.', 'P')}",
@@ -304,7 +325,8 @@ def build_kats(artifact: Mapping[str, Any]) -> dict[str, Any]:
                 "expected": {
                     "status": "supported",
                     "curve_id": record["curve_id"],
-                    "failure_unit_damage_ratio": evaluator.evaluate_thresholded_weibull_expected_damage_record(record, speed),
+                    "failure_unit_damage_ratio": expected_dr,
+                    "boundary_flag": boundary_flag,
                     "covered_value_share_of_project_tiv": 0.63,
                     "source_curve_id": "TCWW_JAIMES_3P3MW_100M_SCREENING",
                     "capacity_ratio_scaling": "prohibited",
@@ -383,6 +405,7 @@ def build_registers() -> None:
             ["JAIMES_2020_TC_WIND_TURBINE", "numeric source", "unchanged 3.3 MW/100 m curve parameters and native axis", "not target-matched to 5 MW"],
             ["OWNER_DECISION_2026_08_14", "governance", "authorizes one explicit canonical-5-MW screening bridge", "not empirical evidence"],
             ["CONUS_WIND_FARM_REFERENCE_V1", "consumer asset profile", "20×5 MW, 100 MW, $140M and subsystem shares", "screening value grade"],
+            ["HAZARD_HURRICANE_WIND_FARM_M2_FULL_POPULATION_2026_08_14", "consumer measurement", "1773 active cells, 113526 events, 20-node boundary and M2 sensitivity", "screening completion evidence; not target-matched damage evidence"],
         ],
     )
     write_csv(
@@ -393,6 +416,8 @@ def build_registers() -> None:
             ["TCWW11-C02", "No 5/3.3 damage scaling is applied.", "hard contract", "damage ratio has no supported capacity multiplier", "new reviewed physical transfer model"],
             ["TCWW11-C03", "Rotor+nacelle+tower cover 0.63 of canonical project TIV.", "owner-approved value crosswalk", "shared canonical asset profile", "improved component valuation"],
             ["TCWW11-C04", "The other 0.37 is withheld, not zero.", "hard reporting contract", "partial coverage discipline", "additional governed curves"],
+            ["TCWW11-C05", "The named proxy assigns zero in the unsupported 90–108 km/h transition band.", "owner-approved screening completion", "full-M1 sensitivity bound = $10,564.85 summed placement EAL", "target-matched low-wind evidence"],
+            ["TCWW11-C06", "The named proxy caps speeds above 252 km/h at max_dr=1.", "owner-approved screening completion", "bounded physical damage ratio; no curve extrapolation", "target-matched extreme-wind evidence"],
         ],
     )
     write_csv(
@@ -404,6 +429,8 @@ def build_registers() -> None:
             ["rho", 4.99, "source-derived", "unchanged Jaimes 3.3 MW record"],
             ["target_rated_power_mw", 5, "owner-approved target identity", "no numeric scaling effect"],
             ["covered_value_share", 0.63, "owner-approved value crosswalk", "rotor+nacelle+tower only"],
+            ["proxy_transition_zero_upper_kmh", 108, "owner-approved screening completion", "zero below the source-supported simulation band"],
+            ["proxy_source_ceiling_kmh", 252, "source-derived boundary", "proxy caps above this speed at max_dr"],
         ],
     )
     write_csv(
@@ -428,6 +455,8 @@ def build_registers() -> None:
             ["covered project value", "withheld", "0.63 of TIV", "intentional partial coverage"],
             ["remaining project value", "withheld", "0.37 withheld", "none; never zero"],
             ["annual metrics", "withheld", "consumer-computable after Hazard gates", "consumer capability only"],
+            ["90–108 km/h", "withheld", "proxy returns flagged zero; source selectors still withhold", "intentional screening completion"],
+            [">252 km/h", "withheld", "proxy returns flagged max_dr cap; source selectors still withhold", "intentional screening completion"],
         ],
     )
 
