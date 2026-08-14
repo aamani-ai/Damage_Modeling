@@ -23,6 +23,10 @@ This page is the current **cell-documentation anchor**. Model v1.0/docs r1 is no
 source-native partial-screening release. The preserved proposal remains audit history; the canonical bytes,
 capability, KATs, and release decision live in [`current/`](current/README.md).
 
+> **Active proposal:** [model v1.1 / docs r1](proposed/README_tropical_cyclone_wind_wind__model_v1_1__docs_r1.md)
+> adds one explicit owner-approved 3.3 MW-source → canonical-5-MW screening bridge and a 0.63
+> rotor+nacelle+tower value scope. It is not current until the Hurricane consumer gates pass.
+
 For the shortest Hazard-facing request, exact selector example, and range behavior, start with the
 [hurricane × wind curve request guide](../../extra/guides/tropical_cyclone_wind_wind_curve_request_guide.md).
 

@@ -21,9 +21,15 @@ from typing import Any, Mapping
 
 SUPPORTED_PATHWAY = "tropical_cyclone_wind"
 SUPPORTED_FAILURE_UNIT = "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT"
+PROXY_FAILURE_UNIT = "WT_TURBINE_EQUIPMENT_ASSEMBLY"
 SUPPORTED_ASSUMPTION_SET = (
     "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED"
 )
+PROXY_ARCHETYPE_ID = "CONUS_WIND_FARM_5MW_HH100_PROXY_V1"
+PROXY_POLICY_ID = "TCWW_OWNER_APPROVED_3P3MW_FOR_CANONICAL_5MW_V1"
+PROXY_ASSET_PROFILE_ID = "CONUS_WIND_FARM_REFERENCE_V1"
+PROXY_VALUE_BASIS_ID = "CONUS_WIND_FARM_ROTOR_NACELLE_TOWER_63PCT_V1"
+PROXY_COVERED_VALUE_SHARE = 0.63
 AXIS_ID = "TC_PEAK_GUST_3S_10M_KMH_JAIMES"
 AXIS_FIELD = "tc_peak_gust_3s_10m_kmh"
 INCOMPATIBLE_AXIS_FIELDS = frozenset(
@@ -180,6 +186,48 @@ def _select_record(
     return matches[0]
 
 
+def _validate_proxy_request(
+    artifact: Mapping[str, Any],
+    request: Mapping[str, Any],
+    record: Mapping[str, Any],
+) -> bool:
+    """Validate the one named v1.1 bridge; never infer a generic nearest neighbour."""
+
+    selector = record.get("selector_match", {})
+    is_proxy = selector.get("turbine_archetype_id") == PROXY_ARCHETYPE_ID
+    if not is_proxy:
+        return False
+    if artifact.get("semantic_damage_model_version") != "model v1.1":
+        raise TropicalCycloneWindEvaluationError(
+            "TURBINE_ARCHETYPE_UNSUPPORTED",
+            "the canonical 5 MW proxy exists only in model v1.1",
+        )
+    required = {
+        "proxy_policy_id": PROXY_POLICY_ID,
+        "canonical_asset_profile_id": PROXY_ASSET_PROFILE_ID,
+        "covered_value_basis_id": PROXY_VALUE_BASIS_ID,
+    }
+    missing = [field for field in required if not request.get(field)]
+    if missing:
+        raise TropicalCycloneWindEvaluationError(
+            "OWNER_APPROVED_PROXY_OPT_IN_REQUIRED",
+            "explicit proxy fields are required: " + ", ".join(missing),
+        )
+    mismatches = [
+        field for field, expected in required.items() if request.get(field) != expected
+    ]
+    if mismatches:
+        raise TropicalCycloneWindEvaluationError(
+            "OWNER_APPROVED_PROXY_IDENTITY_MISMATCH",
+            "proxy identity mismatch for " + ", ".join(mismatches),
+        )
+    if record.get("failure_unit_id") != PROXY_FAILURE_UNIT:
+        raise TropicalCycloneWindEvaluationError(
+            "CURVE_PAYLOAD_INVALID", "proxy record failure unit changed"
+        )
+    return True
+
+
 def _withheld_by_unit(
     artifact: Mapping[str, Any]
 ) -> dict[str, list[str]]:
@@ -242,6 +290,7 @@ def evaluate_damage_call(
             "TURBINE_ARCHETYPE_UNSUPPORTED", "archetype ID must be a string"
         )
     record = _select_record(pathway, archetype_id)
+    proxy_route = _validate_proxy_request(artifact, request, record)
 
     assumption_set = request.get("source_model_assumption_set_id")
     if assumption_set is None or assumption_set == "":
@@ -290,6 +339,16 @@ def evaluate_damage_call(
 
     base_flags = list(artifact["evaluation_contract"]["metadata_flags_always"])
     base_flags.append("SOURCE_MODEL_ASSUMPTION_SET_ACKNOWLEDGED")
+    if proxy_route:
+        base_flags.extend(
+            [
+                "OWNER_APPROVED_SCREENING_PROXY",
+                "REQUESTED_5MW_EVALUATED_WITH_3P3MW_SOURCE_CURVE",
+                "NO_CAPACITY_RATIO_SCALING",
+                "PARTIAL_STRUCTURAL_VALUE_COVERAGE_63PCT",
+                "UNCOVERED_PROJECT_VALUE_37PCT_WITHHELD_NOT_ZERO",
+            ]
+        )
     if archetype_id == "TCWW_JAIMES_GENERIC_1MW_HH44_V1":
         base_flags.append("SOURCE_1MW_HUB_HEIGHT_TABLE_44M_FIGURE_CAPTION_40M")
     control_state = request.get("actual_operating_control_state")
@@ -309,7 +368,7 @@ def evaluate_damage_call(
     results: list[dict[str, Any]] = []
     for failure_unit_id in unit_ids:
         unit = failure_units[failure_unit_id]
-        if failure_unit_id != SUPPORTED_FAILURE_UNIT:
+        if failure_unit_id != record["failure_unit_id"]:
             results.append(
                 _withheld_result(
                     pathway_id=pathway_id,
@@ -388,18 +447,46 @@ def evaluate_damage_call(
         "input_quality": {
             "source_simulation_range_kmh": [108, 252],
             "source_assumed_zero_branch_kmh": [0, 90],
-            "scenario_loss_status": "withheld",
+            "scenario_loss_status": (
+                "consumer_computable_with_explicit_0p63_covered_value_cap"
+                if proxy_route
+                else "withheld"
+            ),
         },
         "selectors_used": {
             "turbine_archetype_id": archetype_id,
             "source_model_assumption_set_id": assumption_set,
+            **(
+                {
+                    "proxy_policy_id": PROXY_POLICY_ID,
+                    "canonical_asset_profile_id": PROXY_ASSET_PROFILE_ID,
+                    "covered_value_basis_id": PROXY_VALUE_BASIS_ID,
+                }
+                if proxy_route
+                else {}
+            ),
         },
         "conditioners_used": {
             "actual_operating_control_state": control_state
         },
+        "exposure_used": (
+            {
+                "covered_value_share_of_project_tiv": PROXY_COVERED_VALUE_SHARE,
+                "uncovered_value_share_of_project_tiv": 1.0
+                - PROXY_COVERED_VALUE_SHARE,
+                "covered_subsystems": ["rotor", "nacelle", "tower"],
+                "uncovered_treatment": "withheld_not_zero",
+            }
+            if proxy_route
+            else {}
+        ),
         "failure_unit_results": results,
         "capability_declaration_ref": (
-            "tropical_cyclone_wind_wind__model_v1_0__docs_r1__capability.json"
+            "tropical_cyclone_wind_wind__"
+            + artifact["semantic_damage_model_version"].replace(" ", "_").replace(".", "_")
+            + "__"
+            + artifact["documentation_revision"].replace(" ", "_")
+            + "__capability.json"
         ),
         "cap_binding_preflight_ref": None,
     }
