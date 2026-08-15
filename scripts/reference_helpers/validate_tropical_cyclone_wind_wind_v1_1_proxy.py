@@ -25,7 +25,7 @@ from tropical_cyclone_wind_wind_curve_eval import (
 
 ROOT = Path(__file__).resolve().parents[2]
 PROPOSED = ROOT / "docs/cells/tropical_cyclone_wind_wind/proposed"
-CURRENT = ROOT / "docs/cells/tropical_cyclone_wind_wind/current"
+CURRENT = ROOT / "docs/cells/tropical_cyclone_wind_wind/archive/model_v1_1__docs_r1"
 BASELINE = ROOT / "docs/cells/tropical_cyclone_wind_wind/archive/model_v1_0__docs_r1"
 CURRENT_ARTIFACT = BASELINE / "tropical_cyclone_wind_wind__model_v1_0__docs_r1__curve_artifact.json"
 ARTIFACT = CURRENT / "tropical_cyclone_wind_wind__model_v1_1__docs_r1__curve_artifact.json"

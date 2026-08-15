@@ -30,6 +30,12 @@ PROXY_POLICY_ID = "TCWW_OWNER_APPROVED_3P3MW_FOR_CANONICAL_5MW_V1"
 PROXY_ASSET_PROFILE_ID = "CONUS_WIND_FARM_REFERENCE_V1"
 PROXY_VALUE_BASIS_ID = "CONUS_WIND_FARM_ROTOR_NACELLE_TOWER_63PCT_V1"
 PROXY_COVERED_VALUE_SHARE = 0.63
+TOWER_PROXY_FAILURE_UNIT = SUPPORTED_FAILURE_UNIT
+TOWER_PROXY_ARCHETYPE_ID = "CONUS_WIND_FARM_5MW_HH100_TOWER_PROXY_V1"
+TOWER_PROXY_POLICY_ID = "TCWW_OWNER_APPROVED_3P3MW_FOR_CANONICAL_5MW_TOWER_ONLY_V1"
+TOWER_PROXY_ASSET_PROFILE_ID = PROXY_ASSET_PROFILE_ID
+TOWER_PROXY_VALUE_BASIS_ID = "CONUS_WIND_FARM_TOWER_16PCT_V1"
+TOWER_PROXY_COVERED_VALUE_SHARE = 0.16
 PROXY_TRANSITION_ZERO_UPPER_KMH = 108.0
 PROXY_SOURCE_CEILING_KMH = 252.0
 AXIS_ID = "TC_PEAK_GUST_3S_10M_KMH_JAIMES"
@@ -213,22 +219,52 @@ def _validate_proxy_request(
     artifact: Mapping[str, Any],
     request: Mapping[str, Any],
     record: Mapping[str, Any],
-) -> bool:
-    """Validate the one named v1.1 bridge; never infer a generic nearest neighbour."""
+) -> Mapping[str, Any] | None:
+    """Validate an exact named bridge; never infer a nearest neighbour.
+
+    Model v1.1 is retained for archived reproduction.  Model v1.2 corrects
+    the value/failure-unit binding while preserving the numerical curve.
+    """
 
     selector = record.get("selector_match", {})
-    is_proxy = selector.get("turbine_archetype_id") == PROXY_ARCHETYPE_ID
-    if not is_proxy:
-        return False
-    if artifact.get("semantic_damage_model_version") != "model v1.1":
-        raise TropicalCycloneWindEvaluationError(
-            "TURBINE_ARCHETYPE_UNSUPPORTED",
-            "the canonical 5 MW proxy exists only in model v1.1",
-        )
+    archetype_id = selector.get("turbine_archetype_id")
+    model_version = artifact.get("semantic_damage_model_version")
+    configs = {
+        ("model v1.1", PROXY_ARCHETYPE_ID): {
+            "failure_unit_id": PROXY_FAILURE_UNIT,
+            "proxy_policy_id": PROXY_POLICY_ID,
+            "canonical_asset_profile_id": PROXY_ASSET_PROFILE_ID,
+            "covered_value_basis_id": PROXY_VALUE_BASIS_ID,
+            "covered_value_share": PROXY_COVERED_VALUE_SHARE,
+            "covered_subsystems": ["rotor", "nacelle", "tower"],
+            "coverage_flag": "PARTIAL_STRUCTURAL_VALUE_COVERAGE_63PCT",
+            "uncovered_flag": "UNCOVERED_PROJECT_VALUE_37PCT_WITHHELD_NOT_ZERO",
+            "scenario_loss_status": "consumer_computable_with_explicit_0p63_covered_value_cap",
+        },
+        ("model v1.2", TOWER_PROXY_ARCHETYPE_ID): {
+            "failure_unit_id": TOWER_PROXY_FAILURE_UNIT,
+            "proxy_policy_id": TOWER_PROXY_POLICY_ID,
+            "canonical_asset_profile_id": TOWER_PROXY_ASSET_PROFILE_ID,
+            "covered_value_basis_id": TOWER_PROXY_VALUE_BASIS_ID,
+            "covered_value_share": TOWER_PROXY_COVERED_VALUE_SHARE,
+            "covered_subsystems": ["tower"],
+            "coverage_flag": "PARTIAL_TOWER_VALUE_COVERAGE_16PCT",
+            "uncovered_flag": "UNCOVERED_PROJECT_VALUE_84PCT_WITHHELD_NOT_ZERO",
+            "scenario_loss_status": "consumer_computable_with_explicit_0p16_tower_value_cap",
+        },
+    }
+    config = configs.get((model_version, archetype_id))
+    if config is None:
+        if archetype_id in {PROXY_ARCHETYPE_ID, TOWER_PROXY_ARCHETYPE_ID}:
+            raise TropicalCycloneWindEvaluationError(
+                "TURBINE_ARCHETYPE_UNSUPPORTED",
+                "the requested canonical 5 MW proxy is not part of this model version",
+            )
+        return None
     required = {
-        "proxy_policy_id": PROXY_POLICY_ID,
-        "canonical_asset_profile_id": PROXY_ASSET_PROFILE_ID,
-        "covered_value_basis_id": PROXY_VALUE_BASIS_ID,
+        "proxy_policy_id": config["proxy_policy_id"],
+        "canonical_asset_profile_id": config["canonical_asset_profile_id"],
+        "covered_value_basis_id": config["covered_value_basis_id"],
     }
     missing = [field for field in required if not request.get(field)]
     if missing:
@@ -244,11 +280,11 @@ def _validate_proxy_request(
             "OWNER_APPROVED_PROXY_IDENTITY_MISMATCH",
             "proxy identity mismatch for " + ", ".join(mismatches),
         )
-    if record.get("failure_unit_id") != PROXY_FAILURE_UNIT:
+    if record.get("failure_unit_id") != config["failure_unit_id"]:
         raise TropicalCycloneWindEvaluationError(
             "CURVE_PAYLOAD_INVALID", "proxy record failure unit changed"
         )
-    return True
+    return config
 
 
 def _withheld_by_unit(
@@ -313,7 +349,8 @@ def evaluate_damage_call(
             "TURBINE_ARCHETYPE_UNSUPPORTED", "archetype ID must be a string"
         )
     record = _select_record(pathway, archetype_id)
-    proxy_route = _validate_proxy_request(artifact, request, record)
+    proxy_config = _validate_proxy_request(artifact, request, record)
+    proxy_route = proxy_config is not None
 
     assumption_set = request.get("source_model_assumption_set_id")
     if assumption_set is None or assumption_set == "":
@@ -363,13 +400,14 @@ def evaluate_damage_call(
     base_flags = list(artifact["evaluation_contract"]["metadata_flags_always"])
     base_flags.append("SOURCE_MODEL_ASSUMPTION_SET_ACKNOWLEDGED")
     if proxy_route:
+        assert proxy_config is not None
         base_flags.extend(
             [
                 "OWNER_APPROVED_SCREENING_PROXY",
                 "REQUESTED_5MW_EVALUATED_WITH_3P3MW_SOURCE_CURVE",
                 "NO_CAPACITY_RATIO_SCALING",
-                "PARTIAL_STRUCTURAL_VALUE_COVERAGE_63PCT",
-                "UNCOVERED_PROJECT_VALUE_37PCT_WITHHELD_NOT_ZERO",
+                proxy_config["coverage_flag"],
+                proxy_config["uncovered_flag"],
             ]
         )
     if archetype_id == "TCWW_JAIMES_GENERIC_1MW_HH44_V1":
@@ -488,7 +526,7 @@ def evaluate_damage_call(
                 else None
             ),
             "scenario_loss_status": (
-                "consumer_computable_with_explicit_0p63_covered_value_cap"
+                proxy_config["scenario_loss_status"]
                 if proxy_route
                 else "withheld"
             ),
@@ -498,9 +536,9 @@ def evaluate_damage_call(
             "source_model_assumption_set_id": assumption_set,
             **(
                 {
-                    "proxy_policy_id": PROXY_POLICY_ID,
-                    "canonical_asset_profile_id": PROXY_ASSET_PROFILE_ID,
-                    "covered_value_basis_id": PROXY_VALUE_BASIS_ID,
+                    "proxy_policy_id": proxy_config["proxy_policy_id"],
+                    "canonical_asset_profile_id": proxy_config["canonical_asset_profile_id"],
+                    "covered_value_basis_id": proxy_config["covered_value_basis_id"],
                 }
                 if proxy_route
                 else {}
@@ -511,10 +549,10 @@ def evaluate_damage_call(
         },
         "exposure_used": (
             {
-                "covered_value_share_of_project_tiv": PROXY_COVERED_VALUE_SHARE,
+                "covered_value_share_of_project_tiv": proxy_config["covered_value_share"],
                 "uncovered_value_share_of_project_tiv": 1.0
-                - PROXY_COVERED_VALUE_SHARE,
-                "covered_subsystems": ["rotor", "nacelle", "tower"],
+                - proxy_config["covered_value_share"],
+                "covered_subsystems": proxy_config["covered_subsystems"],
                 "uncovered_treatment": "withheld_not_zero",
             }
             if proxy_route

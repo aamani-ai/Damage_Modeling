@@ -1,120 +1,70 @@
-# Guide: request the hurricane × onshore-wind damage curve
-
-Use this guide when Hazard needs the current tropical-cyclone wind response for an onshore wind asset. This
-is the easy-use bridge to the canonical artifact and consumer contract; it is not a second source of curve
-truth.
-
-## Short answer
+# Requesting the tropical-cyclone wind × Wind Farm tower proxy
 
 ```yaml
 cell_id: tropical_cyclone_wind_wind
-consumer_pin: tropical_cyclone_wind_wind@model_v1_1__docs_r1
-damage_code_id: TROPICAL_CYCLONE_WIND_WIND_JAIMES_SCREENING_V1_1
-artifact_schema: damage_curve_record_bundle.v3
-capability_schema: capability_declaration.v3
-artifact_sha256: 0c33499183deb5179cb29c8a53e30571311b3b7690bc98289b0cd91dc0889e5a
-model_grade: screening_owner_approved_target_mismatch_proxy
-coverage: rotor+nacelle+tower = 0.63 of canonical Wind Farm TIV; remaining 0.37 withheld
+consumer_pin: tropical_cyclone_wind_wind@model_v1_2__docs_r2
+damage_code_id: TROPICAL_CYCLONE_WIND_WIND_JAIMES_TOWER_SCREENING_V1_2
+artifact_sha256: 009996c07eb8150f79f11741d42b6cd37562d655ee336f82f178ccdeb987c992
+failure_unit: WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT
+coverage: tower = 0.16 of project TIV; all other value = 0.84 withheld
 ```
 
-Canonical artifact:
-[`tropical_cyclone_wind_wind__model_v1_1__docs_r1__curve_artifact.json`](../../cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_1__docs_r1__curve_artifact.json).
-Always resolve and verify it through the
-[`machine_readable_artifact_index.json`](../../contracts/machine_readable_artifact_index.json), not from the
-portable package label alone.
+Use the exact current [curve artifact](../../cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_2__docs_r2__curve_artifact.json)
+and its SHA from the [machine-readable index](../../contracts/machine_readable_artifact_index.json).
 
-## Normal Hazard request flow
+## Flow
 
 ```text
-TC event at each canonical turbine node
-  -> exact 3-second peak gust at 10 m, km/h
-  -> exact proxy + asset-profile + value-basis identities
-  -> evaluate the unchanged Jaimes 3.3 MW response for the named 5 MW target
-  -> aggregate node DRs and cap loss at 0.63 of TIV
-  -> preserve the remaining 0.37 as withheld, not zero
-  -> Hazard owns coupling, frequency, occurrence aggregation, and annual metrics
+pin exact artifact bytes
+  → provide source-native 3-second peak gust at 10 m, km/h
+  → provide the exact tower-proxy identities
+  → evaluate unchanged Jaimes 3.3 MW curve at each turbine node
+  → average node DRs for the event
+  → multiply only by tower value (0.16 of project TIV)
+  → cap occurrence and annual calculations at that covered value
+  → report 0.84 as withheld, never zero
 ```
 
-Do not route hurricane through `wind_tornado_wind` or a convective-wind logistic. A common 3-second-gust
-label does not make the mechanisms or denominators equivalent.
-
-## Canonical Wind Farm request
-
-At the unchanged source curve's absolute midpoint:
+## Exact request
 
 ```json
 {
   "pathway_id": "tropical_cyclone_wind",
-  "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
-  "turbine_archetype_id": "CONUS_WIND_FARM_5MW_HH100_PROXY_V1",
+  "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+  "turbine_archetype_id": "CONUS_WIND_FARM_5MW_HH100_TOWER_PROXY_V1",
   "source_model_assumption_set_id": "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED",
-  "proxy_policy_id": "TCWW_OWNER_APPROVED_3P3MW_FOR_CANONICAL_5MW_V1",
+  "proxy_policy_id": "TCWW_OWNER_APPROVED_3P3MW_FOR_CANONICAL_5MW_TOWER_ONLY_V1",
   "canonical_asset_profile_id": "CONUS_WIND_FARM_REFERENCE_V1",
-  "covered_value_basis_id": "CONUS_WIND_FARM_ROTOR_NACELLE_TOWER_63PCT_V1",
+  "covered_value_basis_id": "CONUS_WIND_FARM_TOWER_16PCT_V1",
   "tc_peak_gust_3s_10m_kmh": 163.3,
   "actual_operating_control_state": "unknown"
 }
 ```
 
-Expected central result:
-
-```text
-curve_id: TCWW_JAIMES_3P3MW_AS_CANONICAL_5MW_OWNER_PROXY_V1
-failure_unit_damage_ratio: 0.5
-status: conditional/supported
-required flag: SOURCE_MODEL_CONTROL_STATE_UNKNOWN
-```
-
-For an authoring-side smoke check from the `damage_modeling` repository root:
+Evaluate locally:
 
 ```bash
-.venv/bin/python \
-  scripts/reference_helpers/tropical_cyclone_wind_wind_curve_eval.py \
-  docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_1__docs_r1__curve_artifact.json \
-  '{"pathway_id":"tropical_cyclone_wind","failure_unit_id":"WT_TURBINE_EQUIPMENT_ASSEMBLY","turbine_archetype_id":"CONUS_WIND_FARM_5MW_HH100_PROXY_V1","source_model_assumption_set_id":"JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED","proxy_policy_id":"TCWW_OWNER_APPROVED_3P3MW_FOR_CANONICAL_5MW_V1","canonical_asset_profile_id":"CONUS_WIND_FARM_REFERENCE_V1","covered_value_basis_id":"CONUS_WIND_FARM_ROTOR_NACELLE_TOWER_63PCT_V1","tc_peak_gust_3s_10m_kmh":163.3,"actual_operating_control_state":"unknown"}'
+.venv/bin/python scripts/reference_helpers/tropical_cyclone_wind_wind_curve_eval.py \
+  docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_2__docs_r2__curve_artifact.json \
+  '{"pathway_id":"tropical_cyclone_wind","failure_unit_id":"WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT","turbine_archetype_id":"CONUS_WIND_FARM_5MW_HH100_TOWER_PROXY_V1","source_model_assumption_set_id":"JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED","proxy_policy_id":"TCWW_OWNER_APPROVED_3P3MW_FOR_CANONICAL_5MW_TOWER_ONLY_V1","canonical_asset_profile_id":"CONUS_WIND_FARM_REFERENCE_V1","covered_value_basis_id":"CONUS_WIND_FARM_TOWER_16PCT_V1","tc_peak_gust_3s_10m_kmh":163.3,"actual_operating_control_state":"unknown"}'
 ```
 
-Production Hazard execution uses the common registry → manifest → SHA → schema → KAT loader, not this
-reference CLI.
+## Fail-closed rules
 
-## Existing source-native selectors remain available
+- Do not use the old model-v1.1 63% value basis or equipment-assembly failure unit.
+- Do not multiply damage by `5/3.3` or infer another turbine archetype.
+- Do not supply NHC sustained wind, Saffir-Simpson category, or hub-height wind as an alias.
+- Do not apply the emitted DR to rotor, nacelle, foundation, electrical, substation, civil, or full TIV.
+- Do not call the result target-matched, component-complete, financially calibrated, or bankable.
 
-| Selector | Source rating / hub / rotor | Absolute DR50 gust |
-|---|---|---:|
-| `TCWW_JAIMES_GENERIC_1MW_HH44_V1` | 1 MW / 44 m / 50 m | 196.77 km/h |
-| `TCWW_JAIMES_GENERIC_2P5MW_HH80_V1` | 2.5 MW / 80 m / 90 m | 172.52 km/h |
-| `TCWW_JAIMES_GENERIC_3P3MW_HH100_V1` | 3.3 MW / 100 m / 114 m | 163.30 km/h |
+## Current evidence and limits
 
-Selection remains exact. The named canonical-5-MW proxy is an additional explicit route, not a generic
-nearest-neighbor mechanism. Other 4, 5, or 6 MW requests still fail closed.
+The numerical curve is unchanged from the source record. The correction is the failure-unit/value binding.
+On the governed Hurricane Version-1 event population, the corrected tower-only consumer passes 13,085-cell
+QA and has a maximum Monte Carlo EAL of 1.890796% of full TIV/year. That is a measured consumer consequence,
+not an external reasonability range.
 
-## Axis and range behavior
-
-The only accepted damage input is `tc_peak_gust_3s_10m_kmh`: three-second peak gust, 10 m reference height,
-km/h.
-
-| Input | Behavior |
-|---:|---|
-| `< 0` or nonfinite | reject |
-| `0–90 km/h` | DR `0` with the source-assumed-threshold limitation flag |
-| `>90–<108 km/h` | canonical proxy returns flagged zero; source-native selectors withhold |
-| `108–252 km/h` | evaluate exact selected curve |
-| `>252 km/h` | canonical proxy returns flagged `max_dr=1`; source-native selectors withhold |
-
-Saffir-Simpson category, NHC one-minute sustained wind, hub-height wind, mph, knots, or m/s are not aliases.
-This guide does not invent a height, duration, exposure, terrain, or gust bridge. If Hazard cannot supply the
-exact governed axis semantics, the call withholds until a separately reviewed upstream adapter exists.
-
-## What Hazard may and may not report
-
-The exact canonical route may emit a conditional scalar DR for the rotor+nacelle+tower screening scope and
-Hazard may bind it to 0.63 of project TIV. Foundation, substation, electrical and civil value remains
-withheld. Reports must show both percent of covered value and percent of full TIV so the missing 0.37 is
-never hidden. EAL/PML remain Hazard-owned and screening-grade.
-
-## Related contracts
-
-- [Current cell package](../../cells/tropical_cyclone_wind_wind/current/README.md)
-- [Hazard migration contract](../../contracts/hazard_handoff/tropical_cyclone_wind_wind_model_v1_1_hazard_migration.md)
-- [Known-answer tests](../../cells/tropical_cyclone_wind_wind/current/known_answer_tests_tropical_cyclone_wind_wind__model_v1_1__docs_r1.json)
-- [Release decision](../../cells/tropical_cyclone_wind_wind/current/RELEASE_DECISION_tropical_cyclone_wind_wind__model_v1_1__docs_r1.md)
+- [Current package](../../cells/tropical_cyclone_wind_wind/current/README.md)
+- [Known-answer tests](../../cells/tropical_cyclone_wind_wind/current/known_answer_tests_tropical_cyclone_wind_wind__model_v1_2__docs_r2.json)
+- [Validation report](../../cells/tropical_cyclone_wind_wind/current/VALIDATION_REPORT_tropical_cyclone_wind_wind__model_v1_2__docs_r2.md)
+- [Release decision](../../cells/tropical_cyclone_wind_wind/current/RELEASE_DECISION_tropical_cyclone_wind_wind__model_v1_2__docs_r2.md)

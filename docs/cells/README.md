@@ -14,7 +14,7 @@ live under each cell folder.
 | `wildfire_solar` | model v1.0 / human docs r4; runtime pin docs r3; screening engineering proxy | `WILDFIRE_SOLAR_FSIM_SCREENING_V1` | [`wildfire_solar/`](wildfire_solar/README.md) |
 | `flood_wind` | model v1.0 / docs r1; partial screening | `FLOOD_WIND_FEMA_HAZUS_SUBSTATION_SCREENING_V1` | [`flood_wind/`](flood_wind/README.md) |
 | `wildfire_wind` | model v1.0 / docs r1; Tier-4 partial screening | `WILDFIRE_WIND_PARTIAL_ELECTRICAL_SCREENING_V1` | [`wildfire_wind/`](wildfire_wind/README.md) |
-| `tropical_cyclone_wind_wind` | model v1.1 / docs r1; owner-approved partial screening | `TROPICAL_CYCLONE_WIND_WIND_JAIMES_SCREENING_V1_1` | [`tropical_cyclone_wind_wind/`](tropical_cyclone_wind_wind/README.md) |
+| `tropical_cyclone_wind_wind` | model v1.2 / docs r2; owner-approved tower-only screening | `TROPICAL_CYCLONE_WIND_WIND_JAIMES_TOWER_SCREENING_V1_2` | [`tropical_cyclone_wind_wind/`](tropical_cyclone_wind_wind/README.md) |
 
 Active research proposal: `wind_tornado_wind` has a noncanonical
 [`model v2.0 / docs r1` pathway-aware package](wind_tornado_wind/proposed/README_wind_tornado_wind__model_v2_0__docs_r1.md).

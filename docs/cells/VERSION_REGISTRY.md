@@ -45,7 +45,7 @@ artifact index, the cell changelog, package releases, and Hazard runtime remain 
 | `wildfire_solar` | **model v1.0** | human docs r4; runtime docs r3 | Current screening engineering proxy | Docs r4 adds the three-file basics set; runtime docs r3 retain exact FSim-class tables, value linkage, KATs, and screening flags. |
 | `flood_wind` | **model v1.0** | docs r1 | Current partial screening | One exact FEMA Hazus-MH 2.1 facility-substation atom; all component/wind units withheld; bundle v3 pin and KATs. |
 | `wildfire_wind` | **model v1.0** | docs r1 | Current Tier-4 partial screening | Two exact FSim-state electrical-unit curves; all other units withheld; bundle v3 pin and KATs. |
-| `tropical_cyclone_wind_wind` | **model v1.1** | docs r1 | Current owner-approved partial screening | Three model-v1.0 Jaimes selectors reproduce; one exact canonical-5-MW proxy covers 63% of TIV; remaining 37% withheld; bundle v3 pin and KATs. |
+| `tropical_cyclone_wind_wind` | **model v1.2** | docs r2 | Current owner-approved tower-only screening | Jaimes parameters and source selectors reproduce; the canonical-5-MW proxy covers tower value only (16% of TIV); remaining 84% withheld; old 63% route superseded. |
 
 ---
 
@@ -68,11 +68,10 @@ pressure and qualified-tracker instability axes; it adds dependency-controlled m
 explicitly excludes hurricane, tornado and nonconvective wind. See
 [`strong_wind_solar/proposed/README_strong_wind_solar__model_v2_0__docs_r1.md`](strong_wind_solar/proposed/README_strong_wind_solar__model_v2_0__docs_r1.md).
 
-The tropical-cyclone wind release reuses the wind-asset anatomy while keeping TC wind as a distinct
-pathway. Model v1.0 corrects the earlier evidence interpretation and carries three source-derived expected-DR
-curves for exact Jaimes turbine archetypes on their native 3-second-gust-at-10-m axis. The curve denominator
-is quarantined to `WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT`; the standard equipment assembly, foundation,
-electrical/GSU/control, civil, support, dollar loss, and consumer annual/tail metrics remain withheld. See
+The tropical-cyclone wind release reuses the wind-asset anatomy while keeping TC wind distinct. Model v1.2
+preserves the source-derived Jaimes curves and binds the named canonical proxy only to
+`WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT` and 16% tower value. Standard equipment assembly, foundation,
+electrical/GSU/control, civil, support, and the other 84% remain withheld. See
 [`tropical_cyclone_wind_wind/current/`](tropical_cyclone_wind_wind/current/README.md).
 
 The flood-wind release keeps the hazard × asset release unit and the asset-neutral flood-electrical method
@@ -130,7 +129,7 @@ index. It is not assigned a new package number until a portable release is delib
 | `wildfire_solar` | model v1.0 | human docs r4; runtime docs r3 | released repository-current screening proxy; model v0.1 scaffold retained as research/rejection audit | Yes, repository-current |
 | `flood_wind` | model v1.0 | docs r1 | released repository-current partial screening; legacy FEMA source and all limits retained | Yes, repository-current |
 | `wildfire_wind` | model v1.0 | docs r1 | released repository-current Tier-4 partial screening; v0.1 strict scaffold retained | Yes, repository-current |
-| `tropical_cyclone_wind_wind` | model v1.1 | docs r1 | released repository-current canonical-Wind-Farm partial screening; v1.0 exact offline archive and earlier proposals retained | Yes, repository-current |
+| `tropical_cyclone_wind_wind` | model v1.2 | docs r2 | released repository-current canonical-Wind-Farm tower-only screening; v1.1 and v1.0 exact archives retained | Yes, repository-current |
 
 The portable v2.5 package does not contain these four later repository-current cells. The artifact index does.
 Model v1.0 is deliberately a Tier 4 absolute engineering proxy constrained by Tier 2/3 evidence; it uses exact

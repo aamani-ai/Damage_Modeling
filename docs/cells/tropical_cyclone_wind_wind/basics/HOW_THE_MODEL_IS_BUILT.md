@@ -1,4 +1,4 @@
-# How tropical-cyclone wind × onshore Wind Farm model v1.1 is built
+# How tropical-cyclone wind × onshore Wind Farm model v1.2 is built
 
 Use the [basics README](README.md) for the short explanation and the [model reference](MODEL_REFERENCE.md) for
 exact request fields and pins.
@@ -24,7 +24,7 @@ Hazard production package
 | 2 · name target | identify `CONUS_WIND_FARM_REFERENCE_V1` and its 5 MW / 100 m turbine | no generic modern-fleet alias |
 | 3 · admit proxy | map only the named target to the 3.3 MW / 100 m source curve | exact opt-in IDs; no `5/3.3` scaling |
 | 4 · complete range | add flagged proxy-only behavior below 108 and above 252 km/h | source-native selectors do not change |
-| 5 · bind value | apply DR to rotor+nacelle+tower = 0.63 of TIV | other 0.37 stays withheld |
+| 5 · bind value | apply DR to tower = 0.16 of TIV | other 0.84 stays withheld |
 | 6 · validate M2 | compare centroid and node-aware coupling on all active Hurricane cells | node-aware selected from measured evidence |
 | 7 · validate M3/M4 | run every governed cell and preserve event identity/zeros | 13,085/13,085 pass; covered cap enforced |
 | 8 · release | promote one current artifact, update index/SHA, publish create-only | manifest is written last; prior prefix immutable |
@@ -47,7 +47,7 @@ These are governed screening completion rules, not new empirical evidence.
 ## What would replace this model
 
 A target-matched 5 MW damage curve, improved component valuation, additional governed failure-unit curves,
-or claims/field calibration would trigger a separately versioned model. They do not silently modify v1.1.
+or claims/field calibration would trigger a separately versioned model. They do not silently modify v1.2.
 
-See the [release decision](../current/RELEASE_DECISION_tropical_cyclone_wind_wind__model_v1_1__docs_r1.md)
-and [validation report](../current/VALIDATION_REPORT_tropical_cyclone_wind_wind__model_v1_1__docs_r1.md).
+See the [release decision](../current/RELEASE_DECISION_tropical_cyclone_wind_wind__model_v1_2__docs_r2.md)
+and [validation report](../current/VALIDATION_REPORT_tropical_cyclone_wind_wind__model_v1_2__docs_r2.md).

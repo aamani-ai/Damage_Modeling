@@ -16,7 +16,7 @@ the full cell tuple, not `package_release` alone.
 | `wildfire_solar` | `wildfire_solar@model_v1_0__docs_r3` | bundle v2 | capability v2 | `docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json` | `598512fbe2f0a3c…` |
 | `flood_wind` | `flood_wind@model_v1_0__docs_r1` | bundle v3 | capability v3 | `docs/cells/flood_wind/current/flood_wind__model_v1_0__docs_r1__curve_artifact.json` | `37da745d87a4722e…` |
 | `wildfire_wind` | `wildfire_wind@model_v1_0__docs_r1` | bundle v3 | capability v3 | `docs/cells/wildfire_wind/current/wildfire_wind__model_v1_0__docs_r1__curve_artifact.json` | `3f923f506a2082dd…` |
-| `tropical_cyclone_wind_wind` | `tropical_cyclone_wind_wind@model_v1_1__docs_r1` | bundle v3 | capability v3 | `docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_1__docs_r1__curve_artifact.json` | `0c33499183deb517…` |
+| `tropical_cyclone_wind_wind` | `tropical_cyclone_wind_wind@model_v1_2__docs_r2` | bundle v3 | capability v3 | `docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_2__docs_r2__curve_artifact.json` | `009996c07eb8150f…` |
 
 ## Consumer sequence
 
@@ -39,5 +39,6 @@ ten failure-unit state tables, explicit value linkage, and mandatory not-field-c
 
 `flood_wind`, `wildfire_wind`, and `tropical_cyclone_wind_wind` are explicitly partial-screening releases. They support only their named
 failure units, run v3 KATs through the shared Hazard loader, and allow scenario dollars only with explicit
-same-unit direct replacement value and exposure when the individual capability permits it. The TC-wind source
-denominator is not approved, so it withholds scenario dollars. Annual/tail/portfolio completeness is not implied.
+same-unit direct replacement value and exposure when the individual capability permits it. TC-wind's
+canonical bridge is tower-only: 16% of project TIV is covered and 84% is withheld. Annual/tail/
+portfolio completeness is not implied.

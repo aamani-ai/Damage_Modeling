@@ -54,20 +54,20 @@ def test_current_request_guide_local_links_resolve():
 def test_hurricane_inline_request_example_executes():
     artifact = ROOT / (
         "docs/cells/tropical_cyclone_wind_wind/current/"
-        "tropical_cyclone_wind_wind__model_v1_1__docs_r1__curve_artifact.json"
+        "tropical_cyclone_wind_wind__model_v1_2__docs_r2__curve_artifact.json"
     )
     request = {
         "pathway_id": "tropical_cyclone_wind",
-        "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
-        "turbine_archetype_id": "CONUS_WIND_FARM_5MW_HH100_PROXY_V1",
+        "failure_unit_id": "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+        "turbine_archetype_id": "CONUS_WIND_FARM_5MW_HH100_TOWER_PROXY_V1",
         "source_model_assumption_set_id": (
             "JAIMES_2020_GENERIC_FIXED_BASE_STEEL_PARKED_ROTOR_AS_DOCUMENTED"
         ),
         "tc_peak_gust_3s_10m_kmh": 163.3,
         "actual_operating_control_state": "unknown",
-        "proxy_policy_id": "TCWW_OWNER_APPROVED_3P3MW_FOR_CANONICAL_5MW_V1",
+        "proxy_policy_id": "TCWW_OWNER_APPROVED_3P3MW_FOR_CANONICAL_5MW_TOWER_ONLY_V1",
         "canonical_asset_profile_id": "CONUS_WIND_FARM_REFERENCE_V1",
-        "covered_value_basis_id": "CONUS_WIND_FARM_ROTOR_NACELLE_TOWER_63PCT_V1",
+        "covered_value_basis_id": "CONUS_WIND_FARM_TOWER_16PCT_V1",
     }
     completed = subprocess.run(
         [
@@ -81,5 +81,5 @@ def test_hurricane_inline_request_example_executes():
         text=True,
     )
     result = json.loads(completed.stdout)["failure_unit_results"][0]
-    assert result["curve_id"] == "TCWW_JAIMES_3P3MW_AS_CANONICAL_5MW_OWNER_PROXY_V1"
+    assert result["curve_id"] == "TCWW_JAIMES_3P3MW_AS_CANONICAL_5MW_TOWER_PROXY_V1"
     assert math.isclose(result["scalar_central_dr"], 0.5, rel_tol=0, abs_tol=1e-12)

@@ -1,7 +1,6 @@
-# TC-wind × Wind Farm current — model v1.2/docs r2
+# TC-wind × Wind Farm model v1.2/docs r2 proposal
 
-> **Canonical tower-only screening release · 2026-08-14.** This release corrects the prior value scope
-> without changing the Jaimes curve. It is not a target-matched 5 MW or component-complete model.
+This proposal corrects the prior value scope without changing the Jaimes curve.
 
 ```text
 Jaimes 3.3 MW / 100 m tower-state curve (unchanged)
@@ -27,4 +26,3 @@ component-complete or financially calibrated wind-farm model.
 - [tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_2__docs_r2.md](tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_2__docs_r2.md)
 - [PROMOTION_GATE_MATRIX_tropical_cyclone_wind_wind__model_v1_2__docs_r2.md](PROMOTION_GATE_MATRIX_tropical_cyclone_wind_wind__model_v1_2__docs_r2.md)
 - [VALIDATION_REPORT_tropical_cyclone_wind_wind__model_v1_2__docs_r2.md](VALIDATION_REPORT_tropical_cyclone_wind_wind__model_v1_2__docs_r2.md)
-- [RELEASE_DECISION_tropical_cyclone_wind_wind__model_v1_2__docs_r2.md](RELEASE_DECISION_tropical_cyclone_wind_wind__model_v1_2__docs_r2.md)

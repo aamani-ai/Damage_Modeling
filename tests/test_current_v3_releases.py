@@ -63,7 +63,7 @@ def test_v3_changelogs_validate_and_point_at_current():
         )
         jsonschema.Draft202012Validator(schema).validate(changelog)
         expected_pin = (
-            "tropical_cyclone_wind_wind@model_v1_1__docs_r1"
+            "tropical_cyclone_wind_wind@model_v1_2__docs_r2"
             if cell_id == "tropical_cyclone_wind_wind"
             else f"{cell_id}@model_v1_0__docs_r1"
         )
