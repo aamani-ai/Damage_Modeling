@@ -94,6 +94,7 @@ are not curves).
 | `docs/contracts/schemas/` | JSON schemas for curve bundles, damage emit, and capability declarations. |
 | `docs/contracts/hazard_handoff/` | Hazard M2/M3 handoff notes. |
 | `docs/contracts/resiliency_handoff/` | Damage producer boundary for Resiliency scenarios; links to the canonical cross-repo contract. |
+| `docs/extra/learning_logs/` | Team-shared, non-canonical atomic lessons and complete newcomer/re-entry project learning packages. [Index](docs/extra/learning_logs/README.md). |
 | `scripts/reference_helpers/` | Reference helper scripts only; not a stable `src/` API. |
 | `data/` | Curve-record artifacts + manifests (large/binary gitignored). [README](data/README.md). |
 | `notebooks/` | Curve-derivation / fitting / evidence notebooks (TBD). [README](notebooks/README.md). |

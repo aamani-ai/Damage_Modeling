@@ -15,6 +15,7 @@ for method, contracts, cells, evidence, and source drops.
 | [`method/foundations/`](method/foundations/README.md) | Principles (P1–P3) + the 6 question-docs + the assembled-curve-record spec. |
 | [`plans/`](plans/README.md) | Build-facing plans that have graduated from discussion into staged execution, including hazard × asset coverage priority. |
 | [`extra/guides/`](extra/guides/README.md) | Practical walkthroughs for common repo operations and requests. |
+| [`extra/learning_logs/`](extra/learning_logs/README.md) | Team-shared, non-canonical atomic lessons and complete newcomer/re-entry learning packages. |
 | [`extra/discussion/`](extra/discussion/README.md) | Thinking-out-loud *before* building (P2), including coverage framing, flood-wind/shared-electrical decisions, and evidence harvest. |
 
 > **Relocation note.** The old deliverable-shaped `docs/damage_curves/` tree has been removed. The current
