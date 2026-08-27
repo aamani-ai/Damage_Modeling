@@ -83,6 +83,43 @@ This sequence is ordered, but it is not a claim that every scientific iteration 
 
 The Damage artifact can say that a `pv_module` failure unit maps to the `PV_ARRAY` subsystem and `PV_MODULE` component. It cannot prove that a given plant has a surveyed module polygon, a known module count, or an observed module value. Those facts come from the platform resolver. Conversely, the database should not reproduce the scientific curves merely because a plant row needs to use them.
 
+## Failure unit, subsystem, component, and plant evidence
+
+A **failure unit** is the smallest object for which Damage independently defines a hazard response, conditions, value endpoint, and known-answer tests. It is a modeling unit: what the Damage calculation evaluates. It is not automatically a platform component, an observed piece of equipment, or one final reporting row.
+
+```text
+Damage failure unit
+  = physical target + failure mechanism + response/value contract
+
+WSV1_MODULE_THERMAL
+ │     │       │
+ │     │       └── mechanism: thermal damage
+ │     └────────── target: module
+ └──────────────── Wildfire × Solar model/version namespace
+```
+
+The name carries the modeled target and mechanism because the same physical component can have several failure mechanisms, while several components can sometimes share one defensible response/value endpoint. A database component name alone cannot express that scientific distinction.
+
+| Layer | Question it answers | Wildfire Solar example | What it does not prove |
+|---|---|---|---|
+| Failure unit | What receives its own response calculation? | `WSV1_MODULE_THERMAL` | That a module was observed at a particular plant |
+| Platform subsystem | Which broad equipment category receives the rollup? | `PV_ARRAY` | Component-level anatomy |
+| Platform component | Which finer catalog code is an exact match? | `PV_MODULE` | That the plant has an observed component instance |
+| Plant evidence lane | What is actually known for this plant? | observed, placeholder, reference-only, absent, unknown, or withheld | Universal asset composition |
+
+The joins must therefore be read in two separate directions:
+
+```text
+VOCABULARY COMPATIBILITY                         PLANT EVIDENCE
+failure unit ─► subsystem/component code         resolved asset fact ─► observed?
+               exact or subsystem-only                                reference?
+                                                                         absent?
+
+an exact code join does not cross the gap and become an observation
+```
+
+This distinction is the reason a model can support subsystem-level screening while still refusing a “fully observed plant” claim.
+
 ## How to read this package
 
 Start with the question you have:
@@ -164,7 +201,23 @@ This makes the missing step explicit. It prevents an experiment from being mista
 
 ## A compact Wildfire × Solar example
 
-The current Wildfire Solar artifact declares ten failure units mapped across nine subsystem codes. One failure unit, `pv_module`, maps to `PV_ARRAY` / `PV_MODULE`; other units cover mounting, foundation, inverter/combiner, collection, substation, grounding/lightning, SCADA, and a mixed civil-direct bucket. The Hayhurst platform receipt currently proves observed PV-array geometry, while several other plant-specific subsystem facts are absent or placeholders. The correct calculation therefore joins the artifact’s response possibilities to the plant facts that are actually supported, labels the basis of every retained row, keeps reference/default value separate from observed value, and does not call the result a fully observed asset.
+The current Wildfire Solar artifact declares ten failure units and six wildfire flame-length classes. Evaluating every modeled combination produces `10 × 6 = 60` response rows. Probability-weighting the six classes then produces one loss contribution per failure unit. Those ten contributions roll into nine platform subsystem totals because inverter and combiner are distinct failure units that both map to `INVERTER_SYSTEM`. A separate replacement-support line is added once because labor/logistics support is cost, not physical equipment.
+
+```text
+10 failure units × 6 wildfire classes
+                  ↓
+       60 response combinations
+                  ↓ class-probability weighting
+       10 physical loss contributions
+                  ↓ artifact-declared mapping
+       9 platform subsystem totals
+                  +
+       1 nonphysical support-cost line
+                  ↓
+       plant aggregate M3 loss
+```
+
+All ten failure units match exact platform subsystem codes. Only `PV_MODULE` and `COMBINER_BOX` match exact platform component codes; the other eight are intentionally `subsystem_only` rather than guessed. This describes reporting vocabulary, not observed Hayhurst anatomy. The Hayhurst receipt currently supports the PV-array lane with observed-source geometry. Its other modeled subsystem contributions remain placeholder/reference-only or absent and must retain those labels, including the combiner even though `COMBINER_BOX` is a valid component code.
 
 For flame-length class 4, the artifact’s module damage ratio is `0.12`. With its reference module value of `291.214851 USD/kWdc`, the illustrative direct module loss is:
 
@@ -175,13 +228,31 @@ direct module loss
   = 34.94578212 USD/kWdc
 ```
 
-That number is not yet a plant loss. Hazard must still apply the plant’s selected value basis, exposure/support logic, spatial evidence, and event probability. Detailed failure-unit-by-intensity rows should remain available before M4 aggregation so reviewers can see exactly where an aggregate came from.
+That number is not yet a plant loss. Hazard must still apply the plant’s selected value basis, exposure/support logic, spatial evidence, and event probability. Detailed failure-unit-by-intensity rows should remain available before M4 aggregation so reviewers can see exactly where an aggregate came from. In the recent bounded experiment, summing the detailed physical contributions plus the support line reproduced aggregate M3 within approximately `1.73e-18`. That is an accounting/implementation parity check; it does not validate the scientific curves, reference composition, or plant observations.
+
+### Current D3.5 questions—not yet production authorization
+
+| Owner question | Current experiment-supported direction | Still open |
+|---|---|---|
+| Reporting grain | Ten failure units; exact subsystem rollups; component reporting only for exact codes; support separate | Owner acceptance of the Version-1 claim boundary |
+| Database boundary | Detailed immutable history in GCS; thin current headline and lineage pointers in the database; no new snapshot/run-ledger/Damage-detail/result-family table | Spatial semantics plus valuation and result-status policy |
+| Scientific direction | Accept low-risk Hayhurst as a valid end-to-end method proof; common-period zero PMLs are expected from rare occurrence | Owner acceptance and a later predeclared high-risk contrast |
+
+These are review decisions. They do not authorize branch integration, production extraction, a database write, or serving.
 
 ## Newcomer questions
+
+### What is a Damage failure unit, and why is it not simply called a component?
+
+A failure unit is the smallest modeled object with its own hazard response, conditions, value endpoint, and known-answer checks. The name emphasizes what the model evaluates, not merely what the equipment catalog calls an object. One physical component can have several failure mechanisms that need different curves; conversely, a defensible composite failure unit can cover several components when the evidence and value endpoint cannot support a finer split. The artifact maps each failure unit to platform subsystem/component vocabulary afterward. This separation lets Damage science improve without forcing the asset database to copy curve structure, and lets richer plant observations enter later without redesigning every response.
 
 ### Does a Damage artifact prove that the equipment exists at a plant?
 
 No. A Damage artifact defines a response vocabulary: failure units, intensity measures, damage ratios, subsystem/component mappings, conditions, caps, and value-bucket semantics. It says what the model is capable of representing. The platform resolver supplies plant evidence: observed subsystem instances, component specifications, geometry, capacity, provenance, confidence, and explicit unknowns. Hazard intersects those two inputs. If the artifact contains a foundation curve but the plant receipt has no observed foundation instance, Hazard must not relabel that curve as observed plant detail. It may use an approved reference or default composition only when the method allows it, and the resulting rows and claim grade must state that basis.
+
+### Does an exact subsystem or component mapping mean that equipment was observed?
+
+No. “Exact” means the Damage label joins an active platform vocabulary code without fuzzy interpretation. It answers where a calculated contribution may be reported. Observation is a separate question answered by the resolved plant facts. In the Wildfire Solar example, all ten failure units have exact subsystem-code joins and two have exact component-code joins, but Hayhurst currently has observed evidence only for its PV-array subsystem lane. The other rows remain placeholder/reference-only or absent as appropriate. Even an exact `COMBINER_BOX` code cannot become an observed combiner instance unless the platform receipt supplies that evidence.
 
 ### Why are publishing and registration two different steps?
 
@@ -194,6 +265,10 @@ Yes for a bounded experiment if it is explicitly labeled local, proposed, and no
 ### Why keep failure-unit and subsystem rows before aggregating to the plant?
 
 Early plant averaging destroys auditability and can produce scientifically incorrect joins. Different failure units can have different curves, caps, conditions, value bases, spatial support, and evidence grades. A single plant-level number cannot show whether a loss came from modules, inverters, substation equipment, or a support-cost rule. It also makes later asset-detail improvements hard to use because the information was discarded upstream. The safer order is to calculate at the artifact’s declared failure-unit grain, attach observed/reference/default status, roll up through the declared subsystem mapping, and only then form the M4 plant result. The aggregate is still available, but it remains reproducible from retained detailed rows.
+
+### Do detailed failure-unit results require another database table?
+
+Not under the current D3.5 direction. The complete failure-unit, subsystem, support-line, diagnostic, and historical result belongs in the immutable GCS run package, where its exact inputs and versions can be preserved. The relational database should retain a thin current result for cross-asset queries and serving, together with manifest/input/Damage pointers and hashes. A new detail table would be justified only by a concrete repeated query that cannot be served from the governed package or a typed projection. Spatial-semantics repair and valuation/status policy remain real database work, but they do not require copying Damage physics or full run history into new tables.
 
 ### What happens when the database only knows panels and a substation?
 
@@ -252,5 +327,6 @@ This team-shared package explains the as-built system as of 2026-08-27. Refresh 
 - Hazard replaces a local/vendored Damage path with the registered loader;
 - the artifact schema, cap-binding rules, or asset-to-artifact mapping standard changes;
 - the first corrected Wildfire × Solar detailed Deep execution establishes a better worked example.
+- the D3.5 owner review changes the proposed reporting-grain, database, or scientific-direction conclusions.
 
 The scientific and operational authorities linked above take precedence if this explanatory package becomes stale.

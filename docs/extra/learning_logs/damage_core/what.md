@@ -40,6 +40,8 @@ The central grain rule is: preserve the smallest scientifically meaningful unit 
 
 A Damage cell is the governed scientific address for one peril × asset pairing, such as `wildfire_solar`. It establishes the physical phenomenon, asset class, intended intensity measure, initial output grain, and the claim the work is trying to support. The cell is broader than one curve: it may contain multiple failure units, intensity classes, component mappings, conditions, value buckets, sources, and model/documentation identities.
 
+Inside that cell, a **failure unit** is the smallest object for which Damage defines an independent response and value endpoint. It normally names a physical target plus a failure mechanism, such as `WSV1_MODULE_THERMAL`: Wildfire Solar Version 1, module target, thermal mechanism. That is a modeling identity, not a claim that a database component or observed plant instance exists. The same component can have several failure units when mechanisms differ; a composite failure unit can span several components when evidence supports only a shared response/value endpoint.
+
 Its starting inputs are a requested Hazard × Asset coordinate, the intended decision use, known platform asset vocabulary, and any existing Damage coverage. Its output is a written scope that identifies inclusions, exclusions, target claim grade, owner, and open questions. The scope must distinguish the scientific coordinate from a particular plant. `wildfire_solar` defines a reusable response cell; Hayhurst is one observed plant that may consume it.
 
 The cell’s state begins as missing or proposed. It does not become current merely because a notebook or JSON draft exists. The stable identifier becomes the route through research, packaging, validation, publication, registration, and consumption.
@@ -98,6 +100,20 @@ The grain remains claim-level during evaluation, then becomes a decision bundle 
 
 Response derivation turns admitted evidence into executable vulnerability behavior. The primary object is a typed response definition for each failure unit: intensity measure and units, domain, curve form or class lookup, damage-ratio output, interpolation rule, thresholds, monotonicity, caps, conditions, and behavior outside the supported domain.
 
+The failure unit is the calculation atom because it is the smallest grain at which those fields remain internally consistent:
+
+```text
+failure-unit identity
+      ├── modeled target + mechanism
+      ├── intensity axis/domain
+      ├── response function or class table
+      ├── conditions/caps
+      ├── mapped value endpoint
+      └── known-answer tests
+```
+
+A platform component is instead an asset-catalog object. Mapping happens after the response unit is defined; the artifact does not rename every failure unit to match the database or infer plant anatomy from its own labels.
+
 The result can be a continuous curve, piecewise function, discrete class table, or another schema-supported form. Its output damage ratio must have an exact meaning, normally a fraction of the mapped value bucket damaged under the specified intensity and conditions. Frequency remains outside this object; Hazard supplies event or annualized intensity evidence and later integrates loss.
 
 Response derivation preserves the difference between directly sourced values and transformations. If reported points are digitized, normalized, interpolated, smoothed, capped, or made monotonic, those operations and their rationale are declared. Known-answer cases are created alongside the behavior, including boundary, zero, positive, cap, and invalid-input cases.
@@ -113,6 +129,31 @@ Value connection defines the denominator and monetary basis to which each damage
 
 This stage does not assign a specific plant’s observed total value. It defines how a consumer can allocate an approved value basis across modeled failure units. The platform or Hazard run supplies the selected plant value assertion and labels whether it is observed, reference, default, or withheld. The Damage artifact supplies the mapping semantics and any reference composition needed for a permitted screening fallback.
 
+Mapping and plant evidence are two independent dimensions:
+
+| Dimension | Values | Meaning |
+|---|---|---|
+| Subsystem mapping | exact code join or unresolved | Broad platform category that may receive the rollup |
+| Component mapping | exact code join or `subsystem_only` | Whether a finer catalog label is defensible without guessing |
+| Plant evidence lane | observed, placeholder, reference-only, absent, unknown, withheld | Whether this particular plant supports the modeled anatomy/value claim |
+
+For the executed Wildfire Solar mapping audit, all ten failure units join active subsystem codes, but only two join exact component codes:
+
+| Failure unit | Platform subsystem | Component output | Hayhurst evidence lane in the bounded proof |
+|---|---|---|---|
+| Module thermal | `PV_ARRAY` | `PV_MODULE` exact | Observed subsystem/geometry |
+| Racking thermal | `MOUNTING` | `subsystem_only` | Placeholder/reference calculation |
+| Foundation thermal | `FOUNDATION` | `subsystem_only` | Reference-only; no subsystem record |
+| Inverter thermal | `INVERTER_SYSTEM` | `subsystem_only` | Placeholder/reference calculation |
+| Combiner thermal | `INVERTER_SYSTEM` | `COMBINER_BOX` exact | Placeholder/reference calculation |
+| Exposed cable | `ELECTRICAL_COLLECTION` | `subsystem_only` | Placeholder/reference calculation |
+| MV equipment thermal | `SUBSTATION` | `subsystem_only` | Placeholder/reference calculation |
+| Grounding thermal | `GROUNDING_LIGHTNING` | `subsystem_only` | Reference-only; no subsystem record |
+| SCADA thermal | `SCADA` | `subsystem_only` | Placeholder/reference calculation |
+| Civil direct | `CIVIL_INFRA` | `subsystem_only` | Placeholder/reference calculation |
+
+The ten failure units produce nine subsystem rollups because inverter and combiner both map to `INVERTER_SYSTEM`. Exact `COMBINER_BOX` vocabulary still does not establish an observed Hayhurst combiner.
+
 ```text
 plant value assertion
         │
@@ -124,6 +165,8 @@ plant value assertion
 ```
 
 For the current Wildfire Solar reference basis, installed capex is `1120 USD/kWdc`, physical replaceable value is `877.7957 USD/kWdc`, and excluded soft cost is `242.2043 USD/kWdc`. The artifact separately identifies direct/civil and support portions. These are reference semantics, not proof of Hayhurst’s observed TIV.
+
+Replacement support is not a failure unit or asset subsystem. It is a nonphysical value line applied once using the artifact’s declared support rule after physical failure-unit damage is calculated.
 
 The handoff is a complete, non-overlapping value map whose totals reconcile and whose unmodeled portion is explicit.
 
@@ -222,18 +265,25 @@ registered Damage artifact             resolved asset receipt
 native hazard support ─► intensity per support/failure unit
                           │
                           v
-              M3: damage ratio × mapped value
-                          │
-                 support cost applied once
-                          │
+              M3 response matrix
+          failure unit × intensity class/event
+                          │ probability/value weighting
+                          v
+              physical failure-unit contributions
+                          │ artifact mappings
                           v
               canonical subsystem rollups
+                          + support cost applied once
                           │
                           v
-              M4 plant distribution/headline
+              M3 plant aggregate → M4 distribution/headline
 ```
 
 Every row carries enough basis to distinguish observed, reference, default, placeholder-excluded, absent, unknown, and withheld inputs. The run writes an immutable GCS package containing the input receipt URI/SHA, Damage artifact URI/SHA, model/configuration versions, detailed rows, aggregates, and manifest. The database receives a current queryable projection and pointers, not the entire immutable history.
+
+In the Wildfire Solar example, ten failure units across six flame-length classes create 60 response combinations. Class weighting reduces these to ten physical contributions; mapping reduces those to nine subsystem totals; one separate support line completes aggregate M3. The detailed-plus-support sum reproduced aggregate M3 within approximately `1.73e-18`, which establishes implementation/accounting parity only—not curve calibration, observed composition, or value accuracy.
+
+The current D3.5 database direction is therefore no new snapshot, run-ledger, Damage-detail, or result-family table. Immutable GCS owns full detail/history, while a thin current database projection owns selected cross-asset headlines and lineage pointers. Spatial-role/grain completion plus valuation and result-status policy remain open production gates rather than reasons to copy model physics into new tables.
 
 For a new pair, successful local calculation is not sufficient. The admission chain is registry → GCS → SHA/schema → peril-specific known-answer test → detailed calculation → aggregate reproduction. The run’s result grade states what use the evidence supports.
 

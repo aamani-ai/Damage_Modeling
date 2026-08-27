@@ -37,7 +37,7 @@ Tracking a package here is a sharing promotion, not a model or method promotion.
 
 | # | Date | Created by | Related to | Doc | What it is |
 |---|---|---|---|---|---|
-| — | 2026-08-27 | owner-directed (Divy) · agent-drafted | Damage Core ↔ Hazard Deep | [Damage Core: evidence to Hazard-ready artifact](damage_core/README.md) | Team-shareable, non-canonical guide to the 12-step cell-definition → evidence → response/value → approval → publication → registration → Hazard-consumption lifecycle, with mirrored What/Why/How views, operating run cards, current distribution gaps, and a Wildfire × Solar worked example. |
+| — | 2026-08-27 | owner-directed (Divy) · agent-drafted | Damage Core ↔ Hazard Deep | [Damage Core: evidence to Hazard-ready artifact](damage_core/README.md) | Team-shareable, non-canonical guide to the 12-step lifecycle, with mirrored What/Why/How views, operating run cards, failure-unit/subsystem/component/plant-evidence foundations, current distribution and D3.5 boundaries, and a Wildfire × Solar detail-to-aggregate worked example. |
 
 ## Atomic learning index
 

@@ -59,9 +59,23 @@ Hazard run package + DB projection
 1. Normalize the address as `<hazard>_<asset>`. Split materially different physical pathways instead of hiding them under an ambiguous label.
 2. Run the change classifier. Use `NEW_CELL_SCAFFOLD` when there is no reviewed runtime curve and `NEW_CELL_MODEL_RELEASE` only when the complete scientific release is actually intended.
 3. Write the scope answers required by Phase 1 of the workflow: included damage mechanisms, explicitly deferred mechanisms, candidate hazard axis, relevant asset metadata, plausible failure units, and implicated value buckets.
-4. State the consumer claim: exploratory, screening, calibrated, or another governed grade. Name what the result will not support.
-5. Record whether the cell is plant-independent and which details the platform must later provide.
-6. Identify the owner decisions needed before evidence research expands.
+4. For every candidate failure unit, state the physical target, failure mechanism, independent response reason, value endpoint, and whether the unit is one component, a split mechanism on one component, or a defensible composite.
+5. Give the unit a stable model-scoped ID. Do not use a platform component code as the ID unless the scientific unit genuinely has the same meaning and cardinality.
+6. State the consumer claim: exploratory, screening, calibrated, or another governed grade. Name what the result will not support.
+7. Record whether the cell is plant-independent and which details the platform must later provide.
+8. Identify the owner decisions needed before evidence research expands.
+
+**Failure-unit candidate card**
+
+| Field | Question |
+|---|---|
+| ID | Is it stable and model-scoped? |
+| Target | What physical thing or composite is acted upon? |
+| Mechanism | How does it fail under this peril? |
+| Separate response | Why can this not safely share another unit’s curve? |
+| Value endpoint | What denominator does its damage ratio act on? |
+| Platform mapping | Exact component, subsystem-only, or unresolved? |
+| Plant dependency | Which observed facts will later determine applicability? |
 
 **Pass gate:** another reader can distinguish this cell from adjacent hazards/assets, list its v1 inclusions and exclusions, and explain why it is a scaffold, candidate, or update. **Stop gate:** the hazard pathway, intensity definition, asset boundary, or intended claim is still ambiguous.
 
@@ -203,11 +217,13 @@ admitted use / contextual only / rejected / deferred
 
 1. Define the incoming intensity variable, units, valid domain, spatial/time support, and exact M2-to-M3 handoff.
 2. Choose the response form that matches evidence: discrete class lookup, continuous/piecewise curve, formula, or a withheld response. Record rejected alternatives.
-3. For every failure unit, declare curve parameters, interpolation, thresholds, conditions, extrapolation behavior, and cap binding.
-4. Keep selector, conditioner, exposure modifier, and damage response distinct. A site condition should not silently change the base curve when it belongs in a declared adapter.
-5. Calculate expected outputs independently for zero, lower/upper boundary, interior positive, cap, invalid/missing, and unsupported failure-unit cases.
-6. Compare old and new outputs when updating a cell. List maximum and decision-relevant differences.
-7. Emit deterministic records in the current artifact schema, but retain proposed state until Steps 8–9.
+3. Confirm that each failure unit’s target, mechanism, response, and value endpoint form one coherent calculation atom. Split a unit when mechanisms require different functions; keep a composite only when evidence/value cannot defend a finer split.
+4. Name the unit with a model/version namespace plus target and mechanism. Keep its subsystem/component mapping in separate fields.
+5. For every failure unit, declare curve parameters, interpolation, thresholds, conditions, extrapolation behavior, and cap binding.
+6. Keep selector, conditioner, exposure modifier, and damage response distinct. A site condition should not silently change the base curve when it belongs in a declared adapter.
+7. Calculate expected outputs independently for zero, lower/upper boundary, interior positive, cap, invalid/missing, and unsupported failure-unit cases.
+8. Compare old and new outputs when updating a cell. List maximum and decision-relevant differences.
+9. Emit deterministic records in the current artifact schema, but retain proposed state until Steps 8–9.
 
 ```text
 native hazard evidence
@@ -218,6 +234,22 @@ failure-unit response f(intensity)
        ↓ cap and domain policy
 damage ratio in [0, 1] or explicit withheld/error state
 ```
+
+**Naming worked example**
+
+```text
+WSV1_MODULE_THERMAL
+ │     │       │
+ │     │       └── mechanism used to choose/justify the response
+ │     └────────── physical target receiving that response
+ └──────────────── model/version namespace preventing ambiguous reuse
+
+separate mapping fields:
+  subsystem_code = PV_ARRAY
+  component_label = PV_MODULE
+```
+
+If future evidence distinguishes several module failure mechanisms, they may become separate failure units even though they still map to `PV_MODULE`. If evidence supports one composite electrical response, one failure unit may remain `subsystem_only` rather than inventing component splits.
 
 **Worked example:** for Wildfire Solar, flame-length class 4 gives `pv_module DR = 0.12` in the current artifact. This test proves the class lookup. It does not include event frequency or plant value.
 
@@ -240,13 +272,16 @@ damage ratio in [0, 1] or explicit withheld/error state
 
 **Procedure**
 
-1. List each artifact failure unit and its canonical subsystem/component mapping. For composite units, declare the exact component set or a defensible `subsystem_only` mapping.
-2. Assign the response role: primary/secondary nonzero, conditioner only, exposure only, reviewed near-zero, or deferred.
-3. Map each failure unit to direct vulnerable value. Separate mixed rows that need allocation.
-4. Identify support/logistics/fieldwork value, define its allocation rule, and guarantee it is applied once after direct damage—not independently damaged and scaled again.
-5. Identify soft, sunk, nonphysical, or otherwise excluded value. Record withheld value explicitly.
-6. Reconcile row totals to the declared value basis and test zero/full-damage limits.
-7. Define consumer behavior for observed, reference, default, absent, placeholder, and unknown plant facts. Do not let an unknown share default to one.
+1. List each artifact failure unit and its declared subsystem/component labels. For composite units, declare the exact component set or a defensible `subsystem_only` mapping.
+2. Join subsystem labels against the active platform subsystem-code catalog; fail on missing or ambiguous codes.
+3. Join component labels independently. Record `exact` only for a literal canonical code; otherwise record `subsystem_only` rather than using fuzzy matching.
+4. In a separate pass, join the mapped unit to the resolved plant receipt and label its evidence lane: observed, placeholder, reference-only, absent, unknown, or withheld. Do not infer observation from catalog compatibility.
+5. Assign the response role: primary/secondary nonzero, conditioner only, exposure only, reviewed near-zero, or deferred.
+6. Map each failure unit to direct vulnerable value. Separate mixed rows that need allocation.
+7. Identify support/logistics/fieldwork value, define its allocation rule, and guarantee it is applied once after direct damage—not independently damaged and scaled again.
+8. Identify soft, sunk, nonphysical, or otherwise excluded value. Record withheld value explicitly.
+9. Reconcile row totals to the declared value basis and test zero/full-damage limits.
+10. Define consumer behavior for every evidence lane. Do not let an unknown share default to one.
 
 ```text
 failure unit      subsystem             value treatment
@@ -256,6 +291,20 @@ inverter       ─► INVERTER_SYSTEM    ─► direct vulnerable bucket
 field support  ─► separate value line ─► allocated once by declared rule
 soft cost      ─► no physical mapping ─► excluded/withheld and disclosed
 ```
+
+Run the audit as two separate joins:
+
+```text
+PASS A · VOCABULARY
+failure unit ─► exact subsystem code ─► exact component OR subsystem_only
+
+PASS B · PLANT EVIDENCE
+mapped failure unit ─► resolved plant record ─► observed/reference/placeholder/absent/unknown
+
+Never replace PASS B with the success of PASS A.
+```
+
+**Wildfire mapping example:** ten failure units pass the subsystem-code join. Inverter and combiner both map to `INVERTER_SYSTEM`, so ten physical contributions later form nine subsystem totals. Only `PV_MODULE` and `COMBINER_BOX` pass the exact component-code join. Hayhurst observation is narrower still: the PV-array lane is observed; the combiner remains a placeholder/reference calculation despite its exact component code.
 
 **Worked example:** `0.12 × 291.214851 USD/kWdc = 34.94578212 USD/kWdc` is the Wildfire Solar module direct loss for class 4 under the reference module value. It is not a Hayhurst whole-plant loss. The plant run must label whether the value is observed or reference.
 
@@ -500,6 +549,43 @@ GCS objects ─► run manifest last ─► current DB projection ─► served 
 
 **Corrected Wildfire × Solar worked example:** the current artifact has ten failure units across six flame classes, so the first auditable response table has `10 × 6 = 60` failure-unit-class rows before plant/event weighting, plus separately governed support allocation. Hayhurst’s observed PV-array geometry can support module exposure. Other subsystem rows must carry their actual observed/reference/default/absent status. The artifact’s declared mappings replace the experiment’s handwritten six-group diagnostic. The retained detailed rows must reproduce the existing aggregate if only representation changed.
 
+The complete executed reduction is:
+
+```text
+60 failure-unit/class rows
+      ↓ weight six classes by P(class | fire)
+10 physical failure-unit contributions
+      ↓ group by exact subsystem code
+ 9 subsystem totals
+      + one nonphysical replacement-support line
+      ↓
+aggregate conditional M3 loss
+```
+
+The parity invariant is:
+
+```text
+aggregate_M3
+  = Σ(physical failure-unit loss contributions)
+    + replacement-support allocation applied once
+
+absolute difference in the bounded proof ≈ 1.73 × 10⁻¹⁸
+```
+
+Treat this as a calculation and accounting assertion. It does not establish that the response functions are calibrated, that reference weights are observed Hayhurst values, or that all mapped subsystems exist at Hayhurst.
+
+**D3.5 output-storage direction**
+
+| Output | Proposed owner | Current interpretation |
+|---|---|---|
+| Full failure-unit/class detail, subsystem rollups, support line, diagnostics, run history | Immutable GCS package | Preserve exact bytes and lineage |
+| Current cross-asset headline and manifest/input/Damage pointers | Thin database projection | Query and serve current eligible state |
+| Snapshot bank, run-ledger, Damage-detail table, new result family | None proposed | Do not add without a demonstrated query/use case |
+| Spatial role/grain semantics | Platform asset data | Repair before production |
+| Observed/reference/withheld valuation and zero/unavailable/stale status | Platform/Hazard policy | Decide before D4 serving |
+
+This is an owner-review direction, not authorization to change the database.
+
 **Verification commands for the loader seam**
 
 ```bash
@@ -514,7 +600,7 @@ Add pair-specific tests and the canonical Hazard suite required by `AGENTS.md` b
 
 **Copyable request**
 
-> Build a bounded `<hazard> × <asset>` Hazard consumption proof from the registered Damage artifact. Resolve registry → GCS, verify SHA/schema, run artifact and peril-specific KATs, fetch and receipt live asset facts, label every failure unit’s observed/reference/default/absent/placeholder/unknown/withheld basis, retain detailed M3 rows, apply support once, roll up through artifact mappings, and prove exact aggregate parity. Write immutable GCS evidence before any eligible development DB projection. Stop for owner review before production extraction or public serving.
+> Build a bounded `<hazard> × <asset>` Hazard consumption proof from the registered Damage artifact. Resolve registry → GCS, verify SHA/schema, run artifact and peril-specific KATs, fetch and receipt live asset facts, separately audit vocabulary mapping and plant evidence, label every failure unit’s observed/reference/default/absent/placeholder/unknown/withheld basis, retain detailed M3 rows, apply support once, roll up through artifact mappings, and prove exact aggregate parity. Keep full detail in immutable GCS and propose relational detail only for a demonstrated query. Stop for owner review before a database change, production extraction, or public serving.
 
 **Handoff:** return the answer-first assessment, run manifest, detailed/aggregate parity report, database-change observations, and owner decisions. New evidence or a model defect re-enters the classifier at Step 1, 3, or 4.
 
