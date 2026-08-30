@@ -5,16 +5,16 @@
 ```yaml
 cell_id: tropical_cyclone_wind_solar
 pathway_id: tropical_cyclone_wind
-documentation_lead: current model v2.1 / docs r1
+documentation_lead: current model v2.1 / docs r2
 damage_code_id: TROPICAL_CYCLONE_WIND_SOLAR_SCREENING_COMPLETE_V2_1
 semantic_damage_model_version: model v2.1
-documentation_revision: docs r1
+documentation_revision: docs r2
 lifecycle_state: released_v2_1
 promotion_status: released
 model_grade: screening_engineering_proxy_T4_coverage_complete
 canonical_runtime_artifact: true
 package_release: repository_current_not_in_portable_package
-artifact_index_entry: model_v2_1_docs_r1_bundle_v3_exact_sha
+artifact_index_entry: model_v2_1_docs_r2_bundle_v3_exact_sha
 current_pointer: current/
 full_plant_physical_dr: supported_in_screening_mode
 scenario_physical_loss: supported_with_named_value_profile
@@ -60,16 +60,16 @@ The runnable evaluator is
 Key package files:
 
 - [current package](current/README.md)
-- [overview](current/README_tropical_cyclone_wind_solar__model_v2_1__docs_r1.md)
-- [derivation dossier](current/tropical_cyclone_wind_solar_curve_derivation_dossier__model_v2_1__docs_r1.md)
-- [metadata contract](current/tropical_cyclone_wind_solar_damage_code_metadata_spec__model_v2_1__docs_r1.md)
-- [curve artifact](current/tropical_cyclone_wind_solar__model_v2_1__docs_r1__curve_artifact.json)
-- [capability](current/tropical_cyclone_wind_solar__model_v2_1__docs_r1__capability.json)
-- [known-answer tests](current/known_answer_tests_tropical_cyclone_wind_solar__model_v2_1__docs_r1.json)
-- [full-plant curve table](current/FULL_PLANT_SCREENING_CURVE_TABLE_tropical_cyclone_wind_solar__model_v2_1__docs_r1.csv)
-- [workbook](current/damage_curve_records_tropical_cyclone_wind_solar__model_v2_1__docs_r1.xlsx)
-- [validation report](current/VALIDATION_REPORT_tropical_cyclone_wind_solar__model_v2_1__docs_r1.md)
-- [release decision](current/RELEASE_DECISION_tropical_cyclone_wind_solar__model_v2_1__docs_r1.md)
+- [overview](current/README_tropical_cyclone_wind_solar__model_v2_1__docs_r2.md)
+- [derivation dossier](current/tropical_cyclone_wind_solar_curve_derivation_dossier__model_v2_1__docs_r2.md)
+- [metadata contract](current/tropical_cyclone_wind_solar_damage_code_metadata_spec__model_v2_1__docs_r2.md)
+- [curve artifact](current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json)
+- [capability](current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__capability.json)
+- [known-answer tests](current/known_answer_tests_tropical_cyclone_wind_solar__model_v2_1__docs_r2.json)
+- [full-plant curve table](current/FULL_PLANT_SCREENING_CURVE_TABLE_tropical_cyclone_wind_solar__model_v2_1__docs_r2.csv)
+- [workbook](current/damage_curve_records_tropical_cyclone_wind_solar__model_v2_1__docs_r2.xlsx)
+- [validation report](current/VALIDATION_REPORT_tropical_cyclone_wind_solar__model_v2_1__docs_r2.md)
+- [release decision](current/RELEASE_DECISION_tropical_cyclone_wind_solar__model_v2_1__docs_r2.md)
 - [Hazard handoff](../../contracts/hazard_handoff/tropical_cyclone_wind_solar_model_v2_1_screening_proposal.md)
 
 ## Scope boundary
@@ -82,7 +82,8 @@ BI and downtime remain a separate disruption stage.
 
 | Version | Role | Plant screening output | Status |
 |---|---|---|---|
-| model v2.1/docs r1 | coverage-complete screening release | numeric failure-unit DR, plant DR, loss per kWdc, optional dollars | current; canonical screening |
+| model v2.1/docs r2 | coverage-complete screening release | numeric failure-unit DR, plant DR, loss per kWdc, optional dollars | current; canonical screening |
+| model v2.1/docs r1 | first immutable promotion | same numerical output; stale noncanonical KAT status label | superseded by docs r2 |
 | model v2.0/docs r1 | partial component research baseline | array component DR only; plant/value outputs withheld | preserved audit baseline |
 | model v1.0/docs r2 human, r1 runtime | narrow Perry source-cohort alternative | one visible-module material proxy | noncanonical |
 | model v0.1/docs r1 | strict evidence-only alternative | no runtime curve | fail closed |

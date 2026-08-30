@@ -1,4 +1,4 @@
-# Tropical-cyclone wind × Solar current — model v2.1/docs r2
+# Tropical-cyclone wind × Solar current — model v2.1/docs r1
 
 > **Canonical coverage-complete screening release · 2026-08-30.** The exact proposed curve/value physics
 > passed the Everglades M0→M4 experiment and proposal-to-current dual-read tests before promotion.
@@ -24,15 +24,15 @@ outside this wind-only cell.
 
 ## Package
 
-- [curve artifact](tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json)
-- [capability declaration](tropical_cyclone_wind_solar__model_v2_1__docs_r2__capability.json)
-- [known-answer tests](known_answer_tests_tropical_cyclone_wind_solar__model_v2_1__docs_r2.json)
-- [full-plant curve table](FULL_PLANT_SCREENING_CURVE_TABLE_tropical_cyclone_wind_solar__model_v2_1__docs_r2.csv)
-- [value crosswalk](VALUE_CROSSWALK_tropical_cyclone_wind_solar__model_v2_1__docs_r2.csv)
-- [workbook](damage_curve_records_tropical_cyclone_wind_solar__model_v2_1__docs_r2.xlsx)
-- [derivation dossier](tropical_cyclone_wind_solar_curve_derivation_dossier__model_v2_1__docs_r2.md)
-- [validation report](VALIDATION_REPORT_tropical_cyclone_wind_solar__model_v2_1__docs_r2.md)
-- [release decision](RELEASE_DECISION_tropical_cyclone_wind_solar__model_v2_1__docs_r2.md)
+- [curve artifact](tropical_cyclone_wind_solar__model_v2_1__docs_r1__curve_artifact.json)
+- [capability declaration](tropical_cyclone_wind_solar__model_v2_1__docs_r1__capability.json)
+- [known-answer tests](known_answer_tests_tropical_cyclone_wind_solar__model_v2_1__docs_r1.json)
+- [full-plant curve table](FULL_PLANT_SCREENING_CURVE_TABLE_tropical_cyclone_wind_solar__model_v2_1__docs_r1.csv)
+- [value crosswalk](VALUE_CROSSWALK_tropical_cyclone_wind_solar__model_v2_1__docs_r1.csv)
+- [workbook](damage_curve_records_tropical_cyclone_wind_solar__model_v2_1__docs_r1.xlsx)
+- [derivation dossier](tropical_cyclone_wind_solar_curve_derivation_dossier__model_v2_1__docs_r1.md)
+- [validation report](VALIDATION_REPORT_tropical_cyclone_wind_solar__model_v2_1__docs_r1.md)
+- [release decision](RELEASE_DECISION_tropical_cyclone_wind_solar__model_v2_1__docs_r1.md)
 
 The immutable `proposed/` v2.1 artifact remains the rollback and numerical-parity reference. Consumers must
 pin this current artifact by model, docs revision, schema and SHA; the portable library remains v2.5.

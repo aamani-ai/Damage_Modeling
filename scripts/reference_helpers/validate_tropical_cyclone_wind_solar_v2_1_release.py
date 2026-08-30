@@ -14,13 +14,14 @@ ROOT = Path(__file__).resolve().parents[2]
 CELL = ROOT / "docs/cells/tropical_cyclone_wind_solar"
 PROPOSED = CELL / "proposed"
 CURRENT = CELL / "current"
-NAME = "tropical_cyclone_wind_solar__model_v2_1__docs_r1"
-PROPOSED_ARTIFACT = PROPOSED / f"{NAME}__curve_artifact.json"
-CURRENT_ARTIFACT = CURRENT / f"{NAME}__curve_artifact.json"
-PROPOSED_CAPABILITY = PROPOSED / f"{NAME}__capability.json"
-CURRENT_CAPABILITY = CURRENT / f"{NAME}__capability.json"
-PROPOSED_KATS = PROPOSED / f"known_answer_tests_{NAME}.json"
-CURRENT_KATS = CURRENT / f"known_answer_tests_{NAME}.json"
+PROPOSED_NAME = "tropical_cyclone_wind_solar__model_v2_1__docs_r1"
+CURRENT_NAME = "tropical_cyclone_wind_solar__model_v2_1__docs_r2"
+PROPOSED_ARTIFACT = PROPOSED / f"{PROPOSED_NAME}__curve_artifact.json"
+CURRENT_ARTIFACT = CURRENT / f"{CURRENT_NAME}__curve_artifact.json"
+PROPOSED_CAPABILITY = PROPOSED / f"{PROPOSED_NAME}__capability.json"
+CURRENT_CAPABILITY = CURRENT / f"{CURRENT_NAME}__capability.json"
+PROPOSED_KATS = PROPOSED / f"known_answer_tests_{PROPOSED_NAME}.json"
+CURRENT_KATS = CURRENT / f"known_answer_tests_{CURRENT_NAME}.json"
 INDEX = ROOT / "docs/contracts/machine_readable_artifact_index.json"
 SCHEMA_DIR = ROOT / "docs/contracts/schemas"
 
@@ -67,6 +68,12 @@ def _normalized_ids(value: Any) -> Any:
         return [_normalized_ids(item) for item in value]
     if value == CURRENT_CODE:
         return PROPOSED_CODE
+    if value == "CANONICAL_SCREENING_RELEASE":
+        return "NONCANONICAL_MODEL_V2_1"
+    if isinstance(value, str):
+        return value.replace("model_v2_1__docs_r2", "model_v2_1__docs_r1").replace(
+            "docs r2", "docs r1"
+        )
     return value
 
 
@@ -102,6 +109,7 @@ def validate_identity(
     require(proposed["canonical_runtime_artifact"] is False, "proposal became canonical")
     require(proposed["damage_code_id"] == PROPOSED_CODE, "proposal identity changed")
     require(current["schema_status"] == "released", "release schema status")
+    require(current["documentation_revision"] == "docs r2", "release docs revision")
     require(current["lifecycle_state"] == "released_v2_1", "release lifecycle")
     require(current["promotion_status"] == "released", "release promotion status")
     require(current["canonical_runtime_artifact"] is True, "release is not canonical")
@@ -161,6 +169,7 @@ def validate_promotion_diff(
         "/claim_parameter_register",
         "/claim_supersession_map",
         "/damage_code_id",
+        "/documentation_revision",
         "/failure_units/1/denominator",
         "/failure_units/2/denominator",
         "/failure_units/3/denominator",
@@ -191,7 +200,7 @@ def validate_promotion_diff(
 
 
 def validate_supporting_bytes() -> None:
-    names = [
+    proposed_names = [
         "SOURCE_REGISTER_tropical_cyclone_wind_solar__model_v2_1__docs_r1.csv",
         "CLAIM_PARAMETER_REGISTER_tropical_cyclone_wind_solar__model_v2_1__docs_r1.csv",
         "CLAIM_SUPERSESSION_MAP_tropical_cyclone_wind_solar__model_v2_0__docs_r1.csv",
@@ -201,8 +210,15 @@ def validate_supporting_bytes() -> None:
         "FULL_PLANT_SCREENING_CURVE_TABLE_tropical_cyclone_wind_solar__model_v2_1__docs_r1.csv",
         "damage_curve_records_tropical_cyclone_wind_solar__model_v2_1__docs_r1.xlsx",
     ]
-    for name in names:
-        require(sha(PROPOSED / name) == sha(CURRENT / name), f"supporting bytes changed: {name}")
+    for proposed_name in proposed_names:
+        current_name = proposed_name.replace("model_v2_1__docs_r1", "model_v2_1__docs_r2")
+        if proposed_name.endswith(".xlsx"):
+            same = sha(PROPOSED / proposed_name) == sha(CURRENT / current_name)
+        else:
+            same = (PROPOSED / proposed_name).read_text() == (
+                CURRENT / current_name
+            ).read_text().replace("model_v2_1__docs_r2", "model_v2_1__docs_r1")
+        require(same, f"supporting content changed beyond docs revision: {current_name}")
 
 
 def validate_dual_read(
@@ -260,7 +276,7 @@ def validate_index(artifact: Mapping[str, Any]) -> None:
     entry = entries[0]
     require(entry["damage_code_id"] == CURRENT_CODE, "index damage-code identity")
     require(entry["semantic_damage_model_version"] == "model v2.1", "index model version")
-    require(entry["documentation_revision"] == "docs r1", "index docs revision")
+    require(entry["documentation_revision"] == "docs r2", "index docs revision")
     require(entry["artifact_schema_version"] == "damage_curve_record_bundle.v3", "index schema")
     require(entry["capability_schema_version"] == "capability_declaration.v3", "index capability schema")
     require(ROOT / entry["path"] == CURRENT_ARTIFACT, "index does not point at current artifact")
@@ -289,7 +305,7 @@ def main() -> int:
     comparisons = validate_dual_read(proposed, current)
     runtime_kats, rejection_kats = validate_kats(current)
     validate_index(current)
-    print("PASS tropical_cyclone_wind_solar model v2.1/docs r1 canonical screening release")
+    print("PASS tropical_cyclone_wind_solar model v2.1/docs r2 canonical screening release")
     print(f"checks={Checks.count}")
     print(f"proposal_sha256={sha(PROPOSED_ARTIFACT)}")
     print(f"canonical_sha256={sha(CURRENT_ARTIFACT)}")

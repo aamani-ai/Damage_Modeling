@@ -20,7 +20,7 @@ does not become zero, tracker state must be attained and qualified, and no inter
 
 ## Use it
 
-Start with the [v2.1 request guide](../../../extra/guides/tropical_cyclone_wind_solar_v2_1_curve_request_guide.md).
+Start with the [v2.1 request guide](../../../../extra/guides/tropical_cyclone_wind_solar_v2_1_curve_request_guide.md).
 Machine truth is the
 [curve artifact](tropical_cyclone_wind_solar__model_v2_1__docs_r1__curve_artifact.json), accompanied by the
 [capability declaration](tropical_cyclone_wind_solar__model_v2_1__docs_r1__capability.json),
