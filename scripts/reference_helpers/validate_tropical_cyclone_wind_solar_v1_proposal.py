@@ -815,8 +815,10 @@ def validate_docs_r2_state() -> tuple[int, int]:
 def validate_index_and_raw_guard() -> None:
     index = load(INDEX)
     require(index["schema_version"] == "damage_curve_artifact_index.v2", "index schema changed")
-    require(not [item for item in index["artifacts"] if item["cell_id"] == "tropical_cyclone_wind_solar"], "proposal entered canonical index")
-    require(not (ROOT / "docs/cells/tropical_cyclone_wind_solar/current").exists(), "current folder created before promotion")
+    require(
+        not [item for item in index["artifacts"] if (ROOT / item["path"]).resolve() == ARTIFACT.resolve()],
+        "model-v1 proposal entered canonical index",
+    )
     forbidden_names = {
         "hurricane_sites_manual.csv",
         "hurricane_sites_aggregated.csv",

@@ -288,6 +288,7 @@ def _array_unit_results(
             artifact,
             unit_request,
             verified_artifact_sha256_hex=verified_artifact_sha256_hex,
+            allow_canonical_runtime_artifact=True,
         )
         cleaned = _clean_v20_emit(artifact, raw, verified_artifact_sha256_hex)
         results.extend(cleaned["failure_unit_results"])
@@ -425,6 +426,17 @@ def evaluate_damage_call(
     if artifact.get("semantic_damage_model_version") != "model v2.1":
         raise TropicalCycloneWindSolarV21EvaluationError(
             "MODEL_VERSION_MISMATCH", "v2.1 evaluator requires model v2.1"
+        )
+    canonical = artifact.get("canonical_runtime_artifact")
+    expected_damage_code_id = (
+        "TROPICAL_CYCLONE_WIND_SOLAR_SCREENING_COMPLETE_V2_1"
+        if canonical is True
+        else "TROPICAL_CYCLONE_WIND_SOLAR_SCREENING_COMPLETE_V2_1_PROPOSED"
+    )
+    if canonical not in {False, True} or artifact.get("damage_code_id") != expected_damage_code_id:
+        raise TropicalCycloneWindSolarV21EvaluationError(
+            "CURVE_PAYLOAD_INVALID",
+            "v2.1 evaluator requires the exact proposed or canonical artifact identity",
         )
     if request.get("pathway_id") != PATHWAY:
         code = "PATHWAY_ID_REQUIRED" if not request.get("pathway_id") else "PATHWAY_ID_UNKNOWN"
@@ -574,6 +586,7 @@ def evaluate_damage_call(
         artifact,
         stripped,
         verified_artifact_sha256_hex=verified_artifact_sha256_hex,
+        allow_canonical_runtime_artifact=True,
     )
     return _clean_v20_emit(artifact, raw, verified_artifact_sha256_hex)
 
