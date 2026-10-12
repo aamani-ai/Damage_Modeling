@@ -1,0 +1,115 @@
+{
+  "schema_version": "capability_declaration.v3",
+  "cell_id": "winter_storm_solar",
+  "canonical_runtime_artifact": false,
+  "pathway_capabilities": [
+    {
+      "pathway_id": "snow_gravity_load",
+      "failure_unit_scalar_dr": "conditional",
+      "scenario_loss_given_value_basis": "conditional",
+      "curve_intrinsic_spread": "nonprobabilistic_epistemic_envelope",
+      "populated_emit_modes": [
+        "scalar_mean_plus_bounds",
+        "state_ensemble"
+      ],
+      "conditions": [
+        "pathway_id snow_gravity_load and a supported ground-mount architecture supplied",
+        "snowpack water equivalent (not depth) supplied with an explicit ice_component_basis, or a direct demand ratio",
+        "racking design basis declared: site_code_assumed with the cell design ground snow load, or project_rated with the rated array snow load",
+        "module and structure values and exposure supplied for monetary loss",
+        "module-structure cascade and support allocation applied once"
+      ],
+      "limitation_flags": [
+        "SCREENING_ENGINEERING_PROXY",
+        "NONPROBABILISTIC_EPISTEMIC_ENVELOPE",
+        "CAPACITY_FROM_SEVEN_JAPANESE_FIXED_RACK_TESTS",
+        "JAPANESE_TO_ASCE_DESIGN_LOAD_MAPPING_UNRESOLVED",
+        "TRACKER_TRANSFER_FROM_FIXED_RACK_TESTS",
+        "SNOW_STOW_AND_SNOW_REMOVAL_NO_CREDIT",
+        "MODULE_CAPACITY_T3_LOWER_EDGE_KNOCKDOWN_T4",
+        "MODULE_SALVAGE_T4_ASSUMPTION",
+        "NO_US_FIELD_OR_CLAIMS_CALIBRATION",
+        "FULL_PLANT_PHYSICAL_LOSS_INCOMPLETE"
+      ],
+      "withheld_failure_units": [
+        {
+          "failure_unit_id": "WSS1_FOUNDATION",
+          "reason_codes": [
+            "NO_SNOW_LOAD_FOUNDATION_RESPONSE_EVIDENCE",
+            "FROST_HEAVE_IS_SEPARATE_CHRONIC_PATHWAY"
+          ]
+        },
+        {
+          "failure_unit_id": "WSS1_POWER_CONVERSION_AND_ELECTRICAL",
+          "reason_codes": [
+            "NO_SNOW_LOAD_RESPONSE_EVIDENCE",
+            "ICE_ON_YARD_EQUIPMENT_IS_SEPARATE_PATHWAY"
+          ]
+        },
+        {
+          "failure_unit_id": "WSS1_SCADA_COMMUNICATIONS",
+          "reason_codes": [
+            "NO_SNOW_LOAD_RESPONSE_EVIDENCE"
+          ]
+        },
+        {
+          "failure_unit_id": "WSS1_CIVIL_INFRA",
+          "reason_codes": [
+            "MIXED_ASSET_BUCKET_REQUIRES_SPLIT",
+            "BUILDING_ROOF_SNOW_IS_SEPARATE_ASSET_CLASS"
+          ]
+        },
+        {
+          "failure_unit_id": "WSS1_REPLACEMENT_SUPPORT",
+          "reason_codes": [
+            "ALLOCATION_ONLY_NO_INTRINSIC_DR",
+            "ALLOCATE_ONCE_AFTER_DIRECT_DAMAGE"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumer_annual_metrics": {
+    "computation_owner": "downstream_consumer",
+    "status_before_promotion": "withheld_noncanonical_proposal",
+    "status_after_promotion": "consumer_computable_from_validated_frequency_intensity_coupling_value_and_cap_model",
+    "prerequisites": [
+      "canonical promotion and exact model/docs/schema/SHA pin",
+      "winter event catalog with peak snowpack SWE, ice thickness and parent event_family_id",
+      "per-cell or per-asset design snow load",
+      "architecture-aware exposure and value basis",
+      "consumer cap-binding validation"
+    ],
+    "limitation_flags": [
+      "FREQUENCY_DRIVEN_TAIL_IS_CONSUMER_OWNED",
+      "ENGINEERING_SCENARIOS_ARE_NOT_A_PROBABILITY_DISTRIBUTION",
+      "FULL_PLANT_LOSS_REQUIRES_SEPARATELY_QUALIFIED_FAILURE_UNITS"
+    ]
+  },
+  "cap_binding": {
+    "policy": "consumer_enforced_fail_closed",
+    "enforcement_owner": "downstream_consumer",
+    "checks_required": [
+      "exact model/docs/schema/SHA pin",
+      "pathway and architecture match",
+      "SWE and ice basis provenance",
+      "declared racking design basis",
+      "explicit values and exposure",
+      "module-structure cascade applied once",
+      "support costs not embedded and re-added",
+      "withheld units remain null"
+    ],
+    "action_if_fail": "withhold the affected DR, loss, or annual metric; do not substitute another winter or wind pathway"
+  },
+  "promotion_gate": {
+    "status": "blocked",
+    "required_before_canonical_use": [
+      "independent engineering review of axis, bridge, scenarios and cascade",
+      "ASCE 7-22 Ch.7 and the ASCE 2025 ground-mount snow guidance read and reconciled",
+      "tracker-specific snow capacity evidence or an explicit tracker transfer review",
+      "US field, forensic or claims evidence sufficient to review the T4 mapping",
+      "Hazard dual-read and rejection-path tests",
+      "explicit maintainer promotion decision and atomic registry/index/changelog update"
+    ]
+  }
+}

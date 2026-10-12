@@ -1,0 +1,322 @@
+{
+  "schema_version": "damage_curve_record_bundle.v1",
+  "cell_id": "winter_storm_wind",
+  "damage_code_id": "WINTER_STORM_WIND_PROPOSED_V0_1",
+  "semantic_damage_model_version": "model v0.1",
+  "documentation_revision": "docs r1",
+  "package_release": "unreleased",
+  "package_baseline": "library v2.5",
+  "lifecycle_state": "scaffold",
+  "promotion_status": "proposed",
+  "review_status": "pressure_tested",
+  "documentation_status": "working_revision",
+  "package_inclusion_status": "not_included",
+  "canonical_runtime_artifact": false,
+  "schema_envelope_status": {
+    "selected_schema": "damage_curve_record_bundle.v1",
+    "use": "noncanonical_zero_curve_scaffold_only",
+    "reason": "Repository-current v2 and v3 schemas require output-bearing records; this zero-curve scaffold is not publishable.",
+    "runtime_publication_allowed": false,
+    "promotion_rule": "A runtime bundle must use the repository-current schema and contain reviewed output-bearing records."
+  },
+  "ordinate_status": "withheld",
+  "withheld_reason_codes": [
+    "NO_RUNTIME_CURVE"
+  ],
+  "source_dossier": "docs/cells/winter_storm_wind/proposed/winter_storm_wind_curve_derivation_dossier__model_v0_1__docs_r1.md",
+  "source_workbook": "docs/cells/winter_storm_wind/proposed/damage_curve_records_winter_storm_wind__model_v0_1__docs_r1.xlsx",
+  "source_register": "docs/cells/winter_storm_wind/proposed/SOURCE_REGISTER_winter_storm_wind__model_v0_1__docs_r1.csv",
+  "claim_parameter_register": "docs/cells/winter_storm_wind/proposed/CLAIM_PARAMETER_REGISTER_winter_storm_wind__model_v0_1__docs_r1.csv",
+  "bounded_evidence_search_log": "docs/cells/winter_storm_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_winter_storm_wind__model_v0_1__docs_r1.md",
+  "parameter_tier_table_ref": "docs/cells/winter_storm_wind/proposed/PARAMETER_TIER_TABLE_winter_storm_wind__model_v0_1__docs_r1.csv",
+  "value_crosswalk_ref": "docs/cells/winter_storm_wind/proposed/VALUE_CROSSWALK_winter_storm_wind__model_v0_1__docs_r1.csv",
+  "legacy_evidence_ingestion_ref": "docs/cells/winter_storm_wind/proposed/LEGACY_EVIDENCE_INGESTION_winter_storm_wind__model_v0_1__docs_r1.md",
+  "pressure_test_ref": "docs/cells/winter_storm_wind/proposed/PRESSURE_TEST_winter_storm_wind__model_v0_1__docs_r1.md",
+  "known_answer_tests": "docs/cells/winter_storm_wind/proposed/known_answer_tests_winter_storm_wind__model_v0_1__docs_r1.json",
+  "pathway": {
+    "pathway_id": "ice_accretion",
+    "physical_mechanism": "atmospheric glaze or rime accretion load on turbine and BOP members",
+    "exact_match_required": true,
+    "fallback_allowed": false,
+    "event_family_id_required": true,
+    "deferred_neighboring_pathways": [
+      "ice_with_concurrent_wind",
+      "ice_shedding_impact",
+      "snow_gravity_load_on_buildings",
+      "extreme_cold_physical_effects"
+    ],
+    "compound_event_rule": "Preserve one parent winter event_family_id; reconcile any shared physical state and value once downstream."
+  },
+  "asset_archetype": {
+    "asset": "land_based_multi_megawatt_horizontal_axis_wind_facility",
+    "reference_configuration": "generic_modern_onshore_reference_value_archetype",
+    "target_applicability_status": "not_frozen",
+    "scope_included": [
+      "direct_occurrence_ice_accretion_physical_destruction"
+    ],
+    "scope_excluded": [
+      "icing_downtime_and_curtailment",
+      "freeze_off_and_cold_shutdown",
+      "ice_throw_or_shedding",
+      "ice_plus_concurrent_wind",
+      "snow_on_buildings",
+      "frost_heave",
+      "business_interruption",
+      "frequency_and_annual_or_tail_metrics"
+    ]
+  },
+  "value_basis": {
+    "status": "reference_archetype_only_not_enabled_for_loss",
+    "source_workbook": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "source_register_id": "WSW-S021",
+    "crosswalk": "docs/cells/winter_storm_wind/proposed/VALUE_CROSSWALK_winter_storm_wind__model_v0_1__docs_r1.csv",
+    "unit": "2023_USD_per_kW",
+    "turbine_equipment_total": 1090,
+    "other_direct_withheld": 239,
+    "support_once": 294,
+    "physical_reference": 1623,
+    "excluded_soft_sunk_nonphysical": 345,
+    "installed_reference": 1968,
+    "reconciliation": "1090 + 239 + 294 = 1623; 1623 + 345 = 1968",
+    "site_override_required_for_loss": true,
+    "values_embedded_as_curve_denominators": false
+  },
+  "hazard_axis": {
+    "id": "WITHHELD_PENDING_QUALIFIED_ICE_RESPONSE_EVIDENCE",
+    "status": "declared_not_active",
+    "runtime_damage_mapping_status": "withheld_no_runtime_curve",
+    "source_native_objects": [
+      {
+        "id": "EQUIVALENT_RADIAL_GLAZE_ICE",
+        "input_field": "ice_radial_thickness_mm",
+        "unit": "mm",
+        "definition": "equivalent uniform radial glaze ice on a 25.4 mm cylinder at 10 m (ASCE 7 Ch.10 / Simple model)",
+        "role": "future_primary_axis",
+        "runtime_curve_compatible": false,
+        "source_id": "WSW-S020"
+      },
+      {
+        "id": "CONCURRENT_GUST",
+        "input_field": "ice_concurrent_gust_3s_10m_mps",
+        "unit": "m/s",
+        "role": "required_capture_for_deferred_ice_plus_wind",
+        "runtime_curve_compatible": false,
+        "source_id": "WSW-S011"
+      },
+      {
+        "id": "DESIGN_ICE",
+        "input_field": "design_ice_thickness_mm",
+        "unit": "mm",
+        "role": "future_overhead_line_denominator",
+        "runtime_curve_compatible": false,
+        "source_id": "WSW-S011"
+      }
+    ]
+  },
+  "proposed_future_y_axis": {
+    "id": "conditional_direct_repair_or_replacement_cost_ratio",
+    "status": "withheld",
+    "definition": "Expected direct repair-or-replacement cost divided by pre-event replacement value of the same failure unit given delivered ice state.",
+    "denominator_rule": "Same failure unit in numerator and denominator; no whole-farm or installed-TIV substitution.",
+    "support_cost_rule": "Allocate fieldwork and transport once after qualified disposition.",
+    "excluded_from_ordinate": [
+      "business_interruption",
+      "icing_downtime",
+      "derating_or_revenue",
+      "frequency",
+      "insurance_terms"
+    ]
+  },
+  "failure_units": [
+    {
+      "id": "WT_BLADE_ASSEMBLY",
+      "subsystem": "ROTOR_ASSEMBLY; PITCH_SYSTEM",
+      "component": "BLADE; PITCH_DRIVE",
+      "pathway": "ice_accretion",
+      "treatment": "candidate_primary_no_curve",
+      "ordinate_status": "withheld",
+      "mechanism_note": "ice mass, imbalance and extreme iced-blade loads",
+      "value_lineage": "Wind_Map rows 2-3"
+    },
+    {
+      "id": "WT_NACELLE_AND_HUB",
+      "subsystem": "NACELLE; ROTOR_ASSEMBLY; POWER_ELECTRONICS",
+      "component": "HUB; NACELLE_STRUCTURE; GEARBOX; GENERATOR_INTERNAL; YAW_SYSTEM; POWER_CONVERTER",
+      "pathway": "ice_accretion",
+      "treatment": "withheld_candidate",
+      "ordinate_status": "withheld",
+      "mechanism_note": "ice load transfer; cold effects belong to a separate pathway",
+      "value_lineage": "Wind_Map rows 4-8"
+    },
+    {
+      "id": "WT_TOWER_AND_EXTERNAL_FIXTURES",
+      "subsystem": "TOWER",
+      "component": "TOWER_SECTION; ladders; cable trays",
+      "pathway": "ice_accretion",
+      "treatment": "withheld_candidate",
+      "ordinate_status": "withheld",
+      "mechanism_note": "iced projected area under concurrent wind (deferred pathway)",
+      "value_lineage": "Wind_Map row 9"
+    },
+    {
+      "id": "WT_PAD_ELECTRICAL",
+      "subsystem": "ELECTRICAL_COLLECTION",
+      "component": "pad transformers and switchgear",
+      "pathway": "ice_accretion",
+      "treatment": "withheld_candidate",
+      "ordinate_status": "withheld",
+      "mechanism_note": "ice on enclosures and bushings",
+      "value_lineage": "Wind_Map row 12 (split required)"
+    },
+    {
+      "id": "WT_COLLECTION_NETWORK",
+      "subsystem": "ELECTRICAL_COLLECTION",
+      "component": "CABLE_AC (overhead or buried)",
+      "pathway": "ice_accretion",
+      "treatment": "withheld_candidate",
+      "ordinate_status": "withheld",
+      "mechanism_note": "ice and ice + wind on overhead spans; buried cables not exposed",
+      "value_lineage": "Wind_Map row 12 (split required)"
+    },
+    {
+      "id": "WT_GSU_SUBSTATION",
+      "subsystem": "SUBSTATION",
+      "component": "TRANSFORMER_MAIN; SWITCHGEAR; bus",
+      "pathway": "ice_accretion",
+      "treatment": "withheld_candidate",
+      "ordinate_status": "withheld",
+      "mechanism_note": "ice bridging and bus loads",
+      "value_lineage": "Wind_Map row 12 (split required)"
+    },
+    {
+      "id": "WT_CONTROL_AND_MET_STATION",
+      "subsystem": "SCADA",
+      "component": "met masts; control building",
+      "pathway": "ice_accretion",
+      "treatment": "withheld_candidate",
+      "ordinate_status": "withheld",
+      "mechanism_note": "ice + wind on guyed lattice masts",
+      "value_lineage": "not in value workbook"
+    },
+    {
+      "id": "WT_FOUNDATION",
+      "subsystem": "FOUNDATION",
+      "component": "FOUNDATION_BASE",
+      "pathway": "ice_accretion",
+      "treatment": "geometry_screened_no_numeric_zero",
+      "ordinate_status": "withheld",
+      "mechanism_note": "no direct ice-load pathway; frost heave separate",
+      "value_lineage": "Wind_Map row 10"
+    },
+    {
+      "id": "WT_CIVIL_INFRA",
+      "subsystem": "CIVIL_INFRA",
+      "component": "SITE_ACCESS_STAGING_FACILITIES",
+      "pathway": "ice_accretion",
+      "treatment": "split_required",
+      "ordinate_status": "withheld",
+      "mechanism_note": "building roof snow is a separate asset class",
+      "value_lineage": "Wind_Map row 11"
+    },
+    {
+      "id": "SUPPORT_FIELDWORK",
+      "subsystem": "REPLACEMENT_FIELDWORK",
+      "component": "ASSEMBLY_AND_INSTALLATION",
+      "pathway": "ice_accretion",
+      "treatment": "allocation_only",
+      "ordinate_status": "withheld",
+      "mechanism_note": "allocate once",
+      "value_lineage": "Wind_Map row 13"
+    },
+    {
+      "id": "SUPPORT_TRANSPORT_LOGISTICS",
+      "subsystem": "REPLACEMENT_LOGISTICS",
+      "component": "WIND_TURBINE_TRANSPORT",
+      "pathway": "ice_accretion",
+      "treatment": "allocation_only",
+      "ordinate_status": "withheld",
+      "mechanism_note": "allocate once",
+      "value_lineage": "Wind_Map row 14"
+    }
+  ],
+  "candidate_evidence": {
+    "status": "audit_only_not_runtime_shaped",
+    "numeric_values_embedded": false,
+    "runtime_enabled": false,
+    "candidate_families": [
+      "overhead_line_field_withstand_1998",
+      "distribution_pole_ice_wind_fragility_2024",
+      "lattice_tower_ice_fragility"
+    ],
+    "legacy_rejection": "docs/cells/winter_storm_wind/proposed/LEGACY_EVIDENCE_INGESTION_winter_storm_wind__model_v0_1__docs_r1.md"
+  },
+  "curve_records": [],
+  "parameter_tier_table": [],
+  "derivation_rationale": {
+    "decision": "NO_RUNTIME_CURVE",
+    "reason": "No located evidence links ice thickness to physical repair cost for turbine or BOP units; the documented February 2021 icing produced outages without reported damage; the one damage case was falling ice; the overhead-line anchor lacks topology and a split value row.",
+    "update_trigger": "Field, claims or work-order evidence at known ice thickness; Li et al. 2024 coefficients with site overhead share and split collection value."
+  },
+  "emit_contract": {
+    "runtime_status": "withheld",
+    "valid_input_behavior": "Return no numeric DR or loss and stable NO_RUNTIME_CURVE reason.",
+    "unknown_or_neighboring_pathway_behavior": "Reject or withhold; never default to ice_accretion.",
+    "annual_tail_boundary": "Frequency, EAL, PML, VaR and TVaR remain downstream and withheld."
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v1",
+    "cell_id": "winter_storm_wind",
+    "spread_carried": false,
+    "emit_modes_populated_by_cell": [],
+    "metrics_supportable": {
+      "failure_unit_scalar_dr": "withheld",
+      "scenario_loss_given_value_basis": "withheld",
+      "scalar_eal": "withheld",
+      "pml": "withheld",
+      "var": "withheld",
+      "tvar": "withheld"
+    },
+    "withheld_reason_by_metric": {
+      "failure_unit_scalar_dr": [
+        "NO_RUNTIME_CURVE"
+      ],
+      "scenario_loss_given_value_basis": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_VALUE_BASIS",
+        "MISSING_EXPOSURE_OR_COUPLING"
+      ],
+      "scalar_eal": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_VALUE_BASIS",
+        "MISSING_EXPOSURE_OR_COUPLING",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "pml": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "var": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ],
+      "tvar": [
+        "NO_RUNTIME_CURVE",
+        "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+      ]
+    },
+    "withheld_reason_codes": [
+      "NO_RUNTIME_CURVE",
+      "MISSING_VALUE_BASIS",
+      "MISSING_EXPOSURE_OR_COUPLING",
+      "MISSING_HAZARD_FREQUENCY_OR_INTENSITY_DISTRIBUTION"
+    ],
+    "cap_binding": {
+      "policy": "fail_closed",
+      "preflight_status": "not_executed_no_distribution",
+      "required_before_scalar_eal": true,
+      "tolerance_pct": null,
+      "tolerance_status": "not_applicable_no_distribution",
+      "action_if_fail": "withhold_scalar_eal_and_require_tail_capable_emit"
+    }
+  }
+}

@@ -33,5 +33,9 @@ These files are reference implementations for downstream notebooks/services. The
 | `validate_tropical_cyclone_wind_solar_v2_1_release.py` | Canonical identity, schema, exact promotion-diff, supporting-byte, proposal/current dual-read, KAT and artifact-index validator for the model-v2.1 release. |
 | `validate_hail_wind_v0_1_scaffold.py` | Fail-closed source/contact/value/workbook/link validator for hail × wind model v0.1. |
 | `validate_wildfire_wind_v0_1_scaffold.py` | Fail-closed JSON/register/value/workbook/link validator for the noncanonical wildfire x wind model-v0.1 scaffold. |
+| `build_winter_storm_v0_1_packages.py` · `winter_storm_v0_1_registers.py` | Deterministic builder (and register data) for the proposed winter_storm_solar screening proxy and winter_storm_wind scaffold, model v0.1. |
+| `winter_storm_solar_curve_eval.py` | Reference evaluator for winter_storm_solar snow_gravity_load: SWE/ice bridge, design-ratio axis, scenario DRs, module cascade, loss view. |
+| `validate_winter_storm_solar_v0_1_proposal.py` | Schema/semantic/KAT/register/value/workbook validator for the noncanonical winter_storm_solar model v0.1 proposal. |
+| `validate_winter_storm_wind_v0_1_scaffold.py` | Fail-closed validator for the noncanonical winter_storm_wind model v0.1 scaffold. |
 
 These helpers are not a full production package. Their purpose is to make the intended implementation seam unambiguous.
