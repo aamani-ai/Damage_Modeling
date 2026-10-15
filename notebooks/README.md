@@ -40,6 +40,8 @@ when a cell later grows from one failure-unit curve to multiple failure-unit rec
 | `hail_solar` | [`hail/solar/01_runtime_curve_walkthrough.ipynb`](hail/solar/01_runtime_curve_walkthrough.ipynb) | Canonical artifact walkthrough, plots, evidence/provenance fields, and M3 conditional-loss example. |
 | `flood_solar` | [`flood/solar/00_curve_curation_walkthrough.ipynb`](flood/solar/00_curve_curation_walkthrough.ipynb) | Step-by-step curation walkthrough for multi-failure-unit flood modeling, evidence roles, local-depth axis, piecewise/state curves, value linkage, and open seams. |
 | `flood_solar` | [`flood/solar/01_runtime_curve_walkthrough.ipynb`](flood/solar/01_runtime_curve_walkthrough.ipynb) | Canonical artifact walkthrough for multi-failure-unit flood curves, local-depth transforms, exposure/value scaling, and conditional loss assembly. |
+| `winter_storm_solar` | [`winter_storm/solar/00_curve_curation_walkthrough.ipynb`](winter_storm/solar/00_curve_curation_walkthrough.ipynb) | Proposed model v0.1 curation walkthrough: evidence map, SWE/design-ratio axis, lognormal ordered states fitted to seven rack failure tests, three resistance scenarios, worked value, tiers, capability. |
+| `winter_storm_solar` | [`winter_storm/solar/01_runtime_curve_walkthrough.ipynb`](winter_storm/solar/01_runtime_curve_walkthrough.ipynb) | Proposed artifact runtime walkthrough: payload modes, scenario bounds, module cascade, rejections, and conditional loss assembly. |
 
 ## Rules
 
