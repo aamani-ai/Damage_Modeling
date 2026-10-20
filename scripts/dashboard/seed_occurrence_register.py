@@ -8,8 +8,8 @@ view can show the twin letter beside the curve mark. Re-running never overwrites
 longer `not_searched`, and never touches the search log once it exists.
 
     .venv/bin/python scripts/dashboard/seed_occurrence_register.py --asset bess \
-        --twin "/Users/divy/code/personal/Digital Twin" \
-        --crosswalk /Users/divy/code/work/infrasure_git_codes/Hazard_modeling/docs/plans/_cross_cutting/bess_conus/twin_crosswalk.csv
+        --twin "<your Digital Twin checkout>" \
+        --crosswalk "<your Hazard_modeling checkout>/docs/plans/_cross_cutting/bess_conus/twin_crosswalk.csv"
 
 Standard library only. The twin and the crosswalk are read, never modified.
 """

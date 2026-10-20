@@ -18,6 +18,7 @@ import glob
 import hashlib
 import html
 import json
+import os
 import re
 import sys
 import urllib.request
@@ -25,7 +26,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[5]
 BASE = "http://localhost:3211"
-HAZARD_TWIN = Path("/Users/divy/code/work/infrasure_git_codes/Hazard_modeling/docs/plans/_cross_cutting/bess_conus/twin_crosswalk.csv")
+# Hazard_modeling is read, never imported: $HAZARD_MODELING, else a sibling of this checkout; without it the
+# committed copy in dashboard/data stands in (its SHA is checked against the pin by the build).
+HAZARD_TWIN = Path(os.environ.get("HAZARD_MODELING") or ROOT.parent / "Hazard_modeling") / "docs/plans/_cross_cutting/bess_conus/twin_crosswalk.csv"
 
 
 def load(rel: str):
