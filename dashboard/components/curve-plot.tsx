@@ -100,12 +100,20 @@ function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette,
     ? Array.from(new Set(curves.flatMap((c) => c.series.flatMap((s) => s.points.map(([x]) => x))))).sort((a, b) => a - b).map(String)
     : [];
   const xOf = (x: number) => (categorical ? String(x) : x);
-  // a dodged class axis: the visible records sit side by side inside each class, in drawing order (display only)
-  const dodged = categorical && axis.dodge ? curves.flatMap((c) => c.series.filter((s) => !s.continuation && !hidden.has(s.label)).map((s) => s.label)) : [];
+  // a dodged class axis: the visible records sit side by side inside each class, in drawing order, with a gap
+  // between dodge groups (display only; the value is the record's)
+  const dodgedSeries = categorical && axis.dodge ? curves.flatMap((c) => c.series.filter((s) => !s.continuation && !hidden.has(s.label))) : [];
+  const dodged = dodgedSeries.map((s) => s.label);
+  const slotOf = new Map<string, number>();
+  let span = 0;
+  dodgedSeries.forEach((s, i) => {
+    if (i > 0) span += s.dodge_group !== dodgedSeries[i - 1].dodge_group ? 1.8 : 1;
+    slotOf.set(s.label, span);
+  });
   const band = width > 0 ? (width - GRID.left - GRID.right) / Math.max(1, categories.length) : 84;
-  const step = dodged.length > 1 ? Math.min(16, (band * 0.84) / dodged.length) : 0;
+  const step = dodged.length > 1 ? Math.min(16, (band * 0.88) / (span + 1)) : 0;
   const markSize = dodged.length > 1 ? Math.max(5, Math.min(9, step - 2.5)) : 10;
-  const offsetOf = (label: string) => (dodged.includes(label) ? (dodged.indexOf(label) - (dodged.length - 1) / 2) * step : 0);
+  const offsetOf = (label: string) => (slotOf.has(label) ? (slotOf.get(label)! - span / 2) * step : 0);
   // end labels: every line when a plot shows four or fewer; past that, only where the build wrote one ("" = none)
   const lines = curves.flatMap((c) => c.series.filter((s) => !s.continuation && s.kind !== "categorical" && !hidden.has(s.label)));
   const labelEvery = lines.length <= 4;

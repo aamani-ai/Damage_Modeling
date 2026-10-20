@@ -1019,7 +1019,7 @@ def sample_wildfire_bess(e: Entry, kat: dict[str, Any]) -> tuple[list[dict[str, 
             style = {"ink": True, "symbol_slot": WF_BESS_SHAPE["electronics_ordinal"][1], "variant": "every response hypothesis × shape"}
         label = f"{row} · {col}"
         labels[rec["curve_id"]] = label
-        curves.append(_curve(e, rec, axis, [_series(label, pts, "categorical", legend_row=row, legend_col=col, **style)], form_label=EXACT_STATE_FORM,
+        curves.append(_curve(e, rec, axis, [_series(label, pts, "categorical", legend_row=row, legend_col=col, dodge_group=unit, **style)], form_label=EXACT_STATE_FORM,
                              evaluator=_evaluator(name, "evaluate_curve_record", f"exact lookup at the integer states {lo}–{hi}; any other state is rejected (EXACT_FSIM_CLASS_STATE_REQUIRED), so nothing is drawn between states"),
                              knots=[[float(x), float(y)] for x, y in rec["parameters"]["points"]], domain=[lo, hi]))
     # between states the evaluator refuses (it never interpolates): confirm it on every record

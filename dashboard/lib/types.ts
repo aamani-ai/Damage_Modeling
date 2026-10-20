@@ -128,8 +128,9 @@ export interface Cell {
 // `note`: one sentence the build writes about how this axis is drawn, shown once under its plot.
 export interface Axis { id: string; label: string; unit: string | null; input_field?: string | null; kind: "continuous" | "categorical"; valid_range?: (number | null)[] | null; classes?: Record<string, string>; bridge?: Record<string, unknown>; dodge?: boolean; note?: string }
 // The build's style hints, where it writes them: colour = a palette slot or ink, line style and mark = slots; else a series takes its
-// order. `end_label`: the words at the line's right end ("" = none, the legend names it); `legend_row`/`legend_col`: its cell in a grid legend.
-export interface Series { label: string; kind: "line" | "step" | "categorical"; points: [number, number][]; variant?: string; scenario?: string; beyond_last_knot_from?: number | null; continuation?: boolean; color_slot?: number; ink?: boolean; dash_slot?: number; symbol_slot?: number; end_label?: string; legend_row?: string; legend_col?: string }
+// order. `end_label`: the words at the line's right end ("" = none, the legend names it); `legend_row`/`legend_col`: its cell in a grid legend;
+// `dodge_group`: on a dodged class axis, a gap separates one group's marks from the next (e.g. the enclosure records from the PCS).
+export interface Series { label: string; kind: "line" | "step" | "categorical"; points: [number, number][]; variant?: string; scenario?: string; beyond_last_knot_from?: number | null; continuation?: boolean; color_slot?: number; ink?: boolean; dash_slot?: number; symbol_slot?: number; end_label?: string; legend_row?: string; legend_col?: string; dodge_group?: string }
 // `n`: cases that land on this same point (one ○ for them all); `series`: the label of the series it sits on.
 export interface KnownAnswer { x: number; y: number; test: string; cost_usd?: number; n?: number; series?: string }
 
