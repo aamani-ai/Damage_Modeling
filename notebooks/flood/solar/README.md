@@ -11,7 +11,7 @@ This folder contains runnable companions for the `flood_solar` damage-curve cell
 
 ## Execution state
 
-> **Broken as of 2026-08-26 — repair is Phase 0 (WP-0b) of the
+> **Broken as of 2026-10-20 (re-measured; unchanged since 2026-08-26) — repair is Phase 0 (WP-0b) of the
 > [cell notebook coverage plan](../../../docs/plans/cell_notebook_coverage/README.md).** Both notebooks stop
 > in their first code cell: the loader looks for the removed `docs/damage_curves/…` tree and pins
 > `flood_solar__model_v1_0__docs_r3`, which now exists only in the gitignored `docs/source_drops/extracted/`
