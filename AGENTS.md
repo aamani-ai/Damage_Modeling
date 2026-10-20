@@ -99,9 +99,10 @@ are not curves).
 | `docs/extra/tasks_history/` | Per-session handoffs; read the newest `handoff.md` first. [Index](docs/extra/tasks_history/README.md). |
 | `docs/extra/learning_logs/` | Team-shared, non-canonical atomic lessons and complete newcomer/re-entry project learning packages. [Index](docs/extra/learning_logs/README.md). |
 | `scripts/reference_helpers/` | Reference helper scripts only; not a stable `src/` API. |
+| `src/damage_modeling/` | The durable publisher package (`publishing/cli.py`, `publishing/publisher.py`; standard 23). Not a curve API; the validators guard that no cell code enters it. |
 | `data/` | Curve-record artifacts + manifests (large/binary gitignored). [README](data/README.md). |
 | `notebooks/` | Companion notebooks per cell — `<hazard>/<asset>/00_curve_curation_walkthrough` + `01_runtime_curve_walkthrough`, reading the pinned artifact through the artifact index, never authoring one. **2 of 10 cells covered; both existing pairs currently fail (their loader targets the removed `docs/damage_curves/` tree).** Repair + the other eight cells: [`docs/plans/cell_notebook_coverage/`](docs/plans/cell_notebook_coverage/README.md). [README](notebooks/README.md). |
-| `.github/workflows/` | CI (starter). |
+| `.github/workflows/` | **Does not exist yet.** There is no CI; run the validators by hand (`.venv/bin/python scripts/reference_helpers/validate_*.py`). Observed in [`docs/extra/discussion/2026-10-20_repo_observations.md`](docs/extra/discussion/2026-10-20_repo_observations.md). |
 
 ### Cross-project symlinks (gitignored, local-only — machine-specific absolute paths, never commit)
 
@@ -139,6 +140,11 @@ is linked from the [`Resiliency handoff`](docs/contracts/resiliency_handoff/READ
   same commit as the doc, and new folders start from the tier's `_templates/`
   ([plans](docs/plans/README.md) · [discussion](docs/extra/discussion/README.md)). Agent-drafted work is
   stamped `owner-directed (<name>) · agent-drafted`; an owner ruling is never inferred.
+- **Internal instruments (dashboards) follow the shared look-and-usability principle** at
+  `Hazard_modeling/docs/principles/analytical_instrument_look_and_usability.md` (promoted 2026-10-20 from
+  [`docs/extra/discussion/damage_curve_dashboard/06_look_and_usability.md`](docs/extra/discussion/damage_curve_dashboard/06_look_and_usability.md));
+  the curve-specific rules and the look review live in that node and in
+  [`docs/plans/damage_curve_dashboard/`](docs/plans/damage_curve_dashboard/README.md).
 - For any new ZIP/source drop, follow
   [`docs/extra/guides/source_drop_ingestion_guide.md`](docs/extra/guides/source_drop_ingestion_guide.md):
   preserve raw first, use `extracted/` only as a local mirror/staging area, inventory before moving, and

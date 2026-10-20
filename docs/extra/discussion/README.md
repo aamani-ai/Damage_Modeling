@@ -1,7 +1,7 @@
 <!--
 author: Divi-patel (2026-06-21) · revision 2026-08-26 owner-directed (Divy) · agent-drafted
 created: 2026-06-21
-updated: 2026-10-16
+updated: 2026-10-20
 status: active
 scope: reasoning-log index — the ledger over every discussion node/package, the discussion → plan progression, the stamp, the closed status vocabulary and the node template.
 -->
@@ -23,6 +23,8 @@ date the document names).*
 
 | Date | Topic | Created by | Related to | Status | Purpose |
 |---|---|---|---|---|---|
+| **2026-10-20** | [`2026-10-20_repo_observations.md`](2026-10-20_repo_observations.md) | owner-directed (Divy) · agent-drafted | Divy | draft | Twelve verified observations about the repository noticed while preparing the dashboard — uneven derivation chain across three cell generations, no CI, stale `AGENTS.md` claims, agent-only catalogue reads, "partial" ambiguity, evaluators only in Hazard, hazard-name drift, stale notebook matrix, a July registry seed, link rot, the winter-storm branch, two dependency files — each with what · why · where · fix; gates RO1–RO3. |
+| **2026-10-19** · it. 3 2026-10-20 | [`damage_curve_dashboard/`](damage_curve_dashboard/README.md) | owner-directed (Divy) · agent-drafted | Divy / Jung A | settled | What the damage-curve dashboard should be before any build: brief in Divy's words, reasons, reference audit (seen in a browser on 10-20), wireframes and trade-offs, "does it happen?" occurrence evidence, the look-and-usability rules with every inherited principle's path, the derivation chain (ten stations, measured against every cell) and a build brief (P1–P25). Gates G1–G12 ruled 2026-10-20 ("I agree with your recommendation"); plan at `docs/plans/damage_curve_dashboard/`; principle promoted to Hazard. |
 | **2026-10-18** | [`bess_damage/`](bess_damage/README.md) | owner-directed (Divy) · agent-researched | Divy / Hazard | active | Bounded Flood source/claim and value review, five source curves / 95 checks, explicit BESS transfer limits and next candidate. |
 | **2026-10-16** | [`substation_damage/`](substation_damage/README.md) | owner-directed (Divy) · agent-researched | Divy / Hazard | active | Pinned Flood assembly reuse review, 93 numerical cases, 31-row value accounting, open source/profile/denominator qualification and skill 0.8. |
 | **2026-10-15** | [`real_estate_conus/`](real_estate_conus/README.md) | owner-directed (Divy) · agent-drafted | — | active | Warehouse/office/house scope, skill revision 0.7, pinned Junga Flood proposal intake, office source check and consumer gaps; linked warehouse-first Hazard plan; no current release changes. |
