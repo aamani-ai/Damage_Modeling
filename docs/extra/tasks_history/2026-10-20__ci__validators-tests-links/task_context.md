@@ -5,7 +5,8 @@
 Owner-directed, relayed by the dashboard session that started this one: the owner asked for the repository
 to be tightened, and `docs/extra/discussion/2026-10-20_repo_observations.md` records the cheapest piece of
 that as gate **RO2** — item 2 (*no CI; four validators sat failing on `main` for weeks because nobody ran
-them*) and item 10 (*small link rot … a link check in CI here*). The brief:
+them*) and item 13 (*a test suite exists and nothing runs it*), with the link check that item 10 (*small
+link rot … a link check in CI here*) asks for. The brief:
 
 1. `scripts/reference_helpers/validate_all.py` — run every `validate_*.py` with the current interpreter,
    one line per validator (`PASS` / `FAIL` / `SKIPPED` + the validator's last output line), non-zero exit on
@@ -27,7 +28,9 @@ check*; do not merge.
 
 - `AGENTS.md` (the venv rule under Conventions; the repo-map row that said `.github/workflows/` does not
   exist), `requirements.txt`, `pyproject.toml`, `scripts/reference_helpers/README.md`, the four test files,
-  the observations node (twelve items; the brief's "item 13" was read as item 10, the link-rot row).
+  the observations node. This branch was cut from a twelve-item copy; item 13 was added on `main` in
+  `b824e10` later the same day, and the first draft of this entry wrongly read the brief's "item 13" as
+  item 10 (corrected after merging `main`; `decisions.md` D14).
 - Every `validate_*.py` (34 files): their imports, `sys.argv` handling, file writes and any path that leaves
   the repository.
 - The newest task-history entry (2026-10-20, dashboard) for this folder's format.

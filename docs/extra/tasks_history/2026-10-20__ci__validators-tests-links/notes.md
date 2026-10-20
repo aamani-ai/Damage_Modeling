@@ -24,9 +24,44 @@
 8. Clean-venv verification from the final `requirements.txt` in a scratch venv: install 18 s (warm pip
    cache), pytest 19 passed in 1 s, `validate_all.py` 28 / 0 / 6 in 16 s, `check_links.py` 0 broken in 1 s,
    all exit 0; tree shows only this change.
-9. This entry; commit; push; PR; CI run (recorded in `handoff.md`).
+9. This entry; commit; push; PR #3.
+10. The PR's first two CI runs (`39401534460`, `39401723668`; 80–83 s each, install ≈ 45 s, validators
+    31 s): tests pass; `validate_all.py` 26 / 2 / 6 — the two v2.1 TC-wind × solar validators stop at
+    `TCWS21-FIXED-CENTRAL`; the link step never ran.
+11. The owner turned on Auto-fix for PR #3. The Linux worker timed out again; no container runtime here.
+    Wrote `evidence/2026-10-20_kat_platform_diff.py` (evaluates every runtime known answer of both v2.1
+    fixtures without stopping and prints each differing leaf) and ran it on a temporary branch with an
+    Ubuntu and a macOS job (run `39428144610`, 9 s and 15 s); deleted the branch; saved both outputs.
+12. `main` had moved to `ed9a664` (PR #4: battery reference evaluators, two validators, 147 tests; the
+    observations node with items 13–16; the branch register). The app's sync tool refused the SSH alias;
+    merged by hand, two conflicts (D17). Merged tree: 166 tests pass, `validate_all.py` 30 / 0 / 6 of 36,
+    `check_links.py` 826 files, 0 broken.
 
 ## Findings worth keeping
+
+- **A canonical release's known answers hold only on macOS at exact equality.** Evaluated without stopping,
+  on GitHub's runners (`evidence/`):
+
+  | Known answer | Leaves | Differing on Ubuntu (glibc 2.39, x86_64, Python 3.12.15) |
+  |---|---|---|
+  | `TCWS21-FIXED-ZERO` | 320 | 0 |
+  | `TCWS21-FIXED-CENTRAL` | 323 | 64 |
+  | `TCWS21-FIXED-HIGH` | 320 | 17 |
+  | `TCWS21-TRACKER-CENTRAL` | 361 | 64 |
+  | `TCWS21-GSU-DIRECT` | 57 | 12 |
+
+  The same in the proposal (`docs r1`) and the release (`docs r2`) fixture: 314 leaves in all. Every
+  differing leaf is a float, 1–32 ulp apart (226 at 1 ulp); the largest relative difference is
+  6.6 × 10⁻¹⁵, a GSU no-direct-damage state probability. No string, key or structure differs. The macOS
+  runner (macOS 26.6.2, arm64, Python 3.12.10) reproduces all ten exactly, as does this Mac.
+- **Where it comes from, as far as measured.** `TCWS21-FIXED-ZERO` is the only request with zero demand,
+  which returns before the lognormal fragility (`_normal_cdf` = `0.5 * math.erfc(…)` of `math.log(x / median)`
+  in `tropical_cyclone_wind_solar_v2_curve_eval.py`); every request that calls it differs. The spot values
+  `erfc(-1/√2)` and `log(0.8)` are bit-identical on both platforms, so the function and inputs at which the
+  two maths libraries diverge were not isolated.
+- **Only these two validators compare a whole evaluator output with `==`** (`grep` for
+  `== test["expected"]` finds no other whole-output comparison). The v2.0 proposal validator checks the same
+  fragility with `math.isclose` and passes on Linux, as does every other validator that ran on Ubuntu.
 
 - **The six external dependencies, exactly.** `validate_substation_convective_wind_binding.py`,
   `…_hurricane_binding.py`, `…_screening_binding.py`, `…_wildfire_binding.py` read
@@ -62,3 +97,11 @@
   as it will on a CI runner; the owner's main checkout satisfies it.
 - `Path.resolve()` follows symlinks; the checker normalises link targets lexically (`os.path.normpath`) so
   the in-repo `Hazard_modeling` symlink in the main checkout is classified by its name, not its target.
+- The app's sync-with-base tool refuses this checkout: it does not recognise the `github.com-work` SSH host
+  alias as the PR's repository. Merge `origin/main` by hand.
+- `origin/main` is shared by every worktree of the checkout: another session's fetch moved it from
+  `b824e10` to `ed9a664` between two commands here. Fetch again right before merging.
+- The command guard also holds an `rm -rf` of a scratch-pad path; use a fresh directory name instead.
+- The first draft of the PR description claimed the cell's "other nine" known answers were bit-identical
+  on both platforms; the validators stop at the first mismatch, so three of five had never run on Linux.
+  Corrected once the diagnostic measured them (four of five differ).
