@@ -187,7 +187,9 @@ unreliable while the pane sat in the background; these come from headless Chrome
 
 ## 9 · Owner review
 
-Open. Divy accepts or rejects these screenshots and the running app; findings become plan rows (Phase 2).
+Open. Divy accepts or rejects the running app, not these screenshots alone: `/v0` in the app (the *Review V0* tab,
+added after these captures) walks through every V0 screen live, shows these checks, and lists the six decisions
+asked of the owner. Findings become plan rows (Phase 2).
 
 ## Fixed during this review
 

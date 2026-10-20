@@ -8,7 +8,9 @@ checked build step and **never writes** to `docs/`. Plan of record:
 [`docs/extra/discussion/damage_curve_dashboard/`](../docs/extra/discussion/damage_curve_dashboard/README.md).
 
 **Status: V0, battery storage end to end, local only.** It waits for the owner's look review
-([`REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/3f9d516/REVIEW.md)); nothing merges before it.
+([`REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/3f9d516/REVIEW.md)); nothing merges before it. **To review
+it, open `/v0` in the running app** (the *Review V0* tab): it walks through every V0 screen live, shows what was
+checked, and lists the decisions the owner is asked for.
 
 ## Run it
 
@@ -92,7 +94,7 @@ keyboard-only walk, the fixed sentences, both themes, a cold read, the speed bud
 
 | Path | What |
 |---|---|
-| `app/` | The routes: `/`, `/assets/[asset]`, `/cells/[entry]`, `/cells/[entry]/curves/[curve]`, `/occurrence/[asset]/[hazard]`, `/code/[code]` — all prerendered from `data/` |
+| `app/` | The routes: `/`, `/assets/[asset]`, `/cells/[entry]`, `/cells/[entry]/curves/[curve]`, `/occurrence/[asset]/[hazard]`, `/code/[code]`, and `/v0`, the slice's review page — all prerendered from `data/` |
 | `components/` | The status rail, the trail and its drawer, the library grid, the asset view, the curve plots, the cell cards |
 | `lib/` | Readers for `data/`, types, number formats, the series palette and line styles, URL state |
 | `data/` | Written only by the build step ([README](data/README.md)) |
