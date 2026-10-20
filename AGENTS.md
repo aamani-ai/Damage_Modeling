@@ -99,6 +99,8 @@ are not curves).
 | `docs/extra/tasks_history/` | Per-session handoffs; read the newest `handoff.md` first. [Index](docs/extra/tasks_history/README.md). |
 | `docs/extra/learning_logs/` | Team-shared, non-canonical atomic lessons and complete newcomer/re-entry project learning packages. [Index](docs/extra/learning_logs/README.md). |
 | `scripts/reference_helpers/` | Reference helper scripts only; not a stable `src/` API. |
+| `scripts/dashboard/` | The dashboard's data build: reads the catalogue, artifacts, registers and Hazard's pinned twin crosswalk, runs the reconciliation checks, writes `dashboard/data/` with a receipt. [README](scripts/dashboard/README.md). |
+| `dashboard/` | The internal damage-curve dashboard (Next.js static app, local; V0 = battery storage end to end). Reads `dashboard/data/` only and never writes `docs/`. Plan: [`docs/plans/damage_curve_dashboard/`](docs/plans/damage_curve_dashboard/README.md). [README](dashboard/README.md). |
 | `src/damage_modeling/` | The durable publisher package (`publishing/cli.py`, `publishing/publisher.py`; standard 23). Not a curve API; the validators guard that no cell code enters it. |
 | `data/` | Curve-record artifacts + manifests (large/binary gitignored). [README](data/README.md). |
 | `notebooks/` | Companion notebooks per cell — `<hazard>/<asset>/00_curve_curation_walkthrough` + `01_runtime_curve_walkthrough`, reading the pinned artifact through the artifact index, never authoring one. **2 of 10 cells covered; both existing pairs currently fail (their loader targets the removed `docs/damage_curves/` tree).** Repair + the other eight cells: [`docs/plans/cell_notebook_coverage/`](docs/plans/cell_notebook_coverage/README.md). [README](notebooks/README.md). |
