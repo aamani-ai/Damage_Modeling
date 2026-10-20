@@ -129,13 +129,14 @@ const LOOK_REVIEW: { n: number; check: string; result: string; ok: boolean | nul
   { n: 6, check: "Both themes", result: "the builder's eye; yours decides", ok: true },
   { n: 7, check: "Cold read", result: "not run; needs a named reader (question 6)", ok: null },
   { n: 8, check: "Speed", result: "cell page 673 ms worst at 4× slower CPU (budget 1,500)", ok: true },
-  { n: 9, check: "Your review", result: "this page", ok: null },
+  { n: 9, check: "Your review", result: "accepted on the running app, 2026-10-20 (DCD-D17)", ok: true },
 ];
 
-const QUESTIONS: { q: ReactNode; options: string[]; rec?: string }[] = [
+const QUESTIONS: { q: ReactNode; options: string[]; rec?: string; answer?: string }[] = [
   {
     q: "Is V0 the right base to build V1 on?",
     options: ["Accept as it is", "Accept with the changes you list", "Rework before V1"],
+    answer: "Accepted on the running app, 2026-10-20 (DCD-D17)",
   },
   {
     q: "Two page titles that do not name an object are in sentence case: “Damage-curve library” and “Resolving a damage code”. Make them Title Case?",
@@ -184,14 +185,14 @@ export default function ReviewV0() {
           <h2 className="text-[15px] font-semibold tracking-tight">Review V0 — battery storage, end to end</h2>
           <span className="font-mono text-[10.5px] text-muted-foreground">built from catalogue at {m.commit} · {m.built_at.slice(0, 10)}</span>
           <span className="ml-auto flex flex-wrap gap-1.5">
-            <Tag>7 of 9 look checks pass</Tag>
-            <Tag tone="warn">your review open</Tag>
+            <Tag>8 of 9 look checks pass</Tag>
+            <Tag tone="ok">✓ accepted 2026-10-20</Tag>
             <a href={PR} target="_blank" rel="noreferrer" className="rounded border border-border px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground hover:text-foreground">PR #5 ↗</a>
           </span>
         </div>
         <p className="mt-1 max-w-[1100px] text-[12.5px] leading-snug">
-          Open the screens below in order and use them as a reviewer would, then answer the six questions at the bottom in the chat. Every link opens the
-          real page in this tab; use the browser&apos;s back button to return here.
+          The owner accepted V0 on the running app on 2026-10-20. The screens below stay the walkthrough for anyone reviewing it; questions 2 to 6 at
+          the bottom are still open. Every link opens the real page in this tab; use the browser&apos;s back button to return here.
         </p>
       </div>
 
@@ -269,7 +270,7 @@ export default function ReviewV0() {
         </Section>
       </div>
 
-      <Section title="Decisions I need from you" right={<span className="text-[10.5px] text-muted-foreground">reply in the chat, e.g. “1 accept, 2 keep, …”</span>}>
+      <Section title="Decisions I need from you" right={<span className="text-[10.5px] text-muted-foreground">1 answered · reply in the chat for 2–6, e.g. “2 keep, 3 keep, …”</span>}>
         <ol className="space-y-2.5">
           {QUESTIONS.map((x, i) => (
             <li key={i} className="grid gap-x-6 gap-y-1 text-[11.5px] leading-snug md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
@@ -278,8 +279,14 @@ export default function ReviewV0() {
                 <span className="font-medium">{x.q}</span>
               </div>
               <div>
-                <div className="flex flex-wrap items-center gap-1.5"><span className="text-[10.5px] text-muted-foreground">options</span>{x.options.map((o) => <Tag key={o}>{o}</Tag>)}</div>
-                {x.rec ? <p className="mt-0.5 text-[11px] text-muted-foreground">My recommendation: {x.rec}</p> : null}
+                {x.answer ? (
+                  <Tag tone="ok">✓ {x.answer}</Tag>
+                ) : (
+                  <>
+                    <div className="flex flex-wrap items-center gap-1.5"><span className="text-[10.5px] text-muted-foreground">options</span>{x.options.map((o) => <Tag key={o}>{o}</Tag>)}</div>
+                    {x.rec ? <p className="mt-0.5 text-[11px] text-muted-foreground">My recommendation: {x.rec}</p> : null}
+                  </>
+                )}
               </div>
             </li>
           ))}

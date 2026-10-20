@@ -7,8 +7,8 @@ checked build step and **never writes** to `docs/`. Plan of record:
 [`docs/plans/damage_curve_dashboard/`](../docs/plans/damage_curve_dashboard/README.md); reasoning:
 [`docs/extra/discussion/damage_curve_dashboard/`](../docs/extra/discussion/damage_curve_dashboard/README.md).
 
-**Status: V0, battery storage end to end, local only.** It waits for the owner's look review
-([`REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/3f9d516/REVIEW.md)); nothing merges before it. **To review
+**Status: V0, battery storage end to end, local only; accepted by the owner on 2026-10-20** after review on the
+running app ([`REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/3f9d516/REVIEW.md), `DCD-D17`); the cold read is still to run. **To review
 it, open `/v0` in the running app** (the *Review V0* tab): it walks through every V0 screen live, shows what was
 checked, and lists the decisions the owner is asked for.
 

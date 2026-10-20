@@ -3,7 +3,7 @@ author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
 updated: 2026-10-20
 status: active
-scope: Decision register for the damage-curve dashboard plan (DCD-D*). D01–D12 are the owner's rulings on gates G1–G12 of the discussion node; D13–D16 record the owner's directions and the agent's engineering decisions inside them.
+scope: Decision register for the damage-curve dashboard plan (DCD-D*). D01–D12 are the owner's rulings on gates G1–G12 of the discussion node; D13–D16 record the owner's directions and the agent's engineering decisions inside them; D17 records the owner's acceptance of V0.
 -->
 
 # Damage-curve dashboard — decisions
@@ -148,3 +148,14 @@ The owner has not read this text; its first review is on V0.
 
 **Reason:** The owner asked for momentum and chose the running app as the review surface; the plan records
 what the build will do so that the review has a reference.
+
+## DCD-D17 — V0 accepted on the running app
+
+**Decision:** The owner accepted the V0 slice (battery storage end to end) on 2026-10-20, after reviewing it on
+the running app through its review page (`/v0`): *"I reviewed the V0 screenshots in docs/plans/damage_curve_dashboard/evidence/3f9d516 and the running app, and I accept them (look review check 9)."* This is check 9 of discussion `06` §4. The cold
+read (check 7) has not run; under `DCD-D10` the slice is done when it runs or when the owner moves it to V1.
+The ruling answers the review page's first question (V0 is the base for V1); questions 2–6 (two page titles,
+the *not drawn* tile tag, the ┈ and – glyphs, a focus landing mark, the cold reader) are not answered by it.
+
+**Reason:** `DCD-D10` (the owner signs off each slice) and `DCD-D15` (feedback on the running slice). The owner
+asked to judge the live app rather than screenshots; the review page was added for that before the acceptance.
