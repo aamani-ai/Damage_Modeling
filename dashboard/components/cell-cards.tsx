@@ -1,6 +1,7 @@
 // The cell page's cards in the reader's order (07 §4). Server components; the plot and the ⓘ are client islands.
 import Link from "next/link";
 import { identicalSeries } from "@/lib/plot-utils";
+import { CollapsibleCard } from "./collapsible-card";
 import { CurvePlot } from "./curve-plot";
 import { fmtPct, fmtUsdCompact, shortSha } from "@/lib/format";
 import type { Cell, Citations, Curve, Manifest } from "@/lib/types";
@@ -131,10 +132,7 @@ export function AnswerCard({ cell, curves, m, blob }: { cell: Cell; curves: Curv
 
 export function PartsCard({ cell }: { cell: Cell }) {
   return (
-    <Card id="card-parts">
-      <CardTitle station={ST(2, "units", "A · B2")} right={<span>{cell.parts.length} parts · weakest {cell.rail.evidence.shape === "–" ? "–" : `shape ${cell.rail.evidence.shape.split("–").slice(-1)[0].replace(/^(\d)$/, "T$1")}`}</span>}>
-        The parts
-      </CardTitle>
+    <CollapsibleCard id="parts" eyebrow="The parts" station={ST(2, "units", "A · B2")} summary={<span>{cell.parts.length} part{cell.parts.length === 1 ? "" : "s"}{cell.answer.withheld_units.length ? ` · ${cell.answer.withheld_units.length} withheld` : ""} · shape <span className="font-mono">{cell.rail.evidence.shape}</span> · cost <span className="font-mono">{cell.rail.evidence.cost}</span></span>}>
       {cell.parts.length ? (
         <div className="overflow-x-auto px-3 pb-3">
           <table className="w-full min-w-[720px] text-[11px]">
@@ -178,7 +176,7 @@ export function PartsCard({ cell }: { cell: Cell }) {
       ) : (
         <div className="px-3 pb-3"><EmptyState>{cell.kind === "gap" ? cell.summary : "No part rows in the catalogue entry."}</EmptyState></div>
       )}
-    </Card>
+    </CollapsibleCard>
   );
 }
 
@@ -187,11 +185,8 @@ export function EvidenceCard({ cell, cites, blob, m }: { cell: Cell; cites: Cita
   const finding = cell.build_findings.find((f) => f.check === "source_ids");
   const machine = cites && cites.lineage === "machine_readable";
   return (
-    <Card id="card-evidence">
-      <CardTitle station={ST(4, "evidence", "B")} right={<span>{ev.n_sources} sources · {ev.n_claims} claims · {ev.n_parameters} parameters · weakest <span className="font-mono">{ev.weakest_tier}</span></span>}
-        hint={<div>Sources → claims → parameters, as one aligned table from the cell&apos;s registers: a claim without its source, or a parameter without its claim, is what reviewers catch. A citation never upgrades a tier (P2).</div>}>
-        The evidence
-      </CardTitle>
+    <CollapsibleCard id="evidence" eyebrow="The evidence" station={ST(4, "evidence", "B")} summary={<span>{ev.n_sources} sources · {ev.n_claims} claims · {ev.n_parameters} parameters · weakest <span className="font-mono">{ev.weakest_tier}</span>{finding ? <span className="text-danger"> · ✗ {finding.items.length} unresolved source IDs</span> : null}</span>}>
+      <p className="px-3 pb-1 text-[10.5px] text-muted-foreground">Sources → claims → parameters, as one aligned table from the cell&apos;s registers: a claim without its source, or a parameter without its claim, is what reviewers catch. A citation never upgrades a tier.</p>
       <div className="px-3 pb-3 text-[11px]">
         {finding ? <p className="mb-2"><Tag tone="danger">✗ build check</Tag> <span className="text-muted-foreground">{finding.sentence}</span> <InfoHint label="Unresolved source IDs"><ul className="list-disc pl-4">{(finding.items as string[]).map((s) => <li key={s} className="font-mono text-[10px]">{s}</li>)}</ul></InfoHint></p> : null}
         {ev.method ? <p className="mb-2"><span className="text-muted-foreground">method · </span><span className="font-medium">{ev.method.type.replace(/_/g, " ")}</span> — {ev.method.summary}</p> : null}
@@ -217,7 +212,7 @@ export function EvidenceCard({ cell, cites, blob, m }: { cell: Cell; cites: Cita
           <p className="mt-2 text-[10px] text-muted-foreground">registers · {(["sources", "claims", "parameters"] as const).filter((k) => ev.paths?.[k]).map((k) => <span key={k}><FileLink href={blob(ev.paths![k]!)}>{k}</FileLink> </span>)}</p>
         ) : null}
       </div>
-    </Card>
+    </CollapsibleCard>
   );
 }
 
@@ -242,6 +237,8 @@ function EvidenceTable({ cites, blob }: { cites: Citations["cells"][string]; blo
     if (!p.claim_ids.length) for (const s of p.source_ids) paramsBySource.set(s, [...(paramsBySource.get(s) ?? []), p]);
   }
   const used = cites.sources.filter((s) => claimsBySource.has(s.id) || paramsBySource.has(s.id));
+  const seenClaims = new Set<string>();
+  const seenParams = new Set<string>();
   const unused = cites.sources.filter((s) => !claimsBySource.has(s.id) && !paramsBySource.has(s.id));
   return (
     <div className="overflow-x-auto">
@@ -266,15 +263,27 @@ function EvidenceTable({ cites, blob }: { cites: Citations["cells"][string]; blo
                   {s.prohibited ? <div className="text-[10px] text-muted-foreground"><span className="italic">not for:</span> {s.prohibited}</div> : null}
                 </td>
                 <td className="py-1.5 pr-2">
-                  {claims.map((c) => (
-                    <div key={c.id} className="mb-1 last:mb-0"><Mono>{c.id}</Mono> <span className="font-mono text-[10px]">{c.tier ?? ""}</span> <span>{c.text}</span>{c.parameter_or_rule ? <span className="block text-[10px] text-muted-foreground">{c.parameter_or_rule}</span> : null}</div>
-                  ))}
+                  {claims.map((c) => {
+                    const first = !seenClaims.has(c.id);
+                    seenClaims.add(c.id);
+                    return first ? (
+                      <div key={c.id} id={`claim-${c.id}`} className="mb-1 last:mb-0"><Mono>{c.id}</Mono> <span className="font-mono text-[10px]">{c.tier ?? ""}</span> <span>{c.text}</span>{c.parameter_or_rule ? <span className="block text-[10px] text-muted-foreground">{c.parameter_or_rule}</span> : null}</div>
+                    ) : (
+                      <a key={c.id} href={`#claim-${c.id}`} title={`${c.text} — shown in full above`} className="mr-1.5 inline-block font-mono text-[10px] text-muted-foreground hover:text-accent">{c.id}↑</a>
+                    );
+                  })}
                   {!claims.length ? <span className="text-muted-foreground">—</span> : null}
                 </td>
                 <td className="py-1.5">
-                  {[...claims.flatMap((c) => paramsByClaim.get(c.id) ?? []), ...direct].filter((p, i, arr) => arr.findIndex((q) => q.id === p.id) === i).map((p) => (
-                    <div key={p.id} className="mb-1 last:mb-0"><span>{p.name}</span> <span className="font-mono text-[10px]">{p.tier ?? ""}</span>{p.value != null ? <span className="block font-mono text-[10px] text-muted-foreground">{typeof p.value === "string" ? p.value : JSON.stringify(p.value)}</span> : null}</div>
-                  ))}
+                  {[...claims.flatMap((c) => paramsByClaim.get(c.id) ?? []), ...direct].filter((p, i, arr) => arr.findIndex((q) => q.id === p.id) === i).map((p) => {
+                    const first = !seenParams.has(p.id);
+                    seenParams.add(p.id);
+                    return first ? (
+                      <div key={p.id} id={`param-${p.id}`} className="mb-1 last:mb-0"><span>{p.name}</span> <span className="font-mono text-[10px]">{p.tier ?? ""}</span>{p.value != null ? <span className="block font-mono text-[10px] text-muted-foreground">{typeof p.value === "string" ? p.value : JSON.stringify(p.value)}</span> : null}</div>
+                    ) : (
+                      <a key={p.id} href={`#param-${p.id}`} title="shown in full above" className="mr-1.5 inline-block text-[10px] text-muted-foreground hover:text-accent">{p.name}↑</a>
+                    );
+                  })}
                 </td>
               </tr>
             );
@@ -291,10 +300,8 @@ function EvidenceTable({ cites, blob }: { cites: Citations["cells"][string]; blo
 export function AuditCard({ cell, blob }: { cell: Cell; blob: (p: string) => string }) {
   const t = cell.audit.table;
   return (
-    <Card id="card-audit">
-      <CardTitle station={ST(6, "audit", "B2")} right={t ? <span>{t.rows.length} rows · {t.kind === "file" ? "seven-step file" : "dossier section"}</span> : null} hint={<div>The seven-step audit as it is written in the cell&apos;s files — asset, failure units, endpoint, split, allocate, site adapter, curves — shown verbatim; that it exists and names its seams is the check.</div>}>
-        The audit
-      </CardTitle>
+    <CollapsibleCard id="audit" eyebrow="The audit" station={ST(6, "audit", "B2")} summary={t ? <span>{t.rows.length} rows · {t.kind === "file" ? "seven-step file" : "seven steps in the dossier"} · site adapter {cell.audit.site_adapter ? "file" : <span className="font-mono">▢</span>}</span> : <span className="text-muted-foreground"><span className="font-mono">▢</span> no seven-step audit found</span>}>
+      <p className="px-3 pb-1 text-[10.5px] text-muted-foreground">The seven-step audit as it is written in the cell&apos;s files, shown verbatim; that it exists and names its seams is the check.</p>
       <div className="px-3 pb-3 text-[11px]">
         {t ? (
           <div className="overflow-x-auto">
@@ -309,7 +316,7 @@ export function AuditCard({ cell, blob }: { cell: Cell; blob: (p: string) => str
         )}
         <p className="mt-2 text-[10.5px] text-muted-foreground">site-condition adapter · {cell.audit.site_adapter ? <FileLink href={blob(cell.audit.site_adapter.path)}>{cell.audit.site_adapter.path.split("/").slice(-1)[0]}</FileLink> : <span className="font-mono">▢ no file</span>}</p>
       </div>
-    </Card>
+    </CollapsibleCard>
   );
 }
 
@@ -320,10 +327,7 @@ export function ProofCard({ cell, blob }: { cell: Cell; blob: (p: string) => str
   const cap = p.capability;
   const flags = (cap.limitation_flags ?? []) as string[];
   return (
-    <Card id="card-proof">
-      <CardTitle station={ST(9, "proof · release", "E") + " · station 8 capability · gate D"} right={<span>{k.declared ? `${k.reproduced} of ${k.run} known answers reproduced` : "no known answers declared"}</span>}>
-        The proof
-      </CardTitle>
+    <CollapsibleCard id="proof" eyebrow="The proof" station={ST(9, "proof", "E") + " · station 8 capability · gate D"} summary={<span>{k.declared ? (k.run ? `${k.reproduced} of ${k.run} known answers reproduced` : `${k.declared} known answers, not run`) : "no known answers declared"}{k.not_run.length ? ` · ${k.not_run.reduce((s, n) => s + n.n, 0)} not run` : ""} · {p.outside_checks.length ? `${p.outside_checks.length} outside check${p.outside_checks.length === 1 ? "" : "s"}` : "no outside check yet"}</span>}>
       <div className="grid gap-3 px-3 pb-3 text-[11px] md:grid-cols-3">
         <div>
           <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Known answers</div>
@@ -360,17 +364,14 @@ export function ProofCard({ cell, blob }: { cell: Cell; blob: (p: string) => str
           <p className="mt-1 text-[10px] text-muted-foreground">annual metrics are the consumer&apos;s (Hazard); nothing here is an EAL or PML.</p>
         </div>
       </div>
-    </Card>
+    </CollapsibleCard>
   );
 }
 
 export function SeamsCard({ cell }: { cell: Cell }) {
   const s = cell.seams;
   return (
-    <Card id="card-seams">
-      <CardTitle station={ST(1, "scope", "A") + " · deferred"} right={<span>{s.open_items.length} open · {s.missing_mechanisms.length} missing mechanisms · {s.update_triggers.length} triggers</span>}>
-        The seams
-      </CardTitle>
+    <CollapsibleCard id="seams" eyebrow="The seams" station={ST(1, "scope", "A") + " · deferred"} summary={<span>{s.open_items.length} open item{s.open_items.length === 1 ? "" : "s"} · {s.missing_mechanisms.length} missing mechanism{s.missing_mechanisms.length === 1 ? "" : "s"} · {s.update_triggers.length} update trigger{s.update_triggers.length === 1 ? "" : "s"}</span>}>
       <div className="grid gap-3 px-3 pb-3 text-[11px] md:grid-cols-3">
         <div>
           <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Open items</div>
@@ -388,7 +389,7 @@ export function SeamsCard({ cell }: { cell: Cell }) {
           {s.update_triggers.length ? s.update_triggers.map((t) => <div key={t.parameter} className="border-t border-border/60 py-0.5"><span className="font-mono text-[10px]">{t.tier}</span> {t.parameter} <span className="block text-[10px] text-muted-foreground">{t.update_trigger}</span></div>) : <p className="text-muted-foreground">none listed</p>}
         </div>
       </div>
-    </Card>
+    </CollapsibleCard>
   );
 }
 
@@ -396,10 +397,8 @@ export function FieldReviewCard({ cell, blob, m }: { cell: Cell; blob: (p: strin
   const f = cell.field_review;
   const rv = f.review;
   return (
-    <Card id="card-field">
-      <CardTitle station={ST(10, "field · review", "—")} hint={<div>Two separate facts: whether this hazard has physically damaged these parts in the field (the occurrence register, per value bucket), and who has read the catalogue entry and reviewed the curve release. Neither is a verdict on the curve.</div>}>
-        Field and review
-      </CardTitle>
+    <CollapsibleCard id="field" eyebrow="Field and review" station={ST(10, "field · review", "—")} summary={<span>{f.register ? <>field reports <span className="font-mono">{f.buckets.every((b) => b.state === "not_searched") ? "?" : "·"}</span> {f.buckets.every((b) => b.state === "not_searched") ? `not searched, ${f.buckets.length} buckets` : "mixed"}</> : <>field reports <span className="font-mono">?</span> not searched, no register</>} · entry {rv.entry_read_kind === "agent" ? "agent-read" : "read"} {rv.entry_read_on ?? "—"} · release {rv.release_review ?? "—"}</span>}>
+      <p className="px-3 pb-1 text-[10.5px] text-muted-foreground">Two separate facts: whether this hazard has physically damaged these parts in the field, and who has read the entry and reviewed the curve release. Neither is a verdict on the curve.</p>
       <div className="grid gap-3 px-3 pb-3 text-[11px] md:grid-cols-2">
         <div>
           <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Does it happen?</div>
@@ -427,6 +426,6 @@ export function FieldReviewCard({ cell, blob, m }: { cell: Cell; blob: (p: strin
           <p className="mt-1 text-[10.5px] text-muted-foreground">how to sign off <InfoHint label="How to sign off"><div>The dashboard shows review state; it does not own it. Add a <span className="font-mono">review</span> block (by · on · verdict) to the catalogue entry under <span className="font-mono">docs/cells/catalogue/</span>, open a pull request, and re-run the build. <span className="font-mono">reviewed_on</span> keeps its meaning of &quot;date read&quot;.</div></InfoHint></p>
         </div>
       </div>
-    </Card>
+    </CollapsibleCard>
   );
 }

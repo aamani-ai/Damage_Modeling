@@ -121,7 +121,7 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
           </div>
         </Card>
         <Card className="xl:col-span-5">
-          <CardTitle>Versions · what we changed from the source</CardTitle>
+          <CardTitle>Versions · how this curve was drawn</CardTitle>
           <div className="grid gap-3 px-3 pb-3 text-[11px] md:grid-cols-2">
             <div>
               {k.versions.length ? k.versions.map((v, i) => (
@@ -134,6 +134,7 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
             <div>
               {k.evaluator ? <p className="text-[10.5px] text-muted-foreground">evaluator · <FileLink href={blob(k.evaluator.module)}>{k.evaluator.module.split("/").slice(-1)[0]}</FileLink> <span className="font-mono">{k.evaluator.function}</span>{k.evaluator.note ? ` — ${k.evaluator.note}` : ""}</p> : null}
               {k.known_answers.length ? <p className="mt-1 text-[10.5px] text-muted-foreground">{k.known_answers.length} known answers on this curve reproduced by the build (○ on the plot).</p> : null}
+              <p className="mt-1 text-[10.5px] text-muted-foreground">what we changed from the source · not machine-readable in this cell yet; the write-up records it in prose</p>
               <p className="mt-1 text-[10.5px] text-muted-foreground">record in <FileLink href={blob(c.identity.kind === "cell" ? c.files.write_up ?? "" : "")}>{c.files.write_up?.split("/").slice(-1)[0] ?? "the artifact"}</FileLink> · data <Mono>{k.data_path}</Mono></p>
             </div>
           </div>

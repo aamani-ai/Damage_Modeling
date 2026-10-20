@@ -4,6 +4,7 @@
 // files behind it. The mark is the presence state; colour is not used. State lives in the URL (?station=).
 import { useCallback, useRef } from "react";
 import { useUrlParam } from "@/lib/url-state";
+import { useOpenCards } from "./collapsible-card";
 import type { Chain, Station } from "@/lib/types";
 import { shortSha } from "@/lib/format";
 import { Drawer } from "./drawer";
@@ -18,6 +19,7 @@ const CARD_FOR: Record<string, string> = {
 export function Trail({ chain, blobBase }: { chain: Chain; blobBase: string }) {
   const blob = (p: string) => `${blobBase}/${p.replace(/^\/+/, "")}`;
   const [selected, setStation] = useUrlParam("station");
+  const [, openCard] = useOpenCards();
   const open = chain.stations.find((s) => s.id === selected) ?? null;
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
   const close = useCallback(() => {
@@ -45,6 +47,7 @@ export function Trail({ chain, blobBase }: { chain: Chain; blobBase: string }) {
             type="button"
             onKeyDown={(e) => onKey(e, i)}
             onClick={() => {
+              if (CARD_FOR[s.id] !== "answer") openCard(CARD_FOR[s.id], true);
               setStation(s.id);
               document.getElementById(`card-${CARD_FOR[s.id]}`)?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
             }}
