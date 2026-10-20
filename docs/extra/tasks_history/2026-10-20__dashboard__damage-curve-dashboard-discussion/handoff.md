@@ -26,8 +26,8 @@
    **balance** of the cell page (answer above the fold; parts → evidence → audit → proof → seams → field and
    review below; each card names its station and review gate), **lineage lighting** from the registers, the
    **chain lens** on the library, and the `chain` block + `citations.json` for the data contract.
-7. **Repository observations** are in `docs/extra/discussion/2026-10-20_repo_observations.md` (draft, twelve
-   verified items with what · why · where · fix, gates RO1–RO3); `AGENTS.md` was corrected where it was
+7. **Repository observations** are in `docs/extra/discussion/2026-10-20_repo_observations.md` (draft, sixteen
+   verified items with what · why · where · fix, gates RO1–RO5; the branch register is at `docs/extra/branch_register.md`); `AGENTS.md` was corrected where it was
    plainly wrong (no `.github/`; the `src/damage_modeling/publishing/` package exists).
 8. The visual pass (built-in browser; Chrome not connected) and the look document are as in iteration 2:
    `evidence/2026-10-20_visual_pass.md`, two dark-theme PNGs of the Hazard dashboard (no WebGL in headless).

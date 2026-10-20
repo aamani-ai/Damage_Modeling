@@ -173,6 +173,10 @@ workaround while the work org had access issues; it is **no longer a remote of t
 2026-10-19), the work account can only read it, and it must not be used to sync. Collaborators' work (for
 example Junga's `cell/*` branches) lands on `origin` branches.
 
+Every branch — who made it, when, how it stands against `main`, what should happen to it — is in
+[`docs/extra/branch_register.md`](docs/extra/branch_register.md), with the branch policy; refresh it with
+`python3 scripts/reference_helpers/branch_register.py --fetch` in the same commit as any branch action.
+
 Do **not** assume the fork is ahead. Skill and agent runs write straight into this working tree, so the local
 checkout is frequently the newer side with the work merely uncommitted. Before syncing, run:
 
