@@ -30,8 +30,9 @@
 9. **Nothing in `docs/cells/` changed, and nothing in the Hazard repository was touched.** The dashboard
    README, the plan (the Phase 3 evaluator item ticked on PR #4's merge, the first V1 step added), `DCD-A06`
    and the plans ledger record the step.
-10. **Branch `claude/dashboard-v1-battery-75e6ea`, pushed; a PR into `claude/dashboard-v0-5d463c` is open and not
-    merged.** The owner decides when PR #5 merges.
+10. **Branch `claude/dashboard-v1-battery-75e6ea`, pushed; [PR #6](https://github.com/aamani-ai/Damage_Modeling/pull/6) into
+    `claude/dashboard-v0-5d463c` is open and not merged.** The owner decides when PR #5 merges. The repository's CI
+    workflow is not on this branch's base yet, so PR #6 shows no checks.
 
 ## Open for the owner
 
