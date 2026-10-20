@@ -41,8 +41,8 @@
    "shape": "T2",
    "cost": "T2",
    "occurrence": {
-    "mark": "—",
-    "label": "no register"
+    "mark": "?",
+    "label": "not searched"
    }
   },
   "review": {
@@ -56,12 +56,13 @@
    "label": "entry agent-read 2026-10-19 · release not yet reviewed"
   }
  },
- "summary": "Proposal, not in the runtime index — Flood on real estate: fEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water); retail keeps Hazus DF 217 for river water and USACE NACCS for coastal surge.",
+ "summary": "Proposal, not in the runtime index — Flood on buildings: fEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water).",
  "chain": {
   "stations": [
    {
     "id": "scope",
     "label": "Scope",
+    "full_label": "Scope",
     "gate": "A",
     "state": "artifact",
     "files": [
@@ -85,6 +86,7 @@
    {
     "id": "units",
     "label": "Units",
+    "full_label": "Units",
     "gate": "A · B2",
     "state": "artifact",
     "files": [
@@ -104,6 +106,7 @@
    {
     "id": "axis_form",
     "label": "Axis · form",
+    "full_label": "Axis · form",
     "gate": "C",
     "state": "artifact",
     "files": [
@@ -123,6 +126,7 @@
    {
     "id": "evidence",
     "label": "Evidence",
+    "full_label": "Evidence",
     "gate": "B",
     "state": "artifact",
     "files": [
@@ -154,6 +158,7 @@
    {
     "id": "value",
     "label": "Value",
+    "full_label": "Value",
     "gate": "B2",
     "state": "artifact",
     "files": [
@@ -177,6 +182,7 @@
    {
     "id": "audit",
     "label": "Audit",
+    "full_label": "Audit",
     "gate": "B2",
     "state": "artifact",
     "files": [
@@ -186,12 +192,13 @@
      }
     ],
     "evidence": [],
-    "fact": "7 steps",
+    "fact": "7-step file",
     "absent_sentence": null
    },
    {
     "id": "artifact",
     "label": "Artifact",
+    "full_label": "Artifact",
     "gate": "C",
     "state": "artifact",
     "files": [
@@ -235,6 +242,7 @@
    {
     "id": "capability",
     "label": "Capability",
+    "full_label": "Capability",
     "gate": "D",
     "state": "artifact",
     "files": [
@@ -253,7 +261,8 @@
    },
    {
     "id": "proof",
-    "label": "Proof · release",
+    "label": "Proof",
+    "full_label": "Proof · release",
     "gate": "E",
     "state": "artifact",
     "files": [
@@ -275,12 +284,13 @@
      }
     ],
     "evidence": [],
-    "fact": "185 of 190 KAT reproduced",
+    "fact": "185 of 185 KAT reproduced · 5 not run",
     "absent_sentence": null
    },
    {
     "id": "field_review",
     "label": "Field · review",
+    "full_label": "Field · review",
     "gate": "—",
     "state": "absent",
     "files": [],
@@ -547,14 +557,15 @@
    {
     "axis": {
      "id": "FLOOD_DEPTH_ABOVE_FIRST_FINISHED_FLOOR_FT",
-     "label": "flood depth above first finished floor ft",
+     "label": "water depth above the first floor",
      "unit": "ft",
      "input_field": "flood_depth_above_first_floor_ft",
      "valid_range": [
       -4.0,
       24.0
      ],
-     "kind": "continuous"
+     "kind": "continuous",
+     "label_from_id": true
     },
     "curve_ids": [
      "FRE_RES_HAZUS_DF129",

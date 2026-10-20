@@ -52,7 +52,7 @@ STATIONS: list[dict[str, Any]] = [
      "files": ["capability"],
      "headings": r"capability declaration|consumer contract|damage-code output|runtime contract",
      "sheets": r"damage_code_interface|emit_metrics|cap_binding"},
-    {"id": "proof", "label": "Proof · release", "gate": "E",
+    {"id": "proof", "label": "Proof", "full": "Proof · release", "gate": "E",
      "files": ["known_answer", "known_answers.json", "validation", "release", "manifest.json", "changelog", "version_registry", "old_vs_new", "kats"],
      "headings": r"qa status|validation|reviewer checklist|version call",
      "sheets": r"^qa|qa_checks|kats|known_answer|old_vs_new"},
@@ -147,6 +147,14 @@ def detect(entry: Entry, registers: dict[str, Any], kat_summary: dict[str, Any],
             hit_files = sorted(set(hit_files) | {ROOT / entry.artifact_path})
         if sid == "units" and entry.artifact_path and any(f.get("treatment") for f in a.get("failure_units") or []):
             hit_files = sorted(set(hit_files) | {ROOT / entry.artifact_path})  # the failure-unit table with roles lives in the artifact JSON
+        if sid == "capability" and entry.artifact_path and a.get("capability_declaration") and not hit_files:
+            hit_files = [ROOT / entry.artifact_path]  # the declaration is a block inside the curve artifact JSON
+        if sid == "evidence":
+            # registers the artifact names outside its own folder (e.g. flood_bess → docs/extra/discussion/bess_damage/evidence/)
+            for key in ("sources", "claims", "parameters"):
+                rp = (registers.get("paths") or {}).get(key)
+                if rp and (ROOT / rp).is_file():
+                    hit_files = sorted(set(hit_files) | {ROOT / rp})
         if sid == "proof" and entry.index_row:
             pass  # the index pin is added below as its own file
         if sid == "field_review":
@@ -189,11 +197,15 @@ def detect(entry: Entry, registers: dict[str, Any], kat_summary: dict[str, Any],
         if state == "artifact" and not file_entries:
             raise AssertionError(f"{entry.id}: station {sid} marked artifact without a file")
         stations.append({
-            "id": sid, "label": st["label"], "gate": st["gate"], "state": state,
+            "id": sid, "label": st["label"], "full_label": st.get("full", st["label"]), "gate": st["gate"], "state": state,
             "files": file_entries, "evidence": evidence,
             "fact": _fact(sid, entry, a, registers, kat_summary, occurrence, value_facts, file_entries, state),
             "absent_sentence": STATION_ABSENT_SENTENCES[sid] if state == "absent" else None,
         })
+    for s in stations:
+        if s["id"] == "audit" and s["state"] == "prose":
+            heads = [h for ev in s["evidence"] for h in ev["matched"]]
+            s["fact"] = "7 steps in the dossier" if any(re.search(r"seven[- ]step", h, re.I) for h in heads) else ("7-step sheet" if any(re.search(r"seven_steps", h, re.I) for h in heads) else "adjustments in prose")
     gen = generation(entry, files, registers)
     return {
         "stations": stations,
@@ -221,13 +233,19 @@ def _fact(sid: str, e: Entry, a: dict[str, Any], regs: dict[str, Any], kats: dic
         return f"{len(deferred)} deferred" if deferred else ("README" if files else "—")
     if sid == "units":
         withheld = sum(1 for f in fus if str(f.get("treatment", "")).startswith("withheld"))
-        return f"{len(fus)} units" + (f" · {withheld} withheld" if withheld else "") if fus else ("source cell" if e.kind == "binding" else "—")
+        return f"{len(fus)} unit{'s' if len(fus) != 1 else ''}" + (f" · {withheld} withheld" if withheld else "") if fus else ("source cell" if e.kind == "binding" else "—")
     if sid == "axis_form":
-        forms = sorted({r.get("curve_form", "") for r in (a.get("curve_records") or []) + [r for pw in a.get("pathways") or [] for r in pw.get("curve_records") or []]})
-        forms = [f.replace("_", " ") for f in forms if f]
-        if any("binary" in str(r.get("x_axis", "")) for r in a.get("curve_records") or []):
-            forms = ["binary state"] + [f for f in forms if f != "piecewise linear"] or forms
-        return " · ".join(forms)[:40] if forms else "—"
+        recs = (a.get("curve_records") or []) + [r for pw in a.get("pathways") or [] for r in pw.get("curve_records") or []]
+        binary = [r for r in recs if "binary" in str(r.get("x_axis", ""))]
+        exact = [r for r in recs if "exact_integer" in str(r.get("x_axis", ""))]
+        forms = []
+        if binary:
+            forms.append("binary step")
+        if exact:
+            forms.append("exact classes")
+        rest = sorted({r.get("curve_form", "").replace("_", " ") for r in recs if r not in binary and r not in exact and r.get("curve_form")})
+        forms += rest
+        return " + ".join(forms) if forms else "—"
     if sid == "evidence":
         n = len(regs.get("sources") or [])
         tiers = sorted({p["tier"] for p in regs.get("parameters") or [] if p.get("tier")})
@@ -236,9 +254,13 @@ def _fact(sid: str, e: Entry, a: dict[str, Any], regs: dict[str, Any], kats: dic
     if sid == "value":
         if value and value.get("share_covered") is not None:
             return f"{value['share_covered'] * 100:.0f} % · {value['covered_label']}"
-        return "crosswalk" if state == "artifact" else "—"
+        return "crosswalk" if state == "artifact" else ("in prose" if state == "prose" else "—")
     if sid == "audit":
-        return "7 steps" if state in ("artifact", "prose") else "no file · no prose"
+        if state == "artifact":
+            return "7-step file" if any("seven_step" in f["path"].lower() for f in files) else "site adapter file"
+        if state == "prose":
+            return "prose"
+        return "no file · no prose" if state == "absent" else "—"
     if sid == "artifact":
         ident = e.identity
         return f"{(ident.get('model') or '').replace('model ', '')} · {ident.get('docs') or ''}".strip(" ·") if ident.get("model") else ("binding" if e.kind == "binding" else "—")
@@ -255,8 +277,10 @@ def _fact(sid: str, e: Entry, a: dict[str, Any], regs: dict[str, Any], kats: dic
             parts.append("EAL conditional" if "conditional" in str(eal) or "computable" in str(eal) else f"EAL {str(eal)[:12]}")
         return " · ".join(parts) if parts else ("declared" if state == "artifact" else "—")
     if sid == "proof":
+        if kats.get("declared") and kats.get("run"):
+            return f"{kats['reproduced']} of {kats['run']} KAT reproduced" + (f" · {sum(n['n'] for n in kats['not_run'])} not run" if kats.get("not_run") else "")
         if kats.get("declared"):
-            return f"{kats['reproduced']} of {kats['declared']} KAT" + (" reproduced" if kats["reproduced"] == kats["run"] else "")
+            return f"{kats['declared']} KAT · not run"
         return "no KAT declared" if e.kind == "cell" else "validation" if files else "—"
     if sid == "field_review":
         read = d.get("reviewed_on", "")

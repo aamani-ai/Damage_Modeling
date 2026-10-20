@@ -77,12 +77,13 @@
    "label": "entry agent-read 2026-10-19 · release —"
   }
  },
- "summary": "Flood on battery storage: conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; unit values from market cost shares of the fixed Hazard reference budget; 75 % of the reference value has a curve and 25 % has none.",
+ "summary": "Flood on batteries: conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; 75 % of the reference value has a curve and 25 % has none.",
  "chain": {
   "stations": [
    {
     "id": "scope",
     "label": "Scope",
+    "full_label": "Scope",
     "gate": "A",
     "state": "artifact",
     "files": [
@@ -106,6 +107,7 @@
    {
     "id": "units",
     "label": "Units",
+    "full_label": "Units",
     "gate": "A · B2",
     "state": "artifact",
     "files": [
@@ -121,37 +123,38 @@
    {
     "id": "axis_form",
     "label": "Axis · form",
+    "full_label": "Axis · form",
     "gate": "C",
     "state": "absent",
     "files": [],
     "evidence": [],
-    "fact": "binary state",
+    "fact": "binary step + piecewise linear",
     "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section."
    },
    {
     "id": "evidence",
     "label": "Evidence",
+    "full_label": "Evidence",
     "gate": "B",
-    "state": "prose",
-    "files": [],
-    "evidence": [
+    "state": "artifact",
+    "files": [
      {
-      "kind": "dossier_headings",
-      "file": {
-       "path": "docs/cells/flood_bess/current/derivation.md",
-       "sha256": "7711f12d974c3d8926c39dc6eb686233df613a4ebb5c21fba42496988b501a96"
-      },
-      "matched": [
-       "Evidence, value and annual qualification"
-      ]
+      "path": "docs/extra/discussion/bess_damage/evidence/claims.csv",
+      "sha256": "fbf63f5bc07a1d395b73bd0fa6067d6e6caf0a9abfcc72a7004d3b0532554e94"
+     },
+     {
+      "path": "docs/extra/discussion/bess_damage/evidence/sources.csv",
+      "sha256": "e055ffffdb5f5183bba1346b75acd6279b75c9544470bb183bb365638d5ad2b0"
      }
     ],
+    "evidence": [],
     "fact": "19 src · T3–4",
     "absent_sentence": null
    },
    {
     "id": "value",
     "label": "Value",
+    "full_label": "Value",
     "gate": "B2",
     "state": "artifact",
     "files": [
@@ -171,6 +174,7 @@
    {
     "id": "audit",
     "label": "Audit",
+    "full_label": "Audit",
     "gate": "B2",
     "state": "prose",
     "files": [],
@@ -186,12 +190,13 @@
       ]
      }
     ],
-    "fact": "7 steps",
+    "fact": "7 steps in the dossier",
     "absent_sentence": null
    },
    {
     "id": "artifact",
     "label": "Artifact",
+    "full_label": "Artifact",
     "gate": "C",
     "state": "artifact",
     "files": [
@@ -219,6 +224,7 @@
    {
     "id": "capability",
     "label": "Capability",
+    "full_label": "Capability",
     "gate": "D",
     "state": "artifact",
     "files": [
@@ -233,7 +239,8 @@
    },
    {
     "id": "proof",
-    "label": "Proof · release",
+    "label": "Proof",
+    "full_label": "Proof · release",
     "gate": "E",
     "state": "artifact",
     "files": [
@@ -276,6 +283,7 @@
    {
     "id": "field_review",
     "label": "Field · review",
+    "full_label": "Field · review",
     "gate": "—",
     "state": "artifact",
     "files": [
@@ -290,7 +298,7 @@
    }
   ],
   "generation": "plain",
-  "core_as_files": 4,
+  "core_as_files": 5,
   "core_total": 6,
   "dossier": {
    "path": "docs/cells/flood_bess/current/derivation.md",
@@ -599,12 +607,14 @@
     {
      "label": "Battery enclosures · active hardware",
      "value_usd": 72110403.39702758,
-     "curve_id": "BESS_ACTIVE_CONTACT_STATE"
+     "curve_id": "BESS_ACTIVE_CONTACT_STATE",
+     "bucket": "battery_enclosures"
     },
     {
      "label": "PCS",
      "value_usd": 10400000,
-     "curve_id": "BESS_PCS_INUNDATION_PROXY"
+     "curve_id": "BESS_PCS_INUNDATION_PROXY",
+     "bucket": "pcs"
     }
    ],
    "no_curve": [

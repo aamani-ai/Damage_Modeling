@@ -33,16 +33,16 @@ def value_facts(e: Entry) -> dict[str, Any] | None:
     if e.id == "flood_bess":
         vb = load_json(ROOT / vl["value_binding_path"])
         u = vb["units"]
-        covered = [{"label": "Battery enclosures · active hardware", "value_usd": u["battery_enclosures"]["count"] * u["battery_enclosures"]["same_unit_value_usd"], "curve_id": u["battery_enclosures"]["curve_id"]},
-                   {"label": "PCS", "value_usd": u["pcs"]["count"] * u["pcs"]["same_unit_value_usd"], "curve_id": u["pcs"]["curve_id"]}]
+        covered = [{"label": "Battery enclosures · active hardware", "value_usd": u["battery_enclosures"]["count"] * u["battery_enclosures"]["same_unit_value_usd"], "curve_id": u["battery_enclosures"]["curve_id"], "bucket": "battery_enclosures"},
+                   {"label": "PCS", "value_usd": u["pcs"]["count"] * u["pcs"]["same_unit_value_usd"], "curve_id": u["pcs"]["curve_id"], "bucket": "pcs"}]
         names = {"enclosure_racks_fire_suppression": "Enclosure racks and fire suppression", "electrical_balance": "Electrical balance (unit transformers, cables)", "civil_works": "Civil works", "unallocated_fieldwork": "Unallocated fieldwork"}
         no_curve = [{"label": names.get(k, humanise(k)), "value_usd": v} for k, v in vb["unmodeled_buckets"].items()]
         total = vb["reference_tiv_usd"]
         return _value_block(vb["modeled_value_usd"], total, covered, no_curve, vl["value_binding_path"], "real 2024 dollars; reference budget r1")
     if e.id in ("tropical_cyclone_wind_bess", "wildfire_bess"):
         vb = load_json(ROOT / vl["value_binding_path"])
-        covered = [{"label": "Integrated battery enclosures", "value_usd": vb["units"]["BESS_INTEGRATED_ENCLOSURE"]["count"] * vb["units"]["BESS_INTEGRATED_ENCLOSURE"]["value_usd_each"]},
-                   {"label": "PCS", "value_usd": vb["units"]["BESS_SEPARATE_PCS"]["count"] * vb["units"]["BESS_SEPARATE_PCS"]["value_usd_each"]}]
+        covered = [{"label": "Integrated battery enclosures", "value_usd": vb["units"]["BESS_INTEGRATED_ENCLOSURE"]["count"] * vb["units"]["BESS_INTEGRATED_ENCLOSURE"]["value_usd_each"], "bucket": "battery_enclosures"},
+                   {"label": "PCS", "value_usd": vb["units"]["BESS_SEPARATE_PCS"]["count"] * vb["units"]["BESS_SEPARATE_PCS"]["value_usd_each"], "bucket": "pcs"}]
         no_curve = [{"label": s, "value_usd": _dollars_in(s)} for s in d.get("not_covered", [])]
         return _value_block(vl["candidate_hardware_usd"], vl["full_tiv_usd"], covered, no_curve, vl["value_binding_path"], "fixed 2024 dollars; reference budget r1")
     if e.id == "tropical_cyclone_wind_wind":
@@ -90,7 +90,7 @@ def review_block(e: Entry) -> dict[str, Any]:
         "release_review_code": release,
         "review": {"by": rv.get("by"), "on": rv.get("on"), "verdict": rv.get("verdict")} if rv else None,
         "tone": "ok" if rv.get("verdict") in ("approved", "accepted") else "neutral",
-        "label": (f"reviewed {rv.get('by')} {rv.get('on')}" if rv else f"entry agent-read {d.get('reviewed_on', '')}") + " · release " + (humanise(release)[:40] if release else "—"),
+        "label": (f"reviewed {rv.get('by')} {rv.get('on')}" if rv else f"entry agent-read {d.get('reviewed_on', '')}") + " · release " + (humanise(release) if release else "—"),
     }
 
 
@@ -248,7 +248,7 @@ def build(write: bool = True) -> dict[str, Any]:
         occ_states = {b["state"] for b in buckets_block}
         occ_mark = SENTENCES["not_searched"]["mark"] if not occ_states or occ_states == {"not_searched"} else ("✓" if "found" in occ_states else ("~" if "adjacent" in occ_states else "∅"))
         if not occ:
-            occ_mark, occ_label = SENTENCES["unavailable"]["mark"], "no register"
+            occ_mark, occ_label = SENTENCES["not_searched"]["mark"], "not searched"  # no register yet: nobody has looked
         else:
             occ_label = "not searched" if occ_states == {"not_searched"} else "mixed"
         # parts
@@ -270,7 +270,8 @@ def build(write: bool = True) -> dict[str, Any]:
         withheld_units = [{"failure_unit_id": f.get("id"), "subsystem": f.get("subsystem"), "reasons": f.get("withheld_reason_codes") or [], "sentence": SENTENCES["withheld"]["page"].format(condition=humanise(", ".join(f.get("withheld_reason_codes") or ["withheld"])))}
                           for f in a.get("failure_units") or [] if str(f.get("treatment", "")).startswith("withheld")]
         title = f"{e.data['hazard']} × {e.data['asset']}"
-        summary = cell_sentence(e.data, e.status, value, e.data["hazard"], e.data["asset"], bool(drawn) if e.kind == "cell" else None)
+        noun = next((a.get("noun") for a in sl["assets"] if a["slug"] == aslug), e.data["asset"])
+        summary = cell_sentence(e.data, e.status, value, e.data["hazard"], noun, bool(drawn) if e.kind == "cell" else None)
         # axis groups: one plot per native axis
         groups: list[dict[str, Any]] = []
         for c in drawn:
@@ -393,7 +394,9 @@ def build(write: bool = True) -> dict[str, Any]:
         "built_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "commit": git("rev-parse", "--short", "HEAD"), "commit_full": git("rev-parse", "HEAD"),
         "catalogue_commit_note": "catalogue entries and artifacts read at this commit; every number traces to a file at it",
-        "counts": {**counts, "entries": len(entries), "curves_declared": declared, "curves_drawn": sum(1 for c in all_curves if c["drawn"]), "curves_no_evaluator": sum(1 for c in all_curves if not c["drawn"]), "agent_read_only": agent_read, "field_searches_logged": searched},
+        "counts": {**counts, "entries": len(entries), "curves_declared": declared, "curves_drawn": sum(1 for c in all_curves if c["drawn"]), "curves_no_evaluator": sum(1 for c in all_curves if not c["drawn"]), "agent_read_only": agent_read, "field_searches_logged": searched,
+                   "known_answers_run": kat_totals["run"], "known_answers_reproduced": kat_totals["reproduced"], "known_answers_not_run": kat_totals["not_run"], "occurrence_registers": len(registers),
+                   "owner_reviews": sum(1 for e in entries if e.data.get("review")), "outside_checks": sum(1 for e in entries if e.data.get("checks")), "cells_with_rows": sum(1 for e in entries if e.data.get("rows"))},
         "summary": library_sentence(counts, len(as_order), len([h for h in sl["hazards"] if not h["outside_the_five"]]), agent_read, len(entries), searched),
         "assets": [{**a, "href": f"/assets/{a['slug']}", "n_entries": sum(1 for t in tiles if t["asset"]["slug"] == a["slug"])} for a in sl["assets"]],
         "hazards": sl["hazards"],
@@ -433,7 +436,12 @@ def build(write: bool = True) -> dict[str, Any]:
                         if entry.kind == "gap":
                             curve_cell = {"mark": "┈", "state": "gap", "label": "gap"}
                         elif part_rows:
-                            curve_cell = {"mark": STATUS_MARK[entry.status], "state": entry.status, "partial": bool(entry.data.get("not_covered")), "shape": tier_span([p["shape"] for p in part_rows]), "cost": tier_span([p["cost"] for p in part_rows]), "curves": [c for p in part_rows for c in p["curves"]], "drawn": any(p["drawn"] for p in part_rows)}
+                            cv = cell["answer"]["value"] or {}
+                            by_bucket = [ci for ci in cv.get("covered", []) if ci.get("bucket") == b["key"] and ci.get("value_usd") is not None]
+                            bucket_value = values.get(b["key"])
+                            # ◔ at the bucket grain: part of THIS bucket's value has no curve in this cell
+                            partial = (sum(ci["value_usd"] for ci in by_bucket) < bucket_value - 1.0) if (by_bucket and bucket_value is not None) else bool(entry.data.get("not_covered"))
+                            curve_cell = {"mark": STATUS_MARK[entry.status], "state": entry.status, "partial": partial, "shape": tier_span([p["shape"] for p in part_rows]), "cost": tier_span([p["cost"] for p in part_rows]), "curves": [c for p in part_rows for c in p["curves"]], "drawn": any(p["drawn"] for p in part_rows)}
                         elif withheld or entry.kind == "cell":
                             curve_cell = {"mark": "✕", "state": "no_curve", "label": "no curve", "sentence": SENTENCES["no_curve"]["page"].format(part=b["label"], value=fmt_usd_compact(values.get(b["key"])) if values.get(b["key"]) is not None else "an unstated share")}
                         else:
@@ -455,7 +463,7 @@ def build(write: bool = True) -> dict[str, Any]:
                     if not row:
                         row = {"key": key, "label": humanise(key).title() if key.isupper() else p["part"], "value_usd": None, "share": None, "twin_targets": [], "subsystems": p["subsystems"], "cells": {}}
                         rows.append(row)
-                    row["cells"][hazard_slug(e.data["hazard"], sl)] = {"twin_lead": None, "twin_nodes": [], "entry_id": e.id, "occurrence": None, "effect": "damage", "outside_the_five": False,
+                    row["cells"][hazard_slug(e.data["hazard"], sl)] = {"twin_lead": None, "twin_nodes": [], "entry_id": e.id, "occurrence": {"bucket": key, "state": "not_searched", "mark": "?", "sentence": SENTENCES["not_searched"]["page"], "reports": [], "twin_lead": None}, "effect": "damage", "outside_the_five": False,
                                                                        "curve": {"mark": STATUS_MARK[e.status], "state": e.status, "partial": bool(e.data.get("not_covered")), "shape": p["shape"], "cost": p["cost"], "curves": p["curves"], "drawn": p["drawn"]}}
             for e in asset_entries:
                 if e.kind == "gap":
@@ -471,7 +479,7 @@ def build(write: bool = True) -> dict[str, Any]:
             reg = registers.get((aslug, h["slug"]))
             hazards_cols.append({**h, "entry_id": entry.id if entry else None, "status": entry.status if entry else None, "cell_title": cells[entry.id]["title"] if entry else None,
                                  "occurrence_href": f"/occurrence/{aslug}/{h['slug']}" if reg else None, "has_register": bool(reg)})
-        assets_out[aslug] = {"asset": {**a_def, "href": f"/assets/{aslug}"}, "summary": asset_sentence(a_def["label"], cells_for, searched_any), "reference": reference,
+        assets_out[aslug] = {"asset": {**a_def, "href": f"/assets/{aslug}"}, "summary": asset_sentence(a_def.get("noun", a_def["label"]), cells_for, searched_any), "reference": reference,
                              "hazards": hazards_cols, "rows": rows, "entries": [t for t in tiles if t["asset"]["slug"] == aslug], "has_buckets": bool(bucket_defs), "twin_crosswalk": {"sha256": twin.get("sha256"), "rows": twin.get("rows")} if aslug == "bess" else None}
     # ─── occurrence pages ───
     occurrence_out: dict[tuple[str, str], dict[str, Any]] = {}

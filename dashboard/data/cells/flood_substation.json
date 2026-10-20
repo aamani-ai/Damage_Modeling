@@ -62,8 +62,8 @@
    "shape": "T3",
    "cost": "T4",
    "occurrence": {
-    "mark": "—",
-    "label": "no register"
+    "mark": "?",
+    "label": "not searched"
    }
   },
   "review": {
@@ -74,15 +74,16 @@
    "release_review_code": "agent_reviewed_screening_under_owner_delivery_direction",
    "review": null,
    "tone": "neutral",
-   "label": "entry agent-read 2026-10-19 · release agent reviewed screening under owner del"
+   "label": "entry agent-read 2026-10-19 · release agent reviewed screening under owner delivery direction"
   }
  },
- "summary": "Flood on substation: fEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage ratios used as published (0 to 15% over 0 to 10 ft), the same table already carried by the flood_wind cell.",
+ "summary": "Flood on substations: fEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage ratios used as published (0 to 15% over 0 to 10 ft), the same table already carried by the flood_wind cell.",
  "chain": {
   "stations": [
    {
     "id": "scope",
     "label": "Scope",
+    "full_label": "Scope",
     "gate": "A",
     "state": "artifact",
     "files": [
@@ -106,6 +107,7 @@
    {
     "id": "units",
     "label": "Units",
+    "full_label": "Units",
     "gate": "A · B2",
     "state": "artifact",
     "files": [
@@ -115,12 +117,13 @@
      }
     ],
     "evidence": [],
-    "fact": "1 units",
+    "fact": "1 unit",
     "absent_sentence": null
    },
    {
     "id": "axis_form",
     "label": "Axis · form",
+    "full_label": "Axis · form",
     "gate": "C",
     "state": "absent",
     "files": [],
@@ -131,6 +134,7 @@
    {
     "id": "evidence",
     "label": "Evidence",
+    "full_label": "Evidence",
     "gate": "B",
     "state": "artifact",
     "files": [
@@ -150,6 +154,7 @@
    {
     "id": "value",
     "label": "Value",
+    "full_label": "Value",
     "gate": "B2",
     "state": "artifact",
     "files": [
@@ -165,6 +170,7 @@
    {
     "id": "audit",
     "label": "Audit",
+    "full_label": "Audit",
     "gate": "B2",
     "state": "prose",
     "files": [],
@@ -180,12 +186,13 @@
       ]
      }
     ],
-    "fact": "7 steps",
+    "fact": "7 steps in the dossier",
     "absent_sentence": null
    },
    {
     "id": "artifact",
     "label": "Artifact",
+    "full_label": "Artifact",
     "gate": "C",
     "state": "artifact",
     "files": [
@@ -209,6 +216,7 @@
    {
     "id": "capability",
     "label": "Capability",
+    "full_label": "Capability",
     "gate": "D",
     "state": "artifact",
     "files": [
@@ -223,7 +231,8 @@
    },
    {
     "id": "proof",
-    "label": "Proof · release",
+    "label": "Proof",
+    "full_label": "Proof · release",
     "gate": "E",
     "state": "artifact",
     "files": [
@@ -254,6 +263,7 @@
    {
     "id": "field_review",
     "label": "Field · review",
+    "full_label": "Field · review",
     "gate": "—",
     "state": "absent",
     "files": [],
@@ -520,14 +530,15 @@
    {
     "axis": {
      "id": "FLOOD_DEPTH_ABOVE_SUBSTATION_GRADE_FT_HAZUS",
-     "label": "flood depth above substation grade",
+     "label": "water depth above station grade (ft) at the facility point",
      "unit": "ft",
      "input_field": "flood_depth_above_substation_grade_ft",
      "valid_range": [
       0,
       10
      ],
-     "kind": "continuous"
+     "kind": "continuous",
+     "label_from_id": true
     },
     "curve_ids": [
      "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL"
@@ -776,7 +787,7 @@
    "release_review_code": "agent_reviewed_screening_under_owner_delivery_direction",
    "review": null,
    "tone": "neutral",
-   "label": "entry agent-read 2026-10-19 · release agent reviewed screening under owner del"
+   "label": "entry agent-read 2026-10-19 · release agent reviewed screening under owner delivery direction"
   },
   "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only."
  },

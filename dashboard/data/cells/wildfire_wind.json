@@ -48,8 +48,8 @@
    "shape": "T4",
    "cost": "T4",
    "occurrence": {
-    "mark": "—",
-    "label": "no register"
+    "mark": "?",
+    "label": "not searched"
    }
   },
   "review": {
@@ -63,12 +63,13 @@
    "label": "entry agent-read 2026-10-19 · release reviewed screening release"
   }
  },
- "summary": "Wildfire on wind farm: cell-local Tier-4 screening points per FSim flame-length class, adopted under owner direction; research supports the mechanism and relative ordering, not the numbers; 4 parts of the asset's value have no curve.",
+ "summary": "Wildfire on wind farms: cell-local Tier-4 screening points per FSim flame-length class, adopted under owner direction; 4 parts of the asset's value have no curve.",
  "chain": {
   "stations": [
    {
     "id": "scope",
     "label": "Scope",
+    "full_label": "Scope",
     "gate": "A",
     "state": "artifact",
     "files": [
@@ -96,6 +97,7 @@
    {
     "id": "units",
     "label": "Units",
+    "full_label": "Units",
     "gate": "A · B2",
     "state": "artifact",
     "files": [
@@ -111,16 +113,18 @@
    {
     "id": "axis_form",
     "label": "Axis · form",
+    "full_label": "Axis · form",
     "gate": "C",
     "state": "absent",
     "files": [],
     "evidence": [],
-    "fact": "piecewise linear",
+    "fact": "exact classes",
     "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section."
    },
    {
     "id": "evidence",
     "label": "Evidence",
+    "full_label": "Evidence",
     "gate": "B",
     "state": "artifact",
     "files": [
@@ -144,6 +148,7 @@
    {
     "id": "value",
     "label": "Value",
+    "full_label": "Value",
     "gate": "B2",
     "state": "artifact",
     "files": [
@@ -159,6 +164,7 @@
    {
     "id": "audit",
     "label": "Audit",
+    "full_label": "Audit",
     "gate": "B2",
     "state": "absent",
     "files": [],
@@ -169,6 +175,7 @@
    {
     "id": "artifact",
     "label": "Artifact",
+    "full_label": "Artifact",
     "gate": "C",
     "state": "artifact",
     "files": [
@@ -196,6 +203,7 @@
    {
     "id": "capability",
     "label": "Capability",
+    "full_label": "Capability",
     "gate": "D",
     "state": "artifact",
     "files": [
@@ -210,7 +218,8 @@
    },
    {
     "id": "proof",
-    "label": "Proof · release",
+    "label": "Proof",
+    "full_label": "Proof · release",
     "gate": "E",
     "state": "artifact",
     "files": [
@@ -245,6 +254,7 @@
    {
     "id": "field_review",
     "label": "Field · review",
+    "full_label": "Field · review",
     "gate": "—",
     "state": "absent",
     "files": [],
@@ -514,14 +524,15 @@
    {
     "axis": {
      "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE_SCREENING",
-     "label": "FSim conditional flame-length class (0 = no event)",
-     "unit": "source_native_categorical_class",
+     "label": "USFS FSim conditional flame-length class",
+     "unit": "class",
      "input_field": "conditional_flame_length_class_state",
      "valid_range": [
       0,
       6
      ],
-     "kind": "categorical"
+     "kind": "categorical",
+     "label_from_id": true
     },
     "curve_ids": [
      "WWV1_PAD_ELECTRICAL_FSIM_T4",

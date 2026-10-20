@@ -7,6 +7,7 @@ Nothing is sampled outside a declared valid domain; withheld zones stay gaps.
 from __future__ import annotations
 
 import importlib
+import re
 import math
 from fnmatch import fnmatchcase
 from typing import Any, Callable
@@ -77,9 +78,45 @@ def _curve(e: Entry, record: dict[str, Any], axis: dict[str, Any], series: list[
         "evaluator": evaluator,
         "tiers": {"shape": row.get("shape"), "shape_basis": row.get("shape_basis"), "cost": row.get("cost"), "cost_basis": row.get("cost_basis")},
         "row_notes": row.get("notes") or [],
+        "selected_by": selected_by(a.get("evaluation_contract"), record["curve_id"]),
         "variants": row.get("variants"),
         "notes": notes or [],
     }
+
+
+def _first_clause(text: str) -> str:
+    """Text up to the first ':', ',' or ';' outside parentheses."""
+    depth = 0
+    for i, ch in enumerate(text):
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth = max(0, depth - 1)
+        elif ch in ":,;" and depth == 0:
+            return text[:i].strip()
+    return text.strip()
+
+
+def selected_by(contract: dict[str, Any] | None, curve_id: str) -> list[dict[str, Any]]:
+    """Which evaluation-contract conditions select this curve (e.g. water condition: freshwater screening)."""
+    out: list[dict[str, Any]] = []
+    for key, val in (contract or {}).items():
+        if not (key.startswith("curve_selection_by_") or key == "record_selection") or not isinstance(val, dict):
+            continue
+        by = "response hypothesis · shape" if key == "record_selection" else key.replace("curve_selection_by_", "").replace("_", " ")
+        hits: list[list[str]] = []
+
+        def walk(node: Any, path: list[str]) -> None:
+            if isinstance(node, dict):
+                for k, v in node.items():
+                    walk(v, path + [k])
+            elif node == curve_id:
+                hits.append(path[:-1])
+
+        walk(val, [])
+        if hits:
+            out.append({"by": by, "when": [" · ".join(h).replace("_", " ") for h in hits]})
+    return out
 
 
 def _kat(declared: int = 0) -> dict[str, Any]:
@@ -305,7 +342,7 @@ def pathway_axis(a: dict[str, Any], rec: dict[str, Any], unit_label: str | None 
     hz = pw.get("hazard_axis") or {}
     return {"id": hz.get("id") or rec.get("x_axis"), "label": (hz.get("id") or rec.get("x_axis", "")).replace("_", " ").lower(),
             "unit": unit_label or hz.get("unit"), "input_field": hz.get("preferred_input_field"), "valid_range": hz.get("valid_range"),
-            "kind": "continuous"}
+            "kind": "continuous", "label_from_id": True}
 
 
 # ─── per-cell samplers ────────────────────────────────────────────────────────────────────────────────────────
@@ -783,7 +820,7 @@ def sample_no_evaluator(e: Entry, kat: dict[str, Any]) -> tuple[list[dict[str, A
     for rec in curve_records(a):
         pw = pathway_of(a, rec) or {}
         hz = pw.get("hazard_axis") or {}
-        axis = {"id": hz.get("id") or rec.get("x_axis"), "label": (hz.get("id") or "").replace("_", " "), "unit": hz.get("unit"), "input_field": hz.get("preferred_input_field"), "kind": "continuous", "valid_range": hz.get("valid_range")}
+        axis = {"id": hz.get("id") or rec.get("x_axis"), "label": (hz.get("id") or "").replace("_", " ").lower(), "unit": hz.get("unit"), "input_field": hz.get("preferred_input_field"), "kind": "continuous", "valid_range": hz.get("valid_range"), "label_from_id": True}
         knots = [[float(x), float(y)] for x, y in rec["parameters"]["points"]] if rec.get("curve_form") == "piecewise_linear" else []
         curves.append(_curve(e, rec, axis, [], evaluator=None, knots=knots, domain=list(hz["valid_range"]) if hz.get("valid_range") else None, drawn=False,
                              notes=["Reference evaluator planned in Phase 3 (DCD-D09); the consumer implementation sits in the Hazard repository and is not read here."]))
@@ -861,6 +898,21 @@ def sample_entry(e: Entry) -> dict[str, Any]:
                 c["known_answers"].append(p)
     else:
         raise AssertionError(f"{e.id}: no sampler")
+    axis_ids = {c["axis"]["id"] for c in curves}
+    if len(axis_ids) == 1 and e.data.get("input"):
+        first = _first_clause(e.data["input"])
+        unit_m = re.search(r"\(([^)]{1,12})\)\s*$", first)
+        name = re.sub(r"\s*\([^)]*\)\s*$", "", first)
+        for c in curves:
+            if c["axis"].get("label_from_id"):
+                c["axis"]["label"] = name[:1].lower() + name[1:] if len(name) > 1 and name[1].islower() else name
+                u = c["axis"].get("unit") or ""
+                if unit_m:
+                    c["axis"]["unit"] = unit_m.group(1)
+                elif "categorical" in u or u == "source_native_categorical_class":
+                    c["axis"]["unit"] = "class"
+                elif len(u) > 16:
+                    c["axis"]["unit"] = u.split()[0]
     expected_ids = {r["curve_id"] for r in curve_records(a)}
     got = {c["curve_id"] for c in curves}
     if expected_ids != got:

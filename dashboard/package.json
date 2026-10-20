@@ -2,13 +2,16 @@
   "name": "damage-curve-dashboard",
   "version": "0.1.0",
   "private": true,
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "npx serve out",
+    "start": "node scripts/serve-static.mjs",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "data": "cd .. && .venv/bin/python scripts/dashboard/build_dashboard_data.py"
   },
   "dependencies": {
     "echarts": "^6.1.0",

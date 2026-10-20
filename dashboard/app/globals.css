@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* The Hazard dashboard's token set (DCD-D03): zinc neutrals, one accent, the state pairs. Series tokens are new
+   here (discussion 06 §3.3) and were re-stepped so every adjacent pair passes the dataviz validator in both
+   themes; every series also carries a line style, so an overlay survives greyscale. */
+:root {
+  color-scheme: light;
+  --background: #fafafa;
+  --foreground: #18181b;
+  --chart-accent: #e0662f;
+  --card: #ffffff;
+  --card-foreground: #18181b;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --border: #e4e4e7;
+  --accent: #2563eb;
+  --accent-foreground: #ffffff;
+  --warn: #b45309;
+  --warn-bg: #fef3c7;
+  --danger: #b91c1c;
+  --danger-bg: #fee2e2;
+  --ok: #15803d;
+  --ok-bg: #dcfce7;
+  --series-1: #e0662f;
+  --series-2: #2563eb;
+  --series-3: #65a30d;
+  --series-4: #6d28d9;
+  --series-5: #be123c;
+  --hairline: color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+
+.dark {
+  color-scheme: dark;
+  --background: #111113;
+  --foreground: #ececef;
+  --chart-accent: #f08a4b;
+  --card: #1a1a1e;
+  --card-foreground: #ececef;
+  --muted: #232329;
+  --muted-foreground: #9d9da8;
+  --border: #2e2e35;
+  --accent: #5b8def;
+  --accent-foreground: #0c0c0e;
+  --warn: #f59e0b;
+  --warn-bg: #422006;
+  --danger: #f87171;
+  --danger-bg: #450a0a;
+  --ok: #4ade80;
+  --ok-bg: #052e16;
+  --series-1: #e0662f;
+  --series-2: #5b8def;
+  --series-3: #65a30d;
+  --series-4: #d946ef;
+  --series-5: #e11d48;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-warn: var(--warn);
+  --color-warn-bg: var(--warn-bg);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --color-ok: var(--ok);
+  --color-ok-bg: var(--ok-bg);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* the one focus ring: 2 px accent, never removed (06 §2.8) */
+:where(a, button, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* a reused binding is drawn as a reused binding — hatched, never as the cell's own curve (▨) */
+.hatch-reused {
+  background-image: repeating-linear-gradient(135deg, color-mix(in srgb, var(--muted-foreground) 28%, transparent) 0 1px, transparent 1px 6px);
+}
+/* a gap tile is a dashed outline with no fill (┈) */
+.tile-gap {
+  border-style: dashed;
+  background: transparent;
+}
+
+.thin-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+.thin-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* motion is for orientation only (06 §2.10); off entirely under reduced motion */
+.lens-fade { transition: background-color 150ms ease, color 150ms ease; }
+.drawer-slide { transition: transform 200ms ease; }
+@media (prefers-reduced-motion: reduce) {
+  .lens-fade, .drawer-slide { transition: none; }
+  * { animation: none !important; }
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
+}

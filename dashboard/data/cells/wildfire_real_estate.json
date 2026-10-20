@@ -41,8 +41,8 @@
    "shape": "T3",
    "cost": "T4",
    "occurrence": {
-    "mark": "—",
-    "label": "no register"
+    "mark": "?",
+    "label": "not searched"
    }
   },
   "review": {
@@ -56,12 +56,13 @@
    "label": "entry agent-read 2026-10-19 · release not yet reviewed"
   }
  },
- "summary": "Proposal, not in the runtime index — Wildfire on real estate: uS Forest Service home loss by flame-length class (shrub vegetation) for the house; warehouse 0.8x and office 0.9x from same-fire CAL FIRE inspection ratios.",
+ "summary": "Proposal, not in the runtime index — Wildfire on buildings: uS Forest Service home loss by flame-length class (shrub vegetation) for the house.",
  "chain": {
   "stations": [
    {
     "id": "scope",
     "label": "Scope",
+    "full_label": "Scope",
     "gate": "A",
     "state": "artifact",
     "files": [
@@ -81,6 +82,7 @@
    {
     "id": "units",
     "label": "Units",
+    "full_label": "Units",
     "gate": "A · B2",
     "state": "artifact",
     "files": [
@@ -96,6 +98,7 @@
    {
     "id": "axis_form",
     "label": "Axis · form",
+    "full_label": "Axis · form",
     "gate": "C",
     "state": "prose",
     "files": [],
@@ -112,12 +115,13 @@
       ]
      }
     ],
-    "fact": "piecewise linear",
+    "fact": "exact classes",
     "absent_sentence": null
    },
    {
     "id": "evidence",
     "label": "Evidence",
+    "full_label": "Evidence",
     "gate": "B",
     "state": "artifact",
     "files": [
@@ -141,6 +145,7 @@
    {
     "id": "value",
     "label": "Value",
+    "full_label": "Value",
     "gate": "B2",
     "state": "artifact",
     "files": [
@@ -160,6 +165,7 @@
    {
     "id": "audit",
     "label": "Audit",
+    "full_label": "Audit",
     "gate": "B2",
     "state": "prose",
     "files": [],
@@ -176,12 +182,13 @@
       ]
      }
     ],
-    "fact": "7 steps",
+    "fact": "7 steps in the dossier",
     "absent_sentence": null
    },
    {
     "id": "artifact",
     "label": "Artifact",
+    "full_label": "Artifact",
     "gate": "C",
     "state": "artifact",
     "files": [
@@ -209,6 +216,7 @@
    {
     "id": "capability",
     "label": "Capability",
+    "full_label": "Capability",
     "gate": "D",
     "state": "artifact",
     "files": [
@@ -223,7 +231,8 @@
    },
    {
     "id": "proof",
-    "label": "Proof · release",
+    "label": "Proof",
+    "full_label": "Proof · release",
     "gate": "E",
     "state": "artifact",
     "files": [
@@ -237,12 +246,13 @@
      }
     ],
     "evidence": [],
-    "fact": "44 of 48 KAT reproduced",
+    "fact": "44 of 44 KAT reproduced · 4 not run",
     "absent_sentence": null
    },
    {
     "id": "field_review",
     "label": "Field · review",
+    "full_label": "Field · review",
     "gate": "—",
     "state": "absent",
     "files": [],
@@ -509,14 +519,15 @@
    {
     "axis": {
      "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE_SCREENING",
-     "label": "FSim conditional flame-length class (0 = no event)",
-     "unit": "source_native_categorical_class",
+     "label": "FSim conditional flame-length class state",
+     "unit": "class",
      "input_field": "conditional_flame_length_class_state",
      "valid_range": [
       0,
       6
      ],
-     "kind": "categorical"
+     "kind": "categorical",
+     "label_from_id": true
     },
     "curve_ids": [
      "WFRE_RES_WRC_SHRUB",

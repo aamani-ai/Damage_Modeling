@@ -31,12 +31,15 @@ def _tier_phrase(tiers: set[str]) -> str:
     return f"with evidence from {'–'.join(sorted(tiers)[0:1] + sorted(tiers)[-1:])}"
 
 
-def asset_sentence(asset_label: str, cells: list[dict[str, Any]], searched_any: bool) -> str:
+def asset_sentence(noun: str, cells: list[dict[str, Any]], searched_any: bool) -> str:
     live = [c for c in cells if c["status"] == "live"]
     proposals = [c for c in cells if c["status"] == "proposal"]
     reused = [c for c in cells if c["status"] == "reused"]
     gaps = [c for c in cells if c["status"] == "gap"]
-    plural = asset_label.lower() if asset_label.lower().endswith("s") else asset_label.lower()
+    plural = noun.lower()
+    for group in (live, proposals, reused, gaps):
+        for c in group:
+            c["hazard"] = c["hazard"].lower()
     parts = []
     if live:
         tiers: set[str] = set()
@@ -62,7 +65,7 @@ def asset_sentence(asset_label: str, cells: list[dict[str, Any]], searched_any: 
 def cell_sentence(entry: dict[str, Any], status: str, value: dict[str, Any] | None, hazard_label: str, asset_label: str, drawn: bool | None) -> str:
     if entry["kind"] == "gap":
         return f"No curve for {hazard_label.lower()} on {asset_label.lower()} yet: {entry.get('reason', '').rstrip('.')}."
-    method = (entry.get("method") or {}).get("summary", "").rstrip(".")
+    method = (entry.get("method") or {}).get("summary", "").rstrip(".").split(";")[0].strip()
     lead = f"{hazard_label} on {asset_label.lower()}"
     if entry["kind"] == "binding":
         lead = f"{hazard_label} on {asset_label.lower()} reuses another cell's curve"
