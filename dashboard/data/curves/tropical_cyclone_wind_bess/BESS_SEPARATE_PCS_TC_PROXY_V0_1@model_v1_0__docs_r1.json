@@ -1,0 +1,411 @@
+{
+ "curve_id": "BESS_SEPARATE_PCS_TC_PROXY_V0_1",
+ "entry_id": "tropical_cyclone_wind_bess",
+ "damage_code_id": "BESS_TC_WIND_SCREENING_V1",
+ "version_key": "model_v1_0__docs_r1",
+ "artifact_sha256": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed",
+ "failure_unit_id": "BESS_SEPARATE_PCS",
+ "subsystem": "pcs",
+ "component": "separate PCS group",
+ "treatment": "primary_nonzero",
+ "part": "Separate PCS",
+ "pathway_id": "tropical_cyclone_wind",
+ "curve_form": "ordered_damage_state_lognormal",
+ "x_axis_id": "bess_tc_event_to_reference_pressure_ratio",
+ "y_axis": "failure_unit_damage_ratio",
+ "parameters": {
+  "beta_ln": 0.35,
+  "damage_states": [
+   {
+    "state_id": "BESS_PCS_TC_DS0",
+    "cost_ratio": 0.0,
+    "affected_subsystems": [],
+    "description": "Related electrical-equipment T4 transfer; not matched OEM fragility",
+    "tier": "T4_placeholder_or_expert_judgment",
+    "source_ids": [
+     "BW-S02",
+     "BW-S03"
+    ]
+   },
+   {
+    "state_id": "BESS_PCS_TC_DS1",
+    "cost_ratio": 0.1,
+    "affected_subsystems": [
+     "separate_pcs"
+    ],
+    "description": "Related electrical-equipment T4 transfer; not matched OEM fragility",
+    "tier": "T4_placeholder_or_expert_judgment",
+    "source_ids": [
+     "BW-S02",
+     "BW-S03"
+    ]
+   },
+   {
+    "state_id": "BESS_PCS_TC_DS2",
+    "cost_ratio": 0.4,
+    "affected_subsystems": [
+     "separate_pcs"
+    ],
+    "description": "Related electrical-equipment T4 transfer; not matched OEM fragility",
+    "tier": "T4_placeholder_or_expert_judgment",
+    "source_ids": [
+     "BW-S02",
+     "BW-S03"
+    ]
+   },
+   {
+    "state_id": "BESS_PCS_TC_DS3",
+    "cost_ratio": 1.0,
+    "affected_subsystems": [
+     "separate_pcs"
+    ],
+    "description": "Related electrical-equipment T4 transfer; not matched OEM fragility",
+    "tier": "T4_placeholder_or_expert_judgment",
+    "source_ids": [
+     "BW-S02",
+     "BW-S03"
+    ]
+   }
+  ],
+  "capacity_scenarios": [
+   {
+    "scenario_id": "lower_resistance",
+    "state_medians": [
+     0.72,
+     1.0,
+     1.32
+    ],
+    "tier": "T4_placeholder_or_expert_judgment",
+    "source_ids": [
+     "BW-S02"
+    ],
+    "interpretation": "unweighted screening resistance scenario on a qualified site-facility demand/design ratio; not fitted and not a probabilistic confidence bound"
+   },
+   {
+    "scenario_id": "central_screening",
+    "state_medians": [
+     0.9,
+     1.25,
+     1.65
+    ],
+    "tier": "T4_placeholder_or_expert_judgment",
+    "source_ids": [
+     "BW-S02"
+    ],
+    "interpretation": "unweighted screening resistance scenario on a qualified site-facility demand/design ratio; not fitted and not a probabilistic confidence bound"
+   },
+   {
+    "scenario_id": "upper_resistance",
+    "state_medians": [
+     1.125,
+     1.5625,
+     2.0625
+    ],
+    "tier": "T4_placeholder_or_expert_judgment",
+    "source_ids": [
+     "BW-S02"
+    ],
+    "interpretation": "unweighted screening resistance scenario on a qualified site-facility demand/design ratio; not fitted and not a probabilistic confidence bound"
+   }
+  ]
+ },
+ "record_extra": {},
+ "axis": {
+  "id": "bess_tc_event_to_reference_pressure_ratio",
+  "label": "bess tc event to reference pressure ratio",
+  "unit": "dimensionless comparable pressure-demand/reference ratio",
+  "input_field": "pressure_ratio",
+  "kind": "continuous",
+  "valid_range": [
+   0,
+   2
+  ]
+ },
+ "domain": [
+  0,
+  2
+ ],
+ "withheld_zones": [],
+ "knots": [],
+ "series": [],
+ "envelope": null,
+ "scenario_note": null,
+ "known_answers": [],
+ "source_points": [],
+ "drawn": false,
+ "no_evaluator_sentence": "Not drawn — no reference evaluator for this form in this repository (G9).",
+ "evaluator": null,
+ "tiers": {
+  "shape": "T4",
+  "shape_basis": "Solar TC-wind source states unchanged (BW-P07)",
+  "cost": "T4",
+  "cost_basis": "Source state costs 0 / 0.1 / 0.4 / 1 unchanged (BW-P07)"
+ },
+ "row_notes": [
+  {
+   "type": "reused_from",
+   "text": "tropical_cyclone_wind_solar v2.1 docs r2 (states and costs unchanged)"
+  }
+ ],
+ "variants": "resistance: lower, central or upper (unweighted)",
+ "notes": [
+  "Reference evaluator planned in Phase 3 (DCD-D09); the consumer implementation sits in the Hazard repository and is not read here."
+ ],
+ "title": "Hurricane wind × Battery storage",
+ "asset": {
+  "slug": "bess",
+  "label": "Battery storage"
+ },
+ "hazard": {
+  "slug": "hurricane_wind",
+  "label": "Hurricane wind"
+ },
+ "status": "live",
+ "rail": {
+  "exists": {
+   "status": "live",
+   "mark": "■",
+   "label": "LIVE",
+   "qualifier": "screening"
+  },
+  "evidence": {
+   "shape": "T4",
+   "cost": "T4",
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   }
+  },
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+   "entry_read_kind": "agent",
+   "release_review": "same author with independent numerical methods",
+   "release_review_code": "same_author_with_independent_numerical_methods",
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release same author with independent numerical m"
+  }
+ },
+ "parameters_rows": [
+  {
+   "id": "BW-P01",
+   "name": "pressure_axis",
+   "value": "(comparable event/design3second gust)^2",
+   "tier": "T4",
+   "source_ids": [
+    "BW-S02",
+    "BW-S13"
+   ],
+   "claim_ids": [],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": "axis_bridge",
+   "status": "research_bridge",
+   "reasoning": "Pressure normalization only with declared common wind basis; no unqualified height/shielding or aerodynamic credit",
+   "update_trigger": "Qualified BESS demand bridge"
+  },
+  {
+   "id": "BW-P02",
+   "name": "state_probability_shape",
+   "value": "beta0.35 and inherited three source scenarios",
+   "tier": "T4",
+   "source_ids": [
+    "BW-S02"
+   ],
+   "claim_ids": [],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": "curve_fit_shape",
+   "status": "research_transfer_not_fit",
+   "reasoning": "Existing synthetic electrical-equipment response reused explicitly as hypothesis; no target observations fitted",
+   "update_trigger": "Matched structural/enclosure failure data"
+  },
+  {
+   "id": "BW-P03",
+   "name": "limited_group_cost",
+   "value": "20/141.3 of cabinet value",
+   "tier": "T4",
+   "source_ids": [
+    "BW-S12"
+   ],
+   "claim_ids": [],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": "exposure_or_value",
+   "status": "research_policy",
+   "reasoning": "Cost fraction derived from related benchmark; mapping limited damage to whole composite repair is a separate engineering assumption",
+   "update_trigger": "Repair itemization or selected candidate revision"
+  },
+  {
+   "id": "BW-P04",
+   "name": "major_repair_if_serviceable",
+   "value": "27.5/141.3 of cabinet value",
+   "tier": "T4",
+   "source_ids": [
+    "BW-S11",
+    "BW-S12"
+   ],
+   "claim_ids": [],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": "exposure_or_value",
+   "status": "unselected_alternative",
+   "reasoning": "Repairs enclosure/rack/safety composite plus thermal group while assuming battery and management remain reusable; not demonstrated service result",
+   "update_trigger": "Configuration-matched repair guidance or owner local-test ruling"
+  },
+  {
+   "id": "BW-P05",
+   "name": "major_compromise_replacement",
+   "value": "1.0 of integrated cabinet value",
+   "tier": "T4",
+   "source_ids": [
+    "BW-S11",
+    "BW-S12"
+   ],
+   "claim_ids": [],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": "boundary_or_cap",
+   "status": "BW_Q01_APPROVED_LOCAL_ONLY",
+   "reasoning": "Conservative return-to-service hypothesis selected by owner; source motivates evaluation but does not mandate universal replacement",
+   "update_trigger": "Matched repair evidence or later qualification"
+  },
+  {
+   "id": "BW-P06",
+   "name": "destructive_state_cost",
+   "value": "1.0 of integrated cabinet value",
+   "tier": "T4",
+   "source_ids": [
+    "BW-S01",
+    "BW-S11",
+    "BW-S12"
+   ],
+   "claim_ids": [],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": "boundary_or_cap",
+   "status": "research_policy",
+   "reasoning": "Direct replacement of the defined destructive unit once; no separate internal/cascade cost",
+   "update_trigger": "Supported partial salvage or replacement scope"
+  },
+  {
+   "id": "BW-P07",
+   "name": "pcs_response",
+   "value": "Unchanged source normalized-pressure states and costs0:0.1:0.4:1",
+   "tier": "T4",
+   "source_ids": [
+    "BW-S02",
+    "BW-S03"
+   ],
+   "claim_ids": [],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": "curve_fit_shape",
+   "status": "proposed_related_proxy",
+   "reasoning": "Apply only to separate PCS candidate value; no Solar collection dollars or fullplant scaling",
+   "update_trigger": "Target-specific local binding and tests"
+  },
+  {
+   "id": "BW-P08",
+   "name": "national_wind_reference",
+   "value": "Not selected by this research experiment",
+   "tier": "T4",
+   "source_ids": [
+    "BW-S10",
+    "BW-S13"
+   ],
+   "claim_ids": [],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": "selector_default",
+   "status": "consumer_qualification_pending",
+   "reasoning": "Existing ASCE surface has multiple MRIs; choose explicit BESS screening policy before geographic losses",
+   "update_trigger": "Bounded Hazard reference qualification"
+  },
+  {
+   "id": "BW-P09",
+   "name": "unbound_property",
+   "value": "15400000USD remains without wind response",
+   "tier": "T3",
+   "source_ids": [
+    "BW-S01"
+   ],
+   "claim_ids": [],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": "exposure_or_value",
+   "status": "unresolved_not_zero",
+   "reasoning": "Full budget retained and candidate hardware never renormalized to100percent",
+   "update_trigger": "Qualified same-scope EBOS/civil/support response"
+  }
+ ],
+ "sources_for_curve": [
+  "BW-S01",
+  "BW-S02",
+  "BW-S03",
+  "BW-S10",
+  "BW-S11",
+  "BW-S12",
+  "BW-S13"
+ ],
+ "occurrence": {
+  "bucket": "pcs",
+  "state": "not_searched",
+  "mark": "?",
+  "sentence": "Not searched — nobody has looked for field reports yet.",
+  "reports": [],
+  "twin_lead": {
+   "level": null,
+   "nodes": []
+  }
+ },
+ "review": {
+  "entry_read_on": "2026-10-19",
+  "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+  "entry_read_kind": "agent",
+  "release_review": "same author with independent numerical methods",
+  "release_review_code": "same_author_with_independent_numerical_methods",
+  "review": null,
+  "tone": "neutral",
+  "label": "entry agent-read 2026-10-19 · release same author with independent numerical m"
+ },
+ "summary": "Separate PCS: ordered damage state lognormal on bess tc event to reference pressure ratio; shape T4, cost T4; not drawn here. Not searched — nobody has looked for field reports yet.",
+ "versions": [
+  {
+   "columns": [
+    "Date",
+    "Model/docs",
+    "State",
+    "Canonical/package",
+    "Basis"
+   ],
+   "row": [
+    "2026-10-19",
+    "v1.0 / r1",
+    "`NEW_CELL_MODEL_RELEASE`, conditional annual screening",
+    "true / repository canonical, portable package unreleased",
+    "Same response/values; [qualification](current/validation.json)"
+   ],
+   "source": "VERSION_REGISTRY.md"
+  },
+  {
+   "columns": [
+    "Date",
+    "Model/docs",
+    "State",
+    "Canonical/package",
+    "Basis"
+   ],
+   "row": [
+    "2026-10-19",
+    "v0.1 / r1",
+    "`NEW_CELL_SCAFFOLD` with owner-selected local-test candidate",
+    "false / unreleased, not included",
+    "BW-Q01; [validation](proposed/local_candidate_v0_1/validation.json)"
+   ],
+   "source": "VERSION_REGISTRY.md"
+  }
+ ],
+ "data_path": "curves/tropical_cyclone_wind_bess/BESS_SEPARATE_PCS_TC_PROXY_V0_1@model_v1_0__docs_r1.json"
+}

@@ -1,0 +1,442 @@
+{
+ "curve_id": "BWF01_ENC_limited_repair_sensitivity_electronics_ordinal",
+ "entry_id": "wildfire_bess",
+ "damage_code_id": "BESS_WILDFIRE_SCREENING_V1",
+ "version_key": "model_v1_0__docs_r1",
+ "artifact_sha256": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491",
+ "failure_unit_id": "BESS_INTEGRATED_ENCLOSURE",
+ "subsystem": "battery_enclosures",
+ "component": "integrated battery/cooling/BMS/enclosure/safety",
+ "treatment": "primary_nonzero",
+ "part": "Integrated battery enclosure",
+ "pathway_id": "wildfire_thermal_attack",
+ "curve_form": "piecewise_linear",
+ "x_axis_id": "fsim_class_state_exact_integer_only",
+ "y_axis": "failure_unit_damage_ratio",
+ "parameters": {
+  "points": [
+   [
+    0,
+    0.0
+   ],
+   [
+    1,
+    0.00038924274593064406
+   ],
+   [
+    2,
+    0.0019462137296532202
+   ],
+   [
+    3,
+    0.009731068648266101
+   ],
+   [
+    4,
+    0.03503184713375796
+   ],
+   [
+    5,
+    0.08757961783439491
+   ],
+   [
+    6,
+    0.15569709837225762
+   ]
+  ]
+ },
+ "record_extra": {
+  "valid_range": [
+   0,
+   6
+  ],
+  "interpolation_policy": "linear_between_source_knots",
+  "extrapolation_policy": "reject every noninteger or unknown state; exact lookup only; no interpolation executed",
+  "selector_match": {
+   "reference_id": "BESS_LFP_R1_WILDFIRE_ORDINAL_LOCAL_V0_1",
+   "response_hypothesis_id": "limited_repair_sensitivity",
+   "shape_scenario": "electronics_ordinal"
+  },
+  "source_parameter_refs": [
+   "BWF-P07",
+   "BWF-P08",
+   "BWF-P10"
+  ],
+  "metadata_flags": [
+   "LOCAL_TEST_ONLY_NOT_CANONICAL",
+   "BESS_CLASS_RESPONSE_TRANSFER_T4_NOT_CALIBRATED",
+   "SOURCE_DR_IS_NOT_IGNITION_PROBABILITY",
+   "FSIM_CLASS_IS_NOT_LOCAL_HEAT_FLUX",
+   "BWF_Q01_FULL_REPLACEMENT_AFTER_BATTERY_COMPROMISE",
+   "PARTIAL_PROPERTY_SCOPE",
+   "REPAIR_AND_SHAPE_SENSITIVITIES_ARE_UNWEIGHTED_HYPOTHESES",
+   "NO_GENERIC_MITIGATION_CREDIT",
+   "CROSS_UNIT_PROPAGATION_UNQUANTIFIED",
+   "CURVE_INTRINSIC_SPREAD_NOT_CARRIED",
+   "ANNUAL_SOURCE_COUPLING_NOT_QUALIFIED"
+  ]
+ },
+ "axis": {
+  "id": "FSIM_CLASS_EXACT",
+  "label": "FSIM CLASS EXACT",
+  "unit": "source_native_categorical_class",
+  "input_field": "class_state",
+  "kind": "continuous",
+  "valid_range": [
+   0,
+   6
+  ]
+ },
+ "domain": [
+  0,
+  6
+ ],
+ "withheld_zones": [],
+ "knots": [
+  [
+   0.0,
+   0.0
+  ],
+  [
+   1.0,
+   0.00038924274593064406
+  ],
+  [
+   2.0,
+   0.0019462137296532202
+  ],
+  [
+   3.0,
+   0.009731068648266101
+  ],
+  [
+   4.0,
+   0.03503184713375796
+  ],
+  [
+   5.0,
+   0.08757961783439491
+  ],
+  [
+   6.0,
+   0.15569709837225762
+  ]
+ ],
+ "series": [],
+ "envelope": null,
+ "scenario_note": null,
+ "known_answers": [],
+ "source_points": [],
+ "drawn": false,
+ "no_evaluator_sentence": "Not drawn — no reference evaluator for this form in this repository (G9).",
+ "evaluator": null,
+ "tiers": {
+  "shape": "T4",
+  "shape_basis": "Solar electrical class tables transferred as ordinal weights (BWF-P07)",
+  "cost": "T4",
+  "cost_basis": "Owner-selected replacement and cost-split repair amounts (BWF-P08)"
+ },
+ "row_notes": [
+  {
+   "type": "opt_in_only",
+   "text": "Repair versions need an explicit serviceability counterfactual"
+  },
+  {
+   "type": "key_assumption",
+   "text": "Class weights are economic mean responses, not ignition probabilities"
+  }
+ ],
+ "variants": "consequence: approved replacement / non-cell repair / limited repair; shape: electronics or heavy-electrical (unweighted)",
+ "notes": [
+  "Reference evaluator planned in Phase 3 (DCD-D09); the consumer implementation sits in the Hazard repository and is not read here."
+ ],
+ "title": "Wildfire × Battery storage",
+ "asset": {
+  "slug": "bess",
+  "label": "Battery storage"
+ },
+ "hazard": {
+  "slug": "wildfire",
+  "label": "Wildfire"
+ },
+ "status": "live",
+ "rail": {
+  "exists": {
+   "status": "live",
+   "mark": "■",
+   "label": "LIVE",
+   "qualifier": "screening"
+  },
+  "evidence": {
+   "shape": "T4",
+   "cost": "T4",
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   }
+  },
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+   "entry_read_kind": "agent",
+   "release_review": "same author with independent numerical methods",
+   "release_review_code": "same_author_with_independent_numerical_methods",
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release same author with independent numerical m"
+  }
+ },
+ "parameters_rows": [
+  {
+   "id": "BWF-P07",
+   "name": "enclosure ordinal mean-response transfer",
+   "value": {
+    "electronics_ordinal": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      0.002
+     ],
+     [
+      2,
+      0.01
+     ],
+     [
+      3,
+      0.05
+     ],
+     [
+      4,
+      0.18
+     ],
+     [
+      5,
+      0.45
+     ],
+     [
+      6,
+      0.8
+     ]
+    ],
+    "heavy_electrical_ordinal": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      0.001
+     ],
+     [
+      2,
+      0.006
+     ],
+     [
+      3,
+      0.03
+     ],
+     [
+      4,
+      0.12
+     ],
+     [
+      5,
+      0.35
+     ],
+     [
+      6,
+      0.7
+     ]
+    ]
+   },
+   "tier": "T4",
+   "source_ids": [
+    "BWF-S03",
+    "BWF-S04",
+    "BWF-S05"
+   ],
+   "claim_ids": [],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": null,
+   "status": null,
+   "reasoning": "Electronics response is the simple reference for enclosed electronic/cooling/battery hardware; heavy electrical is a contrasting lower-response shape. Both are new T4 target transfers, not physical or probabilistic conversion of the donor DR.",
+   "update_trigger": "Matched local attack, construction, inspected damage and same-unit repair costs"
+  },
+  {
+   "id": "BWF-P08",
+   "name": "same-unit consequence policy",
+   "value": {
+    "approved_replacement": 1050000.0,
+    "noncell_repair_sensitivity": 334394.90445859876,
+    "limited_repair_sensitivity": 204352.44161358813
+   },
+   "tier": "T4",
+   "source_ids": [
+    "BWF-S01",
+    "BWF-S09",
+    "BWF-S12"
+   ],
+   "claim_ids": [],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": null,
+   "status": null,
+   "reasoning": "Owner selects full replacement for compromised battery contents; cheaper outcomes require the explicit retained-hardware serviceability counterfactual.",
+   "update_trigger": "OEM disposition, actual repair BOM/costs or revised owner policy"
+  },
+  {
+   "id": "BWF-P09",
+   "name": "PCS adjacent electrical transfer",
+   "value": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     0.002
+    ],
+    [
+     2,
+     0.01
+    ],
+    [
+     3,
+     0.05
+    ],
+    [
+     4,
+     0.18
+    ],
+    [
+     5,
+     0.45
+    ],
+    [
+     6,
+     0.8
+    ]
+   ],
+   "tier": "T4",
+   "source_ids": [
+    "BWF-S01",
+    "BWF-S03"
+   ],
+   "claim_ids": [],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": null,
+   "status": null,
+   "reasoning": "Separate PCS has related enclosed power-electronic hardware; it is not battery contents or a whole GSU. Source response is retained without target calibration.",
+   "update_trigger": "Matched PCS thermal exposure and repair evidence"
+  },
+  {
+   "id": "BWF-P10",
+   "name": "site/cost/uncertainty controls",
+   "value": "No blanket protection, no exposed-share default, no stochastic Damage-state draw, no residual zero",
+   "tier": "T4",
+   "source_ids": [
+    "BWF-S01",
+    "BWF-S02",
+    "BWF-S08",
+    "BWF-S10"
+   ],
+   "claim_ids": [],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": null,
+   "status": null,
+   "reasoning": "Keep reference/context limits explicit; use per-unit conditional means only. Source BP, joint events and annual caps stay with Hazard.",
+   "update_trigger": "Qualified consumer coupling or matched protection/propagation/value evidence"
+  }
+ ],
+ "sources_for_curve": [
+  "BWF-S01",
+  "BWF-S02",
+  "BWF-S03",
+  "BWF-S04",
+  "BWF-S05",
+  "BWF-S08",
+  "BWF-S09",
+  "BWF-S10",
+  "BWF-S12"
+ ],
+ "occurrence": {
+  "bucket": "battery_enclosures",
+  "state": "not_searched",
+  "mark": "?",
+  "sentence": "Not searched — nobody has looked for field reports yet.",
+  "reports": [],
+  "twin_lead": {
+   "level": "M",
+   "nodes": [
+    {
+     "node": "be_modules",
+     "name": "Battery Modules",
+     "level": 2,
+     "why": "External fire can propagate into enclosures"
+    },
+    {
+     "node": "be_hvac",
+     "name": "Chiller & Liquid Loop",
+     "level": 1,
+     "why": "Smoke fouls coils"
+    },
+    {
+     "node": "be_fire",
+     "name": "Fire & Gas Detection",
+     "level": 2,
+     "why": "Smoke triggers detectors; external fire risk"
+    }
+   ]
+  }
+ },
+ "review": {
+  "entry_read_on": "2026-10-19",
+  "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+  "entry_read_kind": "agent",
+  "release_review": "same author with independent numerical methods",
+  "release_review_code": "same_author_with_independent_numerical_methods",
+  "review": null,
+  "tone": "neutral",
+  "label": "entry agent-read 2026-10-19 · release same author with independent numerical m"
+ },
+ "summary": "Integrated battery enclosure: piecewise linear on FSIM CLASS EXACT; shape T4, cost T4; not drawn here. Not searched — nobody has looked for field reports yet.",
+ "versions": [
+  {
+   "columns": [
+    "Date",
+    "Model / docs",
+    "State",
+    "Change"
+   ],
+   "row": [
+    "2026-10-19",
+    "v1.0 / r1",
+    "Current repository-canonical conditional annual screening",
+    "Unchanged conditional records/values; source, same-unit cap and independent annual proof; no national or portable admission."
+   ],
+   "source": "VERSION_REGISTRY.md"
+  },
+  {
+   "columns": [
+    "Date",
+    "Model / docs",
+    "State",
+    "Change"
+   ],
+   "row": [
+    "2026-10-19",
+    "v0.1 / r1",
+    "Proposed local-test candidate; not canonical or indexed",
+    "BWF-Q01 consequence policy, grouped enclosure/PCS response, ordinal shape and repair sensitivities."
+   ],
+   "source": "VERSION_REGISTRY.md"
+  }
+ ],
+ "data_path": "curves/wildfire_bess/BWF01_ENC_limited_repair_sensitivity_electronics_ordinal@model_v1_0__docs_r1.json"
+}

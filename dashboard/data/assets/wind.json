@@ -1,0 +1,874 @@
+{
+ "asset": {
+  "slug": "wind",
+  "label": "Wind farm",
+  "catalogue": "Wind farm",
+  "href": "/assets/wind"
+ },
+ "summary": "Flood, Hurricane wind, Convective wind and Wildfire have curves for wind farm, all from transferred or policy evidence (T3–T4); Hail has none; nobody has yet searched for field reports.",
+ "reference": null,
+ "hazards": [
+  {
+   "slug": "hail",
+   "label": "Hail",
+   "catalogue": "Hail",
+   "twin": [
+    "hail"
+   ],
+   "entry_tokens": [
+    "hail"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "hail_wind",
+   "status": "gap",
+   "cell_title": "Hail × Wind farm",
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "flood",
+   "label": "Flood",
+   "catalogue": "Flood",
+   "twin": [
+    "flood"
+   ],
+   "entry_tokens": [
+    "flood"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "flood_wind",
+   "status": "live",
+   "cell_title": "Flood × Wind farm",
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "hurricane_wind",
+   "label": "Hurricane wind",
+   "catalogue": "Hurricane wind",
+   "twin": [
+    "wind"
+   ],
+   "entry_tokens": [
+    "tropical_cyclone_wind",
+    "hurricane"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "tropical_cyclone_wind_wind",
+   "status": "live",
+   "cell_title": "Hurricane wind × Wind farm",
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "convective_wind",
+   "label": "Convective wind",
+   "catalogue": "Convective wind",
+   "twin": [
+    "wind"
+   ],
+   "entry_tokens": [
+    "convective_wind",
+    "strong_wind",
+    "wind_tornado"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "wind_tornado_wind",
+   "status": "live",
+   "cell_title": "Convective wind × Wind farm",
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "wildfire",
+   "label": "Wildfire",
+   "catalogue": "Wildfire",
+   "twin": [
+    "wildfire"
+   ],
+   "entry_tokens": [
+    "wildfire"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "wildfire_wind",
+   "status": "live",
+   "cell_title": "Wildfire × Wind farm",
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "heat",
+   "label": "Heat",
+   "catalogue": null,
+   "twin": [
+    "heat"
+   ],
+   "entry_tokens": [],
+   "outside_the_five": true,
+   "effect": "performance",
+   "effect_note": "The twin's heat leads (ageing, derating, chiller capacity) work through performance, not physical damage; pointer to the outage-as-performance work, no curve (discussion 04 §6).",
+   "entry_id": null,
+   "status": null,
+   "cell_title": null,
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "icing",
+   "label": "Icing",
+   "catalogue": null,
+   "twin": [
+    "icing"
+   ],
+   "entry_tokens": [],
+   "outside_the_five": true,
+   "effect": "performance",
+   "effect_note": "Cold limits charge rate until heated; snow load on venting panels is the one physical lead (discussion 04 §6, ledger C-172).",
+   "entry_id": null,
+   "status": null,
+   "cell_title": null,
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "lightning",
+   "label": "Lightning",
+   "catalogue": null,
+   "twin": [
+    "lightning"
+   ],
+   "entry_tokens": [],
+   "outside_the_five": true,
+   "effect": "damage",
+   "effect_note": "No hazard cell exists; the twin carries Medium surge leads on the electronics (discussion 04 §6).",
+   "entry_id": null,
+   "status": null,
+   "cell_title": null,
+   "occurrence_href": null,
+   "has_register": false
+  }
+ ],
+ "rows": [
+  {
+   "key": "FACILITY_GSU_SUBSTATION_SOURCE_NATIVE",
+   "label": "Facility Gsu Substation Source Native",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "FACILITY_GSU_SUBSTATION_SOURCE_NATIVE"
+   ],
+   "cells": {
+    "flood": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "flood_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T3",
+      "cost": "T3",
+      "curves": [
+       "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL"
+      ],
+      "drawn": true
+     }
+    },
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "hail_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     }
+    }
+   }
+  },
+  {
+   "key": "REPEATED_TURBINE_SOURCE_NATIVE",
+   "label": "Repeated Turbine Source Native",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "REPEATED_TURBINE_SOURCE_NATIVE"
+   ],
+   "cells": {
+    "hurricane_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "tropical_cyclone_wind_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T3",
+      "cost": "T4",
+      "curves": [
+       "TCWW_JAIMES_1MW_44M_SCREENING",
+       "TCWW_JAIMES_2P5MW_80M_SCREENING",
+       "TCWW_JAIMES_3P3MW_100M_SCREENING",
+       "TCWW_JAIMES_3P3MW_AS_CANONICAL_5MW_TOWER_PROXY_V1"
+      ],
+      "drawn": true
+     }
+    },
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "hail_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     }
+    }
+   }
+  },
+  {
+   "key": "REPEATED_TURBINE_PAD_ELECTRICAL",
+   "label": "Repeated Turbine Pad Electrical",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "REPEATED_TURBINE_PAD_ELECTRICAL"
+   ],
+   "cells": {
+    "wildfire": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "wildfire_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "WWV1_PAD_ELECTRICAL_FSIM_T4"
+      ],
+      "drawn": true
+     }
+    },
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "hail_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     }
+    }
+   }
+  },
+  {
+   "key": "FACILITY_GSU_SUBSTATION",
+   "label": "Facility Gsu Substation",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "FACILITY_GSU_SUBSTATION"
+   ],
+   "cells": {
+    "wildfire": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "wildfire_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "WWV1_GSU_PROTECTION_CONTROL_DC_FSIM_T4"
+      ],
+      "drawn": true
+     }
+    },
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "hail_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     }
+    }
+   }
+  },
+  {
+   "key": "ROTOR_ASSEMBLY",
+   "label": "Rotor Assembly",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "ROTOR_ASSEMBLY"
+   ],
+   "cells": {
+    "convective_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "wind_tornado_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T3",
+      "curves": [
+       "WT_BLADE_STRUCT"
+      ],
+      "drawn": true
+     }
+    },
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "hail_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     }
+    }
+   }
+  },
+  {
+   "key": "TOWER",
+   "label": "Tower",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "TOWER"
+   ],
+   "cells": {
+    "convective_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "wind_tornado_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T3",
+      "curves": [
+       "WT_TOWER_STRUCT"
+      ],
+      "drawn": true
+     }
+    },
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "hail_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     }
+    }
+   }
+  },
+  {
+   "key": "NACELLE",
+   "label": "Nacelle",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "NACELLE"
+   ],
+   "cells": {
+    "convective_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "wind_tornado_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T3",
+      "curves": [
+       "WT_NACELLE_CONSEQ"
+      ],
+      "drawn": true
+     }
+    },
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "hail_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     }
+    }
+   }
+  },
+  {
+   "key": "FOUNDATION",
+   "label": "Foundation",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "FOUNDATION"
+   ],
+   "cells": {
+    "convective_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "wind_tornado_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T3",
+      "curves": [
+       "WT_FOUNDATION_OT"
+      ],
+      "drawn": true
+     }
+    },
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "hail_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     }
+    }
+   }
+  },
+  {
+   "key": "POWER_ELECTRONICS",
+   "label": "Power Electronics",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "POWER_ELECTRONICS"
+   ],
+   "cells": {
+    "convective_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "wind_tornado_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "WT_POWER_ELEC_ACCEL"
+      ],
+      "drawn": true
+     }
+    },
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "hail_wind",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     }
+    }
+   }
+  }
+ ],
+ "entries": [
+  {
+   "entry_id": "flood_wind",
+   "kind": "cell",
+   "status": "live",
+   "title": "Flood × Wind farm",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T3",
+    "cost": "T3",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and release decision",
+    "entry_read_kind": "agent",
+    "release_review": "reviewed screening release",
+    "release_review_code": "reviewed_screening_release",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release reviewed screening release"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "FLOOD_WIND_FEMA_HAZUS_SUBSTATION_SCREENING_V1",
+    "model": "model v1.0",
+    "docs": "docs r1",
+    "version_key": "model_v1_0__docs_r1",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "37da745d87a4722e13118319bd30d9d2bcfd18dabc2a198ac6b8b1422bc3e1c1",
+    "consumer_pin": "flood_wind@model_v1_0__docs_r1"
+   },
+   "summary": "Flood on wind farm: fEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points; 6 parts of the asset's value have no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 1,
+   "n_drawn": 1,
+   "outside_checks": 0,
+   "chain_core_as_files": 5,
+   "generation": "skill",
+   "aria_label": "Flood × Wind farm, live, partial, shape T3, cost T3, no field-report register",
+   "href": "/cells/flood_wind"
+  },
+  {
+   "entry_id": "hail_wind",
+   "kind": "gap",
+   "status": "gap",
+   "title": "Hail × Wind farm",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail"
+   },
+   "exists": {
+    "status": "gap",
+    "mark": "┈",
+    "label": "GAP",
+    "qualifier": null
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "–",
+    "cost": "–",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell README and deep-curation decision",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "gap",
+    "damage_code_id": null,
+    "model": null,
+    "docs": null,
+    "version_key": null,
+    "sha256": null
+   },
+   "summary": "No curve for hail on wind farm yet: Model v0.1 is a fail-closed research scaffold with no curve records: no evidence yet links one hail event's impact on a blade to an inspected blade state and that blade's repair cost, and no hail-to-blade input axis is fixed (docs r2 deep curation kept it a strict no-go).",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 0,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 0,
+   "generation": "gap",
+   "aria_label": "Hail × Wind farm, gap, no field-report register",
+   "href": "/cells/hail_wind"
+  },
+  {
+   "entry_id": "tropical_cyclone_wind_wind",
+   "kind": "cell",
+   "status": "live",
+   "title": "Hurricane wind × Wind farm",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T3",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and decision log",
+    "entry_read_kind": "agent",
+    "release_review": "reviewed owner approved tower only screening release",
+    "release_review_code": "reviewed_owner_approved_tower_only_screening_release",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release reviewed owner approved tower only scree"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "TROPICAL_CYCLONE_WIND_WIND_JAIMES_TOWER_SCREENING_V1_2",
+    "model": "model v1.2",
+    "docs": "docs r2",
+    "version_key": "model_v1_2__docs_r2",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "009996c07eb8150f79f11741d42b6cd37562d655ee336f82f178ccdeb987c992",
+    "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2"
+   },
+   "summary": "Hurricane wind on wind farm: published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; the 3.3 MW / 100 m curve stands in for the canonical 5 MW turbine, tower value only; 16 % of the reference value has a curve and 84 % has none.",
+   "no_evaluator": false,
+   "share_covered": 0.16,
+   "n_curves": 4,
+   "n_drawn": 4,
+   "outside_checks": 1,
+   "chain_core_as_files": 5,
+   "generation": "skill",
+   "aria_label": "Hurricane wind × Wind farm, live, partial, shape T3, cost T4, no field-report register",
+   "href": "/cells/tropical_cyclone_wind_wind"
+  },
+  {
+   "entry_id": "wildfire_wind",
+   "kind": "cell",
+   "status": "live",
+   "title": "Wildfire × Wind farm",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and release decision",
+    "entry_read_kind": "agent",
+    "release_review": "reviewed screening release",
+    "release_review_code": "reviewed_screening_release",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release reviewed screening release"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "WILDFIRE_WIND_PARTIAL_ELECTRICAL_SCREENING_V1",
+    "model": "model v1.0",
+    "docs": "docs r1",
+    "version_key": "model_v1_0__docs_r1",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "3f923f506a2082dd2f074c8b3cc3d696288097072eb8b6f803f3eb7d3f2b4e0d",
+    "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
+   },
+   "summary": "Wildfire on wind farm: cell-local Tier-4 screening points per FSim flame-length class, adopted under owner direction; research supports the mechanism and relative ordering, not the numbers; 4 parts of the asset's value have no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 2,
+   "n_drawn": 2,
+   "outside_checks": 0,
+   "chain_core_as_files": 5,
+   "generation": "skill",
+   "aria_label": "Wildfire × Wind farm, live, partial, shape T4, cost T4, no field-report register",
+   "href": "/cells/wildfire_wind"
+  },
+  {
+   "entry_id": "wind_tornado_wind",
+   "kind": "cell",
+   "status": "live",
+   "title": "Convective wind × Wind farm",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": null
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T3–4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and derivation write-up",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "WIND_TORNADO_WIND_V1",
+    "model": "model v1.0",
+    "docs": "docs r4",
+    "version_key": "model_v1_0__docs_r4",
+    "schema": "damage_curve_record_bundle.v2",
+    "sha256": "908f386953d062a62a33b6714020374b9b9d8a4538006e80d37047686c2c127a",
+    "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4"
+   },
+   "summary": "Convective wind on wind farm: engineering-fit logistic curves on hub gust over the IEC 50-year gust, built from IEC design speeds, the NIST fragility method and EF4 case evidence; tornado is a curve shift; 1 part of the asset's value has no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 5,
+   "n_drawn": 5,
+   "outside_checks": 1,
+   "chain_core_as_files": 2,
+   "generation": "prose",
+   "aria_label": "Convective wind × Wind farm, live, partial, shape T4, cost T3–4, no field-report register",
+   "href": "/cells/wind_tornado_wind"
+  }
+ ],
+ "has_buckets": false,
+ "twin_crosswalk": null
+}

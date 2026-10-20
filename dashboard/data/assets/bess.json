@@ -1,0 +1,1916 @@
+{
+ "asset": {
+  "slug": "bess",
+  "label": "Battery storage",
+  "catalogue": "Battery storage",
+  "href": "/assets/bess"
+ },
+ "summary": "Flood, Hurricane wind and Wildfire have curves for battery storage, all from transferred or policy evidence (T3–T4); Hail and Convective wind have none; nobody has yet searched for field reports.",
+ "reference": {
+  "label": "80 enclosures · 20 PCS · $109.8M reference value (real 2024)",
+  "source": "docs/cells/flood_bess/current/value_binding.json",
+  "total_usd": 109800000
+ },
+ "hazards": [
+  {
+   "slug": "hail",
+   "label": "Hail",
+   "catalogue": "Hail",
+   "twin": [
+    "hail"
+   ],
+   "entry_tokens": [
+    "hail"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "hail_bess",
+   "status": "gap",
+   "cell_title": "Hail × Battery storage",
+   "occurrence_href": "/occurrence/bess/hail",
+   "has_register": true
+  },
+  {
+   "slug": "flood",
+   "label": "Flood",
+   "catalogue": "Flood",
+   "twin": [
+    "flood"
+   ],
+   "entry_tokens": [
+    "flood"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "flood_bess",
+   "status": "live",
+   "cell_title": "Flood × Battery storage",
+   "occurrence_href": "/occurrence/bess/flood",
+   "has_register": true
+  },
+  {
+   "slug": "hurricane_wind",
+   "label": "Hurricane wind",
+   "catalogue": "Hurricane wind",
+   "twin": [
+    "wind"
+   ],
+   "entry_tokens": [
+    "tropical_cyclone_wind",
+    "hurricane"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "tropical_cyclone_wind_bess",
+   "status": "live",
+   "cell_title": "Hurricane wind × Battery storage",
+   "occurrence_href": "/occurrence/bess/hurricane_wind",
+   "has_register": true
+  },
+  {
+   "slug": "convective_wind",
+   "label": "Convective wind",
+   "catalogue": "Convective wind",
+   "twin": [
+    "wind"
+   ],
+   "entry_tokens": [
+    "convective_wind",
+    "strong_wind",
+    "wind_tornado"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "convective_wind_bess",
+   "status": "gap",
+   "cell_title": "Convective wind × Battery storage",
+   "occurrence_href": "/occurrence/bess/convective_wind",
+   "has_register": true
+  },
+  {
+   "slug": "wildfire",
+   "label": "Wildfire",
+   "catalogue": "Wildfire",
+   "twin": [
+    "wildfire"
+   ],
+   "entry_tokens": [
+    "wildfire"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "wildfire_bess",
+   "status": "live",
+   "cell_title": "Wildfire × Battery storage",
+   "occurrence_href": "/occurrence/bess/wildfire",
+   "has_register": true
+  },
+  {
+   "slug": "heat",
+   "label": "Heat",
+   "catalogue": null,
+   "twin": [
+    "heat"
+   ],
+   "entry_tokens": [],
+   "outside_the_five": true,
+   "effect": "performance",
+   "effect_note": "The twin's heat leads (ageing, derating, chiller capacity) work through performance, not physical damage; pointer to the outage-as-performance work, no curve (discussion 04 §6).",
+   "entry_id": null,
+   "status": null,
+   "cell_title": null,
+   "occurrence_href": "/occurrence/bess/heat",
+   "has_register": true
+  },
+  {
+   "slug": "icing",
+   "label": "Icing",
+   "catalogue": null,
+   "twin": [
+    "icing"
+   ],
+   "entry_tokens": [],
+   "outside_the_five": true,
+   "effect": "performance",
+   "effect_note": "Cold limits charge rate until heated; snow load on venting panels is the one physical lead (discussion 04 §6, ledger C-172).",
+   "entry_id": null,
+   "status": null,
+   "cell_title": null,
+   "occurrence_href": "/occurrence/bess/icing",
+   "has_register": true
+  },
+  {
+   "slug": "lightning",
+   "label": "Lightning",
+   "catalogue": null,
+   "twin": [
+    "lightning"
+   ],
+   "entry_tokens": [],
+   "outside_the_five": true,
+   "effect": "damage",
+   "effect_note": "No hazard cell exists; the twin carries Medium surge leads on the electronics (discussion 04 §6).",
+   "entry_id": null,
+   "status": null,
+   "cell_title": null,
+   "occurrence_href": "/occurrence/bess/lightning",
+   "has_register": true
+  }
+ ],
+ "rows": [
+  {
+   "key": "battery_enclosures",
+   "label": "Battery enclosures",
+   "value_usd": 84000000.0,
+   "share": 0.7650273224043715,
+   "twin_targets": [
+    "battery_enclosures"
+   ],
+   "subsystems": [
+    "battery_enclosures"
+   ],
+   "cells": {
+    "hail": {
+     "twin_lead": "L",
+     "twin_nodes": [
+      {
+       "node": "be_enc",
+       "name": "Enclosure Shell",
+       "level": 1,
+       "why": "Panel denting"
+      },
+      {
+       "node": "be_hvac",
+       "name": "Chiller & Liquid Loop",
+       "level": 1,
+       "why": "Condenser coil damage"
+      },
+      {
+       "node": "be_vent",
+       "name": "Explosion Venting",
+       "level": 1,
+       "why": "Panel damage"
+      }
+     ],
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     },
+     "entry_id": "hail_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": "L",
+       "nodes": [
+        {
+         "node": "be_enc",
+         "name": "Enclosure Shell",
+         "level": 1,
+         "why": "Panel denting"
+        },
+        {
+         "node": "be_hvac",
+         "name": "Chiller & Liquid Loop",
+         "level": 1,
+         "why": "Condenser coil damage"
+        },
+        {
+         "node": "be_vent",
+         "name": "Explosion Venting",
+         "level": 1,
+         "why": "Panel damage"
+        }
+       ]
+      },
+      "bucket": "battery_enclosures"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "flood": {
+     "twin_lead": "H",
+     "twin_nodes": [
+      {
+       "node": "be_enc",
+       "name": "Enclosure Shell",
+       "level": 3,
+       "why": "Water at the racks shorts modules and can trigger thermal events"
+      },
+      {
+       "node": "be_modules",
+       "name": "Battery Modules",
+       "level": 3,
+       "why": "Submersion shorts modules"
+      },
+      {
+       "node": "be_dccab",
+       "name": "DC Combiner & Disconnect",
+       "level": 2,
+       "why": "Low-mounted DC gear"
+      }
+     ],
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "BESS_ACTIVE_CONTACT_STATE"
+      ],
+      "drawn": true
+     },
+     "entry_id": "flood_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": "H",
+       "nodes": [
+        {
+         "node": "be_enc",
+         "name": "Enclosure Shell",
+         "level": 3,
+         "why": "Water at the racks shorts modules and can trigger thermal events"
+        },
+        {
+         "node": "be_modules",
+         "name": "Battery Modules",
+         "level": 3,
+         "why": "Submersion shorts modules"
+        },
+        {
+         "node": "be_dccab",
+         "name": "DC Combiner & Disconnect",
+         "level": 2,
+         "why": "Low-mounted DC gear"
+        }
+       ]
+      },
+      "bucket": "battery_enclosures"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "hurricane_wind": {
+     "twin_lead": "L",
+     "twin_nodes": [
+      {
+       "node": "be_enc",
+       "name": "Enclosure Shell",
+       "level": 1,
+       "why": "Anchorage loads"
+      }
+     ],
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1",
+       "BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1"
+      ],
+      "drawn": false
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": "L",
+       "nodes": [
+        {
+         "node": "be_enc",
+         "name": "Enclosure Shell",
+         "level": 1,
+         "why": "Anchorage loads"
+        }
+       ]
+      },
+      "bucket": "battery_enclosures"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "convective_wind": {
+     "twin_lead": "L",
+     "twin_nodes": [
+      {
+       "node": "be_enc",
+       "name": "Enclosure Shell",
+       "level": 1,
+       "why": "Anchorage loads"
+      }
+     ],
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     },
+     "entry_id": "convective_wind_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": "L",
+       "nodes": [
+        {
+         "node": "be_enc",
+         "name": "Enclosure Shell",
+         "level": 1,
+         "why": "Anchorage loads"
+        }
+       ]
+      },
+      "bucket": "battery_enclosures"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "wildfire": {
+     "twin_lead": "M",
+     "twin_nodes": [
+      {
+       "node": "be_modules",
+       "name": "Battery Modules",
+       "level": 2,
+       "why": "External fire can propagate into enclosures"
+      },
+      {
+       "node": "be_hvac",
+       "name": "Chiller & Liquid Loop",
+       "level": 1,
+       "why": "Smoke fouls coils"
+      },
+      {
+       "node": "be_fire",
+       "name": "Fire & Gas Detection",
+       "level": 2,
+       "why": "Smoke triggers detectors; external fire risk"
+      }
+     ],
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "BWF01_ENC_approved_replacement_electronics_ordinal",
+       "BWF01_ENC_approved_replacement_heavy_electrical_ordinal",
+       "BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal",
+       "BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal",
+       "BWF01_ENC_limited_repair_sensitivity_electronics_ordinal",
+       "BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal"
+      ],
+      "drawn": false
+     },
+     "entry_id": "wildfire_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": "M",
+       "nodes": [
+        {
+         "node": "be_modules",
+         "name": "Battery Modules",
+         "level": 2,
+         "why": "External fire can propagate into enclosures"
+        },
+        {
+         "node": "be_hvac",
+         "name": "Chiller & Liquid Loop",
+         "level": 1,
+         "why": "Smoke fouls coils"
+        },
+        {
+         "node": "be_fire",
+         "name": "Fire & Gas Detection",
+         "level": 2,
+         "why": "Smoke triggers detectors; external fire risk"
+        }
+       ]
+      },
+      "bucket": "battery_enclosures"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "heat": {
+     "twin_lead": "H",
+     "twin_nodes": [
+      {
+       "node": "be_modules",
+       "name": "Battery Modules",
+       "level": 3,
+       "why": "Every +10 °C roughly doubles calendar ageing; cooling load rises"
+      },
+      {
+       "node": "be_bms",
+       "name": "Battery Management System",
+       "level": 1,
+       "why": "Electronics"
+      },
+      {
+       "node": "be_hvac",
+       "name": "Chiller & Liquid Loop",
+       "level": 3,
+       "why": "Chiller capacity sets derating in heat waves"
+      }
+     ],
+     "curve": null,
+     "entry_id": null,
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": "H",
+       "nodes": [
+        {
+         "node": "be_modules",
+         "name": "Battery Modules",
+         "level": 3,
+         "why": "Every +10 °C roughly doubles calendar ageing; cooling load rises"
+        },
+        {
+         "node": "be_bms",
+         "name": "Battery Management System",
+         "level": 1,
+         "why": "Electronics"
+        },
+        {
+         "node": "be_hvac",
+         "name": "Chiller & Liquid Loop",
+         "level": 3,
+         "why": "Chiller capacity sets derating in heat waves"
+        }
+       ]
+      },
+      "bucket": "battery_enclosures"
+     },
+     "effect": "performance",
+     "outside_the_five": true
+    },
+    "icing": {
+     "twin_lead": "L",
+     "twin_nodes": [
+      {
+       "node": "be_modules",
+       "name": "Battery Modules",
+       "level": 1,
+       "why": "Cold limits charge rate until heated"
+      },
+      {
+       "node": "be_vent",
+       "name": "Explosion Venting",
+       "level": 1,
+       "why": "Snow load on panels"
+      }
+     ],
+     "curve": null,
+     "entry_id": null,
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": "L",
+       "nodes": [
+        {
+         "node": "be_modules",
+         "name": "Battery Modules",
+         "level": 1,
+         "why": "Cold limits charge rate until heated"
+        },
+        {
+         "node": "be_vent",
+         "name": "Explosion Venting",
+         "level": 1,
+         "why": "Snow load on panels"
+        }
+       ]
+      },
+      "bucket": "battery_enclosures"
+     },
+     "effect": "performance",
+     "outside_the_five": true
+    },
+    "lightning": {
+     "twin_lead": "M",
+     "twin_nodes": [
+      {
+       "node": "be_bms",
+       "name": "Battery Management System",
+       "level": 2,
+       "why": "Surges on comms and auxiliary power"
+      }
+     ],
+     "curve": null,
+     "entry_id": null,
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": "M",
+       "nodes": [
+        {
+         "node": "be_bms",
+         "name": "Battery Management System",
+         "level": 2,
+         "why": "Surges on comms and auxiliary power"
+        }
+       ]
+      },
+      "bucket": "battery_enclosures"
+     },
+     "effect": "damage",
+     "outside_the_five": true
+    }
+   }
+  },
+  {
+   "key": "pcs",
+   "label": "PCS",
+   "value_usd": 10400000,
+   "share": 0.0947176684881603,
+   "twin_targets": [
+    "pcs",
+    "pcs+unit_mv"
+   ],
+   "subsystems": [
+    "pcs"
+   ],
+   "cells": {
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     },
+     "entry_id": "hail_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "pcs"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "flood": {
+     "twin_lead": "M",
+     "twin_nodes": [
+      {
+       "node": "bp_pcs",
+       "name": "Bidirectional PCS",
+       "level": 2,
+       "why": "Skid height"
+      }
+     ],
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T3",
+      "cost": "T3",
+      "curves": [
+       "BESS_PCS_INUNDATION_PROXY",
+       "BESS_PCS_SALINE_CONTACT_STATE"
+      ],
+      "drawn": true
+     },
+     "entry_id": "flood_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": "M",
+       "nodes": [
+        {
+         "node": "bp_pcs",
+         "name": "Bidirectional PCS",
+         "level": 2,
+         "why": "Skid height"
+        }
+       ]
+      },
+      "bucket": "pcs"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "hurricane_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "BESS_SEPARATE_PCS_TC_PROXY_V0_1"
+      ],
+      "drawn": false
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "pcs"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "convective_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     },
+     "entry_id": "convective_wind_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "pcs"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "wildfire": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "BWF01_PCS_ELECTRONICS"
+      ],
+      "drawn": false
+     },
+     "entry_id": "wildfire_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "pcs"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "heat": {
+     "twin_lead": "H",
+     "twin_nodes": [
+      {
+       "node": "bp_pcs",
+       "name": "Bidirectional PCS",
+       "level": 3,
+       "why": "Derates above ~40–45 °C"
+      }
+     ],
+     "curve": null,
+     "entry_id": null,
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": "H",
+       "nodes": [
+        {
+         "node": "bp_pcs",
+         "name": "Bidirectional PCS",
+         "level": 3,
+         "why": "Derates above ~40–45 °C"
+        }
+       ]
+      },
+      "bucket": "pcs"
+     },
+     "effect": "performance",
+     "outside_the_five": true
+    },
+    "icing": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": null,
+     "entry_id": null,
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "pcs"
+     },
+     "effect": "performance",
+     "outside_the_five": true
+    },
+    "lightning": {
+     "twin_lead": "M",
+     "twin_nodes": [
+      {
+       "node": "bp_pcs",
+       "name": "Bidirectional PCS",
+       "level": 2,
+       "why": "Surges"
+      }
+     ],
+     "curve": null,
+     "entry_id": null,
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": "M",
+       "nodes": [
+        {
+         "node": "bp_pcs",
+         "name": "Bidirectional PCS",
+         "level": 2,
+         "why": "Surges"
+        }
+       ]
+      },
+      "bucket": "pcs"
+     },
+     "effect": "damage",
+     "outside_the_five": true
+    }
+   }
+  },
+  {
+   "key": "electrical_balance",
+   "label": "MV, collection and controls",
+   "value_usd": 13200000,
+   "share": 0.12021857923497267,
+   "twin_targets": [
+    "unit_mv",
+    "collection",
+    "controls",
+    "pcs+unit_mv"
+   ],
+   "subsystems": [
+    "BESS_MV_AND_SHARED_ELECTRICAL"
+   ],
+   "cells": {
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     },
+     "entry_id": "hail_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "electrical_balance"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "flood": {
+     "twin_lead": "M",
+     "twin_nodes": [
+      {
+       "node": "bp_rmu",
+       "name": "MV Switchgear (RMU)",
+       "level": 2,
+       "why": "Cable compartment flooding"
+      },
+      {
+       "node": "bp_skid",
+       "name": "Skid & Piers",
+       "level": 2,
+       "why": "Skid height is the main mitigation"
+      },
+      {
+       "node": "bc_dc",
+       "name": "DC Cables",
+       "level": 2,
+       "why": "Ground faults"
+      },
+      {
+       "node": "bc_mv",
+       "name": "MV Cable",
+       "level": 2,
+       "why": "Water treeing"
+      },
+      {
+       "node": "bpl_feeders",
+       "name": "34.5 kV Feeders",
+       "level": 2,
+       "why": "Water treeing"
+      },
+      {
+       "node": "bk_fiber",
+       "name": "Control Network",
+       "level": 1,
+       "why": "Vault flooding"
+      }
+     ],
+     "curve": {
+      "mark": "✕",
+      "state": "no_curve",
+      "label": "no curve",
+      "sentence": "No curve — MV, collection and controls, $13.2M of the reference value, has no damage response yet."
+     },
+     "entry_id": "flood_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": "M",
+       "nodes": [
+        {
+         "node": "bp_rmu",
+         "name": "MV Switchgear (RMU)",
+         "level": 2,
+         "why": "Cable compartment flooding"
+        },
+        {
+         "node": "bp_skid",
+         "name": "Skid & Piers",
+         "level": 2,
+         "why": "Skid height is the main mitigation"
+        },
+        {
+         "node": "bc_dc",
+         "name": "DC Cables",
+         "level": 2,
+         "why": "Ground faults"
+        },
+        {
+         "node": "bc_mv",
+         "name": "MV Cable",
+         "level": 2,
+         "why": "Water treeing"
+        },
+        {
+         "node": "bpl_feeders",
+         "name": "34.5 kV Feeders",
+         "level": 2,
+         "why": "Water treeing"
+        },
+        {
+         "node": "bk_fiber",
+         "name": "Control Network",
+         "level": 1,
+         "why": "Vault flooding"
+        }
+       ]
+      },
+      "bucket": "electrical_balance"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "hurricane_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": {
+      "mark": "✕",
+      "state": "no_curve",
+      "label": "no curve",
+      "sentence": "No curve — MV, collection and controls, $13.2M of the reference value, has no damage response yet."
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "electrical_balance"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "convective_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     },
+     "entry_id": "convective_wind_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "electrical_balance"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "wildfire": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": {
+      "mark": "✕",
+      "state": "no_curve",
+      "label": "no curve",
+      "sentence": "No curve — MV, collection and controls, $13.2M of the reference value, has no damage response yet."
+     },
+     "entry_id": "wildfire_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "electrical_balance"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "heat": {
+     "twin_lead": "M",
+     "twin_nodes": [
+      {
+       "node": "bp_mvt",
+       "name": "MV Transformer",
+       "level": 2,
+       "why": "Hot-spot ageing"
+      },
+      {
+       "node": "bp_aux",
+       "name": "Auxiliary Supply",
+       "level": 1,
+       "why": "Load peaks on hot afternoons"
+      },
+      {
+       "node": "bk_ems",
+       "name": "EMS / Plant Controller",
+       "level": 1,
+       "why": "Electronics"
+      }
+     ],
+     "curve": null,
+     "entry_id": null,
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": "M",
+       "nodes": [
+        {
+         "node": "bp_mvt",
+         "name": "MV Transformer",
+         "level": 2,
+         "why": "Hot-spot ageing"
+        },
+        {
+         "node": "bp_aux",
+         "name": "Auxiliary Supply",
+         "level": 1,
+         "why": "Load peaks on hot afternoons"
+        },
+        {
+         "node": "bk_ems",
+         "name": "EMS / Plant Controller",
+         "level": 1,
+         "why": "Electronics"
+        }
+       ]
+      },
+      "bucket": "electrical_balance"
+     },
+     "effect": "performance",
+     "outside_the_five": true
+    },
+    "icing": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": null,
+     "entry_id": null,
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "electrical_balance"
+     },
+     "effect": "performance",
+     "outside_the_five": true
+    },
+    "lightning": {
+     "twin_lead": "M",
+     "twin_nodes": [
+      {
+       "node": "bp_mvt",
+       "name": "MV Transformer",
+       "level": 1,
+       "why": "Surges"
+      },
+      {
+       "node": "bg_grid",
+       "name": "Ground Grid",
+       "level": 2,
+       "why": "Dissipates strike and fault current"
+      },
+      {
+       "node": "bk_ems",
+       "name": "EMS / Plant Controller",
+       "level": 2,
+       "why": "Surges on comms"
+      }
+     ],
+     "curve": null,
+     "entry_id": null,
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": "M",
+       "nodes": [
+        {
+         "node": "bp_mvt",
+         "name": "MV Transformer",
+         "level": 1,
+         "why": "Surges"
+        },
+        {
+         "node": "bg_grid",
+         "name": "Ground Grid",
+         "level": 2,
+         "why": "Dissipates strike and fault current"
+        },
+        {
+         "node": "bk_ems",
+         "name": "EMS / Plant Controller",
+         "level": 2,
+         "why": "Surges on comms"
+        }
+       ]
+      },
+      "bucket": "electrical_balance"
+     },
+     "effect": "damage",
+     "outside_the_five": true
+    }
+   }
+  },
+  {
+   "key": "civil_works",
+   "label": "Civil works",
+   "value_usd": 1600000,
+   "share": 0.014571948998178506,
+   "twin_targets": [
+    "civil_works"
+   ],
+   "subsystems": [
+    "BESS_CIVIL"
+   ],
+   "cells": {
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     },
+     "entry_id": "hail_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "civil_works"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "flood": {
+     "twin_lead": "M",
+     "twin_nodes": [
+      {
+       "node": "bs_found",
+       "name": "Enclosure Foundations",
+       "level": 2,
+       "why": "Pad elevation sets ingress risk"
+      }
+     ],
+     "curve": {
+      "mark": "✕",
+      "state": "no_curve",
+      "label": "no curve",
+      "sentence": "No curve — Civil works, $1.6M of the reference value, has no damage response yet."
+     },
+     "entry_id": "flood_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": "M",
+       "nodes": [
+        {
+         "node": "bs_found",
+         "name": "Enclosure Foundations",
+         "level": 2,
+         "why": "Pad elevation sets ingress risk"
+        }
+       ]
+      },
+      "bucket": "civil_works"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "hurricane_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": {
+      "mark": "✕",
+      "state": "no_curve",
+      "label": "no curve",
+      "sentence": "No curve — Civil works, $1.6M of the reference value, has no damage response yet."
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "civil_works"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "convective_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     },
+     "entry_id": "convective_wind_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "civil_works"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "wildfire": {
+     "twin_lead": "M",
+     "twin_nodes": [
+      {
+       "node": "bv_yard",
+       "name": "Yard & Fence",
+       "level": 2,
+       "why": "Vegetation clearance is a fire-code requirement"
+      },
+      {
+       "node": "bpl_yard",
+       "name": "Yard & Fence",
+       "level": 2,
+       "why": "Vegetation clearance"
+      }
+     ],
+     "curve": {
+      "mark": "✕",
+      "state": "no_curve",
+      "label": "no curve",
+      "sentence": "No curve — Civil works, $1.6M of the reference value, has no damage response yet."
+     },
+     "entry_id": "wildfire_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": "M",
+       "nodes": [
+        {
+         "node": "bv_yard",
+         "name": "Yard & Fence",
+         "level": 2,
+         "why": "Vegetation clearance is a fire-code requirement"
+        },
+        {
+         "node": "bpl_yard",
+         "name": "Yard & Fence",
+         "level": 2,
+         "why": "Vegetation clearance"
+        }
+       ]
+      },
+      "bucket": "civil_works"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "heat": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": null,
+     "entry_id": null,
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "civil_works"
+     },
+     "effect": "performance",
+     "outside_the_five": true
+    },
+    "icing": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": null,
+     "entry_id": null,
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "civil_works"
+     },
+     "effect": "performance",
+     "outside_the_five": true
+    },
+    "lightning": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": null,
+     "entry_id": null,
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "civil_works"
+     },
+     "effect": "damage",
+     "outside_the_five": true
+    }
+   }
+  },
+  {
+   "key": "fieldwork",
+   "label": "Fieldwork",
+   "value_usd": 600000,
+   "share": 0.00546448087431694,
+   "twin_targets": [],
+   "subsystems": [
+    "BESS_FIELDWORK"
+   ],
+   "cells": {
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     },
+     "entry_id": "hail_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "fieldwork"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "flood": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": {
+      "mark": "✕",
+      "state": "no_curve",
+      "label": "no curve",
+      "sentence": "No curve — Fieldwork, $600k of the reference value, has no damage response yet."
+     },
+     "entry_id": "flood_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "fieldwork"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "hurricane_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": {
+      "mark": "✕",
+      "state": "no_curve",
+      "label": "no curve",
+      "sentence": "No curve — Fieldwork, $600k of the reference value, has no damage response yet."
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "fieldwork"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "convective_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     },
+     "entry_id": "convective_wind_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "fieldwork"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "wildfire": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": {
+      "mark": "✕",
+      "state": "no_curve",
+      "label": "no curve",
+      "sentence": "No curve — Fieldwork, $600k of the reference value, has no damage response yet."
+     },
+     "entry_id": "wildfire_bess",
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "fieldwork"
+     },
+     "effect": "damage",
+     "outside_the_five": false
+    },
+    "heat": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": null,
+     "entry_id": null,
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "fieldwork"
+     },
+     "effect": "performance",
+     "outside_the_five": true
+    },
+    "icing": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": null,
+     "entry_id": null,
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "fieldwork"
+     },
+     "effect": "performance",
+     "outside_the_five": true
+    },
+    "lightning": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "curve": null,
+     "entry_id": null,
+     "occurrence": {
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": {
+       "level": null,
+       "nodes": []
+      },
+      "bucket": "fieldwork"
+     },
+     "effect": "damage",
+     "outside_the_five": true
+    }
+   }
+  }
+ ],
+ "entries": [
+  {
+   "entry_id": "convective_wind_bess",
+   "kind": "gap",
+   "status": "gap",
+   "title": "Convective wind × Battery storage",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "exists": {
+    "status": "gap",
+    "mark": "┈",
+    "label": "GAP",
+    "qualifier": null
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "–",
+    "cost": "–",
+    "occurrence": {
+     "mark": "?",
+     "label": "not searched"
+    }
+   },
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the BESS plan and the BESS hurricane wind cell",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "gap",
+    "damage_code_id": null,
+    "model": null,
+    "docs": null,
+    "version_key": null,
+    "sha256": null
+   },
+   "summary": "No curve for convective wind on battery storage yet: No curve yet: the BESS hurricane wind cell leaves convective wind and tornado as a separate scope, and the BESS plan lists other hazards as later work (docs/plans/bess_damage/README.md, step 6).",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 0,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 0,
+   "generation": "gap",
+   "aria_label": "Convective wind × Battery storage, gap, not searched",
+   "href": "/cells/convective_wind_bess"
+  },
+  {
+   "entry_id": "flood_bess",
+   "kind": "cell",
+   "status": "live",
+   "title": "Flood × Battery storage",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T3–4",
+    "cost": "T3–4",
+    "occurrence": {
+     "mark": "?",
+     "label": "not searched"
+    }
+   },
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "BESS_FLOOD_INUNDATION_SCREENING_V1",
+    "model": "model v1.0",
+    "docs": "docs r1",
+    "version_key": "model_v1_0__docs_r1",
+    "schema": "damage_curve_record_bundle.v2",
+    "sha256": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24",
+    "consumer_pin": "flood_bess@model_v1_0__docs_r1"
+   },
+   "summary": "Flood on battery storage: conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; unit values from market cost shares of the fixed Hazard reference budget; 75 % of the reference value has a curve and 25 % has none.",
+   "no_evaluator": false,
+   "share_covered": 0.7514608688253878,
+   "n_curves": 3,
+   "n_drawn": 3,
+   "outside_checks": 0,
+   "chain_core_as_files": 4,
+   "generation": "plain",
+   "aria_label": "Flood × Battery storage, live, partial, shape T3–4, cost T3–4, not searched",
+   "href": "/cells/flood_bess"
+  },
+  {
+   "entry_id": "hail_bess",
+   "kind": "gap",
+   "status": "gap",
+   "title": "Hail × Battery storage",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail"
+   },
+   "exists": {
+    "status": "gap",
+    "mark": "┈",
+    "label": "GAP",
+    "qualifier": null
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "–",
+    "cost": "–",
+    "occurrence": {
+     "mark": "?",
+     "label": "not searched"
+    }
+   },
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the BESS plan and decision log",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "gap",
+    "damage_code_id": null,
+    "model": null,
+    "docs": null,
+    "version_key": null,
+    "sha256": null
+   },
+   "summary": "No curve for hail on battery storage yet: No curve and no documented plan yet (the BESS plan only lists other hazards as later work, step 6).",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 0,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 0,
+   "generation": "gap",
+   "aria_label": "Hail × Battery storage, gap, not searched",
+   "href": "/cells/hail_bess"
+  },
+  {
+   "entry_id": "tropical_cyclone_wind_bess",
+   "kind": "cell",
+   "status": "live",
+   "title": "Hurricane wind × Battery storage",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "?",
+     "label": "not searched"
+    }
+   },
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+    "entry_read_kind": "agent",
+    "release_review": "same author with independent numerical methods",
+    "release_review_code": "same_author_with_independent_numerical_methods",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release same author with independent numerical m"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "BESS_TC_WIND_SCREENING_V1",
+    "model": "model v1.0",
+    "docs": "docs r1",
+    "version_key": "model_v1_0__docs_r1",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed",
+    "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
+   },
+   "summary": "Hurricane wind on battery storage: solar TC-wind ordered damage-state curves reused as a T4 hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage; 86 % of the reference value has a curve and 14 % has none.",
+   "no_evaluator": true,
+   "share_covered": 0.8597449908925319,
+   "n_curves": 3,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 5,
+   "generation": "plain",
+   "aria_label": "Hurricane wind × Battery storage, live, partial, shape T4, cost T4, not searched",
+   "href": "/cells/tropical_cyclone_wind_bess"
+  },
+  {
+   "entry_id": "wildfire_bess",
+   "kind": "cell",
+   "status": "live",
+   "title": "Wildfire × Battery storage",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "?",
+     "label": "not searched"
+    }
+   },
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+    "entry_read_kind": "agent",
+    "release_review": "same author with independent numerical methods",
+    "release_review_code": "same_author_with_independent_numerical_methods",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release same author with independent numerical m"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "BESS_WILDFIRE_SCREENING_V1",
+    "model": "model v1.0",
+    "docs": "docs r1",
+    "version_key": "model_v1_0__docs_r1",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491",
+    "consumer_pin": "wildfire_bess@model_v1_0__docs_r1"
+   },
+   "summary": "Wildfire on battery storage: solar wildfire electrical class tables reused as T4 ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities); 86 % of the reference value has a curve and 14 % has none.",
+   "no_evaluator": true,
+   "share_covered": 0.8597449908925319,
+   "n_curves": 7,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 5,
+   "generation": "plain",
+   "aria_label": "Wildfire × Battery storage, live, partial, shape T4, cost T4, not searched",
+   "href": "/cells/wildfire_bess"
+  }
+ ],
+ "has_buckets": true,
+ "twin_crosswalk": {
+  "sha256": "7e96ff9a6f48db73bb35ccdf76daa5a41a418140472d127b7e7253e25fbdd30d",
+  "rows": 58
+ }
+}

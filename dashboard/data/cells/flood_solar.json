@@ -1,0 +1,1119 @@
+{
+ "entry_id": "flood_solar",
+ "kind": "cell",
+ "status": "live",
+ "title": "Flood × Solar farm",
+ "asset": {
+  "slug": "solar",
+  "label": "Solar farm"
+ },
+ "hazard": {
+  "slug": "flood",
+  "label": "Flood"
+ },
+ "identity": {
+  "kind": "cell",
+  "damage_code_id": "FLOOD_SOLAR_ELECTRICAL_INUNDATION_V1",
+  "model": "model v1.0",
+  "docs": "docs r4",
+  "version_key": "model_v1_0__docs_r4",
+  "schema": "damage_curve_record_bundle.v2",
+  "sha256": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
+  "consumer_pin": "flood_solar@model_v1_0__docs_r4"
+ },
+ "pins": [
+  {
+   "what": "catalogue entry artifact_sha256",
+   "file": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+   "expected": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
+   "actual": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
+   "ok": true
+  },
+  {
+   "what": "runtime artifact index sha256",
+   "file": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+   "expected": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
+   "actual": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
+   "ok": true
+  }
+ ],
+ "rail": {
+  "exists": {
+   "status": "live",
+   "mark": "■",
+   "label": "LIVE",
+   "qualifier": null
+  },
+  "evidence": {
+   "shape": "T3–4",
+   "cost": "T3–4",
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   }
+  },
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table and capability declaration",
+   "entry_read_kind": "agent",
+   "release_review": null,
+   "release_review_code": null,
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release —"
+  }
+ },
+ "summary": "Flood on solar farm: piecewise depth-damage points per part, set by engineering judgment from DOE/FEMP solar flood guidance and NEMA water-damaged equipment guidance, in the USACE depth-percent table form; 3 parts of the asset's value have no curve.",
+ "chain": {
+  "stations": [
+   {
+    "id": "scope",
+    "label": "Scope",
+    "gate": "A",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_solar/current/README_flood_solar_v1_0.md",
+      "sha256": "1cf04218602f7cd82632188f3ccc76159db7b8efc91c8e332571dae190198c66"
+     },
+     {
+      "path": "docs/cells/flood_solar/README.md",
+      "sha256": "c44160699ff45d7e083e0c7f671ea2b69f1cb9def2f91d575ecdb02093efb4cd"
+     },
+     {
+      "path": "docs/cells/flood_solar/basics/README.md",
+      "sha256": "a89ac59cc4694aefcc7852b4665cf3f004eba905cb7927a57d197e0f82bbf2f2"
+     }
+    ],
+    "evidence": [],
+    "fact": "4 deferred",
+    "absent_sentence": null
+   },
+   {
+    "id": "units",
+    "label": "Units",
+    "gate": "A · B2",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+      "sha256": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d"
+     },
+     {
+      "path": "docs/cells/flood_solar/previews/flood_solar_v0_1_coverage_preview.png",
+      "sha256": "1853682b00bc2f3d40e5c59518650c3aed03998a90c8ce32d2638780e4f8adf7"
+     },
+     {
+      "path": "docs/cells/flood_solar/previews/flood_solar_v1_0_coverage_preview.png",
+      "sha256": "a0935d32e01b4d690fd67e6d1d0fbfc31916585e6119b3e1f7bcc9eda04c42d5"
+     }
+    ],
+    "evidence": [],
+    "fact": "8 units",
+    "absent_sentence": null
+   },
+   {
+    "id": "axis_form",
+    "label": "Axis · form",
+    "gate": "C",
+    "state": "prose",
+    "files": [],
+    "evidence": [
+     {
+      "kind": "dossier_headings",
+      "file": {
+       "path": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+       "sha256": "33d9001a5ea45fd2cef4c8f8f1e907e3f93004e75813642802372888bfd66177"
+      },
+      "matched": [
+       "5. X-axis decision",
+       "6. Curve-form decision"
+      ]
+     },
+     {
+      "kind": "basics_headings",
+      "file": {
+       "path": "docs/cells/flood_solar/basics/HOW_THE_MODEL_IS_BUILT.md",
+       "sha256": "0f72445031424575a9765a08ce6fb6218f7fd783ec553dc566adebc4eae729b6"
+      },
+      "matched": [
+       "Stage 3 -- Axis",
+       "Stage 4 -- Curve form"
+      ]
+     },
+     {
+      "kind": "workbook_sheets",
+      "file": {
+       "path": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+       "sha256": "1e586bc4b9e34b3a4ab07d67ab6f038357c9f5bdb441be7fdf509f5c88b53be2"
+      },
+      "matched": [
+       "Flood_X_Axis_Decision"
+      ]
+     }
+    ],
+    "fact": "piecewise linear",
+    "absent_sentence": null
+   },
+   {
+    "id": "evidence",
+    "label": "Evidence",
+    "gate": "B",
+    "state": "prose",
+    "files": [],
+    "evidence": [
+     {
+      "kind": "dossier_headings",
+      "file": {
+       "path": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+       "sha256": "33d9001a5ea45fd2cef4c8f8f1e907e3f93004e75813642802372888bfd66177"
+      },
+      "matched": [
+       "3. Evidence map",
+       "8. What exactly is derived versus assumed?",
+       "Evidence co-curation update · package v2.2 · model v1.0 docs r2",
+       "v2.5 implementation-hardening addendum — derivation rationale, tier table, and runtime contract",
+       "Per-parameter tier summary"
+      ]
+     },
+     {
+      "kind": "basics_headings",
+      "file": {
+       "path": "docs/cells/flood_solar/basics/HOW_THE_MODEL_IS_BUILT.md",
+       "sha256": "0f72445031424575a9765a08ce6fb6218f7fd783ec553dc566adebc4eae729b6"
+      },
+      "matched": [
+       "Stage 1 -- Evidence",
+       "Evidence-to-parameter conclusion"
+      ]
+     },
+     {
+      "kind": "workbook_sheets",
+      "file": {
+       "path": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+       "sha256": "1e586bc4b9e34b3a4ab07d67ab6f038357c9f5bdb441be7fdf509f5c88b53be2"
+      },
+      "matched": [
+       "Flood_Evidence_Params",
+       "Flood_Assumption_Register",
+       "Sources"
+      ]
+     }
+    ],
+    "fact": "T2–4",
+    "absent_sentence": null
+   },
+   {
+    "id": "value",
+    "label": "Value",
+    "gate": "B2",
+    "state": "prose",
+    "files": [],
+    "evidence": [
+     {
+      "kind": "workbook_sheets",
+      "file": {
+       "path": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+       "sha256": "1e586bc4b9e34b3a4ab07d67ab6f038357c9f5bdb441be7fdf509f5c88b53be2"
+      },
+      "matched": [
+       "Value_Link"
+      ]
+     }
+    ],
+    "fact": "—",
+    "absent_sentence": null
+   },
+   {
+    "id": "audit",
+    "label": "Audit",
+    "gate": "B2",
+    "state": "prose",
+    "files": [],
+    "evidence": [
+     {
+      "kind": "dossier_headings",
+      "file": {
+       "path": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+       "sha256": "33d9001a5ea45fd2cef4c8f8f1e907e3f93004e75813642802372888bfd66177"
+      },
+      "matched": [
+       "9. Selectors, conditioners, and exposure variables",
+       "10. Adjustment rules"
+      ]
+     },
+     {
+      "kind": "basics_headings",
+      "file": {
+       "path": "docs/cells/flood_solar/basics/HOW_THE_MODEL_IS_BUILT.md",
+       "sha256": "0f72445031424575a9765a08ce6fb6218f7fd783ec553dc566adebc4eae729b6"
+      },
+      "matched": [
+       "Stage 5 -- Adjustments"
+      ]
+     },
+     {
+      "kind": "workbook_sheets",
+      "file": {
+       "path": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+       "sha256": "1e586bc4b9e34b3a4ab07d67ab6f038357c9f5bdb441be7fdf509f5c88b53be2"
+      },
+      "matched": [
+       "Flood_Adjustment_Rules",
+       "Site_Inputs"
+      ]
+     }
+    ],
+    "fact": "7 steps",
+    "absent_sentence": null
+   },
+   {
+    "id": "artifact",
+    "label": "Artifact",
+    "gate": "C",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+      "sha256": "1e586bc4b9e34b3a4ab07d67ab6f038357c9f5bdb441be7fdf509f5c88b53be2"
+     },
+     {
+      "path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+      "sha256": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d"
+     },
+     {
+      "path": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+      "sha256": "33d9001a5ea45fd2cef4c8f8f1e907e3f93004e75813642802372888bfd66177"
+     },
+     {
+      "path": "docs/cells/flood_solar/current/flood_solar_damage_code_metadata_spec_v1_0.md",
+      "sha256": "7bbc6c0718993aa95e0b1be6d458930296b23aadb0e8fdb7d855179f3e171c62"
+     }
+    ],
+    "evidence": [],
+    "fact": "v1.0 · docs r4",
+    "absent_sentence": null
+   },
+   {
+    "id": "capability",
+    "label": "Capability",
+    "gate": "D",
+    "state": "prose",
+    "files": [],
+    "evidence": [
+     {
+      "kind": "dossier_headings",
+      "file": {
+       "path": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+       "sha256": "33d9001a5ea45fd2cef4c8f8f1e907e3f93004e75813642802372888bfd66177"
+      },
+      "matched": [
+       "11. Damage-code output grain",
+       "v2.5 implementation-hardening addendum — derivation rationale, tier table, and runtime contract",
+       "Capability declaration"
+      ]
+     },
+     {
+      "kind": "basics_headings",
+      "file": {
+       "path": "docs/cells/flood_solar/basics/HOW_THE_MODEL_IS_BUILT.md",
+       "sha256": "0f72445031424575a9765a08ce6fb6218f7fd783ec553dc566adebc4eae729b6"
+      },
+      "matched": [
+       "Stage 6 -- Emit"
+      ]
+     },
+     {
+      "kind": "workbook_sheets",
+      "file": {
+       "path": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+       "sha256": "1e586bc4b9e34b3a4ab07d67ab6f038357c9f5bdb441be7fdf509f5c88b53be2"
+      },
+      "matched": [
+       "Damage_Code_Interface"
+      ]
+     }
+    ],
+    "fact": "DR supported · EAL conditional",
+    "absent_sentence": null
+   },
+   {
+    "id": "proof",
+    "label": "Proof · release",
+    "gate": "E",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_solar/CHANGELOG.json",
+      "sha256": "35540b4f9357ee0e68462b60181f2d2a8f48fb29b602b7894cfbc26683d20fbc"
+     },
+     {
+      "path": "docs/contracts/machine_readable_artifact_index.json",
+      "sha256": "b421721ea2d82aa6e341cb80868d5023074de90ed80eed648b5a10c060b98e75",
+      "note": "artifact index pin",
+      "pinned_sha256": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
+      "pin_ok": true
+     }
+    ],
+    "evidence": [],
+    "fact": "no KAT declared",
+    "absent_sentence": null
+   },
+   {
+    "id": "field_review",
+    "label": "Field · review",
+    "gate": "—",
+    "state": "absent",
+    "files": [],
+    "evidence": [],
+    "fact": "not searched · agent-read 10-19",
+    "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only."
+   }
+  ],
+  "generation": "prose",
+  "core_as_files": 2,
+  "core_total": 6,
+  "dossier": {
+   "path": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+   "sha256": "33d9001a5ea45fd2cef4c8f8f1e907e3f93004e75813642802372888bfd66177"
+  },
+  "basics": {
+   "path": "docs/cells/flood_solar/basics/HOW_THE_MODEL_IS_BUILT.md",
+   "sha256": "0f72445031424575a9765a08ce6fb6218f7fd783ec553dc566adebc4eae729b6"
+  },
+  "workbook": {
+   "path": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+   "sha256": "1e586bc4b9e34b3a4ab07d67ab6f038357c9f5bdb441be7fdf509f5c88b53be2"
+  },
+  "gates": [
+   {
+    "gate": "A",
+    "label": "scope",
+    "items": [
+     {
+      "item": "hazard and asset are named",
+      "status": "proven",
+      "basis": "cell_id in the artifact"
+     },
+     {
+      "item": "in-scope and out-of-scope mechanisms listed",
+      "status": "proven",
+      "basis": "hazard_scope.deferred or the entry's out_of_scope"
+     },
+     {
+      "item": "related hazards that should split are named",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "multi-pathway cells declare stable pathway IDs",
+      "status": "n/a",
+      "basis": "pathways[].pathway_id"
+     },
+     {
+      "item": "neighbouring or compound mechanisms have an include / defer / split decision",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "no downstream M4 metric is hidden in the damage cell",
+      "status": "proven",
+      "basis": "consumer_annual_metrics.computation_owner"
+     }
+    ]
+   },
+   {
+    "gate": "B",
+    "label": "evidence",
+    "items": [
+     {
+      "item": "source register with stable IDs, locators, roles, tiers and decisions",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "load-bearing claims carry claim-level provenance",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "the chosen spine is explained",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "rejected or demoted sources are explained",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "parameter tier table populated",
+      "status": "proven",
+      "basis": "parameter_tier_table"
+     },
+     {
+      "item": "T3/T4 update triggers listed",
+      "status": "proven",
+      "basis": "update_trigger per T3/T4 row"
+     },
+     {
+      "item": "legacy equations and tables reproduced where legacy material is used",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "proposed numbers pressure-tested at boundaries and on explicit denominators",
+      "status": "human",
+      "basis": "PRESSURE_TEST file"
+     },
+     {
+      "item": "evidence, parameters and transfer limits resolved independently by pathway",
+      "status": "n/a",
+      "basis": "pathway_id on tier rows"
+     }
+    ]
+   },
+   {
+    "gate": "B2",
+    "label": "seven-step, site and value",
+    "items": [
+     {
+      "item": "seven-step audit records a status and blocking seam for every step",
+      "status": "human",
+      "basis": "SEVEN_STEP_AUDIT file"
+     },
+     {
+      "item": "row-level value crosswalk reconciles direct, mixed, support and excluded rows",
+      "status": "proven",
+      "basis": "value crosswalk or binding"
+     },
+     {
+      "item": "support and logistics are allocated once, not given an independent DR",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "site-conditioned hazards have a site adapter",
+      "status": "human",
+      "basis": "SITE_CONDITION_ADAPTER file"
+     },
+     {
+      "item": "fences, walls, barriers and bypass pathways receive no blanket credit",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "the adapter includes a double-counting matrix",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "unknown at-risk, exposure or mitigation states do not silently become full credit",
+      "status": "human",
+      "basis": null
+     }
+    ]
+   },
+   {
+    "gate": "C",
+    "label": "runtime contract",
+    "items": [
+     {
+      "item": "the JSON artifact is canonical",
+      "status": "proven",
+      "basis": "canonical_runtime_artifact"
+     },
+     {
+      "item": "workbooks are derivation or audit views, not the runtime",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "damage_code_id and model version are stable",
+      "status": "proven",
+      "basis": "damage_code_id · semantic_damage_model_version"
+     },
+     {
+      "item": "field names and aliases are explicit",
+      "status": "human",
+      "basis": "hazard_axis input field"
+     },
+     {
+      "item": "pathway_id is first-class in request, record, output, capability and KAT surfaces",
+      "status": "n/a",
+      "basis": "pathway_capabilities"
+     },
+     {
+      "item": "pathway-specific axes and bridges are explicit",
+      "status": "n/a",
+      "basis": "pathways[].hazard_axis.id"
+     },
+     {
+      "item": "the emit contract is distribution-ready",
+      "status": "proven",
+      "basis": "emit_contract"
+     }
+    ]
+   },
+   {
+    "gate": "D",
+    "label": "reportability",
+    "items": [
+     {
+      "item": "failure-unit DR support stated",
+      "status": "proven",
+      "basis": "capability_declaration"
+     },
+     {
+      "item": "scenario loss support requires a value basis",
+      "status": "proven",
+      "basis": "scenario_loss_given_value_basis"
+     },
+     {
+      "item": "scalar EAL requires downstream frequency, value basis and a cap-binding pass",
+      "status": "proven",
+      "basis": "consumer_annual_metrics"
+     },
+     {
+      "item": "PML / VaR / TVaR withheld unless spread exists",
+      "status": "proven",
+      "basis": "curve_intrinsic_spread"
+     },
+     {
+      "item": "a no-curve scaffold emits no numeric DR",
+      "status": "n/a",
+      "basis": null
+     },
+     {
+      "item": "unsupported pathway × failure-unit pairs withhold with a stable reason",
+      "status": "n/a",
+      "basis": "withheld_reason_codes"
+     }
+    ]
+   },
+   {
+    "gate": "E",
+    "label": "release",
+    "items": [
+     {
+      "item": "registry, index, changelog and manifest updated",
+      "status": "proven",
+      "basis": "artifact index row · CHANGELOG"
+     },
+     {
+      "item": "validation report produced",
+      "status": "human",
+      "basis": "validation file"
+     },
+     {
+      "item": "old-vs-new and cross-pathway negative tests pass",
+      "status": "human",
+      "basis": "negative contract tests run by the build"
+     },
+     {
+      "item": "consumer migration and the exact model / docs / schema / SHA pin verified",
+      "status": "proven",
+      "basis": "SHA equals the index pin"
+     },
+     {
+      "item": "package zip integrity checked",
+      "status": "n/a",
+      "basis": "no portable package for repository-canonical artifacts"
+     }
+    ]
+   }
+  ]
+ },
+ "no_evaluator": false,
+ "no_evaluator_sentence": null,
+ "answer": {
+  "axis_groups": [
+   {
+    "axis": {
+     "id": "local_depth_above_component_datum_m",
+     "label": "local depth above component datum",
+     "unit": "m",
+     "input_field": "water_surface_elevation_m",
+     "kind": "continuous",
+     "valid_range": [
+      0,
+      2.0
+     ],
+     "bridge": {
+      "formula": "h_i = max(0, WSE - z_i_crit)"
+     }
+    },
+    "curve_ids": [
+     "FS_INV",
+     "FS_SWG",
+     "FS_XFMR",
+     "FS_COMB",
+     "FS_SCADA"
+    ]
+   },
+   {
+    "axis": {
+     "id": "depth_pathway_termination_exposure",
+     "label": "depth at the pathway termination",
+     "unit": "m",
+     "kind": "continuous",
+     "valid_range": null
+    },
+    "curve_ids": [
+     "FS_CABLE"
+    ]
+   },
+   {
+    "axis": {
+     "id": "depth_above_module_lower_edge_m",
+     "label": "depth above the module lower edge",
+     "unit": "m",
+     "kind": "continuous",
+     "valid_range": null
+    },
+    "curve_ids": [
+     "FS_PVMOD"
+    ]
+   },
+   {
+    "axis": {
+     "id": "flow_velocity_mps_or_scour_proxy",
+     "label": "flow velocity or scour proxy",
+     "unit": "m/s",
+     "kind": "continuous",
+     "valid_range": null
+    },
+    "curve_ids": [
+     "FS_FOUND"
+    ]
+   }
+  ],
+  "curve_ids": [
+   "FS_INV",
+   "FS_SWG",
+   "FS_XFMR",
+   "FS_COMB",
+   "FS_SCADA",
+   "FS_CABLE",
+   "FS_PVMOD",
+   "FS_FOUND"
+  ],
+  "input": "Water surface elevation or site flood depth (m), turned into local depth above each part's critical elevation, 0 to 2 m (clamp or warn); foundations use flow velocity (m/s) or a scour proxy, 0 to 4",
+  "how_to_use": {
+   "share_of": "Replacement value of the same part (its own value bucket), never total project value",
+   "outputs": {
+    "single_event": "allowed: per-part damage ratio",
+    "scenario_dollars": "conditional: needs an explicit part value and exposure fraction (fraction_value_exposed)",
+    "yearly_loss": "conditional: computed by the consumer from a frequency-driven loss simulation with caps applied; curve spread not carried"
+   },
+   "conditions": [
+    "Equipment elevations must use the same vertical datum as the water surface; unknown or incompatible datum fails closed",
+    "Local depth above 2 m clamps or warns",
+    "Flow velocity is required to evaluate the foundation curve",
+    "Do not apply a part's damage ratio to total project value or count shared support cost twice"
+   ]
+  },
+  "value": null,
+  "not_covered": [
+   "Mounting and racking structure (debris and velocity load is a candidate mechanism; no curve)",
+   "Civil works: roads, access and fencing (reviewed in the write-up; no curve)",
+   "Site drainage and flood defences (treated as protection state, not a damaged part)"
+  ],
+  "withheld_units": [],
+  "hazard_axis": {
+   "id": "FLOOD_LOCAL_DEPTH_COMPONENT_DATUM",
+   "input_field_preferred": "water_surface_elevation_m",
+   "fallback_input_field": "site_flood_depth_m",
+   "internal_axis": "local_depth_above_component_datum_m",
+   "formula": "h_i = max(0, WSE - z_i_crit)",
+   "unit": "m",
+   "valid_range": [
+    0,
+    2.0
+   ],
+   "extrapolation_policy": "clamp_or_warn"
+  }
+ },
+ "parts": [
+  {
+   "part": "Inverters",
+   "curves": [
+    "FS_INV"
+   ],
+   "failure_units": [
+    "FS_INV"
+   ],
+   "subsystems": [
+    "INVERTER_SYSTEM"
+   ],
+   "bucket": null,
+   "variants": "none (enclosure rating is recorded as a flag; no alternate curve)",
+   "shape": "T3",
+   "shape_basis": "Engineering depth-damage points; mechanism from DOE/FEMP and NEMA",
+   "cost": "T3",
+   "cost_basis": "Points already give damage as a share of the part's replacement value (same table)",
+   "notes": [],
+   "occurrence": null,
+   "drawn": true
+  },
+  {
+   "part": "Switchgear",
+   "curves": [
+    "FS_SWG"
+   ],
+   "failure_units": [
+    "FS_SWG"
+   ],
+   "subsystems": [
+    "SUBSTATION"
+   ],
+   "bucket": null,
+   "variants": "none (enclosure rating is recorded as a flag; no alternate curve)",
+   "shape": "T3",
+   "shape_basis": "Engineering depth-damage points; mechanism from DOE/FEMP and NEMA",
+   "cost": "T3",
+   "cost_basis": "Points already give damage as a share of the part's replacement value (same table)",
+   "notes": [],
+   "occurrence": null,
+   "drawn": true
+  },
+  {
+   "part": "Main transformer and controls",
+   "curves": [
+    "FS_XFMR"
+   ],
+   "failure_units": [
+    "FS_XFMR"
+   ],
+   "subsystems": [
+    "SUBSTATION"
+   ],
+   "bucket": null,
+   "variants": "none (transformer type is a flag and a future variant)",
+   "shape": "T3",
+   "shape_basis": "Engineering depth-damage points; mechanism from DOE/FEMP and NEMA",
+   "cost": "T3",
+   "cost_basis": "Points already give damage as a share of the part's replacement value (same table)",
+   "notes": [
+    {
+     "type": "key_assumption",
+     "text": "Rises more slowly than other cabinets because a liquid-filled transformer may be reconditioned"
+    }
+   ],
+   "occurrence": null,
+   "drawn": true
+  },
+  {
+   "part": "Combiner boxes and DC protection",
+   "curves": [
+    "FS_COMB"
+   ],
+   "failure_units": [
+    "FS_COMB"
+   ],
+   "subsystems": [
+    "INVERTER_SYSTEM"
+   ],
+   "bucket": null,
+   "variants": "none",
+   "shape": "T3",
+   "shape_basis": "Engineering depth-damage points; mechanism from DOE/FEMP and NEMA",
+   "cost": "T3",
+   "cost_basis": "Points already give damage as a share of the part's replacement value (same table)",
+   "notes": [],
+   "occurrence": null,
+   "drawn": true
+  },
+  {
+   "part": "SCADA and monitoring cabinets",
+   "curves": [
+    "FS_SCADA"
+   ],
+   "failure_units": [
+    "FS_SCADA"
+   ],
+   "subsystems": [
+    "SCADA"
+   ],
+   "bucket": null,
+   "variants": "none",
+   "shape": "T3",
+   "shape_basis": "Engineering depth-damage points; mechanism from DOE/FEMP and NEMA",
+   "cost": "T3",
+   "cost_basis": "Points already give damage as a share of the part's replacement value (same table)",
+   "notes": [],
+   "occurrence": null,
+   "drawn": true
+  },
+  {
+   "part": "AC and DC collection cable",
+   "curves": [
+    "FS_CABLE"
+   ],
+   "failure_units": [
+    "FS_CABLE"
+   ],
+   "subsystems": [
+    "ELECTRICAL_COLLECTION"
+   ],
+   "bucket": null,
+   "variants": "none (cable wet-location rating is a future variant)",
+   "shape": "T3",
+   "shape_basis": "Engineering points for wet terminations and conduit contamination",
+   "cost": "T3",
+   "cost_basis": "Points already give damage as a share of the part's replacement value (same table)",
+   "notes": [
+    {
+     "type": "key_assumption",
+     "text": "Pathway and termination exposure axis; its unit and formula are not fully pinned"
+    }
+   ],
+   "occurrence": null,
+   "drawn": true
+  },
+  {
+   "part": "PV modules",
+   "curves": [
+    "FS_PVMOD"
+   ],
+   "failure_units": [
+    "FS_PVMOD"
+   ],
+   "subsystems": [
+    "PV_ARRAY"
+   ],
+   "bucket": null,
+   "variants": "none",
+   "shape": "T3",
+   "shape_basis": "Engineering submersion points",
+   "cost": "T3",
+   "cost_basis": "Points already give damage as a share of the part's replacement value (same table)",
+   "notes": [
+    {
+     "type": "key_assumption",
+     "text": "Applies only when water reaches the module's lower edge"
+    }
+   ],
+   "occurrence": null,
+   "drawn": true
+  },
+  {
+   "part": "Foundations",
+   "curves": [
+    "FS_FOUND"
+   ],
+   "failure_units": [
+    "FS_FOUND"
+   ],
+   "subsystems": [
+    "FOUNDATION"
+   ],
+   "bucket": null,
+   "variants": "none",
+   "shape": "T4",
+   "shape_basis": "Generic velocity/scour placeholder points",
+   "cost": "T4",
+   "cost_basis": "Points already give damage as a share of the part's replacement value (same T4 table)",
+   "notes": [
+    {
+     "type": "key_assumption",
+     "text": "Placeholder; replace with a site hydraulic or geotechnical assessment where material"
+    }
+   ],
+   "occurrence": null,
+   "drawn": true
+  }
+ ],
+ "evidence": {
+  "lineage": "parameters_only",
+  "prose_sentence": null,
+  "paths": {
+   "sources": null,
+   "claims": null,
+   "parameters": null
+  },
+  "n_sources": 0,
+  "n_claims": 0,
+  "n_parameters": 9,
+  "key_sources": [
+   "DOE/FEMP, Preventing and Mitigating Flood Damage to Solar PV Systems (DOE_FEMP_PV_FLOOD)",
+   "NEMA GD 1-2019, Evaluating Water-Damaged Electrical Equipment (NEMA_GD1_2019)",
+   "NEMA, Enclosure Types (NEMA_ENCLOSURE_TYPES)",
+   "FEMA P-348, Protecting Building Utility Systems from Flood Damage (FEMA_P348)",
+   "USACE HEC-FIA, Depth-Percent Damage Relationships (USACE_HEC_FIA)"
+  ],
+  "sources_from": "write-up",
+  "judgment": [
+   "Foundation scour curve is a generic placeholder; site hydraulics and geotechnics decide real damage"
+  ],
+  "weakest_tier": "T4",
+  "pressure_test": null,
+  "method": {
+   "type": "built_from_references",
+   "summary": "Piecewise depth-damage points per part, set by engineering judgment from DOE/FEMP solar flood guidance and NEMA water-damaged equipment guidance, in the USACE depth-percent table form"
+  }
+ },
+ "audit": {
+  "table": null,
+  "state": "prose",
+  "absent_sentence": null,
+  "site_adapter": null
+ },
+ "proof": {
+  "known_answers": {
+   "declared": 0,
+   "run": 0,
+   "reproduced": 0,
+   "not_run": [],
+   "negative_run": 0,
+   "tolerance": null,
+   "source": null,
+   "kinds": {},
+   "failed": []
+  },
+  "validation": null,
+  "outside_checks": [
+   {
+    "kind": "result",
+    "name": "Financial range check (Hazard repo): industry loss figures for solar flood",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/data_sources/financial_range_solar_flood/profile.md"
+   }
+  ],
+  "capability": {
+   "failure_unit_scalar_dr": "supported",
+   "scenario_loss_given_value_basis": "supported_with_explicit_value_and_exposure_basis",
+   "curve_intrinsic_spread": "not_carried",
+   "populated_emit_modes": [
+    "scalar_mean",
+    "discrete_state_table"
+   ],
+   "eal": "consumer_computable_with_prerequisites",
+   "pml": "consumer_computable_from_validated_annual_loss_distribution",
+   "var": "consumer_computable_from_validated_annual_loss_distribution",
+   "tvar": "consumer_computable_from_validated_annual_loss_distribution",
+   "limitation_flags": [
+    "CURVE_INTRINSIC_SPREAD_NOT_CARRIED",
+    "TAIL_CONDITIONAL_ON_DETERMINISTIC_VULNERABILITY"
+   ],
+   "computation_owner": "downstream_consumer"
+  }
+ },
+ "seams": {
+  "open_items": [
+   "No claims, OEM or forensic calibration; damage points are engineering parameterisation",
+   "Transformer type, flood duration and salinity are open seams (candidate model v1.1 items)",
+   "Cable pathway axis unit and formula are not fully pinned in the curve file",
+   "Surveyed equipment elevations and conduit routing are needed per site"
+  ],
+  "missing_mechanisms": [
+   "Flood duration, salinity and contamination (flags only, no numeric effect)",
+   "Energised versus shut-down state at flooding (flag only)",
+   "Water reaching equipment through conduits when the cabinet itself is above water (flag only, no multiplier)",
+   "Debris impact on modules"
+  ],
+  "out_of_scope": [
+   "Yearly and tail loss metrics (computed by the consumer, not the cell)",
+   "Part values and exposure fractions (supplied by the consumer; not embedded in the curve file)"
+  ],
+  "next_version": null,
+  "update_triggers": [
+   {
+    "parameter": "depth_damage_points",
+    "tier": "T3",
+    "update_trigger": "claims/OEM/forensic depth-damage data"
+   },
+   {
+    "parameter": "depth_damage_points",
+    "tier": "T3",
+    "update_trigger": "claims/OEM/forensic depth-damage data"
+   },
+   {
+    "parameter": "depth_damage_points",
+    "tier": "T3",
+    "update_trigger": "claims/OEM/forensic depth-damage data"
+   },
+   {
+    "parameter": "depth_damage_points",
+    "tier": "T3",
+    "update_trigger": "claims/OEM/forensic depth-damage data"
+   },
+   {
+    "parameter": "depth_damage_points",
+    "tier": "T3",
+    "update_trigger": "claims/OEM/forensic depth-damage data"
+   },
+   {
+    "parameter": "depth_damage_points",
+    "tier": "T3",
+    "update_trigger": "claims/OEM/forensic depth-damage data"
+   },
+   {
+    "parameter": "depth_damage_points",
+    "tier": "T3",
+    "update_trigger": "claims/OEM/forensic depth-damage data"
+   },
+   {
+    "parameter": "foundation_velocity_scour_points",
+    "tier": "T4",
+    "update_trigger": "hydraulic/geotechnical model or forensic scour dataset"
+   }
+  ]
+ },
+ "field_review": {
+  "register": null,
+  "buckets": [],
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table and capability declaration",
+   "entry_read_kind": "agent",
+   "release_review": null,
+   "release_review_code": null,
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release —"
+  },
+  "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only."
+ },
+ "files": {
+  "write_up": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+  "decisions": null,
+  "validation": null,
+  "notebooks": "notebooks/flood/solar/"
+ },
+ "folder_files": [
+  {
+   "path": "docs/cells/flood_solar/current/CELL_DOCUMENTATION_CROSSWALK_flood_solar_v1_0.md",
+   "sha256": "d0a238c60c68598455f2870f21ad6b129e557bf4718584a8aade93ad9188d9c7"
+  },
+  {
+   "path": "docs/cells/flood_solar/current/README_flood_solar_v1_0.md",
+   "sha256": "1cf04218602f7cd82632188f3ccc76159db7b8efc91c8e332571dae190198c66"
+  },
+  {
+   "path": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+   "sha256": "1e586bc4b9e34b3a4ab07d67ab6f038357c9f5bdb441be7fdf509f5c88b53be2"
+  },
+  {
+   "path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+   "sha256": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d"
+  },
+  {
+   "path": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+   "sha256": "33d9001a5ea45fd2cef4c8f8f1e907e3f93004e75813642802372888bfd66177"
+  },
+  {
+   "path": "docs/cells/flood_solar/current/flood_solar_damage_code_metadata_spec_v1_0.md",
+   "sha256": "7bbc6c0718993aa95e0b1be6d458930296b23aadb0e8fdb7d855179f3e171c62"
+  },
+  {
+   "path": "docs/cells/flood_solar/current/workbook_sheet_manifest_flood_solar_v1_0.md",
+   "sha256": "030b8738b63c0e375a26f17f038eed27f76a3a983603b3a38827bea0114e6056"
+  }
+ ],
+ "gap_reason": null,
+ "binding": null,
+ "sampling_notes": [
+  "No known-answer tests declared by this artifact."
+ ],
+ "build_findings": []
+}

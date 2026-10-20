@@ -1,0 +1,1001 @@
+{
+ "entry_id": "tropical_cyclone_wind_bess",
+ "kind": "cell",
+ "status": "live",
+ "title": "Hurricane wind × Battery storage",
+ "asset": {
+  "slug": "bess",
+  "label": "Battery storage"
+ },
+ "hazard": {
+  "slug": "hurricane_wind",
+  "label": "Hurricane wind"
+ },
+ "identity": {
+  "kind": "cell",
+  "damage_code_id": "BESS_TC_WIND_SCREENING_V1",
+  "model": "model v1.0",
+  "docs": "docs r1",
+  "version_key": "model_v1_0__docs_r1",
+  "schema": "damage_curve_record_bundle.v3",
+  "sha256": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed",
+  "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
+ },
+ "pins": [
+  {
+   "what": "catalogue entry artifact_sha256",
+   "file": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
+   "expected": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed",
+   "actual": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed",
+   "ok": true
+  },
+  {
+   "what": "runtime artifact index sha256",
+   "file": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
+   "expected": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed",
+   "actual": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed",
+   "ok": true
+  },
+  {
+   "what": "value_linkage.value_binding_sha256",
+   "file": "docs/cells/tropical_cyclone_wind_bess/current/value_binding.json",
+   "expected": "4aaf33b9aa7f3bcaca37eb2506799c303d9ff9f67c449665f512a38d9a43aa89",
+   "actual": "4aaf33b9aa7f3bcaca37eb2506799c303d9ff9f67c449665f512a38d9a43aa89",
+   "ok": true
+  },
+  {
+   "what": "derivation_rationale.source_artifact_sha256",
+   "file": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
+   "expected": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
+   "actual": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
+   "ok": true
+  }
+ ],
+ "rail": {
+  "exists": {
+   "status": "live",
+   "mark": "■",
+   "label": "LIVE",
+   "qualifier": "screening"
+  },
+  "evidence": {
+   "shape": "T4",
+   "cost": "T4",
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   }
+  },
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+   "entry_read_kind": "agent",
+   "release_review": "same author with independent numerical methods",
+   "release_review_code": "same_author_with_independent_numerical_methods",
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release same author with independent numerical m"
+  }
+ },
+ "summary": "Hurricane wind on battery storage: solar TC-wind ordered damage-state curves reused as a T4 hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage; 86 % of the reference value has a curve and 14 % has none.",
+ "chain": {
+  "stations": [
+   {
+    "id": "scope",
+    "label": "Scope",
+    "gate": "A",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/current/README.md",
+      "sha256": "cbad69c9b03bc40b323268c0735eb93aa77617b461a2ac2e548941416acfd447"
+     },
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/README.md",
+      "sha256": "997e2ba38198933da88346a7d5473cde58c685e9f03b73d0097d02d139249706"
+     },
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/basics/README.md",
+      "sha256": "4357c5c1dc9a2b07ad498b1f7eae439afe198a7d101eb71e340391f87c7d4146"
+     }
+    ],
+    "evidence": [],
+    "fact": "3 deferred",
+    "absent_sentence": null
+   },
+   {
+    "id": "units",
+    "label": "Units",
+    "gate": "A · B2",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
+      "sha256": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed"
+     }
+    ],
+    "evidence": [],
+    "fact": "5 units · 3 withheld",
+    "absent_sentence": null
+   },
+   {
+    "id": "axis_form",
+    "label": "Axis · form",
+    "gate": "C",
+    "state": "absent",
+    "files": [],
+    "evidence": [],
+    "fact": "ordered damage state lognormal",
+    "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section."
+   },
+   {
+    "id": "evidence",
+    "label": "Evidence",
+    "gate": "B",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/current/claim_parameter_register.csv",
+      "sha256": "e45b816fa8f7898a10b39f7c23ed48412f5893499636288cae76311d0f386d12"
+     },
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/current/parameter_register.csv",
+      "sha256": "7d4d8738e626f62d2313a81603cb606621b16492bfac7619cfa8eaedfc2e9dff"
+     },
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/current/source_register.csv",
+      "sha256": "568296b4e6b60eb0e3928c88ce95401548661642081faa84b21f28dd66765f82"
+     }
+    ],
+    "evidence": [],
+    "fact": "13 src · T3–4",
+    "absent_sentence": null
+   },
+   {
+    "id": "value",
+    "label": "Value",
+    "gate": "B2",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/current/value_binding.json",
+      "sha256": "4aaf33b9aa7f3bcaca37eb2506799c303d9ff9f67c449665f512a38d9a43aa89"
+     },
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/current/value_crosswalk.csv",
+      "sha256": "4030fcf62918501fb16ff52e47e6757686a7a6dde93d406b0ec9e4bc467249b8"
+     }
+    ],
+    "evidence": [],
+    "fact": "86 % · $94.4M of $109.8M",
+    "absent_sentence": null
+   },
+   {
+    "id": "audit",
+    "label": "Audit",
+    "gate": "B2",
+    "state": "absent",
+    "files": [],
+    "evidence": [],
+    "fact": "no file · no prose",
+    "absent_sentence": "No seven-step audit or site-condition adapter found as a file or a dossier section."
+   },
+   {
+    "id": "artifact",
+    "label": "Artifact",
+    "gate": "C",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
+      "sha256": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed"
+     },
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/current/derivation.md",
+      "sha256": "1694dac651c439b194a6ca7bc9b6fa67ffa9547a9d486063aefd628174720434"
+     },
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/current/metadata.md",
+      "sha256": "99bcd7d8369eb6940eac7d64bf60d4f6e1ba60da0a9856a78f28494f97d6af85"
+     },
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/current/value_binding.json",
+      "sha256": "4aaf33b9aa7f3bcaca37eb2506799c303d9ff9f67c449665f512a38d9a43aa89"
+     }
+    ],
+    "evidence": [],
+    "fact": "v1.0 · docs r1",
+    "absent_sentence": null
+   },
+   {
+    "id": "capability",
+    "label": "Capability",
+    "gate": "D",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/current/capability.json",
+      "sha256": "664aef156f0b4152e8f57803d8be15b7b491173f2a0f3c8ff1f37ac8f0520a8e"
+     }
+    ],
+    "evidence": [],
+    "fact": "DR conditional · EAL conditional",
+    "absent_sentence": null
+   },
+   {
+    "id": "proof",
+    "label": "Proof · release",
+    "gate": "E",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/current/known_answers.json",
+      "sha256": "68689dbf61661cf1ae92be4eba78b85943c43011dcbc43110f5e5dbc50c3ee15"
+     },
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/current/validation.json",
+      "sha256": "189363743808c650324127104aad62c414154c435015a4eec90d61820763217b"
+     },
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/CHANGELOG.json",
+      "sha256": "06fd6f86fec9cd1401bb60b88b564e4c33dc052d7dc5388abf9b9775e780a22d"
+     },
+     {
+      "path": "docs/cells/tropical_cyclone_wind_bess/VERSION_REGISTRY.md",
+      "sha256": "fc404811a825f15ee7ab8b435ed4c3abf116e06256d1804ae21bac6d629f86da"
+     },
+     {
+      "path": "docs/contracts/machine_readable_artifact_index.json",
+      "sha256": "b421721ea2d82aa6e341cb80868d5023074de90ed80eed648b5a10c060b98e75",
+      "note": "artifact index pin",
+      "pinned_sha256": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed",
+      "pin_ok": true
+     }
+    ],
+    "evidence": [],
+    "fact": "0 of 20 KAT reproduced",
+    "absent_sentence": null
+   },
+   {
+    "id": "field_review",
+    "label": "Field · review",
+    "gate": "—",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/evidence/occurrence/bess/hurricane_wind.json",
+      "sha256": "b0dba18f513768581c2d477d1c8135dec4adf68d8dd57088b9c6c0463871cdf7"
+     }
+    ],
+    "evidence": [],
+    "fact": "not searched · agent-read 10-19",
+    "absent_sentence": null
+   }
+  ],
+  "generation": "plain",
+  "core_as_files": 5,
+  "core_total": 6,
+  "dossier": {
+   "path": "docs/cells/tropical_cyclone_wind_bess/current/derivation.md",
+   "sha256": "1694dac651c439b194a6ca7bc9b6fa67ffa9547a9d486063aefd628174720434"
+  },
+  "basics": {
+   "path": "docs/cells/tropical_cyclone_wind_bess/basics/HOW_THE_MODEL_IS_BUILT.md",
+   "sha256": "d1a6154d6f54202df9e7077cd28651c82e4ad53611185b95c215ac382b08590e"
+  },
+  "workbook": null,
+  "gates": [
+   {
+    "gate": "A",
+    "label": "scope",
+    "items": [
+     {
+      "item": "hazard and asset are named",
+      "status": "proven",
+      "basis": "cell_id in the artifact"
+     },
+     {
+      "item": "in-scope and out-of-scope mechanisms listed",
+      "status": "proven",
+      "basis": "hazard_scope.deferred or the entry's out_of_scope"
+     },
+     {
+      "item": "related hazards that should split are named",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "multi-pathway cells declare stable pathway IDs",
+      "status": "proven",
+      "basis": "pathways[].pathway_id"
+     },
+     {
+      "item": "neighbouring or compound mechanisms have an include / defer / split decision",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "no downstream M4 metric is hidden in the damage cell",
+      "status": "proven",
+      "basis": "consumer_annual_metrics.computation_owner"
+     }
+    ]
+   },
+   {
+    "gate": "B",
+    "label": "evidence",
+    "items": [
+     {
+      "item": "source register with stable IDs, locators, roles, tiers and decisions",
+      "status": "proven",
+      "basis": "docs/cells/tropical_cyclone_wind_bess/current/source_register.csv"
+     },
+     {
+      "item": "load-bearing claims carry claim-level provenance",
+      "status": "proven",
+      "basis": "docs/cells/tropical_cyclone_wind_bess/current/claim_parameter_register.csv"
+     },
+     {
+      "item": "the chosen spine is explained",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "rejected or demoted sources are explained",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "parameter tier table populated",
+      "status": "proven",
+      "basis": "parameter_tier_table"
+     },
+     {
+      "item": "T3/T4 update triggers listed",
+      "status": "proven",
+      "basis": "update_trigger per T3/T4 row"
+     },
+     {
+      "item": "legacy equations and tables reproduced where legacy material is used",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "proposed numbers pressure-tested at boundaries and on explicit denominators",
+      "status": "human",
+      "basis": "PRESSURE_TEST file"
+     },
+     {
+      "item": "evidence, parameters and transfer limits resolved independently by pathway",
+      "status": "human",
+      "basis": "pathway_id on tier rows"
+     }
+    ]
+   },
+   {
+    "gate": "B2",
+    "label": "seven-step, site and value",
+    "items": [
+     {
+      "item": "seven-step audit records a status and blocking seam for every step",
+      "status": "human",
+      "basis": "SEVEN_STEP_AUDIT file"
+     },
+     {
+      "item": "row-level value crosswalk reconciles direct, mixed, support and excluded rows",
+      "status": "proven",
+      "basis": "value crosswalk or binding"
+     },
+     {
+      "item": "support and logistics are allocated once, not given an independent DR",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "site-conditioned hazards have a site adapter",
+      "status": "human",
+      "basis": "SITE_CONDITION_ADAPTER file"
+     },
+     {
+      "item": "fences, walls, barriers and bypass pathways receive no blanket credit",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "the adapter includes a double-counting matrix",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "unknown at-risk, exposure or mitigation states do not silently become full credit",
+      "status": "human",
+      "basis": null
+     }
+    ]
+   },
+   {
+    "gate": "C",
+    "label": "runtime contract",
+    "items": [
+     {
+      "item": "the JSON artifact is canonical",
+      "status": "proven",
+      "basis": "canonical_runtime_artifact"
+     },
+     {
+      "item": "workbooks are derivation or audit views, not the runtime",
+      "status": "n/a",
+      "basis": null
+     },
+     {
+      "item": "damage_code_id and model version are stable",
+      "status": "proven",
+      "basis": "damage_code_id · semantic_damage_model_version"
+     },
+     {
+      "item": "field names and aliases are explicit",
+      "status": "proven",
+      "basis": "hazard_axis input field"
+     },
+     {
+      "item": "pathway_id is first-class in request, record, output, capability and KAT surfaces",
+      "status": "proven",
+      "basis": "pathway_capabilities"
+     },
+     {
+      "item": "pathway-specific axes and bridges are explicit",
+      "status": "proven",
+      "basis": "pathways[].hazard_axis.id"
+     },
+     {
+      "item": "the emit contract is distribution-ready",
+      "status": "proven",
+      "basis": "emit_contract"
+     }
+    ]
+   },
+   {
+    "gate": "D",
+    "label": "reportability",
+    "items": [
+     {
+      "item": "failure-unit DR support stated",
+      "status": "proven",
+      "basis": "capability_declaration"
+     },
+     {
+      "item": "scenario loss support requires a value basis",
+      "status": "proven",
+      "basis": "scenario_loss_given_value_basis"
+     },
+     {
+      "item": "scalar EAL requires downstream frequency, value basis and a cap-binding pass",
+      "status": "proven",
+      "basis": "consumer_annual_metrics"
+     },
+     {
+      "item": "PML / VaR / TVaR withheld unless spread exists",
+      "status": "proven",
+      "basis": "curve_intrinsic_spread"
+     },
+     {
+      "item": "a no-curve scaffold emits no numeric DR",
+      "status": "n/a",
+      "basis": null
+     },
+     {
+      "item": "unsupported pathway × failure-unit pairs withhold with a stable reason",
+      "status": "proven",
+      "basis": "withheld_reason_codes"
+     }
+    ]
+   },
+   {
+    "gate": "E",
+    "label": "release",
+    "items": [
+     {
+      "item": "registry, index, changelog and manifest updated",
+      "status": "proven",
+      "basis": "artifact index row · CHANGELOG"
+     },
+     {
+      "item": "validation report produced",
+      "status": "proven",
+      "basis": "validation file"
+     },
+     {
+      "item": "old-vs-new and cross-pathway negative tests pass",
+      "status": "human",
+      "basis": "negative contract tests run by the build"
+     },
+     {
+      "item": "consumer migration and the exact model / docs / schema / SHA pin verified",
+      "status": "proven",
+      "basis": "SHA equals the index pin"
+     },
+     {
+      "item": "package zip integrity checked",
+      "status": "n/a",
+      "basis": "no portable package for repository-canonical artifacts"
+     }
+    ]
+   }
+  ]
+ },
+ "no_evaluator": true,
+ "no_evaluator_sentence": "Not drawn — no reference evaluator for this form in this repository (G9).",
+ "answer": {
+  "axis_groups": [],
+  "curve_ids": [
+   "BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1",
+   "BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1",
+   "BESS_SEPARATE_PCS_TC_PROXY_V0_1"
+  ],
+  "input": "Pressure ratio: (event 3-second gust / declared reference gust) squared, dimensionless, valid 0 to 2; outside the range is withheld, not clamped",
+  "how_to_use": {
+   "share_of": "Replacement value of the same physical unit, fixed 2024 dollars: $1.05M per integrated enclosure (80), $520,000 per PCS (20); $94.4M covered of $109.8M total",
+   "outputs": {
+    "single_event": "conditional: needs an explicit response choice (replacement or repair sensitivity), a resistance scenario and a declared comparable pressure reference",
+    "scenario_dollars": "conditional: same conditions, with the same-unit value; covered hardware only",
+    "yearly_loss": "conditional: Hazard computes it only after frequency, shared-event coupling, per-unit cap and annual-distribution checks pass; partial-property result only, complete-plant figures withheld"
+   },
+   "conditions": [
+    "Pin the exact model v1.0 / docs r1 artifact, value and capability",
+    "No default response: choose replacement or repair sensitivity, and lower, central or upper resistance (unweighted, not probabilities)",
+    "Declare the comparable pressure reference; the cell picks no national wind reference",
+    "Cap each unit's yearly cost at its value; no repair within the year",
+    "Keep unknown source and domain probability; the $15.4M unbound property is not zero"
+   ]
+  },
+  "value": {
+   "covered_usd": 94400000,
+   "total_usd": 109800000,
+   "share_covered": 0.8597449908925319,
+   "covered_label": "$94.4M of $109.8M",
+   "covered": [
+    {
+     "label": "Integrated battery enclosures",
+     "value_usd": 84000000
+    },
+    {
+     "label": "PCS",
+     "value_usd": 10400000
+    }
+   ],
+   "no_curve": [
+    {
+     "label": "Unit MV and shared electrical ($13.2M)",
+     "value_usd": 13200000.0,
+     "sentence": "No curve — Unit MV and shared electrical ($13.2M), $13.2M of the reference value, has no damage response yet."
+    },
+    {
+     "label": "Civil works ($1.6M)",
+     "value_usd": 1600000.0,
+     "sentence": "No curve — Civil works ($1.6M), $1.6M of the reference value, has no damage response yet."
+    },
+    {
+     "label": "Fieldwork ($0.6M)",
+     "value_usd": 600000.0,
+     "sentence": "No curve — Fieldwork ($0.6M), $600k of the reference value, has no damage response yet."
+    }
+   ],
+   "left_out": [],
+   "source": "docs/cells/tropical_cyclone_wind_bess/current/value_binding.json",
+   "basis": "fixed 2024 dollars; reference budget r1"
+  },
+  "not_covered": [
+   "Unit MV and shared electrical ($13.2M)",
+   "Civil works ($1.6M)",
+   "Fieldwork ($0.6M)"
+  ],
+  "withheld_units": [
+   {
+    "failure_unit_id": "BESS_MV_AND_SHARED_ELECTRICAL",
+    "subsystem": "BESS_MV_AND_SHARED_ELECTRICAL",
+    "reasons": [
+     "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION"
+    ],
+    "sentence": "Withheld: NO QUALIFIED WIND RESPONSE OR ALLOCATION."
+   },
+   {
+    "failure_unit_id": "BESS_CIVIL",
+    "subsystem": "BESS_CIVIL",
+    "reasons": [
+     "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION"
+    ],
+    "sentence": "Withheld: NO QUALIFIED WIND RESPONSE OR ALLOCATION."
+   },
+   {
+    "failure_unit_id": "BESS_FIELDWORK",
+    "subsystem": "BESS_FIELDWORK",
+    "reasons": [
+     "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION"
+    ],
+    "sentence": "Withheld: NO QUALIFIED WIND RESPONSE OR ALLOCATION."
+   }
+  ],
+  "hazard_axis": [
+   {
+    "id": "bess_tc_event_to_reference_pressure_ratio",
+    "preferred_input_field": "pressure_ratio",
+    "unit": "dimensionless comparable pressure-demand/reference ratio",
+    "valid_range": [
+     0,
+     2
+    ],
+    "extrapolation_policy": "withhold outside range; no clamp"
+   }
+  ]
+ },
+ "parts": [
+  {
+   "part": "Integrated battery enclosure",
+   "curves": [
+    "BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1",
+    "BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1"
+   ],
+   "failure_units": [
+    "BESS_INTEGRATED_ENCLOSURE"
+   ],
+   "subsystems": [
+    "battery_enclosures"
+   ],
+   "bucket": "battery_enclosures",
+   "variants": "response: approved replacement / repair sensitivity; resistance: lower, central or upper (unweighted)",
+   "shape": "T4",
+   "shape_basis": "State medians and beta transferred from the solar TC-wind curve, not fitted (BW-P02)",
+   "cost": "T4",
+   "cost_basis": "State costs 0 / 0.14 / 1 / 1 (repair sensitivity 0.19 at major) from policy and a related cost split (BW-P03 to P06)",
+   "notes": [
+    {
+     "type": "key_assumption",
+     "text": "Major damage means replacing the whole enclosure (BW-Q01)"
+    }
+   ],
+   "occurrence": {
+    "mark": "?",
+    "state": "not_searched",
+    "sentence": "Not searched — nobody has looked for field reports yet."
+   },
+   "drawn": false
+  },
+  {
+   "part": "Separate PCS",
+   "curves": [
+    "BESS_SEPARATE_PCS_TC_PROXY_V0_1"
+   ],
+   "failure_units": [
+    "BESS_SEPARATE_PCS"
+   ],
+   "subsystems": [
+    "pcs"
+   ],
+   "bucket": "pcs",
+   "variants": "resistance: lower, central or upper (unweighted)",
+   "shape": "T4",
+   "shape_basis": "Solar TC-wind source states unchanged (BW-P07)",
+   "cost": "T4",
+   "cost_basis": "Source state costs 0 / 0.1 / 0.4 / 1 unchanged (BW-P07)",
+   "notes": [
+    {
+     "type": "reused_from",
+     "text": "tropical_cyclone_wind_solar v2.1 docs r2 (states and costs unchanged)"
+    }
+   ],
+   "occurrence": {
+    "mark": "?",
+    "state": "not_searched",
+    "sentence": "Not searched — nobody has looked for field reports yet."
+   },
+   "drawn": false
+  }
+ ],
+ "evidence": {
+  "lineage": "machine_readable",
+  "prose_sentence": null,
+  "paths": {
+   "sources": "docs/cells/tropical_cyclone_wind_bess/current/source_register.csv",
+   "claims": "docs/cells/tropical_cyclone_wind_bess/current/claim_parameter_register.csv",
+   "parameters": "docs/cells/tropical_cyclone_wind_bess/current/parameter_register.csv"
+  },
+  "n_sources": 13,
+  "n_claims": 16,
+  "n_parameters": 9,
+  "key_sources": [
+   "Hazard BESS r1 selected profile and budget (BW-S01)",
+   "Solar TC-wind model v2.1 docs r2 (BW-S02)",
+   "SMA MVPS-S2-SCS-US system manual, storm mounting and anchorage (BW-S03)",
+   "Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 (BW-S11)",
+   "NREL PVSCM 2024 inputs and prior same-budget allocation (BW-S12)"
+  ],
+  "sources_from": "register",
+  "judgment": [
+   "Pressure axis is a squared gust ratio against a reference the consumer declares (BW-P01)",
+   "Curve shape and beta 0.35 borrowed from the solar TC-wind cell; no BESS data fitted (BW-P02)",
+   "Major damage means full enclosure replacement (owner-approved local policy BW-Q01)",
+   "Limited-damage cost of 20/141.3 of enclosure value from a related cost split (BW-P03)",
+   "PCS uses the solar TC-wind states and costs unchanged (BW-P07)"
+  ],
+  "weakest_tier": "T4",
+  "pressure_test": null,
+  "method": {
+   "type": "built_from_references",
+   "summary": "Solar TC-wind ordered damage-state curves reused as a T4 hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage"
+  }
+ },
+ "audit": {
+  "table": null,
+  "state": "absent",
+  "absent_sentence": "No seven-step audit or site-condition adapter found as a file or a dossier section.",
+  "site_adapter": null
+ },
+ "proof": {
+  "known_answers": {
+   "declared": 20,
+   "run": 0,
+   "reproduced": 0,
+   "not_run": [
+    {
+     "kind": "case",
+     "n": 20,
+     "reason": "no reference evaluator for this cell in this repository (G9); not run, not reproduced"
+    }
+   ],
+   "negative_run": 0,
+   "tolerance": null,
+   "source": "docs/cells/tropical_cyclone_wind_bess/current/known_answers.json",
+   "kinds": {},
+   "failed": []
+  },
+  "validation": {
+   "path": "docs/cells/tropical_cyclone_wind_bess/current/validation.json",
+   "status": "passed_conditional_annual_screening",
+   "date": null,
+   "classification": "NEW_CELL_MODEL_RELEASE",
+   "review_scope": "same-author validation with independent numerical methods; no external scientific review"
+  },
+  "outside_checks": [],
+  "capability": {
+   "failure_unit_scalar_dr": "conditional",
+   "scenario_loss_given_value_basis": "conditional",
+   "curve_intrinsic_spread": "not_carried",
+   "populated_emit_modes": [
+    "scalar_mean"
+   ],
+   "eal": "consumer_computable_from_validated_frequency_intensity_coupling_value_and_cap_model",
+   "pml": null,
+   "var": null,
+   "tvar": null,
+   "limitation_flags": [
+    "T4_PROBABILITY_TRANSFER_NOT_CALIBRATED",
+    "BW_Q01_CONSERVATIVE_REPLACEMENT_POLICY",
+    "REPAIR_AND_RESISTANCE_SENSITIVITIES_NOT_CONFIDENCE_INTERVALS",
+    "PARTIAL_PROPERTY_SCOPE",
+    "WIND_ONLY_DEBRIS_RAIN_INGRESS_AND_SPREAD_UNQUANTIFIED",
+    "UNKNOWN_TC_DURATION_CLASS",
+    "UNKNOWN_TC_DIRECTION_EVOLUTION_CLASS",
+    "COMMON_RATE_RANK_SCREENING_DEPENDENCE",
+    "SOURCE_UNKNOWN_MASS_RETAINED",
+    "NO_INTRINSIC_DAMAGE_SPREAD",
+    "PER_PHYSICAL_UNIT_ANNUAL_CAP_NO_RESTORATION",
+    "LOCAL_PROOF_NOT_NATIONAL_ADMISSION"
+   ],
+   "computation_owner": "downstream_consumer"
+  }
+ },
+ "seams": {
+  "open_items": [
+   "No national wind reference selected (BW-P08); national placement support not yet qualified",
+   "Matched wind or anchorage tests and service outcomes still needed",
+   "$15.4M of plant value has no wind response yet"
+  ],
+  "missing_mechanisms": [
+   "Windborne debris",
+   "Wind-driven rain ingress",
+   "Triggered propagation between units"
+  ],
+  "out_of_scope": [
+   "Storm surge and rain flooding (Flood cell)",
+   "Convective wind and tornado (separate scope)",
+   "Autonomous internal failures",
+   "Collector station and export line",
+   "Business interruption"
+  ],
+  "next_version": null,
+  "update_triggers": [
+   {
+    "parameter": "pressure_axis",
+    "tier": "T4",
+    "update_trigger": "Qualified BESS demand bridge"
+   },
+   {
+    "parameter": "state_probability_shape",
+    "tier": "T4",
+    "update_trigger": "Matched structural/enclosure failure data"
+   },
+   {
+    "parameter": "limited_group_cost",
+    "tier": "T4",
+    "update_trigger": "Repair itemization or selected candidate revision"
+   },
+   {
+    "parameter": "major_repair_if_serviceable",
+    "tier": "T4",
+    "update_trigger": "Configuration-matched repair guidance or owner local-test ruling"
+   },
+   {
+    "parameter": "major_compromise_replacement",
+    "tier": "T4",
+    "update_trigger": "Matched repair evidence or later qualification"
+   },
+   {
+    "parameter": "destructive_state_cost",
+    "tier": "T4",
+    "update_trigger": "Supported partial salvage or replacement scope"
+   },
+   {
+    "parameter": "pcs_response",
+    "tier": "T4",
+    "update_trigger": "Target-specific local binding and tests"
+   },
+   {
+    "parameter": "national_wind_reference",
+    "tier": "T4",
+    "update_trigger": "Bounded Hazard reference qualification"
+   },
+   {
+    "parameter": "unbound_property",
+    "tier": "T3",
+    "update_trigger": "Qualified same-scope EBOS/civil/support response"
+   }
+  ]
+ },
+ "field_review": {
+  "register": {
+   "path": "docs/evidence/occurrence/bess/hurricane_wind.json",
+   "sha256": "b0dba18f513768581c2d477d1c8135dec4adf68d8dd57088b9c6c0463871cdf7",
+   "search_log": "docs/evidence/occurrence/bess/hurricane_wind.md",
+   "last_searched": null
+  },
+  "buckets": [
+   {
+    "bucket": "battery_enclosures",
+    "state": "not_searched",
+    "mark": "?",
+    "sentence": "Not searched — nobody has looked for field reports yet.",
+    "reports": [],
+    "twin_lead": {
+     "level": "L",
+     "nodes": [
+      {
+       "node": "be_enc",
+       "name": "Enclosure Shell",
+       "level": 1,
+       "why": "Anchorage loads"
+      }
+     ]
+    }
+   },
+   {
+    "bucket": "pcs",
+    "state": "not_searched",
+    "mark": "?",
+    "sentence": "Not searched — nobody has looked for field reports yet.",
+    "reports": [],
+    "twin_lead": {
+     "level": null,
+     "nodes": []
+    }
+   },
+   {
+    "bucket": "electrical_balance",
+    "state": "not_searched",
+    "mark": "?",
+    "sentence": "Not searched — nobody has looked for field reports yet.",
+    "reports": [],
+    "twin_lead": {
+     "level": null,
+     "nodes": []
+    }
+   },
+   {
+    "bucket": "civil_works",
+    "state": "not_searched",
+    "mark": "?",
+    "sentence": "Not searched — nobody has looked for field reports yet.",
+    "reports": [],
+    "twin_lead": {
+     "level": null,
+     "nodes": []
+    }
+   },
+   {
+    "bucket": "fieldwork",
+    "state": "not_searched",
+    "mark": "?",
+    "sentence": "Not searched — nobody has looked for field reports yet.",
+    "reports": [],
+    "twin_lead": {
+     "level": null,
+     "nodes": []
+    }
+   }
+  ],
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+   "entry_read_kind": "agent",
+   "release_review": "same author with independent numerical methods",
+   "release_review_code": "same_author_with_independent_numerical_methods",
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release same author with independent numerical m"
+  },
+  "absent_sentence": null
+ },
+ "files": {
+  "write_up": "docs/cells/tropical_cyclone_wind_bess/current/derivation.md",
+  "decisions": "docs/plans/bess_damage/decisions.md",
+  "validation": "docs/cells/tropical_cyclone_wind_bess/current/validation.json",
+  "notebooks": null
+ },
+ "folder_files": [
+  {
+   "path": "docs/cells/tropical_cyclone_wind_bess/current/README.md",
+   "sha256": "cbad69c9b03bc40b323268c0735eb93aa77617b461a2ac2e548941416acfd447"
+  },
+  {
+   "path": "docs/cells/tropical_cyclone_wind_bess/current/capability.json",
+   "sha256": "664aef156f0b4152e8f57803d8be15b7b491173f2a0f3c8ff1f37ac8f0520a8e"
+  },
+  {
+   "path": "docs/cells/tropical_cyclone_wind_bess/current/claim_parameter_register.csv",
+   "sha256": "e45b816fa8f7898a10b39f7c23ed48412f5893499636288cae76311d0f386d12"
+  },
+  {
+   "path": "docs/cells/tropical_cyclone_wind_bess/current/consumption_pin.json",
+   "sha256": "e623a0695ff2cbac52558af654706e5da45086e0a047f3b83b051aa6293cb0c4"
+  },
+  {
+   "path": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
+   "sha256": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed"
+  },
+  {
+   "path": "docs/cells/tropical_cyclone_wind_bess/current/derivation.md",
+   "sha256": "1694dac651c439b194a6ca7bc9b6fa67ffa9547a9d486063aefd628174720434"
+  },
+  {
+   "path": "docs/cells/tropical_cyclone_wind_bess/current/known_answers.json",
+   "sha256": "68689dbf61661cf1ae92be4eba78b85943c43011dcbc43110f5e5dbc50c3ee15"
+  },
+  {
+   "path": "docs/cells/tropical_cyclone_wind_bess/current/metadata.md",
+   "sha256": "99bcd7d8369eb6940eac7d64bf60d4f6e1ba60da0a9856a78f28494f97d6af85"
+  },
+  {
+   "path": "docs/cells/tropical_cyclone_wind_bess/current/parameter_register.csv",
+   "sha256": "7d4d8738e626f62d2313a81603cb606621b16492bfac7619cfa8eaedfc2e9dff"
+  },
+  {
+   "path": "docs/cells/tropical_cyclone_wind_bess/current/source_register.csv",
+   "sha256": "568296b4e6b60eb0e3928c88ce95401548661642081faa84b21f28dd66765f82"
+  },
+  {
+   "path": "docs/cells/tropical_cyclone_wind_bess/current/validation.json",
+   "sha256": "189363743808c650324127104aad62c414154c435015a4eec90d61820763217b"
+  },
+  {
+   "path": "docs/cells/tropical_cyclone_wind_bess/current/value_binding.json",
+   "sha256": "4aaf33b9aa7f3bcaca37eb2506799c303d9ff9f67c449665f512a38d9a43aa89"
+  },
+  {
+   "path": "docs/cells/tropical_cyclone_wind_bess/current/value_crosswalk.csv",
+   "sha256": "4030fcf62918501fb16ff52e47e6757686a7a6dde93d406b0ec9e4bc467249b8"
+  }
+ ],
+ "gap_reason": null,
+ "binding": null,
+ "sampling_notes": [],
+ "build_findings": []
+}

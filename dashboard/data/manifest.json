@@ -1,0 +1,2140 @@
+{
+ "schema": "damage_dashboard_manifest.v0",
+ "built_at": "2026-10-20T09:28:25+00:00",
+ "commit": "05188ae",
+ "commit_full": "05188ae7d3706dd28d6bd734b83979c091206f3f",
+ "catalogue_commit_note": "catalogue entries and artifacts read at this commit; every number traces to a file at it",
+ "counts": {
+  "live": 13,
+  "proposal": 5,
+  "reused": 3,
+  "gap": 4,
+  "entries": 25,
+  "curves_declared": 104,
+  "curves_drawn": 94,
+  "curves_no_evaluator": 10,
+  "agent_read_only": 25,
+  "field_searches_logged": 0
+ },
+ "summary": "13 live curve cells, 5 proposals, 3 reused bindings and 4 gaps across 5 assets and 5 hazards; 25 of 25 catalogue entries have been read by an agent only; no field-report search has been logged yet.",
+ "assets": [
+  {
+   "slug": "solar",
+   "label": "Solar farm",
+   "catalogue": "Solar farm",
+   "href": "/assets/solar",
+   "n_entries": 5
+  },
+  {
+   "slug": "wind",
+   "label": "Wind farm",
+   "catalogue": "Wind farm",
+   "href": "/assets/wind",
+   "n_entries": 5
+  },
+  {
+   "slug": "real_estate",
+   "label": "Real estate",
+   "catalogue": "Real estate",
+   "href": "/assets/real_estate",
+   "n_entries": 5
+  },
+  {
+   "slug": "substation",
+   "label": "Substation",
+   "catalogue": "Substation",
+   "href": "/assets/substation",
+   "n_entries": 5
+  },
+  {
+   "slug": "bess",
+   "label": "Battery storage",
+   "catalogue": "Battery storage",
+   "href": "/assets/bess",
+   "n_entries": 5
+  }
+ ],
+ "hazards": [
+  {
+   "slug": "hail",
+   "label": "Hail",
+   "catalogue": "Hail",
+   "twin": [
+    "hail"
+   ],
+   "entry_tokens": [
+    "hail"
+   ],
+   "outside_the_five": false,
+   "effect": "damage"
+  },
+  {
+   "slug": "flood",
+   "label": "Flood",
+   "catalogue": "Flood",
+   "twin": [
+    "flood"
+   ],
+   "entry_tokens": [
+    "flood"
+   ],
+   "outside_the_five": false,
+   "effect": "damage"
+  },
+  {
+   "slug": "hurricane_wind",
+   "label": "Hurricane wind",
+   "catalogue": "Hurricane wind",
+   "twin": [
+    "wind"
+   ],
+   "entry_tokens": [
+    "tropical_cyclone_wind",
+    "hurricane"
+   ],
+   "outside_the_five": false,
+   "effect": "damage"
+  },
+  {
+   "slug": "convective_wind",
+   "label": "Convective wind",
+   "catalogue": "Convective wind",
+   "twin": [
+    "wind"
+   ],
+   "entry_tokens": [
+    "convective_wind",
+    "strong_wind",
+    "wind_tornado"
+   ],
+   "outside_the_five": false,
+   "effect": "damage"
+  },
+  {
+   "slug": "wildfire",
+   "label": "Wildfire",
+   "catalogue": "Wildfire",
+   "twin": [
+    "wildfire"
+   ],
+   "entry_tokens": [
+    "wildfire"
+   ],
+   "outside_the_five": false,
+   "effect": "damage"
+  },
+  {
+   "slug": "heat",
+   "label": "Heat",
+   "catalogue": null,
+   "twin": [
+    "heat"
+   ],
+   "entry_tokens": [],
+   "outside_the_five": true,
+   "effect": "performance",
+   "effect_note": "The twin's heat leads (ageing, derating, chiller capacity) work through performance, not physical damage; pointer to the outage-as-performance work, no curve (discussion 04 §6)."
+  },
+  {
+   "slug": "icing",
+   "label": "Icing",
+   "catalogue": null,
+   "twin": [
+    "icing"
+   ],
+   "entry_tokens": [],
+   "outside_the_five": true,
+   "effect": "performance",
+   "effect_note": "Cold limits charge rate until heated; snow load on venting panels is the one physical lead (discussion 04 §6, ledger C-172)."
+  },
+  {
+   "slug": "lightning",
+   "label": "Lightning",
+   "catalogue": null,
+   "twin": [
+    "lightning"
+   ],
+   "entry_tokens": [],
+   "outside_the_five": true,
+   "effect": "damage",
+   "effect_note": "No hazard cell exists; the twin carries Medium surge leads on the electronics (discussion 04 §6)."
+  }
+ ],
+ "entries": [
+  {
+   "entry_id": "convective_wind_bess",
+   "kind": "gap",
+   "status": "gap",
+   "title": "Convective wind × Battery storage",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "exists": {
+    "status": "gap",
+    "mark": "┈",
+    "label": "GAP",
+    "qualifier": null
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "–",
+    "cost": "–",
+    "occurrence": {
+     "mark": "?",
+     "label": "not searched"
+    }
+   },
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the BESS plan and the BESS hurricane wind cell",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "gap",
+    "damage_code_id": null,
+    "model": null,
+    "docs": null,
+    "version_key": null,
+    "sha256": null
+   },
+   "summary": "No curve for convective wind on battery storage yet: No curve yet: the BESS hurricane wind cell leaves convective wind and tornado as a separate scope, and the BESS plan lists other hazards as later work (docs/plans/bess_damage/README.md, step 6).",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 0,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 0,
+   "generation": "gap",
+   "aria_label": "Convective wind × Battery storage, gap, not searched",
+   "href": "/cells/convective_wind_bess"
+  },
+  {
+   "entry_id": "convective_wind_real_estate",
+   "kind": "cell",
+   "status": "proposal",
+   "title": "Convective wind × Real estate",
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "exists": {
+    "status": "proposal",
+    "mark": "▢",
+    "label": "PROPOSAL",
+    "qualifier": "screening"
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "T3",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and decision log",
+    "entry_read_kind": "agent",
+    "release_review": "not yet reviewed",
+    "release_review_code": "not_yet_reviewed",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release not yet reviewed"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "CONVECTIVE_WIND_REAL_ESTATE_EF_SCREENING_V0_1",
+    "model": "model v0.1",
+    "docs": "docs r1",
+    "version_key": "model_v0_1__docs_r1",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "e676fb077ca3fb96a1d0efce7b1e408c2a82265ec97ea2eb4ebbef7e5aeeef3d",
+    "consumer_pin": null
+   },
+   "summary": "Proposal, not in the runtime index — Convective wind on real estate: eF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder; tornado used directly, storm wind as a transfer starting at 96 mph.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 6,
+   "n_drawn": 6,
+   "outside_checks": 1,
+   "chain_core_as_files": 5,
+   "generation": "skill",
+   "aria_label": "Convective wind × Real estate, proposal, shape T3, cost T4, no field-report register",
+   "href": "/cells/convective_wind_real_estate"
+  },
+  {
+   "entry_id": "flood_bess",
+   "kind": "cell",
+   "status": "live",
+   "title": "Flood × Battery storage",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T3–4",
+    "cost": "T3–4",
+    "occurrence": {
+     "mark": "?",
+     "label": "not searched"
+    }
+   },
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "BESS_FLOOD_INUNDATION_SCREENING_V1",
+    "model": "model v1.0",
+    "docs": "docs r1",
+    "version_key": "model_v1_0__docs_r1",
+    "schema": "damage_curve_record_bundle.v2",
+    "sha256": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24",
+    "consumer_pin": "flood_bess@model_v1_0__docs_r1"
+   },
+   "summary": "Flood on battery storage: conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; unit values from market cost shares of the fixed Hazard reference budget; 75 % of the reference value has a curve and 25 % has none.",
+   "no_evaluator": false,
+   "share_covered": 0.7514608688253878,
+   "n_curves": 3,
+   "n_drawn": 3,
+   "outside_checks": 0,
+   "chain_core_as_files": 4,
+   "generation": "plain",
+   "aria_label": "Flood × Battery storage, live, partial, shape T3–4, cost T3–4, not searched",
+   "href": "/cells/flood_bess"
+  },
+  {
+   "entry_id": "flood_real_estate",
+   "kind": "cell",
+   "status": "proposal",
+   "title": "Flood × Real estate",
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real estate"
+   },
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "exists": {
+    "status": "proposal",
+    "mark": "▢",
+    "label": "PROPOSAL",
+    "qualifier": "screening"
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "T2",
+    "cost": "T2",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and decision log",
+    "entry_read_kind": "agent",
+    "release_review": "not yet reviewed",
+    "release_review_code": "not_yet_reviewed",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release not yet reviewed"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "FLOOD_REAL_ESTATE_HAZUS_NACCS_SCREENING_V0_2",
+    "model": "model v0.2",
+    "docs": "docs r1",
+    "version_key": "model_v0_2__docs_r1",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "99fe3f1f6430caada7943a4a83fe74a2f94895c8c454d7789fda97fabfafe9af",
+    "consumer_pin": null
+   },
+   "summary": "Proposal, not in the runtime index — Flood on real estate: fEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water); retail keeps Hazus DF 217 for river water and USACE NACCS for coastal surge.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 7,
+   "n_drawn": 7,
+   "outside_checks": 1,
+   "chain_core_as_files": 6,
+   "generation": "skill",
+   "aria_label": "Flood × Real estate, proposal, shape T2, cost T2, no field-report register",
+   "href": "/cells/flood_real_estate"
+  },
+  {
+   "entry_id": "flood_solar",
+   "kind": "cell",
+   "status": "live",
+   "title": "Flood × Solar farm",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": null
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T3–4",
+    "cost": "T3–4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and capability declaration",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "FLOOD_SOLAR_ELECTRICAL_INUNDATION_V1",
+    "model": "model v1.0",
+    "docs": "docs r4",
+    "version_key": "model_v1_0__docs_r4",
+    "schema": "damage_curve_record_bundle.v2",
+    "sha256": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
+    "consumer_pin": "flood_solar@model_v1_0__docs_r4"
+   },
+   "summary": "Flood on solar farm: piecewise depth-damage points per part, set by engineering judgment from DOE/FEMP solar flood guidance and NEMA water-damaged equipment guidance, in the USACE depth-percent table form; 3 parts of the asset's value have no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 8,
+   "n_drawn": 8,
+   "outside_checks": 1,
+   "chain_core_as_files": 2,
+   "generation": "prose",
+   "aria_label": "Flood × Solar farm, live, partial, shape T3–4, cost T3–4, no field-report register",
+   "href": "/cells/flood_solar"
+  },
+  {
+   "entry_id": "flood_substation",
+   "kind": "cell",
+   "status": "live",
+   "title": "Flood × Substation",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": null
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "T3",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table, capability, consumer binding and decision log",
+    "entry_read_kind": "agent",
+    "release_review": "agent reviewed screening under owner delivery direction",
+    "release_review_code": "agent_reviewed_screening_under_owner_delivery_direction",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release agent reviewed screening under owner del"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "FLOOD_SUBSTATION_DEPTH_SCREENING_V1",
+    "model": "model v1.0",
+    "docs": "docs r1",
+    "version_key": "model_v1_0__docs_r1",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "f001eb0191439a1345a7a794995c684ef731f777c4b3e1eff0298de592999f30",
+    "consumer_pin": "flood_substation@model_v1_0__docs_r1"
+   },
+   "summary": "Flood on substation: fEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage ratios used as published (0 to 15% over 0 to 10 ft), the same table already carried by the flood_wind cell.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 1,
+   "n_drawn": 1,
+   "outside_checks": 0,
+   "chain_core_as_files": 5,
+   "generation": "skill",
+   "aria_label": "Flood × Substation, live, shape T3, cost T4, no field-report register",
+   "href": "/cells/flood_substation"
+  },
+  {
+   "entry_id": "flood_wind",
+   "kind": "cell",
+   "status": "live",
+   "title": "Flood × Wind farm",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T3",
+    "cost": "T3",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and release decision",
+    "entry_read_kind": "agent",
+    "release_review": "reviewed screening release",
+    "release_review_code": "reviewed_screening_release",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release reviewed screening release"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "FLOOD_WIND_FEMA_HAZUS_SUBSTATION_SCREENING_V1",
+    "model": "model v1.0",
+    "docs": "docs r1",
+    "version_key": "model_v1_0__docs_r1",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "37da745d87a4722e13118319bd30d9d2bcfd18dabc2a198ac6b8b1422bc3e1c1",
+    "consumer_pin": "flood_wind@model_v1_0__docs_r1"
+   },
+   "summary": "Flood on wind farm: fEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points; 6 parts of the asset's value have no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 1,
+   "n_drawn": 1,
+   "outside_checks": 0,
+   "chain_core_as_files": 5,
+   "generation": "skill",
+   "aria_label": "Flood × Wind farm, live, partial, shape T3, cost T3, no field-report register",
+   "href": "/cells/flood_wind"
+  },
+  {
+   "entry_id": "hail_bess",
+   "kind": "gap",
+   "status": "gap",
+   "title": "Hail × Battery storage",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail"
+   },
+   "exists": {
+    "status": "gap",
+    "mark": "┈",
+    "label": "GAP",
+    "qualifier": null
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "–",
+    "cost": "–",
+    "occurrence": {
+     "mark": "?",
+     "label": "not searched"
+    }
+   },
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the BESS plan and decision log",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "gap",
+    "damage_code_id": null,
+    "model": null,
+    "docs": null,
+    "version_key": null,
+    "sha256": null
+   },
+   "summary": "No curve for hail on battery storage yet: No curve and no documented plan yet (the BESS plan only lists other hazards as later work, step 6).",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 0,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 0,
+   "generation": "gap",
+   "aria_label": "Hail × Battery storage, gap, not searched",
+   "href": "/cells/hail_bess"
+  },
+  {
+   "entry_id": "hail_real_estate",
+   "kind": "cell",
+   "status": "proposal",
+   "title": "Hail × Real estate",
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real estate"
+   },
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail"
+   },
+   "exists": {
+    "status": "proposal",
+    "mark": "▢",
+    "label": "PROPOSAL",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T3–4",
+    "cost": "T3–4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and decision log",
+    "entry_read_kind": "agent",
+    "release_review": "not yet reviewed",
+    "release_review_code": "not_yet_reviewed",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release not yet reviewed"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "HAIL_REAL_ESTATE_ROOF_THRESHOLD_SCREENING_V0_1",
+    "model": "model v0.1",
+    "docs": "docs r1",
+    "version_key": "model_v0_1__docs_r1",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "52cf865d4dfb8b4c593736fb05b5d3e7c341bad2a2441b89499d7e88605fef20",
+    "consumer_pin": null
+   },
+   "summary": "Proposal, not in the runtime index — Hail on real estate: published hail-damage thresholds by roofing material (onset and full failure) turned into a replacement probability, times the roof's share of building cost; 1 part of the asset's value has no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 6,
+   "n_drawn": 6,
+   "outside_checks": 1,
+   "chain_core_as_files": 5,
+   "generation": "skill",
+   "aria_label": "Hail × Real estate, proposal, partial, shape T3–4, cost T3–4, no field-report register",
+   "href": "/cells/hail_real_estate"
+  },
+  {
+   "entry_id": "hail_solar",
+   "kind": "cell",
+   "status": "live",
+   "title": "Hail × Solar farm",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": null
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T2",
+    "cost": "T2",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table, value profiles and capability declaration",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "HAIL_SOLAR_PV_MODULE_V1",
+    "model": "model v1.0",
+    "docs": "docs r7",
+    "version_key": "model_v1_0__docs_r7",
+    "schema": "damage_curve_record_bundle.v2",
+    "sha256": "8c52f3442eb606f55aa0502fbb2738df70076f8a181de463c029061020b3cf32",
+    "consumer_pin": "hail_solar@model_v1_0__docs_r7"
+   },
+   "summary": "Hail on solar farm: logistic curves per module type fitted to public PVEL/Kiwa hail-test breakage anchors and the IEC baseline; glass-breakage probability used as the module replacement ratio; 4 parts of the asset's value have no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 3,
+   "n_drawn": 3,
+   "outside_checks": 1,
+   "chain_core_as_files": 2,
+   "generation": "prose",
+   "aria_label": "Hail × Solar farm, live, partial, shape T2, cost T2, no field-report register",
+   "href": "/cells/hail_solar"
+  },
+  {
+   "entry_id": "hail_substation",
+   "kind": "gap",
+   "status": "gap",
+   "title": "Hail × Substation",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail"
+   },
+   "exists": {
+    "status": "gap",
+    "mark": "┈",
+    "label": "GAP",
+    "qualifier": null
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "–",
+    "cost": "–",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the substation plan and cross-hazard reuse inventory",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "gap",
+    "damage_code_id": null,
+    "model": null,
+    "docs": null,
+    "version_key": null,
+    "sha256": null
+   },
+   "summary": "No curve for hail on substation yet: Hail was excluded from the first substation delivery and no station hail response was found in the reviewed curves; missing evidence is not zero risk (docs/extra/discussion/substation_damage/05_cross_hazard_reuse_inventory.md).",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 0,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 0,
+   "generation": "gap",
+   "aria_label": "Hail × Substation, gap, no field-report register",
+   "href": "/cells/hail_substation"
+  },
+  {
+   "entry_id": "hail_wind",
+   "kind": "gap",
+   "status": "gap",
+   "title": "Hail × Wind farm",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail"
+   },
+   "exists": {
+    "status": "gap",
+    "mark": "┈",
+    "label": "GAP",
+    "qualifier": null
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "–",
+    "cost": "–",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell README and deep-curation decision",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "gap",
+    "damage_code_id": null,
+    "model": null,
+    "docs": null,
+    "version_key": null,
+    "sha256": null
+   },
+   "summary": "No curve for hail on wind farm yet: Model v0.1 is a fail-closed research scaffold with no curve records: no evidence yet links one hail event's impact on a blade to an inspected blade state and that blade's repair cost, and no hail-to-blade input axis is fixed (docs r2 deep curation kept it a strict no-go).",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 0,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 0,
+   "generation": "gap",
+   "aria_label": "Hail × Wind farm, gap, no field-report register",
+   "href": "/cells/hail_wind"
+  },
+  {
+   "entry_id": "strong_wind_solar",
+   "kind": "cell",
+   "status": "live",
+   "title": "Convective wind × Solar farm",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": null
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and capability declaration",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "STRONG_WIND_SOLAR_V1",
+    "model": "model v1.0",
+    "docs": "docs r3",
+    "version_key": "model_v1_0__docs_r3",
+    "schema": "damage_curve_record_bundle.v2",
+    "sha256": "832f47d69372ec54723a61b8a956addccef07bb39338c3ec99907e116f1855ca",
+    "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3"
+   },
+   "summary": "Convective wind on solar farm: thresholded logistic curves on a design-normalised demand ratio; axis from wind-pressure physics, all numeric parameters set by engineering judgment from PV wind-load and storm-resilience sources; 1 part of the asset's value has no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 5,
+   "n_drawn": 5,
+   "outside_checks": 0,
+   "chain_core_as_files": 2,
+   "generation": "prose",
+   "aria_label": "Convective wind × Solar farm, live, partial, shape T4, cost T4, no field-report register",
+   "href": "/cells/strong_wind_solar"
+  },
+  {
+   "entry_id": "substation_convective_wind_screening_v1",
+   "kind": "binding",
+   "status": "reused",
+   "title": "Convective wind × Substation",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "exists": {
+    "status": "reused",
+    "mark": "▨",
+    "label": "REUSED",
+    "qualifier": null
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the binding README, binding.json and the source cell's tier table",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "binding",
+    "binding_id": "SUBSTATION_CW_DIRECT_WIND_SCREENING_V1",
+    "damage_code_id": null,
+    "model": "model v2.1",
+    "docs": "docs r2",
+    "version_key": "model_v2_1__docs_r2",
+    "source_cell_id": "tropical_cyclone_wind_solar",
+    "source_artifact_sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
+    "sha256": "5afa3f9cd31ee52092762bdb505fbc4c24c02ed2420d1be67c448e6441383be0"
+   },
+   "summary": "Convective wind on substation reuses another cell's curve: same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a T4 cross-hazard proxy for direct wind only (see docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md).",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 0,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 2,
+   "generation": "binding",
+   "aria_label": "Convective wind × Substation, reused, shape T4, cost T4, no field-report register",
+   "href": "/cells/substation_convective_wind_screening_v1"
+  },
+  {
+   "entry_id": "substation_hurricane_screening_v1",
+   "kind": "binding",
+   "status": "reused",
+   "title": "Hurricane wind × Substation",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "exists": {
+    "status": "reused",
+    "mark": "▨",
+    "label": "REUSED",
+    "qualifier": null
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the binding README, binding.json and the source cell's tier table",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "binding",
+    "binding_id": "SUBSTATION_TC_WIND_ASSEMBLY_SCREENING_V1",
+    "damage_code_id": null,
+    "model": "model v2.1",
+    "docs": "docs r2",
+    "version_key": "model_v2_1__docs_r2",
+    "source_cell_id": "tropical_cyclone_wind_solar",
+    "source_artifact_sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
+    "sha256": "4a5e994b4ef8cde8629bba765f1643190ce49e31cf045dbcf36adaf05a8f4773"
+   },
+   "summary": "Hurricane wind on substation reuses another cell's curve: the canonical solar TC-wind GSU/substation assembly curve is already separate from the solar array, so it is reused for the standalone station without inventing a solar plant (see docs/contracts/hazard_handoff/substation_hurricane_screening_v1/README.md).",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 0,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 3,
+   "generation": "binding",
+   "aria_label": "Hurricane wind × Substation, reused, shape T4, cost T4, no field-report register",
+   "href": "/cells/substation_hurricane_screening_v1"
+  },
+  {
+   "entry_id": "substation_wildfire_screening_v1",
+   "kind": "binding",
+   "status": "reused",
+   "title": "Wildfire × Substation",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "exists": {
+    "status": "reused",
+    "mark": "▨",
+    "label": "REUSED",
+    "qualifier": null
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the binding README, binding.json and the source cell's tier table",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "binding",
+    "binding_id": "substation_wildfire_electrical_screening_v1",
+    "damage_code_id": null,
+    "model": "model v1.0",
+    "docs": "docs r3",
+    "version_key": "model_v1_0__docs_r3",
+    "source_cell_id": "wildfire_solar",
+    "source_artifact_sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
+    "sha256": "10742caaf6e4622f72b2572db08d3fc4cc4dc92ca58746ad0928cabad4be5e48"
+   },
+   "summary": "Wildfire on substation reuses another cell's curve: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a T4 assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md); 1 part of the asset's value has no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 0,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 3,
+   "generation": "binding",
+   "aria_label": "Wildfire × Substation, reused, partial, shape T4, cost T4, no field-report register",
+   "href": "/cells/substation_wildfire_screening_v1"
+  },
+  {
+   "entry_id": "tropical_cyclone_wind_bess",
+   "kind": "cell",
+   "status": "live",
+   "title": "Hurricane wind × Battery storage",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "?",
+     "label": "not searched"
+    }
+   },
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+    "entry_read_kind": "agent",
+    "release_review": "same author with independent numerical methods",
+    "release_review_code": "same_author_with_independent_numerical_methods",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release same author with independent numerical m"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "BESS_TC_WIND_SCREENING_V1",
+    "model": "model v1.0",
+    "docs": "docs r1",
+    "version_key": "model_v1_0__docs_r1",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed",
+    "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
+   },
+   "summary": "Hurricane wind on battery storage: solar TC-wind ordered damage-state curves reused as a T4 hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage; 86 % of the reference value has a curve and 14 % has none.",
+   "no_evaluator": true,
+   "share_covered": 0.8597449908925319,
+   "n_curves": 3,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 5,
+   "generation": "plain",
+   "aria_label": "Hurricane wind × Battery storage, live, partial, shape T4, cost T4, not searched",
+   "href": "/cells/tropical_cyclone_wind_bess"
+  },
+  {
+   "entry_id": "tropical_cyclone_wind_real_estate",
+   "kind": "cell",
+   "status": "proposal",
+   "title": "Hurricane wind × Real estate",
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real estate"
+   },
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "exists": {
+    "status": "proposal",
+    "mark": "▢",
+    "label": "PROPOSAL",
+    "qualifier": "screening"
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "T2",
+    "cost": "T2",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and decision log",
+    "entry_read_kind": "agent",
+    "release_review": "not yet reviewed",
+    "release_review_code": "not_yet_reviewed",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release not yet reviewed"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "TROPICAL_CYCLONE_WIND_REAL_ESTATE_HAZUS_SCREENING_V0_2",
+    "model": "model v0.2",
+    "docs": "docs r1",
+    "version_key": "model_v0_2__docs_r1",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "99487ff5812e6b1017eeaaeea14d469bcb15ae2265e9d6cf107ce5ca41c85753",
+    "consumer_pin": null
+   },
+   "summary": "Proposal, not in the runtime index — Hurricane wind on real estate: fEMA Hazus hurricane building-loss rows used as published (every 5 mph, five terrain classes) for the Hazus building type and wind characteristics matching each building; the 32 Hazus curves used are identical in FEMA's 6.1 extract and SimCenter's independent 5.1 copy.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 20,
+   "n_drawn": 20,
+   "outside_checks": 0,
+   "chain_core_as_files": 6,
+   "generation": "skill",
+   "aria_label": "Hurricane wind × Real estate, proposal, shape T2, cost T2, no field-report register",
+   "href": "/cells/tropical_cyclone_wind_real_estate"
+  },
+  {
+   "entry_id": "tropical_cyclone_wind_solar",
+   "kind": "cell",
+   "status": "live",
+   "title": "Hurricane wind × Solar farm",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T3–4",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table, source register and decision log",
+    "entry_read_kind": "agent",
+    "release_review": "reviewed owner approved screening release",
+    "release_review_code": "reviewed_owner_approved_screening_release",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release reviewed owner approved screening releas"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "TROPICAL_CYCLONE_WIND_SOLAR_SCREENING_COMPLETE_V2_1",
+    "model": "model v2.1",
+    "docs": "docs r2",
+    "version_key": "model_v2_1__docs_r2",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
+    "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2"
+   },
+   "summary": "Hurricane wind on solar farm: ordered damage-state curves with Tier-4 synthetic resistance medians and cost ratios (cell-local decision, no direct TC calibration source); one module route fitted to NREL satellite storm-damage records; 1 part of the asset's value has no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 10,
+   "n_drawn": 10,
+   "outside_checks": 1,
+   "chain_core_as_files": 5,
+   "generation": "skill",
+   "aria_label": "Hurricane wind × Solar farm, live, partial, shape T3–4, cost T4, no field-report register",
+   "href": "/cells/tropical_cyclone_wind_solar"
+  },
+  {
+   "entry_id": "tropical_cyclone_wind_wind",
+   "kind": "cell",
+   "status": "live",
+   "title": "Hurricane wind × Wind farm",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T3",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and decision log",
+    "entry_read_kind": "agent",
+    "release_review": "reviewed owner approved tower only screening release",
+    "release_review_code": "reviewed_owner_approved_tower_only_screening_release",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release reviewed owner approved tower only scree"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "TROPICAL_CYCLONE_WIND_WIND_JAIMES_TOWER_SCREENING_V1_2",
+    "model": "model v1.2",
+    "docs": "docs r2",
+    "version_key": "model_v1_2__docs_r2",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "009996c07eb8150f79f11741d42b6cd37562d655ee336f82f178ccdeb987c992",
+    "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2"
+   },
+   "summary": "Hurricane wind on wind farm: published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; the 3.3 MW / 100 m curve stands in for the canonical 5 MW turbine, tower value only; 16 % of the reference value has a curve and 84 % has none.",
+   "no_evaluator": false,
+   "share_covered": 0.16,
+   "n_curves": 4,
+   "n_drawn": 4,
+   "outside_checks": 1,
+   "chain_core_as_files": 5,
+   "generation": "skill",
+   "aria_label": "Hurricane wind × Wind farm, live, partial, shape T3, cost T4, no field-report register",
+   "href": "/cells/tropical_cyclone_wind_wind"
+  },
+  {
+   "entry_id": "wildfire_bess",
+   "kind": "cell",
+   "status": "live",
+   "title": "Wildfire × Battery storage",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "?",
+     "label": "not searched"
+    }
+   },
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+    "entry_read_kind": "agent",
+    "release_review": "same author with independent numerical methods",
+    "release_review_code": "same_author_with_independent_numerical_methods",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release same author with independent numerical m"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "BESS_WILDFIRE_SCREENING_V1",
+    "model": "model v1.0",
+    "docs": "docs r1",
+    "version_key": "model_v1_0__docs_r1",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491",
+    "consumer_pin": "wildfire_bess@model_v1_0__docs_r1"
+   },
+   "summary": "Wildfire on battery storage: solar wildfire electrical class tables reused as T4 ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities); 86 % of the reference value has a curve and 14 % has none.",
+   "no_evaluator": true,
+   "share_covered": 0.8597449908925319,
+   "n_curves": 7,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 5,
+   "generation": "plain",
+   "aria_label": "Wildfire × Battery storage, live, partial, shape T4, cost T4, not searched",
+   "href": "/cells/wildfire_bess"
+  },
+  {
+   "entry_id": "wildfire_real_estate",
+   "kind": "cell",
+   "status": "proposal",
+   "title": "Wildfire × Real estate",
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real estate"
+   },
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "exists": {
+    "status": "proposal",
+    "mark": "▢",
+    "label": "PROPOSAL",
+    "qualifier": "screening"
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "T3",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and decision log",
+    "entry_read_kind": "agent",
+    "release_review": "not yet reviewed",
+    "release_review_code": "not_yet_reviewed",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release not yet reviewed"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "WILDFIRE_REAL_ESTATE_WRC_FSIM_SCREENING_V0_1",
+    "model": "model v0.1",
+    "docs": "docs r1",
+    "version_key": "model_v0_1__docs_r1",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "6b7c771d88b46d60e2c0b1339009ab06753f93f6376e8c8f30e40c91f31474ee",
+    "consumer_pin": null
+   },
+   "summary": "Proposal, not in the runtime index — Wildfire on real estate: uS Forest Service home loss by flame-length class (shrub vegetation) for the house; warehouse 0.8x and office 0.9x from same-fire CAL FIRE inspection ratios.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 3,
+   "n_drawn": 3,
+   "outside_checks": 2,
+   "chain_core_as_files": 5,
+   "generation": "skill",
+   "aria_label": "Wildfire × Real estate, proposal, shape T3, cost T4, no field-report register",
+   "href": "/cells/wildfire_real_estate"
+  },
+  {
+   "entry_id": "wildfire_solar",
+   "kind": "cell",
+   "status": "live",
+   "title": "Wildfire × Solar farm",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T2",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table, source registers and capability declaration",
+    "entry_read_kind": "agent",
+    "release_review": "reviewed",
+    "release_review_code": "reviewed",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release reviewed"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "WILDFIRE_SOLAR_FSIM_SCREENING_V1",
+    "model": "model v1.0",
+    "docs": "docs r3",
+    "version_key": "model_v1_0__docs_r3",
+    "schema": "damage_curve_record_bundle.v2",
+    "sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
+    "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
+   },
+   "summary": "Wildfire on solar farm: exact-class state tables per part on FSim flame-length classes; ordering constrained by field, lab and guidance sources, absolute values set by engineering judgment; 1 part of the asset's value has no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 10,
+   "n_drawn": 10,
+   "outside_checks": 1,
+   "chain_core_as_files": 6,
+   "generation": "skill",
+   "aria_label": "Wildfire × Solar farm, live, partial, shape T4, cost T2, no field-report register",
+   "href": "/cells/wildfire_solar"
+  },
+  {
+   "entry_id": "wildfire_wind",
+   "kind": "cell",
+   "status": "live",
+   "title": "Wildfire × Wind farm",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and release decision",
+    "entry_read_kind": "agent",
+    "release_review": "reviewed screening release",
+    "release_review_code": "reviewed_screening_release",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release reviewed screening release"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "WILDFIRE_WIND_PARTIAL_ELECTRICAL_SCREENING_V1",
+    "model": "model v1.0",
+    "docs": "docs r1",
+    "version_key": "model_v1_0__docs_r1",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "3f923f506a2082dd2f074c8b3cc3d696288097072eb8b6f803f3eb7d3f2b4e0d",
+    "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
+   },
+   "summary": "Wildfire on wind farm: cell-local Tier-4 screening points per FSim flame-length class, adopted under owner direction; research supports the mechanism and relative ordering, not the numbers; 4 parts of the asset's value have no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 2,
+   "n_drawn": 2,
+   "outside_checks": 0,
+   "chain_core_as_files": 5,
+   "generation": "skill",
+   "aria_label": "Wildfire × Wind farm, live, partial, shape T4, cost T4, no field-report register",
+   "href": "/cells/wildfire_wind"
+  },
+  {
+   "entry_id": "wind_tornado_wind",
+   "kind": "cell",
+   "status": "live",
+   "title": "Convective wind × Wind farm",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": null
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T3–4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and derivation write-up",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "WIND_TORNADO_WIND_V1",
+    "model": "model v1.0",
+    "docs": "docs r4",
+    "version_key": "model_v1_0__docs_r4",
+    "schema": "damage_curve_record_bundle.v2",
+    "sha256": "908f386953d062a62a33b6714020374b9b9d8a4538006e80d37047686c2c127a",
+    "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4"
+   },
+   "summary": "Convective wind on wind farm: engineering-fit logistic curves on hub gust over the IEC 50-year gust, built from IEC design speeds, the NIST fragility method and EF4 case evidence; tornado is a curve shift; 1 part of the asset's value has no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 5,
+   "n_drawn": 5,
+   "outside_checks": 1,
+   "chain_core_as_files": 2,
+   "generation": "prose",
+   "aria_label": "Convective wind × Wind farm, live, partial, shape T4, cost T3–4, no field-report register",
+   "href": "/cells/wind_tornado_wind"
+  }
+ ],
+ "codes": {
+  "CONVECTIVE_WIND_REAL_ESTATE_EF_SCREENING_V0_1": [
+   {
+    "entry_id": "convective_wind_real_estate",
+    "version_key": "model_v0_1__docs_r1",
+    "status": "proposal",
+    "sha256": "e676fb077ca3fb96a1d0efce7b1e408c2a82265ec97ea2eb4ebbef7e5aeeef3d",
+    "model": "model v0.1",
+    "docs": "docs r1"
+   }
+  ],
+  "BESS_FLOOD_INUNDATION_SCREENING_V1": [
+   {
+    "entry_id": "flood_bess",
+    "version_key": "model_v1_0__docs_r1",
+    "status": "live",
+    "sha256": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24",
+    "model": "model v1.0",
+    "docs": "docs r1"
+   }
+  ],
+  "FLOOD_REAL_ESTATE_HAZUS_NACCS_SCREENING_V0_2": [
+   {
+    "entry_id": "flood_real_estate",
+    "version_key": "model_v0_2__docs_r1",
+    "status": "proposal",
+    "sha256": "99fe3f1f6430caada7943a4a83fe74a2f94895c8c454d7789fda97fabfafe9af",
+    "model": "model v0.2",
+    "docs": "docs r1"
+   }
+  ],
+  "FLOOD_SOLAR_ELECTRICAL_INUNDATION_V1": [
+   {
+    "entry_id": "flood_solar",
+    "version_key": "model_v1_0__docs_r4",
+    "status": "live",
+    "sha256": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
+    "model": "model v1.0",
+    "docs": "docs r4"
+   }
+  ],
+  "FLOOD_SUBSTATION_DEPTH_SCREENING_V1": [
+   {
+    "entry_id": "flood_substation",
+    "version_key": "model_v1_0__docs_r1",
+    "status": "live",
+    "sha256": "f001eb0191439a1345a7a794995c684ef731f777c4b3e1eff0298de592999f30",
+    "model": "model v1.0",
+    "docs": "docs r1"
+   }
+  ],
+  "FLOOD_WIND_FEMA_HAZUS_SUBSTATION_SCREENING_V1": [
+   {
+    "entry_id": "flood_wind",
+    "version_key": "model_v1_0__docs_r1",
+    "status": "live",
+    "sha256": "37da745d87a4722e13118319bd30d9d2bcfd18dabc2a198ac6b8b1422bc3e1c1",
+    "model": "model v1.0",
+    "docs": "docs r1"
+   }
+  ],
+  "HAIL_REAL_ESTATE_ROOF_THRESHOLD_SCREENING_V0_1": [
+   {
+    "entry_id": "hail_real_estate",
+    "version_key": "model_v0_1__docs_r1",
+    "status": "proposal",
+    "sha256": "52cf865d4dfb8b4c593736fb05b5d3e7c341bad2a2441b89499d7e88605fef20",
+    "model": "model v0.1",
+    "docs": "docs r1"
+   }
+  ],
+  "HAIL_SOLAR_PV_MODULE_V1": [
+   {
+    "entry_id": "hail_solar",
+    "version_key": "model_v1_0__docs_r7",
+    "status": "live",
+    "sha256": "8c52f3442eb606f55aa0502fbb2738df70076f8a181de463c029061020b3cf32",
+    "model": "model v1.0",
+    "docs": "docs r7"
+   }
+  ],
+  "STRONG_WIND_SOLAR_V1": [
+   {
+    "entry_id": "strong_wind_solar",
+    "version_key": "model_v1_0__docs_r3",
+    "status": "live",
+    "sha256": "832f47d69372ec54723a61b8a956addccef07bb39338c3ec99907e116f1855ca",
+    "model": "model v1.0",
+    "docs": "docs r3"
+   }
+  ],
+  "SUBSTATION_CW_DIRECT_WIND_SCREENING_V1": [
+   {
+    "entry_id": "substation_convective_wind_screening_v1",
+    "version_key": "model_v2_1__docs_r2",
+    "status": "reused",
+    "sha256": "5afa3f9cd31ee52092762bdb505fbc4c24c02ed2420d1be67c448e6441383be0",
+    "model": "model v2.1",
+    "docs": "docs r2"
+   }
+  ],
+  "SUBSTATION_TC_WIND_ASSEMBLY_SCREENING_V1": [
+   {
+    "entry_id": "substation_hurricane_screening_v1",
+    "version_key": "model_v2_1__docs_r2",
+    "status": "reused",
+    "sha256": "4a5e994b4ef8cde8629bba765f1643190ce49e31cf045dbcf36adaf05a8f4773",
+    "model": "model v2.1",
+    "docs": "docs r2"
+   }
+  ],
+  "substation_wildfire_electrical_screening_v1": [
+   {
+    "entry_id": "substation_wildfire_screening_v1",
+    "version_key": "model_v1_0__docs_r3",
+    "status": "reused",
+    "sha256": "10742caaf6e4622f72b2572db08d3fc4cc4dc92ca58746ad0928cabad4be5e48",
+    "model": "model v1.0",
+    "docs": "docs r3"
+   }
+  ],
+  "BESS_TC_WIND_SCREENING_V1": [
+   {
+    "entry_id": "tropical_cyclone_wind_bess",
+    "version_key": "model_v1_0__docs_r1",
+    "status": "live",
+    "sha256": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed",
+    "model": "model v1.0",
+    "docs": "docs r1"
+   }
+  ],
+  "TROPICAL_CYCLONE_WIND_REAL_ESTATE_HAZUS_SCREENING_V0_2": [
+   {
+    "entry_id": "tropical_cyclone_wind_real_estate",
+    "version_key": "model_v0_2__docs_r1",
+    "status": "proposal",
+    "sha256": "99487ff5812e6b1017eeaaeea14d469bcb15ae2265e9d6cf107ce5ca41c85753",
+    "model": "model v0.2",
+    "docs": "docs r1"
+   }
+  ],
+  "TROPICAL_CYCLONE_WIND_SOLAR_SCREENING_COMPLETE_V2_1": [
+   {
+    "entry_id": "tropical_cyclone_wind_solar",
+    "version_key": "model_v2_1__docs_r2",
+    "status": "live",
+    "sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
+    "model": "model v2.1",
+    "docs": "docs r2"
+   }
+  ],
+  "TROPICAL_CYCLONE_WIND_WIND_JAIMES_TOWER_SCREENING_V1_2": [
+   {
+    "entry_id": "tropical_cyclone_wind_wind",
+    "version_key": "model_v1_2__docs_r2",
+    "status": "live",
+    "sha256": "009996c07eb8150f79f11741d42b6cd37562d655ee336f82f178ccdeb987c992",
+    "model": "model v1.2",
+    "docs": "docs r2"
+   }
+  ],
+  "BESS_WILDFIRE_SCREENING_V1": [
+   {
+    "entry_id": "wildfire_bess",
+    "version_key": "model_v1_0__docs_r1",
+    "status": "live",
+    "sha256": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491",
+    "model": "model v1.0",
+    "docs": "docs r1"
+   }
+  ],
+  "WILDFIRE_REAL_ESTATE_WRC_FSIM_SCREENING_V0_1": [
+   {
+    "entry_id": "wildfire_real_estate",
+    "version_key": "model_v0_1__docs_r1",
+    "status": "proposal",
+    "sha256": "6b7c771d88b46d60e2c0b1339009ab06753f93f6376e8c8f30e40c91f31474ee",
+    "model": "model v0.1",
+    "docs": "docs r1"
+   }
+  ],
+  "WILDFIRE_SOLAR_FSIM_SCREENING_V1": [
+   {
+    "entry_id": "wildfire_solar",
+    "version_key": "model_v1_0__docs_r3",
+    "status": "live",
+    "sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
+    "model": "model v1.0",
+    "docs": "docs r3"
+   }
+  ],
+  "WILDFIRE_WIND_PARTIAL_ELECTRICAL_SCREENING_V1": [
+   {
+    "entry_id": "wildfire_wind",
+    "version_key": "model_v1_0__docs_r1",
+    "status": "live",
+    "sha256": "3f923f506a2082dd2f074c8b3cc3d696288097072eb8b6f803f3eb7d3f2b4e0d",
+    "model": "model v1.0",
+    "docs": "docs r1"
+   }
+  ],
+  "WIND_TORNADO_WIND_V1": [
+   {
+    "entry_id": "wind_tornado_wind",
+    "version_key": "model_v1_0__docs_r4",
+    "status": "live",
+    "sha256": "908f386953d062a62a33b6714020374b9b9d8a4538006e80d37047686c2c127a",
+    "model": "model v1.0",
+    "docs": "docs r4"
+   }
+  ]
+ },
+ "sentences": {
+  "not_searched": {
+   "mark": "?",
+   "page": "Not searched — nobody has looked for field reports yet."
+  },
+  "none_after_search": {
+   "mark": "∅",
+   "page": "None found in {n} sources that could see it, searched {date}. Not a proof of absence."
+  },
+  "adjacent": {
+   "mark": "~",
+   "page": "Adjacent evidence only: {what}. No direct report."
+  },
+  "found": {
+   "mark": "✓",
+   "page": "Field reports found: {n} direct report(s)."
+  },
+  "no_curve": {
+   "mark": "✕",
+   "page": "No curve — {part}, {value} of the reference value, has no damage response yet."
+  },
+  "left_out": {
+   "mark": "–",
+   "page": "Left out on purpose: {reason}, {decision}."
+  },
+  "no_evaluator": {
+   "mark": "—",
+   "page": "Not drawn — no reference evaluator for this form in this repository (G9)."
+  },
+  "withheld": {
+   "mark": "",
+   "page": "Withheld: {condition}."
+  },
+  "unavailable": {
+   "mark": "—",
+   "page": "—"
+  },
+  "lineage_prose": {
+   "mark": "",
+   "page": "Lineage not machine-readable in this cell — see the dossier."
+  }
+ },
+ "marks": {
+  "exists": {
+   "live": "■",
+   "proposal": "▢",
+   "reused": "▨",
+   "gap": "┈"
+  },
+  "partial": "◔",
+  "no_curve": "✕",
+  "left_out": "–",
+  "twin_levels": {
+   "3": "H",
+   "2": "M",
+   "1": "L"
+  }
+ },
+ "tiers": {
+  "T1": "claims or field calibrated",
+  "T2": "public lab, standard or physics",
+  "T3": "engineering proxy or adjacent evidence",
+  "T4": "placeholder or expert judgment"
+ },
+ "stations": [
+  {
+   "id": "scope",
+   "label": "Scope",
+   "gate": "A"
+  },
+  {
+   "id": "units",
+   "label": "Units",
+   "gate": "A · B2"
+  },
+  {
+   "id": "axis_form",
+   "label": "Axis · form",
+   "gate": "C"
+  },
+  {
+   "id": "evidence",
+   "label": "Evidence",
+   "gate": "B"
+  },
+  {
+   "id": "value",
+   "label": "Value",
+   "gate": "B2"
+  },
+  {
+   "id": "audit",
+   "label": "Audit",
+   "gate": "B2"
+  },
+  {
+   "id": "artifact",
+   "label": "Artifact",
+   "gate": "C"
+  },
+  {
+   "id": "capability",
+   "label": "Capability",
+   "gate": "D"
+  },
+  {
+   "id": "proof",
+   "label": "Proof · release",
+   "gate": "E"
+  },
+  {
+   "id": "field_review",
+   "label": "Field · review",
+   "gate": "—"
+  }
+ ],
+ "lenses": [
+  "status",
+  "evidence",
+  "occurrence",
+  "value",
+  "review"
+ ],
+ "repo": {
+  "url": "https://github.com/aamani-ai/Damage_Modeling",
+  "blob": "https://github.com/aamani-ai/Damage_Modeling/blob/main"
+ },
+ "build_checks": [
+  {
+   "id": "counts",
+   "name": "headline counts equal the catalogue's",
+   "ok": true,
+   "severity": "hard",
+   "summary": "25 entries · 13 live · 5 proposal · 3 reused · 4 gap"
+  },
+  {
+   "id": "pins",
+   "name": "every artifact SHA equals its pin",
+   "ok": true,
+   "severity": "hard",
+   "summary": "45 pins checked"
+  },
+  {
+   "id": "twin_crosswalk",
+   "name": "Hazard's twin crosswalk SHA equals the value binding's pin",
+   "ok": true,
+   "severity": "hard",
+   "summary": "sha 7e96ff9 · 58 rows"
+  },
+  {
+   "id": "curves",
+   "name": "every curve sampled or listed as no evaluator",
+   "ok": true,
+   "severity": "hard",
+   "summary": "94 drawn · 10 listed no evaluator · 104 declared"
+  },
+  {
+   "id": "known_answers",
+   "name": "every known answer reproduced within tolerance (not-run cases carry a reason)",
+   "ok": true,
+   "severity": "data",
+   "summary": "1748 of 1748 run reproduced · 136 not run with a reason"
+  },
+  {
+   "id": "source_ids",
+   "name": "every displayed source ID resolves in the cell's register",
+   "ok": false,
+   "severity": "data",
+   "summary": "22 unresolved in tropical_cyclone_wind_solar, tropical_cyclone_wind_wind, wildfire_solar"
+  },
+  {
+   "id": "domain",
+   "name": "nothing sampled outside its declared valid domain",
+   "ok": true,
+   "severity": "hard",
+   "summary": "ok"
+  },
+  {
+   "id": "chain_files",
+   "name": "no station marked artifact without a file behind it",
+   "ok": true,
+   "severity": "hard",
+   "summary": "ok"
+  },
+  {
+   "id": "occurrence",
+   "name": "occurrence registers name their entries and use the shared bucket keys",
+   "ok": true,
+   "severity": "hard",
+   "summary": "8 registers"
+  }
+ ],
+ "all_checks_pass": false
+}

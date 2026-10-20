@@ -1,0 +1,212 @@
+{
+ "asset": {
+  "slug": "bess",
+  "label": "Battery storage",
+  "catalogue": "Battery storage"
+ },
+ "hazard": {
+  "slug": "heat",
+  "label": "Heat",
+  "catalogue": null,
+  "twin": [
+   "heat"
+  ],
+  "entry_tokens": [],
+  "outside_the_five": true,
+  "effect": "performance",
+  "effect_note": "The twin's heat leads (ageing, derating, chiller capacity) work through performance, not physical damage; pointer to the outage-as-performance work, no curve (discussion 04 §6)."
+ },
+ "title": "Heat × Battery storage",
+ "register": {
+  "path": "docs/evidence/occurrence/bess/heat.json",
+  "sha256": "162d7e040fb47c4379871d081a0db2aa7aa57bc79a2e04cc537587f70a7135d6"
+ },
+ "question": "Has heat physically damaged a battery storage subsystem in the field, outside a test?",
+ "effect": "performance",
+ "search_log": "docs/evidence/occurrence/bess/heat.md",
+ "last_searched": null,
+ "rule": "found = one or more direct reports · adjacent = neighbouring case only · none_after_search = a logged search in at least two sources that could see it · not_searched = the default, not a finding",
+ "summary": "Heat works on battery storage through performance (ageing, derating), not physical damage; no damage curve is planned and no field-report search applies.",
+ "surfaces": [
+  {
+   "id": "epri_bess_failure_db",
+   "name": "EPRI BESS Failure Incident Database",
+   "can_see_hazard": false,
+   "public": true,
+   "note": "Excludes exogenous causes by definition (EPRI white paper, May 2024); internal failures only.",
+   "searched": null,
+   "queries": [],
+   "hits": null
+  },
+  {
+   "id": "noaa_storm_events",
+   "name": "NOAA Storm Events Database",
+   "can_see_hazard": true,
+   "public": true,
+   "note": "Narrative keyword search by county and event type.",
+   "searched": null,
+   "queries": [],
+   "hits": null
+  },
+  {
+   "id": "nite_accident_reports",
+   "name": "NITE accident reports (Japan)",
+   "can_see_hazard": true,
+   "public": true,
+   "note": "Statutory reports; CSV download.",
+   "searched": null,
+   "queries": [],
+   "hits": null
+  },
+  {
+   "id": "insurer_broker_notes",
+   "name": "Insurer and broker loss notes",
+   "can_see_hazard": true,
+   "public": "partly",
+   "note": "Gated summaries; cite the note, not the claim.",
+   "searched": null,
+   "queries": [],
+   "hits": null
+  },
+  {
+   "id": "news_oem_site_notices",
+   "name": "News, OEM and site notices",
+   "can_see_hazard": true,
+   "public": true,
+   "note": "Date, place, what broke, intensity if stated.",
+   "searched": null,
+   "queries": [],
+   "hits": null
+  }
+ ],
+ "buckets": [
+  {
+   "key": "battery_enclosures",
+   "label": "Battery enclosures",
+   "value_usd": 84000000.0,
+   "state": "not_searched",
+   "mark": "?",
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "reports": [],
+   "twin_lead": {
+    "level": "H",
+    "nodes": [
+     {
+      "node": "be_modules",
+      "name": "Battery Modules",
+      "level": 3,
+      "why": "Every +10 °C roughly doubles calendar ageing; cooling load rises"
+     },
+     {
+      "node": "be_bms",
+      "name": "Battery Management System",
+      "level": 1,
+      "why": "Electronics"
+     },
+     {
+      "node": "be_hvac",
+      "name": "Chiller & Liquid Loop",
+      "level": 3,
+      "why": "Chiller capacity sets derating in heat waves"
+     }
+    ]
+   }
+  },
+  {
+   "key": "pcs",
+   "label": "PCS",
+   "value_usd": 10400000,
+   "state": "not_searched",
+   "mark": "?",
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "reports": [],
+   "twin_lead": {
+    "level": "H",
+    "nodes": [
+     {
+      "node": "bp_pcs",
+      "name": "Bidirectional PCS",
+      "level": 3,
+      "why": "Derates above ~40–45 °C"
+     }
+    ]
+   }
+  },
+  {
+   "key": "electrical_balance",
+   "label": "MV, collection and controls",
+   "value_usd": 13200000,
+   "state": "not_searched",
+   "mark": "?",
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "reports": [],
+   "twin_lead": {
+    "level": "M",
+    "nodes": [
+     {
+      "node": "bp_mvt",
+      "name": "MV Transformer",
+      "level": 2,
+      "why": "Hot-spot ageing"
+     },
+     {
+      "node": "bp_aux",
+      "name": "Auxiliary Supply",
+      "level": 1,
+      "why": "Load peaks on hot afternoons"
+     },
+     {
+      "node": "bk_ems",
+      "name": "EMS / Plant Controller",
+      "level": 1,
+      "why": "Electronics"
+     }
+    ]
+   }
+  },
+  {
+   "key": "civil_works",
+   "label": "Civil works",
+   "value_usd": 1600000,
+   "state": "not_searched",
+   "mark": "?",
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "reports": [],
+   "twin_lead": {
+    "level": null,
+    "nodes": []
+   }
+  },
+  {
+   "key": "fieldwork",
+   "label": "Fieldwork",
+   "value_usd": 600000,
+   "state": "not_searched",
+   "mark": "?",
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "reports": [],
+   "twin_lead": {
+    "level": null,
+    "nodes": []
+   }
+  }
+ ],
+ "left_out": [],
+ "provenance": {
+  "twin": {
+   "repository": "aamani-ai/infrasure-digital-twin",
+   "file": "public/engine/bess-data.js",
+   "commit": "d01abd0",
+   "sha256": "ade70e024aae14cafa09beb2dc41482feb2f2c644a740d75a09e9d768c2e8ea9",
+   "meaning": "per-node design exposure, level 1 Low · 2 Medium · 3 High; a lead, not evidence"
+  },
+  "crosswalk": {
+   "path": "Hazard_modeling/docs/plans/_cross_cutting/bess_conus/twin_crosswalk.csv",
+   "sha256": "7e96ff9a6f48db73bb35ccdf76daa5a41a418140472d127b7e7253e25fbdd30d",
+   "rows": 58
+  }
+ },
+ "entry": null,
+ "state_overall": "not_searched",
+ "suggested_next": null
+}

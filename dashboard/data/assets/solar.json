@@ -1,0 +1,1217 @@
+{
+ "asset": {
+  "slug": "solar",
+  "label": "Solar farm",
+  "catalogue": "Solar farm",
+  "href": "/assets/solar"
+ },
+ "summary": "Hail, Flood, Hurricane wind, Convective wind and Wildfire have curves for solar farm, with evidence from T2–T4; nobody has yet searched for field reports.",
+ "reference": null,
+ "hazards": [
+  {
+   "slug": "hail",
+   "label": "Hail",
+   "catalogue": "Hail",
+   "twin": [
+    "hail"
+   ],
+   "entry_tokens": [
+    "hail"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "hail_solar",
+   "status": "live",
+   "cell_title": "Hail × Solar farm",
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "flood",
+   "label": "Flood",
+   "catalogue": "Flood",
+   "twin": [
+    "flood"
+   ],
+   "entry_tokens": [
+    "flood"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "flood_solar",
+   "status": "live",
+   "cell_title": "Flood × Solar farm",
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "hurricane_wind",
+   "label": "Hurricane wind",
+   "catalogue": "Hurricane wind",
+   "twin": [
+    "wind"
+   ],
+   "entry_tokens": [
+    "tropical_cyclone_wind",
+    "hurricane"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "tropical_cyclone_wind_solar",
+   "status": "live",
+   "cell_title": "Hurricane wind × Solar farm",
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "convective_wind",
+   "label": "Convective wind",
+   "catalogue": "Convective wind",
+   "twin": [
+    "wind"
+   ],
+   "entry_tokens": [
+    "convective_wind",
+    "strong_wind",
+    "wind_tornado"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "strong_wind_solar",
+   "status": "live",
+   "cell_title": "Convective wind × Solar farm",
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "wildfire",
+   "label": "Wildfire",
+   "catalogue": "Wildfire",
+   "twin": [
+    "wildfire"
+   ],
+   "entry_tokens": [
+    "wildfire"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "wildfire_solar",
+   "status": "live",
+   "cell_title": "Wildfire × Solar farm",
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "heat",
+   "label": "Heat",
+   "catalogue": null,
+   "twin": [
+    "heat"
+   ],
+   "entry_tokens": [],
+   "outside_the_five": true,
+   "effect": "performance",
+   "effect_note": "The twin's heat leads (ageing, derating, chiller capacity) work through performance, not physical damage; pointer to the outage-as-performance work, no curve (discussion 04 §6).",
+   "entry_id": null,
+   "status": null,
+   "cell_title": null,
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "icing",
+   "label": "Icing",
+   "catalogue": null,
+   "twin": [
+    "icing"
+   ],
+   "entry_tokens": [],
+   "outside_the_five": true,
+   "effect": "performance",
+   "effect_note": "Cold limits charge rate until heated; snow load on venting panels is the one physical lead (discussion 04 §6, ledger C-172).",
+   "entry_id": null,
+   "status": null,
+   "cell_title": null,
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "lightning",
+   "label": "Lightning",
+   "catalogue": null,
+   "twin": [
+    "lightning"
+   ],
+   "entry_tokens": [],
+   "outside_the_five": true,
+   "effect": "damage",
+   "effect_note": "No hazard cell exists; the twin carries Medium surge leads on the electronics (discussion 04 §6).",
+   "entry_id": null,
+   "status": null,
+   "cell_title": null,
+   "occurrence_href": null,
+   "has_register": false
+  }
+ ],
+ "rows": [
+  {
+   "key": "INVERTER_SYSTEM",
+   "label": "Inverter System",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "INVERTER_SYSTEM"
+   ],
+   "cells": {
+    "flood": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "flood_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T3",
+      "cost": "T3",
+      "curves": [
+       "FS_COMB"
+      ],
+      "drawn": true
+     }
+    },
+    "wildfire": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "wildfire_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T2",
+      "curves": [
+       "WSV1_COMBINER_THERMAL"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  },
+  {
+   "key": "SUBSTATION",
+   "label": "Substation",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "SUBSTATION"
+   ],
+   "cells": {
+    "flood": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "flood_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T3",
+      "cost": "T3",
+      "curves": [
+       "FS_XFMR"
+      ],
+      "drawn": true
+     }
+    },
+    "wildfire": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "wildfire_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T2",
+      "curves": [
+       "WSV1_MV_EQUIPMENT_THERMAL"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  },
+  {
+   "key": "SCADA",
+   "label": "Scada",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "SCADA"
+   ],
+   "cells": {
+    "flood": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "flood_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T3",
+      "cost": "T3",
+      "curves": [
+       "FS_SCADA"
+      ],
+      "drawn": true
+     }
+    },
+    "convective_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "strong_wind_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "SWS_SCADA_EXPOSED"
+      ],
+      "drawn": true
+     }
+    },
+    "wildfire": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "wildfire_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T2",
+      "curves": [
+       "WSV1_SCADA_THERMAL"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  },
+  {
+   "key": "ELECTRICAL_COLLECTION",
+   "label": "Electrical Collection",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "ELECTRICAL_COLLECTION"
+   ],
+   "cells": {
+    "flood": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "flood_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T3",
+      "cost": "T3",
+      "curves": [
+       "FS_CABLE"
+      ],
+      "drawn": true
+     }
+    },
+    "wildfire": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "wildfire_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T2",
+      "curves": [
+       "WSV1_CABLE_EXPOSED"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  },
+  {
+   "key": "PV_ARRAY",
+   "label": "Pv Array",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "PV_ARRAY"
+   ],
+   "cells": {
+    "flood": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "flood_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T3",
+      "cost": "T3",
+      "curves": [
+       "FS_PVMOD"
+      ],
+      "drawn": true
+     }
+    },
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "hail_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T2",
+      "cost": "T2",
+      "curves": [
+       "HAIL_SOLAR_FRAGILE_THIN_GG",
+       "HAIL_SOLAR_DEFAULT_3P2_GBS",
+       "HAIL_SOLAR_HARDENED_THICKER"
+      ],
+      "drawn": true
+     }
+    },
+    "convective_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "strong_wind_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "SWS_MODULE_ATTACH"
+      ],
+      "drawn": true
+     }
+    },
+    "wildfire": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "wildfire_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T2",
+      "curves": [
+       "WSV1_MODULE_THERMAL"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  },
+  {
+   "key": "FOUNDATION",
+   "label": "Foundation",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "FOUNDATION"
+   ],
+   "cells": {
+    "flood": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "flood_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "FS_FOUND"
+      ],
+      "drawn": true
+     }
+    },
+    "convective_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "strong_wind_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "SWS_FOUNDATION_UPLIFT"
+      ],
+      "drawn": true
+     }
+    },
+    "wildfire": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "wildfire_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T2",
+      "curves": [
+       "WSV1_FOUNDATION_THERMAL"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  },
+  {
+   "key": "MOUNTING",
+   "label": "Mounting",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "MOUNTING"
+   ],
+   "cells": {
+    "convective_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "strong_wind_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "SWS_RACKING_STRUCT"
+      ],
+      "drawn": true
+     }
+    },
+    "wildfire": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "wildfire_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T2",
+      "curves": [
+       "WSV1_RACKING_THERMAL"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  },
+  {
+   "key": "PV array",
+   "label": "PV module field",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "PV array"
+   ],
+   "cells": {
+    "hurricane_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "tropical_cyclone_wind_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "TCWS2_FIXED_MODULE_SYNTHETIC_T4_ORDERED_STATES",
+       "TCWS2_TRACKER_MODULE_SYNTHETIC_T4_ORDERED_STATES"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  },
+  {
+   "key": "PV_ARRAY_MODULES_SOURCE_COHORT",
+   "label": "Pv Array Modules Source Cohort",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "PV_ARRAY_MODULES_SOURCE_COHORT"
+   ],
+   "cells": {
+    "hurricane_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "tropical_cyclone_wind_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T3",
+      "cost": "T4",
+      "curves": [
+       "TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  },
+  {
+   "key": "mounting",
+   "label": "Mounting structure",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "mounting"
+   ],
+   "cells": {
+    "hurricane_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "tropical_cyclone_wind_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "TCWS2_FIXED_STRUCTURE_SYNTHETIC_T4_ORDERED_STATES",
+       "TCWS2_TRACKER_SBOS_SYNTHETIC_T4_ORDERED_STATES"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  },
+  {
+   "key": "foundation",
+   "label": "Foundations",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "foundation"
+   ],
+   "cells": {
+    "hurricane_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "tropical_cyclone_wind_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "TCWS21_FOUNDATION_SCREENING_T4_ORDERED_STATES"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  },
+  {
+   "key": "power conversion and collection",
+   "label": "Power conversion and collection",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "power conversion and collection"
+   ],
+   "cells": {
+    "hurricane_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "tropical_cyclone_wind_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "TCWS21_POWER_COLLECTION_SCREENING_T4_ORDERED_STATES"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  },
+  {
+   "key": "GSU and substation",
+   "label": "GSU and substation",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "GSU and substation"
+   ],
+   "cells": {
+    "hurricane_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "tropical_cyclone_wind_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  },
+  {
+   "key": "SCADA and communications",
+   "label": "SCADA and communications",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "SCADA and communications"
+   ],
+   "cells": {
+    "hurricane_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "tropical_cyclone_wind_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "TCWS21_SCADA_SCREENING_T4_ORDERED_STATES"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  },
+  {
+   "key": "civil infrastructure",
+   "label": "Civil infrastructure",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "civil infrastructure"
+   ],
+   "cells": {
+    "hurricane_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "tropical_cyclone_wind_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "TCWS21_CIVIL_SCREENING_T4_ORDERED_STATES"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  },
+  {
+   "key": "GROUNDING_LIGHTNING",
+   "label": "Grounding Lightning",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "GROUNDING_LIGHTNING"
+   ],
+   "cells": {
+    "wildfire": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "wildfire_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T2",
+      "curves": [
+       "WSV1_GROUNDING_THERMAL"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  },
+  {
+   "key": "CIVIL_INFRA",
+   "label": "Civil Infra",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "CIVIL_INFRA"
+   ],
+   "cells": {
+    "wildfire": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "wildfire_solar",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T2",
+      "curves": [
+       "WSV1_CIVIL_DIRECT"
+      ],
+      "drawn": true
+     }
+    }
+   }
+  }
+ ],
+ "entries": [
+  {
+   "entry_id": "flood_solar",
+   "kind": "cell",
+   "status": "live",
+   "title": "Flood × Solar farm",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": null
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T3–4",
+    "cost": "T3–4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and capability declaration",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "FLOOD_SOLAR_ELECTRICAL_INUNDATION_V1",
+    "model": "model v1.0",
+    "docs": "docs r4",
+    "version_key": "model_v1_0__docs_r4",
+    "schema": "damage_curve_record_bundle.v2",
+    "sha256": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
+    "consumer_pin": "flood_solar@model_v1_0__docs_r4"
+   },
+   "summary": "Flood on solar farm: piecewise depth-damage points per part, set by engineering judgment from DOE/FEMP solar flood guidance and NEMA water-damaged equipment guidance, in the USACE depth-percent table form; 3 parts of the asset's value have no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 8,
+   "n_drawn": 8,
+   "outside_checks": 1,
+   "chain_core_as_files": 2,
+   "generation": "prose",
+   "aria_label": "Flood × Solar farm, live, partial, shape T3–4, cost T3–4, no field-report register",
+   "href": "/cells/flood_solar"
+  },
+  {
+   "entry_id": "hail_solar",
+   "kind": "cell",
+   "status": "live",
+   "title": "Hail × Solar farm",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": null
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T2",
+    "cost": "T2",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table, value profiles and capability declaration",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "HAIL_SOLAR_PV_MODULE_V1",
+    "model": "model v1.0",
+    "docs": "docs r7",
+    "version_key": "model_v1_0__docs_r7",
+    "schema": "damage_curve_record_bundle.v2",
+    "sha256": "8c52f3442eb606f55aa0502fbb2738df70076f8a181de463c029061020b3cf32",
+    "consumer_pin": "hail_solar@model_v1_0__docs_r7"
+   },
+   "summary": "Hail on solar farm: logistic curves per module type fitted to public PVEL/Kiwa hail-test breakage anchors and the IEC baseline; glass-breakage probability used as the module replacement ratio; 4 parts of the asset's value have no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 3,
+   "n_drawn": 3,
+   "outside_checks": 1,
+   "chain_core_as_files": 2,
+   "generation": "prose",
+   "aria_label": "Hail × Solar farm, live, partial, shape T2, cost T2, no field-report register",
+   "href": "/cells/hail_solar"
+  },
+  {
+   "entry_id": "strong_wind_solar",
+   "kind": "cell",
+   "status": "live",
+   "title": "Convective wind × Solar farm",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": null
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table and capability declaration",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "STRONG_WIND_SOLAR_V1",
+    "model": "model v1.0",
+    "docs": "docs r3",
+    "version_key": "model_v1_0__docs_r3",
+    "schema": "damage_curve_record_bundle.v2",
+    "sha256": "832f47d69372ec54723a61b8a956addccef07bb39338c3ec99907e116f1855ca",
+    "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3"
+   },
+   "summary": "Convective wind on solar farm: thresholded logistic curves on a design-normalised demand ratio; axis from wind-pressure physics, all numeric parameters set by engineering judgment from PV wind-load and storm-resilience sources; 1 part of the asset's value has no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 5,
+   "n_drawn": 5,
+   "outside_checks": 0,
+   "chain_core_as_files": 2,
+   "generation": "prose",
+   "aria_label": "Convective wind × Solar farm, live, partial, shape T4, cost T4, no field-report register",
+   "href": "/cells/strong_wind_solar"
+  },
+  {
+   "entry_id": "tropical_cyclone_wind_solar",
+   "kind": "cell",
+   "status": "live",
+   "title": "Hurricane wind × Solar farm",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T3–4",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table, source register and decision log",
+    "entry_read_kind": "agent",
+    "release_review": "reviewed owner approved screening release",
+    "release_review_code": "reviewed_owner_approved_screening_release",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release reviewed owner approved screening releas"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "TROPICAL_CYCLONE_WIND_SOLAR_SCREENING_COMPLETE_V2_1",
+    "model": "model v2.1",
+    "docs": "docs r2",
+    "version_key": "model_v2_1__docs_r2",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
+    "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2"
+   },
+   "summary": "Hurricane wind on solar farm: ordered damage-state curves with Tier-4 synthetic resistance medians and cost ratios (cell-local decision, no direct TC calibration source); one module route fitted to NREL satellite storm-damage records; 1 part of the asset's value has no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 10,
+   "n_drawn": 10,
+   "outside_checks": 1,
+   "chain_core_as_files": 5,
+   "generation": "skill",
+   "aria_label": "Hurricane wind × Solar farm, live, partial, shape T3–4, cost T4, no field-report register",
+   "href": "/cells/tropical_cyclone_wind_solar"
+  },
+  {
+   "entry_id": "wildfire_solar",
+   "kind": "cell",
+   "status": "live",
+   "title": "Wildfire × Solar farm",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": "screening"
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T2",
+    "occurrence": {
+     "mark": "—",
+     "label": "no register"
+    }
+   },
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table, source registers and capability declaration",
+    "entry_read_kind": "agent",
+    "release_review": "reviewed",
+    "release_review_code": "reviewed",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release reviewed"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "WILDFIRE_SOLAR_FSIM_SCREENING_V1",
+    "model": "model v1.0",
+    "docs": "docs r3",
+    "version_key": "model_v1_0__docs_r3",
+    "schema": "damage_curve_record_bundle.v2",
+    "sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
+    "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
+   },
+   "summary": "Wildfire on solar farm: exact-class state tables per part on FSim flame-length classes; ordering constrained by field, lab and guidance sources, absolute values set by engineering judgment; 1 part of the asset's value has no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 10,
+   "n_drawn": 10,
+   "outside_checks": 1,
+   "chain_core_as_files": 6,
+   "generation": "skill",
+   "aria_label": "Wildfire × Solar farm, live, partial, shape T4, cost T2, no field-report register",
+   "href": "/cells/wildfire_solar"
+  }
+ ],
+ "has_buckets": false,
+ "twin_crosswalk": null
+}

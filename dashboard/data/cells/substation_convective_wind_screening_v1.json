@@ -1,0 +1,628 @@
+{
+ "entry_id": "substation_convective_wind_screening_v1",
+ "kind": "binding",
+ "status": "reused",
+ "title": "Convective wind × Substation",
+ "asset": {
+  "slug": "substation",
+  "label": "Substation"
+ },
+ "hazard": {
+  "slug": "convective_wind",
+  "label": "Convective wind"
+ },
+ "identity": {
+  "kind": "binding",
+  "binding_id": "SUBSTATION_CW_DIRECT_WIND_SCREENING_V1",
+  "damage_code_id": null,
+  "model": "model v2.1",
+  "docs": "docs r2",
+  "version_key": "model_v2_1__docs_r2",
+  "source_cell_id": "tropical_cyclone_wind_solar",
+  "source_artifact_sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
+  "sha256": "5afa3f9cd31ee52092762bdb505fbc4c24c02ed2420d1be67c448e6441383be0"
+ },
+ "pins": [
+  {
+   "what": "catalogue entry artifact_sha256",
+   "file": "docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/binding.json",
+   "expected": "5afa3f9cd31ee52092762bdb505fbc4c24c02ed2420d1be67c448e6441383be0",
+   "actual": "5afa3f9cd31ee52092762bdb505fbc4c24c02ed2420d1be67c448e6441383be0",
+   "ok": true
+  },
+  {
+   "what": "binding source_pin.artifact_sha256",
+   "file": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
+   "expected": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
+   "actual": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
+   "ok": true
+  }
+ ],
+ "rail": {
+  "exists": {
+   "status": "reused",
+   "mark": "▨",
+   "label": "REUSED",
+   "qualifier": null
+  },
+  "evidence": {
+   "shape": "T4",
+   "cost": "T4",
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   }
+  },
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the binding README, binding.json and the source cell's tier table",
+   "entry_read_kind": "agent",
+   "release_review": null,
+   "release_review_code": null,
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release —"
+  }
+ },
+ "summary": "Convective wind on substation reuses another cell's curve: same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a T4 cross-hazard proxy for direct wind only (see docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md).",
+ "chain": {
+  "stations": [
+   {
+    "id": "scope",
+    "label": "Scope",
+    "gate": "A",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md",
+      "sha256": "44f710d5a3f866fdc2a33cf1e63524afb90ce1eb4e361ae6867825be8f6b454d"
+     }
+    ],
+    "evidence": [],
+    "fact": "2 deferred",
+    "absent_sentence": null
+   },
+   {
+    "id": "units",
+    "label": "Units",
+    "gate": "A · B2",
+    "state": "not_applicable",
+    "files": [],
+    "evidence": [],
+    "fact": "source cell",
+    "absent_sentence": null
+   },
+   {
+    "id": "axis_form",
+    "label": "Axis · form",
+    "gate": "C",
+    "state": "not_applicable",
+    "files": [],
+    "evidence": [],
+    "fact": "—",
+    "absent_sentence": null
+   },
+   {
+    "id": "evidence",
+    "label": "Evidence",
+    "gate": "B",
+    "state": "not_applicable",
+    "files": [],
+    "evidence": [],
+    "fact": "no register",
+    "absent_sentence": null
+   },
+   {
+    "id": "value",
+    "label": "Value",
+    "gate": "B2",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/value_crosswalk.csv",
+      "sha256": "107c0585f9fa0609f7e8360c9585523b648fa032015d8d24899f2b7bf866fe33"
+     }
+    ],
+    "evidence": [],
+    "fact": "crosswalk",
+    "absent_sentence": null
+   },
+   {
+    "id": "audit",
+    "label": "Audit",
+    "gate": "B2",
+    "state": "not_yet_detected",
+    "files": [],
+    "evidence": [],
+    "fact": "no file · no prose",
+    "absent_sentence": null
+   },
+   {
+    "id": "artifact",
+    "label": "Artifact",
+    "gate": "C",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/binding.json",
+      "sha256": "5afa3f9cd31ee52092762bdb505fbc4c24c02ed2420d1be67c448e6441383be0"
+     }
+    ],
+    "evidence": [],
+    "fact": "v2.1 · docs r2",
+    "absent_sentence": null
+   },
+   {
+    "id": "capability",
+    "label": "Capability",
+    "gate": "D",
+    "state": "not_applicable",
+    "files": [],
+    "evidence": [],
+    "fact": "—",
+    "absent_sentence": null
+   },
+   {
+    "id": "proof",
+    "label": "Proof · release",
+    "gate": "E",
+    "state": "not_yet_detected",
+    "files": [],
+    "evidence": [],
+    "fact": "—",
+    "absent_sentence": null
+   },
+   {
+    "id": "field_review",
+    "label": "Field · review",
+    "gate": "—",
+    "state": "not_applicable",
+    "files": [],
+    "evidence": [],
+    "fact": "not searched · agent-read 10-19",
+    "absent_sentence": null
+   }
+  ],
+  "generation": "binding",
+  "core_as_files": 2,
+  "core_total": 6,
+  "dossier": null,
+  "basics": null,
+  "workbook": null,
+  "gates": [
+   {
+    "gate": "A",
+    "label": "scope",
+    "items": [
+     {
+      "item": "hazard and asset are named",
+      "status": "proven",
+      "basis": "cell_id in the artifact"
+     },
+     {
+      "item": "in-scope and out-of-scope mechanisms listed",
+      "status": "proven",
+      "basis": "hazard_scope.deferred or the entry's out_of_scope"
+     },
+     {
+      "item": "related hazards that should split are named",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "multi-pathway cells declare stable pathway IDs",
+      "status": "human",
+      "basis": "pathways[].pathway_id"
+     },
+     {
+      "item": "neighbouring or compound mechanisms have an include / defer / split decision",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "no downstream M4 metric is hidden in the damage cell",
+      "status": "human",
+      "basis": "consumer_annual_metrics.computation_owner"
+     }
+    ]
+   },
+   {
+    "gate": "B",
+    "label": "evidence",
+    "items": [
+     {
+      "item": "source register with stable IDs, locators, roles, tiers and decisions",
+      "status": "n/a",
+      "basis": null
+     },
+     {
+      "item": "load-bearing claims carry claim-level provenance",
+      "status": "n/a",
+      "basis": null
+     },
+     {
+      "item": "the chosen spine is explained",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "rejected or demoted sources are explained",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "parameter tier table populated",
+      "status": "n/a",
+      "basis": "parameter_tier_table"
+     },
+     {
+      "item": "T3/T4 update triggers listed",
+      "status": "n/a",
+      "basis": "update_trigger per T3/T4 row"
+     },
+     {
+      "item": "legacy equations and tables reproduced where legacy material is used",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "proposed numbers pressure-tested at boundaries and on explicit denominators",
+      "status": "human",
+      "basis": "PRESSURE_TEST file"
+     },
+     {
+      "item": "evidence, parameters and transfer limits resolved independently by pathway",
+      "status": "n/a",
+      "basis": "pathway_id on tier rows"
+     }
+    ]
+   },
+   {
+    "gate": "B2",
+    "label": "seven-step, site and value",
+    "items": [
+     {
+      "item": "seven-step audit records a status and blocking seam for every step",
+      "status": "human",
+      "basis": "SEVEN_STEP_AUDIT file"
+     },
+     {
+      "item": "row-level value crosswalk reconciles direct, mixed, support and excluded rows",
+      "status": "proven",
+      "basis": "value crosswalk or binding"
+     },
+     {
+      "item": "support and logistics are allocated once, not given an independent DR",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "site-conditioned hazards have a site adapter",
+      "status": "human",
+      "basis": "SITE_CONDITION_ADAPTER file"
+     },
+     {
+      "item": "fences, walls, barriers and bypass pathways receive no blanket credit",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "the adapter includes a double-counting matrix",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "unknown at-risk, exposure or mitigation states do not silently become full credit",
+      "status": "human",
+      "basis": null
+     }
+    ]
+   },
+   {
+    "gate": "C",
+    "label": "runtime contract",
+    "items": [
+     {
+      "item": "the JSON artifact is canonical",
+      "status": "n/a",
+      "basis": "canonical_runtime_artifact"
+     },
+     {
+      "item": "workbooks are derivation or audit views, not the runtime",
+      "status": "n/a",
+      "basis": null
+     },
+     {
+      "item": "damage_code_id and model version are stable",
+      "status": "proven",
+      "basis": "damage_code_id · semantic_damage_model_version"
+     },
+     {
+      "item": "field names and aliases are explicit",
+      "status": "human",
+      "basis": "hazard_axis input field"
+     },
+     {
+      "item": "pathway_id is first-class in request, record, output, capability and KAT surfaces",
+      "status": "n/a",
+      "basis": "pathway_capabilities"
+     },
+     {
+      "item": "pathway-specific axes and bridges are explicit",
+      "status": "n/a",
+      "basis": "pathways[].hazard_axis.id"
+     },
+     {
+      "item": "the emit contract is distribution-ready",
+      "status": "human",
+      "basis": "emit_contract"
+     }
+    ]
+   },
+   {
+    "gate": "D",
+    "label": "reportability",
+    "items": [
+     {
+      "item": "failure-unit DR support stated",
+      "status": "human",
+      "basis": "capability_declaration"
+     },
+     {
+      "item": "scenario loss support requires a value basis",
+      "status": "human",
+      "basis": "scenario_loss_given_value_basis"
+     },
+     {
+      "item": "scalar EAL requires downstream frequency, value basis and a cap-binding pass",
+      "status": "human",
+      "basis": "consumer_annual_metrics"
+     },
+     {
+      "item": "PML / VaR / TVaR withheld unless spread exists",
+      "status": "human",
+      "basis": "curve_intrinsic_spread"
+     },
+     {
+      "item": "a no-curve scaffold emits no numeric DR",
+      "status": "n/a",
+      "basis": null
+     },
+     {
+      "item": "unsupported pathway × failure-unit pairs withhold with a stable reason",
+      "status": "n/a",
+      "basis": "withheld_reason_codes"
+     }
+    ]
+   },
+   {
+    "gate": "E",
+    "label": "release",
+    "items": [
+     {
+      "item": "registry, index, changelog and manifest updated",
+      "status": "human",
+      "basis": "artifact index row · CHANGELOG"
+     },
+     {
+      "item": "validation report produced",
+      "status": "human",
+      "basis": "validation file"
+     },
+     {
+      "item": "old-vs-new and cross-pathway negative tests pass",
+      "status": "human",
+      "basis": "negative contract tests run by the build"
+     },
+     {
+      "item": "consumer migration and the exact model / docs / schema / SHA pin verified",
+      "status": "n/a",
+      "basis": "SHA equals the index pin"
+     },
+     {
+      "item": "package zip integrity checked",
+      "status": "n/a",
+      "basis": "no portable package for repository-canonical artifacts"
+     }
+    ]
+   }
+  ]
+ },
+ "no_evaluator": false,
+ "no_evaluator_sentence": null,
+ "answer": {
+  "axis_groups": [],
+  "curve_ids": [],
+  "input": "Pressure ratio: (event 3-second gust / ASCE MRI300 reference design gust, 10 m, Exposure C) squared, valid 0 to 2; Strong Wind uses ASCE 3-second gusts, Tornado uses the EF-band midpoint gust; outside the range is unavailable, not clamped",
+  "how_to_use": {
+   "share_of": "Replacement value of the same fenced station, $27,353,236.37 (MISO MTEP24 published table amounts), applied once",
+   "outputs": {
+    "single_event": "conditional: whole-station direct-wind damage ratio for a pressure ratio of 0 to 2 and an explicit resistance scenario",
+    "scenario_dollars": "conditional: same conditions, damage ratio times the $27.35M fenced value",
+    "yearly_loss": "conditional: Hazard supplies frequency, tornado footprint contact, severity and count law, then one station cap; direct-wind screening contribution only"
+   },
+   "conditions": [
+    "Pin the source artifact (tropical_cyclone_wind_solar v2.1 docs r2) and this binding by hash",
+    "No hurricane duration conversion; inputs are already 3-second gusts",
+    "Resistance scenarios are unweighted sensitivities, not probabilities",
+    "Strong Wind and Tornado run as independent yearly streams, then one cap of $27,353,236.37",
+    "Not a complete tornado loss; unknown event mass kept with tags"
+   ]
+  },
+  "value": null,
+  "not_covered": [],
+  "withheld_units": [],
+  "hazard_axis": []
+ },
+ "parts": [
+  {
+   "part": "Whole station (fenced assembly)",
+   "curves": [
+    "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+   ],
+   "failure_units": [],
+   "subsystems": [],
+   "bucket": null,
+   "variants": "pathway: strong wind or tornado direct loading; resistance: lower, central or upper (unweighted)",
+   "shape": "T4",
+   "shape_basis": "Source medians and beta are T4; the cross-hazard transfer is also T4",
+   "cost": "T4",
+   "cost_basis": "Source state costs 0 / 0.08 / 0.35 / 1 are T4; fenced value membership is T4",
+   "notes": [
+    {
+     "type": "reused_from",
+     "text": "tropical_cyclone_wind_solar v2.1 docs r2 (TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES)"
+    },
+    {
+     "type": "known_bias",
+     "text": "Direct wind only; tornado debris and pressure-change damage left out"
+    }
+   ],
+   "occurrence": null,
+   "drawn": false
+  }
+ ],
+ "evidence": {
+  "lineage": null,
+  "prose_sentence": null,
+  "paths": {},
+  "n_sources": 0,
+  "n_claims": 0,
+  "n_parameters": 0,
+  "key_sources": [
+   "Canonical tropical_cyclone_wind_solar model v2.1 docs r2, curve TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES",
+   "NIST, design guide for the new tornado load requirements in ASCE 7-22",
+   "NIST, explanation of tornado loading (2024), incl. Joplin substation damage",
+   "NWS Enhanced Fujita scale wind bands",
+   "Substation Hurricane screening binding (station and value qualification)"
+  ],
+  "sources_from": "write-up",
+  "judgment": [
+   "Hurricane-to-non-hurricane direct-wind transfer",
+   "Tornado EF-midpoint gust used on the pressure axis",
+   "Equivalent-square footprint, uniform value and parallel path overlap for tornado contact",
+   "GSU-to-transmission-yard transfer and fenced civil membership carried from the Hurricane binding"
+  ],
+  "weakest_tier": "–",
+  "pressure_test": null,
+  "method": {
+   "type": "reused",
+   "summary": "Same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a T4 cross-hazard proxy for direct wind only (see docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md)"
+  }
+ },
+ "audit": {
+  "table": null,
+  "state": "not_yet_detected",
+  "absent_sentence": "No seven-step audit or site-condition adapter found as a file or a dossier section.",
+  "site_adapter": null
+ },
+ "proof": {
+  "known_answers": {
+   "declared": 0,
+   "run": 0,
+   "reproduced": 0,
+   "not_run": [],
+   "negative_run": 0,
+   "tolerance": null,
+   "source": null,
+   "kinds": {},
+   "failed": []
+  },
+  "validation": null,
+  "outside_checks": [],
+  "capability": {
+   "failure_unit_scalar_dr": null,
+   "scenario_loss_given_value_basis": null,
+   "curve_intrinsic_spread": null,
+   "populated_emit_modes": null,
+   "eal": null,
+   "pml": null,
+   "var": null,
+   "tvar": null,
+   "limitation_flags": [],
+   "computation_owner": null
+  }
+ },
+ "seams": {
+  "open_items": [
+   "A complete tornado response needs the deferred component and pathway research",
+   "Regional Fano factor kept after contact thinning (not an exact derivation)",
+   "Strong Wind and Hurricane overlap left to a downstream Total decision"
+  ],
+  "missing_mechanisms": [
+   "Tornado-only mechanisms: windborne debris, pressure change, rotation and duration",
+   "Cascading electrical failures"
+  ],
+  "out_of_scope": [
+   "External access road and project support allowances ($3.06M, outside the fenced value)",
+   "Business interruption and service interruption",
+   "Overlap with Hurricane wind (not deduplicated; a downstream Total decision)"
+  ],
+  "next_version": null,
+  "update_triggers": []
+ },
+ "field_review": {
+  "register": null,
+  "buckets": [],
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the binding README, binding.json and the source cell's tier table",
+   "entry_read_kind": "agent",
+   "release_review": null,
+   "release_review_code": null,
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release —"
+  },
+  "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only."
+ },
+ "files": {
+  "write_up": "docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md",
+  "decisions": "docs/plans/substation_damage/decisions.md",
+  "validation": null,
+  "notebooks": null
+ },
+ "folder_files": [
+  {
+   "path": "docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md",
+   "sha256": "44f710d5a3f866fdc2a33cf1e63524afb90ce1eb4e361ae6867825be8f6b454d"
+  },
+  {
+   "path": "docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/binding.json",
+   "sha256": "5afa3f9cd31ee52092762bdb505fbc4c24c02ed2420d1be67c448e6441383be0"
+  },
+  {
+   "path": "docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/value_crosswalk.csv",
+   "sha256": "107c0585f9fa0609f7e8360c9585523b648fa032015d8d24899f2b7bf866fe33"
+  }
+ ],
+ "gap_reason": null,
+ "binding": {
+  "source_cell_id": "tropical_cyclone_wind_solar",
+  "source_entry_id": "tropical_cyclone_wind_solar",
+  "reused_curves": [
+   "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+  ],
+  "transfer_rationale": "Same station assembly, direct aerodynamic loading, dimensionless squared compatible 3-second gust ratio, same repair denominator and unchanged T4 ordinates. Tornado adoption covers this mechanism only, not source TC permission for complete tornado response.",
+  "transfer_tier": "T4_explicit_cross_hazard_proxy",
+  "status": "qualified_screening_consumer_binding",
+  "limitations": [
+   "T4_COMMON_UNIT_CURVES_NOT_CALIBRATED",
+   "GSU_TO_TRANSMISSION_YARD_ASSEMBLY_TRANSFER",
+   "FENCED_CIVIL_MEMBERSHIP_T4_PROXY",
+   "REGIONALLY_VARYING_REFERENCE_DESIGN_NOT_OBSERVED_CAPACITY",
+   "NO_COMPONENT_HEIGHT_OR_RESILIENCE_CREDIT",
+   "SOURCE_AND_RESPONSE_TAIL_GAPS_RETAINED",
+   "SCENARIOS_ARE_NOT_PROBABILITIES",
+   "ASCE_M1_PARENT_0P25_SUPPORT",
+   "TC_TO_NON_TC_DIRECT_WIND_TRANSFER_T4",
+   "TORNADO_DIRECT_WIND_PROXY_ONLY",
+   "TORNADO_DEBRIS_PRESSURE_CHANGE_ROTATION_AND_CASCADES_UNMODELED",
+   "EQUIVALENT_SQUARE_UNIFORM_VALUE_PATH_OVERLAP_T4",
+   "REGIONAL_FANO_RETAINED_AFTER_CONTACT_THINNING",
+   "STRONG_WIND_HURRICANE_OVERLAP_NOT_DEDUPLICATED"
+  ]
+ },
+ "sampling_notes": [],
+ "build_findings": []
+}

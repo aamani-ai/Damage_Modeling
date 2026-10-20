@@ -1,0 +1,288 @@
+{
+ "curve_id": "WFRE_IND_WRC_SHRUB_X0_8",
+ "entry_id": "wildfire_real_estate",
+ "damage_code_id": "WILDFIRE_REAL_ESTATE_WRC_FSIM_SCREENING_V0_1",
+ "version_key": "model_v0_1__docs_r1",
+ "artifact_sha256": "6b7c771d88b46d60e2c0b1339009ab06753f93f6376e8c8f30e40c91f31474ee",
+ "failure_unit_id": "WFRE_BUILDING_STRUCTURE",
+ "subsystem": "BUILDING",
+ "component": "BUILDING_STRUCTURE_ASSEMBLY",
+ "treatment": "primary_nonzero",
+ "part": "Warehouse",
+ "pathway_id": "wildfire_building_exposure",
+ "curve_form": "piecewise_linear",
+ "x_axis_id": "fsim_conditional_flame_length_class_state_exact_integer_only",
+ "y_axis": "failure_unit_damage_ratio",
+ "parameters": {
+  "points": [
+   [
+    0,
+    0.0
+   ],
+   [
+    1,
+    0.16
+   ],
+   [
+    2,
+    0.28
+   ],
+   [
+    3,
+    0.4
+   ],
+   [
+    4,
+    0.52
+   ],
+   [
+    5,
+    0.64
+   ],
+   [
+    6,
+    0.76
+   ]
+  ]
+ },
+ "record_extra": {
+  "valid_range": [
+   0,
+   6
+  ],
+  "interpolation_policy": "linear_between_source_knots",
+  "extrapolation_policy": "exact integer states 0-6 only (USFS shrub response / 100 x 0.8 (DINS same-fire building factor); state 0 = 0); the evaluator does not interpolate; fractional or out-of-range states rejected (INVALID_CLASS_STATE)",
+  "selector_match": {
+   "reference_building_id": "RE_IND_WAREHOUSE",
+   "source_wildfire_product_id": "USFS_RDS_2016_0034_3_270M"
+  },
+  "source_parameter_refs": [
+   "WFRE-S001#Process_Step_5:shrub_FLP1-FLP6",
+   "WFRE-S003#Entity_and_Attribute:FLP1-FLP6",
+   "WFRE-S002#DINS_BUILDING_COMPARISON:same_fire_ratio:warehouse_like"
+  ],
+  "metadata_flags": [
+   "WRC_HOME_RESPONSE_TIMES_DINS_SAME_FIRE_FACTOR",
+   "BUILDING_FACTOR_T4_TRANSFER_FROM_CALIFORNIA_COMMERCIAL_STOCK"
+  ]
+ },
+ "axis": {
+  "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE_SCREENING",
+  "label": "FSim conditional flame-length class (0 = no event)",
+  "unit": "source_native_categorical_class",
+  "input_field": "conditional_flame_length_class_state",
+  "valid_range": [
+   0,
+   6
+  ],
+  "kind": "categorical"
+ },
+ "domain": [
+  0,
+  6
+ ],
+ "withheld_zones": [],
+ "knots": [
+  [
+   0.0,
+   0.0
+  ],
+  [
+   1.0,
+   0.16
+  ],
+  [
+   2.0,
+   0.28
+  ],
+  [
+   3.0,
+   0.4
+  ],
+  [
+   4.0,
+   0.52
+  ],
+  [
+   5.0,
+   0.64
+  ],
+  [
+   6.0,
+   0.76
+  ]
+ ],
+ "series": [
+  {
+   "label": "WFRE_IND_WRC_SHRUB_X0_8",
+   "kind": "categorical",
+   "points": [
+    [
+     0.0,
+     0.0
+    ],
+    [
+     1.0,
+     0.16
+    ],
+    [
+     2.0,
+     0.28
+    ],
+    [
+     3.0,
+     0.4
+    ],
+    [
+     4.0,
+     0.52
+    ],
+    [
+     5.0,
+     0.64
+    ],
+    [
+     6.0,
+     0.76
+    ]
+   ]
+  }
+ ],
+ "envelope": null,
+ "scenario_note": null,
+ "known_answers": [
+  {
+   "x": 0.0,
+   "y": 0.0,
+   "test": "WFRE_IND_WRC_SHRUB_X0_8_STATE_0"
+  },
+  {
+   "x": 1.0,
+   "y": 0.16,
+   "test": "WFRE_IND_WRC_SHRUB_X0_8_STATE_1"
+  },
+  {
+   "x": 2.0,
+   "y": 0.28,
+   "test": "WFRE_IND_WRC_SHRUB_X0_8_STATE_2"
+  },
+  {
+   "x": 3.0,
+   "y": 0.4,
+   "test": "WFRE_IND_WRC_SHRUB_X0_8_STATE_3"
+  },
+  {
+   "x": 4.0,
+   "y": 0.52,
+   "test": "WFRE_IND_WRC_SHRUB_X0_8_STATE_4"
+  },
+  {
+   "x": 5.0,
+   "y": 0.64,
+   "test": "WFRE_IND_WRC_SHRUB_X0_8_STATE_5"
+  },
+  {
+   "x": 6.0,
+   "y": 0.76,
+   "test": "WFRE_IND_WRC_SHRUB_X0_8_STATE_6"
+  },
+  {
+   "x": 3.0,
+   "y": 0.4,
+   "test": "WFRE_IND_WRC_SHRUB_X0_8_STATE_3_AS_FLOAT"
+  }
+ ],
+ "source_points": [],
+ "drawn": true,
+ "no_evaluator_sentence": null,
+ "evaluator": {
+  "module": "scripts/reference_helpers/wildfire_real_estate_curve_eval.py",
+  "function": "evaluate_damage_call",
+  "note": "request template from the cell's known-answer tests; the hazard axis field varied over the record's valid range"
+ },
+ "tiers": {
+  "shape": "T3",
+  "shape_basis": "house response x 0.8 (CAL FIRE same-fire ratio)",
+  "cost": "T4",
+  "cost_basis": "our reading of the loss figure as rebuild-cost share"
+ },
+ "row_notes": [
+  {
+   "type": "key_assumption",
+   "text": "CAL FIRE commercial buildings are smaller and more mixed than the reference warehouse"
+  }
+ ],
+ "variants": "none",
+ "notes": [],
+ "title": "Wildfire × Real estate",
+ "asset": {
+  "slug": "real_estate",
+  "label": "Real estate"
+ },
+ "hazard": {
+  "slug": "wildfire",
+  "label": "Wildfire"
+ },
+ "status": "proposal",
+ "rail": {
+  "exists": {
+   "status": "proposal",
+   "mark": "▢",
+   "label": "PROPOSAL",
+   "qualifier": "screening"
+  },
+  "evidence": {
+   "shape": "T3",
+   "cost": "T4",
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   }
+  },
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table and decision log",
+   "entry_read_kind": "agent",
+   "release_review": "not yet reviewed",
+   "release_review_code": "not_yet_reviewed",
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release not yet reviewed"
+  }
+ },
+ "parameters_rows": [
+  {
+   "id": "warehouse_factor",
+   "name": "warehouse_factor",
+   "value": "0.8 x house",
+   "tier": "T3",
+   "source_ids": [
+    "WFRE-S002"
+   ],
+   "claim_ids": [],
+   "curve_id": "WFRE_IND_WRC_SHRUB_X0_8",
+   "pathway_id": "wildfire_building_exposure",
+   "role": "building_factor",
+   "status": "proposed",
+   "reasoning": "Same-fire DINS ratio 0.79 (0.61-0.99) rounded (WFRE-C009); transfer to the reference warehouse T4 (WFRE-C010).",
+   "update_trigger": "Warehouse-specific loss data."
+  }
+ ],
+ "sources_for_curve": [
+  "WFRE-S002"
+ ],
+ "occurrence": null,
+ "review": {
+  "entry_read_on": "2026-10-19",
+  "entry_read_by": "Agent-drafted, from the cell's own tier table and decision log",
+  "entry_read_kind": "agent",
+  "release_review": "not yet reviewed",
+  "release_review_code": "not_yet_reviewed",
+  "review": null,
+  "tone": "neutral",
+  "label": "entry agent-read 2026-10-19 · release not yet reviewed"
+ },
+ "summary": "Warehouse: piecewise linear on FSim conditional flame-length class (0 = no event); shape T3, cost T4.",
+ "versions": [],
+ "data_path": "curves/wildfire_real_estate/WFRE_IND_WRC_SHRUB_X0_8@model_v0_1__docs_r1.json"
+}

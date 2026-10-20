@@ -1,0 +1,302 @@
+{
+ "curve_id": "WWV1_GSU_PROTECTION_CONTROL_DC_FSIM_T4",
+ "entry_id": "wildfire_wind",
+ "damage_code_id": "WILDFIRE_WIND_PARTIAL_ELECTRICAL_SCREENING_V1",
+ "version_key": "model_v1_0__docs_r1",
+ "artifact_sha256": "3f923f506a2082dd2f074c8b3cc3d696288097072eb8b6f803f3eb7d3f2b4e0d",
+ "failure_unit_id": "WT_GSU_PROTECTION_CONTROL_DC",
+ "subsystem": "FACILITY_GSU_SUBSTATION",
+ "component": "PROTECTION_RELAY_CONTROL_SCADA_COMMUNICATIONS_STATION_SERVICE_AND_DC",
+ "treatment": "primary_nonzero",
+ "part": "GSU protection, control and DC",
+ "pathway_id": "wildfire_thermal_attack",
+ "curve_form": "piecewise_linear",
+ "x_axis_id": "fsim_conditional_flame_length_class_state_exact_integer_only",
+ "y_axis": "failure_unit_damage_ratio",
+ "parameters": {
+  "points": [
+   [
+    0,
+    0.0
+   ],
+   [
+    1,
+    0.004
+   ],
+   [
+    2,
+    0.02
+   ],
+   [
+    3,
+    0.08
+   ],
+   [
+    4,
+    0.25
+   ],
+   [
+    5,
+    0.6
+   ],
+   [
+    6,
+    0.9
+   ]
+  ]
+ },
+ "record_extra": {
+  "valid_range": [
+   0,
+   6
+  ],
+  "interpolation_policy": "linear_between_source_knots",
+  "extrapolation_policy": "reject noninteger unknown or out-of-range states; evaluator does not execute interpolation",
+  "selector_match": {
+   "source_wildfire_product_id": "USFS_RDS_2016_0034_3_270M",
+   "screening_assumption_set_id": "WW_T4_PARTIAL_ELECTRICAL_SCREENING_2026_08_08"
+  },
+  "source_parameter_refs": [
+   "WW1-A001",
+   "WW1-S001",
+   "WW1-S002",
+   "WW1-S003",
+   "WW1-S004"
+  ],
+  "metadata_flags": [
+   "CANONICAL_SCREENING_RELEASE",
+   "SCREENING_ENGINEERING_PROXY_T4",
+   "PARTIAL_FAILURE_UNIT_COVERAGE",
+   "FSIM_CLASS_IS_NOT_LOCAL_EQUIPMENT_HEAT_FLUX",
+   "NOT_FIELD_OR_CLAIMS_CALIBRATED",
+   "NO_AUTOMATIC_MITIGATION_CREDIT",
+   "CURVE_INTRINSIC_SPREAD_NOT_CARRIED",
+   "CELL_LOCAL_T4_ORDINATES"
+  ]
+ },
+ "axis": {
+  "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE_SCREENING",
+  "label": "FSim conditional flame-length class (0 = no event)",
+  "unit": "source_native_categorical_class",
+  "input_field": "conditional_flame_length_class_state",
+  "valid_range": [
+   0,
+   6
+  ],
+  "kind": "categorical"
+ },
+ "domain": [
+  0,
+  6
+ ],
+ "withheld_zones": [],
+ "knots": [
+  [
+   0.0,
+   0.0
+  ],
+  [
+   1.0,
+   0.004
+  ],
+  [
+   2.0,
+   0.02
+  ],
+  [
+   3.0,
+   0.08
+  ],
+  [
+   4.0,
+   0.25
+  ],
+  [
+   5.0,
+   0.6
+  ],
+  [
+   6.0,
+   0.9
+  ]
+ ],
+ "series": [
+  {
+   "label": "WWV1_GSU_PROTECTION_CONTROL_DC_FSIM_T4",
+   "kind": "categorical",
+   "points": [
+    [
+     0.0,
+     0.0
+    ],
+    [
+     1.0,
+     0.004
+    ],
+    [
+     2.0,
+     0.02
+    ],
+    [
+     3.0,
+     0.08
+    ],
+    [
+     4.0,
+     0.25
+    ],
+    [
+     5.0,
+     0.6
+    ],
+    [
+     6.0,
+     0.9
+    ]
+   ]
+  }
+ ],
+ "envelope": null,
+ "scenario_note": null,
+ "known_answers": [
+  {
+   "x": 0.0,
+   "y": 0.0,
+   "test": "wt_gsu_protection_control_dc_state_0"
+  },
+  {
+   "x": 1.0,
+   "y": 0.004,
+   "test": "wt_gsu_protection_control_dc_state_1"
+  },
+  {
+   "x": 2.0,
+   "y": 0.02,
+   "test": "wt_gsu_protection_control_dc_state_2"
+  },
+  {
+   "x": 3.0,
+   "y": 0.08,
+   "test": "wt_gsu_protection_control_dc_state_3"
+  },
+  {
+   "x": 4.0,
+   "y": 0.25,
+   "test": "wt_gsu_protection_control_dc_state_4"
+  },
+  {
+   "x": 5.0,
+   "y": 0.6,
+   "test": "wt_gsu_protection_control_dc_state_5"
+  },
+  {
+   "x": 6.0,
+   "y": 0.9,
+   "test": "wt_gsu_protection_control_dc_state_6"
+  }
+ ],
+ "source_points": [],
+ "drawn": true,
+ "no_evaluator_sentence": null,
+ "evaluator": {
+  "module": "scripts/reference_helpers/wildfire_wind_v1_curve_eval.py",
+  "function": "evaluate_damage_call",
+  "note": "request template from the cell's known-answer tests; the hazard axis field varied over the record's valid range"
+ },
+ "tiers": {
+  "shape": "T4",
+  "shape_basis": "Tier-4 point array per flame-length class; T3 support for ranking controls above steel-enclosed gear",
+  "cost": "T4",
+  "cost_basis": "Same T4 point array sets the damage level as a share of the unit's value; no separate cost table"
+ },
+ "row_notes": [
+  {
+   "type": "key_assumption",
+   "text": "One shared package per site, counted once"
+  }
+ ],
+ "variants": "none",
+ "notes": [],
+ "title": "Wildfire × Wind farm",
+ "asset": {
+  "slug": "wind",
+  "label": "Wind farm"
+ },
+ "hazard": {
+  "slug": "wildfire",
+  "label": "Wildfire"
+ },
+ "status": "live",
+ "rail": {
+  "exists": {
+   "status": "live",
+   "mark": "■",
+   "label": "LIVE",
+   "qualifier": "screening"
+  },
+  "evidence": {
+   "shape": "T4",
+   "cost": "T4",
+   "occurrence": {
+    "mark": "—",
+    "label": "no register"
+   }
+  },
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table and release decision",
+   "entry_read_kind": "agent",
+   "release_review": "reviewed screening release",
+   "release_review_code": "reviewed_screening_release",
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release reviewed screening release"
+  }
+ },
+ "parameters_rows": [
+  {
+   "id": "GSU protection-control-DC ordinates",
+   "name": "GSU protection-control-DC ordinates",
+   "value": "[[0, 0.0], [1, 0.004], [2, 0.02], [3, 0.08], [4, 0.25], [5, 0.6], [6, 0.9]]",
+   "tier": "T4",
+   "source_ids": [
+    "WW1-A001"
+   ],
+   "claim_ids": [],
+   "curve_id": "WWV1_GSU_PROTECTION_CONTROL_DC_FSIM_T4",
+   "pathway_id": null,
+   "role": "curve_shape_and_level",
+   "status": null,
+   "reasoning": "Owner-authorized cell-local screening assumptions; not an ignition-probability or claims curve.",
+   "update_trigger": "qualified field/lab/claims calibration or structured elicitation"
+  }
+ ],
+ "sources_for_curve": [
+  "WW1-A001"
+ ],
+ "occurrence": null,
+ "review": {
+  "entry_read_on": "2026-10-19",
+  "entry_read_by": "Agent-drafted, from the cell's own tier table and release decision",
+  "entry_read_kind": "agent",
+  "release_review": "reviewed screening release",
+  "release_review_code": "reviewed_screening_release",
+  "review": null,
+  "tone": "neutral",
+  "label": "entry agent-read 2026-10-19 · release reviewed screening release"
+ },
+ "summary": "GSU protection, control and DC: piecewise linear on FSim conditional flame-length class (0 = no event); shape T4, cost T4.",
+ "versions": [
+  {
+   "pin": "wildfire_wind@model_v1_0__docs_r1",
+   "model": "model v1.0",
+   "docs": "docs r1",
+   "published_on": "2026-08-08",
+   "change_class": null,
+   "summary": "First canonical partial-screening release: two Tier-4 source-native FSim-class curves for pad electrical and shared GSU protection-control-DC units; every other unit remains withheld.",
+   "artifact_path": "docs/cells/wildfire_wind/current/wildfire_wind__model_v1_0__docs_r1__curve_artifact.json",
+   "source": "CHANGELOG.json"
+  }
+ ],
+ "data_path": "curves/wildfire_wind/WWV1_GSU_PROTECTION_CONTROL_DC_FSIM_T4@model_v1_0__docs_r1.json"
+}
