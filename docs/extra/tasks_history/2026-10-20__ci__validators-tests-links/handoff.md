@@ -34,7 +34,16 @@
 9. **PR:** [aamani-ai/Damage_Modeling#3](https://github.com/aamani-ai/Damage_Modeling/pull/3) — *CI: validators,
    tests and link check*. Its description carries the local results, the six skips with reasons, the link
    census, and the link and runtime of the workflow run on the PR's final commit.
-10. Untouched on purpose: every validator's logic; the dashboard session's paths (`dashboard/`,
+10. **CI is red on Ubuntu for one known-answer test, and the PR says exactly why.** Runs 1 and 2 (80–83 s
+    each; install ≈ 45 s, validators 31 s): tests pass; `validate_all.py` 26 passed · 2 failed · 6 skipped.
+    The two failures are the same KAT, `TCWS21-FIXED-CENTRAL`, in
+    `validate_tropical_cyclone_wind_solar_v2_1_{proposal,release}.py`: both compare the evaluator's whole
+    output dict with `==` against values recorded on macOS, and the fixed-tilt route goes through `math.log`
+    and `math.erfc`, which Apple's libm and glibc round differently in the last bit. Passes on macOS, fails
+    on Linux, confined to that one KAT. Not changed here (the brief). Owner's call: tolerance in the two
+    validators (`math.isclose`), rounding in the evaluator, or macOS runners. The exact Linux leaf-level
+    diff is still to be produced (no container runtime on the Mac; the Linux worker was unreachable).
+11. Untouched on purpose: every validator's logic; the dashboard session's paths (`dashboard/`,
     `scripts/dashboard/`, `docs/plans/damage_curve_dashboard/evidence/`, `docs/evidence/occurrence/`, the
     catalogue README/builder/validator); the notebooks (both existing pairs are known-broken per
     `docs/plans/cell_notebook_coverage/` and are not in CI).
