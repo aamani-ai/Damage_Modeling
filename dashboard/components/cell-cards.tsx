@@ -9,6 +9,7 @@ import { OccMark, TierText } from "./marks";
 import { Card, CardTitle, EmptyState, FileLink, InfoHint, Kv, Mono, Tag } from "./ui";
 
 const ST = (n: number, id: string, gate: string) => `station ${n} ${id} · gate ${gate}`;
+const fmtTol = (v: number | null | undefined) => (v == null ? "—" : v < 1e-3 ? v.toExponential() : String(v)); // 1e-6, not 0.000001
 
 export function AnswerCard({ cell, curves, m, blob }: { cell: Cell; curves: Curve[]; m: Manifest; blob: (p: string) => string }) {
   const a = cell.answer;
@@ -346,7 +347,7 @@ export function ProofCard({ cell, blob }: { cell: Cell; blob: (p: string) => str
               <Kv label="declared" value={k.declared} />
               <Kv label="run · reproduced" value={<span>{k.run} · {k.reproduced}{k.failed.length ? <Tag tone="danger" className="ml-1">✗ {k.failed.length}</Tag> : <Tag tone="ok" className="ml-1">✓</Tag>}</span>} />
               {k.not_run.map((n) => <Kv key={n.kind} label={`not run · ${n.kind.replace(/_/g, " ")}`} value={<span className="text-muted-foreground">{n.n} — {n.reason}</span>} />)}
-              <Kv label="tolerance" value={<span className="font-mono">{k.tolerance ?? "—"}{k.tolerance != null && k.tolerance_usd != null ? <span className="font-sans text-muted-foreground"> on the damage ratio · </span> : null}{k.tolerance_usd != null ? <>{k.tolerance_usd}<span className="font-sans text-muted-foreground"> USD</span></> : null}</span>} />
+              <Kv label="tolerance" value={<span className="font-mono">{fmtTol(k.tolerance)}{k.tolerance != null && k.tolerance_usd != null ? <span className="font-sans text-muted-foreground"> on the damage ratio · </span> : null}{k.tolerance_usd != null ? <>{fmtTol(k.tolerance_usd)}<span className="font-sans text-muted-foreground"> USD</span></> : null}</span>} />
               {k.source ? <Kv label="file" value={<FileLink href={blob(k.source)}>{k.source.split("/").slice(-1)[0]}</FileLink>} /> : null}
             </>
           ) : <EmptyState>No known-answer tests are declared by this artifact; nothing was reproduced.</EmptyState>}
