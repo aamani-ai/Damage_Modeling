@@ -159,11 +159,13 @@ is linked from the [`Resiliency handoff`](docs/contracts/resiliency_handoff/READ
 - **`outputs/` is gitignored** — a regenerable render target. The canonical workbook for a cell always lives
   under `docs/cells/<cell>/{current,proposed}/`, never in `outputs/`.
 
-### Syncing with the fork — check the direction first
+### Syncing with GitHub — check the direction first
 
-`aamani-ai/Damage_Modeling` (remote `origin`) and `Divi-patel/Damage_Modeling` (remote `divi`) are **the same
-project as this checkout**, not separate ones. Work happens on the fork because the work GitHub org has access
-issues.
+The repository of record is `aamani-ai/Damage_Modeling`, this checkout's **single remote `origin`**, pushed with
+the work GitHub account. `Divi-patel/Damage_Modeling` is a personal GitHub fork of it that served as a
+workaround while the work org had access issues; it is **no longer a remote of this checkout** (dropped
+2026-10-19), the work account can only read it, and it must not be used to sync. Collaborators' work (for
+example Junga's `cell/*` branches) lands on `origin` branches.
 
 Do **not** assume the fork is ahead. Skill and agent runs write straight into this working tree, so the local
 checkout is frequently the newer side with the work merely uncommitted. Before syncing, run:
