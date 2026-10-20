@@ -262,7 +262,7 @@
      }
     ],
     "evidence": [],
-    "fact": "20 KAT · not run",
+    "fact": "20 of 20 KAT reproduced",
     "absent_sentence": null
    },
    {
@@ -533,10 +533,33 @@
    }
   ]
  },
- "no_evaluator": true,
- "no_evaluator_sentence": "Not drawn — no reference evaluator for this form in this repository (G9).",
+ "no_evaluator": false,
+ "no_evaluator_sentence": null,
  "answer": {
-  "axis_groups": [],
+  "axis_groups": [
+   {
+    "axis": {
+     "id": "bess_tc_event_to_reference_pressure_ratio",
+     "label": "pressure ratio, (event 3-s gust ÷ declared reference 3-s gust)²",
+     "unit": "dimensionless",
+     "input_field": "pressure_ratio",
+     "kind": "continuous",
+     "valid_range": [
+      0.0,
+      2.0
+     ],
+     "bridge": {
+      "formula": "pressure ratio = (event 3-s gust / reference 3-s gust)², formed by the consumer or by the evaluator from a gust pair",
+      "reference": "declared by the consumer as demand_basis_id; the cell selects no national wind reference"
+     }
+    },
+    "curve_ids": [
+     "BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1",
+     "BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1",
+     "BESS_SEPARATE_PCS_TC_PROXY_V0_1"
+    ]
+   }
+  ],
   "curve_ids": [
    "BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1",
    "BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1",
@@ -670,7 +693,7 @@
     "state": "not_searched",
     "sentence": "Not searched — nobody has looked for field reports yet."
    },
-   "drawn": false
+   "drawn": true
   },
   {
    "part": "Separate PCS",
@@ -700,7 +723,7 @@
     "state": "not_searched",
     "sentence": "Not searched — nobody has looked for field reports yet."
    },
-   "drawn": false
+   "drawn": true
   }
  ],
  "evidence": {
@@ -745,19 +768,15 @@
  "proof": {
   "known_answers": {
    "declared": 20,
-   "run": 0,
-   "reproduced": 0,
-   "not_run": [
-    {
-     "kind": "case",
-     "n": 20,
-     "reason": "no reference evaluator for this cell in this repository (G9); not run, not reproduced"
-    }
-   ],
+   "run": 20,
+   "reproduced": 20,
+   "not_run": [],
    "negative_run": 0,
-   "tolerance": null,
+   "tolerance": 1e-12,
    "source": "docs/cells/tropical_cyclone_wind_bess/current/known_answers.json",
-   "kinds": {},
+   "kinds": {
+    "case": 20
+   },
    "failed": []
   },
   "validation": {
@@ -983,6 +1002,10 @@
    "sha256": "1694dac651c439b194a6ca7bc9b6fa67ffa9547a9d486063aefd628174720434"
   },
   {
+   "path": "docs/cells/tropical_cyclone_wind_bess/current/hazard_consumer_comparison.md",
+   "sha256": "07be69b3c91d9a7a21ce8ff9ead698a8d2e0bb709831f29c609a91230e709c20"
+  },
+  {
    "path": "docs/cells/tropical_cyclone_wind_bess/current/known_answers.json",
    "sha256": "68689dbf61661cf1ae92be4eba78b85943c43011dcbc43110f5e5dbc50c3ee15"
   },
@@ -1013,6 +1036,10 @@
  ],
  "gap_reason": null,
  "binding": null,
- "sampling_notes": [],
+ "sampling_notes": [
+  "Sampled through the cell's reference evaluator (tropical_cyclone_wind_bess_curve_eval.py) at 161 pressure ratios in 0–2 for every record × resistance scenario; nothing averaged.",
+  "Known answers replayed through evaluate_damage_call with demand_basis_id DASHBOARD_BUILD_DECLARED_COMPARABLE_REFERENCE (recorded, not judged); tolerance 1e-12 on the damage ratio (the cell declares none), and each answer equals the drawn line at its ratio.",
+  "Demand above 2 confirmed withheld (AXIS_OUTSIDE_VALID_RANGE) for every record; BESS_MV_AND_SHARED_ELECTRICAL, BESS_CIVIL, BESS_FIELDWORK confirmed withheld with the artifact's reason codes."
+ ],
  "build_findings": []
 }

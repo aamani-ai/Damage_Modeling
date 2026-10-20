@@ -270,7 +270,7 @@
      }
     ],
     "evidence": [],
-    "fact": "84 KAT · not run",
+    "fact": "84 of 84 KAT reproduced",
     "absent_sentence": null
    },
    {
@@ -538,10 +538,38 @@
    }
   ]
  },
- "no_evaluator": true,
- "no_evaluator_sentence": "Not drawn — no reference evaluator for this form in this repository (G9).",
+ "no_evaluator": false,
+ "no_evaluator_sentence": null,
  "answer": {
-  "axis_groups": [],
+  "axis_groups": [
+   {
+    "axis": {
+     "id": "FSIM_CLASS_EXACT",
+     "label": "FSim fire-intensity class at the unit, exact state",
+     "unit": "class",
+     "input_field": "class_state",
+     "kind": "categorical",
+     "valid_range": [
+      0,
+      6
+     ],
+     "classes": {
+      "0": "no event"
+     },
+     "dodge": true,
+     "note": "Exact states only: one mark per record at each class 0–6 (records that share a class stand side by side inside it); nothing is drawn between classes, because the evaluator rejects any other state. Class 0 is the no-event control, never a stand-in for a missing class."
+    },
+    "curve_ids": [
+     "BWF01_ENC_approved_replacement_electronics_ordinal",
+     "BWF01_ENC_approved_replacement_heavy_electrical_ordinal",
+     "BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal",
+     "BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal",
+     "BWF01_ENC_limited_repair_sensitivity_electronics_ordinal",
+     "BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal",
+     "BWF01_PCS_ELECTRONICS"
+    ]
+   }
+  ],
   "curve_ids": [
    "BWF01_ENC_approved_replacement_electronics_ordinal",
    "BWF01_ENC_approved_replacement_heavy_electrical_ordinal",
@@ -690,7 +718,7 @@
     "state": "not_searched",
     "sentence": "Not searched — nobody has looked for field reports yet."
    },
-   "drawn": false
+   "drawn": true
   },
   {
    "part": "Separate PCS",
@@ -720,7 +748,7 @@
     "state": "not_searched",
     "sentence": "Not searched — nobody has looked for field reports yet."
    },
-   "drawn": false
+   "drawn": true
   }
  ],
  "evidence": {
@@ -810,19 +838,16 @@
  "proof": {
   "known_answers": {
    "declared": 84,
-   "run": 0,
-   "reproduced": 0,
-   "not_run": [
-    {
-     "kind": "case",
-     "n": 84,
-     "reason": "no reference evaluator for this cell in this repository (G9); not run, not reproduced"
-    }
-   ],
+   "run": 84,
+   "reproduced": 84,
+   "not_run": [],
    "negative_run": 0,
-   "tolerance": null,
+   "tolerance": 1e-12,
    "source": "docs/cells/wildfire_bess/current/known_answers.json",
-   "kinds": {},
+   "kinds": {
+    "case": 84
+   },
+   "tolerance_usd": 1e-06,
    "failed": []
   },
   "validation": {
@@ -1047,6 +1072,10 @@
    "sha256": "47c7bdd139310f4d1b98e8fdc195c79da346f9195eef7a37ffb9d2f998cbf508"
   },
   {
+   "path": "docs/cells/wildfire_bess/current/hazard_consumer_comparison.md",
+   "sha256": "0849f13d3a29647423b53ae0ed7e7375438da9662432b01efcd849a9f704c5ca"
+  },
+  {
    "path": "docs/cells/wildfire_bess/current/known_answers.json",
    "sha256": "6d1bddb932b769a8b63262b5884a8f7ff22728c3a942ebcb230696264ccf2403"
   },
@@ -1077,6 +1106,10 @@
  ],
  "gap_reason": null,
  "binding": null,
- "sampling_notes": [],
+ "sampling_notes": [
+  "Each record looked up through the cell's reference evaluator (wildfire_bess_curve_eval.py) at the exact states 0–6; marks only, since the evaluator rejects any state between two classes (confirmed on every record).",
+  "Known answers replayed through evaluate_damage_call with selector_id BESS_LFP_R1_WILDFIRE_ORDINAL_V1 and each unit's value from the pinned value binding; the two repair hypotheses carry the explicit serviceability counterfactual the contract requires. Tolerances 1e-12 on the damage ratio and 1e-06 USD (the cell declares none); each answer equals the drawn mark at its state.",
+  "BESS_MV_AND_SHARED_ELECTRICAL, BESS_CIVIL, BESS_FIELDWORK confirmed withheld with the artifact's reason codes."
+ ],
  "build_findings": []
 }

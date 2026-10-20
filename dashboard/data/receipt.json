@@ -1,8 +1,8 @@
 {
  "schema": "damage_dashboard_receipt.v0",
- "built_at": "2026-10-20T14:34:00+00:00",
- "commit": "3f9d516",
- "commit_full": "3f9d5163f0d252aea27254a2b76cb852abea234d",
+ "built_at": "2026-10-20T19:24:14+00:00",
+ "commit": "054eb9d",
+ "commit_full": "054eb9db5b3192f2a614685ca3cc78406c8c375f",
  "working_tree_clean": true,
  "python": "3.12.12",
  "counts": {
@@ -12,13 +12,13 @@
   "gap": 4,
   "entries": 25,
   "curves_declared": 104,
-  "curves_drawn": 94,
-  "curves_no_evaluator": 10,
+  "curves_drawn": 104,
+  "curves_no_evaluator": 0,
   "agent_read_only": 25,
   "field_searches_logged": 0,
-  "known_answers_run": 1748,
-  "known_answers_reproduced": 1748,
-  "known_answers_not_run": 136,
+  "known_answers_run": 1852,
+  "known_answers_reproduced": 1852,
+  "known_answers_not_run": 32,
   "occurrence_registers": 8,
   "owner_reviews": 0,
   "outside_checks": 10,
@@ -26,9 +26,9 @@
  },
  "known_answers": {
   "declared": 1884,
-  "run": 1748,
-  "reproduced": 1748,
-  "not_run": 136
+  "run": 1852,
+  "reproduced": 1852,
+  "not_run": 32
  },
  "pins_checked": 45,
  "twin_crosswalk": {
@@ -92,13 +92,10 @@
    "severity": "hard",
    "detail": {
     "declared": 104,
-    "sampled": 94,
-    "no_evaluator": 10,
+    "sampled": 104,
+    "no_evaluator": 0,
     "bad": [],
-    "listed_no_evaluator": [
-     "tropical_cyclone_wind_bess",
-     "wildfire_bess"
-    ],
+    "listed_no_evaluator": [],
     "evaluator_now_present": {}
    }
   },
@@ -109,9 +106,9 @@
    "severity": "data",
    "detail": {
     "declared": 1884,
-    "run": 1748,
-    "reproduced": 1748,
-    "not_run": 136,
+    "run": 1852,
+    "reproduced": 1852,
+    "not_run": 32,
     "failures": []
    }
   },
@@ -199,8 +196,18 @@
   "strong_wind_solar": [
    "No known-answer tests declared by this artifact."
   ],
+  "tropical_cyclone_wind_bess": [
+   "Sampled through the cell's reference evaluator (tropical_cyclone_wind_bess_curve_eval.py) at 161 pressure ratios in 0–2 for every record × resistance scenario; nothing averaged.",
+   "Known answers replayed through evaluate_damage_call with demand_basis_id DASHBOARD_BUILD_DECLARED_COMPARABLE_REFERENCE (recorded, not judged); tolerance 1e-12 on the damage ratio (the cell declares none), and each answer equals the drawn line at its ratio.",
+   "Demand above 2 confirmed withheld (AXIS_OUTSIDE_VALID_RANGE) for every record; BESS_MV_AND_SHARED_ELECTRICAL, BESS_CIVIL, BESS_FIELDWORK confirmed withheld with the artifact's reason codes."
+  ],
   "tropical_cyclone_wind_solar": [
    "Runtime known answers compared as a subset match of the expected damage emit (every expected key, floats within 1e-9)."
+  ],
+  "wildfire_bess": [
+   "Each record looked up through the cell's reference evaluator (wildfire_bess_curve_eval.py) at the exact states 0–6; marks only, since the evaluator rejects any state between two classes (confirmed on every record).",
+   "Known answers replayed through evaluate_damage_call with selector_id BESS_LFP_R1_WILDFIRE_ORDINAL_V1 and each unit's value from the pinned value binding; the two repair hypotheses carry the explicit serviceability counterfactual the contract requires. Tolerances 1e-12 on the damage ratio and 1e-06 USD (the cell declares none); each answer equals the drawn mark at its state.",
+   "BESS_MV_AND_SHARED_ELECTRICAL, BESS_CIVIL, BESS_FIELDWORK confirmed withheld with the artifact's reason codes."
   ],
   "wildfire_solar": [
    "Aggregate and distribution known answers reproduced with the equations the KAT file states (tolerance 1e-9)."
@@ -250,25 +257,11 @@
     "reason": "request-contract test (value profile required); belongs to the cell validator"
    }
   ],
-  "tropical_cyclone_wind_bess": [
-   {
-    "kind": "case",
-    "n": 20,
-    "reason": "no reference evaluator for this cell in this repository (G9); not run, not reproduced"
-   }
-  ],
   "tropical_cyclone_wind_real_estate": [
    {
     "kind": "contract_assertion",
     "n": 4,
     "reason": "prose assertions; not executable"
-   }
-  ],
-  "wildfire_bess": [
-   {
-    "kind": "case",
-    "n": 84,
-    "reason": "no reference evaluator for this cell in this repository (G9); not run, not reproduced"
    }
   ],
   "wildfire_real_estate": [
@@ -449,7 +442,7 @@
   }
  },
  "files": {
-  "manifest.json": "ff52f92590bfcff2222233523031b32799eb0429b06ce16a8d81e46fb6da6be9",
+  "manifest.json": "e3efdf9a7a408eda00c72e611b2a3cc12553a9c1520dbdf40fa5e8ba632feeab",
   "cells/convective_wind_bess.json": "2338bff2c4ddc45ba0ef579b9b1bf3c08590ec4c3104fc98b0320e7f2b086f50",
   "cells/convective_wind_real_estate.json": "b386ac3c8636d283721962024db459c582a0cbc7e96efe9e9d24543c9f16119c",
   "cells/flood_bess.json": "97ffbe300969cd27e1a80c1f53ef19de2b531a71d3b4e390f02d321e12b0234b",
@@ -466,11 +459,11 @@
   "cells/substation_convective_wind_screening_v1.json": "c52f4e3ad669bc9578188f3c806f919789579a83145b2b44aa8919e894ea34fb",
   "cells/substation_hurricane_screening_v1.json": "21a7323d7977d34275b90220e28177ead1cd780310e80abe9d26bc5e206465a6",
   "cells/substation_wildfire_screening_v1.json": "d0d1a5b312a9595e60f3e729b03592cb2c30b213ab58401ca6a3827e52300913",
-  "cells/tropical_cyclone_wind_bess.json": "5446cd3cb16ac92a3385be60d3c557a29b249916bbb73423b14eece7d9cc75a3",
+  "cells/tropical_cyclone_wind_bess.json": "fb84716db48dc2652b996b89460fa5dd8790dca290b3adab4d8e25732538422b",
   "cells/tropical_cyclone_wind_real_estate.json": "46ddc328fdb405df4870e1d7f070e468d81bf297bf5ba4001eded750f666195b",
   "cells/tropical_cyclone_wind_solar.json": "3cb88ec2cc2239415185c93cac270352bd455a5f71359fc92be24851b9bf05da",
   "cells/tropical_cyclone_wind_wind.json": "09a64c14cf9c686a4412d9a69423468e2adc0dc1018ee0dc61ea9edfc3b4e917",
-  "cells/wildfire_bess.json": "8b6b33911af9e7740fcf69c46a42a83f659fe9c0544a236460db7847dc2dd263",
+  "cells/wildfire_bess.json": "227ceb15ed2b478bf5e41749a35fbaa6fa7aa09f11546579008acff5ca4c2de2",
   "cells/wildfire_real_estate.json": "0f5f39e5a587007e57fdda3d7f9d1f4ff8cb485537001d408f81a5356f6dc121",
   "cells/wildfire_solar.json": "5a7d395bb9196a2b716e2146d6cf10e197b9e044e71b12939a4b38ae42dd2df8",
   "cells/wildfire_wind.json": "e9209731c458399cb9a8922ead0102ab689effbd92e1966dd61b4362e172ca6f",
@@ -515,9 +508,9 @@
   "curves/strong_wind_solar/SWS_MODULE_ATTACH@model_v1_0__docs_r3.json": "cfc2f1af7cce6b09460bbbb803683de3fbbbc5f839aea87adb752c93f684a545",
   "curves/strong_wind_solar/SWS_FOUNDATION_UPLIFT@model_v1_0__docs_r3.json": "f2c1887e1da5fd5a15a2f7eeea77b8b53a17ca65a543051b1a6216ad5d5ea2ff",
   "curves/strong_wind_solar/SWS_SCADA_EXPOSED@model_v1_0__docs_r3.json": "f6372582db7ed3a5a89742ee45bd48e1e178aaf271b3403945925aa8363c2e02",
-  "curves/tropical_cyclone_wind_bess/BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1@model_v1_0__docs_r1.json": "3a9338800df3d3bca0e156074506af9f4f5ec1c5a59dc8db292b5352e8562164",
-  "curves/tropical_cyclone_wind_bess/BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1@model_v1_0__docs_r1.json": "0701cfa7d8afec51a925158b19f5acda53897a72994945eacb0fb84fccb4bbac",
-  "curves/tropical_cyclone_wind_bess/BESS_SEPARATE_PCS_TC_PROXY_V0_1@model_v1_0__docs_r1.json": "2ba4052c9a6179b94b88c2cdb606686d17b2c763d3964e81a77f975134906198",
+  "curves/tropical_cyclone_wind_bess/BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1@model_v1_0__docs_r1.json": "3d6825472e486a7e55c3ca2d7e171a56a19b07db12ad16d44dd7c9c723696241",
+  "curves/tropical_cyclone_wind_bess/BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1@model_v1_0__docs_r1.json": "80e36ec50edba783c23b6003c4892338da95bf4eb36150d2f3fef6a3de7cff7b",
+  "curves/tropical_cyclone_wind_bess/BESS_SEPARATE_PCS_TC_PROXY_V0_1@model_v1_0__docs_r1.json": "06eb70d02061fab1a3674907503622a488cd153c4dbeecf96ba8777318dd6b18",
   "curves/tropical_cyclone_wind_real_estate/TCRE_RES_HAZUS_WSF1_OPEN@model_v0_2__docs_r1.json": "ae582096d44a1fd803f74710f75a41930a6770e54f0ede86f43c3a25c381a57d",
   "curves/tropical_cyclone_wind_real_estate/TCRE_RES_HAZUS_WSF1_LIGHT_SUBURBAN@model_v0_2__docs_r1.json": "3c618d5186f40a178ebab1788a73e74bafdb6090fffe6d5b0e86ad4500a9409b",
   "curves/tropical_cyclone_wind_real_estate/TCRE_RES_HAZUS_WSF1_SUBURBAN@model_v0_2__docs_r1.json": "0b50dd0b491a91e143c3f723f8c42dbb9730db3bf210d072673aed601ea9a890",
@@ -552,13 +545,13 @@
   "curves/tropical_cyclone_wind_wind/TCWW_JAIMES_2P5MW_80M_SCREENING@model_v1_2__docs_r2.json": "698de3267029a648f3b7a81cc3af64a88614dca6c8da8c6a1943c9bf22493c13",
   "curves/tropical_cyclone_wind_wind/TCWW_JAIMES_3P3MW_100M_SCREENING@model_v1_2__docs_r2.json": "b24a9cfa934a932b197bb584e4f8a84d1f87ebfcac7ec364d6dabe3f43894faa",
   "curves/tropical_cyclone_wind_wind/TCWW_JAIMES_3P3MW_AS_CANONICAL_5MW_TOWER_PROXY_V1@model_v1_2__docs_r2.json": "cf53f215e2f96756fd57b88a14fa1591bfad97194d48634f1507d30cc3a12fa5",
-  "curves/wildfire_bess/BWF01_ENC_approved_replacement_electronics_ordinal@model_v1_0__docs_r1.json": "a819cfd6dd5afe8126adf118a9fe5154962c0a0f571b593dc7b3963ad3de0688",
-  "curves/wildfire_bess/BWF01_ENC_approved_replacement_heavy_electrical_ordinal@model_v1_0__docs_r1.json": "73e509729760c3529bc6ca0b04334b7e02fc7617d8d18624fdd7fa56f358309c",
-  "curves/wildfire_bess/BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal@model_v1_0__docs_r1.json": "5c6aa3c840ed8bf7d21aed01db32e951b4e1097983f147c96101e72f8e8621de",
-  "curves/wildfire_bess/BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal@model_v1_0__docs_r1.json": "19628a3ef9f1bebffe0484e786a689a0b779f9ddcc68509194b6fdb8edebee19",
-  "curves/wildfire_bess/BWF01_ENC_limited_repair_sensitivity_electronics_ordinal@model_v1_0__docs_r1.json": "40d046d73dfe48a35d59095d5199d2fa03416577580d018b749b11809f080572",
-  "curves/wildfire_bess/BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal@model_v1_0__docs_r1.json": "b5659ca050b58d732956ed02107c6ea846608b25f312a58f1044c416be336bcd",
-  "curves/wildfire_bess/BWF01_PCS_ELECTRONICS@model_v1_0__docs_r1.json": "1f4e960bdd525060af2ab129c9917b998bffeca6d4b1cbab4f5a37d3aff25353",
+  "curves/wildfire_bess/BWF01_ENC_approved_replacement_electronics_ordinal@model_v1_0__docs_r1.json": "f38ebae3f750cc7d78be4abdeb310d0c3b40cafb57f05b351fd77de790b1db1f",
+  "curves/wildfire_bess/BWF01_ENC_approved_replacement_heavy_electrical_ordinal@model_v1_0__docs_r1.json": "4e25188e009088c9c26a066fa9508c937ce48ce2cd43ed3301e2a45810b3cb11",
+  "curves/wildfire_bess/BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal@model_v1_0__docs_r1.json": "12a7a8c1ef270bd0e7ea230501dc8473335a75873082b99b19a261c759af14a6",
+  "curves/wildfire_bess/BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal@model_v1_0__docs_r1.json": "534fc663a7229b0b077abe70d44824c7b1f503aed156dd110fcd0c413f90765d",
+  "curves/wildfire_bess/BWF01_ENC_limited_repair_sensitivity_electronics_ordinal@model_v1_0__docs_r1.json": "986fab7ce2025d93d1d45127c4213c1c96a2ce42553eb0465ca63346f5e5295a",
+  "curves/wildfire_bess/BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal@model_v1_0__docs_r1.json": "2ba5fa62a30c91a7b5f37e731201d2020b8286745bd05305f045c9b50054dbad",
+  "curves/wildfire_bess/BWF01_PCS_ELECTRONICS@model_v1_0__docs_r1.json": "69e02696a53e8a1c889a698c701bd8c4523ab86ebf67b003c053b1d76c8e5313",
   "curves/wildfire_real_estate/WFRE_RES_WRC_SHRUB@model_v0_1__docs_r1.json": "71ca1b254cdbf1a6896bf4ccedd6dc204791c1d0f190239117c258f7367f02f0",
   "curves/wildfire_real_estate/WFRE_IND_WRC_SHRUB_X0_8@model_v0_1__docs_r1.json": "d16ac5e638dc9ca2aaf4c6c438bad6db3bde49d63b02abb87879b4ef0394bb19",
   "curves/wildfire_real_estate/WFRE_OFF_WRC_SHRUB_X0_9@model_v0_1__docs_r1.json": "7c12ce21aecf94e65a0cc64fb9cdec2fd02e7e83b4700daf331e2bdd08e584c4",
@@ -583,7 +576,7 @@
   "assets/wind.json": "3e1f71f693b8b615b072e0f94754046cdeb2ec01a41b3473ebfb2dfb49c9d76d",
   "assets/real_estate.json": "965926dc6beffc98f170019eb73b506bd7d12c7d8bc832ee3787d5a9c85e9492",
   "assets/substation.json": "1ee0914c3e7c107d11bd88069c3a4c53b7ad398e816d5364341b0a37999b4fc3",
-  "assets/bess.json": "3ae062a6d41ec664002da1dbb97885a9e5b68ba4aada51150505c68018108768",
+  "assets/bess.json": "910bd94b08b559b1a144357a49b0ad5fa65013c771c23cacc4d2998b0e779b49",
   "occurrence/bess/convective_wind.json": "d0376a7092661efc5e28a601e8587bdb5b5419a641813c523ceaac9d7d742afa",
   "occurrence/bess/flood.json": "d87ad16caaa30c293f7933dbd0d443ddaed8c258b15716e3540b7cb5de7217cc",
   "occurrence/bess/hail.json": "c59272916084613ee8a98acedc941caf3637e300fcccd6e6cb9899384fa48794",

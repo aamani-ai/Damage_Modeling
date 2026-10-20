@@ -11,6 +11,7 @@
  "part": "Separate PCS",
  "pathway_id": "wildfire_thermal_attack",
  "curve_form": "piecewise_linear",
+ "form_label": "exact-state table, carried in the schema's piecewise-linear container",
  "x_axis_id": "fsim_class_state_exact_integer_only",
  "y_axis": "failure_unit_damage_ratio",
  "parameters": {
@@ -75,15 +76,19 @@
  },
  "axis": {
   "id": "FSIM_CLASS_EXACT",
-  "label": "FSim fire intensity class at the unit",
+  "label": "FSim fire-intensity class at the unit, exact state",
   "unit": "class",
   "input_field": "class_state",
-  "kind": "continuous",
+  "kind": "categorical",
   "valid_range": [
    0,
    6
   ],
-  "label_from_id": true
+  "classes": {
+   "0": "no event"
+  },
+  "dodge": true,
+  "note": "Exact states only: one mark per record at each class 0–6 (records that share a class stand side by side inside it); nothing is drawn between classes, because the evaluator rejects any other state. Class 0 is the no-event control, never a stand-in for a missing class."
  },
  "domain": [
   0,
@@ -120,14 +125,115 @@
    0.8
   ]
  ],
- "series": [],
+ "series": [
+  {
+   "label": "PCS · every consequence · electronics response under either shape",
+   "kind": "categorical",
+   "points": [
+    [
+     0.0,
+     0.0
+    ],
+    [
+     1.0,
+     0.002
+    ],
+    [
+     2.0,
+     0.01
+    ],
+    [
+     3.0,
+     0.05
+    ],
+    [
+     4.0,
+     0.18
+    ],
+    [
+     5.0,
+     0.45
+    ],
+    [
+     6.0,
+     0.8
+    ]
+   ],
+   "legend_row": "PCS · every consequence",
+   "legend_col": "electronics response under either shape",
+   "ink": true,
+   "symbol_slot": 0,
+   "variant": "every response hypothesis × shape"
+  }
+ ],
  "envelope": null,
  "scenario_note": null,
- "known_answers": [],
+ "known_answers": [
+  {
+   "x": 0.0,
+   "y": 0.0,
+   "test": "cases 43, 50, 57, 64, 71, 78: PCS · state 0 · $0 — the same point under 6 request choices",
+   "n": 6,
+   "series": "PCS · every consequence · electronics response under either shape",
+   "cost_usd": 0.0
+  },
+  {
+   "x": 1.0,
+   "y": 0.002,
+   "test": "cases 44, 51, 58, 65, 72, 79: PCS · state 1 · $1,040 — the same point under 6 request choices",
+   "n": 6,
+   "series": "PCS · every consequence · electronics response under either shape",
+   "cost_usd": 1040.0
+  },
+  {
+   "x": 2.0,
+   "y": 0.01,
+   "test": "cases 45, 52, 59, 66, 73, 80: PCS · state 2 · $5,200 — the same point under 6 request choices",
+   "n": 6,
+   "series": "PCS · every consequence · electronics response under either shape",
+   "cost_usd": 5200.0
+  },
+  {
+   "x": 3.0,
+   "y": 0.05,
+   "test": "cases 46, 53, 60, 67, 74, 81: PCS · state 3 · $26,000 — the same point under 6 request choices",
+   "n": 6,
+   "series": "PCS · every consequence · electronics response under either shape",
+   "cost_usd": 26000.0
+  },
+  {
+   "x": 4.0,
+   "y": 0.18,
+   "test": "cases 47, 54, 61, 68, 75, 82: PCS · state 4 · $93,600 — the same point under 6 request choices",
+   "n": 6,
+   "series": "PCS · every consequence · electronics response under either shape",
+   "cost_usd": 93600.0
+  },
+  {
+   "x": 5.0,
+   "y": 0.45,
+   "test": "cases 48, 55, 62, 69, 76, 83: PCS · state 5 · $234,000 — the same point under 6 request choices",
+   "n": 6,
+   "series": "PCS · every consequence · electronics response under either shape",
+   "cost_usd": 234000.0
+  },
+  {
+   "x": 6.0,
+   "y": 0.8,
+   "test": "cases 49, 56, 63, 70, 77, 84: PCS · state 6 · $416,000 — the same point under 6 request choices",
+   "n": 6,
+   "series": "PCS · every consequence · electronics response under either shape",
+   "cost_usd": 416000.0
+  }
+ ],
  "source_points": [],
- "drawn": false,
- "no_evaluator_sentence": "Not drawn — no reference evaluator for this form in this repository (G9).",
- "evaluator": null,
+ "drawn": true,
+ "no_evaluator_sentence": null,
+ "evaluator": {
+  "module": "scripts/reference_helpers/wildfire_bess_curve_eval.py",
+  "function": "evaluate_curve_record",
+  "note": "exact lookup at the integer states 0–6; any other state is rejected (EXACT_FSIM_CLASS_STATE_REQUIRED), so nothing is drawn between states"
+ },
  "tiers": {
   "shape": "T4",
   "shape_basis": "Solar electronics class table unchanged (BWF-P09)",
@@ -154,9 +260,7 @@
   }
  ],
  "variants": "none",
- "notes": [
-  "Reference evaluator planned in Phase 3 (DCD-D09); the consumer implementation sits in the Hazard repository and is not read here."
- ],
+ "notes": [],
  "title": "Wildfire × Battery storage",
  "asset": {
   "slug": "bess",
@@ -394,7 +498,7 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release same author with independent numerical methods"
  },
- "summary": "Separate PCS: piecewise linear on FSim fire intensity class at the unit; shape T4, cost T4; not drawn here. Not searched — nobody has looked for field reports yet.",
+ "summary": "Separate PCS: exact-state table, carried in the schema's piecewise-linear container on FSim fire-intensity class at the unit, exact state; shape T4, cost T4. Not searched — nobody has looked for field reports yet.",
  "versions": [
   {
    "columns": [

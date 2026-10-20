@@ -11,6 +11,7 @@
  "part": "Integrated battery enclosure",
  "pathway_id": "wildfire_thermal_attack",
  "curve_form": "piecewise_linear",
+ "form_label": "exact-state table, carried in the schema's piecewise-linear container",
  "x_axis_id": "fsim_class_state_exact_integer_only",
  "y_axis": "failure_unit_damage_ratio",
  "parameters": {
@@ -78,15 +79,19 @@
  },
  "axis": {
   "id": "FSIM_CLASS_EXACT",
-  "label": "FSim fire intensity class at the unit",
+  "label": "FSim fire-intensity class at the unit, exact state",
   "unit": "class",
   "input_field": "class_state",
-  "kind": "continuous",
+  "kind": "categorical",
   "valid_range": [
    0,
    6
   ],
-  "label_from_id": true
+  "classes": {
+   "0": "no event"
+  },
+  "dodge": true,
+  "note": "Exact states only: one mark per record at each class 0–6 (records that share a class stand side by side inside it); nothing is drawn between classes, because the evaluator rejects any other state. Class 0 is the no-event control, never a stand-in for a missing class."
  },
  "domain": [
   0,
@@ -123,14 +128,115 @@
    0.15569709837225762
   ]
  ],
- "series": [],
+ "series": [
+  {
+   "label": "enclosure · limited repair · electronics shape",
+   "kind": "categorical",
+   "points": [
+    [
+     0.0,
+     0.0
+    ],
+    [
+     1.0,
+     0.00038924274593064406
+    ],
+    [
+     2.0,
+     0.0019462137296532202
+    ],
+    [
+     3.0,
+     0.009731068648266101
+    ],
+    [
+     4.0,
+     0.03503184713375796
+    ],
+    [
+     5.0,
+     0.08757961783439491
+    ],
+    [
+     6.0,
+     0.15569709837225762
+    ]
+   ],
+   "legend_row": "enclosure · limited repair",
+   "legend_col": "electronics shape",
+   "color_slot": 4,
+   "symbol_slot": 0,
+   "variant": "limited_repair_sensitivity · electronics_ordinal"
+  }
+ ],
  "envelope": null,
  "scenario_note": null,
- "known_answers": [],
+ "known_answers": [
+  {
+   "x": 0.0,
+   "y": 0.0,
+   "test": "case 29: enclosure · limited repair · electronics shape · state 0 · $0",
+   "n": 1,
+   "series": "enclosure · limited repair · electronics shape",
+   "cost_usd": 0.0
+  },
+  {
+   "x": 1.0,
+   "y": 0.00038924274593064406,
+   "test": "case 30: enclosure · limited repair · electronics shape · state 1 · $409",
+   "n": 1,
+   "series": "enclosure · limited repair · electronics shape",
+   "cost_usd": 408.70488322717625
+  },
+  {
+   "x": 2.0,
+   "y": 0.0019462137296532202,
+   "test": "case 31: enclosure · limited repair · electronics shape · state 2 · $2,044",
+   "n": 1,
+   "series": "enclosure · limited repair · electronics shape",
+   "cost_usd": 2043.5244161358812
+  },
+  {
+   "x": 3.0,
+   "y": 0.009731068648266101,
+   "test": "case 32: enclosure · limited repair · electronics shape · state 3 · $10,218",
+   "n": 1,
+   "series": "enclosure · limited repair · electronics shape",
+   "cost_usd": 10217.622080679406
+  },
+  {
+   "x": 4.0,
+   "y": 0.03503184713375796,
+   "test": "case 33: enclosure · limited repair · electronics shape · state 4 · $36,783",
+   "n": 1,
+   "series": "enclosure · limited repair · electronics shape",
+   "cost_usd": 36783.43949044586
+  },
+  {
+   "x": 5.0,
+   "y": 0.08757961783439491,
+   "test": "case 34: enclosure · limited repair · electronics shape · state 5 · $91,959",
+   "n": 1,
+   "series": "enclosure · limited repair · electronics shape",
+   "cost_usd": 91958.59872611467
+  },
+  {
+   "x": 6.0,
+   "y": 0.15569709837225762,
+   "test": "case 35: enclosure · limited repair · electronics shape · state 6 · $163,482",
+   "n": 1,
+   "series": "enclosure · limited repair · electronics shape",
+   "cost_usd": 163481.9532908705
+  }
+ ],
  "source_points": [],
- "drawn": false,
- "no_evaluator_sentence": "Not drawn — no reference evaluator for this form in this repository (G9).",
- "evaluator": null,
+ "drawn": true,
+ "no_evaluator_sentence": null,
+ "evaluator": {
+  "module": "scripts/reference_helpers/wildfire_bess_curve_eval.py",
+  "function": "evaluate_curve_record",
+  "note": "exact lookup at the integer states 0–6; any other state is rejected (EXACT_FSIM_CLASS_STATE_REQUIRED), so nothing is drawn between states"
+ },
  "tiers": {
   "shape": "T4",
   "shape_basis": "Solar electrical class tables transferred as ordinal weights (BWF-P07)",
@@ -156,9 +262,7 @@
   }
  ],
  "variants": "consequence: approved replacement / non-cell repair / limited repair; shape: electronics or heavy-electrical (unweighted)",
- "notes": [
-  "Reference evaluator planned in Phase 3 (DCD-D09); the consumer implementation sits in the Hazard repository and is not read here."
- ],
+ "notes": [],
  "title": "Wildfire × Battery storage",
  "asset": {
   "slug": "bess",
@@ -415,7 +519,7 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release same author with independent numerical methods"
  },
- "summary": "Integrated battery enclosure: piecewise linear on FSim fire intensity class at the unit; shape T4, cost T4; not drawn here. Not searched — nobody has looked for field reports yet.",
+ "summary": "Integrated battery enclosure: exact-state table, carried in the schema's piecewise-linear container on FSim fire-intensity class at the unit, exact state; shape T4, cost T4. Not searched — nobody has looked for field reports yet.",
  "versions": [
   {
    "columns": [
