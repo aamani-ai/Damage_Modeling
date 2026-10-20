@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { ThemeProvider } from "next-themes";
 import { Nav } from "@/components/nav";
+import { RouteFocus } from "@/components/route-focus";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { manifest } from "@/lib/data";
 import "./globals.css";
@@ -41,7 +42,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               </div>
             </div>
           </header>
-          <main className="mx-auto max-w-[1440px] px-4 py-3">{children}</main>
+          <main id="main" tabIndex={-1} className="mx-auto max-w-[1440px] px-4 py-3 outline-none">{children}</main>
+          <RouteFocus />
         </ThemeProvider>
       </body>
     </html>

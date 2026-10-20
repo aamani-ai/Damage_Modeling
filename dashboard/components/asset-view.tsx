@@ -4,8 +4,8 @@
 // reports mark. "Outside the five" columns carry leads and field reports only. Lens and expanded rows live in
 // the URL; the grid is a keyboard grid.
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useRef } from "react";
+import { useRef } from "react";
+import { useUrlParam } from "@/lib/url-state";
 import { fmtPct, fmtUsdCompact } from "@/lib/format";
 import type { AssetCell, AssetView as AV, Manifest } from "@/lib/types";
 import { OccMark, TwinLead } from "./marks";
@@ -32,20 +32,12 @@ function CellMarks({ c, lens, m }: { c: AssetCell; lens: string; m: Manifest }) 
   );
 }
 
-function Inner({ v, m }: { v: AV; m: Manifest }) {
-  const sp = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
-  const lens = (LENSES as readonly string[]).includes(sp.get("lens") ?? "") ? (sp.get("lens") as string) : "all";
-  const openRow = sp.get("row");
+export function AssetViewGrid({ v, m }: { v: AV; m: Manifest }) {
+  const [lensParam, setLens] = useUrlParam("lens");
+  const [openRow, setRow] = useUrlParam("row");
+  const lens = (LENSES as readonly string[]).includes(lensParam ?? "") ? (lensParam as string) : "all";
   const grid = useRef<HTMLTableElement>(null);
-  const setParam = (key: string, val: string | null) => {
-    const p = new URLSearchParams(sp.toString());
-    if (val) p.set(key, val);
-    else p.delete(key);
-    const qs = p.toString();
-    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-  };
+  const setParam = (key: string, val: string | null) => (key === "lens" ? setLens(val) : setRow(val));
   const five = v.hazards.filter((h) => !h.outside_the_five);
   const outside = v.hazards.filter((h) => h.outside_the_five);
   const onKey = (r: number, c: number) => (e: React.KeyboardEvent<HTMLElement>) => {
@@ -53,7 +45,12 @@ function Inner({ v, m }: { v: AV; m: Manifest }) {
     const mv = d[e.key];
     if (!mv) return;
     e.preventDefault();
-    grid.current?.querySelector<HTMLElement>(`[data-rc="${r + mv[0]}-${c + mv[1]}"]`)?.focus();
+    const target = grid.current?.querySelector<HTMLElement>(`[data-rc="${r + mv[0]}-${c + mv[1]}"]`);
+    if (target) {
+      grid.current?.querySelectorAll<HTMLElement>("[data-rc]").forEach((el) => (el.tabIndex = -1));
+      target.tabIndex = 0;
+      target.focus();
+    }
   };
   const hrefFor = (h: (typeof v.hazards)[number], c: AssetCell) => (c.entry_id ? `/cells/${c.entry_id}` : h.occurrence_href);
   return (
@@ -178,10 +175,3 @@ function RowGroup({ row, r, open, cols, five, lens, m, hrefFor, onKey, toggle, h
   );
 }
 
-export function AssetViewGrid({ v, m }: { v: AV; m: Manifest }) {
-  return (
-    <Suspense fallback={<div className="h-[320px]" />}>
-      <Inner v={v} m={m} />
-    </Suspense>
-  );
-}

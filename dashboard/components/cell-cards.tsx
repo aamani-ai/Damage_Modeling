@@ -23,14 +23,24 @@ export function AnswerCard({ cell, curves, m, blob }: { cell: Cell; curves: Curv
           {cell.no_evaluator ? (
             <div>
               <EmptyState>{cell.no_evaluator_sentence}</EmptyState>
-              <ul className="mt-2 space-y-0.5 text-[11px]">
-                {curves.map((c) => (
-                  <li key={c.curve_id} className="flex flex-wrap items-baseline gap-2">
-                    <Link href={`/cells/${cell.entry_id}/curves/${c.curve_id}`} className="font-mono text-[10.5px] text-accent hover:underline">{c.curve_id}</Link>
-                    <span className="text-muted-foreground">{c.part} · {c.curve_form?.replace(/_/g, " ")} on {c.axis.label}{c.axis.unit ? ` (${c.axis.unit})` : ""}</span>
-                  </li>
-                ))}
-              </ul>
+              <table className="mt-2 w-full text-[11px]">
+                <thead>
+                  <tr className="text-[10px] uppercase tracking-wide text-muted-foreground">
+                    <th className="py-1 pr-2 text-left font-medium">Curve · listed, not drawn</th>
+                    <th className="py-1 pr-2 text-left font-medium">Part</th>
+                    <th className="py-1 text-left font-medium">Form · axis</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {curves.map((c) => (
+                    <tr key={c.curve_id} className="border-t border-border/60 align-top">
+                      <td className="py-1 pr-2"><Link href={`/cells/${cell.entry_id}/curves/${c.curve_id}`} className="font-mono text-[10.5px] text-accent hover:underline">{c.curve_id}</Link></td>
+                      <td className="py-1 pr-2">{c.part}</td>
+                      <td className="py-1 text-muted-foreground">{c.curve_form?.replace(/_/g, " ")} · {c.axis.label}{c.axis.unit ? ` (${c.axis.unit})` : ""}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           ) : a.axis_groups.length ? (
             a.axis_groups.map((g) => (

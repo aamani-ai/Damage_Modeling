@@ -2,23 +2,14 @@
 
 // The dossier's plot header owns its own display controls (linear | log x), in the URL (?x=log) — display changes
 // resolution, not meaning (P10). Lives with its effect (P8).
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { useUrlParam } from "@/lib/url-state";
 import type { Curve } from "@/lib/types";
 import { CurvePlot } from "./curve-plot";
 
-function Inner({ curve }: { curve: Curve }) {
-  const sp = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
-  const log = sp.get("x") === "log" && curve.axis.kind !== "categorical";
-  const set = (v: "linear" | "log") => {
-    const p = new URLSearchParams(sp.toString());
-    if (v === "log") p.set("x", "log");
-    else p.delete("x");
-    const qs = p.toString();
-    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-  };
+export function DossierPlot({ curve }: { curve: Curve }) {
+  const [x, setX] = useUrlParam("x");
+  const log = x === "log" && curve.axis.kind !== "categorical";
+  const set = (v: "linear" | "log") => setX(v === "log" ? "log" : null);
   return (
     <div>
       <div className="flex items-center gap-2 px-3 text-[10.5px] text-muted-foreground">
@@ -37,10 +28,3 @@ function Inner({ curve }: { curve: Curve }) {
   );
 }
 
-export function DossierPlot({ curve }: { curve: Curve }) {
-  return (
-    <Suspense fallback={<div className="h-[380px]" />}>
-      <Inner curve={curve} />
-    </Suspense>
-  );
-}

@@ -2,8 +2,8 @@
 
 // The derivation trail (07 §3): ten stations in one row, each a button that scrolls to its card and opens the
 // files behind it. The mark is the presence state; colour is not used. State lives in the URL (?station=).
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useCallback } from "react";
+import { useCallback, useRef } from "react";
+import { useUrlParam } from "@/lib/url-state";
 import type { Chain, Station } from "@/lib/types";
 import { shortSha } from "@/lib/format";
 import { Drawer } from "./drawer";
@@ -15,23 +15,16 @@ const CARD_FOR: Record<string, string> = {
   artifact: "answer", capability: "proof", proof: "proof", field_review: "field",
 };
 
-function TrailInner({ chain, blobBase }: { chain: Chain; blobBase: string }) {
+export function Trail({ chain, blobBase }: { chain: Chain; blobBase: string }) {
   const blob = (p: string) => `${blobBase}/${p.replace(/^\/+/, "")}`;
-  const sp = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
-  const selected = sp.get("station");
-  const setStation = useCallback(
-    (id: string | null) => {
-      const p = new URLSearchParams(sp.toString());
-      if (id) p.set("station", id);
-      else p.delete("station");
-      const qs = p.toString();
-      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-    },
-    [sp, router, pathname],
-  );
+  const [selected, setStation] = useUrlParam("station");
   const open = chain.stations.find((s) => s.id === selected) ?? null;
+  const buttons = useRef<(HTMLButtonElement | null)[]>([]);
+  const close = useCallback(() => {
+    const idx = chain.stations.findIndex((s) => s.id === selected);
+    setStation(null);
+    requestAnimationFrame(() => buttons.current[idx]?.focus()); // focus returns to the station that opened the drawer
+  }, [chain.stations, selected, setStation]);
   const onKey = (e: React.KeyboardEvent<HTMLButtonElement>, i: number) => {
     const n = chain.stations.length;
     const next = e.key === "ArrowRight" ? i + 1 : e.key === "ArrowLeft" ? i - 1 : e.key === "Home" ? 0 : e.key === "End" ? n - 1 : null;
@@ -46,6 +39,9 @@ function TrailInner({ chain, blobBase }: { chain: Chain; blobBase: string }) {
         {chain.stations.map((s, i) => (
           <button
             key={s.id}
+            ref={(el) => {
+              buttons.current[i] = el;
+            }}
             type="button"
             onKeyDown={(e) => onKey(e, i)}
             onClick={() => {
@@ -64,7 +60,7 @@ function TrailInner({ chain, blobBase }: { chain: Chain; blobBase: string }) {
           </button>
         ))}
       </div>
-      <Drawer open={!!open} title={open ? `${open.full_label ?? open.label} · station ${chain.stations.indexOf(open) + 1} · gate ${open.gate}` : ""} onClose={() => setStation(null)}>
+      <Drawer open={!!open} title={open ? `${open.full_label ?? open.label} · station ${chain.stations.indexOf(open) + 1} · gate ${open.gate}` : ""} onClose={close}>
         {open ? <StationDetail s={open} chain={chain} blob={blob} /> : null}
       </Drawer>
     </>
@@ -117,10 +113,3 @@ function StationDetail({ s, chain, blob }: { s: Station; chain: Chain; blob: (p:
   );
 }
 
-export function Trail(props: { chain: Chain; blobBase: string }) {
-  return (
-    <Suspense fallback={<div className="mt-2 min-h-[56px] rounded-lg border border-border bg-card" />}>
-      <TrailInner {...props} />
-    </Suspense>
-  );
-}

@@ -45,12 +45,13 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
             {c.binding.transfer_tier ? ` · transfer tier ${c.binding.transfer_tier}` : ""}. {c.binding.transfer_rationale ?? ""}
           </EmptyState>
         ) : null}
-        <PartsCard cell={c} />
+        {c.kind !== "gap" ? <PartsCard cell={c} /> : null}
         {c.kind !== "gap" ? <EvidenceCard cell={c} cites={cites} blob={blob} m={m} /> : null}
         {c.kind !== "gap" ? <AuditCard cell={c} blob={blob} /> : null}
         <ProofCard cell={c} blob={blob} />
-        <SeamsCard cell={c} />
+        {c.kind !== "gap" ? <SeamsCard cell={c} /> : null}
         <FieldReviewCard cell={c} blob={blob} m={m} />
+        {Object.values(c.files).some(Boolean) || c.folder_files.length ? (
         <p className="text-[10.5px] text-muted-foreground">
           files at the build commit ·{" "}
           {Object.entries(c.files)
@@ -70,6 +71,7 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
           ) : null}
           {c.sampling_notes.length ? <> · build notes: {c.sampling_notes.join(" ")}</> : null}
         </p>
+        ) : null}
       </div>
     </div>
   );

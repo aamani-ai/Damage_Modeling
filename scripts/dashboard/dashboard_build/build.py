@@ -267,7 +267,7 @@ def build(write: bool = True) -> dict[str, Any]:
                           "shape": r.get("shape"), "shape_basis": r.get("shape_basis"), "cost": r.get("cost"), "cost_basis": r.get("cost_basis"),
                           "notes": r.get("notes") or [], "occurrence": {"mark": occ_row["mark"], "state": occ_row["state"], "sentence": occ_row["sentence"]} if occ_row else None,
                           "drawn": any(c["drawn"] for c in sampled["curves"] if c["part"] == r["part"])})
-        withheld_units = [{"failure_unit_id": f.get("id"), "subsystem": f.get("subsystem"), "reasons": f.get("withheld_reason_codes") or [], "sentence": SENTENCES["withheld"]["page"].format(condition=humanise(", ".join(f.get("withheld_reason_codes") or ["withheld"])))}
+        withheld_units = [{"failure_unit_id": f.get("id"), "subsystem": f.get("subsystem"), "reasons": f.get("withheld_reason_codes") or [], "sentence": SENTENCES["withheld"]["page"].format(condition="; ".join(humanise(r).lower() for r in (f.get("withheld_reason_codes") or ["no reason code in the artifact"])))}
                           for f in a.get("failure_units") or [] if str(f.get("treatment", "")).startswith("withheld")]
         title = f"{e.data['hazard']} × {e.data['asset']}"
         noun = next((a.get("noun") for a in sl["assets"] if a["slug"] == aslug), e.data["asset"])

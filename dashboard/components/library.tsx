@@ -2,8 +2,8 @@
 
 // The library (03 §2.1, 06 §3.1): asset × hazard tiles, one lens at a time in the URL, a keyboard grid.
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useCallback, useRef } from "react";
+import { useRef } from "react";
+import { useUrlParam } from "@/lib/url-state";
 import { fmtPct } from "@/lib/format";
 import type { Manifest, Tile } from "@/lib/types";
 import { ExistsMark, OccMark, TierText } from "./marks";
@@ -17,7 +17,7 @@ function tierShade(t: Tile): string {
   return weaker === 0 ? "" : weaker <= 2 ? "bg-muted/40" : weaker === 3 ? "bg-muted" : "bg-muted shadow-[inset_0_0_0_9999px_color-mix(in_srgb,var(--muted-foreground)_14%,transparent)]";
 }
 
-function TileBox({ t, lens, m, tabIndex, onKey }: { t: Tile; lens: string; m: Manifest; tabIndex: number; onKey: (e: React.KeyboardEvent<HTMLAnchorElement>) => void }) {
+function TileBox({ t, lens, m, tabIndex, onKey, rc }: { t: Tile; lens: string; m: Manifest; tabIndex: number; onKey: (e: React.KeyboardEvent<HTMLAnchorElement>) => void; rc: string }) {
   const gap = t.status === "gap";
   const shade = lens === "evidence" && !gap ? tierShade(t) : lens === "review" && t.review.entry_read_kind === "agent" ? "bg-muted/60" : "";
   const second =
@@ -28,6 +28,7 @@ function TileBox({ t, lens, m, tabIndex, onKey }: { t: Tile; lens: string; m: Ma
   return (
     <Link
       href={t.href}
+      data-rc={rc}
       tabIndex={tabIndex}
       onKeyDown={onKey}
       aria-label={t.aria_label}
@@ -48,21 +49,10 @@ function TileBox({ t, lens, m, tabIndex, onKey }: { t: Tile; lens: string; m: Ma
   );
 }
 
-function LibraryInner({ m }: { m: Manifest }) {
-  const sp = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
-  const lens = m.lenses.includes(sp.get("lens") ?? "") ? (sp.get("lens") as string) : "status";
-  const setLens = useCallback(
-    (l: string) => {
-      const p = new URLSearchParams(sp.toString());
-      if (l === "status") p.delete("lens");
-      else p.set("lens", l);
-      const qs = p.toString();
-      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-    },
-    [sp, router, pathname],
-  );
+export function Library({ m }: { m: Manifest }) {
+  const [lensParam, setLensParam] = useUrlParam("lens");
+  const lens = m.lenses.includes(lensParam ?? "") ? (lensParam as string) : "status";
+  const setLens = (l: string) => setLensParam(l === "status" ? null : l);
   const hazards = m.hazards.filter((h) => !h.outside_the_five);
   const outside = m.hazards.filter((h) => h.outside_the_five);
   const grid = useRef<HTMLDivElement>(null);
@@ -74,7 +64,11 @@ function LibraryInner({ m }: { m: Manifest }) {
     if (!mv) return;
     e.preventDefault();
     const target = grid.current?.querySelector<HTMLElement>(`[data-rc="${r + mv[0]}-${c + mv[1]}"]`);
-    target?.focus();
+    if (target) {
+      grid.current?.querySelectorAll<HTMLElement>("[data-rc]").forEach((el) => (el.tabIndex = -1));
+      target.tabIndex = 0;
+      target.focus();
+    }
   };
   return (
     <div>
@@ -113,11 +107,9 @@ function LibraryInner({ m }: { m: Manifest }) {
               {hazards.map((h, c) => {
                 const t = byKey.get(`${a.slug}|${h.slug}`);
                 return (
-                  <div key={h.slug} role="gridcell" data-rc={`${r}-${c}`} className="contents">
+                  <div key={h.slug} role="gridcell" className="contents">
                     {t ? (
-                      <span data-rc={`${r}-${c}`} className="contents">
-                        <TileBox t={t} lens={lens} m={m} tabIndex={r === 0 && c === 0 ? 0 : -1} onKey={onKey(r, c)} />
-                      </span>
+                      <TileBox t={t} lens={lens} m={m} rc={`${r}-${c}`} tabIndex={r === 0 && c === 0 ? 0 : -1} onKey={onKey(r, c)} />
                     ) : (
                       <span className="flex h-[56px] items-center justify-center rounded-md border border-dashed border-border/60 font-mono text-[10px] text-muted-foreground">—</span>
                     )}
@@ -137,10 +129,3 @@ function LibraryInner({ m }: { m: Manifest }) {
   );
 }
 
-export function Library({ m }: { m: Manifest }) {
-  return (
-    <Suspense fallback={<div className="h-[400px]" />}>
-      <LibraryInner m={m} />
-    </Suspense>
-  );
-}
