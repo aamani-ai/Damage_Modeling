@@ -245,7 +245,8 @@ def build(write: bool = True) -> dict[str, Any]:
         if occ:
             reg = occ["register"]
             for key, b in reg.get("buckets", {}).items():
-                buckets_block.append({"bucket": key, **resolve_state(b, reg.get("surfaces", []), reg.get("last_searched"))})
+                label = next((vb["label"] for vb in sl["value_buckets"].get(aslug, {}).get("buckets", []) if vb["key"] == key), key)
+                buckets_block.append({"bucket": key, "label": label, **resolve_state(b, reg.get("surfaces", []), reg.get("last_searched"))})
         occ_states = {b["state"] for b in buckets_block}
         occ_mark = SENTENCES["not_searched"]["mark"] if not occ_states or occ_states == {"not_searched"} else ("✓" if "found" in occ_states else ("~" if "adjacent" in occ_states else "∅"))
         if not occ:

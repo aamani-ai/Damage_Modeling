@@ -87,7 +87,7 @@ export interface Part {
 }
 
 export interface OccurrenceBucket {
-  bucket: string; state: string; mark: string; sentence: string; reports: Record<string, unknown>[];
+  bucket: string; label?: string; state: string; mark: string; sentence: string; reports: Record<string, unknown>[];
   twin_lead: { level: string | null; nodes: { node: string; name: string; level: number; why: string }[] } | null;
 }
 

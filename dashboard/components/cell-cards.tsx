@@ -320,6 +320,11 @@ export function AuditCard({ cell, blob }: { cell: Cell; blob: (p: string) => str
   );
 }
 
+// A capability value exactly as the artifact declares it (underscores read as spaces), wrapped, never cut.
+function CapValue({ v }: { v: unknown }) {
+  return <span className="font-mono text-[10px] [overflow-wrap:anywhere]">{v == null ? "—" : String(v).replace(/_/g, " ")}</span>;
+}
+
 export function ProofCard({ cell, blob }: { cell: Cell; blob: (p: string) => string }) {
   const p = cell.proof;
   if (!p) return null;
@@ -327,7 +332,7 @@ export function ProofCard({ cell, blob }: { cell: Cell; blob: (p: string) => str
   const cap = p.capability;
   const flags = (cap.limitation_flags ?? []) as string[];
   return (
-    <CollapsibleCard id="proof" eyebrow="The proof" station={ST(9, "proof", "E") + " · station 8 capability · gate D"} summary={<span>{k.declared ? (k.run ? `${k.reproduced} of ${k.run} known answers reproduced` : `${k.declared} known answers, not run`) : "no known answers declared"}{k.not_run.length ? ` · ${k.not_run.reduce((s, n) => s + n.n, 0)} not run` : ""} · {p.outside_checks.length ? `${p.outside_checks.length} outside check${p.outside_checks.length === 1 ? "" : "s"}` : "no outside check yet"}</span>}>
+    <CollapsibleCard id="proof" eyebrow="The proof" station={ST(9, "proof", "E") + " · station 8 capability · gate D"} summary={<span>{k.declared ? (k.run ? `${k.reproduced} of ${k.run} known answers reproduced` : `${k.declared} known answers, not run`) : "no known answers declared"}{k.run && k.not_run.length ? ` · ${k.not_run.reduce((s, n) => s + n.n, 0)} not run` : ""} · {p.outside_checks.length ? `${p.outside_checks.length} outside check${p.outside_checks.length === 1 ? "" : "s"}` : "no outside check yet"}</span>}>
       <div className="grid gap-3 px-3 pb-3 text-[11px] md:grid-cols-3">
         <div>
           <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Known answers</div>
@@ -355,10 +360,11 @@ export function ProofCard({ cell, blob }: { cell: Cell; blob: (p: string) => str
         </div>
         <div>
           <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Capability <span className="font-normal normal-case tracking-normal">(what a consumer may compute)</span></div>
-          <Kv label="failure-unit DR" value={<span className="font-mono">{String(cap.failure_unit_scalar_dr ?? "—").replace(/_/g, " ")}</span>} />
-          <Kv label="scenario loss" value={<span className="font-mono">{String(cap.scenario_loss_given_value_basis ?? "—").replace(/_/g, " ").slice(0, 40)}</span>} />
-          <Kv label="intrinsic spread" value={<span className="font-mono">{String(cap.curve_intrinsic_spread ?? "—").replace(/_/g, " ")}</span>} />
-          <Kv label="EAL · PML" value={<span className="font-mono">{String(cap.eal ?? "—").replace(/_/g, " ").slice(0, 28)} · {String(cap.pml ?? "—").replace(/_/g, " ").slice(0, 20)}</span>} />
+          <Kv label="failure-unit DR" value={<CapValue v={cap.failure_unit_scalar_dr} />} />
+          <Kv label="scenario loss" value={<CapValue v={cap.scenario_loss_given_value_basis} />} />
+          <Kv label="intrinsic spread" value={<CapValue v={cap.curve_intrinsic_spread} />} />
+          <Kv label="EAL" value={<CapValue v={cap.eal} />} />
+          <Kv label="PML" value={<CapValue v={cap.pml} />} />
           <Kv label="emit modes" value={<span className="font-mono">{((cap.populated_emit_modes as string[] | null) ?? []).join(", ") || "—"}</span>} />
           <Kv label="limitation flags" value={<span>{flags.length} <InfoHint label="Limitation flags" align="right"><ul className="list-disc pl-4 font-mono text-[10px]">{flags.map((f) => <li key={f}>{f}</li>)}</ul></InfoHint></span>} />
           <p className="mt-1 text-[10px] text-muted-foreground">annual metrics are the consumer&apos;s (Hazard); nothing here is an EAL or PML.</p>
@@ -406,7 +412,7 @@ export function FieldReviewCard({ cell, blob, m }: { cell: Cell; blob: (p: strin
             <>
               {f.buckets.map((b) => (
                 <div key={b.bucket} className="flex items-start gap-2 border-t border-border/60 py-1">
-                  <span className="w-28 shrink-0 font-mono text-[10px] text-muted-foreground">{b.bucket}</span>
+                  <span className="w-32 shrink-0 leading-tight">{b.label ?? b.bucket}{b.label ? <span className="block font-mono text-[9.5px] text-muted-foreground">{b.bucket}</span> : null}</span>
                   <span className="font-mono">{b.mark}</span>
                   <span>{b.sentence}{b.twin_lead?.level ? <span className="block text-[10px] text-muted-foreground">twin lead {b.twin_lead.level}: {b.twin_lead.nodes.map((n) => `${n.name} — ${n.why}`).join("; ")}</span> : null}</span>
                 </div>
