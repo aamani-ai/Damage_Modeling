@@ -1,7 +1,7 @@
 <!--
 author: owner-directed (JL) · agent-drafted
 created: 2026-10-19
-updated: 2026-10-19
+updated: 2026-10-20
 status: draft
 -->
 
@@ -15,6 +15,14 @@ Runnable companions for the noncanonical `convective_wind_real_estate` damage-cu
 |---|---|
 | [`00_curve_curation_walkthrough.ipynb`](00_curve_curation_walkthrough.ipynb) | Start here. How the curves are built: evidence register, source tables, the derivation (recomputed and compared with the artifact), the NRI check, sensitivity, decisions, parameter tiers and open items. |
 | [`01_runtime_curve_walkthrough.ipynb`](01_runtime_curve_walkthrough.ipynb) | Reads the proposed artifact and calls the curves through the cell's reference evaluator: request contract, value grids, fail-closed cases and an illustrative dollar example. |
+
+## Execution state
+
+> **Executing as of 2026-10-20.** Both notebooks run headlessly top-to-bottom
+> (`.venv/bin/jupyter nbconvert --to notebook --execute`, from the repository root) against the proposed
+> artifact `convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json` named explicitly — a noncanonical proposal with no
+> current runtime, so there is no index pin or SHA for the loader to verify. Re-measure after any change to the
+> proposal, the cell registers or the reference evaluator.
 
 ## Source artifacts
 

@@ -103,7 +103,7 @@ are not curves).
 | `dashboard/` | The internal damage-curve dashboard (Next.js static app, local; V0 = battery storage end to end). Reads `dashboard/data/` only and never writes `docs/`. Plan: [`docs/plans/damage_curve_dashboard/`](docs/plans/damage_curve_dashboard/README.md). [README](dashboard/README.md). |
 | `src/damage_modeling/` | The durable publisher package (`publishing/cli.py`, `publishing/publisher.py`; standard 23). Not a curve API; the validators guard that no cell code enters it. |
 | `data/` | Curve-record artifacts + manifests (large/binary gitignored). [README](data/README.md). |
-| `notebooks/` | Companion notebooks per cell — `<hazard>/<asset>/00_curve_curation_walkthrough` + `01_runtime_curve_walkthrough`, reading the pinned artifact through the artifact index, never authoring one. **2 of 10 cells covered; both existing pairs currently fail (their loader targets the removed `docs/damage_curves/` tree).** Repair + the other eight cells: [`docs/plans/cell_notebook_coverage/`](docs/plans/cell_notebook_coverage/README.md). [README](notebooks/README.md). |
+| `notebooks/` | Companion notebooks per cell — `<hazard>/<asset>/00_curve_curation_walkthrough` + `01_runtime_curve_walkthrough`, reading the pinned artifact through the artifact index, never authoring one. **7 of 15 cells have a pair (measured 2026-10-20): the five Real Estate proposal pairs execute; the two solar pairs still fail in their first code cell (their loader targets the removed `docs/damage_curves/` tree).** Repair + the uncovered cells: [`docs/plans/cell_notebook_coverage/`](docs/plans/cell_notebook_coverage/README.md). [README](notebooks/README.md). |
 | `.github/workflows/` | **Does not exist yet.** There is no CI; run the validators by hand (`.venv/bin/python scripts/reference_helpers/validate_*.py`). Observed in [`docs/extra/discussion/2026-10-20_repo_observations.md`](docs/extra/discussion/2026-10-20_repo_observations.md). |
 
 ### Cross-project symlinks (gitignored, local-only — machine-specific absolute paths, never commit)
@@ -174,6 +174,10 @@ the work GitHub account. `Divi-patel/Damage_Modeling` is a personal GitHub fork 
 workaround while the work org had access issues; it is **no longer a remote of this checkout** (dropped
 2026-10-19), the work account can only read it, and it must not be used to sync. Collaborators' work (for
 example Junga's `cell/*` branches) lands on `origin` branches.
+
+Every branch — who made it, when, how it stands against `main`, what should happen to it — is in
+[`docs/extra/branch_register.md`](docs/extra/branch_register.md), with the branch policy; refresh it with
+`python3 scripts/reference_helpers/branch_register.py --fetch` in the same commit as any branch action.
 
 Do **not** assume the fork is ahead. Skill and agent runs write straight into this working tree, so the local
 checkout is frequently the newer side with the work merely uncommitted. Before syncing, run:
