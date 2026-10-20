@@ -16,7 +16,7 @@
    *not searched*, the Digital Twin's leads beside them; the five battery catalogue entries point at theirs.
 5. **The look review** is in [`evidence/3f9d516/REVIEW.md`](../../../plans/damage_curve_dashboard/evidence/3f9d516/REVIEW.md):
    checks 1–6 and 8 pass, 30 of 30 traced numbers match their files, the speed budget holds with a wide margin
-   even at a 4× slower CPU. The cold read (check 7) needs a named person. The owner's review (check 9) is open.
+   even at a 4× slower CPU. The cold read (check 7) needs a named person. The owner accepted V0 on the running app on 2026-10-20 (check 9, `DCD-D17`).
 6. **The two battery cells without an evaluator** show the fixed *Not drawn* sentence. PR #4 put their
    evaluators on `main` during this build. This branch does not merge `main`; instead the build now stops
    once an evaluator exists for a cell it lists as having none, so drawing those cells is forced at the merge.
@@ -30,9 +30,9 @@
 
 ## Open for the owner
 
-- Accept or reject the V0 screenshots and the running app (check 9). Three copy questions are in `REVIEW.md`
-  §5 (Title Case for two page titles, the *not drawn* tile tag, the ┈ and – glyphs at 10 px) and one keyboard
-  question in §4 (a visible mark where focus lands after a page change).
+- **V0 accepted on the running app, 2026-10-20** (`DCD-D17`), after the owner asked for a live review surface
+  and the review page `/v0` was added. Still open on that page: two page titles' case, the *not drawn* tile
+  tag, the ┈ and – glyphs at 10 px, a visible focus landing mark, and the cold reader. Merging PR #5 is pending.
 - Name a cold reader for check 7.
 - The 22 unresolved source IDs belong to the owners of `tropical_cyclone_wind_wind`, `wildfire_solar` and
   `tropical_cyclone_wind_solar`.
@@ -47,7 +47,7 @@
    record × resistance scenario on pressure ratio 0–2, never an average; wildfire: seven exact states per record,
    no line between them; withheld units stay withheld), reproduce their 20 and 84 known answers, and
    recapture those two pages for the look review.
-2. Act on the owner's findings from check 9 (Phase 2), then tick the plan's gate and merge.
+2. Settle the review page's open questions 2–6 and the cold read with the owner, then merge (Phase 2's gate).
 3. Phase 3: the remaining live cells, proposals and bindings sampled and reviewed per slice; the review block
    in the catalogue (G7); the chain lens and the gate view.
 

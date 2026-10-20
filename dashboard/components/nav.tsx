@@ -24,6 +24,10 @@ export function Nav({ assets }: { assets: (Slug & { href?: string })[] }) {
           </Link>
         );
       })}
+      <span aria-hidden className="mx-1 h-4 w-px bg-border" />
+      <Link href="/v0" aria-current={pathname === "/v0" ? "page" : undefined} className={tab(pathname === "/v0")} title="Review the V0 slice on the live screens">
+        Review V0
+      </Link>
     </nav>
   );
 }

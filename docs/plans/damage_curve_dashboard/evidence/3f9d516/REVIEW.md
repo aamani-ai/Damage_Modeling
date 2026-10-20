@@ -2,16 +2,17 @@
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
 updated: 2026-10-20
-status: proposed
+status: settled
 scope: The look review (discussion 06 §4, gate G10) of the dashboard's V0 battery-storage slice at receipt commit 3f9d516 — the screenshot set, the greyscale, screenshot-escape, keyboard, copy and theme checks, the measured speed, the number spot-check, what was fixed during the review and what is left for the owner — for the owner's acceptance (check 9).
 -->
 
 # V0 look review — battery storage slice at `3f9d516`
 
 This folder is the evidence for the look review of [`06` §4](../../../../extra/discussion/damage_curve_dashboard/06_look_and_usability.md)
-for the first slice of the [dashboard plan](../../README.md). Seven of the nine checks pass. The cold read
-(check 7) has not been run: it needs a named person who has not read node `06`. The owner's review (check 9) is
-open, and nothing merges to `main` before it ([`DCD-D10`](../../decisions.md#dcd-d10--look-sign-off-per-slice)).
+for the first slice of the [dashboard plan](../../README.md). Eight of the nine checks pass: the owner accepted V0 on the
+running app on 2026-10-20 ([`DCD-D17`](../../decisions.md#dcd-d17--v0-accepted-on-the-running-app)). The cold read (check 7) has not been run: it needs a
+named person who has not read node `06`. Under [`DCD-D10`](../../decisions.md#dcd-d10--look-sign-off-per-slice) the slice is done when it runs or when the
+owner moves it to V1.
 
 | # | Check | Verdict | Evidence here |
 |---|---|---|---|
@@ -23,7 +24,7 @@ open, and nothing merges to `main` before it ([`DCD-D10`](../../decisions.md#dcd
 | 6 | Themes | **pass** as far as the builder can judge | every screen in both themes; `10_*`, `14_*` |
 | 7 | Cold read | **not run** | needs a named reader |
 | 8 | Speed | **pass** | `speed.json` |
-| 9 | Owner review | **open** | this folder and the running app |
+| 9 | Owner review | **accepted** 2026-10-20 | the running app through `/v0` and this folder |
 
 Every displayed number traced in the plan's spot-check (*"spot-check 20 per slice"*) matches its file: **30 of
 30**, in `spot_check_numbers.txt`, produced by `spot_check_numbers.py` with its own code, not the build's.
@@ -187,7 +188,10 @@ unreliable while the pane sat in the background; these come from headless Chrome
 
 ## 9 · Owner review
 
-Open. Divy accepts or rejects these screenshots and the running app; findings become plan rows (Phase 2).
+**Accepted, 2026-10-20.** The owner asked to judge the running app rather than screenshots; `/v0` (the *Review V0*
+tab, added after these captures) walks through every V0 screen live, shows these checks and lists six
+decisions. The owner then wrote: *"I reviewed the V0 screenshots in docs/plans/damage_curve_dashboard/evidence/3f9d516 and the running app, and I accept them (look review check 9)."* The review page's questions 2–6 are not answered by that and stay
+open.
 
 ## Fixed during this review
 
