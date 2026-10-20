@@ -30,8 +30,8 @@
    **`scripts/reference_helpers/README.md`**: two rows for the new scripts at the top of the table.
 7. **Verified on macOS from a fresh `python3.12` venv built from the final `requirements.txt`** (before the
    merge: 19 tests, 28 · 0 · 6, 811 files) and again on the merged tree (table below); every exit code 0.
-8. **CI is red on Ubuntu, for one exactly measured reason.** On the PR's runs, tests pass and
-   `validate_all.py` gives 26 passed · 2 failed · 6 skipped: `validate_tropical_cyclone_wind_solar_v2_1_proposal.py`
+8. **CI was red on Ubuntu for one exactly measured reason.** On the PR's first runs, tests passed and
+   `validate_all.py` gave 26 passed · 2 failed · 6 skipped: `validate_tropical_cyclone_wind_solar_v2_1_proposal.py`
    and `…_v2_1_release.py` both stop at `TCWS21-FIXED-CENTRAL`. Both compare the v2.1 evaluator's **whole
    output** with `==` against known answers recorded on macOS. The diagnostic run
    ([39428144610](https://github.com/aamani-ai/Damage_Modeling/actions/runs/39428144610), output under
@@ -39,12 +39,13 @@
    differ — 314 float leaves, 1–32 ulp, largest relative difference 6.6 × 10⁻¹⁵, no string, key or
    structure difference — and only `TCWS21-FIXED-ZERO`, the one request that returns before the lognormal
    fragility (`math.log`, `math.erfc`), matches. The macOS runner reproduces all ten exactly.
-9. **That comparison rule is the owner's call; nothing here changes it** (the brief: never change what a
-   validator checks). Options: (a) floats compared with `math.isclose` in the two validators, everything
-   else exact — my recommendation; (b) the evaluator rounds emitted floats, which changes the release's
-   emitted digits and so its fixtures and pins; (c) macOS runners, which pass but hide what a Linux consumer
-   computes.
-10. Untouched on purpose: every validator's and evaluator's logic; the dashboard session's paths
+9. **Fixed by option (a)** (`8ab3dfa`, D19), on the direction of the Dashboard session that started this one,
+   relaying the owner: both v2.1 validators' `validate_kats` now compare through `_kat_equal` — float leaves
+   with `math.isclose(rel_tol=1e-9, abs_tol=1e-12)`, keys, list lengths, ints, strings, bools and `None`
+   exactly. Nothing else in either validator, and no artifact, fixture or evaluator byte, changed. Not taken:
+   (b) rounding in the evaluator (changes released digits and pins), (c) macOS runners (hide what Linux
+   computes). Recorded as item 17 of the observations node.
+10. Untouched on purpose: every other validator, every evaluator, artifact and fixture; the dashboard session's paths
     (`dashboard/`, `scripts/dashboard/`, `docs/plans/damage_curve_dashboard/evidence/`,
     `docs/evidence/occurrence/`, the catalogue README/builder/validator); the notebooks (not in CI).
 
@@ -60,7 +61,9 @@ Created: `.github/workflows/validate.yml` · `scripts/reference_helpers/validate
 `scripts/reference_helpers/check_links.py` · this folder, with `evidence/2026-10-20_kat_platform_diff.py`
 (read-only) and its Ubuntu and macOS outputs.
 Modified: `requirements.txt` · `AGENTS.md` (one row) · `scripts/reference_helpers/README.md` (two rows) ·
-`docs/extra/tasks_history/README.md` (index row). Merged `main` at `ed9a664` (PR #4, the observations
+`docs/extra/tasks_history/README.md` (index row) · `scripts/reference_helpers/validate_tropical_cyclone_wind_solar_v2_1_{proposal,release}.py`
+(`_kat_equal` only) · `docs/extra/discussion/2026-10-20_repo_observations.md` (item 17, exit count) and its
+ledger row in `docs/extra/discussion/README.md`. Merged `main` at `ed9a664` (PR #4, the observations
 update, the branch register) into the branch.
 
 ## Repro / verify current state
@@ -79,20 +82,19 @@ python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 - Branch `claude/keen-sanderson-23b1d5` on `origin` (`aamani-ai/Damage_Modeling`);
   [PR #3](https://github.com/aamani-ai/Damage_Modeling/pull/3), up to date with `main`, Auto-fix on
-  (2026-10-20, owner). **Not merged** — the owner reviews and merges. Its `validate` check stays red on
-  Ubuntu until the comparison rule for the two v2.1 validators is decided.
+  (2026-10-20, owner). **Not merged** — the owner reviews and merges. The Ubuntu run on its final commit,
+  with each step's result, is linked from the PR description (not from this folder, so recording it does
+  not trigger another run).
 - The temporary branch `claude/ci-kat-diagnostic` was deleted after its run; the run and its logs remain in
   the Actions history as evidence.
 
 ## Next action
 
-1. Owner: rule on the v2.1 known-answer comparison (bullet 9). With (a) the change is two `validate_kats`
-   functions in `scripts/reference_helpers/validate_tropical_cyclone_wind_solar_v2_1_{proposal,release}.py`;
-   the measured headroom is 6.6 × 10⁻¹⁵ against any tolerance chosen.
-2. Owner: review and merge the PR; optionally require the `validate` check in branch protection for `main`.
-3. If the substation bindings should run on CI too, add a second checkout of the private
+1. Owner: review the PR, including the tolerance in the two v2.1 validators (bullet 9), and merge it;
+   optionally require the `validate` check in branch protection for `main`.
+2. If the substation bindings should run on CI too, add a second checkout of the private
    `aamani-ai/Hazard_Modeling` beside the repository (`path: ../Hazard_modeling`, a token with read access);
    the five skips then become runs with no change to the validators. The flood × wind v0.1 scaffold's
    `outputs/` dependency is a validator design question, not a CI one.
-4. Observation item 12: decide between `requirements.txt` and `pyproject.toml` as the one dependency file
+3. Observation item 12: decide between `requirements.txt` and `pyproject.toml` as the one dependency file
    and say so in `AGENTS.md`; the workflow then installs from that file.

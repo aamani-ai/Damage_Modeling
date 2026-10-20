@@ -36,6 +36,13 @@
     observations node with items 13–16; the branch register). The app's sync tool refused the SSH alias;
     merged by hand, two conflicts (D17). Merged tree: 166 tests pass, `validate_all.py` 30 / 0 / 6 of 36,
     `check_links.py` 826 files, 0 broken.
+13. CI on the merged tree (run `39430519512`, 88 s): 166 tests pass on Linux, PR #4's validators pass;
+    `validate_all.py` 28 / 2 / 6 — the same two v2.1 failures.
+14. On the Dashboard session's direction (D19): `_kat_equal` in both v2.1 validators. Locally both pass;
+    ten probes per validator behave as intended (the macOS output, every float moved 32 ulp or 1e-12
+    relative: accepted; every float moved 1e-6 relative, a changed string or int, a key added or
+    removed, a list shortened, a float replaced by `None`: rejected). Committed and pushed (`8ab3dfa`).
+15. Item 17 appended to the observations node, its exit condition and ledger row recounted (`9176873`).
 
 ## Findings worth keeping
 
