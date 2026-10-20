@@ -1,9 +1,9 @@
 <!--
-author: Divi-patel (2026-06-25) · revision 2026-08-26 owner-directed (Divy) · agent-drafted
+author: Divi-patel (2026-06-25) · revisions 2026-08-26 and 2026-10-20 owner-directed (Divy) · agent-drafted
 created: 2026-06-25
-updated: 2026-08-26
+updated: 2026-10-20
 status: active
-scope: Home of the companion notebooks — roles, folder shape, the loader rule, the 10-cell coverage matrix with execution state, and the rules. Coverage plan: docs/plans/cell_notebook_coverage/.
+scope: Home of the companion notebooks — roles, folder shape, the loader rule, the 15-cell coverage matrix with execution state, and the rules. Coverage plan: docs/plans/cell_notebook_coverage/.
 -->
 
 # notebooks/ — damage-curve walkthroughs and derivation companions
@@ -13,12 +13,17 @@ Runnable notebooks live here as companions to the formal cell packages under
 notebooks are for inspection, fitting checks, evidence walkthroughs, and consumer-facing examples. A notebook
 **reads** a pinned artifact; it never authors, edits or publishes one.
 
-> **State on 2026-08-26.** Two of ten cells have a notebook pair, and **both pairs fail in their first code
-> cell** — their loader targets the removed `docs/damage_curves/…` tree and pins `docs_r5` / `docs_r3`
-> artifacts that now exist only in the gitignored `docs/source_drops/extracted/` mirror. Repair (Phase 0) and
-> the remaining eight cells are planned one cell at a time in
-> [`docs/plans/cell_notebook_coverage/`](../docs/plans/cell_notebook_coverage/README.md); every notebook
-> follows the [companion-notebook contract](../docs/plans/cell_notebook_coverage/notebook_contract.md).
+> **State on 2026-10-20 (re-measured headlessly; nothing repaired).** Seven of fifteen cells have a notebook
+> pair. The five Real Estate pairs from `cell/real-estate` (merged 2026-10-19) **all execute top-to-bottom**
+> against their explicitly named noncanonical proposal artifacts (ten notebooks, 2.6–9.8 s each). The two
+> solar pairs (`hail_solar`, `flood_solar`) **still fail in their first code cell**, exactly as on 2026-08-26:
+> their loader targets the removed `docs/damage_curves/…` tree and pins `docs_r5` / `docs_r3` artifacts that
+> now exist only in the gitignored `docs/source_drops/extracted/` mirror. The other eight cells have no
+> notebooks. Repair (Phase 0) and the uncovered cells are planned one cell at a time in
+> [`docs/plans/cell_notebook_coverage/`](../docs/plans/cell_notebook_coverage/README.md) (status `proposed`,
+> gates G1–G4 unruled); every notebook follows the
+> [companion-notebook contract](../docs/plans/cell_notebook_coverage/notebook_contract.md). Measurement
+> record: [`tasks_history/2026-10-20__notebooks__coverage-remeasure/`](../docs/extra/tasks_history/2026-10-20__notebooks__coverage-remeasure/notes.md).
 
 ## Organization
 
@@ -66,12 +71,12 @@ never          docs/source_drops/extracted/ · GCS · the Hazard repo · a folde
 Full rules (identity block, evaluators, KATs, figures, execution, boundary):
 [`notebook_contract.md`](../docs/plans/cell_notebook_coverage/notebook_contract.md).
 
-## Coverage matrix (10 cells · measured 2026-08-26)
+## Coverage matrix (15 cells · measured 2026-10-20)
 
 | Cell | Repository-current runtime | Lead artifact the notebooks read | Notebooks | Execution state | Package |
 |---|---|---|---|---|---|
-| [`hail_solar`](../docs/cells/hail_solar/README.md) | canonical model v1.0 · runtime docs r7 | `current/hail_solar__model_v1_0__docs_r7__curve_artifact.json` | [`hail/solar/00`](hail/solar/00_curve_curation_walkthrough.ipynb) · [`01`](hail/solar/01_runtime_curve_walkthrough.ipynb) | **broken — loader** (pins r5, removed path) | WP-0a |
-| [`flood_solar`](../docs/cells/flood_solar/README.md) | canonical v1.0 · r4 | `current/flood_solar__model_v1_0__docs_r4__curve_artifact.json` | [`flood/solar/00`](flood/solar/00_curve_curation_walkthrough.ipynb) · [`01`](flood/solar/01_runtime_curve_walkthrough.ipynb) | **broken — loader** (pins r3, removed path) | WP-0b |
+| [`hail_solar`](../docs/cells/hail_solar/README.md) | canonical model v1.0 · runtime docs r7 | `current/hail_solar__model_v1_0__docs_r7__curve_artifact.json` | [`hail/solar/00`](hail/solar/00_curve_curation_walkthrough.ipynb) · [`01`](hail/solar/01_runtime_curve_walkthrough.ipynb) | **broken — loader** (pins r5, removed path; re-measured 2026-10-20, unchanged: first code cell raises `RuntimeError`) | WP-0a |
+| [`flood_solar`](../docs/cells/flood_solar/README.md) | canonical v1.0 · r4 | `current/flood_solar__model_v1_0__docs_r4__curve_artifact.json` | [`flood/solar/00`](flood/solar/00_curve_curation_walkthrough.ipynb) · [`01`](flood/solar/01_runtime_curve_walkthrough.ipynb) | **broken — loader** (pins r3, removed path; re-measured 2026-10-20, unchanged: first code cell raises `RuntimeError`) | WP-0b |
 | [`tropical_cyclone_wind_wind`](../docs/cells/tropical_cyclone_wind_wind/README.md) | canonical v1.2 · r2 tower-only partial screening | `current/tropical_cyclone_wind_wind__model_v1_2__docs_r2__curve_artifact.json` | none | — | WP-2 |
 | [`tropical_cyclone_wind_solar`](../docs/cells/tropical_cyclone_wind_solar/README.md) | **no canonical runtime**; noncanonical v2.1 · r1 lead | `proposed/tropical_cyclone_wind_solar__model_v2_1__docs_r1__curve_artifact.json` | none | — | WP-3 (gate G3) |
 | [`wildfire_solar`](../docs/cells/wildfire_solar/README.md) | canonical screening v1.0 · r3 | `current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json` | none | — | WP-4 |
@@ -80,16 +85,26 @@ Full rules (identity block, evaluators, KATs, figures, execution, boundary):
 | [`flood_wind`](../docs/cells/flood_wind/README.md) | canonical partial screening v1.0 · r1 | `current/flood_wind__model_v1_0__docs_r1__curve_artifact.json` | none | — | WP-7 |
 | [`wildfire_wind`](../docs/cells/wildfire_wind/README.md) | canonical Tier-4 partial screening v1.0 · r1 | `current/wildfire_wind__model_v1_0__docs_r1__curve_artifact.json` | none | — | WP-8 |
 | [`hail_wind`](../docs/cells/hail_wind/README.md) | **no runtime**; model v0.1 · docs r2 fail-closed scaffold | `proposed/hail_wind__model_v0_1__docs_r1__curve_artifact.json` | none | — | WP-9 (gate G3) |
+| [`flood_real_estate`](../docs/cells/flood_real_estate/README.md) | **no runtime**; noncanonical scaffold, model v0.2 · docs r1 proposal (v0.1 kept beside it) | `proposed/flood_real_estate__model_v0_2__docs_r1__curve_artifact.json` | [`flood/real_estate/00`](flood/real_estate/00_curve_curation_walkthrough.ipynb) · [`01`](flood/real_estate/01_runtime_curve_walkthrough.ipynb) | **executing** (2026-10-20) | none yet (outside the plan's ten cells) |
+| [`tropical_cyclone_wind_real_estate`](../docs/cells/tropical_cyclone_wind_real_estate/README.md) | **no runtime**; noncanonical scaffold, model v0.2 · docs r1 proposal (v0.1 kept beside it) | `proposed/tropical_cyclone_wind_real_estate__model_v0_2__docs_r1__curve_artifact.json` | [`tropical_cyclone_wind/real_estate/00`](tropical_cyclone_wind/real_estate/00_curve_curation_walkthrough.ipynb) · [`01`](tropical_cyclone_wind/real_estate/01_runtime_curve_walkthrough.ipynb) | **executing** (2026-10-20) | none yet (outside the plan's ten cells) |
+| [`convective_wind_real_estate`](../docs/cells/convective_wind_real_estate/README.md) | **no runtime**; noncanonical scaffold, model v0.1 · docs r1 proposal | `proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json` | [`convective_wind/real_estate/00`](convective_wind/real_estate/00_curve_curation_walkthrough.ipynb) · [`01`](convective_wind/real_estate/01_runtime_curve_walkthrough.ipynb) | **executing** (2026-10-20) | none yet (outside the plan's ten cells) |
+| [`hail_real_estate`](../docs/cells/hail_real_estate/README.md) | **no runtime**; noncanonical scaffold, model v0.1 · docs r1 proposal | `proposed/hail_real_estate__model_v0_1__docs_r1__curve_artifact.json` | [`hail/real_estate/00`](hail/real_estate/00_curve_curation_walkthrough.ipynb) · [`01`](hail/real_estate/01_runtime_curve_walkthrough.ipynb) | **executing** (2026-10-20) | none yet (outside the plan's ten cells) |
+| [`wildfire_real_estate`](../docs/cells/wildfire_real_estate/README.md) | **no runtime**; noncanonical scaffold, model v0.1 · docs r1 proposal | `proposed/wildfire_real_estate__model_v0_1__docs_r1__curve_artifact.json` | [`wildfire/real_estate/00`](wildfire/real_estate/00_curve_curation_walkthrough.ipynb) · [`01`](wildfire/real_estate/01_runtime_curve_walkthrough.ipynb) | **executing** (2026-10-20) | none yet (outside the plan's ten cells) |
 
 "Notebooks exist" is not "a runtime curve exists": the runtime column carries the coverage plan's counting
 rule (canonical · partial screening · noncanonical proposal · withheld scaffold) on every row. Work-package
-details: [`cell_work_packages.md`](../docs/plans/cell_notebook_coverage/cell_work_packages.md).
+details: [`cell_work_packages.md`](../docs/plans/cell_notebook_coverage/cell_work_packages.md). The five
+Real Estate rows are outside the plan's ten cells and have no work package yet. **executing** means the notebook
+ran headlessly top-to-bottom on the measurement date; it is not a claim that the notebook meets every rule of
+the contract.
 
 ## Real Estate proposal notebooks (from `cell/real-estate`, merged 2026-10-19)
 
 Jung A Lim's five Real Estate cells are **noncanonical proposals** (no current runtime); their notebooks read
-the proposed artifact named explicitly, per the proposal-cell loader rule above. They sit outside the 10-cell
-matrix measured on 2026-08-26; their execution state has not been re-measured against the notebook contract.
+the proposed artifact named explicitly, per the proposal-cell loader rule above. Their rows are in the coverage
+matrix; all ten notebooks executed headlessly on 2026-10-20. Execution only was measured — the identity block
+they print carries no SHA-256 and no index pin (there is none for a proposal), so conformance to the notebook
+contract's Rule 2 was not assessed. Per-notebook purposes:
 
 | Cell | Notebook | Purpose |
 |---|---|---|
