@@ -10,7 +10,9 @@ checked build step and **never writes** to `docs/`. Plan of record:
 **Status: V0, battery storage end to end, local only; accepted by the owner on 2026-10-20** after review on the
 running app ([`REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/3f9d516/REVIEW.md), `DCD-D17`); the cold read is still to run. **To review
 it, open `/v0` in the running app** (the *Review V0* tab): it walks through every V0 screen live, shows what was
-checked, and lists the decisions the owner is asked for.
+checked, and lists the decisions the owner is asked for. **First V1 step (2026-10-20):** the hurricane wind and
+wildfire battery cells are drawn through their reference evaluators
+([`REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/3ea7e02/REVIEW.md)).
 
 ## Run it
 
@@ -77,7 +79,8 @@ keyboard-only walk, the fixed sentences, both themes, a cold read, the speed bud
 ≤ 1.5 s to usable) and the owner's acceptance. The measured half is scripted in
 [`scripts/look-review/`](scripts/look-review/README.md); the evidence goes under
 `docs/plans/damage_curve_dashboard/evidence/<commit>/` with a `REVIEW.md`. V0's record:
-[`evidence/3f9d516/REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/3f9d516/REVIEW.md).
+[`evidence/3f9d516/REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/3f9d516/REVIEW.md); the first V1
+step's: [`evidence/3ea7e02/REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/3ea7e02/REVIEW.md).
 
 ## What V0 covers, and what it does not
 

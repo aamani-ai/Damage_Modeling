@@ -3,7 +3,7 @@
 The measured half of the look review ([`06` §4](../../../docs/extra/discussion/damage_curve_dashboard/06_look_and_usability.md),
 gate G10): screenshots, the keyboard walk, the screenshot-escape frames and the speed numbers, all against the
 static export. The judged half (does it look intentional, does a cold reader get the answer) stays with people.
-The V0 record they produced: [`evidence/89cc801/REVIEW.md`](../../../docs/plans/damage_curve_dashboard/evidence/89cc801/REVIEW.md).
+The V0 record they produced: [`evidence/3f9d516/REVIEW.md`](../../../docs/plans/damage_curve_dashboard/evidence/3f9d516/REVIEW.md).
 
 They drive the system Chrome through `puppeteer-core`, which is **not** a dashboard dependency: its download
 chain carries high-severity advisories (`extract-zip`, `basic-ftp`), so it is installed on demand and never

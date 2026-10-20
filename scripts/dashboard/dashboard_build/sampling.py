@@ -824,9 +824,11 @@ BESS_UNIT_WORD = {"BESS_INTEGRATED_ENCLOSURE": "enclosure", "BESS_SEPARATE_PCS":
 BESS_DR_TOLERANCE = 1e-12   # neither battery cell declares a tolerance; these are the ones their evaluator validators use
 BESS_USD_TOLERANCE = 1e-6
 TC_BESS_DEMAND_BASIS = "DASHBOARD_BUILD_DECLARED_COMPARABLE_REFERENCE"  # the evaluator records it; it does not judge it
-# One encoding for both battery cells. Colour = the enclosure's consequence choice, in the three palette slots that
-# pass the dataviz validator on every pair in both themes (2 · 3 · 5; slots 1 and 3, 2 and 4 fail together); the
-# PCS, which no consequence choice changes, is drawn in ink. Line style = resistance scenario; mark = curve shape.
+# One encoding for both battery cells. Colour = the enclosure's consequence choice, in the tokens --series-2, -3 and
+# -5 (color_slot 1, 2, 4): every pair passes the dataviz validator in light, and in dark one pair warns (rose↔green,
+# colour-vision ΔE 6.3, legal with the line styles, marks and labels); -1↔-3 and -2↔-4 fail, so no set includes
+# them together. The PCS, which no consequence choice changes, is drawn in ink. Line style = resistance scenario;
+# mark = curve shape.
 BESS_RESPONSE = {  # artifact id → (legend words, end-label word, palette slot)
     "approved_replacement": ("approved replacement", "replacement", 1),
     "repair_sensitivity": ("repair sensitivity", "repair", 2),
