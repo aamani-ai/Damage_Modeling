@@ -49,7 +49,7 @@ Shared with Hazard: the look principle at `Hazard_modeling/docs/principles/analy
 
 | Fact | Source |
 |---|---|
-| **V0 built (2026-10-20, after this table was measured):** `dashboard/`, `scripts/dashboard/`, the occurrence register at `docs/evidence/occurrence/`; look review at [`evidence/3f9d516/`](evidence/3f9d516/REVIEW.md); PR open, not merged, waiting for the owner's review | branch `claude/dashboard-v0-5d463c`; [`tasks_history/2026-10-20__dashboard__v0-build`](../../extra/tasks_history/2026-10-20__dashboard__v0-build/handoff.md) |
+| **V0 built (2026-10-20, after this table was measured):** `dashboard/`, `scripts/dashboard/`, the occurrence register at `docs/evidence/occurrence/`; look review at [`evidence/3f9d516/`](evidence/3f9d516/REVIEW.md); [PR #5](https://github.com/aamani-ai/Damage_Modeling/pull/5) open, not merged, waiting for the owner's review | branch `claude/dashboard-v0-5d463c`; [`tasks_history/2026-10-20__dashboard__v0-build`](../../extra/tasks_history/2026-10-20__dashboard__v0-build/handoff.md) |
 | No `dashboard/` folder exists in this repository (`find . -iname '*dashboard*'` finds only the discussion node) | shell, 2026-10-20 |
 | 25 catalogue entries: 13 live · 5 proposals · 3 reused · 4 gaps; 71 part rows, 51 with a T4 shape or cost; 87 curve IDs; 25 of 25 read by an agent only; 14 of 21 cells and bindings partial; 11 with no outside check | `docs/extra/discussion/damage_curve_dashboard/evidence/2026-10-19_catalogue_counts.txt` |
 | Chain artifacts as named files: 2 of 21 cells complete on the 10 core stations; seven-step audit 2, pressure test 2, site adapter 0, search log 0; 15 skill-named · 6 plain-named · 4 no folder | `…/evidence/2026-10-20_chain_inventory.txt` |

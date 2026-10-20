@@ -26,7 +26,7 @@
    keyboard walk, speed, PNG reduction); `puppeteer-core` is installed on demand, never saved.
 9. **Nothing in `docs/cells/` changed except the five battery catalogue entries' pointer**, and nothing in the
    Hazard repository was touched; its crosswalk is read and copied with its SHA.
-10. **Branch `claude/dashboard-v0-5d463c`, pushed, PR to `main` open and not merged** (`DCD-D10`).
+10. **Branch `claude/dashboard-v0-5d463c`, pushed; [PR #5](https://github.com/aamani-ai/Damage_Modeling/pull/5) to `main` is open and not merged** (`DCD-D10`). The repository has no CI yet, so the PR shows no checks.
 
 ## Open for the owner
 
