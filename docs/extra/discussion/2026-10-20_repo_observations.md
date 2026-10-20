@@ -28,6 +28,8 @@ which order?
 | Validators | all 34 `scripts/reference_helpers/validate_*.py` pass since `a71ac72` (four were failing on `main` before 2026-10-19) |
 | Skill bundle | `docs/extra/damage_curve_skill/tools/validate_skill_bundle.py` → `PASS`, 106 files |
 | CI | no `.github/` folder exists (`ls -d .github`) |
+| Tests | `.venv/bin/python -m pytest tests -q` → 19 passed (2026-10-20) |
+| Branches | `scripts/reference_helpers/branch_register.py` → [`../branch_register.md`](../branch_register.md) |
 
 ## The observations
 
@@ -45,6 +47,10 @@ which order?
 | 10 | **Small link and claim rot.** Discussion `02` cited `datanutrition.org/labels/` (404; corrected); the Hazard framing doc lists shadcn/ui in its stack lean while the dashboard has none; `reading_the_hazard_grid.md` says "grey = zero" while `lib/colors.ts` puts zero on the ramp floor. | Each is small; together they are why a builder cannot trust a doc without opening the code | `02_reference_audit.md`; Hazard `00_…` §2, §5; Hazard `docs/guides/reading_the_hazard_grid.md` | Two one-line fixes on the Hazard side; a link check in CI here |
 | 11 | **Junga's `cell/winter-storm-solar-wind` sits 2 ahead and 25 behind `main`.** Not merged on 2026-10-19 by the owner's choice; it will drift further. | A proposal that ages off `main` becomes a merge project | `origin/cell/winter-storm-solar-wind` | A decision with Jung A: rebase and merge as proposals, or close with a note |
 | 12 | **Validators need the venv and the repo has two dependency files.** `requirements.txt` and `pyproject.toml` both exist; a bare `python3` fails on `expat` (already in `AGENTS.md`). | Minor; the venv rule is documented | root | Pick one (the `pyproject.toml` with an optional `[dev]` group) and say so in `AGENTS.md` |
+| 13 | **A test suite exists and nothing runs it.** `tests/` holds four pytest files — 19 tests, all passing in 0.8 s on 2026-10-20 (`.venv/bin/python -m pytest tests -q`). | Free regression safety on every push, unused | `tests/`; no `.github/` | Part of `RO2`: the Actions workflow runs `pytest tests` and the validator runner |
+| 14 | **Commits on the work org carry the personal e-mail.** This checkout's `git config user.email` is `divy2023@gmail.com`; 75 of 106 commits on `main` are by Divi-patel. GitHub attributes them to whichever account has that address verified — the personal one, not the work account (`D-ivyy`) that pushes them. | Attribution and access reviews on the org read the wrong identity | `git config --get user.email` here | Set the work address for this repository (`git config user.email <the address verified on D-ivyy>`); past commits stay as they are |
+| 15 | **`tmp/` at the root was untracked junk and not ignored.** Empty `docs/` and `pdfs/` folders and a `.DS_Store` from 2026-07-29 / 08-09; it appeared in every `git status`. | Invites an accidental commit | root `tmp/`, `.gitignore` | `tmp/` added to `.gitignore` on 2026-10-20; delete the folder when convenient |
+| 16 | **Branches had no register.** Five remote branches from Jung A: two fully merged (`cell/real-estate`, `cell/flood-real-estate`), two docs-only and unmerged for 35 and 54 days (`validation/damage-core`, `review/cell-curation-audit`), one unmerged proposal falling 59 commits behind (`cell/winter-storm-solar-wind`); no tags; one PR ever. | Review evidence that lives only on a branch is invisible to the reader path; merged branches pile up; nobody could say which was stale | `git for-each-ref`, `gh pr list` | [`../branch_register.md`](../branch_register.md) (created 2026-10-20) with a proposed policy; merge the two docs-only branches as docs and delete them with Jung A's OK (`RO4`) |
 
 ## Verdict
 
@@ -52,17 +58,20 @@ which order?
   closed by it.
 - Item 1 is the one the owner should rule on soon, because it decides whether the dashboard's chain lens
   shows a repository that is catching up or one that has decided the older cells are complete in prose.
-- Item 2 is the cheapest high-value fix in the repository.
-- Items 3, 8–12 are hygiene; a half-day plan.
+- Item 2 (with 13) is the cheapest high-value fix in the repository: a runner for the 34 validators and the
+  19 tests, and one Actions workflow.
+- Item 16 is handled by the register; items 11 and 16 need Jung A's word.
+- Items 3, 8–10, 12, 14, 15 are hygiene; a half-day plan.
 
 ## Owner gates carried into the plan
 
-`RO1` backfill registers as files, or declare prose locations per station (item 1) · `RO2` add CI (item 2)
-· `RO3` the winter-storm branch (item 11).
+`RO1` backfill registers as files, or declare prose locations per station (item 1) · `RO2` add CI with the
+validators and the tests (items 2, 13) · `RO3` the winter-storm branch (item 11) · `RO4` merge the two
+docs-only branches as docs and delete them (item 16) · `RO5` confirm the branch policy in the register.
 
 ## Exit condition
 
-`settled` when the owner has ranked the twelve and each has a plan row, a "won't do" note, or a closing commit.
+`settled` when the owner has ranked the sixteen and each has a plan row, a "won't do" note, or a closing commit.
 
 ## Related
 

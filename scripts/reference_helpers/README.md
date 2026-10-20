@@ -78,6 +78,7 @@ These files are reference implementations for downstream notebooks/services. The
 | `validate_wildfire_real_estate_v0_1_package.py` | Schema/register/source-table/factor/re-derivation/loader-routing/reproducibility/KAT/non-promotion/binding/workbook/link validator for the wildfire × real estate model-v0.1 proposal. |
 | `check_wildfire_real_estate_hazard_loader.py` | Read-only consumer check: runs the proposal's known-answer requests through a copy of Hazard's generic v3 loader and lists the differences. |
 | `wildfire_real_estate_nri_check.py` | Read-only order-of-magnitude check of the proposal's yearly building loss on Hazard's wildfire grid (M1 parquet) against FEMA NRI (needs numpy, pandas, pyarrow). |
+| `branch_register.py` | Read-only branch register: every local and remote branch with its creator and first date, last author and date, age, ahead/behind `main`, merged state and files changed, as a Markdown table for `docs/extra/branch_register.md`. Standard library only; `--fetch` fetches and prunes first. |
 
 These helpers are not a full production package. Their purpose is to make the intended implementation seam unambiguous.
 
