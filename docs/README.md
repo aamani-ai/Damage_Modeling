@@ -17,6 +17,7 @@ for method, contracts, cells, evidence, and source drops.
 | [`extra/guides/`](extra/guides/README.md) | Practical walkthroughs for common repo operations and requests. |
 | [`extra/learning_logs/`](extra/learning_logs/README.md) | Team-shared, non-canonical atomic lessons and complete newcomer/re-entry learning packages. |
 | [`extra/discussion/`](extra/discussion/README.md) | Thinking-out-loud *before* building (P2), including coverage framing, flood-wind/shared-electrical decisions, evidence harvest and notebook coverage. A dated ledger; new nodes start from [`extra/discussion/_templates/`](extra/discussion/_templates/README.md). |
+| [`extra/branch_register.md`](extra/branch_register.md) | Every branch with who created it, when, when it was last touched, how it stands against `main` and what should happen to it; the branch policy; refreshed by `scripts/reference_helpers/branch_register.py`. |
 | [`extra/tasks_history/`](extra/tasks_history/README.md) | Per-session handoffs (`YYYY-MM-DD__area__slug/` with task_context · decisions · notes · handoff). Read the newest `handoff.md` first. |
 
 > **Relocation note.** The old deliverable-shaped `docs/damage_curves/` tree has been removed. The current

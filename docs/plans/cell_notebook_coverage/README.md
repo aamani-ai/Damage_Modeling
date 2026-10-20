@@ -1,7 +1,7 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-08-26
-updated: 2026-08-26
+updated: 2026-10-20
 status: proposed
 scope: Plan of record — repair the two existing companion-notebook pairs against their current pins, then give every governed hazard × asset cell a curation + runtime notebook pair, one cell at a time, hurricane first, with a shared loader, a coverage gate and a checkable done-when.
 -->
@@ -46,12 +46,12 @@ evidence memo or proposal path; it never edits the artifact.
 | `tests/test_notebook_coverage.py` structure gate + a manual headless-execution runner | CI wiring — `.github/` does not exist; a CI plan is separate |
 | optional close-out `notebooks/00_library_overview.ipynb` | EAL / PML / VaR / TVaR anywhere in this repo |
 
-## Current state (measured 2026-08-26)
+## Current state (measured 2026-10-20)
 
 | Cell | Repo-current runtime | Lead artifact the notebooks read | Bundle | Records / failure units | KAT in `current/` | Hazard consumer | Notebooks |
 |---|---|---|---|---|---|---|---|
-| `hail_solar` | canonical model v1.0 · runtime docs r7 | `current/hail_solar__model_v1_0__docs_r7__curve_artifact.json` | v2 | 3 / 1 | yes | hail × solar CONUS (`HAIL_SOLAR_DEFAULT_3P2_GBS` selected) | `00`+`01` — **broken loader** |
-| `flood_solar` | canonical v1.0 · r4 | `current/flood_solar__model_v1_0__docs_r4__curve_artifact.json` | v2 | 8 / 8 | **none** | flood × solar CONUS (7 units, `FS_FOUND` excluded) | `00`+`01` — **broken loader** |
+| `hail_solar` | canonical model v1.0 · runtime docs r7 | `current/hail_solar__model_v1_0__docs_r7__curve_artifact.json` | v2 | 3 / 1 | yes | hail × solar CONUS (`HAIL_SOLAR_DEFAULT_3P2_GBS` selected) | `00`+`01` — **broken loader** (re-measured 2026-10-20: unchanged) |
+| `flood_solar` | canonical v1.0 · r4 | `current/flood_solar__model_v1_0__docs_r4__curve_artifact.json` | v2 | 8 / 8 | **none** | flood × solar CONUS (7 units, `FS_FOUND` excluded) | `00`+`01` — **broken loader** (re-measured 2026-10-20: unchanged) |
 | `wind_tornado_wind` | canonical v1.0 · r4 (+ noncanonical v2.0) | `current/wind_tornado_wind__model_v1_0__docs_r4__curve_artifact.json` | v2 | 5 / 5 | **none** (v2 proposal has one) | convective wind × wind farm (`WIND_TORNADO_WIND_V1`) | none |
 | `strong_wind_solar` | canonical v1.0 · r3 (+ noncanonical v2.0) | `current/strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json` | v2 | 5 / 5 | **none** (v2 proposal has one) | convective wind × solar (`STRONG_WIND_SOLAR_V1`) | none |
 | `wildfire_solar` | canonical screening v1.0 · r3 | `current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json` | v2 | 10 / 10 (categorical FSim states) | yes | wildfire × solar CONUS (`WILDFIRE_SOLAR_FSIM_SCREENING_V1`) | none |
@@ -60,11 +60,20 @@ evidence memo or proposal path; it never edits the artifact.
 | `tropical_cyclone_wind_wind` | canonical v1.2 · r2 tower-only | `current/tropical_cyclone_wind_wind__model_v1_2__docs_r2__curve_artifact.json` | v3 (1 pathway) | Jaimes selectors + canonical-5-MW tower proxy; 16 % TIV covered, 84 % withheld / 10 units | yes | hurricane × wind farm (`…JAIMES_TOWER_SCREENING_V1_2`) | none |
 | `tropical_cyclone_wind_solar` | **no canonical runtime**; lead = noncanonical v2.1 · r1 (v0.1 / v1.0 / v2.0 preserved) | `proposed/tropical_cyclone_wind_solar__model_v2_1__docs_r1__curve_artifact.json` | v3 (1 pathway + site-facility axis) | 10 records / 11 units | yes (v2.1) | hurricane × solar CONUS served **below crown** on the proposal | none |
 | `hail_wind` | **no runtime**; model v0.1 · docs r2 fail-closed scaffold | `proposed/hail_wind__model_v0_1__docs_r1__curve_artifact.json` | v1 | 0 / 11 · `NO_RUNTIME_CURVE` | yes (v0.1, tests withholding) | none | none |
+| `flood_real_estate` | **no runtime**; noncanonical scaffold, model v0.2 · r1 proposal (v0.1 kept beside it); outside this plan's ten cells | `proposed/flood_real_estate__model_v0_2__docs_r1__curve_artifact.json` | v3 (1 pathway) | 7 / 2 (1 withheld) | **none** (no `current/`; the v0.2 KAT file sits in `proposed/`) | none (not in the artifact index) | `00`+`01` — **executing** (2026-10-20) |
+| `tropical_cyclone_wind_real_estate` | **no runtime**; noncanonical scaffold, model v0.2 · r1 proposal (v0.1 kept beside it); outside this plan's ten cells | `proposed/tropical_cyclone_wind_real_estate__model_v0_2__docs_r1__curve_artifact.json` | v3 (1 pathway) | 20 / 2 (1 withheld) | **none** (v0.2 KAT in `proposed/`) | none (not in the artifact index) | `00`+`01` — **executing** (2026-10-20) |
+| `convective_wind_real_estate` | **no runtime**; noncanonical scaffold, model v0.1 · r1 proposal; outside this plan's ten cells | `proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json` | v3 (2 pathways) | 6 / 2 (1 withheld) | **none** (v0.1 KAT in `proposed/`) | none (not in the artifact index) | `00`+`01` — **executing** (2026-10-20) |
+| `hail_real_estate` | **no runtime**; noncanonical scaffold, model v0.1 · r1 proposal; outside this plan's ten cells | `proposed/hail_real_estate__model_v0_1__docs_r1__curve_artifact.json` | v3 (1 pathway) | 6 / 4 (2 withheld) | **none** (v0.1 KAT in `proposed/`) | none (not in the artifact index) | `00`+`01` — **executing** (2026-10-20) |
+| `wildfire_real_estate` | **no runtime**; noncanonical scaffold, model v0.1 · r1 proposal; outside this plan's ten cells | `proposed/wildfire_real_estate__model_v0_1__docs_r1__curve_artifact.json` | v3 (1 pathway) | 3 / 2 (1 withheld) | **none** (v0.1 KAT in `proposed/`) | none (not in the artifact index) | `00`+`01` — **executing** (2026-10-20) |
 
 Sources: [`MACHINE_READABLE_ARTIFACTS.md`](../../contracts/MACHINE_READABLE_ARTIFACTS.md) (pins), each cell's
 `current/` and `proposed/` folders (records, KATs), the Hazard consumer code paths listed per cell in
 [`cell_work_packages.md`](cell_work_packages.md). The "broken loader" finding is reproduced in
-[`notebook_contract.md`](notebook_contract.md#why-the-existing-pairs-fail).
+[`notebook_contract.md`](notebook_contract.md#why-the-existing-pairs-fail). Re-measured on 2026-10-20 — every
+notebook executed headlessly from the repository root with the `.venv` jupyter, nothing repaired — in
+[`tasks_history/2026-10-20__notebooks__coverage-remeasure/`](../../extra/tasks_history/2026-10-20__notebooks__coverage-remeasure/notes.md):
+the two solar pairs fail exactly as on 2026-08-26; the five Real Estate pairs (arrived 2026-10-19, listed above
+for completeness, no work package in this plan) all execute.
 
 ## Decisions fixed for this plan
 
