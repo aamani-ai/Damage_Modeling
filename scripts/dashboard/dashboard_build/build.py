@@ -43,7 +43,8 @@ def value_facts(e: Entry) -> dict[str, Any] | None:
         vb = load_json(ROOT / vl["value_binding_path"])
         covered = [{"label": "Integrated battery enclosures", "value_usd": vb["units"]["BESS_INTEGRATED_ENCLOSURE"]["count"] * vb["units"]["BESS_INTEGRATED_ENCLOSURE"]["value_usd_each"], "bucket": "battery_enclosures"},
                    {"label": "PCS", "value_usd": vb["units"]["BESS_SEPARATE_PCS"]["count"] * vb["units"]["BESS_SEPARATE_PCS"]["value_usd_each"], "bucket": "pcs"}]
-        no_curve = [{"label": s, "value_usd": _dollars_in(s)} for s in d.get("not_covered", [])]
+        # the catalogue writes "Civil works ($1.6M)"; the amount goes into the fixed sentence once, not twice
+        no_curve = [{"label": re.sub(r"\s*\(\$[\d.]+\s*[MBk]\)\s*$", "", s), "value_usd": _dollars_in(s)} for s in d.get("not_covered", [])]
         return _value_block(vl["candidate_hardware_usd"], vl["full_tiv_usd"], covered, no_curve, vl["value_binding_path"], "fixed 2024 dollars; reference budget r1")
     if e.id == "tropical_cyclone_wind_wind":
         basis = vl.get("owner_approved_proxy_value_basis") or {}
