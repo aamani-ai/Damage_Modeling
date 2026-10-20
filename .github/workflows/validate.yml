@@ -1,0 +1,48 @@
+# CI for aamani-ai/Damage_Modeling — one job, three commands, exactly what AGENTS.md says to run by hand.
+#
+#   python -m pytest tests -q                              the pytest suite (tests/)
+#   python scripts/reference_helpers/validate_all.py       every scripts/reference_helpers/validate_*.py
+#   python scripts/reference_helpers/check_links.py        relative Markdown links + same-file anchors
+#
+# validate_all.py reports SKIPPED (with the reason) for the validators whose inputs no clean checkout has:
+# the five substation bindings that pin a sibling Hazard_modeling checkout, and the flood × wind v0.1
+# scaffold that compares against the gitignored outputs/ render. Everything else must pass.
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out
+        uses: actions/checkout@v5
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install requirements
+        run: pip install -r requirements.txt
+
+      - name: Tests
+        run: python -m pytest tests -q
+
+      - name: Validators
+        run: python scripts/reference_helpers/validate_all.py
+
+      - name: Links
+        run: python scripts/reference_helpers/check_links.py

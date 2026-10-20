@@ -102,7 +102,7 @@ are not curves).
 | `src/damage_modeling/` | The durable publisher package (`publishing/cli.py`, `publishing/publisher.py`; standard 23). Not a curve API; the validators guard that no cell code enters it. |
 | `data/` | Curve-record artifacts + manifests (large/binary gitignored). [README](data/README.md). |
 | `notebooks/` | Companion notebooks per cell — `<hazard>/<asset>/00_curve_curation_walkthrough` + `01_runtime_curve_walkthrough`, reading the pinned artifact through the artifact index, never authoring one. **2 of 10 cells covered; both existing pairs currently fail (their loader targets the removed `docs/damage_curves/` tree).** Repair + the other eight cells: [`docs/plans/cell_notebook_coverage/`](docs/plans/cell_notebook_coverage/README.md). [README](notebooks/README.md). |
-| `.github/workflows/` | **Does not exist yet.** There is no CI; run the validators by hand (`.venv/bin/python scripts/reference_helpers/validate_*.py`). Observed in [`docs/extra/discussion/2026-10-20_repo_observations.md`](docs/extra/discussion/2026-10-20_repo_observations.md). |
+| `.github/workflows/` | `validate.yml` — on every push to `main` and every pull request (Ubuntu, Python 3.12, `requirements.txt`): `python -m pytest tests -q`, then `scripts/reference_helpers/validate_all.py` (every `validate_*.py`; the five substation bindings that pin a sibling `Hazard_modeling/` checkout and the flood × wind v0.1 scaffold that needs the local `outputs/` render are reported SKIPPED with the reason, never silently), then `scripts/reference_helpers/check_links.py` (relative Markdown links and same-file anchors in `docs/`, `README.md`, `AGENTS.md`). |
 
 ### Cross-project symlinks (gitignored, local-only — machine-specific absolute paths, never commit)
 
