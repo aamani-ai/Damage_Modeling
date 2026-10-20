@@ -30,8 +30,8 @@
 
 ## Pull request
 
-Title: *Notebook coverage re-measured 2026-10-20*. Link: see the PR list on `aamani-ai/Damage_Modeling`
-(recorded in the session that started this one; the number was not known when this file was written).
+[aamani-ai/Damage_Modeling#2 — *Notebook coverage re-measured 2026-10-20*](https://github.com/aamani-ai/Damage_Modeling/pull/2),
+from `claude/amazing-elgamal-e5550b` (commit `43593a5`) against `main`. Open, not merged; the owner reviews.
 
 ## Files touched
 
