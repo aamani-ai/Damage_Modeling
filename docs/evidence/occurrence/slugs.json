@@ -1,0 +1,37 @@
+{
+  "schema": "occurrence_slugs.v1",
+  "note": "One shared slug list for the dashboard, the occurrence register and the hazard-name crosswalk (DCD-D06). Never rename a catalogue label or a twin name here; add a row instead.",
+  "assets": [
+    {"slug": "solar", "label": "Solar farm", "catalogue": "Solar farm"},
+    {"slug": "wind", "label": "Wind farm", "catalogue": "Wind farm"},
+    {"slug": "real_estate", "label": "Real estate", "catalogue": "Real estate"},
+    {"slug": "substation", "label": "Substation", "catalogue": "Substation"},
+    {"slug": "bess", "label": "Battery storage", "catalogue": "Battery storage"}
+  ],
+  "hazards": [
+    {"slug": "hail", "label": "Hail", "catalogue": "Hail", "twin": ["hail"], "entry_tokens": ["hail"], "outside_the_five": false, "effect": "damage"},
+    {"slug": "flood", "label": "Flood", "catalogue": "Flood", "twin": ["flood"], "entry_tokens": ["flood"], "outside_the_five": false, "effect": "damage"},
+    {"slug": "hurricane_wind", "label": "Hurricane wind", "catalogue": "Hurricane wind", "twin": ["wind"], "entry_tokens": ["tropical_cyclone_wind", "hurricane"], "outside_the_five": false, "effect": "damage"},
+    {"slug": "convective_wind", "label": "Convective wind", "catalogue": "Convective wind", "twin": ["wind"], "entry_tokens": ["convective_wind", "strong_wind", "wind_tornado"], "outside_the_five": false, "effect": "damage"},
+    {"slug": "wildfire", "label": "Wildfire", "catalogue": "Wildfire", "twin": ["wildfire"], "entry_tokens": ["wildfire"], "outside_the_five": false, "effect": "damage"},
+    {"slug": "heat", "label": "Heat", "catalogue": null, "twin": ["heat"], "entry_tokens": [], "outside_the_five": true, "effect": "performance", "effect_note": "The twin's heat leads (ageing, derating, chiller capacity) work through performance, not physical damage; pointer to the outage-as-performance work, no curve (discussion 04 §6)."},
+    {"slug": "icing", "label": "Icing", "catalogue": null, "twin": ["icing"], "entry_tokens": [], "outside_the_five": true, "effect": "performance", "effect_note": "Cold limits charge rate until heated; snow load on venting panels is the one physical lead (discussion 04 §6, ledger C-172)."},
+    {"slug": "lightning", "label": "Lightning", "catalogue": null, "twin": ["lightning"], "entry_tokens": [], "outside_the_five": true, "effect": "damage", "effect_note": "No hazard cell exists; the twin carries Medium surge leads on the electronics (discussion 04 §6)."}
+  ],
+  "twin_hazard_names": {
+    "hail": "hail", "wind": "severe wind", "lightning": "lightning", "icing": "winter storm / icing", "heat": "extreme heat", "flood": "flood", "wildfire": "wildfire"
+  },
+  "twin_lead_levels": {"3": "H", "2": "M", "1": "L"},
+  "value_buckets": {
+    "bess": {
+      "note": "The asset view's rows. Twin nodes map to twin targets through Hazard's twin_crosswalk.csv; targets roll up into these value buckets, whose dollars come from the pinned flood_bess value binding (reference budget r1, $109.8M). unit_mv, collection and controls share one unallocated $13.2M electrical-balance row in that budget, so they are one bucket here.",
+      "buckets": [
+        {"key": "battery_enclosures", "label": "Battery enclosures", "twin_targets": ["battery_enclosures"], "failure_unit_subsystems": ["battery_enclosures"]},
+        {"key": "pcs", "label": "PCS", "twin_targets": ["pcs", "pcs+unit_mv"], "failure_unit_subsystems": ["pcs"]},
+        {"key": "electrical_balance", "label": "MV, collection and controls", "twin_targets": ["unit_mv", "collection", "controls", "pcs+unit_mv"], "failure_unit_subsystems": ["BESS_MV_AND_SHARED_ELECTRICAL"]},
+        {"key": "civil_works", "label": "Civil works", "twin_targets": ["civil_works"], "failure_unit_subsystems": ["BESS_CIVIL"]},
+        {"key": "fieldwork", "label": "Fieldwork", "twin_targets": [], "failure_unit_subsystems": ["BESS_FIELDWORK"]}
+      ]
+    }
+  }
+}

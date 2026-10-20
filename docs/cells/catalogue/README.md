@@ -1,7 +1,7 @@
 ---
 author: owner-directed (JL) · agent-drafted
 created: 2026-10-19
-updated: 2026-10-19
+updated: 2026-10-20
 status: draft
 ---
 
@@ -44,6 +44,8 @@ generated catalogue.
 | `rows` | cell, binding | One per part or building: `part`, `curves` (IDs), `variants` (text, or `none`), `shape` and `cost` (tier codes `T1`–`T4`, with a short `shape_basis` / `cost_basis`), `notes` (list of `{type, text}`) |
 | `bindings` | no | Consumer bindings that are part of this cell (e.g. its value binding), so they need no entry of their own |
 | `reason` | gap | Why there is no curve yet |
+| `occurrence_register` | no | Path of the "does it happen?" register for this asset × hazard under `docs/evidence/occurrence/<asset>/<hazard>.json` (field-report evidence per value bucket; see that folder's README). The validator checks the file exists and names this entry |
+| `left_out` | no | Parts deliberately left out of the cell, each `{part, reason, decision}` — a modelling choice, shown apart from `not_covered` ("no curve yet"). Empty or absent today |
 
 **Shape and cost.** *Shape* is what sets how damage rises with the hazard; *cost* is what turns that damage into a
 share of value. Each is given the tier its source carries in the cell's own tier table (the parameter rows for curve

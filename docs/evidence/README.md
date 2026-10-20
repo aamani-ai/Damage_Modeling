@@ -14,6 +14,13 @@ registers, and update history.
 - Evidence memo template:
   [`TEMPLATE_evidence_update_memo.md`](../method/templates/TEMPLATE_evidence_update_memo.md)
 
+## "Does it happen?" — the occurrence register
+
+- [`occurrence/README.md`](occurrence/README.md) — field-report evidence per asset × value bucket × hazard,
+  the four states (found · adjacent · none after a logged search · not searched), the shared slug list and the
+  search-log convention (plan `docs/plans/damage_curve_dashboard/`, DCD-D05). Battery storage seeded 2026-10-20,
+  every bucket not searched.
+
 ## v2.2 evidence ingestion
 
 - [`README_evidence_cocuration_v2_2.md`](ingestion/README_evidence_cocuration_v2_2.md)

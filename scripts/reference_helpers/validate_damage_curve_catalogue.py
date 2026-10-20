@@ -26,6 +26,7 @@ WITH_CURVE = ["artifact", "artifact_sha256", "input", "how_to_use", "method", "k
 ROW_FIELDS = ["part", "curves", "variants", "shape", "shape_basis", "cost", "cost_basis", "notes"]
 METHODS = set(cat.METHOD_LABELS)
 OUTPUT_VALUES = ("allowed", "conditional", "withheld")
+OCCURRENCE_STATES = {"found", "adjacent", "none_after_search", "not_searched"}
 HAZARD_MAIN = "https://github.com/aamani-ai/Hazard_Modeling/blob/main/"
 # Optional local Hazard checkout used to confirm result-check paths exist on its origin/main.
 HAZARD_REPO = os.environ.get("HAZARD_REPO")
@@ -75,6 +76,20 @@ def check_entry(e: dict, index: dict, known_ids: set[str]) -> list[str]:
                 errs.append(f"{name}: result check path not on Hazard origin/main: {c['link']}")
         elif not (cat.ROOT / c["link"]).exists():
             errs.append(f"{name}: check link does not exist: {c['link']}")
+    if e.get("occurrence_register"):
+        reg_path = cat.ROOT / e["occurrence_register"]
+        if not reg_path.exists():
+            errs.append(f"{name}: occurrence_register does not exist: {e['occurrence_register']}")
+        else:
+            reg = cat.load_json(reg_path)
+            if reg.get("catalogue_entry") != e["entry_id"]:
+                errs.append(f"{name}: occurrence register names catalogue_entry {reg.get('catalogue_entry')!r}, not {e['entry_id']!r}")
+            bad = [k for k, b in reg.get("buckets", {}).items() if b.get("state") not in OCCURRENCE_STATES]
+            if bad:
+                errs.append(f"{name}: occurrence register buckets with an unknown state: {bad}")
+    for item in e.get("left_out") or []:
+        if not all(item.get(k) for k in ("part", "reason", "decision")):
+            errs.append(f"{name}: left_out items need part, reason and decision: {item}")
     if e["kind"] == "gap":
         return errs
 

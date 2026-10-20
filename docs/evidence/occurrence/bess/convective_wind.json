@@ -1,0 +1,127 @@
+{
+  "schema": "occurrence_register.v1",
+  "asset": "bess",
+  "hazard": "convective_wind",
+  "catalogue_entry": "convective_wind_bess",
+  "question": "Has convective wind physically damaged a battery storage subsystem in the field, outside a test?",
+  "effect": "damage",
+  "search_log": "docs/evidence/occurrence/bess/convective_wind.md",
+  "last_searched": null,
+  "rule": "found = one or more direct reports · adjacent = neighbouring case only · none_after_search = a logged search in at least two sources that could see it · not_searched = the default, not a finding",
+  "surfaces": [
+    {
+      "id": "epri_bess_failure_db",
+      "name": "EPRI BESS Failure Incident Database",
+      "can_see_hazard": false,
+      "public": true,
+      "note": "Excludes exogenous causes by definition (EPRI white paper, May 2024); internal failures only.",
+      "searched": null,
+      "queries": [],
+      "hits": null
+    },
+    {
+      "id": "noaa_storm_events",
+      "name": "NOAA Storm Events Database",
+      "can_see_hazard": true,
+      "public": true,
+      "note": "Narrative keyword search by county and event type.",
+      "searched": null,
+      "queries": [],
+      "hits": null
+    },
+    {
+      "id": "nite_accident_reports",
+      "name": "NITE accident reports (Japan)",
+      "can_see_hazard": true,
+      "public": true,
+      "note": "Statutory reports; CSV download.",
+      "searched": null,
+      "queries": [],
+      "hits": null
+    },
+    {
+      "id": "insurer_broker_notes",
+      "name": "Insurer and broker loss notes",
+      "can_see_hazard": true,
+      "public": "partly",
+      "note": "Gated summaries; cite the note, not the claim.",
+      "searched": null,
+      "queries": [],
+      "hits": null
+    },
+    {
+      "id": "news_oem_site_notices",
+      "name": "News, OEM and site notices",
+      "can_see_hazard": true,
+      "public": true,
+      "note": "Date, place, what broke, intensity if stated.",
+      "searched": null,
+      "queries": [],
+      "hits": null
+    }
+  ],
+  "buckets": {
+    "battery_enclosures": {
+      "state": "not_searched",
+      "reports": [],
+      "twin_lead": {
+        "level": "L",
+        "nodes": [
+          {
+            "node": "be_enc",
+            "name": "Enclosure Shell",
+            "level": 1,
+            "why": "Anchorage loads"
+          }
+        ]
+      }
+    },
+    "pcs": {
+      "state": "not_searched",
+      "reports": [],
+      "twin_lead": {
+        "level": null,
+        "nodes": []
+      }
+    },
+    "electrical_balance": {
+      "state": "not_searched",
+      "reports": [],
+      "twin_lead": {
+        "level": null,
+        "nodes": []
+      }
+    },
+    "civil_works": {
+      "state": "not_searched",
+      "reports": [],
+      "twin_lead": {
+        "level": null,
+        "nodes": []
+      }
+    },
+    "fieldwork": {
+      "state": "not_searched",
+      "reports": [],
+      "twin_lead": {
+        "level": null,
+        "nodes": []
+      }
+    }
+  },
+  "left_out": [],
+  "provenance": {
+    "twin": {
+      "repository": "aamani-ai/infrasure-digital-twin",
+      "file": "public/engine/bess-data.js",
+      "commit": "d01abd0",
+      "sha256": "ade70e024aae14cafa09beb2dc41482feb2f2c644a740d75a09e9d768c2e8ea9",
+      "meaning": "per-node design exposure, level 1 Low · 2 Medium · 3 High; a lead, not evidence"
+    },
+    "crosswalk": {
+      "path": "Hazard_modeling/docs/plans/_cross_cutting/bess_conus/twin_crosswalk.csv",
+      "sha256": "7e96ff9a6f48db73bb35ccdf76daa5a41a418140472d127b7e7253e25fbdd30d",
+      "rows": 58
+    }
+  }
+}
