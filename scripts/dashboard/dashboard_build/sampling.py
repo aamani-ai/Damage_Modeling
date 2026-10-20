@@ -10,12 +10,15 @@ import importlib
 import re
 import math
 from fnmatch import fnmatchcase
+from pathlib import Path
 from typing import Any, Callable
 
 from .catalogue import Entry, curve_records, failure_unit, pathway_of, row_for_curve
-from .common import ROOT, SENTENCES, load_json, rel
+from .common import HELPERS, ROOT, SENTENCES, humanise, load_json, rel
 
-NO_EVALUATOR = {"tropical_cyclone_wind_bess", "wildfire_bess"}  # DCD-D09 / G9 — reference evaluators land in Phase 3
+# Cells whose curves no evaluator in scripts/reference_helpers/ can draw (G9). Empty since the two battery cells
+# gained reference evaluators (PR #4); the build's `curves` check stops if a cell listed here gets one.
+NO_EVALUATOR: set[str] = set()
 
 GRID_N = 161
 
@@ -42,7 +45,7 @@ def _evaluator(module: str, function: str, note: str | None = None) -> dict[str,
 def _curve(e: Entry, record: dict[str, Any], axis: dict[str, Any], series: list[dict[str, Any]], *,
            evaluator: dict[str, Any] | None, knots: list[list[float]] | None = None, domain: list | None = None,
            withheld_zones: list[dict[str, Any]] | None = None, drawn: bool = True, notes: list[str] | None = None,
-           scenario_note: str | None = None, envelope: dict[str, Any] | None = None) -> dict[str, Any]:
+           scenario_note: str | None = None, envelope: dict[str, Any] | None = None, form_label: str | None = None) -> dict[str, Any]:
     a = e.artifact or {}
     row = row_for_curve(e, record["curve_id"]) or {}
     fu = failure_unit(a, record.get("failure_unit_id", ""))
@@ -60,6 +63,7 @@ def _curve(e: Entry, record: dict[str, Any], axis: dict[str, Any], series: list[
         "part": row.get("part"),
         "pathway_id": record.get("pathway_id") or (pathway_of(a, record) or {}).get("pathway_id"),
         "curve_form": record.get("curve_form"),
+        **({"form_label": form_label} if form_label else {}),  # how to read the form where the schema's container name would mislead
         "x_axis_id": record.get("x_axis"),
         "y_axis": record.get("y_axis"),
         "parameters": record.get("parameters"),
@@ -814,6 +818,261 @@ def sample_tc_solar(e: Entry, kat: dict[str, Any]) -> tuple[list[dict[str, Any]]
     return curves, k, ["Runtime known answers compared as a subset match of the expected damage emit (every expected key, floats within 1e-9)."]
 
 
+# ─── the two battery cells: their own reference evaluators (PR #4, G9), imported from their files ──────────────
+
+BESS_UNIT_WORD = {"BESS_INTEGRATED_ENCLOSURE": "enclosure", "BESS_SEPARATE_PCS": "PCS"}
+BESS_DR_TOLERANCE = 1e-12   # neither battery cell declares a tolerance; these are the ones their evaluator validators use
+BESS_USD_TOLERANCE = 1e-6
+TC_BESS_DEMAND_BASIS = "DASHBOARD_BUILD_DECLARED_COMPARABLE_REFERENCE"  # the evaluator records it; it does not judge it
+# One encoding for both battery cells. Colour = the enclosure's consequence choice, in the three palette slots that
+# pass the dataviz validator on every pair in both themes (2 · 3 · 5; slots 1 and 3, 2 and 4 fail together); the
+# PCS, which no consequence choice changes, is drawn in ink. Line style = resistance scenario; mark = curve shape.
+BESS_RESPONSE = {  # artifact id → (legend words, end-label word, palette slot)
+    "approved_replacement": ("approved replacement", "replacement", 1),
+    "repair_sensitivity": ("repair sensitivity", "repair", 2),
+    "noncell_repair_sensitivity": ("non-cell repair", "non-cell repair", 2),
+    "limited_repair_sensitivity": ("limited repair", "limited repair", 4),
+}
+TC_BESS_SCENARIO_LINE = {"central_screening": 0, "lower_resistance": 1, "upper_resistance": 2}  # line-style slots: solid · dashed · dotted
+EXACT_STATE_FORM = "exact-state table, carried in the schema's piecewise-linear container"  # the evaluator never interpolates it
+WF_BESS_SHAPE = {"electronics_ordinal": ("electronics", 0), "heavy_electrical_ordinal": ("heavy-electrical", 1)}  # words · mark slot (circle · square)
+
+
+def _reference_evaluator(name: str) -> Any:
+    """A cell's reference evaluator, imported from its own file in scripts/reference_helpers/ and never re-implemented."""
+    module = importlib.import_module(name)
+    if Path(module.__file__).resolve() != (HELPERS / f"{name}.py").resolve():
+        raise AssertionError(f"{name} was imported from {module.__file__}, not from scripts/reference_helpers/")
+    return module
+
+
+def _answer_marks(found: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """One ○ per drawn point: cases that land on the same point of the same series are listed together."""
+    groups: dict[tuple[Any, ...], list[dict[str, Any]]] = {}
+    for f in found:
+        groups.setdefault((f["series"], f["x"], f["y"]), []).append(f)
+    out = []
+    for (series, x, y), fs in groups.items():
+        if len(fs) == 1:
+            test = f"case {fs[0]['case']}: {fs[0]['what']}"
+        else:
+            test = f"cases {', '.join(str(f['case']) for f in fs)}: {fs[0]['shared']} — the same point under {len(fs)} request choices"
+        mark = {"x": x, "y": y, "test": test, "n": len(fs), "series": series}
+        if fs[0].get("cost_usd") is not None:
+            mark["cost_usd"] = fs[0]["cost_usd"]
+        out.append(mark)
+    return out
+
+
+def _confirm_withheld_units(ev: Any, a: dict[str, Any], request_for: Callable[[str], dict[str, Any]]) -> list[str]:
+    """Every withheld failure unit comes back withheld from the evaluator, with the artifact's own reason codes."""
+    ids = []
+    for fu in a.get("failure_units") or []:
+        if not str(fu.get("treatment", "")).startswith("withheld"):
+            continue
+        unit = _unit_result(ev.evaluate_damage_call(a, request_for(fu["id"])), fu["id"]) or {}
+        if unit.get("status") != "withheld" or unit.get("scalar_central_dr") is not None or unit.get("withheld_reason_codes") != fu.get("withheld_reason_codes"):
+            raise AssertionError(f"{a.get('cell_id')}: {fu['id']} is not withheld by the evaluator with the artifact's reason codes ({unit.get('status')}, {unit.get('withheld_reason_codes')})")
+        ids.append(fu["id"])
+    return ids
+
+
+def sample_tc_bess(e: Entry, kat: dict[str, Any]) -> tuple[list[dict[str, Any]], dict[str, Any], list[str]]:
+    """Ordered damage-state lognormal records: one line per record × resistance scenario, never an average."""
+    name = "tropical_cyclone_wind_bess_curve_eval"
+    ev = _reference_evaluator(name)
+    a = e.artifact or {}
+    contract = a["evaluation_contract"]
+    selection = contract["curve_selection_by_response_hypothesis"]
+    if len(a["pathways"]) != 1:
+        raise AssertionError(f"{e.id}: expected one pathway, found {len(a['pathways'])}")
+    pw = a["pathways"][0]
+    hz = pw["hazard_axis"]
+    valid = (float(hz["valid_range"][0]), float(hz["valid_range"][1]))
+    axis = {"id": hz["id"], "label": "pressure ratio, (event 3-s gust ÷ declared reference 3-s gust)²", "unit": "dimensionless",
+            "input_field": hz["preferred_input_field"], "kind": "continuous", "valid_range": list(valid),
+            "bridge": {"formula": "pressure ratio = (event 3-s gust / reference 3-s gust)², formed by the consumer or by the evaluator from a gust pair",
+                       "reference": "declared by the consumer as demand_basis_id; the cell selects no national wind reference"}}
+    cases = kat.get("cases", [])
+    xs = _merge(grid(*valid), [float(c["pressure_ratio"]) for c in cases if valid[0] <= float(c["pressure_ratio"]) <= valid[1]])
+
+    def request(unit_id: str, hypothesis: str, scenario: str, ratio: float) -> dict[str, Any]:
+        return {"pathway_id": pw["pathway_id"], "failure_unit_id": unit_id, "demand_basis_id": TC_BESS_DEMAND_BASIS, "pressure_ratio": ratio,
+                "response_hypothesis_id": hypothesis, "resistance_scenario": scenario}
+
+    curves, labels = [], {}
+    above = math.nextafter(valid[1], math.inf)
+    for rec in pw["curve_records"]:
+        unit = BESS_UNIT_WORD[rec["failure_unit_id"]]
+        hyps = [h for h, units in selection.items() if units.get(rec["failure_unit_id"]) == rec["curve_id"]]
+        if not hyps:
+            raise AssertionError(f"{e.id}: no response hypothesis selects {rec['curve_id']}")
+        if len(hyps) == 1:
+            words, end_word, slot = BESS_RESPONSE[hyps[0]]
+            colour: dict[str, Any] = {"color_slot": slot}
+        else:  # one record under every response: no consequence choice changes it
+            words, end_word, colour = "either response", unit, {"ink": True}
+        per: dict[str, list[list[float]]] = {}
+        for x in xs:
+            for sid, out in ev.evaluate_curve_record(rec, x, valid_range=valid).items():
+                per.setdefault(sid, []).append([x, out["damage_ratio"]])
+        # above the valid range the evaluator withholds the demand (never clamps); confirm it for this record
+        held = _unit_result(ev.evaluate_damage_call(a, request(rec["failure_unit_id"], hyps[0], next(iter(per)), above)), rec["failure_unit_id"]) or {}
+        if held.get("status") != "withheld" or held.get("withheld_reason_codes") != ["AXIS_OUTSIDE_VALID_RANGE"]:
+            raise AssertionError(f"{e.id} {rec['curve_id']}: demand above {valid[1]} is not withheld by the evaluator")
+        series = []
+        row = f"{unit} · {words}"
+        for sid, pts in per.items():
+            scen = humanise(sid)
+            label = f"{row} · {scen}"
+            labels[(rec["curve_id"], sid)] = label
+            # one direct label per record, on its central line; the legend's record × scenario grid names every line
+            end = (unit if unit == "PCS" else f"{unit}, {end_word}") if sid == "central_screening" else ""
+            series.append(_series(label, pts, "line", scenario=sid, dash_slot=TC_BESS_SCENARIO_LINE[sid], end_label=end, legend_row=row, legend_col=scen, **colour))
+        p = rec["parameters"]
+        costs = " / ".join(f"{s['cost_ratio']:.3g}" for s in p["damage_states"])
+        curves.append(_curve(e, rec, axis, series,
+                             evaluator=_evaluator(name, "evaluate_curve_record", f"every resistance scenario evaluated on its own at {len(xs)} pressure ratios inside the axis valid range {valid[0]:g}–{valid[1]:g}, passed as valid_range; nothing averaged"),
+                             domain=list(valid),
+                             withheld_zones=[{"from": valid[1], "to": None, "reason": f"AXIS_OUTSIDE_VALID_RANGE: the evaluator withholds demand above {valid[1]:g}; never clamped"}],
+                             scenario_note=(f"{len(per)} unweighted resistance scenarios ({', '.join(humanise(s) for s in per)}), each its own line — alternatives, never averaged, "
+                                            "not confidence intervals; a request names one and the evaluator reports the others beside it"),
+                             notes=[f"State costs {costs} with lognormal β = {p['beta_ln']:g}; selected under response {' and '.join(humanise(h) for h in hyps)}."]))
+
+    by_curve = {c["curve_id"]: c for c in curves}
+    k = _kat(len(cases))
+    k["tolerance"] = BESS_DR_TOLERANCE
+    k["source"] = a.get("known_answer_tests")
+    found: dict[str, list[dict[str, Any]]] = {}
+    for i, c in enumerate(cases, start=1):
+        unit_id, hyp, sid, x = c["failure_unit_id"], c["response_hypothesis_id"], c["resistance_scenario"], float(c["pressure_ratio"])
+        try:
+            res = ev.evaluate_damage_call(a, request(unit_id, hyp, sid, c["pressure_ratio"]))
+            unit = _unit_result(res, unit_id) or {}
+            dr = _unit_dr(unit)
+            curve_id = selection[hyp][unit_id]
+            rec = next(r for r in pw["curve_records"] if r["curve_id"] == curve_id)
+            grain = ev.evaluate_curve_record(rec, x, valid_range=valid)[sid]["damage_ratio"]  # the drawn line at the same x
+            ok = (unit.get("status") == "conditional" and unit.get("curve_id") == curve_id and dr is not None
+                  and _close(dr, c["expected_dr"], BESS_DR_TOLERANCE) and grain == dr)
+            detail = {"expected": {"dr": c["expected_dr"], "curve_id": curve_id}, "actual": {"status": unit.get("status"), "curve_id": unit.get("curve_id"), "dr": dr, "record_grain_dr": grain}}
+            if ok:
+                found.setdefault(curve_id, []).append({"case": i, "series": labels[(curve_id, sid)], "x": x, "y": float(dr),
+                                                       "what": f"{BESS_UNIT_WORD[unit_id]} · {BESS_RESPONSE[hyp][0]} · {humanise(sid)} · ratio {c['pressure_ratio']}",
+                                                       "shared": f"{BESS_UNIT_WORD[unit_id]} · {humanise(sid)} · ratio {c['pressure_ratio']}"})
+        except Exception as exc:  # noqa: BLE001
+            ok, detail = False, {"error": _code(exc)}
+        _record(k, "case", ok, f"case {i}", detail)
+    for cid, fs in found.items():
+        by_curve[cid]["known_answers"] = _answer_marks(fs)
+    withheld = _confirm_withheld_units(ev, a, lambda u: request(u, next(iter(selection)), "central_screening", 1.0))
+    return curves, k, [
+        f"Sampled through the cell's reference evaluator ({name}.py) at {len(xs)} pressure ratios in {valid[0]:g}–{valid[1]:g} for every record × resistance scenario; nothing averaged.",
+        f"Known answers replayed through evaluate_damage_call with demand_basis_id {TC_BESS_DEMAND_BASIS} (recorded, not judged); tolerance {BESS_DR_TOLERANCE:g} on the damage ratio (the cell declares none), and each answer equals the drawn line at its ratio.",
+        f"Demand above {valid[1]:g} confirmed withheld (AXIS_OUTSIDE_VALID_RANGE) for every record; {', '.join(withheld)} confirmed withheld with the artifact's reason codes.",
+    ]
+
+
+def sample_wildfire_bess(e: Entry, kat: dict[str, Any]) -> tuple[list[dict[str, Any]], dict[str, Any], list[str]]:
+    """Exact-state tables: seven marks per record at the integer FSim states, never a line between states."""
+    name = "wildfire_bess_curve_eval"
+    ev = _reference_evaluator(name)
+    a = e.artifact or {}
+    contract = a["evaluation_contract"]
+    selection = contract["record_selection"]
+    if len(a["pathways"]) != 1:
+        raise AssertionError(f"{e.id}: expected one pathway, found {len(a['pathways'])}")
+    pw = a["pathways"][0]
+    hz = pw["hazard_axis"]
+    lo, hi = int(hz["valid_range"][0]), int(hz["valid_range"][1])
+    states = list(range(lo, hi + 1))
+    axis = {"id": hz["id"], "label": "FSim fire-intensity class at the unit, exact state", "unit": "class", "input_field": hz["preferred_input_field"],
+            "kind": "categorical", "valid_range": [lo, hi], "classes": {"0": "no event"}, "dodge": True,
+            "note": (f"Exact states only: one mark per record at each class {lo}–{hi} (records that share a class stand side by side inside it); nothing "
+                     "is drawn between classes, because the evaluator rejects any other state. Class 0 is the no-event control, never a stand-in for a missing class.")}
+
+    def picks(curve_id: str) -> list[tuple[str, str]]:
+        return [(h, s) for h, shapes in selection.items() for s, units in shapes.items() if curve_id in units.values()]
+
+    def request(unit_id: str, hypothesis: str, shape: str, state: Any, **extra: Any) -> dict[str, Any]:
+        req = {"pathway_id": pw["pathway_id"], "failure_unit_id": unit_id, "selector_id": contract["reference_id"], "class_state": state,
+               "response_hypothesis_id": hypothesis, "shape_scenario": shape, **extra}
+        if hypothesis != "approved_replacement" and contract.get("repair_serviceability_counterfactual_required"):
+            req["assume_retained_hardware_serviceable_for_sensitivity"] = True  # the contract's explicit counterfactual, not evidence
+        return req
+
+    curves, labels = [], {}
+    for rec in pw["curve_records"]:
+        unit = BESS_UNIT_WORD[rec["failure_unit_id"]]
+        chosen = picks(rec["curve_id"])
+        if not chosen:
+            raise AssertionError(f"{e.id}: no response hypothesis × shape selects {rec['curve_id']}")
+        pts = [[float(s), ev.evaluate_curve_record(rec, s)] for s in states]
+        if len(chosen) == 1:
+            hyp, shape = chosen[0]
+            words, _, slot = BESS_RESPONSE[hyp]
+            shape_words, mark = WF_BESS_SHAPE[shape]
+            row, col = f"{unit} · {words}", f"{shape_words} shape"
+            style: dict[str, Any] = {"color_slot": slot, "symbol_slot": mark, "variant": f"{hyp} · {shape}"}
+        else:  # the PCS keeps its electronics response under every consequence and shape: no choice changes it
+            row, col = f"{unit} · every consequence", f"{WF_BESS_SHAPE['electronics_ordinal'][0]} response under either shape"
+            style = {"ink": True, "symbol_slot": WF_BESS_SHAPE["electronics_ordinal"][1], "variant": "every response hypothesis × shape"}
+        label = f"{row} · {col}"
+        labels[rec["curve_id"]] = label
+        curves.append(_curve(e, rec, axis, [_series(label, pts, "categorical", legend_row=row, legend_col=col, **style)], form_label=EXACT_STATE_FORM,
+                             evaluator=_evaluator(name, "evaluate_curve_record", f"exact lookup at the integer states {lo}–{hi}; any other state is rejected (EXACT_FSIM_CLASS_STATE_REQUIRED), so nothing is drawn between states"),
+                             knots=[[float(x), float(y)] for x, y in rec["parameters"]["points"]], domain=[lo, hi]))
+    # between states the evaluator refuses (it never interpolates): confirm it on every record
+    for rec in pw["curve_records"]:
+        try:
+            ev.evaluate_curve_record(rec, lo + 0.5)
+        except ev.DamageCallError as err:
+            if err.code != "EXACT_FSIM_CLASS_STATE_REQUIRED":
+                raise
+        else:
+            raise AssertionError(f"{e.id} {rec['curve_id']}: the evaluator accepted a state between two classes")
+
+    by_curve = {c["curve_id"]: c for c in curves}
+    values = ev.load_value_binding(a, ROOT)["units"]
+    cases = kat.get("cases", [])
+    k = _kat(len(cases))
+    k["tolerance"] = BESS_DR_TOLERANCE
+    k["tolerance_usd"] = BESS_USD_TOLERANCE
+    k["source"] = a.get("known_answer_tests")
+    found: dict[str, list[dict[str, Any]]] = {}
+    for i, c in enumerate(cases, start=1):
+        unit_id, hyp, shape, state = c["failure_unit_id"], c["response_hypothesis_id"], c["shape_scenario"], c["class_state"]
+        try:
+            value = values[unit_id]["value_usd_each"]
+            res = ev.evaluate_damage_call(a, request(unit_id, hyp, shape, state, same_unit_value_usd=value))
+            unit = _unit_result(res, unit_id) or {}
+            dr = _unit_dr(unit)
+            usd = (res.get("exposure_used") or {}).get("expected_loss_usd")
+            curve_id = selection[hyp][shape][unit_id]
+            rec = next(r for r in pw["curve_records"] if r["curve_id"] == curve_id)
+            grain = ev.evaluate_curve_record(rec, state)  # the drawn mark at the same state
+            ok = (unit.get("status") == "conditional" and unit.get("curve_id") == curve_id and dr is not None and usd is not None
+                  and _close(dr, c["expected_dr"], BESS_DR_TOLERANCE) and _close(usd, c["expected_loss_usd"], BESS_USD_TOLERANCE) and grain == dr)
+            detail = {"expected": {"dr": c["expected_dr"], "usd": c["expected_loss_usd"], "curve_id": curve_id},
+                      "actual": {"status": unit.get("status"), "curve_id": unit.get("curve_id"), "dr": dr, "usd": usd, "record_grain_dr": grain}}
+            if ok:
+                found.setdefault(curve_id, []).append({"case": i, "series": labels[curve_id], "x": float(state), "y": float(dr), "cost_usd": float(usd),
+                                                       "what": f"{BESS_UNIT_WORD[unit_id]} · {BESS_RESPONSE[hyp][0]} · {WF_BESS_SHAPE[shape][0]} shape · state {state} · ${usd:,.0f}",
+                                                       "shared": f"{BESS_UNIT_WORD[unit_id]} · state {state} · ${usd:,.0f}"})
+        except Exception as exc:  # noqa: BLE001
+            ok, detail = False, {"error": _code(exc)}
+        _record(k, "case", ok, f"case {i}", detail)
+    for cid, fs in found.items():
+        by_curve[cid]["known_answers"] = _answer_marks(fs)
+    withheld = _confirm_withheld_units(ev, a, lambda u: request(u, "approved_replacement", contract["shape_scenarios"][0], 3))
+    return curves, k, [
+        f"Each record looked up through the cell's reference evaluator ({name}.py) at the exact states {lo}–{hi}; marks only, since the evaluator rejects any state between two classes (confirmed on every record).",
+        f"Known answers replayed through evaluate_damage_call with selector_id {contract['reference_id']} and each unit's value from the pinned value binding; the two repair hypotheses carry the explicit serviceability counterfactual the contract requires. "
+        f"Tolerances {BESS_DR_TOLERANCE:g} on the damage ratio and {BESS_USD_TOLERANCE:g} USD (the cell declares none); each answer equals the drawn mark at its state.",
+        f"{', '.join(withheld)} confirmed withheld with the artifact's reason codes.",
+    ]
+
+
 def sample_no_evaluator(e: Entry, kat: dict[str, Any]) -> tuple[list[dict[str, Any]], dict[str, Any], list[str]]:
     a = e.artifact or {}
     curves = []
@@ -877,6 +1136,10 @@ def sample_entry(e: Entry) -> dict[str, Any]:
         curves, k, notes = sample_tc_wind(e, kat)
     elif e.id == "tropical_cyclone_wind_solar":
         curves, k, notes = sample_tc_solar(e, kat)
+    elif e.id == "tropical_cyclone_wind_bess":
+        curves, k, notes = sample_tc_bess(e, kat)
+    elif e.id == "wildfire_bess":
+        curves, k, notes = sample_wildfire_bess(e, kat)
     elif e.id in EVALUATOR_MODULES:
         name = EVALUATOR_MODULES[e.id]
         module = importlib.import_module(name)

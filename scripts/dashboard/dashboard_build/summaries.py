@@ -99,7 +99,7 @@ def occurrence_sentence(hazard_label: str, asset_label: str, buckets: dict[str, 
 
 def dossier_sentence(curve: dict[str, Any], hazard_label: str, occurrence_state_sentence: str | None) -> str:
     part = curve.get("part") or curve.get("failure_unit_id")
-    form = (curve.get("curve_form") or "").replace("_", " ")
+    form = curve.get("form_label") or (curve.get("curve_form") or "").replace("_", " ")
     tiers = curve.get("tiers") or {}
     s = f"{part}: {form} on {curve['axis'].get('label', 'its native axis')}"
     if tiers.get("shape") or tiers.get("cost"):
