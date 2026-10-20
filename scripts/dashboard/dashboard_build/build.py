@@ -339,8 +339,15 @@ def build(write: bool = True) -> dict[str, Any]:
     all_curves = list(curves_out.values())
     bad_curves = [c["curve_id"] for c in all_curves if (c["drawn"] and not any(s["points"] for s in c["series"])) or (not c["drawn"] and not c["no_evaluator_sentence"])]
     declared = sum(len(curve_records(e.artifact)) for e in entries if e.kind == "cell")
-    check("curves", "every curve sampled or listed as no evaluator", not bad_curves and declared == len(all_curves),
-          {"declared": declared, "sampled": sum(1 for c in all_curves if c["drawn"]), "no_evaluator": sum(1 for c in all_curves if not c["drawn"]), "bad": bad_curves})
+    # The fixed sentence says "no reference evaluator for this form in this repository". It must stay true: once
+    # a `<entry>…_curve_eval.py` lands in scripts/reference_helpers/, the build stops (hard) until the sampler
+    # draws that cell through it (DCD-A06's trigger) — the page never keeps saying "none" beside an evaluator.
+    helpers = ROOT / "scripts/reference_helpers"
+    evaluator_now_present = {eid: sorted(p.name for p in helpers.glob(f"{eid}*_curve_eval.py")) for eid in sorted(NO_EVALUATOR)}
+    evaluator_now_present = {eid: names for eid, names in evaluator_now_present.items() if names}
+    check("curves", "every curve sampled or listed as no evaluator", not bad_curves and declared == len(all_curves) and not evaluator_now_present,
+          {"declared": declared, "sampled": sum(1 for c in all_curves if c["drawn"]), "no_evaluator": sum(1 for c in all_curves if not c["drawn"]), "bad": bad_curves,
+           "listed_no_evaluator": sorted(NO_EVALUATOR), "evaluator_now_present": evaluator_now_present})
     # 4 · every known answer reproduced
     check("known_answers", "every known answer reproduced within tolerance (not-run cases carry a reason)", not kat_failures, {**kat_totals, "failures": kat_failures}, severity="data")
     # 5 · every displayed source ID resolves
@@ -534,6 +541,8 @@ def _check_summary(c: dict[str, Any]) -> str:
     if c["id"] == "pins":
         return f"{d.get('pins')} pins checked" + (f", {len(d.get('failures') or [])} broken" if d.get("failures") else "")
     if c["id"] == "curves":
+        if d.get("evaluator_now_present"):
+            return "an evaluator now exists for " + ", ".join(d["evaluator_now_present"]) + " — draw it through the sampler"
         return f"{d.get('sampled')} drawn · {d.get('no_evaluator')} listed no evaluator · {d.get('declared')} declared"
     if c["id"] == "known_answers":
         return f"{d.get('reproduced')} of {d.get('run')} run reproduced · {d.get('not_run')} not run with a reason" + (f" · {len(d.get('failures') or [])} cells with failures" if d.get("failures") else "")

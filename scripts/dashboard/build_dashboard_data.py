@@ -21,15 +21,17 @@ from dashboard_build.common import BuildError  # noqa: E402
 
 
 def main() -> int:
+    check_only = "--check" in sys.argv
     try:
-        receipt = build(write="--check" not in sys.argv)
+        receipt = build(write=not check_only)
     except BuildError as exc:
         print(f"FAIL: {exc}", file=sys.stderr)
         return 1
     c = receipt["counts"]
     k = receipt["known_answers"]
     failed = [ch for ch in receipt["checks"] if not ch["ok"]]
-    print(f"{'PASS' if not failed else 'DATA CHECKS FAILED (' + ', '.join(ch['id'] for ch in failed) + ') — written, see receipt.json'}: {c['entries']} entries ({c['live']} live · {c['proposal']} proposals · {c['reused']} reused · {c['gap']} gaps) · "
+    where = "not written (--check)" if check_only else "written, see receipt.json"
+    print(f"{'PASS' if not failed else 'DATA CHECKS FAILED (' + ', '.join(ch['id'] for ch in failed) + ')'} — {where}: {c['entries']} entries ({c['live']} live · {c['proposal']} proposals · {c['reused']} reused · {c['gap']} gaps) · "
           f"{c['curves_drawn']} curves drawn + {c['curves_no_evaluator']} listed no evaluator of {c['curves_declared']} · "
           f"known answers {k['reproduced']} of {k['run']} run reproduced, {k['not_run']} not run with a reason · {receipt['pins_checked']} pins")
     return 1 if failed else 0
