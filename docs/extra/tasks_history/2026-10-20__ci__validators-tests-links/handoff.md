@@ -31,7 +31,9 @@
 8. **Verified locally from a fresh `python3.12` venv built from the final `requirements.txt`:** install 18 s
    (warm cache), pytest 19 passed (1 s), `validate_all.py` 28 passed · 0 failed · 6 skipped (16 s),
    `check_links.py` 0 broken (1 s); every exit code 0; the tree holds only this change.
-9. **PR and CI run:** recorded below under *Where it stands* once the workflow has run on GitHub.
+9. **PR:** [aamani-ai/Damage_Modeling#3](https://github.com/aamani-ai/Damage_Modeling/pull/3) — *CI: validators,
+   tests and link check*. Its description carries the local results, the six skips with reasons, the link
+   census, and the link and runtime of the workflow run on the PR's final commit.
 10. Untouched on purpose: every validator's logic; the dashboard session's paths (`dashboard/`,
     `scripts/dashboard/`, `docs/plans/damage_curve_dashboard/evidence/`, `docs/evidence/occurrence/`, the
     catalogue README/builder/validator); the notebooks (both existing pairs are known-broken per
@@ -56,11 +58,12 @@ python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 ## Where it stands
 
-- Branch `claude/keen-sanderson-23b1d5` on `origin` (`aamani-ai/Damage_Modeling`); the PR *CI: validators,
-  tests and link check* carries the local results, the skipped validators and the CI run link. **Not
-  merged** — the owner reviews and merges.
-- The workflow's first run is on the PR itself (`pull_request` trigger); its link and runtime are in the PR
-  description and in the final commit of this folder.
+- Branch `claude/keen-sanderson-23b1d5` on `origin` (`aamani-ai/Damage_Modeling`);
+  [PR #3](https://github.com/aamani-ai/Damage_Modeling/pull/3) carries the local results, the skipped
+  validators and the CI run link. **Not merged** — the owner reviews and merges.
+- The workflow's first runs are on the PR itself (`pull_request` trigger; each push supersedes the previous
+  run through the concurrency group). The run on the PR's final commit, with its runtime, is linked from the
+  PR description — not from this folder, so that recording it does not itself trigger another run.
 
 ## Next action
 
