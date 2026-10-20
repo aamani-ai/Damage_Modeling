@@ -5,7 +5,7 @@ import { StatusRail } from "@/components/status-rail";
 import { Card, CardTitle, Dl, EmptyState, FileLink, InfoHint, Kv, Mono, Tag } from "@/components/ui";
 import { blobUrl, cell, curve, curvesOf, manifest } from "@/lib/data";
 import { fmtDr, fmtNum, shortSha } from "@/lib/format";
-import { LINE_STYLE_WORDS } from "@/lib/series";
+import { CATEGORY_SYMBOL_WORDS, LINE_STYLE_WORDS } from "@/lib/series";
 
 export const dynamicParams = false;
 
@@ -56,7 +56,12 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
           )}
           {k.drawn ? (
             <div className="flex flex-wrap gap-x-4 gap-y-0.5 border-t border-border px-3 py-1.5 text-[10.5px] text-muted-foreground">
-              {k.series.map((s, i) => <span key={s.label}><span className="font-mono">{s.continuation ? "┄" : "—"}</span> {s.label} <span className="italic">({s.continuation ? "dotted" : LINE_STYLE_WORDS[i % LINE_STYLE_WORDS.length]})</span></span>)}
+              {k.series.map((s, i) => (
+                <span key={s.label}>
+                  {s.kind === "categorical" ? <span className="italic">{CATEGORY_SYMBOL_WORDS[(s.symbol_slot ?? i) % CATEGORY_SYMBOL_WORDS.length]} marks</span> : <><span className="font-mono">{s.continuation ? "┄" : "—"}</span> <span className="italic">{s.continuation ? "dotted" : LINE_STYLE_WORDS[(s.dash_slot ?? i) % LINE_STYLE_WORDS.length]}</span></>} · {s.label}{s.ink ? <span className="italic"> · ink: no choice in the cell changes it</span> : null}
+                </span>
+              ))}
+              {k.axis.note ? <span className="w-full">{k.axis.note}</span> : null}
               {k.scenario_note ? <span className="w-full">{k.scenario_note}</span> : null}
               {k.notes.map((n) => <span key={n} className="w-full">{n}</span>)}
             </div>
@@ -66,23 +71,27 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
           <CardTitle>What sets this curve</CardTitle>
           <div className="px-3 pb-3 text-[11px]">
             <Dl rows={[
-              ["form", <span key="f">{k.curve_form?.replace(/_/g, " ")}</span>],
+              ["form", <span key="f">{k.form_label ?? k.curve_form?.replace(/_/g, " ")}{k.form_label ? <span className="block font-mono text-[10px] text-muted-foreground">{k.curve_form} · x axis {k.x_axis_id}</span> : null}</span>],
               ["x axis", <span key="x">{k.axis.label}{k.axis.unit ? ` (${k.axis.unit})` : ""}</span>],
               ...(k.axis.bridge ? [["bridge", <span key="b" className="text-muted-foreground">{Object.entries(k.axis.bridge).filter(([, v]) => typeof v === "string").map(([kk, v]) => `${kk.replace(/_/g, " ")}: ${v}`).join(" · ")}</span>] as [string, React.ReactNode]] : []),
               ["valid domain", <span key="d" className="font-mono">{k.domain ? `${k.domain[0] ?? "−∞"} … ${k.domain[1] ?? "∞"}` : "—"}</span>],
               ...k.withheld_zones.map((z) => ["withheld", <span key={`w${z.from}`} className="text-muted-foreground"><span className="font-mono">{z.from} … {z.to ?? "∞"}</span> — {z.reason}</span>] as [string, React.ReactNode]),
               ["shape tier", <span key="s"><span className="font-mono">{k.tiers.shape ?? "–"}</span>{k.tiers.shape_basis ? <span className="text-muted-foreground"> — {k.tiers.shape_basis}</span> : null}</span>],
               ["cost tier", <span key="c"><span className="font-mono">{k.tiers.cost ?? "–"}</span>{k.tiers.cost_basis ? <span className="text-muted-foreground"> — {k.tiers.cost_basis}</span> : null}</span>],
-              ...(k.selected_by.length ? [["selected by", <span key="sel">{k.selected_by.map((s) => `${s.by}: ${s.when.join(" · ")}`).join("; ")}</span>] as [string, React.ReactNode]] : []),
+              ...(k.selected_by.length ? [["selected by", <span key="sel">{k.selected_by.map((s) => (
+                <span key={s.by} className="block">{s.by}: {s.when.length > 2 ? <span className="text-muted-foreground">any of {s.when.length}{s.when.map((w) => <span key={w} className="block pl-2">{w}</span>)}</span> : s.when.join(" or ")}</span>
+              ))}</span>] as [string, React.ReactNode]] : []),
               ...(k.variants && k.variants !== "none" ? [["variants", <span key="v" className="text-muted-foreground">{k.variants}</span>] as [string, React.ReactNode]] : []),
             ]} />
             {knotRows.length ? (
               <details className="mt-1">
-                <summary className="cursor-pointer text-muted-foreground hover:text-foreground">{knotRows.length} defining knots</summary>
+                <summary className="cursor-pointer text-muted-foreground hover:text-foreground">{k.axis.kind === "categorical" ? `${knotRows.length} exact states` : `${knotRows.length} defining knots`}</summary>
                 <table className="mt-1 w-full font-mono text-[10px]"><tbody>{knotRows.map(([x, y], i) => <tr key={i} className="border-t border-border/60"><td className="py-0.5 pr-2 tabular">{fmtNum(x, 4)}</td><td className="py-0.5 tabular">{fmtDr(y)}</td></tr>)}</tbody></table>
               </details>
             ) : null}
-            {Object.keys(params_).length && !("points" in params_) ? (
+            {k.curve_form === "ordered_damage_state_lognormal" && Array.isArray(params_.damage_states) && Array.isArray(params_.capacity_scenarios) ? (
+              <OrderedStates params={params_ as unknown as OrderedStateParams} />
+            ) : Object.keys(params_).length && !("points" in params_) ? (
               <details className="mt-1">
                 <summary className="cursor-pointer text-muted-foreground hover:text-foreground">record parameters</summary>
                 <pre className="mt-1 max-h-48 overflow-auto rounded bg-muted p-2 font-mono text-[9.5px] leading-snug">{JSON.stringify(params_, null, 1)}</pre>
@@ -133,13 +142,50 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
             </div>
             <div>
               {k.evaluator ? <p className="text-[10.5px] text-muted-foreground">evaluator · <FileLink href={blob(k.evaluator.module)}>{k.evaluator.module.split("/").slice(-1)[0]}</FileLink> <span className="font-mono">{k.evaluator.function}</span>{k.evaluator.note ? ` — ${k.evaluator.note}` : ""}</p> : null}
-              {k.known_answers.length ? <p className="mt-1 text-[10.5px] text-muted-foreground">{k.known_answers.length} known answers on this curve reproduced by the build (○ on the plot).</p> : null}
+              {k.known_answers.length ? (() => {
+                const n = k.known_answers.reduce((t, a) => t + (a.n ?? 1), 0);
+                return <p className="mt-1 text-[10.5px] text-muted-foreground">{n} known answer{n === 1 ? "" : "s"} on this curve reproduced by the build (○ on the plot{n > k.known_answers.length ? `, at ${k.known_answers.length} points` : ""}).</p>;
+              })() : null}
               <p className="mt-1 text-[10.5px] text-muted-foreground">what we changed from the source · not machine-readable in this cell yet; the write-up records it in prose</p>
               <p className="mt-1 text-[10.5px] text-muted-foreground">record in <FileLink href={blob(c.identity.kind === "cell" ? c.files.write_up ?? "" : "")}>{c.files.write_up?.split("/").slice(-1)[0] ?? "the artifact"}</FileLink> · data <Mono>{k.data_path}</Mono></p>
             </div>
           </div>
         </Card>
       </div>
+    </div>
+  );
+}
+
+interface OrderedStateParams { beta_ln: number; damage_states: { state_id: string; cost_ratio: number; tier?: string; description?: string; source_ids?: string[] }[]; capacity_scenarios: { scenario_id: string; state_medians: number[] }[] }
+
+/** An ordered damage-state record as the table it is: each state's cost, and the demand at which each resistance
+ * scenario reaches it (the lognormal median); one β for every state. */
+function OrderedStates({ params }: { params: OrderedStateParams }) {
+  const { damage_states: states, capacity_scenarios: scen } = params;
+  const sources = Array.from(new Set(states.flatMap((st) => st.source_ids ?? [])));
+  return (
+    <div className="mt-1">
+      <table className="w-full font-mono text-[10px]">
+        <thead>
+          <tr className="text-left text-muted-foreground">
+            <th className="py-0.5 pr-2 font-normal">state</th>
+            <th className="py-0.5 pr-2 font-normal">cost ratio</th>
+            <th className="py-0.5 pr-2 font-normal">tier</th>
+            {scen.map((s) => <th key={s.scenario_id} className="py-0.5 pr-2 font-normal">median · {s.scenario_id.split("_")[0]}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {states.map((st, i) => (
+            <tr key={st.state_id} className="border-t border-border/60">
+              <td className="py-0.5 pr-2" title={[st.state_id, st.description?.replace(/_/g, " ")].filter(Boolean).join(" — ")}>{st.state_id.split("_").slice(-1)[0]}</td>
+              <td className="tabular py-0.5 pr-2">{fmtNum(st.cost_ratio, 4)}</td>
+              <td className="py-0.5 pr-2">{st.tier?.slice(0, 2) ?? "–"}</td>
+              {scen.map((s) => <td key={s.scenario_id} className="tabular py-0.5 pr-2">{i === 0 ? "—" : fmtNum(s.state_medians[i - 1], 4)}</td>)}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className="mt-0.5 text-[10px] text-muted-foreground">lognormal β = {fmtNum(params.beta_ln, 3)} for every state; a median is the demand at which half the units reach that state or worse{sources.length ? <> · state costs from <span className="font-mono">{sources.join(" · ")}</span></> : null}</p>
     </div>
   );
 }

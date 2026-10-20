@@ -51,8 +51,8 @@ and the library's header shows them as a strip.
 | `counts` | The headline counts equal the catalogue's (13 live · 5 proposals · 3 reused · 4 gaps; 25 entries) | structural | pass |
 | `pins` | Every artifact, index, value-binding and source SHA equals its pin (45 pins) | structural | pass |
 | `twin_crosswalk` | Hazard's twin crosswalk SHA equals the battery value binding's pin | structural | pass |
-| `curves` | Every curve record is sampled through a repository evaluator, or listed with the fixed *no evaluator* sentence; and no cell listed as having no evaluator has one in `scripts/reference_helpers/` | structural | pass — 94 drawn, 10 listed |
-| `known_answers` | Every executable known answer reproduces within tolerance; a case not run carries its reason | data | pass — 1,748 of 1,748 run; 136 not run with reasons |
+| `curves` | Every curve record is sampled through a repository evaluator, or listed with the fixed *no evaluator* sentence; and no cell listed as having no evaluator has one in `scripts/reference_helpers/` | structural | pass — 104 drawn, 0 listed |
+| `known_answers` | Every executable known answer reproduces within tolerance; a case not run carries its reason | data | pass — 1,852 of 1,852 run; 32 not run with reasons |
 | `source_ids` | Every source ID shown resolves in the cell's own register | data | **fails** — 22 references in `tropical_cyclone_wind_wind`, `wildfire_solar`, `tropical_cyclone_wind_solar` |
 | `domain` | Nothing is sampled outside a declared valid domain (each sampler asserts it; a violation stops the build) | structural | pass |
 | `chain_files` | No trail station is marked *artifact* without a file behind it | structural | pass |
@@ -61,10 +61,13 @@ and the library's header shows them as a strip.
 A data check is never loosened to make the strip green: the failure is shown on the library and in each
 affected cell's evidence card until the cell's registers are fixed.
 
-**The two battery cells without an evaluator.** `tropical_cyclone_wind_bess` and `wildfire_bess` show *Not
-drawn — no reference evaluator for this form in this repository (G9).* Their evaluators landed on `main` in
-PR #4 after this slice was cut; once they are present the `curves` check stops the build until the sampler
-draws those cells through them (`DCD-A06`). That wiring is the first V1 step.
+**The two battery cells, drawn in the first V1 step.** V0 listed `tropical_cyclone_wind_bess` and
+`wildfire_bess` as *Not drawn* because no evaluator for their forms existed here. Their reference evaluators
+(PR #4) now sample them: the hurricane cell as nine lines, three records × three unweighted resistance
+scenarios that are never averaged, with demand above a pressure ratio of 2 hatched as withheld; the wildfire
+cell as seven marks per record at the exact FSim classes 0–6, side by side inside each class and never joined
+by a line. The build replays their 104 known answers (20 + 84) through `evaluate_damage_call`, and every one
+reproduces. `NO_EVALUATOR` is empty; the `curves` guard stays for any cell listed there later (`DCD-A06`).
 
 ## The look review
 
@@ -85,7 +88,7 @@ keyboard-only walk, the fixed sentences, both themes, a cold read, the speed bud
 | The Flood × Battery storage cell page with the ten-station trail, its drawers and the cards | Lineage lighting, the version ghost and the chain diff |
 | The Separate PCS curve dossier, with a linear or log x-axis | Digitised source points (◇) and the events rug; no V0 cell has data for either |
 | The Hail × Battery storage occurrence page, every bucket *not searched* | Search results: no field-report search has been logged |
-| Hurricane wind and wildfire × Battery storage listed, *Not drawn* | Their curves (the V1 step above) |
+| Hurricane wind and wildfire × Battery storage — listed *Not drawn* in V0, drawn through their evaluators since the first V1 step | The same scenario-grid legend and class marks for the other cells of these forms (`tropical_cyclone_wind_solar`, the wildfire cells) |
 | The `/code/<damage_code_id>?v=` resolver | The review queue and the one-pager export (gate G8) |
 | Every other cell and asset page, rendered from the same build | A look review of any page outside the battery slice |
 | Local run, static export | Hosting (gate H1) |
@@ -106,6 +109,12 @@ keyboard-only walk, the fixed sentences, both themes, a cold read, the speed bud
   (`DCD-D03`). The lock resolved Next 16.4.2; Hazard's baseline is 16.3.1 (`DCD-A02`).
 - **The browser never evaluates a curve.** Every point on a plot was sampled by a repository evaluator during
   the build; the app draws the samples.
+- **The build chooses the encoding where a cell needs one.** A series may carry style hints — colour as a
+  palette slot or ink, a line style, a mark — and a row and column in a grid legend; the plot draws them as
+  written, so a series looks the same on the cell page and in its dossier. Past four lines only the build's
+  chosen end labels are drawn; the grid legend names every line. On a class axis marked `dodge`, the records
+  sharing a class stand side by side inside it (display only). The two battery cells use this; other cells
+  keep the plot's default order.
 - **View state lives in the URL** so a link reproduces what the sender saw: `?lens=` on the library and the
   asset view, `?row=` for an open bucket, `?station=` for an open trail drawer, `?open=` for open cards
   (`?open=all` opens every card), `?x=log` on a dossier plot.

@@ -111,7 +111,7 @@ export interface Cell {
   };
   audit: { table: { source: string; columns: string[]; rows: string[][]; kind: string } | null; state: StationState; absent_sentence: string | null; site_adapter: FileRef | null };
   proof: {
-    known_answers: { declared: number; run: number; reproduced: number; not_run: { kind: string; n: number; reason: string }[]; failed: unknown[]; negative_run: number; tolerance: number | null; source: string | null; kinds: Record<string, number> };
+    known_answers: { declared: number; run: number; reproduced: number; not_run: { kind: string; n: number; reason: string }[]; failed: unknown[]; negative_run: number; tolerance: number | null; tolerance_usd?: number | null; source: string | null; kinds: Record<string, number> };
     validation: { path: string; status: string | null; date: string | null; classification?: string | null; review_scope?: string | null } | null;
     outside_checks: { kind: string; name: string; link: string }[];
     capability: Record<string, unknown> & { limitation_flags: string[] };
@@ -124,14 +124,19 @@ export interface Cell {
   build_findings: { check: string; severity: string; items: unknown[]; sentence: string }[];
 }
 
-export interface Axis { id: string; label: string; unit: string | null; input_field?: string | null; kind: "continuous" | "categorical"; valid_range?: (number | null)[] | null; classes?: Record<string, string>; bridge?: Record<string, unknown> }
-export interface Series { label: string; kind: "line" | "step" | "categorical"; points: [number, number][]; variant?: string; scenario?: string; beyond_last_knot_from?: number | null; continuation?: boolean }
-export interface KnownAnswer { x: number; y: number; test: string; cost_usd?: number }
+// `dodge`: exact states whose records share a class are drawn side by side inside the class (display only; the value is the record's).
+// `note`: one sentence the build writes about how this axis is drawn, shown once under its plot.
+export interface Axis { id: string; label: string; unit: string | null; input_field?: string | null; kind: "continuous" | "categorical"; valid_range?: (number | null)[] | null; classes?: Record<string, string>; bridge?: Record<string, unknown>; dodge?: boolean; note?: string }
+// The build's style hints, where it writes them: colour = a palette slot or ink, line style and mark = slots; else a series takes its
+// order. `end_label`: the words at the line's right end ("" = none, the legend names it); `legend_row`/`legend_col`: its cell in a grid legend.
+export interface Series { label: string; kind: "line" | "step" | "categorical"; points: [number, number][]; variant?: string; scenario?: string; beyond_last_knot_from?: number | null; continuation?: boolean; color_slot?: number; ink?: boolean; dash_slot?: number; symbol_slot?: number; end_label?: string; legend_row?: string; legend_col?: string }
+// `n`: cases that land on this same point (one ○ for them all); `series`: the label of the series it sits on.
+export interface KnownAnswer { x: number; y: number; test: string; cost_usd?: number; n?: number; series?: string }
 
 export interface Curve {
   curve_id: string; entry_id: string; damage_code_id: string | null; version_key: string | null; artifact_sha256: string | null;
   failure_unit_id: string | null; subsystem: string | null; component: string | null; treatment: string | null; part: string | null;
-  pathway_id: string | null; curve_form: string | null; x_axis_id: string | null; y_axis: string | null;
+  pathway_id: string | null; curve_form: string | null; form_label?: string | null; x_axis_id: string | null; y_axis: string | null;
   parameters: Record<string, unknown> | null; record_extra: Record<string, unknown>;
   axis: Axis; domain: (number | null)[] | null; withheld_zones: { from: number; to: number | null; reason: string }[];
   knots: [number, number][]; series: Series[]; envelope: { lower: [number, number][]; upper: [number, number][]; label: string } | null;

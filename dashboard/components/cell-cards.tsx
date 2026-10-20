@@ -44,11 +44,15 @@ export function AnswerCard({ cell, curves, m, blob }: { cell: Cell; curves: Curv
               </table>
             </div>
           ) : a.axis_groups.length ? (
-            a.axis_groups.map((g) => (
+            a.axis_groups.map((g) => {
+              const groupCurves = g.curve_ids.map((id) => curves.find((c) => c.curve_id === id)!).filter(Boolean);
+              const notes = Array.from(new Set([g.axis.note, ...groupCurves.map((c) => c.scenario_note)].filter((n): n is string => !!n)));
+              return (
               <div key={g.axis.id} className="mb-2 last:mb-0">
-                <CurvePlot curves={g.curve_ids.map((id) => curves.find((c) => c.curve_id === id)!).filter(Boolean)} axis={g.axis} height={a.axis_groups.length > 1 ? 260 : 340} />
-                {identicalSeries(g.curve_ids.map((id) => curves.find((c) => c.curve_id === id)!).filter(Boolean)).map(([x, y]) => (
-                  <p key={x + y} className="px-1 text-[10.5px] text-muted-foreground">identical response: <span className="font-mono">{x}</span> and <span className="font-mono">{y}</span> are the same function — the second is drawn as a band beneath the first, never offset</p>
+                <CurvePlot curves={groupCurves} axis={g.axis} height={a.axis_groups.length > 1 ? 260 : 340} />
+                {notes.map((n) => <p key={n} className="px-1 text-[10.5px] text-muted-foreground">{n}</p>)}
+                {identicalSeries(groupCurves).map(([x, y]) => (
+                  <p key={x + y} className="px-1 text-[10.5px] text-muted-foreground">identical response: <span className="font-mono">{x}</span> and <span className="font-mono">{y}</span> are the same function — {g.axis.kind === "categorical" ? (g.axis.dodge ? "their marks stand at the same heights in every class" : "the second's marks sit on the first's") : "the second is drawn as a band beneath the first, never offset"}</p>
                 ))}
                 <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 px-1 text-[10.5px] text-muted-foreground">
                   {g.curve_ids.map((id) => {
@@ -61,7 +65,8 @@ export function AnswerCard({ cell, curves, m, blob }: { cell: Cell; curves: Curv
                   })}
                 </div>
               </div>
-            ))
+              );
+            })
           ) : (
             <EmptyState>{cell.kind === "binding" ? "A reused binding has no curve of its own; it prices this asset with the pinned source cell's curve." : "No curve records in this artifact."}</EmptyState>
           )}
@@ -341,7 +346,7 @@ export function ProofCard({ cell, blob }: { cell: Cell; blob: (p: string) => str
               <Kv label="declared" value={k.declared} />
               <Kv label="run · reproduced" value={<span>{k.run} · {k.reproduced}{k.failed.length ? <Tag tone="danger" className="ml-1">✗ {k.failed.length}</Tag> : <Tag tone="ok" className="ml-1">✓</Tag>}</span>} />
               {k.not_run.map((n) => <Kv key={n.kind} label={`not run · ${n.kind.replace(/_/g, " ")}`} value={<span className="text-muted-foreground">{n.n} — {n.reason}</span>} />)}
-              <Kv label="tolerance" value={<span className="font-mono">{k.tolerance ?? "—"}</span>} />
+              <Kv label="tolerance" value={<span className="font-mono">{k.tolerance ?? "—"}{k.tolerance != null && k.tolerance_usd != null ? <span className="font-sans text-muted-foreground"> on the damage ratio · </span> : null}{k.tolerance_usd != null ? <>{k.tolerance_usd}<span className="font-sans text-muted-foreground"> USD</span></> : null}</span>} />
               {k.source ? <Kv label="file" value={<FileLink href={blob(k.source)}>{k.source.split("/").slice(-1)[0]}</FileLink>} /> : null}
             </>
           ) : <EmptyState>No known-answer tests are declared by this artifact; nothing was reproduced.</EmptyState>}

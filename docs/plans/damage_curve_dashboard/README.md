@@ -91,7 +91,7 @@ Shared with Hazard: the look principle at `Hazard_modeling/docs/principles/analy
 
 - [x] `dashboard/` scaffold from the Hazard dashboard's shell: `layout.tsx`, `globals.css` tokens, `ui.tsx` primitives, `status-chip` → the status rail, `echart.tsx`, the drawer; URL state always
 - [x] Library (all 25 entries, status lens; the tile of `06` §3.1) · battery asset view (`03` §2.2) · `flood_bess` cell page with the trail and the cards of `07` §4 · one curve dossier (`BESS_PCS_INUNDATION_PROXY`) · the hail × battery occurrence page (empty state) · the plain first line on each
-- [x] Hurricane × battery and wildfire × battery pages show *Not drawn — no reference evaluator* until Phase 3 — *their evaluators reached `main` in PR #4 during the build; the build now stops once one exists for a cell it lists as having none, so wiring them is the first V1 step*
+- [x] Hurricane × battery and wildfire × battery pages show *Not drawn — no reference evaluator* until Phase 3 — *their evaluators reached `main` in PR #4 during the build; the build now stops once one exists for a cell it lists as having none, so wiring them is the first V1 step — done 2026-10-20, see Phase 3*
 - [x] `dashboard/README.md`: run, build, checks, the look review
 - [ ] Gate: the look review of `06` §4, checks 1–8, with the screenshot set under `evidence/<commit>/`; then the owner's review on the running app (check 9) — *2026-10-20, [`evidence/3f9d516/REVIEW.md`](evidence/3f9d516/REVIEW.md): checks 1–6 and 8 pass; check 7 (cold read) not run, it needs a named reader; check 9 **accepted by the owner on the running app, 2026-10-20** ([`DCD-D17`](decisions.md#dcd-d17--v0-accepted-on-the-running-app))*
 
@@ -102,7 +102,8 @@ Shared with Hazard: the look principle at `Hazard_modeling/docs/principles/analy
 
 ### Phase 3 · V1 — every live cell
 
-- [ ] Reference evaluators for `tropical_cyclone_wind_bess` and `wildfire_bess` in `scripts/reference_helpers/`, each proven against the cell's known answers and checked against Hazard's `perils/*/src/*/bess.py` output (read, never imported)
+- [x] Reference evaluators for `tropical_cyclone_wind_bess` and `wildfire_bess` in `scripts/reference_helpers/`, each proven against the cell's known answers and checked against Hazard's `perils/*/src/*/bess.py` output (read, never imported) — *2026-10-20, merged to `main` in PR #4: each validator reproduces every known answer; the Hazard comparison is in each cell's `current/hazard_consumer_comparison.md`*
+- [x] The first V1 step: draw both cells through those evaluators — the hurricane cell as one line per record × resistance scenario, never averaged; the wildfire cell as marks at the exact FSim classes 0–6, never joined; their 104 known answers replayed and reproduced; the look review of the two pages — *2026-10-20, branch `claude/dashboard-v1-battery-75e6ea`, a pull request into `claude/dashboard-v0-5d463c`*
 - [ ] All 13 live cells, 5 proposals and 3 bindings sampled; the review block (G7) in the catalogue entries; the chain lens and the gate view (`07` §6–§7); the `/code/` resolver for model-gpr and the Hazard dashboard
 - [ ] Gate: look review per slice; the cold-read test with a named reviewer
 

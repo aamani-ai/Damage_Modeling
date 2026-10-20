@@ -5,14 +5,18 @@
 // reproduced; the continuation beyond the last knot is dotted and labelled "our judgment (T4)"; a withheld domain
 // is a hatched gap; one interactive legend — an HTML row of buttons that shows each series' colour AND line
 // style — owns visibility; hairline grid; the unit sits in the axis title. No animation (motion is for
-// orientation only). The browser draws the build's sampled points — it never evaluates a curve (P6).
+// orientation only). The browser draws the build's sampled points — it never evaluates a curve (P6). Where the
+// build writes style hints (colour = a palette slot or ink, line style, mark), a series keeps them on every page
+// it appears on. A scenario set is a grid legend (row = record, column = scenario or shape), every line named
+// there; past four lines only the build's chosen end labels are drawn (dataviz: direct labels for four or fewer).
+// On a dodged class axis the records sharing a class sit side by side inside it, the value untouched.
 import type { EChartsOption, SeriesOption } from "echarts";
 import { useTheme } from "next-themes";
-import { useEffect, useMemo, useState } from "react";
+import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { fmtDr } from "@/lib/format";
 import { identicalSeries } from "@/lib/plot-utils";
 import { CATEGORY_SYMBOLS, hatch, LINE_STYLES, readPalette, seriesColor, type PlotPalette } from "@/lib/series";
-import type { Axis, Curve } from "@/lib/types";
+import type { Axis, Curve, Series } from "@/lib/types";
 import { EChart } from "./echart";
 
 const MONO = "var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace";
@@ -20,12 +24,28 @@ const KNOTS = "defining knots ●";
 const ANSWERS = "known answers ○";
 const WITHHELD = "withheld";
 
-type LegendItem = { name: string; kind: "line" | "band" | "symbol" | "knot" | "answer" | "area"; slot: number; dash?: number[] | null; symbol?: string };
+type LegendItem = { name: string; kind: "line" | "band" | "symbol" | "knot" | "answer" | "area"; slot: number; dash?: number[] | null; symbol?: string; row?: string; col?: string };
+
+const INK = -1; // the foreground ink: a series no choice in the cell changes (and the legend's neutral glyphs)
+const GRID = { left: 46, right: 188, top: 26, bottom: 44 };
 
 function dashArray(slot: number, continuation = false): number[] | null {
   if (continuation) return [2, 3];
   const s = LINE_STYLES[slot % LINE_STYLES.length];
   return Array.isArray(s) ? s : null;
+}
+
+/** A series' colour slot, line style and mark: the build's hints where it wrote them, else its drawing order. */
+function styleOf(s: Series, order: number): { color: number; dash: number[] | null; symbol: string } {
+  return {
+    color: s.ink ? INK : s.color_slot ?? order,
+    dash: dashArray(s.dash_slot ?? order, s.continuation),
+    symbol: CATEGORY_SYMBOLS[(s.symbol_slot ?? order) % CATEGORY_SYMBOLS.length],
+  };
+}
+
+function colorOf(p: PlotPalette, slot: number): string {
+  return slot === INK ? p.fg : seriesColor(p, slot);
 }
 
 function niceMax(x: number): number {
@@ -43,8 +63,10 @@ export function legendItems(curves: Curve[], categorical: boolean): LegendItem[]
   for (const c of curves) {
     for (const s of c.series) {
       if (s.continuation) continue;
-      if (categorical || s.kind === "categorical") items.push({ name: s.label, kind: "symbol", slot, symbol: CATEGORY_SYMBOLS[slot % CATEGORY_SYMBOLS.length] });
-      else items.push({ name: s.label, kind: banded.has(s.label) ? "band" : "line", slot, dash: dashArray(slot) });
+      const st = styleOf(s, slot);
+      const cell = { row: s.legend_row, col: s.legend_col };
+      if (categorical || s.kind === "categorical") items.push({ name: s.label, kind: "symbol", slot: st.color, symbol: st.symbol, ...cell });
+      else items.push({ name: s.label, kind: banded.has(s.label) ? "band" : "line", slot: st.color, dash: st.dash, ...cell });
       slot++;
     }
     if (c.envelope) items.push({ name: c.envelope.label, kind: "area", slot: -1 });
@@ -55,12 +77,40 @@ export function legendItems(curves: Curve[], categorical: boolean): LegendItem[]
   return items;
 }
 
-function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette, hidden: Set<string>): EChartsOption {
+/** A scenario set's legend as a grid — rows = records, columns = scenarios or shapes — when every series names its
+ * row and column. Columns come from rows with several series; a row with one series that fits no column spans them. */
+export function legendGrid(items: LegendItem[]): { rows: string[]; cols: string[]; cells: Map<string, LegendItem>; spans: Map<string, LegendItem> } | null {
+  const own = items.filter((it) => it.kind === "line" || it.kind === "band" || it.kind === "symbol");
+  if (own.length < 2 || !own.every((it) => it.row && it.col)) return null;
+  const rows = Array.from(new Set(own.map((it) => it.row!)));
+  const multi = new Set(rows.filter((r) => own.filter((it) => it.row === r).length > 1));
+  const cols = Array.from(new Set(own.filter((it) => multi.has(it.row!)).map((it) => it.col!)));
+  const cells = new Map<string, LegendItem>();
+  const spans = new Map<string, LegendItem>();
+  for (const it of own) {
+    if (cols.includes(it.col!)) cells.set(`${it.row}\u0000${it.col}`, it);
+    else spans.set(it.row!, it);
+  }
+  return cols.length ? { rows, cols, cells, spans } : null;
+}
+
+function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette, hidden: Set<string>, width: number): EChartsOption {
   const categorical = axis.kind === "categorical";
   const categories = categorical
     ? Array.from(new Set(curves.flatMap((c) => c.series.flatMap((s) => s.points.map(([x]) => x))))).sort((a, b) => a - b).map(String)
     : [];
   const xOf = (x: number) => (categorical ? String(x) : x);
+  // a dodged class axis: the visible records sit side by side inside each class, in drawing order (display only)
+  const dodged = categorical && axis.dodge ? curves.flatMap((c) => c.series.filter((s) => !s.continuation && !hidden.has(s.label)).map((s) => s.label)) : [];
+  const band = width > 0 ? (width - GRID.left - GRID.right) / Math.max(1, categories.length) : 84;
+  const step = dodged.length > 1 ? Math.min(16, (band * 0.84) / dodged.length) : 0;
+  const markSize = dodged.length > 1 ? Math.max(5, Math.min(9, step - 2.5)) : 10;
+  const offsetOf = (label: string) => (dodged.includes(label) ? (dodged.indexOf(label) - (dodged.length - 1) / 2) * step : 0);
+  // end labels: every line when a plot shows four or fewer; past that, only where the build wrote one ("" = none)
+  const lines = curves.flatMap((c) => c.series.filter((s) => !s.continuation && s.kind !== "categorical" && !hidden.has(s.label)));
+  const labelEvery = lines.length <= 4;
+  const onlyRow = new Set(lines.map((s) => s.legend_row ?? s.label)).size === 1; // one record: name its lines by scenario
+  const openZone = !categorical && curves.some((c) => c.withheld_zones.some((z) => z.to == null));
   const series: SeriesOption[] = [];
   const twins = new Map<string, string>(); // first label → the identical series that shares its end label
   const silenced = new Set<string>();
@@ -73,38 +123,42 @@ function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette,
   let slot = 0;
   let xMax = 0;
   const knots: { value: [number | string, number]; itemStyle: { color: string } }[] = [];
-  const answers: { value: [number | string, number]; name: string; itemStyle: { borderColor: string; color: string } }[] = [];
-  const zones: { from: number; to: number | null; label: string }[] = [];
+  const answers: { value: [number | string, number]; name: string; symbolOffset?: [number, number]; itemStyle: { borderColor: string; color: string } }[] = [];
+  const zones: { from: number; to: number | null; label: string; low: boolean }[] = [];
   const refLines: { x: number; label: string }[] = [];
 
   for (const c of curves) {
     const curveSlot = slot;
     const main = c.series.filter((s) => !s.continuation);
+    const colorFor = new Map<string, string>(); // series label → its colour, for the ○ that sit on it
     for (let i = 0; i < c.series.length; i++) {
       const s = c.series[i];
       const own = s.continuation ? curveSlot + Math.max(0, main.findIndex((m) => s.label.startsWith(m.label))) : slot++;
       const parent = s.continuation ? main.find((m) => s.label.startsWith(m.label)) ?? main[0] : null;
       const visibleName = parent ? parent.label : s.label;
+      const st = styleOf(s, own);
+      const color = colorOf(p, st.color);
+      colorFor.set(s.label, color);
       if (hidden.has(visibleName)) continue;
-      const color = seriesColor(p, own);
       const pts = (logX ? s.points.filter(([x]) => x > 0) : s.points) as [number, number][];
       for (const [x] of pts) xMax = Math.max(xMax, x);
       if (categorical || s.kind === "categorical") {
-        const symbol = CATEGORY_SYMBOLS[own % CATEGORY_SYMBOLS.length];
-        series.push({ name: s.label, type: "scatter", data: pts.map(([x, y]) => [xOf(x), y]), symbol, symbolSize: 10, itemStyle: { color, borderColor: p.card, borderWidth: 1.5 }, z: 3 });
+        series.push({ name: s.label, type: "scatter", data: pts.map(([x, y]) => [xOf(x), y]), symbol: st.symbol, symbolSize: markSize, symbolOffset: [offsetOf(s.label), 0], itemStyle: { color, borderColor: p.card, borderWidth: 1.5 }, z: 3 });
         continue;
       }
       const hasContinuation = !s.continuation && c.series.some((o) => o.continuation && o.label.startsWith(s.label));
       const labelText = s.continuation ? visibleName : s.label;
-      const showEnd = !hasContinuation && !silenced.has(labelText);
-      const endText = twins.has(labelText) ? `${labelText}\n= ${twins.get(labelText)}` : labelText;
+      const ownEnd = labelEvery ? (onlyRow && s.legend_col ? s.legend_col : s.end_label || labelText) : s.end_label ?? labelText;
+      const showEnd = !hasContinuation && !silenced.has(labelText) && ownEnd !== "";
+      const endText = twins.has(labelText) ? `${ownEnd}\n= ${twins.get(labelText)}` : ownEnd;
       const mid = pts.length > 1 ? pts[Math.floor(pts.length / 2)] : null;
       const band = silenced.has(labelText) && !s.continuation; // the same function as an earlier series: a band beneath it
       series.push({
         name: s.label, type: "line", data: pts, showSymbol: false, smooth: false, connectNulls: false, z: band ? 1 : s.continuation ? 2 : 3,
-        lineStyle: band ? { color, width: 8, opacity: 0.3, type: "solid", cap: "round", join: "round" } : { color, width: s.continuation ? 1.5 : 1.75, type: (s.continuation ? [2, 3] : dashArray(own) ?? "solid") as never, cap: "round" },
+        lineStyle: band ? { color, width: 8, opacity: 0.3, type: "solid", cap: "round", join: "round" } : { color, width: s.continuation ? 1.5 : 1.75, type: (st.dash ?? "solid") as never, cap: "round" },
         itemStyle: { color },
-        endLabel: { show: showEnd, formatter: endText, color: p.fg, fontSize: 10.5, lineHeight: 13, fontFamily: MONO, distance: 6 },
+        endLabel: { show: showEnd, formatter: endText, color: p.fg, fontSize: 10.5, lineHeight: 13, fontFamily: MONO, distance: 6,
+          ...(openZone ? { backgroundColor: p.card, padding: [0, 3], borderRadius: 2 } : {}) }, // legible over the withheld hatch
         labelLayout: { moveOverlap: "shiftY" },
         markPoint: s.continuation && mid ? {
           silent: true, symbol: "circle", symbolSize: 0,
@@ -114,9 +168,22 @@ function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette,
         emphasis: { focus: "series", lineStyle: { width: 2.5 } },
       });
     }
-    if (!hidden.has(KNOTS)) for (const [x, y] of c.knots) if (!logX || x > 0) knots.push({ value: [xOf(x), y], itemStyle: { color: seriesColor(p, curveSlot) } });
-    if (!hidden.has(ANSWERS)) for (const ka of c.known_answers) if (!logX || ka.x > 0) answers.push({ value: [xOf(ka.x), ka.y], name: ka.test, itemStyle: { borderColor: seriesColor(p, curveSlot), color: p.card } });
-    for (const z of c.withheld_zones) zones.push({ from: z.from, to: z.to, label: /flag/i.test(z.reason) ? "flagged zero" : "withheld" });
+    const firstColor = colorOf(p, c.series.length ? styleOf(c.series[0], curveSlot).color : curveSlot);
+    if (!hidden.has(KNOTS)) for (const [x, y] of c.knots) if (!logX || x > 0) knots.push({ value: [xOf(x), y], itemStyle: { color: firstColor } });
+    if (!hidden.has(ANSWERS)) {
+      for (const ka of c.known_answers) {
+        if (logX && ka.x <= 0) continue;
+        const on = ka.series && colorFor.has(ka.series) ? ka.series : c.series[0]?.label;
+        if (dodged.length && on && !dodged.includes(on)) continue; // its record is hidden
+        answers.push({ value: [xOf(ka.x), ka.y], name: ka.test, ...(dodged.length && on ? { symbolOffset: [offsetOf(on), 0] as [number, number] } : {}),
+          itemStyle: { borderColor: (on && colorFor.get(on)) || firstColor, color: dodged.length ? "transparent" : p.card } });
+      }
+    }
+    for (const z of c.withheld_zones) {
+      // the word "withheld" sits at the top of the zone, or at its foot when lines end high at its edge (their labels sit there)
+      const high = lines.some((s) => { const e = s.points[s.points.length - 1]; return e && Math.abs(e[0] - z.from) < 1e-9 && e[1] > 0.5; });
+      zones.push({ from: z.from, to: z.to, label: /flag/i.test(z.reason) ? "flagged zero" : "withheld", low: high });
+    }
     const entry = (c.axis.bridge as { assumed_entry_m?: number } | undefined)?.assumed_entry_m;
     if (typeof entry === "number" && !refLines.some((r) => r.x === entry)) refLines.push({ x: entry, label: `${entry.toFixed(2)} m entry · T4 policy` });
     if (c.envelope && !hidden.has(c.envelope.label)) {
@@ -127,9 +194,10 @@ function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette,
   }
   if (!categorical && knots.length) series.push({ name: KNOTS, type: "scatter", data: knots, symbol: "circle", symbolSize: 5, z: 4, tooltip: { show: false } });
   if (answers.length) {
+    // on a dodged class axis every mark may be a known answer, so the ○ is a ring around the mark, never a cover
     series.push({
-      name: ANSWERS, type: "scatter", data: answers, symbol: "circle", symbolSize: 10, itemStyle: { borderWidth: 1.5 }, z: 5,
-      tooltip: { trigger: "item", formatter: (q: unknown) => { const v = q as { name: string; value: [number, number] }; return `○ reproduced by the build<br/>${v.name}<br/>${axis.label}: <b>${v.value[0]}</b> ${axis.unit ?? ""} · DR <b>${fmtDr(v.value[1])}</b>`; } },
+      name: ANSWERS, type: "scatter", data: answers, symbol: "circle", symbolSize: dodged.length ? Math.min(markSize + 5, Math.max(markSize + 3, step + 0.5)) : 10, itemStyle: { borderWidth: dodged.length ? 1.25 : 1.5 }, z: 5,
+      tooltip: { trigger: "item", formatter: (q: unknown) => { const v = q as { name: string; value: [number | string, number] }; return `○ reproduced by the build<br/>${v.name}<br/>${axis.label}: <b>${v.value[0]}</b> ${axis.unit ?? ""} · DR <b>${fmtDr(v.value[1])}</b>`; } },
     });
   }
   const hasOpenZone = zones.some((z) => z.to == null);
@@ -141,7 +209,7 @@ function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette,
       markArea: showZones ? {
         silent: true, itemStyle: { color: hatch(p.muted) as never },
         label: { show: true, position: "insideTop", color: p.muted, fontSize: 10.5, fontFamily: MONO },
-        data: zones.map((z) => [{ xAxis: xOf(z.from), name: z.label }, { xAxis: z.to == null ? (xMaxShown ?? "max") : xOf(z.to) }]) as never,
+        data: zones.map((z) => [{ xAxis: xOf(z.from), name: z.label, ...(z.low ? { label: { position: "insideBottom" } } : {}) }, { xAxis: z.to == null ? (xMaxShown ?? "max") : xOf(z.to) }]) as never,
       } : undefined,
       markLine: refLines.length ? {
         silent: true, symbol: "none", lineStyle: { color: p.muted, type: [3, 3] as never, width: 1 },
@@ -156,7 +224,7 @@ function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette,
   return {
     animation: false,
     textStyle: { fontFamily: "var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif", color: p.fg },
-    grid: { left: 46, right: 188, top: 26, bottom: 44 },
+    grid: { ...GRID },
     tooltip: {
       trigger: categorical ? "item" : "axis", confine: true,
       axisPointer: { type: "cross", lineStyle: { color: p.muted }, crossStyle: { color: p.muted }, label: { backgroundColor: p.card, color: p.fg, borderColor: p.border, borderWidth: 1, fontFamily: MONO, fontSize: 10 } },
@@ -197,14 +265,23 @@ export function CurvePlot({ curves, axis, logX = false, height = 340, ariaLabel 
   const { resolvedTheme } = useTheme();
   const [palette, setPalette] = useState<PlotPalette | null>(null);
   const [hidden, setHidden] = useState<Set<string>>(() => new Set());
+  const box = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(0);
   useEffect(() => {
     // read the tokens one frame after the theme class flips, so the plot never paints the other theme's ink
     const id = requestAnimationFrame(() => setPalette(readPalette()));
     return () => cancelAnimationFrame(id);
   }, [resolvedTheme]);
+  useEffect(() => {
+    // a dodged class axis spaces its marks by the width of one class, so it follows the plot's width
+    if (!axis.dodge || !box.current) return;
+    const ro = new ResizeObserver(([e]) => setWidth(Math.round(e.contentRect.width)));
+    ro.observe(box.current);
+    return () => ro.disconnect();
+  }, [axis.dodge]);
   const categorical = axis.kind === "categorical";
   const items = useMemo(() => legendItems(curves, categorical), [curves, categorical]);
-  const option = useMemo(() => (palette ? buildOption(curves, axis, logX, palette, hidden) : null), [curves, axis, logX, palette, hidden]);
+  const option = useMemo(() => (palette && (!axis.dodge || width) ? buildOption(curves, axis, logX, palette, hidden, width) : null), [curves, axis, logX, palette, hidden, width]);
   const label = ariaLabel ?? `Damage ratio against ${axis.label} for ${curves.map((c) => c.part ?? c.curve_id).join(", ")}`;
   const toggle = (name: string) =>
     setHidden((h) => {
@@ -213,21 +290,49 @@ export function CurvePlot({ curves, axis, logX = false, height = 340, ariaLabel 
       else n.add(name);
       return n;
     });
+  const grid = useMemo(() => legendGrid(items), [items]);
+  const inGrid = (it: LegendItem) => !!grid && (it.kind === "line" || it.kind === "band" || it.kind === "symbol");
+  const button = (it: LegendItem, text: ReactNode, key: string | number = it.name) => {
+    const off = hidden.has(it.name);
+    return (
+      <button key={key} type="button" aria-pressed={!off} aria-label={text ? undefined : it.name} onClick={() => toggle(it.name)} title={off ? `Show ${it.name}` : `Hide ${it.name}`}
+        className={`inline-flex items-center gap-1.5 rounded px-1 py-0.5 text-[10.5px] hover:bg-muted ${off ? "text-muted-foreground line-through opacity-40" : "text-foreground"}`}>
+        <Swatch item={it} />
+        {text ? <span>{text}</span> : null}
+      </button>
+    );
+  };
   return (
     <div>
-      <div role="group" aria-label="Legend — show or hide a series" className="flex flex-wrap items-center gap-x-3 gap-y-1 px-1 pb-1">
-        {items.map((it) => {
-          const off = hidden.has(it.name);
-          return (
-            <button key={it.name} type="button" aria-pressed={!off} onClick={() => toggle(it.name)} title={off ? `Show ${it.name}` : `Hide ${it.name}`}
-              className={`inline-flex items-center gap-1.5 rounded px-1 py-0.5 text-[10.5px] hover:bg-muted ${off ? "text-muted-foreground line-through opacity-60" : "text-foreground"}`}>
-              <Swatch item={it} />
-              <span>{it.name}{it.kind === "band" ? <span className="text-muted-foreground"> · same line, drawn as a band</span> : null}</span>
-            </button>
-          );
-        })}
+      <div role="group" aria-label="Legend — show or hide a series" className="px-1 pb-1">
+        {grid ? (
+          <table className="mb-1 text-[10.5px] leading-tight">
+            <thead>
+              <tr>
+                <td />
+                {grid.cols.map((c) => <th key={c} scope="col" className="px-1.5 pb-0.5 text-left font-normal text-muted-foreground">{c}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {grid.rows.map((r) => (
+                <tr key={r}>
+                  <th scope="row" className="py-0 pr-3 text-left font-normal">{r}</th>
+                  {grid.spans.has(r) ? (
+                    <td colSpan={grid.cols.length} className="px-0.5">{button(grid.spans.get(r)!, <span className="text-muted-foreground">{grid.spans.get(r)!.col}</span>)}</td>
+                  ) : grid.cols.map((c) => {
+                    const it = grid.cells.get(`${r}\u0000${c}`);
+                    return <td key={c} className="px-0.5">{it ? button(it, null) : null}</td>;
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : null}
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          {items.filter((it) => !inGrid(it)).map((it, i) => button(it, <>{it.name}{it.kind === "band" ? <span className="text-muted-foreground"> · same line, drawn as a band</span> : null}</>, `${i}·${it.name}`))}
+        </div>
       </div>
-      <div style={{ height }}>{option ? <EChart option={option} className="h-full w-full" ariaLabel={label} /> : null}</div>
+      <div ref={box} style={{ height }}>{option ? <EChart option={option} className="h-full w-full" ariaLabel={label} /> : null}</div>
     </div>
   );
 }

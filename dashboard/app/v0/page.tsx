@@ -87,15 +87,21 @@ const STOPS: Stop[] = [
     ],
   },
   {
-    title: "Hurricane wind and wildfire × Battery storage — not drawn",
+    title: "Hurricane wind and wildfire × Battery storage — drawn through their evaluators",
     links: [
       { href: "/cells/tropical_cyclone_wind_bess", label: "Hurricane wind × Battery storage" },
       { href: "/cells/wildfire_bess", label: "Wildfire × Battery storage" },
     ],
-    answers: "What does the dashboard do when a curve exists but this repository cannot evaluate it?",
-    tryThis: ["Compare the answer card with Flood's: the curves are listed, the plot is replaced by the fixed sentence."],
+    answers: "Can I read a cell whose curve comes as resistance scenarios, or as exact fire-intensity classes?",
+    tryThis: [
+      "Hurricane: read the legend grid (a row per record, a column per resistance scenario), switch a line off and on, and hover the plot.",
+      "Wildfire: the seven records stand side by side inside each class; hover a mark for its value and the known answer it reproduces.",
+      "Open a curve from the list under a plot: the hurricane dossier tabulates each damage state's cost and its median per scenario.",
+    ],
     known: [
-      "Their evaluators reached main in PR #4 after V0 was cut. A separate session is wiring them in; until then the build refuses to drop the sentence silently.",
+      "Since the first V1 step both are drawn by their own reference evaluators (PR #4), and the build reproduces their 104 known answers (20 hurricane, 84 wildfire).",
+      "The three resistance scenarios are unweighted alternatives, never averaged and not confidence intervals; above a pressure ratio of 2 the evaluator withholds, so that zone is hatched.",
+      "Wildfire is marks only, because the evaluator rejects any state between two classes. The PCS is drawn in ink: no consequence or shape choice changes it.",
     ],
   },
   {
@@ -125,14 +131,14 @@ const LOOK_REVIEW: { n: number; check: string; result: string; ok: boolean | nul
   { n: 2, check: "Greyscale", result: "every tile and curve still reads", ok: true },
   { n: 3, check: "Screenshot escape", result: "the rail stays in every frame", ok: true },
   { n: 4, check: "Keyboard only", result: "library → cell → drawer → dossier → ⓘ, ring visible", ok: true },
-  { n: 5, check: "Copy and fixed sentences", result: "pass; questions 2–4 below", ok: true },
+  { n: 5, check: "Copy and fixed sentences", result: "pass; questions 2 and 4 below (3 no longer applies)", ok: true },
   { n: 6, check: "Both themes", result: "the builder's eye; yours decides", ok: true },
   { n: 7, check: "Cold read", result: "not run; needs a named reader (question 6)", ok: null },
   { n: 8, check: "Speed", result: "cell page 673 ms worst at 4× slower CPU (budget 1,500)", ok: true },
   { n: 9, check: "Your review", result: "accepted on the running app, 2026-10-20 (DCD-D17)", ok: true },
 ];
 
-const QUESTIONS: { q: ReactNode; options: string[]; rec?: string; answer?: string }[] = [
+const QUESTIONS: { q: ReactNode; options: string[]; rec?: string; answer?: string; moot?: string }[] = [
   {
     q: "Is V0 the right base to build V1 on?",
     options: ["Accept as it is", "Accept with the changes you list", "Rework before V1"],
@@ -147,6 +153,7 @@ const QUESTIONS: { q: ReactNode; options: string[]; rec?: string; answer?: strin
     q: "The two battery tiles without an evaluator carry a small “not drawn” tag. The spec gives that state no tile form. Keep it?",
     options: ["Keep", "Drop"],
     rec: "Keep until the evaluators are wired; it disappears then anyway.",
+    moot: "No longer applies: both cells are drawn since the first V1 step, so no tile carries the tag. Not a ruling — nothing was decided.",
   },
   {
     q: <>At 10 px the gap mark <Mono>┈</Mono> reads close to the left-out mark <Mono>–</Mono>. Change one?</>,
@@ -191,8 +198,8 @@ export default function ReviewV0() {
           </span>
         </div>
         <p className="mt-1 max-w-[1100px] text-[12.5px] leading-snug">
-          The owner accepted V0 on the running app on 2026-10-20. The screens below stay the walkthrough for anyone reviewing it; questions 2 to 6 at
-          the bottom are still open. Every link opens the real page in this tab; use the browser&apos;s back button to return here.
+          The owner accepted V0 on the running app on 2026-10-20. The screens below stay the walkthrough for anyone reviewing it; questions 2, 4, 5
+          and 6 at the bottom are still open, and 3 no longer applies. Every link opens the real page in this tab; use the browser&apos;s back button to return here.
         </p>
       </div>
 
@@ -270,7 +277,7 @@ export default function ReviewV0() {
         </Section>
       </div>
 
-      <Section title="Decisions I need from you" right={<span className="text-[10.5px] text-muted-foreground">1 answered · reply in the chat for 2–6, e.g. “2 keep, 3 keep, …”</span>}>
+      <Section title="Decisions I need from you" right={<span className="text-[10.5px] text-muted-foreground">1 answered · 1 no longer applies · reply in the chat for 2 and 4–6, e.g. “2 keep, 4 keep, …”</span>}>
         <ol className="space-y-2.5">
           {QUESTIONS.map((x, i) => (
             <li key={i} className="grid gap-x-6 gap-y-1 text-[11.5px] leading-snug md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
@@ -281,6 +288,8 @@ export default function ReviewV0() {
               <div>
                 {x.answer ? (
                   <Tag tone="ok">✓ {x.answer}</Tag>
+                ) : x.moot ? (
+                  <p className="text-[11px] text-muted-foreground">{x.moot}</p>
                 ) : (
                   <>
                     <div className="flex flex-wrap items-center gap-1.5"><span className="text-[10.5px] text-muted-foreground">options</span>{x.options.map((o) => <Tag key={o}>{o}</Tag>)}</div>

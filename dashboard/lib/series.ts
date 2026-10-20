@@ -6,6 +6,7 @@ export type LineType = "solid" | "dashed" | "dotted" | number[];
 export const LINE_STYLES: LineType[] = ["solid", [7, 4], [2, 3], [9, 3, 2, 3], [14, 4]];
 export const LINE_STYLE_WORDS = ["solid", "dashed", "dotted", "dash-dot", "long dash"];
 export const CATEGORY_SYMBOLS = ["circle", "rect", "triangle", "roundRect", "pin"];
+export const CATEGORY_SYMBOL_WORDS = ["● circle", "■ square", "▲ triangle", "rounded square", "pin"];
 
 export function cssVar(name: string): string {
   if (typeof window === "undefined") return "";

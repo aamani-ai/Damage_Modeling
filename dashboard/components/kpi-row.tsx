@@ -20,7 +20,7 @@ export function KpiRow({ m }: { m: Manifest }) {
       <Kpi label="Curve cells" value={<>{c.live} <span className="text-[12px] font-normal text-muted-foreground">live</span></>}
         sub={<span className="font-mono">■ {c.live} · ▢ {c.proposal} proposals · ▨ {c.reused} reused · ┈ {c.gap} gaps</span>} title="what exists: live in the runtime index · proposal · reused binding · gap" />
       <Kpi label="Curves drawn" value={<>{c.curves_drawn} <span className="text-[12px] font-normal text-muted-foreground">of {c.curves_declared}</span></>}
-        sub={<>{c.curves_no_evaluator} curves: {m.sentences.no_evaluator.page}</>} title="every curve record sampled through a Python evaluator, or listed as not drawn" />
+        sub={c.curves_no_evaluator ? <>{c.curves_no_evaluator} curves: {m.sentences.no_evaluator.page}</> : <>every curve record sampled through this repository&apos;s own evaluators</>} title="every curve record sampled through a Python evaluator, or listed as not drawn" />
       <Kpi label="Known answers" value={<>{n(c.known_answers_reproduced)} <span className="text-[12px] font-normal text-muted-foreground">of {n(c.known_answers_run)} run</span></>}
         sub={<>reproduced by the build · {n(c.known_answers_not_run)} not run, each with its reason</>} title="the cells' own known-answer tests, re-run by the data build" />
       <Kpi label="Field reports" value={<>{c.field_searches_logged} <span className="text-[12px] font-normal text-muted-foreground">searches logged</span></>}
