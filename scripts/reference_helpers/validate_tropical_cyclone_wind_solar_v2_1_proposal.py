@@ -291,12 +291,39 @@ def validate_assembly(artifact: Mapping[str, Any]) -> None:
     require(gsu["failure_unit_results"][0]["scalar_central_dr"] > 0, "GSU remains null/zero")
 
 
+def _kat_equal(actual: Any, expected: Any) -> bool:
+    """Known-answer equality: float leaves within math.isclose(rel_tol=1e-9, abs_tol=1e-12), all else exact.
+
+    The expected values were recorded on macOS. On Linux (glibc) the evaluator's lognormal-fragility
+    floats (math.log, math.erfc) come out 1-32 ulp different (measured 2026-10-20, at most 6.6e-15
+    relative), so exact float equality only holds on the platform that wrote the fixture.
+    """
+    if isinstance(expected, dict):
+        return (
+            isinstance(actual, dict)
+            and actual.keys() == expected.keys()
+            and all(_kat_equal(actual[key], value) for key, value in expected.items())
+        )
+    if isinstance(expected, list):
+        return (
+            isinstance(actual, list)
+            and len(actual) == len(expected)
+            and all(_kat_equal(got, want) for got, want in zip(actual, expected))
+        )
+    if isinstance(expected, float) or isinstance(actual, float):
+        return (
+            all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in (actual, expected))
+            and math.isclose(actual, expected, rel_tol=1e-9, abs_tol=1e-12)
+        )
+    return actual == expected
+
+
 def validate_kats(artifact: Mapping[str, Any]) -> tuple[int, int]:
     fixture = load(KATS)
     require(fixture["semantic_damage_model_version"] == "model v2.1", "KAT model")
     for test in fixture["runtime_known_answer_tests"]:
         actual = evaluator.evaluate_damage_call(artifact, test["request"])
-        require(actual == test["expected"], f"{test['test_id']}: output drift")
+        require(_kat_equal(actual, test["expected"]), f"{test['test_id']}: output drift")
     for test in fixture["rejection_tests"]:
         try:
             evaluator.evaluate_damage_call(artifact, test["request"])

@@ -14,28 +14,33 @@ and should be deleted." This file is that idea, kept current. The facts come fro
 [`scripts/reference_helpers/branch_register.py`](../../scripts/reference_helpers/branch_register.py); the
 **What to do** column is judgment, and a branch is never deleted without its creator's agreement.*
 
-## The register (2026-10-20, `main` after merging PR #2 and PR #4)
+## The register (2026-10-20, `main` after merging PR #3)
 
 | Branch | Created by · on | Last by · on | Age (days) | Ahead / behind `main` | Merged | Files | What it is | What to do |
 |---|---|---|---|---|---|---|---|---|
 | `main` = `origin/main` | — | Divi-patel · 2026-10-20 | 0 | — | — | — | The line of record; pushed directly by the owner | — |
-| `claude/dashboard-v0-5d463c` (local worktree, not yet pushed) | the V0 build session · 2026-10-20 | · 2026-10-20 | 0 | 2 / 4 | no | 188 | The dashboard Phase 0 (data build with checks and receipt, the occurrence register home) committed; V0 screens in progress — interrupted by a session limit and resumed ([plan](../plans/damage_curve_dashboard/README.md)) | **Active.** Becomes a PR that waits for the owner's screenshot review; delete after merge |
-| `origin/claude/keen-sanderson-23b1d5` | the CI session · 2026-10-20 | · 2026-10-20 | 0 | 4 / 4 | no | 11 | **PR #3** — CI workflow, `validate_all.py`, `check_links.py`; red on Ubuntu for one platform-sensitive known-answer test, fix in progress | **Active.** Merge when the workflow is green; delete after merge |
-| `origin/claude/ci-kat-diagnostic` | the CI session · 2026-10-20 | · 2026-10-20 | 0 | 5 / 4 | no | 13 | A temporary branch to run the KAT diagnostic on Ubuntu; its own commit message says it is to be deleted | **Delete** once PR #3 is green (the CI session's job) |
+| `origin/claude/dashboard-v0-5d463c` | the V0 build session · 2026-10-20 | · 2026-10-20 | 0 | 20 / 7 | no | 346 | **PR #5** — the dashboard Phase 0 (data build with checks and receipt, the occurrence register home) and the V0 battery slice; the owner accepted V0 on the running app on 2026-10-20 (recorded on the branch as `DCD-D17`) ([plan](../plans/damage_curve_dashboard/README.md)) | **Active.** Merge together with PR #6 once that is folded in (the build session asks the owner); delete after merge |
+| `origin/claude/dashboard-v1-battery-75e6ea` | the evaluator-wiring session · 2026-10-20 | · 2026-10-20 | 0 | 31 / 0 | no | 421 (includes PR #5's) | **PR #6**, stacked on PR #5's branch — wires the two battery evaluators from PR #4 into the data build; all 104 curves drawn, all 1,852 known answers reproduced | **Active.** Merges through PR #5; delete after merge |
 | `origin/cell/real-estate` | jll-l · (fully contained) | jll-l · 2026-10-19 | 1 | 0 / 8 | **yes** | 0 | Jung A's working branch for the five Real Estate cells; merged into `main` on 2026-10-19 | **Merged — safe to delete whenever Jung A is done pushing to it.** Nothing is lost |
 | `origin/cell/flood-real-estate` | jll-l · (fully contained) | jll-l · 2026-10-12 | 8 | 0 / 56 | **yes** | 0 | The first Real Estate cell, superseded by `cell/real-estate` | **Delete** (merged; with Jung A's OK) |
 | `origin/cell/winter-storm-solar-wind` | jll-l · 2026-10-12 | jll-l · 2026-10-15 | 5 | 2 / 63 | no | 55 | Two proposed cells (`winter_storm_solar` screening proxy, `winter_storm_wind` fail-closed), five notebooks, five scripts | **Decision needed (RO3):** rebase onto `main` and merge as proposals, or close with a note. It falls further behind every day |
 | `origin/validation/damage-core` | jll-l · 2026-09-15 | jll-l · 2026-09-15 | 35 | 1 / 65 | no | 1 | `docs/extra/learning_logs/damage_core/VALIDATION_REPORT.md` — docs only | **Merge as a doc, then delete.** No model change; review evidence that only lives on a branch is invisible |
 | `origin/review/cell-curation-audit` | jll-l · 2026-08-27 | jll-l · 2026-08-27 | 54 | 1 / 70 | no | 2 | Standard-10 review scorecards and summary (2026-08-27) under `docs/extra/learning_logs/` — docs only | **Merge as docs, then delete.** Same reason |
 
-Tags: none. Pull requests on `origin`: #1 (`codex/publish-v2-5-implementation`, merged 2026-06-25); #2 and #4
-merged 2026-10-20 (below); #3 open. Remotes: `origin` only (`aamani-ai/Damage_Modeling`); the personal fork
-`Divi-patel/Damage_Modeling` is a dormant mirror at `a71ac72`, not a remote.
+Tags: none. Pull requests on `origin`: #1 (`codex/publish-v2-5-implementation`, merged 2026-06-25); #2, #3 and
+#4 merged 2026-10-20 (below); #5 and #6 open. Remotes: `origin` only (`aamani-ai/Damage_Modeling`); the personal
+fork `Divi-patel/Damage_Modeling` is a dormant mirror at `a71ac72`, not a remote.
+
+Local only, not on `origin`: `claude/jolly-gauss-75e6ea`, `claude/modest-darwin-9c7792` and
+`claude/amazing-elgamal-e5550b` are the worktree branches of finished agent sessions (the last two fully merged);
+the desktop app removes them with their worktrees. They are not in the table.
 
 ### Recently closed
 
 | When | Branch | What happened |
 |---|---|---|
+| 2026-10-20 | `claude/keen-sanderson-23b1d5` — **PR #3**, CI: validators, tests and link check | Merged into `main` (merge commit) once its workflow was green; branch deleted on `origin` in the same action |
+| 2026-10-20 | `claude/ci-kat-diagnostic` | The CI session's temporary branch for the Ubuntu known-answer diagnostic; deleted by that session once the diagnosis was recorded |
 | 2026-10-20 | `claude/modest-darwin-9c7792` — **PR #4**, reference evaluators for the two battery cells (G9) | Merged into `main` (merge commit); branch deleted on `origin` in the same action |
 | 2026-10-20 | `claude/amazing-elgamal-e5550b` — **PR #2**, notebook coverage re-measured | Merged into `main` (merge commit); branch deleted on `origin` in the same action |
 | 2026-10-19 | `codex/deep-damage-admission-v1` (local only, never pushed) | One commit of 2026-08-27 whose content `main` had superseded; deleted |

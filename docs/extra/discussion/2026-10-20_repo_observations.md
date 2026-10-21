@@ -51,6 +51,7 @@ which order?
 | 14 | **Commits on the work org carry the personal e-mail.** This checkout's `git config user.email` is `divy2023@gmail.com`; 75 of 106 commits on `main` are by Divi-patel. GitHub attributes them to whichever account has that address verified — the personal one, not the work account (`D-ivyy`) that pushes them. | Attribution and access reviews on the org read the wrong identity | `git config --get user.email` here | Set the work address for this repository (`git config user.email <the address verified on D-ivyy>`); past commits stay as they are |
 | 15 | **`tmp/` at the root was untracked junk and not ignored.** Empty `docs/` and `pdfs/` folders and a `.DS_Store` from 2026-07-29 / 08-09; it appeared in every `git status`. | Invites an accidental commit | root `tmp/`, `.gitignore` | `tmp/` added to `.gitignore` on 2026-10-20; delete the folder when convenient |
 | 16 | **Branches had no register.** Five remote branches from Jung A: two fully merged (`cell/real-estate`, `cell/flood-real-estate`), two docs-only and unmerged for 35 and 54 days (`validation/damage-core`, `review/cell-curation-audit`), one unmerged proposal falling 59 commits behind (`cell/winter-storm-solar-wind`); no tags; one PR ever. | Review evidence that lives only on a branch is invisible to the reader path; merged branches pile up; nobody could say which was stale | `git for-each-ref`, `gh pr list` | [`../branch_register.md`](../branch_register.md) (created 2026-10-20) with a proposed policy; merge the two docs-only branches as docs and delete them with Jung A's OK (`RO4`) |
+| 17 | **A canonical release's known-answer test was platform-sensitive at exact-equality precision.** The two TC-wind × solar v2.1 validators compared the evaluator's whole output with `==` against known answers recorded on macOS. The first CI run (2026-10-20) failed them on Linux: four of the five known answers differ there, 314 float leaves 1–32 ulp apart, at most 6.6 × 10⁻¹⁵ relative, with no string, key or structure difference; only the zero-demand answer, which skips the lognormal fragility (`math.log`, `math.erfc`), matched. | The check measured the platform that wrote the fixture, not the curve: no Linux runner or consumer could pass it, so CI stayed red on a correct release | `scripts/reference_helpers/validate_tropical_cyclone_wind_solar_v2_1_{proposal,release}.py` (`validate_kats`); measurement in [`../tasks_history/2026-10-20__ci__validators-tests-links/evidence/`](../tasks_history/2026-10-20__ci__validators-tests-links/evidence/) | Fixed in PR #3: float leaves compared with `math.isclose(rel_tol=1e-9, abs_tol=1e-12)`, keys, list lengths, ints, strings, bools and `None` exactly; no artifact, fixture or evaluator change |
 
 ## Verdict
 
@@ -61,6 +62,7 @@ which order?
 - Item 2 (with 13) is the cheapest high-value fix in the repository: a runner for the 34 validators and the
   19 tests, and one Actions workflow.
 - Item 16 is handled by the register; items 11 and 16 need Jung A's word.
+- Item 17 was found by the first CI run and is fixed in PR #3 (two validators; nothing released changes).
 - Items 3, 8–10, 12, 14, 15 are hygiene; a half-day plan.
 
 ## Owner gates carried into the plan
@@ -71,7 +73,7 @@ docs-only branches as docs and delete them (item 16) · `RO5` confirm the branch
 
 ## Exit condition
 
-`settled` when the owner has ranked the sixteen and each has a plan row, a "won't do" note, or a closing commit.
+`settled` when the owner has ranked the seventeen and each has a plan row, a "won't do" note, or a closing commit.
 
 ## Related
 
