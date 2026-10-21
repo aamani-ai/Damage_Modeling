@@ -11,7 +11,7 @@ record: [`docs/plans/damage_curve_dashboard/`](../docs/plans/damage_curve_dashbo
 [brief](../docs/plans/damage_curve_dashboard/iteration_2_brief.md)): the plain layer is the page and every
 ledger fact is one control away (`DCD-D19`); sources are links; every asset has the asset view with the
 *split differently* finding; the four oldest cells show the evidence read from their workbooks and dossiers.
-Look review at [`evidence/d2cc634/REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/d2cc634/REVIEW.md);
+Look review at [`evidence/b0ff718/REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/b0ff718/REVIEW.md);
 the owner's second review on the running app is open. **To review it, open `/v0` in the running app** (the
 *Review iteration 2* tab): eight stops in the new words, what was checked, and the decisions the owner is asked
 for. V0 (accepted 2026-10-20, `DCD-D17`) and the first V1 step keep their records at

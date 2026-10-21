@@ -1,7 +1,7 @@
 # Decisions — damage-curve dashboard, iteration 2 (2026-10-21)
 
 Choices made in this session, with the reason for each. None is an owner ruling; the ones the owner is asked to
-confirm are on `/v0` and in [`REVIEW.md`](../../../plans/damage_curve_dashboard/evidence/d2cc634/REVIEW.md) §9.
+confirm are on `/v0` and in [`REVIEW.md`](../../../plans/damage_curve_dashboard/evidence/b0ff718/REVIEW.md) §9.
 
 | # | Decision | Why |
 |---|---|---|
@@ -23,4 +23,4 @@ confirm are on `/v0` and in [`REVIEW.md`](../../../plans/damage_curve_dashboard/
 | 16 | The curve hero draws the other parts of the same axis faint and unlabelled behind the selected curve; *compare all parts* restores V0's overlay with the legend | Brief §3.1: one curve at a time, the others ghosted, compare opt-in |
 | 17 | A visible *open this curve's own page* link beside the caption | The keyboard walk needs a reachable path to the curve page without opening a disclosure |
 | 18 | A seeded review queue at `/review` (sources without a link, locator-only sources, unmatched IDs, not-yet-extracted cells, failing data checks), each row opening the step that shows it | Brief §3.2 and §5 check 4 put the unlinked-source count on the review queue, which did not exist; the agent notes and owner filter stay Phase 4 |
-| 19 | The look review runs from the clean tree at `d2cc634`; the evidence folder is named after the receipt commit, and the data and evidence are committed after the captures | The same sequence as V0 and the first V1 step |
+| 19 | The look review runs from the clean tree at `b0ff718`; the evidence folder is named after the receipt commit, and the data and evidence are committed after the captures | The same sequence as V0 and the first V1 step |

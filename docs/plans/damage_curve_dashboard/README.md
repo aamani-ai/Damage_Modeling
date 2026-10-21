@@ -1,7 +1,7 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
-updated: 2026-10-20
+updated: 2026-10-21
 status: active
 scope: Build the damage-curve dashboard as a local internal instrument in this repository — a Python data build over the catalogue and the cells, then a Next.js app with the library, asset view, curve cell page with the derivation trail, curve dossier, occurrence page and review queue — verified by the data-build checks, the look review and the owner's feedback on the running slices; hosting after local feedback.
 -->
@@ -101,10 +101,14 @@ Shared with Hazard: the look principle at `Hazard_modeling/docs/principles/analy
   the page reads like an audit ledger; multiple curves on one plot; station drawers and cards too technical;
   sources without links; the asset view for batteries only; older cells showing no evidence. Library and
   lenses accepted.
-- [ ] **Iteration 2** per [`iteration_2_brief.md`](iteration_2_brief.md): the plain layer is the page and the
+- [x] **Iteration 2** per [`iteration_2_brief.md`](iteration_2_brief.md): the plain layer is the page and the
   ledger is one control away (`DCD-D19`); one curve at a time with generated captions; sources as links;
   station panels that explain first; the asset view for every asset with the *split differently* block;
-  workbook/dossier extraction so the older cells show their evidence. Acceptance: the brief's §5.
+  workbook/dossier extraction so the older cells show their evidence. Acceptance: the brief's §5 —
+  *2026-10-21, branch `claude/dashboard-iteration-2-8df11e`, [PR #7](https://github.com/aamani-ai/Damage_Modeling/pull/7)
+  open, not merged; look review at [`evidence/b0ff718/REVIEW.md`](evidence/b0ff718/REVIEW.md): `06` §4 checks 1–6
+  and 8 pass, the brief's §5 checks 1–7 pass mechanically (`acceptance_checks.txt`), check 8 (the cold read) is
+  pending a named reader; the walkthrough is `/v0`*
 - [ ] Gate: the owner's second review on the running app
 
 - [x] The owner runs it locally and gives feedback on the screens; findings become rows here, not reopened gates unless a ruling is contradicted — *2026-10-20: the owner asked to review the live app, not screenshots; the review page `/v0` was added and the owner accepted V0 (`DCD-D17`). The page's questions 2–6 stay open*

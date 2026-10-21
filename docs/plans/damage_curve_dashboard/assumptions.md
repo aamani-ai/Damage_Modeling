@@ -1,7 +1,7 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
-updated: 2026-10-20
+updated: 2026-10-21
 status: active
 scope: Assumptions and watchlist for the damage-curve dashboard plan (DCD-A*).
 -->
@@ -22,7 +22,10 @@ scope: Assumptions and watchlist for the damage-curve dashboard plan (DCD-A*).
 | DCD-A10 | 25 entries and ~100 curves stay small enough for static JSON; no server | Static export, `fetch` of JSON | More than ~500 curves or a write path |
 | DCD-A11 | "Cell" means hazard × asset here and a 0.25° grid cell in the Hazard dashboard | Every page and doc says "curve cell" or "grid cell" where both could appear | — |
 | DCD-A12 | The headless capture used for evidence follows the system theme and lacks WebGL | Screenshots for the look review come from a real browser, both themes switched explicitly. *2026-10-20: V0's set came from Chrome 155 (headless) with both the media feature and next-themes' stored key set; the plots use ECharts' canvas renderer, so WebGL is not needed* | — |
-| DCD-A13 | `Hazard_modeling` may not sit at the same place on every machine | The build looks in `$HAZARD_MODELING`, the gitignored repo-root symlink, then beside the main checkout; without any it checks the committed `dashboard/data/twin_crosswalk.csv` against the same pin and says so in the receipt | Hazard moves `docs/plans/_cross_cutting/bess_conus/twin_crosswalk.csv`; the value binding's pin changes |
+| DCD-A13 | `Hazard_modeling` may not sit at the same place on every machine | The build looks in `$HAZARD_MODELING`, the gitignored repo-root symlink, then beside the main checkout; without any it checks the committed `dashboard/data/twin_crosswalk.csv` against the same pin and says so in the receipt. *2026-10-21: the same for Hazard's substation reference budget (checked against the substation flood binding's pin) and its substation twin crosswalk (read, recorded unpinned)* | Hazard moves `docs/plans/_cross_cutting/bess_conus/twin_crosswalk.csv`; the value binding's pin changes |
+| DCD-A14 | The rows of each asset view are canonical parts declared by the builder in `scripts/dashboard/dashboard_build/parts.py` (ten for solar, ten for wind, the four reference buildings and contents for real estate, Hazard's five budget systems for substations, the five battery buckets); each cell's own part names are kept beside them | Shown as the grid's rows with the cells' own names on hover and side by side in the *split differently* block; owner question 3 on `/v0` | The owner names other rows; a reference budget for solar or wind appears in this repository |
+| DCD-A15 | The plain-text pass changes only the *form* of a catalogue sentence in the default view: a bare tier code gains its word (`T4` → `T4 (our judgment)`), a register ID is dropped; the raw text stays in the ledger (`evidence.judgment`, `row_notes[].raw`, `binding.transfer_rationale_raw`) | Applied by the build; the acceptance scan (`evidence/b0ff718/acceptance_checks.py`) proves no code in the default view | The owner prefers the raw sentences on the page |
+| DCD-A16 | The tier-table source IDs of the four oldest cells are matched to the documents read from their workbooks and dossiers by their words (two shared words, or one distinctive word in the document's own name) | Three IDs match no document and are reported on the page and the queue (`extracted_sources` data check); never guessed | A cell gains a source register (the match is then exact); an unmatched ID turns out to name a real document |
 
 ## Watchlist
 
