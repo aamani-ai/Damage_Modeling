@@ -16,6 +16,12 @@ scope: Build the damage-curve dashboard as a local internal instrument in this r
 > [`docs/extra/discussion/damage_curve_dashboard/`](../../extra/discussion/damage_curve_dashboard/README.md)
 > (gates G1–G12 ruled 2026-10-20). Status `active` on the owner's direction of 2026-10-20 — *"Let's just keep
 > moving … Let's go."* — with the owner's feedback coming on the running slices, not on this text.
+>
+> **2026-10-21 — the owner's review of the running iteration 2 is under discussion.** Divy found it close but
+> not there; [`08`](../../extra/discussion/damage_curve_dashboard/08_categories_and_construction.md) turns his
+> points into gates G13–G19 (the Digital Twin's asset categories as the spine, the cell page's order, tier words,
+> one meaning of review, building from `main` only, builder information; the build date already ruled out).
+> PR #7 stays open; the rulings land on its branch as `DCD-D20…` before the merge.
 
 ## Outcome first
 

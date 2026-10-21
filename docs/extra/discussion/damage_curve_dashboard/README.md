@@ -1,14 +1,19 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-19
-updated: 2026-10-20
-status: settled
-scope: Reasoning node — what the damage-curve dashboard is for, what it shows, how it looks, how a curve's derivation chain is shown, and what it connects to, agreed before any build; owner gates G1–G12 ruled 2026-10-20. Promoted to the plan at docs/plans/damage_curve_dashboard/ (active) and to the shared look principle in Hazard_modeling/docs/principles/.
+updated: 2026-10-21
+status: active
+scope: Reasoning node — what the damage-curve dashboard is for, what it shows, how it looks, how a curve's derivation chain is shown, and what it connects to, agreed before any build; owner gates G1–G12 ruled 2026-10-20. Promoted to the plan at docs/plans/damage_curve_dashboard/ (active) and to the shared look principle in Hazard_modeling/docs/principles/. Reopened 2026-10-21 by the owner's review of the running iteration 2 — 08 (asset categories, page order, evidence words, review, main only, builder information), gates G13–G19.
 -->
 
 # Damage-curve dashboard — the reasoning
 
-> **Status: settled — iteration 3, 2026-10-20.** All twelve gates were ruled on 2026-10-20 (*"Yeah, I agree
+> **Status: active — iteration 4, 2026-10-21.** Reopened by Divy's review of the running iteration 2: his
+> feedback reshapes the asset grouping, the order of a cell page, the tier words, the review pages and what the
+> data is built from, so [`08`](08_categories_and_construction.md) puts seven gates to him (G13–G19; the build
+> date in G19 is already ruled). G1–G12 stand.
+>
+> *Iteration 3, 2026-10-20 (settled then):* all twelve gates were ruled on 2026-10-20 (*"Yeah, I agree
 > with your recommendation"*), the plan exists at
 > [`docs/plans/damage_curve_dashboard/`](../../../plans/damage_curve_dashboard/README.md) with the rulings as
 > `DCD-D01…D12`, and the look principle has its home in `Hazard_modeling/docs/principles/`. Nothing is built
@@ -16,6 +21,17 @@ scope: Reasoning node — what the damage-curve dashboard is for, what it shows,
 > ruling. The data layer already exists: Jung A's catalogue
 > ([`../../../cells/CATALOGUE.md`](../../../cells/CATALOGUE.md), generated from
 > [`../../../cells/catalogue/`](../../../cells/catalogue/README.md)).
+
+## What changed since iteration 3 (2026-10-21)
+
+| Ruled | Merged | New | Reworked | Still open |
+|---|---|---|---|---|
+| **G19, the build date:** removed (*"You don't need a build date or things like those"*, 2026-10-21) | — | [`08`](08_categories_and_construction.md) (the curation framework in one picture; the Digital Twin's taxonomy as the asset spine; the top bar and library on it; the cell page's order; tier words; one meaning of review; main only; builder information) · gates **G13–G19** · [`evidence/2026-10-21_second_review_inventory.py`](evidence/2026-10-21_second_review_inventory.py) + [`.txt`](evidence/2026-10-21_second_review_inventory.txt) | the status of this node (settled → active) | **G13–G18**, and the rest of G19 |
+
+**Starting problem (iteration 4):** the dashboard is arranged the way it was built, not the way a reader looks:
+five asset names in no order of kind beside two pages about the dashboard's own development, ten equal process
+steps with three names cut off, 463 tier codes across 104 captions, and 6 of 13 Hazard links not on Hazard's
+`main` ([evidence](evidence/2026-10-21_second_review_inventory.txt)).
 
 ## What changed since iteration 2 (2026-10-20)
 
@@ -81,7 +97,8 @@ reference, deciding which curves are worth building — modelled into the design
 | 05 | [Build brief](05_build_brief.md) | For the builder agent: what to read, principles to follow (P1–P25), data contract, look, cross-connections, first slice, checks including the look review, don'ts |
 | 06 | [The look and the usability](06_look_and_usability.md) | The bar; every inherited UI principle with its path and words; the rules curves and evidence need; the tile, rail, colour, type and dossier anatomy; the look review that defines "done"; the usability tasks; G10–G12; the principle as promoted |
 | 07 | [The chain](07_derivation_chain.md) | The derivation chain as the skill, the review gates and the basics standard define it (ten stations); whether the cells follow it, measured; the trail on every cell page; the balance of the page's sections; lineage lighting; the chain lens; what it adds to validation |
-| — | [`evidence/`](evidence/) | `2026-10-19_catalogue_counts.py` + `.txt` (every count quoted here); `2026-10-20_chain_inventory.py` + `.txt` (every cell against the chain); `2026-10-20_visual_pass.md` (what was looked at, in a browser); two PNGs of the Hazard dashboard running |
+| 08 | [Categories first, then construction](08_categories_and_construction.md) | The owner's review of iteration 2 as decisions: the curation framework in one picture; the Digital Twin's taxonomy (Power plants · Real estate · Grid infrastructure) as the dashboard's spine; the top bar and library on it; the curve, main logic and references before a four-step strip; tier words without codes; one meaning of review; built from `main` only; the build date and other builder information. Gates G13–G19 |
+| — | [`evidence/`](evidence/) | `2026-10-19_catalogue_counts.py` + `.txt` (every count quoted here); `2026-10-20_chain_inventory.py` + `.txt` (every cell against the chain); `2026-10-21_second_review_inventory.py` + `.txt` (every number in 08); `2026-10-20_visual_pass.md` (what was looked at, in a browser); two PNGs of the Hazard dashboard running |
 
 ## What was verified before reasoning (2026-10-19)
 
@@ -124,6 +141,18 @@ All twelve were ruled on the recommendation on 2026-10-20 (the owner's words and
 | **G11** | Where the look-and-usability principle ([`06`](06_look_and_usability.md) §7) lives permanently | One shared file in `Hazard_modeling/docs/principles/` (the home `AGENTS.md` names for shared principles), linked from both repositories; the curve-specific rules stay in this repository's plan |
 | **G12** | Density with one plain sentence per screen, a plain-mode switch, or nothing plain? | One plain sentence per screen, written by the build step from the same data; the one-pager remains the client surface |
 
+### Gates opened 2026-10-21 by the review of iteration 2 — argued in [`08`](08_categories_and_construction.md) §4
+
+| Gate | Question | Lean |
+|---|---|---|
+| **G13** | How are the assets grouped? | The Digital Twin's three categories — Power plants (Solar farm, Wind farm, Battery storage) · Real estate (Residential, Commercial, Industrial) · Grid infrastructure (Substation); a type appears once the catalogue has an entry |
+| **G14** | How do the top bar and the library follow the groups? | Categories with their types in the top bar; the library grouped the same way; real estate one row per type |
+| **G15** | What does a cell page show first? | The curve with its main logic and main references, then four steps in the reader's order; files, outputs and known answers in a *For Hazard* footer; no marks |
+| **G16** | How is evidence strength said? | Where each half comes from, in words; one word per tile (*field-calibrated · published · borrowed · our judgment*); codes behind a control |
+| **G17** | What does "review" mean? | One Review page about curves; the iteration walkthrough leaves the app |
+| **G18** | What is the dashboard built from? | `origin/main` of this repository and of Hazard; branch-only Hazard files shown without a link, as open items |
+| **G19** | The build date, and what goes with it | Date removed (ruled); the build checks, build lines and the *internal* chip go behind one *About this data* link |
+
 ## Rulings
 
 *The owner, 2026-10-20, in chat: "Yeah, I agree with your recommendation, but don't let this stop your
@@ -147,6 +176,13 @@ are a local dashboard and hosting comes later (`DCD-D13`); feedback is given on 
 | G10 | Look sign-off | Owner accepts screenshots per slice before merge — agreed | `DCD-D10` |
 | G11 | Home of the look principle | Shared file in `Hazard_modeling/docs/principles/` — agreed; promoted | `DCD-D11` |
 | G12 | Plain language | One plain sentence per screen — agreed; **revised 2026-10-20 by the owner's V0 review**: the plain layer is the page, the ledger one control away | `DCD-D12`, `DCD-D19` |
+| G13 | How the assets are grouped | *open* | — |
+| G14 | The top bar and the library | *open* | — |
+| G15 | What a cell page shows first | *open* | — |
+| G16 | How evidence strength is said | *open* | — |
+| G17 | What "review" means | *open* | — |
+| G18 | What the dashboard is built from | *open* | — |
+| G19 | The build date and what goes with it | **date removed** — *"You don't need a build date or things like those. No, it's weird, to be honest."* (2026-10-21); the rest *open* | — |
 
 ## From here to a build — what and how
 
@@ -160,6 +196,9 @@ are a local dashboard and hosting comes later (`DCD-D13`); feedback is given on 
              (its checks must pass), then the battery slice; screenshots per 06 §4; Divy's feedback on the
              running local app (DCD-D15); merge after the look review
           4. V1 → V2 per the plan, each slice with the same review; hosting (H1) after local feedback
+ done ──► 5. V0 (PR #5, #6) merged; iteration 2 built and on PR #7 (open); Divy reviewed it running, 2026-10-21
+ now  ──► 6. Iteration 4 of this node: 08 puts G13–G19 to Divy; once ruled they become DCD-D20… and land on
+             PR #7's branch, reviewed once more on the running app before the merge
    in parallel: the "does it happen?" searches on the battery rows (04 §6) — they do not wait for a screen.
 ```
 
@@ -168,6 +207,8 @@ Each step is reversible until merge; nothing in the catalogue or the cells chang
 ## Exit condition
 
 Met on 2026-10-20: G1–G12 ruled, the plan folder exists with `DCD-D01…D16`, the look principle has its home.
+**Reopened 2026-10-21** under the rule below: the owner's feedback on the running iteration 2 reshapes the
+asset grouping and the page order. The node settles again when G13–G19 are ruled and land in the plan.
 **Reopen** only when the owner's feedback on a running slice contradicts a ruling, or when evidence shows a
 settled premise wrong (for example, that the catalogue can carry the review and occurrence pointers).
 

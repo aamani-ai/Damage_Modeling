@@ -1,0 +1,249 @@
+
+====================================================================================================
+§0 · Where the numbers come from
+====================================================================================================
+this repository: HEAD a93abf0 on claude/dashboard-iteration-2-8df11e; origin/main 2efd6c3; HEAD contained in origin/main: no
+dashboard data: built 2026-10-21T19:54:35+00:00 at b0ff718; working tree clean then: True; that commit contained in origin/main: no
+Hazard_modeling: /Users/divy/code/work/infrasure_git_codes/Hazard_modeling
+Digital Twin: /Users/divy/code/personal/Digital Twin
+
+====================================================================================================
+§1 · The Digital Twin's taxonomy (skills/reference/taxonomy.md), verbatim tree
+====================================================================================================
+twin HEAD d01abd0 · remote git@github.com-work:aamani-ai/infrasure-digital-twin.git · file last changed d56cfb7 2026-10-11 · on the twin's origin/main: yes
+  |  Power plants                         rule: technology producing the output
+  |  ├─ Solar        profile: 1P single-axis tracker, 100 MWac          T2
+  |  ├─ Wind         profile: 2.8 MW geared DFIG, IEC IIIA              T2
+  |  ├─ BESS         profile: 4-hour LFP, liquid-cooled blocks          T2
+  |  └─ Hybrid       (planned: shared POI and controls)
+  | 
+  |  Real estate                          rule: use of the majority of floor area (IBC / Hazus)
+  |  ├─ Industrial   F, S        IND1–6, COM2 (warehouse)   profile: 100,000 sq ft distribution
+  |  │                                                    warehouse, pre-engineered steel     T2
+  |  ├─ Commercial   B, M, R-1   COM1, COM4, RES4 (hotel)   profile: 12,000 sq ft neighbourhood
+  |  │                                                    retail, masonry                     T2
+  |  ├─ Residential  R-2, R-3    RES1, RES3                 profile: 1,800 sq ft one-story
+  |  │                                                    single-family house                 T2
+  |  └─ Institutional E, I, A-3  EDU, COM6    (proposed: K-12 school first)
+  | 
+  |  Grid infrastructure                  rule: function in the network
+  |  ├─ Substation   transmission (345/138 kV, breaker-and-a-half)                           T2
+  |  │               switching (345 kV ring bus, no transformer)                             T2
+  |  │               distribution (138/12.47 kV)                                             T2
+  |  ├─ Transmission line  345 kV single circuit, steel lattice                              T2
+  |  └─ Distribution line  12.47 kV overhead feeder, wood poles                              T2
+  | 
+  |  Candidates (run place-asset before adding)
+  |  ├─ Digital infrastructure   data centres: hyperscale, colocation, edge   (new category)
+  |  ├─ Water                    treatment plants, pumping stations           (network or plant-like)
+  |  └─ Telecom                  towers, exchanges                            (network)
+
+category 'Power plants': 4 types — Solar, Wind, BESS, Hybrid
+category 'Real estate': 4 types — Industrial, Commercial, Residential, Institutional E, I, A-3
+category 'Grid infrastructure': 3 types — Substation, Transmission line, Distribution line
+category 'Candidates (run place-asset before adding)': 3 types — Digital infrastructure, Water, Telecom
+lines of the tree ending in the depth tier 'T2': 11
+
+====================================================================================================
+§2 · The catalogue under the twin's categories (proposed mapping ASSET_TO_TWIN)
+====================================================================================================
+Power plants         Solar        catalogue asset 'Solar farm'       5 entries: live 5
+Power plants         Wind         catalogue asset 'Wind farm'        5 entries: gap 1 · live 4
+Power plants         BESS         catalogue asset 'Battery storage'  5 entries: gap 2 · live 3
+Real estate          by building  catalogue asset 'Real estate'      5 entries: proposal 5
+Grid infrastructure  Substation   catalogue asset 'Substation'       5 entries: gap 1 · live 1 · reused 3
+  Power plants: 15 entries — gap 3 · live 12
+  Real estate: 5 entries — proposal 5
+  Grid infrastructure: 5 entries — gap 1 · live 1 · reused 3
+top bar today: Library + 5 assets in this order: Solar farm, Wind farm, Real estate, Substation, Battery storage
+
+====================================================================================================
+§2b · Real estate: the buildings inside each cell, by the type their use gives them
+====================================================================================================
+convective_wind_real_estate (proposal):
+    House                                         → Residential  curves 2 · shape T3 · cost T4
+    Warehouse                                     → Industrial   curves 2 · shape T3 · cost T4
+    Office                                        → Commercial   curves 2 · shape T3 · cost T4
+flood_real_estate (proposal):
+    House                                         → Residential  curves 1 · shape T2 · cost T2
+    Warehouse                                     → Industrial   curves 1 · shape T2 · cost T2
+    Office                                        → Commercial   curves 1 · shape T2 · cost T2
+    Retail                                        → Commercial   curves 4 · shape T2 · cost T2
+hail_real_estate (proposal):
+    House roof (asphalt shingles)                 → Residential  curves 1 · shape T3 · cost T3
+    Warehouse roof (standing-seam steel)          → Industrial   curves 1 · shape T3 · cost T4
+    Office roof (TPO membrane and insulation)     → Commercial   curves 1 · shape T3 · cost T3
+    House walls and windows                       → Residential  curves 1 · shape T4 · cost T4
+    Warehouse windows                             → Industrial   curves 1 · shape T4 · cost T4
+    Office windows                                → Commercial   curves 1 · shape T4 · cost T4
+tropical_cyclone_wind_real_estate (proposal):
+    House                                         → Residential  curves 1 · shape T2 · cost T2
+    Warehouse                                     → Industrial   curves 1 · shape T2 · cost T2
+    Office                                        → Commercial   curves 1 · shape T2 · cost T2
+    Retail                                        → Commercial   curves 1 · shape T2 · cost T2
+wildfire_real_estate (proposal):
+    House                                         → Residential  curves 1 · shape T3 · cost T4
+    Warehouse                                     → Industrial   curves 1 · shape T3 · cost T4
+    Office                                        → Commercial   curves 1 · shape T3 · cost T4
+Residential: 5 of 5 hazards — Convective wind: House; Flood: House; Hail: House roof (asphalt shingles), House walls and windows; Hurricane wind: House; Wildfire: House
+Commercial: 5 of 5 hazards — Convective wind: Office; Flood: Office, Retail; Hail: Office roof (TPO membrane and insulation), Office windows; Hurricane wind: Office, Retail; Wildfire: Office
+Industrial: 5 of 5 hazards — Convective wind: Warehouse; Flood: Warehouse; Hail: Warehouse roof (standing-seam steel), Warehouse windows; Hurricane wind: Warehouse; Wildfire: Warehouse
+the real-estate asset page lists these as its 'parts' (canonical rows): House (single-family, slab) · Warehouse · Office (three storeys) · Retail · Contents and inventory
+
+====================================================================================================
+§3 · 'How this was built': the ten steps, the marks behind them, the checks
+====================================================================================================
+the ten labels and their lengths: What it covers (14) · What breaks (11) · How damage is measured (22) · Where the numbers come from (27) · What it is worth (16) · The audit (9) · The files (9) · What it can output (18) · How it was tested (17) · Seen in the field, and reviewed (31)
+cells and bindings with a chain: 25
+  What it covers                     artifact 21 · not_applicable 4
+  What breaks                        artifact 18 · not_applicable 7
+  How damage is measured             absent 6 · artifact 2 · not_applicable 7 · prose 10
+  Where the numbers come from        artifact 14 · not_applicable 7 · prose 4
+  What it is worth                   artifact 17 · not_applicable 4 · prose 4
+  The audit                          absent 4 · artifact 3 · not_applicable 4 · not_yet_detected 3 · prose 11
+  The files                          artifact 21 · not_applicable 4
+  What it can output                 artifact 18 · not_applicable 7
+  How it was tested                  artifact 20 · not_applicable 4 · not_yet_detected 1
+  Seen in the field, and reviewed    absent 17 · artifact 5 · not_applicable 3
+hail × solar, as its page shows the ten steps (state · fact):
+    What it covers                     artifact         1 part · 2 left out
+    What breaks                        artifact         1 part
+    How damage is measured             prose            an S-curve
+    Where the numbers come from        prose            21 sources · lab-tested
+    What it is worth                   prose            shares per part
+    The audit                          prose            adjustments in the write-up
+    The files                          artifact         3 curve records
+    What it can output                 artifact         1 of 4 outputs allowed
+    How it was tested                  artifact         15 of 15 reproduced
+    Seen in the field, and reviewed    absent           not searched · agent-read
+    outside checks: 1 · sources: {"total": 21, "linked": 20, "locator_only": 1, "neither": 0, "markers": 0, "placeholders": 3}
+    the default module curve says: PV modules (glass and cells): no loss until hail diameter, MESH equivalent reaches about 21 mm; damage then rises, passing half of full loss near 53 mm, and reaches full replacement by 80.5 mm.
+    the cell's sentence: Hail on solar farms: logistic curves per module type fitted to public PVEL/Kiwa hail-test breakage anchors and the IEC baseline; 4 parts of the asset's value have no curve.
+known answers: {"declared": 1884, "run": 1852, "reproduced": 1852, "not_run": 32}
+entries with a curve or binding: 21; with at least one outside check: 10
+
+====================================================================================================
+§4 · Evidence tiers: what the catalogue holds and what the default view prints
+====================================================================================================
+part rows: 71; rows with T1 in shape or cost: 0
+shape tiers: T2 9 · T3 21 · T4 41
+cost tiers:  T2 19 · T3 15 · T4 37
+rows graded T2 for shape (9), and what the basis rests on:
+    flood_real_estate                    House                              [published model or standard] Hazus DF 129 points
+    flood_real_estate                    Warehouse                          [published model or standard] Hazus DF 341 points
+    flood_real_estate                    Office                             [published model or standard] Hazus DF 431 points
+    flood_real_estate                    Retail                             [published model or standard] Hazus DF 217 and NACCS published points
+    hail_solar                           PV modules (glass and cells)       [lab test] D50 and slope fitted to public lab anchors (fragile and default T2; hardened variant T3)
+    tropical_cyclone_wind_real_estate    House                              [published model or standard] Hazus WSF1 building-loss rows
+    tropical_cyclone_wind_real_estate    Warehouse                          [published model or standard] Hazus SPMBL building-loss rows (new or average roof deck)
+    tropical_cyclone_wind_real_estate    Office                             [published model or standard] Hazus SECBM building-loss rows (tier as for the other Hazus rows)
+    tropical_cyclone_wind_real_estate    Retail                             [published model or standard] Hazus SECBL building-loss rows
+  → published model or standard 8 · lab test 1
+the word the dashboard gives T2: 'lab-tested' (legend: 'lab-tested or a standard')
+curves with a caption: 104; whose 'how sure' block prints a tier code: 104; tier codes printed across them: 463
+hail × solar default module curve: 7 tier codes in its 'how sure' block:
+    T2
+    D50 and slope fitted to public lab anchors (fragile and default T2 (lab-tested); hardened variant T3 (transferred))
+    T2
+    Direct module-hardware value share from the NLR Q1-2025 basis (T2, lab-tested); optional Hazard-adapter profile is T4 (our judgment)
+    2 parameters: 2 lab-tested (T2)
+library tiles printing 'shape/cost' codes: 21 of 25
+    convective_wind_real_estate              T3/T4       → our judgment
+    flood_bess                               T3–4/T3–4     → our judgment
+    flood_real_estate                        T2/T2       → published
+    flood_solar                              T3–4/T3–4     → our judgment
+    flood_substation                         T3/T4       → our judgment
+    flood_wind                               T3/T3       → borrowed
+    hail_real_estate                         T3–4/T3–4     → our judgment
+    hail_solar                               T2/T2       → published
+    strong_wind_solar                        T4/T4       → our judgment
+    substation_convective_wind_screening_v1  T4/T4       → our judgment
+    substation_hurricane_screening_v1        T4/T4       → our judgment
+    substation_wildfire_screening_v1         T4/T4       → our judgment
+    tropical_cyclone_wind_bess               T4/T4       → our judgment
+    tropical_cyclone_wind_real_estate        T2/T2       → published
+    tropical_cyclone_wind_solar              T3–4/T4       → our judgment
+    tropical_cyclone_wind_wind               T3/T4       → our judgment
+    wildfire_bess                            T4/T4       → our judgment
+    wildfire_real_estate                     T3/T4       → our judgment
+    wildfire_solar                           T4/T2       → our judgment
+    wildfire_wind                            T4/T4       → our judgment
+    wind_tornado_wind                        T4/T3–4     → our judgment
+tiles by the weaker half's word: our judgment 17 · published 3 · borrowed 1
+tiles whose two halves differ (the word hides a stronger half): 5 — convective_wind_real_estate (T3/T4), flood_substation (T3/T4), tropical_cyclone_wind_wind (T3/T4), wildfire_real_estate (T3/T4), wildfire_solar (T4/T2)
+
+====================================================================================================
+§5 · Where the word 'review' reaches a reader before any control is opened
+====================================================================================================
+top-bar tabs with 'review': 2 — ['Review queue', 'Review iteration 2']
+    /review — its tooltip: 'What the pages found and could not resolve'
+    /v0 — its tooltip: 'Walk iteration 2 on the live screens'
+library KPI tile 'REVIEW' present: yes
+library lens 'review' present: yes (lenses: status, evidence, occurrence, value, review)
+cell-page chip about review (words · cells): 'Not yet reviewed by a person' 25
+the /v0 page's heading: '—'
+review queue items: 25 — source_without_link 5 · sources_locator_only 9 · tier_id_unmatched 3 · extracted_sources 3 · source_ids 3 · source_links 2
+    source_without_link    tropical_cyclone_wind_wind     JAIMES_2020_TC_WIND_TURBINE — unchanged 3.3 MW/100 m curve and source-native axis
+    source_without_link    tropical_cyclone_wind_wind     OWNER_SCOPE_CORRECTION_2026_08_14 — authorizes a tower-only 0.16 value binding
+    source_without_link    tropical_cyclone_wind_wind     CONUS_WIND_FARM_REFERENCE_V1 — 20×5 MW, 100 MW, $140M; tower share 0.16
+    source_without_link    tropical_cyclone_wind_wind     HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14 — diagnoses 0.63 failure-unit/value mismatch
+    source_without_link    wildfire_solar                 SOURCE_REVIEW_2026_07_09 — Wildfire × solar bounded public-evidence review and reproducibility log; review dat
+    sources_locator_only   convective_wind_real_estate    1 source with a locator but no link
+    sources_locator_only   flood_bess                     1 source with a locator but no link
+    sources_locator_only   flood_real_estate              1 source with a locator but no link
+    tier_id_unmatched      flood_solar                    tier-table source IDs with no document in the workbook or dossier: ANZGEO_2023_SCOUR_CONTEXT
+    extracted_sources      flood_solar                    1 source ID in this cell's tier table matches no document in the workbook or dossier.
+    sources_locator_only   hail_real_estate               1 source with a locator but no link
+    sources_locator_only   hail_solar                     1 source with a locator but no link
+    tier_id_unmatched      strong_wind_solar              tier-table source IDs with no document in the workbook or dossier: WIND_PRESSURE_PHYSICS
+    extracted_sources      strong_wind_solar              1 source ID in this cell's tier table matches no document in the workbook or dossier.
+    sources_locator_only   tropical_cyclone_wind_real_estate 5 sources with a locator but no link
+    sources_locator_only   tropical_cyclone_wind_solar    1 source with a locator but no link
+    source_ids             tropical_cyclone_wind_solar    2 source ID references in this cell do not resolve in its current source register.
+    source_ids             tropical_cyclone_wind_wind     10 source ID references in this cell do not resolve in its current source register.
+    source_links           tropical_cyclone_wind_wind     4 sources in this cell's register have neither a link nor a locator.
+    sources_locator_only   wildfire_real_estate           1 source with a locator but no link
+    source_ids             wildfire_solar                 10 source ID references in this cell do not resolve in its current source register.
+    source_links           wildfire_solar                 1 source in this cell's register has neither a link nor a locator.
+    sources_locator_only   wildfire_wind                  1 source with a locator but no link
+    tier_id_unmatched      wind_tornado_wind              tier-table source IDs with no document in the workbook or dossier: AWN_15_DECLARED_BRIDGE
+    extracted_sources      wind_tornado_wind              1 source ID in this cell's tier table matches no document in the workbook or dossier.
+
+====================================================================================================
+§6 · Builder information on the default view
+====================================================================================================
+  header, the build date chip: present
+  header, the 'internal' chip: present
+  header, the GitHub link: present
+  library, 'built from the catalogue on <date>': present
+  library, 'built at <commit> · <timestamp>': present
+build checks shown as chips on the library: 13; failing: source_ids, source_links, extracted_sources
+
+====================================================================================================
+§7 · Main only: branches, and the Hazard files the pages link to
+====================================================================================================
+  origin/cell/winter-storm-solar-wind             2 commits not on main · last jll-l 2026-10-15
+  origin/claude/dashboard-iteration-2-8df11e      5 commits not on main · last Divi-patel 2026-10-21
+  origin/claude/dashboard-iteration-2-da2f33      2 commits not on main · last Divi-patel 2026-10-21
+  origin/review/cell-curation-audit               1 commits not on main · last jll-l 2026-08-27
+  origin/validation/damage-core                   1 commits not on main · last jll-l 2026-09-15
+Hazard checkout on codex/bess-conus; origin/main c83e83b00 2026-10-19; uncommitted paths 110
+distinct Hazard paths linked from the dashboard: 13; not on Hazard's main: 6
+  Notebooks/flood/wind_farm/m3_damage/01_damage.py
+      not on the checked-out branch either; the same file elsewhere on main: ['Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py']
+      named (by its last three parts) in 8 file(s) under docs/cells: flood_wind, tropical_cyclone_wind_wind
+  Notebooks/flood/wind_farm/m4_loss_metrics/01_loss_metrics.py
+      not on the checked-out branch either; the same file elsewhere on main: ['Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py']
+      named (by its last three parts) in 4 file(s) under docs/cells: flood_wind
+  Notebooks/hurricane/solar/m3_damage/01_damage.py
+      not on the checked-out branch either; the same file elsewhere on main: ['Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py']
+      named (by its last three parts) in 7 file(s) under docs/cells: tropical_cyclone_wind_solar
+  docs/plans/_cross_cutting/bess_conus
+      on the checked-out branch; the same file elsewhere on main: none
+      named (by its last three parts) in 11 file(s) under docs/cells: flood_bess, tropical_cyclone_wind_bess, wildfire_bess
+  perils/hurricane/src/hurricane/resources/substation_screening/binding.json
+      on the checked-out branch; the same file elsewhere on main: none
+      named (by its last three parts) in 2 file(s) under docs/cells: tropical_cyclone_wind_bess
+  perils/wildfire/src/wildfire/substation.py
+      on the checked-out branch; the same file elsewhere on main: none
+      named (by its last three parts) in 2 file(s) under docs/cells: wildfire_bess

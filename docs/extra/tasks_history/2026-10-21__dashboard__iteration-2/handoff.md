@@ -60,7 +60,11 @@
 
 ## Next
 
-1. The owner's second review on the running app; findings become rows in the plan, not reopened gates.
+1. The owner's second review on the running app — **held 2026-10-21.** Divy found it close but not there. His
+   points change the asset grouping and the page order, so they became gates G13–G19 in
+   [`08`](../../discussion/damage_curve_dashboard/08_categories_and_construction.md) rather than plan rows; the
+   build date is already ruled out. The five `/v0` questions are mapped there (§5). Next: his rulings, then
+   `DCD-D20…` and the changes on this branch.
 2. Merge PR #7 and delete the branch and worktree in the same action; refresh the branch register's row.
 3. Phase 3 and 4 items unchanged: the chain lens and the gate view as library lenses, lineage lighting, the version
    ghost, the review queue's agent notes, the one-pager (G8), hosting (H1).
