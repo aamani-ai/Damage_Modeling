@@ -1074,7 +1074,7 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "8 sources set this cell: USFS, Wildfire Risk to Communities spatial datasets, 2nd ed. (2024), CAL FIRE Damage Inspection (DINS) data, 2013-2025, USFS, probabilistic wildfire risk components (FSim) and FEMA National Risk Index, Dec 2025 (WFRE-S006; check only) and 4 more. Of the 10 parameters, 3 are lab-tested (T2), 3 are transferred (T3) and 4 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "paragraph": "8 sources set this cell: USFS, Wildfire Risk to Communities spatial datasets, 2nd ed. (2024), CAL FIRE Damage Inspection (DINS) data, 2013-2025, USFS, probabilistic wildfire risk components (FSim) and FEMA National Risk Index, Dec 2025 (check only) and 4 more. Of the 10 parameters, 3 are lab-tested (T2), 3 are transferred (T3) and 4 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
     "plain_fact": "8 sources · transferred and our judgment"
    },
    {
@@ -1158,14 +1158,16 @@
     "source_id": "WFRE-S003"
    },
    {
-    "text": "FEMA National Risk Index, Dec 2025 (WFRE-S006; check only)",
-    "ids": [],
-    "title": "FEMA National Risk Index, Dec 2025 (WFRE-S006; check only)",
+    "text": "FEMA National Risk Index, Dec 2025 (check only)",
+    "ids": [
+     "WFRE-S006"
+    ],
+    "title": "FEMA National Risk Index, December 2025 edition, county building expected annual loss for wildfire (Hazard…",
     "link": null,
     "link_kind": "none",
-    "locator": null,
-    "no_link_sentence": null,
-    "source_id": null
+    "locator": "columns wfir_ealb, wfir_expb; 13,085 cells keyed by cell_id; sha256 bc4f8dff7ab9c465677d7a8b94f2fe3038ff03da4632d7b044bcff2afcb3d82b",
+    "no_link_sentence": "no link in the register",
+    "source_id": "WFRE-S006"
    }
   ],
   "sources": [
@@ -1693,7 +1695,7 @@
     ],
     "claim_ids": [],
     "curve_id": "all",
-    "reasoning": "Hazard's delivered state (WFRE-C005, C006).",
+    "reasoning": "Hazard's delivered state (C006).",
     "update_trigger": "Hazard changes product.",
     "role": "axis"
    },
@@ -1722,7 +1724,7 @@
     ],
     "claim_ids": [],
     "curve_id": "all",
-    "reasoning": "Same class boundaries, different resolution and vintage (WFRE-C005).",
+    "reasoning": "Same class boundaries, different resolution and vintage.",
     "update_trigger": "A source states the WRC class boundaries explicitly.",
     "role": "axis_bridge"
    },
@@ -1744,7 +1746,7 @@
     ],
     "claim_ids": [],
     "curve_id": "WFRE_RES_WRC_SHRUB",
-    "reasoning": "USFS response for a home, shrub (WFRE-C001 to C003); level consistent with DINS (WFRE-C008).",
+    "reasoning": "USFS response for a home, shrub (to C003); level consistent with DINS.",
     "update_trigger": "Revised WRC response; flame-intensity-stratified loss data.",
     "role": "curve_ordinate"
    },
@@ -1773,7 +1775,7 @@
     ],
     "claim_ids": [],
     "curve_id": "all",
-    "reasoning": "No lifeform from Hazard; JL decided the middle response (WFRE-C007).",
+    "reasoning": "No lifeform from Hazard; JL decided the middle response.",
     "update_trigger": "Hazard delivers lifeform per cell.",
     "role": "selector_default"
    },
@@ -1795,7 +1797,7 @@
     ],
     "claim_ids": [],
     "curve_id": "all",
-    "reasoning": "WFRE-C004.",
+    "reasoning": ".",
     "update_trigger": "Cost-based source statement.",
     "role": "cost_mapping"
    },
@@ -1817,7 +1819,7 @@
     ],
     "claim_ids": [],
     "curve_id": "WFRE_IND_WRC_SHRUB_X0_8",
-    "reasoning": "Same-fire DINS ratio 0.79 (0.61-0.99) rounded (WFRE-C009); transfer to the reference warehouse T4 (WFRE-C010).",
+    "reasoning": "Same-fire DINS ratio 0.79 (0.61-0.99) rounded; transfer to the reference warehouse T4 (our judgment).",
     "update_trigger": "Warehouse-specific loss data.",
     "role": "building_factor"
    },
@@ -1839,7 +1841,7 @@
     ],
     "claim_ids": [],
     "curve_id": "WFRE_OFF_WRC_SHRUB_X0_9",
-    "reasoning": "Same-fire DINS ratio 0.93 (0.66-1.38) rounded (WFRE-C009); transfer T4 (WFRE-C010).",
+    "reasoning": "Same-fire DINS ratio 0.93 (0.66-1.38) rounded; transfer T4 (our judgment).",
     "update_trigger": "Office-specific loss data.",
     "role": "building_factor"
    },

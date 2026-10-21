@@ -38,7 +38,7 @@ NO_LINK = "no link in the register"
 
 def short_title(citation: str | None, fallback: str) -> str:
     """A reader's title: the citation's first sentence, or the whole citation when it is short."""
-    c = (citation or "").strip()
+    c = re.sub(r";?\s*commit\s+[0-9a-f]{7,40}\b", "", (citation or "").strip()).strip(" ;")
     if not c:
         return fallback
     if len(c) <= 110:

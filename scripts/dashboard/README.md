@@ -3,7 +3,8 @@
 The one build step behind [`dashboard/`](../../dashboard/README.md): it reads the catalogue, every cell
 artifact, the known-answer tests, the source and claim registers, the occurrence register and Hazard's pinned
 twin crosswalk, runs the checks, and writes `dashboard/data/` with a receipt. Nothing under `docs/` is written.
-Needs the `python3.12` venv (`openpyxl` reads the workbooks for the trail's prose detector).
+Needs the `python3.12` venv (`openpyxl` reads the workbooks for the trail's prose detector and for the older
+cells' evidence sheets).
 
 ```bash
 .venv/bin/python scripts/dashboard/build_dashboard_data.py           # build; a structural failure writes nothing
@@ -20,5 +21,8 @@ Needs the `python3.12` venv (`openpyxl` reads the workbooks for the trail's pros
 | `dashboard_build/registers.py` | Reads source, claim and parameter registers across their header variants |
 | `dashboard_build/occurrence.py` | The occurrence register, the bucket values and the twin crosswalk pin |
 | `dashboard_build/summaries.py` | The plain first line of each screen |
+| `dashboard_build/sources.py` | Sources as links (URL · DOI · repository file at the build commit · Hazard file · none, with the words *no link in the register*); the older cells' sources, claims, assumptions and open seams read from their workbook sheets and dossier tables, each marked where it came from; the tier table's source IDs matched to them by their words |
+| `dashboard_build/plain.py` | The plain layer (DCD-D19): tier words, the three rail chips, the ✓ ◐ ✗ sentences, one caption per drawn curve, the ten station paragraphs from fixed templates, parameters in words |
+| `dashboard_build/parts.py` | The asset view for every asset: the canonical parts per asset, each cell's own split (failure units, catalogue rows, value linkage, the binding ledgers), the *split differently* finding, Hazard's substation budget and crosswalk |
 | `dashboard_build/common.py` | Paths, formats and the fixed honest-state sentences (discussion `06` §2.4) |
 | `seed_occurrence_register.py` | Seeds `docs/evidence/occurrence/<asset>/<hazard>.{json,md}` with every bucket *not searched* and the Digital Twin's leads; never overwrites a searched row or an existing log |

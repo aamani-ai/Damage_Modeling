@@ -1,8 +1,8 @@
 {
  "schema": "damage_dashboard_manifest.v0",
- "built_at": "2026-10-21T11:19:56+00:00",
- "commit": "72f8b6d",
- "commit_full": "72f8b6d9db192626901019e06ab1d5f39964351f",
+ "built_at": "2026-10-21T11:39:41+00:00",
+ "commit": "d2cc634",
+ "commit_full": "d2cc634daf4172ddb9737d5f9d0313eb0610e565",
  "catalogue_commit_note": "catalogue entries and artifacts read at this commit; every number traces to a file at it",
  "counts": {
   "live": 13,
@@ -1037,7 +1037,7 @@
     "source_artifact_sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
     "sha256": "5afa3f9cd31ee52092762bdb505fbc4c24c02ed2420d1be67c448e6441383be0"
    },
-   "summary": "Convective wind on substations reuses another cell's curve: same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a T4 cross-hazard proxy for direct wind only (see docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md).",
+   "summary": "Convective wind on substations reuses another cell's curve: same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a T4 (our judgment) cross-hazard proxy for direct wind only (see docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md).",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 0,
@@ -1165,7 +1165,7 @@
     "source_artifact_sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
     "sha256": "10742caaf6e4622f72b2572db08d3fc4cc4dc92ca58746ad0928cabad4be5e48"
    },
-   "summary": "Wildfire on substations reuses another cell's curve: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a T4 assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md); 1 part of the asset's value has no curve.",
+   "summary": "Wildfire on substations reuses another cell's curve: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a T4 (our judgment) assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md); 1 part of the asset's value has no curve.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 0,
@@ -1228,7 +1228,7 @@
     "sha256": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed",
     "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
    },
-   "summary": "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a T4 hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage; 86 % of the reference value has a curve and 14 % has none.",
+   "summary": "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a T4 (our judgment) hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage; 86 % of the reference value has a curve and 14 % has none.",
    "no_evaluator": false,
    "share_covered": 0.8597449908925319,
    "n_curves": 3,
@@ -1480,7 +1480,7 @@
     "sha256": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491",
     "consumer_pin": "wildfire_bess@model_v1_0__docs_r1"
    },
-   "summary": "Wildfire on batteries: solar wildfire electrical class tables reused as T4 ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities); 86 % of the reference value has a curve and 14 % has none.",
+   "summary": "Wildfire on batteries: solar wildfire electrical class tables reused as T4 (our judgment) ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities); 86 % of the reference value has a curve and 14 % has none.",
    "no_evaluator": false,
    "share_covered": 0.8597449908925319,
    "n_curves": 7,
@@ -2330,14 +2330,14 @@
    "name": "Hazard's twin crosswalk SHA equals the value binding's pin",
    "ok": true,
    "severity": "hard",
-   "summary": "sha 7e96ff9 · 58 rows"
+   "summary": "58 rows, equal to the pin"
   },
   {
    "id": "substation_budget",
    "name": "Hazard's substation reference budget SHA equals the substation flood binding's pin",
    "ok": true,
    "severity": "hard",
-   "summary": "sha 831a020 · 28 rows"
+   "summary": "28 rows, equal to the pin"
   },
   {
    "id": "curves",

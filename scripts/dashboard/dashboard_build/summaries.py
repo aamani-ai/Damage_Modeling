@@ -70,7 +70,8 @@ def cell_sentence(entry: dict[str, Any], status: str, value: dict[str, Any] | No
                 reason = reason[len(prefix):]
                 break
         return f"{hazard_label} on {asset_label.lower()} has no curve yet — {reason[:1].lower() + reason[1:]}."
-    method = (entry.get("method") or {}).get("summary", "").rstrip(".").split(";")[0].strip()
+    from .plain import plain_text
+    method = plain_text((entry.get("method") or {}).get("summary", "").rstrip(".").split(";")[0].strip())
     lead = f"{hazard_label} on {asset_label.lower()}"
     if entry["kind"] == "binding":
         lead = f"{hazard_label} on {asset_label.lower()} reuses another cell's curve"

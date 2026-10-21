@@ -112,6 +112,33 @@ def label_case(label: str) -> str:
     return label
 
 
+REG_ID = r"[A-Z]{2,4}\d?-[SCQPAD]\d{2,3}"
+
+
+def plain_text(s: str | None) -> str | None:
+    """The default view's form of a catalogue sentence: register IDs dropped (a note beside one is kept), a bare tier
+    code given its word — "reused as a T4 hypothesis" → "reused as a T4 (our judgment) hypothesis". The raw text stays
+    in the ledger."""
+    if not s:
+        return s
+    t = str(s)
+
+    def paren(m: re.Match[str]) -> str:
+        parts = [p.strip() for p in re.split(r"[;,]", m.group(1))]
+        keep = [re.sub(rf"\s*\b{REG_ID}\b\s*", " ", p).strip() for p in parts if not re.fullmatch(REG_ID, p)]
+        keep = [p for p in keep if p]
+        return f" ({'; '.join(keep)})" if keep else ""
+
+    t = re.sub(rf"\s*\(([^()]*\b{REG_ID}\b[^()]*)\)", paren, t)
+    t = re.sub(rf"\s*\b{REG_ID}\b", "", t)
+    t = re.sub(r"\s+([,;.)])", r"\1", t)
+    t = re.sub(r"\(\s+", "(", t)
+    t = re.sub(r"\s{2,}", " ", t).strip()
+    t = re.sub(r"\((T[1-4])\)", lambda m: f"({m.group(1)}, {TIER_SHORT[m.group(1)]})", t)
+    t = re.sub(r"(?<![·(\-–,]\s)(?<![A-Za-z(])(T[1-4])\b(?!–|\s*[—·(:,]|[_\w])", lambda m: f"{m.group(1)} ({TIER_SHORT[m.group(1)]})", t)
+    return t
+
+
 def _strip_amount(s: str) -> str:
     return re.sub(r"\s*\(\$[\d.,]+\s*[MBk]?\)\s*$", "", s).strip()
 
@@ -212,7 +239,7 @@ def capability_sentences(entry: dict[str, Any], artifact: dict[str, Any], hazard
             label = "yearly loss — only through Hazard"
         if key == "scenario_dollars" and mark == "✓":
             label = "a dollar scenario (give the unit value)"
-        out.append({"key": key, "mark": mark, "label": label, "short": {"single_event": f"one {hazard_label.lower()} event", "scenario_dollars": "a dollar scenario", "yearly_loss": "yearly loss"}[key], "detail": detail})
+        out.append({"key": key, "mark": mark, "label": label, "short": {"single_event": f"one {hazard_label.lower()} event", "scenario_dollars": "a dollar scenario", "yearly_loss": "yearly loss"}[key], "detail": plain_text(detail)})
     cap = artifact.get("capability_declaration") or {}
     cam = cap.get("consumer_annual_metrics") or {}
     pml = cam.get("pml") or cam.get("status_after_promotion")
@@ -332,9 +359,8 @@ def what_it_says(curve: dict[str, Any]) -> str:
 
 def how_sure(curve: dict[str, Any], params: list[dict[str, Any]]) -> dict[str, Any]:
     t = curve.get("tiers") or {}
-    strip_ids = lambda b: re.sub(r"\s*\((?:[A-Z]{1,6}-[A-Z]{0,2}\d{1,3}[^)]*|T[1-4][^)]*)\)", "", b).strip() if b else b  # noqa: E731 — IDs and bare codes stay in the ledger
-    shape = {"tier": t.get("shape"), "word": TIER_SHORT.get(t.get("shape") or "", "no tier stated"), "basis": strip_ids(t.get("shape_basis"))}
-    cost = {"tier": t.get("cost"), "word": TIER_SHORT.get(t.get("cost") or "", "no tier stated"), "basis": strip_ids(t.get("cost_basis"))}
+    shape = {"tier": t.get("shape"), "word": TIER_SHORT.get(t.get("shape") or "", "no tier stated"), "basis": plain_text(t.get("shape_basis"))}
+    cost = {"tier": t.get("cost"), "word": TIER_SHORT.get(t.get("cost") or "", "no tier stated"), "basis": plain_text(t.get("cost_basis"))}
     by_tier: dict[str, int] = {}
     for p in params:
         if p.get("tier"):
@@ -348,9 +374,10 @@ def resolve_key_sources(key_sources: list[str], sources_by_id: dict[str, dict[st
     """'NEMA GD 1-2016, Evaluating … (BF-S02)' → the register row BF-S02 with its link; an ID with no row keeps its text."""
     out = []
     for ks in key_sources:
-        ids = re.findall(r"\(([A-Za-z][A-Za-z0-9_\-]{1,60}(?:,\s*[A-Za-z][A-Za-z0-9_\-]{1,60})*)\)\s*$", ks)
-        text = re.sub(r"\s*\([^()]*\)\s*$", "", ks).strip() if ids else ks
-        id_list = [i.strip() for i in ids[0].split(",")] if ids else []
+        m = re.search(r"\(([A-Za-z][A-Za-z0-9_\-]{1,60}(?:,\s*[A-Za-z][A-Za-z0-9_\-]{1,60})*)(?:;\s*([^)]*))?\)\s*$", ks)
+        id_list = [i.strip() for i in m.group(1).split(",")] if m else []
+        note = (m.group(2) or "").strip() if m else ""
+        text = (ks[: m.start()].strip() + (f" ({note})" if note else "")) if m else ks
         rows = [sources_by_id.get(aliases.get(i, i)) for i in id_list]
         row = next((r for r in rows if r), None)
         out.append({"text": text, "ids": id_list, "title": row.get("title") if row else text, "link": row.get("link") if row else None,
@@ -461,7 +488,7 @@ def parameters_plain(params: list[dict[str, Any]], sources_by_id: dict[str, dict
         name = str(p.get("name") or "")
         words = humanise(name) if re.fullmatch(r"[A-Za-z0-9_]+", name) and "_" in name else name
         out.append({"id": p.get("id"), "name": words, "raw_name": name, "value_text": vt[:120], "tier": p.get("tier"), "tier_word": TIER_SHORT.get(p.get("tier") or "", "no tier stated"),
-                    "sources": srcs, "claim_ids": p.get("claim_ids") or [], "curve_id": p.get("curve_id"), "reasoning": p.get("reasoning"), "update_trigger": p.get("update_trigger"), "role": p.get("role")})
+                    "sources": srcs, "claim_ids": p.get("claim_ids") or [], "curve_id": p.get("curve_id"), "reasoning": plain_text(p.get("reasoning")), "update_trigger": p.get("update_trigger"), "role": p.get("role")})
     return out
 
 
@@ -479,22 +506,22 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
         p = f"{hazard} on {noun} has no curve yet. {e.get('reason', '').rstrip('.')}." if sid == "scope" else "Not applicable: this is a gap entry with no artifact."
         return {"id": sid, "name": name, "meaning": meaning, "paragraph": p, "plain_fact": "gap" if sid == "scope" else "—"}
     if sid == "scope":
-        method = (e.get("method") or {}).get("summary", "").rstrip(".")
+        method = plain_text((e.get("method") or {}).get("summary", "").rstrip("."))
         names = [pt["part"] for pt in parts]
         p = f"{hazard} on {noun}: {_lower_first(method)}." if method else f"{hazard} on {noun}."
         if names:
             p += f" It names {len(names)} part{'s' if len(names) != 1 else ''}: {_join(names)}."
         if e.get("out_of_scope"):
-            p += f" Outside its scope: {_join([_lower_first(x) for x in e['out_of_scope']], 'and')}."
+            p += f" Outside its scope: {_join([_lower_first(plain_text(x)) for x in e['out_of_scope']], 'and')}."
         if e.get("missing_mechanisms"):
-            p += f" Kinds of damage it does not include: {_join([_lower_first(x) for x in e['missing_mechanisms']])}."
+            p += f" Kinds of damage it does not include: {_join([_lower_first(plain_text(x)) for x in e['missing_mechanisms']])}."
         fact = f"{len(names)} part{'s' if len(names) != 1 else ''}" + (f" · {len(e.get('out_of_scope') or [])} left out" if e.get("out_of_scope") else "")
     elif sid == "units":
         names = [pt["part"] for pt in parts]
         p = f"For this hazard the {singular(noun)} is split into {len(names)} part{'s' if len(names) != 1 else ''}: {_join(names)}." if names else "No part rows are listed in the catalogue entry."
         if withheld:
             p += f" {len(withheld)} further unit{'s are' if len(withheld) != 1 else ' is'} named but withheld — {_join([humanise(w['failure_unit_id']).lower() for w in withheld])} — a stated 'not zero', not a curve."
-        nc = [_strip_amount(x) for x in e.get("not_covered") or []]
+        nc = [plain_text(_strip_amount(x)) for x in e.get("not_covered") or []]
         if nc:
             p += f" Parts of the plant's value with no curve yet: {_join([_lower_first(x) for x in nc])}."
         fact = f"{len(names)} part{'s' if len(names) != 1 else ''}" + (f" · {len(withheld)} withheld" if withheld else "")
@@ -511,7 +538,7 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
         if form:
             p += " " + form
         if e.get("input"):
-            p += f" The input, in the catalogue's words: {_lower_first(e['input'].rstrip('.'))}."
+            p += f" The input, in the catalogue's words: {_lower_first(plain_text(e['input'].rstrip('.')))}."
         short = {"binary_state": "a step", "piecewise_linear": "a line through points", "logistic": "an S-curve", "thresholded_logistic": "a threshold, then an S-curve",
                  "exact_state_table": "exact classes", "ordered_damage_state_lognormal": "damage states", "thresholded_weibull_expected_damage": "a threshold, then a rise"}
         fact = " + ".join(dict.fromkeys(short.get(k_, k_.replace("_", " ")) for k_ in _form_keys(curves))) or "—"

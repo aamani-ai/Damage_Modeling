@@ -16,7 +16,7 @@ from .occurrence import (all_registers, asset_slug, bess_bucket_values, hazard_s
                          twin_crosswalk_pin)
 from .parts import asset_plain_sentence, asset_view, substation_budget, substation_crosswalk
 from .plain import (STATION_NAMES, TIER_MEANING, TIER_PLAIN, TIER_SHORT, capability_sentences, curve_caption, parameters_plain, plain_rail,
-                    resolve_key_sources, station_plain, tier_words)
+                    plain_text, resolve_key_sources, station_plain, tier_words)
 from .registers import load_registers
 from .sampling import NO_EVALUATOR, sample_entry
 from .sources import NO_LINK, NOT_YET_EXTRACTED, extract_for_entry, link_counts, resolve_link
@@ -367,11 +367,11 @@ def build(write: bool = True) -> dict[str, Any]:
             "rail": rail_plain,
             "capabilities": capabilities,
             "blocks": {
-                "covered": {"value": value, "not_covered": [re.sub(r"\s*\(\$[\d.,]+\s*[MBk]?\)\s*$", "", x) for x in e.data.get("not_covered") or []], "withheld": withheld_units},
-                "assumed": [re.sub(r"\s*\((?:[A-Z]{1,6}-[A-Z]{0,2}\d{1,3}[^)]*)\)\s*$", "", j) for j in e.data.get("judgment") or []],  # the IDs stay in the evidence ledger
-                "missing": {"mechanisms": e.data.get("missing_mechanisms") or [], "out_of_scope": e.data.get("out_of_scope") or []},
-                "open_questions": e.data.get("open_items") or [],
-                "next_version": e.data.get("next_version"),
+                "covered": {"value": value, "not_covered": [plain_text(re.sub(r"\s*\(\$[\d.,]+\s*[MBk]?\)\s*$", "", x)) for x in e.data.get("not_covered") or []], "withheld": withheld_units},
+                "assumed": [plain_text(j) for j in e.data.get("judgment") or []],  # the IDs stay in the evidence ledger (cell.evidence.judgment)
+                "missing": {"mechanisms": [plain_text(x) for x in e.data.get("missing_mechanisms") or []], "out_of_scope": [plain_text(x) for x in e.data.get("out_of_scope") or []]},
+                "open_questions": [plain_text(x) for x in e.data.get("open_items") or []],
+                "next_version": plain_text(e.data.get("next_version")),
             },
             "stations": stations_plain,
             "key_references": key_refs,
@@ -653,9 +653,9 @@ def _check_summary(c: dict[str, Any]) -> str:
     if c["id"] == "source_ids":
         return "all resolve" if c["ok"] else f"{len(d.get('unresolved') or [])} unresolved in {', '.join(d.get('cells_affected') or [])}"
     if c["id"] == "twin_crosswalk":
-        return f"sha {str(d.get('sha256'))[:7]} · {d.get('rows')} rows"
+        return f"{d.get('rows')} rows, {'equal to the pin' if c['ok'] else 'NOT equal to the pin'}"
     if c["id"] == "substation_budget":
-        return f"sha {str(d.get('sha256'))[:7]} · {d.get('rows')} rows" if d.get("available") else "Hazard's budget not found"
+        return f"{d.get('rows')} rows, {'equal to the pin' if c['ok'] else 'NOT equal to the pin'}" if d.get("available") else "Hazard's budget not found"
     if c["id"] == "source_links":
         return "every source linked or located" if c["ok"] else f"{len(d.get('neither') or [])} sources with neither, in {', '.join(d.get('cells_affected') or [])}"
     if c["id"] == "extracted_sources":

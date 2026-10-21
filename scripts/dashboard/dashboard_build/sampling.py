@@ -392,7 +392,7 @@ def sample_flood_bess(e: Entry, kat: dict[str, Any]) -> tuple[list[dict[str, Any
     beyond = [[last, pcs_fresh_dr(pcs, last)], [xmax, pcs_fresh_dr(pcs, xmax)]]
     curves.append(_curve(e, pcs, axis,
                          [_series("PCS · fresh", pts, "line", variant="fresh", beyond_last_knot_from=last),
-                          _series("PCS · fresh · beyond the last knot (our judgment, T4)", beyond, "line", variant="fresh", continuation=True)],
+                          _series("PCS · fresh · beyond the last knot (our judgment · T4)", beyond, "line", variant="fresh", continuation=True)],
                          evaluator=_evaluator("damage_curve_eval", "evaluate_curve_record", f"x = max(0, depth − {entry_m}) per the evaluation contract, then the nine source knots; DR 1 continued beyond the last knot (T4)"),
                          knots=knots, domain=[0, None],
                          notes=[f"Knots are the Flood × Solar inverter curve read on depth above the {entry_m} m entry; shown here on depth above grade."]))

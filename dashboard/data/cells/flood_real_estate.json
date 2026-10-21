@@ -1232,7 +1232,7 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "13 sources set this cell: FEMA, Hazus Flood Model Technical Manual 7.0 (2025), Table 5-2, FEMA Hazus 6.1 flood damage-function extract, USACE, North Atlantic Coast Comprehensive Study (2015), depth-damage functions and FEMA OpenFEMA NFIP redacted claims, v3 (FRE-S012; check only) and 9 more. Of the 20 parameters, 15 are lab-tested (T2), 3 are transferred (T3) and 2 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "paragraph": "13 sources set this cell: FEMA, Hazus Flood Model Technical Manual 7.0 (2025), Table 5-2, FEMA Hazus 6.1 flood damage-function extract, USACE, North Atlantic Coast Comprehensive Study (2015), depth-damage functions and FEMA OpenFEMA NFIP redacted claims, v3 (check only) and 9 more. Of the 20 parameters, 15 are lab-tested (T2), 3 are transferred (T3) and 2 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
     "plain_fact": "13 sources · lab-tested"
    },
    {
@@ -1316,14 +1316,16 @@
     "source_id": "FRE-S004"
    },
    {
-    "text": "FEMA OpenFEMA NFIP redacted claims, v3 (FRE-S012; check only)",
-    "ids": [],
-    "title": "FEMA OpenFEMA NFIP redacted claims, v3 (FRE-S012; check only)",
-    "link": null,
-    "link_kind": "none",
-    "locator": null,
+    "text": "FEMA OpenFEMA NFIP redacted claims, v3 (check only)",
+    "ids": [
+     "FRE-S012"
+    ],
+    "title": "FEMA. OpenFEMA FIMA NFIP Redacted Claims, dataset NfipClaims version 3 (API).",
+    "link": "https://www.fema.gov/api/open/v3/NfipClaims",
+    "link_kind": "url",
+    "locator": "Three filtered pulls (one-floor slab buildings with exterior water depth > 0): single-family with damage (95,435), non-residential with damage (10,180), single-family with zero damage (1,006). Filters, record counts and sha256 of the cached pulls in NFIP_CLAIMS_PULL_MANIFEST_flood_real_estate__model_v0_1__docs_r1.json",
     "no_link_sentence": null,
-    "source_id": null
+    "source_id": "FRE-S012"
    },
    {
     "text": "Hazard reference profiles r1",
@@ -1426,7 +1428,7 @@
     "doi": null,
     "link": "https://github.com/USACE/go-consequences/blob/dff647cabbc1abae3f084e80b7f6a166651d05d8/structures/occtypes.json",
     "link_kind": "url",
-    "title": "U.S. Army Corps of Engineers, Hydrologic Engineering Center. go-consequences, structures/occtypes.json…",
+    "title": "U.S. Army Corps of Engineers, Hydrologic Engineering Center. go-consequences, structures/occtypes.json (,…",
     "no_link_sentence": null
    },
    {
@@ -2451,7 +2453,7 @@
     ],
     "claim_ids": [],
     "curve_id": "all",
-    "reasoning": "Native axis of both libraries (FRE-C001).",
+    "reasoning": "Native axis of both libraries.",
     "update_trigger": "A source with a different reference elevation is adopted.",
     "role": "axis_bridge"
    },
@@ -2552,7 +2554,7 @@
     ],
     "claim_ids": [],
     "curve_id": "FRE_RES_FRESH_HAZUS_DF129",
-    "reasoning": "FEMA Table 5-2 default; equals rounded USACE EGM means −2 to 16 ft (FRE-C002, C004).",
+    "reasoning": "FEMA Table 5-2 default; equals rounded USACE EGM means −2 to 16 ft (C004).",
     "update_trigger": "NFIP claims comparison or a Hazus Table 5-2 change.",
     "role": "curve_fit_shape"
    },
@@ -2580,7 +2582,7 @@
      },
      {
       "id": "FRE-S005",
-      "title": "U.S. Army Corps of Engineers, Hydrologic Engineering Center. go-consequences, structures/occtypes.json…",
+      "title": "U.S. Army Corps of Engineers, Hydrologic Engineering Center. go-consequences, structures/occtypes.json (,…",
       "link": "https://github.com/USACE/go-consequences/blob/dff647cabbc1abae3f084e80b7f6a166651d05d8/structures/occtypes.json",
       "link_kind": "url",
       "resolved": true
@@ -2595,7 +2597,7 @@
     ],
     "claim_ids": [],
     "curve_id": "FRE_COM_FRESH_HAZUS_DF217",
-    "reasoning": "FEMA Table 5-2 default for COM1; verified identical to USACE copy (FRE-C003). Single-district provenance (FRE-C011).",
+    "reasoning": "FEMA Table 5-2 default for COM1; verified identical to USACE copy. Single-district provenance.",
     "update_trigger": "Owner selects office (DF 431) or NFIP comparison shows bias.",
     "role": "curve_fit_shape"
    },
@@ -2623,7 +2625,7 @@
      },
      {
       "id": "FRE-S005",
-      "title": "U.S. Army Corps of Engineers, Hydrologic Engineering Center. go-consequences, structures/occtypes.json…",
+      "title": "U.S. Army Corps of Engineers, Hydrologic Engineering Center. go-consequences, structures/occtypes.json (,…",
       "link": "https://github.com/USACE/go-consequences/blob/dff647cabbc1abae3f084e80b7f6a166651d05d8/structures/occtypes.json",
       "link_kind": "url",
       "resolved": true
@@ -2638,7 +2640,7 @@
     ],
     "claim_ids": [],
     "curve_id": "FRE_IND_FRESH_HAZUS_DF341",
-    "reasoning": "FEMA Table 5-2 default for COM2 (warehouse use); verified identical to USACE copy (FRE-C003). Single-district provenance.",
+    "reasoning": "FEMA Table 5-2 default for COM2 (warehouse use); verified identical to USACE copy. Single-district provenance.",
     "update_trigger": "Owner selects light industrial (DF 559) or NFIP comparison shows bias.",
     "role": "curve_fit_shape"
    },
@@ -2660,7 +2662,7 @@
     ],
     "claim_ids": [],
     "curve_id": "FRE_RES_COAST_NACCS_5A",
-    "reasoning": "Prototype 5A matches the reference house (FRE-C007). North Atlantic expert panel; own verification found it low (FRE-C009). T3 transfer outside the North Atlantic.",
+    "reasoning": "Prototype 5A matches the reference house. North Atlantic expert panel; own verification found it low. T3 (transferred) transfer outside the North Atlantic.",
     "update_trigger": "Attachment G review, NFIP comparison, or owner selects FEMA DF 658.",
     "role": "curve_fit_shape"
    },
@@ -2682,7 +2684,7 @@
     ],
     "claim_ids": [],
     "curve_id": "FRE_COM_COAST_NACCS_P2",
-    "reasoning": "Prototype 2 steel-framed commercial matches the reference building (FRE-C008). T3 transfer outside the North Atlantic.",
+    "reasoning": "Prototype 2 steel-framed commercial matches the reference building. T3 (transferred) transfer outside the North Atlantic.",
     "update_trigger": "Commercial reference redefined as masonry (then COM-PRE) or NFIP comparison.",
     "role": "curve_fit_shape"
    },
@@ -2704,7 +2706,7 @@
     ],
     "claim_ids": [],
     "curve_id": "FRE_IND_COAST_NACCS_P3",
-    "reasoning": "Prototype 3 one-story steel/light-metal building matches the warehouse (FRE-C008). T3 transfer outside the North Atlantic.",
+    "reasoning": "Prototype 3 one-story steel/light-metal building matches the warehouse. T3 (transferred) transfer outside the North Atlantic.",
     "update_trigger": "NFIP comparison.",
     "role": "curve_fit_shape"
    },
@@ -2755,7 +2757,7 @@
     ],
     "claim_ids": [],
     "curve_id": "FRE_*_COAST_NACCS_*",
-    "reasoning": "Compiled values at 4, 6, 8, 9 ft are fills (FRE-C006, D-FRE-13).",
+    "reasoning": "Compiled values at 4, 6, 8, 9 ft are fills (D-FRE-13).",
     "update_trigger": "—",
     "role": "boundary_or_cap"
    },
@@ -2828,7 +2830,7 @@
     ],
     "claim_ids": [],
     "curve_id": "all",
-    "reasoning": "Libraries built for different water and settings; FEMA's own coastal position recorded as alternative (FRE-C013).",
+    "reasoning": "Libraries built for different water and settings; FEMA's own coastal position recorded as alternative.",
     "update_trigger": "Owner selects FEMA coastal defaults, or Hazard cannot supply water type.",
     "role": "conditioner_adjustment"
    },
@@ -2850,7 +2852,7 @@
     ],
     "claim_ids": [],
     "curve_id": "all residential",
-    "reasoning": "NSI 2026 documented RES1 slab default (FRE-C022); replaces the NACCS 5A 1.0 ft (D-FRE-22).",
+    "reasoning": "NSI 2026 documented RES1 slab default; replaces the NACCS 5A 1.0 ft (D-FRE-22).",
     "update_trigger": "NSI documents non-residential defaults, or owner choice.",
     "role": "selector_default"
    },
@@ -2872,7 +2874,7 @@
     ],
     "claim_ids": [],
     "curve_id": "all commercial",
-    "reasoning": "NSI records, slab COM1/COM4 in three counties (FRE-C023); not documented; replaces NACCS Prototype 2 0 ft.",
+    "reasoning": "NSI records, slab COM1/COM4 in three counties; not documented; replaces NACCS Prototype 2 0 ft.",
     "update_trigger": "NSI documents non-residential defaults, or owner choice.",
     "role": "selector_default"
    },
@@ -2894,7 +2896,7 @@
     ],
     "claim_ids": [],
     "curve_id": "all warehouse",
-    "reasoning": "NSI records, slab COM2/IND2 in three counties (FRE-C023); not documented; replaces NACCS Prototype 3 1.0 ft.",
+    "reasoning": "NSI records, slab COM2/IND2 in three counties; not documented; replaces NACCS Prototype 3 1.0 ft.",
     "update_trigger": "NSI documents non-residential defaults, or owner choice.",
     "role": "selector_default"
    },
@@ -2923,7 +2925,7 @@
     ],
     "claim_ids": [],
     "curve_id": "all",
-    "reasoning": "Both libraries express damage as % of structure value (FRE-C001).",
+    "reasoning": "Both libraries express damage as % of structure value.",
     "update_trigger": "Owner chooses another reporting basis (explicit conversion only).",
     "role": "exposure_or_value"
    },
