@@ -159,3 +159,36 @@ the *not drawn* tile tag, the ┈ and – glyphs, a focus landing mark, the cold
 
 **Reason:** `DCD-D10` (the owner signs off each slice) and `DCD-D15` (feedback on the running slice). The owner
 asked to judge the live app rather than screenshots; the review page was added for that before the acceptance.
+
+## DCD-D18 — The owner's first review of V0 (2026-10-20)
+
+**Decision:** The owner reviewed V0 on the running app and asked for one more iteration before reviewing
+again. His words: *"Things are not very well structured … in the cases where you have multiple curves … you
+need to improve that somehow. I'm opening a flood, and it's really hard to understand or read things … it
+sounds very technical, but this is also something we want to showcase to Prashant and others … whenever I
+click on, let's say, scope, units, X's, and all that. It's very tricky to even understand … Can you make it a
+bit more user-friendly? I think your library and settings are good."* — *"For sources and all, I am under the
+assumption you will provide a link, but it seems like that's not the case."* — *"For batteries, you are
+providing an amazing thing … Why don't we do that for solar and wind? … there is a lot of inconsistency …
+maybe … our breakdown was different than it should be. That's what we want to ultimately understand."* —
+*"You're putting all that into dropdowns … I'm getting overwhelmed … It looks too cluttery right now."*
+Recorded as the iteration-2 requirements in
+[`iteration_2_brief.md`](iteration_2_brief.md) §1–§3.
+
+**Reason:** `DCD-D15` — feedback on the running software is the review loop, and this is the first round of
+it. The library and its lenses are accepted as they are.
+
+## DCD-D19 — The plain layer is the page; the ledger is one control away (G12 revised by feedback)
+
+**Decision:** Revises `DCD-D12` ("one plain sentence per screen, then the instrument"). On every page the
+default view is written for a reader who does not know the framework — plain chips, captions, open blocks in
+words, one curve at a time, sources as links, station panels that explain first — and every ledger fact
+(register and claim IDs, tier codes, gate letters, station numbers, SHAs, known answers) stays available one
+control away (*Show the numbers*, *Details*, the identity footer). No separate "plain mode" and nothing
+removed from the ledger. *(Agent, inside the owner's review of 2026-10-20: "make it a bit more user-friendly so
+people can understand".)*
+
+**Reason:** The review showed that one sentence above an audit ledger is the wrong balance for the readers
+this instrument is for (reason 2 and reason 10 in discussion `01`: a library of subsystems; Prashant's
+question). The information is unchanged; its order and its words are not.
+

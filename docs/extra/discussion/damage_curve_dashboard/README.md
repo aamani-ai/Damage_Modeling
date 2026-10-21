@@ -146,7 +146,7 @@ are a local dashboard and hosting comes later (`DCD-D13`); feedback is given on 
 | G9 | Missing battery evaluators | Reference evaluators here — agreed | `DCD-D09` |
 | G10 | Look sign-off | Owner accepts screenshots per slice before merge — agreed | `DCD-D10` |
 | G11 | Home of the look principle | Shared file in `Hazard_modeling/docs/principles/` — agreed; promoted | `DCD-D11` |
-| G12 | Plain language | One plain sentence per screen — agreed | `DCD-D12` |
+| G12 | Plain language | One plain sentence per screen — agreed; **revised 2026-10-20 by the owner's V0 review**: the plain layer is the page, the ledger one control away | `DCD-D12`, `DCD-D19` |
 
 ## From here to a build — what and how
 

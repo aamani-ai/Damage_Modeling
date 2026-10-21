@@ -97,6 +97,16 @@ Shared with Hazard: the look principle at `Hazard_modeling/docs/principles/analy
 
 ### Phase 2 · Owner feedback loop (local)
 
+- [x] 2026-10-20 — the owner reviewed V0 on the running app and asked for one more iteration (`DCD-D18`):
+  the page reads like an audit ledger; multiple curves on one plot; station drawers and cards too technical;
+  sources without links; the asset view for batteries only; older cells showing no evidence. Library and
+  lenses accepted.
+- [ ] **Iteration 2** per [`iteration_2_brief.md`](iteration_2_brief.md): the plain layer is the page and the
+  ledger is one control away (`DCD-D19`); one curve at a time with generated captions; sources as links;
+  station panels that explain first; the asset view for every asset with the *split differently* block;
+  workbook/dossier extraction so the older cells show their evidence. Acceptance: the brief's §5.
+- [ ] Gate: the owner's second review on the running app
+
 - [x] The owner runs it locally and gives feedback on the screens; findings become rows here, not reopened gates unless a ruling is contradicted — *2026-10-20: the owner asked to review the live app, not screenshots; the review page `/v0` was added and the owner accepted V0 (`DCD-D17`). The page's questions 2–6 stay open*
 - [ ] Gate: the owner accepts V0's screenshot set; merge to `main` — *accepted 2026-10-20 (`DCD-D17`); the cold read (check 7) and the merge are pending*
 
