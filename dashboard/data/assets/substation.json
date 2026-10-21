@@ -912,8 +912,14 @@
      "treatment": "primary_nonzero",
      "part": "Whole station (fenced assembly)",
      "state": "curve",
-     "rows": [],
-     "spans": false,
+     "rows": [
+      "substation_hv_yard",
+      "substation_lv_yard",
+      "substation_transformation",
+      "substation_controls_auxiliaries",
+      "substation_civil_support"
+     ],
+     "spans": true,
      "share": null,
      "share_basis": null,
      "dollars": null,
@@ -1039,9 +1045,7 @@
      "rows": [
       "substation_hv_yard",
       "substation_lv_yard",
-      "substation_transformation",
-      "substation_controls_auxiliaries",
-      "substation_civil_support"
+      "substation_transformation"
      ],
      "spans": false,
      "share": null,
@@ -1065,12 +1069,35 @@
       "hv_arresters",
       "transformers"
      ]
+    },
+    {
+     "failure_unit_id": null,
+     "subsystem": "FACILITY_GSU_SUBSTATION",
+     "component": "rest of the fenced station",
+     "treatment": "withheld",
+     "part": "rest of the fenced station",
+     "state": "withheld",
+     "rows": [
+      "substation_controls_auxiliaries",
+      "substation_civil_support"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": null,
+     "cost": null,
+     "curves": [],
+     "drawn": false,
+     "withheld_reasons": [
+      "withheld by the binding"
+     ]
     }
    ],
    "share_basis": null,
-   "n_named": 1,
+   "n_named": 2,
    "n_curve": 1,
-   "n_withheld": 0,
+   "n_withheld": 1,
    "not_covered": [
     "Rest of the fenced station ($14,327,879.37, 52.38%): bus supports, dead-ends, oil containment and firewall, relay panels, control house, station battery, SCADA, station service, control cable, conduit and trench, site work, drainage and lightning shielding"
    ]
@@ -1078,8 +1105,10 @@
  },
  "split": {
   "differs": true,
-  "sentence": "These cells split the substation differently: wildfire binds 8 equipment rows ($13.0M, 48 % of the fenced station) and withholds the rest; the other hazards use one curve for the whole station. Hazard's substation reference budget ($27.35M fenced station) sets the rows; three hazards use one curve for the whole station, wildfire binds the equipment rows only.",
+  "sentence": "These cells split the substation differently: the cells name different numbers of parts: flood 1, convective wind 1, hurricane wind 1 and wildfire 2; flood treats whole station (fenced assembly) as one unit that spans 345 kv yard: breakers, disconnects, bus, instrument transformers, deadends, 138 kv yard: breakers, disconnects, bus, instrument transformers, deadends, autotransformers, oil containment and firewall, relays, control house, station battery, scada, station service, control cable and site work, access road, drainage and lightning shielding; wildfire binds 8 equipment rows ($13.0M, 48 % of the fenced station) and withholds the rest; the other hazards use one curve for the whole station. Hazard's substation reference budget ($27.35M fenced station) sets the rows; three hazards use one curve for the whole station, wildfire binds the equipment rows only.",
   "details": [
+   "the cells name different numbers of parts: flood 1, convective wind 1, hurricane wind 1 and wildfire 2",
+   "flood treats whole station (fenced assembly) as one unit that spans 345 kv yard: breakers, disconnects, bus, instrument transformers, deadends, 138 kv yard: breakers, disconnects, bus, instrument transformers, deadends, autotransformers, oil containment and firewall, relays, control house, station battery, scada, station service, control cable and site work, access road, drainage and lightning shielding",
    "wildfire binds 8 equipment rows ($13.0M, 48 % of the fenced station) and withholds the rest; the other hazards use one curve for the whole station"
   ],
   "columns": [
@@ -1125,9 +1154,9 @@
      "slug": "wildfire",
      "label": "Wildfire"
     },
-    "n_named": 1,
+    "n_named": 2,
     "n_curve": 1,
-    "n_withheld": 0,
+    "n_withheld": 1,
     "share_basis": null,
     "title": "Wildfire × Substation"
    }
@@ -1137,7 +1166,9 @@
     "key": "substation_hv_yard",
     "label": "345 kV yard: breakers, disconnects, bus, instrument transformers, deadends",
     "by_cell": {
-     "flood_substation": [],
+     "flood_substation": [
+      "Whole station (fenced assembly)"
+     ],
      "substation_convective_wind_screening_v1": [
       "Whole station (fenced assembly)"
      ],
@@ -1153,7 +1184,9 @@
     "key": "substation_lv_yard",
     "label": "138 kV yard: breakers, disconnects, bus, instrument transformers, deadends",
     "by_cell": {
-     "flood_substation": [],
+     "flood_substation": [
+      "Whole station (fenced assembly)"
+     ],
      "substation_convective_wind_screening_v1": [
       "Whole station (fenced assembly)"
      ],
@@ -1169,7 +1202,9 @@
     "key": "substation_transformation",
     "label": "Autotransformers, oil containment and firewall",
     "by_cell": {
-     "flood_substation": [],
+     "flood_substation": [
+      "Whole station (fenced assembly)"
+     ],
      "substation_convective_wind_screening_v1": [
       "Whole station (fenced assembly)"
      ],
@@ -1185,7 +1220,9 @@
     "key": "substation_controls_auxiliaries",
     "label": "Relays, control house, station battery, SCADA, station service, control cable",
     "by_cell": {
-     "flood_substation": [],
+     "flood_substation": [
+      "Whole station (fenced assembly)"
+     ],
      "substation_convective_wind_screening_v1": [
       "Whole station (fenced assembly)"
      ],
@@ -1193,7 +1230,7 @@
       "Whole station (fenced assembly)"
      ],
      "substation_wildfire_screening_v1": [
-      "Electrical equipment (transformers and switchgear)"
+      "rest of the fenced station (withheld)"
      ]
     }
    },
@@ -1201,7 +1238,9 @@
     "key": "substation_civil_support",
     "label": "Site work, access road, drainage and lightning shielding",
     "by_cell": {
-     "flood_substation": [],
+     "flood_substation": [
+      "Whole station (fenced assembly)"
+     ],
      "substation_convective_wind_screening_v1": [
       "Whole station (fenced assembly)"
      ],
@@ -1209,7 +1248,7 @@
       "Whole station (fenced assembly)"
      ],
      "substation_wildfire_screening_v1": [
-      "Electrical equipment (transformers and switchgear)"
+      "rest of the fenced station (withheld)"
      ]
     }
    }

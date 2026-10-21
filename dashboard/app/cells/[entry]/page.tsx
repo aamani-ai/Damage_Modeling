@@ -1,9 +1,15 @@
+// The cell page, rebuilt as a story (brief §3.1, DCD-D19): plain chips and the plain sentence, "How this was built"
+// in words, one curve at a time with its caption, five open plain blocks, the identity in the footer. Every
+// ledger fact V0 showed is still here, one control away: the station panels' Details, "Show the numbers", the
+// footer's files, registers, known answers and pins.
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AnswerCard, AuditCard, EvidenceCard, FieldReviewCard, PartsCard, ProofCard, SeamsCard } from "@/components/cell-cards";
-import { StatusRail } from "@/components/status-rail";
-import { Trail } from "@/components/trail";
-import { EmptyState, FileLink } from "@/components/ui";
+import { CellFooter } from "@/components/cell-footer";
+import { CurveHero } from "@/components/curve-hero";
+import { HowBuiltStrip } from "@/components/how-built-strip";
+import { PlainBlocks } from "@/components/plain-blocks";
+import { PlainRail } from "@/components/plain-rail";
+import { EmptyState } from "@/components/ui";
 import { blobUrl, cell, citations, curvesOf, manifest } from "@/lib/data";
 
 export const dynamicParams = false;
@@ -20,59 +26,40 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
   const curves = curvesOf(entry);
   const cites = citations()?.cells[entry] ?? null;
   const blob = (p: string) => blobUrl(m, p);
-  const pinsOk = c.pins.length ? c.pins.every((p) => p.ok) : null;
   return (
     <div>
-      <StatusRail title={c.title} rail={c.rail} identity={c.identity} summary={c.summary} back={{ href: `/assets/${c.asset.slug}`, label: c.asset.label }} pinsOk={pinsOk} tiers={m.tiers} />
-      <Trail chain={c.chain} blobBase={`${m.repo.url}/blob/${m.commit_full}`} />
-      <div className="mt-3 space-y-3">
-        {c.kind === "gap" ? (
+      <PlainRail title={c.title} rail={c.plain.rail} summary={c.summary} back={{ href: `/assets/${c.asset.slug}`, label: c.asset.label }} tierMeaning={m.tier_meaning} tone={c.rail.review.tone} />
+      {c.kind === "gap" ? (
+        <div className="mt-3 space-y-3">
           <EmptyState>
             {c.gap_reason} — no artifact, no curve, no evidence registers.{" "}
             {c.field_review.register ? (
-              <>
-                The field-report register exists: <Link href={`/occurrence/${c.asset.slug}/${c.hazard.slug}`} className="text-accent hover:underline">open it ▸</Link>
-              </>
+              <>The field-report register exists: <Link href={`/occurrence/${c.asset.slug}/${c.hazard.slug}`} className="text-accent hover:underline">open it ▸</Link></>
             ) : null}
           </EmptyState>
-        ) : (
-          <AnswerCard cell={c} curves={curves} m={m} blob={blob} />
-        )}
-        {c.binding ? (
-          <EmptyState>
-            Reused binding <span className="font-mono">{c.identity.binding_id}</span>: prices this asset with the curve of{" "}
-            <Link href={`/cells/${c.binding.source_entry_id}`} className="text-accent hover:underline">{c.binding.source_entry_id}</Link> ({c.binding.reused_curves.join(", ")})
-            {c.binding.transfer_tier ? ` · transfer tier ${c.binding.transfer_tier}` : ""}. {c.binding.transfer_rationale ?? ""}
-          </EmptyState>
-        ) : null}
-        {c.kind !== "gap" ? <PartsCard cell={c} /> : null}
-        {c.kind !== "gap" ? <EvidenceCard cell={c} cites={cites} blob={blob} m={m} /> : null}
-        {c.kind !== "gap" ? <AuditCard cell={c} blob={blob} /> : null}
-        <ProofCard cell={c} blob={blob} />
-        {c.kind !== "gap" ? <SeamsCard cell={c} /> : null}
-        <FieldReviewCard cell={c} blob={blob} m={m} />
-        {Object.values(c.files).some(Boolean) || c.folder_files.length ? (
-        <p className="text-[10.5px] text-muted-foreground">
-          files at the build commit ·{" "}
-          {Object.entries(c.files)
-            .filter(([, v]) => v)
-            .map(([k, v]) => (
-              <span key={k}>
-                <FileLink href={blob(v!)}>{k.replace("_", "-")}</FileLink>{" "}
-              </span>
-            ))}
-          {c.folder_files.length ? (
-            <>
-              · folder{" "}
-              <FileLink href={`${m.repo.url}/tree/${m.commit_full}/${c.folder_files[0].path.split("/").slice(0, -1).join("/")}`}>
-                {c.folder_files[0].path.split("/").slice(-2, -1)[0]}/ ({c.folder_files.length} files)
-              </FileLink>
-            </>
-          ) : null}
-          {c.sampling_notes.length ? <> · build notes: {c.sampling_notes.join(" ")}</> : null}
-        </p>
-        ) : null}
-      </div>
+          <HowBuiltStrip cell={c} cites={cites} curves={curves} m={m} />
+        </div>
+      ) : (
+        <>
+          <HowBuiltStrip cell={c} cites={cites} curves={curves} m={m} />
+          {c.binding ? (
+            <EmptyState>
+              This cell reuses another cell&apos;s curve: it prices {c.asset.label.toLowerCase()} with{" "}
+              {c.binding.reused_curves.map((id, i) => (
+                <span key={id}>{i ? ", " : ""}<Link href={`/cells/${c.binding!.source_entry_id}/curves/${id}`} className="text-accent hover:underline">{id}</Link></span>
+              ))}{" "}
+              from <Link href={`/cells/${c.binding.source_entry_id}`} className="text-accent hover:underline">{m.entries.find((t) => t.entry_id === c.binding!.source_entry_id)?.title ?? c.binding.source_entry_id}</Link>
+              {c.binding.transfer_tier ? ` (the transfer is rated ${m.tier_words[c.binding.transfer_tier] ?? c.binding.transfer_tier})` : ""}. {c.binding.transfer_rationale ?? ""}
+            </EmptyState>
+          ) : curves.length ? (
+            <CurveHero cell={c} curves={curves} m={m} />
+          ) : (
+            <EmptyState>No curve records in this artifact.</EmptyState>
+          )}
+          <PlainBlocks cell={c} blob={blob} />
+        </>
+      )}
+      <CellFooter cell={c} m={m} blob={blob} />
     </div>
   );
 }

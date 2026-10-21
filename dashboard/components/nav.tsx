@@ -25,8 +25,11 @@ export function Nav({ assets }: { assets: (Slug & { href?: string })[] }) {
         );
       })}
       <span aria-hidden className="mx-1 h-4 w-px bg-border" />
-      <Link href="/v0" aria-current={pathname === "/v0" ? "page" : undefined} className={tab(pathname === "/v0")} title="Review the V0 slice on the live screens">
-        Review V0
+      <Link href="/review" aria-current={pathname === "/review" ? "page" : undefined} className={tab(pathname === "/review")} title="What the pages found and could not resolve">
+        Review queue
+      </Link>
+      <Link href="/v0" aria-current={pathname === "/v0" ? "page" : undefined} className={tab(pathname === "/v0")} title="Walk iteration 2 on the live screens">
+        Review iteration 2
       </Link>
     </nav>
   );

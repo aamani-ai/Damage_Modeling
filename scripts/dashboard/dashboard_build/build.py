@@ -368,7 +368,7 @@ def build(write: bool = True) -> dict[str, Any]:
             "capabilities": capabilities,
             "blocks": {
                 "covered": {"value": value, "not_covered": [re.sub(r"\s*\(\$[\d.,]+\s*[MBk]?\)\s*$", "", x) for x in e.data.get("not_covered") or []], "withheld": withheld_units},
-                "assumed": e.data.get("judgment") or [],
+                "assumed": [re.sub(r"\s*\((?:[A-Z]{1,6}-[A-Z]{0,2}\d{1,3}[^)]*)\)\s*$", "", j) for j in e.data.get("judgment") or []],  # the IDs stay in the evidence ledger
                 "missing": {"mechanisms": e.data.get("missing_mechanisms") or [], "out_of_scope": e.data.get("out_of_scope") or []},
                 "open_questions": e.data.get("open_items") or [],
                 "next_version": e.data.get("next_version"),

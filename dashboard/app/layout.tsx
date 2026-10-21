@@ -34,8 +34,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <a href={`${m.repo.url}/tree/${m.commit_full}`} target="_blank" rel="noreferrer" title="The repository at the build commit" className="rounded border border-border px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground hover:text-foreground">
                   GitHub ↗
                 </a>
-                <span className="rounded-sm bg-muted px-1.5 py-0.5 font-mono text-[9.5px] text-muted-foreground/90" title={`built ${m.built_at} at commit ${m.commit_full}`}>
-                  built {m.commit}
+                <span className="rounded-sm bg-muted px-1.5 py-0.5 text-[9.5px] text-muted-foreground/90" title={`built ${m.built_at} at commit ${m.commit_full}; the commit is in every page's footer`}>
+                  built {m.built_at.slice(0, 10)}
                 </span>
                 <span className="rounded-sm bg-muted px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-muted-foreground/80">internal</span>
                 <ThemeToggle />

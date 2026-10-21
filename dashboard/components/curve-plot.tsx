@@ -94,7 +94,7 @@ export function legendGrid(items: LegendItem[]): { rows: string[]; cols: string[
   return cols.length ? { rows, cols, cells, spans } : null;
 }
 
-function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette, hidden: Set<string>, width: number): EChartsOption {
+function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette, hidden: Set<string>, width: number, ghosts: Curve[] = []): EChartsOption {
   const categorical = axis.kind === "categorical";
   const categories = categorical
     ? Array.from(new Set(curves.flatMap((c) => c.series.flatMap((s) => s.points.map(([x]) => x))))).sort((a, b) => a - b).map(String)
@@ -170,8 +170,8 @@ function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette,
         labelLayout: { moveOverlap: "shiftY" },
         markPoint: s.continuation && mid ? {
           silent: true, symbol: "circle", symbolSize: 0,
-          label: { show: true, position: "top", distance: 4, formatter: "our judgment (T4)", color: p.muted, fontSize: 10, fontFamily: MONO },
-          data: [{ name: "our judgment (T4)", coord: [(pts[0][0] + pts[pts.length - 1][0]) / 2, pts[0][1]] }],
+          label: { show: true, position: "top", distance: 4, formatter: "beyond the data: our judgment · T4", color: p.muted, fontSize: 10, fontFamily: MONO },
+          data: [{ name: "beyond the data: our judgment", coord: [(pts[0][0] + pts[pts.length - 1][0]) / 2, pts[0][1]] }],
         } : undefined,
         emphasis: { focus: "series", lineStyle: { width: 2.5 } },
       });
@@ -193,11 +193,24 @@ function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette,
       zones.push({ from: z.from, to: z.to, label: /flag/i.test(z.reason) ? "flagged zero" : "withheld", low: high });
     }
     const entry = (c.axis.bridge as { assumed_entry_m?: number } | undefined)?.assumed_entry_m;
-    if (typeof entry === "number" && !refLines.some((r) => r.x === entry)) refLines.push({ x: entry, label: `${entry.toFixed(2)} m entry · T4 policy` });
+    if (typeof entry === "number" && !refLines.some((r) => r.x === entry)) refLines.push({ x: entry, label: `water enters here · ${entry.toFixed(2)} m (our judgment · T4)` });
     if (c.envelope && !hidden.has(c.envelope.label)) {
       const lo = c.envelope.lower, up = c.envelope.upper;
       series.push({ name: "_envelope_base", type: "line", data: lo, stack: `env-${c.curve_id}`, lineStyle: { opacity: 0 }, showSymbol: false, silent: true, tooltip: { show: false }, z: 1 });
       series.push({ name: c.envelope.label, type: "line", data: up.map(([x, y], i) => [x, y - (lo[i]?.[1] ?? 0)]), stack: `env-${c.curve_id}`, lineStyle: { opacity: 0 }, showSymbol: false, silent: true, areaStyle: { color: hatch(p.muted) as never }, tooltip: { show: false }, z: 1 });
+    }
+  }
+  // the other parts, ghosted: faint, unlabelled, not in the legend, not hoverable — the selected curve stays the one line labelled
+  for (const g of ghosts) {
+    for (const s of g.series) {
+      if (s.continuation || !s.points.length) continue;
+      const pts = (logX ? s.points.filter(([x]) => x > 0) : s.points) as [number, number][];
+      if (categorical || s.kind === "categorical") {
+        series.push({ name: `_ghost_${g.curve_id}_${s.label}`, type: "scatter", data: pts.map(([x, y]) => [xOf(x), y]), symbol: "circle", symbolSize: 5, itemStyle: { color: p.muted, opacity: 0.35 }, silent: true, tooltip: { show: false }, z: 0 });
+      } else {
+        series.push({ name: `_ghost_${g.curve_id}_${s.label}`, type: "line", data: pts, showSymbol: false, smooth: false, silent: true, tooltip: { show: false }, z: 0,
+          lineStyle: { color: p.muted, width: 1, opacity: 0.4, type: s.kind === "step" ? "solid" : "solid" }, itemStyle: { color: p.muted } });
+      }
     }
   }
   if (!categorical && knots.length) series.push({ name: KNOTS, type: "scatter", data: knots, symbol: "circle", symbolSize: 5, z: 4, tooltip: { show: false } });
@@ -269,10 +282,24 @@ function Swatch({ item }: { item: LegendItem }) {
   );
 }
 
-export function CurvePlot({ curves, axis, logX = false, height = 340, ariaLabel }: { curves: Curve[]; axis: Axis; logX?: boolean; height?: number; ariaLabel?: string }) {
+export function CurvePlot({ curves, axis, logX = false, height = 340, ariaLabel, ghosts = [], onlySeries = null, legend = true }: {
+  curves: Curve[]; axis: Axis; logX?: boolean; height?: number; ariaLabel?: string;
+  /** other curves drawn faint and unlabelled behind the selected one (the cell page's "one curve at a time") */
+  ghosts?: Curve[];
+  /** when set, only these series labels are drawn and listed; the rest stay hidden (the variant toggle) */
+  onlySeries?: string[] | null;
+  legend?: boolean;
+}) {
   const { resolvedTheme } = useTheme();
   const [palette, setPalette] = useState<PlotPalette | null>(null);
-  const [hidden, setHidden] = useState<Set<string>>(() => new Set());
+  const [userHidden, setHidden] = useState<Set<string>>(() => new Set());
+  const hidden = useMemo(() => {
+    if (!onlySeries) return userHidden;
+    const keep = new Set(onlySeries);
+    const h = new Set(userHidden);
+    for (const c of curves) for (const s of c.series) if (!s.continuation && !keep.has(s.label)) h.add(s.label);
+    return h;
+  }, [userHidden, onlySeries, curves]);
   const box = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
   useEffect(() => {
@@ -288,8 +315,13 @@ export function CurvePlot({ curves, axis, logX = false, height = 340, ariaLabel 
     return () => ro.disconnect();
   }, [axis.dodge]);
   const categorical = axis.kind === "categorical";
-  const items = useMemo(() => legendItems(curves, categorical), [curves, categorical]);
-  const option = useMemo(() => (palette && (!axis.dodge || width) ? buildOption(curves, axis, logX, palette, hidden, width) : null), [curves, axis, logX, palette, hidden, width]);
+  const items = useMemo(() => {
+    const all = legendItems(curves, categorical);
+    if (!onlySeries) return all;
+    const keep = new Set(onlySeries);
+    return all.filter((it) => keep.has(it.name) || !(it.kind === "line" || it.kind === "band" || it.kind === "symbol"));
+  }, [curves, categorical, onlySeries]);
+  const option = useMemo(() => (palette && (!axis.dodge || width) ? buildOption(curves, axis, logX, palette, hidden, width, ghosts) : null), [curves, axis, logX, palette, hidden, width, ghosts]);
   const label = ariaLabel ?? `Damage ratio against ${axis.label} for ${curves.map((c) => c.part ?? c.curve_id).join(", ")}`;
   const toggle = (name: string) =>
     setHidden((h) => {
@@ -312,7 +344,7 @@ export function CurvePlot({ curves, axis, logX = false, height = 340, ariaLabel 
   };
   return (
     <div>
-      <div role="group" aria-label="Legend — show or hide a series" className="px-1 pb-1">
+      {legend ? <div role="group" aria-label="Legend — show or hide a series" className="px-1 pb-1">
         {grid ? (
           <table className="mb-1 text-[10.5px] leading-tight">
             <thead>
@@ -339,7 +371,7 @@ export function CurvePlot({ curves, axis, logX = false, height = 340, ariaLabel 
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
           {items.filter((it) => !inGrid(it)).map((it, i) => button(it, <>{it.name}{it.kind === "band" ? <span className="text-muted-foreground"> · same line, drawn as a band</span> : null}</>, `${i}·${it.name}`))}
         </div>
-      </div>
+      </div> : null}
       <div ref={box} style={{ height }}>{option ? <EChart option={option} className="h-full w-full" ariaLabel={label} /> : null}</div>
     </div>
   );

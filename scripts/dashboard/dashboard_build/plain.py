@@ -332,8 +332,9 @@ def what_it_says(curve: dict[str, Any]) -> str:
 
 def how_sure(curve: dict[str, Any], params: list[dict[str, Any]]) -> dict[str, Any]:
     t = curve.get("tiers") or {}
-    shape = {"tier": t.get("shape"), "word": TIER_SHORT.get(t.get("shape") or "", "no tier stated"), "basis": t.get("shape_basis")}
-    cost = {"tier": t.get("cost"), "word": TIER_SHORT.get(t.get("cost") or "", "no tier stated"), "basis": t.get("cost_basis")}
+    strip_ids = lambda b: re.sub(r"\s*\((?:[A-Z]{1,6}-[A-Z]{0,2}\d{1,3}[^)]*|T[1-4][^)]*)\)", "", b).strip() if b else b  # noqa: E731 — IDs and bare codes stay in the ledger
+    shape = {"tier": t.get("shape"), "word": TIER_SHORT.get(t.get("shape") or "", "no tier stated"), "basis": strip_ids(t.get("shape_basis"))}
+    cost = {"tier": t.get("cost"), "word": TIER_SHORT.get(t.get("cost") or "", "no tier stated"), "basis": strip_ids(t.get("cost_basis"))}
     by_tier: dict[str, int] = {}
     for p in params:
         if p.get("tier"):
@@ -362,14 +363,23 @@ def curve_caption(curve: dict[str, Any], params: list[dict[str, Any]], sources_b
                   key_sources: list[str], occurrence: dict[str, Any] | None, search_log_href: str | None) -> dict[str, Any]:
     cited = sorted({aliases.get(s, s) for p in params for s in p.get("source_ids", [])})
     refs = [sources_by_id[s] for s in cited if s in sources_by_id]
-    main_refs = [{"text": r.get("title"), "ids": [r["id"]], "title": r.get("title"), "link": r.get("link"), "link_kind": r.get("link_kind"), "locator": r.get("locator"),
-                  "no_link_sentence": r.get("no_link_sentence"), "source_id": r["id"]} for r in refs[:5]] if refs else resolve_key_sources(key_sources, sources_by_id, aliases)[:5]
+    main_refs = resolve_key_sources(key_sources, sources_by_id, aliases)[:5]
+    named = {r.get("source_id") for r in main_refs}
+    for r in refs:
+        if len(main_refs) >= 6:
+            break
+        if r["id"] not in named:
+            main_refs.append({"text": r.get("title"), "ids": [r["id"]], "title": r.get("title"), "link": r.get("link"), "link_kind": r.get("link_kind"), "locator": r.get("locator"),
+                              "no_link_sentence": r.get("no_link_sentence"), "source_id": r["id"]})
+            named.add(r["id"])
+    if not main_refs:
+        main_refs = []
     if occurrence:
         seen = {"sentence": occurrence["sentence"], "state": occurrence["state"], "href": search_log_href, "words": ("nobody has looked yet" if occurrence["state"] == "not_searched" else occurrence["sentence"])}
     else:
         seen = {"sentence": SENTENCES["not_searched"]["page"], "state": "not_searched", "href": None, "words": "nobody has looked yet; no search log exists for this asset and hazard"}
     return {"what_it_says": what_it_says(curve), "how_sure": how_sure(curve, params), "seen_in_field": seen, "main_references": main_refs,
-            "references_from": "the parameters' own sources" if refs else "the entry's key sources"}
+            "references_from": "the entry's key sources" + (", then the parameters' own" if any(r.get("source_id") and r.get("source_id") not in {x.get("source_id") for x in resolve_key_sources(key_sources, sources_by_id, aliases)} for r in main_refs) else "")}
 
 
 # ─── the ten station paragraphs ───────────────────────────────────────────────────────────────────────────────
@@ -448,7 +458,9 @@ def parameters_plain(params: list[dict[str, Any]], sources_by_id: dict[str, dict
         for sid in p.get("source_ids") or []:
             row = sources_by_id.get(aliases.get(sid, sid))
             srcs.append({"id": sid, "title": row.get("title") if row else sid, "link": row.get("link") if row else None, "link_kind": row.get("link_kind") if row else "none", "resolved": bool(row)})
-        out.append({"id": p.get("id"), "name": p.get("name"), "value_text": vt[:120], "tier": p.get("tier"), "tier_word": TIER_SHORT.get(p.get("tier") or "", "no tier stated"),
+        name = str(p.get("name") or "")
+        words = humanise(name) if re.fullmatch(r"[A-Za-z0-9_]+", name) and "_" in name else name
+        out.append({"id": p.get("id"), "name": words, "raw_name": name, "value_text": vt[:120], "tier": p.get("tier"), "tier_word": TIER_SHORT.get(p.get("tier") or "", "no tier stated"),
                     "sources": srcs, "claim_ids": p.get("claim_ids") or [], "curve_id": p.get("curve_id"), "reasoning": p.get("reasoning"), "update_trigger": p.get("update_trigger"), "role": p.get("role")})
     return out
 
@@ -508,7 +520,7 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
         docs = [s for s in src if s.get("kind") not in ("marker", "placeholder")]
         params = ctx["parameters"]
         prov = ctx["evidence_provenance"]
-        top = [r["title"] for r in ctx.get("key_references") or [] if r.get("title")] or [s.get("title") or s["id"] for s in docs[:5]]
+        top = [r["text"] for r in ctx.get("key_references") or [] if r.get("text")] or [s.get("title") or s["id"] for s in docs[:5]]
         if docs:
             p = f"{len(docs)} source{'s' if len(docs) != 1 else ''} set this cell" + (f": {_join(top[:4])}" + (f" and {len(docs) - 4} more" if len(docs) > 4 else "") if top else "") + "."
         else:

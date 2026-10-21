@@ -134,6 +134,15 @@ def _flood_solar_shares(folder: Path | None) -> dict[str, float]:
     return out
 
 
+def unit_words(fu: dict[str, Any]) -> str:
+    """'FW_ELEVATED_TURBINE_EQUIPMENT' → 'elevated turbine equipment'; a CONTENTS component → 'contents and inventory'."""
+    if str(fu.get("component") or "") == "CONTENTS":
+        return "contents and inventory"
+    fid = str(fu.get("id") or "")
+    fid = re.sub(r"^[A-Z]{2,5}\d?_(?=[A-Z])", "", fid) if not fid.startswith(("SUPPORT_", "BESS_")) else fid.replace("BESS_", "")
+    return humanise(fid).lower()
+
+
 def cell_parts(e: Any, cell: dict[str, Any], aslug: str, bess_values: dict[str, float] | None, fb_binding: dict[str, Any] | None) -> dict[str, Any]:
     """Every failure unit and catalogue row of one cell, each mapped to the asset's canonical rows, with its share where stated."""
     a = e.artifact or {}
@@ -169,10 +178,20 @@ def cell_parts(e: Any, cell: dict[str, Any], aslug: str, bess_values: dict[str, 
         ledger = (a.get("value") or {}).get("ledger") or []
         modeled_rows = {l.get("row_id") for l in ledger if str(l.get("role", "")).startswith("modeled")}
         for r in e.data.get("rows") or []:
+            covered = [k for k, _ in SUBSTATION_SYSTEMS]
+            if modeled_rows:
+                budget_rows = read_csv(ROOT / "dashboard" / "data" / "substation_reference_budget.csv") if (ROOT / "dashboard" / "data" / "substation_reference_budget.csv").exists() else []
+                sys_of = {b["row_id"]: b["system"] for b in budget_rows}
+                covered = sorted({sys_of[i] for i in modeled_rows if i in sys_of}, key=lambda k: [x for x, _ in SUBSTATION_SYSTEMS].index(k))
             parts.append({"failure_unit_id": a.get("failure_unit_id"), "subsystem": "FACILITY_GSU_SUBSTATION_SOURCE_NATIVE", "component": r["part"], "treatment": "reused",
-                          "part": r["part"], "state": "curve", "rows": [k for k, _ in SUBSTATION_SYSTEMS], "spans": False, "share": None, "share_basis": None, "dollars": None,
+                          "part": r["part"], "state": "curve", "rows": covered, "spans": False, "share": None, "share_basis": None, "dollars": None,
                           "shape": r.get("shape"), "cost": r.get("cost"), "curves": r.get("curves") or [], "drawn": True, "withheld_reasons": [], "whole_station": not modeled_rows,
                           "modeled_row_ids": sorted(modeled_rows)})
+            if modeled_rows:
+                rest = [k for k, _ in SUBSTATION_SYSTEMS if k not in covered]
+                parts.append({"failure_unit_id": None, "subsystem": "FACILITY_GSU_SUBSTATION", "component": "rest of the fenced station", "treatment": "withheld",
+                              "part": "rest of the fenced station", "state": "withheld", "rows": rest, "spans": False, "share": None, "share_basis": None, "dollars": None,
+                              "shape": None, "cost": None, "curves": [], "drawn": False, "withheld_reasons": ["withheld by the binding"]})
     for fu in fus:
         sh = shares.get(fu.get("id")) if shares else None
         if sh is None and fu.get("default_value_share_physical_base") is not None:
@@ -199,8 +218,10 @@ def cell_parts(e: Any, cell: dict[str, Any], aslug: str, bess_values: dict[str, 
                     fu = {**fu, "_dollars": dollars}
                     sh = dollars / total if total else None
         catalogue_row = next((r for r in e.data.get("rows") or [] if any(c in (r.get("curves") or []) for c in [c["curve_id"] for c in cell.get("_curves", []) if c.get("failure_unit_id") == fu.get("id")])), None)
+        if aslug == "substation" and e.kind == "cell":
+            rows = [k for k, _ in SUBSTATION_SYSTEMS]  # the Hazus assembly is the whole fenced station
         parts.append({"failure_unit_id": fu.get("id"), "subsystem": fu.get("subsystem"), "component": fu.get("component"), "treatment": treatment,
-                      "part": (catalogue_row or {}).get("part") or humanise(str(fu.get("id") or "")).lower(), "state": state, "rows": rows,
+                      "part": (catalogue_row or {}).get("part") or unit_words(fu), "state": state, "rows": rows,
                       "spans": len(rows) > 1, "share": sh, "share_basis": share_basis if sh is not None else None, "dollars": fu.get("_dollars"),
                       "shape": (catalogue_row or {}).get("shape"), "cost": (catalogue_row or {}).get("cost"),
                       "curves": [c["curve_id"] for c in cell.get("_curves", []) if c.get("failure_unit_id") == fu.get("id")],
