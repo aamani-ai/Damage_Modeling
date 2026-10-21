@@ -1,0 +1,1115 @@
+{
+ "entry_id": "wildfire_bess",
+ "kind": "cell",
+ "status": "live",
+ "title": "Wildfire × Battery storage",
+ "asset": {
+  "slug": "bess",
+  "label": "Battery storage"
+ },
+ "hazard": {
+  "slug": "wildfire",
+  "label": "Wildfire"
+ },
+ "identity": {
+  "kind": "cell",
+  "damage_code_id": "BESS_WILDFIRE_SCREENING_V1",
+  "model": "model v1.0",
+  "docs": "docs r1",
+  "version_key": "model_v1_0__docs_r1",
+  "schema": "damage_curve_record_bundle.v3",
+  "sha256": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491",
+  "consumer_pin": "wildfire_bess@model_v1_0__docs_r1"
+ },
+ "pins": [
+  {
+   "what": "catalogue entry artifact_sha256",
+   "file": "docs/cells/wildfire_bess/current/curve_artifact.json",
+   "expected": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491",
+   "actual": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491",
+   "ok": true
+  },
+  {
+   "what": "runtime artifact index sha256",
+   "file": "docs/cells/wildfire_bess/current/curve_artifact.json",
+   "expected": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491",
+   "actual": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491",
+   "ok": true
+  },
+  {
+   "what": "value_linkage.value_binding_sha256",
+   "file": "docs/cells/wildfire_bess/current/value_binding.json",
+   "expected": "8b3044c4241dbc45f4eed98b92e8454ec82658e72e5ecf1e4052637ce9946a89",
+   "actual": "8b3044c4241dbc45f4eed98b92e8454ec82658e72e5ecf1e4052637ce9946a89",
+   "ok": true
+  },
+  {
+   "what": "derivation_rationale.source_artifact_sha256",
+   "file": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+   "expected": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
+   "actual": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
+   "ok": true
+  }
+ ],
+ "rail": {
+  "exists": {
+   "status": "live",
+   "mark": "■",
+   "label": "LIVE",
+   "qualifier": "screening"
+  },
+  "evidence": {
+   "shape": "T4",
+   "cost": "T4",
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   }
+  },
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+   "entry_read_kind": "agent",
+   "release_review": "same author with independent numerical methods",
+   "release_review_code": "same_author_with_independent_numerical_methods",
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release same author with independent numerical methods"
+  }
+ },
+ "summary": "Wildfire on batteries: solar wildfire electrical class tables reused as T4 ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities); 86 % of the reference value has a curve and 14 % has none.",
+ "chain": {
+  "stations": [
+   {
+    "id": "scope",
+    "label": "Scope",
+    "full_label": "Scope",
+    "gate": "A",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/wildfire_bess/current/README.md",
+      "sha256": "c0ab0063ceca11bfa27c533f667f0ed73732aabfdc1a3c3786cd89cc124f6a8e"
+     },
+     {
+      "path": "docs/cells/wildfire_bess/README.md",
+      "sha256": "d34fab30357b3a0f29d18549a8c9d4c14b3551de785caa239ce00f85070bb172"
+     }
+    ],
+    "evidence": [],
+    "fact": "3 deferred",
+    "absent_sentence": null
+   },
+   {
+    "id": "units",
+    "label": "Units",
+    "full_label": "Units",
+    "gate": "A · B2",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/wildfire_bess/current/curve_artifact.json",
+      "sha256": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491"
+     }
+    ],
+    "evidence": [],
+    "fact": "5 units · 3 withheld",
+    "absent_sentence": null
+   },
+   {
+    "id": "axis_form",
+    "label": "Axis · form",
+    "full_label": "Axis · form",
+    "gate": "C",
+    "state": "absent",
+    "files": [],
+    "evidence": [],
+    "fact": "exact classes",
+    "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section."
+   },
+   {
+    "id": "evidence",
+    "label": "Evidence",
+    "full_label": "Evidence",
+    "gate": "B",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/wildfire_bess/current/claim_parameter_register.csv",
+      "sha256": "883a36d8480a637b0335e617b52766a0d34a5abd02406052235a040f7707a539"
+     },
+     {
+      "path": "docs/cells/wildfire_bess/current/parameter_register.csv",
+      "sha256": "b86afcb13fd80e50094b9e2f95323703fedaac5c0aaae248d7e88b7f446dcb2e"
+     },
+     {
+      "path": "docs/cells/wildfire_bess/current/source_register.csv",
+      "sha256": "094b315022dcb236c52aac71d0b90626b910802eb6ead647f643deeb9fc3ebe9"
+     }
+    ],
+    "evidence": [],
+    "fact": "12 src · T4",
+    "absent_sentence": null
+   },
+   {
+    "id": "value",
+    "label": "Value",
+    "full_label": "Value",
+    "gate": "B2",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/wildfire_bess/current/value_binding.json",
+      "sha256": "8b3044c4241dbc45f4eed98b92e8454ec82658e72e5ecf1e4052637ce9946a89"
+     },
+     {
+      "path": "docs/cells/wildfire_bess/current/value_crosswalk.csv",
+      "sha256": "2e113876a8f4538e55bd6869199d762aaf5ab6bcdddd45c1432933f0ed410c60"
+     }
+    ],
+    "evidence": [],
+    "fact": "86 % · $94.4M of $109.8M",
+    "absent_sentence": null
+   },
+   {
+    "id": "audit",
+    "label": "Audit",
+    "full_label": "Audit",
+    "gate": "B2",
+    "state": "prose",
+    "files": [],
+    "evidence": [
+     {
+      "kind": "dossier_headings",
+      "file": {
+       "path": "docs/cells/wildfire_bess/current/derivation.md",
+       "sha256": "47c7bdd139310f4d1b98e8fdc195c79da346f9195eef7a37ffb9d2f998cbf508"
+      },
+      "matched": [
+       "Seven-step and value audit",
+       "Site-condition and double-counting controls"
+      ]
+     }
+    ],
+    "fact": "7 steps in the dossier",
+    "absent_sentence": null
+   },
+   {
+    "id": "artifact",
+    "label": "Artifact",
+    "full_label": "Artifact",
+    "gate": "C",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/wildfire_bess/current/curve_artifact.json",
+      "sha256": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491"
+     },
+     {
+      "path": "docs/cells/wildfire_bess/current/derivation.md",
+      "sha256": "47c7bdd139310f4d1b98e8fdc195c79da346f9195eef7a37ffb9d2f998cbf508"
+     },
+     {
+      "path": "docs/cells/wildfire_bess/current/metadata.md",
+      "sha256": "f6a7311d2439979384b727abdbc1674de215829ab90f511cd3cb2815b5d01d95"
+     },
+     {
+      "path": "docs/cells/wildfire_bess/current/value_binding.json",
+      "sha256": "8b3044c4241dbc45f4eed98b92e8454ec82658e72e5ecf1e4052637ce9946a89"
+     }
+    ],
+    "evidence": [],
+    "fact": "v1.0 · docs r1",
+    "absent_sentence": null
+   },
+   {
+    "id": "capability",
+    "label": "Capability",
+    "full_label": "Capability",
+    "gate": "D",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/wildfire_bess/current/capability.json",
+      "sha256": "75ef239e8cd215c358364cd77416659c8904d4090ae4891f22d0106c1e6dc8a5"
+     }
+    ],
+    "evidence": [],
+    "fact": "DR conditional · EAL conditional",
+    "absent_sentence": null
+   },
+   {
+    "id": "proof",
+    "label": "Proof",
+    "full_label": "Proof · release",
+    "gate": "E",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/wildfire_bess/current/known_answers.json",
+      "sha256": "6d1bddb932b769a8b63262b5884a8f7ff22728c3a942ebcb230696264ccf2403"
+     },
+     {
+      "path": "docs/cells/wildfire_bess/current/validation.json",
+      "sha256": "f9cad8a204af47f7a73ac79f655aa4e8f0ebf93ca7c66d6c48db08d177a782ec"
+     },
+     {
+      "path": "docs/cells/wildfire_bess/CHANGELOG.json",
+      "sha256": "b906fec17efcceb8007a080c53934d06d79be1fac30f16517a43a644fd36e6f4"
+     },
+     {
+      "path": "docs/cells/wildfire_bess/VERSION_REGISTRY.md",
+      "sha256": "d814de74a492ea2422145989c49672e7474c9f407283ccf3016f193436fc6aeb"
+     },
+     {
+      "path": "docs/contracts/machine_readable_artifact_index.json",
+      "sha256": "b421721ea2d82aa6e341cb80868d5023074de90ed80eed648b5a10c060b98e75",
+      "note": "artifact index pin",
+      "pinned_sha256": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491",
+      "pin_ok": true
+     }
+    ],
+    "evidence": [],
+    "fact": "84 of 84 KAT reproduced",
+    "absent_sentence": null
+   },
+   {
+    "id": "field_review",
+    "label": "Field · review",
+    "full_label": "Field · review",
+    "gate": "—",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/evidence/occurrence/bess/wildfire.json",
+      "sha256": "ce97039890a5431ab52190a69edac3435161e3957cf901793da111da5f481388"
+     }
+    ],
+    "evidence": [],
+    "fact": "not searched · agent-read 10-19",
+    "absent_sentence": null
+   }
+  ],
+  "generation": "plain",
+  "core_as_files": 5,
+  "core_total": 6,
+  "dossier": {
+   "path": "docs/cells/wildfire_bess/current/derivation.md",
+   "sha256": "47c7bdd139310f4d1b98e8fdc195c79da346f9195eef7a37ffb9d2f998cbf508"
+  },
+  "basics": null,
+  "workbook": null,
+  "gates": [
+   {
+    "gate": "A",
+    "label": "scope",
+    "items": [
+     {
+      "item": "hazard and asset are named",
+      "status": "proven",
+      "basis": "cell_id in the artifact"
+     },
+     {
+      "item": "in-scope and out-of-scope mechanisms listed",
+      "status": "proven",
+      "basis": "hazard_scope.deferred or the entry's out_of_scope"
+     },
+     {
+      "item": "related hazards that should split are named",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "multi-pathway cells declare stable pathway IDs",
+      "status": "proven",
+      "basis": "pathways[].pathway_id"
+     },
+     {
+      "item": "neighbouring or compound mechanisms have an include / defer / split decision",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "no downstream M4 metric is hidden in the damage cell",
+      "status": "proven",
+      "basis": "consumer_annual_metrics.computation_owner"
+     }
+    ]
+   },
+   {
+    "gate": "B",
+    "label": "evidence",
+    "items": [
+     {
+      "item": "source register with stable IDs, locators, roles, tiers and decisions",
+      "status": "proven",
+      "basis": "docs/cells/wildfire_bess/current/source_register.csv"
+     },
+     {
+      "item": "load-bearing claims carry claim-level provenance",
+      "status": "proven",
+      "basis": "docs/cells/wildfire_bess/current/claim_parameter_register.csv"
+     },
+     {
+      "item": "the chosen spine is explained",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "rejected or demoted sources are explained",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "parameter tier table populated",
+      "status": "proven",
+      "basis": "parameter_tier_table"
+     },
+     {
+      "item": "T3/T4 update triggers listed",
+      "status": "proven",
+      "basis": "update_trigger per T3/T4 row"
+     },
+     {
+      "item": "legacy equations and tables reproduced where legacy material is used",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "proposed numbers pressure-tested at boundaries and on explicit denominators",
+      "status": "human",
+      "basis": "PRESSURE_TEST file"
+     },
+     {
+      "item": "evidence, parameters and transfer limits resolved independently by pathway",
+      "status": "human",
+      "basis": "pathway_id on tier rows"
+     }
+    ]
+   },
+   {
+    "gate": "B2",
+    "label": "seven-step, site and value",
+    "items": [
+     {
+      "item": "seven-step audit records a status and blocking seam for every step",
+      "status": "human",
+      "basis": "SEVEN_STEP_AUDIT file"
+     },
+     {
+      "item": "row-level value crosswalk reconciles direct, mixed, support and excluded rows",
+      "status": "proven",
+      "basis": "value crosswalk or binding"
+     },
+     {
+      "item": "support and logistics are allocated once, not given an independent DR",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "site-conditioned hazards have a site adapter",
+      "status": "human",
+      "basis": "SITE_CONDITION_ADAPTER file"
+     },
+     {
+      "item": "fences, walls, barriers and bypass pathways receive no blanket credit",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "the adapter includes a double-counting matrix",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "unknown at-risk, exposure or mitigation states do not silently become full credit",
+      "status": "human",
+      "basis": null
+     }
+    ]
+   },
+   {
+    "gate": "C",
+    "label": "runtime contract",
+    "items": [
+     {
+      "item": "the JSON artifact is canonical",
+      "status": "proven",
+      "basis": "canonical_runtime_artifact"
+     },
+     {
+      "item": "workbooks are derivation or audit views, not the runtime",
+      "status": "n/a",
+      "basis": null
+     },
+     {
+      "item": "damage_code_id and model version are stable",
+      "status": "proven",
+      "basis": "damage_code_id · semantic_damage_model_version"
+     },
+     {
+      "item": "field names and aliases are explicit",
+      "status": "proven",
+      "basis": "hazard_axis input field"
+     },
+     {
+      "item": "pathway_id is first-class in request, record, output, capability and KAT surfaces",
+      "status": "proven",
+      "basis": "pathway_capabilities"
+     },
+     {
+      "item": "pathway-specific axes and bridges are explicit",
+      "status": "proven",
+      "basis": "pathways[].hazard_axis.id"
+     },
+     {
+      "item": "the emit contract is distribution-ready",
+      "status": "proven",
+      "basis": "emit_contract"
+     }
+    ]
+   },
+   {
+    "gate": "D",
+    "label": "reportability",
+    "items": [
+     {
+      "item": "failure-unit DR support stated",
+      "status": "proven",
+      "basis": "capability_declaration"
+     },
+     {
+      "item": "scenario loss support requires a value basis",
+      "status": "proven",
+      "basis": "scenario_loss_given_value_basis"
+     },
+     {
+      "item": "scalar EAL requires downstream frequency, value basis and a cap-binding pass",
+      "status": "proven",
+      "basis": "consumer_annual_metrics"
+     },
+     {
+      "item": "PML / VaR / TVaR withheld unless spread exists",
+      "status": "proven",
+      "basis": "curve_intrinsic_spread"
+     },
+     {
+      "item": "a no-curve scaffold emits no numeric DR",
+      "status": "n/a",
+      "basis": null
+     },
+     {
+      "item": "unsupported pathway × failure-unit pairs withhold with a stable reason",
+      "status": "proven",
+      "basis": "withheld_reason_codes"
+     }
+    ]
+   },
+   {
+    "gate": "E",
+    "label": "release",
+    "items": [
+     {
+      "item": "registry, index, changelog and manifest updated",
+      "status": "proven",
+      "basis": "artifact index row · CHANGELOG"
+     },
+     {
+      "item": "validation report produced",
+      "status": "proven",
+      "basis": "validation file"
+     },
+     {
+      "item": "old-vs-new and cross-pathway negative tests pass",
+      "status": "human",
+      "basis": "negative contract tests run by the build"
+     },
+     {
+      "item": "consumer migration and the exact model / docs / schema / SHA pin verified",
+      "status": "proven",
+      "basis": "SHA equals the index pin"
+     },
+     {
+      "item": "package zip integrity checked",
+      "status": "n/a",
+      "basis": "no portable package for repository-canonical artifacts"
+     }
+    ]
+   }
+  ]
+ },
+ "no_evaluator": false,
+ "no_evaluator_sentence": null,
+ "answer": {
+  "axis_groups": [
+   {
+    "axis": {
+     "id": "FSIM_CLASS_EXACT",
+     "label": "FSim fire-intensity class at the unit, exact state",
+     "unit": "class",
+     "input_field": "class_state",
+     "kind": "categorical",
+     "valid_range": [
+      0,
+      6
+     ],
+     "classes": {
+      "0": "no event"
+     },
+     "dodge": true,
+     "note": "Exact states only: one mark per record at each class 0–6 (records that share a class stand side by side inside it); nothing is drawn between classes, because the evaluator rejects any other state. Class 0 is the no-event control, never a stand-in for a missing class."
+    },
+    "curve_ids": [
+     "BWF01_ENC_approved_replacement_electronics_ordinal",
+     "BWF01_ENC_approved_replacement_heavy_electrical_ordinal",
+     "BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal",
+     "BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal",
+     "BWF01_ENC_limited_repair_sensitivity_electronics_ordinal",
+     "BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal",
+     "BWF01_PCS_ELECTRONICS"
+    ]
+   }
+  ],
+  "curve_ids": [
+   "BWF01_ENC_approved_replacement_electronics_ordinal",
+   "BWF01_ENC_approved_replacement_heavy_electrical_ordinal",
+   "BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal",
+   "BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal",
+   "BWF01_ENC_limited_repair_sensitivity_electronics_ordinal",
+   "BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal",
+   "BWF01_PCS_ELECTRONICS"
+  ],
+  "input": "FSim fire intensity class at the unit, exact integer 1 to 6 (0 = no event); no interpolation, heat-flux conversion or burn probability in the Damage call",
+  "how_to_use": {
+   "share_of": "Hardware value of the same physical unit, fixed 2024 dollars: $1.05M per integrated enclosure (80), $520,000 per PCS (20); $94.4M covered of $109.8M total",
+   "outputs": {
+    "single_event": "conditional: exact class 0 to 6 plus an explicit consequence choice and curve shape; repair choices also need a serviceability counterfactual",
+    "scenario_dollars": "conditional: same conditions, with the same-unit value; no blanket exposure or protection multiplier",
+    "yearly_loss": "conditional: Hazard computes it only after source exposure, shared-event dependence, per-unit cap and annual-distribution checks pass; partial-property result only"
+   },
+   "conditions": [
+    "Pin the exact model v1.0 / docs r1 artifact, capability and value",
+    "No default consequence or shape: choose one; options are unweighted and must not be averaged",
+    "Burn probability stays with Hazard; unknown class is unavailable, never the no-event class",
+    "Cap each unit's yearly cost at its value; no repair within the year",
+    "The $15.4M unbound property is not zero"
+   ]
+  },
+  "value": {
+   "covered_usd": 94400000,
+   "total_usd": 109800000,
+   "share_covered": 0.8597449908925319,
+   "covered_label": "$94.4M of $109.8M",
+   "covered": [
+    {
+     "label": "Integrated battery enclosures",
+     "value_usd": 84000000,
+     "bucket": "battery_enclosures"
+    },
+    {
+     "label": "PCS",
+     "value_usd": 10400000,
+     "bucket": "pcs"
+    }
+   ],
+   "no_curve": [
+    {
+     "label": "Unit MV and shared electrical",
+     "value_usd": 13200000.0,
+     "sentence": "No curve — Unit MV and shared electrical, $13.2M of the reference value, has no damage response yet."
+    },
+    {
+     "label": "Civil works",
+     "value_usd": 1600000.0,
+     "sentence": "No curve — Civil works, $1.6M of the reference value, has no damage response yet."
+    },
+    {
+     "label": "Fieldwork",
+     "value_usd": 600000.0,
+     "sentence": "No curve — Fieldwork, $600k of the reference value, has no damage response yet."
+    }
+   ],
+   "left_out": [],
+   "source": "docs/cells/wildfire_bess/current/value_binding.json",
+   "basis": "fixed 2024 dollars; reference budget r1"
+  },
+  "not_covered": [
+   "Unit MV and shared electrical ($13.2M)",
+   "Civil works ($1.6M)",
+   "Fieldwork ($0.6M)"
+  ],
+  "withheld_units": [
+   {
+    "failure_unit_id": "BESS_MV_AND_SHARED_ELECTRICAL",
+    "subsystem": "BESS_MV_AND_SHARED_ELECTRICAL",
+    "reasons": [
+     "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+     "VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED"
+    ],
+    "sentence": "Withheld: no runtime curve for pathway unit; value allocation or response unqualified."
+   },
+   {
+    "failure_unit_id": "BESS_CIVIL",
+    "subsystem": "BESS_CIVIL",
+    "reasons": [
+     "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+     "VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED"
+    ],
+    "sentence": "Withheld: no runtime curve for pathway unit; value allocation or response unqualified."
+   },
+   {
+    "failure_unit_id": "BESS_FIELDWORK",
+    "subsystem": "BESS_FIELDWORK",
+    "reasons": [
+     "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+     "VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED"
+    ],
+    "sentence": "Withheld: no runtime curve for pathway unit; value allocation or response unqualified."
+   }
+  ],
+  "hazard_axis": [
+   {
+    "id": "FSIM_CLASS_EXACT",
+    "preferred_input_field": "class_state",
+    "unit": "source_native_categorical_class",
+    "valid_range": [
+     0,
+     6
+    ],
+    "extrapolation_policy": "exact integer state0..6 only; no midpoint, heat-flux conversion, interpolation or extrapolation"
+   }
+  ]
+ },
+ "parts": [
+  {
+   "part": "Integrated battery enclosure",
+   "curves": [
+    "BWF01_ENC_approved_replacement_electronics_ordinal",
+    "BWF01_ENC_approved_replacement_heavy_electrical_ordinal",
+    "BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal",
+    "BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal",
+    "BWF01_ENC_limited_repair_sensitivity_electronics_ordinal",
+    "BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal"
+   ],
+   "failure_units": [
+    "BESS_INTEGRATED_ENCLOSURE"
+   ],
+   "subsystems": [
+    "battery_enclosures"
+   ],
+   "bucket": "battery_enclosures",
+   "variants": "consequence: approved replacement / non-cell repair / limited repair; shape: electronics or heavy-electrical (unweighted)",
+   "shape": "T4",
+   "shape_basis": "Solar electrical class tables transferred as ordinal weights (BWF-P07)",
+   "cost": "T4",
+   "cost_basis": "Owner-selected replacement and cost-split repair amounts (BWF-P08)",
+   "notes": [
+    {
+     "type": "opt_in_only",
+     "text": "Repair versions need an explicit serviceability counterfactual"
+    },
+    {
+     "type": "key_assumption",
+     "text": "Class weights are economic mean responses, not ignition probabilities"
+    }
+   ],
+   "occurrence": {
+    "mark": "?",
+    "state": "not_searched",
+    "sentence": "Not searched — nobody has looked for field reports yet."
+   },
+   "drawn": true
+  },
+  {
+   "part": "Separate PCS",
+   "curves": [
+    "BWF01_PCS_ELECTRONICS"
+   ],
+   "failure_units": [
+    "BESS_SEPARATE_PCS"
+   ],
+   "subsystems": [
+    "pcs"
+   ],
+   "bucket": "pcs",
+   "variants": "none",
+   "shape": "T4",
+   "shape_basis": "Solar electronics class table unchanged (BWF-P09)",
+   "cost": "T4",
+   "cost_basis": "Donor table is already a share of value (T4), applied to $520,000",
+   "notes": [
+    {
+     "type": "reused_from",
+     "text": "wildfire_solar v1.0 docs r3 electronics table"
+    }
+   ],
+   "occurrence": {
+    "mark": "?",
+    "state": "not_searched",
+    "sentence": "Not searched — nobody has looked for field reports yet."
+   },
+   "drawn": true
+  }
+ ],
+ "evidence": {
+  "lineage": "machine_readable",
+  "prose_sentence": null,
+  "paths": {
+   "sources": "docs/cells/wildfire_bess/current/source_register.csv",
+   "claims": "docs/cells/wildfire_bess/current/claim_parameter_register.csv",
+   "parameters": "docs/cells/wildfire_bess/current/parameter_register.csv"
+  },
+  "n_sources": 12,
+  "n_claims": 14,
+  "n_parameters": 4,
+  "key_sources": [
+   "Selected BESS r1 profile and fixed-2024 budget (BWF-S01)",
+   "USFS, A Wildfire Risk Assessment Framework, RMRS-GTR-315 (2013), FSim classes (BWF-S02)",
+   "Canonical wildfire_solar model v1.0 docs r3 (BWF-S03)",
+   "Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 (BWF-S04)",
+   "Sungrow, A Holistic Approach to Safety whitepaper (BWF-S05)"
+  ],
+  "sources_from": "register",
+  "judgment": [
+   "Enclosure class weights borrowed from the solar wildfire electrical tables; not ignition probabilities (BWF-P07)",
+   "A compromised battery means full $1.05M enclosure replacement (BWF-Q01)",
+   "Repair costs (about $334k and $204k) come from a related cost split (BWF-P08)",
+   "PCS uses the solar electronics table unchanged (BWF-P09)",
+   "No protection credit, exposed-share default or random damage draw (BWF-P10)"
+  ],
+  "weakest_tier": "T4",
+  "pressure_test": null,
+  "method": {
+   "type": "built_from_references",
+   "summary": "Solar wildfire electrical class tables reused as T4 ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities)"
+  }
+ },
+ "audit": {
+  "table": {
+   "source": "docs/cells/wildfire_bess/current/derivation.md",
+   "columns": [
+    "Step",
+    "Current result",
+    "Limit"
+   ],
+   "rows": [
+    [
+     "1. Boundary",
+     "Selected 100 MW / 400 MWh usable-AC outdoor LFP, 450MWh DC, $109.8M fixed 2024 physical value",
+     "Engineering reference, not an observed fleet or appraisal. Autonomous failures, BI/performance and external collector/export are outside."
+    ],
+    [
+     "2. Failure units",
+     "Integrated enclosure and separate PCS",
+     "Cell/rack independence and unit-MV/civil curves are not invented."
+    ],
+    [
+     "3. Y-axis",
+     "Same-unit conditional mean physical repair/replacement cost divided by same-unit hardware value",
+     "Safety isolation, ignition, availability and revenue are different endpoints."
+    ],
+    [
+     "4. Value rows",
+     "Ten rows reconcile: $109.8M retained and $23.4M outside",
+     "Mixed physical rows stay explicit."
+    ],
+    [
+     "5. Allocation",
+     "80×$1.05M enclosure +20×$520k PCS =$94.4M candidate hardware",
+     "$15.4M residual stays unbound; no renormalization to full TIV or repeated internals."
+    ],
+    [
+     "6. Site exposure",
+     "Declared local FSim class; no blanket mitigation or exposed-share default",
+     "Native source support and a declared common-event law are locally qualified; actual yard thermal transfer and event-resolved footprints remain uncalibrated."
+    ],
+    [
+     "7. Conditional response",
+     "Conditional scalar means with independent source/cost controls",
+     "Annual use requires the machine-readable consumer gates; full-property loss stays withheld."
+    ]
+   ],
+   "kind": "dossier_section"
+  },
+  "state": "prose",
+  "absent_sentence": null,
+  "site_adapter": null
+ },
+ "proof": {
+  "known_answers": {
+   "declared": 84,
+   "run": 84,
+   "reproduced": 84,
+   "not_run": [],
+   "negative_run": 0,
+   "tolerance": 1e-12,
+   "source": "docs/cells/wildfire_bess/current/known_answers.json",
+   "kinds": {
+    "case": 84
+   },
+   "tolerance_usd": 1e-06,
+   "failed": []
+  },
+  "validation": {
+   "path": "docs/cells/wildfire_bess/current/validation.json",
+   "status": "passed_conditional_annual_screening",
+   "date": null,
+   "classification": "NEW_CELL_MODEL_RELEASE",
+   "review_scope": "same-author review with independent numerical methods; not external scientific review or empirical calibration"
+  },
+  "outside_checks": [],
+  "capability": {
+   "failure_unit_scalar_dr": "conditional",
+   "scenario_loss_given_value_basis": "conditional",
+   "curve_intrinsic_spread": "not_carried",
+   "populated_emit_modes": [
+    "scalar_mean"
+   ],
+   "eal": "consumer_computable_from_validated_frequency_intensity_coupling_value_and_cap_model",
+   "pml": null,
+   "var": null,
+   "tvar": null,
+   "limitation_flags": [
+    "BESS_CLASS_RESPONSE_TRANSFER_T4_NOT_CALIBRATED",
+    "SOURCE_DR_IS_NOT_IGNITION_PROBABILITY",
+    "FSIM_CLASS_IS_NOT_LOCAL_HEAT_FLUX",
+    "BWF_Q01_FULL_REPLACEMENT_AFTER_BATTERY_COMPROMISE",
+    "PARTIAL_PROPERTY_SCOPE",
+    "REPAIR_AND_SHAPE_SENSITIVITIES_ARE_UNWEIGHTED_HYPOTHESES",
+    "NO_GENERIC_MITIGATION_CREDIT",
+    "CROSS_UNIT_PROPAGATION_UNQUANTIFIED",
+    "CURVE_INTRINSIC_SPREAD_NOT_CARRIED",
+    "COMMON_RATE_AND_CLASS_RANK_SCREENING_DEPENDENCE",
+    "ORIGINAL_SOURCE_AND_UNKNOWN_CLOCKS_RETAINED",
+    "PER_PHYSICAL_UNIT_ANNUAL_CAP_NO_RESTORATION",
+    "LOCAL_PROOF_NOT_NATIONAL_ADMISSION"
+   ],
+   "computation_owner": "downstream_consumer"
+  }
+ },
+ "seams": {
+  "open_items": [
+   "Matched fire exposure, duration and inspected repair costs still needed",
+   "Yard fuel transfer, real fire footprints and spread between units not modelled",
+   "$15.4M of mixed electrical, civil and fieldwork value has no response yet"
+  ],
+  "missing_mechanisms": [
+   "Fire spread between units",
+   "Post-fire erosion",
+   "Remediation"
+  ],
+  "out_of_scope": [
+   "Autonomous equipment fire",
+   "Collector station and export line",
+   "Business interruption and performance"
+  ],
+  "next_version": null,
+  "update_triggers": [
+   {
+    "parameter": "enclosure ordinal mean-response transfer",
+    "tier": "T4",
+    "update_trigger": "Matched local attack, construction, inspected damage and same-unit repair costs"
+   },
+   {
+    "parameter": "same-unit consequence policy",
+    "tier": "T4",
+    "update_trigger": "OEM disposition, actual repair BOM/costs or revised owner policy"
+   },
+   {
+    "parameter": "PCS adjacent electrical transfer",
+    "tier": "T4",
+    "update_trigger": "Matched PCS thermal exposure and repair evidence"
+   },
+   {
+    "parameter": "site/cost/uncertainty controls",
+    "tier": "T4",
+    "update_trigger": "Qualified consumer coupling or matched protection/propagation/value evidence"
+   }
+  ]
+ },
+ "field_review": {
+  "register": {
+   "path": "docs/evidence/occurrence/bess/wildfire.json",
+   "sha256": "ce97039890a5431ab52190a69edac3435161e3957cf901793da111da5f481388",
+   "search_log": "docs/evidence/occurrence/bess/wildfire.md",
+   "last_searched": null
+  },
+  "buckets": [
+   {
+    "bucket": "battery_enclosures",
+    "label": "Battery enclosures",
+    "state": "not_searched",
+    "mark": "?",
+    "sentence": "Not searched — nobody has looked for field reports yet.",
+    "reports": [],
+    "twin_lead": {
+     "level": "M",
+     "nodes": [
+      {
+       "node": "be_modules",
+       "name": "Battery Modules",
+       "level": 2,
+       "why": "External fire can propagate into enclosures"
+      },
+      {
+       "node": "be_hvac",
+       "name": "Chiller & Liquid Loop",
+       "level": 1,
+       "why": "Smoke fouls coils"
+      },
+      {
+       "node": "be_fire",
+       "name": "Fire & Gas Detection",
+       "level": 2,
+       "why": "Smoke triggers detectors; external fire risk"
+      }
+     ]
+    }
+   },
+   {
+    "bucket": "pcs",
+    "label": "PCS",
+    "state": "not_searched",
+    "mark": "?",
+    "sentence": "Not searched — nobody has looked for field reports yet.",
+    "reports": [],
+    "twin_lead": {
+     "level": null,
+     "nodes": []
+    }
+   },
+   {
+    "bucket": "electrical_balance",
+    "label": "MV, collection and controls",
+    "state": "not_searched",
+    "mark": "?",
+    "sentence": "Not searched — nobody has looked for field reports yet.",
+    "reports": [],
+    "twin_lead": {
+     "level": null,
+     "nodes": []
+    }
+   },
+   {
+    "bucket": "civil_works",
+    "label": "Civil works",
+    "state": "not_searched",
+    "mark": "?",
+    "sentence": "Not searched — nobody has looked for field reports yet.",
+    "reports": [],
+    "twin_lead": {
+     "level": "M",
+     "nodes": [
+      {
+       "node": "bv_yard",
+       "name": "Yard & Fence",
+       "level": 2,
+       "why": "Vegetation clearance is a fire-code requirement"
+      },
+      {
+       "node": "bpl_yard",
+       "name": "Yard & Fence",
+       "level": 2,
+       "why": "Vegetation clearance"
+      }
+     ]
+    }
+   },
+   {
+    "bucket": "fieldwork",
+    "label": "Fieldwork",
+    "state": "not_searched",
+    "mark": "?",
+    "sentence": "Not searched — nobody has looked for field reports yet.",
+    "reports": [],
+    "twin_lead": {
+     "level": null,
+     "nodes": []
+    }
+   }
+  ],
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+   "entry_read_kind": "agent",
+   "release_review": "same author with independent numerical methods",
+   "release_review_code": "same_author_with_independent_numerical_methods",
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release same author with independent numerical methods"
+  },
+  "absent_sentence": null
+ },
+ "files": {
+  "write_up": "docs/cells/wildfire_bess/current/derivation.md",
+  "decisions": "docs/plans/bess_damage/decisions.md",
+  "validation": "docs/cells/wildfire_bess/current/validation.json",
+  "notebooks": null
+ },
+ "folder_files": [
+  {
+   "path": "docs/cells/wildfire_bess/current/README.md",
+   "sha256": "c0ab0063ceca11bfa27c533f667f0ed73732aabfdc1a3c3786cd89cc124f6a8e"
+  },
+  {
+   "path": "docs/cells/wildfire_bess/current/capability.json",
+   "sha256": "75ef239e8cd215c358364cd77416659c8904d4090ae4891f22d0106c1e6dc8a5"
+  },
+  {
+   "path": "docs/cells/wildfire_bess/current/claim_parameter_register.csv",
+   "sha256": "883a36d8480a637b0335e617b52766a0d34a5abd02406052235a040f7707a539"
+  },
+  {
+   "path": "docs/cells/wildfire_bess/current/consumption_pin.json",
+   "sha256": "f5ef993b37bf70e90694503ef81a3d71d0a2c155daaebf27a4078bacff070a6e"
+  },
+  {
+   "path": "docs/cells/wildfire_bess/current/curve_artifact.json",
+   "sha256": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491"
+  },
+  {
+   "path": "docs/cells/wildfire_bess/current/derivation.md",
+   "sha256": "47c7bdd139310f4d1b98e8fdc195c79da346f9195eef7a37ffb9d2f998cbf508"
+  },
+  {
+   "path": "docs/cells/wildfire_bess/current/hazard_consumer_comparison.md",
+   "sha256": "0849f13d3a29647423b53ae0ed7e7375438da9662432b01efcd849a9f704c5ca"
+  },
+  {
+   "path": "docs/cells/wildfire_bess/current/known_answers.json",
+   "sha256": "6d1bddb932b769a8b63262b5884a8f7ff22728c3a942ebcb230696264ccf2403"
+  },
+  {
+   "path": "docs/cells/wildfire_bess/current/metadata.md",
+   "sha256": "f6a7311d2439979384b727abdbc1674de215829ab90f511cd3cb2815b5d01d95"
+  },
+  {
+   "path": "docs/cells/wildfire_bess/current/parameter_register.csv",
+   "sha256": "b86afcb13fd80e50094b9e2f95323703fedaac5c0aaae248d7e88b7f446dcb2e"
+  },
+  {
+   "path": "docs/cells/wildfire_bess/current/source_register.csv",
+   "sha256": "094b315022dcb236c52aac71d0b90626b910802eb6ead647f643deeb9fc3ebe9"
+  },
+  {
+   "path": "docs/cells/wildfire_bess/current/validation.json",
+   "sha256": "f9cad8a204af47f7a73ac79f655aa4e8f0ebf93ca7c66d6c48db08d177a782ec"
+  },
+  {
+   "path": "docs/cells/wildfire_bess/current/value_binding.json",
+   "sha256": "8b3044c4241dbc45f4eed98b92e8454ec82658e72e5ecf1e4052637ce9946a89"
+  },
+  {
+   "path": "docs/cells/wildfire_bess/current/value_crosswalk.csv",
+   "sha256": "2e113876a8f4538e55bd6869199d762aaf5ab6bcdddd45c1432933f0ed410c60"
+  }
+ ],
+ "gap_reason": null,
+ "binding": null,
+ "sampling_notes": [
+  "Each record looked up through the cell's reference evaluator (wildfire_bess_curve_eval.py) at the exact states 0–6; marks only, since the evaluator rejects any state between two classes (confirmed on every record).",
+  "Known answers replayed through evaluate_damage_call with selector_id BESS_LFP_R1_WILDFIRE_ORDINAL_V1 and each unit's value from the pinned value binding; the two repair hypotheses carry the explicit serviceability counterfactual the contract requires. Tolerances 1e-12 on the damage ratio and 1e-06 USD (the cell declares none); each answer equals the drawn mark at its state.",
+  "BESS_MV_AND_SHARED_ELECTRICAL, BESS_CIVIL, BESS_FIELDWORK confirmed withheld with the artifact's reason codes."
+ ],
+ "build_findings": []
+}

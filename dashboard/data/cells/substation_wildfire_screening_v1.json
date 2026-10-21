@@ -1,0 +1,639 @@
+{
+ "entry_id": "substation_wildfire_screening_v1",
+ "kind": "binding",
+ "status": "reused",
+ "title": "Wildfire × Substation",
+ "asset": {
+  "slug": "substation",
+  "label": "Substation"
+ },
+ "hazard": {
+  "slug": "wildfire",
+  "label": "Wildfire"
+ },
+ "identity": {
+  "kind": "binding",
+  "binding_id": "substation_wildfire_electrical_screening_v1",
+  "damage_code_id": null,
+  "model": "model v1.0",
+  "docs": "docs r3",
+  "version_key": "model_v1_0__docs_r3",
+  "source_cell_id": "wildfire_solar",
+  "source_artifact_sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
+  "sha256": "10742caaf6e4622f72b2572db08d3fc4cc4dc92ca58746ad0928cabad4be5e48"
+ },
+ "pins": [
+  {
+   "what": "catalogue entry artifact_sha256",
+   "file": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/binding.json",
+   "expected": "10742caaf6e4622f72b2572db08d3fc4cc4dc92ca58746ad0928cabad4be5e48",
+   "actual": "10742caaf6e4622f72b2572db08d3fc4cc4dc92ca58746ad0928cabad4be5e48",
+   "ok": true
+  },
+  {
+   "what": "binding source_pin.artifact_sha256",
+   "file": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+   "expected": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
+   "actual": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
+   "ok": true
+  }
+ ],
+ "rail": {
+  "exists": {
+   "status": "reused",
+   "mark": "▨",
+   "label": "REUSED",
+   "qualifier": null
+  },
+  "evidence": {
+   "shape": "T4",
+   "cost": "T4",
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   }
+  },
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the binding README, binding.json and the source cell's tier table",
+   "entry_read_kind": "agent",
+   "release_review": null,
+   "release_review_code": null,
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release —"
+  }
+ },
+ "summary": "Wildfire on substations reuses another cell's curve: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a T4 assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md); 1 part of the asset's value has no curve.",
+ "chain": {
+  "stations": [
+   {
+    "id": "scope",
+    "label": "Scope",
+    "full_label": "Scope",
+    "gate": "A",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md",
+      "sha256": "2f821cec3fa17dfd0389ceb81bb458fa62318eec7b8cd4b48b09f44e2cb716ad"
+     }
+    ],
+    "evidence": [],
+    "fact": "README",
+    "absent_sentence": null
+   },
+   {
+    "id": "units",
+    "label": "Units",
+    "full_label": "Units",
+    "gate": "A · B2",
+    "state": "not_applicable",
+    "files": [],
+    "evidence": [],
+    "fact": "source cell",
+    "absent_sentence": null
+   },
+   {
+    "id": "axis_form",
+    "label": "Axis · form",
+    "full_label": "Axis · form",
+    "gate": "C",
+    "state": "not_applicable",
+    "files": [],
+    "evidence": [],
+    "fact": "—",
+    "absent_sentence": null
+   },
+   {
+    "id": "evidence",
+    "label": "Evidence",
+    "full_label": "Evidence",
+    "gate": "B",
+    "state": "not_applicable",
+    "files": [],
+    "evidence": [],
+    "fact": "no register",
+    "absent_sentence": null
+   },
+   {
+    "id": "value",
+    "label": "Value",
+    "full_label": "Value",
+    "gate": "B2",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/value_crosswalk.csv",
+      "sha256": "a4eedd957d3d7c2affa18c5495ee42c5f078c9b4a41a75dac992f6f25a9e214e"
+     }
+    ],
+    "evidence": [],
+    "fact": "crosswalk",
+    "absent_sentence": null
+   },
+   {
+    "id": "audit",
+    "label": "Audit",
+    "full_label": "Audit",
+    "gate": "B2",
+    "state": "not_yet_detected",
+    "files": [],
+    "evidence": [],
+    "fact": "—",
+    "absent_sentence": null
+   },
+   {
+    "id": "artifact",
+    "label": "Artifact",
+    "full_label": "Artifact",
+    "gate": "C",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/binding.json",
+      "sha256": "10742caaf6e4622f72b2572db08d3fc4cc4dc92ca58746ad0928cabad4be5e48"
+     }
+    ],
+    "evidence": [],
+    "fact": "v1.0 · docs r3",
+    "absent_sentence": null
+   },
+   {
+    "id": "capability",
+    "label": "Capability",
+    "full_label": "Capability",
+    "gate": "D",
+    "state": "not_applicable",
+    "files": [],
+    "evidence": [],
+    "fact": "—",
+    "absent_sentence": null
+   },
+   {
+    "id": "proof",
+    "label": "Proof",
+    "full_label": "Proof · release",
+    "gate": "E",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/validation.json",
+      "sha256": "c6bf674f0ca28647aa241258ec3facd859bec472f32438cb21ffd8e8a202fae5"
+     }
+    ],
+    "evidence": [],
+    "fact": "validation",
+    "absent_sentence": null
+   },
+   {
+    "id": "field_review",
+    "label": "Field · review",
+    "full_label": "Field · review",
+    "gate": "—",
+    "state": "not_applicable",
+    "files": [],
+    "evidence": [],
+    "fact": "not searched · agent-read 10-19",
+    "absent_sentence": null
+   }
+  ],
+  "generation": "binding",
+  "core_as_files": 3,
+  "core_total": 6,
+  "dossier": null,
+  "basics": null,
+  "workbook": null,
+  "gates": [
+   {
+    "gate": "A",
+    "label": "scope",
+    "items": [
+     {
+      "item": "hazard and asset are named",
+      "status": "proven",
+      "basis": "cell_id in the artifact"
+     },
+     {
+      "item": "in-scope and out-of-scope mechanisms listed",
+      "status": "proven",
+      "basis": "hazard_scope.deferred or the entry's out_of_scope"
+     },
+     {
+      "item": "related hazards that should split are named",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "multi-pathway cells declare stable pathway IDs",
+      "status": "human",
+      "basis": "pathways[].pathway_id"
+     },
+     {
+      "item": "neighbouring or compound mechanisms have an include / defer / split decision",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "no downstream M4 metric is hidden in the damage cell",
+      "status": "human",
+      "basis": "consumer_annual_metrics.computation_owner"
+     }
+    ]
+   },
+   {
+    "gate": "B",
+    "label": "evidence",
+    "items": [
+     {
+      "item": "source register with stable IDs, locators, roles, tiers and decisions",
+      "status": "n/a",
+      "basis": null
+     },
+     {
+      "item": "load-bearing claims carry claim-level provenance",
+      "status": "n/a",
+      "basis": null
+     },
+     {
+      "item": "the chosen spine is explained",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "rejected or demoted sources are explained",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "parameter tier table populated",
+      "status": "n/a",
+      "basis": "parameter_tier_table"
+     },
+     {
+      "item": "T3/T4 update triggers listed",
+      "status": "n/a",
+      "basis": "update_trigger per T3/T4 row"
+     },
+     {
+      "item": "legacy equations and tables reproduced where legacy material is used",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "proposed numbers pressure-tested at boundaries and on explicit denominators",
+      "status": "human",
+      "basis": "PRESSURE_TEST file"
+     },
+     {
+      "item": "evidence, parameters and transfer limits resolved independently by pathway",
+      "status": "n/a",
+      "basis": "pathway_id on tier rows"
+     }
+    ]
+   },
+   {
+    "gate": "B2",
+    "label": "seven-step, site and value",
+    "items": [
+     {
+      "item": "seven-step audit records a status and blocking seam for every step",
+      "status": "human",
+      "basis": "SEVEN_STEP_AUDIT file"
+     },
+     {
+      "item": "row-level value crosswalk reconciles direct, mixed, support and excluded rows",
+      "status": "proven",
+      "basis": "value crosswalk or binding"
+     },
+     {
+      "item": "support and logistics are allocated once, not given an independent DR",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "site-conditioned hazards have a site adapter",
+      "status": "human",
+      "basis": "SITE_CONDITION_ADAPTER file"
+     },
+     {
+      "item": "fences, walls, barriers and bypass pathways receive no blanket credit",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "the adapter includes a double-counting matrix",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "unknown at-risk, exposure or mitigation states do not silently become full credit",
+      "status": "human",
+      "basis": null
+     }
+    ]
+   },
+   {
+    "gate": "C",
+    "label": "runtime contract",
+    "items": [
+     {
+      "item": "the JSON artifact is canonical",
+      "status": "n/a",
+      "basis": "canonical_runtime_artifact"
+     },
+     {
+      "item": "workbooks are derivation or audit views, not the runtime",
+      "status": "n/a",
+      "basis": null
+     },
+     {
+      "item": "damage_code_id and model version are stable",
+      "status": "proven",
+      "basis": "damage_code_id · semantic_damage_model_version"
+     },
+     {
+      "item": "field names and aliases are explicit",
+      "status": "human",
+      "basis": "hazard_axis input field"
+     },
+     {
+      "item": "pathway_id is first-class in request, record, output, capability and KAT surfaces",
+      "status": "n/a",
+      "basis": "pathway_capabilities"
+     },
+     {
+      "item": "pathway-specific axes and bridges are explicit",
+      "status": "n/a",
+      "basis": "pathways[].hazard_axis.id"
+     },
+     {
+      "item": "the emit contract is distribution-ready",
+      "status": "human",
+      "basis": "emit_contract"
+     }
+    ]
+   },
+   {
+    "gate": "D",
+    "label": "reportability",
+    "items": [
+     {
+      "item": "failure-unit DR support stated",
+      "status": "human",
+      "basis": "capability_declaration"
+     },
+     {
+      "item": "scenario loss support requires a value basis",
+      "status": "human",
+      "basis": "scenario_loss_given_value_basis"
+     },
+     {
+      "item": "scalar EAL requires downstream frequency, value basis and a cap-binding pass",
+      "status": "human",
+      "basis": "consumer_annual_metrics"
+     },
+     {
+      "item": "PML / VaR / TVaR withheld unless spread exists",
+      "status": "human",
+      "basis": "curve_intrinsic_spread"
+     },
+     {
+      "item": "a no-curve scaffold emits no numeric DR",
+      "status": "n/a",
+      "basis": null
+     },
+     {
+      "item": "unsupported pathway × failure-unit pairs withhold with a stable reason",
+      "status": "n/a",
+      "basis": "withheld_reason_codes"
+     }
+    ]
+   },
+   {
+    "gate": "E",
+    "label": "release",
+    "items": [
+     {
+      "item": "registry, index, changelog and manifest updated",
+      "status": "human",
+      "basis": "artifact index row · CHANGELOG"
+     },
+     {
+      "item": "validation report produced",
+      "status": "proven",
+      "basis": "validation file"
+     },
+     {
+      "item": "old-vs-new and cross-pathway negative tests pass",
+      "status": "human",
+      "basis": "negative contract tests run by the build"
+     },
+     {
+      "item": "consumer migration and the exact model / docs / schema / SHA pin verified",
+      "status": "n/a",
+      "basis": "SHA equals the index pin"
+     },
+     {
+      "item": "package zip integrity checked",
+      "status": "n/a",
+      "basis": "no portable package for repository-canonical artifacts"
+     }
+    ]
+   }
+  ]
+ },
+ "no_evaluator": false,
+ "no_evaluator_sentence": null,
+ "answer": {
+  "axis_groups": [],
+  "curve_ids": [],
+  "input": "FSim fire intensity class at the station reference point, exact integer 1 to 6 (0 = no event); no interpolation or heat-flux conversion",
+  "how_to_use": {
+   "share_of": "Bound electrical equipment value of the station, $13,025,357 (eight equipment rows); % of TIV divides by the full fenced value $27,353,236.37",
+   "outputs": {
+    "single_event": "conditional: equipment damage ratio for an exact FSim class at the facility point",
+    "scenario_dollars": "conditional: damage ratio times $13,025,357; remaining fenced value withheld",
+    "yearly_loss": "conditional: Hazard computes it after frequency, class, value, cap and spatial-aggregation proof; capped at $13,025,357"
+   },
+   "conditions": [
+    "Pin the source artifact (wildfire_solar v1.0 docs r3) and this binding by hash",
+    "Burn probability and class probability stay separate, in Hazard",
+    "No extra contact, perimeter, gravel, firebreak, firewall or enclosure credit",
+    "Apply the one response once to the declared assembly; no child losses on top",
+    "Withheld station value is a response gap, not immunity"
+   ]
+  },
+  "value": null,
+  "not_covered": [
+   "Rest of the fenced station ($14,327,879.37, 52.38%): bus supports, dead-ends, oil containment and firewall, relay panels, control house, station battery, SCADA, station service, control cable, conduit and trench, site work, drainage and lightning shielding"
+  ],
+  "withheld_units": [],
+  "hazard_axis": []
+ },
+ "parts": [
+  {
+   "part": "Electrical equipment (transformers and switchgear)",
+   "curves": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "failure_units": [],
+   "subsystems": [],
+   "bucket": null,
+   "variants": "none",
+   "shape": "T4",
+   "shape_basis": "Source class ordinates are T4; the MV-to-HV transfer is also T4",
+   "cost": "T4",
+   "cost_basis": "Source damage ratio is already a share of value (T4); equipment row membership is T4",
+   "notes": [
+    {
+     "type": "reused_from",
+     "text": "wildfire_solar v1.0 docs r3 (WSV1_MV_EQUIPMENT_THERMAL)"
+    },
+    {
+     "type": "key_assumption",
+     "text": "FSim class is landscape severity, not local heat at the equipment"
+    }
+   ],
+   "occurrence": null,
+   "drawn": false
+  }
+ ],
+ "evidence": {
+  "lineage": null,
+  "prose_sentence": null,
+  "paths": {},
+  "n_sources": 0,
+  "n_claims": 0,
+  "n_parameters": 0,
+  "key_sources": [
+   "Canonical wildfire_solar model v1.0 docs r3, WSV1_MV_EQUIPMENT_THERMAL (ordinate table and value linkage)",
+   "USFS FSim RDS-2016-0034-3 (native fire class and burn probability)",
+   "Hazard substation profile (asset_model.json): 345/138 kV AIS, two 336 MVA transformers",
+   "MISO MTEP24 published cost tables (equipment value rows)"
+  ],
+  "sources_from": "write-up",
+  "judgment": [
+   "MV-to-HV electrical assembly transfer",
+   "Source class ordinates are engineering judgment, not measured failure rates",
+   "Instrument and protection equipment counted inside the modeled electrical assembly"
+  ],
+  "weakest_tier": "–",
+  "pressure_test": null,
+  "method": {
+   "type": "reused",
+   "summary": "The canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a T4 assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md)"
+  }
+ },
+ "audit": {
+  "table": null,
+  "state": "not_yet_detected",
+  "absent_sentence": "No seven-step audit or site-condition adapter found as a file or a dossier section.",
+  "site_adapter": null
+ },
+ "proof": {
+  "known_answers": {
+   "declared": 0,
+   "run": 0,
+   "reproduced": 0,
+   "not_run": [],
+   "negative_run": 0,
+   "tolerance": null,
+   "source": null,
+   "kinds": {},
+   "failed": []
+  },
+  "validation": {
+   "path": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/validation.json",
+   "status": "passed",
+   "date": null,
+   "classification": null,
+   "review_scope": null
+  },
+  "outside_checks": [],
+  "capability": {
+   "failure_unit_scalar_dr": null,
+   "scenario_loss_given_value_basis": null,
+   "curve_intrinsic_spread": null,
+   "populated_emit_modes": null,
+   "eal": null,
+   "pml": null,
+   "var": null,
+   "tvar": null,
+   "limitation_flags": [],
+   "computation_owner": null
+  }
+ },
+ "seams": {
+  "open_items": [
+   "52.38% of fenced station value has no wildfire response",
+   "Tank and oil versus breaker or instrument behaviour not resolved; replace when a station-specific electrical model is qualified"
+  ],
+  "missing_mechanisms": [],
+  "out_of_scope": [
+   "External access road and project support allowances ($3.06M, outside the fenced value)",
+   "Business interruption, revenue and insurance terms"
+  ],
+  "next_version": null,
+  "update_triggers": []
+ },
+ "field_review": {
+  "register": null,
+  "buckets": [],
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the binding README, binding.json and the source cell's tier table",
+   "entry_read_kind": "agent",
+   "release_review": null,
+   "release_review_code": null,
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release —"
+  },
+  "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only."
+ },
+ "files": {
+  "write_up": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md",
+  "decisions": "docs/plans/substation_damage/decisions.md",
+  "validation": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/validation.json",
+  "notebooks": null
+ },
+ "folder_files": [
+  {
+   "path": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md",
+   "sha256": "2f821cec3fa17dfd0389ceb81bb458fa62318eec7b8cd4b48b09f44e2cb716ad"
+  },
+  {
+   "path": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/binding.json",
+   "sha256": "10742caaf6e4622f72b2572db08d3fc4cc4dc92ca58746ad0928cabad4be5e48"
+  },
+  {
+   "path": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/validation.json",
+   "sha256": "c6bf674f0ca28647aa241258ec3facd859bec472f32438cb21ffd8e8a202fae5"
+  },
+  {
+   "path": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/value_crosswalk.csv",
+   "sha256": "a4eedd957d3d7c2affa18c5495ee42c5f078c9b4a41a75dac992f6f25a9e214e"
+  }
+ ],
+ "gap_reason": null,
+ "binding": {
+  "source_cell_id": "wildfire_solar",
+  "source_entry_id": "wildfire_solar",
+  "reused_curves": [
+   "WSV1_MV_EQUIPMENT_THERMAL"
+  ],
+  "transfer_rationale": null,
+  "transfer_tier": null,
+  "status": null,
+  "limitations": [
+   "T4_MV_TO_HV_ELECTRICAL_ASSEMBLY_TRANSFER",
+   "PARTIAL_STATION_VALUE_COVERAGE",
+   "FSIM_CLASS_IS_NOT_LOCAL_HEAT_FLUX",
+   "NOT_FIELD_OR_CLAIMS_CALIBRATED",
+   "NO_COMPONENT_OR_RESILIENCE_CREDIT"
+  ]
+ },
+ "sampling_notes": [],
+ "build_findings": []
+}

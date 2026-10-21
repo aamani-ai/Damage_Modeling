@@ -1,0 +1,1080 @@
+{
+ "entry_id": "flood_bess",
+ "kind": "cell",
+ "status": "live",
+ "title": "Flood × Battery storage",
+ "asset": {
+  "slug": "bess",
+  "label": "Battery storage"
+ },
+ "hazard": {
+  "slug": "flood",
+  "label": "Flood"
+ },
+ "identity": {
+  "kind": "cell",
+  "damage_code_id": "BESS_FLOOD_INUNDATION_SCREENING_V1",
+  "model": "model v1.0",
+  "docs": "docs r1",
+  "version_key": "model_v1_0__docs_r1",
+  "schema": "damage_curve_record_bundle.v2",
+  "sha256": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24",
+  "consumer_pin": "flood_bess@model_v1_0__docs_r1"
+ },
+ "pins": [
+  {
+   "what": "catalogue entry artifact_sha256",
+   "file": "docs/cells/flood_bess/current/curve_artifact.json",
+   "expected": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24",
+   "actual": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24",
+   "ok": true
+  },
+  {
+   "what": "runtime artifact index sha256",
+   "file": "docs/cells/flood_bess/current/curve_artifact.json",
+   "expected": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24",
+   "actual": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24",
+   "ok": true
+  },
+  {
+   "what": "value_linkage.value_binding_sha256",
+   "file": "docs/cells/flood_bess/current/value_binding.json",
+   "expected": "d0f12c7728cbab8f071eb0772e07ef1b0f08e4943d7cfbfedfd3c6dcb1f3fdb4",
+   "actual": "d0f12c7728cbab8f071eb0772e07ef1b0f08e4943d7cfbfedfd3c6dcb1f3fdb4",
+   "ok": true
+  },
+  {
+   "what": "derivation_rationale.source_artifact_sha256",
+   "file": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+   "expected": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
+   "actual": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
+   "ok": true
+  }
+ ],
+ "rail": {
+  "exists": {
+   "status": "live",
+   "mark": "■",
+   "label": "LIVE",
+   "qualifier": "screening"
+  },
+  "evidence": {
+   "shape": "T3–4",
+   "cost": "T3–4",
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   }
+  },
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+   "entry_read_kind": "agent",
+   "release_review": null,
+   "release_review_code": null,
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release —"
+  }
+ },
+ "summary": "Flood on batteries: conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; 75 % of the reference value has a curve and 25 % has none.",
+ "chain": {
+  "stations": [
+   {
+    "id": "scope",
+    "label": "Scope",
+    "full_label": "Scope",
+    "gate": "A",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_bess/current/README.md",
+      "sha256": "cb965b7cb3f069470bc96f6e5723f480adae7356b5353abf2e23db08e35f4270"
+     },
+     {
+      "path": "docs/cells/flood_bess/README.md",
+      "sha256": "5b227cf28377df2b44ae427c5531132422ad534a4dbab631e9a32785ac990bd4"
+     },
+     {
+      "path": "docs/cells/flood_bess/basics/README.md",
+      "sha256": "c9e4f97e9dabe0cecba1b02908a288fb894ef488d4f2230ffe511e434327017e"
+     }
+    ],
+    "evidence": [],
+    "fact": "3 deferred",
+    "absent_sentence": null
+   },
+   {
+    "id": "units",
+    "label": "Units",
+    "full_label": "Units",
+    "gate": "A · B2",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_bess/current/curve_artifact.json",
+      "sha256": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24"
+     }
+    ],
+    "evidence": [],
+    "fact": "2 units",
+    "absent_sentence": null
+   },
+   {
+    "id": "axis_form",
+    "label": "Axis · form",
+    "full_label": "Axis · form",
+    "gate": "C",
+    "state": "absent",
+    "files": [],
+    "evidence": [],
+    "fact": "binary step + piecewise linear",
+    "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section."
+   },
+   {
+    "id": "evidence",
+    "label": "Evidence",
+    "full_label": "Evidence",
+    "gate": "B",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/extra/discussion/bess_damage/evidence/claims.csv",
+      "sha256": "fbf63f5bc07a1d395b73bd0fa6067d6e6caf0a9abfcc72a7004d3b0532554e94"
+     },
+     {
+      "path": "docs/extra/discussion/bess_damage/evidence/sources.csv",
+      "sha256": "e055ffffdb5f5183bba1346b75acd6279b75c9544470bb183bb365638d5ad2b0"
+     }
+    ],
+    "evidence": [],
+    "fact": "19 src · T3–4",
+    "absent_sentence": null
+   },
+   {
+    "id": "value",
+    "label": "Value",
+    "full_label": "Value",
+    "gate": "B2",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_bess/current/value_binding.json",
+      "sha256": "d0f12c7728cbab8f071eb0772e07ef1b0f08e4943d7cfbfedfd3c6dcb1f3fdb4"
+     },
+     {
+      "path": "docs/cells/flood_bess/current/value_crosswalk.csv",
+      "sha256": "208486801501026b9104f0b6290cb1cffcca2e08da00c3bd4c3cae54855a7091"
+     }
+    ],
+    "evidence": [],
+    "fact": "75 % · $82.5M of $109.8M",
+    "absent_sentence": null
+   },
+   {
+    "id": "audit",
+    "label": "Audit",
+    "full_label": "Audit",
+    "gate": "B2",
+    "state": "prose",
+    "files": [],
+    "evidence": [
+     {
+      "kind": "dossier_headings",
+      "file": {
+       "path": "docs/cells/flood_bess/current/derivation.md",
+       "sha256": "7711f12d974c3d8926c39dc6eb686233df613a4ebb5c21fba42496988b501a96"
+      },
+      "matched": [
+       "Seven-step audit"
+      ]
+     }
+    ],
+    "fact": "7 steps in the dossier",
+    "absent_sentence": null
+   },
+   {
+    "id": "artifact",
+    "label": "Artifact",
+    "full_label": "Artifact",
+    "gate": "C",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_bess/current/curve_artifact.json",
+      "sha256": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24"
+     },
+     {
+      "path": "docs/cells/flood_bess/current/derivation.md",
+      "sha256": "7711f12d974c3d8926c39dc6eb686233df613a4ebb5c21fba42496988b501a96"
+     },
+     {
+      "path": "docs/cells/flood_bess/current/metadata.md",
+      "sha256": "aa7fddd8896f29ed614cba716a8d0db05b4f73acab4a8da3ad61420418e34c14"
+     },
+     {
+      "path": "docs/cells/flood_bess/current/value_binding.json",
+      "sha256": "d0f12c7728cbab8f071eb0772e07ef1b0f08e4943d7cfbfedfd3c6dcb1f3fdb4"
+     }
+    ],
+    "evidence": [],
+    "fact": "v1.0 · docs r1",
+    "absent_sentence": null
+   },
+   {
+    "id": "capability",
+    "label": "Capability",
+    "full_label": "Capability",
+    "gate": "D",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_bess/current/capability.json",
+      "sha256": "43789b9dd742a3741bc0ded91233da58158efff8767c922e8b29a7bb34b750e9"
+     }
+    ],
+    "evidence": [],
+    "fact": "DR supported · EAL conditional",
+    "absent_sentence": null
+   },
+   {
+    "id": "proof",
+    "label": "Proof",
+    "full_label": "Proof · release",
+    "gate": "E",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_bess/current/MANIFEST.json",
+      "sha256": "5f13ad91c7c1a99218125dc6966e093565a82c02e231a99bf996a759c9a68f6a"
+     },
+     {
+      "path": "docs/cells/flood_bess/current/RELEASE.md",
+      "sha256": "318bd4888425f2740a9b39450f1add344ebc7f82c0899b9b4aa4c3915e308201"
+     },
+     {
+      "path": "docs/cells/flood_bess/current/known_answers.json",
+      "sha256": "a0b7fa390e71bb8f933f95116660d8dbfc1b0c9ed3763f3a6c392b89e0be902a"
+     },
+     {
+      "path": "docs/cells/flood_bess/current/validation.json",
+      "sha256": "911804550844ef7da898853f14702732bf17fc196ac55a019951d43db5be4a42"
+     },
+     {
+      "path": "docs/cells/flood_bess/CHANGELOG.json",
+      "sha256": "2b7d526ba7a4dbed1dec8deb6a54096f625a182c056f9df8a911dbdc85c50c54"
+     },
+     {
+      "path": "docs/cells/flood_bess/VERSION_REGISTRY.md",
+      "sha256": "02c20eabf293d3553b0caf3fb06e13fe354a1a92bf210c3bac6015c0be7e9d6c"
+     },
+     {
+      "path": "docs/contracts/machine_readable_artifact_index.json",
+      "sha256": "b421721ea2d82aa6e341cb80868d5023074de90ed80eed648b5a10c060b98e75",
+      "note": "artifact index pin",
+      "pinned_sha256": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24",
+      "pin_ok": true
+     }
+    ],
+    "evidence": [],
+    "fact": "30 of 30 KAT reproduced",
+    "absent_sentence": null
+   },
+   {
+    "id": "field_review",
+    "label": "Field · review",
+    "full_label": "Field · review",
+    "gate": "—",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/evidence/occurrence/bess/flood.json",
+      "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d"
+     }
+    ],
+    "evidence": [],
+    "fact": "not searched · agent-read 10-19",
+    "absent_sentence": null
+   }
+  ],
+  "generation": "plain",
+  "core_as_files": 5,
+  "core_total": 6,
+  "dossier": {
+   "path": "docs/cells/flood_bess/current/derivation.md",
+   "sha256": "7711f12d974c3d8926c39dc6eb686233df613a4ebb5c21fba42496988b501a96"
+  },
+  "basics": {
+   "path": "docs/cells/flood_bess/basics/HOW_THE_MODEL_IS_BUILT.md",
+   "sha256": "0ce112e54d9643178d54e35781fa8e4b9b1187ed332e8b0da6f79ab93a1d1521"
+  },
+  "workbook": null,
+  "gates": [
+   {
+    "gate": "A",
+    "label": "scope",
+    "items": [
+     {
+      "item": "hazard and asset are named",
+      "status": "proven",
+      "basis": "cell_id in the artifact"
+     },
+     {
+      "item": "in-scope and out-of-scope mechanisms listed",
+      "status": "proven",
+      "basis": "hazard_scope.deferred or the entry's out_of_scope"
+     },
+     {
+      "item": "related hazards that should split are named",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "multi-pathway cells declare stable pathway IDs",
+      "status": "n/a",
+      "basis": "pathways[].pathway_id"
+     },
+     {
+      "item": "neighbouring or compound mechanisms have an include / defer / split decision",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "no downstream M4 metric is hidden in the damage cell",
+      "status": "proven",
+      "basis": "consumer_annual_metrics.computation_owner"
+     }
+    ]
+   },
+   {
+    "gate": "B",
+    "label": "evidence",
+    "items": [
+     {
+      "item": "source register with stable IDs, locators, roles, tiers and decisions",
+      "status": "proven",
+      "basis": "docs/extra/discussion/bess_damage/evidence/sources.csv"
+     },
+     {
+      "item": "load-bearing claims carry claim-level provenance",
+      "status": "proven",
+      "basis": "docs/extra/discussion/bess_damage/evidence/claims.csv"
+     },
+     {
+      "item": "the chosen spine is explained",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "rejected or demoted sources are explained",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "parameter tier table populated",
+      "status": "proven",
+      "basis": "parameter_tier_table"
+     },
+     {
+      "item": "T3/T4 update triggers listed",
+      "status": "human",
+      "basis": "update_trigger per T3/T4 row"
+     },
+     {
+      "item": "legacy equations and tables reproduced where legacy material is used",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "proposed numbers pressure-tested at boundaries and on explicit denominators",
+      "status": "human",
+      "basis": "PRESSURE_TEST file"
+     },
+     {
+      "item": "evidence, parameters and transfer limits resolved independently by pathway",
+      "status": "n/a",
+      "basis": "pathway_id on tier rows"
+     }
+    ]
+   },
+   {
+    "gate": "B2",
+    "label": "seven-step, site and value",
+    "items": [
+     {
+      "item": "seven-step audit records a status and blocking seam for every step",
+      "status": "human",
+      "basis": "SEVEN_STEP_AUDIT file"
+     },
+     {
+      "item": "row-level value crosswalk reconciles direct, mixed, support and excluded rows",
+      "status": "proven",
+      "basis": "value crosswalk or binding"
+     },
+     {
+      "item": "support and logistics are allocated once, not given an independent DR",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "site-conditioned hazards have a site adapter",
+      "status": "human",
+      "basis": "SITE_CONDITION_ADAPTER file"
+     },
+     {
+      "item": "fences, walls, barriers and bypass pathways receive no blanket credit",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "the adapter includes a double-counting matrix",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "unknown at-risk, exposure or mitigation states do not silently become full credit",
+      "status": "human",
+      "basis": null
+     }
+    ]
+   },
+   {
+    "gate": "C",
+    "label": "runtime contract",
+    "items": [
+     {
+      "item": "the JSON artifact is canonical",
+      "status": "proven",
+      "basis": "canonical_runtime_artifact"
+     },
+     {
+      "item": "workbooks are derivation or audit views, not the runtime",
+      "status": "n/a",
+      "basis": null
+     },
+     {
+      "item": "damage_code_id and model version are stable",
+      "status": "proven",
+      "basis": "damage_code_id · semantic_damage_model_version"
+     },
+     {
+      "item": "field names and aliases are explicit",
+      "status": "proven",
+      "basis": "hazard_axis input field"
+     },
+     {
+      "item": "pathway_id is first-class in request, record, output, capability and KAT surfaces",
+      "status": "n/a",
+      "basis": "pathway_capabilities"
+     },
+     {
+      "item": "pathway-specific axes and bridges are explicit",
+      "status": "n/a",
+      "basis": "pathways[].hazard_axis.id"
+     },
+     {
+      "item": "the emit contract is distribution-ready",
+      "status": "proven",
+      "basis": "emit_contract"
+     }
+    ]
+   },
+   {
+    "gate": "D",
+    "label": "reportability",
+    "items": [
+     {
+      "item": "failure-unit DR support stated",
+      "status": "proven",
+      "basis": "capability_declaration"
+     },
+     {
+      "item": "scenario loss support requires a value basis",
+      "status": "proven",
+      "basis": "scenario_loss_given_value_basis"
+     },
+     {
+      "item": "scalar EAL requires downstream frequency, value basis and a cap-binding pass",
+      "status": "proven",
+      "basis": "consumer_annual_metrics"
+     },
+     {
+      "item": "PML / VaR / TVaR withheld unless spread exists",
+      "status": "proven",
+      "basis": "curve_intrinsic_spread"
+     },
+     {
+      "item": "a no-curve scaffold emits no numeric DR",
+      "status": "n/a",
+      "basis": null
+     },
+     {
+      "item": "unsupported pathway × failure-unit pairs withhold with a stable reason",
+      "status": "n/a",
+      "basis": "withheld_reason_codes"
+     }
+    ]
+   },
+   {
+    "gate": "E",
+    "label": "release",
+    "items": [
+     {
+      "item": "registry, index, changelog and manifest updated",
+      "status": "proven",
+      "basis": "artifact index row · CHANGELOG"
+     },
+     {
+      "item": "validation report produced",
+      "status": "proven",
+      "basis": "validation file"
+     },
+     {
+      "item": "old-vs-new and cross-pathway negative tests pass",
+      "status": "human",
+      "basis": "negative contract tests run by the build"
+     },
+     {
+      "item": "consumer migration and the exact model / docs / schema / SHA pin verified",
+      "status": "proven",
+      "basis": "SHA equals the index pin"
+     },
+     {
+      "item": "package zip integrity checked",
+      "status": "n/a",
+      "basis": "no portable package for repository-canonical artifacts"
+     }
+    ]
+   }
+  ]
+ },
+ "no_evaluator": false,
+ "no_evaluator_sentence": null,
+ "answer": {
+  "axis_groups": [
+   {
+    "axis": {
+     "id": "external_inundation_depth_above_local_grade_m",
+     "label": "water depth above local grade",
+     "unit": "m",
+     "input_field": "depth_m",
+     "kind": "continuous",
+     "valid_range": [
+      0,
+      null
+     ],
+     "bridge": {
+      "battery_state": "int(external_depth_m > 0.30); only binary states accepted; never interpolate depth between state codes",
+      "PCS_axis": "Freshwater: max(0, external_depth_m - 0.30), once only; DR1 beyond final source point. Saline: binary strict entry state.",
+      "assumed_entry_m": 0.3
+     }
+    },
+    "curve_ids": [
+     "BESS_ACTIVE_CONTACT_STATE",
+     "BESS_PCS_INUNDATION_PROXY",
+     "BESS_PCS_SALINE_CONTACT_STATE"
+    ]
+   }
+  ],
+  "curve_ids": [
+   "BESS_ACTIVE_CONTACT_STATE",
+   "BESS_PCS_INUNDATION_PROXY",
+   "BESS_PCS_SALINE_CONTACT_STATE"
+  ],
+  "input": "Water depth above local grade (m), finite and 0 or more; water type must be stated as fresh or saline; the PCS freshwater curve reads depth above the assumed 0.30 m entry (0 to 2 m knots, flat at full replacement beyond 0.6 m)",
+  "how_to_use": {
+   "share_of": "Hardware replacement value of the same physical unit, fixed real-2024 dollars: $901,380 active hardware per enclosure (80), $520,000 per PCS (20); $82.5M covered of $109.8M total",
+   "outputs": {
+    "single_event": "allowed: per-unit damage ratio for a stated depth and a stated water type (fresh or saline); unknown water or missing depth is withheld",
+    "scenario_dollars": "allowed with the same-unit value and exposure stated; covered hardware only, never scaled to the whole plant",
+    "yearly_loss": "conditional: Hazard computes it only if frequency, shared event, per-unit cap and missing-data checks pass; partial-property result only, complete-plant figures withheld"
+   },
+   "conditions": [
+    "Pin the exact v1.0 artifact, value and profile; one value per unique physical unit",
+    "Use Hazard's existing inland annual-maximum or Coastal event-rate clock; no invented category probabilities",
+    "Interpolate depth before the response; apply the 0.30 m entry once",
+    "All units share one event; the plant stays fixed within the year",
+    "Cap each unit's yearly cost at its replacement value; no repair within the year",
+    "Keep missing source and response probability; do not turn unmodeled value into zero"
+   ]
+  },
+  "value": {
+   "covered_usd": 82510403.39702758,
+   "total_usd": 109800000,
+   "share_covered": 0.7514608688253878,
+   "covered_label": "$82.5M of $109.8M",
+   "covered": [
+    {
+     "label": "Battery enclosures · active hardware",
+     "value_usd": 72110403.39702758,
+     "curve_id": "BESS_ACTIVE_CONTACT_STATE",
+     "bucket": "battery_enclosures"
+    },
+    {
+     "label": "PCS",
+     "value_usd": 10400000,
+     "curve_id": "BESS_PCS_INUNDATION_PROXY",
+     "bucket": "pcs"
+    }
+   ],
+   "no_curve": [
+    {
+     "label": "Enclosure racks and fire suppression",
+     "value_usd": 11889596.60297241,
+     "sentence": "No curve — Enclosure racks and fire suppression, $11.9M of the reference value, has no damage response yet."
+    },
+    {
+     "label": "Electrical balance (unit transformers, cables)",
+     "value_usd": 13200000,
+     "sentence": "No curve — Electrical balance (unit transformers, cables), $13.2M of the reference value, has no damage response yet."
+    },
+    {
+     "label": "Civil works",
+     "value_usd": 1600000,
+     "sentence": "No curve — Civil works, $1.6M of the reference value, has no damage response yet."
+    },
+    {
+     "label": "Unallocated fieldwork",
+     "value_usd": 600000,
+     "sentence": "No curve — Unallocated fieldwork, $600k of the reference value, has no damage response yet."
+    }
+   ],
+   "left_out": [],
+   "source": "docs/cells/flood_bess/current/value_binding.json",
+   "basis": "real 2024 dollars; reference budget r1"
+  },
+  "not_covered": [
+   "Enclosure racks and fire suppression ($11.89M)",
+   "Electrical balance including unit transformers and cables ($13.2M)",
+   "Civil works ($1.6M)",
+   "Unallocated fieldwork ($0.6M)"
+  ],
+  "withheld_units": [],
+  "hazard_axis": {
+   "id": "external_inundation_depth_above_local_grade_m",
+   "input_field": "depth_m",
+   "unit": "m",
+   "extrapolation_policy": "Finite nonnegative depths only; explicit capped replacement continuation; no added damage beyond included hardware value"
+  }
+ },
+ "parts": [
+  {
+   "part": "Battery enclosure (active hardware)",
+   "curves": [
+    "BESS_ACTIVE_CONTACT_STATE"
+   ],
+   "failure_units": [
+    "BESS_ACTIVE_ENCLOSURE"
+   ],
+   "subsystems": [
+    "battery_enclosures"
+   ],
+   "bucket": "battery_enclosures",
+   "variants": "water: fresh or saline (same rule: full replacement once depth is strictly above 0.30 m)",
+   "shape": "T4",
+   "shape_basis": "0.30 m entry step is an owner-approved policy, not a fragility (BF-Q01)",
+   "cost": "T4",
+   "cost_basis": "Full replacement on entry is policy; the $901,380 unit value split is T3",
+   "notes": [
+    {
+     "type": "key_assumption",
+     "text": "Water assumed to enter at 0.30 m above grade"
+    },
+    {
+     "type": "known_bias",
+     "text": "Conservative policy, not a calibrated mean"
+    }
+   ],
+   "occurrence": {
+    "mark": "?",
+    "state": "not_searched",
+    "sentence": "Not searched — nobody has looked for field reports yet."
+   },
+   "drawn": true
+  },
+  {
+   "part": "Separate PCS",
+   "curves": [
+    "BESS_PCS_INUNDATION_PROXY",
+    "BESS_PCS_SALINE_CONTACT_STATE"
+   ],
+   "failure_units": [
+    "BESS_SEPARATE_PCS"
+   ],
+   "subsystems": [
+    "pcs"
+   ],
+   "bucket": "pcs",
+   "variants": "water: fresh (inverter curve on depth above 0.30 m entry) / saline (full replacement above 0.30 m)",
+   "shape": "T3",
+   "shape_basis": "Flood Solar inverter knots (T3); the entry offset, deep plateau and saline step are T4",
+   "cost": "T3",
+   "cost_basis": "Same-unit value $520,000 from market cost shares (T3)",
+   "notes": [
+    {
+     "type": "reused_from",
+     "text": "flood_solar v1.0 docs r4 (FS_INV inverter curve)"
+    }
+   ],
+   "occurrence": {
+    "mark": "?",
+    "state": "not_searched",
+    "sentence": "Not searched — nobody has looked for field reports yet."
+   },
+   "drawn": true
+  }
+ ],
+ "evidence": {
+  "lineage": "machine_readable",
+  "prose_sentence": null,
+  "paths": {
+   "sources": "docs/extra/discussion/bess_damage/evidence/sources.csv",
+   "claims": "docs/extra/discussion/bess_damage/evidence/claims.csv",
+   "parameters": null
+  },
+  "n_sources": 19,
+  "n_claims": 30,
+  "n_parameters": 5,
+  "key_sources": [
+   "Hazard BESS reference r1: profile, layout and 2024 budget (BF-S01)",
+   "NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment (BF-S02)",
+   "Flood Solar model v1.0 docs r4 canonical artifact (BF-S06)",
+   "SMA MV Power Station with Sunny Central Storage system manual (BF-S12)",
+   "NREL PVSCM 2024 Q1 cost model, ESS rows (BF-S13)"
+  ],
+  "sources_from": "register",
+  "judgment": [
+   "Water enters the enclosure and PCS at 0.30 m above grade (owner-approved policy, not measured)",
+   "Any entry means full replacement of the enclosure's active hardware (BF-Q01)",
+   "Saline water above 0.30 m means full replacement of enclosure and PCS hardware (BF-Q02)",
+   "Freshwater PCS damage stays at full replacement past the last source point (no deep-water data)"
+  ],
+  "weakest_tier": "T4",
+  "pressure_test": null,
+  "method": {
+   "type": "built_from_references",
+   "summary": "Conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; unit values from market cost shares of the fixed Hazard reference budget"
+  }
+ },
+ "audit": {
+  "table": {
+   "source": "docs/cells/flood_bess/current/derivation.md",
+   "columns": [
+    "Step",
+    "Qualified disposition"
+   ],
+   "rows": [
+    [
+     "Asset / boundary",
+     "One outdoor liquid-cooled LFP plant; unit transformers included in the physical boundary but currently in unmodeled value; collector/export excluded"
+    ],
+    [
+     "Failure units",
+     "80 active enclosure groups and 20 separate PCS, unique IDs; no overlapping cell/rack/cabinet charges"
+    ],
+    [
+     "Endpoint",
+     "Conditional hardware replacement/repair fraction of that same hardware value; conservative screening policy, not an empirically calibrated mean"
+    ],
+    [
+     "Split rows",
+     "Preserve original reference budget and r3 cost allocation; no new electrical-balance subdivision"
+    ],
+    [
+     "Allocate value",
+     "$1.05M × 121.3/141.3 = $901,380.0424628449 active hardware per enclosure; $520,000 per PCS; full partition reconciles to $109.8M"
+    ],
+    [
+     "Site adapter",
+     "Unit-local grade depth, one strict entry test or one PCS entry subtraction; explicit water condition; source missingness retained"
+    ],
+    [
+     "Apply / restrict",
+     "Original PCS knots; binary strict-entry response; deep replacement plateau; conditional annual capability subject to verified event dependence, caps and missing mass"
+    ]
+   ],
+   "kind": "dossier_section"
+  },
+  "state": "prose",
+  "absent_sentence": null,
+  "site_adapter": null
+ },
+ "proof": {
+  "known_answers": {
+   "declared": 30,
+   "run": 30,
+   "reproduced": 30,
+   "not_run": [],
+   "negative_run": 0,
+   "tolerance": 1e-09,
+   "source": "docs/cells/flood_bess/current/known_answers.json",
+   "kinds": {
+    "case": 30
+   },
+   "failed": []
+  },
+  "validation": {
+   "path": "docs/cells/flood_bess/current/validation.json",
+   "status": "passed_conditional_annual_screening",
+   "date": "2026-10-18",
+   "classification": "NEW_CELL_MODEL_RELEASE",
+   "review_scope": "Same-author validation with independent numerical methods; no external scientific review claimed"
+  },
+  "outside_checks": [],
+  "capability": {
+   "failure_unit_scalar_dr": "supported",
+   "scenario_loss_given_value_basis": "supported_with_explicit_value_and_exposure_basis",
+   "curve_intrinsic_spread": "not_carried",
+   "populated_emit_modes": [
+    "discrete_state_table",
+    "scalar_mean"
+   ],
+   "eal": "consumer_computable_with_prerequisites",
+   "pml": "consumer_computable_from_validated_annual_loss_distribution",
+   "var": "consumer_computable_from_validated_annual_loss_distribution",
+   "tvar": "consumer_computable_from_validated_annual_loss_distribution",
+   "limitation_flags": [
+    "CONSERVATIVE_POLICY_NOT_CALIBRATED_MEAN",
+    "PARTIAL_PROPERTY_SCOPE",
+    "NO_INTRINSIC_DAMAGE_SPREAD",
+    "NO_WITHIN_YEAR_RESTORATION",
+    "CANONICAL_REFERENCE_NOT_OBSERVED_ASSET",
+    "COASTAL_CATEGORY_ENVELOPE_NOT_EVENT_HYDRAULICS",
+    "COMMON_RANK_INLAND_SCREENING",
+    "SOURCE_MISSINGNESS_RETAINED",
+    "NO_AUTOMATIC_PORTFOLIO_OR_TOTAL_ADMISSION"
+   ],
+   "computation_owner": "downstream_consumer"
+  }
+ },
+ "seams": {
+  "open_items": [
+   "Coastal first SLOSH depth bin (0-1 ft) straddles the 0.30 m entry; upper-bin sensitivity kept for the spatial pilot",
+   "$27.29M of the plant value has no flood response yet",
+   "Matched service evidence, more mechanisms, restoration and size/duration scaling are future work"
+  ],
+  "missing_mechanisms": [
+   "Wave impact",
+   "Scour",
+   "Debris"
+  ],
+  "out_of_scope": [
+   "Collector station and export line",
+   "Autonomous internal failures (not caused by the flood)",
+   "Business interruption"
+  ],
+  "next_version": null,
+  "update_triggers": []
+ },
+ "field_review": {
+  "register": {
+   "path": "docs/evidence/occurrence/bess/flood.json",
+   "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",
+   "search_log": "docs/evidence/occurrence/bess/flood.md",
+   "last_searched": null
+  },
+  "buckets": [
+   {
+    "bucket": "battery_enclosures",
+    "label": "Battery enclosures",
+    "state": "not_searched",
+    "mark": "?",
+    "sentence": "Not searched — nobody has looked for field reports yet.",
+    "reports": [],
+    "twin_lead": {
+     "level": "H",
+     "nodes": [
+      {
+       "node": "be_enc",
+       "name": "Enclosure Shell",
+       "level": 3,
+       "why": "Water at the racks shorts modules and can trigger thermal events"
+      },
+      {
+       "node": "be_modules",
+       "name": "Battery Modules",
+       "level": 3,
+       "why": "Submersion shorts modules"
+      },
+      {
+       "node": "be_dccab",
+       "name": "DC Combiner & Disconnect",
+       "level": 2,
+       "why": "Low-mounted DC gear"
+      }
+     ]
+    }
+   },
+   {
+    "bucket": "pcs",
+    "label": "PCS",
+    "state": "not_searched",
+    "mark": "?",
+    "sentence": "Not searched — nobody has looked for field reports yet.",
+    "reports": [],
+    "twin_lead": {
+     "level": "M",
+     "nodes": [
+      {
+       "node": "bp_pcs",
+       "name": "Bidirectional PCS",
+       "level": 2,
+       "why": "Skid height"
+      }
+     ]
+    }
+   },
+   {
+    "bucket": "electrical_balance",
+    "label": "MV, collection and controls",
+    "state": "not_searched",
+    "mark": "?",
+    "sentence": "Not searched — nobody has looked for field reports yet.",
+    "reports": [],
+    "twin_lead": {
+     "level": "M",
+     "nodes": [
+      {
+       "node": "bp_rmu",
+       "name": "MV Switchgear (RMU)",
+       "level": 2,
+       "why": "Cable compartment flooding"
+      },
+      {
+       "node": "bp_skid",
+       "name": "Skid & Piers",
+       "level": 2,
+       "why": "Skid height is the main mitigation"
+      },
+      {
+       "node": "bc_dc",
+       "name": "DC Cables",
+       "level": 2,
+       "why": "Ground faults"
+      },
+      {
+       "node": "bc_mv",
+       "name": "MV Cable",
+       "level": 2,
+       "why": "Water treeing"
+      },
+      {
+       "node": "bpl_feeders",
+       "name": "34.5 kV Feeders",
+       "level": 2,
+       "why": "Water treeing"
+      },
+      {
+       "node": "bk_fiber",
+       "name": "Control Network",
+       "level": 1,
+       "why": "Vault flooding"
+      }
+     ]
+    }
+   },
+   {
+    "bucket": "civil_works",
+    "label": "Civil works",
+    "state": "not_searched",
+    "mark": "?",
+    "sentence": "Not searched — nobody has looked for field reports yet.",
+    "reports": [],
+    "twin_lead": {
+     "level": "M",
+     "nodes": [
+      {
+       "node": "bs_found",
+       "name": "Enclosure Foundations",
+       "level": 2,
+       "why": "Pad elevation sets ingress risk"
+      }
+     ]
+    }
+   },
+   {
+    "bucket": "fieldwork",
+    "label": "Fieldwork",
+    "state": "not_searched",
+    "mark": "?",
+    "sentence": "Not searched — nobody has looked for field reports yet.",
+    "reports": [],
+    "twin_lead": {
+     "level": null,
+     "nodes": []
+    }
+   }
+  ],
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+   "entry_read_kind": "agent",
+   "release_review": null,
+   "release_review_code": null,
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release —"
+  },
+  "absent_sentence": null
+ },
+ "files": {
+  "write_up": "docs/cells/flood_bess/current/derivation.md",
+  "decisions": "docs/plans/bess_damage/decisions.md",
+  "validation": "docs/cells/flood_bess/current/validation.json",
+  "notebooks": null
+ },
+ "folder_files": [
+  {
+   "path": "docs/cells/flood_bess/current/MANIFEST.json",
+   "sha256": "5f13ad91c7c1a99218125dc6966e093565a82c02e231a99bf996a759c9a68f6a"
+  },
+  {
+   "path": "docs/cells/flood_bess/current/README.md",
+   "sha256": "cb965b7cb3f069470bc96f6e5723f480adae7356b5353abf2e23db08e35f4270"
+  },
+  {
+   "path": "docs/cells/flood_bess/current/RELEASE.md",
+   "sha256": "318bd4888425f2740a9b39450f1add344ebc7f82c0899b9b4aa4c3915e308201"
+  },
+  {
+   "path": "docs/cells/flood_bess/current/capability.json",
+   "sha256": "43789b9dd742a3741bc0ded91233da58158efff8767c922e8b29a7bb34b750e9"
+  },
+  {
+   "path": "docs/cells/flood_bess/current/consumption_pin.json",
+   "sha256": "2aaa139f1f056be59b122c7957f36518d7ed65cd6aaa6de3c87dea1ca24e0cf0"
+  },
+  {
+   "path": "docs/cells/flood_bess/current/curve_artifact.json",
+   "sha256": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24"
+  },
+  {
+   "path": "docs/cells/flood_bess/current/derivation.md",
+   "sha256": "7711f12d974c3d8926c39dc6eb686233df613a4ebb5c21fba42496988b501a96"
+  },
+  {
+   "path": "docs/cells/flood_bess/current/known_answers.json",
+   "sha256": "a0b7fa390e71bb8f933f95116660d8dbfc1b0c9ed3763f3a6c392b89e0be902a"
+  },
+  {
+   "path": "docs/cells/flood_bess/current/metadata.md",
+   "sha256": "aa7fddd8896f29ed614cba716a8d0db05b4f73acab4a8da3ad61420418e34c14"
+  },
+  {
+   "path": "docs/cells/flood_bess/current/validation.json",
+   "sha256": "911804550844ef7da898853f14702732bf17fc196ac55a019951d43db5be4a42"
+  },
+  {
+   "path": "docs/cells/flood_bess/current/value_binding.json",
+   "sha256": "d0f12c7728cbab8f071eb0772e07ef1b0f08e4943d7cfbfedfd3c6dcb1f3fdb4"
+  },
+  {
+   "path": "docs/cells/flood_bess/current/value_crosswalk.csv",
+   "sha256": "208486801501026b9104f0b6290cb1cffcca2e08da00c3bd4c3cae54855a7091"
+  }
+ ],
+ "gap_reason": null,
+ "binding": null,
+ "sampling_notes": [],
+ "build_findings": []
+}

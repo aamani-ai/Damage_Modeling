@@ -1214,6 +1214,8 @@ Cell text: status · shape tier / cost tier. *Partial* means some parts of the a
 
 **Gap** · 2026-10-19: Agent-drafted, from the BESS plan and decision log
 
+**Field reports:** [occurrence register](../evidence/occurrence/bess/hail.json) — 5 of 5 buckets not searched
+
 **Why no curve yet:** No curve and no documented plan yet (the BESS plan only lists other hazards as later work, step 6)
 
 <a id="flood-bess"></a>
@@ -1221,6 +1223,8 @@ Cell text: status · shape tier / cost tier. *Partial* means some parts of the a
 ### Battery storage × Flood
 
 **Live** · model v1.0, docs r1 · `flood_bess` · [curve file](flood_bess/current/curve_artifact.json) · 2026-10-19: Agent-drafted, from the cell's own tier table, capability and decision log
+
+**Field reports:** [occurrence register](../evidence/occurrence/bess/flood.json) — 5 of 5 buckets not searched
 
 **Input:** Water depth above local grade (m), finite and 0 or more; water type must be stated as fresh or saline; the PCS freshwater curve reads depth above the assumed 0.30 m entry (0 to 2 m knots, flat at full replacement beyond 0.6 m)
 
@@ -1283,6 +1287,8 @@ Cell text: status · shape tier / cost tier. *Partial* means some parts of the a
 
 **Live** · model v1.0, docs r1 · `tropical_cyclone_wind_bess` · [curve file](tropical_cyclone_wind_bess/current/curve_artifact.json) · 2026-10-19: Agent-drafted, from the cell's own tier table, capability and decision log
 
+**Field reports:** [occurrence register](../evidence/occurrence/bess/hurricane_wind.json) — 5 of 5 buckets not searched
+
 **Input:** Pressure ratio: (event 3-second gust / declared reference gust) squared, dimensionless, valid 0 to 2; outside the range is withheld, not clamped
 
 **Method:** Built from references. Solar TC-wind ordered damage-state curves reused as a T4 hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage.
@@ -1344,6 +1350,8 @@ Cell text: status · shape tier / cost tier. *Partial* means some parts of the a
 
 **Gap** · 2026-10-19: Agent-drafted, from the BESS plan and the BESS hurricane wind cell
 
+**Field reports:** [occurrence register](../evidence/occurrence/bess/convective_wind.json) — 5 of 5 buckets not searched
+
 **Why no curve yet:** No curve yet: the BESS hurricane wind cell leaves convective wind and tornado as a separate scope, and the BESS plan lists other hazards as later work (docs/plans/bess_damage/README.md, step 6)
 
 <a id="wildfire-bess"></a>
@@ -1351,6 +1359,8 @@ Cell text: status · shape tier / cost tier. *Partial* means some parts of the a
 ### Battery storage × Wildfire
 
 **Live** · model v1.0, docs r1 · `wildfire_bess` · [curve file](wildfire_bess/current/curve_artifact.json) · 2026-10-19: Agent-drafted, from the cell's own tier table, capability and decision log
+
+**Field reports:** [occurrence register](../evidence/occurrence/bess/wildfire.json) — 5 of 5 buckets not searched
 
 **Input:** FSim fire intensity class at the unit, exact integer 1 to 6 (0 = no event); no interpolation, heat-flux conversion or burn probability in the Damage call
 

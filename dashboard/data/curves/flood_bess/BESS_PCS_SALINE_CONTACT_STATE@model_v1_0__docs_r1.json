@@ -1,0 +1,350 @@
+{
+ "curve_id": "BESS_PCS_SALINE_CONTACT_STATE",
+ "entry_id": "flood_bess",
+ "damage_code_id": "BESS_FLOOD_INUNDATION_SCREENING_V1",
+ "version_key": "model_v1_0__docs_r1",
+ "artifact_sha256": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24",
+ "failure_unit_id": "BESS_SEPARATE_PCS",
+ "subsystem": "pcs",
+ "component": "pcs",
+ "treatment": "primary_nonzero",
+ "part": "Separate PCS",
+ "pathway_id": null,
+ "curve_form": "piecewise_linear",
+ "x_axis_id": "binary_common_entry_policy_state",
+ "y_axis": "failure_unit_damage_ratio",
+ "parameters": {
+  "points": [
+   [
+    0,
+    0
+   ],
+   [
+    1,
+    1
+   ]
+  ]
+ },
+ "record_extra": {},
+ "axis": {
+  "id": "external_inundation_depth_above_local_grade_m",
+  "label": "water depth above local grade",
+  "unit": "m",
+  "input_field": "depth_m",
+  "kind": "continuous",
+  "valid_range": [
+   0,
+   null
+  ],
+  "bridge": {
+   "battery_state": "int(external_depth_m > 0.30); only binary states accepted; never interpolate depth between state codes",
+   "PCS_axis": "Freshwater: max(0, external_depth_m - 0.30), once only; DR1 beyond final source point. Saline: binary strict entry state.",
+   "assumed_entry_m": 0.3
+  }
+ },
+ "domain": [
+  0,
+  null
+ ],
+ "withheld_zones": [],
+ "knots": [
+  [
+   0.3,
+   0.0
+  ],
+  [
+   0.3,
+   1.0
+  ]
+ ],
+ "series": [
+  {
+   "label": "PCS · saline",
+   "kind": "step",
+   "points": [
+    [
+     0.0,
+     0.0
+    ],
+    [
+     0.3,
+     0.0
+    ],
+    [
+     0.3,
+     1.0
+    ],
+    [
+     3.0,
+     1.0
+    ]
+   ],
+   "variant": "saline"
+  }
+ ],
+ "envelope": null,
+ "scenario_note": null,
+ "known_answers": [
+  {
+   "x": 0.0,
+   "y": 0.0,
+   "test": "case 25: pcs · saline · 0 m",
+   "cost_usd": 0.0
+  },
+  {
+   "x": 0.3,
+   "y": 0.0,
+   "test": "case 26: pcs · saline · 0.3 m",
+   "cost_usd": 0.0
+  },
+  {
+   "x": 0.3000001,
+   "y": 1.0,
+   "test": "case 27: pcs · saline · 0.3000001 m",
+   "cost_usd": 520000.0
+  },
+  {
+   "x": 0.45,
+   "y": 1.0,
+   "test": "case 28: pcs · saline · 0.45 m",
+   "cost_usd": 520000.0
+  },
+  {
+   "x": 3.0,
+   "y": 1.0,
+   "test": "case 29: pcs · saline · 3.0 m",
+   "cost_usd": 520000.0
+  },
+  {
+   "x": 10.0,
+   "y": 1.0,
+   "test": "case 30: pcs · saline · 10.0 m",
+   "cost_usd": 520000.0
+  }
+ ],
+ "source_points": [],
+ "drawn": true,
+ "no_evaluator_sentence": null,
+ "evaluator": {
+  "module": "scripts/reference_helpers/damage_curve_eval.py",
+  "function": "evaluate_curve_record",
+  "note": "state = int(depth > 0.3 m); saline replacement policy BF-Q02"
+ },
+ "tiers": {
+  "shape": "T3",
+  "shape_basis": "Flood Solar inverter knots (T3); the entry offset, deep plateau and saline step are T4",
+  "cost": "T3",
+  "cost_basis": "Same-unit value $520,000 from market cost shares (T3)"
+ },
+ "row_notes": [
+  {
+   "type": "reused_from",
+   "text": "flood_solar v1.0 docs r4 (FS_INV inverter curve)"
+  }
+ ],
+ "selected_by": [
+  {
+   "by": "water condition",
+   "when": [
+    "saline screening"
+   ]
+  }
+ ],
+ "variants": "water: fresh (inverter curve on depth above 0.30 m entry) / saline (full replacement above 0.30 m)",
+ "notes": [],
+ "title": "Flood × Battery storage",
+ "asset": {
+  "slug": "bess",
+  "label": "Battery storage"
+ },
+ "hazard": {
+  "slug": "flood",
+  "label": "Flood"
+ },
+ "status": "live",
+ "rail": {
+  "exists": {
+   "status": "live",
+   "mark": "■",
+   "label": "LIVE",
+   "qualifier": "screening"
+  },
+  "evidence": {
+   "shape": "T3–4",
+   "cost": "T3–4",
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   }
+  },
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+   "entry_read_kind": "agent",
+   "release_review": null,
+   "release_review_code": null,
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release —"
+  }
+ },
+ "parameters_rows": [
+  {
+   "id": "entry_and_active_replacement",
+   "name": "entry_and_active_replacement",
+   "value": ".30m; binary strict greater-than",
+   "tier": "T4",
+   "source_ids": [
+    "BF-S01",
+    "BF-S02",
+    "BF-S09",
+    "BF-S15"
+   ],
+   "claim_ids": [
+    "BF-C20"
+   ],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": null,
+   "status": null,
+   "reasoning": "BF-Q01 owner-approved conservative local-test policy, not a physical fragility",
+   "update_trigger": null
+  },
+  {
+   "id": "PCS_source_knots",
+   "name": "PCS_source_knots",
+   "value": null,
+   "tier": "T3",
+   "source_ids": [
+    "BF-S06",
+    "BF-S12"
+   ],
+   "claim_ids": [
+    "BF-C14"
+   ],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": null,
+   "status": null,
+   "reasoning": "Exact source engineering proxy; target entry remains T4",
+   "update_trigger": null
+  },
+  {
+   "id": "same_unit_value",
+   "name": "same_unit_value",
+   "value": null,
+   "tier": "T3",
+   "source_ids": [
+    "BF-S01",
+    "BF-S13",
+    "BF-S14"
+   ],
+   "claim_ids": [
+    "BF-C18"
+   ],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": null,
+   "status": null,
+   "reasoning": "Dimensionless market-case allocation preserves reference total",
+   "update_trigger": null
+  },
+  {
+   "id": "deep_freshwater_saturation",
+   "name": "deep_freshwater_saturation",
+   "value": null,
+   "tier": "T4",
+   "source_ids": [
+    "BF-S01",
+    "BF-S06"
+   ],
+   "claim_ids": [
+    "BF-C26",
+    "BF-C27"
+   ],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": null,
+   "status": null,
+   "reasoning": "Continue existing maximum equipment replacement; no empirical deep-water calibration or cleanup scope",
+   "update_trigger": null
+  },
+  {
+   "id": "saline_contact_replacement",
+   "name": "saline_contact_replacement",
+   "value": ".30m strict greater-than; DR1 for covered battery and PCS hardware",
+   "tier": "T4",
+   "source_ids": [
+    "BF-S02",
+    "BF-S03",
+    "BF-S10",
+    "BF-S16"
+   ],
+   "claim_ids": [
+    "BF-C30"
+   ],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": null,
+   "status": null,
+   "reasoning": "BF-Q02 owner-approved conservative local-test policy; not a measured mean or salinity multiplier",
+   "update_trigger": null
+  }
+ ],
+ "sources_for_curve": [
+  "BF-S01",
+  "BF-S02",
+  "BF-S03",
+  "BF-S06",
+  "BF-S09",
+  "BF-S10",
+  "BF-S12",
+  "BF-S13",
+  "BF-S14",
+  "BF-S15",
+  "BF-S16"
+ ],
+ "occurrence": {
+  "bucket": "pcs",
+  "label": "PCS",
+  "state": "not_searched",
+  "mark": "?",
+  "sentence": "Not searched — nobody has looked for field reports yet.",
+  "reports": [],
+  "twin_lead": {
+   "level": "M",
+   "nodes": [
+    {
+     "node": "bp_pcs",
+     "name": "Bidirectional PCS",
+     "level": 2,
+     "why": "Skid height"
+    }
+   ]
+  }
+ },
+ "review": {
+  "entry_read_on": "2026-10-19",
+  "entry_read_by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+  "entry_read_kind": "agent",
+  "release_review": null,
+  "release_review_code": null,
+  "review": null,
+  "tone": "neutral",
+  "label": "entry agent-read 2026-10-19 · release —"
+ },
+ "summary": "Separate PCS: piecewise linear on water depth above local grade; shape T3, cost T3. Not searched — nobody has looked for field reports yet.",
+ "versions": [
+  {
+   "pin": "flood_bess@model_v1_0__docs_r1",
+   "model": "model v1.0",
+   "docs": "docs r1",
+   "published_on": "2026-10-18",
+   "change_class": "NEW_CELL_MODEL_RELEASE",
+   "summary": "First canonical partial-property Flood BESS response; annual permission requires existing frequency/coupling/cap/coverage proof. Prior proposals unchanged.",
+   "artifact_path": "docs/cells/flood_bess/current/curve_artifact.json",
+   "source": "CHANGELOG.json"
+  }
+ ],
+ "data_path": "curves/flood_bess/BESS_PCS_SALINE_CONTACT_STATE@model_v1_0__docs_r1.json"
+}

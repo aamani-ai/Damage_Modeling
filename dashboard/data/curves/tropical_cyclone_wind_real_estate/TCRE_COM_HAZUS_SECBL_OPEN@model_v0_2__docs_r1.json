@@ -1,0 +1,1348 @@
+{
+ "curve_id": "TCRE_COM_HAZUS_SECBL_OPEN",
+ "entry_id": "tropical_cyclone_wind_real_estate",
+ "damage_code_id": "TROPICAL_CYCLONE_WIND_REAL_ESTATE_HAZUS_SCREENING_V0_2",
+ "version_key": "model_v0_2__docs_r1",
+ "artifact_sha256": "99487ff5812e6b1017eeaaeea14d469bcb15ae2265e9d6cf107ce5ca41c85753",
+ "failure_unit_id": "TCRE_BUILDING_STRUCTURE",
+ "subsystem": "BUILDING",
+ "component": "BUILDING_STRUCTURE_ASSEMBLY",
+ "treatment": "primary_nonzero",
+ "part": "Retail",
+ "pathway_id": "tropical_cyclone_wind",
+ "curve_form": "piecewise_linear",
+ "x_axis_id": "tc_peak_gust_3s_10m_mph",
+ "y_axis": "failure_unit_damage_ratio",
+ "parameters": {
+  "points": [
+   [
+    50.0,
+    0.0
+   ],
+   [
+    55.0,
+    0.0
+   ],
+   [
+    60.0,
+    6.67094e-05
+   ],
+   [
+    65.0,
+    0.000112089
+   ],
+   [
+    70.0,
+    0.000197623
+   ],
+   [
+    75.0,
+    0.000323904
+   ],
+   [
+    80.0,
+    0.00055593
+   ],
+   [
+    85.0,
+    0.00110471
+   ],
+   [
+    90.0,
+    0.00230687
+   ],
+   [
+    95.0,
+    0.00498921
+   ],
+   [
+    100.0,
+    0.00986765
+   ],
+   [
+    105.0,
+    0.0202898
+   ],
+   [
+    110.0,
+    0.0346281
+   ],
+   [
+    115.0,
+    0.0622408
+   ],
+   [
+    120.0,
+    0.0876971
+   ],
+   [
+    125.0,
+    0.138396
+   ],
+   [
+    130.0,
+    0.185789
+   ],
+   [
+    135.0,
+    0.247526
+   ],
+   [
+    140.0,
+    0.312759
+   ],
+   [
+    145.0,
+    0.378837
+   ],
+   [
+    150.0,
+    0.453007
+   ],
+   [
+    155.0,
+    0.536489
+   ],
+   [
+    160.0,
+    0.616049
+   ],
+   [
+    165.0,
+    0.652999
+   ],
+   [
+    170.0,
+    0.69727
+   ],
+   [
+    175.0,
+    0.760879
+   ],
+   [
+    180.0,
+    0.809643
+   ],
+   [
+    185.0,
+    0.834491
+   ],
+   [
+    190.0,
+    0.849055
+   ],
+   [
+    195.0,
+    0.860833
+   ],
+   [
+    200.0,
+    0.87203
+   ],
+   [
+    205.0,
+    0.875644
+   ],
+   [
+    210.0,
+    0.878694
+   ],
+   [
+    215.0,
+    0.88007
+   ],
+   [
+    220.0,
+    0.881687
+   ],
+   [
+    225.0,
+    0.881853
+   ],
+   [
+    230.0,
+    0.881824
+   ],
+   [
+    235.0,
+    0.881785
+   ],
+   [
+    240.0,
+    0.882631
+   ],
+   [
+    245.0,
+    0.883074
+   ],
+   [
+    250.0,
+    0.883074
+   ]
+  ]
+ },
+ "record_extra": {
+  "valid_range": [
+   50.0,
+   250.0
+  ],
+  "interpolation_policy": "linear_between_source_knots",
+  "extrapolation_policy": "0 <= gust < 50 mph returns 0 (the source is 0 at 50 mph); above 250 mph withholds; no clamp",
+  "selector_match": {
+   "reference_building_id": "RE_COM_LOWRISE",
+   "hazus_terrain_class": "open"
+  },
+  "source_parameter_refs": [
+   "TCRE-S001#Section_2.1",
+   "TCRE-S002#huDamLossFun:wbID=1812;TERRAINID=1;DamLossDescID=5",
+   "TCRE-S003#loss_repair:S.ECB.L.bur.0.B.std.low.3"
+  ],
+  "metadata_flags": [
+   "HAZUS_HURRICANE_BUILDING_LOSS_TABLE",
+   "HAZUS_6_1_EXTRACT_VERIFIED_AGAINST_5_1_COPY",
+   "MOST_COMMON_WIND_CHARACTERISTICS_ASSUMED",
+   "SECBL_EQUALS_MECBL_IN_SOURCE",
+   "HAZUS_COMMERCIAL_TERRAIN_ORDER_NOT_MONOTONE",
+   "HAZUS_SIMULATION_NOISE_SMALL_DIPS"
+  ]
+ },
+ "axis": {
+  "id": "TC_PEAK_GUST_3S_10M_OPEN_TERRAIN_MPH",
+  "label": "peak 3-second gust at 10 m in open terrain",
+  "unit": "mph",
+  "input_field": "tc_peak_gust_3s_10m_mph",
+  "valid_range": [
+   50.0,
+   250.0
+  ],
+  "kind": "continuous",
+  "label_from_id": true
+ },
+ "domain": [
+  50.0,
+  250.0
+ ],
+ "withheld_zones": [],
+ "knots": [
+  [
+   50.0,
+   0.0
+  ],
+  [
+   55.0,
+   0.0
+  ],
+  [
+   60.0,
+   6.67094e-05
+  ],
+  [
+   65.0,
+   0.000112089
+  ],
+  [
+   70.0,
+   0.000197623
+  ],
+  [
+   75.0,
+   0.000323904
+  ],
+  [
+   80.0,
+   0.00055593
+  ],
+  [
+   85.0,
+   0.00110471
+  ],
+  [
+   90.0,
+   0.00230687
+  ],
+  [
+   95.0,
+   0.00498921
+  ],
+  [
+   100.0,
+   0.00986765
+  ],
+  [
+   105.0,
+   0.0202898
+  ],
+  [
+   110.0,
+   0.0346281
+  ],
+  [
+   115.0,
+   0.0622408
+  ],
+  [
+   120.0,
+   0.0876971
+  ],
+  [
+   125.0,
+   0.138396
+  ],
+  [
+   130.0,
+   0.185789
+  ],
+  [
+   135.0,
+   0.247526
+  ],
+  [
+   140.0,
+   0.312759
+  ],
+  [
+   145.0,
+   0.378837
+  ],
+  [
+   150.0,
+   0.453007
+  ],
+  [
+   155.0,
+   0.536489
+  ],
+  [
+   160.0,
+   0.616049
+  ],
+  [
+   165.0,
+   0.652999
+  ],
+  [
+   170.0,
+   0.69727
+  ],
+  [
+   175.0,
+   0.760879
+  ],
+  [
+   180.0,
+   0.809643
+  ],
+  [
+   185.0,
+   0.834491
+  ],
+  [
+   190.0,
+   0.849055
+  ],
+  [
+   195.0,
+   0.860833
+  ],
+  [
+   200.0,
+   0.87203
+  ],
+  [
+   205.0,
+   0.875644
+  ],
+  [
+   210.0,
+   0.878694
+  ],
+  [
+   215.0,
+   0.88007
+  ],
+  [
+   220.0,
+   0.881687
+  ],
+  [
+   225.0,
+   0.881853
+  ],
+  [
+   230.0,
+   0.881824
+  ],
+  [
+   235.0,
+   0.881785
+  ],
+  [
+   240.0,
+   0.882631
+  ],
+  [
+   245.0,
+   0.883074
+  ],
+  [
+   250.0,
+   0.883074
+  ]
+ ],
+ "series": [
+  {
+   "label": "TCRE_COM_HAZUS_SECBL_OPEN",
+   "kind": "line",
+   "points": [
+    [
+     50.0,
+     0.0
+    ],
+    [
+     51.25,
+     0.0
+    ],
+    [
+     52.5,
+     0.0
+    ],
+    [
+     53.75,
+     0.0
+    ],
+    [
+     55.0,
+     0.0
+    ],
+    [
+     56.25,
+     1.667735e-05
+    ],
+    [
+     57.5,
+     3.33547e-05
+    ],
+    [
+     58.75,
+     5.003205e-05
+    ],
+    [
+     60.0,
+     6.67094e-05
+    ],
+    [
+     61.25,
+     7.80543e-05
+    ],
+    [
+     62.5,
+     8.93992e-05
+    ],
+    [
+     63.75,
+     0.0001007441
+    ],
+    [
+     65.0,
+     0.000112089
+    ],
+    [
+     66.25,
+     0.0001334725
+    ],
+    [
+     67.5,
+     0.00015485599999999998
+    ],
+    [
+     68.75,
+     0.0001762395
+    ],
+    [
+     70.0,
+     0.000197623
+    ],
+    [
+     71.25,
+     0.00022919325
+    ],
+    [
+     72.5,
+     0.0002607635
+    ],
+    [
+     73.75,
+     0.00029233375
+    ],
+    [
+     75.0,
+     0.000323904
+    ],
+    [
+     76.25,
+     0.0003819105
+    ],
+    [
+     77.5,
+     0.00043991700000000006
+    ],
+    [
+     78.75,
+     0.0004979235
+    ],
+    [
+     80.0,
+     0.00055593
+    ],
+    [
+     81.25,
+     0.0006931250000000001
+    ],
+    [
+     82.5,
+     0.0008303200000000001
+    ],
+    [
+     83.75,
+     0.0009675150000000001
+    ],
+    [
+     85.0,
+     0.00110471
+    ],
+    [
+     86.25,
+     0.00140525
+    ],
+    [
+     87.5,
+     0.00170579
+    ],
+    [
+     88.75,
+     0.0020063299999999997
+    ],
+    [
+     90.0,
+     0.00230687
+    ],
+    [
+     91.25,
+     0.002977455
+    ],
+    [
+     92.5,
+     0.00364804
+    ],
+    [
+     93.75,
+     0.0043186249999999995
+    ],
+    [
+     95.0,
+     0.00498921
+    ],
+    [
+     96.25,
+     0.00620882
+    ],
+    [
+     97.5,
+     0.00742843
+    ],
+    [
+     98.75,
+     0.008648040000000001
+    ],
+    [
+     100.0,
+     0.00986765
+    ],
+    [
+     101.25,
+     0.0124731875
+    ],
+    [
+     102.5,
+     0.015078725000000001
+    ],
+    [
+     103.75,
+     0.0176842625
+    ],
+    [
+     105.0,
+     0.0202898
+    ],
+    [
+     106.25,
+     0.023874375
+    ],
+    [
+     107.5,
+     0.027458950000000003
+    ],
+    [
+     108.75,
+     0.031043525000000002
+    ],
+    [
+     110.0,
+     0.0346281
+    ],
+    [
+     111.25,
+     0.041531275
+    ],
+    [
+     112.5,
+     0.048434450000000004
+    ],
+    [
+     113.75,
+     0.055337625
+    ],
+    [
+     115.0,
+     0.0622408
+    ],
+    [
+     116.25,
+     0.068604875
+    ],
+    [
+     117.5,
+     0.07496894999999999
+    ],
+    [
+     118.75,
+     0.081333025
+    ],
+    [
+     120.0,
+     0.0876971
+    ],
+    [
+     121.25,
+     0.100371825
+    ],
+    [
+     122.5,
+     0.11304655
+    ],
+    [
+     123.75,
+     0.125721275
+    ],
+    [
+     125.0,
+     0.138396
+    ],
+    [
+     126.25,
+     0.15024425
+    ],
+    [
+     127.5,
+     0.1620925
+    ],
+    [
+     128.75,
+     0.17394075
+    ],
+    [
+     130.0,
+     0.185789
+    ],
+    [
+     131.25,
+     0.20122325000000002
+    ],
+    [
+     132.5,
+     0.2166575
+    ],
+    [
+     133.75,
+     0.23209174999999999
+    ],
+    [
+     135.0,
+     0.247526
+    ],
+    [
+     136.25,
+     0.26383425
+    ],
+    [
+     137.5,
+     0.2801425
+    ],
+    [
+     138.75,
+     0.29645075
+    ],
+    [
+     140.0,
+     0.312759
+    ],
+    [
+     141.25,
+     0.32927850000000003
+    ],
+    [
+     142.5,
+     0.345798
+    ],
+    [
+     143.75,
+     0.36231749999999996
+    ],
+    [
+     145.0,
+     0.378837
+    ],
+    [
+     146.25,
+     0.3973795
+    ],
+    [
+     147.5,
+     0.415922
+    ],
+    [
+     148.75,
+     0.4344645
+    ],
+    [
+     150.0,
+     0.453007
+    ],
+    [
+     151.25,
+     0.4738775
+    ],
+    [
+     152.5,
+     0.49474799999999997
+    ],
+    [
+     153.75,
+     0.5156185
+    ],
+    [
+     155.0,
+     0.536489
+    ],
+    [
+     156.25,
+     0.556379
+    ],
+    [
+     157.5,
+     0.5762689999999999
+    ],
+    [
+     158.75,
+     0.596159
+    ],
+    [
+     160.0,
+     0.616049
+    ],
+    [
+     161.25,
+     0.6252865
+    ],
+    [
+     162.5,
+     0.634524
+    ],
+    [
+     163.75,
+     0.6437615
+    ],
+    [
+     165.0,
+     0.652999
+    ],
+    [
+     166.25,
+     0.6640667499999999
+    ],
+    [
+     167.5,
+     0.6751345
+    ],
+    [
+     168.75,
+     0.68620225
+    ],
+    [
+     170.0,
+     0.69727
+    ],
+    [
+     171.25,
+     0.71317225
+    ],
+    [
+     172.5,
+     0.7290745
+    ],
+    [
+     173.75,
+     0.74497675
+    ],
+    [
+     175.0,
+     0.760879
+    ],
+    [
+     176.25,
+     0.7730699999999999
+    ],
+    [
+     177.5,
+     0.785261
+    ],
+    [
+     178.75,
+     0.797452
+    ],
+    [
+     180.0,
+     0.809643
+    ],
+    [
+     181.25,
+     0.815855
+    ],
+    [
+     182.5,
+     0.822067
+    ],
+    [
+     183.75,
+     0.828279
+    ],
+    [
+     185.0,
+     0.834491
+    ],
+    [
+     186.25,
+     0.838132
+    ],
+    [
+     187.5,
+     0.841773
+    ],
+    [
+     188.75,
+     0.845414
+    ],
+    [
+     190.0,
+     0.849055
+    ],
+    [
+     191.25,
+     0.8519995
+    ],
+    [
+     192.5,
+     0.8549439999999999
+    ],
+    [
+     193.75,
+     0.8578884999999999
+    ],
+    [
+     195.0,
+     0.860833
+    ],
+    [
+     196.25,
+     0.86363225
+    ],
+    [
+     197.5,
+     0.8664315
+    ],
+    [
+     198.75,
+     0.8692307499999999
+    ],
+    [
+     200.0,
+     0.87203
+    ],
+    [
+     201.25,
+     0.8729335
+    ],
+    [
+     202.5,
+     0.873837
+    ],
+    [
+     203.75,
+     0.8747404999999999
+    ],
+    [
+     205.0,
+     0.875644
+    ],
+    [
+     206.25,
+     0.8764065
+    ],
+    [
+     207.5,
+     0.877169
+    ],
+    [
+     208.75,
+     0.8779315
+    ],
+    [
+     210.0,
+     0.878694
+    ],
+    [
+     211.25,
+     0.879038
+    ],
+    [
+     212.5,
+     0.879382
+    ],
+    [
+     213.75,
+     0.879726
+    ],
+    [
+     215.0,
+     0.88007
+    ],
+    [
+     216.25,
+     0.88047425
+    ],
+    [
+     217.5,
+     0.8808785
+    ],
+    [
+     218.75,
+     0.88128275
+    ],
+    [
+     220.0,
+     0.881687
+    ],
+    [
+     221.25,
+     0.8817285
+    ],
+    [
+     222.5,
+     0.8817699999999999
+    ],
+    [
+     223.75,
+     0.8818115
+    ],
+    [
+     225.0,
+     0.881853
+    ],
+    [
+     226.25,
+     0.88184575
+    ],
+    [
+     227.5,
+     0.8818385
+    ],
+    [
+     228.75,
+     0.8818312500000001
+    ],
+    [
+     230.0,
+     0.881824
+    ],
+    [
+     231.25,
+     0.88181425
+    ],
+    [
+     232.5,
+     0.8818045000000001
+    ],
+    [
+     233.75,
+     0.8817947500000001
+    ],
+    [
+     235.0,
+     0.881785
+    ],
+    [
+     236.25,
+     0.8819965000000001
+    ],
+    [
+     237.5,
+     0.8822080000000001
+    ],
+    [
+     238.75,
+     0.8824195
+    ],
+    [
+     240.0,
+     0.882631
+    ],
+    [
+     241.25,
+     0.8827417500000001
+    ],
+    [
+     242.5,
+     0.8828525
+    ],
+    [
+     243.75,
+     0.88296325
+    ],
+    [
+     245.0,
+     0.883074
+    ],
+    [
+     246.25,
+     0.883074
+    ],
+    [
+     247.5,
+     0.883074
+    ],
+    [
+     248.75,
+     0.883074
+    ],
+    [
+     250.0,
+     0.883074
+    ]
+   ]
+  }
+ ],
+ "envelope": null,
+ "scenario_note": null,
+ "known_answers": [
+  {
+   "x": 50.0,
+   "y": 0.0,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_50MPH"
+  },
+  {
+   "x": 55.0,
+   "y": 0.0,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_55MPH"
+  },
+  {
+   "x": 60.0,
+   "y": 6.67094e-05,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_60MPH"
+  },
+  {
+   "x": 65.0,
+   "y": 0.000112089,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_65MPH"
+  },
+  {
+   "x": 70.0,
+   "y": 0.000197623,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_70MPH"
+  },
+  {
+   "x": 75.0,
+   "y": 0.000323904,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_75MPH"
+  },
+  {
+   "x": 80.0,
+   "y": 0.00055593,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_80MPH"
+  },
+  {
+   "x": 85.0,
+   "y": 0.00110471,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_85MPH"
+  },
+  {
+   "x": 90.0,
+   "y": 0.00230687,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_90MPH"
+  },
+  {
+   "x": 95.0,
+   "y": 0.00498921,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_95MPH"
+  },
+  {
+   "x": 100.0,
+   "y": 0.00986765,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_100MPH"
+  },
+  {
+   "x": 105.0,
+   "y": 0.0202898,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_105MPH"
+  },
+  {
+   "x": 110.0,
+   "y": 0.0346281,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_110MPH"
+  },
+  {
+   "x": 115.0,
+   "y": 0.0622408,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_115MPH"
+  },
+  {
+   "x": 120.0,
+   "y": 0.0876971,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_120MPH"
+  },
+  {
+   "x": 125.0,
+   "y": 0.138396,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_125MPH"
+  },
+  {
+   "x": 130.0,
+   "y": 0.185789,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_130MPH"
+  },
+  {
+   "x": 135.0,
+   "y": 0.247526,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_135MPH"
+  },
+  {
+   "x": 140.0,
+   "y": 0.312759,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_140MPH"
+  },
+  {
+   "x": 145.0,
+   "y": 0.378837,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_145MPH"
+  },
+  {
+   "x": 150.0,
+   "y": 0.453007,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_150MPH"
+  },
+  {
+   "x": 155.0,
+   "y": 0.536489,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_155MPH"
+  },
+  {
+   "x": 160.0,
+   "y": 0.616049,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_160MPH"
+  },
+  {
+   "x": 165.0,
+   "y": 0.652999,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_165MPH"
+  },
+  {
+   "x": 170.0,
+   "y": 0.69727,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_170MPH"
+  },
+  {
+   "x": 175.0,
+   "y": 0.760879,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_175MPH"
+  },
+  {
+   "x": 180.0,
+   "y": 0.809643,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_180MPH"
+  },
+  {
+   "x": 185.0,
+   "y": 0.834491,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_185MPH"
+  },
+  {
+   "x": 190.0,
+   "y": 0.849055,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_190MPH"
+  },
+  {
+   "x": 195.0,
+   "y": 0.860833,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_195MPH"
+  },
+  {
+   "x": 200.0,
+   "y": 0.87203,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_200MPH"
+  },
+  {
+   "x": 205.0,
+   "y": 0.875644,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_205MPH"
+  },
+  {
+   "x": 210.0,
+   "y": 0.878694,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_210MPH"
+  },
+  {
+   "x": 215.0,
+   "y": 0.88007,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_215MPH"
+  },
+  {
+   "x": 220.0,
+   "y": 0.881687,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_220MPH"
+  },
+  {
+   "x": 225.0,
+   "y": 0.881853,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_225MPH"
+  },
+  {
+   "x": 230.0,
+   "y": 0.881824,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_230MPH"
+  },
+  {
+   "x": 235.0,
+   "y": 0.881785,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_235MPH"
+  },
+  {
+   "x": 240.0,
+   "y": 0.882631,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_240MPH"
+  },
+  {
+   "x": 245.0,
+   "y": 0.883074,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_245MPH"
+  },
+  {
+   "x": 250.0,
+   "y": 0.883074,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_KNOT_250MPH"
+  },
+  {
+   "x": 122.5,
+   "y": 0.11304655,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_BETWEEN_122.5MPH"
+  },
+  {
+   "x": 61.4,
+   "y": 7.941568799999999e-05,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_BETWEEN_61.4MPH"
+  },
+  {
+   "x": 228.8,
+   "y": 0.88183096,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_BETWEEN_228.8MPH"
+  },
+  {
+   "x": 40.0,
+   "y": 0.0,
+   "test": "TCRE_COM_HAZUS_SECBL_OPEN_BELOW_RANGE_ZERO"
+  }
+ ],
+ "source_points": [],
+ "drawn": true,
+ "no_evaluator_sentence": null,
+ "evaluator": {
+  "module": "scripts/reference_helpers/tropical_cyclone_wind_real_estate_curve_eval.py",
+  "function": "evaluate_damage_call",
+  "note": "request template from the cell's known-answer tests; the hazard axis field varied over the record's valid range"
+ },
+ "tiers": {
+  "shape": "T2",
+  "shape_basis": "Hazus SECBL building-loss rows",
+  "cost": "T2",
+  "cost_basis": "Hazus loss ratio of replacement value"
+ },
+ "row_notes": [
+  {
+   "type": "not_a_hazard_profile",
+   "text": "Kept from v0.1; not a current Hazard profile"
+  }
+ ],
+ "selected_by": [],
+ "variants": "terrain x 5",
+ "notes": [],
+ "title": "Hurricane wind × Real estate",
+ "asset": {
+  "slug": "real_estate",
+  "label": "Real estate"
+ },
+ "hazard": {
+  "slug": "hurricane_wind",
+  "label": "Hurricane wind"
+ },
+ "status": "proposal",
+ "rail": {
+  "exists": {
+   "status": "proposal",
+   "mark": "▢",
+   "label": "PROPOSAL",
+   "qualifier": "screening"
+  },
+  "evidence": {
+   "shape": "T2",
+   "cost": "T2",
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   }
+  },
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table and decision log",
+   "entry_read_kind": "agent",
+   "release_review": "not yet reviewed",
+   "release_review_code": "not_yet_reviewed",
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release not yet reviewed"
+  }
+ },
+ "parameters_rows": [],
+ "sources_for_curve": [],
+ "occurrence": null,
+ "review": {
+  "entry_read_on": "2026-10-19",
+  "entry_read_by": "Agent-drafted, from the cell's own tier table and decision log",
+  "entry_read_kind": "agent",
+  "release_review": "not yet reviewed",
+  "release_review_code": "not_yet_reviewed",
+  "review": null,
+  "tone": "neutral",
+  "label": "entry agent-read 2026-10-19 · release not yet reviewed"
+ },
+ "summary": "Retail: piecewise linear on peak 3-second gust at 10 m in open terrain; shape T2, cost T2.",
+ "versions": [],
+ "data_path": "curves/tropical_cyclone_wind_real_estate/TCRE_COM_HAZUS_SECBL_OPEN@model_v0_2__docs_r1.json"
+}

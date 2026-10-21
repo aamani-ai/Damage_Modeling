@@ -1,0 +1,218 @@
+{
+ "asset": {
+  "slug": "bess",
+  "label": "Battery storage",
+  "catalogue": "Battery storage",
+  "noun": "batteries"
+ },
+ "hazard": {
+  "slug": "hail",
+  "label": "Hail",
+  "catalogue": "Hail",
+  "twin": [
+   "hail"
+  ],
+  "entry_tokens": [
+   "hail"
+  ],
+  "outside_the_five": false,
+  "effect": "damage"
+ },
+ "title": "Hail × Battery storage",
+ "register": {
+  "path": "docs/evidence/occurrence/bess/hail.json",
+  "sha256": "92c78e1b445872410e3f9eabce63c8278ab8430a6779186fa6cc42d848dac44f"
+ },
+ "question": "Has hail physically damaged a battery storage subsystem in the field, outside a test?",
+ "effect": "damage",
+ "search_log": "docs/evidence/occurrence/bess/hail.md",
+ "last_searched": null,
+ "rule": "found = one or more direct reports · adjacent = neighbouring case only · none_after_search = a logged search in at least two sources that could see it · not_searched = the default, not a finding",
+ "summary": "Has hail physically damaged a battery storage subsystem in the field? Not searched — nobody has looked for field reports yet, for any of the 5 value buckets.",
+ "surfaces": [
+  {
+   "id": "epri_bess_failure_db",
+   "name": "EPRI BESS Failure Incident Database",
+   "can_see_hazard": false,
+   "public": true,
+   "note": "Excludes exogenous causes by definition (EPRI white paper, May 2024); internal failures only.",
+   "searched": null,
+   "queries": [],
+   "hits": null
+  },
+  {
+   "id": "noaa_storm_events",
+   "name": "NOAA Storm Events Database",
+   "can_see_hazard": true,
+   "public": true,
+   "note": "Narrative keyword search by county and event type.",
+   "searched": null,
+   "queries": [],
+   "hits": null
+  },
+  {
+   "id": "nite_accident_reports",
+   "name": "NITE accident reports (Japan)",
+   "can_see_hazard": true,
+   "public": true,
+   "note": "Statutory reports; CSV download.",
+   "searched": null,
+   "queries": [],
+   "hits": null
+  },
+  {
+   "id": "insurer_broker_notes",
+   "name": "Insurer and broker loss notes",
+   "can_see_hazard": true,
+   "public": "partly",
+   "note": "Gated summaries; cite the note, not the claim.",
+   "searched": null,
+   "queries": [],
+   "hits": null
+  },
+  {
+   "id": "news_oem_site_notices",
+   "name": "News, OEM and site notices",
+   "can_see_hazard": true,
+   "public": true,
+   "note": "Date, place, what broke, intensity if stated.",
+   "searched": null,
+   "queries": [],
+   "hits": null
+  }
+ ],
+ "buckets": [
+  {
+   "key": "battery_enclosures",
+   "label": "Battery enclosures",
+   "value_usd": 84000000.0,
+   "state": "not_searched",
+   "mark": "?",
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "reports": [],
+   "twin_lead": {
+    "level": "L",
+    "nodes": [
+     {
+      "node": "be_enc",
+      "name": "Enclosure Shell",
+      "level": 1,
+      "why": "Panel denting"
+     },
+     {
+      "node": "be_hvac",
+      "name": "Chiller & Liquid Loop",
+      "level": 1,
+      "why": "Condenser coil damage"
+     },
+     {
+      "node": "be_vent",
+      "name": "Explosion Venting",
+      "level": 1,
+      "why": "Panel damage"
+     }
+    ]
+   }
+  },
+  {
+   "key": "pcs",
+   "label": "PCS",
+   "value_usd": 10400000,
+   "state": "not_searched",
+   "mark": "?",
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "reports": [],
+   "twin_lead": {
+    "level": null,
+    "nodes": []
+   }
+  },
+  {
+   "key": "electrical_balance",
+   "label": "MV, collection and controls",
+   "value_usd": 13200000,
+   "state": "not_searched",
+   "mark": "?",
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "reports": [],
+   "twin_lead": {
+    "level": null,
+    "nodes": []
+   }
+  },
+  {
+   "key": "civil_works",
+   "label": "Civil works",
+   "value_usd": 1600000,
+   "state": "not_searched",
+   "mark": "?",
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "reports": [],
+   "twin_lead": {
+    "level": null,
+    "nodes": []
+   }
+  },
+  {
+   "key": "fieldwork",
+   "label": "Fieldwork",
+   "value_usd": 600000,
+   "state": "not_searched",
+   "mark": "?",
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "reports": [],
+   "twin_lead": {
+    "level": null,
+    "nodes": []
+   }
+  }
+ ],
+ "left_out": [],
+ "provenance": {
+  "twin": {
+   "repository": "aamani-ai/infrasure-digital-twin",
+   "file": "public/engine/bess-data.js",
+   "commit": "d01abd0",
+   "sha256": "ade70e024aae14cafa09beb2dc41482feb2f2c644a740d75a09e9d768c2e8ea9",
+   "meaning": "per-node design exposure, level 1 Low · 2 Medium · 3 High; a lead, not evidence"
+  },
+  "crosswalk": {
+   "path": "Hazard_modeling/docs/plans/_cross_cutting/bess_conus/twin_crosswalk.csv",
+   "sha256": "7e96ff9a6f48db73bb35ccdf76daa5a41a418140472d127b7e7253e25fbdd30d",
+   "rows": 58
+  }
+ },
+ "entry": {
+  "entry_id": "hail_bess",
+  "status": "gap",
+  "title": "Hail × Battery storage",
+  "rail": {
+   "exists": {
+    "status": "gap",
+    "mark": "┈",
+    "label": "GAP",
+    "qualifier": null
+   },
+   "evidence": {
+    "shape": "–",
+    "cost": "–",
+    "occurrence": {
+     "mark": "?",
+     "label": "not searched"
+    }
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the BESS plan and decision log",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   }
+  }
+ },
+ "state_overall": "not_searched",
+ "suggested_next": "search first"
+}

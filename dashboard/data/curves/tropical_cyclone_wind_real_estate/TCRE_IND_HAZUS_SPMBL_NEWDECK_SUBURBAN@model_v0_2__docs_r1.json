@@ -1,0 +1,1359 @@
+{
+ "curve_id": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN",
+ "entry_id": "tropical_cyclone_wind_real_estate",
+ "damage_code_id": "TROPICAL_CYCLONE_WIND_REAL_ESTATE_HAZUS_SCREENING_V0_2",
+ "version_key": "model_v0_2__docs_r1",
+ "artifact_sha256": "99487ff5812e6b1017eeaaeea14d469bcb15ae2265e9d6cf107ce5ca41c85753",
+ "failure_unit_id": "TCRE_BUILDING_STRUCTURE",
+ "subsystem": "BUILDING",
+ "component": "BUILDING_STRUCTURE_ASSEMBLY",
+ "treatment": "primary_nonzero",
+ "part": "Warehouse",
+ "pathway_id": "tropical_cyclone_wind",
+ "curve_form": "piecewise_linear",
+ "x_axis_id": "tc_peak_gust_3s_10m_mph",
+ "y_axis": "failure_unit_damage_ratio",
+ "parameters": {
+  "points": [
+   [
+    50.0,
+    0.0
+   ],
+   [
+    55.0,
+    0.0
+   ],
+   [
+    60.0,
+    8.50846e-07
+   ],
+   [
+    65.0,
+    8.86634e-06
+   ],
+   [
+    70.0,
+    5.81953e-05
+   ],
+   [
+    75.0,
+    0.000240758
+   ],
+   [
+    80.0,
+    0.000760103
+   ],
+   [
+    85.0,
+    0.00194014
+   ],
+   [
+    90.0,
+    0.00403032
+   ],
+   [
+    95.0,
+    0.00762328
+   ],
+   [
+    100.0,
+    0.0121708
+   ],
+   [
+    105.0,
+    0.0193037
+   ],
+   [
+    110.0,
+    0.0273747
+   ],
+   [
+    115.0,
+    0.0394061
+   ],
+   [
+    120.0,
+    0.0519036
+   ],
+   [
+    125.0,
+    0.0788741
+   ],
+   [
+    130.0,
+    0.127056
+   ],
+   [
+    135.0,
+    0.205674
+   ],
+   [
+    140.0,
+    0.315727
+   ],
+   [
+    145.0,
+    0.439398
+   ],
+   [
+    150.0,
+    0.57912
+   ],
+   [
+    155.0,
+    0.711762
+   ],
+   [
+    160.0,
+    0.816383
+   ],
+   [
+    165.0,
+    0.887394
+   ],
+   [
+    170.0,
+    0.940004
+   ],
+   [
+    175.0,
+    0.964823
+   ],
+   [
+    180.0,
+    0.985353
+   ],
+   [
+    185.0,
+    0.993419
+   ],
+   [
+    190.0,
+    0.998407
+   ],
+   [
+    195.0,
+    0.999419
+   ],
+   [
+    200.0,
+    0.999372
+   ],
+   [
+    205.0,
+    0.999791
+   ],
+   [
+    210.0,
+    0.999895
+   ],
+   [
+    215.0,
+    1.0
+   ],
+   [
+    220.0,
+    1.0
+   ],
+   [
+    225.0,
+    1.0
+   ],
+   [
+    230.0,
+    1.0
+   ],
+   [
+    235.0,
+    1.0
+   ],
+   [
+    240.0,
+    1.0
+   ],
+   [
+    245.0,
+    1.0
+   ],
+   [
+    250.0,
+    1.0
+   ]
+  ]
+ },
+ "record_extra": {
+  "valid_range": [
+   50.0,
+   250.0
+  ],
+  "interpolation_policy": "linear_between_source_knots",
+  "extrapolation_policy": "0 <= gust < 50 mph returns 0 (the source is 0 at 50 mph); above 250 mph withholds; no clamp",
+  "selector_match": {
+   "reference_building_id": "RE_IND_WAREHOUSE",
+   "hazus_terrain_class": "suburban"
+  },
+  "source_parameter_refs": [
+   "TCRE-S001#Section_2.1",
+   "TCRE-S002#huDamLossFun:wbID=1730;TERRAINID=3;DamLossDescID=5",
+   "TCRE-S003#loss_repair:S.PMB.L.0.god.std.35"
+  ],
+  "metadata_flags": [
+   "HAZUS_HURRICANE_BUILDING_LOSS_TABLE",
+   "HAZUS_6_1_EXTRACT_VERIFIED_AGAINST_5_1_COPY",
+   "PROFILE_WIND_CHARACTERISTICS_WHERE_STATED",
+   "WAREHOUSE_FLOOR_AREA_100000_FT2_PROFILE",
+   "LARGE_DOORS_NOT_A_HAZUS_SPMB_CHARACTERISTIC",
+   "HAZUS_SPMB_FAMILY_ANOMALY_NOT_IN_SELECTED_ROW",
+   "HAZUS_SIMULATION_NOISE_SMALL_DIPS"
+  ]
+ },
+ "axis": {
+  "id": "TC_PEAK_GUST_3S_10M_OPEN_TERRAIN_MPH",
+  "label": "peak 3-second gust at 10 m in open terrain",
+  "unit": "mph",
+  "input_field": "tc_peak_gust_3s_10m_mph",
+  "valid_range": [
+   50.0,
+   250.0
+  ],
+  "kind": "continuous",
+  "label_from_id": true
+ },
+ "domain": [
+  50.0,
+  250.0
+ ],
+ "withheld_zones": [],
+ "knots": [
+  [
+   50.0,
+   0.0
+  ],
+  [
+   55.0,
+   0.0
+  ],
+  [
+   60.0,
+   8.50846e-07
+  ],
+  [
+   65.0,
+   8.86634e-06
+  ],
+  [
+   70.0,
+   5.81953e-05
+  ],
+  [
+   75.0,
+   0.000240758
+  ],
+  [
+   80.0,
+   0.000760103
+  ],
+  [
+   85.0,
+   0.00194014
+  ],
+  [
+   90.0,
+   0.00403032
+  ],
+  [
+   95.0,
+   0.00762328
+  ],
+  [
+   100.0,
+   0.0121708
+  ],
+  [
+   105.0,
+   0.0193037
+  ],
+  [
+   110.0,
+   0.0273747
+  ],
+  [
+   115.0,
+   0.0394061
+  ],
+  [
+   120.0,
+   0.0519036
+  ],
+  [
+   125.0,
+   0.0788741
+  ],
+  [
+   130.0,
+   0.127056
+  ],
+  [
+   135.0,
+   0.205674
+  ],
+  [
+   140.0,
+   0.315727
+  ],
+  [
+   145.0,
+   0.439398
+  ],
+  [
+   150.0,
+   0.57912
+  ],
+  [
+   155.0,
+   0.711762
+  ],
+  [
+   160.0,
+   0.816383
+  ],
+  [
+   165.0,
+   0.887394
+  ],
+  [
+   170.0,
+   0.940004
+  ],
+  [
+   175.0,
+   0.964823
+  ],
+  [
+   180.0,
+   0.985353
+  ],
+  [
+   185.0,
+   0.993419
+  ],
+  [
+   190.0,
+   0.998407
+  ],
+  [
+   195.0,
+   0.999419
+  ],
+  [
+   200.0,
+   0.999372
+  ],
+  [
+   205.0,
+   0.999791
+  ],
+  [
+   210.0,
+   0.999895
+  ],
+  [
+   215.0,
+   1.0
+  ],
+  [
+   220.0,
+   1.0
+  ],
+  [
+   225.0,
+   1.0
+  ],
+  [
+   230.0,
+   1.0
+  ],
+  [
+   235.0,
+   1.0
+  ],
+  [
+   240.0,
+   1.0
+  ],
+  [
+   245.0,
+   1.0
+  ],
+  [
+   250.0,
+   1.0
+  ]
+ ],
+ "series": [
+  {
+   "label": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN",
+   "kind": "line",
+   "points": [
+    [
+     50.0,
+     0.0
+    ],
+    [
+     51.25,
+     0.0
+    ],
+    [
+     52.5,
+     0.0
+    ],
+    [
+     53.75,
+     0.0
+    ],
+    [
+     55.0,
+     0.0
+    ],
+    [
+     56.25,
+     2.1271149999999997e-07
+    ],
+    [
+     57.5,
+     4.2542299999999993e-07
+    ],
+    [
+     58.75,
+     6.381345e-07
+    ],
+    [
+     60.0,
+     8.508459999999999e-07
+    ],
+    [
+     61.25,
+     2.8547195e-06
+    ],
+    [
+     62.5,
+     4.858593e-06
+    ],
+    [
+     63.75,
+     6.862466499999999e-06
+    ],
+    [
+     65.0,
+     8.86634e-06
+    ],
+    [
+     66.25,
+     2.1198580000000003e-05
+    ],
+    [
+     67.5,
+     3.353082e-05
+    ],
+    [
+     68.75,
+     4.5863059999999995e-05
+    ],
+    [
+     70.0,
+     5.81953e-05
+    ],
+    [
+     71.25,
+     0.00010383597499999999
+    ],
+    [
+     72.5,
+     0.00014947665
+    ],
+    [
+     73.75,
+     0.000195117325
+    ],
+    [
+     75.0,
+     0.000240758
+    ],
+    [
+     76.25,
+     0.00037059425
+    ],
+    [
+     77.5,
+     0.0005004305
+    ],
+    [
+     78.75,
+     0.00063026675
+    ],
+    [
+     80.0,
+     0.000760103
+    ],
+    [
+     81.25,
+     0.00105511225
+    ],
+    [
+     82.5,
+     0.0013501214999999999
+    ],
+    [
+     83.75,
+     0.00164513075
+    ],
+    [
+     85.0,
+     0.00194014
+    ],
+    [
+     86.25,
+     0.002462685
+    ],
+    [
+     87.5,
+     0.00298523
+    ],
+    [
+     88.75,
+     0.0035077750000000003
+    ],
+    [
+     90.0,
+     0.00403032
+    ],
+    [
+     91.25,
+     0.00492856
+    ],
+    [
+     92.5,
+     0.0058268
+    ],
+    [
+     93.75,
+     0.00672504
+    ],
+    [
+     95.0,
+     0.00762328
+    ],
+    [
+     96.25,
+     0.00876016
+    ],
+    [
+     97.5,
+     0.00989704
+    ],
+    [
+     98.75,
+     0.011033920000000001
+    ],
+    [
+     100.0,
+     0.0121708
+    ],
+    [
+     101.25,
+     0.013954025
+    ],
+    [
+     102.5,
+     0.01573725
+    ],
+    [
+     103.75,
+     0.017520475
+    ],
+    [
+     105.0,
+     0.0193037
+    ],
+    [
+     106.25,
+     0.02132145
+    ],
+    [
+     107.5,
+     0.023339199999999997
+    ],
+    [
+     108.75,
+     0.02535695
+    ],
+    [
+     110.0,
+     0.0273747
+    ],
+    [
+     111.25,
+     0.030382549999999998
+    ],
+    [
+     112.5,
+     0.0333904
+    ],
+    [
+     113.75,
+     0.03639825
+    ],
+    [
+     115.0,
+     0.0394061
+    ],
+    [
+     116.25,
+     0.042530475
+    ],
+    [
+     117.5,
+     0.04565485
+    ],
+    [
+     118.75,
+     0.048779225
+    ],
+    [
+     120.0,
+     0.0519036
+    ],
+    [
+     121.25,
+     0.058646225
+    ],
+    [
+     122.5,
+     0.06538885
+    ],
+    [
+     123.75,
+     0.072131475
+    ],
+    [
+     125.0,
+     0.0788741
+    ],
+    [
+     126.25,
+     0.090919575
+    ],
+    [
+     127.5,
+     0.10296505
+    ],
+    [
+     128.75,
+     0.115010525
+    ],
+    [
+     130.0,
+     0.127056
+    ],
+    [
+     131.25,
+     0.1467105
+    ],
+    [
+     132.5,
+     0.16636499999999999
+    ],
+    [
+     133.75,
+     0.1860195
+    ],
+    [
+     135.0,
+     0.205674
+    ],
+    [
+     136.25,
+     0.23318724999999998
+    ],
+    [
+     137.5,
+     0.2607005
+    ],
+    [
+     138.75,
+     0.28821375
+    ],
+    [
+     140.0,
+     0.315727
+    ],
+    [
+     141.25,
+     0.34664475
+    ],
+    [
+     142.5,
+     0.3775625
+    ],
+    [
+     143.75,
+     0.40848025
+    ],
+    [
+     145.0,
+     0.439398
+    ],
+    [
+     146.25,
+     0.4743285
+    ],
+    [
+     147.5,
+     0.509259
+    ],
+    [
+     148.75,
+     0.5441895
+    ],
+    [
+     150.0,
+     0.57912
+    ],
+    [
+     151.25,
+     0.6122805
+    ],
+    [
+     152.5,
+     0.6454409999999999
+    ],
+    [
+     153.75,
+     0.6786015
+    ],
+    [
+     155.0,
+     0.711762
+    ],
+    [
+     156.25,
+     0.73791725
+    ],
+    [
+     157.5,
+     0.7640724999999999
+    ],
+    [
+     158.75,
+     0.79022775
+    ],
+    [
+     160.0,
+     0.816383
+    ],
+    [
+     161.25,
+     0.83413575
+    ],
+    [
+     162.5,
+     0.8518885
+    ],
+    [
+     163.75,
+     0.86964125
+    ],
+    [
+     165.0,
+     0.887394
+    ],
+    [
+     166.25,
+     0.9005465
+    ],
+    [
+     167.5,
+     0.913699
+    ],
+    [
+     168.75,
+     0.9268514999999999
+    ],
+    [
+     170.0,
+     0.940004
+    ],
+    [
+     171.25,
+     0.9462087499999999
+    ],
+    [
+     172.5,
+     0.9524135
+    ],
+    [
+     173.75,
+     0.95861825
+    ],
+    [
+     175.0,
+     0.964823
+    ],
+    [
+     176.25,
+     0.9699555
+    ],
+    [
+     177.5,
+     0.975088
+    ],
+    [
+     178.75,
+     0.9802205
+    ],
+    [
+     180.0,
+     0.985353
+    ],
+    [
+     181.25,
+     0.9873695
+    ],
+    [
+     182.5,
+     0.9893860000000001
+    ],
+    [
+     183.75,
+     0.9914025000000001
+    ],
+    [
+     185.0,
+     0.993419
+    ],
+    [
+     186.25,
+     0.994666
+    ],
+    [
+     187.5,
+     0.995913
+    ],
+    [
+     188.75,
+     0.99716
+    ],
+    [
+     190.0,
+     0.998407
+    ],
+    [
+     191.25,
+     0.99866
+    ],
+    [
+     192.5,
+     0.9989129999999999
+    ],
+    [
+     193.75,
+     0.999166
+    ],
+    [
+     195.0,
+     0.999419
+    ],
+    [
+     196.25,
+     0.99940725
+    ],
+    [
+     197.5,
+     0.9993955
+    ],
+    [
+     198.75,
+     0.99938375
+    ],
+    [
+     200.0,
+     0.999372
+    ],
+    [
+     201.25,
+     0.99947675
+    ],
+    [
+     202.5,
+     0.9995815
+    ],
+    [
+     203.75,
+     0.99968625
+    ],
+    [
+     205.0,
+     0.999791
+    ],
+    [
+     206.25,
+     0.999817
+    ],
+    [
+     207.5,
+     0.999843
+    ],
+    [
+     208.75,
+     0.999869
+    ],
+    [
+     210.0,
+     0.999895
+    ],
+    [
+     211.25,
+     0.99992125
+    ],
+    [
+     212.5,
+     0.9999475
+    ],
+    [
+     213.75,
+     0.99997375
+    ],
+    [
+     215.0,
+     1.0
+    ],
+    [
+     216.25,
+     1.0
+    ],
+    [
+     217.5,
+     1.0
+    ],
+    [
+     218.75,
+     1.0
+    ],
+    [
+     220.0,
+     1.0
+    ],
+    [
+     221.25,
+     1.0
+    ],
+    [
+     222.5,
+     1.0
+    ],
+    [
+     223.75,
+     1.0
+    ],
+    [
+     225.0,
+     1.0
+    ],
+    [
+     226.25,
+     1.0
+    ],
+    [
+     227.5,
+     1.0
+    ],
+    [
+     228.75,
+     1.0
+    ],
+    [
+     230.0,
+     1.0
+    ],
+    [
+     231.25,
+     1.0
+    ],
+    [
+     232.5,
+     1.0
+    ],
+    [
+     233.75,
+     1.0
+    ],
+    [
+     235.0,
+     1.0
+    ],
+    [
+     236.25,
+     1.0
+    ],
+    [
+     237.5,
+     1.0
+    ],
+    [
+     238.75,
+     1.0
+    ],
+    [
+     240.0,
+     1.0
+    ],
+    [
+     241.25,
+     1.0
+    ],
+    [
+     242.5,
+     1.0
+    ],
+    [
+     243.75,
+     1.0
+    ],
+    [
+     245.0,
+     1.0
+    ],
+    [
+     246.25,
+     1.0
+    ],
+    [
+     247.5,
+     1.0
+    ],
+    [
+     248.75,
+     1.0
+    ],
+    [
+     250.0,
+     1.0
+    ]
+   ]
+  }
+ ],
+ "envelope": null,
+ "scenario_note": null,
+ "known_answers": [
+  {
+   "x": 50.0,
+   "y": 0.0,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_50MPH"
+  },
+  {
+   "x": 55.0,
+   "y": 0.0,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_55MPH"
+  },
+  {
+   "x": 60.0,
+   "y": 8.508459999999999e-07,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_60MPH"
+  },
+  {
+   "x": 65.0,
+   "y": 8.86634e-06,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_65MPH"
+  },
+  {
+   "x": 70.0,
+   "y": 5.81953e-05,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_70MPH"
+  },
+  {
+   "x": 75.0,
+   "y": 0.000240758,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_75MPH"
+  },
+  {
+   "x": 80.0,
+   "y": 0.000760103,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_80MPH"
+  },
+  {
+   "x": 85.0,
+   "y": 0.00194014,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_85MPH"
+  },
+  {
+   "x": 90.0,
+   "y": 0.00403032,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_90MPH"
+  },
+  {
+   "x": 95.0,
+   "y": 0.00762328,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_95MPH"
+  },
+  {
+   "x": 100.0,
+   "y": 0.0121708,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_100MPH"
+  },
+  {
+   "x": 105.0,
+   "y": 0.0193037,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_105MPH"
+  },
+  {
+   "x": 110.0,
+   "y": 0.0273747,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_110MPH"
+  },
+  {
+   "x": 115.0,
+   "y": 0.0394061,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_115MPH"
+  },
+  {
+   "x": 120.0,
+   "y": 0.0519036,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_120MPH"
+  },
+  {
+   "x": 125.0,
+   "y": 0.0788741,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_125MPH"
+  },
+  {
+   "x": 130.0,
+   "y": 0.127056,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_130MPH"
+  },
+  {
+   "x": 135.0,
+   "y": 0.205674,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_135MPH"
+  },
+  {
+   "x": 140.0,
+   "y": 0.315727,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_140MPH"
+  },
+  {
+   "x": 145.0,
+   "y": 0.439398,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_145MPH"
+  },
+  {
+   "x": 150.0,
+   "y": 0.57912,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_150MPH"
+  },
+  {
+   "x": 155.0,
+   "y": 0.711762,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_155MPH"
+  },
+  {
+   "x": 160.0,
+   "y": 0.816383,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_160MPH"
+  },
+  {
+   "x": 165.0,
+   "y": 0.887394,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_165MPH"
+  },
+  {
+   "x": 170.0,
+   "y": 0.940004,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_170MPH"
+  },
+  {
+   "x": 175.0,
+   "y": 0.964823,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_175MPH"
+  },
+  {
+   "x": 180.0,
+   "y": 0.985353,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_180MPH"
+  },
+  {
+   "x": 185.0,
+   "y": 0.993419,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_185MPH"
+  },
+  {
+   "x": 190.0,
+   "y": 0.998407,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_190MPH"
+  },
+  {
+   "x": 195.0,
+   "y": 0.999419,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_195MPH"
+  },
+  {
+   "x": 200.0,
+   "y": 0.999372,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_200MPH"
+  },
+  {
+   "x": 205.0,
+   "y": 0.999791,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_205MPH"
+  },
+  {
+   "x": 210.0,
+   "y": 0.999895,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_210MPH"
+  },
+  {
+   "x": 215.0,
+   "y": 1.0,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_215MPH"
+  },
+  {
+   "x": 220.0,
+   "y": 1.0,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_220MPH"
+  },
+  {
+   "x": 225.0,
+   "y": 1.0,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_225MPH"
+  },
+  {
+   "x": 230.0,
+   "y": 1.0,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_230MPH"
+  },
+  {
+   "x": 235.0,
+   "y": 1.0,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_235MPH"
+  },
+  {
+   "x": 240.0,
+   "y": 1.0,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_240MPH"
+  },
+  {
+   "x": 245.0,
+   "y": 1.0,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_245MPH"
+  },
+  {
+   "x": 250.0,
+   "y": 1.0,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_KNOT_250MPH"
+  },
+  {
+   "x": 122.5,
+   "y": 0.06538885,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_BETWEEN_122.5MPH"
+  },
+  {
+   "x": 61.4,
+   "y": 3.0951843199999974e-06,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_BETWEEN_61.4MPH"
+  },
+  {
+   "x": 228.8,
+   "y": 1.0,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_BETWEEN_228.8MPH"
+  },
+  {
+   "x": 40.0,
+   "y": 0.0,
+   "test": "TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN_BELOW_RANGE_ZERO"
+  },
+  {
+   "x": 130.0,
+   "y": 0.127056,
+   "test": "RE_IND_WAREHOUSE_REFERENCE_CHARACTERISTICS_SUPPLIED"
+  },
+  {
+   "x": 130.0,
+   "y": 0.127056,
+   "test": "RE_IND_WAREHOUSE_REFERENCE_DEFAULT_FLAGGED"
+  }
+ ],
+ "source_points": [],
+ "drawn": true,
+ "no_evaluator_sentence": null,
+ "evaluator": {
+  "module": "scripts/reference_helpers/tropical_cyclone_wind_real_estate_curve_eval.py",
+  "function": "evaluate_damage_call",
+  "note": "request template from the cell's known-answer tests; the hazard axis field varied over the record's valid range"
+ },
+ "tiers": {
+  "shape": "T2",
+  "shape_basis": "Hazus SPMBL building-loss rows (new or average roof deck)",
+  "cost": "T2",
+  "cost_basis": "Hazus loss ratio of replacement value"
+ },
+ "row_notes": [
+  {
+   "type": "key_assumption",
+   "text": "Large overhead doors not represented in Hazus"
+  }
+ ],
+ "selected_by": [],
+ "variants": "terrain x 5",
+ "notes": [],
+ "title": "Hurricane wind × Real estate",
+ "asset": {
+  "slug": "real_estate",
+  "label": "Real estate"
+ },
+ "hazard": {
+  "slug": "hurricane_wind",
+  "label": "Hurricane wind"
+ },
+ "status": "proposal",
+ "rail": {
+  "exists": {
+   "status": "proposal",
+   "mark": "▢",
+   "label": "PROPOSAL",
+   "qualifier": "screening"
+  },
+  "evidence": {
+   "shape": "T2",
+   "cost": "T2",
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   }
+  },
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table and decision log",
+   "entry_read_kind": "agent",
+   "release_review": "not yet reviewed",
+   "release_review_code": "not_yet_reviewed",
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release not yet reviewed"
+  }
+ },
+ "parameters_rows": [],
+ "sources_for_curve": [],
+ "occurrence": null,
+ "review": {
+  "entry_read_on": "2026-10-19",
+  "entry_read_by": "Agent-drafted, from the cell's own tier table and decision log",
+  "entry_read_kind": "agent",
+  "release_review": "not yet reviewed",
+  "release_review_code": "not_yet_reviewed",
+  "review": null,
+  "tone": "neutral",
+  "label": "entry agent-read 2026-10-19 · release not yet reviewed"
+ },
+ "summary": "Warehouse: piecewise linear on peak 3-second gust at 10 m in open terrain; shape T2, cost T2.",
+ "versions": [],
+ "data_path": "curves/tropical_cyclone_wind_real_estate/TCRE_IND_HAZUS_SPMBL_NEWDECK_SUBURBAN@model_v0_2__docs_r1.json"
+}

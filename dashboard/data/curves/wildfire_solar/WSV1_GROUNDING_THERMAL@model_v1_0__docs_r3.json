@@ -1,0 +1,254 @@
+{
+ "curve_id": "WSV1_GROUNDING_THERMAL",
+ "entry_id": "wildfire_solar",
+ "damage_code_id": "WILDFIRE_SOLAR_FSIM_SCREENING_V1",
+ "version_key": "model_v1_0__docs_r3",
+ "artifact_sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
+ "failure_unit_id": "WSV1_GROUNDING_THERMAL",
+ "subsystem": "GROUNDING_LIGHTNING",
+ "component": "GROUNDING_GRID_AND_LIGHTNING_PROTECTION",
+ "treatment": "reviewed_low_nonzero_screening_proxy",
+ "part": "Grounding and lightning protection",
+ "pathway_id": null,
+ "curve_form": "piecewise_linear",
+ "x_axis_id": "fsim_screening_fire_state_index_exact_integer_only",
+ "y_axis": "failure_unit_damage_ratio",
+ "parameters": {
+  "points": [
+   [
+    0,
+    0
+   ],
+   [
+    1,
+    0
+   ],
+   [
+    2,
+    0.001
+   ],
+   [
+    3,
+    0.004
+   ],
+   [
+    4,
+    0.015
+   ],
+   [
+    5,
+    0.05
+   ],
+   [
+    6,
+    0.12
+   ]
+  ]
+ },
+ "record_extra": {},
+ "axis": {
+  "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE",
+  "label": "FSim conditional flame-length class (0 = no event)",
+  "unit": "class",
+  "input_field": "conditional_flame_length_class",
+  "kind": "categorical",
+  "valid_range": [
+   0,
+   6
+  ],
+  "classes": {
+   "1": "lt_2_ft",
+   "2": "gte_2_lt_4_ft",
+   "3": "gte_4_lt_6_ft",
+   "4": "gte_6_lt_8_ft",
+   "5": "gte_8_lt_12_ft",
+   "6": "gte_12_ft"
+  }
+ },
+ "domain": [
+  0,
+  6
+ ],
+ "withheld_zones": [],
+ "knots": [
+  [
+   0.0,
+   0.0
+  ],
+  [
+   1.0,
+   0.0
+  ],
+  [
+   2.0,
+   0.001
+  ],
+  [
+   3.0,
+   0.004
+  ],
+  [
+   4.0,
+   0.015
+  ],
+  [
+   5.0,
+   0.05
+  ],
+  [
+   6.0,
+   0.12
+  ]
+ ],
+ "series": [
+  {
+   "label": "grounding thermal",
+   "kind": "categorical",
+   "points": [
+    [
+     0.0,
+     0.0
+    ],
+    [
+     1.0,
+     0.0
+    ],
+    [
+     2.0,
+     0.001
+    ],
+    [
+     3.0,
+     0.004
+    ],
+    [
+     4.0,
+     0.015
+    ],
+    [
+     5.0,
+     0.05
+    ],
+    [
+     6.0,
+     0.12
+    ]
+   ]
+  }
+ ],
+ "envelope": null,
+ "scenario_note": null,
+ "known_answers": [
+  {
+   "x": 6.0,
+   "y": 0.12,
+   "test": "WSV1_GROUNDING_CLASS6"
+  }
+ ],
+ "source_points": [],
+ "drawn": true,
+ "no_evaluator_sentence": null,
+ "evaluator": {
+  "module": "scripts/reference_helpers/damage_curve_eval.py",
+  "function": "evaluate_curve_record",
+  "note": "exact integer state lookup on the record's knots; no interpolation"
+ },
+ "tiers": {
+  "shape": "T4",
+  "shape_basis": "Class values are engineering judgment",
+  "cost": "T2",
+  "cost_basis": "Reference part value from the NREL/NLR Q1-2025 benchmark crosswalk"
+ },
+ "row_notes": [
+  {
+   "type": "key_assumption",
+   "text": "Low response, not immunity"
+  }
+ ],
+ "selected_by": [],
+ "variants": "none",
+ "notes": [],
+ "title": "Wildfire × Solar farm",
+ "asset": {
+  "slug": "solar",
+  "label": "Solar farm"
+ },
+ "hazard": {
+  "slug": "wildfire",
+  "label": "Wildfire"
+ },
+ "status": "live",
+ "rail": {
+  "exists": {
+   "status": "live",
+   "mark": "■",
+   "label": "LIVE",
+   "qualifier": "screening"
+  },
+  "evidence": {
+   "shape": "T4",
+   "cost": "T2",
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   }
+  },
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table, source registers and capability declaration",
+   "entry_read_kind": "agent",
+   "release_review": "reviewed",
+   "release_review_code": "reviewed",
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release reviewed"
+  }
+ },
+ "parameters_rows": [],
+ "sources_for_curve": [],
+ "occurrence": null,
+ "review": {
+  "entry_read_on": "2026-10-19",
+  "entry_read_by": "Agent-drafted, from the cell's own tier table, source registers and capability declaration",
+  "entry_read_kind": "agent",
+  "release_review": "reviewed",
+  "release_review_code": "reviewed",
+  "review": null,
+  "tone": "neutral",
+  "label": "entry agent-read 2026-10-19 · release reviewed"
+ },
+ "summary": "Grounding and lightning protection: piecewise linear on FSim conditional flame-length class (0 = no event); shape T4, cost T2.",
+ "versions": [
+  {
+   "pin": "wildfire_solar@model_v1_0__docs_r4",
+   "model": "model v1.0",
+   "docs": "docs r4",
+   "published_on": "2026-07-20",
+   "change_class": null,
+   "summary": "Adds the complete cell-owned three-file basics set: first-reader FSim flame-length-class terminology, the evidence-to-SHIP reasoning chain, and an exact reference for ten categorical state tables, value linkage, screening limitations, capabilities, and known-answer tests.",
+   "artifact_path": null,
+   "source": "CHANGELOG.json"
+  },
+  {
+   "pin": "wildfire_solar@model_v1_0__docs_r3",
+   "model": "model v1.0",
+   "docs": "docs r3",
+   "published_on": "2026-07-10",
+   "change_class": null,
+   "summary": "Promotes the v0.1 no-curve scaffold to the first screening-grade runtime model with exact FSim-class state tables, ten failure units, explicit value linkage, and executable known-answer tests.",
+   "artifact_path": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+   "source": "CHANGELOG.json"
+  },
+  {
+   "pin": "wildfire_solar@model_v0_1__docs_r2",
+   "model": "model v0.1",
+   "docs": "docs r2",
+   "published_on": "2026-07-10",
+   "change_class": null,
+   "summary": "Pressure-tested research scaffold with zero runtime curves and NO_RUNTIME_CURVE.",
+   "artifact_path": null,
+   "source": "CHANGELOG.json"
+  }
+ ],
+ "data_path": "curves/wildfire_solar/WSV1_GROUNDING_THERMAL@model_v1_0__docs_r3.json"
+}

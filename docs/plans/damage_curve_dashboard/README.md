@@ -49,6 +49,7 @@ Shared with Hazard: the look principle at `Hazard_modeling/docs/principles/analy
 
 | Fact | Source |
 |---|---|
+| **V0 built (2026-10-20, after this table was measured):** `dashboard/`, `scripts/dashboard/`, the occurrence register at `docs/evidence/occurrence/`; look review at [`evidence/3f9d516/`](evidence/3f9d516/REVIEW.md); [PR #5](https://github.com/aamani-ai/Damage_Modeling/pull/5) open; accepted by the owner 2026-10-20 (`DCD-D17`), merge pending | branch `claude/dashboard-v0-5d463c`; [`tasks_history/2026-10-20__dashboard__v0-build`](../../extra/tasks_history/2026-10-20__dashboard__v0-build/handoff.md) |
 | No `dashboard/` folder exists in this repository (`find . -iname '*dashboard*'` finds only the discussion node) | shell, 2026-10-20 |
 | 25 catalogue entries: 13 live · 5 proposals · 3 reused · 4 gaps; 71 part rows, 51 with a T4 shape or cost; 87 curve IDs; 25 of 25 read by an agent only; 14 of 21 cells and bindings partial; 11 with no outside check | `docs/extra/discussion/damage_curve_dashboard/evidence/2026-10-19_catalogue_counts.txt` |
 | Chain artifacts as named files: 2 of 21 cells complete on the 10 core stations; seven-step audit 2, pressure test 2, site adapter 0, search log 0; 15 skill-named · 6 plain-named · 4 no folder | `…/evidence/2026-10-20_chain_inventory.txt` |
@@ -80,28 +81,29 @@ Shared with Hazard: the look principle at `Hazard_modeling/docs/principles/analy
 
 ### Phase 0 · The data build (no UI)
 
-- [ ] `scripts/dashboard/build_dashboard_data.py`: load the 25 entries; verify each artifact SHA against its pin (reuse `validate_damage_curve_catalogue.py`); enumerate curves with the catalogue builder's `curve_records()`; sample every curve through a Python evaluator or list it *no evaluator*; reproduce every known answer; join the twin crosswalk (pinned SHA) and the hazard-name crosswalk; write `dashboard/data/*.json` and a `receipt.json` (commit, SHAs, counts)
-- [ ] The chain detector (`07` §10): start from `evidence/2026-10-20_chain_inventory.py`; add dossier-heading and workbook-sheet detection before any station is marked *prose*; stations not yet detectable are `not_yet_detected`
-- [ ] `citations.json` from the source and claim registers of the cells that have them
-- [ ] The occurrence register shape (`04` §5) with every battery row `not_searched`; the catalogue README, builder and validator gain the pointer field
-- [ ] Gate: the build checks in `05` §3 all pass (counts equal the catalogue, SHAs equal pins, every curve sampled or listed, every known answer reproduced, every source ID resolves, nothing sampled outside its valid domain); the receipt is committed with the data
+- [x] `scripts/dashboard/build_dashboard_data.py`: load the 25 entries; verify each artifact SHA against its pin (reuse `validate_damage_curve_catalogue.py`); enumerate curves with the catalogue builder's `curve_records()`; sample every curve through a Python evaluator or list it *no evaluator*; reproduce every known answer; join the twin crosswalk (pinned SHA) and the hazard-name crosswalk; write `dashboard/data/*.json` and a `receipt.json` (commit, SHAs, counts)
+- [x] The chain detector (`07` §10): start from `evidence/2026-10-20_chain_inventory.py`; add dossier-heading and workbook-sheet detection before any station is marked *prose*; stations not yet detectable are `not_yet_detected`
+- [x] `citations.json` from the source and claim registers of the cells that have them
+- [x] The occurrence register shape (`04` §5) with every battery row `not_searched`; the catalogue README, builder and validator gain the pointer field
+- [ ] Gate: the build checks in `05` §3 all pass (counts equal the catalogue, SHAs equal pins, every curve sampled or listed, every known answer reproduced, every source ID resolves, nothing sampled outside its valid domain); the receipt is committed with the data — *2026-10-20: every structural check passes and the receipt is committed; 1,748 of 1,748 known answers run are reproduced (136 not run, each with its reason); the `source_ids` data check fails on 22 references in `tropical_cyclone_wind_wind`, `wildfire_solar` and `tropical_cyclone_wind_solar`, reported and not loosened*
 
 ### Phase 1 · V0 — battery storage end to end, local
 
-- [ ] `dashboard/` scaffold from the Hazard dashboard's shell: `layout.tsx`, `globals.css` tokens, `ui.tsx` primitives, `status-chip` → the status rail, `echart.tsx`, the drawer; URL state always
-- [ ] Library (all 25 entries, status lens; the tile of `06` §3.1) · battery asset view (`03` §2.2) · `flood_bess` cell page with the trail and the cards of `07` §4 · one curve dossier (`BESS_PCS_INUNDATION_PROXY`) · the hail × battery occurrence page (empty state) · the plain first line on each
-- [ ] Hurricane × battery and wildfire × battery pages show *Not drawn — no reference evaluator* until Phase 3
-- [ ] `dashboard/README.md`: run, build, checks, the look review
-- [ ] Gate: the look review of `06` §4, checks 1–8, with the screenshot set under `evidence/<commit>/`; then the owner's review on the running app (check 9)
+- [x] `dashboard/` scaffold from the Hazard dashboard's shell: `layout.tsx`, `globals.css` tokens, `ui.tsx` primitives, `status-chip` → the status rail, `echart.tsx`, the drawer; URL state always
+- [x] Library (all 25 entries, status lens; the tile of `06` §3.1) · battery asset view (`03` §2.2) · `flood_bess` cell page with the trail and the cards of `07` §4 · one curve dossier (`BESS_PCS_INUNDATION_PROXY`) · the hail × battery occurrence page (empty state) · the plain first line on each
+- [x] Hurricane × battery and wildfire × battery pages show *Not drawn — no reference evaluator* until Phase 3 — *their evaluators reached `main` in PR #4 during the build; the build now stops once one exists for a cell it lists as having none, so wiring them is the first V1 step — done 2026-10-20, see Phase 3*
+- [x] `dashboard/README.md`: run, build, checks, the look review
+- [ ] Gate: the look review of `06` §4, checks 1–8, with the screenshot set under `evidence/<commit>/`; then the owner's review on the running app (check 9) — *2026-10-20, [`evidence/3f9d516/REVIEW.md`](evidence/3f9d516/REVIEW.md): checks 1–6 and 8 pass; check 7 (cold read) not run, it needs a named reader; check 9 **accepted by the owner on the running app, 2026-10-20** ([`DCD-D17`](decisions.md#dcd-d17--v0-accepted-on-the-running-app))*
 
 ### Phase 2 · Owner feedback loop (local)
 
-- [ ] The owner runs it locally and gives feedback on the screens; findings become rows here, not reopened gates unless a ruling is contradicted
-- [ ] Gate: the owner accepts V0's screenshot set; merge to `main`
+- [x] The owner runs it locally and gives feedback on the screens; findings become rows here, not reopened gates unless a ruling is contradicted — *2026-10-20: the owner asked to review the live app, not screenshots; the review page `/v0` was added and the owner accepted V0 (`DCD-D17`). The page's questions 2–6 stay open*
+- [ ] Gate: the owner accepts V0's screenshot set; merge to `main` — *accepted 2026-10-20 (`DCD-D17`); the cold read (check 7) and the merge are pending*
 
 ### Phase 3 · V1 — every live cell
 
-- [ ] Reference evaluators for `tropical_cyclone_wind_bess` and `wildfire_bess` in `scripts/reference_helpers/`, each proven against the cell's known answers and checked against Hazard's `perils/*/src/*/bess.py` output (read, never imported)
+- [x] Reference evaluators for `tropical_cyclone_wind_bess` and `wildfire_bess` in `scripts/reference_helpers/`, each proven against the cell's known answers and checked against Hazard's `perils/*/src/*/bess.py` output (read, never imported) — *2026-10-20, merged to `main` in PR #4: each validator reproduces every known answer; the Hazard comparison is in each cell's `current/hazard_consumer_comparison.md`*
+- [x] The first V1 step: draw both cells through those evaluators — the hurricane cell as one line per record × resistance scenario, never averaged; the wildfire cell as marks at the exact FSim classes 0–6, never joined; their 104 known answers replayed and reproduced; the look review of the two pages — *2026-10-20, branch `claude/dashboard-v1-battery-75e6ea`, [PR #6](https://github.com/aamani-ai/Damage_Modeling/pull/6) into `claude/dashboard-v0-5d463c`, open; look review at [`evidence/3ea7e02/REVIEW.md`](evidence/3ea7e02/REVIEW.md): checks 1–6 and 8 pass, 25 of 25 traced numbers match*
 - [ ] All 13 live cells, 5 proposals and 3 bindings sampled; the review block (G7) in the catalogue entries; the chain lens and the gate view (`07` §6–§7); the `/code/` resolver for model-gpr and the Hazard dashboard
 - [ ] Gate: look review per slice; the cold-read test with a named reviewer
 

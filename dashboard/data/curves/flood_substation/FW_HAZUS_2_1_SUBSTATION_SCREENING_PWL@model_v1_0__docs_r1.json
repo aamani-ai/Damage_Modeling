@@ -1,0 +1,1022 @@
+{
+ "curve_id": "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL",
+ "entry_id": "flood_substation",
+ "damage_code_id": "FLOOD_SUBSTATION_DEPTH_SCREENING_V1",
+ "version_key": "model_v1_0__docs_r1",
+ "artifact_sha256": "f001eb0191439a1345a7a794995c684ef731f777c4b3e1eff0298de592999f30",
+ "failure_unit_id": "FW_HAZUS_GSU_SUBSTATION_ASSEMBLY",
+ "subsystem": "FACILITY_GSU_SUBSTATION_SOURCE_NATIVE",
+ "component": "HAZUS_SUBSTATION_CONTROL_ROOM_CABLING_AND_INCIDENTAL_TRANSFORMER_SWITCHGEAR_ASSEMBLY",
+ "treatment": "primary_nonzero",
+ "part": "Whole station (fenced assembly)",
+ "pathway_id": "flood_inundation_contact",
+ "curve_form": "piecewise_linear",
+ "x_axis_id": "flood_depth_above_substation_grade_ft",
+ "y_axis": "failure_unit_damage_ratio",
+ "parameters": {
+  "points": [
+   [
+    0,
+    0
+   ],
+   [
+    1,
+    0.02
+   ],
+   [
+    2,
+    0.04
+   ],
+   [
+    3,
+    0.06
+   ],
+   [
+    4,
+    0.07
+   ],
+   [
+    5,
+    0.08
+   ],
+   [
+    6,
+    0.09
+   ],
+   [
+    7,
+    0.1
+   ],
+   [
+    8,
+    0.12
+   ],
+   [
+    9,
+    0.14
+   ],
+   [
+    10,
+    0.15
+   ]
+  ]
+ },
+ "record_extra": {
+  "valid_range": [
+   0,
+   10
+  ],
+  "interpolation_policy": "linear_between_source_knots",
+  "extrapolation_policy": "withhold outside 0 through 10 ft; no endpoint clamp",
+  "selector_match": {
+   "substation_hazus_classes": [
+    "ESSL",
+    "ESSM",
+    "ESSH"
+   ],
+   "source_assumption_set_id": "FEMA_HAZUS_MH_2_1_TABLE_7_9_UNPROTECTED_SUBSTATION"
+  },
+  "source_parameter_refs": [
+   "FW-S011#Table_7_9"
+  ],
+  "metadata_flags": [
+   "SCREENING_LEGACY_FEMA_ASSEMBLY_PROXY",
+   "FACILITY_POINT_NOT_COMPONENT_HYDRAULICS",
+   "NO_INTRINSIC_DAMAGE_SPREAD",
+   "NO_FIELD_OR_CLAIMS_CALIBRATION",
+   "SOURCE_DOMAIN_0_TO_10_FT",
+   "COASTAL_DEPTH_RESPONSE_TRANSFER_T4",
+   "SALINITY_CONTAMINATION_WAVE_SCOUR_EXCLUDED",
+   "INCOMPLETE_SUPPORT_ZERO_CONTRIBUTION_TAGGED",
+   "FEMA_CURRENT_ELECTRIC_POWER_LOSS_DISABLED"
+  ]
+ },
+ "axis": {
+  "id": "FLOOD_DEPTH_ABOVE_SUBSTATION_GRADE_FT_HAZUS",
+  "label": "water depth above station grade (ft) at the facility point",
+  "unit": "ft",
+  "input_field": "flood_depth_above_substation_grade_ft",
+  "valid_range": [
+   0,
+   10
+  ],
+  "kind": "continuous",
+  "label_from_id": true
+ },
+ "domain": [
+  0,
+  10
+ ],
+ "withheld_zones": [
+  {
+   "from": 10,
+   "to": null,
+   "reason": "withhold outside 0 through 10 ft; no endpoint clamp"
+  }
+ ],
+ "knots": [
+  [
+   0.0,
+   0.0
+  ],
+  [
+   1.0,
+   0.02
+  ],
+  [
+   2.0,
+   0.04
+  ],
+  [
+   3.0,
+   0.06
+  ],
+  [
+   4.0,
+   0.07
+  ],
+  [
+   5.0,
+   0.08
+  ],
+  [
+   6.0,
+   0.09
+  ],
+  [
+   7.0,
+   0.1
+  ],
+  [
+   8.0,
+   0.12
+  ],
+  [
+   9.0,
+   0.14
+  ],
+  [
+   10.0,
+   0.15
+  ]
+ ],
+ "series": [
+  {
+   "label": "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL",
+   "kind": "line",
+   "points": [
+    [
+     0.0,
+     0.0
+    ],
+    [
+     0.0625,
+     0.00125
+    ],
+    [
+     0.125,
+     0.0025
+    ],
+    [
+     0.1875,
+     0.00375
+    ],
+    [
+     0.25,
+     0.005
+    ],
+    [
+     0.3125,
+     0.00625
+    ],
+    [
+     0.375,
+     0.0075
+    ],
+    [
+     0.4375,
+     0.00875
+    ],
+    [
+     0.5,
+     0.01
+    ],
+    [
+     0.5625,
+     0.01125
+    ],
+    [
+     0.625,
+     0.0125
+    ],
+    [
+     0.6875,
+     0.01375
+    ],
+    [
+     0.75,
+     0.015
+    ],
+    [
+     0.8125,
+     0.01625
+    ],
+    [
+     0.875,
+     0.0175
+    ],
+    [
+     0.9375,
+     0.01875
+    ],
+    [
+     1.0,
+     0.02
+    ],
+    [
+     1.0625,
+     0.02125
+    ],
+    [
+     1.125,
+     0.0225
+    ],
+    [
+     1.1875,
+     0.02375
+    ],
+    [
+     1.25,
+     0.025
+    ],
+    [
+     1.3125,
+     0.026250000000000002
+    ],
+    [
+     1.375,
+     0.0275
+    ],
+    [
+     1.4375,
+     0.02875
+    ],
+    [
+     1.5,
+     0.03
+    ],
+    [
+     1.5625,
+     0.03125
+    ],
+    [
+     1.625,
+     0.0325
+    ],
+    [
+     1.6875,
+     0.03375
+    ],
+    [
+     1.75,
+     0.035
+    ],
+    [
+     1.8125,
+     0.036250000000000004
+    ],
+    [
+     1.875,
+     0.037500000000000006
+    ],
+    [
+     1.9375,
+     0.03875
+    ],
+    [
+     2.0,
+     0.04
+    ],
+    [
+     2.0625,
+     0.04125
+    ],
+    [
+     2.125,
+     0.0425
+    ],
+    [
+     2.1875,
+     0.04375
+    ],
+    [
+     2.25,
+     0.045
+    ],
+    [
+     2.3125,
+     0.04625
+    ],
+    [
+     2.375,
+     0.0475
+    ],
+    [
+     2.4375,
+     0.04875
+    ],
+    [
+     2.5,
+     0.05
+    ],
+    [
+     2.5625,
+     0.05125
+    ],
+    [
+     2.625,
+     0.0525
+    ],
+    [
+     2.6875,
+     0.05375
+    ],
+    [
+     2.75,
+     0.055
+    ],
+    [
+     2.8125,
+     0.056249999999999994
+    ],
+    [
+     2.875,
+     0.057499999999999996
+    ],
+    [
+     2.9375,
+     0.05875
+    ],
+    [
+     3.0,
+     0.06
+    ],
+    [
+     3.0625,
+     0.060625
+    ],
+    [
+     3.125,
+     0.06125
+    ],
+    [
+     3.1875,
+     0.061875
+    ],
+    [
+     3.25,
+     0.0625
+    ],
+    [
+     3.3125,
+     0.063125
+    ],
+    [
+     3.375,
+     0.06375
+    ],
+    [
+     3.4375,
+     0.064375
+    ],
+    [
+     3.5,
+     0.065
+    ],
+    [
+     3.5625,
+     0.065625
+    ],
+    [
+     3.625,
+     0.06625
+    ],
+    [
+     3.6875,
+     0.066875
+    ],
+    [
+     3.75,
+     0.0675
+    ],
+    [
+     3.8125,
+     0.068125
+    ],
+    [
+     3.875,
+     0.06875
+    ],
+    [
+     3.9375,
+     0.069375
+    ],
+    [
+     4.0,
+     0.07
+    ],
+    [
+     4.0625,
+     0.07062500000000001
+    ],
+    [
+     4.125,
+     0.07125000000000001
+    ],
+    [
+     4.1875,
+     0.07187500000000001
+    ],
+    [
+     4.25,
+     0.07250000000000001
+    ],
+    [
+     4.3125,
+     0.07312500000000001
+    ],
+    [
+     4.375,
+     0.07375000000000001
+    ],
+    [
+     4.4375,
+     0.07437500000000001
+    ],
+    [
+     4.5,
+     0.07500000000000001
+    ],
+    [
+     4.5625,
+     0.075625
+    ],
+    [
+     4.625,
+     0.07625
+    ],
+    [
+     4.6875,
+     0.076875
+    ],
+    [
+     4.75,
+     0.0775
+    ],
+    [
+     4.8125,
+     0.078125
+    ],
+    [
+     4.875,
+     0.07875
+    ],
+    [
+     4.9375,
+     0.079375
+    ],
+    [
+     5.0,
+     0.08
+    ],
+    [
+     5.0625,
+     0.080625
+    ],
+    [
+     5.125,
+     0.08125
+    ],
+    [
+     5.1875,
+     0.081875
+    ],
+    [
+     5.25,
+     0.0825
+    ],
+    [
+     5.3125,
+     0.083125
+    ],
+    [
+     5.375,
+     0.08375
+    ],
+    [
+     5.4375,
+     0.084375
+    ],
+    [
+     5.5,
+     0.08499999999999999
+    ],
+    [
+     5.5625,
+     0.08562499999999999
+    ],
+    [
+     5.625,
+     0.08625
+    ],
+    [
+     5.6875,
+     0.086875
+    ],
+    [
+     5.75,
+     0.0875
+    ],
+    [
+     5.8125,
+     0.088125
+    ],
+    [
+     5.875,
+     0.08875
+    ],
+    [
+     5.9375,
+     0.089375
+    ],
+    [
+     6.0,
+     0.09
+    ],
+    [
+     6.0625,
+     0.090625
+    ],
+    [
+     6.125,
+     0.09125
+    ],
+    [
+     6.1875,
+     0.091875
+    ],
+    [
+     6.25,
+     0.0925
+    ],
+    [
+     6.3125,
+     0.093125
+    ],
+    [
+     6.375,
+     0.09375
+    ],
+    [
+     6.4375,
+     0.094375
+    ],
+    [
+     6.5,
+     0.095
+    ],
+    [
+     6.5625,
+     0.095625
+    ],
+    [
+     6.625,
+     0.09625
+    ],
+    [
+     6.6875,
+     0.096875
+    ],
+    [
+     6.75,
+     0.0975
+    ],
+    [
+     6.8125,
+     0.098125
+    ],
+    [
+     6.875,
+     0.09875
+    ],
+    [
+     6.9375,
+     0.099375
+    ],
+    [
+     7.0,
+     0.1
+    ],
+    [
+     7.0625,
+     0.10125
+    ],
+    [
+     7.125,
+     0.10250000000000001
+    ],
+    [
+     7.1875,
+     0.10375000000000001
+    ],
+    [
+     7.25,
+     0.10500000000000001
+    ],
+    [
+     7.3125,
+     0.10625
+    ],
+    [
+     7.375,
+     0.1075
+    ],
+    [
+     7.4375,
+     0.10875
+    ],
+    [
+     7.5,
+     0.11
+    ],
+    [
+     7.5625,
+     0.11125
+    ],
+    [
+     7.625,
+     0.1125
+    ],
+    [
+     7.6875,
+     0.11375
+    ],
+    [
+     7.75,
+     0.11499999999999999
+    ],
+    [
+     7.8125,
+     0.11624999999999999
+    ],
+    [
+     7.875,
+     0.1175
+    ],
+    [
+     7.9375,
+     0.11875
+    ],
+    [
+     8.0,
+     0.12
+    ],
+    [
+     8.0625,
+     0.12125
+    ],
+    [
+     8.125,
+     0.1225
+    ],
+    [
+     8.1875,
+     0.12375
+    ],
+    [
+     8.25,
+     0.125
+    ],
+    [
+     8.3125,
+     0.12625
+    ],
+    [
+     8.375,
+     0.1275
+    ],
+    [
+     8.4375,
+     0.12875
+    ],
+    [
+     8.5,
+     0.13
+    ],
+    [
+     8.5625,
+     0.13125
+    ],
+    [
+     8.625,
+     0.1325
+    ],
+    [
+     8.6875,
+     0.13375
+    ],
+    [
+     8.75,
+     0.135
+    ],
+    [
+     8.8125,
+     0.13625
+    ],
+    [
+     8.875,
+     0.1375
+    ],
+    [
+     8.9375,
+     0.13875
+    ],
+    [
+     9.0,
+     0.14
+    ],
+    [
+     9.0625,
+     0.140625
+    ],
+    [
+     9.125,
+     0.14125000000000001
+    ],
+    [
+     9.1875,
+     0.141875
+    ],
+    [
+     9.25,
+     0.14250000000000002
+    ],
+    [
+     9.3125,
+     0.143125
+    ],
+    [
+     9.375,
+     0.14375000000000002
+    ],
+    [
+     9.4375,
+     0.144375
+    ],
+    [
+     9.5,
+     0.14500000000000002
+    ],
+    [
+     9.5625,
+     0.145625
+    ],
+    [
+     9.625,
+     0.14625
+    ],
+    [
+     9.6875,
+     0.146875
+    ],
+    [
+     9.75,
+     0.1475
+    ],
+    [
+     9.8125,
+     0.148125
+    ],
+    [
+     9.875,
+     0.14875
+    ],
+    [
+     9.9375,
+     0.149375
+    ],
+    [
+     10.0,
+     0.15
+    ]
+   ]
+  }
+ ],
+ "envelope": null,
+ "scenario_note": null,
+ "known_answers": [
+  {
+   "x": 0.0,
+   "y": 0.0,
+   "test": "source knot 0 ft"
+  },
+  {
+   "x": 1.0,
+   "y": 0.02,
+   "test": "source knot 1 ft"
+  },
+  {
+   "x": 2.0,
+   "y": 0.04,
+   "test": "source knot 2 ft"
+  },
+  {
+   "x": 3.0,
+   "y": 0.06,
+   "test": "source knot 3 ft"
+  },
+  {
+   "x": 4.0,
+   "y": 0.07,
+   "test": "source knot 4 ft"
+  },
+  {
+   "x": 5.0,
+   "y": 0.08,
+   "test": "source knot 5 ft"
+  },
+  {
+   "x": 6.0,
+   "y": 0.09,
+   "test": "source knot 6 ft"
+  },
+  {
+   "x": 7.0,
+   "y": 0.1,
+   "test": "source knot 7 ft"
+  },
+  {
+   "x": 8.0,
+   "y": 0.12,
+   "test": "source knot 8 ft"
+  },
+  {
+   "x": 9.0,
+   "y": 0.14,
+   "test": "source knot 9 ft"
+  },
+  {
+   "x": 10.0,
+   "y": 0.15,
+   "test": "source knot 10 ft"
+  },
+  {
+   "x": 3.5,
+   "y": 0.065,
+   "test": "midpoint 3.5 ft"
+  }
+ ],
+ "source_points": [],
+ "drawn": true,
+ "no_evaluator_sentence": null,
+ "evaluator": {
+  "module": "scripts/reference_helpers/damage_curve_eval.py",
+  "function": "evaluate_curve_record",
+  "note": "generic piecewise-linear evaluator inside the record's valid range (0–10 ft); this cell has no per-cell evaluator in the repository"
+ },
+ "tiers": {
+  "shape": "T3",
+  "shape_basis": "Hazus Table 7.9 points, linear between them (Coastal use is a T4 transfer)",
+  "cost": "T4",
+  "cost_basis": "Hazus loss ratio (T3) applied to a fenced value whose match to the Hazus denominator is T4 (SUB-A01)"
+ },
+ "row_notes": [
+  {
+   "type": "reused_from",
+   "text": "Same Hazus table as the flood_wind substation assembly (FW_HAZUS_GSU_SUBSTATION_ASSEMBLY)"
+  },
+  {
+   "type": "key_assumption",
+   "text": "Coastal uses the river depth curve with no salt or wave effect (T4)"
+  }
+ ],
+ "selected_by": [],
+ "variants": "sub-peril: pluvial, riverine or coastal (same curve); Hazus class ESSL, ESSM or ESSH (same points)",
+ "notes": [],
+ "title": "Flood × Substation",
+ "asset": {
+  "slug": "substation",
+  "label": "Substation"
+ },
+ "hazard": {
+  "slug": "flood",
+  "label": "Flood"
+ },
+ "status": "live",
+ "rail": {
+  "exists": {
+   "status": "live",
+   "mark": "■",
+   "label": "LIVE",
+   "qualifier": null
+  },
+  "evidence": {
+   "shape": "T3",
+   "cost": "T4",
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   }
+  },
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table, capability, consumer binding and decision log",
+   "entry_read_kind": "agent",
+   "release_review": "agent reviewed screening under owner delivery direction",
+   "release_review_code": "agent_reviewed_screening_under_owner_delivery_direction",
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release agent reviewed screening under owner delivery direction"
+  }
+ },
+ "parameters_rows": [
+  {
+   "id": "source knots and linear interpolation",
+   "name": "source knots and linear interpolation",
+   "value": "unchanged 0–10 ft source table",
+   "tier": "T3",
+   "source_ids": [
+    "FW-S011"
+   ],
+   "claim_ids": [],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": null,
+   "status": null,
+   "reasoning": null,
+   "update_trigger": null
+  },
+  {
+   "id": "canonical station and point exposure",
+   "name": "canonical station and point exposure",
+   "value": "existing author-selected profile/value binding",
+   "tier": "T4",
+   "source_ids": [
+    "SUB-A01"
+   ],
+   "claim_ids": [],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": null,
+   "status": null,
+   "reasoning": null,
+   "update_trigger": null
+  },
+  {
+   "id": "coastal depth-response transfer",
+   "name": "coastal depth-response transfer",
+   "value": "same inundation-only curve, no salinity/wave modifier; no full surge claim",
+   "tier": "T4",
+   "source_ids": [
+    "SUB-A02"
+   ],
+   "claim_ids": [],
+   "curve_id": null,
+   "pathway_id": null,
+   "role": null,
+   "status": null,
+   "reasoning": null,
+   "update_trigger": null
+  }
+ ],
+ "sources_for_curve": [
+  "FW-S011",
+  "SUB-A01",
+  "SUB-A02"
+ ],
+ "occurrence": null,
+ "review": {
+  "entry_read_on": "2026-10-19",
+  "entry_read_by": "Agent-drafted, from the cell's own tier table, capability, consumer binding and decision log",
+  "entry_read_kind": "agent",
+  "release_review": "agent reviewed screening under owner delivery direction",
+  "release_review_code": "agent_reviewed_screening_under_owner_delivery_direction",
+  "review": null,
+  "tone": "neutral",
+  "label": "entry agent-read 2026-10-19 · release agent reviewed screening under owner delivery direction"
+ },
+ "summary": "Whole station (fenced assembly): piecewise linear on water depth above station grade (ft) at the facility point; shape T3, cost T4.",
+ "versions": [
+  {
+   "pin": "flood_substation@model_v1_0__docs_r1",
+   "model": "model v1.0",
+   "docs": "docs r1",
+   "published_on": "2026-10-16",
+   "change_class": null,
+   "summary": "Standalone canonical station screening: exact legacy Hazus assembly table; explicit Coastal depth-only T4 transfer; annual consumer capability conditional on frequency, value, cap and missing-mass proof.",
+   "artifact_path": "docs/cells/flood_substation/current/flood_substation__model_v1_0__docs_r1__curve_artifact.json",
+   "source": "CHANGELOG.json"
+  }
+ ],
+ "data_path": "curves/flood_substation/FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL@model_v1_0__docs_r1.json"
+}

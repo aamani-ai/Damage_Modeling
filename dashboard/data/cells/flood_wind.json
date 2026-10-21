@@ -1,0 +1,1003 @@
+{
+ "entry_id": "flood_wind",
+ "kind": "cell",
+ "status": "live",
+ "title": "Flood × Wind farm",
+ "asset": {
+  "slug": "wind",
+  "label": "Wind farm"
+ },
+ "hazard": {
+  "slug": "flood",
+  "label": "Flood"
+ },
+ "identity": {
+  "kind": "cell",
+  "damage_code_id": "FLOOD_WIND_FEMA_HAZUS_SUBSTATION_SCREENING_V1",
+  "model": "model v1.0",
+  "docs": "docs r1",
+  "version_key": "model_v1_0__docs_r1",
+  "schema": "damage_curve_record_bundle.v3",
+  "sha256": "37da745d87a4722e13118319bd30d9d2bcfd18dabc2a198ac6b8b1422bc3e1c1",
+  "consumer_pin": "flood_wind@model_v1_0__docs_r1"
+ },
+ "pins": [
+  {
+   "what": "catalogue entry artifact_sha256",
+   "file": "docs/cells/flood_wind/current/flood_wind__model_v1_0__docs_r1__curve_artifact.json",
+   "expected": "37da745d87a4722e13118319bd30d9d2bcfd18dabc2a198ac6b8b1422bc3e1c1",
+   "actual": "37da745d87a4722e13118319bd30d9d2bcfd18dabc2a198ac6b8b1422bc3e1c1",
+   "ok": true
+  },
+  {
+   "what": "runtime artifact index sha256",
+   "file": "docs/cells/flood_wind/current/flood_wind__model_v1_0__docs_r1__curve_artifact.json",
+   "expected": "37da745d87a4722e13118319bd30d9d2bcfd18dabc2a198ac6b8b1422bc3e1c1",
+   "actual": "37da745d87a4722e13118319bd30d9d2bcfd18dabc2a198ac6b8b1422bc3e1c1",
+   "ok": true
+  }
+ ],
+ "rail": {
+  "exists": {
+   "status": "live",
+   "mark": "■",
+   "label": "LIVE",
+   "qualifier": "screening"
+  },
+  "evidence": {
+   "shape": "T3",
+   "cost": "T3",
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   }
+  },
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table and release decision",
+   "entry_read_kind": "agent",
+   "release_review": "reviewed screening release",
+   "release_review_code": "reviewed_screening_release",
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release reviewed screening release"
+  }
+ },
+ "summary": "Flood on wind farms: fEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points; 6 parts of the asset's value have no curve.",
+ "chain": {
+  "stations": [
+   {
+    "id": "scope",
+    "label": "Scope",
+    "full_label": "Scope",
+    "gate": "A",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_wind/current/README.md",
+      "sha256": "59eaa2a62b1341af4df31363ddb952c7f40f22e9011ef82f4fc33231390bd31d"
+     },
+     {
+      "path": "docs/cells/flood_wind/current/RELEASE_DECISION_flood_wind__model_v1_0__docs_r1.md",
+      "sha256": "cbb208e5eebacb6e5ca4724d16f684ffc070a27257c03797e7885572ab36d867"
+     },
+     {
+      "path": "docs/cells/flood_wind/README.md",
+      "sha256": "b31d65086c0bc70b77a268bbb3e243769f2fccef4b9a4b8ddd59bcd3177ab755"
+     },
+     {
+      "path": "docs/cells/flood_wind/basics/README.md",
+      "sha256": "e2ab6b4605029e8dd6c4b1e7b32daa7b28adef1ddef2a10e96b6608c962c6d31"
+     }
+    ],
+    "evidence": [],
+    "fact": "2 deferred",
+    "absent_sentence": null
+   },
+   {
+    "id": "units",
+    "label": "Units",
+    "full_label": "Units",
+    "gate": "A · B2",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_wind/current/flood_wind__model_v1_0__docs_r1__curve_artifact.json",
+      "sha256": "37da745d87a4722e13118319bd30d9d2bcfd18dabc2a198ac6b8b1422bc3e1c1"
+     }
+    ],
+    "evidence": [],
+    "fact": "15 units · 14 withheld",
+    "absent_sentence": null
+   },
+   {
+    "id": "axis_form",
+    "label": "Axis · form",
+    "full_label": "Axis · form",
+    "gate": "C",
+    "state": "prose",
+    "files": [],
+    "evidence": [
+     {
+      "kind": "dossier_headings",
+      "file": {
+       "path": "docs/cells/flood_wind/current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md",
+       "sha256": "9d6d9185efeb05f65095e4c6f9a83cd6c357f5581bd9cc6f7f042c0e2efc5b80"
+      },
+      "matched": [
+       "6. Curve form and exact derivation"
+      ]
+     },
+     {
+      "kind": "basics_headings",
+      "file": {
+       "path": "docs/cells/flood_wind/basics/HOW_THE_MODEL_IS_BUILT.md",
+       "sha256": "1b2921f968439e61f4844ae22bc5c37ebf8c4ad39c4e09f84e15ddfaf8563536"
+      },
+      "matched": [
+       "Axis construction"
+      ]
+     },
+     {
+      "kind": "workbook_sheets",
+      "file": {
+       "path": "docs/cells/flood_wind/current/damage_curve_records_flood_wind__model_v1_0__docs_r1.xlsx",
+       "sha256": "8470cd281bf2e5bb8e8543a5c918ffdd908c1ed6c9b4dbec2b8e6219b6eb5015"
+      },
+      "matched": [
+       "Axis_Bridge"
+      ]
+     }
+    ],
+    "fact": "piecewise linear",
+    "absent_sentence": null
+   },
+   {
+    "id": "evidence",
+    "label": "Evidence",
+    "full_label": "Evidence",
+    "gate": "B",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_wind/current/CLAIM_PARAMETER_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
+      "sha256": "e451384a4ce546ca8427c778f1f592f6529534a7ba57845c489a0765df6aed30"
+     },
+     {
+      "path": "docs/cells/flood_wind/current/PARAMETER_TIER_TABLE_flood_wind__model_v1_0__docs_r1.csv",
+      "sha256": "79e51d8f84a353e540f8039f8540aa25457ed52103686728bde67024d80f637f"
+     },
+     {
+      "path": "docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
+      "sha256": "65bff4eadd5d914f25c46d5fbc1dbe65ac7afb12da6eeed19d7942d9c4e007b7"
+     }
+    ],
+    "evidence": [],
+    "fact": "18 src · T2–4",
+    "absent_sentence": null
+   },
+   {
+    "id": "value",
+    "label": "Value",
+    "full_label": "Value",
+    "gate": "B2",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_wind/current/VALUE_CROSSWALK_flood_wind__model_v1_0__docs_r1.csv",
+      "sha256": "d3921274974fa519cbbdcceaff5c94b21cbf40911454ea099ed8716ab135fe44"
+     }
+    ],
+    "evidence": [],
+    "fact": "crosswalk",
+    "absent_sentence": null
+   },
+   {
+    "id": "audit",
+    "label": "Audit",
+    "full_label": "Audit",
+    "gate": "B2",
+    "state": "prose",
+    "files": [],
+    "evidence": [
+     {
+      "kind": "basics_headings",
+      "file": {
+       "path": "docs/cells/flood_wind/basics/HOW_THE_MODEL_IS_BUILT.md",
+       "sha256": "1b2921f968439e61f4844ae22bc5c37ebf8c4ad39c4e09f84e15ddfaf8563536"
+      },
+      "matched": [
+       "Seven-step build"
+      ]
+     }
+    ],
+    "fact": "7 steps in the dossier",
+    "absent_sentence": null
+   },
+   {
+    "id": "artifact",
+    "label": "Artifact",
+    "full_label": "Artifact",
+    "gate": "C",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_wind/current/damage_curve_records_flood_wind__model_v1_0__docs_r1.xlsx",
+      "sha256": "8470cd281bf2e5bb8e8543a5c918ffdd908c1ed6c9b4dbec2b8e6219b6eb5015"
+     },
+     {
+      "path": "docs/cells/flood_wind/current/flood_wind__model_v1_0__docs_r1__curve_artifact.json",
+      "sha256": "37da745d87a4722e13118319bd30d9d2bcfd18dabc2a198ac6b8b1422bc3e1c1"
+     },
+     {
+      "path": "docs/cells/flood_wind/current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md",
+      "sha256": "9d6d9185efeb05f65095e4c6f9a83cd6c357f5581bd9cc6f7f042c0e2efc5b80"
+     },
+     {
+      "path": "docs/cells/flood_wind/current/flood_wind_damage_code_metadata_spec__model_v1_0__docs_r1.md",
+      "sha256": "fc07eedb0e3817ac18bb3d7a38630651b44ed4b0dd611ca5968eb14200edcd97"
+     }
+    ],
+    "evidence": [],
+    "fact": "v1.0 · docs r1",
+    "absent_sentence": null
+   },
+   {
+    "id": "capability",
+    "label": "Capability",
+    "full_label": "Capability",
+    "gate": "D",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_wind/current/flood_wind__model_v1_0__docs_r1__capability.json",
+      "sha256": "9037e4558a0352cdc55c0c66241d869cf5c13e85edccd8b103387e8579cf4b6b"
+     }
+    ],
+    "evidence": [],
+    "fact": "DR conditional · EAL withheld",
+    "absent_sentence": null
+   },
+   {
+    "id": "proof",
+    "label": "Proof",
+    "full_label": "Proof · release",
+    "gate": "E",
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/flood_wind/current/RELEASE_DECISION_flood_wind__model_v1_0__docs_r1.md",
+      "sha256": "cbb208e5eebacb6e5ca4724d16f684ffc070a27257c03797e7885572ab36d867"
+     },
+     {
+      "path": "docs/cells/flood_wind/current/VALIDATION_REPORT_flood_wind__model_v1_0__docs_r1.md",
+      "sha256": "e809d70d6c2a38ffd7e4c0ddd4c04d15344b1a927a9b0e0e21e62ad0415f18ff"
+     },
+     {
+      "path": "docs/cells/flood_wind/current/known_answer_tests_flood_wind__model_v1_0__docs_r1.json",
+      "sha256": "361358834339656a92150510d8813ad5ce25fd4641cfaad3df0aa401e2e9f271"
+     },
+     {
+      "path": "docs/cells/flood_wind/CHANGELOG.json",
+      "sha256": "489275d747db235ee4944fd5c2ea3fe05230b4182ad80f04b4e84d4a6ebafcb4"
+     },
+     {
+      "path": "docs/contracts/machine_readable_artifact_index.json",
+      "sha256": "b421721ea2d82aa6e341cb80868d5023074de90ed80eed648b5a10c060b98e75",
+      "note": "artifact index pin",
+      "pinned_sha256": "37da745d87a4722e13118319bd30d9d2bcfd18dabc2a198ac6b8b1422bc3e1c1",
+      "pin_ok": true
+     }
+    ],
+    "evidence": [],
+    "fact": "37 of 37 KAT reproduced · 6 not run",
+    "absent_sentence": null
+   },
+   {
+    "id": "field_review",
+    "label": "Field · review",
+    "full_label": "Field · review",
+    "gate": "—",
+    "state": "absent",
+    "files": [],
+    "evidence": [],
+    "fact": "not searched · agent-read 10-19",
+    "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only."
+   }
+  ],
+  "generation": "skill",
+  "core_as_files": 5,
+  "core_total": 6,
+  "dossier": {
+   "path": "docs/cells/flood_wind/current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md",
+   "sha256": "9d6d9185efeb05f65095e4c6f9a83cd6c357f5581bd9cc6f7f042c0e2efc5b80"
+  },
+  "basics": {
+   "path": "docs/cells/flood_wind/basics/HOW_THE_MODEL_IS_BUILT.md",
+   "sha256": "1b2921f968439e61f4844ae22bc5c37ebf8c4ad39c4e09f84e15ddfaf8563536"
+  },
+  "workbook": {
+   "path": "docs/cells/flood_wind/current/damage_curve_records_flood_wind__model_v1_0__docs_r1.xlsx",
+   "sha256": "8470cd281bf2e5bb8e8543a5c918ffdd908c1ed6c9b4dbec2b8e6219b6eb5015"
+  },
+  "gates": [
+   {
+    "gate": "A",
+    "label": "scope",
+    "items": [
+     {
+      "item": "hazard and asset are named",
+      "status": "proven",
+      "basis": "cell_id in the artifact"
+     },
+     {
+      "item": "in-scope and out-of-scope mechanisms listed",
+      "status": "proven",
+      "basis": "hazard_scope.deferred or the entry's out_of_scope"
+     },
+     {
+      "item": "related hazards that should split are named",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "multi-pathway cells declare stable pathway IDs",
+      "status": "proven",
+      "basis": "pathways[].pathway_id"
+     },
+     {
+      "item": "neighbouring or compound mechanisms have an include / defer / split decision",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "no downstream M4 metric is hidden in the damage cell",
+      "status": "proven",
+      "basis": "consumer_annual_metrics.computation_owner"
+     }
+    ]
+   },
+   {
+    "gate": "B",
+    "label": "evidence",
+    "items": [
+     {
+      "item": "source register with stable IDs, locators, roles, tiers and decisions",
+      "status": "proven",
+      "basis": "docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv"
+     },
+     {
+      "item": "load-bearing claims carry claim-level provenance",
+      "status": "proven",
+      "basis": "docs/cells/flood_wind/current/CLAIM_PARAMETER_REGISTER_flood_wind__model_v1_0__docs_r1.csv"
+     },
+     {
+      "item": "the chosen spine is explained",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "rejected or demoted sources are explained",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "parameter tier table populated",
+      "status": "proven",
+      "basis": "parameter_tier_table"
+     },
+     {
+      "item": "T3/T4 update triggers listed",
+      "status": "proven",
+      "basis": "update_trigger per T3/T4 row"
+     },
+     {
+      "item": "legacy equations and tables reproduced where legacy material is used",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "proposed numbers pressure-tested at boundaries and on explicit denominators",
+      "status": "human",
+      "basis": "PRESSURE_TEST file"
+     },
+     {
+      "item": "evidence, parameters and transfer limits resolved independently by pathway",
+      "status": "human",
+      "basis": "pathway_id on tier rows"
+     }
+    ]
+   },
+   {
+    "gate": "B2",
+    "label": "seven-step, site and value",
+    "items": [
+     {
+      "item": "seven-step audit records a status and blocking seam for every step",
+      "status": "human",
+      "basis": "SEVEN_STEP_AUDIT file"
+     },
+     {
+      "item": "row-level value crosswalk reconciles direct, mixed, support and excluded rows",
+      "status": "proven",
+      "basis": "value crosswalk or binding"
+     },
+     {
+      "item": "support and logistics are allocated once, not given an independent DR",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "site-conditioned hazards have a site adapter",
+      "status": "human",
+      "basis": "SITE_CONDITION_ADAPTER file"
+     },
+     {
+      "item": "fences, walls, barriers and bypass pathways receive no blanket credit",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "the adapter includes a double-counting matrix",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "unknown at-risk, exposure or mitigation states do not silently become full credit",
+      "status": "human",
+      "basis": null
+     }
+    ]
+   },
+   {
+    "gate": "C",
+    "label": "runtime contract",
+    "items": [
+     {
+      "item": "the JSON artifact is canonical",
+      "status": "proven",
+      "basis": "canonical_runtime_artifact"
+     },
+     {
+      "item": "workbooks are derivation or audit views, not the runtime",
+      "status": "human",
+      "basis": null
+     },
+     {
+      "item": "damage_code_id and model version are stable",
+      "status": "proven",
+      "basis": "damage_code_id · semantic_damage_model_version"
+     },
+     {
+      "item": "field names and aliases are explicit",
+      "status": "proven",
+      "basis": "hazard_axis input field"
+     },
+     {
+      "item": "pathway_id is first-class in request, record, output, capability and KAT surfaces",
+      "status": "proven",
+      "basis": "pathway_capabilities"
+     },
+     {
+      "item": "pathway-specific axes and bridges are explicit",
+      "status": "proven",
+      "basis": "pathways[].hazard_axis.id"
+     },
+     {
+      "item": "the emit contract is distribution-ready",
+      "status": "proven",
+      "basis": "emit_contract"
+     }
+    ]
+   },
+   {
+    "gate": "D",
+    "label": "reportability",
+    "items": [
+     {
+      "item": "failure-unit DR support stated",
+      "status": "proven",
+      "basis": "capability_declaration"
+     },
+     {
+      "item": "scenario loss support requires a value basis",
+      "status": "proven",
+      "basis": "scenario_loss_given_value_basis"
+     },
+     {
+      "item": "scalar EAL requires downstream frequency, value basis and a cap-binding pass",
+      "status": "proven",
+      "basis": "consumer_annual_metrics"
+     },
+     {
+      "item": "PML / VaR / TVaR withheld unless spread exists",
+      "status": "proven",
+      "basis": "curve_intrinsic_spread"
+     },
+     {
+      "item": "a no-curve scaffold emits no numeric DR",
+      "status": "n/a",
+      "basis": null
+     },
+     {
+      "item": "unsupported pathway × failure-unit pairs withhold with a stable reason",
+      "status": "proven",
+      "basis": "withheld_reason_codes"
+     }
+    ]
+   },
+   {
+    "gate": "E",
+    "label": "release",
+    "items": [
+     {
+      "item": "registry, index, changelog and manifest updated",
+      "status": "proven",
+      "basis": "artifact index row · CHANGELOG"
+     },
+     {
+      "item": "validation report produced",
+      "status": "proven",
+      "basis": "validation file"
+     },
+     {
+      "item": "old-vs-new and cross-pathway negative tests pass",
+      "status": "proven",
+      "basis": "negative contract tests run by the build"
+     },
+     {
+      "item": "consumer migration and the exact model / docs / schema / SHA pin verified",
+      "status": "proven",
+      "basis": "SHA equals the index pin"
+     },
+     {
+      "item": "package zip integrity checked",
+      "status": "n/a",
+      "basis": "no portable package for repository-canonical artifacts"
+     }
+    ]
+   }
+  ]
+ },
+ "no_evaluator": false,
+ "no_evaluator_sentence": null,
+ "answer": {
+  "axis_groups": [
+   {
+    "axis": {
+     "id": "FLOOD_DEPTH_ABOVE_SUBSTATION_GRADE_FT_HAZUS",
+     "label": "freshwater flood depth above substation grade",
+     "unit": "ft",
+     "input_field": "flood_depth_above_substation_grade_ft",
+     "valid_range": [
+      0,
+      10
+     ],
+     "kind": "continuous",
+     "label_from_id": true
+    },
+    "curve_ids": [
+     "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL"
+    ]
+   }
+  ],
+  "curve_ids": [
+   "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL"
+  ],
+  "input": "Freshwater flood depth above substation grade (ft), 0 to 10 ft; or water-surface and grade elevations (m) on the same vertical datum",
+  "how_to_use": {
+   "share_of": "Full direct replacement value of the same facility-level GSU/substation (not project TIV, not the mixed 72 USD/kW electrical row)",
+   "outputs": {
+    "single_event": "conditional: exact Hazus substation class, the Hazus 2.1 Table 7.9 assumption set, freshwater non-contaminated water, depth 0 to 10 ft",
+    "scenario_dollars": "conditional: only with an explicit same-substation replacement value and exposure fraction",
+    "yearly_loss": "withheld for this partial screening release (consumer-owned)"
+   },
+   "conditions": [
+    "substation_hazus_class must be ESSL, ESSM or ESSH (all three use the same points)",
+    "Salt, brackish, contaminated or unknown water withholds",
+    "Depth must be unprotected or internal post-bypass depth; no extra mitigation credit",
+    "Negative depth rejects, depth above 10 ft withholds, missing depth rejects (never treated as dry)",
+    "One shared substation is counted once, never repeated by turbine count or across solar and wind",
+    "The cell gives no covered value share; the substation value must come from the site"
+   ]
+  },
+  "value": null,
+  "not_covered": [
+   "GSU parts as separate units: switchgear, main transformer, transformer auxiliaries and controls, protection and SCADA, station service and DC, cable terminations (withheld, not zero)",
+   "Turbine-base electrical and pad or turbine step-up transformers (withheld)",
+   "Collection cable joints and terminations (withheld)",
+   "Turbine foundation (needs a separate scour and erosion pathway) and civil access and drainage (needs a split)",
+   "Elevated turbine equipment: rotor, nacelle, tower (geometry-screened, not declared zero)",
+   "Fieldwork and transport support (allocated once after repair scope; no fragility)"
+  ],
+  "withheld_units": [
+   {
+    "failure_unit_id": "FW_GSU_SWITCHGEAR",
+    "subsystem": "FACILITY_GSU_SUBSTATION",
+    "reasons": [
+     "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+     "COMPONENT_LEVEL_ECONOMIC_RESPONSE_NOT_CALIBRATED"
+    ],
+    "sentence": "Withheld: no runtime curve for pathway unit; component level economic response not calibrated."
+   },
+   {
+    "failure_unit_id": "FW_GSU_TRANSFORMER_MAIN",
+    "subsystem": "FACILITY_GSU_SUBSTATION",
+    "reasons": [
+     "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+     "TRANSFORMER_MAIN_AUXILIARY_STATE_MODEL_REQUIRED"
+    ],
+    "sentence": "Withheld: no runtime curve for pathway unit; transformer main auxiliary state model required."
+   },
+   {
+    "failure_unit_id": "FW_GSU_TRANSFORMER_AUX_CONTROLS",
+    "subsystem": "FACILITY_GSU_SUBSTATION",
+    "reasons": [
+     "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+     "DEPENDENCY_SAFE_VALUE_SPLIT_REQUIRED"
+    ],
+    "sentence": "Withheld: no runtime curve for pathway unit; dependency safe value split required."
+   },
+   {
+    "failure_unit_id": "FW_GSU_PROTECTION_SCADA",
+    "subsystem": "FACILITY_GSU_SUBSTATION",
+    "reasons": [
+     "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+     "PROTECTION_CONTROL_ECONOMIC_RESPONSE_NOT_CALIBRATED"
+    ],
+    "sentence": "Withheld: no runtime curve for pathway unit; protection control economic response not calibrated."
+   },
+   {
+    "failure_unit_id": "FW_GSU_STATION_SERVICE_DC",
+    "subsystem": "FACILITY_GSU_SUBSTATION",
+    "reasons": [
+     "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+     "STATION_SERVICE_DC_DECOMPOSITION_REQUIRED"
+    ],
+    "sentence": "Withheld: no runtime curve for pathway unit; station service dc decomposition required."
+   },
+   {
+    "failure_unit_id": "FW_GSU_CABLE_TERMINATIONS",
+    "subsystem": "FACILITY_GSU_SUBSTATION",
+    "reasons": [
+     "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+     "CABLE_BODY_TERMINATION_PATHWAY_SPLIT_REQUIRED"
+    ],
+    "sentence": "Withheld: no runtime curve for pathway unit; cable body termination pathway split required."
+   },
+   {
+    "failure_unit_id": "FW_TURBINE_BASE_ELECTRICAL",
+    "subsystem": "REPEATED_TURBINE_ELECTRICAL",
+    "reasons": [
+     "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+     "WIND_SPECIFIC_EQUIPMENT_DECOMPOSITION_REQUIRED"
+    ],
+    "sentence": "Withheld: no runtime curve for pathway unit; wind specific equipment decomposition required."
+   },
+   {
+    "failure_unit_id": "FW_PADMOUNT_STEPUP_TRANSFORMER",
+    "subsystem": "REPEATED_TURBINE_ELECTRICAL",
+    "reasons": [
+     "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+     "PAD_TRANSFORMER_CONSTRUCTION_AND_VALUE_REQUIRED"
+    ],
+    "sentence": "Withheld: no runtime curve for pathway unit; pad transformer construction and value required."
+   },
+   {
+    "failure_unit_id": "FW_COLLECTION_CABLE_TERMINATIONS",
+    "subsystem": "PLANT_COLLECTION",
+    "reasons": [
+     "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+     "LINE_NETWORK_EXPOSURE_AND_VALUE_REQUIRED"
+    ],
+    "sentence": "Withheld: no runtime curve for pathway unit; line network exposure and value required."
+   },
+   {
+    "failure_unit_id": "FW_TURBINE_FOUNDATION",
+    "subsystem": "FOUNDATION",
+    "reasons": [
+     "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+     "SEPARATE_FLOOD_SCOUR_EROSION_PATHWAY_REQUIRED"
+    ],
+    "sentence": "Withheld: no runtime curve for pathway unit; separate flood scour erosion pathway required."
+   },
+   {
+    "failure_unit_id": "FW_CIVIL_ACCESS_DRAINAGE",
+    "subsystem": "PLANT_CIVIL",
+    "reasons": [
+     "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+     "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
+    ],
+    "sentence": "Withheld: no runtime curve for pathway unit; mixed civil bucket requires split."
+   },
+   {
+    "failure_unit_id": "FW_ELEVATED_TURBINE_EQUIPMENT",
+    "subsystem": "REPEATED_TURBINE",
+    "reasons": [
+     "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+     "GEOMETRY_SCREENED_NOT_UNIVERSAL_ZERO"
+    ],
+    "sentence": "Withheld: no runtime curve for pathway unit; geometry screened not universal zero."
+   },
+   {
+    "failure_unit_id": "SUPPORT_FIELDWORK",
+    "subsystem": "SUPPORT",
+    "reasons": [
+     "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+     "NO_INDEPENDENT_FRAGILITY"
+    ],
+    "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+   },
+   {
+    "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+    "subsystem": "SUPPORT",
+    "reasons": [
+     "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+     "NO_INDEPENDENT_FRAGILITY"
+    ],
+    "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+   }
+  ],
+  "hazard_axis": [
+   {
+    "id": "FLOOD_DEPTH_ABOVE_SUBSTATION_GRADE_FT_HAZUS",
+    "preferred_input_field": "flood_depth_above_substation_grade_ft",
+    "permitted_proxy_fields": [
+     "water_surface_elevation_m",
+     "substation_grade_elevation_m"
+    ],
+    "unit": "ft",
+    "source_native_unit": "ft",
+    "valid_range": [
+     0,
+     10
+    ],
+    "extrapolation_policy": "negative depth rejects; 0 through 10 ft evaluates by linear interpolation; depth above 10 ft withholds",
+    "source_table_knots_ft": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "physics_bridge": "Optional bridge: (water_surface_elevation_m - substation_grade_elevation_m) * 3.280839895013123, with exact matching vertical datums; direct-depth and WSE payloads are mutually exclusive.",
+    "datum_basis": "substation facility grade used by the source-native Hazus class, not a component contact datum"
+   }
+  ]
+ },
+ "parts": [
+  {
+   "part": "GSU / substation (whole facility)",
+   "curves": [
+    "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL"
+   ],
+   "failure_units": [
+    "FW_HAZUS_GSU_SUBSTATION_ASSEMBLY"
+   ],
+   "subsystems": [
+    "FACILITY_GSU_SUBSTATION_SOURCE_NATIVE"
+   ],
+   "bucket": null,
+   "variants": "Hazus substation class ESSL, ESSM or ESSH (same points)",
+   "shape": "T3",
+   "shape_basis": "Hazus 2.1 Table 7.9 points; official but legacy, no claims calibration",
+   "cost": "T3",
+   "cost_basis": "Same Hazus table gives damage as a share of the substation's replacement value; denominator row T3",
+   "notes": [
+    {
+     "type": "key_assumption",
+     "text": "Whole-substation unit; never charge it together with the GSU component parts"
+    }
+   ],
+   "occurrence": null,
+   "drawn": true
+  }
+ ],
+ "evidence": {
+  "lineage": "machine_readable",
+  "prose_sentence": null,
+  "paths": {
+   "sources": "docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
+   "claims": "docs/cells/flood_wind/current/CLAIM_PARAMETER_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
+   "parameters": "docs/cells/flood_wind/current/PARAMETER_TIER_TABLE_flood_wind__model_v1_0__docs_r1.csv"
+  },
+  "n_sources": 18,
+  "n_claims": 27,
+  "n_parameters": 5,
+  "key_sources": [
+   "FEMA, Hazus-MH Flood Model Technical Manual 2.1, Table 7.9 (FW-S011)",
+   "FEMA, Hazus 7.0 Flood Technical Manual (2025), electric-power status (FW-S012)",
+   "USACE, HEC-FIA Technical Reference, depth-percent damage relationships (FW-S006)",
+   "NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment (FW-S002; historical context)",
+   "NREL, Cost of Wind Energy Review 2024 (FW-S008; value anatomy only)"
+  ],
+  "sources_from": "register",
+  "judgment": [
+   "Only freshwater non-contaminated water gets a number; all other water types withhold",
+   "No extension past 10 ft: deeper water withholds instead of holding the last value",
+   "Missing or incomplete depth is rejected, never read as dry",
+   "Flood duration is recorded but does not change the result",
+   "The whole-substation curve and any future component curves must never be charged together",
+   "Unknown ownership keeps the substation out of the baseline"
+  ],
+  "weakest_tier": "T4",
+  "pressure_test": null,
+  "method": {
+   "type": "adopted",
+   "summary": "FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points"
+  }
+ },
+ "audit": {
+  "table": null,
+  "state": "prose",
+  "absent_sentence": null,
+  "site_adapter": null
+ },
+ "proof": {
+  "known_answers": {
+   "declared": 43,
+   "run": 37,
+   "reproduced": 37,
+   "not_run": [
+    {
+     "kind": "contract_assertion",
+     "n": 6,
+     "reason": "prose assertions; not executable"
+    }
+   ],
+   "negative_run": 16,
+   "tolerance": 1e-12,
+   "source": "docs/cells/flood_wind/current/known_answer_tests_flood_wind__model_v1_0__docs_r1.json",
+   "kinds": {
+    "formula": 15,
+    "withheld": 6,
+    "error": 16
+   },
+   "failed": []
+  },
+  "validation": {
+   "path": "docs/cells/flood_wind/current/VALIDATION_REPORT_flood_wind__model_v1_0__docs_r1.md",
+   "status": "report",
+   "date": null
+  },
+  "outside_checks": [],
+  "capability": {
+   "failure_unit_scalar_dr": "conditional",
+   "scenario_loss_given_value_basis": "supported_with_explicit_failure_unit_value_and_exposure_basis",
+   "curve_intrinsic_spread": "not_carried",
+   "populated_emit_modes": [
+    "scalar_mean"
+   ],
+   "eal": "withheld",
+   "pml": null,
+   "var": null,
+   "tvar": null,
+   "limitation_flags": [
+    "CANONICAL_SCREENING_RELEASE",
+    "PARTIAL_FAILURE_UNIT_COVERAGE",
+    "ANNUAL_AND_TAIL_METRICS_WITHHELD",
+    "CURVE_INTRINSIC_SPREAD_NOT_CARRIED"
+   ],
+   "computation_owner": "downstream_consumer"
+  }
+ },
+ "seams": {
+  "open_items": [
+   "Review of the 2026 NEMA successor guide (CS 70006-2026) is still open",
+   "Current Hazus 7.0 disables electric-power loss functions; the table is legacy and not claims-calibrated",
+   "Component-level GSU curves could replace the whole-substation curve later",
+   "Salt and contaminated water response not modelled"
+  ],
+  "missing_mechanisms": [
+   "Scour, erosion, saturated-soil support loss, debris impact and wave loading",
+   "Flood duration (captured but has no effect on the result)"
+  ],
+  "out_of_scope": [
+   "Outage restoration, business interruption, curtailment, revenue and insurance",
+   "Soft, sunk and non-physical costs (excluded from the physical base)",
+   "Other hazards in the same event (tropical-cyclone wind, tornado); one event must not charge the same value twice"
+  ],
+  "next_version": null,
+  "update_triggers": [
+   {
+    "parameter": "Hazus substation depth-damage knots",
+    "tier": "T3",
+    "update_trigger": "component or assembly flood claims/OEM dataset or a re-enabled and revalidated FEMA electric-power method"
+   },
+   {
+    "parameter": "freshwater-only numeric eligibility",
+    "tier": "T4",
+    "update_trigger": "NEMA CS 70006-2026 and qualified salinity contamination and duration evidence are acquired and reviewed"
+   }
+  ]
+ },
+ "field_review": {
+  "register": null,
+  "buckets": [],
+  "review": {
+   "entry_read_on": "2026-10-19",
+   "entry_read_by": "Agent-drafted, from the cell's own tier table and release decision",
+   "entry_read_kind": "agent",
+   "release_review": "reviewed screening release",
+   "release_review_code": "reviewed_screening_release",
+   "review": null,
+   "tone": "neutral",
+   "label": "entry agent-read 2026-10-19 · release reviewed screening release"
+  },
+  "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only."
+ },
+ "files": {
+  "write_up": "docs/cells/flood_wind/current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md",
+  "decisions": "docs/cells/flood_wind/current/RELEASE_DECISION_flood_wind__model_v1_0__docs_r1.md",
+  "validation": "docs/cells/flood_wind/current/VALIDATION_REPORT_flood_wind__model_v1_0__docs_r1.md",
+  "notebooks": null
+ },
+ "folder_files": [
+  {
+   "path": "docs/cells/flood_wind/current/CLAIM_PARAMETER_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
+   "sha256": "e451384a4ce546ca8427c778f1f592f6529534a7ba57845c489a0765df6aed30"
+  },
+  {
+   "path": "docs/cells/flood_wind/current/PARAMETER_TIER_TABLE_flood_wind__model_v1_0__docs_r1.csv",
+   "sha256": "79e51d8f84a353e540f8039f8540aa25457ed52103686728bde67024d80f637f"
+  },
+  {
+   "path": "docs/cells/flood_wind/current/README.md",
+   "sha256": "59eaa2a62b1341af4df31363ddb952c7f40f22e9011ef82f4fc33231390bd31d"
+  },
+  {
+   "path": "docs/cells/flood_wind/current/RELEASE_DECISION_flood_wind__model_v1_0__docs_r1.md",
+   "sha256": "cbb208e5eebacb6e5ca4724d16f684ffc070a27257c03797e7885572ab36d867"
+  },
+  {
+   "path": "docs/cells/flood_wind/current/SHARED_COMPONENT_REUSE_CROSSWALK_flood_wind__model_v1_0__docs_r1.csv",
+   "sha256": "e0cd68ba49a8b2748bba739d2322dc2d699bc973c116d5794eec298a4a4aa0fc"
+  },
+  {
+   "path": "docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
+   "sha256": "65bff4eadd5d914f25c46d5fbc1dbe65ac7afb12da6eeed19d7942d9c4e007b7"
+  },
+  {
+   "path": "docs/cells/flood_wind/current/VALIDATION_REPORT_flood_wind__model_v1_0__docs_r1.md",
+   "sha256": "e809d70d6c2a38ffd7e4c0ddd4c04d15344b1a927a9b0e0e21e62ad0415f18ff"
+  },
+  {
+   "path": "docs/cells/flood_wind/current/VALUE_CROSSWALK_flood_wind__model_v1_0__docs_r1.csv",
+   "sha256": "d3921274974fa519cbbdcceaff5c94b21cbf40911454ea099ed8716ab135fe44"
+  },
+  {
+   "path": "docs/cells/flood_wind/current/damage_curve_records_flood_wind__model_v1_0__docs_r1.xlsx",
+   "sha256": "8470cd281bf2e5bb8e8543a5c918ffdd908c1ed6c9b4dbec2b8e6219b6eb5015"
+  },
+  {
+   "path": "docs/cells/flood_wind/current/flood_wind__model_v1_0__docs_r1__capability.json",
+   "sha256": "9037e4558a0352cdc55c0c66241d869cf5c13e85edccd8b103387e8579cf4b6b"
+  },
+  {
+   "path": "docs/cells/flood_wind/current/flood_wind__model_v1_0__docs_r1__curve_artifact.json",
+   "sha256": "37da745d87a4722e13118319bd30d9d2bcfd18dabc2a198ac6b8b1422bc3e1c1"
+  },
+  {
+   "path": "docs/cells/flood_wind/current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md",
+   "sha256": "9d6d9185efeb05f65095e4c6f9a83cd6c357f5581bd9cc6f7f042c0e2efc5b80"
+  },
+  {
+   "path": "docs/cells/flood_wind/current/flood_wind_damage_code_metadata_spec__model_v1_0__docs_r1.md",
+   "sha256": "fc07eedb0e3817ac18bb3d7a38630651b44ed4b0dd611ca5968eb14200edcd97"
+  },
+  {
+   "path": "docs/cells/flood_wind/current/known_answer_tests_flood_wind__model_v1_0__docs_r1.json",
+   "sha256": "361358834339656a92150510d8813ad5ce25fd4641cfaad3df0aa401e2e9f271"
+  }
+ ],
+ "gap_reason": null,
+ "binding": null,
+ "sampling_notes": [],
+ "build_findings": []
+}

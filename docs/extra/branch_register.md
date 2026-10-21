@@ -14,35 +14,39 @@ and should be deleted." This file is that idea, kept current. The facts come fro
 [`scripts/reference_helpers/branch_register.py`](../../scripts/reference_helpers/branch_register.py); the
 **What to do** column is judgment, and a branch is never deleted without its creator's agreement.*
 
-## The register (2026-10-20, `main` after merging PR #3)
+## The register (2026-10-20, `main` after merging PR #5 and PR #6)
+
+Every branch an agent session opened this week is merged and gone (below). What remains on `origin` is
+`main` and Jung A's five branches; the owner asked on 2026-10-20 that no agent branch stay open once its work
+is merged, and that Jung A's branches are hers to decide.
 
 | Branch | Created by · on | Last by · on | Age (days) | Ahead / behind `main` | Merged | Files | What it is | What to do |
 |---|---|---|---|---|---|---|---|---|
 | `main` = `origin/main` | — | Divi-patel · 2026-10-20 | 0 | — | — | — | The line of record; pushed directly by the owner | — |
-| `origin/claude/dashboard-v0-5d463c` | the V0 build session · 2026-10-20 | · 2026-10-20 | 0 | 20 / 7 | no | 346 | **PR #5** — the dashboard Phase 0 (data build with checks and receipt, the occurrence register home) and the V0 battery slice; the owner accepted V0 on the running app on 2026-10-20 (recorded on the branch as `DCD-D17`) ([plan](../plans/damage_curve_dashboard/README.md)) | **Active.** Merge together with PR #6 once that is folded in (the build session asks the owner); delete after merge |
-| `origin/claude/dashboard-v1-battery-75e6ea` | the evaluator-wiring session · 2026-10-20 | · 2026-10-20 | 0 | 31 / 0 | no | 421 (includes PR #5's) | **PR #6**, stacked on PR #5's branch — wires the two battery evaluators from PR #4 into the data build; all 104 curves drawn, all 1,852 known answers reproduced | **Active.** Merges through PR #5; delete after merge |
-| `origin/cell/real-estate` | jll-l · (fully contained) | jll-l · 2026-10-19 | 1 | 0 / 8 | **yes** | 0 | Jung A's working branch for the five Real Estate cells; merged into `main` on 2026-10-19 | **Merged — safe to delete whenever Jung A is done pushing to it.** Nothing is lost |
-| `origin/cell/flood-real-estate` | jll-l · (fully contained) | jll-l · 2026-10-12 | 8 | 0 / 56 | **yes** | 0 | The first Real Estate cell, superseded by `cell/real-estate` | **Delete** (merged; with Jung A's OK) |
-| `origin/cell/winter-storm-solar-wind` | jll-l · 2026-10-12 | jll-l · 2026-10-15 | 5 | 2 / 63 | no | 55 | Two proposed cells (`winter_storm_solar` screening proxy, `winter_storm_wind` fail-closed), five notebooks, five scripts | **Decision needed (RO3):** rebase onto `main` and merge as proposals, or close with a note. It falls further behind every day |
-| `origin/validation/damage-core` | jll-l · 2026-09-15 | jll-l · 2026-09-15 | 35 | 1 / 65 | no | 1 | `docs/extra/learning_logs/damage_core/VALIDATION_REPORT.md` — docs only | **Merge as a doc, then delete.** No model change; review evidence that only lives on a branch is invisible |
-| `origin/review/cell-curation-audit` | jll-l · 2026-08-27 | jll-l · 2026-08-27 | 54 | 1 / 70 | no | 2 | Standard-10 review scorecards and summary (2026-08-27) under `docs/extra/learning_logs/` — docs only | **Merge as docs, then delete.** Same reason |
+| `origin/cell/real-estate` | jll-l · (fully contained) | jll-l · 2026-10-19 | 1 | 0 / — | **yes** | 0 | Jung A's working branch for the five Real Estate cells; merged into `main` on 2026-10-19 | **Merged — safe to delete whenever Jung A is done pushing to it.** Nothing is lost |
+| `origin/cell/flood-real-estate` | jll-l · (fully contained) | jll-l · 2026-10-12 | 8 | 0 / — | **yes** | 0 | The first Real Estate cell, superseded by `cell/real-estate` | **Delete** (merged; with Jung A's OK) |
+| `origin/cell/winter-storm-solar-wind` | jll-l · 2026-10-12 | jll-l · 2026-10-15 | 5 | 2 / — | no | 55 | Two proposed cells (`winter_storm_solar` screening proxy, `winter_storm_wind` fail-closed), five notebooks, five scripts | **Decision needed (RO3):** rebase onto `main` and merge as proposals, or close with a note. It falls further behind every day |
+| `origin/validation/damage-core` | jll-l · 2026-09-15 | jll-l · 2026-09-15 | 35 | 1 / — | no | 1 | `docs/extra/learning_logs/damage_core/VALIDATION_REPORT.md` — docs only | **Merge as a doc, then delete.** No model change; review evidence that only lives on a branch is invisible |
+| `origin/review/cell-curation-audit` | jll-l · 2026-08-27 | jll-l · 2026-08-27 | 54 | 1 / — | no | 2 | Standard-10 review scorecards and summary (2026-08-27) under `docs/extra/learning_logs/` — docs only | **Merge as docs, then delete.** Same reason |
 
-Tags: none. Pull requests on `origin`: #1 (`codex/publish-v2-5-implementation`, merged 2026-06-25); #2, #3 and
-#4 merged 2026-10-20 (below); #5 and #6 open. Remotes: `origin` only (`aamani-ai/Damage_Modeling`); the personal
-fork `Divi-patel/Damage_Modeling` is a dormant mirror at `a71ac72`, not a remote.
-
-Local only, not on `origin`: `claude/jolly-gauss-75e6ea`, `claude/modest-darwin-9c7792` and
-`claude/amazing-elgamal-e5550b` are the worktree branches of finished agent sessions (the last two fully merged);
-the desktop app removes them with their worktrees. They are not in the table.
+*"Behind" is left blank for Jung A's rows because `main` moved by six merge commits on 2026-10-20; the script
+prints the current number.* Tags: none. Pull requests on `origin`: #1 (`codex/publish-v2-5-implementation`,
+merged 2026-06-25); #2, #3, #4, #5 and #6 merged 2026-10-20 (below); none open. Remotes: `origin` only
+(`aamani-ai/Damage_Modeling`); the personal fork `Divi-patel/Damage_Modeling` is a dormant mirror at
+`a71ac72`, not a remote. No local-only branches remain: the worktrees of the finished agent sessions and their
+branches were removed on 2026-10-20 after their merges.
 
 ### Recently closed
 
 | When | Branch | What happened |
 |---|---|---|
-| 2026-10-20 | `claude/keen-sanderson-23b1d5` — **PR #3**, CI: validators, tests and link check | Merged into `main` (merge commit) once its workflow was green; branch deleted on `origin` in the same action |
+| 2026-10-20 | `claude/dashboard-v1-battery-75e6ea` — **PR #6**, the two battery cells drawn through their evaluators (stacked on PR #5) | Merged into `main` as one merge commit that carried PR #5's commits too; branch deleted on `origin`; the session's worktree and local branch removed |
+| 2026-10-20 | `claude/dashboard-v0-5d463c` — **PR #5**, the dashboard's data build and the V0 battery slice (accepted by the owner on the running app, `DCD-D17`) | Merged into `main` through PR #6's branch; branch deleted on `origin`; worktree and local branch removed |
+| 2026-10-20 | `claude/keen-sanderson-23b1d5` — **PR #3**, CI: validators, tests and link check | Merged into `main` (merge commit) once its workflow was green; branch deleted on `origin`; worktree and local branch removed |
 | 2026-10-20 | `claude/ci-kat-diagnostic` | The CI session's temporary branch for the Ubuntu known-answer diagnostic; deleted by that session once the diagnosis was recorded |
-| 2026-10-20 | `claude/modest-darwin-9c7792` — **PR #4**, reference evaluators for the two battery cells (G9) | Merged into `main` (merge commit); branch deleted on `origin` in the same action |
-| 2026-10-20 | `claude/amazing-elgamal-e5550b` — **PR #2**, notebook coverage re-measured | Merged into `main` (merge commit); branch deleted on `origin` in the same action |
+| 2026-10-20 | `claude/modest-darwin-9c7792` — **PR #4**, reference evaluators for the two battery cells (G9) | Merged into `main` (merge commit); branch deleted on `origin`; worktree and local branch removed |
+| 2026-10-20 | `claude/amazing-elgamal-e5550b` — **PR #2**, notebook coverage re-measured | Merged into `main` (merge commit); branch deleted on `origin`; worktree and local branch removed |
+| 2026-10-20 | `claude/jolly-gauss-75e6ea` (local only) | The evaluator-wiring session's first worktree branch, never pushed and empty; removed with the worktree |
 | 2026-10-19 | `codex/deep-damage-admission-v1` (local only, never pushed) | One commit of 2026-08-27 whose content `main` had superseded; deleted |
 | 2026-10-19 | `codex/hurricane-solar-v2-1-admission` | Fully merged into `main`; deleted locally and on `origin` |
 | 2026-10-19 | remote `divi` | Removed; the fork is dormant and the work account cannot push to it |
@@ -52,7 +56,7 @@ the desktop app removes them with their worktrees. They are not in the table.
 | Rule | Why |
 |---|---|
 | **Names say the work.** `cell/<hazard>-<asset>` for cell curation; `review/…` and `validation/…` for review evidence; `claude/…` and `codex/…` for agent worktrees (short-lived); no personal-name branches | A name that says what the branch holds is half the register |
-| **A branch lives until its PR merges or it is closed.** Merged branches are deleted within a week by their creator; turn on *Automatically delete head branches* in the GitHub repository settings | Merged branches are the ones that pile up |
+| **A branch lives until its PR merges or it is closed.** Merged branches are deleted within a week by their creator; turn on *Automatically delete head branches* in the GitHub repository settings. **An agent branch is deleted in the same action as its merge** (owner direction, 2026-10-20) | Merged branches are the ones that pile up |
 | **Stale = not merged and no commit for 60 days.** A stale branch gets a row here with one of three outcomes: merge · archive · delete. The creator decides; after 90 days the owner decides | "Old" needs a number |
 | **Archive before deleting anything unmerged:** `git tag archive/<branch>/<yyyy-mm-dd> <sha> && git push origin --tags`, then delete the branch | History stays reachable by tag; the branch list stays short |
 | **Docs-only branches are merged as docs,** not kept hanging | A review or a validation report has no reason to wait for a model change |

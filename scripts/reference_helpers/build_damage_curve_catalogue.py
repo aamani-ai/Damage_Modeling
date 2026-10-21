@@ -90,6 +90,16 @@ def facts(entry: dict, index: dict) -> dict:
     return {"status": "live" if is_live else "proposal", "version": version, "records": len(curve_records(data))}
 
 
+def occurrence_summary(path: str) -> str:
+    """One phrase from the occurrence register: how many value buckets are in which field-report state."""
+    reg = load_json(ROOT / path)
+    states = [b.get("state", "not_searched") for b in reg.get("buckets", {}).values()]
+    labels = {"found": "found", "adjacent": "adjacent only", "none_after_search": "none after a logged search",
+              "not_searched": "not searched"}
+    counts = {s: states.count(s) for s in labels if s in states}
+    return "; ".join(f"{n} of {len(states)} buckets {labels[s]}" for s, n in counts.items()) or "no buckets"
+
+
 def link(path: str, text: str | None = None) -> str:
     rel = os.path.relpath(ROOT / path, OUT.parent)
     return f"[{text or Path(path).name}]({rel})"
@@ -252,6 +262,10 @@ def render_entry(w, e: dict, i: dict) -> None:
     head += f' · {e["reviewed_on"]}: {e["read_by"]}'
     w(head)
     w("")
+    if e.get("occurrence_register"):
+        w(f'**Field reports:** {link(e["occurrence_register"], "occurrence register")} — '
+          f'{occurrence_summary(e["occurrence_register"])}')
+        w("")
     if e["kind"] == "gap":
         w(f'**Why no curve yet:** {e["reason"]}')
         w("")

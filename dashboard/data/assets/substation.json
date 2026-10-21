@@ -1,0 +1,654 @@
+{
+ "asset": {
+  "slug": "substation",
+  "label": "Substation",
+  "catalogue": "Substation",
+  "noun": "substations",
+  "href": "/assets/substation"
+ },
+ "summary": "Flood has a curve for substations, all from transferred or policy evidence (T3–T4); hurricane wind, convective wind and wildfire reuse another cell's curve; hail has none; nobody has yet searched for field reports.",
+ "reference": null,
+ "hazards": [
+  {
+   "slug": "hail",
+   "label": "Hail",
+   "catalogue": "Hail",
+   "twin": [
+    "hail"
+   ],
+   "entry_tokens": [
+    "hail"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "hail_substation",
+   "status": "gap",
+   "cell_title": "Hail × Substation",
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "flood",
+   "label": "Flood",
+   "catalogue": "Flood",
+   "twin": [
+    "flood"
+   ],
+   "entry_tokens": [
+    "flood"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "flood_substation",
+   "status": "live",
+   "cell_title": "Flood × Substation",
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "hurricane_wind",
+   "label": "Hurricane wind",
+   "catalogue": "Hurricane wind",
+   "twin": [
+    "wind"
+   ],
+   "entry_tokens": [
+    "tropical_cyclone_wind",
+    "hurricane"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "substation_hurricane_screening_v1",
+   "status": "reused",
+   "cell_title": "Hurricane wind × Substation",
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "convective_wind",
+   "label": "Convective wind",
+   "catalogue": "Convective wind",
+   "twin": [
+    "wind"
+   ],
+   "entry_tokens": [
+    "convective_wind",
+    "strong_wind",
+    "wind_tornado"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "substation_convective_wind_screening_v1",
+   "status": "reused",
+   "cell_title": "Convective wind × Substation",
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "wildfire",
+   "label": "Wildfire",
+   "catalogue": "Wildfire",
+   "twin": [
+    "wildfire"
+   ],
+   "entry_tokens": [
+    "wildfire"
+   ],
+   "outside_the_five": false,
+   "effect": "damage",
+   "entry_id": "substation_wildfire_screening_v1",
+   "status": "reused",
+   "cell_title": "Wildfire × Substation",
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "heat",
+   "label": "Heat",
+   "catalogue": null,
+   "twin": [
+    "heat"
+   ],
+   "entry_tokens": [],
+   "outside_the_five": true,
+   "effect": "performance",
+   "effect_note": "The twin's heat leads (ageing, derating, chiller capacity) work through performance, not physical damage; pointer to the outage-as-performance work, no curve (discussion 04 §6).",
+   "entry_id": null,
+   "status": null,
+   "cell_title": null,
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "icing",
+   "label": "Icing",
+   "catalogue": null,
+   "twin": [
+    "icing"
+   ],
+   "entry_tokens": [],
+   "outside_the_five": true,
+   "effect": "damage",
+   "effect_note": "Two leads in the twin: snow load on the venting panels (physical, L) and cold limiting the charge rate until heated (performance, L). No hazard cell; the C-172 snow-and-ice reasoning applies (discussion 04 §6).",
+   "entry_id": null,
+   "status": null,
+   "cell_title": null,
+   "occurrence_href": null,
+   "has_register": false
+  },
+  {
+   "slug": "lightning",
+   "label": "Lightning",
+   "catalogue": null,
+   "twin": [
+    "lightning"
+   ],
+   "entry_tokens": [],
+   "outside_the_five": true,
+   "effect": "damage",
+   "effect_note": "No hazard cell exists; the twin carries Medium surge leads on the electronics (discussion 04 §6).",
+   "entry_id": null,
+   "status": null,
+   "cell_title": null,
+   "occurrence_href": null,
+   "has_register": false
+  }
+ ],
+ "rows": [
+  {
+   "key": "FACILITY_GSU_SUBSTATION_SOURCE_NATIVE",
+   "label": "Facility Gsu Substation Source Native",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "FACILITY_GSU_SUBSTATION_SOURCE_NATIVE"
+   ],
+   "cells": {
+    "flood": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "flood_substation",
+     "occurrence": {
+      "bucket": "FACILITY_GSU_SUBSTATION_SOURCE_NATIVE",
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": null
+     },
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "■",
+      "state": "live",
+      "partial": false,
+      "shape": "T3",
+      "cost": "T4",
+      "curves": [
+       "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL"
+      ],
+      "drawn": true
+     }
+    },
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "hail_substation",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     }
+    }
+   }
+  },
+  {
+   "key": "Whole station (fenced assembly)",
+   "label": "Whole station (fenced assembly)",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [],
+   "cells": {
+    "convective_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "substation_convective_wind_screening_v1",
+     "occurrence": {
+      "bucket": "Whole station (fenced assembly)",
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": null
+     },
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "▨",
+      "state": "reused",
+      "partial": false,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+      ],
+      "drawn": false
+     }
+    },
+    "hurricane_wind": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "substation_hurricane_screening_v1",
+     "occurrence": {
+      "bucket": "Whole station (fenced assembly)",
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": null
+     },
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "▨",
+      "state": "reused",
+      "partial": false,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+      ],
+      "drawn": false
+     }
+    },
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "hail_substation",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     }
+    }
+   }
+  },
+  {
+   "key": "Electrical equipment (transformers and switchgear)",
+   "label": "Electrical equipment (transformers and switchgear)",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [],
+   "cells": {
+    "wildfire": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "substation_wildfire_screening_v1",
+     "occurrence": {
+      "bucket": "Electrical equipment (transformers and switchgear)",
+      "state": "not_searched",
+      "mark": "?",
+      "sentence": "Not searched — nobody has looked for field reports yet.",
+      "reports": [],
+      "twin_lead": null
+     },
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "▨",
+      "state": "reused",
+      "partial": true,
+      "shape": "T4",
+      "cost": "T4",
+      "curves": [
+       "WSV1_MV_EQUIPMENT_THERMAL"
+      ],
+      "drawn": false
+     }
+    },
+    "hail": {
+     "twin_lead": null,
+     "twin_nodes": [],
+     "entry_id": "hail_substation",
+     "occurrence": null,
+     "effect": "damage",
+     "outside_the_five": false,
+     "curve": {
+      "mark": "┈",
+      "state": "gap",
+      "label": "gap"
+     }
+    }
+   }
+  }
+ ],
+ "entries": [
+  {
+   "entry_id": "flood_substation",
+   "kind": "cell",
+   "status": "live",
+   "title": "Flood × Substation",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "exists": {
+    "status": "live",
+    "mark": "■",
+    "label": "LIVE",
+    "qualifier": null
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "T3",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "?",
+     "label": "not searched"
+    }
+   },
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the cell's own tier table, capability, consumer binding and decision log",
+    "entry_read_kind": "agent",
+    "release_review": "agent reviewed screening under owner delivery direction",
+    "release_review_code": "agent_reviewed_screening_under_owner_delivery_direction",
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release agent reviewed screening under owner delivery direction"
+   },
+   "identity": {
+    "kind": "cell",
+    "damage_code_id": "FLOOD_SUBSTATION_DEPTH_SCREENING_V1",
+    "model": "model v1.0",
+    "docs": "docs r1",
+    "version_key": "model_v1_0__docs_r1",
+    "schema": "damage_curve_record_bundle.v3",
+    "sha256": "f001eb0191439a1345a7a794995c684ef731f777c4b3e1eff0298de592999f30",
+    "consumer_pin": "flood_substation@model_v1_0__docs_r1"
+   },
+   "summary": "Flood on substations: fEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage ratios used as published (0 to 15% over 0 to 10 ft), the same table already carried by the flood_wind cell.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 1,
+   "n_drawn": 1,
+   "outside_checks": 0,
+   "chain_core_as_files": 5,
+   "generation": "skill",
+   "aria_label": "Flood × Substation, live, shape T3, cost T4, not searched",
+   "href": "/cells/flood_substation"
+  },
+  {
+   "entry_id": "hail_substation",
+   "kind": "gap",
+   "status": "gap",
+   "title": "Hail × Substation",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail"
+   },
+   "exists": {
+    "status": "gap",
+    "mark": "┈",
+    "label": "GAP",
+    "qualifier": null
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "–",
+    "cost": "–",
+    "occurrence": {
+     "mark": "?",
+     "label": "not searched"
+    }
+   },
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the substation plan and cross-hazard reuse inventory",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "gap",
+    "damage_code_id": null,
+    "model": null,
+    "docs": null,
+    "version_key": null,
+    "sha256": null
+   },
+   "summary": "Hail on substations has no curve yet — hail was excluded from the first substation delivery and no station hail response was found in the reviewed curves; missing evidence is not zero risk (docs/extra/discussion/substation_damage/05_cross_hazard_reuse_inventory.md).",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 0,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 0,
+   "generation": "gap",
+   "aria_label": "Hail × Substation, gap, not searched",
+   "href": "/cells/hail_substation"
+  },
+  {
+   "entry_id": "substation_convective_wind_screening_v1",
+   "kind": "binding",
+   "status": "reused",
+   "title": "Convective wind × Substation",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "exists": {
+    "status": "reused",
+    "mark": "▨",
+    "label": "REUSED",
+    "qualifier": null
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "?",
+     "label": "not searched"
+    }
+   },
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the binding README, binding.json and the source cell's tier table",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "binding",
+    "binding_id": "SUBSTATION_CW_DIRECT_WIND_SCREENING_V1",
+    "damage_code_id": null,
+    "model": "model v2.1",
+    "docs": "docs r2",
+    "version_key": "model_v2_1__docs_r2",
+    "source_cell_id": "tropical_cyclone_wind_solar",
+    "source_artifact_sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
+    "sha256": "5afa3f9cd31ee52092762bdb505fbc4c24c02ed2420d1be67c448e6441383be0"
+   },
+   "summary": "Convective wind on substations reuses another cell's curve: same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a T4 cross-hazard proxy for direct wind only (see docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md).",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 0,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 2,
+   "generation": "binding",
+   "aria_label": "Convective wind × Substation, reused, shape T4, cost T4, not searched",
+   "href": "/cells/substation_convective_wind_screening_v1"
+  },
+  {
+   "entry_id": "substation_hurricane_screening_v1",
+   "kind": "binding",
+   "status": "reused",
+   "title": "Hurricane wind × Substation",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "exists": {
+    "status": "reused",
+    "mark": "▨",
+    "label": "REUSED",
+    "qualifier": null
+   },
+   "partial": false,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "?",
+     "label": "not searched"
+    }
+   },
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the binding README, binding.json and the source cell's tier table",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "binding",
+    "binding_id": "SUBSTATION_TC_WIND_ASSEMBLY_SCREENING_V1",
+    "damage_code_id": null,
+    "model": "model v2.1",
+    "docs": "docs r2",
+    "version_key": "model_v2_1__docs_r2",
+    "source_cell_id": "tropical_cyclone_wind_solar",
+    "source_artifact_sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
+    "sha256": "4a5e994b4ef8cde8629bba765f1643190ce49e31cf045dbcf36adaf05a8f4773"
+   },
+   "summary": "Hurricane wind on substations reuses another cell's curve: the canonical solar TC-wind GSU/substation assembly curve is already separate from the solar array, so it is reused for the standalone station without inventing a solar plant (see docs/contracts/hazard_handoff/substation_hurricane_screening_v1/README.md).",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 0,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 3,
+   "generation": "binding",
+   "aria_label": "Hurricane wind × Substation, reused, shape T4, cost T4, not searched",
+   "href": "/cells/substation_hurricane_screening_v1"
+  },
+  {
+   "entry_id": "substation_wildfire_screening_v1",
+   "kind": "binding",
+   "status": "reused",
+   "title": "Wildfire × Substation",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "exists": {
+    "status": "reused",
+    "mark": "▨",
+    "label": "REUSED",
+    "qualifier": null
+   },
+   "partial": true,
+   "tiers": {
+    "shape": "T4",
+    "cost": "T4",
+    "occurrence": {
+     "mark": "?",
+     "label": "not searched"
+    }
+   },
+   "occurrence": {
+    "mark": "?",
+    "label": "not searched"
+   },
+   "review": {
+    "entry_read_on": "2026-10-19",
+    "entry_read_by": "Agent-drafted, from the binding README, binding.json and the source cell's tier table",
+    "entry_read_kind": "agent",
+    "release_review": null,
+    "release_review_code": null,
+    "review": null,
+    "tone": "neutral",
+    "label": "entry agent-read 2026-10-19 · release —"
+   },
+   "identity": {
+    "kind": "binding",
+    "binding_id": "substation_wildfire_electrical_screening_v1",
+    "damage_code_id": null,
+    "model": "model v1.0",
+    "docs": "docs r3",
+    "version_key": "model_v1_0__docs_r3",
+    "source_cell_id": "wildfire_solar",
+    "source_artifact_sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
+    "sha256": "10742caaf6e4622f72b2572db08d3fc4cc4dc92ca58746ad0928cabad4be5e48"
+   },
+   "summary": "Wildfire on substations reuses another cell's curve: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a T4 assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md); 1 part of the asset's value has no curve.",
+   "no_evaluator": false,
+   "share_covered": null,
+   "n_curves": 0,
+   "n_drawn": 0,
+   "outside_checks": 0,
+   "chain_core_as_files": 3,
+   "generation": "binding",
+   "aria_label": "Wildfire × Substation, reused, partial, shape T4, cost T4, not searched",
+   "href": "/cells/substation_wildfire_screening_v1"
+  }
+ ],
+ "has_buckets": false,
+ "twin_crosswalk": null
+}
