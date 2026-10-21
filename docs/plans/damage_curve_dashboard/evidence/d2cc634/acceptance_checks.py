@@ -43,7 +43,11 @@ def fetch(path: str) -> str:
 
 def default_view_text(page: str) -> str:
     """The visible text a reader sees before any control: no <details> bodies, no <footer>, no attributes."""
-    page = re.sub(r"<details.*?</details>", " ", page, flags=re.S)
+    while re.search(r"<details", page):  # innermost first: "Show the numbers" nests the knots, answers and parameter disclosures
+        nxt = re.sub(r"<details(?:(?!<details).)*?</details>", " ", page, flags=re.S)
+        if nxt == page:
+            break
+        page = nxt
     page = re.sub(r"<footer.*?</footer>", " ", page, flags=re.S)
     page = re.sub(r"<script.*?</script>", " ", page, flags=re.S)
     page = re.sub(r"<style.*?</style>", " ", page, flags=re.S)

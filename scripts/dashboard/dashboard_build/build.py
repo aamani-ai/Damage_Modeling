@@ -413,7 +413,7 @@ def build(write: bool = True) -> dict[str, Any]:
             "files": files, "folder_files": folder_files,
             "gap_reason": e.data.get("reason"),
             "binding": {"source_cell_id": e.identity.get("source_cell_id"), "source_entry_id": e.identity.get("source_cell_id"), "reused_curves": [c for r in e.data.get("rows") or [] for c in r.get("curves", [])],
-                        "transfer_rationale": a.get("transfer_rationale"), "transfer_tier": a.get("transfer_tier"), "status": a.get("status"), "limitations": a.get("limitations")} if e.kind == "binding" else None,
+                        "transfer_rationale": plain_text(a.get("transfer_rationale")), "transfer_rationale_raw": a.get("transfer_rationale"), "transfer_tier": a.get("transfer_tier"), "status": a.get("status"), "limitations": a.get("limitations")} if e.kind == "binding" else None,
             "sampling_notes": sampled["notes"],
             "plain": plain,
         }
@@ -425,6 +425,7 @@ def build(write: bool = True) -> dict[str, Any]:
             c["rail"] = cell["rail"]
             c["parameters_rows"] = [p for p in regs.get("parameters") or [] if (p.get("curve_id") == c["curve_id"]) or (not p.get("curve_id"))]
             c["sources_for_curve"] = sorted({s for p in c["parameters_rows"] for s in p["source_ids"]})
+            c["row_notes"] = [{**n, "text": plain_text(n.get("text")), "raw": n.get("text")} for n in c.get("row_notes") or []]
             c["sources_resolved"] = [sources_by_id[aliases.get(s, s)] for s in c["sources_for_curve"] if aliases.get(s, s) in sources_by_id]
             c["plain_tiers"] = {"shape": tier_words(c["tiers"].get("shape")), "cost": tier_words(c["tiers"].get("cost"))}
             bucket = bucket_of_subsystem.get(c["subsystem"])

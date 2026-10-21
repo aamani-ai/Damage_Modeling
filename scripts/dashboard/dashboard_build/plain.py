@@ -135,6 +135,7 @@ def plain_text(s: str | None) -> str | None:
     t = re.sub(r"\(\s+", "(", t)
     t = re.sub(r"\s{2,}", " ", t).strip()
     t = re.sub(r"\((T[1-4])\)", lambda m: f"({m.group(1)}, {TIER_SHORT[m.group(1)]})", t)
+    t = re.sub(r"\((T[1-4])\s+([^()]*)\)", lambda m: f"({TIER_SHORT[m.group(1)]}, {m.group(1)} {m.group(2)})", t)
     t = re.sub(r"(?<![·(\-–,]\s)(?<![A-Za-z(])(T[1-4])\b(?!–|\s*[—·(:,]|[_\w])", lambda m: f"{m.group(1)} ({TIER_SHORT[m.group(1)]})", t)
     return t
 
@@ -374,8 +375,8 @@ def resolve_key_sources(key_sources: list[str], sources_by_id: dict[str, dict[st
     """'NEMA GD 1-2016, Evaluating … (BF-S02)' → the register row BF-S02 with its link; an ID with no row keeps its text."""
     out = []
     for ks in key_sources:
-        m = re.search(r"\(([A-Za-z][A-Za-z0-9_\-]{1,60}(?:,\s*[A-Za-z][A-Za-z0-9_\-]{1,60})*)(?:;\s*([^)]*))?\)\s*$", ks)
-        id_list = [i.strip() for i in m.group(1).split(",")] if m else []
+        m = re.search(r"\(([A-Za-z][A-Za-z0-9_\-]{1,60}(?:\s*[,/]\s*[A-Za-z][A-Za-z0-9_\-]{1,60})*)(?:;\s*([^)]*))?\)\s*$", ks)
+        id_list = [i.strip() for i in re.split(r"[,/]", m.group(1))] if m else []
         note = (m.group(2) or "").strip() if m else ""
         text = (ks[: m.start()].strip() + (f" ({note})" if note else "")) if m else ks
         rows = [sources_by_id.get(aliases.get(i, i)) for i in id_list]

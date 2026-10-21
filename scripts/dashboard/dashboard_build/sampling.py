@@ -88,6 +88,17 @@ def _curve(e: Entry, record: dict[str, Any], axis: dict[str, Any], series: list[
     }
 
 
+def _series_label(e: Entry, rec: dict[str, Any]) -> str:
+    """The words a plot labels a series with: the catalogue part when it has one curve, else the part and the record's
+    own words — never a bare curve ID in the default view."""
+    row = row_for_curve(e, rec["curve_id"]) or {}
+    part = row.get("part")
+    if part and len(row.get("curves") or []) == 1:
+        return part
+    words = humanise(rec["curve_id"]).lower()
+    return f"{part} · {words}" if part else words
+
+
 def _first_clause(text: str) -> str:
     """Text up to the first ':', ',' or ';' outside parentheses."""
     depth = 0
@@ -322,7 +333,7 @@ def sample_via_evaluator(e: Entry, module: Any, module_name: str, templates: dic
         zones = []
         if withheld:
             zones.append({"from": min(withheld), "to": max(withheld), "reason": "withheld by the evaluator (outside the record's support)"})
-        curves.append(_curve(e, rec, axis, [_series(rec["curve_id"], pts, "categorical" if categorical else "line")],
+        curves.append(_curve(e, rec, axis, [_series(_series_label(e, rec), pts, "categorical" if categorical else "line")],
                              evaluator=_evaluator(module_name, "evaluate_damage_call", "request template from the cell's known-answer tests; the hazard axis field varied over the record's valid range"),
                              knots=knots, domain=list(vr) if vr else [knots[0][0], knots[-1][0]], withheld_zones=zones))
     return curves, notes
@@ -336,7 +347,7 @@ def sample_pwl_generic(e: Entry, rec: dict[str, Any], axis: dict[str, Any], cate
     lo, hi = (vr[0], vr[1]) if vr else (knots[0][0], knots[-1][0])
     xs = [float(int(x)) for x, _ in knots] if categorical else _merge(grid(lo, hi), [kx for kx, _ in knots if lo <= kx <= hi])
     pts = [[x, dce.evaluate_curve_record(rec, x=x)] for x in xs]
-    return _curve(e, rec, axis, [_series(rec["curve_id"], pts, "categorical" if categorical else "line")],
+    return _curve(e, rec, axis, [_series(_series_label(e, rec), pts, "categorical" if categorical else "line")],
                   evaluator=_evaluator("damage_curve_eval", "evaluate_curve_record", note or "generic piecewise-linear evaluator; sampled inside the record's valid range"),
                   knots=knots, domain=[lo, hi])
 
