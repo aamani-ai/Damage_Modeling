@@ -209,7 +209,7 @@
       ]
      }
     ],
-    "fact": "T2–4",
+    "fact": "8 src · T2–4",
     "absent_sentence": null
    },
    {
@@ -377,7 +377,7 @@
     "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only."
    }
   ],
-  "generation": "prose",
+  "generation": "skill",
   "core_as_files": 3,
   "core_total": 6,
   "dossier": {
@@ -435,12 +435,12 @@
     "items": [
      {
       "item": "source register with stable IDs, locators, roles, tiers and decisions",
-      "status": "human",
+      "status": "proven",
       "basis": null
      },
      {
       "item": "load-bearing claims carry claim-level provenance",
-      "status": "human",
+      "status": "proven",
       "basis": null
      },
      {
@@ -832,15 +832,15 @@
   }
  ],
  "evidence": {
-  "lineage": "parameters_only",
+  "lineage": "extracted",
   "prose_sentence": null,
   "paths": {
    "sources": null,
    "claims": null,
    "parameters": null
   },
-  "n_sources": 0,
-  "n_claims": 0,
+  "n_sources": 8,
+  "n_claims": 8,
   "n_parameters": 22,
   "key_sources": [
    "IEC 61400-1 design classes and Ve50 = 1.4 x Vref (DTU_IEC_61400_1, ASHES_IEC_EXTREME_EVENTS)",
@@ -1085,5 +1085,1753 @@
  "sampling_notes": [
   "No known-answer tests declared by this artifact."
  ],
- "build_findings": []
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Live · in the runtime index",
+    "code": "LIVE"
+   },
+   "evidence": {
+    "words": "Evidence: transferred and our judgment",
+    "code": "shape T4 · cost T3–4",
+    "tiers": [
+     "T3",
+     "T4"
+    ]
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "? not searched"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release —"
+   }
+  },
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "✓",
+    "label": "one convective wind event (give hub-height 3-second gust)",
+    "short": "one convective wind event",
+    "detail": "failure-unit damage ratio"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "◐",
+    "label": "a dollar scenario",
+    "short": "a dollar scenario",
+    "detail": "needs an explicit value and exposure basis"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "◐",
+    "label": "yearly loss — only through Hazard",
+    "short": "yearly loss",
+    "detail": "consumer-computed from sampled frequency and intensity, a coupling model and caps applied inside the simulation; curve spread not carried"
+   },
+   {
+    "key": "pml",
+    "mark": "◐",
+    "label": "PML, VaR, TVaR — only from Hazard's validated annual loss distribution",
+    "short": "PML, VaR and TVaR",
+    "detail": "consumer computable from validated annual loss distribution"
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": null,
+    "not_covered": [
+     "SCADA and controls, electrical collection, substation and civil infrastructure (reviewed secondary units, no curve)"
+    ],
+    "withheld": []
+   },
+   "assumed": [
+    "The 50% damage points (D50 ratios) for every part are engineering fits",
+    "Curve steepness (k) for every part is an engineering fit for sparse evidence",
+    "Tornado direct-hit shifts of the 50% point (-0.05 to -0.12) are placeholders",
+    "Power electronics maximum damage of 0.3 is a judgment cap"
+   ],
+   "missing": {
+    "mechanisms": [
+     "Operating, feathered and yaw state are flags only, with no numeric effect"
+    ],
+    "out_of_scope": [
+     "Tropical-cyclone and hurricane wind (separate neighbouring cell)"
+    ]
+   },
+   "open_questions": [
+    "Blade, tower, nacelle and foundation damage are summed; a damage-state dependency matrix is still needed",
+    "Measured tornado-on-turbine fragility remains sparse",
+    "Candidate v1.1 items not adopted: numeric yaw-error conditioner, tornado shift refinement, IEC class II/III offsets",
+    "Curve spread not carried"
+   ],
+   "next_version": "Model v2.0 proposal (not indexed): separate straight-line and tornado direct-hit pathways with ordered damage states, narrowed to one turbine-equipment assembly on a 1,090 USD/kW (2023) denominator"
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "What it covers",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Convective wind on wind farms: engineering-fit logistic curves on hub gust over the IEC 50-year gust, built from IEC design speeds, the NIST fragility method and EF4 case evidence; tornado is a curve shift. It names 5 parts: Blade, Tower, Nacelle, Foundation and Power electronics. Outside its scope: tropical-cyclone and hurricane wind (separate neighbouring cell). Kinds of damage it does not include: operating, feathered and yaw state are flags only, with no numeric effect.",
+    "plain_fact": "5 parts · 1 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the wind farm is split into 5 parts: Blade, Tower, Nacelle, Foundation and Power electronics. Parts of the plant's value with no curve yet: SCADA and controls, electrical collection, substation and civil infrastructure (reviewed secondary units, no curve).",
+    "plain_fact": "5 parts"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "Damage is read against gust ratio V₃ₛ,hub / Ve50 (IEC class). The curve is an S-shaped curve: little damage, then a steep rise, then a plateau (logistic). The input, in the catalogue's words: hub-height 3-second gust (m/s), or 10 m gust with a height bridge, divided by the IEC class 50-year gust (Ve50 = 1.4 x Vref); tornado via an EF-scale gust proxy; no fixed range (extrapolation warns).",
+    "plain_fact": "an S-curve"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "8 sources set this cell: IEC 61400-1 turbine safety standard explainer, Fragility curves, damage matrices, and wind-induced loss estimation, Wind turbines severe weather controls and design context and Enhanced Fujita scale and 4 more. Of the 22 parameters, 1 is lab-tested (T2), 5 are transferred (T3) and 16 are our judgment (T4). The sources were read from the workbook's Evidence_Params, Sources, Assumption_Register and Open_Seams sheets, because this older cell keeps them there rather than in register files. 1 source ID in the tier table (AWN_15_DECLARED_BRIDGE) matches no document in the workbook or dossier.",
+    "plain_fact": "8 sources · transferred and our judgment"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "The damage ratio is a share of each part's default share of the physical replaceable base (blade 0.173, tower 0.169, nacelle 0.345, foundation 0.062, power electronics 0.037), times the exposed turbine fraction. The files state no plant-level dollar figure for this asset. Shares of the plant's physical value, as the cell states them: Blade 17 %, Tower 17 %, Nacelle 34 %, Foundation 6 % and Power electronics 4 %.",
+    "plain_fact": "shares per part"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "adjustments in the write-up"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 5 curve records (model v1.0, docs r4). The write-up is wind_tornado_wind_curve_derivation_dossier_v1_0.md. The workbook is damage_curve_records_v1_0_wind_tornado_wind.xlsx. The cell folder holds 7 files, each with its SHA under Details.",
+    "plain_fact": "5 curve records"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "It can give one convective wind event. A dollar scenario, yearly loss and PML, VaR and TVaR are available only under conditions the consumer (Hazard) checks. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "1 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "The artifact declares no known-answer tests, so this build reproduced none. No validation record was found. 1 outside check: Financial range check (Hazard repo): value-envelope ceiling for wind-farm convective wind (shared lineage; no open industry loss figures found).",
+    "plain_fact": "no known answers"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "IEC 61400-1 design classes and Ve50 = 1.4 x Vref",
+    "ids": [
+     "DTU_IEC_61400_1",
+     "ASHES_IEC_EXTREME_EVENTS"
+    ],
+    "title": "IEC 61400-1 turbine safety standard explainer",
+    "link": "https://wasp.dtu.dk/software/windfarm-assessment-tool/iec-61400-1",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SRC_DTU_IEC"
+   },
+   {
+    "text": "NIST, Fragility curves, damage matrices and wind-induced loss estimation",
+    "ids": [
+     "NIST_FRAGILITY_METHOD"
+    ],
+    "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+    "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SRC_NIST_FRAGILITY"
+   },
+   {
+    "text": "US DOE, How do wind turbines survive severe weather and storms",
+    "ids": [
+     "DOE_SEVERE_WEATHER"
+    ],
+    "title": "Wind turbines severe weather controls and design context",
+    "link": "https://www.energy.gov/cmei/wind/articles/how-do-wind-turbines-survive-severe-weather-and-storms",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SRC_DOE_WIND_STORMS"
+   },
+   {
+    "text": "NOAA/NWS, Enhanced Fujita scale",
+    "ids": [
+     "NOAA_NWS_EF_SCALE"
+    ],
+    "title": "Enhanced Fujita scale",
+    "link": "https://www.weather.gov/grb/efscale",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SRC_NWS_EF"
+   },
+   {
+    "text": "NASA Earth Observatory, Greenfield EF4 tornado damage",
+    "ids": [
+     "NASA_GREENFIELD_TORNADO"
+    ],
+    "title": "2024 Greenfield tornado case",
+    "link": "https://science.nasa.gov/earth/earth-observatory/tornado-damage-in-greenfield-152870/",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SRC_NASA_GREENFIELD"
+   }
+  ],
+  "sources": [
+   {
+    "id": "SRC_DOE_WIND_STORMS",
+    "title": "Wind turbines severe weather controls and design context",
+    "citation": "Wind turbines severe weather controls and design context",
+    "url": "https://www.energy.gov/cmei/wind/articles/how-do-wind-turbines-survive-severe-weather-and-storms",
+    "locator": null,
+    "role": "Supports cut-out/shutdown, feathering, yaw behavior, typical IEC design gust context, and direct tornado-damage caveat.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SRC_DOE_WIND_STORMS"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.energy.gov/cmei/wind/articles/how-do-wind-turbines-survive-severe-weather-and-storms",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SRC_DTU_IEC",
+    "title": "IEC 61400-1 turbine safety standard explainer",
+    "citation": "IEC 61400-1 turbine safety standard explainer",
+    "url": "https://wasp.dtu.dk/software/windfarm-assessment-tool/iec-61400-1",
+    "locator": null,
+    "role": "Supports class/load-case framing, extreme wind, gusts, yaw error, turbulence, and site assessment principle.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SRC_DTU_IEC"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://wasp.dtu.dk/software/windfarm-assessment-tool/iec-61400-1",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SRC_ASHES_IEC_EWM",
+    "title": "IEC extreme wind equations summary",
+    "citation": "IEC extreme wind equations summary",
+    "url": "https://www.simis.io/docs/wind-iec-extreme-events",
+    "locator": null,
+    "role": "Supports Ve50 = 1.4 * Vref at hub height, Ve1 = 0.8 * Ve50, and extreme wind model framing.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SRC_ASHES_IEC_EWM"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.simis.io/docs/wind-iec-extreme-events",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SRC_NWS_EF",
+    "title": "Enhanced Fujita scale",
+    "citation": "Enhanced Fujita scale",
+    "url": "https://www.weather.gov/grb/efscale",
+    "locator": null,
+    "role": "Supports EF-scale 3-second gust ranges and warning that EF wind estimates are damage-based, not direct measurements.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SRC_NWS_EF"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.weather.gov/grb/efscale",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SRC_NASA_GREENFIELD",
+    "title": "2024 Greenfield tornado case",
+    "citation": "2024 Greenfield tornado case",
+    "url": "https://science.nasa.gov/earth/earth-observatory/tornado-damage-in-greenfield-152870/",
+    "locator": null,
+    "role": "Supports EF4 185 mph case evidence with downed wind turbines/power lines; used as high-severity case evidence, not a curve.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SRC_NASA_GREENFIELD"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://science.nasa.gov/earth/earth-observatory/tornado-damage-in-greenfield-152870/",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SRC_NIST_FRAGILITY",
+    "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+    "citation": "Fragility curves, damage matrices, and wind-induced loss estimation",
+    "url": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+    "locator": null,
+    "role": "Supports fragility/damage-state methodology, multiple damage types, no double-counting, and conditional dependencies.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SRC_NIST_FRAGILITY"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SRC_RICE_ACCEL",
+    "title": "Wind-induced acceleration fragility context",
+    "citation": "Wind-induced acceleration fragility context",
+    "url": "https://duenas-osorio.rice.edu/sisrra/current-projects-and-sponsors/long-term-unavailability-wind-turbines-wind-induced-accelerations",
+    "locator": null,
+    "role": "Supports acceleration-sensitive turbine subcomponents as secondary/open-seam pathway, not default physical-damage curve.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SRC_RICE_ACCEL"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://duenas-osorio.rice.edu/sisrra/current-projects-and-sponsors/long-term-unavailability-wind-turbines-wind-induced-accelerations",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+    "title": "solar_wind_value_breakdown.xlsx",
+    "citation": "solar_wind_value_breakdown.xlsx (this repository)",
+    "url": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "locator": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "role": "value basis",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "repository-file",
+    "from": {
+     "file": "docs/method/value_basis/solar_wind_value_breakdown.xlsx"
+    },
+    "aliases": [
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "link_kind": "repo_file",
+    "no_link_sentence": null
+   }
+  ],
+  "claims": [
+   {
+    "id": "EVID_001",
+    "text": "Cut-out/shutdown and controls",
+    "type": "",
+    "source_ids": [
+     "SRC_DOE_WIND_STORMS"
+    ],
+    "source_name": "SRC_DOE_WIND_STORMS",
+    "locator": null,
+    "tier": null,
+    "strength": "",
+    "parameter_or_rule": "Used to define pitch/brake/yaw as conditioners, not damaged value buckets.",
+    "how_used": "Conditioner logic",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+     "sheet": "Evidence_Params"
+    }
+   },
+   {
+    "id": "EVID_002",
+    "text": "IEC design gust context",
+    "type": "",
+    "source_ids": [
+     "SRC_DOE_WIND_STORMS"
+    ],
+    "source_name": "SRC_DOE_WIND_STORMS",
+    "locator": null,
+    "tier": null,
+    "strength": "",
+    "parameter_or_rule": "Used as design anchor context, not as proof of zero failure.",
+    "how_used": "Low-damage design anchor",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+     "sheet": "Evidence_Params"
+    }
+   },
+   {
+    "id": "EVID_003",
+    "text": "IEC class/load-case framing",
+    "type": "",
+    "source_ids": [
+     "SRC_DTU_IEC"
+    ],
+    "source_name": "SRC_DTU_IEC",
+    "locator": null,
+    "tier": null,
+    "strength": "",
+    "parameter_or_rule": "Supports using IEC class as selector and operating states as conditioners.",
+    "how_used": "X-axis + selector logic",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+     "sheet": "Evidence_Params"
+    }
+   },
+   {
+    "id": "EVID_004",
+    "text": "Ve50 equation",
+    "type": "",
+    "source_ids": [
+     "SRC_ASHES_IEC_EWM"
+    ],
+    "source_name": "SRC_ASHES_IEC_EWM",
+    "locator": null,
+    "tier": null,
+    "strength": "",
+    "parameter_or_rule": "Used to compute design-normalized speed ratio r = V3s_hub / Ve50_class.",
+    "how_used": "Speed normalization",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+     "sheet": "Evidence_Params"
+    }
+   },
+   {
+    "id": "EVID_005",
+    "text": "EF 3-second gust ranges",
+    "type": "",
+    "source_ids": [
+     "SRC_NWS_EF"
+    ],
+    "source_name": "SRC_NWS_EF",
+    "locator": null,
+    "tier": null,
+    "strength": "",
+    "parameter_or_rule": "Used to bridge tornado EF to wind speed proxy with caution.",
+    "how_used": "Tornado bridge",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+     "sheet": "Evidence_Params"
+    }
+   },
+   {
+    "id": "EVID_006",
+    "text": "Greenfield EF4 direct-hit case",
+    "type": "",
+    "source_ids": [
+     "SRC_NASA_GREENFIELD"
+    ],
+    "source_name": "SRC_NASA_GREENFIELD",
+    "locator": null,
+    "tier": null,
+    "strength": "",
+    "parameter_or_rule": "Used to check that direct-hit EF4 can produce catastrophic turbine outcomes; not a full curve.",
+    "how_used": "High-severity case evidence",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+     "sheet": "Evidence_Params"
+    }
+   },
+   {
+    "id": "EVID_007",
+    "text": "Fragility/damage-state methodology",
+    "type": "",
+    "source_ids": [
+     "SRC_NIST_FRAGILITY"
+    ],
+    "source_name": "SRC_NIST_FRAGILITY",
+    "locator": null,
+    "tier": null,
+    "strength": "",
+    "parameter_or_rule": "Supports logit/logistic fragility structure and dependency notes.",
+    "how_used": "Curve form and no-double-count logic",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+     "sheet": "Evidence_Params"
+    }
+   },
+   {
+    "id": "EVID_008",
+    "text": "Acceleration-sensitive subcomponents",
+    "type": "",
+    "source_ids": [
+     "SRC_RICE_ACCEL"
+    ],
+    "source_name": "SRC_RICE_ACCEL",
+    "locator": null,
+    "tier": null,
+    "strength": "",
+    "parameter_or_rule": "Marked as secondary/open-seam pathway for v1.0.",
+    "how_used": "Secondary pathway",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+     "sheet": "Evidence_Params"
+    }
+   }
+  ],
+  "parameters": [
+   {
+    "id": "Ve50 = 1.4 * Vref",
+    "name": "Ve50 = 1.4 * Vref",
+    "value": "IEC class table",
+    "tier": "T2",
+    "source_ids": [
+     "DTU_IEC_61400_1",
+     "ASHES_IEC_EXTREME_EVENTS"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": null,
+    "role": "axis_bridge",
+    "status": null,
+    "reasoning": "IEC design bridge from Vref to 50-year extreme gust.",
+    "update_trigger": "site-specific turbine design speed"
+   },
+   {
+    "id": "10m_to_hub_height_bridge",
+    "name": "10m_to_hub_height_bridge",
+    "value": "power_law_or_log_law",
+    "tier": "T3",
+    "source_ids": [
+     "AWN_15_DECLARED_BRIDGE"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": null,
+    "role": "axis_bridge",
+    "status": null,
+    "reasoning": "Required to avoid feeding 10m gust into hub-height curve; exponent/roughness must be site/terrain documented.",
+    "update_trigger": "M2 catalog supplies hub-height gust directly"
+   },
+   {
+    "id": "max_DR",
+    "name": "max_DR",
+    "value": 1.0,
+    "tier": "T3",
+    "source_ids": [
+     "NIST_FRAGILITY_METHOD",
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_BLADE_STRUCT",
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": null,
+    "reasoning": "Failure-unit cap chosen for bounded generic structural severity; not claims-calibrated.",
+    "update_trigger": "claims/OEM/forensic value-loss calibration"
+   },
+   {
+    "id": "D50_ratio_straight_line",
+    "name": "D50_ratio_straight_line",
+    "value": 1.38,
+    "tier": "T4",
+    "source_ids": [
+     "DOE_SEVERE_WEATHER",
+     "NIST_FRAGILITY_METHOD"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_BLADE_STRUCT",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit normalized fragility transition; public sources support form/mechanism, not exact ratio.",
+    "update_trigger": "empirical turbine fragility dataset"
+   },
+   {
+    "id": "k_ratio",
+    "name": "k_ratio",
+    "value": 12.0,
+    "tier": "T4",
+    "source_ids": [
+     "NIST_FRAGILITY_METHOD"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_BLADE_STRUCT",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit steepness for sparse public evidence.",
+    "update_trigger": "empirical turbine fragility dataset"
+   },
+   {
+    "id": "tornado_D50_shift",
+    "name": "tornado_D50_shift",
+    "value": -0.1,
+    "tier": "T4",
+    "source_ids": [
+     "NOAA_NWS_EF_SCALE",
+     "NASA_GREENFIELD_TORNADO"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_BLADE_STRUCT",
+    "pathway_id": null,
+    "role": "conditioner_adjustment",
+    "status": null,
+    "reasoning": "Tornado direct-hit adjustment is qualitative/placeholder.",
+    "update_trigger": "tornado-specific turbine fragility data"
+   },
+   {
+    "id": "max_DR",
+    "name": "max_DR",
+    "value": 1.0,
+    "tier": "T3",
+    "source_ids": [
+     "NIST_FRAGILITY_METHOD",
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_TOWER_STRUCT",
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": null,
+    "reasoning": "Failure-unit cap chosen for bounded generic structural severity; not claims-calibrated.",
+    "update_trigger": "claims/OEM/forensic value-loss calibration"
+   },
+   {
+    "id": "D50_ratio_straight_line",
+    "name": "D50_ratio_straight_line",
+    "value": 1.48,
+    "tier": "T4",
+    "source_ids": [
+     "DOE_SEVERE_WEATHER",
+     "NIST_FRAGILITY_METHOD"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_TOWER_STRUCT",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit normalized fragility transition; public sources support form/mechanism, not exact ratio.",
+    "update_trigger": "empirical turbine fragility dataset"
+   },
+   {
+    "id": "k_ratio",
+    "name": "k_ratio",
+    "value": 11.0,
+    "tier": "T4",
+    "source_ids": [
+     "NIST_FRAGILITY_METHOD"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_TOWER_STRUCT",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit steepness for sparse public evidence.",
+    "update_trigger": "empirical turbine fragility dataset"
+   },
+   {
+    "id": "tornado_D50_shift",
+    "name": "tornado_D50_shift",
+    "value": -0.12,
+    "tier": "T4",
+    "source_ids": [
+     "NOAA_NWS_EF_SCALE",
+     "NASA_GREENFIELD_TORNADO"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_TOWER_STRUCT",
+    "pathway_id": null,
+    "role": "conditioner_adjustment",
+    "status": null,
+    "reasoning": "Tornado direct-hit adjustment is qualitative/placeholder.",
+    "update_trigger": "tornado-specific turbine fragility data"
+   },
+   {
+    "id": "max_DR",
+    "name": "max_DR",
+    "value": 0.85,
+    "tier": "T3",
+    "source_ids": [
+     "NIST_FRAGILITY_METHOD",
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_NACELLE_CONSEQ",
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": null,
+    "reasoning": "Failure-unit cap chosen for bounded generic structural severity; not claims-calibrated.",
+    "update_trigger": "claims/OEM/forensic value-loss calibration"
+   },
+   {
+    "id": "D50_ratio_straight_line",
+    "name": "D50_ratio_straight_line",
+    "value": 1.44,
+    "tier": "T4",
+    "source_ids": [
+     "DOE_SEVERE_WEATHER",
+     "NIST_FRAGILITY_METHOD"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_NACELLE_CONSEQ",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit normalized fragility transition; public sources support form/mechanism, not exact ratio.",
+    "update_trigger": "empirical turbine fragility dataset"
+   },
+   {
+    "id": "k_ratio",
+    "name": "k_ratio",
+    "value": 10.0,
+    "tier": "T4",
+    "source_ids": [
+     "NIST_FRAGILITY_METHOD"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_NACELLE_CONSEQ",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit steepness for sparse public evidence.",
+    "update_trigger": "empirical turbine fragility dataset"
+   },
+   {
+    "id": "tornado_D50_shift",
+    "name": "tornado_D50_shift",
+    "value": -0.1,
+    "tier": "T4",
+    "source_ids": [
+     "NOAA_NWS_EF_SCALE",
+     "NASA_GREENFIELD_TORNADO"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_NACELLE_CONSEQ",
+    "pathway_id": null,
+    "role": "conditioner_adjustment",
+    "status": null,
+    "reasoning": "Tornado direct-hit adjustment is qualitative/placeholder.",
+    "update_trigger": "tornado-specific turbine fragility data"
+   },
+   {
+    "id": "max_DR",
+    "name": "max_DR",
+    "value": 0.65,
+    "tier": "T3",
+    "source_ids": [
+     "NIST_FRAGILITY_METHOD",
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_FOUNDATION_OT",
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": null,
+    "reasoning": "Failure-unit cap chosen for bounded generic structural severity; not claims-calibrated.",
+    "update_trigger": "claims/OEM/forensic value-loss calibration"
+   },
+   {
+    "id": "D50_ratio_straight_line",
+    "name": "D50_ratio_straight_line",
+    "value": 1.62,
+    "tier": "T4",
+    "source_ids": [
+     "DOE_SEVERE_WEATHER",
+     "NIST_FRAGILITY_METHOD"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_FOUNDATION_OT",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit normalized fragility transition; public sources support form/mechanism, not exact ratio.",
+    "update_trigger": "empirical turbine fragility dataset"
+   },
+   {
+    "id": "k_ratio",
+    "name": "k_ratio",
+    "value": 9.0,
+    "tier": "T4",
+    "source_ids": [
+     "NIST_FRAGILITY_METHOD"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_FOUNDATION_OT",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit steepness for sparse public evidence.",
+    "update_trigger": "empirical turbine fragility dataset"
+   },
+   {
+    "id": "tornado_D50_shift",
+    "name": "tornado_D50_shift",
+    "value": -0.08,
+    "tier": "T4",
+    "source_ids": [
+     "NOAA_NWS_EF_SCALE",
+     "NASA_GREENFIELD_TORNADO"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_FOUNDATION_OT",
+    "pathway_id": null,
+    "role": "conditioner_adjustment",
+    "status": null,
+    "reasoning": "Tornado direct-hit adjustment is qualitative/placeholder.",
+    "update_trigger": "tornado-specific turbine fragility data"
+   },
+   {
+    "id": "max_DR",
+    "name": "max_DR",
+    "value": 0.3,
+    "tier": "T4",
+    "source_ids": [
+     "NIST_FRAGILITY_METHOD",
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_POWER_ELEC_ACCEL",
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": null,
+    "reasoning": "Failure-unit cap chosen for bounded generic structural severity; not claims-calibrated.",
+    "update_trigger": "claims/OEM/forensic value-loss calibration"
+   },
+   {
+    "id": "D50_ratio_straight_line",
+    "name": "D50_ratio_straight_line",
+    "value": 1.2,
+    "tier": "T4",
+    "source_ids": [
+     "DOE_SEVERE_WEATHER",
+     "NIST_FRAGILITY_METHOD"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_POWER_ELEC_ACCEL",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit normalized fragility transition; public sources support form/mechanism, not exact ratio.",
+    "update_trigger": "empirical turbine fragility dataset"
+   },
+   {
+    "id": "k_ratio",
+    "name": "k_ratio",
+    "value": 8.0,
+    "tier": "T4",
+    "source_ids": [
+     "NIST_FRAGILITY_METHOD"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_POWER_ELEC_ACCEL",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit steepness for sparse public evidence.",
+    "update_trigger": "empirical turbine fragility dataset"
+   },
+   {
+    "id": "tornado_D50_shift",
+    "name": "tornado_D50_shift",
+    "value": -0.05,
+    "tier": "T4",
+    "source_ids": [
+     "NOAA_NWS_EF_SCALE",
+     "NASA_GREENFIELD_TORNADO"
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_POWER_ELEC_ACCEL",
+    "pathway_id": null,
+    "role": "conditioner_adjustment",
+    "status": null,
+    "reasoning": "Tornado direct-hit adjustment is qualitative/placeholder.",
+    "update_trigger": "tornado-specific turbine fragility data"
+   }
+  ],
+  "parameters_plain": [
+   {
+    "id": "Ve50 = 1.4 * Vref",
+    "name": "Ve50 = 1.4 * Vref",
+    "value_text": "IEC class table",
+    "tier": "T2",
+    "tier_word": "lab-tested",
+    "sources": [
+     {
+      "id": "DTU_IEC_61400_1",
+      "title": "IEC 61400-1 turbine safety standard explainer",
+      "link": "https://wasp.dtu.dk/software/windfarm-assessment-tool/iec-61400-1",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "ASHES_IEC_EXTREME_EVENTS",
+      "title": "IEC extreme wind equations summary",
+      "link": "https://www.simis.io/docs/wind-iec-extreme-events",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "IEC design bridge from Vref to 50-year extreme gust.",
+    "update_trigger": "site-specific turbine design speed",
+    "role": "axis_bridge"
+   },
+   {
+    "id": "10m_to_hub_height_bridge",
+    "name": "10m_to_hub_height_bridge",
+    "value_text": "power_law_or_log_law",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "AWN_15_DECLARED_BRIDGE",
+      "title": "AWN_15_DECLARED_BRIDGE",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Required to avoid feeding 10m gust into hub-height curve; exponent/roughness must be site/terrain documented.",
+    "update_trigger": "M2 catalog supplies hub-height gust directly",
+    "role": "axis_bridge"
+   },
+   {
+    "id": "max_DR",
+    "name": "max_DR",
+    "value_text": "1",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "NIST_FRAGILITY_METHOD",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+      "title": "solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_BLADE_STRUCT",
+    "reasoning": "Failure-unit cap chosen for bounded generic structural severity; not claims-calibrated.",
+    "update_trigger": "claims/OEM/forensic value-loss calibration",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "D50_ratio_straight_line",
+    "name": "D50_ratio_straight_line",
+    "value_text": "1.38",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "DOE_SEVERE_WEATHER",
+      "title": "Wind turbines severe weather controls and design context",
+      "link": "https://www.energy.gov/cmei/wind/articles/how-do-wind-turbines-survive-severe-weather-and-storms",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NIST_FRAGILITY_METHOD",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_BLADE_STRUCT",
+    "reasoning": "Engineering-fit normalized fragility transition; public sources support form/mechanism, not exact ratio.",
+    "update_trigger": "empirical turbine fragility dataset",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "k_ratio",
+    "name": "k_ratio",
+    "value_text": "12",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "NIST_FRAGILITY_METHOD",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_BLADE_STRUCT",
+    "reasoning": "Engineering-fit steepness for sparse public evidence.",
+    "update_trigger": "empirical turbine fragility dataset",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "tornado_D50_shift",
+    "name": "tornado_D50_shift",
+    "value_text": "-0.1",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "NOAA_NWS_EF_SCALE",
+      "title": "Enhanced Fujita scale",
+      "link": "https://www.weather.gov/grb/efscale",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NASA_GREENFIELD_TORNADO",
+      "title": "2024 Greenfield tornado case",
+      "link": "https://science.nasa.gov/earth/earth-observatory/tornado-damage-in-greenfield-152870/",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_BLADE_STRUCT",
+    "reasoning": "Tornado direct-hit adjustment is qualitative/placeholder.",
+    "update_trigger": "tornado-specific turbine fragility data",
+    "role": "conditioner_adjustment"
+   },
+   {
+    "id": "max_DR",
+    "name": "max_DR",
+    "value_text": "1",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "NIST_FRAGILITY_METHOD",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+      "title": "solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_TOWER_STRUCT",
+    "reasoning": "Failure-unit cap chosen for bounded generic structural severity; not claims-calibrated.",
+    "update_trigger": "claims/OEM/forensic value-loss calibration",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "D50_ratio_straight_line",
+    "name": "D50_ratio_straight_line",
+    "value_text": "1.48",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "DOE_SEVERE_WEATHER",
+      "title": "Wind turbines severe weather controls and design context",
+      "link": "https://www.energy.gov/cmei/wind/articles/how-do-wind-turbines-survive-severe-weather-and-storms",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NIST_FRAGILITY_METHOD",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_TOWER_STRUCT",
+    "reasoning": "Engineering-fit normalized fragility transition; public sources support form/mechanism, not exact ratio.",
+    "update_trigger": "empirical turbine fragility dataset",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "k_ratio",
+    "name": "k_ratio",
+    "value_text": "11",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "NIST_FRAGILITY_METHOD",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_TOWER_STRUCT",
+    "reasoning": "Engineering-fit steepness for sparse public evidence.",
+    "update_trigger": "empirical turbine fragility dataset",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "tornado_D50_shift",
+    "name": "tornado_D50_shift",
+    "value_text": "-0.12",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "NOAA_NWS_EF_SCALE",
+      "title": "Enhanced Fujita scale",
+      "link": "https://www.weather.gov/grb/efscale",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NASA_GREENFIELD_TORNADO",
+      "title": "2024 Greenfield tornado case",
+      "link": "https://science.nasa.gov/earth/earth-observatory/tornado-damage-in-greenfield-152870/",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_TOWER_STRUCT",
+    "reasoning": "Tornado direct-hit adjustment is qualitative/placeholder.",
+    "update_trigger": "tornado-specific turbine fragility data",
+    "role": "conditioner_adjustment"
+   },
+   {
+    "id": "max_DR",
+    "name": "max_DR",
+    "value_text": "0.85",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "NIST_FRAGILITY_METHOD",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+      "title": "solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_NACELLE_CONSEQ",
+    "reasoning": "Failure-unit cap chosen for bounded generic structural severity; not claims-calibrated.",
+    "update_trigger": "claims/OEM/forensic value-loss calibration",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "D50_ratio_straight_line",
+    "name": "D50_ratio_straight_line",
+    "value_text": "1.44",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "DOE_SEVERE_WEATHER",
+      "title": "Wind turbines severe weather controls and design context",
+      "link": "https://www.energy.gov/cmei/wind/articles/how-do-wind-turbines-survive-severe-weather-and-storms",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NIST_FRAGILITY_METHOD",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_NACELLE_CONSEQ",
+    "reasoning": "Engineering-fit normalized fragility transition; public sources support form/mechanism, not exact ratio.",
+    "update_trigger": "empirical turbine fragility dataset",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "k_ratio",
+    "name": "k_ratio",
+    "value_text": "10",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "NIST_FRAGILITY_METHOD",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_NACELLE_CONSEQ",
+    "reasoning": "Engineering-fit steepness for sparse public evidence.",
+    "update_trigger": "empirical turbine fragility dataset",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "tornado_D50_shift",
+    "name": "tornado_D50_shift",
+    "value_text": "-0.1",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "NOAA_NWS_EF_SCALE",
+      "title": "Enhanced Fujita scale",
+      "link": "https://www.weather.gov/grb/efscale",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NASA_GREENFIELD_TORNADO",
+      "title": "2024 Greenfield tornado case",
+      "link": "https://science.nasa.gov/earth/earth-observatory/tornado-damage-in-greenfield-152870/",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_NACELLE_CONSEQ",
+    "reasoning": "Tornado direct-hit adjustment is qualitative/placeholder.",
+    "update_trigger": "tornado-specific turbine fragility data",
+    "role": "conditioner_adjustment"
+   },
+   {
+    "id": "max_DR",
+    "name": "max_DR",
+    "value_text": "0.65",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "NIST_FRAGILITY_METHOD",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+      "title": "solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_FOUNDATION_OT",
+    "reasoning": "Failure-unit cap chosen for bounded generic structural severity; not claims-calibrated.",
+    "update_trigger": "claims/OEM/forensic value-loss calibration",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "D50_ratio_straight_line",
+    "name": "D50_ratio_straight_line",
+    "value_text": "1.62",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "DOE_SEVERE_WEATHER",
+      "title": "Wind turbines severe weather controls and design context",
+      "link": "https://www.energy.gov/cmei/wind/articles/how-do-wind-turbines-survive-severe-weather-and-storms",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NIST_FRAGILITY_METHOD",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_FOUNDATION_OT",
+    "reasoning": "Engineering-fit normalized fragility transition; public sources support form/mechanism, not exact ratio.",
+    "update_trigger": "empirical turbine fragility dataset",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "k_ratio",
+    "name": "k_ratio",
+    "value_text": "9",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "NIST_FRAGILITY_METHOD",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_FOUNDATION_OT",
+    "reasoning": "Engineering-fit steepness for sparse public evidence.",
+    "update_trigger": "empirical turbine fragility dataset",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "tornado_D50_shift",
+    "name": "tornado_D50_shift",
+    "value_text": "-0.08",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "NOAA_NWS_EF_SCALE",
+      "title": "Enhanced Fujita scale",
+      "link": "https://www.weather.gov/grb/efscale",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NASA_GREENFIELD_TORNADO",
+      "title": "2024 Greenfield tornado case",
+      "link": "https://science.nasa.gov/earth/earth-observatory/tornado-damage-in-greenfield-152870/",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_FOUNDATION_OT",
+    "reasoning": "Tornado direct-hit adjustment is qualitative/placeholder.",
+    "update_trigger": "tornado-specific turbine fragility data",
+    "role": "conditioner_adjustment"
+   },
+   {
+    "id": "max_DR",
+    "name": "max_DR",
+    "value_text": "0.3",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "NIST_FRAGILITY_METHOD",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+      "title": "solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_POWER_ELEC_ACCEL",
+    "reasoning": "Failure-unit cap chosen for bounded generic structural severity; not claims-calibrated.",
+    "update_trigger": "claims/OEM/forensic value-loss calibration",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "D50_ratio_straight_line",
+    "name": "D50_ratio_straight_line",
+    "value_text": "1.2",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "DOE_SEVERE_WEATHER",
+      "title": "Wind turbines severe weather controls and design context",
+      "link": "https://www.energy.gov/cmei/wind/articles/how-do-wind-turbines-survive-severe-weather-and-storms",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NIST_FRAGILITY_METHOD",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_POWER_ELEC_ACCEL",
+    "reasoning": "Engineering-fit normalized fragility transition; public sources support form/mechanism, not exact ratio.",
+    "update_trigger": "empirical turbine fragility dataset",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "k_ratio",
+    "name": "k_ratio",
+    "value_text": "8",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "NIST_FRAGILITY_METHOD",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_POWER_ELEC_ACCEL",
+    "reasoning": "Engineering-fit steepness for sparse public evidence.",
+    "update_trigger": "empirical turbine fragility dataset",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "tornado_D50_shift",
+    "name": "tornado_D50_shift",
+    "value_text": "-0.05",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "NOAA_NWS_EF_SCALE",
+      "title": "Enhanced Fujita scale",
+      "link": "https://www.weather.gov/grb/efscale",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NASA_GREENFIELD_TORNADO",
+      "title": "2024 Greenfield tornado case",
+      "link": "https://science.nasa.gov/earth/earth-observatory/tornado-damage-in-greenfield-152870/",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WT_POWER_ELEC_ACCEL",
+    "reasoning": "Tornado direct-hit adjustment is qualitative/placeholder.",
+    "update_trigger": "tornado-specific turbine fragility data",
+    "role": "conditioner_adjustment"
+   }
+  ],
+  "evidence_provenance": {
+   "kind": "extracted",
+   "sheets": [
+    "Evidence_Params",
+    "Sources",
+    "Assumption_Register",
+    "Open_Seams"
+   ],
+   "sections": [],
+   "unmatched": [
+    "AWN_15_DECLARED_BRIDGE"
+   ],
+   "sentence": null,
+   "dossier": "docs/cells/wind_tornado_wind/current/wind_tornado_wind_curve_derivation_dossier_v1_0.md",
+   "workbook": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx"
+  },
+  "link_counts": {
+   "total": 8,
+   "linked": 8,
+   "locator_only": 0,
+   "neither": 0,
+   "markers": 0,
+   "placeholders": 0
+  },
+  "extraction": {
+   "status": "extracted",
+   "sentence": null,
+   "dossier": "docs/cells/wind_tornado_wind/current/wind_tornado_wind_curve_derivation_dossier_v1_0.md",
+   "workbook": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+   "sheets_read": [
+    "Evidence_Params",
+    "Sources",
+    "Assumption_Register",
+    "Open_Seams"
+   ],
+   "dossier_sections": [],
+   "files": [
+    {
+     "path": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+     "sha256": "126aff606205c359bc77db0519a06dbaa5f5694209555f3d17670552c5833a84"
+    },
+    {
+     "path": "docs/cells/wind_tornado_wind/current/wind_tornado_wind_curve_derivation_dossier_v1_0.md",
+     "sha256": "a77267407c0773b518e8e0e8beeee5252516eb1c3348607fdbd7c0ad184a9103"
+    }
+   ],
+   "assumptions": [
+    {
+     "id": "ASM_001",
+     "text": "Class II as generic default",
+     "status": "medium",
+     "confidence": "",
+     "trigger": "Replace with turbine-specific IEC class or design data.",
+     "effect": "Curve shifts horizontally on absolute speed axis.",
+     "from": {
+      "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+      "sheet": "Assumption_Register"
+     }
+    },
+    {
+     "id": "ASM_002",
+     "text": "Design-normalized logistic curve form",
+     "status": "high",
+     "confidence": "",
+     "trigger": "Replace with turbine-specific fragility or claims data.",
+     "effect": "Curve form and D50/k values can change.",
+     "from": {
+      "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+      "sheet": "Assumption_Register"
+     }
+    },
+    {
+     "id": "ASM_003",
+     "text": "D50 ratios for blade/tower/nacelle/foundation",
+     "status": "high",
+     "confidence": "",
+     "trigger": "Replace with source-derived structural fragility.",
+     "effect": "Current values are engineering-fit anchors, not empirical estimates.",
+     "from": {
+      "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+      "sheet": "Assumption_Register"
+     }
+    },
+    {
+     "id": "ASM_004",
+     "text": "Tornado direct-hit D50 shift",
+     "status": "high",
+     "confidence": "",
+     "trigger": "Replace with tornado/turbine forensic data.",
+     "effect": "Current shift is case-informed placeholder.",
+     "from": {
+      "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+      "sheet": "Assumption_Register"
+     }
+    },
+    {
+     "id": "ASM_005",
+     "text": "Nacelle independent proxy",
+     "status": "medium/high",
+     "confidence": "",
+     "trigger": "Replace with dependency matrix after blade/tower failure.",
+     "effect": "Avoids over-counting by flagging dependency.",
+     "from": {
+      "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+      "sheet": "Assumption_Register"
+     }
+    }
+   ],
+   "open_seams": [
+    {
+     "id": "SEAM_WIND_CURVE_EMPIRICAL",
+     "name": "No public universal turbine-level fragility curve by subsystem.",
+     "description": "No public universal turbine-level fragility curve by subsystem.",
+     "severity": "High",
+     "status": "",
+     "resolution": "Private claims, OEM, forensic datasets, or research fragility curves.",
+     "from": {
+      "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+      "sheet": "Open_Seams"
+     }
+    },
+    {
+     "id": "SEAM_TORNADO_WIND_PROXY",
+     "name": "EF scale is damage-estimated and near-ground; not direct hub-height wind measure",
+     "description": "EF scale is damage-estimated and near-ground; not direct hub-height wind measurement.",
+     "severity": "High",
+     "status": "",
+     "resolution": "Mobile radar / DOW / forensic turbine-specific wind reconstruction.",
+     "from": {
+      "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+      "sheet": "Open_Seams"
+     }
+    },
+    {
+     "id": "SEAM_DEPENDENCY",
+     "name": "Blade/tower/nacelle/foundation damage states are dependent.",
+     "description": "Blade/tower/nacelle/foundation damage states are dependent.",
+     "severity": "High",
+     "status": "",
+     "resolution": "Damage-state transition matrix / conditional assembly.",
+     "from": {
+      "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+      "sheet": "Open_Seams"
+     }
+    },
+    {
+     "id": "SEAM_CONTROL_STATE",
+     "name": "Feather/yaw/brake state has directionally clear impact but generic numerical mul",
+     "description": "Feather/yaw/brake state has directionally clear impact but generic numerical multiplier is not sourced.",
+     "severity": "Medium/high",
+     "status": "",
+     "resolution": "SCADA event logs / OEM load cases.",
+     "from": {
+      "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+      "sheet": "Open_Seams"
+     }
+    },
+    {
+     "id": "SEAM_ACCELERATION",
+     "name": "Acceleration-sensitive components need acceleration response, not wind speed alo",
+     "description": "Acceleration-sensitive components need acceleration response, not wind speed alone.",
+     "severity": "Medium",
+     "status": "",
+     "resolution": "Structural dynamics model / measured accelerations.",
+     "from": {
+      "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+      "sheet": "Open_Seams"
+     }
+    }
+   ],
+   "matched": {
+    "ASHES_IEC_EXTREME_EVENTS": "SRC_ASHES_IEC_EWM",
+    "DOE_SEVERE_WEATHER": "SRC_DOE_WIND_STORMS",
+    "DTU_IEC_61400_1": "SRC_DTU_IEC",
+    "NASA_GREENFIELD_TORNADO": "SRC_NASA_GREENFIELD",
+    "NIST_FRAGILITY_METHOD": "SRC_NIST_FRAGILITY",
+    "NOAA_NWS_EF_SCALE": "SRC_NWS_EF",
+    "SOLAR_WIND_VALUE_BREAKDOWN": "SOLAR_WIND_VALUE_BREAKDOWN"
+   },
+   "unmatched": [
+    "AWN_15_DECLARED_BRIDGE"
+   ]
+  },
+  "tier_words": {
+   "shape": "our judgment",
+   "cost": "transferred and our judgment"
+  }
+ },
+ "build_findings": [
+  {
+   "check": "extracted_sources",
+   "severity": "data",
+   "items": [
+    "tier-table source ID AWN_15_DECLARED_BRIDGE matches no document in the workbook or dossier"
+   ],
+   "sentence": "1 source ID in this cell's tier table matches no document in the workbook or dossier."
+  }
+ ]
 }

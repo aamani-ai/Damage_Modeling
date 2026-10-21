@@ -204,7 +204,7 @@
       ]
      }
     ],
-    "fact": "T2–4",
+    "fact": "8 src · T2–4",
     "absent_sentence": null
    },
    {
@@ -352,7 +352,7 @@
     "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only."
    }
   ],
-  "generation": "prose",
+  "generation": "skill",
   "core_as_files": 3,
   "core_total": 6,
   "dossier": {
@@ -410,12 +410,12 @@
     "items": [
      {
       "item": "source register with stable IDs, locators, roles, tiers and decisions",
-      "status": "human",
+      "status": "proven",
       "basis": null
      },
      {
       "item": "load-bearing claims carry claim-level provenance",
-      "status": "human",
+      "status": "proven",
       "basis": null
      },
      {
@@ -907,15 +907,15 @@
   }
  ],
  "evidence": {
-  "lineage": "parameters_only",
+  "lineage": "extracted",
   "prose_sentence": null,
   "paths": {
    "sources": null,
    "claims": null,
    "parameters": null
   },
-  "n_sources": 0,
-  "n_claims": 0,
+  "n_sources": 8,
+  "n_claims": 17,
   "n_parameters": 9,
   "key_sources": [
    "DOE/FEMP, Preventing and Mitigating Flood Damage to Solar PV Systems (DOE_FEMP_PV_FLOOD)",
@@ -1097,5 +1097,1698 @@
  "sampling_notes": [
   "No known-answer tests declared by this artifact."
  ],
- "build_findings": []
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Live · in the runtime index",
+    "code": "LIVE"
+   },
+   "evidence": {
+    "words": "Evidence: transferred and our judgment",
+    "code": "shape T3–4 · cost T3–4",
+    "tiers": [
+     "T3",
+     "T4"
+    ]
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "? not searched"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release —"
+   }
+  },
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "✓",
+    "label": "one flood event (give water surface elevation or site flood depth)",
+    "short": "one flood event",
+    "detail": "per-part damage ratio"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "◐",
+    "label": "a dollar scenario",
+    "short": "a dollar scenario",
+    "detail": "needs an explicit part value and exposure fraction (fraction_value_exposed)"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "◐",
+    "label": "yearly loss — only through Hazard",
+    "short": "yearly loss",
+    "detail": "computed by the consumer from a frequency-driven loss simulation with caps applied; curve spread not carried"
+   },
+   {
+    "key": "pml",
+    "mark": "◐",
+    "label": "PML, VaR, TVaR — only from Hazard's validated annual loss distribution",
+    "short": "PML, VaR and TVaR",
+    "detail": "consumer computable from validated annual loss distribution"
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": null,
+    "not_covered": [
+     "Mounting and racking structure (debris and velocity load is a candidate mechanism; no curve)",
+     "Civil works: roads, access and fencing (reviewed in the write-up; no curve)",
+     "Site drainage and flood defences (treated as protection state, not a damaged part)"
+    ],
+    "withheld": []
+   },
+   "assumed": [
+    "Foundation scour curve is a generic placeholder; site hydraulics and geotechnics decide real damage"
+   ],
+   "missing": {
+    "mechanisms": [
+     "Flood duration, salinity and contamination (flags only, no numeric effect)",
+     "Energised versus shut-down state at flooding (flag only)",
+     "Water reaching equipment through conduits when the cabinet itself is above water (flag only, no multiplier)",
+     "Debris impact on modules"
+    ],
+    "out_of_scope": [
+     "Yearly and tail loss metrics (computed by the consumer, not the cell)",
+     "Part values and exposure fractions (supplied by the consumer; not embedded in the curve file)"
+    ]
+   },
+   "open_questions": [
+    "No claims, OEM or forensic calibration; damage points are engineering parameterisation",
+    "Transformer type, flood duration and salinity are open seams (candidate model v1.1 items)",
+    "Cable pathway axis unit and formula are not fully pinned in the curve file",
+    "Surveyed equipment elevations and conduit routing are needed per site"
+   ],
+   "next_version": null
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "What it covers",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Flood on solar farms: piecewise depth-damage points per part, set by engineering judgment from DOE/FEMP solar flood guidance and NEMA water-damaged equipment guidance, in the USACE depth-percent table form. It names 8 parts: Inverters, Switchgear, Main transformer and controls, Combiner boxes and DC protection, SCADA and monitoring cabinets, AC and DC collection cable, PV modules and Foundations. Outside its scope: yearly and tail loss metrics (computed by the consumer, not the cell) and part values and exposure fractions (supplied by the consumer; not embedded in the curve file). Kinds of damage it does not include: flood duration, salinity and contamination (flags only, no numeric effect), energised versus shut-down state at flooding (flag only), water reaching equipment through conduits when the cabinet itself is above water (flag only, no multiplier) and debris impact on modules.",
+    "plain_fact": "8 parts · 2 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the solar farm is split into 8 parts: Inverters, Switchgear, Main transformer and controls, Combiner boxes and DC protection, SCADA and monitoring cabinets, AC and DC collection cable, PV modules and Foundations. Parts of the plant's value with no curve yet: mounting and racking structure (debris and velocity load is a candidate mechanism; no curve), civil works: roads, access and fencing (reviewed in the write-up; no curve) and site drainage and flood defences (treated as protection state, not a damaged part).",
+    "plain_fact": "8 parts"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "Damage is read against local depth above component datum (m), depth at the pathway termination (m), depth above the module lower edge (m) and flow velocity or scour proxy (m/s). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: water surface elevation or site flood depth (m), turned into local depth above each part's critical elevation, 0 to 2 m (clamp or warn); foundations use flow velocity (m/s) or a scour proxy, 0 to 4.",
+    "plain_fact": "a line through points"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "8 sources set this cell: Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems, Evaluating Water-Damaged Electrical Equipment (GD 1-2019), NEMA Enclosure Types and Protecting Building Utility Systems From Flood Damage and 4 more. Of the 9 parameters, 1 is lab-tested (T2), 7 are transferred (T3) and 1 is our judgment (T4). The sources were read from the workbook's Flood_Evidence_Params, Flood_Assumption_Register and Sources sheets and the dossier's 3. Evidence map, because this older cell keeps them there rather than in register files. 1 source ID in the tier table (ANZGEO_2023_SCOUR_CONTEXT) matches no document in the workbook or dossier.",
+    "plain_fact": "8 sources · transferred and our judgment"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "The damage ratio is a share of replacement value of the same part (its own value bucket), never total project value. The files state no plant-level dollar figure for this asset.",
+    "plain_fact": "no plant value stated"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "adjustments in the write-up"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 8 curve records (model v1.0, docs r4). The write-up is flood_solar_curve_derivation_dossier_v1_0.md. The workbook is damage_curve_records_v1_0_flood_solar.xlsx. The cell folder holds 7 files, each with its SHA under Details.",
+    "plain_fact": "8 curve records"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "It can give one flood event. A dollar scenario, yearly loss and PML, VaR and TVaR are available only under conditions the consumer (Hazard) checks. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "1 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "The artifact declares no known-answer tests, so this build reproduced none. No validation record was found. 1 outside check: Financial range check (Hazard repo): industry loss figures for solar flood.",
+    "plain_fact": "no known answers"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "DOE/FEMP, Preventing and Mitigating Flood Damage to Solar PV Systems",
+    "ids": [
+     "DOE_FEMP_PV_FLOOD"
+    ],
+    "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+    "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "DOE_FEMP_PV_FLOOD"
+   },
+   {
+    "text": "NEMA GD 1-2019, Evaluating Water-Damaged Electrical Equipment",
+    "ids": [
+     "NEMA_GD1_2019"
+    ],
+    "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+    "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "NEMA_GD1_2019"
+   },
+   {
+    "text": "NEMA, Enclosure Types",
+    "ids": [
+     "NEMA_ENCLOSURE_TYPES"
+    ],
+    "title": "NEMA Enclosure Types",
+    "link": "https://www.nema.org/docs/default-source/products-document-library/nema-enclosure-types.pdf",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "NEMA_ENCLOSURE_TYPES"
+   },
+   {
+    "text": "FEMA P-348, Protecting Building Utility Systems from Flood Damage",
+    "ids": [
+     "FEMA_P348"
+    ],
+    "title": "Protecting Building Utility Systems From Flood Damage",
+    "link": "https://basc.pnnl.gov/library/protecting-building-utility-systems-flood-damage-principles-and-practices-design-and",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "FEMA_P348"
+   },
+   {
+    "text": "USACE HEC-FIA, Depth-Percent Damage Relationships",
+    "ids": [
+     "USACE_HEC_FIA"
+    ],
+    "title": "Depth-Percent Damage Relationships",
+    "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "USACE_HEC_FIA"
+   }
+  ],
+  "sources": [
+   {
+    "id": "DOE_FEMP_PV_FLOOD",
+    "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+    "citation": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+    "url": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+    "locator": null,
+    "role": "Solar-specific flood pathways: total submersion, raising equipment, conduit water paths, enclosure ratings, stormwater/scour measures.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "DOE_FEMP_PV_FLOOD"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NEMA_GD1_2019",
+    "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+    "citation": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+    "url": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+    "locator": null,
+    "role": "Replacement/reconditioning logic for water-exposed electrical distribution, power equipment, transformers, cables, electronic products.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "NEMA_GD1_2019"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NEMA_GD1_2016_PDF",
+    "title": "Evaluating Water-Damaged Electrical Equipment Guide PDF",
+    "citation": "Evaluating Water-Damaged Electrical Equipment Guide PDF",
+    "url": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+    "locator": null,
+    "role": "Open PDF with detailed table of replace vs recondition categories.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "NEMA_GD1_2016_PDF"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NEMA_ENCLOSURE_TYPES",
+    "title": "NEMA Enclosure Types",
+    "citation": "NEMA Enclosure Types",
+    "url": "https://www.nema.org/docs/default-source/products-document-library/nema-enclosure-types.pdf",
+    "locator": null,
+    "role": "Distinguishes rain/hosedown ratings from temporary/prolonged submersion protection.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "NEMA_ENCLOSURE_TYPES"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.nema.org/docs/default-source/products-document-library/nema-enclosure-types.pdf",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FEMA_P348",
+    "title": "Protecting Building Utility Systems From Flood Damage",
+    "citation": "Protecting Building Utility Systems From Flood Damage",
+    "url": "https://basc.pnnl.gov/library/protecting-building-utility-systems-flood-damage-principles-and-practices-design-and",
+    "locator": null,
+    "role": "Utility-system elevation/protection framing; not solar-specific curves.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "FEMA_P348"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://basc.pnnl.gov/library/protecting-building-utility-systems-flood-damage-principles-and-practices-design-and",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "USACE_HEC_FIA",
+    "title": "Depth-Percent Damage Relationships",
+    "citation": "Depth-Percent Damage Relationships",
+    "url": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+    "locator": null,
+    "role": "Supports tabular depth-percent damage relationship and interpolation approach.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "USACE_HEC_FIA"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SOLAR_VALUATION",
+    "title": "solar_wind_value_breakdown.xlsx",
+    "citation": "solar_wind_value_breakdown.xlsx",
+    "url": "source_context/solar_wind_value_breakdown.xlsx",
+    "locator": null,
+    "role": "Value-link basis for subsystem/component dollar caps.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SOLAR_VALUATION"
+    ],
+    "source_type": null,
+    "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "link_kind": "repo_file",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SUBSTRATE",
+    "title": "substrate_decomposition.md",
+    "citation": "substrate_decomposition.md",
+    "url": "99_source_context/substrate_decomposition.md",
+    "locator": null,
+    "role": "Solar subsystem/component vocabulary.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SUBSTRATE"
+    ],
+    "source_type": null,
+    "repo_path": "docs/source_drops/context/v2_5/substrate_decomposition.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/source_drops/context/v2_5/substrate_decomposition.md",
+    "link_kind": "repo_file",
+    "no_link_sentence": null
+   }
+  ],
+  "claims": [
+   {
+    "id": "DOE_FEMP_PV_FLOOD; FEMA_P348",
+    "text": "Accepted x-axis for electrical ingress/submersion curves.",
+    "type": "",
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD",
+     "FEMA_P348"
+    ],
+    "source_name": null,
+    "locator": null,
+    "tier": null,
+    "strength": "Source-anchored; no numerical curve.",
+    "parameter_or_rule": "local water depth above component datum",
+    "how_used": "Accepted x-axis for electrical ingress/submersion curves.",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Flood_Evidence_Params"
+    }
+   },
+   {
+    "id": "DOE_FEMP_PV_FLOOD; NEMA_GD1_2019",
+    "text": "Justifies steep high-DR behavior once water enters electrical equipment.",
+    "type": "",
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD",
+     "NEMA_GD1_2019"
+    ],
+    "source_name": null,
+    "locator": null,
+    "tier": null,
+    "strength": "Source-anchored; generic to equipment categories.",
+    "parameter_or_rule": "submerged components need replacement / likely total loss",
+    "how_used": "Justifies steep high-DR behavior once water enters electrical equipment.",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Flood_Evidence_Params"
+    }
+   },
+   {
+    "id": "NEMA_GD1_2016_PDF; NEMA_GD1_2019",
+    "text": "Sets switchgear curve to near/full replacement after ingress.",
+    "type": "",
+    "source_ids": [
+     "NEMA_GD1_2016_PDF",
+     "NEMA_GD1_2019"
+    ],
+    "source_name": null,
+    "locator": null,
+    "tier": null,
+    "strength": "Category-level evidence.",
+    "parameter_or_rule": "switchgear high DR after water exposure",
+    "how_used": "Sets switchgear curve to near/full replacement after ingress.",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Flood_Evidence_Params"
+    }
+   },
+   {
+    "id": "NEMA_GD1_2016_PDF; DOE_FEMP_PV_FLOOD",
+    "text": "Sets inverter/SCADA/combiner steep curves.",
+    "type": "",
+    "source_ids": [
+     "NEMA_GD1_2016_PDF",
+     "DOE_FEMP_PV_FLOOD"
+    ],
+    "source_name": null,
+    "locator": null,
+    "tier": null,
+    "strength": "Mapped from generic electrical equipment to solar equipment.",
+    "parameter_or_rule": "electronics and power devices high DR after water exposure",
+    "how_used": "Sets inverter/SCADA/combiner steep curves.",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Flood_Evidence_Params"
+    }
+   },
+   {
+    "id": "NEMA_GD1_2016_PDF; NEMA_GD1_2019",
+    "text": "Sets transformer curve less vertical than switchgear/inverter.",
+    "type": "",
+    "source_ids": [
+     "NEMA_GD1_2016_PDF",
+     "NEMA_GD1_2019"
+    ],
+    "source_name": null,
+    "locator": null,
+    "tier": null,
+    "strength": "Transformer type must be captured.",
+    "parameter_or_rule": "liquid-filled transformers may be evaluated/reconditioned",
+    "how_used": "Sets transformer curve less vertical than switchgear/inverter.",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Flood_Evidence_Params"
+    }
+   },
+   {
+    "id": "PARAM_ENCLOSURE_SELECTOR",
+    "text": "Controls adjustment rules for submersion-resistant enclosures.",
+    "type": "",
+    "source_ids": [
+     "NEMA_ENCLOSURE_TYPES"
+    ],
+    "source_name": null,
+    "locator": null,
+    "tier": null,
+    "strength": "Rating does not alone determine salvageability.",
+    "parameter_or_rule": "NEMA 3/4/4X vs 6/6P protection distinction",
+    "how_used": "Controls adjustment rules for submersion-resistant enclosures.",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Flood_Evidence_Params"
+    }
+   },
+   {
+    "id": "PARAM_CONDUIT_PATH",
+    "text": "Open seam / modifier for effective depth even when cabinet is elevated.",
+    "type": "",
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD"
+    ],
+    "source_name": null,
+    "locator": null,
+    "tier": null,
+    "strength": "Needs site-specific design geometry.",
+    "parameter_or_rule": "conduit can convey floodwater into inverters/switchgear",
+    "how_used": "Open seam / modifier for effective depth even when cabinet is elevated.",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Flood_Evidence_Params"
+    }
+   },
+   {
+    "id": "PARAM_SCOUR",
+    "text": "Justifies separate velocity/scour pathway, not depth-only curve.",
+    "type": "",
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD"
+    ],
+    "source_name": null,
+    "locator": null,
+    "tier": null,
+    "strength": "Numeric curve remains placeholder.",
+    "parameter_or_rule": "stormwater management reduces scour/erosion",
+    "how_used": "Justifies separate velocity/scour pathway, not depth-only curve.",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Flood_Evidence_Params"
+    }
+   },
+   {
+    "id": "PARAM_DEPTH_DAMAGE_FORM",
+    "text": "Justifies piecewise-linear curve form.",
+    "type": "",
+    "source_ids": [
+     "USACE_HEC_FIA"
+    ],
+    "source_name": null,
+    "locator": null,
+    "tier": null,
+    "strength": "Generic flood modeling method, not solar-specific values.",
+    "parameter_or_rule": "tabular depth-percent damage curve with interpolation",
+    "how_used": "Justifies piecewise-linear curve form.",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Flood_Evidence_Params"
+    }
+   },
+   {
+    "id": "DOE_FEMP_PV_FLOOD·dossier",
+    "text": "Solar-specific pathways: total submersion, raising equipment, conduit water paths, enclosure ratings, stormwater/scour mitigation.",
+    "type": "dossier evidence map",
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD"
+    ],
+    "locator": "3. Evidence map",
+    "tier": null,
+    "strength": null,
+    "parameter_or_rule": null,
+    "status": null,
+    "update_trigger": null,
+    "provenance": "from-dossier",
+    "from": {
+     "file": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+     "section": "3. Evidence map"
+    }
+   },
+   {
+    "id": "NEMA_GD1_2019·dossier",
+    "text": "Replacement/reconditioning framing for water-exposed electrical equipment.",
+    "type": "dossier evidence map",
+    "source_ids": [
+     "NEMA_GD1_2019"
+    ],
+    "locator": "3. Evidence map",
+    "tier": null,
+    "strength": null,
+    "parameter_or_rule": null,
+    "status": null,
+    "update_trigger": null,
+    "provenance": "from-dossier",
+    "from": {
+     "file": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+     "section": "3. Evidence map"
+    }
+   },
+   {
+    "id": "NEMA_GD1_2016_PDF·dossier",
+    "text": "Detailed table: switchgear, circuit breakers, electronics, transformers, wire/cable categories.",
+    "type": "dossier evidence map",
+    "source_ids": [
+     "NEMA_GD1_2016_PDF"
+    ],
+    "locator": "3. Evidence map",
+    "tier": null,
+    "strength": null,
+    "parameter_or_rule": null,
+    "status": null,
+    "update_trigger": null,
+    "provenance": "from-dossier",
+    "from": {
+     "file": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+     "section": "3. Evidence map"
+    }
+   },
+   {
+    "id": "NEMA_ENCLOSURE_TYPES·dossier",
+    "text": "Distinguishes rain/hosedown ratings from temporary/prolonged submersion protection.",
+    "type": "dossier evidence map",
+    "source_ids": [
+     "NEMA_ENCLOSURE_TYPES"
+    ],
+    "locator": "3. Evidence map",
+    "tier": null,
+    "strength": null,
+    "parameter_or_rule": null,
+    "status": null,
+    "update_trigger": null,
+    "provenance": "from-dossier",
+    "from": {
+     "file": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+     "section": "3. Evidence map"
+    }
+   },
+   {
+    "id": "FEMA_P348·dossier",
+    "text": "Elevation/protection framing for utility systems.",
+    "type": "dossier evidence map",
+    "source_ids": [
+     "FEMA_P348"
+    ],
+    "locator": "3. Evidence map",
+    "tier": null,
+    "strength": null,
+    "parameter_or_rule": null,
+    "status": null,
+    "update_trigger": null,
+    "provenance": "from-dossier",
+    "from": {
+     "file": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+     "section": "3. Evidence map"
+    }
+   },
+   {
+    "id": "USACE_HEC_FIA·dossier",
+    "text": "Supports tabular depth-percent curve form and interpolation.",
+    "type": "dossier evidence map",
+    "source_ids": [
+     "USACE_HEC_FIA"
+    ],
+    "locator": "3. Evidence map",
+    "tier": null,
+    "strength": null,
+    "parameter_or_rule": null,
+    "status": null,
+    "update_trigger": null,
+    "provenance": "from-dossier",
+    "from": {
+     "file": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+     "section": "3. Evidence map"
+    }
+   },
+   {
+    "id": "SOLAR_VALUATION·dossier",
+    "text": "Value-link basis for subsystem/component caps.",
+    "type": "dossier evidence map",
+    "source_ids": [
+     "SOLAR_VALUATION"
+    ],
+    "locator": "3. Evidence map",
+    "tier": null,
+    "strength": null,
+    "parameter_or_rule": null,
+    "status": null,
+    "update_trigger": null,
+    "provenance": "from-dossier",
+    "from": {
+     "file": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+     "section": "3. Evidence map"
+    }
+   },
+   {
+    "id": "SUBSTRATE·dossier",
+    "text": "Solar subsystem/component vocabulary.",
+    "type": "dossier evidence map",
+    "source_ids": [
+     "SUBSTRATE"
+    ],
+    "locator": "3. Evidence map",
+    "tier": null,
+    "strength": null,
+    "parameter_or_rule": null,
+    "status": null,
+    "update_trigger": null,
+    "provenance": "from-dossier",
+    "from": {
+     "file": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+     "section": "3. Evidence map"
+    }
+   }
+  ],
+  "parameters": [
+   {
+    "id": "depth_damage_points",
+    "name": "depth_damage_points",
+    "value": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.02,
+      0.05
+     ],
+     [
+      0.05,
+      0.25
+     ],
+     [
+      0.15,
+      0.75
+     ],
+     [
+      0.3,
+      0.95
+     ],
+     [
+      0.6,
+      1.0
+     ],
+     [
+      1.0,
+      1.0
+     ],
+     [
+      1.5,
+      1.0
+     ],
+     [
+      2.0,
+      1.0
+     ]
+    ],
+    "tier": "T3",
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD",
+     "NEMA_GD1_2019",
+     "USACE_HEC_FIA"
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_INV",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+    "update_trigger": "claims/OEM/forensic depth-damage data"
+   },
+   {
+    "id": "depth_damage_points",
+    "name": "depth_damage_points",
+    "value": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.02,
+      0.1
+     ],
+     [
+      0.05,
+      0.4
+     ],
+     [
+      0.15,
+      0.85
+     ],
+     [
+      0.3,
+      1.0
+     ],
+     [
+      0.6,
+      1.0
+     ],
+     [
+      1.0,
+      1.0
+     ],
+     [
+      1.5,
+      1.0
+     ],
+     [
+      2.0,
+      1.0
+     ]
+    ],
+    "tier": "T3",
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD",
+     "NEMA_GD1_2019",
+     "USACE_HEC_FIA"
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_SWG",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+    "update_trigger": "claims/OEM/forensic depth-damage data"
+   },
+   {
+    "id": "depth_damage_points",
+    "name": "depth_damage_points",
+    "value": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.02,
+      0.03
+     ],
+     [
+      0.05,
+      0.1
+     ],
+     [
+      0.15,
+      0.25
+     ],
+     [
+      0.3,
+      0.45
+     ],
+     [
+      0.6,
+      0.65
+     ],
+     [
+      1.0,
+      0.8
+     ],
+     [
+      1.5,
+      0.95
+     ],
+     [
+      2.0,
+      1.0
+     ]
+    ],
+    "tier": "T3",
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD",
+     "NEMA_GD1_2019",
+     "USACE_HEC_FIA"
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_XFMR",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+    "update_trigger": "claims/OEM/forensic depth-damage data"
+   },
+   {
+    "id": "depth_damage_points",
+    "name": "depth_damage_points",
+    "value": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.02,
+      0.1
+     ],
+     [
+      0.05,
+      0.35
+     ],
+     [
+      0.15,
+      0.8
+     ],
+     [
+      0.3,
+      1.0
+     ],
+     [
+      0.6,
+      1.0
+     ],
+     [
+      1.0,
+      1.0
+     ],
+     [
+      1.5,
+      1.0
+     ],
+     [
+      2.0,
+      1.0
+     ]
+    ],
+    "tier": "T3",
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD",
+     "NEMA_GD1_2019",
+     "USACE_HEC_FIA"
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_COMB",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+    "update_trigger": "claims/OEM/forensic depth-damage data"
+   },
+   {
+    "id": "depth_damage_points",
+    "name": "depth_damage_points",
+    "value": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.02,
+      0.15
+     ],
+     [
+      0.05,
+      0.45
+     ],
+     [
+      0.15,
+      0.9
+     ],
+     [
+      0.3,
+      1.0
+     ],
+     [
+      0.6,
+      1.0
+     ],
+     [
+      1.0,
+      1.0
+     ],
+     [
+      1.5,
+      1.0
+     ],
+     [
+      2.0,
+      1.0
+     ]
+    ],
+    "tier": "T3",
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD",
+     "NEMA_GD1_2019",
+     "USACE_HEC_FIA"
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_SCADA",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+    "update_trigger": "claims/OEM/forensic depth-damage data"
+   },
+   {
+    "id": "depth_damage_points",
+    "name": "depth_damage_points",
+    "value": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.02,
+      0.02
+     ],
+     [
+      0.05,
+      0.05
+     ],
+     [
+      0.15,
+      0.1
+     ],
+     [
+      0.3,
+      0.15
+     ],
+     [
+      0.6,
+      0.25
+     ],
+     [
+      1.0,
+      0.4
+     ],
+     [
+      1.5,
+      0.55
+     ],
+     [
+      2.0,
+      0.65
+     ]
+    ],
+    "tier": "T3",
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD",
+     "NEMA_GD1_2019",
+     "USACE_HEC_FIA"
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_CABLE",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+    "update_trigger": "claims/OEM/forensic depth-damage data"
+   },
+   {
+    "id": "depth_damage_points",
+    "name": "depth_damage_points",
+    "value": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.02,
+      0.05
+     ],
+     [
+      0.05,
+      0.1
+     ],
+     [
+      0.15,
+      0.3
+     ],
+     [
+      0.3,
+      0.6
+     ],
+     [
+      0.6,
+      0.85
+     ],
+     [
+      1.0,
+      1.0
+     ],
+     [
+      1.5,
+      1.0
+     ],
+     [
+      2.0,
+      1.0
+     ]
+    ],
+    "tier": "T3",
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD",
+     "NEMA_GD1_2019",
+     "USACE_HEC_FIA"
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_PVMOD",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+    "update_trigger": "claims/OEM/forensic depth-damage data"
+   },
+   {
+    "id": "foundation_velocity_scour_points",
+    "name": "foundation_velocity_scour_points",
+    "value": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.5,
+      0.0
+     ],
+     [
+      1.0,
+      0.05
+     ],
+     [
+      1.5,
+      0.15
+     ],
+     [
+      2.0,
+      0.35
+     ],
+     [
+      3.0,
+      0.7
+     ],
+     [
+      4.0,
+      1.0
+     ]
+    ],
+    "tier": "T4",
+    "source_ids": [
+     "ANZGEO_2023_SCOUR_CONTEXT"
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_FOUND",
+    "pathway_id": null,
+    "role": "open_seam_placeholder",
+    "status": null,
+    "reasoning": "Scour is site-geotechnical; generic velocity proxy is retained only as conditional placeholder.",
+    "update_trigger": "hydraulic/geotechnical model or forensic scour dataset"
+   },
+   {
+    "id": "local_depth_transform",
+    "name": "local_depth_transform",
+    "value": "h_i=max(0,WSE-z_i_crit)",
+    "tier": "T2",
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD",
+     "FEMA_P348"
+    ],
+    "claim_ids": [],
+    "curve_id": "all_depth_curves",
+    "pathway_id": null,
+    "role": "axis_bridge",
+    "status": null,
+    "reasoning": "Component freeboard/elevation controls local exposure.",
+    "update_trigger": "none; replace only if cell axis changes"
+   }
+  ],
+  "parameters_plain": [
+   {
+    "id": "depth_damage_points",
+    "name": "depth_damage_points",
+    "value_text": "9 points",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "DOE_FEMP_PV_FLOOD",
+      "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+      "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NEMA_GD1_2019",
+      "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+      "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "USACE_HEC_FIA",
+      "title": "Depth-Percent Damage Relationships",
+      "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_INV",
+    "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+    "update_trigger": "claims/OEM/forensic depth-damage data",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "depth_damage_points",
+    "name": "depth_damage_points",
+    "value_text": "9 points",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "DOE_FEMP_PV_FLOOD",
+      "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+      "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NEMA_GD1_2019",
+      "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+      "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "USACE_HEC_FIA",
+      "title": "Depth-Percent Damage Relationships",
+      "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_SWG",
+    "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+    "update_trigger": "claims/OEM/forensic depth-damage data",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "depth_damage_points",
+    "name": "depth_damage_points",
+    "value_text": "9 points",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "DOE_FEMP_PV_FLOOD",
+      "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+      "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NEMA_GD1_2019",
+      "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+      "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "USACE_HEC_FIA",
+      "title": "Depth-Percent Damage Relationships",
+      "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_XFMR",
+    "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+    "update_trigger": "claims/OEM/forensic depth-damage data",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "depth_damage_points",
+    "name": "depth_damage_points",
+    "value_text": "9 points",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "DOE_FEMP_PV_FLOOD",
+      "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+      "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NEMA_GD1_2019",
+      "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+      "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "USACE_HEC_FIA",
+      "title": "Depth-Percent Damage Relationships",
+      "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_COMB",
+    "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+    "update_trigger": "claims/OEM/forensic depth-damage data",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "depth_damage_points",
+    "name": "depth_damage_points",
+    "value_text": "9 points",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "DOE_FEMP_PV_FLOOD",
+      "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+      "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NEMA_GD1_2019",
+      "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+      "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "USACE_HEC_FIA",
+      "title": "Depth-Percent Damage Relationships",
+      "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_SCADA",
+    "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+    "update_trigger": "claims/OEM/forensic depth-damage data",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "depth_damage_points",
+    "name": "depth_damage_points",
+    "value_text": "9 points",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "DOE_FEMP_PV_FLOOD",
+      "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+      "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NEMA_GD1_2019",
+      "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+      "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "USACE_HEC_FIA",
+      "title": "Depth-Percent Damage Relationships",
+      "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_CABLE",
+    "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+    "update_trigger": "claims/OEM/forensic depth-damage data",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "depth_damage_points",
+    "name": "depth_damage_points",
+    "value_text": "9 points",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "DOE_FEMP_PV_FLOOD",
+      "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+      "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NEMA_GD1_2019",
+      "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+      "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "USACE_HEC_FIA",
+      "title": "Depth-Percent Damage Relationships",
+      "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_PVMOD",
+    "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+    "update_trigger": "claims/OEM/forensic depth-damage data",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "foundation_velocity_scour_points",
+    "name": "foundation_velocity_scour_points",
+    "value_text": "7 points",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "ANZGEO_2023_SCOUR_CONTEXT",
+      "title": "ANZGEO_2023_SCOUR_CONTEXT",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_FOUND",
+    "reasoning": "Scour is site-geotechnical; generic velocity proxy is retained only as conditional placeholder.",
+    "update_trigger": "hydraulic/geotechnical model or forensic scour dataset",
+    "role": "open_seam_placeholder"
+   },
+   {
+    "id": "local_depth_transform",
+    "name": "local_depth_transform",
+    "value_text": "h_i=max(0,WSE-z_i_crit)",
+    "tier": "T2",
+    "tier_word": "lab-tested",
+    "sources": [
+     {
+      "id": "DOE_FEMP_PV_FLOOD",
+      "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+      "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FEMA_P348",
+      "title": "Protecting Building Utility Systems From Flood Damage",
+      "link": "https://basc.pnnl.gov/library/protecting-building-utility-systems-flood-damage-principles-and-practices-design-and",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all_depth_curves",
+    "reasoning": "Component freeboard/elevation controls local exposure.",
+    "update_trigger": "none; replace only if cell axis changes",
+    "role": "axis_bridge"
+   }
+  ],
+  "evidence_provenance": {
+   "kind": "extracted",
+   "sheets": [
+    "Flood_Evidence_Params",
+    "Flood_Assumption_Register",
+    "Sources"
+   ],
+   "sections": [
+    "3. Evidence map"
+   ],
+   "unmatched": [
+    "ANZGEO_2023_SCOUR_CONTEXT"
+   ],
+   "sentence": null,
+   "dossier": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+   "workbook": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx"
+  },
+  "link_counts": {
+   "total": 8,
+   "linked": 8,
+   "locator_only": 0,
+   "neither": 0,
+   "markers": 0,
+   "placeholders": 0
+  },
+  "extraction": {
+   "status": "extracted",
+   "sentence": null,
+   "dossier": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+   "workbook": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+   "sheets_read": [
+    "Flood_Evidence_Params",
+    "Flood_Assumption_Register",
+    "Sources"
+   ],
+   "dossier_sections": [
+    "3. Evidence map"
+   ],
+   "files": [
+    {
+     "path": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sha256": "1e586bc4b9e34b3a4ab07d67ab6f038357c9f5bdb441be7fdf509f5c88b53be2"
+    },
+    {
+     "path": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md",
+     "sha256": "33d9001a5ea45fd2cef4c8f8f1e907e3f93004e75813642802372888bfd66177"
+    }
+   ],
+   "assumptions": [
+    {
+     "id": "A1",
+     "text": "Default curve values are source-anchored engineering parameters, not empirical loss data.",
+     "status": "Open",
+     "confidence": "",
+     "trigger": "Replace with claims/forensic data when available.",
+     "effect": "",
+     "from": {
+      "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+      "sheet": "Flood_Assumption_Register"
+     }
+    },
+    {
+     "id": "A2",
+     "text": "Default electrical equipment is non-submersible NEMA 3R/4/4X class unless explicitly specified as Type 6/6P or equivalent.",
+     "status": "Open",
+     "confidence": "",
+     "trigger": "Override with asset-specific enclosure rating.",
+     "effect": "",
+     "from": {
+      "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+      "sheet": "Flood_Assumption_Register"
+     }
+    },
+    {
+     "id": "A3",
+     "text": "Local depth above vulnerable datum is the correct x-axis for electrical equipment.",
+     "status": "Accepted",
+     "confidence": "",
+     "trigger": "Override only if evidence shows duration or contamination dominates for a given unit.",
+     "effect": "",
+     "from": {
+      "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+      "sheet": "Flood_Assumption_Register"
+     }
+    },
+    {
+     "id": "A4",
+     "text": "Transformer default is liquid-filled with possible evaluation/reconditioning, not automatic full replacement at first wet contact.",
+     "status": "Open",
+     "confidence": "",
+     "trigger": "Use dry-type transformer variant if applicable.",
+     "effect": "",
+     "from": {
+      "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+      "sheet": "Flood_Assumption_Register"
+     }
+    },
+    {
+     "id": "A5",
+     "text": "PV modules are secondary for flood unless the water reaches module lower edge or debris impact is modeled.",
+     "status": "Accepted",
+     "confidence": "",
+     "trigger": "Override for low-clearance canopy/ground arrays.",
+     "effect": "",
+     "from": {
+      "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+      "sheet": "Flood_Assumption_Register"
+     }
+    },
+    {
+     "id": "A6",
+     "text": "Velocity/scour curve is a placeholder because site-specific geotech/hydraulic design controls the outcome.",
+     "status": "Open",
+     "confidence": "",
+     "trigger": "Replace with engineering scour model where available.",
+     "effect": "",
+     "from": {
+      "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+      "sheet": "Flood_Assumption_Register"
+     }
+    },
+    {
+     "id": "A7",
+     "text": "The dashboard dollar loss is illustrative; damage code emits DR by failure-unit and does not own EAL/tail metrics.",
+     "status": "Accepted",
+     "confidence": "",
+     "trigger": "Downstream hazard catalog/financial engine handles metrics.",
+     "effect": "",
+     "from": {
+      "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+      "sheet": "Flood_Assumption_Register"
+     }
+    }
+   ],
+   "open_seams": [],
+   "matched": {
+    "DOE_FEMP_PV_FLOOD": "DOE_FEMP_PV_FLOOD",
+    "FEMA_P348": "FEMA_P348",
+    "NEMA_GD1_2019": "NEMA_GD1_2019",
+    "USACE_HEC_FIA": "USACE_HEC_FIA"
+   },
+   "unmatched": [
+    "ANZGEO_2023_SCOUR_CONTEXT"
+   ]
+  },
+  "tier_words": {
+   "shape": "transferred and our judgment",
+   "cost": "transferred and our judgment"
+  }
+ },
+ "build_findings": [
+  {
+   "check": "extracted_sources",
+   "severity": "data",
+   "items": [
+    "tier-table source ID ANZGEO_2023_SCOUR_CONTEXT matches no document in the workbook or dossier"
+   ],
+   "sentence": "1 source ID in this cell's tier table matches no document in the workbook or dossier."
+  }
+ ]
 }

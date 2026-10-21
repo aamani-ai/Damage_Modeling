@@ -1074,5 +1074,1395 @@
  "gap_reason": null,
  "binding": null,
  "sampling_notes": [],
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Proposal · not in the runtime index yet",
+    "code": "PROPOSAL · screening"
+   },
+   "evidence": {
+    "words": "Evidence: transferred and our judgment",
+    "code": "shape T3–4 · cost T3–4",
+    "tiers": [
+     "T3",
+     "T4"
+    ]
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "? not searched"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release not yet reviewed"
+   }
+  },
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "◐",
+    "label": "one hail event",
+    "short": "one hail event",
+    "detail": "proposal, not in the runtime index; part and building required"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "✗",
+    "label": "a dollar scenario",
+    "short": "a dollar scenario",
+    "detail": "withheld until the building value is qualified"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "✗",
+    "label": "yearly loss",
+    "short": "yearly loss",
+    "detail": "withheld before promotion (computed by the consumer afterwards)"
+   },
+   {
+    "key": "pml",
+    "mark": "✗",
+    "label": "PML, VaR — not supported",
+    "short": "PML and VaR",
+    "detail": "withheld"
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": null,
+    "not_covered": [
+     "Outdoor equipment: AC condenser, rooftop units (whether it sits in the profile value is an open question)"
+    ],
+    "withheld": [
+     {
+      "failure_unit_id": "HRE_EXPOSED_EQUIPMENT",
+      "subsystem": "BUILDING",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "FUNCTIONAL_EQUIPMENT_HAIL_EVIDENCE_NOT_FOUND"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; functional equipment hail evidence not found."
+     },
+     {
+      "failure_unit_id": "HRE_BUILDING_CONTENTS",
+      "subsystem": "BUILDING",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; contents deferred separate failure unit."
+     }
+    ]
+   },
+   "assumed": [
+    "Hazard's MESH75 size read as the hailstone at the building",
+    "Threshold band read as a 5%-95% range",
+    "Warehouse roof share 12% of building cost (range 9-15%)",
+    "Walls and windows thresholds, exposure and costs (no published thresholds)",
+    "Outdoor equipment withheld"
+   ],
+   "missing": {
+    "mechanisms": [
+     "Rain entering after a roof breach",
+     "Cosmetic denting",
+     "Wear from repeated small hail"
+    ],
+    "out_of_scope": [
+     "Contents (declared as a withheld placeholder part)",
+     "Wind and flooding from the same storm (other cells)"
+    ]
+   },
+   "open_questions": [
+    "Hazard's MESH75 floor (every severe pixel at least 1.5 in) drives most of the gap to NRI",
+    "Shingle type and office membrane attachment not in the profiles",
+    "Whether outdoor equipment sits in the profile value (for the reviewer)"
+   ],
+   "next_version": null
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "What it covers",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Hail on buildings: published hail-damage thresholds by roofing material (onset and full failure) turned into a replacement probability, times the roof's share of building cost. It names 6 parts: House roof (asphalt shingles), Warehouse roof (standing-seam steel), Office roof (TPO membrane and insulation), House walls and windows, Warehouse windows and Office windows. Outside its scope: contents (declared as a withheld placeholder part) and wind and flooding from the same storm (other cells). Kinds of damage it does not include: rain entering after a roof breach, cosmetic denting and wear from repeated small hail.",
+    "plain_fact": "6 parts · 2 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the building is split into 6 parts: House roof (asphalt shingles), Warehouse roof (standing-seam steel), Office roof (TPO membrane and insulation), House walls and windows, Warehouse windows and Office windows. 2 further units are named but withheld — hre exposed equipment and hre building contents — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: outdoor equipment: AC condenser, rooftop units (whether it sits in the profile value is an open question).",
+    "plain_fact": "6 parts · 2 withheld"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "Damage is read against hazard's MESH75 hail diameter (mm). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: hazard's MESH75 hail diameter (mm), read as the largest hailstone at the building, 0 to 203.2 mm.",
+    "plain_fact": "a line through points"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "15 sources set this cell: Marshall, T. P., R. F. Herzog, S. J. Morrison and S. R. Smith (Haag Engineering Co.). Hail damage threshold…, Morrison, S. J. (Haag Engineering Co.), Bhawalkar, S., L. Yang and T and FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025). and 11 more. Of the 13 parameters, 1 is lab-tested (T2), 5 are transferred (T3) and 7 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "plain_fact": "15 sources · transferred and our judgment"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "The damage ratio is a share of each part's own replacement value (roof cover; walls and windows); building share = unit damage x the part's share of structure replacement cost. The files state no plant-level dollar figure for this asset.",
+    "plain_fact": "no plant value stated"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "The seven-step audit is written in the dossier with 7 rows. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "7 steps in the write-up"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 6 curve records (model v0.1, docs r1). The write-up is hail_real_estate_curve_derivation_dossier__model_v0_1__docs_r1.md. The workbook is damage_curve_records_hail_real_estate__model_v0_1__docs_r1.xlsx. The cell folder holds 20 files, each with its SHA under Details.",
+    "plain_fact": "6 curve records"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "One hail event is available only under conditions the consumer (Hazard) checks. A dollar scenario, yearly loss and PML and VaR are not supported. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "0 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "This build reproduced 206 of 206 known answers through the cell's evaluator (within 1e-12 on the damage ratio). 4 were not run: prose assertions; not executable. The validation record says report. 1 outside check: FEMA National Risk Index: yearly roof loss on Hazard's grid.",
+    "plain_fact": "206 of 206 reproduced"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: not yet reviewed.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "Haag Engineering, hail damage threshold sizes for common roofing",
+    "ids": [
+     "HRE-S001"
+    ],
+    "title": "Marshall, T. P., R. F. Herzog, S. J. Morrison and S. R. Smith (Haag Engineering Co.). Hail damage threshold…",
+    "link": "https://ams.confex.com/ams/pdfpapers/45858.pdf",
+    "link_kind": "url",
+    "locator": "p. 2 Table 1 (terminal velocity and impact energy by diameter, after Greenfeld 1969) and text (freezer ice harder and denser than natural hail; perpendicular impacts = worst case); p. 3 §4 (panels: asphalt and cedar shingles weathered about 11 years; ten impacts per size) and §4a (damage = diminished water-shedding or reduced expected life; for shingles punctures, tears, mat fractures or granules displaced to expose the bitumen); p. 3 Table 2 (percent of impacts damaging: 30-yr laminated 11 yr 0/0/60/90/100 and 3-tab fiberglass 0/60/90/100/100 at 1/1.25/1.5/1.75/2.0 in); p. 4 Table 3 (field thresholds: 3-tab 1.00 in, laminated 1.25 in, built-up gravel 2.50 in)",
+    "no_link_sentence": null,
+    "source_id": "HRE-S001"
+   },
+   {
+    "text": "Haag Engineering, low-slope roof systems and hail",
+    "ids": [
+     "HRE-S002"
+    ],
+    "title": "Morrison, S. J. (Haag Engineering Co.)",
+    "link": "https://professionalroofing.net/articles/article/1506",
+    "link_kind": "url",
+    "locator": "Figure 'Hail thresholds for low-slope roof coverings' (image https://proroofing.blob.core.windows.net/publicwebsitefiles/images/0609_41_3.jpg): thermoplastic single-ply membranes 1 to 2 in; EPDM 2 in; steel panels 2 1/2 in; smooth BUR 1 3/4 to 2 in; modified bitumen 1 1/2 to 2 in; text: thresholds assume hard hail, perpendicular impacts, average support, roofs in good or midlife condition; functional damage = reduced weather resistance or service life; stress plates and fastened insulation are the most sensitive areas",
+    "no_link_sentence": null,
+    "source_id": "HRE-S002"
+   },
+   {
+    "text": "IIBEC, ice-ball impact resistance of heat-aged TPO membranes",
+    "ids": [
+     "HRE-S005"
+    ],
+    "title": "Bhawalkar, S., L. Yang and T",
+    "link": "https://iibec.org/publication-post/ice-ball-impact-resistance-of-heat-aged-tpo-roofing-membranes/",
+    "link_kind": "url",
+    "locator": "Web article: 2 in freezer ice balls at FM Class 4 energy (23.75-26.13 ft-lbf); fully adhered 60-mil TPO on HD polyiso cover board over 2 in polyiso; heat-aged up to 30-year equivalence; membrane not punctured unless impact over a fastener; cover board and insulation facers cracked at 20-year equivalence after three impacts; ice-ball results rank materials, correlation to hail not established",
+    "no_link_sentence": null,
+    "source_id": "HRE-S005"
+   },
+   {
+    "text": "FEMA, Hazus 7.0 Hurricane Technical Manual, building cost ratios",
+    "ids": [
+     "HRE-S006"
+    ],
+    "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+    "link_kind": "url",
+    "locator": "§8.1.2.2 Table 8-5 p. 8-5 (one-storey residential subassembly cost ratios: roofing 3%); Table 8-7 p. 8-6 (roofing $1.79 of $59.88/ft2); §8.1.3 pp. 8-7 to 8-8 (asphalt roof covering replaced above a 0.5% damage state; repair-and-remodel factor 1.25; explicit window cost functions); §8.1.7.1.1 Eq. 8-10 p. 8-21 (story adjustment for roofing); Table 8-11 pp. 8-23 to 8-24 (three-storey motel: roof covering 1.1%, insulation 0.7%, roofing 2.1%, windows and glazed walls 1.8%); §8.1.7.2 p. 8-25 (commercial loss: repair factor 1.25, overhead and profit 1.20)",
+    "no_link_sentence": null,
+    "source_id": "HRE-S006"
+   },
+   {
+    "text": "FEMA National Risk Index, Dec 2025 (HRE-S012; check only)",
+    "ids": [],
+    "title": "FEMA National Risk Index, Dec 2025 (HRE-S012; check only)",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   }
+  ],
+  "sources": [
+   {
+    "id": "HRE-S001",
+    "citation": "Marshall, T. P., R. F. Herzog, S. J. Morrison and S. R. Smith (Haag Engineering Co.). Hail damage threshold sizes for common roofing materials. Preprints, 21st Conference on Severe Local Storms, American Meteorological Society, 2002, paper P3.2.",
+    "url": "https://ams.confex.com/ams/pdfpapers/45858.pdf",
+    "locator": "p. 2 Table 1 (terminal velocity and impact energy by diameter, after Greenfeld 1969) and text (freezer ice harder and denser than natural hail; perpendicular impacts = worst case); p. 3 §4 (panels: asphalt and cedar shingles weathered about 11 years; ten impacts per size) and §4a (damage = diminished water-shedding or reduced expected life; for shingles punctures, tears, mat fractures or granules displaced to expose the bitumen); p. 3 Table 2 (percent of impacts damaging: 30-yr laminated 11 yr 0/0/60/90/100 and 3-tab fiberglass 0/60/90/100/100 at 1/1.25/1.5/1.75/2.0 in); p. 4 Table 3 (field thresholds: 3-tab 1.00 in, laminated 1.25 in, built-up gravel 2.50 in)",
+    "role": "curve_data_carrier;method_definition",
+    "tier": "T3",
+    "permitted": "Place the onset (field threshold) and the full-damage size (every lab impact damaging) of the laminated-shingle band; read the onset as the start of roof-cover replacement.",
+    "prohibited": "Read the lab percentages as a roof replacement probability or as a repair-cost ratio; transfer them to other roofing types.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://ams.confex.com/ams/pdfpapers/45858.pdf",
+    "link_kind": "url",
+    "title": "Marshall, T. P., R. F. Herzog, S. J. Morrison and S. R. Smith (Haag Engineering Co.). Hail damage threshold…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S002",
+    "citation": "Morrison, S. J. (Haag Engineering Co.). Holy hail! (part two: low-slope roof systems). Professional Roofing, National Roofing Contractors Association, June 2009.",
+    "url": "https://professionalroofing.net/articles/article/1506",
+    "locator": "Figure 'Hail thresholds for low-slope roof coverings' (image https://proroofing.blob.core.windows.net/publicwebsitefiles/images/0609_41_3.jpg): thermoplastic single-ply membranes 1 to 2 in; EPDM 2 in; steel panels 2 1/2 in; smooth BUR 1 3/4 to 2 in; modified bitumen 1 1/2 to 2 in; text: thresholds assume hard hail, perpendicular impacts, average support, roofs in good or midlife condition; functional damage = reduced weather resistance or service life; stress plates and fastened insulation are the most sensitive areas",
+    "role": "curve_data_carrier;method_definition",
+    "tier": "T3",
+    "permitted": "Use the thermoplastic single-ply range for the office TPO band and the steel-panel threshold as the onset for the warehouse roof.",
+    "prohibited": "Read the range as a probability interval stated by the source; apply the steel-panel threshold to cosmetic denting.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://professionalroofing.net/articles/article/1506",
+    "link_kind": "url",
+    "title": "Morrison, S. J. (Haag Engineering Co.)",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S003",
+    "citation": "Kestner, J. (Haag Engineering Co.) and K. J. Kennedy. Testing your mettle: what you need to know about court rulings on cosmetic hail damage to metal roofs. CLM Magazine, 21 July 2016.",
+    "url": "https://www.theclm.org/Magazine/articles/testing-your-mettle/1223",
+    "locator": "Web article: Haag 2010 report 'Ice Ball Impact Testing of Roofing Materials' — the typical hail size needed to rupture metal panels in good to fair condition is at least 2.5 in (perpendicular freezer ice balls at free-fall speed); dents on seam tops are not a rupture or open seam; insurers write cosmetic-damage exclusions",
+    "role": "method_definition;independent_verification",
+    "tier": "T3",
+    "permitted": "Confirm the 2.5 in onset of functional (water-shedding) damage to standing-seam steel and the exclusion of cosmetic denting.",
+    "prohibited": "Read 2.5 in as the size at which every panel fails; read denting as functional damage.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.theclm.org/Magazine/articles/testing-your-mettle/1223",
+    "link_kind": "url",
+    "title": "Kestner, J. (Haag Engineering Co.) and K",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S004",
+    "citation": "Olson, E. (Simpson Gumpertz & Heger). Understanding hail damage risks for roofing and wall systems. SGH topic brief, 1 June 2026.",
+    "url": "https://www.sgh.com/insight/understanding-hail-damage-risks-for-roofing-and-wall-systems/",
+    "locator": "Web page: asphalt shingles granule loss can begin above about 1 in; single-ply membranes damaged at 1.5 in or more; metal roofing cosmetic damage at 1.5 in or more; built-up and concrete tile from 2 in; FM 4473 moderate < 1.75 in, severe 1.75-2 in, very severe > 2 in; UL 2218 Class 4 = 2 in hailstone energy; no industry hail rating for wall coverings; glazing described as susceptible (no size)",
+    "role": "independent_verification",
+    "tier": "T3",
+    "permitted": "Cross-check the TPO and metal bands; document that walls and windows have no public threshold (T4 judgment).",
+    "prohibited": "Use the brief's sizes as measured thresholds for walls or windows (none are given).",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.sgh.com/insight/understanding-hail-damage-risks-for-roofing-and-wall-systems/",
+    "link_kind": "url",
+    "title": "Olson, E. (Simpson Gumpertz & Heger)",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S005",
+    "citation": "Bhawalkar, S., L. Yang and T. Taylor. Ice ball impact resistance of heat-aged TPO roofing membranes. IIBEC Interface, January 2017.",
+    "url": "https://iibec.org/publication-post/ice-ball-impact-resistance-of-heat-aged-tpo-roofing-membranes/",
+    "locator": "Web article: 2 in freezer ice balls at FM Class 4 energy (23.75-26.13 ft-lbf); fully adhered 60-mil TPO on HD polyiso cover board over 2 in polyiso; heat-aged up to 30-year equivalence; membrane not punctured unless impact over a fastener; cover board and insulation facers cracked at 20-year equivalence after three impacts; ice-ball results rank materials, correlation to hail not established",
+    "role": "independent_verification",
+    "tier": "T3",
+    "permitted": "Support the low TPO case (adhered membrane on a cover board survives 2 in ice balls).",
+    "prohibited": "Assume the reference office has an adhered membrane on a cover board (attachment not stated in the profile).",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://iibec.org/publication-post/ice-ball-impact-resistance-of-heat-aged-tpo-roofing-membranes/",
+    "link_kind": "url",
+    "title": "Bhawalkar, S., L. Yang and T",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S006",
+    "citation": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+    "url": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+    "locator": "§8.1.2.2 Table 8-5 p. 8-5 (one-storey residential subassembly cost ratios: roofing 3%); Table 8-7 p. 8-6 (roofing $1.79 of $59.88/ft2); §8.1.3 pp. 8-7 to 8-8 (asphalt roof covering replaced above a 0.5% damage state; repair-and-remodel factor 1.25; explicit window cost functions); §8.1.7.1.1 Eq. 8-10 p. 8-21 (story adjustment for roofing); Table 8-11 pp. 8-23 to 8-24 (three-storey motel: roof covering 1.1%, insulation 0.7%, roofing 2.1%, windows and glazed walls 1.8%); §8.1.7.2 p. 8-25 (commercial loss: repair factor 1.25, overhead and profit 1.20)",
+    "role": "value_basis",
+    "tier": "T2",
+    "permitted": "Take the roof-cover share of replacement cost for the house (residential table) and the office (three-storey commercial example) with Hazus's own repair factors.",
+    "prohibited": "Read the Hazus hurricane damage functions as hail evidence (Hazus has no hail model); apply the motel example to the warehouse.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+    "link_kind": "url",
+    "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S007",
+    "citation": "Hazard reference profiles r1: aamani-ai/Hazard_Modeling commit 8b0d61c88fbcf85daa1c098516cee22398cdb524, docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml (git blob a74fb72b0a2edce593b5505e0fd8852f4c0253f8), with failure_mechanism_guide.md and the handoff note in the same folder.",
+    "url": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "locator": "profiles[].physical: roof_cover (asphalt_shingle_on_wood_sheathing; standing_seam_metal; single_ply_TPO_membrane_on_insulated_metal_deck), roof_cover_age_years 10, roof_surface_area_ft2 (2,218.18; 100,346.62; 18,003.91), length/width/heights, window_to_rectangular_wall_area_ratio (0.15; 0.02; 0.33), wall_system, fixed_service_locations; profiles[].valuation.replacement_cost_new_usd (405,000; 11,000,000; 10,800,000); failure_mechanism_guide.md hail row (separate cosmetic denting from loss of function; no Solar-panel response transfer)",
+    "role": "selector_archetype;value_basis",
+    "tier": "T4",
+    "permitted": "Bind the records to the three profiles; compute roof, wall and window areas; use the budget only as the denominator of judgment cost shares.",
+    "prohibited": "Treat the budgets as qualified runtime values or the designs as observed buildings.",
+    "decision": "adopt",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "link_kind": "url",
+    "title": "Hazard reference profiles r1: aamani-ai/Hazard_Modeling commit 8b0d61c88fbcf85daa1c098516cee22398cdb524,…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S008",
+    "citation": "Hazard hail pipeline on aamani-ai/Hazard_Modeling main (commit 20de3770b039d709b6867578dcb6d0672c2c7234): perils/hail/src/hail/m1/magnitude.py (blob 515d824b), perils/hail/src/hail/solar/native_response.py (blob 64f134cd), perils/hail/src/hail/config.py (blob 879c8467), docs/hazards/hail/implementation/solar/conus_grid/version_1_3/m3.md (blob 96c0f52a).",
+    "url": "https://github.com/aamani-ai/Hazard_Modeling/tree/20de3770b039d709b6867578dcb6d0672c2c7234/perils/hail",
+    "locator": "config.py: THRESHOLD_MM = 25.4 on MRMS MESH_Max_1440min; magnitude.py: mesh75_magnitude = 15.096 x ((raw / 2.54)^2)^0.206, capped at 203.2 mm; native_response.py and m3.md §2: damage per native pixel = 1[raw MESH >= 25.4] x d(MESH75), then area-weighted; hail_solar curve axis mesh_diameter_mm",
+    "role": "axis_bridge",
+    "tier": "T4",
+    "permitted": "Adopt mesh_diameter_mm as the axis, as delivered; record that the smallest nonzero value Hazard sends is MESH75(25.4 mm) = 38.98 mm.",
+    "prohibited": "Convert MESH75 back to raw MESH or to a hailstone count in Damage.",
+    "decision": "adopt",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/20de3770b039d709b6867578dcb6d0672c2c7234/perils/hail",
+    "link_kind": "url",
+    "title": "Hazard hail pipeline on aamani-ai/Hazard_Modeling main (commit 20de3770b039d709b6867578dcb6d0672c2c7234):…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S009",
+    "citation": "Schmid, T., R. Portmann, L. Villiger, K. Schröer and D. N. Bresch. An open-source radar-based hail damage model for buildings and cars. Natural Hazards and Earth System Sciences 24, 847-872, 2024. doi:10.5194/nhess-24-847-2024",
+    "url": "https://nhess.copernicus.org/articles/24/847/2024/nhess-24-847-2024.pdf",
+    "locator": "pp. 853-856 §4 and §4.1 (PAA and MDR per MESHS level; smooth-empirical building MDR 0.05% at 60 mm, bootstrap 90% CI 0.02-0.09%; PAA 5%); Table 2 p. 856 (buildings, MESHS: PAA Vthresh 8.6, Vhalf 66.9, scale 0.118; MDR Vthresh 20, Vhalf 73.9, scale 1.47e-3); p. 855 (sharp MDR rise above 50 mm from roof-penetrating damage)",
+    "role": "independent_verification",
+    "tier": "T3",
+    "permitted": "Order-of-magnitude comparison only (D-HRE-01).",
+    "prohibited": "Use as a US building curve; compare its portfolio-average MDR (includes unhit buildings) with a conditional at-building curve without saying so.",
+    "decision": "context_only",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": "10.5194/nhess-24-847-2024",
+    "link": "https://nhess.copernicus.org/articles/24/847/2024/nhess-24-847-2024.pdf",
+    "link_kind": "url",
+    "title": "Schmid, T., R. Portmann, L",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S010",
+    "citation": "Meisenzahl, B., I. Giammanco and F. Hedayati (IBHS). Sub-severe hail: the missing piece in assessing asphalt shingle risk in North America. Frontiers in Materials 12:1603074, 2025. doi:10.3389/fmats.2025.1603074",
+    "url": "https://public-pages-files-2025.frontiersin.org/journals/materials/articles/10.3389/fmats.2025.1603074/pdf",
+    "locator": "Abstract and §1 p. 1 (asphalt shingles about 80% of US residential roof coverings; repeated sub-severe hail lowers the shingles' resistance to later large hail and speeds aging)",
+    "role": "limitation",
+    "tier": "T3",
+    "permitted": "Record that the per-event curve does not carry cumulative damage from repeated small hail; asphalt shingles are the common US roof.",
+    "prohibited": "Add a cumulative-damage term (no quantitative basis here).",
+    "decision": "context_only",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": "10.3389/fmats.2025.1603074/pdf",
+    "link": "https://public-pages-files-2025.frontiersin.org/journals/materials/articles/10.3389/fmats.2025.1603074/pdf",
+    "link_kind": "url",
+    "title": "Meisenzahl, B., I. Giammanco and F",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S011",
+    "citation": "Ezold, R. (Vertex). HVAC condenser coil hail damage — repair or replace? Vertex web article, 22 May 2018, citing ASME IMECE2007-41518 'Hail effects on air conditioner performance'.",
+    "url": "https://vertexeng.com/insights/hvac-condenser-coil-hail-damage-repair-or-replace/",
+    "locator": "Web article: coils with 41% of fin area flattened had little or no capacity loss (SEER -2 to -5%); 100% flattened lost 23-27% of capacity; combing restored units to within 1-4% of undented capacity",
+    "role": "limitation",
+    "tier": "T3",
+    "permitted": "Support withholding the exposed-equipment unit: fin denting is mostly cosmetic or comb-repairable; functional damage needs evidence not found.",
+    "prohibited": "Read as a hail-size threshold or a repair-cost ratio; read as evidence of zero damage.",
+    "decision": "context_only",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://vertexeng.com/insights/hvac-condenser-coil-hail-damage-repair-or-replace/",
+    "link_kind": "url",
+    "title": "Ezold, R. (Vertex). HVAC condenser coil hail damage — repair or replace? Vertex web article, 22 May 2018,…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S012",
+    "citation": "FEMA National Risk Index (December 2025 release), hail building expected annual loss (hail_ealb) and building exposure (hail_expb), as the Hazard team's CONUS 0.25° extract.",
+    "url": "gs://infrasure-benchmark/hazard_conus_grid/dev/reference/nri/nri_dec2025/raw/run_id=20260706T184931Z_nri_reference/nri_raw_conus.parquet",
+    "locator": "Columns cell_id, hail_ealb, hail_expb for 13,085 CONUS cells",
+    "role": "independent_verification",
+    "tier": "T3",
+    "permitted": "Order-of-magnitude and ranking check of yearly building loss (dossier §13).",
+    "prohibited": "Calibrate the curves to NRI; read NRI as the reference buildings' loss.",
+    "decision": "context_only",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "FEMA National Risk Index (December 2025 release), hail building expected annual loss (hail_ealb) and building…",
+    "no_link_sentence": "no link in the register"
+   },
+   {
+    "id": "HRE-S013",
+    "citation": "Smith, D. L. Asphalt composition shingle damage — hail or manufacturing defect? IIBEC Interface, February 2013.",
+    "url": "https://iibec.org/publication-post/2013-02-smith/",
+    "locator": "Web page, Table 1 'Hail thresholds for steep-sloped roof coverings': three-tab lightweight shingles 1 in; laminated heavyweight shingles 1 1/4 in; based on lab testing with simulated hail and field inspections; dense hail, perpendicular impacts, roofs in good condition; for shingles, puncture or fracture is functional damage, granule loss alone is not",
+    "role": "independent_verification",
+    "tier": "T3",
+    "permitted": "Corroborate the laminated (1.25 in) and three-tab (1.0 in) onsets.",
+    "prohibited": "Read the threshold as the size at which the whole roof is replaced.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://iibec.org/publication-post/2013-02-smith/",
+    "link_kind": "url",
+    "title": "Smith, D. L. Asphalt composition shingle damage — hail or manufacturing defect? IIBEC Interface, February…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S014",
+    "citation": "Damage_Modeling hail_wind proposal, legacy evidence audit: docs/cells/hail_wind/proposed/LEGACY_EVIDENCE_INGESTION_hail_wind__model_v0_1__docs_r1.md and NUMERICAL_CANDIDATE_AUDIT_hail_wind__model_v0_1__docs_r1.md (main 81d5309).",
+    "url": "docs/cells/hail_wind/proposed/LEGACY_EVIDENCE_INGESTION_hail_wind__model_v0_1__docs_r1.md",
+    "locator": "'Rejected alleged wind-turbine hail curve': the legacy array comes from the deprecated Real Estate_Hail record (Schmid-derived), a 0-4 cm grid relabelled as inches, plateau about 5.78% extended beyond the grid; decision REJECT_RUNTIME_RETAIN_AUDIT, parameter and shape reuse prohibited",
+    "role": "legacy_audit",
+    "tier": "T4",
+    "permitted": "Record that no legacy real-estate hail array is used; negative regression only.",
+    "prohibited": "Reuse the legacy array or its shape.",
+    "decision": "reject",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "repo_path": "docs/cells/hail_wind/proposed/LEGACY_EVIDENCE_INGESTION_hail_wind__model_v0_1__docs_r1.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/hail_wind/proposed/LEGACY_EVIDENCE_INGESTION_hail_wind__model_v0_1__docs_r1.md",
+    "link_kind": "repo_file",
+    "title": "Damage_Modeling hail_wind proposal, legacy evidence audit:…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S015",
+    "citation": "Hazard generic damage loader: aamani-ai/Hazard_Modeling main drivers/deep/src/deep/damage_loader.py (blob 4bdadaa1cae5d7c42935a09994145650db75a95d).",
+    "url": "https://github.com/aamani-ai/Hazard_Modeling/blob/20de3770b039d709b6867578dcb6d0672c2c7234/drivers/deep/src/deep/damage_loader.py",
+    "locator": "evaluate_v3_damage_call (selector and conditioner validation; failure_unit_coverage withheld; selector_match routing; piecewise_linear evaluation; ABOVE_SOURCE_VALID_RANGE and AXIS_OUTSIDE_VALID_RANGE)",
+    "role": "consumer_contract",
+    "tier": "T4",
+    "permitted": "Run every known-answer request through a copy (validation report §4).",
+    "prohibited": "Change Hazard code from this cell.",
+    "decision": "adopt",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/20de3770b039d709b6867578dcb6d0672c2c7234/drivers/deep/src/deep/damage_loader.py",
+    "link_kind": "url",
+    "title": "Hazard generic damage loader: aamani-ai/Hazard_Modeling main drivers/deep/src/deep/damage_loader.py (blob…",
+    "no_link_sentence": null
+   }
+  ],
+  "claims": [
+   {
+    "id": "HRE-C001",
+    "text": "Field surveys put the onset of hail damage at 1.00 in for three-tab asphalt shingles and 1.25 in for laminated shingles (all ages).",
+    "type": "direct_observation",
+    "source_ids": [
+     "HRE-S001",
+     "HRE-S013"
+    ],
+    "locator": "S001 p. 4 Table 3; S013 Table 1",
+    "tier": "T3",
+    "parameter_or_rule": "house roof onset",
+    "status": "adopt",
+    "update_trigger": "A US claims study by roof type and hail size."
+   },
+   {
+    "id": "HRE-C002",
+    "text": "Freezer ice stones at free-fall speed, perpendicular impacts: 11-year-old laminated shingles were damaged by 0/0/60/90/100% of impacts at 1/1.25/1.5/1.75/2.0 in; 11-year-old three-tab fiberglass shingles by 0/60/90/100/100%.",
+    "type": "direct_observation",
+    "source_ids": [
+     "HRE-S001"
+    ],
+    "locator": "p. 3 Table 2; p. 2 (test ice harder than natural hail; perpendicular = worst case)",
+    "tier": "T3",
+    "parameter_or_rule": "house roof full-damage size",
+    "status": "adopt_with_limits",
+    "update_trigger": "Natural-hail or age-specific test data."
+   },
+   {
+    "id": "HRE-C003",
+    "text": "Roofing damage means a diminished water-shedding capability or a reduced expected life (shingle punctures, tears, mat fractures, granules displaced to expose the bitumen); granule loss alone is not functional damage.",
+    "type": "definition",
+    "source_ids": [
+     "HRE-S001",
+     "HRE-S002",
+     "HRE-S013"
+    ],
+    "locator": "S001 p. 3 §4a; S002 text; S013 text",
+    "tier": "T3",
+    "parameter_or_rule": "damage definition",
+    "status": "adopt",
+    "update_trigger": "—"
+   },
+   {
+    "id": "HRE-C004",
+    "text": "Smallest hail sizes that damage low-slope coverings: thermoplastic single-ply membranes 1 to 2 in; EPDM 2 in; steel panels 2 1/2 in (hard hail, perpendicular impacts, average support, good or midlife roofs).",
+    "type": "direct_observation",
+    "source_ids": [
+     "HRE-S002"
+    ],
+    "locator": "Figure 'Hail thresholds for low-slope roof coverings'",
+    "tier": "T3",
+    "parameter_or_rule": "office roof band; warehouse roof onset",
+    "status": "adopt_with_limits",
+    "update_trigger": "A TPO hail test series by age and attachment."
+   },
+   {
+    "id": "HRE-C005",
+    "text": "Metal panels in good to fair condition need hail of at least 2.5 in to rupture; dents on seam tops are not an open seam; insurers write cosmetic-damage exclusions.",
+    "type": "direct_observation",
+    "source_ids": [
+     "HRE-S003",
+     "HRE-S004"
+    ],
+    "locator": "S003 web article; S004 web page (metal cosmetic damage from 1.5 in)",
+    "tier": "T3",
+    "parameter_or_rule": "warehouse roof onset; cosmetic exclusion",
+    "status": "adopt_with_limits",
+    "update_trigger": "Haag 2010 report or a metal-panel hail test with sizes above 2.5 in."
+   },
+   {
+    "id": "HRE-C006",
+    "text": "Single-ply membranes can be damaged by hail of 1.5 in or more; walls have no industry hail rating; glazing is susceptible (no size given).",
+    "type": "direct_observation",
+    "source_ids": [
+     "HRE-S004"
+    ],
+    "locator": "web page",
+    "tier": "T3",
+    "parameter_or_rule": "cross-check; wall and window evidence gap",
+    "status": "adopt_with_limits",
+    "update_trigger": "—"
+   },
+   {
+    "id": "HRE-C007",
+    "text": "Aged (up to 20-30-year equivalence) fully adhered 60-mil TPO on a high-density polyiso cover board was not punctured by 2 in ice balls unless struck over a fastener; cover boards cracked at 20-year equivalence after three impacts.",
+    "type": "direct_observation",
+    "source_ids": [
+     "HRE-S005"
+    ],
+    "locator": "web article",
+    "tier": "T3",
+    "parameter_or_rule": "office low case",
+    "status": "adopt_with_limits",
+    "update_trigger": "Hazard states the TPO attachment and cover board."
+   },
+   {
+    "id": "HRE-C008",
+    "text": "Hazus default one-storey residential subassembly cost ratios: roofing 3% of building cost; repair work costs 1.25 times new work (repair-and-remodel factor).",
+    "type": "direct_observation",
+    "source_ids": [
+     "HRE-S006"
+    ],
+    "locator": "Table 8-5 p. 8-5; §8.1.3 p. 8-8",
+    "tier": "T2",
+    "parameter_or_rule": "house roof share",
+    "status": "adopt_with_limits",
+    "update_trigger": "A published US cost model by component."
+   },
+   {
+    "id": "HRE-C009",
+    "text": "Hazus replaces the whole asphalt roof covering once more than 0.5% of it is damaged.",
+    "type": "direct_observation",
+    "source_ids": [
+     "HRE-S006"
+    ],
+    "locator": "§8.1.3 p. 8-7",
+    "tier": "T2",
+    "parameter_or_rule": "roof replacement rule",
+    "status": "adopt_with_limits",
+    "update_trigger": "—"
+   },
+   {
+    "id": "HRE-C010",
+    "text": "Hazus three-storey motel cost ratios: roof covering 1.1%, roof insulation 0.7% (roofing 2.1%); commercial repair factor 1.25 and overhead and profit 1.20.",
+    "type": "direct_observation",
+    "source_ids": [
+     "HRE-S006"
+    ],
+    "locator": "Table 8-11 pp. 8-23 to 8-24; §8.1.7.2 p. 8-25",
+    "tier": "T2",
+    "parameter_or_rule": "office roof share",
+    "status": "adopt_with_limits",
+    "update_trigger": "A published office cost breakdown."
+   },
+   {
+    "id": "HRE-C011",
+    "text": "Hazus adjusts commercial roofing cost ratios by storey count: R' = R(1 - 2.2(Nm/N - 1)) for fewer storeys.",
+    "type": "direct_observation",
+    "source_ids": [
+     "HRE-S006"
+    ],
+    "locator": "Eq. 8-10 p. 8-21",
+    "tier": "T2",
+    "parameter_or_rule": "warehouse cross-check",
+    "status": "context_only",
+    "update_trigger": "A published warehouse cost breakdown."
+   },
+   {
+    "id": "HRE-C012",
+    "text": "Reference designs: house asphalt shingles on wood sheathing, 6:12 gable, roof 2,218.18 ft2, vinyl siding, windows 15%; warehouse standing-seam metal, 1:12, roof 100,346.62 ft2, insulated metal walls, windows 2%, eight overhead doors; office TPO on insulated metal deck, roof 18,003.91 ft2, masonry veneer, windows 33%, six rooftop units; roof covers 10 years old; budgets $405,000, $11.0M, $10.8M.",
+    "type": "direct_observation",
+    "source_ids": [
+     "HRE-S007"
+    ],
+    "locator": "reference_candidates.yml profiles[]",
+    "tier": "T4",
+    "parameter_or_rule": "selectors; geometry; denominators",
+    "status": "adopt",
+    "update_trigger": "Hazard revises the profiles."
+   },
+   {
+    "id": "HRE-C013",
+    "text": "Hazard sends mesh_diameter_mm = MESH75 = 15.096 x ((raw/2.54)^2)^0.206 (capped at 203.2 mm) for native pixels with raw MRMS MESH >= 25.4 mm and zero damage elsewhere; MESH75 at raw 25.4 mm is 38.98 mm.",
+    "type": "direct_observation",
+    "source_ids": [
+     "HRE-S008"
+    ],
+    "locator": "magnitude.py mesh75_magnitude; native_response.py; m3.md §2",
+    "tier": "T4",
+    "parameter_or_rule": "axis",
+    "status": "adopt",
+    "update_trigger": "Hazard changes the transform or adds a ground-truth bridge."
+   },
+   {
+    "id": "HRE-C014",
+    "text": "Swiss insured buildings: mean damage ratio 0.05% (CI 0.02-0.09%) of building value at 60 mm MESHS, with 5% of buildings claiming.",
+    "type": "direct_observation",
+    "source_ids": [
+     "HRE-S009"
+    ],
+    "locator": "§4.1 pp. 854-855; Table 2 p. 856",
+    "tier": "T3",
+    "parameter_or_rule": "cross-check",
+    "status": "context_only",
+    "update_trigger": "A US radar-to-claims study."
+   },
+   {
+    "id": "HRE-C015",
+    "text": "Asphalt shingles cover about 80% of US homes; repeated sub-severe hail lowers shingle resistance to later large hail.",
+    "type": "direct_observation",
+    "source_ids": [
+     "HRE-S010"
+    ],
+    "locator": "abstract; §1",
+    "tier": "T3",
+    "parameter_or_rule": "limitation",
+    "status": "context_only",
+    "update_trigger": "A quantified cumulative-damage model."
+   },
+   {
+    "id": "HRE-C016",
+    "text": "Flattening 41% of condenser fins barely changes capacity; combing restores units to within 1-4% of undented capacity.",
+    "type": "direct_observation",
+    "source_ids": [
+     "HRE-S011"
+    ],
+    "locator": "web article citing IMECE2007-41518",
+    "tier": "T3",
+    "parameter_or_rule": "exposed equipment withheld",
+    "status": "adopt_with_limits",
+    "update_trigger": "Equipment hail damage evidence by size."
+   },
+   {
+    "id": "HRE-C017",
+    "text": "NRI hail building expected annual loss rate (hail_ealb / hail_expb) on Hazard's grid: median 1.4e-5 per year, 95th percentile 2.1e-4, maximum 2.8e-3.",
+    "type": "derived_check",
+    "source_ids": [
+     "HRE-S012"
+    ],
+    "locator": "NRI parquet",
+    "tier": "T3",
+    "parameter_or_rule": "check",
+    "status": "context_only",
+    "update_trigger": "—"
+   },
+   {
+    "id": "HRE-C018",
+    "text": "The legacy Real Estate_Hail array (Schmid-derived, centimetre grid relabelled as inches, plateau about 5.78%) is rejected for runtime use.",
+    "type": "audit",
+    "source_ids": [
+     "HRE-S014"
+    ],
+    "locator": "LEGACY_EVIDENCE_INGESTION_hail_wind §'Rejected alleged wind-turbine hail curve'",
+    "tier": "T4",
+    "parameter_or_rule": "legacy",
+    "status": "reject",
+    "update_trigger": "—"
+   },
+   {
+    "id": "HRE-C019",
+    "text": "Hazus has no hail model, and no published US building hail vulnerability curve was found.",
+    "type": "search_result",
+    "source_ids": [
+     "HRE-S006",
+     "HRE-S009"
+    ],
+    "locator": "search log in dossier §4",
+    "tier": "T4",
+    "parameter_or_rule": "evidence gap",
+    "status": "adopt",
+    "update_trigger": "A published US building hail vulnerability study."
+   },
+   {
+    "id": "HRE-C020",
+    "text": "Each part's onset and full-damage sizes are read as the 5th and 95th percentiles of the size that makes it need replacing (lognormal), as the convective real-estate cell reads EF bounds.",
+    "type": "modeling_choice",
+    "source_ids": [
+     "HRE-S001",
+     "HRE-S002"
+    ],
+    "locator": "derive script",
+    "tier": "T4",
+    "parameter_or_rule": "band reading",
+    "status": "adopt",
+    "update_trigger": "A source states the spread."
+   },
+   {
+    "id": "HRE-C021",
+    "text": "The standing-seam roof is fully failed by 3.5 in (95%).",
+    "type": "modeling_choice",
+    "source_ids": [
+     "HRE-S003"
+    ],
+    "locator": "—",
+    "tier": "T4",
+    "parameter_or_rule": "warehouse full-damage size",
+    "status": "adopt",
+    "update_trigger": "Metal-panel tests above 2.5 in."
+   },
+   {
+    "id": "HRE-C022",
+    "text": "The warehouse roof panels are 12% of the warehouse's replacement cost (range 9-15%).",
+    "type": "modeling_choice",
+    "source_ids": [
+     "HRE-S007",
+     "HRE-S006"
+    ],
+    "locator": "—",
+    "tier": "T4",
+    "parameter_or_rule": "warehouse roof share",
+    "status": "adopt",
+    "update_trigger": "A published metal-roof replacement rate (e.g. a cost book)."
+   },
+   {
+    "id": "HRE-C023",
+    "text": "Walls and windows (T4): vinyl siding band 1.25-2.0 in, half of it on hail-facing elevations; window glass band 1.5-2.5 in, a quarter of panes reached; costs $7/ft2 siding, $55/ft2 residential and $80/ft2 commercial window.",
+    "type": "modeling_choice",
+    "source_ids": [
+     "HRE-S004",
+     "HRE-S007"
+    ],
+    "locator": "COMPONENT_FRAGILITY_TABLE",
+    "tier": "T4",
+    "parameter_or_rule": "walls and windows unit",
+    "status": "adopt",
+    "update_trigger": "Any wall or window hail study."
+   },
+   {
+    "id": "HRE-C024",
+    "text": "Cosmetic denting (metal roof, metal wall panels, overhead doors, gutters) and fin denting are not physical loss of function and are outside the y-axis.",
+    "type": "modeling_choice",
+    "source_ids": [
+     "HRE-S003",
+     "HRE-S007",
+     "HRE-S011"
+    ],
+    "locator": "failure_mechanism_guide.md hail row",
+    "tier": "T4",
+    "parameter_or_rule": "scope",
+    "status": "adopt",
+    "update_trigger": "Consumer wants policy-style (cosmetic) loss."
+   }
+  ],
+  "parameters": [
+   {
+    "id": "axis_definition",
+    "name": "axis_definition",
+    "value": "mesh_diameter_mm: Hazard's MESH75 hail diameter, mm, read as the largest hailstone at the building",
+    "tier": "T4",
+    "source_ids": [
+     "HRE-S008"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "hail_impact",
+    "role": "axis_bridge",
+    "status": "proposed",
+    "reasoning": "Hazard's field (HRE-C013); radar estimate, not a measured stone.",
+    "update_trigger": "Hazard changes the transform."
+   },
+   {
+    "id": "valid_range",
+    "name": "valid_range",
+    "value": "0 to 203.2 mm; above withholds; negative rejected",
+    "tier": "T2",
+    "source_ids": [
+     "HRE-S008"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "hail_impact",
+    "role": "range",
+    "status": "proposed",
+    "reasoning": "Hazard's physical cap 203.2 mm.",
+    "update_trigger": "Hazard changes the cap."
+   },
+   {
+    "id": "band_reading",
+    "name": "band_reading",
+    "value": "onset = 5%, full = 95% (lognormal)",
+    "tier": "T4",
+    "source_ids": [
+     "HRE-S001",
+     "HRE-S002"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "hail_impact",
+    "role": "curve_form",
+    "status": "proposed",
+    "reasoning": "HRE-C020.",
+    "update_trigger": "A source states the spread."
+   },
+   {
+    "id": "house_roof_band",
+    "name": "house_roof_band",
+    "value": "1.25-2.0 in (31.75-50.8 mm)",
+    "tier": "T3",
+    "source_ids": [
+     "HRE-S001",
+     "HRE-S013"
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_RES_ROOF_ASPHALT_SHINGLE_LAMINATED",
+    "pathway_id": "hail_impact",
+    "role": "threshold",
+    "status": "proposed",
+    "reasoning": "HRE-C001, C002.",
+    "update_trigger": "Claims study by roof type."
+   },
+   {
+    "id": "house_roof_share",
+    "name": "house_roof_share",
+    "value": "0.0375 of structure RCN",
+    "tier": "T3",
+    "source_ids": [
+     "HRE-S006"
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_RES_ROOF_ASPHALT_SHINGLE_LAMINATED",
+    "pathway_id": "hail_impact",
+    "role": "value_share",
+    "status": "proposed",
+    "reasoning": "HRE-C008.",
+    "update_trigger": "Cost model."
+   },
+   {
+    "id": "warehouse_roof_band",
+    "name": "warehouse_roof_band",
+    "value": "2.5-3.5 in (63.5-88.9 mm)",
+    "tier": "T3",
+    "source_ids": [
+     "HRE-S002",
+     "HRE-S003"
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_IND_ROOF_STANDING_SEAM_STEEL",
+    "pathway_id": "hail_impact",
+    "role": "threshold",
+    "status": "proposed",
+    "reasoning": "Onset T3 (HRE-C005); full T4 (HRE-C021).",
+    "update_trigger": "Metal panel tests above 2.5 in."
+   },
+   {
+    "id": "warehouse_roof_share",
+    "name": "warehouse_roof_share",
+    "value": "0.12 of structure RCN (9-15%)",
+    "tier": "T4",
+    "source_ids": [
+     "HRE-S006",
+     "HRE-S007"
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_IND_ROOF_STANDING_SEAM_STEEL",
+    "pathway_id": "hail_impact",
+    "role": "value_share",
+    "status": "proposed",
+    "reasoning": "HRE-C022.",
+    "update_trigger": "Metal roof cost source."
+   },
+   {
+    "id": "office_roof_band",
+    "name": "office_roof_band",
+    "value": "1.0-2.0 in (25.4-50.8 mm)",
+    "tier": "T3",
+    "source_ids": [
+     "HRE-S002",
+     "HRE-S004",
+     "HRE-S005"
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_OFF_ROOF_TPO_MEMBRANE_AND_INSULATION",
+    "pathway_id": "hail_impact",
+    "role": "threshold",
+    "status": "proposed",
+    "reasoning": "HRE-C004, C006, C007.",
+    "update_trigger": "TPO test series by attachment."
+   },
+   {
+    "id": "office_roof_share",
+    "name": "office_roof_share",
+    "value": "0.027 of structure RCN",
+    "tier": "T3",
+    "source_ids": [
+     "HRE-S006"
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_OFF_ROOF_TPO_MEMBRANE_AND_INSULATION",
+    "pathway_id": "hail_impact",
+    "role": "value_share",
+    "status": "proposed",
+    "reasoning": "HRE-C010.",
+    "update_trigger": "Office cost breakdown."
+   },
+   {
+    "id": "siding_band_and_exposure",
+    "name": "siding_band_and_exposure",
+    "value": "1.25-2.0 in; hail-facing share 0.5",
+    "tier": "T4",
+    "source_ids": [
+     "HRE-S004"
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_RES_WALLS_WINDOWS_T4",
+    "pathway_id": "hail_impact",
+    "role": "threshold",
+    "status": "proposed",
+    "reasoning": "HRE-C023.",
+    "update_trigger": "Siding hail study."
+   },
+   {
+    "id": "window_band_and_exposure",
+    "name": "window_band_and_exposure",
+    "value": "1.5-2.5 in; panes reached 0.25",
+    "tier": "T4",
+    "source_ids": [
+     "HRE-S004"
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_*_WALLS_WINDOWS_T4;HRE_*_WINDOWS_T4",
+    "pathway_id": "hail_impact",
+    "role": "threshold",
+    "status": "proposed",
+    "reasoning": "HRE-C023.",
+    "update_trigger": "Glazing hail study."
+   },
+   {
+    "id": "wall_window_costs",
+    "name": "wall_window_costs",
+    "value": "$7/ft2 siding; $55/ft2 residential window; $80/ft2 commercial window",
+    "tier": "T4",
+    "source_ids": [
+     "HRE-S007"
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_*_WALLS_WINDOWS_T4;HRE_*_WINDOWS_T4",
+    "pathway_id": "hail_impact",
+    "role": "value_share",
+    "status": "proposed",
+    "reasoning": "HRE-C023; areas from the profiles.",
+    "update_trigger": "Cost source."
+   },
+   {
+    "id": "exposed_equipment",
+    "name": "exposed_equipment",
+    "value": "withheld (not zero)",
+    "tier": "T4",
+    "source_ids": [
+     "HRE-S011"
+    ],
+    "claim_ids": [],
+    "curve_id": "none",
+    "pathway_id": "hail_impact",
+    "role": "scope",
+    "status": "proposed",
+    "reasoning": "HRE-C016.",
+    "update_trigger": "Equipment hail evidence."
+   }
+  ],
+  "parameters_plain": [
+   {
+    "id": "axis_definition",
+    "name": "axis_definition",
+    "value_text": "mesh_diameter_mm: Hazard's MESH75 hail diameter, mm, read as the largest hailstone at the building",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "HRE-S008",
+      "title": "Hazard hail pipeline on aamani-ai/Hazard_Modeling main (commit 20de3770b039d709b6867578dcb6d0672c2c7234):…",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/20de3770b039d709b6867578dcb6d0672c2c7234/perils/hail",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Hazard's field (HRE-C013); radar estimate, not a measured stone.",
+    "update_trigger": "Hazard changes the transform.",
+    "role": "axis_bridge"
+   },
+   {
+    "id": "valid_range",
+    "name": "valid_range",
+    "value_text": "0 to 203.2 mm; above withholds; negative rejected",
+    "tier": "T2",
+    "tier_word": "lab-tested",
+    "sources": [
+     {
+      "id": "HRE-S008",
+      "title": "Hazard hail pipeline on aamani-ai/Hazard_Modeling main (commit 20de3770b039d709b6867578dcb6d0672c2c7234):…",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/20de3770b039d709b6867578dcb6d0672c2c7234/perils/hail",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Hazard's physical cap 203.2 mm.",
+    "update_trigger": "Hazard changes the cap.",
+    "role": "range"
+   },
+   {
+    "id": "band_reading",
+    "name": "band_reading",
+    "value_text": "onset = 5%, full = 95% (lognormal)",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "HRE-S001",
+      "title": "Marshall, T. P., R. F. Herzog, S. J. Morrison and S. R. Smith (Haag Engineering Co.). Hail damage threshold…",
+      "link": "https://ams.confex.com/ams/pdfpapers/45858.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "HRE-S002",
+      "title": "Morrison, S. J. (Haag Engineering Co.)",
+      "link": "https://professionalroofing.net/articles/article/1506",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "HRE-C020.",
+    "update_trigger": "A source states the spread.",
+    "role": "curve_form"
+   },
+   {
+    "id": "house_roof_band",
+    "name": "house_roof_band",
+    "value_text": "1.25-2.0 in (31.75-50.8 mm)",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "HRE-S001",
+      "title": "Marshall, T. P., R. F. Herzog, S. J. Morrison and S. R. Smith (Haag Engineering Co.). Hail damage threshold…",
+      "link": "https://ams.confex.com/ams/pdfpapers/45858.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "HRE-S013",
+      "title": "Smith, D. L. Asphalt composition shingle damage — hail or manufacturing defect? IIBEC Interface, February…",
+      "link": "https://iibec.org/publication-post/2013-02-smith/",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_RES_ROOF_ASPHALT_SHINGLE_LAMINATED",
+    "reasoning": "HRE-C001, C002.",
+    "update_trigger": "Claims study by roof type.",
+    "role": "threshold"
+   },
+   {
+    "id": "house_roof_share",
+    "name": "house_roof_share",
+    "value_text": "0.0375 of structure RCN",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "HRE-S006",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_RES_ROOF_ASPHALT_SHINGLE_LAMINATED",
+    "reasoning": "HRE-C008.",
+    "update_trigger": "Cost model.",
+    "role": "value_share"
+   },
+   {
+    "id": "warehouse_roof_band",
+    "name": "warehouse_roof_band",
+    "value_text": "2.5-3.5 in (63.5-88.9 mm)",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "HRE-S002",
+      "title": "Morrison, S. J. (Haag Engineering Co.)",
+      "link": "https://professionalroofing.net/articles/article/1506",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "HRE-S003",
+      "title": "Kestner, J. (Haag Engineering Co.) and K",
+      "link": "https://www.theclm.org/Magazine/articles/testing-your-mettle/1223",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_IND_ROOF_STANDING_SEAM_STEEL",
+    "reasoning": "Onset T3 (HRE-C005); full T4 (HRE-C021).",
+    "update_trigger": "Metal panel tests above 2.5 in.",
+    "role": "threshold"
+   },
+   {
+    "id": "warehouse_roof_share",
+    "name": "warehouse_roof_share",
+    "value_text": "0.12 of structure RCN (9-15%)",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "HRE-S006",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "HRE-S007",
+      "title": "Hazard reference profiles r1: aamani-ai/Hazard_Modeling commit 8b0d61c88fbcf85daa1c098516cee22398cdb524,…",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_IND_ROOF_STANDING_SEAM_STEEL",
+    "reasoning": "HRE-C022.",
+    "update_trigger": "Metal roof cost source.",
+    "role": "value_share"
+   },
+   {
+    "id": "office_roof_band",
+    "name": "office_roof_band",
+    "value_text": "1.0-2.0 in (25.4-50.8 mm)",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "HRE-S002",
+      "title": "Morrison, S. J. (Haag Engineering Co.)",
+      "link": "https://professionalroofing.net/articles/article/1506",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "HRE-S004",
+      "title": "Olson, E. (Simpson Gumpertz & Heger)",
+      "link": "https://www.sgh.com/insight/understanding-hail-damage-risks-for-roofing-and-wall-systems/",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "HRE-S005",
+      "title": "Bhawalkar, S., L. Yang and T",
+      "link": "https://iibec.org/publication-post/ice-ball-impact-resistance-of-heat-aged-tpo-roofing-membranes/",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_OFF_ROOF_TPO_MEMBRANE_AND_INSULATION",
+    "reasoning": "HRE-C004, C006, C007.",
+    "update_trigger": "TPO test series by attachment.",
+    "role": "threshold"
+   },
+   {
+    "id": "office_roof_share",
+    "name": "office_roof_share",
+    "value_text": "0.027 of structure RCN",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "HRE-S006",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_OFF_ROOF_TPO_MEMBRANE_AND_INSULATION",
+    "reasoning": "HRE-C010.",
+    "update_trigger": "Office cost breakdown.",
+    "role": "value_share"
+   },
+   {
+    "id": "siding_band_and_exposure",
+    "name": "siding_band_and_exposure",
+    "value_text": "1.25-2.0 in; hail-facing share 0.5",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "HRE-S004",
+      "title": "Olson, E. (Simpson Gumpertz & Heger)",
+      "link": "https://www.sgh.com/insight/understanding-hail-damage-risks-for-roofing-and-wall-systems/",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_RES_WALLS_WINDOWS_T4",
+    "reasoning": "HRE-C023.",
+    "update_trigger": "Siding hail study.",
+    "role": "threshold"
+   },
+   {
+    "id": "window_band_and_exposure",
+    "name": "window_band_and_exposure",
+    "value_text": "1.5-2.5 in; panes reached 0.25",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "HRE-S004",
+      "title": "Olson, E. (Simpson Gumpertz & Heger)",
+      "link": "https://www.sgh.com/insight/understanding-hail-damage-risks-for-roofing-and-wall-systems/",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_*_WALLS_WINDOWS_T4;HRE_*_WINDOWS_T4",
+    "reasoning": "HRE-C023.",
+    "update_trigger": "Glazing hail study.",
+    "role": "threshold"
+   },
+   {
+    "id": "wall_window_costs",
+    "name": "wall_window_costs",
+    "value_text": "$7/ft2 siding; $55/ft2 residential window; $80/ft2 commercial window",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "HRE-S007",
+      "title": "Hazard reference profiles r1: aamani-ai/Hazard_Modeling commit 8b0d61c88fbcf85daa1c098516cee22398cdb524,…",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_*_WALLS_WINDOWS_T4;HRE_*_WINDOWS_T4",
+    "reasoning": "HRE-C023; areas from the profiles.",
+    "update_trigger": "Cost source.",
+    "role": "value_share"
+   },
+   {
+    "id": "exposed_equipment",
+    "name": "exposed_equipment",
+    "value_text": "withheld (not zero)",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "HRE-S011",
+      "title": "Ezold, R. (Vertex). HVAC condenser coil hail damage — repair or replace? Vertex web article, 22 May 2018,…",
+      "link": "https://vertexeng.com/insights/hvac-condenser-coil-hail-damage-repair-or-replace/",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "none",
+    "reasoning": "HRE-C016.",
+    "update_trigger": "Equipment hail evidence.",
+    "role": "scope"
+   }
+  ],
+  "evidence_provenance": {
+   "kind": "register",
+   "sheets": [],
+   "sections": [],
+   "unmatched": [],
+   "sentence": null,
+   "dossier": null,
+   "workbook": null
+  },
+  "link_counts": {
+   "total": 15,
+   "linked": 14,
+   "locator_only": 1,
+   "neither": 0,
+   "markers": 0,
+   "placeholders": 0
+  },
+  "extraction": null,
+  "tier_words": {
+   "shape": "transferred and our judgment",
+   "cost": "transferred and our judgment"
+  }
+ },
  "build_findings": []
 }

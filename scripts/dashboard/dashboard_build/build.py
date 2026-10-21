@@ -14,9 +14,16 @@ from .common import (OUT, ROOT, SENTENCES, STATION_ABSENT_SENTENCES, BuildError,
                      humanise, load_json, rel, sha256, tier_span)
 from .occurrence import (all_registers, asset_slug, bess_bucket_values, hazard_slug, register_for, resolve_state, slugs,
                          twin_crosswalk_pin)
+from .parts import asset_plain_sentence, asset_view, substation_budget, substation_crosswalk
+from .plain import (STATION_NAMES, TIER_MEANING, TIER_PLAIN, TIER_SHORT, capability_sentences, curve_caption, parameters_plain, plain_rail,
+                    resolve_key_sources, station_plain, tier_words)
 from .registers import load_registers
 from .sampling import NO_EVALUATOR, sample_entry
+from .sources import NO_LINK, NOT_YET_EXTRACTED, extract_for_entry, link_counts, resolve_link
 from .summaries import asset_sentence, cell_sentence, dossier_sentence, library_sentence, occurrence_sentence
+
+REPO_URL = "https://github.com/aamani-ai/Damage_Modeling"
+SUBSTATION_BUDGET_SOURCE = "Hazard_modeling/docs/plans/_cross_cutting/substation_conus/reference_budget.csv"
 
 STATUS_MARK = {"live": "■", "proposal": "▢", "reused": "▨", "gap": "┈"}
 STATUS_LABEL = {"live": "LIVE", "proposal": "PROPOSAL", "reused": "REUSED", "gap": "GAP"}
@@ -109,7 +116,7 @@ def exists_chip(e: Entry) -> dict[str, Any]:
 def source_id_check(e: Entry, regs: dict[str, Any]) -> list[str]:
     """Every source ID the cell displays must resolve in its register (only for register-backed cells)."""
     ids = {s["id"] for s in regs.get("sources") or []}
-    if not ids:
+    if not ids or regs.get("extraction"):
         return []
     unresolved = []
     for p in regs.get("parameters") or []:
@@ -134,11 +141,15 @@ def citations_for(e: Entry, regs: dict[str, Any]) -> dict[str, Any]:
     for c in claims:
         for sid in c["source_ids"]:
             edges.append({"from": c["id"], "to": sid, "kind": "claim→source"})
-    lineage = "machine_readable" if sources and (claims or params) else ("parameters_only" if params else "prose_only")
+    lineage = "extracted" if regs.get("extraction") and sources else ("machine_readable" if sources and (claims or params) else ("parameters_only" if params else "prose_only"))
     known = {s["id"] for s in sources}
     unresolved = sorted({ed["to"] for ed in edges if ed["kind"].endswith("source") and ed["to"] not in known}) if known else []
+    ex = regs.get("extraction") or {}
     return {"entry_id": e.id, "lineage": lineage, "paths": regs.get("paths"), "sources": sources, "claims": claims, "parameters": params, "edges": edges,
-            "unresolved_source_ids": unresolved,
+            "unresolved_source_ids": unresolved, "aliases": ex.get("matched") or {}, "unmatched_source_ids": ex.get("unmatched") or [],
+            "provenance": ("extracted" if ex.get("status") == "extracted" else "not_yet_extracted" if ex else "register"),
+            "extraction": {k: ex.get(k) for k in ("status", "sentence", "dossier", "workbook", "sheets_read", "dossier_sections", "files", "assumptions", "open_seams")} if ex else None,
+            "link_counts": link_counts(sources),
             "prose_sentence": SENTENCES["lineage_prose"]["page"] if lineage == "prose_only" else None}
 
 
@@ -210,6 +221,13 @@ def build(write: bool = True) -> dict[str, Any]:
     twin = twin_crosswalk_pin(fb_binding.get("reference_sha256", {}).get("twin_crosswalk.csv"))
     check("twin_crosswalk", "Hazard's twin crosswalk SHA equals the value binding's pin", twin.get("ok") is True, {k: v for k, v in twin.items() if k not in ("text", "crosswalk")})
     bess_values = bess_bucket_values(fb_binding)
+    commit_full = git("rev-parse", "HEAD")
+    # Hazard's substation reference budget, pinned by the substation flood binding; its twin crosswalk, read and unpinned
+    sub_bind = load_json(ROOT / "docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json")
+    sub_budget = substation_budget(((sub_bind.get("source_inputs") or {}).get("hazard_budget") or {}).get("sha256"), OUT)
+    check("substation_budget", "Hazard's substation reference budget SHA equals the substation flood binding's pin", sub_budget.get("ok") is True,
+          {k: v for k, v in sub_budget.items() if k not in ("text", "rows")} | {"rows": len(sub_budget.get("rows") or [])})
+    sub_xwalk = substation_crosswalk(OUT)
 
     # per-entry work
     cells: dict[str, dict[str, Any]] = {}
@@ -219,8 +237,24 @@ def build(write: bool = True) -> dict[str, Any]:
     unresolved_sources: list[str] = []
     sampling_notes: dict[str, list[str]] = {}
     by_id = {e.id: e for e in entries}
+    link_findings: list[str] = []
+    extraction_findings: list[str] = []
     for e in entries:
         regs = load_registers(e.artifact or {}, e.folder) if e.kind == "cell" else {"paths": {}, "sources": [], "claims": [], "parameters": []}
+        if e.kind == "cell":
+            base_dir = (ROOT / regs["paths"]["sources"]).parent if regs["paths"].get("sources") else e.folder
+            for src in regs["sources"]:
+                src["provenance"] = "register"
+                resolve_link(src, REPO_URL, commit_full, base_dir)
+            ex = extract_for_entry(e, regs, REPO_URL, commit_full)
+            if ex:
+                regs["extraction"] = ex
+                if ex["status"] == "extracted":
+                    regs["sources"] = ex["sources"]
+                    regs["claims"] = regs["claims"] or ex["claims"]
+                extraction_findings += [f"{e.id}: tier-table source ID {u} matches no document in the workbook or dossier" for u in ex["unmatched"]]
+            link_findings += [f"{e.id}: {src['id']} — {src.get('title') or src.get('citation') or ''}".rstrip(" —") for src in regs["sources"]
+                              if src.get("kind") not in ("marker", "placeholder") and not src.get("link") and not src.get("locator")]
         sampled = sample_entry(e)
         k = sampled["kats"]
         kat_totals["declared"] += k["declared"]; kat_totals["run"] += k["run"]; kat_totals["reproduced"] += k["reproduced"]
@@ -288,6 +322,68 @@ def build(write: bool = True) -> dict[str, Any]:
             citations[e.id] = cite
         folder_files = [{"path": rel(p), "sha256": sha256(p)} for p in sorted(e.folder.iterdir()) if p.is_file()] if e.folder and e.folder.is_dir() else []
         files = dict(e.data.get("files") or {})
+        # ── the plain layer (DCD-D19): chips, ✓ ◐ ✗ sentences, captions and station paragraphs, written here
+        review = review_block(e)
+        sources_by_id = {s_["id"]: s_ for s_ in regs.get("sources") or []}
+        for s_ in regs.get("sources") or []:
+            for al in s_.get("aliases") or []:
+                sources_by_id.setdefault(al, s_)
+        aliases = (regs.get("extraction") or {}).get("matched") or {}
+        occ_state_overall = None if not occ else ("not_searched" if occ_states == {"not_searched"} else ("found" if "found" in occ_states else ("adjacent" if "adjacent" in occ_states else "none_after_search")))
+        rail_plain = plain_rail(e.status, exists_chip(e).get("qualifier"), rows_tiers["shape"], rows_tiers["cost"], occ_state_overall, occ_label, review)
+        capabilities = capability_sentences(e.data, a, e.data["hazard"]) if e.kind != "gap" else []
+        search_href = f"/occurrence/{aslug}/{hslug}" if occ else None
+        for c in sampled["curves"]:
+            prow = [p for p in regs.get("parameters") or [] if (p.get("curve_id") == c["curve_id"]) or (p.get("curve_id") in (None, "all", "all_three"))]
+            bucket = bucket_of_subsystem.get(c["subsystem"])
+            occ_row = next((b for b in buckets_block if b["bucket"] == bucket), None)
+            c["caption"] = curve_caption(c, prow, sources_by_id, aliases, e.data.get("key_sources") or [], occ_row, search_href)
+        ex = regs.get("extraction") or {}
+        prov = {"kind": "extracted" if ex.get("status") == "extracted" else ("not_yet_extracted" if ex else "register"), "sheets": ex.get("sheets_read") or [],
+                "sections": ex.get("dossier_sections") or [], "unmatched": ex.get("unmatched") or [], "sentence": ex.get("sentence"), "dossier": ex.get("dossier"), "workbook": ex.get("workbook")}
+        lc = link_counts(regs.get("sources") or [])
+        fu_shares = []
+        for pt in parts:
+            fus_here = [f for f in a.get("failure_units") or [] if f.get("id") in pt["failure_units"]]
+            share = next((f.get(k_) for f in fus_here for k_ in ("default_value_share_physical_base", "direct_hardware_value_share_physical_base") if f.get(k_) is not None), None)
+            if share is not None:
+                fu_shares.append((pt, float(share)))
+        station_ctx = {"entry": e.data, "artifact": a, "hazard": e.data["hazard"], "noun": noun, "parts": parts, "withheld_units": withheld_units, "value": value,
+                       "curves": sampled["curves"], "sources": regs.get("sources") or [], "parameters": regs.get("parameters") or [], "evidence_provenance": prov,
+                       "link_counts": lc, "tier_span": tier_span([rows_tiers["shape"], rows_tiers["cost"]]) if rows_tiers["shape"] != "–" else "–",
+                       "audit_table": audit_table, "site_adapter": next((f for f in next(s_ for s_ in ch["stations"] if s_["id"] == "audit")["files"] if "site" in f["path"].lower()), None),
+                       "identity": e.identity, "dossier": (ch.get("dossier") or {}).get("path"), "workbook": (ch.get("workbook") or {}).get("path"), "n_files": len(folder_files),
+                       "capabilities": capabilities, "kats": k, "validation": None, "outside_checks": e.data.get("checks") or [], "review": review,
+                       "occurrence_sentence": (buckets_block[0]["sentence"] if buckets_block and len({b_["state"] for b_ in buckets_block}) == 1 else None) if occ else None,
+                       "occurrence_state": occ_state_overall, "fu_shares": fu_shares}
+        proof_tmp = proof_block(e, k, ch["stations"]) if e.kind != "gap" else None
+        station_ctx["validation"] = (proof_tmp or {}).get("validation")
+        station_ctx["key_references"] = resolve_key_sources(e.data.get("key_sources") or [], sources_by_id, aliases)
+        stations_plain = []
+        for st_ in ch["stations"]:
+            stations_plain.append(station_plain(st_["id"], {**station_ctx, "station": st_}))
+        key_refs = resolve_key_sources(e.data.get("key_sources") or [], sources_by_id, aliases)
+        plain = {
+            "rail": rail_plain,
+            "capabilities": capabilities,
+            "blocks": {
+                "covered": {"value": value, "not_covered": [re.sub(r"\s*\(\$[\d.,]+\s*[MBk]?\)\s*$", "", x) for x in e.data.get("not_covered") or []], "withheld": withheld_units},
+                "assumed": e.data.get("judgment") or [],
+                "missing": {"mechanisms": e.data.get("missing_mechanisms") or [], "out_of_scope": e.data.get("out_of_scope") or []},
+                "open_questions": e.data.get("open_items") or [],
+                "next_version": e.data.get("next_version"),
+            },
+            "stations": stations_plain,
+            "key_references": key_refs,
+            "sources": [{k_: v_ for k_, v_ in s_.items() if k_ != "_extra"} for s_ in regs.get("sources") or []],
+            "claims": regs.get("claims") or [],
+            "parameters": regs.get("parameters") or [],
+            "parameters_plain": parameters_plain(regs.get("parameters") or [], sources_by_id, aliases),
+            "evidence_provenance": prov,
+            "link_counts": lc,
+            "extraction": {k_: ex.get(k_) for k_ in ("status", "sentence", "dossier", "workbook", "sheets_read", "dossier_sections", "files", "assumptions", "open_seams", "matched", "unmatched")} if ex else None,
+            "tier_words": {"shape": tier_words(rows_tiers["shape"]), "cost": tier_words(rows_tiers["cost"])},
+        }
         cell = {
             "entry_id": e.id, "kind": e.kind, "status": e.status, "title": title,
             "asset": {"slug": aslug, "label": e.data["asset"]}, "hazard": {"slug": hslug, "label": e.data["hazard"]},
@@ -319,6 +415,7 @@ def build(write: bool = True) -> dict[str, Any]:
             "binding": {"source_cell_id": e.identity.get("source_cell_id"), "source_entry_id": e.identity.get("source_cell_id"), "reused_curves": [c for r in e.data.get("rows") or [] for c in r.get("curves", [])],
                         "transfer_rationale": a.get("transfer_rationale"), "transfer_tier": a.get("transfer_tier"), "status": a.get("status"), "limitations": a.get("limitations")} if e.kind == "binding" else None,
             "sampling_notes": sampled["notes"],
+            "plain": plain,
         }
         cells[e.id] = cell
         for c in sampled["curves"]:
@@ -328,11 +425,14 @@ def build(write: bool = True) -> dict[str, Any]:
             c["rail"] = cell["rail"]
             c["parameters_rows"] = [p for p in regs.get("parameters") or [] if (p.get("curve_id") == c["curve_id"]) or (not p.get("curve_id"))]
             c["sources_for_curve"] = sorted({s for p in c["parameters_rows"] for s in p["source_ids"]})
+            c["sources_resolved"] = [sources_by_id[aliases.get(s, s)] for s in c["sources_for_curve"] if aliases.get(s, s) in sources_by_id]
+            c["plain_tiers"] = {"shape": tier_words(c["tiers"].get("shape")), "cost": tier_words(c["tiers"].get("cost"))}
             bucket = bucket_of_subsystem.get(c["subsystem"])
             occ_row = next((b for b in buckets_block if b["bucket"] == bucket), None)
             c["occurrence"] = {"bucket": bucket, **{kk: vv for kk, vv in occ_row.items() if kk != "bucket"}} if occ_row else None
             c["review"] = review_block(e)
             c["summary"] = dossier_sentence(c, e.data["hazard"], occ_row["sentence"] if occ_row else None)
+            c["rail_plain"] = plain_rail(e.status, exists_chip(e).get("qualifier"), c["tiers"].get("shape") or "–", c["tiers"].get("cost") or "–", occ_row["state"] if occ_row else occ_state_overall, occ_row["state"].replace("_", " ") if occ_row else occ_label, review_block(e))
             c["versions"] = _versions(e)
             c["data_path"] = f"curves/{e.id}/{c['curve_id']}@{c['version_key']}.json"
             curves_out[f"{e.id}/{c['curve_id']}@{c['version_key']}"] = c
@@ -354,6 +454,23 @@ def build(write: bool = True) -> dict[str, Any]:
     check("known_answers", "every known answer reproduced within tolerance (not-run cases carry a reason)", not kat_failures, {**kat_totals, "failures": kat_failures}, severity="data")
     # 5 · every displayed source ID resolves
     check("source_ids", "every displayed source ID resolves in the cell's register", not unresolved_sources, {"unresolved": unresolved_sources, "cells_affected": sorted({u.split(":")[0] for u in unresolved_sources})}, severity="data")
+    # 5b · every source has a link or a locator (iteration 2); markers and placeholders are listed apart
+    check("source_links", "every source has either a link or a locator", not link_findings, {"neither": link_findings, "cells_affected": sorted({u.split(":")[0] for u in link_findings})}, severity="data")
+    # 5c · an older cell's tier-table source IDs match the sources extracted from its workbook and dossier
+    check("extracted_sources", "every tier-table source ID of an older cell matches an extracted source", not extraction_findings, {"unmatched": extraction_findings, "cells_affected": sorted({u.split(":")[0] for u in extraction_findings})}, severity="data")
+    # 5d · the plain layer is complete: a caption with its four parts for every drawn curve, ten paragraphs for every cell (structural: the build's own completeness)
+    missing_plain = []
+    for c in all_curves:
+        cap = c.get("caption") or {}
+        if c["drawn"] and not all(cap.get(k_) for k_ in ("what_it_says", "how_sure", "seen_in_field", "main_references")):
+            missing_plain.append(f"{c['entry_id']}/{c['curve_id']}: caption incomplete")
+    for cid_, cell_ in cells.items():
+        sts = (cell_.get("plain") or {}).get("stations") or []
+        if len(sts) != 10 or any(not st_.get("paragraph") for st_ in sts):
+            missing_plain.append(f"{cid_}: {len(sts)} station paragraphs")
+        if cell_["kind"] != "gap" and not cell_["plain"]["capabilities"]:
+            missing_plain.append(f"{cid_}: no capability sentences")
+    check("plain_layer", "every drawn curve has a four-part caption and every cell its ten station paragraphs", not missing_plain, {"missing": missing_plain})
     # 6 · nothing sampled outside its declared valid domain (asserted while sampling)
     check("domain", "nothing sampled outside its declared valid domain", True, {"asserted_per_curve": len(all_curves)})
     # 7 · chain: no station marked artifact without a file (asserted in the detector)
@@ -374,6 +491,8 @@ def build(write: bool = True) -> dict[str, Any]:
     check("occurrence", "occurrence registers name their entries and use the shared bucket keys", not occ_problems, {"registers": len(registers), "problems": occ_problems})
 
     failed = [c for c in checks if not c["ok"]]
+    for cid, cell in cells.items():
+        cell["build_findings"] = _findings_for(cid, checks)
     # ─── manifest ───
     hz_order = [h["slug"] for h in sl["hazards"]]
     as_order = [a["slug"] for a in sl["assets"]]
@@ -414,82 +533,62 @@ def build(write: bool = True) -> dict[str, Any]:
         "sentences": SENTENCES,
         "marks": {"exists": STATUS_MARK, "partial": "◔", "no_curve": "✕", "left_out": "–", "twin_levels": sl["twin_lead_levels"]},
         "tiers": {"T1": "claims or field calibrated", "T2": "public lab, standard or physics", "T3": "engineering proxy or adjacent evidence", "T4": "placeholder or expert judgment"},
-        "stations": [{"id": s["id"], "label": s["label"], "gate": s["gate"]} for s in chain_mod.STATIONS],
+        "tier_words": TIER_SHORT, "tier_plain": TIER_PLAIN, "tier_meaning": TIER_MEANING,
+        "stations": [{"id": s["id"], "label": s["label"], "gate": s["gate"], "name": STATION_NAMES[s["id"]][0], "meaning": STATION_NAMES[s["id"]][1]} for s in chain_mod.STATIONS],
+        "no_link_words": NO_LINK, "not_yet_extracted_sentence": NOT_YET_EXTRACTED,
         "lenses": ["status", "evidence", "occurrence", "value", "review"],
-        "repo": {"url": "https://github.com/aamani-ai/Damage_Modeling", "blob": "https://github.com/aamani-ai/Damage_Modeling/blob/main"},
+        "repo": {"url": REPO_URL, "blob": f"{REPO_URL}/blob/main"},
     }
-    # ─── assets ───
+    # ── the review queue (seed): findings the pages name, one place to read them
+    rq_items: list[dict[str, Any]] = []
+    for u in link_findings:
+        eid, rest = u.split(": ", 1)
+        rq_items.append({"kind": "source_without_link", "entry_id": eid, "text": rest, "href": f"/cells/{eid}?station=evidence", "words": "no link in the register"})
+    for eid, cell in cells.items():
+        pl = cell.get("plain") or {}
+        lc = pl.get("link_counts") or {}
+        if lc.get("locator_only"):
+            rq_items.append({"kind": "sources_locator_only", "entry_id": eid, "text": f"{lc['locator_only']} source{'s' if lc['locator_only'] != 1 else ''} with a locator but no link", "href": f"/cells/{eid}?station=evidence", "words": "no link in the register"})
+        prov = pl.get("evidence_provenance") or {}
+        if prov.get("kind") == "not_yet_extracted":
+            rq_items.append({"kind": "not_yet_extracted", "entry_id": eid, "text": NOT_YET_EXTRACTED, "href": f"/cells/{eid}?station=evidence", "words": "sources not yet extracted"})
+        if prov.get("unmatched"):
+            rq_items.append({"kind": "tier_id_unmatched", "entry_id": eid, "text": f"tier-table source IDs with no document in the workbook or dossier: {', '.join(prov['unmatched'])}", "href": f"/cells/{eid}?station=evidence", "words": "no document behind a source ID"})
+        for f_ in cell.get("build_findings") or []:
+            rq_items.append({"kind": f_["check"], "entry_id": eid, "text": f_["sentence"], "href": f"/cells/{eid}?station=evidence", "words": "a build check failed here"})
+    manifest["review_queue"] = {"items": rq_items, "counts": {k_: sum(1 for i_ in rq_items if i_["kind"] == k_) for k_ in sorted({i_["kind"] for i_ in rq_items})}}
+    # ─── assets: every asset through the same parts view (iteration 2) ───
     assets_out: dict[str, dict[str, Any]] = {}
     for a_def in sl["assets"]:
         aslug = a_def["slug"]
         asset_entries = [e for e in entries if asset_slug(e.data["asset"], sl) == aslug]
-        cells_for = sorted([{"hazard": e.data["hazard"], "slug": hazard_slug(e.data["hazard"], sl), "status": e.status, "tiers": {"shape": cells[e.id]["rail"]["evidence"]["shape"], "cost": cells[e.id]["rail"]["evidence"]["cost"]}, "entry_id": e.id} for e in asset_entries],
-                           key=lambda c: hz_order.index(c["slug"]))
-        searched_any = any(r["register"].get("last_searched") for (asl, _), r in registers.items() if asl == aslug)
-        bucket_defs = sl["value_buckets"].get(aslug, {}).get("buckets")
-        if bucket_defs:
-            values = bess_values if aslug == "bess" else {}
-            total = sum(values.values()) if values else None
-            rows = []
-            for b in bucket_defs:
-                row: dict[str, Any] = {"key": b["key"], "label": b["label"], "value_usd": values.get(b["key"]), "share": (values[b["key"]] / total) if values and total else None, "twin_targets": b["twin_targets"], "subsystems": b["failure_unit_subsystems"], "cells": {}}
-                for h in sl["hazards"]:
-                    reg = registers.get((aslug, h["slug"]))
-                    bucket_reg = (reg or {}).get("register", {}).get("buckets", {}).get(b["key"]) if reg else None
-                    entry = next((e for e in asset_entries if hazard_slug(e.data["hazard"], sl) == h["slug"]), None) if h["catalogue"] else None
-                    cell = cells[entry.id] if entry else None
-                    curve_cell = None
-                    if cell:
-                        part_rows = [p for p in cell["parts"] if p["bucket"] == b["key"]]
-                        withheld = [w for w in cell["answer"]["withheld_units"] if w["subsystem"] in b["failure_unit_subsystems"]]
-                        if entry.kind == "gap":
-                            curve_cell = {"mark": "┈", "state": "gap", "label": "gap"}
-                        elif part_rows:
-                            cv = cell["answer"]["value"] or {}
-                            by_bucket = [ci for ci in cv.get("covered", []) if ci.get("bucket") == b["key"] and ci.get("value_usd") is not None]
-                            bucket_value = values.get(b["key"])
-                            # ◔ at the bucket grain: part of THIS bucket's value has no curve in this cell
-                            partial = (sum(ci["value_usd"] for ci in by_bucket) < bucket_value - 1.0) if (by_bucket and bucket_value is not None) else bool(entry.data.get("not_covered"))
-                            curve_cell = {"mark": STATUS_MARK[entry.status], "state": entry.status, "partial": partial, "shape": tier_span([p["shape"] for p in part_rows]), "cost": tier_span([p["cost"] for p in part_rows]), "curves": [c for p in part_rows for c in p["curves"]], "drawn": any(p["drawn"] for p in part_rows)}
-                        elif withheld or entry.kind == "cell":
-                            curve_cell = {"mark": "✕", "state": "no_curve", "label": "no curve", "sentence": SENTENCES["no_curve"]["page"].format(part=b["label"], value=fmt_usd_compact(values.get(b["key"])) if values.get(b["key"]) is not None else "an unstated share")}
-                        else:
-                            curve_cell = {"mark": STATUS_MARK[entry.status], "state": entry.status}
-                    row["cells"][h["slug"]] = {
-                        "twin_lead": (bucket_reg or {}).get("twin_lead", {}).get("level") if bucket_reg else None,
-                        "twin_nodes": (bucket_reg or {}).get("twin_lead", {}).get("nodes", []) if bucket_reg else [],
-                        "curve": curve_cell, "entry_id": entry.id if entry else None,
-                        "occurrence": resolve_state(bucket_reg, reg["register"].get("surfaces", []), reg["register"].get("last_searched")) | {"bucket": b["key"]} if bucket_reg else None,
-                        "effect": h["effect"], "outside_the_five": h["outside_the_five"],
-                    }
-                rows.append(row)
-        else:
-            rows = []
-            for e in asset_entries:
-                for p in cells[e.id]["parts"]:
-                    key = (p["subsystems"][0] if p["subsystems"] else p["part"])
-                    row = next((r for r in rows if r["key"] == key), None)
-                    if not row:
-                        row = {"key": key, "label": humanise(key).title() if key.isupper() else p["part"], "value_usd": None, "share": None, "twin_targets": [], "subsystems": p["subsystems"], "cells": {}}
-                        rows.append(row)
-                    row["cells"][hazard_slug(e.data["hazard"], sl)] = {"twin_lead": None, "twin_nodes": [], "entry_id": e.id, "occurrence": {"bucket": key, "state": "not_searched", "mark": "?", "sentence": SENTENCES["not_searched"]["page"], "reports": [], "twin_lead": None}, "effect": "damage", "outside_the_five": False,
-                                                                       "curve": {"mark": STATUS_MARK[e.status], "state": e.status, "partial": bool(e.data.get("not_covered")), "shape": p["shape"], "cost": p["cost"], "curves": p["curves"], "drawn": p["drawn"]}}
-            for e in asset_entries:
-                if e.kind == "gap":
-                    for row in rows:
-                        row["cells"].setdefault(hazard_slug(e.data["hazard"], sl), {"twin_lead": None, "twin_nodes": [], "entry_id": e.id, "occurrence": None, "effect": "damage", "outside_the_five": False, "curve": {"mark": "┈", "state": "gap", "label": "gap"}})
+        for e in asset_entries:
+            cells[e.id]["_curves"] = [c for c in curves_out.values() if c["entry_id"] == e.id]
+        view = asset_view(aslug, a_def, asset_entries, cells, sl, registers, bess_values if aslug == "bess" else None, fb_binding if aslug == "bess" else None, twin,
+                          sub_budget if aslug == "substation" else None, sub_xwalk if aslug == "substation" else None, resolve_state)
+        for e in asset_entries:
+            cells[e.id].pop("_curves", None)
+        status_by_hz = {hazard_slug(e.data["hazard"], sl): e.status for e in asset_entries}
         reference = None
         if aslug == "bess":
             u = fb_binding["units"]
             reference = {"label": f"{u['battery_enclosures']['count']} enclosures · {u['pcs']['count']} PCS · {fmt_usd_compact(fb_binding['reference_tiv_usd'])} reference value ({humanise(fb_binding.get('currency_basis'))})", "source": fb.artifact["value_linkage"]["value_binding_path"], "total_usd": fb_binding["reference_tiv_usd"]}
+        elif aslug == "substation" and sub_budget.get("available"):
+            total = sum(float(r["amount_usd"]) for r in sub_budget["rows"] if r.get("amount_usd"))
+            reference = {"label": f"one 345/138 kV station · {fmt_usd_compact(total)} reference budget (Hazard, MISO MTEP24 rates)", "source": SUBSTATION_BUDGET_SOURCE, "total_usd": total,
+                         "note": "the bindings price the fenced station at $27.4M; the budget also carries the external access road outside the fence"}
         hazards_cols = []
         for h in sl["hazards"]:
             entry = next((e for e in asset_entries if hazard_slug(e.data["hazard"], sl) == h["slug"]), None) if h["catalogue"] else None
             reg = registers.get((aslug, h["slug"]))
             hazards_cols.append({**h, "entry_id": entry.id if entry else None, "status": entry.status if entry else None, "cell_title": cells[entry.id]["title"] if entry else None,
                                  "occurrence_href": f"/occurrence/{aslug}/{h['slug']}" if reg else None, "has_register": bool(reg)})
-        assets_out[aslug] = {"asset": {**a_def, "href": f"/assets/{aslug}"}, "summary": asset_sentence(a_def.get("noun", a_def["label"]), cells_for, searched_any), "reference": reference,
-                             "hazards": hazards_cols, "rows": rows, "entries": [t for t in tiles if t["asset"]["slug"] == aslug], "has_buckets": bool(bucket_defs), "twin_crosswalk": {"sha256": twin.get("sha256"), "rows": twin.get("rows")} if aslug == "bess" else None}
+        searched_any = any(r["register"].get("last_searched") for (asl, _), r in registers.items() if asl == aslug)
+        assets_out[aslug] = {"asset": {**a_def, "href": f"/assets/{aslug}"}, "summary": asset_plain_sentence(a_def, view["rows"], sl["hazards"], status_by_hz),
+                             "summary_v0": asset_sentence(a_def.get("noun", a_def["label"]), sorted([{"hazard": e.data["hazard"], "slug": hazard_slug(e.data["hazard"], sl), "status": e.status, "tiers": {"shape": cells[e.id]["rail"]["evidence"]["shape"], "cost": cells[e.id]["rail"]["evidence"]["cost"]}, "entry_id": e.id} for e in asset_entries], key=lambda c: hz_order.index(c["slug"])), searched_any),
+                             "reference": reference, "hazards": hazards_cols, "rows": view["rows"], "parts_by_cell": view["parts_by_cell"], "split": view["split"], "twin": view["twin"],
+                             "value_source": view["value_source"], "entries": [t for t in tiles if t["asset"]["slug"] == aslug], "has_buckets": aslug in ("bess", "substation"),
+                             "twin_crosswalk": {"sha256": twin.get("sha256"), "rows": twin.get("rows")} if aslug == "bess" else ({"sha256": sub_xwalk.get("sha256"), "rows": len(sub_xwalk.get("rows") or [])} if aslug == "substation" and sub_xwalk.get("available") else None)}
     # ─── occurrence pages ───
     occurrence_out: dict[tuple[str, str], dict[str, Any]] = {}
     for (aslug, hslug), r in registers.items():
@@ -515,6 +614,11 @@ def build(write: bool = True) -> dict[str, Any]:
         "working_tree_clean": git("status", "--porcelain") == "", "python": sys.version.split()[0],
         "counts": manifest["counts"], "known_answers": kat_totals, "pins_checked": sum(len(e.pins) for e in entries),
         "twin_crosswalk": {k: v for k, v in twin.items() if k not in ("text", "crosswalk")},
+        "substation_budget": {k: v for k, v in sub_budget.items() if k not in ("text", "rows")} | {"rows": len(sub_budget.get("rows") or [])},
+        "substation_twin_crosswalk": {k: v for k, v in sub_xwalk.items() if k not in ("text", "rows")} | {"rows": len(sub_xwalk.get("rows") or [])},
+        "source_links": {"neither": len(link_findings), "cells": sorted({u.split(":")[0] for u in link_findings})},
+        "extraction": {eid: {"status": (c_.get("plain") or {}).get("evidence_provenance", {}).get("kind"), "sources": (c_.get("plain") or {}).get("link_counts", {}).get("total"), "unmatched": (c_.get("plain") or {}).get("evidence_provenance", {}).get("unmatched")}
+                       for eid, c_ in cells.items() if (c_.get("plain") or {}).get("evidence_provenance", {}).get("kind") in ("extracted", "not_yet_extracted")},
         "checks": checks, "all_checks_pass": not failed, "sampling_notes": sampling_notes,
         "known_answers_not_run": {e.id: cells[e.id]["proof"]["known_answers"]["not_run"] for e in entries if e.kind == "cell" and cells[e.id]["proof"]["known_answers"]["not_run"]},
         "artifacts": [{"entry_id": e.id, "path": e.artifact_path, "sha256": e.artifact_sha, "status": e.status} for e in entries if e.artifact_path],
@@ -529,10 +633,8 @@ def build(write: bool = True) -> dict[str, Any]:
         raise BuildError(f"{len(hard)} structural check(s) failed; nothing written")
     manifest["build_checks"] = [{k: v for k, v in c.items() if k != "detail"} | {"summary": _check_summary(c)} for c in checks]
     manifest["all_checks_pass"] = not failed
-    for cid, cell in cells.items():
-        cell["build_findings"] = _findings_for(cid, checks)
     if write:
-        _write_all(manifest, cells, curves_out, assets_out, occurrence_out, citations, receipt, twin)
+        _write_all(manifest, cells, curves_out, assets_out, occurrence_out, citations, receipt, twin, sub_budget, sub_xwalk)
     return receipt
 
 
@@ -552,6 +654,14 @@ def _check_summary(c: dict[str, Any]) -> str:
         return "all resolve" if c["ok"] else f"{len(d.get('unresolved') or [])} unresolved in {', '.join(d.get('cells_affected') or [])}"
     if c["id"] == "twin_crosswalk":
         return f"sha {str(d.get('sha256'))[:7]} · {d.get('rows')} rows"
+    if c["id"] == "substation_budget":
+        return f"sha {str(d.get('sha256'))[:7]} · {d.get('rows')} rows" if d.get("available") else "Hazard's budget not found"
+    if c["id"] == "source_links":
+        return "every source linked or located" if c["ok"] else f"{len(d.get('neither') or [])} sources with neither, in {', '.join(d.get('cells_affected') or [])}"
+    if c["id"] == "extracted_sources":
+        return "every tier-table ID matched" if c["ok"] else f"{len(d.get('unmatched') or [])} unmatched in {', '.join(d.get('cells_affected') or [])}"
+    if c["id"] == "plain_layer":
+        return "captions and paragraphs complete" if c["ok"] else f"{len(d.get('missing') or [])} missing"
     if c["id"] == "occurrence":
         return f"{d.get('registers')} registers"
     return "ok" if c["ok"] else "failed"
@@ -571,6 +681,14 @@ def _findings_for(entry_id: str, checks: list[dict[str, Any]]) -> list[dict[str,
             mine = [f for f in d.get("failures", []) if f["entry"] == entry_id]
             if mine:
                 out.append({"check": c["id"], "severity": c["severity"], "items": mine[0]["failed"], "sentence": f"{len(mine[0]['failed'])} known answer{'s' if len(mine[0]['failed']) != 1 else ''} did not reproduce."})
+        if c["id"] == "source_links":
+            mine = [u.split(": ", 1)[1] for u in d.get("neither", []) if u.startswith(entry_id + ":")]
+            if mine:
+                out.append({"check": c["id"], "severity": c["severity"], "items": mine, "sentence": f"{len(mine)} source{'s' if len(mine) != 1 else ''} in this cell's register {'have' if len(mine) != 1 else 'has'} neither a link nor a locator."})
+        if c["id"] == "extracted_sources":
+            mine = [u.split(": ", 1)[1] for u in d.get("unmatched", []) if u.startswith(entry_id + ":")]
+            if mine:
+                out.append({"check": c["id"], "severity": c["severity"], "items": mine, "sentence": f"{len(mine)} source ID{'s' if len(mine) != 1 else ''} in this cell's tier table {'match' if len(mine) != 1 else 'matches'} no document in the workbook or dossier."})
     return out
 
 
@@ -606,7 +724,7 @@ def _dump(path, obj) -> str:
     return sha256(path)
 
 
-def _write_all(manifest, cells, curves, assets, occurrence, citations, receipt, twin) -> None:
+def _write_all(manifest, cells, curves, assets, occurrence, citations, receipt, twin, sub_budget=None, sub_xwalk=None) -> None:
     if OUT.exists():
         for child in OUT.iterdir():
             if child.name in ("README.md", ".gitkeep"):
@@ -626,6 +744,10 @@ def _write_all(manifest, cells, curves, assets, occurrence, citations, receipt, 
     if twin.get("available"):
         (OUT / "twin_crosswalk.csv").write_text(twin["text"], encoding="utf-8")
         written["twin_crosswalk.csv"] = sha256(OUT / "twin_crosswalk.csv")
+    for name, blk in (("substation_reference_budget.csv", sub_budget), ("substation_twin_crosswalk.csv", sub_xwalk)):
+        if blk and blk.get("available") and blk.get("text"):
+            (OUT / name).write_text(blk["text"], encoding="utf-8")
+            written[name] = sha256(OUT / name)
     receipt["files"] = written
     _dump(OUT / "receipt.json", receipt)
     n_fail = sum(1 for c in receipt["checks"] if not c["ok"])

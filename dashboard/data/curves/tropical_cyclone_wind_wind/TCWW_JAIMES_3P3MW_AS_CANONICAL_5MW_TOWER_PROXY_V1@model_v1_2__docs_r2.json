@@ -1365,6 +1365,86 @@
  "notes": [
   "Flags raised while sampling: ['SCREENING_ABOVE_SOURCE_RANGE_CAPPED_AT_MAX_DR', 'SCREENING_TRANSITION_BAND_ASSIGNED_ZERO']"
  ],
+ "caption": {
+  "what_it_says": "Turbine tower: no loss until peak 3-second gust at 10 m reaches about 118 km/h; damage then rises, passing half of full loss near 163 km/h, and reaches full replacement by 198 km/h. Beyond 252 km/h the line is continued at a damage ratio of 1 — our judgment, no data that far. Between 90 km/h and 108 km/h the model assigns zero and flags it.",
+  "how_sure": {
+   "shape": {
+    "tier": "T3",
+    "word": "transferred",
+    "basis": "Published fitted curve shape and archetype parameters"
+   },
+   "cost": {
+    "tier": "T4",
+    "word": "our judgment",
+    "basis": "Damage-state cost ratios and the denominator quarantine are T4; the 0.16 tower share is owner-approved (no tier code)"
+   },
+   "parameters": "5 parameters: 2 transferred (T3) and 3 our judgment (T4)",
+   "weakest": "T4"
+  },
+  "seen_in_field": {
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "state": "not_searched",
+   "href": null,
+   "words": "nobody has looked yet; no search log exists for this asset and hazard"
+  },
+  "main_references": [
+   {
+    "text": "Probabilistic risk assessment on wind turbine towers subjected to cyclone-induced wind loads, Wind Energy 23(3), 528-546 (2020) (JAIMES_2020_TC_WIND_TURBINE / TCWW-S005)",
+    "ids": [],
+    "title": "Probabilistic risk assessment on wind turbine towers subjected to cyclone-induced wind loads, Wind Energy 23(3), 528-546 (2020) (JAIMES_2020_TC_WIND_TURBINE / TCWW-S005)",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   },
+   {
+    "text": "Canonical wind-farm reference profile: 20 x 5 MW, $140M, tower share 0.16",
+    "ids": [
+     "CONUS_WIND_FARM_REFERENCE_V1"
+    ],
+    "title": "20×5 MW, 100 MW, $140M; tower share 0.16",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": "no link in the register",
+    "source_id": "CONUS_WIND_FARM_REFERENCE_V1"
+   },
+   {
+    "text": "Owner scope correction authorizing the tower-only 0.16 binding (OWNER_SCOPE_CORRECTION_2026_08_14; governance, not evidence)",
+    "ids": [],
+    "title": "Owner scope correction authorizing the tower-only 0.16 binding (OWNER_SCOPE_CORRECTION_2026_08_14; governance, not evidence)",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   },
+   {
+    "text": "Hazard hurricane wind-farm EAL review that found the 0.63 value mismatch",
+    "ids": [
+     "HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14"
+    ],
+    "title": "diagnoses 0.63 failure-unit/value mismatch",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": "no link in the register",
+    "source_id": "HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14"
+   },
+   {
+    "text": "NREL, Cost of Wind Energy Review 2024 (TCWW-S010; comparison only)",
+    "ids": [],
+    "title": "NREL, Cost of Wind Energy Review 2024 (TCWW-S010; comparison only)",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   }
+  ],
+  "references_from": "the entry's key sources"
+ },
  "title": "Hurricane wind × Wind farm",
  "asset": {
   "slug": "wind",
@@ -1403,6 +1483,11 @@
  },
  "parameters_rows": [],
  "sources_for_curve": [],
+ "sources_resolved": [],
+ "plain_tiers": {
+  "shape": "transferred",
+  "cost": "our judgment"
+ },
  "occurrence": null,
  "review": {
   "entry_read_on": "2026-10-19",
@@ -1414,7 +1499,29 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release reviewed owner approved tower only screening release"
  },
- "summary": "Turbine tower: thresholded weibull expected damage on peak 3-second gust at 10 m; shape T3, cost T4.",
+ "summary": "Turbine tower: nothing below a threshold, then a Weibull-shaped rise (thresholded Weibull), read against peak 3-second gust at 10 m; the shape is transferred, the cost our judgment.",
+ "rail_plain": {
+  "exists": {
+   "words": "Live · a screening model",
+   "code": "LIVE · screening"
+  },
+  "evidence": {
+   "words": "Evidence: transferred and our judgment",
+   "code": "shape T3 · cost T4",
+   "tiers": [
+    "T3",
+    "T4"
+   ]
+  },
+  "occurrence": {
+   "words": "Field reports: nobody has looked yet",
+   "code": "? not searched"
+  },
+  "review": {
+   "words": "Not yet reviewed by a person",
+   "code": "entry agent-read 2026-10-19 · release reviewed owner approved tower only screening release"
+  }
+ },
  "versions": [
   {
    "pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",

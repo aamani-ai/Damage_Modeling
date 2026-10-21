@@ -1090,6 +1090,80 @@
  "notes": [
   "The native curve axis is the demand ratio; the gust-to-ratio bridge needs the site's design gust (a selector) and is not drawn."
  ],
+ "caption": {
+  "what_it_says": "Foundations (uplift): no loss until effective demand ratio R_eff = (V₃ₛ / V_design)² × demand multipliers reaches about 0.9; damage then rises, passing half of its maximum near 1.35, and reaches a damage ratio of 0.45 (45 % of the part's value) by 2.01.",
+  "how_sure": {
+   "shape": {
+    "tier": "T4",
+    "word": "our judgment",
+    "basis": "Threshold, midpoint and slope are engineering fits"
+   },
+   "cost": {
+    "tier": "T4",
+    "word": "our judgment",
+    "basis": "45% cap and 8% default value share, both T4"
+   },
+   "parameters": "6 parameters: 1 lab-tested (T2) and 5 our judgment (T4)",
+   "weakest": "T4"
+  },
+  "seen_in_field": {
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "state": "not_searched",
+   "href": null,
+   "words": "nobody has looked yet; no search log exists for this asset and hazard"
+  },
+  "main_references": [
+   {
+    "text": "solar_wind_value_breakdown.xlsx",
+    "ids": [
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "title": "solar_wind_value_breakdown.xlsx",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "link_kind": "repo_file",
+    "locator": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "no_link_sentence": null,
+    "source_id": "SOLAR_WIND_VALUE_BREAKDOWN"
+   },
+   {
+    "text": "Wind Loads on Utility Scale Solar PV Power Plants",
+    "ids": [
+     "SRC_CPP_WIND_LOADS_UTILITY_PV"
+    ],
+    "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+    "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SRC_CPP_WIND_LOADS_UTILITY_PV"
+   },
+   {
+    "text": "Severe Weather Resilience in Solar Photovoltaic System Design",
+    "ids": [
+     "SRC_DOE_FEMP_PV_SEVERE_WEATHER"
+    ],
+    "title": "Severe Weather Resilience in Solar Photovoltaic System Design",
+    "link": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SRC_DOE_FEMP_PV_SEVERE_WEATHER"
+   },
+   {
+    "text": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+    "ids": [
+     "SRC_NREL_STORM_RESILIENCE"
+    ],
+    "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+    "link": "https://www.osti.gov/servlets/purl/2448530",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SRC_NREL_STORM_RESILIENCE"
+   }
+  ],
+  "references_from": "the parameters' own sources"
+ },
  "title": "Convective wind × Solar farm",
  "asset": {
   "slug": "solar",
@@ -1217,6 +1291,115 @@
   "NREL_STORM_RESILIENCE",
   "SOLAR_WIND_VALUE_BREAKDOWN"
  ],
+ "sources_resolved": [
+  {
+   "id": "SRC_CPP_WIND_LOADS_UTILITY_PV",
+   "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+   "citation": "Wind Loads on Utility Scale Solar PV Power Plants",
+   "url": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+   "locator": null,
+   "role": "Supports dynamic effects, tracker wind loads, and caveat against static-only simplified loads; used for x-axis bridge and curve-form rationale.",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+    "sheet": "Sources"
+   },
+   "aliases": [
+    "SRC_CPP_WIND_LOADS_UTILITY_PV"
+   ],
+   "source_type": null,
+   "doi": null,
+   "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+   "link_kind": "url",
+   "no_link_sentence": null
+  },
+  {
+   "id": "SRC_DOE_FEMP_PV_SEVERE_WEATHER",
+   "title": "Severe Weather Resilience in Solar Photovoltaic System Design",
+   "citation": "Severe Weather Resilience in Solar Photovoltaic System Design",
+   "url": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
+   "locator": null,
+   "role": "Supports wind-resilience failure mechanisms and storm-hardening selectors for PV systems; not a quantitative fragility curve.",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+    "sheet": "Sources"
+   },
+   "aliases": [
+    "SRC_DOE_FEMP_PV_SEVERE_WEATHER"
+   ],
+   "source_type": null,
+   "doi": null,
+   "link": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
+   "link_kind": "url",
+   "no_link_sentence": null
+  },
+  {
+   "id": "SRC_NREL_STORM_RESILIENCE",
+   "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+   "citation": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+   "url": "https://www.osti.gov/servlets/purl/2448530",
+   "locator": null,
+   "role": "Field mechanism evidence for clamp, fastener, bracing, cascading module release and high-wind failures; used for mechanism and curve-form support.",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+    "sheet": "Sources"
+   },
+   "aliases": [
+    "SRC_NREL_STORM_RESILIENCE"
+   ],
+   "source_type": null,
+   "doi": null,
+   "link": "https://www.osti.gov/servlets/purl/2448530",
+   "link_kind": "url",
+   "no_link_sentence": null
+  },
+  {
+   "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+   "title": "solar_wind_value_breakdown.xlsx",
+   "citation": "solar_wind_value_breakdown.xlsx (this repository)",
+   "url": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+   "locator": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+   "role": "value basis",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "repository-file",
+   "from": {
+    "file": "docs/method/value_basis/solar_wind_value_breakdown.xlsx"
+   },
+   "aliases": [
+    "SOLAR_WIND_VALUE_BREAKDOWN"
+   ],
+   "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+   "doi": null,
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+   "link_kind": "repo_file",
+   "no_link_sentence": null
+  }
+ ],
+ "plain_tiers": {
+  "shape": "our judgment",
+  "cost": "our judgment"
+ },
  "occurrence": null,
  "review": {
   "entry_read_on": "2026-10-19",
@@ -1228,7 +1411,28 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release —"
  },
- "summary": "Foundations (uplift): thresholded logistic demand on effective demand ratio R_eff = (V₃ₛ / V_design)² × demand multipliers; shape T4, cost T4.",
+ "summary": "Foundations (uplift): thresholded logistic demand, read against effective demand ratio R_eff = (V₃ₛ / V_design)² × demand multipliers; the shape is our judgment, the cost our judgment.",
+ "rail_plain": {
+  "exists": {
+   "words": "Live · in the runtime index",
+   "code": "LIVE"
+  },
+  "evidence": {
+   "words": "Evidence: our judgment",
+   "code": "shape T4 · cost T4",
+   "tiers": [
+    "T4"
+   ]
+  },
+  "occurrence": {
+   "words": "Field reports: nobody has looked yet",
+   "code": "? not searched"
+  },
+  "review": {
+   "words": "Not yet reviewed by a person",
+   "code": "entry agent-read 2026-10-19 · release —"
+  }
+ },
  "versions": [
   {
    "pin": "strong_wind_solar@model_v1_0__docs_r4",

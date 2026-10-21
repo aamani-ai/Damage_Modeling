@@ -1292,6 +1292,92 @@
  "selected_by": [],
  "variants": "terrain: open, light suburban, suburban, light trees, trees",
  "notes": [],
+ "caption": {
+  "what_it_says": "House: no loss until peak 3-second gust at 10 m in open terrain reaches about 77.5 mph; damage then rises, passing half of full loss near 130 mph, and reaches full replacement by 171 mph.",
+  "how_sure": {
+   "shape": {
+    "tier": "T2",
+    "word": "lab-tested",
+    "basis": "Hazus WSF1 building-loss rows"
+   },
+   "cost": {
+    "tier": "T2",
+    "word": "lab-tested",
+    "basis": "Hazus loss ratio of replacement value"
+   },
+   "parameters": "8 parameters: 7 lab-tested (T2) and 1 our judgment (T4)",
+   "weakest": "T4"
+  },
+  "seen_in_field": {
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "state": "not_searched",
+   "href": null,
+   "words": "nobody has looked yet; no search log exists for this asset and hazard"
+  },
+  "main_references": [
+   {
+    "text": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+    "ids": [
+     "TCRE-S001"
+    ],
+    "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+    "link_kind": "url",
+    "locator": "§2.1 p. 2-4 (wind pressure, windborne debris and rainwater penetration combined in the damage and loss functions; tree blowdown additive for small residential); §4.3 p. 4-81 (all damage and loss functions given as a function of peak gust, not one-minute wind); §5.5.1.3 p. 5-173 (results indexed to peak gust at 10 m in open terrain for several terrains); §5.6.5 Tables 5-76 and 5-77 p. 5-241 (metal-building size and deck-age effects); §6.1 pp. 6-2 to 6-3 (interior damage from roof cover, sheathing and fenestration breach); §8.1.2 p. 8-4 (cost ratio over total building cost); §8.1.4.1 p. 8-9 (interior loss from envelope damage); §8.1.7.2 p. 8-25 (commercial loss: repair factor 1.25, overhead and profit 1.20, capped at total replacement cost); §9.1 p. 9-2 (SPMB size classes); §9.7 pp. 9-49 to 9-50 (6.1/7.0 updates are mapping schemes and WBC weights); Appendix C Table C-1 pp. C-1 to C-2 (SBT names) and Table C-2 pp. C-3, C-12, C-13, C-20 to C-22 (WBC weight statistics)",
+    "no_link_sentence": null,
+    "source_id": "TCRE-S001"
+   },
+   {
+    "text": "FEMA Hazus team. Hazus 6.1 hurricane damage and loss function extract, HazusWindDamFunctions_Hazus61.xlsx…",
+    "ids": [
+     "TCRE-S002"
+    ],
+    "title": "FEMA Hazus team. Hazus 6.1 hurricane damage and loss function extract, HazusWindDamFunctions_Hazus61.xlsx…",
+    "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusWindDamFunctions_Hazus61.xlsx",
+    "link_kind": "url",
+    "locator": "sheet huDamLossFun (wbID × TERRAINID × DamLossDescID, columns WS50..WS250 mph); DamLossDescID 5 = Building Loss (huDamLossFunDescription); huListOfWindBldgTypes (wbID, sbtName, charDescription, CaseID); huListOfBldgChar (WBC codes); huTerrain (z0 0.03/0.15/0.35/0.70/1.00 m); selected rows wbID 6 (WSF1 CaseID 1), 1812 (SECBL), 1729 (SPMBL), TERRAINID 1-5",
+    "no_link_sentence": null,
+    "source_id": "TCRE-S002"
+   },
+   {
+    "text": "NHERI SimCenter. Damage and Loss Model Library (DLML), dataset \"Hazus Hurricane Methodology v5.1\", hurricane/building/portfolio/Hazus v5.1 original/loss_repair.csv",
+    "ids": [
+     "TCRE-S003"
+    ],
+    "title": "NHERI SimCenter. Damage and Loss Model Library (DLML), dataset \"Hazus Hurricane Methodology v5.1\", hurricane/building/portfolio/Hazus v5.1 original/loss_repair.csv",
+    "link": "https://github.com/NHERI-SimCenter/DamageAndLossModelLibrary/blob/869423b9ad21a8bfe5c40eee8db9eee13e4f61b9/src/dlml/data/hurricane/building/portfolio/Hazus%20v5.1%20original/loss_repair.csv",
+    "link_kind": "url",
+    "locator": "commit 869423b9ad21a8bfe5c40eee8db9eee13e4f61b9 (2026-10-03); rows W.SF.1.gab.0.6d.tnail.no.0.{3,15,35,70,100}, S.ECB.L.bur.0.B.std.low.{…}, S.PMB.L.0.por.std.{…}; column LossFunction-Theta_0 (41 loss ratios | 50..250 mph); Demand-Type \"Peak Gust Wind Speed\", unit mph",
+    "no_link_sentence": null,
+    "source_id": "TCRE-S003"
+   },
+   {
+    "text": "InfraSure Hazard_Modeling repository, hurricane peril (consumer contract).",
+    "ids": [
+     "TCRE-S005"
+    ],
+    "title": "InfraSure Hazard_Modeling repository, hurricane peril (consumer contract).",
+    "link": null,
+    "link_kind": "none",
+    "locator": "docs/hazards/hurricane/fundamentals.md lines 10-14 and 64-71 (wind only; 3-second gust at 10 m in mph; STORM 10-min bridge); perils/hurricane/src/hurricane/storm_return_periods.py lines 22-46 (thresholds 20-75 m/s, conversion (1/0.88)*1.20); drivers/deep/src/deep/damage_loader.py lines 230-466 (selector routing, one pathway-level valid_range)",
+    "no_link_sentence": "no link in the register",
+    "source_id": "TCRE-S005"
+   },
+   {
+    "text": "InfraSure Damage_Modeling, flood_real_estate model v0.1 / docs r1 (proposed).",
+    "ids": [
+     "TCRE-S006"
+    ],
+    "title": "InfraSure Damage_Modeling, flood_real_estate model v0.1 / docs r1 (proposed).",
+    "link": null,
+    "link_kind": "none",
+    "locator": "docs/cells/flood_real_estate/proposed/README_* §3 and REFERENCE_BUILDINGS_* §1, §3-4",
+    "no_link_sentence": "no link in the register",
+    "source_id": "TCRE-S006"
+   }
+  ],
+  "references_from": "the parameters' own sources"
+ },
  "title": "Hurricane wind × Real estate",
  "asset": {
   "slug": "real_estate",
@@ -1330,6 +1416,11 @@
  },
  "parameters_rows": [],
  "sources_for_curve": [],
+ "sources_resolved": [],
+ "plain_tiers": {
+  "shape": "lab-tested",
+  "cost": "lab-tested"
+ },
  "occurrence": null,
  "review": {
   "entry_read_on": "2026-10-19",
@@ -1341,7 +1432,28 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release not yet reviewed"
  },
- "summary": "House: piecewise linear on peak 3-second gust at 10 m in open terrain; shape T2, cost T2.",
+ "summary": "House: a line through fixed points (piecewise linear), read against peak 3-second gust at 10 m in open terrain; the shape is lab-tested, the cost lab-tested.",
+ "rail_plain": {
+  "exists": {
+   "words": "Proposal · not in the runtime index yet",
+   "code": "PROPOSAL · screening"
+  },
+  "evidence": {
+   "words": "Evidence: lab-tested",
+   "code": "shape T2 · cost T2",
+   "tiers": [
+    "T2"
+   ]
+  },
+  "occurrence": {
+   "words": "Field reports: nobody has looked yet",
+   "code": "? not searched"
+  },
+  "review": {
+   "words": "Not yet reviewed by a person",
+   "code": "entry agent-read 2026-10-19 · release not yet reviewed"
+  }
+ },
  "versions": [],
  "data_path": "curves/tropical_cyclone_wind_real_estate/TCRE_RES_HAZUS_WSF1_LIGHT_SUBURBAN@model_v0_2__docs_r1.json"
 }

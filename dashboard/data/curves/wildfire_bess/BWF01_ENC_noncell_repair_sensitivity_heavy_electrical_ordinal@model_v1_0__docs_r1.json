@@ -264,6 +264,92 @@
  ],
  "variants": "consequence: approved replacement / non-cell repair / limited repair; shape: electronics or heavy-electrical (unweighted)",
  "notes": [],
+ "caption": {
+  "what_it_says": "Integrated battery enclosure: the damage ratio is 0 at class 0 (no event), 0 at class 1, 0 at class 2, 0.01 at class 3, 0.04 at class 4, 0.11 at class 5 and 0.22 at class 6; nothing is drawn between classes because the model only answers at exact classes.",
+  "how_sure": {
+   "shape": {
+    "tier": "T4",
+    "word": "our judgment",
+    "basis": "Solar electrical class tables transferred as ordinal weights (BWF-P07)"
+   },
+   "cost": {
+    "tier": "T4",
+    "word": "our judgment",
+    "basis": "Owner-selected replacement and cost-split repair amounts (BWF-P08)"
+   },
+   "parameters": "4 parameters: 4 our judgment (T4)",
+   "weakest": "T4"
+  },
+  "seen_in_field": {
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "state": "not_searched",
+   "href": "/occurrence/bess/wildfire",
+   "words": "nobody has looked yet"
+  },
+  "main_references": [
+   {
+    "text": "Selected BESS r1 profile and fixed-2024 budget",
+    "ids": [
+     "BWF-S01"
+    ],
+    "title": "Selected BESS r1 profile and fixed-2024 budget",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+    "link_kind": "hazard_file",
+    "locator": "asset_model.json; layout.csv; reference_budget.csv",
+    "no_link_sentence": null,
+    "source_id": "BWF-S01"
+   },
+   {
+    "text": "USFS A Wildfire Risk Assessment Framework RMRS-GTR-315 (2013)",
+    "ids": [
+     "BWF-S02"
+    ],
+    "title": "USFS A Wildfire Risk Assessment Framework RMRS-GTR-315 (2013)",
+    "link": "https://www.fs.usda.gov/rm/pubs/rmrs_gtr315.pdf",
+    "link_kind": "url",
+    "locator": "printed25 / PDF31 Table5 and Wildfire Likelihood; native catalog RDS-2016-0034-3",
+    "no_link_sentence": null,
+    "source_id": "BWF-S02"
+   },
+   {
+    "text": "Canonical wildfire_solar model v1.0 docs r3",
+    "ids": [
+     "BWF-S03"
+    ],
+    "title": "Canonical wildfire_solar model v1.0 docs r3",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/wildfire_solar/current",
+    "link_kind": "repo_file",
+    "locator": "curve_artifact; ORDINATE_TABLE; dossier sections3-5; exact index pin",
+    "no_link_sentence": null,
+    "source_id": "BWF-S03"
+   },
+   {
+    "text": "Tesla Industrial Lithium-Ion Battery ERG rev2.8 (existing captured bytes)",
+    "ids": [
+     "BWF-S04"
+    ],
+    "title": "Tesla Industrial Lithium-Ion Battery ERG rev2.8 (existing captured bytes)",
+    "link": "https://www.tesla.com/sites/default/files/downloads/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
+    "link_kind": "url",
+    "locator": "printed13 / PDF15 section3.3; printed17 / PDF19 section5.2; printed20 / PDF22 section8",
+    "no_link_sentence": null,
+    "source_id": "BWF-S04"
+   },
+   {
+    "text": "Sungrow A Holistic Approach to Safety whitepaper",
+    "ids": [
+     "BWF-S05"
+    ],
+    "title": "Sungrow A Holistic Approach to Safety whitepaper",
+    "link": "https://info-support.sungrowpower.com/market-material/eeb93c64-dfba-4f4c-a481-b6853ec90cea.pdf",
+    "link_kind": "url",
+    "locator": "printed24 / PDF25 Figures36-39; embedded test report cover 10522343-SHA-R-01 IssueE dated2025-04-22",
+    "no_link_sentence": null,
+    "source_id": "BWF-S05"
+   }
+  ],
+  "references_from": "the parameters' own sources"
+ },
  "title": "Wildfire × Battery storage",
  "asset": {
   "slug": "bess",
@@ -479,6 +565,177 @@
   "BWF-S10",
   "BWF-S12"
  ],
+ "sources_resolved": [
+  {
+   "id": "BWF-S01",
+   "citation": "Selected BESS r1 profile and fixed-2024 budget",
+   "url": "Hazard_modeling/docs/plans/_cross_cutting/bess_conus/",
+   "locator": "asset_model.json; layout.csv; reference_budget.csv",
+   "role": "exposure_or_value",
+   "tier": "T3",
+   "permitted": "80 enclosures;20 PCS;20 unit MV;109.8M physical boundary",
+   "prohibited": "Observed fleet/OEM installation or wildfire resistance",
+   "decision": "retain exact inputs",
+   "accessed_on": null,
+   "provenance": "register",
+   "doi": null,
+   "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+   "link_kind": "hazard_file",
+   "title": "Selected BESS r1 profile and fixed-2024 budget",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BWF-S02",
+   "citation": "USFS A Wildfire Risk Assessment Framework RMRS-GTR-315 (2013)",
+   "url": "https://www.fs.usda.gov/rm/pubs/rmrs_gtr315.pdf",
+   "locator": "printed25 / PDF31 Table5 and Wildfire Likelihood; native catalog RDS-2016-0034-3",
+   "role": "x_axis_definition",
+   "tier": "T2",
+   "permitted": "Six categorical source classes; source FIL6 remains unsplit",
+   "prohibited": "Component heat flux/duration; equipment ignition threshold; damage ratio",
+   "decision": "retain hazard semantics; no new physics",
+   "accessed_on": null,
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.fs.usda.gov/rm/pubs/rmrs_gtr315.pdf",
+   "link_kind": "url",
+   "title": "USFS A Wildfire Risk Assessment Framework RMRS-GTR-315 (2013)",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BWF-S03",
+   "citation": "Canonical wildfire_solar model v1.0 docs r3",
+   "url": "docs/cells/wildfire_solar/current/",
+   "locator": "curve_artifact; ORDINATE_TABLE; dossier sections3-5; exact index pin",
+   "role": "curve_form",
+   "tier": "T4",
+   "permitted": "Source-only reproduction and separately qualified adjacent electrical transfer",
+   "prohibited": "BESS enclosure calibration; measured failure probabilities; whole-plant transfer",
+   "decision": "reproduce; PCS/MV review candidates only",
+   "accessed_on": null,
+   "provenance": "register",
+   "repo_path": "docs/cells/wildfire_solar/current",
+   "doi": null,
+   "link": "https://github.com/aamani-ai/Damage_Modeling/tree/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/wildfire_solar/current",
+   "link_kind": "repo_file",
+   "title": "Canonical wildfire_solar model v1.0 docs r3",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BWF-S04",
+   "citation": "Tesla Industrial Lithium-Ion Battery ERG rev2.8 (existing captured bytes)",
+   "url": "https://www.tesla.com/sites/default/files/downloads/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
+   "locator": "printed13 / PDF15 section3.3; printed17 / PDF19 section5.2; printed20 / PDF22 section8",
+   "role": "mechanism_only",
+   "tier": "T3",
+   "permitted": "External flame can initiate thermal runaway; inspect and distinguish product states",
+   "prohibited": "50C or60C is a wildfire ignition threshold; every exposed unit replaced; chemistry-equivalent probability",
+   "decision": "retain mechanism and endpoint limits",
+   "accessed_on": null,
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.tesla.com/sites/default/files/downloads/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
+   "link_kind": "url",
+   "title": "Tesla Industrial Lithium-Ion Battery ERG rev2.8 (existing captured bytes)",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BWF-S05",
+   "citation": "Sungrow A Holistic Approach to Safety whitepaper",
+   "url": "https://info-support.sungrowpower.com/market-material/eeb93c64-dfba-4f4c-a481-b6853ec90cea.pdf",
+   "locator": "printed24 / PDF25 Figures36-39; embedded test report cover 10522343-SHA-R-01 IssueE dated2025-04-22",
+   "role": "case_study_severity",
+   "tier": "T3",
+   "permitted": "Some tested targets survive substantial neighboring fire; construction/layout matter",
+   "prohibited": "Whitepaper is full independently reviewed DNV report; generic zero damage; FSim-class fragility or loss ratio",
+   "decision": "retain adjacent-fire endpoint; no numerical curve anchor",
+   "accessed_on": null,
+   "provenance": "register",
+   "doi": null,
+   "link": "https://info-support.sungrowpower.com/market-material/eeb93c64-dfba-4f4c-a481-b6853ec90cea.pdf",
+   "link_kind": "url",
+   "title": "Sungrow A Holistic Approach to Safety whitepaper",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BWF-S08",
+   "citation": "DOE FEMP Solar Photovoltaic Hardening for Resilience - Wildfire",
+   "url": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+   "locator": "Physical Measures; containers; fuel removal; access and local fire-crew consultation",
+   "role": "mechanism_only",
+   "tier": "T3",
+   "permitted": "Fuel/spacing/barriers are relevant context and future inputs",
+   "prohibited": "Quantitative efficacy; physical fence boundary proves fire protection",
+   "decision": "retain site-interface guidance; no numerical credit",
+   "accessed_on": null,
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+   "link_kind": "url",
+   "title": "DOE FEMP Solar Photovoltaic Hardening for Resilience - Wildfire",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BWF-S09",
+   "citation": "NREL-related same-budget battery hardware allocation from prior BESS review",
+   "url": "docs/extra/discussion/bess_damage/evidence/r3/",
+   "locator": "value_allocations.csv MMP_related_allocation; parent source and receipt in r3 README/audit",
+   "role": "exposure_or_value",
+   "tier": "T4",
+   "permitted": "Cost arithmetic for distinct known repair outcomes; preserve parent value",
+   "prohibited": "Actual fire service quote; replaceable subassembly or repair viability established by cost labels",
+   "decision": "retain illustrative consequence arithmetic only",
+   "accessed_on": null,
+   "provenance": "register",
+   "repo_path": "docs/extra/discussion/bess_damage/evidence/r3",
+   "doi": null,
+   "link": "https://github.com/aamani-ai/Damage_Modeling/tree/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/extra/discussion/bess_damage/evidence/r3",
+   "link_kind": "repo_file",
+   "title": "NREL-related same-budget battery hardware allocation from prior BESS review",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BWF-S10",
+   "citation": "Current native Substation Wildfire Hazard route",
+   "url": "Hazard_modeling/perils/wildfire/src/wildfire/substation.py",
+   "locator": "station_fire_native_response; station_fire_annual; docs/hazards/wildfire/implementation/substation/conus_grid/version_1/m0.md through m4.md",
+   "role": "validation_only",
+   "tier": "T3",
+   "permitted": "Reuse source pins/normalization and generic annual mechanisms after changed-support qualification",
+   "prohibited": "One station point is an observed BESS footprint event; completed station losses are reusable BESS losses",
+   "decision": "retain code inventory; BESS coupling not admitted",
+   "accessed_on": null,
+   "provenance": "register",
+   "doi": null,
+   "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/perils/wildfire/src/wildfire/substation.py",
+   "link_kind": "hazard_file",
+   "title": "Current native Substation Wildfire Hazard route",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BWF-S12",
+   "citation": "Owner BWF-Q01 ruling2026-10-19",
+   "url": "docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
+   "locator": "BWF-Q01; experiment_spec.json owner_ruling",
+   "role": "boundary_or_cap",
+   "tier": "T4",
+   "permitted": "Test integrated replacement with repair sensitivities",
+   "prohibited": "Approved curve probabilities or annual/national release",
+   "decision": "adopt local policy",
+   "accessed_on": null,
+   "provenance": "register",
+   "repo_path": "docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
+   "doi": null,
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
+   "link_kind": "repo_file",
+   "title": "Owner BWF-Q01 ruling2026-10-19",
+   "no_link_sentence": null
+  }
+ ],
+ "plain_tiers": {
+  "shape": "our judgment",
+  "cost": "our judgment"
+ },
  "occurrence": {
   "bucket": "battery_enclosures",
   "label": "Battery enclosures",
@@ -520,7 +777,28 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release same author with independent numerical methods"
  },
- "summary": "Integrated battery enclosure: exact-state table, carried in the schema's piecewise-linear container on FSim fire-intensity class at the unit, exact state; shape T4, cost T4. Not searched — nobody has looked for field reports yet.",
+ "summary": "Integrated battery enclosure: exact-state table, carried in the schema's piecewise-linear container, read against FSim fire-intensity class at the unit, exact state; the shape is our judgment, the cost our judgment. Not searched — nobody has looked for field reports yet.",
+ "rail_plain": {
+  "exists": {
+   "words": "Live · a screening model",
+   "code": "LIVE · screening"
+  },
+  "evidence": {
+   "words": "Evidence: our judgment",
+   "code": "shape T4 · cost T4",
+   "tiers": [
+    "T4"
+   ]
+  },
+  "occurrence": {
+   "words": "Field reports: nobody has looked yet",
+   "code": "? not searched"
+  },
+  "review": {
+   "words": "Not yet reviewed by a person",
+   "code": "entry agent-read 2026-10-19 · release same author with independent numerical methods"
+  }
+ },
  "versions": [
   {
    "columns": [

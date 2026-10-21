@@ -1076,5 +1076,1359 @@
  "gap_reason": null,
  "binding": null,
  "sampling_notes": [],
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Live · a screening model",
+    "code": "LIVE · screening"
+   },
+   "evidence": {
+    "words": "Evidence: transferred and our judgment",
+    "code": "shape T3–4 · cost T3–4",
+    "tiers": [
+     "T3",
+     "T4"
+    ]
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "? not searched"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release —"
+   }
+  },
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "✓",
+    "label": "one flood event (give water depth above local grade and the water type)",
+    "short": "one flood event",
+    "detail": "per-unit damage ratio for a stated depth and a stated water type (fresh or saline); unknown water or missing depth is withheld"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "✓",
+    "label": "a dollar scenario (give the unit value)",
+    "short": "a dollar scenario",
+    "detail": "allowed with the same-unit value and exposure stated; covered hardware only, never scaled to the whole plant"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "◐",
+    "label": "yearly loss — only through Hazard",
+    "short": "yearly loss",
+    "detail": "hazard computes it only if frequency, shared event, per-unit cap and missing-data checks pass; partial-property result only, complete-plant figures withheld"
+   },
+   {
+    "key": "pml",
+    "mark": "◐",
+    "label": "PML, VaR, TVaR — only from Hazard's validated annual loss distribution",
+    "short": "PML, VaR and TVaR",
+    "detail": "consumer computable from validated annual loss distribution"
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": {
+     "covered_usd": 82510403.39702758,
+     "total_usd": 109800000,
+     "share_covered": 0.7514608688253878,
+     "covered_label": "$82.5M of $109.8M",
+     "covered": [
+      {
+       "label": "Battery enclosures · active hardware",
+       "value_usd": 72110403.39702758,
+       "curve_id": "BESS_ACTIVE_CONTACT_STATE",
+       "bucket": "battery_enclosures"
+      },
+      {
+       "label": "PCS",
+       "value_usd": 10400000,
+       "curve_id": "BESS_PCS_INUNDATION_PROXY",
+       "bucket": "pcs"
+      }
+     ],
+     "no_curve": [
+      {
+       "label": "Enclosure racks and fire suppression",
+       "value_usd": 11889596.60297241,
+       "sentence": "No curve — Enclosure racks and fire suppression, $11.9M of the reference value, has no damage response yet."
+      },
+      {
+       "label": "Electrical balance (unit transformers, cables)",
+       "value_usd": 13200000,
+       "sentence": "No curve — Electrical balance (unit transformers, cables), $13.2M of the reference value, has no damage response yet."
+      },
+      {
+       "label": "Civil works",
+       "value_usd": 1600000,
+       "sentence": "No curve — Civil works, $1.6M of the reference value, has no damage response yet."
+      },
+      {
+       "label": "Unallocated fieldwork",
+       "value_usd": 600000,
+       "sentence": "No curve — Unallocated fieldwork, $600k of the reference value, has no damage response yet."
+      }
+     ],
+     "left_out": [],
+     "source": "docs/cells/flood_bess/current/value_binding.json",
+     "basis": "real 2024 dollars; reference budget r1"
+    },
+    "not_covered": [
+     "Enclosure racks and fire suppression",
+     "Electrical balance including unit transformers and cables",
+     "Civil works",
+     "Unallocated fieldwork"
+    ],
+    "withheld": []
+   },
+   "assumed": [
+    "Water enters the enclosure and PCS at 0.30 m above grade (owner-approved policy, not measured)",
+    "Any entry means full replacement of the enclosure's active hardware (BF-Q01)",
+    "Saline water above 0.30 m means full replacement of enclosure and PCS hardware (BF-Q02)",
+    "Freshwater PCS damage stays at full replacement past the last source point (no deep-water data)"
+   ],
+   "missing": {
+    "mechanisms": [
+     "Wave impact",
+     "Scour",
+     "Debris"
+    ],
+    "out_of_scope": [
+     "Collector station and export line",
+     "Autonomous internal failures (not caused by the flood)",
+     "Business interruption"
+    ]
+   },
+   "open_questions": [
+    "Coastal first SLOSH depth bin (0-1 ft) straddles the 0.30 m entry; upper-bin sensitivity kept for the spatial pilot",
+    "$27.29M of the plant value has no flood response yet",
+    "Matched service evidence, more mechanisms, restoration and size/duration scaling are future work"
+   ],
+   "next_version": null
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "What it covers",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Flood on batteries: conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; unit values from market cost shares of the fixed Hazard reference budget. It names 2 parts: Battery enclosure (active hardware) and Separate PCS. Outside its scope: collector station and export line, autonomous internal failures (not caused by the flood) and business interruption. Kinds of damage it does not include: wave impact, scour and debris.",
+    "plain_fact": "2 parts · 3 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the battery plant is split into 2 parts: Battery enclosure (active hardware) and Separate PCS. Parts of the plant's value with no curve yet: enclosure racks and fire suppression, electrical balance including unit transformers and cables, civil works and unallocated fieldwork.",
+    "plain_fact": "2 parts"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "Damage is read against water depth above local grade (m). The curves take 2 forms: an on/off step: nothing, then full replacement; a line through fixed points (piecewise linear). The input, in the catalogue's words: water depth above local grade (m), finite and 0 or more; water type must be stated as fresh or saline; the PCS freshwater curve reads depth above the assumed 0.30 m entry (0 to 2 m knots, flat at full replacement beyond 0.6 m).",
+    "plain_fact": "a step + a line through points"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "19 sources set this cell: Hazard BESS reference r1; commit 23e1aac4d, NEMA GD 1-2016 Evaluating Water-Damaged Electrical Equipment, Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier and SMA System Manual MV Power Station with Sunny Central Storage US; MVPS-S2-SCS-US-B8-SH-en-11 and 15 more. Of the 5 parameters, 2 are transferred (T3) and 3 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "plain_fact": "19 sources · transferred and our judgment"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "$82.5M of $109.8M of the reference plant has a curve (75 %). No curve yet for enclosure racks and fire suppression, electrical balance (unit transformers, cables), civil works and unallocated fieldwork (25 % of the value).",
+    "plain_fact": "75 % of value"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "The seven-step audit is written in the dossier with 7 rows. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "7 steps in the write-up"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 3 curve records (model v1.0, docs r1). The write-up is derivation.md. The cell folder holds 12 files, each with its SHA under Details.",
+    "plain_fact": "3 curve records"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "It can give one flood event and a dollar scenario. Yearly loss and PML, VaR and TVaR are available only under conditions the consumer (Hazard) checks. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "2 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "This build reproduced 30 of 30 known answers through the cell's evaluator (within 1e-09 on the damage ratio). The validation record says passed conditional annual screening (2026-10-18). No outside check has been made yet.",
+    "plain_fact": "30 of 30 reproduced"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "Hazard BESS reference r1: profile, layout and 2024 budget",
+    "ids": [
+     "BF-S01"
+    ],
+    "title": "Hazard BESS reference r1; commit 23e1aac4d",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+    "link_kind": "hazard_file",
+    "locator": "01_reference_profile_and_value.md; reference_budget.csv; layout.csv",
+    "no_link_sentence": null,
+    "source_id": "BF-S01"
+   },
+   {
+    "text": "NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment",
+    "ids": [
+     "BF-S02"
+    ],
+    "title": "NEMA GD 1-2016 Evaluating Water-Damaged Electrical Equipment",
+    "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+    "link_kind": "url",
+    "locator": "Printed pp1-4 equipment table; pp5-8 sections 4.2.1 4.4 4.6 4.11 4.12; p4 table visually reviewed",
+    "no_link_sentence": null,
+    "source_id": "BF-S02"
+   },
+   {
+    "text": "Flood Solar model v1.0 docs r4 canonical artifact",
+    "ids": [
+     "BF-S06"
+    ],
+    "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link_kind": "repo_file",
+    "locator": "flood_solar__model_v1_0__docs_r4__curve_artifact.json; flood_solar_curve_derivation_dossier_v1_0.md",
+    "no_link_sentence": null,
+    "source_id": "BF-S06"
+   },
+   {
+    "text": "SMA MV Power Station with Sunny Central Storage system manual",
+    "ids": [
+     "BF-S12"
+    ],
+    "title": "SMA System Manual MV Power Station with Sunny Central Storage US; MVPS-S2-SCS-US-B8-SH-en-11",
+    "link": "https://files.sma.de/downloads/MVPS-S2-SCS-US-B8-SH-en-11.pdf",
+    "link_kind": "url",
+    "locator": "p22 environmental disturbance; p267 electronics/air/connection ratings; pp274-275 section17.5 and Fig99 visually checked",
+    "no_link_sentence": null,
+    "source_id": "BF-S12"
+   },
+   {
+    "text": "NREL PVSCM 2024 Q1 cost model, ESS rows",
+    "ids": [
+     "BF-S13"
+    ],
+    "title": "PVSCM 2024 Q1 archive; NLR data catalog DOI 10.7799/3007269",
+    "link": "https://data.nlr.gov/submissions/307",
+    "link_kind": "url",
+    "locator": "UPV 2024Q1.txt lines1-7 50-66 153 172-173; ESS rows and tariff factor; workbook ESS columns D-H inspected read-only",
+    "no_link_sentence": null,
+    "source_id": "BF-S13"
+   }
+  ],
+  "sources": [
+   {
+    "id": "BF-S01",
+    "citation": "Hazard BESS reference r1; commit 23e1aac4d",
+    "url": "Hazard_modeling/docs/plans/_cross_cutting/bess_conus/",
+    "locator": "01_reference_profile_and_value.md; reference_budget.csv; layout.csv",
+    "role": "exposure_or_value",
+    "tier": "T3",
+    "permitted": "Selected canonical design and same-scope 2024-dollar value",
+    "prohibited": "Observed OEM design; ingress threshold; current appraisal",
+    "decision": "adopt reference only",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+    "link_kind": "hazard_file",
+    "title": "Hazard BESS reference r1; commit 23e1aac4d",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S02",
+    "citation": "NEMA GD 1-2016 Evaluating Water-Damaged Electrical Equipment",
+    "url": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+    "locator": "Printed pp1-4 equipment table; pp5-8 sections 4.2.1 4.4 4.6 4.11 4.12; p4 table visually reviewed",
+    "role": "boundary_or_cap; mechanism_only",
+    "tier": "T2",
+    "permitted": "Water-damaged equipment consequence distinctions; manufacturer evaluation; water chemistry matters",
+    "prohibited": "External depth predicts internal ingress; all enclosure contents replaced; empirical DR ordinates",
+    "decision": "adopt conditional guidance; no numeric curve",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+    "link_kind": "url",
+    "title": "NEMA GD 1-2016 Evaluating Water-Damaged Electrical Equipment",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S03",
+    "citation": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev2.8 2026-04-10",
+    "url": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
+    "locator": "Printed p2 scope; p17 firefighting; p18 shutdown/flood; p20 damaged product; p22 repair; p24 revision",
+    "role": "mechanism_only",
+    "tier": "T3",
+    "permitted": "Utility product safety and damaged-product handling context",
+    "prohibited": "Generic LFP depth-cost relation; quantitative containment or flood efficacy; annual fire probability",
+    "decision": "adopt mechanism context only",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
+    "link_kind": "url",
+    "title": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev2.8 2026-04-10",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S04",
+    "citation": "Chen et al. 2025 Risk Assessment Method for Power Distribution Systems Based on Spatiotemporal Characteristics of the Typhoon Disaster Chain; Processes 13 699",
+    "url": "https://doi.org/10.3390/pr13030699",
+    "locator": "Section3.3 Eq28 PDFp9; section5.1 PDFp12 400mm design assumption",
+    "role": "curve_form",
+    "tier": "T3",
+    "permitted": "Candidate functional-failure model structure and threshold roles",
+    "prohibited": "Observed LFP repair curve; selected BESS protection height; complete upper-domain model",
+    "decision": "reject direct numeric transfer; retain form lead",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": "10.3390/pr13030699",
+    "link": "https://doi.org/10.3390/pr13030699",
+    "link_kind": "doi",
+    "title": "Chen et al. 2025 Risk Assessment Method for Power Distribution Systems Based on Spatiotemporal…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S05",
+    "citation": "Southern California Edison Tehachapi Wind Energy Storage Project Technology Performance Report 3",
+    "url": "https://www.osti.gov/servlets/purl/1349233",
+    "locator": "Term search of complete pdftotext output: flood; mudslide; inundat; water damage",
+    "role": "rejected",
+    "tier": "T3",
+    "permitted": "Bounded search result only: match concerns gas suppression",
+    "prohibited": "No flooding ever occurred; empirical inundation damage or zero-loss anchor",
+    "decision": "no flood calibration adopted",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.osti.gov/servlets/purl/1349233",
+    "link_kind": "url",
+    "title": "Southern California Edison Tehachapi Wind Energy Storage Project Technology Performance Report 3",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S06",
+    "citation": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
+    "url": "damage_modeling/docs/cells/flood_solar/current/",
+    "locator": "flood_solar__model_v1_0__docs_r4__curve_artifact.json; flood_solar_curve_derivation_dossier_v1_0.md",
+    "role": "curve_form; boundary_or_cap",
+    "tier": "T3",
+    "permitted": "Pinned candidate electrical curves and exact native-axis response",
+    "prohibited": "Automatic BESS compatibility; empirical provenance for analyst ordinates",
+    "decision": "source reproduction complete; target qualification pending",
+    "accessed_on": null,
+    "provenance": "register",
+    "repo_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link_kind": "repo_file",
+    "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S07",
+    "citation": "Shared electrical Flood substrate and Wind reuse review",
+    "url": "damage_modeling/docs/method/shared_components/flood_electrical/",
+    "locator": "binding_rules.md; failure_unit_catalog.csv; docs/cells/flood_wind/current/SHARED_COMPONENT_REUSE_CROSSWALK_flood_wind__model_v1_0__docs_r1.csv",
+    "role": "selector_archetype",
+    "tier": "T3",
+    "permitted": "Compatibility criteria and known transformer/control value mismatch",
+    "prohibited": "Shared folder implies an admitted shared runtime; chemistry-free battery interchangeability",
+    "decision": "adopt reuse checks",
+    "accessed_on": null,
+    "provenance": "register",
+    "repo_path": "docs/method/shared_components/flood_electrical/binding_rules.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/method/shared_components/flood_electrical/binding_rules.md",
+    "link_kind": "repo_file",
+    "title": "Shared electrical Flood substrate and Wind reuse review",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S08",
+    "citation": "Hazard existing Pluvial ponding method",
+    "url": "Hazard_modeling/perils/flood/src/flood/pluvial/ponding.py",
+    "locator": "CAP_M = 0.30; exact bytes pinned in audit_receipt.json",
+    "role": "axis_bridge",
+    "tier": "T3",
+    "permitted": "Current method cap and same-datum audit",
+    "prohibited": "0.30m universal physical flood limit; mounting top automatically equals entry threshold",
+    "decision": "audit only; no hazard change",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/perils/flood/src/flood/pluvial/ponding.py",
+    "link_kind": "hazard_file",
+    "title": "Hazard existing Pluvial ponding method",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S09",
+    "citation": "Sungrow PowerTitan-ST2752UX System Manual; ST2752UX-SEN-Ver21-202204",
+    "url": "https://info-support.sungrowpower.com/application/pdf/2022/11/10/E049-ST2752UX-SEN-Ver21-202204-IEC.pdf",
+    "locator": "Printed pp8-13 internal anatomy and module data; pp25-26 foundation/drainage; p35 Fig5-1; p42 DC connections. PDF pages are printed+10.",
+    "role": "selector_archetype; mechanism_only",
+    "tier": "T3",
+    "permitted": "LFP modular internal anatomy and separate PCS architecture; distinct vulnerable assemblies",
+    "prohibited": "Exact r1 OEM match; universal entry elevation; numeric IP protection or replacement fraction",
+    "decision": "adopt anatomy; no numerical Flood response",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://info-support.sungrowpower.com/application/pdf/2022/11/10/E049-ST2752UX-SEN-Ver21-202204-IEC.pdf",
+    "link_kind": "url",
+    "title": "Sungrow PowerTitan-ST2752UX System Manual; ST2752UX-SEN-Ver21-202204",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S10",
+    "citation": "Rask et al.; NHTSA/Argonne DOT HS 813 136; Li-Ion Battery Pack Immersion Exploratory Investigation; August2021",
+    "url": "https://rosap.ntl.bts.gov/view/dot/57013/dot_57013_DS1.pdf",
+    "locator": "Printed pp15-17 procedure and Table1; pp19-24 findings; p27 conclusions. PDF page=printed+4. Table1 and p20 visually checked.",
+    "role": "adjacent_empirical; mechanism_only",
+    "tier": "T3",
+    "permitted": "Automotive-pack immersion can degrade components without in-water fire; post-immersion behavior matters",
+    "prohibited": "2/7 calibrated fire probability; LFP utility-depth repair curve; postmortem corrosion attributed solely to short initial soak",
+    "decision": "adopt mechanisms and test-design lessons only",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://rosap.ntl.bts.gov/view/dot/57013/dot_57013_DS1.pdf",
+    "link_kind": "url",
+    "title": "Rask et al.; NHTSA/Argonne DOT HS 813 136; Li-Ion Battery Pack Immersion Exploratory Investigation; August2021",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S11",
+    "citation": "Orendorff Lamb Steele; Sandia SAND2017-6925; Recommended Practices for Abuse Testing Rechargeable Energy Storage Systems; July2017",
+    "url": "https://www.sandia.gov/app/uploads/sites/163/2021/09/SNL-Abuse-Testing-Manual_July2017_FINAL.pdf",
+    "locator": "p36 section4.4 Water Immersion",
+    "role": "test_method",
+    "tier": "T2",
+    "permitted": "Test protocol and requested measurements; not test outcomes",
+    "prohibited": "Specified exposure means survived test; 2h is a BESS damage threshold; any economic DR",
+    "decision": "retain protocol for future evidence specification",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.sandia.gov/app/uploads/sites/163/2021/09/SNL-Abuse-Testing-Manual_July2017_FINAL.pdf",
+    "link_kind": "url",
+    "title": "Orendorff Lamb Steele; Sandia SAND2017-6925; Recommended Practices for Abuse Testing Rechargeable Energy…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S12",
+    "citation": "SMA System Manual MV Power Station with Sunny Central Storage US; MVPS-S2-SCS-US-B8-SH-en-11",
+    "url": "https://files.sma.de/downloads/MVPS-S2-SCS-US-B8-SH-en-11.pdf",
+    "locator": "p22 environmental disturbance; p267 electronics/air/connection ratings; pp274-275 section17.5 and Fig99 visually checked",
+    "role": "selector_archetype; mechanism_only",
+    "tier": "T3",
+    "permitted": "Storage-inverter components and multiple protection zones; post-flood evaluation required",
+    "prohibited": "All compartments share one rating; exact reference PCS; full-unit replacement mandated; measured FS_INV ordinates",
+    "decision": "supports qualified-proxy research; no automatic runtime admission",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://files.sma.de/downloads/MVPS-S2-SCS-US-B8-SH-en-11.pdf",
+    "link_kind": "url",
+    "title": "SMA System Manual MV Power Station with Sunny Central Storage US; MVPS-S2-SCS-US-B8-SH-en-11",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S13",
+    "citation": "PVSCM 2024 Q1 archive; NLR data catalog DOI 10.7799/3007269",
+    "url": "https://data.nlr.gov/submissions/307",
+    "locator": "UPV 2024Q1.txt lines1-7 50-66 153 172-173; ESS rows and tariff factor; workbook ESS columns D-H inspected read-only",
+    "role": "exposure_or_value",
+    "tier": "T3",
+    "permitted": "Historical direct-input cost shares; normalize compatible rows as a labeled related-benchmark allocation",
+    "prohibited": "Current tariffs; full replacement quotes; literal Battery Packs means all electrochemical pack parts; native rates multiplied by usable AC kWh",
+    "decision": "adopt dimensionless research allocation; no macro execution",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": "10.7799/3007269",
+    "link": "https://data.nlr.gov/submissions/307",
+    "link_kind": "url",
+    "title": "PVSCM 2024 Q1 archive; NLR data catalog DOI 10.7799/3007269",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S14",
+    "citation": "Cole et al.; NREL/TP-6A40-93281 Cost Projections for Utility-Scale Battery Storage: 2025 Update",
+    "url": "https://www.osti.gov/servlets/purl/2583471",
+    "locator": "Printed p4 PVSCM method; p18 Table3 visually reviewed (PDFp26); p19 mixed BOS",
+    "role": "exposure_or_value",
+    "tier": "T3",
+    "permitted": "Interpret category membership and link to source model already used for r1 valuation",
+    "prohibited": "Cost shares establish damage shares or repairable module geometry",
+    "decision": "adopt category crosswalk; preserve fixed r1 budget",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.osti.gov/servlets/purl/2583471",
+    "link_kind": "url",
+    "title": "Cole et al.; NREL/TP-6A40-93281 Cost Projections for Utility-Scale Battery Storage: 2025 Update",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S15",
+    "citation": "Sungrow High Voltage LFP Battery SBS050 User Manual; SBS050-UEN-Ver13-202504",
+    "url": "https://uk.sungrowpower.com/upload/file/20250603/EN_UM_SBS050_User_Manual.pdf",
+    "locator": "Printed p6 sections1.3.3-1.3.4 (PDFp14) visually reviewed; scope pII",
+    "role": "mechanism_only",
+    "tier": "T3",
+    "permitted": "Flooded-battery non-reuse guidance in adjacent LFP product; damaged battery distinct from whole surrounding system",
+    "prohibited": "Utility-enclosure entry height or affected fraction; whole cooling/container replacement; numerical utility DR",
+    "decision": "adopt conditional consequence only; no residential-to-utility curve transfer",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://uk.sungrowpower.com/upload/file/20250603/EN_UM_SBS050_User_Manual.pdf",
+    "link_kind": "url",
+    "title": "Sungrow High Voltage LFP Battery SBS050 User Manual; SBS050-UEN-Ver13-202504",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S16",
+    "citation": "Schneider Electric bulletin 0110DB0401R07/11 August2011; linked by FAQ FA123082 last modified2026-02-04",
+    "url": "https://ckm-content.se.com/ckmContent/sfc/servlet.shepherd/document/download/0691H00000EDoYrQAL",
+    "locator": "pp1-2 replacement and reconditioning lists; p3 non-submerged equipment",
+    "role": "mechanism_only; boundary_or_cap",
+    "tier": "T3",
+    "permitted": "Equipment-specific replacement versus potential reconditioning; interior assemblies distinct from enclosures",
+    "prohibited": "Numeric BESS depth-loss curve; entire PCS mandatory replacement; latest bulletin date equals FAQ date",
+    "decision": "adopt repair-scope distinctions only",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://ckm-content.se.com/ckmContent/sfc/servlet.shepherd/document/download/0691H00000EDoYrQAL",
+    "link_kind": "url",
+    "title": "Schneider Electric bulletin 0110DB0401R07/11 August2011; linked by FAQ FA123082 last modified2026-02-04",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S17",
+    "citation": "EIA / Sargent & Lundy Capital Cost and Performance Characteristics; January2024 report / SL-018001 RevA December2023",
+    "url": "https://www.eia.gov/analysis/studies/powerplants/capitalcost/pdf/capital_cost_AEO2025.pdf",
+    "locator": "Case19 pp113-116; Table19-1; printedp116 PDFp158 visually reviewed",
+    "role": "exposure_or_value; selector_archetype",
+    "tier": "T3",
+    "permitted": "Standalone150MW/600MWh anatomy; separate main substation and bundled BOP cost scope",
+    "prohibited": "BOP total is only electrical balance; exact target component shares; 2023 EPC costs are 2024 replacement values",
+    "decision": "adopt boundary cross-check; no numerical value transfer",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.eia.gov/analysis/studies/powerplants/capitalcost/pdf/capital_cost_AEO2025.pdf",
+    "link_kind": "url",
+    "title": "EIA / Sargent & Lundy Capital Cost and Performance Characteristics; January2024 report / SL-018001 RevA…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S18",
+    "citation": "NEMA updated equipment-damage guides announcement May28 2026",
+    "url": "https://www.makeitelectric.org/newsroom/news/nema-issues-guidance-on-evaluating-damaged-electrical-equipment-after-natural-disasters-and-extreme-weather-events/",
+    "locator": "Announcement names CS70006-2026; new full guide unavailable in bounded retrieval",
+    "role": "mechanism_only",
+    "tier": "T3",
+    "permitted": "A newer edition exists; prioritize exact full-body review when accessible",
+    "prohibited": "Full2026 guide reviewed; historical2016 rows still current or superseded in any specified way",
+    "decision": "retain edition-gap flag; no numeric inference",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.makeitelectric.org/newsroom/news/nema-issues-guidance-on-evaluating-damaged-electrical-equipment-after-natural-disasters-and-extreme-weather-events/",
+    "link_kind": "url",
+    "title": "NEMA updated equipment-damage guides announcement May28 2026",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BF-S19",
+    "citation": "Illustrative Digital Twin BESS cost model and equipment cards",
+    "url": "infrasure-digital-twin/public/engine/",
+    "locator": "cost-basis.js BESS estimated rows; bess-data.js bp_mvt bp_rmu bk_ems cost fields; exact local hashes in r4/source_captures.json",
+    "role": "exposure_or_value",
+    "tier": "T4",
+    "permitted": "Illustrative anatomy and cost hypotheses; explicit estimated allocations",
+    "prohibited": "Independent quotes; internally reconciled EMS value; exact replacement rates; assumed cost split becomes calibrated curve",
+    "decision": "retain plausibility context; no new target allocation",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "Illustrative Digital Twin BESS cost model and equipment cards",
+    "no_link_sentence": "no link in the register"
+   }
+  ],
+  "claims": [
+   {
+    "id": "BF-C01",
+    "text": "Use conditional water-damaged equipment consequence guidance after actual affected unit is established",
+    "type": "source_interpretation",
+    "source_ids": [
+     "BF-S02"
+    ],
+    "locator": "Printed p4 battery row; p1 use; section4.12 p8",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "no BESS depth parameter adopted",
+    "update_trigger": "Matched OEM repair procedure or immersion test"
+   },
+   {
+    "id": "BF-C02",
+    "text": "Use emergency handling and escalation context; do not infer quantitative survival",
+    "type": "source_interpretation",
+    "source_ids": [
+     "BF-S03"
+    ],
+    "locator": "Printed pp2 17 18 20 22",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "no efficacy or event-rate parameter adopted",
+    "update_trigger": "Configuration-matched test with physical loss endpoint"
+   },
+   {
+    "id": "BF-C03",
+    "text": "Reject direct DR use: availability endpoint and incomplete upper branch; retain form lead",
+    "type": "engineering_review",
+    "source_ids": [
+     "BF-S04"
+    ],
+    "locator": "Eq28 p9 and design case section5.1 p12",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "400mm not adopted; coefficients not supplied by us",
+    "update_trigger": "Validated parameter set and matched consequence mapping"
+   },
+   {
+    "id": "BF-C04",
+    "text": "0.75 times PCS10.4M = 7.8M; applying to plant109.8M gives82.35M and wrong denominator",
+    "type": "audit_arithmetic",
+    "source_ids": [
+     "BF-S01",
+     "BF-S06"
+    ],
+    "locator": "Reference pcs row; FS_INV native depth0.15m and DR0.75",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "source-only arithmetic; not BESS prediction",
+    "update_trigger": "Target binding changes or new source curve"
+   },
+   {
+    "id": "BF-C05",
+    "text": "Simple direct base-overtopping would have no positive above-base demand inside capped Pluvial domain",
+    "type": "engineering_inference",
+    "source_ids": [
+     "BF-S01",
+     "BF-S08"
+    ],
+    "locator": "Reference mounting0.30m; source CAP_M0.30m",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "geometry audit; no ingress parameter adopted",
+    "update_trigger": "Qualified critical datum and bypass model or hazard version change"
+   },
+   {
+    "id": "BF-C06",
+    "text": "No directly usable matched external-depth-to-LFP-repair dataset located in this pass",
+    "type": "bounded_negative_evidence",
+    "source_ids": [
+     "BF-S02",
+     "BF-S03",
+     "BF-S04",
+     "BF-S05"
+    ],
+    "locator": "../02_bounded_search.md protocol queries and endpoint tests",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "no numerical conclusion from absence",
+    "update_trigger": "Named matched source or changed reference becomes available"
+   },
+   {
+    "id": "BF-C07",
+    "text": "Keep enclosure internals included once and mixed EBOS/support unresolved until allocated",
+    "type": "governance_decision",
+    "source_ids": [
+     "BF-S01",
+     "BF-S07"
+    ],
+    "locator": "Reference budget all rows; binding_rules.md",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "10 rows reconciled; no loss allocation admitted",
+    "update_trigger": "Qualified component costs and replacement scope"
+   },
+   {
+    "id": "BF-C08",
+    "text": "Reproduce existing source curves before deciding target transfer",
+    "type": "source_reproduction",
+    "source_ids": [
+     "BF-S06",
+     "BF-S07"
+    ],
+    "locator": "Five electrical curve records; evidence/source_curve_audit.csv",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "95 evaluations pass; target admission remains false",
+    "update_trigger": "Target-specific evidence and consumer proof"
+   },
+   {
+    "id": "BF-C09",
+    "text": "Keep sizing and duration rules as required later handoff",
+    "type": "owner_direction",
+    "source_ids": [
+     "BF-S01"
+    ],
+    "locator": "Hazard 03_scaling_and_production_handoff.md; owner2026-10-18",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "not implemented; no multiplier chosen",
+    "update_trigger": "Reference response complete and production use specified"
+   },
+   {
+    "id": "BF-C10",
+    "text": "Keep module case and shared control/cooling regions distinct; older separate-PCS LFP product is anatomy evidence only",
+    "type": "source_interpretation",
+    "source_ids": [
+     "BF-S09"
+    ],
+    "locator": "Printed pp8-13; pp25-26; p35 Fig5-1",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "no source dimensions or IP credit transferred",
+    "update_trigger": "Matched reference entry/repair drawings"
+   },
+   {
+    "id": "BF-C11",
+    "text": "Separate observed degradation from thermal safety endpoint; two smoking packs among heterogeneous tests is not target probability",
+    "type": "adjacent_empirical",
+    "source_ids": [
+     "BF-S10"
+    ],
+    "locator": "Printed Table1 p17; sections3.2.2-3.3 pp20-24; p27",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "no frequency fitted",
+    "update_trigger": "Controlled representative test matrix with target endpoint"
+   },
+   {
+    "id": "BF-C12",
+    "text": "Postmortem corrosion followed extended final immersion; initial short-soak duration does not identify damage severity",
+    "type": "source_interpretation",
+    "source_ids": [
+     "BF-S10"
+    ],
+    "locator": "Printed sections2.2.4/2.3 p15 and final paragraphp21",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "no duration-response anchor adopted",
+    "update_trigger": "Post-test timeline and stage-specific inspection data"
+   },
+   {
+    "id": "BF-C13",
+    "text": "Protocol defines exposures and observations; it is not a dataset of survival or repair cost",
+    "type": "source_interpretation",
+    "source_ids": [
+     "BF-S11"
+    ],
+    "locator": "p36 section4.4",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "no damage threshold derived from2h protocol",
+    "update_trigger": "Actual results at declared configuration and endpoint"
+   },
+   {
+    "id": "BF-C14",
+    "text": "Carry exact electrical curve as conditional PCS proxy candidate; compartment and repair-scope differences still matter",
+    "type": "engineering_inference",
+    "source_ids": [
+     "BF-S06",
+     "BF-S12"
+    ],
+    "locator": "FS_INV nine knots; SMA pp22 267 274-275",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "T3 candidate; entry not admitted",
+    "update_trigger": "Explicit target entry and approved screening repair-scope rationale"
+   },
+   {
+    "id": "BF-C15",
+    "text": "Immediate-bundle and uniform-height assumptions are pressure tests; neither is selected as expected DR",
+    "type": "unresolved_hypothesis",
+    "source_ids": [
+     "BF-S01",
+     "BF-S02",
+     "BF-S09"
+    ],
+    "locator": "r2/experiment_spec.json; ../03_flood_candidate_pressure_test.md section3",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "T4 hypotheses; no average or confidence band",
+    "update_trigger": "Grouped repair policy and value allocation"
+   },
+   {
+    "id": "BF-C16",
+    "text": "At assumed entry0.30m and externaldepth0.45m one PCS source-proxy arithmetic is390000; one enclosure stress arithmetic is1050000 versus54310.34",
+    "type": "audit_arithmetic",
+    "source_ids": [
+     "BF-S01",
+     "BF-S06"
+    ],
+    "locator": "r2/known_answer_checks.csv; r2/audit_receipt.json",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "research-only hypothetical amounts",
+    "update_trigger": "Candidate admission and integrated Hazard proof"
+   },
+   {
+    "id": "BF-C17",
+    "text": "Cost labels distinguish cells from management/thermal and the enclosure/racks/fire composite",
+    "type": "source_interpretation",
+    "source_ids": [
+     "BF-S13",
+     "BF-S14"
+    ],
+    "locator": "UPV ESS.Li-Ion Cells; ESS.Battery Packs; ESS.Enclosure; Table3 printedp18",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "direct-input extraction only",
+    "update_trigger": "Revised source model or compatible service BOM"
+   },
+   {
+    "id": "BF-C18",
+    "text": "Normalize historical market-case direct costs and allocate existing84M proportionally; not a new TIV",
+    "type": "engineering_inference",
+    "source_ids": [
+     "BF-S01",
+     "BF-S13",
+     "BF-S14"
+    ],
+    "locator": "r3/value_allocations.csv; ../04_grouped_repair_and_value.md section1",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "T3 proposed reference allocation; four groups sum to original",
+    "update_trigger": "Target repair quotes or changed hardware architecture"
+   },
+   {
+    "id": "BF-C19",
+    "text": "Flooded-battery non-reuse supports conditional replacement; utility affected unit still needs explicit policy",
+    "type": "source_interpretation",
+    "source_ids": [
+     "BF-S15",
+     "BF-S02",
+     "BF-S09"
+    ],
+    "locator": "SBS050 printedp6; NEMA p4/section4.12; ST2752 anatomy",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "no source depth/affected-share parameter",
+    "update_trigger": "Matched utility service or immersion report"
+   },
+   {
+    "id": "BF-C20",
+    "text": "Propose common-entry active-hardware replacement as conservative screening policy; not measured mean",
+    "type": "unresolved_hypothesis",
+    "source_ids": [
+     "BF-S01",
+     "BF-S02",
+     "BF-S09",
+     "BF-S13",
+     "BF-S15"
+    ],
+    "locator": "BF-Q01 in ../04_grouped_repair_and_value.md; r3/entry_policy_examples.csv",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "T4 policy and entry; owner ruling open",
+    "update_trigger": "Owner policy decision then full new-cell qualification"
+   },
+   {
+    "id": "BF-C21",
+    "text": "Active group901380.04 per enclosure; with PCS potential value coverage75.146%; remainder27289596.60 retained",
+    "type": "audit_arithmetic",
+    "source_ids": [
+     "BF-S01",
+     "BF-S13"
+    ],
+    "locator": "r3/audit_receipt.json; r3/repair_policy_examples.csv",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "31 checks; no runtime admission",
+    "update_trigger": "Changed reference or allocation"
+   },
+   {
+    "id": "BF-C22",
+    "text": "No matched utility depth-to-repair-unit mapping recovered in this targeted pass",
+    "type": "bounded_negative_evidence",
+    "source_ids": [
+     "BF-S09",
+     "BF-S12",
+     "BF-S15"
+    ],
+    "locator": "../02_bounded_search.md third bounded pass",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "no new numerical ingress anchor",
+    "update_trigger": "Accessible OEM service data or observed repair case"
+   },
+   {
+    "id": "BF-C23",
+    "text": "Liquid-filled transformer assemblies may be reconditionable while electronic controls need replacement",
+    "type": "source_interpretation",
+    "source_ids": [
+     "BF-S02",
+     "BF-S12",
+     "BF-S16"
+    ],
+    "locator": "NEMA GD1-2016 section4.4; SMA pp31-32; Schneider pp1-2",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "no quantified target repair fraction",
+    "update_trigger": "Matched construction and tank/auxiliary values plus response"
+   },
+   {
+    "id": "BF-C24",
+    "text": "Public BOP aggregates and PV donor rows do not isolate target13.2M component values",
+    "type": "source_interpretation",
+    "source_ids": [
+     "BF-S13",
+     "BF-S14",
+     "BF-S17"
+    ],
+    "locator": "UPV EBOS rows; NREL Table3 pp18-19; EIA Table19-1 pp115-116",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "budget remains unallocated within group",
+    "update_trigger": "Consistent target BOM or bounded quotes with scope reconciliation"
+   },
+   {
+    "id": "BF-C25",
+    "text": "Twin14USD/kWh times400000kWh equals5.6M;62percent/20 equals173600 per transformer; EMS16percent of5.6M equals896000 versus40-120k card",
+    "type": "audit_arithmetic",
+    "source_ids": [
+     "BF-S19"
+    ],
+    "locator": "cost-basis.js BESS rows; bess-data.js bk_ems and bp_mvt",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "illustrative estimates only; no runtime value change",
+    "update_trigger": "Reconciled source estimate with same scope and vintage"
+   },
+   {
+    "id": "BF-C26",
+    "text": "Continue covered replacement cost at its existing ceiling beyond2.3m freshwater test limit",
+    "type": "engineering_inference",
+    "source_ids": [
+     "BF-S01",
+     "BF-S06"
+    ],
+    "locator": "r4/policy_examples.csv; ../05_remaining_property_and_flood_domain.md section3",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "T4 proposed saturation; no model change in r4",
+    "update_trigger": "New candidate version with explicit domain and consumer proof"
+   },
+   {
+    "id": "BF-C27",
+    "text": "Saturation comparison recovers701enclosure+175PCS cases;8649missing hazard stay unavailable; all43800priorcases reproduce",
+    "type": "audit_arithmetic",
+    "source_ids": [
+     "BF-S01",
+     "BF-S06"
+    ],
+    "locator": "r4/audit_receipt.json; r4/riverine_domain_impact.csv",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "diagnostic cohort only;70checks; runtime unchanged",
+    "update_trigger": "Separate source-backed candidate and annual/placement qualification"
+   },
+   {
+    "id": "BF-C28",
+    "text": "Saltwater-entry replacement versus unmodified gradualPCS proxy compared explicitly; at0.45m PCS520k versus390k",
+    "type": "unresolved_hypothesis",
+    "source_ids": [
+     "BF-S02",
+     "BF-S03",
+     "BF-S10",
+     "BF-S16"
+    ],
+    "locator": "BF-Q02; r4/policy_examples.csv",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "T4 coastal local-test policy open; no salinity coefficient",
+    "update_trigger": "Owner policy ruling then new candidate and Coastal proof"
+   },
+   {
+    "id": "BF-C29",
+    "text": "New NEMA CS70006-2026 edition announced; body not retrieved",
+    "type": "source_interpretation",
+    "source_ids": [
+     "BF-S18"
+    ],
+    "locator": "Official May28 2026 announcement; r4/source_captures.json",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "edition existence only",
+    "update_trigger": "Accessible official full2026guide and row-level comparison"
+   },
+   {
+    "id": "BF-C30",
+    "text": "For local saline screening replace covered active enclosure and PCS hardware strictly above assumed0.30m entry; freshwater response retained with explicit deep-water replacement cap",
+    "type": "owner_selected_engineering_policy",
+    "source_ids": [
+     "BF-S02",
+     "BF-S03",
+     "BF-S10",
+     "BF-S16"
+    ],
+    "locator": "BF-Q02 owner reply 2026-10-18; proposed/local_candidate_v0_2/derivation.md",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "T4 conservative local-test policy; not empirical mean or annual admission",
+    "update_trigger": "Matched repair evidence or sensitivity changes target response; annual capability requires separate qualification"
+   }
+  ],
+  "parameters": [
+   {
+    "id": "entry_and_active_replacement",
+    "name": "entry_and_active_replacement",
+    "value": ".30m; binary strict greater-than",
+    "tier": "T4",
+    "source_ids": [
+     "BF-S01",
+     "BF-S02",
+     "BF-S09",
+     "BF-S15"
+    ],
+    "claim_ids": [
+     "BF-C20"
+    ],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "BF-Q01 owner-approved conservative local-test policy, not a physical fragility",
+    "update_trigger": null
+   },
+   {
+    "id": "PCS_source_knots",
+    "name": "PCS_source_knots",
+    "value": null,
+    "tier": "T3",
+    "source_ids": [
+     "BF-S06",
+     "BF-S12"
+    ],
+    "claim_ids": [
+     "BF-C14"
+    ],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Exact source engineering proxy; target entry remains T4",
+    "update_trigger": null
+   },
+   {
+    "id": "same_unit_value",
+    "name": "same_unit_value",
+    "value": null,
+    "tier": "T3",
+    "source_ids": [
+     "BF-S01",
+     "BF-S13",
+     "BF-S14"
+    ],
+    "claim_ids": [
+     "BF-C18"
+    ],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Dimensionless market-case allocation preserves reference total",
+    "update_trigger": null
+   },
+   {
+    "id": "deep_freshwater_saturation",
+    "name": "deep_freshwater_saturation",
+    "value": null,
+    "tier": "T4",
+    "source_ids": [
+     "BF-S01",
+     "BF-S06"
+    ],
+    "claim_ids": [
+     "BF-C26",
+     "BF-C27"
+    ],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Continue existing maximum equipment replacement; no empirical deep-water calibration or cleanup scope",
+    "update_trigger": null
+   },
+   {
+    "id": "saline_contact_replacement",
+    "name": "saline_contact_replacement",
+    "value": ".30m strict greater-than; DR1 for covered battery and PCS hardware",
+    "tier": "T4",
+    "source_ids": [
+     "BF-S02",
+     "BF-S03",
+     "BF-S10",
+     "BF-S16"
+    ],
+    "claim_ids": [
+     "BF-C30"
+    ],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "BF-Q02 owner-approved conservative local-test policy; not a measured mean or salinity multiplier",
+    "update_trigger": null
+   }
+  ],
+  "parameters_plain": [
+   {
+    "id": "entry_and_active_replacement",
+    "name": "entry_and_active_replacement",
+    "value_text": ".30m; binary strict greater-than",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "BF-S01",
+      "title": "Hazard BESS reference r1; commit 23e1aac4d",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+      "link_kind": "hazard_file",
+      "resolved": true
+     },
+     {
+      "id": "BF-S02",
+      "title": "NEMA GD 1-2016 Evaluating Water-Damaged Electrical Equipment",
+      "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "BF-S09",
+      "title": "Sungrow PowerTitan-ST2752UX System Manual; ST2752UX-SEN-Ver21-202204",
+      "link": "https://info-support.sungrowpower.com/application/pdf/2022/11/10/E049-ST2752UX-SEN-Ver21-202204-IEC.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "BF-S15",
+      "title": "Sungrow High Voltage LFP Battery SBS050 User Manual; SBS050-UEN-Ver13-202504",
+      "link": "https://uk.sungrowpower.com/upload/file/20250603/EN_UM_SBS050_User_Manual.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [
+     "BF-C20"
+    ],
+    "curve_id": null,
+    "reasoning": "BF-Q01 owner-approved conservative local-test policy, not a physical fragility",
+    "update_trigger": null,
+    "role": null
+   },
+   {
+    "id": "PCS_source_knots",
+    "name": "PCS_source_knots",
+    "value_text": "",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "BF-S06",
+      "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+      "link_kind": "repo_file",
+      "resolved": true
+     },
+     {
+      "id": "BF-S12",
+      "title": "SMA System Manual MV Power Station with Sunny Central Storage US; MVPS-S2-SCS-US-B8-SH-en-11",
+      "link": "https://files.sma.de/downloads/MVPS-S2-SCS-US-B8-SH-en-11.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [
+     "BF-C14"
+    ],
+    "curve_id": null,
+    "reasoning": "Exact source engineering proxy; target entry remains T4",
+    "update_trigger": null,
+    "role": null
+   },
+   {
+    "id": "same_unit_value",
+    "name": "same_unit_value",
+    "value_text": "",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "BF-S01",
+      "title": "Hazard BESS reference r1; commit 23e1aac4d",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+      "link_kind": "hazard_file",
+      "resolved": true
+     },
+     {
+      "id": "BF-S13",
+      "title": "PVSCM 2024 Q1 archive; NLR data catalog DOI 10.7799/3007269",
+      "link": "https://data.nlr.gov/submissions/307",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "BF-S14",
+      "title": "Cole et al.; NREL/TP-6A40-93281 Cost Projections for Utility-Scale Battery Storage: 2025 Update",
+      "link": "https://www.osti.gov/servlets/purl/2583471",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [
+     "BF-C18"
+    ],
+    "curve_id": null,
+    "reasoning": "Dimensionless market-case allocation preserves reference total",
+    "update_trigger": null,
+    "role": null
+   },
+   {
+    "id": "deep_freshwater_saturation",
+    "name": "deep_freshwater_saturation",
+    "value_text": "",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "BF-S01",
+      "title": "Hazard BESS reference r1; commit 23e1aac4d",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+      "link_kind": "hazard_file",
+      "resolved": true
+     },
+     {
+      "id": "BF-S06",
+      "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [
+     "BF-C26",
+     "BF-C27"
+    ],
+    "curve_id": null,
+    "reasoning": "Continue existing maximum equipment replacement; no empirical deep-water calibration or cleanup scope",
+    "update_trigger": null,
+    "role": null
+   },
+   {
+    "id": "saline_contact_replacement",
+    "name": "saline_contact_replacement",
+    "value_text": ".30m strict greater-than; DR1 for covered battery and PCS hardware",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "BF-S02",
+      "title": "NEMA GD 1-2016 Evaluating Water-Damaged Electrical Equipment",
+      "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "BF-S03",
+      "title": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev2.8 2026-04-10",
+      "link": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "BF-S10",
+      "title": "Rask et al.; NHTSA/Argonne DOT HS 813 136; Li-Ion Battery Pack Immersion Exploratory Investigation; August2021",
+      "link": "https://rosap.ntl.bts.gov/view/dot/57013/dot_57013_DS1.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "BF-S16",
+      "title": "Schneider Electric bulletin 0110DB0401R07/11 August2011; linked by FAQ FA123082 last modified2026-02-04",
+      "link": "https://ckm-content.se.com/ckmContent/sfc/servlet.shepherd/document/download/0691H00000EDoYrQAL",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [
+     "BF-C30"
+    ],
+    "curve_id": null,
+    "reasoning": "BF-Q02 owner-approved conservative local-test policy; not a measured mean or salinity multiplier",
+    "update_trigger": null,
+    "role": null
+   }
+  ],
+  "evidence_provenance": {
+   "kind": "register",
+   "sheets": [],
+   "sections": [],
+   "unmatched": [],
+   "sentence": null,
+   "dossier": null,
+   "workbook": null
+  },
+  "link_counts": {
+   "total": 19,
+   "linked": 18,
+   "locator_only": 1,
+   "neither": 0,
+   "markers": 0,
+   "placeholders": 0
+  },
+  "extraction": null,
+  "tier_words": {
+   "shape": "transferred and our judgment",
+   "cost": "transferred and our judgment"
+  }
+ },
  "build_findings": []
 }

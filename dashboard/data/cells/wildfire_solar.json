@@ -1094,6 +1094,1830 @@
  "sampling_notes": [
   "Aggregate and distribution known answers reproduced with the equations the KAT file states (tolerance 1e-9)."
  ],
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Live · a screening model",
+    "code": "LIVE · screening"
+   },
+   "evidence": {
+    "words": "Evidence: lab-tested and our judgment",
+    "code": "shape T4 · cost T2",
+    "tiers": [
+     "T2",
+     "T4"
+    ]
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "? not searched"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release reviewed"
+   }
+  },
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "✓",
+    "label": "one wildfire event (give USFS FSim conditional flame-length class)",
+    "short": "one wildfire event",
+    "detail": "per-part damage ratio for one exact class, or the expected ratio over the six-class probabilities"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "◐",
+    "label": "a dollar scenario",
+    "short": "a dollar scenario",
+    "detail": "needs an explicit value profile or complete site part values"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "◐",
+    "label": "yearly loss — only through Hazard",
+    "short": "yearly loss",
+    "detail": "computed by the consumer with FSim burn probability in the frequency layer and cap-binding checks passed; curve spread not carried"
+   },
+   {
+    "key": "pml",
+    "mark": "◐",
+    "label": "PML, VaR, TVaR — only from Hazard's validated annual loss distribution",
+    "short": "PML, VaR and TVaR",
+    "detail": "consumer computable from validated annual loss distribution"
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": null,
+    "not_covered": [
+     "Replacement support and fieldwork: no own curve; allocated once at the aggregate direct-and-civil damage ratio (T4 rule)"
+    ],
+    "withheld": []
+   },
+   "assumed": [
+    "Damage values per flame-length class for every part are engineering judgment (no class-specific field data)",
+    "Racking, foundations and grounding get a low response, not immunity",
+    "Support cost is allocated in proportion to direct-and-civil damage"
+   ],
+   "missing": {
+    "mechanisms": [
+     "Smoke and ash optical losses and module cleaning"
+    ],
+    "out_of_scope": [
+     "Equipment-origin fire and battery storage",
+     "Power shutoffs, downtime, business interruption and insurance terms",
+     "Post-fire erosion or landslide, environmental remediation and fire-service liability",
+     "Soft and non-physical cost (installed capex above physical replacement value)"
+    ]
+   },
+   "open_questions": [
+    "No field or claims calibration; values to be replaced when paired exposure, disposition and cost evidence arrives",
+    "No credit yet for site controls (vegetation, barriers, suppression, de-energisation); kept as metadata",
+    "Reference profile counts all cable as exposed and the mixed civil row as direct civil; site schedules should replace it"
+   ],
+   "next_version": null
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "What it covers",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Wildfire on solar farms: exact-class state tables per part on FSim flame-length classes; ordering constrained by field, lab and guidance sources, absolute values set by engineering judgment. It names 10 parts: PV modules, Tracker and racking, Piles and inverter pads, Central inverters, Combiner boxes, Exposed AC and DC cable, Transformers and switchgear, Grounding and lightning protection, SCADA and communications and Civil: fencing, roads, buildings, site prep. Outside its scope: equipment-origin fire and battery storage, power shutoffs, downtime, business interruption and insurance terms, post-fire erosion or landslide, environmental remediation and fire-service liability and soft and non-physical cost (installed capex above physical replacement value). Kinds of damage it does not include: smoke and ash optical losses and module cleaning.",
+    "plain_fact": "10 parts · 4 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the solar farm is split into 10 parts: PV modules, Tracker and racking, Piles and inverter pads, Central inverters, Combiner boxes, Exposed AC and DC cable, Transformers and switchgear, Grounding and lightning protection, SCADA and communications and Civil: fencing, roads, buildings, site prep. Parts of the plant's value with no curve yet: replacement support and fieldwork: no own curve; allocated once at the aggregate direct-and-civil damage ratio (T4 rule).",
+    "plain_fact": "10 parts"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "Damage is read against FSim conditional flame-length class (0 = no event). The curve is a table of damage ratios at exact classes, nothing in between. The input, in the catalogue's words: USFS FSim conditional flame-length class, exact integer 1 to 6 (0 = no event), or the six-class probability vector; no interpolation; burn probability stays with Hazard.",
+    "plain_fact": "exact classes"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "21 sources set this cell: Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition, U.S. Department of Energy, Federal Energy Management Program, NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment and FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026 and 17 more. Of the 9 parameters, 3 are lab-tested (T2) and 6 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register.",
+    "plain_fact": "21 sources · lab-tested, transferred and our judgment"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "The damage ratio is a share of pre-event direct replacement value of the same part; the plant view uses the named reference profile WILDFIRE_SOLAR_REFERENCE_100MWDC_V1 or complete site part values. The files state no plant-level dollar figure for this asset. Shares of the plant's physical value, as the cell states them: PV modules 33 %, Tracker and racking 13 %, Piles and inverter pads 4 %, Central inverters 4 %, Combiner boxes 1 %, Exposed AC and DC cable 8 %, Transformers and switchgear 12 %, Grounding and lightning protection 1 %, SCADA and communications 0 % and Civil: fencing, roads, buildings, site prep 4 %.",
+    "plain_fact": "shares per part"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter exists as a file.",
+    "plain_fact": "no audit found"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 10 curve records (model v1.0, docs r3). The write-up is wildfire_solar_curve_derivation_dossier__model_v1_0__docs_r3.md. The workbook is damage_curve_records_wildfire_solar__model_v1_0__docs_r3.xlsx. The cell folder holds 12 files, each with its SHA under Details.",
+    "plain_fact": "10 curve records"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "It can give one wildfire event. A dollar scenario, yearly loss and PML, VaR and TVaR are available only under conditions the consumer (Hazard) checks. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "1 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "This build reproduced 26 of 26 known answers through the cell's evaluator (within 1e-12 on the damage ratio). 3 were not run: runtime request-contract tests (frequency field, value-profile requirement, mitigation credit) belong to the cell validator; the build samples curves. The validation record says report. 1 outside check: Financial range check (Hazard repo): industry loss figures for solar wildfire.",
+    "plain_fact": "26 of 26 reproduced"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: reviewed.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "USDA Forest Service, Spatial datasets of probabilistic wildfire risk components for the US, 3rd ed., RDS-2016-0034-3",
+    "ids": [
+     "USFS_FSIM_RDS_2023"
+    ],
+    "title": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition",
+    "link": "https://doi.org/10.2737/RDS-2016-0034-3",
+    "link_kind": "doi",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "USFS_FSIM_RDS_2023"
+   },
+   {
+    "text": "DOE/FEMP, Solar Photovoltaic Hardening for Resilience - Wildfire",
+    "ids": [
+     "DOE_FEMP_PV_WILDFIRE"
+    ],
+    "title": "U.S. Department of Energy, Federal Energy Management Program",
+    "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "DOE_FEMP_PV_WILDFIRE"
+   },
+   {
+    "text": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment",
+    "ids": [
+     "NEMA_GD2_2016"
+    ],
+    "title": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": "not in the register",
+    "source_id": null
+   },
+   {
+    "text": "FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026",
+    "ids": [
+     "FM_DS_7_106_2026"
+    ],
+    "title": "FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": "not in the register",
+    "source_id": null
+   },
+   {
+    "text": "NREL/NLR, Q1-2025 Solar PV System Cost Benchmarks",
+    "ids": [
+     "NREL_NLR_Q1_2025_PV_BENCHMARK"
+    ],
+    "title": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E",
+    "link": "https://doi.org/10.7799/3009689",
+    "link_kind": "doi",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "NREL_NLR_Q1_2025_PV_BENCHMARK"
+   }
+  ],
+  "sources": [
+   {
+    "id": "LEGACY_DIVI_WILDFIRE_SOLAR_2026",
+    "citation": "InfraSure Damage Curve Library. WILDFIRE × SOLAR: Deep Research for Damage Curve Derivation. Version 1.0, March 2026. Commit 12653b2c3d5a013c9524228243ea666c35bb3814; file blob 64142f9873256fc6b09deb497af795b310a47985.",
+    "url": "https://github.com/Divi-patel/infrasure-damage-curves/blob/12653b2c3d5a013c9524228243ea666c35bb3814/research/WILDFIRE_x_SOLAR.md",
+    "locator": null,
+    "role": "legacy intake / validation-only",
+    "tier": "T4",
+    "permitted": "scope split, candidate mechanisms, source leads, site-variable hypotheses, evidence gaps",
+    "prohibited": "any curve ordinate, converter, weight, mitigation credit, event calibration, or uncertainty bound",
+    "decision": "REJECTED_FOR_CALIBRATION",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/Divi-patel/infrasure-damage-curves/blob/12653b2c3d5a013c9524228243ea666c35bb3814/research/WILDFIRE_x_SOLAR.md",
+    "link_kind": "url",
+    "title": "InfraSure Damage Curve Library",
+    "no_link_sentence": null
+   },
+   {
+    "id": "USFS_FSIM_RDS_2023",
+    "citation": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition. USDA Forest Service Research Data Archive RDS-2016-0034-3, 2023.",
+    "url": "https://doi.org/10.2737/RDS-2016-0034-3",
+    "locator": null,
+    "role": "x-axis definition / hazard contract",
+    "tier": "T2",
+    "permitted": "source-native FIL/FLP semantics; conditional-on-burning interpretation and imputed-cell rules; end-2020 landscape/product caveats; 20,000–100,000 iterations (potential annual weather scenarios) depending on pyrome; 1/3/5-hour active periods as daily simulation fire-growth windows",
+    "prohibited": "equipment heat flux, equipment exposure duration, ember dose, component damage, continuous FLI midpoint reconstruction",
+    "decision": "RETAINED",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": "10.2737/RDS-2016-0034-3",
+    "link": "https://doi.org/10.2737/RDS-2016-0034-3",
+    "link_kind": "doi",
+    "title": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FINNEY_2011_FSIM",
+    "citation": "Finney, M.A., et al. A simulation of probabilistic wildfire risk components for the continental United States. Stochastic Environmental Research and Risk Assessment 25, 973–1000 (2011).",
+    "url": "https://doi.org/10.1007/s00477-011-0462-z",
+    "locator": null,
+    "role": "hazard-model context",
+    "tier": "T2",
+    "permitted": "FSim architecture, simulated annual scenarios, conditional intensity distributions",
+    "prohibited": "asset exposure or solar damage",
+    "decision": "RETAINED_SUPPORTING",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": "10.1007/s00477-011-0462-z",
+    "link": "https://doi.org/10.1007/s00477-011-0462-z",
+    "link_kind": "doi",
+    "title": "Finney, M.A., et al. A simulation of probabilistic wildfire risk components for the continental United States",
+    "no_link_sentence": null
+   },
+   {
+    "id": "USFS_FARSITE_1998",
+    "citation": "Finney, M.A. FARSITE: Fire Area Simulator—Model Development and Evaluation. USDA Forest Service RMRS-RP-4, 1998.",
+    "url": "https://www.fs.usda.gov/rm/pubs/rmrs_rp004.pdf",
+    "locator": null,
+    "role": "axis physics / converter rejection",
+    "tier": "T2",
+    "permitted": "fireline-intensity definition and dependence on heat content, consumed fuel, and rate of spread",
+    "prohibited": "a unique local heat-flux/time state for equipment",
+    "decision": "RETAINED",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.fs.usda.gov/rm/pubs/rmrs_rp004.pdf",
+    "link_kind": "url",
+    "title": "Finney, M.A. FARSITE: Fire Area Simulator—Model Development and Evaluation",
+    "no_link_sentence": null
+   },
+   {
+    "id": "WANG_2025_PV_THERMAL",
+    "citation": "Wang, Y.; Xiao, C.; Bedon, C. Performance of photovoltaic panels with different inclinations under uniform thermal loading. International Journal of Thermal Sciences 208 (2025) 109489.",
+    "url": "https://doi.org/10.1016/j.ijthermalsci.2024.109489",
+    "locator": null,
+    "role": "component mechanism / future flux-time constraint",
+    "tier": "T2",
+    "permitted": "15 four-edge-shielded 300 × 300 × 4.7 mm specimens; glass fracture/pyrolysis; primarily 8–15 kW/m² and 61–84 °C reported tolerance ranges; inclination sensitivity",
+    "prohibited": "universal PV threshold, modern utility-module population fragility, FIL ordinate, replacement-cost ratio",
+    "decision": "RETAINED_WITH_TRANSFER_LIMIT",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": "10.1016/j.ijthermalsci.2024.109489",
+    "link": "https://doi.org/10.1016/j.ijthermalsci.2024.109489",
+    "link_kind": "doi",
+    "title": "Wang, Y.; Xiao, C.; Bedon, C",
+    "no_link_sentence": null
+   },
+   {
+    "id": "YANG_2015_PV_IGNITION",
+    "citation": "Yang, H.-Y.; Zhou, X.-D.; Yang, L.-Z.; Zhang, T.-L. Experimental Studies on the Flammability and Fire Hazards of Photovoltaic Modules. Materials 8(7), 4210–4225 (2015).",
+    "url": "https://doi.org/10.3390/ma8074210",
+    "locator": null,
+    "role": "component ignition constraint",
+    "tier": "T2",
+    "permitted": "tested small 2014 poly-Si module specimens; empirical ignition CHF 26 kW/m²; ignition times 913/636/218/133/83 s at 28/30/35/40/45 kW/m²",
+    "prohibited": "first functional damage, EVA-only threshold, full-size/modern BOM fragility, economic DR, FIL conversion",
+    "decision": "RETAINED_WITH_TRANSFER_LIMIT",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": "10.3390/ma8074210",
+    "link": "https://doi.org/10.3390/ma8074210",
+    "link_kind": "doi",
+    "title": "Yang, H.-Y.; Zhou, X.-D.; Yang, L.-Z.; Zhang, T.-L",
+    "no_link_sentence": null
+   },
+   {
+    "id": "ZHANG_2022_XLPE",
+    "citation": "Zhang, H.; Yao, J.; Zhu, H.; Wang, X. Study on Combustion Characteristics of Cable Based on Cone Calorimeter. Energies 15(5), 1904 (2022).",
+    "url": "https://doi.org/10.3390/en15051904",
+    "locator": null,
+    "role": "cable-material ignition constraint",
+    "tier": "T2",
+    "permitted": "9 mm self-developed XLPE cable specimens; CHF 16.24 kW/m²; mean ignition times 83.5/25/13.3 s at 20/30/40 kW/m²",
+    "prohibited": "all PV cable types, installed cable systems, buried/conduit response, collection-bucket or economic DR",
+    "decision": "RETAINED_WITH_TRANSFER_LIMIT",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": "10.3390/en15051904",
+    "link": "https://doi.org/10.3390/en15051904",
+    "link_kind": "doi",
+    "title": "Zhang, H.; Yao, J.; Zhu, H.; Wang, X",
+    "no_link_sentence": null
+   },
+   {
+    "id": "ZHAO_2026_PV_POOL_FIRE",
+    "citation": "Zhao, J.; Zhang, S.; Li, X.; Kong, X.; Zhao, L.; Shen, J. Experimental Investigation of Thermal Response of Single-Glass Photovoltaic Modules with Different Inclination Angles. Fire 9(2), 62 (2026).",
+    "url": "https://doi.org/10.3390/fire9020062",
+    "locator": null,
+    "role": "selector/conditioner direction and zonal exposure architecture",
+    "tier": "T2",
+    "permitted": "front-glass integrity, flame-contact zone, and inclination materially affected burn-through and temperature response; cracked modules burned faster; tested response peaked at 15°",
+    "prohibited": "wildfire population fragility, replacement-cost ratio, universal stow credit",
+    "decision": "RETAINED_MECHANISM_ONLY",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": "10.3390/fire9020062",
+    "link": "https://doi.org/10.3390/fire9020062",
+    "link_kind": "doi",
+    "title": "Zhao, J.; Zhang, S.; Li, X.; Kong, X.; Zhao, L.; Shen, J",
+    "no_link_sentence": null
+   },
+   {
+    "id": "DOE_FEMP_PV_WILDFIRE",
+    "citation": "U.S. Department of Energy, Federal Energy Management Program. Solar Photovoltaic Hardening for Resilience – Wildfire.",
+    "url": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+    "locator": null,
+    "role": "site-field design / mechanism / inspection",
+    "tier": "T2",
+    "permitted": "vegetation management, undergrounding where practical, fire-resistant containers, access planning, noncombustible barriers, post-fire imaging",
+    "prohibited": "universal mitigation coefficient, fire-rating-to-DR conversion, component fragility or FIL mapping",
+    "decision": "RETAINED_QUALITATIVE",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+    "link_kind": "url",
+    "title": "U.S. Department of Energy, Federal Energy Management Program",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NIST_TN_1796",
+    "citation": "Maranghides, A., et al. A Case Study of a Community Affected by the Witch and Guejito Fires: Report #2—Evaluating the Effects of Hazard Mitigation Actions on Structure Ignitions. NIST TN 1796 (2013).",
+    "url": "https://doi.org/10.6028/NIST.TN.1796",
+    "locator": null,
+    "role": "architecture / field-study protocol",
+    "tier": "T2",
+    "permitted": "exposure/vulnerability separation; importance of exposure state; need to quantify fire and ember exposure over time",
+    "prohibited": "solar mitigation coefficient or component DR",
+    "decision": "RETAINED_WITH_RESIDENTIAL_TRANSFER_LIMIT",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": "10.6028/NIST.TN.1796",
+    "link": "https://doi.org/10.6028/NIST.TN.1796",
+    "link_kind": "doi",
+    "title": "Maranghides, A., et al. A Case Study of a Community Affected by the Witch and Guejito Fires: Report…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NIST_TN_2228",
+    "citation": "Butler, K., et al. Wind-Driven Fire Spread to a Structure from Fences and Mulch. NIST TN 2228 (2022).",
+    "url": "https://doi.org/10.6028/NIST.TN.2228",
+    "locator": null,
+    "role": "fence/fuel pathway",
+    "tier": "T2",
+    "permitted": "187 tests; combustible fences can act as conduits; combinations can increase hazard disproportionately; parallel fences and mulch matter; noncombustible fences still require debris control",
+    "prohibited": "solar-specific multiplier, radiant shield credit, wall effectiveness coefficient",
+    "decision": "RETAINED_WITH_TRANSFER_LIMIT",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": "10.6028/NIST.TN.2228",
+    "link": "https://doi.org/10.6028/NIST.TN.2228",
+    "link_kind": "doi",
+    "title": "Butler, K., et al. Wind-Driven Fire Spread to a Structure from Fences and Mulch. NIST TN 2228 (2022).",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NIST_TN_2205",
+    "citation": "Maranghides, A., et al. WUI Structure/Parcel/Community Fire Hazard Mitigation Methodology. NIST TN 2205 (2022).",
+    "url": "https://doi.org/10.6028/NIST.TN.2205",
+    "locator": null,
+    "role": "site-adapter architecture",
+    "tier": "T2",
+    "permitted": "joint spatial treatment of exposures, fuels, and hardening variables",
+    "prohibited": "solar DR or numeric site credit",
+    "decision": "RETAINED_WITH_RESIDENTIAL_TRANSFER_LIMIT",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": "10.6028/NIST.TN.2205",
+    "link": "https://doi.org/10.6028/NIST.TN.2205",
+    "link_kind": "doi",
+    "title": "Maranghides, A., et al. WUI Structure/Parcel/Community Fire Hazard Mitigation Methodology. NIST TN 2205…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "COHEN_USDA_2000",
+    "citation": "Cohen, J.D. Preventing Disaster: Home Ignitability in the Wildland-Urban Interface. Journal of Forestry 98(3), 15–21 (2000).",
+    "url": "https://research.fs.usda.gov/treesearch/download/4688.pdf",
+    "locator": null,
+    "role": "converter pressure test / site scale",
+    "tier": "T2",
+    "permitted": "distance and duration matter; a severe black-body model produced 70 kW/m² at 10 m while measured maximum total heat flux was 46 kW/m²; local site state matters",
+    "prohibited": "universal q=C·I/d coefficient, solar DR, universal clearance credit",
+    "decision": "RETAINED_WITH_RESIDENTIAL_TRANSFER_LIMIT",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://research.fs.usda.gov/treesearch/download/4688.pdf",
+    "link_kind": "url",
+    "title": "Cohen, J.D. Preventing Disaster: Home Ignitability in the Wildland-Urban Interface",
+    "no_link_sentence": null
+   },
+   {
+    "id": "ENERGY_SAFE_VICTORIA_SOLAR",
+    "citation": "Energy Safe Victoria. General duties of solar farm owners and operators.",
+    "url": "https://www.energysafe.vic.gov.au/industry-guidance/electrical/installations-and-infrastructure/general-duties-solar-farm-owners-and-operators",
+    "locator": null,
+    "role": "site-control fields / compliance anchors",
+    "tier": "T2",
+    "permitted": "≤100 mm grass near equipment during declared Fire Danger Period; ≥10 m fuel-free noncombustible firebreak around key infrastructure/perimeter; emergency controls",
+    "prohibited": "damage-reduction coefficient, proof a severe wildfire stops, applicability outside jurisdiction",
+    "decision": "RETAINED_AS_REGULATORY_CONTROL_ONLY",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.energysafe.vic.gov.au/industry-guidance/electrical/installations-and-infrastructure/general-duties-solar-farm-owners-and-operators",
+    "link_kind": "url",
+    "title": "Energy Safe Victoria. General duties of solar farm owners and operators.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NSW_RFS_OP_1_2_22",
+    "citation": "NSW Rural Fire Service. OP 1.2.22 Photovoltaic Arrays, version accessed 2026-07-09.",
+    "url": "https://www.rfs.nsw.gov.au/__data/assets/pdf_file/0004/247891/OP-1.2.22-Photovoltaic-Arrays.pdf",
+    "locator": null,
+    "role": "access/de-energization conditioner",
+    "tier": "T2",
+    "permitted": "large-scale solar response planning; no firefighting within 8 m of generation infrastructure or fenced area without explicit de-energization assurance",
+    "prohibited": "suppression success probability or physical fragility",
+    "decision": "RETAINED_OPERATIONAL_ONLY",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.rfs.nsw.gov.au/__data/assets/pdf_file/0004/247891/OP-1.2.22-Photovoltaic-Arrays.pdf",
+    "link_kind": "url",
+    "title": "NSW Rural Fire Service. OP 1.2.22 Photovoltaic Arrays, version accessed 2026-07-09.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NREL_PV_OM_2018",
+    "citation": "Walker, H., et al. Best Practices for Operation and Maintenance of Photovoltaic and Energy Storage Systems; 3rd Edition. NREL/TP-7A40-73822 (2018).",
+    "url": "https://www.nrel.gov/docs/fy19osti/73822.pdf",
+    "locator": null,
+    "role": "asset decomposition / exposure-state design",
+    "tier": "T2",
+    "permitted": "open-air module/combiner wiring exposure; direct-burial/conduit distinctions; roads, access, vegetation and emergency planning",
+    "prohibited": "wildfire fragility or numeric protection factor",
+    "decision": "RETAINED_QUALITATIVE",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.nrel.gov/docs/fy19osti/73822.pdf",
+    "link_kind": "url",
+    "title": "Walker, H., et al. Best Practices for Operation and Maintenance of Photovoltaic and Energy Storage Systems; 3rd Edition",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SYPHARD_2014",
+    "citation": "Syphard, A.D.; Brennan, T.J.; Keeley, J.E. The role of defensible space for residential structure protection during wildfires. International Journal of Wildland Fire 23, 1165–1175 (2014).",
+    "url": "https://doi.org/10.1071/WF13158",
+    "locator": null,
+    "role": "adjacent empirical site-condition evidence",
+    "tier": "T3",
+    "permitted": "site/immediate-surroundings sensitivity and non-universal distance response in a residential population",
+    "prohibited": "direct solar credit or universal width",
+    "decision": "RETAINED_AS_TRANSFER_EVIDENCE",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": "10.1071/WF13158",
+    "link": "https://doi.org/10.1071/WF13158",
+    "link_kind": "doi",
+    "title": "Syphard, A.D.; Brennan, T.J.; Keeley, J.E",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NREL_NLR_Q1_2025_PV_BENCHMARK",
+    "citation": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E. Q1-2025 Solar Photovoltaic System Cost Benchmarks. NLR Data Catalog, 2025; NLR/OT-7A40-97930; last updated 2026-03-12.",
+    "url": "https://doi.org/10.7799/3009689",
+    "locator": null,
+    "role": "exposure/value basis",
+    "tier": "T2",
+    "permitted": "generic utility-PV installed and replaceable-value crosswalk inputs",
+    "prohibited": "site appraisal, wildfire vulnerability, at-risk fraction",
+    "decision": "RETAINED_FOR_VALUE_ONLY",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": "10.7799/3009689",
+    "link": "https://doi.org/10.7799/3009689",
+    "link_kind": "doi",
+    "title": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E",
+    "no_link_sentence": null
+   },
+   {
+    "id": "PLANNING_VICTORIA_SOLAR_GUIDE",
+    "citation": "Department of Transport and Planning Victoria. Solar Energy Facilities Design and Development Guideline, October 2022.",
+    "url": "https://www.planning.vic.gov.au/__data/assets/pdf_file/0037/659917/Solar-Energy-Facilities-Design-and-Development-Guideline.pdf",
+    "locator": null,
+    "role": "site-field completeness cross-check",
+    "tier": "T2",
+    "permitted": "ground-mounted solar site-control checklist and emergency-planning fields",
+    "prohibited": "generic loss multiplier or cross-jurisdiction requirement",
+    "decision": "RETAINED_AS_GUIDANCE_ONLY",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.planning.vic.gov.au/__data/assets/pdf_file/0037/659917/Solar-Energy-Facilities-Design-and-Development-Guideline.pdf",
+    "link_kind": "url",
+    "title": "Department of Transport and Planning Victoria",
+    "no_link_sentence": null
+   },
+   {
+    "id": "VALUE_SOLAR_WORKBOOK",
+    "citation": "damage_modeling/docs/method/value_basis/solar_wind_value_breakdown.xlsx; Solar_Map rows 2:17.",
+    "url": "https://data.nrel.gov/submissions/304",
+    "locator": null,
+    "role": "exposure/value mapping",
+    "tier": "T2",
+    "permitted": "row-level installed/physical/excluded/support-cost reconciliation",
+    "prohibited": "site value, asset fragility, exposed share",
+    "decision": "RETAINED_FOR_REFERENCE_ARCHETYPE",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://data.nrel.gov/submissions/304",
+    "link_kind": "url",
+    "title": "damage_modeling/docs/method/value_basis/solar_wind_value_breakdown.xlsx; Solar_Map rows 2:17.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "GOVERNANCE_CONTRACT",
+    "citation": "Damage Modeling repository governance contracts: seven-step failure-unit/value workflow, evidence gate, reportability contract, and fail-closed output policy.",
+    "url": null,
+    "locator": null,
+    "role": "governance / model-boundary control",
+    "tier": "T4",
+    "permitted": "future y-axis definition, zonal loss identity, support-cost allocation-once rule, and withholding behavior",
+    "prohibited": "scientific calibration, observed vulnerability, or numeric parameter value",
+    "decision": "CONTROL_ONLY",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "Damage Modeling repository governance contracts: seven-step failure-unit/value workflow, evidence gate,…",
+    "kind": "marker",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NO_DIRECT_SOURCE_T4",
+    "citation": "Governed provenance marker: no direct calibration source supports the withdrawn proposed parameter.",
+    "url": null,
+    "locator": null,
+    "role": "parameter-withholding control",
+    "tier": "T4",
+    "permitted": "records why a proposed parameter is withdrawn and cannot enter runtime",
+    "prohibited": "any numerical estimate, calibration, uncertainty range, or evidence of no damage",
+    "decision": "CONTROL_MARKER_NOT_EVIDENCE",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "Governed provenance marker: no direct calibration source supports the withdrawn proposed parameter.",
+    "kind": "marker",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NO_SOURCE_SYNTHETIC",
+    "citation": "Governed provenance marker: the input was created as an illustrative synthetic fixture and has no empirical source.",
+    "url": null,
+    "locator": null,
+    "role": "synthetic-fixture control",
+    "tier": "T4",
+    "permitted": "identifies an audit-only fixture and requires withdrawal from scientific/runtime use",
+    "prohibited": "site hazard distribution, calibration input, or uncertainty model",
+    "decision": "CONTROL_MARKER_NOT_EVIDENCE",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "Governed provenance marker: the input was created as an illustrative synthetic fixture and has no empirical…",
+    "kind": "marker",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SOURCE_REVIEW_2026_07_09",
+    "citation": "Wildfire × solar bounded public-evidence review and reproducibility log; review date 2026-07-09.",
+    "url": null,
+    "locator": null,
+    "role": "negative-evidence / open-seam control",
+    "tier": "T4",
+    "permitted": "supports the scoped statement that the recorded review did not locate a paired utility-scale-solar exposure/damage/economic-loss dataset",
+    "prohibited": "universal claim that no such evidence exists outside the recorded search scope",
+    "decision": "REVIEW_LOG_ONLY",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "Wildfire × solar bounded public-evidence review and reproducibility log; review date 2026-07-09.",
+    "no_link_sentence": "no link in the register"
+   }
+  ],
+  "claims": [
+   {
+    "id": "WS-C001",
+    "text": "FSim defines six Fire Intensity Levels and corresponding conditional flame-length-probability layers: FLP1 <2 ft; FLP2 2–<4; FLP3 4–<6; FLP4 6–<8; FLP5 8–<12; FLP6 ≥12 ft.",
+    "type": null,
+    "source_ids": [
+     "USFS_FSIM_RDS_2023"
+    ],
+    "locator": "RDS abstract and entity/attribute definitions for FLP1–FLP6",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN",
+    "update_trigger": "FSim product/version changes"
+   },
+   {
+    "id": "WS-C002",
+    "text": "The six FLPs sum to one conditional on burning. For pixels burned in simulation they represent proportions by flame-length bin; metadata-described unburned burnable pixels receive zonal-mean FLPs and nominal BP, so the metadata-defined imputation state must be preserved or detected.",
+    "type": null,
+    "source_ids": [
+     "USFS_FSIM_RDS_2023"
+    ],
+    "locator": "Entity and Attribute Information — Conditional Flame-Length Probability; logical-consistency checks; process step 11 post-processing",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN",
+    "update_trigger": "FSim semantic or imputation change"
+   },
+   {
+    "id": "WS-C003",
+    "text": "Annual burn probability is separate from conditional severity and remains outside M3 damage.",
+    "type": null,
+    "source_ids": [
+     "USFS_FSIM_RDS_2023",
+     "FINNEY_2011_FSIM"
+    ],
+    "locator": "dataset abstract/method and governance boundary",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN",
+    "update_trigger": "architecture change"
+   },
+   {
+    "id": "WS-C004",
+    "text": "FSim FLPs do not provide component heat flux, exposure duration, flame contact, ember dose or damage.",
+    "type": null,
+    "source_ids": [
+     "USFS_FSIM_RDS_2023"
+    ],
+    "locator": "published attributes and scope/caveats",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_GUARDRAIL",
+    "update_trigger": "new official product supplies target exposure"
+   },
+   {
+    "id": "WS-C005",
+    "text": "Fireline intensity is energy release per fire-front length and depends on heat yield, consumed fuel and spread rate.",
+    "type": null,
+    "source_ids": [
+     "USFS_FARSITE_1998"
+    ],
+    "locator": "pp. 9–10; I_b = h·w·R/60",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN",
+    "update_trigger": "validated transfer model"
+   },
+   {
+    "id": "WS-C006",
+    "text": "Legacy q = 0.35·I/d is not a governed converter.",
+    "type": null,
+    "source_ids": [
+     "LEGACY_DIVI_WILDFIRE_SOLAR_2026",
+     "COHEN_USDA_2000"
+    ],
+    "locator": "legacy §4; Cohen pp. 16–18 / experimental comparison",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "REJECT",
+    "update_trigger": "independent calibrated converter"
+   },
+   {
+    "id": "WS-C007",
+    "text": "A fixed 10 m fire-to-asset distance is not a default.",
+    "type": null,
+    "source_ids": [
+     "LEGACY_DIVI_WILDFIRE_SOLAR_2026",
+     "COHEN_USDA_2000"
+    ],
+    "locator": "legacy §4.3; Cohen distance/duration analysis",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "REJECT_DEFAULT",
+    "update_trigger": "validated site archetype"
+   },
+   {
+    "id": "WS-C008",
+    "text": "No continuous FLI midpoint or FIL6 upper cap is reconstructed from source-native FIL bins.",
+    "type": null,
+    "source_ids": [
+     "USFS_FSIM_RDS_2023"
+    ],
+    "locator": "open-ended and interval FLP definitions",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN",
+    "update_trigger": "approved product-specific conversion"
+   },
+   {
+    "id": "WS-C009",
+    "text": "Tested shielded PV specimens primarily tolerated 8–15 kW/m² and 61–84 °C maximum temperature difference before reported failure behavior.",
+    "type": null,
+    "source_ids": [
+     "WANG_2025_PV_THERMAL"
+    ],
+    "locator": "abstract; 15 specimens at five inclinations",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_WITH_LIMIT",
+    "update_trigger": "representative utility-module program"
+   },
+   {
+    "id": "WS-C010",
+    "text": "Tested small PV modules had empirical sustained-flame ignition CHF near 26 kW/m².",
+    "type": null,
+    "source_ids": [
+     "YANG_2015_PV_IGNITION"
+    ],
+    "locator": "§4.2, Figures 5–7",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_WITH_LIMIT",
+    "update_trigger": "representative full-size/modern BOM testing"
+   },
+   {
+    "id": "WS-C011",
+    "text": "PV ignition times were 913/636/218/133/83 s at 28/30/35/40/45 kW/m² for the tested specimens.",
+    "type": null,
+    "source_ids": [
+     "YANG_2015_PV_IGNITION"
+    ],
+    "locator": "Table 2",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_WITH_LIMIT",
+    "update_trigger": "representative full-size/modern BOM testing"
+   },
+   {
+    "id": "WS-C012",
+    "text": "Tested 9 mm XLPE cable construction had estimated ignition CHF 16.24 kW/m².",
+    "type": null,
+    "source_ids": [
+     "ZHANG_2022_XLPE"
+    ],
+    "locator": "§2.1 (9 mm construction); §3.1, Figure 4 (CHF)",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_WITH_LIMIT",
+    "update_trigger": "installed PV-cable program"
+   },
+   {
+    "id": "WS-C013",
+    "text": "Mean XLPE ignition times were 83.5/25/13.3 s at 20/30/40 kW/m².",
+    "type": null,
+    "source_ids": [
+     "ZHANG_2022_XLPE"
+    ],
+    "locator": "§3.1, Table 2",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_WITH_LIMIT",
+    "update_trigger": "installed PV-cable program"
+   },
+   {
+    "id": "WS-C014",
+    "text": "Front-glass integrity materially affected full-size single-glass module burn-through and temperature response under tested pool-fire exposure.",
+    "type": null,
+    "source_ids": [
+     "ZHAO_2026_PV_POOL_FIRE"
+    ],
+    "locator": "§§3.1–3.2 and Conclusions",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_MECHANISM_ONLY",
+    "update_trigger": "field/lab population calibration"
+   },
+   {
+    "id": "WS-C015",
+    "text": "Tilt effect was non-monotonic in the tested pool-fire configuration and peaked at 15°.",
+    "type": null,
+    "source_ids": [
+     "ZHAO_2026_PV_POOL_FIRE"
+    ],
+    "locator": "Conclusion item 3",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_MECHANISM_ONLY",
+    "update_trigger": "representative geometry testing"
+   },
+   {
+    "id": "WS-C016",
+    "text": "Fire/ember exposure should be uncoupled from construction vulnerability and quantified in space and time.",
+    "type": null,
+    "source_ids": [
+     "NIST_TN_1796"
+    ],
+    "locator": "pp. 25–26 and 54–55",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_WITH_TRANSFER_LIMIT",
+    "update_trigger": "solar exposure-validation study"
+   },
+   {
+    "id": "WS-C017",
+    "text": "Vegetation management, undergrounding where practical, fire-resistant containers, access and emergency planning are PV-relevant risk controls.",
+    "type": null,
+    "source_ids": [
+     "DOE_FEMP_PV_WILDFIRE"
+    ],
+    "locator": "System Considerations and O&M",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_QUALITATIVE",
+    "update_trigger": "effectiveness calibration"
+   },
+   {
+    "id": "WS-C018",
+    "text": "Noncombustible screens/barriers may interrupt flame spread, but the effect is geometry- and pathway-dependent.",
+    "type": null,
+    "source_ids": [
+     "DOE_FEMP_PV_WILDFIRE"
+    ],
+    "locator": "System Considerations, barrier paragraphs",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_QUALITATIVE",
+    "update_trigger": "validated geometry/ember model"
+   },
+   {
+    "id": "WS-C019",
+    "text": "Combustible fences can rapidly conduct fire; fence-plus-mulch and parallel-fence configurations can increase hazard disproportionately.",
+    "type": null,
+    "source_ids": [
+     "NIST_TN_2228"
+    ],
+    "locator": "Abstract/executive summary; 187 experiments",
+    "tier": "T3",
+    "parameter_or_rule": null,
+    "status": "RETAIN_WITH_TRANSFER_LIMIT",
+    "update_trigger": "solar fence/fire study"
+   },
+   {
+    "id": "WS-C020",
+    "text": "Noncombustible fencing still requires maintenance to prevent accumulated fine fuels.",
+    "type": null,
+    "source_ids": [
+     "NIST_TN_2228"
+    ],
+    "locator": "Abstract/executive summary",
+    "tier": "T3",
+    "parameter_or_rule": null,
+    "status": "RETAIN_WITH_TRANSFER_LIMIT",
+    "update_trigger": "solar fence/fire study"
+   },
+   {
+    "id": "WS-C021",
+    "text": "Grass height near electrical equipment should be no more than 100 mm during the declared Fire Danger Period in the cited Victoria control framework.",
+    "type": null,
+    "source_ids": [
+     "ENERGY_SAFE_VICTORIA_SOLAR"
+    ],
+    "locator": "Vegetation management",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_CONTROL_ONLY",
+    "update_trigger": "effectiveness study/local code selection"
+   },
+   {
+    "id": "WS-C022",
+    "text": "The cited Victoria framework calls for at least 10 m fuel-free noncombustible firebreaks around key infrastructure and the perimeter.",
+    "type": null,
+    "source_ids": [
+     "ENERGY_SAFE_VICTORIA_SOLAR"
+    ],
+    "locator": "Fire-breaks",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_CONTROL_ONLY",
+    "update_trigger": "effectiveness study/local code selection"
+   },
+   {
+    "id": "WS-C023",
+    "text": "The cited NSW operational guidance disallows firefighting within 8 m of large-scale generation infrastructure or a fenced area without explicit de-energization assurance.",
+    "type": null,
+    "source_ids": [
+     "NSW_RFS_OP_1_2_22"
+    ],
+    "locator": "§7.3, printed p. 12 / PDF page 11",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_OPERATIONAL_ONLY",
+    "update_trigger": "response calibration"
+   },
+   {
+    "id": "WS-C024",
+    "text": "Module/combiner conductors are commonly exposed while direct burial, conduit and trays are distinct installation states.",
+    "type": null,
+    "source_ids": [
+     "NREL_PV_OM_2018"
+    ],
+    "locator": "§5.1, Wire Management",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_QUALITATIVE",
+    "update_trigger": "installed-condition tests"
+   },
+   {
+    "id": "WS-C025",
+    "text": "Residential defensible-space effectiveness varied by distance and site context; it is transfer evidence only.",
+    "type": null,
+    "source_ids": [
+     "SYPHARD_2014"
+    ],
+    "locator": "abstract/results",
+    "tier": "T3",
+    "parameter_or_rule": null,
+    "status": "RETAIN_WITH_TRANSFER_LIMIT",
+    "update_trigger": "solar field calibration"
+   },
+   {
+    "id": "WS-C026",
+    "text": "Reference installed basis is 1120.000000 USD/kWdc.",
+    "type": null,
+    "source_ids": [
+     "VALUE_SOLAR_WORKBOOK"
+    ],
+    "locator": "Inputs!B6; Summary!B5",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_REFERENCE_ONLY",
+    "update_trigger": "benchmark vintage/site appraisal"
+   },
+   {
+    "id": "WS-C027",
+    "text": "Reference physical replaceable basis is 877.795702 USD/kWdc.",
+    "type": null,
+    "source_ids": [
+     "VALUE_SOLAR_WORKBOOK"
+    ],
+    "locator": "Inputs!B7; Summary!B6",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_REFERENCE_ONLY",
+    "update_trigger": "benchmark vintage/site appraisal"
+   },
+   {
+    "id": "WS-C028",
+    "text": "Reference excluded soft/sunk/nonphysical basis is 242.204298 USD/kWdc.",
+    "type": null,
+    "source_ids": [
+     "VALUE_SOLAR_WORKBOOK"
+    ],
+    "locator": "Inputs!B8; Summary!B7",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_REFERENCE_ONLY",
+    "update_trigger": "benchmark vintage/site appraisal"
+   },
+   {
+    "id": "WS-C029",
+    "text": "Direct-hardware rows 2–10 total 656.981457 USD/kWdc or 65.698146M USD for 100 MWdc.",
+    "type": null,
+    "source_ids": [
+     "VALUE_SOLAR_WORKBOOK"
+    ],
+    "locator": "Solar_Map!2:10; VALUE_CROSSWALK summary",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_REFERENCE_ONLY",
+    "update_trigger": "site appraisal"
+   },
+   {
+    "id": "WS-C030",
+    "text": "Rows 12–15 total 220.814245 USD/kWdc of mixed civil/replacement/support value; rows 12, 13, and 15 are support allocations with no independent DR, while row 14 must first split direct civil failure units from support/pathway costs.",
+    "type": null,
+    "source_ids": [
+     "VALUE_SOLAR_WORKBOOK"
+    ],
+    "locator": "Solar_Map!12:15; VALUE_CROSSWALK summary and row 14 treatment",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "RETAIN_FAIL_CLOSED_RULE",
+    "update_trigger": "claims-supported allocation and civil-asset split"
+   },
+   {
+    "id": "WS-C031",
+    "text": "Current value mappings require component, exposed/buried/protected and support-cost splits before loss.",
+    "type": null,
+    "source_ids": [
+     "VALUE_SOLAR_WORKBOOK",
+     "DOE_FEMP_PV_WILDFIRE",
+     "NREL_PV_OM_2018"
+    ],
+    "locator": "Solar_Map rows and site guidance",
+    "tier": "T3",
+    "parameter_or_rule": null,
+    "status": "RETAIN_FAIL_CLOSED_RULE",
+    "update_trigger": "site inventory"
+   },
+   {
+    "id": "WS-C032",
+    "text": "All initial FIL low/base/high economic DR ordinates are withdrawn.",
+    "type": null,
+    "source_ids": [
+     "NO_DIRECT_SOURCE_T4"
+    ],
+    "locator": "Pressure test and provenance audit",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "WITHDRAW",
+    "update_trigger": "target calibration/structured elicitation"
+   },
+   {
+    "id": "WS-C033",
+    "text": "The illustrative FLP vector 0.45/0.25/0.15/0.08/0.05/0.02 is synthetic and withdrawn.",
+    "type": null,
+    "source_ids": [
+     "NO_SOURCE_SYNTHETIC"
+    ],
+    "locator": "Pressure test",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "WITHDRAW",
+    "update_trigger": "source-native site data"
+   },
+   {
+    "id": "WS-C034",
+    "text": "Legacy six logistic equations imply 5.82%–9.84% DR at I=0.",
+    "type": null,
+    "source_ids": [
+     "LEGACY_DIVI_WILDFIRE_SOLAR_2026"
+    ],
+    "locator": "Recalculation from §11 L/k/x0 values",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "REJECT",
+    "update_trigger": "never; superseded legacy audit"
+   },
+   {
+    "id": "WS-C035",
+    "text": "At I=200 the legacy formulas yield 7.41%/9.21%/8.58%/8.05%/8.91%/11.49%, while the table reports 2%/1%/1%/1%/1%/4%.",
+    "type": null,
+    "source_ids": [
+     "LEGACY_DIVI_WILDFIRE_SOLAR_2026"
+    ],
+    "locator": "§11 equation/table recomputation",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "REJECT",
+    "update_trigger": "never; superseded legacy audit"
+   },
+   {
+    "id": "WS-C036",
+    "text": "The legacy inverse flame-length table does not match its displayed F_H = 0.0775·I^0.46 equation.",
+    "type": null,
+    "source_ids": [
+     "LEGACY_DIVI_WILDFIRE_SOLAR_2026"
+    ],
+    "locator": "§12.1 recomputation",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "REJECT",
+    "update_trigger": "authoritative re-derivation with unit contract"
+   },
+   {
+    "id": "WS-C037",
+    "text": "Legacy component/BOM/civil weights are not audited failure-unit economic shares.",
+    "type": null,
+    "source_ids": [
+     "LEGACY_DIVI_WILDFIRE_SOLAR_2026",
+     "VALUE_SOLAR_WORKBOOK"
+    ],
+    "locator": "Appendix A vs governed value rows",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "REJECT",
+    "update_trigger": "audited BOM/replacement rule"
+   },
+   {
+    "id": "WS-C038",
+    "text": "Legacy uncertainty ranges and factor-of-two/order-of-magnitude reliability claims are unsupported.",
+    "type": null,
+    "source_ids": [
+     "LEGACY_DIVI_WILDFIRE_SOLAR_2026"
+    ],
+    "locator": "Appendix B",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "REJECT",
+    "update_trigger": "statistical model/structured elicitation"
+   },
+   {
+    "id": "WS-C039",
+    "text": "General wildfire acreage, residential loss, utility liability and hypothetical solar events do not calibrate solar fragility.",
+    "type": null,
+    "source_ids": [
+     "LEGACY_DIVI_WILDFIRE_SOLAR_2026"
+    ],
+    "locator": "§13",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "REJECT",
+    "update_trigger": "paired target events"
+   },
+   {
+    "id": "WS-C040",
+    "text": "Within the bounded 2026-07-09 public-evidence review, no event dataset was located that pairs utility-scale solar local wildfire exposure with component inventory, inspected damage and economic replacement.",
+    "type": null,
+    "source_ids": [
+     "SOURCE_REVIEW_2026_07_09"
+    ],
+    "locator": "BOUNDED_EVIDENCE_SEARCH_LOG_wildfire_solar__model_v0_1__docs_r1.md — Purpose, query families, endpoint tests, and results",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "WITHHOLD",
+    "update_trigger": "new public field/claims dataset or repeat search at next evidence review"
+   },
+   {
+    "id": "WS-C041",
+    "text": "Solid walls/barriers receive no mitigation credit without qualified geometry, wind, gaps and ember-bypass modeling.",
+    "type": null,
+    "source_ids": [
+     "DOE_FEMP_PV_WILDFIRE",
+     "COHEN_USDA_2000",
+     "NIST_TN_2205"
+    ],
+    "locator": "site adapter rule",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "RETAIN_GUARDRAIL",
+    "update_trigger": "validated transfer model"
+   },
+   {
+    "id": "WS-C042",
+    "text": "Open-metal/chain-link fencing receives no radiant-shield credit by default.",
+    "type": null,
+    "source_ids": [
+     "NIST_TN_2228"
+    ],
+    "locator": "site adapter rule informed by open geometry",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "RETAIN_GUARDRAIL",
+    "update_trigger": "qualified geometry model"
+   },
+   {
+    "id": "WS-C043",
+    "text": "Whole-site exposure and at-risk fraction never default to one.",
+    "type": null,
+    "source_ids": [
+     "NIST_TN_1796",
+     "VALUE_SOLAR_WORKBOOK"
+    ],
+    "locator": "exposure/vulnerability separation and value rows",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "RETAIN_FAIL_CLOSED_RULE",
+    "update_trigger": "approved spatial adapter"
+   },
+   {
+    "id": "WS-C044",
+    "text": "Smoke/ash production effects and PSPS are outside this physical burnover cell.",
+    "type": null,
+    "source_ids": [
+     "LEGACY_DIVI_WILDFIRE_SOLAR_2026",
+     "DOE_FEMP_PV_WILDFIRE"
+    ],
+    "locator": "scope split",
+    "tier": "T3",
+    "parameter_or_rule": null,
+    "status": "RETAIN_SCOPE",
+    "update_trigger": "combined-peril architecture review"
+   },
+   {
+    "id": "WS-C045",
+    "text": "Firebrand/ember attack is recorded as a separate exposure pathway but cannot emit damage in this scaffold.",
+    "type": null,
+    "source_ids": [
+     "NIST_TN_1796",
+     "NIST_TN_2205",
+     "NIST_TN_2228"
+    ],
+    "locator": "exposure definitions and fence/firebrand experiments",
+    "tier": "T3",
+    "parameter_or_rule": null,
+    "status": "RETAIN_DEFERRED",
+    "update_trigger": "recipient-side ignition calibration"
+   },
+   {
+    "id": "WS-C046",
+    "text": "Future y-axis is conditional expected direct replacement-cost ratio of the same failure unit, excluding support costs and financial terms.",
+    "type": null,
+    "source_ids": [
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "cell y-axis decision",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "RETAIN_PROPOSED",
+    "update_trigger": "reviewed runtime model"
+   },
+   {
+    "id": "WS-C047",
+    "text": "Post-fire thermal/EL imaging can reveal damage not evident visually, but it does not supply a damage ratio.",
+    "type": null,
+    "source_ids": [
+     "DOE_FEMP_PV_WILDFIRE"
+    ],
+    "locator": "Post-Damage Techniques / Imaging",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_QUALITATIVE",
+    "update_trigger": "forensic dataset"
+   },
+   {
+    "id": "WS-C048",
+    "text": "Component-zone loss must separate physical value, at-risk fraction, burned fraction, attack fraction given burned, and conditional severity.",
+    "type": null,
+    "source_ids": [
+     "NIST_TN_1796",
+     "VALUE_SOLAR_WORKBOOK",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "seven-step audit and value/exposure contracts",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "RETAIN_FAIL_CLOSED_RULE",
+    "update_trigger": "validated zonal implementation"
+   },
+   {
+    "id": "WS-C049",
+    "text": "Replacement fieldwork/logistics in rows 12, 13, and 15 are allocated once to damaged units and do not receive an independent DR; mixed civil row 14 is governed by a separate split requirement.",
+    "type": null,
+    "source_ids": [
+     "VALUE_SOLAR_WORKBOOK",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "Solar_Map!12, Solar_Map!13, Solar_Map!15; row 14 value-crosswalk treatment",
+    "tier": "T4",
+    "parameter_or_rule": null,
+    "status": "RETAIN_FAIL_CLOSED_RULE",
+    "update_trigger": "claims-supported allocation and civil-asset split"
+   },
+   {
+    "id": "WS-C050",
+    "text": "The third-edition FSim RDS product is a 270 m strategic-scale product based on an end-2020 landscape and 20,000–100,000 iterations (potential annual weather scenarios) depending on pyrome.",
+    "type": null,
+    "source_ids": [
+     "USFS_FSIM_RDS_2023"
+    ],
+    "locator": "RDS abstract, methods, process step 10, and spatial-reference metadata",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_WITH_SCOPE_LIMIT",
+    "update_trigger": "FSim product/version change"
+   },
+   {
+    "id": "WS-C051",
+    "text": "FSim 1/3/5-hour active periods are daily simulation fire-growth windows, not solar-equipment exposure durations.",
+    "type": null,
+    "source_ids": [
+     "USFS_FSIM_RDS_2023",
+     "FINNEY_2011_FSIM"
+    ],
+    "locator": "RDS methods/simulation-duration description and FSim model context",
+    "tier": "T2",
+    "parameter_or_rule": null,
+    "status": "RETAIN_GUARDRAIL",
+    "update_trigger": "validated event/local exposure bridge"
+   }
+  ],
+  "parameters": [
+   {
+    "id": "FSim class definitions and conditional probability semantics",
+    "name": "FSim class definitions and conditional probability semantics",
+    "value": null,
+    "tier": "T2",
+    "source_ids": [
+     "USFS_FSIM_RDS_2023",
+     "FINNEY_2011_FSIM"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Official source-native hazard contract.",
+    "update_trigger": "FSim product/version change"
+   },
+   {
+    "id": "relative radiant/convective severity ordering",
+    "name": "relative radiant/convective severity ordering",
+    "value": null,
+    "tier": "T2",
+    "source_ids": [
+     "FRANKMAN_2012_WILDLAND_HEAT",
+     "BUTLER_2010_CROWN_HEAT",
+     "MUELLER_2018_FIELD_FIRE"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Field measurements support strong environment- and pathway-dependent heat exposure but not an FSim converter.",
+    "update_trigger": "validated regional-to-site solar transfer model"
+   },
+   {
+    "id": "module state-table ordinates",
+    "name": "module state-table ordinates",
+    "value": [
+     0,
+     0.002,
+     0.01,
+     0.04,
+     0.12,
+     0.32,
+     0.65
+    ],
+    "tier": "T4",
+    "source_ids": [
+     "WANG_2025_PV_THERMAL",
+     "ZHAO_2026_PV_POOL_FIRE",
+     "KIEE_JANG_2026_WILDFIRE_PV",
+     "DOE_FEMP_PV_WILDFIRE"
+    ],
+    "claim_ids": [],
+    "curve_id": "WSV1_MODULE_THERMAL",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Evidence constrains mechanism, selector sensitivity, and inspection endpoint; absolute class DR is engineering judgment.",
+    "update_trigger": "paired local exposure, inspection disposition, and module replacement cost"
+   },
+   {
+    "id": "racking and foundation state-table ordinates",
+    "name": "racking and foundation state-table ordinates",
+    "value": null,
+    "tier": "T4",
+    "source_ids": [
+     "DOE_FEMP_PV_WILDFIRE",
+     "FRANKMAN_2012_WILDLAND_HEAT"
+    ],
+    "claim_ids": [],
+    "curve_id": "WSV1_RACKING_THERMAL;WSV1_FOUNDATION_THERMAL",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Low-response metal/concrete-dominant engineering proxy; no immunity assumption.",
+    "update_trigger": "forensic structural inspection and cost cohort"
+   },
+   {
+    "id": "electrical and control state-table ordinates",
+    "name": "electrical and control state-table ordinates",
+    "value": null,
+    "tier": "T4",
+    "source_ids": [
+     "NEMA_GD2_2016",
+     "DOE_FEMP_PV_WILDFIRE",
+     "YONHAP_UISEONG_PV_2025"
+    ],
+    "claim_ids": [],
+    "curve_id": "WSV1_INVERTER_THERMAL;WSV1_COMBINER_THERMAL;WSV1_MV_EQUIPMENT_THERMAL;WSV1_SCADA_THERMAL",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Disposition guidance and field materiality support replacement endpoints; absolute class DR remains engineering judgment.",
+    "update_trigger": "OEM/forensic exposure, disposition, and cost records"
+   },
+   {
+    "id": "exposed cable state-table ordinates",
+    "name": "exposed cable state-table ordinates",
+    "value": null,
+    "tier": "T4",
+    "source_ids": [
+     "ZHANG_2022_XLPE",
+     "NEMA_GD2_2016",
+     "NREL_PV_OM_2018"
+    ],
+    "claim_ids": [],
+    "curve_id": "WSV1_CABLE_EXPOSED",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Material tests support high heat sensitivity but not installed-population economic DR.",
+    "update_trigger": "installed cable fire testing and routing-specific claims"
+   },
+   {
+    "id": "grounding and civil state-table ordinates",
+    "name": "grounding and civil state-table ordinates",
+    "value": null,
+    "tier": "T4",
+    "source_ids": [
+     "NEMA_GD2_2016",
+     "FM_DS_7_106_2026",
+     "DOE_FEMP_PV_WILDFIRE"
+    ],
+    "claim_ids": [],
+    "curve_id": "WSV1_GROUNDING_THERMAL;WSV1_CIVIL_DIRECT",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Inspection/control guidance supports inclusion and lower response; absolute DR is engineering judgment.",
+    "update_trigger": "site schedule split and direct-fire civil/grounding claims"
+   },
+   {
+    "id": "reference failure-unit values",
+    "name": "reference failure-unit values",
+    "value": null,
+    "tier": "T2",
+    "source_ids": [
+     "NREL_NLR_Q1_2025_PV_BENCHMARK",
+     "VALUE_SOLAR_WORKBOOK"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Governed row-level crosswalk from the official cost benchmark.",
+    "update_trigger": "new cost vintage or project-specific schedule of values"
+   },
+   {
+    "id": "proportional support-cost allocation",
+    "name": "proportional support-cost allocation",
+    "value": "support DR equals aggregate direct-and-civil DR",
+    "tier": "T4",
+    "source_ids": [
+     "VALUE_SOLAR_WORKBOOK",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "claim_ids": [],
+    "curve_id": "aggregate",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Transparent allocate-once reference rule; not claims-calibrated.",
+    "update_trigger": "claims/work-order support-cost allocation"
+   }
+  ],
+  "parameters_plain": [
+   {
+    "id": "FSim class definitions and conditional probability semantics",
+    "name": "FSim class definitions and conditional probability semantics",
+    "value_text": "",
+    "tier": "T2",
+    "tier_word": "lab-tested",
+    "sources": [
+     {
+      "id": "USFS_FSIM_RDS_2023",
+      "title": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition",
+      "link": "https://doi.org/10.2737/RDS-2016-0034-3",
+      "link_kind": "doi",
+      "resolved": true
+     },
+     {
+      "id": "FINNEY_2011_FSIM",
+      "title": "Finney, M.A., et al. A simulation of probabilistic wildfire risk components for the continental United States",
+      "link": "https://doi.org/10.1007/s00477-011-0462-z",
+      "link_kind": "doi",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Official source-native hazard contract.",
+    "update_trigger": "FSim product/version change",
+    "role": null
+   },
+   {
+    "id": "relative radiant/convective severity ordering",
+    "name": "relative radiant/convective severity ordering",
+    "value_text": "",
+    "tier": "T2",
+    "tier_word": "lab-tested",
+    "sources": [
+     {
+      "id": "FRANKMAN_2012_WILDLAND_HEAT",
+      "title": "FRANKMAN_2012_WILDLAND_HEAT",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     },
+     {
+      "id": "BUTLER_2010_CROWN_HEAT",
+      "title": "BUTLER_2010_CROWN_HEAT",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     },
+     {
+      "id": "MUELLER_2018_FIELD_FIRE",
+      "title": "MUELLER_2018_FIELD_FIRE",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Field measurements support strong environment- and pathway-dependent heat exposure but not an FSim converter.",
+    "update_trigger": "validated regional-to-site solar transfer model",
+    "role": null
+   },
+   {
+    "id": "module state-table ordinates",
+    "name": "module state-table ordinates",
+    "value_text": "0, 0.002, 0.01, 0.04, 0.12 and 0.32",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "WANG_2025_PV_THERMAL",
+      "title": "Wang, Y.; Xiao, C.; Bedon, C",
+      "link": "https://doi.org/10.1016/j.ijthermalsci.2024.109489",
+      "link_kind": "doi",
+      "resolved": true
+     },
+     {
+      "id": "ZHAO_2026_PV_POOL_FIRE",
+      "title": "Zhao, J.; Zhang, S.; Li, X.; Kong, X.; Zhao, L.; Shen, J",
+      "link": "https://doi.org/10.3390/fire9020062",
+      "link_kind": "doi",
+      "resolved": true
+     },
+     {
+      "id": "KIEE_JANG_2026_WILDFIRE_PV",
+      "title": "KIEE_JANG_2026_WILDFIRE_PV",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     },
+     {
+      "id": "DOE_FEMP_PV_WILDFIRE",
+      "title": "U.S. Department of Energy, Federal Energy Management Program",
+      "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WSV1_MODULE_THERMAL",
+    "reasoning": "Evidence constrains mechanism, selector sensitivity, and inspection endpoint; absolute class DR is engineering judgment.",
+    "update_trigger": "paired local exposure, inspection disposition, and module replacement cost",
+    "role": null
+   },
+   {
+    "id": "racking and foundation state-table ordinates",
+    "name": "racking and foundation state-table ordinates",
+    "value_text": "",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "DOE_FEMP_PV_WILDFIRE",
+      "title": "U.S. Department of Energy, Federal Energy Management Program",
+      "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FRANKMAN_2012_WILDLAND_HEAT",
+      "title": "FRANKMAN_2012_WILDLAND_HEAT",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WSV1_RACKING_THERMAL;WSV1_FOUNDATION_THERMAL",
+    "reasoning": "Low-response metal/concrete-dominant engineering proxy; no immunity assumption.",
+    "update_trigger": "forensic structural inspection and cost cohort",
+    "role": null
+   },
+   {
+    "id": "electrical and control state-table ordinates",
+    "name": "electrical and control state-table ordinates",
+    "value_text": "",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "NEMA_GD2_2016",
+      "title": "NEMA_GD2_2016",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     },
+     {
+      "id": "DOE_FEMP_PV_WILDFIRE",
+      "title": "U.S. Department of Energy, Federal Energy Management Program",
+      "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "YONHAP_UISEONG_PV_2025",
+      "title": "YONHAP_UISEONG_PV_2025",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WSV1_INVERTER_THERMAL;WSV1_COMBINER_THERMAL;WSV1_MV_EQUIPMENT_THERMAL;WSV1_SCADA_THERMAL",
+    "reasoning": "Disposition guidance and field materiality support replacement endpoints; absolute class DR remains engineering judgment.",
+    "update_trigger": "OEM/forensic exposure, disposition, and cost records",
+    "role": null
+   },
+   {
+    "id": "exposed cable state-table ordinates",
+    "name": "exposed cable state-table ordinates",
+    "value_text": "",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "ZHANG_2022_XLPE",
+      "title": "Zhang, H.; Yao, J.; Zhu, H.; Wang, X",
+      "link": "https://doi.org/10.3390/en15051904",
+      "link_kind": "doi",
+      "resolved": true
+     },
+     {
+      "id": "NEMA_GD2_2016",
+      "title": "NEMA_GD2_2016",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     },
+     {
+      "id": "NREL_PV_OM_2018",
+      "title": "Walker, H., et al. Best Practices for Operation and Maintenance of Photovoltaic and Energy Storage Systems; 3rd Edition",
+      "link": "https://www.nrel.gov/docs/fy19osti/73822.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WSV1_CABLE_EXPOSED",
+    "reasoning": "Material tests support high heat sensitivity but not installed-population economic DR.",
+    "update_trigger": "installed cable fire testing and routing-specific claims",
+    "role": null
+   },
+   {
+    "id": "grounding and civil state-table ordinates",
+    "name": "grounding and civil state-table ordinates",
+    "value_text": "",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "NEMA_GD2_2016",
+      "title": "NEMA_GD2_2016",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     },
+     {
+      "id": "FM_DS_7_106_2026",
+      "title": "FM_DS_7_106_2026",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     },
+     {
+      "id": "DOE_FEMP_PV_WILDFIRE",
+      "title": "U.S. Department of Energy, Federal Energy Management Program",
+      "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "WSV1_GROUNDING_THERMAL;WSV1_CIVIL_DIRECT",
+    "reasoning": "Inspection/control guidance supports inclusion and lower response; absolute DR is engineering judgment.",
+    "update_trigger": "site schedule split and direct-fire civil/grounding claims",
+    "role": null
+   },
+   {
+    "id": "reference failure-unit values",
+    "name": "reference failure-unit values",
+    "value_text": "",
+    "tier": "T2",
+    "tier_word": "lab-tested",
+    "sources": [
+     {
+      "id": "NREL_NLR_Q1_2025_PV_BENCHMARK",
+      "title": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E",
+      "link": "https://doi.org/10.7799/3009689",
+      "link_kind": "doi",
+      "resolved": true
+     },
+     {
+      "id": "VALUE_SOLAR_WORKBOOK",
+      "title": "damage_modeling/docs/method/value_basis/solar_wind_value_breakdown.xlsx; Solar_Map rows 2:17.",
+      "link": "https://data.nrel.gov/submissions/304",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Governed row-level crosswalk from the official cost benchmark.",
+    "update_trigger": "new cost vintage or project-specific schedule of values",
+    "role": null
+   },
+   {
+    "id": "proportional support-cost allocation",
+    "name": "proportional support-cost allocation",
+    "value_text": "support DR equals aggregate direct-and-civil DR",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "VALUE_SOLAR_WORKBOOK",
+      "title": "damage_modeling/docs/method/value_basis/solar_wind_value_breakdown.xlsx; Solar_Map rows 2:17.",
+      "link": "https://data.nrel.gov/submissions/304",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "GOVERNANCE_CONTRACT",
+      "title": "Damage Modeling repository governance contracts: seven-step failure-unit/value workflow, evidence gate,…",
+      "link": null,
+      "link_kind": "none",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "aggregate",
+    "reasoning": "Transparent allocate-once reference rule; not claims-calibrated.",
+    "update_trigger": "claims/work-order support-cost allocation",
+    "role": null
+   }
+  ],
+  "evidence_provenance": {
+   "kind": "register",
+   "sheets": [],
+   "sections": [],
+   "unmatched": [],
+   "sentence": null,
+   "dossier": null,
+   "workbook": null
+  },
+  "link_counts": {
+   "total": 21,
+   "linked": 20,
+   "locator_only": 0,
+   "neither": 1,
+   "markers": 3,
+   "placeholders": 0
+  },
+  "extraction": null,
+  "tier_words": {
+   "shape": "our judgment",
+   "cost": "lab-tested"
+  }
+ },
  "build_findings": [
   {
    "check": "source_ids",
@@ -1111,6 +2935,14 @@
     "parameter grounding and civil state-table ordinates → FM_DS_7_106_2026"
    ],
    "sentence": "10 source ID references in this cell do not resolve in its current source register."
+  },
+  {
+   "check": "source_links",
+   "severity": "data",
+   "items": [
+    "SOURCE_REVIEW_2026_07_09 — Wildfire × solar bounded public-evidence review and reproducibility log; review date 2026-07-09."
+   ],
+   "sentence": "1 source in this cell's register has neither a link nor a locator."
   }
  ]
 }

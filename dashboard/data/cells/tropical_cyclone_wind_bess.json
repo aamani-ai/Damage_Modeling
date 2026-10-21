@@ -1041,5 +1041,1167 @@
   "Known answers replayed through evaluate_damage_call with demand_basis_id DASHBOARD_BUILD_DECLARED_COMPARABLE_REFERENCE (recorded, not judged); tolerance 1e-12 on the damage ratio (the cell declares none), and each answer equals the drawn line at its ratio.",
   "Demand above 2 confirmed withheld (AXIS_OUTSIDE_VALID_RANGE) for every record; BESS_MV_AND_SHARED_ELECTRICAL, BESS_CIVIL, BESS_FIELDWORK confirmed withheld with the artifact's reason codes."
  ],
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Live · a screening model",
+    "code": "LIVE · screening"
+   },
+   "evidence": {
+    "words": "Evidence: our judgment",
+    "code": "shape T4 · cost T4",
+    "tiers": [
+     "T4"
+    ]
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "? not searched"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release same author with independent numerical methods"
+   }
+  },
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "◐",
+    "label": "one hurricane wind event",
+    "short": "one hurricane wind event",
+    "detail": "needs an explicit response choice (replacement or repair sensitivity), a resistance scenario and a declared comparable pressure reference"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "◐",
+    "label": "a dollar scenario",
+    "short": "a dollar scenario",
+    "detail": "same conditions, with the same-unit value; covered hardware only"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "◐",
+    "label": "yearly loss — only through Hazard",
+    "short": "yearly loss",
+    "detail": "hazard computes it only after frequency, shared-event coupling, per-unit cap and annual-distribution checks pass; partial-property result only, complete-plant figures withheld"
+   },
+   {
+    "key": "pml",
+    "mark": "◐",
+    "label": "PML, VaR, TVaR — only from Hazard's validated annual loss distribution",
+    "short": "PML, VaR and TVaR",
+    "detail": "consumer computable from validated frequency intensity coupling value and cap model"
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": {
+     "covered_usd": 94400000,
+     "total_usd": 109800000,
+     "share_covered": 0.8597449908925319,
+     "covered_label": "$94.4M of $109.8M",
+     "covered": [
+      {
+       "label": "Integrated battery enclosures",
+       "value_usd": 84000000,
+       "bucket": "battery_enclosures"
+      },
+      {
+       "label": "PCS",
+       "value_usd": 10400000,
+       "bucket": "pcs"
+      }
+     ],
+     "no_curve": [
+      {
+       "label": "Unit MV and shared electrical",
+       "value_usd": 13200000.0,
+       "sentence": "No curve — Unit MV and shared electrical, $13.2M of the reference value, has no damage response yet."
+      },
+      {
+       "label": "Civil works",
+       "value_usd": 1600000.0,
+       "sentence": "No curve — Civil works, $1.6M of the reference value, has no damage response yet."
+      },
+      {
+       "label": "Fieldwork",
+       "value_usd": 600000.0,
+       "sentence": "No curve — Fieldwork, $600k of the reference value, has no damage response yet."
+      }
+     ],
+     "left_out": [],
+     "source": "docs/cells/tropical_cyclone_wind_bess/current/value_binding.json",
+     "basis": "fixed 2024 dollars; reference budget r1"
+    },
+    "not_covered": [
+     "Unit MV and shared electrical",
+     "Civil works",
+     "Fieldwork"
+    ],
+    "withheld": [
+     {
+      "failure_unit_id": "BESS_MV_AND_SHARED_ELECTRICAL",
+      "subsystem": "BESS_MV_AND_SHARED_ELECTRICAL",
+      "reasons": [
+       "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION"
+      ],
+      "sentence": "Withheld: no qualified wind response or allocation."
+     },
+     {
+      "failure_unit_id": "BESS_CIVIL",
+      "subsystem": "BESS_CIVIL",
+      "reasons": [
+       "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION"
+      ],
+      "sentence": "Withheld: no qualified wind response or allocation."
+     },
+     {
+      "failure_unit_id": "BESS_FIELDWORK",
+      "subsystem": "BESS_FIELDWORK",
+      "reasons": [
+       "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION"
+      ],
+      "sentence": "Withheld: no qualified wind response or allocation."
+     }
+    ]
+   },
+   "assumed": [
+    "Pressure axis is a squared gust ratio against a reference the consumer declares (BW-P01)",
+    "Curve shape and beta 0.35 borrowed from the solar TC-wind cell; no BESS data fitted (BW-P02)",
+    "Major damage means full enclosure replacement (owner-approved local policy BW-Q01)",
+    "Limited-damage cost of 20/141.3 of enclosure value from a related cost split (BW-P03)",
+    "PCS uses the solar TC-wind states and costs unchanged (BW-P07)"
+   ],
+   "missing": {
+    "mechanisms": [
+     "Windborne debris",
+     "Wind-driven rain ingress",
+     "Triggered propagation between units"
+    ],
+    "out_of_scope": [
+     "Storm surge and rain flooding (Flood cell)",
+     "Convective wind and tornado (separate scope)",
+     "Autonomous internal failures",
+     "Collector station and export line",
+     "Business interruption"
+    ]
+   },
+   "open_questions": [
+    "No national wind reference selected (BW-P08); national placement support not yet qualified",
+    "Matched wind or anchorage tests and service outcomes still needed",
+    "$15.4M of plant value has no wind response yet"
+   ],
+   "next_version": null
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "What it covers",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a T4 hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage. It names 2 parts: Integrated battery enclosure and Separate PCS. Outside its scope: storm surge and rain flooding (Flood cell), convective wind and tornado (separate scope), autonomous internal failures, collector station and export line and business interruption. Kinds of damage it does not include: windborne debris, wind-driven rain ingress and triggered propagation between units.",
+    "plain_fact": "2 parts · 5 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the battery plant is split into 2 parts: Integrated battery enclosure and Separate PCS. 3 further units are named but withheld — bess mv and shared electrical, bess civil and bess fieldwork — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: unit MV and shared electrical, civil works and fieldwork.",
+    "plain_fact": "2 parts · 3 withheld"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "Damage is read against pressure ratio, (event 3-s gust ÷ declared reference 3-s gust)². The curve is ordered damage states, each reached with a lognormal chance as demand rises. The input, in the catalogue's words: pressure ratio: (event 3-second gust / declared reference gust) squared, dimensionless, valid 0 to 2; outside the range is withheld, not clamped.",
+    "plain_fact": "damage states"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "13 sources set this cell: Hazard BESS r1 selected profile and budget, Solar TC-wind model v2.1 docs r2, SMA MVPS-S2-SCS-US-B8-SH-en-11 system manual and Tesla Industrial Lithium-Ion Battery Emergency Response Guide revision2.8 2026-04-10 and 9 more. Of the 9 parameters, 1 is transferred (T3) and 8 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder.",
+    "plain_fact": "13 sources · our judgment"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "$94.4M of $109.8M of the reference plant has a curve (86 %). No curve yet for unit MV and shared electrical, civil works and fieldwork (14 % of the value).",
+    "plain_fact": "86 % of value"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "no audit found"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 3 curve records (model v1.0, docs r1). The write-up is derivation.md. The cell folder holds 14 files, each with its SHA under Details.",
+    "plain_fact": "3 curve records"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "One hurricane wind event, a dollar scenario, yearly loss and PML, VaR and TVaR are available only under conditions the consumer (Hazard) checks. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "0 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "This build reproduced 20 of 20 known answers through the cell's evaluator (within 1e-12 on the damage ratio). The validation record says passed conditional annual screening. No outside check has been made yet.",
+    "plain_fact": "20 of 20 reproduced"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: same author with independent numerical methods.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "Hazard BESS r1 selected profile and budget",
+    "ids": [
+     "BW-S01"
+    ],
+    "title": "Hazard BESS r1 selected profile and budget",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+    "link_kind": "hazard_file",
+    "locator": "asset_model.json; layout.csv; reference_budget.csv; 01_reference_profile_and_value.md",
+    "no_link_sentence": null,
+    "source_id": "BW-S01"
+   },
+   {
+    "text": "Solar TC-wind model v2.1 docs r2",
+    "ids": [
+     "BW-S02"
+    ],
+    "title": "Solar TC-wind model v2.1 docs r2",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/tropical_cyclone_wind_solar/current",
+    "link_kind": "repo_file",
+    "locator": "curve_artifact site-facility records and derivation dossier sections Curve architecture and Honest limitations",
+    "no_link_sentence": null,
+    "source_id": "BW-S02"
+   },
+   {
+    "text": "SMA MVPS-S2-SCS-US system manual, storm mounting and anchorage",
+    "ids": [
+     "BW-S03"
+    ],
+    "title": "SMA MVPS-S2-SCS-US-B8-SH-en-11 system manual",
+    "link": "https://files.sma.de/downloads/MVPS-S2-SCS-US-B8-SH-en-11.pdf",
+    "link_kind": "url",
+    "locator": "Section6.7 printed/PDF pp74-75; section17.14 p282; p75 rendered and inspected",
+    "no_link_sentence": null,
+    "source_id": "BW-S03"
+   },
+   {
+    "text": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8",
+    "ids": [
+     "BW-S11"
+    ],
+    "title": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide revision2.8 2026-04-10",
+    "link": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
+    "link_kind": "url",
+    "locator": "Printedp13 section3.4 and p20 section8; PDFpp15 and22 rendered/inspected; p22 section10 text read",
+    "no_link_sentence": null,
+    "source_id": "BW-S11"
+   },
+   {
+    "text": "NREL PVSCM 2024 inputs and prior same-budget allocation",
+    "ids": [
+     "BW-S12"
+    ],
+    "title": "PVSCM2024 original inputs and prior same-budget allocation",
+    "link": "https://data.nlr.gov/system/files/307/1764611886-PVSCM%202024.zip",
+    "link_kind": "url",
+    "locator": "UPV2024Q1.txt ESS.Li-IonCells BatteryPacks and Enclosure; prior evidence/r3/value_allocations.csv",
+    "no_link_sentence": null,
+    "source_id": "BW-S12"
+   }
+  ],
+  "sources": [
+   {
+    "id": "BW-S01",
+    "citation": "Hazard BESS r1 selected profile and budget",
+    "url": "Hazard_modeling/docs/plans/_cross_cutting/bess_conus/",
+    "locator": "asset_model.json; layout.csv; reference_budget.csv; 01_reference_profile_and_value.md",
+    "role": "exposure_or_value",
+    "tier": "T3",
+    "permitted": "Selected quantities and fixed-2024 physical denominator",
+    "prohibited": "Observed OEM capacity or BESS wind resistance",
+    "decision": "retain reference only",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+    "link_kind": "hazard_file",
+    "title": "Hazard BESS r1 selected profile and budget",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BW-S02",
+    "citation": "Solar TC-wind model v2.1 docs r2",
+    "url": "docs/cells/tropical_cyclone_wind_solar/current/",
+    "locator": "curve_artifact site-facility records and derivation dossier sections Curve architecture and Honest limitations",
+    "role": "curve_form",
+    "tier": "T4",
+    "permitted": "Exact existing synthetic pressure-axis response and numerical pattern",
+    "prohibited": "Target-matched BESS calibration or shared construction",
+    "decision": "source-only reproduce; BESS transfer unresolved",
+    "accessed_on": null,
+    "provenance": "register",
+    "repo_path": "docs/cells/tropical_cyclone_wind_solar/current",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/tropical_cyclone_wind_solar/current",
+    "link_kind": "repo_file",
+    "title": "Solar TC-wind model v2.1 docs r2",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BW-S03",
+    "citation": "SMA MVPS-S2-SCS-US-B8-SH-en-11 system manual",
+    "url": "https://files.sma.de/downloads/MVPS-S2-SCS-US-B8-SH-en-11.pdf",
+    "locator": "Section6.7 printed/PDF pp74-75; section17.14 p282; p75 rendered and inspected",
+    "role": "selector_archetype; mechanism_only",
+    "tier": "T3",
+    "permitted": "Separate storm-package mounting and anchorage configuration; customer-supplied foundation interface",
+    "prohibited": "Storm Kit efficacy coefficient or general BESS failure threshold",
+    "decision": "retain construction-selector evidence only",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://files.sma.de/downloads/MVPS-S2-SCS-US-B8-SH-en-11.pdf",
+    "link_kind": "url",
+    "title": "SMA MVPS-S2-SCS-US-B8-SH-en-11 system manual",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BW-S04",
+    "citation": "Sungrow ST2752UX system manual SEN-Ver21-202204",
+    "url": "https://info-support.sungrowpower.com/application/pdf/2022/11/10/E049-ST2752UX-SEN-Ver21-202204-IEC.pdf",
+    "locator": "Section4.2.1 printed p24 PDFp34; section4.2.2 printed p25 PDFp35",
+    "role": "selector_archetype; mechanism_only",
+    "tier": "T3",
+    "permitted": "Site trees and foundation/environment requirements; blockage is a separate possible pathway",
+    "prohibited": "No trees guarantees safety or quantified debris/cooling damage",
+    "decision": "retain mechanism and site-interface evidence only",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://info-support.sungrowpower.com/application/pdf/2022/11/10/E049-ST2752UX-SEN-Ver21-202204-IEC.pdf",
+    "link_kind": "url",
+    "title": "Sungrow ST2752UX system manual SEN-Ver21-202204",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BW-S05",
+    "citation": "Burns Engineering BESS Accel-Cheshire foundation drawing issued for permits 2025-08-29",
+    "url": "https://portal.ct.gov/-/media/csc/3_petitions-medialibrary/petitions_medialibrary/mediapetitionnos1501-1600/pe1587/proceduralcorrespondence/pe1587_ack-conditions_staffchange_110325_a.pdf",
+    "locator": "PDFp20 drawing S-102 sheet16 of19 details3-4; rendered and inspected",
+    "role": "selector_archetype; mechanism_only",
+    "tier": "T3",
+    "permitted": "One utility Megapack2XL project has an explicit bracket-anchor-pad load path and OEM manual interface",
+    "prohibited": "Universal anchor design or fragility; our reference adopts these bolts or resistance",
+    "decision": "retain project-specific load-path example only",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://portal.ct.gov/-/media/csc/3_petitions-medialibrary/petitions_medialibrary/mediapetitionnos1501-1600/pe1587/proceduralcorrespondence/pe1587_ack-conditions_staffchange_110325_a.pdf",
+    "link_kind": "url",
+    "title": "Burns Engineering BESS Accel-Cheshire foundation drawing issued for permits 2025-08-29",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BW-S06",
+    "citation": "SYL manufacturer specification submitted in CEC Enterprise air-quality filing TN268070",
+    "url": "https://efiling.energy.ca.gov/GetDocument.aspx?DocumentContentId=105086&tn=268070",
+    "locator": "PDFp193 supplier sheet printed28; wind-load row and battery/system parameters; rendered and inspected",
+    "role": "selector_archetype",
+    "tier": "T3",
+    "permitted": "Published specification states66m/s for an adjacent3793.92kWh liquid-cooled system; averaging/height/exposure basis not stated on this sheet",
+    "prohibited": "BESS fragility median; matched3-second10m gust; generic national capacity",
+    "decision": "retain resistance lead; numerical transfer withheld",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://efiling.energy.ca.gov/GetDocument.aspx?DocumentContentId=105086&tn=268070",
+    "link_kind": "url",
+    "title": "SYL manufacturer specification submitted in CEC Enterprise air-quality filing TN268070",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BW-S07",
+    "citation": "AES Dominicana operational press release 2017-10-17 on Fluence website",
+    "url": "https://blog.fluenceenergy.com/dominican-republics-first-energy-storage-arrays-help-grid-operator-prevent-blackouts",
+    "locator": "Body describing two10MW arrays at Andres and Los Mina during Irma/Maria",
+    "role": "case_study_severity",
+    "tier": "T3",
+    "permitted": "Operator reports continued frequency-service operation during regional hurricane conditions",
+    "prohibited": "Measured local wind anchor; zero repair cost; population vulnerability or modernLFP matched response",
+    "decision": "retain operational case only; no DR point",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://blog.fluenceenergy.com/dominican-republics-first-energy-storage-arrays-help-grid-operator-prevent-blackouts",
+    "link_kind": "url",
+    "title": "AES Dominicana operational press release 2017-10-17 on Fluence website",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BW-S08",
+    "citation": "Tesla Powerwall2 anchoring installation guidance",
+    "url": "https://energylibrary.tesla.com/docs/Public/EnergyStorage/Powerwall/2/InstallManual/BackupGateway/2/en-us/GUID-EF498B4A-9E0A-4A04-9BE1-512C14DB415E.html",
+    "locator": "AppendixA1 Table1 and exceptions below it",
+    "role": "rejected",
+    "tier": "T3",
+    "permitted": "Construction-specific residential mounting conditions illustrate target-matching need",
+    "prohibited": "Transfer180mph rating or residential mounting design to utility reference",
+    "decision": "reject numerical BESS transfer",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://energylibrary.tesla.com/docs/Public/EnergyStorage/Powerwall/2/InstallManual/BackupGateway/2/en-us/GUID-EF498B4A-9E0A-4A04-9BE1-512C14DB415E.html",
+    "link_kind": "url",
+    "title": "Tesla Powerwall2 anchoring installation guidance",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BW-S09",
+    "citation": "Moradi-Sepahvand et al2023 hurricane resilient co-planning preprint",
+    "url": "https://arxiv.org/abs/2310.05814",
+    "locator": "Abstract only; full paper not reviewed in this pass",
+    "role": "rejected",
+    "tier": "T3",
+    "permitted": "Abstract identifies hurricane fragility of transmission lines and storage in planning",
+    "prohibited": "Abstract supplies a BESS repair curve or proves full paper has none",
+    "decision": "discovery lead only",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://arxiv.org/abs/2310.05814",
+    "link_kind": "url",
+    "title": "Moradi-Sepahvand et al2023 hurricane resilient co-planning preprint",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BW-S10",
+    "citation": "Tesla Marshall Medical Center public permit drawing set 2022",
+    "url": "https://evogov.s3.us-west-2.amazonaws.com/meetings/17/staff_reports/629.pdf",
+    "locator": "PDFpp14 and29; S-101 PDFp29 rendered and inspected; structural criteria",
+    "role": "selector_archetype",
+    "tier": "T3",
+    "permitted": "One project specifies105mph ultimate wind ExposureC and RiskCategoryIV; site design policy is explicit",
+    "prohibited": "Universal Megapack rating; our BESS must use hospital RiskCategoryIV or105mph",
+    "decision": "retain construction/reference-policy context only",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://evogov.s3.us-west-2.amazonaws.com/meetings/17/staff_reports/629.pdf",
+    "link_kind": "url",
+    "title": "Tesla Marshall Medical Center public permit drawing set 2022",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BW-S11",
+    "citation": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide revision2.8 2026-04-10",
+    "url": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
+    "locator": "Printedp13 section3.4 and p20 section8; PDFpp15 and22 rendered/inspected; p22 section10 text read",
+    "role": "mechanism_only",
+    "tier": "T3",
+    "permitted": "Mechanical damage and compromised enclosure require evaluation and can create internal hazards; approved service distinction",
+    "prohibited": "Full replacement mandated for every dent; damage probabilities; inevitable fire or quantified propagation",
+    "decision": "retain consequence rationale; replacement policy remains analyst proposal",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
+    "link_kind": "url",
+    "title": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide revision2.8 2026-04-10",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BW-S12",
+    "citation": "PVSCM2024 original inputs and prior same-budget allocation",
+    "url": "https://data.nlr.gov/system/files/307/1764611886-PVSCM%202024.zip",
+    "locator": "UPV2024Q1.txt ESS.Li-IonCells BatteryPacks and Enclosure; prior evidence/r3/value_allocations.csv",
+    "role": "exposure_or_value",
+    "tier": "T3",
+    "permitted": "Related cost-group proportions reconcile the existing84M cabinet budget; enclosure row includes racks and suppression",
+    "prohibited": "Component repair quote; passive steel-only price; mapping states to these costs is observed",
+    "decision": "retain budget allocation; economic state mapping explicitly T4",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://data.nlr.gov/system/files/307/1764611886-PVSCM%202024.zip",
+    "link_kind": "url",
+    "title": "PVSCM2024 original inputs and prior same-budget allocation",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BW-S13",
+    "citation": "Existing Hazard Substation Hurricane demand-reference binding",
+    "url": "Hazard_modeling/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
+    "locator": "demand block; parent-cell ASCE MRI300 screening reference",
+    "role": "axis_bridge",
+    "tier": "T4",
+    "permitted": "Reusable comparable-gust squared-ratio pattern and explicit screening-reference policy",
+    "prohibited": "Observed BESS resistance; mandatory BESS design category; station binding proves target qualification",
+    "decision": "retain bridge pattern only; BESS national reference not selected in this pass",
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
+    "link_kind": "hazard_file",
+    "title": "Existing Hazard Substation Hurricane demand-reference binding",
+    "no_link_sentence": null
+   }
+  ],
+  "claims": [
+   {
+    "id": "BW-C01",
+    "text": "Keep plant and unitMV inside full109.8M denominator; collector/export and autonomous failures outside",
+    "type": "governance_decision",
+    "source_ids": [
+     "BW-S01"
+    ],
+    "locator": "Hazard decisions S2 S3 S5 and reference_budget.csv",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "existing scope only",
+    "update_trigger": "Owner boundary change or qualified value split"
+   },
+   {
+    "id": "BW-C02",
+    "text": "Existing response is ordered-state cost expectation on pressure-demand/design axis; lower/central/upper are unweighted sensitivities",
+    "type": "source_reproduction",
+    "source_ids": [
+     "BW-S02"
+    ],
+    "locator": "Five site-facility records and source_curve_probes.csv",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "source-only reproduction; BESS admission false",
+    "update_trigger": "Matched construction and same-unit consequence qualification"
+   },
+   {
+    "id": "BW-C03",
+    "text": "Anchorage and storm-option configuration belong in target matching before resistance transfer",
+    "type": "source_interpretation",
+    "source_ids": [
+     "BW-S03",
+     "BW-S05"
+    ],
+    "locator": "SMA section6.7 p75 and CT drawingS-102 details3-4",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "no efficacy or target resistance adopted",
+    "update_trigger": "Matched enclosure/PCS mechanical and installation documentation"
+   },
+   {
+    "id": "BW-C04",
+    "text": "66m/s is a published adjacent-product specification with unstated averaging/height/exposure basis on reviewed sheet",
+    "type": "source_interpretation",
+    "source_ids": [
+     "BW-S06"
+    ],
+    "locator": "PDFp193 supplier sheet wind-load row",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "not adopted; no DR or pressure bridge",
+    "update_trigger": "Primary design/test basis plus comparable wind reference and consequence"
+   },
+   {
+    "id": "BW-C05",
+    "text": "Continued operation is useful survival context but no local-intensity or repair-cost anchor",
+    "type": "source_interpretation",
+    "source_ids": [
+     "BW-S07"
+    ],
+    "locator": "2017press-release operating account",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "no damage ordinate adopted",
+    "update_trigger": "Local wind and inspected repair outcome for named units"
+   },
+   {
+    "id": "BW-C06",
+    "text": "An electrical collection proxy cannot cover the battery enclosure by its component name; construction and consequence need separate qualification",
+    "type": "engineering_inference",
+    "source_ids": [
+     "BW-S01",
+     "BW-S02"
+    ],
+    "locator": "Reference cabinet84M and Solar power/collection assembly membership",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "no mapping admitted",
+    "update_trigger": "Enclosure-specific evidence and reviewed proxy derivation"
+   },
+   {
+    "id": "BW-C07",
+    "text": "Tree/debris inlet blockage is distinct from wind-pressure structural damage and must be explicitly dispositioned",
+    "type": "source_interpretation",
+    "source_ids": [
+     "BW-S04"
+    ],
+    "locator": "Section4.2.1 printedp24",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "no blockage probability or cooling-failure loss adopted",
+    "update_trigger": "Scoped wind-driven-debris/auxiliary-loss evidence with repair endpoint"
+   },
+   {
+    "id": "BW-C08",
+    "text": "This pass has not admitted a target-matched gust-to-BESS-repair curve; remaining gaps are explicitly scoped",
+    "type": "bounded_negative_evidence",
+    "source_ids": [
+     "BW-S02",
+     "BW-S03",
+     "BW-S04",
+     "BW-S05",
+     "BW-S06",
+     "BW-S07",
+     "BW-S08",
+     "BW-S09"
+    ],
+    "locator": "search_log.md cutoff surfaces queries and endpoint tests",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "no universal absence claim",
+    "update_trigger": "Matched source or justified reviewed engineering candidate"
+   },
+   {
+    "id": "BW-C09",
+    "text": "Use explicit design/reference basis rather than a bare product wind-speed label",
+    "type": "source_interpretation",
+    "source_ids": [
+     "BW-S10"
+    ],
+    "locator": "Public permit S-101 PDFp29",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "reference illustration only",
+    "update_trigger": "Matched target drawing or declared screening reference"
+   },
+   {
+    "id": "BW-C10",
+    "text": "Mechanical compromise can create internal hazards; OEM evaluation is needed; full replacement is not commanded by this source",
+    "type": "source_interpretation",
+    "source_ids": [
+     "BW-S11"
+    ],
+    "locator": "Sections3.4 and8 printedpp13 and20",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "consequence rationale only",
+    "update_trigger": "Matched utility repair/disposition evidence"
+   },
+   {
+    "id": "BW-C11",
+    "text": "Compare two cabinet-aware repair policies using existing synthetic normalized-demand probabilities",
+    "type": "engineering_hypothesis",
+    "source_ids": [
+     "BW-S02",
+     "BW-S12"
+    ],
+    "locator": "experiment_spec.json and state_costs.csv",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "local research only; not calibrated",
+    "update_trigger": "Matched failure data or owner local-test selection"
+   },
+   {
+    "id": "BW-C12",
+    "text": "Composite repair group20/141.3; composite plus thermal27.5/141.3; both use the same1.05M budget",
+    "type": "audit_arithmetic",
+    "source_ids": [
+     "BW-S01",
+     "BW-S12"
+    ],
+    "locator": "Original25 cost row split70:30 and20 enclosure row; r3MMP denominator141.3",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "related allocation; no double count",
+    "update_trigger": "Same-boundary OEM BOM or quote"
+   },
+   {
+    "id": "BW-C13",
+    "text": "PCS source response may be tested as a named related-equipment T4proxy against separate520k PCS value",
+    "type": "engineering_proxy",
+    "source_ids": [
+     "BW-S02",
+     "BW-S03"
+    ],
+    "locator": "PV_POWER_CONVERSION_AND_COLLECTION source contract and SMAstorm selector context",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "target consumer not yet admitted",
+    "update_trigger": "Local binding and construction/response compatibility proof"
+   },
+   {
+    "id": "BW-C14",
+    "text": "The example60mps reference is not national resistance; comparable-gust requirements and source domain remain explicit",
+    "type": "governance_decision",
+    "source_ids": [
+     "BW-S01",
+     "BW-S13"
+    ],
+    "locator": "experiment_spec.json axis policy and source bridge",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "national reference remains to qualify",
+    "update_trigger": "Bounded Hazard bridge/reference qualification before geographic proof"
+   },
+   {
+    "id": "BW-C15",
+    "text": "Potential candidate property membership94.4M is85.97percent of full109.8M; remaining15.4M has no wind response here",
+    "type": "audit_arithmetic",
+    "source_ids": [
+     "BW-S01"
+    ],
+    "locator": "Reference budget cabinet84M and PCS10.4M; remaining included rows",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "conditional candidate scope only",
+    "update_trigger": "Qualified EBOS/civil/support extension"
+   },
+   {
+    "id": "BW-C16",
+    "text": "Test full replacement; retain repair as a sensitivity (Recommended)",
+    "type": "owner_ruling",
+    "source_ids": [
+     "BW-S01"
+    ],
+    "locator": "BW-Q01 owner reply2026-10-19; experiment_spec.json owner_ruling",
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "approved_local_testing_only",
+    "update_trigger": "Later qualification or matched evidence"
+   }
+  ],
+  "parameters": [
+   {
+    "id": "BW-P01",
+    "name": "pressure_axis",
+    "value": "(comparable event/design3second gust)^2",
+    "tier": "T4",
+    "source_ids": [
+     "BW-S02",
+     "BW-S13"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": "axis_bridge",
+    "status": "research_bridge",
+    "reasoning": "Pressure normalization only with declared common wind basis; no unqualified height/shielding or aerodynamic credit",
+    "update_trigger": "Qualified BESS demand bridge"
+   },
+   {
+    "id": "BW-P02",
+    "name": "state_probability_shape",
+    "value": "beta0.35 and inherited three source scenarios",
+    "tier": "T4",
+    "source_ids": [
+     "BW-S02"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": "research_transfer_not_fit",
+    "reasoning": "Existing synthetic electrical-equipment response reused explicitly as hypothesis; no target observations fitted",
+    "update_trigger": "Matched structural/enclosure failure data"
+   },
+   {
+    "id": "BW-P03",
+    "name": "limited_group_cost",
+    "value": "20/141.3 of cabinet value",
+    "tier": "T4",
+    "source_ids": [
+     "BW-S12"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": "exposure_or_value",
+    "status": "research_policy",
+    "reasoning": "Cost fraction derived from related benchmark; mapping limited damage to whole composite repair is a separate engineering assumption",
+    "update_trigger": "Repair itemization or selected candidate revision"
+   },
+   {
+    "id": "BW-P04",
+    "name": "major_repair_if_serviceable",
+    "value": "27.5/141.3 of cabinet value",
+    "tier": "T4",
+    "source_ids": [
+     "BW-S11",
+     "BW-S12"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": "exposure_or_value",
+    "status": "unselected_alternative",
+    "reasoning": "Repairs enclosure/rack/safety composite plus thermal group while assuming battery and management remain reusable; not demonstrated service result",
+    "update_trigger": "Configuration-matched repair guidance or owner local-test ruling"
+   },
+   {
+    "id": "BW-P05",
+    "name": "major_compromise_replacement",
+    "value": "1.0 of integrated cabinet value",
+    "tier": "T4",
+    "source_ids": [
+     "BW-S11",
+     "BW-S12"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": "BW_Q01_APPROVED_LOCAL_ONLY",
+    "reasoning": "Conservative return-to-service hypothesis selected by owner; source motivates evaluation but does not mandate universal replacement",
+    "update_trigger": "Matched repair evidence or later qualification"
+   },
+   {
+    "id": "BW-P06",
+    "name": "destructive_state_cost",
+    "value": "1.0 of integrated cabinet value",
+    "tier": "T4",
+    "source_ids": [
+     "BW-S01",
+     "BW-S11",
+     "BW-S12"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": "research_policy",
+    "reasoning": "Direct replacement of the defined destructive unit once; no separate internal/cascade cost",
+    "update_trigger": "Supported partial salvage or replacement scope"
+   },
+   {
+    "id": "BW-P07",
+    "name": "pcs_response",
+    "value": "Unchanged source normalized-pressure states and costs0:0.1:0.4:1",
+    "tier": "T4",
+    "source_ids": [
+     "BW-S02",
+     "BW-S03"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": "proposed_related_proxy",
+    "reasoning": "Apply only to separate PCS candidate value; no Solar collection dollars or fullplant scaling",
+    "update_trigger": "Target-specific local binding and tests"
+   },
+   {
+    "id": "BW-P08",
+    "name": "national_wind_reference",
+    "value": "Not selected by this research experiment",
+    "tier": "T4",
+    "source_ids": [
+     "BW-S10",
+     "BW-S13"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": "selector_default",
+    "status": "consumer_qualification_pending",
+    "reasoning": "Existing ASCE surface has multiple MRIs; choose explicit BESS screening policy before geographic losses",
+    "update_trigger": "Bounded Hazard reference qualification"
+   },
+   {
+    "id": "BW-P09",
+    "name": "unbound_property",
+    "value": "15400000USD remains without wind response",
+    "tier": "T3",
+    "source_ids": [
+     "BW-S01"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": "exposure_or_value",
+    "status": "unresolved_not_zero",
+    "reasoning": "Full budget retained and candidate hardware never renormalized to100percent",
+    "update_trigger": "Qualified same-scope EBOS/civil/support response"
+   }
+  ],
+  "parameters_plain": [
+   {
+    "id": "BW-P01",
+    "name": "pressure_axis",
+    "value_text": "(comparable event/design3second gust)^2",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "BW-S02",
+      "title": "Solar TC-wind model v2.1 docs r2",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/tropical_cyclone_wind_solar/current",
+      "link_kind": "repo_file",
+      "resolved": true
+     },
+     {
+      "id": "BW-S13",
+      "title": "Existing Hazard Substation Hurricane demand-reference binding",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
+      "link_kind": "hazard_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": "Pressure normalization only with declared common wind basis; no unqualified height/shielding or aerodynamic credit",
+    "update_trigger": "Qualified BESS demand bridge",
+    "role": "axis_bridge"
+   },
+   {
+    "id": "BW-P02",
+    "name": "state_probability_shape",
+    "value_text": "beta0.35 and inherited three source scenarios",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "BW-S02",
+      "title": "Solar TC-wind model v2.1 docs r2",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/tropical_cyclone_wind_solar/current",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": "Existing synthetic electrical-equipment response reused explicitly as hypothesis; no target observations fitted",
+    "update_trigger": "Matched structural/enclosure failure data",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "BW-P03",
+    "name": "limited_group_cost",
+    "value_text": "20/141.3 of cabinet value",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "BW-S12",
+      "title": "PVSCM2024 original inputs and prior same-budget allocation",
+      "link": "https://data.nlr.gov/system/files/307/1764611886-PVSCM%202024.zip",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": "Cost fraction derived from related benchmark; mapping limited damage to whole composite repair is a separate engineering assumption",
+    "update_trigger": "Repair itemization or selected candidate revision",
+    "role": "exposure_or_value"
+   },
+   {
+    "id": "BW-P04",
+    "name": "major_repair_if_serviceable",
+    "value_text": "27.5/141.3 of cabinet value",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "BW-S11",
+      "title": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide revision2.8 2026-04-10",
+      "link": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "BW-S12",
+      "title": "PVSCM2024 original inputs and prior same-budget allocation",
+      "link": "https://data.nlr.gov/system/files/307/1764611886-PVSCM%202024.zip",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": "Repairs enclosure/rack/safety composite plus thermal group while assuming battery and management remain reusable; not demonstrated service result",
+    "update_trigger": "Configuration-matched repair guidance or owner local-test ruling",
+    "role": "exposure_or_value"
+   },
+   {
+    "id": "BW-P05",
+    "name": "major_compromise_replacement",
+    "value_text": "1.0 of integrated cabinet value",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "BW-S11",
+      "title": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide revision2.8 2026-04-10",
+      "link": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "BW-S12",
+      "title": "PVSCM2024 original inputs and prior same-budget allocation",
+      "link": "https://data.nlr.gov/system/files/307/1764611886-PVSCM%202024.zip",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": "Conservative return-to-service hypothesis selected by owner; source motivates evaluation but does not mandate universal replacement",
+    "update_trigger": "Matched repair evidence or later qualification",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "BW-P06",
+    "name": "destructive_state_cost",
+    "value_text": "1.0 of integrated cabinet value",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "BW-S01",
+      "title": "Hazard BESS r1 selected profile and budget",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+      "link_kind": "hazard_file",
+      "resolved": true
+     },
+     {
+      "id": "BW-S11",
+      "title": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide revision2.8 2026-04-10",
+      "link": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "BW-S12",
+      "title": "PVSCM2024 original inputs and prior same-budget allocation",
+      "link": "https://data.nlr.gov/system/files/307/1764611886-PVSCM%202024.zip",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": "Direct replacement of the defined destructive unit once; no separate internal/cascade cost",
+    "update_trigger": "Supported partial salvage or replacement scope",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "BW-P07",
+    "name": "pcs_response",
+    "value_text": "Unchanged source normalized-pressure states and costs0:0.1:0.4:1",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "BW-S02",
+      "title": "Solar TC-wind model v2.1 docs r2",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/tropical_cyclone_wind_solar/current",
+      "link_kind": "repo_file",
+      "resolved": true
+     },
+     {
+      "id": "BW-S03",
+      "title": "SMA MVPS-S2-SCS-US-B8-SH-en-11 system manual",
+      "link": "https://files.sma.de/downloads/MVPS-S2-SCS-US-B8-SH-en-11.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": "Apply only to separate PCS candidate value; no Solar collection dollars or fullplant scaling",
+    "update_trigger": "Target-specific local binding and tests",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "BW-P08",
+    "name": "national_wind_reference",
+    "value_text": "Not selected by this research experiment",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "BW-S10",
+      "title": "Tesla Marshall Medical Center public permit drawing set 2022",
+      "link": "https://evogov.s3.us-west-2.amazonaws.com/meetings/17/staff_reports/629.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "BW-S13",
+      "title": "Existing Hazard Substation Hurricane demand-reference binding",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
+      "link_kind": "hazard_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": "Existing ASCE surface has multiple MRIs; choose explicit BESS screening policy before geographic losses",
+    "update_trigger": "Bounded Hazard reference qualification",
+    "role": "selector_default"
+   },
+   {
+    "id": "BW-P09",
+    "name": "unbound_property",
+    "value_text": "15400000USD remains without wind response",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "BW-S01",
+      "title": "Hazard BESS r1 selected profile and budget",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+      "link_kind": "hazard_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": "Full budget retained and candidate hardware never renormalized to100percent",
+    "update_trigger": "Qualified same-scope EBOS/civil/support response",
+    "role": "exposure_or_value"
+   }
+  ],
+  "evidence_provenance": {
+   "kind": "register",
+   "sheets": [],
+   "sections": [],
+   "unmatched": [],
+   "sentence": null,
+   "dossier": null,
+   "workbook": null
+  },
+  "link_counts": {
+   "total": 13,
+   "linked": 13,
+   "locator_only": 0,
+   "neither": 0,
+   "markers": 0,
+   "placeholders": 0
+  },
+  "extraction": null,
+  "tier_words": {
+   "shape": "our judgment",
+   "cost": "our judgment"
+  }
+ },
  "build_findings": []
 }

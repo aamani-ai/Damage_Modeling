@@ -643,5 +643,228 @@
   ]
  },
  "sampling_notes": [],
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Reused · borrows another cell's curve",
+    "code": "REUSED"
+   },
+   "evidence": {
+    "words": "Evidence: our judgment",
+    "code": "shape T4 · cost T4",
+    "tiers": [
+     "T4"
+    ]
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "? not searched"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release —"
+   }
+  },
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "◐",
+    "label": "one hurricane wind event",
+    "short": "one hurricane wind event",
+    "detail": "whole-station damage ratio for a pressure ratio of 0 to 2 and an explicit resistance scenario (lower, central or upper)"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "◐",
+    "label": "a dollar scenario",
+    "short": "a dollar scenario",
+    "detail": "same conditions, damage ratio times the $27.35M fenced value; no component losses added"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "◐",
+    "label": "yearly loss — only through Hazard",
+    "short": "yearly loss",
+    "detail": "hazard computes capped yearly metrics after frequency, spatial coupling, value and cap qualification; not a portfolio total"
+   },
+   {
+    "key": "pml",
+    "mark": "◐",
+    "label": "PML, VaR — only from Hazard's validated annual loss distribution, per the source cell",
+    "short": "PML and VaR",
+    "detail": ""
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": null,
+    "not_covered": [],
+    "withheld": []
+   },
+   "assumed": [
+    "GSU-to-transmission-yard assembly transfer",
+    "Source state medians, beta 0.35 and state costs are synthetic choices, not calibrated",
+    "Regional ASCE MRI300 design reference stands in for station capacity",
+    "Civil and site works counted inside the fenced value"
+   ],
+   "missing": {
+    "mechanisms": [
+     "Wind-driven rain",
+     "Windborne debris"
+    ],
+    "out_of_scope": [
+     "External access road and project support allowances ($3.06M, outside the fenced value; unmodeled, not zero)",
+     "Storm surge and rain flooding (Flood entry)",
+     "Tornado (convective wind binding)",
+     "Business interruption, revenue and insured interest"
+    ]
+   },
+   "open_questions": [
+    "National delivery is Hazard's next step",
+    "A future component response must replace the overlapping assembly scope and be requalified"
+   ],
+   "next_version": null
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "What it covers",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Hurricane wind on substations: the canonical solar TC-wind GSU/substation assembly curve is already separate from the solar array, so it is reused for the standalone station without inventing a solar plant (see docs/contracts/hazard_handoff/substation_hurricane_screening_v1/README.md). It names 1 part: Whole station (fenced assembly). Outside its scope: external access road and project support allowances ($3.06M, outside the fenced value; unmodeled, not zero), storm surge and rain flooding (Flood entry), tornado (convective wind binding) and business interruption, revenue and insured interest. Kinds of damage it does not include: wind-driven rain and windborne debris.",
+    "plain_fact": "1 part · 4 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the substation is split into 1 part: Whole station (fenced assembly).",
+    "plain_fact": "1 part"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "No hazard axis is declared. The input, in the catalogue's words: pressure ratio: (event 3-second gust / ASCE MRI300 reference design gust, 10 m, Exposure C) squared, valid 0 to 2; STORM 10-minute wind converted by (1/0.88) x 1.20; outside the range is unavailable, not clamped.",
+    "plain_fact": "—"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "No source list could be read for this cell. The source and claim registers are machine-readable files in the cell folder.",
+    "plain_fact": "0 sources · our judgment"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "The damage ratio is a share of replacement value of the same fenced station, $27,353,236.37 (MISO MTEP24 published table amounts), applied once. The files state no plant-level dollar figure for this asset.",
+    "plain_fact": "no plant value stated"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "no audit found"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 0 curve records (model v2.1, docs r2). The cell folder holds 4 files, each with its SHA under Details.",
+    "plain_fact": "0 curve records"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "One hurricane wind event, a dollar scenario, yearly loss and PML and VaR are available only under conditions the consumer (Hazard) checks. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "0 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "The artifact declares no known-answer tests, so this build reproduced none. The validation record says passed. No outside check has been made yet.",
+    "plain_fact": "no known answers"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "Canonical tropical_cyclone_wind_solar model v2.1 docs r2, curve TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES",
+    "ids": [],
+    "title": "Canonical tropical_cyclone_wind_solar model v2.1 docs r2, curve TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   },
+   {
+    "text": "Hazard substation profile (asset_model.json): 345/138 kV AIS, two 336 MVA transformers",
+    "ids": [],
+    "title": "Hazard substation profile (asset_model.json): 345/138 kV AIS, two 336 MVA transformers",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   },
+   {
+    "text": "MISO MTEP24 published cost tables (fenced station value)",
+    "ids": [],
+    "title": "MISO MTEP24 published cost tables (fenced station value)",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   },
+   {
+    "text": "ASCE MRI300 parent-cell screening design reference (demand bridge)",
+    "ids": [],
+    "title": "ASCE MRI300 parent-cell screening design reference (demand bridge)",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   }
+  ],
+  "sources": [],
+  "claims": [],
+  "parameters": [],
+  "parameters_plain": [],
+  "evidence_provenance": {
+   "kind": "register",
+   "sheets": [],
+   "sections": [],
+   "unmatched": [],
+   "sentence": null,
+   "dossier": null,
+   "workbook": null
+  },
+  "link_counts": {
+   "total": 0,
+   "linked": 0,
+   "locator_only": 0,
+   "neither": 0,
+   "markers": 0,
+   "placeholders": 0
+  },
+  "extraction": null,
+  "tier_words": {
+   "shape": "our judgment",
+   "cost": "our judgment"
+  }
+ },
  "build_findings": []
 }

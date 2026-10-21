@@ -163,6 +163,80 @@
  "selected_by": [],
  "variants": "none",
  "notes": [],
+ "caption": {
+  "what_it_says": "Tracker and racking: the damage ratio is 0 at class 0 (no event), 0 at class 1, 0 at class 2, 0.01 at class 3, 0.02 at class 4, 0.08 at class 5 and 0.25 at class 6; nothing is drawn between classes because the model only answers at exact classes.",
+  "how_sure": {
+   "shape": {
+    "tier": "T4",
+    "word": "our judgment",
+    "basis": "Class values are engineering judgment"
+   },
+   "cost": {
+    "tier": "T2",
+    "word": "lab-tested",
+    "basis": "Reference part value from the NREL/NLR Q1-2025 benchmark crosswalk"
+   },
+   "parameters": "3 parameters: 3 lab-tested (T2)",
+   "weakest": "T2"
+  },
+  "seen_in_field": {
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "state": "not_searched",
+   "href": null,
+   "words": "nobody has looked yet; no search log exists for this asset and hazard"
+  },
+  "main_references": [
+   {
+    "text": "Finney, M.A., et al. A simulation of probabilistic wildfire risk components for the continental United States",
+    "ids": [
+     "FINNEY_2011_FSIM"
+    ],
+    "title": "Finney, M.A., et al. A simulation of probabilistic wildfire risk components for the continental United States",
+    "link": "https://doi.org/10.1007/s00477-011-0462-z",
+    "link_kind": "doi",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "FINNEY_2011_FSIM"
+   },
+   {
+    "text": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E",
+    "ids": [
+     "NREL_NLR_Q1_2025_PV_BENCHMARK"
+    ],
+    "title": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E",
+    "link": "https://doi.org/10.7799/3009689",
+    "link_kind": "doi",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "NREL_NLR_Q1_2025_PV_BENCHMARK"
+   },
+   {
+    "text": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition",
+    "ids": [
+     "USFS_FSIM_RDS_2023"
+    ],
+    "title": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition",
+    "link": "https://doi.org/10.2737/RDS-2016-0034-3",
+    "link_kind": "doi",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "USFS_FSIM_RDS_2023"
+   },
+   {
+    "text": "damage_modeling/docs/method/value_basis/solar_wind_value_breakdown.xlsx; Solar_Map rows 2:17.",
+    "ids": [
+     "VALUE_SOLAR_WORKBOOK"
+    ],
+    "title": "damage_modeling/docs/method/value_basis/solar_wind_value_breakdown.xlsx; Solar_Map rows 2:17.",
+    "link": "https://data.nrel.gov/submissions/304",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "VALUE_SOLAR_WORKBOOK"
+   }
+  ],
+  "references_from": "the parameters' own sources"
+ },
  "title": "Wildfire × Solar farm",
  "asset": {
   "slug": "solar",
@@ -201,6 +275,11 @@
  },
  "parameters_rows": [],
  "sources_for_curve": [],
+ "sources_resolved": [],
+ "plain_tiers": {
+  "shape": "our judgment",
+  "cost": "lab-tested"
+ },
  "occurrence": null,
  "review": {
   "entry_read_on": "2026-10-19",
@@ -212,7 +291,29 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release reviewed"
  },
- "summary": "Tracker and racking: piecewise linear on FSim conditional flame-length class (0 = no event); shape T4, cost T2.",
+ "summary": "Tracker and racking: a line through fixed points (piecewise linear), read against FSim conditional flame-length class (0 = no event); the shape is our judgment, the cost lab-tested.",
+ "rail_plain": {
+  "exists": {
+   "words": "Live · a screening model",
+   "code": "LIVE · screening"
+  },
+  "evidence": {
+   "words": "Evidence: lab-tested and our judgment",
+   "code": "shape T4 · cost T2",
+   "tiers": [
+    "T2",
+    "T4"
+   ]
+  },
+  "occurrence": {
+   "words": "Field reports: nobody has looked yet",
+   "code": "? not searched"
+  },
+  "review": {
+   "words": "Not yet reviewed by a person",
+   "code": "entry agent-read 2026-10-19 · release reviewed"
+  }
+ },
  "versions": [
   {
    "pin": "wildfire_solar@model_v1_0__docs_r4",

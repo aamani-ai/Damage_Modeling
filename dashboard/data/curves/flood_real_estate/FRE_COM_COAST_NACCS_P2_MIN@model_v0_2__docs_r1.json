@@ -847,6 +847,80 @@
  "selected_by": [],
  "variants": "water: river (Hazus DF 217) / coastal (NACCS, with low and high building-variant bounds)",
  "notes": [],
+ "caption": {
+  "what_it_says": "Retail: no loss until water depth above the first floor reaches about 0.1 ft; damage then rises, passing half of its maximum near 2.64 ft, and reaches a damage ratio of 0.48 (48 % of the part's value) by 9.72 ft.",
+  "how_sure": {
+   "shape": {
+    "tier": "T2",
+    "word": "lab-tested",
+    "basis": "Hazus DF 217 and NACCS published points"
+   },
+   "cost": {
+    "tier": "T2",
+    "word": "lab-tested",
+    "basis": "source loss ratios of replacement value"
+   },
+   "parameters": "7 parameters: 4 lab-tested (T2), 1 transferred (T3) and 2 our judgment (T4)",
+   "weakest": "T4"
+  },
+  "seen_in_field": {
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "state": "not_searched",
+   "href": null,
+   "words": "nobody has looked yet; no search log exists for this asset and hazard"
+  },
+  "main_references": [
+   {
+    "text": "FEMA. Hazus Flood Model Technical Manual, Hazus 7.0 (June 2025), Table 5-2 Default Damage Functions for…",
+    "ids": [
+     "FRE-S002"
+    ],
+    "title": "FEMA. Hazus Flood Model Technical Manual, Hazus 7.0 (June 2025), Table 5-2 Default Damage Functions for…",
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+    "link_kind": "url",
+    "locator": "Hazus 7.0 Table 5-2 pp. 5-3 to 5-6; Table 5-3 pp. 5-7 to 5-8 incl. note; Table 5-4 pp. 5-8 to 5-9 incl. notes; section 5.4.1.1.2.1 p. 5-10. Same Table 5-2 rows in Hazus 5.1 (pp. 5-4 to 5-5) and 6.1.",
+    "no_link_sentence": null,
+    "source_id": "FRE-S002"
+   },
+   {
+    "text": "FEMA Hazus flood depth-damage function library, Hazus 5.1 (as distributed in the CRAN hazus R package,…",
+    "ids": [
+     "FRE-S003"
+    ],
+    "title": "FEMA Hazus flood depth-damage function library, Hazus 5.1 (as distributed in the CRAN hazus R package,…",
+    "link": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
+    "link_kind": "url",
+    "locator": "DmgFnId 129, 217, 431, 341, 559 (structure, building)",
+    "no_link_sentence": null,
+    "source_id": "FRE-S003"
+   },
+   {
+    "text": "U.S. Army Corps of Engineers (2015)",
+    "ids": [
+     "FRE-S004"
+    ],
+    "title": "U.S. Army Corps of Engineers (2015)",
+    "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+    "link_kind": "url",
+    "locator": "Table 24 + Table 25 (pp. 61-62, Prototype 2 Commercial Engineered); Table 34 + Table 35 (pp. 67-68, Prototype 3 Commercial Non/Pre-Engineered); Table 55 + Table 56 (pp. 80-82, Prototype 5A Single-Story Residence No Basement); verification note pp. 80-81",
+    "no_link_sentence": null,
+    "source_id": "FRE-S004"
+   },
+   {
+    "text": "Plymouth / Salem coastal flood trial, methodology trial 5 and fit catalogue (Hazard_Modeling branch…",
+    "ids": [
+     "FRE-S008"
+    ],
+    "title": "Plymouth / Salem coastal flood trial, methodology trial 5 and fit catalogue (Hazard_Modeling branch…",
+    "link": null,
+    "link_kind": "none",
+    "locator": "plymouth_modelling_methodology.md sections 3, 6, 7; outputs/06_damage_curve_catalog",
+    "no_link_sentence": "no link in the register",
+    "source_id": "FRE-S008"
+   }
+  ],
+  "references_from": "the parameters' own sources"
+ },
  "title": "Flood × Real estate",
  "asset": {
   "slug": "real_estate",
@@ -885,6 +959,11 @@
  },
  "parameters_rows": [],
  "sources_for_curve": [],
+ "sources_resolved": [],
+ "plain_tiers": {
+  "shape": "lab-tested",
+  "cost": "lab-tested"
+ },
  "occurrence": null,
  "review": {
   "entry_read_on": "2026-10-19",
@@ -896,7 +975,28 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release not yet reviewed"
  },
- "summary": "Retail: piecewise linear on water depth above the first floor; shape T2, cost T2.",
+ "summary": "Retail: a line through fixed points (piecewise linear), read against water depth above the first floor; the shape is lab-tested, the cost lab-tested.",
+ "rail_plain": {
+  "exists": {
+   "words": "Proposal · not in the runtime index yet",
+   "code": "PROPOSAL · screening"
+  },
+  "evidence": {
+   "words": "Evidence: lab-tested",
+   "code": "shape T2 · cost T2",
+   "tiers": [
+    "T2"
+   ]
+  },
+  "occurrence": {
+   "words": "Field reports: nobody has looked yet",
+   "code": "? not searched"
+  },
+  "review": {
+   "words": "Not yet reviewed by a person",
+   "code": "entry agent-read 2026-10-19 · release not yet reviewed"
+  }
+ },
  "versions": [],
  "data_path": "curves/flood_real_estate/FRE_COM_COAST_NACCS_P2_MIN@model_v0_2__docs_r1.json"
 }

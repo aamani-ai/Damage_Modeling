@@ -952,6 +952,732 @@
  "gap_reason": null,
  "binding": null,
  "sampling_notes": [],
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Live · a screening model",
+    "code": "LIVE · screening"
+   },
+   "evidence": {
+    "words": "Evidence: transferred and our judgment",
+    "code": "shape T3 · cost T4",
+    "tiers": [
+     "T3",
+     "T4"
+    ]
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "? not searched"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release reviewed owner approved tower only screening release"
+   }
+  },
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "◐",
+    "label": "one hurricane wind event",
+    "short": "one hurricane wind event",
+    "detail": "exact turbine archetype and source-assumption IDs; the canonical 5 MW route also needs the tower-proxy policy, asset-profile and value-basis IDs"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "◐",
+    "label": "a dollar scenario",
+    "short": "a dollar scenario",
+    "detail": "only with an explicit tower value and exposure; covered loss capped at 0.16 of project TIV per event"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "◐",
+    "label": "yearly loss — only through Hazard",
+    "short": "yearly loss",
+    "detail": "consumer-computed with validated hurricane frequency and intensity, 0.16 occurrence and annual caps, and disclosure that 0.84 is withheld"
+   },
+   {
+    "key": "pml",
+    "mark": "◐",
+    "label": "PML, VaR, TVaR — only from Hazard's validated annual loss distribution",
+    "short": "PML, VaR and TVaR",
+    "detail": "consumer computable from validated frequency intensity coupling value and cap model"
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": {
+     "covered_usd": null,
+     "total_usd": null,
+     "share_covered": 0.16,
+     "covered_label": "16 % of project value",
+     "covered": [
+      {
+       "label": "Tower (owner-approved proxy basis)",
+       "value_usd": null,
+       "share": 0.16
+      }
+     ],
+     "no_curve": [
+      {
+       "label": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil, fieldwork and transport (withheld, not zero)",
+       "value_usd": null,
+       "sentence": "No curve — Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil, fieldwork and transport (withheld, not zero), an unstated share of the reference value, has no damage response yet."
+      }
+     ],
+     "left_out": [],
+     "source": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_2__docs_r2__curve_artifact.json",
+     "basis": "share of project TIV; dollars are the consumer's"
+    },
+    "not_covered": [
+     "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil, fieldwork and transport (withheld, not zero)"
+    ],
+    "withheld": [
+     {
+      "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "subsystem": "REPEATED_TURBINE",
+      "reasons": [
+       "SOURCE_NATIVE_ATOM_NOT_HARMONIZED_TO_STANDARD_EQUIPMENT_ASSEMBLY",
+       "OMITTED_NON_TOWER_FAILURE_MODES"
+      ],
+      "sentence": "Withheld: source native atom not harmonized to standard equipment assembly; omitted non tower failure modes."
+     },
+     {
+      "failure_unit_id": "WT_FOUNDATION",
+      "subsystem": "FOUNDATION",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit."
+     },
+     {
+      "failure_unit_id": "WT_PAD_MOUNTED_ELECTRICAL",
+      "subsystem": "PLANT_ELECTRICAL",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "ELECTRICAL_VALUE_SPLIT_REQUIRED"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; electrical value split required."
+     },
+     {
+      "failure_unit_id": "WT_COLLECTION_SYSTEM",
+      "subsystem": "PLANT_ELECTRICAL",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "LINE_NETWORK_EXPOSURE_REQUIRED"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; line network exposure required."
+     },
+     {
+      "failure_unit_id": "WT_GSU_SUBSTATION",
+      "subsystem": "SUBSTATION",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "FACILITY_LEVEL_EXPOSURE_REQUIRED"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; facility level exposure required."
+     },
+     {
+      "failure_unit_id": "WT_CONTROL_BUILDING_AND_SCADA",
+      "subsystem": "CONTROL",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit."
+     },
+     {
+      "failure_unit_id": "WT_CIVIL_INFRA",
+      "subsystem": "PLANT_CIVIL",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; mixed civil bucket requires split."
+     },
+     {
+      "failure_unit_id": "SUPPORT_FIELDWORK",
+      "subsystem": "SUPPORT",
+      "reasons": [
+       "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+       "NO_INDEPENDENT_FRAGILITY"
+      ],
+      "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+     },
+     {
+      "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+      "subsystem": "SUPPORT",
+      "reasons": [
+       "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+       "NO_INDEPENDENT_FRAGILITY"
+      ],
+      "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+     }
+    ]
+   },
+   "assumed": [
+    "No damage at or below 90 km/h is a source assumption, not measured",
+    "Damage-state cost ratios (1 MW 2/43/100%, 2.5 MW 4/48/100%, 3.3 MW 5/50/100%) are the source authors' assumptions",
+    "The source's own cost denominator is ambiguous and is kept quarantined",
+    "All non-tower parts are withheld, not zero"
+   ],
+   "missing": {
+    "mechanisms": [
+     "Blade and other non-tower turbine failure modes (the curve is driven by tower damage states only)"
+    ],
+    "out_of_scope": [
+     "Storm surge, flood, scour, debris, rain ingress, lightning and fire",
+     "Business interruption"
+    ]
+   },
+   "open_questions": [
+    "No target-matched 5 MW evidence",
+    "No separate rotor, blade, nacelle, foundation, electrical, substation, civil or support curves",
+    "Curve spread and damage-state probabilities not carried",
+    "No external financial-range validation of the annual results"
+   ],
+   "next_version": "Model v1.3 proposal: same curve, tower value re-based to 276 of 1,623 USD/kW (17.0% of a $162.3M physical TIV, $27.6M covered); not yet released"
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "What it covers",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Hurricane wind on wind farms: published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; the 3.3 MW / 100 m curve stands in for the canonical 5 MW turbine, tower value only. It names 1 part: Turbine tower. Outside its scope: storm surge, flood, scour, debris, rain ingress, lightning and fire and business interruption. Kinds of damage it does not include: blade and other non-tower turbine failure modes (the curve is driven by tower damage states only).",
+    "plain_fact": "1 part · 2 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the wind farm is split into 1 part: Turbine tower. 9 further units are named but withheld — wt turbine equipment assembly, wt foundation, wt pad mounted electrical, wt collection system, wt gsu substation, wt control building and scada, wt civil infra, support fieldwork and support transport logistics — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil, fieldwork and transport (withheld, not zero).",
+    "plain_fact": "1 part · 9 withheld"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "Damage is read against peak 3-second gust at 10 m (km/h). The curve is nothing below a threshold, then a Weibull-shaped rise (thresholded Weibull). The input, in the catalogue's words: peak 3-second gust at 10 m (km/h); zero at or below 90, evaluated 108 to 252; for the canonical 5 MW proxy 90 to 108 returns zero and above 252 returns the maximum (both flagged).",
+    "plain_fact": "a threshold, then a rise"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "4 sources set this cell: Probabilistic risk assessment on wind turbine towers subjected to cyclone-induced wind loads, Wind Energy 23(3), 528-546 (2020) (JAIMES_2020_TC_WIND_TURBINE / TCWW-S005), 20×5 MW, 100 MW, $140M; tower share 0.16, Owner scope correction authorizing the tower-only 0.16 binding (OWNER_SCOPE_CORRECTION_2026_08_14; governance, not evidence) and diagnoses 0.63 failure-unit/value mismatch. Of the 6 parameters, 2 are transferred (T3) and 4 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 4 sources have no link in the register.",
+    "plain_fact": "4 sources · transferred and our judgment"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "16 % of the project's value has a curve. No curve yet for rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil, fieldwork and transport (withheld, not zero) (84 % of the value).",
+    "plain_fact": "16 % of value"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "no audit found"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 4 curve records (model v1.2, docs r2). The write-up is tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_2__docs_r2.md. The workbook is damage_curve_records_tropical_cyclone_wind_wind__model_v1_2__docs_r2.xlsx. The cell folder holds 16 files, each with its SHA under Details.",
+    "plain_fact": "4 curve records"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "One hurricane wind event, a dollar scenario, yearly loss and PML, VaR and TVaR are available only under conditions the consumer (Hazard) checks. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "0 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "This build reproduced 39 of 39 known answers through the cell's evaluator (within 1e-12 on the damage ratio). The validation record says report. 1 outside check: Financial range check (Hazard repo): tower-value ceiling for wind-farm hurricane loss (shared lineage; no open industry loss figures found).",
+    "plain_fact": "39 of 39 reproduced"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: reviewed owner approved tower only screening release.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "Probabilistic risk assessment on wind turbine towers subjected to cyclone-induced wind loads, Wind Energy 23(3), 528-546 (2020) (JAIMES_2020_TC_WIND_TURBINE / TCWW-S005)",
+    "ids": [],
+    "title": "Probabilistic risk assessment on wind turbine towers subjected to cyclone-induced wind loads, Wind Energy 23(3), 528-546 (2020) (JAIMES_2020_TC_WIND_TURBINE / TCWW-S005)",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   },
+   {
+    "text": "Canonical wind-farm reference profile: 20 x 5 MW, $140M, tower share 0.16",
+    "ids": [
+     "CONUS_WIND_FARM_REFERENCE_V1"
+    ],
+    "title": "20×5 MW, 100 MW, $140M; tower share 0.16",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": "no link in the register",
+    "source_id": "CONUS_WIND_FARM_REFERENCE_V1"
+   },
+   {
+    "text": "Owner scope correction authorizing the tower-only 0.16 binding (OWNER_SCOPE_CORRECTION_2026_08_14; governance, not evidence)",
+    "ids": [],
+    "title": "Owner scope correction authorizing the tower-only 0.16 binding (OWNER_SCOPE_CORRECTION_2026_08_14; governance, not evidence)",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   },
+   {
+    "text": "Hazard hurricane wind-farm EAL review that found the 0.63 value mismatch",
+    "ids": [
+     "HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14"
+    ],
+    "title": "diagnoses 0.63 failure-unit/value mismatch",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": "no link in the register",
+    "source_id": "HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14"
+   },
+   {
+    "text": "NREL, Cost of Wind Energy Review 2024 (TCWW-S010; comparison only)",
+    "ids": [],
+    "title": "NREL, Cost of Wind Energy Review 2024 (TCWW-S010; comparison only)",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   }
+  ],
+  "sources": [
+   {
+    "id": "JAIMES_2020_TC_WIND_TURBINE",
+    "citation": "unchanged 3.3 MW/100 m curve and source-native axis",
+    "url": null,
+    "locator": null,
+    "role": "numeric source",
+    "tier": null,
+    "permitted": null,
+    "prohibited": "tower-state model; not target-matched to 5 MW",
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "unchanged 3.3 MW/100 m curve and source-native axis",
+    "no_link_sentence": "no link in the register"
+   },
+   {
+    "id": "OWNER_SCOPE_CORRECTION_2026_08_14",
+    "citation": "authorizes a tower-only 0.16 value binding",
+    "url": null,
+    "locator": null,
+    "role": "governance",
+    "tier": null,
+    "permitted": null,
+    "prohibited": "not empirical curve evidence",
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "authorizes a tower-only 0.16 value binding",
+    "no_link_sentence": "no link in the register"
+   },
+   {
+    "id": "CONUS_WIND_FARM_REFERENCE_V1",
+    "citation": "20×5 MW, 100 MW, $140M; tower share 0.16",
+    "url": null,
+    "locator": null,
+    "role": "consumer asset profile",
+    "tier": null,
+    "permitted": null,
+    "prohibited": "screening value grade",
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "20×5 MW, 100 MW, $140M; tower share 0.16",
+    "no_link_sentence": "no link in the register"
+   },
+   {
+    "id": "HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14",
+    "citation": "diagnoses 0.63 failure-unit/value mismatch",
+    "url": null,
+    "locator": null,
+    "role": "consumer measurement",
+    "tier": null,
+    "permitted": null,
+    "prohibited": "not a financial benchmark",
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "diagnoses 0.63 failure-unit/value mismatch",
+    "no_link_sentence": "no link in the register"
+   }
+  ],
+  "claims": [
+   {
+    "id": "TCWW12-C01",
+    "text": "The canonical proxy uses the unchanged Jaimes 3.3 MW numerical curve.",
+    "type": null,
+    "source_ids": [],
+    "locator": null,
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "owner-approved screening assumption",
+    "update_trigger": "target-matched 5 MW evidence"
+   },
+   {
+    "id": "TCWW12-C02",
+    "text": "The proxy remains on the source-defined tower exposure unit.",
+    "type": null,
+    "source_ids": [],
+    "locator": null,
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "hard contract",
+    "update_trigger": "qualified component-complete model"
+   },
+   {
+    "id": "TCWW12-C03",
+    "text": "Only tower value, 0.16 of project TIV, is covered.",
+    "type": null,
+    "source_ids": [],
+    "locator": null,
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "owner-approved value crosswalk",
+    "update_trigger": "improved tower valuation"
+   },
+   {
+    "id": "TCWW12-C04",
+    "text": "The other 0.84 is withheld, not zero.",
+    "type": null,
+    "source_ids": [],
+    "locator": null,
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "hard reporting contract",
+    "update_trigger": "additional governed curves"
+   },
+   {
+    "id": "TCWW12-C05",
+    "text": "The prior 0.63 equipment-assembly route is rejected.",
+    "type": null,
+    "source_ids": [],
+    "locator": null,
+    "tier": null,
+    "parameter_or_rule": null,
+    "status": "corrective contract",
+    "update_trigger": "never; superseded route"
+   }
+  ],
+  "parameters": [
+   {
+    "id": "Eq. 1 structural-response shape and fitted archetype parameters",
+    "name": "Eq. 1 structural-response shape and fitted archetype parameters",
+    "value": null,
+    "tier": "T3",
+    "source_ids": [
+     "TCWW-S005"
+    ],
+    "claim_ids": [],
+    "curve_id": "all_three",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Peer-reviewed analytical wind-field and finite-element fragility basis for three generic source archetypes.",
+    "update_trigger": "independent reproduction failure or better matched structural evidence"
+   },
+   {
+    "id": "V_zero_kmh = 90",
+    "name": "V_zero_kmh = 90",
+    "value": 90,
+    "tier": "T4",
+    "source_ids": [
+     "TCWW-S005"
+    ],
+    "claim_ids": [],
+    "curve_id": "all_three",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Explicit author assumption tied to typical cut-out speed; not an empirical immunity threshold.",
+    "update_trigger": "matched low-severity damage evidence"
+   },
+   {
+    "id": "DS1/DS2/DS3 economic consequence ratios",
+    "name": "DS1/DS2/DS3 economic consequence ratios",
+    "value": "1MW 2/43/100%; 2.5MW 4/48/100%; 3.3MW 5/50/100%",
+    "tier": "T4",
+    "source_ids": [
+     "TCWW-S005"
+    ],
+    "claim_ids": [],
+    "curve_id": "all_three",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Source-author assumptions used to construct the analytical mean vulnerability.",
+    "update_trigger": "claims, inspection disposition, and same-unit repair-cost calibration"
+   },
+   {
+    "id": "source model assumption set",
+    "name": "source model assumption set",
+    "value": "generic fixed-base steel tower; source-modelled parked rotor state; wind parallel to rotor; no yaw",
+    "tier": "T3",
+    "source_ids": [
+     "TCWW-S005"
+    ],
+    "claim_ids": [],
+    "curve_id": "all_three",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Direct model configuration with an internal pitch/feathering wording inconsistency.",
+    "update_trigger": "author clarification or matched control-state evidence"
+   },
+   {
+    "id": "source-native denominator quarantine",
+    "name": "source-native denominator quarantine",
+    "value": "JAIMES_CT_H_SOURCE_NATIVE_REPLACEMENT_PROXY",
+    "tier": "T4",
+    "source_ids": [
+     "TCWW-S005",
+     "TCWW-S010",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "claim_ids": [],
+    "curve_id": "all_three",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Prevents ambiguous source value scope from being silently mapped to modern CWER or TIV.",
+    "update_trigger": "independent valuation crosswalk approval"
+   },
+   {
+    "id": "all non-source-native failure units",
+    "name": "all non-source-native failure units",
+    "value": "withheld_not_zero",
+    "tier": "T4",
+    "source_ids": [
+     "TCWW-S008",
+     "TCWW-S014",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "claim_ids": [],
+    "curve_id": "none",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Field cases show omitted blade/component and BOP modes are material.",
+    "update_trigger": "unit-specific TC-wind vulnerability and value evidence"
+   }
+  ],
+  "parameters_plain": [
+   {
+    "id": "Eq. 1 structural-response shape and fitted archetype parameters",
+    "name": "Eq. 1 structural-response shape and fitted archetype parameters",
+    "value_text": "",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "TCWW-S005",
+      "title": "TCWW-S005",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all_three",
+    "reasoning": "Peer-reviewed analytical wind-field and finite-element fragility basis for three generic source archetypes.",
+    "update_trigger": "independent reproduction failure or better matched structural evidence",
+    "role": null
+   },
+   {
+    "id": "V_zero_kmh = 90",
+    "name": "V_zero_kmh = 90",
+    "value_text": "90",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "TCWW-S005",
+      "title": "TCWW-S005",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all_three",
+    "reasoning": "Explicit author assumption tied to typical cut-out speed; not an empirical immunity threshold.",
+    "update_trigger": "matched low-severity damage evidence",
+    "role": null
+   },
+   {
+    "id": "DS1/DS2/DS3 economic consequence ratios",
+    "name": "DS1/DS2/DS3 economic consequence ratios",
+    "value_text": "1MW 2/43/100%; 2.5MW 4/48/100%; 3.3MW 5/50/100%",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "TCWW-S005",
+      "title": "TCWW-S005",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all_three",
+    "reasoning": "Source-author assumptions used to construct the analytical mean vulnerability.",
+    "update_trigger": "claims, inspection disposition, and same-unit repair-cost calibration",
+    "role": null
+   },
+   {
+    "id": "source model assumption set",
+    "name": "source model assumption set",
+    "value_text": "generic fixed-base steel tower; source-modelled parked rotor state; wind parallel to rotor; no yaw",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "TCWW-S005",
+      "title": "TCWW-S005",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all_three",
+    "reasoning": "Direct model configuration with an internal pitch/feathering wording inconsistency.",
+    "update_trigger": "author clarification or matched control-state evidence",
+    "role": null
+   },
+   {
+    "id": "source-native denominator quarantine",
+    "name": "source-native denominator quarantine",
+    "value_text": "JAIMES_CT_H_SOURCE_NATIVE_REPLACEMENT_PROXY",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "TCWW-S005",
+      "title": "TCWW-S005",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     },
+     {
+      "id": "TCWW-S010",
+      "title": "TCWW-S010",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     },
+     {
+      "id": "GOVERNANCE_CONTRACT",
+      "title": "GOVERNANCE_CONTRACT",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all_three",
+    "reasoning": "Prevents ambiguous source value scope from being silently mapped to modern CWER or TIV.",
+    "update_trigger": "independent valuation crosswalk approval",
+    "role": null
+   },
+   {
+    "id": "all non-source-native failure units",
+    "name": "all non-source-native failure units",
+    "value_text": "withheld_not_zero",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "TCWW-S008",
+      "title": "TCWW-S008",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     },
+     {
+      "id": "TCWW-S014",
+      "title": "TCWW-S014",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     },
+     {
+      "id": "GOVERNANCE_CONTRACT",
+      "title": "GOVERNANCE_CONTRACT",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "none",
+    "reasoning": "Field cases show omitted blade/component and BOP modes are material.",
+    "update_trigger": "unit-specific TC-wind vulnerability and value evidence",
+    "role": null
+   }
+  ],
+  "evidence_provenance": {
+   "kind": "register",
+   "sheets": [],
+   "sections": [],
+   "unmatched": [],
+   "sentence": null,
+   "dossier": null,
+   "workbook": null
+  },
+  "link_counts": {
+   "total": 4,
+   "linked": 0,
+   "locator_only": 0,
+   "neither": 4,
+   "markers": 0,
+   "placeholders": 0
+  },
+  "extraction": null,
+  "tier_words": {
+   "shape": "transferred",
+   "cost": "our judgment"
+  }
+ },
  "build_findings": [
   {
    "check": "source_ids",
@@ -969,6 +1695,17 @@
     "parameter all non-source-native failure units → GOVERNANCE_CONTRACT"
    ],
    "sentence": "10 source ID references in this cell do not resolve in its current source register."
+  },
+  {
+   "check": "source_links",
+   "severity": "data",
+   "items": [
+    "JAIMES_2020_TC_WIND_TURBINE — unchanged 3.3 MW/100 m curve and source-native axis",
+    "OWNER_SCOPE_CORRECTION_2026_08_14 — authorizes a tower-only 0.16 value binding",
+    "CONUS_WIND_FARM_REFERENCE_V1 — 20×5 MW, 100 MW, $140M; tower share 0.16",
+    "HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14 — diagnoses 0.63 failure-unit/value mismatch"
+   ],
+   "sentence": "4 sources in this cell's register have neither a link nor a locator."
   }
  ]
 }

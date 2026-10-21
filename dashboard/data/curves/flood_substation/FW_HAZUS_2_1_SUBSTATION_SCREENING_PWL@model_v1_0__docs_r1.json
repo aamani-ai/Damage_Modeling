@@ -903,6 +903,68 @@
  "selected_by": [],
  "variants": "sub-peril: pluvial, riverine or coastal (same curve); Hazus class ESSL, ESSM or ESSH (same points)",
  "notes": [],
+ "caption": {
+  "what_it_says": "Whole station (fenced assembly): no loss until water depth above station grade (ft) at the facility point reaches about 0.31 ft; damage then rises, passing half of its maximum near 4.5 ft, and reaches a damage ratio of 0.15 (15 % of the part's value) by 9.88 ft. Above 10 ft the model withholds an answer instead of guessing.",
+  "how_sure": {
+   "shape": {
+    "tier": "T3",
+    "word": "transferred",
+    "basis": "Hazus Table 7.9 points, linear between them (Coastal use is a T4 transfer)"
+   },
+   "cost": {
+    "tier": "T4",
+    "word": "our judgment",
+    "basis": "Hazus loss ratio (T3) applied to a fenced value whose match to the Hazus denominator is T4 (SUB-A01)"
+   },
+   "parameters": "3 parameters: 1 transferred (T3) and 2 our judgment (T4)",
+   "weakest": "T4"
+  },
+  "seen_in_field": {
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "state": "not_searched",
+   "href": null,
+   "words": "nobody has looked yet; no search log exists for this asset and hazard"
+  },
+  "main_references": [
+   {
+    "text": "Table 7.9 pp7-20–7-21 exact assembly knots; source proof in flood_wind dossier",
+    "ids": [
+     "FW-S011"
+    ],
+    "title": "Table 7.9 pp7-20–7-21 exact assembly knots; source proof in flood_wind dossier",
+    "link": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "FW-S011"
+   },
+   {
+    "text": "Existing canonical point/value selection",
+    "ids": [
+     "SUB-A01"
+    ],
+    "title": "Existing canonical point/value selection",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+    "link_kind": "repo_file",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SUB-A01"
+   },
+   {
+    "text": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
+    "ids": [
+     "SUB-A02"
+    ],
+    "title": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/flood_substation/current/derivation.md",
+    "link_kind": "repo_file",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SUB-A02"
+   }
+  ],
+  "references_from": "the parameters' own sources"
+ },
  "title": "Flood × Substation",
  "asset": {
   "slug": "substation",
@@ -994,6 +1056,68 @@
   "SUB-A01",
   "SUB-A02"
  ],
+ "sources_resolved": [
+  {
+   "id": "FW-S011",
+   "citation": "Table 7.9 pp7-20–7-21 exact assembly knots; source proof in flood_wind dossier",
+   "url": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+   "locator": null,
+   "role": null,
+   "tier": null,
+   "permitted": null,
+   "prohibited": "Legacy table; not component or saline calibration",
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+   "link_kind": "url",
+   "title": "Table 7.9 pp7-20–7-21 exact assembly knots; source proof in flood_wind dossier",
+   "no_link_sentence": null
+  },
+  {
+   "id": "SUB-A01",
+   "citation": "Existing canonical point/value selection",
+   "url": "docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+   "locator": null,
+   "role": null,
+   "tier": null,
+   "permitted": null,
+   "prohibited": "Engineering proxy, not observed asset",
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "register",
+   "repo_path": "docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+   "doi": null,
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+   "link_kind": "repo_file",
+   "title": "Existing canonical point/value selection",
+   "no_link_sentence": null
+  },
+  {
+   "id": "SUB-A02",
+   "citation": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
+   "url": "derivation.md",
+   "locator": null,
+   "role": null,
+   "tier": null,
+   "permitted": null,
+   "prohibited": "T4 assumption; salinity/wave/contamination effects unknown, not zero damage",
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "register",
+   "repo_path": "docs/cells/flood_substation/current/derivation.md",
+   "doi": null,
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/flood_substation/current/derivation.md",
+   "link_kind": "repo_file",
+   "title": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
+   "no_link_sentence": null
+  }
+ ],
+ "plain_tiers": {
+  "shape": "transferred",
+  "cost": "our judgment"
+ },
  "occurrence": null,
  "review": {
   "entry_read_on": "2026-10-19",
@@ -1005,7 +1129,29 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release agent reviewed screening under owner delivery direction"
  },
- "summary": "Whole station (fenced assembly): piecewise linear on water depth above station grade (ft) at the facility point; shape T3, cost T4.",
+ "summary": "Whole station (fenced assembly): a line through fixed points (piecewise linear), read against water depth above station grade (ft) at the facility point; the shape is transferred, the cost our judgment.",
+ "rail_plain": {
+  "exists": {
+   "words": "Live · in the runtime index",
+   "code": "LIVE"
+  },
+  "evidence": {
+   "words": "Evidence: transferred and our judgment",
+   "code": "shape T3 · cost T4",
+   "tiers": [
+    "T3",
+    "T4"
+   ]
+  },
+  "occurrence": {
+   "words": "Field reports: nobody has looked yet",
+   "code": "? not searched"
+  },
+  "review": {
+   "words": "Not yet reviewed by a person",
+   "code": "entry agent-read 2026-10-19 · release agent reviewed screening under owner delivery direction"
+  }
+ },
  "versions": [
   {
    "pin": "flood_substation@model_v1_0__docs_r1",

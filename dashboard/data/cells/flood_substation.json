@@ -848,5 +848,506 @@
  "sampling_notes": [
   "The flood × wind evaluator does not accept this artifact (it reads cell-specific contract fields), so the generic piecewise-linear evaluator samples the same Hazus-MH 2.1 Table 7.9 knots inside the record's declared range."
  ],
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Live · in the runtime index",
+    "code": "LIVE"
+   },
+   "evidence": {
+    "words": "Evidence: transferred and our judgment",
+    "code": "shape T3 · cost T4",
+    "tiers": [
+     "T3",
+     "T4"
+    ]
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "? not searched"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release agent reviewed screening under owner delivery direction"
+   }
+  },
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "◐",
+    "label": "one flood event",
+    "short": "one flood event",
+    "detail": "whole-station damage ratio for a stated sub-peril and a depth of 0 to 10 ft; deeper or missing depth returns no value"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "✓",
+    "label": "a dollar scenario (give the unit value)",
+    "short": "a dollar scenario",
+    "detail": "damage ratio times $27.35M fenced value, no component terms added"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "◐",
+    "label": "yearly loss — only through Hazard",
+    "short": "yearly loss",
+    "detail": "hazard computes it only after frequency, missing-mass, station cap and tail checks pass; screening composite, not complete risk or portfolio total"
+   },
+   {
+    "key": "pml",
+    "mark": "◐",
+    "label": "PML, VaR, TVaR — only from Hazard's validated annual loss distribution",
+    "short": "PML, VaR and TVaR",
+    "detail": "consumer computable from validated frequency intensity coupling value and cap model"
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": null,
+    "not_covered": [],
+    "withheld": []
+   },
+   "assumed": [
+    "One canonical 345/138 kV station and its fenced value stand in for any station (SUB-A01)",
+    "Coastal water uses the same depth curve with no salt or wave adjustment (SUB-A02)",
+    "Civil and site works counted inside the fenced value is an engineering interpretation"
+   ],
+   "missing": {
+    "mechanisms": [
+     "Salinity and contamination",
+     "Waves",
+     "Velocity and scour",
+     "Debris"
+    ],
+    "out_of_scope": [
+     "External access road and project support allowances ($3.06M, outside the fenced value; unmodeled, not zero)",
+     "Land and anything outside the fence",
+     "Movable contents, outage and business interruption"
+    ]
+   },
+   "open_questions": [
+    "Equipment-local curves and heights deferred to the component research backlog",
+    "No qualified response above 10 ft or for coastal salt and wave effects",
+    "National completion of Hazard's cloud run still to be verified"
+   ],
+   "next_version": null
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "What it covers",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Flood on substations: FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage ratios used as published (0 to 15% over 0 to 10 ft), the same table already carried by the flood_wind cell. It names 1 part: Whole station (fenced assembly). Outside its scope: external access road and project support allowances ($3.06M, outside the fenced value; unmodeled, not zero), land and anything outside the fence and movable contents, outage and business interruption. Kinds of damage it does not include: salinity and contamination, waves, velocity and scour and debris.",
+    "plain_fact": "1 part · 3 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the substation is split into 1 part: Whole station (fenced assembly).",
+    "plain_fact": "1 part"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "Damage is read against water depth above station grade (ft) at the facility point (ft). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: water depth above station grade (ft) at the facility point, 0 to 10 ft; sub-peril (pluvial, riverine or coastal) must be stated; deeper or missing depth is withheld.",
+    "plain_fact": "a line through points"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "4 sources set this cell: Table 7.9 pp7-20–7-21 exact assembly knots; source proof in flood_wind dossier, Hazus7 electric-power losses disabled; inherited pinned evidence, Existing canonical point/value selection and Owner-selected screening scope; engineering-selected equal depth response for Coastal. Of the 3 parameters, 1 is transferred (T3) and 2 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder.",
+    "plain_fact": "4 sources · transferred and our judgment"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "The damage ratio is a share of replacement value of the same fenced station, $27,353,236.37 (MISO MTEP24 published table amounts, no extra uplift), applied once. The files state no plant-level dollar figure for this asset.",
+    "plain_fact": "no plant value stated"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "The seven-step audit is written in the dossier with 7 rows. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "7 steps in the write-up"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 1 curve record (model v1.0, docs r1). The write-up is derivation.md. The cell folder holds 11 files, each with its SHA under Details.",
+    "plain_fact": "1 curve record"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "It can give a dollar scenario. One flood event, yearly loss and PML, VaR and TVaR are available only under conditions the consumer (Hazard) checks. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "1 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "This build reproduced 16 of 16 known answers through the cell's evaluator (within 1e-12 on the damage ratio). The validation record says report (2026-10-16). No outside check has been made yet.",
+    "plain_fact": "16 of 16 reproduced"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: agent reviewed screening under owner delivery direction.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "FEMA, Hazus-MH 2.1 Flood Technical Manual, Table 7.9",
+    "ids": [
+     "FW-S011"
+    ],
+    "title": "Table 7.9 pp7-20–7-21 exact assembly knots; source proof in flood_wind dossier",
+    "link": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "FW-S011"
+   },
+   {
+    "text": "flood_wind source register: current Hazus electric-power losses disabled",
+    "ids": [
+     "FW-S012"
+    ],
+    "title": "Hazus7 electric-power losses disabled; inherited pinned evidence",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
+    "link_kind": "repo_file",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "FW-S012"
+   },
+   {
+    "text": "Substation flood consumer binding: canonical station and value",
+    "ids": [
+     "SUB-A01"
+    ],
+    "title": "Existing canonical point/value selection",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+    "link_kind": "repo_file",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SUB-A01"
+   },
+   {
+    "text": "Owner-selected screening scope and Coastal equal-depth transfer",
+    "ids": [
+     "SUB-A02"
+    ],
+    "title": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/flood_substation/current/derivation.md",
+    "link_kind": "repo_file",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SUB-A02"
+   }
+  ],
+  "sources": [
+   {
+    "id": "FW-S011",
+    "citation": "Table 7.9 pp7-20–7-21 exact assembly knots; source proof in flood_wind dossier",
+    "url": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+    "locator": null,
+    "role": null,
+    "tier": null,
+    "permitted": null,
+    "prohibited": "Legacy table; not component or saline calibration",
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+    "link_kind": "url",
+    "title": "Table 7.9 pp7-20–7-21 exact assembly knots; source proof in flood_wind dossier",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FW-S012",
+    "citation": "Hazus7 electric-power losses disabled; inherited pinned evidence",
+    "url": "docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
+    "locator": null,
+    "role": null,
+    "tier": null,
+    "permitted": null,
+    "prohibited": "Does not establish current enabled Hazus loss model",
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "register",
+    "repo_path": "docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
+    "link_kind": "repo_file",
+    "title": "Hazus7 electric-power losses disabled; inherited pinned evidence",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SUB-A01",
+    "citation": "Existing canonical point/value selection",
+    "url": "docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+    "locator": null,
+    "role": null,
+    "tier": null,
+    "permitted": null,
+    "prohibited": "Engineering proxy, not observed asset",
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "register",
+    "repo_path": "docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+    "link_kind": "repo_file",
+    "title": "Existing canonical point/value selection",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SUB-A02",
+    "citation": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
+    "url": "derivation.md",
+    "locator": null,
+    "role": null,
+    "tier": null,
+    "permitted": null,
+    "prohibited": "T4 assumption; salinity/wave/contamination effects unknown, not zero damage",
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "register",
+    "repo_path": "docs/cells/flood_substation/current/derivation.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/flood_substation/current/derivation.md",
+    "link_kind": "repo_file",
+    "title": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
+    "no_link_sentence": null
+   }
+  ],
+  "claims": [
+   {
+    "id": "SUB-C01",
+    "text": "0–10 ft source knots",
+    "type": null,
+    "source_ids": [
+     "FW-S011"
+    ],
+    "locator": null,
+    "tier": null,
+    "parameter_or_rule": "0–10 ft source knots",
+    "status": null,
+    "update_trigger": "Qualified updated economic source"
+   },
+   {
+    "id": "SUB-C02",
+    "text": "No enabled current Hazus electric loss claim",
+    "type": null,
+    "source_ids": [
+     "FW-S012"
+    ],
+    "locator": null,
+    "tier": null,
+    "parameter_or_rule": "No enabled current Hazus electric loss claim",
+    "status": null,
+    "update_trigger": "FEMA implementation change"
+   },
+   {
+    "id": "SUB-C03",
+    "text": "Point and fenced value",
+    "type": null,
+    "source_ids": [
+     "SUB-A01"
+    ],
+    "locator": null,
+    "tier": null,
+    "parameter_or_rule": "Point and fenced value",
+    "status": null,
+    "update_trigger": "Component inventory or observed asset"
+   },
+   {
+    "id": "SUB-C04",
+    "text": "Coastal equal-depth response transfer",
+    "type": null,
+    "source_ids": [
+     "SUB-A02"
+    ],
+    "locator": null,
+    "tier": null,
+    "parameter_or_rule": "Coastal equal-depth response transfer",
+    "status": null,
+    "update_trigger": "Qualified coastal economic response"
+   },
+   {
+    "id": "SUB-C05",
+    "text": "No above-domain curve",
+    "type": null,
+    "source_ids": [
+     "FW-S011"
+    ],
+    "locator": null,
+    "tier": null,
+    "parameter_or_rule": "No above-domain curve",
+    "status": null,
+    "update_trigger": "Qualified extended depth table"
+   },
+   {
+    "id": "SUB-C06",
+    "text": "Annual calculation conditional",
+    "type": null,
+    "source_ids": [
+     "SUB-A01"
+    ],
+    "locator": null,
+    "tier": null,
+    "parameter_or_rule": "Annual calculation conditional",
+    "status": null,
+    "update_trigger": "Consumer probability/cap failure"
+   }
+  ],
+  "parameters": [
+   {
+    "id": "source knots and linear interpolation",
+    "name": "source knots and linear interpolation",
+    "value": "unchanged 0–10 ft source table",
+    "tier": "T3",
+    "source_ids": [
+     "FW-S011"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": null,
+    "update_trigger": null
+   },
+   {
+    "id": "canonical station and point exposure",
+    "name": "canonical station and point exposure",
+    "value": "existing author-selected profile/value binding",
+    "tier": "T4",
+    "source_ids": [
+     "SUB-A01"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": null,
+    "update_trigger": null
+   },
+   {
+    "id": "coastal depth-response transfer",
+    "name": "coastal depth-response transfer",
+    "value": "same inundation-only curve, no salinity/wave modifier; no full surge claim",
+    "tier": "T4",
+    "source_ids": [
+     "SUB-A02"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": null,
+    "update_trigger": null
+   }
+  ],
+  "parameters_plain": [
+   {
+    "id": "source knots and linear interpolation",
+    "name": "source knots and linear interpolation",
+    "value_text": "unchanged 0–10 ft source table",
+    "tier": "T3",
+    "tier_word": "transferred",
+    "sources": [
+     {
+      "id": "FW-S011",
+      "title": "Table 7.9 pp7-20–7-21 exact assembly knots; source proof in flood_wind dossier",
+      "link": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": null,
+    "update_trigger": null,
+    "role": null
+   },
+   {
+    "id": "canonical station and point exposure",
+    "name": "canonical station and point exposure",
+    "value_text": "existing author-selected profile/value binding",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "SUB-A01",
+      "title": "Existing canonical point/value selection",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": null,
+    "update_trigger": null,
+    "role": null
+   },
+   {
+    "id": "coastal depth-response transfer",
+    "name": "coastal depth-response transfer",
+    "value_text": "same inundation-only curve, no salinity/wave modifier; no full surge claim",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "SUB-A02",
+      "title": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/cells/flood_substation/current/derivation.md",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": null,
+    "update_trigger": null,
+    "role": null
+   }
+  ],
+  "evidence_provenance": {
+   "kind": "register",
+   "sheets": [],
+   "sections": [],
+   "unmatched": [],
+   "sentence": null,
+   "dossier": null,
+   "workbook": null
+  },
+  "link_counts": {
+   "total": 4,
+   "linked": 4,
+   "locator_only": 0,
+   "neither": 0,
+   "markers": 0,
+   "placeholders": 0
+  },
+  "extraction": null,
+  "tier_words": {
+   "shape": "transferred",
+   "cost": "our judgment"
+  }
+ },
  "build_findings": []
 }

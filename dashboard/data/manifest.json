@@ -1,8 +1,8 @@
 {
  "schema": "damage_dashboard_manifest.v0",
- "built_at": "2026-10-20T19:41:24+00:00",
- "commit": "3ea7e02",
- "commit_full": "3ea7e021f2b42fed0899b249a048a0bf51ec17b4",
+ "built_at": "2026-10-21T11:03:02+00:00",
+ "commit": "2efd6c3",
+ "commit_full": "2efd6c33a6200cad6b18c5c8af9860a688b4bf38",
  "catalogue_commit_note": "catalogue entries and artifacts read at this commit; every number traces to a file at it",
  "counts": {
   "live": 13,
@@ -482,7 +482,7 @@
    "n_drawn": 8,
    "outside_checks": 1,
    "chain_core_as_files": 3,
-   "generation": "prose",
+   "generation": "skill",
    "aria_label": "Flood × Solar farm, live, partial, shape T3–4, cost T3–4, not searched",
    "href": "/cells/flood_solar"
   },
@@ -795,7 +795,7 @@
    "n_drawn": 3,
    "outside_checks": 1,
    "chain_core_as_files": 3,
-   "generation": "prose",
+   "generation": "skill",
    "aria_label": "Hail × Solar farm, live, partial, shape T2, cost T2, not searched",
    "href": "/cells/hail_solar"
   },
@@ -980,7 +980,7 @@
    "n_drawn": 5,
    "outside_checks": 0,
    "chain_core_as_files": 3,
-   "generation": "prose",
+   "generation": "skill",
    "aria_label": "Convective wind × Solar farm, live, partial, shape T4, cost T4, not searched",
    "href": "/cells/strong_wind_solar"
   },
@@ -1739,7 +1739,7 @@
    "n_drawn": 5,
    "outside_checks": 1,
    "chain_core_as_files": 3,
-   "generation": "prose",
+   "generation": "skill",
    "aria_label": "Convective wind × Wind farm, live, partial, shape T4, cost T3–4, not searched",
    "href": "/cells/wind_tornado_wind"
   }
@@ -2020,58 +2020,98 @@
   "T3": "engineering proxy or adjacent evidence",
   "T4": "placeholder or expert judgment"
  },
+ "tier_words": {
+  "T1": "field-calibrated",
+  "T2": "lab-tested",
+  "T3": "transferred",
+  "T4": "our judgment"
+ },
+ "tier_plain": {
+  "T1": "field-calibrated",
+  "T2": "lab-tested or a standard",
+  "T3": "transferred",
+  "T4": "our judgment"
+ },
+ "tier_meaning": {
+  "T1": "field-calibrated: claims or field data for this kind of asset",
+  "T2": "lab-tested or a standard: a public test, standard or physics",
+  "T3": "transferred: an engineering proxy or evidence from an adjacent asset",
+  "T4": "our judgment: a placeholder or expert judgment, to be replaced when evidence arrives"
+ },
  "stations": [
   {
    "id": "scope",
    "label": "Scope",
-   "gate": "A"
+   "gate": "A",
+   "name": "What it covers",
+   "meaning": "Which hazard, which asset, which parts; what is left out"
   },
   {
    "id": "units",
    "label": "Units",
-   "gate": "A · B2"
+   "gate": "A · B2",
+   "name": "What breaks",
+   "meaning": "The parts of the plant the hazard damages, each with its own curve"
   },
   {
    "id": "axis_form",
    "label": "Axis · form",
-   "gate": "C"
+   "gate": "C",
+   "name": "How damage is measured",
+   "meaning": "The hazard intensity on the x-axis and the shape of the curve"
   },
   {
    "id": "evidence",
    "label": "Evidence",
-   "gate": "B"
+   "gate": "B",
+   "name": "Where the numbers come from",
+   "meaning": "The sources, what was taken from each, and how sure we are"
   },
   {
    "id": "value",
    "label": "Value",
-   "gate": "B2"
+   "gate": "B2",
+   "name": "What it is worth",
+   "meaning": "The share of the plant's value the curves cover"
   },
   {
    "id": "audit",
    "label": "Audit",
-   "gate": "B2"
+   "gate": "B2",
+   "name": "The audit",
+   "meaning": "The seven checks a curve passes before release"
   },
   {
    "id": "artifact",
    "label": "Artifact",
-   "gate": "C"
+   "gate": "C",
+   "name": "The files",
+   "meaning": "The runtime file, the write-up and the workbook"
   },
   {
    "id": "capability",
    "label": "Capability",
-   "gate": "D"
+   "gate": "D",
+   "name": "What it can output",
+   "meaning": "What a consumer may compute with this curve"
   },
   {
    "id": "proof",
    "label": "Proof",
-   "gate": "E"
+   "gate": "E",
+   "name": "How it was tested",
+   "meaning": "The known answers this build reproduced"
   },
   {
    "id": "field_review",
    "label": "Field · review",
-   "gate": "—"
+   "gate": "—",
+   "name": "Seen in the field, and reviewed",
+   "meaning": "Field reports of this damage, and who has read the entry"
   }
  ],
+ "no_link_words": "no link in the register",
+ "not_yet_extracted_sentence": "Sources are in the dossier prose and the workbook; not yet extracted — open the dossier.",
  "lenses": [
   "status",
   "evidence",
@@ -2082,6 +2122,193 @@
  "repo": {
   "url": "https://github.com/aamani-ai/Damage_Modeling",
   "blob": "https://github.com/aamani-ai/Damage_Modeling/blob/main"
+ },
+ "review_queue": {
+  "items": [
+   {
+    "kind": "source_without_link",
+    "entry_id": "tropical_cyclone_wind_wind",
+    "text": "JAIMES_2020_TC_WIND_TURBINE — unchanged 3.3 MW/100 m curve and source-native axis",
+    "href": "/cells/tropical_cyclone_wind_wind?station=evidence",
+    "words": "no link in the register"
+   },
+   {
+    "kind": "source_without_link",
+    "entry_id": "tropical_cyclone_wind_wind",
+    "text": "OWNER_SCOPE_CORRECTION_2026_08_14 — authorizes a tower-only 0.16 value binding",
+    "href": "/cells/tropical_cyclone_wind_wind?station=evidence",
+    "words": "no link in the register"
+   },
+   {
+    "kind": "source_without_link",
+    "entry_id": "tropical_cyclone_wind_wind",
+    "text": "CONUS_WIND_FARM_REFERENCE_V1 — 20×5 MW, 100 MW, $140M; tower share 0.16",
+    "href": "/cells/tropical_cyclone_wind_wind?station=evidence",
+    "words": "no link in the register"
+   },
+   {
+    "kind": "source_without_link",
+    "entry_id": "tropical_cyclone_wind_wind",
+    "text": "HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14 — diagnoses 0.63 failure-unit/value mismatch",
+    "href": "/cells/tropical_cyclone_wind_wind?station=evidence",
+    "words": "no link in the register"
+   },
+   {
+    "kind": "source_without_link",
+    "entry_id": "wildfire_solar",
+    "text": "SOURCE_REVIEW_2026_07_09 — Wildfire × solar bounded public-evidence review and reproducibility log; review date 2026-07-09.",
+    "href": "/cells/wildfire_solar?station=evidence",
+    "words": "no link in the register"
+   },
+   {
+    "kind": "sources_locator_only",
+    "entry_id": "convective_wind_real_estate",
+    "text": "1 source with a locator but no link",
+    "href": "/cells/convective_wind_real_estate?station=evidence",
+    "words": "no link in the register"
+   },
+   {
+    "kind": "sources_locator_only",
+    "entry_id": "flood_bess",
+    "text": "1 source with a locator but no link",
+    "href": "/cells/flood_bess?station=evidence",
+    "words": "no link in the register"
+   },
+   {
+    "kind": "sources_locator_only",
+    "entry_id": "flood_real_estate",
+    "text": "1 source with a locator but no link",
+    "href": "/cells/flood_real_estate?station=evidence",
+    "words": "no link in the register"
+   },
+   {
+    "kind": "tier_id_unmatched",
+    "entry_id": "flood_solar",
+    "text": "tier-table source IDs with no document in the workbook or dossier: ANZGEO_2023_SCOUR_CONTEXT",
+    "href": "/cells/flood_solar?station=evidence",
+    "words": "no document behind a source ID"
+   },
+   {
+    "kind": "extracted_sources",
+    "entry_id": "flood_solar",
+    "text": "1 source ID in this cell's tier table matches no document in the workbook or dossier.",
+    "href": "/cells/flood_solar?station=evidence",
+    "words": "a build check failed here"
+   },
+   {
+    "kind": "sources_locator_only",
+    "entry_id": "hail_real_estate",
+    "text": "1 source with a locator but no link",
+    "href": "/cells/hail_real_estate?station=evidence",
+    "words": "no link in the register"
+   },
+   {
+    "kind": "sources_locator_only",
+    "entry_id": "hail_solar",
+    "text": "1 source with a locator but no link",
+    "href": "/cells/hail_solar?station=evidence",
+    "words": "no link in the register"
+   },
+   {
+    "kind": "tier_id_unmatched",
+    "entry_id": "strong_wind_solar",
+    "text": "tier-table source IDs with no document in the workbook or dossier: WIND_PRESSURE_PHYSICS",
+    "href": "/cells/strong_wind_solar?station=evidence",
+    "words": "no document behind a source ID"
+   },
+   {
+    "kind": "extracted_sources",
+    "entry_id": "strong_wind_solar",
+    "text": "1 source ID in this cell's tier table matches no document in the workbook or dossier.",
+    "href": "/cells/strong_wind_solar?station=evidence",
+    "words": "a build check failed here"
+   },
+   {
+    "kind": "sources_locator_only",
+    "entry_id": "tropical_cyclone_wind_real_estate",
+    "text": "5 sources with a locator but no link",
+    "href": "/cells/tropical_cyclone_wind_real_estate?station=evidence",
+    "words": "no link in the register"
+   },
+   {
+    "kind": "sources_locator_only",
+    "entry_id": "tropical_cyclone_wind_solar",
+    "text": "1 source with a locator but no link",
+    "href": "/cells/tropical_cyclone_wind_solar?station=evidence",
+    "words": "no link in the register"
+   },
+   {
+    "kind": "source_ids",
+    "entry_id": "tropical_cyclone_wind_solar",
+    "text": "2 source ID references in this cell do not resolve in its current source register.",
+    "href": "/cells/tropical_cyclone_wind_solar?station=evidence",
+    "words": "a build check failed here"
+   },
+   {
+    "kind": "source_ids",
+    "entry_id": "tropical_cyclone_wind_wind",
+    "text": "10 source ID references in this cell do not resolve in its current source register.",
+    "href": "/cells/tropical_cyclone_wind_wind?station=evidence",
+    "words": "a build check failed here"
+   },
+   {
+    "kind": "source_links",
+    "entry_id": "tropical_cyclone_wind_wind",
+    "text": "4 sources in this cell's register have neither a link nor a locator.",
+    "href": "/cells/tropical_cyclone_wind_wind?station=evidence",
+    "words": "a build check failed here"
+   },
+   {
+    "kind": "sources_locator_only",
+    "entry_id": "wildfire_real_estate",
+    "text": "1 source with a locator but no link",
+    "href": "/cells/wildfire_real_estate?station=evidence",
+    "words": "no link in the register"
+   },
+   {
+    "kind": "source_ids",
+    "entry_id": "wildfire_solar",
+    "text": "10 source ID references in this cell do not resolve in its current source register.",
+    "href": "/cells/wildfire_solar?station=evidence",
+    "words": "a build check failed here"
+   },
+   {
+    "kind": "source_links",
+    "entry_id": "wildfire_solar",
+    "text": "1 source in this cell's register has neither a link nor a locator.",
+    "href": "/cells/wildfire_solar?station=evidence",
+    "words": "a build check failed here"
+   },
+   {
+    "kind": "sources_locator_only",
+    "entry_id": "wildfire_wind",
+    "text": "1 source with a locator but no link",
+    "href": "/cells/wildfire_wind?station=evidence",
+    "words": "no link in the register"
+   },
+   {
+    "kind": "tier_id_unmatched",
+    "entry_id": "wind_tornado_wind",
+    "text": "tier-table source IDs with no document in the workbook or dossier: AWN_15_DECLARED_BRIDGE",
+    "href": "/cells/wind_tornado_wind?station=evidence",
+    "words": "no document behind a source ID"
+   },
+   {
+    "kind": "extracted_sources",
+    "entry_id": "wind_tornado_wind",
+    "text": "1 source ID in this cell's tier table matches no document in the workbook or dossier.",
+    "href": "/cells/wind_tornado_wind?station=evidence",
+    "words": "a build check failed here"
+   }
+  ],
+  "counts": {
+   "extracted_sources": 3,
+   "source_ids": 3,
+   "source_links": 2,
+   "source_without_link": 5,
+   "sources_locator_only": 9,
+   "tier_id_unmatched": 3
+  }
  },
  "build_checks": [
   {
@@ -2106,6 +2333,13 @@
    "summary": "sha 7e96ff9 · 58 rows"
   },
   {
+   "id": "substation_budget",
+   "name": "Hazard's substation reference budget SHA equals the substation flood binding's pin",
+   "ok": true,
+   "severity": "hard",
+   "summary": "sha 831a020 · 28 rows"
+  },
+  {
    "id": "curves",
    "name": "every curve sampled or listed as no evaluator",
    "ok": true,
@@ -2125,6 +2359,27 @@
    "ok": false,
    "severity": "data",
    "summary": "22 unresolved in tropical_cyclone_wind_solar, tropical_cyclone_wind_wind, wildfire_solar"
+  },
+  {
+   "id": "source_links",
+   "name": "every source has either a link or a locator",
+   "ok": false,
+   "severity": "data",
+   "summary": "5 sources with neither, in tropical_cyclone_wind_wind, wildfire_solar"
+  },
+  {
+   "id": "extracted_sources",
+   "name": "every tier-table source ID of an older cell matches an extracted source",
+   "ok": false,
+   "severity": "data",
+   "summary": "3 unmatched in flood_solar, strong_wind_solar, wind_tornado_wind"
+  },
+  {
+   "id": "plain_layer",
+   "name": "every drawn curve has a four-part caption and every cell its ten station paragraphs",
+   "ok": true,
+   "severity": "hard",
+   "summary": "captions and paragraphs complete"
   },
   {
    "id": "domain",

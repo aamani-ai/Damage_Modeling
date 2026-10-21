@@ -98,12 +98,16 @@ def occurrence_sentence(hazard_label: str, asset_label: str, buckets: dict[str, 
 
 
 def dossier_sentence(curve: dict[str, Any], hazard_label: str, occurrence_state_sentence: str | None) -> str:
+    from .plain import FORM_WORDS, tier_words
     part = curve.get("part") or curve.get("failure_unit_id")
-    form = curve.get("form_label") or (curve.get("curve_form") or "").replace("_", " ")
+    raw = curve.get("form_label") or (curve.get("curve_form") or "")
+    form = FORM_WORDS.get(raw, raw.replace("_", " "))
+    if "binary" in str(curve.get("x_axis_id") or ""):
+        form = FORM_WORDS["binary_state"]
     tiers = curve.get("tiers") or {}
-    s = f"{part}: {form} on {curve['axis'].get('label', 'its native axis')}"
+    s = f"{part}: {form}, read against {curve['axis'].get('label', 'its native axis')}"
     if tiers.get("shape") or tiers.get("cost"):
-        s += f"; shape {tiers.get('shape') or '–'}, cost {tiers.get('cost') or '–'}"
+        s += f"; the shape is {tier_words(tiers.get('shape'))}, the cost {tier_words(tiers.get('cost'))}"
     if not curve.get("drawn"):
         s += "; not drawn here"
     if occurrence_state_sentence:

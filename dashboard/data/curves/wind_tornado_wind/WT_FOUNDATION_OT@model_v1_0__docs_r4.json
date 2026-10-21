@@ -2107,6 +2107,92 @@
  "selected_by": [],
  "variants": "straight-line wind or tornado direct hit (D50 shift -0.08); IEC class I, II or III",
  "notes": [],
+ "caption": {
+  "what_it_says": "Foundation: no loss until gust ratio V₃ₛ,hub / Ve50 (IEC class) reaches about 1.09; damage then rises, passing half of its maximum near 1.62, and reaches a damage ratio of 0.65 (65 % of the part's value) by 2.13. The tornado variant reaches half of its maximum near 1.54.",
+  "how_sure": {
+   "shape": {
+    "tier": "T4",
+    "word": "our judgment",
+    "basis": "Engineering-fit D50 ratio and steepness"
+   },
+   "cost": {
+    "tier": "T3",
+    "word": "transferred",
+    "basis": "max_DR 0.65 cap T3; the 0.062 value share is not tiered by the cell"
+   },
+   "parameters": "6 parameters: 1 lab-tested (T2), 2 transferred (T3) and 3 our judgment (T4)",
+   "weakest": "T4"
+  },
+  "seen_in_field": {
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "state": "not_searched",
+   "href": null,
+   "words": "nobody has looked yet; no search log exists for this asset and hazard"
+  },
+  "main_references": [
+   {
+    "text": "solar_wind_value_breakdown.xlsx",
+    "ids": [
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "title": "solar_wind_value_breakdown.xlsx",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "link_kind": "repo_file",
+    "locator": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "no_link_sentence": null,
+    "source_id": "SOLAR_WIND_VALUE_BREAKDOWN"
+   },
+   {
+    "text": "IEC extreme wind equations summary",
+    "ids": [
+     "SRC_ASHES_IEC_EWM"
+    ],
+    "title": "IEC extreme wind equations summary",
+    "link": "https://www.simis.io/docs/wind-iec-extreme-events",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SRC_ASHES_IEC_EWM"
+   },
+   {
+    "text": "Wind turbines severe weather controls and design context",
+    "ids": [
+     "SRC_DOE_WIND_STORMS"
+    ],
+    "title": "Wind turbines severe weather controls and design context",
+    "link": "https://www.energy.gov/cmei/wind/articles/how-do-wind-turbines-survive-severe-weather-and-storms",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SRC_DOE_WIND_STORMS"
+   },
+   {
+    "text": "IEC 61400-1 turbine safety standard explainer",
+    "ids": [
+     "SRC_DTU_IEC"
+    ],
+    "title": "IEC 61400-1 turbine safety standard explainer",
+    "link": "https://wasp.dtu.dk/software/windfarm-assessment-tool/iec-61400-1",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SRC_DTU_IEC"
+   },
+   {
+    "text": "2024 Greenfield tornado case",
+    "ids": [
+     "SRC_NASA_GREENFIELD"
+    ],
+    "title": "2024 Greenfield tornado case",
+    "link": "https://science.nasa.gov/earth/earth-observatory/tornado-damage-in-greenfield-152870/",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SRC_NASA_GREENFIELD"
+   }
+  ],
+  "references_from": "the parameters' own sources"
+ },
  "title": "Convective wind × Wind farm",
  "asset": {
   "slug": "wind",
@@ -2219,6 +2305,141 @@
   "NOAA_NWS_EF_SCALE",
   "SOLAR_WIND_VALUE_BREAKDOWN"
  ],
+ "sources_resolved": [
+  {
+   "id": "SRC_DOE_WIND_STORMS",
+   "title": "Wind turbines severe weather controls and design context",
+   "citation": "Wind turbines severe weather controls and design context",
+   "url": "https://www.energy.gov/cmei/wind/articles/how-do-wind-turbines-survive-severe-weather-and-storms",
+   "locator": null,
+   "role": "Supports cut-out/shutdown, feathering, yaw behavior, typical IEC design gust context, and direct tornado-damage caveat.",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+    "sheet": "Sources"
+   },
+   "aliases": [
+    "SRC_DOE_WIND_STORMS"
+   ],
+   "source_type": null,
+   "doi": null,
+   "link": "https://www.energy.gov/cmei/wind/articles/how-do-wind-turbines-survive-severe-weather-and-storms",
+   "link_kind": "url",
+   "no_link_sentence": null
+  },
+  {
+   "id": "SRC_NASA_GREENFIELD",
+   "title": "2024 Greenfield tornado case",
+   "citation": "2024 Greenfield tornado case",
+   "url": "https://science.nasa.gov/earth/earth-observatory/tornado-damage-in-greenfield-152870/",
+   "locator": null,
+   "role": "Supports EF4 185 mph case evidence with downed wind turbines/power lines; used as high-severity case evidence, not a curve.",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+    "sheet": "Sources"
+   },
+   "aliases": [
+    "SRC_NASA_GREENFIELD"
+   ],
+   "source_type": null,
+   "doi": null,
+   "link": "https://science.nasa.gov/earth/earth-observatory/tornado-damage-in-greenfield-152870/",
+   "link_kind": "url",
+   "no_link_sentence": null
+  },
+  {
+   "id": "SRC_NIST_FRAGILITY",
+   "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+   "citation": "Fragility curves, damage matrices, and wind-induced loss estimation",
+   "url": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+   "locator": null,
+   "role": "Supports fragility/damage-state methodology, multiple damage types, no double-counting, and conditional dependencies.",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+    "sheet": "Sources"
+   },
+   "aliases": [
+    "SRC_NIST_FRAGILITY"
+   ],
+   "source_type": null,
+   "doi": null,
+   "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+   "link_kind": "url",
+   "no_link_sentence": null
+  },
+  {
+   "id": "SRC_NWS_EF",
+   "title": "Enhanced Fujita scale",
+   "citation": "Enhanced Fujita scale",
+   "url": "https://www.weather.gov/grb/efscale",
+   "locator": null,
+   "role": "Supports EF-scale 3-second gust ranges and warning that EF wind estimates are damage-based, not direct measurements.",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+    "sheet": "Sources"
+   },
+   "aliases": [
+    "SRC_NWS_EF"
+   ],
+   "source_type": null,
+   "doi": null,
+   "link": "https://www.weather.gov/grb/efscale",
+   "link_kind": "url",
+   "no_link_sentence": null
+  },
+  {
+   "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+   "title": "solar_wind_value_breakdown.xlsx",
+   "citation": "solar_wind_value_breakdown.xlsx (this repository)",
+   "url": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+   "locator": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+   "role": "value basis",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "repository-file",
+   "from": {
+    "file": "docs/method/value_basis/solar_wind_value_breakdown.xlsx"
+   },
+   "aliases": [
+    "SOLAR_WIND_VALUE_BREAKDOWN"
+   ],
+   "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+   "doi": null,
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/2efd6c33a6200cad6b18c5c8af9860a688b4bf38/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+   "link_kind": "repo_file",
+   "no_link_sentence": null
+  }
+ ],
+ "plain_tiers": {
+  "shape": "our judgment",
+  "cost": "transferred"
+ },
  "occurrence": null,
  "review": {
   "entry_read_on": "2026-10-19",
@@ -2230,7 +2451,29 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release —"
  },
- "summary": "Foundation: wind tornado logistic ratio on gust ratio V₃ₛ,hub / Ve50 (IEC class); shape T4, cost T3.",
+ "summary": "Foundation: wind tornado logistic ratio, read against gust ratio V₃ₛ,hub / Ve50 (IEC class); the shape is our judgment, the cost transferred.",
+ "rail_plain": {
+  "exists": {
+   "words": "Live · in the runtime index",
+   "code": "LIVE"
+  },
+  "evidence": {
+   "words": "Evidence: transferred and our judgment",
+   "code": "shape T4 · cost T3",
+   "tiers": [
+    "T3",
+    "T4"
+   ]
+  },
+  "occurrence": {
+   "words": "Field reports: nobody has looked yet",
+   "code": "? not searched"
+  },
+  "review": {
+   "words": "Not yet reviewed by a person",
+   "code": "entry agent-read 2026-10-19 · release —"
+  }
+ },
  "versions": [
   {
    "pin": "wind_tornado_wind@model_v1_0__docs_r5",
