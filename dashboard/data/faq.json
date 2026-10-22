@@ -1,0 +1,243 @@
+{
+ "schema": "damage_dashboard_faq.v1",
+ "source": "docs/faq.md",
+ "sections": [
+  {
+   "title": "The basics",
+   "questions": [
+    {
+     "id": "what-is-a-damage-curve",
+     "q": "What is a damage curve?",
+     "updated": "2026-10-21",
+     "owner": "Divy",
+     "answer": [
+      "A damage curve says how much of a part's value a hazard destroys at a given strength. It covers physical damage only: the cost to repair or replace the part, divided by its replacement value. Downtime and lost revenue are a separate step, not part of the curve."
+     ],
+     "example": "Hail on the default solar module (3.2 mm glass, with a backsheet): no loss below about 21 mm hail, half the modules' value lost at 53 mm, full replacement by 80.5 mm.",
+     "read_more": {
+      "label": "the scope of this repository",
+      "path": "docs/scope/SCOPE_AND_STORY.md",
+      "href": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/scope/SCOPE_AND_STORY.md"
+     }
+    },
+    {
+     "id": "how-are-assets-organised",
+     "q": "How are assets organised?",
+     "updated": "2026-10-21",
+     "owner": "Divy",
+     "answer": [
+      "Four categories sit side by side: Power plants, Real estate, Grid infrastructure, and Digital infrastructure (planned). Each holds types — a solar farm, an office building, a substation — and each type has a reference plant or building. Below it sits the Digital Twin's breakdown into systems, equipment and components."
+     ],
+     "example": "Power plants › Battery storage › a 100 MW / 400 MWh plant › Battery System › Battery Enclosures › Battery Modules.",
+     "read_more": {
+      "label": "the asset spine and the twin crosswalks",
+      "path": "docs/contracts/twin_crosswalks/README.md",
+      "href": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/contracts/twin_crosswalks/README.md"
+     }
+    },
+    {
+     "id": "at-which-level-does-a-curve-attach",
+     "q": "At which level does a curve attach?",
+     "updated": "2026-10-21",
+     "owner": "Divy",
+     "answer": [
+      "To the part that is replaced and priced on its own, which the files call the *failure unit*. Its failure modes are the reasons it breaks; its value is the money the curve applies to. A curve covers a whole plant or station only when the evidence exists only at that level."
+     ],
+     "example": "Flood on a battery plant has one curve for the enclosure's active hardware, replaced once water rises above 0.30 m, and one for the separate PCS. The enclosure's racks have no flood curve yet.",
+     "read_more": {
+      "label": "the assembled curve record",
+      "path": "docs/method/foundations/00_assembled_curve_record.md",
+      "href": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/foundations/00_assembled_curve_record.md"
+     }
+    },
+    {
+     "id": "what-is-a-cell",
+     "q": "What is a \"cell\"?",
+     "updated": "2026-10-21",
+     "owner": "Divy",
+     "answer": [
+      "One hazard on one kind of asset, such as hail × solar farm. It is the unit we version and release: one or more curves, one per failure unit, with the files that explain them. On the Hazard dashboard \"cell\" means a map grid cell, which is a different thing."
+     ],
+     "example": "Flood × solar farm holds eight curves: inverters, switchgear, transformer, combiner boxes, SCADA cabinets, collection cable, PV modules and foundations.",
+     "read_more": {
+      "label": "the cell-package standard",
+      "path": "docs/method/standards/02_cell_package_standard.md",
+      "href": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/standards/02_cell_package_standard.md"
+     }
+    }
+   ]
+  },
+  {
+   "title": "Reading a page",
+   "questions": [
+    {
+     "id": "what-do-the-colours-on-the-3d-picture-mean",
+     "q": "What do the colours on the 3D picture mean?",
+     "updated": "2026-10-21",
+     "owner": "Divy",
+     "answer": [
+      "Each part of the Digital Twin's reference model is coloured by what the cell does with it: it has a damage curve; it changes the curve without one of its own; it is in the value with no curve yet; it was reviewed and takes no direct damage; or it is outside the value the curve prices. The list beside the picture says the same in words."
+     ],
+     "example": "Hail × solar farm: the modules have the curve, the tracker drives change it (stow), the racking has no curve yet, and the inverters take no direct hail damage.",
+     "read_more": {
+      "label": "how a curve shows what it covers",
+      "path": "docs/extra/discussion/damage_curve_dashboard/09_asset_spine_coverage_and_faq.md",
+      "href": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/extra/discussion/damage_curve_dashboard/09_asset_spine_coverage_and_faq.md"
+     }
+    },
+    {
+     "id": "why-does-the-same-plant-show-different-parts-for-different-hazards",
+     "q": "Why does the same plant show different parts for different hazards?",
+     "updated": "2026-10-21",
+     "owner": "Divy",
+     "answer": [
+      "Each cell was built on its own. The battery cells all started from one reference plant, so they divide it the same way; the older solar and wind cells each chose their own part list. The asset page lines every hazard up against the twin's systems so the differences are visible. Aligning the part lists is follow-up work for the cell owners."
+     ],
+     "example": "On a solar farm, hail has a curve for 1 part, flood for 8 and wildfire for 10, with different names for the same equipment.",
+     "read_more": {
+      "label": "the parts of every cell, beside the twin",
+      "path": "docs/extra/discussion/damage_curve_dashboard/evidence/2026-10-21_twin_spine_and_cell_parts.txt",
+      "href": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/extra/discussion/damage_curve_dashboard/evidence/2026-10-21_twin_spine_and_cell_parts.txt"
+     }
+    },
+    {
+     "id": "why-do-some-parts-have-no-curve",
+     "q": "Why do some parts have no curve?",
+     "updated": "2026-10-21",
+     "owner": "Divy",
+     "answer": [
+      "Because the evidence was not good enough to build one, because the part was judged secondary, or because nobody has built it yet. A cell withholds rather than guesses. A part without a curve is never treated as zero damage."
+     ],
+     "example": "Flood on a battery plant: the racks and fire suppression ($11.9M of the plant) have no flood curve yet.",
+     "read_more": {
+      "label": "the rules a curve is built under",
+      "path": "docs/extra/damage_curve_skill/SKILL.md",
+      "href": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/extra/damage_curve_skill/SKILL.md"
+     }
+    }
+   ]
+  },
+  {
+   "title": "How sure we are",
+   "questions": [
+    {
+     "id": "what-do-published-borrowed-and-our-judgment-mean",
+     "q": "What do \"published\", \"borrowed\" and \"our judgment\" mean?",
+     "updated": "2026-10-21",
+     "owner": "Divy",
+     "answer": [
+      "Each curve has two grades: one for how damage rises with the hazard, one for how that damage becomes dollars. *Field-calibrated* means fitted to claims or field surveys of the same kind of asset, and *published* means a standard, a public model such as FEMA Hazus, or lab tests. *Borrowed* means taken from a similar asset with an engineering step, and *our judgment* means no source gives the number. The files call these T1 to T4."
+     ],
+     "example": "Wildfire on a solar farm: how damage rises is our judgment; how it becomes dollars is published.",
+     "read_more": {
+      "label": "parameter tiers and rationale",
+      "path": "docs/extra/damage_curve_skill/02_design_guides/PARAMETER_TIER_AND_RATIONALE.md",
+      "href": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/extra/damage_curve_skill/02_design_guides/PARAMETER_TIER_AND_RATIONALE.md"
+     }
+    },
+    {
+     "id": "what-does-seen-in-the-field-mean",
+     "q": "What does \"seen in the field\" mean?",
+     "updated": "2026-10-21",
+     "owner": "Divy",
+     "answer": [
+      "Whether anyone has found real event reports of this hazard damaging this part. It is a second kind of reference beside the curve's sources. *Not searched* means nobody has looked yet. A *none found* always says where we looked, because some sources cannot see the hazard at all."
+     ],
+     "example": "Every battery-storage part is *not searched* today. The main public battery incident database leaves out weather damage by definition, so finding nothing there would prove nothing.",
+     "read_more": {
+      "label": "\"does it happen?\" evidence",
+      "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "href": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md"
+     }
+    },
+    {
+     "id": "who-has-reviewed-a-curve",
+     "q": "Who has reviewed a curve?",
+     "updated": "2026-10-21",
+     "owner": "Divy",
+     "answer": [
+      "Each catalogue entry records who read it and when. So far every entry has been read by an agent only. A person's review will be recorded with their name, the date and a verdict, and shown on the Review page."
+     ],
+     "example": "Flood × battery storage: read by an agent on 2026-10-19; no person's review yet.",
+     "read_more": {
+      "label": "the catalogue's fields",
+      "path": "docs/cells/catalogue/README.md",
+      "href": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/catalogue/README.md"
+     }
+    }
+   ]
+  },
+  {
+   "title": "Using the numbers",
+   "questions": [
+    {
+     "id": "what-can-a-curve-be-used-for",
+     "q": "What can a curve be used for?",
+     "updated": "2026-10-21",
+     "owner": "Divy",
+     "answer": [
+      "A single event: the damage for a given hazard strength. A dollar scenario, when you supply the part's value. A yearly expected loss is computed only by the Hazard engine, which adds how often the hazard happens and checks the caps; some cells allow it only under conditions."
+     ],
+     "example": "Flood × battery storage: one event — yes; a dollar scenario — yes; yearly loss — only through Hazard.",
+     "read_more": {
+      "label": "what a cell may output",
+      "path": "docs/extra/damage_curve_skill/03_contracts/CAPABILITY_DECLARATION.md",
+      "href": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/extra/damage_curve_skill/03_contracts/CAPABILITY_DECLARATION.md"
+     }
+    },
+    {
+     "id": "why-is-there-no-yearly-loss-eal-or-pml-here",
+     "q": "Why is there no yearly loss (EAL) or PML here?",
+     "updated": "2026-10-21",
+     "owner": "Divy",
+     "answer": [
+      "This repository owns the physical response only. How often a hazard happens, yearly losses and tail risk belong to the Hazard engine, which reads these curves."
+     ],
+     "example": "The flood × battery curve gives the share of an enclosure lost at 0.5 m of water. How often a site sees 0.5 m, and what that costs per year, comes from Hazard.",
+     "read_more": {
+      "label": "the scope and the boundary with Hazard",
+      "path": "docs/scope/SCOPE_AND_STORY.md",
+      "href": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/scope/SCOPE_AND_STORY.md"
+     }
+    }
+   ]
+  },
+  {
+   "title": "Behind the scenes",
+   "questions": [
+    {
+     "id": "how-is-a-curve-built-step-by-step",
+     "q": "How is a curve built, step by step?",
+     "updated": "2026-10-21",
+     "owner": "Divy",
+     "answer": [
+      "Eight questions, in order: what are we answering, what breaks, how is the hazard measured, what shape does damage take, where do the numbers come from, what is it worth and does it add up, what does Hazard receive, and is it right and released. Each answer leaves a file, and a review gate checks it before the next."
+     ],
+     "example": "Hail × solar farm: hail is measured by its diameter; public hail tests give the sizes that break module glass; an S-curve is fitted through them; the loss is a share of the modules' value.",
+     "read_more": {
+      "label": "the add-a-new-cell workflow",
+      "path": "docs/extra/damage_curve_skill/01_workflows/ADD_NEW_CELL_WORKFLOW.md",
+      "href": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/extra/damage_curve_skill/01_workflows/ADD_NEW_CELL_WORKFLOW.md"
+     }
+    },
+    {
+     "id": "where-do-the-files-live-and-how-do-i-propose-a-change",
+     "q": "Where do the files live, and how do I propose a change?",
+     "updated": "2026-10-21",
+     "owner": "Divy",
+     "answer": [
+      "Each cell lives in its own folder under `docs/cells/`, the catalogue under `docs/cells/catalogue/`, and the twin crosswalks under `docs/contracts/twin_crosswalks/`. Change them through a pull request; the dashboard is rebuilt from `main`."
+     ],
+     "example": "To say the hail cell also covers the combiner boxes, edit that row in `solar.csv` and open a pull request.",
+     "read_more": {
+      "label": "the cells",
+      "path": "docs/cells/README.md",
+      "href": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/README.md"
+     }
+    }
+   ]
+  }
+ ],
+ "n_questions": 14,
+ "errors": []
+}

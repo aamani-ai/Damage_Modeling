@@ -958,7 +958,13 @@
    {
     "kind": "result",
     "name": "Financial range check (Hazard repo): industry loss figures for solar flood",
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/data_sources/financial_range_solar_flood/profile.md"
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/docs/data_sources/financial_range_solar_flood/profile.md",
+    "hazard": {
+     "path": "docs/data_sources/financial_range_solar_flood/profile.md",
+     "state": "on_main",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/docs/data_sources/financial_range_solar_flood/profile.md",
+     "words": null
+    }
    }
   ],
   "capability": {
@@ -1104,22 +1110,96 @@
     "code": "LIVE"
    },
    "evidence": {
-    "words": "Evidence: transferred and our judgment",
-    "code": "shape T3–4 · cost T3–4",
+    "words": "Evidence: our judgment",
+    "code": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment",
     "tiers": [
-     "T3",
      "T4"
-    ]
+    ],
+    "codes": "shape T3–4 · cost T3–4"
    },
    "occurrence": {
     "words": "Field reports: nobody has looked yet",
-    "code": "? not searched"
+    "code": "Field reports: nobody has looked yet"
    },
    "review": {
     "words": "Not yet reviewed by a person",
     "code": "entry agent-read 2026-10-19 · release —"
    }
   },
+  "main_logic": [
+   "Flood is measured as local depth above component datum, in m, depth at the pathway termination, in m, depth above the module lower edge, in m and flow velocity or scour proxy, in m/s.",
+   "Piecewise depth-damage points per part, set by engineering judgment from DOE/FEMP solar flood guidance and NEMA water-damaged equipment guidance, in the USACE depth-percent table form.",
+   "The damage ratio is a share of the replacement value of the same part (its own value bucket), never total project value."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "8 parts with a curve · 3 without one yet",
+    "paragraphs": [
+     "Flood on solar farms: piecewise depth-damage points per part, set by engineering judgment from DOE/FEMP solar flood guidance and NEMA water-damaged equipment guidance, in the USACE depth-percent table form. It names 8 parts: Inverters, Switchgear, Main transformer and controls, Combiner boxes and DC protection, SCADA and monitoring cabinets, AC and DC collection cable, PV modules and Foundations. Outside its scope: yearly and tail loss metrics (computed by the consumer, not the cell) and part values and exposure fractions (supplied by the consumer; not embedded in the curve file). Kinds of damage it does not include: flood duration, salinity and contamination (flags only, no numeric effect), energised versus shut-down state at flooding (flag only), water reaching equipment through conduits when the cabinet itself is above water (flag only, no multiplier) and debris impact on modules.",
+     "For this hazard the solar farm is split into 8 parts: Inverters, Switchgear, Main transformer and controls, Combiner boxes and DC protection, SCADA and monitoring cabinets, AC and DC collection cable, PV modules and Foundations. Parts of the plant's value with no curve yet: mounting and racking structure (debris and velocity load is a candidate mechanism; no curve), civil works: roads, access and fencing (reviewed in the write-up; no curve) and site drainage and flood defences (treated as protection state, not a damaged part).",
+     "The damage ratio is a share of replacement value of the same part (its own value bucket), never total project value. The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true
+   },
+   {
+    "id": "worked_out",
+    "name": "How damage is worked out",
+    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "fact": "4 hazard measures → a line through points",
+    "paragraphs": [
+     "Damage is read against local depth above component datum (m), depth at the pathway termination (m), depth above the module lower edge (m) and flow velocity or scour proxy (m/s). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: water surface elevation or site flood depth (m), turned into local depth above each part's critical elevation, 0 to 2 m (clamp or warn); foundations use flow velocity (m/s) or a scour proxy, 0 to 4.",
+     "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "8 sources, 8 linked · our judgment",
+    "paragraphs": [
+     "8 sources set this cell: DOE/FEMP, Preventing and Mitigating Flood Damage to Solar PV Systems, NEMA GD 1-2019, Evaluating Water-Damaged Electrical Equipment, NEMA, Enclosure Types and FEMA P-348, Protecting Building Utility Systems from Flood Damage and 4 more. Of the 9 parameters, 1 is published, 7 are borrowed and 1 is our judgment. The sources were read from the workbook's Flood_Evidence_Params, Flood_Assumption_Register and Sources sheets and the dossier's 3. Evidence map, because this older cell keeps them there rather than in register files. 1 source ID in the tier table (ANZGEO_2023_SCOUR_CONTEXT) matches no document in the workbook or dossier."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "1 outside check · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "1 outside check compares this curve with an independent result: Financial range check (Hazard repo): industry loss figures for solar flood.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment",
+  "hazard_paths": [],
   "capabilities": [
    {
     "key": "single_event",
@@ -1186,7 +1266,7 @@
   "stations": [
    {
     "id": "scope",
-    "name": "What it covers",
+    "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
     "paragraph": "Flood on solar farms: piecewise depth-damage points per part, set by engineering judgment from DOE/FEMP solar flood guidance and NEMA water-damaged equipment guidance, in the USACE depth-percent table form. It names 8 parts: Inverters, Switchgear, Main transformer and controls, Combiner boxes and DC protection, SCADA and monitoring cabinets, AC and DC collection cable, PV modules and Foundations. Outside its scope: yearly and tail loss metrics (computed by the consumer, not the cell) and part values and exposure fractions (supplied by the consumer; not embedded in the curve file). Kinds of damage it does not include: flood duration, salinity and contamination (flags only, no numeric effect), energised versus shut-down state at flooding (flag only), water reaching equipment through conduits when the cabinet itself is above water (flag only, no multiplier) and debris impact on modules.",
     "plain_fact": "8 parts · 2 left out"
@@ -1209,8 +1289,8 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "8 sources set this cell: DOE/FEMP, Preventing and Mitigating Flood Damage to Solar PV Systems, NEMA GD 1-2019, Evaluating Water-Damaged Electrical Equipment, NEMA, Enclosure Types and FEMA P-348, Protecting Building Utility Systems from Flood Damage and 4 more. Of the 9 parameters, 1 is lab-tested (T2), 7 are transferred (T3) and 1 is our judgment (T4). The sources were read from the workbook's Flood_Evidence_Params, Flood_Assumption_Register and Sources sheets and the dossier's 3. Evidence map, because this older cell keeps them there rather than in register files. 1 source ID in the tier table (ANZGEO_2023_SCOUR_CONTEXT) matches no document in the workbook or dossier.",
-    "plain_fact": "8 sources · transferred and our judgment"
+    "paragraph": "8 sources set this cell: DOE/FEMP, Preventing and Mitigating Flood Damage to Solar PV Systems, NEMA GD 1-2019, Evaluating Water-Damaged Electrical Equipment, NEMA, Enclosure Types and FEMA P-348, Protecting Building Utility Systems from Flood Damage and 4 more. Of the 9 parameters, 1 is published, 7 are borrowed and 1 is our judgment. The sources were read from the workbook's Flood_Evidence_Params, Flood_Assumption_Register and Sources sheets and the dossier's 3. Evidence map, because this older cell keeps them there rather than in register files. 1 source ID in the tier table (ANZGEO_2023_SCOUR_CONTEXT) matches no document in the workbook or dossier.",
+    "plain_fact": "8 sources · borrowed and our judgment"
    },
    {
     "id": "value",
@@ -1497,7 +1577,7 @@
     "source_type": null,
     "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "link_kind": "repo_file",
     "no_link_sentence": null
    },
@@ -1524,7 +1604,7 @@
     "source_type": null,
     "repo_path": "docs/source_drops/context/v2_5/substrate_decomposition.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/source_drops/context/v2_5/substrate_decomposition.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/source_drops/context/v2_5/substrate_decomposition.md",
     "link_kind": "repo_file",
     "no_link_sentence": null
    }
@@ -2342,7 +2422,7 @@
     "raw_name": "depth_damage_points",
     "value_text": "9 points",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "DOE_FEMP_PV_FLOOD",
@@ -2378,7 +2458,7 @@
     "raw_name": "depth_damage_points",
     "value_text": "9 points",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "DOE_FEMP_PV_FLOOD",
@@ -2414,7 +2494,7 @@
     "raw_name": "depth_damage_points",
     "value_text": "9 points",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "DOE_FEMP_PV_FLOOD",
@@ -2450,7 +2530,7 @@
     "raw_name": "depth_damage_points",
     "value_text": "9 points",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "DOE_FEMP_PV_FLOOD",
@@ -2486,7 +2566,7 @@
     "raw_name": "depth_damage_points",
     "value_text": "9 points",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "DOE_FEMP_PV_FLOOD",
@@ -2522,7 +2602,7 @@
     "raw_name": "depth_damage_points",
     "value_text": "9 points",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "DOE_FEMP_PV_FLOOD",
@@ -2558,7 +2638,7 @@
     "raw_name": "depth_damage_points",
     "value_text": "9 points",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "DOE_FEMP_PV_FLOOD",
@@ -2616,7 +2696,7 @@
     "raw_name": "local_depth_transform",
     "value_text": "h_i=max(0,WSE-z_i_crit)",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "DOE_FEMP_PV_FLOOD",
@@ -2786,8 +2866,8 @@
    ]
   },
   "tier_words": {
-   "shape": "transferred and our judgment",
-   "cost": "transferred and our judgment"
+   "shape": "borrowed and our judgment",
+   "cost": "borrowed and our judgment"
   }
  },
  "build_findings": [

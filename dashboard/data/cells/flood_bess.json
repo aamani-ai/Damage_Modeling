@@ -1083,22 +1083,105 @@
     "code": "LIVE · screening"
    },
    "evidence": {
-    "words": "Evidence: transferred and our judgment",
-    "code": "shape T3–4 · cost T3–4",
+    "words": "Evidence: our judgment",
+    "code": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment",
     "tiers": [
-     "T3",
      "T4"
-    ]
+    ],
+    "codes": "shape T3–4 · cost T3–4"
    },
    "occurrence": {
     "words": "Field reports: nobody has looked yet",
-    "code": "? not searched"
+    "code": "Field reports: nobody has looked yet"
    },
    "review": {
     "words": "Not yet reviewed by a person",
     "code": "entry agent-read 2026-10-19 · release —"
    }
   },
+  "main_logic": [
+   "Flood is measured as water depth above local grade, in m.",
+   "Conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; unit values from market cost shares of the fixed Hazard reference budget.",
+   "The damage ratio is a share of the hardware replacement value of the same physical unit, fixed real-2024 dollars: $901,380 active hardware per enclosure (80), $520,000 per PCS (20)."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "2 parts with a curve · 75 % of the value · 4 without one yet",
+    "paragraphs": [
+     "Flood on batteries: conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; unit values from market cost shares of the fixed Hazard reference budget. It names 2 parts: Battery enclosure (active hardware) and Separate PCS. Outside its scope: collector station and export line, autonomous internal failures (not caused by the flood) and business interruption. Kinds of damage it does not include: wave impact, scour and debris.",
+     "For this hazard the battery plant is split into 2 parts: Battery enclosure (active hardware) and Separate PCS. Parts of the plant's value with no curve yet: enclosure racks and fire suppression, electrical balance including unit transformers and cables, civil works and unallocated fieldwork.",
+     "$82.5M of $109.8M of the reference plant has a curve (75 %). No curve yet for enclosure racks and fire suppression, electrical balance (unit transformers, cables), civil works and unallocated fieldwork (25 % of the value)."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true
+   },
+   {
+    "id": "worked_out",
+    "name": "How damage is worked out",
+    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "fact": "water depth above local grade → a step + a line through points",
+    "paragraphs": [
+     "Damage is read against water depth above local grade (m). The curves take 2 forms: an on/off step: nothing, then full replacement; a line through fixed points (piecewise linear). The input, in the catalogue's words: water depth above local grade (m), finite and 0 or more; water type must be stated as fresh or saline; the PCS freshwater curve reads depth above the assumed 0.30 m entry (0 to 2 m knots, flat at full replacement beyond 0.6 m).",
+     "The seven-step audit is written in the dossier with 7 rows. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "19 sources, 17 linked · our judgment",
+    "paragraphs": [
+     "19 sources set this cell: Hazard BESS reference r1: profile, layout and 2024 budget, NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment, Flood Solar model v1.0 docs r4 canonical artifact and SMA MV Power Station with Sunny Central Storage system manual and 15 more. Of the 5 parameters, 2 are borrowed and 3 are our judgment. The source and claim registers are machine-readable files in the cell folder. 2 sources have no link in the register (2 with a locator)."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says passed conditional annual screening (2026-10-18).",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment",
+  "hazard_paths": [
+   {
+    "id": "BF-S01",
+    "title": "Hazard BESS reference r1",
+    "path": "docs/plans/_cross_cutting/bess_conus",
+    "state": "on_branch",
+    "link": null,
+    "words": "on a Hazard branch, not on its main yet"
+   }
+  ],
   "capabilities": [
    {
     "key": "single_event",
@@ -1212,7 +1295,7 @@
   "stations": [
    {
     "id": "scope",
-    "name": "What it covers",
+    "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
     "paragraph": "Flood on batteries: conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; unit values from market cost shares of the fixed Hazard reference budget. It names 2 parts: Battery enclosure (active hardware) and Separate PCS. Outside its scope: collector station and export line, autonomous internal failures (not caused by the flood) and business interruption. Kinds of damage it does not include: wave impact, scour and debris.",
     "plain_fact": "2 parts · 3 left out"
@@ -1235,8 +1318,8 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "19 sources set this cell: Hazard BESS reference r1: profile, layout and 2024 budget, NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment, Flood Solar model v1.0 docs r4 canonical artifact and SMA MV Power Station with Sunny Central Storage system manual and 15 more. Of the 5 parameters, 2 are transferred (T3) and 3 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
-    "plain_fact": "19 sources · transferred and our judgment"
+    "paragraph": "19 sources set this cell: Hazard BESS reference r1: profile, layout and 2024 budget, NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment, Flood Solar model v1.0 docs r4 canonical artifact and SMA MV Power Station with Sunny Central Storage system manual and 15 more. Of the 5 parameters, 2 are borrowed and 3 are our judgment. The source and claim registers are machine-readable files in the cell folder. 2 sources have no link in the register (2 with a locator).",
+    "plain_fact": "19 sources · borrowed and our judgment"
    },
    {
     "id": "value",
@@ -1288,10 +1371,10 @@
      "BF-S01"
     ],
     "title": "Hazard BESS reference r1",
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
-    "link_kind": "hazard_file",
+    "link": null,
+    "link_kind": "hazard_branch",
     "locator": "01_reference_profile_and_value.md; reference_budget.csv; layout.csv",
-    "no_link_sentence": null,
+    "no_link_sentence": "on a Hazard branch, not on its main yet",
     "source_id": "BF-S01"
    },
    {
@@ -1312,7 +1395,7 @@
      "BF-S06"
     ],
     "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "link_kind": "repo_file",
     "locator": "flood_solar__model_v1_0__docs_r4__curve_artifact.json; flood_solar_curve_derivation_dossier_v1_0.md",
     "no_link_sentence": null,
@@ -1356,11 +1439,17 @@
     "decision": "adopt reference only",
     "accessed_on": null,
     "provenance": "register",
+    "hazard": {
+     "path": "docs/plans/_cross_cutting/bess_conus",
+     "state": "on_branch",
+     "link": null,
+     "words": "on a Hazard branch, not on its main yet"
+    },
     "doi": null,
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
-    "link_kind": "hazard_file",
+    "link": null,
+    "link_kind": "hazard_branch",
     "title": "Hazard BESS reference r1",
-    "no_link_sentence": null
+    "no_link_sentence": "on a Hazard branch, not on its main yet"
    },
    {
     "id": "BF-S02",
@@ -1448,7 +1537,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "link_kind": "repo_file",
     "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
     "no_link_sentence": null
@@ -1467,7 +1556,7 @@
     "provenance": "register",
     "repo_path": "docs/method/shared_components/flood_electrical/binding_rules.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/method/shared_components/flood_electrical/binding_rules.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/shared_components/flood_electrical/binding_rules.md",
     "link_kind": "repo_file",
     "title": "Shared electrical Flood substrate and Wind reuse review",
     "no_link_sentence": null
@@ -1484,8 +1573,14 @@
     "decision": "audit only; no hazard change",
     "accessed_on": null,
     "provenance": "register",
+    "hazard": {
+     "path": "perils/flood/src/flood/pluvial/ponding.py",
+     "state": "on_main",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/perils/flood/src/flood/pluvial/ponding.py",
+     "words": null
+    },
     "doi": null,
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/perils/flood/src/flood/pluvial/ponding.py",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/perils/flood/src/flood/pluvial/ponding.py",
     "link_kind": "hazard_file",
     "title": "Hazard existing Pluvial ponding method",
     "no_link_sentence": null
@@ -2231,8 +2326,8 @@
      {
       "id": "BF-S01",
       "title": "Hazard BESS reference r1",
-      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
-      "link_kind": "hazard_file",
+      "link": null,
+      "link_kind": "hazard_branch",
       "resolved": true
      },
      {
@@ -2271,12 +2366,12 @@
     "raw_name": "PCS_source_knots",
     "value_text": "",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "BF-S06",
       "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
       "link_kind": "repo_file",
       "resolved": true
      },
@@ -2292,7 +2387,7 @@
      "BF-C14"
     ],
     "curve_id": null,
-    "reasoning": "Exact source engineering proxy; target entry remains T4 (our judgment)",
+    "reasoning": "Exact source engineering proxy; target entry remains judgment-based",
     "update_trigger": null,
     "role": null
    },
@@ -2302,13 +2397,13 @@
     "raw_name": "same_unit_value",
     "value_text": "",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "BF-S01",
       "title": "Hazard BESS reference r1",
-      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
-      "link_kind": "hazard_file",
+      "link": null,
+      "link_kind": "hazard_branch",
       "resolved": true
      },
      {
@@ -2345,14 +2440,14 @@
      {
       "id": "BF-S01",
       "title": "Hazard BESS reference r1",
-      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
-      "link_kind": "hazard_file",
+      "link": null,
+      "link_kind": "hazard_branch",
       "resolved": true
      },
      {
       "id": "BF-S06",
       "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2423,16 +2518,16 @@
   },
   "link_counts": {
    "total": 19,
-   "linked": 18,
-   "locator_only": 1,
+   "linked": 17,
+   "locator_only": 2,
    "neither": 0,
    "markers": 0,
    "placeholders": 0
   },
   "extraction": null,
   "tier_words": {
-   "shape": "transferred and our judgment",
-   "cost": "transferred and our judgment"
+   "shape": "borrowed and our judgment",
+   "cost": "borrowed and our judgment"
   }
  },
  "build_findings": []

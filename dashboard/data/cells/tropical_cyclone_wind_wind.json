@@ -792,7 +792,13 @@
    {
     "kind": "result",
     "name": "Financial range check (Hazard repo): tower-value ceiling for wind-farm hurricane loss (shared lineage; no open industry loss figures found)",
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/data_sources/financial_range_wind_farm_hurricane/profile.md"
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/docs/data_sources/financial_range_wind_farm_hurricane/profile.md",
+    "hazard": {
+     "path": "docs/data_sources/financial_range_wind_farm_hurricane/profile.md",
+     "state": "on_main",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/docs/data_sources/financial_range_wind_farm_hurricane/profile.md",
+     "words": null
+    }
    }
   ],
   "capability": {
@@ -959,22 +965,96 @@
     "code": "LIVE · screening"
    },
    "evidence": {
-    "words": "Evidence: transferred and our judgment",
-    "code": "shape T3 · cost T4",
+    "words": "Evidence: our judgment",
+    "code": "How damage rises: borrowed · how it becomes dollars: our judgment",
     "tiers": [
-     "T3",
      "T4"
-    ]
+    ],
+    "codes": "shape T3 · cost T4"
    },
    "occurrence": {
     "words": "Field reports: nobody has looked yet",
-    "code": "? not searched"
+    "code": "Field reports: nobody has looked yet"
    },
    "review": {
     "words": "Not yet reviewed by a person",
     "code": "entry agent-read 2026-10-19 · release reviewed owner approved tower only screening release"
    }
   },
+  "main_logic": [
+   "Hurricane wind is measured as peak 3-second gust at 10 m, in km/h.",
+   "Published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; the 3.3 MW / 100 m curve stands in for the canonical 5 MW turbine, tower value only.",
+   "The damage ratio is a share of the tower value of the canonical 5 MW wind farm (0.16 of project TIV)."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "1 part with a curve · 16 % of the value · 1 without one yet",
+    "paragraphs": [
+     "Hurricane wind on wind farms: published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; the 3.3 MW / 100 m curve stands in for the canonical 5 MW turbine, tower value only. It names 1 part: Turbine tower. Outside its scope: storm surge, flood, scour, debris, rain ingress, lightning and fire and business interruption. Kinds of damage it does not include: blade and other non-tower turbine failure modes (the curve is driven by tower damage states only).",
+     "For this hazard the wind farm is split into 1 part: Turbine tower. 9 further units are named but withheld — wt turbine equipment assembly, wt foundation, wt pad mounted electrical, wt collection system, wt gsu substation, wt control building and scada, wt civil infra, support fieldwork and support transport logistics — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil, fieldwork and transport (withheld, not zero).",
+     "16 % of the project's value has a curve. No curve yet for rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil, fieldwork and transport (withheld, not zero) (84 % of the value)."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true
+   },
+   {
+    "id": "worked_out",
+    "name": "How damage is worked out",
+    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "fact": "not written yet",
+    "paragraphs": [
+     "Damage is read against peak 3-second gust at 10 m (km/h). The curve is nothing below a threshold, then a Weibull-shaped rise (thresholded Weibull). The input, in the catalogue's words: peak 3-second gust at 10 m (km/h); zero at or below 90, evaluated 108 to 252; for the canonical 5 MW proxy 90 to 108 returns zero and above 252 returns the maximum (both flagged).",
+     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": false
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "4 sources, 0 linked · our judgment",
+    "paragraphs": [
+     "4 sources set this cell: Probabilistic risk assessment on wind turbine towers subjected to cyclone-induced wind loads, Wind Energy 23(3), 528-546 (2020), Canonical wind-farm reference profile: 20 x 5 MW, $140M, tower share 0.16, Owner scope correction authorizing the tower-only 0.16 binding (governance, not evidence) and Hazard hurricane wind-farm EAL review that found the 0.63 value mismatch. Of the 6 parameters, 2 are borrowed and 4 are our judgment. The source and claim registers are machine-readable files in the cell folder. 4 sources have no link in the register."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "1 outside check · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "1 outside check compares this curve with an independent result: Financial range check (Hazard repo): tower-value ceiling for wind-farm hurricane loss (shared lineage; no open industry loss figures found). The validation record says report.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: reviewed owner approved tower only screening release."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: borrowed · how it becomes dollars: our judgment",
+  "hazard_paths": [],
   "capabilities": [
    {
     "key": "single_event",
@@ -1141,7 +1221,7 @@
   "stations": [
    {
     "id": "scope",
-    "name": "What it covers",
+    "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
     "paragraph": "Hurricane wind on wind farms: published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; the 3.3 MW / 100 m curve stands in for the canonical 5 MW turbine, tower value only. It names 1 part: Turbine tower. Outside its scope: storm surge, flood, scour, debris, rain ingress, lightning and fire and business interruption. Kinds of damage it does not include: blade and other non-tower turbine failure modes (the curve is driven by tower damage states only).",
     "plain_fact": "1 part · 2 left out"
@@ -1164,8 +1244,8 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "4 sources set this cell: Probabilistic risk assessment on wind turbine towers subjected to cyclone-induced wind loads, Wind Energy 23(3), 528-546 (2020), Canonical wind-farm reference profile: 20 x 5 MW, $140M, tower share 0.16, Owner scope correction authorizing the tower-only 0.16 binding (governance, not evidence) and Hazard hurricane wind-farm EAL review that found the 0.63 value mismatch. Of the 6 parameters, 2 are transferred (T3) and 4 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 4 sources have no link in the register.",
-    "plain_fact": "4 sources · transferred and our judgment"
+    "paragraph": "4 sources set this cell: Probabilistic risk assessment on wind turbine towers subjected to cyclone-induced wind loads, Wind Energy 23(3), 528-546 (2020), Canonical wind-farm reference profile: 20 x 5 MW, $140M, tower share 0.16, Owner scope correction authorizing the tower-only 0.16 binding (governance, not evidence) and Hazard hurricane wind-farm EAL review that found the 0.63 value mismatch. Of the 6 parameters, 2 are borrowed and 4 are our judgment. The source and claim registers are machine-readable files in the cell folder. 4 sources have no link in the register.",
+    "plain_fact": "4 sources · borrowed and our judgment"
    },
    {
     "id": "value",
@@ -1513,7 +1593,7 @@
     "raw_name": "Eq. 1 structural-response shape and fitted archetype parameters",
     "value_text": "",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "TCWW-S005",
@@ -1579,7 +1659,7 @@
     "raw_name": "source model assumption set",
     "value_text": "generic fixed-base steel tower; source-modelled parked rotor state; wind parallel to rotor; no yaw",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "TCWW-S005",
@@ -1687,7 +1767,7 @@
   },
   "extraction": null,
   "tier_words": {
-   "shape": "transferred",
+   "shape": "borrowed",
    "cost": "our judgment"
   }
  },

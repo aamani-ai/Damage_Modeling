@@ -6,8 +6,8 @@
   "noun": "wind farms",
   "href": "/assets/wind"
  },
- "summary": "Flood has transferred curves (GSU substation only); hurricane wind and convective wind have curves built from transferred and our judgment evidence (hurricane wind: tower only and convective wind: 5 parts); wildfire has curves that are our judgment (2 parts); hail has no cell yet. 4 parts of the wind farm have no curve under any hazard: collection network, control building, SCADA, met and O&M, civil and fieldwork and transport support.",
- "summary_v0": "Flood, hurricane wind, convective wind and wildfire have curves for wind farms, all from transferred or policy evidence (T3–T4); hail has none; nobody has yet searched for field reports.",
+ "summary": "Wildfire has curves that are our judgment (2 parts); flood has curves built from borrowed evidence (GSU substation only); hurricane wind and convective wind have curves built from borrowed and our judgment evidence (hurricane wind: tower only and convective wind: 5 parts); hail has no cell yet. 4 parts of the wind farm have no curve under any hazard: collection network, control building, SCADA, met and O&M, civil and fieldwork and transport support.",
+ "summary_v0": "Flood, hurricane wind, convective wind and wildfire have curves for wind farms, all on borrowed evidence or our judgment; hail has none; nobody has yet searched for field reports.",
  "reference": null,
  "hazards": [
   {
@@ -229,7 +229,7 @@
      "twin_nodes": [],
      "occurrence": null,
      "state": "curve",
-     "words": "curve · transferred and our judgment",
+     "words": "curve · borrowed and our judgment",
      "mark": "■",
      "parts": [
       "Blade"
@@ -361,7 +361,7 @@
      "twin_nodes": [],
      "occurrence": null,
      "state": "curve",
-     "words": "curve · transferred and our judgment",
+     "words": "curve · borrowed and our judgment",
      "mark": "■",
      "parts": [
       "Turbine tower",
@@ -383,7 +383,7 @@
      "twin_nodes": [],
      "occurrence": null,
      "state": "curve",
-     "words": "curve · transferred and our judgment",
+     "words": "curve · borrowed and our judgment",
      "mark": "■",
      "parts": [
       "Tower"
@@ -534,7 +534,7 @@
      "twin_nodes": [],
      "occurrence": null,
      "state": "curve",
-     "words": "curve · transferred and our judgment",
+     "words": "curve · borrowed and our judgment",
      "mark": "■",
      "parts": [
       "Nacelle"
@@ -681,7 +681,7 @@
      "twin_nodes": [],
      "occurrence": null,
      "state": "curve",
-     "words": "curve · transferred and our judgment",
+     "words": "curve · borrowed and our judgment",
      "mark": "■",
      "parts": [
       "Foundation"
@@ -1084,7 +1084,7 @@
      "twin_nodes": [],
      "occurrence": null,
      "state": "curve",
-     "words": "curve · transferred",
+     "words": "curve · borrowed",
      "mark": "■",
      "parts": [
       "GSU / substation (whole facility)",
@@ -3000,8 +3000,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 5,
    "generation": "skill",
-   "aria_label": "Flood × Wind farm, live, partial, shape T3, cost T3, not searched",
-   "href": "/cells/flood_wind"
+   "aria_label": "Flood × Wind farm, live, partial, evidence: borrowed, field reports not searched",
+   "href": "/cells/flood_wind",
+   "word": "borrowed",
+   "halves": "How damage rises: borrowed · how it becomes dollars: borrowed"
   },
   {
    "entry_id": "hail_wind",
@@ -3061,8 +3063,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 0,
    "generation": "gap",
-   "aria_label": "Hail × Wind farm, gap, not searched",
-   "href": "/cells/hail_wind"
+   "aria_label": "Hail × Wind farm, gap, field reports not searched",
+   "href": "/cells/hail_wind",
+   "word": null,
+   "halves": null
   },
   {
    "entry_id": "tropical_cyclone_wind_wind",
@@ -3124,8 +3128,10 @@
    "outside_checks": 1,
    "chain_core_as_files": 5,
    "generation": "skill",
-   "aria_label": "Hurricane wind × Wind farm, live, partial, shape T3, cost T4, not searched",
-   "href": "/cells/tropical_cyclone_wind_wind"
+   "aria_label": "Hurricane wind × Wind farm, live, partial, evidence: our judgment, field reports not searched",
+   "href": "/cells/tropical_cyclone_wind_wind",
+   "word": "our judgment",
+   "halves": "How damage rises: borrowed · how it becomes dollars: our judgment"
   },
   {
    "entry_id": "wildfire_wind",
@@ -3179,7 +3185,7 @@
     "sha256": "3f923f506a2082dd2f074c8b3cc3d696288097072eb8b6f803f3eb7d3f2b4e0d",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
    },
-   "summary": "Wildfire on wind farms: cell-local Tier-4 screening points per FSim flame-length class, adopted under owner direction; 4 parts of the asset's value have no curve.",
+   "summary": "Wildfire on wind farms: cell-local judgment-based screening points per FSim flame-length class, adopted under owner direction; 4 parts of the asset's value have no curve.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 2,
@@ -3187,8 +3193,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 5,
    "generation": "skill",
-   "aria_label": "Wildfire × Wind farm, live, partial, shape T4, cost T4, not searched",
-   "href": "/cells/wildfire_wind"
+   "aria_label": "Wildfire × Wind farm, live, partial, evidence: our judgment, field reports not searched",
+   "href": "/cells/wildfire_wind",
+   "word": "our judgment",
+   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
   },
   {
    "entry_id": "wind_tornado_wind",
@@ -3250,8 +3258,10 @@
    "outside_checks": 1,
    "chain_core_as_files": 3,
    "generation": "skill",
-   "aria_label": "Convective wind × Wind farm, live, partial, shape T4, cost T3–4, not searched",
-   "href": "/cells/wind_tornado_wind"
+   "aria_label": "Convective wind × Wind farm, live, partial, evidence: our judgment, field reports not searched",
+   "href": "/cells/wind_tornado_wind",
+   "word": "our judgment",
+   "halves": "How damage rises: our judgment · how it becomes dollars: borrowed and our judgment"
   }
  ],
  "has_buckets": false,

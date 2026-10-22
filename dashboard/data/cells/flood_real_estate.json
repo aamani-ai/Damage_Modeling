@@ -1125,21 +1125,96 @@
     "code": "PROPOSAL · screening"
    },
    "evidence": {
-    "words": "Evidence: lab-tested",
-    "code": "shape T2 · cost T2",
+    "words": "Evidence: published",
+    "code": "How damage rises: published · how it becomes dollars: published",
     "tiers": [
      "T2"
-    ]
+    ],
+    "codes": "shape T2 · cost T2"
    },
    "occurrence": {
     "words": "Field reports: nobody has looked yet",
-    "code": "? not searched"
+    "code": "Field reports: nobody has looked yet"
    },
    "review": {
     "words": "Not yet reviewed by a person",
     "code": "entry agent-read 2026-10-19 · release not yet reviewed"
    }
   },
+  "main_logic": [
+   "Flood is measured as water depth above the first floor, in ft.",
+   "FEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water); retail keeps Hazus DF 217 for river water and USACE NACCS for coastal surge.",
+   "The damage ratio is a share of the structure replacement cost new of the same building (no land, contents or depreciation)."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "4 parts with a curve · 1 withheld",
+    "paragraphs": [
+     "Flood on buildings: FEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water); retail keeps Hazus DF 217 for river water and USACE NACCS for coastal surge. It names 4 parts: House, Warehouse, Office and Retail. Outside its scope: contents (declared as a withheld placeholder part) and land, site works, business interruption. Kinds of damage it does not include: waves and fast-moving water (wave and velocity zones).",
+     "For this hazard the building is split into 4 parts: House, Warehouse, Office and Retail. 1 further unit is named but withheld — fre building contents — a stated 'not zero', not a curve.",
+     "The damage ratio is a share of structure replacement cost new of the same building (no land, contents or depreciation). The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true
+   },
+   {
+    "id": "worked_out",
+    "name": "How damage is worked out",
+    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "fact": "water depth above the first floor → a line through points",
+    "paragraphs": [
+     "Damage is read against water depth above the first floor (ft). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: water depth above the first floor (ft), -4 to 24 ft (retail coastal curve -1 to 10 ft); depth above ground is accepted with the building's floor height.",
+     "The seven-step audit is a file in the cell folder with 7 rows; the statuses it records: partial and proposed. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "13 sources, 12 linked · published",
+    "paragraphs": [
+     "13 sources set this cell: FEMA, Hazus Flood Model Technical Manual 7.0 (2025), Table 5-2, FEMA Hazus 6.1 flood damage-function extract, USACE, North Atlantic Coast Comprehensive Study (2015), depth-damage functions and FEMA OpenFEMA NFIP redacted claims, v3 (check only) and 9 more. Of the 20 parameters, 15 are published, 3 are borrowed and 2 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator)."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "1 outside check · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "1 outside check compares this curve with an independent result: NFIP flood-insurance claims by depth band (about 105,000 claims). The validation record says report.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: not yet reviewed."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "published",
+  "halves": "How damage rises: published · how it becomes dollars: published",
+  "hazard_paths": [],
   "capabilities": [
    {
     "key": "single_event",
@@ -1209,7 +1284,7 @@
   "stations": [
    {
     "id": "scope",
-    "name": "What it covers",
+    "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
     "paragraph": "Flood on buildings: FEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water); retail keeps Hazus DF 217 for river water and USACE NACCS for coastal surge. It names 4 parts: House, Warehouse, Office and Retail. Outside its scope: contents (declared as a withheld placeholder part) and land, site works, business interruption. Kinds of damage it does not include: waves and fast-moving water (wave and velocity zones).",
     "plain_fact": "4 parts · 2 left out"
@@ -1232,8 +1307,8 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "13 sources set this cell: FEMA, Hazus Flood Model Technical Manual 7.0 (2025), Table 5-2, FEMA Hazus 6.1 flood damage-function extract, USACE, North Atlantic Coast Comprehensive Study (2015), depth-damage functions and FEMA OpenFEMA NFIP redacted claims, v3 (check only) and 9 more. Of the 20 parameters, 15 are lab-tested (T2), 3 are transferred (T3) and 2 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
-    "plain_fact": "13 sources · lab-tested"
+    "paragraph": "13 sources set this cell: FEMA, Hazus Flood Model Technical Manual 7.0 (2025), Table 5-2, FEMA Hazus 6.1 flood damage-function extract, USACE, North Atlantic Coast Comprehensive Study (2015), depth-damage functions and FEMA OpenFEMA NFIP redacted claims, v3 (check only) and 9 more. Of the 20 parameters, 15 are published, 3 are borrowed and 2 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "plain_fact": "13 sources · published"
    },
    {
     "id": "value",
@@ -2434,7 +2509,7 @@
     "raw_name": "axis_definition",
     "value_text": "flood depth above first finished floor, ft",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FRE-S003",
@@ -2463,7 +2538,7 @@
     "raw_name": "curve_form",
     "value_text": "straight lines between published points (piecewise linear)",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FRE-S003",
@@ -2499,7 +2574,7 @@
     "raw_name": "axis_bridge",
     "value_text": "depth_above_floor = depth_above_grade − first_floor_height (same datum required)",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FRE-S003",
@@ -2528,7 +2603,7 @@
     "raw_name": "RE_RES_SFD_1S_SLAB.freshwater.ordinates",
     "value_text": "Hazus DF 129, −4 to 24 ft (USACE-IWR)",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FRE-S002",
@@ -2564,7 +2639,7 @@
     "raw_name": "RE_COM_LOWRISE.freshwater.ordinates",
     "value_text": "Hazus DF 217, −4 to 24 ft (USACE Galveston, average of 47 retail classes)",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FRE-S002",
@@ -2607,7 +2682,7 @@
     "raw_name": "RE_IND_WAREHOUSE.freshwater.ordinates",
     "value_text": "Hazus DF 341, −4 to 24 ft (USACE Galveston, average of 22 wholesale/warehouse classes)",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FRE-S002",
@@ -2650,7 +2725,7 @@
     "raw_name": "RE_RES_SFD_1S_SLAB.coastal.ordinates",
     "value_text": "NACCS RES1-1SNB Min/ML/Max at −1, −0.5, 0, 0.5, 1, 2, 3, 5, 7, 10 ft",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FRE-S004",
@@ -2662,7 +2737,7 @@
     ],
     "claim_ids": [],
     "curve_id": "FRE_RES_COAST_NACCS_5A",
-    "reasoning": "Prototype 5A matches the reference house. North Atlantic expert panel; own verification found it low. T3 (transferred) transfer outside the North Atlantic.",
+    "reasoning": "Prototype 5A matches the reference house. North Atlantic expert panel; own verification found it low. borrowed transfer outside the North Atlantic.",
     "update_trigger": "Attachment G review, NFIP comparison, or owner selects FEMA DF 658.",
     "role": "curve_fit_shape"
    },
@@ -2672,7 +2747,7 @@
     "raw_name": "RE_COM_LOWRISE.coastal.ordinates",
     "value_text": "NACCS COM-ENG Min/ML/Max at the ten published depths",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FRE-S004",
@@ -2684,7 +2759,7 @@
     ],
     "claim_ids": [],
     "curve_id": "FRE_COM_COAST_NACCS_P2",
-    "reasoning": "Prototype 2 steel-framed commercial matches the reference building. T3 (transferred) transfer outside the North Atlantic.",
+    "reasoning": "Prototype 2 steel-framed commercial matches the reference building. borrowed transfer outside the North Atlantic.",
     "update_trigger": "Commercial reference redefined as masonry (then COM-PRE) or NFIP comparison.",
     "role": "curve_fit_shape"
    },
@@ -2694,7 +2769,7 @@
     "raw_name": "RE_IND_WAREHOUSE.coastal.ordinates",
     "value_text": "NACCS COM-PRE Min/ML/Max at the ten published depths",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FRE-S004",
@@ -2706,7 +2781,7 @@
     ],
     "claim_ids": [],
     "curve_id": "FRE_IND_COAST_NACCS_P3",
-    "reasoning": "Prototype 3 one-story steel/light-metal building matches the warehouse. T3 (transferred) transfer outside the North Atlantic.",
+    "reasoning": "Prototype 3 one-story steel/light-metal building matches the warehouse. borrowed transfer outside the North Atlantic.",
     "update_trigger": "NFIP comparison.",
     "role": "curve_fit_shape"
    },
@@ -2716,7 +2791,7 @@
     "raw_name": "naccs_runtime_band",
     "value_text": "ML is the point curve; Min and Max are building-variant bounds, not a probability spread",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FRE-S004",
@@ -2738,7 +2813,7 @@
     "raw_name": "naccs_knot_set",
     "value_text": "published depths only: −1, −0.5, 0, 0.5, 1, 2, 3, 5, 7, 10 ft",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FRE-S001",
@@ -2767,7 +2842,7 @@
     "raw_name": "valid_range.hazus",
     "value_text": "−4 to 24 ft; below −4 ft = 0%; above 24 ft withholds",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FRE-S003",
@@ -2789,7 +2864,7 @@
     "raw_name": "valid_range.naccs",
     "value_text": "−1 to 10 ft; below −1 ft = 0%; above 10 ft withholds",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FRE-S004",
@@ -2811,7 +2886,7 @@
     "raw_name": "water_type_conditioner",
     "value_text": "freshwater -> Hazus; coastal_surge_saline -> NACCS; unknown -> withhold",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "FRE-S002",
@@ -2840,7 +2915,7 @@
     "raw_name": "first_floor_height.RE_RES_SFD_1S_SLAB",
     "value_text": "0.75 ft above grade",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FRE-S009",
@@ -2862,7 +2937,7 @@
     "raw_name": "first_floor_height.RE_COM_LOWRISE",
     "value_text": "0.25 ft above grade",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "FRE-S011",
@@ -2884,7 +2959,7 @@
     "raw_name": "first_floor_height.RE_IND_WAREHOUSE",
     "value_text": "0.25 ft above grade",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "FRE-S011",
@@ -2906,7 +2981,7 @@
     "raw_name": "value_denominator",
     "value_text": "structure replacement cost new (no land, contents, depreciation)",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FRE-S003",
@@ -2992,8 +3067,8 @@
   },
   "extraction": null,
   "tier_words": {
-   "shape": "lab-tested",
-   "cost": "lab-tested"
+   "shape": "published",
+   "cost": "published"
   }
  },
  "build_findings": []

@@ -77,7 +77,7 @@
    "label": "entry agent-read 2026-10-19 · release same author with independent numerical methods"
   }
  },
- "summary": "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a T4 (our judgment) hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage; 86 % of the reference value has a curve and 14 % has none.",
+ "summary": "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a judgment-based hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage; 86 % of the reference value has a curve and 14 % has none.",
  "chain": {
   "stations": [
    {
@@ -1049,20 +1049,112 @@
    },
    "evidence": {
     "words": "Evidence: our judgment",
-    "code": "shape T4 · cost T4",
+    "code": "How damage rises: our judgment · how it becomes dollars: our judgment",
     "tiers": [
      "T4"
-    ]
+    ],
+    "codes": "shape T4 · cost T4"
    },
    "occurrence": {
     "words": "Field reports: nobody has looked yet",
-    "code": "? not searched"
+    "code": "Field reports: nobody has looked yet"
    },
    "review": {
     "words": "Not yet reviewed by a person",
     "code": "entry agent-read 2026-10-19 · release same author with independent numerical methods"
    }
   },
+  "main_logic": [
+   "Hurricane wind is measured as pressure ratio, (event 3-s gust ÷ declared reference 3-s gust)².",
+   "Solar TC-wind ordered damage-state curves reused as a judgment-based hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage.",
+   "The damage ratio is a share of the replacement value of the same physical unit, fixed 2024 dollars: $1.05M per integrated enclosure (80), $520,000 per PCS (20)."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "2 parts with a curve · 86 % of the value · 3 without one yet",
+    "paragraphs": [
+     "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a judgment-based hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage. It names 2 parts: Integrated battery enclosure and Separate PCS. Outside its scope: storm surge and rain flooding (Flood cell), convective wind and tornado (separate scope), autonomous internal failures, collector station and export line and business interruption. Kinds of damage it does not include: windborne debris, wind-driven rain ingress and triggered propagation between units.",
+     "For this hazard the battery plant is split into 2 parts: Integrated battery enclosure and Separate PCS. 3 further units are named but withheld — bess mv and shared electrical, bess civil and bess fieldwork — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: unit MV and shared electrical, civil works and fieldwork.",
+     "$94.4M of $109.8M of the reference plant has a curve (86 %). No curve yet for unit MV and shared electrical, civil works and fieldwork (14 % of the value)."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true
+   },
+   {
+    "id": "worked_out",
+    "name": "How damage is worked out",
+    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "fact": "not written yet",
+    "paragraphs": [
+     "Damage is read against pressure ratio, (event 3-s gust ÷ declared reference 3-s gust)². The curve is ordered damage states, each reached with a lognormal chance as demand rises. The input, in the catalogue's words: pressure ratio: (event 3-second gust / declared reference gust) squared, dimensionless, valid 0 to 2; outside the range is withheld, not clamped.",
+     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": false
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "13 sources, 12 linked · our judgment",
+    "paragraphs": [
+     "13 sources set this cell: Hazard BESS r1 selected profile and budget, Solar TC-wind model v2.1 docs r2, SMA MVPS-S2-SCS-US system manual, storm mounting and anchorage and Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 and 9 more. Of the 9 parameters, 1 is borrowed and 8 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator)."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says passed conditional annual screening.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: same author with independent numerical methods."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: our judgment · how it becomes dollars: our judgment",
+  "hazard_paths": [
+   {
+    "id": "BW-S01",
+    "title": "Hazard BESS r1 selected profile and budget",
+    "path": "docs/plans/_cross_cutting/bess_conus",
+    "state": "on_branch",
+    "link": null,
+    "words": "on a Hazard branch, not on its main yet"
+   },
+   {
+    "id": "BW-S13",
+    "title": "Existing Hazard Substation Hurricane demand-reference binding",
+    "path": "perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
+    "state": "on_branch",
+    "link": null,
+    "words": "on a Hazard branch, not on its main yet"
+   }
+  ],
   "capabilities": [
    {
     "key": "single_event",
@@ -1196,9 +1288,9 @@
   "stations": [
    {
     "id": "scope",
-    "name": "What it covers",
+    "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a T4 (our judgment) hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage. It names 2 parts: Integrated battery enclosure and Separate PCS. Outside its scope: storm surge and rain flooding (Flood cell), convective wind and tornado (separate scope), autonomous internal failures, collector station and export line and business interruption. Kinds of damage it does not include: windborne debris, wind-driven rain ingress and triggered propagation between units.",
+    "paragraph": "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a judgment-based hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage. It names 2 parts: Integrated battery enclosure and Separate PCS. Outside its scope: storm surge and rain flooding (Flood cell), convective wind and tornado (separate scope), autonomous internal failures, collector station and export line and business interruption. Kinds of damage it does not include: windborne debris, wind-driven rain ingress and triggered propagation between units.",
     "plain_fact": "2 parts · 5 left out"
    },
    {
@@ -1219,7 +1311,7 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "13 sources set this cell: Hazard BESS r1 selected profile and budget, Solar TC-wind model v2.1 docs r2, SMA MVPS-S2-SCS-US system manual, storm mounting and anchorage and Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 and 9 more. Of the 9 parameters, 1 is transferred (T3) and 8 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder.",
+    "paragraph": "13 sources set this cell: Hazard BESS r1 selected profile and budget, Solar TC-wind model v2.1 docs r2, SMA MVPS-S2-SCS-US system manual, storm mounting and anchorage and Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 and 9 more. Of the 9 parameters, 1 is borrowed and 8 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
     "plain_fact": "13 sources · our judgment"
    },
    {
@@ -1272,8 +1364,8 @@
      "BW-S01"
     ],
     "title": "Hazard BESS r1 selected profile and budget",
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
-    "link_kind": "hazard_file",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/plans/flood_wind_shared_electrical/asset_model.json",
+    "link_kind": "repo_file",
     "locator": "asset_model.json; layout.csv; reference_budget.csv; 01_reference_profile_and_value.md",
     "no_link_sentence": null,
     "source_id": "BW-S01"
@@ -1284,7 +1376,7 @@
      "BW-S02"
     ],
     "title": "Solar TC-wind model v2.1 docs r2",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/tropical_cyclone_wind_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/tropical_cyclone_wind_solar/current",
     "link_kind": "repo_file",
     "locator": "curve_artifact site-facility records and derivation dossier sections Curve architecture and Honest limitations",
     "no_link_sentence": null,
@@ -1340,9 +1432,16 @@
     "decision": "retain reference only",
     "accessed_on": null,
     "provenance": "register",
+    "hazard": {
+     "path": "docs/plans/_cross_cutting/bess_conus",
+     "state": "on_branch",
+     "link": null,
+     "words": "on a Hazard branch, not on its main yet"
+    },
+    "repo_path": "docs/plans/flood_wind_shared_electrical/asset_model.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
-    "link_kind": "hazard_file",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/plans/flood_wind_shared_electrical/asset_model.json",
+    "link_kind": "repo_file",
     "title": "Hazard BESS r1 selected profile and budget",
     "no_link_sentence": null
    },
@@ -1360,7 +1459,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/tropical_cyclone_wind_solar/current",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/tropical_cyclone_wind_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/tropical_cyclone_wind_solar/current",
     "link_kind": "repo_file",
     "title": "Solar TC-wind model v2.1 docs r2",
     "no_link_sentence": null
@@ -1557,11 +1656,17 @@
     "decision": "retain bridge pattern only; BESS national reference not selected in this pass",
     "accessed_on": null,
     "provenance": "register",
+    "hazard": {
+     "path": "perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
+     "state": "on_branch",
+     "link": null,
+     "words": "on a Hazard branch, not on its main yet"
+    },
     "doi": null,
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
-    "link_kind": "hazard_file",
+    "link": null,
+    "link_kind": "hazard_branch",
     "title": "Existing Hazard Substation Hurricane demand-reference binding",
-    "no_link_sentence": null
+    "no_link_sentence": "on a Hazard branch, not on its main yet"
    }
   ],
   "claims": [
@@ -1952,15 +2057,15 @@
      {
       "id": "BW-S02",
       "title": "Solar TC-wind model v2.1 docs r2",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/tropical_cyclone_wind_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/tropical_cyclone_wind_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "BW-S13",
       "title": "Existing Hazard Substation Hurricane demand-reference binding",
-      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
-      "link_kind": "hazard_file",
+      "link": null,
+      "link_kind": "hazard_branch",
       "resolved": true
      }
     ],
@@ -1981,7 +2086,7 @@
      {
       "id": "BW-S02",
       "title": "Solar TC-wind model v2.1 docs r2",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/tropical_cyclone_wind_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/tropical_cyclone_wind_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2083,8 +2188,8 @@
      {
       "id": "BW-S01",
       "title": "Hazard BESS r1 selected profile and budget",
-      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
-      "link_kind": "hazard_file",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/plans/flood_wind_shared_electrical/asset_model.json",
+      "link_kind": "repo_file",
       "resolved": true
      },
      {
@@ -2119,7 +2224,7 @@
      {
       "id": "BW-S02",
       "title": "Solar TC-wind model v2.1 docs r2",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/tropical_cyclone_wind_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/tropical_cyclone_wind_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      },
@@ -2155,8 +2260,8 @@
      {
       "id": "BW-S13",
       "title": "Existing Hazard Substation Hurricane demand-reference binding",
-      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
-      "link_kind": "hazard_file",
+      "link": null,
+      "link_kind": "hazard_branch",
       "resolved": true
      }
     ],
@@ -2172,13 +2277,13 @@
     "raw_name": "unbound_property",
     "value_text": "15400000USD remains without wind response",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "BW-S01",
       "title": "Hazard BESS r1 selected profile and budget",
-      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
-      "link_kind": "hazard_file",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/plans/flood_wind_shared_electrical/asset_model.json",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2200,8 +2305,8 @@
   },
   "link_counts": {
    "total": 13,
-   "linked": 13,
-   "locator_only": 0,
+   "linked": 12,
+   "locator_only": 1,
    "neither": 0,
    "markers": 0,
    "placeholders": 0

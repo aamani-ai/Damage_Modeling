@@ -63,7 +63,7 @@
    "label": "entry agent-read 2026-10-19 · release reviewed owner approved screening release"
   }
  },
- "summary": "Hurricane wind on solar farms: ordered damage-state curves with Tier-4 synthetic resistance medians and cost ratios (cell-local decision, no direct TC calibration source); 1 part of the asset's value has no curve.",
+ "summary": "Hurricane wind on solar farms: ordered damage-state curves with judgment-based synthetic resistance medians and cost ratios (cell-local decision, no direct TC calibration source); 1 part of the asset's value has no curve.",
  "chain": {
   "stations": [
    {
@@ -1035,7 +1035,13 @@
    {
     "kind": "result",
     "name": "Financial range check (Hazard repo): industry loss figures for solar hurricane",
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/data_sources/financial_range_solar_hurricane/profile.md"
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/docs/data_sources/financial_range_solar_hurricane/profile.md",
+    "hazard": {
+     "path": "docs/data_sources/financial_range_solar_hurricane/profile.md",
+     "state": "on_main",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/docs/data_sources/financial_range_solar_hurricane/profile.md",
+     "words": null
+    }
    }
   ],
   "capability": {
@@ -1188,22 +1194,106 @@
     "code": "LIVE · screening"
    },
    "evidence": {
-    "words": "Evidence: transferred and our judgment",
-    "code": "shape T3–4 · cost T4",
+    "words": "Evidence: our judgment",
+    "code": "How damage rises: borrowed and our judgment · how it becomes dollars: our judgment",
     "tiers": [
-     "T3",
      "T4"
-    ]
+    ],
+    "codes": "shape T3–4 · cost T4"
    },
    "occurrence": {
     "words": "Field reports: nobody has looked yet",
-    "code": "? not searched"
+    "code": "Field reports: nobody has looked yet"
    },
    "review": {
     "words": "Not yet reviewed by a person",
     "code": "entry agent-read 2026-10-19 · release reviewed owner approved screening release"
    }
   },
+  "main_logic": [
+   "Hurricane wind is measured as event maximum gust (Perry dataset), in m/s, architecture-specific demand index (event / design pressure ratio) and site-facility demand ratio (event / design pressure).",
+   "Ordered damage-state curves with judgment-based synthetic resistance medians and cost ratios (cell-local decision, no direct TC calibration source); one module route fitted to NREL satellite storm-damage records.",
+   "The damage ratio is a share of the replacement value of the same part."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "8 parts with a curve · 1 without one yet",
+    "paragraphs": [
+     "Hurricane wind on solar farms: ordered damage-state curves with judgment-based synthetic resistance medians and cost ratios (cell-local decision, no direct TC calibration source); one module route fitted to NREL satellite storm-damage records. It names 8 parts: PV module field, PV module hardware, satellite-data route, Mounting structure, Foundations, Power conversion and collection, GSU and substation, SCADA and communications and Civil infrastructure. Outside its scope: storm surge, flood, tornado and straight-line convective wind (separate pathways or cells), hail, lightning and fire, downtime, business interruption and insurance terms and soft, sunk and non-physical cost (installed capex above physical replacement value). Kinds of damage it does not include: windborne debris impact as a separately valued pathway and wind-driven rain and water ingress.",
+     "For this hazard the solar farm is split into 8 parts: PV module field, PV module hardware, satellite-data route, Mounting structure, Foundations, Power conversion and collection, GSU and substation, SCADA and communications and Civil infrastructure. Parts of the plant's value with no curve yet: replacement support (inspection, labour, rental, logistics, removal): no own curve; takes the value-weighted damage ratio of the other parts and is counted once.",
+     "The damage ratio is a share of replacement value of the same part; the plant view uses the named 2024-USD physical replacement profile, which must be requested and is never selected silently. The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true
+   },
+   {
+    "id": "worked_out",
+    "name": "How damage is worked out",
+    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "fact": "3 hazard measures → a line through points + damage states",
+    "paragraphs": [
+     "Damage is read against event maximum gust (Perry dataset) (m/s), architecture-specific demand index (event / design pressure ratio) and site-facility demand ratio (event / design pressure). The curves take 2 forms: a line through fixed points (piecewise linear); ordered damage states, each reached with a lognormal chance as demand rises. The input, in the catalogue's words: demand ratio 0 to 2, withheld above 2: arrays use event/design net pressure (fixed tilt) or tracker-normal gust / exact-system critical gust (tracker); site facilities use event/design wind pressure or a gust-squared proxy. The satellite-data module route uses event maximum gust, 17.4 to 39.1 m/s.",
+     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "70 sources, 70 linked · our judgment",
+    "paragraphs": [
+     "70 sources set this cell: NREL/NLR, Satellite Imagery of PV Site Storm Damage dataset, 2025, NREL, Q1-2025 Solar PV System Cost Benchmarks, DOE/FEMP, Toward Solar PV Storm Resilience field investigation and ASCE/SEI 7-22, Minimum Design Loads and 66 more. Of the 5 parameters, 1 is field-calibrated and 4 are our judgment. The source and claim registers are machine-readable files in the cell folder."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "1 outside check · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "1 outside check compares this curve with an independent result: Financial range check (Hazard repo): industry loss figures for solar hurricane. The validation record says report.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: reviewed owner approved screening release."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: our judgment",
+  "hazard_paths": [
+   {
+    "id": "LEG-TCWS-002",
+    "title": "Hazard Modeling hurricane-solar M3 provisional placeholder implementation.",
+    "path": "Notebooks/hurricane/solar/m3_damage/01_damage.py",
+    "state": "moved",
+    "moved_to": "Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py",
+    "words": "moved on Hazard's main to Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py"
+   }
+  ],
   "capabilities": [
    {
     "key": "single_event",
@@ -1262,7 +1352,7 @@
     ]
    },
    "open_questions": [
-    "Tier-4 curves to be replaced by better evidence in a later model version",
+    "judgment-based curves to be replaced by better evidence in a later model version",
     "Wind-field, direction-history and duration-cycling bridge contracts are named but their external content is unresolved",
     "Capability field status_before_promotion should become a clearer consumer-readiness field"
    ],
@@ -1271,9 +1361,9 @@
   "stations": [
    {
     "id": "scope",
-    "name": "What it covers",
+    "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Hurricane wind on solar farms: ordered damage-state curves with Tier-4 synthetic resistance medians and cost ratios (cell-local decision, no direct TC calibration source); one module route fitted to NREL satellite storm-damage records. It names 8 parts: PV module field, PV module hardware, satellite-data route, Mounting structure, Foundations, Power conversion and collection, GSU and substation, SCADA and communications and Civil infrastructure. Outside its scope: storm surge, flood, tornado and straight-line convective wind (separate pathways or cells), hail, lightning and fire, downtime, business interruption and insurance terms and soft, sunk and non-physical cost (installed capex above physical replacement value). Kinds of damage it does not include: windborne debris impact as a separately valued pathway and wind-driven rain and water ingress.",
+    "paragraph": "Hurricane wind on solar farms: ordered damage-state curves with judgment-based synthetic resistance medians and cost ratios (cell-local decision, no direct TC calibration source); one module route fitted to NREL satellite storm-damage records. It names 8 parts: PV module field, PV module hardware, satellite-data route, Mounting structure, Foundations, Power conversion and collection, GSU and substation, SCADA and communications and Civil infrastructure. Outside its scope: storm surge, flood, tornado and straight-line convective wind (separate pathways or cells), hail, lightning and fire, downtime, business interruption and insurance terms and soft, sunk and non-physical cost (installed capex above physical replacement value). Kinds of damage it does not include: windborne debris impact as a separately valued pathway and wind-driven rain and water ingress.",
     "plain_fact": "8 parts · 4 left out"
    },
    {
@@ -1294,8 +1384,8 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "70 sources set this cell: NREL/NLR, Satellite Imagery of PV Site Storm Damage dataset, 2025, NREL, Q1-2025 Solar PV System Cost Benchmarks, DOE/FEMP, Toward Solar PV Storm Resilience field investigation and ASCE/SEI 7-22, Minimum Design Loads and 66 more. Of the 5 parameters, 1 is field-calibrated (T1) and 4 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
-    "plain_fact": "70 sources · transferred and our judgment"
+    "paragraph": "70 sources set this cell: NREL/NLR, Satellite Imagery of PV Site Storm Damage dataset, 2025, NREL, Q1-2025 Solar PV System Cost Benchmarks, DOE/FEMP, Toward Solar PV Storm Resilience field investigation and ASCE/SEI 7-22, Minimum Design Loads and 66 more. Of the 5 parameters, 1 is field-calibrated and 4 are our judgment. The source and claim registers are machine-readable files in the cell folder.",
+    "plain_fact": "70 sources · borrowed and our judgment"
    },
    {
     "id": "value",
@@ -1395,7 +1485,7 @@
      "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION"
     ],
     "title": "Damage Modeling owner decision: TC-wind x solar model-v2 cell-local synthetic parameter set.",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
     "link_kind": "repo_file",
     "locator": "TCWS2-D001; TCWS2-D003 through TCWS2-D007",
     "no_link_sentence": null,
@@ -1669,7 +1759,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/strong_wind_solar/proposed/SOURCE_REGISTER_strong_wind_solar__model_v2_0__docs_r1.csv",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/strong_wind_solar/proposed/SOURCE_REGISTER_strong_wind_solar__model_v2_0__docs_r1.csv",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/strong_wind_solar/proposed/SOURCE_REGISTER_strong_wind_solar__model_v2_0__docs_r1.csv",
     "link_kind": "repo_file",
     "title": "Damage Modeling strong_wind_solar model-v2.0/docs-r1 proposed evidence package.",
     "no_link_sentence": null
@@ -1686,11 +1776,12 @@
     "decision": "reject_runtime_retain_audit",
     "accessed_on": "2026-07-28",
     "provenance": "register",
+    "repo_path": "/Users/divy/code/work/infrasure_git_codes/damage_modeling/infrasure-damage-curves/research/HURRICANE_x_SOLAR.md",
     "doi": null,
-    "link": null,
-    "link_kind": "none",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913//Users/divy/code/work/infrasure_git_codes/damage_modeling/infrasure-damage-curves/research/HURRICANE_x_SOLAR.md",
+    "link_kind": "repo_file",
     "title": "InfraSure legacy HURRICANE x SOLAR research memo and master curve index.",
-    "no_link_sentence": "no link in the register"
+    "no_link_sentence": null
    },
    {
     "id": "LEG-TCWS-002",
@@ -1704,9 +1795,16 @@
     "decision": "reject_runtime_retain_audit",
     "accessed_on": "2026-07-28",
     "provenance": "register",
+    "hazard": {
+     "path": "Notebooks/hurricane/solar/m3_damage/01_damage.py",
+     "state": "moved",
+     "moved_to": "Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py",
+     "words": "moved on Hazard's main to Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py"
+    },
     "doi": null,
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/Notebooks/hurricane/solar/m3_damage/01_damage.py",
-    "link_kind": "hazard_file",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py",
+    "link_kind": "hazard_moved",
     "title": "Hazard Modeling hurricane-solar M3 provisional placeholder implementation.",
     "no_link_sentence": null
    },
@@ -1724,7 +1822,7 @@
     "provenance": "register",
     "repo_path": "docs/method/standards/00_index.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/method/standards/00_index.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/standards/00_index.md",
     "link_kind": "repo_file",
     "title": "Damage Modeling repository governance: method standards, contracts, and damage-curve skill controls.",
     "kind": "marker",
@@ -1744,7 +1842,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md",
     "link_kind": "repo_file",
     "title": "Bounded evidence search log for tropical_cyclone_wind_solar model v0.1/docs r1.",
     "no_link_sentence": null
@@ -2627,7 +2725,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/strong_wind_solar/current",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/strong_wind_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/strong_wind_solar/current",
     "link_kind": "repo_file",
     "title": "Current canonical strong_wind_solar model v1.0/docs r3 artifact and workbook.",
     "no_link_sentence": null
@@ -2646,7 +2744,7 @@
     "provenance": "register",
     "repo_path": "docs/method/shared_components/solar_wind_normalized_response/candidate_response_profile_v0_1.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/method/shared_components/solar_wind_normalized_response/candidate_response_profile_v0_1.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/shared_components/solar_wind_normalized_response/candidate_response_profile_v0_1.json",
     "link_kind": "repo_file",
     "title": "Damage Modeling shared solar-wind normalized-response candidate profile v0.1.",
     "no_link_sentence": null
@@ -2665,7 +2763,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
     "link_kind": "repo_file",
     "title": "Damage Modeling owner decision: TC-wind x solar model-v2 cell-local synthetic parameter set.",
     "no_link_sentence": null
@@ -2684,7 +2782,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
     "link_kind": "repo_file",
     "title": "TC-wind x solar model-v2 bounded evidence review: no direct generic fixed/tracker calibration source adopted.",
     "no_link_sentence": null
@@ -4142,7 +4240,7 @@
      {
       "id": "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION",
       "title": "Damage Modeling owner decision: TC-wind x solar model-v2 cell-local synthetic parameter set.",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -4164,14 +4262,14 @@
      {
       "id": "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION",
       "title": "Damage Modeling owner decision: TC-wind x solar model-v2 cell-local synthetic parameter set.",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
       "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "NO_DIRECT_TC_CALIBRATION_SOURCE",
       "title": "TC-wind x solar model-v2 bounded evidence review: no direct generic fixed/tracker calibration source adopted.",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -4193,7 +4291,7 @@
      {
       "id": "GOVERNANCE_CONTRACT",
       "title": "Damage Modeling repository governance: method standards, contracts, and damage-curve skill controls.",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/method/standards/00_index.md",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/standards/00_index.md",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -4215,7 +4313,7 @@
      {
       "id": "GOVERNANCE_CONTRACT",
       "title": "Damage Modeling repository governance: method standards, contracts, and damage-curve skill controls.",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/method/standards/00_index.md",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/standards/00_index.md",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -4238,15 +4336,15 @@
   },
   "link_counts": {
    "total": 70,
-   "linked": 69,
-   "locator_only": 1,
+   "linked": 70,
+   "locator_only": 0,
    "neither": 0,
    "markers": 1,
    "placeholders": 0
   },
   "extraction": null,
   "tier_words": {
-   "shape": "transferred and our judgment",
+   "shape": "borrowed and our judgment",
    "cost": "our judgment"
   }
  },

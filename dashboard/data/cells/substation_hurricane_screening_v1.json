@@ -652,20 +652,95 @@
    },
    "evidence": {
     "words": "Evidence: our judgment",
-    "code": "shape T4 · cost T4",
+    "code": "How damage rises: our judgment · how it becomes dollars: our judgment",
     "tiers": [
      "T4"
-    ]
+    ],
+    "codes": "shape T4 · cost T4"
    },
    "occurrence": {
     "words": "Field reports: nobody has looked yet",
-    "code": "? not searched"
+    "code": "Field reports: nobody has looked yet"
    },
    "review": {
     "words": "Not yet reviewed by a person",
     "code": "entry agent-read 2026-10-19 · release —"
    }
   },
+  "main_logic": [
+   "Hurricane wind is read as pressure ratio: (event 3-second gust / ASCE MRI300 reference design gust, 10 m, Exposure C) squared, valid 0 to 2.",
+   "The canonical solar TC-wind GSU/substation assembly curve is already separate from the solar array, so it is reused for the standalone station without inventing a solar plant.",
+   "The damage ratio is a share of the replacement value of the same fenced station, $27,353,236.37 (MISO MTEP24 published table amounts), applied once."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "1 part with a curve",
+    "paragraphs": [
+     "Hurricane wind on substations: the canonical solar TC-wind GSU/substation assembly curve is already separate from the solar array, so it is reused for the standalone station without inventing a solar plant (see docs/contracts/hazard_handoff/substation_hurricane_screening_v1/README.md). It names 1 part: Whole station (fenced assembly). Outside its scope: external access road and project support allowances ($3.06M, outside the fenced value; unmodeled, not zero), storm surge and rain flooding (Flood entry), tornado (convective wind binding) and business interruption, revenue and insured interest. Kinds of damage it does not include: wind-driven rain and windborne debris.",
+     "For this hazard the substation is split into 1 part: Whole station (fenced assembly).",
+     "The damage ratio is a share of replacement value of the same fenced station, $27,353,236.37 (MISO MTEP24 published table amounts), applied once. The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true
+   },
+   {
+    "id": "worked_out",
+    "name": "How damage is worked out",
+    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "fact": "not written yet",
+    "paragraphs": [
+     "No hazard axis is declared. The input, in the catalogue's words: pressure ratio: (event 3-second gust / ASCE MRI300 reference design gust, 10 m, Exposure C) squared, valid 0 to 2; STORM 10-minute wind converted by (1/0.88) x 1.20; outside the range is unavailable, not clamped.",
+     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": false
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "not written yet",
+    "paragraphs": [
+     "No source list could be read for this cell. The source and claim registers are machine-readable files in the cell folder."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": false
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says passed.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: our judgment · how it becomes dollars: our judgment",
+  "hazard_paths": [],
   "capabilities": [
    {
     "key": "single_event",
@@ -729,7 +804,7 @@
   "stations": [
    {
     "id": "scope",
-    "name": "What it covers",
+    "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
     "paragraph": "Hurricane wind on substations: the canonical solar TC-wind GSU/substation assembly curve is already separate from the solar array, so it is reused for the standalone station without inventing a solar plant (see docs/contracts/hazard_handoff/substation_hurricane_screening_v1/README.md). It names 1 part: Whole station (fenced assembly). Outside its scope: external access road and project support allowances ($3.06M, outside the fenced value; unmodeled, not zero), storm surge and rain flooding (Flood entry), tornado (convective wind binding) and business interruption, revenue and insured interest. Kinds of damage it does not include: wind-driven rain and windborne debris.",
     "plain_fact": "1 part · 4 left out"

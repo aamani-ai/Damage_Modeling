@@ -945,7 +945,13 @@
    {
     "kind": "result",
     "name": "Financial range check (Hazard repo): industry loss figures for solar wildfire",
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/data_sources/financial_range_solar_wildfire/profile.md"
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/docs/data_sources/financial_range_solar_wildfire/profile.md",
+    "hazard": {
+     "path": "docs/data_sources/financial_range_solar_wildfire/profile.md",
+     "state": "on_main",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/docs/data_sources/financial_range_solar_wildfire/profile.md",
+     "words": null
+    }
    }
   ],
   "capability": {
@@ -1101,22 +1107,96 @@
     "code": "LIVE · screening"
    },
    "evidence": {
-    "words": "Evidence: lab-tested and our judgment",
-    "code": "shape T4 · cost T2",
+    "words": "Evidence: our judgment",
+    "code": "How damage rises: our judgment · how it becomes dollars: published",
     "tiers": [
-     "T2",
      "T4"
-    ]
+    ],
+    "codes": "shape T4 · cost T2"
    },
    "occurrence": {
     "words": "Field reports: nobody has looked yet",
-    "code": "? not searched"
+    "code": "Field reports: nobody has looked yet"
    },
    "review": {
     "words": "Not yet reviewed by a person",
     "code": "entry agent-read 2026-10-19 · release reviewed"
    }
   },
+  "main_logic": [
+   "Wildfire is measured as FSim conditional flame-length class (0 = no event).",
+   "Exact-class state tables per part on FSim flame-length classes; ordering constrained by field, lab and guidance sources, absolute values set by engineering judgment.",
+   "The damage ratio is a share of the pre-event direct replacement value of the same part."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "10 parts with a curve · 1 without one yet",
+    "paragraphs": [
+     "Wildfire on solar farms: exact-class state tables per part on FSim flame-length classes; ordering constrained by field, lab and guidance sources, absolute values set by engineering judgment. It names 10 parts: PV modules, Tracker and racking, Piles and inverter pads, Central inverters, Combiner boxes, Exposed AC and DC cable, Transformers and switchgear, Grounding and lightning protection, SCADA and communications and Civil: fencing, roads, buildings, site prep. Outside its scope: equipment-origin fire and battery storage, power shutoffs, downtime, business interruption and insurance terms, post-fire erosion or landslide, environmental remediation and fire-service liability and soft and non-physical cost (installed capex above physical replacement value). Kinds of damage it does not include: smoke and ash optical losses and module cleaning.",
+     "For this hazard the solar farm is split into 10 parts: PV modules, Tracker and racking, Piles and inverter pads, Central inverters, Combiner boxes, Exposed AC and DC cable, Transformers and switchgear, Grounding and lightning protection, SCADA and communications and Civil: fencing, roads, buildings, site prep. Parts of the plant's value with no curve yet: replacement support and fieldwork: no own curve; allocated once at the aggregate direct-and-civil damage ratio (judgment-based rule).",
+     "The damage ratio is a share of pre-event direct replacement value of the same part; the plant view uses the named reference profile WILDFIRE_SOLAR_REFERENCE_100MWDC_V1 or complete site part values. The files state no plant-level dollar figure for this asset. Shares of the plant's physical value, as the cell states them: PV modules 33 %, Tracker and racking 13 %, Piles and inverter pads 4 %, Central inverters 4 %, Combiner boxes 1 %, Exposed AC and DC cable 8 %, Transformers and switchgear 12 %, Grounding and lightning protection 1 %, SCADA and communications 0 % and Civil: fencing, roads, buildings, site prep 4 %."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true
+   },
+   {
+    "id": "worked_out",
+    "name": "How damage is worked out",
+    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "fact": "FSim conditional flame-length class → exact classes",
+    "paragraphs": [
+     "Damage is read against FSim conditional flame-length class (0 = no event). The curve is a table of damage ratios at exact classes, nothing in between. The input, in the catalogue's words: USFS FSim conditional flame-length class, exact integer 1 to 6 (0 = no event), or the six-class probability vector; no interpolation; burn probability stays with Hazard.",
+     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter exists as a file."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "21 sources, 20 linked · our judgment",
+    "paragraphs": [
+     "21 sources set this cell: USDA Forest Service, Spatial datasets of probabilistic wildfire risk components for the US, 3rd ed., RDS-2016-0034-3, DOE/FEMP, Solar Photovoltaic Hardening for Resilience - Wildfire, NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment and FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026 and 17 more. Of the 9 parameters, 3 are published and 6 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "1 outside check · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "1 outside check compares this curve with an independent result: Financial range check (Hazard repo): industry loss figures for solar wildfire. The validation record says report.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: reviewed."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: our judgment · how it becomes dollars: published",
+  "hazard_paths": [],
   "capabilities": [
    {
     "key": "single_event",
@@ -1151,7 +1231,7 @@
    "covered": {
     "value": null,
     "not_covered": [
-     "Replacement support and fieldwork: no own curve; allocated once at the aggregate direct-and-civil damage ratio (our judgment, T4 rule)"
+     "Replacement support and fieldwork: no own curve; allocated once at the aggregate direct-and-civil damage ratio (judgment-based rule)"
     ],
     "withheld": []
    },
@@ -1181,7 +1261,7 @@
   "stations": [
    {
     "id": "scope",
-    "name": "What it covers",
+    "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
     "paragraph": "Wildfire on solar farms: exact-class state tables per part on FSim flame-length classes; ordering constrained by field, lab and guidance sources, absolute values set by engineering judgment. It names 10 parts: PV modules, Tracker and racking, Piles and inverter pads, Central inverters, Combiner boxes, Exposed AC and DC cable, Transformers and switchgear, Grounding and lightning protection, SCADA and communications and Civil: fencing, roads, buildings, site prep. Outside its scope: equipment-origin fire and battery storage, power shutoffs, downtime, business interruption and insurance terms, post-fire erosion or landslide, environmental remediation and fire-service liability and soft and non-physical cost (installed capex above physical replacement value). Kinds of damage it does not include: smoke and ash optical losses and module cleaning.",
     "plain_fact": "10 parts · 4 left out"
@@ -1190,7 +1270,7 @@
     "id": "units",
     "name": "What breaks",
     "meaning": "The parts of the plant the hazard damages, each with its own curve",
-    "paragraph": "For this hazard the solar farm is split into 10 parts: PV modules, Tracker and racking, Piles and inverter pads, Central inverters, Combiner boxes, Exposed AC and DC cable, Transformers and switchgear, Grounding and lightning protection, SCADA and communications and Civil: fencing, roads, buildings, site prep. Parts of the plant's value with no curve yet: replacement support and fieldwork: no own curve; allocated once at the aggregate direct-and-civil damage ratio (our judgment, T4 rule).",
+    "paragraph": "For this hazard the solar farm is split into 10 parts: PV modules, Tracker and racking, Piles and inverter pads, Central inverters, Combiner boxes, Exposed AC and DC cable, Transformers and switchgear, Grounding and lightning protection, SCADA and communications and Civil: fencing, roads, buildings, site prep. Parts of the plant's value with no curve yet: replacement support and fieldwork: no own curve; allocated once at the aggregate direct-and-civil damage ratio (judgment-based rule).",
     "plain_fact": "10 parts"
    },
    {
@@ -1204,8 +1284,8 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "21 sources set this cell: USDA Forest Service, Spatial datasets of probabilistic wildfire risk components for the US, 3rd ed., RDS-2016-0034-3, DOE/FEMP, Solar Photovoltaic Hardening for Resilience - Wildfire, NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment and FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026 and 17 more. Of the 9 parameters, 3 are lab-tested (T2) and 6 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register.",
-    "plain_fact": "21 sources · lab-tested, transferred and our judgment"
+    "paragraph": "21 sources set this cell: USDA Forest Service, Spatial datasets of probabilistic wildfire risk components for the US, 3rd ed., RDS-2016-0034-3, DOE/FEMP, Solar Photovoltaic Hardening for Resilience - Wildfire, NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment and FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026 and 17 more. Of the 9 parameters, 3 are published and 6 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register.",
+    "plain_fact": "21 sources · published, borrowed and our judgment"
    },
    {
     "id": "value",
@@ -2606,7 +2686,7 @@
     "raw_name": "FSim class definitions and conditional probability semantics",
     "value_text": "",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "USFS_FSIM_RDS_2023",
@@ -2635,7 +2715,7 @@
     "raw_name": "relative radiant/convective severity ordering",
     "value_text": "",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FRANKMAN_2012_WILDLAND_HEAT",
@@ -2851,7 +2931,7 @@
     "raw_name": "reference failure-unit values",
     "value_text": "",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "NREL_NLR_Q1_2025_PV_BENCHMARK",
@@ -2924,7 +3004,7 @@
   "extraction": null,
   "tier_words": {
    "shape": "our judgment",
-   "cost": "lab-tested"
+   "cost": "published"
   }
  },
  "build_findings": [

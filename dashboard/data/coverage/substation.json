@@ -1,0 +1,2057 @@
+{
+ "schema": "damage_dashboard_coverage.v1",
+ "type": {
+  "slug": "substation",
+  "label": "Substation",
+  "category": "grid",
+  "category_label": "Grid infrastructure",
+  "profile": "345/138 kV transmission substation, the fenced station",
+  "building": null,
+  "also_buildings": null,
+  "picture_note": null,
+  "catalogue_asset": "Substation"
+ },
+ "twin": {
+  "asset": "gi_sub_t",
+  "name": "Sample Transmission Substation",
+  "model": "gi-sub-trans",
+  "root": "st_stn",
+  "plant_model": null,
+  "plant_root": null,
+  "plant_name": null,
+  "commit": "d01abd03cb101ecbe05468a5d573b50f90efd8fb",
+  "crosswalk": "docs/contracts/twin_crosswalks/gi_sub_t.csv"
+ },
+ "trees": {
+  "asset": {
+   "root": "st_stn",
+   "nodes": {
+    "st_stn": {
+     "n": "Transmission Substation"
+    },
+    "st_hv": {
+     "n": "345 kV Yard",
+     "p": "st_stn"
+    },
+    "st_hv_de": {
+     "n": "345 kV Line Terminals",
+     "p": "st_hv"
+    },
+    "st_hv_cb": {
+     "n": "345 kV Circuit Breakers",
+     "p": "st_hv"
+    },
+    "st_hv_ds": {
+     "n": "345 kV Disconnect Switches",
+     "p": "st_hv"
+    },
+    "st_hv_bus": {
+     "n": "345 kV Bus & Supports",
+     "p": "st_hv"
+    },
+    "st_hv_vt": {
+     "n": "345 kV Voltage Transformers",
+     "p": "st_hv"
+    },
+    "st_hv_sa": {
+     "n": "345 kV Surge Arresters",
+     "p": "st_hv"
+    },
+    "st_lv": {
+     "n": "138 kV Yard",
+     "p": "st_stn"
+    },
+    "st_lv_de": {
+     "n": "138 kV Line Terminals",
+     "p": "st_lv"
+    },
+    "st_lv_cb": {
+     "n": "138 kV Circuit Breakers",
+     "p": "st_lv"
+    },
+    "st_lv_ds": {
+     "n": "138 kV Disconnect Switches",
+     "p": "st_lv"
+    },
+    "st_lv_bus": {
+     "n": "138 kV Bus & Supports",
+     "p": "st_lv"
+    },
+    "st_lv_vt": {
+     "n": "138 kV Voltage Transformers",
+     "p": "st_lv"
+    },
+    "st_tx": {
+     "n": "Power Transformation",
+     "p": "st_stn"
+    },
+    "st_tx_u": {
+     "n": "Autotransformers",
+     "p": "st_tx"
+    },
+    "st_tx_core": {
+     "n": "Core & Windings",
+     "p": "st_tx_u"
+    },
+    "st_tx_bush": {
+     "n": "Bushings",
+     "p": "st_tx_u"
+    },
+    "st_tx_cool": {
+     "n": "Radiators & Fans",
+     "p": "st_tx_u"
+    },
+    "st_tx_ltc": {
+     "n": "On-Load Tap Changer",
+     "p": "st_tx_u"
+    },
+    "st_tx_cons": {
+     "n": "Conservator & Protection Devices",
+     "p": "st_tx_u"
+    },
+    "st_tx_cab": {
+     "n": "Control Cabinet",
+     "p": "st_tx_u"
+    },
+    "st_tx_oc": {
+     "n": "Oil Containment & Firewall",
+     "p": "st_tx"
+    },
+    "st_pc": {
+     "n": "Protection, Control & Communications",
+     "p": "st_stn"
+    },
+    "st_pc_house": {
+     "n": "Control House",
+     "p": "st_pc"
+    },
+    "st_pc_relay": {
+     "n": "Relay Panels",
+     "p": "st_pc"
+    },
+    "st_pc_rtu": {
+     "n": "SCADA & Communications",
+     "p": "st_pc"
+    },
+    "st_pc_dc": {
+     "n": "Station Battery & Charger",
+     "p": "st_pc"
+    },
+    "st_pc_ss": {
+     "n": "Station Service",
+     "p": "st_pc"
+    },
+    "st_pc_cable": {
+     "n": "Control Cable & Trench",
+     "p": "st_pc"
+    },
+    "st_cv": {
+     "n": "Civil, Grounding & Security",
+     "p": "st_stn"
+    },
+    "st_cv_grid": {
+     "n": "Grounding Grid",
+     "p": "st_cv"
+    },
+    "st_cv_rock": {
+     "n": "Yard Surfacing",
+     "p": "st_cv"
+    },
+    "st_cv_fence": {
+     "n": "Fence, Gates & Security",
+     "p": "st_cv"
+    },
+    "st_cv_shield": {
+     "n": "Lightning Shielding",
+     "p": "st_cv"
+    },
+    "st_cv_drain": {
+     "n": "Drainage",
+     "p": "st_cv"
+    },
+    "st_cv_road": {
+     "n": "Access Road",
+     "p": "st_cv"
+    },
+    "st_ao_wall": {
+     "n": "Perimeter Flood Wall",
+     "p": "st_cv"
+    }
+   }
+  }
+ },
+ "hazards": [
+  {
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail"
+   },
+   "entry_id": "hail_substation",
+   "status": "gap",
+   "gap": true,
+   "href": "/cells/hail_substation",
+   "rows": {
+    "_gap": {
+     "s": "no_curve",
+     "note": "No curve for this hazard yet: the catalogue lists it as a gap.",
+     "basis": "gap"
+    }
+   },
+   "states": {
+    "asset": {
+     "st_stn": "_gap",
+     "st_hv": "_gap",
+     "st_hv_de": "_gap",
+     "st_hv_cb": "_gap",
+     "st_hv_ds": "_gap",
+     "st_hv_bus": "_gap",
+     "st_hv_vt": "_gap",
+     "st_hv_sa": "_gap",
+     "st_lv": "_gap",
+     "st_lv_de": "_gap",
+     "st_lv_cb": "_gap",
+     "st_lv_ds": "_gap",
+     "st_lv_bus": "_gap",
+     "st_lv_vt": "_gap",
+     "st_tx": "_gap",
+     "st_tx_u": "_gap",
+     "st_tx_core": "_gap",
+     "st_tx_bush": "_gap",
+     "st_tx_cool": "_gap",
+     "st_tx_ltc": "_gap",
+     "st_tx_cons": "_gap",
+     "st_tx_cab": "_gap",
+     "st_tx_oc": "_gap",
+     "st_pc": "_gap",
+     "st_pc_house": "_gap",
+     "st_pc_relay": "_gap",
+     "st_pc_rtu": "_gap",
+     "st_pc_dc": "_gap",
+     "st_pc_ss": "_gap",
+     "st_pc_cable": "_gap",
+     "st_cv": "_gap",
+     "st_cv_grid": "_gap",
+     "st_cv_rock": "_gap",
+     "st_cv_fence": "_gap",
+     "st_cv_shield": "_gap",
+     "st_cv_drain": "_gap",
+     "st_cv_road": "_gap",
+     "st_ao_wall": "_gap"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "st_hv",
+      "name": "345 kV Yard",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "st_hv_de",
+          "name": "345 kV Line Terminals",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_hv_cb",
+          "name": "345 kV Circuit Breakers",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_hv_ds",
+          "name": "345 kV Disconnect Switches",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_hv_bus",
+          "name": "345 kV Bus & Supports",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_hv_vt",
+          "name": "345 kV Voltage Transformers",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_hv_sa",
+          "name": "345 kV Surge Arresters",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_lv",
+      "name": "138 kV Yard",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "st_lv_de",
+          "name": "138 kV Line Terminals",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_lv_cb",
+          "name": "138 kV Circuit Breakers",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_lv_ds",
+          "name": "138 kV Disconnect Switches",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_lv_bus",
+          "name": "138 kV Bus & Supports",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_lv_vt",
+          "name": "138 kV Voltage Transformers",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_tx",
+      "name": "Power Transformation",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "st_tx_u",
+          "name": "Autotransformers",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_tx_oc",
+          "name": "Oil Containment & Firewall",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_pc",
+      "name": "Protection, Control & Communications",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "st_pc_house",
+          "name": "Control House",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_pc_relay",
+          "name": "Relay Panels",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_pc_rtu",
+          "name": "SCADA & Communications",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_pc_dc",
+          "name": "Station Battery & Charger",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_pc_ss",
+          "name": "Station Service",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_pc_cable",
+          "name": "Control Cable & Trench",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_cv",
+      "name": "Civil, Grounding & Security",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "st_cv_grid",
+          "name": "Grounding Grid",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_cv_rock",
+          "name": "Yard Surfacing",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_cv_fence",
+          "name": "Fence, Gates & Security",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_cv_shield",
+          "name": "Lightning Shielding",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_cv_drain",
+          "name": "Drainage",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_cv_road",
+          "name": "Access Road",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "st_ao_wall",
+          "name": "Perimeter Flood Wall",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 0,
+    "conditioner": 0,
+    "no_curve": 26,
+    "no_direct_damage": 0,
+    "outside": 0
+   },
+   "curve_parts": [],
+   "unmapped": []
+  },
+  {
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "entry_id": "flood_substation",
+   "status": "live",
+   "gap": false,
+   "href": "/cells/flood_substation",
+   "rows": {
+    "st_stn": {
+     "s": "curve",
+     "part": "Whole station (fenced assembly)",
+     "note": "One curve for the whole fenced station",
+     "basis": "part"
+    },
+    "st_cv_road": {
+     "s": "outside",
+     "part": "External access road and project support allowances",
+     "note": "Outside the fenced value; unmodeled, not zero",
+     "basis": "out_of_scope"
+    },
+    "st_ao_wall": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference station",
+     "basis": "out_of_scope"
+    }
+   },
+   "states": {
+    "asset": {
+     "st_stn": "st_stn",
+     "st_hv": "st_stn",
+     "st_hv_de": "st_stn",
+     "st_hv_cb": "st_stn",
+     "st_hv_ds": "st_stn",
+     "st_hv_bus": "st_stn",
+     "st_hv_vt": "st_stn",
+     "st_hv_sa": "st_stn",
+     "st_lv": "st_stn",
+     "st_lv_de": "st_stn",
+     "st_lv_cb": "st_stn",
+     "st_lv_ds": "st_stn",
+     "st_lv_bus": "st_stn",
+     "st_lv_vt": "st_stn",
+     "st_tx": "st_stn",
+     "st_tx_u": "st_stn",
+     "st_tx_core": "st_stn",
+     "st_tx_bush": "st_stn",
+     "st_tx_cool": "st_stn",
+     "st_tx_ltc": "st_stn",
+     "st_tx_cons": "st_stn",
+     "st_tx_cab": "st_stn",
+     "st_tx_oc": "st_stn",
+     "st_pc": "st_stn",
+     "st_pc_house": "st_stn",
+     "st_pc_relay": "st_stn",
+     "st_pc_rtu": "st_stn",
+     "st_pc_dc": "st_stn",
+     "st_pc_ss": "st_stn",
+     "st_pc_cable": "st_stn",
+     "st_cv": "st_stn",
+     "st_cv_grid": "st_stn",
+     "st_cv_rock": "st_stn",
+     "st_cv_fence": "st_stn",
+     "st_cv_shield": "st_stn",
+     "st_cv_drain": "st_stn",
+     "st_cv_road": "st_cv_road",
+     "st_ao_wall": "st_ao_wall"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "st_hv",
+      "name": "345 kV Yard",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_hv_de",
+          "name": "345 kV Line Terminals",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_hv_cb",
+          "name": "345 kV Circuit Breakers",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_hv_ds",
+          "name": "345 kV Disconnect Switches",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_hv_bus",
+          "name": "345 kV Bus & Supports",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_hv_vt",
+          "name": "345 kV Voltage Transformers",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_hv_sa",
+          "name": "345 kV Surge Arresters",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_lv",
+      "name": "138 kV Yard",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_lv_de",
+          "name": "138 kV Line Terminals",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_lv_cb",
+          "name": "138 kV Circuit Breakers",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_lv_ds",
+          "name": "138 kV Disconnect Switches",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_lv_bus",
+          "name": "138 kV Bus & Supports",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_lv_vt",
+          "name": "138 kV Voltage Transformers",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_tx",
+      "name": "Power Transformation",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_tx_u",
+          "name": "Autotransformers",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_tx_oc",
+          "name": "Oil Containment & Firewall",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_pc",
+      "name": "Protection, Control & Communications",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_pc_house",
+          "name": "Control House",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_pc_relay",
+          "name": "Relay Panels",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_pc_rtu",
+          "name": "SCADA & Communications",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_pc_dc",
+          "name": "Station Battery & Charger",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_pc_ss",
+          "name": "Station Service",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_pc_cable",
+          "name": "Control Cable & Trench",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_cv",
+      "name": "Civil, Grounding & Security",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_cv_grid",
+          "name": "Grounding Grid",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_cv_rock",
+          "name": "Yard Surfacing",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_cv_fence",
+          "name": "Fence, Gates & Security",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_cv_shield",
+          "name": "Lightning Shielding",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         },
+         {
+          "node": "st_cv_drain",
+          "name": "Drainage",
+          "part": "Whole station (fenced assembly)",
+          "note": "One curve for the whole fenced station"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "st_cv_road",
+          "name": "Access Road",
+          "part": "External access road and project support allowances",
+          "note": "Outside the fenced value; unmodeled, not zero"
+         },
+         {
+          "node": "st_ao_wall",
+          "name": "Perimeter Flood Wall",
+          "note": "A resilience measure in the twin; not part of the reference station"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 24,
+    "conditioner": 0,
+    "no_curve": 0,
+    "no_direct_damage": 0,
+    "outside": 2
+   },
+   "curve_parts": [
+    "Whole station (fenced assembly)"
+   ],
+   "unmapped": []
+  },
+  {
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "entry_id": "substation_hurricane_screening_v1",
+   "status": "reused",
+   "gap": false,
+   "href": "/cells/substation_hurricane_screening_v1",
+   "rows": {
+    "st_stn": {
+     "s": "curve",
+     "part": "Whole station (fenced assembly)",
+     "note": "Reuses the screening response for the whole fenced station",
+     "basis": "part"
+    },
+    "st_cv_road": {
+     "s": "outside",
+     "part": "External access road and project support allowances",
+     "note": "Outside the fenced value",
+     "basis": "out_of_scope"
+    },
+    "st_ao_wall": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference station",
+     "basis": "out_of_scope"
+    }
+   },
+   "states": {
+    "asset": {
+     "st_stn": "st_stn",
+     "st_hv": "st_stn",
+     "st_hv_de": "st_stn",
+     "st_hv_cb": "st_stn",
+     "st_hv_ds": "st_stn",
+     "st_hv_bus": "st_stn",
+     "st_hv_vt": "st_stn",
+     "st_hv_sa": "st_stn",
+     "st_lv": "st_stn",
+     "st_lv_de": "st_stn",
+     "st_lv_cb": "st_stn",
+     "st_lv_ds": "st_stn",
+     "st_lv_bus": "st_stn",
+     "st_lv_vt": "st_stn",
+     "st_tx": "st_stn",
+     "st_tx_u": "st_stn",
+     "st_tx_core": "st_stn",
+     "st_tx_bush": "st_stn",
+     "st_tx_cool": "st_stn",
+     "st_tx_ltc": "st_stn",
+     "st_tx_cons": "st_stn",
+     "st_tx_cab": "st_stn",
+     "st_tx_oc": "st_stn",
+     "st_pc": "st_stn",
+     "st_pc_house": "st_stn",
+     "st_pc_relay": "st_stn",
+     "st_pc_rtu": "st_stn",
+     "st_pc_dc": "st_stn",
+     "st_pc_ss": "st_stn",
+     "st_pc_cable": "st_stn",
+     "st_cv": "st_stn",
+     "st_cv_grid": "st_stn",
+     "st_cv_rock": "st_stn",
+     "st_cv_fence": "st_stn",
+     "st_cv_shield": "st_stn",
+     "st_cv_drain": "st_stn",
+     "st_cv_road": "st_cv_road",
+     "st_ao_wall": "st_ao_wall"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "st_hv",
+      "name": "345 kV Yard",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_hv_de",
+          "name": "345 kV Line Terminals",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_hv_cb",
+          "name": "345 kV Circuit Breakers",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_hv_ds",
+          "name": "345 kV Disconnect Switches",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_hv_bus",
+          "name": "345 kV Bus & Supports",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_hv_vt",
+          "name": "345 kV Voltage Transformers",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_hv_sa",
+          "name": "345 kV Surge Arresters",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_lv",
+      "name": "138 kV Yard",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_lv_de",
+          "name": "138 kV Line Terminals",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_lv_cb",
+          "name": "138 kV Circuit Breakers",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_lv_ds",
+          "name": "138 kV Disconnect Switches",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_lv_bus",
+          "name": "138 kV Bus & Supports",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_lv_vt",
+          "name": "138 kV Voltage Transformers",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_tx",
+      "name": "Power Transformation",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_tx_u",
+          "name": "Autotransformers",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_tx_oc",
+          "name": "Oil Containment & Firewall",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_pc",
+      "name": "Protection, Control & Communications",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_pc_house",
+          "name": "Control House",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_pc_relay",
+          "name": "Relay Panels",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_pc_rtu",
+          "name": "SCADA & Communications",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_pc_dc",
+          "name": "Station Battery & Charger",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_pc_ss",
+          "name": "Station Service",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_pc_cable",
+          "name": "Control Cable & Trench",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_cv",
+      "name": "Civil, Grounding & Security",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_cv_grid",
+          "name": "Grounding Grid",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_cv_rock",
+          "name": "Yard Surfacing",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_cv_fence",
+          "name": "Fence, Gates & Security",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_cv_shield",
+          "name": "Lightning Shielding",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_cv_drain",
+          "name": "Drainage",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "st_cv_road",
+          "name": "Access Road",
+          "part": "External access road and project support allowances",
+          "note": "Outside the fenced value"
+         },
+         {
+          "node": "st_ao_wall",
+          "name": "Perimeter Flood Wall",
+          "note": "A resilience measure in the twin; not part of the reference station"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 24,
+    "conditioner": 0,
+    "no_curve": 0,
+    "no_direct_damage": 0,
+    "outside": 2
+   },
+   "curve_parts": [
+    "Whole station (fenced assembly)"
+   ],
+   "unmapped": []
+  },
+  {
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "entry_id": "substation_convective_wind_screening_v1",
+   "status": "reused",
+   "gap": false,
+   "href": "/cells/substation_convective_wind_screening_v1",
+   "rows": {
+    "st_stn": {
+     "s": "curve",
+     "part": "Whole station (fenced assembly)",
+     "note": "Reuses the screening response for the whole fenced station",
+     "basis": "part"
+    },
+    "st_cv_road": {
+     "s": "outside",
+     "part": "External access road and project support allowances",
+     "note": "Outside the fenced value",
+     "basis": "out_of_scope"
+    },
+    "st_ao_wall": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference station",
+     "basis": "out_of_scope"
+    }
+   },
+   "states": {
+    "asset": {
+     "st_stn": "st_stn",
+     "st_hv": "st_stn",
+     "st_hv_de": "st_stn",
+     "st_hv_cb": "st_stn",
+     "st_hv_ds": "st_stn",
+     "st_hv_bus": "st_stn",
+     "st_hv_vt": "st_stn",
+     "st_hv_sa": "st_stn",
+     "st_lv": "st_stn",
+     "st_lv_de": "st_stn",
+     "st_lv_cb": "st_stn",
+     "st_lv_ds": "st_stn",
+     "st_lv_bus": "st_stn",
+     "st_lv_vt": "st_stn",
+     "st_tx": "st_stn",
+     "st_tx_u": "st_stn",
+     "st_tx_core": "st_stn",
+     "st_tx_bush": "st_stn",
+     "st_tx_cool": "st_stn",
+     "st_tx_ltc": "st_stn",
+     "st_tx_cons": "st_stn",
+     "st_tx_cab": "st_stn",
+     "st_tx_oc": "st_stn",
+     "st_pc": "st_stn",
+     "st_pc_house": "st_stn",
+     "st_pc_relay": "st_stn",
+     "st_pc_rtu": "st_stn",
+     "st_pc_dc": "st_stn",
+     "st_pc_ss": "st_stn",
+     "st_pc_cable": "st_stn",
+     "st_cv": "st_stn",
+     "st_cv_grid": "st_stn",
+     "st_cv_rock": "st_stn",
+     "st_cv_fence": "st_stn",
+     "st_cv_shield": "st_stn",
+     "st_cv_drain": "st_stn",
+     "st_cv_road": "st_cv_road",
+     "st_ao_wall": "st_ao_wall"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "st_hv",
+      "name": "345 kV Yard",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_hv_de",
+          "name": "345 kV Line Terminals",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_hv_cb",
+          "name": "345 kV Circuit Breakers",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_hv_ds",
+          "name": "345 kV Disconnect Switches",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_hv_bus",
+          "name": "345 kV Bus & Supports",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_hv_vt",
+          "name": "345 kV Voltage Transformers",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_hv_sa",
+          "name": "345 kV Surge Arresters",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_lv",
+      "name": "138 kV Yard",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_lv_de",
+          "name": "138 kV Line Terminals",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_lv_cb",
+          "name": "138 kV Circuit Breakers",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_lv_ds",
+          "name": "138 kV Disconnect Switches",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_lv_bus",
+          "name": "138 kV Bus & Supports",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_lv_vt",
+          "name": "138 kV Voltage Transformers",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_tx",
+      "name": "Power Transformation",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_tx_u",
+          "name": "Autotransformers",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_tx_oc",
+          "name": "Oil Containment & Firewall",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_pc",
+      "name": "Protection, Control & Communications",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_pc_house",
+          "name": "Control House",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_pc_relay",
+          "name": "Relay Panels",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_pc_rtu",
+          "name": "SCADA & Communications",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_pc_dc",
+          "name": "Station Battery & Charger",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_pc_ss",
+          "name": "Station Service",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_pc_cable",
+          "name": "Control Cable & Trench",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_cv",
+      "name": "Civil, Grounding & Security",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_cv_grid",
+          "name": "Grounding Grid",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_cv_rock",
+          "name": "Yard Surfacing",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_cv_fence",
+          "name": "Fence, Gates & Security",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_cv_shield",
+          "name": "Lightning Shielding",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         },
+         {
+          "node": "st_cv_drain",
+          "name": "Drainage",
+          "part": "Whole station (fenced assembly)",
+          "note": "Reuses the screening response for the whole fenced station"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "st_cv_road",
+          "name": "Access Road",
+          "part": "External access road and project support allowances",
+          "note": "Outside the fenced value"
+         },
+         {
+          "node": "st_ao_wall",
+          "name": "Perimeter Flood Wall",
+          "note": "A resilience measure in the twin; not part of the reference station"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 24,
+    "conditioner": 0,
+    "no_curve": 0,
+    "no_direct_damage": 0,
+    "outside": 2
+   },
+   "curve_parts": [
+    "Whole station (fenced assembly)"
+   ],
+   "unmapped": []
+  },
+  {
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "entry_id": "substation_wildfire_screening_v1",
+   "status": "reused",
+   "gap": false,
+   "href": "/cells/substation_wildfire_screening_v1",
+   "rows": {
+    "st_stn": {
+     "s": "no_curve",
+     "part": "Rest of the fenced station",
+     "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value",
+     "basis": "not_covered"
+    },
+    "st_hv_cb": {
+     "s": "curve",
+     "part": "Electrical equipment (transformers and switchgear)",
+     "basis": "part"
+    },
+    "st_hv_ds": {
+     "s": "curve",
+     "part": "Electrical equipment (transformers and switchgear)",
+     "basis": "part"
+    },
+    "st_lv_cb": {
+     "s": "curve",
+     "part": "Electrical equipment (transformers and switchgear)",
+     "basis": "part"
+    },
+    "st_lv_ds": {
+     "s": "curve",
+     "part": "Electrical equipment (transformers and switchgear)",
+     "basis": "part"
+    },
+    "st_tx_u": {
+     "s": "curve",
+     "part": "Electrical equipment (transformers and switchgear)",
+     "basis": "part"
+    },
+    "st_cv_road": {
+     "s": "outside",
+     "part": "External access road and project support allowances",
+     "note": "Outside the fenced value",
+     "basis": "out_of_scope"
+    },
+    "st_ao_wall": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference station",
+     "basis": "out_of_scope"
+    }
+   },
+   "states": {
+    "asset": {
+     "st_stn": "st_stn",
+     "st_hv": "st_stn",
+     "st_hv_de": "st_stn",
+     "st_hv_cb": "st_hv_cb",
+     "st_hv_ds": "st_hv_ds",
+     "st_hv_bus": "st_stn",
+     "st_hv_vt": "st_stn",
+     "st_hv_sa": "st_stn",
+     "st_lv": "st_stn",
+     "st_lv_de": "st_stn",
+     "st_lv_cb": "st_lv_cb",
+     "st_lv_ds": "st_lv_ds",
+     "st_lv_bus": "st_stn",
+     "st_lv_vt": "st_stn",
+     "st_tx": "st_stn",
+     "st_tx_u": "st_tx_u",
+     "st_tx_core": "st_tx_u",
+     "st_tx_bush": "st_tx_u",
+     "st_tx_cool": "st_tx_u",
+     "st_tx_ltc": "st_tx_u",
+     "st_tx_cons": "st_tx_u",
+     "st_tx_cab": "st_tx_u",
+     "st_tx_oc": "st_stn",
+     "st_pc": "st_stn",
+     "st_pc_house": "st_stn",
+     "st_pc_relay": "st_stn",
+     "st_pc_rtu": "st_stn",
+     "st_pc_dc": "st_stn",
+     "st_pc_ss": "st_stn",
+     "st_pc_cable": "st_stn",
+     "st_cv": "st_stn",
+     "st_cv_grid": "st_stn",
+     "st_cv_rock": "st_stn",
+     "st_cv_fence": "st_stn",
+     "st_cv_shield": "st_stn",
+     "st_cv_drain": "st_stn",
+     "st_cv_road": "st_cv_road",
+     "st_ao_wall": "st_ao_wall"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "st_hv",
+      "name": "345 kV Yard",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_hv_cb",
+          "name": "345 kV Circuit Breakers",
+          "part": "Electrical equipment (transformers and switchgear)"
+         },
+         {
+          "node": "st_hv_ds",
+          "name": "345 kV Disconnect Switches",
+          "part": "Electrical equipment (transformers and switchgear)"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "st_hv_de",
+          "name": "345 kV Line Terminals",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         },
+         {
+          "node": "st_hv_bus",
+          "name": "345 kV Bus & Supports",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         },
+         {
+          "node": "st_hv_vt",
+          "name": "345 kV Voltage Transformers",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         },
+         {
+          "node": "st_hv_sa",
+          "name": "345 kV Surge Arresters",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_lv",
+      "name": "138 kV Yard",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_lv_cb",
+          "name": "138 kV Circuit Breakers",
+          "part": "Electrical equipment (transformers and switchgear)"
+         },
+         {
+          "node": "st_lv_ds",
+          "name": "138 kV Disconnect Switches",
+          "part": "Electrical equipment (transformers and switchgear)"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "st_lv_de",
+          "name": "138 kV Line Terminals",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         },
+         {
+          "node": "st_lv_bus",
+          "name": "138 kV Bus & Supports",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         },
+         {
+          "node": "st_lv_vt",
+          "name": "138 kV Voltage Transformers",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_tx",
+      "name": "Power Transformation",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "st_tx_u",
+          "name": "Autotransformers",
+          "part": "Electrical equipment (transformers and switchgear)"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "st_tx_oc",
+          "name": "Oil Containment & Firewall",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_pc",
+      "name": "Protection, Control & Communications",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "st_pc_house",
+          "name": "Control House",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         },
+         {
+          "node": "st_pc_relay",
+          "name": "Relay Panels",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         },
+         {
+          "node": "st_pc_rtu",
+          "name": "SCADA & Communications",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         },
+         {
+          "node": "st_pc_dc",
+          "name": "Station Battery & Charger",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         },
+         {
+          "node": "st_pc_ss",
+          "name": "Station Service",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         },
+         {
+          "node": "st_pc_cable",
+          "name": "Control Cable & Trench",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "st_cv",
+      "name": "Civil, Grounding & Security",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "st_cv_grid",
+          "name": "Grounding Grid",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         },
+         {
+          "node": "st_cv_rock",
+          "name": "Yard Surfacing",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         },
+         {
+          "node": "st_cv_fence",
+          "name": "Fence, Gates & Security",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         },
+         {
+          "node": "st_cv_shield",
+          "name": "Lightning Shielding",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         },
+         {
+          "node": "st_cv_drain",
+          "name": "Drainage",
+          "part": "Rest of the fenced station",
+          "note": "Bus supports, dead-ends, oil containment and firewall, relay panels, control house and the rest: 52.38 % of the fenced value"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "st_cv_road",
+          "name": "Access Road",
+          "part": "External access road and project support allowances",
+          "note": "Outside the fenced value"
+         },
+         {
+          "node": "st_ao_wall",
+          "name": "Perimeter Flood Wall",
+          "note": "A resilience measure in the twin; not part of the reference station"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 5,
+    "conditioner": 0,
+    "no_curve": 19,
+    "no_direct_damage": 0,
+    "outside": 2
+   },
+   "curve_parts": [
+    "Electrical equipment (transformers and switchgear)"
+   ],
+   "unmapped": []
+  }
+ ],
+ "matrix": [
+  {
+   "tree": "asset",
+   "node": "st_hv",
+   "name": "345 kV Yard",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Electrical equipment (transformers and switchgear)"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "st_lv",
+   "name": "138 kV Yard",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Electrical equipment (transformers and switchgear)"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "st_tx",
+   "name": "Power Transformation",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Electrical equipment (transformers and switchgear)"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "st_pc",
+   "name": "Protection, Control & Communications",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "st_cv",
+   "name": "Civil, Grounding & Security",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "outside"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "outside"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "outside"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": true,
+     "states": [
+      "no_curve",
+      "outside"
+     ]
+    }
+   }
+  }
+ ],
+ "state_words": {
+  "curve": "Has a damage curve",
+  "conditioner": "Changes the curve, no curve of its own",
+  "no_curve": "In the value, no curve yet",
+  "no_direct_damage": "Reviewed: no direct damage",
+  "outside": "Outside the value this curve prices"
+ },
+ "state_short": {
+  "curve": "curve",
+  "conditioner": "changes the curve",
+  "no_curve": "no curve yet",
+  "no_direct_damage": "no direct damage",
+  "outside": "outside"
+ }
+}

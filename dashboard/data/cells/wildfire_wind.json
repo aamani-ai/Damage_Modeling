@@ -63,7 +63,7 @@
    "label": "entry agent-read 2026-10-19 · release reviewed screening release"
   }
  },
- "summary": "Wildfire on wind farms: cell-local Tier-4 screening points per FSim flame-length class, adopted under owner direction; 4 parts of the asset's value have no curve.",
+ "summary": "Wildfire on wind farms: cell-local judgment-based screening points per FSim flame-length class, adopted under owner direction; 4 parts of the asset's value have no curve.",
  "chain": {
   "stations": [
    {
@@ -946,27 +946,102 @@
    },
    "evidence": {
     "words": "Evidence: our judgment",
-    "code": "shape T4 · cost T4",
+    "code": "How damage rises: our judgment · how it becomes dollars: our judgment",
     "tiers": [
      "T4"
-    ]
+    ],
+    "codes": "shape T4 · cost T4"
    },
    "occurrence": {
     "words": "Field reports: nobody has looked yet",
-    "code": "? not searched"
+    "code": "Field reports: nobody has looked yet"
    },
    "review": {
     "words": "Not yet reviewed by a person",
     "code": "entry agent-read 2026-10-19 · release reviewed screening release"
    }
   },
+  "main_logic": [
+   "Wildfire is measured as USFS FSim conditional flame-length class.",
+   "Cell-local judgment-based screening points per FSim flame-length class, adopted under owner direction; research supports the mechanism and relative ordering, not the numbers.",
+   "The damage ratio is a share of the direct replacement value of the same named unit (one pad's electrical equipment, or the one shared GSU protection-control-DC package)."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "2 parts with a curve · 4 without one yet",
+    "paragraphs": [
+     "Wildfire on wind farms: cell-local judgment-based screening points per FSim flame-length class, adopted under owner direction; research supports the mechanism and relative ordering, not the numbers. It names 2 parts: Pad electrical and GSU protection, control and DC. Outside its scope: internal turbine or electrical fire, lightning and maintenance fires, business interruption, revenue, PSPS and shutdown, post-fire erosion, flood and landslide and soft, sunk and non-physical costs. Kinds of damage it does not include: firebrand attack and destructive residue or soot (separate deferred pathways) and mitigation or clearance credit and operating state (captured, no numeric effect).",
+     "For this hazard the wind farm is split into 2 parts: Pad electrical and GSU protection, control and DC. 10 further units are named but withheld — wt turbine fire assembly, wt collection network, wt gsu main transformer, wt gsu switchgear bus, wt gsu cable terminations, wt control met om, wt foundation, wt civil infra, support fieldwork and support transport logistics — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: turbine fire assembly: blades, nacelle, tower (withheld, not zero), collection network, GSU main transformer, GSU switchgear and bus, GSU cable terminations (withheld), control, met-station and O&M buildings; foundation; civil (withheld) and fieldwork and transport support (allocated once after repair scope; no fragility).",
+     "The damage ratio is a share of direct replacement value of the same named unit (one pad's electrical equipment, or the one shared GSU protection-control-DC package). The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true
+   },
+   {
+    "id": "worked_out",
+    "name": "How damage is worked out",
+    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "fact": "not written yet",
+    "paragraphs": [
+     "Damage is read against USFS FSim conditional flame-length class. The curve is a table of damage ratios at exact classes, nothing in between. The input, in the catalogue's words: USFS FSim conditional flame-length class (RDS-2016-0034-3, 270 m), exact integer 1 to 6 (0 = no-event control); a class, not equipment heat flux.",
+     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": false
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "6 sources, 5 linked · our judgment",
+    "paragraphs": [
+     "6 sources set this cell: USFS, Spatial datasets of probabilistic wildfire risk components for the US (270 m), 3rd ed., RDS-2016-0034-3 (2023), Assessing wildfire risk to critical infrastructure in central Chile: an electrical substation, Int. J. Wildland Fire (2024), NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment and USFS, Wildfire vulnerability of power transmission and distribution infrastructure (2015) and 2 more. Of the 5 parameters, 1 is published, 1 is borrowed and 3 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator)."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says report.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: reviewed screening release."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: our judgment · how it becomes dollars: our judgment",
+  "hazard_paths": [],
   "capabilities": [
    {
     "key": "single_event",
     "mark": "◐",
     "label": "one wildfire event",
     "short": "one wildfire event",
-    "detail": "exact FSim product ID, exact integer class 1 to 6, and the Tier-4 screening assumption-set ID"
+    "detail": "exact FSim product ID, exact integer class 1 to 6, and the judgment-based screening assumption-set ID"
    },
    {
     "key": "scenario_dollars",
@@ -1093,8 +1168,8 @@
     ]
    },
    "assumed": [
-    "Pad electrical damage points per flame-length class are a Tier-4 screening assumption",
-    "GSU protection-control-DC damage points per flame-length class are a Tier-4 screening assumption",
+    "Pad electrical damage points per flame-length class are a judgment-based screening assumption",
+    "GSU protection-control-DC damage points per flame-length class are a judgment-based screening assumption",
     "Non-integer and out-of-range classes are rejected rather than interpolated",
     "Curve spread is not carried"
    ],
@@ -1121,9 +1196,9 @@
   "stations": [
    {
     "id": "scope",
-    "name": "What it covers",
+    "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Wildfire on wind farms: cell-local Tier-4 screening points per FSim flame-length class, adopted under owner direction; research supports the mechanism and relative ordering, not the numbers. It names 2 parts: Pad electrical and GSU protection, control and DC. Outside its scope: internal turbine or electrical fire, lightning and maintenance fires, business interruption, revenue, PSPS and shutdown, post-fire erosion, flood and landslide and soft, sunk and non-physical costs. Kinds of damage it does not include: firebrand attack and destructive residue or soot (separate deferred pathways) and mitigation or clearance credit and operating state (captured, no numeric effect).",
+    "paragraph": "Wildfire on wind farms: cell-local judgment-based screening points per FSim flame-length class, adopted under owner direction; research supports the mechanism and relative ordering, not the numbers. It names 2 parts: Pad electrical and GSU protection, control and DC. Outside its scope: internal turbine or electrical fire, lightning and maintenance fires, business interruption, revenue, PSPS and shutdown, post-fire erosion, flood and landslide and soft, sunk and non-physical costs. Kinds of damage it does not include: firebrand attack and destructive residue or soot (separate deferred pathways) and mitigation or clearance credit and operating state (captured, no numeric effect).",
     "plain_fact": "2 parts · 4 left out"
    },
    {
@@ -1144,7 +1219,7 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "6 sources set this cell: USFS, Spatial datasets of probabilistic wildfire risk components for the US (270 m), 3rd ed., RDS-2016-0034-3 (2023), Assessing wildfire risk to critical infrastructure in central Chile: an electrical substation, Int. J. Wildland Fire (2024), NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment and USFS, Wildfire vulnerability of power transmission and distribution infrastructure (2015) and 2 more. Of the 5 parameters, 1 is lab-tested (T2), 1 is transferred (T3) and 3 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "paragraph": "6 sources set this cell: USFS, Spatial datasets of probabilistic wildfire risk components for the US (270 m), 3rd ed., RDS-2016-0034-3 (2023), Assessing wildfire risk to critical infrastructure in central Chile: an electrical substation, Int. J. Wildland Fire (2024), NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment and USFS, Wildfire vulnerability of power transmission and distribution infrastructure (2015) and 2 more. Of the 5 parameters, 1 is published, 1 is borrowed and 3 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
     "plain_fact": "6 sources · our judgment"
    },
    {
@@ -1339,7 +1414,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
     "link_kind": "repo_file",
     "title": "Damage Modeling wildfire_solar model v1.0/docs r3.",
     "no_link_sentence": null
@@ -1376,7 +1451,7 @@
     "provenance": "register",
     "repo_path": "docs/method/standards/00_index.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/method/standards/00_index.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/standards/00_index.md",
     "link_kind": "repo_file",
     "title": "Damage Modeling governed damage-curve standards and skill workflow.",
     "kind": "marker",
@@ -1559,7 +1634,7 @@
     "raw_name": "FSim product and six conditional flame-length class semantics",
     "value_text": "USFS_RDS_2016_0034_3_270M",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "WW1-S001",
@@ -1581,7 +1656,7 @@
     "raw_name": "GSU polymeric ignition ordering",
     "value_text": "controls/electronics more vulnerable than steel-enclosed apparatus",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "WW1-S002",
@@ -1673,7 +1748,7 @@
      {
       "id": "GOVERNANCE_CONTRACT",
       "title": "Damage Modeling governed damage-curve standards and skill workflow.",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/method/standards/00_index.md",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/standards/00_index.md",
       "link_kind": "repo_file",
       "resolved": true
      }

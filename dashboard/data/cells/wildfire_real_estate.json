@@ -965,22 +965,96 @@
     "code": "PROPOSAL · screening"
    },
    "evidence": {
-    "words": "Evidence: transferred and our judgment",
-    "code": "shape T3 · cost T4",
+    "words": "Evidence: our judgment",
+    "code": "How damage rises: borrowed · how it becomes dollars: our judgment",
     "tiers": [
-     "T3",
      "T4"
-    ]
+    ],
+    "codes": "shape T3 · cost T4"
    },
    "occurrence": {
     "words": "Field reports: nobody has looked yet",
-    "code": "? not searched"
+    "code": "Field reports: nobody has looked yet"
    },
    "review": {
     "words": "Not yet reviewed by a person",
     "code": "entry agent-read 2026-10-19 · release not yet reviewed"
    }
   },
+  "main_logic": [
+   "Wildfire is measured as FSim conditional flame-length class state.",
+   "US Forest Service home loss by flame-length class (shrub vegetation) for the house; warehouse 0.8x and office 0.9x from same-fire CAL FIRE inspection ratios.",
+   "The damage ratio is a share of the structure replacement cost new of the same building."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "3 parts with a curve · 1 withheld",
+    "paragraphs": [
+     "Wildfire on buildings: US Forest Service home loss by flame-length class (shrub vegetation) for the house; warehouse 0.8x and office 0.9x from same-fire CAL FIRE inspection ratios. It names 3 parts: House, Warehouse and Office. Outside its scope: contents (declared as a withheld placeholder part), smoke, soot and ash without fire damage, post-fire debris flow and flooding and land, landscaping, business interruption.",
+     "For this hazard the building is split into 3 parts: House, Warehouse and Office. 1 further unit is named but withheld — wfre building contents — a stated 'not zero', not a curve.",
+     "The damage ratio is a share of structure replacement cost new of the same building. The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true
+   },
+   {
+    "id": "worked_out",
+    "name": "How damage is worked out",
+    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "fact": "FSim conditional flame-length class state → exact classes",
+    "paragraphs": [
+     "Damage is read against FSim conditional flame-length class state. The curve is a table of damage ratios at exact classes, nothing in between. The input, in the catalogue's words: FSim conditional flame-length class state, exact integer 0 to 6 (0 = no event); nothing between classes.",
+     "The seven-step audit is written in the dossier with 7 rows; the statuses it records: Exact FSim class at the location, as delivered; shrub lifeform; no mitigation credit; no hit probability added., Numeric per building; contents withheld; invalid states, missing selectors and a burn probability in the call fail., One row, 100% of structure value; components not itemized by the source., One whole-building unit; contents withheld., Repair cost / structure replacement cost new., Three reference buildings (profiles r1); structure only. and Whole building; no zones.. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "8 sources, 7 linked · our judgment",
+    "paragraphs": [
+     "8 sources set this cell: USFS, Wildfire Risk to Communities spatial datasets, 2nd ed. (2024), CAL FIRE Damage Inspection (DINS) data, 2013-2025, USFS, probabilistic wildfire risk components (FSim) and FEMA National Risk Index, Dec 2025 (check only) and 4 more. Of the 10 parameters, 3 are published, 3 are borrowed and 4 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator)."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "2 outside checks · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "2 outside checks compare this curve with an independent result: FEMA National Risk Index: yearly loss on Hazard's grid and CAL FIRE inspections: building-type outcomes inside the same fires. The validation record says report.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: not yet reviewed."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: borrowed · how it becomes dollars: our judgment",
+  "hazard_paths": [],
   "capabilities": [
    {
     "key": "single_event",
@@ -1051,7 +1125,7 @@
   "stations": [
    {
     "id": "scope",
-    "name": "What it covers",
+    "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
     "paragraph": "Wildfire on buildings: US Forest Service home loss by flame-length class (shrub vegetation) for the house; warehouse 0.8x and office 0.9x from same-fire CAL FIRE inspection ratios. It names 3 parts: House, Warehouse and Office. Outside its scope: contents (declared as a withheld placeholder part), smoke, soot and ash without fire damage, post-fire debris flow and flooding and land, landscaping, business interruption.",
     "plain_fact": "3 parts · 4 left out"
@@ -1074,8 +1148,8 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "8 sources set this cell: USFS, Wildfire Risk to Communities spatial datasets, 2nd ed. (2024), CAL FIRE Damage Inspection (DINS) data, 2013-2025, USFS, probabilistic wildfire risk components (FSim) and FEMA National Risk Index, Dec 2025 (check only) and 4 more. Of the 10 parameters, 3 are lab-tested (T2), 3 are transferred (T3) and 4 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
-    "plain_fact": "8 sources · transferred and our judgment"
+    "paragraph": "8 sources set this cell: USFS, Wildfire Risk to Communities spatial datasets, 2nd ed. (2024), CAL FIRE Damage Inspection (DINS) data, 2013-2025, USFS, probabilistic wildfire risk components (FSim) and FEMA National Risk Index, Dec 2025 (check only) and 4 more. Of the 10 parameters, 3 are published, 3 are borrowed and 4 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "plain_fact": "8 sources · borrowed and our judgment"
    },
    {
     "id": "value",
@@ -1676,7 +1750,7 @@
     "raw_name": "axis_definition",
     "value_text": "exact FSim conditional flame-length class state 0-6 (0 = no event); integers only",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "WFRE-S003",
@@ -1734,7 +1808,7 @@
     "raw_name": "house_response",
     "value_text": "0.20/0.35/0.50/0.65/0.80/0.95 for states 1-6",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "WFRE-S001",
@@ -1807,7 +1881,7 @@
     "raw_name": "warehouse_factor",
     "value_text": "0.8 x house",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "WFRE-S002",
@@ -1819,7 +1893,7 @@
     ],
     "claim_ids": [],
     "curve_id": "WFRE_IND_WRC_SHRUB_X0_8",
-    "reasoning": "Same-fire DINS ratio 0.79 (0.61-0.99) rounded; transfer to the reference warehouse T4 (our judgment).",
+    "reasoning": "Same-fire DINS ratio 0.79 (0.61-0.99) rounded; transfer to the reference warehouse judgment-based.",
     "update_trigger": "Warehouse-specific loss data.",
     "role": "building_factor"
    },
@@ -1829,7 +1903,7 @@
     "raw_name": "office_factor",
     "value_text": "0.9 x house",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "WFRE-S002",
@@ -1841,7 +1915,7 @@
     ],
     "claim_ids": [],
     "curve_id": "WFRE_OFF_WRC_SHRUB_X0_9",
-    "reasoning": "Same-fire DINS ratio 0.93 (0.66-1.38) rounded; transfer T4 (our judgment).",
+    "reasoning": "Same-fire DINS ratio 0.93 (0.66-1.38) rounded; transfer judgment-based.",
     "update_trigger": "Office-specific loss data.",
     "role": "building_factor"
    },
@@ -1873,7 +1947,7 @@
     "raw_name": "no_event_state",
     "value_text": "state 0 = 0",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "WFRE-S005",
@@ -1902,7 +1976,7 @@
     "raw_name": "tabulation",
     "value_text": "seven exact states, 6 decimals; no interpolation",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "WFRE-S008",
@@ -1938,7 +2012,7 @@
   },
   "extraction": null,
   "tier_words": {
-   "shape": "transferred",
+   "shape": "borrowed",
    "cost": "our judgment"
   }
  },

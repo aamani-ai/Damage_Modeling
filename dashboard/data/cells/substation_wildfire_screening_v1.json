@@ -64,7 +64,7 @@
    "label": "entry agent-read 2026-10-19 · release —"
   }
  },
- "summary": "Wildfire on substations reuses another cell's curve: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a T4 (our judgment) assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md); 1 part of the asset's value has no curve.",
+ "summary": "Wildfire on substations reuses another cell's curve: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md); 1 part of the asset's value has no curve.",
  "chain": {
   "stations": [
    {
@@ -644,20 +644,95 @@
    },
    "evidence": {
     "words": "Evidence: our judgment",
-    "code": "shape T4 · cost T4",
+    "code": "How damage rises: our judgment · how it becomes dollars: our judgment",
     "tiers": [
      "T4"
-    ]
+    ],
+    "codes": "shape T4 · cost T4"
    },
    "occurrence": {
     "words": "Field reports: nobody has looked yet",
-    "code": "? not searched"
+    "code": "Field reports: nobody has looked yet"
    },
    "review": {
     "words": "Not yet reviewed by a person",
     "code": "entry agent-read 2026-10-19 · release —"
    }
   },
+  "main_logic": [
+   "Wildfire is read as FSim fire intensity class at the station reference point, exact integer 1 to 6 (0 = no event).",
+   "The canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer.",
+   "The damage ratio is a share of the bound electrical equipment value of the station, $13,025,357 (eight equipment rows)."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "1 part with a curve · 1 without one yet",
+    "paragraphs": [
+     "Wildfire on substations: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md). It names 1 part: Electrical equipment (transformers and switchgear). Outside its scope: external access road and project support allowances ($3.06M, outside the fenced value) and business interruption, revenue and insurance terms.",
+     "For this hazard the substation is split into 1 part: Electrical equipment (transformers and switchgear). Parts of the plant's value with no curve yet: rest of the fenced station ($14,327,879.37, 52.38%): bus supports, dead-ends, oil containment and firewall, relay panels, control house, station battery, SCADA, station service, control cable, conduit and trench, site work, drainage and lightning shielding.",
+     "The damage ratio is a share of bound electrical equipment value of the station, $13,025,357 (eight equipment rows); % of TIV divides by the full fenced value $27,353,236.37. The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true
+   },
+   {
+    "id": "worked_out",
+    "name": "How damage is worked out",
+    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "fact": "not written yet",
+    "paragraphs": [
+     "No hazard axis is declared. The input, in the catalogue's words: FSim fire intensity class at the station reference point, exact integer 1 to 6 (0 = no event); no interpolation or heat-flux conversion.",
+     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": false
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "not written yet",
+    "paragraphs": [
+     "No source list could be read for this cell. The source and claim registers are machine-readable files in the cell folder."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": false
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says passed.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: our judgment · how it becomes dollars: our judgment",
+  "hazard_paths": [],
   "capabilities": [
    {
     "key": "single_event",
@@ -717,9 +792,9 @@
   "stations": [
    {
     "id": "scope",
-    "name": "What it covers",
+    "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Wildfire on substations: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a T4 (our judgment) assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md). It names 1 part: Electrical equipment (transformers and switchgear). Outside its scope: external access road and project support allowances ($3.06M, outside the fenced value) and business interruption, revenue and insurance terms.",
+    "paragraph": "Wildfire on substations: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md). It names 1 part: Electrical equipment (transformers and switchgear). Outside its scope: external access road and project support allowances ($3.06M, outside the fenced value) and business interruption, revenue and insurance terms.",
     "plain_fact": "1 part · 2 left out"
    },
    {

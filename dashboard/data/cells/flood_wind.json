@@ -1006,21 +1006,115 @@
     "code": "LIVE · screening"
    },
    "evidence": {
-    "words": "Evidence: transferred",
-    "code": "shape T3 · cost T3",
+    "words": "Evidence: borrowed",
+    "code": "How damage rises: borrowed · how it becomes dollars: borrowed",
     "tiers": [
      "T3"
-    ]
+    ],
+    "codes": "shape T3 · cost T3"
    },
    "occurrence": {
     "words": "Field reports: nobody has looked yet",
-    "code": "? not searched"
+    "code": "Field reports: nobody has looked yet"
    },
    "review": {
     "words": "Not yet reviewed by a person",
     "code": "entry agent-read 2026-10-19 · release reviewed screening release"
    }
   },
+  "main_logic": [
+   "Flood is measured as freshwater flood depth above substation grade, in ft.",
+   "FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points.",
+   "The damage ratio is a share of the full direct replacement value of the same facility-level GSU/substation (not project TIV, not the mixed 72 USD/kW electrical row)."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "1 part with a curve · 6 without one yet",
+    "paragraphs": [
+     "Flood on wind farms: FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points. It names 1 part: GSU / substation (whole facility). Outside its scope: outage restoration, business interruption, curtailment, revenue and insurance, soft, sunk and non-physical costs (excluded from the physical base) and other hazards in the same event (tropical-cyclone wind, tornado); one event must not charge the same value twice. Kinds of damage it does not include: scour, erosion, saturated-soil support loss, debris impact and wave loading and flood duration (captured but has no effect on the result).",
+     "For this hazard the wind farm is split into 1 part: GSU / substation (whole facility). 14 further units are named but withheld — fw gsu switchgear, fw gsu transformer main, fw gsu transformer aux controls, fw gsu protection scada, fw gsu station service dc, fw gsu cable terminations, fw turbine base electrical, fw padmount stepup transformer, fw collection cable terminations, fw turbine foundation, fw civil access drainage, fw elevated turbine equipment, support fieldwork and support transport logistics — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: GSU parts as separate units: switchgear, main transformer, transformer auxiliaries and controls, protection and SCADA, station service and DC, cable terminations (withheld, not zero), turbine-base electrical and pad or turbine step-up transformers (withheld), collection cable joints and terminations (withheld), turbine foundation (needs a separate scour and erosion pathway) and civil access and drainage (needs a split), elevated turbine equipment: rotor, nacelle, tower (geometry-screened, not declared zero) and fieldwork and transport support (allocated once after repair scope; no fragility).",
+     "The damage ratio is a share of full direct replacement value of the same facility-level GSU/substation (not project TIV, not the mixed 72 USD/kW electrical row). The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true
+   },
+   {
+    "id": "worked_out",
+    "name": "How damage is worked out",
+    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "fact": "freshwater flood depth above substation grade → a line through points",
+    "paragraphs": [
+     "Damage is read against freshwater flood depth above substation grade (ft). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: freshwater flood depth above substation grade (ft), 0 to 10 ft; or water-surface and grade elevations (m) on the same vertical datum.",
+     "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "17 sources, 17 linked · borrowed",
+    "paragraphs": [
+     "17 sources set this cell: FEMA, Hazus-MH Flood Model Technical Manual 2.1, Table 7.9, FEMA, Hazus 7.0 Flood Technical Manual (2025), electric-power status, USACE, HEC-FIA Technical Reference, depth-percent damage relationships and NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment (historical context) and 13 more. Of the 5 parameters, 3 are published, 1 is borrowed and 1 is our judgment. The source and claim registers are machine-readable files in the cell folder."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says report.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: reviewed screening release."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "borrowed",
+  "halves": "How damage rises: borrowed · how it becomes dollars: borrowed",
+  "hazard_paths": [
+   {
+    "id": "LEG-FW-001",
+    "title": "Hazard Modeling flood/wind M3 greenfield consumer implementation.",
+    "path": "Notebooks/flood/wind_farm/m3_damage/01_damage.py",
+    "state": "moved",
+    "moved_to": "Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
+    "words": "moved on Hazard's main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py"
+   },
+   {
+    "id": "LEG-FW-002",
+    "title": "Hazard Modeling flood/wind M4 independent coastal flood reconstruction.",
+    "path": "Notebooks/flood/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+    "state": "moved",
+    "moved_to": "Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+    "words": "moved on Hazard's main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py"
+   }
+  ],
   "capabilities": [
    {
     "key": "single_event",
@@ -1221,7 +1315,7 @@
   "stations": [
    {
     "id": "scope",
-    "name": "What it covers",
+    "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
     "paragraph": "Flood on wind farms: FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points. It names 1 part: GSU / substation (whole facility). Outside its scope: outage restoration, business interruption, curtailment, revenue and insurance, soft, sunk and non-physical costs (excluded from the physical base) and other hazards in the same event (tropical-cyclone wind, tornado); one event must not charge the same value twice. Kinds of damage it does not include: scour, erosion, saturated-soil support loss, debris impact and wave loading and flood duration (captured but has no effect on the result).",
     "plain_fact": "1 part · 3 left out"
@@ -1244,8 +1338,8 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "17 sources set this cell: FEMA, Hazus-MH Flood Model Technical Manual 2.1, Table 7.9, FEMA, Hazus 7.0 Flood Technical Manual (2025), electric-power status, USACE, HEC-FIA Technical Reference, depth-percent damage relationships and NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment (historical context) and 13 more. Of the 5 parameters, 3 are lab-tested (T2), 1 is transferred (T3) and 1 is our judgment (T4). The source and claim registers are machine-readable files in the cell folder.",
-    "plain_fact": "17 sources · transferred"
+    "paragraph": "17 sources set this cell: FEMA, Hazus-MH Flood Model Technical Manual 2.1, Table 7.9, FEMA, Hazus 7.0 Flood Technical Manual (2025), electric-power status, USACE, HEC-FIA Technical Reference, depth-percent damage relationships and NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment (historical context) and 13 more. Of the 5 parameters, 3 are published, 1 is borrowed and 1 is our judgment. The source and claim registers are machine-readable files in the cell folder.",
+    "plain_fact": "17 sources · borrowed"
    },
    {
     "id": "value",
@@ -1529,7 +1623,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "link_kind": "repo_file",
     "title": "Canonical Damage Modeling flood_solar artifact, flood_solar@model_v1_0__docs_r4.",
     "no_link_sentence": null
@@ -1600,9 +1694,16 @@
     "decision": "reject_runtime_retain_audit",
     "accessed_on": "2026-07-28",
     "provenance": "register",
+    "hazard": {
+     "path": "Notebooks/flood/wind_farm/m3_damage/01_damage.py",
+     "state": "moved",
+     "moved_to": "Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
+     "words": "moved on Hazard's main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py"
+    },
     "doi": null,
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/Notebooks/flood/wind_farm/m3_damage/01_damage.py",
-    "link_kind": "hazard_file",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
+    "link_kind": "hazard_moved",
     "title": "Hazard Modeling flood/wind M3 greenfield consumer implementation.",
     "no_link_sentence": null
    },
@@ -1618,9 +1719,16 @@
     "decision": "reject_runtime_retain_audit",
     "accessed_on": "2026-07-28",
     "provenance": "register",
+    "hazard": {
+     "path": "Notebooks/flood/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+     "state": "moved",
+     "moved_to": "Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+     "words": "moved on Hazard's main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py"
+    },
     "doi": null,
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/Notebooks/flood/wind_farm/m4_loss_metrics/01_loss_metrics.py",
-    "link_kind": "hazard_file",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+    "link_kind": "hazard_moved",
     "title": "Hazard Modeling flood/wind M4 independent coastal flood reconstruction.",
     "no_link_sentence": null
    },
@@ -1638,7 +1746,7 @@
     "provenance": "register",
     "repo_path": "docs/method/standards/00_index.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/method/standards/00_index.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/standards/00_index.md",
     "link_kind": "repo_file",
     "title": "Damage Modeling method, contracts, and damage-curve skill governance.",
     "kind": "marker",
@@ -1658,7 +1766,7 @@
     "provenance": "register",
     "repo_path": "docs/method/shared_components/flood_electrical/README.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/method/shared_components/flood_electrical/README.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/shared_components/flood_electrical/README.md",
     "link_kind": "repo_file",
     "title": "Flood-electrical non-runtime shared component substrate v0.1.",
     "no_link_sentence": null
@@ -1677,7 +1785,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
     "link_kind": "repo_file",
     "title": "Bounded evidence search log for flood_wind model v0.1/docs r1.",
     "no_link_sentence": null
@@ -2168,7 +2276,7 @@
     "raw_name": "Hazus substation depth-damage knots",
     "value_text": "0..10 ft -> 0..0.15 DR exactly as Table 7.9",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "FW-S011",
@@ -2197,7 +2305,7 @@
     "raw_name": "linear interpolation between one-foot knots",
     "value_text": "linear_between_source_knots",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FW-S006",
@@ -2226,7 +2334,7 @@
     "raw_name": "valid source range",
     "value_text": "0..10 ft",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FW-S011",
@@ -2298,7 +2406,7 @@
     "raw_name": "WSE-to-grade unit bridge",
     "value_text": "(WSE_m - grade_m) * 3.280839895013123",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "FW-S005",
@@ -2341,8 +2449,8 @@
   },
   "extraction": null,
   "tier_words": {
-   "shape": "transferred",
-   "cost": "transferred"
+   "shape": "borrowed",
+   "cost": "borrowed"
   }
  },
  "build_findings": []

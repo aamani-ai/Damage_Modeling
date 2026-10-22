@@ -1,0 +1,4255 @@
+{
+ "schema": "damage_dashboard_coverage.v1",
+ "type": {
+  "slug": "wind",
+  "label": "Wind farm",
+  "category": "power_plants",
+  "category_label": "Power plants",
+  "profile": "2.8 MW geared turbine; the picture shows one turbine and the farm",
+  "building": null,
+  "also_buildings": null,
+  "picture_note": null,
+  "catalogue_asset": "Wind farm"
+ },
+ "twin": {
+  "asset": "wind",
+  "name": "Sample Wind Asset",
+  "model": "wind-turbine",
+  "root": "wtg",
+  "plant_model": "wind-farm",
+  "plant_root": "wfarm",
+  "plant_name": "Wind Farm",
+  "commit": "d01abd03cb101ecbe05468a5d573b50f90efd8fb",
+  "crosswalk": "docs/contracts/twin_crosswalks/wind.csv"
+ },
+ "trees": {
+  "asset": {
+   "root": "wtg",
+   "nodes": {
+    "wtg": {
+     "n": "Wind Turbine"
+    },
+    "sys_rotor": {
+     "n": "Rotor",
+     "p": "wtg"
+    },
+    "hub": {
+     "n": "Hub",
+     "p": "sys_rotor"
+    },
+    "hb_casting": {
+     "n": "Hub Casting",
+     "p": "hub"
+    },
+    "hb_spinner": {
+     "n": "Spinner",
+     "p": "hub"
+    },
+    "pitch": {
+     "n": "Pitch System",
+     "p": "sys_rotor"
+    },
+    "pt_bearing": {
+     "n": "Pitch Bearings",
+     "p": "pitch"
+    },
+    "pt_drive": {
+     "n": "Pitch Drives",
+     "p": "pitch"
+    },
+    "pt_cabinet": {
+     "n": "Pitch Cabinets",
+     "p": "pitch"
+    },
+    "pt_backup": {
+     "n": "Backup Power",
+     "p": "pitch"
+    },
+    "blade": {
+     "n": "Blades",
+     "p": "sys_rotor"
+    },
+    "bl_root": {
+     "n": "Root Section",
+     "p": "blade"
+    },
+    "bl_bolts": {
+     "n": "Root Bolts",
+     "p": "blade"
+    },
+    "bl_shell": {
+     "n": "Blade Shell",
+     "p": "blade"
+    },
+    "bl_spar": {
+     "n": "Spar Caps",
+     "p": "blade"
+    },
+    "bl_web": {
+     "n": "Shear Webs",
+     "p": "blade"
+    },
+    "bl_lep": {
+     "n": "Leading-Edge Protection",
+     "p": "blade"
+    },
+    "lps": {
+     "n": "Lightning Protection",
+     "p": "sys_rotor"
+    },
+    "lp_receptor": {
+     "n": "Receptors",
+     "p": "lps"
+    },
+    "lp_band": {
+     "n": "Root Band",
+     "p": "lps"
+    },
+    "lp_transfer": {
+     "n": "Transfer Unit",
+     "p": "lps"
+    },
+    "lp_air": {
+     "n": "Nacelle Air Terminal",
+     "p": "lps"
+    },
+    "lp_conductor": {
+     "n": "Down Conductor",
+     "p": "lps"
+    },
+    "ao_bladeheat": {
+     "n": "Blade Heating",
+     "p": "sys_rotor"
+    },
+    "sys_dt": {
+     "n": "Drivetrain",
+     "p": "wtg"
+    },
+    "shaft": {
+     "n": "Main Shaft",
+     "p": "sys_dt"
+    },
+    "ms_shaft": {
+     "n": "Shaft & Flange",
+     "p": "shaft"
+    },
+    "ms_lock": {
+     "n": "Rotor Lock",
+     "p": "shaft"
+    },
+    "mainbrg": {
+     "n": "Main Bearing",
+     "p": "sys_dt"
+    },
+    "mb_housing": {
+     "n": "Bearing Housing",
+     "p": "mainbrg"
+    },
+    "mb_bearing": {
+     "n": "Spherical Roller Bearing",
+     "p": "mainbrg"
+    },
+    "gearbox": {
+     "n": "Gearbox",
+     "p": "sys_dt"
+    },
+    "gb_planet": {
+     "n": "Planetary Stage",
+     "p": "gearbox"
+    },
+    "gb_parallel": {
+     "n": "Parallel Stages",
+     "p": "gearbox"
+    },
+    "gb_arms": {
+     "n": "Torque Arms",
+     "p": "gearbox"
+    },
+    "gb_lube": {
+     "n": "Lubrication System",
+     "p": "gearbox"
+    },
+    "hss": {
+     "n": "HS Coupling & Brake",
+     "p": "sys_dt"
+    },
+    "hs_coupling": {
+     "n": "Coupling",
+     "p": "hss"
+    },
+    "hs_disc": {
+     "n": "Brake Disc",
+     "p": "hss"
+    },
+    "hs_caliper": {
+     "n": "Brake Caliper",
+     "p": "hss"
+    },
+    "gen": {
+     "n": "Generator (DFIG)",
+     "p": "sys_dt"
+    },
+    "gn_stator": {
+     "n": "Stator & Rotor",
+     "p": "gen"
+    },
+    "gn_slip": {
+     "n": "Slip Ring Unit",
+     "p": "gen"
+    },
+    "gn_cooler": {
+     "n": "Generator Cooler",
+     "p": "gen"
+    },
+    "sys_yaw": {
+     "n": "Yaw System",
+     "p": "wtg"
+    },
+    "yawbrg": {
+     "n": "Yaw Bearing",
+     "p": "sys_yaw"
+    },
+    "yawdrv": {
+     "n": "Yaw Drives",
+     "p": "sys_yaw"
+    },
+    "yawbrk": {
+     "n": "Yaw Brakes",
+     "p": "sys_yaw"
+    },
+    "yb_disc": {
+     "n": "Brake Disc",
+     "p": "yawbrk"
+    },
+    "yb_caliper": {
+     "n": "Calipers",
+     "p": "yawbrk"
+    },
+    "sys_struct": {
+     "n": "Nacelle Structure",
+     "p": "wtg"
+    },
+    "bedplate": {
+     "n": "Bedplate",
+     "p": "sys_struct"
+    },
+    "rearframe": {
+     "n": "Rear Frame",
+     "p": "sys_struct"
+    },
+    "cover": {
+     "n": "Nacelle Cover",
+     "p": "sys_struct"
+    },
+    "crane": {
+     "n": "Service Crane",
+     "p": "sys_struct"
+    },
+    "sys_aux": {
+     "n": "Nacelle Electrical & Auxiliary",
+     "p": "wtg"
+    },
+    "converter": {
+     "n": "Converter",
+     "p": "sys_aux"
+    },
+    "controller": {
+     "n": "Nacelle Controller",
+     "p": "sys_aux"
+    },
+    "cooling": {
+     "n": "Top Cooler",
+     "p": "sys_aux"
+    },
+    "hydraulic": {
+     "n": "Hydraulic Unit",
+     "p": "sys_aux"
+    },
+    "met": {
+     "n": "Met Sensors",
+     "p": "sys_aux"
+    },
+    "me_anemo": {
+     "n": "Anemometer",
+     "p": "met"
+    },
+    "me_vane": {
+     "n": "Wind Vane",
+     "p": "met"
+    },
+    "nc_cables": {
+     "n": "Nacelle Power Cables",
+     "p": "sys_aux"
+    },
+    "ao_wfire": {
+     "n": "Fire Suppression",
+     "p": "sys_aux"
+    },
+    "sys_tower": {
+     "n": "Tower",
+     "p": "wtg"
+    },
+    "tower": {
+     "n": "Tower Structure",
+     "p": "sys_tower"
+    },
+    "tw_shell": {
+     "n": "Tower Sections",
+     "p": "tower"
+    },
+    "tw_flange": {
+     "n": "Flanges & Bolts",
+     "p": "tower"
+    },
+    "tw_access": {
+     "n": "Access & Internals",
+     "p": "sys_tower"
+    },
+    "tw_platform": {
+     "n": "Platforms",
+     "p": "tw_access"
+    },
+    "tw_ladder": {
+     "n": "Ladder & Fall Arrest",
+     "p": "tw_access"
+    },
+    "tw_lift": {
+     "n": "Service Lift",
+     "p": "tw_access"
+    },
+    "tw_door": {
+     "n": "Door & Entrance Stairs",
+     "p": "tw_access"
+    },
+    "tw_cable": {
+     "n": "Power & Control Cables",
+     "p": "sys_tower"
+    },
+    "sys_fnd": {
+     "n": "Foundation",
+     "p": "wtg"
+    },
+    "foundation": {
+     "n": "Gravity Foundation",
+     "p": "sys_fnd"
+    },
+    "fd_footing": {
+     "n": "Footing Slab",
+     "p": "foundation"
+    },
+    "fd_pedestal": {
+     "n": "Pedestal",
+     "p": "foundation"
+    },
+    "fd_anchor": {
+     "n": "Anchor Bolt Cage",
+     "p": "foundation"
+    },
+    "fd_grout": {
+     "n": "Grout Layer",
+     "p": "foundation"
+    },
+    "sys_bop": {
+     "n": "Electrical Infrastructure",
+     "p": "wtg"
+    },
+    "padmount": {
+     "n": "Pad-Mount Transformer",
+     "p": "sys_bop"
+    },
+    "pm_tank": {
+     "n": "Tank & Core/Coil",
+     "p": "padmount"
+    },
+    "pm_rad": {
+     "n": "Radiators",
+     "p": "padmount"
+    },
+    "pm_cab": {
+     "n": "Termination Cabinet",
+     "p": "padmount"
+    },
+    "pm_pad": {
+     "n": "Pad & Containment",
+     "p": "padmount"
+    },
+    "el_basecab": {
+     "n": "Base Switchgear & Control",
+     "p": "sys_bop"
+    },
+    "el_cables": {
+     "n": "Cables",
+     "p": "sys_bop"
+    },
+    "el_lv": {
+     "n": "LV Cables",
+     "p": "el_cables"
+    },
+    "el_mv": {
+     "n": "MV Collection Cable",
+     "p": "el_cables"
+    },
+    "el_ground": {
+     "n": "Grounding System",
+     "p": "sys_bop"
+    },
+    "gd_ring": {
+     "n": "Ring Electrode",
+     "p": "el_ground"
+    },
+    "gd_rods": {
+     "n": "Ground Rods",
+     "p": "el_ground"
+    },
+    "sys_wcivil": {
+     "n": "Civil",
+     "p": "wtg"
+    },
+    "cv_cranepad": {
+     "n": "Crane Pad",
+     "p": "sys_wcivil"
+    },
+    "cv_road": {
+     "n": "Access Road",
+     "p": "sys_wcivil"
+    }
+   }
+  },
+  "plant": {
+   "root": "wfarm",
+   "nodes": {
+    "wfarm": {
+     "n": "Wind Farm"
+    },
+    "wf_array": {
+     "n": "Turbine Array",
+     "p": "wfarm"
+    },
+    "wf_wtg": {
+     "n": "Wind Turbines",
+     "p": "wf_array"
+    },
+    "wf_pads": {
+     "n": "Pad-Mount Transformers",
+     "p": "wf_array"
+    },
+    "wf_coll": {
+     "n": "Collection System",
+     "p": "wfarm"
+    },
+    "wf_feeders": {
+     "n": "34.5 kV Feeders",
+     "p": "wf_coll"
+    },
+    "wf_roads": {
+     "n": "Access Roads",
+     "p": "wf_coll"
+    },
+    "wsys_sub": {
+     "n": "Substation & Interconnection",
+     "p": "wfarm"
+    },
+    "wsub": {
+     "n": "Collector Substation",
+     "p": "wsys_sub"
+    },
+    "wsub_mpt": {
+     "n": "Main Power Transformer",
+     "p": "wsub"
+    },
+    "wsub_bkr": {
+     "n": "HV Circuit Breakers",
+     "p": "wsub"
+    },
+    "wsub_disc": {
+     "n": "Disconnect Switches",
+     "p": "wsub"
+    },
+    "wsub_meter": {
+     "n": "Revenue Metering",
+     "p": "wsub"
+    },
+    "wsub_mvbus": {
+     "n": "34.5 kV Switchgear",
+     "p": "wsub"
+    },
+    "wsub_bus": {
+     "n": "HV Bus & Dead-End Gantry",
+     "p": "wsub"
+    },
+    "wsub_house": {
+     "n": "Control House",
+     "p": "wsub"
+    },
+    "wsub_lm": {
+     "n": "Lightning Masts",
+     "p": "wsub"
+    },
+    "wsub_grid": {
+     "n": "Ground Grid",
+     "p": "wsub"
+    },
+    "wsub_yard": {
+     "n": "Yard & Fence",
+     "p": "wsub"
+    },
+    "wsub_spare": {
+     "n": "Spare Main Power Transformer",
+     "p": "wsub"
+    },
+    "wgt": {
+     "n": "Gen-Tie Line",
+     "p": "wsys_sub"
+    },
+    "wgt_struct": {
+     "n": "H-Frame Structures",
+     "p": "wgt"
+    },
+    "wgt_cond": {
+     "n": "Conductors & Shield Wire",
+     "p": "wgt"
+    },
+    "wpoi": {
+     "n": "POI Switchyard",
+     "p": "wsys_sub"
+    },
+    "wpoi_lines": {
+     "n": "Network Lines",
+     "p": "wpoi"
+    },
+    "wpoi_bkr": {
+     "n": "Ring Bus Breakers",
+     "p": "wpoi"
+    },
+    "wpoi_bus": {
+     "n": "Bus & Line Gantries",
+     "p": "wpoi"
+    },
+    "wpoi_ctrl": {
+     "n": "Control House",
+     "p": "wpoi"
+    },
+    "wpoi_yard": {
+     "n": "Yard & Fence",
+     "p": "wpoi"
+    }
+   }
+  }
+ },
+ "hazards": [
+  {
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail"
+   },
+   "entry_id": "hail_wind",
+   "status": "gap",
+   "gap": true,
+   "href": "/cells/hail_wind",
+   "rows": {
+    "_gap": {
+     "s": "no_curve",
+     "note": "No curve for this hazard yet: the catalogue lists it as a gap.",
+     "basis": "gap"
+    }
+   },
+   "states": {
+    "asset": {
+     "wtg": "_gap",
+     "sys_rotor": "_gap",
+     "hub": "_gap",
+     "hb_casting": "_gap",
+     "hb_spinner": "_gap",
+     "pitch": "_gap",
+     "pt_bearing": "_gap",
+     "pt_drive": "_gap",
+     "pt_cabinet": "_gap",
+     "pt_backup": "_gap",
+     "blade": "_gap",
+     "bl_root": "_gap",
+     "bl_bolts": "_gap",
+     "bl_shell": "_gap",
+     "bl_spar": "_gap",
+     "bl_web": "_gap",
+     "bl_lep": "_gap",
+     "lps": "_gap",
+     "lp_receptor": "_gap",
+     "lp_band": "_gap",
+     "lp_transfer": "_gap",
+     "lp_air": "_gap",
+     "lp_conductor": "_gap",
+     "ao_bladeheat": "_gap",
+     "sys_dt": "_gap",
+     "shaft": "_gap",
+     "ms_shaft": "_gap",
+     "ms_lock": "_gap",
+     "mainbrg": "_gap",
+     "mb_housing": "_gap",
+     "mb_bearing": "_gap",
+     "gearbox": "_gap",
+     "gb_planet": "_gap",
+     "gb_parallel": "_gap",
+     "gb_arms": "_gap",
+     "gb_lube": "_gap",
+     "hss": "_gap",
+     "hs_coupling": "_gap",
+     "hs_disc": "_gap",
+     "hs_caliper": "_gap",
+     "gen": "_gap",
+     "gn_stator": "_gap",
+     "gn_slip": "_gap",
+     "gn_cooler": "_gap",
+     "sys_yaw": "_gap",
+     "yawbrg": "_gap",
+     "yawdrv": "_gap",
+     "yawbrk": "_gap",
+     "yb_disc": "_gap",
+     "yb_caliper": "_gap",
+     "sys_struct": "_gap",
+     "bedplate": "_gap",
+     "rearframe": "_gap",
+     "cover": "_gap",
+     "crane": "_gap",
+     "sys_aux": "_gap",
+     "converter": "_gap",
+     "controller": "_gap",
+     "cooling": "_gap",
+     "hydraulic": "_gap",
+     "met": "_gap",
+     "me_anemo": "_gap",
+     "me_vane": "_gap",
+     "nc_cables": "_gap",
+     "ao_wfire": "_gap",
+     "sys_tower": "_gap",
+     "tower": "_gap",
+     "tw_shell": "_gap",
+     "tw_flange": "_gap",
+     "tw_access": "_gap",
+     "tw_platform": "_gap",
+     "tw_ladder": "_gap",
+     "tw_lift": "_gap",
+     "tw_door": "_gap",
+     "tw_cable": "_gap",
+     "sys_fnd": "_gap",
+     "foundation": "_gap",
+     "fd_footing": "_gap",
+     "fd_pedestal": "_gap",
+     "fd_anchor": "_gap",
+     "fd_grout": "_gap",
+     "sys_bop": "_gap",
+     "padmount": "_gap",
+     "pm_tank": "_gap",
+     "pm_rad": "_gap",
+     "pm_cab": "_gap",
+     "pm_pad": "_gap",
+     "el_basecab": "_gap",
+     "el_cables": "_gap",
+     "el_lv": "_gap",
+     "el_mv": "_gap",
+     "el_ground": "_gap",
+     "gd_ring": "_gap",
+     "gd_rods": "_gap",
+     "sys_wcivil": "_gap",
+     "cv_cranepad": "_gap",
+     "cv_road": "_gap"
+    },
+    "plant": {
+     "wfarm": "_gap",
+     "wf_array": "_gap",
+     "wf_wtg": "_gap",
+     "wf_pads": "_gap",
+     "wf_coll": "_gap",
+     "wf_feeders": "_gap",
+     "wf_roads": "_gap",
+     "wsys_sub": "_gap",
+     "wsub": "_gap",
+     "wsub_mpt": "_gap",
+     "wsub_bkr": "_gap",
+     "wsub_disc": "_gap",
+     "wsub_meter": "_gap",
+     "wsub_mvbus": "_gap",
+     "wsub_bus": "_gap",
+     "wsub_house": "_gap",
+     "wsub_lm": "_gap",
+     "wsub_grid": "_gap",
+     "wsub_yard": "_gap",
+     "wsub_spare": "_gap",
+     "wgt": "_gap",
+     "wgt_struct": "_gap",
+     "wgt_cond": "_gap",
+     "wpoi": "_gap",
+     "wpoi_lines": "_gap",
+     "wpoi_bkr": "_gap",
+     "wpoi_bus": "_gap",
+     "wpoi_ctrl": "_gap",
+     "wpoi_yard": "_gap"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "sys_rotor",
+      "name": "Rotor",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "hub",
+          "name": "Hub",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "pitch",
+          "name": "Pitch System",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "blade",
+          "name": "Blades",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "lps",
+          "name": "Lightning Protection",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "ao_bladeheat",
+          "name": "Blade Heating",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_dt",
+      "name": "Drivetrain",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "shaft",
+          "name": "Main Shaft",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "mainbrg",
+          "name": "Main Bearing",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "gearbox",
+          "name": "Gearbox",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "hss",
+          "name": "HS Coupling & Brake",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "gen",
+          "name": "Generator (DFIG)",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_yaw",
+      "name": "Yaw System",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "yawbrg",
+          "name": "Yaw Bearing",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "yawdrv",
+          "name": "Yaw Drives",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "yawbrk",
+          "name": "Yaw Brakes",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_struct",
+      "name": "Nacelle Structure",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bedplate",
+          "name": "Bedplate",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "rearframe",
+          "name": "Rear Frame",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "cover",
+          "name": "Nacelle Cover",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "crane",
+          "name": "Service Crane",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_aux",
+      "name": "Nacelle Electrical & Auxiliary",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "converter",
+          "name": "Converter",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "controller",
+          "name": "Nacelle Controller",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "cooling",
+          "name": "Top Cooler",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "hydraulic",
+          "name": "Hydraulic Unit",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "met",
+          "name": "Met Sensors",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "nc_cables",
+          "name": "Nacelle Power Cables",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "ao_wfire",
+          "name": "Fire Suppression",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_tower",
+      "name": "Tower",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "tower",
+          "name": "Tower Structure",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "tw_access",
+          "name": "Access & Internals",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "tw_cable",
+          "name": "Power & Control Cables",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_fnd",
+      "name": "Foundation",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "foundation",
+          "name": "Gravity Foundation",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bop",
+      "name": "Electrical Infrastructure",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "padmount",
+          "name": "Pad-Mount Transformer",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "el_basecab",
+          "name": "Base Switchgear & Control",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "el_cables",
+          "name": "Cables",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "el_ground",
+          "name": "Grounding System",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_wcivil",
+      "name": "Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "cv_cranepad",
+          "name": "Crane Pad",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "cv_road",
+          "name": "Access Road",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "wf_array",
+      "name": "Turbine Array",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wf_wtg",
+          "name": "Wind Turbines",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "wf_pads",
+          "name": "Pad-Mount Transformers",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "wf_coll",
+      "name": "Collection System",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wf_feeders",
+          "name": "34.5 kV Feeders",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "wf_roads",
+          "name": "Access Roads",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "wsys_sub",
+      "name": "Substation & Interconnection",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wsub",
+          "name": "Collector Substation",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "wgt",
+          "name": "Gen-Tie Line",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "wpoi",
+          "name": "POI Switchyard",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 0,
+    "conditioner": 0,
+    "no_curve": 41,
+    "no_direct_damage": 0,
+    "outside": 0
+   },
+   "curve_parts": [],
+   "unmapped": []
+  },
+  {
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "entry_id": "flood_wind",
+   "status": "live",
+   "gap": false,
+   "href": "/cells/flood_wind",
+   "rows": {
+    "sys_rotor": {
+     "s": "no_curve",
+     "part": "Elevated turbine equipment: rotor, nacelle, tower",
+     "note": "Geometry-screened, not declared zero",
+     "basis": "not_covered"
+    },
+    "sys_dt": {
+     "s": "no_curve",
+     "part": "Elevated turbine equipment: rotor, nacelle, tower",
+     "note": "Geometry-screened, not declared zero",
+     "basis": "not_covered"
+    },
+    "sys_yaw": {
+     "s": "no_curve",
+     "part": "Elevated turbine equipment: rotor, nacelle, tower",
+     "note": "Geometry-screened, not declared zero",
+     "basis": "not_covered"
+    },
+    "sys_struct": {
+     "s": "no_curve",
+     "part": "Elevated turbine equipment: rotor, nacelle, tower",
+     "note": "Geometry-screened, not declared zero",
+     "basis": "not_covered"
+    },
+    "sys_aux": {
+     "s": "no_curve",
+     "part": "Elevated turbine equipment: rotor, nacelle, tower",
+     "note": "Geometry-screened, not declared zero",
+     "basis": "not_covered"
+    },
+    "sys_tower": {
+     "s": "no_curve",
+     "part": "Elevated turbine equipment: rotor, nacelle, tower",
+     "note": "Geometry-screened, not declared zero",
+     "basis": "not_covered"
+    },
+    "sys_fnd": {
+     "s": "no_curve",
+     "part": "Turbine foundation",
+     "note": "Needs a separate scour and erosion pathway",
+     "basis": "not_covered"
+    },
+    "sys_bop": {
+     "s": "no_curve",
+     "part": "Turbine-base electrical and pad or turbine step-up transformers",
+     "note": "Withheld",
+     "basis": "not_covered"
+    },
+    "sys_wcivil": {
+     "s": "no_curve",
+     "part": "Civil access and drainage",
+     "note": "Needs a split",
+     "basis": "not_covered"
+    },
+    "wf_wtg": {
+     "s": "no_curve",
+     "part": "Elevated turbine equipment: rotor, nacelle, tower",
+     "note": "Geometry-screened, not declared zero",
+     "basis": "not_covered"
+    },
+    "wf_pads": {
+     "s": "no_curve",
+     "part": "Turbine-base electrical and pad or turbine step-up transformers",
+     "note": "Withheld",
+     "basis": "not_covered"
+    },
+    "wf_feeders": {
+     "s": "no_curve",
+     "part": "Collection cable joints and terminations",
+     "note": "Withheld",
+     "basis": "not_covered"
+    },
+    "wf_roads": {
+     "s": "no_curve",
+     "part": "Civil access and drainage",
+     "basis": "not_covered"
+    },
+    "wsub": {
+     "s": "curve",
+     "part": "GSU / substation (whole facility)",
+     "note": "One curve for the whole collector substation; its parts have no separate curves",
+     "basis": "part"
+    },
+    "wgt": {
+     "s": "no_curve",
+     "note": "The gen-tie line is not named by the cell",
+     "basis": "not_named"
+    },
+    "wpoi": {
+     "s": "no_curve",
+     "note": "The point-of-interconnection switchyard is not named by the cell",
+     "basis": "not_named"
+    }
+   },
+   "states": {
+    "asset": {
+     "sys_rotor": "sys_rotor",
+     "hub": "sys_rotor",
+     "hb_casting": "sys_rotor",
+     "hb_spinner": "sys_rotor",
+     "pitch": "sys_rotor",
+     "pt_bearing": "sys_rotor",
+     "pt_drive": "sys_rotor",
+     "pt_cabinet": "sys_rotor",
+     "pt_backup": "sys_rotor",
+     "blade": "sys_rotor",
+     "bl_root": "sys_rotor",
+     "bl_bolts": "sys_rotor",
+     "bl_shell": "sys_rotor",
+     "bl_spar": "sys_rotor",
+     "bl_web": "sys_rotor",
+     "bl_lep": "sys_rotor",
+     "lps": "sys_rotor",
+     "lp_receptor": "sys_rotor",
+     "lp_band": "sys_rotor",
+     "lp_transfer": "sys_rotor",
+     "lp_air": "sys_rotor",
+     "lp_conductor": "sys_rotor",
+     "ao_bladeheat": "sys_rotor",
+     "sys_dt": "sys_dt",
+     "shaft": "sys_dt",
+     "ms_shaft": "sys_dt",
+     "ms_lock": "sys_dt",
+     "mainbrg": "sys_dt",
+     "mb_housing": "sys_dt",
+     "mb_bearing": "sys_dt",
+     "gearbox": "sys_dt",
+     "gb_planet": "sys_dt",
+     "gb_parallel": "sys_dt",
+     "gb_arms": "sys_dt",
+     "gb_lube": "sys_dt",
+     "hss": "sys_dt",
+     "hs_coupling": "sys_dt",
+     "hs_disc": "sys_dt",
+     "hs_caliper": "sys_dt",
+     "gen": "sys_dt",
+     "gn_stator": "sys_dt",
+     "gn_slip": "sys_dt",
+     "gn_cooler": "sys_dt",
+     "sys_yaw": "sys_yaw",
+     "yawbrg": "sys_yaw",
+     "yawdrv": "sys_yaw",
+     "yawbrk": "sys_yaw",
+     "yb_disc": "sys_yaw",
+     "yb_caliper": "sys_yaw",
+     "sys_struct": "sys_struct",
+     "bedplate": "sys_struct",
+     "rearframe": "sys_struct",
+     "cover": "sys_struct",
+     "crane": "sys_struct",
+     "sys_aux": "sys_aux",
+     "converter": "sys_aux",
+     "controller": "sys_aux",
+     "cooling": "sys_aux",
+     "hydraulic": "sys_aux",
+     "met": "sys_aux",
+     "me_anemo": "sys_aux",
+     "me_vane": "sys_aux",
+     "nc_cables": "sys_aux",
+     "ao_wfire": "sys_aux",
+     "sys_tower": "sys_tower",
+     "tower": "sys_tower",
+     "tw_shell": "sys_tower",
+     "tw_flange": "sys_tower",
+     "tw_access": "sys_tower",
+     "tw_platform": "sys_tower",
+     "tw_ladder": "sys_tower",
+     "tw_lift": "sys_tower",
+     "tw_door": "sys_tower",
+     "tw_cable": "sys_tower",
+     "sys_fnd": "sys_fnd",
+     "foundation": "sys_fnd",
+     "fd_footing": "sys_fnd",
+     "fd_pedestal": "sys_fnd",
+     "fd_anchor": "sys_fnd",
+     "fd_grout": "sys_fnd",
+     "sys_bop": "sys_bop",
+     "padmount": "sys_bop",
+     "pm_tank": "sys_bop",
+     "pm_rad": "sys_bop",
+     "pm_cab": "sys_bop",
+     "pm_pad": "sys_bop",
+     "el_basecab": "sys_bop",
+     "el_cables": "sys_bop",
+     "el_lv": "sys_bop",
+     "el_mv": "sys_bop",
+     "el_ground": "sys_bop",
+     "gd_ring": "sys_bop",
+     "gd_rods": "sys_bop",
+     "sys_wcivil": "sys_wcivil",
+     "cv_cranepad": "sys_wcivil",
+     "cv_road": "sys_wcivil"
+    },
+    "plant": {
+     "wf_wtg": "wf_wtg",
+     "wf_pads": "wf_pads",
+     "wf_feeders": "wf_feeders",
+     "wf_roads": "wf_roads",
+     "wsub": "wsub",
+     "wsub_mpt": "wsub",
+     "wsub_bkr": "wsub",
+     "wsub_disc": "wsub",
+     "wsub_meter": "wsub",
+     "wsub_mvbus": "wsub",
+     "wsub_bus": "wsub",
+     "wsub_house": "wsub",
+     "wsub_lm": "wsub",
+     "wsub_grid": "wsub",
+     "wsub_yard": "wsub",
+     "wsub_spare": "wsub",
+     "wgt": "wgt",
+     "wgt_struct": "wgt",
+     "wgt_cond": "wgt",
+     "wpoi": "wpoi",
+     "wpoi_lines": "wpoi",
+     "wpoi_bkr": "wpoi",
+     "wpoi_bus": "wpoi",
+     "wpoi_ctrl": "wpoi",
+     "wpoi_yard": "wpoi"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "sys_rotor",
+      "name": "Rotor",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "hub",
+          "name": "Hub",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "pitch",
+          "name": "Pitch System",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "blade",
+          "name": "Blades",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "lps",
+          "name": "Lightning Protection",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "ao_bladeheat",
+          "name": "Blade Heating",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_dt",
+      "name": "Drivetrain",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "shaft",
+          "name": "Main Shaft",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "mainbrg",
+          "name": "Main Bearing",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "gearbox",
+          "name": "Gearbox",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "hss",
+          "name": "HS Coupling & Brake",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "gen",
+          "name": "Generator (DFIG)",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_yaw",
+      "name": "Yaw System",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "yawbrg",
+          "name": "Yaw Bearing",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "yawdrv",
+          "name": "Yaw Drives",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "yawbrk",
+          "name": "Yaw Brakes",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_struct",
+      "name": "Nacelle Structure",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bedplate",
+          "name": "Bedplate",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "rearframe",
+          "name": "Rear Frame",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "cover",
+          "name": "Nacelle Cover",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "crane",
+          "name": "Service Crane",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_aux",
+      "name": "Nacelle Electrical & Auxiliary",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "converter",
+          "name": "Converter",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "controller",
+          "name": "Nacelle Controller",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "cooling",
+          "name": "Top Cooler",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "hydraulic",
+          "name": "Hydraulic Unit",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "met",
+          "name": "Met Sensors",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "nc_cables",
+          "name": "Nacelle Power Cables",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "ao_wfire",
+          "name": "Fire Suppression",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_tower",
+      "name": "Tower",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "tower",
+          "name": "Tower Structure",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "tw_access",
+          "name": "Access & Internals",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "tw_cable",
+          "name": "Power & Control Cables",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_fnd",
+      "name": "Foundation",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "foundation",
+          "name": "Gravity Foundation",
+          "part": "Turbine foundation",
+          "note": "Needs a separate scour and erosion pathway"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bop",
+      "name": "Electrical Infrastructure",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "padmount",
+          "name": "Pad-Mount Transformer",
+          "part": "Turbine-base electrical and pad or turbine step-up transformers",
+          "note": "Withheld"
+         },
+         {
+          "node": "el_basecab",
+          "name": "Base Switchgear & Control",
+          "part": "Turbine-base electrical and pad or turbine step-up transformers",
+          "note": "Withheld"
+         },
+         {
+          "node": "el_cables",
+          "name": "Cables",
+          "part": "Turbine-base electrical and pad or turbine step-up transformers",
+          "note": "Withheld"
+         },
+         {
+          "node": "el_ground",
+          "name": "Grounding System",
+          "part": "Turbine-base electrical and pad or turbine step-up transformers",
+          "note": "Withheld"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_wcivil",
+      "name": "Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "cv_cranepad",
+          "name": "Crane Pad",
+          "part": "Civil access and drainage",
+          "note": "Needs a split"
+         },
+         {
+          "node": "cv_road",
+          "name": "Access Road",
+          "part": "Civil access and drainage",
+          "note": "Needs a split"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "wf_array",
+      "name": "Turbine Array",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wf_wtg",
+          "name": "Wind Turbines",
+          "part": "Elevated turbine equipment: rotor, nacelle, tower",
+          "note": "Geometry-screened, not declared zero"
+         },
+         {
+          "node": "wf_pads",
+          "name": "Pad-Mount Transformers",
+          "part": "Turbine-base electrical and pad or turbine step-up transformers",
+          "note": "Withheld"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "wf_coll",
+      "name": "Collection System",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wf_feeders",
+          "name": "34.5 kV Feeders",
+          "part": "Collection cable joints and terminations",
+          "note": "Withheld"
+         },
+         {
+          "node": "wf_roads",
+          "name": "Access Roads",
+          "part": "Civil access and drainage"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "wsys_sub",
+      "name": "Substation & Interconnection",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "wsub",
+          "name": "Collector Substation",
+          "part": "GSU / substation (whole facility)",
+          "note": "One curve for the whole collector substation; its parts have no separate curves"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wgt",
+          "name": "Gen-Tie Line",
+          "note": "The gen-tie line is not named by the cell"
+         },
+         {
+          "node": "wpoi",
+          "name": "POI Switchyard",
+          "note": "The point-of-interconnection switchyard is not named by the cell"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 1,
+    "conditioner": 0,
+    "no_curve": 40,
+    "no_direct_damage": 0,
+    "outside": 0
+   },
+   "curve_parts": [
+    "GSU / substation (whole facility)"
+   ],
+   "unmapped": []
+  },
+  {
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "entry_id": "tropical_cyclone_wind_wind",
+   "status": "live",
+   "gap": false,
+   "href": "/cells/tropical_cyclone_wind_wind",
+   "rows": {
+    "wtg": {
+     "s": "no_curve",
+     "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+     "note": "Withheld, not zero",
+     "basis": "not_covered"
+    },
+    "sys_tower": {
+     "s": "curve",
+     "part": "Turbine tower",
+     "basis": "part"
+    },
+    "wf_wtg": {
+     "s": "curve",
+     "part": "Turbine tower",
+     "note": "The towers of the turbines; the rest of each turbine is withheld",
+     "basis": "part"
+    },
+    "wf_pads": {
+     "s": "no_curve",
+     "part": "Pad electrical",
+     "note": "Withheld, not zero",
+     "basis": "not_covered"
+    },
+    "wf_coll": {
+     "s": "no_curve",
+     "part": "Collection",
+     "note": "Withheld, not zero",
+     "basis": "not_covered"
+    },
+    "wsys_sub": {
+     "s": "no_curve",
+     "part": "GSU/substation",
+     "note": "Withheld, not zero",
+     "basis": "not_covered"
+    }
+   },
+   "states": {
+    "asset": {
+     "wtg": "wtg",
+     "sys_rotor": "wtg",
+     "hub": "wtg",
+     "hb_casting": "wtg",
+     "hb_spinner": "wtg",
+     "pitch": "wtg",
+     "pt_bearing": "wtg",
+     "pt_drive": "wtg",
+     "pt_cabinet": "wtg",
+     "pt_backup": "wtg",
+     "blade": "wtg",
+     "bl_root": "wtg",
+     "bl_bolts": "wtg",
+     "bl_shell": "wtg",
+     "bl_spar": "wtg",
+     "bl_web": "wtg",
+     "bl_lep": "wtg",
+     "lps": "wtg",
+     "lp_receptor": "wtg",
+     "lp_band": "wtg",
+     "lp_transfer": "wtg",
+     "lp_air": "wtg",
+     "lp_conductor": "wtg",
+     "ao_bladeheat": "wtg",
+     "sys_dt": "wtg",
+     "shaft": "wtg",
+     "ms_shaft": "wtg",
+     "ms_lock": "wtg",
+     "mainbrg": "wtg",
+     "mb_housing": "wtg",
+     "mb_bearing": "wtg",
+     "gearbox": "wtg",
+     "gb_planet": "wtg",
+     "gb_parallel": "wtg",
+     "gb_arms": "wtg",
+     "gb_lube": "wtg",
+     "hss": "wtg",
+     "hs_coupling": "wtg",
+     "hs_disc": "wtg",
+     "hs_caliper": "wtg",
+     "gen": "wtg",
+     "gn_stator": "wtg",
+     "gn_slip": "wtg",
+     "gn_cooler": "wtg",
+     "sys_yaw": "wtg",
+     "yawbrg": "wtg",
+     "yawdrv": "wtg",
+     "yawbrk": "wtg",
+     "yb_disc": "wtg",
+     "yb_caliper": "wtg",
+     "sys_struct": "wtg",
+     "bedplate": "wtg",
+     "rearframe": "wtg",
+     "cover": "wtg",
+     "crane": "wtg",
+     "sys_aux": "wtg",
+     "converter": "wtg",
+     "controller": "wtg",
+     "cooling": "wtg",
+     "hydraulic": "wtg",
+     "met": "wtg",
+     "me_anemo": "wtg",
+     "me_vane": "wtg",
+     "nc_cables": "wtg",
+     "ao_wfire": "wtg",
+     "sys_tower": "sys_tower",
+     "tower": "sys_tower",
+     "tw_shell": "sys_tower",
+     "tw_flange": "sys_tower",
+     "tw_access": "sys_tower",
+     "tw_platform": "sys_tower",
+     "tw_ladder": "sys_tower",
+     "tw_lift": "sys_tower",
+     "tw_door": "sys_tower",
+     "tw_cable": "sys_tower",
+     "sys_fnd": "wtg",
+     "foundation": "wtg",
+     "fd_footing": "wtg",
+     "fd_pedestal": "wtg",
+     "fd_anchor": "wtg",
+     "fd_grout": "wtg",
+     "sys_bop": "wtg",
+     "padmount": "wtg",
+     "pm_tank": "wtg",
+     "pm_rad": "wtg",
+     "pm_cab": "wtg",
+     "pm_pad": "wtg",
+     "el_basecab": "wtg",
+     "el_cables": "wtg",
+     "el_lv": "wtg",
+     "el_mv": "wtg",
+     "el_ground": "wtg",
+     "gd_ring": "wtg",
+     "gd_rods": "wtg",
+     "sys_wcivil": "wtg",
+     "cv_cranepad": "wtg",
+     "cv_road": "wtg"
+    },
+    "plant": {
+     "wf_wtg": "wf_wtg",
+     "wf_pads": "wf_pads",
+     "wf_coll": "wf_coll",
+     "wf_feeders": "wf_coll",
+     "wf_roads": "wf_coll",
+     "wsys_sub": "wsys_sub",
+     "wsub": "wsys_sub",
+     "wsub_mpt": "wsys_sub",
+     "wsub_bkr": "wsys_sub",
+     "wsub_disc": "wsys_sub",
+     "wsub_meter": "wsys_sub",
+     "wsub_mvbus": "wsys_sub",
+     "wsub_bus": "wsys_sub",
+     "wsub_house": "wsys_sub",
+     "wsub_lm": "wsys_sub",
+     "wsub_grid": "wsys_sub",
+     "wsub_yard": "wsys_sub",
+     "wsub_spare": "wsys_sub",
+     "wgt": "wsys_sub",
+     "wgt_struct": "wsys_sub",
+     "wgt_cond": "wsys_sub",
+     "wpoi": "wsys_sub",
+     "wpoi_lines": "wsys_sub",
+     "wpoi_bkr": "wsys_sub",
+     "wpoi_bus": "wsys_sub",
+     "wpoi_ctrl": "wsys_sub",
+     "wpoi_yard": "wsys_sub"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "sys_rotor",
+      "name": "Rotor",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "hub",
+          "name": "Hub",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "pitch",
+          "name": "Pitch System",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "blade",
+          "name": "Blades",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "lps",
+          "name": "Lightning Protection",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "ao_bladeheat",
+          "name": "Blade Heating",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_dt",
+      "name": "Drivetrain",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "shaft",
+          "name": "Main Shaft",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "mainbrg",
+          "name": "Main Bearing",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "gearbox",
+          "name": "Gearbox",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "hss",
+          "name": "HS Coupling & Brake",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "gen",
+          "name": "Generator (DFIG)",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_yaw",
+      "name": "Yaw System",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "yawbrg",
+          "name": "Yaw Bearing",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "yawdrv",
+          "name": "Yaw Drives",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "yawbrk",
+          "name": "Yaw Brakes",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_struct",
+      "name": "Nacelle Structure",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bedplate",
+          "name": "Bedplate",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "rearframe",
+          "name": "Rear Frame",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "cover",
+          "name": "Nacelle Cover",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "crane",
+          "name": "Service Crane",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_aux",
+      "name": "Nacelle Electrical & Auxiliary",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "converter",
+          "name": "Converter",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "controller",
+          "name": "Nacelle Controller",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "cooling",
+          "name": "Top Cooler",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "hydraulic",
+          "name": "Hydraulic Unit",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "met",
+          "name": "Met Sensors",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "nc_cables",
+          "name": "Nacelle Power Cables",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "ao_wfire",
+          "name": "Fire Suppression",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_tower",
+      "name": "Tower",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "tower",
+          "name": "Tower Structure",
+          "part": "Turbine tower"
+         },
+         {
+          "node": "tw_access",
+          "name": "Access & Internals",
+          "part": "Turbine tower"
+         },
+         {
+          "node": "tw_cable",
+          "name": "Power & Control Cables",
+          "part": "Turbine tower"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_fnd",
+      "name": "Foundation",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "foundation",
+          "name": "Gravity Foundation",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bop",
+      "name": "Electrical Infrastructure",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "padmount",
+          "name": "Pad-Mount Transformer",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "el_basecab",
+          "name": "Base Switchgear & Control",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "el_cables",
+          "name": "Cables",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "el_ground",
+          "name": "Grounding System",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_wcivil",
+      "name": "Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "cv_cranepad",
+          "name": "Crane Pad",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "cv_road",
+          "name": "Access Road",
+          "part": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "wf_array",
+      "name": "Turbine Array",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "wf_wtg",
+          "name": "Wind Turbines",
+          "part": "Turbine tower",
+          "note": "The towers of the turbines; the rest of each turbine is withheld"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wf_pads",
+          "name": "Pad-Mount Transformers",
+          "part": "Pad electrical",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "wf_coll",
+      "name": "Collection System",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wf_feeders",
+          "name": "34.5 kV Feeders",
+          "part": "Collection",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "wf_roads",
+          "name": "Access Roads",
+          "part": "Collection",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "wsys_sub",
+      "name": "Substation & Interconnection",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wsub",
+          "name": "Collector Substation",
+          "part": "GSU/substation",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "wgt",
+          "name": "Gen-Tie Line",
+          "part": "GSU/substation",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "wpoi",
+          "name": "POI Switchyard",
+          "part": "GSU/substation",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 4,
+    "conditioner": 0,
+    "no_curve": 37,
+    "no_direct_damage": 0,
+    "outside": 0
+   },
+   "curve_parts": [
+    "Turbine tower"
+   ],
+   "unmapped": []
+  },
+  {
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "entry_id": "wind_tornado_wind",
+   "status": "live",
+   "gap": false,
+   "href": "/cells/wind_tornado_wind",
+   "rows": {
+    "sys_rotor": {
+     "s": "curve",
+     "part": "Blade",
+     "note": "The rotor is read with the blades",
+     "basis": "part"
+    },
+    "sys_dt": {
+     "s": "curve",
+     "part": "Nacelle",
+     "basis": "part"
+    },
+    "sys_yaw": {
+     "s": "curve",
+     "part": "Nacelle",
+     "basis": "part"
+    },
+    "sys_struct": {
+     "s": "curve",
+     "part": "Nacelle",
+     "basis": "part"
+    },
+    "sys_aux": {
+     "s": "curve",
+     "part": "Nacelle",
+     "basis": "part"
+    },
+    "converter": {
+     "s": "curve",
+     "part": "Power electronics",
+     "basis": "part"
+    },
+    "controller": {
+     "s": "no_curve",
+     "part": "SCADA and controls",
+     "note": "Reviewed secondary unit; no curve",
+     "basis": "not_covered"
+    },
+    "met": {
+     "s": "no_curve",
+     "part": "SCADA and controls",
+     "note": "Reviewed secondary unit; no curve",
+     "basis": "not_covered"
+    },
+    "sys_tower": {
+     "s": "curve",
+     "part": "Tower",
+     "basis": "part"
+    },
+    "sys_fnd": {
+     "s": "curve",
+     "part": "Foundation",
+     "basis": "part"
+    },
+    "sys_bop": {
+     "s": "no_curve",
+     "part": "Electrical collection",
+     "note": "Reviewed secondary unit; no curve",
+     "basis": "not_covered"
+    },
+    "sys_wcivil": {
+     "s": "no_curve",
+     "part": "Civil infrastructure",
+     "note": "Reviewed secondary unit; no curve",
+     "basis": "not_covered"
+    },
+    "wf_wtg": {
+     "s": "curve",
+     "part": "Tower",
+     "note": "The turbines: blade, nacelle, tower, foundation and power electronics each have a curve",
+     "basis": "part"
+    },
+    "wf_pads": {
+     "s": "no_curve",
+     "part": "Electrical collection",
+     "basis": "not_covered"
+    },
+    "wf_coll": {
+     "s": "no_curve",
+     "part": "Electrical collection, civil infrastructure",
+     "basis": "not_covered"
+    },
+    "wsys_sub": {
+     "s": "no_curve",
+     "part": "Substation",
+     "note": "Reviewed secondary unit; no curve",
+     "basis": "not_covered"
+    }
+   },
+   "states": {
+    "asset": {
+     "sys_rotor": "sys_rotor",
+     "hub": "sys_rotor",
+     "hb_casting": "sys_rotor",
+     "hb_spinner": "sys_rotor",
+     "pitch": "sys_rotor",
+     "pt_bearing": "sys_rotor",
+     "pt_drive": "sys_rotor",
+     "pt_cabinet": "sys_rotor",
+     "pt_backup": "sys_rotor",
+     "blade": "sys_rotor",
+     "bl_root": "sys_rotor",
+     "bl_bolts": "sys_rotor",
+     "bl_shell": "sys_rotor",
+     "bl_spar": "sys_rotor",
+     "bl_web": "sys_rotor",
+     "bl_lep": "sys_rotor",
+     "lps": "sys_rotor",
+     "lp_receptor": "sys_rotor",
+     "lp_band": "sys_rotor",
+     "lp_transfer": "sys_rotor",
+     "lp_air": "sys_rotor",
+     "lp_conductor": "sys_rotor",
+     "ao_bladeheat": "sys_rotor",
+     "sys_dt": "sys_dt",
+     "shaft": "sys_dt",
+     "ms_shaft": "sys_dt",
+     "ms_lock": "sys_dt",
+     "mainbrg": "sys_dt",
+     "mb_housing": "sys_dt",
+     "mb_bearing": "sys_dt",
+     "gearbox": "sys_dt",
+     "gb_planet": "sys_dt",
+     "gb_parallel": "sys_dt",
+     "gb_arms": "sys_dt",
+     "gb_lube": "sys_dt",
+     "hss": "sys_dt",
+     "hs_coupling": "sys_dt",
+     "hs_disc": "sys_dt",
+     "hs_caliper": "sys_dt",
+     "gen": "sys_dt",
+     "gn_stator": "sys_dt",
+     "gn_slip": "sys_dt",
+     "gn_cooler": "sys_dt",
+     "sys_yaw": "sys_yaw",
+     "yawbrg": "sys_yaw",
+     "yawdrv": "sys_yaw",
+     "yawbrk": "sys_yaw",
+     "yb_disc": "sys_yaw",
+     "yb_caliper": "sys_yaw",
+     "sys_struct": "sys_struct",
+     "bedplate": "sys_struct",
+     "rearframe": "sys_struct",
+     "cover": "sys_struct",
+     "crane": "sys_struct",
+     "sys_aux": "sys_aux",
+     "converter": "converter",
+     "controller": "controller",
+     "cooling": "sys_aux",
+     "hydraulic": "sys_aux",
+     "met": "met",
+     "me_anemo": "met",
+     "me_vane": "met",
+     "nc_cables": "sys_aux",
+     "ao_wfire": "sys_aux",
+     "sys_tower": "sys_tower",
+     "tower": "sys_tower",
+     "tw_shell": "sys_tower",
+     "tw_flange": "sys_tower",
+     "tw_access": "sys_tower",
+     "tw_platform": "sys_tower",
+     "tw_ladder": "sys_tower",
+     "tw_lift": "sys_tower",
+     "tw_door": "sys_tower",
+     "tw_cable": "sys_tower",
+     "sys_fnd": "sys_fnd",
+     "foundation": "sys_fnd",
+     "fd_footing": "sys_fnd",
+     "fd_pedestal": "sys_fnd",
+     "fd_anchor": "sys_fnd",
+     "fd_grout": "sys_fnd",
+     "sys_bop": "sys_bop",
+     "padmount": "sys_bop",
+     "pm_tank": "sys_bop",
+     "pm_rad": "sys_bop",
+     "pm_cab": "sys_bop",
+     "pm_pad": "sys_bop",
+     "el_basecab": "sys_bop",
+     "el_cables": "sys_bop",
+     "el_lv": "sys_bop",
+     "el_mv": "sys_bop",
+     "el_ground": "sys_bop",
+     "gd_ring": "sys_bop",
+     "gd_rods": "sys_bop",
+     "sys_wcivil": "sys_wcivil",
+     "cv_cranepad": "sys_wcivil",
+     "cv_road": "sys_wcivil"
+    },
+    "plant": {
+     "wf_wtg": "wf_wtg",
+     "wf_pads": "wf_pads",
+     "wf_coll": "wf_coll",
+     "wf_feeders": "wf_coll",
+     "wf_roads": "wf_coll",
+     "wsys_sub": "wsys_sub",
+     "wsub": "wsys_sub",
+     "wsub_mpt": "wsys_sub",
+     "wsub_bkr": "wsys_sub",
+     "wsub_disc": "wsys_sub",
+     "wsub_meter": "wsys_sub",
+     "wsub_mvbus": "wsys_sub",
+     "wsub_bus": "wsys_sub",
+     "wsub_house": "wsys_sub",
+     "wsub_lm": "wsys_sub",
+     "wsub_grid": "wsys_sub",
+     "wsub_yard": "wsys_sub",
+     "wsub_spare": "wsys_sub",
+     "wgt": "wsys_sub",
+     "wgt_struct": "wsys_sub",
+     "wgt_cond": "wsys_sub",
+     "wpoi": "wsys_sub",
+     "wpoi_lines": "wsys_sub",
+     "wpoi_bkr": "wsys_sub",
+     "wpoi_bus": "wsys_sub",
+     "wpoi_ctrl": "wsys_sub",
+     "wpoi_yard": "wsys_sub"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "sys_rotor",
+      "name": "Rotor",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "hub",
+          "name": "Hub",
+          "part": "Blade",
+          "note": "The rotor is read with the blades"
+         },
+         {
+          "node": "pitch",
+          "name": "Pitch System",
+          "part": "Blade",
+          "note": "The rotor is read with the blades"
+         },
+         {
+          "node": "blade",
+          "name": "Blades",
+          "part": "Blade",
+          "note": "The rotor is read with the blades"
+         },
+         {
+          "node": "lps",
+          "name": "Lightning Protection",
+          "part": "Blade",
+          "note": "The rotor is read with the blades"
+         },
+         {
+          "node": "ao_bladeheat",
+          "name": "Blade Heating",
+          "part": "Blade",
+          "note": "The rotor is read with the blades"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_dt",
+      "name": "Drivetrain",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "shaft",
+          "name": "Main Shaft",
+          "part": "Nacelle"
+         },
+         {
+          "node": "mainbrg",
+          "name": "Main Bearing",
+          "part": "Nacelle"
+         },
+         {
+          "node": "gearbox",
+          "name": "Gearbox",
+          "part": "Nacelle"
+         },
+         {
+          "node": "hss",
+          "name": "HS Coupling & Brake",
+          "part": "Nacelle"
+         },
+         {
+          "node": "gen",
+          "name": "Generator (DFIG)",
+          "part": "Nacelle"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_yaw",
+      "name": "Yaw System",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "yawbrg",
+          "name": "Yaw Bearing",
+          "part": "Nacelle"
+         },
+         {
+          "node": "yawdrv",
+          "name": "Yaw Drives",
+          "part": "Nacelle"
+         },
+         {
+          "node": "yawbrk",
+          "name": "Yaw Brakes",
+          "part": "Nacelle"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_struct",
+      "name": "Nacelle Structure",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "bedplate",
+          "name": "Bedplate",
+          "part": "Nacelle"
+         },
+         {
+          "node": "rearframe",
+          "name": "Rear Frame",
+          "part": "Nacelle"
+         },
+         {
+          "node": "cover",
+          "name": "Nacelle Cover",
+          "part": "Nacelle"
+         },
+         {
+          "node": "crane",
+          "name": "Service Crane",
+          "part": "Nacelle"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_aux",
+      "name": "Nacelle Electrical & Auxiliary",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "converter",
+          "name": "Converter",
+          "part": "Power electronics"
+         },
+         {
+          "node": "cooling",
+          "name": "Top Cooler",
+          "part": "Nacelle"
+         },
+         {
+          "node": "hydraulic",
+          "name": "Hydraulic Unit",
+          "part": "Nacelle"
+         },
+         {
+          "node": "nc_cables",
+          "name": "Nacelle Power Cables",
+          "part": "Nacelle"
+         },
+         {
+          "node": "ao_wfire",
+          "name": "Fire Suppression",
+          "part": "Nacelle"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "controller",
+          "name": "Nacelle Controller",
+          "part": "SCADA and controls",
+          "note": "Reviewed secondary unit; no curve"
+         },
+         {
+          "node": "met",
+          "name": "Met Sensors",
+          "part": "SCADA and controls",
+          "note": "Reviewed secondary unit; no curve"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_tower",
+      "name": "Tower",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "tower",
+          "name": "Tower Structure",
+          "part": "Tower"
+         },
+         {
+          "node": "tw_access",
+          "name": "Access & Internals",
+          "part": "Tower"
+         },
+         {
+          "node": "tw_cable",
+          "name": "Power & Control Cables",
+          "part": "Tower"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_fnd",
+      "name": "Foundation",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "foundation",
+          "name": "Gravity Foundation",
+          "part": "Foundation"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bop",
+      "name": "Electrical Infrastructure",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "padmount",
+          "name": "Pad-Mount Transformer",
+          "part": "Electrical collection",
+          "note": "Reviewed secondary unit; no curve"
+         },
+         {
+          "node": "el_basecab",
+          "name": "Base Switchgear & Control",
+          "part": "Electrical collection",
+          "note": "Reviewed secondary unit; no curve"
+         },
+         {
+          "node": "el_cables",
+          "name": "Cables",
+          "part": "Electrical collection",
+          "note": "Reviewed secondary unit; no curve"
+         },
+         {
+          "node": "el_ground",
+          "name": "Grounding System",
+          "part": "Electrical collection",
+          "note": "Reviewed secondary unit; no curve"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_wcivil",
+      "name": "Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "cv_cranepad",
+          "name": "Crane Pad",
+          "part": "Civil infrastructure",
+          "note": "Reviewed secondary unit; no curve"
+         },
+         {
+          "node": "cv_road",
+          "name": "Access Road",
+          "part": "Civil infrastructure",
+          "note": "Reviewed secondary unit; no curve"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "wf_array",
+      "name": "Turbine Array",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "wf_wtg",
+          "name": "Wind Turbines",
+          "part": "Tower",
+          "note": "The turbines: blade, nacelle, tower, foundation and power electronics each have a curve"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wf_pads",
+          "name": "Pad-Mount Transformers",
+          "part": "Electrical collection"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "wf_coll",
+      "name": "Collection System",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wf_feeders",
+          "name": "34.5 kV Feeders",
+          "part": "Electrical collection, civil infrastructure"
+         },
+         {
+          "node": "wf_roads",
+          "name": "Access Roads",
+          "part": "Electrical collection, civil infrastructure"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "wsys_sub",
+      "name": "Substation & Interconnection",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wsub",
+          "name": "Collector Substation",
+          "part": "Substation",
+          "note": "Reviewed secondary unit; no curve"
+         },
+         {
+          "node": "wgt",
+          "name": "Gen-Tie Line",
+          "part": "Substation",
+          "note": "Reviewed secondary unit; no curve"
+         },
+         {
+          "node": "wpoi",
+          "name": "POI Switchyard",
+          "part": "Substation",
+          "note": "Reviewed secondary unit; no curve"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 27,
+    "conditioner": 0,
+    "no_curve": 14,
+    "no_direct_damage": 0,
+    "outside": 0
+   },
+   "curve_parts": [
+    "Blade",
+    "Foundation",
+    "Nacelle",
+    "Power electronics",
+    "Tower"
+   ],
+   "unmapped": []
+  },
+  {
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "entry_id": "wildfire_wind",
+   "status": "live",
+   "gap": false,
+   "href": "/cells/wildfire_wind",
+   "rows": {
+    "wtg": {
+     "s": "no_curve",
+     "part": "Turbine fire assembly: blades, nacelle, tower",
+     "note": "Withheld, not zero",
+     "basis": "not_covered"
+    },
+    "sys_fnd": {
+     "s": "no_curve",
+     "part": "Foundation",
+     "note": "Withheld",
+     "basis": "not_covered"
+    },
+    "sys_bop": {
+     "s": "curve",
+     "part": "Pad electrical",
+     "basis": "part"
+    },
+    "sys_wcivil": {
+     "s": "no_curve",
+     "part": "Civil",
+     "note": "Withheld",
+     "basis": "not_covered"
+    },
+    "wf_wtg": {
+     "s": "no_curve",
+     "part": "Turbine fire assembly: blades, nacelle, tower",
+     "note": "Withheld, not zero",
+     "basis": "not_covered"
+    },
+    "wf_pads": {
+     "s": "curve",
+     "part": "Pad electrical",
+     "basis": "part"
+    },
+    "wf_coll": {
+     "s": "no_curve",
+     "part": "Collection network",
+     "note": "Withheld",
+     "basis": "not_covered"
+    },
+    "wsub": {
+     "s": "curve",
+     "part": "GSU protection, control and DC",
+     "note": "Only the protection, control and DC part of the substation has a curve; its main transformer, switchgear and bus are withheld",
+     "basis": "part"
+    },
+    "wgt": {
+     "s": "no_curve",
+     "note": "The gen-tie line is not named by the cell",
+     "basis": "not_named"
+    },
+    "wpoi": {
+     "s": "no_curve",
+     "note": "The point-of-interconnection switchyard is not named by the cell",
+     "basis": "not_named"
+    }
+   },
+   "states": {
+    "asset": {
+     "wtg": "wtg",
+     "sys_rotor": "wtg",
+     "hub": "wtg",
+     "hb_casting": "wtg",
+     "hb_spinner": "wtg",
+     "pitch": "wtg",
+     "pt_bearing": "wtg",
+     "pt_drive": "wtg",
+     "pt_cabinet": "wtg",
+     "pt_backup": "wtg",
+     "blade": "wtg",
+     "bl_root": "wtg",
+     "bl_bolts": "wtg",
+     "bl_shell": "wtg",
+     "bl_spar": "wtg",
+     "bl_web": "wtg",
+     "bl_lep": "wtg",
+     "lps": "wtg",
+     "lp_receptor": "wtg",
+     "lp_band": "wtg",
+     "lp_transfer": "wtg",
+     "lp_air": "wtg",
+     "lp_conductor": "wtg",
+     "ao_bladeheat": "wtg",
+     "sys_dt": "wtg",
+     "shaft": "wtg",
+     "ms_shaft": "wtg",
+     "ms_lock": "wtg",
+     "mainbrg": "wtg",
+     "mb_housing": "wtg",
+     "mb_bearing": "wtg",
+     "gearbox": "wtg",
+     "gb_planet": "wtg",
+     "gb_parallel": "wtg",
+     "gb_arms": "wtg",
+     "gb_lube": "wtg",
+     "hss": "wtg",
+     "hs_coupling": "wtg",
+     "hs_disc": "wtg",
+     "hs_caliper": "wtg",
+     "gen": "wtg",
+     "gn_stator": "wtg",
+     "gn_slip": "wtg",
+     "gn_cooler": "wtg",
+     "sys_yaw": "wtg",
+     "yawbrg": "wtg",
+     "yawdrv": "wtg",
+     "yawbrk": "wtg",
+     "yb_disc": "wtg",
+     "yb_caliper": "wtg",
+     "sys_struct": "wtg",
+     "bedplate": "wtg",
+     "rearframe": "wtg",
+     "cover": "wtg",
+     "crane": "wtg",
+     "sys_aux": "wtg",
+     "converter": "wtg",
+     "controller": "wtg",
+     "cooling": "wtg",
+     "hydraulic": "wtg",
+     "met": "wtg",
+     "me_anemo": "wtg",
+     "me_vane": "wtg",
+     "nc_cables": "wtg",
+     "ao_wfire": "wtg",
+     "sys_tower": "wtg",
+     "tower": "wtg",
+     "tw_shell": "wtg",
+     "tw_flange": "wtg",
+     "tw_access": "wtg",
+     "tw_platform": "wtg",
+     "tw_ladder": "wtg",
+     "tw_lift": "wtg",
+     "tw_door": "wtg",
+     "tw_cable": "wtg",
+     "sys_fnd": "sys_fnd",
+     "foundation": "sys_fnd",
+     "fd_footing": "sys_fnd",
+     "fd_pedestal": "sys_fnd",
+     "fd_anchor": "sys_fnd",
+     "fd_grout": "sys_fnd",
+     "sys_bop": "sys_bop",
+     "padmount": "sys_bop",
+     "pm_tank": "sys_bop",
+     "pm_rad": "sys_bop",
+     "pm_cab": "sys_bop",
+     "pm_pad": "sys_bop",
+     "el_basecab": "sys_bop",
+     "el_cables": "sys_bop",
+     "el_lv": "sys_bop",
+     "el_mv": "sys_bop",
+     "el_ground": "sys_bop",
+     "gd_ring": "sys_bop",
+     "gd_rods": "sys_bop",
+     "sys_wcivil": "sys_wcivil",
+     "cv_cranepad": "sys_wcivil",
+     "cv_road": "sys_wcivil"
+    },
+    "plant": {
+     "wf_wtg": "wf_wtg",
+     "wf_pads": "wf_pads",
+     "wf_coll": "wf_coll",
+     "wf_feeders": "wf_coll",
+     "wf_roads": "wf_coll",
+     "wsub": "wsub",
+     "wsub_mpt": "wsub",
+     "wsub_bkr": "wsub",
+     "wsub_disc": "wsub",
+     "wsub_meter": "wsub",
+     "wsub_mvbus": "wsub",
+     "wsub_bus": "wsub",
+     "wsub_house": "wsub",
+     "wsub_lm": "wsub",
+     "wsub_grid": "wsub",
+     "wsub_yard": "wsub",
+     "wsub_spare": "wsub",
+     "wgt": "wgt",
+     "wgt_struct": "wgt",
+     "wgt_cond": "wgt",
+     "wpoi": "wpoi",
+     "wpoi_lines": "wpoi",
+     "wpoi_bkr": "wpoi",
+     "wpoi_bus": "wpoi",
+     "wpoi_ctrl": "wpoi",
+     "wpoi_yard": "wpoi"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "sys_rotor",
+      "name": "Rotor",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "hub",
+          "name": "Hub",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "pitch",
+          "name": "Pitch System",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "blade",
+          "name": "Blades",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "lps",
+          "name": "Lightning Protection",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "ao_bladeheat",
+          "name": "Blade Heating",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_dt",
+      "name": "Drivetrain",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "shaft",
+          "name": "Main Shaft",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "mainbrg",
+          "name": "Main Bearing",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "gearbox",
+          "name": "Gearbox",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "hss",
+          "name": "HS Coupling & Brake",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "gen",
+          "name": "Generator (DFIG)",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_yaw",
+      "name": "Yaw System",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "yawbrg",
+          "name": "Yaw Bearing",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "yawdrv",
+          "name": "Yaw Drives",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "yawbrk",
+          "name": "Yaw Brakes",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_struct",
+      "name": "Nacelle Structure",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bedplate",
+          "name": "Bedplate",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "rearframe",
+          "name": "Rear Frame",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "cover",
+          "name": "Nacelle Cover",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "crane",
+          "name": "Service Crane",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_aux",
+      "name": "Nacelle Electrical & Auxiliary",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "converter",
+          "name": "Converter",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "controller",
+          "name": "Nacelle Controller",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "cooling",
+          "name": "Top Cooler",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "hydraulic",
+          "name": "Hydraulic Unit",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "met",
+          "name": "Met Sensors",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "nc_cables",
+          "name": "Nacelle Power Cables",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "ao_wfire",
+          "name": "Fire Suppression",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_tower",
+      "name": "Tower",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "tower",
+          "name": "Tower Structure",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "tw_access",
+          "name": "Access & Internals",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         },
+         {
+          "node": "tw_cable",
+          "name": "Power & Control Cables",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_fnd",
+      "name": "Foundation",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "foundation",
+          "name": "Gravity Foundation",
+          "part": "Foundation",
+          "note": "Withheld"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bop",
+      "name": "Electrical Infrastructure",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "padmount",
+          "name": "Pad-Mount Transformer",
+          "part": "Pad electrical"
+         },
+         {
+          "node": "el_basecab",
+          "name": "Base Switchgear & Control",
+          "part": "Pad electrical"
+         },
+         {
+          "node": "el_cables",
+          "name": "Cables",
+          "part": "Pad electrical"
+         },
+         {
+          "node": "el_ground",
+          "name": "Grounding System",
+          "part": "Pad electrical"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_wcivil",
+      "name": "Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "cv_cranepad",
+          "name": "Crane Pad",
+          "part": "Civil",
+          "note": "Withheld"
+         },
+         {
+          "node": "cv_road",
+          "name": "Access Road",
+          "part": "Civil",
+          "note": "Withheld"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "wf_array",
+      "name": "Turbine Array",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "wf_pads",
+          "name": "Pad-Mount Transformers",
+          "part": "Pad electrical"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wf_wtg",
+          "name": "Wind Turbines",
+          "part": "Turbine fire assembly: blades, nacelle, tower",
+          "note": "Withheld, not zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "wf_coll",
+      "name": "Collection System",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wf_feeders",
+          "name": "34.5 kV Feeders",
+          "part": "Collection network",
+          "note": "Withheld"
+         },
+         {
+          "node": "wf_roads",
+          "name": "Access Roads",
+          "part": "Collection network",
+          "note": "Withheld"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "wsys_sub",
+      "name": "Substation & Interconnection",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "wsub",
+          "name": "Collector Substation",
+          "part": "GSU protection, control and DC",
+          "note": "Only the protection, control and DC part of the substation has a curve; its main transformer, switchgear and bus are withheld"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wgt",
+          "name": "Gen-Tie Line",
+          "note": "The gen-tie line is not named by the cell"
+         },
+         {
+          "node": "wpoi",
+          "name": "POI Switchyard",
+          "note": "The point-of-interconnection switchyard is not named by the cell"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 6,
+    "conditioner": 0,
+    "no_curve": 35,
+    "no_direct_damage": 0,
+    "outside": 0
+   },
+   "curve_parts": [
+    "GSU protection, control and DC",
+    "Pad electrical"
+   ],
+   "unmapped": []
+  }
+ ],
+ "matrix": [
+  {
+   "tree": "asset",
+   "node": "sys_rotor",
+   "name": "Rotor",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Blade"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_dt",
+   "name": "Drivetrain",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Nacelle"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_yaw",
+   "name": "Yaw System",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Nacelle"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_struct",
+   "name": "Nacelle Structure",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Nacelle"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_aux",
+   "name": "Nacelle Electrical & Auxiliary",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Nacelle",
+      "Power electronics"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_tower",
+   "name": "Tower",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Turbine tower"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Tower"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_fnd",
+   "name": "Foundation",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Foundation"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_bop",
+   "name": "Electrical Infrastructure",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Pad electrical"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_wcivil",
+   "name": "Civil",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "wf_array",
+   "name": "Turbine Array",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Turbine tower"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Tower"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Pad electrical"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "wf_coll",
+   "name": "Collection System",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "wsys_sub",
+   "name": "Substation & Interconnection",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "GSU / substation (whole facility)"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "GSU protection, control and DC"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    }
+   }
+  }
+ ],
+ "state_words": {
+  "curve": "Has a damage curve",
+  "conditioner": "Changes the curve, no curve of its own",
+  "no_curve": "In the value, no curve yet",
+  "no_direct_damage": "Reviewed: no direct damage",
+  "outside": "Outside the value this curve prices"
+ },
+ "state_short": {
+  "curve": "curve",
+  "conditioner": "changes the curve",
+  "no_curve": "no curve yet",
+  "no_direct_damage": "no direct damage",
+  "outside": "outside"
+ }
+}

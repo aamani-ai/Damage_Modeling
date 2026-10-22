@@ -1081,22 +1081,96 @@
     "code": "PROPOSAL · screening"
    },
    "evidence": {
-    "words": "Evidence: transferred and our judgment",
-    "code": "shape T3–4 · cost T3–4",
+    "words": "Evidence: our judgment",
+    "code": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment",
     "tiers": [
-     "T3",
      "T4"
-    ]
+    ],
+    "codes": "shape T3–4 · cost T3–4"
    },
    "occurrence": {
     "words": "Field reports: nobody has looked yet",
-    "code": "? not searched"
+    "code": "Field reports: nobody has looked yet"
    },
    "review": {
     "words": "Not yet reviewed by a person",
     "code": "entry agent-read 2026-10-19 · release not yet reviewed"
    }
   },
+  "main_logic": [
+   "Hail is measured as hazard's MESH75 hail diameter, in mm.",
+   "Published hail-damage thresholds by roofing material (onset and full failure) turned into a replacement probability, times the roof's share of building cost.",
+   "The damage ratio is a share of each part's own replacement value (roof cover; walls and windows)."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "6 parts with a curve · 1 without one yet",
+    "paragraphs": [
+     "Hail on buildings: published hail-damage thresholds by roofing material (onset and full failure) turned into a replacement probability, times the roof's share of building cost. It names 6 parts: House roof (asphalt shingles), Warehouse roof (standing-seam steel), Office roof (TPO membrane and insulation), House walls and windows, Warehouse windows and Office windows. Outside its scope: contents (declared as a withheld placeholder part) and wind and flooding from the same storm (other cells). Kinds of damage it does not include: rain entering after a roof breach, cosmetic denting and wear from repeated small hail.",
+     "For this hazard the building is split into 6 parts: House roof (asphalt shingles), Warehouse roof (standing-seam steel), Office roof (TPO membrane and insulation), House walls and windows, Warehouse windows and Office windows. 2 further units are named but withheld — hre exposed equipment and hre building contents — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: outdoor equipment: AC condenser, rooftop units (whether it sits in the profile value is an open question).",
+     "The damage ratio is a share of each part's own replacement value (roof cover; walls and windows); building share = unit damage x the part's share of structure replacement cost. The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true
+   },
+   {
+    "id": "worked_out",
+    "name": "How damage is worked out",
+    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "fact": "hazard's MESH75 hail diameter → a line through points",
+    "paragraphs": [
+     "Damage is read against hazard's MESH75 hail diameter (mm). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: hazard's MESH75 hail diameter (mm), read as the largest hailstone at the building, 0 to 203.2 mm.",
+     "The seven-step audit is written in the dossier with 7 rows. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "15 sources, 14 linked · our judgment",
+    "paragraphs": [
+     "15 sources set this cell: Haag Engineering, hail damage threshold sizes for common roofing, Haag Engineering, low-slope roof systems and hail, IIBEC, ice-ball impact resistance of heat-aged TPO membranes and FEMA, Hazus 7.0 Hurricane Technical Manual, building cost ratios and 11 more. Of the 13 parameters, 1 is published, 5 are borrowed and 7 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator)."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "1 outside check · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "1 outside check compares this curve with an independent result: FEMA National Risk Index: yearly roof loss on Hazard's grid. The validation record says report.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: not yet reviewed."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment",
+  "hazard_paths": [],
   "capabilities": [
    {
     "key": "single_event",
@@ -1182,7 +1256,7 @@
   "stations": [
    {
     "id": "scope",
-    "name": "What it covers",
+    "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
     "paragraph": "Hail on buildings: published hail-damage thresholds by roofing material (onset and full failure) turned into a replacement probability, times the roof's share of building cost. It names 6 parts: House roof (asphalt shingles), Warehouse roof (standing-seam steel), Office roof (TPO membrane and insulation), House walls and windows, Warehouse windows and Office windows. Outside its scope: contents (declared as a withheld placeholder part) and wind and flooding from the same storm (other cells). Kinds of damage it does not include: rain entering after a roof breach, cosmetic denting and wear from repeated small hail.",
     "plain_fact": "6 parts · 2 left out"
@@ -1205,8 +1279,8 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "15 sources set this cell: Haag Engineering, hail damage threshold sizes for common roofing, Haag Engineering, low-slope roof systems and hail, IIBEC, ice-ball impact resistance of heat-aged TPO membranes and FEMA, Hazus 7.0 Hurricane Technical Manual, building cost ratios and 11 more. Of the 13 parameters, 1 is lab-tested (T2), 5 are transferred (T3) and 7 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
-    "plain_fact": "15 sources · transferred and our judgment"
+    "paragraph": "15 sources set this cell: Haag Engineering, hail damage threshold sizes for common roofing, Haag Engineering, low-slope roof systems and hail, IIBEC, ice-ball impact resistance of heat-aged TPO membranes and FEMA, Hazus 7.0 Hurricane Technical Manual, building cost ratios and 11 more. Of the 13 parameters, 1 is published, 5 are borrowed and 7 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "plain_fact": "15 sources · borrowed and our judgment"
    },
    {
     "id": "value",
@@ -1562,7 +1636,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/hail_wind/proposed/LEGACY_EVIDENCE_INGESTION_hail_wind__model_v0_1__docs_r1.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/hail_wind/proposed/LEGACY_EVIDENCE_INGESTION_hail_wind__model_v0_1__docs_r1.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/hail_wind/proposed/LEGACY_EVIDENCE_INGESTION_hail_wind__model_v0_1__docs_r1.md",
     "link_kind": "repo_file",
     "title": "Damage_Modeling hail_wind proposal, legacy evidence audit:…",
     "no_link_sentence": null
@@ -2155,7 +2229,7 @@
     "raw_name": "valid_range",
     "value_text": "0 to 203.2 mm; above withholds; negative rejected",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "HRE-S008",
@@ -2206,7 +2280,7 @@
     "raw_name": "house_roof_band",
     "value_text": "1.25-2.0 in (31.75-50.8 mm)",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "HRE-S001",
@@ -2235,7 +2309,7 @@
     "raw_name": "house_roof_share",
     "value_text": "0.0375 of structure RCN",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "HRE-S006",
@@ -2257,7 +2331,7 @@
     "raw_name": "warehouse_roof_band",
     "value_text": "2.5-3.5 in (63.5-88.9 mm)",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "HRE-S002",
@@ -2276,7 +2350,7 @@
     ],
     "claim_ids": [],
     "curve_id": "HRE_IND_ROOF_STANDING_SEAM_STEEL",
-    "reasoning": "Onset T3 (transferred); full T4 (our judgment).",
+    "reasoning": "Onset borrowed; full judgment-based.",
     "update_trigger": "Metal panel tests above 2.5 in.",
     "role": "threshold"
    },
@@ -2315,7 +2389,7 @@
     "raw_name": "office_roof_band",
     "value_text": "1.0-2.0 in (25.4-50.8 mm)",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "HRE-S002",
@@ -2351,7 +2425,7 @@
     "raw_name": "office_roof_share",
     "value_text": "0.027 of structure RCN",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "HRE-S006",
@@ -2475,8 +2549,8 @@
   },
   "extraction": null,
   "tier_words": {
-   "shape": "transferred and our judgment",
-   "cost": "transferred and our judgment"
+   "shape": "borrowed and our judgment",
+   "cost": "borrowed and our judgment"
   }
  },
  "build_findings": []

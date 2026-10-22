@@ -1,0 +1,4204 @@
+{
+ "schema": "damage_dashboard_coverage.v1",
+ "type": {
+  "slug": "solar",
+  "label": "Solar farm",
+  "category": "power_plants",
+  "category_label": "Power plants",
+  "profile": "100 MWac single-axis tracker plant; the picture shows one tracker block and the plant",
+  "building": null,
+  "also_buildings": null,
+  "picture_note": null,
+  "catalogue_asset": "Solar farm"
+ },
+ "twin": {
+  "asset": "solar",
+  "name": "Sample Solar Asset",
+  "model": "pv-tracker",
+  "root": "pvrow",
+  "plant_model": "solar-plant",
+  "plant_root": "pplant",
+  "plant_name": "Solar Plant",
+  "commit": "d01abd03cb101ecbe05468a5d573b50f90efd8fb",
+  "crosswalk": "docs/contracts/twin_crosswalks/solar.csv"
+ },
+ "trees": {
+  "asset": {
+   "root": "pvrow",
+   "nodes": {
+    "pvrow": {
+     "n": "Tracker Block"
+    },
+    "sys_pv": {
+     "n": "PV Array",
+     "p": "pvrow"
+    },
+    "pv_module": {
+     "n": "PV Module",
+     "p": "sys_pv"
+    },
+    "pv_fglass": {
+     "n": "Front Glass",
+     "p": "pv_module"
+    },
+    "pv_encap": {
+     "n": "Encapsulant",
+     "p": "pv_module"
+    },
+    "pv_cells": {
+     "n": "Cell Matrix",
+     "p": "pv_module"
+    },
+    "pv_rglass": {
+     "n": "Rear Glass",
+     "p": "pv_module"
+    },
+    "pv_frame": {
+     "n": "Frame",
+     "p": "pv_module"
+    },
+    "pv_jbox": {
+     "n": "Junction Boxes",
+     "p": "pv_module"
+    },
+    "pv_leads": {
+     "n": "Leads & Connectors",
+     "p": "pv_module"
+    },
+    "pv_harness": {
+     "n": "DC Harness",
+     "p": "sys_pv"
+    },
+    "hn_cable": {
+     "n": "String Cable",
+     "p": "pv_harness"
+    },
+    "hn_clip": {
+     "n": "Wire Management Clips",
+     "p": "pv_harness"
+    },
+    "sys_trk": {
+     "n": "Tracker Structure",
+     "p": "pvrow"
+    },
+    "tt": {
+     "n": "Torque Tube",
+     "p": "sys_trk"
+    },
+    "tt_tube": {
+     "n": "Tube Sections",
+     "p": "tt"
+    },
+    "tt_splice": {
+     "n": "Splice Couplers",
+     "p": "tt"
+    },
+    "mt": {
+     "n": "Module Mounting",
+     "p": "sys_trk"
+    },
+    "mt_rail": {
+     "n": "Module Rails",
+     "p": "mt"
+    },
+    "mt_clamp": {
+     "n": "Tube Clamps",
+     "p": "mt"
+    },
+    "br": {
+     "n": "Bearing Assemblies",
+     "p": "sys_trk"
+    },
+    "br_housing": {
+     "n": "Bearing Housing",
+     "p": "br"
+    },
+    "br_bushing": {
+     "n": "Polymer Bushing",
+     "p": "br"
+    },
+    "fd": {
+     "n": "Driven Piles",
+     "p": "sys_trk"
+    },
+    "sys_drv": {
+     "n": "Drive & Control",
+     "p": "pvrow"
+    },
+    "dr_slewdrive": {
+     "n": "Slew Drive",
+     "p": "sys_drv"
+    },
+    "sd_gear": {
+     "n": "Slewing Gear",
+     "p": "dr_slewdrive"
+    },
+    "sd_motor": {
+     "n": "Drive Motor",
+     "p": "dr_slewdrive"
+    },
+    "dr_damper": {
+     "n": "Dampers",
+     "p": "sys_drv"
+    },
+    "ct": {
+     "n": "Tracker Controller",
+     "p": "sys_drv"
+    },
+    "ct_tcu": {
+     "n": "Controller Enclosure",
+     "p": "ct"
+    },
+    "ct_power": {
+     "n": "Self-Power Module",
+     "p": "ct"
+    },
+    "ct_incl": {
+     "n": "Inclinometer",
+     "p": "ct"
+    },
+    "sys_coll": {
+     "n": "Electrical Collection",
+     "p": "pvrow"
+    },
+    "cb": {
+     "n": "Combiner Box",
+     "p": "sys_coll"
+    },
+    "cb_enc": {
+     "n": "Enclosure & Post",
+     "p": "cb"
+    },
+    "cb_fuse": {
+     "n": "String Fuses",
+     "p": "cb"
+    },
+    "cb_disc": {
+     "n": "Load-Break Disconnect",
+     "p": "cb"
+    },
+    "cb_spd": {
+     "n": "Surge Protection",
+     "p": "cb"
+    },
+    "dc_feeder": {
+     "n": "DC Feeders",
+     "p": "sys_coll"
+    },
+    "mv_cable": {
+     "n": "MV Collection Cable",
+     "p": "sys_coll"
+    },
+    "sys_pcs": {
+     "n": "Power Conversion",
+     "p": "pvrow"
+    },
+    "inv": {
+     "n": "Central Inverter",
+     "p": "sys_pcs"
+    },
+    "inv_cab": {
+     "n": "Power Stack Cabinet",
+     "p": "inv"
+    },
+    "inv_dc": {
+     "n": "DC Input Section",
+     "p": "inv"
+    },
+    "inv_cool": {
+     "n": "Cooling & Filters",
+     "p": "inv"
+    },
+    "mvt": {
+     "n": "MV Transformer",
+     "p": "sys_pcs"
+    },
+    "mvt_tank": {
+     "n": "Tank & Core/Coil",
+     "p": "mvt"
+    },
+    "mvt_rad": {
+     "n": "Radiators",
+     "p": "mvt"
+    },
+    "mvt_bush": {
+     "n": "Bushings & Arresters",
+     "p": "mvt"
+    },
+    "mvt_bund": {
+     "n": "Oil Containment",
+     "p": "mvt"
+    },
+    "rmu": {
+     "n": "MV Switchgear (RMU)",
+     "p": "sys_pcs"
+    },
+    "aux": {
+     "n": "Auxiliary Supply",
+     "p": "sys_pcs"
+    },
+    "sk_base": {
+     "n": "Skid & Piers",
+     "p": "sys_pcs"
+    },
+    "ac_bus": {
+     "n": "LV Bus Duct",
+     "p": "sys_pcs"
+    },
+    "hv_leads": {
+     "n": "HV Cable Leads",
+     "p": "sys_pcs"
+    },
+    "sys_ground": {
+     "n": "Grounding",
+     "p": "pvrow"
+    },
+    "gr_cond": {
+     "n": "Ground Conductor",
+     "p": "sys_ground"
+    },
+    "gr_rods": {
+     "n": "Ground Rods",
+     "p": "sys_ground"
+    },
+    "gr_jumper": {
+     "n": "Bonding Jumpers",
+     "p": "sys_ground"
+    },
+    "sys_scada": {
+     "n": "Monitoring & SCADA",
+     "p": "pvrow"
+    },
+    "wx": {
+     "n": "Met Station",
+     "p": "sys_scada"
+    },
+    "me_pyr": {
+     "n": "Pyranometers",
+     "p": "wx"
+    },
+    "me_wind": {
+     "n": "Anemometer",
+     "p": "wx"
+    },
+    "me_logger": {
+     "n": "Data Logger",
+     "p": "wx"
+    },
+    "scada_cab": {
+     "n": "SCADA / PPC Cabinet",
+     "p": "sys_scada"
+    },
+    "scada_fiber": {
+     "n": "Fiber Network",
+     "p": "sys_scada"
+    },
+    "sys_pcivil": {
+     "n": "Civil",
+     "p": "pvrow"
+    },
+    "pr_road": {
+     "n": "Access Road",
+     "p": "sys_pcivil"
+    },
+    "pr_fence": {
+     "n": "Perimeter Fence",
+     "p": "sys_pcivil"
+    },
+    "ao_berm": {
+     "n": "Flood Berm & Drainage",
+     "p": "sys_pcivil"
+    },
+    "ao_firebreak": {
+     "n": "Firebreak & Irrigated Buffer",
+     "p": "sys_pcivil"
+    },
+    "ao_hailnet": {
+     "n": "Hail Netting",
+     "p": "sys_pcivil"
+    }
+   }
+  },
+  "plant": {
+   "root": "pplant",
+   "nodes": {
+    "pplant": {
+     "n": "Solar Plant"
+    },
+    "pp_array": {
+     "n": "PV Blocks",
+     "p": "pplant"
+    },
+    "pp_arrays": {
+     "n": "Tracker Arrays",
+     "p": "pp_array"
+    },
+    "pp_skids": {
+     "n": "MV Power Stations",
+     "p": "pp_array"
+    },
+    "pp_coll": {
+     "n": "Collection & Civil",
+     "p": "pplant"
+    },
+    "pp_feeders": {
+     "n": "34.5 kV Feeders",
+     "p": "pp_coll"
+    },
+    "pp_roads": {
+     "n": "Access Roads",
+     "p": "pp_coll"
+    },
+    "pp_fence": {
+     "n": "Perimeter Fence",
+     "p": "pp_coll"
+    },
+    "ssub_floodwall": {
+     "n": "Substation Flood Wall",
+     "p": "pp_coll"
+    },
+    "ssys_sub": {
+     "n": "Substation & Interconnection",
+     "p": "pplant"
+    },
+    "ssub": {
+     "n": "Collector Substation",
+     "p": "ssys_sub"
+    },
+    "ssub_mpt": {
+     "n": "Main Power Transformer",
+     "p": "ssub"
+    },
+    "ssub_bkr": {
+     "n": "HV Circuit Breakers",
+     "p": "ssub"
+    },
+    "ssub_disc": {
+     "n": "Disconnect Switches",
+     "p": "ssub"
+    },
+    "ssub_meter": {
+     "n": "Revenue Metering",
+     "p": "ssub"
+    },
+    "ssub_mvbus": {
+     "n": "34.5 kV Switchgear",
+     "p": "ssub"
+    },
+    "ssub_bus": {
+     "n": "HV Bus & Dead-End Gantry",
+     "p": "ssub"
+    },
+    "ssub_house": {
+     "n": "Control House",
+     "p": "ssub"
+    },
+    "ssub_lm": {
+     "n": "Lightning Masts",
+     "p": "ssub"
+    },
+    "ssub_grid": {
+     "n": "Ground Grid",
+     "p": "ssub"
+    },
+    "ssub_yard": {
+     "n": "Yard & Fence",
+     "p": "ssub"
+    },
+    "ssub_spare": {
+     "n": "Spare Main Power Transformer",
+     "p": "ssub"
+    },
+    "sgt": {
+     "n": "Gen-Tie Line",
+     "p": "ssys_sub"
+    },
+    "sgt_struct": {
+     "n": "H-Frame Structures",
+     "p": "sgt"
+    },
+    "sgt_cond": {
+     "n": "Conductors & Shield Wire",
+     "p": "sgt"
+    },
+    "spoi": {
+     "n": "POI Switchyard",
+     "p": "ssys_sub"
+    },
+    "spoi_lines": {
+     "n": "Network Lines",
+     "p": "spoi"
+    },
+    "spoi_bkr": {
+     "n": "Ring Bus Breakers",
+     "p": "spoi"
+    },
+    "spoi_bus": {
+     "n": "Bus & Line Gantries",
+     "p": "spoi"
+    },
+    "spoi_ctrl": {
+     "n": "Control House",
+     "p": "spoi"
+    },
+    "spoi_yard": {
+     "n": "Yard & Fence",
+     "p": "spoi"
+    }
+   }
+  }
+ },
+ "hazards": [
+  {
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail"
+   },
+   "entry_id": "hail_solar",
+   "status": "live",
+   "gap": false,
+   "href": "/cells/hail_solar",
+   "rows": {
+    "sys_pv": {
+     "s": "curve",
+     "part": "PV modules (glass and cells)",
+     "basis": "part"
+    },
+    "pv_harness": {
+     "s": "no_curve",
+     "note": "The DC harness under the modules is not named by the cell",
+     "basis": "not_named"
+    },
+    "sys_trk": {
+     "s": "no_curve",
+     "part": "Racking structure",
+     "note": "Racking and tracker steel are secondary; tracker steel is used only as a stow conditioner",
+     "basis": "not_covered"
+    },
+    "fd": {
+     "s": "no_direct_damage",
+     "note": "Foundations: no direct hail damage by coverage decision",
+     "basis": "coverage_decision"
+    },
+    "sys_drv": {
+     "s": "conditioner",
+     "part": "Tracker stow",
+     "note": "Tracker stow changes how hard hail hits the modules; it has no curve of its own",
+     "basis": "coverage_decision"
+    },
+    "sys_coll": {
+     "s": "no_curve",
+     "note": "Combiner boxes and collection cable are not named by the cell",
+     "basis": "not_named"
+    },
+    "sys_pcs": {
+     "s": "no_direct_damage",
+     "note": "Inverters and the skid: no direct hail damage by coverage decision",
+     "basis": "coverage_decision"
+    },
+    "sys_ground": {
+     "s": "no_direct_damage",
+     "note": "Buried grounding; not named by the cell (inferred; to confirm with the cell owner)",
+     "basis": "inferred"
+    },
+    "sys_scada": {
+     "s": "no_curve",
+     "part": "SCADA and met instruments",
+     "note": "Optional secondary; no curve",
+     "basis": "not_covered"
+    },
+    "sys_pcivil": {
+     "s": "no_direct_damage",
+     "note": "Civil works and drainage: no direct hail damage by coverage decision",
+     "basis": "coverage_decision"
+    },
+    "pp_arrays": {
+     "s": "curve",
+     "part": "PV modules (glass and cells)",
+     "note": "The modules in the tracker arrays carry the curve",
+     "basis": "part"
+    },
+    "pp_skids": {
+     "s": "no_direct_damage",
+     "note": "Inverter stations: no direct hail damage",
+     "basis": "coverage_decision"
+    },
+    "pp_coll": {
+     "s": "no_direct_damage",
+     "note": "Roads and fencing: no direct hail damage",
+     "basis": "coverage_decision"
+    },
+    "pp_feeders": {
+     "s": "no_curve",
+     "note": "Collection feeders are not named by the cell",
+     "basis": "not_named"
+    },
+    "ssys_sub": {
+     "s": "no_direct_damage",
+     "note": "Substation: no direct hail damage by coverage decision",
+     "basis": "coverage_decision"
+    }
+   },
+   "states": {
+    "asset": {
+     "sys_pv": "sys_pv",
+     "pv_module": "sys_pv",
+     "pv_fglass": "sys_pv",
+     "pv_encap": "sys_pv",
+     "pv_cells": "sys_pv",
+     "pv_rglass": "sys_pv",
+     "pv_frame": "sys_pv",
+     "pv_jbox": "sys_pv",
+     "pv_leads": "sys_pv",
+     "pv_harness": "pv_harness",
+     "hn_cable": "pv_harness",
+     "hn_clip": "pv_harness",
+     "sys_trk": "sys_trk",
+     "tt": "sys_trk",
+     "tt_tube": "sys_trk",
+     "tt_splice": "sys_trk",
+     "mt": "sys_trk",
+     "mt_rail": "sys_trk",
+     "mt_clamp": "sys_trk",
+     "br": "sys_trk",
+     "br_housing": "sys_trk",
+     "br_bushing": "sys_trk",
+     "fd": "fd",
+     "sys_drv": "sys_drv",
+     "dr_slewdrive": "sys_drv",
+     "sd_gear": "sys_drv",
+     "sd_motor": "sys_drv",
+     "dr_damper": "sys_drv",
+     "ct": "sys_drv",
+     "ct_tcu": "sys_drv",
+     "ct_power": "sys_drv",
+     "ct_incl": "sys_drv",
+     "sys_coll": "sys_coll",
+     "cb": "sys_coll",
+     "cb_enc": "sys_coll",
+     "cb_fuse": "sys_coll",
+     "cb_disc": "sys_coll",
+     "cb_spd": "sys_coll",
+     "dc_feeder": "sys_coll",
+     "mv_cable": "sys_coll",
+     "sys_pcs": "sys_pcs",
+     "inv": "sys_pcs",
+     "inv_cab": "sys_pcs",
+     "inv_dc": "sys_pcs",
+     "inv_cool": "sys_pcs",
+     "mvt": "sys_pcs",
+     "mvt_tank": "sys_pcs",
+     "mvt_rad": "sys_pcs",
+     "mvt_bush": "sys_pcs",
+     "mvt_bund": "sys_pcs",
+     "rmu": "sys_pcs",
+     "aux": "sys_pcs",
+     "sk_base": "sys_pcs",
+     "ac_bus": "sys_pcs",
+     "hv_leads": "sys_pcs",
+     "sys_ground": "sys_ground",
+     "gr_cond": "sys_ground",
+     "gr_rods": "sys_ground",
+     "gr_jumper": "sys_ground",
+     "sys_scada": "sys_scada",
+     "wx": "sys_scada",
+     "me_pyr": "sys_scada",
+     "me_wind": "sys_scada",
+     "me_logger": "sys_scada",
+     "scada_cab": "sys_scada",
+     "scada_fiber": "sys_scada",
+     "sys_pcivil": "sys_pcivil",
+     "pr_road": "sys_pcivil",
+     "pr_fence": "sys_pcivil",
+     "ao_berm": "sys_pcivil",
+     "ao_firebreak": "sys_pcivil",
+     "ao_hailnet": "sys_pcivil"
+    },
+    "plant": {
+     "pp_arrays": "pp_arrays",
+     "pp_skids": "pp_skids",
+     "pp_coll": "pp_coll",
+     "pp_feeders": "pp_feeders",
+     "pp_roads": "pp_coll",
+     "pp_fence": "pp_coll",
+     "ssub_floodwall": "pp_coll",
+     "ssys_sub": "ssys_sub",
+     "ssub": "ssys_sub",
+     "ssub_mpt": "ssys_sub",
+     "ssub_bkr": "ssys_sub",
+     "ssub_disc": "ssys_sub",
+     "ssub_meter": "ssys_sub",
+     "ssub_mvbus": "ssys_sub",
+     "ssub_bus": "ssys_sub",
+     "ssub_house": "ssys_sub",
+     "ssub_lm": "ssys_sub",
+     "ssub_grid": "ssys_sub",
+     "ssub_yard": "ssys_sub",
+     "ssub_spare": "ssys_sub",
+     "sgt": "ssys_sub",
+     "sgt_struct": "ssys_sub",
+     "sgt_cond": "ssys_sub",
+     "spoi": "ssys_sub",
+     "spoi_lines": "ssys_sub",
+     "spoi_bkr": "ssys_sub",
+     "spoi_bus": "ssys_sub",
+     "spoi_ctrl": "ssys_sub",
+     "spoi_yard": "ssys_sub"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "sys_pv",
+      "name": "PV Array",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "pv_module",
+          "name": "PV Module",
+          "part": "PV modules (glass and cells)"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "pv_harness",
+          "name": "DC Harness",
+          "note": "The DC harness under the modules is not named by the cell"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_trk",
+      "name": "Tracker Structure",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "tt",
+          "name": "Torque Tube",
+          "part": "Racking structure",
+          "note": "Racking and tracker steel are secondary; tracker steel is used only as a stow conditioner"
+         },
+         {
+          "node": "mt",
+          "name": "Module Mounting",
+          "part": "Racking structure",
+          "note": "Racking and tracker steel are secondary; tracker steel is used only as a stow conditioner"
+         },
+         {
+          "node": "br",
+          "name": "Bearing Assemblies",
+          "part": "Racking structure",
+          "note": "Racking and tracker steel are secondary; tracker steel is used only as a stow conditioner"
+         }
+        ]
+       },
+       {
+        "state": "no_direct_damage",
+        "words": "no direct damage",
+        "parts": [
+         {
+          "node": "fd",
+          "name": "Driven Piles",
+          "note": "Foundations: no direct hail damage by coverage decision"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_drv",
+      "name": "Drive & Control",
+      "state": "conditioner",
+      "by_state": [
+       {
+        "state": "conditioner",
+        "words": "changes the curve",
+        "parts": [
+         {
+          "node": "dr_slewdrive",
+          "name": "Slew Drive",
+          "part": "Tracker stow",
+          "note": "Tracker stow changes how hard hail hits the modules; it has no curve of its own"
+         },
+         {
+          "node": "dr_damper",
+          "name": "Dampers",
+          "part": "Tracker stow",
+          "note": "Tracker stow changes how hard hail hits the modules; it has no curve of its own"
+         },
+         {
+          "node": "ct",
+          "name": "Tracker Controller",
+          "part": "Tracker stow",
+          "note": "Tracker stow changes how hard hail hits the modules; it has no curve of its own"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_coll",
+      "name": "Electrical Collection",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "cb",
+          "name": "Combiner Box",
+          "note": "Combiner boxes and collection cable are not named by the cell"
+         },
+         {
+          "node": "dc_feeder",
+          "name": "DC Feeders",
+          "note": "Combiner boxes and collection cable are not named by the cell"
+         },
+         {
+          "node": "mv_cable",
+          "name": "MV Collection Cable",
+          "note": "Combiner boxes and collection cable are not named by the cell"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_pcs",
+      "name": "Power Conversion",
+      "state": "no_direct_damage",
+      "by_state": [
+       {
+        "state": "no_direct_damage",
+        "words": "no direct damage",
+        "parts": [
+         {
+          "node": "inv",
+          "name": "Central Inverter",
+          "note": "Inverters and the skid: no direct hail damage by coverage decision"
+         },
+         {
+          "node": "mvt",
+          "name": "MV Transformer",
+          "note": "Inverters and the skid: no direct hail damage by coverage decision"
+         },
+         {
+          "node": "rmu",
+          "name": "MV Switchgear (RMU)",
+          "note": "Inverters and the skid: no direct hail damage by coverage decision"
+         },
+         {
+          "node": "aux",
+          "name": "Auxiliary Supply",
+          "note": "Inverters and the skid: no direct hail damage by coverage decision"
+         },
+         {
+          "node": "sk_base",
+          "name": "Skid & Piers",
+          "note": "Inverters and the skid: no direct hail damage by coverage decision"
+         },
+         {
+          "node": "ac_bus",
+          "name": "LV Bus Duct",
+          "note": "Inverters and the skid: no direct hail damage by coverage decision"
+         },
+         {
+          "node": "hv_leads",
+          "name": "HV Cable Leads",
+          "note": "Inverters and the skid: no direct hail damage by coverage decision"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_ground",
+      "name": "Grounding",
+      "state": "no_direct_damage",
+      "by_state": [
+       {
+        "state": "no_direct_damage",
+        "words": "no direct damage",
+        "parts": [
+         {
+          "node": "gr_cond",
+          "name": "Ground Conductor",
+          "note": "Buried grounding; not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "gr_rods",
+          "name": "Ground Rods",
+          "note": "Buried grounding; not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "gr_jumper",
+          "name": "Bonding Jumpers",
+          "note": "Buried grounding; not named by the cell (inferred; to confirm with the cell owner)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_scada",
+      "name": "Monitoring & SCADA",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wx",
+          "name": "Met Station",
+          "part": "SCADA and met instruments",
+          "note": "Optional secondary; no curve"
+         },
+         {
+          "node": "scada_cab",
+          "name": "SCADA / PPC Cabinet",
+          "part": "SCADA and met instruments",
+          "note": "Optional secondary; no curve"
+         },
+         {
+          "node": "scada_fiber",
+          "name": "Fiber Network",
+          "part": "SCADA and met instruments",
+          "note": "Optional secondary; no curve"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_pcivil",
+      "name": "Civil",
+      "state": "no_direct_damage",
+      "by_state": [
+       {
+        "state": "no_direct_damage",
+        "words": "no direct damage",
+        "parts": [
+         {
+          "node": "pr_road",
+          "name": "Access Road",
+          "note": "Civil works and drainage: no direct hail damage by coverage decision"
+         },
+         {
+          "node": "pr_fence",
+          "name": "Perimeter Fence",
+          "note": "Civil works and drainage: no direct hail damage by coverage decision"
+         },
+         {
+          "node": "ao_berm",
+          "name": "Flood Berm & Drainage",
+          "note": "Civil works and drainage: no direct hail damage by coverage decision"
+         },
+         {
+          "node": "ao_firebreak",
+          "name": "Firebreak & Irrigated Buffer",
+          "note": "Civil works and drainage: no direct hail damage by coverage decision"
+         },
+         {
+          "node": "ao_hailnet",
+          "name": "Hail Netting",
+          "note": "Civil works and drainage: no direct hail damage by coverage decision"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "pp_array",
+      "name": "PV Blocks",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "pp_arrays",
+          "name": "Tracker Arrays",
+          "part": "PV modules (glass and cells)",
+          "note": "The modules in the tracker arrays carry the curve"
+         }
+        ]
+       },
+       {
+        "state": "no_direct_damage",
+        "words": "no direct damage",
+        "parts": [
+         {
+          "node": "pp_skids",
+          "name": "MV Power Stations",
+          "note": "Inverter stations: no direct hail damage"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "pp_coll",
+      "name": "Collection & Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "pp_feeders",
+          "name": "34.5 kV Feeders",
+          "note": "Collection feeders are not named by the cell"
+         }
+        ]
+       },
+       {
+        "state": "no_direct_damage",
+        "words": "no direct damage",
+        "parts": [
+         {
+          "node": "pp_roads",
+          "name": "Access Roads",
+          "note": "Roads and fencing: no direct hail damage"
+         },
+         {
+          "node": "pp_fence",
+          "name": "Perimeter Fence",
+          "note": "Roads and fencing: no direct hail damage"
+         },
+         {
+          "node": "ssub_floodwall",
+          "name": "Substation Flood Wall",
+          "note": "Roads and fencing: no direct hail damage"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ssys_sub",
+      "name": "Substation & Interconnection",
+      "state": "no_direct_damage",
+      "by_state": [
+       {
+        "state": "no_direct_damage",
+        "words": "no direct damage",
+        "parts": [
+         {
+          "node": "ssub",
+          "name": "Collector Substation",
+          "note": "Substation: no direct hail damage by coverage decision"
+         },
+         {
+          "node": "sgt",
+          "name": "Gen-Tie Line",
+          "note": "Substation: no direct hail damage by coverage decision"
+         },
+         {
+          "node": "spoi",
+          "name": "POI Switchyard",
+          "note": "Substation: no direct hail damage by coverage decision"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 2,
+    "conditioner": 3,
+    "no_curve": 11,
+    "no_direct_damage": 23,
+    "outside": 0
+   },
+   "curve_parts": [
+    "PV modules (glass and cells)"
+   ],
+   "unmapped": []
+  },
+  {
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "entry_id": "flood_solar",
+   "status": "live",
+   "gap": false,
+   "href": "/cells/flood_solar",
+   "rows": {
+    "pv_module": {
+     "s": "curve",
+     "part": "PV modules",
+     "basis": "part"
+    },
+    "pv_harness": {
+     "s": "curve",
+     "part": "AC and DC collection cable",
+     "basis": "part"
+    },
+    "sys_trk": {
+     "s": "no_curve",
+     "part": "Mounting and racking structure",
+     "note": "Debris and velocity load is a candidate mechanism; no curve",
+     "basis": "not_covered"
+    },
+    "fd": {
+     "s": "curve",
+     "part": "Foundations",
+     "basis": "part"
+    },
+    "sys_drv": {
+     "s": "no_curve",
+     "note": "Tracker drives and controllers are not named by the cell",
+     "basis": "not_named"
+    },
+    "cb": {
+     "s": "curve",
+     "part": "Combiner boxes and DC protection",
+     "basis": "part"
+    },
+    "dc_feeder": {
+     "s": "curve",
+     "part": "AC and DC collection cable",
+     "basis": "part"
+    },
+    "mv_cable": {
+     "s": "curve",
+     "part": "AC and DC collection cable",
+     "basis": "part"
+    },
+    "inv": {
+     "s": "curve",
+     "part": "Inverters",
+     "basis": "part"
+    },
+    "mvt": {
+     "s": "curve",
+     "part": "Main transformer and controls",
+     "note": "The twin's skid transformer; the cell's main transformer may be the substation's (to confirm)",
+     "basis": "part"
+    },
+    "rmu": {
+     "s": "curve",
+     "part": "Switchgear",
+     "basis": "part"
+    },
+    "aux": {
+     "s": "curve",
+     "part": "Inverters",
+     "note": "Skid auxiliaries read with the inverter station",
+     "basis": "part"
+    },
+    "sk_base": {
+     "s": "curve",
+     "part": "Foundations",
+     "note": "The skid's piers",
+     "basis": "part"
+    },
+    "ac_bus": {
+     "s": "curve",
+     "part": "Inverters",
+     "note": "Skid bus duct read with the inverter station",
+     "basis": "part"
+    },
+    "hv_leads": {
+     "s": "curve",
+     "part": "Inverters",
+     "note": "Skid cable leads read with the inverter station",
+     "basis": "part"
+    },
+    "sys_ground": {
+     "s": "no_curve",
+     "note": "Grounding is not named by the cell",
+     "basis": "not_named"
+    },
+    "wx": {
+     "s": "no_curve",
+     "note": "The met station is not named by the cell",
+     "basis": "not_named"
+    },
+    "scada_cab": {
+     "s": "curve",
+     "part": "SCADA and monitoring cabinets",
+     "basis": "part"
+    },
+    "scada_fiber": {
+     "s": "no_curve",
+     "note": "The fibre network is not named by the cell",
+     "basis": "not_named"
+    },
+    "sys_pcivil": {
+     "s": "no_curve",
+     "part": "Civil works: roads, access and fencing",
+     "note": "Reviewed in the write-up; no curve",
+     "basis": "not_covered"
+    },
+    "ao_berm": {
+     "s": "conditioner",
+     "part": "Site drainage and flood defences",
+     "note": "Treated as a protection state that changes the water depth; not a damaged part",
+     "basis": "not_covered"
+    },
+    "pp_arrays": {
+     "s": "curve",
+     "part": "PV modules",
+     "note": "The modules in the arrays; their racking has no curve",
+     "basis": "part"
+    },
+    "pp_skids": {
+     "s": "curve",
+     "part": "Inverters",
+     "basis": "part"
+    },
+    "pp_feeders": {
+     "s": "curve",
+     "part": "AC and DC collection cable",
+     "basis": "part"
+    },
+    "pp_roads": {
+     "s": "no_curve",
+     "part": "Civil works: roads, access and fencing",
+     "basis": "not_covered"
+    },
+    "pp_fence": {
+     "s": "no_curve",
+     "part": "Civil works: roads, access and fencing",
+     "basis": "not_covered"
+    },
+    "ssub_floodwall": {
+     "s": "conditioner",
+     "part": "Site drainage and flood defences",
+     "note": "A flood defence changes the water depth at the equipment",
+     "basis": "not_covered"
+    },
+    "ssub": {
+     "s": "curve",
+     "part": "Main transformer and controls",
+     "note": "The collector substation's transformer and switchgear",
+     "basis": "part"
+    },
+    "sgt": {
+     "s": "no_curve",
+     "note": "The gen-tie line is not named by the cell",
+     "basis": "not_named"
+    },
+    "spoi": {
+     "s": "no_curve",
+     "note": "The point-of-interconnection switchyard is not named by the cell",
+     "basis": "not_named"
+    }
+   },
+   "states": {
+    "asset": {
+     "pv_module": "pv_module",
+     "pv_fglass": "pv_module",
+     "pv_encap": "pv_module",
+     "pv_cells": "pv_module",
+     "pv_rglass": "pv_module",
+     "pv_frame": "pv_module",
+     "pv_jbox": "pv_module",
+     "pv_leads": "pv_module",
+     "pv_harness": "pv_harness",
+     "hn_cable": "pv_harness",
+     "hn_clip": "pv_harness",
+     "sys_trk": "sys_trk",
+     "tt": "sys_trk",
+     "tt_tube": "sys_trk",
+     "tt_splice": "sys_trk",
+     "mt": "sys_trk",
+     "mt_rail": "sys_trk",
+     "mt_clamp": "sys_trk",
+     "br": "sys_trk",
+     "br_housing": "sys_trk",
+     "br_bushing": "sys_trk",
+     "fd": "fd",
+     "sys_drv": "sys_drv",
+     "dr_slewdrive": "sys_drv",
+     "sd_gear": "sys_drv",
+     "sd_motor": "sys_drv",
+     "dr_damper": "sys_drv",
+     "ct": "sys_drv",
+     "ct_tcu": "sys_drv",
+     "ct_power": "sys_drv",
+     "ct_incl": "sys_drv",
+     "cb": "cb",
+     "cb_enc": "cb",
+     "cb_fuse": "cb",
+     "cb_disc": "cb",
+     "cb_spd": "cb",
+     "dc_feeder": "dc_feeder",
+     "mv_cable": "mv_cable",
+     "inv": "inv",
+     "inv_cab": "inv",
+     "inv_dc": "inv",
+     "inv_cool": "inv",
+     "mvt": "mvt",
+     "mvt_tank": "mvt",
+     "mvt_rad": "mvt",
+     "mvt_bush": "mvt",
+     "mvt_bund": "mvt",
+     "rmu": "rmu",
+     "aux": "aux",
+     "sk_base": "sk_base",
+     "ac_bus": "ac_bus",
+     "hv_leads": "hv_leads",
+     "sys_ground": "sys_ground",
+     "gr_cond": "sys_ground",
+     "gr_rods": "sys_ground",
+     "gr_jumper": "sys_ground",
+     "wx": "wx",
+     "me_pyr": "wx",
+     "me_wind": "wx",
+     "me_logger": "wx",
+     "scada_cab": "scada_cab",
+     "scada_fiber": "scada_fiber",
+     "sys_pcivil": "sys_pcivil",
+     "pr_road": "sys_pcivil",
+     "pr_fence": "sys_pcivil",
+     "ao_berm": "ao_berm",
+     "ao_firebreak": "sys_pcivil",
+     "ao_hailnet": "sys_pcivil"
+    },
+    "plant": {
+     "pp_arrays": "pp_arrays",
+     "pp_skids": "pp_skids",
+     "pp_feeders": "pp_feeders",
+     "pp_roads": "pp_roads",
+     "pp_fence": "pp_fence",
+     "ssub_floodwall": "ssub_floodwall",
+     "ssub": "ssub",
+     "ssub_mpt": "ssub",
+     "ssub_bkr": "ssub",
+     "ssub_disc": "ssub",
+     "ssub_meter": "ssub",
+     "ssub_mvbus": "ssub",
+     "ssub_bus": "ssub",
+     "ssub_house": "ssub",
+     "ssub_lm": "ssub",
+     "ssub_grid": "ssub",
+     "ssub_yard": "ssub",
+     "ssub_spare": "ssub",
+     "sgt": "sgt",
+     "sgt_struct": "sgt",
+     "sgt_cond": "sgt",
+     "spoi": "spoi",
+     "spoi_lines": "spoi",
+     "spoi_bkr": "spoi",
+     "spoi_bus": "spoi",
+     "spoi_ctrl": "spoi",
+     "spoi_yard": "spoi"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "sys_pv",
+      "name": "PV Array",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "pv_module",
+          "name": "PV Module",
+          "part": "PV modules"
+         },
+         {
+          "node": "pv_harness",
+          "name": "DC Harness",
+          "part": "AC and DC collection cable"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_trk",
+      "name": "Tracker Structure",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "fd",
+          "name": "Driven Piles",
+          "part": "Foundations"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "tt",
+          "name": "Torque Tube",
+          "part": "Mounting and racking structure",
+          "note": "Debris and velocity load is a candidate mechanism; no curve"
+         },
+         {
+          "node": "mt",
+          "name": "Module Mounting",
+          "part": "Mounting and racking structure",
+          "note": "Debris and velocity load is a candidate mechanism; no curve"
+         },
+         {
+          "node": "br",
+          "name": "Bearing Assemblies",
+          "part": "Mounting and racking structure",
+          "note": "Debris and velocity load is a candidate mechanism; no curve"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_drv",
+      "name": "Drive & Control",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "dr_slewdrive",
+          "name": "Slew Drive",
+          "note": "Tracker drives and controllers are not named by the cell"
+         },
+         {
+          "node": "dr_damper",
+          "name": "Dampers",
+          "note": "Tracker drives and controllers are not named by the cell"
+         },
+         {
+          "node": "ct",
+          "name": "Tracker Controller",
+          "note": "Tracker drives and controllers are not named by the cell"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_coll",
+      "name": "Electrical Collection",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "cb",
+          "name": "Combiner Box",
+          "part": "Combiner boxes and DC protection"
+         },
+         {
+          "node": "dc_feeder",
+          "name": "DC Feeders",
+          "part": "AC and DC collection cable"
+         },
+         {
+          "node": "mv_cable",
+          "name": "MV Collection Cable",
+          "part": "AC and DC collection cable"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_pcs",
+      "name": "Power Conversion",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "inv",
+          "name": "Central Inverter",
+          "part": "Inverters"
+         },
+         {
+          "node": "mvt",
+          "name": "MV Transformer",
+          "part": "Main transformer and controls",
+          "note": "The twin's skid transformer; the cell's main transformer may be the substation's (to confirm)"
+         },
+         {
+          "node": "rmu",
+          "name": "MV Switchgear (RMU)",
+          "part": "Switchgear"
+         },
+         {
+          "node": "aux",
+          "name": "Auxiliary Supply",
+          "part": "Inverters",
+          "note": "Skid auxiliaries read with the inverter station"
+         },
+         {
+          "node": "sk_base",
+          "name": "Skid & Piers",
+          "part": "Foundations",
+          "note": "The skid's piers"
+         },
+         {
+          "node": "ac_bus",
+          "name": "LV Bus Duct",
+          "part": "Inverters",
+          "note": "Skid bus duct read with the inverter station"
+         },
+         {
+          "node": "hv_leads",
+          "name": "HV Cable Leads",
+          "part": "Inverters",
+          "note": "Skid cable leads read with the inverter station"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_ground",
+      "name": "Grounding",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "gr_cond",
+          "name": "Ground Conductor",
+          "note": "Grounding is not named by the cell"
+         },
+         {
+          "node": "gr_rods",
+          "name": "Ground Rods",
+          "note": "Grounding is not named by the cell"
+         },
+         {
+          "node": "gr_jumper",
+          "name": "Bonding Jumpers",
+          "note": "Grounding is not named by the cell"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_scada",
+      "name": "Monitoring & SCADA",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "scada_cab",
+          "name": "SCADA / PPC Cabinet",
+          "part": "SCADA and monitoring cabinets"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "wx",
+          "name": "Met Station",
+          "note": "The met station is not named by the cell"
+         },
+         {
+          "node": "scada_fiber",
+          "name": "Fiber Network",
+          "note": "The fibre network is not named by the cell"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_pcivil",
+      "name": "Civil",
+      "state": "conditioner",
+      "by_state": [
+       {
+        "state": "conditioner",
+        "words": "changes the curve",
+        "parts": [
+         {
+          "node": "ao_berm",
+          "name": "Flood Berm & Drainage",
+          "part": "Site drainage and flood defences",
+          "note": "Treated as a protection state that changes the water depth; not a damaged part"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "pr_road",
+          "name": "Access Road",
+          "part": "Civil works: roads, access and fencing",
+          "note": "Reviewed in the write-up; no curve"
+         },
+         {
+          "node": "pr_fence",
+          "name": "Perimeter Fence",
+          "part": "Civil works: roads, access and fencing",
+          "note": "Reviewed in the write-up; no curve"
+         },
+         {
+          "node": "ao_firebreak",
+          "name": "Firebreak & Irrigated Buffer",
+          "part": "Civil works: roads, access and fencing",
+          "note": "Reviewed in the write-up; no curve"
+         },
+         {
+          "node": "ao_hailnet",
+          "name": "Hail Netting",
+          "part": "Civil works: roads, access and fencing",
+          "note": "Reviewed in the write-up; no curve"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "pp_array",
+      "name": "PV Blocks",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "pp_arrays",
+          "name": "Tracker Arrays",
+          "part": "PV modules",
+          "note": "The modules in the arrays; their racking has no curve"
+         },
+         {
+          "node": "pp_skids",
+          "name": "MV Power Stations",
+          "part": "Inverters"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "pp_coll",
+      "name": "Collection & Civil",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "pp_feeders",
+          "name": "34.5 kV Feeders",
+          "part": "AC and DC collection cable"
+         }
+        ]
+       },
+       {
+        "state": "conditioner",
+        "words": "changes the curve",
+        "parts": [
+         {
+          "node": "ssub_floodwall",
+          "name": "Substation Flood Wall",
+          "part": "Site drainage and flood defences",
+          "note": "A flood defence changes the water depth at the equipment"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "pp_roads",
+          "name": "Access Roads",
+          "part": "Civil works: roads, access and fencing"
+         },
+         {
+          "node": "pp_fence",
+          "name": "Perimeter Fence",
+          "part": "Civil works: roads, access and fencing"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ssys_sub",
+      "name": "Substation & Interconnection",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ssub",
+          "name": "Collector Substation",
+          "part": "Main transformer and controls",
+          "note": "The collector substation's transformer and switchgear"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "sgt",
+          "name": "Gen-Tie Line",
+          "note": "The gen-tie line is not named by the cell"
+         },
+         {
+          "node": "spoi",
+          "name": "POI Switchyard",
+          "note": "The point-of-interconnection switchyard is not named by the cell"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 18,
+    "conditioner": 2,
+    "no_curve": 19,
+    "no_direct_damage": 0,
+    "outside": 0
+   },
+   "curve_parts": [
+    "AC and DC collection cable",
+    "Combiner boxes and DC protection",
+    "Foundations",
+    "Inverters",
+    "Main transformer and controls",
+    "PV modules",
+    "SCADA and monitoring cabinets",
+    "Switchgear"
+   ],
+   "unmapped": []
+  },
+  {
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "entry_id": "tropical_cyclone_wind_solar",
+   "status": "live",
+   "gap": false,
+   "href": "/cells/tropical_cyclone_wind_solar",
+   "rows": {
+    "sys_pv": {
+     "s": "curve",
+     "part": "PV module field or PV module hardware, satellite-data route",
+     "parts": [
+      "PV module field",
+      "PV module hardware, satellite-data route"
+     ],
+     "note": "Two routes for the same modules: the synthetic damage states and the satellite-data fit",
+     "basis": "part"
+    },
+    "pv_harness": {
+     "s": "curve",
+     "part": "Power conversion and collection",
+     "basis": "part"
+    },
+    "sys_trk": {
+     "s": "curve",
+     "part": "Mounting structure",
+     "basis": "part"
+    },
+    "fd": {
+     "s": "curve",
+     "part": "Foundations",
+     "basis": "part"
+    },
+    "sys_drv": {
+     "s": "curve",
+     "part": "Mounting structure",
+     "note": "Tracker drives read with the mounting structure",
+     "basis": "part"
+    },
+    "sys_coll": {
+     "s": "curve",
+     "part": "Power conversion and collection",
+     "basis": "part"
+    },
+    "sys_pcs": {
+     "s": "curve",
+     "part": "Power conversion and collection",
+     "basis": "part"
+    },
+    "sys_ground": {
+     "s": "no_curve",
+     "note": "Grounding is not named by the cell",
+     "basis": "not_named"
+    },
+    "sys_scada": {
+     "s": "curve",
+     "part": "SCADA and communications",
+     "basis": "part"
+    },
+    "sys_pcivil": {
+     "s": "curve",
+     "part": "Civil infrastructure",
+     "basis": "part"
+    },
+    "pp_arrays": {
+     "s": "curve",
+     "part": "PV module field or PV module hardware, satellite-data route",
+     "parts": [
+      "PV module field",
+      "PV module hardware, satellite-data route"
+     ],
+     "note": "Two routes for the same modules",
+     "basis": "part"
+    },
+    "pp_skids": {
+     "s": "curve",
+     "part": "Power conversion and collection",
+     "basis": "part"
+    },
+    "pp_coll": {
+     "s": "curve",
+     "part": "Civil infrastructure",
+     "basis": "part"
+    },
+    "pp_feeders": {
+     "s": "curve",
+     "part": "Power conversion and collection",
+     "basis": "part"
+    },
+    "ssub": {
+     "s": "curve",
+     "part": "GSU and substation",
+     "basis": "part"
+    },
+    "sgt": {
+     "s": "no_curve",
+     "note": "The gen-tie line is not named by the cell",
+     "basis": "not_named"
+    },
+    "spoi": {
+     "s": "no_curve",
+     "note": "The point-of-interconnection switchyard is not named by the cell",
+     "basis": "not_named"
+    }
+   },
+   "states": {
+    "asset": {
+     "sys_pv": "sys_pv",
+     "pv_module": "sys_pv",
+     "pv_fglass": "sys_pv",
+     "pv_encap": "sys_pv",
+     "pv_cells": "sys_pv",
+     "pv_rglass": "sys_pv",
+     "pv_frame": "sys_pv",
+     "pv_jbox": "sys_pv",
+     "pv_leads": "sys_pv",
+     "pv_harness": "pv_harness",
+     "hn_cable": "pv_harness",
+     "hn_clip": "pv_harness",
+     "sys_trk": "sys_trk",
+     "tt": "sys_trk",
+     "tt_tube": "sys_trk",
+     "tt_splice": "sys_trk",
+     "mt": "sys_trk",
+     "mt_rail": "sys_trk",
+     "mt_clamp": "sys_trk",
+     "br": "sys_trk",
+     "br_housing": "sys_trk",
+     "br_bushing": "sys_trk",
+     "fd": "fd",
+     "sys_drv": "sys_drv",
+     "dr_slewdrive": "sys_drv",
+     "sd_gear": "sys_drv",
+     "sd_motor": "sys_drv",
+     "dr_damper": "sys_drv",
+     "ct": "sys_drv",
+     "ct_tcu": "sys_drv",
+     "ct_power": "sys_drv",
+     "ct_incl": "sys_drv",
+     "sys_coll": "sys_coll",
+     "cb": "sys_coll",
+     "cb_enc": "sys_coll",
+     "cb_fuse": "sys_coll",
+     "cb_disc": "sys_coll",
+     "cb_spd": "sys_coll",
+     "dc_feeder": "sys_coll",
+     "mv_cable": "sys_coll",
+     "sys_pcs": "sys_pcs",
+     "inv": "sys_pcs",
+     "inv_cab": "sys_pcs",
+     "inv_dc": "sys_pcs",
+     "inv_cool": "sys_pcs",
+     "mvt": "sys_pcs",
+     "mvt_tank": "sys_pcs",
+     "mvt_rad": "sys_pcs",
+     "mvt_bush": "sys_pcs",
+     "mvt_bund": "sys_pcs",
+     "rmu": "sys_pcs",
+     "aux": "sys_pcs",
+     "sk_base": "sys_pcs",
+     "ac_bus": "sys_pcs",
+     "hv_leads": "sys_pcs",
+     "sys_ground": "sys_ground",
+     "gr_cond": "sys_ground",
+     "gr_rods": "sys_ground",
+     "gr_jumper": "sys_ground",
+     "sys_scada": "sys_scada",
+     "wx": "sys_scada",
+     "me_pyr": "sys_scada",
+     "me_wind": "sys_scada",
+     "me_logger": "sys_scada",
+     "scada_cab": "sys_scada",
+     "scada_fiber": "sys_scada",
+     "sys_pcivil": "sys_pcivil",
+     "pr_road": "sys_pcivil",
+     "pr_fence": "sys_pcivil",
+     "ao_berm": "sys_pcivil",
+     "ao_firebreak": "sys_pcivil",
+     "ao_hailnet": "sys_pcivil"
+    },
+    "plant": {
+     "pp_arrays": "pp_arrays",
+     "pp_skids": "pp_skids",
+     "pp_coll": "pp_coll",
+     "pp_feeders": "pp_feeders",
+     "pp_roads": "pp_coll",
+     "pp_fence": "pp_coll",
+     "ssub_floodwall": "pp_coll",
+     "ssub": "ssub",
+     "ssub_mpt": "ssub",
+     "ssub_bkr": "ssub",
+     "ssub_disc": "ssub",
+     "ssub_meter": "ssub",
+     "ssub_mvbus": "ssub",
+     "ssub_bus": "ssub",
+     "ssub_house": "ssub",
+     "ssub_lm": "ssub",
+     "ssub_grid": "ssub",
+     "ssub_yard": "ssub",
+     "ssub_spare": "ssub",
+     "sgt": "sgt",
+     "sgt_struct": "sgt",
+     "sgt_cond": "sgt",
+     "spoi": "spoi",
+     "spoi_lines": "spoi",
+     "spoi_bkr": "spoi",
+     "spoi_bus": "spoi",
+     "spoi_ctrl": "spoi",
+     "spoi_yard": "spoi"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "sys_pv",
+      "name": "PV Array",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "pv_module",
+          "name": "PV Module",
+          "part": "PV module field or PV module hardware, satellite-data route",
+          "note": "Two routes for the same modules: the synthetic damage states and the satellite-data fit"
+         },
+         {
+          "node": "pv_harness",
+          "name": "DC Harness",
+          "part": "Power conversion and collection"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_trk",
+      "name": "Tracker Structure",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "tt",
+          "name": "Torque Tube",
+          "part": "Mounting structure"
+         },
+         {
+          "node": "mt",
+          "name": "Module Mounting",
+          "part": "Mounting structure"
+         },
+         {
+          "node": "br",
+          "name": "Bearing Assemblies",
+          "part": "Mounting structure"
+         },
+         {
+          "node": "fd",
+          "name": "Driven Piles",
+          "part": "Foundations"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_drv",
+      "name": "Drive & Control",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "dr_slewdrive",
+          "name": "Slew Drive",
+          "part": "Mounting structure",
+          "note": "Tracker drives read with the mounting structure"
+         },
+         {
+          "node": "dr_damper",
+          "name": "Dampers",
+          "part": "Mounting structure",
+          "note": "Tracker drives read with the mounting structure"
+         },
+         {
+          "node": "ct",
+          "name": "Tracker Controller",
+          "part": "Mounting structure",
+          "note": "Tracker drives read with the mounting structure"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_coll",
+      "name": "Electrical Collection",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "cb",
+          "name": "Combiner Box",
+          "part": "Power conversion and collection"
+         },
+         {
+          "node": "dc_feeder",
+          "name": "DC Feeders",
+          "part": "Power conversion and collection"
+         },
+         {
+          "node": "mv_cable",
+          "name": "MV Collection Cable",
+          "part": "Power conversion and collection"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_pcs",
+      "name": "Power Conversion",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "inv",
+          "name": "Central Inverter",
+          "part": "Power conversion and collection"
+         },
+         {
+          "node": "mvt",
+          "name": "MV Transformer",
+          "part": "Power conversion and collection"
+         },
+         {
+          "node": "rmu",
+          "name": "MV Switchgear (RMU)",
+          "part": "Power conversion and collection"
+         },
+         {
+          "node": "aux",
+          "name": "Auxiliary Supply",
+          "part": "Power conversion and collection"
+         },
+         {
+          "node": "sk_base",
+          "name": "Skid & Piers",
+          "part": "Power conversion and collection"
+         },
+         {
+          "node": "ac_bus",
+          "name": "LV Bus Duct",
+          "part": "Power conversion and collection"
+         },
+         {
+          "node": "hv_leads",
+          "name": "HV Cable Leads",
+          "part": "Power conversion and collection"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_ground",
+      "name": "Grounding",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "gr_cond",
+          "name": "Ground Conductor",
+          "note": "Grounding is not named by the cell"
+         },
+         {
+          "node": "gr_rods",
+          "name": "Ground Rods",
+          "note": "Grounding is not named by the cell"
+         },
+         {
+          "node": "gr_jumper",
+          "name": "Bonding Jumpers",
+          "note": "Grounding is not named by the cell"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_scada",
+      "name": "Monitoring & SCADA",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "wx",
+          "name": "Met Station",
+          "part": "SCADA and communications"
+         },
+         {
+          "node": "scada_cab",
+          "name": "SCADA / PPC Cabinet",
+          "part": "SCADA and communications"
+         },
+         {
+          "node": "scada_fiber",
+          "name": "Fiber Network",
+          "part": "SCADA and communications"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_pcivil",
+      "name": "Civil",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "pr_road",
+          "name": "Access Road",
+          "part": "Civil infrastructure"
+         },
+         {
+          "node": "pr_fence",
+          "name": "Perimeter Fence",
+          "part": "Civil infrastructure"
+         },
+         {
+          "node": "ao_berm",
+          "name": "Flood Berm & Drainage",
+          "part": "Civil infrastructure"
+         },
+         {
+          "node": "ao_firebreak",
+          "name": "Firebreak & Irrigated Buffer",
+          "part": "Civil infrastructure"
+         },
+         {
+          "node": "ao_hailnet",
+          "name": "Hail Netting",
+          "part": "Civil infrastructure"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "pp_array",
+      "name": "PV Blocks",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "pp_arrays",
+          "name": "Tracker Arrays",
+          "part": "PV module field or PV module hardware, satellite-data route",
+          "note": "Two routes for the same modules"
+         },
+         {
+          "node": "pp_skids",
+          "name": "MV Power Stations",
+          "part": "Power conversion and collection"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "pp_coll",
+      "name": "Collection & Civil",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "pp_feeders",
+          "name": "34.5 kV Feeders",
+          "part": "Power conversion and collection"
+         },
+         {
+          "node": "pp_roads",
+          "name": "Access Roads",
+          "part": "Civil infrastructure"
+         },
+         {
+          "node": "pp_fence",
+          "name": "Perimeter Fence",
+          "part": "Civil infrastructure"
+         },
+         {
+          "node": "ssub_floodwall",
+          "name": "Substation Flood Wall",
+          "part": "Civil infrastructure"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ssys_sub",
+      "name": "Substation & Interconnection",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ssub",
+          "name": "Collector Substation",
+          "part": "GSU and substation"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "sgt",
+          "name": "Gen-Tie Line",
+          "note": "The gen-tie line is not named by the cell"
+         },
+         {
+          "node": "spoi",
+          "name": "POI Switchyard",
+          "note": "The point-of-interconnection switchyard is not named by the cell"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 34,
+    "conditioner": 0,
+    "no_curve": 5,
+    "no_direct_damage": 0,
+    "outside": 0
+   },
+   "curve_parts": [
+    "Civil infrastructure",
+    "Foundations",
+    "GSU and substation",
+    "Mounting structure",
+    "PV module field",
+    "PV module hardware, satellite-data route",
+    "Power conversion and collection",
+    "SCADA and communications"
+   ],
+   "unmapped": []
+  },
+  {
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "entry_id": "strong_wind_solar",
+   "status": "live",
+   "gap": false,
+   "href": "/cells/strong_wind_solar",
+   "rows": {
+    "pv_module": {
+     "s": "curve",
+     "part": "PV module attachment",
+     "note": "The modules are damaged through their attachment",
+     "basis": "part"
+    },
+    "pv_harness": {
+     "s": "no_curve",
+     "part": "The other 36% of the reference physical base",
+     "note": "Not named by the cell; not an automatic zero",
+     "basis": "not_covered"
+    },
+    "tt": {
+     "s": "curve",
+     "part": "Tracker structure",
+     "basis": "part"
+    },
+    "mt": {
+     "s": "curve",
+     "part": "Racking structure",
+     "basis": "part"
+    },
+    "br": {
+     "s": "curve",
+     "part": "Tracker structure",
+     "basis": "part"
+    },
+    "fd": {
+     "s": "curve",
+     "part": "Foundations (uplift)",
+     "basis": "part"
+    },
+    "sys_drv": {
+     "s": "curve",
+     "part": "Tracker structure",
+     "note": "Drives and controllers read with the tracker",
+     "basis": "part"
+    },
+    "sys_coll": {
+     "s": "no_curve",
+     "part": "The other 36% of the reference physical base",
+     "note": "Not an automatic zero",
+     "basis": "not_covered"
+    },
+    "sys_pcs": {
+     "s": "no_curve",
+     "part": "The other 36% of the reference physical base",
+     "note": "Not an automatic zero",
+     "basis": "not_covered"
+    },
+    "sys_ground": {
+     "s": "no_curve",
+     "part": "The other 36% of the reference physical base",
+     "note": "Not an automatic zero",
+     "basis": "not_covered"
+    },
+    "sys_scada": {
+     "s": "curve",
+     "part": "Exposed SCADA and met station",
+     "basis": "part"
+    },
+    "sys_pcivil": {
+     "s": "no_curve",
+     "part": "The other 36% of the reference physical base",
+     "note": "Not an automatic zero",
+     "basis": "not_covered"
+    },
+    "pp_arrays": {
+     "s": "curve",
+     "part": "Tracker structure",
+     "note": "The trackers and their modules",
+     "basis": "part"
+    },
+    "pp_skids": {
+     "s": "no_curve",
+     "part": "The other 36% of the reference physical base",
+     "basis": "not_covered"
+    },
+    "pp_coll": {
+     "s": "no_curve",
+     "part": "The other 36% of the reference physical base",
+     "basis": "not_covered"
+    },
+    "ssys_sub": {
+     "s": "no_curve",
+     "part": "The other 36% of the reference physical base",
+     "basis": "not_covered"
+    }
+   },
+   "states": {
+    "asset": {
+     "pv_module": "pv_module",
+     "pv_fglass": "pv_module",
+     "pv_encap": "pv_module",
+     "pv_cells": "pv_module",
+     "pv_rglass": "pv_module",
+     "pv_frame": "pv_module",
+     "pv_jbox": "pv_module",
+     "pv_leads": "pv_module",
+     "pv_harness": "pv_harness",
+     "hn_cable": "pv_harness",
+     "hn_clip": "pv_harness",
+     "tt": "tt",
+     "tt_tube": "tt",
+     "tt_splice": "tt",
+     "mt": "mt",
+     "mt_rail": "mt",
+     "mt_clamp": "mt",
+     "br": "br",
+     "br_housing": "br",
+     "br_bushing": "br",
+     "fd": "fd",
+     "sys_drv": "sys_drv",
+     "dr_slewdrive": "sys_drv",
+     "sd_gear": "sys_drv",
+     "sd_motor": "sys_drv",
+     "dr_damper": "sys_drv",
+     "ct": "sys_drv",
+     "ct_tcu": "sys_drv",
+     "ct_power": "sys_drv",
+     "ct_incl": "sys_drv",
+     "sys_coll": "sys_coll",
+     "cb": "sys_coll",
+     "cb_enc": "sys_coll",
+     "cb_fuse": "sys_coll",
+     "cb_disc": "sys_coll",
+     "cb_spd": "sys_coll",
+     "dc_feeder": "sys_coll",
+     "mv_cable": "sys_coll",
+     "sys_pcs": "sys_pcs",
+     "inv": "sys_pcs",
+     "inv_cab": "sys_pcs",
+     "inv_dc": "sys_pcs",
+     "inv_cool": "sys_pcs",
+     "mvt": "sys_pcs",
+     "mvt_tank": "sys_pcs",
+     "mvt_rad": "sys_pcs",
+     "mvt_bush": "sys_pcs",
+     "mvt_bund": "sys_pcs",
+     "rmu": "sys_pcs",
+     "aux": "sys_pcs",
+     "sk_base": "sys_pcs",
+     "ac_bus": "sys_pcs",
+     "hv_leads": "sys_pcs",
+     "sys_ground": "sys_ground",
+     "gr_cond": "sys_ground",
+     "gr_rods": "sys_ground",
+     "gr_jumper": "sys_ground",
+     "sys_scada": "sys_scada",
+     "wx": "sys_scada",
+     "me_pyr": "sys_scada",
+     "me_wind": "sys_scada",
+     "me_logger": "sys_scada",
+     "scada_cab": "sys_scada",
+     "scada_fiber": "sys_scada",
+     "sys_pcivil": "sys_pcivil",
+     "pr_road": "sys_pcivil",
+     "pr_fence": "sys_pcivil",
+     "ao_berm": "sys_pcivil",
+     "ao_firebreak": "sys_pcivil",
+     "ao_hailnet": "sys_pcivil"
+    },
+    "plant": {
+     "pp_arrays": "pp_arrays",
+     "pp_skids": "pp_skids",
+     "pp_coll": "pp_coll",
+     "pp_feeders": "pp_coll",
+     "pp_roads": "pp_coll",
+     "pp_fence": "pp_coll",
+     "ssub_floodwall": "pp_coll",
+     "ssys_sub": "ssys_sub",
+     "ssub": "ssys_sub",
+     "ssub_mpt": "ssys_sub",
+     "ssub_bkr": "ssys_sub",
+     "ssub_disc": "ssys_sub",
+     "ssub_meter": "ssys_sub",
+     "ssub_mvbus": "ssys_sub",
+     "ssub_bus": "ssys_sub",
+     "ssub_house": "ssys_sub",
+     "ssub_lm": "ssys_sub",
+     "ssub_grid": "ssys_sub",
+     "ssub_yard": "ssys_sub",
+     "ssub_spare": "ssys_sub",
+     "sgt": "ssys_sub",
+     "sgt_struct": "ssys_sub",
+     "sgt_cond": "ssys_sub",
+     "spoi": "ssys_sub",
+     "spoi_lines": "ssys_sub",
+     "spoi_bkr": "ssys_sub",
+     "spoi_bus": "ssys_sub",
+     "spoi_ctrl": "ssys_sub",
+     "spoi_yard": "ssys_sub"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "sys_pv",
+      "name": "PV Array",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "pv_module",
+          "name": "PV Module",
+          "part": "PV module attachment",
+          "note": "The modules are damaged through their attachment"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "pv_harness",
+          "name": "DC Harness",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not named by the cell; not an automatic zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_trk",
+      "name": "Tracker Structure",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "tt",
+          "name": "Torque Tube",
+          "part": "Tracker structure"
+         },
+         {
+          "node": "mt",
+          "name": "Module Mounting",
+          "part": "Racking structure"
+         },
+         {
+          "node": "br",
+          "name": "Bearing Assemblies",
+          "part": "Tracker structure"
+         },
+         {
+          "node": "fd",
+          "name": "Driven Piles",
+          "part": "Foundations (uplift)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_drv",
+      "name": "Drive & Control",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "dr_slewdrive",
+          "name": "Slew Drive",
+          "part": "Tracker structure",
+          "note": "Drives and controllers read with the tracker"
+         },
+         {
+          "node": "dr_damper",
+          "name": "Dampers",
+          "part": "Tracker structure",
+          "note": "Drives and controllers read with the tracker"
+         },
+         {
+          "node": "ct",
+          "name": "Tracker Controller",
+          "part": "Tracker structure",
+          "note": "Drives and controllers read with the tracker"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_coll",
+      "name": "Electrical Collection",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "cb",
+          "name": "Combiner Box",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         },
+         {
+          "node": "dc_feeder",
+          "name": "DC Feeders",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         },
+         {
+          "node": "mv_cable",
+          "name": "MV Collection Cable",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_pcs",
+      "name": "Power Conversion",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "inv",
+          "name": "Central Inverter",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         },
+         {
+          "node": "mvt",
+          "name": "MV Transformer",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         },
+         {
+          "node": "rmu",
+          "name": "MV Switchgear (RMU)",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         },
+         {
+          "node": "aux",
+          "name": "Auxiliary Supply",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         },
+         {
+          "node": "sk_base",
+          "name": "Skid & Piers",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         },
+         {
+          "node": "ac_bus",
+          "name": "LV Bus Duct",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         },
+         {
+          "node": "hv_leads",
+          "name": "HV Cable Leads",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_ground",
+      "name": "Grounding",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "gr_cond",
+          "name": "Ground Conductor",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         },
+         {
+          "node": "gr_rods",
+          "name": "Ground Rods",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         },
+         {
+          "node": "gr_jumper",
+          "name": "Bonding Jumpers",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_scada",
+      "name": "Monitoring & SCADA",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "wx",
+          "name": "Met Station",
+          "part": "Exposed SCADA and met station"
+         },
+         {
+          "node": "scada_cab",
+          "name": "SCADA / PPC Cabinet",
+          "part": "Exposed SCADA and met station"
+         },
+         {
+          "node": "scada_fiber",
+          "name": "Fiber Network",
+          "part": "Exposed SCADA and met station"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_pcivil",
+      "name": "Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "pr_road",
+          "name": "Access Road",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         },
+         {
+          "node": "pr_fence",
+          "name": "Perimeter Fence",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         },
+         {
+          "node": "ao_berm",
+          "name": "Flood Berm & Drainage",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         },
+         {
+          "node": "ao_firebreak",
+          "name": "Firebreak & Irrigated Buffer",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         },
+         {
+          "node": "ao_hailnet",
+          "name": "Hail Netting",
+          "part": "The other 36% of the reference physical base",
+          "note": "Not an automatic zero"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "pp_array",
+      "name": "PV Blocks",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "pp_arrays",
+          "name": "Tracker Arrays",
+          "part": "Tracker structure",
+          "note": "The trackers and their modules"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "pp_skids",
+          "name": "MV Power Stations",
+          "part": "The other 36% of the reference physical base"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "pp_coll",
+      "name": "Collection & Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "pp_feeders",
+          "name": "34.5 kV Feeders",
+          "part": "The other 36% of the reference physical base"
+         },
+         {
+          "node": "pp_roads",
+          "name": "Access Roads",
+          "part": "The other 36% of the reference physical base"
+         },
+         {
+          "node": "pp_fence",
+          "name": "Perimeter Fence",
+          "part": "The other 36% of the reference physical base"
+         },
+         {
+          "node": "ssub_floodwall",
+          "name": "Substation Flood Wall",
+          "part": "The other 36% of the reference physical base"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ssys_sub",
+      "name": "Substation & Interconnection",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "ssub",
+          "name": "Collector Substation",
+          "part": "The other 36% of the reference physical base"
+         },
+         {
+          "node": "sgt",
+          "name": "Gen-Tie Line",
+          "part": "The other 36% of the reference physical base"
+         },
+         {
+          "node": "spoi",
+          "name": "POI Switchyard",
+          "part": "The other 36% of the reference physical base"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 12,
+    "conditioner": 0,
+    "no_curve": 27,
+    "no_direct_damage": 0,
+    "outside": 0
+   },
+   "curve_parts": [
+    "Exposed SCADA and met station",
+    "Foundations (uplift)",
+    "PV module attachment",
+    "Racking structure",
+    "Tracker structure"
+   ],
+   "unmapped": []
+  },
+  {
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "entry_id": "wildfire_solar",
+   "status": "live",
+   "gap": false,
+   "href": "/cells/wildfire_solar",
+   "rows": {
+    "pv_module": {
+     "s": "curve",
+     "part": "PV modules",
+     "basis": "part"
+    },
+    "pv_harness": {
+     "s": "curve",
+     "part": "Exposed AC and DC cable",
+     "basis": "part"
+    },
+    "sys_trk": {
+     "s": "curve",
+     "part": "Tracker and racking",
+     "basis": "part"
+    },
+    "fd": {
+     "s": "curve",
+     "part": "Piles and inverter pads",
+     "basis": "part"
+    },
+    "sys_drv": {
+     "s": "curve",
+     "part": "Tracker and racking",
+     "basis": "part"
+    },
+    "cb": {
+     "s": "curve",
+     "part": "Combiner boxes",
+     "basis": "part"
+    },
+    "dc_feeder": {
+     "s": "curve",
+     "part": "Exposed AC and DC cable",
+     "basis": "part"
+    },
+    "mv_cable": {
+     "s": "curve",
+     "part": "Exposed AC and DC cable",
+     "basis": "part"
+    },
+    "sys_pcs": {
+     "s": "curve",
+     "part": "Central inverters",
+     "basis": "part"
+    },
+    "mvt": {
+     "s": "curve",
+     "part": "Transformers and switchgear",
+     "basis": "part"
+    },
+    "rmu": {
+     "s": "curve",
+     "part": "Transformers and switchgear",
+     "basis": "part"
+    },
+    "sk_base": {
+     "s": "curve",
+     "part": "Piles and inverter pads",
+     "basis": "part"
+    },
+    "sys_ground": {
+     "s": "curve",
+     "part": "Grounding and lightning protection",
+     "basis": "part"
+    },
+    "sys_scada": {
+     "s": "curve",
+     "part": "SCADA and communications",
+     "basis": "part"
+    },
+    "sys_pcivil": {
+     "s": "curve",
+     "part": "Civil: fencing, roads, buildings, site prep",
+     "basis": "part"
+    },
+    "pp_arrays": {
+     "s": "curve",
+     "part": "PV modules",
+     "basis": "part"
+    },
+    "pp_skids": {
+     "s": "curve",
+     "part": "Central inverters",
+     "basis": "part"
+    },
+    "pp_coll": {
+     "s": "curve",
+     "part": "Civil: fencing, roads, buildings, site prep",
+     "basis": "part"
+    },
+    "pp_feeders": {
+     "s": "curve",
+     "part": "Exposed AC and DC cable",
+     "basis": "part"
+    },
+    "ssub": {
+     "s": "curve",
+     "part": "Transformers and switchgear",
+     "basis": "part"
+    },
+    "sgt": {
+     "s": "no_curve",
+     "note": "The gen-tie line is not named by the cell",
+     "basis": "not_named"
+    },
+    "spoi": {
+     "s": "no_curve",
+     "note": "The point-of-interconnection switchyard is not named by the cell",
+     "basis": "not_named"
+    }
+   },
+   "states": {
+    "asset": {
+     "pv_module": "pv_module",
+     "pv_fglass": "pv_module",
+     "pv_encap": "pv_module",
+     "pv_cells": "pv_module",
+     "pv_rglass": "pv_module",
+     "pv_frame": "pv_module",
+     "pv_jbox": "pv_module",
+     "pv_leads": "pv_module",
+     "pv_harness": "pv_harness",
+     "hn_cable": "pv_harness",
+     "hn_clip": "pv_harness",
+     "sys_trk": "sys_trk",
+     "tt": "sys_trk",
+     "tt_tube": "sys_trk",
+     "tt_splice": "sys_trk",
+     "mt": "sys_trk",
+     "mt_rail": "sys_trk",
+     "mt_clamp": "sys_trk",
+     "br": "sys_trk",
+     "br_housing": "sys_trk",
+     "br_bushing": "sys_trk",
+     "fd": "fd",
+     "sys_drv": "sys_drv",
+     "dr_slewdrive": "sys_drv",
+     "sd_gear": "sys_drv",
+     "sd_motor": "sys_drv",
+     "dr_damper": "sys_drv",
+     "ct": "sys_drv",
+     "ct_tcu": "sys_drv",
+     "ct_power": "sys_drv",
+     "ct_incl": "sys_drv",
+     "cb": "cb",
+     "cb_enc": "cb",
+     "cb_fuse": "cb",
+     "cb_disc": "cb",
+     "cb_spd": "cb",
+     "dc_feeder": "dc_feeder",
+     "mv_cable": "mv_cable",
+     "sys_pcs": "sys_pcs",
+     "inv": "sys_pcs",
+     "inv_cab": "sys_pcs",
+     "inv_dc": "sys_pcs",
+     "inv_cool": "sys_pcs",
+     "mvt": "mvt",
+     "mvt_tank": "mvt",
+     "mvt_rad": "mvt",
+     "mvt_bush": "mvt",
+     "mvt_bund": "mvt",
+     "rmu": "rmu",
+     "aux": "sys_pcs",
+     "sk_base": "sk_base",
+     "ac_bus": "sys_pcs",
+     "hv_leads": "sys_pcs",
+     "sys_ground": "sys_ground",
+     "gr_cond": "sys_ground",
+     "gr_rods": "sys_ground",
+     "gr_jumper": "sys_ground",
+     "sys_scada": "sys_scada",
+     "wx": "sys_scada",
+     "me_pyr": "sys_scada",
+     "me_wind": "sys_scada",
+     "me_logger": "sys_scada",
+     "scada_cab": "sys_scada",
+     "scada_fiber": "sys_scada",
+     "sys_pcivil": "sys_pcivil",
+     "pr_road": "sys_pcivil",
+     "pr_fence": "sys_pcivil",
+     "ao_berm": "sys_pcivil",
+     "ao_firebreak": "sys_pcivil",
+     "ao_hailnet": "sys_pcivil"
+    },
+    "plant": {
+     "pp_arrays": "pp_arrays",
+     "pp_skids": "pp_skids",
+     "pp_coll": "pp_coll",
+     "pp_feeders": "pp_feeders",
+     "pp_roads": "pp_coll",
+     "pp_fence": "pp_coll",
+     "ssub_floodwall": "pp_coll",
+     "ssub": "ssub",
+     "ssub_mpt": "ssub",
+     "ssub_bkr": "ssub",
+     "ssub_disc": "ssub",
+     "ssub_meter": "ssub",
+     "ssub_mvbus": "ssub",
+     "ssub_bus": "ssub",
+     "ssub_house": "ssub",
+     "ssub_lm": "ssub",
+     "ssub_grid": "ssub",
+     "ssub_yard": "ssub",
+     "ssub_spare": "ssub",
+     "sgt": "sgt",
+     "sgt_struct": "sgt",
+     "sgt_cond": "sgt",
+     "spoi": "spoi",
+     "spoi_lines": "spoi",
+     "spoi_bkr": "spoi",
+     "spoi_bus": "spoi",
+     "spoi_ctrl": "spoi",
+     "spoi_yard": "spoi"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "sys_pv",
+      "name": "PV Array",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "pv_module",
+          "name": "PV Module",
+          "part": "PV modules"
+         },
+         {
+          "node": "pv_harness",
+          "name": "DC Harness",
+          "part": "Exposed AC and DC cable"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_trk",
+      "name": "Tracker Structure",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "tt",
+          "name": "Torque Tube",
+          "part": "Tracker and racking"
+         },
+         {
+          "node": "mt",
+          "name": "Module Mounting",
+          "part": "Tracker and racking"
+         },
+         {
+          "node": "br",
+          "name": "Bearing Assemblies",
+          "part": "Tracker and racking"
+         },
+         {
+          "node": "fd",
+          "name": "Driven Piles",
+          "part": "Piles and inverter pads"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_drv",
+      "name": "Drive & Control",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "dr_slewdrive",
+          "name": "Slew Drive",
+          "part": "Tracker and racking"
+         },
+         {
+          "node": "dr_damper",
+          "name": "Dampers",
+          "part": "Tracker and racking"
+         },
+         {
+          "node": "ct",
+          "name": "Tracker Controller",
+          "part": "Tracker and racking"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_coll",
+      "name": "Electrical Collection",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "cb",
+          "name": "Combiner Box",
+          "part": "Combiner boxes"
+         },
+         {
+          "node": "dc_feeder",
+          "name": "DC Feeders",
+          "part": "Exposed AC and DC cable"
+         },
+         {
+          "node": "mv_cable",
+          "name": "MV Collection Cable",
+          "part": "Exposed AC and DC cable"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_pcs",
+      "name": "Power Conversion",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "inv",
+          "name": "Central Inverter",
+          "part": "Central inverters"
+         },
+         {
+          "node": "mvt",
+          "name": "MV Transformer",
+          "part": "Transformers and switchgear"
+         },
+         {
+          "node": "rmu",
+          "name": "MV Switchgear (RMU)",
+          "part": "Transformers and switchgear"
+         },
+         {
+          "node": "aux",
+          "name": "Auxiliary Supply",
+          "part": "Central inverters"
+         },
+         {
+          "node": "sk_base",
+          "name": "Skid & Piers",
+          "part": "Piles and inverter pads"
+         },
+         {
+          "node": "ac_bus",
+          "name": "LV Bus Duct",
+          "part": "Central inverters"
+         },
+         {
+          "node": "hv_leads",
+          "name": "HV Cable Leads",
+          "part": "Central inverters"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_ground",
+      "name": "Grounding",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "gr_cond",
+          "name": "Ground Conductor",
+          "part": "Grounding and lightning protection"
+         },
+         {
+          "node": "gr_rods",
+          "name": "Ground Rods",
+          "part": "Grounding and lightning protection"
+         },
+         {
+          "node": "gr_jumper",
+          "name": "Bonding Jumpers",
+          "part": "Grounding and lightning protection"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_scada",
+      "name": "Monitoring & SCADA",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "wx",
+          "name": "Met Station",
+          "part": "SCADA and communications"
+         },
+         {
+          "node": "scada_cab",
+          "name": "SCADA / PPC Cabinet",
+          "part": "SCADA and communications"
+         },
+         {
+          "node": "scada_fiber",
+          "name": "Fiber Network",
+          "part": "SCADA and communications"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_pcivil",
+      "name": "Civil",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "pr_road",
+          "name": "Access Road",
+          "part": "Civil: fencing, roads, buildings, site prep"
+         },
+         {
+          "node": "pr_fence",
+          "name": "Perimeter Fence",
+          "part": "Civil: fencing, roads, buildings, site prep"
+         },
+         {
+          "node": "ao_berm",
+          "name": "Flood Berm & Drainage",
+          "part": "Civil: fencing, roads, buildings, site prep"
+         },
+         {
+          "node": "ao_firebreak",
+          "name": "Firebreak & Irrigated Buffer",
+          "part": "Civil: fencing, roads, buildings, site prep"
+         },
+         {
+          "node": "ao_hailnet",
+          "name": "Hail Netting",
+          "part": "Civil: fencing, roads, buildings, site prep"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "pp_array",
+      "name": "PV Blocks",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "pp_arrays",
+          "name": "Tracker Arrays",
+          "part": "PV modules"
+         },
+         {
+          "node": "pp_skids",
+          "name": "MV Power Stations",
+          "part": "Central inverters"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "pp_coll",
+      "name": "Collection & Civil",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "pp_feeders",
+          "name": "34.5 kV Feeders",
+          "part": "Exposed AC and DC cable"
+         },
+         {
+          "node": "pp_roads",
+          "name": "Access Roads",
+          "part": "Civil: fencing, roads, buildings, site prep"
+         },
+         {
+          "node": "pp_fence",
+          "name": "Perimeter Fence",
+          "part": "Civil: fencing, roads, buildings, site prep"
+         },
+         {
+          "node": "ssub_floodwall",
+          "name": "Substation Flood Wall",
+          "part": "Civil: fencing, roads, buildings, site prep"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ssys_sub",
+      "name": "Substation & Interconnection",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ssub",
+          "name": "Collector Substation",
+          "part": "Transformers and switchgear"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "sgt",
+          "name": "Gen-Tie Line",
+          "note": "The gen-tie line is not named by the cell"
+         },
+         {
+          "node": "spoi",
+          "name": "POI Switchyard",
+          "note": "The point-of-interconnection switchyard is not named by the cell"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 37,
+    "conditioner": 0,
+    "no_curve": 2,
+    "no_direct_damage": 0,
+    "outside": 0
+   },
+   "curve_parts": [
+    "Central inverters",
+    "Civil: fencing, roads, buildings, site prep",
+    "Combiner boxes",
+    "Exposed AC and DC cable",
+    "Grounding and lightning protection",
+    "PV modules",
+    "Piles and inverter pads",
+    "SCADA and communications",
+    "Tracker and racking",
+    "Transformers and switchgear"
+   ],
+   "unmapped": []
+  }
+ ],
+ "matrix": [
+  {
+   "tree": "asset",
+   "node": "sys_pv",
+   "name": "PV Array",
+   "cells": {
+    "hail": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "PV modules (glass and cells)"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "AC and DC collection cable",
+      "PV modules"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "PV module field or PV module hardware, satellite-data route",
+      "Power conversion and collection"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "PV module attachment"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Exposed AC and DC cable",
+      "PV modules"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_trk",
+   "name": "Tracker Structure",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": true,
+     "states": [
+      "no_curve",
+      "no_direct_damage"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Foundations"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Foundations",
+      "Mounting structure"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Foundations (uplift)",
+      "Racking structure",
+      "Tracker structure"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Piles and inverter pads",
+      "Tracker and racking"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_drv",
+   "name": "Drive & Control",
+   "cells": {
+    "hail": {
+     "state": "conditioner",
+     "words": "changes the curve",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "conditioner"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Mounting structure"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Tracker structure"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Tracker and racking"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_coll",
+   "name": "Electrical Collection",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "AC and DC collection cable",
+      "Combiner boxes and DC protection"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Power conversion and collection"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Combiner boxes",
+      "Exposed AC and DC cable"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_pcs",
+   "name": "Power Conversion",
+   "cells": {
+    "hail": {
+     "state": "no_direct_damage",
+     "words": "no direct damage",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_direct_damage"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Foundations",
+      "Inverters",
+      "Main transformer and controls",
+      "Switchgear"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Power conversion and collection"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Central inverters",
+      "Piles and inverter pads",
+      "Transformers and switchgear"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_ground",
+   "name": "Grounding",
+   "cells": {
+    "hail": {
+     "state": "no_direct_damage",
+     "words": "no direct damage",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_direct_damage"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Grounding and lightning protection"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_scada",
+   "name": "Monitoring & SCADA",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "SCADA and monitoring cabinets"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "SCADA and communications"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Exposed SCADA and met station"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "SCADA and communications"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_pcivil",
+   "name": "Civil",
+   "cells": {
+    "hail": {
+     "state": "no_direct_damage",
+     "words": "no direct damage",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_direct_damage"
+     ]
+    },
+    "flood": {
+     "state": "conditioner",
+     "words": "changes the curve",
+     "curve_parts": [],
+     "mixed": true,
+     "states": [
+      "conditioner",
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Civil infrastructure"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Civil: fencing, roads, buildings, site prep"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "pp_array",
+   "name": "PV Blocks",
+   "cells": {
+    "hail": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "PV modules (glass and cells)"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_direct_damage"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Inverters",
+      "PV modules"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "PV module field or PV module hardware, satellite-data route",
+      "Power conversion and collection"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Tracker structure"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Central inverters",
+      "PV modules"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "pp_coll",
+   "name": "Collection & Civil",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": true,
+     "states": [
+      "no_curve",
+      "no_direct_damage"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "AC and DC collection cable"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "conditioner",
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Civil infrastructure",
+      "Power conversion and collection"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Civil: fencing, roads, buildings, site prep",
+      "Exposed AC and DC cable"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "ssys_sub",
+   "name": "Substation & Interconnection",
+   "cells": {
+    "hail": {
+     "state": "no_direct_damage",
+     "words": "no direct damage",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_direct_damage"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Main transformer and controls"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "GSU and substation"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Transformers and switchgear"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    }
+   }
+  }
+ ],
+ "state_words": {
+  "curve": "Has a damage curve",
+  "conditioner": "Changes the curve, no curve of its own",
+  "no_curve": "In the value, no curve yet",
+  "no_direct_damage": "Reviewed: no direct damage",
+  "outside": "Outside the value this curve prices"
+ },
+ "state_short": {
+  "curve": "curve",
+  "conditioner": "changes the curve",
+  "no_curve": "no curve yet",
+  "no_direct_damage": "no direct damage",
+  "outside": "outside"
+ }
+}

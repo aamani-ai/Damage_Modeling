@@ -6,12 +6,13 @@
   "noun": "substations",
   "href": "/assets/substation"
  },
- "summary": "Flood has curves built from transferred and our judgment evidence (one curve for the whole substation); hurricane wind, convective wind and wildfire have curves that are our judgment (hurricane wind: one curve for the whole substation · reused, convective wind: one curve for the whole substation · reused and wildfire: 3 parts · reused); hail has no cell yet.",
- "summary_v0": "Flood has a curve for substations, all from transferred or policy evidence (T3–T4); hurricane wind, convective wind and wildfire reuse another cell's curve; hail has none; nobody has yet searched for field reports.",
+ "summary": "Hurricane wind, convective wind and wildfire have curves that are our judgment (hurricane wind: one curve for the whole substation · reused, convective wind: one curve for the whole substation · reused and wildfire: 3 parts · reused); flood has curves built from borrowed and our judgment evidence (one curve for the whole substation); hail has no cell yet.",
+ "summary_v0": "Flood has a curve for substations, all on borrowed evidence or our judgment; hurricane wind, convective wind and wildfire reuse another cell's curve; hail has none; nobody has yet searched for field reports.",
  "reference": {
   "label": "one 345/138 kV station · $27.7M reference budget (Hazard, MISO MTEP24 rates)",
   "source": "Hazard_modeling/docs/plans/_cross_cutting/substation_conus/reference_budget.csv",
   "total_usd": 27650054.37,
+  "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/docs/plans/_cross_cutting/substation_conus/reference_budget.csv",
   "note": "the bindings price the fenced station at $27.4M; the budget also carries the external access road outside the fence"
  },
  "hazards": [
@@ -196,7 +197,7 @@
      "twin_nodes": [],
      "occurrence": null,
      "state": "whole",
-     "words": "one curve for the whole fenced station · transferred and our judgment",
+     "words": "one curve for the whole fenced station · borrowed and our judgment",
      "mark": "■",
      "parts": [
       "Whole station (fenced assembly)"
@@ -343,7 +344,7 @@
      "twin_nodes": [],
      "occurrence": null,
      "state": "whole",
-     "words": "one curve for the whole fenced station · transferred and our judgment",
+     "words": "one curve for the whole fenced station · borrowed and our judgment",
      "mark": "■",
      "parts": [
       "Whole station (fenced assembly)"
@@ -489,7 +490,7 @@
      "twin_nodes": [],
      "occurrence": null,
      "state": "whole",
-     "words": "one curve for the whole fenced station · transferred and our judgment",
+     "words": "one curve for the whole fenced station · borrowed and our judgment",
      "mark": "■",
      "parts": [
       "Whole station (fenced assembly)"
@@ -632,7 +633,7 @@
      "twin_nodes": [],
      "occurrence": null,
      "state": "whole",
-     "words": "one curve for the whole fenced station · transferred and our judgment",
+     "words": "one curve for the whole fenced station · borrowed and our judgment",
      "mark": "■",
      "parts": [
       "Whole station (fenced assembly)"
@@ -785,7 +786,7 @@
      "twin_nodes": [],
      "occurrence": null,
      "state": "whole",
-     "words": "one curve for the whole fenced station · transferred and our judgment",
+     "words": "one curve for the whole fenced station · borrowed and our judgment",
      "mark": "■",
      "parts": [
       "Whole station (fenced assembly)"
@@ -1556,8 +1557,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 5,
    "generation": "skill",
-   "aria_label": "Flood × Substation, live, shape T3, cost T4, not searched",
-   "href": "/cells/flood_substation"
+   "aria_label": "Flood × Substation, live, evidence: our judgment, field reports not searched",
+   "href": "/cells/flood_substation",
+   "word": "our judgment",
+   "halves": "How damage rises: borrowed · how it becomes dollars: our judgment"
   },
   {
    "entry_id": "hail_substation",
@@ -1617,8 +1620,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 0,
    "generation": "gap",
-   "aria_label": "Hail × Substation, gap, not searched",
-   "href": "/cells/hail_substation"
+   "aria_label": "Hail × Substation, gap, field reports not searched",
+   "href": "/cells/hail_substation",
+   "word": null,
+   "halves": null
   },
   {
    "entry_id": "substation_convective_wind_screening_v1",
@@ -1673,7 +1678,7 @@
     "source_artifact_sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
     "sha256": "5afa3f9cd31ee52092762bdb505fbc4c24c02ed2420d1be67c448e6441383be0"
    },
-   "summary": "Convective wind on substations reuses another cell's curve: same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a T4 (our judgment) cross-hazard proxy for direct wind only (see docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md).",
+   "summary": "Convective wind on substations reuses another cell's curve: same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a judgment-based cross-hazard proxy for direct wind only (see docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md).",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 0,
@@ -1681,8 +1686,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 2,
    "generation": "binding",
-   "aria_label": "Convective wind × Substation, reused, shape T4, cost T4, not searched",
-   "href": "/cells/substation_convective_wind_screening_v1"
+   "aria_label": "Convective wind × Substation, reused, evidence: our judgment, field reports not searched",
+   "href": "/cells/substation_convective_wind_screening_v1",
+   "word": "our judgment",
+   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
   },
   {
    "entry_id": "substation_hurricane_screening_v1",
@@ -1745,8 +1752,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 3,
    "generation": "binding",
-   "aria_label": "Hurricane wind × Substation, reused, shape T4, cost T4, not searched",
-   "href": "/cells/substation_hurricane_screening_v1"
+   "aria_label": "Hurricane wind × Substation, reused, evidence: our judgment, field reports not searched",
+   "href": "/cells/substation_hurricane_screening_v1",
+   "word": "our judgment",
+   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
   },
   {
    "entry_id": "substation_wildfire_screening_v1",
@@ -1801,7 +1810,7 @@
     "source_artifact_sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
     "sha256": "10742caaf6e4622f72b2572db08d3fc4cc4dc92ca58746ad0928cabad4be5e48"
    },
-   "summary": "Wildfire on substations reuses another cell's curve: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a T4 (our judgment) assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md); 1 part of the asset's value has no curve.",
+   "summary": "Wildfire on substations reuses another cell's curve: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md); 1 part of the asset's value has no curve.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 0,
@@ -1809,8 +1818,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 3,
    "generation": "binding",
-   "aria_label": "Wildfire × Substation, reused, partial, shape T4, cost T4, not searched",
-   "href": "/cells/substation_wildfire_screening_v1"
+   "aria_label": "Wildfire × Substation, reused, partial, evidence: our judgment, field reports not searched",
+   "href": "/cells/substation_wildfire_screening_v1",
+   "word": "our judgment",
+   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
   }
  ],
  "has_buckets": true,

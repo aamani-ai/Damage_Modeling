@@ -1005,22 +1005,96 @@
     "code": "PROPOSAL · screening"
    },
    "evidence": {
-    "words": "Evidence: transferred and our judgment",
-    "code": "shape T3 · cost T4",
+    "words": "Evidence: our judgment",
+    "code": "How damage rises: borrowed · how it becomes dollars: our judgment",
     "tiers": [
-     "T3",
      "T4"
-    ]
+    ],
+    "codes": "shape T3 · cost T4"
    },
    "occurrence": {
     "words": "Field reports: nobody has looked yet",
-    "code": "? not searched"
+    "code": "Field reports: nobody has looked yet"
    },
    "review": {
     "words": "Not yet reviewed by a person",
     "code": "entry agent-read 2026-10-19 · release not yet reviewed"
    }
   },
+  "main_logic": [
+   "Convective wind is measured as convective gust 3s 10m open terrain mph, in mph and tornado gust 3s 10m mph, in mph.",
+   "EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder; tornado used directly, storm wind as a transfer starting at 96 mph.",
+   "The damage ratio is a share of the structure replacement cost new of the same building."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "3 parts with a curve · 1 withheld",
+    "paragraphs": [
+     "Convective wind on buildings: EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder; tornado used directly, storm wind as a transfer starting at 96 mph. It names 3 parts: House, Warehouse and Office. Outside its scope: contents (declared as a withheld placeholder part), land, site works, business interruption and hurricane wind (hurricane cell).",
+     "For this hazard the building is split into 3 parts: House, Warehouse and Office. 1 further unit is named but withheld — cwre building contents — a stated 'not zero', not a curve.",
+     "The damage ratio is a share of structure replacement cost new of the same building. The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true
+   },
+   {
+    "id": "worked_out",
+    "name": "How damage is worked out",
+    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "fact": "2 hazard measures → a line through points",
+    "paragraphs": [
+     "Damage is read against convective gust 3s 10m open terrain mph (mph) and tornado gust 3s 10m mph (mph). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: 3-second gust at 10 m (mph), 0 to 255 mph; separate fields for storm wind and tornado (tornado: Hazard's EF band midpoint gust).",
+     "The seven-step audit is written in the dossier with 7 rows; the statuses it records: Gust at 10 m open terrain as delivered; no terrain or height bridge; EF midpoint bridge flagged., Numeric per building and pathway; above 255 mph, contents and unknown inputs withhold or fail., One row, 100% of structure value; components not itemized by the source., One whole-building unit; contents withheld., Repair cost / structure replacement cost new., Three reference buildings (profiles r1); structure only. and Whole building; no zones.. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "8 sources, 7 linked · our judgment",
+    "paragraphs": [
+     "8 sources set this cell: Texas Tech WSEC, A Recommendation for an Enhanced Fujita Scale, Rev 2 (2006), NOAA Storm Prediction Center, EF scale damage indicators FR12, MBS, LRB, FEMA, Hazus 7.0 Hurricane Technical Manual, damage-state costs and definitions and FEMA National Risk Index, Dec 2025 (check only) and 4 more. Of the 15 parameters, 2 are published, 4 are borrowed and 9 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator)."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "1 outside check · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "1 outside check compares this curve with an independent result: FEMA National Risk Index: yearly loss on Hazard's grid (storm wind and tornado). The validation record says report.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: not yet reviewed."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: borrowed · how it becomes dollars: our judgment",
+  "hazard_paths": [],
   "capabilities": [
    {
     "key": "single_event",
@@ -1092,7 +1166,7 @@
   "stations": [
    {
     "id": "scope",
-    "name": "What it covers",
+    "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
     "paragraph": "Convective wind on buildings: EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder; tornado used directly, storm wind as a transfer starting at 96 mph. It names 3 parts: House, Warehouse and Office. Outside its scope: contents (declared as a withheld placeholder part), land, site works, business interruption and hurricane wind (hurricane cell).",
     "plain_fact": "3 parts · 3 left out"
@@ -1115,8 +1189,8 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "8 sources set this cell: Texas Tech WSEC, A Recommendation for an Enhanced Fujita Scale, Rev 2 (2006), NOAA Storm Prediction Center, EF scale damage indicators FR12, MBS, LRB, FEMA, Hazus 7.0 Hurricane Technical Manual, damage-state costs and definitions and FEMA National Risk Index, Dec 2025 (check only) and 4 more. Of the 15 parameters, 2 are lab-tested (T2), 4 are transferred (T3) and 9 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
-    "plain_fact": "8 sources · transferred and our judgment"
+    "paragraph": "8 sources set this cell: Texas Tech WSEC, A Recommendation for an Enhanced Fujita Scale, Rev 2 (2006), NOAA Storm Prediction Center, EF scale damage indicators FR12, MBS, LRB, FEMA, Hazus 7.0 Hurricane Technical Manual, damage-state costs and definitions and FEMA National Risk Index, Dec 2025 (check only) and 4 more. Of the 15 parameters, 2 are published, 4 are borrowed and 9 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "plain_fact": "8 sources · borrowed and our judgment"
    },
    {
     "id": "value",
@@ -1929,7 +2003,7 @@
     "raw_name": "dod_speeds_house",
     "value_text": "FR12 EXP/LB/UB, 10 degrees",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "CWRE-S001",
@@ -1958,7 +2032,7 @@
     "raw_name": "dod_speeds_warehouse",
     "value_text": "MBS EXP/LB/UB, 8 degrees",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "CWRE-S001",
@@ -1987,7 +2061,7 @@
     "raw_name": "dod_speeds_office",
     "value_text": "LRB EXP/LB/UB, 7 degrees",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "CWRE-S001",
@@ -2016,7 +2090,7 @@
     "raw_name": "damage_state_costs",
     "value_text": "Slight 2%, Moderate 10%, Extensive 50%, Complete 100%; 5% between Slight and Moderate",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "CWRE-S003",
@@ -2234,7 +2308,7 @@
     "raw_name": "tabulation",
     "value_text": "1 mph knots 0-255 mph, 6 decimals; straight lines between knots",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [],
     "claim_ids": [],
     "curve_id": "all",
@@ -2248,7 +2322,7 @@
     "raw_name": "valid_range",
     "value_text": "0-255 mph; above 255 withheld; negative rejected",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "CWRE-S005",
@@ -2284,7 +2358,7 @@
   },
   "extraction": null,
   "tier_words": {
-   "shape": "transferred",
+   "shape": "borrowed",
    "cost": "our judgment"
   }
  },

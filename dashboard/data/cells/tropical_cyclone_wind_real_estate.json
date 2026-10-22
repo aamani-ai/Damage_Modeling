@@ -1135,21 +1135,96 @@
     "code": "PROPOSAL · screening"
    },
    "evidence": {
-    "words": "Evidence: lab-tested",
-    "code": "shape T2 · cost T2",
+    "words": "Evidence: published",
+    "code": "How damage rises: published · how it becomes dollars: published",
     "tiers": [
      "T2"
-    ]
+    ],
+    "codes": "shape T2 · cost T2"
    },
    "occurrence": {
     "words": "Field reports: nobody has looked yet",
-    "code": "? not searched"
+    "code": "Field reports: nobody has looked yet"
    },
    "review": {
     "words": "Not yet reviewed by a person",
     "code": "entry agent-read 2026-10-19 · release not yet reviewed"
    }
   },
+  "main_logic": [
+   "Hurricane wind is measured as peak 3-second gust at 10 m in open terrain, in mph.",
+   "FEMA Hazus hurricane building-loss rows used as published (every 5 mph, five terrain classes) for the Hazus building type and wind characteristics matching each building; the 32 Hazus curves used are identical in FEMA's 6.1 extract and SimCenter's independent 5.1 copy.",
+   "The damage ratio is a share of the structure replacement cost new of the same building."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "4 parts with a curve · 1 withheld",
+    "paragraphs": [
+     "Hurricane wind on buildings: FEMA Hazus hurricane building-loss rows used as published (every 5 mph, five terrain classes) for the Hazus building type and wind characteristics matching each building; the 32 Hazus curves used are identical in FEMA's 6.1 extract and SimCenter's independent 5.1 copy. It names 4 parts: House, Warehouse, Office and Retail. Outside its scope: contents (declared as a withheld placeholder part), land, site works, business interruption and storm surge and rain flooding (flood cell). Kinds of damage it does not include: tree fall on the house (a separate Hazus add-on, withheld) and tornadoes spawned by the hurricane (convective cell).",
+     "For this hazard the building is split into 4 parts: House, Warehouse, Office and Retail. 1 further unit is named but withheld — tcre building contents — a stated 'not zero', not a curve.",
+     "The damage ratio is a share of structure replacement cost new of the same building. The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true
+   },
+   {
+    "id": "worked_out",
+    "name": "How damage is worked out",
+    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "fact": "peak 3-second gust at 10 m in open terrain → a line through points",
+    "paragraphs": [
+     "Damage is read against peak 3-second gust at 10 m in open terrain (mph). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: peak 3-second gust at 10 m in open terrain (mph), 50 to 250 mph; the building's terrain class picks the curve.",
+     "The seven-step audit is a file in the cell folder with 7 rows; the statuses it records: partial and proposed. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "10 sources, 5 linked · published",
+    "paragraphs": [
+     "10 sources set this cell: FEMA, Hazus 7.0 Hurricane Model Technical Manual (2025), FEMA Hazus 6.1 hurricane damage and loss function extract, NHERI SimCenter, Hazus 5.1 hurricane loss functions, independent copy and Hazard reference profiles r1 and 6 more. Of the 18 parameters, 12 are published, 2 are borrowed and 4 are our judgment. The source and claim registers are machine-readable files in the cell folder. 5 sources have no link in the register (5 with a locator)."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says report.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: not yet reviewed."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "published",
+  "halves": "How damage rises: published · how it becomes dollars: published",
+  "hazard_paths": [],
   "capabilities": [
    {
     "key": "single_event",
@@ -1221,7 +1296,7 @@
   "stations": [
    {
     "id": "scope",
-    "name": "What it covers",
+    "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
     "paragraph": "Hurricane wind on buildings: FEMA Hazus hurricane building-loss rows used as published (every 5 mph, five terrain classes) for the Hazus building type and wind characteristics matching each building; the 32 Hazus curves used are identical in FEMA's 6.1 extract and SimCenter's independent 5.1 copy. It names 4 parts: House, Warehouse, Office and Retail. Outside its scope: contents (declared as a withheld placeholder part), land, site works, business interruption and storm surge and rain flooding (flood cell). Kinds of damage it does not include: tree fall on the house (a separate Hazus add-on, withheld) and tornadoes spawned by the hurricane (convective cell).",
     "plain_fact": "4 parts · 3 left out"
@@ -1244,8 +1319,8 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "10 sources set this cell: FEMA, Hazus 7.0 Hurricane Model Technical Manual (2025), FEMA Hazus 6.1 hurricane damage and loss function extract, NHERI SimCenter, Hazus 5.1 hurricane loss functions, independent copy and Hazard reference profiles r1 and 6 more. Of the 18 parameters, 12 are lab-tested (T2), 2 are transferred (T3) and 4 are our judgment (T4). The source and claim registers are machine-readable files in the cell folder. 5 sources have no link in the register (5 with a locator).",
-    "plain_fact": "10 sources · lab-tested"
+    "paragraph": "10 sources set this cell: FEMA, Hazus 7.0 Hurricane Model Technical Manual (2025), FEMA Hazus 6.1 hurricane damage and loss function extract, NHERI SimCenter, Hazus 5.1 hurricane loss functions, independent copy and Hazard reference profiles r1 and 6 more. Of the 18 parameters, 12 are published, 2 are borrowed and 4 are our judgment. The source and claim registers are machine-readable files in the cell folder. 5 sources have no link in the register (5 with a locator).",
+    "plain_fact": "10 sources · published"
    },
    {
     "id": "value",
@@ -2252,7 +2327,7 @@
     "raw_name": "axis_definition",
     "value_text": "peak 3-second gust at 10 m, open terrain (z0 0.03 m), mph",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "TCRE-S001",
@@ -2288,7 +2363,7 @@
     "raw_name": "axis_bridge",
     "value_text": "none in Damage (Hazard converts STORM 10-min wind)",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "TCRE-S005",
@@ -2310,7 +2385,7 @@
     "raw_name": "curve_ordinates_house",
     "value_text": "Hazus WSF1 wbID 6 building loss, 5 terrains, 50-250 mph every 5 mph",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "TCRE-S002",
@@ -2339,7 +2414,7 @@
     "raw_name": "curve_ordinates_commercial",
     "value_text": "Hazus SECBL wbID 1812 building loss, 5 terrains",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "TCRE-S002",
@@ -2368,7 +2443,7 @@
     "raw_name": "curve_ordinates_warehouse",
     "value_text": "Hazus SPMBL wbID 1729 building loss, 5 terrains",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "TCRE-S002",
@@ -2397,7 +2472,7 @@
     "raw_name": "building_type_house",
     "value_text": "WSF1 (CONUS, CaseID 1)",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "TCRE-S001",
@@ -2426,7 +2501,7 @@
     "raw_name": "building_type_commercial",
     "value_text": "SECBL (identical to MECBL)",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "TCRE-S001",
@@ -2455,7 +2530,7 @@
     "raw_name": "building_type_warehouse",
     "value_text": "SPMBL (> 50,000 ft2)",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "TCRE-S001",
@@ -2550,7 +2625,7 @@
     "raw_name": "terrain_class",
     "value_text": "one of open, light_suburban, suburban, light_trees, trees; required; no default; no interpolation",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "TCRE-S001",
@@ -2579,7 +2654,7 @@
     "raw_name": "curve_form",
     "value_text": "straight lines between published points (5 mph spacing); published values kept, including dips <= 0.002",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "TCRE-S002",
@@ -2601,7 +2676,7 @@
     "raw_name": "range_low",
     "value_text": "below 50 mph returns 0",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "TCRE-S002",
@@ -2623,7 +2698,7 @@
     "raw_name": "range_high",
     "value_text": "above 250 mph withholds",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "TCRE-S002",
@@ -2645,7 +2720,7 @@
     "raw_name": "denominator",
     "value_text": "structure replacement cost new (100%, one failure unit)",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "TCRE-S001",
@@ -2696,7 +2771,7 @@
     "raw_name": "tree_fall_house",
     "value_text": "deferred; withheld, not zero",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "TCRE-S001",
@@ -2732,8 +2807,8 @@
   },
   "extraction": null,
   "tier_words": {
-   "shape": "lab-tested",
-   "cost": "lab-tested"
+   "shape": "published",
+   "cost": "published"
   }
  },
  "build_findings": []

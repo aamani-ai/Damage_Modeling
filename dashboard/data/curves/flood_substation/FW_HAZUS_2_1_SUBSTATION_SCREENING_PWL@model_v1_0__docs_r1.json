@@ -898,7 +898,7 @@
   },
   {
    "type": "key_assumption",
-   "text": "Coastal uses the river depth curve with no salt or wave effect (T4, our judgment)",
+   "text": "Coastal uses the river depth curve with no salt or wave effect (our judgment)",
    "raw": "Coastal uses the river depth curve with no salt or wave effect (T4)"
   }
  ],
@@ -910,16 +910,17 @@
   "how_sure": {
    "shape": {
     "tier": "T3",
-    "word": "transferred",
-    "basis": "Hazus Table 7.9 points, linear between them (Coastal use is a T4 (our judgment) transfer)"
+    "word": "borrowed",
+    "basis": "Hazus Table 7.9 points, linear between them (Coastal use is a judgment-based transfer)"
    },
    "cost": {
     "tier": "T4",
     "word": "our judgment",
-    "basis": "Hazus loss ratio (T3, transferred) applied to a fenced value whose match to the Hazus denominator is T4 (our judgment)"
+    "basis": "Hazus loss ratio (borrowed) applied to a fenced value whose match to the Hazus denominator is judgment-based"
    },
-   "parameters": "3 parameters: 1 transferred (T3) and 2 our judgment (T4)",
-   "weakest": "T4"
+   "parameters": "3 parameters: 1 borrowed and 2 our judgment",
+   "weakest": "T4",
+   "word": "our judgment"
   },
   "seen_in_field": {
    "sentence": "Not searched — nobody has looked for field reports yet.",
@@ -946,7 +947,7 @@
      "FW-S012"
     ],
     "title": "Hazus7 electric-power losses disabled; inherited pinned evidence",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
     "link_kind": "repo_file",
     "locator": null,
     "no_link_sentence": null,
@@ -958,7 +959,7 @@
      "SUB-A01"
     ],
     "title": "Existing canonical point/value selection",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
     "link_kind": "repo_file",
     "locator": null,
     "no_link_sentence": null,
@@ -970,7 +971,7 @@
      "SUB-A02"
     ],
     "title": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/flood_substation/current/derivation.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/flood_substation/current/derivation.md",
     "link_kind": "repo_file",
     "locator": null,
     "no_link_sentence": null,
@@ -1103,7 +1104,7 @@
    "provenance": "register",
    "repo_path": "docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
    "doi": null,
-   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
    "link_kind": "repo_file",
    "title": "Existing canonical point/value selection",
    "no_link_sentence": null
@@ -1122,14 +1123,14 @@
    "provenance": "register",
    "repo_path": "docs/cells/flood_substation/current/derivation.md",
    "doi": null,
-   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/cells/flood_substation/current/derivation.md",
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/cells/flood_substation/current/derivation.md",
    "link_kind": "repo_file",
    "title": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
    "no_link_sentence": null
   }
  ],
  "plain_tiers": {
-  "shape": "transferred",
+  "shape": "borrowed",
   "cost": "our judgment"
  },
  "occurrence": null,
@@ -1143,23 +1144,23 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release agent reviewed screening under owner delivery direction"
  },
- "summary": "Whole station (fenced assembly): a line through fixed points (piecewise linear), read against water depth above station grade (ft) at the facility point; the shape is transferred, the cost our judgment.",
+ "summary": "Whole station (fenced assembly): a line through fixed points (piecewise linear), read against water depth above station grade (ft) at the facility point; how damage rises is borrowed, how it becomes dollars our judgment.",
  "rail_plain": {
   "exists": {
    "words": "Live · in the runtime index",
    "code": "LIVE"
   },
   "evidence": {
-   "words": "Evidence: transferred and our judgment",
-   "code": "shape T3 · cost T4",
+   "words": "Evidence: our judgment",
+   "code": "How damage rises: borrowed · how it becomes dollars: our judgment",
    "tiers": [
-    "T3",
     "T4"
-   ]
+   ],
+   "codes": "shape T3 · cost T4"
   },
   "occurrence": {
    "words": "Field reports: nobody has looked yet",
-   "code": "? not searched"
+   "code": "Field reports: nobody has looked yet"
   },
   "review": {
    "words": "Not yet reviewed by a person",

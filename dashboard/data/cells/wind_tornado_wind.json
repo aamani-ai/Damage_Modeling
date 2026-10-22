@@ -886,7 +886,13 @@
    {
     "kind": "result",
     "name": "Financial range check (Hazard repo): value-envelope ceiling for wind-farm convective wind (shared lineage; no open industry loss figures found)",
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/data_sources/financial_range_wind_farm_convective_wind/profile.md"
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/docs/data_sources/financial_range_wind_farm_convective_wind/profile.md",
+    "hazard": {
+     "path": "docs/data_sources/financial_range_wind_farm_convective_wind/profile.md",
+     "state": "on_main",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/docs/data_sources/financial_range_wind_farm_convective_wind/profile.md",
+     "words": null
+    }
    }
   ],
   "capability": {
@@ -1092,22 +1098,96 @@
     "code": "LIVE"
    },
    "evidence": {
-    "words": "Evidence: transferred and our judgment",
-    "code": "shape T4 · cost T3–4",
+    "words": "Evidence: our judgment",
+    "code": "How damage rises: our judgment · how it becomes dollars: borrowed and our judgment",
     "tiers": [
-     "T3",
      "T4"
-    ]
+    ],
+    "codes": "shape T4 · cost T3–4"
    },
    "occurrence": {
     "words": "Field reports: nobody has looked yet",
-    "code": "? not searched"
+    "code": "Field reports: nobody has looked yet"
    },
    "review": {
     "words": "Not yet reviewed by a person",
     "code": "entry agent-read 2026-10-19 · release —"
    }
   },
+  "main_logic": [
+   "Convective wind is measured as gust ratio V₃ₛ,hub / Ve50 (IEC class).",
+   "Engineering-fit logistic curves on hub gust over the IEC 50-year gust, built from IEC design speeds, the NIST fragility method and EF4 case evidence; tornado is a curve shift.",
+   "The damage ratio is a share of each part's default share of the physical replaceable base (blade 0.173, tower 0.169, nacelle 0.345, foundation 0.062, power electronics 0.037), times the exposed turbine fraction."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "5 parts with a curve · 1 without one yet",
+    "paragraphs": [
+     "Convective wind on wind farms: engineering-fit logistic curves on hub gust over the IEC 50-year gust, built from IEC design speeds, the NIST fragility method and EF4 case evidence; tornado is a curve shift. It names 5 parts: Blade, Tower, Nacelle, Foundation and Power electronics. Outside its scope: tropical-cyclone and hurricane wind (separate neighbouring cell). Kinds of damage it does not include: operating, feathered and yaw state are flags only, with no numeric effect.",
+     "For this hazard the wind farm is split into 5 parts: Blade, Tower, Nacelle, Foundation and Power electronics. Parts of the plant's value with no curve yet: SCADA and controls, electrical collection, substation and civil infrastructure (reviewed secondary units, no curve).",
+     "The damage ratio is a share of each part's default share of the physical replaceable base (blade 0.173, tower 0.169, nacelle 0.345, foundation 0.062, power electronics 0.037), times the exposed turbine fraction. The files state no plant-level dollar figure for this asset. Shares of the plant's physical value, as the cell states them: Blade 17 %, Tower 17 %, Nacelle 34 %, Foundation 6 % and Power electronics 4 %."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true
+   },
+   {
+    "id": "worked_out",
+    "name": "How damage is worked out",
+    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "fact": "gust ratio V₃ₛ,hub / Ve50 → an S-curve",
+    "paragraphs": [
+     "Damage is read against gust ratio V₃ₛ,hub / Ve50 (IEC class). The curve is an S-shaped curve: little damage, then a steep rise, then a plateau (logistic). The input, in the catalogue's words: hub-height 3-second gust (m/s), or 10 m gust with a height bridge, divided by the IEC class 50-year gust (Ve50 = 1.4 x Vref); tornado via an EF-scale gust proxy; no fixed range (extrapolation warns).",
+     "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "8 sources, 8 linked · our judgment",
+    "paragraphs": [
+     "8 sources set this cell: IEC 61400-1 design classes and Ve50 = 1.4 x Vref, NIST, Fragility curves, damage matrices and wind-induced loss estimation, US DOE, How do wind turbines survive severe weather and storms and NOAA/NWS, Enhanced Fujita scale and 4 more. Of the 22 parameters, 1 is published, 5 are borrowed and 16 are our judgment. The sources were read from the workbook's Evidence_Params, Sources, Assumption_Register and Open_Seams sheets, because this older cell keeps them there rather than in register files. 1 source ID in the tier table (AWN_15_DECLARED_BRIDGE) matches no document in the workbook or dossier."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "1 outside check · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "1 outside check compares this curve with an independent result: Financial range check (Hazard repo): value-envelope ceiling for wind-farm convective wind (shared lineage; no open industry loss figures found).",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: our judgment · how it becomes dollars: borrowed and our judgment",
+  "hazard_paths": [],
   "capabilities": [
    {
     "key": "single_event",
@@ -1171,7 +1251,7 @@
   "stations": [
    {
     "id": "scope",
-    "name": "What it covers",
+    "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
     "paragraph": "Convective wind on wind farms: engineering-fit logistic curves on hub gust over the IEC 50-year gust, built from IEC design speeds, the NIST fragility method and EF4 case evidence; tornado is a curve shift. It names 5 parts: Blade, Tower, Nacelle, Foundation and Power electronics. Outside its scope: tropical-cyclone and hurricane wind (separate neighbouring cell). Kinds of damage it does not include: operating, feathered and yaw state are flags only, with no numeric effect.",
     "plain_fact": "5 parts · 1 left out"
@@ -1194,8 +1274,8 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "8 sources set this cell: IEC 61400-1 design classes and Ve50 = 1.4 x Vref, NIST, Fragility curves, damage matrices and wind-induced loss estimation, US DOE, How do wind turbines survive severe weather and storms and NOAA/NWS, Enhanced Fujita scale and 4 more. Of the 22 parameters, 1 is lab-tested (T2), 5 are transferred (T3) and 16 are our judgment (T4). The sources were read from the workbook's Evidence_Params, Sources, Assumption_Register and Open_Seams sheets, because this older cell keeps them there rather than in register files. 1 source ID in the tier table (AWN_15_DECLARED_BRIDGE) matches no document in the workbook or dossier.",
-    "plain_fact": "8 sources · transferred and our judgment"
+    "paragraph": "8 sources set this cell: IEC 61400-1 design classes and Ve50 = 1.4 x Vref, NIST, Fragility curves, damage matrices and wind-induced loss estimation, US DOE, How do wind turbines survive severe weather and storms and NOAA/NWS, Enhanced Fujita scale and 4 more. Of the 22 parameters, 1 is published, 5 are borrowed and 16 are our judgment. The sources were read from the workbook's Evidence_Params, Sources, Assumption_Register and Open_Seams sheets, because this older cell keeps them there rather than in register files. 1 source ID in the tier table (AWN_15_DECLARED_BRIDGE) matches no document in the workbook or dossier.",
+    "plain_fact": "8 sources · borrowed and our judgment"
    },
    {
     "id": "value",
@@ -1507,7 +1587,7 @@
     ],
     "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "link_kind": "repo_file",
     "no_link_sentence": null
    }
@@ -2067,7 +2147,7 @@
     "raw_name": "Ve50 = 1.4 * Vref",
     "value_text": "IEC class table",
     "tier": "T2",
-    "tier_word": "lab-tested",
+    "tier_word": "published",
     "sources": [
      {
       "id": "DTU_IEC_61400_1",
@@ -2096,7 +2176,7 @@
     "raw_name": "10m_to_hub_height_bridge",
     "value_text": "power_law_or_log_law",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "AWN_15_DECLARED_BRIDGE",
@@ -2118,7 +2198,7 @@
     "raw_name": "max_DR",
     "value_text": "1",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "NIST_FRAGILITY_METHOD",
@@ -2130,7 +2210,7 @@
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2227,7 +2307,7 @@
     "raw_name": "max_DR",
     "value_text": "1",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "NIST_FRAGILITY_METHOD",
@@ -2239,7 +2319,7 @@
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2336,7 +2416,7 @@
     "raw_name": "max_DR",
     "value_text": "0.85",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "NIST_FRAGILITY_METHOD",
@@ -2348,7 +2428,7 @@
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2445,7 +2525,7 @@
     "raw_name": "max_DR",
     "value_text": "0.65",
     "tier": "T3",
-    "tier_word": "transferred",
+    "tier_word": "borrowed",
     "sources": [
      {
       "id": "NIST_FRAGILITY_METHOD",
@@ -2457,7 +2537,7 @@
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2566,7 +2646,7 @@
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/b0ff7189e239e8f8de76d20adbb0b9f7fd6a9476/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/6eaf9a3c531b8e494df34e7a5f822397f9a49913/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2843,7 +2923,7 @@
   },
   "tier_words": {
    "shape": "our judgment",
-   "cost": "transferred and our judgment"
+   "cost": "borrowed and our judgment"
   }
  },
  "build_findings": [
