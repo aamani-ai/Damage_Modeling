@@ -25,8 +25,8 @@ export default function AboutPage() {
       <div className="sticky top-0 z-20 -mx-4 border-b border-border bg-background/95 px-4 pb-2 pt-2 backdrop-blur">
         <h2 className="text-[15px] font-semibold tracking-tight">About this data</h2>
         <p className="mt-1 text-[12.5px] leading-snug">
-          Every number on these pages was built from {m.source.label}, and traces to a file at that commit. The build reads the files,
-          checks them and writes the data the pages show; nothing on a page is evaluated in the browser.
+          Every number on these pages traces to a file at the commit they were built from: {m.source.label}. The build reads the
+          files, checks them and writes the data the pages show; nothing on a page is evaluated in the browser.
         </p>
       </div>
       <div className="mt-3 space-y-3">

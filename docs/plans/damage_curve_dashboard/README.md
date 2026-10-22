@@ -29,7 +29,8 @@ scope: Build the damage-curve dashboard as a local internal instrument in this r
 > [FAQ](../../faq.md); data built from `main`, or a labelled preview. Look review at
 > [`evidence/2e49bb4/`](evidence/2e49bb4/REVIEW.md); handoff at
 > [`tasks_history/2026-10-21__dashboard__iteration-3`](../../extra/tasks_history/2026-10-21__dashboard__iteration-3/handoff.md).
-> G19 completed the same day (`DCD-D32`): builder information sits behind one *About this data* link.
+> G19 completed the same day (`DCD-D32`): builder information sits behind one *About this data* link; addendum review
+> at [`evidence/4e31ac6/`](evidence/4e31ac6/REVIEW.md).
 
 ## Outcome first
 
