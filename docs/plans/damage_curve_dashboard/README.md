@@ -26,7 +26,10 @@ scope: Build the damage-curve dashboard as a local internal instrument in this r
 > on every cell page; crosswalks drafted for seven types at
 > [`docs/contracts/twin_crosswalks/`](../../contracts/twin_crosswalks/README.md); the cell page in the order *curve
 > and why we believe it → what it covers → four steps → For Hazard*; evidence in words; one Review page; the
-> [FAQ](../../faq.md); data built from `main`, or a labelled preview. Still open: the rest of G19.
+> [FAQ](../../faq.md); data built from `main`, or a labelled preview. Look review at
+> [`evidence/2e49bb4/`](evidence/2e49bb4/REVIEW.md); handoff at
+> [`tasks_history/2026-10-21__dashboard__iteration-3`](../../extra/tasks_history/2026-10-21__dashboard__iteration-3/handoff.md).
+> Still open: the rest of G19.
 
 ## Outcome first
 

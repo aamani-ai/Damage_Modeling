@@ -49,7 +49,7 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
     <section className="rounded-lg border border-border bg-card" aria-label="Which hazard has a curve for which system">
       <div className="px-3 pt-2.5 pb-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Which hazard has a curve for which part</div>
       <p className="px-3 pb-2 text-[11.5px] leading-snug">
-        The twin&apos;s systems down the side, the hazards across. Each cell was built on its own, so each names the parts in its own words and splits the {cov.type.label.toLowerCase()} differently; this table puts them on one breakdown.
+        The twin&apos;s systems down the side, the hazards across. Each cell was built on its own, so each names the parts in its own words and splits the {(cov.type.building ?? cov.type.label).toLowerCase()} differently; this table puts them on one breakdown.
       </p>
       <div className="overflow-x-auto px-3 pb-3">
         <table className="w-full min-w-[860px] text-[11px]">

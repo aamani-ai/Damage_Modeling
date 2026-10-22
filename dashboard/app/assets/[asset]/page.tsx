@@ -113,8 +113,14 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
     <div>
       <div className="sticky top-0 z-20 -mx-4 border-b border-border bg-background/95 px-4 pb-2 pt-2 backdrop-blur">
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <Link href={indexCategories(m).some((c) => c.slug === cat.slug) ? `/assets/${cat.slug}` : "/"} className="text-[11px] text-muted-foreground hover:text-foreground">← {indexCategories(m).some((c) => c.slug === cat.slug) ? cat.label : "Library"}</Link>
-          <span className="text-[11px] text-muted-foreground">{cat.label} ›</span>
+          {indexCategories(m).some((c) => c.slug === cat.slug) ? (
+            <Link href={`/assets/${cat.slug}`} className="text-[11px] text-muted-foreground hover:text-foreground">← {cat.label}</Link>
+          ) : (
+            <>
+              <Link href="/" className="text-[11px] text-muted-foreground hover:text-foreground">← Library</Link>
+              <span className="text-[11px] text-muted-foreground">{cat.label} ›</span>
+            </>
+          )}
           <h2 className="text-[15px] font-semibold tracking-tight">{type.label}{type.building ? <span className="font-normal text-muted-foreground"> · {type.building.toLowerCase()}</span> : null}</h2>
           <Tag>{tiles.length} hazards: {statusLine}</Tag>
           {v?.reference && !sharedCell ? <Tag title={v.reference.source}>{v.reference.label}</Tag> : null}
