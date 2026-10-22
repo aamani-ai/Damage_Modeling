@@ -662,6 +662,7 @@
   "main_logic": [
    "Wildfire is read as FSim fire intensity class at the station reference point, exact integer 1 to 6 (0 = no event).",
    "The canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer.",
+   "Why this shape: as in Wildfire × Solar farm, evidence constrains mechanism, selector sensitivity, and inspection endpoint; absolute class DR is engineering judgment.",
    "The damage ratio is a share of the bound electrical equipment value of the station, $13,025,357 (eight equipment rows)."
   ],
   "steps": [
@@ -680,12 +681,24 @@
      "units",
      "value"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "Electrical equipment…",
+      "tone": "key",
+      "title": "Electrical equipment (transformers and switchgear)"
+     },
+     {
+      "text": "1 without a curve yet",
+      "tone": "muted",
+      "title": "Rest of the fenced station ($14,327,879.37, 52.38%): bus supports, dead-ends, oil containment and firewall, relay panels, control house, station battery, SCADA, station service, control cable, conduit and trench, site work, drainage and lightning shielding"
+     }
+    ]
    },
    {
-    "id": "worked_out",
-    "name": "How damage is worked out",
-    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "not written yet",
     "paragraphs": [
      "No hazard axis is declared. The input, in the catalogue's words: FSim fire intensity class at the station reference point, exact integer 1 to 6 (0 = no event); no interpolation or heat-flux conversion.",
@@ -695,7 +708,22 @@
      "axis_form",
      "audit"
     ],
-    "written": false
+    "written": false,
+    "chips": [
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Evidence constrains mechanism, selector sensitivity, and inspection endpoint; absolute class DR is engineering judgment."
+     }
+    ],
+    "why": [
+     {
+      "label": "From Wildfire × Solar farm, which it builds on",
+      "text": "Evidence constrains mechanism, selector sensitivity, and inspection endpoint; absolute class DR is engineering judgment.",
+      "source": "Wildfire × Solar farm",
+      "source_label": "Why this shape"
+     }
+    ]
    },
    {
     "id": "numbers",
@@ -708,7 +736,28 @@
     "holds": [
      "evidence"
     ],
-    "written": false
+    "written": false,
+    "chips": [
+     {
+      "text": "our judgment",
+      "tone": "key",
+      "title": "How damage rises: our judgment · how it becomes dollars: our judgment"
+     },
+     {
+      "text": "Canonical wildfire_solar…",
+      "tone": "key",
+      "title": "Canonical wildfire_solar model v1.0 docs r3, WSV1_MV_EQUIPMENT_THERMAL (ordinate table and value linkage)"
+     },
+     {
+      "text": "USFS FSim RDS-2016-0034-3…",
+      "tone": "key",
+      "title": "USFS FSim RDS-2016-0034-3 (native fire class and burn probability)"
+     },
+     {
+      "text": "+2 more references",
+      "tone": "muted"
+     }
+    ]
    },
    {
     "id": "checked",
@@ -722,7 +771,21 @@
     "holds": [
      "field_review"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "no outside check yet",
+      "tone": "muted"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
    }
   ],
   "for_hazard": [

@@ -1129,6 +1129,7 @@
   "main_logic": [
    "Flood is measured as local depth above component datum, in m, depth at the pathway termination, in m, depth above the module lower edge, in m and flow velocity or scour proxy, in m/s.",
    "Piecewise depth-damage points per part, set by engineering judgment from DOE/FEMP solar flood guidance and NEMA water-damaged equipment guidance, in the USACE depth-percent table form.",
+   "Why this shape: flood electrical damage is state/threshold-like by local component datum, so piecewise depth-percent curves are more auditable than logistics.",
    "The damage ratio is a share of the replacement value of the same part (its own value bucket), never total project value."
   ],
   "steps": [
@@ -1147,12 +1148,39 @@
      "units",
      "value"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "Inverters",
+      "tone": "key",
+      "title": "Inverters"
+     },
+     {
+      "text": "Switchgear",
+      "tone": "key",
+      "title": "Switchgear"
+     },
+     {
+      "text": "Main transformer and controls",
+      "tone": "key",
+      "title": "Main transformer and controls"
+     },
+     {
+      "text": "+5 more",
+      "tone": "muted",
+      "title": "Combiner boxes and DC protection, SCADA and monitoring cabinets, AC and DC collection cable, PV modules, Foundations"
+     },
+     {
+      "text": "3 without a curve yet",
+      "tone": "muted",
+      "title": "Mounting and racking structure (debris and velocity load is a candidate mechanism; no curve); Civil works: roads, access and fencing (reviewed in the write-up; no curve); Site drainage and flood defences (treated as protection state, not a damaged part)"
+     }
+    ]
    },
    {
-    "id": "worked_out",
-    "name": "How damage is worked out",
-    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "4 hazard measures → a line through points",
     "paragraphs": [
      "Damage is read against local depth above component datum (m), depth at the pathway termination (m), depth above the module lower edge (m) and flow velocity or scour proxy (m/s). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: water surface elevation or site flood depth (m), turned into local depth above each part's critical elevation, 0 to 2 m (clamp or warn); foundations use flow velocity (m/s) or a scour proxy, 0 to 4.",
@@ -1162,7 +1190,42 @@
      "axis_form",
      "audit"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "local depth above component…, m",
+      "tone": "key",
+      "title": "local depth above component datum"
+     },
+     {
+      "text": "depth at the pathway…, m",
+      "tone": "key",
+      "title": "depth at the pathway termination"
+     },
+     {
+      "text": "+2 more measures",
+      "tone": "muted"
+     },
+     {
+      "text": "line through points",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Flood electrical damage is state/threshold-like by local component datum, so piecewise depth-percent curves are more auditable than logistics."
+     }
+    ],
+    "why": [
+     {
+      "label": "Why this shape",
+      "text": "Flood electrical damage is state/threshold-like by local component datum, so piecewise depth-percent curves are more auditable than logistics."
+     },
+     {
+      "label": "How the shape was set",
+      "text": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization."
+     }
+    ]
    },
    {
     "id": "numbers",
@@ -1175,7 +1238,32 @@
     "holds": [
      "evidence"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "our judgment",
+      "tone": "key",
+      "title": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment"
+     },
+     {
+      "text": "DOE/FEMP, Preventing and…",
+      "tone": "key",
+      "title": "DOE/FEMP, Preventing and Mitigating Flood Damage to Solar PV Systems"
+     },
+     {
+      "text": "NEMA GD 1-2019, Evaluating…",
+      "tone": "key",
+      "title": "NEMA GD 1-2019, Evaluating Water-Damaged Electrical Equipment"
+     },
+     {
+      "text": "+3 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "8 sources, 8 linked",
+      "tone": "muted"
+     }
+    ]
    },
    {
     "id": "checked",
@@ -1189,7 +1277,22 @@
     "holds": [
      "field_review"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "Financial range check (Hazard…",
+      "tone": "key",
+      "title": "Financial range check (Hazard repo): industry loss figures for solar flood"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
    }
   ],
   "for_hazard": [
@@ -1577,7 +1680,7 @@
     "source_type": null,
     "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "link_kind": "repo_file",
     "no_link_sentence": null
    },
@@ -1604,7 +1707,7 @@
     "source_type": null,
     "repo_path": "docs/source_drops/context/v2_5/substrate_decomposition.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/source_drops/context/v2_5/substrate_decomposition.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/source_drops/context/v2_5/substrate_decomposition.md",
     "link_kind": "repo_file",
     "no_link_sentence": null
    }

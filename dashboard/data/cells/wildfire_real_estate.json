@@ -984,6 +984,7 @@
   "main_logic": [
    "Wildfire is measured as FSim conditional flame-length class state.",
    "US Forest Service home loss by flame-length class (shrub vegetation) for the house; warehouse 0.8x and office 0.9x from same-fire CAL FIRE inspection ratios.",
+   "Why this shape: USFS response for a home, shrub; level consistent with DINS.",
    "The damage ratio is a share of the structure replacement cost new of the same building."
   ],
   "steps": [
@@ -1002,12 +1003,33 @@
      "units",
      "value"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "House",
+      "tone": "key",
+      "title": "House"
+     },
+     {
+      "text": "Warehouse",
+      "tone": "key",
+      "title": "Warehouse"
+     },
+     {
+      "text": "Office",
+      "tone": "key",
+      "title": "Office"
+     },
+     {
+      "text": "1 withheld",
+      "tone": "muted"
+     }
+    ]
    },
    {
-    "id": "worked_out",
-    "name": "How damage is worked out",
-    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "FSim conditional flame-length class state → exact classes",
     "paragraphs": [
      "Damage is read against FSim conditional flame-length class state. The curve is a table of damage ratios at exact classes, nothing in between. The input, in the catalogue's words: FSim conditional flame-length class state, exact integer 0 to 6 (0 = no event); nothing between classes.",
@@ -1017,7 +1039,33 @@
      "axis_form",
      "audit"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "FSim conditional flame-length…",
+      "tone": "key",
+      "title": "FSim conditional flame-length class state"
+     },
+     {
+      "text": "exact classes",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "USFS response for a home, shrub; level consistent with DINS."
+     }
+    ],
+    "why": [
+     {
+      "label": "Why this shape",
+      "text": "USFS response for a home, shrub; level consistent with DINS."
+     },
+     {
+      "label": "The form adopted",
+      "text": "Exact class-state table: DR(0) = 0; DR(k) = factor x WRC_shrub(FLP_k) / 100; factor 1.0 house, 0.8 warehouse, 0.9 office."
+     }
+    ]
    },
    {
     "id": "numbers",
@@ -1030,7 +1078,32 @@
     "holds": [
      "evidence"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "our judgment",
+      "tone": "key",
+      "title": "How damage rises: borrowed · how it becomes dollars: our judgment"
+     },
+     {
+      "text": "USFS, Wildfire Risk to…",
+      "tone": "key",
+      "title": "USFS, Wildfire Risk to Communities spatial datasets, 2nd ed. (2024)"
+     },
+     {
+      "text": "CAL FIRE Damage Inspection…",
+      "tone": "key",
+      "title": "CAL FIRE Damage Inspection (DINS) data, 2013-2025"
+     },
+     {
+      "text": "+2 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "8 sources, 7 linked",
+      "tone": "muted"
+     }
+    ]
    },
    {
     "id": "checked",
@@ -1044,7 +1117,27 @@
     "holds": [
      "field_review"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "FEMA National Risk Index…",
+      "tone": "key",
+      "title": "FEMA National Risk Index: yearly loss on Hazard's grid"
+     },
+     {
+      "text": "CAL FIRE inspections…",
+      "tone": "key",
+      "title": "CAL FIRE inspections: building-type outcomes inside the same fires"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
    }
   ],
   "for_hazard": [

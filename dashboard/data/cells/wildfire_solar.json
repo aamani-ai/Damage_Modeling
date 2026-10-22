@@ -1126,6 +1126,7 @@
   "main_logic": [
    "Wildfire is measured as FSim conditional flame-length class (0 = no event).",
    "Exact-class state tables per part on FSim flame-length classes; ordering constrained by field, lab and guidance sources, absolute values set by engineering judgment.",
+   "Why this shape: evidence constrains mechanism, selector sensitivity, and inspection endpoint; absolute class DR is engineering judgment.",
    "The damage ratio is a share of the pre-event direct replacement value of the same part."
   ],
   "steps": [
@@ -1144,12 +1145,39 @@
      "units",
      "value"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "PV modules",
+      "tone": "key",
+      "title": "PV modules"
+     },
+     {
+      "text": "Tracker and racking",
+      "tone": "key",
+      "title": "Tracker and racking"
+     },
+     {
+      "text": "Piles and inverter pads",
+      "tone": "key",
+      "title": "Piles and inverter pads"
+     },
+     {
+      "text": "+7 more",
+      "tone": "muted",
+      "title": "Central inverters, Combiner boxes, Exposed AC and DC cable, Transformers and switchgear, Grounding and lightning protection, SCADA and communications, Civil: fencing, roads, buildings, site prep"
+     },
+     {
+      "text": "1 without a curve yet",
+      "tone": "muted",
+      "title": "Replacement support and fieldwork: no own curve; allocated once at the aggregate direct-and-civil damage ratio (judgment-based rule)"
+     }
+    ]
    },
    {
-    "id": "worked_out",
-    "name": "How damage is worked out",
-    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "FSim conditional flame-length class → exact classes",
     "paragraphs": [
      "Damage is read against FSim conditional flame-length class (0 = no event). The curve is a table of damage ratios at exact classes, nothing in between. The input, in the catalogue's words: USFS FSim conditional flame-length class, exact integer 1 to 6 (0 = no event), or the six-class probability vector; no interpolation; burn probability stays with Hazard.",
@@ -1159,7 +1187,37 @@
      "axis_form",
      "audit"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "FSim conditional flame-length…",
+      "tone": "key",
+      "title": "FSim conditional flame-length class"
+     },
+     {
+      "text": "exact classes",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Evidence constrains mechanism, selector sensitivity, and inspection endpoint; absolute class DR is engineering judgment."
+     }
+    ],
+    "why": [
+     {
+      "label": "Why this shape",
+      "text": "Evidence constrains mechanism, selector sensitivity, and inspection endpoint; absolute class DR is engineering judgment."
+     },
+     {
+      "label": "The form adopted",
+      "text": "Exact categorical screening state table by failure unit."
+     },
+     {
+      "label": "Why not continuous FLI curve",
+      "text": "No validated FSim/fireline-intensity to component heat-flux/time bridge exists; a smooth curve would imply unsupported physical precision."
+     }
+    ]
    },
    {
     "id": "numbers",
@@ -1172,7 +1230,32 @@
     "holds": [
      "evidence"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "our judgment",
+      "tone": "key",
+      "title": "How damage rises: our judgment · how it becomes dollars: published"
+     },
+     {
+      "text": "USDA Forest Service, Spatial…",
+      "tone": "key",
+      "title": "USDA Forest Service, Spatial datasets of probabilistic wildfire risk components for the US, 3rd ed., RDS-2016-0034-3"
+     },
+     {
+      "text": "DOE/FEMP, Solar Photovoltaic…",
+      "tone": "key",
+      "title": "DOE/FEMP, Solar Photovoltaic Hardening for Resilience - Wildfire"
+     },
+     {
+      "text": "+3 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "21 sources, 20 linked",
+      "tone": "muted"
+     }
+    ]
    },
    {
     "id": "checked",
@@ -1186,7 +1269,22 @@
     "holds": [
      "field_review"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "Financial range check (Hazard…",
+      "tone": "key",
+      "title": "Financial range check (Hazard repo): industry loss figures for solar wildfire"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
    }
   ],
   "for_hazard": [

@@ -1025,6 +1025,7 @@
   "main_logic": [
    "Flood is measured as freshwater flood depth above substation grade, in ft.",
    "FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points.",
+   "Why this shape: FEMA published the numeric whole-substation screening function, but current Hazus disables electric-power loss calculations and no claims calibration is documented.",
    "The damage ratio is a share of the full direct replacement value of the same facility-level GSU/substation (not project TIV, not the mixed 72 USD/kW electrical row)."
   ],
   "steps": [
@@ -1043,12 +1044,28 @@
      "units",
      "value"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "GSU / substation (whole…",
+      "tone": "key",
+      "title": "GSU / substation (whole facility)"
+     },
+     {
+      "text": "6 without a curve yet",
+      "tone": "muted",
+      "title": "GSU parts as separate units: switchgear, main transformer, transformer auxiliaries and controls, protection and SCADA, station service and DC, cable terminations (withheld, not zero); Turbine-base electrical and pad or turbine step-up transformers (withheld); Collection cable joints and terminations (withheld); Turbine foundation (needs a separate scour and erosion pathway) and civil access and drainage (needs a split); Elevated turbine equipment: rotor, nacelle, tower (geometry-screened, not declared zero); Fieldwork and transport support (allocated once after repair scope; no fragility)"
+     },
+     {
+      "text": "14 withheld",
+      "tone": "muted"
+     }
+    ]
    },
    {
-    "id": "worked_out",
-    "name": "How damage is worked out",
-    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "freshwater flood depth above substation grade → a line through points",
     "paragraphs": [
      "Damage is read against freshwater flood depth above substation grade (ft). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: freshwater flood depth above substation grade (ft), 0 to 10 ft; or water-surface and grade elevations (m) on the same vertical datum.",
@@ -1058,7 +1075,37 @@
      "axis_form",
      "audit"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "freshwater flood depth above…, ft",
+      "tone": "key",
+      "title": "freshwater flood depth above substation grade"
+     },
+     {
+      "text": "line through points",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "FEMA published the numeric whole-substation screening function, but current Hazus disables electric-power loss calculations and no claims calibration is documented."
+     }
+    ],
+    "why": [
+     {
+      "label": "Why this shape",
+      "text": "FEMA published the numeric whole-substation screening function, but current Hazus disables electric-power loss calculations and no claims calibration is documented."
+     },
+     {
+      "label": "The form adopted",
+      "text": "Exact source-tabulated piecewise-linear screening response."
+     },
+     {
+      "label": "Why not flood solar component curves",
+      "text": "The solar candidates mix or only partially match component grains and remain engineering proxies; the FEMA source instead supplies one explicit whole-substation economic atom."
+     }
+    ]
    },
    {
     "id": "numbers",
@@ -1071,7 +1118,32 @@
     "holds": [
      "evidence"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "borrowed",
+      "tone": "key",
+      "title": "How damage rises: borrowed · how it becomes dollars: borrowed"
+     },
+     {
+      "text": "FEMA, Hazus-MH Flood Model…",
+      "tone": "key",
+      "title": "FEMA, Hazus-MH Flood Model Technical Manual 2.1, Table 7.9"
+     },
+     {
+      "text": "FEMA, Hazus 7.0 Flood…",
+      "tone": "key",
+      "title": "FEMA, Hazus 7.0 Flood Technical Manual (2025), electric-power status"
+     },
+     {
+      "text": "+3 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "17 sources, 17 linked",
+      "tone": "muted"
+     }
+    ]
    },
    {
     "id": "checked",
@@ -1085,7 +1157,21 @@
     "holds": [
      "field_review"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "no outside check yet",
+      "tone": "muted"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
    }
   ],
   "for_hazard": [
@@ -1623,7 +1709,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "link_kind": "repo_file",
     "title": "Canonical Damage Modeling flood_solar artifact, flood_solar@model_v1_0__docs_r4.",
     "no_link_sentence": null
@@ -1746,7 +1832,7 @@
     "provenance": "register",
     "repo_path": "docs/method/standards/00_index.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/method/standards/00_index.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/method/standards/00_index.md",
     "link_kind": "repo_file",
     "title": "Damage Modeling method, contracts, and damage-curve skill governance.",
     "kind": "marker",
@@ -1766,7 +1852,7 @@
     "provenance": "register",
     "repo_path": "docs/method/shared_components/flood_electrical/README.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/method/shared_components/flood_electrical/README.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/method/shared_components/flood_electrical/README.md",
     "link_kind": "repo_file",
     "title": "Flood-electrical non-runtime shared component substrate v0.1.",
     "no_link_sentence": null
@@ -1785,7 +1871,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
     "link_kind": "repo_file",
     "title": "Bounded evidence search log for flood_wind model v0.1/docs r1.",
     "no_link_sentence": null

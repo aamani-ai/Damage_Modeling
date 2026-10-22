@@ -941,6 +941,7 @@
   "main_logic": [
    "Hail is measured as hail diameter, MESH equivalent, in mm.",
    "Logistic curves per module type fitted to public PVEL/Kiwa hail-test breakage anchors and the IEC baseline; glass-breakage probability used as the module replacement ratio.",
+   "Why this shape: logistic form is a bounded monotone threshold-like model appropriate to sparse breakage probability anchors.",
    "The damage ratio is a share of the replacement value of the PV modules."
   ],
   "steps": [
@@ -959,12 +960,28 @@
      "units",
      "value"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "PV modules (glass and cells)",
+      "tone": "key",
+      "title": "PV modules (glass and cells)"
+     },
+     {
+      "text": "3 module types",
+      "tone": "key"
+     },
+     {
+      "text": "4 without a curve yet",
+      "tone": "muted",
+      "title": "Racking structure (secondary, open; no curve); Tracker steel (used only as a stow conditioner; direct damage has no curve); SCADA and met instruments (optional secondary; no curve); Inverters, substation, foundations, civil works and drainage (treated as no direct hail damage by coverage decision; no curve)"
+     }
+    ]
    },
    {
-    "id": "worked_out",
-    "name": "How damage is worked out",
-    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "hail diameter → an S-curve",
     "paragraphs": [
      "Damage is read against hail diameter, MESH equivalent (mm). The curve is an S-shaped curve: little damage, then a steep rise, then a plateau (logistic). The input, in the catalogue's words: MESH-equivalent maximum hail diameter (mm; inches are converted), 0 to 100 mm (clamp or warn).",
@@ -974,7 +991,37 @@
      "axis_form",
      "audit"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "hail diameter, mm",
+      "tone": "key",
+      "title": "hail diameter"
+     },
+     {
+      "text": "S-curve",
+      "tone": "key"
+     },
+     {
+      "text": "3 curves",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Logistic form is a bounded monotone threshold-like model appropriate to sparse breakage probability anchors."
+     }
+    ],
+    "why": [
+     {
+      "label": "Why this shape",
+      "text": "Logistic form is a bounded monotone threshold-like model appropriate to sparse breakage probability anchors."
+     },
+     {
+      "label": "How the shape was set",
+      "text": "Fit from public aggregate lab breakage anchors for thin glass/glass modules."
+     }
+    ]
    },
    {
     "id": "numbers",
@@ -987,7 +1034,32 @@
     "holds": [
      "evidence"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "published",
+      "tone": "key",
+      "title": "How damage rises: published · how it becomes dollars: published"
+     },
+     {
+      "text": "PVEL, 2023 Hail Stress…",
+      "tone": "key",
+      "title": "PVEL, 2023 Hail Stress Sequence results"
+     },
+     {
+      "text": "Kiwa PVEL, Hail Stress…",
+      "tone": "key",
+      "title": "Kiwa PVEL, Hail Stress Sequence scorecard"
+     },
+     {
+      "text": "+3 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "21 sources, 20 linked",
+      "tone": "muted"
+     }
+    ]
    },
    {
     "id": "checked",
@@ -1001,7 +1073,22 @@
     "holds": [
      "field_review"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "Financial range check (Hazard…",
+      "tone": "key",
+      "title": "Financial range check (Hazard repo): industry loss figures for solar hail"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
    }
   ],
   "for_hazard": [
@@ -1424,7 +1511,7 @@
     "source_type": "local_doc",
     "repo_path": "docs/method/foundations/00_assembled_curve_record.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/method/foundations/00_assembled_curve_record.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/method/foundations/00_assembled_curve_record.md",
     "link_kind": "repo_file",
     "no_link_sentence": null
    },
@@ -1451,7 +1538,7 @@
     "source_type": "local_doc",
     "repo_path": "docs/method/foundations/questions/03_valuation_guide.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/method/foundations/questions/03_valuation_guide.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/method/foundations/questions/03_valuation_guide.md",
     "link_kind": "repo_file",
     "no_link_sentence": null
    },
@@ -1478,7 +1565,7 @@
     "source_type": "local_doc",
     "repo_path": "docs/source_drops/context/v2_5/substrate_decomposition.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/source_drops/context/v2_5/substrate_decomposition.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/source_drops/context/v2_5/substrate_decomposition.md",
     "link_kind": "repo_file",
     "no_link_sentence": null
    },
@@ -1505,7 +1592,7 @@
     "source_type": "local_xlsx",
     "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "link_kind": "repo_file",
     "no_link_sentence": null
    },
@@ -1610,7 +1697,7 @@
     "source_type": "local_xlsx",
     "repo_path": "docs/cells/hail_solar/archive/v1_1_site_adaptation/damage_curve_records_v1_1_hail_solar_site_adaptation.xlsx",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/cells/hail_solar/archive/v1_1_site_adaptation/damage_curve_records_v1_1_hail_solar_site_adaptation.xlsx",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/cells/hail_solar/archive/v1_1_site_adaptation/damage_curve_records_v1_1_hail_solar_site_adaptation.xlsx",
     "link_kind": "repo_file",
     "no_link_sentence": null
    },

@@ -1137,6 +1137,7 @@
   "main_logic": [
    "Wildfire is measured as FSim fire-intensity class at the unit, exact state.",
    "Solar wildfire electrical class tables reused as judgment-based ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities).",
+   "Why this shape: electronics response is the simple reference for enclosed electronic/cooling/battery hardware; heavy electrical is a contrasting lower-response shape. Both are new judgment-based target transfers, not physical or probabilistic conversion of the donor DR.",
    "The damage ratio is a share of the hardware value of the same physical unit, fixed 2024 dollars: $1.05M per integrated enclosure (80), $520,000 per PCS (20)."
   ],
   "steps": [
@@ -1155,12 +1156,41 @@
      "units",
      "value"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "Integrated battery enclosure",
+      "tone": "key",
+      "title": "Integrated battery enclosure"
+     },
+     {
+      "text": "Separate PCS",
+      "tone": "key",
+      "title": "Separate PCS"
+     },
+     {
+      "text": "3 consequences",
+      "tone": "key"
+     },
+     {
+      "text": "86 % of the value",
+      "tone": "key"
+     },
+     {
+      "text": "3 without a curve yet",
+      "tone": "muted",
+      "title": "Unit MV and shared electrical; Civil works; Fieldwork"
+     },
+     {
+      "text": "3 withheld",
+      "tone": "muted"
+     }
+    ]
    },
    {
-    "id": "worked_out",
-    "name": "How damage is worked out",
-    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "FSim fire-intensity class at the unit → exact classes",
     "paragraphs": [
      "Damage is read against FSim fire-intensity class at the unit, exact state. The curve is a table of damage ratios at exact classes, nothing in between. The input, in the catalogue's words: FSim fire intensity class at the unit, exact integer 1 to 6 (0 = no event); no interpolation, heat-flux conversion or burn probability in the Damage call.",
@@ -1170,7 +1200,39 @@
      "axis_form",
      "audit"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "FSim fire-intensity class at…",
+      "tone": "key",
+      "title": "FSim fire-intensity class at the unit"
+     },
+     {
+      "text": "exact classes",
+      "tone": "key"
+     },
+     {
+      "text": "7 curves",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Electronics response is the simple reference for enclosed electronic/cooling/battery hardware; heavy electrical is a contrasting lower-response shape. Both are new judgment-based target transfers, not physical or probabilistic conversion of the donor DR."
+     }
+    ],
+    "why": [
+     {
+      "label": "Why this shape",
+      "text": "Electronics response is the simple reference for enclosed electronic/cooling/battery hardware; heavy electrical is a contrasting lower-response shape. Both are new judgment-based target transfers, not physical or probabilistic conversion of the donor DR."
+     },
+     {
+      "label": "From Wildfire × Solar farm, which it builds on",
+      "text": "Evidence constrains mechanism, selector sensitivity, and inspection endpoint; absolute class DR is engineering judgment.",
+      "source": "Wildfire × Solar farm",
+      "source_label": "Why this shape"
+     }
+    ]
    },
    {
     "id": "numbers",
@@ -1183,7 +1245,32 @@
     "holds": [
      "evidence"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "our judgment",
+      "tone": "key",
+      "title": "How damage rises: our judgment · how it becomes dollars: our judgment"
+     },
+     {
+      "text": "Selected BESS r1 profile and…",
+      "tone": "key",
+      "title": "Selected BESS r1 profile and fixed-2024 budget"
+     },
+     {
+      "text": "USFS, A Wildfire Risk…",
+      "tone": "key",
+      "title": "USFS, A Wildfire Risk Assessment Framework, RMRS-GTR-315 (2013), FSim classes"
+     },
+     {
+      "text": "+3 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "12 sources, 11 linked",
+      "tone": "muted"
+     }
+    ]
    },
    {
     "id": "checked",
@@ -1197,7 +1284,21 @@
     "holds": [
      "field_review"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "no outside check yet",
+      "tone": "muted"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
    }
   ],
   "for_hazard": [
@@ -1435,7 +1536,7 @@
      "BWF-S01"
     ],
     "title": "Selected BESS r1 profile and fixed-2024 budget",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/plans/flood_wind_shared_electrical/asset_model.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/plans/flood_wind_shared_electrical/asset_model.json",
     "link_kind": "repo_file",
     "locator": "asset_model.json; layout.csv; reference_budget.csv",
     "no_link_sentence": null,
@@ -1459,7 +1560,7 @@
      "BWF-S03"
     ],
     "title": "Canonical wildfire_solar model v1.0 docs r3",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/cells/wildfire_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/cells/wildfire_solar/current",
     "link_kind": "repo_file",
     "locator": "curve_artifact; ORDINATE_TABLE; dossier sections3-5; exact index pin",
     "no_link_sentence": null,
@@ -1511,7 +1612,7 @@
     },
     "repo_path": "docs/plans/flood_wind_shared_electrical/asset_model.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/plans/flood_wind_shared_electrical/asset_model.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/plans/flood_wind_shared_electrical/asset_model.json",
     "link_kind": "repo_file",
     "title": "Selected BESS r1 profile and fixed-2024 budget",
     "no_link_sentence": null
@@ -1548,7 +1649,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/wildfire_solar/current",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/cells/wildfire_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/cells/wildfire_solar/current",
     "link_kind": "repo_file",
     "title": "Canonical wildfire_solar model v1.0 docs r3",
     "no_link_sentence": null
@@ -1657,7 +1758,7 @@
     "provenance": "register",
     "repo_path": "docs/extra/discussion/bess_damage/evidence/r3",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/extra/discussion/bess_damage/evidence/r3",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/extra/discussion/bess_damage/evidence/r3",
     "link_kind": "repo_file",
     "title": "NREL-related same-budget battery hardware allocation from prior BESS review",
     "no_link_sentence": null
@@ -1718,7 +1819,7 @@
     "provenance": "register",
     "repo_path": "docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
     "link_kind": "repo_file",
     "title": "Owner BWF-Q01 ruling2026-10-19",
     "no_link_sentence": null
@@ -2106,7 +2207,7 @@
      {
       "id": "BWF-S03",
       "title": "Canonical wildfire_solar model v1.0 docs r3",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/cells/wildfire_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/cells/wildfire_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      },
@@ -2142,21 +2243,21 @@
      {
       "id": "BWF-S01",
       "title": "Selected BESS r1 profile and fixed-2024 budget",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/plans/flood_wind_shared_electrical/asset_model.json",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/plans/flood_wind_shared_electrical/asset_model.json",
       "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "BWF-S09",
       "title": "NREL-related same-budget battery hardware allocation from prior BESS review",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/extra/discussion/bess_damage/evidence/r3",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/extra/discussion/bess_damage/evidence/r3",
       "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "BWF-S12",
       "title": "Owner BWF-Q01 ruling2026-10-19",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2178,14 +2279,14 @@
      {
       "id": "BWF-S01",
       "title": "Selected BESS r1 profile and fixed-2024 budget",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/plans/flood_wind_shared_electrical/asset_model.json",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/plans/flood_wind_shared_electrical/asset_model.json",
       "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "BWF-S03",
       "title": "Canonical wildfire_solar model v1.0 docs r3",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/cells/wildfire_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/cells/wildfire_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2207,7 +2308,7 @@
      {
       "id": "BWF-S01",
       "title": "Selected BESS r1 profile and fixed-2024 budget",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/plans/flood_wind_shared_electrical/asset_model.json",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/plans/flood_wind_shared_electrical/asset_model.json",
       "link_kind": "repo_file",
       "resolved": true
      },

@@ -1154,6 +1154,7 @@
   "main_logic": [
    "Hurricane wind is measured as peak 3-second gust at 10 m in open terrain, in mph.",
    "FEMA Hazus hurricane building-loss rows used as published (every 5 mph, five terrain classes) for the Hazus building type and wind characteristics matching each building; the 32 Hazus curves used are identical in FEMA's 6.1 extract and SimCenter's independent 5.1 copy.",
+   "Why this shape: dense published table; no smoothing needed.",
    "The damage ratio is a share of the structure replacement cost new of the same building."
   ],
   "steps": [
@@ -1172,12 +1173,38 @@
      "units",
      "value"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "House",
+      "tone": "key",
+      "title": "House"
+     },
+     {
+      "text": "Warehouse",
+      "tone": "key",
+      "title": "Warehouse"
+     },
+     {
+      "text": "Office",
+      "tone": "key",
+      "title": "Office"
+     },
+     {
+      "text": "+1 more",
+      "tone": "muted",
+      "title": "Retail"
+     },
+     {
+      "text": "1 withheld",
+      "tone": "muted"
+     }
+    ]
    },
    {
-    "id": "worked_out",
-    "name": "How damage is worked out",
-    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "peak 3-second gust at 10 m in open terrain → a line through points",
     "paragraphs": [
      "Damage is read against peak 3-second gust at 10 m in open terrain (mph). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: peak 3-second gust at 10 m in open terrain (mph), 50 to 250 mph; the building's terrain class picks the curve.",
@@ -1187,7 +1214,41 @@
      "axis_form",
      "audit"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "peak 3-second gust at 10 m in…, mph",
+      "tone": "key",
+      "title": "peak 3-second gust at 10 m in open terrain"
+     },
+     {
+      "text": "line through points",
+      "tone": "key"
+     },
+     {
+      "text": "20 curves",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Dense published table; no smoothing needed."
+     }
+    ],
+    "why": [
+     {
+      "label": "Why this shape",
+      "text": "Dense published table; no smoothing needed."
+     },
+     {
+      "label": "The form adopted",
+      "text": "Exact published 5-mph tables, straight lines between published points."
+     },
+     {
+      "label": "Why not smooth fits",
+      "text": "41 published points per record; nothing to fill and a fit could only move published values."
+     }
+    ]
    },
    {
     "id": "numbers",
@@ -1200,7 +1261,32 @@
     "holds": [
      "evidence"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "published",
+      "tone": "key",
+      "title": "How damage rises: published · how it becomes dollars: published"
+     },
+     {
+      "text": "FEMA, Hazus 7.0 Hurricane…",
+      "tone": "key",
+      "title": "FEMA, Hazus 7.0 Hurricane Model Technical Manual (2025)"
+     },
+     {
+      "text": "FEMA Hazus 6.1 hurricane…",
+      "tone": "key",
+      "title": "FEMA Hazus 6.1 hurricane damage and loss function extract"
+     },
+     {
+      "text": "+2 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "10 sources, 5 linked",
+      "tone": "muted"
+     }
+    ]
    },
    {
     "id": "checked",
@@ -1214,7 +1300,21 @@
     "holds": [
      "field_review"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "no outside check yet",
+      "tone": "muted"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
    }
   ],
   "for_hazard": [

@@ -1102,6 +1102,7 @@
   "main_logic": [
    "Flood is measured as water depth above local grade, in m.",
    "Conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; unit values from market cost shares of the fixed Hazard reference budget.",
+   "Why this shape: owner-approved conservative local-test policy, not a physical fragility.",
    "The damage ratio is a share of the hardware replacement value of the same physical unit, fixed real-2024 dollars: $901,380 active hardware per enclosure (80), $520,000 per PCS (20)."
   ],
   "steps": [
@@ -1120,12 +1121,37 @@
      "units",
      "value"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "Battery enclosure (active…",
+      "tone": "key",
+      "title": "Battery enclosure (active hardware)"
+     },
+     {
+      "text": "Separate PCS",
+      "tone": "key",
+      "title": "Separate PCS"
+     },
+     {
+      "text": "2 waters",
+      "tone": "key"
+     },
+     {
+      "text": "75 % of the value",
+      "tone": "key"
+     },
+     {
+      "text": "4 without a curve yet",
+      "tone": "muted",
+      "title": "Enclosure racks and fire suppression; Electrical balance including unit transformers and cables; Civil works; Unallocated fieldwork"
+     }
+    ]
    },
    {
-    "id": "worked_out",
-    "name": "How damage is worked out",
-    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "water depth above local grade → a step + a line through points",
     "paragraphs": [
      "Damage is read against water depth above local grade (m). The curves take 2 forms: an on/off step: nothing, then full replacement; a line through fixed points (piecewise linear). The input, in the catalogue's words: water depth above local grade (m), finite and 0 or more; water type must be stated as fresh or saline; the PCS freshwater curve reads depth above the assumed 0.30 m entry (0 to 2 m knots, flat at full replacement beyond 0.6 m).",
@@ -1135,7 +1161,43 @@
      "axis_form",
      "audit"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "water depth above local grade, m",
+      "tone": "key",
+      "title": "water depth above local grade"
+     },
+     {
+      "text": "step",
+      "tone": "key"
+     },
+     {
+      "text": "line through points",
+      "tone": "key"
+     },
+     {
+      "text": "3 curves",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Owner-approved conservative local-test policy, not a physical fragility."
+     }
+    ],
+    "why": [
+     {
+      "label": "Why this shape",
+      "text": "Owner-approved conservative local-test policy, not a physical fragility."
+     },
+     {
+      "label": "From Flood × Solar farm, which it builds on",
+      "text": "Flood electrical damage is state/threshold-like by local component datum, so piecewise depth-percent curves are more auditable than logistics.",
+      "source": "Flood × Solar farm",
+      "source_label": "Why this shape"
+     }
+    ]
    },
    {
     "id": "numbers",
@@ -1148,7 +1210,32 @@
     "holds": [
      "evidence"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "our judgment",
+      "tone": "key",
+      "title": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment"
+     },
+     {
+      "text": "Hazard BESS reference r1…",
+      "tone": "key",
+      "title": "Hazard BESS reference r1: profile, layout and 2024 budget"
+     },
+     {
+      "text": "NEMA GD 1-2016, Evaluating…",
+      "tone": "key",
+      "title": "NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment"
+     },
+     {
+      "text": "+3 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "19 sources, 17 linked",
+      "tone": "muted"
+     }
+    ]
    },
    {
     "id": "checked",
@@ -1162,7 +1249,21 @@
     "holds": [
      "field_review"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "no outside check yet",
+      "tone": "muted"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
    }
   ],
   "for_hazard": [
@@ -1395,7 +1496,7 @@
      "BF-S06"
     ],
     "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "link_kind": "repo_file",
     "locator": "flood_solar__model_v1_0__docs_r4__curve_artifact.json; flood_solar_curve_derivation_dossier_v1_0.md",
     "no_link_sentence": null,
@@ -1537,7 +1638,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "link_kind": "repo_file",
     "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
     "no_link_sentence": null
@@ -1556,7 +1657,7 @@
     "provenance": "register",
     "repo_path": "docs/method/shared_components/flood_electrical/binding_rules.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/method/shared_components/flood_electrical/binding_rules.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/method/shared_components/flood_electrical/binding_rules.md",
     "link_kind": "repo_file",
     "title": "Shared electrical Flood substrate and Wind reuse review",
     "no_link_sentence": null
@@ -2371,7 +2472,7 @@
      {
       "id": "BF-S06",
       "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
       "link_kind": "repo_file",
       "resolved": true
      },
@@ -2447,7 +2548,7 @@
      {
       "id": "BF-S06",
       "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
       "link_kind": "repo_file",
       "resolved": true
      }

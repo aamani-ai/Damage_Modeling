@@ -1144,6 +1144,7 @@
   "main_logic": [
    "Flood is measured as water depth above the first floor, in ft.",
    "FEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water); retail keeps Hazus DF 217 for river water and USACE NACCS for coastal surge.",
+   "Why this shape: reproduces every published value; smooth fits predict held-out points worse on all six point curves and move published values by 2-5 points; table-based cells use straight lines; method rule: simplest form the evidence yields.",
    "The damage ratio is a share of the structure replacement cost new of the same building (no land, contents or depreciation)."
   ],
   "steps": [
@@ -1162,12 +1163,42 @@
      "units",
      "value"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "House",
+      "tone": "key",
+      "title": "House"
+     },
+     {
+      "text": "Warehouse",
+      "tone": "key",
+      "title": "Warehouse"
+     },
+     {
+      "text": "Office",
+      "tone": "key",
+      "title": "Office"
+     },
+     {
+      "text": "+1 more",
+      "tone": "muted",
+      "title": "Retail"
+     },
+     {
+      "text": "2 waters",
+      "tone": "key"
+     },
+     {
+      "text": "1 withheld",
+      "tone": "muted"
+     }
+    ]
    },
    {
-    "id": "worked_out",
-    "name": "How damage is worked out",
-    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "water depth above the first floor → a line through points",
     "paragraphs": [
      "Damage is read against water depth above the first floor (ft). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: water depth above the first floor (ft), -4 to 24 ft (retail coastal curve -1 to 10 ft); depth above ground is accepted with the building's floor height.",
@@ -1177,7 +1208,45 @@
      "axis_form",
      "audit"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "water depth above the first…, ft",
+      "tone": "key",
+      "title": "water depth above the first floor"
+     },
+     {
+      "text": "line through points",
+      "tone": "key"
+     },
+     {
+      "text": "7 curves",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Reproduces every published value; smooth fits predict held-out points worse on all six point curves and move published values by 2-5 points; table-based cells use straight lines; method rule: simplest form the evidence yields."
+     }
+    ],
+    "why": [
+     {
+      "label": "Why this shape",
+      "text": "Reproduces every published value; smooth fits predict held-out points worse on all six point curves and move published values by 2-5 points; table-based cells use straight lines; method rule: simplest form the evidence yields."
+     },
+     {
+      "label": "The form adopted",
+      "text": "Exact published tables, straight lines between published points."
+     },
+     {
+      "label": "Why one curve for both waters",
+      "text": "NFIP coastal-surge claims are closer to the Hazus curves than to NACCS for the house and multi-floor business buildings; FEMA assigns DF 341 and DF 431 to coastal zones."
+     },
+     {
+      "label": "Why not smooth fits",
+      "text": "Smooth fits (incl. anchored logistic) predicted held-out points worse on all point curves and moved published values by 2-6 points."
+     }
+    ]
    },
    {
     "id": "numbers",
@@ -1190,7 +1259,32 @@
     "holds": [
      "evidence"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "published",
+      "tone": "key",
+      "title": "How damage rises: published · how it becomes dollars: published"
+     },
+     {
+      "text": "FEMA, Hazus Flood Model…",
+      "tone": "key",
+      "title": "FEMA, Hazus Flood Model Technical Manual 7.0 (2025), Table 5-2"
+     },
+     {
+      "text": "FEMA Hazus 6.1 flood…",
+      "tone": "key",
+      "title": "FEMA Hazus 6.1 flood damage-function extract"
+     },
+     {
+      "text": "+3 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "13 sources, 12 linked",
+      "tone": "muted"
+     }
+    ]
    },
    {
     "id": "checked",
@@ -1204,7 +1298,22 @@
     "holds": [
      "field_review"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "NFIP flood-insurance claims…",
+      "tone": "key",
+      "title": "NFIP flood-insurance claims by depth band (about 105,000 claims)"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
    }
   ],
   "for_hazard": [

@@ -1024,6 +1024,7 @@
   "main_logic": [
    "Convective wind is measured as convective gust 3s 10m open terrain mph, in mph and tornado gust 3s 10m mph, in mph.",
    "EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder; tornado used directly, storm wind as a transfer starting at 96 mph.",
+   "Why this shape: expected cost over ordered degrees of damage; equals the ordered-state form with one beta per degree.",
    "The damage ratio is a share of the structure replacement cost new of the same building."
   ],
   "steps": [
@@ -1042,12 +1043,37 @@
      "units",
      "value"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "House",
+      "tone": "key",
+      "title": "House"
+     },
+     {
+      "text": "Warehouse",
+      "tone": "key",
+      "title": "Warehouse"
+     },
+     {
+      "text": "Office",
+      "tone": "key",
+      "title": "Office"
+     },
+     {
+      "text": "2 pathways",
+      "tone": "key"
+     },
+     {
+      "text": "1 withheld",
+      "tone": "muted"
+     }
+    ]
    },
    {
-    "id": "worked_out",
-    "name": "How damage is worked out",
-    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "2 hazard measures → a line through points",
     "paragraphs": [
      "Damage is read against convective gust 3s 10m open terrain mph (mph) and tornado gust 3s 10m mph (mph). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: 3-second gust at 10 m (mph), 0 to 255 mph; separate fields for storm wind and tornado (tornado: Hazard's EF band midpoint gust).",
@@ -1057,7 +1083,46 @@
      "axis_form",
      "audit"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "convective gust 3s 10m open…, mph",
+      "tone": "key",
+      "title": "convective gust 3s 10m open terrain mph"
+     },
+     {
+      "text": "tornado gust 3s 10m mph, mph",
+      "tone": "key",
+      "title": "tornado gust 3s 10m mph"
+     },
+     {
+      "text": "line through points",
+      "tone": "key"
+     },
+     {
+      "text": "6 curves",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Expected cost over ordered degrees of damage; equals the ordered-state form with one beta per degree."
+     }
+    ],
+    "why": [
+     {
+      "label": "Why this shape",
+      "text": "Expected cost over ordered degrees of damage; equals the ordered-state form with one beta per degree."
+     },
+     {
+      "label": "The form adopted",
+      "text": "Expected cost over ordered degrees of damage, each lognormal in gust (median = expected speed, beta from the bounds read as a 90% range); tabulated every 1 mph; straight-line onset 96 mph."
+     },
+     {
+      "label": "Why not hurricane curves",
+      "text": "Separate evidence per hazard (owner choice); hurricane-curve reuse is the documented alternative."
+     }
+    ]
    },
    {
     "id": "numbers",
@@ -1070,7 +1135,32 @@
     "holds": [
      "evidence"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "our judgment",
+      "tone": "key",
+      "title": "How damage rises: borrowed · how it becomes dollars: our judgment"
+     },
+     {
+      "text": "Texas Tech WSEC, A…",
+      "tone": "key",
+      "title": "Texas Tech WSEC, A Recommendation for an Enhanced Fujita Scale, Rev 2 (2006)"
+     },
+     {
+      "text": "NOAA Storm Prediction Center…",
+      "tone": "key",
+      "title": "NOAA Storm Prediction Center, EF scale damage indicators FR12, MBS, LRB"
+     },
+     {
+      "text": "+2 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "8 sources, 7 linked",
+      "tone": "muted"
+     }
+    ]
    },
    {
     "id": "checked",
@@ -1084,7 +1174,22 @@
     "holds": [
      "field_review"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "FEMA National Risk Index…",
+      "tone": "key",
+      "title": "FEMA National Risk Index: yearly loss on Hazard's grid (storm wind and tornado)"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
    }
   ],
   "for_hazard": [

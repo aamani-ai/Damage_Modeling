@@ -874,6 +874,7 @@
   "main_logic": [
    "Flood is measured as water depth above station grade (ft) at the facility point.",
    "FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage ratios used as published (0 to 15% over 0 to 10 ft), the same table already carried by the flood_wind cell.",
+   "Why this shape: as in Flood × Wind farm, FEMA published the numeric whole-substation screening function, but current Hazus disables electric-power loss calculations and no claims calibration is documented.",
    "The damage ratio is a share of the replacement value of the same fenced station, $27,353,236.37 (MISO MTEP24 published table amounts, no extra uplift), applied once."
   ],
   "steps": [
@@ -892,12 +893,19 @@
      "units",
      "value"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "Whole station (fenced…",
+      "tone": "key",
+      "title": "Whole station (fenced assembly)"
+     }
+    ]
    },
    {
-    "id": "worked_out",
-    "name": "How damage is worked out",
-    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "water depth above station grade → a line through points",
     "paragraphs": [
      "Damage is read against water depth above station grade (ft) at the facility point (ft). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: water depth above station grade (ft) at the facility point, 0 to 10 ft; sub-peril (pluvial, riverine or coastal) must be stated; deeper or missing depth is withheld.",
@@ -907,7 +915,31 @@
      "axis_form",
      "audit"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "water depth above station…, ft",
+      "tone": "key",
+      "title": "water depth above station grade"
+     },
+     {
+      "text": "line through points",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "FEMA published the numeric whole-substation screening function, but current Hazus disables electric-power loss calculations and no claims calibration is documented."
+     }
+    ],
+    "why": [
+     {
+      "label": "From Flood × Wind farm, which it builds on",
+      "text": "FEMA published the numeric whole-substation screening function, but current Hazus disables electric-power loss calculations and no claims calibration is documented.",
+      "source": "Flood × Wind farm",
+      "source_label": "Why this shape"
+     }
+    ]
    },
    {
     "id": "numbers",
@@ -920,7 +952,32 @@
     "holds": [
      "evidence"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "our judgment",
+      "tone": "key",
+      "title": "How damage rises: borrowed · how it becomes dollars: our judgment"
+     },
+     {
+      "text": "FEMA, Hazus-MH 2.1 Flood…",
+      "tone": "key",
+      "title": "FEMA, Hazus-MH 2.1 Flood Technical Manual, Table 7.9"
+     },
+     {
+      "text": "flood_wind source register…",
+      "tone": "key",
+      "title": "flood_wind source register: current Hazus electric-power losses disabled"
+     },
+     {
+      "text": "+2 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "4 sources, 4 linked",
+      "tone": "muted"
+     }
+    ]
    },
    {
     "id": "checked",
@@ -934,7 +991,21 @@
     "holds": [
      "field_review"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "no outside check yet",
+      "tone": "muted"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
    }
   ],
   "for_hazard": [
@@ -1097,7 +1168,7 @@
      "FW-S012"
     ],
     "title": "Hazus7 electric-power losses disabled; inherited pinned evidence",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
     "link_kind": "repo_file",
     "locator": null,
     "no_link_sentence": null,
@@ -1109,7 +1180,7 @@
      "SUB-A01"
     ],
     "title": "Existing canonical point/value selection",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
     "link_kind": "repo_file",
     "locator": null,
     "no_link_sentence": null,
@@ -1121,7 +1192,7 @@
      "SUB-A02"
     ],
     "title": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/cells/flood_substation/current/derivation.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/cells/flood_substation/current/derivation.md",
     "link_kind": "repo_file",
     "locator": null,
     "no_link_sentence": null,
@@ -1161,7 +1232,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
     "link_kind": "repo_file",
     "title": "Hazus7 electric-power losses disabled; inherited pinned evidence",
     "no_link_sentence": null
@@ -1180,7 +1251,7 @@
     "provenance": "register",
     "repo_path": "docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
     "link_kind": "repo_file",
     "title": "Existing canonical point/value selection",
     "no_link_sentence": null
@@ -1199,7 +1270,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/flood_substation/current/derivation.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/cells/flood_substation/current/derivation.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/cells/flood_substation/current/derivation.md",
     "link_kind": "repo_file",
     "title": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
     "no_link_sentence": null
@@ -1369,7 +1440,7 @@
      {
       "id": "SUB-A01",
       "title": "Existing canonical point/value selection",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -1391,7 +1462,7 @@
      {
       "id": "SUB-A02",
       "title": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/cells/flood_substation/current/derivation.md",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/cells/flood_substation/current/derivation.md",
       "link_kind": "repo_file",
       "resolved": true
      }

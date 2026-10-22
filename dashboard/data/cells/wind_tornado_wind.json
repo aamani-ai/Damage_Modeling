@@ -1117,6 +1117,7 @@
   "main_logic": [
    "Convective wind is measured as gust ratio V₃ₛ,hub / Ve50 (IEC class).",
    "Engineering-fit logistic curves on hub gust over the IEC 50-year gust, built from IEC design speeds, the NIST fragility method and EF4 case evidence; tornado is a curve shift.",
+   "Why this shape: bounded logistic on V/Ve50 gives a portable generic structural fragility family while preserving failure-unit grain.",
    "The damage ratio is a share of each part's default share of the physical replaceable base (blade 0.173, tower 0.169, nacelle 0.345, foundation 0.062, power electronics 0.037), times the exposed turbine fraction."
   ],
   "steps": [
@@ -1135,12 +1136,39 @@
      "units",
      "value"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "Blade",
+      "tone": "key",
+      "title": "Blade"
+     },
+     {
+      "text": "Tower",
+      "tone": "key",
+      "title": "Tower"
+     },
+     {
+      "text": "Nacelle",
+      "tone": "key",
+      "title": "Nacelle"
+     },
+     {
+      "text": "+2 more",
+      "tone": "muted",
+      "title": "Foundation, Power electronics"
+     },
+     {
+      "text": "1 without a curve yet",
+      "tone": "muted",
+      "title": "SCADA and controls, electrical collection, substation and civil infrastructure (reviewed secondary units, no curve)"
+     }
+    ]
    },
    {
-    "id": "worked_out",
-    "name": "How damage is worked out",
-    "meaning": "How the hazard is measured, the shape of the curve, and the site adjustments",
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "gust ratio V₃ₛ,hub / Ve50 → an S-curve",
     "paragraphs": [
      "Damage is read against gust ratio V₃ₛ,hub / Ve50 (IEC class). The curve is an S-shaped curve: little damage, then a steep rise, then a plateau (logistic). The input, in the catalogue's words: hub-height 3-second gust (m/s), or 10 m gust with a height bridge, divided by the IEC class 50-year gust (Ve50 = 1.4 x Vref); tornado via an EF-scale gust proxy; no fixed range (extrapolation warns).",
@@ -1150,7 +1178,33 @@
      "axis_form",
      "audit"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "gust ratio V₃ₛ,hub / Ve50",
+      "tone": "key",
+      "title": "gust ratio V₃ₛ,hub / Ve50"
+     },
+     {
+      "text": "S-curve",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Bounded logistic on V/Ve50 gives a portable generic structural fragility family while preserving failure-unit grain."
+     }
+    ],
+    "why": [
+     {
+      "label": "Why this shape",
+      "text": "Bounded logistic on V/Ve50 gives a portable generic structural fragility family while preserving failure-unit grain."
+     },
+     {
+      "label": "How the shape was set",
+      "text": "Engineering-fit normalized fragility transition; public sources support form/mechanism, not exact ratio."
+     }
+    ]
    },
    {
     "id": "numbers",
@@ -1163,7 +1217,32 @@
     "holds": [
      "evidence"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "our judgment",
+      "tone": "key",
+      "title": "How damage rises: our judgment · how it becomes dollars: borrowed and our judgment"
+     },
+     {
+      "text": "IEC 61400-1 design classes…",
+      "tone": "key",
+      "title": "IEC 61400-1 design classes and Ve50 = 1.4 x Vref"
+     },
+     {
+      "text": "NIST, Fragility curves…",
+      "tone": "key",
+      "title": "NIST, Fragility curves, damage matrices and wind-induced loss estimation"
+     },
+     {
+      "text": "+3 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "8 sources, 8 linked",
+      "tone": "muted"
+     }
+    ]
    },
    {
     "id": "checked",
@@ -1177,7 +1256,22 @@
     "holds": [
      "field_review"
     ],
-    "written": true
+    "written": true,
+    "chips": [
+     {
+      "text": "Financial range check (Hazard…",
+      "tone": "key",
+      "title": "Financial range check (Hazard repo): value-envelope ceiling for wind-farm convective wind (shared lineage; no open industry loss figures found)"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
    }
   ],
   "for_hazard": [
@@ -1587,7 +1681,7 @@
     ],
     "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "link_kind": "repo_file",
     "no_link_sentence": null
    }
@@ -2210,7 +2304,7 @@
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2319,7 +2413,7 @@
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2428,7 +2522,7 @@
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2537,7 +2631,7 @@
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2646,7 +2740,7 @@
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/8b9c7c5af04269c96f59e2dff478ea42fa1b11d4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/5db1b4bb343ab7435121aba9ade33d79c5a54693/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
