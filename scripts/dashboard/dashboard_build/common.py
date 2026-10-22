@@ -4,18 +4,30 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
 from pathlib import Path
 from typing import Any
 
-ROOT = Path(__file__).resolve().parents[3]
+# The checkout this code runs in: git runs here and dashboard/data is written here.
+CHECKOUT = Path(__file__).resolve().parents[3]
+# Where the content is read from (G18, DCD-D30). scripts/dashboard/build_dashboard_data.py sets
+# DASHBOARD_SOURCE_ROOT to an export of origin/main for a main build; unset, the content is this checkout's
+# working tree, which the CLI only allows as a labelled preview.
+ROOT = Path(os.environ["DASHBOARD_SOURCE_ROOT"]).resolve() if os.environ.get("DASHBOARD_SOURCE_ROOT") else CHECKOUT
+SOURCE = {
+    "mode": os.environ.get("DASHBOARD_SOURCE_MODE", "preview"),
+    "ref": os.environ.get("DASHBOARD_SOURCE_REF") or "",
+    "commit_full": os.environ.get("DASHBOARD_SOURCE_COMMIT") or "",
+    "dirty": os.environ.get("DASHBOARD_SOURCE_DIRTY") == "1",
+}
 HELPERS = ROOT / "scripts" / "reference_helpers"
 CATALOGUE_DIR = ROOT / "docs" / "cells" / "catalogue"
 INDEX = ROOT / "docs" / "contracts" / "machine_readable_artifact_index.json"
 OCCURRENCE = ROOT / "docs" / "evidence" / "occurrence"
-OUT = ROOT / "dashboard" / "data"
+OUT = CHECKOUT / "dashboard" / "data"
 
 if str(HELPERS) not in sys.path:
     sys.path.insert(0, str(HELPERS))
@@ -47,7 +59,7 @@ def rel(path: Path | str) -> str:
 
 
 def git(*args: str) -> str:
-    return subprocess.run(["git", "-C", str(ROOT), *args], capture_output=True, text=True, check=True).stdout.strip()
+    return subprocess.run(["git", "-C", str(CHECKOUT), *args], capture_output=True, text=True, check=True).stdout.strip()
 
 
 def tier_code(label: str | None) -> str | None:
@@ -102,7 +114,7 @@ SENTENCES = {
     "found": {"mark": "✓", "page": "Field reports found: {n} direct report(s)."},
     "no_curve": {"mark": "✕", "page": "No curve — {part}, {value} of the reference value, has no damage response yet."},
     "left_out": {"mark": "–", "page": "Left out on purpose: {reason}, {decision}."},
-    "no_evaluator": {"mark": "—", "page": "Not drawn — no reference evaluator for this form in this repository (G9)."},
+    "no_evaluator": {"mark": "—", "page": "Not drawn — no reference evaluator for this form in this repository."},
     "withheld": {"mark": "", "page": "Withheld: {condition}."},
     "unavailable": {"mark": "—", "page": "—"},
     "lineage_prose": {"mark": "", "page": "Lineage not machine-readable in this cell — see the dossier."},

@@ -14,17 +14,9 @@ TWIN_CROSSWALK_COPY = OUT / "twin_crosswalk.csv"  # the copy this build commits 
 
 
 def hazard_repo() -> Path | None:
-    """Where Hazard_modeling is on this machine, without a machine-specific path in the code: $HAZARD_MODELING,
-    then the gitignored repo-root symlink, then a sibling of the main checkout (a worktree resolves it through
-    git's common directory). None when no candidate holds the crosswalk."""
-    candidates = [Path(os.environ["HAZARD_MODELING"])] if os.environ.get("HAZARD_MODELING") else []
-    candidates.append(ROOT / "Hazard_modeling")
-    try:
-        common = subprocess.run(["git", "rev-parse", "--git-common-dir"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
-        candidates.append((ROOT / common).resolve().parent.parent / "Hazard_modeling")
-    except (OSError, subprocess.CalledProcessError):
-        pass
-    return next((c for c in candidates if (c / TWIN_CROSSWALK_REL).exists()), None)
+    """Kept for callers; the Hazard checkout is read only through its origin/main (hazard_main, G18)."""
+    from . import hazard_main
+    return hazard_main.repo()
 
 
 def slugs() -> dict[str, Any]:
@@ -83,21 +75,28 @@ def resolve_state(bucket: dict[str, Any], surfaces: list[dict[str, Any]], last_s
 
 
 def twin_crosswalk_pin(expected_sha: str | None) -> dict[str, Any]:
-    """Copy Hazard's twin crosswalk beside the data with its SHA; the build checks it against the value binding's pin.
-    Without Hazard_modeling on the machine, the committed copy is checked against the same pin instead, and the
-    receipt says so: the content is then proven to be the pinned crosswalk, but drift in Hazard cannot be seen."""
-    repo = hazard_repo()
-    if repo is not None:
-        path, source = repo / TWIN_CROSSWALK_REL, f"Hazard_modeling/{TWIN_CROSSWALK_REL}"
+    """Hazard's battery twin crosswalk as it is on Hazard's origin/main (G18), checked against the value binding's pin.
+
+    When it is not on Hazard's main — today it lives on Hazard's codex/bess-conus branch — the copy this build commits
+    beside the data is checked against the same pin instead, and the receipt says so: the content is proven to be the
+    pinned crosswalk, and the pages say the original is on a Hazard branch, not on its main yet."""
+    import hashlib
+    from . import hazard_main
+    raw = hazard_main.read(TWIN_CROSSWALK_REL)
+    if raw is not None:
+        text, source, where = raw.decode("utf-8"), f"Hazard_modeling/{TWIN_CROSSWALK_REL} at origin/main", "hazard_main"
     elif TWIN_CROSSWALK_COPY.exists():
-        path, source = TWIN_CROSSWALK_COPY, "dashboard/data/twin_crosswalk.csv (Hazard_modeling not found on this machine; set HAZARD_MODELING to read the original)"
+        why = "not on Hazard's main yet" if hazard_main.repo() is not None else "Hazard_modeling not found on this machine"
+        text, source, where = TWIN_CROSSWALK_COPY.read_text(encoding="utf-8"), f"dashboard/data/twin_crosswalk.csv, the committed copy ({why})", "committed_copy"
     else:
         return {"available": False, "path": TWIN_CROSSWALK_REL, "sha256": None, "expected_sha256": expected_sha, "ok": None, "rows": None}
-    actual = sha256(path)
-    rows = read_csv(path)
-    return {"available": True, "source": source, "sha256": actual,
+    actual = hashlib.sha256(text.encode("utf-8")).hexdigest()
+    import csv
+    import io
+    rows = [{(k or "").strip(): (v or "").strip() for k, v in r.items()} for r in csv.DictReader(io.StringIO(text))]
+    return {"available": True, "source": source, "read_from": where, "hazard": hazard_main.lookup(TWIN_CROSSWALK_REL), "sha256": actual,
             "expected_sha256": expected_sha, "ok": (actual == expected_sha) if expected_sha else None, "rows": len(rows),
-            "text": path.read_text(encoding="utf-8"), "crosswalk": rows}
+            "text": text, "crosswalk": rows}
 
 
 def bess_bucket_values(value_binding: dict[str, Any]) -> dict[str, float]:

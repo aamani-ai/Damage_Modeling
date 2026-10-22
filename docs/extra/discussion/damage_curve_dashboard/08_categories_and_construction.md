@@ -8,10 +8,11 @@ scope: The owner's review of the running iteration 2 (2026-10-21) turned into de
 
 # 08 — Categories first, then how the pages are built on them
 
-**Iteration 1, 2026-10-21, for the owner to read.** Written from Divy's review of the running iteration 2
-([PR #7](https://github.com/aamani-ai/Damage_Modeling/pull/7), open, not merged). Nothing in the dashboard has
-changed since that review. Every gate below is open except the build date (G19). Once ruled, the gates become
-`DCD-D20…` rows in the [plan](../../../plans/damage_curve_dashboard/README.md) and the next build.
+**Iteration 2, 2026-10-21 — ruled.** Written from Divy's review of the running iteration 2
+([PR #7](https://github.com/aamani-ai/Damage_Modeling/pull/7), since moved to
+[PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8) on the `dashboard` branch). G13 was ruled first; G14–G18
+were taken as recommended the same day and built as iteration 3; of G19 only the build date is ruled. The rulings
+are `DCD-D20` and `DCD-D26`–`DCD-D31` in the [plan](../../../plans/damage_curve_dashboard/decisions.md).
 
 **Starting problem:** the dashboard is arranged the way it was built, not the way a reader looks. The top bar
 puts five asset names, in no order of kind, beside two pages about the dashboard's own development. A cell
@@ -245,7 +246,7 @@ not for the dashboard.
 (`P17`). The library gets three group headings and three real-estate rows. Power plants come first: they hold
 15 of the 25 entries and 12 of the 13 live cells.
 
-**Ruling:** ______
+**Ruling:** (a), 2026-10-21, taken as recommended — *Divy, 2026-10-21: "Take G14–G18 as recommended and build iteration 3 here on the dashboard branch: the category nav, the twin 3D coverage picture, the crosswalk drafts and the FAQ."* `DCD-D26`.
 
 ### G15 · What does a cell page show first?
 
@@ -300,7 +301,7 @@ from the axis, the curve form, the spine sources and the value basis, which ever
 strip draws four boxes, the side panel groups the old steps, and the marks leave the default view. The two
 counts of uncovered parts become one.
 
-**Ruling:** ______
+**Ruling:** (a), 2026-10-21, taken as recommended. `DCD-D27`.
 
 ### G16 · How is evidence strength said?
 
@@ -353,7 +354,7 @@ readers must match the screen to the catalogue's codes in a meeting, then (b).
 *borrowed*. *How sure* becomes two sentences without codes, and tiles print one word. The twin's depth tiers are
 never shown here, so the clash leaves the reader's view.
 
-**Ruling:** ______
+**Ruling:** (a), 2026-10-21, taken as recommended. `DCD-D28`.
 
 ### G17 · What does "review" mean on the dashboard?
 
@@ -386,7 +387,7 @@ line in the footer, not a tab.
 **If chosen.** The walkthrough page is deleted and the tab is renamed *Review*. The page groups by cell: read
 by, on, field search, open items. The KPI tile links to it.
 
-**Ruling:** ______
+**Ruling:** (a), 2026-10-21, taken as recommended. `DCD-D29`.
 
 ### G18 · What is the dashboard built from?
 
@@ -433,7 +434,7 @@ for the dashboard.
 names the `main` commit of each. The link resolver checks every Hazard path on Hazard's `main`. The committed
 data is rebuilt on `main` once PR #7 merges. When hosting comes (`H1`), the deploy builds from `main` the same way.
 
-**Ruling:** ______
+**Ruling:** (a), 2026-10-21, taken as recommended. `DCD-D30`. One adaptation while the slice is on its branch: the crosswalks and the FAQ exist only on `dashboard` until it merges, so the branch carries labelled preview data, and `main`'s data is rebuilt from `main` at the merge.
 
 ### G19 · The build date, and what goes with it — **date RULED**
 
@@ -477,12 +478,14 @@ screenshots reaching clients, keep it, small, in the footer.
 | ID | Decision | Recommendation | Ruling |
 |---|---|---|---|
 | G13 | How the assets are grouped | (a) the twin's three categories | **(a), 2026-10-21** — *"Power plants and real estate are something parallel, just like grid infrastructure, just like a data center in the future"*; `DCD-D20`; detail in [`09`](09_asset_spine_coverage_and_faq.md) §1 |
-| G14 | The top bar and the library | (a) categories with their types; real estate one row per type | |
-| G15 | What a cell page shows first | (a) curve, main logic and references first; four steps; a *For Hazard* footer; no marks | |
-| G16 | How evidence strength is said | (a) sources in words; one word per tile; codes behind a control | |
-| G17 | What "review" means | (a) one Review page about curves; the walkthrough leaves the app | |
-| G18 | What the dashboard is built from | (a) `origin/main` of both repositories | |
-| G19 | The build date and what goes with it | date removed; the rest (a) | date: **removed** (2026-10-21) · the rest: |
+| G14 | The top bar and the library | (a) categories with their types; real estate one row per type | **(a), 2026-10-21**, as recommended; `DCD-D26` |
+| G15 | What a cell page shows first | (a) curve, main logic and references first; four steps; a *For Hazard* footer; no marks | **(a), 2026-10-21**, as recommended; `DCD-D27` |
+| G16 | How evidence strength is said | (a) sources in words; one word per tile; codes behind a control | **(a), 2026-10-21**, as recommended; `DCD-D28` |
+| G17 | What "review" means | (a) one Review page about curves; the walkthrough leaves the app | **(a), 2026-10-21**, as recommended; `DCD-D29` |
+| G18 | What the dashboard is built from | (a) `origin/main` of both repositories | **(a), 2026-10-21**, as recommended; `DCD-D30` (the branch carries preview data until it merges) |
+| G19 | The build date and what goes with it | date removed; the rest (a) | date: **removed** (2026-10-21), `DCD-D31` · the rest: open |
 
-**After the rulings.** They become `DCD-D20…` in the plan. The changes land on the `dashboard` branch (PR #7's branch, renamed 2026-10-21), so Divy reviews
-one running dashboard and merges once (`DCD-D10`), with the look review run again from a clean build.
+**After the rulings.** They are `DCD-D20` and `DCD-D26`–`DCD-D31` in the plan. Iteration 3 builds them on the
+`dashboard` branch ([PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8)), so Divy reviews one running
+dashboard and merges once (`DCD-D10`). Still open: the rest of G19 (the *internal* chip, the build-check chips under
+the library title, an *About this data* link).

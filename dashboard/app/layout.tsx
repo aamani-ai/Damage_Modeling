@@ -13,11 +13,12 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 
 export const metadata: Metadata = {
   title: "Damage curves",
-  description: "InfraSure damage-curve library — every curve cell, part and curve with its derivation chain, evidence tiers, field-report state and review state",
+  description: "InfraSure damage-curve library — every curve cell by asset category and hazard, what each curve covers on the Digital Twin's reference model, where its numbers come from and who has read it",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const m = manifest();
+  const preview = m.source.mode !== "main";
   return (
     <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="min-h-screen antialiased">
@@ -29,18 +30,23 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                   Damage curves
                 </Link>
               </h1>
-              <Nav assets={m.assets} />
+              <Nav categories={m.spine.categories} />
               <div className="ml-auto flex items-center gap-2">
-                <a href={`${m.repo.url}/tree/${m.commit_full}`} target="_blank" rel="noreferrer" title="The repository at the build commit" className="rounded border border-border px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground hover:text-foreground">
+                <Link href="/faq" className="rounded px-1.5 py-0.5 text-[11px] font-medium text-muted-foreground hover:text-foreground" title="What the words and colours mean, and how a curve is made">
+                  FAQ
+                </Link>
+                <a href={`${m.repo.url}/tree/${m.commit_full}`} target="_blank" rel="noreferrer" title="The repository at the commit this dashboard was built from" className="rounded border border-border px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground hover:text-foreground">
                   GitHub ↗
                 </a>
-                <span className="rounded-sm bg-muted px-1.5 py-0.5 text-[9.5px] text-muted-foreground/90" title={`built ${m.built_at} at commit ${m.commit_full}; the commit is in every page's footer`}>
-                  built {m.built_at.slice(0, 10)}
-                </span>
                 <span className="rounded-sm bg-muted px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-muted-foreground/80">internal</span>
                 <ThemeToggle />
               </div>
             </div>
+            {preview ? (
+              <div className="border-t border-warn/30 bg-warn-bg/60 px-4 py-1 text-center text-[11px] text-warn" role="note">
+                Preview of branch <span className="font-mono">{m.source.ref}</span> at <span className="font-mono">{m.source.commit}</span>{m.source.dirty ? ", with uncommitted changes" : ""} — not main. The dashboard shows main once this branch merges.
+              </div>
+            ) : null}
           </header>
           <main id="main" tabIndex={-1} className="mx-auto max-w-[1440px] px-4 py-3 outline-none">{children}</main>
           <RouteFocus />

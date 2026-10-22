@@ -170,7 +170,7 @@ function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette,
         labelLayout: { moveOverlap: "shiftY" },
         markPoint: s.continuation && mid ? {
           silent: true, symbol: "circle", symbolSize: 0,
-          label: { show: true, position: "top", distance: 4, formatter: "beyond the data: our judgment · T4", color: p.muted, fontSize: 10, fontFamily: MONO },
+          label: { show: true, position: "top", distance: 4, formatter: "beyond the data: our judgment", color: p.muted, fontSize: 10, fontFamily: MONO },
           data: [{ name: "beyond the data: our judgment", coord: [(pts[0][0] + pts[pts.length - 1][0]) / 2, pts[0][1]] }],
         } : undefined,
         emphasis: { focus: "series", lineStyle: { width: 2.5 } },
@@ -193,7 +193,7 @@ function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette,
       zones.push({ from: z.from, to: z.to, label: /flag/i.test(z.reason) ? "flagged zero" : "withheld", low: high });
     }
     const entry = (c.axis.bridge as { assumed_entry_m?: number } | undefined)?.assumed_entry_m;
-    if (typeof entry === "number" && !refLines.some((r) => r.x === entry)) refLines.push({ x: entry, label: `water enters here · ${entry.toFixed(2)} m (our judgment · T4)` });
+    if (typeof entry === "number" && !refLines.some((r) => r.x === entry)) refLines.push({ x: entry, label: `water enters here · ${entry.toFixed(2)} m (our judgment)` });
     if (c.envelope && !hidden.has(c.envelope.label)) {
       const lo = c.envelope.lower, up = c.envelope.upper;
       series.push({ name: "_envelope_base", type: "line", data: lo, stack: `env-${c.curve_id}`, lineStyle: { opacity: 0 }, showSymbol: false, silent: true, tooltip: { show: false }, z: 1 });
@@ -303,9 +303,21 @@ export function CurvePlot({ curves, axis, logX = false, height = 340, ariaLabel,
   const box = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
   useEffect(() => {
-    // read the tokens one frame after the theme class flips, so the plot never paints the other theme's ink
-    const id = requestAnimationFrame(() => setPalette(readPalette()));
-    return () => cancelAnimationFrame(id);
+    // read the tokens one frame after the theme class flips, so the plot never paints the other theme's ink; a timer
+    // backs the frame up, because a page in a background tab or a hidden pane may not produce frames at all
+    let done = false;
+    const apply = () => {
+      if (done) return;
+      done = true;
+      setPalette(readPalette());
+    };
+    const id = requestAnimationFrame(apply);
+    const t = setTimeout(apply, 120);
+    return () => {
+      done = true;
+      cancelAnimationFrame(id);
+      clearTimeout(t);
+    };
   }, [resolvedTheme]);
   useEffect(() => {
     // a dodged class axis spaces its marks by the width of one class, so it follows the plot's width

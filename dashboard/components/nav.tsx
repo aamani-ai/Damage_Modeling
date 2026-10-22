@@ -1,35 +1,66 @@
 "use client";
 
-// Library and the assets, from the manifest — no asset is named in UI code (P17).
+// The top bar (G14, DCD-D26): Library · one menu per category with its types · Review. Categories and types come from
+// the manifest's spine (the Digital Twin's taxonomy, DCD-D20), so no asset is named in UI code (P17).
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { Slug } from "@/lib/types";
+import { useEffect, useRef, useState } from "react";
+import type { SpineCategory } from "@/lib/types";
 
-export function Nav({ assets }: { assets: (Slug & { href?: string })[] }) {
-  const pathname = usePathname();
-  const onLibrary = pathname === "/";
-  const tab = (active: boolean) =>
-    `rounded-md border px-2.5 py-1 text-xs font-medium transition-colors ${active ? "border-accent/40 bg-accent/10 text-accent" : "border-border text-muted-foreground hover:bg-muted hover:text-foreground"}`;
+const tab = (active: boolean) =>
+  `rounded-md border px-2.5 py-1 text-xs font-medium transition-colors ${active ? "border-accent/40 bg-accent/10 text-accent" : "border-transparent text-muted-foreground hover:bg-muted hover:text-foreground"}`;
+
+function CategoryMenu({ c, pathname }: { c: SpineCategory; pathname: string }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const live = c.types.filter((t) => !t.planned && t.href);
+  const active = live.some((t) => pathname === t.href) || pathname === `/assets/${c.slug}`;
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: PointerEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("pointerdown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => { document.removeEventListener("pointerdown", onDown); document.removeEventListener("keydown", onKey); };
+  }, [open]);
   return (
-    <nav className="ml-1 flex flex-wrap items-center gap-1.5" aria-label="Dashboard surfaces">
-      <Link href="/" aria-current={onLibrary ? "page" : undefined} className={tab(onLibrary)}>
+    <div ref={ref} className="relative">
+      <button type="button" aria-expanded={open} aria-haspopup="menu" onClick={() => setOpen((o) => !o)} className={tab(active)}>
+        {c.label} <span aria-hidden className="ml-0.5 text-[9px] opacity-70">▾</span>
+      </button>
+      {open ? (
+        <div role="menu" aria-label={c.label} className="absolute left-0 z-50 mt-1 w-64 rounded-md border border-border bg-card p-1 shadow-lg">
+          {c.rule ? <div className="px-2 pb-1 pt-1 text-[10px] text-muted-foreground">grouped by {c.rule}</div> : null}
+          {c.types.map((t) =>
+            t.planned || !t.href ? (
+              <div key={t.slug} role="menuitem" aria-disabled className="flex items-baseline justify-between px-2 py-1 text-[12px] text-muted-foreground/70">
+                {t.label} <span className="text-[10px]">planned</span>
+              </div>
+            ) : (
+              <Link key={t.slug} role="menuitem" href={t.href} onClick={() => setOpen(false)} aria-current={pathname === t.href ? "page" : undefined}
+                className={`flex items-baseline justify-between gap-2 rounded px-2 py-1 text-[12px] hover:bg-muted ${pathname === t.href ? "text-accent" : ""}`}>
+                <span>{t.label}</span>
+                {t.building ? <span className="text-[10.5px] text-muted-foreground">{t.building.toLowerCase()}</span> : null}
+              </Link>
+            ),
+          )}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+export function Nav({ categories }: { categories: SpineCategory[] }) {
+  const pathname = usePathname();
+  const shown = categories.filter((c) => c.types.some((t) => !t.planned));
+  return (
+    <nav className="ml-1 flex flex-wrap items-center gap-1" aria-label="Dashboard surfaces">
+      <Link href="/" aria-current={pathname === "/" ? "page" : undefined} className={tab(pathname === "/")}>
         Library
       </Link>
-      {assets.map((a) => {
-        const href = a.href ?? `/assets/${a.slug}`;
-        const active = pathname === href || pathname.startsWith(`/occurrence/${a.slug}/`);
-        return (
-          <Link key={a.slug} href={href} aria-current={active ? "page" : undefined} className={tab(active)}>
-            {a.label}
-          </Link>
-        );
-      })}
-      <span aria-hidden className="mx-1 h-4 w-px bg-border" />
-      <Link href="/review" aria-current={pathname === "/review" ? "page" : undefined} className={tab(pathname === "/review")} title="What the pages found and could not resolve">
-        Review queue
-      </Link>
-      <Link href="/v0" aria-current={pathname === "/v0" ? "page" : undefined} className={tab(pathname === "/v0")} title="Walk iteration 2 on the live screens">
-        Review iteration 2
+      {shown.map((c) => <CategoryMenu key={`${c.slug}:${pathname}`} c={c} pathname={pathname} />)}
+      <Link href="/review" aria-current={pathname === "/review" ? "page" : undefined} className={tab(pathname === "/review")} title="Who has read each curve, and what is open for its owner">
+        Review
       </Link>
     </nav>
   );

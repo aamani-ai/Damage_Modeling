@@ -265,8 +265,8 @@ export function ProofLedger({ cell, blob }: { cell: CellV2; blob: (p: string) =>
             {p.validation.review_scope ? <p className="mt-0.5 text-[10.5px] text-muted-foreground">{p.validation.review_scope}</p> : null}
             <Kv label="file" value={<FileLink href={blob(p.validation.path)}>{p.validation.path.split("/").slice(-1)[0]}</FileLink>} />
           </>
-        ) : <p className="font-mono text-[10.5px] text-muted-foreground">▢ no validation record</p>}
-        {p.outside_checks.length ? p.outside_checks.map((c) => <div key={c.name} className="border-t border-border/60 py-0.5">{c.kind === "curve" ? "curve check" : "result check"} · <a href={/^https?:/.test(c.link) ? c.link : blob(c.link)} target="_blank" rel="noreferrer" className="text-accent hover:underline">{c.name}</a></div>) : <p className="mt-1 text-muted-foreground">no outside check yet</p>}
+        ) : <p className="text-[10.5px] text-muted-foreground">no validation record</p>}
+        {p.outside_checks.length ? p.outside_checks.map((c) => <div key={c.name} className="border-t border-border/60 py-0.5">{c.kind === "curve" ? "curve check" : "result check"} · {c.link ? <a href={/^https?:/.test(c.link) ? c.link : blob(c.link)} target="_blank" rel="noreferrer" className="text-accent hover:underline">{c.name}</a> : <span>{c.name}</span>}{c.hazard?.words ? <span className="italic text-muted-foreground"> · {c.hazard.words}</span> : null}</div>) : <p className="mt-1 text-muted-foreground">no outside check yet</p>}
       </div>
     </div>
   );

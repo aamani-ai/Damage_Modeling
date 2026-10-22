@@ -1,7 +1,8 @@
 """The plain layer (iteration 2, DCD-D19): every sentence a reader sees first is written here by the build, from the
 same data the ledger shows — never typed in a component.
 
-- tier words (the code stays secondary): T1 field-calibrated · T2 lab-tested or a standard · T3 transferred · T4 our judgment
+- tier words, with no code before a control (G16, DCD-D28): T1 field-calibrated · T2 published · T3 borrowed · T4 our judgment
+- the main logic of a cell and its four steps (G15, DCD-D27)
 - the three plain chips of the status rail
 - the ✓ ◐ ✗ sentences of "what it can be used for"
 - one caption per drawn curve: what it says · how sure · seen in the field · main references
@@ -14,16 +15,19 @@ from typing import Any
 
 from .common import SENTENCES, fmt_pct, fmt_usd_compact, humanise
 
-TIER_PLAIN = {"T1": "field-calibrated", "T2": "lab-tested or a standard", "T3": "transferred", "T4": "our judgment"}
-TIER_SHORT = {"T1": "field-calibrated", "T2": "lab-tested", "T3": "transferred", "T4": "our judgment"}
+# G16 (DCD-D28): the catalogue's own words. "Published" fits all nine T2 rows (FEMA Hazus tables and lab tests are both
+# published); "borrowed" is the catalogue's word for T3. The codes stay in the ledger, under "Show the numbers".
+TIER_SHORT = {"T1": "field-calibrated", "T2": "published", "T3": "borrowed", "T4": "our judgment"}
+TIER_PLAIN = dict(TIER_SHORT)
+TIER_ADJ = {"T1": "field-calibrated", "T2": "published", "T3": "borrowed", "T4": "judgment-based"}  # inside a sentence
 TIER_MEANING = {
-    "T1": "field-calibrated: claims or field data for this kind of asset",
-    "T2": "lab-tested or a standard: a public test, standard or physics",
-    "T3": "transferred: an engineering proxy or evidence from an adjacent asset",
-    "T4": "our judgment: a placeholder or expert judgment, to be replaced when evidence arrives",
+    "T1": "field-calibrated: fitted to insurance claims or field damage surveys of the same kind of asset",
+    "T2": "published: taken from a published standard, a public model such as FEMA Hazus, lab tests or physics",
+    "T3": "borrowed: from a similar asset or a related study, with an engineering step to make it fit",
+    "T4": "our judgment: no source gives the number; a placeholder until evidence replaces it",
 }
 STATION_NAMES = {
-    "scope": ("What it covers", "Which hazard, which asset, which parts; what is left out"),
+    "scope": ("Scope", "Which hazard, which asset, which parts; what is left out"),
     "units": ("What breaks", "The parts of the plant the hazard damages, each with its own curve"),
     "axis_form": ("How damage is measured", "The hazard intensity on the x-axis and the shape of the curve"),
     "evidence": ("Where the numbers come from", "The sources, what was taken from each, and how sure we are"),
@@ -67,7 +71,7 @@ def with_unit(x: float | int | None, unit: str | None) -> str:
 
 
 def tier_words(span: str | None) -> str:
-    """'T3–4' → 'transferred and our judgment'; 'T2' → 'lab-tested'; '–' → 'no tier stated'."""
+    """'T3–4' → 'borrowed and our judgment'; 'T2' → 'published'; '–' → 'no tier stated'."""
     if not span or span == "–":
         return "no tier stated"
     m = re.match(r"T(\d)(?:–(\d))?", span)
@@ -78,11 +82,28 @@ def tier_words(span: str | None) -> str:
     return " and ".join(words) if len(words) <= 2 else ", ".join(words[:-1]) + " and " + words[-1]
 
 
+def tier_max(*spans: str | None) -> str | None:
+    """The weaker grade across spans: ('T2', 'T3–4') → 'T4'; nothing stated → None."""
+    nums = [int(d) for sp in spans if sp and sp != "–" for d in re.findall(r"\d", sp)]
+    return f"T{max(nums)}" if nums else None
+
+
+def one_word(shape: str | None, cost: str | None) -> str:
+    """The one word a tile or chip carries (G16): the weaker half's."""
+    t = tier_max(shape, cost)
+    return TIER_SHORT[t] if t else "no tier stated"
+
+
+def halves(shape: str | None, cost: str | None) -> str:
+    """Both halves in words, for a tooltip or a caption: 'How damage rises: our judgment · how it becomes dollars: published'."""
+    return f"How damage rises: {tier_words(shape)} · how it becomes dollars: {tier_words(cost)}"
+
+
 def tier_phrase(code: str | None) -> str:
-    """'T3' → 'transferred · T3' — the word first, the code secondary."""
+    """'T3' → 'borrowed' — the word only; the code stays in the ledger."""
     if not code:
         return "no tier stated"
-    return f"{TIER_SHORT.get(code, code)} · {code}"
+    return TIER_SHORT.get(code, code)
 
 
 def _join(items: list[str], last: str = "and") -> str:
@@ -116,9 +137,9 @@ REG_ID = r"[A-Z]{2,4}\d?-[SCQPAD]\d{2,3}"
 
 
 def plain_text(s: str | None) -> str | None:
-    """The default view's form of a catalogue sentence: register IDs dropped (a note beside one is kept), a bare tier
-    code given its word — "reused as a T4 hypothesis" → "reused as a T4 (our judgment) hypothesis". The raw text stays
-    in the ledger."""
+    """The default view's form of a catalogue sentence: register IDs dropped (a note beside one is kept), and every tier
+    code said in words (G16) — "reused as a T4 hypothesis" → "reused as a judgment-based hypothesis". The raw text
+    stays in the ledger."""
     if not s:
         return s
     t = str(s)
@@ -134,9 +155,17 @@ def plain_text(s: str | None) -> str | None:
     t = re.sub(r"\s+([,;.)])", r"\1", t)
     t = re.sub(r"\(\s+", "(", t)
     t = re.sub(r"\s{2,}", " ", t).strip()
-    t = re.sub(r"\((T[1-4])\)", lambda m: f"({m.group(1)}, {TIER_SHORT[m.group(1)]})", t)
-    t = re.sub(r"\((T[1-4])\s+([^()]*)\)", lambda m: f"({TIER_SHORT[m.group(1)]}, {m.group(1)} {m.group(2)})", t)
-    t = re.sub(r"(?<![·(\-–,]\s)(?<![A-Za-z(])(T[1-4])\b(?!–|\s*[—·(:,]|[_\w])", lambda m: f"{m.group(1)} ({TIER_SHORT[m.group(1)]})", t)
+    return words_for_codes(t)
+
+
+def words_for_codes(t: str) -> str:
+    """Tier codes in a sentence become words (G16): '(T3)' → '(borrowed)', 'are T4' → 'are judgment-based',
+    'Tier-4 points' → 'judgment-based points', 'judgment (T4)' → 'judgment'."""
+    t = re.sub(r"(judge?ment)\s*\(T4\)", r"\1", t, flags=re.I)
+    t = re.sub(r"\((T[1-4])\)", lambda m: f"({TIER_SHORT[m.group(1)]})", t)
+    t = re.sub(r"\bTier[- ]([1-4])\b", lambda m: TIER_ADJ[f"T{m.group(1)}"], t, flags=re.I)
+    t = re.sub(r"\bT([1-4])\s*[–-]\s*T?([1-4])\b", lambda m: f"{TIER_ADJ['T' + m.group(1)]} to {TIER_ADJ['T' + m.group(2)]}", t)
+    t = re.sub(r"\b(T[1-4])\b(?![_\w])", lambda m: TIER_ADJ[m.group(1)], t)
     return t
 
 
@@ -153,17 +182,9 @@ def plain_rail(status: str, qualifier: str | None, shape: str, cost: str, occ_st
         "reused": "Reused · borrows another cell's curve",
         "gap": "Gap · no curve yet",
     }[status]
-    tiers = sorted({t for sp in (shape, cost) for t in (re.findall(r"T\d", sp.replace("–", "–T") if "–" in sp else sp) if sp and sp != "–" else [])})
-    if "–" in (shape or "") or "–" in (cost or ""):
-        codes = []
-        for sp in (shape, cost):
-            m = re.match(r"T(\d)–(\d)", sp or "")
-            if m:
-                codes += [f"T{t}" for t in range(int(m.group(1)), int(m.group(2)) + 1)]
-            elif sp and sp != "–":
-                codes.append(sp)
-        tiers = sorted(set(codes))
-    ev_words = "Evidence: " + (_join([TIER_SHORT[t] for t in tiers if t in TIER_SHORT]) if tiers else "no tier stated")
+    worst = tier_max(shape, cost)
+    tiers = [worst] if worst else []
+    ev_words = "Evidence: " + (TIER_SHORT[worst] if worst else "no tier stated")
     occ_words = {
         "not_searched": "Field reports: nobody has looked yet",
         "found": "Field reports: found",
@@ -174,8 +195,8 @@ def plain_rail(status: str, qualifier: str | None, shape: str, cost: str, occ_st
     review_words = f"Reviewed by {rv['by']} on {rv['on']}: {rv['verdict']}" if rv else "Not yet reviewed by a person"
     return {
         "exists": {"words": exists_words, "code": f"{status.upper()}{' · ' + qualifier if qualifier else ''}"},
-        "evidence": {"words": ev_words, "code": f"shape {shape} · cost {cost}" if shape != "–" else "no tiers", "tiers": tiers},
-        "occurrence": {"words": occ_words, "code": f"{SENTENCES.get(occ_state or 'not_searched', SENTENCES['not_searched'])['mark']} {occ_label}"},
+        "evidence": {"words": ev_words, "code": halves(shape, cost) if worst else "no tier stated", "tiers": tiers, "codes": f"shape {shape} · cost {cost}"},
+        "occurrence": {"words": occ_words, "code": occ_words},
         "review": {"words": review_words, "code": review.get("label", "")},
     }
 
@@ -359,6 +380,7 @@ def what_it_says(curve: dict[str, Any]) -> str:
 
 
 def how_sure(curve: dict[str, Any], params: list[dict[str, Any]]) -> dict[str, Any]:
+    """Two halves in words (G16): how damage rises and how it becomes dollars, each with where it comes from."""
     t = curve.get("tiers") or {}
     shape = {"tier": t.get("shape"), "word": TIER_SHORT.get(t.get("shape") or "", "no tier stated"), "basis": plain_text(t.get("shape_basis"))}
     cost = {"tier": t.get("cost"), "word": TIER_SHORT.get(t.get("cost") or "", "no tier stated"), "basis": plain_text(t.get("cost_basis"))}
@@ -366,9 +388,9 @@ def how_sure(curve: dict[str, Any], params: list[dict[str, Any]]) -> dict[str, A
     for p in params:
         if p.get("tier"):
             by_tier[p["tier"]] = by_tier.get(p["tier"], 0) + 1
-    counts = _join([f"{n} {TIER_SHORT.get(k, k)} ({k})" for k, n in sorted(by_tier.items())])
+    counts = _join([f"{n} {TIER_SHORT.get(k, k)}" for k, n in sorted(by_tier.items())])
     return {"shape": shape, "cost": cost, "parameters": f"{len(params)} parameter{'s' if len(params) != 1 else ''}" + (f": {counts}" if counts else "") if params else "no parameter rows for this curve",
-            "weakest": max(by_tier) if by_tier else (t.get("cost") or t.get("shape"))}
+            "weakest": max(by_tier) if by_tier else (t.get("cost") or t.get("shape")), "word": one_word(t.get("shape"), t.get("cost"))}
 
 
 def resolve_key_sources(key_sources: list[str], sources_by_id: dict[str, dict[str, Any]], aliases: dict[str, str]) -> list[dict[str, Any]]:
@@ -558,7 +580,7 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
             if pr.get("tier"):
                 by_tier[pr["tier"]] = by_tier.get(pr["tier"], 0) + 1
         if params:
-            p += f" Of the {len(params)} parameter{'s' if len(params) != 1 else ''}, " + _join([f"{n} {'are' if n != 1 else 'is'} {TIER_SHORT.get(k, k)} ({k})" for k, n in sorted(by_tier.items())]) + "."
+            p += f" Of the {len(params)} parameter{'s' if len(params) != 1 else ''}, " + _join([f"{n} {'are' if n != 1 else 'is'} {TIER_SHORT.get(k, k)}" for k, n in sorted(by_tier.items())]) + "."
         if prov["kind"] == "register":
             p += " The source and claim registers are machine-readable files in the cell folder."
         elif prov["kind"] == "extracted":
@@ -661,3 +683,116 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
             p += f" The curve release carries its own review state: {rv['release_review']}."
         fact = ("not searched" if (ctx.get("occurrence_state") or "not_searched") == "not_searched" else "searched") + " · " + ("reviewed" if rv.get("review") else "agent-read")
     return {"id": sid, "name": name, "meaning": meaning, "paragraph": p, "plain_fact": fact}
+
+
+# ─── the cell page's first view (G15, DCD-D27): the main logic and the four steps ─────────────────────────────────
+
+def _first_clause(s: str) -> str:
+    """Text up to the first ';' that is not inside parentheses."""
+    depth = 0
+    for i, ch in enumerate(s):
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth = max(0, depth - 1)
+        elif ch == ";" and depth == 0:
+            return s[:i].strip()
+    return s.strip()
+
+
+def _axis_phrase(ax: dict[str, Any]) -> str:
+    label = (ax.get("label") or "").strip()
+    unit = ax.get("unit")
+    if label and unit and unit not in ("dimensionless", "class") and f"({unit})" not in label:
+        label += f", in {unit}"
+    return label
+
+
+def axis_short(ax: dict[str, Any]) -> str:
+    """'hail diameter, MESH equivalent' → 'hail diameter'; 'FSim conditional flame-length class (0 = no event)' → 'FSim conditional flame-length class'."""
+    label = (ax.get("label") or "").strip()
+    return re.split(r" \(|, | = ", label)[0].strip()
+
+
+def main_logic(entry: dict[str, Any], curves: list[dict[str, Any]], hazard_label: str) -> list[str]:
+    """Two to four sentences a first-time reader needs: how the hazard is measured, how damage rises, how it becomes
+    dollars. Written from the axis, the cell's own method summary and its value basis — never typed in a component."""
+    out: list[str] = []
+    axes: list[str] = []
+    for c in curves:
+        ph = _axis_phrase(c.get("axis") or {})
+        if ph and ph not in axes:
+            axes.append(ph)
+    if axes:
+        out.append(f"{hazard_label} is measured as {_join([_lower_first(a) for a in axes])}.")
+    elif entry.get("input"):
+        out.append(f"{hazard_label} is read as {_lower_first(plain_text(_first_clause(entry['input'])))}.")
+    method = re.sub(r"\s*\(see [^)]*\)", "", (entry.get("method") or {}).get("summary") or "").strip().rstrip(".")
+    if method:
+        m = plain_text(method) or ""
+        out.append(m[:1].upper() + m[1:] + ".")
+    share = (entry.get("how_to_use") or {}).get("share_of")
+    if share:
+        ph = _lower_first((plain_text(_first_clause(share)) or "").rstrip("."))
+        if not re.match(r"(the|each|a|an)\b", ph):
+            ph = "the " + ph
+        out.append(f"The damage ratio is a share of {ph}.")
+    return out
+
+
+STEPS = (
+    ("covers", "What it covers", "The parts that have a curve, their share of the value, and what has none yet", ("scope", "units", "value")),
+    ("worked_out", "How damage is worked out", "How the hazard is measured, the shape of the curve, and the site adjustments", ("axis_form", "audit")),
+    ("numbers", "Where the numbers come from", "The sources, what each one gave, and how sure we are", ("evidence",)),
+    ("checked", "Has it been checked", "Outside checks, field reports of this damage, and who has read the entry", ("field_review",)),
+)
+FOR_HAZARD = ("artifact", "capability", "proof")
+
+
+def steps4(ctx: dict[str, Any], stations_plain: list[dict[str, Any]], chain_stations: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Today's ten steps folded into four, in the reader's order (08 §G15). A step none of whose files or write-up
+    sections exist says so in words; no marks."""
+    e, parts, value = ctx["entry"], ctx["parts"], ctx.get("value")
+    nc = e.get("not_covered") or []
+    by_id = {s["id"]: s for s in stations_plain}
+    state = {s["id"]: s["state"] for s in chain_stations}
+    out = []
+    for sid, name, meaning, holds in STEPS:
+        written = any(state.get(h) in ("artifact", "prose") for h in holds)
+        paras = [by_id[h]["paragraph"] for h in holds if h in by_id and by_id[h].get("paragraph")]
+        if sid == "covers":
+            n = len(parts)
+            fact = f"{n} part{'s' if n != 1 else ''} with a curve"
+            if value and value.get("share_covered") is not None:
+                fact += f" · {fmt_pct(value['share_covered'])} of the value"
+            if nc:
+                fact += f" · {len(nc)} without one yet"
+            elif ctx.get("withheld_units"):
+                fact += f" · {len(ctx['withheld_units'])} withheld"
+        elif sid == "worked_out":
+            axes = list(dict.fromkeys(axis_short(c.get("axis") or {}) for c in ctx["curves"] if (c.get("axis") or {}).get("label")))
+            form = (by_id.get("axis_form") or {}).get("plain_fact") or ""
+            lead = axes[0] if len(axes) == 1 else (f"{len(axes)} hazard measures" if axes else "")
+            fact = f"{lead} → {form}" if lead and form and form != "—" else (form if form and form != "—" else "see the write-up")
+        elif sid == "numbers":
+            lc = ctx["link_counts"]
+            fact = (f"{lc['total']} source{'s' if lc['total'] != 1 else ''}, {lc['linked']} linked" if lc["total"] else "sources in the write-up")
+            fact += f" · {one_word(ctx['rows_tiers']['shape'], ctx['rows_tiers']['cost'])}"
+        else:
+            oc = ctx.get("outside_checks") or []
+            occ = ctx.get("occurrence_state") or "not_searched"
+            rv = ctx["review"]
+            fact = " · ".join([
+                f"{len(oc)} outside check{'s' if len(oc) != 1 else ''}" if oc else "no outside check yet",
+                "field reports not searched" if occ == "not_searched" else f"field reports: {occ.replace('_', ' ')}",
+                f"reviewed by {rv['review']['by']}" if rv.get("review") else "read by an agent only",
+            ])
+            first = (f"{len(oc)} outside check{'s' if len(oc) != 1 else ''} compare{'' if len(oc) != 1 else 's'} this curve with an independent result: {_join([c['name'] for c in oc])}."
+                     if oc else "No outside check has been made yet: nothing independent has been compared with this curve.")
+            v = ctx.get("validation")
+            if v:
+                first += f" The validation record says {humanise(v.get('status') or 'report')}" + (f" ({v['date']})" if v.get("date") else "") + "."
+            paras = [first] + paras
+            written = True
+        out.append({"id": sid, "name": name, "meaning": meaning, "fact": fact if written else "not written yet", "paragraphs": paras, "holds": list(holds), "written": written})
+    return out

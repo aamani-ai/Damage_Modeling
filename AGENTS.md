@@ -84,7 +84,7 @@ are not curves).
 | `docs/` | All damage-curve docs. Index: [`docs/README.md`](docs/README.md). |
 | `docs/scope/SCOPE_AND_STORY.md` | **The anchor** — scope, phases, tier/contract boundary, migration. |
 | `docs/cells/` | Shallow entrypoints for current hazard × asset cells and canonical runtime artifacts. |
-| `docs/contracts/` | Repo-level damage-code, artifact, capability, and Hazard handoff contracts. |
+| `docs/contracts/` | Repo-level damage-code, artifact, capability, and Hazard handoff contracts; the asset spine and the Digital Twin crosswalks (`twin_crosswalks/`). |
 | `docs/method/` | Durable foundations, value-basis support, and global method standards. |
 | `docs/evidence/` | Cross-cell evidence-ingestion protocol/register. |
 | `docs/source_drops/` | Raw ZIP/source-drop landing zone: raw ZIPs, optional local extracted mirrors, manifests, and source context. |
@@ -99,8 +99,8 @@ are not curves).
 | `docs/extra/tasks_history/` | Per-session handoffs; read the newest `handoff.md` first. [Index](docs/extra/tasks_history/README.md). |
 | `docs/extra/learning_logs/` | Team-shared, non-canonical atomic lessons and complete newcomer/re-entry project learning packages. [Index](docs/extra/learning_logs/README.md). |
 | `scripts/reference_helpers/` | Reference helper scripts only; not a stable `src/` API. |
-| `scripts/dashboard/` | The dashboard's data build: reads the catalogue, artifacts, registers and Hazard's pinned twin crosswalk, runs the reconciliation checks, writes `dashboard/data/` with a receipt. [README](scripts/dashboard/README.md). |
-| `dashboard/` | The internal damage-curve dashboard (Next.js static app, local; V0 = battery storage end to end, iteration 2 = the plain layer first with the ledger one control away, every asset). Reads `dashboard/data/` only and never writes `docs/`. Plan: [`docs/plans/damage_curve_dashboard/`](docs/plans/damage_curve_dashboard/README.md). [README](dashboard/README.md). |
+| `scripts/dashboard/` | The dashboard's data build: reads the catalogue, artifacts, registers, the twin crosswalks and the FAQ from an export of `origin/main` (or the worktree as a labelled preview), and Hazard's files on Hazard's `origin/main`; runs the reconciliation checks; writes `dashboard/data/` with a receipt. `export_twin.mjs` vendors the Digital Twin's viewer. [README](scripts/dashboard/README.md). |
+| `dashboard/` | The internal damage-curve dashboard (Next.js static app, local; iteration 3 = the Digital Twin's categories as the spine, each curve's coverage on the twin's own 3D model, the curve and its main logic first, evidence in words, one Review page, the FAQ). Reads `dashboard/data/` only and never writes `docs/`. Plan: [`docs/plans/damage_curve_dashboard/`](docs/plans/damage_curve_dashboard/README.md). [README](dashboard/README.md). |
 | `src/damage_modeling/` | The durable publisher package (`publishing/cli.py`, `publishing/publisher.py`; standard 23). Not a curve API; the validators guard that no cell code enters it. |
 | `data/` | Curve-record artifacts + manifests (large/binary gitignored). [README](data/README.md). |
 | `notebooks/` | Companion notebooks per cell — `<hazard>/<asset>/00_curve_curation_walkthrough` + `01_runtime_curve_walkthrough`, reading the pinned artifact through the artifact index, never authoring one. **7 of 15 cells have a pair (measured 2026-10-20): the five Real Estate proposal pairs execute; the two solar pairs still fail in their first code cell (their loader targets the removed `docs/damage_curves/` tree).** Repair + the uncovered cells: [`docs/plans/cell_notebook_coverage/`](docs/plans/cell_notebook_coverage/README.md). [README](notebooks/README.md). |

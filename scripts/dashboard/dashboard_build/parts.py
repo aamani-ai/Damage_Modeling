@@ -17,7 +17,6 @@ from pathlib import Path
 from typing import Any
 
 from .common import ROOT, SENTENCES, fmt_pct, fmt_usd_compact, humanise, load_json, read_csv, rel, sha256
-from .occurrence import hazard_repo
 from .plain import TIER_SHORT, _join, label_case, singular, tier_words
 
 try:
@@ -253,33 +252,42 @@ def cell_parts(e: Any, cell: dict[str, Any], aslug: str, bess_values: dict[str, 
 
 # ─── substation: Hazard's reference budget and the bindings' ledgers ──────────────────────────────────────────
 
+def _hazard_or_copy(rel_path: str, copy: Path) -> tuple[str | None, str | None, str | None]:
+    """The file's text on Hazard's origin/main (G18), else the copy committed beside the data; with where it came from."""
+    from . import hazard_main
+    raw = hazard_main.read(rel_path)
+    if raw is not None:
+        return raw.decode("utf-8"), f"Hazard_modeling/{rel_path} at origin/main", "hazard_main"
+    if copy.exists():
+        why = "not on Hazard's main" if hazard_main.repo() is not None else "Hazard_modeling not found on this machine"
+        return copy.read_text(encoding="utf-8"), f"dashboard/data/{copy.name}, the committed copy ({why})", "committed_copy"
+    return None, None, None
+
+
+def _rows_of(text: str) -> list[dict[str, str]]:
+    import csv
+    import io
+    return [{(k or "").strip(): (v or "").strip() for k, v in r.items()} for r in csv.DictReader(io.StringIO(text))]
+
+
 def substation_budget(pin_sha: str | None, out_dir: Path) -> dict[str, Any]:
-    """Hazard's substation reference budget, read from the Hazard checkout (never imported) and checked against the SHA
+    """Hazard's substation reference budget, read on Hazard's origin/main (never imported) and checked against the SHA
     the substation flood binding pins; a copy is kept beside the data so the build runs without Hazard, and says so."""
-    repo = hazard_repo()
-    copy = out_dir / "substation_reference_budget.csv"
-    if repo is not None and (repo / SUBSTATION_BUDGET_REL).exists():
-        path, source = repo / SUBSTATION_BUDGET_REL, f"Hazard_modeling/{SUBSTATION_BUDGET_REL}"
-    elif copy.exists():
-        path, source = copy, "dashboard/data/substation_reference_budget.csv (Hazard_modeling not found on this machine)"
-    else:
+    import hashlib
+    text, source, where = _hazard_or_copy(SUBSTATION_BUDGET_REL, out_dir / "substation_reference_budget.csv")
+    if text is None:
         return {"available": False, "ok": None, "rows": [], "source": None, "sha256": None, "expected_sha256": pin_sha}
-    rows = read_csv(path)
-    actual = sha256(path)
-    return {"available": True, "ok": (actual == pin_sha) if pin_sha else None, "rows": rows, "source": source, "sha256": actual, "expected_sha256": pin_sha,
-            "text": path.read_text(encoding="utf-8")}
+    actual = hashlib.sha256(text.encode("utf-8")).hexdigest()
+    return {"available": True, "ok": (actual == pin_sha) if pin_sha else None, "rows": _rows_of(text), "source": source, "read_from": where, "sha256": actual,
+            "expected_sha256": pin_sha, "text": text}
 
 
 def substation_crosswalk(out_dir: Path) -> dict[str, Any]:
-    repo = hazard_repo()
-    copy = out_dir / "substation_twin_crosswalk.csv"
-    if repo is not None and (repo / SUBSTATION_CROSSWALK_REL).exists():
-        path, source = repo / SUBSTATION_CROSSWALK_REL, f"Hazard_modeling/{SUBSTATION_CROSSWALK_REL}"
-    elif copy.exists():
-        path, source = copy, "dashboard/data/substation_twin_crosswalk.csv (Hazard_modeling not found on this machine)"
-    else:
+    import hashlib
+    text, source, where = _hazard_or_copy(SUBSTATION_CROSSWALK_REL, out_dir / "substation_twin_crosswalk.csv")
+    if text is None:
         return {"available": False, "rows": [], "source": None, "sha256": None}
-    return {"available": True, "rows": read_csv(path), "source": source, "sha256": sha256(path), "text": path.read_text(encoding="utf-8"),
+    return {"available": True, "rows": _rows_of(text), "source": source, "read_from": where, "sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(), "text": text,
             "pin": "read, not pinned by any artifact in this repository"}
 
 

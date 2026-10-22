@@ -12,11 +12,13 @@ the extracted sources by their words, and every unmatched ID is reported, never 
 """
 from __future__ import annotations
 
+import functools
 import re
+import subprocess
 from pathlib import Path
 from typing import Any
 
-from .common import ROOT, rel, sha256
+from .common import CHECKOUT, ROOT, rel, sha256
 
 try:
     import openpyxl  # type: ignore
@@ -51,6 +53,21 @@ def short_title(citation: str | None, fallback: str) -> str:
 MARKER_RE = re.compile(r"^(NO_SOURCE|NO_DIRECT_SOURCE|GOVERNANCE_CONTRACT|SCOPE$|OPEN_VALUE)", re.I)
 
 
+@functools.lru_cache(maxsize=1)
+def _git_visible() -> frozenset[str] | None:
+    """Repository paths git can see (tracked, or new and not ignored). A preview build reads the working tree, which may
+    hold gitignored local mirrors (docs/source_drops/extracted/); a main build reads an export that never has them."""
+    if ROOT != CHECKOUT:
+        return None
+    done = subprocess.run(["git", "-C", str(CHECKOUT), "ls-files", "--cached", "--others", "--exclude-standard", "docs"], capture_output=True, text=True)
+    return frozenset(done.stdout.splitlines()) if done.returncode == 0 else None
+
+
+def _visible(p: Path) -> bool:
+    seen = _git_visible()
+    return seen is None or rel(p) in seen
+
+
 def _repo_path(path: str, base_dir: Path | None) -> Path | None:
     """A repository file named by a register: an exact path, a path beside the register, or a unique file name under docs/."""
     p = path.strip("/").split("#")[0].split(";")[0].strip()
@@ -61,7 +78,7 @@ def _repo_path(path: str, base_dir: Path | None) -> Path | None:
             return cand
     name = Path(p).name
     if "." in name and len(name) > 6:
-        hits = [h for h in (ROOT / "docs").rglob(name) if h.is_file()]
+        hits = [h for h in (ROOT / "docs").rglob(name) if h.is_file() and _visible(h)]
         for keep in (lambda h: "/archive/" not in str(h) and "/source_drops/" not in str(h), lambda h: "/source_drops/" not in str(h), lambda h: True):
             kept = [h for h in hits if keep(h)]
             if len(kept) == 1:
@@ -85,7 +102,11 @@ def resolve_link(src: dict[str, Any], repo_url: str, commit: str, base_dir: Path
     elif url:
         path = url.strip("/").split("#")[0].split(";")[0].strip()
         if path.startswith("Hazard_modeling/"):
-            link, kind = f"{HAZARD_REPO_URL}/blob/main/{path[len('Hazard_modeling/'):]}", "hazard_file"
+            # checked on Hazard's origin/main (G18): on main → a link at that commit; moved → the new place; else no link
+            from . import hazard_main
+            h = hazard_main.lookup(path[len("Hazard_modeling/"):])
+            src["hazard"] = h
+            link, kind = h["link"], {"on_main": "hazard_file", "moved": "hazard_moved", "on_branch": "hazard_branch", "unchecked": "hazard_file"}[h["state"]]
         else:
             rp = _repo_path(path, base_dir)
             if rp is not None:
@@ -113,7 +134,7 @@ def resolve_link(src: dict[str, Any], repo_url: str, commit: str, base_dir: Path
     src.setdefault("title", short_title(citation, src.get("id", "")))
     if MARKER_RE.match(src.get("id") or ""):
         src["kind"] = "marker"  # a provenance marker ("no direct source"), not a document: nothing to link
-    src["no_link_sentence"] = None if (link or src.get("kind") == "marker") else NO_LINK
+    src["no_link_sentence"] = None if (link or src.get("kind") == "marker") else ((src.get("hazard") or {}).get("words") or NO_LINK)
     return src
 
 

@@ -9,20 +9,24 @@ import sys
 from typing import Any
 
 from . import chain as chain_mod
+from . import hazard_main
+from . import twin as twin_mod
 from .catalogue import Entry, curve_records, load_entries
-from .common import (OUT, ROOT, SENTENCES, STATION_ABSENT_SENTENCES, BuildError, fmt_pct, fmt_usd_compact, git,
+from .common import (OUT, ROOT, SENTENCES, SOURCE, STATION_ABSENT_SENTENCES, BuildError, fmt_pct, fmt_usd_compact, git,
                      humanise, load_json, rel, sha256, tier_span)
+from .faq import build_faq
 from .occurrence import (all_registers, asset_slug, bess_bucket_values, hazard_slug, register_for, resolve_state, slugs,
                          twin_crosswalk_pin)
 from .parts import asset_plain_sentence, asset_view, substation_budget, substation_crosswalk
-from .plain import (STATION_NAMES, TIER_MEANING, TIER_PLAIN, TIER_SHORT, capability_sentences, curve_caption, parameters_plain, plain_rail,
-                    plain_text, resolve_key_sources, station_plain, tier_words)
+from .plain import (FOR_HAZARD, STATION_NAMES, STEPS, TIER_MEANING, TIER_PLAIN, TIER_SHORT, capability_sentences, curve_caption, halves, main_logic,
+                    one_word, parameters_plain, plain_rail, plain_text, resolve_key_sources, station_plain, steps4, tier_words)
 from .registers import load_registers
 from .sampling import NO_EVALUATOR, sample_entry
 from .sources import NO_LINK, NOT_YET_EXTRACTED, extract_for_entry, link_counts, resolve_link
 from .summaries import asset_sentence, cell_sentence, dossier_sentence, library_sentence, occurrence_sentence
 
 REPO_URL = "https://github.com/aamani-ai/Damage_Modeling"
+HAZARD_BLOB_MAIN = "https://github.com/aamani-ai/Hazard_Modeling/blob/main/"
 SUBSTATION_BUDGET_SOURCE = "Hazard_modeling/docs/plans/_cross_cutting/substation_conus/reference_budget.csv"
 
 STATUS_MARK = {"live": "■", "proposal": "▢", "reused": "▨", "gap": "┈"}
@@ -83,6 +87,20 @@ def _value_block(covered_usd: float, total_usd: float, covered: list, no_curve: 
     return {"covered_usd": covered_usd if total_usd != 1.0 else None, "total_usd": total_usd if total_usd != 1.0 else None, "share_covered": share,
             "covered_label": f"{fmt_usd_compact(covered_usd)} of {fmt_usd_compact(total_usd)}" if total_usd != 1.0 else f"{fmt_pct(share)} of project value",
             "covered": covered, "no_curve": no_curve, "left_out": [], "source": source, "basis": basis}
+
+
+def resolve_checks(checks: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """The catalogue's outside checks with every Hazard link looked up on Hazard's origin/main (G18): kept when there,
+    pointed at the new place when moved, and no link with the words when it is only on a Hazard branch."""
+    out = []
+    for c in checks:
+        link = c.get("link") or ""
+        if link.startswith(HAZARD_BLOB_MAIN):
+            h = hazard_main.lookup(link[len(HAZARD_BLOB_MAIN):])
+            out.append({**c, "link": h["link"], "hazard": h})
+        else:
+            out.append(dict(c))
+    return out
 
 
 def review_block(e: Entry) -> dict[str, Any]:
@@ -221,7 +239,11 @@ def build(write: bool = True) -> dict[str, Any]:
     twin = twin_crosswalk_pin(fb_binding.get("reference_sha256", {}).get("twin_crosswalk.csv"))
     check("twin_crosswalk", "Hazard's twin crosswalk SHA equals the value binding's pin", twin.get("ok") is True, {k: v for k, v in twin.items() if k not in ("text", "crosswalk")})
     bess_values = bess_bucket_values(fb_binding)
-    commit_full = git("rev-parse", "HEAD")
+    commit_full = SOURCE["commit_full"] or git("rev-parse", "HEAD")
+    # the vendored 3D viewer equals its manifest (DCD-D21); the twin trees and the spine are read below
+    viewer = twin_mod.viewer_check()
+    check("twin_viewer", "the vendored Digital Twin viewer files equal the SHA-256 their manifest records", viewer.get("ok") is True,
+          {k: v for k, v in viewer.items() if k != "load_order"})
     # Hazard's substation reference budget, pinned by the substation flood binding; its twin crosswalk, read and unpinned
     sub_bind = load_json(ROOT / "docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json")
     sub_budget = substation_budget(((sub_bind.get("source_inputs") or {}).get("hazard_budget") or {}).get("sha256"), OUT)
@@ -348,12 +370,13 @@ def build(write: bool = True) -> dict[str, Any]:
             share = next((f.get(k_) for f in fus_here for k_ in ("default_value_share_physical_base", "direct_hardware_value_share_physical_base") if f.get(k_) is not None), None)
             if share is not None:
                 fu_shares.append((pt, float(share)))
-        station_ctx = {"entry": e.data, "artifact": a, "hazard": e.data["hazard"], "noun": noun, "parts": parts, "withheld_units": withheld_units, "value": value,
+        checks_resolved = resolve_checks(e.data.get("checks") or [])
+        station_ctx = {"entry": e.data, "artifact": a, "hazard": e.data["hazard"], "noun": noun, "parts": parts, "withheld_units": withheld_units, "value": value, "rows_tiers": rows_tiers,
                        "curves": sampled["curves"], "sources": regs.get("sources") or [], "parameters": regs.get("parameters") or [], "evidence_provenance": prov,
                        "link_counts": lc, "tier_span": tier_span([rows_tiers["shape"], rows_tiers["cost"]]) if rows_tiers["shape"] != "–" else "–",
                        "audit_table": audit_table, "site_adapter": next((f for f in next(s_ for s_ in ch["stations"] if s_["id"] == "audit")["files"] if "site" in f["path"].lower()), None),
                        "identity": e.identity, "dossier": (ch.get("dossier") or {}).get("path"), "workbook": (ch.get("workbook") or {}).get("path"), "n_files": len(folder_files),
-                       "capabilities": capabilities, "kats": k, "validation": None, "outside_checks": e.data.get("checks") or [], "review": review,
+                       "capabilities": capabilities, "kats": k, "validation": None, "outside_checks": checks_resolved, "review": review,
                        "occurrence_sentence": (buckets_block[0]["sentence"] if buckets_block and len({b_["state"] for b_ in buckets_block}) == 1 else None) if occ else None,
                        "occurrence_state": occ_state_overall, "fu_shares": fu_shares}
         proof_tmp = proof_block(e, k, ch["stations"]) if e.kind != "gap" else None
@@ -365,6 +388,13 @@ def build(write: bool = True) -> dict[str, Any]:
         key_refs = resolve_key_sources(e.data.get("key_sources") or [], sources_by_id, aliases)
         plain = {
             "rail": rail_plain,
+            "main_logic": main_logic(e.data, sampled["curves"], e.data["hazard"]) if e.kind != "gap" else [],
+            "steps": steps4(station_ctx, stations_plain, ch["stations"]) if e.kind != "gap" else [],
+            "for_hazard": list(FOR_HAZARD),
+            "word": one_word(rows_tiers["shape"], rows_tiers["cost"]) if e.kind != "gap" else None,
+            "halves": halves(rows_tiers["shape"], rows_tiers["cost"]) if e.kind != "gap" else None,
+            "hazard_paths": [{"id": s_["id"], "title": s_.get("title"), **(s_.get("hazard") or {})} for s_ in regs.get("sources") or [] if (s_.get("hazard") or {}).get("state") in ("moved", "on_branch")]
+                            + [{"id": None, "title": c_["name"], **c_["hazard"]} for c_ in checks_resolved if (c_.get("hazard") or {}).get("state") in ("moved", "on_branch")],
             "capabilities": capabilities,
             "blocks": {
                 "covered": {"value": value, "not_covered": [plain_text(re.sub(r"\s*\(\$[\d.,]+\s*[MBk]?\)\s*$", "", x)) for x in e.data.get("not_covered") or []], "withheld": withheld_units},
@@ -406,7 +436,7 @@ def build(write: bool = True) -> dict[str, Any]:
             "audit": {"table": audit_table, "state": next(s["state"] for s in ch["stations"] if s["id"] == "audit"),
                       "absent_sentence": STATION_ABSENT_SENTENCES["audit"] if next(s["state"] for s in ch["stations"] if s["id"] == "audit") in ("absent", "not_yet_detected") else None,
                       "site_adapter": next((f for f in next(s for s in ch["stations"] if s["id"] == "audit")["files"] if "site" in f["path"].lower()), None)},
-            "proof": proof_block(e, k, ch["stations"]) if e.kind != "gap" else None,
+            "proof": ({**proof_tmp, "outside_checks": checks_resolved} if proof_tmp else None),
             "seams": seams_block(e, regs),
             "field_review": {"register": {"path": occ["path"], "sha256": occ["sha256"], "search_log": occ["register"].get("search_log"), "last_searched": occ["register"].get("last_searched")} if occ else None,
                              "buckets": buckets_block, "review": review_block(e), "absent_sentence": None if occ else STATION_ABSENT_SENTENCES["field_review"]},
@@ -491,6 +521,12 @@ def build(write: bool = True) -> dict[str, Any]:
             occ_problems.append(f"{e.id}: pointer to a register the build did not find")
     check("occurrence", "occurrence registers name their entries and use the shared bucket keys", not occ_problems, {"registers": len(registers), "problems": occ_problems})
 
+    hz_off = sorted({f"{eid}: {h_['path']} — {h_['words']}" for eid, c_ in cells.items() for h_ in (c_.get("plain") or {}).get("hazard_paths") or []})
+    if (twin.get("hazard") or {}).get("state") in ("moved", "on_branch"):
+        hz_off.append(f"flood_bess value binding: {twin['hazard']['path']} — {twin['hazard']['words']} (the committed copy is checked against the pin)")
+    check("hazard_links", "every Hazard file the pages name is on Hazard's main", not hz_off, {"off_main": hz_off, "hazard": hazard_main.state().get("sentence")}, severity="data")
+    faq = build_faq(f"{REPO_URL}/blob/{commit_full}")
+    check("faq", "every FAQ question has its date, owner, a short answer and a Read more link that resolves", not faq["errors"], {"errors": faq["errors"], "questions": faq["n_questions"]}, severity="data")
     failed = [c for c in checks if not c["ok"]]
     for cid, cell in cells.items():
         cell["build_findings"] = _findings_for(cid, checks)
@@ -509,6 +545,7 @@ def build(write: bool = True) -> dict[str, Any]:
             "outside_checks": len(e.data.get("checks") or []), "chain_core_as_files": c["chain"]["core_as_files"], "generation": c["chain"]["generation"],
             "aria_label": _aria(c, e),
             "href": f"/cells/{e.id}",
+            "word": c["plain"]["word"], "halves": c["plain"]["halves"],
         })
     codes: dict[str, list[dict[str, Any]]] = {}
     for e in entries:
@@ -519,9 +556,10 @@ def build(write: bool = True) -> dict[str, Any]:
     agent_read = sum(1 for e in entries if str(e.data.get("read_by", "")).lower().startswith("agent"))
     searched = sum(1 for r in registers.values() for b in r["register"].get("buckets", {}).values() if b.get("state") != "not_searched")
     manifest = {
-        "schema": "damage_dashboard_manifest.v0",
-        "built_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
-        "commit": git("rev-parse", "--short", "HEAD"), "commit_full": git("rev-parse", "HEAD"),
+        "schema": "damage_dashboard_manifest.v1",
+        "commit": commit_full[:7], "commit_full": commit_full,
+        "source": source_block(commit_full),
+        "hazard_main": {k: v for k, v in hazard_main.state().items() if k in ("available", "ref", "commit", "behind", "sentence")},
         "catalogue_commit_note": "catalogue entries and artifacts read at this commit; every number traces to a file at it",
         "counts": {**counts, "entries": len(entries), "curves_declared": declared, "curves_drawn": sum(1 for c in all_curves if c["drawn"]), "curves_no_evaluator": sum(1 for c in all_curves if not c["drawn"]), "agent_read_only": agent_read, "field_searches_logged": searched,
                    "known_answers_run": kat_totals["run"], "known_answers_reproduced": kat_totals["reproduced"], "known_answers_not_run": kat_totals["not_run"], "occurrence_registers": len(registers),
@@ -540,24 +578,102 @@ def build(write: bool = True) -> dict[str, Any]:
         "lenses": ["status", "evidence", "occurrence", "value", "review"],
         "repo": {"url": REPO_URL, "blob": f"{REPO_URL}/blob/main"},
     }
-    # ── the review queue (seed): findings the pages name, one place to read them
-    rq_items: list[dict[str, Any]] = []
-    for u in link_findings:
-        eid, rest = u.split(": ", 1)
-        rq_items.append({"kind": "source_without_link", "entry_id": eid, "text": rest, "href": f"/cells/{eid}?station=evidence", "words": "no link in the register"})
-    for eid, cell in cells.items():
+    # ─── the spine (G13/G14): coverage per asset type, the nav, the library rows ───
+    hz_label = {h["slug"]: h["label"] for h in sl["hazards"]}
+    sp = twin_mod.spine()
+    coverage = twin_mod.build_coverage(entries, sl, lambda lbl: hazard_slug(lbl, sl), lambda e_: f"/cells/{e_.id}")
+    check("twin_crosswalks", "every crosswalk row names a twin node, a catalogue entry and, for a curve, one of its parts", not coverage["errors"],
+          {"errors": coverage["errors"], "types": sorted(coverage["types"]), "twin_commit": coverage["twin_commit"]})
+    check("twin_coverage", "every part of each twin reference model is mapped for every hazard with a curve", not coverage["findings"],
+          {"unmapped": coverage["findings"]}, severity="data")
+    for t_def in twin_mod.types(sp):
+        cov = coverage["types"].get(t_def["slug"])
+        if cov and t_def.get("building"):
+            for hz in cov["hazards"]:
+                if hz["href"]:
+                    hz["href"] = f"{hz['href']}?building={t_def['slug']}"
+    manifest["spine"] = twin_mod.nav_spine(sp, entries, lambda lbl: hazard_slug(lbl, sl))
+    tiles_by_id = {t["entry_id"]: t for t in tiles}
+    five = [h for h in sl["hazards"] if not h.get("outside_the_five")]
+    library_rows = []
+    for c_def in sp["categories"]:
+        rows_out = []
+        for t_def in c_def["types"]:
+            if t_def.get("planned"):
+                continue
+            row = {"slug": t_def["slug"], "label": t_def["label"], "building": t_def.get("building"), "profile": t_def.get("profile"),
+                   "picture_note": t_def.get("picture_note"), "href": f"/assets/{t_def['slug']}", "tiles": {}}
+            for h in five:
+                e_ = next((x for x in entries if x.data["asset"] == t_def["catalogue_asset"] and hazard_slug(x.data["hazard"], sl) == h["slug"]), None)
+                if not e_:
+                    continue
+                tile = dict(tiles_by_id[e_.id])
+                if t_def.get("building") and e_.kind != "gap":
+                    b_rows = [r for r in e_.data.get("rows") or [] if r["part"].startswith(t_def["building"])]
+                    sh, co = tier_span([r.get("shape") for r in b_rows]), tier_span([r.get("cost") for r in b_rows])
+                    tile["tiers"] = {**tile["tiers"], "shape": sh, "cost": co}
+                    tile["word"], tile["halves"] = one_word(sh, co), halves(sh, co)
+                    tile["building"] = t_def["building"]
+                    tile["building_parts"] = [r["part"] for r in b_rows]
+                    tile["href"] = f"/cells/{e_.id}?building={t_def['slug']}"
+                    tile["aria_label"] = f"{tile['aria_label']}, {t_def['building'].lower()} rows"
+                row["tiles"][h["slug"]] = tile
+            rows_out.append(row)
+        library_rows.append({"slug": c_def["slug"], "label": c_def["label"], "rule": c_def.get("rule"), "planned": bool(c_def.get("planned")),
+                             "planned_types": [t_["label"] for t_ in c_def["types"] if t_.get("planned")], "types": rows_out})
+    manifest["library"] = library_rows
+    n_types = sum(len(c_["types"]) for c_ in library_rows)
+    n_cats = sum(1 for c_ in library_rows if c_["types"])
+    manifest["summary"] = library_sentence(counts, f"{n_types} asset types in {n_cats} categories", len(five), agent_read, len(entries), searched)
+    manifest["state_words"] = twin_mod.STATE_WORDS
+    # ─── the Review page (G17): about curves only, one card per cell — who has read it, field reports, what is open
+    review_cells = []
+    type_of = {}
+    for t_def in twin_mod.types(sp):
+        if t_def.get("catalogue_asset"):
+            type_of.setdefault(t_def["catalogue_asset"], []).append(t_def)
+    for e in entries:
+        cell = cells[e.id]
         pl = cell.get("plain") or {}
         lc = pl.get("link_counts") or {}
-        if lc.get("locator_only"):
-            rq_items.append({"kind": "sources_locator_only", "entry_id": eid, "text": f"{lc['locator_only']} source{'s' if lc['locator_only'] != 1 else ''} with a locator but no link", "href": f"/cells/{eid}?station=evidence", "words": "no link in the register"})
         prov = pl.get("evidence_provenance") or {}
+        tasks: list[dict[str, Any]] = []
+        mine = [u.split(": ", 1)[1] for u in link_findings if u.startswith(e.id + ":")]
+        if mine:
+            tasks.append({"kind": "source_without_link", "text": f"Give {len(mine)} source{'s' if len(mine) != 1 else ''} a link or a locator", "items": mine, "href": f"/cells/{e.id}?step=numbers"})
+        if lc.get("locator_only"):
+            tasks.append({"kind": "sources_locator_only", "text": f"Add a link to {lc['locator_only']} source{'s' if lc['locator_only'] != 1 else ''} that only {'have' if lc['locator_only'] != 1 else 'has'} a locator", "items": [], "href": f"/cells/{e.id}?step=numbers"})
         if prov.get("kind") == "not_yet_extracted":
-            rq_items.append({"kind": "not_yet_extracted", "entry_id": eid, "text": NOT_YET_EXTRACTED, "href": f"/cells/{eid}?station=evidence", "words": "sources not yet extracted"})
+            tasks.append({"kind": "not_yet_extracted", "text": "Extract the sources from the write-up into register files", "items": [], "href": f"/cells/{e.id}?step=numbers"})
         if prov.get("unmatched"):
-            rq_items.append({"kind": "tier_id_unmatched", "entry_id": eid, "text": f"tier-table source IDs with no document in the workbook or dossier: {', '.join(prov['unmatched'])}", "href": f"/cells/{eid}?station=evidence", "words": "no document behind a source ID"})
+            tasks.append({"kind": "tier_id_unmatched", "text": f"Match {len(prov['unmatched'])} tier-table source ID{'s' if len(prov['unmatched']) != 1 else ''} to a document", "items": prov["unmatched"], "href": f"/cells/{e.id}?step=numbers"})
         for f_ in cell.get("build_findings") or []:
-            rq_items.append({"kind": f_["check"], "entry_id": eid, "text": f_["sentence"], "href": f"/cells/{eid}?station=evidence", "words": "a build check failed here"})
-    manifest["review_queue"] = {"items": rq_items, "counts": {k_: sum(1 for i_ in rq_items if i_["kind"] == k_) for k_ in sorted({i_["kind"] for i_ in rq_items})}}
+            if f_["check"] == "source_ids":
+                tasks.append({"kind": "source_ids", "text": f"Fix {len(f_['items'])} source-ID reference{'s' if len(f_['items']) != 1 else ''} that point at nothing in the register", "items": f_["items"], "href": f"/cells/{e.id}?step=numbers"})
+            elif f_["check"] == "known_answers":
+                tasks.append({"kind": "known_answers", "text": f_["sentence"], "items": f_["items"], "href": f"/cells/{e.id}"})
+        moved = [h_ for h_ in pl.get("hazard_paths") or [] if h_["state"] == "moved"]
+        branch = [h_ for h_ in pl.get("hazard_paths") or [] if h_["state"] == "on_branch"]
+        if moved:
+            tasks.append({"kind": "hazard_moved", "text": f"Update {len(moved)} Hazard path{'s' if len(moved) != 1 else ''}: moved on Hazard's main", "items": [f"{h_['path']} → {h_['moved_to']}" for h_ in moved], "href": f"/cells/{e.id}?step=numbers"})
+        if branch:
+            tasks.append({"kind": "hazard_branch", "text": f"{len(branch)} Hazard file{'s are' if len(branch) != 1 else ' is'} on a Hazard branch, not on its main yet", "items": sorted({h_["path"] for h_ in branch}), "href": f"/cells/{e.id}?step=numbers"})
+        to_confirm = coverage.get("to_confirm", {}).get(e.id) or []
+        if to_confirm:
+            tasks.append({"kind": "crosswalk_confirm", "text": f"Confirm {len(to_confirm)} part{'s' if len(to_confirm) != 1 else ''} of the coverage picture the cell does not name", "items": [f"{q['type']}: {q['name']} — {q['note']}" for q in to_confirm], "href": f"/cells/{e.id}?step=covers"})
+        rv = cell["rail"]["review"]
+        occ = cell["rail"]["evidence"]["occurrence"]["label"]
+        review_cells.append({
+            "entry_id": e.id, "title": cell["title"], "status": e.status, "href": f"/cells/{e.id}",
+            "types": [t_["label"] for t_ in type_of.get(e.data["asset"], [])], "category": next((c_["label"] for c_ in sp["categories"] for t_ in c_["types"] if t_.get("catalogue_asset") == e.data["asset"]), None),
+            "read": {"kind": rv["entry_read_kind"], "by": rv["entry_read_by"], "on": rv["entry_read_on"]}, "review": rv["review"], "release_review": rv["release_review"],
+            "field": "not searched" if occ in ("not searched", "no register") else occ, "words": cell["plain"]["rail"]["review"]["words"],
+            "tasks": tasks,
+        })
+    cat_order = {c_["label"]: i for i, c_ in enumerate(sp["categories"])}
+    review_cells.sort(key=lambda r: (cat_order.get(r["category"], 99), -len(r["tasks"]), r["title"]))
+    manifest["review"] = {"cells": review_cells, "n_tasks": sum(len(r["tasks"]) for r in review_cells), "n_cells_with_tasks": sum(1 for r in review_cells if r["tasks"]),
+                          "n_person_reviews": sum(1 for r in review_cells if r["review"]), "kinds": sorted({t_["kind"] for r in review_cells for t_ in r["tasks"]})}
     # ─── assets: every asset through the same parts view (iteration 2) ───
     assets_out: dict[str, dict[str, Any]] = {}
     for a_def in sl["assets"]:
@@ -577,6 +693,7 @@ def build(write: bool = True) -> dict[str, Any]:
         elif aslug == "substation" and sub_budget.get("available"):
             total = sum(float(r["amount_usd"]) for r in sub_budget["rows"] if r.get("amount_usd"))
             reference = {"label": f"one 345/138 kV station · {fmt_usd_compact(total)} reference budget (Hazard, MISO MTEP24 rates)", "source": SUBSTATION_BUDGET_SOURCE, "total_usd": total,
+                         "link": hazard_main.lookup(SUBSTATION_BUDGET_SOURCE[len("Hazard_modeling/"):])["link"],
                          "note": "the bindings price the fenced station at $27.4M; the budget also carries the external access road outside the fence"}
         hazards_cols = []
         for h in sl["hazards"]:
@@ -611,8 +728,11 @@ def build(write: bool = True) -> dict[str, Any]:
         }
 
     receipt = {
-        "schema": "damage_dashboard_receipt.v0", "built_at": manifest["built_at"], "commit": manifest["commit"], "commit_full": manifest["commit_full"],
+        "schema": "damage_dashboard_receipt.v1", "built_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "commit": manifest["commit"], "commit_full": manifest["commit_full"],
+        "source": manifest["source"], "hazard_main": hazard_main.state(), "checkout_head": git("rev-parse", "HEAD"),
         "working_tree_clean": git("status", "--porcelain") == "", "python": sys.version.split()[0],
+        "twin": {"viewer": {k: v for k, v in viewer.items() if k != "load_order"}, "trees_commit": coverage["twin_commit"], "trees_dirty": coverage["twin_dirty"],
+                 "types": sorted(coverage["types"]), "unmapped": coverage["findings"], "to_confirm": {k: len(v) for k, v in (coverage.get("to_confirm") or {}).items()}},
         "counts": manifest["counts"], "known_answers": kat_totals, "pins_checked": sum(len(e.pins) for e in entries),
         "twin_crosswalk": {k: v for k, v in twin.items() if k not in ("text", "crosswalk")},
         "substation_budget": {k: v for k, v in sub_budget.items() if k not in ("text", "rows")} | {"rows": len(sub_budget.get("rows") or [])},
@@ -635,8 +755,19 @@ def build(write: bool = True) -> dict[str, Any]:
     manifest["build_checks"] = [{k: v for k, v in c.items() if k != "detail"} | {"summary": _check_summary(c)} for c in checks]
     manifest["all_checks_pass"] = not failed
     if write:
-        _write_all(manifest, cells, curves_out, assets_out, occurrence_out, citations, receipt, twin, sub_budget, sub_xwalk)
+        _write_all(manifest, cells, curves_out, assets_out, occurrence_out, citations, receipt, twin, sub_budget, sub_xwalk, coverage["types"], faq)
     return receipt
+
+
+def source_block(commit_full: str) -> dict[str, Any]:
+    """What the dashboard was built from (G18): main, or a labelled preview of a branch whose data is never main's."""
+    mode = SOURCE["mode"]
+    branch = SOURCE["ref"] or git("rev-parse", "--abbrev-ref", "HEAD")
+    if mode == "main":
+        label = f"main at {commit_full[:7]}"
+    else:
+        label = f"preview of branch {branch} at {commit_full[:7]}" + (" with uncommitted changes" if SOURCE["dirty"] else "") + " — not main"
+    return {"mode": mode, "ref": "origin/main" if mode == "main" else branch, "commit": commit_full[:7], "commit_full": commit_full, "dirty": SOURCE["dirty"], "label": label}
 
 
 def _check_summary(c: dict[str, Any]) -> str:
@@ -665,6 +796,16 @@ def _check_summary(c: dict[str, Any]) -> str:
         return "captions and paragraphs complete" if c["ok"] else f"{len(d.get('missing') or [])} missing"
     if c["id"] == "occurrence":
         return f"{d.get('registers')} registers"
+    if c["id"] == "twin_viewer":
+        return f"{d.get('files')} files equal their manifest, twin {str(d.get('twin_commit'))[:7]}" if c["ok"] else (d.get("reason") or f"{len(d.get('mismatched') or [])} files differ")
+    if c["id"] == "twin_crosswalks":
+        return f"{len(d.get('types') or [])} asset types mapped" if c["ok"] else f"{len(d.get('errors') or [])} rows do not resolve"
+    if c["id"] == "twin_coverage":
+        return "every twin part mapped" if c["ok"] else f"{len(d.get('unmapped') or [])} type × hazard pairs leave parts unmapped"
+    if c["id"] == "hazard_links":
+        return "every Hazard file on its main" if c["ok"] else f"{len(d.get('off_main') or [])} Hazard paths not on Hazard's main ({d.get('hazard')})"
+    if c["id"] == "faq":
+        return f"{d.get('questions')} questions, every link resolves" if c["ok"] else f"{len(d.get('errors') or [])} problems"
     return "ok" if c["ok"] else "failed"
 
 
@@ -710,12 +851,14 @@ def _versions(e: Entry) -> list[dict[str, Any]]:
 
 
 def _aria(c: dict[str, Any], e: Entry) -> str:
+    """A tile's accessible name, in words like the tile (G16): no tier code."""
     bits = [c["title"], c["status"]]
     if e.data.get("not_covered"):
         bits.append("partial")
-    if c["rail"]["evidence"]["shape"] != "–":
-        bits.append(f"shape {c['rail']['evidence']['shape']}, cost {c['rail']['evidence']['cost']}")
-    bits.append(c["rail"]["evidence"]["occurrence"]["label"].replace("no register", "no field-report register"))
+    if (c.get("plain") or {}).get("word"):
+        bits.append(f"evidence: {c['plain']['word']}")
+    occ = c["rail"]["evidence"]["occurrence"]["label"]
+    bits.append("field reports not searched" if occ in ("not searched", "no register") else f"field reports: {occ}")
     return ", ".join(bits)
 
 
@@ -725,10 +868,10 @@ def _dump(path, obj) -> str:
     return sha256(path)
 
 
-def _write_all(manifest, cells, curves, assets, occurrence, citations, receipt, twin, sub_budget=None, sub_xwalk=None) -> None:
+def _write_all(manifest, cells, curves, assets, occurrence, citations, receipt, twin, sub_budget=None, sub_xwalk=None, coverage=None, faq=None) -> None:
     if OUT.exists():
         for child in OUT.iterdir():
-            if child.name in ("README.md", ".gitkeep"):
+            if child.name in ("README.md", ".gitkeep", "twin"):  # twin/ is an input: the twin export (scripts/dashboard/export_twin.mjs)
                 continue
             shutil.rmtree(child) if child.is_dir() else child.unlink()
     written: dict[str, str] = {}
@@ -742,6 +885,10 @@ def _write_all(manifest, cells, curves, assets, occurrence, citations, receipt, 
     for (aslug, hslug), o in occurrence.items():
         written[f"occurrence/{aslug}/{hslug}.json"] = _dump(OUT / "occurrence" / aslug / f"{hslug}.json", o)
     written["citations.json"] = _dump(OUT / "citations.json", {"schema": "damage_dashboard_citations.v0", "cells": citations})
+    for slug, cov in (coverage or {}).items():
+        written[f"coverage/{slug}.json"] = _dump(OUT / "coverage" / f"{slug}.json", {"schema": "damage_dashboard_coverage.v1", **cov})
+    if faq is not None:
+        written["faq.json"] = _dump(OUT / "faq.json", {k: v for k, v in faq.items() if k != "errors"} | {"errors": faq["errors"]})
     if twin.get("available"):
         (OUT / "twin_crosswalk.csv").write_text(twin["text"], encoding="utf-8")
         written["twin_crosswalk.csv"] = sha256(OUT / "twin_crosswalk.csv")

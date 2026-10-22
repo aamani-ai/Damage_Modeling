@@ -1,9 +1,9 @@
 "use client";
 
-// The asset view for every asset (brief §3.4): the parts of the plant × the hazards, words first — "curve ·
-// lab-tested", "curve for part of it", "named, no response yet", "no curve", "not named by this cell", "no cell
-// yet" — with the marks on hover; a lens for curves, field reports or the twin; the Digital Twin's nodes where a
-// crosswalk exists; and the finding that the cells split the plant differently, shown side by side.
+// The cells' own part lists, asset by asset (brief §3.4; one control away on the asset page since iteration 3): the
+// parts of the plant × the hazards, in words — "curve · published", "curve for part of it", "named, no response yet",
+// "no curve", "not named by this cell", "no cell yet" — a lens for curves, field reports or the twin; the Digital
+// Twin's nodes where Hazard's crosswalk exists; and the finding that the cells split the plant differently.
 import Link from "next/link";
 import { useRef } from "react";
 import { fmtPct, fmtUsdCompact } from "@/lib/format";
@@ -23,7 +23,6 @@ function cellTitle(c: AssetCellV2): string {
   if (c.sentence) bits.push(c.sentence);
   if (c.twin_lead) bits.push(`Digital Twin lead: ${LEAD_WORD[c.twin_lead] ?? c.twin_lead} (a lead, not evidence)`);
   if (c.occurrence) bits.push(`field reports: ${c.occurrence.sentence}`);
-  bits.push(`mark ${c.mark}`);
   return bits.join(" · ");
 }
 
@@ -47,7 +46,7 @@ function CellWords({ c, lens }: { c: AssetCellV2; lens: string }) {
   );
 }
 
-export function AssetViewGrid({ v, m }: { v: AssetViewV2; m: ManifestV2 }) {
+export function AssetViewGrid({ v }: { v: AssetViewV2; m: ManifestV2 }) {
   const [lensParam, setLens] = useUrlParam("lens");
   const [openRow, setRow] = useUrlParam("row");
   const lenses = ["all", "curves", "occurrence", ...(v.twin.available && v.twin.leads !== false ? ["twin"] : [])];
@@ -82,12 +81,12 @@ export function AssetViewGrid({ v, m }: { v: AssetViewV2; m: ManifestV2 }) {
         </div>
         <InfoHint label="How to read a cell">
           <div className="space-y-1">
-            <div><span className="font-medium">curve · lab-tested</span> — this part has a curve under this hazard; the words say how sure we are (lab-tested · transferred · our judgment)</div>
+            <div><span className="font-medium">curve · published</span> — this part has a curve under this hazard; the words say how sure we are (field-calibrated · published · borrowed · our judgment)</div>
             <div><span className="font-medium">curve for part of it</span> — some of the part&apos;s value has a curve, the rest has none</div>
             <div><span className="font-medium">one curve for the whole …</span> — the cell prices the whole asset with one curve, so every part is inside it</div>
             <div><span className="font-medium">named, no response yet</span> — the cell lists the part but withholds a number (a stated &quot;not zero&quot;)</div>
             <div><span className="font-medium">no curve</span> — the cell says this part has no curve yet · <span className="font-medium">not named by this cell</span> — the cell is silent about it · <span className="font-medium">no cell yet</span> — no entry exists</div>
-            <div className="text-muted-foreground">Hover a cell for the marks, the cell&apos;s own part names and the field-report state. Arrow keys move; Enter opens the cell.</div>
+            <div className="text-muted-foreground">Hover a cell for the cell&apos;s own part names and the field-report state. Arrow keys move; Enter opens the cell.</div>
           </div>
         </InfoHint>
       </div>
@@ -124,10 +123,10 @@ export function AssetViewGrid({ v, m }: { v: AssetViewV2; m: ManifestV2 }) {
         </table>
       </div>
       <p className="mt-1.5 px-1 text-[10.5px] text-muted-foreground">
-        Words first: each cell says whether this part has a curve under this hazard and how sure we are; hover for the marks (<span className="font-mono">■</span> live <span className="font-mono">▢</span> proposal or withheld <span className="font-mono">▨</span> reused <span className="font-mono">┈</span> no cell <span className="font-mono">✕</span> no curve <span className="font-mono">◔</span> part of it), the cell&apos;s own part names and the field-report state.
+        Each cell says whether this part has a curve under this hazard and how sure we are; hover for the cell&apos;s own part names and the field-report state.
         {hasNodes ? " ▸ opens a part's Digital Twin nodes." : ""} {v.twin.sentence}
       </p>
-      <SplitBlock v={v} m={m} />
+      <SplitBlock v={v} />
     </div>
   );
 }
@@ -193,7 +192,7 @@ function RowGroup({ row, r, open, expandable, cols, five, lens, hrefFor, onKey, 
   );
 }
 
-function SplitBlock({ v, m }: { v: AssetViewV2; m: ManifestV2 }) {
+function SplitBlock({ v }: { v: AssetViewV2 }) {
   const s = v.split;
   const cols = s.columns;
   return (
@@ -225,7 +224,7 @@ function SplitBlock({ v, m }: { v: AssetViewV2; m: ManifestV2 }) {
             </tbody>
           </table>
           {v.value_source ? <p className="mt-1 text-[10px] text-muted-foreground">rows and dollars from {v.value_source.label}{v.value_source.pin_ok != null ? (v.value_source.pin_ok ? " · checked against its pin" : " · pin check failed") : ""}</p> : null}
-          <p className="mt-1 text-[10px] text-muted-foreground">built at {m.commit}</p>
+
         </div>
       </details>
     </section>

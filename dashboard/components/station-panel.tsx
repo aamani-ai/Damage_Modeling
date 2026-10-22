@@ -5,7 +5,7 @@
 // "Details" — the ledger exactly as V0 showed it: register and claim IDs, the gate checklist, files and SHAs.
 import Link from "next/link";
 import { fmtPct, fmtUsdCompact } from "@/lib/format";
-import type { CellV2, Citations, CurveV2, ManifestV2, PlainStation } from "@/lib/types";
+import type { CellV2, Citations, CurveV2, ManifestV3, PlainStation } from "@/lib/types";
 import { AuditTable, CapabilityLedger, EvidenceLedger, Eyebrow, FieldReviewLedger, FilesList, GateChecklist, PartsTable, ProofLedger, ProseEvidence, SeamsLedger, StationFact, ValueLedger } from "./ledger";
 import { SourceRef } from "./source-link";
 import { EmptyState, FileLink, Mono } from "./ui";
@@ -25,7 +25,7 @@ function Line({ label, children }: { label: string; children: React.ReactNode })
   );
 }
 
-export function StationPanel({ station, cell, cites, curves, m }: { station: PlainStation; cell: CellV2; cites: Citations["cells"][string] | null; curves: CurveV2[]; m: ManifestV2 }) {
+export function StationPanel({ station, cell, cites, curves, m }: { station: PlainStation; cell: CellV2; cites: Citations["cells"][string] | null; curves: CurveV2[]; m: ManifestV3 }) {
   const blob = (p: string) => `${BLOB}/${m.commit_full}/${p.replace(/^\/+/, "")}`;
   const ch = cell.chain.stations.find((s) => s.id === station.id)!;
   const pl = cell.plain;
@@ -101,7 +101,7 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
               <ul className="space-y-1">
                 {pl.parameters_plain.map((p, i) => (
                   <li key={p.id + i}>
-                    <span className="font-medium">{p.name}</span>{p.value_text ? <span className="tabular"> {p.value_text}</span> : null} · {p.tier_word} <span className="font-mono text-[10px] text-muted-foreground">· {p.tier ?? "–"}</span>
+                    <span className="font-medium">{p.name}</span>{p.value_text ? <span className="tabular"> {p.value_text}</span> : null} · {p.tier_word}
                     {p.sources.length ? <span className="text-muted-foreground"> · from {p.sources.map((s, j) => <span key={s.id}>{j ? ", " : ""}{s.link ? <a href={s.link} target="_blank" rel="noreferrer" className="text-accent hover:underline">{s.title}</a> : <span title={s.resolved ? undefined : "no document matched this source ID"}>{s.title}</span>}</span>)}</span> : <span className="text-muted-foreground"> · our judgment, no source cited</span>}
                     {p.curve_id && p.curve_id !== "all" ? <span className="block text-[10px] text-muted-foreground">for {curves.find((c) => c.curve_id === p.curve_id)?.part ?? p.curve_id}{p.reasoning ? ` — ${p.reasoning}` : ""}</span> : p.reasoning ? <span className="block text-[10px] text-muted-foreground">{p.reasoning}</span> : null}
                   </li>
@@ -166,7 +166,7 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
         <Words>
           {cell.proof?.known_answers.declared ? <Line label="Known answers">{cell.proof.known_answers.reproduced} of {cell.proof.known_answers.run} reproduced by this build{cell.proof.known_answers.not_run.length ? `; ${cell.proof.known_answers.not_run.reduce((s, n) => s + n.n, 0)} not run` : ""} — the hollow circles on the curves</Line> : <Line label="Known answers">none declared by the artifact</Line>}
           {cell.proof?.validation ? <Line label="Validation">{cell.proof.validation.status?.replace(/_/g, " ") ?? "report"}{cell.proof.validation.date ? ` · ${cell.proof.validation.date}` : ""}</Line> : null}
-          <Line label="Outside checks">{cell.proof?.outside_checks.length ? cell.proof.outside_checks.map((c) => <span key={c.name} className="block"><a href={/^https?:/.test(c.link) ? c.link : blob(c.link)} target="_blank" rel="noreferrer" className="text-accent hover:underline">{c.name}</a></span>) : <span className="text-muted-foreground">none yet</span>}</Line>
+          <Line label="Outside checks">{cell.proof?.outside_checks.length ? cell.proof.outside_checks.map((c) => <span key={c.name} className="block">{c.link ? <a href={/^https?:/.test(c.link) ? c.link : blob(c.link)} target="_blank" rel="noreferrer" className="text-accent hover:underline">{c.name}</a> : <span>{c.name}</span>}{c.hazard?.words ? <span className="italic text-muted-foreground"> · {c.hazard.words}</span> : null}</span>) : <span className="text-muted-foreground">none yet</span>}</Line>
         </Words>
       );
       details = <ProofLedger cell={cell} blob={blob} />;

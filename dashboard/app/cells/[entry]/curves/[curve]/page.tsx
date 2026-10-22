@@ -1,15 +1,16 @@
-// The curve dossier (brief §3.1, DCD-D19): one curve, large, with the build's caption beside it; what sets the
-// curve in words; its parameters with their tier words and sources as links; the field-report state and the
-// review state; the identity in the footer. "Show the numbers" keeps knots, known answers, tier codes and the
-// record's parameters exactly as before.
+// The curve dossier (brief §3.1, DCD-D19): one curve, large, with the build's caption beside it; how sure in words
+// (G16, DCD-D28); where its part sits on the Digital Twin's reference model (DCD-D21); what sets the curve; its
+// parameters with their words and sources as links; the field-report and review state; the identity in the footer.
+// "Show the numbers" keeps knots, known answers, tier codes and the record's parameters exactly as before.
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DossierPlot } from "@/components/dossier-plot";
 import { Eyebrow } from "@/components/ledger";
+import { PartPicture } from "@/components/part-picture";
 import { PlainRail } from "@/components/plain-rail";
-import { SourceRef, TierWord } from "@/components/source-link";
+import { SourceRef } from "@/components/source-link";
 import { Card, CardTitle, EmptyState, FileLink, InfoHint, Kv, Mono, Tag } from "@/components/ui";
-import { blobUrl, cell, curve, curvesOf, manifest } from "@/lib/data";
+import { blobUrl, cell, coverageSlice, curve, curvesOf, manifest, twinViewer } from "@/lib/data";
 import { fmtDr, fmtNum, shortSha } from "@/lib/format";
 import { CATEGORY_SYMBOL_WORDS, LINE_STYLE_WORDS } from "@/lib/series";
 
@@ -35,6 +36,13 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
   const nAnswers = k.known_answers.reduce((t, a) => t + (a.n ?? 1), 0);
   const plainParams = c.plain.parameters_plain.filter((p) => !p.curve_id || p.curve_id === k.curve_id || p.curve_id === "all" || p.curve_id === "all_three");
   const formWords = k.summary.split(":")[1]?.split(", read against")[0]?.trim() ?? (k.form_label ?? k.curve_form?.replace(/_/g, " ") ?? "");
+  // the twin type whose picture holds this part: the type of this catalogue asset (for a shared real-estate cell, the
+  // type whose building the part names)
+  const catalogue = m.assets.find((a) => a.slug === c.asset.slug)?.catalogue ?? c.asset.label;
+  const types = m.spine.categories.flatMap((x) => x.types).filter((t) => !t.planned && t.catalogue_asset === catalogue);
+  const type = types.find((t) => t.building && (k.part ?? "").startsWith(t.building)) ?? types[0];
+  const cov = type ? coverageSlice(type.slug, c.hazard.slug) : null;
+  const viewer = twinViewer();
   return (
     <div>
       <PlainRail title={title} rail={k.rail_plain} summary={k.summary} back={{ href: `/cells/${entry}`, label: c.title }} tierMeaning={m.tier_meaning} tone={c.rail.review.tone} />
@@ -66,8 +74,8 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
             <p>{cap.what_it_says}</p>
             <div>
               <Eyebrow>How sure</Eyebrow>
-              <p><span className="text-muted-foreground">shape · </span><TierWord code={cap.how_sure.shape.tier} words={m.tier_words} />{cap.how_sure.shape.basis ? <span className="text-muted-foreground"> — {cap.how_sure.shape.basis}</span> : null}</p>
-              <p><span className="text-muted-foreground">cost · </span><TierWord code={cap.how_sure.cost.tier} words={m.tier_words} />{cap.how_sure.cost.basis ? <span className="text-muted-foreground"> — {cap.how_sure.cost.basis}</span> : null}</p>
+              <p><span className="text-muted-foreground">How damage rises: </span><span className="font-medium">{cap.how_sure.shape.word}</span>{cap.how_sure.shape.basis ? <span className="text-muted-foreground"> — {cap.how_sure.shape.basis}</span> : null}</p>
+              <p><span className="text-muted-foreground">How it becomes dollars: </span><span className="font-medium">{cap.how_sure.cost.word}</span>{cap.how_sure.cost.basis ? <span className="text-muted-foreground"> — {cap.how_sure.cost.basis}</span> : null}</p>
               <p className="text-muted-foreground">{cap.how_sure.parameters}</p>
             </div>
             <div>
@@ -76,9 +84,10 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
               {k.occurrence?.twin_lead?.nodes.length ? <p className="text-[10.5px] text-muted-foreground">Digital Twin leads (design exposure, not evidence): {k.occurrence.twin_lead.nodes.map((n) => `${n.name} ${["", "low", "medium", "high"][n.level]} — ${n.why}`).join("; ")}</p> : null}
             </div>
             <div>
-              <Eyebrow>Main references <span className="font-normal normal-case tracking-normal">({cap.references_from})</span></Eyebrow>
+              <Eyebrow>Main references</Eyebrow>
               <ul className="space-y-0.5">{cap.main_references.map((r, i) => <li key={(r.source_id ?? r.text) + i}><SourceRef s={{ ...r, title: r.text }} id={r.source_id} showLocator={false} /></li>)}</ul>
             </div>
+            {cov && viewer && k.part ? <PartPicture cov={cov} loadOrder={viewer.load_order} part={k.part} typeLabel={type!.label} typeHref={`${type!.href}?hazard=${c.hazard.slug}`} /> : null}
           </div>
         </Card>
         <Card className="xl:col-span-3">
@@ -93,7 +102,7 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
             <div className="mt-2"><Eyebrow>Parameters and their sources</Eyebrow></div>
             {plainParams.length ? plainParams.map((p, i) => (
               <div key={p.id + i} className="border-t border-border/60 py-1">
-                <span className="font-medium">{p.name}</span>{p.value_text ? <span className="tabular"> {p.value_text}</span> : null} · {p.tier_word} <span className="font-mono text-[10px] text-muted-foreground">· {p.tier ?? "–"}</span>
+                <span className="font-medium">{p.name}</span>{p.value_text ? <span className="tabular"> {p.value_text}</span> : null} · {p.tier_word}
                 {p.sources.length ? <span className="text-muted-foreground"> · from {p.sources.map((s, j) => <span key={s.id}>{j ? ", " : ""}{s.link ? <a href={s.link} target="_blank" rel="noreferrer" className="text-accent hover:underline">{s.title}</a> : <span>{s.title}</span>}</span>)}</span> : <span className="text-muted-foreground"> · our judgment, no source cited</span>}
                 {p.reasoning ? <span className="block text-[10.5px] text-muted-foreground">{p.reasoning}</span> : null}
               </div>
@@ -151,7 +160,8 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
       </div>
       <footer className="mt-4 border-t border-border pt-2 text-[10.5px] text-muted-foreground">
         <span className="text-[10px] font-semibold uppercase tracking-wide">Identity</span>{" "}
-        <span className="font-mono">{c.identity.damage_code_id ?? c.identity.binding_id} · {c.identity.model} · {c.identity.docs} · sha {shortSha(c.identity.sha256)} · built at {m.commit}</span>
+        <span className="font-mono">{c.identity.damage_code_id ?? c.identity.binding_id} · {c.identity.model} · {c.identity.docs} · sha {shortSha(c.identity.sha256)}</span>
+        <span className="ml-3">built from {m.source.label}</span>
         <span className="ml-3">record in <FileLink href={blob(c.files.write_up ?? c.chain.stations.find((s) => s.id === "artifact")?.files[0]?.path ?? "")}>{c.files.write_up?.split("/").slice(-1)[0] ?? "the artifact"}</FileLink> · data <Mono>{k.data_path}</Mono></span>
       </footer>
     </div>

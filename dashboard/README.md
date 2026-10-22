@@ -1,22 +1,35 @@
-# dashboard/ — the damage-curve dashboard (iteration 2, local)
+# dashboard/ — the damage-curve dashboard (iteration 3, local)
 
-An internal instrument that shows every damage curve in this repository with where it came from: the library
-of hazard × asset cells, an asset view for every asset, a cell page written for a reader with the ledger one
-control away, a curve page, the "does it happen?" page, a review queue and a `/code/` resolver. It **reads**
+An internal instrument that shows every damage curve in this repository with where it came from: the library by
+asset category and type, an asset page per type with the Digital Twin's own 3D model coloured by what each curve
+covers, a cell page that opens on the curve and why we believe it, a curve page, the "does it happen?" page, one
+Review page, the FAQ and a `/code/` resolver. It **reads**
 the catalogue and the cell artifacts through a checked build step and **never writes** to `docs/`. Plan of
 record: [`docs/plans/damage_curve_dashboard/`](../docs/plans/damage_curve_dashboard/README.md); reasoning:
 [`docs/extra/discussion/damage_curve_dashboard/`](../docs/extra/discussion/damage_curve_dashboard/README.md).
 
-**Status: iteration 2 (2026-10-21), built on the owner's first review of V0** (`DCD-D18`, the
-[brief](../docs/plans/damage_curve_dashboard/iteration_2_brief.md)): the plain layer is the page and every
-ledger fact is one control away (`DCD-D19`); sources are links; every asset has the asset view with the
-*split differently* finding; the four oldest cells show the evidence read from their workbooks and dossiers.
-Look review at [`evidence/b0ff718/REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/b0ff718/REVIEW.md);
-the owner's second review on the running app is open. **To review it, open `/v0` in the running app** (the
-*Review iteration 2* tab): eight stops in the new words, what was checked, and the decisions the owner is asked
-for. V0 (accepted 2026-10-20, `DCD-D17`) and the first V1 step keep their records at
-[`evidence/3f9d516/`](../docs/plans/damage_curve_dashboard/evidence/3f9d516/REVIEW.md) and
-[`evidence/3ea7e02/`](../docs/plans/damage_curve_dashboard/evidence/3ea7e02/REVIEW.md).
+**Status: iteration 3 (2026-10-21), built on the owner's rulings G13–G23** (`DCD-D20`–`D31`, discussion
+[`08`](../docs/extra/discussion/damage_curve_dashboard/08_categories_and_construction.md) and
+[`09`](../docs/extra/discussion/damage_curve_dashboard/09_asset_spine_coverage_and_faq.md)), on the one `dashboard`
+branch ([PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8)), for the owner's review on the running app:
+
+- **The spine.** The top bar is *Library · Power plants ▾ · Real estate ▾ · Grid infrastructure ▾ · Review*, from the
+  Digital Twin's taxonomy ([`spine.json`](../docs/contracts/twin_crosswalks/spine.json)); the library has one row
+  per type under its category; real estate has one row per building type.
+- **What each curve covers, in 3D.** Every type's page shows the twin's reference model, coloured by what the cell
+  does with each part (has a curve · changes the curve · in the value, no curve yet · reviewed, no direct damage ·
+  outside the value), hazard by hazard, with the systems in words beside it and a systems × hazards table below.
+  Every cell page shows the same picture for its hazard; every curve page shows where its part sits. The viewer is
+  vendored and pinned (`public/twin/`); the colours come from the crosswalks at
+  [`docs/contracts/twin_crosswalks/`](../docs/contracts/twin_crosswalks/README.md).
+- **The cell page** opens on the curve and *Why we believe it* (main logic, how sure in words, main references),
+  then what it covers, then four steps, then a *For Hazard* footer. Evidence is said in words; the codes are under
+  *Show the numbers*. One Review page; the [FAQ](../docs/faq.md); no build date.
+- **Built from `main`** (`DCD-D30`): the data on this branch is a labelled preview, rebuilt from `main` at the merge.
+
+Earlier records: iteration 2 at [`evidence/b0ff718/REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/b0ff718/REVIEW.md),
+V0 (accepted 2026-10-20, `DCD-D17`) at [`evidence/3f9d516/`](../docs/plans/damage_curve_dashboard/evidence/3f9d516/REVIEW.md)
+and the first V1 step at [`evidence/3ea7e02/`](../docs/plans/damage_curve_dashboard/evidence/3ea7e02/REVIEW.md).
 
 ## Run it
 
@@ -24,6 +37,12 @@ From the repository root, with the `python3.12` venv of [`AGENTS.md`](../AGENTS.
 
 ```bash
 .venv/bin/python scripts/dashboard/build_dashboard_data.py
+```
+
+That builds from `origin/main`. On a branch whose work is not merged yet, build a labelled preview instead:
+
+```bash
+.venv/bin/python scripts/dashboard/build_dashboard_data.py --source worktree
 ```
 
 ```bash
@@ -40,9 +59,15 @@ finding. A *structural* failure writes nothing.
 - **Checks only:** add `--check` to the build step to run every check and write nothing.
 - **In a git worktree** the venv lives in the main checkout: `<main checkout>/.venv/bin/python
   scripts/dashboard/build_dashboard_data.py`, run from the worktree root.
-- **Hazard's twin crosswalk** is read from `$HAZARD_MODELING`, else the gitignored `Hazard_modeling` symlink,
-  else a `Hazard_modeling` checkout beside this repository. Without any of them the build checks the committed
-  copy `data/twin_crosswalk.csv` against the same pin and says so in the receipt.
+- **Hazard's files** — its battery and substation twin crosswalks and the substation budget — are read through
+  git on Hazard's `origin/main`, never its working tree (`DCD-D30`); the checkout is found at `$HAZARD_MODELING`,
+  else the gitignored `Hazard_modeling` symlink, else beside this repository. A file not on Hazard's main falls back
+  to the copy committed in `data/`, checked against the same pin, and the receipt says so. Every Hazard path a page
+  links to is looked up on Hazard's main too: kept, pointed at its new place when Hazard archived it, or shown
+  without a link as *on a Hazard branch, not on its main yet*.
+- **The Digital Twin** is exported by `node scripts/dashboard/export_twin.mjs ["<Digital Twin checkout>"]`: the
+  trees into `data/twin/trees.json` (an input the build keeps) and the viewer, models and three.js into
+  `public/twin/` with a SHA manifest the build checks. Run it again when the twin changes.
 - **If `npm install` fails with `EACCES` under `~/.npm`**, give it another cache: `npm install --cache
   /tmp/npm-cache` (any writable folder; never `sudo`).
 - **Other scripts:** `npm run lint` · `npm run typecheck` · `npm run data` (the build step, from the main
@@ -68,6 +93,11 @@ and the library's header shows them as a strip.
 | `domain` | Nothing is sampled outside a declared valid domain (each sampler asserts it; a violation stops the build) | structural | pass |
 | `chain_files` | No trail station is marked *artifact* without a file behind it | structural | pass |
 | `occurrence` | Every occurrence register names its catalogue entry and uses the shared bucket keys | structural | pass |
+| `twin_viewer` | The vendored twin viewer, models and three.js equal the SHA-256 their manifest records | structural | pass — 16 files, twin `d01abd0` |
+| `twin_crosswalks` | Every crosswalk row names a node of the pinned twin tree, a catalogue entry of its type and hazard, a known state and basis, and — for a curve — one of the entry's parts | structural | pass — 7 types |
+| `twin_coverage` | Every part of each twin reference model is mapped for every hazard with a curve | data | pass |
+| `hazard_links` | Every Hazard file the pages name is on Hazard's main | data | **fails** — 9 paths: the battery crosswalk folder, the hurricane substation binding and the wildfire substation module are on a Hazard branch; three notebooks were moved into `_archive/` on Hazard's main |
+| `faq` | Every FAQ question has its date, owner, an answer of at most four sentences, an example and a *Read more* link that resolves | data | pass — 14 questions |
 
 A data check is never loosened to make the strip green: the failure is shown on the library, in the
 affected cell's "Where the numbers come from" panel, and on the review queue (`/review`) until the cell's
@@ -100,26 +130,24 @@ keyboard-only walk, the fixed sentences, both themes, a cold read, the speed bud
 [`evidence/3f9d516/REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/3f9d516/REVIEW.md); the first V1
 step's: [`evidence/3ea7e02/REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/3ea7e02/REVIEW.md).
 
-## What iteration 2 covers, and what it does not
+## What iteration 3 covers, and what it does not
 
 | Covered | Not yet |
 |---|---|
-| The library of all 25 entries, with its five lenses, unchanged (accepted as it was) | The chain lens and the gate view as library lenses (`07` §6–§7); the gate checklist is under each step's Details |
-| The asset view for all five assets: the parts of the plant × the hazards in words, the cell's own part names on hover and side by side, the *split differently* finding; Digital Twin nodes for batteries (leads) and substations (nodes, no leads yet); *no twin mapping yet* for the rest | Dollars for solar, wind and real estate (no reference budget exists for them here); the twin's hazard leads for substations (no register) |
-| Every cell page as a story: plain chips, the plain sentence, *How this was built* (ten steps, plain names, a side panel each: paragraph → sources and parameters in words → Details), one curve at a time with a caption, five open plain blocks, the identity in the footer | Lineage lighting, the version ghost and the chain diff |
-| Every curve page in the same shape: the caption, what sets the curve in words, parameters with linked sources, *Show the numbers* | Digitised source points (◇) and the events rug; no cell has data for either |
-| Sources as links everywhere: URL, DOI, a file in this repository at the build commit, or a Hazard file (its `main`, not pinned); otherwise the title, the locator and the words *no link in the register* | A link for the five sources that carry neither (a data finding, on the queue) |
-| The four oldest cells' sources, claims, assumptions and open seams read from their workbooks and dossiers | The three tier-table IDs that match no document (on the page and the queue) |
-| The review queue (`/review`), seeded with what the pages found | Agent notes, the owner filter and the weekly agents' JSON (Phase 4) |
-| The `/code/<damage_code_id>?v=` resolver; the occurrence page (register path and SHA in its footer) | Search results: no field-report search has been logged |
-| `/v0` rewritten as the iteration-2 walkthrough | The one-pager export (gate G8); hosting (gate H1) |
+| The library by category and type; real estate one row per building type, each tile opening the shared cell at its building | The chain lens and the gate view as library lenses |
+| An asset page per type: the twin's 3D model coloured by coverage, hazard by hazard, block and plant; the systems in words; click a part for its curve; the systems × hazards table; the cells' own part lists one control away | An office model in the twin (the Commercial picture is the retail building, `DCD-D22`); a reference budget for solar, wind and real estate, so no dollars there |
+| Every cell page: the curve and why we believe it, what it covers in 3D (a building toggle for real estate), four steps with the old steps in their side panels, the open blocks, *For Hazard* | Lineage lighting, the version ghost and the chain diff |
+| Every curve page: how sure in words, where its part sits on the twin | Digitised source points and the events rug |
+| The crosswalks for seven types, drafted here (`DCD-D23`); rows marked *inferred* or *not named* are on the Review page as questions for each cell's owner | Hazard's co-ownership, and the cells aligning their part lists (`09` §3 row 7) |
+| One Review page about curves; the FAQ; builds from `main` with labelled previews | The rest of G19 (the *internal* chip, the build-check chips, *About this data*); the one-pager (G8); hosting (H1) |
 
 ## How it is built
 
 | Path | What |
 |---|---|
-| `app/` | The routes: `/`, `/assets/[asset]`, `/cells/[entry]`, `/cells/[entry]/curves/[curve]`, `/occurrence/[asset]/[hazard]`, `/code/[code]`, `/review` (the queue) and `/v0` (the walkthrough) — all prerendered from `data/` |
-| `components/` | `plain-rail` (the chips and the sentence), `how-built-strip` + `station-panel` (the ten steps and their side panels), `ledger` (the register, gate, file, proof and capability pieces under Details), `curve-hero` (one curve at a time, caption, Show the numbers), `plain-blocks`, `cell-footer`, `asset-view` (parts × hazards, the split block), `source-link`, the library grid, the plots |
+| `app/` | The routes: `/`, `/assets/[asset]` (a type, or the real-estate index), `/cells/[entry]`, `/cells/[entry]/curves/[curve]`, `/occurrence/[asset]/[hazard]`, `/code/[code]`, `/review` and `/faq` — all prerendered from `data/` |
+| `components/` | `nav` (the category menus), `library`, `twin-coverage` (the 3D picture, its legend and systems list), `asset-coverage` (the hazard picker and the systems × hazards table), `cell-coverage`, `part-picture`, `plain-rail` + `crumbs`, `curve-hero` (the curve and *Why we believe it*), `steps-strip` + `station-panel` (the four steps and their side panels), `ledger` (the pieces under Details), `plain-blocks`, `cell-footer` (*For Hazard*), `asset-view` (the cells' own part lists), `source-link`, the plots |
+| `public/twin/` | The Digital Twin's viewer, models and three.js r147, copied unchanged by `scripts/dashboard/export_twin.mjs` with a SHA manifest; not linted, never edited |
 | `lib/` | Readers for `data/`, types, number formats, the series palette and line styles, URL state |
 | `data/` | Written only by the build step ([README](data/README.md)) |
 | `scripts/serve-static.mjs` | Serves `out/` for `npm run start` |
@@ -130,10 +158,11 @@ step's: [`evidence/3ea7e02/REVIEW.md`](../docs/plans/damage_curve_dashboard/evid
   (`DCD-D03`). The lock resolved Next 16.4.2; Hazard's baseline is 16.3.1 (`DCD-A02`).
 - **The browser never evaluates a curve.** Every point on a plot was sampled by a repository evaluator during
   the build; the app draws the samples.
-- **No sentence is typed in a component.** The plain chips, the ✓ ◐ ✗ sentences, every curve's caption, the
-  ten station paragraphs, the asset sentences and the *split differently* finding are written by the build
-  (`dashboard_build/plain.py`, `parts.py`) from the files; the components lay them out. Tiers appear as words with
-  the code secondary everywhere (`field-calibrated · T1`, `lab-tested · T2`, `transferred · T3`, `our judgment · T4`).
+- **No sentence is typed in a component.** The plain chips, every curve's caption, the main logic, the four step
+  facts and paragraphs, the asset sentences, the coverage words and the Review tasks are written by the build
+  (`dashboard_build/plain.py`, `parts.py`, `twin.py`, `build.py`) from the files; the components lay them out.
+  Evidence is said in words only — *field-calibrated*, *published*, *borrowed*, *our judgment* — and every tier
+  code in a catalogue sentence is rewritten in words; the codes stay under *Show the numbers* (`DCD-D28`).
 - **The ledger moved, nothing was removed (`DCD-D19`).** Register and claim IDs, tier codes, gate checklists,
   files and SHAs, known answers and capability values sit under each step's *Details*, under *Show the numbers*
   beside a curve, and in the footer's *Files · Registers · Known answers · Pins*.
@@ -144,7 +173,11 @@ step's: [`evidence/3ea7e02/REVIEW.md`](../docs/plans/damage_curve_dashboard/evid
   sharing a class stand side by side inside it (display only). The two battery cells use this; other cells
   keep the plot's default order.
 - **View state lives in the URL** so a link reproduces what the sender saw: `?lens=` on the library and the
-  asset view, `?row=` for an open part, `?station=` for an open step panel, `?part=`, `?v=` and `?compare=1` for
-  the curve hero's part, variant and overlay, `?x=log` on a curve page's plot.
+  part lists, `?row=` for an open part, `?hazard=` and `?view=` for the coverage picture's hazard and model,
+  `?building=` for a real-estate cell's building, `?step=` for an open step panel, `?part=` (an index or a part's
+  name), `?v=` and `?compare=1` for the curve's part, variant and overlay, `?x=log` on a curve page's plot.
+- **The 3D picture never traps the page.** The wheel zooms the model only after a click into it; otherwise it
+  scrolls the page. Every colour is repeated in words beside the picture, and the systems list is the keyboard
+  way through it.
 - **Dependencies.** `npm audit --omit=dev` reports none. The dev-only lint chain (`eslint-config-next` →
   `micromatch` → `braces`) carries five high-severity advisories with no non-breaking fix yet.

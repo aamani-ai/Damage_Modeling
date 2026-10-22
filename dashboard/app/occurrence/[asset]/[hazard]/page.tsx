@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { OccMark, TwinLead } from "@/components/marks";
+import { TwinLead } from "@/components/marks";
 import { Card, CardTitle, EmptyState, FileLink, Kv, Tag } from "@/components/ui";
 import { blobUrl, manifest, occurrence } from "@/lib/data";
 import { fmtUsdCompact, shortSha } from "@/lib/format";
@@ -30,7 +30,7 @@ export default async function OccurrencePage({ params }: { params: Promise<{ ass
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <Link href={`/assets/${o.asset.slug}`} className="text-[11px] text-muted-foreground hover:text-foreground">← {o.asset.label}</Link>
           <h2 className="text-[15px] font-semibold tracking-tight">Does it happen? — {o.title}</h2>
-          {o.entry ? <Tag><span className="font-mono">{o.entry.rail.exists.mark}</span> {o.entry.rail.exists.label}{o.entry.rail.exists.qualifier ? ` · ${o.entry.rail.exists.qualifier}` : ""}</Tag> : <Tag>no damage cell</Tag>}
+          {o.entry ? <Tag>{o.entry.rail.exists.label.toLowerCase()}{o.entry.rail.exists.qualifier ? ` · ${o.entry.rail.exists.qualifier}` : ""}</Tag> : <Tag>no damage cell</Tag>}
           <Tag title={`state ${o.state_overall === "not_searched" ? "?" : "·"} ${o.state_overall}`}>{o.state_overall === "not_searched" ? "Field reports: nobody has looked yet" : `Field reports: ${o.state_overall.replace(/_/g, " ")}`}</Tag>
           <Tag>{o.last_searched ? `last searched ${o.last_searched}` : "never searched"}</Tag>
         </div>
@@ -48,7 +48,7 @@ export default async function OccurrencePage({ params }: { params: Promise<{ ass
                     <td className="py-1.5 pr-2" title={`bucket key ${b.key}`}>{b.label}</td>
                     <td className="py-1.5 pr-2 text-right tabular">{b.value_usd != null ? fmtUsdCompact(b.value_usd) : "—"}</td>
                     <td className="py-1.5 pr-2"><TwinLead level={b.twin_lead?.level} />{b.twin_lead?.nodes.length ? <span className="block text-[10px] text-muted-foreground">{b.twin_lead.nodes.map((n) => `${n.name} — ${n.why}`).join("; ")}</span> : null}</td>
-                    <td className="py-1.5"><OccMark mark={b.mark} label={b.state} /> {b.sentence}</td>
+                    <td className="py-1.5">{b.sentence}</td>
                   </tr>
                 ))}
               </tbody>
@@ -92,7 +92,7 @@ export default async function OccurrencePage({ params }: { params: Promise<{ ass
           </div>
         </Card>
       </div>
-      <footer className="mt-4 border-t border-border pt-2 font-mono text-[10.5px] text-muted-foreground">register {o.register.path} · sha {shortSha(o.register.sha256)}{o.entry ? ` · ${o.entry.entry_id}` : ""} · built at {m.commit}</footer>
+      <footer className="mt-4 border-t border-border pt-2 font-mono text-[10.5px] text-muted-foreground">register {o.register.path} · sha {shortSha(o.register.sha256)}{o.entry ? ` · ${o.entry.entry_id}` : ""} · built from {m.source.label}</footer>
     </div>
   );
 }

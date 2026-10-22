@@ -3,13 +3,15 @@
 import type { BuildCheck } from "@/lib/types";
 import { InfoHint, Tag } from "./ui";
 
-export function BuildChecks({ checks, commit, builtAt }: { checks: BuildCheck[]; commit: string; builtAt: string }) {
+export function BuildChecks({ checks, source }: { checks: BuildCheck[]; source: string }) {
+  const failed = checks.filter((c) => !c.ok);
   return (
     <div className="flex flex-wrap items-center gap-1.5 text-[10.5px] text-muted-foreground">
       <span>build checks</span>
-      {checks.map((c) => (
-        <Tag key={c.id} tone={c.ok ? "ok" : "danger"} title={`${c.name} — ${c.summary}`}>
-          {c.ok ? "✓" : "✗"} {c.id.replace("_", " ")}
+      <Tag tone={failed.length ? "neutral" : "ok"} title={`${checks.length - failed.length} of ${checks.length} pass`}>{checks.length - failed.length} of {checks.length} pass</Tag>
+      {failed.map((c) => (
+        <Tag key={c.id} tone="danger" title={`${c.name} — ${c.summary}`}>
+          ✗ {c.id.replace(/_/g, " ")}
         </Tag>
       ))}
       <InfoHint label="What the build checks are" align="right">
@@ -18,7 +20,7 @@ export function BuildChecks({ checks, commit, builtAt }: { checks: BuildCheck[];
           {checks.map((c) => (
             <div key={c.id}><span className="font-mono">{c.ok ? "✓" : "✗"}</span> {c.name}: <span className="text-muted-foreground">{c.summary}</span>{!c.ok ? <span className="text-danger"> — {c.severity === "data" ? "a data reality, reported not loosened" : "structural"}</span> : null}</div>
           ))}
-          <div className="pt-1 text-muted-foreground">built {builtAt} at commit <span className="font-mono">{commit}</span></div>
+          <div className="pt-1 text-muted-foreground">Built from {source}.</div>
         </div>
       </InfoHint>
     </div>

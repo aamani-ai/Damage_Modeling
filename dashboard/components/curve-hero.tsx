@@ -1,16 +1,17 @@
 "use client";
 
-// THE CURVE (brief §3.1): one curve at a time. A part selector, a variant toggle where a part has more than one
-// curve or variant, the other parts ghosted behind the selected line, and "compare all parts" as an opt-in overlay.
-// Beside the plot, the build's caption: what this curve says · how sure · seen in the field · main references.
-// "Show the numbers" keeps the ledger: knots, known answers, tier codes, parameter rows, the record's ID.
+// THE CURVE and WHY WE BELIEVE IT (G15, DCD-D27): one curve at a time — a part selector, a variant toggle where a
+// part has more than one curve or variant, the other parts faint behind the selected line, "compare all parts" as an
+// opt-in overlay, and what the curve says under the plot. Beside it, the cell's main logic, how sure we are in
+// words (G16, DCD-D28: how damage rises · how it becomes dollars), the main references and the field reports.
+// "Show the numbers" keeps the ledger: knots, known answers, the tier codes, parameter rows, the record's ID.
 import Link from "next/link";
 import { useMemo } from "react";
 import { fmtDr, fmtNum } from "@/lib/format";
 import { useUrlParam } from "@/lib/url-state";
-import type { Axis, CellV2, CurveV2, ManifestV2 } from "@/lib/types";
+import type { Axis, CellV2, CurveV2, ManifestV3 } from "@/lib/types";
 import { CurvePlot } from "./curve-plot";
-import { SourceRef, TierWord } from "./source-link";
+import { SourceRef } from "./source-link";
 import { Card, Mono } from "./ui";
 
 interface Option { id: string; label: string; curve: CurveV2; series: string[] | null }
@@ -30,8 +31,24 @@ function optionsFor(curves: CurveV2[]): Option[] {
   return out;
 }
 
-export function CurveHero({ cell, curves, m }: { cell: CellV2; curves: CurveV2[]; m: ManifestV2 }) {
+/** The cell's main logic: two to four sentences the build writes from the axis, the method and the value basis. */
+export function MainLogic({ cell }: { cell: CellV2 }) {
+  if (!cell.plain.main_logic.length) return null;
+  return (
+    <div>
+      <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Main logic</div>
+      <ol className="mt-0.5 space-y-1">
+        {cell.plain.main_logic.map((s, i) => (
+          <li key={i} className="grid grid-cols-[16px_1fr] gap-x-1"><span className="tabular text-muted-foreground">{i + 1}</span><span>{s}</span></li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+export function CurveHero({ cell, curves, buildings }: { cell: CellV2; curves: CurveV2[]; m: ManifestV3; buildings?: Record<string, string> }) {
   const [partParam, setPart] = useUrlParam("part");
+  const [buildingParam] = useUrlParam("building");
   const [vParam, setV] = useUrlParam("v");
   const [compareParam, setCompare] = useUrlParam("compare");
   const parts = useMemo(() => {
@@ -39,7 +56,10 @@ export function CurveHero({ cell, curves, m }: { cell: CellV2; curves: CurveV2[]
     for (const c of curves) { const n = c.part ?? c.failure_unit_id ?? c.curve_id; if (!names.includes(n)) names.push(n); }
     return names;
   }, [curves]);
-  const partIdx = Math.max(0, Math.min(parts.length - 1, Number(partParam ?? 0) || 0));
+  // ?part= is an index or a part's name (the coverage picture links by name); ?building= picks that building's first part
+  const byName = partParam != null ? parts.indexOf(partParam) : -1;
+  const byBuilding = buildingParam && buildings?.[buildingParam] ? parts.findIndex((p) => p.startsWith(buildings[buildingParam])) : -1;
+  const partIdx = byName >= 0 ? byName : partParam != null && /^\d+$/.test(partParam) ? Math.max(0, Math.min(parts.length - 1, Number(partParam))) : Math.max(0, byBuilding);
   const part = parts[partIdx];
   const partCurves = useMemo(() => curves.filter((c) => (c.part ?? c.failure_unit_id ?? c.curve_id) === part), [curves, part]);
   const options = useMemo(() => optionsFor(partCurves), [partCurves]);
@@ -63,7 +83,7 @@ export function CurveHero({ cell, curves, m }: { cell: CellV2; curves: CurveV2[]
           <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
             <span className="text-muted-foreground">part</span>
             <div role="radiogroup" aria-label="Part of the plant" className="inline-flex flex-wrap rounded-md border border-border bg-card p-0.5">
-              {parts.map((p, i) => <button key={p} type="button" role="radio" aria-checked={i === partIdx} onClick={() => { setPart(i === 0 ? null : String(i)); setV(null); }} className={chip(i === partIdx)}>{p}</button>)}
+              {parts.map((p, i) => <button key={p} type="button" role="radio" aria-checked={i === partIdx} onClick={() => { setPart(p); setV(null); }} className={chip(i === partIdx)}>{p}</button>)}
             </div>
           </div>
         ) : <span className="rounded bg-muted px-2 py-0.5 text-[11px]">{part}</span>}
@@ -85,6 +105,7 @@ export function CurveHero({ cell, curves, m }: { cell: CellV2; curves: CurveV2[]
       <div className="grid gap-3 px-3 pb-3 xl:grid-cols-5">
         <div className="xl:col-span-3">
           <CurvePlot curves={shown} axis={axis} ghosts={ghosts} onlySeries={compare ? null : selected.series} height={340} ariaLabel={`${cell.title}: damage ratio of ${part} against ${axis.label}`} />
+          <p className="px-1 pt-0.5 text-[12px] leading-snug">{cap.what_it_says}</p>
           <p className="px-1 text-[10.5px] text-muted-foreground">
             {compare ? "every part of this cell on one plot; labels at the right end name the lines" : ghosts.length ? `the other ${ghosts.length === 1 ? "part is" : "parts are"} drawn faint behind the selected curve; tick “compare all parts” to label them` : "the only curve on this axis"}
             {axis.note ? ` · ${axis.note}` : ""}{k.scenario_note ? ` · ${k.scenario_note}` : ""}
@@ -92,28 +113,26 @@ export function CurveHero({ cell, curves, m }: { cell: CellV2; curves: CurveV2[]
           {axisGroupsOther.length ? <p className="px-1 text-[10.5px] text-muted-foreground">{axisGroupsOther.length} more {axisGroupsOther.length === 1 ? "axis" : "axes"} in this cell: {axisGroupsOther.map((g) => g.axis.label).join(" · ")} — pick a part on {axisGroupsOther.length === 1 ? "it" : "them"} to see its plot</p> : null}
         </div>
         <div className="space-y-2.5 text-[11.5px] leading-snug xl:col-span-2">
-          <div>
-            <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">What this curve says</div>
-            <p>{cap.what_it_says}</p>
-          </div>
+          <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Why we believe it</div>
+          <MainLogic cell={cell} />
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">How sure</div>
-            <p><span className="text-muted-foreground">shape · </span><TierWord code={cap.how_sure.shape.tier} words={m.tier_words} />{cap.how_sure.shape.basis ? <span className="text-muted-foreground"> — {cap.how_sure.shape.basis}</span> : null}</p>
-            <p><span className="text-muted-foreground">cost · </span><TierWord code={cap.how_sure.cost.tier} words={m.tier_words} />{cap.how_sure.cost.basis ? <span className="text-muted-foreground"> — {cap.how_sure.cost.basis}</span> : null}</p>
-            <p className="text-muted-foreground">{cap.how_sure.parameters}</p>
+            <p><span className="text-muted-foreground">How damage rises: </span><span className="font-medium">{cap.how_sure.shape.word}</span>{cap.how_sure.shape.basis ? <span className="text-muted-foreground"> — {cap.how_sure.shape.basis}</span> : null}</p>
+            <p><span className="text-muted-foreground">How it becomes dollars: </span><span className="font-medium">{cap.how_sure.cost.word}</span>{cap.how_sure.cost.basis ? <span className="text-muted-foreground"> — {cap.how_sure.cost.basis}</span> : null}</p>
+          </div>
+          <div>
+            <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Main references</div>
+            <ul className="space-y-0.5">{cap.main_references.map((r, i) => <li key={(r.source_id ?? r.text) + i}><SourceRef s={{ ...r, title: r.text }} id={r.source_id} showLocator={false} /></li>)}</ul>
           </div>
           <div>
             <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Seen in the field</div>
             <p>{cap.seen_in_field.words}{cap.seen_in_field.href ? <> → <Link href={cap.seen_in_field.href} className="text-accent hover:underline">open the search log</Link></> : null}</p>
           </div>
-          <div>
-            <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Main references <span className="font-normal normal-case tracking-normal">({cap.references_from})</span></div>
-            <ul className="space-y-0.5">{cap.main_references.map((r, i) => <li key={(r.source_id ?? r.text) + i}><SourceRef s={{ ...r, title: r.text }} id={r.source_id} showLocator={false} /></li>)}</ul>
-          </div>
           <p><Link href={`/cells/${cell.entry_id}/curves/${k.curve_id}`} className="text-accent hover:underline">open this curve&apos;s own page ▸</Link></p>
           <details className="rounded-md border border-border text-[11px]">
             <summary className="cursor-pointer px-2 py-1 font-medium text-muted-foreground hover:text-foreground">Show the numbers — knots, known answers, tier codes, the record&apos;s ID</summary>
             <div className="space-y-1.5 border-t border-border px-2 py-1.5">
+              <p className="text-muted-foreground">{cap.how_sure.parameters}{cap.references_from ? ` · references from ${cap.references_from}` : ""}</p>
               <p className="font-mono text-[10.5px]">{k.curve_id}{k.pathway_id ? ` · ${k.pathway_id}` : ""} · {k.failure_unit_id} · {k.curve_form}{k.form_label ? ` (${k.form_label})` : ""} · x axis {k.x_axis_id}</p>
               <p className="text-muted-foreground">shape <span className="font-mono">{k.tiers.shape ?? "–"}</span> · cost <span className="font-mono">{k.tiers.cost ?? "–"}</span> · valid domain <span className="font-mono">{k.domain ? `${k.domain[0] ?? "−∞"} … ${k.domain[1] ?? "∞"}` : "—"}</span>{k.withheld_zones.map((z) => <span key={z.from} className="block">withheld <span className="font-mono">{z.from} … {z.to ?? "∞"}</span> — {z.reason}</span>)}</p>
               {k.knots.length ? (

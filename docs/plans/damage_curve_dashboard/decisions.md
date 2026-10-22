@@ -1,9 +1,9 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
-updated: 2026-10-20
+updated: 2026-10-21
 status: active
-scope: Decision register for the damage-curve dashboard plan (DCD-D*). D01–D12 are the owner's rulings on gates G1–G12 of the discussion node; D13–D16 record the owner's directions and the agent's engineering decisions inside them; D17 records the owner's acceptance of V0.
+scope: Decision register for the damage-curve dashboard plan (DCD-D*). D01–D12 are the owner's rulings on gates G1–G12 of the discussion node; D13–D16 record the owner's directions and the agent's engineering decisions inside them; D17 records the owner's acceptance of V0; D18–D19 iteration 2; D20–D25 the asset spine, the twin picture, the crosswalks, the FAQ and one branch; D26–D31 the rulings on G14–G19 that iteration 3 builds.
 -->
 
 # Damage-curve dashboard — decisions
@@ -249,4 +249,77 @@ sessions.)*
 
 **Reason:** Two sessions built the same iteration on two branches; the owner wants one place to look and to
 iterate.
+
+## DCD-D26 — The top bar and the library follow the categories (G14)
+
+**Decision:** The top bar reads *Library · Power plants ▾ · Real estate ▾ · Grid infrastructure ▾ · Review*, each
+category opening its types, drawn from the manifest's spine so no asset is named in UI code (`P17`). The library
+groups its rows under the category headings, one row per type; real estate has one row per type, each tile opening
+the shared real-estate cell at that type's building (`?building=`) and naming the building. An asset page exists
+per type; a category whose types share one cell per hazard (real estate) gets an index page. *(Divy, 2026-10-21:
+"Take G14–G18 as recommended"; discussion `08` G14 (a).)*
+
+**Reason:** A reader looks for "a warehouse in a flood". The cell stays the unit that is versioned and released;
+the footer names it.
+
+## DCD-D27 — A cell page shows the curve first, then four steps, then a footer for Hazard (G15)
+
+**Decision:** The cell page opens on the curve and, beside it, *Why we believe it*: the cell's main logic in two to
+four sentences, how sure in words, the main references and the field reports. Then what the curve covers on the
+twin (`DCD-D21`). Then *How this curve was made* in four steps — what it covers · how damage is worked out · where
+the numbers come from · has it been checked — each opening a side panel that holds its old steps with their
+Details. Files, outputs, known answers and pins sit in a *For Hazard* footer. No ■ ◧ ▢ marks: a step with nothing
+behind it says "not written yet". The build writes the main logic and the four facts. *(Ruled 2026-10-21, "as
+recommended"; `08` G15 (a).)*
+
+**Reason:** Divy's "main logic, main reference" first (2026-10-19); the framework stays visible (`DCD-D14`) and every
+ledger fact stays one control away (`DCD-D19`). Known answers prove the code computes the curve as written, not that
+the curve is right, so they are for Hazard, not the reader's steps.
+
+## DCD-D28 — Evidence strength is said in words; codes behind a control (G16)
+
+**Decision:** The four grades are *field-calibrated* (T1), *published* (T2), *borrowed* (T3) and *our judgment* (T4).
+Tiles and chips carry one word, the weaker half's; the hover and the caption name both halves — *how damage rises*
+and *how it becomes dollars* — with where each comes from. Every tier code in a catalogue sentence is rewritten in
+words for the default view; the codes stay under *Show the numbers* and in the ledgers. *(Ruled 2026-10-21, "as
+recommended"; `08` G16 (a).)*
+
+**Reason:** "What is this T1/T2?" — a reader asks how sure and why, and the source in words answers both. *Published*
+fits all nine T2 rows (FEMA Hazus tables and lab tests are both published); *borrowed* is the catalogue's own word
+for T3; the twin's own depth tiers, where a higher number is better, never appear here.
+
+## DCD-D29 — One Review page, about curves (G17)
+
+**Decision:** *Review* is one page about curves only, grouped by category and cell: who has read the cell and when,
+whether field reports were searched, and what is open for its owner, written as tasks (sources to link, IDs to
+match, Hazard paths moved or not on Hazard's main, twin parts to confirm). The iteration walkthrough (`/v0`) left
+the app; the dashboard's own development lives in the pull request and this plan. *(Ruled 2026-10-21, "as
+recommended"; `08` G17 (a).)*
+
+**Reason:** One meaning of "review", in one place: the dashboard describes curves, the pull request describes the
+dashboard.
+
+## DCD-D30 — The dashboard is built from main (G18)
+
+**Decision:** The data build reads this repository through an export of `origin/main` by default
+(`--source main`), and Hazard's files and links on Hazard's `origin/main`, through git and never its working
+tree. A Hazard path not on Hazard's main shows *on a Hazard branch, not on its main yet* with no link, or the new
+place when Hazard moved it into an `_archive/` folder, and becomes a task on the Review page; a data check lists
+them. `--source worktree` builds a labelled preview: every page says *preview of branch X, not main*. While a
+dashboard slice is on its branch, the branch carries preview data; the data on `main` is rebuilt from `main` when
+the branch merges. *(Ruled 2026-10-21, "as recommended"; `08` G18 (a). The branch-preview data is the one
+adaptation: this iteration's crosswalks and FAQ exist only on the branch until it merges, so a build from `main`
+cannot show them yet, and the build says so instead of building.)*
+
+**Reason:** "What the dashboard shows" equals "what is merged", in both repositories, on any machine — the Hazard
+checkout here sits on a feature branch with uncommitted work.
+
+## DCD-D31 — No build date on any page (G19, the date)
+
+**Decision:** The build date leaves the header, the library and every footer; a footer says what the page was built
+from (*main at abc1234*, or the labelled preview). The receipt keeps the date for the record. The rest of G19 —
+the *internal* chip, the build-check chips under the library title, an *About this data* link — is still open.
+*(Divy, 2026-10-21: "You don't need a build date or things like those"; `08` G19.)*
+
+**Reason:** It costs a reader nothing and was "weird" on a page about curves.
 

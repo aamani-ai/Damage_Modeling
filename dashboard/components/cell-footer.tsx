@@ -1,32 +1,40 @@
-// The identity, once, in mono, at the foot of the page (brief §3.1): damage code · model · docs · SHA · build commit,
-// and one control for the rest of the ledger — files, registers, known answers, pins, the build's notes and findings.
+// For Hazard (G15, DCD-D27): what a consumer needs and a first-time reader does not — the identity Hazard pins, what
+// the cell may output, its files, registers, known answers and pins. Known answers prove the code computes the curve
+// as written, not that the curve is right, so they live here and not in the reader's four steps.
 import { shortSha } from "@/lib/format";
-import type { CellV2, ManifestV2 } from "@/lib/types";
-import { Eyebrow } from "./ledger";
+import type { CellV2, ManifestV3 } from "@/lib/types";
+import { CapabilityLedger, Eyebrow } from "./ledger";
 import { FileLink, Tag } from "./ui";
 
-export function CellFooter({ cell, m, blob }: { cell: CellV2; m: ManifestV2; blob: (p: string) => string }) {
+export function CellFooter({ cell, m, blob }: { cell: CellV2; m: ManifestV3; blob: (p: string) => string }) {
   const id = cell.identity;
   const pinsOk = cell.pins.length ? cell.pins.every((p) => p.ok) : null;
   const k = cell.proof?.known_answers;
+  const caps = cell.plain.capabilities;
+  const allowed = caps.filter((c) => c.mark === "✓").length;
   return (
-    <footer className="mt-4 border-t border-border pt-2 text-[10.5px] text-muted-foreground">
+    <footer className="mt-4 rounded-lg border border-border bg-card px-3 py-2 text-[10.5px] text-muted-foreground">
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <span className="text-[10px] font-semibold uppercase tracking-wide">Identity</span>
+        <span className="text-[10px] font-semibold uppercase tracking-wide text-foreground/80">For Hazard</span>
         {id.kind === "binding" ? (
           <span className="font-mono">{id.binding_id} · pinned to {id.source_cell_id} · {id.model} · {id.docs} · source sha {shortSha(id.sha256)}</span>
         ) : id.kind === "cell" ? (
-          <span className="font-mono">{id.damage_code_id} · {id.model} · {id.docs} · sha {shortSha(id.sha256)}{pinsOk == null ? "" : pinsOk ? " ✓" : " ✗ pin"}</span>
+          <span className="font-mono">{id.damage_code_id} · {id.model} · {id.docs} · sha {shortSha(id.sha256)}{pinsOk == null ? "" : pinsOk ? " · pins match" : " · a pin does not match"}</span>
         ) : (
           <span className="font-mono">{cell.entry_id} · gap entry · no artifact</span>
         )}
-        <span className="font-mono">built at {m.commit}</span>
-        <span className="font-mono">entry {cell.entry_id}</span>
+        {cell.kind !== "gap" ? <span>{allowed} of {caps.length} outputs allowed outright</span> : null}
+        {k?.declared ? <span>{k.reproduced} of {k.run} known answers reproduced{k.not_run.length ? `, ${k.not_run.reduce((s, n) => s + n.n, 0)} not run` : ""}</span> : null}
+        <span>built from {m.source.label}</span>
       </div>
       {cell.kind !== "gap" ? (
         <details className="mt-1.5">
-          <summary className="cursor-pointer font-medium hover:text-foreground">Files · Registers · Known answers · Pins</summary>
-          <div className="mt-2 grid gap-3 text-[11px] md:grid-cols-3">
+          <summary className="cursor-pointer font-medium hover:text-foreground">What it outputs · the files · known answers · pins</summary>
+          <div className="mt-2 grid gap-3 text-[11px] md:grid-cols-2 xl:grid-cols-4">
+            <div>
+              <Eyebrow>What it outputs</Eyebrow>
+              <CapabilityLedger cell={cell} />
+            </div>
             <div>
               <Eyebrow>Files at the build commit</Eyebrow>
               {Object.entries(cell.files).filter(([, v]) => v).map(([key, v]) => <div key={key}><FileLink href={blob(v!)}>{key.replace("_", "-")}</FileLink> <span className="text-muted-foreground">{v!.split("/").slice(-1)[0]}</span></div>)}
@@ -40,9 +48,9 @@ export function CellFooter({ cell, m, blob }: { cell: CellV2; m: ManifestV2; blo
             <div>
               <Eyebrow>Known answers and pins</Eyebrow>
               {k ? <p>{k.declared ? `${k.reproduced} of ${k.run} known answers reproduced` : "no known answers declared"}{k && k.not_run.length ? ` · ${k.not_run.reduce((s, n) => s + n.n, 0)} not run` : ""}{k?.source ? <> · <FileLink href={blob(k.source)}>{k.source.split("/").slice(-1)[0]}</FileLink></> : null}</p> : null}
-              {cell.pins.map((p) => <div key={p.what + (p.file ?? "")} className="flex items-baseline gap-1.5"><span className="font-mono">{p.ok ? "✓" : "✗"}</span><span className="text-muted-foreground">{p.what}</span><span className="font-mono text-[10px]">{shortSha(p.expected)}</span></div>)}
+              {cell.pins.map((p) => <div key={p.what + (p.file ?? "")} className="flex items-baseline gap-1.5"><span>{p.ok ? "matches" : "differs"}</span><span className="text-muted-foreground">{p.what}</span><span className="font-mono text-[10px]">{shortSha(p.expected)}</span></div>)}
               {cell.sampling_notes.length ? <p className="mt-1 text-muted-foreground">build notes: {cell.sampling_notes.join(" ")}</p> : null}
-              {cell.build_findings.map((f) => <p key={f.check} className="mt-1"><Tag tone="danger">✗ {f.check.replace(/_/g, " ")}</Tag> <span className="text-muted-foreground">{f.sentence}</span></p>)}
+              {cell.build_findings.map((f) => <p key={f.check} className="mt-1"><Tag tone="danger">{f.check.replace(/_/g, " ")}</Tag> <span className="text-muted-foreground">{f.sentence}</span></p>)}
             </div>
           </div>
         </details>

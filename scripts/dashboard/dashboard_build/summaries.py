@@ -15,9 +15,10 @@ def _join(items: list[str]) -> str:
     return ", ".join(items[:-1]) + " and " + items[-1]
 
 
-def library_sentence(counts: dict[str, int], n_assets: int, n_hazards: int, agent_read: int, n_entries: int, searched: int) -> str:
+def library_sentence(counts: dict[str, int], assets: int | str, n_hazards: int, agent_read: int, n_entries: int, searched: int) -> str:
+    where = f"{assets} assets" if isinstance(assets, int) else assets
     return (f"{counts['live']} live curve cells, {counts['proposal']} proposals, {counts['reused']} reused bindings and {counts['gap']} gaps "
-            f"across {n_assets} assets and {n_hazards} hazards; {agent_read} of {n_entries} catalogue entries have been read by an agent only; "
+            f"across {where} and {n_hazards} hazards; {agent_read} of {n_entries} catalogue entries have been read by an agent only; "
             + ("no field-report search has been logged yet." if searched == 0 else f"{searched} field-report searches have been logged."))
 
 
@@ -25,10 +26,10 @@ def _tier_phrase(tiers: set[str]) -> str:
     if not tiers:
         return ""
     if tiers <= {"T3", "T4"}:
-        return "all from transferred or policy evidence (T3–T4)"
+        return "all on borrowed evidence or our judgment"
     if tiers <= {"T1", "T2"}:
-        return "from public or calibrated evidence (T1–T2)"
-    return f"with evidence from {'–'.join(sorted(tiers)[0:1] + sorted(tiers)[-1:])}"
+        return "on published or field-calibrated evidence"
+    return "on evidence from published to our judgment"
 
 
 def asset_sentence(noun: str, cells: list[dict[str, Any]], searched_any: bool) -> str:
@@ -108,7 +109,7 @@ def dossier_sentence(curve: dict[str, Any], hazard_label: str, occurrence_state_
     tiers = curve.get("tiers") or {}
     s = f"{part}: {form}, read against {curve['axis'].get('label', 'its native axis')}"
     if tiers.get("shape") or tiers.get("cost"):
-        s += f"; the shape is {tier_words(tiers.get('shape'))}, the cost {tier_words(tiers.get('cost'))}"
+        s += f"; how damage rises is {tier_words(tiers.get('shape'))}, how it becomes dollars {tier_words(tiers.get('cost'))}"
     if not curve.get("drawn"):
         s += "; not drawn here"
     if occurrence_state_sentence:

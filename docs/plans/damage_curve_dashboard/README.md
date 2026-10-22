@@ -17,20 +17,26 @@ scope: Build the damage-curve dashboard as a local internal instrument in this r
 > (gates G1–G12 ruled 2026-10-20). Status `active` on the owner's direction of 2026-10-20 — *"Let's just keep
 > moving … Let's go."* — with the owner's feedback coming on the running slices, not on this text.
 >
-> **2026-10-21 — the owner's review of the running iteration 2 is under discussion.** Divy found it close but
-> not there; [`08`](../../extra/discussion/damage_curve_dashboard/08_categories_and_construction.md) turns his
-> points into gates G13–G19 (the Digital Twin's asset categories as the spine, the cell page's order, tier words,
-> one meaning of review, building from `main` only, builder information; the build date already ruled out).
-> PR #7 stays open; the rulings land on its branch as `DCD-D20…` before the merge.
+> **2026-10-21 — iteration 3 built on the `dashboard` branch
+> ([PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8)), for the owner's review on the running app.** Divy
+> took G14–G18 of [`08`](../../extra/discussion/damage_curve_dashboard/08_categories_and_construction.md) as
+> recommended (`DCD-D26`–`D30`) after ruling G13 and G20–G23 (`DCD-D20`–`D24`) and the build date (`DCD-D31`). The
+> build: the Digital Twin's categories in the top bar and the library; an asset page per type with the twin's own
+> 3D model coloured by what each curve covers, hazard by hazard, and the systems × hazards table; the same picture
+> on every cell page; crosswalks drafted for seven types at
+> [`docs/contracts/twin_crosswalks/`](../../contracts/twin_crosswalks/README.md); the cell page in the order *curve
+> and why we believe it → what it covers → four steps → For Hazard*; evidence in words; one Review page; the
+> [FAQ](../../faq.md); data built from `main`, or a labelled preview. Still open: the rest of G19.
 
 ## Outcome first
 
 ```text
 damage_modeling/
 ├── dashboard/                       the app (Next.js · TypeScript · Tailwind 4 · ECharts; Hazard's stack and tokens)
-│   ├── app/                         /  /assets/<asset>  /cells/<entry>  /cells/<entry>/curves/<curve>  /occurrence/<asset>/<hazard>  /review  /export/<entry>  /code/<damage_code_id>
+│   ├── app/                         /  /assets/<type>  /cells/<entry>  /cells/<entry>/curves/<curve>  /occurrence/<asset>/<hazard>  /review  /faq  /code/<damage_code_id>
 │   ├── components/                  status rail · trail · tile · curve plot · evidence table · audit stepper · drawer
-│   ├── data/                        written ONLY by the build step: manifest.json · cells/*.json · curves/*.json · occurrence/*.json · citations.json · receipt.json
+│   ├── data/                        written ONLY by the build step: manifest.json · cells/ · curves/ · coverage/ · occurrence/ · faq.json · citations.json · receipt.json (twin/ is the twin export, an input)
+│   ├── public/twin/                 the Digital Twin's 3D viewer and models, vendored unchanged and pinned by SHA (DCD-D21)
 │   └── README.md                    how to run locally, what the build checks are, the look review
 ├── scripts/dashboard/build_dashboard_data.py      the one build step (python3.12 venv): catalogue → JSON, with every check in 05 §3
 ├── scripts/reference_helpers/                     + reference evaluators for hurricane × battery and wildfire × battery (G9)
