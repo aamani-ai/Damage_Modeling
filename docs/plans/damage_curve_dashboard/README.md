@@ -20,7 +20,7 @@ scope: Build the damage-curve dashboard as a local internal instrument in this r
 > **2026-10-21 — iteration 3 built on the `dashboard` branch
 > ([PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8)), for the owner's review on the running app.** Divy
 > took G14–G18 of [`08`](../../extra/discussion/damage_curve_dashboard/08_categories_and_construction.md) as
-> recommended (`DCD-D26`–`D30`) after ruling G13 and G20–G23 (`DCD-D20`–`D24`) and the build date (`DCD-D31`). The
+> recommended (`DCD-D26`–`D30`) after ruling G13 and G20–G23 (`DCD-D20`–`D24`), and all of G19 (`DCD-D31`, `D32`). The
 > build: the Digital Twin's categories in the top bar and the library; an asset page per type with the twin's own
 > 3D model coloured by what each curve covers, hazard by hazard, and the systems × hazards table; the same picture
 > on every cell page; crosswalks drafted for seven types at
@@ -29,7 +29,7 @@ scope: Build the damage-curve dashboard as a local internal instrument in this r
 > [FAQ](../../faq.md); data built from `main`, or a labelled preview. Look review at
 > [`evidence/2e49bb4/`](evidence/2e49bb4/REVIEW.md); handoff at
 > [`tasks_history/2026-10-21__dashboard__iteration-3`](../../extra/tasks_history/2026-10-21__dashboard__iteration-3/handoff.md).
-> Still open: the rest of G19.
+> G19 completed the same day (`DCD-D32`): builder information sits behind one *About this data* link.
 
 ## Outcome first
 

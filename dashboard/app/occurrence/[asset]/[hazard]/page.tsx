@@ -92,7 +92,7 @@ export default async function OccurrencePage({ params }: { params: Promise<{ ass
           </div>
         </Card>
       </div>
-      <footer className="mt-4 border-t border-border pt-2 font-mono text-[10.5px] text-muted-foreground">register {o.register.path} · sha {shortSha(o.register.sha256)}{o.entry ? ` · ${o.entry.entry_id}` : ""} · built from {m.source.label}</footer>
+      <footer className="mt-4 border-t border-border pt-2 font-mono text-[10.5px] text-muted-foreground">register {o.register.path} · sha {shortSha(o.register.sha256)}{o.entry ? ` · ${o.entry.entry_id}` : ""}</footer>
     </div>
   );
 }

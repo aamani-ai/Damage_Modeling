@@ -23,3 +23,6 @@ choices made while building them, with the reason for each; none is an owner rul
 | 16 | *In the value, no curve yet* is a lighter amber (`#e9c47f`) | On a battery block the yard and fence made the amber lead the picture |
 | 17 | The curve plot's palette has a timer behind its animation frame | A hidden pane or background tab produces no frames, and the plot stayed empty |
 | 18 | The data on the branch is a labelled preview; `main`'s data is rebuilt from `main` at the merge | `DCD-D30`'s one adaptation, recorded in `08` |
+| 19 | *About this data* is its own page (`/about`), linked from one footer line that every page shares; it shows the source commit, Hazard's main, the twin's pin, every check and the receipt, with no build date | `DCD-D32`; a page is linkable and keeps the header and the footers free of builder information |
+| 20 | The preview banner stays on every page of a branch build | `DCD-D30`: a preview must say it is not main; it is not builder information |
+

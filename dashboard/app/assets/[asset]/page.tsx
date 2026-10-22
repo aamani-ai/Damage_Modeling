@@ -96,7 +96,6 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
             <div className="border-t border-border p-3"><AssetViewGrid v={v} m={m} /></div>
           </details>
         ) : null}
-        <footer className="mt-4 border-t border-border pt-2 text-[10.5px] text-muted-foreground">Built from {m.source.label}.</footer>
       </div>
     );
   }
@@ -143,12 +142,14 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
           <p className="px-1 text-[11px] text-muted-foreground">The real-estate cells&apos; own part lists, building by building, are on the <Link href={`/assets/${cat.slug}`} className="text-accent hover:underline">{cat.label.toLowerCase()} page</Link>.</p>
         ) : null}
       </div>
-      <footer className="mt-4 border-t border-border pt-2 text-[10.5px] text-muted-foreground">
-        <span className="text-[10px] font-semibold uppercase tracking-wide">Sources of this page</span>{" "}
-        {cov ? <>the Digital Twin at <span className="font-mono">{cov.twin.commit.slice(0, 7)}</span> · crosswalk <FileLink href={blobUrl(m, cov.twin.crosswalk)}>{cov.twin.crosswalk.split("/").slice(-1)[0]}</FileLink> · </> : null}
-        {v?.reference && !sharedCell ? <>reference value {v.reference.link || !v.reference.source.startsWith("Hazard_modeling/") ? <FileLink href={v.reference.link ?? blobUrl(m, v.reference.source)}>{v.reference.source.split("/").slice(-1)[0]}</FileLink> : <span>{v.reference.source.split("/").slice(-1)[0]} (on a Hazard branch, not on its main yet)</span>}{v.reference.note ? ` (${v.reference.note})` : ""} · </> : null}
-        built from {m.source.label}
-      </footer>
+      {cov || (v?.reference && !sharedCell) ? (
+        <footer className="mt-4 border-t border-border pt-2 text-[10.5px] text-muted-foreground">
+          <span className="text-[10px] font-semibold uppercase tracking-wide">Sources of this page</span>{" "}
+          {cov ? <>the Digital Twin at <span className="font-mono">{cov.twin.commit.slice(0, 7)}</span> · crosswalk <FileLink href={blobUrl(m, cov.twin.crosswalk)}>{cov.twin.crosswalk.split("/").slice(-1)[0]}</FileLink></> : null}
+          {cov && v?.reference && !sharedCell ? " · " : null}
+          {v?.reference && !sharedCell ? <>reference value {v.reference.link || !v.reference.source.startsWith("Hazard_modeling/") ? <FileLink href={v.reference.link ?? blobUrl(m, v.reference.source)}>{v.reference.source.split("/").slice(-1)[0]}</FileLink> : <span>{v.reference.source.split("/").slice(-1)[0]} (on a Hazard branch, not on its main yet)</span>}{v.reference.note ? ` (${v.reference.note})` : ""}</> : null}
+        </footer>
+      ) : null}
     </div>
   );
 }

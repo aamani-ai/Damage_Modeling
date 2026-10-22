@@ -25,7 +25,6 @@ export function CellFooter({ cell, m, blob }: { cell: CellV2; m: ManifestV3; blo
         )}
         {cell.kind !== "gap" ? <span>{allowed} of {caps.length} outputs allowed outright</span> : null}
         {k?.declared ? <span>{k.reproduced} of {k.run} known answers reproduced{k.not_run.length ? `, ${k.not_run.reduce((s, n) => s + n.n, 0)} not run` : ""}</span> : null}
-        <span>built from {m.source.label}</span>
       </div>
       {cell.kind !== "gap" ? (
         <details className="mt-1.5">

@@ -24,7 +24,9 @@ branch ([PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8)), for the o
   [`docs/contracts/twin_crosswalks/`](../docs/contracts/twin_crosswalks/README.md).
 - **The cell page** opens on the curve and *Why we believe it* (main logic, how sure in words, main references),
   then what it covers, then four steps, then a *For Hazard* footer. Evidence is said in words; the codes are under
-  *Show the numbers*. One Review page; the [FAQ](../docs/faq.md); no build date.
+  *Show the numbers*. One Review page; the [FAQ](../docs/faq.md); no build date, no *internal* chip, and what the
+  dashboard was built from — the commit, the build checks, the receipt — behind one *About this data* link in every
+  page's footer (`DCD-D31`, `D32`).
 - **Built from `main`** (`DCD-D30`): the data on this branch is a labelled preview, rebuilt from `main` at the merge.
 
 Earlier records: iteration 2 at [`evidence/b0ff718/REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/b0ff718/REVIEW.md),
@@ -76,7 +78,7 @@ finding. A *structural* failure writes nothing.
 ## The build checks
 
 `scripts/dashboard/build_dashboard_data.py` runs them in this order; `data/receipt.json` records each result,
-and the library's header shows them as a strip.
+and the *About this data* page (`/about`) lists them.
 
 | Check | Passes when | Kind | Today |
 |---|---|---|---|
@@ -99,9 +101,9 @@ and the library's header shows them as a strip.
 | `hazard_links` | Every Hazard file the pages name is on Hazard's main | data | **fails** — 9 paths: the battery crosswalk folder, the hurricane substation binding and the wildfire substation module are on a Hazard branch; three notebooks were moved into `_archive/` on Hazard's main |
 | `faq` | Every FAQ question has its date, owner, an answer of at most four sentences, an example and a *Read more* link that resolves | data | pass — 14 questions |
 
-A data check is never loosened to make the strip green: the failure is shown on the library, in the
-affected cell's "Where the numbers come from" panel, and on the review queue (`/review`) until the cell's
-registers are fixed.
+A data check is never loosened to make it pass: the failure is listed on *About this data*, its items reach the
+cells' owners as tasks on the Review page (`/review`), and the affected cell's "Where the numbers come from" step
+shows it, until the cell's registers are fixed.
 
 **The older cells' evidence (iteration 2).** `hail_solar`, `flood_solar`, `strong_wind_solar` and
 `wind_tornado_wind` keep their sources in workbook sheets (`Sources`, `Evidence_Log`, `*_Evidence_Params`,
@@ -139,13 +141,13 @@ step's: [`evidence/3ea7e02/REVIEW.md`](../docs/plans/damage_curve_dashboard/evid
 | Every cell page: the curve and why we believe it, what it covers in 3D (a building toggle for real estate), four steps with the old steps in their side panels, the open blocks, *For Hazard* | Lineage lighting, the version ghost and the chain diff |
 | Every curve page: how sure in words, where its part sits on the twin | Digitised source points and the events rug |
 | The crosswalks for seven types, drafted here (`DCD-D23`); rows marked *inferred* or *not named* are on the Review page as questions for each cell's owner | Hazard's co-ownership, and the cells aligning their part lists (`09` §3 row 7) |
-| One Review page about curves; the FAQ; builds from `main` with labelled previews | The rest of G19 (the *internal* chip, the build-check chips, *About this data*); the one-pager (G8); hosting (H1) |
+| One Review page about curves; the FAQ; builds from `main` with labelled previews; builder information behind *About this data* | The one-pager (G8); hosting (H1) |
 
 ## How it is built
 
 | Path | What |
 |---|---|
-| `app/` | The routes: `/`, `/assets/[asset]` (a type, or the real-estate index), `/cells/[entry]`, `/cells/[entry]/curves/[curve]`, `/occurrence/[asset]/[hazard]`, `/code/[code]`, `/review` and `/faq` — all prerendered from `data/` |
+| `app/` | The routes: `/`, `/assets/[asset]` (a type, or the real-estate index), `/cells/[entry]`, `/cells/[entry]/curves/[curve]`, `/occurrence/[asset]/[hazard]`, `/code/[code]`, `/review`, `/faq` and `/about` — all prerendered from `data/` |
 | `components/` | `nav` (the category menus), `library`, `twin-coverage` (the 3D picture, its legend and systems list), `asset-coverage` (the hazard picker and the systems × hazards table), `cell-coverage`, `part-picture`, `plain-rail` + `crumbs`, `curve-hero` (the curve and *Why we believe it*), `steps-strip` + `station-panel` (the four steps and their side panels), `ledger` (the pieces under Details), `plain-blocks`, `cell-footer` (*For Hazard*), `asset-view` (the cells' own part lists), `source-link`, the plots |
 | `public/twin/` | The Digital Twin's viewer, models and three.js r147, copied unchanged by `scripts/dashboard/export_twin.mjs` with a SHA manifest; not linted, never edited |
 | `lib/` | Readers for `data/`, types, number formats, the series palette and line styles, URL state |

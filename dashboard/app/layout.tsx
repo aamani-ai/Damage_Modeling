@@ -38,7 +38,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <a href={`${m.repo.url}/tree/${m.commit_full}`} target="_blank" rel="noreferrer" title="The repository at the commit this dashboard was built from" className="rounded border border-border px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground hover:text-foreground">
                   GitHub ↗
                 </a>
-                <span className="rounded-sm bg-muted px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-muted-foreground/80">internal</span>
                 <ThemeToggle />
               </div>
             </div>
@@ -49,6 +48,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             ) : null}
           </header>
           <main id="main" tabIndex={-1} className="mx-auto max-w-[1440px] px-4 py-3 outline-none">{children}</main>
+          {/* G19 (DCD-D32): builder information lives behind this one link, never in a page's default view */}
+          <footer className="no-print mx-auto max-w-[1440px] px-4 pb-6 pt-1 text-[10.5px]">
+            <Link href="/about" className="text-muted-foreground hover:text-foreground hover:underline">About this data</Link>
+          </footer>
           <RouteFocus />
         </ThemeProvider>
       </body>

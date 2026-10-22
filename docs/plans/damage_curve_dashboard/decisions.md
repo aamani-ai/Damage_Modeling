@@ -3,7 +3,7 @@ author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
 updated: 2026-10-21
 status: active
-scope: Decision register for the damage-curve dashboard plan (DCD-D*). D01–D12 are the owner's rulings on gates G1–G12 of the discussion node; D13–D16 record the owner's directions and the agent's engineering decisions inside them; D17 records the owner's acceptance of V0; D18–D19 iteration 2; D20–D25 the asset spine, the twin picture, the crosswalks, the FAQ and one branch; D26–D31 the rulings on G14–G19 that iteration 3 builds.
+scope: Decision register for the damage-curve dashboard plan (DCD-D*). D01–D12 are the owner's rulings on gates G1–G12 of the discussion node; D13–D16 record the owner's directions and the agent's engineering decisions inside them; D17 records the owner's acceptance of V0; D18–D19 iteration 2; D20–D25 the asset spine, the twin picture, the crosswalks, the FAQ and one branch; D26–D32 the rulings on G14–G19 that iteration 3 builds.
 -->
 
 # Damage-curve dashboard — decisions
@@ -316,10 +316,22 @@ checkout here sits on a feature branch with uncommitted work.
 
 ## DCD-D31 — No build date on any page (G19, the date)
 
-**Decision:** The build date leaves the header, the library and every footer; a footer says what the page was built
-from (*main at abc1234*, or the labelled preview). The receipt keeps the date for the record. The rest of G19 —
-the *internal* chip, the build-check chips under the library title, an *About this data* link — is still open.
-*(Divy, 2026-10-21: "You don't need a build date or things like those"; `08` G19.)*
+**Decision:** The build date leaves the header, the library and every footer. The receipt keeps the date for the
+record. *(Divy, 2026-10-21: "You don't need a build date or things like those"; `08` G19.)* *Completed the same day
+by `DCD-D32`, which moved what a page was built from behind one link.*
 
 **Reason:** It costs a reader nothing and was "weird" on a page about curves.
+
+## DCD-D32 — Builder information behind one *About this data* link (G19, the rest)
+
+**Decision:** No page carries builder information in its default view. The *internal* chip leaves the header; the
+build-check chips leave the library title; the *built from* lines leave every footer. One link, *About this data*, in
+every page's footer opens a page with what the dashboard was built from (this repository's commit, Hazard's main, the
+Digital Twin's pin), every build check with its summary, and the receipt; the failing checks' items keep reaching the
+cells' owners on the Review page (`DCD-D29`). The preview banner of `DCD-D30` stays: a branch must say it is not main.
+*(Ruled 2026-10-21: "Take the rest of G19 as recommended: drop the internal chip, and move the build checks and
+builder lines behind one About this data link"; `08` G19 (a).)*
+
+**Reason:** It costs a reader nothing; the dashboard is internal while it runs locally, and the client surface is the
+one-pager (`DCD-D08`).
 

@@ -5,8 +5,9 @@
 1. **Iteration 3 is on the one `dashboard` branch** ([PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8), open,
    **not merged**): code at `b5db9a1` and `2e49bb4`, wording fixes after the look review, then the preview data. The owner
    reviews it on the running app at `localhost:3211` (`npm run build && npm run start` in `dashboard/`).
-2. **The rulings it builds** are `DCD-D20`–`D31` (G13–G23 of discussions `08` and `09`; G14–G18 *"as recommended"*). The
-   rest of G19 — the *internal* chip, the build-check chips, an *About this data* link — is still open.
+2. **The rulings it builds** are `DCD-D20`–`D32` (G13–G23 of discussions `08` and `09`; G14–G18 and the rest of G19
+   *"as recommended"*). Every gate is ruled and discussion `08` is settled. The last ruling moved the build checks and the
+   *built from* lines behind one *About this data* link in every page's footer and dropped the *internal* chip.
 3. **The spine.** The top bar and the library follow the Digital Twin's categories, from
    [`spine.json`](../../../contracts/twin_crosswalks/spine.json); real estate is one row per building type, each tile opening
    the shared cell at `?building=`; `/assets/real_estate` is the category's index.
@@ -30,13 +31,13 @@
    structural checks pass and four data checks fail as reported (`source_ids`, `source_links`, `extracted_sources`, the new
    `hazard_links`). Look review at [`evidence/2e49bb4/REVIEW.md`](../../../plans/damage_curve_dashboard/evidence/2e49bb4/REVIEW.md):
    seven of nine pass; the cold read needs a named reader, the owner's review is open.
-10. **Next.** The owner's review on the running app; the rest of G19; Hazard's co-ownership of the crosswalks and the cell
-    owners' answers to the *inferred* rows; at the merge, rebuild `dashboard/data/` from `main` and commit it there.
+10. **Next.** The owner's review on the running app; Hazard's co-ownership of the crosswalks and the cell owners'
+    answers to the *inferred* rows; at the merge, rebuild `dashboard/data/` from `main` and commit it there.
 
 ## Where to look
 
 - Plan and rulings: [`docs/plans/damage_curve_dashboard/`](../../../plans/damage_curve_dashboard/README.md) ·
-  [`decisions.md`](../../../plans/damage_curve_dashboard/decisions.md) `DCD-D26`–`D31`
+  [`decisions.md`](../../../plans/damage_curve_dashboard/decisions.md) `DCD-D26`–`D32`
 - The app: [`dashboard/README.md`](../../../../dashboard/README.md) · the build:
   [`scripts/dashboard/README.md`](../../../../scripts/dashboard/README.md)
 - This session's choices: [`decisions.md`](decisions.md) · commands and pitfalls: [`notes.md`](notes.md)

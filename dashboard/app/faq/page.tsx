@@ -43,7 +43,7 @@ export default function FaqPage() {
           </section>
         ))}
       </div>
-      <footer className="mt-4 border-t border-border pt-2 text-[10.5px] text-muted-foreground">A question asked twice in review becomes a new entry. Built from {m.source.label}.</footer>
+      <footer className="mt-4 border-t border-border pt-2 text-[10.5px] text-muted-foreground">A question asked twice in review becomes a new entry.</footer>
     </div>
   );
 }

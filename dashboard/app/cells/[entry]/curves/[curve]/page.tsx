@@ -161,7 +161,6 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
       <footer className="mt-4 border-t border-border pt-2 text-[10.5px] text-muted-foreground">
         <span className="text-[10px] font-semibold uppercase tracking-wide">Identity</span>{" "}
         <span className="font-mono">{c.identity.damage_code_id ?? c.identity.binding_id} · {c.identity.model} · {c.identity.docs} · sha {shortSha(c.identity.sha256)}</span>
-        <span className="ml-3">built from {m.source.label}</span>
         <span className="ml-3">record in <FileLink href={blob(c.files.write_up ?? c.chain.stations.find((s) => s.id === "artifact")?.files[0]?.path ?? "")}>{c.files.write_up?.split("/").slice(-1)[0] ?? "the artifact"}</FileLink> · data <Mono>{k.data_path}</Mono></span>
       </footer>
     </div>

@@ -2,17 +2,16 @@
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-19
 updated: 2026-10-21
-status: active
-scope: Reasoning node — what the damage-curve dashboard is for, what it shows, how it looks, how a curve's derivation chain is shown, and what it connects to, agreed before any build; owner gates G1–G12 ruled 2026-10-20. Promoted to the plan at docs/plans/damage_curve_dashboard/ (active) and to the shared look principle in Hazard_modeling/docs/principles/. Reopened 2026-10-21 by the owner's review of the running iteration 2 — 08 (asset categories, page order, evidence words, review, main only, builder information), gates G13–G19.
+status: settled
+scope: Reasoning node — what the damage-curve dashboard is for, what it shows, how it looks, how a curve's derivation chain is shown, and what it connects to, agreed before any build; owner gates G1–G12 ruled 2026-10-20. Promoted to the plan at docs/plans/damage_curve_dashboard/ (active) and to the shared look principle in Hazard_modeling/docs/principles/. Reopened 2026-10-21 by the owner's review of the running iteration 2 — 08 (asset categories, page order, evidence words, review, main only, builder information), gates G13–G19. Settled again 2026-10-21: G13–G23 ruled (DCD-D20–D32) and built as iteration 3.
 -->
 
 # Damage-curve dashboard — the reasoning
 
-> **Status: active — iteration 5, 2026-10-21: ruled, built.** Divy ruled G13 and G20–G23, then took G14–G18
-> "as recommended" (*"Take G14–G18 as recommended and build iteration 3 here on the dashboard branch"*); the build
-> date in G19 was already ruled. They are `DCD-D20`–`D31` in the plan and are built as the dashboard's iteration 3
-> on [PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8). Only the rest of G19 is open; the node settles
-> when it is ruled. G1–G12 stand.
+> **Status: settled — iteration 5, 2026-10-21: ruled, built.** Divy ruled G13 and G20–G23, then took G14–G18
+> "as recommended" (*"Take G14–G18 as recommended and build iteration 3 here on the dashboard branch"*), and the rest
+> of G19 the same way after its date. They are `DCD-D20`–`D32` in the plan and are built as the dashboard's
+> iteration 3 on [PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8). Every gate G1–G23 is ruled.
 >
 > *Iteration 4, 2026-10-21:* reopened by Divy's review of the running iteration 2 — his feedback reshaped the asset
 > grouping, the order of a cell page, the tier words, the review pages and what the data is built from, so
@@ -32,7 +31,7 @@ scope: Reasoning node — what the damage-curve dashboard is for, what it shows,
 
 | Ruled | Merged | New | Reworked | Still open |
 |---|---|---|---|---|
-| **G13** (the twin's categories, `DCD-D20`) · **G14–G18** taken as recommended (`DCD-D26`–`D30`) · **G20–G23** (the 3D picture, the office, the crosswalks, the FAQ; `DCD-D21`–`D24`) · G19's date (`DCD-D31`) | — | the dashboard's iteration 3, built from these rulings: [`docs/contracts/twin_crosswalks/`](../../../contracts/twin_crosswalks/README.md), [`docs/faq.md`](../../../faq.md), the vendored twin viewer | [`08`](08_categories_and_construction.md) (rulings recorded) · this index | **the rest of G19**: the *internal* chip, the build-check chips, an *About this data* link |
+| **G13** (the twin's categories, `DCD-D20`) · **G14–G18** taken as recommended (`DCD-D26`–`D30`) · **G20–G23** (the 3D picture, the office, the crosswalks, the FAQ; `DCD-D21`–`D24`) · **G19**: the date (`DCD-D31`), then the rest as recommended (`DCD-D32`) | — | the dashboard's iteration 3, built from these rulings: [`docs/contracts/twin_crosswalks/`](../../../contracts/twin_crosswalks/README.md), [`docs/faq.md`](../../../faq.md), the vendored twin viewer, the *About this data* page | [`08`](08_categories_and_construction.md) (rulings recorded; settled) · this index | none |
 
 ## What changed since iteration 3 (2026-10-21)
 
@@ -195,7 +194,7 @@ are a local dashboard and hosting comes later (`DCD-D13`); feedback is given on 
 | G16 | How evidence strength is said | (a), taken as recommended (2026-10-21) | `DCD-D28` |
 | G17 | What "review" means | (a), taken as recommended (2026-10-21) | `DCD-D29` |
 | G18 | What the dashboard is built from | (a), taken as recommended (2026-10-21); the branch carries preview data until it merges | `DCD-D30` |
-| G19 | The build date and what goes with it | **date removed** — *"You don't need a build date or things like those. No, it's weird, to be honest."* (2026-10-21); the rest *open* | `DCD-D31` (the date) |
+| G19 | The build date and what goes with it | **date removed** — *"You don't need a build date or things like those. No, it's weird, to be honest."* (2026-10-21); the rest (a), taken as recommended the same day: the *internal* chip dropped, the build checks and builder lines behind one *About this data* link | `DCD-D31`, `DCD-D32` |
 | G20–G23 | The 3D picture · the office as Commercial · the crosswalks · the FAQ | (a) each — *"agree on all"* (2026-10-21), argued in [`09`](09_asset_spine_coverage_and_faq.md) | `DCD-D21`–`D24` |
 
 ## From here to a build — what and how
@@ -212,8 +211,8 @@ are a local dashboard and hosting comes later (`DCD-D13`); feedback is given on 
           4. V1 → V2 per the plan, each slice with the same review; hosting (H1) after local feedback
  done ──► 5. V0 (PR #5, #6) merged; iteration 2 built and on PR #7 (open); Divy reviewed it running, 2026-10-21
  done ──► 6. Iteration 4 of this node: 08 and 09 put G13–G23 to Divy; ruled 2026-10-21 (DCD-D20–D31)
- now  ──► 7. The dashboard's iteration 3 on the one `dashboard` branch (PR #8), reviewed by Divy on the running
-             app before the merge; the rest of G19 decided there
+ now  ──► 7. The dashboard's iteration 3 on the one `dashboard` branch (PR #8), with G19 complete, reviewed by
+             Divy on the running app before the merge
    in parallel: the "does it happen?" searches on the battery rows (04 §6) — they do not wait for a screen.
 ```
 
@@ -223,8 +222,8 @@ Each step is reversible until merge; nothing in the catalogue or the cells chang
 
 Met on 2026-10-20: G1–G12 ruled, the plan folder exists with `DCD-D01…D16`, the look principle has its home.
 **Reopened 2026-10-21** under the rule below: the owner's feedback on the running iteration 2 reshapes the
-asset grouping and the page order. G13–G18 and G20–G23 were ruled and landed in the plan the same day; the node
-settles again when the rest of G19 is ruled.
+asset grouping and the page order. G13–G23 were ruled and landed in the plan the same day, and the node settled
+again.
 **Reopen** only when the owner's feedback on a running slice contradicts a ruling, or when evidence shows a
 settled premise wrong (for example, that the catalogue can carry the review and occurrence pointers).
 

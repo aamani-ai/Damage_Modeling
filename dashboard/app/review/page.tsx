@@ -82,7 +82,6 @@ export default function ReviewPage() {
           );
         })}
       </div>
-      <footer className="mt-4 border-t border-border pt-2 text-[10.5px] text-muted-foreground">Built from {m.source.label}. Hazard files and links: {m.hazard_main.sentence}.</footer>
     </div>
   );
 }
