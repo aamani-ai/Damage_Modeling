@@ -1,0 +1,155 @@
+<!--
+  Prototype for discussion 09 (2026-10-21): each cell's coverage drawn on the Digital Twin's own 3D model.
+  It loads the twin's engine unchanged. To run it, put three files beside this page and serve the folder:
+    engine/          -> a link to "<Digital Twin checkout>/public/engine"
+    three.min.js     -> a link to "<Digital Twin checkout>/node_modules/three/build/three.min.js"   (r147)
+    engine_order.js  -> window.ENGINE_SCRIPTS = [the list in "<Digital Twin checkout>/src/engine/loadEngine.ts"];
+  then `python3 -m http.server 4175` and open http://localhost:4175/#flood_bess (or #hail_solar, #flood_solar).
+  The part-to-twin-node mapping in VIEWS is read off the catalogue by hand; the build replaces it with crosswalks.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What a damage curve covers</title>
+<style>
+  :root { --bg:#fafafa; --fg:#18181b; --muted:#71717a; --card:#fff; --border:#e4e4e7; --accent:#2563eb;
+          --curve:#1b8a6b; --cond:#5b8bd6; --gap:#dfae5a; --none:#b9bec6; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:13px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { padding:14px 20px 8px; border-bottom:1px solid var(--border); background:var(--card); }
+  .crumb { color:var(--muted); font-size:12px; }
+  h1 { font-size:17px; margin:2px 0 4px; }
+  .plain { font-size:13.5px; max-width:980px; }
+  .tabs { display:flex; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .tabs button { border:1px solid var(--border); background:var(--card); border-radius:6px; padding:5px 10px; font:inherit; cursor:pointer; }
+  .tabs button[aria-pressed="true"] { border-color:var(--accent); color:var(--accent); font-weight:600; }
+  main { display:grid; grid-template-columns: minmax(0,1fr) 380px; gap:14px; padding:14px 20px 20px; height:calc(100vh - 128px); min-height:520px; }
+  .stage { position:relative; border:1px solid var(--border); border-radius:10px; overflow:hidden; background:#dde4e8; }
+  .stage subsystem-viewer { position:absolute; inset:0; }
+  .note { position:absolute; left:10px; bottom:10px; background:rgba(255,255,255,.88); border:1px solid var(--border); border-radius:6px; padding:5px 8px; font-size:11.5px; color:var(--muted); }
+  aside { overflow:auto; border:1px solid var(--border); border-radius:10px; background:var(--card); padding:12px 14px; }
+  .eyebrow { font-size:11px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin:10px 0 6px; }
+  .legend div, .row { display:flex; align-items:flex-start; gap:8px; margin:5px 0; }
+  .sw { flex:0 0 12px; height:12px; border-radius:3px; margin-top:3px; border:1px solid rgba(0,0,0,.12); }
+  .row { padding:5px 6px; border-radius:6px; cursor:pointer; }
+  .row:hover, .row.sel { background:#f1f5f9; }
+  .row .name { font-weight:600; }
+  .row .why { color:var(--muted); font-size:12px; }
+  .row .state { font-size:11.5px; }
+  .count { color:var(--muted); font-size:12px; }
+  .warn { margin-top:12px; padding:8px 10px; border:1px dashed var(--border); border-radius:6px; color:var(--muted); font-size:12px; }
+</style>
+<script src="three.min.js"></script>
+<script src="engine_order.js"></script>
+</head>
+<body>
+<header>
+  <div class="crumb" id="crumb"></div>
+  <h1 id="title">Loading the twin…</h1>
+  <div class="plain" id="plain"></div>
+  <div class="tabs" id="tabs"></div>
+</header>
+<main>
+  <div class="stage"><subsystem-viewer id="v"></subsystem-viewer><div class="note">Drag to orbit · scroll to zoom · click a part · the 3D model is the Digital Twin's reference block</div></div>
+  <aside>
+    <div class="eyebrow">What the colours mean</div>
+    <div class="legend">
+      <div><span class="sw" style="background:var(--curve)"></span><span><b>Has a damage curve</b> in this cell</span></div>
+      <div><span class="sw" style="background:var(--cond)"></span><span><b>Changes the curve</b>, no curve of its own (e.g. tracker stow)</span></div>
+      <div><span class="sw" style="background:var(--gap)"></span><span><b>In the asset's value, no curve yet</b></span></div>
+      <div><span class="sw" style="background:var(--none)"></span><span><b>Reviewed: no direct damage</b> from this hazard</span></div>
+    </div>
+    <div class="eyebrow">The asset's systems, as the twin breaks it down</div>
+    <div id="rows"></div>
+    <div class="warn" id="warn"></div>
+  </aside>
+</main>
+<script>
+const COL = { curve:0x1b8a6b, cond:0x5b8bd6, gap:0xdfae5a, none:0xb9bec6 };
+const CSS = { curve:'var(--curve)', cond:'var(--cond)', gap:'var(--gap)', none:'var(--none)' };
+const WORD = { curve:'Has a curve', cond:'Changes the curve', gap:'No curve yet', none:'Reviewed: no direct damage' };
+
+// Illustrative mapping of each cell's parts onto the twin's nodes, read off the catalogue entries
+// (rows, not_covered) on 2026-10-21. To be replaced by the crosswalk tables the plan calls for.
+const VIEWS = {
+  flood_bess: {
+    crumb:'Power plants › Battery storage › Flood', title:'Flood × Battery storage', model:'bess-block', root:'bblock',
+    plain:'Two parts have flood curves: the battery enclosure\'s active hardware (replaced once water passes 0.30 m) and the separate PCS (loses value with depth). Racks and fire suppression, the electrical balance and civil works are in the plant\'s value but have no flood curve yet.',
+    map:{ be_enc:'curve', be_modules:'curve', be_bms:'curve', be_dccab:'curve', be_hvac:'curve', bp_pcs:'curve',
+          be_racks:'gap', be_fire:'gap', be_vent:'gap', ao_deluge:'gap', bp_mvt:'gap', bp_rmu:'gap', bp_aux:'gap', bp_skid:'gap',
+          bc_dc:'gap', bc_mv:'gap', bk_ems:'gap', bk_fiber:'gap', bg_grid:'gap', bs_found:'gap', bv_yard:'gap' } },
+  hail_solar: {
+    crumb:'Power plants › Solar farm › Hail', title:'Hail × Solar farm', model:'pv-tracker', root:'pvrow',
+    plain:'One part has a hail curve: the PV modules (glass and cells). Tracker stow changes how hard hail hits them but has no curve of its own. Racking, tracker steel and the SCADA and met instruments are in the plant\'s value with no curve yet; inverters, collection, grounding and civil works take no direct hail damage.',
+    map:{ sys_pv:'curve', pv_module:'curve', pv_fglass:'curve', pv_encap:'curve', pv_cells:'curve', pv_rglass:'curve', pv_frame:'curve', pv_jbox:'curve', pv_leads:'curve',
+          pv_harness:'none', hn_cable:'none', hn_clip:'none',
+          sys_drv:'cond', dr_slewdrive:'cond', sd_gear:'cond', sd_motor:'cond', dr_damper:'cond', ct:'cond', ct_tcu:'cond', ct_power:'cond', ct_incl:'cond',
+          sys_trk:'gap', tt:'gap', tt_tube:'gap', tt_splice:'gap', mt:'gap', mt_rail:'gap', mt_clamp:'gap', br:'gap', br_housing:'gap', br_bushing:'gap', fd:'none',
+          sys_scada:'gap', wx:'gap', me_pyr:'gap', me_wind:'gap', me_logger:'gap', scada_cab:'gap', scada_fiber:'gap',
+          sys_coll:'none', sys_pcs:'none', sys_ground:'none', sys_pcivil:'none' } },
+  flood_solar: {
+    crumb:'Power plants › Solar farm › Flood', title:'Flood × Solar farm', model:'pv-tracker', root:'pvrow',
+    plain:'Eight parts have flood curves — inverters, switchgear, transformer, combiner boxes, SCADA cabinets, collection cable, PV modules and foundations. Mounting and racking, roads and fencing, and the flood berm and drainage are in the plant\'s value with no flood curve yet. Note how differently this cell splits the plant from Hail × Solar.',
+    map:{ sys_pv:'curve', pv_module:'curve', pv_fglass:'curve', pv_encap:'curve', pv_cells:'curve', pv_rglass:'curve', pv_frame:'curve', pv_jbox:'curve', pv_leads:'curve',
+          pv_harness:'curve', hn_cable:'curve', hn_clip:'curve',
+          sys_coll:'curve', cb:'curve', cb_enc:'curve', cb_fuse:'curve', cb_disc:'curve', cb_spd:'curve', dc_feeder:'curve', mv_cable:'curve',
+          sys_pcs:'curve', inv:'curve', inv_cab:'curve', inv_dc:'curve', inv_cool:'curve', mvt:'curve', mvt_tank:'curve', mvt_rad:'curve', mvt_bush:'curve', mvt_bund:'curve', rmu:'curve', aux:'curve', sk_base:'curve', ac_bus:'curve', hv_leads:'curve',
+          sys_scada:'curve', scada_cab:'curve', scada_fiber:'curve', wx:'curve', me_pyr:'curve', me_wind:'curve', me_logger:'curve',
+          fd:'curve',
+          sys_trk:'gap', tt:'gap', tt_tube:'gap', tt_splice:'gap', mt:'gap', mt_rail:'gap', mt_clamp:'gap', br:'gap', br_housing:'gap', br_bushing:'gap',
+          sys_drv:'gap', dr_slewdrive:'gap', sd_gear:'gap', sd_motor:'gap', dr_damper:'gap', ct:'gap', ct_tcu:'gap', ct_power:'gap', ct_incl:'gap',
+          sys_pcivil:'gap', pr_road:'gap', pr_fence:'gap', ao_berm:'gap', ao_firebreak:'gap', ao_hailnet:'gap', sys_ground:'none', gr_cond:'none', gr_rods:'none', gr_jumper:'none' } },
+};
+
+const load = (src) => new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = () => no(new Error(src)); document.head.appendChild(s); });
+
+(async () => {
+  for (const f of window.ENGINE_SCRIPTS) { try { await load('engine/' + f); } catch (e) { console.warn('skip', e.message); } }
+  for (let pass = 0; pass < 2; pass++) for (const k of Object.keys(window)) if (/Install$/.test(k) && typeof window[k] === 'function') { try { window[k](); } catch (e) {} }
+  const N = window.SubsystemData.nodes, par = {}, kids = {};
+  for (const id in N) { const p = N[id].p; if (p) { par[id] = p; (kids[p] = kids[p] || []).push(id); } }
+  const lab = {}; for (const id in N) lab[id] = N[id].n;
+  const v = document.getElementById('v');
+  const subtree = (r) => { const out = [r]; (kids[r] || []).forEach((k) => out.push(...subtree(k))); return out; };
+  let current = null;
+
+  const show = async (key) => {
+    current = key; const V = VIEWS[key];
+    document.getElementById('crumb').textContent = V.crumb;
+    document.getElementById('title').textContent = V.title;
+    document.getElementById('plain').textContent = V.plain;
+    [...document.querySelectorAll('.tabs button')].forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.k === key)));
+    const stateOf = (id) => { let c = id; while (c) { if (V.map[c]) return V.map[c]; c = par[c]; } return 'none'; };
+    const tint = {}; subtree(V.root).forEach((id) => { tint[id] = COL[stateOf(id)]; });
+    await v.load(V.model, { parents: par, labels: lab });
+    v.setTint(tint);
+    // rows: the twin's systems (level 1); inside each, its parts grouped by state
+    const rows = document.getElementById('rows'); rows.innerHTML = '';
+    const counts = { curve:0, cond:0, gap:0, none:0 };
+    const leaves = (id) => (kids[id] || []).length ? kids[id].flatMap(leaves) : [id];
+    const groups = (id) => { const ch = (kids[id] || []); return ch.length ? ch : [id]; };
+    (kids[V.root] || []).forEach((sys) => {
+      const parts = groups(sys);
+      const by = { curve:[], cond:[], gap:[], none:[] };
+      parts.forEach((p) => { const ls = leaves(p).map(stateOf); const s = ['curve','cond','gap','none'].find((x) => ls.includes(x)); by[s].push(N[p].n); counts[s]++; });
+      const main = ['curve','cond','gap','none'].find((s) => by[s].length);
+      const el = document.createElement('div'); el.className = 'row'; el.tabIndex = 0;
+      el.innerHTML = `<span class="sw" style="background:${CSS[main]}"></span><span><span class="name">${N[sys].n}</span>` +
+        ['curve','cond','gap','none'].filter((s) => by[s].length).map((s) => `<div class="state"><span style="color:${CSS[s]};font-weight:600">${WORD[s]}</span> — ${by[s].join(', ')}</div>`).join('') + `</span>`;
+      el.onclick = () => { [...rows.children].forEach((r) => r.classList.remove('sel')); el.classList.add('sel'); v.select && v.select(sys); v.frame && v.frame(sys); };
+      rows.appendChild(el);
+    });
+    document.getElementById('warn').textContent = `Counted at the twin's equipment level: ${counts.curve} with a curve · ${counts.cond} changing the curve · ${counts.gap} in the value with no curve yet · ${counts.none} with no direct damage. Prototype: the mapping from each cell's parts to the twin's equipment is read off the catalogue by hand; the real one comes from one crosswalk table per asset.`;
+  };
+
+  const tabs = document.getElementById('tabs');
+  Object.entries(VIEWS).forEach(([k, V]) => { const b = document.createElement('button'); b.textContent = V.title; b.dataset.k = k; b.onclick = () => { location.hash = k; }; tabs.appendChild(b); });
+  const fromHash = () => { const k = (location.hash || '#flood_bess').slice(1); show(VIEWS[k] ? k : 'flood_bess'); };
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
+})();
+</script>
+</body>
+</html>

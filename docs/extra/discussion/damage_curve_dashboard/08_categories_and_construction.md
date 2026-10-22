@@ -199,7 +199,7 @@ is pinned. It writes a category → type → profile table and the building → 
 path, such as *Power plants › Solar farm › Hail*. The real-estate pages list building systems, not buildings.
 Nothing in `docs/cells/` changes.
 
-**Ruling:** ______
+**Ruling:** (a), 2026-10-21 — Divy: *"Power plants and real estate are something parallel, just like grid infrastructure, just like a data center in the future."* Recorded as `DCD-D20`; the spine and the four precise points are in [`09`](09_asset_spine_coverage_and_faq.md) §1.
 
 ### G14 · How do the top bar and the library follow the groups?
 
@@ -476,7 +476,7 @@ screenshots reaching clients, keep it, small, in the footer.
 
 | ID | Decision | Recommendation | Ruling |
 |---|---|---|---|
-| G13 | How the assets are grouped | (a) the twin's three categories | |
+| G13 | How the assets are grouped | (a) the twin's three categories | **(a), 2026-10-21** — *"Power plants and real estate are something parallel, just like grid infrastructure, just like a data center in the future"*; `DCD-D20`; detail in [`09`](09_asset_spine_coverage_and_faq.md) §1 |
 | G14 | The top bar and the library | (a) categories with their types; real estate one row per type | |
 | G15 | What a cell page shows first | (a) curve, main logic and references first; four steps; a *For Hazard* footer; no marks | |
 | G16 | How evidence strength is said | (a) sources in words; one word per tile; codes behind a control | |
@@ -484,5 +484,5 @@ screenshots reaching clients, keep it, small, in the footer.
 | G18 | What the dashboard is built from | (a) `origin/main` of both repositories | |
 | G19 | The build date and what goes with it | date removed; the rest (a) | date: **removed** (2026-10-21) · the rest: |
 
-**After the rulings.** They become `DCD-D20…` in the plan. The changes land on PR #7's branch, so Divy reviews
+**After the rulings.** They become `DCD-D20…` in the plan. The changes land on the `dashboard` branch (PR #7's branch, renamed 2026-10-21), so Divy reviews
 one running dashboard and merges once (`DCD-D10`), with the look review run again from a clean build.

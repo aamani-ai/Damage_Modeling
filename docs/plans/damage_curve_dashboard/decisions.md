@@ -192,3 +192,61 @@ people can understand".)*
 this instrument is for (reason 2 and reason 10 in discussion `01`: a library of subsystems; Prashant's
 question). The information is unchanged; its order and its words are not.
 
+## DCD-D20 — The asset spine is the Digital Twin's taxonomy (G13)
+
+**Decision:** Category → type → profile, as the Digital Twin defines them: Power plants (Solar farm, Wind farm,
+Battery storage, Hybrid planned), Real estate (Residential, Commercial, Industrial, Institutional proposed), Grid
+infrastructure (Substation, transmission and distribution lines), and Digital infrastructure (data centres) as a
+future category. A real-estate building is a profile under its type, not a part; a plant's own substation is
+part of the plant. Below the profile sits the twin's tree (systems → equipment → components); a damage curve
+attaches to the part replaced and priced on its own. *(Divy, 2026-10-21: "Power plants and real estate are
+something parallel, just like grid infrastructure, just like a data center in the future"; discussion `08`
+G13, `09` §1.)*
+
+**Reason:** The house's own taxonomy, already used by Hazard; it puts every asset on one spine and fixes the
+real-estate page that listed buildings as parts.
+
+## DCD-D21 — The twin's 3D picture shows what each curve covers (G20)
+
+**Decision:** The dashboard carries a pinned copy of the Digital Twin's viewer and the models it uses, and colours
+every part by what the cell does with it: has a curve · changes the curve · in the value, no curve yet · reviewed,
+no direct damage. Words repeat every colour in the systems list. *(Ruled 2026-10-21: "agree on all"; `09` G20.)*
+
+**Reason:** It is what the working prototype does (`09` §2), and it makes coverage — and the inconsistency
+between cells — visible without reading files.
+
+## DCD-D22 — Commercial real estate is the office (G21)
+
+**Decision:** The office is the Commercial profile; the twin is asked for an office model; until it exists the
+Commercial picture is the twin's retail building with the note *picture: retail · curves: office*. *(Ruled
+2026-10-21; `09` G21.)*
+
+**Reason:** Hazard's reference profiles and four of the five real-estate cells use the office.
+
+## DCD-D23 — Crosswalks drafted here, co-owned with Hazard (G22)
+
+**Decision:** This repository drafts the twin node → value bucket → failure unit crosswalks for solar, wind and
+the three buildings, flags missing reference budgets, and hands them to Hazard to co-own, beside its battery and
+substation crosswalks. *(Ruled 2026-10-21; `09` G22.)*
+
+**Reason:** Unblocks the picture and the per-asset views; it is Hazard's own follow-up AS-F01.
+
+## DCD-D24 — The FAQ is one Markdown file rendered by the dashboard (G23)
+
+**Decision:** One Markdown FAQ in this repository, about fifteen questions in five sections, each answer short
+with one example and one *Read more* link checked by the build; edited by pull request; rendered as the
+dashboard's FAQ page. *(Ruled 2026-10-21; `09` G23 and §4.)*
+
+**Reason:** Reviewable, versioned with the curves, one text for every reader.
+
+## DCD-D25 — One dashboard branch, worked in one session
+
+**Decision:** All dashboard work lives on one branch, `dashboard` (PR #7's branch, renamed on 2026-10-21), and
+is done in the owner's session, not in spawned sessions. Duplicate branches and finished worktrees were removed
+the same day. The branch merges to `main` when the owner accepts a slice (`DCD-D10`). *(Divy, 2026-10-21: "For
+dashboard work, there should be a maximum of only one branch at this stage … I am not a fan of" spawned
+sessions.)*
+
+**Reason:** Two sessions built the same iteration on two branches; the owner wants one place to look and to
+iterate.
+
