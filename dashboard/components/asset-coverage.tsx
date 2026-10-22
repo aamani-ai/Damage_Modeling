@@ -24,7 +24,7 @@ export function AssetCoverage({ cov, loadOrder }: { cov: Coverage; loadOrder: st
     </div>
   );
   return (
-    <section className="rounded-lg border border-border bg-card" aria-label="What each curve covers">
+    <section id="asset-coverage" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="What each curve covers">
       <TwinCoverage cov={cov} loadOrder={loadOrder} hazardSlug={hz.hazard.slug} mode="asset" title="What each curve covers" hazardPicker={picker} height={480} />
       <div className="flex flex-wrap items-center gap-x-3 border-t border-border px-3 py-2 text-[11.5px]">
         {hz.gap ? (
@@ -44,6 +44,16 @@ export function AssetCoverage({ cov, loadOrder }: { cov: Coverage; loadOrder: st
 
 export function CoverageMatrix({ cov }: { cov: Coverage }) {
   const trees = Object.keys(cov.trees);
+  const [, setHz] = useUrlParam("hazard");
+  const [, setView] = useUrlParam("view");
+  const [, setSel] = useUrlParam("sel");
+  // a cell shows that system on the picture above, for that hazard
+  const show = (hazard: string | null, tree: string, node: string) => {
+    if (hazard) setHz(hazard);
+    setView(tree === trees[0] ? null : tree);
+    setSel(node);
+    document.getElementById("asset-coverage")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
   const name = (k: string) => cov.trees[k].nodes[cov.trees[k].root]?.n ?? k;
   return (
     <section className="rounded-lg border border-border bg-card" aria-label="Which hazard has a curve for which system">
@@ -66,12 +76,12 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
           </thead>
           <tbody>
             {trees.map((k) => (
-              <MatrixGroup key={k} label={trees.length > 1 ? name(k) : null} rows={cov.matrix.filter((r) => r.tree === k)} cov={cov} />
+              <MatrixGroup key={k} label={trees.length > 1 ? name(k) : null} rows={cov.matrix.filter((r) => r.tree === k)} cov={cov} show={show} />
             ))}
           </tbody>
         </table>
         <p className="mt-1.5 text-[10.5px] text-muted-foreground">
-          A system shows its strongest state; &quot;and more&quot; means some of its parts are in another state (the picture above shows which). Mapped from{" "}
+          A system shows its strongest state; &quot;and more&quot; means some of its parts are in another state. Click a cell to see that system on the picture above; a part&apos;s name opens its curve. Mapped from{" "}
           <span className="font-mono">{cov.twin.crosswalk.split("/").slice(-1)[0]}</span>, a draft co-owned with Hazard.
         </p>
       </div>
@@ -79,7 +89,14 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
   );
 }
 
-function MatrixGroup({ label, rows, cov }: { label: string | null; rows: Coverage["matrix"]; cov: Coverage }) {
+function withPart(href: string, part: string): string {
+  const [path, q = ""] = href.split("?");
+  const sp = new URLSearchParams(q);
+  sp.set("part", part);
+  return `${path}?${sp.toString()}`;
+}
+
+function MatrixGroup({ label, rows, cov, show }: { label: string | null; rows: Coverage["matrix"]; cov: Coverage; show: (hazard: string | null, tree: string, node: string) => void }) {
   return (
     <>
       {label ? (
@@ -87,20 +104,28 @@ function MatrixGroup({ label, rows, cov }: { label: string | null; rows: Coverag
       ) : null}
       {rows.map((r) => (
         <tr key={r.node} className="border-t border-border/60 align-top">
-          <td className="py-1 pr-2 font-medium">{r.name}</td>
+          <td className="py-1 pr-2 font-medium">
+            <button type="button" onClick={() => show(null, r.tree, r.node)} className="text-left hover:text-accent hover:underline" title={`show ${r.name} on the picture`}>{r.name}</button>
+          </td>
           {cov.hazards.map((h) => {
             const c = r.cells[h.hazard.slug];
             if (!c) return <td key={h.hazard.slug} className="py-1 pr-2 text-muted-foreground">—</td>;
             return (
-              <td key={h.hazard.slug} className="py-1 pr-2" title={c.states.map((s) => cov.state_words[s as CoverageState]).join(" · ")}>
-                <span className="flex items-start gap-1.5">
+              <td key={h.hazard.slug} className="py-0.5 pr-1.5" title={c.states.map((s) => cov.state_words[s as CoverageState]).join(" · ")}>
+                <button type="button" onClick={() => show(h.hazard.slug, r.tree, r.node)} className="flex w-full items-start gap-1.5 rounded px-1 py-0.5 text-left hover:bg-muted" aria-label={`${r.name} × ${h.hazard.label}: ${c.words}${c.mixed ? " and more" : ""} — show it on the picture`}>
                   <Swatch state={c.state} className="mt-[3px]" />
                   <span className="leading-snug">
                     <span>{c.words}</span>
                     {c.mixed ? <span className="text-muted-foreground"> and more</span> : null}
-                    {c.curve_parts.length ? <span className="block text-[10px] text-muted-foreground">{c.curve_parts.join(" · ")}</span> : null}
                   </span>
-                </span>
+                </button>
+                {c.curve_parts.length ? (
+                  <span className="block pl-5 text-[10px] leading-snug">
+                    {c.curve_parts.map((p, i) => (
+                      <span key={p}>{i ? " · " : ""}{h.href ? <Link href={withPart(h.href, p)} className="text-muted-foreground hover:text-accent hover:underline" title={`open the curve for ${p}`}>{p}</Link> : <span className="text-muted-foreground">{p}</span>}</span>
+                    ))}
+                  </span>
+                ) : null}
               </td>
             );
           })}

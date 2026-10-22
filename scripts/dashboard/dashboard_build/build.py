@@ -18,8 +18,8 @@ from .faq import build_faq
 from .occurrence import (all_registers, asset_slug, bess_bucket_values, hazard_slug, register_for, resolve_state, slugs,
                          twin_crosswalk_pin)
 from .parts import asset_plain_sentence, asset_view, substation_budget, substation_crosswalk
-from .plain import (FOR_HAZARD, STATION_NAMES, STEPS, TIER_MEANING, TIER_PLAIN, TIER_SHORT, capability_sentences, curve_caption, halves, main_logic,
-                    one_word, parameters_plain, plain_rail, plain_text, resolve_key_sources, station_plain, steps4, tier_words)
+from .plain import (FOR_HAZARD, STATION_NAMES, STEPS, TIER_MEANING, TIER_PLAIN, TIER_SHORT, ShapeSource, capability_sentences, curve_caption, halves,
+                    main_logic, one_word, parameters_plain, plain_rail, plain_text, resolve_key_sources, station_plain, steps4, tier_words)
 from .registers import load_registers
 from .sampling import NO_EVALUATOR, sample_entry
 from .sources import NO_LINK, NOT_YET_EXTRACTED, extract_for_entry, link_counts, resolve_link
@@ -87,6 +87,42 @@ def _value_block(covered_usd: float, total_usd: float, covered: list, no_curve: 
     return {"covered_usd": covered_usd if total_usd != 1.0 else None, "total_usd": total_usd if total_usd != 1.0 else None, "share_covered": share,
             "covered_label": f"{fmt_usd_compact(covered_usd)} of {fmt_usd_compact(total_usd)}" if total_usd != 1.0 else f"{fmt_pct(share)} of project value",
             "covered": covered, "no_curve": no_curve, "left_out": [], "source": source, "basis": basis}
+
+
+def _spark(c: dict[str, Any]) -> dict[str, Any] | None:
+    """A curve's first drawn series, thinned to about 40 points, with its axis — enough to draw it in miniature."""
+    main = [s_ for s_ in c.get("series") or [] if not s_.get("continuation") and s_.get("points")]
+    if not main:
+        return None
+    pts = main[0]["points"]
+    step = max(1, len(pts) // 40)
+    keep = pts[::step]
+    if keep[-1] != pts[-1]:
+        keep.append(pts[-1])
+    ax = c.get("axis") or {}
+    return {"pts": [[round(float(x), 4), round(float(y), 4)] for x, y in keep], "kind": main[0].get("kind") or "line",
+            "axis": ax.get("label"), "unit": ax.get("unit"), "curve_id": c["curve_id"], "label": main[0].get("label")}
+
+
+def shape_source_for(entries: list[Entry]) -> ShapeSource:
+    """The cell a curve builds on, for *why this shape*: the artifact its derivation_rationale names, read at that path so
+    the reason is the one it was built from, or the cell a binding pins."""
+    by_id = {x.id: x for x in entries}
+
+    def title(cid: str) -> str:
+        x = by_id.get(cid)
+        return f"{x.data['hazard']} × {x.data['asset']}" if x else humanise(cid)
+
+    def source(art: dict[str, Any]) -> tuple[str, dict[str, Any]] | None:
+        dr = art.get("derivation_rationale") if isinstance(art.get("derivation_rationale"), dict) else {}
+        path = dr.get("source_artifact_path")
+        if isinstance(path, str) and path.startswith("docs/cells/") and (ROOT / path).is_file():
+            return title(path.split("/")[2]), load_json(ROOT / path)
+        pin = art.get("source_pin") if isinstance(art.get("source_pin"), dict) else {}
+        x = by_id.get(pin.get("cell_id") or "")
+        return (title(x.id), x.artifact) if x and x.artifact else None
+
+    return source
 
 
 def resolve_checks(checks: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -212,6 +248,7 @@ def seams_block(e: Entry, regs: dict[str, Any]) -> dict[str, Any]:
 
 def build(write: bool = True) -> dict[str, Any]:
     entries, index, index_doc = load_entries()
+    shape_source = shape_source_for(entries)
     sl = slugs()
     registers = all_registers(sl)
     checks: list[dict[str, Any]] = []
@@ -378,7 +415,7 @@ def build(write: bool = True) -> dict[str, Any]:
                        "identity": e.identity, "dossier": (ch.get("dossier") or {}).get("path"), "workbook": (ch.get("workbook") or {}).get("path"), "n_files": len(folder_files),
                        "capabilities": capabilities, "kats": k, "validation": None, "outside_checks": checks_resolved, "review": review,
                        "occurrence_sentence": (buckets_block[0]["sentence"] if buckets_block and len({b_["state"] for b_ in buckets_block}) == 1 else None) if occ else None,
-                       "occurrence_state": occ_state_overall, "fu_shares": fu_shares}
+                       "occurrence_state": occ_state_overall, "fu_shares": fu_shares, "shape_source": shape_source}
         proof_tmp = proof_block(e, k, ch["stations"]) if e.kind != "gap" else None
         station_ctx["validation"] = (proof_tmp or {}).get("validation")
         station_ctx["key_references"] = resolve_key_sources(e.data.get("key_sources") or [], sources_by_id, aliases)
@@ -388,7 +425,7 @@ def build(write: bool = True) -> dict[str, Any]:
         key_refs = resolve_key_sources(e.data.get("key_sources") or [], sources_by_id, aliases)
         plain = {
             "rail": rail_plain,
-            "main_logic": main_logic(e.data, sampled["curves"], e.data["hazard"]) if e.kind != "gap" else [],
+            "main_logic": main_logic(e.data, sampled["curves"], e.data["hazard"], a, shape_source) if e.kind != "gap" else [],
             "steps": steps4(station_ctx, stations_plain, ch["stations"]) if e.kind != "gap" else [],
             "for_hazard": list(FOR_HAZARD),
             "word": one_word(rows_tiers["shape"], rows_tiers["cost"]) if e.kind != "gap" else None,
@@ -581,7 +618,22 @@ def build(write: bool = True) -> dict[str, Any]:
     # ─── the spine (G13/G14): coverage per asset type, the nav, the library rows ───
     hz_label = {h["slug"]: h["label"] for h in sl["hazards"]}
     sp = twin_mod.spine()
-    coverage = twin_mod.build_coverage(entries, sl, lambda lbl: hazard_slug(lbl, sl), lambda e_: f"/cells/{e_.id}")
+    # a miniature of each part's first curve, for the coverage picture's list (the owner's review of iteration 3)
+    sparks: dict[str, dict[str, Any]] = {}
+    by_curve_id: dict[str, dict[str, Any]] = {}
+    for c_ in curves_out.values():
+        if c_.get("drawn") and c_.get("part"):
+            sp_ = _spark(c_)
+            if sp_:
+                sparks.setdefault(c_["entry_id"], {}).setdefault(c_["part"], sp_)
+                by_curve_id.setdefault(c_["curve_id"], sp_)
+    for e_ in entries:
+        if e_.kind == "binding":
+            for r_ in e_.data.get("rows") or []:
+                sp_ = next((by_curve_id[cid] for cid in r_.get("curves") or [] if cid in by_curve_id), None)
+                if sp_:
+                    sparks.setdefault(e_.id, {}).setdefault(r_["part"], sp_)
+    coverage = twin_mod.build_coverage(entries, sl, lambda lbl: hazard_slug(lbl, sl), lambda e_: f"/cells/{e_.id}", sparks)
     check("twin_crosswalks", "every crosswalk row names a twin node, a catalogue entry and, for a curve, one of its parts", not coverage["errors"],
           {"errors": coverage["errors"], "types": sorted(coverage["types"]), "twin_commit": coverage["twin_commit"]})
     check("twin_coverage", "every part of each twin reference model is mapped for every hazard with a curve", not coverage["findings"],

@@ -8,25 +8,35 @@ the catalogue and the cell artifacts through a checked build step and **never wr
 record: [`docs/plans/damage_curve_dashboard/`](../docs/plans/damage_curve_dashboard/README.md); reasoning:
 [`docs/extra/discussion/damage_curve_dashboard/`](../docs/extra/discussion/damage_curve_dashboard/README.md).
 
-**Status: iteration 3 (2026-10-21), built on the owner's rulings G13–G23** (`DCD-D20`–`D31`, discussion
+**Status: iteration 3 (2026-10-21), built on the owner's rulings G13–G23** (`DCD-D20`–`D32`, discussion
 [`08`](../docs/extra/discussion/damage_curve_dashboard/08_categories_and_construction.md) and
 [`09`](../docs/extra/discussion/damage_curve_dashboard/09_asset_spine_coverage_and_faq.md)), on the one `dashboard`
-branch ([PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8)), for the owner's review on the running app:
+branch ([PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8)). The owner reviewed it on the running app and it
+was revised the same day (`DCD-D33`, `D34`):
 
 - **The spine.** The top bar is *Library · Power plants ▾ · Real estate ▾ · Grid infrastructure ▾ · Review*, from the
   Digital Twin's taxonomy ([`spine.json`](../docs/contracts/twin_crosswalks/spine.json)); the library has one row
   per type under its category; real estate has one row per building type.
 - **What each curve covers, in 3D.** Every type's page shows the twin's reference model, coloured by what the cell
   does with each part (has a curve · changes the curve · in the value, no curve yet · reviewed, no direct damage ·
-  outside the value), hazard by hazard, with the systems in words beside it and a systems × hazards table below.
-  Every cell page shows the same picture for its hazard; every curve page shows where its part sits. The viewer is
-  vendored and pinned (`public/twin/`); the colours come from the crosswalks at
-  [`docs/contracts/twin_crosswalks/`](../docs/contracts/twin_crosswalks/README.md).
-- **The cell page** opens on the curve and *Why we believe it* (main logic, how sure in words, main references),
-  then what it covers, then four steps, then a *For Hazard* footer. Evidence is said in words; the codes are under
-  *Show the numbers*. One Review page; the [FAQ](../docs/faq.md); no build date, no *internal* chip, and what the
-  dashboard was built from — the commit, the build checks, the receipt — behind one *About this data* link in every
-  page's footer (`DCD-D31`, `D32`).
+  outside the value), hazard by hazard.
+  - Beside the picture the systems are listed in words; each part with a curve shows its curve in miniature and a
+    link to it.
+  - Below it is a systems × hazards table whose rows and cells select in the picture.
+  - The picture has the twin's own tools (*Focus · Isolate · Fade others · Explode · See inside · Reset*) and a
+    full-screen view (`DCD-D34`).
+  - Every cell page shows the same picture for its hazard, and every curve page shows where its part sits.
+  - The viewer is vendored and pinned (`public/twin/`). The colours come from the crosswalks at
+    [`docs/contracts/twin_crosswalks/`](../docs/contracts/twin_crosswalks/README.md).
+- **The cell page** opens on *How this curve was made* (`DCD-D33`): four steps, *What it covers · How it was
+  derived · Where the numbers come from · Has it been checked*, each with its key items as chips. The derived step
+  opens with why the curve has its shape, from the cell's own files.
+  - Then comes the curve and *Why we believe it*: the main logic, how sure in words and the main references.
+  - Then what the curve covers, then a *For Hazard* footer.
+  - Evidence is said in words; the codes are under *Show the numbers*.
+- **Around the pages.** One Review page and the [FAQ](../docs/faq.md). There is no build date and no *internal* chip.
+  What the dashboard was built from (the commit, the build checks, the receipt) sits behind one *About this data*
+  link in every page's footer (`DCD-D31`, `D32`).
 - **Built from `main`** (`DCD-D30`): the data on this branch is a labelled preview, rebuilt from `main` at the merge.
 
 Earlier records: iteration 2 at [`evidence/b0ff718/REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/b0ff718/REVIEW.md),
@@ -137,8 +147,8 @@ step's: [`evidence/3ea7e02/REVIEW.md`](../docs/plans/damage_curve_dashboard/evid
 | Covered | Not yet |
 |---|---|
 | The library by category and type; real estate one row per building type, each tile opening the shared cell at its building | The chain lens and the gate view as library lenses |
-| An asset page per type: the twin's 3D model coloured by coverage, hazard by hazard, block and plant; the systems in words; click a part for its curve; the systems × hazards table; the cells' own part lists one control away | An office model in the twin (the Commercial picture is the retail building, `DCD-D22`); a reference budget for solar, wind and real estate, so no dollars there |
-| Every cell page: the curve and why we believe it, what it covers in 3D (a building toggle for real estate), four steps with the old steps in their side panels, the open blocks, *For Hazard* | Lineage lighting, the version ghost and the chain diff |
+| An asset page per type: the twin's 3D model coloured by coverage, hazard by hazard, block and plant, with the twin's tools and full screen; the systems in words, each part's curve in miniature beside it; click a part for its curve; the systems × hazards table, which selects in the picture; the cells' own part lists one control away | An office model in the twin (the Commercial picture is the retail building, `DCD-D22`); a reference budget for solar, wind and real estate, so no dollars there |
+| Every cell page: four steps with their key items on top, the old steps in their side panels and why the curve has its shape (21 of 21 cells); the curve and why we believe it; what it covers in 3D (a building toggle for real estate); the open blocks; *For Hazard* | Lineage lighting, the version ghost and the chain diff |
 | Every curve page: how sure in words, where its part sits on the twin | Digitised source points and the events rug |
 | The crosswalks for seven types, drafted here (`DCD-D23`); rows marked *inferred* or *not named* are on the Review page as questions for each cell's owner | Hazard's co-ownership, and the cells aligning their part lists (`09` §3 row 7) |
 | One Review page about curves; the FAQ; builds from `main` with labelled previews; builder information behind *About this data* | The one-pager (G8); hosting (H1) |
@@ -148,7 +158,7 @@ step's: [`evidence/3ea7e02/REVIEW.md`](../docs/plans/damage_curve_dashboard/evid
 | Path | What |
 |---|---|
 | `app/` | The routes: `/`, `/assets/[asset]` (a type, or the real-estate index), `/cells/[entry]`, `/cells/[entry]/curves/[curve]`, `/occurrence/[asset]/[hazard]`, `/code/[code]`, `/review`, `/faq` and `/about` — all prerendered from `data/` |
-| `components/` | `nav` (the category menus), `library`, `twin-coverage` (the 3D picture, its legend and systems list), `asset-coverage` (the hazard picker and the systems × hazards table), `cell-coverage`, `part-picture`, `plain-rail` + `crumbs`, `curve-hero` (the curve and *Why we believe it*), `steps-strip` + `station-panel` (the four steps and their side panels), `ledger` (the pieces under Details), `plain-blocks`, `cell-footer` (*For Hazard*), `asset-view` (the cells' own part lists), `source-link`, the plots |
+| `components/` | `nav` (the category menus), `library`, `twin-coverage` (the 3D picture, its tools, full screen, legend and systems list), `sparkline` (a curve in miniature), `asset-coverage` (the hazard picker and the systems × hazards table), `cell-coverage`, `part-picture`, `plain-rail` + `crumbs`, `curve-hero` (the curve and *Why we believe it*), `steps-strip` + `station-panel` (the four steps and their side panels), `ledger` (the pieces under Details), `plain-blocks`, `cell-footer` (*For Hazard*), `asset-view` (the cells' own part lists), `source-link`, the plots |
 | `public/twin/` | The Digital Twin's viewer, models and three.js r147, copied unchanged by `scripts/dashboard/export_twin.mjs` with a SHA manifest; not linted, never edited |
 | `lib/` | Readers for `data/`, types, number formats, the series palette and line styles, URL state |
 | `data/` | Written only by the build step ([README](data/README.md)) |
@@ -161,7 +171,7 @@ step's: [`evidence/3ea7e02/REVIEW.md`](../docs/plans/damage_curve_dashboard/evid
 - **The browser never evaluates a curve.** Every point on a plot was sampled by a repository evaluator during
   the build; the app draws the samples.
 - **No sentence is typed in a component.** The plain chips, every curve's caption, the main logic, the four step
-  facts and paragraphs, the asset sentences, the coverage words and the Review tasks are written by the build
+  facts, chips and paragraphs, why each curve has its shape, the asset sentences, the coverage words and the Review tasks are written by the build
   (`dashboard_build/plain.py`, `parts.py`, `twin.py`, `build.py`) from the files; the components lay them out.
   Evidence is said in words only — *field-calibrated*, *published*, *borrowed*, *our judgment* — and every tier
   code in a catalogue sentence is rewritten in words; the codes stay under *Show the numbers* (`DCD-D28`).
@@ -175,11 +185,13 @@ step's: [`evidence/3ea7e02/REVIEW.md`](../docs/plans/damage_curve_dashboard/evid
   sharing a class stand side by side inside it (display only). The two battery cells use this; other cells
   keep the plot's default order.
 - **View state lives in the URL** so a link reproduces what the sender saw: `?lens=` on the library and the
-  part lists, `?row=` for an open part, `?hazard=` and `?view=` for the coverage picture's hazard and model,
+  part lists, `?row=` for an open part, `?hazard=`, `?view=` and `?sel=` for the coverage picture's hazard, model and
+  selected system or part,
   `?building=` for a real-estate cell's building, `?step=` for an open step panel, `?part=` (an index or a part's
   name), `?v=` and `?compare=1` for the curve's part, variant and overlay, `?x=log` on a curve page's plot.
-- **The 3D picture never traps the page.** The wheel zooms the model only after a click into it; otherwise it
-  scrolls the page. Every colour is repeated in words beside the picture, and the systems list is the keyboard
-  way through it.
+- **The 3D picture never traps the page.** The wheel zooms the model only after a click into it, and always in full
+  screen; otherwise it scrolls the page. Choosing a part or a system highlights it and keeps the whole model in view;
+  *Focus* zooms when asked. Every colour is repeated in words beside the picture, and the systems list is the
+  keyboard way through it.
 - **Dependencies.** `npm audit --omit=dev` reports none. The dev-only lint chain (`eslint-config-next` →
   `micromatch` → `braces`) carries five high-severity advisories with no non-breaking fix yet.

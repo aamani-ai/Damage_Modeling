@@ -31,6 +31,13 @@ scope: Build the damage-curve dashboard as a local internal instrument in this r
 > [`tasks_history/2026-10-21__dashboard__iteration-3`](../../extra/tasks_history/2026-10-21__dashboard__iteration-3/handoff.md).
 > G19 completed the same day (`DCD-D32`): builder information sits behind one *About this data* link; addendum review
 > at [`evidence/4e31ac6/`](evidence/4e31ac6/REVIEW.md).
+>
+> **2026-10-21: the owner's review of iteration 3 on the running app, built the same day** (`DCD-D33`, `D34`).
+> *How this curve was made* now sits above the curve. Its four steps are renamed *What it covers · How it was derived ·
+> Where the numbers come from · Has it been checked*, and each carries its key items as chips. Every cell with a
+> curve (21 of 21) says why its curve has its shape, in the derived step and, for 17, in the main logic. The 3D
+> picture gained the twin's tools, a full-screen view, each part's curve in miniature beside it and level columns.
+> The systems × hazards table now selects in the picture.
 
 ## Outcome first
 
@@ -125,7 +132,15 @@ Shared with Hazard: the look principle at `Hazard_modeling/docs/principles/analy
   open, not merged; look review at [`evidence/b0ff718/REVIEW.md`](evidence/b0ff718/REVIEW.md): `06` §4 checks 1–6
   and 8 pass, the brief's §5 checks 1–7 pass mechanically (`acceptance_checks.txt`), check 8 (the cold read) is
   pending a named reader; the walkthrough is `/v0`*
-- [ ] Gate: the owner's second review on the running app
+- [x] Gate: the owner's second review on the running app — *2026-10-21: reviewed; the review became discussion `08`
+  (G13–G19) and iteration 3*
+- [x] **Iteration 3** on the one `dashboard` branch ([PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8)):
+  G13–G23 built (`DCD-D20`–`D32`); look review at [`evidence/2e49bb4/REVIEW.md`](evidence/2e49bb4/REVIEW.md), G19's
+  addendum at [`evidence/4e31ac6/REVIEW.md`](evidence/4e31ac6/REVIEW.md)
+- [x] 2026-10-21: the owner reviewed iteration 3 on the running app (`DCD-D33`, `D34`). The steps moved above the curve
+  with their key items as chips, and each curve's shape now has its reason. The picture gained the twin's tools, full
+  screen, curves in miniature and a clickable table. All of it was built the same day.
+- [ ] Gate: the owner accepts iteration 3; merge to `main` and rebuild `dashboard/data/` from `main` (`DCD-D10`, `D30`)
 
 - [x] The owner runs it locally and gives feedback on the screens; findings become rows here, not reopened gates unless a ruling is contradicted — *2026-10-20: the owner asked to review the live app, not screenshots; the review page `/v0` was added and the owner accepted V0 (`DCD-D17`). The page's questions 2–6 stay open*
 - [ ] Gate: the owner accepts V0's screenshot set; merge to `main` — *accepted 2026-10-20 (`DCD-D17`); the cold read (check 7) and the merge are pending*

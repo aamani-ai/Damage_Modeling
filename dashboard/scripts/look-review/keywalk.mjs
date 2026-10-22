@@ -1,7 +1,7 @@
-// Keyboard-only walk for check 4 of the look review (06 §4), iteration 3: library → tile → cell page → the part selector
-// (Tab, Enter switches the part) → "How this curve was made" (the four steps, arrow keys) → a step's side panel (Enter,
-// Escape) → back (Shift+Tab) to the curve's own page → ⓘ → close, keys only, recording the focused element and its
-// computed outline at every step. (Iteration 2's order — strip first — is in git history.)
+// Keyboard-only walk for check 4 of the look review (06 §4), iteration 3 after the owner's review (DCD-D33): library →
+// tile → cell page → "How this curve was made" (the four steps, on top; arrow keys) → a step's side panel (Enter,
+// Escape) → the part selector (Tab, Enter switches the part) → the curve's own page → ⓘ → close, keys only, recording
+// the focused element and its computed outline at every step.
 // usage: node keywalk.mjs <baseUrl> [tile title] [curve id]   — default: Flood × Battery storage → BESS_PCS_INUNDATION_PROXY
 import puppeteer from "puppeteer-core";
 const CHROME = process.env.CHROME_PATH ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
@@ -45,10 +45,6 @@ for (const theme of ["light", "dark"]) {
   a = await active(); record(`Library: ${tileTitle} tile`, `${r1 > r0 ? "ArrowDown" : "ArrowUp"} ×${Math.abs(r1 - r0)}, ${c1 > c0 ? "ArrowRight" : "ArrowLeft"} ×${Math.abs(c1 - c0)}`, a);
   await press("Enter"); await page.waitForFunction(() => location.pathname.startsWith("/cells/"), { timeout: 15000 }); await hydrated(); await new Promise((r) => setTimeout(r, 300));
   a = await active(); record("Cell page opened; focus on the page body", "Enter", a);
-  if (await page.$('[role="radiogroup"][aria-label="Part of the plant"]')) {
-    [n, a] = await tabUntil((x) => x.role === "radio" && x.checked === "true"); record("Part selector: the selected part", `Tab ×${n}`, a);
-    await press("Tab"); await press("Enter"); await new Promise((r) => setTimeout(r, 250)); a = await active(); record("Next part selected (the URL carries ?part=)", "Tab, Enter", a);
-  }
   [n, a] = await tabUntil((x) => x.label != null && /What it covers/.test(x.label)); record("How this curve was made: step 1 (What it covers)", `Tab ×${n}`, a);
   let k = 0; while (!/Where the numbers come from/.test(a.label || "") && k < 10) { await press("ArrowRight"); k++; a = await active(); }
   record("How this curve was made: Where the numbers come from", `ArrowRight ×${k}`, a);
@@ -56,7 +52,11 @@ for (const theme of ["light", "dark"]) {
   a = await active(); record("Step panel open; focus on Close", "Enter", a);
   await press("Escape"); await new Promise((r) => setTimeout(r, 300));
   a = await active(); record("Panel closed; focus back on the step", "Escape", a);
-  [n, a] = await tabUntil((x) => (x.href || "").includes("/curves/"), 120, "Shift+Tab"); record(`Back to the curve's own page link`, `Shift+Tab ×${n}`, a);
+  if (await page.$('[role="radiogroup"][aria-label="Part of the plant"]')) {
+    [n, a] = await tabUntil((x) => x.role === "radio" && x.checked === "true"); record("Part selector: the selected part", `Tab ×${n}`, a);
+    await press("Tab"); await press("Enter"); await new Promise((r) => setTimeout(r, 250)); a = await active(); record("Next part selected (the URL carries ?part=)", "Tab, Enter", a);
+  }
+  [n, a] = await tabUntil((x) => (x.href || "").includes(`/curves/${curveId}`) || (x.href || "").includes("/curves/")); record(`The curve's own page link`, `Tab ×${n}`, a);
   const dossierHref = a.href;
   await press("Enter"); await waitPath(dossierHref.split("?")[0]); await hydrated(); await new Promise((r) => setTimeout(r, 300));
   a = await active(); record("Curve page opened; focus on the page body", "Enter", a);

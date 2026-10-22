@@ -6,7 +6,7 @@
 node scripts/dashboard/export_twin.mjs "$HOME/code/personal/Digital Twin"          # trees + vendored viewer, pinned to d01abd0
 .venv/bin/python scripts/dashboard/build_dashboard_data.py --source worktree         # the branch preview
 .venv/bin/python scripts/dashboard/build_dashboard_data.py                           # from origin/main: refuses until the branch merges
-.venv/bin/python -m pytest tests -q                                                   # 173 passed (7 new in test_dashboard_spine.py)
+.venv/bin/python -m pytest tests -q                                                   # 175 passed (9 new in test_dashboard_spine.py)
 .venv/bin/python scripts/reference_helpers/validate_all.py                            # 36 passed
 .venv/bin/python scripts/reference_helpers/check_links.py                             # 0 broken
 cd dashboard && npx tsc --noEmit && npx eslint && npm run build --cache <a writable folder>
@@ -31,6 +31,13 @@ The look-review runs are in [`dashboard/scripts/look-review/`](../../../../dashb
   the ignored `extracted/` mirror, so the source matcher found it ambiguous in a preview build; the matcher now sees only
   files git sees.
 - **`rm` is held by the Blast Radius guard**; captures went to a fresh folder instead of deleting old ones.
+- **Choosing a system zoomed onto one instance.** On a plant, `frame()` on a selected system with thousands of instances
+  zooms onto the nearest one, so the model seemed to vanish; the owner read it as "broken". A choice from the list or the
+  table now calls `reset()` after `select()`, and only *Focus* zooms.
+- **"form" inside other words.** The shape-parameter match first caught `platform`, `local_depth_transform` and
+  `lifeform_default`; the name test needs word edges (`(?<![a-z])form(?![a-z])`).
+- **The keyboard walk follows the page order.** With the steps above the curve, `keywalk.mjs` reaches the steps before
+  the part selector; the walk was reordered and passes in both themes.
 
 ## What the counts are
 

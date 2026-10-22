@@ -3,7 +3,7 @@ author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
 updated: 2026-10-21
 status: active
-scope: Decision register for the damage-curve dashboard plan (DCD-D*). D01–D12 are the owner's rulings on gates G1–G12 of the discussion node; D13–D16 record the owner's directions and the agent's engineering decisions inside them; D17 records the owner's acceptance of V0; D18–D19 iteration 2; D20–D25 the asset spine, the twin picture, the crosswalks, the FAQ and one branch; D26–D32 the rulings on G14–G19 that iteration 3 builds.
+scope: Decision register for the damage-curve dashboard plan (DCD-D*). D01–D12 are the owner's rulings on gates G1–G12 of the discussion node; D13–D16 record the owner's directions and the agent's engineering decisions inside them; D17 records the owner's acceptance of V0; D18–D19 iteration 2; D20–D25 the asset spine, the twin picture, the crosswalks, the FAQ and one branch; D26–D32 the rulings on G14–G19 that iteration 3 builds; D33–D34 the owner's review of iteration 3 on the running app.
 -->
 
 # Damage-curve dashboard — decisions
@@ -335,3 +335,58 @@ builder lines behind one About this data link"; `08` G19 (a).)*
 **Reason:** It costs a reader nothing; the dashboard is internal while it runs locally, and the client surface is the
 one-pager (`DCD-D08`).
 
+## DCD-D33 — How the curve was made comes first, in four named steps with their key items (the owner's review of iteration 3)
+
+**Decision:** On the cell page, *How this curve was made* sits above the curve. Its four steps are *What it covers ·
+How it was derived · Where the numbers come from · Has it been checked*. Each box carries its key items as chips, which
+the build writes from the same files as the step's panel:
+
+- *What it covers*: the parts with a curve, the variants, the share of the value and the parts without a curve yet.
+- *How it was derived*: the hazard measure and its unit, the curve's form, the number of curves, and *why this shape*.
+- *Where the numbers come from*: how sure in one word, the key references and how many sources are linked.
+- *Has it been checked*: the outside checks by name, the field reports and who has read the entry.
+
+The *How it was derived* panel opens with *Why this shape*. It gives the cell's own reason for the form, the form
+adopted, the alternatives the cell turned down, and the reasoning of the parameter that sets the shape. When the curve
+builds on another cell, it also gives that cell's reason and names the cell. The main logic gives the reason in one
+sentence. All 21 cells with a curve give a reason in the panel, and 17 also give it in the main logic. This amends the
+order in `DCD-D27`, which put the curve first.
+
+*(The owner's review of the running iteration 3, 2026-10-21, given with three screenshots and notes. The notes: "The
+placement of this is a bit weird, given how this curve was made. It should be on top of the curve itself." Divy: "Is
+it possible to have some highlighting, stick things, or chips? … if someone is reviewing this at a high level, they
+might want that summary … Same with other sections as well." On the names: "What it covered / How it was derived /
+Where the numbers come from / It's been checked … find what you can name it there correctly." And: "we had a reason
+to go over why the S curve and stuff like that are there. Those kinds of things should be there, no?")*
+
+**Reason:** A reviewer reads how a curve was made before reading the curve, and the chips give that summary without a
+click. Every earlier fact stays one control away in the panels (`DCD-D19`). The names follow the owner's suggestion
+with two adjustments. *What it covers* is in the present tense, like the other three. *Has it been checked* stays a
+question because 11 of the 21 cells have no outside check yet, and *It's been checked* would claim one. The reasons
+for the shape were in the cells' files all along, in three places: the derivation rationale, the parameter table, and
+the cell a curve builds on. No page showed them.
+
+## DCD-D34 — The coverage picture gets the twin's tools, a full-screen view and each part's curve beside it (the owner's review of iteration 3)
+
+**Decision:** The 3D picture carries the Digital Twin's own tools: *Focus*, *Isolate*, *Fade others*, *Explode*, *See
+inside* and *Reset*. It also has a *Full screen* view, which Esc closes and in which the wheel always zooms.
+
+- Choosing a part or a system, in the list or in the table, highlights it and keeps the whole model in view. *Focus*
+  zooms in when asked.
+- Beside each part that has a curve, the list shows a miniature of the curve and a link to it. On a cell page, the
+  link goes to the curve above.
+- The picture and the list end level.
+- In the systems × hazards table, every row name and every cell is a button. Clicking one picks the hazard and
+  selects the system in the picture above. The curve parts link to their curves, and `?sel=` carries the selection
+  in the URL.
+
+*(The owner's review of the running iteration 3, 2026-10-21. The notes: "The map should also have that expand and
+those kinds of things. Right now, it is broken. I don't know why. Take a look at that." — "I think here itself, you can
+also attach a curve process alongside each, right?" — "Make sure there is no gap in here. Both the left and right sides
+need to match." Divy, on the solar table: "if you click … on this thing, I think that should be clickable, isn't
+it?")*
+
+**Reason:** In a headless check, every type's block and plant views load with no errors. What looked broken is that
+choosing a system zoomed onto its nearest single instance, one module out of thousands, so the model seemed to vanish.
+The tools are the ones the twin's own app offers, used through the viewer's `setModes`. The miniature makes *has a
+curve* show the curve itself, not only a colour.

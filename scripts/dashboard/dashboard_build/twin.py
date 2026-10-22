@@ -66,7 +66,7 @@ def viewer_check() -> dict[str, Any]:
     return {"ok": not bad, "twin_commit": man["twin_commit"], "files": len(man["files"]), "mismatched": bad, "load_order": man["load_order"], "three": man.get("three")}
 
 
-def build_coverage(entries: list[Any], sl: dict[str, Any], hazard_slug_of, cell_href) -> dict[str, Any]:
+def build_coverage(entries: list[Any], sl: dict[str, Any], hazard_slug_of, cell_href, sparks: dict[str, dict[str, Any]] | None = None) -> dict[str, Any]:
     """Coverage per asset type with a twin asset: every node's state per hazard, the systems list and the matrix.
 
     `entries` are catalogue Entry objects; `hazard_slug_of(label)` maps a catalogue hazard label to its slug;
@@ -171,7 +171,8 @@ def build_coverage(entries: list[Any], sl: dict[str, Any], hazard_slug_of, cell_
                         ls = [states[tree_key].get(x, {}).get("s") for x in leaves(g)]
                         s = min((x for x in ls if x), key=lambda x: ORDER[x], default=None) or "no_curve"
                         info = states[tree_key].get(g) or states[tree_key].get(leaves(g)[0]) or {}
-                        by_state.setdefault(s, []).append({"node": g, "name": nodes[g]["n"], **({"part": info.get("part")} if info.get("part") else {}), **({"note": info.get("note")} if info.get("note") else {})})
+                        by_state.setdefault(s, []).append({"node": g, "name": nodes[g]["n"], **({"part": info.get("part")} if info.get("part") else {}),
+                                                           **({"parts": info.get("parts")} if info.get("parts") else {}), **({"note": info.get("note")} if info.get("note") else {})})
                     main = min(by_state, key=lambda x: ORDER[x])
                     rows_out.append({"node": sys_id, "name": nodes[sys_id]["n"], "state": main, "by_state": [{"state": s, "words": STATE_SHORT[s], "parts": by_state[s]} for s in sorted(by_state, key=lambda x: ORDER[x])]})
                 systems[tree_key] = rows_out
@@ -188,6 +189,7 @@ def build_coverage(entries: list[Any], sl: dict[str, Any], hazard_slug_of, cell_
                 "rows": rows_used, "states": pointers,
                 "systems": systems, "counts": counts, "curve_parts": curve_parts,
                 "unmapped": sorted(unmapped),
+                "sparks": {p_: (sparks or {}).get(e.id, {}).get(p_) for p_ in curve_parts if e is not None and (sparks or {}).get(e.id, {}).get(p_)},
             })
         # the matrix: the twin's systems (asset tree, then plant tree) × hazards
         matrix = []

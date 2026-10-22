@@ -1,6 +1,7 @@
-// The cell page (G15, DCD-D27): the curve first, with its main logic, how sure in words and its main references; then
-// what it covers on the Digital Twin's reference model (DCD-D21); then how it was made, in four steps; then the open
-// blocks; then a For Hazard footer with the identity, the outputs, the files, the known answers and the pins. Every
+// The cell page (G15, DCD-D27; the order the owner set on reviewing iteration 3, DCD-D33): how the curve was made, in
+// four steps with their key items, on top; then the curve with its main logic, how sure in words and its main
+// references; then what it covers on the Digital Twin's reference model (DCD-D21); then the open blocks; then a For
+// Hazard footer with the identity, the outputs, the files, the known answers and the pins. Every
 // ledger fact earlier iterations showed is still here, one control away (DCD-D19): the steps' side panels with their
 // Details, "Show the numbers", the footer's details.
 import Link from "next/link";
@@ -58,6 +59,7 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
         </div>
       ) : (
         <>
+          <StepsStrip cell={c} cites={cites} curves={curves} m={m} />
           {c.binding ? (
             <Card id="card-curve" className="mt-3">
               <div className="grid gap-3 px-3 py-3 text-[11.5px] leading-snug xl:grid-cols-5">
@@ -86,7 +88,6 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
             <EmptyState>No curve records in this artifact.</EmptyState>
           )}
           {covs.length && viewer ? <CellCoverage covs={covs} hazardSlug={c.hazard.slug} loadOrder={viewer.load_order} /> : null}
-          <StepsStrip cell={c} cites={cites} curves={curves} m={m} />
           <PlainBlocks cell={c} blob={blob} />
         </>
       )}

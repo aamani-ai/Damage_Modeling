@@ -201,7 +201,8 @@ export interface ExtractionInfo {
   open_seams: { id: string; name: string; description: string; severity: string; status: string; resolution: string; from: { file: string; sheet: string } }[] | null;
   matched: Record<string, string> | null; unmatched: string[] | null;
 }
-export interface Step { id: string; name: string; meaning: string; fact: string; paragraphs: string[]; holds: string[]; written: boolean }
+export interface StepChip { text: string; tone: "key" | "muted"; title?: string }
+export interface Step { id: string; name: string; meaning: string; fact: string; paragraphs: string[]; holds: string[]; written: boolean; chips: StepChip[]; why?: { label: string; text: string; source?: string }[]; why_note?: string }
 export interface HazardPath { id: string | null; title: string | null; path: string; state: "moved" | "on_branch"; moved_to?: string; link: string | null; words: string }
 export interface Plain {
   rail: { exists: PlainChip; evidence: PlainChip; occurrence: PlainChip; review: PlainChip };
@@ -290,13 +291,16 @@ export type ManifestV3 = ManifestV2 & {
 };
 
 export interface CoverageRow { s: CoverageState; part?: string; parts?: string[]; note?: string; basis: string }
-export interface SystemPart { node: string; name: string; part?: string; note?: string }
+export interface SystemPart { node: string; name: string; part?: string; parts?: string[]; note?: string }
 export interface SystemRow { node: string; name: string; state: CoverageState; by_state: { state: CoverageState; words: string; parts: SystemPart[] }[] }
 export interface CoverageHazard {
   hazard: { slug: string; label: string }; entry_id: string | null; status: Status | null; gap: boolean; href: string | null;
   rows: Record<string, CoverageRow>; states: Record<string, Record<string, string>>; systems: Record<string, SystemRow[]>;
   counts: Record<CoverageState, number>; curve_parts: string[]; unmapped: string[];
+  /** a miniature of each part's first curve: thinned points, the series kind and the axis */
+  sparks: Record<string, Spark>;
 }
+export interface Spark { pts: [number, number][]; kind: string; axis: string | null; unit: string | null; curve_id: string; label: string | null }
 export interface TwinTree { root: string; nodes: Record<string, { n: string; p?: string | null }> }
 export interface MatrixRow { tree: string; node: string; name: string; cells: Record<string, { state: CoverageState; words: string; curve_parts: string[]; mixed: boolean; states: CoverageState[] }> }
 export interface Coverage {

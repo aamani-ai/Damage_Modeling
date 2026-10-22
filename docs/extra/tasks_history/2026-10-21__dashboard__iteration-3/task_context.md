@@ -29,3 +29,20 @@ Branch `dashboard` at `4448caa` (PR #8 open into `main`); `origin/main` at `2efd
 `d01abd0` (`~/code/personal/Digital Twin`); Hazard's checkout on `codex/bess-conus` with uncommitted work, its
 `origin/main` at `c83e83b`, equal to GitHub's. Uncommitted from the previous context: the twin export script, its
 output, the vendored viewer, the seven crosswalk drafts with the spine, and `dashboard_build/twin.py`.
+
+## Later asks in the same session
+
+- Divy, 2026-10-21: *"Take the rest of G19 as recommended: drop the internal chip, and move the build checks and builder
+  lines behind one About this data link. Build it here on the dashboard branch."* (`DCD-D32`)
+- The owner's review of the running iteration 3, 2026-10-21, given with three screenshots and notes (`DCD-D33`, `D34`).
+  It asked for:
+  - key items as chips on the steps, so a high-level reviewer gets the summary;
+  - better step names;
+  - the reason for each curve's shape ("we had a reason to go over why the S curve and stuff like that are there");
+  - the steps back on top of the curve;
+  - the twin's tools and an expanded view for the picture, which "is broken";
+  - each part's curve beside it;
+  - level columns;
+  - a clickable systems × hazards table.
+
+  Divy: *"We are close … I would really appreciate it if you can make this point better again."*

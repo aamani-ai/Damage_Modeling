@@ -144,6 +144,10 @@ duplicated geometry work.
 
 **Ruling:** (a) — copy the twin's viewer and models into the dashboard, pinned by the twin's commit. *Divy, 2026-10-21, in chat: "yrepp agree on all" — the recommendation is ruled.*
 
+*Extended 2026-10-21, on the owner's review of the running iteration 3 (`DCD-D34`).* The picture now has the twin's
+own tools and a full-screen view. Each part's curve sits in miniature beside it, and the systems × hazards table
+selects in the picture.
+
 ### G21 · Which reference building stands for Commercial? — **RULED (a), 2026-10-21**
 
 **Options.**

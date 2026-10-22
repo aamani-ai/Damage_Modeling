@@ -1,10 +1,11 @@
 "use client";
 
-// "How this curve was made" (G15, DCD-D27): the ten steps of discussion 07 folded into four, in the reader's order —
-// what it covers · how damage is worked out · where the numbers come from · has it been checked. No marks: a step
-// with nothing behind it says "not written yet". Each opens a side panel holding its old steps, each with its
-// paragraph, its words and its Details, so nothing V0 or iteration 2 showed is removed (DCD-D19). The open step lives
-// in the URL (?step=), so a panel is a link; arrow keys move along the strip.
+// "How this curve was made" (G15, DCD-D27; placed above the curve and renamed on the owner's review, DCD-D33): the ten
+// steps of discussion 07 folded into four, in the reader's order — what it covers · how it was derived · where the
+// numbers come from · has it been checked. Each box carries its key items as chips, so a reviewer has the summary
+// without opening anything; no marks: a step with nothing behind it says "not written yet". Each opens a side panel
+// holding its old steps, each with its paragraph, its words and its Details, so nothing earlier iterations showed is
+// removed (DCD-D19). The open step lives in the URL (?step=), so a panel is a link; arrow keys move along the strip.
 import { useCallback, useRef } from "react";
 import { useUrlParam } from "@/lib/url-state";
 import type { CellV2, Citations, CurveV2, ManifestV3 } from "@/lib/types";
@@ -16,6 +17,10 @@ export function StepsStrip({ cell, cites, curves, m }: { cell: CellV2; cites: Ci
   const [selected, setStep] = useUrlParam("step");
   const steps = cell.plain.steps;
   const open = steps.find((s) => s.id === selected) ?? null;
+  // the cell's own reason leads under the heading; the form adopted, the alternatives turned down and the cell it builds
+  // on follow, each under its label
+  const lead = open?.why?.find((w) => w.label === "Why this shape") ?? null;
+  const more = open?.why?.filter((w) => w !== lead) ?? [];
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
   const close = useCallback(() => {
     const idx = steps.findIndex((s) => s.id === selected);
@@ -35,7 +40,7 @@ export function StepsStrip({ cell, cites, curves, m }: { cell: CellV2; cites: Ci
     <section aria-label="How this curve was made" className="mt-3">
       <div className="mb-1 flex items-baseline gap-2 px-0.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
         How this curve was made
-        <span className="font-normal normal-case tracking-normal text-muted-foreground/80">four steps · open one for the detail</span>
+        <span className="font-normal normal-case tracking-normal text-muted-foreground/80">four steps, with their key items · open one for the detail</span>
       </div>
       <div role="group" aria-label="How this curve was made — four steps" className="grid overflow-hidden rounded-lg border border-border bg-card sm:grid-cols-2 xl:grid-cols-4">
         {steps.map((s, i) => (
@@ -47,14 +52,23 @@ export function StepsStrip({ cell, cites, curves, m }: { cell: CellV2; cites: Ci
             onClick={() => setStep(s.id)}
             aria-pressed={selected === s.id}
             aria-label={`${i + 1}. ${s.name}: ${s.fact}`}
-            title={s.meaning}
-            className={`flex min-w-0 flex-col items-start gap-0.5 border-b border-r border-border px-3 py-2 text-left hover:bg-muted xl:border-b-0 ${selected === s.id ? "bg-accent/10" : ""}`}
+            title={`${s.meaning} — open for the detail`}
+            className={`flex min-w-0 flex-col items-start gap-1 border-b border-r border-border px-3 py-2 text-left hover:bg-muted xl:border-b-0 ${selected === s.id ? "bg-accent/10" : ""}`}
           >
             <span className="flex w-full items-baseline gap-1.5 text-[12px] font-medium leading-tight">
               <span className="tabular text-muted-foreground">{i + 1}</span>
               <span>{s.name}</span>
+              <span aria-hidden className="ml-auto text-[10px] font-normal text-muted-foreground">open ▸</span>
             </span>
-            <span className={`line-clamp-2 text-[11px] leading-snug ${s.written ? "text-muted-foreground" : "italic text-muted-foreground/80"}`}>{s.fact}</span>
+            {s.written && s.chips?.length ? (
+              <span className="flex flex-wrap gap-1">
+                {s.chips.map((c, j) => (
+                  <span key={j} title={c.title} className={`max-w-full truncate rounded-sm px-1.5 py-px text-[10.5px] leading-4 ${c.tone === "key" ? "bg-muted text-foreground" : "border border-dashed border-border text-muted-foreground"}`}>{c.text}</span>
+                ))}
+              </span>
+            ) : (
+              <span className={`line-clamp-2 text-[11px] leading-snug ${s.written ? "text-muted-foreground" : "italic text-muted-foreground/80"}`}>{s.fact}</span>
+            )}
           </button>
         ))}
       </div>
@@ -62,6 +76,23 @@ export function StepsStrip({ cell, cites, curves, m }: { cell: CellV2; cites: Ci
         {open ? (
           <div className="space-y-4">
             <p className="text-[11px] text-muted-foreground">{open.meaning}.</p>
+            {open.id === "derived" ? (
+              <section className="space-y-1.5">
+                <h3 className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Why this shape</h3>
+                {lead ? <p className="text-[12.5px] leading-snug">{lead.text}</p> : null}
+                {more.length ? (
+                  <dl className="space-y-1.5 text-[12px] leading-snug">
+                    {more.map((w) => (
+                      <div key={w.label}>
+                        <dt className="font-medium">{w.label}</dt>
+                        <dd className="text-muted-foreground">{w.text}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                ) : null}
+                {open.why_note ? <p className="text-[12px] text-muted-foreground">{open.why_note}</p> : null}
+              </section>
+            ) : null}
             {open.id === "checked" ? (
               <section className="space-y-1.5">
                 <h3 className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Outside checks</h3>

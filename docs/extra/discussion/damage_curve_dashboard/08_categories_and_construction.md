@@ -304,6 +304,11 @@ counts of uncovered parts become one.
 
 **Ruling:** (a), 2026-10-21, taken as recommended. `DCD-D27`.
 
+*Amended 2026-10-21, on the owner's review of the running iteration 3 (`DCD-D33`).* The four steps now sit above the
+curve. They are named *What it covers · How it was derived · Where the numbers come from · Has it been checked*, and
+each carries its key items as chips. The derived step opens with why the curve has its shape, taken from the cell's
+own files.
+
 ### G16 · How is evidence strength said?
 
 **What T1–T4 are.** Every number in a curve carries an evidence grade from the skill
@@ -481,7 +486,7 @@ screenshots reaching clients, keep it, small, in the footer.
 |---|---|---|---|
 | G13 | How the assets are grouped | (a) the twin's three categories | **(a), 2026-10-21** — *"Power plants and real estate are something parallel, just like grid infrastructure, just like a data center in the future"*; `DCD-D20`; detail in [`09`](09_asset_spine_coverage_and_faq.md) §1 |
 | G14 | The top bar and the library | (a) categories with their types; real estate one row per type | **(a), 2026-10-21**, as recommended; `DCD-D26` |
-| G15 | What a cell page shows first | (a) curve, main logic and references first; four steps; a *For Hazard* footer; no marks | **(a), 2026-10-21**, as recommended; `DCD-D27` |
+| G15 | What a cell page shows first | (a) curve, main logic and references first; four steps; a *For Hazard* footer; no marks | **(a), 2026-10-21**, as recommended; `DCD-D27`; the order amended on the owner's review of iteration 3: the steps above the curve, renamed, with chips (`DCD-D33`) |
 | G16 | How evidence strength is said | (a) sources in words; one word per tile; codes behind a control | **(a), 2026-10-21**, as recommended; `DCD-D28` |
 | G17 | What "review" means | (a) one Review page about curves; the walkthrough leaves the app | **(a), 2026-10-21**, as recommended; `DCD-D29` |
 | G18 | What the dashboard is built from | (a) `origin/main` of both repositories | **(a), 2026-10-21**, as recommended; `DCD-D30` (the branch carries preview data until it merges) |
@@ -489,4 +494,5 @@ screenshots reaching clients, keep it, small, in the footer.
 
 **After the rulings.** They are `DCD-D20` and `DCD-D26`–`DCD-D32` in the plan. Iteration 3 builds them on the
 `dashboard` branch ([PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8)), so Divy reviews one running
-dashboard and merges once (`DCD-D10`). Nothing in this node is open.
+dashboard and merges once (`DCD-D10`). The owner's review of the running iteration 3 amended G15's order
+(`DCD-D33`) and extended the picture (`DCD-D34`), both built the same day. Nothing in this node is open.

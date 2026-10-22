@@ -3,7 +3,7 @@ author: owner-directed (Divy) · agent-drafted
 created: 2026-10-19
 updated: 2026-10-21
 status: settled
-scope: Reasoning node — what the damage-curve dashboard is for, what it shows, how it looks, how a curve's derivation chain is shown, and what it connects to, agreed before any build; owner gates G1–G12 ruled 2026-10-20. Promoted to the plan at docs/plans/damage_curve_dashboard/ (active) and to the shared look principle in Hazard_modeling/docs/principles/. Reopened 2026-10-21 by the owner's review of the running iteration 2 — 08 (asset categories, page order, evidence words, review, main only, builder information), gates G13–G19. Settled again 2026-10-21: G13–G23 ruled (DCD-D20–D32) and built as iteration 3.
+scope: Reasoning node — what the damage-curve dashboard is for, what it shows, how it looks, how a curve's derivation chain is shown, and what it connects to, agreed before any build; owner gates G1–G12 ruled 2026-10-20. Promoted to the plan at docs/plans/damage_curve_dashboard/ (active) and to the shared look principle in Hazard_modeling/docs/principles/. Reopened 2026-10-21 by the owner's review of the running iteration 2 — 08 (asset categories, page order, evidence words, review, main only, builder information), gates G13–G19. Settled again 2026-10-21: G13–G23 ruled (DCD-D20–D32) and built as iteration 3. G15's order and G20's picture amended the same day by the owner's review of the running iteration 3 (DCD-D33, D34).
 -->
 
 # Damage-curve dashboard — the reasoning
@@ -12,6 +12,11 @@ scope: Reasoning node — what the damage-curve dashboard is for, what it shows,
 > "as recommended" (*"Take G14–G18 as recommended and build iteration 3 here on the dashboard branch"*), and the rest
 > of G19 the same way after its date. They are `DCD-D20`–`D32` in the plan and are built as the dashboard's
 > iteration 3 on [PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8). Every gate G1–G23 is ruled.
+>
+> *Amended 2026-10-21 by the owner's review of the running iteration 3, and built the same day.* For G15, the four
+> steps now sit above the curve, renamed, with chips, and the derived step says why each curve has its shape
+> (`DCD-D33`). For G20, the picture now has the twin's tools, a full-screen view, the curves in miniature and a
+> clickable table (`DCD-D34`). Nothing is open.
 >
 > *Iteration 4, 2026-10-21:* reopened by Divy's review of the running iteration 2 — his feedback reshaped the asset
 > grouping, the order of a cell page, the tier words, the review pages and what the data is built from, so
@@ -190,12 +195,12 @@ are a local dashboard and hosting comes later (`DCD-D13`); feedback is given on 
 | G12 | Plain language | One plain sentence per screen — agreed; **revised 2026-10-20 by the owner's V0 review**: the plain layer is the page, the ledger one control away | `DCD-D12`, `DCD-D19` |
 | G13 | How the assets are grouped | The Digital Twin's categories — *"Power plants and real estate are something parallel, just like grid infrastructure, just like a data center in the future"* (2026-10-21) | `DCD-D20` |
 | G14 | The top bar and the library | (a), taken as recommended (2026-10-21) | `DCD-D26` |
-| G15 | What a cell page shows first | (a), taken as recommended (2026-10-21) | `DCD-D27` |
+| G15 | What a cell page shows first | (a), taken as recommended (2026-10-21); the order amended on the owner's review of iteration 3 (2026-10-21): the four steps above the curve, renamed, with chips | `DCD-D27`, `DCD-D33` |
 | G16 | How evidence strength is said | (a), taken as recommended (2026-10-21) | `DCD-D28` |
 | G17 | What "review" means | (a), taken as recommended (2026-10-21) | `DCD-D29` |
 | G18 | What the dashboard is built from | (a), taken as recommended (2026-10-21); the branch carries preview data until it merges | `DCD-D30` |
 | G19 | The build date and what goes with it | **date removed** — *"You don't need a build date or things like those. No, it's weird, to be honest."* (2026-10-21); the rest (a), taken as recommended the same day: the *internal* chip dropped, the build checks and builder lines behind one *About this data* link | `DCD-D31`, `DCD-D32` |
-| G20–G23 | The 3D picture · the office as Commercial · the crosswalks · the FAQ | (a) each — *"agree on all"* (2026-10-21), argued in [`09`](09_asset_spine_coverage_and_faq.md) | `DCD-D21`–`D24` |
+| G20–G23 | The 3D picture · the office as Commercial · the crosswalks · the FAQ | (a) each — *"agree on all"* (2026-10-21), argued in [`09`](09_asset_spine_coverage_and_faq.md); the picture extended on the owner's review of iteration 3 (2026-10-21) | `DCD-D21`–`D24`, `DCD-D34` |
 
 ## From here to a build — what and how
 
@@ -211,8 +216,8 @@ are a local dashboard and hosting comes later (`DCD-D13`); feedback is given on 
           4. V1 → V2 per the plan, each slice with the same review; hosting (H1) after local feedback
  done ──► 5. V0 (PR #5, #6) merged; iteration 2 built and on PR #7 (open); Divy reviewed it running, 2026-10-21
  done ──► 6. Iteration 4 of this node: 08 and 09 put G13–G23 to Divy; ruled 2026-10-21 (DCD-D20–D31)
- now  ──► 7. The dashboard's iteration 3 on the one `dashboard` branch (PR #8), with G19 complete, reviewed by
-             Divy on the running app before the merge
+ now  ──► 7. The dashboard's iteration 3 on the one `dashboard` branch (PR #8), with G19 complete; Divy reviewed
+             it on the running app (2026-10-21; DCD-D33, D34, built the same day); acceptance and the merge next
    in parallel: the "does it happen?" searches on the battery rows (04 §6) — they do not wait for a screen.
 ```
 

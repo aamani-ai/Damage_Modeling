@@ -11,7 +11,7 @@ same data the ledger shows — never typed in a component.
 from __future__ import annotations
 
 import re
-from typing import Any
+from typing import Any, Callable
 
 from .common import SENTENCES, fmt_pct, fmt_usd_compact, humanise
 
@@ -714,9 +714,107 @@ def axis_short(ax: dict[str, Any]) -> str:
     return re.split(r" \(|, | = ", label)[0].strip()
 
 
-def main_logic(entry: dict[str, Any], curves: list[dict[str, Any]], hazard_label: str) -> list[str]:
+def _sentence(text: str | None) -> str:
+    t = (text or "").strip()
+    if not t:
+        return ""
+    t = t[:1].upper() + t[1:]
+    return t if t.endswith((".", "!", "?")) else t + "."
+
+
+# the rationale keys of an artifact's derivation_rationale that speak to the curve's shape (not to release or scope)
+_SHAPE_WORDS = ("smooth", "curve", "fit", "form", "continuous", "logistic", "table", "linear", "step", "shape")
+# the parameter that sets the curve's shape, best first: the one that is the form (its role or name says form or shape),
+# one fitted for the shape, one whose value names a form ("binary strict greater-than"), one that holds the curve's points
+_FORM_ROLE = ("curve_form",)
+_FIT_ROLES = ("curve_fit_shape", "curve_shape_and_level")
+_FORM_NAME = re.compile(r"(?<![a-z])form(?![a-z])|shape", re.I)  # not "platform", "transform", "lifeform"
+_POINTS_NAME = re.compile(r"knots|ordinates|points|response", re.I)
+_FORM_VALUE = re.compile(r"\b(binary|step|linear|logistic|lognormal|interpolat\w*)\b", re.I)
+# resolves the cell a curve builds on: (its name, its artifact), or None
+ShapeSource = Callable[[dict[str, Any]], "tuple[str, dict[str, Any]] | None"]
+
+
+def _reason(text: str) -> str:
+    """A reason in the default view's words: register, claim and decision IDs, ALL_CAPS decision keys and lists of cell
+    IDs dropped, tier codes in words."""
+    t = plain_text(re.sub(r"\s*\([A-Z0-9_]{6,}\)", "", str(text))) or ""
+    t = re.sub(r"\s*\((?:to |see |per )?[SCQPAD]\d{2,3}(?:\s*(?:[;,]|to|and)\s*[SCQPAD]\d{2,3})*\)", "", t)
+    t = re.sub(r"[;,]?\s*\bD-[A-Z]{2,6}-\d{2}\b", "", t)
+    t = re.sub(r"\s*\([a-z]+(?:_[a-z]+)+(?:,\s*[a-z]+(?:_[a-z]+)+)*\)", "", t)
+    t = re.sub(r"\(\s*\)", "", t)
+    t = re.sub(r"\s+([,;.)])", r"\1", t)
+    t = re.sub(r"[;,]+(\.?)\s*$", r"\1", re.sub(r"\s{2,}", " ", t).strip())
+    return _sentence(t)
+
+
+def _shape_rank(r: dict[str, Any]) -> int | None:
+    role = str(r.get("param_role") or r.get("role") or "")
+    name = str(r.get("parameter") or r.get("scope") or "")
+    if role in _FORM_ROLE or _FORM_NAME.search(name):
+        return 0
+    if role in _FIT_ROLES:
+        return 1
+    if _FORM_VALUE.search(str(r.get("value") or r.get("value_or_rule") or "")):
+        return 2
+    if _POINTS_NAME.search(name):
+        return 3
+    return None
+
+
+def _own_shape_reasons(artifact: dict[str, Any]) -> list[dict[str, str]]:
+    dr = artifact.get("derivation_rationale")
+    dr = dr if isinstance(dr, dict) else {}
+    out: list[dict[str, str]] = []
+    if isinstance(dr.get("form_reasoning"), str) and dr["form_reasoning"].strip():
+        out.append({"label": "Why this shape", "text": _reason(dr["form_reasoning"])})
+    if isinstance(dr.get("adopted_form"), str) and dr["adopted_form"].strip():
+        out.append({"label": "The form adopted", "text": _reason(dr["adopted_form"])})
+    for k, v in dr.items():
+        if k.startswith("why_") and isinstance(v, str) and v.strip() and any(w in k.lower() for w in _SHAPE_WORDS):
+            out.append({"label": _sentence(humanise(k)).rstrip("."), "text": _reason(v)})
+    # the parameter that sets the shape, with its reasoning: how the points were fitted, or why they are judgment; a
+    # reason of fewer than three words once its IDs are dropped ("Categorical axis.") says nothing about why
+    ranked = sorted((rank, i, r) for i, r in enumerate(artifact.get("parameter_tier_table") or []) if (rank := _shape_rank(r)) is not None)
+    for _, _, r in ranked:
+        why = r.get("reasoning") or r.get("reason")
+        text = _reason(why) if isinstance(why, str) else ""
+        if len(re.findall(r"[A-Za-z]{2,}", text)) < 3 or text in {w["text"] for w in out}:
+            continue
+        out.append({"label": "How the shape was set" if any(w["label"] == "Why this shape" for w in out) else "Why this shape", "text": text})
+        break
+    if not out:
+        for k in ("summary", "decision"):
+            v = dr.get(k)
+            if isinstance(v, str) and v.strip():
+                out.append({"label": "The choice", "text": _reason(humanise(v) if " " not in v else v)})
+                break
+    out.sort(key=lambda w: w["label"] != "Why this shape")
+    return out
+
+
+def shape_why(artifact: dict[str, Any] | None, source: ShapeSource | None = None) -> list[dict[str, str]]:
+    """Why the curve has its shape, in the cell's own files: its form reasoning, the form it adopted, the alternatives
+    it turned down ("why not a smooth fit"), and the reasoning of the parameter that sets the shape. A cell that builds
+    on another cell's curve (its derivation_rationale names the source artifact, or a binding pins it) also gets that
+    cell's reason, labelled with the cell's name; `source` resolves it. Empty only when none of these files says why."""
+    if not artifact:
+        return []
+    out = _own_shape_reasons(artifact)
+    src = source(artifact) if source else None
+    if src:
+        title, theirs = src[0], _own_shape_reasons(src[1] or {})
+        first = next((w for w in theirs if w["label"] == "Why this shape"), theirs[0] if theirs else None)
+        if first and first["text"] not in {w["text"] for w in out}:
+            out.append({"label": f"From {title}, which it builds on", "text": first["text"], "source": title, "source_label": first["label"]})
+    return out[:4]
+
+
+def main_logic(entry: dict[str, Any], curves: list[dict[str, Any]], hazard_label: str, artifact: dict[str, Any] | None = None,
+               source: ShapeSource | None = None) -> list[str]:
     """Two to four sentences a first-time reader needs: how the hazard is measured, how damage rises, how it becomes
-    dollars. Written from the axis, the cell's own method summary and its value basis — never typed in a component."""
+    dollars, and — where the cell says so — why the curve has its shape. Written from the axis, the cell's own method
+    summary, its value basis and its derivation rationale; never typed in a component."""
     out: list[str] = []
     axes: list[str] = []
     for c in curves:
@@ -731,35 +829,70 @@ def main_logic(entry: dict[str, Any], curves: list[dict[str, Any]], hazard_label
     if method:
         m = plain_text(method) or ""
         out.append(m[:1].upper() + m[1:] + ".")
+    reasons = shape_why(artifact, source)
+    why = next((w for w in reasons if w["label"] == "Why this shape"), None)
+    theirs = next((w for w in reasons if w.get("source_label") == "Why this shape"), None)
+    if why:
+        out.append(f"Why this shape: {_lower_first(why['text'])}")
+    elif theirs:
+        out.append(f"Why this shape: as in {theirs['source']}, {_lower_first(theirs['text'])}")
     share = (entry.get("how_to_use") or {}).get("share_of")
     if share:
         ph = _lower_first((plain_text(_first_clause(share)) or "").rstrip("."))
         if not re.match(r"(the|each|a|an)\b", ph):
             ph = "the " + ph
         out.append(f"The damage ratio is a share of {ph}.")
-    return out
+    return out[:4]
 
 
 STEPS = (
     ("covers", "What it covers", "The parts that have a curve, their share of the value, and what has none yet", ("scope", "units", "value")),
-    ("worked_out", "How damage is worked out", "How the hazard is measured, the shape of the curve, and the site adjustments", ("axis_form", "audit")),
+    ("derived", "How it was derived", "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments", ("axis_form", "audit")),
     ("numbers", "Where the numbers come from", "The sources, what each one gave, and how sure we are", ("evidence",)),
     ("checked", "Has it been checked", "Outside checks, field reports of this damage, and who has read the entry", ("field_review",)),
 )
 FOR_HAZARD = ("artifact", "capability", "proof")
 
 
+def _short(text: str | None, n: int = 34) -> str:
+    t = re.sub(r"\s+", " ", (text or "").strip())
+    if len(t) <= n:
+        return t
+    cut = t[:n].rsplit(" ", 1)[0].rstrip(",;:·-")
+    return cut + "…"
+
+
+def _chip(text: str, tone: str = "key", title: str | None = None) -> dict[str, str]:
+    return {"text": text, "tone": tone, **({"title": title} if title else {})}
+
+
+def _variant_chip(variants: str | None) -> str | None:
+    """'module type: fragile … / default … / hardened …; optional stow' → '3 module types'."""
+    m = re.match(r"\s*([A-Za-z][A-Za-z \-]{2,30}):\s*([^;]+)", variants or "")
+    if not m:
+        return None
+    options = [o for o in re.split(r"\s+/\s+", m.group(2)) if o.strip()]
+    if len(options) < 2:
+        return None
+    name = m.group(1).strip().lower()
+    return f"{len(options)} {name if name.endswith('s') else name + 's'}"
+
+
 def steps4(ctx: dict[str, Any], stations_plain: list[dict[str, Any]], chain_stations: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Today's ten steps folded into four, in the reader's order (08 §G15). A step none of whose files or write-up
-    sections exist says so in words; no marks."""
+    """Today's ten steps folded into four, in the reader's order (08 §G15, renamed on the owner's review: DCD-D33). Each
+    carries a fact line and its key items as chips, so a reviewer sees the summary without opening a panel. A step none
+    of whose files or write-up sections exist says so in words; no marks."""
     e, parts, value = ctx["entry"], ctx["parts"], ctx.get("value")
     nc = e.get("not_covered") or []
     by_id = {s["id"]: s for s in stations_plain}
     state = {s["id"]: s["state"] for s in chain_stations}
+    why = shape_why(ctx.get("artifact"), ctx.get("shape_source"))
     out = []
     for sid, name, meaning, holds in STEPS:
         written = any(state.get(h) in ("artifact", "prose") for h in holds)
         paras = [by_id[h]["paragraph"] for h in holds if h in by_id and by_id[h].get("paragraph")]
+        chips: list[dict[str, str]] = []
+        extra: dict[str, Any] = {}
         if sid == "covers":
             n = len(parts)
             fact = f"{n} part{'s' if n != 1 else ''} with a curve"
@@ -769,15 +902,51 @@ def steps4(ctx: dict[str, Any], stations_plain: list[dict[str, Any]], chain_stat
                 fact += f" · {len(nc)} without one yet"
             elif ctx.get("withheld_units"):
                 fact += f" · {len(ctx['withheld_units'])} withheld"
-        elif sid == "worked_out":
+            names = [pt["part"] for pt in parts]
+            chips += [_chip(_short(x, 30), "key", x) for x in names[:3]]
+            if len(names) > 3:
+                chips.append(_chip(f"+{len(names) - 3} more", "muted", ", ".join(names[3:])))
+            vchips = [v for v in (_variant_chip(pt.get("variants")) for pt in parts) if v]
+            chips += [_chip(v) for v in dict.fromkeys(vchips)]
+            if value and value.get("share_covered") is not None:
+                chips.append(_chip(f"{fmt_pct(value['share_covered'])} of the value"))
+            if nc:
+                chips.append(_chip(f"{len(nc)} without a curve yet", "muted", "; ".join(_strip_amount(plain_text(x) or "") for x in nc)))
+            if ctx.get("withheld_units"):
+                chips.append(_chip(f"{len(ctx['withheld_units'])} withheld", "muted"))
+        elif sid == "derived":
             axes = list(dict.fromkeys(axis_short(c.get("axis") or {}) for c in ctx["curves"] if (c.get("axis") or {}).get("label")))
+            units = {axis_short(c.get("axis") or {}): (c.get("axis") or {}).get("unit") for c in ctx["curves"] if (c.get("axis") or {}).get("label")}
             form = (by_id.get("axis_form") or {}).get("plain_fact") or ""
             lead = axes[0] if len(axes) == 1 else (f"{len(axes)} hazard measures" if axes else "")
             fact = f"{lead} → {form}" if lead and form and form != "—" else (form if form and form != "—" else "see the write-up")
+            for a in axes[:2]:
+                u = units.get(a)
+                chips.append(_chip(_short(a, 30) + (f", {u}" if u and u not in ("dimensionless", "class") else ""), "key", a))
+            if len(axes) > 2:
+                chips.append(_chip(f"+{len(axes) - 2} more measures", "muted"))
+            for f_ in (form.split(" + ") if form and form != "—" else []):
+                chips.append(_chip(re.sub(r"^(an?|the) ", "", f_)))
+            n_curves = len(ctx["curves"])
+            if n_curves > len(parts) and n_curves > 1:
+                chips.append(_chip(f"{n_curves} curves"))
+            if why:
+                chips.append(_chip("why this shape", "muted", why[0]["text"]))
+                extra["why"] = why
+            else:
+                extra["why_note"] = "The cell's files give no reason for the shape beyond its form, which the next section describes."
         elif sid == "numbers":
             lc = ctx["link_counts"]
             fact = (f"{lc['total']} source{'s' if lc['total'] != 1 else ''}, {lc['linked']} linked" if lc["total"] else "sources in the write-up")
-            fact += f" · {one_word(ctx['rows_tiers']['shape'], ctx['rows_tiers']['cost'])}"
+            word = one_word(ctx["rows_tiers"]["shape"], ctx["rows_tiers"]["cost"])
+            fact += f" · {word}"
+            chips.append(_chip(word, "key", halves(ctx["rows_tiers"]["shape"], ctx["rows_tiers"]["cost"])))
+            refs = [r for r in ctx.get("key_references") or [] if r.get("text")]
+            chips += [_chip(_short(r["text"], 30), "key", r["text"]) for r in refs[:2]]
+            if len(refs) > 2:
+                chips.append(_chip(f"+{len(refs) - 2} more references", "muted"))
+            if lc["total"]:
+                chips.append(_chip(f"{lc['total']} sources, {lc['linked']} linked", "muted"))
         else:
             oc = ctx.get("outside_checks") or []
             occ = ctx.get("occurrence_state") or "not_searched"
@@ -787,6 +956,13 @@ def steps4(ctx: dict[str, Any], stations_plain: list[dict[str, Any]], chain_stat
                 "field reports not searched" if occ == "not_searched" else f"field reports: {occ.replace('_', ' ')}",
                 f"reviewed by {rv['review']['by']}" if rv.get("review") else "read by an agent only",
             ])
+            chips += [_chip(_short(c["name"], 30), "key", c["name"]) for c in oc[:2]]
+            if len(oc) > 2:
+                chips.append(_chip(f"+{len(oc) - 2} more checks", "muted"))
+            if not oc:
+                chips.append(_chip("no outside check yet", "muted"))
+            chips.append(_chip("field reports: not searched" if occ == "not_searched" else f"field reports: {occ.replace('_', ' ')}", "muted"))
+            chips.append(_chip(f"reviewed by {rv['review']['by']}" if rv.get("review") else "read by an agent only", "key" if rv.get("review") else "muted"))
             first = (f"{len(oc)} outside check{'s' if len(oc) != 1 else ''} compare{'' if len(oc) != 1 else 's'} this curve with an independent result: {_join([c['name'] for c in oc])}."
                      if oc else "No outside check has been made yet: nothing independent has been compared with this curve.")
             v = ctx.get("validation")
@@ -794,5 +970,6 @@ def steps4(ctx: dict[str, Any], stations_plain: list[dict[str, Any]], chain_stat
                 first += f" The validation record says {humanise(v.get('status') or 'report')}" + (f" ({v['date']})" if v.get("date") else "") + "."
             paras = [first] + paras
             written = True
-        out.append({"id": sid, "name": name, "meaning": meaning, "fact": fact if written else "not written yet", "paragraphs": paras, "holds": list(holds), "written": written})
+        out.append({"id": sid, "name": name, "meaning": meaning, "fact": fact if written else "not written yet", "paragraphs": paras,
+                    "holds": list(holds), "written": written, "chips": chips, **extra})
     return out
