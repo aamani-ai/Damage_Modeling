@@ -220,7 +220,7 @@ def _after_colon(text: str) -> str:
         t = t.split(":", 1)[1].strip()
     elif t.lower().startswith(("allowed with", "withheld until", "withheld before", "withheld for")):
         t = t
-    return t[:1].lower() + t[1:] if t else ""
+    return _lower_first(t) if t else ""
 
 
 def _give(input_text: str | None) -> str:

@@ -6,6 +6,11 @@ from typing import Any
 from .common import fmt_pct, fmt_usd_compact
 
 
+def _lower_first(s: str) -> str:
+    """A sentence's first letter in lower case for use after a colon or a dash, unless it starts an acronym ("FEMA Hazus …")."""
+    return s[:1].lower() + s[1:] if s and not s[:2].isupper() else s
+
+
 def _join(items: list[str]) -> str:
     items = [i for i in items if i]
     if not items:
@@ -70,13 +75,13 @@ def cell_sentence(entry: dict[str, Any], status: str, value: dict[str, Any] | No
             if reason.startswith(prefix):
                 reason = reason[len(prefix):]
                 break
-        return f"{hazard_label} on {asset_label.lower()} has no curve yet — {reason[:1].lower() + reason[1:]}."
+        return f"{hazard_label} on {asset_label.lower()} has no curve yet — {_lower_first(reason)}."
     from .plain import plain_text
     method = plain_text((entry.get("method") or {}).get("summary", "").rstrip(".").split(";")[0].strip())
     lead = f"{hazard_label} on {asset_label.lower()}"
     if entry["kind"] == "binding":
         lead = f"{hazard_label} on {asset_label.lower()} reuses another cell's curve"
-    s = f"{lead}: {method[0].lower() + method[1:] if method else 'see the cell files'}"
+    s = f"{lead}: {_lower_first(method) if method else 'see the cell files'}"
     if value and value.get("share_covered") is not None:
         s += f"; {fmt_pct(value['share_covered'])} of the reference value has a curve and {fmt_pct(1 - value['share_covered'])} has none"
     elif entry.get("not_covered"):

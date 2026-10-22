@@ -50,10 +50,25 @@ node scripts/look-review/measure.mjs $B "$(cat scripts/look-review/speed.iter2.j
 cd .. && .venv/bin/python dashboard/scripts/look-review/quantize.py $RAW docs/plans/damage_curve_dashboard/evidence/<commit> <commit>
 ```
 
+**The owner's review of iteration 3 (2026-10-21)** used `routes.iter3-review.json`, then `routes.iter3-review-full.json`
+for the full-screen view (viewport only), and `picture.mjs` for the coverage picture. `keywalk.mjs` now walks the
+cell page in its order: the four steps come before the part selector (`DCD-D33`). The record is
+[`evidence/5db1b4b/REVIEW.md`](../../../docs/plans/damage_curve_dashboard/evidence/5db1b4b/REVIEW.md).
+
+```bash
+B=http://localhost:3211; RAW=/tmp/look-review-5db1b4b && mkdir -p $RAW
+node scripts/look-review/shoot.mjs $B $RAW "$(cat scripts/look-review/routes.iter3-review.json)"
+node scripts/look-review/shoot.mjs $B $RAW "$(cat scripts/look-review/routes.iter3-review-full.json)" --only-viewport
+node scripts/look-review/picture.mjs $B
+node scripts/look-review/keywalk.mjs $B
+cd .. && .venv/bin/python dashboard/scripts/look-review/quantize.py $RAW docs/plans/damage_curve_dashboard/evidence/<commit> <commit>
+```
+
 | Script | Check (06 §4) | What it does |
 |---|---|---|
 | `shoot.mjs` | 1 Screens, 2 Greyscale | Each route at 1440 × 900 and 1024 × 768, light and dark, viewport and full page; theme set both ways (`prefers-color-scheme` and next-themes' stored key); `--grey` applies a greyscale filter before capture |
 | `scrolled.mjs` | 3 Screenshot escape | Scrolls each route to its middle and bottom at both widths, captures the frame and reports whether the sticky rail is in it |
-| `keywalk.mjs` | 4 Keyboard | Library → a tile (default Flood × Battery storage) → the "How this was built" strip by arrow keys → a step panel (Enter, Escape) → the part selector → the curve's own page (default the PCS) → ⓘ → close, keys only; prints the focused element and its computed outline per step |
+| `keywalk.mjs` | 4 Keyboard | Library → a tile (default Flood × Battery storage) → the four steps of *How this curve was made* by arrow keys → a step panel (Enter, Escape) → the part selector → the curve's own page (default the PCS) → ⓘ → close, keys only; prints the focused element and its computed outline per step |
+| `picture.mjs` | The coverage picture (`DCD-D21`, `D34`) | Every asset type's block and plant views: the model loads with no console error, the six tools are there, the picture and the list end level, each curve part has its miniature; a table click writes `?hazard=` and `?sel=`, selects the system and keeps the whole model in view; full screen opens and Esc closes it |
 | `measure.mjs` | 8 Speed | Seven cold runs per page at no throttle and at 4× CPU slowdown; *usable* = hydrated (the theme toggle is a real button) and, on plot pages, the plot's canvas exists |
 | `quantize.py` | 1 Screens | 128 colours without dithering and the commit in every file name (needs the repo venv's Pillow) |

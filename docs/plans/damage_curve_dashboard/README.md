@@ -37,7 +37,8 @@ scope: Build the damage-curve dashboard as a local internal instrument in this r
 > Where the numbers come from · Has it been checked*, and each carries its key items as chips. Every cell with a
 > curve (21 of 21) says why its curve has its shape, in the derived step and, for 17, in the main logic. The 3D
 > picture gained the twin's tools, a full-screen view, each part's curve in miniature beside it and level columns.
-> The systems × hazards table now selects in the picture.
+> The systems × hazards table now selects in the picture. Addendum review at
+> [`evidence/5db1b4b/`](evidence/5db1b4b/REVIEW.md).
 
 ## Outcome first
 
@@ -139,7 +140,9 @@ Shared with Hazard: the look principle at `Hazard_modeling/docs/principles/analy
   addendum at [`evidence/4e31ac6/REVIEW.md`](evidence/4e31ac6/REVIEW.md)
 - [x] 2026-10-21: the owner reviewed iteration 3 on the running app (`DCD-D33`, `D34`). The steps moved above the curve
   with their key items as chips, and each curve's shape now has its reason. The picture gained the twin's tools, full
-  screen, curves in miniature and a clickable table. All of it was built the same day.
+  screen, curves in miniature and a clickable table. All of it was built the same day. Addendum review at
+  [`evidence/5db1b4b/REVIEW.md`](evidence/5db1b4b/REVIEW.md): screens, the keyboard walk, copy and the picture's
+  checks pass.
 - [ ] Gate: the owner accepts iteration 3; merge to `main` and rebuild `dashboard/data/` from `main` (`DCD-D10`, `D30`)
 
 - [x] The owner runs it locally and gives feedback on the screens; findings become rows here, not reopened gates unless a ruling is contradicted — *2026-10-20: the owner asked to review the live app, not screenshots; the review page `/v0` was added and the owner accepted V0 (`DCD-D17`). The page's questions 2–6 stay open*

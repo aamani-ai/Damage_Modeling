@@ -42,7 +42,7 @@
 8. **Built from main** (`DCD-D30`): `build_dashboard_data.py` reads an export of `origin/main` by default and Hazard on its
    `origin/main` through git; until this branch merges, `main` has no crosswalks, so the build refuses with a message and the
    branch carries a labelled preview (`--source worktree`). Nine Hazard paths are not on Hazard's main and say so.
-9. **Checks.** 175 tests pass (9 new), 36 validators pass, 0 broken links, typecheck and lint clean; the data build's
+9. **Checks.** The owner's review has an addendum record at [`evidence/5db1b4b/REVIEW.md`](../../../plans/damage_curve_dashboard/evidence/5db1b4b/REVIEW.md). In it, all six mechanical checks pass; so do the picture's checks (13 of 13 views, the table click, full screen) and the keyboard walk. 175 tests pass (9 new), 36 validators pass, 0 broken links, typecheck and lint clean; the data build's
    structural checks pass and four data checks fail as reported (`source_ids`, `source_links`, `extracted_sources`, the new
    `hazard_links`). Look review at [`evidence/2e49bb4/REVIEW.md`](../../../plans/damage_curve_dashboard/evidence/2e49bb4/REVIEW.md):
    seven of nine pass; the cold read needs a named reader, the owner's review is open.
