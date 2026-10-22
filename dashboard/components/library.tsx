@@ -46,7 +46,7 @@ function TileBox({ t, lens, tabIndex, onKey, rc }: { t: LibraryTile; lens: strin
       data-rc={rc}
       tabIndex={tabIndex}
       onKeyDown={onKey}
-      aria-label={`${t.aria_label}; ${second(t, lens)}`}
+      aria-label={lens === "status" || lens === "evidence" ? t.aria_label : `${t.aria_label}; ${second(t, lens)}`}
       title={title}
       className={`lens-fade flex h-[52px] w-full flex-col justify-center rounded-md border px-2 ${gap ? "tile-gap border-border text-muted-foreground" : `border-border bg-card ${shade(t, lens)}`} ${t.status === "reused" ? "hatch-reused" : ""} ${t.status === "proposal" ? "border-dashed border-foreground/30 bg-transparent" : ""} hover:border-accent/60`}
     >

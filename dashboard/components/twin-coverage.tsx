@@ -12,7 +12,7 @@ import type { Coverage, CoverageHazard, CoverageState } from "@/lib/types";
 
 export const STATE_ORDER: CoverageState[] = ["curve", "conditioner", "no_curve", "no_direct_damage", "outside"];
 // Data colours, the same in both themes: the legend explains a picture whose scene is always lit the same way.
-export const STATE_CSS: Record<CoverageState, string> = { curve: "#1b8a6b", conditioner: "#5b8bd6", no_curve: "#dfae5a", no_direct_damage: "#b9bec6", outside: "#efede7" };
+export const STATE_CSS: Record<CoverageState, string> = { curve: "#1b8a6b", conditioner: "#5b8bd6", no_curve: "#e9c47f", no_direct_damage: "#b9bec6", outside: "#efede7" };
 const hex = (c: string) => parseInt(c.slice(1), 16);
 
 export type Labels = Record<string, { name: string; sub?: string }>;
