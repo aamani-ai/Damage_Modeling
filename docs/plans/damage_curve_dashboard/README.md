@@ -45,7 +45,8 @@ scope: Build the damage-curve dashboard as a local internal instrument in this r
 > `main` is built from `main` at that commit. The next iteration starts a new `dashboard` branch from `main`.
 >
 > **2026-10-22: hosted** (`DCD-D36`, gate H1). The dashboard is the Cloud Run service `damage-curves`, behind IAP for
-> aamani.ai accounts, deployed from the `deploy/damage-curves` branch, so Jung A can open and own it. See
+> aamani.ai accounts, deployed from the `deploy/damage-curves` branch, so Jung A can open and own it. Live at
+> <https://damage-curves-wsd6lcl64q-uc.a.run.app> (sign in with an aamani.ai account). See
 > [`dashboard/README.md`](../../../dashboard/README.md#hosted).
 
 ## Outcome first
@@ -172,7 +173,8 @@ Shared with Hazard: the look principle at `Hazard_modeling/docs/principles/analy
 ### Phase 5 · Hosting and outward
 
 - [x] Cloud Run through the team's deploy skill, authenticated, after the owner has used the local app — *2026-10-22:
-  the service `damage-curves`, behind IAP for aamani.ai, deployed from `deploy/damage-curves` (`DCD-D36`)*
+  the service `damage-curves`, behind IAP for aamani.ai, deployed from `deploy/damage-curves` (`DCD-D36`); live at
+  <https://damage-curves-wsd6lcl64q-uc.a.run.app>, an anonymous request redirected to Google sign-in*
 - [x] Gate: the owner approves hosting (gate H1 below) — *ruled 2026-10-22, `DCD-D36`*
 - [ ] The one-pager export, after G8
 

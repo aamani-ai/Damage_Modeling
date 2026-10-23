@@ -47,9 +47,9 @@ and the first V1 step at [`evidence/3ea7e02/`](../docs/plans/damage_curve_dashbo
 
 ## Hosted
 
-The dashboard runs on the team's Cloud Run as the service `damage-curves` (project `modeling-nonprod-svc-db5x`,
-`us-central1`), behind IAP: open its address and sign in with an **aamani.ai** Google account; no one else gets in
-(`DCD-D36`, gate H1).
+**<https://damage-curves-wsd6lcl64q-uc.a.run.app>**. Sign in with an **aamani.ai** Google account; no one else gets in (`DCD-D36`, gate H1).
+It runs on the team's Cloud Run as the service `damage-curves` (project `modeling-nonprod-svc-db5x`, `us-central1`)
+behind IAP, live since 2026-10-22 (revision `damage-curves-00001-65t`, from `7d7434a`).
 
 - **What runs.** [`Dockerfile`](Dockerfile) builds the static export from the committed `data/` and serves `out/` with
   [`scripts/serve-static.mjs`](scripts/serve-static.mjs), on Cloud Run's `PORT`. The server gzips text, lets browsers

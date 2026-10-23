@@ -430,6 +430,9 @@ can. Gate H1 is ruled.
 own: "Host the dashboard: sign-in for anyone @aamani.ai (IAP), service name damage-curves, deployed from a
 deploy/damage-curves branch. Merge PR #9 first.")*
 
+*Live since 2026-10-22 at <https://damage-curves-wsd6lcl64q-uc.a.run.app>: revision `damage-curves-00001-65t` from `7d7434a` serves all traffic, and an
+anonymous request to any page is redirected to Google sign-in.*
+
 **Reason:** Jung A takes ownership of the dashboard, and the team sees it the next week. A link anyone at aamani.ai can
 open needs no local setup. IAP is the team runbook's default for internal work, and H1 asked for authentication: the
 curves' evidence and review state are internal. The deploy branch is the runbook's convention. It is a release
