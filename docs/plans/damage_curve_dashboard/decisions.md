@@ -448,6 +448,9 @@ IAP's web-app access (`roles/iap.httpsResourceAccessor`) on every deploy. A gran
 list keeps its access until its grant is removed. *(Divy, 2026-10-23: "Also admit @infrasure.ai accounts: add
 domain:infrasure.ai to the dashboard's IAP access and redeploy.")*
 
+*Live since 2026-10-23: revision `damage-curves-00002-88l` from `e02fac8` serves all traffic. The deploy granted both
+domains, and an anonymous request is still redirected to Google sign-in.*
+
 **Reason:** The team signs in with both domains. Jung A's account is `aamani.ai`; the owner's Google Cloud and calendar
 account is `divy@infrasure.ai`, which `DCD-D36` would have refused. model-gpr's hosted review already admits
 `infrasure.ai` accounts, on the owner's ruling of 2026-10-21.

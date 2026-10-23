@@ -51,7 +51,7 @@ and the first V1 step at [`evidence/3ea7e02/`](../docs/plans/damage_curve_dashbo
 **<https://damage-curves-wsd6lcl64q-uc.a.run.app>**. Sign in with an **aamani.ai** or **infrasure.ai** Google account; no one else gets in (`DCD-D36`, gate H1;
 `DCD-D37`).
 It runs on the team's Cloud Run as the service `damage-curves` (project `modeling-nonprod-svc-db5x`, `us-central1`)
-behind IAP, live since 2026-10-22 (revision `damage-curves-00001-65t`, from `7d7434a`).
+behind IAP, live since 2026-10-22 (revision `damage-curves-00002-88l` from `e02fac8` since 2026-10-23).
 
 - **What runs.** [`Dockerfile`](Dockerfile) builds the static export from the committed `data/` and serves `out/` with
   [`scripts/serve-static.mjs`](scripts/serve-static.mjs), on Cloud Run's `PORT`. The server gzips text, lets browsers
