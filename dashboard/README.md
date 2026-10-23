@@ -39,7 +39,8 @@ was revised the same day (`DCD-D33`, `D34`); it was accepted and merged into `ma
   link in every page's footer (`DCD-D31`, `D32`).
 - **Built from `main`** (`DCD-D30`): the data on `main` is built from `main`, at `01dbf18` since PR #9 merged. A branch
   carries a labelled preview of its own data until it merges.
-- **Hosted** (`DCD-D36`): the Cloud Run service `damage-curves`, behind IAP for aamani.ai accounts ([below](#hosted)).
+- **Hosted** (`DCD-D36`, `D37`): the Cloud Run service `damage-curves`, behind IAP for aamani.ai and infrasure.ai
+  accounts ([below](#hosted)).
 
 Earlier records: iteration 2 at [`evidence/b0ff718/REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/b0ff718/REVIEW.md),
 V0 (accepted 2026-10-20, `DCD-D17`) at [`evidence/3f9d516/`](../docs/plans/damage_curve_dashboard/evidence/3f9d516/REVIEW.md)
@@ -47,7 +48,8 @@ and the first V1 step at [`evidence/3ea7e02/`](../docs/plans/damage_curve_dashbo
 
 ## Hosted
 
-**<https://damage-curves-wsd6lcl64q-uc.a.run.app>**. Sign in with an **aamani.ai** Google account; no one else gets in (`DCD-D36`, gate H1).
+**<https://damage-curves-wsd6lcl64q-uc.a.run.app>**. Sign in with an **aamani.ai** or **infrasure.ai** Google account; no one else gets in (`DCD-D36`, gate H1;
+`DCD-D37`).
 It runs on the team's Cloud Run as the service `damage-curves` (project `modeling-nonprod-svc-db5x`, `us-central1`)
 behind IAP, live since 2026-10-22 (revision `damage-curves-00001-65t`, from `7d7434a`).
 
@@ -56,7 +58,10 @@ behind IAP, live since 2026-10-22 (revision `damage-curves-00001-65t`, from `7d7
   keep Next's hashed files under `/_next/static/`, and never serves a file outside `out/`.
 - **How it deploys.** [`.github/workflows/deploy-damage-curves.yml`](../.github/workflows/deploy-damage-curves.yml) runs on
   a push to the `deploy/damage-curves` branch, never on `main`. It refuses data not built from `main`, then builds and
-  pushes the image, deploys it behind IAP, admits aamani.ai and checks that an anonymous request is refused.
+  pushes the image, deploys it behind IAP, admits the accounts of the domains in `IAP_DOMAINS` and checks that an anonymous request is refused.
+- **Who gets in.** Every Google account of the domains in the workflow's `IAP_DOMAINS`: `aamani.ai` and `infrasure.ai`
+  (`DCD-D37`). Each deploy grants them IAP's web-app access. A grant only adds: to take a domain out, drop it from the
+  list and remove its grant with `gcloud iap web remove-iam-policy-binding`.
 - **Showing the team a new version.** Merge to `main`, then rebuild the data from `main` and commit it there
   (`DCD-D30`). Then move the deploy branch to `main`:
   `git push origin main:deploy/damage-curves`.

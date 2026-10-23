@@ -1,9 +1,9 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
-updated: 2026-10-22
+updated: 2026-10-23
 status: active
-scope: Decision register for the damage-curve dashboard plan (DCD-D*). D01–D12 are the owner's rulings on gates G1–G12 of the discussion node; D13–D16 record the owner's directions and the agent's engineering decisions inside them; D17 records the owner's acceptance of V0; D18–D19 iteration 2; D20–D25 the asset spine, the twin picture, the crosswalks, the FAQ and one branch; D26–D32 the rulings on G14–G19 that iteration 3 builds; D33–D34 the owner's review of iteration 3 on the running app; D35 its acceptance and the merge; D36 hosting on Cloud Run (gate H1).
+scope: Decision register for the damage-curve dashboard plan (DCD-D*). D01–D12 are the owner's rulings on gates G1–G12 of the discussion node; D13–D16 record the owner's directions and the agent's engineering decisions inside them; D17 records the owner's acceptance of V0; D18–D19 iteration 2; D20–D25 the asset spine, the twin picture, the crosswalks, the FAQ and one branch; D26–D32 the rulings on G14–G19 that iteration 3 builds; D33–D34 the owner's review of iteration 3 on the running app; D35 its acceptance and the merge; D36 hosting on Cloud Run (gate H1); D37 infrasure.ai accounts admitted too.
 -->
 
 # Damage-curve dashboard — decisions
@@ -433,7 +433,21 @@ deploy/damage-curves branch. Merge PR #9 first.")*
 *Live since 2026-10-22 at <https://damage-curves-wsd6lcl64q-uc.a.run.app>: revision `damage-curves-00001-65t` from `7d7434a` serves all traffic, and an
 anonymous request to any page is redirected to Google sign-in.*
 
+*Access widened on 2026-10-23 (`DCD-D37`): infrasure.ai accounts are admitted too.*
+
 **Reason:** Jung A takes ownership of the dashboard, and the team sees it the next week. A link anyone at aamani.ai can
 open needs no local setup. IAP is the team runbook's default for internal work, and H1 asked for authentication: the
 curves' evidence and review state are internal. The deploy branch is the runbook's convention. It is a release
 pointer, not a work branch (`DCD-D25`).
+
+## DCD-D37 — infrasure.ai accounts admitted too
+
+**Decision:** The hosted dashboard admits every Google account of `aamani.ai` and of `infrasure.ai`. This amends
+`DCD-D36`, which admitted `aamani.ai` only. The deploy workflow lists the domains in `IAP_DOMAINS` and grants each one
+IAP's web-app access (`roles/iap.httpsResourceAccessor`) on every deploy. A grant only adds: a domain taken out of the
+list keeps its access until its grant is removed. *(Divy, 2026-10-23: "Also admit @infrasure.ai accounts: add
+domain:infrasure.ai to the dashboard's IAP access and redeploy.")*
+
+**Reason:** The team signs in with both domains. Jung A's account is `aamani.ai`; the owner's Google Cloud and calendar
+account is `divy@infrasure.ai`, which `DCD-D36` would have refused. model-gpr's hosted review already admits
+`infrasure.ai` accounts, on the owner's ruling of 2026-10-21.
