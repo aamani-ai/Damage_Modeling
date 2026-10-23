@@ -3,7 +3,7 @@ author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
 updated: 2026-10-22
 status: active
-scope: Decision register for the damage-curve dashboard plan (DCD-D*). D01–D12 are the owner's rulings on gates G1–G12 of the discussion node; D13–D16 record the owner's directions and the agent's engineering decisions inside them; D17 records the owner's acceptance of V0; D18–D19 iteration 2; D20–D25 the asset spine, the twin picture, the crosswalks, the FAQ and one branch; D26–D32 the rulings on G14–G19 that iteration 3 builds; D33–D34 the owner's review of iteration 3 on the running app; D35 its acceptance and the merge.
+scope: Decision register for the damage-curve dashboard plan (DCD-D*). D01–D12 are the owner's rulings on gates G1–G12 of the discussion node; D13–D16 record the owner's directions and the agent's engineering decisions inside them; D17 records the owner's acceptance of V0; D18–D19 iteration 2; D20–D25 the asset spine, the twin picture, the crosswalks, the FAQ and one branch; D26–D32 the rulings on G14–G19 that iteration 3 builds; D33–D34 the owner's review of iteration 3 on the running app; D35 its acceptance and the merge; D36 hosting on Cloud Run (gate H1).
 -->
 
 # Damage-curve dashboard — decisions
@@ -410,3 +410,30 @@ PR #8 into main and rebuild the dashboard data from main.")*
 **Reason:** `DCD-D10`: a slice merges when the owner accepts it on the running app. The merge commit is a true merge,
 not a squash, because the review records name commits by SHA (`2e49bb4`, `4e31ac6`, `5db1b4b`) and a squash would
 leave them unreachable from `main`.
+
+## DCD-D36 — Hosted on Cloud Run, behind IAP for aamani.ai (H1)
+
+**Decision:** The dashboard is hosted on the team's Cloud Run (`modeling-nonprod-svc-db5x`, `us-central1`) as the
+service `damage-curves`, behind IAP. Anyone signed in with an `aamani.ai` Google account can open it, and no one else
+can. Gate H1 is ruled.
+
+- **How it deploys.** It deploys from the `deploy/damage-curves` branch
+  ([`deploy-damage-curves.yml`](../../../.github/workflows/deploy-damage-curves.yml)). `main` stays non-deploying, and
+  the team sees a new version when that branch is moved to `main`.
+- **What the image holds.** The image is the static export, served by the dashboard's own dependency-free server
+  (`dashboard/Dockerfile`, `scripts/serve-static.mjs`). It is built with Docker, as Hazard's dashboard is. The server
+  gzips text and lets browsers keep Next's hashed files.
+- **What the workflow checks.** It refuses page data not built from `main` (`DCD-D30`), and checks that IAP refuses
+  an anonymous request.
+
+*(Divy, 2026-10-22, after that day's meeting with Jung A, which agreed to host the dashboard for Jung A to navigate and
+own: "Host the dashboard: sign-in for anyone @aamani.ai (IAP), service name damage-curves, deployed from a
+deploy/damage-curves branch. Merge PR #9 first.")*
+
+*Live since 2026-10-22 at <https://damage-curves-wsd6lcl64q-uc.a.run.app>: revision `damage-curves-00001-65t` from `7d7434a` serves all traffic, and an
+anonymous request to any page is redirected to Google sign-in.*
+
+**Reason:** Jung A takes ownership of the dashboard, and the team sees it the next week. A link anyone at aamani.ai can
+open needs no local setup. IAP is the team runbook's default for internal work, and H1 asked for authentication: the
+curves' evidence and review state are internal. The deploy branch is the runbook's convention. It is a release
+pointer, not a work branch (`DCD-D25`).

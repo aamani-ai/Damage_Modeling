@@ -43,6 +43,11 @@ scope: Build the damage-curve dashboard as a local internal instrument in this r
 > **2026-10-22: iteration 3 accepted and merged** (`DCD-D35`). The owner accepted it on the running app, and
 > [PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8) merged into `main` as `85aedf6`. The dashboard's data on
 > `main` is built from `main` at that commit. The next iteration starts a new `dashboard` branch from `main`.
+>
+> **2026-10-22: hosted** (`DCD-D36`, gate H1). The dashboard is the Cloud Run service `damage-curves`, behind IAP for
+> aamani.ai accounts, deployed from the `deploy/damage-curves` branch, so Jung A can open and own it. Live at
+> <https://damage-curves-wsd6lcl64q-uc.a.run.app> (sign in with an aamani.ai account). See
+> [`dashboard/README.md`](../../../dashboard/README.md#hosted).
 
 ## Outcome first
 
@@ -167,8 +172,11 @@ Shared with Hazard: the look principle at `Hazard_modeling/docs/principles/analy
 
 ### Phase 5 · Hosting and outward
 
-- [ ] Cloud Run through the team's deploy skill, authenticated, after the owner has used the local app; one-pager export after G8
-- [ ] Gate: the owner approves hosting (gate H1 below)
+- [x] Cloud Run through the team's deploy skill, authenticated, after the owner has used the local app — *2026-10-22:
+  the service `damage-curves`, behind IAP for aamani.ai, deployed from `deploy/damage-curves` (`DCD-D36`); live at
+  <https://damage-curves-wsd6lcl64q-uc.a.run.app>, an anonymous request redirected to Google sign-in*
+- [x] Gate: the owner approves hosting (gate H1 below) — *ruled 2026-10-22, `DCD-D36`*
+- [ ] The one-pager export, after G8
 
 ## Validation gates
 
@@ -188,7 +196,7 @@ A teammate can clone the repository, run the build step and `npm run dev`, open 
 | Gate | Question | Recommendation |
 |---|---|---|
 | G8 (carried) | Which fields go on the client one-pager, and the NDA line | After V1; propose from the running cell page |
-| H1 | Host on Cloud Run (authenticated) once the local app has been used? | Yes, through the deploy skill; not before the owner has given feedback locally |
+| H1 | Host on Cloud Run (authenticated) once the local app has been used? | **Ruled 2026-10-22** (`DCD-D36`): `damage-curves` behind IAP for aamani.ai, deployed from `deploy/damage-curves` |
 
 ## Connected work
 

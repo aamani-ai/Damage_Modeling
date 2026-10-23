@@ -52,8 +52,9 @@
    structural checks pass and four data checks fail as reported (`source_ids`, `source_links`, `extracted_sources`, the new
    `hazard_links`). Look review at [`evidence/2e49bb4/REVIEW.md`](../../../plans/damage_curve_dashboard/evidence/2e49bb4/REVIEW.md):
    seven of nine pass; the cold read needs a named reader, the owner's review is open.
-10. **Next.** Merge PR #9 (the preview link fix, bullet 8) once its CI passes, then the owner's next feedback on a new
-    `dashboard` branch from `main`. Other open work: Hazard's co-ownership of the crosswalks, and the cell owners' answers
+10. **Next.** The dashboard is hosted (`DCD-D36`): <https://damage-curves-wsd6lcl64q-uc.a.run.app>, behind IAP for aamani.ai accounts, deployed from
+    the `deploy/damage-curves` branch (PR #9 merged first). Jung A opens it and takes ownership; the team sees it the
+    week after. [PR #10](https://github.com/aamani-ai/Damage_Modeling/pull/10) brings the hosting setup into `main`: merge it with a merge commit and keep the branch, which is the deploy trigger. The owner's next feedback goes on a new `dashboard` branch from `main`. Other open work: Hazard's co-ownership of the crosswalks, and the cell owners' answers
     to the *inferred* rows.
 
 ## Where to look
