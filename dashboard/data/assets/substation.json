@@ -6,8 +6,15 @@
   "noun": "substations",
   "href": "/assets/substation"
  },
- "summary": "Flood has a curve for substations, all from transferred or policy evidence (T3–T4); hurricane wind, convective wind and wildfire reuse another cell's curve; hail has none; nobody has yet searched for field reports.",
- "reference": null,
+ "summary": "Hurricane wind, convective wind and wildfire have curves that are our judgment (hurricane wind: one curve for the whole substation · reused, convective wind: one curve for the whole substation · reused and wildfire: 3 parts · reused); flood has curves built from borrowed and our judgment evidence (one curve for the whole substation); hail has no cell yet.",
+ "summary_v0": "Flood has a curve for substations, all on borrowed evidence or our judgment; hurricane wind, convective wind and wildfire reuse another cell's curve; hail has none; nobody has yet searched for field reports.",
+ "reference": {
+  "label": "one 345/138 kV station · $27.7M reference budget (Hazard, MISO MTEP24 rates)",
+  "source": "Hazard_modeling/docs/plans/_cross_cutting/substation_conus/reference_budget.csv",
+  "total_usd": 27650054.37,
+  "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/docs/plans/_cross_cutting/substation_conus/reference_budget.csv",
+  "note": "the bindings price the fenced station at $27.4M; the budget also carries the external access road outside the fence"
+ },
  "hazards": [
   {
    "slug": "hail",
@@ -156,181 +163,1339 @@
  ],
  "rows": [
   {
-   "key": "FACILITY_GSU_SUBSTATION_SOURCE_NATIVE",
-   "label": "Facility Gsu Substation Source Native",
-   "value_usd": null,
-   "share": null,
-   "twin_targets": [],
+   "key": "substation_hv_yard",
+   "label": "345 kV yard: breakers, disconnects, bus, instrument transformers, deadends",
+   "value_usd": 9753111.0,
+   "share": 0.35273388144155027,
+   "twin_targets": [
+    "phy:substation:substation_hv_yard"
+   ],
    "subsystems": [
-    "FACILITY_GSU_SUBSTATION_SOURCE_NATIVE"
+    "substation_hv_yard"
    ],
    "cells": {
-    "flood": {
-     "twin_lead": null,
-     "twin_nodes": [],
-     "entry_id": "flood_substation",
-     "occurrence": {
-      "bucket": "FACILITY_GSU_SUBSTATION_SOURCE_NATIVE",
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": null
-     },
-     "effect": "damage",
-     "outside_the_five": false,
-     "curve": {
-      "mark": "■",
-      "state": "live",
-      "partial": false,
-      "shape": "T3",
-      "cost": "T4",
-      "curves": [
-       "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL"
-      ],
-      "drawn": true
-     }
-    },
     "hail": {
-     "twin_lead": null,
-     "twin_nodes": [],
      "entry_id": "hail_substation",
-     "occurrence": null,
      "effect": "damage",
      "outside_the_five": false,
-     "curve": {
-      "mark": "┈",
-      "state": "gap",
-      "label": "gap"
-     }
-    }
-   }
-  },
-  {
-   "key": "Whole station (fenced assembly)",
-   "label": "Whole station (fenced assembly)",
-   "value_usd": null,
-   "share": null,
-   "twin_targets": [],
-   "subsystems": [],
-   "cells": {
-    "convective_wind": {
      "twin_lead": null,
      "twin_nodes": [],
-     "entry_id": "substation_convective_wind_screening_v1",
-     "occurrence": {
-      "bucket": "Whole station (fenced assembly)",
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": null
-     },
+     "occurrence": null,
+     "state": "gap",
+     "words": "no cell yet",
+     "mark": "┈",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "flood": {
+     "entry_id": "flood_substation",
      "effect": "damage",
      "outside_the_five": false,
-     "curve": {
-      "mark": "▨",
-      "state": "reused",
-      "partial": false,
-      "shape": "T4",
-      "cost": "T4",
-      "curves": [
-       "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
-      ],
-      "drawn": false
-     }
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole fenced station · borrowed and our judgment",
+     "mark": "■",
+     "parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "tier_span": "T3–4",
+     "share": null,
+     "dollars": 9753111.0
     },
     "hurricane_wind": {
-     "twin_lead": null,
-     "twin_nodes": [],
      "entry_id": "substation_hurricane_screening_v1",
-     "occurrence": {
-      "bucket": "Whole station (fenced assembly)",
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": null
-     },
      "effect": "damage",
      "outside_the_five": false,
-     "curve": {
-      "mark": "▨",
-      "state": "reused",
-      "partial": false,
-      "shape": "T4",
-      "cost": "T4",
-      "curves": [
-       "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
-      ],
-      "drawn": false
-     }
-    },
-    "hail": {
      "twin_lead": null,
      "twin_nodes": [],
-     "entry_id": "hail_substation",
      "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole fenced station · our judgment",
+     "mark": "▨",
+     "parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "tier_span": "T4",
+     "share": null,
+     "dollars": 9753111.0
+    },
+    "convective_wind": {
+     "entry_id": "substation_convective_wind_screening_v1",
      "effect": "damage",
      "outside_the_five": false,
-     "curve": {
-      "mark": "┈",
-      "state": "gap",
-      "label": "gap"
-     }
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole fenced station · our judgment",
+     "mark": "▨",
+     "parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "tier_span": "T4",
+     "share": null,
+     "dollars": 9753111.0
+    },
+    "wildfire": {
+     "entry_id": "substation_wildfire_screening_v1",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "partial",
+     "words": "curve for part of it: 345 kv circuit breakers, 345 kv three-phase disconnects, 345 kv voltage transformers sets of three and 345 kv arresters sets of three · our judgment",
+     "mark": "▨",
+     "parts": [
+      "345 kV Circuit breakers",
+      "345 kV Three-phase disconnects",
+      "345 kV Three-phase bus supports and fittings",
+      "345 kV Voltage transformers sets of three",
+      "345 kV Angled deadends",
+      "345 kV arresters sets of three"
+     ],
+     "tier_span": "T4",
+     "share": null,
+     "dollars": 6894635.0
+    },
+    "heat": {
+     "entry_id": null,
+     "effect": "performance",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "icing": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "lightning": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     }
    }
   },
   {
-   "key": "Electrical equipment (transformers and switchgear)",
-   "label": "Electrical equipment (transformers and switchgear)",
-   "value_usd": null,
-   "share": null,
-   "twin_targets": [],
-   "subsystems": [],
+   "key": "substation_lv_yard",
+   "label": "138 kV yard: breakers, disconnects, bus, instrument transformers, deadends",
+   "value_usd": 2839838.0,
+   "share": 0.10270641648651485,
+   "twin_targets": [
+    "phy:substation:substation_lv_yard"
+   ],
+   "subsystems": [
+    "substation_lv_yard"
+   ],
    "cells": {
-    "wildfire": {
-     "twin_lead": null,
-     "twin_nodes": [],
-     "entry_id": "substation_wildfire_screening_v1",
-     "occurrence": {
-      "bucket": "Electrical equipment (transformers and switchgear)",
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": null
-     },
-     "effect": "damage",
-     "outside_the_five": false,
-     "curve": {
-      "mark": "▨",
-      "state": "reused",
-      "partial": true,
-      "shape": "T4",
-      "cost": "T4",
-      "curves": [
-       "WSV1_MV_EQUIPMENT_THERMAL"
-      ],
-      "drawn": false
-     }
-    },
     "hail": {
-     "twin_lead": null,
-     "twin_nodes": [],
      "entry_id": "hail_substation",
-     "occurrence": null,
      "effect": "damage",
      "outside_the_five": false,
-     "curve": {
-      "mark": "┈",
-      "state": "gap",
-      "label": "gap"
-     }
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "gap",
+     "words": "no cell yet",
+     "mark": "┈",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "flood": {
+     "entry_id": "flood_substation",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole fenced station · borrowed and our judgment",
+     "mark": "■",
+     "parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "tier_span": "T3–4",
+     "share": null,
+     "dollars": 2839838.0
+    },
+    "hurricane_wind": {
+     "entry_id": "substation_hurricane_screening_v1",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole fenced station · our judgment",
+     "mark": "▨",
+     "parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "tier_span": "T4",
+     "share": null,
+     "dollars": 2839838.0
+    },
+    "convective_wind": {
+     "entry_id": "substation_convective_wind_screening_v1",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole fenced station · our judgment",
+     "mark": "▨",
+     "parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "tier_span": "T4",
+     "share": null,
+     "dollars": 2839838.0
+    },
+    "wildfire": {
+     "entry_id": "substation_wildfire_screening_v1",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "partial",
+     "words": "curve for part of it: 138 kv circuit breakers, 138 kv three-phase disconnects and 138 kv voltage transformers sets of three · our judgment",
+     "mark": "▨",
+     "parts": [
+      "138 kV Circuit breakers",
+      "138 kV Three-phase disconnects",
+      "138 kV Three-phase bus supports and fittings",
+      "138 kV Voltage transformers sets of three",
+      "138 kV Angled deadends"
+     ],
+     "tier_span": "T4",
+     "share": null,
+     "dollars": 1507362.0
+    },
+    "heat": {
+     "entry_id": null,
+     "effect": "performance",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "icing": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "lightning": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    }
+   }
+  },
+  {
+   "key": "substation_transformation",
+   "label": "Autotransformers, oil containment and firewall",
+   "value_usd": 5323360.0,
+   "share": 0.1925262037016385,
+   "twin_targets": [
+    "phy:substation:substation_transformation"
+   ],
+   "subsystems": [
+    "substation_transformation"
+   ],
+   "cells": {
+    "hail": {
+     "entry_id": "hail_substation",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "gap",
+     "words": "no cell yet",
+     "mark": "┈",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "flood": {
+     "entry_id": "flood_substation",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole fenced station · borrowed and our judgment",
+     "mark": "■",
+     "parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "tier_span": "T3–4",
+     "share": null,
+     "dollars": 5323360.0
+    },
+    "hurricane_wind": {
+     "entry_id": "substation_hurricane_screening_v1",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole fenced station · our judgment",
+     "mark": "▨",
+     "parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "tier_span": "T4",
+     "share": null,
+     "dollars": 5323360.0
+    },
+    "convective_wind": {
+     "entry_id": "substation_convective_wind_screening_v1",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole fenced station · our judgment",
+     "mark": "▨",
+     "parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "tier_span": "T4",
+     "share": null,
+     "dollars": 5323360.0
+    },
+    "wildfire": {
+     "entry_id": "substation_wildfire_screening_v1",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "partial",
+     "words": "curve for part of it: two 336 mva 345/138 kv autotransformers · our judgment",
+     "mark": "▨",
+     "parts": [
+      "Two 336 MVA 345/138 kV autotransformers",
+      "Oil containment and firewall for two units"
+     ],
+     "tier_span": "T4",
+     "share": null,
+     "dollars": 4623360.0
+    },
+    "heat": {
+     "entry_id": null,
+     "effect": "performance",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "icing": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "lightning": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    }
+   }
+  },
+  {
+   "key": "substation_controls_auxiliaries",
+   "label": "Relays, control house, station battery, SCADA, station service, control cable",
+   "value_usd": 6574492.59,
+   "share": 0.23777503298992608,
+   "twin_targets": [
+    "phy:substation:substation_controls_auxiliaries"
+   ],
+   "subsystems": [
+    "substation_controls_auxiliaries"
+   ],
+   "cells": {
+    "hail": {
+     "entry_id": "hail_substation",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "gap",
+     "words": "no cell yet",
+     "mark": "┈",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "flood": {
+     "entry_id": "flood_substation",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole fenced station · borrowed and our judgment",
+     "mark": "■",
+     "parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "tier_span": "T3–4",
+     "share": null,
+     "dollars": 6574492.59
+    },
+    "hurricane_wind": {
+     "entry_id": "substation_hurricane_screening_v1",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole fenced station · our judgment",
+     "mark": "▨",
+     "parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "tier_span": "T4",
+     "share": null,
+     "dollars": 6574492.59
+    },
+    "convective_wind": {
+     "entry_id": "substation_convective_wind_screening_v1",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole fenced station · our judgment",
+     "mark": "▨",
+     "parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "tier_span": "T4",
+     "share": null,
+     "dollars": 6574492.59
+    },
+    "wildfire": {
+     "entry_id": "substation_wildfire_screening_v1",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "withheld",
+     "words": "in the station's value, withheld by this binding",
+     "mark": "▢",
+     "parts": [
+      "345 kV relay panels",
+      "138 kV relay panels",
+      "Control house and foundation scaled from 500 sqft",
+      "Station battery and charger",
+      "SCADA and communications",
+      "Station service power",
+      "345 kV yard control cable",
+      "345 kV yard control conduit",
+      "345 kV yard control trench",
+      "138 kV yard control cable",
+      "138 kV yard control conduit",
+      "138 kV yard control trench"
+     ],
+     "tier_span": "T4",
+     "share": null,
+     "dollars": 0.0
+    },
+    "heat": {
+     "entry_id": null,
+     "effect": "performance",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "icing": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "lightning": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    }
+   }
+  },
+  {
+   "key": "substation_civil_support",
+   "label": "Site work, access road, drainage and lightning shielding",
+   "value_usd": 3159252.78,
+   "share": 0.11425846538037024,
+   "twin_targets": [
+    "phy:substation:substation_civil_support"
+   ],
+   "subsystems": [
+    "substation_civil_support"
+   ],
+   "cells": {
+    "hail": {
+     "entry_id": "hail_substation",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "gap",
+     "words": "no cell yet",
+     "mark": "┈",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "flood": {
+     "entry_id": "flood_substation",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole fenced station · borrowed and our judgment",
+     "mark": "■",
+     "parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "tier_span": "T3–4",
+     "share": null,
+     "dollars": 3159252.78
+    },
+    "hurricane_wind": {
+     "entry_id": "substation_hurricane_screening_v1",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole fenced station · our judgment",
+     "mark": "▨",
+     "parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "tier_span": "T4",
+     "share": null,
+     "dollars": 3159252.78
+    },
+    "convective_wind": {
+     "entry_id": "substation_convective_wind_screening_v1",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole fenced station · our judgment",
+     "mark": "▨",
+     "parts": [
+      "Whole station (fenced assembly)"
+     ],
+     "tier_span": "T4",
+     "share": null,
+     "dollars": 3159252.78
+    },
+    "wildfire": {
+     "entry_id": "substation_wildfire_screening_v1",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "withheld",
+     "words": "in the station's value, withheld by this binding",
+     "mark": "▢",
+     "parts": [
+      "Level-ground lightly vegetated site work",
+      "External station access road allowance",
+      "Minor drainage and lightning shielding allowance"
+     ],
+     "tier_span": "T4",
+     "share": null,
+     "dollars": 0.0
+    },
+    "heat": {
+     "entry_id": null,
+     "effect": "performance",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "icing": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "lightning": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     }
    }
   }
  ],
+ "parts_by_cell": {
+  "flood_substation": {
+   "entry_id": "flood_substation",
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "status": "live",
+   "title": "Flood × Substation",
+   "parts": [
+    {
+     "failure_unit_id": "FW_HAZUS_GSU_SUBSTATION_ASSEMBLY",
+     "subsystem": "FACILITY_GSU_SUBSTATION_SOURCE_NATIVE",
+     "component": "HAZUS_SUBSTATION_CONTROL_ROOM_CABLING_AND_INCIDENTAL_TRANSFORMER_SWITCHGEAR_ASSEMBLY",
+     "treatment": "primary_nonzero",
+     "part": "Whole station (fenced assembly)",
+     "state": "curve",
+     "rows": [
+      "substation_hv_yard",
+      "substation_lv_yard",
+      "substation_transformation",
+      "substation_controls_auxiliaries",
+      "substation_civil_support"
+     ],
+     "spans": true,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T3",
+     "cost": "T4",
+     "curves": [
+      "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL"
+     ],
+     "drawn": true,
+     "withheld_reasons": []
+    }
+   ],
+   "share_basis": null,
+   "n_named": 1,
+   "n_curve": 1,
+   "n_withheld": 0,
+   "not_covered": []
+  },
+  "substation_convective_wind_screening_v1": {
+   "entry_id": "substation_convective_wind_screening_v1",
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "status": "reused",
+   "title": "Convective wind × Substation",
+   "parts": [
+    {
+     "failure_unit_id": "PV_GSU_SUBSTATION",
+     "subsystem": "FACILITY_GSU_SUBSTATION_SOURCE_NATIVE",
+     "component": "Whole station (fenced assembly)",
+     "treatment": "reused",
+     "part": "Whole station (fenced assembly)",
+     "state": "curve",
+     "rows": [
+      "substation_hv_yard",
+      "substation_lv_yard",
+      "substation_transformation",
+      "substation_controls_auxiliaries",
+      "substation_civil_support"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T4",
+     "cost": "T4",
+     "curves": [
+      "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_station": true,
+     "modeled_row_ids": []
+    }
+   ],
+   "share_basis": null,
+   "n_named": 1,
+   "n_curve": 1,
+   "n_withheld": 0,
+   "not_covered": []
+  },
+  "substation_hurricane_screening_v1": {
+   "entry_id": "substation_hurricane_screening_v1",
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "status": "reused",
+   "title": "Hurricane wind × Substation",
+   "parts": [
+    {
+     "failure_unit_id": "PV_GSU_SUBSTATION",
+     "subsystem": "FACILITY_GSU_SUBSTATION_SOURCE_NATIVE",
+     "component": "Whole station (fenced assembly)",
+     "treatment": "reused",
+     "part": "Whole station (fenced assembly)",
+     "state": "curve",
+     "rows": [
+      "substation_hv_yard",
+      "substation_lv_yard",
+      "substation_transformation",
+      "substation_controls_auxiliaries",
+      "substation_civil_support"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T4",
+     "cost": "T4",
+     "curves": [
+      "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_station": true,
+     "modeled_row_ids": []
+    }
+   ],
+   "share_basis": null,
+   "n_named": 1,
+   "n_curve": 1,
+   "n_withheld": 0,
+   "not_covered": []
+  },
+  "substation_wildfire_screening_v1": {
+   "entry_id": "substation_wildfire_screening_v1",
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "status": "reused",
+   "title": "Wildfire × Substation",
+   "parts": [
+    {
+     "failure_unit_id": "WSV1_MV_EQUIPMENT_THERMAL",
+     "subsystem": "FACILITY_GSU_SUBSTATION_SOURCE_NATIVE",
+     "component": "Electrical equipment (transformers and switchgear)",
+     "treatment": "reused",
+     "part": "Electrical equipment (transformers and switchgear)",
+     "state": "curve",
+     "rows": [
+      "substation_hv_yard",
+      "substation_lv_yard",
+      "substation_transformation"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T4",
+     "cost": "T4",
+     "curves": [
+      "WSV1_MV_EQUIPMENT_THERMAL"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_station": false,
+     "modeled_row_ids": [
+      "138_breaker_count",
+      "138_three_phase_disconnect_count",
+      "138_three_phase_voltage_transformer_set_count",
+      "345_breaker_count",
+      "345_three_phase_disconnect_count",
+      "345_three_phase_voltage_transformer_set_count",
+      "hv_arresters",
+      "transformers"
+     ]
+    },
+    {
+     "failure_unit_id": null,
+     "subsystem": "FACILITY_GSU_SUBSTATION",
+     "component": "rest of the fenced station",
+     "treatment": "withheld",
+     "part": "rest of the fenced station",
+     "state": "withheld",
+     "rows": [
+      "substation_controls_auxiliaries",
+      "substation_civil_support"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": null,
+     "cost": null,
+     "curves": [],
+     "drawn": false,
+     "withheld_reasons": [
+      "withheld by the binding"
+     ]
+    }
+   ],
+   "share_basis": null,
+   "n_named": 2,
+   "n_curve": 1,
+   "n_withheld": 1,
+   "not_covered": [
+    "Rest of the fenced station ($14,327,879.37, 52.38%): bus supports, dead-ends, oil containment and firewall, relay panels, control house, station battery, SCADA, station service, control cable, conduit and trench, site work, drainage and lightning shielding"
+   ]
+  }
+ },
+ "split": {
+  "differs": true,
+  "sentence": "These cells split the substation differently: the cells name different numbers of parts: flood 1, convective wind 1, hurricane wind 1 and wildfire 2; flood treats whole station (fenced assembly) as one unit that spans 345 kv yard: breakers, disconnects, bus, instrument transformers, deadends, 138 kv yard: breakers, disconnects, bus, instrument transformers, deadends, autotransformers, oil containment and firewall, relays, control house, station battery, scada, station service, control cable and site work, access road, drainage and lightning shielding; wildfire binds 8 equipment rows ($13.0M, 48 % of the fenced station) and withholds the rest; the other hazards use one curve for the whole station. Hazard's substation reference budget ($27.35M fenced station) sets the rows; three hazards use one curve for the whole station, wildfire binds the equipment rows only.",
+  "details": [
+   "the cells name different numbers of parts: flood 1, convective wind 1, hurricane wind 1 and wildfire 2",
+   "flood treats whole station (fenced assembly) as one unit that spans 345 kv yard: breakers, disconnects, bus, instrument transformers, deadends, 138 kv yard: breakers, disconnects, bus, instrument transformers, deadends, autotransformers, oil containment and firewall, relays, control house, station battery, scada, station service, control cable and site work, access road, drainage and lightning shielding",
+   "wildfire binds 8 equipment rows ($13.0M, 48 % of the fenced station) and withholds the rest; the other hazards use one curve for the whole station"
+  ],
+  "columns": [
+   {
+    "entry_id": "flood_substation",
+    "hazard": {
+     "slug": "flood",
+     "label": "Flood"
+    },
+    "n_named": 1,
+    "n_curve": 1,
+    "n_withheld": 0,
+    "share_basis": null,
+    "title": "Flood × Substation"
+   },
+   {
+    "entry_id": "substation_convective_wind_screening_v1",
+    "hazard": {
+     "slug": "convective_wind",
+     "label": "Convective wind"
+    },
+    "n_named": 1,
+    "n_curve": 1,
+    "n_withheld": 0,
+    "share_basis": null,
+    "title": "Convective wind × Substation"
+   },
+   {
+    "entry_id": "substation_hurricane_screening_v1",
+    "hazard": {
+     "slug": "hurricane_wind",
+     "label": "Hurricane wind"
+    },
+    "n_named": 1,
+    "n_curve": 1,
+    "n_withheld": 0,
+    "share_basis": null,
+    "title": "Hurricane wind × Substation"
+   },
+   {
+    "entry_id": "substation_wildfire_screening_v1",
+    "hazard": {
+     "slug": "wildfire",
+     "label": "Wildfire"
+    },
+    "n_named": 2,
+    "n_curve": 1,
+    "n_withheld": 1,
+    "share_basis": null,
+    "title": "Wildfire × Substation"
+   }
+  ],
+  "table": [
+   {
+    "key": "substation_hv_yard",
+    "label": "345 kV yard: breakers, disconnects, bus, instrument transformers, deadends",
+    "by_cell": {
+     "flood_substation": [
+      "Whole station (fenced assembly)"
+     ],
+     "substation_convective_wind_screening_v1": [
+      "Whole station (fenced assembly)"
+     ],
+     "substation_hurricane_screening_v1": [
+      "Whole station (fenced assembly)"
+     ],
+     "substation_wildfire_screening_v1": [
+      "Electrical equipment (transformers and switchgear)"
+     ]
+    }
+   },
+   {
+    "key": "substation_lv_yard",
+    "label": "138 kV yard: breakers, disconnects, bus, instrument transformers, deadends",
+    "by_cell": {
+     "flood_substation": [
+      "Whole station (fenced assembly)"
+     ],
+     "substation_convective_wind_screening_v1": [
+      "Whole station (fenced assembly)"
+     ],
+     "substation_hurricane_screening_v1": [
+      "Whole station (fenced assembly)"
+     ],
+     "substation_wildfire_screening_v1": [
+      "Electrical equipment (transformers and switchgear)"
+     ]
+    }
+   },
+   {
+    "key": "substation_transformation",
+    "label": "Autotransformers, oil containment and firewall",
+    "by_cell": {
+     "flood_substation": [
+      "Whole station (fenced assembly)"
+     ],
+     "substation_convective_wind_screening_v1": [
+      "Whole station (fenced assembly)"
+     ],
+     "substation_hurricane_screening_v1": [
+      "Whole station (fenced assembly)"
+     ],
+     "substation_wildfire_screening_v1": [
+      "Electrical equipment (transformers and switchgear)"
+     ]
+    }
+   },
+   {
+    "key": "substation_controls_auxiliaries",
+    "label": "Relays, control house, station battery, SCADA, station service, control cable",
+    "by_cell": {
+     "flood_substation": [
+      "Whole station (fenced assembly)"
+     ],
+     "substation_convective_wind_screening_v1": [
+      "Whole station (fenced assembly)"
+     ],
+     "substation_hurricane_screening_v1": [
+      "Whole station (fenced assembly)"
+     ],
+     "substation_wildfire_screening_v1": [
+      "rest of the fenced station (withheld)"
+     ]
+    }
+   },
+   {
+    "key": "substation_civil_support",
+    "label": "Site work, access road, drainage and lightning shielding",
+    "by_cell": {
+     "flood_substation": [
+      "Whole station (fenced assembly)"
+     ],
+     "substation_convective_wind_screening_v1": [
+      "Whole station (fenced assembly)"
+     ],
+     "substation_hurricane_screening_v1": [
+      "Whole station (fenced assembly)"
+     ],
+     "substation_wildfire_screening_v1": [
+      "rest of the fenced station (withheld)"
+     ]
+    }
+   }
+  ]
+ },
+ "twin": {
+  "available": true,
+  "sentence": "The Digital Twin's substation nodes are crosswalked to these rows (38 rows, read from the Hazard repository, not pinned by any artifact here); no hazard leads are in a register for substations yet, so no lead letter is shown.",
+  "sha256": "d6ff2969b010ce622dc17f2a02ed60c5b25cd41422345c32a84b69cde2b39c85",
+  "rows": 38,
+  "nodes": {
+   "substation_hv_yard": [
+    {
+     "node": "st_hv",
+     "name": "345 kV Yard",
+     "disposition": "retained_system",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_hv_de",
+     "name": "345 kV Line Terminals",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_hv_cb",
+     "name": "345 kV Circuit Breakers",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_hv_ds",
+     "name": "345 kV Disconnect Switches",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_hv_bus",
+     "name": "345 kV Bus & Supports",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_hv_vt",
+     "name": "345 kV Voltage Transformers",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_hv_sa",
+     "name": "345 kV Surge Arresters",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    }
+   ],
+   "substation_lv_yard": [
+    {
+     "node": "st_lv",
+     "name": "138 kV Yard",
+     "disposition": "retained_system",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_lv_de",
+     "name": "138 kV Line Terminals",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_lv_cb",
+     "name": "138 kV Circuit Breakers",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_lv_ds",
+     "name": "138 kV Disconnect Switches",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_lv_bus",
+     "name": "138 kV Bus & Supports",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_lv_vt",
+     "name": "138 kV Voltage Transformers",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    }
+   ],
+   "substation_transformation": [
+    {
+     "node": "st_tx",
+     "name": "Power Transformation",
+     "disposition": "retained_system",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_tx_u",
+     "name": "Autotransformers",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_tx_core",
+     "name": "Core & Windings",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_tx_bush",
+     "name": "Bushings",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_tx_cool",
+     "name": "Radiators & Fans",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_tx_ltc",
+     "name": "On-Load Tap Changer",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_tx_cons",
+     "name": "Conservator & Protection Devices",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_tx_cab",
+     "name": "Control Cabinet",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_tx_oc",
+     "name": "Oil Containment & Firewall",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    }
+   ],
+   "substation_controls_auxiliaries": [
+    {
+     "node": "st_pc",
+     "name": "Protection, Control & Communications",
+     "disposition": "retained_system",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_pc_house",
+     "name": "Control House",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_pc_relay",
+     "name": "Relay Panels",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_pc_rtu",
+     "name": "SCADA & Communications",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_pc_dc",
+     "name": "Station Battery & Charger",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_pc_ss",
+     "name": "Station Service",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_pc_cable",
+     "name": "Control Cable & Trench",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    }
+   ],
+   "substation_civil_support": [
+    {
+     "node": "st_cv",
+     "name": "Civil, Grounding & Security",
+     "disposition": "retained_system",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_cv_grid",
+     "name": "Grounding Grid",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_cv_rock",
+     "name": "Yard Surfacing",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_cv_fence",
+     "name": "Fence, Gates & Security",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_cv_shield",
+     "name": "Lightning Shielding",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_cv_drain",
+     "name": "Drainage",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    },
+    {
+     "node": "st_cv_road",
+     "name": "Access Road",
+     "disposition": "rolled_up_anatomy",
+     "why": "Preserve source identity for research; no independent component curve or cost split implied."
+    }
+   ]
+  },
+  "leads": false
+ },
+ "value_source": {
+  "label": "Hazard's substation reference budget, pinned by the substation flood binding",
+  "path": "docs/plans/_cross_cutting/substation_conus/reference_budget.csv",
+  "sha256": "831a020a5714cabe26d2b822280aaac22256af96fb3122f48db7c6096cc52129",
+  "pin_ok": true
+ },
  "entries": [
   {
    "entry_id": "flood_substation",
@@ -384,7 +1549,7 @@
     "sha256": "f001eb0191439a1345a7a794995c684ef731f777c4b3e1eff0298de592999f30",
     "consumer_pin": "flood_substation@model_v1_0__docs_r1"
    },
-   "summary": "Flood on substations: fEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage ratios used as published (0 to 15% over 0 to 10 ft), the same table already carried by the flood_wind cell.",
+   "summary": "Flood on substations: FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage ratios used as published (0 to 15% over 0 to 10 ft), the same table already carried by the flood_wind cell.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 1,
@@ -392,8 +1557,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 5,
    "generation": "skill",
-   "aria_label": "Flood × Substation, live, shape T3, cost T4, not searched",
-   "href": "/cells/flood_substation"
+   "aria_label": "Flood × Substation, live, evidence: our judgment, field reports not searched",
+   "href": "/cells/flood_substation",
+   "word": "our judgment",
+   "halves": "How damage rises: borrowed · how it becomes dollars: our judgment"
   },
   {
    "entry_id": "hail_substation",
@@ -453,8 +1620,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 0,
    "generation": "gap",
-   "aria_label": "Hail × Substation, gap, not searched",
-   "href": "/cells/hail_substation"
+   "aria_label": "Hail × Substation, gap, field reports not searched",
+   "href": "/cells/hail_substation",
+   "word": null,
+   "halves": null
   },
   {
    "entry_id": "substation_convective_wind_screening_v1",
@@ -509,7 +1678,7 @@
     "source_artifact_sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
     "sha256": "5afa3f9cd31ee52092762bdb505fbc4c24c02ed2420d1be67c448e6441383be0"
    },
-   "summary": "Convective wind on substations reuses another cell's curve: same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a T4 cross-hazard proxy for direct wind only (see docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md).",
+   "summary": "Convective wind on substations reuses another cell's curve: same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a judgment-based cross-hazard proxy for direct wind only (see docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md).",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 0,
@@ -517,8 +1686,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 2,
    "generation": "binding",
-   "aria_label": "Convective wind × Substation, reused, shape T4, cost T4, not searched",
-   "href": "/cells/substation_convective_wind_screening_v1"
+   "aria_label": "Convective wind × Substation, reused, evidence: our judgment, field reports not searched",
+   "href": "/cells/substation_convective_wind_screening_v1",
+   "word": "our judgment",
+   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
   },
   {
    "entry_id": "substation_hurricane_screening_v1",
@@ -581,8 +1752,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 3,
    "generation": "binding",
-   "aria_label": "Hurricane wind × Substation, reused, shape T4, cost T4, not searched",
-   "href": "/cells/substation_hurricane_screening_v1"
+   "aria_label": "Hurricane wind × Substation, reused, evidence: our judgment, field reports not searched",
+   "href": "/cells/substation_hurricane_screening_v1",
+   "word": "our judgment",
+   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
   },
   {
    "entry_id": "substation_wildfire_screening_v1",
@@ -637,7 +1810,7 @@
     "source_artifact_sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
     "sha256": "10742caaf6e4622f72b2572db08d3fc4cc4dc92ca58746ad0928cabad4be5e48"
    },
-   "summary": "Wildfire on substations reuses another cell's curve: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a T4 assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md); 1 part of the asset's value has no curve.",
+   "summary": "Wildfire on substations reuses another cell's curve: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md); 1 part of the asset's value has no curve.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 0,
@@ -645,10 +1818,15 @@
    "outside_checks": 0,
    "chain_core_as_files": 3,
    "generation": "binding",
-   "aria_label": "Wildfire × Substation, reused, partial, shape T4, cost T4, not searched",
-   "href": "/cells/substation_wildfire_screening_v1"
+   "aria_label": "Wildfire × Substation, reused, partial, evidence: our judgment, field reports not searched",
+   "href": "/cells/substation_wildfire_screening_v1",
+   "word": "our judgment",
+   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
   }
  ],
- "has_buckets": false,
- "twin_crosswalk": null
+ "has_buckets": true,
+ "twin_crosswalk": {
+  "sha256": "d6ff2969b010ce622dc17f2a02ed60c5b25cd41422345c32a84b69cde2b39c85",
+  "rows": 38
+ }
 }

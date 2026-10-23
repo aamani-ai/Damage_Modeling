@@ -63,7 +63,7 @@
    "label": "entry agent-read 2026-10-19 · release reviewed owner approved screening release"
   }
  },
- "summary": "Hurricane wind on solar farms: ordered damage-state curves with Tier-4 synthetic resistance medians and cost ratios (cell-local decision, no direct TC calibration source); 1 part of the asset's value has no curve.",
+ "summary": "Hurricane wind on solar farms: ordered damage-state curves with judgment-based synthetic resistance medians and cost ratios (cell-local decision, no direct TC calibration source); 1 part of the asset's value has no curve.",
  "chain": {
   "stations": [
    {
@@ -1035,7 +1035,13 @@
    {
     "kind": "result",
     "name": "Financial range check (Hazard repo): industry loss figures for solar hurricane",
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/data_sources/financial_range_solar_hurricane/profile.md"
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/docs/data_sources/financial_range_solar_hurricane/profile.md",
+    "hazard": {
+     "path": "docs/data_sources/financial_range_solar_hurricane/profile.md",
+     "state": "on_main",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/docs/data_sources/financial_range_solar_hurricane/profile.md",
+     "words": null
+    }
    }
   ],
   "capability": {
@@ -1181,6 +1187,3281 @@
  "sampling_notes": [
   "Runtime known answers compared as a subset match of the expected damage emit (every expected key, floats within 1e-9)."
  ],
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Live · a screening model",
+    "code": "LIVE · screening"
+   },
+   "evidence": {
+    "words": "Evidence: our judgment",
+    "code": "How damage rises: borrowed and our judgment · how it becomes dollars: our judgment",
+    "tiers": [
+     "T4"
+    ],
+    "codes": "shape T3–4 · cost T4"
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "Field reports: nobody has looked yet"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release reviewed owner approved screening release"
+   }
+  },
+  "main_logic": [
+   "Hurricane wind is measured as event maximum gust (Perry dataset), in m/s, architecture-specific demand index (event / design pressure ratio) and site-facility demand ratio (event / design pressure).",
+   "Ordered damage-state curves with judgment-based synthetic resistance medians and cost ratios (cell-local decision, no direct TC calibration source); one module route fitted to NREL satellite storm-damage records.",
+   "The damage ratio is a share of the replacement value of the same part."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "8 parts with a curve · 1 without one yet",
+    "paragraphs": [
+     "Hurricane wind on solar farms: ordered damage-state curves with judgment-based synthetic resistance medians and cost ratios (cell-local decision, no direct TC calibration source); one module route fitted to NREL satellite storm-damage records. It names 8 parts: PV module field, PV module hardware, satellite-data route, Mounting structure, Foundations, Power conversion and collection, GSU and substation, SCADA and communications and Civil infrastructure. Outside its scope: storm surge, flood, tornado and straight-line convective wind (separate pathways or cells), hail, lightning and fire, downtime, business interruption and insurance terms and soft, sunk and non-physical cost (installed capex above physical replacement value). Kinds of damage it does not include: windborne debris impact as a separately valued pathway and wind-driven rain and water ingress.",
+     "For this hazard the solar farm is split into 8 parts: PV module field, PV module hardware, satellite-data route, Mounting structure, Foundations, Power conversion and collection, GSU and substation, SCADA and communications and Civil infrastructure. Parts of the plant's value with no curve yet: replacement support (inspection, labour, rental, logistics, removal): no own curve; takes the value-weighted damage ratio of the other parts and is counted once.",
+     "The damage ratio is a share of replacement value of the same part; the plant view uses the named 2024-USD physical replacement profile, which must be requested and is never selected silently. The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "PV module field",
+      "tone": "key",
+      "title": "PV module field"
+     },
+     {
+      "text": "PV module hardware…",
+      "tone": "key",
+      "title": "PV module hardware, satellite-data route"
+     },
+     {
+      "text": "Mounting structure",
+      "tone": "key",
+      "title": "Mounting structure"
+     },
+     {
+      "text": "+5 more",
+      "tone": "muted",
+      "title": "Foundations, Power conversion and collection, GSU and substation, SCADA and communications, Civil infrastructure"
+     },
+     {
+      "text": "2 architectures",
+      "tone": "key"
+     },
+     {
+      "text": "3 resistance scenarios",
+      "tone": "key"
+     },
+     {
+      "text": "1 without a curve yet",
+      "tone": "muted",
+      "title": "Replacement support (inspection, labour, rental, logistics, removal): no own curve; takes the value-weighted damage ratio of the other parts and is counted once"
+     }
+    ]
+   },
+   {
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
+    "fact": "3 hazard measures → a line through points + damage states",
+    "paragraphs": [
+     "Damage is read against event maximum gust (Perry dataset) (m/s), architecture-specific demand index (event / design pressure ratio) and site-facility demand ratio (event / design pressure). The curves take 2 forms: a line through fixed points (piecewise linear); ordered damage states, each reached with a lognormal chance as demand rises. The input, in the catalogue's words: demand ratio 0 to 2, withheld above 2: arrays use event/design net pressure (fixed tilt) or tracker-normal gust / exact-system critical gust (tracker); site facilities use event/design wind pressure or a gust-squared proxy. The satellite-data module route uses event maximum gust, 17.4 to 39.1 m/s.",
+     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "event maximum gust, m/s",
+      "tone": "key",
+      "title": "event maximum gust"
+     },
+     {
+      "text": "architecture-specific demand…",
+      "tone": "key",
+      "title": "architecture-specific demand index"
+     },
+     {
+      "text": "+1 more measures",
+      "tone": "muted"
+     },
+     {
+      "text": "line through points",
+      "tone": "key"
+     },
+     {
+      "text": "damage states",
+      "tone": "key"
+     },
+     {
+      "text": "10 curves",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Preserve Perry source compatibility and add owner-authorized synthetic judgment-based fixed/tracker coverage through cell-local synthetic parameters plus TC-specific fail-closed bridge-ID contracts whose unresolved external content remains explicitly flagged."
+     }
+    ],
+    "why": [
+     {
+      "label": "The choice",
+      "text": "Preserve Perry source compatibility and add owner-authorized synthetic judgment-based fixed/tracker coverage through cell-local synthetic parameters plus TC-specific fail-closed bridge-ID contracts whose unresolved external content remains explicitly flagged."
+     }
+    ]
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "70 sources, 70 linked · our judgment",
+    "paragraphs": [
+     "70 sources set this cell: NREL/NLR, Satellite Imagery of PV Site Storm Damage dataset, 2025, NREL, Q1-2025 Solar PV System Cost Benchmarks, DOE/FEMP, Toward Solar PV Storm Resilience field investigation and ASCE/SEI 7-22, Minimum Design Loads and 66 more. Of the 5 parameters, 1 is field-calibrated and 4 are our judgment. The source and claim registers are machine-readable files in the cell folder."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "our judgment",
+      "tone": "key",
+      "title": "How damage rises: borrowed and our judgment · how it becomes dollars: our judgment"
+     },
+     {
+      "text": "NREL/NLR, Satellite Imagery…",
+      "tone": "key",
+      "title": "NREL/NLR, Satellite Imagery of PV Site Storm Damage dataset, 2025"
+     },
+     {
+      "text": "NREL, Q1-2025 Solar PV System…",
+      "tone": "key",
+      "title": "NREL, Q1-2025 Solar PV System Cost Benchmarks"
+     },
+     {
+      "text": "+3 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "70 sources, 70 linked",
+      "tone": "muted"
+     }
+    ]
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "1 outside check · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "1 outside check compares this curve with an independent result: Financial range check (Hazard repo): industry loss figures for solar hurricane. The validation record says report.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: reviewed owner approved screening release."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "Financial range check (Hazard…",
+      "tone": "key",
+      "title": "Financial range check (Hazard repo): industry loss figures for solar hurricane"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: our judgment",
+  "hazard_paths": [
+   {
+    "id": "LEG-TCWS-002",
+    "title": "Hazard Modeling hurricane-solar M3 provisional placeholder implementation.",
+    "path": "Notebooks/hurricane/solar/m3_damage/01_damage.py",
+    "state": "moved",
+    "moved_to": "Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py",
+    "words": "moved on Hazard's main to Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py"
+   }
+  ],
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "◐",
+    "label": "one hurricane wind event",
+    "short": "one hurricane wind event",
+    "detail": "needs the qualified architecture-specific demand input; trackers need exact-system qualification and attained stow state"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "◐",
+    "label": "a dollar scenario",
+    "short": "a dollar scenario",
+    "detail": "needs the named value profile, a representative array exposure basis and a positive capacity_kwdc"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "◐",
+    "label": "yearly loss — only through Hazard",
+    "short": "yearly loss",
+    "detail": "computed by the consumer after exact pin, frequency-intensity coupling, cap and value validation, and an explicit decision to accept screening grade"
+   },
+   {
+    "key": "pml",
+    "mark": "◐",
+    "label": "PML, VaR, TVaR — only from Hazard's validated annual loss distribution",
+    "short": "PML, VaR and TVaR",
+    "detail": "consumer computable from validated frequency intensity coupling value and cap model"
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": null,
+    "not_covered": [
+     "Replacement support (inspection, labour, rental, logistics, removal): no own curve; takes the value-weighted damage ratio of the other parts and is counted once"
+    ],
+    "withheld": []
+   },
+   "assumed": [
+    "Resistance medians and spreads for every array and facility curve are synthetic screening values",
+    "Damage-state cost ratios for every part are synthetic",
+    "The 0 to 2 demand range is a bounded synthetic domain; values above 2 are withheld",
+    "Satellite-data route assumes uniform module value and full replacement of every visibly damaged module",
+    "One representative array-zone curve is applied to the full array value"
+   ],
+   "missing": {
+    "mechanisms": [
+     "Windborne debris impact as a separately valued pathway",
+     "Wind-driven rain and water ingress"
+    ],
+    "out_of_scope": [
+     "Storm surge, flood, tornado and straight-line convective wind (separate pathways or cells)",
+     "Hail, lightning and fire",
+     "Downtime, business interruption and insurance terms",
+     "Soft, sunk and non-physical cost (installed capex above physical replacement value)"
+    ]
+   },
+   "open_questions": [
+    "judgment-based curves to be replaced by better evidence in a later model version",
+    "Wind-field, direction-history and duration-cycling bridge contracts are named but their external content is unresolved",
+    "Capability field status_before_promotion should become a clearer consumer-readiness field"
+   ],
+   "next_version": null
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "Scope",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Hurricane wind on solar farms: ordered damage-state curves with judgment-based synthetic resistance medians and cost ratios (cell-local decision, no direct TC calibration source); one module route fitted to NREL satellite storm-damage records. It names 8 parts: PV module field, PV module hardware, satellite-data route, Mounting structure, Foundations, Power conversion and collection, GSU and substation, SCADA and communications and Civil infrastructure. Outside its scope: storm surge, flood, tornado and straight-line convective wind (separate pathways or cells), hail, lightning and fire, downtime, business interruption and insurance terms and soft, sunk and non-physical cost (installed capex above physical replacement value). Kinds of damage it does not include: windborne debris impact as a separately valued pathway and wind-driven rain and water ingress.",
+    "plain_fact": "8 parts · 4 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the solar farm is split into 8 parts: PV module field, PV module hardware, satellite-data route, Mounting structure, Foundations, Power conversion and collection, GSU and substation, SCADA and communications and Civil infrastructure. Parts of the plant's value with no curve yet: replacement support (inspection, labour, rental, logistics, removal): no own curve; takes the value-weighted damage ratio of the other parts and is counted once.",
+    "plain_fact": "8 parts"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "Damage is read against event maximum gust (Perry dataset) (m/s), architecture-specific demand index (event / design pressure ratio) and site-facility demand ratio (event / design pressure). The curves take 2 forms: a line through fixed points (piecewise linear); ordered damage states, each reached with a lognormal chance as demand rises. The input, in the catalogue's words: demand ratio 0 to 2, withheld above 2: arrays use event/design net pressure (fixed tilt) or tracker-normal gust / exact-system critical gust (tracker); site facilities use event/design wind pressure or a gust-squared proxy. The satellite-data module route uses event maximum gust, 17.4 to 39.1 m/s.",
+    "plain_fact": "a line through points + damage states"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "70 sources set this cell: NREL/NLR, Satellite Imagery of PV Site Storm Damage dataset, 2025, NREL, Q1-2025 Solar PV System Cost Benchmarks, DOE/FEMP, Toward Solar PV Storm Resilience field investigation and ASCE/SEI 7-22, Minimum Design Loads and 66 more. Of the 5 parameters, 1 is field-calibrated and 4 are our judgment. The source and claim registers are machine-readable files in the cell folder.",
+    "plain_fact": "70 sources · borrowed and our judgment"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "The damage ratio is a share of replacement value of the same part; the plant view uses the named 2024-USD physical replacement profile, which must be requested and is never selected silently. The files state no plant-level dollar figure for this asset.",
+    "plain_fact": "no plant value stated"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "no audit found"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 10 curve records (model v2.1, docs r2). The write-up is tropical_cyclone_wind_solar_curve_derivation_dossier__model_v2_1__docs_r2.md. The workbook is damage_curve_records_tropical_cyclone_wind_solar__model_v2_1__docs_r2.xlsx. The cell folder holds 19 files, each with its SHA under Details.",
+    "plain_fact": "10 curve records"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "One hurricane wind event, a dollar scenario, yearly loss and PML, VaR and TVaR are available only under conditions the consumer (Hazard) checks. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "0 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "This build reproduced 10 of 10 known answers through the cell's evaluator (within 1e-09 on the damage ratio). The validation record says report. 1 outside check: Financial range check (Hazard repo): industry loss figures for solar hurricane.",
+    "plain_fact": "10 of 10 reproduced"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: reviewed owner approved screening release.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "NREL/NLR, Satellite Imagery of PV Site Storm Damage dataset, 2025",
+    "ids": [
+     "TCWS-S020"
+    ],
+    "title": "NLR/NREL. Satellite Imagery of PV Site Storm Damage. Dataset DOI 10.21948/2562917 (2025).",
+    "link": "https://www.osti.gov/biblio/2562917",
+    "link_kind": "url",
+    "locator": "manual CSV file id f6eb09a0-4a12-4ef8-b2d9-8aa9e70f4008; columns mounting_type, tracking, max_wind_gust_(m/s), pct_modules_damaged (%); SHA256 edb34e74cc078bba1fdbe34463abadc794fd416caa66eb64ac3d0ed176ac5e00; aggregated CSV file id f5355652-f2e1-4bdb-8ff2-3623ce15a1d4; cross-method audit lines 7, 74, 242, 257; SHA256 c1ab48731f875142c571efcfd6323d7e048b35b2d2525418e25e6fefb3487062",
+    "no_link_sentence": null,
+    "source_id": "TCWS-S020"
+   },
+   {
+    "text": "NREL, Q1-2025 Solar PV System Cost Benchmarks",
+    "ids": [
+     "TCWS-S013"
+    ],
+    "title": "Ramasamy, V.; Woodhouse, M.; Feldman, D",
+    "link": "https://data.nrel.gov/submissions/304",
+    "link_kind": "url",
+    "locator": "dataset landing page; UPV Q1-2025 resource; PVSCM 2025 model and description",
+    "no_link_sentence": null,
+    "source_id": "TCWS-S013"
+   },
+   {
+    "text": "DOE/FEMP, Toward Solar PV Storm Resilience field investigation",
+    "ids": [
+     "TCWS-S004"
+    ],
+    "title": "U.S. DOE Federal Energy Management Program; Elsworth, J.; Van Geet, O.; Robinson, G.; et al",
+    "link": "https://www.energy.gov/sites/default/files/2023-02/femp-toward-solar-pv-storm-resilience-learning-from-hurricane-loss-rebuilding-better_0.pdf",
+    "link_kind": "url",
+    "locator": "Executive Summary pp. vi–vii; §1.1 and Table 1 pp. 2–3; §§2–2.1 pp. 5–6; §§3.1–3.6 pp. 7–12",
+    "no_link_sentence": null,
+    "source_id": "TCWS-S004"
+   },
+   {
+    "text": "ASCE/SEI 7-22, Minimum Design Loads",
+    "ids": [
+     "TCWS-S005"
+    ],
+    "title": "ASCE/SEI 7-22. Minimum Design Loads and Associated Criteria for Buildings and Other Structures.",
+    "link": "https://www.asce.org/publications-and-news/asce-7/",
+    "link_kind": "url",
+    "locator": "Ch. 26 wind-speed definitions and symbols; Ch. 29 §29.4.5; Ch. 31 §31.4.5",
+    "no_link_sentence": null,
+    "source_id": "TCWS-S005"
+   },
+   {
+    "text": "Cell owner decision on synthetic Tier-4 parameters",
+    "ids": [
+     "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION"
+    ],
+    "title": "Damage Modeling owner decision: TC-wind x solar model-v2 cell-local synthetic parameter set.",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+    "link_kind": "repo_file",
+    "locator": "TCWS2-D001; TCWS2-D003 through TCWS2-D007",
+    "no_link_sentence": null,
+    "source_id": "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION"
+   }
+  ],
+  "sources": [
+   {
+    "id": "TCWS-S001",
+    "citation": "NOAA/National Hurricane Center. Glossary of NHC Terms: Maximum Sustained Surface Wind.",
+    "url": "https://www.nhc.noaa.gov/aboutgloss.shtml",
+    "locator": "entry: Maximum Sustained Surface Wind",
+    "role": "axis_bridge",
+    "tier": "T2",
+    "permitted": "Define the source-native NHC storm-intensity quantity and require explicit height, averaging-period, terrain, gust, and local-demand bridges.",
+    "prohibited": "Treat storm category or maximum sustained surface wind as array-height component demand or damage without a qualified bridge.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.nhc.noaa.gov/aboutgloss.shtml",
+    "link_kind": "url",
+    "title": "NOAA/National Hurricane Center. Glossary of NHC Terms: Maximum Sustained Surface Wind.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S002",
+    "citation": "Ceferino, L.; Lin, N.; Xi, D. Bayesian updating of solar panel fragility curves and implications of higher panel strength for solar generation resilience. Reliability Engineering & System Safety 229, 108896 (2023). DOI 10.1016/j.ress.2022.108896.",
+    "url": "https://par.nsf.gov/servlets/purl/10481168",
+    "locator": "§2.1 and Table 1 pp. 2–3; §2.2 pp. 3–4; Eq. 1 and §3.1 p. 4; §4.2 and Figs. 5c/5d/6b p. 7",
+    "role": "curve_fit_shape",
+    "tier": "T1",
+    "permitted": "Retain the source-native extensive-failure probability and posterior parameter summaries as a narrowly scoped candidate; preserve the 14-site population, reconstructed-wind uncertainty, composite limit state, and Bayesian parameter uncertainty.",
+    "prohibited": "Call probability economic DR; split the composite site limit state into module, fixed-rack, tracker, foundation, or electrical DR; transfer to a named CONUS architecture; use a deterministic curve made from posterior medians as the paper's posterior mean curve.",
+    "decision": "defer_candidate_only",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": "10.1016/j.ress.2022.108896",
+    "link": "https://par.nsf.gov/servlets/purl/10481168",
+    "link_kind": "url",
+    "title": "Ceferino, L.; Lin, N.; Xi, D",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S003",
+    "citation": "Perry, K.; Jordan, D. C.; Nguyen, Q. Assessing the Impacts of Extreme Weather Events on Photovoltaic Installations Using Remote Sensing Imagery. Progress in Photovoltaics: Research and Applications 33(9), 1012–1023 (2025). DOI 10.1002/pip.70001; NREL/JA-5K00-92873.",
+    "url": "https://www.osti.gov/pages/biblio/2574727",
+    "locator": "abstract p. 1012; §§2.1 and 2.4 pp. 1013–1016; §3.1 and Figs. 4–5/Table 2 pp. 1016–1018; Discussion pp. 1021–1022",
+    "role": "case_study_severity",
+    "tier": "T1",
+    "permitted": "Use as a fleet-scale visible-damage constraint, installation/mounting-data requirement, and field-data-program method; retain the reported weak gust-damage relationship and site heterogeneity.",
+    "prohibited": "Fit a utility-scale ground-mount curve from the aggregate; infer fixed-versus-tracker fragility, component disposition, hidden electrical damage, direct repair cost, or independence from the Ceferino Caribbean-event evidence.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": "10.1002/pip.70001",
+    "link": "https://www.osti.gov/pages/biblio/2574727",
+    "link_kind": "url",
+    "title": "Perry, K.; Jordan, D. C.; Nguyen, Q. Assessing the Impacts of Extreme Weather Events on Photovoltaic…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S004",
+    "citation": "U.S. DOE Federal Energy Management Program; Elsworth, J.; Van Geet, O.; Robinson, G.; et al. Toward Solar Photovoltaic Storm Resilience: Learning from Hurricane Loss and Rebuilding Better (February 2023).",
+    "url": "https://www.energy.gov/sites/default/files/2023-02/femp-toward-solar-pv-storm-resilience-learning-from-hurricane-loss-rebuilding-better_0.pdf",
+    "locator": "Executive Summary pp. vi–vii; §1.1 and Table 1 pp. 2–3; §§2–2.1 pp. 5–6; §§3.1–3.6 pp. 7–12",
+    "role": "case_study_severity",
+    "tier": "T3",
+    "permitted": "Use to define failure units, construction/maintenance selectors, dependency chains, compound-peril boundaries, and exact-site engineering-review requirements.",
+    "prohibited": "Use the reported 104 mph event estimate or 145 mph design value as a population threshold; isolate wind-only economic loss; transfer the 12-degree rebuild tilt, pressures, or hardening benefit as universal modifiers.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.energy.gov/sites/default/files/2023-02/femp-toward-solar-pv-storm-resilience-learning-from-hurricane-loss-rebuilding-better_0.pdf",
+    "link_kind": "url",
+    "title": "U.S. DOE Federal Energy Management Program; Elsworth, J.; Van Geet, O.; Robinson, G.; et al",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S005",
+    "citation": "ASCE/SEI 7-22. Minimum Design Loads and Associated Criteria for Buildings and Other Structures.",
+    "url": "https://www.asce.org/publications-and-news/asce-7/",
+    "locator": "Ch. 26 wind-speed definitions and symbols; Ch. 29 §29.4.5; Ch. 31 §31.4.5",
+    "role": "axis_bridge",
+    "tier": "T2",
+    "permitted": "Anchor design-basis lineage, 3-second gust semantics, risk category, exposure, and fixed-tilt demand normalization when the licensed project record confirms the exact edition and provisions.",
+    "prohibited": "Treat a code design wind as failure capacity, fragility median, economic loss state, or tracker aeroelastic qualification.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.asce.org/publications-and-news/asce-7/",
+    "link_kind": "url",
+    "title": "ASCE/SEI 7-22. Minimum Design Loads and Associated Criteria for Buildings and Other Structures.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S006",
+    "citation": "FM. Property Loss Prevention Data Sheet 7-106: Ground-Mounted Solar Photovoltaic Power (April 2026).",
+    "url": "https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/07-hazards/fmds07106.pdf",
+    "locator": "§§2.1.2.1–2.1.2.4 pp. 2–4; §§3.1.1–3.1.2 pp. 10–12; Appendix B revision history p. 22",
+    "role": "selector_archetype",
+    "tier": "T2",
+    "permitted": "Require architecture-specific qualification, named instability test, anemometer/control evidence, and windborne-debris boundary fields.",
+    "prohibited": "Use 0.75 of tested instability speed as damage onset; use debris design-speed zones as fragility thresholds; assign numeric mitigation credit or economic DR.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/07-hazards/fmds07106.pdf",
+    "link_kind": "url",
+    "title": "FM. Property Loss Prevention Data Sheet 7-106: Ground-Mounted Solar Photovoltaic Power (April 2026).",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S007",
+    "citation": "International Electrotechnical Commission. IEC 62817:2014+A1:2017, Photovoltaic systems—Design qualification of solar trackers.",
+    "url": "https://webstore.iec.ch/en/publication/61127",
+    "locator": "official scope and product-detail page; tracker component and complete-system test-procedure description",
+    "role": "selector_archetype",
+    "tier": "T2",
+    "permitted": "Require exact tracker model, configuration, qualification edition, and test identity as selector metadata.",
+    "prohibited": "Infer site wind capacity, tropical-cyclone fragility, Ucrit for an unnamed tracker, stow reliability, or economic DR.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://webstore.iec.ch/en/publication/61127",
+    "link_kind": "url",
+    "title": "International Electrotechnical Commission",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S008",
+    "citation": "International Electrotechnical Commission. IEC 61730-2:2023 with COR1:2024, Photovoltaic module safety qualification—Part 2: Requirements for testing.",
+    "url": "https://webstore.iec.ch/en/publication/63895",
+    "locator": "official scope, objective, test-sequence, and pass-criteria description; corrigendum status",
+    "role": "selector_archetype",
+    "tier": "T2",
+    "permitted": "Record module qualification lineage and prevent unqualified module-class aliases.",
+    "prohibited": "Treat safety qualification as tropical-cyclone survival, module/rack structural fragility, wind-load capacity, or replacement-cost ratio.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://webstore.iec.ch/en/publication/63895",
+    "link_kind": "url",
+    "title": "International Electrotechnical Commission",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S009",
+    "citation": "U.S. DOE/FEMP and GSA. PV System Owner's Guide to Identifying, Assessing, and Addressing Weather Vulnerabilities, Risks, and Impacts (2021).",
+    "url": "https://www.energy.gov/sites/default/files/2021-09/pv-system-owners-guide-to-weather-vulnerabilities.pdf",
+    "locator": "§5; PDF pp. 43–50 for clamps/racking and pp. 56–58 for high-wind field context",
+    "role": "mechanism_only",
+    "tier": "T2",
+    "permitted": "Support candidate failure-unit coverage and selector/conditioner inspection fields.",
+    "prohibited": "Supply a numerical hurricane fragility, median, dispersion, component severity, or loss cap.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.energy.gov/sites/default/files/2021-09/pv-system-owners-guide-to-weather-vulnerabilities.pdf",
+    "link_kind": "url",
+    "title": "U.S. DOE/FEMP and GSA. PV System Owner's Guide to Identifying, Assessing, and Addressing Weather…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S010",
+    "citation": "Browne, M. T. L.; Taylor, Z. J.; Li, S.; Gamble, S. A wind load design method for ground-mounted multi-row solar arrays based on a compilation of wind tunnel experiments. Journal of Wind Engineering and Industrial Aerodynamics 205, 104294 (2020). DOI 10.1016/j.jweia.2020.104294.",
+    "url": "https://doi.org/10.1016/j.jweia.2020.104294",
+    "locator": "abstract; §§1–5; limitations on flexible single-axis trackers",
+    "role": "axis_bridge",
+    "tier": "T2",
+    "permitted": "Support a separate fixed-tilt demand bridge, perimeter/interior zoning, and small-deflection eligibility checks.",
+    "prohibited": "Transfer synoptic ABL coefficients to a tropical-cyclone site without basis; apply to flexible trackers; infer failure probability, damage state, or DR.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": "10.1016/j.jweia.2020.104294",
+    "link": "https://doi.org/10.1016/j.jweia.2020.104294",
+    "link_kind": "doi",
+    "title": "Browne, M. T. L.; Taylor, Z",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S011",
+    "citation": "Rodríguez-Casado, C.; Martínez-García, E.; Manzanares-Bercial, R.; et al. Experimental benchmark for the 3D wind tunnel testing of torsional aeroelastic instabilities in single-axis solar trackers. Journal of Wind Engineering and Industrial Aerodynamics 253, 105838 (2024). DOI 10.1016/j.jweia.2024.105838.",
+    "url": "https://doi.org/10.1016/j.jweia.2024.105838",
+    "locator": "abstract; prototype and experimental-methodology sections; stability results; conclusions",
+    "role": "axis_bridge",
+    "tier": "T2",
+    "permitted": "Support exact-system Ucrit normalization and qualification metadata for a tracker-specific future bridge.",
+    "prohibited": "Use benchmark Ucrit as a generic production-tracker threshold, transfer uniform-flow results to a site TC field without qualification, or infer failure probability/economic DR.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": "10.1016/j.jweia.2024.105838",
+    "link": "https://doi.org/10.1016/j.jweia.2024.105838",
+    "link_kind": "doi",
+    "title": "Rodríguez-Casado, C.; Martínez-García, E.; Manzanares-Bercial, R.; et al",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S012",
+    "citation": "Frontini, G.; Calamelli, F.; Muggiasca, S.; Argentini, T. Key parameters influencing wind-induced aeroelastic responses of single-axis solar trackers in photovoltaic plants. Solar Energy 287, 113232 (2025). DOI 10.1016/j.solener.2024.113232.",
+    "url": "https://doi.org/10.1016/j.solener.2024.113232",
+    "locator": "abstract; experimental/numerical method; stability map; stress envelopes; conclusions",
+    "role": "selector_archetype",
+    "tier": "T2",
+    "permitted": "Require row/zone, angle, direction, layout, and structural-dynamic attributes for tracker routing.",
+    "prohibited": "Transfer tested critical speeds or angle ranking to another tracker, claim tropical-cyclone equivalence, or infer probability/severity/cost.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": "10.1016/j.solener.2024.113232",
+    "link": "https://doi.org/10.1016/j.solener.2024.113232",
+    "link_kind": "doi",
+    "title": "Frontini, G.; Calamelli, F.; Muggiasca, S.; Argentini, T",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S013",
+    "citation": "Ramasamy, V.; Woodhouse, M.; Feldman, D. Q1-2025 Solar Photovoltaic System Cost Benchmarks. NLR Data Catalog submission 304 (2025; updated 2026-01-06). DOI 10.7799/3009689.",
+    "url": "https://data.nrel.gov/submissions/304",
+    "locator": "dataset landing page; UPV Q1-2025 resource; PVSCM 2025 model and description",
+    "role": "exposure_or_value",
+    "tier": "T2",
+    "permitted": "Supply a row-level reference value ledger and denominator reconciliation after architecture/vintage/unit checks.",
+    "prohibited": "Infer fragility, damage probability, repair disposition, site replacement cost, exposed fraction, or support allocation.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": "10.7799/3009689",
+    "link": "https://data.nrel.gov/submissions/304",
+    "link_kind": "url",
+    "title": "Ramasamy, V.; Woodhouse, M.; Feldman, D",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S014",
+    "citation": "Du, X.; Becker, T.; Taylor, Z. J.; Needham, C. Cyclic Demands on Solar Structural Joints under Wind Loading. Journal of Structural Engineering 151(10), 04025156 (2025). DOI 10.1061/JSENDH.STENG-14435.",
+    "url": "https://doi.org/10.1061/JSENDH.STENG-14435",
+    "locator": "abstract; Introduction; Prototype Structure; Wind Hazard Analysis; Conclusions",
+    "role": "mechanism_only",
+    "tier": "T2",
+    "permitted": "Support joint-condition, preload/installation, cyclic-demand, and cascading-dependency fields; demonstrate that equivalent-static design does not exhaust failure mechanisms.",
+    "prohibited": "Use the duty cycles as TC demand, a hurricane threshold, clamp failure probability, or repair-cost ratio.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": "10.1061/JSENDH.STENG-14435",
+    "link": "https://doi.org/10.1061/JSENDH.STENG-14435",
+    "link_kind": "doi",
+    "title": "Du, X.; Becker, T.; Taylor, Z",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S015",
+    "citation": "Damage Modeling strong_wind_solar model-v2.0/docs-r1 proposed evidence package.",
+    "url": "docs/cells/strong_wind_solar/proposed/SOURCE_REGISTER_strong_wind_solar__model_v2_0__docs_r1.csv",
+    "locator": "rows DOE_PV_OWNER_GUIDE_2021, FIXED_TILT_WIND_DESIGN_2020, PV_TRACKER_AEROELASTIC_2024, TRACKER_LAYOUT_AEROELASTIC_2025, FM_DS_7_106_2026, ASCE_7_22, IEC_62817; neighboring-wind boundary memo",
+    "role": "mechanism_only",
+    "tier": "T3",
+    "permitted": "Reuse source discovery, anatomy, terminology, and governance controls while independently registering primary sources here.",
+    "prohibited": "Inherit straight-line-convective axes, curves, T4 medians/beta/state costs, downburst profiles, or consumer behavior into tropical-cyclone wind.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "repo_path": "docs/cells/strong_wind_solar/proposed/SOURCE_REGISTER_strong_wind_solar__model_v2_0__docs_r1.csv",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/cells/strong_wind_solar/proposed/SOURCE_REGISTER_strong_wind_solar__model_v2_0__docs_r1.csv",
+    "link_kind": "repo_file",
+    "title": "Damage Modeling strong_wind_solar model-v2.0/docs-r1 proposed evidence package.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "LEG-TCWS-001",
+    "citation": "InfraSure legacy HURRICANE x SOLAR research memo and master curve index.",
+    "url": "infrasure-damage-curves/research/HURRICANE_x_SOLAR.md",
+    "locator": "memo §§2.6–2.8, §5, §6, Appendix A; data/master_curve_index.json lines 219–299",
+    "role": "rejected",
+    "tier": "T4",
+    "permitted": "Use only for source discovery, numerical reproduction, defect audit, and migration regression fixtures.",
+    "prohibited": "Adopt any parameter, threshold, cap, confidence label, architecture shift, economic endpoint, or source characterization.",
+    "decision": "reject_runtime_retain_audit",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "repo_path": "/Users/divy/code/work/infrasure_git_codes/damage_modeling/infrasure-damage-curves/research/HURRICANE_x_SOLAR.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558//Users/divy/code/work/infrasure_git_codes/damage_modeling/infrasure-damage-curves/research/HURRICANE_x_SOLAR.md",
+    "link_kind": "repo_file",
+    "title": "InfraSure legacy HURRICANE x SOLAR research memo and master curve index.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "LEG-TCWS-002",
+    "citation": "Hazard Modeling hurricane-solar M3 provisional placeholder implementation.",
+    "url": "Hazard_modeling/Notebooks/hurricane/solar/m3_damage/01_damage.py",
+    "locator": "lines 14–39, 56–105, 136–183, and 197–207",
+    "role": "rejected",
+    "tier": "T4",
+    "permitted": "Freeze exact behavior only as a migration/regression fixture and document downstream exposure/value assumptions.",
+    "prohibited": "Treat as scientific calibration, a governed Damage artifact, a valid capex denominator, or acceptable runtime fallback after the scaffold exists.",
+    "decision": "reject_runtime_retain_audit",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "hazard": {
+     "path": "Notebooks/hurricane/solar/m3_damage/01_damage.py",
+     "state": "moved",
+     "moved_to": "Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py",
+     "words": "moved on Hazard's main to Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py"
+    },
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py",
+    "link_kind": "hazard_moved",
+    "title": "Hazard Modeling hurricane-solar M3 provisional placeholder implementation.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "GOVERNANCE_CONTRACT",
+    "citation": "Damage Modeling repository governance: method standards, contracts, and damage-curve skill controls.",
+    "url": "docs/method/standards/00_index.md",
+    "locator": "docs/method/standards/02_cell_package_standard.md; docs/contracts/standards/20_machine_readable_artifact_standard.md; docs/contracts/standards/21_capability_and_cap_binding_standard.md; damage-curve skill CHANGE_CLASSIFIER and EVIDENCE_PRESSURE_TEST_AND_FAIL_CLOSED_CHECKLIST",
+    "role": "governance_rule",
+    "tier": "T4",
+    "permitted": "Control package structure, source resolution, candidate isolation, withholding, event identity, and promotion gates.",
+    "prohibited": "Serve as scientific calibration, hazard evidence, or economic-value evidence.",
+    "decision": "adopt",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "repo_path": "docs/method/standards/00_index.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/standards/00_index.md",
+    "link_kind": "repo_file",
+    "title": "Damage Modeling repository governance: method standards, contracts, and damage-curve skill controls.",
+    "kind": "marker",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BOUNDED_SEARCH_LOG",
+    "citation": "Bounded evidence search log for tropical_cyclone_wind_solar model v0.1/docs r1.",
+    "url": "docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md",
+    "locator": "search cutoff, surfaces, exact query families, endpoint-chain matrix, limitations, and update triggers",
+    "role": "negative_evidence_boundary",
+    "tier": "T3",
+    "permitted": "Support the scoped NO_RUNTIME_CURVE decision and define evidence-refresh triggers.",
+    "prohibited": "Claim universal absence across private owner/OEM/insurer data, non-indexed material, other languages, or evidence published after the cutoff.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "repo_path": "docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v0_1__docs_r1.md",
+    "link_kind": "repo_file",
+    "title": "Bounded evidence search log for tropical_cyclone_wind_solar model v0.1/docs r1.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S020",
+    "citation": "NLR/NREL. Satellite Imagery of PV Site Storm Damage. Dataset DOI 10.21948/2562917 (2025).",
+    "url": "https://www.osti.gov/biblio/2562917",
+    "locator": "manual CSV file id f6eb09a0-4a12-4ef8-b2d9-8aa9e70f4008; columns mounting_type, tracking, max_wind_gust_(m/s), pct_modules_damaged (%); SHA256 edb34e74cc078bba1fdbe34463abadc794fd416caa66eb64ac3d0ed176ac5e00; aggregated CSV file id f5355652-f2e1-4bdb-8ff2-3623ce15a1d4; cross-method audit lines 7, 74, 242, 257; SHA256 c1ab48731f875142c571efcfd6323d7e048b35b2d2525418e25e6fefb3487062",
+    "role": "curve_fit_shape",
+    "tier": "T1",
+    "permitted": "Filter ground plus tracking false; convert percent to fraction; fit an unweighted monotone source-cohort screening relationship. Use the four pinned aggregate rows only for the governed apparent-coordinate cross-method audit.",
+    "prohibited": "Claim utility-scale representativeness, local 3-second gust semantics, causal purity, hidden damage, disposition, or repair cost from the raw fields. Treat coordinate proximity as an authoritative identity join.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": "10.21948/2562917",
+    "link": "https://www.osti.gov/biblio/2562917",
+    "link_kind": "url",
+    "title": "NLR/NREL. Satellite Imagery of PV Site Storm Damage. Dataset DOI 10.21948/2562917 (2025).",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S021",
+    "citation": "NLR/NREL. Extreme Weather Data Description, file in Satellite Imagery of PV Site Storm Damage dataset DOI 10.21948/2562917.",
+    "url": "https://www.osti.gov/biblio/2562917",
+    "locator": "data-description PDF file id f3736640-1433-42f6-bd0b-3e2bf9b2951e; pp. 1-2; SHA256 852ff0128c99e188127a3d789ab217f55c98dba4952db590e07c140bf45219d5",
+    "role": "endpoint_definition",
+    "tier": "T1",
+    "permitted": "Define the observed physical fraction while preserving unresolved full-cohort weather-product lineage.",
+    "prohibited": "Invent gust provider, station, averaging period, height, exposure standard, module disposition, or economic denominator for the full manual cohort.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": "10.21948/2562917",
+    "link": "https://www.osti.gov/biblio/2562917",
+    "link_kind": "url",
+    "title": "NLR/NREL. Extreme Weather Data Description, file in Satellite Imagery of PV Site Storm Damage dataset DOI…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S022",
+    "citation": "Ceferino, L.; Lin, N.; Xi, D. Supplementary Information to Bayesian Updating of Solar Panel Fragility Curves and Implications of Higher Panel Strength for Solar Generation Resilience (2023).",
+    "url": "https://ars.els-cdn.com/content/image/1-s2.0-S0951832022005117-mmc1.docx",
+    "locator": "Supplementary Table 2 p. 4; SHA256 6a9e9f36e8e13ae2d9ea266258608a031fe6489bd31155f27b784f1ac7e06756",
+    "role": "cross_source_endpoint_audit",
+    "tier": "T1",
+    "permitted": "Use as a cross-method same-event and same-site endpoint discrepancy and uncertainty challenge.",
+    "prohibited": "Pool with Perry, treat the approximate values as same-method or independent labels, or convert them to repair cost.",
+    "decision": "audit_only",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://ars.els-cdn.com/content/image/1-s2.0-S0951832022005117-mmc1.docx",
+    "link_kind": "url",
+    "title": "Ceferino, L.; Lin, N.; Xi, D",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S023",
+    "citation": "Visual Crossing. Weather Data Documentation.",
+    "url": "https://www.visualcrossing.com/resources/documentation/weather-data/weather-data-documentation/",
+    "locator": "Wind section; windgust field; daily aggregation description",
+    "role": "axis_semantics_constraint",
+    "tier": "T3",
+    "permitted": "Constrain what can and cannot be inferred from a Visual Crossing windgust field.",
+    "prohibited": "Assert that every historical Perry row is an exact 3-second gust at a fixed height/exposure or reconstruct the original query.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.visualcrossing.com/resources/documentation/weather-data/weather-data-documentation/",
+    "link_kind": "url",
+    "title": "Visual Crossing. Weather Data Documentation.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S024",
+    "citation": "Visual Crossing. How Historical Weather Data Records Are Created from Local Weather Station Observations.",
+    "url": "https://www.visualcrossing.com/resources/documentation/weather-data/how-historical-weather-data-records-are-created-from-local-weather-station-observations/",
+    "locator": "query-time station selection and hourly blending description",
+    "role": "axis_query_lineage_constraint",
+    "tier": "T3",
+    "permitted": "Require archived station contributors and query settings before a source-to-Hazard bridge.",
+    "prohibited": "Treat a current vendor query as a reproducible copy of the Perry historical source field.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.visualcrossing.com/resources/documentation/weather-data/how-historical-weather-data-records-are-created-from-local-weather-station-observations/",
+    "link_kind": "url",
+    "title": "Visual Crossing. How Historical Weather Data Records Are Created from Local Weather Station Observations.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S025",
+    "citation": "Walker, H. et al. Solar Photovoltaic System and Energy Storage System Field Assessments in Typhoon Mawar. NLR/TP-7A40-89629 (2024). DOI 10.2172/2479116.",
+    "url": "https://www.nlr.gov/docs/fy25osti/89629.pdf",
+    "locator": "Executive summary PDF pp. 4-6; report pp. 9-12, 18, 53, 78, 95-97; Tables 1-2 and 7; Figures 8 and A-2",
+    "role": "severe_fixed_tilt_audit_and_tracker_boundary",
+    "tier": "T1",
+    "permitted": "Use as a severe fixed-ground audit, installation-quality lesson, and explicit no-tracker boundary.",
+    "prohibited": "Pool with Perry, fit a tail, infer economic DR, or treat estimated wind as the Perry or Hazard axis.",
+    "decision": "audit_only",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": "10.2172/2479116",
+    "link": "https://www.nlr.gov/docs/fy25osti/89629.pdf",
+    "link_kind": "url",
+    "title": "Walker, H. et al. Solar Photovoltaic System and Energy Storage System Field Assessments in Typhoon Mawar",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S026",
+    "citation": "Li, A.; Wu, J. Quantitative assessment method of typhoon-induced photovoltaic damage and energy production losses: a case study of the 2024 Typhoon Yagi. Geomatics, Natural Hazards and Risk (2025). DOI 10.1080/19475705.2025.2569795.",
+    "url": "https://doi.org/10.1080/19475705.2025.2569795",
+    "locator": "Methods Sections 2.1.2, 2.2.3-2.2.4; Eq. 8; Results and limitations",
+    "role": "regional_severe_event_audit",
+    "tier": "T3",
+    "permitted": "Use as an external regional severity and data-design audit.",
+    "prohibited": "Transfer its wind scale, area loss, linear relation, or generic cost estimate into failure-unit economic DR.",
+    "decision": "audit_only",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": "10.1080/19475705.2025.2569795",
+    "link": "https://doi.org/10.1080/19475705.2025.2569795",
+    "link_kind": "doi",
+    "title": "Li, A.; Wu, J. Quantitative assessment method of typhoon-induced photovoltaic damage and energy production losses: a case study of the 2024 Typhoon Yagi",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S027",
+    "citation": "Li, Anqi; Wu, Jidong. Mapping results of photovoltaic solar panels in Hainan Island before and after Typhoon Yagi in 2024. Zenodo. DOI 10.5281/zenodo.15114346.",
+    "url": "https://doi.org/10.5281/zenodo.15114346",
+    "locator": "dataset landing record and mapped before/after PV data",
+    "role": "regional_audit_data_lineage",
+    "tier": "T3",
+    "permitted": "Preserve source lineage for the regional audit.",
+    "prohibited": "Treat mapped area disappearance as inspected module disposition or same-unit cost.",
+    "decision": "audit_only",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": "10.5281/zenodo.15114346",
+    "link": "https://doi.org/10.5281/zenodo.15114346",
+    "link_kind": "doi",
+    "title": "Li, Anqi; Wu, Jidong. Mapping results of photovoltaic solar panels in Hainan Island before and after Typhoon…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S028",
+    "citation": "Florida Power & Light Company. Direct Testimony of Michael A. Jarro, Docket 20240149-EI (2025).",
+    "url": "https://www.psc.state.fl.us/library/FILINGS/2025/15505-2025/15505-2025.pdf",
+    "locator": "PDF pp. 40-41 and footnote 9",
+    "role": "field_occurrence_and_repair_actions",
+    "tier": "T1",
+    "permitted": "Use as a censored occurrence bound and repair/inspection field-design evidence.",
+    "prohibited": "Convert the fleet panel fraction or pooled restoration total to site or failure-unit economic DR.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.psc.state.fl.us/library/FILINGS/2025/15505-2025/15505-2025.pdf",
+    "link_kind": "url",
+    "title": "Florida Power & Light Company. Direct Testimony of Michael A. Jarro, Docket 20240149-EI (2025).",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S029",
+    "citation": "Florida Power & Light Company. Direct Testimony of Amin Mohomed and Exhibit AM-3, Docket 20240149-EI (2025).",
+    "url": "https://www.psc.state.fl.us/library/FILINGS/2025/15506-2025/15506-2025.pdf",
+    "locator": "PDF pp. 19 and 29-30",
+    "role": "restoration_cost_scope_boundary",
+    "tier": "T3",
+    "permitted": "Demonstrate that support and restoration scope can be material and must be allocated once.",
+    "prohibited": "Treat a mixed PGD restoration bucket, capitalization share, or insurance position as solar economic DR.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.psc.state.fl.us/library/FILINGS/2025/15506-2025/15506-2025.pdf",
+    "link_kind": "url",
+    "title": "Florida Power & Light Company. Direct Testimony of Amin Mohomed and Exhibit AM-3, Docket 20240149-EI (2025).",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S030",
+    "citation": "Florida Power & Light Company. Hurricanes Ian and Nicole Final Actual Storm Amount Filing, Docket 20230017-EI (2023).",
+    "url": "https://www.psc.state.fl.us/library/filings/2023/06108-2023/06108-2023.pdf",
+    "locator": "Jarro testimony PDF pp. 45-47; Exhibit KF-1 PDF p. 106",
+    "role": "field_occurrence_repair_and_cost_boundary",
+    "tier": "T1",
+    "permitted": "Use physical actions and panel count bound for occurrence and acquisition design.",
+    "prohibited": "Allocate pooled generation costs to solar failure units or call panel fraction economic DR.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.psc.state.fl.us/library/filings/2023/06108-2023/06108-2023.pdf",
+    "link_kind": "url",
+    "title": "Florida Power & Light Company",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S031",
+    "citation": "Florida Power & Light Company. Prepared Testimony of Brandon J. Stankiewicz Supporting the 2027 Solar Base Rate Adjustment, Docket 20260001-EI (2026).",
+    "url": "https://www.psc.state.fl.us/library/filings/2026/02016-2026/02016-2026.pdf",
+    "locator": "PDF pp. 5-6; solar anatomy pp. 7-14",
+    "role": "fleet_exposure_and_replacement_bound",
+    "tier": "T1",
+    "permitted": "Use as a fleet-level censored replacement-count observation and asset-anatomy input.",
+    "prohibited": "Infer site-level vulnerability, event-specific DR, architecture effect, or direct cost.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.psc.state.fl.us/library/filings/2026/02016-2026/02016-2026.pdf",
+    "link_kind": "url",
+    "title": "Florida Power & Light Company",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S032",
+    "citation": "FEMA. Mitigation Assessment Team Report: Hurricanes Irma and Maria in the U.S. Virgin Islands (2018).",
+    "url": "https://www.fema.gov/sites/default/files/documents/fema_mat-report_hurricane-irma-maria_virgin-islands.pdf",
+    "locator": "Section 7.1.2 pp. 7-5-7-7; Section 7.1.3 pp. 7-7-7-9",
+    "role": "fixed_tilt_failure_unit_occurrence",
+    "tier": "T1",
+    "permitted": "Use as architecture-specific physical mechanism and inspected-state evidence.",
+    "prohibited": "Convert module/post fractions, qualitative total damage, or estimated wind into same-unit economic DR.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_mat-report_hurricane-irma-maria_virgin-islands.pdf",
+    "link_kind": "url",
+    "title": "FEMA. Mitigation Assessment Team Report: Hurricanes Irma and Maria in the U.S. Virgin Islands (2018).",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S033",
+    "citation": "BMR Energy. St. Thomas Solar Project.",
+    "url": "https://bmrenergy.com/projects/st-thomas-solar-project/",
+    "locator": "Context and Process sections",
+    "role": "final_disposition_and_rebuild_context",
+    "tier": "T1",
+    "permitted": "Use as owner-reported terminal facility disposition and rebuild-selector evidence.",
+    "prohibited": "Treat redesigned, resized, and hardened replacement scope as like-kind direct repair cost.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://bmrenergy.com/projects/st-thomas-solar-project/",
+    "link_kind": "url",
+    "title": "BMR Energy. St. Thomas Solar Project.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S034",
+    "citation": "BMR Energy. St. Croix Solar Energy.",
+    "url": "https://bmrenergy.com/projects/st-croix-solar-energy/",
+    "locator": "Context and Process sections",
+    "role": "module_and_electrical_disposition_context",
+    "tier": "T1",
+    "permitted": "Use to show visible module damage can underrepresent electrical consequence and compound pathways.",
+    "prohibited": "Infer component quantities, wind-only causation, or economic DR.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://bmrenergy.com/projects/st-croix-solar-energy/",
+    "link_kind": "url",
+    "title": "BMR Energy. St. Croix Solar Energy.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S035",
+    "citation": "The AES Corporation. Form 10-Q for quarter ended September 30, 2017.",
+    "url": "https://www.sec.gov/Archives/edgar/data/874761/000087476117000066/q32017form10-q.htm",
+    "locator": "lines 2131-2140 and 3507-3513 in SEC filing text",
+    "role": "plant_loss_materiality_and_scope_boundary",
+    "tier": "T1",
+    "permitted": "Use as plant-level materiality and prohibited-numerator evidence.",
+    "prohibited": "Treat estimated loss, MW-normalized loss, availability reduction, insurance coverage, BI, cleanup, or recovery as direct physical DR.",
+    "decision": "audit_only",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.sec.gov/Archives/edgar/data/874761/000087476117000066/q32017form10-q.htm",
+    "link_kind": "url",
+    "title": "The AES Corporation. Form 10-Q for quarter ended September 30, 2017.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S036",
+    "citation": "DOE/FEMP, GSA, NREL, and LBNL. Toward Solar Photovoltaic Storm Resilience: Learning from Hurricane Loss, Rebuilding Better.",
+    "url": "https://www.energy.gov/sites/default/files/2023-02/femp-toward-solar-pv-storm-resilience-learning-from-hurricane-loss-rebuilding-better_0.pdf",
+    "locator": "PDF pp. 9-15 and 24; site assessments, Table 1, failure analysis, and hardening discussion",
+    "role": "multi_failure_unit_and_compound_event_evidence",
+    "tier": "T1",
+    "permitted": "Use for failure-unit anatomy, categorical disposition, compound-pathway boundaries, and acquisition design.",
+    "prohibited": "Serialize total-loss wording or hardening premiums as a transferable wind economic DR point.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.energy.gov/sites/default/files/2023-02/femp-toward-solar-pv-storm-resilience-learning-from-hurricane-loss-rebuilding-better_0.pdf",
+    "link_kind": "url",
+    "title": "DOE/FEMP, GSA, NREL, and LBNL",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S037",
+    "citation": "NREL. Solar Photovoltaics in Severe Weather: Cost Considerations for Storm Hardening PV Systems for Resilience. NREL/TP-7A40-75804 (2020). DOI 10.2172/1659785.",
+    "url": "https://doi.org/10.2172/1659785",
+    "locator": "PDF pp. 8-13; Tables 1-2",
+    "role": "design_anatomy_and_hardening_cost_boundary",
+    "tier": "T2",
+    "permitted": "Use for design selectors, value anatomy, and data-acquisition fields.",
+    "prohibited": "Treat prospective premium or BOM share as occurrence damage probability, DR, or repair savings.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": "10.2172/1659785",
+    "link": "https://doi.org/10.2172/1659785",
+    "link_kind": "doi",
+    "title": "NREL. Solar Photovoltaics in Severe Weather: Cost Considerations for Storm Hardening PV Systems for Resilience",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S038",
+    "citation": "Nextracker. Solar Power Plant O&M in the Age of Extreme Weather (2017).",
+    "url": "https://www.nextracker.com/wp-content/uploads/2017/04/Nextracker_OandM-WhitePaper_FINAL_April-2017_MKT-000059.pdf",
+    "locator": "printed p. 9, Hurricane Matthew case",
+    "role": "tracker_state_candidate_evidence",
+    "tier": "T3",
+    "permitted": "Use as candidate attained-state and inspection-field design evidence.",
+    "prohibited": "Infer a generic tracker zero curve, stow credit, response probability, or economic DR.",
+    "decision": "audit_only",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.nextracker.com/wp-content/uploads/2017/04/Nextracker_OandM-WhitePaper_FINAL_April-2017_MKT-000059.pdf",
+    "link_kind": "url",
+    "title": "Nextracker. Solar Power Plant O&M in the Age of Extreme Weather (2017).",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S039",
+    "citation": "Nevados. Iris Solar Project Hurricane Case Study.",
+    "url": "https://nevados.solar/featured-projects/iris-case-study-hurricane/",
+    "locator": "Hurricane Ida event and post-event inspection sections",
+    "role": "tracker_occurrence_audit",
+    "tier": "T3",
+    "permitted": "Use as a tracker negative-case and compound-attribution design input.",
+    "prohibited": "Infer wind-only immunity, a generic tracker curve, or repair-cost severity.",
+    "decision": "audit_only",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://nevados.solar/featured-projects/iris-case-study-hurricane/",
+    "link_kind": "url",
+    "title": "Nevados. Iris Solar Project Hurricane Case Study.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS-S040",
+    "citation": "DOE/FEMP. Life Cycle of Photovoltaic Systems: Operate and Maintain an Existing Photovoltaic System.",
+    "url": "https://www.energy.gov/cmei/femp/life-cycle-photovoltaic-systems-operate-and-maintain-existing-photovoltaic-system",
+    "locator": "post-damage inspection, itemized repair-or-replace, and severe-storm model limitations in lines 143-190",
+    "role": "inspection_and_disposition_protocol",
+    "tier": "T2",
+    "permitted": "Use to define minimum inspection and disposition records.",
+    "prohibited": "Treat the O&M model or guidance as a severe-storm vulnerability curve.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.energy.gov/cmei/femp/life-cycle-photovoltaic-systems-operate-and-maintain-existing-photovoltaic-system",
+    "link_kind": "url",
+    "title": "DOE/FEMP. Life Cycle of Photovoltaic Systems: Operate and Maintain an Existing Photovoltaic System.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "PV_TRACKER_DOWNBURST_2025",
+    "citation": "Álvarez et al. Downburst-Induced Loads on a Six-Row Array of Ground-Mounted Solar Trackers. Proceedings of the 10th International Conference on Advances in Experimental Structural Engineering, 2025.",
+    "url": "https://doi.org/10.1007/978-3-031-98893-6_6",
+    "locator": "pp. 54–63; §§2–6; especially pp. 57–62",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Transient ramp/plateau/decay, primary-vortex surge, row and tilt dependence, downburst knowledge gap",
+    "prohibited": "Critical speed, component capacity, failure probability, damage state, economic DR, full-scale threshold",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": "10.1007/978-3-031-98893-6_6",
+    "link": "https://doi.org/10.1007/978-3-031-98893-6_6",
+    "link_kind": "doi",
+    "title": "Álvarez et al. Downburst-Induced Loads on a Six-Row Array of Ground-Mounted Solar Trackers",
+    "no_link_sentence": null
+   },
+   {
+    "id": "IEA_PVPS_EXTREME_WEATHER_2025",
+    "citation": "IEA PVPS Task 13. Operational and Economic Impacts of Extreme Weather on PV Power Plants. T13-33:2025.",
+    "url": "https://iea-pvps.org/wp-content/uploads/2025/12/IEA-PVPS-T13-33-2025-REPORT-Extreme-Weather-Impacts.pdf",
+    "locator": "§3.2.2 pp. 24–25; §§3.4–3.6 pp. 25–28",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T3",
+    "permitted": "Observed below-design damage is possible; 1P/2P, stow, perimeter and anemometer state are load-bearing",
+    "prohibited": "Population fragility, normalized DR, exact value denominator, literal threshold or fitted median; Lamar citation is uncertain",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://iea-pvps.org/wp-content/uploads/2025/12/IEA-PVPS-T13-33-2025-REPORT-Extreme-Weather-Impacts.pdf",
+    "link_kind": "url",
+    "title": "IEA PVPS Task 13. Operational and Economic Impacts of Extreme Weather on PV Power Plants. T13-33:2025.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "VALENTIN_TRACKER_FAILURE_2022",
+    "citation": "Valentín et al. Failure Investigation of a Solar Tracker Due to Wind-Induced Torsional Galloping. Engineering Failure Analysis 135, 106137 (2022).",
+    "url": "https://doi.org/10.1016/j.engfailanal.2022.106137",
+    "locator": "§§3.2–3.3, 4.3 and 6",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T3",
+    "permitted": "Tracker cascade sequence and importance of angle/exposure",
+    "prohibited": "Convective attribution, local threshold, population probability, economic DR",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": "10.1016/j.engfailanal.2022.106137",
+    "link": "https://doi.org/10.1016/j.engfailanal.2022.106137",
+    "link_kind": "doi",
+    "title": "Valentín et al. Failure Investigation of a Solar Tracker Due to Wind-Induced Torsional Galloping",
+    "no_link_sentence": null
+   },
+   {
+    "id": "CPP_TRACKER_INSTABILITY_2015",
+    "citation": "Rohr, Bourke and Banks. Torsional Instability of Single-Axis Solar Tracking Systems. 2015.",
+    "url": "https://www.cppwind.com/wp-content/uploads/2020/12/Torsional-Instability-of-Single-Axis-Solar-Tracking-Systems-Rohr-Bourke-Banks-2015.pdf",
+    "locator": "pp. 1–7; especially pp. 5–7",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "System-specific critical-speed and angle-conditioned tracker axis",
+    "prohibited": "Universal 40 m/s threshold, downburst response, DR or loss",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.cppwind.com/wp-content/uploads/2020/12/Torsional-Instability-of-Single-Axis-Solar-Tracking-Systems-Rohr-Bourke-Banks-2015.pdf",
+    "link_kind": "url",
+    "title": "Rohr, Bourke and Banks. Torsional Instability of Single-Axis Solar Tracking Systems. 2015.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TRACKER_LAYOUT_AEROELASTIC_2025",
+    "citation": "Frontini et al. Key Parameters Influencing Wind-Induced Aeroelastic Responses of Single-Axis Solar Trackers in Photovoltaic Plants. Solar Energy 2025, 113232.",
+    "url": "https://doi.org/10.1016/j.solener.2024.113232",
+    "locator": "abstract; stability map Fig. 7; stress envelopes Fig. 12",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Required row, pitch, direction and layout fields",
+    "prohibited": "Transfer of tested critical speeds to another tracker or to downburst loading",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": "10.1016/j.solener.2024.113232",
+    "link": "https://doi.org/10.1016/j.solener.2024.113232",
+    "link_kind": "doi",
+    "title": "Frontini et al. Key Parameters Influencing Wind-Induced Aeroelastic Responses of Single-Axis Solar Trackers in Photovoltaic Plants",
+    "no_link_sentence": null
+   },
+   {
+    "id": "PV_TRACKER_AEROELASTIC_2024",
+    "citation": "Rodríguez-Casado et al. Experimental Benchmark for the 3D Wind Tunnel Testing of Torsional Aeroelastic Instabilities in Single-Axis Solar Trackers. JWEIA 2024, 105838.",
+    "url": "https://doi.org/10.1016/j.jweia.2024.105838",
+    "locator": "abstract and §§1–3",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Exact-system named Ucrit normalization and qualification identity",
+    "prohibited": "Generic production-tracker fragility or damage probability",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": "10.1016/j.jweia.2024.105838",
+    "link": "https://doi.org/10.1016/j.jweia.2024.105838",
+    "link_kind": "doi",
+    "title": "Rodríguez-Casado et al. Experimental Benchmark for the 3D Wind Tunnel Testing of Torsional Aeroelastic…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TRACKER_FIELD_MODAL_2024",
+    "citation": "Koekemoer et al. Field Measurements of Wind Load Effects in a Photovoltaic Single-Axis Tracker Mounting Rail. JWEIA 2024, 105876.",
+    "url": "https://doi.org/10.1016/j.jweia.2024.105876",
+    "locator": "abstract; 109-day campaign",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "1P/2P and modal/layout differentiation",
+    "prohibited": "No-damage threshold or destructive convective response",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": "10.1016/j.jweia.2024.105876",
+    "link": "https://doi.org/10.1016/j.jweia.2024.105876",
+    "link_kind": "doi",
+    "title": "Koekemoer et al. Field Measurements of Wind Load Effects in a Photovoltaic Single-Axis Tracker Mounting Rail",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FIXED_TILT_WIND_DESIGN_2020",
+    "citation": "Browne et al. A Wind Load Design Method for Ground-Mounted Multi-Row Solar Arrays Based on a Compilation of Wind Tunnel Experiments. JWEIA 2020, 104294.",
+    "url": "https://doi.org/10.1016/j.jweia.2020.104294",
+    "locator": "abstract and §§1–5",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Separate fixed-tilt load bridge and array zoning",
+    "prohibited": "Downburst coefficients, tracker aeroelasticity, failure probability or DR",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": "10.1016/j.jweia.2020.104294",
+    "link": "https://doi.org/10.1016/j.jweia.2020.104294",
+    "link_kind": "doi",
+    "title": "Browne et al. A Wind Load Design Method for Ground-Mounted Multi-Row Solar Arrays Based on a Compilation of Wind Tunnel Experiments",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SOLAR_JOINT_CYCLIC_2025",
+    "citation": "Du et al. Cyclic Demands on Solar Structural Joints under Wind Loading. Journal of Structural Engineering, 2025.",
+    "url": "https://doi.org/10.1061/JSENDH.STENG-14435",
+    "locator": "abstract and conclusions",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Joint coverage and acute-versus-fatigue boundary",
+    "prohibited": "Single-occurrence convective DR or lifetime-to-peak conversion",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": "10.1061/JSENDH.STENG-14435",
+    "link": "https://doi.org/10.1061/JSENDH.STENG-14435",
+    "link_kind": "doi",
+    "title": "Du et al. Cyclic Demands on Solar Structural Joints under Wind Loading",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SOLAR_CRITICAL_JOINTS_2025",
+    "citation": "Robinson. Maturing Rational Design Methodologies and Industry Consensus Engineering Standards: Critical Fastened Joints – Solar PV Industry. LBNL, 2025.",
+    "url": "https://doi.org/10.20357/B7VG76",
+    "locator": "abstract and report",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Attachment/joint condition and cascade logic",
+    "prohibited": "Wind-to-failure population or cost fraction",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": "10.20357/B7VG76",
+    "link": "https://doi.org/10.20357/B7VG76",
+    "link_kind": "doi",
+    "title": "Robinson. Maturing Rational Design Methodologies and Industry Consensus Engineering Standards: Critical Fastened Joints – Solar PV Industry",
+    "no_link_sentence": null
+   },
+   {
+    "id": "DOE_PV_OWNER_GUIDE_2021",
+    "citation": "U.S. DOE/FEMP and GSA. PV System Owner’s Guide to Identifying, Assessing, and Addressing Weather Vulnerabilities, Risks, and Impacts. 2021.",
+    "url": "https://www.energy.gov/sites/default/files/2021-09/pv-system-owners-guide-to-weather-vulnerabilities.pdf",
+    "locator": "§5; PDF pp. 43–50 for clamps/racking; derecho context pp. 56–58",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Failure-unit coverage, dependency, audit and conditioner fields",
+    "prohibited": "Numerical utility-scale convective fragility, parameter median, dispersion or loss cap",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.energy.gov/sites/default/files/2021-09/pv-system-owners-guide-to-weather-vulnerabilities.pdf",
+    "link_kind": "url",
+    "title": "U.S. DOE/FEMP and GSA. PV System Owner’s Guide to Identifying, Assessing, and Addressing Weather…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NREL_WEATHER_IMPACTS_2021",
+    "citation": "Walker et al. Weather Impacts on Solar PV Operations: Summary of the 2021 PV Reliability Workshop. LBNL/NREL/Sandia, 2021.",
+    "url": "https://escholarship.org/content/qt5t8569hf/qt5t8569hf_noSplash_f0e76891c1cd44233507d7c5afbad87a.pdf",
+    "locator": "pp. 23–25, 30–32, 39–42 and 56–58",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Mechanism, dependency, below-design failure possibility and open evidence seams",
+    "prohibited": "Curve calibration, universal threshold or repair-cost ratio",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://escholarship.org/content/qt5t8569hf/qt5t8569hf_noSplash_f0e76891c1cd44233507d7c5afbad87a.pdf",
+    "link_kind": "url",
+    "title": "Walker et al. Weather Impacts on Solar PV Operations: Summary of the 2021 PV Reliability Workshop",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FM_DS_7_106_2026",
+    "citation": "FM. Data Sheet 7-106: Ground-Mounted Solar Photovoltaic Power. April 2026.",
+    "url": "https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/07-hazards/fmds07106.pdf",
+    "locator": "§§2.1.2.3–2.1.2.4 pp. 3–4; §3.1 pp. 10–11",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Ucrit qualification, monitoring and 0.75 action flag",
+    "prohibited": "0.75 as damage threshold, hard zero or fragility ordinate",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/07-hazards/fmds07106.pdf",
+    "link_kind": "url",
+    "title": "FM. Data Sheet 7-106: Ground-Mounted Solar Photovoltaic Power. April 2026.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "ASTM_E1830_2025",
+    "citation": "ASTM E1830-15(2025). Standard Test Methods for Determining Mechanical Integrity of Photovoltaic Modules.",
+    "url": "https://store.astm.org/e1830-15r25.html",
+    "locator": "scope §§1.1–1.4; significance §4",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Module qualification metadata and physical/electrical endpoints",
+    "prohibited": "Universal wind speed, failure probability or economic DR",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://store.astm.org/e1830-15r25.html",
+    "link_kind": "url",
+    "title": "ASTM E1830-15(2025). Standard Test Methods for Determining Mechanical Integrity of Photovoltaic Modules.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "IEC_62782_2016",
+    "citation": "IEC TS 62782:2016. Photovoltaic modules — Cyclic (dynamic) mechanical load testing.",
+    "url": "https://webstore.iec.ch/en/publication/24310",
+    "locator": "scope",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Module-test provenance and fatigue susceptibility",
+    "prohibited": "Transient downburst, plant fragility or DR",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://webstore.iec.ch/en/publication/24310",
+    "link_kind": "url",
+    "title": "IEC TS 62782:2016. Photovoltaic modules — Cyclic (dynamic) mechanical load testing.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "IEC_62817",
+    "citation": "IEC 62817:2014+A1:2017. Photovoltaic systems — Design qualification of solar trackers.",
+    "url": "https://webstore.iec.ch/en/publication/61127",
+    "locator": "scope and qualification sequence",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Exact tracker architecture/qualification identity and testing context",
+    "prohibited": "Site-specific structure/foundation certification, Ucrit for an unnamed tracker, or fragility",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://webstore.iec.ch/en/publication/61127",
+    "link_kind": "url",
+    "title": "IEC 62817:2014+A1:2017. Photovoltaic systems — Design qualification of solar trackers.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "ASCE_7_22",
+    "citation": "ASCE/SEI 7-22. Minimum Design Loads and Associated Criteria for Buildings and Other Structures.",
+    "url": "https://www.asce.org/publications-and-news/codes-and-standards/asce-sei-7-22",
+    "locator": "Ch. 29 §29.4.5; Ch. 31 §31.4.5; Ch. 26 symbols",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Design normalization and fixed-tilt scope",
+    "prohibited": "Failure capacity, D50, tracker aeroelastic response or downburst profile",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.asce.org/publications-and-news/codes-and-standards/asce-sei-7-22",
+    "link_kind": "url",
+    "title": "ASCE/SEI 7-22. Minimum Design Loads and Associated Criteria for Buildings and Other Structures.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "ASCE_49_21",
+    "citation": "ASCE/SEI 49-21. Wind Tunnel Testing for Buildings and Other Structures.",
+    "url": "https://www.asce.org/communities/institutes-and-technical-groups/structural-engineering-institute/committees/sei-board-of-governors/sei-technical-community-executive-committee/asce-49---wind-tunnel-testing",
+    "locator": "§2.3.2 nonsynoptic winds",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Named downburst/non-synoptic and tracker qualification bridge",
+    "prohibited": "PV fragility or damage parameters",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.asce.org/communities/institutes-and-technical-groups/structural-engineering-institute/committees/sei-board-of-governors/sei-technical-community-executive-committee/asce-49---wind-tunnel-testing",
+    "link_kind": "url",
+    "title": "ASCE/SEI 49-21. Wind Tunnel Testing for Buildings and Other Structures.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NIST_THUNDERSTORM_PROFILES_2011",
+    "citation": "Lombardo et al. Thunderstorm Characteristics of Importance to Wind Engineering Part II: Profiles, Gust Factors and Other Observations. JWEIA 2011.",
+    "url": "https://www.nist.gov/publications/thunderstorm-characteristics-importance-wind-engineering-part-ii-profiles-gust-factors",
+    "locator": "abstract and paper; ramp-up/profile/gust-factor sections",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Reject silent stationary-ABL equivalence and ordinary default profile conversion",
+    "prohibited": "Solar failure threshold or DR",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.nist.gov/publications/thunderstorm-characteristics-importance-wind-engineering-part-ii-profiles-gust-factors",
+    "link_kind": "url",
+    "title": "Lombardo et al. Thunderstorm Characteristics of Importance to Wind Engineering Part II: Profiles, Gust Factors and Other Observations",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FULL_SCALE_DOWNBURST_2018",
+    "citation": "Gunter and Schroeder. Investigation of a Downburst Loading Event on a Full-Scale Low-Rise Building. JWEIA 2018.",
+    "url": "https://doi.org/10.1016/j.jweia.2018.09.020",
+    "locator": "highlights and results",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Rise time, direction change and non-power-law bridge requirement",
+    "prohibited": "PV fragility or structural transfer coefficients",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": "10.1016/j.jweia.2018.09.020",
+    "link": "https://doi.org/10.1016/j.jweia.2018.09.020",
+    "link_kind": "doi",
+    "title": "Gunter and Schroeder. Investigation of a Downburst Loading Event on a Full-Scale Low-Rise Building. JWEIA…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "DERECHO_MULTISCALE_2025",
+    "citation": "Wagner et al. Detecting and Interpreting Wind Damage at Multiple Scales in the 10 August 2020 Derecho Using UAS, Satellite, and Radar. Weather and Forecasting, 2025.",
+    "url": "https://doi.org/10.1175/WAF-D-24-0198.1",
+    "locator": "abstract; pp. 1–2 and 12–14",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Derecho label requires local mechanism partition and parent event identity",
+    "prohibited": "One derecho-wide demand or PV parameter",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": "10.1175/WAF-D-24-0198.1",
+    "link": "https://doi.org/10.1175/WAF-D-24-0198.1",
+    "link_kind": "doi",
+    "title": "Wagner et al. Detecting and Interpreting Wind Damage at Multiple Scales in the 10 August 2020 Derecho Using UAS, Satellite, and Radar",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NWS_DOWNBURST_TAXONOMY",
+    "citation": "U.S. National Weather Service. Downbursts; NWS Glossary; NSSL Thunderstorm FAQ.",
+    "url": "https://www.weather.gov/spotterguide/downbursts",
+    "locator": "definitions",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Pathway scope vocabulary",
+    "prohibited": "58 mph warning threshold as PV damage onset",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.weather.gov/spotterguide/downbursts",
+    "link_kind": "url",
+    "title": "U.S. National Weather Service. Downbursts; NWS Glossary; NSSL Thunderstorm FAQ.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "DOE_FEMP_STORM_HARDENING_2020",
+    "citation": "Elsworth and Van Geet. Solar Photovoltaics in Severe Weather: Cost Considerations for Storm Hardening PV Systems for Resilience. NREL/TP-7A40-75804, 2020.",
+    "url": "https://docs.nrel.gov/docs/fy20osti/75804.pdf",
+    "locator": "Table 1 pp. 2–3; scope pp. 3–4",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Selector economics and plausibility only",
+    "prohibited": "Repair cost, damage-state ratio, tracker value or fragility",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://docs.nrel.gov/docs/fy20osti/75804.pdf",
+    "link_kind": "url",
+    "title": "Elsworth and Van Geet. Solar Photovoltaics in Severe Weather: Cost Considerations for Storm Hardening PV…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NREL_Q1_2021_COST_BENCHMARK",
+    "citation": "Ramasamy et al. U.S. Solar Photovoltaic System and Energy Storage Cost Benchmarks: Q1 2021. NREL/TP-7A40-80694.",
+    "url": "https://www.govinfo.gov/content/pkg/GOVPUB-E9-PURL-gpo184395/pdf/GOVPUB-E9-PURL-gpo184395.pdf",
+    "locator": "PDF p. 27 utility-scale modeling inputs",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Fixed-tilt screening value bracket",
+    "prohibited": "Architecture-specific point value, fragility or current-dollar replacement cost",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.govinfo.gov/content/pkg/GOVPUB-E9-PURL-gpo184395/pdf/GOVPUB-E9-PURL-gpo184395.pdf",
+    "link_kind": "url",
+    "title": "Ramasamy et al. U.S. Solar Photovoltaic System and Energy Storage Cost Benchmarks: Q1 2021",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NREL_Q1_2024_MMP_TRACKER",
+    "citation": "DOE/NREL PV System Cost Model Q1 2024 market price benchmark for a 100 MWdc one-axis-tracker plant.",
+    "url": "https://www.energy.gov/cmei/systems/solar-photovoltaic-system-cost-benchmarks",
+    "locator": "Figure 1 source-native MMP rows",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Tracker architecture sensitivity and row-level reconciliation",
+    "prohibited": "Fixed-tilt point value, component fragility or blended primary reference",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.energy.gov/cmei/systems/solar-photovoltaic-system-cost-benchmarks",
+    "link_kind": "url",
+    "title": "DOE/NREL PV System Cost Model Q1 2024 market price benchmark for a 100 MWdc one-axis-tracker plant.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NREL_NLR_Q1_2025_PV_BENCHMARK",
+    "citation": "Basore et al. Q1-2025 Solar Photovoltaic System Cost Benchmarks. NLR/OT-7A40-97930; data catalog submission 304.",
+    "url": "https://doi.org/10.7799/3009689",
+    "locator": "dataset and governed Solar_Map crosswalk",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Repository-current reference-value reconciliation",
+    "prohibited": "Site appraisal, architecture-specific BOM, vulnerability or exposed fraction",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": "10.7799/3009689",
+    "link": "https://doi.org/10.7799/3009689",
+    "link_kind": "doi",
+    "title": "Basore et al. Q1-2025 Solar Photovoltaic System Cost Benchmarks",
+    "no_link_sentence": null
+   },
+   {
+    "id": "VALUE_SOLAR_WORKBOOK",
+    "citation": "damage_modeling/docs/method/value_basis/solar_wind_value_breakdown.xlsx.",
+    "url": "https://data.nlr.gov/submissions/304",
+    "locator": "Solar_Map rows 2–17",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T2",
+    "permitted": "Reference denominator and row mapping",
+    "prohibited": "Implicit site value, at-risk fraction or fragility",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://data.nlr.gov/submissions/304",
+    "link_kind": "url",
+    "title": "damage_modeling/docs/method/value_basis/solar_wind_value_breakdown.xlsx.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "LEGACY_SWS_V1",
+    "citation": "Current canonical strong_wind_solar model v1.0/docs r3 artifact and workbook.",
+    "url": null,
+    "locator": "docs/cells/strong_wind_solar/current/",
+    "role": "adjacent_normalized_response_anatomy_only",
+    "tier": "T4",
+    "permitted": "Exact legacy reproduction and migration comparison",
+    "prohibited": "Scientific calibration for v2",
+    "decision": "retain_as_adjacent_or_T4_context",
+    "accessed_on": "2026-07-12",
+    "provenance": "register",
+    "repo_path": "docs/cells/strong_wind_solar/current",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/cells/strong_wind_solar/current",
+    "link_kind": "repo_file",
+    "title": "Current canonical strong_wind_solar model v1.0/docs r3 artifact and workbook.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SHARED_SOLAR_WIND_PROXY_V0_1",
+    "citation": "Damage Modeling shared solar-wind normalized-response candidate profile v0.1.",
+    "url": "docs/method/shared_components/solar_wind_normalized_response/candidate_response_profile_v0_1.json",
+    "locator": "complete non-runtime candidate profile",
+    "role": "audit_comparison_profile_only",
+    "tier": "T4",
+    "permitted": "Compare cell-local synthetic parameters against a hazard-label-neutral solar fingerprint after adoption.",
+    "prohibited": "Call the values field-calibrated, hurricane-calibrated, conservative, probabilistic, or runtime approved.",
+    "decision": "retain_audit_only",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "repo_path": "docs/method/shared_components/solar_wind_normalized_response/candidate_response_profile_v0_1.json",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/shared_components/solar_wind_normalized_response/candidate_response_profile_v0_1.json",
+    "link_kind": "repo_file",
+    "title": "Damage Modeling shared solar-wind normalized-response candidate profile v0.1.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION",
+    "citation": "Damage Modeling owner decision: TC-wind x solar model-v2 cell-local synthetic parameter set.",
+    "url": "docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+    "locator": "TCWS2-D001; TCWS2-D003 through TCWS2-D007",
+    "role": "cell_local_synthetic_parameter_authority",
+    "tier": "T4",
+    "permitted": "Use the exact registered values only in this noncanonical v2 cell proposal.",
+    "prohibited": "Treat the decision as evidence, calibration, shared-runtime approval, or authority for another cell.",
+    "decision": "adopt_cell_local_synthetic_T4",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "repo_path": "docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+    "link_kind": "repo_file",
+    "title": "Damage Modeling owner decision: TC-wind x solar model-v2 cell-local synthetic parameter set.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NO_DIRECT_TC_CALIBRATION_SOURCE",
+    "citation": "TC-wind x solar model-v2 bounded evidence review: no direct generic fixed/tracker calibration source adopted.",
+    "url": "docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+    "locator": "§ Missing matched chain; § v2 consequence",
+    "role": "no_direct_calibration_marker",
+    "tier": "T4",
+    "permitted": "Keep all generic numbers at Tier 4 and promotion blocked.",
+    "prohibited": "Infer zero damage, immunity, or proof that no usable private evidence exists.",
+    "decision": "withhold_calibration_claim",
+    "accessed_on": "2026-07-29",
+    "provenance": "register",
+    "repo_path": "docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+    "link_kind": "repo_file",
+    "title": "TC-wind x solar model-v2 bounded evidence review: no direct generic fixed/tracker calibration source adopted.",
+    "no_link_sentence": null
+   }
+  ],
+  "claims": [
+   {
+    "id": "TCWS-C001",
+    "text": "Tropical-cyclone wind requires its own solar pathway and cannot fall back to the straight-line-convective solar model.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S015",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "strong_wind_solar neighboring-wind boundary; pathway and event-identity standards",
+    "tier": "T3",
+    "parameter_or_rule": "pathway_id=tropical_cyclone_wind",
+    "status": "adopt",
+    "update_trigger": "A reviewed equivalence study passes all pathway and endpoint gates."
+   },
+   {
+    "id": "TCWS-C002",
+    "text": "NHC maximum sustained surface wind is the highest one-minute average wind at 10 m in unobstructed exposure.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCWS-S001"
+    ],
+    "locator": "NHC glossary entry: Maximum Sustained Surface Wind",
+    "tier": "T2",
+    "parameter_or_rule": "source_native_axis_semantics",
+    "status": "adopt",
+    "update_trigger": "NHC changes the definition or a governed upstream product supplies a different exact convention."
+   },
+   {
+    "id": "TCWS-C003",
+    "text": "The runtime damage axis is withheld at scaffold stage.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S001",
+     "TCWS-S002",
+     "TCWS-S005",
+     "TCWS-S010",
+     "TCWS-S011",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "native-axis definitions and transfer limits; runtime gate",
+    "tier": "T3",
+    "parameter_or_rule": "runtime_axis_status",
+    "status": "historical_scope_only",
+    "update_trigger": "A qualified event-to-local-demand bridge and matching damage evidence pass review."
+   },
+   {
+    "id": "TCWS-C004",
+    "text": "Height, averaging period, terrain/exposure, topography, direction history, duration, array zone, and windborne-debris context are load-bearing tropical-cyclone wind descriptors.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "TCWS-S001",
+     "TCWS-S004",
+     "TCWS-S005",
+     "TCWS-S006",
+     "TCWS-S010",
+     "TCWS-S012"
+    ],
+    "locator": "NHC definition; St. Croix mechanisms; design and experimental source scopes",
+    "tier": "T2",
+    "parameter_or_rule": "event_to_local_demand_fields",
+    "status": "adopt",
+    "update_trigger": "A validated reduced-order TC demand model supersedes individual fields."
+   },
+   {
+    "id": "TCWS-C005",
+    "text": "Ground-mounted fixed-tilt and single-axis-tracker arrays require separate architecture routes.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "TCWS-S005",
+     "TCWS-S006",
+     "TCWS-S007",
+     "TCWS-S010",
+     "TCWS-S011",
+     "TCWS-S012"
+    ],
+    "locator": "ASCE fixed-tilt provisions; FM §§2.1.2.1–2.1.2.4; tracker qualification and aeroelastic studies",
+    "tier": "T2",
+    "parameter_or_rule": "array_architecture_selector",
+    "status": "adopt",
+    "update_trigger": "A formal equivalence study supports a shared record."
+   },
+   {
+    "id": "TCWS-C006",
+    "text": "Ceferino et al. analyze 14 large Caribbean ground-mounted sites and define extensive failure as clip or racking failure in more than 50 percent of panels.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCWS-S002"
+    ],
+    "locator": "§2.1 and Table 1 pp. 2–3; Eq. 1 and §3.1 p. 4",
+    "tier": "T1",
+    "parameter_or_rule": "ceferino_source_native_endpoint",
+    "status": "adopt_audit_only",
+    "update_trigger": "Authors release a failure-unit disposition and same-unit cost crosswalk."
+   },
+   {
+    "id": "TCWS-C007",
+    "text": "Five of the 14 Ceferino ground-mounted sites had significant failure; failures began at reconstructed gusts near 83 m/s and the mean reconstructed gust among failed sites was about 91 m/s.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCWS-S002"
+    ],
+    "locator": "§2.1 pp. 2–3 and §2.2 pp. 3–4",
+    "tier": "T1",
+    "parameter_or_rule": "ceferino_field_observations",
+    "status": "adopt_audit_only",
+    "update_trigger": "A larger architecture-labeled field dataset with local demand becomes available."
+   },
+   {
+    "id": "TCWS-C008",
+    "text": "Ceferino's ground-mounted posterior summaries have median v about 90 m/s and median beta about 0.15; reported posterior standard deviations are about 6 m/s and 0.07, and the mean posterior fragility rises from 10 to 90 percent over about 73 to 116 m/s.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCWS-S002"
+    ],
+    "locator": "§4.2 and Figs. 5c/5d/6b p. 7",
+    "tier": "T1",
+    "parameter_or_rule": "ceferino_posterior_candidate",
+    "status": "defer_candidate_only",
+    "update_trigger": "A transfer-qualified failure-unit and consequence bridge passes review."
+   },
+   {
+    "id": "TCWS-C009",
+    "text": "A deterministic lognormal curve built from Ceferino's posterior medians is not the paper's posterior-mean fragility curve.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "TCWS-S002"
+    ],
+    "locator": "Bayesian method and §4.2 posterior integration",
+    "tier": "T1",
+    "parameter_or_rule": "posterior_uncertainty_rule",
+    "status": "adopt",
+    "update_trigger": "Authors publish an authoritative deterministic reduction or full posterior artifact."
+   },
+   {
+    "id": "TCWS-C010",
+    "text": "Ceferino does not support a fixed-tilt-versus-tracker split or component-level curve decomposition.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "TCWS-S002"
+    ],
+    "locator": "Table 1 fields and §3.1 limit-state definition",
+    "tier": "T1",
+    "parameter_or_rule": "ceferino_transfer_limit",
+    "status": "adopt",
+    "update_trigger": "Architecture and component records for the 14 sites are released and validated."
+   },
+   {
+    "id": "TCWS-C011",
+    "text": "Ceferino's observed structural failures included cascading damage and debris from failed panels.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCWS-S002"
+    ],
+    "locator": "§2.1 pp. 2–3",
+    "tier": "T1",
+    "parameter_or_rule": "wind_and_debris_mechanism_boundary",
+    "status": "adopt_with_limits",
+    "update_trigger": "Matched event inspections isolate pressure, impact, and consequential damage."
+   },
+   {
+    "id": "TCWS-C012",
+    "text": "Perry et al. reviewed 1,534 mixed residential, commercial, and utility PV sites after Hurricanes Irma and Maria; 17 percent had visible damage and 2.8 percent had more than 50 percent visible damage.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCWS-S003"
+    ],
+    "locator": "abstract p. 1012; §3.1 and Table 2 pp. 1016–1018",
+    "tier": "T1",
+    "parameter_or_rule": "perry_remote_sensing_statistics",
+    "status": "adopt_audit_only",
+    "update_trigger": "The authors release a utility-scale ground-mounted subset with architecture, demand, inspection, and cost fields."
+   },
+   {
+    "id": "TCWS-C013",
+    "text": "Perry et al. found only a weak damage relationship with estimated maximum gust and documented strong installation/site heterogeneity.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCWS-S003"
+    ],
+    "locator": "Figs. 4–5 pp. 1016–1018; Discussion pp. 1021–1022",
+    "tier": "T1",
+    "parameter_or_rule": "installation_and_site_heterogeneity",
+    "status": "adopt",
+    "update_trigger": "A matched multivariate population dataset supports a reduced selector set."
+   },
+   {
+    "id": "TCWS-C014",
+    "text": "Perry's manual remote-sensing endpoint does not identify hidden electrical damage, component disposition, repair scope, or direct repair cost.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "TCWS-S003"
+    ],
+    "locator": "§2.4 pp. 1015–1016; Discussion pp. 1021–1022",
+    "tier": "T1",
+    "parameter_or_rule": "remote_sensing_endpoint_limit",
+    "status": "adopt",
+    "update_trigger": "Linked inspection, work-order, salvage, and cost records become available."
+   },
+   {
+    "id": "TCWS-C015",
+    "text": "The Ceferino and Perry evidence must not be counted as independent field populations without record-level deduplication.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S002",
+     "TCWS-S003"
+    ],
+    "locator": "both studies' Caribbean Irma/Maria event and site descriptions",
+    "tier": "T1",
+    "parameter_or_rule": "evidence_dependence_rule",
+    "status": "adopt",
+    "update_trigger": "Site identifiers establish overlap or independence."
+   },
+   {
+    "id": "TCWS-C016",
+    "text": "The DOE/FEMP St. Croix case documents a 469 kW fixed-tilt array assessed as total loss with rack, beam, clamp, fastener, corrosion, liberated-module, enclosure, conduit, inverter, switchgear, and transformer mechanisms.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCWS-S004"
+    ],
+    "locator": "Executive Summary pp. vi–vii; §1.1/Table 1 pp. 2–3; §§2–3.6 pp. 5–12",
+    "tier": "T3",
+    "parameter_or_rule": "st_croix_mechanism_and_failure_unit_case",
+    "status": "adopt_with_limits",
+    "update_trigger": "A population of comparable sites with local demands and itemized repair/replacement records is available."
+   },
+   {
+    "id": "TCWS-C017",
+    "text": "The St. Croix case combines high wind, wind-driven rain, and flash flooding; its reported approximately 104 mph event estimate and 145 mph design value are not population failure thresholds.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "TCWS-S004"
+    ],
+    "locator": "Executive Summary pp. vi–vii; §§1.1, 2, and 3 pp. 2–12",
+    "tier": "T3",
+    "parameter_or_rule": "compound_event_and_threshold_limit",
+    "status": "adopt",
+    "update_trigger": "Forensic load reconstruction isolates mechanisms and component capacities."
+   },
+   {
+    "id": "TCWS-C018",
+    "text": "ASCE and fixed-tilt wind-tunnel evidence are design and demand anchors, not failure probability or economic severity evidence.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "TCWS-S005",
+     "TCWS-S010"
+    ],
+    "locator": "ASCE Chs. 26, 29, and 31; Browne abstract and §§1–5",
+    "tier": "T2",
+    "parameter_or_rule": "fixed_tilt_demand_bridge_boundary",
+    "status": "adopt",
+    "update_trigger": "Matched component demand-capacity-failure-cost evidence passes review."
+   },
+   {
+    "id": "TCWS-C019",
+    "text": "Tracker critical velocity is exact-system, angle, layout, direction, row, and qualification dependent.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "TCWS-S006",
+     "TCWS-S007",
+     "TCWS-S011",
+     "TCWS-S012"
+    ],
+    "locator": "FM §§2.1.2.3–2.1.2.4; IEC scope; aeroelastic benchmark and stability-map results",
+    "tier": "T2",
+    "parameter_or_rule": "tracker_ucrit_and_state_contract",
+    "status": "adopt",
+    "update_trigger": "A governed certified tracker-capacity catalog with structured equivalence becomes available."
+   },
+   {
+    "id": "TCWS-C020",
+    "text": "FM's trigger at 25 percent below tested instability speed is an operational action margin, not damage onset.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "TCWS-S006"
+    ],
+    "locator": "§§2.1.2.3–2.1.2.4 pp. 3–4",
+    "tier": "T2",
+    "parameter_or_rule": "tracker_stow_action_gate",
+    "status": "adopt_flag_only",
+    "update_trigger": "FM changes the criterion or matched damage observations calibrate the relationship."
+   },
+   {
+    "id": "TCWS-C021",
+    "text": "IEC 62817 tracker qualification and IEC 61730 module safety qualification are selector provenance, not tropical-cyclone fragility.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "TCWS-S007",
+     "TCWS-S008"
+    ],
+    "locator": "official IEC scope and test-purpose pages",
+    "tier": "T2",
+    "parameter_or_rule": "qualification_provenance_rule",
+    "status": "adopt",
+    "update_trigger": "A product-specific qualified capacity and field-validation artifact is authorized."
+   },
+   {
+    "id": "TCWS-C022",
+    "text": "The NLR Q1-2025 UPV benchmark is a reference value source only, under value_source_id NLR_Q1_2025_UPV_PV_ONLY_2024_USD.",
+    "type": "value_rule",
+    "source_ids": [
+     "TCWS-S013"
+    ],
+    "locator": "dataset landing page and governed parent value ledger",
+    "tier": "T2",
+    "parameter_or_rule": "reference_value_lineage",
+    "status": "adopt_with_limits",
+    "update_trigger": "A new benchmark vintage or site-specific BOM/value ledger supersedes the reference."
+   },
+   {
+    "id": "TCWS-C023",
+    "text": "PV_GSU_SUBSTATION remains a separate solar-plant failure unit and is withheld, not assigned zero and not inherited from a generic hurricane substation placeholder.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S004",
+     "TCWS-S013",
+     "LEG-TCWS-001",
+     "LEG-TCWS-002",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "St. Croix electrical mechanisms; value lineage; legacy substation rows; coverage gate",
+    "tier": "T4",
+    "parameter_or_rule": "PV_GSU_SUBSTATION_coverage",
+    "status": "historical_scope_only",
+    "update_trigger": "GSU-specific TC wind demand, disposition, exposure, and same-unit cost data pass review."
+   },
+   {
+    "id": "TCWS-C024",
+    "text": "PV_POWER_CONVERSION_AND_COLLECTION remains a separate withheld unit for inverters, combiners, wiring, enclosures, collection, grounding, and related power-path equipment.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S004",
+     "TCWS-S009",
+     "TCWS-S013",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "St. Croix §§3.4–3.6; Owner's Guide §5; value and coverage audits",
+    "tier": "T3",
+    "parameter_or_rule": "PV_POWER_CONVERSION_AND_COLLECTION_coverage",
+    "status": "historical_scope_only",
+    "update_trigger": "Unit-specific demand, disposition, repair, and cost evidence becomes available."
+   },
+   {
+    "id": "TCWS-C025",
+    "text": "The strong_wind_solar package may contribute source discovery, anatomy, terminology, and governance controls but no numeric transfer.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S015",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "cross-cell register rows and neighboring-wind boundary",
+    "tier": "T3",
+    "parameter_or_rule": "cross_cell_reuse_rule",
+    "status": "historical_scope_only",
+    "update_trigger": "A formal numerical equivalence review passes."
+   },
+   {
+    "id": "TCWS-C026",
+    "text": "The legacy hurricane-solar memo mischaracterizes Ceferino's ground-mounted result and its logistic parameters are rejected for runtime.",
+    "type": "legacy_audit_finding",
+    "source_ids": [
+     "TCWS-S002",
+     "LEG-TCWS-001"
+    ],
+    "locator": "Ceferino §4.2 p. 7; legacy memo §§2.6–2.8, §5, Appendix A; index rows 219–299",
+    "tier": "T4",
+    "parameter_or_rule": "legacy_curve_bundle",
+    "status": "reject_runtime_retain_audit",
+    "update_trigger": "A separately calibrated, fully provenance-resolved curve passes promotion gates."
+   },
+   {
+    "id": "TCWS-C027",
+    "text": "Hazard Modeling's provisional hurricane-solar implementation is a migration fixture only.",
+    "type": "legacy_audit_finding",
+    "source_ids": [
+     "LEG-TCWS-002",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "01_damage.py lines 14–39, 56–105, 136–183, 197–207",
+    "tier": "T4",
+    "parameter_or_rule": "legacy_consumer_behavior",
+    "status": "reject_runtime_retain_audit",
+    "update_trigger": "A governed promoted Damage artifact and explicit consumer cutover replace the fixture."
+   },
+   {
+    "id": "TCWS-C028",
+    "text": "No public matched chain was located in the bounded review from representative local tropical-cyclone demand through failure-unit state and disposition to same-unit direct repair or replacement cost.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S002",
+     "TCWS-S003",
+     "TCWS-S004",
+     "BOUNDED_SEARCH_LOG"
+    ],
+    "locator": "bounded-search chain matrix and endpoint pressure tests",
+    "tier": "T3",
+    "parameter_or_rule": "runtime_curve_gate",
+    "status": "withhold",
+    "update_trigger": "Authorized matched event, configuration, inspection, disposition, and cost records close the chain."
+   },
+   {
+    "id": "TCWS-C029",
+    "text": "Wind, debris impact, wind-driven rain, flood or surge, and TC-spawned tornado pathways preserve one event_family_id but route separately.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S004",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "St. Croix compound-event evidence; event-identity and neighboring-hazard controls",
+    "tier": "T4",
+    "parameter_or_rule": "compound_event_identity_rule",
+    "status": "adopt",
+    "update_trigger": "A governed multi-pathway consequence assembler supersedes the current rule."
+   },
+   {
+    "id": "TCWS-C030",
+    "text": "Model v0.1/docs r1 is a noncanonical coverage scaffold with zero runtime curve records; scalar damage and monetary loss are withheld.",
+    "type": "governance_decision",
+    "source_ids": [
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "change classification, capability declaration, and fail-closed release gate",
+    "tier": "T4",
+    "parameter_or_rule": "canonical_runtime_artifact=false; curve_records=[]",
+    "status": "historical_scope_only",
+    "update_trigger": "A governed model v1.0 behavior change passes evidence, seven-step, tests, schemas, capability, and release review."
+   },
+   {
+    "id": "TCWS-C101",
+    "text": "The Perry manual dataset contains 47 records, including 37 ground-mounted and 35 ground-mounted records explicitly marked tracking false.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCWS-S020"
+    ],
+    "locator": "manual CSV filter counts pinned to source SHA",
+    "tier": "T1",
+    "parameter_or_rule": "source_cohort_count",
+    "status": "adopt",
+    "update_trigger": "A licensed revised source file or corrected schema changes the counts."
+   },
+   {
+    "id": "TCWS-C102",
+    "text": "The manual endpoint is percent modules visibly damaged based on post-event imagery and labeled site/damage polygons.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCWS-S003",
+     "TCWS-S020",
+     "TCWS-S021"
+    ],
+    "locator": "paper method and data-description pp. 1-2",
+    "tier": "T1",
+    "parameter_or_rule": "source_response_endpoint",
+    "status": "adopt_with_limits",
+    "update_trigger": "A source revision adds inspected disposition and same-unit cost."
+   },
+   {
+    "id": "TCWS-C103",
+    "text": "Under uniform per-module hardware value and full replacement of every visible or missing module, visible module fraction equals a same-unit module-hardware material replacement proxy DR.",
+    "type": "governance_assumption",
+    "source_ids": [
+     "TCWS-S020",
+     "TCWS-S021",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "v1 ordinate bridge derivation",
+    "tier": "T4",
+    "parameter_or_rule": "uniform_value_and_full_replacement_bridge",
+    "status": "adopt_with_limits",
+    "update_trigger": "Disposition or module-level value evidence replaces either assumption."
+   },
+   {
+    "id": "TCWS-C104",
+    "text": "The source x field is the dataset-reported event maximum gust in m/s; provider, station, height, averaging period, exposure, and query semantics are not pinned for the full manual multi-hurricane cohort.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCWS-S020",
+     "TCWS-S021"
+    ],
+    "locator": "manual CSV max_wind_gust_(m/s) and data-description weather notes",
+    "tier": "T1",
+    "parameter_or_rule": "hazard_axis",
+    "status": "adopt_with_limits",
+    "update_trigger": "The archive publishes exact full-cohort weather-query semantics or an approved bridge is validated."
+   },
+   {
+    "id": "TCWS-C105",
+    "text": "The runtime fit uses 34 source-cohort records from 17.4 through 39.1 m/s.",
+    "type": "derived_result",
+    "source_ids": [
+     "TCWS-S020",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "ground and tracking=false; x<=39.1 filter",
+    "tier": "T3",
+    "parameter_or_rule": "fit_population_and_range",
+    "status": "adopt",
+    "update_trigger": "A sufficiently populated tail dataset supports a revised range."
+   },
+   {
+    "id": "TCWS-C106",
+    "text": "The one 48.2 m/s source-cohort record has visible damage fraction 0.4142383192 and is audit-only.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCWS-S020"
+    ],
+    "locator": "manual CSV source cohort sparse-tail record",
+    "tier": "T1",
+    "parameter_or_rule": "sparse_tail_audit",
+    "status": "withhold_runtime",
+    "update_trigger": "Additional architecture-matched observations close the gap and tail."
+   },
+   {
+    "id": "TCWS-C107",
+    "text": "The runtime curve is an unweighted site-level monotone PAVA fit linearized at pooled-block edges.",
+    "type": "method_decision",
+    "source_ids": [
+     "TCWS-S020",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "FIT_SUFFICIENT_STATISTICS and derivation script",
+    "tier": "T3",
+    "parameter_or_rule": "fit_method",
+    "status": "historical_scope_only",
+    "update_trigger": "A reviewed cluster-aware predictive method supersedes the screening fit."
+   },
+   {
+    "id": "TCWS-C108",
+    "text": "No curve-intrinsic uncertainty distribution is carried.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S020",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "FIT_EVENT_SENSITIVITY_tropical_cyclone_wind_solar__model_v1_0__docs_r1.csv",
+    "tier": "T4",
+    "parameter_or_rule": "uncertainty_status",
+    "status": "withhold",
+    "update_trigger": "A hierarchical event-aware uncertainty model passes review."
+   },
+   {
+    "id": "TCWS-C109",
+    "text": "The observed site fraction already contains realized spatial extent and must not be multiplied by a second array exposure fraction.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S003",
+     "TCWS-S020",
+     "TCWS-S021"
+    ],
+    "locator": "source endpoint definition",
+    "tier": "T3",
+    "parameter_or_rule": "exposure_rule",
+    "status": "adopt",
+    "update_trigger": "A future local-demand model changes the response grain."
+   },
+   {
+    "id": "TCWS-C110",
+    "text": "The source does not isolate pure aerodynamic uplift from cascade or debris-related visible module loss.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "TCWS-S003",
+     "TCWS-S020",
+     "TCWS-S021"
+    ],
+    "locator": "paper discussion and dataset fields",
+    "tier": "T3",
+    "parameter_or_rule": "causal_scope_acknowledgement",
+    "status": "adopt_with_limits",
+    "update_trigger": "Mechanism-labeled event observations become available."
+   },
+   {
+    "id": "TCWS-C111",
+    "text": "Tracker modules and tracker SBOS are unsupported by this curve.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S006",
+     "TCWS-S020"
+    ],
+    "locator": "manual cohort has only two ground tracking=true records",
+    "tier": "T2",
+    "parameter_or_rule": "architecture_selector",
+    "status": "historical_scope_only",
+    "update_trigger": "A qualified tracker dataset passes the full evidence chain."
+   },
+   {
+    "id": "TCWS-C112",
+    "text": "Racking, foundations, power conversion, collection, GSU, SCADA, civil, fieldwork, logistics, and hidden damage remain withheld rather than zero.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S003",
+     "TCWS-S006",
+     "TCWS-S020",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "failure-unit coverage audit",
+    "tier": "T4",
+    "parameter_or_rule": "partial_coverage",
+    "status": "historical_scope_only",
+    "update_trigger": "Failure-unit-specific evidence and value chains pass review."
+   },
+   {
+    "id": "TCWS-C113",
+    "text": "Scenario dollar loss and all annual or tail metrics are withheld before canonical promotion.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S013",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "capability and value-linkage gate",
+    "tier": "T4",
+    "parameter_or_rule": "loss_capability",
+    "status": "historical_scope_only",
+    "update_trigger": "Canonical promotion plus exact site module-hardware value and consumer validation."
+   },
+   {
+    "id": "TCWS-C114",
+    "text": "Raw DOI files are hash-pinned but not redistributed in-repository because the archive metadata reports no license.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S020",
+     "TCWS-S021"
+    ],
+    "locator": "DOI resource metadata and pinned file hashes",
+    "tier": "T4",
+    "parameter_or_rule": "source_file_handling",
+    "status": "adopt",
+    "update_trigger": "The archive supplies a compatible license or written permission."
+   },
+   {
+    "id": "TCWS-C115",
+    "text": "Ceferino Supplementary Table 2 and Perry report materially different damage percentages at four apparent coordinate-nearest Caribbean matches and must not be pooled as one measurement system.",
+    "type": "cross_source_discrepancy",
+    "source_ids": [
+     "TCWS-S003",
+     "TCWS-S020",
+     "TCWS-S022"
+    ],
+    "locator": "CROSS_METHOD_MATCH_AUDIT_tropical_cyclone_wind_solar__model_v1_0__docs_r1.csv; Ceferino Supplementary Table 2 p. 4; Perry aggregate CSV lines 7, 74, 242, 257",
+    "tier": "T3",
+    "parameter_or_rule": "cross_method_same_event_endpoint_challenge",
+    "status": "adopt_as_limitation",
+    "update_trigger": "A reconciled site-level adjudication establishes shared identity and common endpoint semantics."
+   },
+   {
+    "id": "TCWS-C116",
+    "text": "Under the strict evidence-earned economic-DR gate, current evidence supports a docs-only v0.1 update rather than a numerical model v1.",
+    "type": "independent_review_finding",
+    "source_ids": [
+     "TCWS-S020",
+     "TCWS-S021",
+     "TCWS-S022",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "independent primary-source and repo audits dated 2026-07-29",
+    "tier": "T4",
+    "parameter_or_rule": "strict_gate_outcome",
+    "status": "adopt_as_limitation",
+    "update_trigger": "All strict promotion gates pass."
+   },
+   {
+    "id": "TCWS-C117",
+    "text": "The released manual CSV has 47 rows and omits the paper-described site_type field, so the governed cohort follows the released file rather than the paper's narrative count/schema.",
+    "type": "source_release_discrepancy",
+    "source_ids": [
+     "TCWS-S003",
+     "TCWS-S020"
+    ],
+    "locator": "paper Methods/Data Availability compared with manual CSV header and row count",
+    "tier": "T1",
+    "parameter_or_rule": "source_release_schema_qa",
+    "status": "adopt_as_limitation",
+    "update_trigger": "Authors publish a corrected/versioned data release and change log."
+   },
+   {
+    "id": "TCWS-C118",
+    "text": "Ceferino's paper defines extensive failure using a strict greater-than-50-percent threshold, but Supplementary Table 2 contains one site at exactly 50 percent: the table yields 4/14 under greater-than 50 percent, while the reported 36 percent corresponds to 5/14 only when 50 percent is included.",
+    "type": "source_internal_threshold_discrepancy",
+    "source_ids": [
+     "TCWS-S002",
+     "TCWS-S022"
+    ],
+    "locator": "paper Section 2.1 and Supplementary Table 2 p. 4",
+    "tier": "T1",
+    "parameter_or_rule": "ceferino_binary_endpoint_reproduction",
+    "status": "adopt_as_limitation",
+    "update_trigger": "Authors publish a corrected threshold, exact binary labels, or a site-level calibration table."
+   },
+   {
+    "id": "TCWS-C201",
+    "text": "Perry identifies Visual Crossing API as the study-level hurricane maximum-gust provider, while the released row-level station, product, query, duration, height, exposure, retrieval-version, time-of-maximum, and uncertainty lineage remains unresolved.",
+    "type": "source_semantics_correction",
+    "source_ids": [
+     "TCWS-S003",
+     "TCWS-S020",
+     "TCWS-S023",
+     "TCWS-S024"
+    ],
+    "locator": "Perry Figure 3 journal p. 1015; released manual CSV schema; Visual Crossing wind and historical-construction documentation",
+    "tier": "T3",
+    "parameter_or_rule": "perry_axis_provider_wording",
+    "status": "adopt",
+    "update_trigger": "Archived author request/response records and station contributors are released."
+   },
+   {
+    "id": "TCWS-C202",
+    "text": "No portable identity or fixed-factor bridge is supported between Hazard's modeled 3-second gust object and the Perry dataset-reported event maximum gust.",
+    "type": "axis_bridge_decision",
+    "source_ids": [
+     "TCWS-S003",
+     "TCWS-S005",
+     "TCWS-S020",
+     "TCWS-S023",
+     "TCWS-S024",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "axis audit dated 2026-07-29 and consumer handoff comparison",
+    "tier": "T4",
+    "parameter_or_rule": "hazard_to_perry_axis_bridge",
+    "status": "withhold",
+    "update_trigger": "A versioned paired reconstruction and held-out transfer validation pass review."
+   },
+   {
+    "id": "TCWS-C203",
+    "text": "Paper and released manual-data inconsistencies include 48 versus 47 sites, one Florence count difference, differing event-window end dates, and a combined Irma/Maria narrative whose manual rows are Maria-labeled with a Maria-only window.",
+    "type": "source_release_discrepancy",
+    "source_ids": [
+     "TCWS-S003",
+     "TCWS-S020"
+    ],
+    "locator": "paper Methods and Figures 3-5 compared with pinned manual CSV",
+    "tier": "T1",
+    "parameter_or_rule": "event_window_lineage_qa",
+    "status": "adopt_as_limitation",
+    "update_trigger": "Authors publish a corrected versioned release and change log."
+   },
+   {
+    "id": "TCWS-C204",
+    "text": "Typhoon Mawar ground fixed-tilt observations provide a severe-event audit but do not support a Perry tail fit or a generic gust-only solar curve.",
+    "type": "external_severe_audit",
+    "source_ids": [
+     "TCWS-S025"
+    ],
+    "locator": "report pp. 9-12 and Figure A-2 p. 78",
+    "tier": "T3",
+    "parameter_or_rule": "severe_tail_external_audit",
+    "status": "adopt_as_limitation",
+    "update_trigger": "Architecture-matched raw data and a qualified common wind axis become available."
+   },
+   {
+    "id": "TCWS-C205",
+    "text": "Mawar's report contains conflicting ground-module damage counts and some inconsistent site wind summaries, so its rows remain audit-only pending clarification.",
+    "type": "source_internal_discrepancy",
+    "source_ids": [
+     "TCWS-S025"
+    ],
+    "locator": "Table 1, Table 7, Figure A-2, and Dandan detailed assessment",
+    "tier": "T1",
+    "parameter_or_rule": "mawar_numerical_ingestion_gate",
+    "status": "withhold",
+    "update_trigger": "Authors or repository publish corrected machine-readable data."
+   },
+   {
+    "id": "TCWS-C206",
+    "text": "Typhoon Yagi's regional satellite-area loss and generic unit-area cost are not compatible with the Perry failure unit or the repository economic DR ordinate.",
+    "type": "cross_source_endpoint_decision",
+    "source_ids": [
+     "TCWS-S026",
+     "TCWS-S027"
+    ],
+    "locator": "Methods Sections 2.1.2, 2.2.3-2.2.4, Eq. 8, results, and limitations",
+    "tier": "T3",
+    "parameter_or_rule": "yagi_transfer_rule",
+    "status": "audit_only",
+    "update_trigger": "Architecture-resolved inspection and cost/value records are released."
+   },
+   {
+    "id": "TCWS-C207",
+    "text": "Current evidence does not support a tracker route, fixed-to-tracker fallback, or generic stow credit.",
+    "type": "architecture_release_decision",
+    "source_ids": [
+     "TCWS-S006",
+     "TCWS-S020",
+     "TCWS-S025",
+     "TCWS-S038",
+     "TCWS-S039"
+    ],
+    "locator": "Perry tracker count; Mawar tracker section; OEM cases",
+    "tier": "T4",
+    "parameter_or_rule": "tracker_route_status",
+    "status": "historical_scope_only",
+    "update_trigger": "A multi-event tracker cohort closes demand, attained state, inspection, disposition, and economics."
+   },
+   {
+    "id": "TCWS-C208",
+    "text": "FPL's reported fleet panel damage or replacement fractions are censored occurrence-count observations, not economic damage ratios or site fragility points.",
+    "type": "field_occurrence_boundary",
+    "source_ids": [
+     "TCWS-S028",
+     "TCWS-S030",
+     "TCWS-S031"
+    ],
+    "locator": "FPL Jarro Ian and Milton testimony and Helene/Milton testimony",
+    "tier": "T1",
+    "parameter_or_rule": "fleet_panel_fraction_use",
+    "status": "adopt_with_limits",
+    "update_trigger": "Event/site/component records with exact denominators and wind are supplied."
+   },
+   {
+    "id": "TCWS-C209",
+    "text": "Regulatory restoration schedules show that contractor, logistics, labor, material, vehicle, inspection, and civil scopes can be material and must be separated and allocated once.",
+    "type": "cost_scope_boundary",
+    "source_ids": [
+     "TCWS-S028",
+     "TCWS-S029",
+     "TCWS-S030"
+    ],
+    "locator": "FPL restoration testimony and cost exhibits",
+    "tier": "T3",
+    "parameter_or_rule": "support_allocation_rule",
+    "status": "adopt",
+    "update_trigger": "Failure-unit-linked work orders and an approved allocation ledger become available."
+   },
+   {
+    "id": "TCWS-C210",
+    "text": "FEMA field cases support architecture-specific module, post, purlin, connector, and rack physical states but not same-unit economic DR.",
+    "type": "physical_occurrence_evidence",
+    "source_ids": [
+     "TCWS-S032"
+    ],
+    "locator": "USVI MAT Sections 7.1.2-7.1.3",
+    "tier": "T1",
+    "parameter_or_rule": "fixed_structure_occurrence_use",
+    "status": "adopt_with_limits",
+    "update_trigger": "Owner/adjuster cost and value schedules join to the inspected units."
+   },
+   {
+    "id": "TCWS-C211",
+    "text": "Owner records document removal, redesign, limited repair, and electrical replacement outcomes, but redesign and compound electrical damage prevent like-kind wind DR calibration.",
+    "type": "owner_disposition_evidence",
+    "source_ids": [
+     "TCWS-S033",
+     "TCWS-S034"
+    ],
+    "locator": "BMR project Context and Process sections",
+    "tier": "T1",
+    "parameter_or_rule": "terminal_disposition_context",
+    "status": "adopt_with_limits",
+    "update_trigger": "Itemized same-unit work orders and pre-event replacement values are released."
+   },
+   {
+    "id": "TCWS-C212",
+    "text": "Plant-level SEC loss estimates and availability statements are materiality evidence but prohibited economic-DR numerators.",
+    "type": "economic_scope_boundary",
+    "source_ids": [
+     "TCWS-S035"
+    ],
+    "locator": "AES 2017 Q3 Form 10-Q specified lines",
+    "tier": "T1",
+    "parameter_or_rule": "plant_loss_estimate_use",
+    "status": "audit_only",
+    "update_trigger": "Audited direct physical cost and event-date replacement value are disclosed separately."
+   },
+   {
+    "id": "TCWS-C213",
+    "text": "DOE/FEMP forensic cases extend physical coverage to modules, racks, conduit, inverters, switchgear, transformers, and compound water pathways without closing numerical economic response.",
+    "type": "multi_failure_unit_evidence",
+    "source_ids": [
+     "TCWS-S036"
+    ],
+    "locator": "in-person assessment and failure analysis PDF pp. 9-15",
+    "tier": "T1",
+    "parameter_or_rule": "secondary_failure_unit_status",
+    "status": "adopt_with_limits",
+    "update_trigger": "Pathway-separated component work orders and values are supplied."
+   },
+   {
+    "id": "TCWS-C214",
+    "text": "NLR/NREL BOM and hardening-cost evidence supports value anatomy and selectors only, not occurrence vulnerability or repair savings.",
+    "type": "value_method_boundary",
+    "source_ids": [
+     "TCWS-S013",
+     "TCWS-S037"
+    ],
+    "locator": "Q1-2025 value source and NREL severe-weather Tables 1-2",
+    "tier": "T2",
+    "parameter_or_rule": "benchmark_value_use",
+    "status": "adopt_with_limits",
+    "update_trigger": "Site-specific event-date replacement values and outcome data are provided."
+   },
+   {
+    "id": "TCWS-C215",
+    "text": "Every generic fixed, tracker, support-structure, foundation, electrical, GSU, SCADA, civil, and support numerical route remains withheld in docs r2.",
+    "type": "coverage_release_decision",
+    "source_ids": [
+     "TCWS-S025",
+     "TCWS-S028",
+     "TCWS-S030",
+     "TCWS-S032",
+     "TCWS-S036",
+     "TCWS-S040",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "docs-r2 failure-unit gap matrix",
+    "tier": "T4",
+    "parameter_or_rule": "expanded_failure_unit_release_status",
+    "status": "historical_scope_only",
+    "update_trigger": "A failure-unit-specific evidence package passes every promotion gate."
+   },
+   {
+    "id": "TCWS-C216",
+    "text": "Strong-wind solar work is reusable for anatomy, demand framing, selectors, value ledgers, dependency rules, evaluators, and KAT structure, but not for numerical tropical-cyclone response.",
+    "type": "cross_cell_reuse_decision",
+    "source_ids": [
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "docs-r2 reuse blueprint and neighboring strong_wind_solar package",
+    "tier": "T4",
+    "parameter_or_rule": "strong_wind_reuse_scope",
+    "status": "historical_scope_only",
+    "update_trigger": "A qualified cross-hazard transfer study passes independent review."
+   },
+   {
+    "id": "TCWS-C217",
+    "text": "The deep-curation result is an evidence-only docs-r2 revision; model v1.1 and model v2.0 are not earned and docs-r1 runtime behavior remains unchanged.",
+    "type": "versioning_decision",
+    "source_ids": [
+     "TCWS-S020",
+     "TCWS-S023",
+     "TCWS-S025",
+     "TCWS-S028",
+     "TCWS-S032",
+     "TCWS-S036",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "change classification and deep-curation decision dated 2026-07-29",
+    "tier": "T4",
+    "parameter_or_rule": "version_action",
+    "status": "historical_scope_only",
+    "update_trigger": "An output-bearing evidence package passes review and is classified separately."
+   },
+   {
+    "id": "TCWS-C218",
+    "text": "The minimum v2 package requires portable local wind, exact architecture and attained state, affected and unaffected inspections, terminal disposition, same-unit direct cost and replacement value, separated support, and compound-pathway attribution.",
+    "type": "acquisition_requirement",
+    "source_ids": [
+     "TCWS-S025",
+     "TCWS-S028",
+     "TCWS-S030",
+     "TCWS-S032",
+     "TCWS-S036",
+     "TCWS-S038",
+     "TCWS-S040",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "docs-r2 v2 acquisition blueprint",
+    "tier": "T4",
+    "parameter_or_rule": "v2_minimum_evidence_package",
+    "status": "adopt",
+    "update_trigger": "The package is acquired, validated, and independently reviewed."
+   },
+   {
+    "id": "TCWS-C219",
+    "text": "No interpolation, monotonicity, selector, range, or evaluator defect was identified in the existing Perry source-specific screening atom within its exact declared domain.",
+    "type": "independent_review_finding",
+    "source_ids": [
+     "TCWS-S003",
+     "TCWS-S020",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "docs-r1 validator and docs-r2 independent review synthesis",
+    "tier": "T4",
+    "parameter_or_rule": "existing_curve_internal_status",
+    "status": "adopt_with_limits",
+    "update_trigger": "A reproducibility defect or changed source artifact is found."
+   },
+   {
+    "id": "TCWS-C220",
+    "text": "The Perry PAVA fit is equal-record weighted rather than strictly unique-site weighted because at least one physical site recurs across storm records.",
+    "type": "source_cohort_dependence_finding",
+    "source_ids": [
+     "TCWS-S020"
+    ],
+    "locator": "manual CSV sites 7 and 14; coordinates, area, installation year, and event labels; docs-r2 independent source replay",
+    "tier": "T1",
+    "parameter_or_rule": "fit_weighting_interpretation",
+    "status": "adopt_as_limitation",
+    "update_trigger": "A governed unique-site/event identifier and cluster-aware refit replace the current cohort."
+   },
+   {
+    "id": "TCWS-C221",
+    "text": "The pinned PAVA is a reproducible finite-sample descriptive smoother, but no scientifically validated predictive relationship is established even for an unseen source-compatible site.",
+    "type": "predictive_validity_decision",
+    "source_ids": [
+     "TCWS-S003",
+     "TCWS-S020",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "manual convenience cohort, six-event cluster counts, leave-one-event sensitivity, repeated-site audit, and interpolation method",
+    "tier": "T4",
+    "parameter_or_rule": "predictive_use_status",
+    "status": "withhold",
+    "update_trigger": "Representative architecture-resolved event cohorts and event-held-out predictive validation pass review."
+   },
+   {
+    "id": "TCWS2-C001",
+    "text": "The requested v2 is a deliberate coverage-first synthetic Tier-4 exception, not an evidence-earned hurricane calibration.",
+    "type": "governance_decision",
+    "source_ids": [
+     "GOVERNANCE_CONTRACT",
+     "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION",
+     "NO_DIRECT_TC_CALIBRATION_SOURCE"
+    ],
+    "locator": "DECISION_LOG model-v2 docs-r1 § TCWS2-D001",
+    "tier": "T4",
+    "parameter_or_rule": "model_grade=experimental_synthetic_T4_scenario",
+    "status": "adopt",
+    "update_trigger": "Formal elicitation or matched field/claims calibration replaces the synthetic parameters."
+   },
+   {
+    "id": "TCWS2-C002",
+    "text": "Model v2.0 is a major behavior change because it adds architecture-specific normalized-demand routes and generic fixed/tracker failure-unit outputs.",
+    "type": "governance_decision",
+    "source_ids": [
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "CHANGE_CLASSIFICATION model-v2 docs-r1 § Why this is a major model change",
+    "tier": "T4",
+    "parameter_or_rule": "semantic_damage_model_version=model v2.0",
+    "status": "adopt",
+    "update_trigger": "Version policy or runtime behavior changes."
+   },
+   {
+    "id": "TCWS2-C003",
+    "text": "The Perry 13-knot source route is carried byte-for-value and remains source specific.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S020",
+     "TCWS-S021"
+    ],
+    "locator": "derivation dossier §12 Perry preservation",
+    "tier": "T3",
+    "parameter_or_rule": "Perry_compatibility_route",
+    "status": "adopt",
+    "update_trigger": "The Perry source package or v1 governed fit changes."
+   },
+   {
+    "id": "TCWS2-C004",
+    "text": "A failure-state probability becomes DR only through explicit exact-state probabilities and separately listed same-unit state-cost ratios.",
+    "type": "governance_decision",
+    "source_ids": [
+     "GOVERNANCE_CONTRACT",
+     "NO_DIRECT_TC_CALIBRATION_SOURCE"
+    ],
+    "locator": "derivation dossier §8 Curve form and probability-to-DR typing",
+    "tier": "T4",
+    "parameter_or_rule": "sum_state_probability_times_cost_ratio",
+    "status": "adopt",
+    "update_trigger": "Observed same-unit state costs replace the T4 ratios."
+   },
+   {
+    "id": "TCWS2-C005",
+    "text": "All generic beta, medians, and state cost ratios are synthetic T4 assumptions.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION",
+     "NO_DIRECT_TC_CALIBRATION_SOURCE"
+    ],
+    "locator": "derivation dossier §§7-9 and parameter-tier register TCWS2 curve rows",
+    "tier": "T4",
+    "parameter_or_rule": "generic_curve_parameters",
+    "status": "adopt",
+    "update_trigger": "Calibration or structured elicitation is completed."
+   },
+   {
+    "id": "TCWS2-C006",
+    "text": "After the cell-local T4 values are adopted, the shared profile provides an audit-only cross-hazard comparison fingerprint.",
+    "type": "governance_decision",
+    "source_ids": [
+     "SHARED_SOLAR_WIND_PROXY_V0_1",
+     "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION",
+     "TCWS-S015",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "DECISION_LOG model-v2 docs-r1 § TCWS2-D003",
+    "tier": "T4",
+    "parameter_or_rule": "audit_comparison_profile_only",
+    "status": "adopt",
+    "update_trigger": "A formal equivalence or hazard-specific response calibration changes the reuse decision."
+   },
+   {
+    "id": "TCWS2-C007",
+    "text": "Historical v0.1/v1 claims remain source-version facts and are scoped by the complete v2 supersession map.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "CLAIM_SUPERSESSION_MAP model-v2 docs-r1 complete file",
+    "tier": "T4",
+    "parameter_or_rule": "historical_claim_scope",
+    "status": "adopt",
+    "update_trigger": "A later model version explicitly replaces the map."
+   },
+   {
+    "id": "TCWS2-C008",
+    "text": "Fixed tilt requires a qualified same-zone TC event/design pressure ratio or a fully bridged array-height speed-squared proxy.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S005",
+     "TCWS-S010",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "derivation dossier §6.1 Fixed tilt",
+    "tier": "T3",
+    "parameter_or_rule": "fixed_axis_contract",
+    "status": "adopt",
+    "update_trigger": "A validated direct local-demand adapter replaces the proxy."
+   },
+   {
+    "id": "TCWS2-C009",
+    "text": "Tracker evaluation requires exact-system Ucrit and attained state matched to the qualification basis.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S006",
+     "TCWS-S007",
+     "TCWS-S011",
+     "TCWS-S012"
+    ],
+    "locator": "derivation dossier §6.2 Tracker and metadata contract tracker request",
+    "tier": "T2",
+    "parameter_or_rule": "tracker_axis_contract",
+    "status": "adopt",
+    "update_trigger": "Architecture-matched TC tracker calibration becomes available."
+   },
+   {
+    "id": "TCWS2-C010",
+    "text": "The 0.75 Ucrit rule is an operational-action flag and never a damage threshold.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S006"
+    ],
+    "locator": "metadata contract § Tracker route",
+    "tier": "T2",
+    "parameter_or_rule": "stow_action_flag",
+    "status": "adopt",
+    "update_trigger": "A source calibrates damage conditional on the action threshold."
+   },
+   {
+    "id": "TCWS2-C011",
+    "text": "Generic ordered-state curves have exact zero only at zero normalized demand and no positive hard-zero threshold.",
+    "type": "governance_decision",
+    "source_ids": [
+     "GOVERNANCE_CONTRACT",
+     "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION"
+    ],
+    "locator": "DECISION_LOG model-v2 docs-r1 § TCWS2-D005",
+    "tier": "T4",
+    "parameter_or_rule": "zero_demand_boundary",
+    "status": "adopt",
+    "update_trigger": "A calibrated physical threshold is adopted."
+   },
+   {
+    "id": "TCWS2-C012",
+    "text": "Unsupported physical units remain null, not zero.",
+    "type": "governance_decision",
+    "source_ids": [
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "DECISION_LOG model-v2 docs-r1 § TCWS2-D006",
+    "tier": "T4",
+    "parameter_or_rule": "withhold_not_zero",
+    "status": "adopt",
+    "update_trigger": "Each unit receives a governed curve or an evidence-backed near-zero treatment."
+   },
+   {
+    "id": "TCWS2-C013",
+    "text": "PV_GSU_SUBSTATION is a separately located yard/point unit and inherits neither array DR nor exposure.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S004",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "DECISION_LOG model-v2 docs-r1 § TCWS2-D008",
+    "tier": "T3",
+    "parameter_or_rule": "GSU_withholding",
+    "status": "adopt",
+    "update_trigger": "Matched TC-wind GSU demand, disposition, cost, and value evidence arrives."
+   },
+   {
+    "id": "TCWS2-C014",
+    "text": "Scenario dollars and whole-plant DR remain withheld even for valid generic curves.",
+    "type": "governance_decision",
+    "source_ids": [
+     "GOVERNANCE_CONTRACT",
+     "NO_DIRECT_TC_CALIBRATION_SOURCE"
+    ],
+    "locator": "derivation dossier §13 Capability and reportability",
+    "tier": "T4",
+    "parameter_or_rule": "scenario_loss_withheld",
+    "status": "historical_scope_only",
+    "update_trigger": "Same-unit state costs, values, exposure, support, and full coverage pass review."
+   },
+   {
+    "id": "TCWS2-C015",
+    "text": "TC duration, direction evolution, cycling, rain, debris, tornado, flood, and surge have no numerical modifier in v2.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS-S004",
+     "TCWS-S025",
+     "TCWS-S026",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "neighboring-wind and compound-boundary memo § Compound occurrence",
+    "tier": "T3",
+    "parameter_or_rule": "conditioner_and_compound_boundary",
+    "status": "adopt",
+    "update_trigger": "Pathway-specific calibration and precedence rules pass review."
+   },
+   {
+    "id": "TCWS2-C016",
+    "text": "The old legacy asset DR is denominator- and coverage-incompatible with v2 failure-unit DR.",
+    "type": "governance_decision",
+    "source_ids": [
+     "LEG-TCWS-001",
+     "LEG-TCWS-002",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "legacy and adjacent-model audit § Legacy hurricane-solar implementation",
+    "tier": "T4",
+    "parameter_or_rule": "old_new_comparison_rule",
+    "status": "adopt",
+    "update_trigger": "A common scenario assembly with complete coverage is governed."
+   },
+   {
+    "id": "TCWS2-C017",
+    "text": "The v2 artifact remains absent from current/, the artifact index, package releases, and Hazard cutover.",
+    "type": "governance_decision",
+    "source_ids": [
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "DECISION_LOG model-v2 docs-r1 § TCWS2-D009",
+    "tier": "T4",
+    "parameter_or_rule": "promotion_status",
+    "status": "adopt",
+    "update_trigger": "Every promotion gate and maintainer decision closes."
+   },
+   {
+    "id": "TCWS2-C018",
+    "text": "The v2 supersession map is mandatory provenance for every consolidated historical claim whose output or version conclusion differs in v2.",
+    "type": "governance_decision",
+    "source_ids": [
+     "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "CLAIM_SUPERSESSION_MAP model-v2 docs-r1 complete file",
+    "tier": "T4",
+    "parameter_or_rule": "claim_supersession_map_required",
+    "status": "adopt",
+    "update_trigger": "The consolidated-register format gains native version-scope and supersession fields."
+   },
+   {
+    "id": "TCWS21-C001",
+    "text": "A screening v2 must return a complete physical-damage view rather than convert unsupported value to zero or leave the requested plant output unavailable.",
+    "type": "governed_model_decision",
+    "source_ids": [
+     "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION"
+    ],
+    "locator": "DECISION_LOG_tropical_cyclone_wind_solar__model_v2_1__docs_r2.md#decision-1",
+    "tier": "T4",
+    "parameter_or_rule": "coverage_complete_screening_contract",
+    "status": "adopted_model_v2_1",
+    "update_trigger": "replace proxies when matched unit-level TC evidence or elicitation is available"
+   },
+   {
+    "id": "TCWS21-C002",
+    "text": "The named NLR physical-value profile reconciles 100% of the 877.7957023626668 USD/kWdc physical replacement basis when direct/civil units and support-once value are assembled.",
+    "type": "reproducible_value_reconciliation",
+    "source_ids": [
+     "TCWS2-S013"
+    ],
+    "locator": "docs/method/value_basis/solar_wind_value_breakdown.xlsx::Solar_Map rows 2-17",
+    "tier": "T2",
+    "parameter_or_rule": "reference_value_profile",
+    "status": "adopted_model_v2_1",
+    "update_trigger": "governed site-specific value profile or updated benchmark"
+   },
+   {
+    "id": "TCWS21-C003",
+    "text": "Foundation, power/collection, GSU, SCADA, and civil infrastructure each return an explicit Tier-4 same-unit screening DR on the qualified site-facility wind-demand axis.",
+    "type": "governed_model_decision",
+    "source_ids": [
+     "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION"
+    ],
+    "locator": "DECISION_LOG_tropical_cyclone_wind_solar__model_v2_1__docs_r2.md#decision-2",
+    "tier": "T4",
+    "parameter_or_rule": "common_failure_unit_numeric_coverage",
+    "status": "adopted_model_v2_1",
+    "update_trigger": "matched unit-level TC evidence or formal elicitation replaces a proxy record"
+   },
+   {
+    "id": "TCWS21-C004",
+    "text": "Replacement support is allocated exactly once using the value-weighted direct-and-civil DR; it is not an intrinsic independently damaged unit.",
+    "type": "governed_assembly_rule",
+    "source_ids": [
+     "GOVERNANCE_CONTRACT",
+     "TCWS2-S013"
+    ],
+    "locator": "DECISION_LOG_tropical_cyclone_wind_solar__model_v2_1__docs_r2.md#decision-3",
+    "tier": "T4",
+    "parameter_or_rule": "replacement_support_allocate_once",
+    "status": "adopted_model_v2_1",
+    "update_trigger": "a governed support-cost allocation model supersedes the screening rule"
+   },
+   {
+    "id": "TCWS21-C005",
+    "text": "Model v2.1 supports failure-unit DR, full-plant physical replacement DR, physical loss per kWdc, installed-capex physical loss fraction, and scenario physical dollars when capacity is supplied.",
+    "type": "runtime_output_contract",
+    "source_ids": [
+     "GOVERNANCE_CONTRACT",
+     "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION"
+    ],
+    "locator": "tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json::emit_contract",
+    "tier": "T4",
+    "parameter_or_rule": "v2_1_supported_outputs",
+    "status": "adopted_model_v2_1",
+    "update_trigger": "a governed output-contract revision changes the supported result set"
+   }
+  ],
+  "parameters": [
+   {
+    "id": "Perry source curve and range",
+    "name": "Perry source curve and range",
+    "value": "unchanged 13 knots, 17.4-39.1 m/s",
+    "tier": "T1",
+    "source_ids": [
+     "TCWS-S020",
+     "TCWS-S021"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": null,
+    "update_trigger": null
+   },
+   {
+    "id": "generic ordered-state form",
+    "name": "generic ordered-state form",
+    "value": "ordered_damage_state_lognormal",
+    "tier": "T4",
+    "source_ids": [
+     "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": null,
+    "update_trigger": null
+   },
+   {
+    "id": "all generic beta, medians, and state cost ratios",
+    "name": "all generic beta, medians, and state cost ratios",
+    "value": "see curve records",
+    "tier": "T4",
+    "source_ids": [
+     "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION",
+     "NO_DIRECT_TC_CALIBRATION_SOURCE"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": null,
+    "update_trigger": null
+   },
+   {
+    "id": "hard-zero treatment",
+    "name": "hard-zero treatment",
+    "value": "exact zero only at zero normalized demand; no positive hard-zero threshold",
+    "tier": "T4",
+    "source_ids": [
+     "GOVERNANCE_CONTRACT"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": null,
+    "update_trigger": null
+   },
+   {
+    "id": "scenario loss",
+    "name": "scenario loss",
+    "value": "withheld",
+    "tier": "T4",
+    "source_ids": [
+     "GOVERNANCE_CONTRACT"
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": null,
+    "update_trigger": null
+   }
+  ],
+  "parameters_plain": [
+   {
+    "id": "Perry source curve and range",
+    "name": "Perry source curve and range",
+    "raw_name": "Perry source curve and range",
+    "value_text": "unchanged 13 knots, 17.4-39.1 m/s",
+    "tier": "T1",
+    "tier_word": "field-calibrated",
+    "sources": [
+     {
+      "id": "TCWS-S020",
+      "title": "NLR/NREL. Satellite Imagery of PV Site Storm Damage. Dataset DOI 10.21948/2562917 (2025).",
+      "link": "https://www.osti.gov/biblio/2562917",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "TCWS-S021",
+      "title": "NLR/NREL. Extreme Weather Data Description, file in Satellite Imagery of PV Site Storm Damage dataset DOI…",
+      "link": "https://www.osti.gov/biblio/2562917",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": null,
+    "update_trigger": null,
+    "role": null
+   },
+   {
+    "id": "generic ordered-state form",
+    "name": "generic ordered-state form",
+    "raw_name": "generic ordered-state form",
+    "value_text": "ordered_damage_state_lognormal",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION",
+      "title": "Damage Modeling owner decision: TC-wind x solar model-v2 cell-local synthetic parameter set.",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": null,
+    "update_trigger": null,
+    "role": null
+   },
+   {
+    "id": "all generic beta, medians, and state cost ratios",
+    "name": "all generic beta, medians, and state cost ratios",
+    "raw_name": "all generic beta, medians, and state cost ratios",
+    "value_text": "see curve records",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION",
+      "title": "Damage Modeling owner decision: TC-wind x solar model-v2 cell-local synthetic parameter set.",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+      "link_kind": "repo_file",
+      "resolved": true
+     },
+     {
+      "id": "NO_DIRECT_TC_CALIBRATION_SOURCE",
+      "title": "TC-wind x solar model-v2 bounded evidence review: no direct generic fixed/tracker calibration source adopted.",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": null,
+    "update_trigger": null,
+    "role": null
+   },
+   {
+    "id": "hard-zero treatment",
+    "name": "hard-zero treatment",
+    "raw_name": "hard-zero treatment",
+    "value_text": "exact zero only at zero normalized demand; no positive hard-zero threshold",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "GOVERNANCE_CONTRACT",
+      "title": "Damage Modeling repository governance: method standards, contracts, and damage-curve skill controls.",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/standards/00_index.md",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": null,
+    "update_trigger": null,
+    "role": null
+   },
+   {
+    "id": "scenario loss",
+    "name": "scenario loss",
+    "raw_name": "scenario loss",
+    "value_text": "withheld",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "GOVERNANCE_CONTRACT",
+      "title": "Damage Modeling repository governance: method standards, contracts, and damage-curve skill controls.",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/standards/00_index.md",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": null,
+    "reasoning": null,
+    "update_trigger": null,
+    "role": null
+   }
+  ],
+  "evidence_provenance": {
+   "kind": "register",
+   "sheets": [],
+   "sections": [],
+   "unmatched": [],
+   "sentence": null,
+   "dossier": null,
+   "workbook": null
+  },
+  "link_counts": {
+   "total": 70,
+   "linked": 70,
+   "locator_only": 0,
+   "neither": 0,
+   "markers": 1,
+   "placeholders": 0
+  },
+  "extraction": null,
+  "tier_words": {
+   "shape": "borrowed and our judgment",
+   "cost": "our judgment"
+  }
+ },
  "build_findings": [
   {
    "check": "source_ids",

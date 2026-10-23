@@ -799,7 +799,7 @@
    "beyond_last_knot_from": 2.3
   },
   {
-   "label": "PCS · fresh · beyond the last knot (our judgment, T4)",
+   "label": "PCS · fresh · beyond the last knot (our judgment)",
    "kind": "line",
    "points": [
     [
@@ -884,7 +884,8 @@
  "row_notes": [
   {
    "type": "reused_from",
-   "text": "flood_solar v1.0 docs r4 (FS_INV inverter curve)"
+   "text": "flood_solar v1.0 docs r4 (FS_INV inverter curve)",
+   "raw": "flood_solar v1.0 docs r4 (FS_INV inverter curve)"
   }
  ],
  "selected_by": [
@@ -899,6 +900,105 @@
  "notes": [
   "Knots are the Flood × Solar inverter curve read on depth above the 0.3 m entry; shown here on depth above grade."
  ],
+ "caption": {
+  "what_it_says": "Separate PCS: no loss until water depth above local grade reaches about 0.32 m; damage then rises, passing half of full loss near 0.4 m, and reaches full replacement by 0.85 m. Beyond 2.3 m the line is continued at a damage ratio of 1 — our judgment, no data that far.",
+  "how_sure": {
+   "shape": {
+    "tier": "T3",
+    "word": "borrowed",
+    "basis": "Flood Solar inverter knots (borrowed); the entry offset, deep plateau and saline step are judgment-based"
+   },
+   "cost": {
+    "tier": "T3",
+    "word": "borrowed",
+    "basis": "Same-unit value $520,000 from market cost shares (borrowed)"
+   },
+   "parameters": "5 parameters: 2 borrowed and 3 our judgment",
+   "weakest": "T4",
+   "word": "borrowed"
+  },
+  "seen_in_field": {
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "state": "not_searched",
+   "href": "/occurrence/bess/flood",
+   "words": "nobody has looked yet"
+  },
+  "main_references": [
+   {
+    "text": "Hazard BESS reference r1: profile, layout and 2024 budget",
+    "ids": [
+     "BF-S01"
+    ],
+    "title": "Hazard BESS reference r1",
+    "link": null,
+    "link_kind": "hazard_branch",
+    "locator": "01_reference_profile_and_value.md; reference_budget.csv; layout.csv",
+    "no_link_sentence": "on a Hazard branch, not on its main yet",
+    "source_id": "BF-S01"
+   },
+   {
+    "text": "NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment",
+    "ids": [
+     "BF-S02"
+    ],
+    "title": "NEMA GD 1-2016 Evaluating Water-Damaged Electrical Equipment",
+    "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+    "link_kind": "url",
+    "locator": "Printed pp1-4 equipment table; pp5-8 sections 4.2.1 4.4 4.6 4.11 4.12; p4 table visually reviewed",
+    "no_link_sentence": null,
+    "source_id": "BF-S02"
+   },
+   {
+    "text": "Flood Solar model v1.0 docs r4 canonical artifact",
+    "ids": [
+     "BF-S06"
+    ],
+    "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link_kind": "repo_file",
+    "locator": "flood_solar__model_v1_0__docs_r4__curve_artifact.json; flood_solar_curve_derivation_dossier_v1_0.md",
+    "no_link_sentence": null,
+    "source_id": "BF-S06"
+   },
+   {
+    "text": "SMA MV Power Station with Sunny Central Storage system manual",
+    "ids": [
+     "BF-S12"
+    ],
+    "title": "SMA System Manual MV Power Station with Sunny Central Storage US; MVPS-S2-SCS-US-B8-SH-en-11",
+    "link": "https://files.sma.de/downloads/MVPS-S2-SCS-US-B8-SH-en-11.pdf",
+    "link_kind": "url",
+    "locator": "p22 environmental disturbance; p267 electronics/air/connection ratings; pp274-275 section17.5 and Fig99 visually checked",
+    "no_link_sentence": null,
+    "source_id": "BF-S12"
+   },
+   {
+    "text": "NREL PVSCM 2024 Q1 cost model, ESS rows",
+    "ids": [
+     "BF-S13"
+    ],
+    "title": "PVSCM 2024 Q1 archive; NLR data catalog DOI 10.7799/3007269",
+    "link": "https://data.nlr.gov/submissions/307",
+    "link_kind": "url",
+    "locator": "UPV 2024Q1.txt lines1-7 50-66 153 172-173; ESS rows and tariff factor; workbook ESS columns D-H inspected read-only",
+    "no_link_sentence": null,
+    "source_id": "BF-S13"
+   },
+   {
+    "text": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev2.8 2026-04-10",
+    "ids": [
+     "BF-S03"
+    ],
+    "title": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev2.8 2026-04-10",
+    "link": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
+    "link_kind": "url",
+    "locator": "Printed p2 scope; p17 firefighting; p18 shutdown/flood; p20 damaged product; p22 repair; p24 revision",
+    "no_link_sentence": null,
+    "source_id": "BF-S03"
+   }
+  ],
+  "references_from": "the entry's key sources, then the parameters' own"
+ },
  "title": "Flood × Battery storage",
  "asset": {
   "slug": "bess",
@@ -1051,6 +1151,217 @@
   "BF-S15",
   "BF-S16"
  ],
+ "sources_resolved": [
+  {
+   "id": "BF-S01",
+   "citation": "Hazard BESS reference r1; commit 23e1aac4d",
+   "url": "Hazard_modeling/docs/plans/_cross_cutting/bess_conus/",
+   "locator": "01_reference_profile_and_value.md; reference_budget.csv; layout.csv",
+   "role": "exposure_or_value",
+   "tier": "T3",
+   "permitted": "Selected canonical design and same-scope 2024-dollar value",
+   "prohibited": "Observed OEM design; ingress threshold; current appraisal",
+   "decision": "adopt reference only",
+   "accessed_on": null,
+   "provenance": "register",
+   "hazard": {
+    "path": "docs/plans/_cross_cutting/bess_conus",
+    "state": "on_branch",
+    "link": null,
+    "words": "on a Hazard branch, not on its main yet"
+   },
+   "doi": null,
+   "link": null,
+   "link_kind": "hazard_branch",
+   "title": "Hazard BESS reference r1",
+   "no_link_sentence": "on a Hazard branch, not on its main yet"
+  },
+  {
+   "id": "BF-S02",
+   "citation": "NEMA GD 1-2016 Evaluating Water-Damaged Electrical Equipment",
+   "url": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+   "locator": "Printed pp1-4 equipment table; pp5-8 sections 4.2.1 4.4 4.6 4.11 4.12; p4 table visually reviewed",
+   "role": "boundary_or_cap; mechanism_only",
+   "tier": "T2",
+   "permitted": "Water-damaged equipment consequence distinctions; manufacturer evaluation; water chemistry matters",
+   "prohibited": "External depth predicts internal ingress; all enclosure contents replaced; empirical DR ordinates",
+   "decision": "adopt conditional guidance; no numeric curve",
+   "accessed_on": null,
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+   "link_kind": "url",
+   "title": "NEMA GD 1-2016 Evaluating Water-Damaged Electrical Equipment",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BF-S03",
+   "citation": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev2.8 2026-04-10",
+   "url": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
+   "locator": "Printed p2 scope; p17 firefighting; p18 shutdown/flood; p20 damaged product; p22 repair; p24 revision",
+   "role": "mechanism_only",
+   "tier": "T3",
+   "permitted": "Utility product safety and damaged-product handling context",
+   "prohibited": "Generic LFP depth-cost relation; quantitative containment or flood efficacy; annual fire probability",
+   "decision": "adopt mechanism context only",
+   "accessed_on": null,
+   "provenance": "register",
+   "doi": null,
+   "link": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
+   "link_kind": "url",
+   "title": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev2.8 2026-04-10",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BF-S06",
+   "citation": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
+   "url": "damage_modeling/docs/cells/flood_solar/current/",
+   "locator": "flood_solar__model_v1_0__docs_r4__curve_artifact.json; flood_solar_curve_derivation_dossier_v1_0.md",
+   "role": "curve_form; boundary_or_cap",
+   "tier": "T3",
+   "permitted": "Pinned candidate electrical curves and exact native-axis response",
+   "prohibited": "Automatic BESS compatibility; empirical provenance for analyst ordinates",
+   "decision": "source reproduction complete; target qualification pending",
+   "accessed_on": null,
+   "provenance": "register",
+   "repo_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+   "doi": null,
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+   "link_kind": "repo_file",
+   "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BF-S09",
+   "citation": "Sungrow PowerTitan-ST2752UX System Manual; ST2752UX-SEN-Ver21-202204",
+   "url": "https://info-support.sungrowpower.com/application/pdf/2022/11/10/E049-ST2752UX-SEN-Ver21-202204-IEC.pdf",
+   "locator": "Printed pp8-13 internal anatomy and module data; pp25-26 foundation/drainage; p35 Fig5-1; p42 DC connections. PDF pages are printed+10.",
+   "role": "selector_archetype; mechanism_only",
+   "tier": "T3",
+   "permitted": "LFP modular internal anatomy and separate PCS architecture; distinct vulnerable assemblies",
+   "prohibited": "Exact r1 OEM match; universal entry elevation; numeric IP protection or replacement fraction",
+   "decision": "adopt anatomy; no numerical Flood response",
+   "accessed_on": null,
+   "provenance": "register",
+   "doi": null,
+   "link": "https://info-support.sungrowpower.com/application/pdf/2022/11/10/E049-ST2752UX-SEN-Ver21-202204-IEC.pdf",
+   "link_kind": "url",
+   "title": "Sungrow PowerTitan-ST2752UX System Manual; ST2752UX-SEN-Ver21-202204",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BF-S10",
+   "citation": "Rask et al.; NHTSA/Argonne DOT HS 813 136; Li-Ion Battery Pack Immersion Exploratory Investigation; August2021",
+   "url": "https://rosap.ntl.bts.gov/view/dot/57013/dot_57013_DS1.pdf",
+   "locator": "Printed pp15-17 procedure and Table1; pp19-24 findings; p27 conclusions. PDF page=printed+4. Table1 and p20 visually checked.",
+   "role": "adjacent_empirical; mechanism_only",
+   "tier": "T3",
+   "permitted": "Automotive-pack immersion can degrade components without in-water fire; post-immersion behavior matters",
+   "prohibited": "2/7 calibrated fire probability; LFP utility-depth repair curve; postmortem corrosion attributed solely to short initial soak",
+   "decision": "adopt mechanisms and test-design lessons only",
+   "accessed_on": null,
+   "provenance": "register",
+   "doi": null,
+   "link": "https://rosap.ntl.bts.gov/view/dot/57013/dot_57013_DS1.pdf",
+   "link_kind": "url",
+   "title": "Rask et al.; NHTSA/Argonne DOT HS 813 136; Li-Ion Battery Pack Immersion Exploratory Investigation; August2021",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BF-S12",
+   "citation": "SMA System Manual MV Power Station with Sunny Central Storage US; MVPS-S2-SCS-US-B8-SH-en-11",
+   "url": "https://files.sma.de/downloads/MVPS-S2-SCS-US-B8-SH-en-11.pdf",
+   "locator": "p22 environmental disturbance; p267 electronics/air/connection ratings; pp274-275 section17.5 and Fig99 visually checked",
+   "role": "selector_archetype; mechanism_only",
+   "tier": "T3",
+   "permitted": "Storage-inverter components and multiple protection zones; post-flood evaluation required",
+   "prohibited": "All compartments share one rating; exact reference PCS; full-unit replacement mandated; measured FS_INV ordinates",
+   "decision": "supports qualified-proxy research; no automatic runtime admission",
+   "accessed_on": null,
+   "provenance": "register",
+   "doi": null,
+   "link": "https://files.sma.de/downloads/MVPS-S2-SCS-US-B8-SH-en-11.pdf",
+   "link_kind": "url",
+   "title": "SMA System Manual MV Power Station with Sunny Central Storage US; MVPS-S2-SCS-US-B8-SH-en-11",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BF-S13",
+   "citation": "PVSCM 2024 Q1 archive; NLR data catalog DOI 10.7799/3007269",
+   "url": "https://data.nlr.gov/submissions/307",
+   "locator": "UPV 2024Q1.txt lines1-7 50-66 153 172-173; ESS rows and tariff factor; workbook ESS columns D-H inspected read-only",
+   "role": "exposure_or_value",
+   "tier": "T3",
+   "permitted": "Historical direct-input cost shares; normalize compatible rows as a labeled related-benchmark allocation",
+   "prohibited": "Current tariffs; full replacement quotes; literal Battery Packs means all electrochemical pack parts; native rates multiplied by usable AC kWh",
+   "decision": "adopt dimensionless research allocation; no macro execution",
+   "accessed_on": null,
+   "provenance": "register",
+   "doi": "10.7799/3007269",
+   "link": "https://data.nlr.gov/submissions/307",
+   "link_kind": "url",
+   "title": "PVSCM 2024 Q1 archive; NLR data catalog DOI 10.7799/3007269",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BF-S14",
+   "citation": "Cole et al.; NREL/TP-6A40-93281 Cost Projections for Utility-Scale Battery Storage: 2025 Update",
+   "url": "https://www.osti.gov/servlets/purl/2583471",
+   "locator": "Printed p4 PVSCM method; p18 Table3 visually reviewed (PDFp26); p19 mixed BOS",
+   "role": "exposure_or_value",
+   "tier": "T3",
+   "permitted": "Interpret category membership and link to source model already used for r1 valuation",
+   "prohibited": "Cost shares establish damage shares or repairable module geometry",
+   "decision": "adopt category crosswalk; preserve fixed r1 budget",
+   "accessed_on": null,
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.osti.gov/servlets/purl/2583471",
+   "link_kind": "url",
+   "title": "Cole et al.; NREL/TP-6A40-93281 Cost Projections for Utility-Scale Battery Storage: 2025 Update",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BF-S15",
+   "citation": "Sungrow High Voltage LFP Battery SBS050 User Manual; SBS050-UEN-Ver13-202504",
+   "url": "https://uk.sungrowpower.com/upload/file/20250603/EN_UM_SBS050_User_Manual.pdf",
+   "locator": "Printed p6 sections1.3.3-1.3.4 (PDFp14) visually reviewed; scope pII",
+   "role": "mechanism_only",
+   "tier": "T3",
+   "permitted": "Flooded-battery non-reuse guidance in adjacent LFP product; damaged battery distinct from whole surrounding system",
+   "prohibited": "Utility-enclosure entry height or affected fraction; whole cooling/container replacement; numerical utility DR",
+   "decision": "adopt conditional consequence only; no residential-to-utility curve transfer",
+   "accessed_on": null,
+   "provenance": "register",
+   "doi": null,
+   "link": "https://uk.sungrowpower.com/upload/file/20250603/EN_UM_SBS050_User_Manual.pdf",
+   "link_kind": "url",
+   "title": "Sungrow High Voltage LFP Battery SBS050 User Manual; SBS050-UEN-Ver13-202504",
+   "no_link_sentence": null
+  },
+  {
+   "id": "BF-S16",
+   "citation": "Schneider Electric bulletin 0110DB0401R07/11 August2011; linked by FAQ FA123082 last modified2026-02-04",
+   "url": "https://ckm-content.se.com/ckmContent/sfc/servlet.shepherd/document/download/0691H00000EDoYrQAL",
+   "locator": "pp1-2 replacement and reconditioning lists; p3 non-submerged equipment",
+   "role": "mechanism_only; boundary_or_cap",
+   "tier": "T3",
+   "permitted": "Equipment-specific replacement versus potential reconditioning; interior assemblies distinct from enclosures",
+   "prohibited": "Numeric BESS depth-loss curve; entire PCS mandatory replacement; latest bulletin date equals FAQ date",
+   "decision": "adopt repair-scope distinctions only",
+   "accessed_on": null,
+   "provenance": "register",
+   "doi": null,
+   "link": "https://ckm-content.se.com/ckmContent/sfc/servlet.shepherd/document/download/0691H00000EDoYrQAL",
+   "link_kind": "url",
+   "title": "Schneider Electric bulletin 0110DB0401R07/11 August2011; linked by FAQ FA123082 last modified2026-02-04",
+   "no_link_sentence": null
+  }
+ ],
+ "plain_tiers": {
+  "shape": "borrowed",
+  "cost": "borrowed"
+ },
  "occurrence": {
   "bucket": "pcs",
   "label": "PCS",
@@ -1080,7 +1391,29 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release —"
  },
- "summary": "Separate PCS: piecewise linear on water depth above local grade; shape T3, cost T3. Not searched — nobody has looked for field reports yet.",
+ "summary": "Separate PCS: a line through fixed points (piecewise linear), read against water depth above local grade; how damage rises is borrowed, how it becomes dollars borrowed. Not searched — nobody has looked for field reports yet.",
+ "rail_plain": {
+  "exists": {
+   "words": "Live · a screening model",
+   "code": "LIVE · screening"
+  },
+  "evidence": {
+   "words": "Evidence: borrowed",
+   "code": "How damage rises: borrowed · how it becomes dollars: borrowed",
+   "tiers": [
+    "T3"
+   ],
+   "codes": "shape T3 · cost T3"
+  },
+  "occurrence": {
+   "words": "Field reports: nobody has looked yet",
+   "code": "Field reports: nobody has looked yet"
+  },
+  "review": {
+   "words": "Not yet reviewed by a person",
+   "code": "entry agent-read 2026-10-19 · release —"
+  }
+ },
  "versions": [
   {
    "pin": "flood_bess@model_v1_0__docs_r1",

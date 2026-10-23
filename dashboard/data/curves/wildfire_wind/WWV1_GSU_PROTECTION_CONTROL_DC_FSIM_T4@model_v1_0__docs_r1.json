@@ -123,7 +123,7 @@
  ],
  "series": [
   {
-   "label": "WWV1_GSU_PROTECTION_CONTROL_DC_FSIM_T4",
+   "label": "GSU protection, control and DC",
    "kind": "categorical",
    "points": [
     [
@@ -213,12 +213,112 @@
  "row_notes": [
   {
    "type": "key_assumption",
-   "text": "One shared package per site, counted once"
+   "text": "One shared package per site, counted once",
+   "raw": "One shared package per site, counted once"
   }
  ],
  "selected_by": [],
  "variants": "none",
  "notes": [],
+ "caption": {
+  "what_it_says": "GSU protection, control and DC: the damage ratio is 0 at class 0 (no event), 0 at class 1, 0.02 at class 2, 0.08 at class 3, 0.25 at class 4, 0.6 at class 5 and 0.9 at class 6; nothing is drawn between classes because the model only answers at exact classes.",
+  "how_sure": {
+   "shape": {
+    "tier": "T4",
+    "word": "our judgment",
+    "basis": "judgment-based point array per flame-length class; borrowed support for ranking controls above steel-enclosed gear"
+   },
+   "cost": {
+    "tier": "T4",
+    "word": "our judgment",
+    "basis": "Same judgment-based point array sets the damage level as a share of the unit's value; no separate cost table"
+   },
+   "parameters": "4 parameters: 1 published, 1 borrowed and 2 our judgment",
+   "weakest": "T4",
+   "word": "our judgment"
+  },
+  "seen_in_field": {
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "state": "not_searched",
+   "href": null,
+   "words": "nobody has looked yet; no search log exists for this asset and hazard"
+  },
+  "main_references": [
+   {
+    "text": "USFS, Spatial datasets of probabilistic wildfire risk components for the US (270 m), 3rd ed., RDS-2016-0034-3 (2023)",
+    "ids": [
+     "WW1-S001"
+    ],
+    "title": "Dillon et al. Spatial datasets of probabilistic wildfire risk components for the United States (270 m), 3rd…",
+    "link": "https://www.fs.usda.gov/rds/archive/products/RDS-2016-0034-3/_metadata_RDS-2016-0034-3.html",
+    "link_kind": "url",
+    "locator": "conditional flame-length probability class definitions and 270 m support",
+    "no_link_sentence": null,
+    "source_id": "WW1-S001"
+   },
+   {
+    "text": "Assessing wildfire risk to critical infrastructure in central Chile: an electrical substation, Int. J. Wildland Fire (2024)",
+    "ids": [
+     "WW1-S002"
+    ],
+    "title": "Severino et al. Assessing wildfire risk to critical infrastructure in central Chile: application to an electrical substation",
+    "link": "https://doi.org/10.1071/WF22113",
+    "link_kind": "doi",
+    "locator": "substation target inventory; PMMA proxy-fuel radiant-flux probit; case heat-flux results",
+    "no_link_sentence": null,
+    "source_id": "WW1-S002"
+   },
+   {
+    "text": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment",
+    "ids": [
+     "WW1-S003"
+    ],
+    "title": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment.",
+    "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+    "link_kind": "url",
+    "locator": "sections on switchgear, transformers, wire/cable, protective relays/meters, communications, UPS and residue",
+    "no_link_sentence": null,
+    "source_id": "WW1-S003"
+   },
+   {
+    "text": "USFS, Wildfire vulnerability of power transmission and distribution infrastructure (2015)",
+    "ids": [
+     "WW1-S004"
+    ],
+    "title": "Butler, Wallace, and Hogge",
+    "link": "https://research.fs.usda.gov/treesearch/49452",
+    "link_kind": "url",
+    "locator": "preliminary steel-tower and transformer/junction-enclosure simulations",
+    "no_link_sentence": null,
+    "source_id": "WW1-S004"
+   },
+   {
+    "text": "Owner direction to represent wildfire-wind risk for one or two subsystems (business decision)",
+    "ids": [
+     "WW1-A001"
+    ],
+    "title": "Owner direction in Damage Modeling task, 2026-08-08: represent wildfire-wind risk even if only one or two…",
+    "link": null,
+    "link_kind": "none",
+    "locator": "explicit coverage-first Tier-4 business decision",
+    "no_link_sentence": "no link in the register",
+    "source_id": "WW1-A001"
+   },
+   {
+    "text": "Damage Modeling governed damage-curve standards and skill workflow.",
+    "ids": [
+     "GOVERNANCE_CONTRACT"
+    ],
+    "title": "Damage Modeling governed damage-curve standards and skill workflow.",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/standards/00_index.md",
+    "link_kind": "repo_file",
+    "locator": "cell package, provenance, pathway, capability, versioning, and fail-closed standards",
+    "no_link_sentence": null,
+    "source_id": "GOVERNANCE_CONTRACT"
+   }
+  ],
+  "references_from": "the entry's key sources, then the parameters' own"
+ },
  "title": "Wildfire × Wind farm",
  "asset": {
   "slug": "wind",
@@ -276,6 +376,30 @@
  "sources_for_curve": [
   "WW1-A001"
  ],
+ "sources_resolved": [
+  {
+   "id": "WW1-A001",
+   "citation": "Owner direction in Damage Modeling task, 2026-08-08: represent wildfire-wind risk even if only one or two subsystems can be supported.",
+   "url": "conversation_record",
+   "locator": "explicit coverage-first Tier-4 business decision",
+   "role": "ordinate_adoption_authority",
+   "tier": "T4",
+   "permitted": "Create a visibly labeled canonical two-unit partial-screening release.",
+   "prohibited": "Relabel assumptions as empirical calibration or present the cell as whole-farm complete.",
+   "decision": "adopt",
+   "accessed_on": "2026-08-08",
+   "provenance": "register",
+   "doi": null,
+   "link": null,
+   "link_kind": "none",
+   "title": "Owner direction in Damage Modeling task, 2026-08-08: represent wildfire-wind risk even if only one or two…",
+   "no_link_sentence": "no link in the register"
+  }
+ ],
+ "plain_tiers": {
+  "shape": "our judgment",
+  "cost": "our judgment"
+ },
  "occurrence": null,
  "review": {
   "entry_read_on": "2026-10-19",
@@ -287,7 +411,29 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release reviewed screening release"
  },
- "summary": "GSU protection, control and DC: piecewise linear on USFS FSim conditional flame-length class; shape T4, cost T4.",
+ "summary": "GSU protection, control and DC: a line through fixed points (piecewise linear), read against USFS FSim conditional flame-length class; how damage rises is our judgment, how it becomes dollars our judgment.",
+ "rail_plain": {
+  "exists": {
+   "words": "Live · a screening model",
+   "code": "LIVE · screening"
+  },
+  "evidence": {
+   "words": "Evidence: our judgment",
+   "code": "How damage rises: our judgment · how it becomes dollars: our judgment",
+   "tiers": [
+    "T4"
+   ],
+   "codes": "shape T4 · cost T4"
+  },
+  "occurrence": {
+   "words": "Field reports: nobody has looked yet",
+   "code": "Field reports: nobody has looked yet"
+  },
+  "review": {
+   "words": "Not yet reviewed by a person",
+   "code": "entry agent-read 2026-10-19 · release reviewed screening release"
+  }
+ },
  "versions": [
   {
    "pin": "wildfire_wind@model_v1_0__docs_r1",

@@ -113,7 +113,7 @@
  ],
  "series": [
   {
-   "label": "FS_INV",
+   "label": "Inverters",
    "kind": "line",
    "points": [
     [
@@ -788,6 +788,93 @@
  "selected_by": [],
  "variants": "none (enclosure rating is recorded as a flag; no alternate curve)",
  "notes": [],
+ "caption": {
+  "what_it_says": "Inverters: no loss until local depth above component datum reaches about 0.01 m; damage then rises, passing half of full loss near 0.1 m, and reaches full replacement by 0.55 m.",
+  "how_sure": {
+   "shape": {
+    "tier": "T3",
+    "word": "borrowed",
+    "basis": "Engineering depth-damage points; mechanism from DOE/FEMP and NEMA"
+   },
+   "cost": {
+    "tier": "T3",
+    "word": "borrowed",
+    "basis": "Points already give damage as a share of the part's replacement value (same table)"
+   },
+   "parameters": "1 parameter: 1 borrowed",
+   "weakest": "T3",
+   "word": "borrowed"
+  },
+  "seen_in_field": {
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "state": "not_searched",
+   "href": null,
+   "words": "nobody has looked yet; no search log exists for this asset and hazard"
+  },
+  "main_references": [
+   {
+    "text": "DOE/FEMP, Preventing and Mitigating Flood Damage to Solar PV Systems",
+    "ids": [
+     "DOE_FEMP_PV_FLOOD"
+    ],
+    "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+    "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "DOE_FEMP_PV_FLOOD"
+   },
+   {
+    "text": "NEMA GD 1-2019, Evaluating Water-Damaged Electrical Equipment",
+    "ids": [
+     "NEMA_GD1_2019"
+    ],
+    "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+    "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "NEMA_GD1_2019"
+   },
+   {
+    "text": "NEMA, Enclosure Types",
+    "ids": [
+     "NEMA_ENCLOSURE_TYPES"
+    ],
+    "title": "NEMA Enclosure Types",
+    "link": "https://www.nema.org/docs/default-source/products-document-library/nema-enclosure-types.pdf",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "NEMA_ENCLOSURE_TYPES"
+   },
+   {
+    "text": "FEMA P-348, Protecting Building Utility Systems from Flood Damage",
+    "ids": [
+     "FEMA_P348"
+    ],
+    "title": "Protecting Building Utility Systems From Flood Damage",
+    "link": "https://basc.pnnl.gov/library/protecting-building-utility-systems-flood-damage-principles-and-practices-design-and",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "FEMA_P348"
+   },
+   {
+    "text": "USACE HEC-FIA, Depth-Percent Damage Relationships",
+    "ids": [
+     "USACE_HEC_FIA"
+    ],
+    "title": "Depth-Percent Damage Relationships",
+    "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "USACE_HEC_FIA"
+   }
+  ],
+  "references_from": "the entry's key sources"
+ },
  "title": "Flood × Solar farm",
  "asset": {
   "slug": "solar",
@@ -886,6 +973,90 @@
   "NEMA_GD1_2019",
   "USACE_HEC_FIA"
  ],
+ "sources_resolved": [
+  {
+   "id": "DOE_FEMP_PV_FLOOD",
+   "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+   "citation": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+   "url": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+   "locator": null,
+   "role": "Solar-specific flood pathways: total submersion, raising equipment, conduit water paths, enclosure ratings, stormwater/scour measures.",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+    "sheet": "Sources"
+   },
+   "aliases": [
+    "DOE_FEMP_PV_FLOOD"
+   ],
+   "source_type": null,
+   "doi": null,
+   "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+   "link_kind": "url",
+   "no_link_sentence": null
+  },
+  {
+   "id": "NEMA_GD1_2019",
+   "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+   "citation": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+   "url": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+   "locator": null,
+   "role": "Replacement/reconditioning logic for water-exposed electrical distribution, power equipment, transformers, cables, electronic products.",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+    "sheet": "Sources"
+   },
+   "aliases": [
+    "NEMA_GD1_2019"
+   ],
+   "source_type": null,
+   "doi": null,
+   "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+   "link_kind": "url",
+   "no_link_sentence": null
+  },
+  {
+   "id": "USACE_HEC_FIA",
+   "title": "Depth-Percent Damage Relationships",
+   "citation": "Depth-Percent Damage Relationships",
+   "url": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+   "locator": null,
+   "role": "Supports tabular depth-percent damage relationship and interpolation approach.",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+    "sheet": "Sources"
+   },
+   "aliases": [
+    "USACE_HEC_FIA"
+   ],
+   "source_type": null,
+   "doi": null,
+   "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+   "link_kind": "url",
+   "no_link_sentence": null
+  }
+ ],
+ "plain_tiers": {
+  "shape": "borrowed",
+  "cost": "borrowed"
+ },
  "occurrence": null,
  "review": {
   "entry_read_on": "2026-10-19",
@@ -897,7 +1068,29 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release —"
  },
- "summary": "Inverters: piecewise linear on local depth above component datum; shape T3, cost T3.",
+ "summary": "Inverters: a line through fixed points (piecewise linear), read against local depth above component datum; how damage rises is borrowed, how it becomes dollars borrowed.",
+ "rail_plain": {
+  "exists": {
+   "words": "Live · in the runtime index",
+   "code": "LIVE"
+  },
+  "evidence": {
+   "words": "Evidence: borrowed",
+   "code": "How damage rises: borrowed · how it becomes dollars: borrowed",
+   "tiers": [
+    "T3"
+   ],
+   "codes": "shape T3 · cost T3"
+  },
+  "occurrence": {
+   "words": "Field reports: nobody has looked yet",
+   "code": "Field reports: nobody has looked yet"
+  },
+  "review": {
+   "words": "Not yet reviewed by a person",
+   "code": "entry agent-read 2026-10-19 · release —"
+  }
+ },
  "versions": [
   {
    "pin": "flood_solar@model_v1_0__docs_r5",

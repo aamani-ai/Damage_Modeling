@@ -6,7 +6,8 @@
   "noun": "buildings",
   "href": "/assets/real_estate"
  },
- "summary": "Hail, flood, hurricane wind, convective wind and wildfire are proposals not yet in the runtime index; nobody has yet searched for field reports.",
+ "summary": "Hail, convective wind and wildfire have curves built from borrowed and our judgment evidence (hail: 3 parts, convective wind: one curve for the whole building and wildfire: one curve for the whole building); flood and hurricane wind have curves built from published evidence (one curve for the whole building each). All of them are proposals, not in the runtime index yet. 1 part of the building has no curve under any hazard: contents and inventory.",
+ "summary_v0": "Hail, flood, hurricane wind, convective wind and wildfire are proposals not yet in the runtime index; nobody has yet searched for field reports.",
  "reference": null,
  "hazards": [
   {
@@ -156,156 +157,1572 @@
  ],
  "rows": [
   {
-   "key": "BUILDING",
-   "label": "Building",
+   "key": "house",
+   "label": "House (single-family, slab)",
    "value_usd": null,
    "share": null,
    "twin_targets": [],
    "subsystems": [
-    "BUILDING"
+    "House"
    ],
    "cells": {
-    "convective_wind": {
-     "twin_lead": null,
-     "twin_nodes": [],
-     "entry_id": "convective_wind_real_estate",
-     "occurrence": {
-      "bucket": "BUILDING",
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": null
-     },
+    "hail": {
+     "entry_id": "hail_real_estate",
      "effect": "damage",
      "outside_the_five": false,
-     "curve": {
-      "mark": "▢",
-      "state": "proposal",
-      "partial": false,
-      "shape": "T3",
-      "cost": "T4",
-      "curves": [
-       "CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96",
-       "CWRE_OFF_EF_LRB_TORNADO"
-      ],
-      "drawn": true
-     }
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "partial",
+     "words": "curve for roof and walls and windows only · borrowed and our judgment",
+     "mark": "■◔",
+     "parts": [
+      "House roof (asphalt shingles)",
+      "House walls and windows"
+     ],
+     "tier_span": "T3–4",
+     "share": 0.098189,
+     "dollars": null,
+     "spans": [],
+     "drawn": true
     },
     "flood": {
-     "twin_lead": null,
-     "twin_nodes": [],
      "entry_id": "flood_real_estate",
-     "occurrence": {
-      "bucket": "BUILDING",
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": null
-     },
      "effect": "damage",
      "outside_the_five": false,
-     "curve": {
-      "mark": "▢",
-      "state": "proposal",
-      "partial": false,
-      "shape": "T2",
-      "cost": "T2",
-      "curves": [
-       "FRE_COM_FRESH_HAZUS_DF217",
-       "FRE_COM_COAST_NACCS_P2",
-       "FRE_COM_COAST_NACCS_P2_MIN",
-       "FRE_COM_COAST_NACCS_P2_MAX"
-      ],
-      "drawn": true
-     }
-    },
-    "hail": {
      "twin_lead": null,
      "twin_nodes": [],
-     "entry_id": "hail_real_estate",
-     "occurrence": {
-      "bucket": "BUILDING",
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": null
-     },
-     "effect": "damage",
-     "outside_the_five": false,
-     "curve": {
-      "mark": "▢",
-      "state": "proposal",
-      "partial": true,
-      "shape": "T4",
-      "cost": "T4",
-      "curves": [
-       "HRE_OFF_WINDOWS_T4"
-      ],
-      "drawn": true
-     }
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole building · published",
+     "mark": "■",
+     "parts": [
+      "House"
+     ],
+     "tier_span": "T2",
+     "share": null,
+     "dollars": null
     },
     "hurricane_wind": {
-     "twin_lead": null,
-     "twin_nodes": [],
      "entry_id": "tropical_cyclone_wind_real_estate",
-     "occurrence": {
-      "bucket": "BUILDING",
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": null
-     },
      "effect": "damage",
      "outside_the_five": false,
-     "curve": {
-      "mark": "▢",
-      "state": "proposal",
-      "partial": false,
-      "shape": "T2",
-      "cost": "T2",
-      "curves": [
-       "TCRE_COM_HAZUS_SECBL_OPEN",
-       "TCRE_COM_HAZUS_SECBL_LIGHT_SUBURBAN",
-       "TCRE_COM_HAZUS_SECBL_SUBURBAN",
-       "TCRE_COM_HAZUS_SECBL_LIGHT_TREES",
-       "TCRE_COM_HAZUS_SECBL_TREES"
-      ],
-      "drawn": true
-     }
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole building · published",
+     "mark": "■",
+     "parts": [
+      "House"
+     ],
+     "tier_span": "T2",
+     "share": null,
+     "dollars": null
+    },
+    "convective_wind": {
+     "entry_id": "convective_wind_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole building · borrowed and our judgment",
+     "mark": "■",
+     "parts": [
+      "House"
+     ],
+     "tier_span": "T3–4",
+     "share": null,
+     "dollars": null
     },
     "wildfire": {
-     "twin_lead": null,
-     "twin_nodes": [],
      "entry_id": "wildfire_real_estate",
-     "occurrence": {
-      "bucket": "BUILDING",
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": null
-     },
      "effect": "damage",
      "outside_the_five": false,
-     "curve": {
-      "mark": "▢",
-      "state": "proposal",
-      "partial": false,
-      "shape": "T3",
-      "cost": "T4",
-      "curves": [
-       "WFRE_OFF_WRC_SHRUB_X0_9"
-      ],
-      "drawn": true
-     }
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole building · borrowed and our judgment",
+     "mark": "■",
+     "parts": [
+      "House"
+     ],
+     "tier_span": "T3–4",
+     "share": null,
+     "dollars": null
+    },
+    "heat": {
+     "entry_id": null,
+     "effect": "performance",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "icing": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "lightning": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    }
+   }
+  },
+  {
+   "key": "warehouse",
+   "label": "Warehouse",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "Warehouse"
+   ],
+   "cells": {
+    "hail": {
+     "entry_id": "hail_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "partial",
+     "words": "curve for roof and windows only · borrowed and our judgment",
+     "mark": "■◔",
+     "parts": [
+      "Warehouse roof (standing-seam steel)",
+      "Warehouse windows"
+     ],
+     "tier_span": "T3–4",
+     "share": 0.125673,
+     "dollars": null,
+     "spans": [],
+     "drawn": true
+    },
+    "flood": {
+     "entry_id": "flood_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole building · published",
+     "mark": "■",
+     "parts": [
+      "Warehouse"
+     ],
+     "tier_span": "T2",
+     "share": null,
+     "dollars": null
+    },
+    "hurricane_wind": {
+     "entry_id": "tropical_cyclone_wind_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole building · published",
+     "mark": "■",
+     "parts": [
+      "Warehouse"
+     ],
+     "tier_span": "T2",
+     "share": null,
+     "dollars": null
+    },
+    "convective_wind": {
+     "entry_id": "convective_wind_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole building · borrowed and our judgment",
+     "mark": "■",
+     "parts": [
+      "Warehouse"
+     ],
+     "tier_span": "T3–4",
+     "share": null,
+     "dollars": null
+    },
+    "wildfire": {
+     "entry_id": "wildfire_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole building · borrowed and our judgment",
+     "mark": "■",
+     "parts": [
+      "Warehouse"
+     ],
+     "tier_span": "T3–4",
+     "share": null,
+     "dollars": null
+    },
+    "heat": {
+     "entry_id": null,
+     "effect": "performance",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "icing": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "lightning": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    }
+   }
+  },
+  {
+   "key": "office",
+   "label": "Office (three storeys)",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "Office"
+   ],
+   "cells": {
+    "hail": {
+     "entry_id": "hail_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "partial",
+     "words": "curve for roof and windows only · borrowed and our judgment",
+     "mark": "■◔",
+     "parts": [
+      "Office roof (TPO membrane and insulation)",
+      "Office windows"
+     ],
+     "tier_span": "T3–4",
+     "share": 0.080387,
+     "dollars": null,
+     "spans": [],
+     "drawn": true
+    },
+    "flood": {
+     "entry_id": "flood_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole building · published",
+     "mark": "■",
+     "parts": [
+      "Office"
+     ],
+     "tier_span": "T2",
+     "share": null,
+     "dollars": null
+    },
+    "hurricane_wind": {
+     "entry_id": "tropical_cyclone_wind_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole building · published",
+     "mark": "■",
+     "parts": [
+      "Office"
+     ],
+     "tier_span": "T2",
+     "share": null,
+     "dollars": null
+    },
+    "convective_wind": {
+     "entry_id": "convective_wind_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole building · borrowed and our judgment",
+     "mark": "■",
+     "parts": [
+      "Office"
+     ],
+     "tier_span": "T3–4",
+     "share": null,
+     "dollars": null
+    },
+    "wildfire": {
+     "entry_id": "wildfire_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole building · borrowed and our judgment",
+     "mark": "■",
+     "parts": [
+      "Office"
+     ],
+     "tier_span": "T3–4",
+     "share": null,
+     "dollars": null
+    },
+    "heat": {
+     "entry_id": null,
+     "effect": "performance",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "icing": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "lightning": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    }
+   }
+  },
+  {
+   "key": "retail",
+   "label": "Retail",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "Retail"
+   ],
+   "cells": {
+    "hail": {
+     "entry_id": "hail_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "not_named",
+     "words": "not named by this cell",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "flood": {
+     "entry_id": "flood_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole building · published",
+     "mark": "■",
+     "parts": [
+      "Retail"
+     ],
+     "tier_span": "T2",
+     "share": null,
+     "dollars": null
+    },
+    "hurricane_wind": {
+     "entry_id": "tropical_cyclone_wind_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "whole",
+     "words": "one curve for the whole building · published",
+     "mark": "■",
+     "parts": [
+      "Retail"
+     ],
+     "tier_span": "T2",
+     "share": null,
+     "dollars": null
+    },
+    "convective_wind": {
+     "entry_id": "convective_wind_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "not_named",
+     "words": "not named by this cell",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "wildfire": {
+     "entry_id": "wildfire_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "not_named",
+     "words": "not named by this cell",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "heat": {
+     "entry_id": null,
+     "effect": "performance",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "icing": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "lightning": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    }
+   }
+  },
+  {
+   "key": "contents",
+   "label": "Contents and inventory",
+   "value_usd": null,
+   "share": null,
+   "twin_targets": [],
+   "subsystems": [
+    "CONTENTS"
+   ],
+   "cells": {
+    "hail": {
+     "entry_id": "hail_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "withheld",
+     "words": "named, no response yet (withheld)",
+     "mark": "▢",
+     "parts": [
+      "contents and inventory"
+     ],
+     "tier_span": null,
+     "share": null,
+     "dollars": null,
+     "spans": []
+    },
+    "flood": {
+     "entry_id": "flood_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "withheld",
+     "words": "named, no response yet (withheld)",
+     "mark": "▢",
+     "parts": [
+      "contents and inventory"
+     ],
+     "tier_span": null,
+     "share": null,
+     "dollars": null,
+     "spans": []
+    },
+    "hurricane_wind": {
+     "entry_id": "tropical_cyclone_wind_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "withheld",
+     "words": "named, no response yet (withheld)",
+     "mark": "▢",
+     "parts": [
+      "contents and inventory"
+     ],
+     "tier_span": null,
+     "share": null,
+     "dollars": null,
+     "spans": []
+    },
+    "convective_wind": {
+     "entry_id": "convective_wind_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "withheld",
+     "words": "named, no response yet (withheld)",
+     "mark": "▢",
+     "parts": [
+      "contents and inventory"
+     ],
+     "tier_span": null,
+     "share": null,
+     "dollars": null,
+     "spans": []
+    },
+    "wildfire": {
+     "entry_id": "wildfire_real_estate",
+     "effect": "damage",
+     "outside_the_five": false,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": "withheld",
+     "words": "named, no response yet (withheld)",
+     "mark": "▢",
+     "parts": [
+      "contents and inventory"
+     ],
+     "tier_span": null,
+     "share": null,
+     "dollars": null,
+     "spans": []
+    },
+    "heat": {
+     "entry_id": null,
+     "effect": "performance",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "icing": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
+    },
+    "lightning": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
+     "twin_lead": null,
+     "twin_nodes": [],
+     "occurrence": null,
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     }
    }
   }
  ],
+ "parts_by_cell": {
+  "convective_wind_real_estate": {
+   "entry_id": "convective_wind_real_estate",
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "status": "proposal",
+   "title": "Convective wind × Real estate",
+   "parts": [
+    {
+     "failure_unit_id": "CWRE_BUILDING_CONTENTS",
+     "subsystem": "BUILDING",
+     "component": "CONTENTS",
+     "treatment": "withheld",
+     "part": "contents and inventory",
+     "state": "withheld",
+     "rows": [
+      "contents"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": null,
+     "cost": null,
+     "curves": [],
+     "drawn": false,
+     "withheld_reasons": [
+      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+      "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
+     ]
+    },
+    {
+     "failure_unit_id": null,
+     "subsystem": "BUILDING",
+     "component": "whole building",
+     "treatment": "primary_nonzero",
+     "part": "House",
+     "state": "curve",
+     "rows": [
+      "house"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T3",
+     "cost": "T4",
+     "curves": [
+      "CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96",
+      "CWRE_RES_EF_FR12_TORNADO"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": true
+    },
+    {
+     "failure_unit_id": null,
+     "subsystem": "BUILDING",
+     "component": "whole building",
+     "treatment": "primary_nonzero",
+     "part": "Warehouse",
+     "state": "curve",
+     "rows": [
+      "warehouse"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T3",
+     "cost": "T4",
+     "curves": [
+      "CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96",
+      "CWRE_IND_EF_MBS_TORNADO"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": true
+    },
+    {
+     "failure_unit_id": null,
+     "subsystem": "BUILDING",
+     "component": "whole building",
+     "treatment": "primary_nonzero",
+     "part": "Office",
+     "state": "curve",
+     "rows": [
+      "office"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T3",
+     "cost": "T4",
+     "curves": [
+      "CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96",
+      "CWRE_OFF_EF_LRB_TORNADO"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": true
+    }
+   ],
+   "share_basis": null,
+   "n_named": 4,
+   "n_curve": 3,
+   "n_withheld": 1,
+   "not_covered": []
+  },
+  "flood_real_estate": {
+   "entry_id": "flood_real_estate",
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "status": "proposal",
+   "title": "Flood × Real estate",
+   "parts": [
+    {
+     "failure_unit_id": "FRE_BUILDING_CONTENTS",
+     "subsystem": "BUILDING",
+     "component": "CONTENTS",
+     "treatment": "withheld",
+     "part": "contents and inventory",
+     "state": "withheld",
+     "rows": [
+      "contents"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": null,
+     "cost": null,
+     "curves": [],
+     "drawn": false,
+     "withheld_reasons": [
+      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+      "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
+     ]
+    },
+    {
+     "failure_unit_id": null,
+     "subsystem": "BUILDING",
+     "component": "whole building",
+     "treatment": "primary_nonzero",
+     "part": "House",
+     "state": "curve",
+     "rows": [
+      "house"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T2",
+     "cost": "T2",
+     "curves": [
+      "FRE_RES_HAZUS_DF129"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": true
+    },
+    {
+     "failure_unit_id": null,
+     "subsystem": "BUILDING",
+     "component": "whole building",
+     "treatment": "primary_nonzero",
+     "part": "Warehouse",
+     "state": "curve",
+     "rows": [
+      "warehouse"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T2",
+     "cost": "T2",
+     "curves": [
+      "FRE_IND_HAZUS_DF341"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": true
+    },
+    {
+     "failure_unit_id": null,
+     "subsystem": "BUILDING",
+     "component": "whole building",
+     "treatment": "primary_nonzero",
+     "part": "Office",
+     "state": "curve",
+     "rows": [
+      "office"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T2",
+     "cost": "T2",
+     "curves": [
+      "FRE_OFF_HAZUS_DF431"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": true
+    },
+    {
+     "failure_unit_id": null,
+     "subsystem": "BUILDING",
+     "component": "whole building",
+     "treatment": "primary_nonzero",
+     "part": "Retail",
+     "state": "curve",
+     "rows": [
+      "retail"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T2",
+     "cost": "T2",
+     "curves": [
+      "FRE_COM_FRESH_HAZUS_DF217",
+      "FRE_COM_COAST_NACCS_P2",
+      "FRE_COM_COAST_NACCS_P2_MIN",
+      "FRE_COM_COAST_NACCS_P2_MAX"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": true
+    }
+   ],
+   "share_basis": null,
+   "n_named": 5,
+   "n_curve": 4,
+   "n_withheld": 1,
+   "not_covered": []
+  },
+  "hail_real_estate": {
+   "entry_id": "hail_real_estate",
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail"
+   },
+   "status": "proposal",
+   "title": "Hail × Real estate",
+   "parts": [
+    {
+     "failure_unit_id": "HRE_BUILDING_CONTENTS",
+     "subsystem": "BUILDING",
+     "component": "CONTENTS",
+     "treatment": "withheld",
+     "part": "contents and inventory",
+     "state": "withheld",
+     "rows": [
+      "contents"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": null,
+     "cost": null,
+     "curves": [],
+     "drawn": false,
+     "withheld_reasons": [
+      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+      "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
+     ]
+    },
+    {
+     "failure_unit_id": "HRE_ROOF_COVER",
+     "subsystem": "BUILDING",
+     "component": "roof",
+     "treatment": "primary_nonzero",
+     "part": "House roof (asphalt shingles)",
+     "state": "curve",
+     "rows": [
+      "house"
+     ],
+     "spans": false,
+     "share": 0.0375,
+     "share_basis": "share of the building's structure replacement cost new",
+     "dollars": null,
+     "shape": "T3",
+     "cost": "T3",
+     "curves": [
+      "HRE_RES_ROOF_ASPHALT_SHINGLE_LAMINATED"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": false
+    },
+    {
+     "failure_unit_id": "HRE_ROOF_COVER",
+     "subsystem": "BUILDING",
+     "component": "roof",
+     "treatment": "primary_nonzero",
+     "part": "Warehouse roof (standing-seam steel)",
+     "state": "curve",
+     "rows": [
+      "warehouse"
+     ],
+     "spans": false,
+     "share": 0.12,
+     "share_basis": "share of the building's structure replacement cost new",
+     "dollars": null,
+     "shape": "T3",
+     "cost": "T4",
+     "curves": [
+      "HRE_IND_ROOF_STANDING_SEAM_STEEL"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": false
+    },
+    {
+     "failure_unit_id": "HRE_ROOF_COVER",
+     "subsystem": "BUILDING",
+     "component": "roof",
+     "treatment": "primary_nonzero",
+     "part": "Office roof (TPO membrane and insulation)",
+     "state": "curve",
+     "rows": [
+      "office"
+     ],
+     "spans": false,
+     "share": 0.027,
+     "share_basis": "share of the building's structure replacement cost new",
+     "dollars": null,
+     "shape": "T3",
+     "cost": "T3",
+     "curves": [
+      "HRE_OFF_ROOF_TPO_MEMBRANE_AND_INSULATION"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": false
+    },
+    {
+     "failure_unit_id": "HRE_WALLS_AND_WINDOWS",
+     "subsystem": "BUILDING",
+     "component": "walls and windows",
+     "treatment": "primary_nonzero",
+     "part": "House walls and windows",
+     "state": "curve",
+     "rows": [
+      "house"
+     ],
+     "spans": false,
+     "share": 0.060689,
+     "share_basis": "share of the building's structure replacement cost new",
+     "dollars": null,
+     "shape": "T4",
+     "cost": "T4",
+     "curves": [
+      "HRE_RES_WALLS_WINDOWS_T4"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": false
+    },
+    {
+     "failure_unit_id": "HRE_WALLS_AND_WINDOWS",
+     "subsystem": "BUILDING",
+     "component": "windows",
+     "treatment": "primary_nonzero",
+     "part": "Warehouse windows",
+     "state": "curve",
+     "rows": [
+      "warehouse"
+     ],
+     "spans": false,
+     "share": 0.005673,
+     "share_basis": "share of the building's structure replacement cost new",
+     "dollars": null,
+     "shape": "T4",
+     "cost": "T4",
+     "curves": [
+      "HRE_IND_WINDOWS_T4"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": false
+    },
+    {
+     "failure_unit_id": "HRE_WALLS_AND_WINDOWS",
+     "subsystem": "BUILDING",
+     "component": "windows",
+     "treatment": "primary_nonzero",
+     "part": "Office windows",
+     "state": "curve",
+     "rows": [
+      "office"
+     ],
+     "spans": false,
+     "share": 0.053387,
+     "share_basis": "share of the building's structure replacement cost new",
+     "dollars": null,
+     "shape": "T4",
+     "cost": "T4",
+     "curves": [
+      "HRE_OFF_WINDOWS_T4"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": false
+    }
+   ],
+   "share_basis": null,
+   "n_named": 7,
+   "n_curve": 6,
+   "n_withheld": 1,
+   "not_covered": [
+    "Outdoor equipment: AC condenser, rooftop units (whether it sits in the profile value is an open question)"
+   ]
+  },
+  "tropical_cyclone_wind_real_estate": {
+   "entry_id": "tropical_cyclone_wind_real_estate",
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "status": "proposal",
+   "title": "Hurricane wind × Real estate",
+   "parts": [
+    {
+     "failure_unit_id": "TCRE_BUILDING_CONTENTS",
+     "subsystem": "BUILDING",
+     "component": "CONTENTS",
+     "treatment": "withheld",
+     "part": "contents and inventory",
+     "state": "withheld",
+     "rows": [
+      "contents"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": null,
+     "cost": null,
+     "curves": [],
+     "drawn": false,
+     "withheld_reasons": [
+      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+      "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
+     ]
+    },
+    {
+     "failure_unit_id": null,
+     "subsystem": "BUILDING",
+     "component": "whole building",
+     "treatment": "primary_nonzero",
+     "part": "House",
+     "state": "curve",
+     "rows": [
+      "house"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T2",
+     "cost": "T2",
+     "curves": [
+      "TCRE_RES_HAZUS_WSF1_*"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": true
+    },
+    {
+     "failure_unit_id": null,
+     "subsystem": "BUILDING",
+     "component": "whole building",
+     "treatment": "primary_nonzero",
+     "part": "Warehouse",
+     "state": "curve",
+     "rows": [
+      "warehouse"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T2",
+     "cost": "T2",
+     "curves": [
+      "TCRE_IND_HAZUS_SPMBL_NEWDECK_*"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": true
+    },
+    {
+     "failure_unit_id": null,
+     "subsystem": "BUILDING",
+     "component": "whole building",
+     "treatment": "primary_nonzero",
+     "part": "Office",
+     "state": "curve",
+     "rows": [
+      "office"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T2",
+     "cost": "T2",
+     "curves": [
+      "TCRE_OFF_HAZUS_SECBM_*"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": true
+    },
+    {
+     "failure_unit_id": null,
+     "subsystem": "BUILDING",
+     "component": "whole building",
+     "treatment": "primary_nonzero",
+     "part": "Retail",
+     "state": "curve",
+     "rows": [
+      "retail"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T2",
+     "cost": "T2",
+     "curves": [
+      "TCRE_COM_HAZUS_SECBL_*"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": true
+    }
+   ],
+   "share_basis": null,
+   "n_named": 5,
+   "n_curve": 4,
+   "n_withheld": 1,
+   "not_covered": []
+  },
+  "wildfire_real_estate": {
+   "entry_id": "wildfire_real_estate",
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "status": "proposal",
+   "title": "Wildfire × Real estate",
+   "parts": [
+    {
+     "failure_unit_id": "WFRE_BUILDING_CONTENTS",
+     "subsystem": "BUILDING",
+     "component": "CONTENTS",
+     "treatment": "withheld",
+     "part": "contents and inventory",
+     "state": "withheld",
+     "rows": [
+      "contents"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": null,
+     "cost": null,
+     "curves": [],
+     "drawn": false,
+     "withheld_reasons": [
+      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+      "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
+     ]
+    },
+    {
+     "failure_unit_id": null,
+     "subsystem": "BUILDING",
+     "component": "whole building",
+     "treatment": "primary_nonzero",
+     "part": "House",
+     "state": "curve",
+     "rows": [
+      "house"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T3",
+     "cost": "T4",
+     "curves": [
+      "WFRE_RES_WRC_SHRUB"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": true
+    },
+    {
+     "failure_unit_id": null,
+     "subsystem": "BUILDING",
+     "component": "whole building",
+     "treatment": "primary_nonzero",
+     "part": "Warehouse",
+     "state": "curve",
+     "rows": [
+      "warehouse"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T3",
+     "cost": "T4",
+     "curves": [
+      "WFRE_IND_WRC_SHRUB_X0_8"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": true
+    },
+    {
+     "failure_unit_id": null,
+     "subsystem": "BUILDING",
+     "component": "whole building",
+     "treatment": "primary_nonzero",
+     "part": "Office",
+     "state": "curve",
+     "rows": [
+      "office"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": "T3",
+     "cost": "T4",
+     "curves": [
+      "WFRE_OFF_WRC_SHRUB_X0_9"
+     ],
+     "drawn": true,
+     "withheld_reasons": [],
+     "whole_building": true
+    }
+   ],
+   "share_basis": null,
+   "n_named": 4,
+   "n_curve": 3,
+   "n_withheld": 1,
+   "not_covered": []
+  }
+ },
+ "split": {
+  "differs": true,
+  "sentence": "These cells split the building differently: the cells name different numbers of parts: convective wind 4, flood 5, hail 7, hurricane wind 5 and wildfire 4; hail splits each building into the roof and the walls and windows, each a share of the building's value; the other hazards price the building as one; retail has a curve under flood and hurricane wind only; convective wind, hail and wildfire do not name it. Buildings carry no dollar value here: every curve is a share of the building's structure replacement cost, which the consumer supplies.",
+  "details": [
+   "the cells name different numbers of parts: convective wind 4, flood 5, hail 7, hurricane wind 5 and wildfire 4",
+   "hail splits each building into the roof and the walls and windows, each a share of the building's value; the other hazards price the building as one",
+   "retail has a curve under flood and hurricane wind only; convective wind, hail and wildfire do not name it"
+  ],
+  "columns": [
+   {
+    "entry_id": "convective_wind_real_estate",
+    "hazard": {
+     "slug": "convective_wind",
+     "label": "Convective wind"
+    },
+    "n_named": 4,
+    "n_curve": 3,
+    "n_withheld": 1,
+    "share_basis": null,
+    "title": "Convective wind × Real estate"
+   },
+   {
+    "entry_id": "flood_real_estate",
+    "hazard": {
+     "slug": "flood",
+     "label": "Flood"
+    },
+    "n_named": 5,
+    "n_curve": 4,
+    "n_withheld": 1,
+    "share_basis": null,
+    "title": "Flood × Real estate"
+   },
+   {
+    "entry_id": "hail_real_estate",
+    "hazard": {
+     "slug": "hail",
+     "label": "Hail"
+    },
+    "n_named": 7,
+    "n_curve": 6,
+    "n_withheld": 1,
+    "share_basis": null,
+    "title": "Hail × Real estate"
+   },
+   {
+    "entry_id": "tropical_cyclone_wind_real_estate",
+    "hazard": {
+     "slug": "hurricane_wind",
+     "label": "Hurricane wind"
+    },
+    "n_named": 5,
+    "n_curve": 4,
+    "n_withheld": 1,
+    "share_basis": null,
+    "title": "Hurricane wind × Real estate"
+   },
+   {
+    "entry_id": "wildfire_real_estate",
+    "hazard": {
+     "slug": "wildfire",
+     "label": "Wildfire"
+    },
+    "n_named": 4,
+    "n_curve": 3,
+    "n_withheld": 1,
+    "share_basis": null,
+    "title": "Wildfire × Real estate"
+   }
+  ],
+  "table": [
+   {
+    "key": "house",
+    "label": "House (single-family, slab)",
+    "by_cell": {
+     "convective_wind_real_estate": [
+      "House"
+     ],
+     "flood_real_estate": [
+      "House"
+     ],
+     "hail_real_estate": [
+      "House roof (asphalt shingles)",
+      "House walls and windows"
+     ],
+     "tropical_cyclone_wind_real_estate": [
+      "House"
+     ],
+     "wildfire_real_estate": [
+      "House"
+     ]
+    }
+   },
+   {
+    "key": "warehouse",
+    "label": "Warehouse",
+    "by_cell": {
+     "convective_wind_real_estate": [
+      "Warehouse"
+     ],
+     "flood_real_estate": [
+      "Warehouse"
+     ],
+     "hail_real_estate": [
+      "Warehouse roof (standing-seam steel)",
+      "Warehouse windows"
+     ],
+     "tropical_cyclone_wind_real_estate": [
+      "Warehouse"
+     ],
+     "wildfire_real_estate": [
+      "Warehouse"
+     ]
+    }
+   },
+   {
+    "key": "office",
+    "label": "Office (three storeys)",
+    "by_cell": {
+     "convective_wind_real_estate": [
+      "Office"
+     ],
+     "flood_real_estate": [
+      "Office"
+     ],
+     "hail_real_estate": [
+      "Office roof (TPO membrane and insulation)",
+      "Office windows"
+     ],
+     "tropical_cyclone_wind_real_estate": [
+      "Office"
+     ],
+     "wildfire_real_estate": [
+      "Office"
+     ]
+    }
+   },
+   {
+    "key": "retail",
+    "label": "Retail",
+    "by_cell": {
+     "convective_wind_real_estate": [],
+     "flood_real_estate": [
+      "Retail"
+     ],
+     "hail_real_estate": [],
+     "tropical_cyclone_wind_real_estate": [
+      "Retail"
+     ],
+     "wildfire_real_estate": []
+    }
+   },
+   {
+    "key": "contents",
+    "label": "Contents and inventory",
+    "by_cell": {
+     "convective_wind_real_estate": [
+      "contents and inventory (withheld)"
+     ],
+     "flood_real_estate": [
+      "contents and inventory (withheld)"
+     ],
+     "hail_real_estate": [
+      "contents and inventory (withheld)"
+     ],
+     "tropical_cyclone_wind_real_estate": [
+      "contents and inventory (withheld)"
+     ],
+     "wildfire_real_estate": [
+      "contents and inventory (withheld)"
+     ]
+    }
+   }
+  ]
+ },
+ "twin": {
+  "available": false,
+  "sentence": "No twin mapping yet — the Digital Twin's nodes have not been crosswalked to this asset's parts.",
+  "sha256": null,
+  "rows": null,
+  "nodes": {}
+ },
+ "value_source": null,
  "entries": [
   {
    "entry_id": "convective_wind_real_estate",
@@ -359,7 +1776,7 @@
     "sha256": "e676fb077ca3fb96a1d0efce7b1e408c2a82265ec97ea2eb4ebbef7e5aeeef3d",
     "consumer_pin": null
    },
-   "summary": "Proposal, not in the runtime index — Convective wind on buildings: eF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder.",
+   "summary": "Proposal, not in the runtime index — Convective wind on buildings: EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 6,
@@ -367,8 +1784,10 @@
    "outside_checks": 1,
    "chain_core_as_files": 5,
    "generation": "skill",
-   "aria_label": "Convective wind × Real estate, proposal, shape T3, cost T4, not searched",
-   "href": "/cells/convective_wind_real_estate"
+   "aria_label": "Convective wind × Real estate, proposal, evidence: our judgment, field reports not searched",
+   "href": "/cells/convective_wind_real_estate",
+   "word": "our judgment",
+   "halves": "How damage rises: borrowed · how it becomes dollars: our judgment"
   },
   {
    "entry_id": "flood_real_estate",
@@ -422,7 +1841,7 @@
     "sha256": "99fe3f1f6430caada7943a4a83fe74a2f94895c8c454d7789fda97fabfafe9af",
     "consumer_pin": null
    },
-   "summary": "Proposal, not in the runtime index — Flood on buildings: fEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water).",
+   "summary": "Proposal, not in the runtime index — Flood on buildings: FEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water).",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 7,
@@ -430,8 +1849,10 @@
    "outside_checks": 1,
    "chain_core_as_files": 6,
    "generation": "skill",
-   "aria_label": "Flood × Real estate, proposal, shape T2, cost T2, not searched",
-   "href": "/cells/flood_real_estate"
+   "aria_label": "Flood × Real estate, proposal, evidence: published, field reports not searched",
+   "href": "/cells/flood_real_estate",
+   "word": "published",
+   "halves": "How damage rises: published · how it becomes dollars: published"
   },
   {
    "entry_id": "hail_real_estate",
@@ -493,8 +1914,10 @@
    "outside_checks": 1,
    "chain_core_as_files": 5,
    "generation": "skill",
-   "aria_label": "Hail × Real estate, proposal, partial, shape T3–4, cost T3–4, not searched",
-   "href": "/cells/hail_real_estate"
+   "aria_label": "Hail × Real estate, proposal, partial, evidence: our judgment, field reports not searched",
+   "href": "/cells/hail_real_estate",
+   "word": "our judgment",
+   "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment"
   },
   {
    "entry_id": "tropical_cyclone_wind_real_estate",
@@ -548,7 +1971,7 @@
     "sha256": "99487ff5812e6b1017eeaaeea14d469bcb15ae2265e9d6cf107ce5ca41c85753",
     "consumer_pin": null
    },
-   "summary": "Proposal, not in the runtime index — Hurricane wind on buildings: fEMA Hazus hurricane building-loss rows used as published (every 5 mph, five terrain classes) for the Hazus building type and wind characteristics matching each building.",
+   "summary": "Proposal, not in the runtime index — Hurricane wind on buildings: FEMA Hazus hurricane building-loss rows used as published (every 5 mph, five terrain classes) for the Hazus building type and wind characteristics matching each building.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 20,
@@ -556,8 +1979,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 6,
    "generation": "skill",
-   "aria_label": "Hurricane wind × Real estate, proposal, shape T2, cost T2, not searched",
-   "href": "/cells/tropical_cyclone_wind_real_estate"
+   "aria_label": "Hurricane wind × Real estate, proposal, evidence: published, field reports not searched",
+   "href": "/cells/tropical_cyclone_wind_real_estate",
+   "word": "published",
+   "halves": "How damage rises: published · how it becomes dollars: published"
   },
   {
    "entry_id": "wildfire_real_estate",
@@ -611,7 +2036,7 @@
     "sha256": "6b7c771d88b46d60e2c0b1339009ab06753f93f6376e8c8f30e40c91f31474ee",
     "consumer_pin": null
    },
-   "summary": "Proposal, not in the runtime index — Wildfire on buildings: uS Forest Service home loss by flame-length class (shrub vegetation) for the house.",
+   "summary": "Proposal, not in the runtime index — Wildfire on buildings: US Forest Service home loss by flame-length class (shrub vegetation) for the house.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 3,
@@ -619,8 +2044,10 @@
    "outside_checks": 2,
    "chain_core_as_files": 5,
    "generation": "skill",
-   "aria_label": "Wildfire × Real estate, proposal, shape T3, cost T4, not searched",
-   "href": "/cells/wildfire_real_estate"
+   "aria_label": "Wildfire × Real estate, proposal, evidence: our judgment, field reports not searched",
+   "href": "/cells/wildfire_real_estate",
+   "word": "our judgment",
+   "halves": "How damage rises: borrowed · how it becomes dollars: our judgment"
   }
  ],
  "has_buckets": false,

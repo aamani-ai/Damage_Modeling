@@ -1,0 +1,4682 @@
+{
+ "schema": "damage_dashboard_coverage.v1",
+ "type": {
+  "slug": "industrial",
+  "label": "Industrial",
+  "category": "real_estate",
+  "category_label": "Real estate",
+  "profile": "one-storey distribution warehouse",
+  "building": "Warehouse",
+  "also_buildings": null,
+  "picture_note": null,
+  "catalogue_asset": "Real estate"
+ },
+ "twin": {
+  "asset": "re_ind",
+  "name": "Sample Industrial Building",
+  "model": "re-warehouse",
+  "root": "ri_bldg",
+  "plant_model": "re-warehouse-site",
+  "plant_root": "ri_site",
+  "plant_name": "Warehouse Site",
+  "commit": "d01abd03cb101ecbe05468a5d573b50f90efd8fb",
+  "crosswalk": "docs/contracts/twin_crosswalks/re_ind.csv"
+ },
+ "trees": {
+  "asset": {
+   "root": "ri_bldg",
+   "nodes": {
+    "ri_bldg": {
+     "n": "Warehouse Building"
+    },
+    "ri_fnd": {
+     "n": "Foundation & Floor",
+     "p": "ri_bldg"
+    },
+    "ri_ftg": {
+     "n": "Column Footings",
+     "p": "ri_fnd"
+    },
+    "ri_gb": {
+     "n": "Grade Beam & Dock Wall",
+     "p": "ri_fnd"
+    },
+    "ri_slab": {
+     "n": "Floor Slab",
+     "p": "ri_fnd"
+    },
+    "ri_pad": {
+     "n": "Building Pad",
+     "p": "ri_fnd"
+    },
+    "ri_str": {
+     "n": "Structure",
+     "p": "ri_bldg"
+    },
+    "ri_frames": {
+     "n": "Primary Rigid Frames",
+     "p": "ri_str"
+    },
+    "ri_cols": {
+     "n": "Columns",
+     "p": "ri_frames"
+    },
+    "ri_raft": {
+     "n": "Rafters",
+     "p": "ri_frames"
+    },
+    "ri_anchor": {
+     "n": "Base Plates & Anchor Rods",
+     "p": "ri_frames"
+    },
+    "ri_purlins": {
+     "n": "Purlins & Girts",
+     "p": "ri_str"
+    },
+    "ri_brace": {
+     "n": "Bracing",
+     "p": "ri_str"
+    },
+    "ri_endwall": {
+     "n": "Endwall Framing",
+     "p": "ri_str"
+    },
+    "ri_roof": {
+     "n": "Roof Assembly",
+     "p": "ri_bldg"
+    },
+    "ri_rpanel": {
+     "n": "Standing-Seam Roof",
+     "p": "ri_roof"
+    },
+    "ri_rins": {
+     "n": "Roof Insulation",
+     "p": "ri_roof"
+    },
+    "ri_gutter": {
+     "n": "Gutters & Downspouts",
+     "p": "ri_roof"
+    },
+    "ri_sky": {
+     "n": "Skylights & Smoke Vents",
+     "p": "ri_roof"
+    },
+    "ri_trim": {
+     "n": "Edge Trim & Ridge Cap",
+     "p": "ri_roof"
+    },
+    "ri_env": {
+     "n": "Walls & Openings",
+     "p": "ri_bldg"
+    },
+    "ri_wpanel": {
+     "n": "Insulated Metal Wall Panels",
+     "p": "ri_env"
+    },
+    "ri_dock": {
+     "n": "Dock Positions",
+     "p": "ri_env"
+    },
+    "ri_ddoor": {
+     "n": "Dock Doors",
+     "p": "ri_dock"
+    },
+    "ri_lev": {
+     "n": "Dock Levelers",
+     "p": "ri_dock"
+    },
+    "ri_seal": {
+     "n": "Seals, Bumpers & Restraints",
+     "p": "ri_dock"
+    },
+    "ri_drive": {
+     "n": "Drive-In Door & Ramp",
+     "p": "ri_env"
+    },
+    "ri_store": {
+     "n": "Office Storefront",
+     "p": "ri_env"
+    },
+    "ri_pdoor": {
+     "n": "Personnel Doors",
+     "p": "ri_env"
+    },
+    "ri_ao_barrier": {
+     "n": "Dock Flood Barriers",
+     "p": "ri_env"
+    },
+    "ri_svc": {
+     "n": "Fixed Services",
+     "p": "ri_bldg"
+    },
+    "ri_fire": {
+     "n": "Fire Sprinklers (ESFR)",
+     "p": "ri_svc"
+    },
+    "ri_fhead": {
+     "n": "Heads & Branch Lines",
+     "p": "ri_fire"
+    },
+    "ri_riser": {
+     "n": "Riser Room & Fire Pump",
+     "p": "ri_fire"
+    },
+    "ri_falarm": {
+     "n": "Fire Alarm & Monitoring",
+     "p": "ri_fire"
+    },
+    "ri_elec": {
+     "n": "Electrical Service & Distribution",
+     "p": "ri_svc"
+    },
+    "ri_swbd": {
+     "n": "Main Switchboard",
+     "p": "ri_elec"
+    },
+    "ri_panels": {
+     "n": "Panels & Feeders",
+     "p": "ri_elec"
+    },
+    "ri_light": {
+     "n": "High-Bay Lighting",
+     "p": "ri_elec"
+    },
+    "ri_hvac": {
+     "n": "Heating & Ventilation",
+     "p": "ri_svc"
+    },
+    "ri_uh": {
+     "n": "Gas Unit Heaters",
+     "p": "ri_hvac"
+    },
+    "ri_rtu": {
+     "n": "Office Rooftop Units",
+     "p": "ri_hvac"
+    },
+    "ri_exh": {
+     "n": "Exhaust Fans & Louvers",
+     "p": "ri_hvac"
+    },
+    "ri_plumb": {
+     "n": "Plumbing",
+     "p": "ri_svc"
+    },
+    "ri_int": {
+     "n": "Interior Construction",
+     "p": "ri_bldg"
+    },
+    "ri_part": {
+     "n": "Partitions & Drywall",
+     "p": "ri_int"
+    },
+    "ri_ceil": {
+     "n": "Suspended Ceilings",
+     "p": "ri_int"
+    },
+    "ri_floorfin": {
+     "n": "Office Floor Finishes",
+     "p": "ri_int"
+    },
+    "ri_rest": {
+     "n": "Restrooms & Break Room",
+     "p": "ri_int"
+    },
+    "ri_cont": {
+     "n": "Contents · Tenant",
+     "p": "ri_bldg"
+    },
+    "ri_rack": {
+     "n": "Pallet Racking",
+     "p": "ri_cont"
+    },
+    "ri_goods": {
+     "n": "Stored Goods",
+     "p": "ri_cont"
+    }
+   }
+  },
+  "plant": {
+   "root": "ri_site",
+   "nodes": {
+    "ri_site": {
+     "n": "Warehouse Site"
+    },
+    "rsi_b": {
+     "n": "Building",
+     "p": "ri_site"
+    },
+    "rsi_bldg": {
+     "n": "Warehouse Building",
+     "p": "rsi_b"
+    },
+    "rsi_pave": {
+     "n": "Paving",
+     "p": "ri_site"
+    },
+    "rsi_truck": {
+     "n": "Truck Court & Trailer Stalls",
+     "p": "rsi_pave"
+    },
+    "rsi_auto": {
+     "n": "Car Parking & Drives",
+     "p": "rsi_pave"
+    },
+    "rsi_storm": {
+     "n": "Stormwater",
+     "p": "ri_site"
+    },
+    "rsi_pond": {
+     "n": "Detention Pond",
+     "p": "rsi_storm"
+    },
+    "rsi_inlets": {
+     "n": "Trench Drains & Storm Pipe",
+     "p": "rsi_storm"
+    },
+    "rsi_util": {
+     "n": "Utilities",
+     "p": "ri_site"
+    },
+    "rsi_xfmr": {
+     "n": "Utility Transformer",
+     "p": "rsi_util"
+    },
+    "rsi_fw": {
+     "n": "Fire Water Service",
+     "p": "rsi_util"
+    },
+    "rsi_wsg": {
+     "n": "Water, Sewer & Gas Laterals",
+     "p": "rsi_util"
+    },
+    "rsi_sec": {
+     "n": "Fencing, Lighting & Landscape",
+     "p": "ri_site"
+    },
+    "rsi_fence": {
+     "n": "Fence, Gate & Guard Booth",
+     "p": "rsi_sec"
+    },
+    "rsi_lights": {
+     "n": "Site Lighting",
+     "p": "rsi_sec"
+    },
+    "rsi_land": {
+     "n": "Landscaping",
+     "p": "rsi_sec"
+    }
+   }
+  }
+ },
+ "hazards": [
+  {
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail"
+   },
+   "entry_id": "hail_real_estate",
+   "status": "proposal",
+   "gap": false,
+   "href": "/cells/hail_real_estate?building=industrial",
+   "rows": {
+    "ri_fnd": {
+     "s": "no_direct_damage",
+     "note": "Not named by the cell (inferred; to confirm with the cell owner)",
+     "basis": "inferred"
+    },
+    "ri_str": {
+     "s": "no_direct_damage",
+     "note": "Not named by the cell (inferred; to confirm with the cell owner)",
+     "basis": "inferred"
+    },
+    "ri_roof": {
+     "s": "curve",
+     "part": "Warehouse roof (standing-seam steel)",
+     "note": "Skylights and smoke vents are part of the roof assembly",
+     "basis": "part"
+    },
+    "ri_wpanel": {
+     "s": "no_curve",
+     "note": "Wall panels are not named by the cell",
+     "basis": "not_named"
+    },
+    "ri_dock": {
+     "s": "no_curve",
+     "note": "Dock doors are not named by the cell",
+     "basis": "not_named"
+    },
+    "ri_drive": {
+     "s": "no_curve",
+     "note": "The drive-in door is not named by the cell",
+     "basis": "not_named"
+    },
+    "ri_store": {
+     "s": "curve",
+     "part": "Warehouse windows",
+     "note": "The office storefront glazing",
+     "basis": "part"
+    },
+    "ri_pdoor": {
+     "s": "no_curve",
+     "note": "Personnel doors are not named by the cell",
+     "basis": "not_named"
+    },
+    "ri_ao_barrier": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference building",
+     "basis": "out_of_scope"
+    },
+    "ri_fire": {
+     "s": "no_direct_damage",
+     "note": "Not named by the cell (inferred; to confirm with the cell owner)",
+     "basis": "inferred"
+    },
+    "ri_elec": {
+     "s": "no_direct_damage",
+     "note": "Not named by the cell (inferred; to confirm with the cell owner)",
+     "basis": "inferred"
+    },
+    "ri_hvac": {
+     "s": "no_curve",
+     "part": "Outdoor equipment: AC condenser, rooftop units",
+     "note": "Whether it sits in the profile value is an open question",
+     "basis": "not_covered"
+    },
+    "ri_plumb": {
+     "s": "no_direct_damage",
+     "note": "Not named by the cell (inferred; to confirm with the cell owner)",
+     "basis": "inferred"
+    },
+    "ri_int": {
+     "s": "no_direct_damage",
+     "note": "Not named by the cell (inferred; to confirm with the cell owner)",
+     "basis": "inferred"
+    },
+    "ri_cont": {
+     "s": "no_curve",
+     "part": "Contents",
+     "note": "Declared as a withheld placeholder part",
+     "basis": "out_of_scope"
+    },
+    "ri_site": {
+     "s": "outside",
+     "part": "Land, site works",
+     "basis": "out_of_scope"
+    },
+    "rsi_b": {
+     "s": "curve",
+     "part": "Warehouse roof (standing-seam steel)",
+     "note": "The building on its site: the roof and windows carry curves",
+     "basis": "part"
+    }
+   },
+   "states": {
+    "asset": {
+     "ri_fnd": "ri_fnd",
+     "ri_ftg": "ri_fnd",
+     "ri_gb": "ri_fnd",
+     "ri_slab": "ri_fnd",
+     "ri_pad": "ri_fnd",
+     "ri_str": "ri_str",
+     "ri_frames": "ri_str",
+     "ri_cols": "ri_str",
+     "ri_raft": "ri_str",
+     "ri_anchor": "ri_str",
+     "ri_purlins": "ri_str",
+     "ri_brace": "ri_str",
+     "ri_endwall": "ri_str",
+     "ri_roof": "ri_roof",
+     "ri_rpanel": "ri_roof",
+     "ri_rins": "ri_roof",
+     "ri_gutter": "ri_roof",
+     "ri_sky": "ri_roof",
+     "ri_trim": "ri_roof",
+     "ri_wpanel": "ri_wpanel",
+     "ri_dock": "ri_dock",
+     "ri_ddoor": "ri_dock",
+     "ri_lev": "ri_dock",
+     "ri_seal": "ri_dock",
+     "ri_drive": "ri_drive",
+     "ri_store": "ri_store",
+     "ri_pdoor": "ri_pdoor",
+     "ri_ao_barrier": "ri_ao_barrier",
+     "ri_fire": "ri_fire",
+     "ri_fhead": "ri_fire",
+     "ri_riser": "ri_fire",
+     "ri_falarm": "ri_fire",
+     "ri_elec": "ri_elec",
+     "ri_swbd": "ri_elec",
+     "ri_panels": "ri_elec",
+     "ri_light": "ri_elec",
+     "ri_hvac": "ri_hvac",
+     "ri_uh": "ri_hvac",
+     "ri_rtu": "ri_hvac",
+     "ri_exh": "ri_hvac",
+     "ri_plumb": "ri_plumb",
+     "ri_int": "ri_int",
+     "ri_part": "ri_int",
+     "ri_ceil": "ri_int",
+     "ri_floorfin": "ri_int",
+     "ri_rest": "ri_int",
+     "ri_cont": "ri_cont",
+     "ri_rack": "ri_cont",
+     "ri_goods": "ri_cont"
+    },
+    "plant": {
+     "ri_site": "ri_site",
+     "rsi_b": "rsi_b",
+     "rsi_bldg": "rsi_b",
+     "rsi_pave": "ri_site",
+     "rsi_truck": "ri_site",
+     "rsi_auto": "ri_site",
+     "rsi_storm": "ri_site",
+     "rsi_pond": "ri_site",
+     "rsi_inlets": "ri_site",
+     "rsi_util": "ri_site",
+     "rsi_xfmr": "ri_site",
+     "rsi_fw": "ri_site",
+     "rsi_wsg": "ri_site",
+     "rsi_sec": "ri_site",
+     "rsi_fence": "ri_site",
+     "rsi_lights": "ri_site",
+     "rsi_land": "ri_site"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "ri_fnd",
+      "name": "Foundation & Floor",
+      "state": "no_direct_damage",
+      "by_state": [
+       {
+        "state": "no_direct_damage",
+        "words": "no direct damage",
+        "parts": [
+         {
+          "node": "ri_ftg",
+          "name": "Column Footings",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "ri_gb",
+          "name": "Grade Beam & Dock Wall",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "ri_slab",
+          "name": "Floor Slab",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "ri_pad",
+          "name": "Building Pad",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_str",
+      "name": "Structure",
+      "state": "no_direct_damage",
+      "by_state": [
+       {
+        "state": "no_direct_damage",
+        "words": "no direct damage",
+        "parts": [
+         {
+          "node": "ri_frames",
+          "name": "Primary Rigid Frames",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "ri_purlins",
+          "name": "Purlins & Girts",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "ri_brace",
+          "name": "Bracing",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "ri_endwall",
+          "name": "Endwall Framing",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_roof",
+      "name": "Roof Assembly",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_rpanel",
+          "name": "Standing-Seam Roof",
+          "part": "Warehouse roof (standing-seam steel)",
+          "note": "Skylights and smoke vents are part of the roof assembly"
+         },
+         {
+          "node": "ri_rins",
+          "name": "Roof Insulation",
+          "part": "Warehouse roof (standing-seam steel)",
+          "note": "Skylights and smoke vents are part of the roof assembly"
+         },
+         {
+          "node": "ri_gutter",
+          "name": "Gutters & Downspouts",
+          "part": "Warehouse roof (standing-seam steel)",
+          "note": "Skylights and smoke vents are part of the roof assembly"
+         },
+         {
+          "node": "ri_sky",
+          "name": "Skylights & Smoke Vents",
+          "part": "Warehouse roof (standing-seam steel)",
+          "note": "Skylights and smoke vents are part of the roof assembly"
+         },
+         {
+          "node": "ri_trim",
+          "name": "Edge Trim & Ridge Cap",
+          "part": "Warehouse roof (standing-seam steel)",
+          "note": "Skylights and smoke vents are part of the roof assembly"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_env",
+      "name": "Walls & Openings",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_store",
+          "name": "Office Storefront",
+          "part": "Warehouse windows",
+          "note": "The office storefront glazing"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "ri_wpanel",
+          "name": "Insulated Metal Wall Panels",
+          "note": "Wall panels are not named by the cell"
+         },
+         {
+          "node": "ri_dock",
+          "name": "Dock Positions",
+          "note": "Dock doors are not named by the cell"
+         },
+         {
+          "node": "ri_drive",
+          "name": "Drive-In Door & Ramp",
+          "note": "The drive-in door is not named by the cell"
+         },
+         {
+          "node": "ri_pdoor",
+          "name": "Personnel Doors",
+          "note": "Personnel doors are not named by the cell"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "ri_ao_barrier",
+          "name": "Dock Flood Barriers",
+          "note": "A resilience measure in the twin; not part of the reference building"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_svc",
+      "name": "Fixed Services",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "ri_hvac",
+          "name": "Heating & Ventilation",
+          "part": "Outdoor equipment: AC condenser, rooftop units",
+          "note": "Whether it sits in the profile value is an open question"
+         }
+        ]
+       },
+       {
+        "state": "no_direct_damage",
+        "words": "no direct damage",
+        "parts": [
+         {
+          "node": "ri_fire",
+          "name": "Fire Sprinklers (ESFR)",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "ri_elec",
+          "name": "Electrical Service & Distribution",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "ri_plumb",
+          "name": "Plumbing",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_int",
+      "name": "Interior Construction",
+      "state": "no_direct_damage",
+      "by_state": [
+       {
+        "state": "no_direct_damage",
+        "words": "no direct damage",
+        "parts": [
+         {
+          "node": "ri_part",
+          "name": "Partitions & Drywall",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "ri_ceil",
+          "name": "Suspended Ceilings",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "ri_floorfin",
+          "name": "Office Floor Finishes",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "ri_rest",
+          "name": "Restrooms & Break Room",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_cont",
+      "name": "Contents · Tenant",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "ri_rack",
+          "name": "Pallet Racking",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         },
+         {
+          "node": "ri_goods",
+          "name": "Stored Goods",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "rsi_b",
+      "name": "Building",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rsi_bldg",
+          "name": "Warehouse Building",
+          "part": "Warehouse roof (standing-seam steel)",
+          "note": "The building on its site: the roof and windows carry curves"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_pave",
+      "name": "Paving",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_truck",
+          "name": "Truck Court & Trailer Stalls",
+          "part": "Land, site works"
+         },
+         {
+          "node": "rsi_auto",
+          "name": "Car Parking & Drives",
+          "part": "Land, site works"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_storm",
+      "name": "Stormwater",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_pond",
+          "name": "Detention Pond",
+          "part": "Land, site works"
+         },
+         {
+          "node": "rsi_inlets",
+          "name": "Trench Drains & Storm Pipe",
+          "part": "Land, site works"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_util",
+      "name": "Utilities",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_xfmr",
+          "name": "Utility Transformer",
+          "part": "Land, site works"
+         },
+         {
+          "node": "rsi_fw",
+          "name": "Fire Water Service",
+          "part": "Land, site works"
+         },
+         {
+          "node": "rsi_wsg",
+          "name": "Water, Sewer & Gas Laterals",
+          "part": "Land, site works"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_sec",
+      "name": "Fencing, Lighting & Landscape",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_fence",
+          "name": "Fence, Gate & Guard Booth",
+          "part": "Land, site works"
+         },
+         {
+          "node": "rsi_lights",
+          "name": "Site Lighting",
+          "part": "Land, site works"
+         },
+         {
+          "node": "rsi_land",
+          "name": "Landscaping",
+          "part": "Land, site works"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 7,
+    "conditioner": 0,
+    "no_curve": 7,
+    "no_direct_damage": 15,
+    "outside": 11
+   },
+   "curve_parts": [
+    "Warehouse roof (standing-seam steel)",
+    "Warehouse windows"
+   ],
+   "unmapped": [],
+   "sparks": {
+    "Warehouse roof (standing-seam steel)": {
+     "pts": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       5.08,
+       0.0
+      ],
+      [
+       10.16,
+       0.0
+      ],
+      [
+       15.24,
+       0.0
+      ],
+      [
+       20.32,
+       0.0
+      ],
+      [
+       25.4,
+       0.0
+      ],
+      [
+       30.48,
+       0.0
+      ],
+      [
+       35.56,
+       0.0
+      ],
+      [
+       40.64,
+       0.0
+      ],
+      [
+       45.72,
+       0.0
+      ],
+      [
+       50.8,
+       0.0001
+      ],
+      [
+       55.88,
+       0.0019
+      ],
+      [
+       60.96,
+       0.0205
+      ],
+      [
+       66.0,
+       0.1025
+      ],
+      [
+       71.0,
+       0.29
+      ],
+      [
+       76.0,
+       0.5446
+      ],
+      [
+       81.0,
+       0.7688
+      ],
+      [
+       86.0,
+       0.9067
+      ],
+      [
+       91.0,
+       0.9695
+      ],
+      [
+       96.0,
+       0.9917
+      ],
+      [
+       101.0,
+       0.9981
+      ],
+      [
+       106.0,
+       0.9996
+      ],
+      [
+       111.0,
+       0.9999
+      ],
+      [
+       116.0,
+       1.0
+      ],
+      [
+       121.0,
+       1.0
+      ],
+      [
+       126.0,
+       1.0
+      ],
+      [
+       132.0,
+       1.0
+      ],
+      [
+       137.0,
+       1.0
+      ],
+      [
+       142.0,
+       1.0
+      ],
+      [
+       147.0,
+       1.0
+      ],
+      [
+       152.0,
+       1.0
+      ],
+      [
+       157.0,
+       1.0
+      ],
+      [
+       162.0,
+       1.0
+      ],
+      [
+       167.0,
+       1.0
+      ],
+      [
+       172.0,
+       1.0
+      ],
+      [
+       177.0,
+       1.0
+      ],
+      [
+       182.0,
+       1.0
+      ],
+      [
+       187.0,
+       1.0
+      ],
+      [
+       192.0,
+       1.0
+      ],
+      [
+       197.0,
+       1.0
+      ],
+      [
+       202.0,
+       1.0
+      ],
+      [
+       203.2,
+       1.0
+      ]
+     ],
+     "kind": "line",
+     "axis": "hazard's MESH75 hail diameter",
+     "unit": "mm",
+     "curve_id": "HRE_IND_ROOF_STANDING_SEAM_STEEL",
+     "label": "Warehouse roof (standing-seam steel)"
+    },
+    "Warehouse windows": {
+     "pts": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       5.08,
+       0.0
+      ],
+      [
+       10.16,
+       0.0
+      ],
+      [
+       15.24,
+       0.0
+      ],
+      [
+       20.32,
+       0.0
+      ],
+      [
+       25.4,
+       0.0
+      ],
+      [
+       30.48,
+       0.0003
+      ],
+      [
+       35.56,
+       0.0047
+      ],
+      [
+       40.64,
+       0.0275
+      ],
+      [
+       45.72,
+       0.0798
+      ],
+      [
+       50.8,
+       0.1455
+      ],
+      [
+       55.88,
+       0.1985
+      ],
+      [
+       60.96,
+       0.2291
+      ],
+      [
+       66.0,
+       0.2427
+      ],
+      [
+       71.0,
+       0.2477
+      ],
+      [
+       76.0,
+       0.2494
+      ],
+      [
+       81.0,
+       0.2498
+      ],
+      [
+       86.0,
+       0.25
+      ],
+      [
+       91.0,
+       0.25
+      ],
+      [
+       96.0,
+       0.25
+      ],
+      [
+       101.0,
+       0.25
+      ],
+      [
+       106.0,
+       0.25
+      ],
+      [
+       111.0,
+       0.25
+      ],
+      [
+       116.0,
+       0.25
+      ],
+      [
+       121.0,
+       0.25
+      ],
+      [
+       126.0,
+       0.25
+      ],
+      [
+       132.0,
+       0.25
+      ],
+      [
+       137.0,
+       0.25
+      ],
+      [
+       142.0,
+       0.25
+      ],
+      [
+       147.0,
+       0.25
+      ],
+      [
+       152.0,
+       0.25
+      ],
+      [
+       157.0,
+       0.25
+      ],
+      [
+       162.0,
+       0.25
+      ],
+      [
+       167.0,
+       0.25
+      ],
+      [
+       172.0,
+       0.25
+      ],
+      [
+       177.0,
+       0.25
+      ],
+      [
+       182.0,
+       0.25
+      ],
+      [
+       187.0,
+       0.25
+      ],
+      [
+       192.0,
+       0.25
+      ],
+      [
+       197.0,
+       0.25
+      ],
+      [
+       202.0,
+       0.25
+      ],
+      [
+       203.2,
+       0.25
+      ]
+     ],
+     "kind": "line",
+     "axis": "hazard's MESH75 hail diameter",
+     "unit": "mm",
+     "curve_id": "HRE_IND_WINDOWS_T4",
+     "label": "Warehouse windows"
+    }
+   }
+  },
+  {
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "entry_id": "flood_real_estate",
+   "status": "proposal",
+   "gap": false,
+   "href": "/cells/flood_real_estate?building=industrial",
+   "rows": {
+    "ri_bldg": {
+     "s": "curve",
+     "part": "Warehouse",
+     "note": "Whole-building response",
+     "basis": "part"
+    },
+    "ri_ao_barrier": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference building",
+     "basis": "out_of_scope"
+    },
+    "ri_cont": {
+     "s": "no_curve",
+     "part": "Contents",
+     "note": "Declared as a withheld placeholder part",
+     "basis": "out_of_scope"
+    },
+    "ri_site": {
+     "s": "outside",
+     "part": "Land, site works",
+     "note": "The site around the building is outside the value this curve prices",
+     "basis": "out_of_scope"
+    },
+    "rsi_b": {
+     "s": "curve",
+     "part": "Warehouse",
+     "note": "The building on its site",
+     "basis": "part"
+    }
+   },
+   "states": {
+    "asset": {
+     "ri_bldg": "ri_bldg",
+     "ri_fnd": "ri_bldg",
+     "ri_ftg": "ri_bldg",
+     "ri_gb": "ri_bldg",
+     "ri_slab": "ri_bldg",
+     "ri_pad": "ri_bldg",
+     "ri_str": "ri_bldg",
+     "ri_frames": "ri_bldg",
+     "ri_cols": "ri_bldg",
+     "ri_raft": "ri_bldg",
+     "ri_anchor": "ri_bldg",
+     "ri_purlins": "ri_bldg",
+     "ri_brace": "ri_bldg",
+     "ri_endwall": "ri_bldg",
+     "ri_roof": "ri_bldg",
+     "ri_rpanel": "ri_bldg",
+     "ri_rins": "ri_bldg",
+     "ri_gutter": "ri_bldg",
+     "ri_sky": "ri_bldg",
+     "ri_trim": "ri_bldg",
+     "ri_env": "ri_bldg",
+     "ri_wpanel": "ri_bldg",
+     "ri_dock": "ri_bldg",
+     "ri_ddoor": "ri_bldg",
+     "ri_lev": "ri_bldg",
+     "ri_seal": "ri_bldg",
+     "ri_drive": "ri_bldg",
+     "ri_store": "ri_bldg",
+     "ri_pdoor": "ri_bldg",
+     "ri_ao_barrier": "ri_ao_barrier",
+     "ri_svc": "ri_bldg",
+     "ri_fire": "ri_bldg",
+     "ri_fhead": "ri_bldg",
+     "ri_riser": "ri_bldg",
+     "ri_falarm": "ri_bldg",
+     "ri_elec": "ri_bldg",
+     "ri_swbd": "ri_bldg",
+     "ri_panels": "ri_bldg",
+     "ri_light": "ri_bldg",
+     "ri_hvac": "ri_bldg",
+     "ri_uh": "ri_bldg",
+     "ri_rtu": "ri_bldg",
+     "ri_exh": "ri_bldg",
+     "ri_plumb": "ri_bldg",
+     "ri_int": "ri_bldg",
+     "ri_part": "ri_bldg",
+     "ri_ceil": "ri_bldg",
+     "ri_floorfin": "ri_bldg",
+     "ri_rest": "ri_bldg",
+     "ri_cont": "ri_cont",
+     "ri_rack": "ri_cont",
+     "ri_goods": "ri_cont"
+    },
+    "plant": {
+     "ri_site": "ri_site",
+     "rsi_b": "rsi_b",
+     "rsi_bldg": "rsi_b",
+     "rsi_pave": "ri_site",
+     "rsi_truck": "ri_site",
+     "rsi_auto": "ri_site",
+     "rsi_storm": "ri_site",
+     "rsi_pond": "ri_site",
+     "rsi_inlets": "ri_site",
+     "rsi_util": "ri_site",
+     "rsi_xfmr": "ri_site",
+     "rsi_fw": "ri_site",
+     "rsi_wsg": "ri_site",
+     "rsi_sec": "ri_site",
+     "rsi_fence": "ri_site",
+     "rsi_lights": "ri_site",
+     "rsi_land": "ri_site"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "ri_fnd",
+      "name": "Foundation & Floor",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_ftg",
+          "name": "Column Footings",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_gb",
+          "name": "Grade Beam & Dock Wall",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_slab",
+          "name": "Floor Slab",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_pad",
+          "name": "Building Pad",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_str",
+      "name": "Structure",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_frames",
+          "name": "Primary Rigid Frames",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_purlins",
+          "name": "Purlins & Girts",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_brace",
+          "name": "Bracing",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_endwall",
+          "name": "Endwall Framing",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_roof",
+      "name": "Roof Assembly",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_rpanel",
+          "name": "Standing-Seam Roof",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_rins",
+          "name": "Roof Insulation",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_gutter",
+          "name": "Gutters & Downspouts",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_sky",
+          "name": "Skylights & Smoke Vents",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_trim",
+          "name": "Edge Trim & Ridge Cap",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_env",
+      "name": "Walls & Openings",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_wpanel",
+          "name": "Insulated Metal Wall Panels",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_dock",
+          "name": "Dock Positions",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_drive",
+          "name": "Drive-In Door & Ramp",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_store",
+          "name": "Office Storefront",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_pdoor",
+          "name": "Personnel Doors",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "ri_ao_barrier",
+          "name": "Dock Flood Barriers",
+          "note": "A resilience measure in the twin; not part of the reference building"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_svc",
+      "name": "Fixed Services",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_fire",
+          "name": "Fire Sprinklers (ESFR)",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_elec",
+          "name": "Electrical Service & Distribution",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_hvac",
+          "name": "Heating & Ventilation",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_plumb",
+          "name": "Plumbing",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_int",
+      "name": "Interior Construction",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_part",
+          "name": "Partitions & Drywall",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_ceil",
+          "name": "Suspended Ceilings",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_floorfin",
+          "name": "Office Floor Finishes",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_rest",
+          "name": "Restrooms & Break Room",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_cont",
+      "name": "Contents · Tenant",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "ri_rack",
+          "name": "Pallet Racking",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         },
+         {
+          "node": "ri_goods",
+          "name": "Stored Goods",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "rsi_b",
+      "name": "Building",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rsi_bldg",
+          "name": "Warehouse Building",
+          "part": "Warehouse",
+          "note": "The building on its site"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_pave",
+      "name": "Paving",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_truck",
+          "name": "Truck Court & Trailer Stalls",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_auto",
+          "name": "Car Parking & Drives",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_storm",
+      "name": "Stormwater",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_pond",
+          "name": "Detention Pond",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_inlets",
+          "name": "Trench Drains & Storm Pipe",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_util",
+      "name": "Utilities",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_xfmr",
+          "name": "Utility Transformer",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_fw",
+          "name": "Fire Water Service",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_wsg",
+          "name": "Water, Sewer & Gas Laterals",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_sec",
+      "name": "Fencing, Lighting & Landscape",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_fence",
+          "name": "Fence, Gate & Guard Booth",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_lights",
+          "name": "Site Lighting",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_land",
+          "name": "Landscaping",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 27,
+    "conditioner": 0,
+    "no_curve": 2,
+    "no_direct_damage": 0,
+    "outside": 11
+   },
+   "curve_parts": [
+    "Warehouse"
+   ],
+   "unmapped": [],
+   "sparks": {
+    "Warehouse": {
+     "pts": [
+      [
+       -4.0,
+       0.0
+      ],
+      [
+       -3.3,
+       0.0
+      ],
+      [
+       -2.775,
+       0.0
+      ],
+      [
+       -2.075,
+       0.0
+      ],
+      [
+       -1.55,
+       0.0
+      ],
+      [
+       -1.0,
+       0.0
+      ],
+      [
+       -0.325,
+       0.0
+      ],
+      [
+       0.2,
+       0.01
+      ],
+      [
+       0.9,
+       0.045
+      ],
+      [
+       1.425,
+       0.0628
+      ],
+      [
+       2.0,
+       0.08
+      ],
+      [
+       2.65,
+       0.0995
+      ],
+      [
+       3.35,
+       0.117
+      ],
+      [
+       4.0,
+       0.13
+      ],
+      [
+       4.575,
+       0.1473
+      ],
+      [
+       5.1,
+       0.163
+      ],
+      [
+       5.8,
+       0.184
+      ],
+      [
+       6.325,
+       0.1998
+      ],
+      [
+       7.0,
+       0.22
+      ],
+      [
+       7.55,
+       0.2365
+      ],
+      [
+       8.075,
+       0.253
+      ],
+      [
+       8.775,
+       0.281
+      ],
+      [
+       9.3,
+       0.299
+      ],
+      [
+       10.0,
+       0.32
+      ],
+      [
+       10.7,
+       0.355
+      ],
+      [
+       11.225,
+       0.379
+      ],
+      [
+       11.925,
+       0.407
+      ],
+      [
+       12.45,
+       0.428
+      ],
+      [
+       13.0,
+       0.45
+      ],
+      [
+       13.675,
+       0.477
+      ],
+      [
+       14.2,
+       0.496
+      ],
+      [
+       14.9,
+       0.517
+      ],
+      [
+       15.425,
+       0.5328
+      ],
+      [
+       16.0,
+       0.55
+      ],
+      [
+       16.65,
+       0.5695
+      ],
+      [
+       17.35,
+       0.5905
+      ],
+      [
+       18.0,
+       0.61
+      ],
+      [
+       18.575,
+       0.6215
+      ],
+      [
+       19.1,
+       0.633
+      ],
+      [
+       19.8,
+       0.654
+      ],
+      [
+       20.325,
+       0.6665
+      ],
+      [
+       21.0,
+       0.68
+      ],
+      [
+       21.55,
+       0.691
+      ],
+      [
+       22.075,
+       0.7007
+      ],
+      [
+       22.775,
+       0.7077
+      ],
+      [
+       23.3,
+       0.716
+      ],
+      [
+       24.0,
+       0.73
+      ]
+     ],
+     "kind": "line",
+     "axis": "water depth above the first floor",
+     "unit": "ft",
+     "curve_id": "FRE_IND_HAZUS_DF341",
+     "label": "Warehouse"
+    }
+   }
+  },
+  {
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "entry_id": "tropical_cyclone_wind_real_estate",
+   "status": "proposal",
+   "gap": false,
+   "href": "/cells/tropical_cyclone_wind_real_estate?building=industrial",
+   "rows": {
+    "ri_bldg": {
+     "s": "curve",
+     "part": "Warehouse",
+     "note": "Whole-building response",
+     "basis": "part"
+    },
+    "ri_ao_barrier": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference building",
+     "basis": "out_of_scope"
+    },
+    "ri_cont": {
+     "s": "no_curve",
+     "part": "Contents",
+     "note": "Declared as a withheld placeholder part",
+     "basis": "out_of_scope"
+    },
+    "ri_site": {
+     "s": "outside",
+     "part": "Land, site works",
+     "note": "The site around the building is outside the value this curve prices",
+     "basis": "out_of_scope"
+    },
+    "rsi_b": {
+     "s": "curve",
+     "part": "Warehouse",
+     "note": "The building on its site",
+     "basis": "part"
+    }
+   },
+   "states": {
+    "asset": {
+     "ri_bldg": "ri_bldg",
+     "ri_fnd": "ri_bldg",
+     "ri_ftg": "ri_bldg",
+     "ri_gb": "ri_bldg",
+     "ri_slab": "ri_bldg",
+     "ri_pad": "ri_bldg",
+     "ri_str": "ri_bldg",
+     "ri_frames": "ri_bldg",
+     "ri_cols": "ri_bldg",
+     "ri_raft": "ri_bldg",
+     "ri_anchor": "ri_bldg",
+     "ri_purlins": "ri_bldg",
+     "ri_brace": "ri_bldg",
+     "ri_endwall": "ri_bldg",
+     "ri_roof": "ri_bldg",
+     "ri_rpanel": "ri_bldg",
+     "ri_rins": "ri_bldg",
+     "ri_gutter": "ri_bldg",
+     "ri_sky": "ri_bldg",
+     "ri_trim": "ri_bldg",
+     "ri_env": "ri_bldg",
+     "ri_wpanel": "ri_bldg",
+     "ri_dock": "ri_bldg",
+     "ri_ddoor": "ri_bldg",
+     "ri_lev": "ri_bldg",
+     "ri_seal": "ri_bldg",
+     "ri_drive": "ri_bldg",
+     "ri_store": "ri_bldg",
+     "ri_pdoor": "ri_bldg",
+     "ri_ao_barrier": "ri_ao_barrier",
+     "ri_svc": "ri_bldg",
+     "ri_fire": "ri_bldg",
+     "ri_fhead": "ri_bldg",
+     "ri_riser": "ri_bldg",
+     "ri_falarm": "ri_bldg",
+     "ri_elec": "ri_bldg",
+     "ri_swbd": "ri_bldg",
+     "ri_panels": "ri_bldg",
+     "ri_light": "ri_bldg",
+     "ri_hvac": "ri_bldg",
+     "ri_uh": "ri_bldg",
+     "ri_rtu": "ri_bldg",
+     "ri_exh": "ri_bldg",
+     "ri_plumb": "ri_bldg",
+     "ri_int": "ri_bldg",
+     "ri_part": "ri_bldg",
+     "ri_ceil": "ri_bldg",
+     "ri_floorfin": "ri_bldg",
+     "ri_rest": "ri_bldg",
+     "ri_cont": "ri_cont",
+     "ri_rack": "ri_cont",
+     "ri_goods": "ri_cont"
+    },
+    "plant": {
+     "ri_site": "ri_site",
+     "rsi_b": "rsi_b",
+     "rsi_bldg": "rsi_b",
+     "rsi_pave": "ri_site",
+     "rsi_truck": "ri_site",
+     "rsi_auto": "ri_site",
+     "rsi_storm": "ri_site",
+     "rsi_pond": "ri_site",
+     "rsi_inlets": "ri_site",
+     "rsi_util": "ri_site",
+     "rsi_xfmr": "ri_site",
+     "rsi_fw": "ri_site",
+     "rsi_wsg": "ri_site",
+     "rsi_sec": "ri_site",
+     "rsi_fence": "ri_site",
+     "rsi_lights": "ri_site",
+     "rsi_land": "ri_site"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "ri_fnd",
+      "name": "Foundation & Floor",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_ftg",
+          "name": "Column Footings",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_gb",
+          "name": "Grade Beam & Dock Wall",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_slab",
+          "name": "Floor Slab",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_pad",
+          "name": "Building Pad",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_str",
+      "name": "Structure",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_frames",
+          "name": "Primary Rigid Frames",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_purlins",
+          "name": "Purlins & Girts",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_brace",
+          "name": "Bracing",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_endwall",
+          "name": "Endwall Framing",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_roof",
+      "name": "Roof Assembly",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_rpanel",
+          "name": "Standing-Seam Roof",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_rins",
+          "name": "Roof Insulation",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_gutter",
+          "name": "Gutters & Downspouts",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_sky",
+          "name": "Skylights & Smoke Vents",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_trim",
+          "name": "Edge Trim & Ridge Cap",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_env",
+      "name": "Walls & Openings",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_wpanel",
+          "name": "Insulated Metal Wall Panels",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_dock",
+          "name": "Dock Positions",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_drive",
+          "name": "Drive-In Door & Ramp",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_store",
+          "name": "Office Storefront",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_pdoor",
+          "name": "Personnel Doors",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "ri_ao_barrier",
+          "name": "Dock Flood Barriers",
+          "note": "A resilience measure in the twin; not part of the reference building"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_svc",
+      "name": "Fixed Services",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_fire",
+          "name": "Fire Sprinklers (ESFR)",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_elec",
+          "name": "Electrical Service & Distribution",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_hvac",
+          "name": "Heating & Ventilation",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_plumb",
+          "name": "Plumbing",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_int",
+      "name": "Interior Construction",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_part",
+          "name": "Partitions & Drywall",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_ceil",
+          "name": "Suspended Ceilings",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_floorfin",
+          "name": "Office Floor Finishes",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_rest",
+          "name": "Restrooms & Break Room",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_cont",
+      "name": "Contents · Tenant",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "ri_rack",
+          "name": "Pallet Racking",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         },
+         {
+          "node": "ri_goods",
+          "name": "Stored Goods",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "rsi_b",
+      "name": "Building",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rsi_bldg",
+          "name": "Warehouse Building",
+          "part": "Warehouse",
+          "note": "The building on its site"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_pave",
+      "name": "Paving",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_truck",
+          "name": "Truck Court & Trailer Stalls",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_auto",
+          "name": "Car Parking & Drives",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_storm",
+      "name": "Stormwater",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_pond",
+          "name": "Detention Pond",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_inlets",
+          "name": "Trench Drains & Storm Pipe",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_util",
+      "name": "Utilities",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_xfmr",
+          "name": "Utility Transformer",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_fw",
+          "name": "Fire Water Service",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_wsg",
+          "name": "Water, Sewer & Gas Laterals",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_sec",
+      "name": "Fencing, Lighting & Landscape",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_fence",
+          "name": "Fence, Gate & Guard Booth",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_lights",
+          "name": "Site Lighting",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_land",
+          "name": "Landscaping",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 27,
+    "conditioner": 0,
+    "no_curve": 2,
+    "no_direct_damage": 0,
+    "outside": 11
+   },
+   "curve_parts": [
+    "Warehouse"
+   ],
+   "unmapped": [],
+   "sparks": {
+    "Warehouse": {
+     "pts": [
+      [
+       50.0,
+       0.0
+      ],
+      [
+       55.0,
+       0.0
+      ],
+      [
+       60.0,
+       0.0
+      ],
+      [
+       65.0,
+       0.0002
+      ],
+      [
+       70.0,
+       0.0007
+      ],
+      [
+       75.0,
+       0.0021
+      ],
+      [
+       80.0,
+       0.0054
+      ],
+      [
+       85.0,
+       0.0107
+      ],
+      [
+       90.0,
+       0.0185
+      ],
+      [
+       95.0,
+       0.0285
+      ],
+      [
+       100.0,
+       0.0394
+      ],
+      [
+       105.0,
+       0.057
+      ],
+      [
+       110.0,
+       0.0871
+      ],
+      [
+       115.0,
+       0.1467
+      ],
+      [
+       120.0,
+       0.2348
+      ],
+      [
+       125.0,
+       0.3619
+      ],
+      [
+       130.0,
+       0.4902
+      ],
+      [
+       135.0,
+       0.6157
+      ],
+      [
+       140.0,
+       0.7352
+      ],
+      [
+       145.0,
+       0.8253
+      ],
+      [
+       150.0,
+       0.8898
+      ],
+      [
+       155.0,
+       0.9294
+      ],
+      [
+       160.0,
+       0.9501
+      ],
+      [
+       165.0,
+       0.9693
+      ],
+      [
+       170.0,
+       0.9863
+      ],
+      [
+       175.0,
+       0.9909
+      ],
+      [
+       180.0,
+       0.9957
+      ],
+      [
+       185.0,
+       0.9952
+      ],
+      [
+       190.0,
+       0.9952
+      ],
+      [
+       195.0,
+       0.9983
+      ],
+      [
+       200.0,
+       0.9994
+      ],
+      [
+       205.0,
+       1.0
+      ],
+      [
+       210.0,
+       1.0
+      ],
+      [
+       215.0,
+       1.0
+      ],
+      [
+       220.0,
+       1.0
+      ],
+      [
+       225.0,
+       1.0
+      ],
+      [
+       230.0,
+       1.0
+      ],
+      [
+       235.0,
+       1.0
+      ],
+      [
+       240.0,
+       1.0
+      ],
+      [
+       245.0,
+       1.0
+      ],
+      [
+       250.0,
+       1.0
+      ]
+     ],
+     "kind": "line",
+     "axis": "peak 3-second gust at 10 m in open terrain",
+     "unit": "mph",
+     "curve_id": "TCRE_IND_HAZUS_SPMBL_NEWDECK_OPEN",
+     "label": "Warehouse"
+    }
+   }
+  },
+  {
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "entry_id": "convective_wind_real_estate",
+   "status": "proposal",
+   "gap": false,
+   "href": "/cells/convective_wind_real_estate?building=industrial",
+   "rows": {
+    "ri_bldg": {
+     "s": "curve",
+     "part": "Warehouse",
+     "note": "Whole-building response",
+     "basis": "part"
+    },
+    "ri_ao_barrier": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference building",
+     "basis": "out_of_scope"
+    },
+    "ri_cont": {
+     "s": "no_curve",
+     "part": "Contents",
+     "note": "Declared as a withheld placeholder part",
+     "basis": "out_of_scope"
+    },
+    "ri_site": {
+     "s": "outside",
+     "part": "Land, site works",
+     "note": "The site around the building is outside the value this curve prices",
+     "basis": "out_of_scope"
+    },
+    "rsi_b": {
+     "s": "curve",
+     "part": "Warehouse",
+     "note": "The building on its site",
+     "basis": "part"
+    }
+   },
+   "states": {
+    "asset": {
+     "ri_bldg": "ri_bldg",
+     "ri_fnd": "ri_bldg",
+     "ri_ftg": "ri_bldg",
+     "ri_gb": "ri_bldg",
+     "ri_slab": "ri_bldg",
+     "ri_pad": "ri_bldg",
+     "ri_str": "ri_bldg",
+     "ri_frames": "ri_bldg",
+     "ri_cols": "ri_bldg",
+     "ri_raft": "ri_bldg",
+     "ri_anchor": "ri_bldg",
+     "ri_purlins": "ri_bldg",
+     "ri_brace": "ri_bldg",
+     "ri_endwall": "ri_bldg",
+     "ri_roof": "ri_bldg",
+     "ri_rpanel": "ri_bldg",
+     "ri_rins": "ri_bldg",
+     "ri_gutter": "ri_bldg",
+     "ri_sky": "ri_bldg",
+     "ri_trim": "ri_bldg",
+     "ri_env": "ri_bldg",
+     "ri_wpanel": "ri_bldg",
+     "ri_dock": "ri_bldg",
+     "ri_ddoor": "ri_bldg",
+     "ri_lev": "ri_bldg",
+     "ri_seal": "ri_bldg",
+     "ri_drive": "ri_bldg",
+     "ri_store": "ri_bldg",
+     "ri_pdoor": "ri_bldg",
+     "ri_ao_barrier": "ri_ao_barrier",
+     "ri_svc": "ri_bldg",
+     "ri_fire": "ri_bldg",
+     "ri_fhead": "ri_bldg",
+     "ri_riser": "ri_bldg",
+     "ri_falarm": "ri_bldg",
+     "ri_elec": "ri_bldg",
+     "ri_swbd": "ri_bldg",
+     "ri_panels": "ri_bldg",
+     "ri_light": "ri_bldg",
+     "ri_hvac": "ri_bldg",
+     "ri_uh": "ri_bldg",
+     "ri_rtu": "ri_bldg",
+     "ri_exh": "ri_bldg",
+     "ri_plumb": "ri_bldg",
+     "ri_int": "ri_bldg",
+     "ri_part": "ri_bldg",
+     "ri_ceil": "ri_bldg",
+     "ri_floorfin": "ri_bldg",
+     "ri_rest": "ri_bldg",
+     "ri_cont": "ri_cont",
+     "ri_rack": "ri_cont",
+     "ri_goods": "ri_cont"
+    },
+    "plant": {
+     "ri_site": "ri_site",
+     "rsi_b": "rsi_b",
+     "rsi_bldg": "rsi_b",
+     "rsi_pave": "ri_site",
+     "rsi_truck": "ri_site",
+     "rsi_auto": "ri_site",
+     "rsi_storm": "ri_site",
+     "rsi_pond": "ri_site",
+     "rsi_inlets": "ri_site",
+     "rsi_util": "ri_site",
+     "rsi_xfmr": "ri_site",
+     "rsi_fw": "ri_site",
+     "rsi_wsg": "ri_site",
+     "rsi_sec": "ri_site",
+     "rsi_fence": "ri_site",
+     "rsi_lights": "ri_site",
+     "rsi_land": "ri_site"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "ri_fnd",
+      "name": "Foundation & Floor",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_ftg",
+          "name": "Column Footings",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_gb",
+          "name": "Grade Beam & Dock Wall",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_slab",
+          "name": "Floor Slab",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_pad",
+          "name": "Building Pad",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_str",
+      "name": "Structure",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_frames",
+          "name": "Primary Rigid Frames",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_purlins",
+          "name": "Purlins & Girts",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_brace",
+          "name": "Bracing",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_endwall",
+          "name": "Endwall Framing",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_roof",
+      "name": "Roof Assembly",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_rpanel",
+          "name": "Standing-Seam Roof",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_rins",
+          "name": "Roof Insulation",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_gutter",
+          "name": "Gutters & Downspouts",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_sky",
+          "name": "Skylights & Smoke Vents",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_trim",
+          "name": "Edge Trim & Ridge Cap",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_env",
+      "name": "Walls & Openings",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_wpanel",
+          "name": "Insulated Metal Wall Panels",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_dock",
+          "name": "Dock Positions",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_drive",
+          "name": "Drive-In Door & Ramp",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_store",
+          "name": "Office Storefront",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_pdoor",
+          "name": "Personnel Doors",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "ri_ao_barrier",
+          "name": "Dock Flood Barriers",
+          "note": "A resilience measure in the twin; not part of the reference building"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_svc",
+      "name": "Fixed Services",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_fire",
+          "name": "Fire Sprinklers (ESFR)",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_elec",
+          "name": "Electrical Service & Distribution",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_hvac",
+          "name": "Heating & Ventilation",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_plumb",
+          "name": "Plumbing",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_int",
+      "name": "Interior Construction",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_part",
+          "name": "Partitions & Drywall",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_ceil",
+          "name": "Suspended Ceilings",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_floorfin",
+          "name": "Office Floor Finishes",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_rest",
+          "name": "Restrooms & Break Room",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_cont",
+      "name": "Contents · Tenant",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "ri_rack",
+          "name": "Pallet Racking",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         },
+         {
+          "node": "ri_goods",
+          "name": "Stored Goods",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "rsi_b",
+      "name": "Building",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rsi_bldg",
+          "name": "Warehouse Building",
+          "part": "Warehouse",
+          "note": "The building on its site"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_pave",
+      "name": "Paving",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_truck",
+          "name": "Truck Court & Trailer Stalls",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_auto",
+          "name": "Car Parking & Drives",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_storm",
+      "name": "Stormwater",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_pond",
+          "name": "Detention Pond",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_inlets",
+          "name": "Trench Drains & Storm Pipe",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_util",
+      "name": "Utilities",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_xfmr",
+          "name": "Utility Transformer",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_fw",
+          "name": "Fire Water Service",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_wsg",
+          "name": "Water, Sewer & Gas Laterals",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_sec",
+      "name": "Fencing, Lighting & Landscape",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_fence",
+          "name": "Fence, Gate & Guard Booth",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_lights",
+          "name": "Site Lighting",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_land",
+          "name": "Landscaping",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 27,
+    "conditioner": 0,
+    "no_curve": 2,
+    "no_direct_damage": 0,
+    "outside": 11
+   },
+   "curve_parts": [
+    "Warehouse"
+   ],
+   "unmapped": [],
+   "sparks": {
+    "Warehouse": {
+     "pts": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       6.375,
+       0.0
+      ],
+      [
+       12.75,
+       0.0
+      ],
+      [
+       19.0,
+       0.0
+      ],
+      [
+       25.0,
+       0.0
+      ],
+      [
+       31.0,
+       0.0
+      ],
+      [
+       37.0,
+       0.0
+      ],
+      [
+       43.0312,
+       0.0
+      ],
+      [
+       49.4062,
+       0.0
+      ],
+      [
+       56.0,
+       0.0
+      ],
+      [
+       62.1562,
+       0.0
+      ],
+      [
+       68.5312,
+       0.0
+      ],
+      [
+       74.9062,
+       0.0
+      ],
+      [
+       81.0,
+       0.0
+      ],
+      [
+       87.0,
+       0.0
+      ],
+      [
+       93.0,
+       0.0
+      ],
+      [
+       99.0,
+       0.0197
+      ],
+      [
+       106.0,
+       0.0872
+      ],
+      [
+       112.0,
+       0.1713
+      ],
+      [
+       118.0,
+       0.2723
+      ],
+      [
+       124.3125,
+       0.3856
+      ],
+      [
+       130.6875,
+       0.5014
+      ],
+      [
+       137.0,
+       0.6156
+      ],
+      [
+       143.0,
+       0.7194
+      ],
+      [
+       149.0,
+       0.8106
+      ],
+      [
+       156.0,
+       0.8925
+      ],
+      [
+       162.0,
+       0.9397
+      ],
+      [
+       168.0,
+       0.9689
+      ],
+      [
+       174.0,
+       0.9852
+      ],
+      [
+       180.0938,
+       0.9935
+      ],
+      [
+       186.4688,
+       0.9974
+      ],
+      [
+       192.8438,
+       0.9991
+      ],
+      [
+       199.0,
+       0.9997
+      ],
+      [
+       205.5938,
+       0.9999
+      ],
+      [
+       211.9688,
+       1.0
+      ],
+      [
+       218.0,
+       1.0
+      ],
+      [
+       224.0,
+       1.0
+      ],
+      [
+       230.0,
+       1.0
+      ],
+      [
+       236.0,
+       1.0
+      ],
+      [
+       242.25,
+       1.0
+      ],
+      [
+       248.625,
+       1.0
+      ],
+      [
+       255.0,
+       1.0
+      ]
+     ],
+     "kind": "line",
+     "axis": "convective gust 3s 10m open terrain mph",
+     "unit": "mph",
+     "curve_id": "CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96",
+     "label": "Warehouse · cwre ind ef mbs straight line onset96"
+    }
+   }
+  },
+  {
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "entry_id": "wildfire_real_estate",
+   "status": "proposal",
+   "gap": false,
+   "href": "/cells/wildfire_real_estate?building=industrial",
+   "rows": {
+    "ri_bldg": {
+     "s": "curve",
+     "part": "Warehouse",
+     "note": "Whole-building response",
+     "basis": "part"
+    },
+    "ri_ao_barrier": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference building",
+     "basis": "out_of_scope"
+    },
+    "ri_cont": {
+     "s": "no_curve",
+     "part": "Contents",
+     "note": "Declared as a withheld placeholder part",
+     "basis": "out_of_scope"
+    },
+    "ri_site": {
+     "s": "outside",
+     "part": "Land, site works",
+     "note": "The site around the building is outside the value this curve prices",
+     "basis": "out_of_scope"
+    },
+    "rsi_b": {
+     "s": "curve",
+     "part": "Warehouse",
+     "note": "The building on its site",
+     "basis": "part"
+    }
+   },
+   "states": {
+    "asset": {
+     "ri_bldg": "ri_bldg",
+     "ri_fnd": "ri_bldg",
+     "ri_ftg": "ri_bldg",
+     "ri_gb": "ri_bldg",
+     "ri_slab": "ri_bldg",
+     "ri_pad": "ri_bldg",
+     "ri_str": "ri_bldg",
+     "ri_frames": "ri_bldg",
+     "ri_cols": "ri_bldg",
+     "ri_raft": "ri_bldg",
+     "ri_anchor": "ri_bldg",
+     "ri_purlins": "ri_bldg",
+     "ri_brace": "ri_bldg",
+     "ri_endwall": "ri_bldg",
+     "ri_roof": "ri_bldg",
+     "ri_rpanel": "ri_bldg",
+     "ri_rins": "ri_bldg",
+     "ri_gutter": "ri_bldg",
+     "ri_sky": "ri_bldg",
+     "ri_trim": "ri_bldg",
+     "ri_env": "ri_bldg",
+     "ri_wpanel": "ri_bldg",
+     "ri_dock": "ri_bldg",
+     "ri_ddoor": "ri_bldg",
+     "ri_lev": "ri_bldg",
+     "ri_seal": "ri_bldg",
+     "ri_drive": "ri_bldg",
+     "ri_store": "ri_bldg",
+     "ri_pdoor": "ri_bldg",
+     "ri_ao_barrier": "ri_ao_barrier",
+     "ri_svc": "ri_bldg",
+     "ri_fire": "ri_bldg",
+     "ri_fhead": "ri_bldg",
+     "ri_riser": "ri_bldg",
+     "ri_falarm": "ri_bldg",
+     "ri_elec": "ri_bldg",
+     "ri_swbd": "ri_bldg",
+     "ri_panels": "ri_bldg",
+     "ri_light": "ri_bldg",
+     "ri_hvac": "ri_bldg",
+     "ri_uh": "ri_bldg",
+     "ri_rtu": "ri_bldg",
+     "ri_exh": "ri_bldg",
+     "ri_plumb": "ri_bldg",
+     "ri_int": "ri_bldg",
+     "ri_part": "ri_bldg",
+     "ri_ceil": "ri_bldg",
+     "ri_floorfin": "ri_bldg",
+     "ri_rest": "ri_bldg",
+     "ri_cont": "ri_cont",
+     "ri_rack": "ri_cont",
+     "ri_goods": "ri_cont"
+    },
+    "plant": {
+     "ri_site": "ri_site",
+     "rsi_b": "rsi_b",
+     "rsi_bldg": "rsi_b",
+     "rsi_pave": "ri_site",
+     "rsi_truck": "ri_site",
+     "rsi_auto": "ri_site",
+     "rsi_storm": "ri_site",
+     "rsi_pond": "ri_site",
+     "rsi_inlets": "ri_site",
+     "rsi_util": "ri_site",
+     "rsi_xfmr": "ri_site",
+     "rsi_fw": "ri_site",
+     "rsi_wsg": "ri_site",
+     "rsi_sec": "ri_site",
+     "rsi_fence": "ri_site",
+     "rsi_lights": "ri_site",
+     "rsi_land": "ri_site"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "ri_fnd",
+      "name": "Foundation & Floor",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_ftg",
+          "name": "Column Footings",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_gb",
+          "name": "Grade Beam & Dock Wall",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_slab",
+          "name": "Floor Slab",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_pad",
+          "name": "Building Pad",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_str",
+      "name": "Structure",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_frames",
+          "name": "Primary Rigid Frames",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_purlins",
+          "name": "Purlins & Girts",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_brace",
+          "name": "Bracing",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_endwall",
+          "name": "Endwall Framing",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_roof",
+      "name": "Roof Assembly",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_rpanel",
+          "name": "Standing-Seam Roof",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_rins",
+          "name": "Roof Insulation",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_gutter",
+          "name": "Gutters & Downspouts",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_sky",
+          "name": "Skylights & Smoke Vents",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_trim",
+          "name": "Edge Trim & Ridge Cap",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_env",
+      "name": "Walls & Openings",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_wpanel",
+          "name": "Insulated Metal Wall Panels",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_dock",
+          "name": "Dock Positions",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_drive",
+          "name": "Drive-In Door & Ramp",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_store",
+          "name": "Office Storefront",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_pdoor",
+          "name": "Personnel Doors",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "ri_ao_barrier",
+          "name": "Dock Flood Barriers",
+          "note": "A resilience measure in the twin; not part of the reference building"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_svc",
+      "name": "Fixed Services",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_fire",
+          "name": "Fire Sprinklers (ESFR)",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_elec",
+          "name": "Electrical Service & Distribution",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_hvac",
+          "name": "Heating & Ventilation",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_plumb",
+          "name": "Plumbing",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_int",
+      "name": "Interior Construction",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ri_part",
+          "name": "Partitions & Drywall",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_ceil",
+          "name": "Suspended Ceilings",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_floorfin",
+          "name": "Office Floor Finishes",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         },
+         {
+          "node": "ri_rest",
+          "name": "Restrooms & Break Room",
+          "part": "Warehouse",
+          "note": "Whole-building response"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "ri_cont",
+      "name": "Contents · Tenant",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "ri_rack",
+          "name": "Pallet Racking",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         },
+         {
+          "node": "ri_goods",
+          "name": "Stored Goods",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "rsi_b",
+      "name": "Building",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rsi_bldg",
+          "name": "Warehouse Building",
+          "part": "Warehouse",
+          "note": "The building on its site"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_pave",
+      "name": "Paving",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_truck",
+          "name": "Truck Court & Trailer Stalls",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_auto",
+          "name": "Car Parking & Drives",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_storm",
+      "name": "Stormwater",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_pond",
+          "name": "Detention Pond",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_inlets",
+          "name": "Trench Drains & Storm Pipe",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_util",
+      "name": "Utilities",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_xfmr",
+          "name": "Utility Transformer",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_fw",
+          "name": "Fire Water Service",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_wsg",
+          "name": "Water, Sewer & Gas Laterals",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsi_sec",
+      "name": "Fencing, Lighting & Landscape",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsi_fence",
+          "name": "Fence, Gate & Guard Booth",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_lights",
+          "name": "Site Lighting",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsi_land",
+          "name": "Landscaping",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 27,
+    "conditioner": 0,
+    "no_curve": 2,
+    "no_direct_damage": 0,
+    "outside": 11
+   },
+   "curve_parts": [
+    "Warehouse"
+   ],
+   "unmapped": [],
+   "sparks": {
+    "Warehouse": {
+     "pts": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       1.0,
+       0.16
+      ],
+      [
+       2.0,
+       0.28
+      ],
+      [
+       3.0,
+       0.4
+      ],
+      [
+       4.0,
+       0.52
+      ],
+      [
+       5.0,
+       0.64
+      ],
+      [
+       6.0,
+       0.76
+      ]
+     ],
+     "kind": "categorical",
+     "axis": "FSim conditional flame-length class state",
+     "unit": "class",
+     "curve_id": "WFRE_IND_WRC_SHRUB_X0_8",
+     "label": "Warehouse"
+    }
+   }
+  }
+ ],
+ "matrix": [
+  {
+   "tree": "asset",
+   "node": "ri_fnd",
+   "name": "Foundation & Floor",
+   "cells": {
+    "hail": {
+     "state": "no_direct_damage",
+     "words": "no direct damage",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_direct_damage"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "ri_str",
+   "name": "Structure",
+   "cells": {
+    "hail": {
+     "state": "no_direct_damage",
+     "words": "no direct damage",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_direct_damage"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "ri_roof",
+   "name": "Roof Assembly",
+   "cells": {
+    "hail": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse roof (standing-seam steel)"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "ri_env",
+   "name": "Walls & Openings",
+   "cells": {
+    "hail": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse windows"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve",
+      "outside"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "outside"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "outside"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "outside"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "outside"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "ri_svc",
+   "name": "Fixed Services",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": true,
+     "states": [
+      "no_curve",
+      "no_direct_damage"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "ri_int",
+   "name": "Interior Construction",
+   "cells": {
+    "hail": {
+     "state": "no_direct_damage",
+     "words": "no direct damage",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_direct_damage"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "ri_cont",
+   "name": "Contents · Tenant",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "rsi_b",
+   "name": "Building",
+   "cells": {
+    "hail": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse roof (standing-seam steel)"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Warehouse"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "rsi_pave",
+   "name": "Paving",
+   "cells": {
+    "hail": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "flood": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "convective_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "wildfire": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "rsi_storm",
+   "name": "Stormwater",
+   "cells": {
+    "hail": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "flood": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "convective_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "wildfire": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "rsi_util",
+   "name": "Utilities",
+   "cells": {
+    "hail": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "flood": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "convective_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "wildfire": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "rsi_sec",
+   "name": "Fencing, Lighting & Landscape",
+   "cells": {
+    "hail": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "flood": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "convective_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "wildfire": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    }
+   }
+  }
+ ],
+ "state_words": {
+  "curve": "Has a damage curve",
+  "conditioner": "Changes the curve, no curve of its own",
+  "no_curve": "In the value, no curve yet",
+  "no_direct_damage": "Reviewed: no direct damage",
+  "outside": "Outside the value this curve prices"
+ },
+ "state_short": {
+  "curve": "curve",
+  "conditioner": "changes the curve",
+  "no_curve": "no curve yet",
+  "no_direct_damage": "no direct damage",
+  "outside": "outside"
+ }
+}

@@ -63,7 +63,7 @@
    "label": "entry agent-read 2026-10-19 · release reviewed screening release"
   }
  },
- "summary": "Flood on wind farms: fEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points; 6 parts of the asset's value have no curve.",
+ "summary": "Flood on wind farms: FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points; 6 parts of the asset's value have no curve.",
  "chain": {
   "stations": [
    {
@@ -999,5 +999,1545 @@
  "gap_reason": null,
  "binding": null,
  "sampling_notes": [],
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Live · a screening model",
+    "code": "LIVE · screening"
+   },
+   "evidence": {
+    "words": "Evidence: borrowed",
+    "code": "How damage rises: borrowed · how it becomes dollars: borrowed",
+    "tiers": [
+     "T3"
+    ],
+    "codes": "shape T3 · cost T3"
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "Field reports: nobody has looked yet"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release reviewed screening release"
+   }
+  },
+  "main_logic": [
+   "Flood is measured as freshwater flood depth above substation grade, in ft.",
+   "FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points.",
+   "Why this shape: FEMA published the numeric whole-substation screening function, but current Hazus disables electric-power loss calculations and no claims calibration is documented.",
+   "The damage ratio is a share of the full direct replacement value of the same facility-level GSU/substation (not project TIV, not the mixed 72 USD/kW electrical row)."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "1 part with a curve · 6 without one yet",
+    "paragraphs": [
+     "Flood on wind farms: FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points. It names 1 part: GSU / substation (whole facility). Outside its scope: outage restoration, business interruption, curtailment, revenue and insurance, soft, sunk and non-physical costs (excluded from the physical base) and other hazards in the same event (tropical-cyclone wind, tornado); one event must not charge the same value twice. Kinds of damage it does not include: scour, erosion, saturated-soil support loss, debris impact and wave loading and flood duration (captured but has no effect on the result).",
+     "For this hazard the wind farm is split into 1 part: GSU / substation (whole facility). 14 further units are named but withheld — fw gsu switchgear, fw gsu transformer main, fw gsu transformer aux controls, fw gsu protection scada, fw gsu station service dc, fw gsu cable terminations, fw turbine base electrical, fw padmount stepup transformer, fw collection cable terminations, fw turbine foundation, fw civil access drainage, fw elevated turbine equipment, support fieldwork and support transport logistics — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: GSU parts as separate units: switchgear, main transformer, transformer auxiliaries and controls, protection and SCADA, station service and DC, cable terminations (withheld, not zero), turbine-base electrical and pad or turbine step-up transformers (withheld), collection cable joints and terminations (withheld), turbine foundation (needs a separate scour and erosion pathway) and civil access and drainage (needs a split), elevated turbine equipment: rotor, nacelle, tower (geometry-screened, not declared zero) and fieldwork and transport support (allocated once after repair scope; no fragility).",
+     "The damage ratio is a share of full direct replacement value of the same facility-level GSU/substation (not project TIV, not the mixed 72 USD/kW electrical row). The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "GSU / substation (whole…",
+      "tone": "key",
+      "title": "GSU / substation (whole facility)"
+     },
+     {
+      "text": "6 without a curve yet",
+      "tone": "muted",
+      "title": "GSU parts as separate units: switchgear, main transformer, transformer auxiliaries and controls, protection and SCADA, station service and DC, cable terminations (withheld, not zero); Turbine-base electrical and pad or turbine step-up transformers (withheld); Collection cable joints and terminations (withheld); Turbine foundation (needs a separate scour and erosion pathway) and civil access and drainage (needs a split); Elevated turbine equipment: rotor, nacelle, tower (geometry-screened, not declared zero); Fieldwork and transport support (allocated once after repair scope; no fragility)"
+     },
+     {
+      "text": "14 withheld",
+      "tone": "muted"
+     }
+    ]
+   },
+   {
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
+    "fact": "freshwater flood depth above substation grade → a line through points",
+    "paragraphs": [
+     "Damage is read against freshwater flood depth above substation grade (ft). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: freshwater flood depth above substation grade (ft), 0 to 10 ft; or water-surface and grade elevations (m) on the same vertical datum.",
+     "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "freshwater flood depth above…, ft",
+      "tone": "key",
+      "title": "freshwater flood depth above substation grade"
+     },
+     {
+      "text": "line through points",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "FEMA published the numeric whole-substation screening function, but current Hazus disables electric-power loss calculations and no claims calibration is documented."
+     }
+    ],
+    "why": [
+     {
+      "label": "Why this shape",
+      "text": "FEMA published the numeric whole-substation screening function, but current Hazus disables electric-power loss calculations and no claims calibration is documented."
+     },
+     {
+      "label": "The form adopted",
+      "text": "Exact source-tabulated piecewise-linear screening response."
+     },
+     {
+      "label": "Why not flood solar component curves",
+      "text": "The solar candidates mix or only partially match component grains and remain engineering proxies; the FEMA source instead supplies one explicit whole-substation economic atom."
+     }
+    ]
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "17 sources, 17 linked · borrowed",
+    "paragraphs": [
+     "17 sources set this cell: FEMA, Hazus-MH Flood Model Technical Manual 2.1, Table 7.9, FEMA, Hazus 7.0 Flood Technical Manual (2025), electric-power status, USACE, HEC-FIA Technical Reference, depth-percent damage relationships and NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment (historical context) and 13 more. Of the 5 parameters, 3 are published, 1 is borrowed and 1 is our judgment. The source and claim registers are machine-readable files in the cell folder."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "borrowed",
+      "tone": "key",
+      "title": "How damage rises: borrowed · how it becomes dollars: borrowed"
+     },
+     {
+      "text": "FEMA, Hazus-MH Flood Model…",
+      "tone": "key",
+      "title": "FEMA, Hazus-MH Flood Model Technical Manual 2.1, Table 7.9"
+     },
+     {
+      "text": "FEMA, Hazus 7.0 Flood…",
+      "tone": "key",
+      "title": "FEMA, Hazus 7.0 Flood Technical Manual (2025), electric-power status"
+     },
+     {
+      "text": "+3 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "17 sources, 17 linked",
+      "tone": "muted"
+     }
+    ]
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says report.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: reviewed screening release."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "no outside check yet",
+      "tone": "muted"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "borrowed",
+  "halves": "How damage rises: borrowed · how it becomes dollars: borrowed",
+  "hazard_paths": [
+   {
+    "id": "LEG-FW-001",
+    "title": "Hazard Modeling flood/wind M3 greenfield consumer implementation.",
+    "path": "Notebooks/flood/wind_farm/m3_damage/01_damage.py",
+    "state": "moved",
+    "moved_to": "Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
+    "words": "moved on Hazard's main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py"
+   },
+   {
+    "id": "LEG-FW-002",
+    "title": "Hazard Modeling flood/wind M4 independent coastal flood reconstruction.",
+    "path": "Notebooks/flood/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+    "state": "moved",
+    "moved_to": "Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+    "words": "moved on Hazard's main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py"
+   }
+  ],
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "◐",
+    "label": "one flood event",
+    "short": "one flood event",
+    "detail": "exact Hazus substation class, the Hazus 2.1 Table 7.9 assumption set, freshwater non-contaminated water, depth 0 to 10 ft"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "◐",
+    "label": "a dollar scenario",
+    "short": "a dollar scenario",
+    "detail": "only with an explicit same-substation replacement value and exposure fraction"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "✗",
+    "label": "yearly loss",
+    "short": "yearly loss",
+    "detail": "withheld for this partial screening release (consumer-owned)"
+   },
+   {
+    "key": "pml",
+    "mark": "✗",
+    "label": "PML, VaR — not supported",
+    "short": "PML and VaR",
+    "detail": "withheld"
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": null,
+    "not_covered": [
+     "GSU parts as separate units: switchgear, main transformer, transformer auxiliaries and controls, protection and SCADA, station service and DC, cable terminations (withheld, not zero)",
+     "Turbine-base electrical and pad or turbine step-up transformers (withheld)",
+     "Collection cable joints and terminations (withheld)",
+     "Turbine foundation (needs a separate scour and erosion pathway) and civil access and drainage (needs a split)",
+     "Elevated turbine equipment: rotor, nacelle, tower (geometry-screened, not declared zero)",
+     "Fieldwork and transport support (allocated once after repair scope; no fragility)"
+    ],
+    "withheld": [
+     {
+      "failure_unit_id": "FW_GSU_SWITCHGEAR",
+      "subsystem": "FACILITY_GSU_SUBSTATION",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "COMPONENT_LEVEL_ECONOMIC_RESPONSE_NOT_CALIBRATED"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; component level economic response not calibrated."
+     },
+     {
+      "failure_unit_id": "FW_GSU_TRANSFORMER_MAIN",
+      "subsystem": "FACILITY_GSU_SUBSTATION",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "TRANSFORMER_MAIN_AUXILIARY_STATE_MODEL_REQUIRED"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; transformer main auxiliary state model required."
+     },
+     {
+      "failure_unit_id": "FW_GSU_TRANSFORMER_AUX_CONTROLS",
+      "subsystem": "FACILITY_GSU_SUBSTATION",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "DEPENDENCY_SAFE_VALUE_SPLIT_REQUIRED"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; dependency safe value split required."
+     },
+     {
+      "failure_unit_id": "FW_GSU_PROTECTION_SCADA",
+      "subsystem": "FACILITY_GSU_SUBSTATION",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "PROTECTION_CONTROL_ECONOMIC_RESPONSE_NOT_CALIBRATED"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; protection control economic response not calibrated."
+     },
+     {
+      "failure_unit_id": "FW_GSU_STATION_SERVICE_DC",
+      "subsystem": "FACILITY_GSU_SUBSTATION",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "STATION_SERVICE_DC_DECOMPOSITION_REQUIRED"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; station service dc decomposition required."
+     },
+     {
+      "failure_unit_id": "FW_GSU_CABLE_TERMINATIONS",
+      "subsystem": "FACILITY_GSU_SUBSTATION",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "CABLE_BODY_TERMINATION_PATHWAY_SPLIT_REQUIRED"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; cable body termination pathway split required."
+     },
+     {
+      "failure_unit_id": "FW_TURBINE_BASE_ELECTRICAL",
+      "subsystem": "REPEATED_TURBINE_ELECTRICAL",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "WIND_SPECIFIC_EQUIPMENT_DECOMPOSITION_REQUIRED"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; wind specific equipment decomposition required."
+     },
+     {
+      "failure_unit_id": "FW_PADMOUNT_STEPUP_TRANSFORMER",
+      "subsystem": "REPEATED_TURBINE_ELECTRICAL",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "PAD_TRANSFORMER_CONSTRUCTION_AND_VALUE_REQUIRED"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; pad transformer construction and value required."
+     },
+     {
+      "failure_unit_id": "FW_COLLECTION_CABLE_TERMINATIONS",
+      "subsystem": "PLANT_COLLECTION",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "LINE_NETWORK_EXPOSURE_AND_VALUE_REQUIRED"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; line network exposure and value required."
+     },
+     {
+      "failure_unit_id": "FW_TURBINE_FOUNDATION",
+      "subsystem": "FOUNDATION",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "SEPARATE_FLOOD_SCOUR_EROSION_PATHWAY_REQUIRED"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; separate flood scour erosion pathway required."
+     },
+     {
+      "failure_unit_id": "FW_CIVIL_ACCESS_DRAINAGE",
+      "subsystem": "PLANT_CIVIL",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; mixed civil bucket requires split."
+     },
+     {
+      "failure_unit_id": "FW_ELEVATED_TURBINE_EQUIPMENT",
+      "subsystem": "REPEATED_TURBINE",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "GEOMETRY_SCREENED_NOT_UNIVERSAL_ZERO"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; geometry screened not universal zero."
+     },
+     {
+      "failure_unit_id": "SUPPORT_FIELDWORK",
+      "subsystem": "SUPPORT",
+      "reasons": [
+       "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+       "NO_INDEPENDENT_FRAGILITY"
+      ],
+      "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+     },
+     {
+      "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+      "subsystem": "SUPPORT",
+      "reasons": [
+       "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+       "NO_INDEPENDENT_FRAGILITY"
+      ],
+      "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+     }
+    ]
+   },
+   "assumed": [
+    "Only freshwater non-contaminated water gets a number; all other water types withhold",
+    "No extension past 10 ft: deeper water withholds instead of holding the last value",
+    "Missing or incomplete depth is rejected, never read as dry",
+    "Flood duration is recorded but does not change the result",
+    "The whole-substation curve and any future component curves must never be charged together",
+    "Unknown ownership keeps the substation out of the baseline"
+   ],
+   "missing": {
+    "mechanisms": [
+     "Scour, erosion, saturated-soil support loss, debris impact and wave loading",
+     "Flood duration (captured but has no effect on the result)"
+    ],
+    "out_of_scope": [
+     "Outage restoration, business interruption, curtailment, revenue and insurance",
+     "Soft, sunk and non-physical costs (excluded from the physical base)",
+     "Other hazards in the same event (tropical-cyclone wind, tornado); one event must not charge the same value twice"
+    ]
+   },
+   "open_questions": [
+    "Review of the 2026 NEMA successor guide (CS 70006-2026) is still open",
+    "Current Hazus 7.0 disables electric-power loss functions; the table is legacy and not claims-calibrated",
+    "Component-level GSU curves could replace the whole-substation curve later",
+    "Salt and contaminated water response not modelled"
+   ],
+   "next_version": null
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "Scope",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Flood on wind farms: FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points. It names 1 part: GSU / substation (whole facility). Outside its scope: outage restoration, business interruption, curtailment, revenue and insurance, soft, sunk and non-physical costs (excluded from the physical base) and other hazards in the same event (tropical-cyclone wind, tornado); one event must not charge the same value twice. Kinds of damage it does not include: scour, erosion, saturated-soil support loss, debris impact and wave loading and flood duration (captured but has no effect on the result).",
+    "plain_fact": "1 part · 3 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the wind farm is split into 1 part: GSU / substation (whole facility). 14 further units are named but withheld — fw gsu switchgear, fw gsu transformer main, fw gsu transformer aux controls, fw gsu protection scada, fw gsu station service dc, fw gsu cable terminations, fw turbine base electrical, fw padmount stepup transformer, fw collection cable terminations, fw turbine foundation, fw civil access drainage, fw elevated turbine equipment, support fieldwork and support transport logistics — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: GSU parts as separate units: switchgear, main transformer, transformer auxiliaries and controls, protection and SCADA, station service and DC, cable terminations (withheld, not zero), turbine-base electrical and pad or turbine step-up transformers (withheld), collection cable joints and terminations (withheld), turbine foundation (needs a separate scour and erosion pathway) and civil access and drainage (needs a split), elevated turbine equipment: rotor, nacelle, tower (geometry-screened, not declared zero) and fieldwork and transport support (allocated once after repair scope; no fragility).",
+    "plain_fact": "1 part · 14 withheld"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "Damage is read against freshwater flood depth above substation grade (ft). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: freshwater flood depth above substation grade (ft), 0 to 10 ft; or water-surface and grade elevations (m) on the same vertical datum.",
+    "plain_fact": "a line through points"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "17 sources set this cell: FEMA, Hazus-MH Flood Model Technical Manual 2.1, Table 7.9, FEMA, Hazus 7.0 Flood Technical Manual (2025), electric-power status, USACE, HEC-FIA Technical Reference, depth-percent damage relationships and NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment (historical context) and 13 more. Of the 5 parameters, 3 are published, 1 is borrowed and 1 is our judgment. The source and claim registers are machine-readable files in the cell folder.",
+    "plain_fact": "17 sources · borrowed"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "The damage ratio is a share of full direct replacement value of the same facility-level GSU/substation (not project TIV, not the mixed 72 USD/kW electrical row). The files state no plant-level dollar figure for this asset.",
+    "plain_fact": "no plant value stated"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "adjustments in the write-up"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 1 curve record (model v1.0, docs r1). The write-up is flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md. The workbook is damage_curve_records_flood_wind__model_v1_0__docs_r1.xlsx. The cell folder holds 14 files, each with its SHA under Details.",
+    "plain_fact": "1 curve record"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "One flood event and a dollar scenario are available only under conditions the consumer (Hazard) checks. Yearly loss and PML and VaR are not supported. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "0 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "This build reproduced 37 of 37 known answers through the cell's evaluator (within 1e-12 on the damage ratio). 6 were not run: prose assertions; not executable. The validation record says report. No outside check has been made yet.",
+    "plain_fact": "37 of 37 reproduced"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: reviewed screening release.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "FEMA, Hazus-MH Flood Model Technical Manual 2.1, Table 7.9",
+    "ids": [
+     "FW-S011"
+    ],
+    "title": "Federal Emergency Management Agency, Hazus-MH Flood Model Technical Manual, version 2.1.",
+    "link": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+    "link_kind": "url",
+    "locator": "sections 7.2.2, 7.2.4, and 7.2.6; Table 7.9, pp. 7-20 through 7-21; Table 7.9 footnote 2 and comments",
+    "no_link_sentence": null,
+    "source_id": "FW-S011"
+   },
+   {
+    "text": "FEMA, Hazus 7.0 Flood Technical Manual (2025), electric-power status",
+    "ids": [
+     "FW-S012"
+    ],
+    "title": "Federal Emergency Management Agency, Hazus 7.0 Flood Technical Manual (2025).",
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+    "link_kind": "url",
+    "locator": "Table 9-1, pp. 9-1 through 9-2; section 9.4.1 footnote 21, p. 9-3",
+    "no_link_sentence": null,
+    "source_id": "FW-S012"
+   },
+   {
+    "text": "USACE, HEC-FIA Technical Reference, depth-percent damage relationships",
+    "ids": [
+     "FW-S006"
+    ],
+    "title": "U.S. Army Corps of Engineers, HEC-FIA Technical Reference, Depth-Percent Damage Relationships.",
+    "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+    "link_kind": "url",
+    "locator": "direct damage, depth-percent relationship and linear interpolation",
+    "no_link_sentence": null,
+    "source_id": "FW-S006"
+   },
+   {
+    "text": "NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment (historical context)",
+    "ids": [
+     "FW-S002"
+    ],
+    "title": "National Electrical Manufacturers Association, NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment…",
+    "link": "https://www.nema.org/docs/default-source/secure-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+    "link_kind": "url",
+    "locator": "sections 4.3 Power Equipment and 4.4 Transformers",
+    "no_link_sentence": null,
+    "source_id": "FW-S002"
+   },
+   {
+    "text": "NREL, Cost of Wind Energy Review 2024 (value anatomy only)",
+    "ids": [
+     "FW-S008"
+    ],
+    "title": "Stehly, T.; Duffy, P.; Mulas Hernando, D. Cost of Wind Energy Review: 2024 Edition. NREL/TP-5000-91775.",
+    "link": "https://www.nrel.gov/docs/fy25osti/91775.pdf",
+    "link_kind": "url",
+    "locator": "land-based reference plant capital-cost breakdown",
+    "no_link_sentence": null,
+    "source_id": "FW-S008"
+   }
+  ],
+  "sources": [
+   {
+    "id": "FW-S001",
+    "citation": "Federal Energy Regulatory Commission, Order on accounting for renewable generating assets, 174 FERC 61,033 (2021).",
+    "url": "https://www.ferc.gov/sites/default/files/2021-01/E-7-011921.pdf",
+    "locator": "pp. 2-3, wind items a-e and solar items a-g",
+    "role": "asset_anatomy",
+    "tier": "T2",
+    "permitted": "Define common Plant-GSU/substation anatomy across solar and wind.",
+    "prohibited": "Infer flood vulnerability, component value, ownership, quantity, or a universal site configuration.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.ferc.gov/sites/default/files/2021-01/E-7-011921.pdf",
+    "link_kind": "url",
+    "title": "Federal Energy Regulatory Commission, Order on accounting for renewable generating assets, 174 FERC 61,033…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FW-S002",
+    "citation": "National Electrical Manufacturers Association, NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment (historical edition).",
+    "url": "https://www.nema.org/docs/default-source/secure-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+    "locator": "sections 4.3 Power Equipment and 4.4 Transformers",
+    "role": "historical_mechanism_and_disposition",
+    "tier": "T2",
+    "permitted": "Retain historical equipment-family and mechanism context while the 2026 successor is acquired and reviewed.",
+    "prohibited": "Treat the 2016 edition as current guidance, derive continuous depth-DR ordinates, or override current OEM/manufacturer guidance.",
+    "decision": "retain_historical_pending_successor_review",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.nema.org/docs/default-source/secure-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+    "link_kind": "url",
+    "title": "National Electrical Manufacturers Association, NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FW-S003",
+    "citation": "North American Electric Reliability Corporation, Substation Flooding Events Highlight Potential Design Deficiencies (2022).",
+    "url": "https://www.nerc.com/pa/rrm/ea/Lessons%20Learned%20Document%20Library/LL20220404_Substation_Flooding_Events_Highlight_Potential_Design_Deficiencies.pdf",
+    "locator": "p. 1, approximately 8 inches at 250 VDC control connections and resulting operations",
+    "role": "case_study_severity",
+    "tier": "T3",
+    "permitted": "Confirm shallow control/protection inundation can be operationally material and motivate separate control/DC units.",
+    "prohibited": "Treat 495 MW removed from service as direct physical DR or repair cost.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.nerc.com/pa/rrm/ea/Lessons%20Learned%20Document%20Library/LL20220404_Substation_Flooding_Events_Highlight_Potential_Design_Deficiencies.pdf",
+    "link_kind": "url",
+    "title": "North American Electric Reliability Corporation, Substation Flooding Events Highlight Potential Design…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FW-S004",
+    "citation": "North American Electric Reliability Corporation, Severe Flooding Damages Transformer Substations (2015).",
+    "url": "https://www.nerc.com/pa/rrm/ea/Lessons%20Learned%20Document%20Library/LL20150402_Severe_Flooding_Damages_Transformer_Substations_final.pdf",
+    "locator": "problem statement, details, and corrective actions",
+    "role": "case_study_severity",
+    "tier": "T3",
+    "permitted": "Support component decomposition and water-path/elevation fields.",
+    "prohibited": "Fit an economic damage curve or infer renewable-project ownership/value.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.nerc.com/pa/rrm/ea/Lessons%20Learned%20Document%20Library/LL20150402_Severe_Flooding_Damages_Transformer_Substations_final.pdf",
+    "link_kind": "url",
+    "title": "North American Electric Reliability Corporation, Severe Flooding Damages Transformer Substations (2015).",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FW-S005",
+    "citation": "Federal Emergency Management Agency, FEMA P-348, Protecting Building Utility Systems From Flood Damage, 2nd ed. (2017).",
+    "url": "https://www.fema.gov/sites/default/files/2020-07/fema_p-348_protecting_building_utility_systems_from_flood_damage_2017.pdf",
+    "locator": "section 5.2, electrical-system flood risk and mitigation",
+    "role": "axis_and_exposure",
+    "tier": "T2",
+    "permitted": "Support local vulnerable datum and equipment-elevation fields.",
+    "prohibited": "Provide wind-farm ordinates or replacement percentages.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.fema.gov/sites/default/files/2020-07/fema_p-348_protecting_building_utility_systems_from_flood_damage_2017.pdf",
+    "link_kind": "url",
+    "title": "Federal Emergency Management Agency, FEMA P-348, Protecting Building Utility Systems From Flood Damage, 2nd…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FW-S006",
+    "citation": "U.S. Army Corps of Engineers, HEC-FIA Technical Reference, Depth-Percent Damage Relationships.",
+    "url": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+    "locator": "direct damage, depth-percent relationship and linear interpolation",
+    "role": "curve_form",
+    "tier": "T2",
+    "permitted": "Support transparent piecewise/tabular curve form and critical-elevation semantics.",
+    "prohibited": "Supply electrical-component ordinates.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+    "link_kind": "url",
+    "title": "U.S. Army Corps of Engineers, HEC-FIA Technical Reference, Depth-Percent Damage Relationships.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FW-S007",
+    "citation": "U.S. Department of Energy FEMP, Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems.",
+    "url": "https://www.energy.gov/cmei/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+    "locator": "total submersion, equipment elevation, conduit-water pathway, and electrical enclosure sections",
+    "role": "mechanism_and_exposure",
+    "tier": "T2",
+    "permitted": "Support shared electrical water-path/elevation concepts where equipment matches.",
+    "prohibited": "Infer wind-specific values or universal numeric curves.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.energy.gov/cmei/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+    "link_kind": "url",
+    "title": "U.S. Department of Energy FEMP, Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FW-S008",
+    "citation": "Stehly, T.; Duffy, P.; Mulas Hernando, D. Cost of Wind Energy Review: 2024 Edition. NREL/TP-5000-91775.",
+    "url": "https://www.nrel.gov/docs/fy25osti/91775.pdf",
+    "locator": "land-based reference plant capital-cost breakdown",
+    "role": "exposure_or_value",
+    "tier": "T2",
+    "permitted": "Use the row-level reference ledger and identify the mixed 72 USD/kW electrical bucket.",
+    "prohibited": "Infer a 9% substation share, fragility, ownership, or site replacement value.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.nrel.gov/docs/fy25osti/91775.pdf",
+    "link_kind": "url",
+    "title": "Stehly, T.; Duffy, P.; Mulas Hernando, D. Cost of Wind Energy Review: 2024 Edition. NREL/TP-5000-91775.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FW-S009",
+    "citation": "Federal Energy Regulatory Commission, pro forma Large Generator Interconnection Agreement.",
+    "url": "https://www.ferc.gov/sites/default/files/2020-04/LGIA.pdf",
+    "locator": "definitions of Point of Change of Ownership and Point of Interconnection; Appendix A dependency",
+    "role": "ownership_boundary",
+    "tier": "T2",
+    "permitted": "Require site agreement/one-line evidence for project versus transmission-owner inclusion.",
+    "prohibited": "Assume ownership from physical role or map proximity.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.ferc.gov/sites/default/files/2020-04/LGIA.pdf",
+    "link_kind": "url",
+    "title": "Federal Energy Regulatory Commission, pro forma Large Generator Interconnection Agreement.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FW-S010",
+    "citation": "Canonical Damage Modeling flood_solar artifact, flood_solar@model_v1_0__docs_r4.",
+    "url": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "locator": "FS_SWG, FS_XFMR, FS_SCADA, FS_CABLE; artifact SHA a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
+    "role": "candidate_curve_and_method",
+    "tier": "T3",
+    "permitted": "Reuse axis/method and retain exact ordinates as pinned audit candidates under explicit crosswalk.",
+    "prohibited": "Silently copy numerics into flood_wind or call them claims-calibrated asset-neutral curves.",
+    "decision": "defer_candidate_only",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "repo_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link_kind": "repo_file",
+    "title": "Canonical Damage Modeling flood_solar artifact, flood_solar@model_v1_0__docs_r4.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FW-S011",
+    "citation": "Federal Emergency Management Agency, Hazus-MH Flood Model Technical Manual, version 2.1.",
+    "url": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+    "locator": "sections 7.2.2, 7.2.4, and 7.2.6; Table 7.9, pp. 7-20 through 7-21; Table 7.9 footnote 2 and comments",
+    "role": "source_native_curve_and_assumptions",
+    "tier": "T3",
+    "permitted": "Reproduce the exact whole-substation source table as a strictly gated legacy screening curve and preserve its source assumptions.",
+    "prohibited": "Infer component curves, field or claims calibration, wind-farm TIV loss, saline-water applicability, protection credit, or current Hazus enablement.",
+    "decision": "adopt_screening_with_strict_gate",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+    "link_kind": "url",
+    "title": "Federal Emergency Management Agency, Hazus-MH Flood Model Technical Manual, version 2.1.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FW-S012",
+    "citation": "Federal Emergency Management Agency, Hazus 7.0 Flood Technical Manual (2025).",
+    "url": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+    "locator": "Table 9-1, pp. 9-1 through 9-2; section 9.4.1 footnote 21, p. 9-3",
+    "role": "current_status_and_limitation",
+    "tier": "T2",
+    "permitted": "Require the current-disabled limitation and prohibit describing the legacy table as an enabled Hazus result.",
+    "prohibited": "Erase the legacy source table or claim current validation/calibration from its visibility.",
+    "decision": "adopt_as_limitation",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+    "link_kind": "url",
+    "title": "Federal Emergency Management Agency, Hazus 7.0 Flood Technical Manual (2025).",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FW-S013",
+    "citation": "National Electrical Manufacturers Association, NEMA Standards Action, April 6, 2026.",
+    "url": "https://www.nema.org/docs/default-source/default-document-library/public/standards-actions/nema-standards-action-april-2026.pdf?sfvrsn=73934d20_2",
+    "locator": "Recently Published Documents, p. 5: Evaluating Water-Damaged Electrical Equipment, NEMA CS 70006-2026, Guide",
+    "role": "current_guide_successor_status",
+    "tier": "T2",
+    "permitted": "Classify NEMA GD 1-2016 as historical and require acquisition and technical review of NEMA CS 70006-2026 before canonical promotion.",
+    "prohibited": "Assume the successor's detailed recommendations are identical, use inaccessible content as evidence, or alter the FEMA Table 7.9 numeric knots from publication metadata alone.",
+    "decision": "adopt_as_promotion_caveat",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.nema.org/docs/default-source/default-document-library/public/standards-actions/nema-standards-action-april-2026.pdf?sfvrsn=73934d20_2",
+    "link_kind": "url",
+    "title": "National Electrical Manufacturers Association, NEMA Standards Action, April 6, 2026.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "LEG-FW-001",
+    "citation": "Hazard Modeling flood/wind M3 greenfield consumer implementation.",
+    "url": "Hazard_modeling/Notebooks/flood/wind_farm/m3_damage/01_damage.py",
+    "locator": "lines 65-84, dr(), loss assembly, vendored object",
+    "role": "rejected",
+    "tier": "T4",
+    "permitted": "Freeze formulas and vectors as migration characterization fixtures.",
+    "prohibited": "Use as scientific calibration, value basis, governed artifact, or fallback.",
+    "decision": "reject_runtime_retain_audit",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "hazard": {
+     "path": "Notebooks/flood/wind_farm/m3_damage/01_damage.py",
+     "state": "moved",
+     "moved_to": "Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
+     "words": "moved on Hazard's main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py"
+    },
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
+    "link_kind": "hazard_moved",
+    "title": "Hazard Modeling flood/wind M3 greenfield consumer implementation.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "LEG-FW-002",
+    "citation": "Hazard Modeling flood/wind M4 independent coastal flood reconstruction.",
+    "url": "Hazard_modeling/Notebooks/flood/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+    "locator": "lines 204-245 and output/compound sections",
+    "role": "rejected",
+    "tier": "T4",
+    "permitted": "Include in future migration/bypass tests.",
+    "prohibited": "Assume replacing M3 alone removes local curves or validates compound aggregation.",
+    "decision": "reject_runtime_retain_audit",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "hazard": {
+     "path": "Notebooks/flood/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+     "state": "moved",
+     "moved_to": "Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+     "words": "moved on Hazard's main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py"
+    },
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+    "link_kind": "hazard_moved",
+    "title": "Hazard Modeling flood/wind M4 independent coastal flood reconstruction.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "GOVERNANCE_CONTRACT",
+    "citation": "Damage Modeling method, contracts, and damage-curve skill governance.",
+    "url": "docs/method/standards/00_index.md",
+    "locator": "standards 02, 07, 08, 18, 20; versioning and capability contracts; fail-closed workflow",
+    "role": "governance_rule",
+    "tier": "T4",
+    "permitted": "Control this package and release gates.",
+    "prohibited": "Serve as scientific calibration.",
+    "decision": "adopt",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "repo_path": "docs/method/standards/00_index.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/standards/00_index.md",
+    "link_kind": "repo_file",
+    "title": "Damage Modeling method, contracts, and damage-curve skill governance.",
+    "kind": "marker",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SHARED_SUBSTRATE",
+    "citation": "Flood-electrical non-runtime shared component substrate v0.1.",
+    "url": "docs/method/shared_components/flood_electrical/README.md",
+    "locator": "catalog and binding rules",
+    "role": "component_identity_and_binding",
+    "tier": "T4",
+    "permitted": "Bind proposed flood_wind failure units to common concepts.",
+    "prohibited": "Populate a curve emit or imply runtime approval.",
+    "decision": "adopt",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "repo_path": "docs/method/shared_components/flood_electrical/README.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/shared_components/flood_electrical/README.md",
+    "link_kind": "repo_file",
+    "title": "Flood-electrical non-runtime shared component substrate v0.1.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "BOUNDED_SEARCH_LOG",
+    "citation": "Bounded evidence search log for flood_wind model v0.1/docs r1.",
+    "url": "docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
+    "locator": "search surfaces endpoint tests limitations and refresh triggers",
+    "role": "historical_negative_evidence_boundary",
+    "tier": "T3",
+    "permitted": "Retain the component-level negative boundary and document why the whole-substation source reopens only a different grain.",
+    "prohibited": "Repeat the old conclusion as universal across whole-substation functions, private evidence, non-English evidence, unindexed evidence, or later publications.",
+    "decision": "partially_superseded_by_FW-S011",
+    "accessed_on": "2026-07-28",
+    "provenance": "register",
+    "repo_path": "docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
+    "link_kind": "repo_file",
+    "title": "Bounded evidence search log for flood_wind model v0.1/docs r1.",
+    "no_link_sentence": null
+   }
+  ],
+  "claims": [
+   {
+    "id": "FW-C001",
+    "text": "Typical wind and solar generation facilities can use the same facility-level Plant GSU role and collection-bus-to-interconnection architecture.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FW-S001"
+    ],
+    "locator": "pp. 2-3",
+    "tier": "T2",
+    "parameter_or_rule": "shared_asset_anatomy",
+    "status": "adopt",
+    "update_trigger": "FERC configuration guidance or class scope changes."
+   },
+   {
+    "id": "FW-C002",
+    "text": "For future component-level records, a local water-depth bridge may use component vulnerable datum h_i=max(0,WSE-z_i_crit); this is not the model-v1 whole-substation runtime axis.",
+    "type": "engineering_inference",
+    "source_ids": [
+     "FW-S005",
+     "FW-S006",
+     "FW-S007",
+     "FW-S010"
+    ],
+    "locator": "elevation/critical-depth method and canonical flood_solar axis",
+    "tier": "T2",
+    "parameter_or_rule": "component_axis_research_bridge",
+    "status": "retain_nonruntime",
+    "update_trigger": "A component record is validated or the assembly-axis contract changes."
+   },
+   {
+    "id": "FW-C003",
+    "text": "Asset label solar versus wind is not an intrinsic selector for materially identical equipment and delivered exposure.",
+    "type": "governance_decision",
+    "source_ids": [
+     "FW-S001",
+     "GOVERNANCE_CONTRACT",
+     "SHARED_SUBSTRATE"
+    ],
+    "locator": "method standard 20 compatibility key",
+    "tier": "T4",
+    "parameter_or_rule": "curve_selection_rule",
+    "status": "adopt",
+    "update_trigger": "Evidence shows technology context changes intrinsic response after controls."
+   },
+   {
+    "id": "FW-C004",
+    "text": "Switchgear main transformer auxiliaries controls station service and terminations require separate failure-unit identities unless an adopted source explicitly supplies a whole-facility atom.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "FW-S002",
+     "FW-S003",
+     "FW-S004",
+     "FW-S011",
+     "SHARED_SUBSTRATE"
+    ],
+    "locator": "equipment categories, case endpoints, and Hazus Table 7.9 comments",
+    "tier": "T3",
+    "parameter_or_rule": "failure_unit_decomposition",
+    "status": "adopt",
+    "update_trigger": "Claims/OEM data or reviewed NEMA CS 70006-2026 guidance change the decomposition."
+   },
+   {
+    "id": "FW-C005",
+    "text": "NERC shallow relay-room flooding demonstrates operational sensitivity but does not calibrate physical DR.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FW-S003"
+    ],
+    "locator": "approximately 8 inches and 495 MW operational consequence",
+    "tier": "T3",
+    "parameter_or_rule": "endpoint_boundary",
+    "status": "adopt_with_limits",
+    "update_trigger": "A source publishes component disposition and cost for the event."
+   },
+   {
+    "id": "FW-C006",
+    "text": "FS_SWG remains a pinned component candidate but is not the adopted whole-substation curve and remains audit-only for flood_wind.",
+    "type": "governance_decision",
+    "source_ids": [
+     "FW-S010"
+    ],
+    "locator": "FS_SWG and parameter tier table",
+    "tier": "T3",
+    "parameter_or_rule": "FS_SWG_candidate",
+    "status": "withhold",
+    "update_trigger": "Exact equipment applicability and economic validation pass."
+   },
+   {
+    "id": "FW-C007",
+    "text": "FS_XFMR cannot transfer directly because its datum/control semantics and main-transformer value denominator are mixed.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "FW-S010"
+    ],
+    "locator": "FS_XFMR record plus dossier/metadata wording",
+    "tier": "T3",
+    "parameter_or_rule": "FS_XFMR_candidate",
+    "status": "reject_direct_reuse",
+    "update_trigger": "A dependency-safe transformer state/cost model is validated."
+   },
+   {
+    "id": "FW-C008",
+    "text": "FS_SCADA and FS_CABLE are partial concept/mechanism matches only.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "FW-S007",
+     "FW-S010"
+    ],
+    "locator": "FS_SCADA and FS_CABLE semantics",
+    "tier": "T3",
+    "parameter_or_rule": "neighbor_candidate_reuse",
+    "status": "withhold",
+    "update_trigger": "Qualified equipment and value crosswalks pass."
+   },
+   {
+    "id": "FW-C009",
+    "text": "The CWER wind electrical value is one mixed 72 2023 USD/kW bucket and does not support a standalone 9% substation allocation.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "FW-S008"
+    ],
+    "locator": "land-based reference breakdown and local Wind_Map row 12",
+    "tier": "T2",
+    "parameter_or_rule": "value_rollup",
+    "status": "adopt_with_limits",
+    "update_trigger": "Site/OEM/insured schedule supplies a complete non-overlapping value."
+   },
+   {
+    "id": "FW-C010",
+    "text": "Functional association or mapped generation-substation role does not prove project ownership or insured inclusion.",
+    "type": "governance_decision",
+    "source_ids": [
+     "FW-S009",
+     "LEG-FW-001",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "LGIA demarcation definitions and Hazard ownership audit",
+    "tier": "T3",
+    "parameter_or_rule": "ownership_value_rule",
+    "status": "adopt",
+    "update_trigger": "Executed agreement, one-line, and value schedule resolve the boundary."
+   },
+   {
+    "id": "FW-C011",
+    "text": "Riverine pluvial and coastal sources may share a contact response only for the same delivered exposure and conditioner vector.",
+    "type": "governance_decision",
+    "source_ids": [
+     "FW-S002",
+     "FW-S005",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "pathway and binding rules",
+    "tier": "T3",
+    "parameter_or_rule": "source_peril_routing",
+    "status": "adopt",
+    "update_trigger": "Validated source-specific variants or equivalence tests pass."
+   },
+   {
+    "id": "FW-C012",
+    "text": "Scour erosion and saturated-soil support loss are separate from direct inundation contact.",
+    "type": "governance_decision",
+    "source_ids": [
+     "FW-S005",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "method standard 18 and discussion boundary",
+    "tier": "T4",
+    "parameter_or_rule": "pathway_split",
+    "status": "adopt",
+    "update_trigger": "Qualified scour pathway is released."
+   },
+   {
+    "id": "FW-C013",
+    "text": "The legacy M3 anchored logistics are regression fixtures and contain a non-renormalized asymptote discrepancy.",
+    "type": "direct_observation",
+    "source_ids": [
+     "LEG-FW-001"
+    ],
+    "locator": "dr() and hardcoded CAPEX/curves",
+    "tier": "T4",
+    "parameter_or_rule": "legacy_curve",
+    "status": "reject",
+    "update_trigger": "Legacy code is retired after pinned migration."
+   },
+   {
+    "id": "FW-C014",
+    "text": "Replacing Hazard M3 alone does not remove the M4 coastal hardcoded bypass.",
+    "type": "direct_observation",
+    "source_ids": [
+     "LEG-FW-002"
+    ],
+    "locator": "CAPEX7 and SURGE_CURVE reconstruction",
+    "tier": "T4",
+    "parameter_or_rule": "consumer_migration_scope",
+    "status": "adopt",
+    "update_trigger": "Consumer dual-read and bypass KAT pass."
+   },
+   {
+    "id": "FW-C015",
+    "text": "Missing ground/elevation data and synthetic centroid fallback cannot become dry or a priced substation.",
+    "type": "governance_decision",
+    "source_ids": [
+     "LEG-FW-001",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "legacy audit and missing-state rules",
+    "tier": "T4",
+    "parameter_or_rule": "missing_exposure_policy",
+    "status": "adopt",
+    "update_trigger": "Observed component identity geometry and datum become available."
+   },
+   {
+    "id": "FW-C016",
+    "text": "Support fieldwork and transport are allocated once after direct damaged units and disposition are known.",
+    "type": "governance_decision",
+    "source_ids": [
+     "FW-S008",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "Wind_Map rows 13-14 and value standard",
+    "tier": "T4",
+    "parameter_or_rule": "support_once_rule",
+    "status": "adopt_with_limits",
+    "update_trigger": "Claims-backed support allocation is approved."
+   },
+   {
+    "id": "FW-C017",
+    "text": "The model-v0.1 bounded negative remains valid for component-local state-to-disposition-to-same-unit-cost chains but is superseded at whole-substation grain by FW-S011.",
+    "type": "governance_decision",
+    "source_ids": [
+     "FW-S002",
+     "FW-S003",
+     "FW-S004",
+     "FW-S011",
+     "FW-S012",
+     "BOUNDED_SEARCH_LOG"
+    ],
+    "locator": "bounded endpoint review plus Hazus-MH 2.1 Table 7.9 and Hazus 7.0 status",
+    "tier": "T3",
+    "parameter_or_rule": "evidence_reopening",
+    "status": "adopt_with_limits",
+    "update_trigger": "Matched component evidence or a newer official Hazus status changes."
+   },
+   {
+    "id": "FW-C018",
+    "text": "Model v1.0 changes capability from universal numeric withholding to one conditional whole-substation scalar DR while every prior failure unit remains withheld.",
+    "type": "governance_decision",
+    "source_ids": [
+     "FW-S011",
+     "FW-S012",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "proposed artifact capability declaration and evaluation contract",
+    "tier": "T3",
+    "parameter_or_rule": "capability",
+    "status": "adopt_proposed",
+    "update_trigger": "Independent review or canonical promotion decision."
+   },
+   {
+    "id": "FW-C019",
+    "text": "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL exactly reproduces Table 7.9 ratios [0,.02,.04,.06,.07,.08,.09,.10,.12,.14,.15] at depths 0 through 10 ft and linearly interpolates only between knots.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FW-S006",
+     "FW-S011"
+    ],
+    "locator": "FW-S011 Table 7.9; FW-S006 interpolation form",
+    "tier": "T3",
+    "parameter_or_rule": "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL",
+    "status": "adopt_proposed",
+    "update_trigger": "Source-table correction or independent transcription failure."
+   },
+   {
+    "id": "FW-C020",
+    "text": "The Hazus curve atom is one facility-level control-room cabling transformer and switchgear assembly with the full same-substation direct replacement value denominator.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "FW-S011"
+    ],
+    "locator": "Table 7.9 comments and footnote 2",
+    "tier": "T3",
+    "parameter_or_rule": "whole_substation_source_atom",
+    "status": "adopt_proposed",
+    "update_trigger": "A source publishes dependency-safe component attribution."
+   },
+   {
+    "id": "FW-C021",
+    "text": "ESSL ESSM and ESSH publish identical Table 7.9 ordinates but substation_hazus_class remains a required no-default selector.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FW-S011"
+    ],
+    "locator": "Table 7.9, pp. 7-20 through 7-21",
+    "tier": "T3",
+    "parameter_or_rule": "substation_hazus_class",
+    "status": "adopt_proposed",
+    "update_trigger": "New class-specific evidence or source revision."
+   },
+   {
+    "id": "FW-C022",
+    "text": "Numeric evaluation requires source_assumption_set_id=FEMA_HAZUS_MH_2_1_TABLE_7_9_UNPROTECTED_SUBSTATION and axis FLOOD_DEPTH_ABOVE_SUBSTATION_GRADE_FT_HAZUS.",
+    "type": "governance_decision",
+    "source_ids": [
+     "FW-S011",
+     "FW-S012",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "source assumptions, proposed artifact selector, and evaluation contract",
+    "tier": "T3",
+    "parameter_or_rule": "source_assumption_and_axis_gate",
+    "status": "adopt_proposed",
+    "update_trigger": "A reviewed source adapter supersedes the gate."
+   },
+   {
+    "id": "FW-C023",
+    "text": "Hazus 7.0 lists electric-power substations as mapping-only and states that viewable default electric-power functions are disabled and produce no results.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FW-S012"
+    ],
+    "locator": "Table 9-1 and section 9.4.1 footnote 21",
+    "tier": "T2",
+    "parameter_or_rule": "current_hazus_status",
+    "status": "adopt_as_limitation",
+    "update_trigger": "FEMA re-enables and documents validated electric-power loss functions."
+   },
+   {
+    "id": "FW-C024",
+    "text": "Numeric support is limited to water_quality_class=freshwater_non_contaminated and delivered_depth_basis=unprotected_or_internal_post_bypass_depth; protection is handled once in delivered depth.",
+    "type": "governance_decision",
+    "source_ids": [
+     "FW-S002",
+     "FW-S005",
+     "FW-S011",
+     "FW-S013",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "source domain and proposed conditioner contract",
+    "tier": "T4",
+    "parameter_or_rule": "conditioner_gate",
+    "status": "adopt_proposed",
+    "update_trigger": "NEMA CS 70006-2026 and qualified water-quality or protection-response evidence are acquired and reviewed."
+   },
+   {
+    "id": "FW-C025",
+    "text": "The Hazus assembly representation and the six component GSU representations are mutually exclusive for both response and value.",
+    "type": "governance_decision",
+    "source_ids": [
+     "FW-S011",
+     "GOVERNANCE_CONTRACT",
+     "SHARED_SUBSTRATE"
+    ],
+    "locator": "source atom and assembly/value standards",
+    "tier": "T4",
+    "parameter_or_rule": "assembly_component_mutual_exclusion",
+    "status": "adopt_proposed",
+    "update_trigger": "A dependency-safe decomposition explicitly replaces the assembly."
+   },
+   {
+    "id": "FW-C026",
+    "text": "The canonical screening evaluator emits DR; scenario loss is supported only with explicit same-substation value ownership and exposure checks.",
+    "type": "governance_decision",
+    "source_ids": [
+     "FW-S008",
+     "FW-S009",
+     "GOVERNANCE_CONTRACT"
+    ],
+    "locator": "evaluation contract and value linkage",
+    "tier": "T4",
+    "parameter_or_rule": "scenario_loss_boundary",
+    "status": "released_screening",
+    "update_trigger": "Value or cap-binding contract changes."
+   },
+   {
+    "id": "FW-C027",
+    "text": "NEMA's April 2026 publication register identifies the same-titled successor guide NEMA CS 70006-2026, so GD 1-2016 is historical and the current guide must be acquired and technically reviewed before canonical promotion.",
+    "type": "source_status_observation",
+    "source_ids": [
+     "FW-S002",
+     "FW-S013"
+    ],
+    "locator": "FW-S013 Recently Published Documents, p. 5; FW-S002 sections 4.3 and 4.4",
+    "tier": "T2",
+    "parameter_or_rule": "current_electrical_disposition_guide_gate",
+    "status": "promotion_caveat",
+    "update_trigger": "NEMA CS 70006-2026 is acquired, registered, compared against FW-S002, and reviewed."
+   }
+  ],
+  "parameters": [
+   {
+    "id": "Hazus substation depth-damage knots",
+    "name": "Hazus substation depth-damage knots",
+    "value": "0..10 ft -> 0..0.15 DR exactly as Table 7.9",
+    "tier": "T3",
+    "source_ids": [
+     "FW-S011",
+     "FW-S012"
+    ],
+    "claim_ids": [],
+    "curve_id": "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "FEMA published the numeric whole-substation screening function, but current Hazus disables electric-power loss calculations and no claims calibration is documented.",
+    "update_trigger": "component or assembly flood claims/OEM dataset or a re-enabled and revalidated FEMA electric-power method"
+   },
+   {
+    "id": "linear interpolation between one-foot knots",
+    "name": "linear interpolation between one-foot knots",
+    "value": "linear_between_source_knots",
+    "tier": "T2",
+    "source_ids": [
+     "FW-S006",
+     "FW-S011"
+    ],
+    "claim_ids": [],
+    "curve_id": "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Hazus and USACE describe interpolation between tabulated depth-percent ordinates.",
+    "update_trigger": "source method changes"
+   },
+   {
+    "id": "valid source range",
+    "name": "valid source range",
+    "value": "0..10 ft",
+    "tier": "T2",
+    "source_ids": [
+     "FW-S011",
+     "FW-S012"
+    ],
+    "claim_ids": [],
+    "curve_id": "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL",
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": null,
+    "reasoning": "The source table ends at ten feet and newer Hazus describes ten feet as the utility-function maximum depth.",
+    "update_trigger": "source-supported extrapolation rule"
+   },
+   {
+    "id": "freshwater-only numeric eligibility",
+    "name": "freshwater-only numeric eligibility",
+    "value": "freshwater_non_contaminated",
+    "tier": "T4",
+    "source_ids": [
+     "FW-S002",
+     "FW-S005",
+     "FW-S012",
+     "FW-S013"
+    ],
+    "claim_ids": [],
+    "curve_id": "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL",
+    "pathway_id": null,
+    "role": "conditioner_adjustment",
+    "status": null,
+    "reasoning": "Hazus does not vary damage by flood type; historical equipment guidance indicates materially different contamination and salinity consequences, while the current NEMA successor remains unreviewed, so unsupported states conservatively withhold.",
+    "update_trigger": "NEMA CS 70006-2026 and qualified salinity contamination and duration evidence are acquired and reviewed"
+   },
+   {
+    "id": "WSE-to-grade unit bridge",
+    "name": "WSE-to-grade unit bridge",
+    "value": "(WSE_m - grade_m) * 3.280839895013123",
+    "tier": "T2",
+    "source_ids": [
+     "FW-S005",
+     "FW-S011"
+    ],
+    "claim_ids": [],
+    "curve_id": "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL",
+    "pathway_id": null,
+    "role": "axis_bridge",
+    "status": null,
+    "reasoning": "A same-datum elevation difference provides local grade depth; the factor is the exact SI-to-foot conversion.",
+    "update_trigger": "axis contract changes"
+   }
+  ],
+  "parameters_plain": [
+   {
+    "id": "Hazus substation depth-damage knots",
+    "name": "Hazus substation depth-damage knots",
+    "raw_name": "Hazus substation depth-damage knots",
+    "value_text": "0..10 ft -> 0..0.15 DR exactly as Table 7.9",
+    "tier": "T3",
+    "tier_word": "borrowed",
+    "sources": [
+     {
+      "id": "FW-S011",
+      "title": "Federal Emergency Management Agency, Hazus-MH Flood Model Technical Manual, version 2.1.",
+      "link": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FW-S012",
+      "title": "Federal Emergency Management Agency, Hazus 7.0 Flood Technical Manual (2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL",
+    "reasoning": "FEMA published the numeric whole-substation screening function, but current Hazus disables electric-power loss calculations and no claims calibration is documented.",
+    "update_trigger": "component or assembly flood claims/OEM dataset or a re-enabled and revalidated FEMA electric-power method",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "linear interpolation between one-foot knots",
+    "name": "linear interpolation between one-foot knots",
+    "raw_name": "linear interpolation between one-foot knots",
+    "value_text": "linear_between_source_knots",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FW-S006",
+      "title": "U.S. Army Corps of Engineers, HEC-FIA Technical Reference, Depth-Percent Damage Relationships.",
+      "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FW-S011",
+      "title": "Federal Emergency Management Agency, Hazus-MH Flood Model Technical Manual, version 2.1.",
+      "link": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL",
+    "reasoning": "Hazus and USACE describe interpolation between tabulated depth-percent ordinates.",
+    "update_trigger": "source method changes",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "valid source range",
+    "name": "valid source range",
+    "raw_name": "valid source range",
+    "value_text": "0..10 ft",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FW-S011",
+      "title": "Federal Emergency Management Agency, Hazus-MH Flood Model Technical Manual, version 2.1.",
+      "link": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FW-S012",
+      "title": "Federal Emergency Management Agency, Hazus 7.0 Flood Technical Manual (2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL",
+    "reasoning": "The source table ends at ten feet and newer Hazus describes ten feet as the utility-function maximum depth.",
+    "update_trigger": "source-supported extrapolation rule",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "freshwater-only numeric eligibility",
+    "name": "freshwater-only numeric eligibility",
+    "raw_name": "freshwater-only numeric eligibility",
+    "value_text": "freshwater_non_contaminated",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "FW-S002",
+      "title": "National Electrical Manufacturers Association, NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment…",
+      "link": "https://www.nema.org/docs/default-source/secure-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FW-S005",
+      "title": "Federal Emergency Management Agency, FEMA P-348, Protecting Building Utility Systems From Flood Damage, 2nd…",
+      "link": "https://www.fema.gov/sites/default/files/2020-07/fema_p-348_protecting_building_utility_systems_from_flood_damage_2017.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FW-S012",
+      "title": "Federal Emergency Management Agency, Hazus 7.0 Flood Technical Manual (2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FW-S013",
+      "title": "National Electrical Manufacturers Association, NEMA Standards Action, April 6, 2026.",
+      "link": "https://www.nema.org/docs/default-source/default-document-library/public/standards-actions/nema-standards-action-april-2026.pdf?sfvrsn=73934d20_2",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL",
+    "reasoning": "Hazus does not vary damage by flood type; historical equipment guidance indicates materially different contamination and salinity consequences, while the current NEMA successor remains unreviewed, so unsupported states conservatively withhold.",
+    "update_trigger": "NEMA CS 70006-2026 and qualified salinity contamination and duration evidence are acquired and reviewed",
+    "role": "conditioner_adjustment"
+   },
+   {
+    "id": "WSE-to-grade unit bridge",
+    "name": "WSE-to-grade unit bridge",
+    "raw_name": "WSE-to-grade unit bridge",
+    "value_text": "(WSE_m - grade_m) * 3.280839895013123",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FW-S005",
+      "title": "Federal Emergency Management Agency, FEMA P-348, Protecting Building Utility Systems From Flood Damage, 2nd…",
+      "link": "https://www.fema.gov/sites/default/files/2020-07/fema_p-348_protecting_building_utility_systems_from_flood_damage_2017.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FW-S011",
+      "title": "Federal Emergency Management Agency, Hazus-MH Flood Model Technical Manual, version 2.1.",
+      "link": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL",
+    "reasoning": "A same-datum elevation difference provides local grade depth; the factor is the exact SI-to-foot conversion.",
+    "update_trigger": "axis contract changes",
+    "role": "axis_bridge"
+   }
+  ],
+  "evidence_provenance": {
+   "kind": "register",
+   "sheets": [],
+   "sections": [],
+   "unmatched": [],
+   "sentence": null,
+   "dossier": null,
+   "workbook": null
+  },
+  "link_counts": {
+   "total": 17,
+   "linked": 17,
+   "locator_only": 0,
+   "neither": 0,
+   "markers": 1,
+   "placeholders": 0
+  },
+  "extraction": null,
+  "tier_words": {
+   "shape": "borrowed",
+   "cost": "borrowed"
+  }
+ },
  "build_findings": []
 }

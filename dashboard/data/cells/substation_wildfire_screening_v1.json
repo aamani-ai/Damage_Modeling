@@ -64,7 +64,7 @@
    "label": "entry agent-read 2026-10-19 · release —"
   }
  },
- "summary": "Wildfire on substations reuses another cell's curve: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a T4 assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md); 1 part of the asset's value has no curve.",
+ "summary": "Wildfire on substations reuses another cell's curve: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md); 1 part of the asset's value has no curve.",
  "chain": {
   "stations": [
    {
@@ -624,6 +624,7 @@
    "WSV1_MV_EQUIPMENT_THERMAL"
   ],
   "transfer_rationale": null,
+  "transfer_rationale_raw": null,
   "transfer_tier": null,
   "status": null,
   "limitations": [
@@ -635,5 +636,362 @@
   ]
  },
  "sampling_notes": [],
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Reused · borrows another cell's curve",
+    "code": "REUSED"
+   },
+   "evidence": {
+    "words": "Evidence: our judgment",
+    "code": "How damage rises: our judgment · how it becomes dollars: our judgment",
+    "tiers": [
+     "T4"
+    ],
+    "codes": "shape T4 · cost T4"
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "Field reports: nobody has looked yet"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release —"
+   }
+  },
+  "main_logic": [
+   "Wildfire is read as FSim fire intensity class at the station reference point, exact integer 1 to 6 (0 = no event).",
+   "The canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer.",
+   "Why this shape: as in Wildfire × Solar farm, evidence constrains mechanism, selector sensitivity, and inspection endpoint; absolute class DR is engineering judgment.",
+   "The damage ratio is a share of the bound electrical equipment value of the station, $13,025,357 (eight equipment rows)."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "1 part with a curve · 1 without one yet",
+    "paragraphs": [
+     "Wildfire on substations: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md). It names 1 part: Electrical equipment (transformers and switchgear). Outside its scope: external access road and project support allowances ($3.06M, outside the fenced value) and business interruption, revenue and insurance terms.",
+     "For this hazard the substation is split into 1 part: Electrical equipment (transformers and switchgear). Parts of the plant's value with no curve yet: rest of the fenced station ($14,327,879.37, 52.38%): bus supports, dead-ends, oil containment and firewall, relay panels, control house, station battery, SCADA, station service, control cable, conduit and trench, site work, drainage and lightning shielding.",
+     "The damage ratio is a share of bound electrical equipment value of the station, $13,025,357 (eight equipment rows); % of TIV divides by the full fenced value $27,353,236.37. The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "Electrical equipment…",
+      "tone": "key",
+      "title": "Electrical equipment (transformers and switchgear)"
+     },
+     {
+      "text": "1 without a curve yet",
+      "tone": "muted",
+      "title": "Rest of the fenced station ($14,327,879.37, 52.38%): bus supports, dead-ends, oil containment and firewall, relay panels, control house, station battery, SCADA, station service, control cable, conduit and trench, site work, drainage and lightning shielding"
+     }
+    ]
+   },
+   {
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
+    "fact": "not written yet",
+    "paragraphs": [
+     "No hazard axis is declared. The input, in the catalogue's words: FSim fire intensity class at the station reference point, exact integer 1 to 6 (0 = no event); no interpolation or heat-flux conversion.",
+     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": false,
+    "chips": [
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Evidence constrains mechanism, selector sensitivity, and inspection endpoint; absolute class DR is engineering judgment."
+     }
+    ],
+    "why": [
+     {
+      "label": "From Wildfire × Solar farm, which it builds on",
+      "text": "Evidence constrains mechanism, selector sensitivity, and inspection endpoint; absolute class DR is engineering judgment.",
+      "source": "Wildfire × Solar farm",
+      "source_label": "Why this shape"
+     }
+    ]
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "not written yet",
+    "paragraphs": [
+     "No source list could be read for this cell. The source and claim registers are machine-readable files in the cell folder."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": false,
+    "chips": [
+     {
+      "text": "our judgment",
+      "tone": "key",
+      "title": "How damage rises: our judgment · how it becomes dollars: our judgment"
+     },
+     {
+      "text": "Canonical wildfire_solar…",
+      "tone": "key",
+      "title": "Canonical wildfire_solar model v1.0 docs r3, WSV1_MV_EQUIPMENT_THERMAL (ordinate table and value linkage)"
+     },
+     {
+      "text": "USFS FSim RDS-2016-0034-3…",
+      "tone": "key",
+      "title": "USFS FSim RDS-2016-0034-3 (native fire class and burn probability)"
+     },
+     {
+      "text": "+2 more references",
+      "tone": "muted"
+     }
+    ]
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says passed.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "no outside check yet",
+      "tone": "muted"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: our judgment · how it becomes dollars: our judgment",
+  "hazard_paths": [],
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "◐",
+    "label": "one wildfire event",
+    "short": "one wildfire event",
+    "detail": "equipment damage ratio for an exact FSim class at the facility point"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "◐",
+    "label": "a dollar scenario",
+    "short": "a dollar scenario",
+    "detail": "damage ratio times $13,025,357; remaining fenced value withheld"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "◐",
+    "label": "yearly loss — only through Hazard",
+    "short": "yearly loss",
+    "detail": "hazard computes it after frequency, class, value, cap and spatial-aggregation proof; capped at $13,025,357"
+   },
+   {
+    "key": "pml",
+    "mark": "◐",
+    "label": "PML, VaR — only from Hazard's validated annual loss distribution, per the source cell",
+    "short": "PML and VaR",
+    "detail": ""
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": null,
+    "not_covered": [
+     "Rest of the fenced station ($14,327,879.37, 52.38%): bus supports, dead-ends, oil containment and firewall, relay panels, control house, station battery, SCADA, station service, control cable, conduit and trench, site work, drainage and lightning shielding"
+    ],
+    "withheld": []
+   },
+   "assumed": [
+    "MV-to-HV electrical assembly transfer",
+    "Source class ordinates are engineering judgment, not measured failure rates",
+    "Instrument and protection equipment counted inside the modeled electrical assembly"
+   ],
+   "missing": {
+    "mechanisms": [],
+    "out_of_scope": [
+     "External access road and project support allowances ($3.06M, outside the fenced value)",
+     "Business interruption, revenue and insurance terms"
+    ]
+   },
+   "open_questions": [
+    "52.38% of fenced station value has no wildfire response",
+    "Tank and oil versus breaker or instrument behaviour not resolved; replace when a station-specific electrical model is qualified"
+   ],
+   "next_version": null
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "Scope",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Wildfire on substations: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md). It names 1 part: Electrical equipment (transformers and switchgear). Outside its scope: external access road and project support allowances ($3.06M, outside the fenced value) and business interruption, revenue and insurance terms.",
+    "plain_fact": "1 part · 2 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the substation is split into 1 part: Electrical equipment (transformers and switchgear). Parts of the plant's value with no curve yet: rest of the fenced station ($14,327,879.37, 52.38%): bus supports, dead-ends, oil containment and firewall, relay panels, control house, station battery, SCADA, station service, control cable, conduit and trench, site work, drainage and lightning shielding.",
+    "plain_fact": "1 part"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "No hazard axis is declared. The input, in the catalogue's words: FSim fire intensity class at the station reference point, exact integer 1 to 6 (0 = no event); no interpolation or heat-flux conversion.",
+    "plain_fact": "—"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "No source list could be read for this cell. The source and claim registers are machine-readable files in the cell folder.",
+    "plain_fact": "0 sources · our judgment"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "The damage ratio is a share of bound electrical equipment value of the station, $13,025,357 (eight equipment rows); % of TIV divides by the full fenced value $27,353,236.37. The files state no plant-level dollar figure for this asset.",
+    "plain_fact": "no plant value stated"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "no audit found"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 0 curve records (model v1.0, docs r3). The cell folder holds 4 files, each with its SHA under Details.",
+    "plain_fact": "0 curve records"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "One wildfire event, a dollar scenario, yearly loss and PML and VaR are available only under conditions the consumer (Hazard) checks. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "0 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "The artifact declares no known-answer tests, so this build reproduced none. The validation record says passed. No outside check has been made yet.",
+    "plain_fact": "no known answers"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "Canonical wildfire_solar model v1.0 docs r3, WSV1_MV_EQUIPMENT_THERMAL (ordinate table and value linkage)",
+    "ids": [],
+    "title": "Canonical wildfire_solar model v1.0 docs r3, WSV1_MV_EQUIPMENT_THERMAL (ordinate table and value linkage)",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   },
+   {
+    "text": "USFS FSim RDS-2016-0034-3 (native fire class and burn probability)",
+    "ids": [],
+    "title": "USFS FSim RDS-2016-0034-3 (native fire class and burn probability)",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   },
+   {
+    "text": "Hazard substation profile (asset_model.json): 345/138 kV AIS, two 336 MVA transformers",
+    "ids": [],
+    "title": "Hazard substation profile (asset_model.json): 345/138 kV AIS, two 336 MVA transformers",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   },
+   {
+    "text": "MISO MTEP24 published cost tables (equipment value rows)",
+    "ids": [],
+    "title": "MISO MTEP24 published cost tables (equipment value rows)",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   }
+  ],
+  "sources": [],
+  "claims": [],
+  "parameters": [],
+  "parameters_plain": [],
+  "evidence_provenance": {
+   "kind": "register",
+   "sheets": [],
+   "sections": [],
+   "unmatched": [],
+   "sentence": null,
+   "dossier": null,
+   "workbook": null
+  },
+  "link_counts": {
+   "total": 0,
+   "linked": 0,
+   "locator_only": 0,
+   "neither": 0,
+   "markers": 0,
+   "placeholders": 0
+  },
+  "extraction": null,
+  "tier_words": {
+   "shape": "our judgment",
+   "cost": "our judgment"
+  }
+ },
  "build_findings": []
 }

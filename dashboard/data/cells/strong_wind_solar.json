@@ -205,7 +205,7 @@
       ]
      }
     ],
-    "fact": "T2–4",
+    "fact": "10 src · T2–4",
     "absent_sentence": null
    },
    {
@@ -372,7 +372,7 @@
     "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only."
    }
   ],
-  "generation": "prose",
+  "generation": "skill",
   "core_as_files": 3,
   "core_total": 6,
   "dossier": {
@@ -430,12 +430,12 @@
     "items": [
      {
       "item": "source register with stable IDs, locators, roles, tiers and decisions",
-      "status": "human",
+      "status": "proven",
       "basis": null
      },
      {
       "item": "load-bearing claims carry claim-level provenance",
-      "status": "human",
+      "status": "proven",
       "basis": null
      },
      {
@@ -813,15 +813,15 @@
   }
  ],
  "evidence": {
-  "lineage": "parameters_only",
+  "lineage": "extracted",
   "prose_sentence": null,
   "paths": {
    "sources": null,
    "claims": null,
    "parameters": null
   },
-  "n_sources": 0,
-  "n_claims": 0,
+  "n_sources": 10,
+  "n_claims": 6,
   "n_parameters": 26,
   "key_sources": [
    "Wind-pressure physics, pressure scales with speed squared (WIND_PRESSURE_PHYSICS)",
@@ -1080,5 +1080,2051 @@
  "sampling_notes": [
   "No known-answer tests declared by this artifact."
  ],
- "build_findings": []
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Live · in the runtime index",
+    "code": "LIVE"
+   },
+   "evidence": {
+    "words": "Evidence: our judgment",
+    "code": "How damage rises: our judgment · how it becomes dollars: our judgment",
+    "tiers": [
+     "T4"
+    ],
+    "codes": "shape T4 · cost T4"
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "Field reports: nobody has looked yet"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release —"
+   }
+  },
+  "main_logic": [
+   "Convective wind is measured as effective demand ratio R_eff = (V₃ₛ / V_design)² × demand multipliers.",
+   "Thresholded logistic curves on a design-normalised demand ratio; axis from wind-pressure physics, all numeric parameters set by engineering judgment from PV wind-load and storm-resilience sources.",
+   "Why this shape: structural wind damage is threshold-like but heterogeneous; thresholded logistic avoids false low-wind damage and caps failure-unit loss.",
+   "The damage ratio is a share of the replacement value of the same part, as a share of the physical replaceable base (default shares are illustrative)."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "5 parts with a curve · 1 without one yet",
+    "paragraphs": [
+     "Convective wind on solar farms: thresholded logistic curves on a design-normalised demand ratio; axis from wind-pressure physics, all numeric parameters set by engineering judgment from PV wind-load and storm-resilience sources. It names 5 parts: Tracker structure, Racking structure, PV module attachment, Foundations (uplift) and Exposed SCADA and met station. Outside its scope: tornado and windborne debris (deferred to a separate pathway) and yearly and tail loss metrics (computed by the consumer, not the cell). Kinds of damage it does not include: cascade between racking or tracker failure and module detachment (no dependency rule).",
+     "For this hazard the solar farm is split into 5 parts: Tracker structure, Racking structure, PV module attachment, Foundations (uplift) and Exposed SCADA and met station. Parts of the plant's value with no curve yet: the other 36% of the reference physical base (parts not named by the cell) has no curve or value share; the cell says this is not an automatic zero.",
+     "The damage ratio is a share of replacement value of the same part, as a share of the physical replaceable base (default shares are illustrative). The files state no plant-level dollar figure for this asset. Shares of the plant's physical value, as the cell states them: Tracker structure 8 %, Racking structure 6 %, PV module attachment 40 %, Foundations (uplift) 8 % and Exposed SCADA and met station 2 %."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "Tracker structure",
+      "tone": "key",
+      "title": "Tracker structure"
+     },
+     {
+      "text": "Racking structure",
+      "tone": "key",
+      "title": "Racking structure"
+     },
+     {
+      "text": "PV module attachment",
+      "tone": "key",
+      "title": "PV module attachment"
+     },
+     {
+      "text": "+2 more",
+      "tone": "muted",
+      "title": "Foundations (uplift), Exposed SCADA and met station"
+     },
+     {
+      "text": "3 stow states",
+      "tone": "key"
+     },
+     {
+      "text": "1 without a curve yet",
+      "tone": "muted",
+      "title": "The other 36% of the reference physical base (parts not named by the cell) has no curve or value share; the cell says this is not an automatic zero"
+     }
+    ]
+   },
+   {
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
+    "fact": "effective demand ratio R_eff → a threshold, then an S-curve",
+    "paragraphs": [
+     "Damage is read against effective demand ratio R_eff = (V₃ₛ / V_design)² × demand multipliers. The curve is nothing below a threshold, then an S-shaped rise to a plateau (thresholded logistic). The input, in the catalogue's words: 3-second gust at array height (mph), 0 to 200 (warn or clamp), turned into a demand ratio: (gust / design gust) squared times stow and zone multipliers.",
+     "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "effective demand ratio R_eff",
+      "tone": "key",
+      "title": "effective demand ratio R_eff"
+     },
+     {
+      "text": "threshold, then an S-curve",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Structural wind damage is threshold-like but heterogeneous; thresholded logistic avoids false low-wind damage and caps failure-unit loss."
+     }
+    ],
+    "why": [
+     {
+      "label": "Why this shape",
+      "text": "Structural wind damage is threshold-like but heterogeneous; thresholded logistic avoids false low-wind damage and caps failure-unit loss."
+     },
+     {
+      "label": "How the shape was set",
+      "text": "Engineering-fit transition point on normalized demand ratio."
+     }
+    ]
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "10 sources, 10 linked · our judgment",
+    "paragraphs": [
+     "10 sources set this cell: Wind-pressure physics, pressure scales with speed squared, CPP, utility-scale PV wind-load paper, CPP, torsional instability of single-axis trackers and DOE/FEMP, severe-weather PV design guidance and 6 more. Of the 26 parameters, 1 is published and 25 are our judgment. The sources were read from the workbook's Evidence_Params, Assumption_Register and Sources sheets, because this older cell keeps them there rather than in register files. 1 source ID in the tier table (WIND_PRESSURE_PHYSICS) matches no document in the workbook or dossier."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "our judgment",
+      "tone": "key",
+      "title": "How damage rises: our judgment · how it becomes dollars: our judgment"
+     },
+     {
+      "text": "Wind-pressure physics…",
+      "tone": "key",
+      "title": "Wind-pressure physics, pressure scales with speed squared"
+     },
+     {
+      "text": "CPP, utility-scale PV…",
+      "tone": "key",
+      "title": "CPP, utility-scale PV wind-load paper"
+     },
+     {
+      "text": "+3 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "10 sources, 10 linked",
+      "tone": "muted"
+     }
+    ]
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "No outside check has been made yet: nothing independent has been compared with this curve.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "no outside check yet",
+      "tone": "muted"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: our judgment · how it becomes dollars: our judgment",
+  "hazard_paths": [],
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "✓",
+    "label": "one convective wind event (give 3-second gust at array height)",
+    "short": "one convective wind event",
+    "detail": "per-part damage ratio"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "◐",
+    "label": "a dollar scenario",
+    "short": "a dollar scenario",
+    "detail": "needs an explicit value and exposure basis"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "◐",
+    "label": "yearly loss — only through Hazard",
+    "short": "yearly loss",
+    "detail": "computed by the consumer from a frequency-driven loss simulation with caps applied; curve spread not carried"
+   },
+   {
+    "key": "pml",
+    "mark": "◐",
+    "label": "PML, VaR, TVaR — only from Hazard's validated annual loss distribution",
+    "short": "PML, VaR and TVaR",
+    "detail": "consumer computable from validated annual loss distribution"
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": null,
+    "not_covered": [
+     "The other 36% of the reference physical base (parts not named by the cell) has no curve or value share; the cell says this is not an automatic zero"
+    ],
+    "withheld": []
+   },
+   "assumed": [
+    "Damage thresholds, midpoints and slopes for every part are engineering fits",
+    "Damage caps per part (15% to 80%) are engineering fits, not claims-calibrated",
+    "Default part value shares are illustrative",
+    "Stow multiplies demand by 0.80 (stowed) or 1.25 (unstowed or failed)"
+   ],
+   "missing": {
+    "mechanisms": [
+     "Cascade between racking or tracker failure and module detachment (no dependency rule)"
+    ],
+    "out_of_scope": [
+     "Tornado and windborne debris (deferred to a separate pathway)",
+     "Yearly and tail loss metrics (computed by the consumer, not the cell)"
+    ]
+   },
+   "open_questions": [
+    "Workbook stow selector defect: Dashboard!G7 reads B7 instead of B8 (not patched in v1)",
+    "No cell-specific known-answer test fixture for v1",
+    "No claims or forensic calibration; v2.0 promotion is blocked pending independent review and stronger calibration"
+   ],
+   "next_version": "Proposed model v2.0 (docs r1): straight-line convective wind only, separate fixed-tilt and qualified single-axis-tracker records with architecture-specific demand axes, bounded cascade, explicit value linkage and known-answer tests; judgment-based screening proxy, not canonical"
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "Scope",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Convective wind on solar farms: thresholded logistic curves on a design-normalised demand ratio; axis from wind-pressure physics, all numeric parameters set by engineering judgment from PV wind-load and storm-resilience sources. It names 5 parts: Tracker structure, Racking structure, PV module attachment, Foundations (uplift) and Exposed SCADA and met station. Outside its scope: tornado and windborne debris (deferred to a separate pathway) and yearly and tail loss metrics (computed by the consumer, not the cell). Kinds of damage it does not include: cascade between racking or tracker failure and module detachment (no dependency rule).",
+    "plain_fact": "5 parts · 2 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the solar farm is split into 5 parts: Tracker structure, Racking structure, PV module attachment, Foundations (uplift) and Exposed SCADA and met station. Parts of the plant's value with no curve yet: the other 36% of the reference physical base (parts not named by the cell) has no curve or value share; the cell says this is not an automatic zero.",
+    "plain_fact": "5 parts"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "Damage is read against effective demand ratio R_eff = (V₃ₛ / V_design)² × demand multipliers. The curve is nothing below a threshold, then an S-shaped rise to a plateau (thresholded logistic). The input, in the catalogue's words: 3-second gust at array height (mph), 0 to 200 (warn or clamp), turned into a demand ratio: (gust / design gust) squared times stow and zone multipliers.",
+    "plain_fact": "a threshold, then an S-curve"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "10 sources set this cell: Wind-pressure physics, pressure scales with speed squared, CPP, utility-scale PV wind-load paper, CPP, torsional instability of single-axis trackers and DOE/FEMP, severe-weather PV design guidance and 6 more. Of the 26 parameters, 1 is published and 25 are our judgment. The sources were read from the workbook's Evidence_Params, Assumption_Register and Sources sheets, because this older cell keeps them there rather than in register files. 1 source ID in the tier table (WIND_PRESSURE_PHYSICS) matches no document in the workbook or dossier.",
+    "plain_fact": "10 sources · our judgment"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "The damage ratio is a share of replacement value of the same part, as a share of the physical replaceable base (default shares are illustrative). The files state no plant-level dollar figure for this asset. Shares of the plant's physical value, as the cell states them: Tracker structure 8 %, Racking structure 6 %, PV module attachment 40 %, Foundations (uplift) 8 % and Exposed SCADA and met station 2 %.",
+    "plain_fact": "shares per part"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "adjustments in the write-up"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 5 curve records (model v1.0, docs r3). The write-up is strong_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md. The workbook is damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx. The cell folder holds 7 files, each with its SHA under Details.",
+    "plain_fact": "5 curve records"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "It can give one convective wind event. A dollar scenario, yearly loss and PML, VaR and TVaR are available only under conditions the consumer (Hazard) checks. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "1 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "The artifact declares no known-answer tests, so this build reproduced none. No validation record was found. No outside check has been made yet.",
+    "plain_fact": "no known answers"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "Wind-pressure physics, pressure scales with speed squared",
+    "ids": [
+     "WIND_PRESSURE_PHYSICS"
+    ],
+    "title": "Wind-pressure physics, pressure scales with speed squared",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": "not in the register",
+    "source_id": null
+   },
+   {
+    "text": "CPP, utility-scale PV wind-load paper",
+    "ids": [
+     "CPP_PV_WIND_LOAD"
+    ],
+    "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+    "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SRC_CPP_WIND_LOADS_UTILITY_PV"
+   },
+   {
+    "text": "CPP, torsional instability of single-axis trackers",
+    "ids": [
+     "CPP_TORSIONAL_TRACKER"
+    ],
+    "title": "CPP, torsional instability of single-axis trackers",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": "not in the register",
+    "source_id": null
+   },
+   {
+    "text": "DOE/FEMP, severe-weather PV design guidance",
+    "ids": [
+     "DOE_FEMP_SEVERE_WEATHER_PV"
+    ],
+    "title": "Severe Weather Resilience in Solar Photovoltaic System Design",
+    "link": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SRC_DOE_FEMP_PV_SEVERE_WEATHER"
+   },
+   {
+    "text": "NREL, storm-resilience and storm-hardening reports",
+    "ids": [
+     "NREL_STORM_RESILIENCE"
+    ],
+    "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+    "link": "https://www.osti.gov/servlets/purl/2448530",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "SRC_NREL_STORM_RESILIENCE"
+   }
+  ],
+  "sources": [
+   {
+    "id": "SRC_DOE_FEMP_PV_SEVERE_WEATHER",
+    "title": "Severe Weather Resilience in Solar Photovoltaic System Design",
+    "citation": "Severe Weather Resilience in Solar Photovoltaic System Design",
+    "url": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
+    "locator": null,
+    "role": "Supports wind-resilience failure mechanisms and storm-hardening selectors for PV systems; not a quantitative fragility curve.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SRC_DOE_FEMP_PV_SEVERE_WEATHER"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SRC_NREL_STORM_RESILIENCE",
+    "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+    "citation": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+    "url": "https://www.osti.gov/servlets/purl/2448530",
+    "locator": null,
+    "role": "Field mechanism evidence for clamp, fastener, bracing, cascading module release and high-wind failures; used for mechanism and curve-form support.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SRC_NREL_STORM_RESILIENCE"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.osti.gov/servlets/purl/2448530",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SRC_NREL_STORM_HARDENING_COST",
+    "title": "Cost Considerations for Storm Hardening PV Systems for Resilience",
+    "citation": "Cost Considerations for Storm Hardening PV Systems for Resilience",
+    "url": "https://docs.nrel.gov/docs/fy20osti/75804.pdf",
+    "locator": null,
+    "role": "Mechanism evidence for loose fasteners, module-racking attachments, and storm-hardening measures; used for assumptions and selectors.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SRC_NREL_STORM_HARDENING_COST"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://docs.nrel.gov/docs/fy20osti/75804.pdf",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SRC_CPP_WIND_LOADS_UTILITY_PV",
+    "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+    "citation": "Wind Loads on Utility Scale Solar PV Power Plants",
+    "url": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+    "locator": null,
+    "role": "Supports dynamic effects, tracker wind loads, and caveat against static-only simplified loads; used for x-axis bridge and curve-form rationale.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SRC_CPP_WIND_LOADS_UTILITY_PV"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SRC_CPP_TORSIONAL_TRACKERS",
+    "title": "Torsional Instability of Single-Axis Solar Tracking Systems",
+    "citation": "Torsional Instability of Single-Axis Solar Tracking Systems",
+    "url": "https://cppwind.com/wp-content/uploads/2014/01/Torsional-Instability-of-Single-Axis-Solar-Tracking-Systems-Rohr-Bourke-Banks-2015.pdf",
+    "locator": null,
+    "role": "Supports tracker stow as a conditioner and torsional instability as a mechanism; not used as a numeric generic curve.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SRC_CPP_TORSIONAL_TRACKERS"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://cppwind.com/wp-content/uploads/2014/01/Torsional-Instability-of-Single-Axis-Solar-Tracking-Systems-Rohr-Bourke-Banks-2015.pdf",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SRC_DURAMAT_AEROELASTIC",
+    "title": "Aero-Elastic Modeling and Advanced Field Testing of PV Trackers",
+    "citation": "Aero-Elastic Modeling and Advanced Field Testing of PV Trackers",
+    "url": "https://www.duramat.org/projects/aero-elastic-modeling",
+    "locator": null,
+    "role": "Supports that tracker high-wind failure modes and aeroelastic model gaps are active research areas; used for open-seam and caveat.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SRC_DURAMAT_AEROELASTIC"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.duramat.org/projects/aero-elastic-modeling",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SRC_DURAMAT_PVADE",
+    "title": "PVade wind-driven PV system simulation",
+    "citation": "PVade wind-driven PV system simulation",
+    "url": "https://www.duramat.org/projects/wind-driven-pv-system-simulation",
+    "locator": null,
+    "role": "Supports fluid-structure-interaction and wind-driven loading framework; used for future calibration path.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SRC_DURAMAT_PVADE"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.duramat.org/projects/wind-driven-pv-system-simulation",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SRC_SEAC_ASCE_7_22_PV",
+    "title": "Updates on ASCE 7 Standard for Solar PV Systems",
+    "citation": "Updates on ASCE 7 Standard for Solar PV Systems",
+    "url": "https://sustainableenergyaction.org/resources/updates-asce-7-standard-solar-pv-systems/",
+    "locator": null,
+    "role": "Supports separating conventional PV wind-load treatment from tornado load scoping; used for tornado deferral rationale.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SRC_SEAC_ASCE_7_22_PV"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://sustainableenergyaction.org/resources/updates-asce-7-standard-solar-pv-systems/",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SRC_ASCE_TORNADO_CHAPTER",
+    "title": "ASCE 7-22 wind load standard adds tornado chapter",
+    "citation": "ASCE 7-22 wind load standard adds tornado chapter",
+    "url": "https://www.asce.org/publications-and-news/civil-engineering-source/civil-engineering-magazine/article/2022/02/asce-7-22-wind-load-standard-adds-tornado-chapter",
+    "locator": null,
+    "role": "Supports tornado hazards being separate from traditional wind loads due to different wind characteristics and load combinations; used for pathway split.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "SRC_ASCE_TORNADO_CHAPTER"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.asce.org/publications-and-news/civil-engineering-source/civil-engineering-magazine/article/2022/02/asce-7-22-wind-load-standard-adds-tornado-chapter",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+    "title": "solar_wind_value_breakdown.xlsx",
+    "citation": "solar_wind_value_breakdown.xlsx (this repository)",
+    "url": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "locator": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "role": "value basis",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "repository-file",
+    "from": {
+     "file": "docs/method/value_basis/solar_wind_value_breakdown.xlsx"
+    },
+    "aliases": [
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "link_kind": "repo_file",
+    "no_link_sentence": null
+   }
+  ],
+  "claims": [
+   {
+    "id": "Evidence_Params-1",
+    "text": "Failure modes, design-screening, racking/bracing/module rating selectors",
+    "type": "core qualitative source",
+    "source_ids": [
+     "DOE_FEMP_PV_SEVERE_WEATHER_GUIDANCE"
+    ],
+    "source_name": "DOE/FEMP PV severe-weather guidance",
+    "locator": null,
+    "tier": null,
+    "strength": "No",
+    "parameter_or_rule": "coverage + selector map",
+    "how_used": "Failure modes, design-screening, racking/bracing/module rating selectors",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+     "sheet": "Evidence_Params"
+    }
+   },
+   {
+    "id": "Evidence_Params-2",
+    "text": "Clamp/fastener weakness, cascading module release",
+    "type": "mechanism anchor",
+    "source_ids": [
+     "NREL_STORM_HARDENING_OBSERVATIONS"
+    ],
+    "source_name": "NREL storm-hardening observations",
+    "locator": null,
+    "tier": null,
+    "strength": "No direct numeric",
+    "parameter_or_rule": "SWS_MODULE_ATTACH mechanism and dependency note",
+    "how_used": "Clamp/fastener weakness, cascading module release",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+     "sheet": "Evidence_Params"
+    }
+   },
+   {
+    "id": "Evidence_Params-3",
+    "text": "Dynamic effects in trackers and limitations of static simplification",
+    "type": "curve-form / caveat",
+    "source_ids": [
+     "CPP_UTILITY_SCALE_PV_WIND_LOAD_LITERATURE"
+    ],
+    "source_name": "CPP utility-scale PV wind-load literature",
+    "locator": null,
+    "tier": null,
+    "strength": "No",
+    "parameter_or_rule": "curve-form rationale; demand-ratio axis",
+    "how_used": "Dynamic effects in trackers and limitations of static simplification",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+     "sheet": "Evidence_Params"
+    }
+   },
+   {
+    "id": "Evidence_Params-4",
+    "text": "Stow and torsional instability",
+    "type": "conditioner support",
+    "source_ids": [
+     "CPP_TORSIONAL_TRACKER_PAPER"
+    ],
+    "source_name": "CPP torsional tracker paper",
+    "locator": null,
+    "tier": null,
+    "strength": "No numeric generic",
+    "parameter_or_rule": "stow conditioner; tracker structural pathway",
+    "how_used": "Stow and torsional instability",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+     "sheet": "Evidence_Params"
+    }
+   },
+   {
+    "id": "Evidence_Params-5",
+    "text": "Aeroelastic high-wind modeling gaps and future calibration",
+    "type": "open-seam support",
+    "source_ids": [
+     "DURAMAT_PVADE"
+    ],
+    "source_name": "DuraMAT/PVade",
+    "locator": null,
+    "tier": null,
+    "strength": "No",
+    "parameter_or_rule": "open seam / future v1.1 evidence path",
+    "how_used": "Aeroelastic high-wind modeling gaps and future calibration",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+     "sheet": "Evidence_Params"
+    }
+   },
+   {
+    "id": "Evidence_Params-6",
+    "text": "Conventional wind vs tornado pathway split",
+    "type": "scope support",
+    "source_ids": [
+     "ASCE_SEAC_ASCE_TORNADO_CHAPTER"
+    ],
+    "source_name": "ASCE/SEAC/ASCE tornado chapter",
+    "locator": null,
+    "tier": null,
+    "strength": "No",
+    "parameter_or_rule": "tornado deferred pathway",
+    "how_used": "Conventional wind vs tornado pathway split",
+    "numeric": "",
+    "status": null,
+    "update_trigger": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+     "sheet": "Evidence_Params"
+    }
+   }
+  ],
+  "parameters": [
+   {
+    "id": "R_eff_formula",
+    "name": "R_eff_formula",
+    "value": "(V_3s/V_design)^2 * multipliers",
+    "tier": "T2",
+    "source_ids": [
+     "WIND_PRESSURE_PHYSICS",
+     "CPP_PV_WIND_LOAD"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": null,
+    "role": "axis_bridge",
+    "status": null,
+    "reasoning": "Wind pressure/demand scales approximately with speed squared; normalization to design speed improves portability.",
+    "update_trigger": "site/vendor structural model"
+   },
+   {
+    "id": "max_DR",
+    "name": "max_DR",
+    "value": 0.8,
+    "tier": "T4",
+    "source_ids": [
+     "DOE_FEMP_SEVERE_WEATHER_PV",
+     "NREL_STORM_RESILIENCE",
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_TRACKER_STRUCT",
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": null,
+    "reasoning": "Bounded engineering-fit cap for generic failure-unit value bucket; not claims-calibrated.",
+    "update_trigger": "claims/forensic/failure-unit calibration"
+   },
+   {
+    "id": "R0",
+    "name": "R0",
+    "value": 0.75,
+    "tier": "T4",
+    "source_ids": [
+     "CPP_PV_WIND_LOAD"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_TRACKER_STRUCT",
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": null,
+    "reasoning": "Threshold avoids false low-wind damage; value is engineering fit.",
+    "update_trigger": "structural test or claims calibration"
+   },
+   {
+    "id": "R50",
+    "name": "R50",
+    "value": 1.15,
+    "tier": "T4",
+    "source_ids": [
+     "CPP_PV_WIND_LOAD",
+     "NREL_STORM_RESILIENCE"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_TRACKER_STRUCT",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit transition point on normalized demand ratio.",
+    "update_trigger": "claims/forensic/aeroelastic calibration"
+   },
+   {
+    "id": "k",
+    "name": "k",
+    "value": 9.0,
+    "tier": "T4",
+    "source_ids": [
+     "CPP_PV_WIND_LOAD"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_TRACKER_STRUCT",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit steepness; public sources support mechanism not numeric slope.",
+    "update_trigger": "claims/forensic/aeroelastic calibration"
+   },
+   {
+    "id": "default_value_share_physical_base",
+    "name": "default_value_share_physical_base",
+    "value": 0.08,
+    "tier": "T4",
+    "source_ids": [
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_TRACKER_STRUCT",
+    "pathway_id": null,
+    "role": "exposure_or_value",
+    "status": null,
+    "reasoning": "Illustrative default value link; should be replaced with asset-specific valuation.",
+    "update_trigger": "project-specific cost breakdown"
+   },
+   {
+    "id": "max_DR",
+    "name": "max_DR",
+    "value": 0.75,
+    "tier": "T4",
+    "source_ids": [
+     "DOE_FEMP_SEVERE_WEATHER_PV",
+     "NREL_STORM_RESILIENCE",
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_RACKING_STRUCT",
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": null,
+    "reasoning": "Bounded engineering-fit cap for generic failure-unit value bucket; not claims-calibrated.",
+    "update_trigger": "claims/forensic/failure-unit calibration"
+   },
+   {
+    "id": "R0",
+    "name": "R0",
+    "value": 0.8,
+    "tier": "T4",
+    "source_ids": [
+     "CPP_PV_WIND_LOAD"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_RACKING_STRUCT",
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": null,
+    "reasoning": "Threshold avoids false low-wind damage; value is engineering fit.",
+    "update_trigger": "structural test or claims calibration"
+   },
+   {
+    "id": "R50",
+    "name": "R50",
+    "value": 1.25,
+    "tier": "T4",
+    "source_ids": [
+     "CPP_PV_WIND_LOAD",
+     "NREL_STORM_RESILIENCE"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_RACKING_STRUCT",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit transition point on normalized demand ratio.",
+    "update_trigger": "claims/forensic/aeroelastic calibration"
+   },
+   {
+    "id": "k",
+    "name": "k",
+    "value": 8.0,
+    "tier": "T4",
+    "source_ids": [
+     "CPP_PV_WIND_LOAD"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_RACKING_STRUCT",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit steepness; public sources support mechanism not numeric slope.",
+    "update_trigger": "claims/forensic/aeroelastic calibration"
+   },
+   {
+    "id": "default_value_share_physical_base",
+    "name": "default_value_share_physical_base",
+    "value": 0.06,
+    "tier": "T4",
+    "source_ids": [
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_RACKING_STRUCT",
+    "pathway_id": null,
+    "role": "exposure_or_value",
+    "status": null,
+    "reasoning": "Illustrative default value link; should be replaced with asset-specific valuation.",
+    "update_trigger": "project-specific cost breakdown"
+   },
+   {
+    "id": "max_DR",
+    "name": "max_DR",
+    "value": 0.65,
+    "tier": "T4",
+    "source_ids": [
+     "DOE_FEMP_SEVERE_WEATHER_PV",
+     "NREL_STORM_RESILIENCE",
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_MODULE_ATTACH",
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": null,
+    "reasoning": "Bounded engineering-fit cap for generic failure-unit value bucket; not claims-calibrated.",
+    "update_trigger": "claims/forensic/failure-unit calibration"
+   },
+   {
+    "id": "R0",
+    "name": "R0",
+    "value": 0.7,
+    "tier": "T4",
+    "source_ids": [
+     "CPP_PV_WIND_LOAD"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_MODULE_ATTACH",
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": null,
+    "reasoning": "Threshold avoids false low-wind damage; value is engineering fit.",
+    "update_trigger": "structural test or claims calibration"
+   },
+   {
+    "id": "R50",
+    "name": "R50",
+    "value": 1.05,
+    "tier": "T4",
+    "source_ids": [
+     "CPP_PV_WIND_LOAD",
+     "NREL_STORM_RESILIENCE"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_MODULE_ATTACH",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit transition point on normalized demand ratio.",
+    "update_trigger": "claims/forensic/aeroelastic calibration"
+   },
+   {
+    "id": "k",
+    "name": "k",
+    "value": 10.0,
+    "tier": "T4",
+    "source_ids": [
+     "CPP_PV_WIND_LOAD"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_MODULE_ATTACH",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit steepness; public sources support mechanism not numeric slope.",
+    "update_trigger": "claims/forensic/aeroelastic calibration"
+   },
+   {
+    "id": "default_value_share_physical_base",
+    "name": "default_value_share_physical_base",
+    "value": 0.4,
+    "tier": "T4",
+    "source_ids": [
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_MODULE_ATTACH",
+    "pathway_id": null,
+    "role": "exposure_or_value",
+    "status": null,
+    "reasoning": "Illustrative default value link; should be replaced with asset-specific valuation.",
+    "update_trigger": "project-specific cost breakdown"
+   },
+   {
+    "id": "max_DR",
+    "name": "max_DR",
+    "value": 0.45,
+    "tier": "T4",
+    "source_ids": [
+     "DOE_FEMP_SEVERE_WEATHER_PV",
+     "NREL_STORM_RESILIENCE",
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_FOUNDATION_UPLIFT",
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": null,
+    "reasoning": "Bounded engineering-fit cap for generic failure-unit value bucket; not claims-calibrated.",
+    "update_trigger": "claims/forensic/failure-unit calibration"
+   },
+   {
+    "id": "R0",
+    "name": "R0",
+    "value": 0.9,
+    "tier": "T4",
+    "source_ids": [
+     "CPP_PV_WIND_LOAD"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_FOUNDATION_UPLIFT",
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": null,
+    "reasoning": "Threshold avoids false low-wind damage; value is engineering fit.",
+    "update_trigger": "structural test or claims calibration"
+   },
+   {
+    "id": "R50",
+    "name": "R50",
+    "value": 1.35,
+    "tier": "T4",
+    "source_ids": [
+     "CPP_PV_WIND_LOAD",
+     "NREL_STORM_RESILIENCE"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_FOUNDATION_UPLIFT",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit transition point on normalized demand ratio.",
+    "update_trigger": "claims/forensic/aeroelastic calibration"
+   },
+   {
+    "id": "k",
+    "name": "k",
+    "value": 7.0,
+    "tier": "T4",
+    "source_ids": [
+     "CPP_PV_WIND_LOAD"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_FOUNDATION_UPLIFT",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit steepness; public sources support mechanism not numeric slope.",
+    "update_trigger": "claims/forensic/aeroelastic calibration"
+   },
+   {
+    "id": "default_value_share_physical_base",
+    "name": "default_value_share_physical_base",
+    "value": 0.08,
+    "tier": "T4",
+    "source_ids": [
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_FOUNDATION_UPLIFT",
+    "pathway_id": null,
+    "role": "exposure_or_value",
+    "status": null,
+    "reasoning": "Illustrative default value link; should be replaced with asset-specific valuation.",
+    "update_trigger": "project-specific cost breakdown"
+   },
+   {
+    "id": "max_DR",
+    "name": "max_DR",
+    "value": 0.15,
+    "tier": "T4",
+    "source_ids": [
+     "DOE_FEMP_SEVERE_WEATHER_PV",
+     "NREL_STORM_RESILIENCE",
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_SCADA_EXPOSED",
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": null,
+    "reasoning": "Bounded engineering-fit cap for generic failure-unit value bucket; not claims-calibrated.",
+    "update_trigger": "claims/forensic/failure-unit calibration"
+   },
+   {
+    "id": "R0",
+    "name": "R0",
+    "value": 0.7,
+    "tier": "T4",
+    "source_ids": [
+     "CPP_PV_WIND_LOAD"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_SCADA_EXPOSED",
+    "pathway_id": null,
+    "role": "boundary_or_cap",
+    "status": null,
+    "reasoning": "Threshold avoids false low-wind damage; value is engineering fit.",
+    "update_trigger": "structural test or claims calibration"
+   },
+   {
+    "id": "R50",
+    "name": "R50",
+    "value": 0.95,
+    "tier": "T4",
+    "source_ids": [
+     "CPP_PV_WIND_LOAD",
+     "NREL_STORM_RESILIENCE"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_SCADA_EXPOSED",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit transition point on normalized demand ratio.",
+    "update_trigger": "claims/forensic/aeroelastic calibration"
+   },
+   {
+    "id": "k",
+    "name": "k",
+    "value": 6.0,
+    "tier": "T4",
+    "source_ids": [
+     "CPP_PV_WIND_LOAD"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_SCADA_EXPOSED",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Engineering-fit steepness; public sources support mechanism not numeric slope.",
+    "update_trigger": "claims/forensic/aeroelastic calibration"
+   },
+   {
+    "id": "default_value_share_physical_base",
+    "name": "default_value_share_physical_base",
+    "value": 0.02,
+    "tier": "T4",
+    "source_ids": [
+     "SOLAR_WIND_VALUE_BREAKDOWN"
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_SCADA_EXPOSED",
+    "pathway_id": null,
+    "role": "exposure_or_value",
+    "status": null,
+    "reasoning": "Illustrative default value link; should be replaced with asset-specific valuation.",
+    "update_trigger": "project-specific cost breakdown"
+   }
+  ],
+  "parameters_plain": [
+   {
+    "id": "R_eff_formula",
+    "name": "R eff formula",
+    "raw_name": "R_eff_formula",
+    "value_text": "(V_3s/V_design)^2 * multipliers",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "WIND_PRESSURE_PHYSICS",
+      "title": "WIND_PRESSURE_PHYSICS",
+      "link": null,
+      "link_kind": "none",
+      "resolved": false
+     },
+     {
+      "id": "CPP_PV_WIND_LOAD",
+      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Wind pressure/demand scales approximately with speed squared; normalization to design speed improves portability.",
+    "update_trigger": "site/vendor structural model",
+    "role": "axis_bridge"
+   },
+   {
+    "id": "max_DR",
+    "name": "max DR",
+    "raw_name": "max_DR",
+    "value_text": "0.8",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "DOE_FEMP_SEVERE_WEATHER_PV",
+      "title": "Severe Weather Resilience in Solar Photovoltaic System Design",
+      "link": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NREL_STORM_RESILIENCE",
+      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+      "link": "https://www.osti.gov/servlets/purl/2448530",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+      "title": "solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_TRACKER_STRUCT",
+    "reasoning": "Bounded engineering-fit cap for generic failure-unit value bucket; not claims-calibrated.",
+    "update_trigger": "claims/forensic/failure-unit calibration",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "R0",
+    "name": "R0",
+    "raw_name": "R0",
+    "value_text": "0.75",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CPP_PV_WIND_LOAD",
+      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_TRACKER_STRUCT",
+    "reasoning": "Threshold avoids false low-wind damage; value is engineering fit.",
+    "update_trigger": "structural test or claims calibration",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "R50",
+    "name": "R50",
+    "raw_name": "R50",
+    "value_text": "1.15",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CPP_PV_WIND_LOAD",
+      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NREL_STORM_RESILIENCE",
+      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+      "link": "https://www.osti.gov/servlets/purl/2448530",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_TRACKER_STRUCT",
+    "reasoning": "Engineering-fit transition point on normalized demand ratio.",
+    "update_trigger": "claims/forensic/aeroelastic calibration",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "k",
+    "name": "k",
+    "raw_name": "k",
+    "value_text": "9",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CPP_PV_WIND_LOAD",
+      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_TRACKER_STRUCT",
+    "reasoning": "Engineering-fit steepness; public sources support mechanism not numeric slope.",
+    "update_trigger": "claims/forensic/aeroelastic calibration",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "default_value_share_physical_base",
+    "name": "default value share physical base",
+    "raw_name": "default_value_share_physical_base",
+    "value_text": "0.08",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+      "title": "solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_TRACKER_STRUCT",
+    "reasoning": "Illustrative default value link; should be replaced with asset-specific valuation.",
+    "update_trigger": "project-specific cost breakdown",
+    "role": "exposure_or_value"
+   },
+   {
+    "id": "max_DR",
+    "name": "max DR",
+    "raw_name": "max_DR",
+    "value_text": "0.75",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "DOE_FEMP_SEVERE_WEATHER_PV",
+      "title": "Severe Weather Resilience in Solar Photovoltaic System Design",
+      "link": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NREL_STORM_RESILIENCE",
+      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+      "link": "https://www.osti.gov/servlets/purl/2448530",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+      "title": "solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_RACKING_STRUCT",
+    "reasoning": "Bounded engineering-fit cap for generic failure-unit value bucket; not claims-calibrated.",
+    "update_trigger": "claims/forensic/failure-unit calibration",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "R0",
+    "name": "R0",
+    "raw_name": "R0",
+    "value_text": "0.8",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CPP_PV_WIND_LOAD",
+      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_RACKING_STRUCT",
+    "reasoning": "Threshold avoids false low-wind damage; value is engineering fit.",
+    "update_trigger": "structural test or claims calibration",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "R50",
+    "name": "R50",
+    "raw_name": "R50",
+    "value_text": "1.25",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CPP_PV_WIND_LOAD",
+      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NREL_STORM_RESILIENCE",
+      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+      "link": "https://www.osti.gov/servlets/purl/2448530",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_RACKING_STRUCT",
+    "reasoning": "Engineering-fit transition point on normalized demand ratio.",
+    "update_trigger": "claims/forensic/aeroelastic calibration",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "k",
+    "name": "k",
+    "raw_name": "k",
+    "value_text": "8",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CPP_PV_WIND_LOAD",
+      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_RACKING_STRUCT",
+    "reasoning": "Engineering-fit steepness; public sources support mechanism not numeric slope.",
+    "update_trigger": "claims/forensic/aeroelastic calibration",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "default_value_share_physical_base",
+    "name": "default value share physical base",
+    "raw_name": "default_value_share_physical_base",
+    "value_text": "0.06",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+      "title": "solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_RACKING_STRUCT",
+    "reasoning": "Illustrative default value link; should be replaced with asset-specific valuation.",
+    "update_trigger": "project-specific cost breakdown",
+    "role": "exposure_or_value"
+   },
+   {
+    "id": "max_DR",
+    "name": "max DR",
+    "raw_name": "max_DR",
+    "value_text": "0.65",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "DOE_FEMP_SEVERE_WEATHER_PV",
+      "title": "Severe Weather Resilience in Solar Photovoltaic System Design",
+      "link": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NREL_STORM_RESILIENCE",
+      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+      "link": "https://www.osti.gov/servlets/purl/2448530",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+      "title": "solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_MODULE_ATTACH",
+    "reasoning": "Bounded engineering-fit cap for generic failure-unit value bucket; not claims-calibrated.",
+    "update_trigger": "claims/forensic/failure-unit calibration",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "R0",
+    "name": "R0",
+    "raw_name": "R0",
+    "value_text": "0.7",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CPP_PV_WIND_LOAD",
+      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_MODULE_ATTACH",
+    "reasoning": "Threshold avoids false low-wind damage; value is engineering fit.",
+    "update_trigger": "structural test or claims calibration",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "R50",
+    "name": "R50",
+    "raw_name": "R50",
+    "value_text": "1.05",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CPP_PV_WIND_LOAD",
+      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NREL_STORM_RESILIENCE",
+      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+      "link": "https://www.osti.gov/servlets/purl/2448530",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_MODULE_ATTACH",
+    "reasoning": "Engineering-fit transition point on normalized demand ratio.",
+    "update_trigger": "claims/forensic/aeroelastic calibration",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "k",
+    "name": "k",
+    "raw_name": "k",
+    "value_text": "10",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CPP_PV_WIND_LOAD",
+      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_MODULE_ATTACH",
+    "reasoning": "Engineering-fit steepness; public sources support mechanism not numeric slope.",
+    "update_trigger": "claims/forensic/aeroelastic calibration",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "default_value_share_physical_base",
+    "name": "default value share physical base",
+    "raw_name": "default_value_share_physical_base",
+    "value_text": "0.4",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+      "title": "solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_MODULE_ATTACH",
+    "reasoning": "Illustrative default value link; should be replaced with asset-specific valuation.",
+    "update_trigger": "project-specific cost breakdown",
+    "role": "exposure_or_value"
+   },
+   {
+    "id": "max_DR",
+    "name": "max DR",
+    "raw_name": "max_DR",
+    "value_text": "0.45",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "DOE_FEMP_SEVERE_WEATHER_PV",
+      "title": "Severe Weather Resilience in Solar Photovoltaic System Design",
+      "link": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NREL_STORM_RESILIENCE",
+      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+      "link": "https://www.osti.gov/servlets/purl/2448530",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+      "title": "solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_FOUNDATION_UPLIFT",
+    "reasoning": "Bounded engineering-fit cap for generic failure-unit value bucket; not claims-calibrated.",
+    "update_trigger": "claims/forensic/failure-unit calibration",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "R0",
+    "name": "R0",
+    "raw_name": "R0",
+    "value_text": "0.9",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CPP_PV_WIND_LOAD",
+      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_FOUNDATION_UPLIFT",
+    "reasoning": "Threshold avoids false low-wind damage; value is engineering fit.",
+    "update_trigger": "structural test or claims calibration",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "R50",
+    "name": "R50",
+    "raw_name": "R50",
+    "value_text": "1.35",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CPP_PV_WIND_LOAD",
+      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NREL_STORM_RESILIENCE",
+      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+      "link": "https://www.osti.gov/servlets/purl/2448530",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_FOUNDATION_UPLIFT",
+    "reasoning": "Engineering-fit transition point on normalized demand ratio.",
+    "update_trigger": "claims/forensic/aeroelastic calibration",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "k",
+    "name": "k",
+    "raw_name": "k",
+    "value_text": "7",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CPP_PV_WIND_LOAD",
+      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_FOUNDATION_UPLIFT",
+    "reasoning": "Engineering-fit steepness; public sources support mechanism not numeric slope.",
+    "update_trigger": "claims/forensic/aeroelastic calibration",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "default_value_share_physical_base",
+    "name": "default value share physical base",
+    "raw_name": "default_value_share_physical_base",
+    "value_text": "0.08",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+      "title": "solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_FOUNDATION_UPLIFT",
+    "reasoning": "Illustrative default value link; should be replaced with asset-specific valuation.",
+    "update_trigger": "project-specific cost breakdown",
+    "role": "exposure_or_value"
+   },
+   {
+    "id": "max_DR",
+    "name": "max DR",
+    "raw_name": "max_DR",
+    "value_text": "0.15",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "DOE_FEMP_SEVERE_WEATHER_PV",
+      "title": "Severe Weather Resilience in Solar Photovoltaic System Design",
+      "link": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NREL_STORM_RESILIENCE",
+      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+      "link": "https://www.osti.gov/servlets/purl/2448530",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+      "title": "solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_SCADA_EXPOSED",
+    "reasoning": "Bounded engineering-fit cap for generic failure-unit value bucket; not claims-calibrated.",
+    "update_trigger": "claims/forensic/failure-unit calibration",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "R0",
+    "name": "R0",
+    "raw_name": "R0",
+    "value_text": "0.7",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CPP_PV_WIND_LOAD",
+      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_SCADA_EXPOSED",
+    "reasoning": "Threshold avoids false low-wind damage; value is engineering fit.",
+    "update_trigger": "structural test or claims calibration",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "R50",
+    "name": "R50",
+    "raw_name": "R50",
+    "value_text": "0.95",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CPP_PV_WIND_LOAD",
+      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "NREL_STORM_RESILIENCE",
+      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
+      "link": "https://www.osti.gov/servlets/purl/2448530",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_SCADA_EXPOSED",
+    "reasoning": "Engineering-fit transition point on normalized demand ratio.",
+    "update_trigger": "claims/forensic/aeroelastic calibration",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "k",
+    "name": "k",
+    "raw_name": "k",
+    "value_text": "6",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CPP_PV_WIND_LOAD",
+      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
+      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_SCADA_EXPOSED",
+    "reasoning": "Engineering-fit steepness; public sources support mechanism not numeric slope.",
+    "update_trigger": "claims/forensic/aeroelastic calibration",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "default_value_share_physical_base",
+    "name": "default value share physical base",
+    "raw_name": "default_value_share_physical_base",
+    "value_text": "0.02",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "SOLAR_WIND_VALUE_BREAKDOWN",
+      "title": "solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link_kind": "repo_file",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "SWS_SCADA_EXPOSED",
+    "reasoning": "Illustrative default value link; should be replaced with asset-specific valuation.",
+    "update_trigger": "project-specific cost breakdown",
+    "role": "exposure_or_value"
+   }
+  ],
+  "evidence_provenance": {
+   "kind": "extracted",
+   "sheets": [
+    "Evidence_Params",
+    "Assumption_Register",
+    "Sources"
+   ],
+   "sections": [],
+   "unmatched": [
+    "WIND_PRESSURE_PHYSICS"
+   ],
+   "sentence": null,
+   "dossier": "docs/cells/strong_wind_solar/current/strong_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md",
+   "workbook": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx"
+  },
+  "link_counts": {
+   "total": 10,
+   "linked": 10,
+   "locator_only": 0,
+   "neither": 0,
+   "markers": 0,
+   "placeholders": 0
+  },
+  "extraction": {
+   "status": "extracted",
+   "sentence": null,
+   "dossier": "docs/cells/strong_wind_solar/current/strong_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md",
+   "workbook": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+   "sheets_read": [
+    "Evidence_Params",
+    "Assumption_Register",
+    "Sources"
+   ],
+   "dossier_sections": [],
+   "files": [
+    {
+     "path": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+     "sha256": "c79af3ebfaa3a4722799c5d2ebb15c253f3fa84a62bf182715e1e7f0b4471f94"
+    },
+    {
+     "path": "docs/cells/strong_wind_solar/current/strong_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md",
+     "sha256": "1f4a40f330bbdce9abed88c89391ec3a20a2eeede75137e90b22bc6dbbf6cb44"
+    }
+   ],
+   "assumptions": [
+    {
+     "id": "A_SWS_001",
+     "text": "Generic v1.0 uses engineering-fit fragility curves on effective demand ratio, not claims-calibrated wind-speed DRs.",
+     "status": "Medium",
+     "confidence": "",
+     "trigger": "Adopt when claims/forensic datasets provide wind-speed + loss anchors.",
+     "effect": "All curve parameters",
+     "from": {
+      "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+      "sheet": "Assumption_Register"
+     }
+    },
+    {
+     "id": "A_SWS_002",
+     "text": "Design gust speed default is 120 mph for illustrative example; production should use site-specific ASCE/project design documents.",
+     "status": "Low as generic input",
+     "confidence": "",
+     "trigger": "Replace with asset-specific design basis.",
+     "effect": "R and all DRs",
+     "from": {
+      "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+      "sheet": "Assumption_Register"
+     }
+    },
+    {
+     "id": "A_SWS_003",
+     "text": "Stow demand multipliers are directionally source-supported but numerically generic placeholders.",
+     "status": "Medium-low",
+     "confidence": "",
+     "trigger": "Replace with tracker-specific wind tunnel/aeroelastic/SCADA evidence.",
+     "effect": "Tracker/racking/module/foundation DR under tracker systems",
+     "from": {
+      "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+      "sheet": "Assumption_Register"
+     }
+    },
+    {
+     "id": "A_SWS_004",
+     "text": "Module attachment and racking curves can overlap; v1.0 flags dependency but does not implement a full cascade model.",
+     "status": "Medium",
+     "confidence": "",
+     "trigger": "Implement dependency/cascade assembly in v1.1 if needed.",
+     "effect": "Cell assembly / double-counting",
+     "from": {
+      "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+      "sheet": "Assumption_Register"
+     }
+    },
+    {
+     "id": "A_SWS_005",
+     "text": "Foundation uplift curve is highly site/foundation-specific and should be considered a generic structural-zone placeholder.",
+     "status": "Low",
+     "confidence": "",
+     "trigger": "Replace with foundation design/geotechnical details.",
+     "effect": "Foundation DR",
+     "from": {
+      "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+      "sheet": "Assumption_Register"
+     }
+    },
+    {
+     "id": "A_SWS_006",
+     "text": "Tornado/debris/missile damage is out of v1.0 and should not be represented by simply extending straight-line gust speed.",
+     "status": "High",
+     "confidence": "",
+     "trigger": "Create tornado × solar pathway if tornado source data is in scope.",
+     "effect": "Scope / hazard pathway",
+     "from": {
+      "file": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx",
+      "sheet": "Assumption_Register"
+     }
+    }
+   ],
+   "open_seams": [],
+   "matched": {
+    "CPP_PV_WIND_LOAD": "SRC_CPP_WIND_LOADS_UTILITY_PV",
+    "DOE_FEMP_SEVERE_WEATHER_PV": "SRC_DOE_FEMP_PV_SEVERE_WEATHER",
+    "NREL_STORM_RESILIENCE": "SRC_NREL_STORM_RESILIENCE",
+    "SOLAR_WIND_VALUE_BREAKDOWN": "SOLAR_WIND_VALUE_BREAKDOWN"
+   },
+   "unmatched": [
+    "WIND_PRESSURE_PHYSICS"
+   ]
+  },
+  "tier_words": {
+   "shape": "our judgment",
+   "cost": "our judgment"
+  }
+ },
+ "build_findings": [
+  {
+   "check": "extracted_sources",
+   "severity": "data",
+   "items": [
+    "tier-table source ID WIND_PRESSURE_PHYSICS matches no document in the workbook or dossier"
+   ],
+   "sentence": "1 source ID in this cell's tier table matches no document in the workbook or dossier."
+  }
+ ]
 }

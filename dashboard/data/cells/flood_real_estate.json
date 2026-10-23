@@ -56,7 +56,7 @@
    "label": "entry agent-read 2026-10-19 · release not yet reviewed"
   }
  },
- "summary": "Proposal, not in the runtime index — Flood on buildings: fEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water).",
+ "summary": "Proposal, not in the runtime index — Flood on buildings: FEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water).",
  "chain": {
   "stations": [
    {
@@ -1118,5 +1118,2067 @@
   "FRE_COM_COAST_NACCS_P2_MIN: no known-answer request to use as the evaluator template; sampled by the generic piecewise-linear evaluator",
   "FRE_COM_COAST_NACCS_P2_MAX: no known-answer request to use as the evaluator template; sampled by the generic piecewise-linear evaluator"
  ],
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Proposal · not in the runtime index yet",
+    "code": "PROPOSAL · screening"
+   },
+   "evidence": {
+    "words": "Evidence: published",
+    "code": "How damage rises: published · how it becomes dollars: published",
+    "tiers": [
+     "T2"
+    ],
+    "codes": "shape T2 · cost T2"
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "Field reports: nobody has looked yet"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release not yet reviewed"
+   }
+  },
+  "main_logic": [
+   "Flood is measured as water depth above the first floor, in ft.",
+   "FEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water); retail keeps Hazus DF 217 for river water and USACE NACCS for coastal surge.",
+   "Why this shape: reproduces every published value; smooth fits predict held-out points worse on all six point curves and move published values by 2-5 points; table-based cells use straight lines; method rule: simplest form the evidence yields.",
+   "The damage ratio is a share of the structure replacement cost new of the same building (no land, contents or depreciation)."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "4 parts with a curve · 1 withheld",
+    "paragraphs": [
+     "Flood on buildings: FEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water); retail keeps Hazus DF 217 for river water and USACE NACCS for coastal surge. It names 4 parts: House, Warehouse, Office and Retail. Outside its scope: contents (declared as a withheld placeholder part) and land, site works, business interruption. Kinds of damage it does not include: waves and fast-moving water (wave and velocity zones).",
+     "For this hazard the building is split into 4 parts: House, Warehouse, Office and Retail. 1 further unit is named but withheld — fre building contents — a stated 'not zero', not a curve.",
+     "The damage ratio is a share of structure replacement cost new of the same building (no land, contents or depreciation). The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "House",
+      "tone": "key",
+      "title": "House"
+     },
+     {
+      "text": "Warehouse",
+      "tone": "key",
+      "title": "Warehouse"
+     },
+     {
+      "text": "Office",
+      "tone": "key",
+      "title": "Office"
+     },
+     {
+      "text": "+1 more",
+      "tone": "muted",
+      "title": "Retail"
+     },
+     {
+      "text": "2 waters",
+      "tone": "key"
+     },
+     {
+      "text": "1 withheld",
+      "tone": "muted"
+     }
+    ]
+   },
+   {
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
+    "fact": "water depth above the first floor → a line through points",
+    "paragraphs": [
+     "Damage is read against water depth above the first floor (ft). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: water depth above the first floor (ft), -4 to 24 ft (retail coastal curve -1 to 10 ft); depth above ground is accepted with the building's floor height.",
+     "The seven-step audit is a file in the cell folder with 7 rows; the statuses it records: partial and proposed. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "water depth above the first…, ft",
+      "tone": "key",
+      "title": "water depth above the first floor"
+     },
+     {
+      "text": "line through points",
+      "tone": "key"
+     },
+     {
+      "text": "7 curves",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Reproduces every published value; smooth fits predict held-out points worse on all six point curves and move published values by 2-5 points; table-based cells use straight lines; method rule: simplest form the evidence yields."
+     }
+    ],
+    "why": [
+     {
+      "label": "Why this shape",
+      "text": "Reproduces every published value; smooth fits predict held-out points worse on all six point curves and move published values by 2-5 points; table-based cells use straight lines; method rule: simplest form the evidence yields."
+     },
+     {
+      "label": "The form adopted",
+      "text": "Exact published tables, straight lines between published points."
+     },
+     {
+      "label": "Why one curve for both waters",
+      "text": "NFIP coastal-surge claims are closer to the Hazus curves than to NACCS for the house and multi-floor business buildings; FEMA assigns DF 341 and DF 431 to coastal zones."
+     },
+     {
+      "label": "Why not smooth fits",
+      "text": "Smooth fits (incl. anchored logistic) predicted held-out points worse on all point curves and moved published values by 2-6 points."
+     }
+    ]
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "13 sources, 12 linked · published",
+    "paragraphs": [
+     "13 sources set this cell: FEMA, Hazus Flood Model Technical Manual 7.0 (2025), Table 5-2, FEMA Hazus 6.1 flood damage-function extract, USACE, North Atlantic Coast Comprehensive Study (2015), depth-damage functions and FEMA OpenFEMA NFIP redacted claims, v3 (check only) and 9 more. Of the 20 parameters, 15 are published, 3 are borrowed and 2 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator)."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "published",
+      "tone": "key",
+      "title": "How damage rises: published · how it becomes dollars: published"
+     },
+     {
+      "text": "FEMA, Hazus Flood Model…",
+      "tone": "key",
+      "title": "FEMA, Hazus Flood Model Technical Manual 7.0 (2025), Table 5-2"
+     },
+     {
+      "text": "FEMA Hazus 6.1 flood…",
+      "tone": "key",
+      "title": "FEMA Hazus 6.1 flood damage-function extract"
+     },
+     {
+      "text": "+3 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "13 sources, 12 linked",
+      "tone": "muted"
+     }
+    ]
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "1 outside check · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "1 outside check compares this curve with an independent result: NFIP flood-insurance claims by depth band (about 105,000 claims). The validation record says report.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: not yet reviewed."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "NFIP flood-insurance claims…",
+      "tone": "key",
+      "title": "NFIP flood-insurance claims by depth band (about 105,000 claims)"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "published",
+  "halves": "How damage rises: published · how it becomes dollars: published",
+  "hazard_paths": [],
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "◐",
+    "label": "one flood event",
+    "short": "one flood event",
+    "detail": "proposal, not in the runtime index; the request must name the building and the water type"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "✗",
+    "label": "a dollar scenario",
+    "short": "a dollar scenario",
+    "detail": "withheld until the building value is qualified"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "✗",
+    "label": "yearly loss",
+    "short": "yearly loss",
+    "detail": "withheld before promotion (computed by the consumer afterwards)"
+   },
+   {
+    "key": "pml",
+    "mark": "✗",
+    "label": "PML, VaR — not supported",
+    "short": "PML and VaR",
+    "detail": "withheld"
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": null,
+    "not_covered": [],
+    "withheld": [
+     {
+      "failure_unit_id": "FRE_BUILDING_CONTENTS",
+      "subsystem": "BUILDING",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; contents deferred separate failure unit."
+     }
+    ]
+   },
+   "assumed": [
+    "No value per area set, so scenario dollars stay withheld",
+    "No adjustment for the gap between river and coastal claims (coastal commercial claims run higher)"
+   ],
+   "missing": {
+    "mechanisms": [
+     "Waves and fast-moving water (wave and velocity zones)"
+    ],
+    "out_of_scope": [
+     "Contents (declared as a withheld placeholder part)",
+     "Land, site works, business interruption"
+    ]
+   },
+   "open_questions": [
+    "Office curve reads about 1.6 times the claims for 3+ storey buildings (kept as published)",
+    "Wave and velocity zones not modelled",
+    "Contents placeholder: keep or drop (for the reviewer)"
+   ],
+   "next_version": null
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "Scope",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Flood on buildings: FEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water); retail keeps Hazus DF 217 for river water and USACE NACCS for coastal surge. It names 4 parts: House, Warehouse, Office and Retail. Outside its scope: contents (declared as a withheld placeholder part) and land, site works, business interruption. Kinds of damage it does not include: waves and fast-moving water (wave and velocity zones).",
+    "plain_fact": "4 parts · 2 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the building is split into 4 parts: House, Warehouse, Office and Retail. 1 further unit is named but withheld — fre building contents — a stated 'not zero', not a curve.",
+    "plain_fact": "4 parts · 1 withheld"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "Damage is read against water depth above the first floor (ft). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: water depth above the first floor (ft), -4 to 24 ft (retail coastal curve -1 to 10 ft); depth above ground is accepted with the building's floor height.",
+    "plain_fact": "a line through points"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "13 sources set this cell: FEMA, Hazus Flood Model Technical Manual 7.0 (2025), Table 5-2, FEMA Hazus 6.1 flood damage-function extract, USACE, North Atlantic Coast Comprehensive Study (2015), depth-damage functions and FEMA OpenFEMA NFIP redacted claims, v3 (check only) and 9 more. Of the 20 parameters, 15 are published, 3 are borrowed and 2 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "plain_fact": "13 sources · published"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "The damage ratio is a share of structure replacement cost new of the same building (no land, contents or depreciation). The files state no plant-level dollar figure for this asset.",
+    "plain_fact": "no plant value stated"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "The seven-step audit is a file in the cell folder with 7 rows; the statuses it records: partial and proposed. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "7-step audit as a file"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 7 curve records (model v0.2, docs r1). The write-up is flood_real_estate_curve_derivation_dossier__model_v0_2__docs_r1.md. The workbook is damage_curve_records_flood_real_estate__model_v0_2__docs_r1.xlsx. The cell folder holds 41 files, each with its SHA under Details.",
+    "plain_fact": "7 curve records"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "One flood event is available only under conditions the consumer (Hazard) checks. A dollar scenario, yearly loss and PML and VaR are not supported. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "0 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "This build reproduced 185 of 185 known answers through the cell's evaluator (within 1e-12 on the damage ratio). 5 were not run: prose assertions; not executable. The validation record says report. 1 outside check: NFIP flood-insurance claims by depth band (about 105,000 claims).",
+    "plain_fact": "185 of 185 reproduced"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: not yet reviewed.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "FEMA, Hazus Flood Model Technical Manual 7.0 (2025), Table 5-2",
+    "ids": [
+     "FRE-S002"
+    ],
+    "title": "FEMA. Hazus Flood Model Technical Manual, Hazus 7.0 (June 2025), Table 5-2 Default Damage Functions for…",
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+    "link_kind": "url",
+    "locator": "Hazus 7.0 Table 5-2 pp. 5-3 to 5-6; Table 5-3 pp. 5-7 to 5-8 incl. note; Table 5-4 pp. 5-8 to 5-9 incl. notes; section 5.4.1.1.2.1 p. 5-10. Same Table 5-2 rows in Hazus 5.1 (pp. 5-4 to 5-5) and 6.1.",
+    "no_link_sentence": null,
+    "source_id": "FRE-S002"
+   },
+   {
+    "text": "FEMA Hazus 6.1 flood damage-function extract",
+    "ids": [
+     "FRE-S010"
+    ],
+    "title": "FEMA Hazus team. Hazus 6.1 flood damage-function extract, HazusFloodDamageFunctions_Hazus61.xlsx…",
+    "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusFloodDamageFunctions_Hazus61.xlsx",
+    "link_kind": "url",
+    "locator": "sheets flBldgStrucDmgFn (892 structure curves, IDs 105-999) and flBldgStructDmgFinal (default curve per occupancy-stories-basement for riverine, coastal A, coastal V)",
+    "no_link_sentence": null,
+    "source_id": "FRE-S010"
+   },
+   {
+    "text": "USACE, North Atlantic Coast Comprehensive Study (2015), depth-damage functions",
+    "ids": [
+     "FRE-S004"
+    ],
+    "title": "U.S. Army Corps of Engineers (2015)",
+    "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+    "link_kind": "url",
+    "locator": "Table 24 + Table 25 (pp. 61-62, Prototype 2 Commercial Engineered); Table 34 + Table 35 (pp. 67-68, Prototype 3 Commercial Non/Pre-Engineered); Table 55 + Table 56 (pp. 80-82, Prototype 5A Single-Story Residence No Basement); verification note pp. 80-81",
+    "no_link_sentence": null,
+    "source_id": "FRE-S004"
+   },
+   {
+    "text": "FEMA OpenFEMA NFIP redacted claims, v3 (check only)",
+    "ids": [
+     "FRE-S012"
+    ],
+    "title": "FEMA. OpenFEMA FIMA NFIP Redacted Claims, dataset NfipClaims version 3 (API).",
+    "link": "https://www.fema.gov/api/open/v3/NfipClaims",
+    "link_kind": "url",
+    "locator": "Three filtered pulls (one-floor slab buildings with exterior water depth > 0): single-family with damage (95,435), non-residential with damage (10,180), single-family with zero damage (1,006). Filters, record counts and sha256 of the cached pulls in NFIP_CLAIMS_PULL_MANIFEST_flood_real_estate__model_v0_1__docs_r1.json",
+    "no_link_sentence": null,
+    "source_id": "FRE-S012"
+   },
+   {
+    "text": "Hazard reference profiles r1",
+    "ids": [
+     "FRE-S013"
+    ],
+    "title": "Hazard_Modeling. Real-estate reference profiles r1 (reference_candidates.yml and generated profile views),…",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "link_kind": "url",
+    "locator": "commit 8b0d61c88fbcf85daa1c098516cee22398cdb524; reference_candidates.yml git blob a74fb72b0a2edce593b5505e0fd8852f4c0253f8; profiles re_house_1s_wood_slab, re_warehouse_1s_steel_slab, re_office_3s_slab",
+    "no_link_sentence": null,
+    "source_id": "FRE-S013"
+   }
+  ],
+  "sources": [
+   {
+    "id": "FRE-S001",
+    "citation": "Pollack, A. (2023). Flood Depth-Damage Functions from HAZUS and 2015 North Atlantic Coast Comprehensive Study [Dataset]. Zenodo. CC-BY-4.0.",
+    "url": "https://doi.org/10.5281/zenodo.10027236",
+    "locator": "files haz_fl_dept.csv (md5 9557d9ffae387cb9e058667abb6ea941), naccs_ddfs.csv (md5 7b3e15aa7f6856e2b71120c4d5e22fc8), riverine_ids.csv (md5 9823ee845e81048758148c306a9f564a)",
+    "role": "curve_data_carrier",
+    "tier": "T2",
+    "permitted": "Use as the working data carrier for ordinates that are verified against an original or independent copy.",
+    "prohibited": "Treat the compilation as the original authority; use NACCS values at depths the report did not publish.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-11",
+    "provenance": "register",
+    "doi": "10.5281/zenodo.10027236",
+    "link": "https://doi.org/10.5281/zenodo.10027236",
+    "link_kind": "doi",
+    "title": "Pollack, A. (2023). Flood Depth-Damage Functions from HAZUS and 2015 North Atlantic Coast Comprehensive Study [Dataset]",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FRE-S002",
+    "citation": "FEMA. Hazus Flood Model Technical Manual, Hazus 7.0 (June 2025), Table 5-2 Default Damage Functions for Estimation of Structure Damage in Riverine Flood Zones, Table 5-3 (Coastal V) and Table 5-4 (Coastal A); cross-checked against the Hazus 5.1 and 6.1 editions.",
+    "url": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+    "locator": "Hazus 7.0 Table 5-2 pp. 5-3 to 5-6; Table 5-3 pp. 5-7 to 5-8 incl. note; Table 5-4 pp. 5-8 to 5-9 incl. notes; section 5.4.1.1.2.1 p. 5-10. Same Table 5-2 rows in Hazus 5.1 (pp. 5-4 to 5-5) and 6.1.",
+    "role": "selector_archetype",
+    "tier": "T2",
+    "permitted": "Select one FEMA default curve per reference building for freshwater flooding; record FEMA's own coastal defaults and its statement on coastal curve availability.",
+    "prohibited": "Treat a default as calibrated for a specific building; use riverine commercial defaults as coastal-specific curves.",
+    "decision": "adopt",
+    "accessed_on": "2026-10-11",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+    "link_kind": "url",
+    "title": "FEMA. Hazus Flood Model Technical Manual, Hazus 7.0 (June 2025), Table 5-2 Default Damage Functions for…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FRE-S003",
+    "citation": "FEMA Hazus flood depth-damage function library, Hazus 5.1 (as distributed in the CRAN hazus R package, haz_fl_dept).",
+    "url": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
+    "locator": "DmgFnId 129, 217, 431, 341, 559 (structure, building)",
+    "role": "curve_form",
+    "tier": "T2",
+    "permitted": "Adopt the ordinates of the default curves as source-native whole-building records.",
+    "prohibited": "Extrapolate beyond the published depth range; treat class-average curves as site-specific.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-11",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
+    "link_kind": "url",
+    "title": "FEMA Hazus flood depth-damage function library, Hazus 5.1 (as distributed in the CRAN hazus R package,…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FRE-S004",
+    "citation": "U.S. Army Corps of Engineers (2015). North Atlantic Coast Comprehensive Study: Resilient Adaptation to Increasing Risk. Physical Depth Damage Function Summary Report (26 Jan 2015).",
+    "url": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+    "locator": "Table 24 + Table 25 (pp. 61-62, Prototype 2 Commercial Engineered); Table 34 + Table 35 (pp. 67-68, Prototype 3 Commercial Non/Pre-Engineered); Table 55 + Table 56 (pp. 80-82, Prototype 5A Single-Story Residence No Basement); verification note pp. 80-81",
+    "role": "curve_form;selector_archetype",
+    "tier": "T2",
+    "permitted": "Adopt published inundation-structure knots for coastal-surge water; use the prototype most-likely characteristics as reference-building defaults.",
+    "prohibited": "Use values between published knots that the report did not publish; treat Min/Max as a probabilistic spread; transfer to riverine or pluvial freshwater; use erosion or wave tables in the inundation pathway.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-11",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+    "link_kind": "url",
+    "title": "U.S. Army Corps of Engineers (2015)",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FRE-S005",
+    "citation": "U.S. Army Corps of Engineers, Hydrologic Engineering Center. go-consequences, structures/occtypes.json (commit dff647cabbc1abae3f084e80b7f6a166651d05d8, 2021-12-27).",
+    "url": "https://github.com/USACE/go-consequences/blob/dff647cabbc1abae3f084e80b7f6a166651d05d8/structures/occtypes.json",
+    "locator": "occupancytypes COM1, COM4, COM2, IND2, RES1-1SNB; structure damagefunctions default",
+    "role": "validation_only",
+    "tier": "T2",
+    "permitted": "Independent cross-check of compiled Hazus ordinates; lineage of DF 129.",
+    "prohibited": "Replace the Hazus default selection rule; adopt EGM uncertainty as a runtime spread in v0.1.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-11",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/USACE/go-consequences/blob/dff647cabbc1abae3f084e80b7f6a166651d05d8/structures/occtypes.json",
+    "link_kind": "url",
+    "title": "U.S. Army Corps of Engineers, Hydrologic Engineering Center. go-consequences, structures/occtypes.json (,…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FRE-S006",
+    "citation": "U.S. Army Corps of Engineers. Economic Guidance Memorandum generic residential depth-damage relationships (one story, no basement), as carried in FRE-S005 (EGM number to be confirmed; likely EGM 01-03).",
+    "url": "https://github.com/USACE/go-consequences/blob/dff647cabbc1abae3f084e80b7f6a166651d05d8/structures/occtypes.json",
+    "locator": "RES1-1SNB structure default, -2 to +16 ft, mean and standard deviation per depth",
+    "role": "curve_form;boundary_or_cap",
+    "tier": "T2",
+    "permitted": "Explain the lineage of DF 129 (USACE-IWR) and record a source-native uncertainty for a later spread decision.",
+    "prohibited": "Use the standard deviation as a calibrated tail before a spread policy is reviewed.",
+    "decision": "defer",
+    "accessed_on": "2026-10-11",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/USACE/go-consequences/blob/dff647cabbc1abae3f084e80b7f6a166651d05d8/structures/occtypes.json",
+    "link_kind": "url",
+    "title": "U.S. Army Corps of Engineers",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FRE-S007",
+    "citation": "U.S. Army Corps of Engineers, Galveston District. Commercial and industrial class depth-damage functions, as carried in Hazus (Source 'USACE - Galveston') and HEC-FIA.",
+    "url": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
+    "locator": "DmgFnId 217 (average of 47 retail classes), 431 (average prof/tech services), 341 (average of 22 wholesale/warehouse classes), 559 (average of 14 light industrial classes)",
+    "role": "curve_form",
+    "tier": "T2",
+    "permitted": "Use class averages as screening defaults for the commercial and warehouse reference buildings.",
+    "prohibited": "Assume national representativeness or modern construction without validation.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-11",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
+    "link_kind": "url",
+    "title": "U.S. Army Corps of Engineers, Galveston District",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FRE-S008",
+    "citation": "Plymouth / Salem coastal flood trial, methodology trial 5 and fit catalogue (Hazard_Modeling branch feature/plymouth_trial @ 09b95acb); final trial 7 v0.7 artifacts in GCS (2026-10-05).",
+    "url": "gs://flood-model-data/_asset_level_cache/plymouth_trial/",
+    "locator": "plymouth_modelling_methodology.md sections 3, 6, 7; outputs/06_damage_curve_catalog",
+    "role": "case_study_severity",
+    "tier": "T3",
+    "permitted": "Reuse the method conventions (depth above first floor; fit gates; selection by occupancy, foundation and stories).",
+    "prohibited": "Reuse its with-basement curve choices or its numbers for the reference buildings.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-11",
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "Plymouth / Salem coastal flood trial, methodology trial 5 and fit catalogue (Hazard_Modeling branch…",
+    "no_link_sentence": "no link in the register"
+   },
+   {
+    "id": "FRE-S009",
+    "citation": "U.S. Army Corps of Engineers, Hydrologic Engineering Center. National Structure Inventory technical documentation, NSI 2026 Base (and the 2022 edition for comparison).",
+    "url": "https://www.hec.usace.army.mil/confluence/nsi/technicalreferences/2026/technical-documentation",
+    "locator": "sections Foundation Type and Height; Full Replacement Cost; field list (fullrep, val_struct, found_ht)",
+    "role": "selector_archetype",
+    "tier": "T2",
+    "permitted": "Use the documented RES1 slab default; describe fullrep as the replacement-cost-new basis matching the curve denominator.",
+    "prohibited": "Treat NSI defaults as observed facts for a building; use val_struct (depreciated) as the denominator.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-11",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.hec.usace.army.mil/confluence/nsi/technicalreferences/2026/technical-documentation",
+    "link_kind": "url",
+    "title": "U.S. Army Corps of Engineers, Hydrologic Engineering Center",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FRE-S010",
+    "citation": "FEMA Hazus team. Hazus 6.1 flood damage-function extract, HazusFloodDamageFunctions_Hazus61.xlsx (FEMA-provided file, retrieved from the OS-Climate physrisk public mirror).",
+    "url": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusFloodDamageFunctions_Hazus61.xlsx",
+    "locator": "sheets flBldgStrucDmgFn (892 structure curves, IDs 105-999) and flBldgStructDmgFinal (default curve per occupancy-stories-basement for riverine, coastal A, coastal V)",
+    "role": "curve_form;selector_archetype",
+    "tier": "T2",
+    "permitted": "Read DF 658 ordinates; independently confirm the 5.1 structure ordinates and the Table 5-2/5-3/5-4 default assignments.",
+    "prohibited": "Treat the mirror as FEMA-hosted; use curves from the workbook that have not been cross-checked.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-11",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusFloodDamageFunctions_Hazus61.xlsx",
+    "link_kind": "url",
+    "title": "FEMA Hazus team. Hazus 6.1 flood damage-function extract, HazusFloodDamageFunctions_Hazus61.xlsx…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FRE-S011",
+    "citation": "U.S. Army Corps of Engineers. National Structure Inventory API, structure records for counties 25019 (Nantucket MA), 22075 (Plaquemines LA) and 19013 (Black Hawk IA).",
+    "url": "https://nsi.sec.usace.army.mil/nsiapi/structures?fips=<county>",
+    "locator": "properties occtype, found_type, found_ht, fullrep, sqft; summary in NSI_SAMPLE_flood_real_estate__model_v0_1__docs_r1.csv",
+    "role": "selector_archetype;exposure_or_value",
+    "tier": "T3",
+    "permitted": "Read the undocumented commercial and industrial slab defaults (0.25 ft) and illustrate fullrep per area.",
+    "prohibited": "Treat three counties as a national value basis; treat assigned defaults as observations.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-11",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://nsi.sec.usace.army.mil/nsiapi/structures?fips=<county>",
+    "link_kind": "url",
+    "title": "U.S. Army Corps of Engineers",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FRE-S012",
+    "citation": "FEMA. OpenFEMA FIMA NFIP Redacted Claims, dataset NfipClaims version 3 (API).",
+    "url": "https://www.fema.gov/api/open/v3/NfipClaims",
+    "locator": "Three filtered pulls (one-floor slab buildings with exterior water depth > 0): single-family with damage (95,435), non-residential with damage (10,180), single-family with zero damage (1,006). Filters, record counts and sha256 of the cached pulls in NFIP_CLAIMS_PULL_MANIFEST_flood_real_estate__model_v0_1__docs_r1.json",
+    "role": "validation_only",
+    "tier": "T1",
+    "permitted": "Compare the proposed curves with the mean damage ratio of analogue claims by depth band, as a reasonableness check and as evidence for curve selection.",
+    "prohibited": "Refit or calibrate the curves to the claims; treat the claims as nationally representative (95% of the house claims are from Gulf states); treat the damage ratio as replacement-cost-new repair cost for the reference buildings.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-16",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.fema.gov/api/open/v3/NfipClaims",
+    "link_kind": "url",
+    "title": "FEMA. OpenFEMA FIMA NFIP Redacted Claims, dataset NfipClaims version 3 (API).",
+    "no_link_sentence": null
+   },
+   {
+    "id": "FRE-S013",
+    "citation": "Hazard_Modeling. Real-estate reference profiles r1 (reference_candidates.yml and generated profile views), handoff of 2026-10-16.",
+    "url": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "locator": "commit 8b0d61c88fbcf85daa1c098516cee22398cdb524; reference_candidates.yml git blob a74fb72b0a2edce593b5505e0fd8852f4c0253f8; profiles re_house_1s_wood_slab, re_warehouse_1s_steel_slab, re_office_3s_slab",
+    "role": "selector_archetype;exposure_or_value",
+    "tier": "T4",
+    "permitted": "Bind curve records to the profiles and check which profile fields change curve selection.",
+    "prohibited": "Treat the profiles as observed buildings or the budgets as qualified coverage of a curve's denominator.",
+    "decision": "adopt",
+    "accessed_on": "2026-10-16",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "link_kind": "url",
+    "title": "Hazard_Modeling. Real-estate reference profiles r1 (reference_candidates.yml and generated profile views),…",
+    "no_link_sentence": null
+   }
+  ],
+  "claims": [
+   {
+    "id": "FRE-C001",
+    "text": "Hazus and NACCS inundation ordinates express damage as % of structure value against flood depth relative to the first finished floor.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S001",
+     "FRE-S003",
+     "FRE-S004"
+    ],
+    "locator": "Zenodo description (columns are feet relative to first-floor elevation); NACCS Tables 25/35/56 axis labels",
+    "tier": "T2",
+    "parameter_or_rule": "axis and denominator",
+    "status": "adopt",
+    "update_trigger": "A source uses a different reference elevation."
+   },
+   {
+    "id": "FRE-C002",
+    "text": "FEMA's riverine default structure curves are DF 129 (RES1, 1 story, no basement), DF 217 (COM1), DF 431 (COM4), DF 341 (COM2), DF 559 (IND2) and DF 209 (RES4), unchanged across Hazus 5.1, 6.1 and 7.0.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "FRE-S001",
+     "FRE-S002"
+    ],
+    "locator": "Hazus 7.0 Table 5-2 pp. 5-3 to 5-6; Hazus 5.1 Table 5-2 pp. 5-4 to 5-5; Hazus 6.1 Table 5-2; riverine_ids.csv",
+    "tier": "T2",
+    "parameter_or_rule": "freshwater curve per reference building",
+    "status": "adopt",
+    "update_trigger": "A later Hazus edition changes Table 5-2."
+   },
+   {
+    "id": "FRE-C003",
+    "text": "Compiled Hazus ordinates for DF 217, 431, 341 and 559 equal the independent USACE go-consequences copies at every depth (29/29, 29/29, 29/29, 26/26).",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S003",
+     "FRE-S005",
+     "FRE-S007"
+    ],
+    "locator": "go-consequences occtypes COM1/COM4/COM2/IND2 structure default vs haz_fl_dept rows",
+    "tier": "T2",
+    "parameter_or_rule": "ordinate integrity",
+    "status": "adopt",
+    "update_trigger": "A newer Hazus release changes these IDs."
+   },
+   {
+    "id": "FRE-C004",
+    "text": "DF 129 (USACE-IWR) equals the rounded mean of the USACE EGM one-story no-basement curve from -2 to +16 ft; EGM also publishes a normal standard deviation per depth.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S003",
+     "FRE-S005",
+     "FRE-S006"
+    ],
+    "locator": "go-consequences RES1-1SNB structure default vs haz_fl_dept DF 129",
+    "tier": "T2",
+    "parameter_or_rule": "residential freshwater curve lineage",
+    "status": "adopt",
+    "update_trigger": "EGM document confirmed or a spread policy is adopted."
+   },
+   {
+    "id": "FRE-C005",
+    "text": "The compiled NACCS values for 5A (RES1-1SNB), Prototype 2 (COM-ENG) and Prototype 3 (COM-PRE) match the report at all published knots (90 of 90 values).",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S001",
+     "FRE-S004"
+    ],
+    "locator": "NACCS Tables 25, 35, 56 vs naccs_ddfs.csv",
+    "tier": "T2",
+    "parameter_or_rule": "coastal ordinate integrity",
+    "status": "adopt",
+    "update_trigger": "—"
+   },
+   {
+    "id": "FRE-C006",
+    "text": "The compiled NACCS file carries values at 4, 6, 8 and 9 ft that the report does not publish; each repeats the previous published value.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S001",
+     "FRE-S004"
+    ],
+    "locator": "naccs_ddfs.csv columns ft4, ft6, ft8, ft9 vs NACCS published depths",
+    "tier": "T2",
+    "parameter_or_rule": "NACCS knot set",
+    "status": "withhold",
+    "update_trigger": "—"
+   },
+   {
+    "id": "FRE-C007",
+    "text": "NACCS Prototype 5A most-likely building: one story, wood frame, slab, 15-30 years old, finished floor 1 ft above grade.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S004"
+    ],
+    "locator": "Table 55, p. 80",
+    "tier": "T2",
+    "parameter_or_rule": "RE_RES_SFD_1S_SLAB defaults: first-floor height 1 ft",
+    "status": "adopt",
+    "update_trigger": "NSI default check (FRE-S009) disagrees materially."
+   },
+   {
+    "id": "FRE-C008",
+    "text": "NACCS Prototype 3 most-likely: one story, steel or light metal frame, slab, finished floor 1 ft above grade. Prototype 2 most-likely: two stories, steel frame with precast infill, slab, finished floor at grade.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S004"
+    ],
+    "locator": "Table 34 p. 67; Table 24 p. 61",
+    "tier": "T2",
+    "parameter_or_rule": "coastal curve per reference building and first-floor-height defaults",
+    "status": "adopt",
+    "update_trigger": "The commercial reference building is defined as masonry or wood (then COM-PRE)."
+   },
+   {
+    "id": "FRE-C009",
+    "text": "NACCS verification found the 5A and 5B (no-basement residential) inundation functions lower than empirical damages from FEMA substantial damage estimates, and advises users to review the verification before selecting them.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S004"
+    ],
+    "locator": "pp. 80-81 (references Attachment G)",
+    "tier": "T2",
+    "parameter_or_rule": "residential coastal curve caution",
+    "status": "adopt",
+    "update_trigger": "Attachment G reviewed or NFIP claims comparison done."
+   },
+   {
+    "id": "FRE-C010",
+    "text": "NACCS advises the high (Max) damage function where extensive mould is likely.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S004"
+    ],
+    "locator": "prototype sections, e.g. p. 61 and p. 80",
+    "tier": "T2",
+    "parameter_or_rule": "mould conditioner",
+    "status": "defer",
+    "update_trigger": "A duration or mould input is defined."
+   },
+   {
+    "id": "FRE-C011",
+    "text": "The commercial and industrial Hazus defaults are class averages from one USACE district (Galveston).",
+    "type": "engineering_inference",
+    "source_ids": [
+     "FRE-S003",
+     "FRE-S007"
+    ],
+    "locator": "haz_fl_dept Source column; go-consequences source label",
+    "tier": "T3",
+    "parameter_or_rule": "transfer limit",
+    "status": "adopt",
+    "update_trigger": "A national or multi-district commercial curve is curated."
+   },
+   {
+    "id": "FRE-C012",
+    "text": "The Plymouth trial curves (NACCS RES1-1SWB/2SWB, Hazus DF 205) are with-basement curves and do not match any reference building.",
+    "type": "governance_decision",
+    "source_ids": [
+     "FRE-S008"
+    ],
+    "locator": "plymouth_modelling_methodology.md section 6.2",
+    "tier": "T3",
+    "parameter_or_rule": "curve reuse",
+    "status": "reject",
+    "update_trigger": "A basement reference profile is added."
+   },
+   {
+    "id": "FRE-C013",
+    "text": "FEMA states that well-documented coastal damage functions exist only for RES1; occupancies not listed in Table 5-3 (all commercial and industrial) use the riverine defaults for coastal flooding. The Hazus coastal A and V default for a one-story slab house is DF 658 (BCAR 2011, 'All floors, slab - no basement, Coastal A or V Zone'), built on the assumption that waves of 1.5 ft or more can destroy walls.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S002"
+    ],
+    "locator": "Hazus 7.0 Table 5-3 note p. 5-8; Table 5-4 note p. 5-9; section 5.4.1.1.2.1 pp. 5-9 to 5-10",
+    "tier": "T2",
+    "parameter_or_rule": "coastal curve choice",
+    "status": "defer",
+    "update_trigger": "Step 4 decides the coastal source per reference building."
+   },
+   {
+    "id": "FRE-C014",
+    "text": "The compiled Hazus 5.1 library (FRE-S003) holds 550 structure curves with IDs up to 657; DF 658 and later (342 IDs added by Hazus 6.1, incl. BCAR 2011 coastal curves) are absent from it but present in the Hazus 6.1 extract (FRE-S010).",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S001",
+     "FRE-S003",
+     "FRE-S010"
+    ],
+    "locator": "haz_fl_dept.csv DmgFnId range",
+    "tier": "T2",
+    "parameter_or_rule": "data gap",
+    "status": "adopt",
+    "update_trigger": "—"
+   },
+   {
+    "id": "FRE-C015",
+    "text": "At 4 ft above the floor the proposed freshwater curves read 47% (house), 18% (commercial) and 13% (warehouse), while the NACCS coastal ML curves read about 38%, 38% and 40%.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S003",
+     "FRE-S004"
+    ],
+    "locator": "Hazus DF 129/217/341 at 4 ft; NACCS ML interpolated between 3 and 5 ft",
+    "tier": "T2",
+    "parameter_or_rule": "cross-source consistency",
+    "status": "adopt",
+    "update_trigger": "NFIP claims comparison."
+   },
+   {
+    "id": "FRE-C016",
+    "text": "Proposed freshwater selections: DF 217 (retail) for the commercial reference building and DF 341 (wholesale/warehouse) for the warehouse; DF 431 and DF 559 become later profiles.",
+    "type": "governance_decision",
+    "source_ids": [
+     "FRE-S002",
+     "FRE-S003"
+    ],
+    "locator": "pressure test §2 A and B",
+    "tier": "T2",
+    "parameter_or_rule": "freshwater curve selection",
+    "status": "adopt",
+    "update_trigger": "Owner selects otherwise."
+   },
+   {
+    "id": "FRE-C017",
+    "text": "Proposed coastal source: NACCS for all three reference buildings, with North Atlantic and low-bias limits; FEMA coastal defaults recorded as alternative.",
+    "type": "governance_decision",
+    "source_ids": [
+     "FRE-S002",
+     "FRE-S004"
+    ],
+    "locator": "pressure test §2 C",
+    "tier": "T2",
+    "parameter_or_rule": "coastal curve source",
+    "status": "adopt",
+    "update_trigger": "Owner selects FEMA defaults or DF 658 ordinates are curated."
+   },
+   {
+    "id": "FRE-C018",
+    "text": "All 550 structure curves shared by the compiled Hazus 5.1 library and the Hazus 6.1 extract are identical at every depth, including DF 129, 217, 431, 341, 559, 209, 205 and 108.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S003",
+     "FRE-S010"
+    ],
+    "locator": "structure rows only (Source_Table = flBldgStructDmgFn); comparison −4 to 24 ft",
+    "tier": "T2",
+    "parameter_or_rule": "ordinate integrity",
+    "status": "adopt",
+    "update_trigger": "A later Hazus edition changes these curves."
+   },
+   {
+    "id": "FRE-C019",
+    "text": "The Hazus 6.1 default-assignment table maps a one-story no-basement RES1 building to DF 129 for riverine and DF 658 for coastal A and V; COM1, COM2, COM4, IND2 and RES4 use the same curve (DF 217, 341, 431, 559, 209) for riverine, coastal A and coastal V.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S002",
+     "FRE-S010"
+    ],
+    "locator": "flBldgStructDmgFinal rows R11N, C1*, C2*, C4*, I2*, R4*",
+    "tier": "T2",
+    "parameter_or_rule": "default assignment by flood hazard",
+    "status": "adopt",
+    "update_trigger": "—"
+   },
+   {
+    "id": "FRE-C020",
+    "text": "DF 658 (BCAR Jan 2011, 'all floors, slab - no basement, Coastal A or V Zone') reads 0% below the floor, 12% at the floor, 25% at 1 ft, 50% at 2 ft, 75% at 3 ft and 100% from 4 ft upward.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S010"
+    ],
+    "locator": "flBldgStrucDmgFn row 658, ft04m to ft24",
+    "tier": "T2",
+    "parameter_or_rule": "FEMA coastal house curve",
+    "status": "defer",
+    "update_trigger": "Owner chooses the FEMA coastal rule, or the wave pathway is built."
+   },
+   {
+    "id": "FRE-C021",
+    "text": "Wave impact, fast-moving water and scour are a separate mechanism from still-water inundation: they act by force and undermining, depend on wave height or flow speed rather than depth, and depend strongly on site exposure, foundation and soil. They are excluded from flood_inundation_contact and deferred, with wave damage withheld rather than set to zero.",
+    "type": "governance_decision",
+    "source_ids": [
+     "FRE-S002",
+     "FRE-S004",
+     "FRE-S010"
+    ],
+    "locator": "flood_wind D-FW-07 and FW-C012 (scour, erosion, debris and wave loading excluded; foundation withheld not zero); flood_solar FS_FOUND (T4 velocity/scour placeholder); Hazus 7.0 section 5.4.1.1.2.1 (BCAR coastal curves assume waves of 1.5 ft or more destroy walls); NACCS 2015 publishes wave and erosion tables separately from inundation",
+    "tier": "T3",
+    "parameter_or_rule": "pathway split",
+    "status": "adopt",
+    "update_trigger": "Hazard supplies wave height or flow speed, and wave or velocity curves are curated."
+   },
+   {
+    "id": "FRE-C022",
+    "text": "NSI 2026 assigns first-floor height by foundation type; RES1 slab foundations default to 0.75 ft and basements to 2 ft, informed by a 2021 USACE survey and generally aligned with median survey values (the 2022 edition stated 0.5 ft for RES1 slab).",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S009"
+    ],
+    "locator": "NSI 2026 Foundation Type and Height; NSI 2022 same section",
+    "tier": "T2",
+    "parameter_or_rule": "first_floor_height.RE_RES_SFD_1S_SLAB",
+    "status": "adopt",
+    "update_trigger": "A later NSI edition changes it."
+   },
+   {
+    "id": "FRE-C023",
+    "text": "In NSI records for three counties, slab-foundation COM1, COM4, COM2 and IND2 structures carry first-floor height 0.25 ft (91.5-100% of records) and slab RES1-1SNB structures carry 0.75 ft (100%).",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S011"
+    ],
+    "locator": "NSI_SAMPLE csv",
+    "tier": "T3",
+    "parameter_or_rule": "first_floor_height.RE_COM_LOWRISE; first_floor_height.RE_IND_WAREHOUSE",
+    "status": "adopt",
+    "update_trigger": "NSI documents non-residential defaults."
+   },
+   {
+    "id": "FRE-C024",
+    "text": "NSI fullrep is replacement cost new (occupancy, floor area, occupancy-specific cost per area; national cost curve with local wage adjustment; RES1 also adjusted by tract income; August 2025 prices; cost per area falls with size). val_struct is depreciated 1% per year for 20 years, then held at 80%.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S009"
+    ],
+    "locator": "NSI 2026 Full Replacement Cost; field list",
+    "tier": "T2",
+    "parameter_or_rule": "value denominator compatibility",
+    "status": "adopt",
+    "update_trigger": "—"
+   },
+   {
+    "id": "FRE-C025",
+    "text": "Hazus rounds first-floor height above grade to the nearest whole foot (0.5 ft and below down, 0.51 ft and above up) when it applies its curves to user-defined facilities.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S002"
+    ],
+    "locator": "Hazus 6.1 Flood TM section 7.4",
+    "tier": "T2",
+    "parameter_or_rule": "axis bridge",
+    "status": "adopt",
+    "update_trigger": "Owner asks to reproduce Hazus exactly."
+   },
+   {
+    "id": "FRE-C026",
+    "text": "The FEMA freshwater curves agree with NFIP claims within about 6 points for the house at 2-6 ft above the floor and for the commercial analogue at 0-10 ft; both curves sit below the claims at shallow depth.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S012",
+     "FRE-S002"
+    ],
+    "locator": "NFIP_CLAIMS_COMPARISON_flood_real_estate__model_v0_1__docs_r1.csv freshwater rows",
+    "tier": "T1",
+    "parameter_or_rule": "freshwater curve validation",
+    "status": "adopt",
+    "update_trigger": "A rerun on a newer pull or a changed curve."
+   },
+   {
+    "id": "FRE-C027",
+    "text": "The NACCS coastal house curve (5A) is 12-23 points below NFIP coastal-surge claims in the first 2 ft above the floor, where 72% of the compared coastal house claims fall; the claims sit near the NACCS upper bound.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S012",
+     "FRE-S004"
+    ],
+    "locator": "NFIP_CLAIMS_COMPARISON_flood_real_estate__model_v0_1__docs_r1.csv house coastal rows",
+    "tier": "T1",
+    "parameter_or_rule": "coastal curve validation",
+    "status": "adopt",
+    "update_trigger": "A rerun, or claims evidence from the North Atlantic."
+   },
+   {
+    "id": "FRE-C028",
+    "text": "The NACCS coastal commercial curve (prototype 2) is 6-12 points above NFIP coastal-surge claims for the commercial analogue from 1 ft above the floor.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S012",
+     "FRE-S004"
+    ],
+    "locator": "NFIP_CLAIMS_COMPARISON_flood_real_estate__model_v0_1__docs_r1.csv commercial coastal rows",
+    "tier": "T1",
+    "parameter_or_rule": "coastal curve validation",
+    "status": "adopt",
+    "update_trigger": "A rerun, or an office-specific comparison."
+   },
+   {
+    "id": "FRE-C029",
+    "text": "Applied to the same coastal-surge claims, the FEMA freshwater curves are 8-12 points below the house claims at 0-2 ft and within 7 points at 2-6 ft, and 7-10 points below the commercial claims at 0-6 ft.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S012",
+     "FRE-S002"
+    ],
+    "locator": "NFIP_CLAIMS_COMPARISON_flood_real_estate__model_v0_1__docs_r1.csv columns fema_freshwater_*",
+    "tier": "T1",
+    "parameter_or_rule": "coastal curve choice",
+    "status": "defer",
+    "update_trigger": "Owner coastal decision."
+   },
+   {
+    "id": "FRE-C030",
+    "text": "NFIP coastal-surge claims match freshwater claims for the house analogue at the same depth (within 5 points at 0-6 ft), but run 2-11 points higher for the commercial analogue.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S012"
+    ],
+    "locator": "NFIP_CLAIMS_COMPARISON_flood_real_estate__model_v0_1__docs_r1.csv claims_mean_dr",
+    "tier": "T1",
+    "parameter_or_rule": "water-type distinction",
+    "status": "adopt",
+    "update_trigger": "A rerun or a salinity-specific study."
+   },
+   {
+    "id": "FRE-C031",
+    "text": "The shallow-depth gap for the house is sensitive to the assumed first-floor height: for claims 0.5-2.0 ft above grade, the freshwater curve is 3 points below the claims at a 0 ft floor height and 10 points below at the reference 0.75 ft.",
+    "type": "engineering_inference",
+    "source_ids": [
+     "FRE-S012",
+     "FRE-S011"
+    ],
+    "locator": "NFIP_CLAIMS_SENSITIVITY_flood_real_estate__model_v0_1__docs_r1.csv floor-height rows",
+    "tier": "T3",
+    "parameter_or_rule": "first_floor_height.RE_RES_SFD_1S_SLAB",
+    "status": "adopt",
+    "update_trigger": "Observed floor heights for the claims, or Hazard's grade-to-floor conversion."
+   },
+   {
+    "id": "FRE-C032",
+    "text": "Hazus DF 431 (COM4, Average Prof/Tech Services, Structure, USACE Galveston) is identical at all 29 knots (-4 to 24 ft) in the Pollack compilation, USACE go-consequences and the Hazus 6.1 extract.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S001",
+     "FRE-S003",
+     "FRE-S005",
+     "FRE-S010"
+    ],
+    "locator": "OFFICE_FLOOD_RESEARCH_flood_real_estate__model_v0_1__docs_r1.md §2; haz_fl_dept.csv DmgFnId 431 (flBldgStructDmgFn); occtypes.json COM4 structure; flBldgStrucDmgFn ID 431",
+    "tier": "T2",
+    "parameter_or_rule": "office freshwater ordinate integrity",
+    "status": "adopt",
+    "update_trigger": "A newer Hazus release changes DF 431."
+   },
+   {
+    "id": "FRE-C033",
+    "text": "FEMA's default structure curve for COM4 is DF 431 at every height class (under 4, 4-7, over 7 storeys), with or without basement, and for riverine, coastal A and coastal V hazards.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S010",
+     "FRE-S002"
+    ],
+    "locator": "Hazus 6.1 flBldgStructDmgFinal rows C4LN, C4LB, C4MN, C4MB, C4HN, C4HB (HazardR, HazardCA, HazardCV = 1); SOoccupId_Occ_Xref",
+    "tier": "T2",
+    "parameter_or_rule": "office curve selection",
+    "status": "adopt",
+    "update_trigger": "A Hazus release with height-specific commercial defaults."
+   },
+   {
+    "id": "FRE-C034",
+    "text": "In NFIP business claims (occupancy 4, 6, 18; slab), damage as a share of the building falls with the number of floors: at matched depth bands two floors show about 0.75 of the one-floor ratio (freshwater; 0.67 coastal) and three or more floors about 0.5 (freshwater, up to 3 ft).",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S012"
+    ],
+    "locator": "NFIP_CLAIMS_BY_STOREYS_flood_real_estate__model_v0_1__docs_r1.csv; OFFICE_FLOOD_RESEARCH_flood_real_estate__model_v0_1__docs_r1.md §4",
+    "tier": "T1",
+    "parameter_or_rule": "office height effect",
+    "status": "adopt",
+    "update_trigger": "Office-specific or height-specific claims evidence."
+   },
+   {
+    "id": "FRE-C035",
+    "text": "On the same NFIP business claims, DF 431 is within 1 point of one-floor freshwater claims and about 3.5 points (x1.6) above three-or-more-floor freshwater claims; in coastal surge it is within 2-5 points of two-floor and taller claims, while NACCS prototype 2 is 11-13 points above them.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S012",
+     "FRE-S004"
+    ],
+    "locator": "NFIP_CLAIMS_BY_STOREYS_flood_real_estate__model_v0_1__docs_r1.csv; OFFICE_FLOOD_RESEARCH_flood_real_estate__model_v0_1__docs_r1.md §4",
+    "tier": "T1",
+    "parameter_or_rule": "office curve validation",
+    "status": "adopt",
+    "update_trigger": "Owner office and coastal decisions."
+   },
+   {
+    "id": "FRE-C036",
+    "text": "Other Hazus office structure curves do not fit better: DF 438 (Big Office Commercial) is within 2-3 points of DF 431 on the claims, DF 466 (Wilmington Office Building) is 21-34 points above every claims group, and the New Orleans office curves (DF 444-462) reach 65-100% by 3 ft.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S010",
+     "FRE-S012"
+    ],
+    "locator": "OFFICE_FLOOD_RESEARCH_flood_real_estate__model_v0_1__docs_r1.md §2, §4",
+    "tier": "T1",
+    "parameter_or_rule": "office curve alternatives",
+    "status": "reject",
+    "update_trigger": "A height- or size-specific office curve is found."
+   },
+   {
+    "id": "FRE-C037",
+    "text": "For the warehouse there is little coastal claims evidence: on 14 NFIP coastal-surge claims with a warehouse building description at 1-3 ft above the floor (mean damage 14%), Hazus DF 341 reads 7% and NACCS prototype 3 reads 26%; on all 1-floor business coastal claims DF 341 is 11-13 points below and NACCS prototype 3 1-13 points above.",
+    "type": "direct_observation",
+    "source_ids": [
+     "FRE-S012",
+     "FRE-S004",
+     "FRE-S010"
+    ],
+    "locator": "NFIP pulls in build/nfip_claims (nonres.json); computed 2026-10-16 with the v0.1 records",
+    "tier": "T1",
+    "parameter_or_rule": "warehouse coastal curve choice",
+    "status": "adopt",
+    "update_trigger": "More coastal warehouse claims or a warehouse-specific coastal study."
+   }
+  ],
+  "parameters": [
+   {
+    "id": "axis_definition",
+    "name": "axis_definition",
+    "value": "flood depth above first finished floor, ft",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S003",
+     "FRE-S004"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "flood_inundation_contact",
+    "role": "axis_bridge",
+    "status": "proposed",
+    "reasoning": "Native axis of both libraries (FRE-C001).",
+    "update_trigger": "A source with a different reference elevation is adopted."
+   },
+   {
+    "id": "curve_form",
+    "name": "curve_form",
+    "value": "straight lines between published points (piecewise linear)",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S003",
+     "FRE-S004",
+     "FRE-S008"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "flood_inundation_contact",
+    "role": "curve_fit_shape",
+    "status": "proposed",
+    "reasoning": "Reproduces every published value; smooth fits predict held-out points worse on all six point curves and move published values by 2-5 points (FORM_COMPARISON); table-based cells (flood_solar, flood_wind, wildfire_solar, wildfire_wind) use straight lines; method rule: simplest form the evidence yields.",
+    "update_trigger": "A reviewed reason to prefer smoothness."
+   },
+   {
+    "id": "axis_bridge",
+    "name": "axis_bridge",
+    "value": "depth_above_floor = depth_above_grade − first_floor_height (same datum required)",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S003",
+     "FRE-S004"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "flood_inundation_contact",
+    "role": "axis_bridge",
+    "status": "proposed",
+    "reasoning": "Both libraries define depth relative to FFE; FFE = grade + first-floor height.",
+    "update_trigger": "Hazard supplies depth on a different reference."
+   },
+   {
+    "id": "RE_RES_SFD_1S_SLAB.freshwater.ordinates",
+    "name": "RE_RES_SFD_1S_SLAB.freshwater.ordinates",
+    "value": "Hazus DF 129, −4 to 24 ft (USACE-IWR)",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S002",
+     "FRE-S003",
+     "FRE-S006"
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_RES_FRESH_HAZUS_DF129",
+    "pathway_id": "flood_inundation_contact",
+    "role": "curve_fit_shape",
+    "status": "proposed",
+    "reasoning": "FEMA Table 5-2 default; equals rounded USACE EGM means −2 to 16 ft (FRE-C002, C004).",
+    "update_trigger": "NFIP claims comparison or a Hazus Table 5-2 change."
+   },
+   {
+    "id": "RE_COM_LOWRISE.freshwater.ordinates",
+    "name": "RE_COM_LOWRISE.freshwater.ordinates",
+    "value": "Hazus DF 217, −4 to 24 ft (USACE Galveston, average of 47 retail classes)",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S002",
+     "FRE-S003",
+     "FRE-S005",
+     "FRE-S007"
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_COM_FRESH_HAZUS_DF217",
+    "pathway_id": "flood_inundation_contact",
+    "role": "curve_fit_shape",
+    "status": "proposed",
+    "reasoning": "FEMA Table 5-2 default for COM1; verified identical to USACE copy (FRE-C003). Single-district provenance (FRE-C011).",
+    "update_trigger": "Owner selects office (DF 431) or NFIP comparison shows bias."
+   },
+   {
+    "id": "RE_IND_WAREHOUSE.freshwater.ordinates",
+    "name": "RE_IND_WAREHOUSE.freshwater.ordinates",
+    "value": "Hazus DF 341, −4 to 24 ft (USACE Galveston, average of 22 wholesale/warehouse classes)",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S002",
+     "FRE-S003",
+     "FRE-S005",
+     "FRE-S007"
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_IND_FRESH_HAZUS_DF341",
+    "pathway_id": "flood_inundation_contact",
+    "role": "curve_fit_shape",
+    "status": "proposed",
+    "reasoning": "FEMA Table 5-2 default for COM2 (warehouse use); verified identical to USACE copy (FRE-C003). Single-district provenance.",
+    "update_trigger": "Owner selects light industrial (DF 559) or NFIP comparison shows bias."
+   },
+   {
+    "id": "RE_RES_SFD_1S_SLAB.coastal.ordinates",
+    "name": "RE_RES_SFD_1S_SLAB.coastal.ordinates",
+    "value": "NACCS RES1-1SNB Min/ML/Max at −1, −0.5, 0, 0.5, 1, 2, 3, 5, 7, 10 ft",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S004"
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_RES_COAST_NACCS_5A",
+    "pathway_id": "flood_inundation_contact",
+    "role": "curve_fit_shape",
+    "status": "proposed",
+    "reasoning": "Prototype 5A matches the reference house (FRE-C007). North Atlantic expert panel; own verification found it low (FRE-C009). T3 transfer outside the North Atlantic.",
+    "update_trigger": "Attachment G review, NFIP comparison, or owner selects FEMA DF 658."
+   },
+   {
+    "id": "RE_COM_LOWRISE.coastal.ordinates",
+    "name": "RE_COM_LOWRISE.coastal.ordinates",
+    "value": "NACCS COM-ENG Min/ML/Max at the ten published depths",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S004"
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_COM_COAST_NACCS_P2",
+    "pathway_id": "flood_inundation_contact",
+    "role": "curve_fit_shape",
+    "status": "proposed",
+    "reasoning": "Prototype 2 steel-framed commercial matches the reference building (FRE-C008). T3 transfer outside the North Atlantic.",
+    "update_trigger": "Commercial reference redefined as masonry (then COM-PRE) or NFIP comparison."
+   },
+   {
+    "id": "RE_IND_WAREHOUSE.coastal.ordinates",
+    "name": "RE_IND_WAREHOUSE.coastal.ordinates",
+    "value": "NACCS COM-PRE Min/ML/Max at the ten published depths",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S004"
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_IND_COAST_NACCS_P3",
+    "pathway_id": "flood_inundation_contact",
+    "role": "curve_fit_shape",
+    "status": "proposed",
+    "reasoning": "Prototype 3 one-story steel/light-metal building matches the warehouse (FRE-C008). T3 transfer outside the North Atlantic.",
+    "update_trigger": "NFIP comparison."
+   },
+   {
+    "id": "naccs_runtime_band",
+    "name": "naccs_runtime_band",
+    "value": "ML is the point curve; Min and Max are building-variant bounds, not a probability spread",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S004"
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_*_COAST_NACCS_*",
+    "pathway_id": "flood_inundation_contact",
+    "role": "boundary_or_cap",
+    "status": "proposed",
+    "reasoning": "NACCS defines Min/Max by building characteristics, not by probability.",
+    "update_trigger": "A reviewed spread policy."
+   },
+   {
+    "id": "naccs_knot_set",
+    "name": "naccs_knot_set",
+    "value": "published depths only: −1, −0.5, 0, 0.5, 1, 2, 3, 5, 7, 10 ft",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S001",
+     "FRE-S004"
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_*_COAST_NACCS_*",
+    "pathway_id": "flood_inundation_contact",
+    "role": "boundary_or_cap",
+    "status": "proposed",
+    "reasoning": "Compiled values at 4, 6, 8, 9 ft are fills (FRE-C006, D-FRE-13).",
+    "update_trigger": "—"
+   },
+   {
+    "id": "valid_range.hazus",
+    "name": "valid_range.hazus",
+    "value": "−4 to 24 ft; below −4 ft = 0%; above 24 ft withholds",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S003"
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_*_FRESH_HAZUS_*",
+    "pathway_id": "flood_inundation_contact",
+    "role": "boundary_or_cap",
+    "status": "proposed",
+    "reasoning": "Published library range; every record is 0% at −4 ft; no extrapolation or clamp above (D-FRE-21, flood_wind precedent).",
+    "update_trigger": "A source publishes deeper ordinates."
+   },
+   {
+    "id": "valid_range.naccs",
+    "name": "valid_range.naccs",
+    "value": "−1 to 10 ft; below −1 ft = 0%; above 10 ft withholds",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S004"
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_*_COAST_NACCS_*",
+    "pathway_id": "flood_inundation_contact",
+    "role": "boundary_or_cap",
+    "status": "proposed",
+    "reasoning": "Published report range; every NACCS curve is 0% at −1 ft; no extrapolation or clamp above (D-FRE-21).",
+    "update_trigger": "A source publishes deeper ordinates."
+   },
+   {
+    "id": "water_type_conditioner",
+    "name": "water_type_conditioner",
+    "value": "freshwater -> Hazus; coastal_surge_saline -> NACCS; unknown -> withhold",
+    "tier": "T3",
+    "source_ids": [
+     "FRE-S002",
+     "FRE-S004"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "flood_inundation_contact",
+    "role": "conditioner_adjustment",
+    "status": "proposed",
+    "reasoning": "Libraries built for different water and settings; FEMA's own coastal position recorded as alternative (FRE-C013).",
+    "update_trigger": "Owner selects FEMA coastal defaults, or Hazard cannot supply water type."
+   },
+   {
+    "id": "first_floor_height.RE_RES_SFD_1S_SLAB",
+    "name": "first_floor_height.RE_RES_SFD_1S_SLAB",
+    "value": "0.75 ft above grade",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S009"
+    ],
+    "claim_ids": [],
+    "curve_id": "all residential",
+    "pathway_id": "flood_inundation_contact",
+    "role": "selector_default",
+    "status": "proposed",
+    "reasoning": "NSI 2026 documented RES1 slab default (FRE-C022); replaces the NACCS 5A 1.0 ft (D-FRE-22).",
+    "update_trigger": "NSI documents non-residential defaults, or owner choice."
+   },
+   {
+    "id": "first_floor_height.RE_COM_LOWRISE",
+    "name": "first_floor_height.RE_COM_LOWRISE",
+    "value": "0.25 ft above grade",
+    "tier": "T3",
+    "source_ids": [
+     "FRE-S011"
+    ],
+    "claim_ids": [],
+    "curve_id": "all commercial",
+    "pathway_id": "flood_inundation_contact",
+    "role": "selector_default",
+    "status": "proposed",
+    "reasoning": "NSI records, slab COM1/COM4 in three counties (FRE-C023); not documented; replaces NACCS Prototype 2 0 ft.",
+    "update_trigger": "NSI documents non-residential defaults, or owner choice."
+   },
+   {
+    "id": "first_floor_height.RE_IND_WAREHOUSE",
+    "name": "first_floor_height.RE_IND_WAREHOUSE",
+    "value": "0.25 ft above grade",
+    "tier": "T3",
+    "source_ids": [
+     "FRE-S011"
+    ],
+    "claim_ids": [],
+    "curve_id": "all warehouse",
+    "pathway_id": "flood_inundation_contact",
+    "role": "selector_default",
+    "status": "proposed",
+    "reasoning": "NSI records, slab COM2/IND2 in three counties (FRE-C023); not documented; replaces NACCS Prototype 3 1.0 ft.",
+    "update_trigger": "NSI documents non-residential defaults, or owner choice."
+   },
+   {
+    "id": "value_denominator",
+    "name": "value_denominator",
+    "value": "structure replacement cost new (no land, contents, depreciation)",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S003",
+     "FRE-S004"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "flood_inundation_contact",
+    "role": "exposure_or_value",
+    "status": "proposed",
+    "reasoning": "Both libraries express damage as % of structure value (FRE-C001).",
+    "update_trigger": "Owner chooses another reporting basis (explicit conversion only)."
+   },
+   {
+    "id": "value_per_area",
+    "name": "value_per_area",
+    "value": "not set",
+    "tier": "T4",
+    "source_ids": [],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "flood_inundation_contact",
+    "role": "open_seam_placeholder",
+    "status": "open",
+    "reasoning": "Four options documented (NSI fullrep, Hazus 7.0 Inventory TM, RSMeans, team values); none selected; scenario dollars withheld (D-FRE-23).",
+    "update_trigger": "A named replacement-cost source is adopted."
+   },
+   {
+    "id": "fresh_vs_coastal_gap",
+    "name": "fresh_vs_coastal_gap",
+    "value": "not adjusted",
+    "tier": "T4",
+    "source_ids": [
+     "FRE-S003",
+     "FRE-S004"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "flood_inundation_contact",
+    "role": "open_seam_placeholder",
+    "status": "open",
+    "reasoning": "Coastal reads below freshwater for the house and two to three times above for commercial and warehouse at 4 ft (pressure test §3); no uplift applied.",
+    "update_trigger": "NFIP claims comparison."
+   }
+  ],
+  "parameters_plain": [
+   {
+    "id": "axis_definition",
+    "name": "axis definition",
+    "raw_name": "axis_definition",
+    "value_text": "flood depth above first finished floor, ft",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FRE-S003",
+      "title": "FEMA Hazus flood depth-damage function library, Hazus 5.1 (as distributed in the CRAN hazus R package,…",
+      "link": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FRE-S004",
+      "title": "U.S. Army Corps of Engineers (2015)",
+      "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Native axis of both libraries.",
+    "update_trigger": "A source with a different reference elevation is adopted.",
+    "role": "axis_bridge"
+   },
+   {
+    "id": "curve_form",
+    "name": "curve form",
+    "raw_name": "curve_form",
+    "value_text": "straight lines between published points (piecewise linear)",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FRE-S003",
+      "title": "FEMA Hazus flood depth-damage function library, Hazus 5.1 (as distributed in the CRAN hazus R package,…",
+      "link": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FRE-S004",
+      "title": "U.S. Army Corps of Engineers (2015)",
+      "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FRE-S008",
+      "title": "Plymouth / Salem coastal flood trial, methodology trial 5 and fit catalogue (Hazard_Modeling branch…",
+      "link": null,
+      "link_kind": "none",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Reproduces every published value; smooth fits predict held-out points worse on all six point curves and move published values by 2-5 points (FORM_COMPARISON); table-based cells (flood_solar, flood_wind, wildfire_solar, wildfire_wind) use straight lines; method rule: simplest form the evidence yields.",
+    "update_trigger": "A reviewed reason to prefer smoothness.",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "axis_bridge",
+    "name": "axis bridge",
+    "raw_name": "axis_bridge",
+    "value_text": "depth_above_floor = depth_above_grade − first_floor_height (same datum required)",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FRE-S003",
+      "title": "FEMA Hazus flood depth-damage function library, Hazus 5.1 (as distributed in the CRAN hazus R package,…",
+      "link": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FRE-S004",
+      "title": "U.S. Army Corps of Engineers (2015)",
+      "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Both libraries define depth relative to FFE; FFE = grade + first-floor height.",
+    "update_trigger": "Hazard supplies depth on a different reference.",
+    "role": "axis_bridge"
+   },
+   {
+    "id": "RE_RES_SFD_1S_SLAB.freshwater.ordinates",
+    "name": "RE_RES_SFD_1S_SLAB.freshwater.ordinates",
+    "raw_name": "RE_RES_SFD_1S_SLAB.freshwater.ordinates",
+    "value_text": "Hazus DF 129, −4 to 24 ft (USACE-IWR)",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FRE-S002",
+      "title": "FEMA. Hazus Flood Model Technical Manual, Hazus 7.0 (June 2025), Table 5-2 Default Damage Functions for…",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FRE-S003",
+      "title": "FEMA Hazus flood depth-damage function library, Hazus 5.1 (as distributed in the CRAN hazus R package,…",
+      "link": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FRE-S006",
+      "title": "U.S. Army Corps of Engineers",
+      "link": "https://github.com/USACE/go-consequences/blob/dff647cabbc1abae3f084e80b7f6a166651d05d8/structures/occtypes.json",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_RES_FRESH_HAZUS_DF129",
+    "reasoning": "FEMA Table 5-2 default; equals rounded USACE EGM means −2 to 16 ft (C004).",
+    "update_trigger": "NFIP claims comparison or a Hazus Table 5-2 change.",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "RE_COM_LOWRISE.freshwater.ordinates",
+    "name": "RE_COM_LOWRISE.freshwater.ordinates",
+    "raw_name": "RE_COM_LOWRISE.freshwater.ordinates",
+    "value_text": "Hazus DF 217, −4 to 24 ft (USACE Galveston, average of 47 retail classes)",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FRE-S002",
+      "title": "FEMA. Hazus Flood Model Technical Manual, Hazus 7.0 (June 2025), Table 5-2 Default Damage Functions for…",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FRE-S003",
+      "title": "FEMA Hazus flood depth-damage function library, Hazus 5.1 (as distributed in the CRAN hazus R package,…",
+      "link": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FRE-S005",
+      "title": "U.S. Army Corps of Engineers, Hydrologic Engineering Center. go-consequences, structures/occtypes.json (,…",
+      "link": "https://github.com/USACE/go-consequences/blob/dff647cabbc1abae3f084e80b7f6a166651d05d8/structures/occtypes.json",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FRE-S007",
+      "title": "U.S. Army Corps of Engineers, Galveston District",
+      "link": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_COM_FRESH_HAZUS_DF217",
+    "reasoning": "FEMA Table 5-2 default for COM1; verified identical to USACE copy. Single-district provenance.",
+    "update_trigger": "Owner selects office (DF 431) or NFIP comparison shows bias.",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "RE_IND_WAREHOUSE.freshwater.ordinates",
+    "name": "RE_IND_WAREHOUSE.freshwater.ordinates",
+    "raw_name": "RE_IND_WAREHOUSE.freshwater.ordinates",
+    "value_text": "Hazus DF 341, −4 to 24 ft (USACE Galveston, average of 22 wholesale/warehouse classes)",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FRE-S002",
+      "title": "FEMA. Hazus Flood Model Technical Manual, Hazus 7.0 (June 2025), Table 5-2 Default Damage Functions for…",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FRE-S003",
+      "title": "FEMA Hazus flood depth-damage function library, Hazus 5.1 (as distributed in the CRAN hazus R package,…",
+      "link": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FRE-S005",
+      "title": "U.S. Army Corps of Engineers, Hydrologic Engineering Center. go-consequences, structures/occtypes.json (,…",
+      "link": "https://github.com/USACE/go-consequences/blob/dff647cabbc1abae3f084e80b7f6a166651d05d8/structures/occtypes.json",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FRE-S007",
+      "title": "U.S. Army Corps of Engineers, Galveston District",
+      "link": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_IND_FRESH_HAZUS_DF341",
+    "reasoning": "FEMA Table 5-2 default for COM2 (warehouse use); verified identical to USACE copy. Single-district provenance.",
+    "update_trigger": "Owner selects light industrial (DF 559) or NFIP comparison shows bias.",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "RE_RES_SFD_1S_SLAB.coastal.ordinates",
+    "name": "RE_RES_SFD_1S_SLAB.coastal.ordinates",
+    "raw_name": "RE_RES_SFD_1S_SLAB.coastal.ordinates",
+    "value_text": "NACCS RES1-1SNB Min/ML/Max at −1, −0.5, 0, 0.5, 1, 2, 3, 5, 7, 10 ft",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FRE-S004",
+      "title": "U.S. Army Corps of Engineers (2015)",
+      "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_RES_COAST_NACCS_5A",
+    "reasoning": "Prototype 5A matches the reference house. North Atlantic expert panel; own verification found it low. borrowed transfer outside the North Atlantic.",
+    "update_trigger": "Attachment G review, NFIP comparison, or owner selects FEMA DF 658.",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "RE_COM_LOWRISE.coastal.ordinates",
+    "name": "RE_COM_LOWRISE.coastal.ordinates",
+    "raw_name": "RE_COM_LOWRISE.coastal.ordinates",
+    "value_text": "NACCS COM-ENG Min/ML/Max at the ten published depths",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FRE-S004",
+      "title": "U.S. Army Corps of Engineers (2015)",
+      "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_COM_COAST_NACCS_P2",
+    "reasoning": "Prototype 2 steel-framed commercial matches the reference building. borrowed transfer outside the North Atlantic.",
+    "update_trigger": "Commercial reference redefined as masonry (then COM-PRE) or NFIP comparison.",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "RE_IND_WAREHOUSE.coastal.ordinates",
+    "name": "RE_IND_WAREHOUSE.coastal.ordinates",
+    "raw_name": "RE_IND_WAREHOUSE.coastal.ordinates",
+    "value_text": "NACCS COM-PRE Min/ML/Max at the ten published depths",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FRE-S004",
+      "title": "U.S. Army Corps of Engineers (2015)",
+      "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_IND_COAST_NACCS_P3",
+    "reasoning": "Prototype 3 one-story steel/light-metal building matches the warehouse. borrowed transfer outside the North Atlantic.",
+    "update_trigger": "NFIP comparison.",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "naccs_runtime_band",
+    "name": "naccs runtime band",
+    "raw_name": "naccs_runtime_band",
+    "value_text": "ML is the point curve; Min and Max are building-variant bounds, not a probability spread",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FRE-S004",
+      "title": "U.S. Army Corps of Engineers (2015)",
+      "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_*_COAST_NACCS_*",
+    "reasoning": "NACCS defines Min/Max by building characteristics, not by probability.",
+    "update_trigger": "A reviewed spread policy.",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "naccs_knot_set",
+    "name": "naccs knot set",
+    "raw_name": "naccs_knot_set",
+    "value_text": "published depths only: −1, −0.5, 0, 0.5, 1, 2, 3, 5, 7, 10 ft",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FRE-S001",
+      "title": "Pollack, A. (2023). Flood Depth-Damage Functions from HAZUS and 2015 North Atlantic Coast Comprehensive Study [Dataset]",
+      "link": "https://doi.org/10.5281/zenodo.10027236",
+      "link_kind": "doi",
+      "resolved": true
+     },
+     {
+      "id": "FRE-S004",
+      "title": "U.S. Army Corps of Engineers (2015)",
+      "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_*_COAST_NACCS_*",
+    "reasoning": "Compiled values at 4, 6, 8, 9 ft are fills (D-FRE-13).",
+    "update_trigger": "—",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "valid_range.hazus",
+    "name": "valid_range.hazus",
+    "raw_name": "valid_range.hazus",
+    "value_text": "−4 to 24 ft; below −4 ft = 0%; above 24 ft withholds",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FRE-S003",
+      "title": "FEMA Hazus flood depth-damage function library, Hazus 5.1 (as distributed in the CRAN hazus R package,…",
+      "link": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_*_FRESH_HAZUS_*",
+    "reasoning": "Published library range; every record is 0% at −4 ft; no extrapolation or clamp above (D-FRE-21, flood_wind precedent).",
+    "update_trigger": "A source publishes deeper ordinates.",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "valid_range.naccs",
+    "name": "valid_range.naccs",
+    "raw_name": "valid_range.naccs",
+    "value_text": "−1 to 10 ft; below −1 ft = 0%; above 10 ft withholds",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FRE-S004",
+      "title": "U.S. Army Corps of Engineers (2015)",
+      "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_*_COAST_NACCS_*",
+    "reasoning": "Published report range; every NACCS curve is 0% at −1 ft; no extrapolation or clamp above (D-FRE-21).",
+    "update_trigger": "A source publishes deeper ordinates.",
+    "role": "boundary_or_cap"
+   },
+   {
+    "id": "water_type_conditioner",
+    "name": "water type conditioner",
+    "raw_name": "water_type_conditioner",
+    "value_text": "freshwater -> Hazus; coastal_surge_saline -> NACCS; unknown -> withhold",
+    "tier": "T3",
+    "tier_word": "borrowed",
+    "sources": [
+     {
+      "id": "FRE-S002",
+      "title": "FEMA. Hazus Flood Model Technical Manual, Hazus 7.0 (June 2025), Table 5-2 Default Damage Functions for…",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FRE-S004",
+      "title": "U.S. Army Corps of Engineers (2015)",
+      "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Libraries built for different water and settings; FEMA's own coastal position recorded as alternative.",
+    "update_trigger": "Owner selects FEMA coastal defaults, or Hazard cannot supply water type.",
+    "role": "conditioner_adjustment"
+   },
+   {
+    "id": "first_floor_height.RE_RES_SFD_1S_SLAB",
+    "name": "first_floor_height.RE_RES_SFD_1S_SLAB",
+    "raw_name": "first_floor_height.RE_RES_SFD_1S_SLAB",
+    "value_text": "0.75 ft above grade",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FRE-S009",
+      "title": "U.S. Army Corps of Engineers, Hydrologic Engineering Center",
+      "link": "https://www.hec.usace.army.mil/confluence/nsi/technicalreferences/2026/technical-documentation",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all residential",
+    "reasoning": "NSI 2026 documented RES1 slab default; replaces the NACCS 5A 1.0 ft (D-FRE-22).",
+    "update_trigger": "NSI documents non-residential defaults, or owner choice.",
+    "role": "selector_default"
+   },
+   {
+    "id": "first_floor_height.RE_COM_LOWRISE",
+    "name": "first_floor_height.RE_COM_LOWRISE",
+    "raw_name": "first_floor_height.RE_COM_LOWRISE",
+    "value_text": "0.25 ft above grade",
+    "tier": "T3",
+    "tier_word": "borrowed",
+    "sources": [
+     {
+      "id": "FRE-S011",
+      "title": "U.S. Army Corps of Engineers",
+      "link": "https://nsi.sec.usace.army.mil/nsiapi/structures?fips=<county>",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all commercial",
+    "reasoning": "NSI records, slab COM1/COM4 in three counties; not documented; replaces NACCS Prototype 2 0 ft.",
+    "update_trigger": "NSI documents non-residential defaults, or owner choice.",
+    "role": "selector_default"
+   },
+   {
+    "id": "first_floor_height.RE_IND_WAREHOUSE",
+    "name": "first_floor_height.RE_IND_WAREHOUSE",
+    "raw_name": "first_floor_height.RE_IND_WAREHOUSE",
+    "value_text": "0.25 ft above grade",
+    "tier": "T3",
+    "tier_word": "borrowed",
+    "sources": [
+     {
+      "id": "FRE-S011",
+      "title": "U.S. Army Corps of Engineers",
+      "link": "https://nsi.sec.usace.army.mil/nsiapi/structures?fips=<county>",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all warehouse",
+    "reasoning": "NSI records, slab COM2/IND2 in three counties; not documented; replaces NACCS Prototype 3 1.0 ft.",
+    "update_trigger": "NSI documents non-residential defaults, or owner choice.",
+    "role": "selector_default"
+   },
+   {
+    "id": "value_denominator",
+    "name": "value denominator",
+    "raw_name": "value_denominator",
+    "value_text": "structure replacement cost new (no land, contents, depreciation)",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "FRE-S003",
+      "title": "FEMA Hazus flood depth-damage function library, Hazus 5.1 (as distributed in the CRAN hazus R package,…",
+      "link": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FRE-S004",
+      "title": "U.S. Army Corps of Engineers (2015)",
+      "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Both libraries express damage as % of structure value.",
+    "update_trigger": "Owner chooses another reporting basis (explicit conversion only).",
+    "role": "exposure_or_value"
+   },
+   {
+    "id": "value_per_area",
+    "name": "value per area",
+    "raw_name": "value_per_area",
+    "value_text": "not set",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Four options documented (NSI fullrep, Hazus 7.0 Inventory TM, RSMeans, team values); none selected; scenario dollars withheld (D-FRE-23).",
+    "update_trigger": "A named replacement-cost source is adopted.",
+    "role": "open_seam_placeholder"
+   },
+   {
+    "id": "fresh_vs_coastal_gap",
+    "name": "fresh vs coastal gap",
+    "raw_name": "fresh_vs_coastal_gap",
+    "value_text": "not adjusted",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "FRE-S003",
+      "title": "FEMA Hazus flood depth-damage function library, Hazus 5.1 (as distributed in the CRAN hazus R package,…",
+      "link": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "FRE-S004",
+      "title": "U.S. Army Corps of Engineers (2015)",
+      "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Coastal reads below freshwater for the house and two to three times above for commercial and warehouse at 4 ft (pressure test §3); no uplift applied.",
+    "update_trigger": "NFIP claims comparison.",
+    "role": "open_seam_placeholder"
+   }
+  ],
+  "evidence_provenance": {
+   "kind": "register",
+   "sheets": [],
+   "sections": [],
+   "unmatched": [],
+   "sentence": null,
+   "dossier": null,
+   "workbook": null
+  },
+  "link_counts": {
+   "total": 13,
+   "linked": 12,
+   "locator_only": 1,
+   "neither": 0,
+   "markers": 0,
+   "placeholders": 0
+  },
+  "extraction": null,
+  "tier_words": {
+   "shape": "published",
+   "cost": "published"
+  }
+ },
  "build_findings": []
 }

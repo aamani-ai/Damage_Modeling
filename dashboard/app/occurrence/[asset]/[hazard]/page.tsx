@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { OccMark, TwinLead } from "@/components/marks";
+import { TwinLead } from "@/components/marks";
 import { Card, CardTitle, EmptyState, FileLink, Kv, Tag } from "@/components/ui";
 import { blobUrl, manifest, occurrence } from "@/lib/data";
 import { fmtUsdCompact, shortSha } from "@/lib/format";
@@ -30,11 +30,10 @@ export default async function OccurrencePage({ params }: { params: Promise<{ ass
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <Link href={`/assets/${o.asset.slug}`} className="text-[11px] text-muted-foreground hover:text-foreground">← {o.asset.label}</Link>
           <h2 className="text-[15px] font-semibold tracking-tight">Does it happen? — {o.title}</h2>
-          {o.entry ? <Tag><span className="font-mono">{o.entry.rail.exists.mark}</span> {o.entry.rail.exists.label}{o.entry.rail.exists.qualifier ? ` · ${o.entry.rail.exists.qualifier}` : ""}</Tag> : <Tag>no damage cell</Tag>}
-          <Tag>state <span className="font-mono">{o.state_overall === "not_searched" ? "?" : "·"}</span> {o.state_overall.replace(/_/g, " ")}</Tag>
-          <Tag>searched {o.last_searched ?? "never"}</Tag>
+          {o.entry ? <Tag>{o.entry.rail.exists.label.toLowerCase()}{o.entry.rail.exists.qualifier ? ` · ${o.entry.rail.exists.qualifier}` : ""}</Tag> : <Tag>no damage cell</Tag>}
+          <Tag title={`state ${o.state_overall === "not_searched" ? "?" : "·"} ${o.state_overall}`}>{o.state_overall === "not_searched" ? "Field reports: nobody has looked yet" : `Field reports: ${o.state_overall.replace(/_/g, " ")}`}</Tag>
+          <Tag>{o.last_searched ? `last searched ${o.last_searched}` : "never searched"}</Tag>
         </div>
-        <div className="mt-1 font-mono text-[10.5px] text-muted-foreground">register {o.register.path} · sha {shortSha(o.register.sha256)}{o.entry ? ` · ${o.entry.entry_id}` : ""}</div>
         <p className="mt-1 max-w-[1100px] text-[12.5px] leading-snug">{o.summary}</p>
       </div>
       <div className="mt-3 grid gap-3 lg:grid-cols-5">
@@ -46,10 +45,10 @@ export default async function OccurrencePage({ params }: { params: Promise<{ ass
               <tbody>
                 {o.buckets.map((b) => (
                   <tr key={b.key} className="border-t border-border/60 align-top">
-                    <td className="py-1.5 pr-2">{b.label}<span className="block font-mono text-[9.5px] text-muted-foreground">{b.key}</span></td>
+                    <td className="py-1.5 pr-2" title={`bucket key ${b.key}`}>{b.label}</td>
                     <td className="py-1.5 pr-2 text-right tabular">{b.value_usd != null ? fmtUsdCompact(b.value_usd) : "—"}</td>
                     <td className="py-1.5 pr-2"><TwinLead level={b.twin_lead?.level} />{b.twin_lead?.nodes.length ? <span className="block text-[10px] text-muted-foreground">{b.twin_lead.nodes.map((n) => `${n.name} — ${n.why}`).join("; ")}</span> : null}</td>
-                    <td className="py-1.5"><OccMark mark={b.mark} label={b.state} /> {b.sentence}</td>
+                    <td className="py-1.5">{b.sentence}</td>
                   </tr>
                 ))}
               </tbody>
@@ -75,7 +74,7 @@ export default async function OccurrencePage({ params }: { params: Promise<{ ass
             <Kv label="search log" value={o.search_log ? <FileLink href={blob(o.search_log)}>{o.search_log.split("/").slice(-1)[0]}</FileLink> : "—"} />
             <Kv label="register" value={<FileLink href={blob(o.register.path)}>{o.register.path.split("/").slice(-1)[0]}</FileLink>} />
             {o.entry ? <Kv label="curve cell" value={<Link href={`/cells/${o.entry.entry_id}`} className="text-accent hover:underline">{o.entry.title}</Link>} /> : <Kv label="curve cell" value={<span className="text-muted-foreground">none</span>} />}
-            {o.provenance ? <p className="mt-2 text-[10px] text-muted-foreground">twin leads from <span className="font-mono">{String((o.provenance.twin as Record<string, unknown>)?.file)}</span> at <span className="font-mono">{String((o.provenance.twin as Record<string, unknown>)?.commit)}</span> through Hazard&apos;s crosswalk sha <span className="font-mono">{String((o.provenance.crosswalk as Record<string, unknown>)?.sha256).slice(0, 7)}</span></p> : null}
+            {o.provenance ? <details className="mt-2 text-[10px] text-muted-foreground"><summary className="cursor-pointer hover:text-foreground">Provenance of the twin leads</summary><p className="mt-1">from <span className="font-mono">{String((o.provenance.twin as Record<string, unknown>)?.file)}</span> at <span className="font-mono">{String((o.provenance.twin as Record<string, unknown>)?.commit)}</span> through Hazard&apos;s crosswalk sha <span className="font-mono">{String((o.provenance.crosswalk as Record<string, unknown>)?.sha256).slice(0, 7)}</span></p></details> : null}
           </div>
         </Card>
         <Card className="lg:col-span-5">
@@ -93,6 +92,7 @@ export default async function OccurrencePage({ params }: { params: Promise<{ ass
           </div>
         </Card>
       </div>
+      <footer className="mt-4 border-t border-border pt-2 font-mono text-[10.5px] text-muted-foreground">register {o.register.path} · sha {shortSha(o.register.sha256)}{o.entry ? ` · ${o.entry.entry_id}` : ""}</footer>
     </div>
   );
 }

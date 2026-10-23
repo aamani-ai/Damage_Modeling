@@ -1,9 +1,9 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
-updated: 2026-10-20
+updated: 2026-10-21
 status: active
-scope: Decision register for the damage-curve dashboard plan (DCD-D*). D01–D12 are the owner's rulings on gates G1–G12 of the discussion node; D13–D16 record the owner's directions and the agent's engineering decisions inside them; D17 records the owner's acceptance of V0.
+scope: Decision register for the damage-curve dashboard plan (DCD-D*). D01–D12 are the owner's rulings on gates G1–G12 of the discussion node; D13–D16 record the owner's directions and the agent's engineering decisions inside them; D17 records the owner's acceptance of V0; D18–D19 iteration 2; D20–D25 the asset spine, the twin picture, the crosswalks, the FAQ and one branch; D26–D32 the rulings on G14–G19 that iteration 3 builds; D33–D34 the owner's review of iteration 3 on the running app.
 -->
 
 # Damage-curve dashboard — decisions
@@ -192,3 +192,201 @@ people can understand".)*
 this instrument is for (reason 2 and reason 10 in discussion `01`: a library of subsystems; Prashant's
 question). The information is unchanged; its order and its words are not.
 
+## DCD-D20 — The asset spine is the Digital Twin's taxonomy (G13)
+
+**Decision:** Category → type → profile, as the Digital Twin defines them: Power plants (Solar farm, Wind farm,
+Battery storage, Hybrid planned), Real estate (Residential, Commercial, Industrial, Institutional proposed), Grid
+infrastructure (Substation, transmission and distribution lines), and Digital infrastructure (data centres) as a
+future category. A real-estate building is a profile under its type, not a part; a plant's own substation is
+part of the plant. Below the profile sits the twin's tree (systems → equipment → components); a damage curve
+attaches to the part replaced and priced on its own. *(Divy, 2026-10-21: "Power plants and real estate are
+something parallel, just like grid infrastructure, just like a data center in the future"; discussion `08`
+G13, `09` §1.)*
+
+**Reason:** The house's own taxonomy, already used by Hazard; it puts every asset on one spine and fixes the
+real-estate page that listed buildings as parts.
+
+## DCD-D21 — The twin's 3D picture shows what each curve covers (G20)
+
+**Decision:** The dashboard carries a pinned copy of the Digital Twin's viewer and the models it uses, and colours
+every part by what the cell does with it: has a curve · changes the curve · in the value, no curve yet · reviewed,
+no direct damage. Words repeat every colour in the systems list. *(Ruled 2026-10-21: "agree on all"; `09` G20.)*
+
+**Reason:** It is what the working prototype does (`09` §2), and it makes coverage — and the inconsistency
+between cells — visible without reading files.
+
+## DCD-D22 — Commercial real estate is the office (G21)
+
+**Decision:** The office is the Commercial profile; the twin is asked for an office model; until it exists the
+Commercial picture is the twin's retail building with the note *picture: retail · curves: office*. *(Ruled
+2026-10-21; `09` G21.)*
+
+**Reason:** Hazard's reference profiles and four of the five real-estate cells use the office.
+
+## DCD-D23 — Crosswalks drafted here, co-owned with Hazard (G22)
+
+**Decision:** This repository drafts the twin node → value bucket → failure unit crosswalks for solar, wind and
+the three buildings, flags missing reference budgets, and hands them to Hazard to co-own, beside its battery and
+substation crosswalks. *(Ruled 2026-10-21; `09` G22.)*
+
+**Reason:** Unblocks the picture and the per-asset views; it is Hazard's own follow-up AS-F01.
+
+## DCD-D24 — The FAQ is one Markdown file rendered by the dashboard (G23)
+
+**Decision:** One Markdown FAQ in this repository, about fifteen questions in five sections, each answer short
+with one example and one *Read more* link checked by the build; edited by pull request; rendered as the
+dashboard's FAQ page. *(Ruled 2026-10-21; `09` G23 and §4.)*
+
+**Reason:** Reviewable, versioned with the curves, one text for every reader.
+
+## DCD-D25 — One dashboard branch, worked in one session
+
+**Decision:** All dashboard work lives on one branch, `dashboard` (PR #7's branch, renamed on 2026-10-21), and
+is done in the owner's session, not in spawned sessions. Duplicate branches and finished worktrees were removed
+the same day. The branch merges to `main` when the owner accepts a slice (`DCD-D10`). *(Divy, 2026-10-21: "For
+dashboard work, there should be a maximum of only one branch at this stage … I am not a fan of" spawned
+sessions.)*
+
+**Reason:** Two sessions built the same iteration on two branches; the owner wants one place to look and to
+iterate.
+
+## DCD-D26 — The top bar and the library follow the categories (G14)
+
+**Decision:** The top bar reads *Library · Power plants ▾ · Real estate ▾ · Grid infrastructure ▾ · Review*, each
+category opening its types, drawn from the manifest's spine so no asset is named in UI code (`P17`). The library
+groups its rows under the category headings, one row per type; real estate has one row per type, each tile opening
+the shared real-estate cell at that type's building (`?building=`) and naming the building. An asset page exists
+per type; a category whose types share one cell per hazard (real estate) gets an index page. *(Divy, 2026-10-21:
+"Take G14–G18 as recommended"; discussion `08` G14 (a).)*
+
+**Reason:** A reader looks for "a warehouse in a flood". The cell stays the unit that is versioned and released;
+the footer names it.
+
+## DCD-D27 — A cell page shows the curve first, then four steps, then a footer for Hazard (G15)
+
+**Decision:** The cell page opens on the curve and, beside it, *Why we believe it*: the cell's main logic in two to
+four sentences, how sure in words, the main references and the field reports. Then what the curve covers on the
+twin (`DCD-D21`). Then *How this curve was made* in four steps — what it covers · how damage is worked out · where
+the numbers come from · has it been checked — each opening a side panel that holds its old steps with their
+Details. Files, outputs, known answers and pins sit in a *For Hazard* footer. No ■ ◧ ▢ marks: a step with nothing
+behind it says "not written yet". The build writes the main logic and the four facts. *(Ruled 2026-10-21, "as
+recommended"; `08` G15 (a).)*
+
+**Reason:** Divy's "main logic, main reference" first (2026-10-19); the framework stays visible (`DCD-D14`) and every
+ledger fact stays one control away (`DCD-D19`). Known answers prove the code computes the curve as written, not that
+the curve is right, so they are for Hazard, not the reader's steps.
+
+## DCD-D28 — Evidence strength is said in words; codes behind a control (G16)
+
+**Decision:** The four grades are *field-calibrated* (T1), *published* (T2), *borrowed* (T3) and *our judgment* (T4).
+Tiles and chips carry one word, the weaker half's; the hover and the caption name both halves — *how damage rises*
+and *how it becomes dollars* — with where each comes from. Every tier code in a catalogue sentence is rewritten in
+words for the default view; the codes stay under *Show the numbers* and in the ledgers. *(Ruled 2026-10-21, "as
+recommended"; `08` G16 (a).)*
+
+**Reason:** "What is this T1/T2?" — a reader asks how sure and why, and the source in words answers both. *Published*
+fits all nine T2 rows (FEMA Hazus tables and lab tests are both published); *borrowed* is the catalogue's own word
+for T3; the twin's own depth tiers, where a higher number is better, never appear here.
+
+## DCD-D29 — One Review page, about curves (G17)
+
+**Decision:** *Review* is one page about curves only, grouped by category and cell: who has read the cell and when,
+whether field reports were searched, and what is open for its owner, written as tasks (sources to link, IDs to
+match, Hazard paths moved or not on Hazard's main, twin parts to confirm). The iteration walkthrough (`/v0`) left
+the app; the dashboard's own development lives in the pull request and this plan. *(Ruled 2026-10-21, "as
+recommended"; `08` G17 (a).)*
+
+**Reason:** One meaning of "review", in one place: the dashboard describes curves, the pull request describes the
+dashboard.
+
+## DCD-D30 — The dashboard is built from main (G18)
+
+**Decision:** The data build reads this repository through an export of `origin/main` by default
+(`--source main`), and Hazard's files and links on Hazard's `origin/main`, through git and never its working
+tree. A Hazard path not on Hazard's main shows *on a Hazard branch, not on its main yet* with no link, or the new
+place when Hazard moved it into an `_archive/` folder, and becomes a task on the Review page; a data check lists
+them. `--source worktree` builds a labelled preview: every page says *preview of branch X, not main*. While a
+dashboard slice is on its branch, the branch carries preview data; the data on `main` is rebuilt from `main` when
+the branch merges. *(Ruled 2026-10-21, "as recommended"; `08` G18 (a). The branch-preview data is the one
+adaptation: this iteration's crosswalks and FAQ exist only on the branch until it merges, so a build from `main`
+cannot show them yet, and the build says so instead of building.)*
+
+**Reason:** "What the dashboard shows" equals "what is merged", in both repositories, on any machine — the Hazard
+checkout here sits on a feature branch with uncommitted work.
+
+## DCD-D31 — No build date on any page (G19, the date)
+
+**Decision:** The build date leaves the header, the library and every footer. The receipt keeps the date for the
+record. *(Divy, 2026-10-21: "You don't need a build date or things like those"; `08` G19.)* *Completed the same day
+by `DCD-D32`, which moved what a page was built from behind one link.*
+
+**Reason:** It costs a reader nothing and was "weird" on a page about curves.
+
+## DCD-D32 — Builder information behind one *About this data* link (G19, the rest)
+
+**Decision:** No page carries builder information in its default view. The *internal* chip leaves the header; the
+build-check chips leave the library title; the *built from* lines leave every footer. One link, *About this data*, in
+every page's footer opens a page with what the dashboard was built from (this repository's commit, Hazard's main, the
+Digital Twin's pin), every build check with its summary, and the receipt; the failing checks' items keep reaching the
+cells' owners on the Review page (`DCD-D29`). The preview banner of `DCD-D30` stays: a branch must say it is not main.
+*(Ruled 2026-10-21: "Take the rest of G19 as recommended: drop the internal chip, and move the build checks and
+builder lines behind one About this data link"; `08` G19 (a).)*
+
+**Reason:** It costs a reader nothing; the dashboard is internal while it runs locally, and the client surface is the
+one-pager (`DCD-D08`).
+
+## DCD-D33 — How the curve was made comes first, in four named steps with their key items (the owner's review of iteration 3)
+
+**Decision:** On the cell page, *How this curve was made* sits above the curve. Its four steps are *What it covers ·
+How it was derived · Where the numbers come from · Has it been checked*. Each box carries its key items as chips, which
+the build writes from the same files as the step's panel:
+
+- *What it covers*: the parts with a curve, the variants, the share of the value and the parts without a curve yet.
+- *How it was derived*: the hazard measure and its unit, the curve's form, the number of curves, and *why this shape*.
+- *Where the numbers come from*: how sure in one word, the key references and how many sources are linked.
+- *Has it been checked*: the outside checks by name, the field reports and who has read the entry.
+
+The *How it was derived* panel opens with *Why this shape*. It gives the cell's own reason for the form, the form
+adopted, the alternatives the cell turned down, and the reasoning of the parameter that sets the shape. When the curve
+builds on another cell, it also gives that cell's reason and names the cell. The main logic gives the reason in one
+sentence. All 21 cells with a curve give a reason in the panel, and 17 also give it in the main logic. This amends the
+order in `DCD-D27`, which put the curve first.
+
+*(The owner's review of the running iteration 3, 2026-10-21, given with three screenshots and notes. The notes: "The
+placement of this is a bit weird, given how this curve was made. It should be on top of the curve itself." Divy: "Is
+it possible to have some highlighting, stick things, or chips? … if someone is reviewing this at a high level, they
+might want that summary … Same with other sections as well." On the names: "What it covered / How it was derived /
+Where the numbers come from / It's been checked … find what you can name it there correctly." And: "we had a reason
+to go over why the S curve and stuff like that are there. Those kinds of things should be there, no?")*
+
+**Reason:** A reviewer reads how a curve was made before reading the curve, and the chips give that summary without a
+click. Every earlier fact stays one control away in the panels (`DCD-D19`). The names follow the owner's suggestion
+with two adjustments. *What it covers* is in the present tense, like the other three. *Has it been checked* stays a
+question because 11 of the 21 cells have no outside check yet, and *It's been checked* would claim one. The reasons
+for the shape were in the cells' files all along, in three places: the derivation rationale, the parameter table, and
+the cell a curve builds on. No page showed them.
+
+## DCD-D34 — The coverage picture gets the twin's tools, a full-screen view and each part's curve beside it (the owner's review of iteration 3)
+
+**Decision:** The 3D picture carries the Digital Twin's own tools: *Focus*, *Isolate*, *Fade others*, *Explode*, *See
+inside* and *Reset*. It also has a *Full screen* view, which Esc closes and in which the wheel always zooms.
+
+- Choosing a part or a system, in the list or in the table, highlights it and keeps the whole model in view. *Focus*
+  zooms in when asked.
+- Beside each part that has a curve, the list shows a miniature of the curve and a link to it. On a cell page, the
+  link goes to the curve above.
+- The picture and the list end level.
+- In the systems × hazards table, every row name and every cell is a button. Clicking one picks the hazard and
+  selects the system in the picture above. The curve parts link to their curves, and `?sel=` carries the selection
+  in the URL.
+
+*(The owner's review of the running iteration 3, 2026-10-21. The notes: "The map should also have that expand and
+those kinds of things. Right now, it is broken. I don't know why. Take a look at that." — "I think here itself, you can
+also attach a curve process alongside each, right?" — "Make sure there is no gap in here. Both the left and right sides
+need to match." Divy, on the solar table: "if you click … on this thing, I think that should be clickable, isn't
+it?")*
+
+**Reason:** In a headless check, every type's block and plant views load with no errors. What looked broken is that
+choosing a system zoomed onto its nearest single instance, one module out of thousands, so the model seemed to vanish.
+The tools are the ones the twin's own app offers, used through the viewer's `setModes`. The miniature makes *has a
+curve* show the curve itself, not only a colour.

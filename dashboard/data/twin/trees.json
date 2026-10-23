@@ -1,0 +1,2137 @@
+{
+ "schema": "damage_dashboard_twin_trees.v1",
+ "twin_repo": "aamani-ai/infrasure-digital-twin",
+ "twin_commit": "d01abd03cb101ecbe05468a5d573b50f90efd8fb",
+ "twin_dirty": false,
+ "assets": {
+  "solar": {
+   "name": "Sample Solar Asset",
+   "category": "power",
+   "model": "pv-tracker",
+   "root": "pvrow",
+   "plant_model": "solar-plant",
+   "plant_root": "pplant",
+   "plant_name": "Solar Plant",
+   "nodes": {
+    "pvrow": {
+     "n": "Tracker Block"
+    },
+    "sys_pv": {
+     "n": "PV Array",
+     "p": "pvrow"
+    },
+    "pv_module": {
+     "n": "PV Module",
+     "p": "sys_pv"
+    },
+    "pv_fglass": {
+     "n": "Front Glass",
+     "p": "pv_module"
+    },
+    "pv_encap": {
+     "n": "Encapsulant",
+     "p": "pv_module"
+    },
+    "pv_cells": {
+     "n": "Cell Matrix",
+     "p": "pv_module"
+    },
+    "pv_rglass": {
+     "n": "Rear Glass",
+     "p": "pv_module"
+    },
+    "pv_frame": {
+     "n": "Frame",
+     "p": "pv_module"
+    },
+    "pv_jbox": {
+     "n": "Junction Boxes",
+     "p": "pv_module"
+    },
+    "pv_leads": {
+     "n": "Leads & Connectors",
+     "p": "pv_module"
+    },
+    "pv_harness": {
+     "n": "DC Harness",
+     "p": "sys_pv"
+    },
+    "hn_cable": {
+     "n": "String Cable",
+     "p": "pv_harness"
+    },
+    "hn_clip": {
+     "n": "Wire Management Clips",
+     "p": "pv_harness"
+    },
+    "sys_trk": {
+     "n": "Tracker Structure",
+     "p": "pvrow"
+    },
+    "tt": {
+     "n": "Torque Tube",
+     "p": "sys_trk"
+    },
+    "tt_tube": {
+     "n": "Tube Sections",
+     "p": "tt"
+    },
+    "tt_splice": {
+     "n": "Splice Couplers",
+     "p": "tt"
+    },
+    "mt": {
+     "n": "Module Mounting",
+     "p": "sys_trk"
+    },
+    "mt_rail": {
+     "n": "Module Rails",
+     "p": "mt"
+    },
+    "mt_clamp": {
+     "n": "Tube Clamps",
+     "p": "mt"
+    },
+    "br": {
+     "n": "Bearing Assemblies",
+     "p": "sys_trk"
+    },
+    "br_housing": {
+     "n": "Bearing Housing",
+     "p": "br"
+    },
+    "br_bushing": {
+     "n": "Polymer Bushing",
+     "p": "br"
+    },
+    "fd": {
+     "n": "Driven Piles",
+     "p": "sys_trk"
+    },
+    "sys_drv": {
+     "n": "Drive & Control",
+     "p": "pvrow"
+    },
+    "dr_slewdrive": {
+     "n": "Slew Drive",
+     "p": "sys_drv"
+    },
+    "sd_gear": {
+     "n": "Slewing Gear",
+     "p": "dr_slewdrive"
+    },
+    "sd_motor": {
+     "n": "Drive Motor",
+     "p": "dr_slewdrive"
+    },
+    "dr_damper": {
+     "n": "Dampers",
+     "p": "sys_drv"
+    },
+    "ct": {
+     "n": "Tracker Controller",
+     "p": "sys_drv"
+    },
+    "ct_tcu": {
+     "n": "Controller Enclosure",
+     "p": "ct"
+    },
+    "ct_power": {
+     "n": "Self-Power Module",
+     "p": "ct"
+    },
+    "ct_incl": {
+     "n": "Inclinometer",
+     "p": "ct"
+    },
+    "sys_coll": {
+     "n": "Electrical Collection",
+     "p": "pvrow"
+    },
+    "cb": {
+     "n": "Combiner Box",
+     "p": "sys_coll"
+    },
+    "cb_enc": {
+     "n": "Enclosure & Post",
+     "p": "cb"
+    },
+    "cb_fuse": {
+     "n": "String Fuses",
+     "p": "cb"
+    },
+    "cb_disc": {
+     "n": "Load-Break Disconnect",
+     "p": "cb"
+    },
+    "cb_spd": {
+     "n": "Surge Protection",
+     "p": "cb"
+    },
+    "dc_feeder": {
+     "n": "DC Feeders",
+     "p": "sys_coll"
+    },
+    "mv_cable": {
+     "n": "MV Collection Cable",
+     "p": "sys_coll"
+    },
+    "sys_pcs": {
+     "n": "Power Conversion",
+     "p": "pvrow"
+    },
+    "inv": {
+     "n": "Central Inverter",
+     "p": "sys_pcs"
+    },
+    "inv_cab": {
+     "n": "Power Stack Cabinet",
+     "p": "inv"
+    },
+    "inv_dc": {
+     "n": "DC Input Section",
+     "p": "inv"
+    },
+    "inv_cool": {
+     "n": "Cooling & Filters",
+     "p": "inv"
+    },
+    "mvt": {
+     "n": "MV Transformer",
+     "p": "sys_pcs"
+    },
+    "mvt_tank": {
+     "n": "Tank & Core/Coil",
+     "p": "mvt"
+    },
+    "mvt_rad": {
+     "n": "Radiators",
+     "p": "mvt"
+    },
+    "mvt_bush": {
+     "n": "Bushings & Arresters",
+     "p": "mvt"
+    },
+    "mvt_bund": {
+     "n": "Oil Containment",
+     "p": "mvt"
+    },
+    "rmu": {
+     "n": "MV Switchgear (RMU)",
+     "p": "sys_pcs"
+    },
+    "aux": {
+     "n": "Auxiliary Supply",
+     "p": "sys_pcs"
+    },
+    "sk_base": {
+     "n": "Skid & Piers",
+     "p": "sys_pcs"
+    },
+    "ac_bus": {
+     "n": "LV Bus Duct",
+     "p": "sys_pcs"
+    },
+    "hv_leads": {
+     "n": "HV Cable Leads",
+     "p": "sys_pcs"
+    },
+    "sys_ground": {
+     "n": "Grounding",
+     "p": "pvrow"
+    },
+    "gr_cond": {
+     "n": "Ground Conductor",
+     "p": "sys_ground"
+    },
+    "gr_rods": {
+     "n": "Ground Rods",
+     "p": "sys_ground"
+    },
+    "gr_jumper": {
+     "n": "Bonding Jumpers",
+     "p": "sys_ground"
+    },
+    "sys_scada": {
+     "n": "Monitoring & SCADA",
+     "p": "pvrow"
+    },
+    "wx": {
+     "n": "Met Station",
+     "p": "sys_scada"
+    },
+    "me_pyr": {
+     "n": "Pyranometers",
+     "p": "wx"
+    },
+    "me_wind": {
+     "n": "Anemometer",
+     "p": "wx"
+    },
+    "me_logger": {
+     "n": "Data Logger",
+     "p": "wx"
+    },
+    "scada_cab": {
+     "n": "SCADA / PPC Cabinet",
+     "p": "sys_scada"
+    },
+    "scada_fiber": {
+     "n": "Fiber Network",
+     "p": "sys_scada"
+    },
+    "sys_pcivil": {
+     "n": "Civil",
+     "p": "pvrow"
+    },
+    "pr_road": {
+     "n": "Access Road",
+     "p": "sys_pcivil"
+    },
+    "pr_fence": {
+     "n": "Perimeter Fence",
+     "p": "sys_pcivil"
+    },
+    "ao_berm": {
+     "n": "Flood Berm & Drainage",
+     "p": "sys_pcivil"
+    },
+    "ao_firebreak": {
+     "n": "Firebreak & Irrigated Buffer",
+     "p": "sys_pcivil"
+    },
+    "ao_hailnet": {
+     "n": "Hail Netting",
+     "p": "sys_pcivil"
+    }
+   },
+   "plant_nodes": {
+    "pplant": {
+     "n": "Solar Plant"
+    },
+    "pp_array": {
+     "n": "PV Blocks",
+     "p": "pplant"
+    },
+    "pp_arrays": {
+     "n": "Tracker Arrays",
+     "p": "pp_array"
+    },
+    "pp_skids": {
+     "n": "MV Power Stations",
+     "p": "pp_array"
+    },
+    "pp_coll": {
+     "n": "Collection & Civil",
+     "p": "pplant"
+    },
+    "pp_feeders": {
+     "n": "34.5 kV Feeders",
+     "p": "pp_coll"
+    },
+    "pp_roads": {
+     "n": "Access Roads",
+     "p": "pp_coll"
+    },
+    "pp_fence": {
+     "n": "Perimeter Fence",
+     "p": "pp_coll"
+    },
+    "ssub_floodwall": {
+     "n": "Substation Flood Wall",
+     "p": "pp_coll"
+    },
+    "ssys_sub": {
+     "n": "Substation & Interconnection",
+     "p": "pplant"
+    },
+    "ssub": {
+     "n": "Collector Substation",
+     "p": "ssys_sub"
+    },
+    "ssub_mpt": {
+     "n": "Main Power Transformer",
+     "p": "ssub"
+    },
+    "ssub_bkr": {
+     "n": "HV Circuit Breakers",
+     "p": "ssub"
+    },
+    "ssub_disc": {
+     "n": "Disconnect Switches",
+     "p": "ssub"
+    },
+    "ssub_meter": {
+     "n": "Revenue Metering",
+     "p": "ssub"
+    },
+    "ssub_mvbus": {
+     "n": "34.5 kV Switchgear",
+     "p": "ssub"
+    },
+    "ssub_bus": {
+     "n": "HV Bus & Dead-End Gantry",
+     "p": "ssub"
+    },
+    "ssub_house": {
+     "n": "Control House",
+     "p": "ssub"
+    },
+    "ssub_lm": {
+     "n": "Lightning Masts",
+     "p": "ssub"
+    },
+    "ssub_grid": {
+     "n": "Ground Grid",
+     "p": "ssub"
+    },
+    "ssub_yard": {
+     "n": "Yard & Fence",
+     "p": "ssub"
+    },
+    "ssub_spare": {
+     "n": "Spare Main Power Transformer",
+     "p": "ssub"
+    },
+    "sgt": {
+     "n": "Gen-Tie Line",
+     "p": "ssys_sub"
+    },
+    "sgt_struct": {
+     "n": "H-Frame Structures",
+     "p": "sgt"
+    },
+    "sgt_cond": {
+     "n": "Conductors & Shield Wire",
+     "p": "sgt"
+    },
+    "spoi": {
+     "n": "POI Switchyard",
+     "p": "ssys_sub"
+    },
+    "spoi_lines": {
+     "n": "Network Lines",
+     "p": "spoi"
+    },
+    "spoi_bkr": {
+     "n": "Ring Bus Breakers",
+     "p": "spoi"
+    },
+    "spoi_bus": {
+     "n": "Bus & Line Gantries",
+     "p": "spoi"
+    },
+    "spoi_ctrl": {
+     "n": "Control House",
+     "p": "spoi"
+    },
+    "spoi_yard": {
+     "n": "Yard & Fence",
+     "p": "spoi"
+    }
+   }
+  },
+  "wind": {
+   "name": "Sample Wind Asset",
+   "category": "power",
+   "model": "wind-turbine",
+   "root": "wtg",
+   "plant_model": "wind-farm",
+   "plant_root": "wfarm",
+   "plant_name": "Wind Farm",
+   "nodes": {
+    "wtg": {
+     "n": "Wind Turbine"
+    },
+    "sys_rotor": {
+     "n": "Rotor",
+     "p": "wtg"
+    },
+    "hub": {
+     "n": "Hub",
+     "p": "sys_rotor"
+    },
+    "hb_casting": {
+     "n": "Hub Casting",
+     "p": "hub"
+    },
+    "hb_spinner": {
+     "n": "Spinner",
+     "p": "hub"
+    },
+    "pitch": {
+     "n": "Pitch System",
+     "p": "sys_rotor"
+    },
+    "pt_bearing": {
+     "n": "Pitch Bearings",
+     "p": "pitch"
+    },
+    "pt_drive": {
+     "n": "Pitch Drives",
+     "p": "pitch"
+    },
+    "pt_cabinet": {
+     "n": "Pitch Cabinets",
+     "p": "pitch"
+    },
+    "pt_backup": {
+     "n": "Backup Power",
+     "p": "pitch"
+    },
+    "blade": {
+     "n": "Blades",
+     "p": "sys_rotor"
+    },
+    "bl_root": {
+     "n": "Root Section",
+     "p": "blade"
+    },
+    "bl_bolts": {
+     "n": "Root Bolts",
+     "p": "blade"
+    },
+    "bl_shell": {
+     "n": "Blade Shell",
+     "p": "blade"
+    },
+    "bl_spar": {
+     "n": "Spar Caps",
+     "p": "blade"
+    },
+    "bl_web": {
+     "n": "Shear Webs",
+     "p": "blade"
+    },
+    "bl_lep": {
+     "n": "Leading-Edge Protection",
+     "p": "blade"
+    },
+    "lps": {
+     "n": "Lightning Protection",
+     "p": "sys_rotor"
+    },
+    "lp_receptor": {
+     "n": "Receptors",
+     "p": "lps"
+    },
+    "lp_band": {
+     "n": "Root Band",
+     "p": "lps"
+    },
+    "lp_transfer": {
+     "n": "Transfer Unit",
+     "p": "lps"
+    },
+    "lp_air": {
+     "n": "Nacelle Air Terminal",
+     "p": "lps"
+    },
+    "lp_conductor": {
+     "n": "Down Conductor",
+     "p": "lps"
+    },
+    "ao_bladeheat": {
+     "n": "Blade Heating",
+     "p": "sys_rotor"
+    },
+    "sys_dt": {
+     "n": "Drivetrain",
+     "p": "wtg"
+    },
+    "shaft": {
+     "n": "Main Shaft",
+     "p": "sys_dt"
+    },
+    "ms_shaft": {
+     "n": "Shaft & Flange",
+     "p": "shaft"
+    },
+    "ms_lock": {
+     "n": "Rotor Lock",
+     "p": "shaft"
+    },
+    "mainbrg": {
+     "n": "Main Bearing",
+     "p": "sys_dt"
+    },
+    "mb_housing": {
+     "n": "Bearing Housing",
+     "p": "mainbrg"
+    },
+    "mb_bearing": {
+     "n": "Spherical Roller Bearing",
+     "p": "mainbrg"
+    },
+    "gearbox": {
+     "n": "Gearbox",
+     "p": "sys_dt"
+    },
+    "gb_planet": {
+     "n": "Planetary Stage",
+     "p": "gearbox"
+    },
+    "gb_parallel": {
+     "n": "Parallel Stages",
+     "p": "gearbox"
+    },
+    "gb_arms": {
+     "n": "Torque Arms",
+     "p": "gearbox"
+    },
+    "gb_lube": {
+     "n": "Lubrication System",
+     "p": "gearbox"
+    },
+    "hss": {
+     "n": "HS Coupling & Brake",
+     "p": "sys_dt"
+    },
+    "hs_coupling": {
+     "n": "Coupling",
+     "p": "hss"
+    },
+    "hs_disc": {
+     "n": "Brake Disc",
+     "p": "hss"
+    },
+    "hs_caliper": {
+     "n": "Brake Caliper",
+     "p": "hss"
+    },
+    "gen": {
+     "n": "Generator (DFIG)",
+     "p": "sys_dt"
+    },
+    "gn_stator": {
+     "n": "Stator & Rotor",
+     "p": "gen"
+    },
+    "gn_slip": {
+     "n": "Slip Ring Unit",
+     "p": "gen"
+    },
+    "gn_cooler": {
+     "n": "Generator Cooler",
+     "p": "gen"
+    },
+    "sys_yaw": {
+     "n": "Yaw System",
+     "p": "wtg"
+    },
+    "yawbrg": {
+     "n": "Yaw Bearing",
+     "p": "sys_yaw"
+    },
+    "yawdrv": {
+     "n": "Yaw Drives",
+     "p": "sys_yaw"
+    },
+    "yawbrk": {
+     "n": "Yaw Brakes",
+     "p": "sys_yaw"
+    },
+    "yb_disc": {
+     "n": "Brake Disc",
+     "p": "yawbrk"
+    },
+    "yb_caliper": {
+     "n": "Calipers",
+     "p": "yawbrk"
+    },
+    "sys_struct": {
+     "n": "Nacelle Structure",
+     "p": "wtg"
+    },
+    "bedplate": {
+     "n": "Bedplate",
+     "p": "sys_struct"
+    },
+    "rearframe": {
+     "n": "Rear Frame",
+     "p": "sys_struct"
+    },
+    "cover": {
+     "n": "Nacelle Cover",
+     "p": "sys_struct"
+    },
+    "crane": {
+     "n": "Service Crane",
+     "p": "sys_struct"
+    },
+    "sys_aux": {
+     "n": "Nacelle Electrical & Auxiliary",
+     "p": "wtg"
+    },
+    "converter": {
+     "n": "Converter",
+     "p": "sys_aux"
+    },
+    "controller": {
+     "n": "Nacelle Controller",
+     "p": "sys_aux"
+    },
+    "cooling": {
+     "n": "Top Cooler",
+     "p": "sys_aux"
+    },
+    "hydraulic": {
+     "n": "Hydraulic Unit",
+     "p": "sys_aux"
+    },
+    "met": {
+     "n": "Met Sensors",
+     "p": "sys_aux"
+    },
+    "me_anemo": {
+     "n": "Anemometer",
+     "p": "met"
+    },
+    "me_vane": {
+     "n": "Wind Vane",
+     "p": "met"
+    },
+    "nc_cables": {
+     "n": "Nacelle Power Cables",
+     "p": "sys_aux"
+    },
+    "ao_wfire": {
+     "n": "Fire Suppression",
+     "p": "sys_aux"
+    },
+    "sys_tower": {
+     "n": "Tower",
+     "p": "wtg"
+    },
+    "tower": {
+     "n": "Tower Structure",
+     "p": "sys_tower"
+    },
+    "tw_shell": {
+     "n": "Tower Sections",
+     "p": "tower"
+    },
+    "tw_flange": {
+     "n": "Flanges & Bolts",
+     "p": "tower"
+    },
+    "tw_access": {
+     "n": "Access & Internals",
+     "p": "sys_tower"
+    },
+    "tw_platform": {
+     "n": "Platforms",
+     "p": "tw_access"
+    },
+    "tw_ladder": {
+     "n": "Ladder & Fall Arrest",
+     "p": "tw_access"
+    },
+    "tw_lift": {
+     "n": "Service Lift",
+     "p": "tw_access"
+    },
+    "tw_door": {
+     "n": "Door & Entrance Stairs",
+     "p": "tw_access"
+    },
+    "tw_cable": {
+     "n": "Power & Control Cables",
+     "p": "sys_tower"
+    },
+    "sys_fnd": {
+     "n": "Foundation",
+     "p": "wtg"
+    },
+    "foundation": {
+     "n": "Gravity Foundation",
+     "p": "sys_fnd"
+    },
+    "fd_footing": {
+     "n": "Footing Slab",
+     "p": "foundation"
+    },
+    "fd_pedestal": {
+     "n": "Pedestal",
+     "p": "foundation"
+    },
+    "fd_anchor": {
+     "n": "Anchor Bolt Cage",
+     "p": "foundation"
+    },
+    "fd_grout": {
+     "n": "Grout Layer",
+     "p": "foundation"
+    },
+    "sys_bop": {
+     "n": "Electrical Infrastructure",
+     "p": "wtg"
+    },
+    "padmount": {
+     "n": "Pad-Mount Transformer",
+     "p": "sys_bop"
+    },
+    "pm_tank": {
+     "n": "Tank & Core/Coil",
+     "p": "padmount"
+    },
+    "pm_rad": {
+     "n": "Radiators",
+     "p": "padmount"
+    },
+    "pm_cab": {
+     "n": "Termination Cabinet",
+     "p": "padmount"
+    },
+    "pm_pad": {
+     "n": "Pad & Containment",
+     "p": "padmount"
+    },
+    "el_basecab": {
+     "n": "Base Switchgear & Control",
+     "p": "sys_bop"
+    },
+    "el_cables": {
+     "n": "Cables",
+     "p": "sys_bop"
+    },
+    "el_lv": {
+     "n": "LV Cables",
+     "p": "el_cables"
+    },
+    "el_mv": {
+     "n": "MV Collection Cable",
+     "p": "el_cables"
+    },
+    "el_ground": {
+     "n": "Grounding System",
+     "p": "sys_bop"
+    },
+    "gd_ring": {
+     "n": "Ring Electrode",
+     "p": "el_ground"
+    },
+    "gd_rods": {
+     "n": "Ground Rods",
+     "p": "el_ground"
+    },
+    "sys_wcivil": {
+     "n": "Civil",
+     "p": "wtg"
+    },
+    "cv_cranepad": {
+     "n": "Crane Pad",
+     "p": "sys_wcivil"
+    },
+    "cv_road": {
+     "n": "Access Road",
+     "p": "sys_wcivil"
+    }
+   },
+   "plant_nodes": {
+    "wfarm": {
+     "n": "Wind Farm"
+    },
+    "wf_array": {
+     "n": "Turbine Array",
+     "p": "wfarm"
+    },
+    "wf_wtg": {
+     "n": "Wind Turbines",
+     "p": "wf_array"
+    },
+    "wf_pads": {
+     "n": "Pad-Mount Transformers",
+     "p": "wf_array"
+    },
+    "wf_coll": {
+     "n": "Collection System",
+     "p": "wfarm"
+    },
+    "wf_feeders": {
+     "n": "34.5 kV Feeders",
+     "p": "wf_coll"
+    },
+    "wf_roads": {
+     "n": "Access Roads",
+     "p": "wf_coll"
+    },
+    "wsys_sub": {
+     "n": "Substation & Interconnection",
+     "p": "wfarm"
+    },
+    "wsub": {
+     "n": "Collector Substation",
+     "p": "wsys_sub"
+    },
+    "wsub_mpt": {
+     "n": "Main Power Transformer",
+     "p": "wsub"
+    },
+    "wsub_bkr": {
+     "n": "HV Circuit Breakers",
+     "p": "wsub"
+    },
+    "wsub_disc": {
+     "n": "Disconnect Switches",
+     "p": "wsub"
+    },
+    "wsub_meter": {
+     "n": "Revenue Metering",
+     "p": "wsub"
+    },
+    "wsub_mvbus": {
+     "n": "34.5 kV Switchgear",
+     "p": "wsub"
+    },
+    "wsub_bus": {
+     "n": "HV Bus & Dead-End Gantry",
+     "p": "wsub"
+    },
+    "wsub_house": {
+     "n": "Control House",
+     "p": "wsub"
+    },
+    "wsub_lm": {
+     "n": "Lightning Masts",
+     "p": "wsub"
+    },
+    "wsub_grid": {
+     "n": "Ground Grid",
+     "p": "wsub"
+    },
+    "wsub_yard": {
+     "n": "Yard & Fence",
+     "p": "wsub"
+    },
+    "wsub_spare": {
+     "n": "Spare Main Power Transformer",
+     "p": "wsub"
+    },
+    "wgt": {
+     "n": "Gen-Tie Line",
+     "p": "wsys_sub"
+    },
+    "wgt_struct": {
+     "n": "H-Frame Structures",
+     "p": "wgt"
+    },
+    "wgt_cond": {
+     "n": "Conductors & Shield Wire",
+     "p": "wgt"
+    },
+    "wpoi": {
+     "n": "POI Switchyard",
+     "p": "wsys_sub"
+    },
+    "wpoi_lines": {
+     "n": "Network Lines",
+     "p": "wpoi"
+    },
+    "wpoi_bkr": {
+     "n": "Ring Bus Breakers",
+     "p": "wpoi"
+    },
+    "wpoi_bus": {
+     "n": "Bus & Line Gantries",
+     "p": "wpoi"
+    },
+    "wpoi_ctrl": {
+     "n": "Control House",
+     "p": "wpoi"
+    },
+    "wpoi_yard": {
+     "n": "Yard & Fence",
+     "p": "wpoi"
+    }
+   }
+  },
+  "bess": {
+   "name": "Sample BESS Asset",
+   "category": "power",
+   "model": "bess-block",
+   "root": "bblock",
+   "plant_model": "bess-plant",
+   "plant_root": "bplant",
+   "plant_name": "BESS Plant",
+   "nodes": {
+    "bblock": {
+     "n": "BESS Block"
+    },
+    "sys_be": {
+     "n": "Battery System",
+     "p": "bblock"
+    },
+    "ao_deluge": {
+     "n": "Water-Based Suppression",
+     "p": "sys_be"
+    },
+    "benc": {
+     "n": "Battery Enclosures",
+     "p": "sys_be"
+    },
+    "be_enc": {
+     "n": "Enclosure Shell",
+     "p": "benc"
+    },
+    "be_modules": {
+     "n": "Battery Modules",
+     "p": "benc"
+    },
+    "be_racks": {
+     "n": "Racks",
+     "p": "benc"
+    },
+    "be_bms": {
+     "n": "Battery Management System",
+     "p": "benc"
+    },
+    "be_dccab": {
+     "n": "DC Combiner & Disconnect",
+     "p": "benc"
+    },
+    "bthermal": {
+     "n": "Thermal Management",
+     "p": "sys_be"
+    },
+    "be_hvac": {
+     "n": "Chiller & Liquid Loop",
+     "p": "bthermal"
+    },
+    "bsafety": {
+     "n": "Fire & Explosion Safety",
+     "p": "sys_be"
+    },
+    "be_fire": {
+     "n": "Fire & Gas Detection",
+     "p": "bsafety"
+    },
+    "be_vent": {
+     "n": "Explosion Venting",
+     "p": "bsafety"
+    },
+    "sys_bp": {
+     "n": "Power Conversion",
+     "p": "bblock"
+    },
+    "bp_pcs": {
+     "n": "Bidirectional PCS",
+     "p": "sys_bp"
+    },
+    "bp_mvt": {
+     "n": "MV Transformer",
+     "p": "sys_bp"
+    },
+    "bp_rmu": {
+     "n": "MV Switchgear (RMU)",
+     "p": "sys_bp"
+    },
+    "bp_aux": {
+     "n": "Auxiliary Supply",
+     "p": "sys_bp"
+    },
+    "bp_skid": {
+     "n": "Skid & Piers",
+     "p": "sys_bp"
+    },
+    "sys_bc": {
+     "n": "Cabling",
+     "p": "bblock"
+    },
+    "bc_dc": {
+     "n": "DC Cables",
+     "p": "sys_bc"
+    },
+    "bc_mv": {
+     "n": "MV Cable",
+     "p": "sys_bc"
+    },
+    "sys_bk": {
+     "n": "Controls",
+     "p": "bblock"
+    },
+    "bk_ems": {
+     "n": "EMS / Plant Controller",
+     "p": "sys_bk"
+    },
+    "bk_fiber": {
+     "n": "Control Network",
+     "p": "sys_bk"
+    },
+    "sys_bg": {
+     "n": "Grounding",
+     "p": "bblock"
+    },
+    "bg_grid": {
+     "n": "Ground Grid",
+     "p": "sys_bg"
+    },
+    "sys_bv": {
+     "n": "Civil",
+     "p": "bblock"
+    },
+    "bs_found": {
+     "n": "Enclosure Foundations",
+     "p": "sys_bv"
+    },
+    "bv_yard": {
+     "n": "Yard & Fence",
+     "p": "sys_bv"
+    }
+   },
+   "plant_nodes": {
+    "bplant": {
+     "n": "BESS Plant"
+    },
+    "bpl_blocks": {
+     "n": "BESS Blocks",
+     "p": "bplant"
+    },
+    "bpl_enc": {
+     "n": "Battery Enclosures",
+     "p": "bpl_blocks"
+    },
+    "bpl_skids": {
+     "n": "PCS Skids",
+     "p": "bpl_blocks"
+    },
+    "bpl_coll": {
+     "n": "Collection & Civil",
+     "p": "bplant"
+    },
+    "bsub_floodwall": {
+     "n": "Substation Flood Wall",
+     "p": "bpl_coll"
+    },
+    "bpl_feeders": {
+     "n": "34.5 kV Feeders",
+     "p": "bpl_coll"
+    },
+    "bpl_yard": {
+     "n": "Yard & Fence",
+     "p": "bpl_coll"
+    },
+    "bsys_sub": {
+     "n": "Substation & Interconnection",
+     "p": "bplant"
+    },
+    "bsub": {
+     "n": "Collector Substation",
+     "p": "bsys_sub"
+    },
+    "bsub_spare": {
+     "n": "Spare Main Power Transformer",
+     "p": "bsub"
+    },
+    "bsub_mpt": {
+     "n": "Main Power Transformer",
+     "p": "bsub"
+    },
+    "bsub_bkr": {
+     "n": "HV Circuit Breakers",
+     "p": "bsub"
+    },
+    "bsub_disc": {
+     "n": "Disconnect Switches",
+     "p": "bsub"
+    },
+    "bsub_meter": {
+     "n": "Revenue Metering",
+     "p": "bsub"
+    },
+    "bsub_mvbus": {
+     "n": "34.5 kV Switchgear",
+     "p": "bsub"
+    },
+    "bsub_bus": {
+     "n": "HV Bus & Dead-End Gantry",
+     "p": "bsub"
+    },
+    "bsub_house": {
+     "n": "Control House",
+     "p": "bsub"
+    },
+    "bsub_lm": {
+     "n": "Lightning Masts",
+     "p": "bsub"
+    },
+    "bsub_grid": {
+     "n": "Ground Grid",
+     "p": "bsub"
+    },
+    "bsub_yard": {
+     "n": "Yard & Fence",
+     "p": "bsub"
+    },
+    "bgt": {
+     "n": "Gen-Tie Line",
+     "p": "bsys_sub"
+    },
+    "bgt_struct": {
+     "n": "H-Frame Structures",
+     "p": "bgt"
+    },
+    "bgt_cond": {
+     "n": "Conductors & Shield Wire",
+     "p": "bgt"
+    },
+    "bpoi": {
+     "n": "POI Switchyard",
+     "p": "bsys_sub"
+    },
+    "bpoi_lines": {
+     "n": "Network Lines",
+     "p": "bpoi"
+    },
+    "bpoi_bkr": {
+     "n": "Ring Bus Breakers",
+     "p": "bpoi"
+    },
+    "bpoi_bus": {
+     "n": "Bus & Line Gantries",
+     "p": "bpoi"
+    },
+    "bpoi_ctrl": {
+     "n": "Control House",
+     "p": "bpoi"
+    },
+    "bpoi_yard": {
+     "n": "Yard & Fence",
+     "p": "bpoi"
+    }
+   }
+  },
+  "re_res": {
+   "name": "Sample Residential Building",
+   "category": "re",
+   "model": "re-house",
+   "root": "rr_bldg",
+   "plant_model": "re-house-site",
+   "plant_root": "rr_site",
+   "plant_name": "Residential Lot",
+   "nodes": {
+    "rr_bldg": {
+     "n": "House"
+    },
+    "rr_fnd": {
+     "n": "Foundation & Floor",
+     "p": "rr_bldg"
+    },
+    "rr_ftg": {
+     "n": "Thickened Slab Edge",
+     "p": "rr_fnd"
+    },
+    "rr_slab": {
+     "n": "Floor Slab",
+     "p": "rr_fnd"
+    },
+    "rr_str": {
+     "n": "Structure",
+     "p": "rr_bldg"
+    },
+    "rr_studs": {
+     "n": "Wall Framing",
+     "p": "rr_str"
+    },
+    "rr_sheath": {
+     "n": "Wall Sheathing",
+     "p": "rr_str"
+    },
+    "rr_truss": {
+     "n": "Roof Trusses",
+     "p": "rr_str"
+    },
+    "rr_conn": {
+     "n": "Roof-to-Wall Connections",
+     "p": "rr_str"
+    },
+    "rr_roof": {
+     "n": "Roof Assembly",
+     "p": "rr_bldg"
+    },
+    "rr_deck": {
+     "n": "Roof Deck",
+     "p": "rr_roof"
+    },
+    "rr_under": {
+     "n": "Underlayment",
+     "p": "rr_roof"
+    },
+    "rr_shing": {
+     "n": "Asphalt Shingles",
+     "p": "rr_roof"
+    },
+    "rr_edge": {
+     "n": "Drip Edge, Fascia & Soffit",
+     "p": "rr_roof"
+    },
+    "rr_gutter": {
+     "n": "Gutters & Downspouts",
+     "p": "rr_roof"
+    },
+    "rr_attic": {
+     "n": "Attic Insulation & Vents",
+     "p": "rr_roof"
+    },
+    "rr_env": {
+     "n": "Walls & Openings",
+     "p": "rr_bldg"
+    },
+    "rr_siding": {
+     "n": "Vinyl Siding",
+     "p": "rr_env"
+    },
+    "rr_wins": {
+     "n": "Wall Insulation",
+     "p": "rr_env"
+    },
+    "rr_win": {
+     "n": "Windows",
+     "p": "rr_env"
+    },
+    "rr_door": {
+     "n": "Exterior Doors",
+     "p": "rr_env"
+    },
+    "rr_gdoor": {
+     "n": "Garage Door",
+     "p": "rr_env"
+    },
+    "rr_svc": {
+     "n": "Fixed Services",
+     "p": "rr_bldg"
+    },
+    "rr_el": {
+     "n": "Electrical",
+     "p": "rr_svc"
+    },
+    "rr_panel": {
+     "n": "Meter & Main Panel",
+     "p": "rr_el"
+    },
+    "rr_wiring": {
+     "n": "Wiring & Devices",
+     "p": "rr_el"
+    },
+    "rr_hv": {
+     "n": "Heating & Cooling",
+     "p": "rr_svc"
+    },
+    "rr_furn": {
+     "n": "Furnace & Indoor Coil",
+     "p": "rr_hv"
+    },
+    "rr_cond": {
+     "n": "AC Condenser",
+     "p": "rr_hv"
+    },
+    "rr_duct": {
+     "n": "Ductwork & Registers",
+     "p": "rr_hv"
+    },
+    "rr_pl": {
+     "n": "Plumbing",
+     "p": "rr_svc"
+    },
+    "rr_wh": {
+     "n": "Water Heater",
+     "p": "rr_pl"
+    },
+    "rr_pipe": {
+     "n": "Supply & Drain Piping",
+     "p": "rr_pl"
+    },
+    "rr_ao_backflow": {
+     "n": "Sewer Backwater Valve",
+     "p": "rr_pl"
+    },
+    "rr_int": {
+     "n": "Interior Finishes",
+     "p": "rr_bldg"
+    },
+    "rr_dry": {
+     "n": "Partitions & Drywall",
+     "p": "rr_int"
+    },
+    "rr_floor": {
+     "n": "Floor Coverings",
+     "p": "rr_int"
+    },
+    "rr_cab": {
+     "n": "Kitchen Cabinets & Counters",
+     "p": "rr_int"
+    },
+    "rr_bath": {
+     "n": "Bath Fixtures & Tile",
+     "p": "rr_int"
+    },
+    "rr_trim": {
+     "n": "Interior Doors & Trim",
+     "p": "rr_int"
+    },
+    "rr_appl": {
+     "n": "Built-In Appliances",
+     "p": "rr_int"
+    },
+    "rr_cont": {
+     "n": "Contents · Coverage C",
+     "p": "rr_bldg"
+    },
+    "rr_furnish": {
+     "n": "Furniture & Belongings",
+     "p": "rr_cont"
+    },
+    "rr_appl_c": {
+     "n": "Refrigerator & Laundry",
+     "p": "rr_cont"
+    }
+   },
+   "plant_nodes": {
+    "rr_site": {
+     "n": "Residential Lot"
+    },
+    "rsr_b": {
+     "n": "Building",
+     "p": "rr_site"
+    },
+    "rsr_bldg": {
+     "n": "House",
+     "p": "rsr_b"
+    },
+    "rsr_other": {
+     "n": "Other Structures · Coverage B",
+     "p": "rr_site"
+    },
+    "rsr_drive": {
+     "n": "Driveway, Walks & Patio",
+     "p": "rsr_other"
+    },
+    "rsr_fence": {
+     "n": "Privacy Fence",
+     "p": "rsr_other"
+    },
+    "rsr_shed": {
+     "n": "Storage Shed",
+     "p": "rsr_other"
+    },
+    "rsr_land": {
+     "n": "Landscape",
+     "p": "rr_site"
+    },
+    "rsr_trees": {
+     "n": "Trees",
+     "p": "rsr_land"
+    },
+    "rsr_lawn": {
+     "n": "Lawn & Shrubs",
+     "p": "rsr_land"
+    },
+    "rsr_drain": {
+     "n": "Lot Drainage",
+     "p": "rr_site"
+    },
+    "rsr_swale": {
+     "n": "Rear Swale & Culvert",
+     "p": "rsr_drain"
+    },
+    "rsr_util": {
+     "n": "Utilities",
+     "p": "rr_site"
+    },
+    "rsr_pole": {
+     "n": "Utility Pole & Service Drop",
+     "p": "rsr_util"
+    },
+    "rsr_water": {
+     "n": "Water Service",
+     "p": "rsr_util"
+    },
+    "rsr_sewer": {
+     "n": "Sewer Lateral",
+     "p": "rsr_util"
+    },
+    "rsr_gas": {
+     "n": "Gas Service & Meter",
+     "p": "rsr_util"
+    }
+   }
+  },
+  "re_com": {
+   "name": "Sample Commercial Building",
+   "category": "re",
+   "model": "re-retail",
+   "root": "rc_bldg",
+   "plant_model": "re-retail-site",
+   "plant_root": "rc_site",
+   "plant_name": "Retail Site",
+   "nodes": {
+    "rc_bldg": {
+     "n": "Retail Building"
+    },
+    "rc_fnd": {
+     "n": "Foundation & Floor",
+     "p": "rc_bldg"
+    },
+    "rc_ftg": {
+     "n": "Footings",
+     "p": "rc_fnd"
+    },
+    "rc_slab": {
+     "n": "Floor Slab",
+     "p": "rc_fnd"
+    },
+    "rc_str": {
+     "n": "Structure",
+     "p": "rc_bldg"
+    },
+    "rc_cmu": {
+     "n": "Masonry Bearing Walls",
+     "p": "rc_str"
+    },
+    "rc_steel": {
+     "n": "Steel Columns & Beams",
+     "p": "rc_str"
+    },
+    "rc_joists": {
+     "n": "Open-Web Steel Joists",
+     "p": "rc_str"
+    },
+    "rc_deck": {
+     "n": "Roof Deck",
+     "p": "rc_str"
+    },
+    "rc_roof": {
+     "n": "Roof Assembly",
+     "p": "rc_bldg"
+    },
+    "rc_memb": {
+     "n": "Single-Ply Membrane",
+     "p": "rc_roof"
+    },
+    "rc_rins": {
+     "n": "Roof Insulation",
+     "p": "rc_roof"
+    },
+    "rc_coping": {
+     "n": "Parapet Coping & Edge Metal",
+     "p": "rc_roof"
+    },
+    "rc_drains": {
+     "n": "Roof Drains & Scuppers",
+     "p": "rc_roof"
+    },
+    "rc_hatch": {
+     "n": "Roof Hatch & Walkways",
+     "p": "rc_roof"
+    },
+    "rc_env": {
+     "n": "Walls & Openings",
+     "p": "rc_bldg"
+    },
+    "rc_store": {
+     "n": "Storefront Glazing",
+     "p": "rc_env"
+    },
+    "rc_entry": {
+     "n": "Entrance Doors",
+     "p": "rc_env"
+    },
+    "rc_facade": {
+     "n": "Front Facade & Sign Band",
+     "p": "rc_env"
+    },
+    "rc_canopy": {
+     "n": "Front Canopy",
+     "p": "rc_env"
+    },
+    "rc_sdoor": {
+     "n": "Rear Service Doors",
+     "p": "rc_env"
+    },
+    "rc_ao_shield": {
+     "n": "Storefront Flood Barrier",
+     "p": "rc_env"
+    },
+    "rc_svc": {
+     "n": "Fixed Services",
+     "p": "rc_bldg"
+    },
+    "rc_elec": {
+     "n": "Electrical Service & Meters",
+     "p": "rc_svc"
+    },
+    "rc_light": {
+     "n": "Lighting",
+     "p": "rc_svc"
+    },
+    "rc_rtu": {
+     "n": "Rooftop Units",
+     "p": "rc_svc"
+    },
+    "rc_duct": {
+     "n": "Ductwork & Diffusers",
+     "p": "rc_svc"
+    },
+    "rc_plumb": {
+     "n": "Plumbing",
+     "p": "rc_svc"
+    },
+    "rc_spr": {
+     "n": "Fire Sprinklers",
+     "p": "rc_svc"
+    },
+    "rc_int": {
+     "n": "Interior Construction",
+     "p": "rc_bldg"
+    },
+    "rc_demise": {
+     "n": "Demising Walls",
+     "p": "rc_int"
+    },
+    "rc_ceil": {
+     "n": "Suspended Ceilings",
+     "p": "rc_int"
+    },
+    "rc_floorfin": {
+     "n": "Floor Finishes",
+     "p": "rc_int"
+    },
+    "rc_rest": {
+     "n": "Restrooms",
+     "p": "rc_int"
+    },
+    "rc_cont": {
+     "n": "Tenant Fit-Out & Stock",
+     "p": "rc_bldg"
+    },
+    "rc_ti": {
+     "n": "Tenant Fit-Out",
+     "p": "rc_cont"
+    },
+    "rc_stock": {
+     "n": "Stock & Fixtures",
+     "p": "rc_cont"
+    }
+   },
+   "plant_nodes": {
+    "rc_site": {
+     "n": "Retail Site"
+    },
+    "rsc_b": {
+     "n": "Building",
+     "p": "rc_site"
+    },
+    "rsc_bldg": {
+     "n": "Retail Building",
+     "p": "rsc_b"
+    },
+    "rsc_pave": {
+     "n": "Paving",
+     "p": "rc_site"
+    },
+    "rsc_lot": {
+     "n": "Parking Lot & Drives",
+     "p": "rsc_pave"
+    },
+    "rsc_walk": {
+     "n": "Sidewalk & Curbs",
+     "p": "rsc_pave"
+    },
+    "rsc_storm": {
+     "n": "Stormwater",
+     "p": "rc_site"
+    },
+    "rsc_inlets": {
+     "n": "Curb Inlets & Storm Pipe",
+     "p": "rsc_storm"
+    },
+    "rsc_det": {
+     "n": "Underground Detention",
+     "p": "rsc_storm"
+    },
+    "rsc_util": {
+     "n": "Utilities",
+     "p": "rc_site"
+    },
+    "rsc_xfmr": {
+     "n": "Utility Transformer",
+     "p": "rsc_util"
+    },
+    "rsc_gas": {
+     "n": "Gas Meters & Laterals",
+     "p": "rsc_util"
+    },
+    "rsc_sec": {
+     "n": "Sign, Lighting & Landscape",
+     "p": "rc_site"
+    },
+    "rsc_sign": {
+     "n": "Pylon Sign",
+     "p": "rsc_sec"
+    },
+    "rsc_lights": {
+     "n": "Lot Lighting",
+     "p": "rsc_sec"
+    },
+    "rsc_dump": {
+     "n": "Dumpster Enclosure",
+     "p": "rsc_sec"
+    },
+    "rsc_land": {
+     "n": "Landscaping",
+     "p": "rsc_sec"
+    }
+   }
+  },
+  "re_ind": {
+   "name": "Sample Industrial Building",
+   "category": "re",
+   "model": "re-warehouse",
+   "root": "ri_bldg",
+   "plant_model": "re-warehouse-site",
+   "plant_root": "ri_site",
+   "plant_name": "Warehouse Site",
+   "nodes": {
+    "ri_bldg": {
+     "n": "Warehouse Building"
+    },
+    "ri_fnd": {
+     "n": "Foundation & Floor",
+     "p": "ri_bldg"
+    },
+    "ri_ftg": {
+     "n": "Column Footings",
+     "p": "ri_fnd"
+    },
+    "ri_gb": {
+     "n": "Grade Beam & Dock Wall",
+     "p": "ri_fnd"
+    },
+    "ri_slab": {
+     "n": "Floor Slab",
+     "p": "ri_fnd"
+    },
+    "ri_pad": {
+     "n": "Building Pad",
+     "p": "ri_fnd"
+    },
+    "ri_str": {
+     "n": "Structure",
+     "p": "ri_bldg"
+    },
+    "ri_frames": {
+     "n": "Primary Rigid Frames",
+     "p": "ri_str"
+    },
+    "ri_cols": {
+     "n": "Columns",
+     "p": "ri_frames"
+    },
+    "ri_raft": {
+     "n": "Rafters",
+     "p": "ri_frames"
+    },
+    "ri_anchor": {
+     "n": "Base Plates & Anchor Rods",
+     "p": "ri_frames"
+    },
+    "ri_purlins": {
+     "n": "Purlins & Girts",
+     "p": "ri_str"
+    },
+    "ri_brace": {
+     "n": "Bracing",
+     "p": "ri_str"
+    },
+    "ri_endwall": {
+     "n": "Endwall Framing",
+     "p": "ri_str"
+    },
+    "ri_roof": {
+     "n": "Roof Assembly",
+     "p": "ri_bldg"
+    },
+    "ri_rpanel": {
+     "n": "Standing-Seam Roof",
+     "p": "ri_roof"
+    },
+    "ri_rins": {
+     "n": "Roof Insulation",
+     "p": "ri_roof"
+    },
+    "ri_gutter": {
+     "n": "Gutters & Downspouts",
+     "p": "ri_roof"
+    },
+    "ri_sky": {
+     "n": "Skylights & Smoke Vents",
+     "p": "ri_roof"
+    },
+    "ri_trim": {
+     "n": "Edge Trim & Ridge Cap",
+     "p": "ri_roof"
+    },
+    "ri_env": {
+     "n": "Walls & Openings",
+     "p": "ri_bldg"
+    },
+    "ri_wpanel": {
+     "n": "Insulated Metal Wall Panels",
+     "p": "ri_env"
+    },
+    "ri_dock": {
+     "n": "Dock Positions",
+     "p": "ri_env"
+    },
+    "ri_ddoor": {
+     "n": "Dock Doors",
+     "p": "ri_dock"
+    },
+    "ri_lev": {
+     "n": "Dock Levelers",
+     "p": "ri_dock"
+    },
+    "ri_seal": {
+     "n": "Seals, Bumpers & Restraints",
+     "p": "ri_dock"
+    },
+    "ri_drive": {
+     "n": "Drive-In Door & Ramp",
+     "p": "ri_env"
+    },
+    "ri_store": {
+     "n": "Office Storefront",
+     "p": "ri_env"
+    },
+    "ri_pdoor": {
+     "n": "Personnel Doors",
+     "p": "ri_env"
+    },
+    "ri_ao_barrier": {
+     "n": "Dock Flood Barriers",
+     "p": "ri_env"
+    },
+    "ri_svc": {
+     "n": "Fixed Services",
+     "p": "ri_bldg"
+    },
+    "ri_fire": {
+     "n": "Fire Sprinklers (ESFR)",
+     "p": "ri_svc"
+    },
+    "ri_fhead": {
+     "n": "Heads & Branch Lines",
+     "p": "ri_fire"
+    },
+    "ri_riser": {
+     "n": "Riser Room & Fire Pump",
+     "p": "ri_fire"
+    },
+    "ri_falarm": {
+     "n": "Fire Alarm & Monitoring",
+     "p": "ri_fire"
+    },
+    "ri_elec": {
+     "n": "Electrical Service & Distribution",
+     "p": "ri_svc"
+    },
+    "ri_swbd": {
+     "n": "Main Switchboard",
+     "p": "ri_elec"
+    },
+    "ri_panels": {
+     "n": "Panels & Feeders",
+     "p": "ri_elec"
+    },
+    "ri_light": {
+     "n": "High-Bay Lighting",
+     "p": "ri_elec"
+    },
+    "ri_hvac": {
+     "n": "Heating & Ventilation",
+     "p": "ri_svc"
+    },
+    "ri_uh": {
+     "n": "Gas Unit Heaters",
+     "p": "ri_hvac"
+    },
+    "ri_rtu": {
+     "n": "Office Rooftop Units",
+     "p": "ri_hvac"
+    },
+    "ri_exh": {
+     "n": "Exhaust Fans & Louvers",
+     "p": "ri_hvac"
+    },
+    "ri_plumb": {
+     "n": "Plumbing",
+     "p": "ri_svc"
+    },
+    "ri_int": {
+     "n": "Interior Construction",
+     "p": "ri_bldg"
+    },
+    "ri_part": {
+     "n": "Partitions & Drywall",
+     "p": "ri_int"
+    },
+    "ri_ceil": {
+     "n": "Suspended Ceilings",
+     "p": "ri_int"
+    },
+    "ri_floorfin": {
+     "n": "Office Floor Finishes",
+     "p": "ri_int"
+    },
+    "ri_rest": {
+     "n": "Restrooms & Break Room",
+     "p": "ri_int"
+    },
+    "ri_cont": {
+     "n": "Contents · Tenant",
+     "p": "ri_bldg"
+    },
+    "ri_rack": {
+     "n": "Pallet Racking",
+     "p": "ri_cont"
+    },
+    "ri_goods": {
+     "n": "Stored Goods",
+     "p": "ri_cont"
+    }
+   },
+   "plant_nodes": {
+    "ri_site": {
+     "n": "Warehouse Site"
+    },
+    "rsi_b": {
+     "n": "Building",
+     "p": "ri_site"
+    },
+    "rsi_bldg": {
+     "n": "Warehouse Building",
+     "p": "rsi_b"
+    },
+    "rsi_pave": {
+     "n": "Paving",
+     "p": "ri_site"
+    },
+    "rsi_truck": {
+     "n": "Truck Court & Trailer Stalls",
+     "p": "rsi_pave"
+    },
+    "rsi_auto": {
+     "n": "Car Parking & Drives",
+     "p": "rsi_pave"
+    },
+    "rsi_storm": {
+     "n": "Stormwater",
+     "p": "ri_site"
+    },
+    "rsi_pond": {
+     "n": "Detention Pond",
+     "p": "rsi_storm"
+    },
+    "rsi_inlets": {
+     "n": "Trench Drains & Storm Pipe",
+     "p": "rsi_storm"
+    },
+    "rsi_util": {
+     "n": "Utilities",
+     "p": "ri_site"
+    },
+    "rsi_xfmr": {
+     "n": "Utility Transformer",
+     "p": "rsi_util"
+    },
+    "rsi_fw": {
+     "n": "Fire Water Service",
+     "p": "rsi_util"
+    },
+    "rsi_wsg": {
+     "n": "Water, Sewer & Gas Laterals",
+     "p": "rsi_util"
+    },
+    "rsi_sec": {
+     "n": "Fencing, Lighting & Landscape",
+     "p": "ri_site"
+    },
+    "rsi_fence": {
+     "n": "Fence, Gate & Guard Booth",
+     "p": "rsi_sec"
+    },
+    "rsi_lights": {
+     "n": "Site Lighting",
+     "p": "rsi_sec"
+    },
+    "rsi_land": {
+     "n": "Landscaping",
+     "p": "rsi_sec"
+    }
+   }
+  },
+  "gi_sub_t": {
+   "name": "Sample Transmission Substation",
+   "category": "gi",
+   "model": "gi-sub-trans",
+   "root": "st_stn",
+   "plant_model": null,
+   "plant_root": null,
+   "plant_name": null,
+   "nodes": {
+    "st_stn": {
+     "n": "Transmission Substation"
+    },
+    "st_hv": {
+     "n": "345 kV Yard",
+     "p": "st_stn"
+    },
+    "st_hv_de": {
+     "n": "345 kV Line Terminals",
+     "p": "st_hv"
+    },
+    "st_hv_cb": {
+     "n": "345 kV Circuit Breakers",
+     "p": "st_hv"
+    },
+    "st_hv_ds": {
+     "n": "345 kV Disconnect Switches",
+     "p": "st_hv"
+    },
+    "st_hv_bus": {
+     "n": "345 kV Bus & Supports",
+     "p": "st_hv"
+    },
+    "st_hv_vt": {
+     "n": "345 kV Voltage Transformers",
+     "p": "st_hv"
+    },
+    "st_hv_sa": {
+     "n": "345 kV Surge Arresters",
+     "p": "st_hv"
+    },
+    "st_lv": {
+     "n": "138 kV Yard",
+     "p": "st_stn"
+    },
+    "st_lv_de": {
+     "n": "138 kV Line Terminals",
+     "p": "st_lv"
+    },
+    "st_lv_cb": {
+     "n": "138 kV Circuit Breakers",
+     "p": "st_lv"
+    },
+    "st_lv_ds": {
+     "n": "138 kV Disconnect Switches",
+     "p": "st_lv"
+    },
+    "st_lv_bus": {
+     "n": "138 kV Bus & Supports",
+     "p": "st_lv"
+    },
+    "st_lv_vt": {
+     "n": "138 kV Voltage Transformers",
+     "p": "st_lv"
+    },
+    "st_tx": {
+     "n": "Power Transformation",
+     "p": "st_stn"
+    },
+    "st_tx_u": {
+     "n": "Autotransformers",
+     "p": "st_tx"
+    },
+    "st_tx_core": {
+     "n": "Core & Windings",
+     "p": "st_tx_u"
+    },
+    "st_tx_bush": {
+     "n": "Bushings",
+     "p": "st_tx_u"
+    },
+    "st_tx_cool": {
+     "n": "Radiators & Fans",
+     "p": "st_tx_u"
+    },
+    "st_tx_ltc": {
+     "n": "On-Load Tap Changer",
+     "p": "st_tx_u"
+    },
+    "st_tx_cons": {
+     "n": "Conservator & Protection Devices",
+     "p": "st_tx_u"
+    },
+    "st_tx_cab": {
+     "n": "Control Cabinet",
+     "p": "st_tx_u"
+    },
+    "st_tx_oc": {
+     "n": "Oil Containment & Firewall",
+     "p": "st_tx"
+    },
+    "st_pc": {
+     "n": "Protection, Control & Communications",
+     "p": "st_stn"
+    },
+    "st_pc_house": {
+     "n": "Control House",
+     "p": "st_pc"
+    },
+    "st_pc_relay": {
+     "n": "Relay Panels",
+     "p": "st_pc"
+    },
+    "st_pc_rtu": {
+     "n": "SCADA & Communications",
+     "p": "st_pc"
+    },
+    "st_pc_dc": {
+     "n": "Station Battery & Charger",
+     "p": "st_pc"
+    },
+    "st_pc_ss": {
+     "n": "Station Service",
+     "p": "st_pc"
+    },
+    "st_pc_cable": {
+     "n": "Control Cable & Trench",
+     "p": "st_pc"
+    },
+    "st_cv": {
+     "n": "Civil, Grounding & Security",
+     "p": "st_stn"
+    },
+    "st_cv_grid": {
+     "n": "Grounding Grid",
+     "p": "st_cv"
+    },
+    "st_cv_rock": {
+     "n": "Yard Surfacing",
+     "p": "st_cv"
+    },
+    "st_cv_fence": {
+     "n": "Fence, Gates & Security",
+     "p": "st_cv"
+    },
+    "st_cv_shield": {
+     "n": "Lightning Shielding",
+     "p": "st_cv"
+    },
+    "st_cv_drain": {
+     "n": "Drainage",
+     "p": "st_cv"
+    },
+    "st_cv_road": {
+     "n": "Access Road",
+     "p": "st_cv"
+    },
+    "st_ao_wall": {
+     "n": "Perimeter Flood Wall",
+     "p": "st_cv"
+    }
+   },
+   "plant_nodes": null
+  }
+ }
+}

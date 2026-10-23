@@ -4211,12 +4211,112 @@
  "row_notes": [
   {
    "type": "key_assumption",
-   "text": "Uses the site-facility demand ratio, not the array ratio"
+   "text": "Uses the site-facility demand ratio, not the array ratio",
+   "raw": "Uses the site-facility demand ratio, not the array ratio"
   }
  ],
  "selected_by": [],
  "variants": "resistance scenario: lower / central (headline) / upper",
  "notes": [],
+ "caption": {
+  "what_it_says": "Power conversion and collection: no loss until site-facility demand ratio (event / design pressure) reaches about 0.49; under the central screening scenario damage rises, passing half of its maximum near 1.31, and reaches a damage ratio of 0.8 (80 % of the part's value) by 1.98. The other scenarios reach half of their maximum at different demands: the lower resistance scenario near 1.12 and the upper resistance scenario near 1.46. They are alternatives, never averaged.",
+  "how_sure": {
+   "shape": {
+    "tier": "T4",
+    "word": "our judgment",
+    "basis": "Synthetic resistance medians and spread"
+   },
+   "cost": {
+    "tier": "T4",
+    "word": "our judgment",
+    "basis": "Synthetic damage-state cost ratios"
+   },
+   "parameters": "5 parameters: 1 field-calibrated and 4 our judgment",
+   "weakest": "T4",
+   "word": "our judgment"
+  },
+  "seen_in_field": {
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "state": "not_searched",
+   "href": null,
+   "words": "nobody has looked yet; no search log exists for this asset and hazard"
+  },
+  "main_references": [
+   {
+    "text": "NREL/NLR, Satellite Imagery of PV Site Storm Damage dataset, 2025",
+    "ids": [
+     "TCWS-S020"
+    ],
+    "title": "NLR/NREL. Satellite Imagery of PV Site Storm Damage. Dataset DOI 10.21948/2562917 (2025).",
+    "link": "https://www.osti.gov/biblio/2562917",
+    "link_kind": "url",
+    "locator": "manual CSV file id f6eb09a0-4a12-4ef8-b2d9-8aa9e70f4008; columns mounting_type, tracking, max_wind_gust_(m/s), pct_modules_damaged (%); SHA256 edb34e74cc078bba1fdbe34463abadc794fd416caa66eb64ac3d0ed176ac5e00; aggregated CSV file id f5355652-f2e1-4bdb-8ff2-3623ce15a1d4; cross-method audit lines 7, 74, 242, 257; SHA256 c1ab48731f875142c571efcfd6323d7e048b35b2d2525418e25e6fefb3487062",
+    "no_link_sentence": null,
+    "source_id": "TCWS-S020"
+   },
+   {
+    "text": "NREL, Q1-2025 Solar PV System Cost Benchmarks",
+    "ids": [
+     "TCWS-S013"
+    ],
+    "title": "Ramasamy, V.; Woodhouse, M.; Feldman, D",
+    "link": "https://data.nrel.gov/submissions/304",
+    "link_kind": "url",
+    "locator": "dataset landing page; UPV Q1-2025 resource; PVSCM 2025 model and description",
+    "no_link_sentence": null,
+    "source_id": "TCWS-S013"
+   },
+   {
+    "text": "DOE/FEMP, Toward Solar PV Storm Resilience field investigation",
+    "ids": [
+     "TCWS-S004"
+    ],
+    "title": "U.S. DOE Federal Energy Management Program; Elsworth, J.; Van Geet, O.; Robinson, G.; et al",
+    "link": "https://www.energy.gov/sites/default/files/2023-02/femp-toward-solar-pv-storm-resilience-learning-from-hurricane-loss-rebuilding-better_0.pdf",
+    "link_kind": "url",
+    "locator": "Executive Summary pp. vi–vii; §1.1 and Table 1 pp. 2–3; §§2–2.1 pp. 5–6; §§3.1–3.6 pp. 7–12",
+    "no_link_sentence": null,
+    "source_id": "TCWS-S004"
+   },
+   {
+    "text": "ASCE/SEI 7-22, Minimum Design Loads",
+    "ids": [
+     "TCWS-S005"
+    ],
+    "title": "ASCE/SEI 7-22. Minimum Design Loads and Associated Criteria for Buildings and Other Structures.",
+    "link": "https://www.asce.org/publications-and-news/asce-7/",
+    "link_kind": "url",
+    "locator": "Ch. 26 wind-speed definitions and symbols; Ch. 29 §29.4.5; Ch. 31 §31.4.5",
+    "no_link_sentence": null,
+    "source_id": "TCWS-S005"
+   },
+   {
+    "text": "Cell owner decision on synthetic Tier-4 parameters",
+    "ids": [
+     "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION"
+    ],
+    "title": "Damage Modeling owner decision: TC-wind x solar model-v2 cell-local synthetic parameter set.",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+    "link_kind": "repo_file",
+    "locator": "TCWS2-D001; TCWS2-D003 through TCWS2-D007",
+    "no_link_sentence": null,
+    "source_id": "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION"
+   },
+   {
+    "text": "Damage Modeling repository governance: method standards, contracts, and damage-curve skill controls.",
+    "ids": [
+     "GOVERNANCE_CONTRACT"
+    ],
+    "title": "Damage Modeling repository governance: method standards, contracts, and damage-curve skill controls.",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/standards/00_index.md",
+    "link_kind": "repo_file",
+    "locator": "docs/method/standards/02_cell_package_standard.md; docs/contracts/standards/20_machine_readable_artifact_standard.md; docs/contracts/standards/21_capability_and_cap_binding_standard.md; damage-curve skill CHANGE_CLASSIFIER and EVIDENCE_PRESSURE_TEST_AND_FAIL_CLOSED_CHECKLIST",
+    "no_link_sentence": null,
+    "source_id": "GOVERNANCE_CONTRACT"
+   }
+  ],
+  "references_from": "the entry's key sources, then the parameters' own"
+ },
  "title": "Hurricane wind × Solar farm",
  "asset": {
   "slug": "solar",
@@ -4344,6 +4444,106 @@
   "TCWS-S021",
   "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION"
  ],
+ "sources_resolved": [
+  {
+   "id": "GOVERNANCE_CONTRACT",
+   "citation": "Damage Modeling repository governance: method standards, contracts, and damage-curve skill controls.",
+   "url": "docs/method/standards/00_index.md",
+   "locator": "docs/method/standards/02_cell_package_standard.md; docs/contracts/standards/20_machine_readable_artifact_standard.md; docs/contracts/standards/21_capability_and_cap_binding_standard.md; damage-curve skill CHANGE_CLASSIFIER and EVIDENCE_PRESSURE_TEST_AND_FAIL_CLOSED_CHECKLIST",
+   "role": "governance_rule",
+   "tier": "T4",
+   "permitted": "Control package structure, source resolution, candidate isolation, withholding, event identity, and promotion gates.",
+   "prohibited": "Serve as scientific calibration, hazard evidence, or economic-value evidence.",
+   "decision": "adopt",
+   "accessed_on": "2026-07-28",
+   "provenance": "register",
+   "repo_path": "docs/method/standards/00_index.md",
+   "doi": null,
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/method/standards/00_index.md",
+   "link_kind": "repo_file",
+   "title": "Damage Modeling repository governance: method standards, contracts, and damage-curve skill controls.",
+   "kind": "marker",
+   "no_link_sentence": null
+  },
+  {
+   "id": "NO_DIRECT_TC_CALIBRATION_SOURCE",
+   "citation": "TC-wind x solar model-v2 bounded evidence review: no direct generic fixed/tracker calibration source adopted.",
+   "url": "docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+   "locator": "§ Missing matched chain; § v2 consequence",
+   "role": "no_direct_calibration_marker",
+   "tier": "T4",
+   "permitted": "Keep all generic numbers at Tier 4 and promotion blocked.",
+   "prohibited": "Infer zero damage, immunity, or proof that no usable private evidence exists.",
+   "decision": "withhold_calibration_claim",
+   "accessed_on": "2026-07-29",
+   "provenance": "register",
+   "repo_path": "docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+   "doi": null,
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/cells/tropical_cyclone_wind_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+   "link_kind": "repo_file",
+   "title": "TC-wind x solar model-v2 bounded evidence review: no direct generic fixed/tracker calibration source adopted.",
+   "no_link_sentence": null
+  },
+  {
+   "id": "TCWS-S020",
+   "citation": "NLR/NREL. Satellite Imagery of PV Site Storm Damage. Dataset DOI 10.21948/2562917 (2025).",
+   "url": "https://www.osti.gov/biblio/2562917",
+   "locator": "manual CSV file id f6eb09a0-4a12-4ef8-b2d9-8aa9e70f4008; columns mounting_type, tracking, max_wind_gust_(m/s), pct_modules_damaged (%); SHA256 edb34e74cc078bba1fdbe34463abadc794fd416caa66eb64ac3d0ed176ac5e00; aggregated CSV file id f5355652-f2e1-4bdb-8ff2-3623ce15a1d4; cross-method audit lines 7, 74, 242, 257; SHA256 c1ab48731f875142c571efcfd6323d7e048b35b2d2525418e25e6fefb3487062",
+   "role": "curve_fit_shape",
+   "tier": "T1",
+   "permitted": "Filter ground plus tracking false; convert percent to fraction; fit an unweighted monotone source-cohort screening relationship. Use the four pinned aggregate rows only for the governed apparent-coordinate cross-method audit.",
+   "prohibited": "Claim utility-scale representativeness, local 3-second gust semantics, causal purity, hidden damage, disposition, or repair cost from the raw fields. Treat coordinate proximity as an authoritative identity join.",
+   "decision": "adopt_with_limits",
+   "accessed_on": "2026-07-28",
+   "provenance": "register",
+   "doi": "10.21948/2562917",
+   "link": "https://www.osti.gov/biblio/2562917",
+   "link_kind": "url",
+   "title": "NLR/NREL. Satellite Imagery of PV Site Storm Damage. Dataset DOI 10.21948/2562917 (2025).",
+   "no_link_sentence": null
+  },
+  {
+   "id": "TCWS-S021",
+   "citation": "NLR/NREL. Extreme Weather Data Description, file in Satellite Imagery of PV Site Storm Damage dataset DOI 10.21948/2562917.",
+   "url": "https://www.osti.gov/biblio/2562917",
+   "locator": "data-description PDF file id f3736640-1433-42f6-bd0b-3e2bf9b2951e; pp. 1-2; SHA256 852ff0128c99e188127a3d789ab217f55c98dba4952db590e07c140bf45219d5",
+   "role": "endpoint_definition",
+   "tier": "T1",
+   "permitted": "Define the observed physical fraction while preserving unresolved full-cohort weather-product lineage.",
+   "prohibited": "Invent gust provider, station, averaging period, height, exposure standard, module disposition, or economic denominator for the full manual cohort.",
+   "decision": "adopt_with_limits",
+   "accessed_on": "2026-07-28",
+   "provenance": "register",
+   "doi": "10.21948/2562917",
+   "link": "https://www.osti.gov/biblio/2562917",
+   "link_kind": "url",
+   "title": "NLR/NREL. Extreme Weather Data Description, file in Satellite Imagery of PV Site Storm Damage dataset DOI…",
+   "no_link_sentence": null
+  },
+  {
+   "id": "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION",
+   "citation": "Damage Modeling owner decision: TC-wind x solar model-v2 cell-local synthetic parameter set.",
+   "url": "docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+   "locator": "TCWS2-D001; TCWS2-D003 through TCWS2-D007",
+   "role": "cell_local_synthetic_parameter_authority",
+   "tier": "T4",
+   "permitted": "Use the exact registered values only in this noncanonical v2 cell proposal.",
+   "prohibited": "Treat the decision as evidence, calibration, shared-runtime approval, or authority for another cell.",
+   "decision": "adopt_cell_local_synthetic_T4",
+   "accessed_on": "2026-07-29",
+   "provenance": "register",
+   "repo_path": "docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+   "doi": null,
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f4750ce9bdc3ac08be2ca4a477f7dea31b414558/docs/cells/tropical_cyclone_wind_solar/proposed/DECISION_LOG_tropical_cyclone_wind_solar__model_v2_0__docs_r1.md",
+   "link_kind": "repo_file",
+   "title": "Damage Modeling owner decision: TC-wind x solar model-v2 cell-local synthetic parameter set.",
+   "no_link_sentence": null
+  }
+ ],
+ "plain_tiers": {
+  "shape": "our judgment",
+  "cost": "our judgment"
+ },
  "occurrence": null,
  "review": {
   "entry_read_on": "2026-10-19",
@@ -4355,7 +4555,29 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release reviewed owner approved screening release"
  },
- "summary": "Power conversion and collection: ordered damage state lognormal on site-facility demand ratio (event / design pressure); shape T4, cost T4.",
+ "summary": "Power conversion and collection: ordered damage states, each reached with a lognormal chance as demand rises, read against site-facility demand ratio (event / design pressure); how damage rises is our judgment, how it becomes dollars our judgment.",
+ "rail_plain": {
+  "exists": {
+   "words": "Live · a screening model",
+   "code": "LIVE · screening"
+  },
+  "evidence": {
+   "words": "Evidence: our judgment",
+   "code": "How damage rises: our judgment · how it becomes dollars: our judgment",
+   "tiers": [
+    "T4"
+   ],
+   "codes": "shape T4 · cost T4"
+  },
+  "occurrence": {
+   "words": "Field reports: nobody has looked yet",
+   "code": "Field reports: nobody has looked yet"
+  },
+  "review": {
+   "words": "Not yet reviewed by a person",
+   "code": "entry agent-read 2026-10-19 · release reviewed owner approved screening release"
+  }
+ },
  "versions": [
   {
    "pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",

@@ -1,0 +1,4559 @@
+{
+ "schema": "damage_dashboard_coverage.v1",
+ "type": {
+  "slug": "commercial",
+  "label": "Commercial",
+  "category": "real_estate",
+  "category_label": "Real estate",
+  "profile": "three-storey office (the curves); retail building (the picture)",
+  "building": "Office",
+  "also_buildings": [
+   "Retail"
+  ],
+  "picture_note": "The picture is the twin's retail building; the curves are for the three-storey office.",
+  "catalogue_asset": "Real estate"
+ },
+ "twin": {
+  "asset": "re_com",
+  "name": "Sample Commercial Building",
+  "model": "re-retail",
+  "root": "rc_bldg",
+  "plant_model": "re-retail-site",
+  "plant_root": "rc_site",
+  "plant_name": "Retail Site",
+  "commit": "d01abd03cb101ecbe05468a5d573b50f90efd8fb",
+  "crosswalk": "docs/contracts/twin_crosswalks/re_com.csv"
+ },
+ "trees": {
+  "asset": {
+   "root": "rc_bldg",
+   "nodes": {
+    "rc_bldg": {
+     "n": "Retail Building"
+    },
+    "rc_fnd": {
+     "n": "Foundation & Floor",
+     "p": "rc_bldg"
+    },
+    "rc_ftg": {
+     "n": "Footings",
+     "p": "rc_fnd"
+    },
+    "rc_slab": {
+     "n": "Floor Slab",
+     "p": "rc_fnd"
+    },
+    "rc_str": {
+     "n": "Structure",
+     "p": "rc_bldg"
+    },
+    "rc_cmu": {
+     "n": "Masonry Bearing Walls",
+     "p": "rc_str"
+    },
+    "rc_steel": {
+     "n": "Steel Columns & Beams",
+     "p": "rc_str"
+    },
+    "rc_joists": {
+     "n": "Open-Web Steel Joists",
+     "p": "rc_str"
+    },
+    "rc_deck": {
+     "n": "Roof Deck",
+     "p": "rc_str"
+    },
+    "rc_roof": {
+     "n": "Roof Assembly",
+     "p": "rc_bldg"
+    },
+    "rc_memb": {
+     "n": "Single-Ply Membrane",
+     "p": "rc_roof"
+    },
+    "rc_rins": {
+     "n": "Roof Insulation",
+     "p": "rc_roof"
+    },
+    "rc_coping": {
+     "n": "Parapet Coping & Edge Metal",
+     "p": "rc_roof"
+    },
+    "rc_drains": {
+     "n": "Roof Drains & Scuppers",
+     "p": "rc_roof"
+    },
+    "rc_hatch": {
+     "n": "Roof Hatch & Walkways",
+     "p": "rc_roof"
+    },
+    "rc_env": {
+     "n": "Walls & Openings",
+     "p": "rc_bldg"
+    },
+    "rc_store": {
+     "n": "Storefront Glazing",
+     "p": "rc_env"
+    },
+    "rc_entry": {
+     "n": "Entrance Doors",
+     "p": "rc_env"
+    },
+    "rc_facade": {
+     "n": "Front Facade & Sign Band",
+     "p": "rc_env"
+    },
+    "rc_canopy": {
+     "n": "Front Canopy",
+     "p": "rc_env"
+    },
+    "rc_sdoor": {
+     "n": "Rear Service Doors",
+     "p": "rc_env"
+    },
+    "rc_ao_shield": {
+     "n": "Storefront Flood Barrier",
+     "p": "rc_env"
+    },
+    "rc_svc": {
+     "n": "Fixed Services",
+     "p": "rc_bldg"
+    },
+    "rc_elec": {
+     "n": "Electrical Service & Meters",
+     "p": "rc_svc"
+    },
+    "rc_light": {
+     "n": "Lighting",
+     "p": "rc_svc"
+    },
+    "rc_rtu": {
+     "n": "Rooftop Units",
+     "p": "rc_svc"
+    },
+    "rc_duct": {
+     "n": "Ductwork & Diffusers",
+     "p": "rc_svc"
+    },
+    "rc_plumb": {
+     "n": "Plumbing",
+     "p": "rc_svc"
+    },
+    "rc_spr": {
+     "n": "Fire Sprinklers",
+     "p": "rc_svc"
+    },
+    "rc_int": {
+     "n": "Interior Construction",
+     "p": "rc_bldg"
+    },
+    "rc_demise": {
+     "n": "Demising Walls",
+     "p": "rc_int"
+    },
+    "rc_ceil": {
+     "n": "Suspended Ceilings",
+     "p": "rc_int"
+    },
+    "rc_floorfin": {
+     "n": "Floor Finishes",
+     "p": "rc_int"
+    },
+    "rc_rest": {
+     "n": "Restrooms",
+     "p": "rc_int"
+    },
+    "rc_cont": {
+     "n": "Tenant Fit-Out & Stock",
+     "p": "rc_bldg"
+    },
+    "rc_ti": {
+     "n": "Tenant Fit-Out",
+     "p": "rc_cont"
+    },
+    "rc_stock": {
+     "n": "Stock & Fixtures",
+     "p": "rc_cont"
+    }
+   }
+  },
+  "plant": {
+   "root": "rc_site",
+   "nodes": {
+    "rc_site": {
+     "n": "Retail Site"
+    },
+    "rsc_b": {
+     "n": "Building",
+     "p": "rc_site"
+    },
+    "rsc_bldg": {
+     "n": "Retail Building",
+     "p": "rsc_b"
+    },
+    "rsc_pave": {
+     "n": "Paving",
+     "p": "rc_site"
+    },
+    "rsc_lot": {
+     "n": "Parking Lot & Drives",
+     "p": "rsc_pave"
+    },
+    "rsc_walk": {
+     "n": "Sidewalk & Curbs",
+     "p": "rsc_pave"
+    },
+    "rsc_storm": {
+     "n": "Stormwater",
+     "p": "rc_site"
+    },
+    "rsc_inlets": {
+     "n": "Curb Inlets & Storm Pipe",
+     "p": "rsc_storm"
+    },
+    "rsc_det": {
+     "n": "Underground Detention",
+     "p": "rsc_storm"
+    },
+    "rsc_util": {
+     "n": "Utilities",
+     "p": "rc_site"
+    },
+    "rsc_xfmr": {
+     "n": "Utility Transformer",
+     "p": "rsc_util"
+    },
+    "rsc_gas": {
+     "n": "Gas Meters & Laterals",
+     "p": "rsc_util"
+    },
+    "rsc_sec": {
+     "n": "Sign, Lighting & Landscape",
+     "p": "rc_site"
+    },
+    "rsc_sign": {
+     "n": "Pylon Sign",
+     "p": "rsc_sec"
+    },
+    "rsc_lights": {
+     "n": "Lot Lighting",
+     "p": "rsc_sec"
+    },
+    "rsc_dump": {
+     "n": "Dumpster Enclosure",
+     "p": "rsc_sec"
+    },
+    "rsc_land": {
+     "n": "Landscaping",
+     "p": "rsc_sec"
+    }
+   }
+  }
+ },
+ "hazards": [
+  {
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail"
+   },
+   "entry_id": "hail_real_estate",
+   "status": "proposal",
+   "gap": false,
+   "href": "/cells/hail_real_estate?building=commercial",
+   "rows": {
+    "rc_fnd": {
+     "s": "no_direct_damage",
+     "note": "Not named by the cell (inferred; to confirm with the cell owner)",
+     "basis": "inferred"
+    },
+    "rc_str": {
+     "s": "no_direct_damage",
+     "note": "Not named by the cell (inferred; to confirm with the cell owner)",
+     "basis": "inferred"
+    },
+    "rc_roof": {
+     "s": "curve",
+     "part": "Office roof (TPO membrane and insulation)",
+     "note": "The picture is the retail building; the curves are the office's",
+     "basis": "part"
+    },
+    "rc_store": {
+     "s": "curve",
+     "part": "Office windows",
+     "note": "The picture is the retail building; the curves are the office's",
+     "basis": "part"
+    },
+    "rc_entry": {
+     "s": "no_curve",
+     "note": "Entrance doors are not named by the cell",
+     "basis": "not_named"
+    },
+    "rc_facade": {
+     "s": "no_curve",
+     "note": "The facade and sign band are not named by the cell",
+     "basis": "not_named"
+    },
+    "rc_canopy": {
+     "s": "no_curve",
+     "note": "The canopy is not named by the cell",
+     "basis": "not_named"
+    },
+    "rc_sdoor": {
+     "s": "no_curve",
+     "note": "Service doors are not named by the cell",
+     "basis": "not_named"
+    },
+    "rc_ao_shield": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference building",
+     "basis": "out_of_scope"
+    },
+    "rc_elec": {
+     "s": "no_direct_damage",
+     "note": "Not named by the cell (inferred; to confirm with the cell owner)",
+     "basis": "inferred"
+    },
+    "rc_light": {
+     "s": "no_direct_damage",
+     "note": "Not named by the cell (inferred; to confirm with the cell owner)",
+     "basis": "inferred"
+    },
+    "rc_rtu": {
+     "s": "no_curve",
+     "part": "Outdoor equipment: AC condenser, rooftop units",
+     "note": "Whether it sits in the profile value is an open question",
+     "basis": "not_covered"
+    },
+    "rc_duct": {
+     "s": "no_direct_damage",
+     "note": "Not named by the cell (inferred; to confirm with the cell owner)",
+     "basis": "inferred"
+    },
+    "rc_plumb": {
+     "s": "no_direct_damage",
+     "note": "Not named by the cell (inferred; to confirm with the cell owner)",
+     "basis": "inferred"
+    },
+    "rc_spr": {
+     "s": "no_direct_damage",
+     "note": "Not named by the cell (inferred; to confirm with the cell owner)",
+     "basis": "inferred"
+    },
+    "rc_int": {
+     "s": "no_direct_damage",
+     "note": "Not named by the cell (inferred; to confirm with the cell owner)",
+     "basis": "inferred"
+    },
+    "rc_cont": {
+     "s": "no_curve",
+     "part": "Contents",
+     "note": "Declared as a withheld placeholder part",
+     "basis": "out_of_scope"
+    },
+    "rc_site": {
+     "s": "outside",
+     "part": "Land, site works",
+     "basis": "out_of_scope"
+    },
+    "rsc_b": {
+     "s": "curve",
+     "part": "Office roof (TPO membrane and insulation)",
+     "note": "The building on its site: the roof and windows carry curves (picture: retail · curves: office)",
+     "basis": "part"
+    }
+   },
+   "states": {
+    "asset": {
+     "rc_fnd": "rc_fnd",
+     "rc_ftg": "rc_fnd",
+     "rc_slab": "rc_fnd",
+     "rc_str": "rc_str",
+     "rc_cmu": "rc_str",
+     "rc_steel": "rc_str",
+     "rc_joists": "rc_str",
+     "rc_deck": "rc_str",
+     "rc_roof": "rc_roof",
+     "rc_memb": "rc_roof",
+     "rc_rins": "rc_roof",
+     "rc_coping": "rc_roof",
+     "rc_drains": "rc_roof",
+     "rc_hatch": "rc_roof",
+     "rc_store": "rc_store",
+     "rc_entry": "rc_entry",
+     "rc_facade": "rc_facade",
+     "rc_canopy": "rc_canopy",
+     "rc_sdoor": "rc_sdoor",
+     "rc_ao_shield": "rc_ao_shield",
+     "rc_elec": "rc_elec",
+     "rc_light": "rc_light",
+     "rc_rtu": "rc_rtu",
+     "rc_duct": "rc_duct",
+     "rc_plumb": "rc_plumb",
+     "rc_spr": "rc_spr",
+     "rc_int": "rc_int",
+     "rc_demise": "rc_int",
+     "rc_ceil": "rc_int",
+     "rc_floorfin": "rc_int",
+     "rc_rest": "rc_int",
+     "rc_cont": "rc_cont",
+     "rc_ti": "rc_cont",
+     "rc_stock": "rc_cont"
+    },
+    "plant": {
+     "rc_site": "rc_site",
+     "rsc_b": "rsc_b",
+     "rsc_bldg": "rsc_b",
+     "rsc_pave": "rc_site",
+     "rsc_lot": "rc_site",
+     "rsc_walk": "rc_site",
+     "rsc_storm": "rc_site",
+     "rsc_inlets": "rc_site",
+     "rsc_det": "rc_site",
+     "rsc_util": "rc_site",
+     "rsc_xfmr": "rc_site",
+     "rsc_gas": "rc_site",
+     "rsc_sec": "rc_site",
+     "rsc_sign": "rc_site",
+     "rsc_lights": "rc_site",
+     "rsc_dump": "rc_site",
+     "rsc_land": "rc_site"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "rc_fnd",
+      "name": "Foundation & Floor",
+      "state": "no_direct_damage",
+      "by_state": [
+       {
+        "state": "no_direct_damage",
+        "words": "no direct damage",
+        "parts": [
+         {
+          "node": "rc_ftg",
+          "name": "Footings",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "rc_slab",
+          "name": "Floor Slab",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_str",
+      "name": "Structure",
+      "state": "no_direct_damage",
+      "by_state": [
+       {
+        "state": "no_direct_damage",
+        "words": "no direct damage",
+        "parts": [
+         {
+          "node": "rc_cmu",
+          "name": "Masonry Bearing Walls",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "rc_steel",
+          "name": "Steel Columns & Beams",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "rc_joists",
+          "name": "Open-Web Steel Joists",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "rc_deck",
+          "name": "Roof Deck",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_roof",
+      "name": "Roof Assembly",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_memb",
+          "name": "Single-Ply Membrane",
+          "part": "Office roof (TPO membrane and insulation)",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_rins",
+          "name": "Roof Insulation",
+          "part": "Office roof (TPO membrane and insulation)",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_coping",
+          "name": "Parapet Coping & Edge Metal",
+          "part": "Office roof (TPO membrane and insulation)",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_drains",
+          "name": "Roof Drains & Scuppers",
+          "part": "Office roof (TPO membrane and insulation)",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_hatch",
+          "name": "Roof Hatch & Walkways",
+          "part": "Office roof (TPO membrane and insulation)",
+          "note": "The picture is the retail building; the curves are the office's"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_env",
+      "name": "Walls & Openings",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_store",
+          "name": "Storefront Glazing",
+          "part": "Office windows",
+          "note": "The picture is the retail building; the curves are the office's"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "rc_entry",
+          "name": "Entrance Doors",
+          "note": "Entrance doors are not named by the cell"
+         },
+         {
+          "node": "rc_facade",
+          "name": "Front Facade & Sign Band",
+          "note": "The facade and sign band are not named by the cell"
+         },
+         {
+          "node": "rc_canopy",
+          "name": "Front Canopy",
+          "note": "The canopy is not named by the cell"
+         },
+         {
+          "node": "rc_sdoor",
+          "name": "Rear Service Doors",
+          "note": "Service doors are not named by the cell"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rc_ao_shield",
+          "name": "Storefront Flood Barrier",
+          "note": "A resilience measure in the twin; not part of the reference building"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_svc",
+      "name": "Fixed Services",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "rc_rtu",
+          "name": "Rooftop Units",
+          "part": "Outdoor equipment: AC condenser, rooftop units",
+          "note": "Whether it sits in the profile value is an open question"
+         }
+        ]
+       },
+       {
+        "state": "no_direct_damage",
+        "words": "no direct damage",
+        "parts": [
+         {
+          "node": "rc_elec",
+          "name": "Electrical Service & Meters",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "rc_light",
+          "name": "Lighting",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "rc_duct",
+          "name": "Ductwork & Diffusers",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "rc_plumb",
+          "name": "Plumbing",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "rc_spr",
+          "name": "Fire Sprinklers",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_int",
+      "name": "Interior Construction",
+      "state": "no_direct_damage",
+      "by_state": [
+       {
+        "state": "no_direct_damage",
+        "words": "no direct damage",
+        "parts": [
+         {
+          "node": "rc_demise",
+          "name": "Demising Walls",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "rc_ceil",
+          "name": "Suspended Ceilings",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "rc_floorfin",
+          "name": "Floor Finishes",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         },
+         {
+          "node": "rc_rest",
+          "name": "Restrooms",
+          "note": "Not named by the cell (inferred; to confirm with the cell owner)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_cont",
+      "name": "Tenant Fit-Out & Stock",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "rc_ti",
+          "name": "Tenant Fit-Out",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         },
+         {
+          "node": "rc_stock",
+          "name": "Stock & Fixtures",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "rsc_b",
+      "name": "Building",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rsc_bldg",
+          "name": "Retail Building",
+          "part": "Office roof (TPO membrane and insulation)",
+          "note": "The building on its site: the roof and windows carry curves (picture: retail · curves: office)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_pave",
+      "name": "Paving",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_lot",
+          "name": "Parking Lot & Drives",
+          "part": "Land, site works"
+         },
+         {
+          "node": "rsc_walk",
+          "name": "Sidewalk & Curbs",
+          "part": "Land, site works"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_storm",
+      "name": "Stormwater",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_inlets",
+          "name": "Curb Inlets & Storm Pipe",
+          "part": "Land, site works"
+         },
+         {
+          "node": "rsc_det",
+          "name": "Underground Detention",
+          "part": "Land, site works"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_util",
+      "name": "Utilities",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_xfmr",
+          "name": "Utility Transformer",
+          "part": "Land, site works"
+         },
+         {
+          "node": "rsc_gas",
+          "name": "Gas Meters & Laterals",
+          "part": "Land, site works"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_sec",
+      "name": "Sign, Lighting & Landscape",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_sign",
+          "name": "Pylon Sign",
+          "part": "Land, site works"
+         },
+         {
+          "node": "rsc_lights",
+          "name": "Lot Lighting",
+          "part": "Land, site works"
+         },
+         {
+          "node": "rsc_dump",
+          "name": "Dumpster Enclosure",
+          "part": "Land, site works"
+         },
+         {
+          "node": "rsc_land",
+          "name": "Landscaping",
+          "part": "Land, site works"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 7,
+    "conditioner": 0,
+    "no_curve": 7,
+    "no_direct_damage": 15,
+    "outside": 11
+   },
+   "curve_parts": [
+    "Office roof (TPO membrane and insulation)",
+    "Office windows"
+   ],
+   "unmapped": [],
+   "sparks": {
+    "Office roof (TPO membrane and insulation)": {
+     "pts": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       5.08,
+       0.0
+      ],
+      [
+       10.16,
+       0.0
+      ],
+      [
+       15.24,
+       0.0
+      ],
+      [
+       20.32,
+       0.0036
+      ],
+      [
+       25.4,
+       0.0506
+      ],
+      [
+       30.48,
+       0.2183
+      ],
+      [
+       35.56,
+       0.4807
+      ],
+      [
+       40.64,
+       0.7206
+      ],
+      [
+       45.72,
+       0.8736
+      ],
+      [
+       50.8,
+       0.9499
+      ],
+      [
+       55.88,
+       0.982
+      ],
+      [
+       60.96,
+       0.994
+      ],
+      [
+       66.0,
+       0.9981
+      ],
+      [
+       71.0,
+       0.9994
+      ],
+      [
+       76.0,
+       0.9998
+      ],
+      [
+       81.0,
+       0.9999
+      ],
+      [
+       86.0,
+       1.0
+      ],
+      [
+       91.0,
+       1.0
+      ],
+      [
+       96.0,
+       1.0
+      ],
+      [
+       101.0,
+       1.0
+      ],
+      [
+       106.0,
+       1.0
+      ],
+      [
+       111.0,
+       1.0
+      ],
+      [
+       116.0,
+       1.0
+      ],
+      [
+       121.0,
+       1.0
+      ],
+      [
+       126.0,
+       1.0
+      ],
+      [
+       132.0,
+       1.0
+      ],
+      [
+       137.0,
+       1.0
+      ],
+      [
+       142.0,
+       1.0
+      ],
+      [
+       147.0,
+       1.0
+      ],
+      [
+       152.0,
+       1.0
+      ],
+      [
+       157.0,
+       1.0
+      ],
+      [
+       162.0,
+       1.0
+      ],
+      [
+       167.0,
+       1.0
+      ],
+      [
+       172.0,
+       1.0
+      ],
+      [
+       177.0,
+       1.0
+      ],
+      [
+       182.0,
+       1.0
+      ],
+      [
+       187.0,
+       1.0
+      ],
+      [
+       192.0,
+       1.0
+      ],
+      [
+       197.0,
+       1.0
+      ],
+      [
+       202.0,
+       1.0
+      ],
+      [
+       203.2,
+       1.0
+      ]
+     ],
+     "kind": "line",
+     "axis": "hazard's MESH75 hail diameter",
+     "unit": "mm",
+     "curve_id": "HRE_OFF_ROOF_TPO_MEMBRANE_AND_INSULATION",
+     "label": "Office roof (TPO membrane and insulation)"
+    },
+    "Office windows": {
+     "pts": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       5.08,
+       0.0
+      ],
+      [
+       10.16,
+       0.0
+      ],
+      [
+       15.24,
+       0.0
+      ],
+      [
+       20.32,
+       0.0
+      ],
+      [
+       25.4,
+       0.0
+      ],
+      [
+       30.48,
+       0.0003
+      ],
+      [
+       35.56,
+       0.0047
+      ],
+      [
+       40.64,
+       0.0275
+      ],
+      [
+       45.72,
+       0.0798
+      ],
+      [
+       50.8,
+       0.1455
+      ],
+      [
+       55.88,
+       0.1985
+      ],
+      [
+       60.96,
+       0.2291
+      ],
+      [
+       66.0,
+       0.2427
+      ],
+      [
+       71.0,
+       0.2477
+      ],
+      [
+       76.0,
+       0.2494
+      ],
+      [
+       81.0,
+       0.2498
+      ],
+      [
+       86.0,
+       0.25
+      ],
+      [
+       91.0,
+       0.25
+      ],
+      [
+       96.0,
+       0.25
+      ],
+      [
+       101.0,
+       0.25
+      ],
+      [
+       106.0,
+       0.25
+      ],
+      [
+       111.0,
+       0.25
+      ],
+      [
+       116.0,
+       0.25
+      ],
+      [
+       121.0,
+       0.25
+      ],
+      [
+       126.0,
+       0.25
+      ],
+      [
+       132.0,
+       0.25
+      ],
+      [
+       137.0,
+       0.25
+      ],
+      [
+       142.0,
+       0.25
+      ],
+      [
+       147.0,
+       0.25
+      ],
+      [
+       152.0,
+       0.25
+      ],
+      [
+       157.0,
+       0.25
+      ],
+      [
+       162.0,
+       0.25
+      ],
+      [
+       167.0,
+       0.25
+      ],
+      [
+       172.0,
+       0.25
+      ],
+      [
+       177.0,
+       0.25
+      ],
+      [
+       182.0,
+       0.25
+      ],
+      [
+       187.0,
+       0.25
+      ],
+      [
+       192.0,
+       0.25
+      ],
+      [
+       197.0,
+       0.25
+      ],
+      [
+       202.0,
+       0.25
+      ],
+      [
+       203.2,
+       0.25
+      ]
+     ],
+     "kind": "line",
+     "axis": "hazard's MESH75 hail diameter",
+     "unit": "mm",
+     "curve_id": "HRE_OFF_WINDOWS_T4",
+     "label": "Office windows"
+    }
+   }
+  },
+  {
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "entry_id": "flood_real_estate",
+   "status": "proposal",
+   "gap": false,
+   "href": "/cells/flood_real_estate?building=commercial",
+   "rows": {
+    "rc_bldg": {
+     "s": "curve",
+     "part": "Office",
+     "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)",
+     "basis": "part"
+    },
+    "rc_ao_shield": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference building",
+     "basis": "out_of_scope"
+    },
+    "rc_cont": {
+     "s": "no_curve",
+     "part": "Contents",
+     "note": "Declared as a withheld placeholder part",
+     "basis": "out_of_scope"
+    },
+    "rc_site": {
+     "s": "outside",
+     "part": "Land, site works",
+     "note": "The site around the building is outside the value this curve prices",
+     "basis": "out_of_scope"
+    },
+    "rsc_b": {
+     "s": "curve",
+     "part": "Office",
+     "note": "The building on its site",
+     "basis": "part"
+    }
+   },
+   "states": {
+    "asset": {
+     "rc_bldg": "rc_bldg",
+     "rc_fnd": "rc_bldg",
+     "rc_ftg": "rc_bldg",
+     "rc_slab": "rc_bldg",
+     "rc_str": "rc_bldg",
+     "rc_cmu": "rc_bldg",
+     "rc_steel": "rc_bldg",
+     "rc_joists": "rc_bldg",
+     "rc_deck": "rc_bldg",
+     "rc_roof": "rc_bldg",
+     "rc_memb": "rc_bldg",
+     "rc_rins": "rc_bldg",
+     "rc_coping": "rc_bldg",
+     "rc_drains": "rc_bldg",
+     "rc_hatch": "rc_bldg",
+     "rc_env": "rc_bldg",
+     "rc_store": "rc_bldg",
+     "rc_entry": "rc_bldg",
+     "rc_facade": "rc_bldg",
+     "rc_canopy": "rc_bldg",
+     "rc_sdoor": "rc_bldg",
+     "rc_ao_shield": "rc_ao_shield",
+     "rc_svc": "rc_bldg",
+     "rc_elec": "rc_bldg",
+     "rc_light": "rc_bldg",
+     "rc_rtu": "rc_bldg",
+     "rc_duct": "rc_bldg",
+     "rc_plumb": "rc_bldg",
+     "rc_spr": "rc_bldg",
+     "rc_int": "rc_bldg",
+     "rc_demise": "rc_bldg",
+     "rc_ceil": "rc_bldg",
+     "rc_floorfin": "rc_bldg",
+     "rc_rest": "rc_bldg",
+     "rc_cont": "rc_cont",
+     "rc_ti": "rc_cont",
+     "rc_stock": "rc_cont"
+    },
+    "plant": {
+     "rc_site": "rc_site",
+     "rsc_b": "rsc_b",
+     "rsc_bldg": "rsc_b",
+     "rsc_pave": "rc_site",
+     "rsc_lot": "rc_site",
+     "rsc_walk": "rc_site",
+     "rsc_storm": "rc_site",
+     "rsc_inlets": "rc_site",
+     "rsc_det": "rc_site",
+     "rsc_util": "rc_site",
+     "rsc_xfmr": "rc_site",
+     "rsc_gas": "rc_site",
+     "rsc_sec": "rc_site",
+     "rsc_sign": "rc_site",
+     "rsc_lights": "rc_site",
+     "rsc_dump": "rc_site",
+     "rsc_land": "rc_site"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "rc_fnd",
+      "name": "Foundation & Floor",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_ftg",
+          "name": "Footings",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_slab",
+          "name": "Floor Slab",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_str",
+      "name": "Structure",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_cmu",
+          "name": "Masonry Bearing Walls",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_steel",
+          "name": "Steel Columns & Beams",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_joists",
+          "name": "Open-Web Steel Joists",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_deck",
+          "name": "Roof Deck",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_roof",
+      "name": "Roof Assembly",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_memb",
+          "name": "Single-Ply Membrane",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_rins",
+          "name": "Roof Insulation",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_coping",
+          "name": "Parapet Coping & Edge Metal",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_drains",
+          "name": "Roof Drains & Scuppers",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_hatch",
+          "name": "Roof Hatch & Walkways",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_env",
+      "name": "Walls & Openings",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_store",
+          "name": "Storefront Glazing",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_entry",
+          "name": "Entrance Doors",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_facade",
+          "name": "Front Facade & Sign Band",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_canopy",
+          "name": "Front Canopy",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_sdoor",
+          "name": "Rear Service Doors",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rc_ao_shield",
+          "name": "Storefront Flood Barrier",
+          "note": "A resilience measure in the twin; not part of the reference building"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_svc",
+      "name": "Fixed Services",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_elec",
+          "name": "Electrical Service & Meters",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_light",
+          "name": "Lighting",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_rtu",
+          "name": "Rooftop Units",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_duct",
+          "name": "Ductwork & Diffusers",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_plumb",
+          "name": "Plumbing",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_spr",
+          "name": "Fire Sprinklers",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_int",
+      "name": "Interior Construction",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_demise",
+          "name": "Demising Walls",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_ceil",
+          "name": "Suspended Ceilings",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_floorfin",
+          "name": "Floor Finishes",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_rest",
+          "name": "Restrooms",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_cont",
+      "name": "Tenant Fit-Out & Stock",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "rc_ti",
+          "name": "Tenant Fit-Out",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         },
+         {
+          "node": "rc_stock",
+          "name": "Stock & Fixtures",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "rsc_b",
+      "name": "Building",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rsc_bldg",
+          "name": "Retail Building",
+          "part": "Office",
+          "note": "The building on its site"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_pave",
+      "name": "Paving",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_lot",
+          "name": "Parking Lot & Drives",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_walk",
+          "name": "Sidewalk & Curbs",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_storm",
+      "name": "Stormwater",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_inlets",
+          "name": "Curb Inlets & Storm Pipe",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_det",
+          "name": "Underground Detention",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_util",
+      "name": "Utilities",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_xfmr",
+          "name": "Utility Transformer",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_gas",
+          "name": "Gas Meters & Laterals",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_sec",
+      "name": "Sign, Lighting & Landscape",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_sign",
+          "name": "Pylon Sign",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_lights",
+          "name": "Lot Lighting",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_dump",
+          "name": "Dumpster Enclosure",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_land",
+          "name": "Landscaping",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 27,
+    "conditioner": 0,
+    "no_curve": 2,
+    "no_direct_damage": 0,
+    "outside": 11
+   },
+   "curve_parts": [
+    "Office"
+   ],
+   "unmapped": [],
+   "sparks": {
+    "Office": {
+     "pts": [
+      [
+       -4.0,
+       0.0
+      ],
+      [
+       -3.3,
+       0.0
+      ],
+      [
+       -2.775,
+       0.0
+      ],
+      [
+       -2.075,
+       0.0
+      ],
+      [
+       -1.55,
+       0.0
+      ],
+      [
+       -1.0,
+       0.0
+      ],
+      [
+       -0.325,
+       0.0135
+      ],
+      [
+       0.2,
+       0.038
+      ],
+      [
+       0.9,
+       0.101
+      ],
+      [
+       1.425,
+       0.1313
+      ],
+      [
+       2.0,
+       0.16
+      ],
+      [
+       2.65,
+       0.199
+      ],
+      [
+       3.35,
+       0.241
+      ],
+      [
+       4.0,
+       0.28
+      ],
+      [
+       4.575,
+       0.3203
+      ],
+      [
+       5.1,
+       0.353
+      ],
+      [
+       5.8,
+       0.374
+      ],
+      [
+       6.325,
+       0.3897
+      ],
+      [
+       7.0,
+       0.41
+      ],
+      [
+       7.55,
+       0.4265
+      ],
+      [
+       8.075,
+       0.4422
+      ],
+      [
+       8.775,
+       0.4632
+      ],
+      [
+       9.3,
+       0.479
+      ],
+      [
+       10.0,
+       0.5
+      ],
+      [
+       10.7,
+       0.528
+      ],
+      [
+       11.225,
+       0.5467
+      ],
+      [
+       11.925,
+       0.5677
+      ],
+      [
+       12.45,
+       0.579
+      ],
+      [
+       13.0,
+       0.59
+      ],
+      [
+       13.675,
+       0.6102
+      ],
+      [
+       14.2,
+       0.628
+      ],
+      [
+       14.9,
+       0.656
+      ],
+      [
+       15.425,
+       0.6685
+      ],
+      [
+       16.0,
+       0.68
+      ],
+      [
+       16.65,
+       0.693
+      ],
+      [
+       17.35,
+       0.707
+      ],
+      [
+       18.0,
+       0.72
+      ],
+      [
+       18.575,
+       0.7315
+      ],
+      [
+       19.1,
+       0.742
+      ],
+      [
+       19.8,
+       0.756
+      ],
+      [
+       20.325,
+       0.7632
+      ],
+      [
+       21.0,
+       0.77
+      ],
+      [
+       21.55,
+       0.7755
+      ],
+      [
+       22.075,
+       0.7808
+      ],
+      [
+       22.775,
+       0.7878
+      ],
+      [
+       23.3,
+       0.793
+      ],
+      [
+       24.0,
+       0.8
+      ]
+     ],
+     "kind": "line",
+     "axis": "water depth above the first floor",
+     "unit": "ft",
+     "curve_id": "FRE_OFF_HAZUS_DF431",
+     "label": "Office"
+    }
+   }
+  },
+  {
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "entry_id": "tropical_cyclone_wind_real_estate",
+   "status": "proposal",
+   "gap": false,
+   "href": "/cells/tropical_cyclone_wind_real_estate?building=commercial",
+   "rows": {
+    "rc_bldg": {
+     "s": "curve",
+     "part": "Office",
+     "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)",
+     "basis": "part"
+    },
+    "rc_ao_shield": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference building",
+     "basis": "out_of_scope"
+    },
+    "rc_cont": {
+     "s": "no_curve",
+     "part": "Contents",
+     "note": "Declared as a withheld placeholder part",
+     "basis": "out_of_scope"
+    },
+    "rc_site": {
+     "s": "outside",
+     "part": "Land, site works",
+     "note": "The site around the building is outside the value this curve prices",
+     "basis": "out_of_scope"
+    },
+    "rsc_b": {
+     "s": "curve",
+     "part": "Office",
+     "note": "The building on its site",
+     "basis": "part"
+    }
+   },
+   "states": {
+    "asset": {
+     "rc_bldg": "rc_bldg",
+     "rc_fnd": "rc_bldg",
+     "rc_ftg": "rc_bldg",
+     "rc_slab": "rc_bldg",
+     "rc_str": "rc_bldg",
+     "rc_cmu": "rc_bldg",
+     "rc_steel": "rc_bldg",
+     "rc_joists": "rc_bldg",
+     "rc_deck": "rc_bldg",
+     "rc_roof": "rc_bldg",
+     "rc_memb": "rc_bldg",
+     "rc_rins": "rc_bldg",
+     "rc_coping": "rc_bldg",
+     "rc_drains": "rc_bldg",
+     "rc_hatch": "rc_bldg",
+     "rc_env": "rc_bldg",
+     "rc_store": "rc_bldg",
+     "rc_entry": "rc_bldg",
+     "rc_facade": "rc_bldg",
+     "rc_canopy": "rc_bldg",
+     "rc_sdoor": "rc_bldg",
+     "rc_ao_shield": "rc_ao_shield",
+     "rc_svc": "rc_bldg",
+     "rc_elec": "rc_bldg",
+     "rc_light": "rc_bldg",
+     "rc_rtu": "rc_bldg",
+     "rc_duct": "rc_bldg",
+     "rc_plumb": "rc_bldg",
+     "rc_spr": "rc_bldg",
+     "rc_int": "rc_bldg",
+     "rc_demise": "rc_bldg",
+     "rc_ceil": "rc_bldg",
+     "rc_floorfin": "rc_bldg",
+     "rc_rest": "rc_bldg",
+     "rc_cont": "rc_cont",
+     "rc_ti": "rc_cont",
+     "rc_stock": "rc_cont"
+    },
+    "plant": {
+     "rc_site": "rc_site",
+     "rsc_b": "rsc_b",
+     "rsc_bldg": "rsc_b",
+     "rsc_pave": "rc_site",
+     "rsc_lot": "rc_site",
+     "rsc_walk": "rc_site",
+     "rsc_storm": "rc_site",
+     "rsc_inlets": "rc_site",
+     "rsc_det": "rc_site",
+     "rsc_util": "rc_site",
+     "rsc_xfmr": "rc_site",
+     "rsc_gas": "rc_site",
+     "rsc_sec": "rc_site",
+     "rsc_sign": "rc_site",
+     "rsc_lights": "rc_site",
+     "rsc_dump": "rc_site",
+     "rsc_land": "rc_site"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "rc_fnd",
+      "name": "Foundation & Floor",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_ftg",
+          "name": "Footings",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_slab",
+          "name": "Floor Slab",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_str",
+      "name": "Structure",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_cmu",
+          "name": "Masonry Bearing Walls",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_steel",
+          "name": "Steel Columns & Beams",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_joists",
+          "name": "Open-Web Steel Joists",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_deck",
+          "name": "Roof Deck",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_roof",
+      "name": "Roof Assembly",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_memb",
+          "name": "Single-Ply Membrane",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_rins",
+          "name": "Roof Insulation",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_coping",
+          "name": "Parapet Coping & Edge Metal",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_drains",
+          "name": "Roof Drains & Scuppers",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_hatch",
+          "name": "Roof Hatch & Walkways",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_env",
+      "name": "Walls & Openings",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_store",
+          "name": "Storefront Glazing",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_entry",
+          "name": "Entrance Doors",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_facade",
+          "name": "Front Facade & Sign Band",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_canopy",
+          "name": "Front Canopy",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_sdoor",
+          "name": "Rear Service Doors",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rc_ao_shield",
+          "name": "Storefront Flood Barrier",
+          "note": "A resilience measure in the twin; not part of the reference building"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_svc",
+      "name": "Fixed Services",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_elec",
+          "name": "Electrical Service & Meters",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_light",
+          "name": "Lighting",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_rtu",
+          "name": "Rooftop Units",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_duct",
+          "name": "Ductwork & Diffusers",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_plumb",
+          "name": "Plumbing",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_spr",
+          "name": "Fire Sprinklers",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_int",
+      "name": "Interior Construction",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_demise",
+          "name": "Demising Walls",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_ceil",
+          "name": "Suspended Ceilings",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_floorfin",
+          "name": "Floor Finishes",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         },
+         {
+          "node": "rc_rest",
+          "name": "Restrooms",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's (the cell also prices a retail building)"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_cont",
+      "name": "Tenant Fit-Out & Stock",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "rc_ti",
+          "name": "Tenant Fit-Out",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         },
+         {
+          "node": "rc_stock",
+          "name": "Stock & Fixtures",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "rsc_b",
+      "name": "Building",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rsc_bldg",
+          "name": "Retail Building",
+          "part": "Office",
+          "note": "The building on its site"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_pave",
+      "name": "Paving",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_lot",
+          "name": "Parking Lot & Drives",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_walk",
+          "name": "Sidewalk & Curbs",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_storm",
+      "name": "Stormwater",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_inlets",
+          "name": "Curb Inlets & Storm Pipe",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_det",
+          "name": "Underground Detention",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_util",
+      "name": "Utilities",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_xfmr",
+          "name": "Utility Transformer",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_gas",
+          "name": "Gas Meters & Laterals",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_sec",
+      "name": "Sign, Lighting & Landscape",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_sign",
+          "name": "Pylon Sign",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_lights",
+          "name": "Lot Lighting",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_dump",
+          "name": "Dumpster Enclosure",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_land",
+          "name": "Landscaping",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 27,
+    "conditioner": 0,
+    "no_curve": 2,
+    "no_direct_damage": 0,
+    "outside": 11
+   },
+   "curve_parts": [
+    "Office"
+   ],
+   "unmapped": [],
+   "sparks": {
+    "Office": {
+     "pts": [
+      [
+       50.0,
+       0.0
+      ],
+      [
+       55.0,
+       0.0
+      ],
+      [
+       60.0,
+       0.0001
+      ],
+      [
+       65.0,
+       0.0002
+      ],
+      [
+       70.0,
+       0.0004
+      ],
+      [
+       75.0,
+       0.0008
+      ],
+      [
+       80.0,
+       0.0021
+      ],
+      [
+       85.0,
+       0.0049
+      ],
+      [
+       90.0,
+       0.0102
+      ],
+      [
+       95.0,
+       0.0191
+      ],
+      [
+       100.0,
+       0.0317
+      ],
+      [
+       105.0,
+       0.05
+      ],
+      [
+       110.0,
+       0.0723
+      ],
+      [
+       115.0,
+       0.1063
+      ],
+      [
+       120.0,
+       0.1402
+      ],
+      [
+       125.0,
+       0.1992
+      ],
+      [
+       130.0,
+       0.252
+      ],
+      [
+       135.0,
+       0.3235
+      ],
+      [
+       140.0,
+       0.3935
+      ],
+      [
+       145.0,
+       0.4639
+      ],
+      [
+       150.0,
+       0.5398
+      ],
+      [
+       155.0,
+       0.6192
+      ],
+      [
+       160.0,
+       0.6847
+      ],
+      [
+       165.0,
+       0.7165
+      ],
+      [
+       170.0,
+       0.7402
+      ],
+      [
+       175.0,
+       0.7673
+      ],
+      [
+       180.0,
+       0.7839
+      ],
+      [
+       185.0,
+       0.7933
+      ],
+      [
+       190.0,
+       0.7989
+      ],
+      [
+       195.0,
+       0.8038
+      ],
+      [
+       200.0,
+       0.8063
+      ],
+      [
+       205.0,
+       0.8051
+      ],
+      [
+       210.0,
+       0.8072
+      ],
+      [
+       215.0,
+       0.808
+      ],
+      [
+       220.0,
+       0.81
+      ],
+      [
+       225.0,
+       0.8105
+      ],
+      [
+       230.0,
+       0.8107
+      ],
+      [
+       235.0,
+       0.8107
+      ],
+      [
+       240.0,
+       0.8105
+      ],
+      [
+       245.0,
+       0.8104
+      ],
+      [
+       250.0,
+       0.8104
+      ]
+     ],
+     "kind": "line",
+     "axis": "peak 3-second gust at 10 m in open terrain",
+     "unit": "mph",
+     "curve_id": "TCRE_OFF_HAZUS_SECBM_OPEN",
+     "label": "Office"
+    }
+   }
+  },
+  {
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "entry_id": "convective_wind_real_estate",
+   "status": "proposal",
+   "gap": false,
+   "href": "/cells/convective_wind_real_estate?building=commercial",
+   "rows": {
+    "rc_bldg": {
+     "s": "curve",
+     "part": "Office",
+     "note": "The picture is the retail building; the curves are the office's",
+     "basis": "part"
+    },
+    "rc_ao_shield": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference building",
+     "basis": "out_of_scope"
+    },
+    "rc_cont": {
+     "s": "no_curve",
+     "part": "Contents",
+     "note": "Declared as a withheld placeholder part",
+     "basis": "out_of_scope"
+    },
+    "rc_site": {
+     "s": "outside",
+     "part": "Land, site works",
+     "note": "The site around the building is outside the value this curve prices",
+     "basis": "out_of_scope"
+    },
+    "rsc_b": {
+     "s": "curve",
+     "part": "Office",
+     "note": "The building on its site",
+     "basis": "part"
+    }
+   },
+   "states": {
+    "asset": {
+     "rc_bldg": "rc_bldg",
+     "rc_fnd": "rc_bldg",
+     "rc_ftg": "rc_bldg",
+     "rc_slab": "rc_bldg",
+     "rc_str": "rc_bldg",
+     "rc_cmu": "rc_bldg",
+     "rc_steel": "rc_bldg",
+     "rc_joists": "rc_bldg",
+     "rc_deck": "rc_bldg",
+     "rc_roof": "rc_bldg",
+     "rc_memb": "rc_bldg",
+     "rc_rins": "rc_bldg",
+     "rc_coping": "rc_bldg",
+     "rc_drains": "rc_bldg",
+     "rc_hatch": "rc_bldg",
+     "rc_env": "rc_bldg",
+     "rc_store": "rc_bldg",
+     "rc_entry": "rc_bldg",
+     "rc_facade": "rc_bldg",
+     "rc_canopy": "rc_bldg",
+     "rc_sdoor": "rc_bldg",
+     "rc_ao_shield": "rc_ao_shield",
+     "rc_svc": "rc_bldg",
+     "rc_elec": "rc_bldg",
+     "rc_light": "rc_bldg",
+     "rc_rtu": "rc_bldg",
+     "rc_duct": "rc_bldg",
+     "rc_plumb": "rc_bldg",
+     "rc_spr": "rc_bldg",
+     "rc_int": "rc_bldg",
+     "rc_demise": "rc_bldg",
+     "rc_ceil": "rc_bldg",
+     "rc_floorfin": "rc_bldg",
+     "rc_rest": "rc_bldg",
+     "rc_cont": "rc_cont",
+     "rc_ti": "rc_cont",
+     "rc_stock": "rc_cont"
+    },
+    "plant": {
+     "rc_site": "rc_site",
+     "rsc_b": "rsc_b",
+     "rsc_bldg": "rsc_b",
+     "rsc_pave": "rc_site",
+     "rsc_lot": "rc_site",
+     "rsc_walk": "rc_site",
+     "rsc_storm": "rc_site",
+     "rsc_inlets": "rc_site",
+     "rsc_det": "rc_site",
+     "rsc_util": "rc_site",
+     "rsc_xfmr": "rc_site",
+     "rsc_gas": "rc_site",
+     "rsc_sec": "rc_site",
+     "rsc_sign": "rc_site",
+     "rsc_lights": "rc_site",
+     "rsc_dump": "rc_site",
+     "rsc_land": "rc_site"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "rc_fnd",
+      "name": "Foundation & Floor",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_ftg",
+          "name": "Footings",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_slab",
+          "name": "Floor Slab",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_str",
+      "name": "Structure",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_cmu",
+          "name": "Masonry Bearing Walls",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_steel",
+          "name": "Steel Columns & Beams",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_joists",
+          "name": "Open-Web Steel Joists",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_deck",
+          "name": "Roof Deck",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_roof",
+      "name": "Roof Assembly",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_memb",
+          "name": "Single-Ply Membrane",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_rins",
+          "name": "Roof Insulation",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_coping",
+          "name": "Parapet Coping & Edge Metal",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_drains",
+          "name": "Roof Drains & Scuppers",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_hatch",
+          "name": "Roof Hatch & Walkways",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_env",
+      "name": "Walls & Openings",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_store",
+          "name": "Storefront Glazing",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_entry",
+          "name": "Entrance Doors",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_facade",
+          "name": "Front Facade & Sign Band",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_canopy",
+          "name": "Front Canopy",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_sdoor",
+          "name": "Rear Service Doors",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rc_ao_shield",
+          "name": "Storefront Flood Barrier",
+          "note": "A resilience measure in the twin; not part of the reference building"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_svc",
+      "name": "Fixed Services",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_elec",
+          "name": "Electrical Service & Meters",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_light",
+          "name": "Lighting",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_rtu",
+          "name": "Rooftop Units",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_duct",
+          "name": "Ductwork & Diffusers",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_plumb",
+          "name": "Plumbing",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_spr",
+          "name": "Fire Sprinklers",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_int",
+      "name": "Interior Construction",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_demise",
+          "name": "Demising Walls",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_ceil",
+          "name": "Suspended Ceilings",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_floorfin",
+          "name": "Floor Finishes",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_rest",
+          "name": "Restrooms",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_cont",
+      "name": "Tenant Fit-Out & Stock",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "rc_ti",
+          "name": "Tenant Fit-Out",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         },
+         {
+          "node": "rc_stock",
+          "name": "Stock & Fixtures",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "rsc_b",
+      "name": "Building",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rsc_bldg",
+          "name": "Retail Building",
+          "part": "Office",
+          "note": "The building on its site"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_pave",
+      "name": "Paving",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_lot",
+          "name": "Parking Lot & Drives",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_walk",
+          "name": "Sidewalk & Curbs",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_storm",
+      "name": "Stormwater",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_inlets",
+          "name": "Curb Inlets & Storm Pipe",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_det",
+          "name": "Underground Detention",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_util",
+      "name": "Utilities",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_xfmr",
+          "name": "Utility Transformer",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_gas",
+          "name": "Gas Meters & Laterals",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_sec",
+      "name": "Sign, Lighting & Landscape",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_sign",
+          "name": "Pylon Sign",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_lights",
+          "name": "Lot Lighting",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_dump",
+          "name": "Dumpster Enclosure",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_land",
+          "name": "Landscaping",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 27,
+    "conditioner": 0,
+    "no_curve": 2,
+    "no_direct_damage": 0,
+    "outside": 11
+   },
+   "curve_parts": [
+    "Office"
+   ],
+   "unmapped": [],
+   "sparks": {
+    "Office": {
+     "pts": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       6.375,
+       0.0
+      ],
+      [
+       12.75,
+       0.0
+      ],
+      [
+       19.0,
+       0.0
+      ],
+      [
+       25.0,
+       0.0
+      ],
+      [
+       31.0,
+       0.0
+      ],
+      [
+       37.0,
+       0.0
+      ],
+      [
+       43.0312,
+       0.0
+      ],
+      [
+       49.4062,
+       0.0
+      ],
+      [
+       56.0,
+       0.0
+      ],
+      [
+       62.1562,
+       0.0
+      ],
+      [
+       68.5312,
+       0.0
+      ],
+      [
+       74.9062,
+       0.0
+      ],
+      [
+       81.0,
+       0.0
+      ],
+      [
+       87.0,
+       0.0
+      ],
+      [
+       93.0,
+       0.0
+      ],
+      [
+       99.0,
+       0.0094
+      ],
+      [
+       106.0,
+       0.0333
+      ],
+      [
+       112.0,
+       0.0585
+      ],
+      [
+       118.0,
+       0.0961
+      ],
+      [
+       124.3125,
+       0.1568
+      ],
+      [
+       130.6875,
+       0.2359
+      ],
+      [
+       137.0,
+       0.3169
+      ],
+      [
+       143.0,
+       0.3818
+      ],
+      [
+       149.0,
+       0.4295
+      ],
+      [
+       156.0,
+       0.4689
+      ],
+      [
+       162.0,
+       0.4993
+      ],
+      [
+       168.0,
+       0.5364
+      ],
+      [
+       174.0,
+       0.5854
+      ],
+      [
+       180.0938,
+       0.6475
+      ],
+      [
+       186.4688,
+       0.7203
+      ],
+      [
+       192.8438,
+       0.7927
+      ],
+      [
+       199.0,
+       0.8547
+      ],
+      [
+       205.5938,
+       0.9076
+      ],
+      [
+       211.9688,
+       0.9443
+      ],
+      [
+       218.0,
+       0.9675
+      ],
+      [
+       224.0,
+       0.982
+      ],
+      [
+       230.0,
+       0.9905
+      ],
+      [
+       236.0,
+       0.9952
+      ],
+      [
+       242.25,
+       0.9978
+      ],
+      [
+       248.625,
+       0.999
+      ],
+      [
+       255.0,
+       0.9996
+      ]
+     ],
+     "kind": "line",
+     "axis": "convective gust 3s 10m open terrain mph",
+     "unit": "mph",
+     "curve_id": "CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96",
+     "label": "Office · cwre off ef lrb straight line onset96"
+    }
+   }
+  },
+  {
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "entry_id": "wildfire_real_estate",
+   "status": "proposal",
+   "gap": false,
+   "href": "/cells/wildfire_real_estate?building=commercial",
+   "rows": {
+    "rc_bldg": {
+     "s": "curve",
+     "part": "Office",
+     "note": "The picture is the retail building; the curves are the office's",
+     "basis": "part"
+    },
+    "rc_ao_shield": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference building",
+     "basis": "out_of_scope"
+    },
+    "rc_cont": {
+     "s": "no_curve",
+     "part": "Contents",
+     "note": "Declared as a withheld placeholder part",
+     "basis": "out_of_scope"
+    },
+    "rc_site": {
+     "s": "outside",
+     "part": "Land, site works",
+     "note": "The site around the building is outside the value this curve prices",
+     "basis": "out_of_scope"
+    },
+    "rsc_b": {
+     "s": "curve",
+     "part": "Office",
+     "note": "The building on its site",
+     "basis": "part"
+    }
+   },
+   "states": {
+    "asset": {
+     "rc_bldg": "rc_bldg",
+     "rc_fnd": "rc_bldg",
+     "rc_ftg": "rc_bldg",
+     "rc_slab": "rc_bldg",
+     "rc_str": "rc_bldg",
+     "rc_cmu": "rc_bldg",
+     "rc_steel": "rc_bldg",
+     "rc_joists": "rc_bldg",
+     "rc_deck": "rc_bldg",
+     "rc_roof": "rc_bldg",
+     "rc_memb": "rc_bldg",
+     "rc_rins": "rc_bldg",
+     "rc_coping": "rc_bldg",
+     "rc_drains": "rc_bldg",
+     "rc_hatch": "rc_bldg",
+     "rc_env": "rc_bldg",
+     "rc_store": "rc_bldg",
+     "rc_entry": "rc_bldg",
+     "rc_facade": "rc_bldg",
+     "rc_canopy": "rc_bldg",
+     "rc_sdoor": "rc_bldg",
+     "rc_ao_shield": "rc_ao_shield",
+     "rc_svc": "rc_bldg",
+     "rc_elec": "rc_bldg",
+     "rc_light": "rc_bldg",
+     "rc_rtu": "rc_bldg",
+     "rc_duct": "rc_bldg",
+     "rc_plumb": "rc_bldg",
+     "rc_spr": "rc_bldg",
+     "rc_int": "rc_bldg",
+     "rc_demise": "rc_bldg",
+     "rc_ceil": "rc_bldg",
+     "rc_floorfin": "rc_bldg",
+     "rc_rest": "rc_bldg",
+     "rc_cont": "rc_cont",
+     "rc_ti": "rc_cont",
+     "rc_stock": "rc_cont"
+    },
+    "plant": {
+     "rc_site": "rc_site",
+     "rsc_b": "rsc_b",
+     "rsc_bldg": "rsc_b",
+     "rsc_pave": "rc_site",
+     "rsc_lot": "rc_site",
+     "rsc_walk": "rc_site",
+     "rsc_storm": "rc_site",
+     "rsc_inlets": "rc_site",
+     "rsc_det": "rc_site",
+     "rsc_util": "rc_site",
+     "rsc_xfmr": "rc_site",
+     "rsc_gas": "rc_site",
+     "rsc_sec": "rc_site",
+     "rsc_sign": "rc_site",
+     "rsc_lights": "rc_site",
+     "rsc_dump": "rc_site",
+     "rsc_land": "rc_site"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "rc_fnd",
+      "name": "Foundation & Floor",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_ftg",
+          "name": "Footings",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_slab",
+          "name": "Floor Slab",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_str",
+      "name": "Structure",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_cmu",
+          "name": "Masonry Bearing Walls",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_steel",
+          "name": "Steel Columns & Beams",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_joists",
+          "name": "Open-Web Steel Joists",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_deck",
+          "name": "Roof Deck",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_roof",
+      "name": "Roof Assembly",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_memb",
+          "name": "Single-Ply Membrane",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_rins",
+          "name": "Roof Insulation",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_coping",
+          "name": "Parapet Coping & Edge Metal",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_drains",
+          "name": "Roof Drains & Scuppers",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_hatch",
+          "name": "Roof Hatch & Walkways",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_env",
+      "name": "Walls & Openings",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_store",
+          "name": "Storefront Glazing",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_entry",
+          "name": "Entrance Doors",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_facade",
+          "name": "Front Facade & Sign Band",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_canopy",
+          "name": "Front Canopy",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_sdoor",
+          "name": "Rear Service Doors",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rc_ao_shield",
+          "name": "Storefront Flood Barrier",
+          "note": "A resilience measure in the twin; not part of the reference building"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_svc",
+      "name": "Fixed Services",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_elec",
+          "name": "Electrical Service & Meters",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_light",
+          "name": "Lighting",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_rtu",
+          "name": "Rooftop Units",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_duct",
+          "name": "Ductwork & Diffusers",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_plumb",
+          "name": "Plumbing",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_spr",
+          "name": "Fire Sprinklers",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_int",
+      "name": "Interior Construction",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rc_demise",
+          "name": "Demising Walls",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_ceil",
+          "name": "Suspended Ceilings",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_floorfin",
+          "name": "Floor Finishes",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         },
+         {
+          "node": "rc_rest",
+          "name": "Restrooms",
+          "part": "Office",
+          "note": "The picture is the retail building; the curves are the office's"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rc_cont",
+      "name": "Tenant Fit-Out & Stock",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "rc_ti",
+          "name": "Tenant Fit-Out",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         },
+         {
+          "node": "rc_stock",
+          "name": "Stock & Fixtures",
+          "part": "Contents",
+          "note": "Declared as a withheld placeholder part"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "rsc_b",
+      "name": "Building",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "rsc_bldg",
+          "name": "Retail Building",
+          "part": "Office",
+          "note": "The building on its site"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_pave",
+      "name": "Paving",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_lot",
+          "name": "Parking Lot & Drives",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_walk",
+          "name": "Sidewalk & Curbs",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_storm",
+      "name": "Stormwater",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_inlets",
+          "name": "Curb Inlets & Storm Pipe",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_det",
+          "name": "Underground Detention",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_util",
+      "name": "Utilities",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_xfmr",
+          "name": "Utility Transformer",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_gas",
+          "name": "Gas Meters & Laterals",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "rsc_sec",
+      "name": "Sign, Lighting & Landscape",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "rsc_sign",
+          "name": "Pylon Sign",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_lights",
+          "name": "Lot Lighting",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_dump",
+          "name": "Dumpster Enclosure",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         },
+         {
+          "node": "rsc_land",
+          "name": "Landscaping",
+          "part": "Land, site works",
+          "note": "The site around the building is outside the value this curve prices"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 27,
+    "conditioner": 0,
+    "no_curve": 2,
+    "no_direct_damage": 0,
+    "outside": 11
+   },
+   "curve_parts": [
+    "Office"
+   ],
+   "unmapped": [],
+   "sparks": {
+    "Office": {
+     "pts": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       1.0,
+       0.18
+      ],
+      [
+       2.0,
+       0.315
+      ],
+      [
+       3.0,
+       0.45
+      ],
+      [
+       4.0,
+       0.585
+      ],
+      [
+       5.0,
+       0.72
+      ],
+      [
+       6.0,
+       0.855
+      ]
+     ],
+     "kind": "categorical",
+     "axis": "FSim conditional flame-length class state",
+     "unit": "class",
+     "curve_id": "WFRE_OFF_WRC_SHRUB_X0_9",
+     "label": "Office"
+    }
+   }
+  }
+ ],
+ "matrix": [
+  {
+   "tree": "asset",
+   "node": "rc_fnd",
+   "name": "Foundation & Floor",
+   "cells": {
+    "hail": {
+     "state": "no_direct_damage",
+     "words": "no direct damage",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_direct_damage"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "rc_str",
+   "name": "Structure",
+   "cells": {
+    "hail": {
+     "state": "no_direct_damage",
+     "words": "no direct damage",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_direct_damage"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "rc_roof",
+   "name": "Roof Assembly",
+   "cells": {
+    "hail": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office roof (TPO membrane and insulation)"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "rc_env",
+   "name": "Walls & Openings",
+   "cells": {
+    "hail": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office windows"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve",
+      "outside"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "outside"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "outside"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "outside"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "outside"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "rc_svc",
+   "name": "Fixed Services",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": true,
+     "states": [
+      "no_curve",
+      "no_direct_damage"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "rc_int",
+   "name": "Interior Construction",
+   "cells": {
+    "hail": {
+     "state": "no_direct_damage",
+     "words": "no direct damage",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_direct_damage"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "rc_cont",
+   "name": "Tenant Fit-Out & Stock",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "rsc_b",
+   "name": "Building",
+   "cells": {
+    "hail": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office roof (TPO membrane and insulation)"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Office"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "rsc_pave",
+   "name": "Paving",
+   "cells": {
+    "hail": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "flood": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "convective_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "wildfire": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "rsc_storm",
+   "name": "Stormwater",
+   "cells": {
+    "hail": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "flood": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "convective_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "wildfire": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "rsc_util",
+   "name": "Utilities",
+   "cells": {
+    "hail": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "flood": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "convective_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "wildfire": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "rsc_sec",
+   "name": "Sign, Lighting & Landscape",
+   "cells": {
+    "hail": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "flood": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "convective_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "wildfire": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    }
+   }
+  }
+ ],
+ "state_words": {
+  "curve": "Has a damage curve",
+  "conditioner": "Changes the curve, no curve of its own",
+  "no_curve": "In the value, no curve yet",
+  "no_direct_damage": "Reviewed: no direct damage",
+  "outside": "Outside the value this curve prices"
+ },
+ "state_short": {
+  "curve": "curve",
+  "conditioner": "changes the curve",
+  "no_curve": "no curve yet",
+  "no_direct_damage": "no direct damage",
+  "outside": "outside"
+ }
+}

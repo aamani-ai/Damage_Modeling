@@ -1,7 +1,7 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
-updated: 2026-10-20
+updated: 2026-10-21
 status: active
 scope: The branch register — every branch of aamani-ai/Damage_Modeling with who created it, when, when it was last touched, how it stands against main and what should happen to it — plus the branch policy proposed for the owner's confirmation. Refreshed with scripts/reference_helpers/branch_register.py in the same commit as any branch action.
 -->
@@ -14,15 +14,16 @@ and should be deleted." This file is that idea, kept current. The facts come fro
 [`scripts/reference_helpers/branch_register.py`](../../scripts/reference_helpers/branch_register.py); the
 **What to do** column is judgment, and a branch is never deleted without its creator's agreement.*
 
-## The register (2026-10-20, `main` after merging PR #5 and PR #6)
+## The register (2026-10-21, one dashboard branch)
 
-Every branch an agent session opened this week is merged and gone (below). What remains on `origin` is
-`main` and Jung A's five branches; the owner asked on 2026-10-20 that no agent branch stay open once its work
+Every branch an agent session opened this week is merged or gone (below). What remains on `origin` is
+`main`, the one `dashboard` branch, and Jung A's five branches; the owner asked on 2026-10-20 that no agent branch stay open once its work
 is merged, and that Jung A's branches are hers to decide.
 
 | Branch | Created by · on | Last by · on | Age (days) | Ahead / behind `main` | Merged | Files | What it is | What to do |
 |---|---|---|---|---|---|---|---|---|
 | `main` = `origin/main` | — | Divi-patel · 2026-10-20 | 0 | — | — | — | The line of record; pushed directly by the owner | — |
+| `origin/dashboard` | Divi-patel (agent session) · 2026-10-21 | Divi-patel · 2026-10-21 | 0 | ahead of `main`, 0 behind | no | — | **The one dashboard branch** (`DCD-D25`): iteration 2, decision sheets `08` and `09`, the rulings `DCD-D20…D25`. **PR #7.** Checked out in the owner's main checkout; the local dashboard on `:3211` serves it | **Active.** Iterate here; merge to `main` when the owner accepts a slice (`DCD-D10`), then delete |
 | `origin/cell/real-estate` | jll-l · (fully contained) | jll-l · 2026-10-19 | 1 | 0 / — | **yes** | 0 | Jung A's working branch for the five Real Estate cells; merged into `main` on 2026-10-19 | **Merged — safe to delete whenever Jung A is done pushing to it.** Nothing is lost |
 | `origin/cell/flood-real-estate` | jll-l · (fully contained) | jll-l · 2026-10-12 | 8 | 0 / — | **yes** | 0 | The first Real Estate cell, superseded by `cell/real-estate` | **Delete** (merged; with Jung A's OK) |
 | `origin/cell/winter-storm-solar-wind` | jll-l · 2026-10-12 | jll-l · 2026-10-15 | 5 | 2 / — | no | 55 | Two proposed cells (`winter_storm_solar` screening proxy, `winter_storm_wind` fail-closed), five notebooks, five scripts | **Decision needed (RO3):** rebase onto `main` and merge as proposals, or close with a note. It falls further behind every day |
@@ -31,15 +32,17 @@ is merged, and that Jung A's branches are hers to decide.
 
 *"Behind" is left blank for Jung A's rows because `main` moved by six merge commits on 2026-10-20; the script
 prints the current number.* Tags: none. Pull requests on `origin`: #1 (`codex/publish-v2-5-implementation`,
-merged 2026-06-25); #2, #3, #4, #5 and #6 merged 2026-10-20 (below); none open. Remotes: `origin` only
+merged 2026-06-25); #2, #3, #4, #5 and #6 merged 2026-10-20 (below); #7 open, from `dashboard`. Remotes: `origin` only
 (`aamani-ai/Damage_Modeling`); the personal fork `Divi-patel/Damage_Modeling` is a dormant mirror at
-`a71ac72`, not a remote. No local-only branches remain: the worktrees of the finished agent sessions and their
-branches were removed on 2026-10-20 after their merges.
+`a71ac72`, not a remote. No local-only branches or extra worktrees remain (cleaned 2026-10-20 and 2026-10-21).
 
 ### Recently closed
 
 | When | Branch | What happened |
 |---|---|---|
+| 2026-10-21 | `claude/dashboard-iteration-2-8df11e` | **Renamed to `dashboard`** on GitHub (PR #7 follows it); the old local branch and its session worktree removed |
+| 2026-10-21 | `claude/dashboard-iteration-2-da2f33` | A duplicate build of iteration 2 by a second session that had failed to start and was restarted; superseded by PR #7; deleted locally and on `origin`, worktree removed |
+| 2026-10-21 | a detached scratch checkout of PR #6 under the V0 session's scratchpad | Worktree removed |
 | 2026-10-20 | `claude/dashboard-v1-battery-75e6ea` — **PR #6**, the two battery cells drawn through their evaluators (stacked on PR #5) | Merged into `main` as one merge commit that carried PR #5's commits too; branch deleted on `origin`; the session's worktree and local branch removed |
 | 2026-10-20 | `claude/dashboard-v0-5d463c` — **PR #5**, the dashboard's data build and the V0 battery slice (accepted by the owner on the running app, `DCD-D17`) | Merged into `main` through PR #6's branch; branch deleted on `origin`; worktree and local branch removed |
 | 2026-10-20 | `claude/keen-sanderson-23b1d5` — **PR #3**, CI: validators, tests and link check | Merged into `main` (merge commit) once its workflow was green; branch deleted on `origin`; worktree and local branch removed |

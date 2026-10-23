@@ -90,7 +90,7 @@
  ],
  "series": [
   {
-   "label": "FS_FOUND",
+   "label": "Foundations",
    "kind": "line",
    "points": [
     [
@@ -760,12 +760,100 @@
  "row_notes": [
   {
    "type": "key_assumption",
-   "text": "Placeholder; replace with a site hydraulic or geotechnical assessment where material"
+   "text": "Placeholder; replace with a site hydraulic or geotechnical assessment where material",
+   "raw": "Placeholder; replace with a site hydraulic or geotechnical assessment where material"
   }
  ],
  "selected_by": [],
  "variants": "none",
  "notes": [],
+ "caption": {
+  "what_it_says": "Foundations: no loss until flow velocity or scour proxy reaches about 0.55 m/s; damage then rises, passing half of full loss near 2.45 m/s, and reaches full replacement by 3.98 m/s.",
+  "how_sure": {
+   "shape": {
+    "tier": "T4",
+    "word": "our judgment",
+    "basis": "Generic velocity/scour placeholder points"
+   },
+   "cost": {
+    "tier": "T4",
+    "word": "our judgment",
+    "basis": "Points already give damage as a share of the part's replacement value (same judgment-based table)"
+   },
+   "parameters": "1 parameter: 1 our judgment",
+   "weakest": "T4",
+   "word": "our judgment"
+  },
+  "seen_in_field": {
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "state": "not_searched",
+   "href": null,
+   "words": "nobody has looked yet; no search log exists for this asset and hazard"
+  },
+  "main_references": [
+   {
+    "text": "DOE/FEMP, Preventing and Mitigating Flood Damage to Solar PV Systems",
+    "ids": [
+     "DOE_FEMP_PV_FLOOD"
+    ],
+    "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+    "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "DOE_FEMP_PV_FLOOD"
+   },
+   {
+    "text": "NEMA GD 1-2019, Evaluating Water-Damaged Electrical Equipment",
+    "ids": [
+     "NEMA_GD1_2019"
+    ],
+    "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+    "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "NEMA_GD1_2019"
+   },
+   {
+    "text": "NEMA, Enclosure Types",
+    "ids": [
+     "NEMA_ENCLOSURE_TYPES"
+    ],
+    "title": "NEMA Enclosure Types",
+    "link": "https://www.nema.org/docs/default-source/products-document-library/nema-enclosure-types.pdf",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "NEMA_ENCLOSURE_TYPES"
+   },
+   {
+    "text": "FEMA P-348, Protecting Building Utility Systems from Flood Damage",
+    "ids": [
+     "FEMA_P348"
+    ],
+    "title": "Protecting Building Utility Systems From Flood Damage",
+    "link": "https://basc.pnnl.gov/library/protecting-building-utility-systems-flood-damage-principles-and-practices-design-and",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "FEMA_P348"
+   },
+   {
+    "text": "USACE HEC-FIA, Depth-Percent Damage Relationships",
+    "ids": [
+     "USACE_HEC_FIA"
+    ],
+    "title": "Depth-Percent Damage Relationships",
+    "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "USACE_HEC_FIA"
+   }
+  ],
+  "references_from": "the entry's key sources"
+ },
  "title": "Flood × Solar farm",
  "asset": {
   "slug": "solar",
@@ -852,6 +940,11 @@
  "sources_for_curve": [
   "ANZGEO_2023_SCOUR_CONTEXT"
  ],
+ "sources_resolved": [],
+ "plain_tiers": {
+  "shape": "our judgment",
+  "cost": "our judgment"
+ },
  "occurrence": null,
  "review": {
   "entry_read_on": "2026-10-19",
@@ -863,7 +956,29 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release —"
  },
- "summary": "Foundations: piecewise linear on flow velocity or scour proxy; shape T4, cost T4.",
+ "summary": "Foundations: a line through fixed points (piecewise linear), read against flow velocity or scour proxy; how damage rises is our judgment, how it becomes dollars our judgment.",
+ "rail_plain": {
+  "exists": {
+   "words": "Live · in the runtime index",
+   "code": "LIVE"
+  },
+  "evidence": {
+   "words": "Evidence: our judgment",
+   "code": "How damage rises: our judgment · how it becomes dollars: our judgment",
+   "tiers": [
+    "T4"
+   ],
+   "codes": "shape T4 · cost T4"
+  },
+  "occurrence": {
+   "words": "Field reports: nobody has looked yet",
+   "code": "Field reports: nobody has looked yet"
+  },
+  "review": {
+   "words": "Not yet reviewed by a person",
+   "code": "entry agent-read 2026-10-19 · release —"
+  }
+ },
  "versions": [
   {
    "pin": "flood_solar@model_v1_0__docs_r5",

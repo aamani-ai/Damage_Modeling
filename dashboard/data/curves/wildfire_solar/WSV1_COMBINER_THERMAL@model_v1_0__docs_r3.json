@@ -163,6 +163,105 @@
  "selected_by": [],
  "variants": "none",
  "notes": [],
+ "caption": {
+  "what_it_says": "Combiner boxes: the damage ratio is 0 at class 0 (no event), 0 at class 1, 0.01 at class 2, 0.06 at class 3, 0.2 at class 4, 0.5 at class 5 and 0.85 at class 6; nothing is drawn between classes because the model only answers at exact classes.",
+  "how_sure": {
+   "shape": {
+    "tier": "T4",
+    "word": "our judgment",
+    "basis": "Class values are engineering judgment"
+   },
+   "cost": {
+    "tier": "T2",
+    "word": "published",
+    "basis": "Reference part value from the NREL/NLR Q1-2025 benchmark crosswalk"
+   },
+   "parameters": "3 parameters: 3 published",
+   "weakest": "T2",
+   "word": "our judgment"
+  },
+  "seen_in_field": {
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "state": "not_searched",
+   "href": null,
+   "words": "nobody has looked yet; no search log exists for this asset and hazard"
+  },
+  "main_references": [
+   {
+    "text": "USDA Forest Service, Spatial datasets of probabilistic wildfire risk components for the US, 3rd ed., RDS-2016-0034-3",
+    "ids": [
+     "USFS_FSIM_RDS_2023"
+    ],
+    "title": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition",
+    "link": "https://doi.org/10.2737/RDS-2016-0034-3",
+    "link_kind": "doi",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "USFS_FSIM_RDS_2023"
+   },
+   {
+    "text": "DOE/FEMP, Solar Photovoltaic Hardening for Resilience - Wildfire",
+    "ids": [
+     "DOE_FEMP_PV_WILDFIRE"
+    ],
+    "title": "U.S. Department of Energy, Federal Energy Management Program",
+    "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "DOE_FEMP_PV_WILDFIRE"
+   },
+   {
+    "text": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment",
+    "ids": [
+     "NEMA_GD2_2016"
+    ],
+    "title": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": "not in the register",
+    "source_id": null
+   },
+   {
+    "text": "FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026",
+    "ids": [
+     "FM_DS_7_106_2026"
+    ],
+    "title": "FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": "not in the register",
+    "source_id": null
+   },
+   {
+    "text": "NREL/NLR, Q1-2025 Solar PV System Cost Benchmarks",
+    "ids": [
+     "NREL_NLR_Q1_2025_PV_BENCHMARK"
+    ],
+    "title": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E",
+    "link": "https://doi.org/10.7799/3009689",
+    "link_kind": "doi",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "NREL_NLR_Q1_2025_PV_BENCHMARK"
+   },
+   {
+    "text": "Finney, M.A., et al. A simulation of probabilistic wildfire risk components for the continental United States",
+    "ids": [
+     "FINNEY_2011_FSIM"
+    ],
+    "title": "Finney, M.A., et al. A simulation of probabilistic wildfire risk components for the continental United States",
+    "link": "https://doi.org/10.1007/s00477-011-0462-z",
+    "link_kind": "doi",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "FINNEY_2011_FSIM"
+   }
+  ],
+  "references_from": "the entry's key sources, then the parameters' own"
+ },
  "title": "Wildfire × Solar farm",
  "asset": {
   "slug": "solar",
@@ -201,6 +300,11 @@
  },
  "parameters_rows": [],
  "sources_for_curve": [],
+ "sources_resolved": [],
+ "plain_tiers": {
+  "shape": "our judgment",
+  "cost": "published"
+ },
  "occurrence": null,
  "review": {
   "entry_read_on": "2026-10-19",
@@ -212,7 +316,29 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release reviewed"
  },
- "summary": "Combiner boxes: piecewise linear on FSim conditional flame-length class (0 = no event); shape T4, cost T2.",
+ "summary": "Combiner boxes: a line through fixed points (piecewise linear), read against FSim conditional flame-length class (0 = no event); how damage rises is our judgment, how it becomes dollars published.",
+ "rail_plain": {
+  "exists": {
+   "words": "Live · a screening model",
+   "code": "LIVE · screening"
+  },
+  "evidence": {
+   "words": "Evidence: our judgment",
+   "code": "How damage rises: our judgment · how it becomes dollars: published",
+   "tiers": [
+    "T4"
+   ],
+   "codes": "shape T4 · cost T2"
+  },
+  "occurrence": {
+   "words": "Field reports: nobody has looked yet",
+   "code": "Field reports: nobody has looked yet"
+  },
+  "review": {
+   "words": "Not yet reviewed by a person",
+   "code": "entry agent-read 2026-10-19 · release reviewed"
+  }
+ },
  "versions": [
   {
    "pin": "wildfire_solar@model_v1_0__docs_r4",

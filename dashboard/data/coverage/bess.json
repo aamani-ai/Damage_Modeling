@@ -1,0 +1,3404 @@
+{
+ "schema": "damage_dashboard_coverage.v1",
+ "type": {
+  "slug": "bess",
+  "label": "Battery storage",
+  "category": "power_plants",
+  "category_label": "Power plants",
+  "profile": "100 MW / 400 MWh LFP; the picture shows one 5 MW block and the plant",
+  "building": null,
+  "also_buildings": null,
+  "picture_note": null,
+  "catalogue_asset": "Battery storage"
+ },
+ "twin": {
+  "asset": "bess",
+  "name": "Sample BESS Asset",
+  "model": "bess-block",
+  "root": "bblock",
+  "plant_model": "bess-plant",
+  "plant_root": "bplant",
+  "plant_name": "BESS Plant",
+  "commit": "d01abd03cb101ecbe05468a5d573b50f90efd8fb",
+  "crosswalk": "docs/contracts/twin_crosswalks/bess.csv"
+ },
+ "trees": {
+  "asset": {
+   "root": "bblock",
+   "nodes": {
+    "bblock": {
+     "n": "BESS Block"
+    },
+    "sys_be": {
+     "n": "Battery System",
+     "p": "bblock"
+    },
+    "ao_deluge": {
+     "n": "Water-Based Suppression",
+     "p": "sys_be"
+    },
+    "benc": {
+     "n": "Battery Enclosures",
+     "p": "sys_be"
+    },
+    "be_enc": {
+     "n": "Enclosure Shell",
+     "p": "benc"
+    },
+    "be_modules": {
+     "n": "Battery Modules",
+     "p": "benc"
+    },
+    "be_racks": {
+     "n": "Racks",
+     "p": "benc"
+    },
+    "be_bms": {
+     "n": "Battery Management System",
+     "p": "benc"
+    },
+    "be_dccab": {
+     "n": "DC Combiner & Disconnect",
+     "p": "benc"
+    },
+    "bthermal": {
+     "n": "Thermal Management",
+     "p": "sys_be"
+    },
+    "be_hvac": {
+     "n": "Chiller & Liquid Loop",
+     "p": "bthermal"
+    },
+    "bsafety": {
+     "n": "Fire & Explosion Safety",
+     "p": "sys_be"
+    },
+    "be_fire": {
+     "n": "Fire & Gas Detection",
+     "p": "bsafety"
+    },
+    "be_vent": {
+     "n": "Explosion Venting",
+     "p": "bsafety"
+    },
+    "sys_bp": {
+     "n": "Power Conversion",
+     "p": "bblock"
+    },
+    "bp_pcs": {
+     "n": "Bidirectional PCS",
+     "p": "sys_bp"
+    },
+    "bp_mvt": {
+     "n": "MV Transformer",
+     "p": "sys_bp"
+    },
+    "bp_rmu": {
+     "n": "MV Switchgear (RMU)",
+     "p": "sys_bp"
+    },
+    "bp_aux": {
+     "n": "Auxiliary Supply",
+     "p": "sys_bp"
+    },
+    "bp_skid": {
+     "n": "Skid & Piers",
+     "p": "sys_bp"
+    },
+    "sys_bc": {
+     "n": "Cabling",
+     "p": "bblock"
+    },
+    "bc_dc": {
+     "n": "DC Cables",
+     "p": "sys_bc"
+    },
+    "bc_mv": {
+     "n": "MV Cable",
+     "p": "sys_bc"
+    },
+    "sys_bk": {
+     "n": "Controls",
+     "p": "bblock"
+    },
+    "bk_ems": {
+     "n": "EMS / Plant Controller",
+     "p": "sys_bk"
+    },
+    "bk_fiber": {
+     "n": "Control Network",
+     "p": "sys_bk"
+    },
+    "sys_bg": {
+     "n": "Grounding",
+     "p": "bblock"
+    },
+    "bg_grid": {
+     "n": "Ground Grid",
+     "p": "sys_bg"
+    },
+    "sys_bv": {
+     "n": "Civil",
+     "p": "bblock"
+    },
+    "bs_found": {
+     "n": "Enclosure Foundations",
+     "p": "sys_bv"
+    },
+    "bv_yard": {
+     "n": "Yard & Fence",
+     "p": "sys_bv"
+    }
+   }
+  },
+  "plant": {
+   "root": "bplant",
+   "nodes": {
+    "bplant": {
+     "n": "BESS Plant"
+    },
+    "bpl_blocks": {
+     "n": "BESS Blocks",
+     "p": "bplant"
+    },
+    "bpl_enc": {
+     "n": "Battery Enclosures",
+     "p": "bpl_blocks"
+    },
+    "bpl_skids": {
+     "n": "PCS Skids",
+     "p": "bpl_blocks"
+    },
+    "bpl_coll": {
+     "n": "Collection & Civil",
+     "p": "bplant"
+    },
+    "bsub_floodwall": {
+     "n": "Substation Flood Wall",
+     "p": "bpl_coll"
+    },
+    "bpl_feeders": {
+     "n": "34.5 kV Feeders",
+     "p": "bpl_coll"
+    },
+    "bpl_yard": {
+     "n": "Yard & Fence",
+     "p": "bpl_coll"
+    },
+    "bsys_sub": {
+     "n": "Substation & Interconnection",
+     "p": "bplant"
+    },
+    "bsub": {
+     "n": "Collector Substation",
+     "p": "bsys_sub"
+    },
+    "bsub_spare": {
+     "n": "Spare Main Power Transformer",
+     "p": "bsub"
+    },
+    "bsub_mpt": {
+     "n": "Main Power Transformer",
+     "p": "bsub"
+    },
+    "bsub_bkr": {
+     "n": "HV Circuit Breakers",
+     "p": "bsub"
+    },
+    "bsub_disc": {
+     "n": "Disconnect Switches",
+     "p": "bsub"
+    },
+    "bsub_meter": {
+     "n": "Revenue Metering",
+     "p": "bsub"
+    },
+    "bsub_mvbus": {
+     "n": "34.5 kV Switchgear",
+     "p": "bsub"
+    },
+    "bsub_bus": {
+     "n": "HV Bus & Dead-End Gantry",
+     "p": "bsub"
+    },
+    "bsub_house": {
+     "n": "Control House",
+     "p": "bsub"
+    },
+    "bsub_lm": {
+     "n": "Lightning Masts",
+     "p": "bsub"
+    },
+    "bsub_grid": {
+     "n": "Ground Grid",
+     "p": "bsub"
+    },
+    "bsub_yard": {
+     "n": "Yard & Fence",
+     "p": "bsub"
+    },
+    "bgt": {
+     "n": "Gen-Tie Line",
+     "p": "bsys_sub"
+    },
+    "bgt_struct": {
+     "n": "H-Frame Structures",
+     "p": "bgt"
+    },
+    "bgt_cond": {
+     "n": "Conductors & Shield Wire",
+     "p": "bgt"
+    },
+    "bpoi": {
+     "n": "POI Switchyard",
+     "p": "bsys_sub"
+    },
+    "bpoi_lines": {
+     "n": "Network Lines",
+     "p": "bpoi"
+    },
+    "bpoi_bkr": {
+     "n": "Ring Bus Breakers",
+     "p": "bpoi"
+    },
+    "bpoi_bus": {
+     "n": "Bus & Line Gantries",
+     "p": "bpoi"
+    },
+    "bpoi_ctrl": {
+     "n": "Control House",
+     "p": "bpoi"
+    },
+    "bpoi_yard": {
+     "n": "Yard & Fence",
+     "p": "bpoi"
+    }
+   }
+  }
+ },
+ "hazards": [
+  {
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail"
+   },
+   "entry_id": "hail_bess",
+   "status": "gap",
+   "gap": true,
+   "href": "/cells/hail_bess",
+   "rows": {
+    "_gap": {
+     "s": "no_curve",
+     "note": "No curve for this hazard yet: the catalogue lists it as a gap.",
+     "basis": "gap"
+    }
+   },
+   "states": {
+    "asset": {
+     "bblock": "_gap",
+     "sys_be": "_gap",
+     "ao_deluge": "_gap",
+     "benc": "_gap",
+     "be_enc": "_gap",
+     "be_modules": "_gap",
+     "be_racks": "_gap",
+     "be_bms": "_gap",
+     "be_dccab": "_gap",
+     "bthermal": "_gap",
+     "be_hvac": "_gap",
+     "bsafety": "_gap",
+     "be_fire": "_gap",
+     "be_vent": "_gap",
+     "sys_bp": "_gap",
+     "bp_pcs": "_gap",
+     "bp_mvt": "_gap",
+     "bp_rmu": "_gap",
+     "bp_aux": "_gap",
+     "bp_skid": "_gap",
+     "sys_bc": "_gap",
+     "bc_dc": "_gap",
+     "bc_mv": "_gap",
+     "sys_bk": "_gap",
+     "bk_ems": "_gap",
+     "bk_fiber": "_gap",
+     "sys_bg": "_gap",
+     "bg_grid": "_gap",
+     "sys_bv": "_gap",
+     "bs_found": "_gap",
+     "bv_yard": "_gap"
+    },
+    "plant": {
+     "bplant": "_gap",
+     "bpl_blocks": "_gap",
+     "bpl_enc": "_gap",
+     "bpl_skids": "_gap",
+     "bpl_coll": "_gap",
+     "bsub_floodwall": "_gap",
+     "bpl_feeders": "_gap",
+     "bpl_yard": "_gap",
+     "bsys_sub": "_gap",
+     "bsub": "_gap",
+     "bsub_spare": "_gap",
+     "bsub_mpt": "_gap",
+     "bsub_bkr": "_gap",
+     "bsub_disc": "_gap",
+     "bsub_meter": "_gap",
+     "bsub_mvbus": "_gap",
+     "bsub_bus": "_gap",
+     "bsub_house": "_gap",
+     "bsub_lm": "_gap",
+     "bsub_grid": "_gap",
+     "bsub_yard": "_gap",
+     "bgt": "_gap",
+     "bgt_struct": "_gap",
+     "bgt_cond": "_gap",
+     "bpoi": "_gap",
+     "bpoi_lines": "_gap",
+     "bpoi_bkr": "_gap",
+     "bpoi_bus": "_gap",
+     "bpoi_ctrl": "_gap",
+     "bpoi_yard": "_gap"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "sys_be",
+      "name": "Battery System",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "ao_deluge",
+          "name": "Water-Based Suppression",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "benc",
+          "name": "Battery Enclosures",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bthermal",
+          "name": "Thermal Management",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bsafety",
+          "name": "Fire & Explosion Safety",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bp",
+      "name": "Power Conversion",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bp_pcs",
+          "name": "Bidirectional PCS",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bp_mvt",
+          "name": "MV Transformer",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bp_rmu",
+          "name": "MV Switchgear (RMU)",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bp_aux",
+          "name": "Auxiliary Supply",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bp_skid",
+          "name": "Skid & Piers",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bc",
+      "name": "Cabling",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bc_dc",
+          "name": "DC Cables",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bc_mv",
+          "name": "MV Cable",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bk",
+      "name": "Controls",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bk_ems",
+          "name": "EMS / Plant Controller",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bk_fiber",
+          "name": "Control Network",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bg",
+      "name": "Grounding",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bg_grid",
+          "name": "Ground Grid",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bv",
+      "name": "Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bs_found",
+          "name": "Enclosure Foundations",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bv_yard",
+          "name": "Yard & Fence",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "bpl_blocks",
+      "name": "BESS Blocks",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bpl_enc",
+          "name": "Battery Enclosures",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bpl_skids",
+          "name": "PCS Skids",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "bpl_coll",
+      "name": "Collection & Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bsub_floodwall",
+          "name": "Substation Flood Wall",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bpl_feeders",
+          "name": "34.5 kV Feeders",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bpl_yard",
+          "name": "Yard & Fence",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "bsys_sub",
+      "name": "Substation & Interconnection",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bsub",
+          "name": "Collector Substation",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bgt",
+          "name": "Gen-Tie Line",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bpoi",
+          "name": "POI Switchyard",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 0,
+    "conditioner": 0,
+    "no_curve": 24,
+    "no_direct_damage": 0,
+    "outside": 0
+   },
+   "curve_parts": [],
+   "unmapped": [],
+   "sparks": {}
+  },
+  {
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "entry_id": "flood_bess",
+   "status": "live",
+   "gap": false,
+   "href": "/cells/flood_bess",
+   "rows": {
+    "sys_be": {
+     "s": "curve",
+     "part": "Battery enclosure (active hardware)",
+     "note": "Modules, BMS, DC combiner, thermal management and the enclosure",
+     "basis": "part"
+    },
+    "ao_deluge": {
+     "s": "no_curve",
+     "part": "Enclosure racks and fire suppression",
+     "note": "A suppression add-on in the twin",
+     "basis": "not_covered"
+    },
+    "be_racks": {
+     "s": "no_curve",
+     "part": "Enclosure racks and fire suppression",
+     "basis": "not_covered"
+    },
+    "bsafety": {
+     "s": "no_curve",
+     "part": "Enclosure racks and fire suppression",
+     "basis": "not_covered"
+    },
+    "bp_pcs": {
+     "s": "curve",
+     "part": "Separate PCS",
+     "basis": "part"
+    },
+    "bp_mvt": {
+     "s": "no_curve",
+     "part": "Electrical balance including unit transformers and cables",
+     "basis": "not_covered"
+    },
+    "bp_rmu": {
+     "s": "no_curve",
+     "part": "Electrical balance including unit transformers and cables",
+     "basis": "not_covered"
+    },
+    "bp_aux": {
+     "s": "no_curve",
+     "part": "Electrical balance including unit transformers and cables",
+     "basis": "not_covered"
+    },
+    "bp_skid": {
+     "s": "no_curve",
+     "part": "Electrical balance including unit transformers and cables",
+     "basis": "not_covered"
+    },
+    "sys_bc": {
+     "s": "no_curve",
+     "part": "Electrical balance including unit transformers and cables",
+     "basis": "not_covered"
+    },
+    "sys_bk": {
+     "s": "no_curve",
+     "part": "Electrical balance including unit transformers and cables",
+     "basis": "not_covered"
+    },
+    "sys_bg": {
+     "s": "no_curve",
+     "part": "Electrical balance including unit transformers and cables",
+     "basis": "not_covered"
+    },
+    "sys_bv": {
+     "s": "no_curve",
+     "part": "Civil works",
+     "basis": "not_covered"
+    },
+    "bpl_enc": {
+     "s": "curve",
+     "part": "Battery enclosure (active hardware)",
+     "basis": "part"
+    },
+    "bpl_skids": {
+     "s": "curve",
+     "part": "Separate PCS",
+     "note": "The PCS on each skid; the skid's transformer and switchgear have no flood curve",
+     "basis": "part"
+    },
+    "bsub_floodwall": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference plant",
+     "basis": "out_of_scope"
+    },
+    "bpl_feeders": {
+     "s": "no_curve",
+     "part": "Electrical balance including unit transformers and cables",
+     "basis": "not_covered"
+    },
+    "bpl_yard": {
+     "s": "no_curve",
+     "part": "Civil works",
+     "basis": "not_covered"
+    },
+    "bsys_sub": {
+     "s": "outside",
+     "part": "Collector station and export line",
+     "basis": "out_of_scope"
+    }
+   },
+   "states": {
+    "asset": {
+     "sys_be": "sys_be",
+     "ao_deluge": "ao_deluge",
+     "benc": "sys_be",
+     "be_enc": "sys_be",
+     "be_modules": "sys_be",
+     "be_racks": "be_racks",
+     "be_bms": "sys_be",
+     "be_dccab": "sys_be",
+     "bthermal": "sys_be",
+     "be_hvac": "sys_be",
+     "bsafety": "bsafety",
+     "be_fire": "bsafety",
+     "be_vent": "bsafety",
+     "bp_pcs": "bp_pcs",
+     "bp_mvt": "bp_mvt",
+     "bp_rmu": "bp_rmu",
+     "bp_aux": "bp_aux",
+     "bp_skid": "bp_skid",
+     "sys_bc": "sys_bc",
+     "bc_dc": "sys_bc",
+     "bc_mv": "sys_bc",
+     "sys_bk": "sys_bk",
+     "bk_ems": "sys_bk",
+     "bk_fiber": "sys_bk",
+     "sys_bg": "sys_bg",
+     "bg_grid": "sys_bg",
+     "sys_bv": "sys_bv",
+     "bs_found": "sys_bv",
+     "bv_yard": "sys_bv"
+    },
+    "plant": {
+     "bpl_enc": "bpl_enc",
+     "bpl_skids": "bpl_skids",
+     "bsub_floodwall": "bsub_floodwall",
+     "bpl_feeders": "bpl_feeders",
+     "bpl_yard": "bpl_yard",
+     "bsys_sub": "bsys_sub",
+     "bsub": "bsys_sub",
+     "bsub_spare": "bsys_sub",
+     "bsub_mpt": "bsys_sub",
+     "bsub_bkr": "bsys_sub",
+     "bsub_disc": "bsys_sub",
+     "bsub_meter": "bsys_sub",
+     "bsub_mvbus": "bsys_sub",
+     "bsub_bus": "bsys_sub",
+     "bsub_house": "bsys_sub",
+     "bsub_lm": "bsys_sub",
+     "bsub_grid": "bsys_sub",
+     "bsub_yard": "bsys_sub",
+     "bgt": "bsys_sub",
+     "bgt_struct": "bsys_sub",
+     "bgt_cond": "bsys_sub",
+     "bpoi": "bsys_sub",
+     "bpoi_lines": "bsys_sub",
+     "bpoi_bkr": "bsys_sub",
+     "bpoi_bus": "bsys_sub",
+     "bpoi_ctrl": "bsys_sub",
+     "bpoi_yard": "bsys_sub"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "sys_be",
+      "name": "Battery System",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "benc",
+          "name": "Battery Enclosures",
+          "part": "Battery enclosure (active hardware)",
+          "note": "Modules, BMS, DC combiner, thermal management and the enclosure"
+         },
+         {
+          "node": "bthermal",
+          "name": "Thermal Management",
+          "part": "Battery enclosure (active hardware)",
+          "note": "Modules, BMS, DC combiner, thermal management and the enclosure"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "ao_deluge",
+          "name": "Water-Based Suppression",
+          "part": "Enclosure racks and fire suppression",
+          "note": "A suppression add-on in the twin"
+         },
+         {
+          "node": "bsafety",
+          "name": "Fire & Explosion Safety",
+          "part": "Enclosure racks and fire suppression"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bp",
+      "name": "Power Conversion",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "bp_pcs",
+          "name": "Bidirectional PCS",
+          "part": "Separate PCS"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bp_mvt",
+          "name": "MV Transformer",
+          "part": "Electrical balance including unit transformers and cables"
+         },
+         {
+          "node": "bp_rmu",
+          "name": "MV Switchgear (RMU)",
+          "part": "Electrical balance including unit transformers and cables"
+         },
+         {
+          "node": "bp_aux",
+          "name": "Auxiliary Supply",
+          "part": "Electrical balance including unit transformers and cables"
+         },
+         {
+          "node": "bp_skid",
+          "name": "Skid & Piers",
+          "part": "Electrical balance including unit transformers and cables"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bc",
+      "name": "Cabling",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bc_dc",
+          "name": "DC Cables",
+          "part": "Electrical balance including unit transformers and cables"
+         },
+         {
+          "node": "bc_mv",
+          "name": "MV Cable",
+          "part": "Electrical balance including unit transformers and cables"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bk",
+      "name": "Controls",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bk_ems",
+          "name": "EMS / Plant Controller",
+          "part": "Electrical balance including unit transformers and cables"
+         },
+         {
+          "node": "bk_fiber",
+          "name": "Control Network",
+          "part": "Electrical balance including unit transformers and cables"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bg",
+      "name": "Grounding",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bg_grid",
+          "name": "Ground Grid",
+          "part": "Electrical balance including unit transformers and cables"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bv",
+      "name": "Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bs_found",
+          "name": "Enclosure Foundations",
+          "part": "Civil works"
+         },
+         {
+          "node": "bv_yard",
+          "name": "Yard & Fence",
+          "part": "Civil works"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "bpl_blocks",
+      "name": "BESS Blocks",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "bpl_enc",
+          "name": "Battery Enclosures",
+          "part": "Battery enclosure (active hardware)"
+         },
+         {
+          "node": "bpl_skids",
+          "name": "PCS Skids",
+          "part": "Separate PCS",
+          "note": "The PCS on each skid; the skid's transformer and switchgear have no flood curve"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "bpl_coll",
+      "name": "Collection & Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bpl_feeders",
+          "name": "34.5 kV Feeders",
+          "part": "Electrical balance including unit transformers and cables"
+         },
+         {
+          "node": "bpl_yard",
+          "name": "Yard & Fence",
+          "part": "Civil works"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "bsub_floodwall",
+          "name": "Substation Flood Wall",
+          "note": "A resilience measure in the twin; not part of the reference plant"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "bsys_sub",
+      "name": "Substation & Interconnection",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "bsub",
+          "name": "Collector Substation",
+          "part": "Collector station and export line"
+         },
+         {
+          "node": "bgt",
+          "name": "Gen-Tie Line",
+          "part": "Collector station and export line"
+         },
+         {
+          "node": "bpoi",
+          "name": "POI Switchyard",
+          "part": "Collector station and export line"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 5,
+    "conditioner": 0,
+    "no_curve": 15,
+    "no_direct_damage": 0,
+    "outside": 4
+   },
+   "curve_parts": [
+    "Battery enclosure (active hardware)",
+    "Separate PCS"
+   ],
+   "unmapped": [],
+   "sparks": {
+    "Battery enclosure (active hardware)": {
+     "pts": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.3,
+       0.0
+      ],
+      [
+       0.3,
+       1.0
+      ],
+      [
+       3.0,
+       1.0
+      ]
+     ],
+     "kind": "step",
+     "axis": "water depth above local grade",
+     "unit": "m",
+     "curve_id": "BESS_ACTIVE_CONTACT_STATE",
+     "label": "battery enclosure · fresh or saline"
+    },
+    "Separate PCS": {
+     "pts": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.0575,
+       0.0
+      ],
+      [
+       0.115,
+       0.0
+      ],
+      [
+       0.1725,
+       0.0
+      ],
+      [
+       0.23,
+       0.0
+      ],
+      [
+       0.2875,
+       0.0
+      ],
+      [
+       0.32,
+       0.05
+      ],
+      [
+       0.3594,
+       0.2969
+      ],
+      [
+       0.4169,
+       0.5844
+      ],
+      [
+       0.46,
+       0.7633
+      ],
+      [
+       0.5175,
+       0.84
+      ],
+      [
+       0.575,
+       0.9167
+      ],
+      [
+       0.6181,
+       0.953
+      ],
+      [
+       0.6756,
+       0.9626
+      ],
+      [
+       0.7331,
+       0.9722
+      ],
+      [
+       0.7906,
+       0.9818
+      ],
+      [
+       0.8481,
+       0.9914
+      ],
+      [
+       0.9,
+       1.0
+      ],
+      [
+       0.9487,
+       1.0
+      ],
+      [
+       1.0063,
+       1.0
+      ],
+      [
+       1.0637,
+       1.0
+      ],
+      [
+       1.1213,
+       1.0
+      ],
+      [
+       1.1787,
+       1.0
+      ],
+      [
+       1.2363,
+       1.0
+      ],
+      [
+       1.2937,
+       1.0
+      ],
+      [
+       1.3369,
+       1.0
+      ],
+      [
+       1.3944,
+       1.0
+      ],
+      [
+       1.4519,
+       1.0
+      ],
+      [
+       1.5094,
+       1.0
+      ],
+      [
+       1.5669,
+       1.0
+      ],
+      [
+       1.6244,
+       1.0
+      ],
+      [
+       1.6819,
+       1.0
+      ],
+      [
+       1.7394,
+       1.0
+      ],
+      [
+       1.7969,
+       1.0
+      ],
+      [
+       1.84,
+       1.0
+      ],
+      [
+       1.8975,
+       1.0
+      ],
+      [
+       1.955,
+       1.0
+      ],
+      [
+       2.0125,
+       1.0
+      ],
+      [
+       2.07,
+       1.0
+      ],
+      [
+       2.1275,
+       1.0
+      ],
+      [
+       2.185,
+       1.0
+      ],
+      [
+       2.2425,
+       1.0
+      ],
+      [
+       2.3,
+       1.0
+      ]
+     ],
+     "kind": "line",
+     "axis": "water depth above local grade",
+     "unit": "m",
+     "curve_id": "BESS_PCS_INUNDATION_PROXY",
+     "label": "PCS · fresh"
+    }
+   }
+  },
+  {
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "entry_id": "tropical_cyclone_wind_bess",
+   "status": "live",
+   "gap": false,
+   "href": "/cells/tropical_cyclone_wind_bess",
+   "rows": {
+    "sys_be": {
+     "s": "curve",
+     "part": "Integrated battery enclosure",
+     "note": "The whole enclosure, racks and fire safety included",
+     "basis": "part"
+    },
+    "bp_pcs": {
+     "s": "curve",
+     "part": "Separate PCS",
+     "basis": "part"
+    },
+    "bp_mvt": {
+     "s": "no_curve",
+     "part": "Unit MV and shared electrical",
+     "basis": "not_covered"
+    },
+    "bp_rmu": {
+     "s": "no_curve",
+     "part": "Unit MV and shared electrical",
+     "basis": "not_covered"
+    },
+    "bp_aux": {
+     "s": "no_curve",
+     "part": "Unit MV and shared electrical",
+     "basis": "not_covered"
+    },
+    "bp_skid": {
+     "s": "no_curve",
+     "part": "Unit MV and shared electrical",
+     "basis": "not_covered"
+    },
+    "sys_bc": {
+     "s": "no_curve",
+     "part": "Unit MV and shared electrical",
+     "basis": "not_covered"
+    },
+    "sys_bk": {
+     "s": "no_curve",
+     "part": "Unit MV and shared electrical",
+     "basis": "not_covered"
+    },
+    "sys_bg": {
+     "s": "no_curve",
+     "part": "Unit MV and shared electrical",
+     "basis": "not_covered"
+    },
+    "sys_bv": {
+     "s": "no_curve",
+     "part": "Civil works",
+     "basis": "not_covered"
+    },
+    "bpl_enc": {
+     "s": "curve",
+     "part": "Integrated battery enclosure",
+     "basis": "part"
+    },
+    "bpl_skids": {
+     "s": "curve",
+     "part": "Separate PCS",
+     "note": "The PCS on each skid; the skid's transformer and switchgear have no curve",
+     "basis": "part"
+    },
+    "bsub_floodwall": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference plant",
+     "basis": "out_of_scope"
+    },
+    "bpl_feeders": {
+     "s": "no_curve",
+     "part": "Unit MV and shared electrical",
+     "basis": "not_covered"
+    },
+    "bpl_yard": {
+     "s": "no_curve",
+     "part": "Civil works",
+     "basis": "not_covered"
+    },
+    "bsys_sub": {
+     "s": "outside",
+     "part": "Collector station and export line",
+     "basis": "out_of_scope"
+    }
+   },
+   "states": {
+    "asset": {
+     "sys_be": "sys_be",
+     "ao_deluge": "sys_be",
+     "benc": "sys_be",
+     "be_enc": "sys_be",
+     "be_modules": "sys_be",
+     "be_racks": "sys_be",
+     "be_bms": "sys_be",
+     "be_dccab": "sys_be",
+     "bthermal": "sys_be",
+     "be_hvac": "sys_be",
+     "bsafety": "sys_be",
+     "be_fire": "sys_be",
+     "be_vent": "sys_be",
+     "bp_pcs": "bp_pcs",
+     "bp_mvt": "bp_mvt",
+     "bp_rmu": "bp_rmu",
+     "bp_aux": "bp_aux",
+     "bp_skid": "bp_skid",
+     "sys_bc": "sys_bc",
+     "bc_dc": "sys_bc",
+     "bc_mv": "sys_bc",
+     "sys_bk": "sys_bk",
+     "bk_ems": "sys_bk",
+     "bk_fiber": "sys_bk",
+     "sys_bg": "sys_bg",
+     "bg_grid": "sys_bg",
+     "sys_bv": "sys_bv",
+     "bs_found": "sys_bv",
+     "bv_yard": "sys_bv"
+    },
+    "plant": {
+     "bpl_enc": "bpl_enc",
+     "bpl_skids": "bpl_skids",
+     "bsub_floodwall": "bsub_floodwall",
+     "bpl_feeders": "bpl_feeders",
+     "bpl_yard": "bpl_yard",
+     "bsys_sub": "bsys_sub",
+     "bsub": "bsys_sub",
+     "bsub_spare": "bsys_sub",
+     "bsub_mpt": "bsys_sub",
+     "bsub_bkr": "bsys_sub",
+     "bsub_disc": "bsys_sub",
+     "bsub_meter": "bsys_sub",
+     "bsub_mvbus": "bsys_sub",
+     "bsub_bus": "bsys_sub",
+     "bsub_house": "bsys_sub",
+     "bsub_lm": "bsys_sub",
+     "bsub_grid": "bsys_sub",
+     "bsub_yard": "bsys_sub",
+     "bgt": "bsys_sub",
+     "bgt_struct": "bsys_sub",
+     "bgt_cond": "bsys_sub",
+     "bpoi": "bsys_sub",
+     "bpoi_lines": "bsys_sub",
+     "bpoi_bkr": "bsys_sub",
+     "bpoi_bus": "bsys_sub",
+     "bpoi_ctrl": "bsys_sub",
+     "bpoi_yard": "bsys_sub"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "sys_be",
+      "name": "Battery System",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ao_deluge",
+          "name": "Water-Based Suppression",
+          "part": "Integrated battery enclosure",
+          "note": "The whole enclosure, racks and fire safety included"
+         },
+         {
+          "node": "benc",
+          "name": "Battery Enclosures",
+          "part": "Integrated battery enclosure",
+          "note": "The whole enclosure, racks and fire safety included"
+         },
+         {
+          "node": "bthermal",
+          "name": "Thermal Management",
+          "part": "Integrated battery enclosure",
+          "note": "The whole enclosure, racks and fire safety included"
+         },
+         {
+          "node": "bsafety",
+          "name": "Fire & Explosion Safety",
+          "part": "Integrated battery enclosure",
+          "note": "The whole enclosure, racks and fire safety included"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bp",
+      "name": "Power Conversion",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "bp_pcs",
+          "name": "Bidirectional PCS",
+          "part": "Separate PCS"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bp_mvt",
+          "name": "MV Transformer",
+          "part": "Unit MV and shared electrical"
+         },
+         {
+          "node": "bp_rmu",
+          "name": "MV Switchgear (RMU)",
+          "part": "Unit MV and shared electrical"
+         },
+         {
+          "node": "bp_aux",
+          "name": "Auxiliary Supply",
+          "part": "Unit MV and shared electrical"
+         },
+         {
+          "node": "bp_skid",
+          "name": "Skid & Piers",
+          "part": "Unit MV and shared electrical"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bc",
+      "name": "Cabling",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bc_dc",
+          "name": "DC Cables",
+          "part": "Unit MV and shared electrical"
+         },
+         {
+          "node": "bc_mv",
+          "name": "MV Cable",
+          "part": "Unit MV and shared electrical"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bk",
+      "name": "Controls",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bk_ems",
+          "name": "EMS / Plant Controller",
+          "part": "Unit MV and shared electrical"
+         },
+         {
+          "node": "bk_fiber",
+          "name": "Control Network",
+          "part": "Unit MV and shared electrical"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bg",
+      "name": "Grounding",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bg_grid",
+          "name": "Ground Grid",
+          "part": "Unit MV and shared electrical"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bv",
+      "name": "Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bs_found",
+          "name": "Enclosure Foundations",
+          "part": "Civil works"
+         },
+         {
+          "node": "bv_yard",
+          "name": "Yard & Fence",
+          "part": "Civil works"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "bpl_blocks",
+      "name": "BESS Blocks",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "bpl_enc",
+          "name": "Battery Enclosures",
+          "part": "Integrated battery enclosure"
+         },
+         {
+          "node": "bpl_skids",
+          "name": "PCS Skids",
+          "part": "Separate PCS",
+          "note": "The PCS on each skid; the skid's transformer and switchgear have no curve"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "bpl_coll",
+      "name": "Collection & Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bpl_feeders",
+          "name": "34.5 kV Feeders",
+          "part": "Unit MV and shared electrical"
+         },
+         {
+          "node": "bpl_yard",
+          "name": "Yard & Fence",
+          "part": "Civil works"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "bsub_floodwall",
+          "name": "Substation Flood Wall",
+          "note": "A resilience measure in the twin; not part of the reference plant"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "bsys_sub",
+      "name": "Substation & Interconnection",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "bsub",
+          "name": "Collector Substation",
+          "part": "Collector station and export line"
+         },
+         {
+          "node": "bgt",
+          "name": "Gen-Tie Line",
+          "part": "Collector station and export line"
+         },
+         {
+          "node": "bpoi",
+          "name": "POI Switchyard",
+          "part": "Collector station and export line"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 7,
+    "conditioner": 0,
+    "no_curve": 13,
+    "no_direct_damage": 0,
+    "outside": 4
+   },
+   "curve_parts": [
+    "Integrated battery enclosure",
+    "Separate PCS"
+   ],
+   "unmapped": [],
+   "sparks": {
+    "Integrated battery enclosure": {
+     "pts": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.05,
+       0.0
+      ],
+      [
+       0.1,
+       0.0
+      ],
+      [
+       0.15,
+       0.0
+      ],
+      [
+       0.2,
+       0.0
+      ],
+      [
+       0.25,
+       0.0002
+      ],
+      [
+       0.3,
+       0.0011
+      ],
+      [
+       0.35,
+       0.0039
+      ],
+      [
+       0.4,
+       0.0104
+      ],
+      [
+       0.45,
+       0.0224
+      ],
+      [
+       0.5,
+       0.0415
+      ],
+      [
+       0.55,
+       0.0689
+      ],
+      [
+       0.6,
+       0.1046
+      ],
+      [
+       0.65,
+       0.1482
+      ],
+      [
+       0.7,
+       0.1985
+      ],
+      [
+       0.75,
+       0.2538
+      ],
+      [
+       0.8,
+       0.3123
+      ],
+      [
+       0.85,
+       0.3723
+      ],
+      [
+       0.9,
+       0.4321
+      ],
+      [
+       0.95,
+       0.4904
+      ],
+      [
+       1.0,
+       0.5461
+      ],
+      [
+       1.05,
+       0.5985
+      ],
+      [
+       1.1,
+       0.6469
+      ],
+      [
+       1.15,
+       0.6912
+      ],
+      [
+       1.2,
+       0.7312
+      ],
+      [
+       1.25,
+       0.767
+      ],
+      [
+       1.3,
+       0.7989
+      ],
+      [
+       1.35,
+       0.827
+      ],
+      [
+       1.4,
+       0.8516
+      ],
+      [
+       1.45,
+       0.873
+      ],
+      [
+       1.5,
+       0.8916
+      ],
+      [
+       1.55,
+       0.9076
+      ],
+      [
+       1.6,
+       0.9214
+      ],
+      [
+       1.65,
+       0.9333
+      ],
+      [
+       1.7,
+       0.9434
+      ],
+      [
+       1.75,
+       0.9521
+      ],
+      [
+       1.8,
+       0.9594
+      ],
+      [
+       1.85,
+       0.9657
+      ],
+      [
+       1.9,
+       0.971
+      ],
+      [
+       1.95,
+       0.9755
+      ],
+      [
+       2.0,
+       0.9793
+      ]
+     ],
+     "kind": "line",
+     "axis": "pressure ratio, (event 3-s gust ÷ declared reference 3-s gust)²",
+     "unit": "dimensionless",
+     "curve_id": "BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1",
+     "label": "enclosure · approved replacement · lower resistance"
+    },
+    "Separate PCS": {
+     "pts": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       0.05,
+       0.0
+      ],
+      [
+       0.1,
+       0.0
+      ],
+      [
+       0.15,
+       0.0
+      ],
+      [
+       0.2,
+       0.0
+      ],
+      [
+       0.25,
+       0.0001
+      ],
+      [
+       0.3,
+       0.0007
+      ],
+      [
+       0.35,
+       0.0024
+      ],
+      [
+       0.4,
+       0.0062
+      ],
+      [
+       0.45,
+       0.013
+      ],
+      [
+       0.5,
+       0.0237
+      ],
+      [
+       0.55,
+       0.0389
+      ],
+      [
+       0.6,
+       0.0591
+      ],
+      [
+       0.65,
+       0.0842
+      ],
+      [
+       0.7,
+       0.114
+      ],
+      [
+       0.75,
+       0.1482
+      ],
+      [
+       0.8,
+       0.1861
+      ],
+      [
+       0.85,
+       0.2272
+      ],
+      [
+       0.9,
+       0.2705
+      ],
+      [
+       0.95,
+       0.3153
+      ],
+      [
+       1.0,
+       0.3609
+      ],
+      [
+       1.05,
+       0.4065
+      ],
+      [
+       1.1,
+       0.4516
+      ],
+      [
+       1.15,
+       0.4956
+      ],
+      [
+       1.2,
+       0.538
+      ],
+      [
+       1.25,
+       0.5786
+      ],
+      [
+       1.3,
+       0.617
+      ],
+      [
+       1.35,
+       0.6531
+      ],
+      [
+       1.4,
+       0.6867
+      ],
+      [
+       1.45,
+       0.7179
+      ],
+      [
+       1.5,
+       0.7467
+      ],
+      [
+       1.55,
+       0.7731
+      ],
+      [
+       1.6,
+       0.7972
+      ],
+      [
+       1.65,
+       0.8191
+      ],
+      [
+       1.7,
+       0.8389
+      ],
+      [
+       1.75,
+       0.8568
+      ],
+      [
+       1.8,
+       0.8729
+      ],
+      [
+       1.85,
+       0.8874
+      ],
+      [
+       1.9,
+       0.9003
+      ],
+      [
+       1.95,
+       0.9118
+      ],
+      [
+       2.0,
+       0.9221
+      ]
+     ],
+     "kind": "line",
+     "axis": "pressure ratio, (event 3-s gust ÷ declared reference 3-s gust)²",
+     "unit": "dimensionless",
+     "curve_id": "BESS_SEPARATE_PCS_TC_PROXY_V0_1",
+     "label": "PCS · either response · lower resistance"
+    }
+   }
+  },
+  {
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind"
+   },
+   "entry_id": "convective_wind_bess",
+   "status": "gap",
+   "gap": true,
+   "href": "/cells/convective_wind_bess",
+   "rows": {
+    "_gap": {
+     "s": "no_curve",
+     "note": "No curve for this hazard yet: the catalogue lists it as a gap.",
+     "basis": "gap"
+    }
+   },
+   "states": {
+    "asset": {
+     "bblock": "_gap",
+     "sys_be": "_gap",
+     "ao_deluge": "_gap",
+     "benc": "_gap",
+     "be_enc": "_gap",
+     "be_modules": "_gap",
+     "be_racks": "_gap",
+     "be_bms": "_gap",
+     "be_dccab": "_gap",
+     "bthermal": "_gap",
+     "be_hvac": "_gap",
+     "bsafety": "_gap",
+     "be_fire": "_gap",
+     "be_vent": "_gap",
+     "sys_bp": "_gap",
+     "bp_pcs": "_gap",
+     "bp_mvt": "_gap",
+     "bp_rmu": "_gap",
+     "bp_aux": "_gap",
+     "bp_skid": "_gap",
+     "sys_bc": "_gap",
+     "bc_dc": "_gap",
+     "bc_mv": "_gap",
+     "sys_bk": "_gap",
+     "bk_ems": "_gap",
+     "bk_fiber": "_gap",
+     "sys_bg": "_gap",
+     "bg_grid": "_gap",
+     "sys_bv": "_gap",
+     "bs_found": "_gap",
+     "bv_yard": "_gap"
+    },
+    "plant": {
+     "bplant": "_gap",
+     "bpl_blocks": "_gap",
+     "bpl_enc": "_gap",
+     "bpl_skids": "_gap",
+     "bpl_coll": "_gap",
+     "bsub_floodwall": "_gap",
+     "bpl_feeders": "_gap",
+     "bpl_yard": "_gap",
+     "bsys_sub": "_gap",
+     "bsub": "_gap",
+     "bsub_spare": "_gap",
+     "bsub_mpt": "_gap",
+     "bsub_bkr": "_gap",
+     "bsub_disc": "_gap",
+     "bsub_meter": "_gap",
+     "bsub_mvbus": "_gap",
+     "bsub_bus": "_gap",
+     "bsub_house": "_gap",
+     "bsub_lm": "_gap",
+     "bsub_grid": "_gap",
+     "bsub_yard": "_gap",
+     "bgt": "_gap",
+     "bgt_struct": "_gap",
+     "bgt_cond": "_gap",
+     "bpoi": "_gap",
+     "bpoi_lines": "_gap",
+     "bpoi_bkr": "_gap",
+     "bpoi_bus": "_gap",
+     "bpoi_ctrl": "_gap",
+     "bpoi_yard": "_gap"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "sys_be",
+      "name": "Battery System",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "ao_deluge",
+          "name": "Water-Based Suppression",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "benc",
+          "name": "Battery Enclosures",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bthermal",
+          "name": "Thermal Management",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bsafety",
+          "name": "Fire & Explosion Safety",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bp",
+      "name": "Power Conversion",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bp_pcs",
+          "name": "Bidirectional PCS",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bp_mvt",
+          "name": "MV Transformer",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bp_rmu",
+          "name": "MV Switchgear (RMU)",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bp_aux",
+          "name": "Auxiliary Supply",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bp_skid",
+          "name": "Skid & Piers",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bc",
+      "name": "Cabling",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bc_dc",
+          "name": "DC Cables",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bc_mv",
+          "name": "MV Cable",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bk",
+      "name": "Controls",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bk_ems",
+          "name": "EMS / Plant Controller",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bk_fiber",
+          "name": "Control Network",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bg",
+      "name": "Grounding",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bg_grid",
+          "name": "Ground Grid",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bv",
+      "name": "Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bs_found",
+          "name": "Enclosure Foundations",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bv_yard",
+          "name": "Yard & Fence",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "bpl_blocks",
+      "name": "BESS Blocks",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bpl_enc",
+          "name": "Battery Enclosures",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bpl_skids",
+          "name": "PCS Skids",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "bpl_coll",
+      "name": "Collection & Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bsub_floodwall",
+          "name": "Substation Flood Wall",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bpl_feeders",
+          "name": "34.5 kV Feeders",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bpl_yard",
+          "name": "Yard & Fence",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "bsys_sub",
+      "name": "Substation & Interconnection",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bsub",
+          "name": "Collector Substation",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bgt",
+          "name": "Gen-Tie Line",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         },
+         {
+          "node": "bpoi",
+          "name": "POI Switchyard",
+          "note": "No curve for this hazard yet: the catalogue lists it as a gap."
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 0,
+    "conditioner": 0,
+    "no_curve": 24,
+    "no_direct_damage": 0,
+    "outside": 0
+   },
+   "curve_parts": [],
+   "unmapped": [],
+   "sparks": {}
+  },
+  {
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "entry_id": "wildfire_bess",
+   "status": "live",
+   "gap": false,
+   "href": "/cells/wildfire_bess",
+   "rows": {
+    "sys_be": {
+     "s": "curve",
+     "part": "Integrated battery enclosure",
+     "note": "The whole enclosure, racks and fire safety included",
+     "basis": "part"
+    },
+    "bp_pcs": {
+     "s": "curve",
+     "part": "Separate PCS",
+     "basis": "part"
+    },
+    "bp_mvt": {
+     "s": "no_curve",
+     "part": "Unit MV and shared electrical",
+     "basis": "not_covered"
+    },
+    "bp_rmu": {
+     "s": "no_curve",
+     "part": "Unit MV and shared electrical",
+     "basis": "not_covered"
+    },
+    "bp_aux": {
+     "s": "no_curve",
+     "part": "Unit MV and shared electrical",
+     "basis": "not_covered"
+    },
+    "bp_skid": {
+     "s": "no_curve",
+     "part": "Unit MV and shared electrical",
+     "basis": "not_covered"
+    },
+    "sys_bc": {
+     "s": "no_curve",
+     "part": "Unit MV and shared electrical",
+     "basis": "not_covered"
+    },
+    "sys_bk": {
+     "s": "no_curve",
+     "part": "Unit MV and shared electrical",
+     "basis": "not_covered"
+    },
+    "sys_bg": {
+     "s": "no_curve",
+     "part": "Unit MV and shared electrical",
+     "basis": "not_covered"
+    },
+    "sys_bv": {
+     "s": "no_curve",
+     "part": "Civil works",
+     "basis": "not_covered"
+    },
+    "bpl_enc": {
+     "s": "curve",
+     "part": "Integrated battery enclosure",
+     "basis": "part"
+    },
+    "bpl_skids": {
+     "s": "curve",
+     "part": "Separate PCS",
+     "note": "The PCS on each skid; the skid's transformer and switchgear have no curve",
+     "basis": "part"
+    },
+    "bsub_floodwall": {
+     "s": "outside",
+     "note": "A resilience measure in the twin; not part of the reference plant",
+     "basis": "out_of_scope"
+    },
+    "bpl_feeders": {
+     "s": "no_curve",
+     "part": "Unit MV and shared electrical",
+     "basis": "not_covered"
+    },
+    "bpl_yard": {
+     "s": "no_curve",
+     "part": "Civil works",
+     "basis": "not_covered"
+    },
+    "bsys_sub": {
+     "s": "outside",
+     "part": "Collector station and export line",
+     "basis": "out_of_scope"
+    }
+   },
+   "states": {
+    "asset": {
+     "sys_be": "sys_be",
+     "ao_deluge": "sys_be",
+     "benc": "sys_be",
+     "be_enc": "sys_be",
+     "be_modules": "sys_be",
+     "be_racks": "sys_be",
+     "be_bms": "sys_be",
+     "be_dccab": "sys_be",
+     "bthermal": "sys_be",
+     "be_hvac": "sys_be",
+     "bsafety": "sys_be",
+     "be_fire": "sys_be",
+     "be_vent": "sys_be",
+     "bp_pcs": "bp_pcs",
+     "bp_mvt": "bp_mvt",
+     "bp_rmu": "bp_rmu",
+     "bp_aux": "bp_aux",
+     "bp_skid": "bp_skid",
+     "sys_bc": "sys_bc",
+     "bc_dc": "sys_bc",
+     "bc_mv": "sys_bc",
+     "sys_bk": "sys_bk",
+     "bk_ems": "sys_bk",
+     "bk_fiber": "sys_bk",
+     "sys_bg": "sys_bg",
+     "bg_grid": "sys_bg",
+     "sys_bv": "sys_bv",
+     "bs_found": "sys_bv",
+     "bv_yard": "sys_bv"
+    },
+    "plant": {
+     "bpl_enc": "bpl_enc",
+     "bpl_skids": "bpl_skids",
+     "bsub_floodwall": "bsub_floodwall",
+     "bpl_feeders": "bpl_feeders",
+     "bpl_yard": "bpl_yard",
+     "bsys_sub": "bsys_sub",
+     "bsub": "bsys_sub",
+     "bsub_spare": "bsys_sub",
+     "bsub_mpt": "bsys_sub",
+     "bsub_bkr": "bsys_sub",
+     "bsub_disc": "bsys_sub",
+     "bsub_meter": "bsys_sub",
+     "bsub_mvbus": "bsys_sub",
+     "bsub_bus": "bsys_sub",
+     "bsub_house": "bsys_sub",
+     "bsub_lm": "bsys_sub",
+     "bsub_grid": "bsys_sub",
+     "bsub_yard": "bsys_sub",
+     "bgt": "bsys_sub",
+     "bgt_struct": "bsys_sub",
+     "bgt_cond": "bsys_sub",
+     "bpoi": "bsys_sub",
+     "bpoi_lines": "bsys_sub",
+     "bpoi_bkr": "bsys_sub",
+     "bpoi_bus": "bsys_sub",
+     "bpoi_ctrl": "bsys_sub",
+     "bpoi_yard": "bsys_sub"
+    }
+   },
+   "systems": {
+    "asset": [
+     {
+      "node": "sys_be",
+      "name": "Battery System",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "ao_deluge",
+          "name": "Water-Based Suppression",
+          "part": "Integrated battery enclosure",
+          "note": "The whole enclosure, racks and fire safety included"
+         },
+         {
+          "node": "benc",
+          "name": "Battery Enclosures",
+          "part": "Integrated battery enclosure",
+          "note": "The whole enclosure, racks and fire safety included"
+         },
+         {
+          "node": "bthermal",
+          "name": "Thermal Management",
+          "part": "Integrated battery enclosure",
+          "note": "The whole enclosure, racks and fire safety included"
+         },
+         {
+          "node": "bsafety",
+          "name": "Fire & Explosion Safety",
+          "part": "Integrated battery enclosure",
+          "note": "The whole enclosure, racks and fire safety included"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bp",
+      "name": "Power Conversion",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "bp_pcs",
+          "name": "Bidirectional PCS",
+          "part": "Separate PCS"
+         }
+        ]
+       },
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bp_mvt",
+          "name": "MV Transformer",
+          "part": "Unit MV and shared electrical"
+         },
+         {
+          "node": "bp_rmu",
+          "name": "MV Switchgear (RMU)",
+          "part": "Unit MV and shared electrical"
+         },
+         {
+          "node": "bp_aux",
+          "name": "Auxiliary Supply",
+          "part": "Unit MV and shared electrical"
+         },
+         {
+          "node": "bp_skid",
+          "name": "Skid & Piers",
+          "part": "Unit MV and shared electrical"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bc",
+      "name": "Cabling",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bc_dc",
+          "name": "DC Cables",
+          "part": "Unit MV and shared electrical"
+         },
+         {
+          "node": "bc_mv",
+          "name": "MV Cable",
+          "part": "Unit MV and shared electrical"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bk",
+      "name": "Controls",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bk_ems",
+          "name": "EMS / Plant Controller",
+          "part": "Unit MV and shared electrical"
+         },
+         {
+          "node": "bk_fiber",
+          "name": "Control Network",
+          "part": "Unit MV and shared electrical"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bg",
+      "name": "Grounding",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bg_grid",
+          "name": "Ground Grid",
+          "part": "Unit MV and shared electrical"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "sys_bv",
+      "name": "Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bs_found",
+          "name": "Enclosure Foundations",
+          "part": "Civil works"
+         },
+         {
+          "node": "bv_yard",
+          "name": "Yard & Fence",
+          "part": "Civil works"
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "plant": [
+     {
+      "node": "bpl_blocks",
+      "name": "BESS Blocks",
+      "state": "curve",
+      "by_state": [
+       {
+        "state": "curve",
+        "words": "curve",
+        "parts": [
+         {
+          "node": "bpl_enc",
+          "name": "Battery Enclosures",
+          "part": "Integrated battery enclosure"
+         },
+         {
+          "node": "bpl_skids",
+          "name": "PCS Skids",
+          "part": "Separate PCS",
+          "note": "The PCS on each skid; the skid's transformer and switchgear have no curve"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "bpl_coll",
+      "name": "Collection & Civil",
+      "state": "no_curve",
+      "by_state": [
+       {
+        "state": "no_curve",
+        "words": "no curve yet",
+        "parts": [
+         {
+          "node": "bpl_feeders",
+          "name": "34.5 kV Feeders",
+          "part": "Unit MV and shared electrical"
+         },
+         {
+          "node": "bpl_yard",
+          "name": "Yard & Fence",
+          "part": "Civil works"
+         }
+        ]
+       },
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "bsub_floodwall",
+          "name": "Substation Flood Wall",
+          "note": "A resilience measure in the twin; not part of the reference plant"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "node": "bsys_sub",
+      "name": "Substation & Interconnection",
+      "state": "outside",
+      "by_state": [
+       {
+        "state": "outside",
+        "words": "outside",
+        "parts": [
+         {
+          "node": "bsub",
+          "name": "Collector Substation",
+          "part": "Collector station and export line"
+         },
+         {
+          "node": "bgt",
+          "name": "Gen-Tie Line",
+          "part": "Collector station and export line"
+         },
+         {
+          "node": "bpoi",
+          "name": "POI Switchyard",
+          "part": "Collector station and export line"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "counts": {
+    "curve": 7,
+    "conditioner": 0,
+    "no_curve": 13,
+    "no_direct_damage": 0,
+    "outside": 4
+   },
+   "curve_parts": [
+    "Integrated battery enclosure",
+    "Separate PCS"
+   ],
+   "unmapped": [],
+   "sparks": {
+    "Integrated battery enclosure": {
+     "pts": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       1.0,
+       0.002
+      ],
+      [
+       2.0,
+       0.01
+      ],
+      [
+       3.0,
+       0.05
+      ],
+      [
+       4.0,
+       0.18
+      ],
+      [
+       5.0,
+       0.45
+      ],
+      [
+       6.0,
+       0.8
+      ]
+     ],
+     "kind": "categorical",
+     "axis": "FSim fire-intensity class at the unit, exact state",
+     "unit": "class",
+     "curve_id": "BWF01_ENC_approved_replacement_electronics_ordinal",
+     "label": "enclosure · approved replacement · electronics shape"
+    },
+    "Separate PCS": {
+     "pts": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       1.0,
+       0.002
+      ],
+      [
+       2.0,
+       0.01
+      ],
+      [
+       3.0,
+       0.05
+      ],
+      [
+       4.0,
+       0.18
+      ],
+      [
+       5.0,
+       0.45
+      ],
+      [
+       6.0,
+       0.8
+      ]
+     ],
+     "kind": "categorical",
+     "axis": "FSim fire-intensity class at the unit, exact state",
+     "unit": "class",
+     "curve_id": "BWF01_PCS_ELECTRONICS",
+     "label": "PCS · every consequence · electronics response under either shape"
+    }
+   }
+  }
+ ],
+ "matrix": [
+  {
+   "tree": "asset",
+   "node": "sys_be",
+   "name": "Battery System",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Battery enclosure (active hardware)"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Integrated battery enclosure"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Integrated battery enclosure"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_bp",
+   "name": "Power Conversion",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Separate PCS"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Separate PCS"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Separate PCS"
+     ],
+     "mixed": true,
+     "states": [
+      "curve",
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_bc",
+   "name": "Cabling",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_bk",
+   "name": "Controls",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_bg",
+   "name": "Grounding",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "asset",
+   "node": "sys_bv",
+   "name": "Civil",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "bpl_blocks",
+   "name": "BESS Blocks",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Battery enclosure (active hardware)",
+      "Separate PCS"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Integrated battery enclosure",
+      "Separate PCS"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "curve",
+     "words": "curve",
+     "curve_parts": [
+      "Integrated battery enclosure",
+      "Separate PCS"
+     ],
+     "mixed": false,
+     "states": [
+      "curve"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "bpl_coll",
+   "name": "Collection & Civil",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": true,
+     "states": [
+      "no_curve",
+      "outside"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": true,
+     "states": [
+      "no_curve",
+      "outside"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": true,
+     "states": [
+      "no_curve",
+      "outside"
+     ]
+    }
+   }
+  },
+  {
+   "tree": "plant",
+   "node": "bsys_sub",
+   "name": "Substation & Interconnection",
+   "cells": {
+    "hail": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "flood": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "hurricane_wind": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    },
+    "convective_wind": {
+     "state": "no_curve",
+     "words": "no curve yet",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "no_curve"
+     ]
+    },
+    "wildfire": {
+     "state": "outside",
+     "words": "outside",
+     "curve_parts": [],
+     "mixed": false,
+     "states": [
+      "outside"
+     ]
+    }
+   }
+  }
+ ],
+ "state_words": {
+  "curve": "Has a damage curve",
+  "conditioner": "Changes the curve, no curve of its own",
+  "no_curve": "In the value, no curve yet",
+  "no_direct_damage": "Reviewed: no direct damage",
+  "outside": "Outside the value this curve prices"
+ },
+ "state_short": {
+  "curve": "curve",
+  "conditioner": "changes the curve",
+  "no_curve": "no curve yet",
+  "no_direct_damage": "no direct damage",
+  "outside": "outside"
+ }
+}

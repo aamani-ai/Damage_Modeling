@@ -1,0 +1,47 @@
+{
+  "schema": "damage_twin_spine.v1",
+  "status": "draft",
+  "owner": "owner-directed (Divy) · agent-drafted; co-owned with Hazard (DCD-D23)",
+  "source": "The Digital Twin's taxonomy, skills/reference/taxonomy.md at the commit pinned in dashboard/data/twin/trees.json; ruled as the dashboard's spine by DCD-D20 (2026-10-21)",
+  "levels": "category → type → profile → the twin's tree (asset → systems → equipment → components); a damage curve attaches to the part that is replaced and priced on its own",
+  "categories": [
+    {
+      "slug": "power_plants",
+      "label": "Power plants",
+      "rule": "the technology producing the output",
+      "types": [
+        { "slug": "solar", "label": "Solar farm", "catalogue_asset": "Solar farm", "profile": "100 MWac single-axis tracker plant; the picture shows one tracker block and the plant", "twin": { "asset": "solar", "crosswalk": "solar.csv" } },
+        { "slug": "wind", "label": "Wind farm", "catalogue_asset": "Wind farm", "profile": "2.8 MW geared turbine; the picture shows one turbine and the farm", "twin": { "asset": "wind", "crosswalk": "wind.csv" } },
+        { "slug": "bess", "label": "Battery storage", "catalogue_asset": "Battery storage", "profile": "100 MW / 400 MWh LFP; the picture shows one 5 MW block and the plant", "twin": { "asset": "bess", "crosswalk": "bess.csv" } },
+        { "slug": "hybrid", "label": "Hybrid (solar + storage)", "planned": true }
+      ]
+    },
+    {
+      "slug": "real_estate",
+      "label": "Real estate",
+      "rule": "the use of the majority of the floor area",
+      "types": [
+        { "slug": "residential", "label": "Residential", "catalogue_asset": "Real estate", "building": "House", "profile": "one-storey single-family house", "twin": { "asset": "re_res", "crosswalk": "re_res.csv" } },
+        { "slug": "commercial", "label": "Commercial", "catalogue_asset": "Real estate", "building": "Office", "also_buildings": ["Retail"], "profile": "three-storey office (the curves); retail building (the picture)", "picture_note": "The picture is the twin's retail building; the curves are for the three-storey office.", "twin": { "asset": "re_com", "crosswalk": "re_com.csv" } },
+        { "slug": "industrial", "label": "Industrial", "catalogue_asset": "Real estate", "building": "Warehouse", "profile": "one-storey distribution warehouse", "twin": { "asset": "re_ind", "crosswalk": "re_ind.csv" } },
+        { "slug": "institutional", "label": "Institutional", "planned": true }
+      ]
+    },
+    {
+      "slug": "grid",
+      "label": "Grid infrastructure",
+      "rule": "the function in the network",
+      "types": [
+        { "slug": "substation", "label": "Substation", "catalogue_asset": "Substation", "profile": "345/138 kV transmission substation, the fenced station", "twin": { "asset": "gi_sub_t", "crosswalk": "gi_sub_t.csv" } },
+        { "slug": "lines", "label": "Transmission and distribution lines", "planned": true }
+      ]
+    },
+    {
+      "slug": "digital",
+      "label": "Digital infrastructure",
+      "rule": "data centres (a future category)",
+      "planned": true,
+      "types": []
+    }
+  ]
+}

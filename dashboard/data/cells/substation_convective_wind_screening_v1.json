@@ -64,7 +64,7 @@
    "label": "entry agent-read 2026-10-19 · release —"
   }
  },
- "summary": "Convective wind on substations reuses another cell's curve: same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a T4 cross-hazard proxy for direct wind only (see docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md).",
+ "summary": "Convective wind on substations reuses another cell's curve: same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a judgment-based cross-hazard proxy for direct wind only (see docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md).",
  "chain": {
   "stations": [
    {
@@ -613,7 +613,8 @@
   "reused_curves": [
    "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
   ],
-  "transfer_rationale": "Same station assembly, direct aerodynamic loading, dimensionless squared compatible 3-second gust ratio, same repair denominator and unchanged T4 ordinates. Tornado adoption covers this mechanism only, not source TC permission for complete tornado response.",
+  "transfer_rationale": "Same station assembly, direct aerodynamic loading, dimensionless squared compatible 3-second gust ratio, same repair denominator and unchanged judgment-based ordinates. Tornado adoption covers this mechanism only, not source TC permission for complete tornado response.",
+  "transfer_rationale_raw": "Same station assembly, direct aerodynamic loading, dimensionless squared compatible 3-second gust ratio, same repair denominator and unchanged T4 ordinates. Tornado adoption covers this mechanism only, not source TC permission for complete tornado response.",
   "transfer_tier": "T4_explicit_cross_hazard_proxy",
   "status": "qualified_screening_consumer_binding",
   "limitations": [
@@ -634,5 +635,370 @@
   ]
  },
  "sampling_notes": [],
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Reused · borrows another cell's curve",
+    "code": "REUSED"
+   },
+   "evidence": {
+    "words": "Evidence: our judgment",
+    "code": "How damage rises: our judgment · how it becomes dollars: our judgment",
+    "tiers": [
+     "T4"
+    ],
+    "codes": "shape T4 · cost T4"
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "Field reports: nobody has looked yet"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release —"
+   }
+  },
+  "main_logic": [
+   "Convective wind is read as pressure ratio: (event 3-second gust / ASCE MRI300 reference design gust, 10 m, Exposure C) squared, valid 0 to 2.",
+   "Same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a judgment-based cross-hazard proxy for direct wind only.",
+   "The damage ratio is a share of the replacement value of the same fenced station, $27,353,236.37 (MISO MTEP24 published table amounts), applied once."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "1 part with a curve",
+    "paragraphs": [
+     "Convective wind on substations: same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a judgment-based cross-hazard proxy for direct wind only (see docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md). It names 1 part: Whole station (fenced assembly). Outside its scope: external access road and project support allowances ($3.06M, outside the fenced value), business interruption and service interruption and overlap with Hurricane wind (not deduplicated; a downstream Total decision). Kinds of damage it does not include: tornado-only mechanisms: windborne debris, pressure change, rotation and duration and cascading electrical failures.",
+     "For this hazard the substation is split into 1 part: Whole station (fenced assembly).",
+     "The damage ratio is a share of replacement value of the same fenced station, $27,353,236.37 (MISO MTEP24 published table amounts), applied once. The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "Whole station (fenced…",
+      "tone": "key",
+      "title": "Whole station (fenced assembly)"
+     }
+    ]
+   },
+   {
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
+    "fact": "not written yet",
+    "paragraphs": [
+     "No hazard axis is declared. The input, in the catalogue's words: pressure ratio: (event 3-second gust / ASCE MRI300 reference design gust, 10 m, Exposure C) squared, valid 0 to 2; Strong Wind uses ASCE 3-second gusts, Tornado uses the EF-band midpoint gust; outside the range is unavailable, not clamped.",
+     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": false,
+    "chips": [
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Preserve Perry source compatibility and add owner-authorized synthetic judgment-based fixed/tracker coverage through cell-local synthetic parameters plus TC-specific fail-closed bridge-ID contracts whose unresolved external content remains explicitly flagged."
+     }
+    ],
+    "why": [
+     {
+      "label": "From Hurricane wind × Solar farm, which it builds on",
+      "text": "Preserve Perry source compatibility and add owner-authorized synthetic judgment-based fixed/tracker coverage through cell-local synthetic parameters plus TC-specific fail-closed bridge-ID contracts whose unresolved external content remains explicitly flagged.",
+      "source": "Hurricane wind × Solar farm",
+      "source_label": "The choice"
+     }
+    ]
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "not written yet",
+    "paragraphs": [
+     "No source list could be read for this cell. The source and claim registers are machine-readable files in the cell folder."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": false,
+    "chips": [
+     {
+      "text": "our judgment",
+      "tone": "key",
+      "title": "How damage rises: our judgment · how it becomes dollars: our judgment"
+     },
+     {
+      "text": "Canonical…",
+      "tone": "key",
+      "title": "Canonical tropical_cyclone_wind_solar model v2.1 docs r2, curve TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+     },
+     {
+      "text": "NIST, design guide for the…",
+      "tone": "key",
+      "title": "NIST, design guide for the new tornado load requirements in ASCE 7-22"
+     },
+     {
+      "text": "+3 more references",
+      "tone": "muted"
+     }
+    ]
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "No outside check has been made yet: nothing independent has been compared with this curve.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "no outside check yet",
+      "tone": "muted"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: our judgment · how it becomes dollars: our judgment",
+  "hazard_paths": [],
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "◐",
+    "label": "one convective wind event",
+    "short": "one convective wind event",
+    "detail": "whole-station direct-wind damage ratio for a pressure ratio of 0 to 2 and an explicit resistance scenario"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "◐",
+    "label": "a dollar scenario",
+    "short": "a dollar scenario",
+    "detail": "same conditions, damage ratio times the $27.35M fenced value"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "◐",
+    "label": "yearly loss — only through Hazard",
+    "short": "yearly loss",
+    "detail": "hazard supplies frequency, tornado footprint contact, severity and count law, then one station cap; direct-wind screening contribution only"
+   },
+   {
+    "key": "pml",
+    "mark": "◐",
+    "label": "PML, VaR — only from Hazard's validated annual loss distribution, per the source cell",
+    "short": "PML and VaR",
+    "detail": ""
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": null,
+    "not_covered": [],
+    "withheld": []
+   },
+   "assumed": [
+    "Hurricane-to-non-hurricane direct-wind transfer",
+    "Tornado EF-midpoint gust used on the pressure axis",
+    "Equivalent-square footprint, uniform value and parallel path overlap for tornado contact",
+    "GSU-to-transmission-yard transfer and fenced civil membership carried from the Hurricane binding"
+   ],
+   "missing": {
+    "mechanisms": [
+     "Tornado-only mechanisms: windborne debris, pressure change, rotation and duration",
+     "Cascading electrical failures"
+    ],
+    "out_of_scope": [
+     "External access road and project support allowances ($3.06M, outside the fenced value)",
+     "Business interruption and service interruption",
+     "Overlap with Hurricane wind (not deduplicated; a downstream Total decision)"
+    ]
+   },
+   "open_questions": [
+    "A complete tornado response needs the deferred component and pathway research",
+    "Regional Fano factor kept after contact thinning (not an exact derivation)",
+    "Strong Wind and Hurricane overlap left to a downstream Total decision"
+   ],
+   "next_version": null
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "Scope",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Convective wind on substations: same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a judgment-based cross-hazard proxy for direct wind only (see docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md). It names 1 part: Whole station (fenced assembly). Outside its scope: external access road and project support allowances ($3.06M, outside the fenced value), business interruption and service interruption and overlap with Hurricane wind (not deduplicated; a downstream Total decision). Kinds of damage it does not include: tornado-only mechanisms: windborne debris, pressure change, rotation and duration and cascading electrical failures.",
+    "plain_fact": "1 part · 3 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the substation is split into 1 part: Whole station (fenced assembly).",
+    "plain_fact": "1 part"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "No hazard axis is declared. The input, in the catalogue's words: pressure ratio: (event 3-second gust / ASCE MRI300 reference design gust, 10 m, Exposure C) squared, valid 0 to 2; Strong Wind uses ASCE 3-second gusts, Tornado uses the EF-band midpoint gust; outside the range is unavailable, not clamped.",
+    "plain_fact": "—"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "No source list could be read for this cell. The source and claim registers are machine-readable files in the cell folder.",
+    "plain_fact": "0 sources · our judgment"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "The damage ratio is a share of replacement value of the same fenced station, $27,353,236.37 (MISO MTEP24 published table amounts), applied once. The files state no plant-level dollar figure for this asset.",
+    "plain_fact": "no plant value stated"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "no audit found"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 0 curve records (model v2.1, docs r2). The cell folder holds 3 files, each with its SHA under Details.",
+    "plain_fact": "0 curve records"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "One convective wind event, a dollar scenario, yearly loss and PML and VaR are available only under conditions the consumer (Hazard) checks. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "0 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "The artifact declares no known-answer tests, so this build reproduced none. No validation record was found. No outside check has been made yet.",
+    "plain_fact": "no known answers"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "Canonical tropical_cyclone_wind_solar model v2.1 docs r2, curve TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES",
+    "ids": [],
+    "title": "Canonical tropical_cyclone_wind_solar model v2.1 docs r2, curve TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   },
+   {
+    "text": "NIST, design guide for the new tornado load requirements in ASCE 7-22",
+    "ids": [],
+    "title": "NIST, design guide for the new tornado load requirements in ASCE 7-22",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   },
+   {
+    "text": "NIST, explanation of tornado loading (2024), incl. Joplin substation damage",
+    "ids": [],
+    "title": "NIST, explanation of tornado loading (2024), incl. Joplin substation damage",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   },
+   {
+    "text": "NWS Enhanced Fujita scale wind bands",
+    "ids": [],
+    "title": "NWS Enhanced Fujita scale wind bands",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   },
+   {
+    "text": "Substation Hurricane screening binding (station and value qualification)",
+    "ids": [],
+    "title": "Substation Hurricane screening binding (station and value qualification)",
+    "link": null,
+    "link_kind": "none",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": null
+   }
+  ],
+  "sources": [],
+  "claims": [],
+  "parameters": [],
+  "parameters_plain": [],
+  "evidence_provenance": {
+   "kind": "register",
+   "sheets": [],
+   "sections": [],
+   "unmatched": [],
+   "sentence": null,
+   "dossier": null,
+   "workbook": null
+  },
+  "link_counts": {
+   "total": 0,
+   "linked": 0,
+   "locator_only": 0,
+   "neither": 0,
+   "markers": 0,
+   "placeholders": 0
+  },
+  "extraction": null,
+  "tier_words": {
+   "shape": "our judgment",
+   "cost": "our judgment"
+  }
+ },
  "build_findings": []
 }

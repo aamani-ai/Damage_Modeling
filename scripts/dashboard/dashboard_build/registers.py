@@ -21,10 +21,11 @@ def normalise_sources(rows: list[dict[str, str]]) -> list[dict[str, Any]]:
         sid = _first(r, "source_id")
         if not sid:
             continue
+        location = _first(r, "location")  # the substation register: a URL or a repository path, with the claim beside it
         out.append({
             "id": sid,
-            "citation": _first(r, "citation", "full_citation", "location", "use") or "",
-            "url": _first(r, "url", "url_or_repo_path", "primary_url"),
+            "citation": _first(r, "citation", "full_citation", "claim", "use") or location or "",
+            "url": _first(r, "url", "url_or_repo_path", "primary_url") or (location if location and ("/" in location or location.endswith((".md", ".json", ".csv"))) else None),
             "locator": _first(r, "exact_locator", "locator"),
             "role": _first(r, "source_role", "role", "evidence_role", "source_class"),
             "tier": tier_code(_first(r, "evidence_tier", "claim_support_tier", "tier")),

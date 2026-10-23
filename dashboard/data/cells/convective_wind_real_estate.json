@@ -56,7 +56,7 @@
    "label": "entry agent-read 2026-10-19 · release not yet reviewed"
   }
  },
- "summary": "Proposal, not in the runtime index — Convective wind on buildings: eF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder.",
+ "summary": "Proposal, not in the runtime index — Convective wind on buildings: EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder.",
  "chain": {
   "stations": [
    {
@@ -998,5 +998,1474 @@
  "gap_reason": null,
  "binding": null,
  "sampling_notes": [],
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Proposal · not in the runtime index yet",
+    "code": "PROPOSAL · screening"
+   },
+   "evidence": {
+    "words": "Evidence: our judgment",
+    "code": "How damage rises: borrowed · how it becomes dollars: our judgment",
+    "tiers": [
+     "T4"
+    ],
+    "codes": "shape T3 · cost T4"
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "Field reports: nobody has looked yet"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release not yet reviewed"
+   }
+  },
+  "main_logic": [
+   "Convective wind is measured as convective gust 3s 10m open terrain mph, in mph and tornado gust 3s 10m mph, in mph.",
+   "EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder; tornado used directly, storm wind as a transfer starting at 96 mph.",
+   "Why this shape: expected cost over ordered degrees of damage; equals the ordered-state form with one beta per degree.",
+   "The damage ratio is a share of the structure replacement cost new of the same building."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "3 parts with a curve · 1 withheld",
+    "paragraphs": [
+     "Convective wind on buildings: EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder; tornado used directly, storm wind as a transfer starting at 96 mph. It names 3 parts: House, Warehouse and Office. Outside its scope: contents (declared as a withheld placeholder part), land, site works, business interruption and hurricane wind (hurricane cell).",
+     "For this hazard the building is split into 3 parts: House, Warehouse and Office. 1 further unit is named but withheld — cwre building contents — a stated 'not zero', not a curve.",
+     "The damage ratio is a share of structure replacement cost new of the same building. The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "House",
+      "tone": "key",
+      "title": "House"
+     },
+     {
+      "text": "Warehouse",
+      "tone": "key",
+      "title": "Warehouse"
+     },
+     {
+      "text": "Office",
+      "tone": "key",
+      "title": "Office"
+     },
+     {
+      "text": "2 pathways",
+      "tone": "key"
+     },
+     {
+      "text": "1 withheld",
+      "tone": "muted"
+     }
+    ]
+   },
+   {
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
+    "fact": "2 hazard measures → a line through points",
+    "paragraphs": [
+     "Damage is read against convective gust 3s 10m open terrain mph (mph) and tornado gust 3s 10m mph (mph). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: 3-second gust at 10 m (mph), 0 to 255 mph; separate fields for storm wind and tornado (tornado: Hazard's EF band midpoint gust).",
+     "The seven-step audit is written in the dossier with 7 rows; the statuses it records: Gust at 10 m open terrain as delivered; no terrain or height bridge; EF midpoint bridge flagged., Numeric per building and pathway; above 255 mph, contents and unknown inputs withhold or fail., One row, 100% of structure value; components not itemized by the source., One whole-building unit; contents withheld., Repair cost / structure replacement cost new., Three reference buildings (profiles r1); structure only. and Whole building; no zones.. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "convective gust 3s 10m open…, mph",
+      "tone": "key",
+      "title": "convective gust 3s 10m open terrain mph"
+     },
+     {
+      "text": "tornado gust 3s 10m mph, mph",
+      "tone": "key",
+      "title": "tornado gust 3s 10m mph"
+     },
+     {
+      "text": "line through points",
+      "tone": "key"
+     },
+     {
+      "text": "6 curves",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Expected cost over ordered degrees of damage; equals the ordered-state form with one beta per degree."
+     }
+    ],
+    "why": [
+     {
+      "label": "Why this shape",
+      "text": "Expected cost over ordered degrees of damage; equals the ordered-state form with one beta per degree."
+     },
+     {
+      "label": "The form adopted",
+      "text": "Expected cost over ordered degrees of damage, each lognormal in gust (median = expected speed, beta from the bounds read as a 90% range); tabulated every 1 mph; straight-line onset 96 mph."
+     },
+     {
+      "label": "Why not hurricane curves",
+      "text": "Separate evidence per hazard (owner choice); hurricane-curve reuse is the documented alternative."
+     }
+    ]
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "8 sources, 7 linked · our judgment",
+    "paragraphs": [
+     "8 sources set this cell: Texas Tech WSEC, A Recommendation for an Enhanced Fujita Scale, Rev 2 (2006), NOAA Storm Prediction Center, EF scale damage indicators FR12, MBS, LRB, FEMA, Hazus 7.0 Hurricane Technical Manual, damage-state costs and definitions and FEMA National Risk Index, Dec 2025 (check only) and 4 more. Of the 15 parameters, 2 are published, 4 are borrowed and 9 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator)."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "our judgment",
+      "tone": "key",
+      "title": "How damage rises: borrowed · how it becomes dollars: our judgment"
+     },
+     {
+      "text": "Texas Tech WSEC, A…",
+      "tone": "key",
+      "title": "Texas Tech WSEC, A Recommendation for an Enhanced Fujita Scale, Rev 2 (2006)"
+     },
+     {
+      "text": "NOAA Storm Prediction Center…",
+      "tone": "key",
+      "title": "NOAA Storm Prediction Center, EF scale damage indicators FR12, MBS, LRB"
+     },
+     {
+      "text": "+2 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "8 sources, 7 linked",
+      "tone": "muted"
+     }
+    ]
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "1 outside check · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "1 outside check compares this curve with an independent result: FEMA National Risk Index: yearly loss on Hazard's grid (storm wind and tornado). The validation record says report.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: not yet reviewed."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "FEMA National Risk Index…",
+      "tone": "key",
+      "title": "FEMA National Risk Index: yearly loss on Hazard's grid (storm wind and tornado)"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "our judgment",
+  "halves": "How damage rises: borrowed · how it becomes dollars: our judgment",
+  "hazard_paths": [],
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "◐",
+    "label": "one convective wind event",
+    "short": "one convective wind event",
+    "detail": "proposal, not in the runtime index; pathway and building required"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "✗",
+    "label": "a dollar scenario",
+    "short": "a dollar scenario",
+    "detail": "withheld until the building value is qualified"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "✗",
+    "label": "yearly loss",
+    "short": "yearly loss",
+    "detail": "withheld before promotion (computed by the consumer afterwards)"
+   },
+   {
+    "key": "pml",
+    "mark": "✗",
+    "label": "PML, VaR — not supported",
+    "short": "PML and VaR",
+    "detail": "withheld"
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": null,
+    "not_covered": [],
+    "withheld": [
+     {
+      "failure_unit_id": "CWRE_BUILDING_CONTENTS",
+      "subsystem": "BUILDING",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; contents deferred separate failure unit."
+     }
+    ]
+   },
+   "assumed": [
+    "Which FEMA damage level each EF damage step belongs to (incl. house foundation shift = 50%, kept for now)",
+    "Light damage priced at 1%",
+    "EF speed range read as a 90% spread",
+    "Storm wind starts at 96 mph",
+    "Storm wind uses tornado-derived evidence",
+    "EF speeds taken as 10 m open-terrain gusts; no terrain adjustment"
+   ],
+   "missing": {
+    "mechanisms": [],
+    "out_of_scope": [
+     "Contents (declared as a withheld placeholder part)",
+     "Land, site works, business interruption",
+     "Hurricane wind (hurricane cell)"
+    ]
+   },
+   "open_questions": [
+    "Storm-wind yearly loss reads well above the NRI level (largely Hazard's storm frequency)",
+    "Alternative route for the reviewer: reuse the hurricane building curves"
+   ],
+   "next_version": null
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "Scope",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Convective wind on buildings: EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder; tornado used directly, storm wind as a transfer starting at 96 mph. It names 3 parts: House, Warehouse and Office. Outside its scope: contents (declared as a withheld placeholder part), land, site works, business interruption and hurricane wind (hurricane cell).",
+    "plain_fact": "3 parts · 3 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the building is split into 3 parts: House, Warehouse and Office. 1 further unit is named but withheld — cwre building contents — a stated 'not zero', not a curve.",
+    "plain_fact": "3 parts · 1 withheld"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "Damage is read against convective gust 3s 10m open terrain mph (mph) and tornado gust 3s 10m mph (mph). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: 3-second gust at 10 m (mph), 0 to 255 mph; separate fields for storm wind and tornado (tornado: Hazard's EF band midpoint gust).",
+    "plain_fact": "a line through points"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "8 sources set this cell: Texas Tech WSEC, A Recommendation for an Enhanced Fujita Scale, Rev 2 (2006), NOAA Storm Prediction Center, EF scale damage indicators FR12, MBS, LRB, FEMA, Hazus 7.0 Hurricane Technical Manual, damage-state costs and definitions and FEMA National Risk Index, Dec 2025 (check only) and 4 more. Of the 15 parameters, 2 are published, 4 are borrowed and 9 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "plain_fact": "8 sources · borrowed and our judgment"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "The damage ratio is a share of structure replacement cost new of the same building. The files state no plant-level dollar figure for this asset.",
+    "plain_fact": "no plant value stated"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "The seven-step audit is written in the dossier with 7 rows; the statuses it records: Gust at 10 m open terrain as delivered; no terrain or height bridge; EF midpoint bridge flagged., Numeric per building and pathway; above 255 mph, contents and unknown inputs withhold or fail., One row, 100% of structure value; components not itemized by the source., One whole-building unit; contents withheld., Repair cost / structure replacement cost new., Three reference buildings (profiles r1); structure only. and Whole building; no zones.. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "7 steps in the write-up"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 6 curve records (model v0.1, docs r1). The write-up is convective_wind_real_estate_curve_derivation_dossier__model_v0_1__docs_r1.md. The workbook is damage_curve_records_convective_wind_real_estate__model_v0_1__docs_r1.xlsx. The cell folder holds 20 files, each with its SHA under Details.",
+    "plain_fact": "6 curve records"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "One convective wind event is available only under conditions the consumer (Hazard) checks. A dollar scenario, yearly loss and PML and VaR are not supported. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "0 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "This build reproduced 166 of 166 known answers through the cell's evaluator (within 1e-12 on the damage ratio). 4 were not run: prose assertions; not executable. The validation record says report. 1 outside check: FEMA National Risk Index: yearly loss on Hazard's grid (storm wind and tornado).",
+    "plain_fact": "166 of 166 reproduced"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: not yet reviewed.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "Texas Tech WSEC, A Recommendation for an Enhanced Fujita Scale, Rev 2 (2006)",
+    "ids": [
+     "CWRE-S001"
+    ],
+    "title": "Wind Science and Engineering Center, Texas Tech University",
+    "link": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
+    "link_kind": "url",
+    "locator": "PDF p. 9 (report p. 4: expected, lower and upper bound wind speed per DOD; expected value under normal conditions — no weak links, traditional construction, code compliance; bounds account for deviation; expert elicitation, means of experts' estimates); PDF p. 15 (Fujita speeds converted to a 3-second gust frame); PDF pp. 17-18 (rating: evaluator judges within the bounds); Appendix A tables: FR12 PDF p. 25, LRB PDF p. 64, MBS PDF p. 74",
+    "no_link_sentence": null,
+    "source_id": "CWRE-S001"
+   },
+   {
+    "text": "NOAA Storm Prediction Center, EF scale damage indicators FR12, MBS, LRB",
+    "ids": [
+     "CWRE-S002"
+    ],
+    "title": "NOAA Storm Prediction Center",
+    "link": "https://www.spc.noaa.gov/efscale/ef-scale.html",
+    "link_kind": "url",
+    "locator": "ef-scale.html (\"three-second gusts estimated at the point of damage\"; \"These estimates vary with height and exposure\"); efscale/2.html + 2.jpg (sha256 6c0d70ca1b77eb71ebadb00942d04fb2aa2d04971e359b45e5b55952cd8d7622); efscale/17.html + 17.jpg (sha256 f7d95f61c8e9c9fd3c539de5707b3f924b0f4f998276f3a9eb390c92500f7520); efscale/21.html + 21.jpg (sha256 f4becdda78dc9025be13fed82427ece6d5a57778e228e5799a58d983c72eed0d)",
+    "no_link_sentence": null,
+    "source_id": "CWRE-S002"
+   },
+   {
+    "text": "FEMA, Hazus 7.0 Hurricane Technical Manual, damage-state costs and definitions",
+    "ids": [
+     "CWRE-S003"
+    ],
+    "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+    "link_kind": "url",
+    "locator": "§8.1.4.3 p. 8-15 (None, Slight, Moderate, Extensive, Complete assumed to correspond to mean building loss ratios 0%, 2%, 10%, 50%, 100%, identified from the damage descriptions and expert judgment; linear interpolation over 0-2, 2-5, 5-10, 10-50, 50-100%); Table 5-44 pp. 5-185 to 5-186 (residential damage states); Table 5-74 p. 5-239 (metal buildings); Table 5-78 p. 5-242 (engineered steel buildings)",
+    "no_link_sentence": null,
+    "source_id": "CWRE-S003"
+   },
+   {
+    "text": "FEMA National Risk Index, Dec 2025 (check only)",
+    "ids": [
+     "CWRE-S006"
+    ],
+    "title": "FEMA National Risk Index, December 2025 edition, county building expected annual loss for strong wind and…",
+    "link": null,
+    "link_kind": "none",
+    "locator": "columns swnd_ealb, swnd_expb, trnd_ealb, trnd_expb; 13,085 cells keyed by cell_id; sha256 bc4f8dff7ab9c465677d7a8b94f2fe3038ff03da4632d7b044bcff2afcb3d82b",
+    "no_link_sentence": "no link in the register",
+    "source_id": "CWRE-S006"
+   }
+  ],
+  "sources": [
+   {
+    "id": "CWRE-S001",
+    "citation": "Wind Science and Engineering Center, Texas Tech University. A Recommendation for an Enhanced Fujita Scale (EF-Scale), submitted to the National Weather Service and other interested users. October 10, 2006, Revision 2.",
+    "url": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
+    "locator": "PDF p. 9 (report p. 4: expected, lower and upper bound wind speed per DOD; expected value under normal conditions — no weak links, traditional construction, code compliance; bounds account for deviation; expert elicitation, means of experts' estimates); PDF p. 15 (Fujita speeds converted to a 3-second gust frame); PDF pp. 17-18 (rating: evaluator judges within the bounds); Appendix A tables: FR12 PDF p. 25, LRB PDF p. 64, MBS PDF p. 74",
+    "role": "curve_data_carrier;method_definition",
+    "tier": "T3",
+    "permitted": "Use the expected, lower and upper bound gusts of FR12, MBS and LRB as the wind side of each degree of damage; read the bounds as a spread of the gust that causes the damage.",
+    "prohibited": "Read a degree of damage as a repair-cost ratio; read the bounds as a stated probability interval (the report does not give one); treat the speeds as measured; treat the report as covering straight-line wind (it does not mention it).",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
+    "link_kind": "url",
+    "title": "Wind Science and Engineering Center, Texas Tech University",
+    "no_link_sentence": null
+   },
+   {
+    "id": "CWRE-S002",
+    "citation": "NOAA Storm Prediction Center. The Enhanced Fujita Scale (EF Scale): damage indicator pages 2 (FR12), 17 (LRB) and 21 (MBS), and the EF scale overview page.",
+    "url": "https://www.spc.noaa.gov/efscale/ef-scale.html",
+    "locator": "ef-scale.html (\"three-second gusts estimated at the point of damage\"; \"These estimates vary with height and exposure\"); efscale/2.html + 2.jpg (sha256 6c0d70ca1b77eb71ebadb00942d04fb2aa2d04971e359b45e5b55952cd8d7622); efscale/17.html + 17.jpg (sha256 f7d95f61c8e9c9fd3c539de5707b3f924b0f4f998276f3a9eb390c92500f7520); efscale/21.html + 21.jpg (sha256 f4becdda78dc9025be13fed82427ece6d5a57778e228e5799a58d983c72eed0d)",
+    "role": "curve_data_carrier;independent_verification",
+    "tier": "T3",
+    "permitted": "Confirm the CWRE-S001 tables are the ones the National Weather Service publishes; read the wind-speed basis (3-second gust at the point of damage).",
+    "prohibited": "Read the speeds as 10 m open-terrain measurements; read the EF rating as a wind measurement.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-16",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.spc.noaa.gov/efscale/ef-scale.html",
+    "link_kind": "url",
+    "title": "NOAA Storm Prediction Center",
+    "no_link_sentence": null
+   },
+   {
+    "id": "CWRE-S003",
+    "citation": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+    "url": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+    "locator": "§8.1.4.3 p. 8-15 (None, Slight, Moderate, Extensive, Complete assumed to correspond to mean building loss ratios 0%, 2%, 10%, 50%, 100%, identified from the damage descriptions and expert judgment; linear interpolation over 0-2, 2-5, 5-10, 10-50, 50-100%); Table 5-44 pp. 5-185 to 5-186 (residential damage states); Table 5-74 p. 5-239 (metal buildings); Table 5-78 p. 5-242 (engineered steel buildings)",
+    "role": "cost_mapping",
+    "tier": "T3",
+    "permitted": "Assign a cost ratio to each EF degree of damage through the Hazus damage state it best matches.",
+    "prohibited": "Treat the 0/2/10/50/100% correspondence as calibrated repair cost (FEMA states it is expert judgment for loss of use); use Hazus hurricane loss functions as convective evidence.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+    "link_kind": "url",
+    "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+    "no_link_sentence": null
+   },
+   {
+    "id": "CWRE-S004",
+    "citation": "Hazard reference profiles r1 (real-estate CONUS reference candidates), aamani-ai/Hazard_Modeling.",
+    "url": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "locator": "commit 8b0d61c88fbcf85daa1c098516cee22398cdb524, reference_candidates.yml (git blob a74fb72b0a2edce593b5505e0fd8852f4c0253f8): re_house_1s_wood_slab, re_warehouse_1s_steel_slab, re_office_3s_slab",
+    "role": "selector_archetype;value_basis",
+    "tier": "T4",
+    "permitted": "Choose the EF damage indicator per building and bind the records to the profiles.",
+    "prohibited": "Treat the profile budgets as qualified values (consumer-owned).",
+    "decision": "adopt",
+    "accessed_on": "2026-10-15",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "link_kind": "url",
+    "title": "Hazard reference profiles r1 (real-estate CONUS reference candidates), aamani-ai/Hazard_Modeling.",
+    "no_link_sentence": null
+   },
+   {
+    "id": "CWRE-S005",
+    "citation": "Hazard convective-wind hazard layer (strong wind [W] from ASCE 7-22 gust maps; tornado [T] from the SPC record), aamani-ai/Hazard_Modeling.",
+    "url": "https://github.com/aamani-ai/Hazard_Modeling/tree/f19c604830954a43e293749be390fd37b6eb6e11/perils/convective_wind",
+    "locator": "main f19c604830954a43e293749be390fd37b6eb6e11, perils/convective_wind/src/convective_wind/config.py (blob a56ff98c53961f7201b63a84e5d96b93496d8078: MU_STRONG_WIND_MS 25.92, PHYSICAL_BOUND_L_MS 113.0, EF_GUST_LO/HI_MPH, TORNADO_POOL_RADIUS_KM 150), spc_m0.py (blob 1df31c92a95e84249bb62633ab7af4cdacebb425: national_path_geometry), m1_hazard_layer.py (blob 5fe515d465399f7e01bbb1508b335fda8de85de6); M1 parquet sha256 386e274d3c109915244c75a0852d3b41ae7aa348f2eb6cd73b050ada6cafa3c8; SPC csv sha256 2b2679ead1920ab96eaa390baeb41aeeaeef49d067f613dfcc5e233403b82d76",
+    "role": "axis_bridge;check_input",
+    "tier": "T4",
+    "permitted": "Fix the axis and range; reproduce Hazard's yearly-loss arithmetic for the NRI check.",
+    "prohibited": "Treat Hazard's frequency below the ASCE 10-year gust as observed; treat the EF band midpoint as a measured tornado gust.",
+    "decision": "adopt",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/f19c604830954a43e293749be390fd37b6eb6e11/perils/convective_wind",
+    "link_kind": "url",
+    "title": "Hazard convective-wind hazard layer (strong wind [W] from ASCE 7-22 gust maps; tornado [T] from the SPC…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "CWRE-S006",
+    "citation": "FEMA National Risk Index, December 2025 edition, county building expected annual loss for strong wind and tornado (Hazard team's 0.25° CONUS copy).",
+    "url": "gs://infrasure-benchmark/hazard_conus_grid/dev/reference/nri/nri_dec2025/raw/run_id=20260706T184931Z_nri_reference/nri_raw_conus.parquet",
+    "locator": "columns swnd_ealb, swnd_expb, trnd_ealb, trnd_expb; 13,085 cells keyed by cell_id; sha256 bc4f8dff7ab9c465677d7a8b94f2fe3038ff03da4632d7b044bcff2afcb3d82b",
+    "role": "benchmark_check",
+    "tier": "T3",
+    "permitted": "Order-of-magnitude and ranking check of the yearly loss the curves produce on Hazard's grid.",
+    "prohibited": "Calibrate the curves to NRI; treat NRI as complete (reported losses undercount); compare a single storm.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-16",
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "FEMA National Risk Index, December 2025 edition, county building expected annual loss for strong wind and…",
+    "no_link_sentence": "no link in the register"
+   },
+   {
+    "id": "CWRE-S007",
+    "citation": "Damage_Modeling repository precedents: strong_wind_solar model v1.0 thresholded demand curves; wind_tornado_wind model v1.0 tornado shift; damage-curve skill common failure modes.",
+    "url": "https://github.com/aamani-ai/Damage_Modeling/tree/81d5309313d53f37d6bac91e22dd55b498101d0f/docs",
+    "locator": "main 81d5309: docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md §3.3 (R0 0.70-0.90 on a pressure ratio: zero damage below); docs/cells/wind_tornado_wind/basics/MODEL_REFERENCE.md (tornado = straight D50 shifted -0.05 to -0.12); docs/extra/damage_curve_skill/04_validation_qc/COMMON_FAILURE_MODES.md lines 35-40",
+    "role": "method_precedent",
+    "tier": "T4",
+    "permitted": "Support a no-damage onset for straight-line wind; keep two governed pathways instead of a shifted copy.",
+    "prohibited": "Copy solar or turbine parameters to buildings.",
+    "decision": "adopt",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/81d5309313d53f37d6bac91e22dd55b498101d0f/docs",
+    "link_kind": "url",
+    "title": "Damage_Modeling repository precedents: strong_wind_solar model v1.0 thresholded demand curves;…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "CWRE-S008",
+    "citation": "Damage_Modeling consumer binding: substation convective-wind screening v1 (hurricane station response reused for strong wind and tornado as a T4 cross-hazard proxy).",
+    "url": "https://github.com/aamani-ai/Damage_Modeling/blob/81d5309313d53f37d6bac91e22dd55b498101d0f/docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md",
+    "locator": "main 81d5309, README lines 13-31 (T4 cross-hazard proxy with exact source identity; no hurricane duration conversion; EF midpoint gust as an explicit T4 bridge; ASCE overlap with hurricane a downstream decision)",
+    "role": "method_precedent",
+    "tier": "T4",
+    "permitted": "Record hurricane-curve reuse as the documented alternative to this cell, and the EF midpoint gust bridge.",
+    "prohibited": "Adopt the station response for buildings.",
+    "decision": "context_only",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/81d5309313d53f37d6bac91e22dd55b498101d0f/docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md",
+    "link_kind": "url",
+    "title": "Damage_Modeling consumer binding: substation convective-wind screening v1 (hurricane station response reused…",
+    "no_link_sentence": null
+   }
+  ],
+  "claims": [
+   {
+    "id": "CWRE-C001",
+    "text": "Each EF degree of damage has an expected, lower-bound and upper-bound wind speed set by expert elicitation (means of the experts' estimates); the expected value assumes normal conditions (no weak links, traditional construction, code compliance, maintenance) and the bounds cover deviations from them.",
+    "type": "direct_observation",
+    "source_ids": [
+     "CWRE-S001"
+    ],
+    "locator": "PDF p. 9 (report p. 4); PDF pp. 17-18",
+    "tier": "T3",
+    "parameter_or_rule": "meaning of EXP, LB, UB",
+    "status": "adopt",
+    "update_trigger": "A revised EF scale (e.g. ASCE/SEI 49-21 implementation) changes the tables."
+   },
+   {
+    "id": "CWRE-C002",
+    "text": "EF wind speeds are three-second gusts estimated at the point of damage; the estimates vary with height and exposure.",
+    "type": "direct_observation",
+    "source_ids": [
+     "CWRE-S001",
+     "CWRE-S002"
+    ],
+    "locator": "S002 ef-scale.html; S001 PDF p. 15",
+    "tier": "T3",
+    "parameter_or_rule": "axis basis",
+    "status": "adopt_with_limits",
+    "update_trigger": "A source states the reference height and exposure."
+   },
+   {
+    "id": "CWRE-C003",
+    "text": "FR12 (one- and two-family residences, 1,000-5,000 ft2) has ten degrees of damage, expected gust 65 to 200 mph (table in EF_DEGREE_OF_DAMAGE_TABLE).",
+    "type": "direct_observation",
+    "source_ids": [
+     "CWRE-S001",
+     "CWRE-S002"
+    ],
+    "locator": "S001 PDF p. 25; S002 efscale/2.html",
+    "tier": "T3",
+    "parameter_or_rule": "house DOD speeds",
+    "status": "adopt",
+    "update_trigger": "Table revision."
+   },
+   {
+    "id": "CWRE-C004",
+    "text": "MBS (metal building systems; examples warehouses; large overhead doors; rigid frames, purlins, x-bracing) has eight degrees of damage, expected gust 67 to 155 mph.",
+    "type": "direct_observation",
+    "source_ids": [
+     "CWRE-S001",
+     "CWRE-S002"
+    ],
+    "locator": "S001 PDF p. 74; S002 efscale/21.html",
+    "tier": "T3",
+    "parameter_or_rule": "warehouse DOD speeds",
+    "status": "adopt",
+    "update_trigger": "Table revision; profile changes to tilt-up."
+   },
+   {
+    "id": "CWRE-C005",
+    "text": "LRB (low-rise building, 1-4 stories; examples office buildings; steel or concrete frame; BUR, single-ply or metal roof) has seven degrees of damage, expected gust 68 to 188 mph.",
+    "type": "direct_observation",
+    "source_ids": [
+     "CWRE-S001",
+     "CWRE-S002"
+    ],
+    "locator": "S001 PDF p. 64; S002 efscale/17.html",
+    "tier": "T3",
+    "parameter_or_rule": "office DOD speeds",
+    "status": "adopt",
+    "update_trigger": "Table revision."
+   },
+   {
+    "id": "CWRE-C006",
+    "text": "FEMA assumes the damage states None, Slight, Moderate, Extensive and Complete correspond to mean building loss ratios of 0, 2, 10, 50 and 100%, identified from the damage descriptions with expert judgment, and interpolates linearly over 0-2, 2-5, 5-10, 10-50 and 50-100%.",
+    "type": "direct_observation",
+    "source_ids": [
+     "CWRE-S003"
+    ],
+    "locator": "§8.1.4.3 p. 8-15",
+    "tier": "T3",
+    "parameter_or_rule": "damage-state cost ratios",
+    "status": "adopt_with_limits",
+    "update_trigger": "A source gives repair cost per EF degree of damage."
+   },
+   {
+    "id": "CWRE-C007",
+    "text": "Hazus residential damage states: Slight = at most one window/door/garage door, roof cover loss over 2% to 15%; Moderate = roof cover over 15% to 50%, 1 to 3 deck panels; Extensive = roof cover over 50%, deck over 3 panels to 25%; Destruction = roof structure or wall frame failure.",
+    "type": "direct_observation",
+    "source_ids": [
+     "CWRE-S003"
+    ],
+    "locator": "Table 5-44 pp. 5-185 to 5-186",
+    "tier": "T2",
+    "parameter_or_rule": "house DOD to state mapping",
+    "status": "adopt",
+    "update_trigger": null
+   },
+   {
+    "id": "CWRE-C008",
+    "text": "Hazus metal-building damage states: Slight = one door or window; Moderate = slight roof or wall panel failures; Extensive = extensive window damage or roof sheathing loss, some frame damage likely; Destruction = significant roof and wall panel failures, significant frame damage.",
+    "type": "direct_observation",
+    "source_ids": [
+     "CWRE-S003"
+    ],
+    "locator": "Table 5-74 p. 5-239",
+    "tier": "T2",
+    "parameter_or_rule": "warehouse DOD to state mapping",
+    "status": "adopt",
+    "update_trigger": null
+   },
+   {
+    "id": "CWRE-C009",
+    "text": "Hazus engineered steel building damage states: Slight = one window or door, roof cover over 2% to 15%; Moderate = roof cover over 15% to 50%, windows over one to 2%, one or two deck panels; Extensive = roof cover over 50%, deck over two panels to 25%, local joist failures; Destruction = essentially complete roof failure or more than 25% of sheathing, wall envelope opened.",
+    "type": "direct_observation",
+    "source_ids": [
+     "CWRE-S003"
+    ],
+    "locator": "Table 5-78 p. 5-242",
+    "tier": "T2",
+    "parameter_or_rule": "office DOD to state mapping",
+    "status": "adopt",
+    "update_trigger": null
+   },
+   {
+    "id": "CWRE-C010",
+    "text": "An EF degree of damage is a damage description, not a repair-cost ratio; the cost assigned to each degree in this cell is a judgment through the Hazus damage states (below-Slight = 1%, single-vs-multiple glazing = 5%, house shifted off its foundation = Extensive).",
+    "type": "judgment",
+    "source_ids": [
+     "CWRE-S001",
+     "CWRE-S003"
+    ],
+    "locator": "EF_DEGREE_OF_DAMAGE_TABLE cost_basis column",
+    "tier": "T4",
+    "parameter_or_rule": "DOD cost ratios",
+    "status": "proposed",
+    "update_trigger": "A repair-cost study by EF degree; claims data by EF rating."
+   },
+   {
+    "id": "CWRE-C011",
+    "text": "Reading LB-UB as a 90% range (beta = ln(UB/LB)/3.29) gives beta 0.09 to 0.13; reading it as 68% or 95% changes the house damage at 120 mph from 36% to 41% or 34% (tornado).",
+    "type": "computed_check",
+    "source_ids": [
+     "CWRE-S001"
+    ],
+    "locator": "SENSITIVITY csv (spread_reading rows)",
+    "tier": "T4",
+    "parameter_or_rule": "lognormal spread per DOD",
+    "status": "proposed",
+    "update_trigger": "A source states the bound percentile."
+   },
+   {
+    "id": "CWRE-C012",
+    "text": "Hazard delivers, for straight-line wind, an ASCE 7-22 3-second gust at 10 m, Exposure C (events at or above 58 mph, exponential excess, capped at 113 m/s = 252.8 mph) and, for a tornado, the EF band midpoint gust (75, 98, 123, 150.5, 183, 227 mph), with national median path length and width and a 150 km pooling radius.",
+    "type": "direct_observation",
+    "source_ids": [
+     "CWRE-S005"
+    ],
+    "locator": "config.py; spc_m0.py; m1_hazard_layer.py",
+    "tier": "T2",
+    "parameter_or_rule": "axis, range and input fields",
+    "status": "adopt",
+    "update_trigger": "Hazard changes its fields or bounds."
+   },
+   {
+    "id": "CWRE-C013",
+    "text": "On Hazard's grid, the median cell sees 0.66 straight-line gust events a year at or above 58 mph, and the ASCE 700-year gust rebuilt from the layer is 99 / 107 / 113 mph (10th percentile / median / 90th percentile; maximum 167).",
+    "type": "computed_check",
+    "source_ids": [
+     "CWRE-S005"
+    ],
+    "locator": "NRI_CHECK_RECEIPT json (straight_line_rate, asce_700yr_gust_mph)",
+    "tier": "T4",
+    "parameter_or_rule": "onset reference",
+    "status": "adopt",
+    "update_trigger": "Hazard changes its severity model."
+   },
+   {
+    "id": "CWRE-C014",
+    "text": "Without an onset, straight-line yearly building loss is 370 to 500 times NRI (median cell); with the 96 mph onset it is 13 to 35 times; an onset at 90% of each cell's design gust gives about the same (13 to 36 times). Rank correlation with NRI is about 0.5.",
+    "type": "computed_check",
+    "source_ids": [
+     "CWRE-S005",
+     "CWRE-S006"
+    ],
+    "locator": "NRI_CHECK csv",
+    "tier": "T4",
+    "parameter_or_rule": "onset value; remaining gap",
+    "status": "adopt",
+    "update_trigger": "Hazard revises the straight-line frequency; a building-level loss record."
+   },
+   {
+    "id": "CWRE-C015",
+    "text": "Tornado yearly building loss on Hazard's grid is 0.11 to 0.26 times NRI with rank correlation 0.91; the gap comes from Hazard's frequency and median path geometry, not the curve (a direct hit at the EF2 midpoint gust, 123 mph, already gives 18-44% damage and at EF3, 150.5 mph, 46-96%).",
+    "type": "computed_check",
+    "source_ids": [
+     "CWRE-S005",
+     "CWRE-S006"
+    ],
+    "locator": "NRI_CHECK csv",
+    "tier": "T4",
+    "parameter_or_rule": "no tornado onset",
+    "status": "adopt",
+    "update_trigger": "Hazard revises tornado path dimensions."
+   },
+   {
+    "id": "CWRE-C016",
+    "text": "The existing straight-line convective solar curve gives zero damage below R0 = 0.70 to 0.90 of the design pressure ratio, i.e. below 84% to 95% of the design gust.",
+    "type": "direct_observation",
+    "source_ids": [
+     "CWRE-S007"
+    ],
+    "locator": "strong_wind_solar MODEL_REFERENCE §3.3",
+    "tier": "T4",
+    "parameter_or_rule": "onset precedent",
+    "status": "adopt",
+    "update_trigger": null
+   },
+   {
+    "id": "CWRE-C017",
+    "text": "The repository's failure-mode list names tornado or straight-line wind represented by a boolean or curve shift, and an unsupported pathway borrowing a neighbouring curve, as defects.",
+    "type": "direct_observation",
+    "source_ids": [
+     "CWRE-S007"
+    ],
+    "locator": "COMMON_FAILURE_MODES.md lines 35-40",
+    "tier": "T4",
+    "parameter_or_rule": "pathway separation",
+    "status": "adopt",
+    "update_trigger": null
+   },
+   {
+    "id": "CWRE-C018",
+    "text": "The EF scale was built from tornado damage; the report does not address straight-line wind, and no source found establishes the EF degree-of-damage speeds for straight-line convective wind.",
+    "type": "judgment",
+    "source_ids": [
+     "CWRE-S001"
+    ],
+    "locator": "whole report (no straight-line or downburst mention)",
+    "tier": "T4",
+    "parameter_or_rule": "straight-line evidence tier",
+    "status": "adopt",
+    "update_trigger": "A straight-line damage survey or loss study by building type."
+   },
+   {
+    "id": "CWRE-C019",
+    "text": "A documented repository precedent reuses a hurricane response for straight-line wind and tornado as a T4 cross-hazard proxy without duration conversion and with the EF midpoint gust as a T4 bridge.",
+    "type": "direct_observation",
+    "source_ids": [
+     "CWRE-S008"
+    ],
+    "locator": "README lines 13-31",
+    "tier": "T4",
+    "parameter_or_rule": "alternative route",
+    "status": "context_only",
+    "update_trigger": null
+   }
+  ],
+  "parameters": [
+   {
+    "id": "axis_definition",
+    "name": "axis_definition",
+    "value": "3-second gust at 10 m, open terrain (ASCE Exposure C), mph",
+    "tier": "T4",
+    "source_ids": [
+     "CWRE-S002",
+     "CWRE-S005"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "straight_line_convective;tornado_direct_hit",
+    "role": "axis_bridge",
+    "status": "proposed",
+    "reasoning": "Hazard's field; EF speeds are point-of-damage gusts (CWRE-C002) — flagged bridge, no conversion.",
+    "update_trigger": "A source fixes the EF height and exposure."
+   },
+   {
+    "id": "tornado_gust_bridge",
+    "name": "tornado_gust_bridge",
+    "value": "EF band midpoint gust accepted as the tornado gust",
+    "tier": "T4",
+    "source_ids": [
+     "CWRE-S005",
+     "CWRE-S008"
+    ],
+    "claim_ids": [],
+    "curve_id": "CWRE_*_TORNADO",
+    "pathway_id": "tornado_direct_hit",
+    "role": "axis_bridge",
+    "status": "proposed",
+    "reasoning": "Hazard's tornado severity anchor; damage-inferred, not measured.",
+    "update_trigger": "Hazard delivers a local tornado wind."
+   },
+   {
+    "id": "dod_speeds_house",
+    "name": "dod_speeds_house",
+    "value": "FR12 EXP/LB/UB, 10 degrees",
+    "tier": "T3",
+    "source_ids": [
+     "CWRE-S001",
+     "CWRE-S002"
+    ],
+    "claim_ids": [],
+    "curve_id": "CWRE_RES_EF_FR12_*",
+    "pathway_id": "straight_line_convective;tornado_direct_hit",
+    "role": "curve_ordinate",
+    "status": "proposed",
+    "reasoning": "Expert elicitation (CWRE-C001, C003).",
+    "update_trigger": "EF table revision."
+   },
+   {
+    "id": "dod_speeds_warehouse",
+    "name": "dod_speeds_warehouse",
+    "value": "MBS EXP/LB/UB, 8 degrees",
+    "tier": "T3",
+    "source_ids": [
+     "CWRE-S001",
+     "CWRE-S002"
+    ],
+    "claim_ids": [],
+    "curve_id": "CWRE_IND_EF_MBS_*",
+    "pathway_id": "straight_line_convective;tornado_direct_hit",
+    "role": "curve_ordinate",
+    "status": "proposed",
+    "reasoning": "CWRE-C001, C004.",
+    "update_trigger": "EF table revision."
+   },
+   {
+    "id": "dod_speeds_office",
+    "name": "dod_speeds_office",
+    "value": "LRB EXP/LB/UB, 7 degrees",
+    "tier": "T3",
+    "source_ids": [
+     "CWRE-S001",
+     "CWRE-S002"
+    ],
+    "claim_ids": [],
+    "curve_id": "CWRE_OFF_EF_LRB_*",
+    "pathway_id": "straight_line_convective;tornado_direct_hit",
+    "role": "curve_ordinate",
+    "status": "proposed",
+    "reasoning": "CWRE-C001, C005.",
+    "update_trigger": "EF table revision."
+   },
+   {
+    "id": "damage_state_costs",
+    "name": "damage_state_costs",
+    "value": "Slight 2%, Moderate 10%, Extensive 50%, Complete 100%; 5% between Slight and Moderate",
+    "tier": "T3",
+    "source_ids": [
+     "CWRE-S003"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "straight_line_convective;tornado_direct_hit",
+    "role": "cost_mapping",
+    "status": "proposed",
+    "reasoning": "FEMA expert-judgment correspondence (CWRE-C006).",
+    "update_trigger": "Repair-cost evidence by damage state."
+   },
+   {
+    "id": "dod_to_state_assignment",
+    "name": "dod_to_state_assignment",
+    "value": "per EF_DEGREE_OF_DAMAGE_TABLE (cost_basis column)",
+    "tier": "T4",
+    "source_ids": [
+     "CWRE-S001",
+     "CWRE-S003"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "straight_line_convective;tornado_direct_hit",
+    "role": "cost_mapping",
+    "status": "proposed",
+    "reasoning": "Judgment against Hazus component thresholds (CWRE-C007 to C010).",
+    "update_trigger": "Repair-cost study by EF degree."
+   },
+   {
+    "id": "below_slight_cost",
+    "name": "below_slight_cost",
+    "value": "1% for 'threshold of visible damage'",
+    "tier": "T4",
+    "source_ids": [
+     "CWRE-S003"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "straight_line_convective;tornado_direct_hit",
+    "role": "cost_mapping",
+    "status": "proposed",
+    "reasoning": "Half of Slight; light-damage cost sensitivity x0.5 / x2 stated.",
+    "update_trigger": null
+   },
+   {
+    "id": "house_foundation_shift_cost",
+    "name": "house_foundation_shift_cost",
+    "value": "50% (Extensive); 100% as sensitivity",
+    "tier": "T4",
+    "source_ids": [
+     "CWRE-S001",
+     "CWRE-S003"
+    ],
+    "claim_ids": [],
+    "curve_id": "CWRE_RES_EF_FR12_*",
+    "pathway_id": "straight_line_convective;tornado_direct_hit",
+    "role": "cost_mapping",
+    "status": "proposed",
+    "reasoning": "Not a Hazus criterion; largest single cost sensitivity (house 120 mph: 32% to 48% straight-line).",
+    "update_trigger": "Owner decision; claims evidence."
+   },
+   {
+    "id": "lognormal_spread",
+    "name": "lognormal_spread",
+    "value": "beta_i = ln(UB_i/LB_i)/(2 x 1.645)",
+    "tier": "T4",
+    "source_ids": [
+     "CWRE-S001"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "straight_line_convective;tornado_direct_hit",
+    "role": "spread",
+    "status": "proposed",
+    "reasoning": "Bounds read as a 90% range (CWRE-C011).",
+    "update_trigger": "A source states the bound percentile."
+   },
+   {
+    "id": "aggregation",
+    "name": "aggregation",
+    "value": "DR(v) = sum_i (c_i - c_{i-1}) Phi(ln(v/EXP_i)/beta_i), costs non-decreasing",
+    "tier": "T4",
+    "source_ids": [
+     "CWRE-S001",
+     "CWRE-S003"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "straight_line_convective;tornado_direct_hit",
+    "role": "curve_form",
+    "status": "proposed",
+    "reasoning": "Expected cost over ordered degrees of damage; equals the ordered-state form with one beta per degree.",
+    "update_trigger": null
+   },
+   {
+    "id": "straight_line_onset",
+    "name": "straight_line_onset",
+    "value": "96 mph: DR_SL = max(0, (DR - DR(96)) / (1 - DR(96)))",
+    "tier": "T4",
+    "source_ids": [
+     "CWRE-S005",
+     "CWRE-S006",
+     "CWRE-S007"
+    ],
+    "claim_ids": [],
+    "curve_id": "CWRE_*_STRAIGHT_LINE_ONSET96",
+    "pathway_id": "straight_line_convective",
+    "role": "onset",
+    "status": "proposed",
+    "reasoning": "90% of the median ASCE 700-year gust; NRI check; solar precedent (CWRE-C013, C014, C016).",
+    "update_trigger": "Hazard supplies a design gust per cell (local onset)."
+   },
+   {
+    "id": "tornado_onset",
+    "name": "tornado_onset",
+    "value": "none",
+    "tier": "T4",
+    "source_ids": [
+     "CWRE-S001",
+     "CWRE-S006"
+    ],
+    "claim_ids": [],
+    "curve_id": "CWRE_*_TORNADO",
+    "pathway_id": "tornado_direct_hit",
+    "role": "onset",
+    "status": "proposed",
+    "reasoning": "EF degrees are observed tornado damage at these gusts; the NRI tornado gap is on the hazard side (CWRE-C015).",
+    "update_trigger": null
+   },
+   {
+    "id": "tabulation",
+    "name": "tabulation",
+    "value": "1 mph knots 0-255 mph, 6 decimals; straight lines between knots",
+    "tier": "T2",
+    "source_ids": [],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "straight_line_convective;tornado_direct_hit",
+    "role": "curve_form",
+    "status": "proposed",
+    "reasoning": "Exact enough for every Hazard gust; the rounded table is the governed curve.",
+    "update_trigger": null
+   },
+   {
+    "id": "valid_range",
+    "name": "valid_range",
+    "value": "0-255 mph; above 255 withheld; negative rejected",
+    "tier": "T2",
+    "source_ids": [
+     "CWRE-S005"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "straight_line_convective;tornado_direct_hit",
+    "role": "domain",
+    "status": "proposed",
+    "reasoning": "Covers Hazard's bound (252.8 mph) and the EF5 band top (253 mph).",
+    "update_trigger": "Hazard changes its bound."
+   }
+  ],
+  "parameters_plain": [
+   {
+    "id": "axis_definition",
+    "name": "axis definition",
+    "raw_name": "axis_definition",
+    "value_text": "3-second gust at 10 m, open terrain (ASCE Exposure C), mph",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CWRE-S002",
+      "title": "NOAA Storm Prediction Center",
+      "link": "https://www.spc.noaa.gov/efscale/ef-scale.html",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "CWRE-S005",
+      "title": "Hazard convective-wind hazard layer (strong wind [W] from ASCE 7-22 gust maps; tornado [T] from the SPC…",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/f19c604830954a43e293749be390fd37b6eb6e11/perils/convective_wind",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Hazard's field; EF speeds are point-of-damage gusts — flagged bridge, no conversion.",
+    "update_trigger": "A source fixes the EF height and exposure.",
+    "role": "axis_bridge"
+   },
+   {
+    "id": "tornado_gust_bridge",
+    "name": "tornado gust bridge",
+    "raw_name": "tornado_gust_bridge",
+    "value_text": "EF band midpoint gust accepted as the tornado gust",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CWRE-S005",
+      "title": "Hazard convective-wind hazard layer (strong wind [W] from ASCE 7-22 gust maps; tornado [T] from the SPC…",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/f19c604830954a43e293749be390fd37b6eb6e11/perils/convective_wind",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "CWRE-S008",
+      "title": "Damage_Modeling consumer binding: substation convective-wind screening v1 (hurricane station response reused…",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/81d5309313d53f37d6bac91e22dd55b498101d0f/docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "CWRE_*_TORNADO",
+    "reasoning": "Hazard's tornado severity anchor; damage-inferred, not measured.",
+    "update_trigger": "Hazard delivers a local tornado wind.",
+    "role": "axis_bridge"
+   },
+   {
+    "id": "dod_speeds_house",
+    "name": "dod speeds house",
+    "raw_name": "dod_speeds_house",
+    "value_text": "FR12 EXP/LB/UB, 10 degrees",
+    "tier": "T3",
+    "tier_word": "borrowed",
+    "sources": [
+     {
+      "id": "CWRE-S001",
+      "title": "Wind Science and Engineering Center, Texas Tech University",
+      "link": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "CWRE-S002",
+      "title": "NOAA Storm Prediction Center",
+      "link": "https://www.spc.noaa.gov/efscale/ef-scale.html",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "CWRE_RES_EF_FR12_*",
+    "reasoning": "Expert elicitation (C003).",
+    "update_trigger": "EF table revision.",
+    "role": "curve_ordinate"
+   },
+   {
+    "id": "dod_speeds_warehouse",
+    "name": "dod speeds warehouse",
+    "raw_name": "dod_speeds_warehouse",
+    "value_text": "MBS EXP/LB/UB, 8 degrees",
+    "tier": "T3",
+    "tier_word": "borrowed",
+    "sources": [
+     {
+      "id": "CWRE-S001",
+      "title": "Wind Science and Engineering Center, Texas Tech University",
+      "link": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "CWRE-S002",
+      "title": "NOAA Storm Prediction Center",
+      "link": "https://www.spc.noaa.gov/efscale/ef-scale.html",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "CWRE_IND_EF_MBS_*",
+    "reasoning": ", C004.",
+    "update_trigger": "EF table revision.",
+    "role": "curve_ordinate"
+   },
+   {
+    "id": "dod_speeds_office",
+    "name": "dod speeds office",
+    "raw_name": "dod_speeds_office",
+    "value_text": "LRB EXP/LB/UB, 7 degrees",
+    "tier": "T3",
+    "tier_word": "borrowed",
+    "sources": [
+     {
+      "id": "CWRE-S001",
+      "title": "Wind Science and Engineering Center, Texas Tech University",
+      "link": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "CWRE-S002",
+      "title": "NOAA Storm Prediction Center",
+      "link": "https://www.spc.noaa.gov/efscale/ef-scale.html",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "CWRE_OFF_EF_LRB_*",
+    "reasoning": ", C005.",
+    "update_trigger": "EF table revision.",
+    "role": "curve_ordinate"
+   },
+   {
+    "id": "damage_state_costs",
+    "name": "damage state costs",
+    "raw_name": "damage_state_costs",
+    "value_text": "Slight 2%, Moderate 10%, Extensive 50%, Complete 100%; 5% between Slight and Moderate",
+    "tier": "T3",
+    "tier_word": "borrowed",
+    "sources": [
+     {
+      "id": "CWRE-S003",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "FEMA expert-judgment correspondence.",
+    "update_trigger": "Repair-cost evidence by damage state.",
+    "role": "cost_mapping"
+   },
+   {
+    "id": "dod_to_state_assignment",
+    "name": "dod to state assignment",
+    "raw_name": "dod_to_state_assignment",
+    "value_text": "per EF_DEGREE_OF_DAMAGE_TABLE (cost_basis column)",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CWRE-S001",
+      "title": "Wind Science and Engineering Center, Texas Tech University",
+      "link": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "CWRE-S003",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Judgment against Hazus component thresholds (to C010).",
+    "update_trigger": "Repair-cost study by EF degree.",
+    "role": "cost_mapping"
+   },
+   {
+    "id": "below_slight_cost",
+    "name": "below slight cost",
+    "raw_name": "below_slight_cost",
+    "value_text": "1% for 'threshold of visible damage'",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CWRE-S003",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Half of Slight; light-damage cost sensitivity x0.5 / x2 stated.",
+    "update_trigger": null,
+    "role": "cost_mapping"
+   },
+   {
+    "id": "house_foundation_shift_cost",
+    "name": "house foundation shift cost",
+    "raw_name": "house_foundation_shift_cost",
+    "value_text": "50% (Extensive); 100% as sensitivity",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CWRE-S001",
+      "title": "Wind Science and Engineering Center, Texas Tech University",
+      "link": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "CWRE-S003",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "CWRE_RES_EF_FR12_*",
+    "reasoning": "Not a Hazus criterion; largest single cost sensitivity (house 120 mph: 32% to 48% straight-line).",
+    "update_trigger": "Owner decision; claims evidence.",
+    "role": "cost_mapping"
+   },
+   {
+    "id": "lognormal_spread",
+    "name": "lognormal spread",
+    "raw_name": "lognormal_spread",
+    "value_text": "beta_i = ln(UB_i/LB_i)/(2 x 1.645)",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CWRE-S001",
+      "title": "Wind Science and Engineering Center, Texas Tech University",
+      "link": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Bounds read as a 90% range.",
+    "update_trigger": "A source states the bound percentile.",
+    "role": "spread"
+   },
+   {
+    "id": "aggregation",
+    "name": "aggregation",
+    "raw_name": "aggregation",
+    "value_text": "DR(v) = sum_i (c_i - c_{i-1}) Phi(ln(v/EXP_i)/beta_i), costs non-decreasing",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CWRE-S001",
+      "title": "Wind Science and Engineering Center, Texas Tech University",
+      "link": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "CWRE-S003",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Expected cost over ordered degrees of damage; equals the ordered-state form with one beta per degree.",
+    "update_trigger": null,
+    "role": "curve_form"
+   },
+   {
+    "id": "straight_line_onset",
+    "name": "straight line onset",
+    "raw_name": "straight_line_onset",
+    "value_text": "96 mph: DR_SL = max(0, (DR - DR(96)) / (1 - DR(96)))",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CWRE-S005",
+      "title": "Hazard convective-wind hazard layer (strong wind [W] from ASCE 7-22 gust maps; tornado [T] from the SPC…",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/f19c604830954a43e293749be390fd37b6eb6e11/perils/convective_wind",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "CWRE-S006",
+      "title": "FEMA National Risk Index, December 2025 edition, county building expected annual loss for strong wind and…",
+      "link": null,
+      "link_kind": "none",
+      "resolved": true
+     },
+     {
+      "id": "CWRE-S007",
+      "title": "Damage_Modeling repository precedents: strong_wind_solar model v1.0 thresholded demand curves;…",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/81d5309313d53f37d6bac91e22dd55b498101d0f/docs",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "CWRE_*_STRAIGHT_LINE_ONSET96",
+    "reasoning": "90% of the median ASCE 700-year gust; NRI check; solar precedent (C014; C016).",
+    "update_trigger": "Hazard supplies a design gust per cell (local onset).",
+    "role": "onset"
+   },
+   {
+    "id": "tornado_onset",
+    "name": "tornado onset",
+    "raw_name": "tornado_onset",
+    "value_text": "none",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "CWRE-S001",
+      "title": "Wind Science and Engineering Center, Texas Tech University",
+      "link": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "CWRE-S006",
+      "title": "FEMA National Risk Index, December 2025 edition, county building expected annual loss for strong wind and…",
+      "link": null,
+      "link_kind": "none",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "CWRE_*_TORNADO",
+    "reasoning": "EF degrees are observed tornado damage at these gusts; the NRI tornado gap is on the hazard side.",
+    "update_trigger": null,
+    "role": "onset"
+   },
+   {
+    "id": "tabulation",
+    "name": "tabulation",
+    "raw_name": "tabulation",
+    "value_text": "1 mph knots 0-255 mph, 6 decimals; straight lines between knots",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Exact enough for every Hazard gust; the rounded table is the governed curve.",
+    "update_trigger": null,
+    "role": "curve_form"
+   },
+   {
+    "id": "valid_range",
+    "name": "valid range",
+    "raw_name": "valid_range",
+    "value_text": "0-255 mph; above 255 withheld; negative rejected",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "CWRE-S005",
+      "title": "Hazard convective-wind hazard layer (strong wind [W] from ASCE 7-22 gust maps; tornado [T] from the SPC…",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/f19c604830954a43e293749be390fd37b6eb6e11/perils/convective_wind",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Covers Hazard's bound (252.8 mph) and the EF5 band top (253 mph).",
+    "update_trigger": "Hazard changes its bound.",
+    "role": "domain"
+   }
+  ],
+  "evidence_provenance": {
+   "kind": "register",
+   "sheets": [],
+   "sections": [],
+   "unmatched": [],
+   "sentence": null,
+   "dossier": null,
+   "workbook": null
+  },
+  "link_counts": {
+   "total": 8,
+   "linked": 7,
+   "locator_only": 1,
+   "neither": 0,
+   "markers": 0,
+   "placeholders": 0
+  },
+  "extraction": null,
+  "tier_words": {
+   "shape": "borrowed",
+   "cost": "our judgment"
+  }
+ },
  "build_findings": []
 }

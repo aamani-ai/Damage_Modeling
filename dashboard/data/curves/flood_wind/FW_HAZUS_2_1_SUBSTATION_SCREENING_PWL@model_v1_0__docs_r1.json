@@ -152,7 +152,7 @@
  ],
  "series": [
   {
-   "label": "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL",
+   "label": "GSU / substation (whole facility)",
    "kind": "line",
    "points": [
     [
@@ -898,12 +898,112 @@
  "row_notes": [
   {
    "type": "key_assumption",
-   "text": "Whole-substation unit; never charge it together with the GSU component parts"
+   "text": "Whole-substation unit; never charge it together with the GSU component parts",
+   "raw": "Whole-substation unit; never charge it together with the GSU component parts"
   }
  ],
  "selected_by": [],
  "variants": "Hazus substation class ESSL, ESSM or ESSH (same points)",
  "notes": [],
+ "caption": {
+  "what_it_says": "GSU / substation (whole facility): no loss until freshwater flood depth above substation grade reaches about 0.31 ft; damage then rises, passing half of its maximum near 4.5 ft, and reaches a damage ratio of 0.15 (15 % of the part's value) by 9.88 ft.",
+  "how_sure": {
+   "shape": {
+    "tier": "T3",
+    "word": "borrowed",
+    "basis": "Hazus 2.1 Table 7.9 points; official but legacy, no claims calibration"
+   },
+   "cost": {
+    "tier": "T3",
+    "word": "borrowed",
+    "basis": "Same Hazus table gives damage as a share of the substation's replacement value; denominator row borrowed"
+   },
+   "parameters": "5 parameters: 3 published, 1 borrowed and 1 our judgment",
+   "weakest": "T4",
+   "word": "borrowed"
+  },
+  "seen_in_field": {
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "state": "not_searched",
+   "href": null,
+   "words": "nobody has looked yet; no search log exists for this asset and hazard"
+  },
+  "main_references": [
+   {
+    "text": "FEMA, Hazus-MH Flood Model Technical Manual 2.1, Table 7.9",
+    "ids": [
+     "FW-S011"
+    ],
+    "title": "Federal Emergency Management Agency, Hazus-MH Flood Model Technical Manual, version 2.1.",
+    "link": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+    "link_kind": "url",
+    "locator": "sections 7.2.2, 7.2.4, and 7.2.6; Table 7.9, pp. 7-20 through 7-21; Table 7.9 footnote 2 and comments",
+    "no_link_sentence": null,
+    "source_id": "FW-S011"
+   },
+   {
+    "text": "FEMA, Hazus 7.0 Flood Technical Manual (2025), electric-power status",
+    "ids": [
+     "FW-S012"
+    ],
+    "title": "Federal Emergency Management Agency, Hazus 7.0 Flood Technical Manual (2025).",
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+    "link_kind": "url",
+    "locator": "Table 9-1, pp. 9-1 through 9-2; section 9.4.1 footnote 21, p. 9-3",
+    "no_link_sentence": null,
+    "source_id": "FW-S012"
+   },
+   {
+    "text": "USACE, HEC-FIA Technical Reference, depth-percent damage relationships",
+    "ids": [
+     "FW-S006"
+    ],
+    "title": "U.S. Army Corps of Engineers, HEC-FIA Technical Reference, Depth-Percent Damage Relationships.",
+    "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+    "link_kind": "url",
+    "locator": "direct damage, depth-percent relationship and linear interpolation",
+    "no_link_sentence": null,
+    "source_id": "FW-S006"
+   },
+   {
+    "text": "NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment (historical context)",
+    "ids": [
+     "FW-S002"
+    ],
+    "title": "National Electrical Manufacturers Association, NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment…",
+    "link": "https://www.nema.org/docs/default-source/secure-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+    "link_kind": "url",
+    "locator": "sections 4.3 Power Equipment and 4.4 Transformers",
+    "no_link_sentence": null,
+    "source_id": "FW-S002"
+   },
+   {
+    "text": "NREL, Cost of Wind Energy Review 2024 (value anatomy only)",
+    "ids": [
+     "FW-S008"
+    ],
+    "title": "Stehly, T.; Duffy, P.; Mulas Hernando, D. Cost of Wind Energy Review: 2024 Edition. NREL/TP-5000-91775.",
+    "link": "https://www.nrel.gov/docs/fy25osti/91775.pdf",
+    "link_kind": "url",
+    "locator": "land-based reference plant capital-cost breakdown",
+    "no_link_sentence": null,
+    "source_id": "FW-S008"
+   },
+   {
+    "text": "Federal Emergency Management Agency, FEMA P-348, Protecting Building Utility Systems From Flood Damage, 2nd…",
+    "ids": [
+     "FW-S005"
+    ],
+    "title": "Federal Emergency Management Agency, FEMA P-348, Protecting Building Utility Systems From Flood Damage, 2nd…",
+    "link": "https://www.fema.gov/sites/default/files/2020-07/fema_p-348_protecting_building_utility_systems_from_flood_damage_2017.pdf",
+    "link_kind": "url",
+    "locator": "section 5.2, electrical-system flood risk and mitigation",
+    "no_link_sentence": null,
+    "source_id": "FW-S005"
+   }
+  ],
+  "references_from": "the entry's key sources, then the parameters' own"
+ },
  "title": "Flood × Wind farm",
  "asset": {
   "slug": "wind",
@@ -1037,6 +1137,120 @@
   "FW-S012",
   "FW-S013"
  ],
+ "sources_resolved": [
+  {
+   "id": "FW-S002",
+   "citation": "National Electrical Manufacturers Association, NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment (historical edition).",
+   "url": "https://www.nema.org/docs/default-source/secure-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+   "locator": "sections 4.3 Power Equipment and 4.4 Transformers",
+   "role": "historical_mechanism_and_disposition",
+   "tier": "T2",
+   "permitted": "Retain historical equipment-family and mechanism context while the 2026 successor is acquired and reviewed.",
+   "prohibited": "Treat the 2016 edition as current guidance, derive continuous depth-DR ordinates, or override current OEM/manufacturer guidance.",
+   "decision": "retain_historical_pending_successor_review",
+   "accessed_on": "2026-07-28",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.nema.org/docs/default-source/secure-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
+   "link_kind": "url",
+   "title": "National Electrical Manufacturers Association, NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment…",
+   "no_link_sentence": null
+  },
+  {
+   "id": "FW-S005",
+   "citation": "Federal Emergency Management Agency, FEMA P-348, Protecting Building Utility Systems From Flood Damage, 2nd ed. (2017).",
+   "url": "https://www.fema.gov/sites/default/files/2020-07/fema_p-348_protecting_building_utility_systems_from_flood_damage_2017.pdf",
+   "locator": "section 5.2, electrical-system flood risk and mitigation",
+   "role": "axis_and_exposure",
+   "tier": "T2",
+   "permitted": "Support local vulnerable datum and equipment-elevation fields.",
+   "prohibited": "Provide wind-farm ordinates or replacement percentages.",
+   "decision": "adopt_with_limits",
+   "accessed_on": "2026-07-28",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.fema.gov/sites/default/files/2020-07/fema_p-348_protecting_building_utility_systems_from_flood_damage_2017.pdf",
+   "link_kind": "url",
+   "title": "Federal Emergency Management Agency, FEMA P-348, Protecting Building Utility Systems From Flood Damage, 2nd…",
+   "no_link_sentence": null
+  },
+  {
+   "id": "FW-S006",
+   "citation": "U.S. Army Corps of Engineers, HEC-FIA Technical Reference, Depth-Percent Damage Relationships.",
+   "url": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+   "locator": "direct damage, depth-percent relationship and linear interpolation",
+   "role": "curve_form",
+   "tier": "T2",
+   "permitted": "Support transparent piecewise/tabular curve form and critical-elevation semantics.",
+   "prohibited": "Supply electrical-component ordinates.",
+   "decision": "adopt_with_limits",
+   "accessed_on": "2026-07-28",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+   "link_kind": "url",
+   "title": "U.S. Army Corps of Engineers, HEC-FIA Technical Reference, Depth-Percent Damage Relationships.",
+   "no_link_sentence": null
+  },
+  {
+   "id": "FW-S011",
+   "citation": "Federal Emergency Management Agency, Hazus-MH Flood Model Technical Manual, version 2.1.",
+   "url": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+   "locator": "sections 7.2.2, 7.2.4, and 7.2.6; Table 7.9, pp. 7-20 through 7-21; Table 7.9 footnote 2 and comments",
+   "role": "source_native_curve_and_assumptions",
+   "tier": "T3",
+   "permitted": "Reproduce the exact whole-substation source table as a strictly gated legacy screening curve and preserve its source assumptions.",
+   "prohibited": "Infer component curves, field or claims calibration, wind-farm TIV loss, saline-water applicability, protection credit, or current Hazus enablement.",
+   "decision": "adopt_screening_with_strict_gate",
+   "accessed_on": "2026-07-28",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
+   "link_kind": "url",
+   "title": "Federal Emergency Management Agency, Hazus-MH Flood Model Technical Manual, version 2.1.",
+   "no_link_sentence": null
+  },
+  {
+   "id": "FW-S012",
+   "citation": "Federal Emergency Management Agency, Hazus 7.0 Flood Technical Manual (2025).",
+   "url": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+   "locator": "Table 9-1, pp. 9-1 through 9-2; section 9.4.1 footnote 21, p. 9-3",
+   "role": "current_status_and_limitation",
+   "tier": "T2",
+   "permitted": "Require the current-disabled limitation and prohibit describing the legacy table as an enabled Hazus result.",
+   "prohibited": "Erase the legacy source table or claim current validation/calibration from its visibility.",
+   "decision": "adopt_as_limitation",
+   "accessed_on": "2026-07-28",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+   "link_kind": "url",
+   "title": "Federal Emergency Management Agency, Hazus 7.0 Flood Technical Manual (2025).",
+   "no_link_sentence": null
+  },
+  {
+   "id": "FW-S013",
+   "citation": "National Electrical Manufacturers Association, NEMA Standards Action, April 6, 2026.",
+   "url": "https://www.nema.org/docs/default-source/default-document-library/public/standards-actions/nema-standards-action-april-2026.pdf?sfvrsn=73934d20_2",
+   "locator": "Recently Published Documents, p. 5: Evaluating Water-Damaged Electrical Equipment, NEMA CS 70006-2026, Guide",
+   "role": "current_guide_successor_status",
+   "tier": "T2",
+   "permitted": "Classify NEMA GD 1-2016 as historical and require acquisition and technical review of NEMA CS 70006-2026 before canonical promotion.",
+   "prohibited": "Assume the successor's detailed recommendations are identical, use inaccessible content as evidence, or alter the FEMA Table 7.9 numeric knots from publication metadata alone.",
+   "decision": "adopt_as_promotion_caveat",
+   "accessed_on": "2026-07-28",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.nema.org/docs/default-source/default-document-library/public/standards-actions/nema-standards-action-april-2026.pdf?sfvrsn=73934d20_2",
+   "link_kind": "url",
+   "title": "National Electrical Manufacturers Association, NEMA Standards Action, April 6, 2026.",
+   "no_link_sentence": null
+  }
+ ],
+ "plain_tiers": {
+  "shape": "borrowed",
+  "cost": "borrowed"
+ },
  "occurrence": null,
  "review": {
   "entry_read_on": "2026-10-19",
@@ -1048,7 +1262,29 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release reviewed screening release"
  },
- "summary": "GSU / substation (whole facility): piecewise linear on freshwater flood depth above substation grade; shape T3, cost T3.",
+ "summary": "GSU / substation (whole facility): a line through fixed points (piecewise linear), read against freshwater flood depth above substation grade; how damage rises is borrowed, how it becomes dollars borrowed.",
+ "rail_plain": {
+  "exists": {
+   "words": "Live · a screening model",
+   "code": "LIVE · screening"
+  },
+  "evidence": {
+   "words": "Evidence: borrowed",
+   "code": "How damage rises: borrowed · how it becomes dollars: borrowed",
+   "tiers": [
+    "T3"
+   ],
+   "codes": "shape T3 · cost T3"
+  },
+  "occurrence": {
+   "words": "Field reports: nobody has looked yet",
+   "code": "Field reports: nobody has looked yet"
+  },
+  "review": {
+   "words": "Not yet reviewed by a person",
+   "code": "entry agent-read 2026-10-19 · release reviewed screening release"
+  }
+ },
  "versions": [
   {
    "pin": "flood_wind@model_v1_0__docs_r1",

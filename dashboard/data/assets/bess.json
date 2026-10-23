@@ -6,7 +6,8 @@
   "noun": "batteries",
   "href": "/assets/bess"
  },
- "summary": "Flood, hurricane wind and wildfire have curves for batteries, all from transferred or policy evidence (T3–T4); hail and convective wind have none; nobody has yet searched for field reports.",
+ "summary": "Hurricane wind and wildfire have curves that are our judgment (2 parts each); flood has curves built from borrowed and our judgment evidence (2 parts); hail and convective wind have no cell yet. 3 parts of the battery plant have no curve under any hazard: MV, collection and controls, civil works and fieldwork.",
+ "summary_v0": "Flood, hurricane wind and wildfire have curves for batteries, all on borrowed evidence or our judgment; hail and convective wind have none; nobody has yet searched for field reports.",
  "reference": {
   "label": "80 enclosures · 20 PCS · $109.8M reference value (real 2024)",
   "source": "docs/cells/flood_bess/current/value_binding.json",
@@ -172,6 +173,9 @@
    ],
    "cells": {
     "hail": {
+     "entry_id": "hail_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": "L",
      "twin_nodes": [
       {
@@ -193,12 +197,6 @@
        "why": "Panel damage"
       }
      ],
-     "curve": {
-      "mark": "┈",
-      "state": "gap",
-      "label": "gap"
-     },
-     "entry_id": "hail_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -229,10 +227,18 @@
       },
       "bucket": "battery_enclosures"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "gap",
+     "words": "no cell yet",
+     "mark": "┈",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "flood": {
+     "entry_id": "flood_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": "H",
      "twin_nodes": [
       {
@@ -254,18 +260,6 @@
        "why": "Low-mounted DC gear"
       }
      ],
-     "curve": {
-      "mark": "■",
-      "state": "live",
-      "partial": true,
-      "shape": "T4",
-      "cost": "T4",
-      "curves": [
-       "BESS_ACTIVE_CONTACT_STATE"
-      ],
-      "drawn": true
-     },
-     "entry_id": "flood_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -296,10 +290,22 @@
       },
       "bucket": "battery_enclosures"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "partial",
+     "words": "curve for part of it · our judgment",
+     "mark": "■◔",
+     "parts": [
+      "Battery enclosure (active hardware)"
+     ],
+     "tier_span": "T4",
+     "share": 0.6567432003372276,
+     "dollars": 72110403.39702758,
+     "spans": [],
+     "drawn": true
     },
     "hurricane_wind": {
+     "entry_id": "tropical_cyclone_wind_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": "L",
      "twin_nodes": [
       {
@@ -309,19 +315,6 @@
        "why": "Anchorage loads"
       }
      ],
-     "curve": {
-      "mark": "■",
-      "state": "live",
-      "partial": false,
-      "shape": "T4",
-      "cost": "T4",
-      "curves": [
-       "BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1",
-       "BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1"
-      ],
-      "drawn": true
-     },
-     "entry_id": "tropical_cyclone_wind_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -340,10 +333,22 @@
       },
       "bucket": "battery_enclosures"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "curve",
+     "words": "curve · our judgment",
+     "mark": "■",
+     "parts": [
+      "Integrated battery enclosure"
+     ],
+     "tier_span": "T4",
+     "share": 0.7650273224043715,
+     "dollars": 84000000.0,
+     "spans": [],
+     "drawn": true
     },
     "convective_wind": {
+     "entry_id": "convective_wind_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": "L",
      "twin_nodes": [
       {
@@ -353,12 +358,6 @@
        "why": "Anchorage loads"
       }
      ],
-     "curve": {
-      "mark": "┈",
-      "state": "gap",
-      "label": "gap"
-     },
-     "entry_id": "convective_wind_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -377,10 +376,18 @@
       },
       "bucket": "battery_enclosures"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "gap",
+     "words": "no cell yet",
+     "mark": "┈",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "wildfire": {
+     "entry_id": "wildfire_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": "M",
      "twin_nodes": [
       {
@@ -402,23 +409,6 @@
        "why": "Smoke triggers detectors; external fire risk"
       }
      ],
-     "curve": {
-      "mark": "■",
-      "state": "live",
-      "partial": false,
-      "shape": "T4",
-      "cost": "T4",
-      "curves": [
-       "BWF01_ENC_approved_replacement_electronics_ordinal",
-       "BWF01_ENC_approved_replacement_heavy_electrical_ordinal",
-       "BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal",
-       "BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal",
-       "BWF01_ENC_limited_repair_sensitivity_electronics_ordinal",
-       "BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal"
-      ],
-      "drawn": true
-     },
-     "entry_id": "wildfire_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -449,10 +439,22 @@
       },
       "bucket": "battery_enclosures"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "curve",
+     "words": "curve · our judgment",
+     "mark": "■",
+     "parts": [
+      "Integrated battery enclosure"
+     ],
+     "tier_span": "T4",
+     "share": 0.7650273224043715,
+     "dollars": 84000000.0,
+     "spans": [],
+     "drawn": true
     },
     "heat": {
+     "entry_id": null,
+     "effect": "performance",
+     "outside_the_five": true,
      "twin_lead": "H",
      "twin_nodes": [
       {
@@ -474,8 +476,6 @@
        "why": "Chiller capacity sets derating in heat waves"
       }
      ],
-     "curve": null,
-     "entry_id": null,
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -506,10 +506,18 @@
       },
       "bucket": "battery_enclosures"
      },
-     "effect": "performance",
-     "outside_the_five": true
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "icing": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
      "twin_lead": "L",
      "twin_nodes": [
       {
@@ -525,8 +533,6 @@
        "why": "Snow load on panels"
       }
      ],
-     "curve": null,
-     "entry_id": null,
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -551,10 +557,18 @@
       },
       "bucket": "battery_enclosures"
      },
-     "effect": "damage",
-     "outside_the_five": true
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "lightning": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
      "twin_lead": "M",
      "twin_nodes": [
       {
@@ -564,8 +578,6 @@
        "why": "Surges on comms and auxiliary power"
       }
      ],
-     "curve": null,
-     "entry_id": null,
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -584,8 +596,13 @@
       },
       "bucket": "battery_enclosures"
      },
-     "effect": "damage",
-     "outside_the_five": true
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     }
    }
   },
@@ -603,14 +620,11 @@
    ],
    "cells": {
     "hail": {
+     "entry_id": "hail_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": {
-      "mark": "┈",
-      "state": "gap",
-      "label": "gap"
-     },
-     "entry_id": "hail_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -622,10 +636,18 @@
       },
       "bucket": "pcs"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "gap",
+     "words": "no cell yet",
+     "mark": "┈",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "flood": {
+     "entry_id": "flood_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": "M",
      "twin_nodes": [
       {
@@ -635,19 +657,6 @@
        "why": "Skid height"
       }
      ],
-     "curve": {
-      "mark": "■",
-      "state": "live",
-      "partial": false,
-      "shape": "T3",
-      "cost": "T3",
-      "curves": [
-       "BESS_PCS_INUNDATION_PROXY",
-       "BESS_PCS_SALINE_CONTACT_STATE"
-      ],
-      "drawn": true
-     },
-     "entry_id": "flood_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -666,24 +675,24 @@
       },
       "bucket": "pcs"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "curve",
+     "words": "curve · borrowed",
+     "mark": "■",
+     "parts": [
+      "Separate PCS"
+     ],
+     "tier_span": "T3",
+     "share": 0.0947176684881603,
+     "dollars": 10400000.0,
+     "spans": [],
+     "drawn": true
     },
     "hurricane_wind": {
+     "entry_id": "tropical_cyclone_wind_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": {
-      "mark": "■",
-      "state": "live",
-      "partial": false,
-      "shape": "T4",
-      "cost": "T4",
-      "curves": [
-       "BESS_SEPARATE_PCS_TC_PROXY_V0_1"
-      ],
-      "drawn": true
-     },
-     "entry_id": "tropical_cyclone_wind_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -695,18 +704,24 @@
       },
       "bucket": "pcs"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "curve",
+     "words": "curve · our judgment",
+     "mark": "■",
+     "parts": [
+      "Separate PCS"
+     ],
+     "tier_span": "T4",
+     "share": 0.0947176684881603,
+     "dollars": 10400000.0,
+     "spans": [],
+     "drawn": true
     },
     "convective_wind": {
+     "entry_id": "convective_wind_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": {
-      "mark": "┈",
-      "state": "gap",
-      "label": "gap"
-     },
-     "entry_id": "convective_wind_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -718,24 +733,20 @@
       },
       "bucket": "pcs"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "gap",
+     "words": "no cell yet",
+     "mark": "┈",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "wildfire": {
+     "entry_id": "wildfire_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": {
-      "mark": "■",
-      "state": "live",
-      "partial": false,
-      "shape": "T4",
-      "cost": "T4",
-      "curves": [
-       "BWF01_PCS_ELECTRONICS"
-      ],
-      "drawn": true
-     },
-     "entry_id": "wildfire_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -747,10 +758,22 @@
       },
       "bucket": "pcs"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "curve",
+     "words": "curve · our judgment",
+     "mark": "■",
+     "parts": [
+      "Separate PCS"
+     ],
+     "tier_span": "T4",
+     "share": 0.0947176684881603,
+     "dollars": 10400000.0,
+     "spans": [],
+     "drawn": true
     },
     "heat": {
+     "entry_id": null,
+     "effect": "performance",
+     "outside_the_five": true,
      "twin_lead": "H",
      "twin_nodes": [
       {
@@ -760,8 +783,6 @@
        "why": "Derates above ~40–45 °C"
       }
      ],
-     "curve": null,
-     "entry_id": null,
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -780,14 +801,20 @@
       },
       "bucket": "pcs"
      },
-     "effect": "performance",
-     "outside_the_five": true
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "icing": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": null,
-     "entry_id": null,
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -799,10 +826,18 @@
       },
       "bucket": "pcs"
      },
-     "effect": "damage",
-     "outside_the_five": true
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "lightning": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
      "twin_lead": "M",
      "twin_nodes": [
       {
@@ -812,8 +847,6 @@
        "why": "Surges"
       }
      ],
-     "curve": null,
-     "entry_id": null,
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -832,8 +865,13 @@
       },
       "bucket": "pcs"
      },
-     "effect": "damage",
-     "outside_the_five": true
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     }
    }
   },
@@ -853,14 +891,11 @@
    ],
    "cells": {
     "hail": {
+     "entry_id": "hail_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": {
-      "mark": "┈",
-      "state": "gap",
-      "label": "gap"
-     },
-     "entry_id": "hail_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -872,10 +907,18 @@
       },
       "bucket": "electrical_balance"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "gap",
+     "words": "no cell yet",
+     "mark": "┈",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "flood": {
+     "entry_id": "flood_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": "M",
      "twin_nodes": [
       {
@@ -915,13 +958,6 @@
        "why": "Vault flooding"
       }
      ],
-     "curve": {
-      "mark": "✕",
-      "state": "no_curve",
-      "label": "no curve",
-      "sentence": "No curve — MV, collection and controls, $13.2M of the reference value, has no damage response yet."
-     },
-     "entry_id": "flood_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -970,19 +1006,22 @@
       },
       "bucket": "electrical_balance"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "no_curve",
+     "words": "no curve",
+     "mark": "✕",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null,
+     "no_curve_text": "MV, collection and controls",
+     "sentence": "No curve — MV, collection and controls, $13.2M of the reference value, has no damage response yet."
     },
     "hurricane_wind": {
+     "entry_id": "tropical_cyclone_wind_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": {
-      "mark": "✕",
-      "state": "no_curve",
-      "label": "no curve",
-      "sentence": "No curve — MV, collection and controls, $13.2M of the reference value, has no damage response yet."
-     },
-     "entry_id": "tropical_cyclone_wind_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -994,18 +1033,23 @@
       },
       "bucket": "electrical_balance"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "withheld",
+     "words": "named, no response yet (withheld)",
+     "mark": "▢",
+     "parts": [
+      "mv and shared electrical"
+     ],
+     "tier_span": null,
+     "share": null,
+     "dollars": null,
+     "spans": []
     },
     "convective_wind": {
+     "entry_id": "convective_wind_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": {
-      "mark": "┈",
-      "state": "gap",
-      "label": "gap"
-     },
-     "entry_id": "convective_wind_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1017,19 +1061,20 @@
       },
       "bucket": "electrical_balance"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "gap",
+     "words": "no cell yet",
+     "mark": "┈",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "wildfire": {
+     "entry_id": "wildfire_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": {
-      "mark": "✕",
-      "state": "no_curve",
-      "label": "no curve",
-      "sentence": "No curve — MV, collection and controls, $13.2M of the reference value, has no damage response yet."
-     },
-     "entry_id": "wildfire_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1041,10 +1086,21 @@
       },
       "bucket": "electrical_balance"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "withheld",
+     "words": "named, no response yet (withheld)",
+     "mark": "▢",
+     "parts": [
+      "mv and shared electrical"
+     ],
+     "tier_span": null,
+     "share": null,
+     "dollars": null,
+     "spans": []
     },
     "heat": {
+     "entry_id": null,
+     "effect": "performance",
+     "outside_the_five": true,
      "twin_lead": "M",
      "twin_nodes": [
       {
@@ -1066,8 +1122,6 @@
        "why": "Electronics"
       }
      ],
-     "curve": null,
-     "entry_id": null,
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1098,14 +1152,20 @@
       },
       "bucket": "electrical_balance"
      },
-     "effect": "performance",
-     "outside_the_five": true
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "icing": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": null,
-     "entry_id": null,
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1117,10 +1177,18 @@
       },
       "bucket": "electrical_balance"
      },
-     "effect": "damage",
-     "outside_the_five": true
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "lightning": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
      "twin_lead": "M",
      "twin_nodes": [
       {
@@ -1142,8 +1210,6 @@
        "why": "Surges on comms"
       }
      ],
-     "curve": null,
-     "entry_id": null,
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1174,8 +1240,13 @@
       },
       "bucket": "electrical_balance"
      },
-     "effect": "damage",
-     "outside_the_five": true
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     }
    }
   },
@@ -1192,14 +1263,11 @@
    ],
    "cells": {
     "hail": {
+     "entry_id": "hail_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": {
-      "mark": "┈",
-      "state": "gap",
-      "label": "gap"
-     },
-     "entry_id": "hail_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1211,10 +1279,18 @@
       },
       "bucket": "civil_works"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "gap",
+     "words": "no cell yet",
+     "mark": "┈",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "flood": {
+     "entry_id": "flood_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": "M",
      "twin_nodes": [
       {
@@ -1224,13 +1300,6 @@
        "why": "Pad elevation sets ingress risk"
       }
      ],
-     "curve": {
-      "mark": "✕",
-      "state": "no_curve",
-      "label": "no curve",
-      "sentence": "No curve — Civil works, $1.6M of the reference value, has no damage response yet."
-     },
-     "entry_id": "flood_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1249,19 +1318,22 @@
       },
       "bucket": "civil_works"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "no_curve",
+     "words": "no curve",
+     "mark": "✕",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null,
+     "no_curve_text": "Civil works",
+     "sentence": "No curve — Civil works, $1.6M of the reference value, has no damage response yet."
     },
     "hurricane_wind": {
+     "entry_id": "tropical_cyclone_wind_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": {
-      "mark": "✕",
-      "state": "no_curve",
-      "label": "no curve",
-      "sentence": "No curve — Civil works, $1.6M of the reference value, has no damage response yet."
-     },
-     "entry_id": "tropical_cyclone_wind_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1273,18 +1345,23 @@
       },
       "bucket": "civil_works"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "withheld",
+     "words": "named, no response yet (withheld)",
+     "mark": "▢",
+     "parts": [
+      "civil"
+     ],
+     "tier_span": null,
+     "share": null,
+     "dollars": null,
+     "spans": []
     },
     "convective_wind": {
+     "entry_id": "convective_wind_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": {
-      "mark": "┈",
-      "state": "gap",
-      "label": "gap"
-     },
-     "entry_id": "convective_wind_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1296,10 +1373,18 @@
       },
       "bucket": "civil_works"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "gap",
+     "words": "no cell yet",
+     "mark": "┈",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "wildfire": {
+     "entry_id": "wildfire_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": "M",
      "twin_nodes": [
       {
@@ -1315,13 +1400,6 @@
        "why": "Vegetation clearance"
       }
      ],
-     "curve": {
-      "mark": "✕",
-      "state": "no_curve",
-      "label": "no curve",
-      "sentence": "No curve — Civil works, $1.6M of the reference value, has no damage response yet."
-     },
-     "entry_id": "wildfire_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1346,14 +1424,23 @@
       },
       "bucket": "civil_works"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "withheld",
+     "words": "named, no response yet (withheld)",
+     "mark": "▢",
+     "parts": [
+      "civil"
+     ],
+     "tier_span": null,
+     "share": null,
+     "dollars": null,
+     "spans": []
     },
     "heat": {
+     "entry_id": null,
+     "effect": "performance",
+     "outside_the_five": true,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": null,
-     "entry_id": null,
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1365,14 +1452,20 @@
       },
       "bucket": "civil_works"
      },
-     "effect": "performance",
-     "outside_the_five": true
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "icing": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": null,
-     "entry_id": null,
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1384,14 +1477,20 @@
       },
       "bucket": "civil_works"
      },
-     "effect": "damage",
-     "outside_the_five": true
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "lightning": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": null,
-     "entry_id": null,
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1403,8 +1502,13 @@
       },
       "bucket": "civil_works"
      },
-     "effect": "damage",
-     "outside_the_five": true
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     }
    }
   },
@@ -1419,14 +1523,11 @@
    ],
    "cells": {
     "hail": {
+     "entry_id": "hail_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": {
-      "mark": "┈",
-      "state": "gap",
-      "label": "gap"
-     },
-     "entry_id": "hail_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1438,19 +1539,20 @@
       },
       "bucket": "fieldwork"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "gap",
+     "words": "no cell yet",
+     "mark": "┈",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "flood": {
+     "entry_id": "flood_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": {
-      "mark": "✕",
-      "state": "no_curve",
-      "label": "no curve",
-      "sentence": "No curve — Fieldwork, $600k of the reference value, has no damage response yet."
-     },
-     "entry_id": "flood_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1462,19 +1564,22 @@
       },
       "bucket": "fieldwork"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "no_curve",
+     "words": "no curve",
+     "mark": "✕",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null,
+     "no_curve_text": "Unallocated fieldwork",
+     "sentence": "No curve — Fieldwork, $600k of the reference value, has no damage response yet."
     },
     "hurricane_wind": {
+     "entry_id": "tropical_cyclone_wind_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": {
-      "mark": "✕",
-      "state": "no_curve",
-      "label": "no curve",
-      "sentence": "No curve — Fieldwork, $600k of the reference value, has no damage response yet."
-     },
-     "entry_id": "tropical_cyclone_wind_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1486,18 +1591,23 @@
       },
       "bucket": "fieldwork"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "withheld",
+     "words": "named, no response yet (withheld)",
+     "mark": "▢",
+     "parts": [
+      "fieldwork"
+     ],
+     "tier_span": null,
+     "share": null,
+     "dollars": null,
+     "spans": []
     },
     "convective_wind": {
+     "entry_id": "convective_wind_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": {
-      "mark": "┈",
-      "state": "gap",
-      "label": "gap"
-     },
-     "entry_id": "convective_wind_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1509,19 +1619,20 @@
       },
       "bucket": "fieldwork"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "gap",
+     "words": "no cell yet",
+     "mark": "┈",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "wildfire": {
+     "entry_id": "wildfire_bess",
+     "effect": "damage",
+     "outside_the_five": false,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": {
-      "mark": "✕",
-      "state": "no_curve",
-      "label": "no curve",
-      "sentence": "No curve — Fieldwork, $600k of the reference value, has no damage response yet."
-     },
-     "entry_id": "wildfire_bess",
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1533,14 +1644,23 @@
       },
       "bucket": "fieldwork"
      },
-     "effect": "damage",
-     "outside_the_five": false
+     "state": "withheld",
+     "words": "named, no response yet (withheld)",
+     "mark": "▢",
+     "parts": [
+      "fieldwork"
+     ],
+     "tier_span": null,
+     "share": null,
+     "dollars": null,
+     "spans": []
     },
     "heat": {
+     "entry_id": null,
+     "effect": "performance",
+     "outside_the_five": true,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": null,
-     "entry_id": null,
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1552,14 +1672,20 @@
       },
       "bucket": "fieldwork"
      },
-     "effect": "performance",
-     "outside_the_five": true
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "icing": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": null,
-     "entry_id": null,
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1571,14 +1697,20 @@
       },
       "bucket": "fieldwork"
      },
-     "effect": "damage",
-     "outside_the_five": true
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     },
     "lightning": {
+     "entry_id": null,
+     "effect": "damage",
+     "outside_the_five": true,
      "twin_lead": null,
      "twin_nodes": [],
-     "curve": null,
-     "entry_id": null,
      "occurrence": {
       "state": "not_searched",
       "mark": "?",
@@ -1590,12 +1722,485 @@
       },
       "bucket": "fieldwork"
      },
-     "effect": "damage",
-     "outside_the_five": true
+     "state": null,
+     "words": "—",
+     "mark": "—",
+     "parts": [],
+     "tier_span": null,
+     "share": null,
+     "dollars": null
     }
    }
   }
  ],
+ "parts_by_cell": {
+  "flood_bess": {
+   "entry_id": "flood_bess",
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood"
+   },
+   "status": "live",
+   "title": "Flood × Battery storage",
+   "parts": [
+    {
+     "failure_unit_id": "BESS_ACTIVE_ENCLOSURE",
+     "subsystem": "battery_enclosures",
+     "component": "battery_enclosures",
+     "treatment": "primary_nonzero",
+     "part": "Battery enclosure (active hardware)",
+     "state": "curve",
+     "rows": [
+      "battery_enclosures"
+     ],
+     "spans": false,
+     "share": 0.6567432003372276,
+     "share_basis": "share of the reference plant ($109.8M, reference budget r1)",
+     "dollars": 72110403.39702758,
+     "shape": "T4",
+     "cost": "T4",
+     "curves": [
+      "BESS_ACTIVE_CONTACT_STATE"
+     ],
+     "drawn": true,
+     "withheld_reasons": []
+    },
+    {
+     "failure_unit_id": "BESS_SEPARATE_PCS",
+     "subsystem": "pcs",
+     "component": "pcs",
+     "treatment": "primary_nonzero",
+     "part": "Separate PCS",
+     "state": "curve",
+     "rows": [
+      "pcs"
+     ],
+     "spans": false,
+     "share": 0.0947176684881603,
+     "share_basis": "share of the reference plant ($109.8M, reference budget r1)",
+     "dollars": 10400000.0,
+     "shape": "T3",
+     "cost": "T3",
+     "curves": [
+      "BESS_PCS_INUNDATION_PROXY",
+      "BESS_PCS_SALINE_CONTACT_STATE"
+     ],
+     "drawn": true,
+     "withheld_reasons": []
+    }
+   ],
+   "share_basis": "share of the reference plant ($109.8M, reference budget r1)",
+   "n_named": 2,
+   "n_curve": 2,
+   "n_withheld": 0,
+   "not_covered": [
+    "Enclosure racks and fire suppression",
+    "Electrical balance including unit transformers and cables",
+    "Civil works",
+    "Unallocated fieldwork"
+   ]
+  },
+  "tropical_cyclone_wind_bess": {
+   "entry_id": "tropical_cyclone_wind_bess",
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind"
+   },
+   "status": "live",
+   "title": "Hurricane wind × Battery storage",
+   "parts": [
+    {
+     "failure_unit_id": "BESS_INTEGRATED_ENCLOSURE",
+     "subsystem": "battery_enclosures",
+     "component": "integrated cabinet and included internal hardware",
+     "treatment": "primary_nonzero",
+     "part": "Integrated battery enclosure",
+     "state": "curve",
+     "rows": [
+      "battery_enclosures"
+     ],
+     "spans": false,
+     "share": 0.7650273224043715,
+     "share_basis": "share of the reference plant ($109.8M, reference budget r1)",
+     "dollars": 84000000.0,
+     "shape": "T4",
+     "cost": "T4",
+     "curves": [
+      "BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1",
+      "BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1"
+     ],
+     "drawn": true,
+     "withheld_reasons": []
+    },
+    {
+     "failure_unit_id": "BESS_SEPARATE_PCS",
+     "subsystem": "pcs",
+     "component": "separate PCS group",
+     "treatment": "primary_nonzero",
+     "part": "Separate PCS",
+     "state": "curve",
+     "rows": [
+      "pcs"
+     ],
+     "spans": false,
+     "share": 0.0947176684881603,
+     "share_basis": "share of the reference plant ($109.8M, reference budget r1)",
+     "dollars": 10400000.0,
+     "shape": "T4",
+     "cost": "T4",
+     "curves": [
+      "BESS_SEPARATE_PCS_TC_PROXY_V0_1"
+     ],
+     "drawn": true,
+     "withheld_reasons": []
+    },
+    {
+     "failure_unit_id": "BESS_MV_AND_SHARED_ELECTRICAL",
+     "subsystem": "BESS_MV_AND_SHARED_ELECTRICAL",
+     "component": "unbound reference property",
+     "treatment": "withheld",
+     "part": "mv and shared electrical",
+     "state": "withheld",
+     "rows": [
+      "electrical_balance"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": null,
+     "cost": null,
+     "curves": [],
+     "drawn": false,
+     "withheld_reasons": [
+      "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION"
+     ]
+    },
+    {
+     "failure_unit_id": "BESS_CIVIL",
+     "subsystem": "BESS_CIVIL",
+     "component": "unbound reference property",
+     "treatment": "withheld",
+     "part": "civil",
+     "state": "withheld",
+     "rows": [
+      "civil_works"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": null,
+     "cost": null,
+     "curves": [],
+     "drawn": false,
+     "withheld_reasons": [
+      "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION"
+     ]
+    },
+    {
+     "failure_unit_id": "BESS_FIELDWORK",
+     "subsystem": "BESS_FIELDWORK",
+     "component": "unbound reference property",
+     "treatment": "withheld",
+     "part": "fieldwork",
+     "state": "withheld",
+     "rows": [
+      "fieldwork"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": null,
+     "cost": null,
+     "curves": [],
+     "drawn": false,
+     "withheld_reasons": [
+      "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION"
+     ]
+    }
+   ],
+   "share_basis": "share of the reference plant ($109.8M, reference budget r1)",
+   "n_named": 5,
+   "n_curve": 2,
+   "n_withheld": 3,
+   "not_covered": [
+    "Unit MV and shared electrical",
+    "Civil works",
+    "Fieldwork"
+   ]
+  },
+  "wildfire_bess": {
+   "entry_id": "wildfire_bess",
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire"
+   },
+   "status": "live",
+   "title": "Wildfire × Battery storage",
+   "parts": [
+    {
+     "failure_unit_id": "BESS_INTEGRATED_ENCLOSURE",
+     "subsystem": "battery_enclosures",
+     "component": "integrated battery/cooling/BMS/enclosure/safety",
+     "treatment": "primary_nonzero",
+     "part": "Integrated battery enclosure",
+     "state": "curve",
+     "rows": [
+      "battery_enclosures"
+     ],
+     "spans": false,
+     "share": 0.7650273224043715,
+     "share_basis": "share of the reference plant ($109.8M, reference budget r1)",
+     "dollars": 84000000.0,
+     "shape": "T4",
+     "cost": "T4",
+     "curves": [
+      "BWF01_ENC_approved_replacement_electronics_ordinal",
+      "BWF01_ENC_approved_replacement_heavy_electrical_ordinal",
+      "BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal",
+      "BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal",
+      "BWF01_ENC_limited_repair_sensitivity_electronics_ordinal",
+      "BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal"
+     ],
+     "drawn": true,
+     "withheld_reasons": []
+    },
+    {
+     "failure_unit_id": "BESS_SEPARATE_PCS",
+     "subsystem": "pcs",
+     "component": "separate bidirectional PCS",
+     "treatment": "primary_nonzero",
+     "part": "Separate PCS",
+     "state": "curve",
+     "rows": [
+      "pcs"
+     ],
+     "spans": false,
+     "share": 0.0947176684881603,
+     "share_basis": "share of the reference plant ($109.8M, reference budget r1)",
+     "dollars": 10400000.0,
+     "shape": "T4",
+     "cost": "T4",
+     "curves": [
+      "BWF01_PCS_ELECTRONICS"
+     ],
+     "drawn": true,
+     "withheld_reasons": []
+    },
+    {
+     "failure_unit_id": "BESS_MV_AND_SHARED_ELECTRICAL",
+     "subsystem": "BESS_MV_AND_SHARED_ELECTRICAL",
+     "component": "unbound reference property",
+     "treatment": "withheld",
+     "part": "mv and shared electrical",
+     "state": "withheld",
+     "rows": [
+      "electrical_balance"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": null,
+     "cost": null,
+     "curves": [],
+     "drawn": false,
+     "withheld_reasons": [
+      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+      "VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED"
+     ]
+    },
+    {
+     "failure_unit_id": "BESS_CIVIL",
+     "subsystem": "BESS_CIVIL",
+     "component": "unbound reference property",
+     "treatment": "withheld",
+     "part": "civil",
+     "state": "withheld",
+     "rows": [
+      "civil_works"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": null,
+     "cost": null,
+     "curves": [],
+     "drawn": false,
+     "withheld_reasons": [
+      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+      "VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED"
+     ]
+    },
+    {
+     "failure_unit_id": "BESS_FIELDWORK",
+     "subsystem": "BESS_FIELDWORK",
+     "component": "unbound reference property",
+     "treatment": "withheld",
+     "part": "fieldwork",
+     "state": "withheld",
+     "rows": [
+      "fieldwork"
+     ],
+     "spans": false,
+     "share": null,
+     "share_basis": null,
+     "dollars": null,
+     "shape": null,
+     "cost": null,
+     "curves": [],
+     "drawn": false,
+     "withheld_reasons": [
+      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+      "VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED"
+     ]
+    }
+   ],
+   "share_basis": "share of the reference plant ($109.8M, reference budget r1)",
+   "n_named": 5,
+   "n_curve": 2,
+   "n_withheld": 3,
+   "not_covered": [
+    "Unit MV and shared electrical",
+    "Civil works",
+    "Fieldwork"
+   ]
+  }
+ },
+ "split": {
+  "differs": true,
+  "sentence": "These cells split the battery plant differently: the cells name different numbers of parts: flood 2, hurricane wind 5 and wildfire 5; MV, collection and controls is a unit under hurricane wind and wildfire; flood lists it as no curve yet; civil works is a unit under hurricane wind and wildfire; flood lists it as no curve yet; fieldwork is a unit under hurricane wind and wildfire; flood lists it as no curve yet; battery enclosures: flood covers $72.1M, hurricane wind covers $84.0M and wildfire covers $84.0M. Hazard's battery reference budget ($109.8M) sets the rows.",
+  "details": [
+   "the cells name different numbers of parts: flood 2, hurricane wind 5 and wildfire 5",
+   "MV, collection and controls is a unit under hurricane wind and wildfire; flood lists it as no curve yet",
+   "civil works is a unit under hurricane wind and wildfire; flood lists it as no curve yet",
+   "fieldwork is a unit under hurricane wind and wildfire; flood lists it as no curve yet",
+   "battery enclosures: flood covers $72.1M, hurricane wind covers $84.0M and wildfire covers $84.0M"
+  ],
+  "columns": [
+   {
+    "entry_id": "flood_bess",
+    "hazard": {
+     "slug": "flood",
+     "label": "Flood"
+    },
+    "n_named": 2,
+    "n_curve": 2,
+    "n_withheld": 0,
+    "share_basis": "share of the reference plant ($109.8M, reference budget r1)",
+    "title": "Flood × Battery storage"
+   },
+   {
+    "entry_id": "tropical_cyclone_wind_bess",
+    "hazard": {
+     "slug": "hurricane_wind",
+     "label": "Hurricane wind"
+    },
+    "n_named": 5,
+    "n_curve": 2,
+    "n_withheld": 3,
+    "share_basis": "share of the reference plant ($109.8M, reference budget r1)",
+    "title": "Hurricane wind × Battery storage"
+   },
+   {
+    "entry_id": "wildfire_bess",
+    "hazard": {
+     "slug": "wildfire",
+     "label": "Wildfire"
+    },
+    "n_named": 5,
+    "n_curve": 2,
+    "n_withheld": 3,
+    "share_basis": "share of the reference plant ($109.8M, reference budget r1)",
+    "title": "Wildfire × Battery storage"
+   }
+  ],
+  "table": [
+   {
+    "key": "battery_enclosures",
+    "label": "Battery enclosures",
+    "by_cell": {
+     "flood_bess": [
+      "Battery enclosure (active hardware)"
+     ],
+     "tropical_cyclone_wind_bess": [
+      "Integrated battery enclosure"
+     ],
+     "wildfire_bess": [
+      "Integrated battery enclosure"
+     ]
+    }
+   },
+   {
+    "key": "pcs",
+    "label": "PCS",
+    "by_cell": {
+     "flood_bess": [
+      "Separate PCS"
+     ],
+     "tropical_cyclone_wind_bess": [
+      "Separate PCS"
+     ],
+     "wildfire_bess": [
+      "Separate PCS"
+     ]
+    }
+   },
+   {
+    "key": "electrical_balance",
+    "label": "MV, collection and controls",
+    "by_cell": {
+     "flood_bess": [],
+     "tropical_cyclone_wind_bess": [
+      "mv and shared electrical (withheld)"
+     ],
+     "wildfire_bess": [
+      "mv and shared electrical (withheld)"
+     ]
+    }
+   },
+   {
+    "key": "civil_works",
+    "label": "Civil works",
+    "by_cell": {
+     "flood_bess": [],
+     "tropical_cyclone_wind_bess": [
+      "civil (withheld)"
+     ],
+     "wildfire_bess": [
+      "civil (withheld)"
+     ]
+    }
+   },
+   {
+    "key": "fieldwork",
+    "label": "Fieldwork",
+    "by_cell": {
+     "flood_bess": [],
+     "tropical_cyclone_wind_bess": [
+      "fieldwork (withheld)"
+     ],
+     "wildfire_bess": [
+      "fieldwork (withheld)"
+     ]
+    }
+   }
+  ]
+ },
+ "twin": {
+  "available": true,
+  "sentence": "Twin leads come from the Digital Twin through Hazard's crosswalk (58 rows, pinned by the battery value binding); a lead is design exposure, never evidence.",
+  "sha256": "7e96ff9a6f48db73bb35ccdf76daa5a41a418140472d127b7e7253e25fbdd30d",
+  "rows": 58,
+  "nodes": {}
+ },
+ "value_source": {
+  "label": "reference budget r1 (battery value binding)",
+  "path": "docs/cells/flood_bess/current/value_binding.json"
+ },
  "entries": [
   {
    "entry_id": "convective_wind_bess",
@@ -1655,8 +2260,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 0,
    "generation": "gap",
-   "aria_label": "Convective wind × Battery storage, gap, not searched",
-   "href": "/cells/convective_wind_bess"
+   "aria_label": "Convective wind × Battery storage, gap, field reports not searched",
+   "href": "/cells/convective_wind_bess",
+   "word": null,
+   "halves": null
   },
   {
    "entry_id": "flood_bess",
@@ -1718,8 +2325,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 5,
    "generation": "plain",
-   "aria_label": "Flood × Battery storage, live, partial, shape T3–4, cost T3–4, not searched",
-   "href": "/cells/flood_bess"
+   "aria_label": "Flood × Battery storage, live, partial, evidence: our judgment, field reports not searched",
+   "href": "/cells/flood_bess",
+   "word": "our judgment",
+   "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment"
   },
   {
    "entry_id": "hail_bess",
@@ -1779,8 +2388,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 0,
    "generation": "gap",
-   "aria_label": "Hail × Battery storage, gap, not searched",
-   "href": "/cells/hail_bess"
+   "aria_label": "Hail × Battery storage, gap, field reports not searched",
+   "href": "/cells/hail_bess",
+   "word": null,
+   "halves": null
   },
   {
    "entry_id": "tropical_cyclone_wind_bess",
@@ -1834,7 +2445,7 @@
     "sha256": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed",
     "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
    },
-   "summary": "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a T4 hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage; 86 % of the reference value has a curve and 14 % has none.",
+   "summary": "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a judgment-based hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage; 86 % of the reference value has a curve and 14 % has none.",
    "no_evaluator": false,
    "share_covered": 0.8597449908925319,
    "n_curves": 3,
@@ -1842,8 +2453,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 5,
    "generation": "plain",
-   "aria_label": "Hurricane wind × Battery storage, live, partial, shape T4, cost T4, not searched",
-   "href": "/cells/tropical_cyclone_wind_bess"
+   "aria_label": "Hurricane wind × Battery storage, live, partial, evidence: our judgment, field reports not searched",
+   "href": "/cells/tropical_cyclone_wind_bess",
+   "word": "our judgment",
+   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
   },
   {
    "entry_id": "wildfire_bess",
@@ -1897,7 +2510,7 @@
     "sha256": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491",
     "consumer_pin": "wildfire_bess@model_v1_0__docs_r1"
    },
-   "summary": "Wildfire on batteries: solar wildfire electrical class tables reused as T4 ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities); 86 % of the reference value has a curve and 14 % has none.",
+   "summary": "Wildfire on batteries: solar wildfire electrical class tables reused as judgment-based ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities); 86 % of the reference value has a curve and 14 % has none.",
    "no_evaluator": false,
    "share_covered": 0.8597449908925319,
    "n_curves": 7,
@@ -1905,8 +2518,10 @@
    "outside_checks": 0,
    "chain_core_as_files": 5,
    "generation": "plain",
-   "aria_label": "Wildfire × Battery storage, live, partial, shape T4, cost T4, not searched",
-   "href": "/cells/wildfire_bess"
+   "aria_label": "Wildfire × Battery storage, live, partial, evidence: our judgment, field reports not searched",
+   "href": "/cells/wildfire_bess",
+   "word": "our judgment",
+   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
   }
  ],
  "has_buckets": true,

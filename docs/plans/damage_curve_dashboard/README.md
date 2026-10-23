@@ -1,7 +1,7 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
-updated: 2026-10-20
+updated: 2026-10-21
 status: active
 scope: Build the damage-curve dashboard as a local internal instrument in this repository — a Python data build over the catalogue and the cells, then a Next.js app with the library, asset view, curve cell page with the derivation trail, curve dossier, occurrence page and review queue — verified by the data-build checks, the look review and the owner's feedback on the running slices; hosting after local feedback.
 -->
@@ -16,15 +16,39 @@ scope: Build the damage-curve dashboard as a local internal instrument in this r
 > [`docs/extra/discussion/damage_curve_dashboard/`](../../extra/discussion/damage_curve_dashboard/README.md)
 > (gates G1–G12 ruled 2026-10-20). Status `active` on the owner's direction of 2026-10-20 — *"Let's just keep
 > moving … Let's go."* — with the owner's feedback coming on the running slices, not on this text.
+>
+> **2026-10-21 — iteration 3 built on the `dashboard` branch
+> ([PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8)), for the owner's review on the running app.** Divy
+> took G14–G18 of [`08`](../../extra/discussion/damage_curve_dashboard/08_categories_and_construction.md) as
+> recommended (`DCD-D26`–`D30`) after ruling G13 and G20–G23 (`DCD-D20`–`D24`), and all of G19 (`DCD-D31`, `D32`). The
+> build: the Digital Twin's categories in the top bar and the library; an asset page per type with the twin's own
+> 3D model coloured by what each curve covers, hazard by hazard, and the systems × hazards table; the same picture
+> on every cell page; crosswalks drafted for seven types at
+> [`docs/contracts/twin_crosswalks/`](../../contracts/twin_crosswalks/README.md); the cell page in the order *curve
+> and why we believe it → what it covers → four steps → For Hazard*; evidence in words; one Review page; the
+> [FAQ](../../faq.md); data built from `main`, or a labelled preview. Look review at
+> [`evidence/2e49bb4/`](evidence/2e49bb4/REVIEW.md); handoff at
+> [`tasks_history/2026-10-21__dashboard__iteration-3`](../../extra/tasks_history/2026-10-21__dashboard__iteration-3/handoff.md).
+> G19 completed the same day (`DCD-D32`): builder information sits behind one *About this data* link; addendum review
+> at [`evidence/4e31ac6/`](evidence/4e31ac6/REVIEW.md).
+>
+> **2026-10-21: the owner's review of iteration 3 on the running app, built the same day** (`DCD-D33`, `D34`).
+> *How this curve was made* now sits above the curve. Its four steps are renamed *What it covers · How it was derived ·
+> Where the numbers come from · Has it been checked*, and each carries its key items as chips. Every cell with a
+> curve (21 of 21) says why its curve has its shape, in the derived step and, for 17, in the main logic. The 3D
+> picture gained the twin's tools, a full-screen view, each part's curve in miniature beside it and level columns.
+> The systems × hazards table now selects in the picture. Addendum review at
+> [`evidence/5db1b4b/`](evidence/5db1b4b/REVIEW.md).
 
 ## Outcome first
 
 ```text
 damage_modeling/
 ├── dashboard/                       the app (Next.js · TypeScript · Tailwind 4 · ECharts; Hazard's stack and tokens)
-│   ├── app/                         /  /assets/<asset>  /cells/<entry>  /cells/<entry>/curves/<curve>  /occurrence/<asset>/<hazard>  /review  /export/<entry>  /code/<damage_code_id>
+│   ├── app/                         /  /assets/<type>  /cells/<entry>  /cells/<entry>/curves/<curve>  /occurrence/<asset>/<hazard>  /review  /faq  /code/<damage_code_id>
 │   ├── components/                  status rail · trail · tile · curve plot · evidence table · audit stepper · drawer
-│   ├── data/                        written ONLY by the build step: manifest.json · cells/*.json · curves/*.json · occurrence/*.json · citations.json · receipt.json
+│   ├── data/                        written ONLY by the build step: manifest.json · cells/ · curves/ · coverage/ · occurrence/ · faq.json · citations.json · receipt.json (twin/ is the twin export, an input)
+│   ├── public/twin/                 the Digital Twin's 3D viewer and models, vendored unchanged and pinned by SHA (DCD-D21)
 │   └── README.md                    how to run locally, what the build checks are, the look review
 ├── scripts/dashboard/build_dashboard_data.py      the one build step (python3.12 venv): catalogue → JSON, with every check in 05 §3
 ├── scripts/reference_helpers/                     + reference evaluators for hurricane × battery and wildfire × battery (G9)
@@ -101,11 +125,25 @@ Shared with Hazard: the look principle at `Hazard_modeling/docs/principles/analy
   the page reads like an audit ledger; multiple curves on one plot; station drawers and cards too technical;
   sources without links; the asset view for batteries only; older cells showing no evidence. Library and
   lenses accepted.
-- [ ] **Iteration 2** per [`iteration_2_brief.md`](iteration_2_brief.md): the plain layer is the page and the
+- [x] **Iteration 2** per [`iteration_2_brief.md`](iteration_2_brief.md): the plain layer is the page and the
   ledger is one control away (`DCD-D19`); one curve at a time with generated captions; sources as links;
   station panels that explain first; the asset view for every asset with the *split differently* block;
-  workbook/dossier extraction so the older cells show their evidence. Acceptance: the brief's §5.
-- [ ] Gate: the owner's second review on the running app
+  workbook/dossier extraction so the older cells show their evidence. Acceptance: the brief's §5 —
+  *2026-10-21, branch `claude/dashboard-iteration-2-8df11e`, [PR #7](https://github.com/aamani-ai/Damage_Modeling/pull/7)
+  open, not merged; look review at [`evidence/b0ff718/REVIEW.md`](evidence/b0ff718/REVIEW.md): `06` §4 checks 1–6
+  and 8 pass, the brief's §5 checks 1–7 pass mechanically (`acceptance_checks.txt`), check 8 (the cold read) is
+  pending a named reader; the walkthrough is `/v0`*
+- [x] Gate: the owner's second review on the running app — *2026-10-21: reviewed; the review became discussion `08`
+  (G13–G19) and iteration 3*
+- [x] **Iteration 3** on the one `dashboard` branch ([PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8)):
+  G13–G23 built (`DCD-D20`–`D32`); look review at [`evidence/2e49bb4/REVIEW.md`](evidence/2e49bb4/REVIEW.md), G19's
+  addendum at [`evidence/4e31ac6/REVIEW.md`](evidence/4e31ac6/REVIEW.md)
+- [x] 2026-10-21: the owner reviewed iteration 3 on the running app (`DCD-D33`, `D34`). The steps moved above the curve
+  with their key items as chips, and each curve's shape now has its reason. The picture gained the twin's tools, full
+  screen, curves in miniature and a clickable table. All of it was built the same day. Addendum review at
+  [`evidence/5db1b4b/REVIEW.md`](evidence/5db1b4b/REVIEW.md): screens, the keyboard walk, copy and the picture's
+  checks pass.
+- [ ] Gate: the owner accepts iteration 3; merge to `main` and rebuild `dashboard/data/` from `main` (`DCD-D10`, `D30`)
 
 - [x] The owner runs it locally and gives feedback on the screens; findings become rows here, not reopened gates unless a ruling is contradicted — *2026-10-20: the owner asked to review the live app, not screenshots; the review page `/v0` was added and the owner accepted V0 (`DCD-D17`). The page's questions 2–6 stay open*
 - [ ] Gate: the owner accepts V0's screenshot set; merge to `main` — *accepted 2026-10-20 (`DCD-D17`); the cold read (check 7) and the merge are pending*

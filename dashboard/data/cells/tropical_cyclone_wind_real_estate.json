@@ -56,7 +56,7 @@
    "label": "entry agent-read 2026-10-19 · release not yet reviewed"
   }
  },
- "summary": "Proposal, not in the runtime index — Hurricane wind on buildings: fEMA Hazus hurricane building-loss rows used as published (every 5 mph, five terrain classes) for the Hazus building type and wind characteristics matching each building.",
+ "summary": "Proposal, not in the runtime index — Hurricane wind on buildings: FEMA Hazus hurricane building-loss rows used as published (every 5 mph, five terrain classes) for the Hazus building type and wind characteristics matching each building.",
  "chain": {
   "stations": [
    {
@@ -1128,5 +1128,1788 @@
  "gap_reason": null,
  "binding": null,
  "sampling_notes": [],
+ "plain": {
+  "rail": {
+   "exists": {
+    "words": "Proposal · not in the runtime index yet",
+    "code": "PROPOSAL · screening"
+   },
+   "evidence": {
+    "words": "Evidence: published",
+    "code": "How damage rises: published · how it becomes dollars: published",
+    "tiers": [
+     "T2"
+    ],
+    "codes": "shape T2 · cost T2"
+   },
+   "occurrence": {
+    "words": "Field reports: nobody has looked yet",
+    "code": "Field reports: nobody has looked yet"
+   },
+   "review": {
+    "words": "Not yet reviewed by a person",
+    "code": "entry agent-read 2026-10-19 · release not yet reviewed"
+   }
+  },
+  "main_logic": [
+   "Hurricane wind is measured as peak 3-second gust at 10 m in open terrain, in mph.",
+   "FEMA Hazus hurricane building-loss rows used as published (every 5 mph, five terrain classes) for the Hazus building type and wind characteristics matching each building; the 32 Hazus curves used are identical in FEMA's 6.1 extract and SimCenter's independent 5.1 copy.",
+   "Why this shape: dense published table; no smoothing needed.",
+   "The damage ratio is a share of the structure replacement cost new of the same building."
+  ],
+  "steps": [
+   {
+    "id": "covers",
+    "name": "What it covers",
+    "meaning": "The parts that have a curve, their share of the value, and what has none yet",
+    "fact": "4 parts with a curve · 1 withheld",
+    "paragraphs": [
+     "Hurricane wind on buildings: FEMA Hazus hurricane building-loss rows used as published (every 5 mph, five terrain classes) for the Hazus building type and wind characteristics matching each building; the 32 Hazus curves used are identical in FEMA's 6.1 extract and SimCenter's independent 5.1 copy. It names 4 parts: House, Warehouse, Office and Retail. Outside its scope: contents (declared as a withheld placeholder part), land, site works, business interruption and storm surge and rain flooding (flood cell). Kinds of damage it does not include: tree fall on the house (a separate Hazus add-on, withheld) and tornadoes spawned by the hurricane (convective cell).",
+     "For this hazard the building is split into 4 parts: House, Warehouse, Office and Retail. 1 further unit is named but withheld — tcre building contents — a stated 'not zero', not a curve.",
+     "The damage ratio is a share of structure replacement cost new of the same building. The files state no plant-level dollar figure for this asset."
+    ],
+    "holds": [
+     "scope",
+     "units",
+     "value"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "House",
+      "tone": "key",
+      "title": "House"
+     },
+     {
+      "text": "Warehouse",
+      "tone": "key",
+      "title": "Warehouse"
+     },
+     {
+      "text": "Office",
+      "tone": "key",
+      "title": "Office"
+     },
+     {
+      "text": "+1 more",
+      "tone": "muted",
+      "title": "Retail"
+     },
+     {
+      "text": "1 withheld",
+      "tone": "muted"
+     }
+    ]
+   },
+   {
+    "id": "derived",
+    "name": "How it was derived",
+    "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
+    "fact": "peak 3-second gust at 10 m in open terrain → a line through points",
+    "paragraphs": [
+     "Damage is read against peak 3-second gust at 10 m in open terrain (mph). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: peak 3-second gust at 10 m in open terrain (mph), 50 to 250 mph; the building's terrain class picks the curve.",
+     "The seven-step audit is a file in the cell folder with 7 rows; the statuses it records: partial and proposed. A site-condition adapter has not been written for this cell."
+    ],
+    "holds": [
+     "axis_form",
+     "audit"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "peak 3-second gust at 10 m in…, mph",
+      "tone": "key",
+      "title": "peak 3-second gust at 10 m in open terrain"
+     },
+     {
+      "text": "line through points",
+      "tone": "key"
+     },
+     {
+      "text": "20 curves",
+      "tone": "key"
+     },
+     {
+      "text": "why this shape",
+      "tone": "muted",
+      "title": "Dense published table; no smoothing needed."
+     }
+    ],
+    "why": [
+     {
+      "label": "Why this shape",
+      "text": "Dense published table; no smoothing needed."
+     },
+     {
+      "label": "The form adopted",
+      "text": "Exact published 5-mph tables, straight lines between published points."
+     },
+     {
+      "label": "Why not smooth fits",
+      "text": "41 published points per record; nothing to fill and a fit could only move published values."
+     }
+    ]
+   },
+   {
+    "id": "numbers",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what each one gave, and how sure we are",
+    "fact": "10 sources, 5 linked · published",
+    "paragraphs": [
+     "10 sources set this cell: FEMA, Hazus 7.0 Hurricane Model Technical Manual (2025), FEMA Hazus 6.1 hurricane damage and loss function extract, NHERI SimCenter, Hazus 5.1 hurricane loss functions, independent copy and Hazard reference profiles r1 and 6 more. Of the 18 parameters, 12 are published, 2 are borrowed and 4 are our judgment. The source and claim registers are machine-readable files in the cell folder. 5 sources have no link in the register (5 with a locator)."
+    ],
+    "holds": [
+     "evidence"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "published",
+      "tone": "key",
+      "title": "How damage rises: published · how it becomes dollars: published"
+     },
+     {
+      "text": "FEMA, Hazus 7.0 Hurricane…",
+      "tone": "key",
+      "title": "FEMA, Hazus 7.0 Hurricane Model Technical Manual (2025)"
+     },
+     {
+      "text": "FEMA Hazus 6.1 hurricane…",
+      "tone": "key",
+      "title": "FEMA Hazus 6.1 hurricane damage and loss function extract"
+     },
+     {
+      "text": "+2 more references",
+      "tone": "muted"
+     },
+     {
+      "text": "10 sources, 5 linked",
+      "tone": "muted"
+     }
+    ]
+   },
+   {
+    "id": "checked",
+    "name": "Has it been checked",
+    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
+    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "paragraphs": [
+     "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says report.",
+     "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: not yet reviewed."
+    ],
+    "holds": [
+     "field_review"
+    ],
+    "written": true,
+    "chips": [
+     {
+      "text": "no outside check yet",
+      "tone": "muted"
+     },
+     {
+      "text": "field reports: not searched",
+      "tone": "muted"
+     },
+     {
+      "text": "read by an agent only",
+      "tone": "muted"
+     }
+    ]
+   }
+  ],
+  "for_hazard": [
+   "artifact",
+   "capability",
+   "proof"
+  ],
+  "word": "published",
+  "halves": "How damage rises: published · how it becomes dollars: published",
+  "hazard_paths": [],
+  "capabilities": [
+   {
+    "key": "single_event",
+    "mark": "◐",
+    "label": "one hurricane wind event",
+    "short": "one hurricane wind event",
+    "detail": "proposal, not in the runtime index; building and terrain class required"
+   },
+   {
+    "key": "scenario_dollars",
+    "mark": "✗",
+    "label": "a dollar scenario",
+    "short": "a dollar scenario",
+    "detail": "withheld until the building value is qualified"
+   },
+   {
+    "key": "yearly_loss",
+    "mark": "✗",
+    "label": "yearly loss",
+    "short": "yearly loss",
+    "detail": "withheld before promotion (computed by the consumer afterwards)"
+   },
+   {
+    "key": "pml",
+    "mark": "✗",
+    "label": "PML, VaR — not supported",
+    "short": "PML and VaR",
+    "detail": "withheld"
+   }
+  ],
+  "blocks": {
+   "covered": {
+    "value": null,
+    "not_covered": [],
+    "withheld": [
+     {
+      "failure_unit_id": "TCRE_BUILDING_CONTENTS",
+      "subsystem": "BUILDING",
+      "reasons": [
+       "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+       "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
+      ],
+      "sentence": "Withheld: no runtime curve for pathway unit; contents deferred separate failure unit."
+     }
+    ]
+   },
+   "assumed": [
+    "Wind characteristics the profiles don't state are set to the national most-common Hazus values (e.g. house roof connections)",
+    "No value per area set, so scenario dollars stay withheld"
+   ],
+   "missing": {
+    "mechanisms": [
+     "Tree fall on the house (a separate Hazus add-on, withheld)",
+     "Tornadoes spawned by the hurricane (convective cell)"
+    ],
+    "out_of_scope": [
+     "Contents (declared as a withheld placeholder part)",
+     "Land, site works, business interruption",
+     "Storm surge and rain flooding (flood cell)"
+    ]
+   },
+   "open_questions": [
+    "A building-code or design-wind zone per cell would let the house use code-built connections (19.0% instead of 31.3% at 120 mph, open terrain)",
+    "Hazus commercial rows read higher in light-suburban than open terrain (office 17.4% vs 14.0% at 120 mph; kept as published)",
+    "No outside loss check yet (no claims or NRI comparison)"
+   ],
+   "next_version": null
+  },
+  "stations": [
+   {
+    "id": "scope",
+    "name": "Scope",
+    "meaning": "Which hazard, which asset, which parts; what is left out",
+    "paragraph": "Hurricane wind on buildings: FEMA Hazus hurricane building-loss rows used as published (every 5 mph, five terrain classes) for the Hazus building type and wind characteristics matching each building; the 32 Hazus curves used are identical in FEMA's 6.1 extract and SimCenter's independent 5.1 copy. It names 4 parts: House, Warehouse, Office and Retail. Outside its scope: contents (declared as a withheld placeholder part), land, site works, business interruption and storm surge and rain flooding (flood cell). Kinds of damage it does not include: tree fall on the house (a separate Hazus add-on, withheld) and tornadoes spawned by the hurricane (convective cell).",
+    "plain_fact": "4 parts · 3 left out"
+   },
+   {
+    "id": "units",
+    "name": "What breaks",
+    "meaning": "The parts of the plant the hazard damages, each with its own curve",
+    "paragraph": "For this hazard the building is split into 4 parts: House, Warehouse, Office and Retail. 1 further unit is named but withheld — tcre building contents — a stated 'not zero', not a curve.",
+    "plain_fact": "4 parts · 1 withheld"
+   },
+   {
+    "id": "axis_form",
+    "name": "How damage is measured",
+    "meaning": "The hazard intensity on the x-axis and the shape of the curve",
+    "paragraph": "Damage is read against peak 3-second gust at 10 m in open terrain (mph). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: peak 3-second gust at 10 m in open terrain (mph), 50 to 250 mph; the building's terrain class picks the curve.",
+    "plain_fact": "a line through points"
+   },
+   {
+    "id": "evidence",
+    "name": "Where the numbers come from",
+    "meaning": "The sources, what was taken from each, and how sure we are",
+    "paragraph": "10 sources set this cell: FEMA, Hazus 7.0 Hurricane Model Technical Manual (2025), FEMA Hazus 6.1 hurricane damage and loss function extract, NHERI SimCenter, Hazus 5.1 hurricane loss functions, independent copy and Hazard reference profiles r1 and 6 more. Of the 18 parameters, 12 are published, 2 are borrowed and 4 are our judgment. The source and claim registers are machine-readable files in the cell folder. 5 sources have no link in the register (5 with a locator).",
+    "plain_fact": "10 sources · published"
+   },
+   {
+    "id": "value",
+    "name": "What it is worth",
+    "meaning": "The share of the plant's value the curves cover",
+    "paragraph": "The damage ratio is a share of structure replacement cost new of the same building. The files state no plant-level dollar figure for this asset.",
+    "plain_fact": "no plant value stated"
+   },
+   {
+    "id": "audit",
+    "name": "The audit",
+    "meaning": "The seven checks a curve passes before release",
+    "paragraph": "The seven-step audit is a file in the cell folder with 7 rows; the statuses it records: partial and proposed. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "7-step audit as a file"
+   },
+   {
+    "id": "artifact",
+    "name": "The files",
+    "meaning": "The runtime file, the write-up and the workbook",
+    "paragraph": "The runtime file is the curve artifact with 20 curve records (model v0.2, docs r1). The write-up is tropical_cyclone_wind_real_estate_curve_derivation_dossier__model_v0_2__docs_r1.md. The workbook is damage_curve_records_tropical_cyclone_wind_real_estate__model_v0_2__docs_r1.xlsx. The cell folder holds 34 files, each with its SHA under Details.",
+    "plain_fact": "20 curve records"
+   },
+   {
+    "id": "capability",
+    "name": "What it can output",
+    "meaning": "What a consumer may compute with this curve",
+    "paragraph": "One hurricane wind event is available only under conditions the consumer (Hazard) checks. A dollar scenario, yearly loss and PML and VaR are not supported. Annual metrics belong to the consumer; nothing here is an expected annual loss.",
+    "plain_fact": "0 of 4 outputs allowed"
+   },
+   {
+    "id": "proof",
+    "name": "How it was tested",
+    "meaning": "The known answers this build reproduced",
+    "paragraph": "This build reproduced 954 of 954 known answers through the cell's evaluator (within 1e-12 on the damage ratio). 4 were not run: prose assertions; not executable. The validation record says report. No outside check has been made yet.",
+    "plain_fact": "954 of 954 reproduced"
+   },
+   {
+    "id": "field_review",
+    "name": "Seen in the field, and reviewed",
+    "meaning": "Field reports of this damage, and who has read the entry",
+    "paragraph": "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: not yet reviewed.",
+    "plain_fact": "not searched · agent-read"
+   }
+  ],
+  "key_references": [
+   {
+    "text": "FEMA, Hazus 7.0 Hurricane Model Technical Manual (2025)",
+    "ids": [
+     "TCRE-S001"
+    ],
+    "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+    "link_kind": "url",
+    "locator": "§2.1 p. 2-4 (wind pressure, windborne debris and rainwater penetration combined in the damage and loss functions; tree blowdown additive for small residential); §4.3 p. 4-81 (all damage and loss functions given as a function of peak gust, not one-minute wind); §5.5.1.3 p. 5-173 (results indexed to peak gust at 10 m in open terrain for several terrains); §5.6.5 Tables 5-76 and 5-77 p. 5-241 (metal-building size and deck-age effects); §6.1 pp. 6-2 to 6-3 (interior damage from roof cover, sheathing and fenestration breach); §8.1.2 p. 8-4 (cost ratio over total building cost); §8.1.4.1 p. 8-9 (interior loss from envelope damage); §8.1.7.2 p. 8-25 (commercial loss: repair factor 1.25, overhead and profit 1.20, capped at total replacement cost); §9.1 p. 9-2 (SPMB size classes); §9.7 pp. 9-49 to 9-50 (6.1/7.0 updates are mapping schemes and WBC weights); Appendix C Table C-1 pp. C-1 to C-2 (SBT names) and Table C-2 pp. C-3, C-12, C-13, C-20 to C-22 (WBC weight statistics)",
+    "no_link_sentence": null,
+    "source_id": "TCRE-S001"
+   },
+   {
+    "text": "FEMA Hazus 6.1 hurricane damage and loss function extract",
+    "ids": [
+     "TCRE-S002"
+    ],
+    "title": "FEMA Hazus team. Hazus 6.1 hurricane damage and loss function extract, HazusWindDamFunctions_Hazus61.xlsx…",
+    "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusWindDamFunctions_Hazus61.xlsx",
+    "link_kind": "url",
+    "locator": "sheet huDamLossFun (wbID × TERRAINID × DamLossDescID, columns WS50..WS250 mph); DamLossDescID 5 = Building Loss (huDamLossFunDescription); huListOfWindBldgTypes (wbID, sbtName, charDescription, CaseID); huListOfBldgChar (WBC codes); huTerrain (z0 0.03/0.15/0.35/0.70/1.00 m); selected rows wbID 6 (WSF1 CaseID 1), 1812 (SECBL), 1729 (SPMBL), TERRAINID 1-5",
+    "no_link_sentence": null,
+    "source_id": "TCRE-S002"
+   },
+   {
+    "text": "NHERI SimCenter, Hazus 5.1 hurricane loss functions, independent copy",
+    "ids": [
+     "TCRE-S003"
+    ],
+    "title": "NHERI SimCenter. Damage and Loss Model Library (DLML), dataset \"Hazus Hurricane Methodology v5.1\", hurricane/building/portfolio/Hazus v5.1 original/loss_repair.csv",
+    "link": "https://github.com/NHERI-SimCenter/DamageAndLossModelLibrary/blob/869423b9ad21a8bfe5c40eee8db9eee13e4f61b9/src/dlml/data/hurricane/building/portfolio/Hazus%20v5.1%20original/loss_repair.csv",
+    "link_kind": "url",
+    "locator": "commit 869423b9ad21a8bfe5c40eee8db9eee13e4f61b9 (2026-10-03); rows W.SF.1.gab.0.6d.tnail.no.0.{3,15,35,70,100}, S.ECB.L.bur.0.B.std.low.{…}, S.PMB.L.0.por.std.{…}; column LossFunction-Theta_0 (41 loss ratios | 50..250 mph); Demand-Type \"Peak Gust Wind Speed\", unit mph",
+    "no_link_sentence": null,
+    "source_id": "TCRE-S003"
+   },
+   {
+    "text": "Hazard reference profiles r1",
+    "ids": [
+     "TCRE-S010"
+    ],
+    "title": "Hazard_Modeling. Real-estate reference profiles r1 (reference_candidates.yml and generated profile views),…",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "link_kind": "url",
+    "locator": "commit 8b0d61c88fbcf85daa1c098516cee22398cdb524; reference_candidates.yml git blob a74fb72b0a2edce593b5505e0fd8852f4c0253f8; profiles re_house_1s_wood_slab, re_warehouse_1s_steel_slab, re_office_3s_slab",
+    "no_link_sentence": null,
+    "source_id": "TCRE-S010"
+   }
+  ],
+  "sources": [
+   {
+    "id": "TCRE-S001",
+    "citation": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+    "url": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+    "locator": "§2.1 p. 2-4 (wind pressure, windborne debris and rainwater penetration combined in the damage and loss functions; tree blowdown additive for small residential); §4.3 p. 4-81 (all damage and loss functions given as a function of peak gust, not one-minute wind); §5.5.1.3 p. 5-173 (results indexed to peak gust at 10 m in open terrain for several terrains); §5.6.5 Tables 5-76 and 5-77 p. 5-241 (metal-building size and deck-age effects); §6.1 pp. 6-2 to 6-3 (interior damage from roof cover, sheathing and fenestration breach); §8.1.2 p. 8-4 (cost ratio over total building cost); §8.1.4.1 p. 8-9 (interior loss from envelope damage); §8.1.7.2 p. 8-25 (commercial loss: repair factor 1.25, overhead and profit 1.20, capped at total replacement cost); §9.1 p. 9-2 (SPMB size classes); §9.7 pp. 9-49 to 9-50 (6.1/7.0 updates are mapping schemes and WBC weights); Appendix C Table C-1 pp. C-1 to C-2 (SBT names) and Table C-2 pp. C-3, C-12, C-13, C-20 to C-22 (WBC weight statistics)",
+    "role": "method_definition;selector_archetype;axis_bridge",
+    "tier": "T2",
+    "permitted": "Define the axis, the mechanisms inside the loss functions, the building types, the characteristic options and their national frequency; read the loss-ratio denominator.",
+    "prohibited": "Read tabulated loss ordinates from the manual (it does not print them); treat figure-read values as data; treat Table C-2 averages as building-weighted national shares (they are unweighted means over 49 regions).",
+    "decision": "adopt",
+    "accessed_on": "2026-10-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+    "link_kind": "url",
+    "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCRE-S002",
+    "citation": "FEMA Hazus team. Hazus 6.1 hurricane damage and loss function extract, HazusWindDamFunctions_Hazus61.xlsx (FEMA-provided file, retrieved from the OS-Climate physrisk public mirror).",
+    "url": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusWindDamFunctions_Hazus61.xlsx",
+    "locator": "sheet huDamLossFun (wbID × TERRAINID × DamLossDescID, columns WS50..WS250 mph); DamLossDescID 5 = Building Loss (huDamLossFunDescription); huListOfWindBldgTypes (wbID, sbtName, charDescription, CaseID); huListOfBldgChar (WBC codes); huTerrain (z0 0.03/0.15/0.35/0.70/1.00 m); selected rows wbID 6 (WSF1 CaseID 1), 1812 (SECBL), 1729 (SPMBL), TERRAINID 1-5",
+    "role": "curve_data_carrier",
+    "tier": "T2",
+    "permitted": "Use the building-loss rows of the three selected variants as the curve ordinates, after the cross-check against TCRE-S003.",
+    "prohibited": "Treat the mirror as FEMA-hosted; use the extract default-mapping sheets (huBldgMapping, huGBSMapping) as current Hazus defaults (they carry the 12 pre-6.1 regions); use rows not cross-checked; use the SPMB superior-deck (rd110) rows (TCRE-C016).",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusWindDamFunctions_Hazus61.xlsx",
+    "link_kind": "url",
+    "title": "FEMA Hazus team. Hazus 6.1 hurricane damage and loss function extract, HazusWindDamFunctions_Hazus61.xlsx…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCRE-S003",
+    "citation": "NHERI SimCenter. Damage and Loss Model Library (DLML), dataset \"Hazus Hurricane Methodology v5.1\", hurricane/building/portfolio/Hazus v5.1 original/loss_repair.csv. BSD 3-Clause.",
+    "url": "https://github.com/NHERI-SimCenter/DamageAndLossModelLibrary/blob/869423b9ad21a8bfe5c40eee8db9eee13e4f61b9/src/dlml/data/hurricane/building/portfolio/Hazus%20v5.1%20original/loss_repair.csv",
+    "locator": "commit 869423b9ad21a8bfe5c40eee8db9eee13e4f61b9 (2026-10-03); rows W.SF.1.gab.0.6d.tnail.no.0.{3,15,35,70,100}, S.ECB.L.bur.0.B.std.low.{…}, S.PMB.L.0.por.std.{…}; column LossFunction-Theta_0 (41 loss ratios | 50..250 mph); Demand-Type \"Peak Gust Wind Speed\", unit mph",
+    "role": "independent_verification",
+    "tier": "T2",
+    "permitted": "Independently confirm the TCRE-S002 ordinates (and that the functions did not change from Hazus 5.1 to 6.1).",
+    "prohibited": "Use the SimCenter \"coupled\" recalibrated dataset as Hazus values; treat agreement as calibration to observed losses.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/NHERI-SimCenter/DamageAndLossModelLibrary/blob/869423b9ad21a8bfe5c40eee8db9eee13e4f61b9/src/dlml/data/hurricane/building/portfolio/Hazus%20v5.1%20original/loss_repair.csv",
+    "link_kind": "url",
+    "title": "NHERI SimCenter. Damage and Loss Model Library (DLML), dataset \"Hazus Hurricane Methodology v5.1\", hurricane/building/portfolio/Hazus v5.1 original/loss_repair.csv",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCRE-S004",
+    "citation": "OS-Climate physrisk documentation, \"Hazus wind damage functions\" (onboarding page).",
+    "url": "https://physrisk.readthedocs.io/en/latest/user_guide/vulnerability/vulnerability_functions/wind_hazus/onboard.html",
+    "locator": "page text: the FEMA Hazus team provided an extract of the damage functions used in the Hazus 6.1 Hurricane Model as HazusWindDamFunctions_Hazus61.xlsx; quotes the Hazus 5.1 TM §4.4.7 peak-gust statement",
+    "role": "provenance",
+    "tier": "T3",
+    "permitted": "Record that the extract is a FEMA-provided file hosted by a third party.",
+    "prohibited": "Adopt physrisk processing choices (for example its per-type curves built from characteristic combinations or its gust conversions).",
+    "decision": "reference_only",
+    "accessed_on": "2026-10-12",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://physrisk.readthedocs.io/en/latest/user_guide/vulnerability/vulnerability_functions/wind_hazus/onboard.html",
+    "link_kind": "url",
+    "title": "OS-Climate physrisk documentation, \"Hazus wind damage functions\" (onboarding page).",
+    "no_link_sentence": null
+   },
+   {
+    "id": "TCRE-S005",
+    "citation": "InfraSure Hazard_Modeling repository, hurricane peril (consumer contract).",
+    "url": "local clone, origin/main @ e8664800",
+    "locator": "docs/hazards/hurricane/fundamentals.md lines 10-14 and 64-71 (wind only; 3-second gust at 10 m in mph; STORM 10-min bridge); perils/hurricane/src/hurricane/storm_return_periods.py lines 22-46 (thresholds 20-75 m/s, conversion (1/0.88)*1.20); drivers/deep/src/deep/damage_loader.py lines 230-466 (selector routing, one pathway-level valid_range)",
+    "role": "consumer_contract",
+    "tier": "T2",
+    "permitted": "Fix the input field as a 3-second gust at 10 m, open terrain, mph, about 61-229 mph; design records that the generic loader can route.",
+    "prohibited": "Treat the consumer bridge (10-min to 3-s gust) as Damage evidence.",
+    "decision": "adopt",
+    "accessed_on": "2026-10-12",
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "InfraSure Hazard_Modeling repository, hurricane peril (consumer contract).",
+    "no_link_sentence": "no link in the register"
+   },
+   {
+    "id": "TCRE-S006",
+    "citation": "InfraSure Damage_Modeling, flood_real_estate model v0.1 / docs r1 (proposed).",
+    "url": "origin/cell/flood-real-estate @ bc27524",
+    "locator": "docs/cells/flood_real_estate/proposed/README_* §3 and REFERENCE_BUILDINGS_* §1, §3-4",
+    "role": "selector_archetype;value_basis",
+    "tier": "T4",
+    "permitted": "Reuse the three reference buildings and the value basis unchanged.",
+    "prohibited": "Treat reference-building attributes as observations of real buildings.",
+    "decision": "adopt",
+    "accessed_on": "2026-10-12",
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "InfraSure Damage_Modeling, flood_real_estate model v0.1 / docs r1 (proposed).",
+    "no_link_sentence": "no link in the register"
+   },
+   {
+    "id": "TCRE-S007",
+    "citation": "Real estate: asset types, OSM mapping and the first CONUS grid run (Hazard plan doc 06), proposed by the reviewer and shared with JL, 2026-10-08.",
+    "url": "local copy ~/Downloads/06_real_estate_types_and_osm_mapping.md",
+    "locator": "§5 table (hurricane wind candidates WSF1, MLRM1 / SECBL, SPMBL); §6 (attributes per peril); §7 (structure first; split the roof for wind where sources support it; peril order); §8 (prefer curves exposing roof cover and opening protection)",
+    "role": "scope_request",
+    "tier": "T4",
+    "permitted": "Define scope, candidate types and the resiliency-ready preference.",
+    "prohibited": "Treat the candidate types as verified selections.",
+    "decision": "adopt",
+    "accessed_on": "2026-10-12",
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "Real estate: asset types, OSM mapping and the first CONUS grid run (Hazard plan doc 06), proposed by the…",
+    "no_link_sentence": "no link in the register"
+   },
+   {
+    "id": "TCRE-S008",
+    "citation": "Legacy hazard_analysis damage-curve library, hurricane_tropical_cyclone_wind_storm_residential and strong_wind_small_residential.",
+    "url": "local copy ~/Desktop/hazards-05-27-dev/hazards @ 9bc9c30",
+    "locator": "tools/damage_curves/data/damage_curves_data.csv (sha256 add6f1c75fad7ec98bc49344ca277c896927ded626eb7ed0b89ed665d17b1138); damage_curves_metadata.csv lines 4 and 7",
+    "role": "legacy_audit",
+    "tier": "T4",
+    "permitted": "Record why the arrays are not used.",
+    "prohibited": "Use either array as evidence, a cross-check or a fallback.",
+    "decision": "reject",
+    "accessed_on": "2026-10-12",
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "Legacy hazard_analysis damage-curve library, hurricane_tropical_cyclone_wind_storm_residential and…",
+    "no_link_sentence": "no link in the register"
+   },
+   {
+    "id": "TCRE-S009",
+    "citation": "InfraSure Damage_Modeling, tropical_cyclone_wind_wind model v1.2 / docs r2 and tropical_cyclone_wind_solar model v2.1 / docs r2 (current).",
+    "url": "main @ 02eba9b",
+    "locator": "current/*curve_artifact.json pathways[0].hazard_axis and hazard_scope",
+    "role": "axis_convention",
+    "tier": "T2",
+    "permitted": "Reuse the pathway ID, gust basis and compound-event rule.",
+    "prohibited": "Reuse their curves or their exclusion of debris and rain ingress for buildings.",
+    "decision": "adopt",
+    "accessed_on": "2026-10-12",
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "InfraSure Damage_Modeling, tropical_cyclone_wind_wind model v1.2 / docs r2 and tropical_cyclone_wind_solar…",
+    "no_link_sentence": "no link in the register"
+   },
+   {
+    "id": "TCRE-S010",
+    "citation": "Hazard_Modeling. Real-estate reference profiles r1 (reference_candidates.yml and generated profile views), handoff of 2026-10-16.",
+    "url": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "locator": "commit 8b0d61c88fbcf85daa1c098516cee22398cdb524; reference_candidates.yml git blob a74fb72b0a2edce593b5505e0fd8852f4c0253f8; profiles re_house_1s_wood_slab, re_warehouse_1s_steel_slab, re_office_3s_slab",
+    "role": "selector_archetype;value_basis",
+    "tier": "T4",
+    "permitted": "Bind curve records to the profiles and read the wind characteristics the profiles state.",
+    "prohibited": "Treat the profiles as observed buildings, their ages as code-compliance evidence, or the budgets as qualified coverage.",
+    "decision": "adopt",
+    "accessed_on": "2026-10-16",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "link_kind": "url",
+    "title": "Hazard_Modeling. Real-estate reference profiles r1 (reference_candidates.yml and generated profile views),…",
+    "no_link_sentence": null
+   }
+  ],
+  "claims": [
+   {
+    "id": "TCRE-C001",
+    "text": "All Hazus hurricane damage and loss functions are indexed to the peak gust at 10 m in open terrain (z0 = 0.03 m), not to one-minute sustained wind; terrain enters as a separate curve family.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S003"
+    ],
+    "locator": "S001 §4.3 p. 4-81 and §5.5.1.3 p. 5-173; S003 Demand-Type \"Peak Gust Wind Speed\", mph",
+    "tier": "T2",
+    "parameter_or_rule": "axis definition",
+    "status": "adopt",
+    "update_trigger": "A Hazus edition re-indexes its functions."
+   },
+   {
+    "id": "TCRE-C002",
+    "text": "The Hazus building damage and loss functions predict the combined effects of wind pressure, windborne debris and rainwater penetration; most interior damage comes from rain entering through roof, fenestration or cladding damage.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S001"
+    ],
+    "locator": "§2.1 p. 2-4; §6.1 pp. 6-2 to 6-3; §8.1.4.1 p. 8-9",
+    "tier": "T2",
+    "parameter_or_rule": "pathway mechanism content",
+    "status": "adopt",
+    "update_trigger": "A source separates the mechanisms."
+   },
+   {
+    "id": "TCRE-C003",
+    "text": "Tree-blowdown damage is an additive term applied to building and contents losses of small residential buildings only; it is not inside the base building loss functions.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S002"
+    ],
+    "locator": "S001 §2.1 p. 2-4 and §8.2; S002 sheets huTreeBlowdownFunctions and huTreeBlowdownLossFunctions",
+    "tier": "T2",
+    "parameter_or_rule": "deferred mechanism",
+    "status": "adopt",
+    "update_trigger": "Hazard supplies tree height, type and density; JL adds the house add-on."
+   },
+   {
+    "id": "TCRE-C004",
+    "text": "The building loss ratio is repair cost over the total replacement cost of the building (subassembly cost ratios sum over the whole building); commercial losses include a 1.25 repair-and-replacement factor and a 1.20 overhead-and-profit factor and are capped at total replacement cost. The default residence value includes site preparation for the slab.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S001"
+    ],
+    "locator": "§8.1.2 p. 8-4; §8.1.2.1 p. 8-4; §8.1.7.2 p. 8-25",
+    "tier": "T2",
+    "parameter_or_rule": "denominator",
+    "status": "adopt",
+    "update_trigger": "A per-area value source with a different boundary is selected."
+   },
+   {
+    "id": "TCRE-C005",
+    "text": "Hazus publishes each variant for five terrain classes (z0 0.03, 0.15, 0.35, 0.70, 1.00 m) and assigns a census-tract roughness from NLCD weighted by building area; the manual states no rule for combining the five classes for intermediate roughness.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S002"
+    ],
+    "locator": "S001 §4.3.4 pp. 4-64 to 4-65 (Equation 4-19); S002 sheet huTerrain; no interpolation rule found in a full-text search of S001",
+    "tier": "T2",
+    "parameter_or_rule": "terrain handling",
+    "status": "adopt_with_limits",
+    "update_trigger": "Hazard adds a roughness field and a mapping rule is agreed, or FEMA documents interpolation."
+   },
+   {
+    "id": "TCRE-C006",
+    "text": "WSF1 is the wood single-family one-story building type; for the continental US (CaseID 1) it has 160 variants: roof shape (hip, gable), secondary water resistance (yes, no), roof-deck attachment (6d @ 6\"/12\", 8d @ 6\"/12\", 6d/8d mix @ 6\"/6\", 8d @ 6\"/6\"), roof-to-wall connection (toe-nail, strap), garage door (none, weak, standard; none or SFBC 1994 with shutters), shutters (yes, no); roof cover shingle.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S002"
+    ],
+    "locator": "S001 Table C-1 p. C-1; S002 huListOfWindBldgTypes rows with sbtName WSF1, CaseID 1; huListOfBldgChar",
+    "tier": "T2",
+    "parameter_or_rule": "house building type and characteristic options",
+    "status": "adopt",
+    "update_trigger": "—"
+   },
+   {
+    "id": "TCRE-C007",
+    "text": "SECBL (steel engineered commercial, 1-2 stories) and MECBL (masonry engineered commercial, 1-2 stories) have identical building loss functions for every characteristic combination and terrain; their characteristics are roof cover (BUR, SPM), window area (low, medium, high), shutters, windborne-debris environment (A residential/commercial, B varies by direction, C residential, D none) and metal-deck attachment (standard, superior).",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S002",
+     "TCRE-S003"
+    ],
+    "locator": "S001 Table C-1 p. C-1 to C-2 and §5.6.6 p. 5-241; S002 rows SECBL and MECBL (480 curves each, identical); S003 S.ECB.L and M.ECB.L",
+    "tier": "T2",
+    "parameter_or_rule": "commercial building type",
+    "status": "adopt",
+    "update_trigger": "—"
+   },
+   {
+    "id": "TCRE-C008",
+    "text": "SPMBL is the large pre-engineered steel metal building (more than 50,000 ft2); SPMBM covers 4,000-50,000 ft2 and SPMBS 4,000 ft2 or less. Characteristics: roof-deck age (new or average, old), shutters, metal-deck attachment (standard, superior).",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S002"
+    ],
+    "locator": "S001 §9.1 p. 9-2 and Table C-1 p. C-2; S002 rows SPMBL",
+    "tier": "T2",
+    "parameter_or_rule": "warehouse building type",
+    "status": "adopt",
+    "update_trigger": "JL fixes a reference floor area below 50,000 ft2 (then SPMBM)."
+   },
+   {
+    "id": "TCRE-C009",
+    "text": "MLRM1 is a masonry low-rise strip mall up to 15 ft high; MLRI is a masonry low-rise warehouse/factory 20 ft high. Both are recorded alternatives, not selected.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S002"
+    ],
+    "locator": "S001 Table C-1 p. C-1; §5.6.4 and §5.6.7",
+    "tier": "T2",
+    "parameter_or_rule": "alternative types",
+    "status": "reference_only",
+    "update_trigger": "Owner adds a masonry strip-mall or masonry warehouse profile."
+   },
+   {
+    "id": "TCRE-C010",
+    "text": "Most common characteristic values (Hazus 7.0 Table C-2, average over all 49 regions): WSF1 gable 78.6%, no SWR 99.8%, 6d @ 6\"/12\" 41.5% (8d @ 6\"/6\" 32.1%, 8d @ 6\"/12\" 26.4%), toe-nail 78.6%, no garage 52.1%, no shutters 95.8%; SECBL BUR 89.4%, low window area 67.7%, debris environment B 41.1%, standard metal deck 99.6%, no shutters 95.7%; SPMBL old roof deck 88.1%, standard metal deck 99.5%, no shutters 97.4%.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S001"
+    ],
+    "locator": "Table C-2 pp. C-3 to C-4 (WSF1), p. C-20 (SPMBL), pp. C-21 to C-22 (SECBL)",
+    "tier": "T2",
+    "parameter_or_rule": "reference characteristic values",
+    "status": "adopt_with_limits",
+    "update_trigger": "A regional reference building is defined, or JL chooses a typical mix."
+   },
+   {
+    "id": "TCRE-C011",
+    "text": "The building-loss ordinates of the FEMA Hazus 6.1 extract equal SimCenter's separately extracted Hazus 5.1 copy exactly, for all 1,840 compared curves (WSF1 CONUS 800, SECBL 480, MECBL 480, SPMBL 40, SPMBM 40) at all 41 speeds.",
+    "type": "computed_check",
+    "source_ids": [
+     "TCRE-S002",
+     "TCRE-S003"
+    ],
+    "locator": "scripts/reference_helpers/extract_tropical_cyclone_wind_real_estate_hazus_ordinates.py (selected 15 records) and the step-3 cross-check (all 1,840)",
+    "tier": "T2",
+    "parameter_or_rule": "ordinate verification",
+    "status": "adopt",
+    "update_trigger": "A discrepancy appears in a later extract."
+   },
+   {
+    "id": "TCRE-C012",
+    "text": "The Hazus 6.1 and 7.0 hurricane updates concern the building-type and characteristic mapping schemes (49 regions, NSI-based weights); the manual does not describe changes to the damage or loss functions.",
+    "type": "source_interpretation",
+    "source_ids": [
+     "TCRE-S001"
+    ],
+    "locator": "§9.7 pp. 9-49 to 9-50",
+    "tier": "T2",
+    "parameter_or_rule": "version currency",
+    "status": "adopt_with_limits",
+    "update_trigger": "FEMA publishes a 7.x function extract or release notes change the functions."
+   },
+   {
+    "id": "TCRE-C013",
+    "text": "The extract's default-mapping sheets (huBldgMapping, huGBSMapping) use the 12 pre-6.1 regions (Florida_Central … Southeast_Inland), not the 49 regions of Hazus 6.1 and 7.0.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S002"
+    ],
+    "locator": "S002 huBldgMapping.huBldgSchemeName (12 values); S001 §9.7 p. 9-49 (49 regions from 6.1)",
+    "tier": "T2",
+    "parameter_or_rule": "default weights source",
+    "status": "adopt",
+    "update_trigger": "—"
+   },
+   {
+    "id": "TCRE-C014",
+    "text": "The 15 selected records are 0 at 50 mph, never exceed 1.0, and are non-decreasing except for twelve dips of at most 0.0020 (0.2 points), all at 205-235 mph (house suburban and light-trees; commercial open, light-suburban and suburban).",
+    "type": "computed_check",
+    "source_ids": [
+     "TCRE-S002",
+     "TCRE-S003"
+    ],
+    "locator": "CURVE_ORDINATES; validator check \"selected records: dips <= 0.002 and only above 200 mph\"",
+    "tier": "T2",
+    "parameter_or_rule": "curve form and range",
+    "status": "adopt",
+    "update_trigger": "A dip above 0.005 appears in a selected record."
+   },
+   {
+    "id": "TCRE-C015",
+    "text": "Across the whole extract, about half of the building-loss rows dip somewhere as wind rises (largest dip 0.10; 1% of rows dip more than 0.027) and 525 WSF1 values exceed 1.0 by at most 0.000052.",
+    "type": "computed_check",
+    "source_ids": [
+     "TCRE-S002"
+    ],
+    "locator": "huDamLossFun, DamLossDescID 5, all 30,580 rows",
+    "tier": "T2",
+    "parameter_or_rule": "source quality",
+    "status": "adopt",
+    "update_trigger": "—"
+   },
+   {
+    "id": "TCRE-C016",
+    "text": "The SPMB superior metal-deck (rd110) rows are inconsistent: each old-deck superior curve exactly equals a new-deck superior curve of another size class, and SPMBL old-deck superior loses more than standard (0.815 vs 0.395 at 120 mph, open). The selected SPMBL old-deck standard row (wbID 1729) duplicates no other row.",
+    "type": "computed_check",
+    "source_ids": [
+     "TCRE-S002",
+     "TCRE-S003"
+    ],
+    "locator": "S002 wbIDs 4813-4818 and 4951-4956 versus 1725-1730; same values in S003 S.PMB.*",
+    "tier": "T2",
+    "parameter_or_rule": "source anomaly",
+    "status": "adopt",
+    "update_trigger": "FEMA corrects or explains the rows."
+   },
+   {
+    "id": "TCRE-C017",
+    "text": "The selected SPMBL row moves in the directions the manual reports for metal buildings: large above medium, old deck above new (Table 5-77: medium to large +57% average damage state; 50% deck capacity reduction +23%). SPMBS standard rows are higher than SPMBM and SPMBL at 120 mph, against the manual's small-to-medium direction.",
+    "type": "computed_check",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S002"
+    ],
+    "locator": "S001 Tables 5-76 and 5-77 p. 5-241; VARIANT_SENSITIVITY rows RE_IND_WAREHOUSE",
+    "tier": "T3",
+    "parameter_or_rule": "plausibility check of the warehouse record",
+    "status": "adopt_with_limits",
+    "update_trigger": "FEMA corrects the SPMB family."
+   },
+   {
+    "id": "TCRE-C018",
+    "text": "Terrain is material: at 120 mph the reference house loses 31.3% in open terrain and 9.3% in suburban terrain; the warehouse 39.5% and 12.7%; the commercial building 8.8% and 5.7%.",
+    "type": "computed_check",
+    "source_ids": [
+     "TCRE-S002"
+    ],
+    "locator": "VARIANT_SENSITIVITY reference rows",
+    "tier": "T2",
+    "parameter_or_rule": "terrain requirement",
+    "status": "adopt",
+    "update_trigger": "—"
+   },
+   {
+    "id": "TCRE-C019",
+    "text": "Single-characteristic changes move the reference house at 140 mph (open) from 77.9% to: shutters 47.7%, straps 72.4%, 8d @ 6\"/6\" 69.4%, SWR 73.9%, all four 6.8%; commercial shutters 31.3% to 12.7%; warehouse shutters 88.2% to 35.1%.",
+    "type": "computed_check",
+    "source_ids": [
+     "TCRE-S002"
+    ],
+    "locator": "VARIANT_SENSITIVITY measure_candidate rows",
+    "tier": "T2",
+    "parameter_or_rule": "future resiliency parameters",
+    "status": "reference_only",
+    "update_trigger": "A resiliency measure is scoped for real estate."
+   },
+   {
+    "id": "TCRE-C020",
+    "text": "Hazard delivers a 3-second peak gust at 10 m in mph, open terrain, from STORM 10-minute wind × (1/0.88) × 1.20; thresholds 20-75 m/s give about 61-229 mph; the generic damage loader routes by unique selector match and checks one pathway-level valid_range on preferred_input_field.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S005"
+    ],
+    "locator": "fundamentals.md 10-14, 64-71; storm_return_periods.py 22-46; damage_loader.py 230-466",
+    "tier": "T2",
+    "parameter_or_rule": "consumer contract",
+    "status": "adopt",
+    "update_trigger": "Hazard changes its delivered field or loader."
+   },
+   {
+    "id": "TCRE-C021",
+    "text": "The extract also publishes contents loss (DamLossDescID 6), loss of use in days (7) and damage-state probabilities (1-4) per variant and terrain.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S002"
+    ],
+    "locator": "huDamLossFunDescription",
+    "tier": "T2",
+    "parameter_or_rule": "deferred outputs",
+    "status": "reference_only",
+    "update_trigger": "Contents enter scope."
+   },
+   {
+    "id": "TCRE-C022",
+    "text": "Hazus commercial roof cover options are BUR and SPM, both low-slope membranes; the SPMB metal-building type has no roof-cover characteristic (its roof is the metal-building roof system).",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S002"
+    ],
+    "locator": "S002 huListOfBldgChar rows 4-5; SPMB charDescription tokens",
+    "tier": "T2",
+    "parameter_or_rule": "roof cover mapping",
+    "status": "adopt",
+    "update_trigger": "A membrane-roof warehouse profile is needed (then MLRI or another type)."
+   },
+   {
+    "id": "TCRE-C023",
+    "text": "The legacy residential hurricane array has no gust averaging period, height, terrain or building type and saturates near 37% at 120 m/s; the second legacy array is straight-line wind.",
+    "type": "legacy_audit",
+    "source_ids": [
+     "TCRE-S008"
+    ],
+    "locator": "damage_curves_data.csv rows hurricane_tropical_cyclone_wind_storm_residential, strong_wind_small_residential",
+    "tier": "T4",
+    "parameter_or_rule": "legacy disposition",
+    "status": "reject",
+    "update_trigger": "—"
+   },
+   {
+    "id": "TCRE-C024",
+    "text": "For the selected commercial variant, light-suburban terrain gives higher building loss than open terrain at 90-250 mph (e.g. 27.7% vs 18.6% at 130 mph), and the open-terrain curve levels off at 88.3%; the house and warehouse records fall with rougher terrain at every speed.",
+    "type": "computed_check",
+    "source_ids": [
+     "TCRE-S002",
+     "TCRE-S003"
+    ],
+    "locator": "CURVE_ORDINATES rows TCRE_COM_HAZUS_SECBL_OPEN and _LIGHT_SUBURBAN; previews chart",
+    "tier": "T2",
+    "parameter_or_rule": "source behaviour",
+    "status": "adopt_with_limits",
+    "update_trigger": "FEMA documents the reason or corrects the rows."
+   },
+   {
+    "id": "TCRE-C025",
+    "text": "SECBM is the steel engineered commercial building of 3-5 stories (SECBL 1-2, SECBH 6 or more); the extract publishes 96 SECBM variants. For single-ply membrane, medium window area, no shutters, debris environment B and standard metal deck, SECBM and MECBM (masonry) give the same loss ratio at 100-160 mph in open and suburban terrain.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S002"
+    ],
+    "locator": "TM Appendix B building-type list (PDF p. 678, 33_SECBM); extract huListOfWindBldgTypes wbID 1840; VARIANT_SENSITIVITY_tropical_cyclone_wind_real_estate__model_v0_2__docs_r1.csv",
+    "tier": "T2",
+    "parameter_or_rule": "office building type",
+    "status": "adopt",
+    "update_trigger": "A height- or curtain-wall-specific source."
+   },
+   {
+    "id": "TCRE-C026",
+    "text": "Hazus window-area classes for engineered buildings are low (<25%), medium (25-40%) and high (>40%) of the wall area.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S001"
+    ],
+    "locator": "Hazus 7.0 TM §9.6.10, p. 9-38",
+    "tier": "T2",
+    "parameter_or_rule": "office window area",
+    "status": "adopt",
+    "update_trigger": "A profile revision changes the ratio."
+   },
+   {
+    "id": "TCRE-C027",
+    "text": "Hazus 6.1 assigns the metal roof deck age 'new or average' to metal roofs installed in 2008 or later and 'old' to those installed before 2008.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S001"
+    ],
+    "locator": "Hazus 7.0 TM §9.6.6, p. 9-37",
+    "tier": "T2",
+    "parameter_or_rule": "warehouse roof deck age",
+    "status": "adopt",
+    "update_trigger": "A profile revision changes the roof age or its meaning."
+   },
+   {
+    "id": "TCRE-C028",
+    "text": "Hazus SPMB (pre-engineered metal building) characteristics are roof-deck age, shutters and metal-deck attachment only; there is no characteristic for large overhead doors, so the profile's eight 12 x 14 ft unprotected doors cannot change the curve.",
+    "type": "direct_observation",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S002"
+    ],
+    "locator": "Hazus 7.0 TM WBC list p. 9-32; extract huListOfWindBldgTypes SPMBL (8 variants)",
+    "tier": "T2",
+    "parameter_or_rule": "warehouse large doors",
+    "status": "adopt_with_limits",
+    "update_trigger": "A source with large-door or opening-ratio variants."
+   },
+   {
+    "id": "TCRE-C029",
+    "text": "Hazus assigns house roof-deck attachment and roof-to-wall connection from the building code, design wind speed, design terrain and code year, so a 20-year-old house is code-built (8d nails, straps) only where its local code required it. On the source curves, 8d @ 6\"/12\" with straps reads 19.0% at 120 mph open (reference 31.3%) and 21.5% at 140 mph suburban (reference 51.2%).",
+    "type": "computed_check",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S002"
+    ],
+    "locator": "Hazus 7.0 TM §9.6.5 and §9.6.9, Figures 9-12 and 9-13, pp. 9-36 to 9-38; VARIANT_SENSITIVITY_tropical_cyclone_wind_real_estate__model_v0_2__docs_r1.csv",
+    "tier": "T3",
+    "parameter_or_rule": "house wind characteristics",
+    "status": "reference_only",
+    "update_trigger": "Hazard supplies a design-wind or code zone per cell."
+   },
+   {
+    "id": "TCRE-C030",
+    "text": "Effect of the v0.2 selections on the source curves: office SECBM single-ply membrane medium windows reads 14.0% at 120 mph open (v0.1 commercial SECBL 8.8%); warehouse new-or-average deck reads 23.5% at 120 mph open and 5.2% suburban (old deck 39.5% and 12.7%). As for SECBL, the office reads higher in light-suburban than in open terrain (17.4% vs 14.0% at 120 mph).",
+    "type": "computed_check",
+    "source_ids": [
+     "TCRE-S002"
+    ],
+    "locator": "VARIANT_SENSITIVITY_tropical_cyclone_wind_real_estate__model_v0_2__docs_r1.csv",
+    "tier": "T2",
+    "parameter_or_rule": "v0.2 selection effect",
+    "status": "adopt",
+    "update_trigger": "A newer Hazus extract."
+   },
+   {
+    "id": "TCRE-C031",
+    "text": "The v0.2 records keep every published value; their dips are at most 0.0035 (office, 205 mph light-suburban), and the new warehouse record dips by at most 0.0004 at 185-190 mph, below the 200 mph seen in v0.1.",
+    "type": "computed_check",
+    "source_ids": [
+     "TCRE-S002"
+    ],
+    "locator": "CURVE_ORDINATES_tropical_cyclone_wind_real_estate__model_v0_2__docs_r1.csv",
+    "tier": "T2",
+    "parameter_or_rule": "record form",
+    "status": "adopt",
+    "update_trigger": "A selected record dips by more than 0.005."
+   }
+  ],
+  "parameters": [
+   {
+    "id": "axis_definition",
+    "name": "axis_definition",
+    "value": "peak 3-second gust at 10 m, open terrain (z0 0.03 m), mph",
+    "tier": "T2",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S003",
+     "TCRE-S005"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "axis_bridge",
+    "status": "proposed",
+    "reasoning": "Native axis of the Hazus functions and the field Hazard delivers (TCRE-C001, C020).",
+    "update_trigger": "Hazus re-indexes its functions or Hazard changes its field."
+   },
+   {
+    "id": "axis_bridge",
+    "name": "axis_bridge",
+    "value": "none in Damage (Hazard converts STORM 10-min wind)",
+    "tier": "T2",
+    "source_ids": [
+     "TCRE-S005"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "axis_bridge",
+    "status": "proposed",
+    "reasoning": "Damage must not repeat or undo the consumer conversion.",
+    "update_trigger": "Hazard delivers a different averaging period."
+   },
+   {
+    "id": "curve_ordinates_house",
+    "name": "curve_ordinates_house",
+    "value": "Hazus WSF1 wbID 6 building loss, 5 terrains, 50-250 mph every 5 mph",
+    "tier": "T2",
+    "source_ids": [
+     "TCRE-S002",
+     "TCRE-S003"
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_RES_HAZUS_WSF1_*",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "curve_ordinate",
+    "status": "proposed",
+    "reasoning": "Identical in two independent extractions (TCRE-C011).",
+    "update_trigger": "A later Hazus extract differs."
+   },
+   {
+    "id": "curve_ordinates_commercial",
+    "name": "curve_ordinates_commercial",
+    "value": "Hazus SECBL wbID 1812 building loss, 5 terrains",
+    "tier": "T2",
+    "source_ids": [
+     "TCRE-S002",
+     "TCRE-S003"
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_COM_HAZUS_SECBL_*",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "curve_ordinate",
+    "status": "proposed",
+    "reasoning": "Identical in two independent extractions; equals MECBL (TCRE-C007, C011).",
+    "update_trigger": "A later Hazus extract differs."
+   },
+   {
+    "id": "curve_ordinates_warehouse",
+    "name": "curve_ordinates_warehouse",
+    "value": "Hazus SPMBL wbID 1729 building loss, 5 terrains",
+    "tier": "T2",
+    "source_ids": [
+     "TCRE-S002",
+     "TCRE-S003"
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_IND_HAZUS_SPMBL_*",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "curve_ordinate",
+    "status": "proposed",
+    "reasoning": "Identical in two extractions; row unaffected by the SPMB family anomaly and directionally consistent with the manual (TCRE-C016, C017).",
+    "update_trigger": "FEMA corrects the SPMB family."
+   },
+   {
+    "id": "building_type_house",
+    "name": "building_type_house",
+    "value": "WSF1 (CONUS, CaseID 1)",
+    "tier": "T2",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S002"
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_RES_HAZUS_WSF1_*",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "selector_archetype",
+    "status": "proposed",
+    "reasoning": "Exact description match (TCRE-C006); JL accepted 2026-10-12.",
+    "update_trigger": "—"
+   },
+   {
+    "id": "building_type_commercial",
+    "name": "building_type_commercial",
+    "value": "SECBL (identical to MECBL)",
+    "tier": "T3",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S002"
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_COM_HAZUS_SECBL_*",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "selector_archetype",
+    "status": "proposed",
+    "reasoning": "Engineered 1-2 story commercial for a 1-3 story building; a 3-story building would be SECBM (TCRE-C007); JL accepted 2026-10-12.",
+    "update_trigger": "Reference building fixed at 3 stories or as a strip mall."
+   },
+   {
+    "id": "building_type_warehouse",
+    "name": "building_type_warehouse",
+    "value": "SPMBL (> 50,000 ft2)",
+    "tier": "T3",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S002"
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_IND_HAZUS_SPMBL_*",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "selector_archetype",
+    "status": "proposed",
+    "reasoning": "Size class depends on an assumed floor area (TCRE-C008); JL accepted 2026-10-12.",
+    "update_trigger": "Reference floor area fixed below 50,000 ft2."
+   },
+   {
+    "id": "wind_characteristics_house",
+    "name": "wind_characteristics_house",
+    "value": "gable; no SWR; 6d @ 6\"/12\"; toe-nail; no garage; no shutters; shingle",
+    "tier": "T4",
+    "source_ids": [
+     "TCRE-S001"
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_RES_HAZUS_WSF1_*",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "selector_archetype",
+    "status": "proposed",
+    "reasoning": "Most common value per characteristic (Table C-2 all-region average, TCRE-C010); an assumption about one building, not an observation.",
+    "update_trigger": "A regional reference building or a typical mix is chosen."
+   },
+   {
+    "id": "wind_characteristics_commercial",
+    "name": "wind_characteristics_commercial",
+    "value": "BUR; low window area; debris environment B; standard metal deck; no shutters",
+    "tier": "T4",
+    "source_ids": [
+     "TCRE-S001"
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_COM_HAZUS_SECBL_*",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "selector_archetype",
+    "status": "proposed",
+    "reasoning": "Most common values (TCRE-C010, C022).",
+    "update_trigger": "Same."
+   },
+   {
+    "id": "wind_characteristics_warehouse",
+    "name": "wind_characteristics_warehouse",
+    "value": "old roof deck; standard metal deck; no shutters",
+    "tier": "T4",
+    "source_ids": [
+     "TCRE-S001"
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_IND_HAZUS_SPMBL_*",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "selector_archetype",
+    "status": "proposed",
+    "reasoning": "Most common values (TCRE-C010).",
+    "update_trigger": "Same."
+   },
+   {
+    "id": "terrain_class",
+    "name": "terrain_class",
+    "value": "one of open, light_suburban, suburban, light_trees, trees; required; no default; no interpolation",
+    "tier": "T2",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S002"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "site_selector",
+    "status": "proposed",
+    "reasoning": "Five discrete source curves and no combination rule (TCRE-C005); JL decided 2026-10-12.",
+    "update_trigger": "Hazard supplies roughness and a mapping rule is agreed."
+   },
+   {
+    "id": "curve_form",
+    "name": "curve_form",
+    "value": "straight lines between published points (5 mph spacing); published values kept, including dips <= 0.002",
+    "tier": "T2",
+    "source_ids": [
+     "TCRE-S002"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "curve_fit_shape",
+    "status": "proposed",
+    "reasoning": "Dense published table; no smoothing needed (CURVE_FORM_DECISION).",
+    "update_trigger": "A reviewed reason to smooth."
+   },
+   {
+    "id": "range_low",
+    "name": "range_low",
+    "value": "below 50 mph returns 0",
+    "tier": "T2",
+    "source_ids": [
+     "TCRE-S002"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "extrapolation",
+    "status": "proposed",
+    "reasoning": "Every selected record is exactly 0 at 50 mph (TCRE-C014).",
+    "update_trigger": "A selected record is non-zero at 50 mph."
+   },
+   {
+    "id": "range_high",
+    "name": "range_high",
+    "value": "above 250 mph withholds",
+    "tier": "T2",
+    "source_ids": [
+     "TCRE-S002"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "extrapolation",
+    "status": "proposed",
+    "reasoning": "Nothing published above 250 mph; Hazard tops out near 229 mph.",
+    "update_trigger": "A source publishes higher speeds."
+   },
+   {
+    "id": "denominator",
+    "name": "denominator",
+    "value": "structure replacement cost new (100%, one failure unit)",
+    "tier": "T2",
+    "source_ids": [
+     "TCRE-S001",
+     "TCRE-S006"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "value_basis",
+    "status": "proposed",
+    "reasoning": "Hazus loss ratio is over total building replacement cost (TCRE-C004).",
+    "update_trigger": "Value basis changes for flood_real_estate too."
+   },
+   {
+    "id": "value_per_area",
+    "name": "value_per_area",
+    "value": "not selected (scenario dollars withheld)",
+    "tier": "T4",
+    "source_ids": [
+     "TCRE-S006"
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "value_basis",
+    "status": "open",
+    "reasoning": "Shared open seam with flood_real_estate.",
+    "update_trigger": "JL selects a per-area source."
+   },
+   {
+    "id": "tree_fall_house",
+    "name": "tree_fall_house",
+    "value": "deferred; withheld, not zero",
+    "tier": "T2",
+    "source_ids": [
+     "TCRE-S001"
+    ],
+    "claim_ids": [],
+    "curve_id": "none",
+    "pathway_id": "tropical_cyclone_wind",
+    "role": "deferred_mechanism",
+    "status": "proposed",
+    "reasoning": "Additive term outside the base record (TCRE-C003).",
+    "update_trigger": "Hazard supplies tree data."
+   }
+  ],
+  "parameters_plain": [
+   {
+    "id": "axis_definition",
+    "name": "axis definition",
+    "raw_name": "axis_definition",
+    "value_text": "peak 3-second gust at 10 m, open terrain (z0 0.03 m), mph",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "TCRE-S001",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "TCRE-S003",
+      "title": "NHERI SimCenter. Damage and Loss Model Library (DLML), dataset \"Hazus Hurricane Methodology v5.1\", hurricane/building/portfolio/Hazus v5.1 original/loss_repair.csv",
+      "link": "https://github.com/NHERI-SimCenter/DamageAndLossModelLibrary/blob/869423b9ad21a8bfe5c40eee8db9eee13e4f61b9/src/dlml/data/hurricane/building/portfolio/Hazus%20v5.1%20original/loss_repair.csv",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "TCRE-S005",
+      "title": "InfraSure Hazard_Modeling repository, hurricane peril (consumer contract).",
+      "link": null,
+      "link_kind": "none",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Native axis of the Hazus functions and the field Hazard delivers (C020).",
+    "update_trigger": "Hazus re-indexes its functions or Hazard changes its field.",
+    "role": "axis_bridge"
+   },
+   {
+    "id": "axis_bridge",
+    "name": "axis bridge",
+    "raw_name": "axis_bridge",
+    "value_text": "none in Damage (Hazard converts STORM 10-min wind)",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "TCRE-S005",
+      "title": "InfraSure Hazard_Modeling repository, hurricane peril (consumer contract).",
+      "link": null,
+      "link_kind": "none",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Damage must not repeat or undo the consumer conversion.",
+    "update_trigger": "Hazard delivers a different averaging period.",
+    "role": "axis_bridge"
+   },
+   {
+    "id": "curve_ordinates_house",
+    "name": "curve ordinates house",
+    "raw_name": "curve_ordinates_house",
+    "value_text": "Hazus WSF1 wbID 6 building loss, 5 terrains, 50-250 mph every 5 mph",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "TCRE-S002",
+      "title": "FEMA Hazus team. Hazus 6.1 hurricane damage and loss function extract, HazusWindDamFunctions_Hazus61.xlsx…",
+      "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusWindDamFunctions_Hazus61.xlsx",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "TCRE-S003",
+      "title": "NHERI SimCenter. Damage and Loss Model Library (DLML), dataset \"Hazus Hurricane Methodology v5.1\", hurricane/building/portfolio/Hazus v5.1 original/loss_repair.csv",
+      "link": "https://github.com/NHERI-SimCenter/DamageAndLossModelLibrary/blob/869423b9ad21a8bfe5c40eee8db9eee13e4f61b9/src/dlml/data/hurricane/building/portfolio/Hazus%20v5.1%20original/loss_repair.csv",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_RES_HAZUS_WSF1_*",
+    "reasoning": "Identical in two independent extractions.",
+    "update_trigger": "A later Hazus extract differs.",
+    "role": "curve_ordinate"
+   },
+   {
+    "id": "curve_ordinates_commercial",
+    "name": "curve ordinates commercial",
+    "raw_name": "curve_ordinates_commercial",
+    "value_text": "Hazus SECBL wbID 1812 building loss, 5 terrains",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "TCRE-S002",
+      "title": "FEMA Hazus team. Hazus 6.1 hurricane damage and loss function extract, HazusWindDamFunctions_Hazus61.xlsx…",
+      "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusWindDamFunctions_Hazus61.xlsx",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "TCRE-S003",
+      "title": "NHERI SimCenter. Damage and Loss Model Library (DLML), dataset \"Hazus Hurricane Methodology v5.1\", hurricane/building/portfolio/Hazus v5.1 original/loss_repair.csv",
+      "link": "https://github.com/NHERI-SimCenter/DamageAndLossModelLibrary/blob/869423b9ad21a8bfe5c40eee8db9eee13e4f61b9/src/dlml/data/hurricane/building/portfolio/Hazus%20v5.1%20original/loss_repair.csv",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_COM_HAZUS_SECBL_*",
+    "reasoning": "Identical in two independent extractions; equals MECBL (C011).",
+    "update_trigger": "A later Hazus extract differs.",
+    "role": "curve_ordinate"
+   },
+   {
+    "id": "curve_ordinates_warehouse",
+    "name": "curve ordinates warehouse",
+    "raw_name": "curve_ordinates_warehouse",
+    "value_text": "Hazus SPMBL wbID 1729 building loss, 5 terrains",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "TCRE-S002",
+      "title": "FEMA Hazus team. Hazus 6.1 hurricane damage and loss function extract, HazusWindDamFunctions_Hazus61.xlsx…",
+      "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusWindDamFunctions_Hazus61.xlsx",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "TCRE-S003",
+      "title": "NHERI SimCenter. Damage and Loss Model Library (DLML), dataset \"Hazus Hurricane Methodology v5.1\", hurricane/building/portfolio/Hazus v5.1 original/loss_repair.csv",
+      "link": "https://github.com/NHERI-SimCenter/DamageAndLossModelLibrary/blob/869423b9ad21a8bfe5c40eee8db9eee13e4f61b9/src/dlml/data/hurricane/building/portfolio/Hazus%20v5.1%20original/loss_repair.csv",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_IND_HAZUS_SPMBL_*",
+    "reasoning": "Identical in two extractions; row unaffected by the SPMB family anomaly and directionally consistent with the manual (C017).",
+    "update_trigger": "FEMA corrects the SPMB family.",
+    "role": "curve_ordinate"
+   },
+   {
+    "id": "building_type_house",
+    "name": "building type house",
+    "raw_name": "building_type_house",
+    "value_text": "WSF1 (CONUS, CaseID 1)",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "TCRE-S001",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "TCRE-S002",
+      "title": "FEMA Hazus team. Hazus 6.1 hurricane damage and loss function extract, HazusWindDamFunctions_Hazus61.xlsx…",
+      "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusWindDamFunctions_Hazus61.xlsx",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_RES_HAZUS_WSF1_*",
+    "reasoning": "Exact description match; JL accepted 2026-10-12.",
+    "update_trigger": "—",
+    "role": "selector_archetype"
+   },
+   {
+    "id": "building_type_commercial",
+    "name": "building type commercial",
+    "raw_name": "building_type_commercial",
+    "value_text": "SECBL (identical to MECBL)",
+    "tier": "T3",
+    "tier_word": "borrowed",
+    "sources": [
+     {
+      "id": "TCRE-S001",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "TCRE-S002",
+      "title": "FEMA Hazus team. Hazus 6.1 hurricane damage and loss function extract, HazusWindDamFunctions_Hazus61.xlsx…",
+      "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusWindDamFunctions_Hazus61.xlsx",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_COM_HAZUS_SECBL_*",
+    "reasoning": "Engineered 1-2 story commercial for a 1-3 story building; a 3-story building would be SECBM; JL accepted 2026-10-12.",
+    "update_trigger": "Reference building fixed at 3 stories or as a strip mall.",
+    "role": "selector_archetype"
+   },
+   {
+    "id": "building_type_warehouse",
+    "name": "building type warehouse",
+    "raw_name": "building_type_warehouse",
+    "value_text": "SPMBL (> 50,000 ft2)",
+    "tier": "T3",
+    "tier_word": "borrowed",
+    "sources": [
+     {
+      "id": "TCRE-S001",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "TCRE-S002",
+      "title": "FEMA Hazus team. Hazus 6.1 hurricane damage and loss function extract, HazusWindDamFunctions_Hazus61.xlsx…",
+      "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusWindDamFunctions_Hazus61.xlsx",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_IND_HAZUS_SPMBL_*",
+    "reasoning": "Size class depends on an assumed floor area; JL accepted 2026-10-12.",
+    "update_trigger": "Reference floor area fixed below 50,000 ft2.",
+    "role": "selector_archetype"
+   },
+   {
+    "id": "wind_characteristics_house",
+    "name": "wind characteristics house",
+    "raw_name": "wind_characteristics_house",
+    "value_text": "gable; no SWR; 6d @ 6\"/12\"; toe-nail; no garage; no shutters; shingle",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "TCRE-S001",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_RES_HAZUS_WSF1_*",
+    "reasoning": "Most common value per characteristic (Table C-2 all-region average); an assumption about one building, not an observation.",
+    "update_trigger": "A regional reference building or a typical mix is chosen.",
+    "role": "selector_archetype"
+   },
+   {
+    "id": "wind_characteristics_commercial",
+    "name": "wind characteristics commercial",
+    "raw_name": "wind_characteristics_commercial",
+    "value_text": "BUR; low window area; debris environment B; standard metal deck; no shutters",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "TCRE-S001",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_COM_HAZUS_SECBL_*",
+    "reasoning": "Most common values (C022).",
+    "update_trigger": "Same.",
+    "role": "selector_archetype"
+   },
+   {
+    "id": "wind_characteristics_warehouse",
+    "name": "wind characteristics warehouse",
+    "raw_name": "wind_characteristics_warehouse",
+    "value_text": "old roof deck; standard metal deck; no shutters",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "TCRE-S001",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "TCRE_IND_HAZUS_SPMBL_*",
+    "reasoning": "Most common values.",
+    "update_trigger": "Same.",
+    "role": "selector_archetype"
+   },
+   {
+    "id": "terrain_class",
+    "name": "terrain class",
+    "raw_name": "terrain_class",
+    "value_text": "one of open, light_suburban, suburban, light_trees, trees; required; no default; no interpolation",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "TCRE-S001",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "TCRE-S002",
+      "title": "FEMA Hazus team. Hazus 6.1 hurricane damage and loss function extract, HazusWindDamFunctions_Hazus61.xlsx…",
+      "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusWindDamFunctions_Hazus61.xlsx",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Five discrete source curves and no combination rule; JL decided 2026-10-12.",
+    "update_trigger": "Hazard supplies roughness and a mapping rule is agreed.",
+    "role": "site_selector"
+   },
+   {
+    "id": "curve_form",
+    "name": "curve form",
+    "raw_name": "curve_form",
+    "value_text": "straight lines between published points (5 mph spacing); published values kept, including dips <= 0.002",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "TCRE-S002",
+      "title": "FEMA Hazus team. Hazus 6.1 hurricane damage and loss function extract, HazusWindDamFunctions_Hazus61.xlsx…",
+      "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusWindDamFunctions_Hazus61.xlsx",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Dense published table; no smoothing needed (CURVE_FORM_DECISION).",
+    "update_trigger": "A reviewed reason to smooth.",
+    "role": "curve_fit_shape"
+   },
+   {
+    "id": "range_low",
+    "name": "range low",
+    "raw_name": "range_low",
+    "value_text": "below 50 mph returns 0",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "TCRE-S002",
+      "title": "FEMA Hazus team. Hazus 6.1 hurricane damage and loss function extract, HazusWindDamFunctions_Hazus61.xlsx…",
+      "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusWindDamFunctions_Hazus61.xlsx",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Every selected record is exactly 0 at 50 mph.",
+    "update_trigger": "A selected record is non-zero at 50 mph.",
+    "role": "extrapolation"
+   },
+   {
+    "id": "range_high",
+    "name": "range high",
+    "raw_name": "range_high",
+    "value_text": "above 250 mph withholds",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "TCRE-S002",
+      "title": "FEMA Hazus team. Hazus 6.1 hurricane damage and loss function extract, HazusWindDamFunctions_Hazus61.xlsx…",
+      "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusWindDamFunctions_Hazus61.xlsx",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Nothing published above 250 mph; Hazard tops out near 229 mph.",
+    "update_trigger": "A source publishes higher speeds.",
+    "role": "extrapolation"
+   },
+   {
+    "id": "denominator",
+    "name": "denominator",
+    "raw_name": "denominator",
+    "value_text": "structure replacement cost new (100%, one failure unit)",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "TCRE-S001",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     },
+     {
+      "id": "TCRE-S006",
+      "title": "InfraSure Damage_Modeling, flood_real_estate model v0.1 / docs r1 (proposed).",
+      "link": null,
+      "link_kind": "none",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Hazus loss ratio is over total building replacement cost.",
+    "update_trigger": "Value basis changes for flood_real_estate too.",
+    "role": "value_basis"
+   },
+   {
+    "id": "value_per_area",
+    "name": "value per area",
+    "raw_name": "value_per_area",
+    "value_text": "not selected (scenario dollars withheld)",
+    "tier": "T4",
+    "tier_word": "our judgment",
+    "sources": [
+     {
+      "id": "TCRE-S006",
+      "title": "InfraSure Damage_Modeling, flood_real_estate model v0.1 / docs r1 (proposed).",
+      "link": null,
+      "link_kind": "none",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "all",
+    "reasoning": "Shared open seam with flood_real_estate.",
+    "update_trigger": "JL selects a per-area source.",
+    "role": "value_basis"
+   },
+   {
+    "id": "tree_fall_house",
+    "name": "tree fall house",
+    "raw_name": "tree_fall_house",
+    "value_text": "deferred; withheld, not zero",
+    "tier": "T2",
+    "tier_word": "published",
+    "sources": [
+     {
+      "id": "TCRE-S001",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "resolved": true
+     }
+    ],
+    "claim_ids": [],
+    "curve_id": "none",
+    "reasoning": "Additive term outside the base record.",
+    "update_trigger": "Hazard supplies tree data.",
+    "role": "deferred_mechanism"
+   }
+  ],
+  "evidence_provenance": {
+   "kind": "register",
+   "sheets": [],
+   "sections": [],
+   "unmatched": [],
+   "sentence": null,
+   "dossier": null,
+   "workbook": null
+  },
+  "link_counts": {
+   "total": 10,
+   "linked": 5,
+   "locator_only": 5,
+   "neither": 0,
+   "markers": 0,
+   "placeholders": 0
+  },
+  "extraction": null,
+  "tier_words": {
+   "shape": "published",
+   "cost": "published"
+  }
+ },
  "build_findings": []
 }

@@ -904,16 +904,105 @@
  "row_notes": [
   {
    "type": "key_assumption",
-   "text": "Glass-breakage probability is used as the module replacement ratio"
+   "text": "Glass-breakage probability is used as the module replacement ratio",
+   "raw": "Glass-breakage probability is used as the module replacement ratio"
   },
   {
    "type": "opt_in_only",
-   "text": "Stow adjustment applies only when a stow state is supplied (T4 placeholder)"
+   "text": "Stow adjustment applies only when a stow state is supplied (judgment-based placeholder)",
+   "raw": "Stow adjustment applies only when a stow state is supplied (T4 placeholder)"
   }
  ],
  "selected_by": [],
  "variants": "module type: fragile thin glass-glass / default 3.2 mm glass-backsheet / hail-hardened thicker glass; optional tracker stow blend",
  "notes": [],
+ "caption": {
+  "what_it_says": "PV modules (glass and cells): no loss until hail diameter, MESH equivalent reaches about 21 mm; damage then rises, passing half of full loss near 53 mm, and reaches full replacement by 80.5 mm.",
+  "how_sure": {
+   "shape": {
+    "tier": "T2",
+    "word": "published",
+    "basis": "D50 and slope fitted to public lab anchors (fragile and default published; hardened variant borrowed)"
+   },
+   "cost": {
+    "tier": "T2",
+    "word": "published",
+    "basis": "Direct module-hardware value share from the NLR Q1-2025 basis (published); optional Hazard-adapter profile is judgment-based"
+   },
+   "parameters": "2 parameters: 2 published",
+   "weakest": "T2",
+   "word": "published"
+  },
+  "seen_in_field": {
+   "sentence": "Not searched — nobody has looked for field reports yet.",
+   "state": "not_searched",
+   "href": null,
+   "words": "nobody has looked yet; no search log exists for this asset and hazard"
+  },
+  "main_references": [
+   {
+    "text": "PVEL, 2023 Hail Stress Sequence results",
+    "ids": [
+     "PVEL_2023_HSS"
+    ],
+    "title": "PVEL 2023 PV Module Reliability Scorecard - Hail Stress Sequence",
+    "link": "https://2023modulescorecard.pvel.com/hail-stress-sequence/",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "EV_PVEL_2023_HSS"
+   },
+   {
+    "text": "Kiwa PVEL, Hail Stress Sequence scorecard",
+    "ids": [
+     "KIWA_PVEL_HSS"
+    ],
+    "title": "Kiwa PVEL 2026 PV Module Reliability Scorecard - Hail Stress Sequence",
+    "link": "https://scorecard.pvel.com/hail-stress-sequence/",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "EV_PVEL_2026_HSS"
+   },
+   {
+    "text": "IEC 61215 hail test baseline",
+    "ids": [
+     "IEC_61215_BASELINE"
+    ],
+    "title": "DOE/FEMP Hail Damage Mitigation for Solar PV Systems",
+    "link": "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "EV_DOE_FEMP_PV_HAIL"
+   },
+   {
+    "text": "VDE Americas, hail-stow technical memo",
+    "ids": [
+     "E_VDE_HAIL_STOW"
+    ],
+    "title": "VDE Americas hail stow memo",
+    "link": "https://www.vde.com/en/vde-americas/newsroom/hail-stow-tech-memo",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "E_VDE_HAIL_STOW"
+   },
+   {
+    "text": "DOE/FEMP, Hail Damage Mitigation for Solar PV Systems",
+    "ids": [
+     "DOE_FEMP_HAIL_GUIDANCE"
+    ],
+    "title": "DOE/FEMP Hail Damage Mitigation for Solar PV Systems",
+    "link": "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems",
+    "link_kind": "url",
+    "locator": null,
+    "no_link_sentence": null,
+    "source_id": "EV_DOE_FEMP_PV_HAIL"
+   }
+  ],
+  "references_from": "the entry's key sources"
+ },
  "title": "Hail × Solar farm",
  "asset": {
   "slug": "solar",
@@ -990,6 +1079,68 @@
   "IEC_61215_BASELINE",
   "PVEL_2023_HSS"
  ],
+ "sources_resolved": [
+  {
+   "id": "EV_DOE_FEMP_PV_HAIL",
+   "title": "DOE/FEMP Hail Damage Mitigation for Solar PV Systems",
+   "citation": "DOE/FEMP Hail Damage Mitigation for Solar PV Systems",
+   "url": "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems",
+   "locator": null,
+   "role": "Supports KE bridge and PV hail selectors",
+   "tier": null,
+   "permitted": null,
+   "prohibited": "Certification tests are anchors/boundary conditions, not full damage curves.",
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/hail_solar/current/damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx",
+    "sheet": "Evidence_Log"
+   },
+   "aliases": [
+    "EV_DOE_FEMP_PV_HAIL",
+    "E_DOE_HAIL_STOW",
+    "E_DOE_MODULE_SELECTION",
+    "E_IEC_DOE_TABLE",
+    "SRC_DOE_FEMP_PV_HAIL"
+   ],
+   "doi": null,
+   "link": "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems",
+   "link_kind": "url",
+   "no_link_sentence": null
+  },
+  {
+   "id": "EV_PVEL_2023_HSS",
+   "title": "PVEL 2023 PV Module Reliability Scorecard - Hail Stress Sequence",
+   "citation": "PVEL 2023 PV Module Reliability Scorecard - Hail Stress Sequence",
+   "url": "https://2023modulescorecard.pvel.com/hail-stress-sequence/",
+   "locator": null,
+   "role": "Supports fragile and default curves",
+   "tier": null,
+   "permitted": null,
+   "prohibited": "Aggregate testing, not field claims; older than 2026 but more detailed public anchor list.",
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/hail_solar/current/damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx",
+    "sheet": "Evidence_Log"
+   },
+   "aliases": [
+    "EV_PVEL_2023_HSS",
+    "E_PVEL_2023_HSS",
+    "PVEL_2023_HSS"
+   ],
+   "doi": null,
+   "link": "https://2023modulescorecard.pvel.com/hail-stress-sequence/",
+   "link_kind": "url",
+   "no_link_sentence": null
+  }
+ ],
+ "plain_tiers": {
+  "shape": "published",
+  "cost": "published"
+ },
  "occurrence": null,
  "review": {
   "entry_read_on": "2026-10-19",
@@ -1001,7 +1152,29 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release —"
  },
- "summary": "PV modules (glass and cells): logistic on hail diameter, MESH equivalent; shape T2, cost T2.",
+ "summary": "PV modules (glass and cells): an S-shaped curve: little damage, then a steep rise, then a plateau (logistic), read against hail diameter, MESH equivalent; how damage rises is published, how it becomes dollars published.",
+ "rail_plain": {
+  "exists": {
+   "words": "Live · in the runtime index",
+   "code": "LIVE"
+  },
+  "evidence": {
+   "words": "Evidence: published",
+   "code": "How damage rises: published · how it becomes dollars: published",
+   "tiers": [
+    "T2"
+   ],
+   "codes": "shape T2 · cost T2"
+  },
+  "occurrence": {
+   "words": "Field reports: nobody has looked yet",
+   "code": "Field reports: nobody has looked yet"
+  },
+  "review": {
+   "words": "Not yet reviewed by a person",
+   "code": "entry agent-read 2026-10-19 · release —"
+  }
+ },
  "versions": [
   {
    "pin": "hail_solar@model_v1_0__docs_r8",

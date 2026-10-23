@@ -56,6 +56,13 @@ Repository-current change records:
 - [`m3_to_m4_distribution_ready_emit.md`](hazard_handoff/m3_to_m4_distribution_ready_emit.md)
 - [`wildfire_solar_model_v1_0_hazard_migration.md`](hazard_handoff/wildfire_solar_model_v1_0_hazard_migration.md)
 
+## The asset spine and the twin crosswalks
+
+- [`twin_crosswalks/README.md`](twin_crosswalks/README.md) — the asset spine (category → type → profile, after the
+  Digital Twin's taxonomy, `DCD-D20`) and one crosswalk per twin asset saying which twin part each cell's curves
+  cover, hazard by hazard. A draft co-owned with Hazard (`DCD-D23`); read by the dashboard's data build to colour
+  the twin's 3D models. It changes no curve and no number.
+
 ## Resiliency handoff
 
 - [`resiliency_handoff/README.md`](resiliency_handoff/README.md) — Damage's thin producer-side boundary:
