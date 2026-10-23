@@ -41,7 +41,9 @@ The look-review runs are in [`dashboard/scripts/look-review/`](../../../../dashb
   would have deleted the served pages, so it was not retried on a full disk.
 - **A preview can link through a gitignored folder.** One hurricane × solar source resolved through the
   `infrasure-damage-curves` symlink, and its GitHub link carried a path on this machine. A build from `main` (an export with
-  no such folder) says *no link* instead, and the Review page lists it.
+  no such folder) says *no link* instead, and the Review page lists it. Fixed on PR #9: the exact-path lookup now asks git
+  too, and `tests/test_dashboard_sources.py` builds the same layout in a temporary repository so the rule is tested on
+  every machine.
 - **The keyboard walk follows the page order.** With the steps above the curve, `keywalk.mjs` reaches the steps before
   the part selector; the walk was reordered and passes in both themes.
 
