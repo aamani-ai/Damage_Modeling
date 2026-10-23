@@ -37,12 +37,31 @@ was revised the same day (`DCD-D33`, `D34`); it was accepted and merged into `ma
 - **Around the pages.** One Review page and the [FAQ](../docs/faq.md). There is no build date and no *internal* chip.
   What the dashboard was built from (the commit, the build checks, the receipt) sits behind one *About this data*
   link in every page's footer (`DCD-D31`, `D32`).
-- **Built from `main`** (`DCD-D30`): the data on `main` is built from `main`, at `85aedf6` since the merge. A branch carries
-  a labelled preview of its own data until it merges.
+- **Built from `main`** (`DCD-D30`): the data on `main` is built from `main`, at `01dbf18` since PR #9 merged. A branch
+  carries a labelled preview of its own data until it merges.
+- **Hosted** (`DCD-D36`): the Cloud Run service `damage-curves`, behind IAP for aamani.ai accounts ([below](#hosted)).
 
 Earlier records: iteration 2 at [`evidence/b0ff718/REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/b0ff718/REVIEW.md),
 V0 (accepted 2026-10-20, `DCD-D17`) at [`evidence/3f9d516/`](../docs/plans/damage_curve_dashboard/evidence/3f9d516/REVIEW.md)
 and the first V1 step at [`evidence/3ea7e02/`](../docs/plans/damage_curve_dashboard/evidence/3ea7e02/REVIEW.md).
+
+## Hosted
+
+The dashboard runs on the team's Cloud Run as the service `damage-curves` (project `modeling-nonprod-svc-db5x`,
+`us-central1`), behind IAP: open its address and sign in with an **aamani.ai** Google account; no one else gets in
+(`DCD-D36`, gate H1).
+
+- **What runs.** [`Dockerfile`](Dockerfile) builds the static export from the committed `data/` and serves `out/` with
+  [`scripts/serve-static.mjs`](scripts/serve-static.mjs), on Cloud Run's `PORT`. The server gzips text, lets browsers
+  keep Next's hashed files under `/_next/static/`, and never serves a file outside `out/`.
+- **How it deploys.** [`.github/workflows/deploy-damage-curves.yml`](../.github/workflows/deploy-damage-curves.yml) runs on
+  a push to the `deploy/damage-curves` branch, never on `main`. It refuses data not built from `main`, then builds and
+  pushes the image, deploys it behind IAP, admits aamani.ai and checks that an anonymous request is refused.
+- **Showing the team a new version.** Merge to `main`, then rebuild the data from `main` and commit it there
+  (`DCD-D30`). Then move the deploy branch to `main`:
+  `git push origin main:deploy/damage-curves`.
+- **The team runbook** for this setup: `gt_models/docs/deployment/cloud-run-deploy-runbook.md`, and the skill
+  `deploy-cloud-run-dashboard`.
 
 ## Run it
 

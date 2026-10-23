@@ -17,7 +17,7 @@ and should be deleted." This file is that idea, kept current. The facts come fro
 ## The register (2026-10-22, after the dashboard merge)
 
 Every branch an agent session opened this week is merged or gone (below). What remains on `origin` is
-`main` and Jung A's five branches. The `dashboard` branch was merged as PR #8 and deleted on 2026-10-22; a new one
+`main`, the dashboard's deploy branch `deploy/damage-curves` (`DCD-D36`) and Jung A's five branches. The `dashboard` branch was merged as PR #8 and deleted on 2026-10-22; a new one
 carried the preview link fix (PR #9), merged and deleted the same day. The next dashboard work starts a new `dashboard`
 from `main` (`DCD-D25`); the owner asked on 2026-10-20 that no agent branch stay open once its work
 is merged, and that Jung A's branches are hers to decide.
@@ -25,6 +25,7 @@ is merged, and that Jung A's branches are hers to decide.
 | Branch | Created by · on | Last by · on | Age (days) | Ahead / behind `main` | Merged | Files | What it is | What to do |
 |---|---|---|---|---|---|---|---|---|
 | `main` = `origin/main` | — | D-ivyy (the PR #9 merge) · 2026-10-22 | 0 | — | — | — | The line of record; pushed directly by the owner | — |
+| `origin/deploy/damage-curves` | Divi-patel (agent session) · 2026-10-22 | Divi-patel · 2026-10-22 | 0 | 1 / 0 | no | — | **The dashboard's deploy branch** (`DCD-D36`): a push deploys the Cloud Run service `damage-curves`; it carries the deploy workflow, the Dockerfile and the server's gzip and caching. A release pointer, not a work branch | **Keep.** Move it to `main` to show the team a new version; merge its deploy files into `main` by PR |
 | `origin/cell/real-estate` | jll-l · (fully contained) | jll-l · 2026-10-19 | 3 | 0 / — | **yes** | 0 | Jung A's working branch for the five Real Estate cells; merged into `main` on 2026-10-19 | **Merged — safe to delete whenever Jung A is done pushing to it.** Nothing is lost |
 | `origin/cell/flood-real-estate` | jll-l · (fully contained) | jll-l · 2026-10-12 | 10 | 0 / — | **yes** | 0 | The first Real Estate cell, superseded by `cell/real-estate` | **Delete** (merged; with Jung A's OK) |
 | `origin/cell/winter-storm-solar-wind` | jll-l · 2026-10-12 | jll-l · 2026-10-15 | 7 | 2 / — | no | 55 | Two proposed cells (`winter_storm_solar` screening proxy, `winter_storm_wind` fail-closed), five notebooks, five scripts | **Decision needed (RO3):** rebase onto `main` and merge as proposals, or close with a note. It falls further behind every day |
