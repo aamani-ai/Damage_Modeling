@@ -46,13 +46,15 @@
    (`--source worktree`); since the merge the data on `main` is built from `main` at `85aedf6`. Nine Hazard paths are not on
    Hazard's main and say so. A preview linked one hurricane × solar source through the gitignored `infrasure-damage-curves`
    folder, writing a path on this machine into a GitHub link; the build from `main` has no such folder and says *no link*.
+   Fixed on [PR #9](https://github.com/aamani-ai/Damage_Modeling/pull/9): a source links only to a file git sees inside this
+   repository, so a preview now equals the build from `main` apart from its commit and label.
 9. **Checks.** The owner's review has an addendum record at [`evidence/5db1b4b/REVIEW.md`](../../../plans/damage_curve_dashboard/evidence/5db1b4b/REVIEW.md). In it, all six mechanical checks pass; so do the picture's checks (13 of 13 views, the table click, full screen) and the keyboard walk. 175 tests pass (9 new), 36 validators pass, 0 broken links, typecheck and lint clean; the data build's
    structural checks pass and four data checks fail as reported (`source_ids`, `source_links`, `extracted_sources`, the new
    `hazard_links`). Look review at [`evidence/2e49bb4/REVIEW.md`](../../../plans/damage_curve_dashboard/evidence/2e49bb4/REVIEW.md):
    seven of nine pass; the cold read needs a named reader, the owner's review is open.
-10. **Next.** The owner's next feedback, built on a new `dashboard` branch from `main`. Other open work: the preview
-    build's resolver must not follow a gitignored folder outside the repository (bullet 8); Hazard's co-ownership of the
-    crosswalks; and the cell owners' answers to the *inferred* rows.
+10. **Next.** Merge PR #9 (the preview link fix, bullet 8) once its CI passes, then the owner's next feedback on a new
+    `dashboard` branch from `main`. Other open work: Hazard's co-ownership of the crosswalks, and the cell owners' answers
+    to the *inferred* rows.
 
 ## Where to look
 

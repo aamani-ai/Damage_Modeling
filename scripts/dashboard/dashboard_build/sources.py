@@ -15,7 +15,7 @@ from __future__ import annotations
 import functools
 import re
 import subprocess
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 from .common import CHECKOUT, ROOT, rel, sha256
@@ -55,26 +55,44 @@ MARKER_RE = re.compile(r"^(NO_SOURCE|NO_DIRECT_SOURCE|GOVERNANCE_CONTRACT|SCOPE$
 
 @functools.lru_cache(maxsize=1)
 def _git_visible() -> frozenset[str] | None:
-    """Repository paths git can see (tracked, or new and not ignored). A preview build reads the working tree, which may
-    hold gitignored local mirrors (docs/source_drops/extracted/); a main build reads an export that never has them."""
+    """Repository files git can see (tracked, or new and not ignored), with their folders. A preview build reads the
+    working tree, which may hold gitignored local mirrors (docs/source_drops/extracted/) and gitignored links to other
+    checkouts (infrasure-damage-curves/ → the old repository); a main build reads an export that never has them."""
     if ROOT != CHECKOUT:
         return None
-    done = subprocess.run(["git", "-C", str(CHECKOUT), "ls-files", "--cached", "--others", "--exclude-standard", "docs"], capture_output=True, text=True)
-    return frozenset(done.stdout.splitlines()) if done.returncode == 0 else None
+    done = subprocess.run(["git", "-C", str(CHECKOUT), "ls-files", "-z", "--cached", "--others", "--exclude-standard"], capture_output=True, text=True)
+    if done.returncode != 0:
+        return None
+    files = [f for f in done.stdout.split("\0") if f]
+    return frozenset(files) | frozenset(str(d) for f in files for d in PurePosixPath(f).parents if str(d) != ".")
+
+
+def _inside(p: Path) -> bool:
+    """The path stays inside the repository being read once every link on the way is followed."""
+    try:
+        p.resolve().relative_to(ROOT.resolve())
+        return True
+    except ValueError:
+        return False
 
 
 def _visible(p: Path) -> bool:
+    """A path a link may point at: inside the repository and seen by git. A preview never links a gitignored mirror or a
+    file reached through a gitignored link to another checkout; on GitHub neither exists."""
+    if not _inside(p):
+        return False
     seen = _git_visible()
     return seen is None or rel(p) in seen
 
 
 def _repo_path(path: str, base_dir: Path | None) -> Path | None:
-    """A repository file named by a register: an exact path, a path beside the register, or a unique file name under docs/."""
+    """A repository file named by a register: an exact path, a path beside the register, or a unique file name under docs/.
+    Only a path git sees inside this repository counts; a path through a folder outside it is no repository file."""
     p = path.strip("/").split("#")[0].split(";")[0].strip()
     if not p or p.startswith("http"):
         return None
     for cand in ([ROOT / p] + ([base_dir / p] if base_dir else [])):
-        if cand.exists():
+        if cand.exists() and _visible(cand):
             return cand
     name = Path(p).name
     if "." in name and len(name) > 6:
