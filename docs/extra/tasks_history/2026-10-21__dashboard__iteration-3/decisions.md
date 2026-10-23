@@ -1,6 +1,6 @@
 # Decisions — damage-curve dashboard, iteration 3 (2026-10-21)
 
-The owner's rulings are `DCD-D20`–`D34` in the [plan](../../../plans/damage_curve_dashboard/decisions.md). These are the
+The owner's rulings are `DCD-D20`–`D35` in the [plan](../../../plans/damage_curve_dashboard/decisions.md). These are the
 choices made while building them, with the reason for each; none is an owner ruling.
 
 | # | Decision | Why |
@@ -36,3 +36,5 @@ choices made while building them, with the reason for each; none is an owner rul
 | 29 | The cell page's order is the rail, the steps, the curve, what it covers, the open blocks, *For Hazard*; the keyboard walk follows it | `DCD-D33` amends `DCD-D27`'s order |
 | 30 | A curve-glyph `app/icon.svg` | The browser asked for a favicon and logged a 404 on every page |
 | 31 | A summary keeps an acronym's capitals after a colon or a dash ("FEMA Hazus …", not "fEMA") | Found by the addendum review on four cell headers; the summary lowercased every first letter |
+| 32 | PR #8 merged with a merge commit (`85aedf6`), not a squash | The review records name commits by SHA (`2e49bb4`, `4e31ac6`, `5db1b4b`); a squash would leave them unreachable from `main` |
+| 33 | After the merge, the data on `main` is built from `main` and committed on `main`; the `dashboard` branch is deleted on `origin` and locally | `DCD-D30` and the handoff's plan for the merge; the owner's branch policy of 2026-10-20, no agent branch stays open once merged; the next iteration starts a new `dashboard` from `main` (`DCD-D25`) |

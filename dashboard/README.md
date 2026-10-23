@@ -12,7 +12,7 @@ record: [`docs/plans/damage_curve_dashboard/`](../docs/plans/damage_curve_dashbo
 [`08`](../docs/extra/discussion/damage_curve_dashboard/08_categories_and_construction.md) and
 [`09`](../docs/extra/discussion/damage_curve_dashboard/09_asset_spine_coverage_and_faq.md)), on the one `dashboard`
 branch ([PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8)). The owner reviewed it on the running app and it
-was revised the same day (`DCD-D33`, `D34`):
+was revised the same day (`DCD-D33`, `D34`); it was accepted and merged into `main` on 2026-10-22 (`DCD-D35`):
 
 - **The spine.** The top bar is *Library · Power plants ▾ · Real estate ▾ · Grid infrastructure ▾ · Review*, from the
   Digital Twin's taxonomy ([`spine.json`](../docs/contracts/twin_crosswalks/spine.json)); the library has one row
@@ -37,7 +37,8 @@ was revised the same day (`DCD-D33`, `D34`):
 - **Around the pages.** One Review page and the [FAQ](../docs/faq.md). There is no build date and no *internal* chip.
   What the dashboard was built from (the commit, the build checks, the receipt) sits behind one *About this data*
   link in every page's footer (`DCD-D31`, `D32`).
-- **Built from `main`** (`DCD-D30`): the data on this branch is a labelled preview, rebuilt from `main` at the merge.
+- **Built from `main`** (`DCD-D30`): the data on `main` is built from `main`, at `85aedf6` since the merge. A branch carries
+  a labelled preview of its own data until it merges.
 
 Earlier records: iteration 2 at [`evidence/b0ff718/REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/b0ff718/REVIEW.md),
 V0 (accepted 2026-10-20, `DCD-D17`) at [`evidence/3f9d516/`](../docs/plans/damage_curve_dashboard/evidence/3f9d516/REVIEW.md)

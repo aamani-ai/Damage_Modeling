@@ -1,9 +1,9 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
-updated: 2026-10-21
+updated: 2026-10-22
 status: active
-scope: Decision register for the damage-curve dashboard plan (DCD-D*). D01–D12 are the owner's rulings on gates G1–G12 of the discussion node; D13–D16 record the owner's directions and the agent's engineering decisions inside them; D17 records the owner's acceptance of V0; D18–D19 iteration 2; D20–D25 the asset spine, the twin picture, the crosswalks, the FAQ and one branch; D26–D32 the rulings on G14–G19 that iteration 3 builds; D33–D34 the owner's review of iteration 3 on the running app.
+scope: Decision register for the damage-curve dashboard plan (DCD-D*). D01–D12 are the owner's rulings on gates G1–G12 of the discussion node; D13–D16 record the owner's directions and the agent's engineering decisions inside them; D17 records the owner's acceptance of V0; D18–D19 iteration 2; D20–D25 the asset spine, the twin picture, the crosswalks, the FAQ and one branch; D26–D32 the rulings on G14–G19 that iteration 3 builds; D33–D34 the owner's review of iteration 3 on the running app; D35 its acceptance and the merge.
 -->
 
 # Damage-curve dashboard — decisions
@@ -390,3 +390,23 @@ it?")*
 choosing a system zoomed onto its nearest single instance, one module out of thousands, so the model seemed to vanish.
 The tools are the ones the twin's own app offers, used through the viewer's `setModes`. The miniature makes *has a
 curve* show the curve itself, not only a colour.
+
+## DCD-D35 — Iteration 3 accepted and merged; the data on `main` built from `main`
+
+**Decision:** The owner accepted iteration 3 on the running app on 2026-10-22 and asked for the merge (quoted below).
+[PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8) merged into `main` as merge commit `85aedf6`, with
+iterations 2 and 3. The data on `main` was then rebuilt from `main` at `85aedf6` (`DCD-D30`), which changed three
+things:
+
+- The preview banner is gone, and the files link to that commit.
+- One hurricane × solar source, which the branch preview had linked through a local folder outside the repository,
+  now says *no link in the register*.
+- That source is now a task on the Review page.
+
+The `dashboard` branch was deleted on `origin` and locally under the branch policy, since its work is merged. The next
+dashboard iteration starts a new `dashboard` from `main` (`DCD-D25`). *(Divy, 2026-10-22: "I accept iteration 3. Merge
+PR #8 into main and rebuild the dashboard data from main.")*
+
+**Reason:** `DCD-D10`: a slice merges when the owner accepts it on the running app. The merge commit is a true merge,
+not a squash, because the review records name commits by SHA (`2e49bb4`, `4e31ac6`, `5db1b4b`) and a squash would
+leave them unreachable from `main`.

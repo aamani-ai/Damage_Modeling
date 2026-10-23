@@ -1,7 +1,7 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
-updated: 2026-10-21
+updated: 2026-10-22
 status: active
 scope: Build the damage-curve dashboard as a local internal instrument in this repository — a Python data build over the catalogue and the cells, then a Next.js app with the library, asset view, curve cell page with the derivation trail, curve dossier, occurrence page and review queue — verified by the data-build checks, the look review and the owner's feedback on the running slices; hosting after local feedback.
 -->
@@ -39,6 +39,10 @@ scope: Build the damage-curve dashboard as a local internal instrument in this r
 > picture gained the twin's tools, a full-screen view, each part's curve in miniature beside it and level columns.
 > The systems × hazards table now selects in the picture. Addendum review at
 > [`evidence/5db1b4b/`](evidence/5db1b4b/REVIEW.md).
+>
+> **2026-10-22: iteration 3 accepted and merged** (`DCD-D35`). The owner accepted it on the running app, and
+> [PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8) merged into `main` as `85aedf6`. The dashboard's data on
+> `main` is built from `main` at that commit. The next iteration starts a new `dashboard` branch from `main`.
 
 ## Outcome first
 
@@ -143,7 +147,9 @@ Shared with Hazard: the look principle at `Hazard_modeling/docs/principles/analy
   screen, curves in miniature and a clickable table. All of it was built the same day. Addendum review at
   [`evidence/5db1b4b/REVIEW.md`](evidence/5db1b4b/REVIEW.md): screens, the keyboard walk, copy and the picture's
   checks pass.
-- [ ] Gate: the owner accepts iteration 3; merge to `main` and rebuild `dashboard/data/` from `main` (`DCD-D10`, `D30`)
+- [x] Gate: the owner accepts iteration 3; merge to `main` and rebuild `dashboard/data/` from `main` (`DCD-D10`, `D30`) —
+  *2026-10-22: accepted (`DCD-D35`); PR #8 merged as `85aedf6`; the data rebuilt from `main` at `85aedf6` and committed
+  on `main`*
 
 - [x] The owner runs it locally and gives feedback on the screens; findings become rows here, not reopened gates unless a ruling is contradicted — *2026-10-20: the owner asked to review the live app, not screenshots; the review page `/v0` was added and the owner accepted V0 (`DCD-D17`). The page's questions 2–6 stay open*
 - [ ] Gate: the owner accepts V0's screenshot set; merge to `main` — *accepted 2026-10-20 (`DCD-D17`); the cold read (check 7) and the merge are pending*

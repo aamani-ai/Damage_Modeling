@@ -2,8 +2,10 @@
 
 ## 10-bullet summary
 
-1. **Iteration 3 is on the one `dashboard` branch** ([PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8), open,
-   **not merged**). The commits, in order: code at `b5db9a1` and `2e49bb4`; wording fixes after the look review; G19's
+1. **Iteration 3 is merged into `main`** ([PR #8](https://github.com/aamani-ai/Damage_Modeling/pull/8), merge commit
+   `85aedf6`, 2026-10-22). The owner accepted it on the running app (`DCD-D35`), the data on `main` was rebuilt from
+   `main`, and the `dashboard` branch was deleted under the branch policy; the next iteration starts a new one from
+   `main`. The commits on the branch, in order: code at `b5db9a1` and `2e49bb4`; wording fixes after the look review; G19's
    rest at `4e31ac6`; the owner's review of iteration 3 (bullet 2); the preview data after each. The owner reviews it on
    the running app at `localhost:3211` (`npm run build && npm run start` in `dashboard/`).
 2. **The rulings it builds** are `DCD-D20`–`D32` (G13–G23 of discussions `08` and `09`; G14–G18 and the rest of G19
@@ -40,14 +42,17 @@
 7. **Review** is one page about curves by category and cell (30 open items in 17 cells); `/v0` is gone. The
    [FAQ](../../../faq.md) is one Markdown file of 14 questions, parsed and link-checked by the build, rendered at `/faq`.
 8. **Built from main** (`DCD-D30`): `build_dashboard_data.py` reads an export of `origin/main` by default and Hazard on its
-   `origin/main` through git; until this branch merges, `main` has no crosswalks, so the build refuses with a message and the
-   branch carries a labelled preview (`--source worktree`). Nine Hazard paths are not on Hazard's main and say so.
+   `origin/main` through git. While the branch was open, `main` had no crosswalks, so the branch carried a labelled preview
+   (`--source worktree`); since the merge the data on `main` is built from `main` at `85aedf6`. Nine Hazard paths are not on
+   Hazard's main and say so. A preview linked one hurricane × solar source through the gitignored `infrasure-damage-curves`
+   folder, writing a path on this machine into a GitHub link; the build from `main` has no such folder and says *no link*.
 9. **Checks.** The owner's review has an addendum record at [`evidence/5db1b4b/REVIEW.md`](../../../plans/damage_curve_dashboard/evidence/5db1b4b/REVIEW.md). In it, all six mechanical checks pass; so do the picture's checks (13 of 13 views, the table click, full screen) and the keyboard walk. 175 tests pass (9 new), 36 validators pass, 0 broken links, typecheck and lint clean; the data build's
    structural checks pass and four data checks fail as reported (`source_ids`, `source_links`, `extracted_sources`, the new
    `hazard_links`). Look review at [`evidence/2e49bb4/REVIEW.md`](../../../plans/damage_curve_dashboard/evidence/2e49bb4/REVIEW.md):
    seven of nine pass; the cold read needs a named reader, the owner's review is open.
-10. **Next.** The owner's acceptance of iteration 3 on the running app; Hazard's co-ownership of the crosswalks and the
-    cell owners' answers to the *inferred* rows; at the merge, rebuild `dashboard/data/` from `main` and commit it there.
+10. **Next.** The owner's next feedback, built on a new `dashboard` branch from `main`. Other open work: the preview
+    build's resolver must not follow a gitignored folder outside the repository (bullet 8); Hazard's co-ownership of the
+    crosswalks; and the cell owners' answers to the *inferred* rows.
 
 ## Where to look
 

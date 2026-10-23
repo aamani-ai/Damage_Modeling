@@ -1,7 +1,7 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-19
-updated: 2026-10-21
+updated: 2026-10-22
 status: settled
 scope: Reasoning node — what the damage-curve dashboard is for, what it shows, how it looks, how a curve's derivation chain is shown, and what it connects to, agreed before any build; owner gates G1–G12 ruled 2026-10-20. Promoted to the plan at docs/plans/damage_curve_dashboard/ (active) and to the shared look principle in Hazard_modeling/docs/principles/. Reopened 2026-10-21 by the owner's review of the running iteration 2 — 08 (asset categories, page order, evidence words, review, main only, builder information), gates G13–G19. Settled again 2026-10-21: G13–G23 ruled (DCD-D20–D32) and built as iteration 3. G15's order and G20's picture amended the same day by the owner's review of the running iteration 3 (DCD-D33, D34).
 -->
@@ -216,8 +216,10 @@ are a local dashboard and hosting comes later (`DCD-D13`); feedback is given on 
           4. V1 → V2 per the plan, each slice with the same review; hosting (H1) after local feedback
  done ──► 5. V0 (PR #5, #6) merged; iteration 2 built and on PR #7 (open); Divy reviewed it running, 2026-10-21
  done ──► 6. Iteration 4 of this node: 08 and 09 put G13–G23 to Divy; ruled 2026-10-21 (DCD-D20–D31)
- now  ──► 7. The dashboard's iteration 3 on the one `dashboard` branch (PR #8), with G19 complete; Divy reviewed
-             it on the running app (2026-10-21; DCD-D33, D34, built the same day); acceptance and the merge next
+ done ──► 7. The dashboard's iteration 3 on the one `dashboard` branch (PR #8), with G19 complete; Divy reviewed
+             it on the running app (2026-10-21; DCD-D33, D34, built the same day), accepted it and PR #8 merged
+             (2026-10-22, DCD-D35)
+ next ──► 8. The next iteration from the owner's feedback, on a new `dashboard` branch from `main`
    in parallel: the "does it happen?" searches on the battery rows (04 §6) — they do not wait for a screen.
 ```
 

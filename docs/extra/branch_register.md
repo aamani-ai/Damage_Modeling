@@ -1,7 +1,7 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
-updated: 2026-10-21
+updated: 2026-10-22
 status: active
 scope: The branch register — every branch of aamani-ai/Damage_Modeling with who created it, when, when it was last touched, how it stands against main and what should happen to it — plus the branch policy proposed for the owner's confirmation. Refreshed with scripts/reference_helpers/branch_register.py in the same commit as any branch action.
 -->
@@ -14,25 +14,25 @@ and should be deleted." This file is that idea, kept current. The facts come fro
 [`scripts/reference_helpers/branch_register.py`](../../scripts/reference_helpers/branch_register.py); the
 **What to do** column is judgment, and a branch is never deleted without its creator's agreement.*
 
-## The register (2026-10-21, one dashboard branch)
+## The register (2026-10-22, after the dashboard merge)
 
 Every branch an agent session opened this week is merged or gone (below). What remains on `origin` is
-`main`, the one `dashboard` branch, and Jung A's five branches; the owner asked on 2026-10-20 that no agent branch stay open once its work
+`main` and Jung A's five branches. The `dashboard` branch was merged as PR #8 and deleted on 2026-10-22, and the next
+dashboard iteration starts a new `dashboard` from `main` (`DCD-D25`); the owner asked on 2026-10-20 that no agent branch stay open once its work
 is merged, and that Jung A's branches are hers to decide.
 
 | Branch | Created by · on | Last by · on | Age (days) | Ahead / behind `main` | Merged | Files | What it is | What to do |
 |---|---|---|---|---|---|---|---|---|
-| `main` = `origin/main` | — | Divi-patel · 2026-10-20 | 0 | — | — | — | The line of record; pushed directly by the owner | — |
-| `origin/dashboard` | Divi-patel (agent session) · 2026-10-21 | Divi-patel · 2026-10-21 | 0 | ahead of `main`, 0 behind | no | — | **The one dashboard branch** (`DCD-D25`): iteration 2, decision sheets `08` and `09`, the rulings `DCD-D20…D25`. **PR #7.** Checked out in the owner's main checkout; the local dashboard on `:3211` serves it | **Active.** Iterate here; merge to `main` when the owner accepts a slice (`DCD-D10`), then delete |
-| `origin/cell/real-estate` | jll-l · (fully contained) | jll-l · 2026-10-19 | 1 | 0 / — | **yes** | 0 | Jung A's working branch for the five Real Estate cells; merged into `main` on 2026-10-19 | **Merged — safe to delete whenever Jung A is done pushing to it.** Nothing is lost |
-| `origin/cell/flood-real-estate` | jll-l · (fully contained) | jll-l · 2026-10-12 | 8 | 0 / — | **yes** | 0 | The first Real Estate cell, superseded by `cell/real-estate` | **Delete** (merged; with Jung A's OK) |
-| `origin/cell/winter-storm-solar-wind` | jll-l · 2026-10-12 | jll-l · 2026-10-15 | 5 | 2 / — | no | 55 | Two proposed cells (`winter_storm_solar` screening proxy, `winter_storm_wind` fail-closed), five notebooks, five scripts | **Decision needed (RO3):** rebase onto `main` and merge as proposals, or close with a note. It falls further behind every day |
-| `origin/validation/damage-core` | jll-l · 2026-09-15 | jll-l · 2026-09-15 | 35 | 1 / — | no | 1 | `docs/extra/learning_logs/damage_core/VALIDATION_REPORT.md` — docs only | **Merge as a doc, then delete.** No model change; review evidence that only lives on a branch is invisible |
-| `origin/review/cell-curation-audit` | jll-l · 2026-08-27 | jll-l · 2026-08-27 | 54 | 1 / — | no | 2 | Standard-10 review scorecards and summary (2026-08-27) under `docs/extra/learning_logs/` — docs only | **Merge as docs, then delete.** Same reason |
+| `main` = `origin/main` | — | D-ivyy (the PR #8 merge) · 2026-10-22 | 0 | — | — | — | The line of record; pushed directly by the owner | — |
+| `origin/cell/real-estate` | jll-l · (fully contained) | jll-l · 2026-10-19 | 3 | 0 / — | **yes** | 0 | Jung A's working branch for the five Real Estate cells; merged into `main` on 2026-10-19 | **Merged — safe to delete whenever Jung A is done pushing to it.** Nothing is lost |
+| `origin/cell/flood-real-estate` | jll-l · (fully contained) | jll-l · 2026-10-12 | 10 | 0 / — | **yes** | 0 | The first Real Estate cell, superseded by `cell/real-estate` | **Delete** (merged; with Jung A's OK) |
+| `origin/cell/winter-storm-solar-wind` | jll-l · 2026-10-12 | jll-l · 2026-10-15 | 7 | 2 / — | no | 55 | Two proposed cells (`winter_storm_solar` screening proxy, `winter_storm_wind` fail-closed), five notebooks, five scripts | **Decision needed (RO3):** rebase onto `main` and merge as proposals, or close with a note. It falls further behind every day |
+| `origin/validation/damage-core` | jll-l · 2026-09-15 | jll-l · 2026-09-15 | 37 | 1 / — | no | 1 | `docs/extra/learning_logs/damage_core/VALIDATION_REPORT.md` — docs only | **Merge as a doc, then delete.** No model change; review evidence that only lives on a branch is invisible |
+| `origin/review/cell-curation-audit` | jll-l · 2026-08-27 | jll-l · 2026-08-27 | 56 | 1 / — | no | 2 | Standard-10 review scorecards and summary (2026-08-27) under `docs/extra/learning_logs/` — docs only | **Merge as docs, then delete.** Same reason |
 
 *"Behind" is left blank for Jung A's rows because `main` moved by six merge commits on 2026-10-20; the script
 prints the current number.* Tags: none. Pull requests on `origin`: #1 (`codex/publish-v2-5-implementation`,
-merged 2026-06-25); #2, #3, #4, #5 and #6 merged 2026-10-20 (below); #7 open, from `dashboard`. Remotes: `origin` only
+merged 2026-06-25); #2, #3, #4, #5 and #6 merged 2026-10-20 (below); #7 closed when its branch was renamed to `dashboard`, its commits carried by #8; #8 merged 2026-10-22 (below). Remotes: `origin` only
 (`aamani-ai/Damage_Modeling`); the personal fork `Divi-patel/Damage_Modeling` is a dormant mirror at
 `a71ac72`, not a remote. No local-only branches or extra worktrees remain (cleaned 2026-10-20 and 2026-10-21).
 
@@ -40,6 +40,7 @@ merged 2026-06-25); #2, #3, #4, #5 and #6 merged 2026-10-20 (below); #7 open, fr
 
 | When | Branch | What happened |
 |---|---|---|
+| 2026-10-22 | `dashboard` — **PR #8**, the damage-curve dashboard's iterations 2 and 3, accepted by the owner on the running app (`DCD-D35`) | Merged into `main` as merge commit `85aedf6`, which keeps every commit the review records name; branch deleted on `origin` and locally under the branch policy; the next dashboard iteration starts a new `dashboard` from `main` (`DCD-D25`) |
 | 2026-10-21 | `claude/dashboard-iteration-2-8df11e` | **Renamed to `dashboard`** on GitHub (PR #7 follows it); the old local branch and its session worktree removed |
 | 2026-10-21 | `claude/dashboard-iteration-2-da2f33` | A duplicate build of iteration 2 by a second session that had failed to start and was restarted; superseded by PR #7; deleted locally and on `origin`, worktree removed |
 | 2026-10-21 | a detached scratch checkout of PR #6 under the V0 session's scratchpad | Worktree removed |

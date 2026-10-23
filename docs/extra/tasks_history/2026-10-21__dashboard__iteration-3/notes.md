@@ -36,6 +36,12 @@ The look-review runs are in [`dashboard/scripts/look-review/`](../../../../dashb
   table now calls `reset()` after `select()`, and only *Focus* zooms.
 - **"form" inside other words.** The shape-parameter match first caught `platform`, `local_depth_transform` and
   `lifeform_default`; the name test needs word edges (`(?<![a-z])form(?![a-z])`).
+- **The disk filled up during the review.** `next build` failed with `ENOSPC` with about 117 MB free, and the shell could
+  not even write its output file; the rebuild ran once the owner had freed several GB. A failed build in its export phase
+  would have deleted the served pages, so it was not retried on a full disk.
+- **A preview can link through a gitignored folder.** One hurricane × solar source resolved through the
+  `infrasure-damage-curves` symlink, and its GitHub link carried a path on this machine. A build from `main` (an export with
+  no such folder) says *no link* instead, and the Review page lists it.
 - **The keyboard walk follows the page order.** With the steps above the curve, `keywalk.mjs` reaches the steps before
   the part selector; the walk was reordered and passes in both themes.
 
