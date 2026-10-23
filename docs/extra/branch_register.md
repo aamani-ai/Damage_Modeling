@@ -1,7 +1,7 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
-updated: 2026-10-22
+updated: 2026-10-23
 status: active
 scope: The branch register — every branch of aamani-ai/Damage_Modeling with who created it, when, when it was last touched, how it stands against main and what should happen to it — plus the branch policy proposed for the owner's confirmation. Refreshed with scripts/reference_helpers/branch_register.py in the same commit as any branch action.
 -->
@@ -14,27 +14,28 @@ and should be deleted." This file is that idea, kept current. The facts come fro
 [`scripts/reference_helpers/branch_register.py`](../../scripts/reference_helpers/branch_register.py); the
 **What to do** column is judgment, and a branch is never deleted without its creator's agreement.*
 
-## The register (2026-10-22, after the dashboard merge)
+## The register (2026-10-23, the dashboard hosted)
 
-Every branch an agent session opened this week is merged or gone (below). What remains on `origin` is
-`main`, the dashboard's deploy branch `deploy/damage-curves` (`DCD-D36`) and Jung A's five branches. The `dashboard` branch was merged as PR #8 and deleted on 2026-10-22; a new one
-carried the preview link fix (PR #9), merged and deleted the same day. The next dashboard work starts a new `dashboard`
-from `main` (`DCD-D25`); the owner asked on 2026-10-20 that no agent branch stay open once its work
-is merged, and that Jung A's branches are hers to decide.
+Every branch an agent session opened this week is merged or gone (below), except the dashboard's deploy branch. What
+remains on `origin` is `main`, that deploy branch `deploy/damage-curves` (`DCD-D36`) and Jung A's five branches. The
+`dashboard` branch was merged as PR #8 and deleted on 2026-10-22; a new one carried the preview link fix (PR #9), merged
+and deleted the same day. The next dashboard work starts a new `dashboard` from `main` (`DCD-D25`). The owner asked on
+2026-10-20 that no agent branch stay open once its work is merged, and that Jung A's branches are Jung A's to decide. The
+deploy branch is the one exception: a push to it deploys the dashboard, so it stays after its PR (#10) merges.
 
 | Branch | Created by · on | Last by · on | Age (days) | Ahead / behind `main` | Merged | Files | What it is | What to do |
 |---|---|---|---|---|---|---|---|---|
-| `main` = `origin/main` | — | D-ivyy (the PR #9 merge) · 2026-10-22 | 0 | — | — | — | The line of record; pushed directly by the owner | — |
-| `origin/deploy/damage-curves` | Divi-patel (agent session) · 2026-10-22 | Divi-patel · 2026-10-22 | 0 | 1 / 0 | no | — | **The dashboard's deploy branch** (`DCD-D36`): a push deploys the Cloud Run service `damage-curves`; it carries the deploy workflow, the Dockerfile and the server's gzip and caching. A release pointer, not a work branch | **Keep.** Move it to `main` to show the team a new version; merge its deploy files into `main` by PR |
-| `origin/cell/real-estate` | jll-l · (fully contained) | jll-l · 2026-10-19 | 3 | 0 / — | **yes** | 0 | Jung A's working branch for the five Real Estate cells; merged into `main` on 2026-10-19 | **Merged — safe to delete whenever Jung A is done pushing to it.** Nothing is lost |
-| `origin/cell/flood-real-estate` | jll-l · (fully contained) | jll-l · 2026-10-12 | 10 | 0 / — | **yes** | 0 | The first Real Estate cell, superseded by `cell/real-estate` | **Delete** (merged; with Jung A's OK) |
-| `origin/cell/winter-storm-solar-wind` | jll-l · 2026-10-12 | jll-l · 2026-10-15 | 7 | 2 / — | no | 55 | Two proposed cells (`winter_storm_solar` screening proxy, `winter_storm_wind` fail-closed), five notebooks, five scripts | **Decision needed (RO3):** rebase onto `main` and merge as proposals, or close with a note. It falls further behind every day |
-| `origin/validation/damage-core` | jll-l · 2026-09-15 | jll-l · 2026-09-15 | 37 | 1 / — | no | 1 | `docs/extra/learning_logs/damage_core/VALIDATION_REPORT.md` — docs only | **Merge as a doc, then delete.** No model change; review evidence that only lives on a branch is invisible |
-| `origin/review/cell-curation-audit` | jll-l · 2026-08-27 | jll-l · 2026-08-27 | 56 | 1 / — | no | 2 | Standard-10 review scorecards and summary (2026-08-27) under `docs/extra/learning_logs/` — docs only | **Merge as docs, then delete.** Same reason |
+| `main` = `origin/main` | — | Divi-patel · 2026-10-22 | 1 | — | — | — | The line of record; pushed directly by the owner | — |
+| `origin/deploy/damage-curves` | Divi-patel (agent session) · 2026-10-22 | Divi-patel · 2026-10-23 | 0 | 3 / 0 | no | 12 | **The dashboard's deploy branch** (`DCD-D36`): a push that touches the dashboard's files deploys the Cloud Run service `damage-curves`; it carries the deploy workflow, the Dockerfile and the server's gzip and caching. A release pointer, not a work branch. **PR #10** brings its files into `main` | **Keep, also after PR #10 merges.** Merge PR #10 with a merge commit, never a squash, so the branch stays an ancestor of `main`; then show the team a new version with `git push origin main:deploy/damage-curves` |
+| `origin/cell/real-estate` | jll-l · (fully contained) | jll-l · 2026-10-19 | 4 | 0 / — | **yes** | 0 | Jung A's working branch for the five Real Estate cells; merged into `main` on 2026-10-19 | **Merged — safe to delete whenever Jung A is done pushing to it.** Nothing is lost |
+| `origin/cell/flood-real-estate` | jll-l · (fully contained) | jll-l · 2026-10-12 | 11 | 0 / — | **yes** | 0 | The first Real Estate cell, superseded by `cell/real-estate` | **Delete** (merged; with Jung A's OK) |
+| `origin/cell/winter-storm-solar-wind` | jll-l · 2026-10-12 | jll-l · 2026-10-15 | 8 | 2 / — | no | 55 | Two proposed cells (`winter_storm_solar` screening proxy, `winter_storm_wind` fail-closed), five notebooks, five scripts | **Decision needed (RO3):** rebase onto `main` and merge as proposals, or close with a note. It falls further behind every day |
+| `origin/validation/damage-core` | jll-l · 2026-09-15 | jll-l · 2026-09-15 | 38 | 1 / — | no | 1 | `docs/extra/learning_logs/damage_core/VALIDATION_REPORT.md` — docs only | **Merge as a doc, then delete.** No model change; review evidence that only lives on a branch is invisible |
+| `origin/review/cell-curation-audit` | jll-l · 2026-08-27 | jll-l · 2026-08-27 | 57 | 1 / — | no | 2 | Standard-10 review scorecards and summary (2026-08-27) under `docs/extra/learning_logs/` — docs only | **Merge as docs, then delete.** Same reason |
 
 *"Behind" is left blank for Jung A's rows because `main` moved by six merge commits on 2026-10-20; the script
 prints the current number.* Tags: none. Pull requests on `origin`: #1 (`codex/publish-v2-5-implementation`,
-merged 2026-06-25); #2, #3, #4, #5 and #6 merged 2026-10-20 (below); #7 closed when its branch was renamed to `dashboard`, its commits carried by #8; #8 and #9 merged 2026-10-22 (below). Remotes: `origin` only
+merged 2026-06-25); #2, #3, #4, #5 and #6 merged 2026-10-20 (below); #7 closed when its branch was renamed to `dashboard`, its commits carried by #8; #8 and #9 merged 2026-10-22 (below); #10 open (2026-10-23), from `deploy/damage-curves`. Remotes: `origin` only
 (`aamani-ai/Damage_Modeling`); the personal fork `Divi-patel/Damage_Modeling` is a dormant mirror at
 `a71ac72`, not a remote. No local-only branches or extra worktrees remain (cleaned 2026-10-20 and 2026-10-21).
 
