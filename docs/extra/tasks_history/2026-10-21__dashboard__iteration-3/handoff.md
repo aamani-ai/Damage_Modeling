@@ -54,7 +54,7 @@
    seven of nine pass; the cold read needs a named reader, the owner's review is open.
 10. **Next.** The dashboard is hosted (`DCD-D36`): <https://damage-curves-wsd6lcl64q-uc.a.run.app>, behind IAP for aamani.ai accounts, deployed from
     the `deploy/damage-curves` branch (PR #9 merged first). Jung A opens it and takes ownership; the team sees it the
-    week after. [PR #10](https://github.com/aamani-ai/Damage_Modeling/pull/10) brings the hosting setup into `main`: merge it with a merge commit and keep the branch, which is the deploy trigger. The owner's next feedback goes on a new `dashboard` branch from `main`. Other open work: Hazard's co-ownership of the crosswalks, and the cell owners' answers
+    week after. [PR #10](https://github.com/aamani-ai/Damage_Modeling/pull/10) merged the hosting setup into `main` on 2026-10-23 (merge commit `54bcf28`); the branch stays, as the deploy trigger. The owner's next feedback goes on a new `dashboard` branch from `main`. Other open work: Hazard's co-ownership of the crosswalks, and the cell owners' answers
     to the *inferred* rows.
 
 ## Where to look

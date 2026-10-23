@@ -21,12 +21,12 @@ remains on `origin` is `main`, that deploy branch `deploy/damage-curves` (`DCD-D
 `dashboard` branch was merged as PR #8 and deleted on 2026-10-22; a new one carried the preview link fix (PR #9), merged
 and deleted the same day. The next dashboard work starts a new `dashboard` from `main` (`DCD-D25`). The owner asked on
 2026-10-20 that no agent branch stay open once its work is merged, and that Jung A's branches are Jung A's to decide. The
-deploy branch is the one exception: a push to it deploys the dashboard, so it stays after its PR (#10) merges.
+deploy branch is the one exception: a push to it deploys the dashboard, so it stayed after its PR (#10) merged on 2026-10-23.
 
 | Branch | Created by · on | Last by · on | Age (days) | Ahead / behind `main` | Merged | Files | What it is | What to do |
 |---|---|---|---|---|---|---|---|---|
-| `main` = `origin/main` | — | Divi-patel · 2026-10-22 | 1 | — | — | — | The line of record; pushed directly by the owner | — |
-| `origin/deploy/damage-curves` | Divi-patel (agent session) · 2026-10-22 | Divi-patel · 2026-10-23 | 0 | 3 / 0 | no | 12 | **The dashboard's deploy branch** (`DCD-D36`): a push that touches the dashboard's files deploys the Cloud Run service `damage-curves`; it carries the deploy workflow, the Dockerfile and the server's gzip and caching. A release pointer, not a work branch. **PR #10** brings its files into `main` | **Keep, also after PR #10 merges.** Merge PR #10 with a merge commit, never a squash, so the branch stays an ancestor of `main`; then show the team a new version with `git push origin main:deploy/damage-curves` |
+| `main` = `origin/main` | — | Divi-patel · 2026-10-23 | 0 | — | — | — | The line of record; pushed directly by the owner | — |
+| `origin/deploy/damage-curves` | Divi-patel (agent session) · 2026-10-22 | Divi-patel · 2026-10-23 | 0 | 0 / 2 | **yes** | 0 | **The dashboard's deploy branch** (`DCD-D36`): a push that touches the dashboard's files deploys the Cloud Run service `damage-curves`. A release pointer, not a work branch. Its files reached `main` through **PR #10** (merge commit `54bcf28`, 2026-10-23); `main` is ahead only by that merge and a records commit, with the same dashboard files | **Keep.** Show the team a new version with `git push origin main:deploy/damage-curves`, which fast-forwards |
 | `origin/cell/real-estate` | jll-l · (fully contained) | jll-l · 2026-10-19 | 4 | 0 / — | **yes** | 0 | Jung A's working branch for the five Real Estate cells; merged into `main` on 2026-10-19 | **Merged — safe to delete whenever Jung A is done pushing to it.** Nothing is lost |
 | `origin/cell/flood-real-estate` | jll-l · (fully contained) | jll-l · 2026-10-12 | 11 | 0 / — | **yes** | 0 | The first Real Estate cell, superseded by `cell/real-estate` | **Delete** (merged; with Jung A's OK) |
 | `origin/cell/winter-storm-solar-wind` | jll-l · 2026-10-12 | jll-l · 2026-10-15 | 8 | 2 / — | no | 55 | Two proposed cells (`winter_storm_solar` screening proxy, `winter_storm_wind` fail-closed), five notebooks, five scripts | **Decision needed (RO3):** rebase onto `main` and merge as proposals, or close with a note. It falls further behind every day |
@@ -35,7 +35,7 @@ deploy branch is the one exception: a push to it deploys the dashboard, so it st
 
 *"Behind" is left blank for Jung A's rows because `main` moved by six merge commits on 2026-10-20; the script
 prints the current number.* Tags: none. Pull requests on `origin`: #1 (`codex/publish-v2-5-implementation`,
-merged 2026-06-25); #2, #3, #4, #5 and #6 merged 2026-10-20 (below); #7 closed when its branch was renamed to `dashboard`, its commits carried by #8; #8 and #9 merged 2026-10-22 (below); #10 open (2026-10-23), from `deploy/damage-curves`. Remotes: `origin` only
+merged 2026-06-25); #2, #3, #4, #5 and #6 merged 2026-10-20 (below); #7 closed when its branch was renamed to `dashboard`, its commits carried by #8; #8 and #9 merged 2026-10-22, and #10 on 2026-10-23 (below). Remotes: `origin` only
 (`aamani-ai/Damage_Modeling`); the personal fork `Divi-patel/Damage_Modeling` is a dormant mirror at
 `a71ac72`, not a remote. No local-only branches or extra worktrees remain (cleaned 2026-10-20 and 2026-10-21).
 
@@ -43,6 +43,7 @@ merged 2026-06-25); #2, #3, #4, #5 and #6 merged 2026-10-20 (below); #7 closed w
 
 | When | Branch | What happened |
 |---|---|---|
+| 2026-10-23 | `deploy/damage-curves` — **PR #10**, the hosting setup (`DCD-D36`) | Merged into `main` as merge commit `54bcf28` on the owner's word ("Merge PR #10 into main with a merge commit and keep the deploy/damage-curves branch"); the branch kept as the deploy trigger, the one exception to the branch policy |
 | 2026-10-22 | `dashboard` — **PR #9**, the preview build's source links stay inside the repository | Merged into `main` as merge commit `01dbf18` on the owner's word ("Merge PR #9 first"); branch deleted on `origin` and locally under the branch policy |
 | 2026-10-22 | `dashboard` — **PR #8**, the damage-curve dashboard's iterations 2 and 3, accepted by the owner on the running app (`DCD-D35`) | Merged into `main` as merge commit `85aedf6`, which keeps every commit the review records name; branch deleted on `origin` and locally under the branch policy; the next dashboard iteration starts a new `dashboard` from `main` (`DCD-D25`) |
 | 2026-10-21 | `claude/dashboard-iteration-2-8df11e` | **Renamed to `dashboard`** on GitHub (PR #7 follows it); the old local branch and its session worktree removed |
