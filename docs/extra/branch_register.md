@@ -16,17 +16,20 @@ and should be deleted." This file is that idea, kept current. The facts come fro
 
 ## The register (2026-10-23, the dashboard hosted)
 
-Every branch an agent session opened this week is merged or gone (below), except the dashboard's deploy branch. What
-remains on `origin` is `main`, that deploy branch `deploy/damage-curves` (`DCD-D36`) and Jung A's five branches. The
+Every branch an agent session opened this week is merged or gone (below), except the dashboard's deploy branch and the open `dashboard` branch. What
+remains on `origin` is `main`, that deploy branch `deploy/damage-curves` (`DCD-D36`), the `dashboard` branch of PR #11 and
+Jung A's five branches. The
 `dashboard` branch was merged as PR #8 and deleted on 2026-10-22; a new one carried the preview link fix (PR #9), merged
-and deleted the same day. The next dashboard work starts a new `dashboard` from `main` (`DCD-D25`). The owner asked on
+and deleted the same day. The next dashboard work starts a new `dashboard` from `main` (`DCD-D25`); the current one, from `092e777`, admits
+infrasure.ai accounts to the hosted dashboard (`DCD-D37`). The owner asked on
 2026-10-20 that no agent branch stay open once its work is merged, and that Jung A's branches are Jung A's to decide. The
 deploy branch is the one exception: a push to it deploys the dashboard, so it stayed after its PR (#10) merged on 2026-10-23.
 
 | Branch | Created by · on | Last by · on | Age (days) | Ahead / behind `main` | Merged | Files | What it is | What to do |
 |---|---|---|---|---|---|---|---|---|
 | `main` = `origin/main` | — | Divi-patel · 2026-10-23 | 0 | — | — | — | The line of record; pushed directly by the owner | — |
-| `origin/deploy/damage-curves` | Divi-patel (agent session) · 2026-10-22 | Divi-patel · 2026-10-23 | 0 | 0 / 2 | **yes** | 0 | **The dashboard's deploy branch** (`DCD-D36`): a push that touches the dashboard's files deploys the Cloud Run service `damage-curves`. A release pointer, not a work branch. Its files reached `main` through **PR #10** (merge commit `54bcf28`, 2026-10-23); `main` is ahead only by that merge and a records commit, with the same dashboard files | **Keep.** Show the team a new version with `git push origin main:deploy/damage-curves`, which fast-forwards |
+| `origin/dashboard` | Divi-patel (agent session) · 2026-10-23 | Divi-patel · 2026-10-23 | 0 | 2 / 0 | no | 9 | **The one dashboard branch** (`DCD-D25`), new from `main` at `092e777`: infrasure.ai accounts admitted to the hosted dashboard (`DCD-D37`). **PR #11**; the deploy branch points at its first commit (`e02fac8`) | **Active.** Merge PR #11 with a merge commit when the owner agrees (a squash would leave the deploy branch off `main`), then delete |
+| `origin/deploy/damage-curves` | Divi-patel (agent session) · 2026-10-22 | Divi-patel · 2026-10-23 | 0 | 1 / 0 | no | 9 | **The dashboard's deploy branch** (`DCD-D36`): a push that touches the dashboard's files or the workflow deploys the Cloud Run service `damage-curves`. A release pointer, not a work branch. Its files reached `main` through **PR #10** (merge commit `54bcf28`, 2026-10-23). It now points at PR #11's first commit (`e02fac8`), which admits infrasure.ai accounts (`DCD-D37`), deployed ahead of `main` until PR #11 merges | **Keep.** Show the team a new version with `git push origin main:deploy/damage-curves`, which fast-forwards once PR #11 is merged with a merge commit |
 | `origin/cell/real-estate` | jll-l · (fully contained) | jll-l · 2026-10-19 | 4 | 0 / — | **yes** | 0 | Jung A's working branch for the five Real Estate cells; merged into `main` on 2026-10-19 | **Merged — safe to delete whenever Jung A is done pushing to it.** Nothing is lost |
 | `origin/cell/flood-real-estate` | jll-l · (fully contained) | jll-l · 2026-10-12 | 11 | 0 / — | **yes** | 0 | The first Real Estate cell, superseded by `cell/real-estate` | **Delete** (merged; with Jung A's OK) |
 | `origin/cell/winter-storm-solar-wind` | jll-l · 2026-10-12 | jll-l · 2026-10-15 | 8 | 2 / — | no | 55 | Two proposed cells (`winter_storm_solar` screening proxy, `winter_storm_wind` fail-closed), five notebooks, five scripts | **Decision needed (RO3):** rebase onto `main` and merge as proposals, or close with a note. It falls further behind every day |
@@ -35,7 +38,7 @@ deploy branch is the one exception: a push to it deploys the dashboard, so it st
 
 *"Behind" is left blank for Jung A's rows because `main` moved by six merge commits on 2026-10-20; the script
 prints the current number.* Tags: none. Pull requests on `origin`: #1 (`codex/publish-v2-5-implementation`,
-merged 2026-06-25); #2, #3, #4, #5 and #6 merged 2026-10-20 (below); #7 closed when its branch was renamed to `dashboard`, its commits carried by #8; #8 and #9 merged 2026-10-22, and #10 on 2026-10-23 (below). Remotes: `origin` only
+merged 2026-06-25); #2, #3, #4, #5 and #6 merged 2026-10-20 (below); #7 closed when its branch was renamed to `dashboard`, its commits carried by #8; #8 and #9 merged 2026-10-22, and #10 on 2026-10-23 (below); #11 open (2026-10-23), from `dashboard`. Remotes: `origin` only
 (`aamani-ai/Damage_Modeling`); the personal fork `Divi-patel/Damage_Modeling` is a dormant mirror at
 `a71ac72`, not a remote. No local-only branches or extra worktrees remain (cleaned 2026-10-20 and 2026-10-21).
 
