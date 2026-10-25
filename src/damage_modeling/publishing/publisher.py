@@ -262,6 +262,8 @@ def _hazard_type(cell_id: str) -> str:
 
 
 def _tech_class(cell_id: str) -> str:
+    if cell_id == "flood_real_estate":
+        return "real_estate"
     if cell_id.endswith("_solar"):
         return "solar"
     if cell_id.endswith("_wind"):

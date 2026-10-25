@@ -9,6 +9,7 @@ the canonical files and explain the normal process.
 
 | Guide | Use when |
 |---|---|
+| [`flood_real_estate_curve_request_guide.md`](flood_real_estate_curve_request_guide.md) | Request the accepted warehouse-only Flood response, exact pin and qualified building-value boundary. |
 | [`hail_solar_curve_request_guide.md`](hail_solar_curve_request_guide.md) | Someone asks for the current solar hail curve or how Hazard should consume it. |
 | [`flood_solar_curve_request_guide.md`](flood_solar_curve_request_guide.md) | Someone needs to bridge event water level and component datum into the current flood × solar failure-unit curves. |
 | [`wildfire_solar_curve_request_guide.md`](wildfire_solar_curve_request_guide.md) | Someone asks for a wildfire x solar curve, multi-subsystem damage treatment, or why the current scaffold must withhold numerical outputs. |

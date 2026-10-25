@@ -1,0 +1,67 @@
+{
+  "schema": "warehouse-flood-annual-binding/v1",
+  "profile_id": "re_warehouse_1s_steel_slab",
+  "reference_building_id": "RE_IND_WAREHOUSE",
+  "asset_type": "real_estate",
+  "reference_count": 1,
+  "dimensions_m": [
+    76.2,
+    121.92
+  ],
+  "first_floor_height_ft": 0.25,
+  "physical_profile": {
+    "repository": "Hazard_Modeling",
+    "path": "docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "sha256": "b952c4e5e8bcae8fd0fa4d9612223bc0b6c2c5e0eafaffc5a1c89620ff4de33f"
+  },
+  "source_pin": {
+    "cell_id": "flood_real_estate",
+    "semantic_damage_model_version": "model v1.0",
+    "documentation_revision": "docs r1",
+    "schema_version": "damage_curve_record_bundle.v3",
+    "artifact_sha256": "810555bada83f04a9aa92dcf1e185ee990b2e840d055805facdc559f928c0102",
+    "curve_id": "FRE_IND_HAZUS_DF341"
+  },
+  "value": {
+    "currency": "USD",
+    "value_basis_id": "RLB_DALLAS_Q3_2025_WAREHOUSE_INCLUDED_BUILDING_RCN_V1",
+    "replacement_cost_new_usd": "11000000",
+    "price_basis": "Q3 2025 Dallas USD",
+    "floor_area_ft2": "100000",
+    "rate_usd_per_ft2": "110",
+    "scope_transfer_tier": "T4_explicit_owner_accepted_structure_scope_transfer",
+    "included": [
+      "foundation_and_floor",
+      "structural_frame",
+      "roof",
+      "walls_and_openings",
+      "fixed_services",
+      "fixed_interiors"
+    ],
+    "excluded": [
+      "land",
+      "site_works",
+      "contents",
+      "process_equipment",
+      "business_interruption",
+      "finance",
+      "extraordinary_code_upgrades",
+      "event_demand_surge"
+    ],
+    "component_responses_added": false
+  },
+  "annual_aggregate_cap_usd": "11000000",
+  "demand": "local_reference_point_grade_depth_ft_minus_0p25_ft_once; grade_dry_zero",
+  "annual_methods": {
+    "inland": "existing_annual_maximum_depth_rank_with_fixed_alternative_location",
+    "coastal": "existing_compound_Poisson_catalog_with_fixed_location_and_once_capped_annual_sum",
+    "missing_mass": "retain original location/event weights; separately labeled unavailable modeled contributions; full risk null",
+    "combined": "screening EAL sum and metricwise tail maximum; not a joint distribution"
+  },
+  "owner_acceptance": {
+    "date": "2026-10-25",
+    "owner": "Divy",
+    "ruling": "Yes\u2014complete warehouse Flood first, then qualify the office, house and other hazards (Recommended)",
+    "scope_question": "DF341 freshwater/coastal still water; 0.25-ft floor; $11M building RCN; waves/velocity/contents/BI excluded; technical checks still required"
+  }
+}

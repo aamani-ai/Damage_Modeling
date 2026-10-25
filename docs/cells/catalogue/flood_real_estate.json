@@ -3,11 +3,11 @@
   "kind": "cell",
   "asset": "Real estate",
   "hazard": "Flood",
-  "artifact": "docs/cells/flood_real_estate/proposed/flood_real_estate__model_v0_2__docs_r1__curve_artifact.json",
-  "artifact_sha256": "99fe3f1f6430caada7943a4a83fe74a2f94895c8c454d7789fda97fabfafe9af",
-  "reviewed_on": "2026-10-19",
-  "read_by": "Agent-drafted, from the cell's own tier table and decision log",
-  "input": "Water depth above the first floor (ft), -4 to 24 ft (retail coastal curve -1 to 10 ft); depth above ground is accepted with the building's floor height",
+  "artifact": "docs/cells/flood_real_estate/current/flood_real_estate__model_v1_0__docs_r1__curve_artifact.json",
+  "artifact_sha256": "810555bada83f04a9aa92dcf1e185ee990b2e840d055805facdc559f928c0102",
+  "reviewed_on": "2026-10-25",
+  "read_by": "Warehouse source/value scope accepted by Divy; source and consumer KAT review by agent",
+  "input": "Warehouse only: water depth in feet above its first floor, -4 to 24 ft; Hazard applies the 0.25-ft grade-to-floor bridge and dry-ground rule once",
   "not_covered": [],
   "out_of_scope": [
     "Contents (declared as a withheld placeholder part)",
@@ -20,9 +20,9 @@
   "how_to_use": {
     "share_of": "Structure replacement cost new of the same building (no land, contents or depreciation)",
     "outputs": {
-      "single_event": "conditional: proposal, not in the runtime index; the request must name the building and the water type",
-      "scenario_dollars": "withheld until the building value is qualified",
-      "yearly_loss": "withheld before promotion (computed by the consumer afterwards)"
+      "single_event": "conditional: accepted warehouse only; named water type and same-floor depth required",
+      "scenario_dollars": "supported with the exact qualified same-building RCN and exposure basis",
+      "yearly_loss": "conditional: Hazard must verify frequency, warehouse coupling, missing mass, cap and retained annual distributions"
     },
     "conditions": [
       "flood_water_type is required; unknown water withholds",
@@ -31,7 +31,7 @@
   },
   "method": {
     "type": "adopted",
-    "summary": "FEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water); retail keeps Hazus DF 217 for river water and USACE NACCS for coastal surge"
+    "summary": "Unchanged FEMA Hazus DF341 building loss ratio for the accepted warehouse, used for freshwater and coastal still water; no wave, velocity or salinity modifier"
   },
   "key_sources": [
     "FEMA, Hazus Flood Model Technical Manual 7.0 (2025), Table 5-2 (FRE-S002)",
@@ -42,8 +42,9 @@
   ],
   "sources_from": "register",
   "judgment": [
-    "No value per area set, so scenario dollars stay withheld",
-    "No adjustment for the gap between river and coastal claims (coastal commercial claims run higher)"
+    "Q3 2025 Dallas $110/ft2 hard-cost benchmark assigned to the included building scope as an accepted T4 transfer",
+    "$11M fixed nationally, without location cost escalation or mitigation credit",
+    "Coastal class-average response is a thin-evidence still-water proxy; no correction fitted to selected NFIP claims"
   ],
   "checks": [
     {
@@ -53,29 +54,17 @@
     }
   ],
   "open_items": [
-    "Office curve reads about 1.6 times the claims for 3+ storey buildings (kept as published)",
-    "Wave and velocity zones not modelled",
-    "Contents placeholder: keep or drop (for the reviewer)"
+    "House, office and retail remain in the unadmitted v0.2 research package",
+    "Coastal warehouse claims are thin and indicate potential low bias",
+    "Wave, velocity, salinity, contents and BI remain excluded"
   ],
   "files": {
-    "write_up": "docs/cells/flood_real_estate/proposed/flood_real_estate_curve_derivation_dossier__model_v0_2__docs_r1.md",
+    "write_up": "docs/cells/flood_real_estate/current/derivation.md",
     "decisions": "docs/cells/flood_real_estate/proposed/DECISION_LOG_flood_real_estate__model_v0_1__docs_r1.md",
-    "validation": "docs/cells/flood_real_estate/proposed/VALIDATION_REPORT_flood_real_estate__model_v0_2__docs_r1.md",
+    "validation": "docs/cells/flood_real_estate/current/validation.json",
     "notebooks": "notebooks/flood/real_estate/"
   },
   "rows": [
-    {
-      "part": "House",
-      "curves": [
-        "FRE_RES_HAZUS_DF129"
-      ],
-      "variants": "water: river or coastal (same curve)",
-      "shape": "T2",
-      "shape_basis": "Hazus DF 129 points",
-      "cost": "T2",
-      "cost_basis": "Hazus loss ratio of replacement value",
-      "notes": []
-    },
     {
       "part": "Warehouse",
       "curves": [
@@ -86,42 +75,10 @@
       "shape_basis": "Hazus DF 341 points",
       "cost": "T2",
       "cost_basis": "Hazus loss ratio of replacement value",
-      "notes": []
-    },
-    {
-      "part": "Office",
-      "curves": [
-        "FRE_OFF_HAZUS_DF431"
-      ],
-      "variants": "water: river or coastal (same curve)",
-      "shape": "T2",
-      "shape_basis": "Hazus DF 431 points",
-      "cost": "T2",
-      "cost_basis": "Hazus loss ratio of replacement value",
       "notes": [
         {
-          "type": "known_bias",
-          "text": "Reads about 1.6x the NFIP claims for 3+ storey buildings"
-        }
-      ]
-    },
-    {
-      "part": "Retail",
-      "curves": [
-        "FRE_COM_FRESH_HAZUS_DF217",
-        "FRE_COM_COAST_NACCS_P2",
-        "FRE_COM_COAST_NACCS_P2_MIN",
-        "FRE_COM_COAST_NACCS_P2_MAX"
-      ],
-      "variants": "water: river (Hazus DF 217) / coastal (NACCS, with low and high building-variant bounds)",
-      "shape": "T2",
-      "shape_basis": "Hazus DF 217 and NACCS published points",
-      "cost": "T2",
-      "cost_basis": "source loss ratios of replacement value",
-      "notes": [
-        {
-          "type": "not_a_hazard_profile",
-          "text": "Kept from v0.1; not a current Hazard profile"
+          "type": "key_assumption",
+          "text": "$11M same-building RCN is an accepted T4 RLB-to-Hazus scope transfer; coastal still-water response remains a qualified proxy"
         }
       ]
     }

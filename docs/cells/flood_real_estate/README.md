@@ -1,16 +1,13 @@
 <!--
 author: owner-directed (JL) · agent-drafted
 created: 2026-10-11
-updated: 2026-10-16
-status: draft
+updated: 2026-10-25
+status: active
 -->
 
 # flood_real_estate
 
-Current cell: **flood × real estate**, a new **scaffold** whose current proposal is semantic damage-model
-`model v0.2`, documentation revision `docs r1`. Model v0.1 is kept unchanged beside it (it is the revision Hazard
-pinned at intake). It publishes **no runtime curve yet**. It is not in the artifact index, not in a package
-release, and does not change any Hazard pin.
+**Current runtime is warehouse only:** [model v1.0/docs r1](current/README.md), admitted under Divy’s October 25 scope/value ruling. It preserves Junga’s DF341 source exactly and permits annual construction only after the stated consumer gates. House, office and retail remain unadmitted in the unchanged v0.2 proposal below.
 
 ## What this cell is for
 
