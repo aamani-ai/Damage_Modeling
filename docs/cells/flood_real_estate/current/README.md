@@ -19,3 +19,10 @@ This model retains Junga's DF341 response exactly and qualifies its bounded buil
 Conditional annual capability requires Hazard's downstream gates; it does not supply event frequency,
 exposure, a completed annual run, a crown, claims calibration or live dashboard adoption.
 Other profiles remain in the [unmodified v0.2 proposal](../proposed/RETURN_PACKAGE_flood_real_estate__model_v0_2__docs_r1.md).
+
+Publication is complete in the immutable namespace
+`gs://infrasure-benchmark/damage_artifacts/dev/flood_real_estate/model_v1_0__docs_r1/`.
+The [publication receipt](publication_receipt.json) pins the source commit and object generations.
+Hazard's independent [remote readback](hazard_remote_readback.json) verifies the exact artifact
+SHA, published schema and all 68 physics known-answer cases. This source publication does not
+claim the downstream national grid is complete. The repository regression suite passed 180 tests.
