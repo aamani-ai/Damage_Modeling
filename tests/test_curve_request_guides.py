@@ -13,6 +13,7 @@ GUIDES = ROOT / "docs/extra/guides"
 INDEX = ROOT / "docs/contracts/machine_readable_artifact_index.json"
 
 GUIDE_BY_CELL = {
+    "wildfire_real_estate": "wildfire_real_estate_curve_request_guide.md",
     "tropical_cyclone_wind_real_estate": "tropical_cyclone_wind_real_estate_curve_request_guide.md",
     "hail_real_estate": "hail_real_estate_curve_request_guide.md",
     "convective_wind_real_estate": "convective_wind_real_estate_curve_request_guide.md",

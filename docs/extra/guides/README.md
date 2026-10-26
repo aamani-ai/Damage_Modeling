@@ -40,3 +40,5 @@ also exist, but they do not satisfy or alter that current-cell mapping.
 - [Hail building request guide](hail_real_estate_curve_request_guide.md): material/unit selectors, explicit screening acknowledgement and partial value.
 
 - [Hurricane building request guide](tropical_cyclone_wind_real_estate_curve_request_guide.md): explicit terrain, characteristic refusals and whole-building value.
+
+- [Wildfire building request guide](wildfire_real_estate_curve_request_guide.md): exact classes and explicit potential-structure proxy scope.
