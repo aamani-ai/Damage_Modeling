@@ -7,7 +7,7 @@ status: active
 
 # Three-reference source admission
 
-Classification: first canonical cell model release, model v1.0 / docs r1. No existing current artifact is replaced. No schema or source ordinate changes. Artifact SHA-256: `9ad6b65608ae562e74d0f6cc31345a48f3905f27e95f8492d3ea4dcad70de2f1`.
+Classification: first canonical cell model release, model v1.0 / docs r2. No existing current artifact is replaced. No schema or source ordinate changes. Artifact SHA-256: `891114053febb90a3c69968f87e5834732b9902e0b80feeaf76436863bd09ba3`.
 
 Divy requested completion of the remaining warehouse, office and house hazards with qualification on October 26. Reference dimensions/material choices remain governed by DD-RE7. This admission retains all six source records, separate axes, the 96-mph straight-line onset, EF-derived tornado response, 0–255-mph domain and source refusal behavior. Hazard's extracted evaluator passes all 166 formula/withheld/error source cases, plus every knot/half-knot across the six records and independent contact/count-law/cap checks (175 tests total). Bounded numerical reviews pass all three profiles; exact Hazard receipts accompany the consumer implementation.
 
