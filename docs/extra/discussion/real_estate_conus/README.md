@@ -47,3 +47,5 @@ The existing proposal, office check and skill flow remain reusable. The proposal
 the [cell folder](../../../cells/flood_real_estate/README.md), not in this discussion.
 
 The sibling links use the existing local `Hazard_modeling` symlink and require that checkout locally.
+
+October 26: [Damage improvement register](future_work.md), maintained alongside the remaining three-profile Hazard integration.

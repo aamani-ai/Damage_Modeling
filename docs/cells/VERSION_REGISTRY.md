@@ -156,3 +156,5 @@ Documentation revision changed = proof trail / contract / implementation wrapper
 v0.1 scaffold = structure accepted but runtime DR not yet parameterized.
 v1.0 = first derived runtime curve package for the cell.
 ```
+
+| convective_wind_real_estate | model v1.0 | docs r1 | 2026-10-26 | Three reference-building screening admission; unchanged source EF/Hazus-cost records, separate pathways, explicit value bindings; annual gates consumer-owned |

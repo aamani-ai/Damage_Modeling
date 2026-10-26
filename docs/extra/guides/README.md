@@ -34,3 +34,5 @@ names a curve, contract, manifest, or artifact, it should link back to the canon
 
 Every repository-current artifact-index cell must have one canonical request guide. Proposal-only guides may
 also exist, but they do not satisfy or alter that current-cell mapping.
+
+- [Building Convective Wind request guide](convective_wind_real_estate_curve_request_guide.md): exact source pin, three reference selectors, separate pathways, value and annual-use gates.

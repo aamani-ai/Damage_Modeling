@@ -1,0 +1,61 @@
+{
+  "schema": "building-convective-wind-screening-binding/v1",
+  "profile_key": "office",
+  "profile_id": "re_office_3s_slab",
+  "reference_building_id": "RE_COM_OFFICE_3S_SLAB",
+  "asset_type": "Real Estate Office",
+  "dimensions_m": [
+    30.48,
+    54.864000000000004
+  ],
+  "physical_profile": {
+    "repository": "Hazard_Modeling",
+    "path": "docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "sha256": "b952c4e5e8bcae8fd0fa4d9612223bc0b6c2c5e0eafaffc5a1c89620ff4de33f"
+  },
+  "source_pin": {
+    "cell_id": "convective_wind_real_estate",
+    "semantic_damage_model_version": "model v1.0",
+    "documentation_revision": "docs r1",
+    "schema_version": "damage_curve_record_bundle.v3",
+    "artifact_sha256": "9ad6b65608ae562e74d0f6cc31345a48f3905f27e95f8492d3ea4dcad70de2f1",
+    "source_proposal_sha256": "e676fb077ca3fb96a1d0efce7b1e408c2a82265ec97ea2eb4ebbef7e5aeeef3d"
+  },
+  "value": {
+    "currency": "USD",
+    "replacement_cost_new_usd": "10800000",
+    "basis": "Q3 2025 Dallas included building RCN",
+    "scope_transfer_tier": "T4_explicit_screening_reference_scope_transfer",
+    "included": [
+      "foundation_and_floor",
+      "structural_frame",
+      "roof",
+      "walls_and_openings",
+      "fixed_services",
+      "fixed_interiors"
+    ],
+    "excluded": [
+      "land",
+      "site_works",
+      "contents",
+      "process_equipment",
+      "business_interruption",
+      "finance",
+      "code_upgrades",
+      "demand_surge"
+    ],
+    "component_responses_added": false
+  },
+  "annual_aggregate_cap_usd": "10800000",
+  "demand": {
+    "strong_wind": "ASCE 3-second 10m Exposure C mph once",
+    "tornado": "SPC EF midpoint 3-second mph; damage-inferred T4"
+  },
+  "tornado_contact": "equivalent-square footprint any-contact; whole-building DR per direct hit; no area discount",
+  "overlap_policy": "standalone CW only; ASCE coastal TC overlap unpartitioned; no cross-hazard Total",
+  "full_physical_risk_complete": false,
+  "authority": {
+    "owner_request_date": "2026-10-26",
+    "scope": "Complete remaining three-profile hazards with qualification; fixed design details delegated DD-RE7; not claims calibration"
+  }
+}
