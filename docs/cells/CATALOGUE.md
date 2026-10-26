@@ -1,7 +1,7 @@
 ---
 author: owner-directed (JL) · agent-drafted
 created: 2026-10-19
-updated: 2026-10-26
+updated: 2026-10-25
 status: draft
 ---
 
@@ -746,7 +746,7 @@ Cell text: status · shape tier / cost tier. *Partial* means some parts of the a
 
 ### Real estate × Flood
 
-**Live** · model v1.1, docs r1 · `flood_real_estate` · [curve file](flood_real_estate/current/flood_real_estate__model_v1_1__docs_r1__curve_artifact.json) · 2026-10-26: Warehouse source/value scope accepted by Divy; source and consumer KAT review by agent
+**Live** · model v1.1, docs r1 · `flood_real_estate` · [curve file](flood_real_estate/current/flood_real_estate__model_v1_1__docs_r1__curve_artifact.json) · 2026-10-25: Divy accepted warehouse scope in DD-RE8 and office/house source, floor and value scope in DD-RE9/S1; source/consumer KAT review by Codex
 
 **Consumer binding inside this cell:** [warehouse_flood_screening_v1](../contracts/hazard_handoff/warehouse_flood_screening_v1/binding.json) · [office_flood_screening_v1](../contracts/hazard_handoff/office_flood_screening_v1/binding.json) · [house_flood_screening_v1](../contracts/hazard_handoff/house_flood_screening_v1/binding.json)
 
@@ -786,8 +786,8 @@ Cell text: status · shape tier / cost tier. *Partial* means some parts of the a
 
 **Our judgment (T4 items)**
 
-- Q3 2025 Dallas $110/ft2 hard-cost benchmark assigned to the included building scope as an accepted T4 transfer
-- $11M fixed nationally, without location cost escalation or mitigation credit
+- Q3 2025 Dallas $110/$200/$225 per ft² hard-cost benchmarks for warehouse/office/house are accepted T4 transfers to included structure RCN
+- $11M/$10.8M/$405k fixed nationally, without location cost escalation or mitigation credit
 - Coastal class-average response is a thin-evidence still-water proxy; no correction fitted to selected NFIP claims
 
 **Outside checks**
