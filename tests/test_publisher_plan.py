@@ -26,6 +26,8 @@ def test_all_index_cells_plan_clean():
     assert not problems, f"planning failures: {problems}"
     by_cell = {p.cell_id: p for p in plans}
     for entry in entries:
+        assert _hazard_type(entry["cell_id"])
+        assert _tech_class(entry["cell_id"])
         artifact = next(f for f in by_cell[entry["cell_id"]].files if f.name == "curve_artifact.json")
         assert artifact.sha256 == entry["sha256"]
 
