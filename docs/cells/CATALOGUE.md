@@ -1,7 +1,7 @@
 ---
 author: owner-directed (JL) · agent-drafted
 created: 2026-10-19
-updated: 2026-10-25
+updated: 2026-10-26
 status: draft
 ---
 
@@ -746,7 +746,9 @@ Cell text: status · shape tier / cost tier. *Partial* means some parts of the a
 
 ### Real estate × Flood
 
-**Live** · model v1.0, docs r1 · `flood_real_estate` · [curve file](flood_real_estate/current/flood_real_estate__model_v1_0__docs_r1__curve_artifact.json) · 2026-10-25: Warehouse source/value scope accepted by Divy; source and consumer KAT review by agent
+**Live** · model v1.0, docs r1 · `flood_real_estate` · [curve file](flood_real_estate/current/flood_real_estate__model_v1_0__docs_r1__curve_artifact.json) · 2026-10-26: Warehouse source/value scope accepted by Divy; source and consumer KAT review by agent
+
+**Consumer binding inside this cell:** [warehouse_flood_screening_v1](../contracts/hazard_handoff/warehouse_flood_screening_v1/binding.json)
 
 **Input:** Warehouse only: water depth in feet above its first floor, -4 to 24 ft; Hazard applies the 0.25-ft grade-to-floor bridge and dry-ground rule once
 
@@ -760,7 +762,7 @@ Cell text: status · shape tier / cost tier. *Partial* means some parts of the a
 
 - Damage is a share of: Structure replacement cost new of the same building (no land, contents or depreciation)
 - Single event: conditional: accepted warehouse only; named water type and same-floor depth required
-- Scenario dollars: supported with the exact qualified same-building RCN and exposure basis
+- Scenario dollars: conditional: exact qualified same-building RCN and exposure basis required
 - Yearly loss: conditional: Hazard must verify frequency, warehouse coupling, missing mass, cap and retained annual distributions
 - Condition: flood_water_type is required; unknown water withholds
 - Condition: When Hazard sends depth above the floor it must apply the dry-ground rule itself (depth above ground of 0 or less means no damage)

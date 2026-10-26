@@ -5,7 +5,7 @@
   "hazard": "Flood",
   "artifact": "docs/cells/flood_real_estate/current/flood_real_estate__model_v1_0__docs_r1__curve_artifact.json",
   "artifact_sha256": "810555bada83f04a9aa92dcf1e185ee990b2e840d055805facdc559f928c0102",
-  "reviewed_on": "2026-10-25",
+  "reviewed_on": "2026-10-26",
   "read_by": "Warehouse source/value scope accepted by Divy; source and consumer KAT review by agent",
   "input": "Warehouse only: water depth in feet above its first floor, -4 to 24 ft; Hazard applies the 0.25-ft grade-to-floor bridge and dry-ground rule once",
   "not_covered": [],
@@ -21,7 +21,7 @@
     "share_of": "Structure replacement cost new of the same building (no land, contents or depreciation)",
     "outputs": {
       "single_event": "conditional: accepted warehouse only; named water type and same-floor depth required",
-      "scenario_dollars": "supported with the exact qualified same-building RCN and exposure basis",
+      "scenario_dollars": "conditional: exact qualified same-building RCN and exposure basis required",
       "yearly_loss": "conditional: Hazard must verify frequency, warehouse coupling, missing mass, cap and retained annual distributions"
     },
     "conditions": [
@@ -64,6 +64,9 @@
     "validation": "docs/cells/flood_real_estate/current/validation.json",
     "notebooks": "notebooks/flood/real_estate/"
   },
+  "bindings": [
+    "docs/contracts/hazard_handoff/warehouse_flood_screening_v1/binding.json"
+  ],
   "rows": [
     {
       "part": "Warehouse",
