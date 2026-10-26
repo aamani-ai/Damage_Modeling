@@ -19,3 +19,8 @@ missing-mass, cap and distribution gates.
 The [warehouse 1.0 archive](../archive/model_v1_0__docs_r1/README.md) and immutable
 GCS package remain exact inputs of the already published warehouse grid. New
 office/house bindings pin 1.1; no warehouse rerun or live selection is implied.
+
+Publication is verified at `gs://infrasure-benchmark/damage_artifacts/dev/flood_real_estate/model_v1_1__docs_r1/`.
+[Publication receipt](publication_receipt.json) pins the producer commit and generations;
+[Hazard readback](hazard_remote_readback.json) independently validates the schema and
+174 direct-floor physics KATs. Repository tests: 183 passed; local links: zero broken.
