@@ -160,3 +160,5 @@ v1.0 = first derived runtime curve package for the cell.
 | convective_wind_real_estate | model v1.0 | docs r2 | 2026-10-26 | Three reference-building screening admission; unchanged source EF/Hazus-cost records, separate pathways, explicit value bindings; annual gates consumer-owned |
 
 | hail_real_estate | model v1.0 | docs r1 | 2026-10-26 | Three-reference roof/walls screening admission; exact own-unit shares; conditional annual consumer gates |
+
+| tropical_cyclone_wind_real_estate | model v1.0 | docs r1 | 2026-10-26 | Unchanged Hazus three-building screening bindings; three explicit terrain conditions; annual gates conditional |

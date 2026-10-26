@@ -38,3 +38,5 @@ also exist, but they do not satisfy or alter that current-cell mapping.
 - [Building Convective Wind request guide](convective_wind_real_estate_curve_request_guide.md): exact source pin, three reference selectors, separate pathways, value and annual-use gates.
 
 - [Hail building request guide](hail_real_estate_curve_request_guide.md): material/unit selectors, explicit screening acknowledgement and partial value.
+
+- [Hurricane building request guide](tropical_cyclone_wind_real_estate_curve_request_guide.md): explicit terrain, characteristic refusals and whole-building value.
