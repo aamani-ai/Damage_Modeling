@@ -1,0 +1,68 @@
+{
+  "schema": "building-flood-annual-binding/v1",
+  "profile_id": "re_house_1s_wood_slab",
+  "reference_building_id": "RE_RES_SFD_1S_SLAB",
+  "asset_type": "real_estate",
+  "reference_count": 1,
+  "dimensions_m": [
+    9.144,
+    18.288
+  ],
+  "first_floor_height_ft": 0.75,
+  "physical_profile": {
+    "repository": "Hazard_Modeling",
+    "path": "docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "sha256": "b952c4e5e8bcae8fd0fa4d9612223bc0b6c2c5e0eafaffc5a1c89620ff4de33f"
+  },
+  "source_pin": {
+    "cell_id": "flood_real_estate",
+    "semantic_damage_model_version": "model v1.1",
+    "documentation_revision": "docs r1",
+    "schema_version": "damage_curve_record_bundle.v3",
+    "artifact_sha256": "01091c67570c156ae94afc0e34bb8e9675dd10e86bd032810219de89146857d0",
+    "curve_id": "FRE_RES_HAZUS_DF129"
+  },
+  "value": {
+    "currency": "USD",
+    "value_basis_id": "RLB_DALLAS_Q3_2025_HOUSE_INCLUDED_BUILDING_RCN_V1",
+    "replacement_cost_new_usd": "405000",
+    "price_basis": "Q3 2025 Dallas USD",
+    "floor_area_ft2": "1800",
+    "rate_usd_per_ft2": "225",
+    "scope_transfer_tier": "T4_explicit_owner_accepted_structure_scope_transfer",
+    "included": [
+      "foundation_and_floor",
+      "structural_frame",
+      "roof",
+      "walls_and_openings",
+      "fixed_services",
+      "fixed_interiors"
+    ],
+    "excluded": [
+      "land",
+      "site_works",
+      "contents",
+      "process_equipment",
+      "business_interruption",
+      "finance",
+      "extraordinary_code_upgrades",
+      "event_demand_surge"
+    ],
+    "component_responses_added": false
+  },
+  "annual_aggregate_cap_usd": "405000",
+  "demand": "grade dry zero; positive grade minus exact first-floor height once; retain source wet-side discontinuity",
+  "annual_methods": {
+    "inland": "existing_annual_maximum_depth_rank_with_fixed_alternative_location",
+    "coastal": "existing_compound_Poisson_catalog_with_fixed_location_and_once_capped_annual_sum",
+    "missing_mass": "retain original location/event weights; separately labeled unavailable modeled contributions; full risk null",
+    "combined": "screening EAL sum and metricwise tail maximum; not a joint distribution"
+  },
+  "owner_acceptance": {
+    "date": "2026-10-25",
+    "timezone": "America/New_York",
+    "owner": "Divy",
+    "ruling": "Retain the source curves and complete annual qualification and grids (Recommended)",
+    "scope_question": "DF431/DF129; 0.25/0.75-ft first floors; $10.8M/$405k building RCN; freshwater/coastal still water; waves/velocity/contents/BI excluded; disclosed one-inch low-depth response"
+  }
+}

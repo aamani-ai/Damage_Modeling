@@ -169,9 +169,9 @@ def main() -> int:
     # non-promotion
     index = (ROOT / "docs/contracts/machine_readable_artifact_index.json").read_text()
     registry = (ROOT / "docs/cells/VERSION_REGISTRY.md").read_text()
-    check("cell absent from the machine-readable artifact index", "flood_real_estate" not in index)
-    check("cell absent from the version registry", "flood_real_estate" not in registry)
-    check("no current/ package", not (CELL / "current").exists())
+    check("this proposal artifact is not the runtime selection", files["artifact"].name not in index)
+    check("this proposal remains noncanonical", art["canonical_runtime_artifact"] is False)
+    check("current release, if any, has a distinct artifact", not (CELL / "current" / files["artifact"].name).exists())
     check("artifact is noncanonical and proposed",
           art["canonical_runtime_artifact"] is False and art["schema_status"] == "proposed_draft"
           and art["promotion_status"] == "proposed" and cap["promotion_gate"]["status"] == "blocked")

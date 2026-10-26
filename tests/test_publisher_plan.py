@@ -26,6 +26,8 @@ def test_all_index_cells_plan_clean():
     assert not problems, f"planning failures: {problems}"
     by_cell = {p.cell_id: p for p in plans}
     for entry in entries:
+        assert _hazard_type(entry["cell_id"])
+        assert _tech_class(entry["cell_id"])
         artifact = next(f for f in by_cell[entry["cell_id"]].files if f.name == "curve_artifact.json")
         assert artifact.sha256 == entry["sha256"]
 
@@ -41,6 +43,9 @@ def test_prefix_and_registry_mapping():
     assert hail.damage_code_id == "HAIL_SOLAR_PV_MODULE_V1"
     assert _hazard_type("wind_tornado_wind") == "convective_wind"
     assert _hazard_type("strong_wind_solar") == "convective_wind"
+    assert _hazard_type("convective_wind_real_estate") == "convective_wind"
+    assert _tech_class("convective_wind_real_estate") == "real_estate"
+    assert _tech_class("tropical_cyclone_wind_real_estate") == "real_estate"
     assert _hazard_type("tropical_cyclone_wind_wind") == "hurricane"
     assert _tech_class("wind_tornado_wind") == "wind"
     assert _tech_class("hail_solar") == "solar"

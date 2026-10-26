@@ -157,6 +157,13 @@ def plan_publications(
             version_tag=tag,
             prefix=f"{NAMESPACE}/{env}/{entry['cell_id']}/{tag}",
         )
+        # Registry projections are offline prerequisites. Check them before
+        # any upload can create a partial immutable prefix.
+        try:
+            _hazard_type(plan.cell_id)
+            _tech_class(plan.cell_id)
+        except ValueError as exc:
+            plan.problems.append(str(exc))
 
         artifact_path = REPO_ROOT / entry["path"]
         if not artifact_path.exists():
@@ -254,6 +261,7 @@ def _hazard_type(cell_id: str) -> str:
     for prefix, hazard in (
         ("hail", "hail"), ("flood", "flood"), ("wildfire", "wildfire"),
         ("wind_tornado", "convective_wind"), ("strong_wind", "convective_wind"),
+        ("convective_wind", "convective_wind"),
         ("tropical_cyclone_wind", "hurricane"),
     ):
         if cell_id.startswith(prefix):
@@ -262,6 +270,12 @@ def _hazard_type(cell_id: str) -> str:
 
 
 def _tech_class(cell_id: str) -> str:
+    if cell_id.endswith("_real_estate"):
+        return "real_estate"
+    if cell_id.endswith("_substation"):
+        return "substation"
+    if cell_id.endswith("_bess"):
+        return "bess"
     if cell_id.endswith("_solar"):
         return "solar"
     if cell_id.endswith("_wind"):

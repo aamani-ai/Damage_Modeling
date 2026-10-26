@@ -1,0 +1,65 @@
+{
+  "schema": "building-wildfire-potential-structure-binding/v1",
+  "profile_key": "house",
+  "profile_id": "re_house_1s_wood_slab",
+  "reference_building_id": "RE_RES_SFD_1S_SLAB",
+  "asset_type": "Real Estate House",
+  "dimensions_m": [
+    9.144,
+    18.288
+  ],
+  "physical_profile": {
+    "repository": "Hazard_Modeling",
+    "path": "docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "sha256": "b952c4e5e8bcae8fd0fa4d9612223bc0b6c2c5e0eafaffc5a1c89620ff4de33f"
+  },
+  "source_pin": {
+    "cell_id": "wildfire_real_estate",
+    "semantic_damage_model_version": "model v1.0",
+    "documentation_revision": "docs r1",
+    "schema_version": "damage_curve_record_bundle.v3",
+    "artifact_sha256": "0ffdd7cd0645d56e8d4c942a4a65e0a2cc4c6e3dbc09408df20d4b09d3e01b7f",
+    "source_proposal_sha256": "6b7c771d88b46d60e2c0b1339009ab06753f93f6376e8c8f30e40c91f31474ee"
+  },
+  "value": {
+    "currency": "USD",
+    "replacement_cost_new_usd": "405000",
+    "basis": "Q3 2025 Dallas included building RCN",
+    "scope_transfer_tier": "T4_explicit_screening_reference_scope_transfer",
+    "included": [
+      "foundation_and_floor",
+      "structural_frame",
+      "roof",
+      "walls_and_openings",
+      "fixed_services",
+      "fixed_interiors"
+    ],
+    "excluded": [
+      "land",
+      "site_works",
+      "contents",
+      "process_equipment",
+      "business_interruption",
+      "finance",
+      "code_upgrades",
+      "demand_surge"
+    ],
+    "component_responses_added": false
+  },
+  "annual_aggregate_cap_usd": "405000",
+  "demand": {
+    "axis": "conditional_flame_length_class_state",
+    "source_wildfire_product_id": "USFS_RDS_2016_0034_3_270M",
+    "definition": "exact integer FSim class 0..6, no frequency in the Damage call"
+  },
+  "overlap_policy": "one combined fire response; no separate ember, radiant or structure-spread add-on; no cross-hazard Total",
+  "full_physical_risk_complete": false,
+  "authority": {
+    "owner_request_date": "2026-10-26",
+    "scope": "Complete remaining three-profile hazards with qualification; fixed design details delegated DD-RE7; not claims calibration"
+  },
+  "location_support": "Exact angular-area intersections of frozen geographic source-export pixels with each 0.25-degree parent; no available-only renormalization, DEM/parcel or observed-stock mask",
+  "reference_condition": "potential_structure_shrub",
+  "exposure_scope": "Hypothetical unmitigated potential structure at a burnable landscape location; source BP is a direct-pixel exposure proxy, not observed building ignition probability",
+  "lifeform": "fixed_source_shrub_not_observed"
+}

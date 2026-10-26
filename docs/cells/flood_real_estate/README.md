@@ -1,16 +1,13 @@
 <!--
 author: owner-directed (JL) · agent-drafted
 created: 2026-10-11
-updated: 2026-10-16
-status: draft
+updated: 2026-10-25
+status: active
 -->
 
 # flood_real_estate
 
-Current cell: **flood × real estate**, a new **scaffold** whose current proposal is semantic damage-model
-`model v0.2`, documentation revision `docs r1`. Model v0.1 is kept unchanged beside it (it is the revision Hazard
-pinned at intake). It publishes **no runtime curve yet**. It is not in the artifact index, not in a package
-release, and does not change any Hazard pin.
+**Current runtime:** [model v1.1/docs r1](current/README.md) admits the exact warehouse, office and house responses under DD-RE8/DD-RE9. Retail remains unadmitted. Published warehouse grids retain their immutable [model 1.0 source](archive/model_v1_0__docs_r1/README.md).
 
 ## What this cell is for
 
@@ -47,7 +44,7 @@ solar and wind cells were.
   [chart](previews/flood_real_estate_v0_1_nfip_claims_check.png)) and the
   [office flood research](proposed/OFFICE_FLOOD_RESEARCH_flood_real_estate__model_v0_1__docs_r1.md)
 
-**Current package — model v0.2** (D-FRE-26 to D-FRE-28):
+**Retained research package — model v0.2** (D-FRE-26 to D-FRE-28):
 [curve artifact](proposed/flood_real_estate__model_v0_2__docs_r1__curve_artifact.json),
 [capability](proposed/flood_real_estate__model_v0_2__docs_r1__capability.json),
 [ordinates](proposed/CURVE_ORDINATES_flood_real_estate__model_v0_2__docs_r1.csv),
@@ -71,7 +68,7 @@ solar and wind cells were.
 [metadata spec](proposed/flood_real_estate_damage_code_metadata_spec__model_v0_1__docs_r1.md),
 [validation report](proposed/VALIDATION_REPORT_flood_real_estate__model_v0_1__docs_r1.md)
 
-## Status
+## Retained research-package status
 
 ```yaml
 cell_id: flood_real_estate
@@ -88,12 +85,11 @@ package_inclusion_status: not_included
 runtime_reason: NO_RUNTIME_CURVE
 ```
 
-## Not done yet
+## Original research seams and consumer gates
 
 Model v0.2 (7 records, 185 known-answer tests) passes its validator and stays out of the artifact index. House,
 warehouse and office each have one FEMA Hazus record for all still water (D-FRE-28), bound to the Hazard reference
 profiles r1; Hazard's common v3 loader routes them without ambiguity (validation report v0.2 §4). The return
-package for Hazard (one card per profile and a warehouse worked example) is written. Still open: owner review of
-the scope and selections, the consumer's value qualification of each reference budget, the dry-ground rule and
-record ranges at cutover, the office height bias and the thin warehouse coastal evidence, and the EGM document
+package for Hazard (one card per profile and a warehouse worked example) is written. Scope and value are now accepted for the three references; Hazard separately qualifies annual
+construction. The retained research seams include the office height bias and the thin warehouse coastal evidence, and the EGM document
 behind DF 129.

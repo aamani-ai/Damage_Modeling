@@ -1,0 +1,100 @@
+{
+  "schema_version": "capability_declaration.v3",
+  "cell_id": "flood_real_estate",
+  "canonical_runtime_artifact": true,
+  "pathway_capabilities": [
+    {
+      "pathway_id": "flood_inundation_contact",
+      "failure_unit_scalar_dr": "conditional",
+      "scenario_loss_given_value_basis": "supported_with_explicit_failure_unit_value_and_exposure_basis",
+      "curve_intrinsic_spread": "nonprobabilistic_epistemic_envelope",
+      "populated_emit_modes": [
+        "scalar_mean",
+        "scalar_mean_plus_bounds"
+      ],
+      "conditions": [
+        "warehouse profile re_warehouse_1s_steel_slab only, with same-scope $11M RCN (Q3 2025 Dallas)",
+        "grade-to-floor conversion once with 0.25 ft first-floor height; dry grade is exact zero",
+        "same Hazus DF341 record for freshwater and coastal still water; coastal remains qualified proxy",
+        "one whole-building source assembly; no overlapping component additions",
+        "above 24 ft above floor withholds; missing depth or unknown water remains unavailable",
+        "wave, velocity, scour, contents, BI and site works excluded"
+      ],
+      "limitation_flags": [
+        "SCREENING_SOURCE_NATIVE_ADOPTED_TABLE",
+        "WHOLE_BUILDING_SOURCE_ATOM",
+        "REFERENCE_BUILDING_ASSUMPTIONS_NOT_OBSERVED",
+        "NOT_FIELD_OR_CLAIMS_CALIBRATED",
+        "PLATFORM_CODES_PROPOSED_NOT_ISSUED",
+        "COASTAL_STILL_WATER_USES_HAZUS_RIVERINE_CURVE_FOR_TARGET_BUILDINGS",
+        "OFFICE_HEIGHT_BIAS_RECORDED_NOT_CORRECTED",
+        "WAVE_VELOCITY_PATHWAY_DEFERRED_WITHHELD_NOT_ZERO",
+        "VALUE_COVERAGE_NOT_ITEMIZED_BY_SOURCE",
+        "WAREHOUSE_ONLY",
+        "POINT_DEMAND_SCREENING_NOT_BUILDING_HYDRAULICS",
+        "RLB_TO_STRUCTURE_RCN_SCOPE_TRANSFER_T4",
+        "COASTAL_STILL_WATER_PROXY",
+        "NO_WAVE_VELOCITY_SCOUR_OR_BI",
+        "INCOMPLETE_SUPPORT_CONTRIBUTION_SEPARATE_FROM_FULL_RISK"
+      ],
+      "withheld_failure_units": [
+        {
+          "failure_unit_id": "FRE_BUILDING_CONTENTS",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumer_annual_metrics": {
+    "computation_owner": "downstream_consumer",
+    "status_before_promotion": "withheld_noncanonical_proposal",
+    "status_after_promotion": "consumer_computable_from_validated_frequency_intensity_coupling_value_and_cap_model",
+    "prerequisites": [
+      "warehouse-only exact model/docs/schema/SHA and $11M same-building RCN binding",
+      "Hazard verifies warehouse footprint eligibility, exact floor bridge, annual depth and Coastal clock semantics",
+      "preserve source/domain missing mass; report modeled contributions separately from full risk",
+      "fixed alternative building location within each year; no dropout or available-only renormalization",
+      "annual aggregate cap at $11M; derive tail metrics from retained annual distributions",
+      "Flood composite EAL sum and metric-wise tail maximum is labeled screening composite, not a joint distribution"
+    ],
+    "limitation_flags": [
+      "SCREENING_SOURCE_NATIVE_ADOPTED_TABLE",
+      "WHOLE_BUILDING_SOURCE_ATOM",
+      "REFERENCE_BUILDING_ASSUMPTIONS_NOT_OBSERVED",
+      "NOT_FIELD_OR_CLAIMS_CALIBRATED",
+      "PLATFORM_CODES_PROPOSED_NOT_ISSUED",
+      "COASTAL_STILL_WATER_USES_HAZUS_RIVERINE_CURVE_FOR_TARGET_BUILDINGS",
+      "OFFICE_HEIGHT_BIAS_RECORDED_NOT_CORRECTED",
+      "WAVE_VELOCITY_PATHWAY_DEFERRED_WITHHELD_NOT_ZERO",
+      "VALUE_COVERAGE_NOT_ITEMIZED_BY_SOURCE",
+      "WAREHOUSE_ONLY",
+      "POINT_DEMAND_SCREENING_NOT_BUILDING_HYDRAULICS",
+      "RLB_TO_STRUCTURE_RCN_SCOPE_TRANSFER_T4",
+      "COASTAL_STILL_WATER_PROXY",
+      "NO_WAVE_VELOCITY_SCOUR_OR_BI",
+      "INCOMPLETE_SUPPORT_CONTRIBUTION_SEPARATE_FROM_FULL_RISK"
+    ]
+  },
+  "cap_binding": {
+    "policy": "consumer_enforced_fail_closed",
+    "enforcement_owner": "downstream_consumer",
+    "checks_required": [
+      "exact model/docs/schema/SHA pin",
+      "record-level valid range enforced (the retail coastal record stops at 10 ft)",
+      "record routing by reference_building_id, plus flood_water_type for RE_COM_LOWRISE only",
+      "dry-ground rule applied when depth is sent relative to the floor",
+      "one building value charged once per event across pathways"
+    ],
+    "action_if_fail": "withhold the affected DR or downstream metric; do not substitute another record or clamp"
+  },
+  "promotion_gate": {
+    "status": "passed",
+    "required_before_canonical_use": [
+      "Divy's October 25 warehouse source/value/scope acceptance and independent source/consumer review",
+      "Hazard frequency, coupling, value, cap and missing-mass gates before annual use"
+    ]
+  }
+}
