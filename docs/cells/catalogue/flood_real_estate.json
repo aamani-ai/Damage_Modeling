@@ -3,11 +3,11 @@
   "kind": "cell",
   "asset": "Real estate",
   "hazard": "Flood",
-  "artifact": "docs/cells/flood_real_estate/current/flood_real_estate__model_v1_0__docs_r1__curve_artifact.json",
-  "artifact_sha256": "810555bada83f04a9aa92dcf1e185ee990b2e840d055805facdc559f928c0102",
+  "artifact": "docs/cells/flood_real_estate/current/flood_real_estate__model_v1_1__docs_r1__curve_artifact.json",
+  "artifact_sha256": "01091c67570c156ae94afc0e34bb8e9675dd10e86bd032810219de89146857d0",
   "reviewed_on": "2026-10-26",
   "read_by": "Warehouse source/value scope accepted by Divy; source and consumer KAT review by agent",
-  "input": "Warehouse only: water depth in feet above its first floor, -4 to 24 ft; Hazard applies the 0.25-ft grade-to-floor bridge and dry-ground rule once",
+  "input": "Explicit warehouse, three-story office or slab-house selector; water depth in feet above its first floor, -4 to 24 ft; grade dry zero and 0.25/0.25/0.75-ft floor bridge once",
   "not_covered": [],
   "out_of_scope": [
     "Contents (declared as a withheld placeholder part)",
@@ -20,18 +20,19 @@
   "how_to_use": {
     "share_of": "Structure replacement cost new of the same building (no land, contents or depreciation)",
     "outputs": {
-      "single_event": "conditional: accepted warehouse only; named water type and same-floor depth required",
+      "single_event": "conditional: exact selected warehouse/office/house, named water type and same-floor depth required",
       "scenario_dollars": "conditional: exact qualified same-building RCN and exposure basis required",
       "yearly_loss": "conditional: Hazard must verify frequency, warehouse coupling, missing mass, cap and retained annual distributions"
     },
     "conditions": [
       "flood_water_type is required; unknown water withholds",
-      "When Hazard sends depth above the floor it must apply the dry-ground rule itself (depth above ground of 0 or less means no damage)"
+      "When Hazard sends depth above the floor it must apply the dry-ground rule itself (depth above ground of 0 or less means no damage)",
+      "Office/house literal positive wet-side response retained; no interpolation ramp through grade dry zero"
     ]
   },
   "method": {
     "type": "adopted",
-    "summary": "Unchanged FEMA Hazus DF341 building loss ratio for the accepted warehouse, used for freshwater and coastal still water; no wave, velocity or salinity modifier"
+    "summary": "Unchanged FEMA Hazus DF341/DF431/DF129 for the three accepted profiles, freshwater and coastal still water; wave, velocity and contents excluded"
   },
   "key_sources": [
     "FEMA, Hazus Flood Model Technical Manual 7.0 (2025), Table 5-2 (FRE-S002)",
@@ -54,9 +55,9 @@
     }
   ],
   "open_items": [
-    "House, office and retail remain in the unadmitted v0.2 research package",
-    "Coastal warehouse claims are thin and indicate potential low bias",
-    "Wave, velocity, salinity, contents and BI remain excluded"
+    "Retail remains in the unadmitted research package",
+    "Source class/height and coastal transfer limitations; no claims calibration",
+    "Wave, velocity, salinity, contents and BI excluded; annual source/coupling/cap gates remain consumer-owned"
   ],
   "files": {
     "write_up": "docs/cells/flood_real_estate/current/derivation.md",
@@ -65,7 +66,9 @@
     "notebooks": "notebooks/flood/real_estate/"
   },
   "bindings": [
-    "docs/contracts/hazard_handoff/warehouse_flood_screening_v1/binding.json"
+    "docs/contracts/hazard_handoff/warehouse_flood_screening_v1/binding.json",
+    "docs/contracts/hazard_handoff/office_flood_screening_v1/binding.json",
+    "docs/contracts/hazard_handoff/house_flood_screening_v1/binding.json"
   ],
   "rows": [
     {
@@ -82,6 +85,40 @@
         {
           "type": "key_assumption",
           "text": "$11M same-building RCN is an accepted T4 RLB-to-Hazus scope transfer; coastal still-water response remains a qualified proxy"
+        }
+      ]
+    },
+    {
+      "part": "Office",
+      "curves": [
+        "FRE_OFF_HAZUS_DF431"
+      ],
+      "variants": "water: river or coastal (same curve)",
+      "shape": "T2",
+      "shape_basis": "Hazus DF431 points",
+      "cost": "T2",
+      "cost_basis": "Hazus loss ratio of structure replacement value",
+      "notes": [
+        {
+          "type": "key_assumption",
+          "text": "Literal source wet-side low-depth loss and first-floor assumption accepted under S1; building RCN scope transfer remains T4"
+        }
+      ]
+    },
+    {
+      "part": "House",
+      "curves": [
+        "FRE_RES_HAZUS_DF129"
+      ],
+      "variants": "water: river or coastal (same curve)",
+      "shape": "T2",
+      "shape_basis": "Hazus DF129 points",
+      "cost": "T2",
+      "cost_basis": "Hazus loss ratio of structure replacement value",
+      "notes": [
+        {
+          "type": "key_assumption",
+          "text": "Literal source wet-side low-depth loss and first-floor assumption accepted under S1; building RCN scope transfer remains T4"
         }
       ]
     }

@@ -1,28 +1,21 @@
 ---
-author: "owner-directed (Divy) · agent-reviewed admission"
+author: "Jung A Lim (source); owner-directed (Divy) · Codex"
 created: 2026-10-25
 updated: 2026-10-25
 status: active
-scope: Warehouse-only current Flood model v1.0/docs r1; remaining Real Estate profiles remain proposed.
+scope: Current model v1.1 admits warehouse, office and house literal still-water responses.
 ---
 
-# Flood × Real Estate — warehouse screening
+# Flood × Real Estate — three reference profiles
 
-Current accepted subject: `re_warehouse_1s_steel_slab` / `RE_IND_WAREHOUSE` only.
-Start with the [derivation and seven-step audit](derivation.md), then the
-[artifact](flood_real_estate__model_v1_0__docs_r1__curve_artifact.json),
-[capability](flood_real_estate__model_v1_0__docs_r1__capability.json),
-[source-knot audit](curve_audit.csv), [value crosswalk](value_crosswalk.csv) and
-[known answers](known_answers.json).
+[Derivation and migration](derivation.md) · [artifact](flood_real_estate__model_v1_1__docs_r1__curve_artifact.json) · [capability](flood_real_estate__model_v1_1__docs_r1__capability.json) · [known answers](known_answers.json) · [curve audit](curve_audit.csv) · [value crosswalk](value_crosswalk.csv) · [qualification](validation.json).
 
-This model retains Junga's DF341 response exactly and qualifies its bounded building/value scope.
-Conditional annual capability requires Hazard's downstream gates; it does not supply event frequency,
-exposure, a completed annual run, a crown, claims calibration or live dashboard adoption.
-Other profiles remain in the [unmodified v0.2 proposal](../proposed/RETURN_PACKAGE_flood_real_estate__model_v0_2__docs_r1.md).
+DD-RE9/S1 accepts office DF431 and house DF129 beside the unchanged warehouse
+DF341. Retail remains unsupported. Source knots and source-assembly denominators
+are retained exactly. No intrinsic spread or fitted coastal multiplier is added.
+Office/house annual construction remains conditional on Hazard source, coupling,
+missing-mass, cap and distribution gates.
 
-Publication is complete in the immutable namespace
-`gs://infrasure-benchmark/damage_artifacts/dev/flood_real_estate/model_v1_0__docs_r1/`.
-The [publication receipt](publication_receipt.json) pins the source commit and object generations.
-Hazard's independent [remote readback](hazard_remote_readback.json) verifies the exact artifact
-SHA, published schema and all 68 physics known-answer cases. This source publication does not
-claim the downstream national grid is complete. The repository regression suite passed 180 tests.
+The [warehouse 1.0 archive](../archive/model_v1_0__docs_r1/README.md) and immutable
+GCS package remain exact inputs of the already published warehouse grid. New
+office/house bindings pin 1.1; no warehouse rerun or live selection is implied.

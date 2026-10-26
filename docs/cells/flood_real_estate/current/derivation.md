@@ -1,58 +1,72 @@
 ---
-author: "Jung A Lim (source curation); owner-directed (Divy) · agent-reviewed admission"
+author: "Jung A Lim (source); owner-directed (Divy) · Codex"
 created: 2026-10-25
 updated: 2026-10-25
 status: active
-scope: Warehouse-only Flood screening admission of unchanged Hazus DF341 from Junga's v0.2 return.
+scope: S1 source/value qualification, seven-step audit and explicit consumer migration for model v1.1.
 ---
 
-# Warehouse Flood — first accepted Real Estate response
+# Three-profile Flood admission
 
-Divy accepted warehouse Flood first on October 25: Hazus DF341 for freshwater and coastal still water,
-0.25 ft first-floor height, and $11M building-only replacement cost. Waves, velocity, contents and BI
-stay excluded. The source curator is Jung A Lim; the source proposal is retained unchanged at SHA
-`99fe3f1f6430caada7943a4a83fe74a2f94895c8c454d7789fda97fabfafe9af`.
-The [original return](../proposed/RETURN_PACKAGE_flood_real_estate__model_v0_2__docs_r1.md) carries her
-sources, reasoning, claims comparison and limitations. This release selects only `RE_IND_WAREHOUSE` /
-`FRE_IND_HAZUS_DF341`. House, office and retail have no runtime fallback in this release.
+**Classification:** MODEL_BEHAVIOR_CHANGE, compatible minor selector/coverage addition,
+model v1.1/docs r1. Bundle/capability v3 and physical response meanings are unchanged.
+Divy accepted on October 25 (America/New_York): “Retain the source curves and
+complete annual qualification and grids (Recommended).” The question disclosed
+the low-depth wet/dry assumption and all included/excluded scope.
 
-**Classification:** first reviewed `NEW_CELL_MODEL_RELEASE`, model v1.0/docs r1, bundle/capability v3
-unchanged. No intrinsic curve ordinate, interpolation, spread or coastal multiplier was fitted. Release
-scope, consumer value qualification and conditional annual capability are now explicit. The portable
-library remains unreleased. The proposal stays available for the profiles awaiting their own admission.
+Junga’s [unaltered v0.2 return](../proposed/RETURN_PACKAGE_flood_real_estate__model_v0_2__docs_r1.md)
+owns the source registers, claim-level evidence, source verification and limitations.
+All three accepted records are byte-equivalent JSON records from that proposal.
+The selected NFIP checks remain diagnostic; this is not claims calibration.
+DF431 is a class-average office response with height-transfer limitations; DF129
+retains its documented source interpretation and the outstanding original-document
+research seam. No new curve or correction is inferred from those gaps.
 
-| Seven-step audit | Qualification |
-|---|---|
-| Asset and boundary | One 100,000 ft², 400×250 ft, one-story steel/slab warehouse, no loading docks; same hypothetical reference in every CONUS cell |
-| Failure unit | One source-native building structure assembly: foundation/floor, frame, roof, enclosure, fixed services and fixed interiors; no child-curve additions |
-| Numerator and denominator | Direct physical repair/replacement / same-building structure RCN; source Hazus COM2 class average, not an exact-design fragility |
-| Value rows | One assembly budget: 100,000 ft² × $110/ft² = $11M, Q3 2025 Dallas; land, contents, machinery, external site works, BI and financing excluded |
-| Allocation | Full included building scope is the owner-accepted same-assembly approximation. RLB hard-cost benchmark to Hazus structure RCN is T4 scope transfer; no invented component fractions or claim of itemized source equivalence |
-| Site adapter | Full building rectangle controls placement fit; local reference-point grade depth drives the assembly. Subtract 0.25 ft once; preserve grade wet/dry. Point demand does not establish uniform water across the building or site hydraulics |
-| Response and annual boundary | Exact 29 Hazus knots, linear interpolation, −4…24 ft above floor; below range zero, above range unknown. Annual construction requires the separately tested Hazard frequency, support, cap and distribution gates |
+| Audit step | Warehouse | Office | House |
+|---|---|---|---|
+| Asset boundary | 100,000 ft² steel/slab warehouse | Three-story 54,000 ft² office | 1,800 ft² wood/slab detached house |
+| Failure unit | One source-native building structure assembly | Same assembly grain | Same assembly grain |
+| DR denominator | Same-building structure RCN | Same-building structure RCN | Same-building structure RCN |
+| Value | $11M = 100,000 × $110 | $10.8M = 54,000 × $200 | $405k = 1,800 × $225 |
+| Allocation | One included building budget once | One included building budget once | One included building budget once |
+| Site adapter | 400 × 250 ft, floor 0.25 ft | 180 × 100 ft, floor 0.25 ft | 60 × 30 ft, floor 0.75 ft |
+| Response | Exact DF341 | Exact DF431 | Exact DF129 |
 
-**Evidence pressure test.** DF341 is FEMA's COM2 wholesale/warehouse default and an average over 22 source
-classes. Junga verified the ordinates across three carriers and the default assignment in Hazus versions
-5.1, 6.1 and 7.0. The inherited NFIP check reports 365 freshwater warehouse claims in shallow bands, where
-the source curve is 2–8 percentage points low. The coastal warehouse comparison has only 14 claims at
-1–3 ft, with mean damage about twice this curve. These are selected claims comparisons and thin coastal
-evidence; no claim calibration or new curve correction is asserted. Hazus's default assignment and the
-owner's bounded screening acceptance support this coastal still-water proxy, with salinity, waves and
-velocity unquantified. All original evidence IDs resolve through the proposal's source/claim registers.
+All values are fixed Q3 2025 Dallas reference budgets and T4 RLB-hard-cost to Hazus
+structure-RCN scope transfers, accepted for this screening use. There is no geographic
+escalation, observed-building valuation, land, site works, movable contents, process
+equipment, BI, insured-policy interpretation or additive component DR. Waves, velocity
+and scour are outside the still-water response. Coastal uses the same approved source
+atom without salinity or wave modification.
 
-**Depth example.** Two feet above grade becomes 1.75 ft above first floor. The exact interpolation is
-`0.05 + 0.75 × (0.08 − 0.05) = 0.0725`; same-scope loss is $797,500. At dry grade the result is zero.
-The first-floor height is a declared reference assumption, not an observed property elevation.
+**Dry/wet branch:** grade depth zero is exactly zero. Every positive grade depth is
+shifted by the first-floor height once and interpolated within the literal source
+knots. This preserves the office/house positive wet-side limits (1.5%/5.5%); adding
+a continuous grade-zero knot would silently change the adopted response. One inch
+above grade gives 1.6667%/$180,000 for office and 6.3333%/$25,650 for house. These
+are conditional event losses, not annual estimates. Above the 24-ft floor-relative
+source endpoint remains unavailable. Unknown depths/water remain unavailable.
 
-**Annual qualification.** Damage supplies conditional DR, with no intrinsic random spread. Hazard may
-reuse its existing inland annual-maximum and Coastal compound-Poisson clocks only after testing the
-warehouse footprint and once-only floor bridge. A location remains fixed within a simulated year.
-Original unavailable location/event mass remains represented; modeled contributions carry coverage tags
-and full-risk metrics remain null. Coastal event sums are capped once at $11M. The curve's 73% endpoint
-is not a physical annual loss cap or permission to extrapolate beyond the source range. Parent tails
-come from weighted annual distributions. Combined EAL-sum / metric-wise tail-max is a screening composite,
-not a joint Flood distribution, portfolio Total or a guaranteed lower bound on actual losses.
+**Old versus new:** every warehouse knot is unchanged. Office and house requests
+previously failed selector admission; they now select their exact source records.
+Retail still fails selection. Direct-floor source parity passes 174 knot/water
+cases. Hazard independently proves grade boundaries, inland onset, Coastal annual
+caps against an analytic Poisson expectation and retained unknown support.
 
-**Revisit:** coastal observations or salinity/wave response; first-floor height data; exact building damage
-or replacement scope; warehouse subtype and contents; better flood hydraulics; material annual-domain or
-support gaps. These remain scoped limitations rather than invented zero loss or undocumented modifiers.
+**Consumer migration:** office/house explicitly select model v1.1/docs r1/bundle v3
+and its SHA, plus their own [office](../../../contracts/hazard_handoff/office_flood_screening_v1/binding.json)
+or [house](../../../contracts/hazard_handoff/house_flood_screening_v1/binding.json)
+value/cap binding. The installed resources authenticate all bytes. Published warehouse
+Scientific Version 1 retains its exact model-1.0 pin and value binding. That frozen
+scientific consumer is the named compatibility dependency; do not repoint it at 1.1.
+Its source-record equality is tested and its compatibility ends only on a separately
+qualified warehouse successor. Rollback office/house admission selects no annual
+release; it never substitutes warehouse damage or converts unsupported response to zero.
+
+Hazard owns native annual clocks, fixed alternative location per year, retained
+unavailable mass, one same-building annual cap, weighted parent distributions and
+exact fixed-mass tail metrics. Combined remains labeled EAL sum / metric-wise tail
+maximum without a joint annual distribution. Full-property risk stays unavailable.
+Revisit with observed first-floor/building facts, stronger same-scope value evidence,
+claims calibration, coastal mechanisms, native source/domain gaps or source-class
+interpretation evidence. These triggers do not create speculative numeric modifiers.

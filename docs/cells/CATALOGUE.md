@@ -76,7 +76,7 @@ Cell text: status · shape tier / cost tier. *Partial* means some parts of the a
 | Cell | Status | Version | Method | Curves | Shape | Cost | Outside checks |
 |---|---|---|---|---:|---|---|---|
 | [Hail](#hail-real-estate) | Proposal | model v0.1, docs r1 | Built from references | 6 | T3–T4 | T3–T4 | 1 |
-| [Flood](#flood-real-estate) | Live | model v1.0, docs r1 | Adopted as published | 1 | T2 | T2 | 1 |
+| [Flood](#flood-real-estate) | Live | model v1.1, docs r1 | Adopted as published | 3 | T2 | T2 | 1 |
 | [Hurricane wind](#tropical-cyclone-wind-real-estate) | Proposal | model v0.2, docs r1 | Adopted as published | 20 | T2 | T2 | none yet |
 | [Convective wind](#convective-wind-real-estate) | Proposal | model v0.1, docs r1 | Built from references | 6 | T3 | T4 | 1 |
 | [Wildfire](#wildfire-real-estate) | Proposal | model v0.1, docs r1 | Built from references | 3 | T3 | T4 | 2 |
@@ -746,26 +746,29 @@ Cell text: status · shape tier / cost tier. *Partial* means some parts of the a
 
 ### Real estate × Flood
 
-**Live** · model v1.0, docs r1 · `flood_real_estate` · [curve file](flood_real_estate/current/flood_real_estate__model_v1_0__docs_r1__curve_artifact.json) · 2026-10-26: Warehouse source/value scope accepted by Divy; source and consumer KAT review by agent
+**Live** · model v1.1, docs r1 · `flood_real_estate` · [curve file](flood_real_estate/current/flood_real_estate__model_v1_1__docs_r1__curve_artifact.json) · 2026-10-26: Warehouse source/value scope accepted by Divy; source and consumer KAT review by agent
 
-**Consumer binding inside this cell:** [warehouse_flood_screening_v1](../contracts/hazard_handoff/warehouse_flood_screening_v1/binding.json)
+**Consumer binding inside this cell:** [warehouse_flood_screening_v1](../contracts/hazard_handoff/warehouse_flood_screening_v1/binding.json) · [office_flood_screening_v1](../contracts/hazard_handoff/office_flood_screening_v1/binding.json) · [house_flood_screening_v1](../contracts/hazard_handoff/house_flood_screening_v1/binding.json)
 
-**Input:** Warehouse only: water depth in feet above its first floor, -4 to 24 ft; Hazard applies the 0.25-ft grade-to-floor bridge and dry-ground rule once
+**Input:** Explicit warehouse, three-story office or slab-house selector; water depth in feet above its first floor, -4 to 24 ft; grade dry zero and 0.25/0.25/0.75-ft floor bridge once
 
-**Method:** Adopted as published. Unchanged FEMA Hazus DF341 building loss ratio for the accepted warehouse, used for freshwater and coastal still water; no wave, velocity or salinity modifier.
+**Method:** Adopted as published. Unchanged FEMA Hazus DF341/DF431/DF129 for the three accepted profiles, freshwater and coastal still water; wave, velocity and contents excluded.
 
 | Part | Curves | Variants | Shape | Cost | Notes |
 |---|---|---|---|---|---|
 | Warehouse | `FRE_IND_HAZUS_DF341` | water: river or coastal (same curve) | T2 · Hazus DF 341 points | T2 · Hazus loss ratio of replacement value | *Key assumption:* $11M same-building RCN is an accepted T4 RLB-to-Hazus scope transfer; coastal still-water response remains a qualified proxy |
+| Office | `FRE_OFF_HAZUS_DF431` | water: river or coastal (same curve) | T2 · Hazus DF431 points | T2 · Hazus loss ratio of structure replacement value | *Key assumption:* Literal source wet-side low-depth loss and first-floor assumption accepted under S1; building RCN scope transfer remains T4 |
+| House | `FRE_RES_HAZUS_DF129` | water: river or coastal (same curve) | T2 · Hazus DF129 points | T2 · Hazus loss ratio of structure replacement value | *Key assumption:* Literal source wet-side low-depth loss and first-floor assumption accepted under S1; building RCN scope transfer remains T4 |
 
 **How to use this curve**
 
 - Damage is a share of: Structure replacement cost new of the same building (no land, contents or depreciation)
-- Single event: conditional: accepted warehouse only; named water type and same-floor depth required
+- Single event: conditional: exact selected warehouse/office/house, named water type and same-floor depth required
 - Scenario dollars: conditional: exact qualified same-building RCN and exposure basis required
 - Yearly loss: conditional: Hazard must verify frequency, warehouse coupling, missing mass, cap and retained annual distributions
 - Condition: flood_water_type is required; unknown water withholds
 - Condition: When Hazard sends depth above the floor it must apply the dry-ground rule itself (depth above ground of 0 or less means no damage)
+- Condition: Office/house literal positive wet-side response retained; no interpolation ramp through grade dry zero
 
 **Scope**
 
@@ -793,9 +796,9 @@ Cell text: status · shape tier / cost tier. *Partial* means some parts of the a
 
 **Open items**
 
-- House, office and retail remain in the unadmitted v0.2 research package
-- Coastal warehouse claims are thin and indicate potential low bias
-- Wave, velocity, salinity, contents and BI remain excluded
+- Retail remains in the unadmitted research package
+- Source class/height and coastal transfer limitations; no claims calibration
+- Wave, velocity, salinity, contents and BI excluded; annual source/coupling/cap gates remain consumer-owned
 
 **Files:** [write-up](flood_real_estate/current/derivation.md) · [decisions](flood_real_estate/proposed/DECISION_LOG_flood_real_estate__model_v0_1__docs_r1.md) · [validation](flood_real_estate/current/validation.json) · [notebooks](../../notebooks/flood/real_estate)
 
