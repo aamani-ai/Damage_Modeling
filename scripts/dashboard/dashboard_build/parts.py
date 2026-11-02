@@ -335,6 +335,17 @@ def _rollup(subcomponents: list[dict[str, Any]]) -> dict[str, Any]:
     return {**counts(subcomponents), "by_hazard": {h: counts([r for r in subcomponents if r["hazard"]["slug"] == h]) for h in hazards}}
 
 
+def _construction_ref(curve: dict[str, Any]) -> dict[str, Any]:
+    """Compact pointer for the matrix; the curve JSON is the one detailed construction document."""
+    block = curve.get("construction") or {}
+    return {
+        "curve_id": curve["curve_id"], "data_path": curve.get("data_path"), "curve_type": block.get("curve_type"),
+        "curve_form": block.get("curve_form"), "formula": block.get("formula"), "artifact": block.get("artifact"),
+        "parameter_count": len(block.get("parameters") or []) + len(block.get("additional_parameter_rows") or []),
+        "source_ids": block.get("source_ids") or [], "production_use": block.get("production_use"),
+    }
+
+
 def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dict[str, dict[str, Any]], sl: dict[str, Any], registers: dict[tuple[str, str], Any],
                bess_values: dict[str, float] | None, fb_binding: dict[str, Any] | None, twin: dict[str, Any], sub_budget: dict[str, Any] | None,
                sub_crosswalk: dict[str, Any] | None, resolve_state: Any, all_curves: dict[str, dict[str, Any]] | None = None) -> dict[str, Any]:
@@ -492,8 +503,7 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                 tier_codes += [x for r_ in e.data.get("rows") or [] for x in (r_.get("shape"), r_.get("cost")) if x]
             curve_ids = c.get("curve_ids") or sorted({cid for p in mine for cid in p.get("curves") or []})
             curve_ids = sorted({actual for pattern in curve_ids for actual in all_curve_lookup if fnmatchcase(actual, pattern)})
-            construction = [{"curve_id": cid, "data_path": all_curve_lookup[cid].get("data_path"), **(all_curve_lookup[cid].get("construction") or {})}
-                            for cid in curve_ids if cid in all_curve_lookup]
+            construction = [_construction_ref(all_curve_lookup[cid]) for cid in curve_ids if cid in all_curve_lookup]
             curve_states = {"curve", "whole", "reused"}
             coverage = "curve" if c.get("state") in curve_states | {"partial"} else "gap"
             completeness = "complete" if c.get("state") in curve_states else "incomplete"

@@ -88,7 +88,7 @@ export interface Part {
   occurrence: { mark: string; state: string; sentence: string } | null; drawn: boolean;
 }
 
-export interface SubcomponentConstruction {
+export interface CurveConstruction {
   curve_id: string; data_path: string | null; curve_type: string; curve_form: string | null; formula: string | null;
   axis: Axis | null; parameters: { name: string; definition: string; value: unknown; value_path: string | null; tier: string | null; tier_word: string | null; reasoning: string[]; source_ids: string[]; sources: Record<string, unknown>[]; register_rows: string[]; source_scope: "parameter" | "curve" }[];
   additional_parameter_rows: Record<string, unknown>[]; sources: Record<string, unknown>[]; source_ids: string[];
@@ -96,11 +96,17 @@ export interface SubcomponentConstruction {
   production_use: { state: "runtime_indexed" | "reused_binding" | "not_runtime_indexed"; consumer_pin: string | null; sentence: string };
 }
 
+export interface SubcomponentConstructionRef {
+  curve_id: string; data_path: string | null; curve_type: string; curve_form: string | null; formula: string | null; artifact: string | null;
+  parameter_count: number; source_ids: string[];
+  production_use: { state: "runtime_indexed" | "reused_binding" | "not_runtime_indexed"; consumer_pin: string | null; sentence: string };
+}
+
 export interface Subcomponent {
   key: string; label: string; asset: Slug; hazard: Hazard; entry_id: string | null; catalogue_status: Status | "missing";
   cell_state: string; coverage: "curve" | "gap"; completeness: "complete" | "incomplete"; curve_ids: string[]; failure_unit_ids: string[];
   tier_span: string; evidence_labels: ("field-calibrated" | "published" | "borrowed" | "our judgment")[]; evidence_words: string;
-  construction: SubcomponentConstruction[];
+  construction: SubcomponentConstructionRef[];
   production_use: { state: "runtime_indexed" | "reused_binding" | "not_runtime_indexed"; consumer_pin: string | null };
   gap: { reason: string; occurrence: OccurrenceBucket | null; register: { path: string; sha256: string; search_log: string | null; last_searched: string | null; question: string | null } | null } | null;
 }
@@ -174,7 +180,7 @@ export interface Curve {
   title: string; asset: Slug; hazard: Slug; status: Status; rail: Rail;
   parameters_rows: { id: string; name: string; value: unknown; tier: string | null; source_ids: string[]; claim_ids: string[]; curve_id: string | null; role: string | null; status: string | null; reasoning: string | null; update_trigger: string | null }[];
   sources_for_curve: string[]; occurrence: (OccurrenceBucket & { bucket: string | null }) | null; review: Review; summary: string;
-  versions: Record<string, unknown>[]; data_path: string;
+  versions: Record<string, unknown>[]; data_path: string; construction: CurveConstruction;
 }
 
 export interface AssetCell {
@@ -186,7 +192,8 @@ export interface AssetRow { key: string; label: string; value_usd: number | null
 export interface AssetView {
   asset: Slug; summary: string; reference: { label: string; source: string; total_usd: number } | null;
   hazards: (Hazard & { entry_id: string | null; status: Status | null; cell_title: string | null; occurrence_href: string | null; has_register: boolean })[];
-  rows: AssetRow[]; entries: Tile[]; has_buckets: boolean; twin_crosswalk: { sha256: string | null; rows: number | null } | null;
+  rows: AssetRow[]; subcomponents: Subcomponent[]; subcomponent_rollup: SubcomponentRollup;
+  entries: Tile[]; has_buckets: boolean; twin_crosswalk: { sha256: string | null; rows: number | null } | null;
 }
 
 export interface OccurrencePage {
