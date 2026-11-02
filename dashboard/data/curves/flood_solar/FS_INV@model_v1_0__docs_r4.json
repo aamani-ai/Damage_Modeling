@@ -1123,5 +1123,394 @@
    "source": "CHANGELOG.json"
   }
  ],
- "data_path": "curves/flood_solar/FS_INV@model_v1_0__docs_r4.json"
+ "data_path": "curves/flood_solar/FS_INV@model_v1_0__docs_r4.json",
+ "construction_sources": [
+  {
+   "id": "DOE_FEMP_PV_FLOOD",
+   "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+   "citation": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+   "url": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+   "locator": null,
+   "role": "Solar-specific flood pathways: total submersion, raising equipment, conduit water paths, enclosure ratings, stormwater/scour measures.",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+    "sheet": "Sources"
+   },
+   "aliases": [
+    "DOE_FEMP_PV_FLOOD"
+   ],
+   "source_type": null,
+   "doi": null,
+   "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+   "link_kind": "url",
+   "no_link_sentence": null
+  },
+  {
+   "id": "NEMA_GD1_2019",
+   "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+   "citation": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+   "url": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+   "locator": null,
+   "role": "Replacement/reconditioning logic for water-exposed electrical distribution, power equipment, transformers, cables, electronic products.",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+    "sheet": "Sources"
+   },
+   "aliases": [
+    "NEMA_GD1_2019"
+   ],
+   "source_type": null,
+   "doi": null,
+   "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+   "link_kind": "url",
+   "no_link_sentence": null
+  },
+  {
+   "id": "USACE_HEC_FIA",
+   "title": "Depth-Percent Damage Relationships",
+   "citation": "Depth-Percent Damage Relationships",
+   "url": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+   "locator": null,
+   "role": "Supports tabular depth-percent damage relationship and interpolation approach.",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+    "sheet": "Sources"
+   },
+   "aliases": [
+    "USACE_HEC_FIA"
+   ],
+   "source_type": null,
+   "doi": null,
+   "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+   "link_kind": "url",
+   "no_link_sentence": null
+  }
+ ],
+ "construction": {
+  "curve_type": "piecewise linear",
+  "curve_form": "piecewise_linear",
+  "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+  "axis": {
+   "id": "local_depth_above_component_datum_m",
+   "label": "local depth above component datum",
+   "unit": "m",
+   "input_field": "water_surface_elevation_m",
+   "kind": "continuous",
+   "valid_range": [
+    0,
+    2.0
+   ],
+   "bridge": {
+    "formula": "h_i = max(0, WSE - z_i_crit)"
+   }
+  },
+  "parameters": [
+   {
+    "name": "points",
+    "definition": "ordered hazard-intensity and damage-ratio knots",
+    "value": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.02,
+      0.05
+     ],
+     [
+      0.05,
+      0.25
+     ],
+     [
+      0.15,
+      0.75
+     ],
+     [
+      0.3,
+      0.95
+     ],
+     [
+      0.6,
+      1.0
+     ],
+     [
+      1.0,
+      1.0
+     ],
+     [
+      1.5,
+      1.0
+     ],
+     [
+      2.0,
+      1.0
+     ]
+    ],
+    "value_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json::curve_id=FS_INV::parameters.points",
+    "tier": null,
+    "tier_word": null,
+    "reasoning": [
+     "No parameter-specific register row; use the curve-level construction sources and artifact value path."
+    ],
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD",
+     "NEMA_GD1_2019",
+     "USACE_HEC_FIA"
+    ],
+    "sources": [
+     {
+      "id": "DOE_FEMP_PV_FLOOD",
+      "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+      "citation": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+      "url": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+      "locator": null,
+      "role": "Solar-specific flood pathways: total submersion, raising equipment, conduit water paths, enclosure ratings, stormwater/scour measures.",
+      "tier": null,
+      "permitted": null,
+      "prohibited": null,
+      "decision": null,
+      "accessed_on": null,
+      "provenance": "extracted-from-workbook",
+      "from": {
+       "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+       "sheet": "Sources"
+      },
+      "aliases": [
+       "DOE_FEMP_PV_FLOOD"
+      ],
+      "source_type": null,
+      "doi": null,
+      "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+      "link_kind": "url",
+      "no_link_sentence": null
+     },
+     {
+      "id": "NEMA_GD1_2019",
+      "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+      "citation": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+      "url": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+      "locator": null,
+      "role": "Replacement/reconditioning logic for water-exposed electrical distribution, power equipment, transformers, cables, electronic products.",
+      "tier": null,
+      "permitted": null,
+      "prohibited": null,
+      "decision": null,
+      "accessed_on": null,
+      "provenance": "extracted-from-workbook",
+      "from": {
+       "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+       "sheet": "Sources"
+      },
+      "aliases": [
+       "NEMA_GD1_2019"
+      ],
+      "source_type": null,
+      "doi": null,
+      "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+      "link_kind": "url",
+      "no_link_sentence": null
+     },
+     {
+      "id": "USACE_HEC_FIA",
+      "title": "Depth-Percent Damage Relationships",
+      "citation": "Depth-Percent Damage Relationships",
+      "url": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+      "locator": null,
+      "role": "Supports tabular depth-percent damage relationship and interpolation approach.",
+      "tier": null,
+      "permitted": null,
+      "prohibited": null,
+      "decision": null,
+      "accessed_on": null,
+      "provenance": "extracted-from-workbook",
+      "from": {
+       "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+       "sheet": "Sources"
+      },
+      "aliases": [
+       "USACE_HEC_FIA"
+      ],
+      "source_type": null,
+      "doi": null,
+      "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+      "link_kind": "url",
+      "no_link_sentence": null
+     }
+    ],
+    "register_rows": [],
+    "source_scope": "curve"
+   }
+  ],
+  "additional_parameter_rows": [
+   {
+    "id": "depth_damage_points",
+    "name": "depth_damage_points",
+    "value": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.02,
+      0.05
+     ],
+     [
+      0.05,
+      0.25
+     ],
+     [
+      0.15,
+      0.75
+     ],
+     [
+      0.3,
+      0.95
+     ],
+     [
+      0.6,
+      1.0
+     ],
+     [
+      1.0,
+      1.0
+     ],
+     [
+      1.5,
+      1.0
+     ],
+     [
+      2.0,
+      1.0
+     ]
+    ],
+    "tier": "T3",
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD",
+     "NEMA_GD1_2019",
+     "USACE_HEC_FIA"
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_INV",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+    "update_trigger": "claims/OEM/forensic depth-damage data"
+   }
+  ],
+  "sources": [
+   {
+    "id": "DOE_FEMP_PV_FLOOD",
+    "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+    "citation": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+    "url": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+    "locator": null,
+    "role": "Solar-specific flood pathways: total submersion, raising equipment, conduit water paths, enclosure ratings, stormwater/scour measures.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "DOE_FEMP_PV_FLOOD"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NEMA_GD1_2019",
+    "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+    "citation": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+    "url": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+    "locator": null,
+    "role": "Replacement/reconditioning logic for water-exposed electrical distribution, power equipment, transformers, cables, electronic products.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "NEMA_GD1_2019"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+    "link_kind": "url",
+    "no_link_sentence": null
+   },
+   {
+    "id": "USACE_HEC_FIA",
+    "title": "Depth-Percent Damage Relationships",
+    "citation": "Depth-Percent Damage Relationships",
+    "url": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+    "locator": null,
+    "role": "Supports tabular depth-percent damage relationship and interpolation approach.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "USACE_HEC_FIA"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+    "link_kind": "url",
+    "no_link_sentence": null
+   }
+  ],
+  "source_ids": [
+   "DOE_FEMP_PV_FLOOD",
+   "NEMA_GD1_2019",
+   "USACE_HEC_FIA"
+  ],
+  "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+  "evaluator": {
+   "module": "scripts/reference_helpers/damage_curve_eval.py",
+   "function": "evaluate_curve_record",
+   "note": "generic piecewise-linear evaluator; sampled inside the record's valid range"
+  },
+  "production_use": {
+   "state": "runtime_indexed",
+   "consumer_pin": "flood_solar@model_v1_0__docs_r4",
+   "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
+  }
+ }
 }

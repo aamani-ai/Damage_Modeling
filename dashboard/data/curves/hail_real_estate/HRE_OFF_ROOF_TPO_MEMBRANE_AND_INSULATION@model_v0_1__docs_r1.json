@@ -3637,5 +3637,1151 @@
   }
  },
  "versions": [],
- "data_path": "curves/hail_real_estate/HRE_OFF_ROOF_TPO_MEMBRANE_AND_INSULATION@model_v0_1__docs_r1.json"
+ "data_path": "curves/hail_real_estate/HRE_OFF_ROOF_TPO_MEMBRANE_AND_INSULATION@model_v0_1__docs_r1.json",
+ "construction_sources": [
+  {
+   "id": "HRE-S002",
+   "aliases": [],
+   "citation": "Morrison, S. J. (Haag Engineering Co.). Holy hail! (part two: low-slope roof systems). Professional Roofing, National Roofing Contractors Association, June 2009.",
+   "url": "https://professionalroofing.net/articles/article/1506",
+   "locator": "Figure 'Hail thresholds for low-slope roof coverings' (image https://proroofing.blob.core.windows.net/publicwebsitefiles/images/0609_41_3.jpg): thermoplastic single-ply membranes 1 to 2 in; EPDM 2 in; steel panels 2 1/2 in; smooth BUR 1 3/4 to 2 in; modified bitumen 1 1/2 to 2 in; text: thresholds assume hard hail, perpendicular impacts, average support, roofs in good or midlife condition; functional damage = reduced weather resistance or service life; stress plates and fastened insulation are the most sensitive areas",
+   "role": "curve_data_carrier;method_definition",
+   "tier": "T3",
+   "permitted": "Use the thermoplastic single-ply range for the office TPO band and the steel-panel threshold as the onset for the warehouse roof.",
+   "prohibited": "Read the range as a probability interval stated by the source; apply the steel-panel threshold to cosmetic denting.",
+   "decision": "adopt_with_limits",
+   "accessed_on": "2026-10-18",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://professionalroofing.net/articles/article/1506",
+   "link_kind": "url",
+   "title": "Morrison, S. J. (Haag Engineering Co.)",
+   "no_link_sentence": null
+  },
+  {
+   "id": "HRE-S004",
+   "aliases": [],
+   "citation": "Olson, E. (Simpson Gumpertz & Heger). Understanding hail damage risks for roofing and wall systems. SGH topic brief, 1 June 2026.",
+   "url": "https://www.sgh.com/insight/understanding-hail-damage-risks-for-roofing-and-wall-systems/",
+   "locator": "Web page: asphalt shingles granule loss can begin above about 1 in; single-ply membranes damaged at 1.5 in or more; metal roofing cosmetic damage at 1.5 in or more; built-up and concrete tile from 2 in; FM 4473 moderate < 1.75 in, severe 1.75-2 in, very severe > 2 in; UL 2218 Class 4 = 2 in hailstone energy; no industry hail rating for wall coverings; glazing described as susceptible (no size)",
+   "role": "independent_verification",
+   "tier": "T3",
+   "permitted": "Cross-check the TPO and metal bands; document that walls and windows have no public threshold (T4 judgment).",
+   "prohibited": "Use the brief's sizes as measured thresholds for walls or windows (none are given).",
+   "decision": "adopt_with_limits",
+   "accessed_on": "2026-10-18",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.sgh.com/insight/understanding-hail-damage-risks-for-roofing-and-wall-systems/",
+   "link_kind": "url",
+   "title": "Olson, E. (Simpson Gumpertz & Heger)",
+   "no_link_sentence": null
+  },
+  {
+   "id": "HRE-S005",
+   "aliases": [],
+   "citation": "Bhawalkar, S., L. Yang and T. Taylor. Ice ball impact resistance of heat-aged TPO roofing membranes. IIBEC Interface, January 2017.",
+   "url": "https://iibec.org/publication-post/ice-ball-impact-resistance-of-heat-aged-tpo-roofing-membranes/",
+   "locator": "Web article: 2 in freezer ice balls at FM Class 4 energy (23.75-26.13 ft-lbf); fully adhered 60-mil TPO on HD polyiso cover board over 2 in polyiso; heat-aged up to 30-year equivalence; membrane not punctured unless impact over a fastener; cover board and insulation facers cracked at 20-year equivalence after three impacts; ice-ball results rank materials, correlation to hail not established",
+   "role": "independent_verification",
+   "tier": "T3",
+   "permitted": "Support the low TPO case (adhered membrane on a cover board survives 2 in ice balls).",
+   "prohibited": "Assume the reference office has an adhered membrane on a cover board (attachment not stated in the profile).",
+   "decision": "adopt_with_limits",
+   "accessed_on": "2026-10-18",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://iibec.org/publication-post/ice-ball-impact-resistance-of-heat-aged-tpo-roofing-membranes/",
+   "link_kind": "url",
+   "title": "Bhawalkar, S., L. Yang and T",
+   "no_link_sentence": null
+  },
+  {
+   "id": "HRE-S006",
+   "aliases": [],
+   "citation": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+   "url": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+   "locator": "§8.1.2.2 Table 8-5 p. 8-5 (one-storey residential subassembly cost ratios: roofing 3%); Table 8-7 p. 8-6 (roofing $1.79 of $59.88/ft2); §8.1.3 pp. 8-7 to 8-8 (asphalt roof covering replaced above a 0.5% damage state; repair-and-remodel factor 1.25; explicit window cost functions); §8.1.7.1.1 Eq. 8-10 p. 8-21 (story adjustment for roofing); Table 8-11 pp. 8-23 to 8-24 (three-storey motel: roof covering 1.1%, insulation 0.7%, roofing 2.1%, windows and glazed walls 1.8%); §8.1.7.2 p. 8-25 (commercial loss: repair factor 1.25, overhead and profit 1.20)",
+   "role": "value_basis",
+   "tier": "T2",
+   "permitted": "Take the roof-cover share of replacement cost for the house (residential table) and the office (three-storey commercial example) with Hazus's own repair factors.",
+   "prohibited": "Read the Hazus hurricane damage functions as hail evidence (Hazus has no hail model); apply the motel example to the warehouse.",
+   "decision": "adopt_with_limits",
+   "accessed_on": "2026-10-18",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+   "link_kind": "url",
+   "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+   "no_link_sentence": null
+  }
+ ],
+ "construction": {
+  "curve_type": "piecewise linear",
+  "curve_form": "piecewise_linear",
+  "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+  "axis": {
+   "id": "HAIL_DIAMETER_MESH_EQUIV",
+   "label": "hazard's MESH75 hail diameter",
+   "unit": "mm",
+   "input_field": "mesh_diameter_mm",
+   "valid_range": [
+    0.0,
+    203.2
+   ],
+   "kind": "continuous",
+   "label_from_id": true
+  },
+  "parameters": [
+   {
+    "name": "points",
+    "definition": "ordered hazard-intensity and damage-ratio knots",
+    "value": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      1.0,
+      0.0
+     ],
+     [
+      2.0,
+      0.0
+     ],
+     [
+      3.0,
+      0.0
+     ],
+     [
+      4.0,
+      0.0
+     ],
+     [
+      5.0,
+      0.0
+     ],
+     [
+      6.0,
+      0.0
+     ],
+     [
+      7.0,
+      0.0
+     ],
+     [
+      8.0,
+      0.0
+     ],
+     [
+      9.0,
+      0.0
+     ],
+     [
+      10.0,
+      0.0
+     ],
+     [
+      11.0,
+      0.0
+     ],
+     [
+      12.0,
+      0.0
+     ],
+     [
+      13.0,
+      1e-06
+     ],
+     [
+      14.0,
+      4e-06
+     ],
+     [
+      15.0,
+      1.7e-05
+     ],
+     [
+      16.0,
+      6.2e-05
+     ],
+     [
+      17.0,
+      0.000192
+     ],
+     [
+      18.0,
+      0.00052
+     ],
+     [
+      19.0,
+      0.001252
+     ],
+     [
+      20.0,
+      0.002722
+     ],
+     [
+      21.0,
+      0.005419
+     ],
+     [
+      22.0,
+      0.00998
+     ],
+     [
+      23.0,
+      0.017168
+     ],
+     [
+      24.0,
+      0.027804
+     ],
+     [
+      25.0,
+      0.042685
+     ],
+     [
+      26.0,
+      0.062492
+     ],
+     [
+      27.0,
+      0.087701
+     ],
+     [
+      28.0,
+      0.118517
+     ],
+     [
+      29.0,
+      0.154845
+     ],
+     [
+      30.0,
+      0.196287
+     ],
+     [
+      31.0,
+      0.242175
+     ],
+     [
+      32.0,
+      0.29163
+     ],
+     [
+      33.0,
+      0.343631
+     ],
+     [
+      34.0,
+      0.397094
+     ],
+     [
+      35.0,
+      0.450939
+     ],
+     [
+      36.0,
+      0.504159
+     ],
+     [
+      37.0,
+      0.555857
+     ],
+     [
+      38.0,
+      0.605286
+     ],
+     [
+      39.0,
+      0.651859
+     ],
+     [
+      40.0,
+      0.695154
+     ],
+     [
+      41.0,
+      0.734905
+     ],
+     [
+      42.0,
+      0.770985
+     ],
+     [
+      43.0,
+      0.803387
+     ],
+     [
+      44.0,
+      0.832201
+     ],
+     [
+      45.0,
+      0.857593
+     ],
+     [
+      46.0,
+      0.87978
+     ],
+     [
+      47.0,
+      0.899017
+     ],
+     [
+      48.0,
+      0.915573
+     ],
+     [
+      49.0,
+      0.929728
+     ],
+     [
+      50.0,
+      0.941753
+     ],
+     [
+      51.0,
+      0.951909
+     ],
+     [
+      52.0,
+      0.96044
+     ],
+     [
+      53.0,
+      0.967571
+     ],
+     [
+      54.0,
+      0.973502
+     ],
+     [
+      55.0,
+      0.978414
+     ],
+     [
+      56.0,
+      0.982466
+     ],
+     [
+      57.0,
+      0.985795
+     ],
+     [
+      58.0,
+      0.988521
+     ],
+     [
+      59.0,
+      0.990745
+     ],
+     [
+      60.0,
+      0.992555
+     ],
+     [
+      61.0,
+      0.994023
+     ],
+     [
+      62.0,
+      0.995211
+     ],
+     [
+      63.0,
+      0.996169
+     ],
+     [
+      64.0,
+      0.996941
+     ],
+     [
+      65.0,
+      0.997561
+     ],
+     [
+      66.0,
+      0.998058
+     ],
+     [
+      67.0,
+      0.998456
+     ],
+     [
+      68.0,
+      0.998774
+     ],
+     [
+      69.0,
+      0.999027
+     ],
+     [
+      70.0,
+      0.999229
+     ],
+     [
+      71.0,
+      0.99939
+     ],
+     [
+      72.0,
+      0.999517
+     ],
+     [
+      73.0,
+      0.999619
+     ],
+     [
+      74.0,
+      0.999699
+     ],
+     [
+      75.0,
+      0.999762
+     ],
+     [
+      76.0,
+      0.999812
+     ],
+     [
+      77.0,
+      0.999852
+     ],
+     [
+      78.0,
+      0.999884
+     ],
+     [
+      79.0,
+      0.999908
+     ],
+     [
+      80.0,
+      0.999928
+     ],
+     [
+      81.0,
+      0.999943
+     ],
+     [
+      82.0,
+      0.999955
+     ],
+     [
+      83.0,
+      0.999965
+     ],
+     [
+      84.0,
+      0.999972
+     ],
+     [
+      85.0,
+      0.999978
+     ],
+     [
+      86.0,
+      0.999983
+     ],
+     [
+      87.0,
+      0.999987
+     ],
+     [
+      88.0,
+      0.999989
+     ],
+     [
+      89.0,
+      0.999992
+     ],
+     [
+      90.0,
+      0.999993
+     ],
+     [
+      91.0,
+      0.999995
+     ],
+     [
+      92.0,
+      0.999996
+     ],
+     [
+      93.0,
+      0.999997
+     ],
+     [
+      94.0,
+      0.999998
+     ],
+     [
+      95.0,
+      0.999998
+     ],
+     [
+      96.0,
+      0.999998
+     ],
+     [
+      97.0,
+      0.999999
+     ],
+     [
+      98.0,
+      0.999999
+     ],
+     [
+      99.0,
+      0.999999
+     ],
+     [
+      100.0,
+      0.999999
+     ],
+     [
+      101.0,
+      1.0
+     ],
+     [
+      102.0,
+      1.0
+     ],
+     [
+      103.0,
+      1.0
+     ],
+     [
+      104.0,
+      1.0
+     ],
+     [
+      105.0,
+      1.0
+     ],
+     [
+      106.0,
+      1.0
+     ],
+     [
+      107.0,
+      1.0
+     ],
+     [
+      108.0,
+      1.0
+     ],
+     [
+      109.0,
+      1.0
+     ],
+     [
+      110.0,
+      1.0
+     ],
+     [
+      111.0,
+      1.0
+     ],
+     [
+      112.0,
+      1.0
+     ],
+     [
+      113.0,
+      1.0
+     ],
+     [
+      114.0,
+      1.0
+     ],
+     [
+      115.0,
+      1.0
+     ],
+     [
+      116.0,
+      1.0
+     ],
+     [
+      117.0,
+      1.0
+     ],
+     [
+      118.0,
+      1.0
+     ],
+     [
+      119.0,
+      1.0
+     ],
+     [
+      120.0,
+      1.0
+     ],
+     [
+      121.0,
+      1.0
+     ],
+     [
+      122.0,
+      1.0
+     ],
+     [
+      123.0,
+      1.0
+     ],
+     [
+      124.0,
+      1.0
+     ],
+     [
+      125.0,
+      1.0
+     ],
+     [
+      126.0,
+      1.0
+     ],
+     [
+      127.0,
+      1.0
+     ],
+     [
+      128.0,
+      1.0
+     ],
+     [
+      129.0,
+      1.0
+     ],
+     [
+      130.0,
+      1.0
+     ],
+     [
+      131.0,
+      1.0
+     ],
+     [
+      132.0,
+      1.0
+     ],
+     [
+      133.0,
+      1.0
+     ],
+     [
+      134.0,
+      1.0
+     ],
+     [
+      135.0,
+      1.0
+     ],
+     [
+      136.0,
+      1.0
+     ],
+     [
+      137.0,
+      1.0
+     ],
+     [
+      138.0,
+      1.0
+     ],
+     [
+      139.0,
+      1.0
+     ],
+     [
+      140.0,
+      1.0
+     ],
+     [
+      141.0,
+      1.0
+     ],
+     [
+      142.0,
+      1.0
+     ],
+     [
+      143.0,
+      1.0
+     ],
+     [
+      144.0,
+      1.0
+     ],
+     [
+      145.0,
+      1.0
+     ],
+     [
+      146.0,
+      1.0
+     ],
+     [
+      147.0,
+      1.0
+     ],
+     [
+      148.0,
+      1.0
+     ],
+     [
+      149.0,
+      1.0
+     ],
+     [
+      150.0,
+      1.0
+     ],
+     [
+      151.0,
+      1.0
+     ],
+     [
+      152.0,
+      1.0
+     ],
+     [
+      153.0,
+      1.0
+     ],
+     [
+      154.0,
+      1.0
+     ],
+     [
+      155.0,
+      1.0
+     ],
+     [
+      156.0,
+      1.0
+     ],
+     [
+      157.0,
+      1.0
+     ],
+     [
+      158.0,
+      1.0
+     ],
+     [
+      159.0,
+      1.0
+     ],
+     [
+      160.0,
+      1.0
+     ],
+     [
+      161.0,
+      1.0
+     ],
+     [
+      162.0,
+      1.0
+     ],
+     [
+      163.0,
+      1.0
+     ],
+     [
+      164.0,
+      1.0
+     ],
+     [
+      165.0,
+      1.0
+     ],
+     [
+      166.0,
+      1.0
+     ],
+     [
+      167.0,
+      1.0
+     ],
+     [
+      168.0,
+      1.0
+     ],
+     [
+      169.0,
+      1.0
+     ],
+     [
+      170.0,
+      1.0
+     ],
+     [
+      171.0,
+      1.0
+     ],
+     [
+      172.0,
+      1.0
+     ],
+     [
+      173.0,
+      1.0
+     ],
+     [
+      174.0,
+      1.0
+     ],
+     [
+      175.0,
+      1.0
+     ],
+     [
+      176.0,
+      1.0
+     ],
+     [
+      177.0,
+      1.0
+     ],
+     [
+      178.0,
+      1.0
+     ],
+     [
+      179.0,
+      1.0
+     ],
+     [
+      180.0,
+      1.0
+     ],
+     [
+      181.0,
+      1.0
+     ],
+     [
+      182.0,
+      1.0
+     ],
+     [
+      183.0,
+      1.0
+     ],
+     [
+      184.0,
+      1.0
+     ],
+     [
+      185.0,
+      1.0
+     ],
+     [
+      186.0,
+      1.0
+     ],
+     [
+      187.0,
+      1.0
+     ],
+     [
+      188.0,
+      1.0
+     ],
+     [
+      189.0,
+      1.0
+     ],
+     [
+      190.0,
+      1.0
+     ],
+     [
+      191.0,
+      1.0
+     ],
+     [
+      192.0,
+      1.0
+     ],
+     [
+      193.0,
+      1.0
+     ],
+     [
+      194.0,
+      1.0
+     ],
+     [
+      195.0,
+      1.0
+     ],
+     [
+      196.0,
+      1.0
+     ],
+     [
+      197.0,
+      1.0
+     ],
+     [
+      198.0,
+      1.0
+     ],
+     [
+      199.0,
+      1.0
+     ],
+     [
+      200.0,
+      1.0
+     ],
+     [
+      201.0,
+      1.0
+     ],
+     [
+      202.0,
+      1.0
+     ],
+     [
+      203.0,
+      1.0
+     ],
+     [
+      203.2,
+      1.0
+     ]
+    ],
+    "value_path": "docs/cells/hail_real_estate/proposed/hail_real_estate__model_v0_1__docs_r1__curve_artifact.json::curve_id=HRE_OFF_ROOF_TPO_MEMBRANE_AND_INSULATION::parameters.points",
+    "tier": null,
+    "tier_word": null,
+    "reasoning": [
+     "No parameter-specific register row; use the curve-level construction sources and artifact value path."
+    ],
+    "source_ids": [
+     "HRE-S002",
+     "HRE-S004",
+     "HRE-S005",
+     "HRE-S006"
+    ],
+    "sources": [
+     {
+      "id": "HRE-S002",
+      "aliases": [],
+      "citation": "Morrison, S. J. (Haag Engineering Co.). Holy hail! (part two: low-slope roof systems). Professional Roofing, National Roofing Contractors Association, June 2009.",
+      "url": "https://professionalroofing.net/articles/article/1506",
+      "locator": "Figure 'Hail thresholds for low-slope roof coverings' (image https://proroofing.blob.core.windows.net/publicwebsitefiles/images/0609_41_3.jpg): thermoplastic single-ply membranes 1 to 2 in; EPDM 2 in; steel panels 2 1/2 in; smooth BUR 1 3/4 to 2 in; modified bitumen 1 1/2 to 2 in; text: thresholds assume hard hail, perpendicular impacts, average support, roofs in good or midlife condition; functional damage = reduced weather resistance or service life; stress plates and fastened insulation are the most sensitive areas",
+      "role": "curve_data_carrier;method_definition",
+      "tier": "T3",
+      "permitted": "Use the thermoplastic single-ply range for the office TPO band and the steel-panel threshold as the onset for the warehouse roof.",
+      "prohibited": "Read the range as a probability interval stated by the source; apply the steel-panel threshold to cosmetic denting.",
+      "decision": "adopt_with_limits",
+      "accessed_on": "2026-10-18",
+      "provenance": "register",
+      "doi": null,
+      "link": "https://professionalroofing.net/articles/article/1506",
+      "link_kind": "url",
+      "title": "Morrison, S. J. (Haag Engineering Co.)",
+      "no_link_sentence": null
+     },
+     {
+      "id": "HRE-S004",
+      "aliases": [],
+      "citation": "Olson, E. (Simpson Gumpertz & Heger). Understanding hail damage risks for roofing and wall systems. SGH topic brief, 1 June 2026.",
+      "url": "https://www.sgh.com/insight/understanding-hail-damage-risks-for-roofing-and-wall-systems/",
+      "locator": "Web page: asphalt shingles granule loss can begin above about 1 in; single-ply membranes damaged at 1.5 in or more; metal roofing cosmetic damage at 1.5 in or more; built-up and concrete tile from 2 in; FM 4473 moderate < 1.75 in, severe 1.75-2 in, very severe > 2 in; UL 2218 Class 4 = 2 in hailstone energy; no industry hail rating for wall coverings; glazing described as susceptible (no size)",
+      "role": "independent_verification",
+      "tier": "T3",
+      "permitted": "Cross-check the TPO and metal bands; document that walls and windows have no public threshold (T4 judgment).",
+      "prohibited": "Use the brief's sizes as measured thresholds for walls or windows (none are given).",
+      "decision": "adopt_with_limits",
+      "accessed_on": "2026-10-18",
+      "provenance": "register",
+      "doi": null,
+      "link": "https://www.sgh.com/insight/understanding-hail-damage-risks-for-roofing-and-wall-systems/",
+      "link_kind": "url",
+      "title": "Olson, E. (Simpson Gumpertz & Heger)",
+      "no_link_sentence": null
+     },
+     {
+      "id": "HRE-S005",
+      "aliases": [],
+      "citation": "Bhawalkar, S., L. Yang and T. Taylor. Ice ball impact resistance of heat-aged TPO roofing membranes. IIBEC Interface, January 2017.",
+      "url": "https://iibec.org/publication-post/ice-ball-impact-resistance-of-heat-aged-tpo-roofing-membranes/",
+      "locator": "Web article: 2 in freezer ice balls at FM Class 4 energy (23.75-26.13 ft-lbf); fully adhered 60-mil TPO on HD polyiso cover board over 2 in polyiso; heat-aged up to 30-year equivalence; membrane not punctured unless impact over a fastener; cover board and insulation facers cracked at 20-year equivalence after three impacts; ice-ball results rank materials, correlation to hail not established",
+      "role": "independent_verification",
+      "tier": "T3",
+      "permitted": "Support the low TPO case (adhered membrane on a cover board survives 2 in ice balls).",
+      "prohibited": "Assume the reference office has an adhered membrane on a cover board (attachment not stated in the profile).",
+      "decision": "adopt_with_limits",
+      "accessed_on": "2026-10-18",
+      "provenance": "register",
+      "doi": null,
+      "link": "https://iibec.org/publication-post/ice-ball-impact-resistance-of-heat-aged-tpo-roofing-membranes/",
+      "link_kind": "url",
+      "title": "Bhawalkar, S., L. Yang and T",
+      "no_link_sentence": null
+     },
+     {
+      "id": "HRE-S006",
+      "aliases": [],
+      "citation": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "url": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "locator": "§8.1.2.2 Table 8-5 p. 8-5 (one-storey residential subassembly cost ratios: roofing 3%); Table 8-7 p. 8-6 (roofing $1.79 of $59.88/ft2); §8.1.3 pp. 8-7 to 8-8 (asphalt roof covering replaced above a 0.5% damage state; repair-and-remodel factor 1.25; explicit window cost functions); §8.1.7.1.1 Eq. 8-10 p. 8-21 (story adjustment for roofing); Table 8-11 pp. 8-23 to 8-24 (three-storey motel: roof covering 1.1%, insulation 0.7%, roofing 2.1%, windows and glazed walls 1.8%); §8.1.7.2 p. 8-25 (commercial loss: repair factor 1.25, overhead and profit 1.20)",
+      "role": "value_basis",
+      "tier": "T2",
+      "permitted": "Take the roof-cover share of replacement cost for the house (residential table) and the office (three-storey commercial example) with Hazus's own repair factors.",
+      "prohibited": "Read the Hazus hurricane damage functions as hail evidence (Hazus has no hail model); apply the motel example to the warehouse.",
+      "decision": "adopt_with_limits",
+      "accessed_on": "2026-10-18",
+      "provenance": "register",
+      "doi": null,
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "no_link_sentence": null
+     }
+    ],
+    "register_rows": [],
+    "source_scope": "curve"
+   }
+  ],
+  "additional_parameter_rows": [
+   {
+    "id": "office_roof_band",
+    "name": "office_roof_band",
+    "value": "1.0-2.0 in (25.4-50.8 mm)",
+    "tier": "T3",
+    "source_ids": [
+     "HRE-S002",
+     "HRE-S004",
+     "HRE-S005"
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_OFF_ROOF_TPO_MEMBRANE_AND_INSULATION",
+    "pathway_id": "hail_impact",
+    "role": "threshold",
+    "status": "proposed",
+    "reasoning": "HRE-C004, C006, C007.",
+    "update_trigger": "TPO test series by attachment."
+   },
+   {
+    "id": "office_roof_share",
+    "name": "office_roof_share",
+    "value": "0.027 of structure RCN",
+    "tier": "T3",
+    "source_ids": [
+     "HRE-S006"
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_OFF_ROOF_TPO_MEMBRANE_AND_INSULATION",
+    "pathway_id": "hail_impact",
+    "role": "value_share",
+    "status": "proposed",
+    "reasoning": "HRE-C010.",
+    "update_trigger": "Office cost breakdown."
+   }
+  ],
+  "sources": [
+   {
+    "id": "HRE-S002",
+    "aliases": [],
+    "citation": "Morrison, S. J. (Haag Engineering Co.). Holy hail! (part two: low-slope roof systems). Professional Roofing, National Roofing Contractors Association, June 2009.",
+    "url": "https://professionalroofing.net/articles/article/1506",
+    "locator": "Figure 'Hail thresholds for low-slope roof coverings' (image https://proroofing.blob.core.windows.net/publicwebsitefiles/images/0609_41_3.jpg): thermoplastic single-ply membranes 1 to 2 in; EPDM 2 in; steel panels 2 1/2 in; smooth BUR 1 3/4 to 2 in; modified bitumen 1 1/2 to 2 in; text: thresholds assume hard hail, perpendicular impacts, average support, roofs in good or midlife condition; functional damage = reduced weather resistance or service life; stress plates and fastened insulation are the most sensitive areas",
+    "role": "curve_data_carrier;method_definition",
+    "tier": "T3",
+    "permitted": "Use the thermoplastic single-ply range for the office TPO band and the steel-panel threshold as the onset for the warehouse roof.",
+    "prohibited": "Read the range as a probability interval stated by the source; apply the steel-panel threshold to cosmetic denting.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://professionalroofing.net/articles/article/1506",
+    "link_kind": "url",
+    "title": "Morrison, S. J. (Haag Engineering Co.)",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S004",
+    "aliases": [],
+    "citation": "Olson, E. (Simpson Gumpertz & Heger). Understanding hail damage risks for roofing and wall systems. SGH topic brief, 1 June 2026.",
+    "url": "https://www.sgh.com/insight/understanding-hail-damage-risks-for-roofing-and-wall-systems/",
+    "locator": "Web page: asphalt shingles granule loss can begin above about 1 in; single-ply membranes damaged at 1.5 in or more; metal roofing cosmetic damage at 1.5 in or more; built-up and concrete tile from 2 in; FM 4473 moderate < 1.75 in, severe 1.75-2 in, very severe > 2 in; UL 2218 Class 4 = 2 in hailstone energy; no industry hail rating for wall coverings; glazing described as susceptible (no size)",
+    "role": "independent_verification",
+    "tier": "T3",
+    "permitted": "Cross-check the TPO and metal bands; document that walls and windows have no public threshold (T4 judgment).",
+    "prohibited": "Use the brief's sizes as measured thresholds for walls or windows (none are given).",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.sgh.com/insight/understanding-hail-damage-risks-for-roofing-and-wall-systems/",
+    "link_kind": "url",
+    "title": "Olson, E. (Simpson Gumpertz & Heger)",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S005",
+    "aliases": [],
+    "citation": "Bhawalkar, S., L. Yang and T. Taylor. Ice ball impact resistance of heat-aged TPO roofing membranes. IIBEC Interface, January 2017.",
+    "url": "https://iibec.org/publication-post/ice-ball-impact-resistance-of-heat-aged-tpo-roofing-membranes/",
+    "locator": "Web article: 2 in freezer ice balls at FM Class 4 energy (23.75-26.13 ft-lbf); fully adhered 60-mil TPO on HD polyiso cover board over 2 in polyiso; heat-aged up to 30-year equivalence; membrane not punctured unless impact over a fastener; cover board and insulation facers cracked at 20-year equivalence after three impacts; ice-ball results rank materials, correlation to hail not established",
+    "role": "independent_verification",
+    "tier": "T3",
+    "permitted": "Support the low TPO case (adhered membrane on a cover board survives 2 in ice balls).",
+    "prohibited": "Assume the reference office has an adhered membrane on a cover board (attachment not stated in the profile).",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://iibec.org/publication-post/ice-ball-impact-resistance-of-heat-aged-tpo-roofing-membranes/",
+    "link_kind": "url",
+    "title": "Bhawalkar, S., L. Yang and T",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S006",
+    "aliases": [],
+    "citation": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+    "url": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+    "locator": "§8.1.2.2 Table 8-5 p. 8-5 (one-storey residential subassembly cost ratios: roofing 3%); Table 8-7 p. 8-6 (roofing $1.79 of $59.88/ft2); §8.1.3 pp. 8-7 to 8-8 (asphalt roof covering replaced above a 0.5% damage state; repair-and-remodel factor 1.25; explicit window cost functions); §8.1.7.1.1 Eq. 8-10 p. 8-21 (story adjustment for roofing); Table 8-11 pp. 8-23 to 8-24 (three-storey motel: roof covering 1.1%, insulation 0.7%, roofing 2.1%, windows and glazed walls 1.8%); §8.1.7.2 p. 8-25 (commercial loss: repair factor 1.25, overhead and profit 1.20)",
+    "role": "value_basis",
+    "tier": "T2",
+    "permitted": "Take the roof-cover share of replacement cost for the house (residential table) and the office (three-storey commercial example) with Hazus's own repair factors.",
+    "prohibited": "Read the Hazus hurricane damage functions as hail evidence (Hazus has no hail model); apply the motel example to the warehouse.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+    "link_kind": "url",
+    "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+    "no_link_sentence": null
+   }
+  ],
+  "source_ids": [
+   "HRE-S002",
+   "HRE-S004",
+   "HRE-S005",
+   "HRE-S006"
+  ],
+  "artifact": "docs/cells/hail_real_estate/proposed/hail_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+  "evaluator": {
+   "module": "scripts/reference_helpers/hail_real_estate_curve_eval.py",
+   "function": "evaluate_damage_call",
+   "note": "request template from the cell's known-answer tests; the hazard axis field varied over the record's valid range"
+  },
+  "production_use": {
+   "state": "not_runtime_indexed",
+   "consumer_pin": null,
+   "sentence": "This curve is not in the runtime index."
+  }
+ }
 }

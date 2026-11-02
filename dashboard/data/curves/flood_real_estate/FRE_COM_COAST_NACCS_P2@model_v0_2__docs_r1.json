@@ -1139,5 +1139,176 @@
   }
  },
  "versions": [],
- "data_path": "curves/flood_real_estate/FRE_COM_COAST_NACCS_P2@model_v0_2__docs_r1.json"
+ "data_path": "curves/flood_real_estate/FRE_COM_COAST_NACCS_P2@model_v0_2__docs_r1.json",
+ "construction_sources": [
+  {
+   "id": "FRE-S004",
+   "aliases": [],
+   "citation": "U.S. Army Corps of Engineers (2015). North Atlantic Coast Comprehensive Study: Resilient Adaptation to Increasing Risk. Physical Depth Damage Function Summary Report (26 Jan 2015).",
+   "url": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+   "locator": "Table 24 + Table 25 (pp. 61-62, Prototype 2 Commercial Engineered); Table 34 + Table 35 (pp. 67-68, Prototype 3 Commercial Non/Pre-Engineered); Table 55 + Table 56 (pp. 80-82, Prototype 5A Single-Story Residence No Basement); verification note pp. 80-81",
+   "role": "curve_form;selector_archetype",
+   "tier": "T2",
+   "permitted": "Adopt published inundation-structure knots for coastal-surge water; use the prototype most-likely characteristics as reference-building defaults.",
+   "prohibited": "Use values between published knots that the report did not publish; treat Min/Max as a probabilistic spread; transfer to riverine or pluvial freshwater; use erosion or wave tables in the inundation pathway.",
+   "decision": "adopt_with_limits",
+   "accessed_on": "2026-10-11",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+   "link_kind": "url",
+   "title": "U.S. Army Corps of Engineers (2015)",
+   "no_link_sentence": null
+  }
+ ],
+ "construction": {
+  "curve_type": "piecewise linear",
+  "curve_form": "piecewise_linear",
+  "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+  "axis": {
+   "id": "FLOOD_DEPTH_ABOVE_FIRST_FINISHED_FLOOR_FT",
+   "label": "water depth above the first floor",
+   "unit": "ft",
+   "input_field": "flood_depth_above_first_floor_ft",
+   "valid_range": [
+    -4.0,
+    24.0
+   ],
+   "kind": "continuous",
+   "label_from_id": true
+  },
+  "parameters": [
+   {
+    "name": "points",
+    "definition": "ordered hazard-intensity and damage-ratio knots",
+    "value": [
+     [
+      -1.0,
+      0.0
+     ],
+     [
+      -0.5,
+      0.0
+     ],
+     [
+      0.0,
+      0.05
+     ],
+     [
+      0.5,
+      0.1
+     ],
+     [
+      1.0,
+      0.2
+     ],
+     [
+      2.0,
+      0.3
+     ],
+     [
+      3.0,
+      0.35
+     ],
+     [
+      5.0,
+      0.4
+     ],
+     [
+      7.0,
+      0.53
+     ],
+     [
+      10.0,
+      0.58
+     ]
+    ],
+    "value_path": "docs/cells/flood_real_estate/proposed/flood_real_estate__model_v0_2__docs_r1__curve_artifact.json::curve_id=FRE_COM_COAST_NACCS_P2::parameters.points",
+    "tier": null,
+    "tier_word": null,
+    "reasoning": [
+     "No parameter-specific register row; use the curve-level construction sources and artifact value path."
+    ],
+    "source_ids": [
+     "FRE-S004"
+    ],
+    "sources": [
+     {
+      "id": "FRE-S004",
+      "aliases": [],
+      "citation": "U.S. Army Corps of Engineers (2015). North Atlantic Coast Comprehensive Study: Resilient Adaptation to Increasing Risk. Physical Depth Damage Function Summary Report (26 Jan 2015).",
+      "url": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "locator": "Table 24 + Table 25 (pp. 61-62, Prototype 2 Commercial Engineered); Table 34 + Table 35 (pp. 67-68, Prototype 3 Commercial Non/Pre-Engineered); Table 55 + Table 56 (pp. 80-82, Prototype 5A Single-Story Residence No Basement); verification note pp. 80-81",
+      "role": "curve_form;selector_archetype",
+      "tier": "T2",
+      "permitted": "Adopt published inundation-structure knots for coastal-surge water; use the prototype most-likely characteristics as reference-building defaults.",
+      "prohibited": "Use values between published knots that the report did not publish; treat Min/Max as a probabilistic spread; transfer to riverine or pluvial freshwater; use erosion or wave tables in the inundation pathway.",
+      "decision": "adopt_with_limits",
+      "accessed_on": "2026-10-11",
+      "provenance": "register",
+      "doi": null,
+      "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "link_kind": "url",
+      "title": "U.S. Army Corps of Engineers (2015)",
+      "no_link_sentence": null
+     }
+    ],
+    "register_rows": [],
+    "source_scope": "curve"
+   }
+  ],
+  "additional_parameter_rows": [
+   {
+    "id": "RE_COM_LOWRISE.coastal.ordinates",
+    "name": "RE_COM_LOWRISE.coastal.ordinates",
+    "value": "NACCS COM-ENG Min/ML/Max at the ten published depths",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S004"
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_COM_COAST_NACCS_P2",
+    "pathway_id": "flood_inundation_contact",
+    "role": "curve_fit_shape",
+    "status": "proposed",
+    "reasoning": "Prototype 2 steel-framed commercial matches the reference building (FRE-C008). T3 transfer outside the North Atlantic.",
+    "update_trigger": "Commercial reference redefined as masonry (then COM-PRE) or NFIP comparison."
+   }
+  ],
+  "sources": [
+   {
+    "id": "FRE-S004",
+    "aliases": [],
+    "citation": "U.S. Army Corps of Engineers (2015). North Atlantic Coast Comprehensive Study: Resilient Adaptation to Increasing Risk. Physical Depth Damage Function Summary Report (26 Jan 2015).",
+    "url": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+    "locator": "Table 24 + Table 25 (pp. 61-62, Prototype 2 Commercial Engineered); Table 34 + Table 35 (pp. 67-68, Prototype 3 Commercial Non/Pre-Engineered); Table 55 + Table 56 (pp. 80-82, Prototype 5A Single-Story Residence No Basement); verification note pp. 80-81",
+    "role": "curve_form;selector_archetype",
+    "tier": "T2",
+    "permitted": "Adopt published inundation-structure knots for coastal-surge water; use the prototype most-likely characteristics as reference-building defaults.",
+    "prohibited": "Use values between published knots that the report did not publish; treat Min/Max as a probabilistic spread; transfer to riverine or pluvial freshwater; use erosion or wave tables in the inundation pathway.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-11",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+    "link_kind": "url",
+    "title": "U.S. Army Corps of Engineers (2015)",
+    "no_link_sentence": null
+   }
+  ],
+  "source_ids": [
+   "FRE-S004"
+  ],
+  "artifact": "docs/cells/flood_real_estate/proposed/flood_real_estate__model_v0_2__docs_r1__curve_artifact.json",
+  "evaluator": {
+   "module": "scripts/reference_helpers/flood_real_estate_curve_eval.py",
+   "function": "evaluate_damage_call",
+   "note": "request template from the cell's known-answer tests; the hazard axis field varied over the record's valid range"
+  },
+  "production_use": {
+   "state": "not_runtime_indexed",
+   "consumer_pin": null,
+   "sentence": "This curve is not in the runtime index."
+  }
+ }
 }

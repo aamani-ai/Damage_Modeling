@@ -433,5 +433,164 @@
   }
  },
  "versions": [],
- "data_path": "curves/wildfire_real_estate/WFRE_IND_WRC_SHRUB_X0_8@model_v0_1__docs_r1.json"
+ "data_path": "curves/wildfire_real_estate/WFRE_IND_WRC_SHRUB_X0_8@model_v0_1__docs_r1.json",
+ "construction_sources": [
+  {
+   "id": "WFRE-S002",
+   "aliases": [],
+   "citation": "CAL FIRE Office of the State Fire Marshal. CAL FIRE Damage Inspection (DINS) Data, master table (CSV export), 2013-2025 incidents; catalog metadata modified 2026-02-04.",
+   "url": "https://gis.data.cnra.ca.gov/api/download/v1/items/994d3dc4569640caadbbc3198d5a3da1/csv?layers=0",
+   "locator": "columns '* Damage' (No Damage; Affected (>0-10%); Minor (10-25%); Major (25-50%); Destroyed (>50%); Inaccessible), '* Structure Type', '* Exterior Siding', '* Roof Construction', '* Incident Name', 'Incident Start Date'; 132,522 rows; group definitions and counts in DINS_CHECK_RECEIPT",
+   "role": "independent_verification;building_factor",
+   "tier": "T3",
+   "permitted": "Compare damage between building types inside the same fires (building factors); check the level of house loss given exposure against the USFS response.",
+   "prohibited": "Read the band as an exact repair-cost ratio; treat no-damage counts as complete (some fires record few or none); read a flame-length dependence (none is recorded); treat California commercial buildings as the reference warehouse or office.",
+   "decision": "adopt_with_limits",
+   "accessed_on": "2026-10-18",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://gis.data.cnra.ca.gov/api/download/v1/items/994d3dc4569640caadbbc3198d5a3da1/csv?layers=0",
+   "link_kind": "url",
+   "title": "CAL FIRE Office of the State Fire Marshal",
+   "no_link_sentence": null
+  }
+ ],
+ "construction": {
+  "curve_type": "piecewise linear",
+  "curve_form": "piecewise_linear",
+  "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+  "axis": {
+   "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE_SCREENING",
+   "label": "FSim conditional flame-length class state",
+   "unit": "class",
+   "input_field": "conditional_flame_length_class_state",
+   "valid_range": [
+    0,
+    6
+   ],
+   "kind": "categorical",
+   "label_from_id": true
+  },
+  "parameters": [
+   {
+    "name": "points",
+    "definition": "ordered hazard-intensity and damage-ratio knots",
+    "value": [
+     [
+      0,
+      0.0
+     ],
+     [
+      1,
+      0.16
+     ],
+     [
+      2,
+      0.28
+     ],
+     [
+      3,
+      0.4
+     ],
+     [
+      4,
+      0.52
+     ],
+     [
+      5,
+      0.64
+     ],
+     [
+      6,
+      0.76
+     ]
+    ],
+    "value_path": "docs/cells/wildfire_real_estate/proposed/wildfire_real_estate__model_v0_1__docs_r1__curve_artifact.json::curve_id=WFRE_IND_WRC_SHRUB_X0_8::parameters.points",
+    "tier": null,
+    "tier_word": null,
+    "reasoning": [
+     "No parameter-specific register row; use the curve-level construction sources and artifact value path."
+    ],
+    "source_ids": [
+     "WFRE-S002"
+    ],
+    "sources": [
+     {
+      "id": "WFRE-S002",
+      "aliases": [],
+      "citation": "CAL FIRE Office of the State Fire Marshal. CAL FIRE Damage Inspection (DINS) Data, master table (CSV export), 2013-2025 incidents; catalog metadata modified 2026-02-04.",
+      "url": "https://gis.data.cnra.ca.gov/api/download/v1/items/994d3dc4569640caadbbc3198d5a3da1/csv?layers=0",
+      "locator": "columns '* Damage' (No Damage; Affected (>0-10%); Minor (10-25%); Major (25-50%); Destroyed (>50%); Inaccessible), '* Structure Type', '* Exterior Siding', '* Roof Construction', '* Incident Name', 'Incident Start Date'; 132,522 rows; group definitions and counts in DINS_CHECK_RECEIPT",
+      "role": "independent_verification;building_factor",
+      "tier": "T3",
+      "permitted": "Compare damage between building types inside the same fires (building factors); check the level of house loss given exposure against the USFS response.",
+      "prohibited": "Read the band as an exact repair-cost ratio; treat no-damage counts as complete (some fires record few or none); read a flame-length dependence (none is recorded); treat California commercial buildings as the reference warehouse or office.",
+      "decision": "adopt_with_limits",
+      "accessed_on": "2026-10-18",
+      "provenance": "register",
+      "doi": null,
+      "link": "https://gis.data.cnra.ca.gov/api/download/v1/items/994d3dc4569640caadbbc3198d5a3da1/csv?layers=0",
+      "link_kind": "url",
+      "title": "CAL FIRE Office of the State Fire Marshal",
+      "no_link_sentence": null
+     }
+    ],
+    "register_rows": [],
+    "source_scope": "curve"
+   }
+  ],
+  "additional_parameter_rows": [
+   {
+    "id": "warehouse_factor",
+    "name": "warehouse_factor",
+    "value": "0.8 x house",
+    "tier": "T3",
+    "source_ids": [
+     "WFRE-S002"
+    ],
+    "claim_ids": [],
+    "curve_id": "WFRE_IND_WRC_SHRUB_X0_8",
+    "pathway_id": "wildfire_building_exposure",
+    "role": "building_factor",
+    "status": "proposed",
+    "reasoning": "Same-fire DINS ratio 0.79 (0.61-0.99) rounded (WFRE-C009); transfer to the reference warehouse T4 (WFRE-C010).",
+    "update_trigger": "Warehouse-specific loss data."
+   }
+  ],
+  "sources": [
+   {
+    "id": "WFRE-S002",
+    "aliases": [],
+    "citation": "CAL FIRE Office of the State Fire Marshal. CAL FIRE Damage Inspection (DINS) Data, master table (CSV export), 2013-2025 incidents; catalog metadata modified 2026-02-04.",
+    "url": "https://gis.data.cnra.ca.gov/api/download/v1/items/994d3dc4569640caadbbc3198d5a3da1/csv?layers=0",
+    "locator": "columns '* Damage' (No Damage; Affected (>0-10%); Minor (10-25%); Major (25-50%); Destroyed (>50%); Inaccessible), '* Structure Type', '* Exterior Siding', '* Roof Construction', '* Incident Name', 'Incident Start Date'; 132,522 rows; group definitions and counts in DINS_CHECK_RECEIPT",
+    "role": "independent_verification;building_factor",
+    "tier": "T3",
+    "permitted": "Compare damage between building types inside the same fires (building factors); check the level of house loss given exposure against the USFS response.",
+    "prohibited": "Read the band as an exact repair-cost ratio; treat no-damage counts as complete (some fires record few or none); read a flame-length dependence (none is recorded); treat California commercial buildings as the reference warehouse or office.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://gis.data.cnra.ca.gov/api/download/v1/items/994d3dc4569640caadbbc3198d5a3da1/csv?layers=0",
+    "link_kind": "url",
+    "title": "CAL FIRE Office of the State Fire Marshal",
+    "no_link_sentence": null
+   }
+  ],
+  "source_ids": [
+   "WFRE-S002"
+  ],
+  "artifact": "docs/cells/wildfire_real_estate/proposed/wildfire_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+  "evaluator": {
+   "module": "scripts/reference_helpers/wildfire_real_estate_curve_eval.py",
+   "function": "evaluate_damage_call",
+   "note": "request template from the cell's known-answer tests; the hazard axis field varied over the record's valid range"
+  },
+  "production_use": {
+   "state": "not_runtime_indexed",
+   "consumer_pin": null,
+   "sentence": "This curve is not in the runtime index."
+  }
+ }
 }

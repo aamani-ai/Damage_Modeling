@@ -4068,5 +4068,1236 @@
   }
  },
  "versions": [],
- "data_path": "curves/convective_wind_real_estate/CWRE_RES_EF_FR12_TORNADO@model_v0_1__docs_r1.json"
+ "data_path": "curves/convective_wind_real_estate/CWRE_RES_EF_FR12_TORNADO@model_v0_1__docs_r1.json",
+ "construction_sources": [
+  {
+   "text": "Texas Tech WSEC, A Recommendation for an Enhanced Fujita Scale, Rev 2 (2006)",
+   "ids": [
+    "CWRE-S001"
+   ],
+   "title": "Wind Science and Engineering Center, Texas Tech University",
+   "link": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
+   "link_kind": "url",
+   "locator": "PDF p. 9 (report p. 4: expected, lower and upper bound wind speed per DOD; expected value under normal conditions — no weak links, traditional construction, code compliance; bounds account for deviation; expert elicitation, means of experts' estimates); PDF p. 15 (Fujita speeds converted to a 3-second gust frame); PDF pp. 17-18 (rating: evaluator judges within the bounds); Appendix A tables: FR12 PDF p. 25, LRB PDF p. 64, MBS PDF p. 74",
+   "no_link_sentence": null,
+   "source_id": "CWRE-S001"
+  },
+  {
+   "text": "NOAA Storm Prediction Center, EF scale damage indicators FR12, MBS, LRB",
+   "ids": [
+    "CWRE-S002"
+   ],
+   "title": "NOAA Storm Prediction Center",
+   "link": "https://www.spc.noaa.gov/efscale/ef-scale.html",
+   "link_kind": "url",
+   "locator": "ef-scale.html (\"three-second gusts estimated at the point of damage\"; \"These estimates vary with height and exposure\"); efscale/2.html + 2.jpg (sha256 6c0d70ca1b77eb71ebadb00942d04fb2aa2d04971e359b45e5b55952cd8d7622); efscale/17.html + 17.jpg (sha256 f7d95f61c8e9c9fd3c539de5707b3f924b0f4f998276f3a9eb390c92500f7520); efscale/21.html + 21.jpg (sha256 f4becdda78dc9025be13fed82427ece6d5a57778e228e5799a58d983c72eed0d)",
+   "no_link_sentence": null,
+   "source_id": "CWRE-S002"
+  },
+  {
+   "text": "FEMA, Hazus 7.0 Hurricane Technical Manual, damage-state costs and definitions",
+   "ids": [
+    "CWRE-S003"
+   ],
+   "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+   "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+   "link_kind": "url",
+   "locator": "§8.1.4.3 p. 8-15 (None, Slight, Moderate, Extensive, Complete assumed to correspond to mean building loss ratios 0%, 2%, 10%, 50%, 100%, identified from the damage descriptions and expert judgment; linear interpolation over 0-2, 2-5, 5-10, 10-50, 50-100%); Table 5-44 pp. 5-185 to 5-186 (residential damage states); Table 5-74 p. 5-239 (metal buildings); Table 5-78 p. 5-242 (engineered steel buildings)",
+   "no_link_sentence": null,
+   "source_id": "CWRE-S003"
+  },
+  {
+   "text": "FEMA National Risk Index, Dec 2025 (check only)",
+   "ids": [
+    "CWRE-S006"
+   ],
+   "title": "FEMA National Risk Index, December 2025 edition, county building expected annual loss for strong wind and…",
+   "link": null,
+   "link_kind": "none",
+   "locator": "columns swnd_ealb, swnd_expb, trnd_ealb, trnd_expb; 13,085 cells keyed by cell_id; sha256 bc4f8dff7ab9c465677d7a8b94f2fe3038ff03da4632d7b044bcff2afcb3d82b",
+   "no_link_sentence": "no link in the register",
+   "source_id": "CWRE-S006"
+  }
+ ],
+ "construction": {
+  "curve_type": "piecewise linear",
+  "curve_form": "piecewise_linear",
+  "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+  "axis": {
+   "id": "TORNADO_GUST_3S_10M_MPH",
+   "label": "tornado gust 3s 10m mph",
+   "unit": "mph",
+   "input_field": "tornado_gust_3s_10m_mph",
+   "valid_range": [
+    0.0,
+    255.0
+   ],
+   "kind": "continuous",
+   "label_from_id": true
+  },
+  "parameters": [
+   {
+    "name": "points",
+    "definition": "ordered hazard-intensity and damage-ratio knots",
+    "value": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      1.0,
+      0.0
+     ],
+     [
+      2.0,
+      0.0
+     ],
+     [
+      3.0,
+      0.0
+     ],
+     [
+      4.0,
+      0.0
+     ],
+     [
+      5.0,
+      0.0
+     ],
+     [
+      6.0,
+      0.0
+     ],
+     [
+      7.0,
+      0.0
+     ],
+     [
+      8.0,
+      0.0
+     ],
+     [
+      9.0,
+      0.0
+     ],
+     [
+      10.0,
+      0.0
+     ],
+     [
+      11.0,
+      0.0
+     ],
+     [
+      12.0,
+      0.0
+     ],
+     [
+      13.0,
+      0.0
+     ],
+     [
+      14.0,
+      0.0
+     ],
+     [
+      15.0,
+      0.0
+     ],
+     [
+      16.0,
+      0.0
+     ],
+     [
+      17.0,
+      0.0
+     ],
+     [
+      18.0,
+      0.0
+     ],
+     [
+      19.0,
+      0.0
+     ],
+     [
+      20.0,
+      0.0
+     ],
+     [
+      21.0,
+      0.0
+     ],
+     [
+      22.0,
+      0.0
+     ],
+     [
+      23.0,
+      0.0
+     ],
+     [
+      24.0,
+      0.0
+     ],
+     [
+      25.0,
+      0.0
+     ],
+     [
+      26.0,
+      0.0
+     ],
+     [
+      27.0,
+      0.0
+     ],
+     [
+      28.0,
+      0.0
+     ],
+     [
+      29.0,
+      0.0
+     ],
+     [
+      30.0,
+      0.0
+     ],
+     [
+      31.0,
+      0.0
+     ],
+     [
+      32.0,
+      0.0
+     ],
+     [
+      33.0,
+      0.0
+     ],
+     [
+      34.0,
+      0.0
+     ],
+     [
+      35.0,
+      0.0
+     ],
+     [
+      36.0,
+      0.0
+     ],
+     [
+      37.0,
+      0.0
+     ],
+     [
+      38.0,
+      0.0
+     ],
+     [
+      39.0,
+      0.0
+     ],
+     [
+      40.0,
+      1e-06
+     ],
+     [
+      41.0,
+      1e-06
+     ],
+     [
+      42.0,
+      2e-06
+     ],
+     [
+      43.0,
+      5e-06
+     ],
+     [
+      44.0,
+      9e-06
+     ],
+     [
+      45.0,
+      1.7e-05
+     ],
+     [
+      46.0,
+      2.9e-05
+     ],
+     [
+      47.0,
+      4.8e-05
+     ],
+     [
+      48.0,
+      7.8e-05
+     ],
+     [
+      49.0,
+      0.000121
+     ],
+     [
+      50.0,
+      0.000183
+     ],
+     [
+      51.0,
+      0.000267
+     ],
+     [
+      52.0,
+      0.00038
+     ],
+     [
+      53.0,
+      0.000526
+     ],
+     [
+      54.0,
+      0.000711
+     ],
+     [
+      55.0,
+      0.000938
+     ],
+     [
+      56.0,
+      0.001212
+     ],
+     [
+      57.0,
+      0.001534
+     ],
+     [
+      58.0,
+      0.001905
+     ],
+     [
+      59.0,
+      0.002326
+     ],
+     [
+      60.0,
+      0.002793
+     ],
+     [
+      61.0,
+      0.003304
+     ],
+     [
+      62.0,
+      0.003855
+     ],
+     [
+      63.0,
+      0.004441
+     ],
+     [
+      64.0,
+      0.005057
+     ],
+     [
+      65.0,
+      0.005698
+     ],
+     [
+      66.0,
+      0.00636
+     ],
+     [
+      67.0,
+      0.007039
+     ],
+     [
+      68.0,
+      0.007731
+     ],
+     [
+      69.0,
+      0.008436
+     ],
+     [
+      70.0,
+      0.009153
+     ],
+     [
+      71.0,
+      0.009885
+     ],
+     [
+      72.0,
+      0.010634
+     ],
+     [
+      73.0,
+      0.011408
+     ],
+     [
+      74.0,
+      0.012213
+     ],
+     [
+      75.0,
+      0.013059
+     ],
+     [
+      76.0,
+      0.013959
+     ],
+     [
+      77.0,
+      0.014925
+     ],
+     [
+      78.0,
+      0.015971
+     ],
+     [
+      79.0,
+      0.017114
+     ],
+     [
+      80.0,
+      0.018367
+     ],
+     [
+      81.0,
+      0.019747
+     ],
+     [
+      82.0,
+      0.021267
+     ],
+     [
+      83.0,
+      0.022939
+     ],
+     [
+      84.0,
+      0.024775
+     ],
+     [
+      85.0,
+      0.026783
+     ],
+     [
+      86.0,
+      0.028967
+     ],
+     [
+      87.0,
+      0.031332
+     ],
+     [
+      88.0,
+      0.033877
+     ],
+     [
+      89.0,
+      0.0366
+     ],
+     [
+      90.0,
+      0.0395
+     ],
+     [
+      91.0,
+      0.042575
+     ],
+     [
+      92.0,
+      0.045821
+     ],
+     [
+      93.0,
+      0.049241
+     ],
+     [
+      94.0,
+      0.052838
+     ],
+     [
+      95.0,
+      0.056624
+     ],
+     [
+      96.0,
+      0.060614
+     ],
+     [
+      97.0,
+      0.064832
+     ],
+     [
+      98.0,
+      0.06931
+     ],
+     [
+      99.0,
+      0.074091
+     ],
+     [
+      100.0,
+      0.079225
+     ],
+     [
+      101.0,
+      0.084771
+     ],
+     [
+      102.0,
+      0.090798
+     ],
+     [
+      103.0,
+      0.09738
+     ],
+     [
+      104.0,
+      0.104598
+     ],
+     [
+      105.0,
+      0.112536
+     ],
+     [
+      106.0,
+      0.121279
+     ],
+     [
+      107.0,
+      0.130912
+     ],
+     [
+      108.0,
+      0.141516
+     ],
+     [
+      109.0,
+      0.153166
+     ],
+     [
+      110.0,
+      0.165929
+     ],
+     [
+      111.0,
+      0.179859
+     ],
+     [
+      112.0,
+      0.194999
+     ],
+     [
+      113.0,
+      0.211377
+     ],
+     [
+      114.0,
+      0.229003
+     ],
+     [
+      115.0,
+      0.247872
+     ],
+     [
+      116.0,
+      0.26796
+     ],
+     [
+      117.0,
+      0.289223
+     ],
+     [
+      118.0,
+      0.311601
+     ],
+     [
+      119.0,
+      0.335017
+     ],
+     [
+      120.0,
+      0.359375
+     ],
+     [
+      121.0,
+      0.384568
+     ],
+     [
+      122.0,
+      0.410474
+     ],
+     [
+      123.0,
+      0.43696
+     ],
+     [
+      124.0,
+      0.463886
+     ],
+     [
+      125.0,
+      0.491104
+     ],
+     [
+      126.0,
+      0.518465
+     ],
+     [
+      127.0,
+      0.545817
+     ],
+     [
+      128.0,
+      0.573012
+     ],
+     [
+      129.0,
+      0.599903
+     ],
+     [
+      130.0,
+      0.626354
+     ],
+     [
+      131.0,
+      0.652232
+     ],
+     [
+      132.0,
+      0.677419
+     ],
+     [
+      133.0,
+      0.701807
+     ],
+     [
+      134.0,
+      0.7253
+     ],
+     [
+      135.0,
+      0.747818
+     ],
+     [
+      136.0,
+      0.769293
+     ],
+     [
+      137.0,
+      0.789673
+     ],
+     [
+      138.0,
+      0.80892
+     ],
+     [
+      139.0,
+      0.827009
+     ],
+     [
+      140.0,
+      0.84393
+     ],
+     [
+      141.0,
+      0.859683
+     ],
+     [
+      142.0,
+      0.874283
+     ],
+     [
+      143.0,
+      0.887751
+     ],
+     [
+      144.0,
+      0.90012
+     ],
+     [
+      145.0,
+      0.911429
+     ],
+     [
+      146.0,
+      0.921723
+     ],
+     [
+      147.0,
+      0.931054
+     ],
+     [
+      148.0,
+      0.939476
+     ],
+     [
+      149.0,
+      0.947044
+     ],
+     [
+      150.0,
+      0.953819
+     ],
+     [
+      151.0,
+      0.959858
+     ],
+     [
+      152.0,
+      0.965219
+     ],
+     [
+      153.0,
+      0.969961
+     ],
+     [
+      154.0,
+      0.974138
+     ],
+     [
+      155.0,
+      0.977804
+     ],
+     [
+      156.0,
+      0.981009
+     ],
+     [
+      157.0,
+      0.983801
+     ],
+     [
+      158.0,
+      0.986224
+     ],
+     [
+      159.0,
+      0.98832
+     ],
+     [
+      160.0,
+      0.990126
+     ],
+     [
+      161.0,
+      0.991677
+     ],
+     [
+      162.0,
+      0.993004
+     ],
+     [
+      163.0,
+      0.994137
+     ],
+     [
+      164.0,
+      0.995099
+     ],
+     [
+      165.0,
+      0.995915
+     ],
+     [
+      166.0,
+      0.996605
+     ],
+     [
+      167.0,
+      0.997185
+     ],
+     [
+      168.0,
+      0.997672
+     ],
+     [
+      169.0,
+      0.99808
+     ],
+     [
+      170.0,
+      0.998421
+     ],
+     [
+      171.0,
+      0.998704
+     ],
+     [
+      172.0,
+      0.99894
+     ],
+     [
+      173.0,
+      0.999134
+     ],
+     [
+      174.0,
+      0.999295
+     ],
+     [
+      175.0,
+      0.999427
+     ],
+     [
+      176.0,
+      0.999535
+     ],
+     [
+      177.0,
+      0.999624
+     ],
+     [
+      178.0,
+      0.999697
+     ],
+     [
+      179.0,
+      0.999756
+     ],
+     [
+      180.0,
+      0.999804
+     ],
+     [
+      181.0,
+      0.999843
+     ],
+     [
+      182.0,
+      0.999874
+     ],
+     [
+      183.0,
+      0.9999
+     ],
+     [
+      184.0,
+      0.99992
+     ],
+     [
+      185.0,
+      0.999936
+     ],
+     [
+      186.0,
+      0.999949
+     ],
+     [
+      187.0,
+      0.99996
+     ],
+     [
+      188.0,
+      0.999968
+     ],
+     [
+      189.0,
+      0.999975
+     ],
+     [
+      190.0,
+      0.99998
+     ],
+     [
+      191.0,
+      0.999985
+     ],
+     [
+      192.0,
+      0.999988
+     ],
+     [
+      193.0,
+      0.99999
+     ],
+     [
+      194.0,
+      0.999993
+     ],
+     [
+      195.0,
+      0.999994
+     ],
+     [
+      196.0,
+      0.999995
+     ],
+     [
+      197.0,
+      0.999996
+     ],
+     [
+      198.0,
+      0.999997
+     ],
+     [
+      199.0,
+      0.999998
+     ],
+     [
+      200.0,
+      0.999998
+     ],
+     [
+      201.0,
+      0.999999
+     ],
+     [
+      202.0,
+      0.999999
+     ],
+     [
+      203.0,
+      0.999999
+     ],
+     [
+      204.0,
+      0.999999
+     ],
+     [
+      205.0,
+      1.0
+     ],
+     [
+      206.0,
+      1.0
+     ],
+     [
+      207.0,
+      1.0
+     ],
+     [
+      208.0,
+      1.0
+     ],
+     [
+      209.0,
+      1.0
+     ],
+     [
+      210.0,
+      1.0
+     ],
+     [
+      211.0,
+      1.0
+     ],
+     [
+      212.0,
+      1.0
+     ],
+     [
+      213.0,
+      1.0
+     ],
+     [
+      214.0,
+      1.0
+     ],
+     [
+      215.0,
+      1.0
+     ],
+     [
+      216.0,
+      1.0
+     ],
+     [
+      217.0,
+      1.0
+     ],
+     [
+      218.0,
+      1.0
+     ],
+     [
+      219.0,
+      1.0
+     ],
+     [
+      220.0,
+      1.0
+     ],
+     [
+      221.0,
+      1.0
+     ],
+     [
+      222.0,
+      1.0
+     ],
+     [
+      223.0,
+      1.0
+     ],
+     [
+      224.0,
+      1.0
+     ],
+     [
+      225.0,
+      1.0
+     ],
+     [
+      226.0,
+      1.0
+     ],
+     [
+      227.0,
+      1.0
+     ],
+     [
+      228.0,
+      1.0
+     ],
+     [
+      229.0,
+      1.0
+     ],
+     [
+      230.0,
+      1.0
+     ],
+     [
+      231.0,
+      1.0
+     ],
+     [
+      232.0,
+      1.0
+     ],
+     [
+      233.0,
+      1.0
+     ],
+     [
+      234.0,
+      1.0
+     ],
+     [
+      235.0,
+      1.0
+     ],
+     [
+      236.0,
+      1.0
+     ],
+     [
+      237.0,
+      1.0
+     ],
+     [
+      238.0,
+      1.0
+     ],
+     [
+      239.0,
+      1.0
+     ],
+     [
+      240.0,
+      1.0
+     ],
+     [
+      241.0,
+      1.0
+     ],
+     [
+      242.0,
+      1.0
+     ],
+     [
+      243.0,
+      1.0
+     ],
+     [
+      244.0,
+      1.0
+     ],
+     [
+      245.0,
+      1.0
+     ],
+     [
+      246.0,
+      1.0
+     ],
+     [
+      247.0,
+      1.0
+     ],
+     [
+      248.0,
+      1.0
+     ],
+     [
+      249.0,
+      1.0
+     ],
+     [
+      250.0,
+      1.0
+     ],
+     [
+      251.0,
+      1.0
+     ],
+     [
+      252.0,
+      1.0
+     ],
+     [
+      253.0,
+      1.0
+     ],
+     [
+      254.0,
+      1.0
+     ],
+     [
+      255.0,
+      1.0
+     ]
+    ],
+    "value_path": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json::curve_id=CWRE_RES_EF_FR12_TORNADO::parameters.points",
+    "tier": null,
+    "tier_word": null,
+    "reasoning": [
+     "No parameter-specific register row; use the curve-level construction sources and artifact value path."
+    ],
+    "source_ids": [
+     "CWRE-S001",
+     "CWRE-S002",
+     "CWRE-S003",
+     "CWRE-S006"
+    ],
+    "sources": [
+     {
+      "text": "Texas Tech WSEC, A Recommendation for an Enhanced Fujita Scale, Rev 2 (2006)",
+      "ids": [
+       "CWRE-S001"
+      ],
+      "title": "Wind Science and Engineering Center, Texas Tech University",
+      "link": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
+      "link_kind": "url",
+      "locator": "PDF p. 9 (report p. 4: expected, lower and upper bound wind speed per DOD; expected value under normal conditions — no weak links, traditional construction, code compliance; bounds account for deviation; expert elicitation, means of experts' estimates); PDF p. 15 (Fujita speeds converted to a 3-second gust frame); PDF pp. 17-18 (rating: evaluator judges within the bounds); Appendix A tables: FR12 PDF p. 25, LRB PDF p. 64, MBS PDF p. 74",
+      "no_link_sentence": null,
+      "source_id": "CWRE-S001"
+     },
+     {
+      "text": "NOAA Storm Prediction Center, EF scale damage indicators FR12, MBS, LRB",
+      "ids": [
+       "CWRE-S002"
+      ],
+      "title": "NOAA Storm Prediction Center",
+      "link": "https://www.spc.noaa.gov/efscale/ef-scale.html",
+      "link_kind": "url",
+      "locator": "ef-scale.html (\"three-second gusts estimated at the point of damage\"; \"These estimates vary with height and exposure\"); efscale/2.html + 2.jpg (sha256 6c0d70ca1b77eb71ebadb00942d04fb2aa2d04971e359b45e5b55952cd8d7622); efscale/17.html + 17.jpg (sha256 f7d95f61c8e9c9fd3c539de5707b3f924b0f4f998276f3a9eb390c92500f7520); efscale/21.html + 21.jpg (sha256 f4becdda78dc9025be13fed82427ece6d5a57778e228e5799a58d983c72eed0d)",
+      "no_link_sentence": null,
+      "source_id": "CWRE-S002"
+     },
+     {
+      "text": "FEMA, Hazus 7.0 Hurricane Technical Manual, damage-state costs and definitions",
+      "ids": [
+       "CWRE-S003"
+      ],
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "locator": "§8.1.4.3 p. 8-15 (None, Slight, Moderate, Extensive, Complete assumed to correspond to mean building loss ratios 0%, 2%, 10%, 50%, 100%, identified from the damage descriptions and expert judgment; linear interpolation over 0-2, 2-5, 5-10, 10-50, 50-100%); Table 5-44 pp. 5-185 to 5-186 (residential damage states); Table 5-74 p. 5-239 (metal buildings); Table 5-78 p. 5-242 (engineered steel buildings)",
+      "no_link_sentence": null,
+      "source_id": "CWRE-S003"
+     },
+     {
+      "text": "FEMA National Risk Index, Dec 2025 (check only)",
+      "ids": [
+       "CWRE-S006"
+      ],
+      "title": "FEMA National Risk Index, December 2025 edition, county building expected annual loss for strong wind and…",
+      "link": null,
+      "link_kind": "none",
+      "locator": "columns swnd_ealb, swnd_expb, trnd_ealb, trnd_expb; 13,085 cells keyed by cell_id; sha256 bc4f8dff7ab9c465677d7a8b94f2fe3038ff03da4632d7b044bcff2afcb3d82b",
+      "no_link_sentence": "no link in the register",
+      "source_id": "CWRE-S006"
+     }
+    ],
+    "register_rows": [],
+    "source_scope": "curve"
+   }
+  ],
+  "additional_parameter_rows": [],
+  "sources": [
+   {
+    "text": "Texas Tech WSEC, A Recommendation for an Enhanced Fujita Scale, Rev 2 (2006)",
+    "ids": [
+     "CWRE-S001"
+    ],
+    "title": "Wind Science and Engineering Center, Texas Tech University",
+    "link": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
+    "link_kind": "url",
+    "locator": "PDF p. 9 (report p. 4: expected, lower and upper bound wind speed per DOD; expected value under normal conditions — no weak links, traditional construction, code compliance; bounds account for deviation; expert elicitation, means of experts' estimates); PDF p. 15 (Fujita speeds converted to a 3-second gust frame); PDF pp. 17-18 (rating: evaluator judges within the bounds); Appendix A tables: FR12 PDF p. 25, LRB PDF p. 64, MBS PDF p. 74",
+    "no_link_sentence": null,
+    "source_id": "CWRE-S001"
+   },
+   {
+    "text": "NOAA Storm Prediction Center, EF scale damage indicators FR12, MBS, LRB",
+    "ids": [
+     "CWRE-S002"
+    ],
+    "title": "NOAA Storm Prediction Center",
+    "link": "https://www.spc.noaa.gov/efscale/ef-scale.html",
+    "link_kind": "url",
+    "locator": "ef-scale.html (\"three-second gusts estimated at the point of damage\"; \"These estimates vary with height and exposure\"); efscale/2.html + 2.jpg (sha256 6c0d70ca1b77eb71ebadb00942d04fb2aa2d04971e359b45e5b55952cd8d7622); efscale/17.html + 17.jpg (sha256 f7d95f61c8e9c9fd3c539de5707b3f924b0f4f998276f3a9eb390c92500f7520); efscale/21.html + 21.jpg (sha256 f4becdda78dc9025be13fed82427ece6d5a57778e228e5799a58d983c72eed0d)",
+    "no_link_sentence": null,
+    "source_id": "CWRE-S002"
+   },
+   {
+    "text": "FEMA, Hazus 7.0 Hurricane Technical Manual, damage-state costs and definitions",
+    "ids": [
+     "CWRE-S003"
+    ],
+    "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+    "link_kind": "url",
+    "locator": "§8.1.4.3 p. 8-15 (None, Slight, Moderate, Extensive, Complete assumed to correspond to mean building loss ratios 0%, 2%, 10%, 50%, 100%, identified from the damage descriptions and expert judgment; linear interpolation over 0-2, 2-5, 5-10, 10-50, 50-100%); Table 5-44 pp. 5-185 to 5-186 (residential damage states); Table 5-74 p. 5-239 (metal buildings); Table 5-78 p. 5-242 (engineered steel buildings)",
+    "no_link_sentence": null,
+    "source_id": "CWRE-S003"
+   },
+   {
+    "text": "FEMA National Risk Index, Dec 2025 (check only)",
+    "ids": [
+     "CWRE-S006"
+    ],
+    "title": "FEMA National Risk Index, December 2025 edition, county building expected annual loss for strong wind and…",
+    "link": null,
+    "link_kind": "none",
+    "locator": "columns swnd_ealb, swnd_expb, trnd_ealb, trnd_expb; 13,085 cells keyed by cell_id; sha256 bc4f8dff7ab9c465677d7a8b94f2fe3038ff03da4632d7b044bcff2afcb3d82b",
+    "no_link_sentence": "no link in the register",
+    "source_id": "CWRE-S006"
+   }
+  ],
+  "source_ids": [
+   "CWRE-S001",
+   "CWRE-S002",
+   "CWRE-S003",
+   "CWRE-S006"
+  ],
+  "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+  "evaluator": {
+   "module": "scripts/reference_helpers/convective_wind_real_estate_curve_eval.py",
+   "function": "evaluate_damage_call",
+   "note": "request template from the cell's known-answer tests; the hazard axis field varied over the record's valid range"
+  },
+  "production_use": {
+   "state": "not_runtime_indexed",
+   "consumer_pin": null,
+   "sentence": "This curve is not in the runtime index."
+  }
+ }
 }

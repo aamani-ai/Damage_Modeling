@@ -310,7 +310,7 @@
      "GOVERNANCE_CONTRACT"
     ],
     "title": "Damage Modeling governed damage-curve standards and skill workflow.",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/0aad764a790c97014975656d1627776b157ccde4/docs/method/standards/00_index.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/cd876ccfd48fa7448c8f6410f58bd5127e3d6608/docs/method/standards/00_index.md",
     "link_kind": "repo_file",
     "locator": "cell package, provenance, pathway, capability, versioning, and fail-closed standards",
     "no_link_sentence": null,
@@ -447,5 +447,164 @@
    "source": "CHANGELOG.json"
   }
  ],
- "data_path": "curves/wildfire_wind/WWV1_PAD_ELECTRICAL_FSIM_T4@model_v1_0__docs_r1.json"
+ "data_path": "curves/wildfire_wind/WWV1_PAD_ELECTRICAL_FSIM_T4@model_v1_0__docs_r1.json",
+ "construction_sources": [
+  {
+   "id": "WW1-A001",
+   "aliases": [],
+   "citation": "Owner direction in Damage Modeling task, 2026-08-08: represent wildfire-wind risk even if only one or two subsystems can be supported.",
+   "url": "conversation_record",
+   "locator": "explicit coverage-first Tier-4 business decision",
+   "role": "ordinate_adoption_authority",
+   "tier": "T4",
+   "permitted": "Create a visibly labeled canonical two-unit partial-screening release.",
+   "prohibited": "Relabel assumptions as empirical calibration or present the cell as whole-farm complete.",
+   "decision": "adopt",
+   "accessed_on": "2026-08-08",
+   "provenance": "register",
+   "doi": null,
+   "link": null,
+   "link_kind": "none",
+   "title": "Owner direction in Damage Modeling task, 2026-08-08: represent wildfire-wind risk even if only one or two…",
+   "no_link_sentence": "no link in the register"
+  }
+ ],
+ "construction": {
+  "curve_type": "piecewise linear",
+  "curve_form": "piecewise_linear",
+  "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+  "axis": {
+   "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE_SCREENING",
+   "label": "USFS FSim conditional flame-length class",
+   "unit": "class",
+   "input_field": "conditional_flame_length_class_state",
+   "valid_range": [
+    0,
+    6
+   ],
+   "kind": "categorical",
+   "label_from_id": true
+  },
+  "parameters": [
+   {
+    "name": "points",
+    "definition": "ordered hazard-intensity and damage-ratio knots",
+    "value": [
+     [
+      0,
+      0.0
+     ],
+     [
+      1,
+      0.001
+     ],
+     [
+      2,
+      0.006
+     ],
+     [
+      3,
+      0.03
+     ],
+     [
+      4,
+      0.12
+     ],
+     [
+      5,
+      0.35
+     ],
+     [
+      6,
+      0.7
+     ]
+    ],
+    "value_path": "docs/cells/wildfire_wind/current/wildfire_wind__model_v1_0__docs_r1__curve_artifact.json::curve_id=WWV1_PAD_ELECTRICAL_FSIM_T4::parameters.points",
+    "tier": null,
+    "tier_word": null,
+    "reasoning": [
+     "No parameter-specific register row; use the curve-level construction sources and artifact value path."
+    ],
+    "source_ids": [
+     "WW1-A001"
+    ],
+    "sources": [
+     {
+      "id": "WW1-A001",
+      "aliases": [],
+      "citation": "Owner direction in Damage Modeling task, 2026-08-08: represent wildfire-wind risk even if only one or two subsystems can be supported.",
+      "url": "conversation_record",
+      "locator": "explicit coverage-first Tier-4 business decision",
+      "role": "ordinate_adoption_authority",
+      "tier": "T4",
+      "permitted": "Create a visibly labeled canonical two-unit partial-screening release.",
+      "prohibited": "Relabel assumptions as empirical calibration or present the cell as whole-farm complete.",
+      "decision": "adopt",
+      "accessed_on": "2026-08-08",
+      "provenance": "register",
+      "doi": null,
+      "link": null,
+      "link_kind": "none",
+      "title": "Owner direction in Damage Modeling task, 2026-08-08: represent wildfire-wind risk even if only one or two…",
+      "no_link_sentence": "no link in the register"
+     }
+    ],
+    "register_rows": [],
+    "source_scope": "curve"
+   }
+  ],
+  "additional_parameter_rows": [
+   {
+    "id": "pad electrical ordinates",
+    "name": "pad electrical ordinates",
+    "value": "[[0, 0.0], [1, 0.001], [2, 0.006], [3, 0.03], [4, 0.12], [5, 0.35], [6, 0.7]]",
+    "tier": "T4",
+    "source_ids": [
+     "WW1-A001"
+    ],
+    "claim_ids": [],
+    "curve_id": "WWV1_PAD_ELECTRICAL_FSIM_T4",
+    "pathway_id": null,
+    "role": "curve_shape_and_level",
+    "status": null,
+    "reasoning": "Owner-authorized cell-local screening assumptions; numerically identical neighboring profile is audit comparison only.",
+    "update_trigger": "qualified field/lab/claims calibration or structured elicitation"
+   }
+  ],
+  "sources": [
+   {
+    "id": "WW1-A001",
+    "aliases": [],
+    "citation": "Owner direction in Damage Modeling task, 2026-08-08: represent wildfire-wind risk even if only one or two subsystems can be supported.",
+    "url": "conversation_record",
+    "locator": "explicit coverage-first Tier-4 business decision",
+    "role": "ordinate_adoption_authority",
+    "tier": "T4",
+    "permitted": "Create a visibly labeled canonical two-unit partial-screening release.",
+    "prohibited": "Relabel assumptions as empirical calibration or present the cell as whole-farm complete.",
+    "decision": "adopt",
+    "accessed_on": "2026-08-08",
+    "provenance": "register",
+    "doi": null,
+    "link": null,
+    "link_kind": "none",
+    "title": "Owner direction in Damage Modeling task, 2026-08-08: represent wildfire-wind risk even if only one or two…",
+    "no_link_sentence": "no link in the register"
+   }
+  ],
+  "source_ids": [
+   "WW1-A001"
+  ],
+  "artifact": "docs/cells/wildfire_wind/current/wildfire_wind__model_v1_0__docs_r1__curve_artifact.json",
+  "evaluator": {
+   "module": "scripts/reference_helpers/wildfire_wind_v1_curve_eval.py",
+   "function": "evaluate_damage_call",
+   "note": "request template from the cell's known-answer tests; the hazard axis field varied over the record's valid range"
+  },
+  "production_use": {
+   "state": "runtime_indexed",
+   "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
+   "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
+  }
+ }
 }

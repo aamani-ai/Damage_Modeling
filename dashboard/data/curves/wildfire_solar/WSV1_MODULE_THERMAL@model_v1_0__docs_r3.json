@@ -496,5 +496,359 @@
    "source": "CHANGELOG.json"
   }
  ],
- "data_path": "curves/wildfire_solar/WSV1_MODULE_THERMAL@model_v1_0__docs_r3.json"
+ "data_path": "curves/wildfire_solar/WSV1_MODULE_THERMAL@model_v1_0__docs_r3.json",
+ "construction_sources": [
+  {
+   "id": "DOE_FEMP_PV_WILDFIRE",
+   "aliases": [],
+   "citation": "U.S. Department of Energy, Federal Energy Management Program. Solar Photovoltaic Hardening for Resilience – Wildfire.",
+   "url": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+   "locator": null,
+   "role": "site-field design / mechanism / inspection",
+   "tier": "T2",
+   "permitted": "vegetation management, undergrounding where practical, fire-resistant containers, access planning, noncombustible barriers, post-fire imaging",
+   "prohibited": "universal mitigation coefficient, fire-rating-to-DR conversion, component fragility or FIL mapping",
+   "decision": "RETAINED_QUALITATIVE",
+   "accessed_on": "2026-07-09",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+   "link_kind": "url",
+   "title": "U.S. Department of Energy, Federal Energy Management Program",
+   "no_link_sentence": null
+  },
+  {
+   "id": "KIEE_JANG_2026_WILDFIRE_PV",
+   "aliases": [],
+   "citation": "Jang, J.-H.; Kim, J.-M.; Oh, S.-J.; Kang, H.-G. Analysis of degradation diagnosis methods of PV modules depending on wildfires. Transactions of the Korean Institute of Electrical Engineers 75(2), 390-396 (2026).",
+   "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003300065",
+   "locator": null,
+   "role": "field diagnostic protocol and endpoint design",
+   "tier": "T3",
+   "permitted": "an actual wildfire-affected PV system exhibited degradation signals; EL and continued monitoring add information beyond performance or I-V alone",
+   "prohibited": "local wildfire dose, population fragility, affected/unaffected denominator, BOM transfer, replacement decision, or economic DR",
+   "decision": "RETAINED_ABSTRACT_ONLY",
+   "accessed_on": "2026-07-10",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003300065",
+   "link_kind": "url",
+   "title": "Jang, J.-H.; Kim, J.-M.; Oh, S.-J.; Kang, H.-G",
+   "no_link_sentence": null
+  },
+  {
+   "id": "WANG_2025_PV_THERMAL",
+   "aliases": [],
+   "citation": "Wang, Y.; Xiao, C.; Bedon, C. Performance of photovoltaic panels with different inclinations under uniform thermal loading. International Journal of Thermal Sciences 208 (2025) 109489.",
+   "url": "https://doi.org/10.1016/j.ijthermalsci.2024.109489",
+   "locator": null,
+   "role": "component mechanism / future flux-time constraint",
+   "tier": "T2",
+   "permitted": "15 four-edge-shielded 300 × 300 × 4.7 mm specimens; glass fracture/pyrolysis; primarily 8–15 kW/m² and 61–84 °C reported tolerance ranges; inclination sensitivity",
+   "prohibited": "universal PV threshold, modern utility-module population fragility, FIL ordinate, replacement-cost ratio",
+   "decision": "RETAINED_WITH_TRANSFER_LIMIT",
+   "accessed_on": "2026-07-09",
+   "provenance": "register",
+   "doi": "10.1016/j.ijthermalsci.2024.109489",
+   "link": "https://doi.org/10.1016/j.ijthermalsci.2024.109489",
+   "link_kind": "doi",
+   "title": "Wang, Y.; Xiao, C.; Bedon, C",
+   "no_link_sentence": null
+  },
+  {
+   "id": "ZHAO_2026_PV_POOL_FIRE",
+   "aliases": [],
+   "citation": "Zhao, J.; Zhang, S.; Li, X.; Kong, X.; Zhao, L.; Shen, J. Experimental Investigation of Thermal Response of Single-Glass Photovoltaic Modules with Different Inclination Angles. Fire 9(2), 62 (2026).",
+   "url": "https://doi.org/10.3390/fire9020062",
+   "locator": null,
+   "role": "selector/conditioner direction and zonal exposure architecture",
+   "tier": "T2",
+   "permitted": "front-glass integrity, flame-contact zone, and inclination materially affected burn-through and temperature response; cracked modules burned faster; tested response peaked at 15°",
+   "prohibited": "wildfire population fragility, replacement-cost ratio, universal stow credit",
+   "decision": "RETAINED_MECHANISM_ONLY",
+   "accessed_on": "2026-07-09",
+   "provenance": "register",
+   "doi": "10.3390/fire9020062",
+   "link": "https://doi.org/10.3390/fire9020062",
+   "link_kind": "doi",
+   "title": "Zhao, J.; Zhang, S.; Li, X.; Kong, X.; Zhao, L.; Shen, J",
+   "no_link_sentence": null
+  }
+ ],
+ "construction": {
+  "curve_type": "piecewise linear",
+  "curve_form": "piecewise_linear",
+  "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+  "axis": {
+   "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE",
+   "label": "FSim conditional flame-length class (0 = no event)",
+   "unit": "class",
+   "input_field": "conditional_flame_length_class",
+   "kind": "categorical",
+   "valid_range": [
+    0,
+    6
+   ],
+   "classes": {
+    "1": "lt_2_ft",
+    "2": "gte_2_lt_4_ft",
+    "3": "gte_4_lt_6_ft",
+    "4": "gte_6_lt_8_ft",
+    "5": "gte_8_lt_12_ft",
+    "6": "gte_12_ft"
+   }
+  },
+  "parameters": [
+   {
+    "name": "points",
+    "definition": "ordered hazard-intensity and damage-ratio knots",
+    "value": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      0.002
+     ],
+     [
+      2,
+      0.01
+     ],
+     [
+      3,
+      0.04
+     ],
+     [
+      4,
+      0.12
+     ],
+     [
+      5,
+      0.32
+     ],
+     [
+      6,
+      0.65
+     ]
+    ],
+    "value_path": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json::curve_id=WSV1_MODULE_THERMAL::parameters.points",
+    "tier": null,
+    "tier_word": null,
+    "reasoning": [
+     "No parameter-specific register row; use the curve-level construction sources and artifact value path."
+    ],
+    "source_ids": [
+     "DOE_FEMP_PV_WILDFIRE",
+     "KIEE_JANG_2026_WILDFIRE_PV",
+     "WANG_2025_PV_THERMAL",
+     "ZHAO_2026_PV_POOL_FIRE"
+    ],
+    "sources": [
+     {
+      "id": "DOE_FEMP_PV_WILDFIRE",
+      "aliases": [],
+      "citation": "U.S. Department of Energy, Federal Energy Management Program. Solar Photovoltaic Hardening for Resilience – Wildfire.",
+      "url": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+      "locator": null,
+      "role": "site-field design / mechanism / inspection",
+      "tier": "T2",
+      "permitted": "vegetation management, undergrounding where practical, fire-resistant containers, access planning, noncombustible barriers, post-fire imaging",
+      "prohibited": "universal mitigation coefficient, fire-rating-to-DR conversion, component fragility or FIL mapping",
+      "decision": "RETAINED_QUALITATIVE",
+      "accessed_on": "2026-07-09",
+      "provenance": "register",
+      "doi": null,
+      "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+      "link_kind": "url",
+      "title": "U.S. Department of Energy, Federal Energy Management Program",
+      "no_link_sentence": null
+     },
+     {
+      "id": "KIEE_JANG_2026_WILDFIRE_PV",
+      "aliases": [],
+      "citation": "Jang, J.-H.; Kim, J.-M.; Oh, S.-J.; Kang, H.-G. Analysis of degradation diagnosis methods of PV modules depending on wildfires. Transactions of the Korean Institute of Electrical Engineers 75(2), 390-396 (2026).",
+      "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003300065",
+      "locator": null,
+      "role": "field diagnostic protocol and endpoint design",
+      "tier": "T3",
+      "permitted": "an actual wildfire-affected PV system exhibited degradation signals; EL and continued monitoring add information beyond performance or I-V alone",
+      "prohibited": "local wildfire dose, population fragility, affected/unaffected denominator, BOM transfer, replacement decision, or economic DR",
+      "decision": "RETAINED_ABSTRACT_ONLY",
+      "accessed_on": "2026-07-10",
+      "provenance": "register",
+      "doi": null,
+      "link": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003300065",
+      "link_kind": "url",
+      "title": "Jang, J.-H.; Kim, J.-M.; Oh, S.-J.; Kang, H.-G",
+      "no_link_sentence": null
+     },
+     {
+      "id": "WANG_2025_PV_THERMAL",
+      "aliases": [],
+      "citation": "Wang, Y.; Xiao, C.; Bedon, C. Performance of photovoltaic panels with different inclinations under uniform thermal loading. International Journal of Thermal Sciences 208 (2025) 109489.",
+      "url": "https://doi.org/10.1016/j.ijthermalsci.2024.109489",
+      "locator": null,
+      "role": "component mechanism / future flux-time constraint",
+      "tier": "T2",
+      "permitted": "15 four-edge-shielded 300 × 300 × 4.7 mm specimens; glass fracture/pyrolysis; primarily 8–15 kW/m² and 61–84 °C reported tolerance ranges; inclination sensitivity",
+      "prohibited": "universal PV threshold, modern utility-module population fragility, FIL ordinate, replacement-cost ratio",
+      "decision": "RETAINED_WITH_TRANSFER_LIMIT",
+      "accessed_on": "2026-07-09",
+      "provenance": "register",
+      "doi": "10.1016/j.ijthermalsci.2024.109489",
+      "link": "https://doi.org/10.1016/j.ijthermalsci.2024.109489",
+      "link_kind": "doi",
+      "title": "Wang, Y.; Xiao, C.; Bedon, C",
+      "no_link_sentence": null
+     },
+     {
+      "id": "ZHAO_2026_PV_POOL_FIRE",
+      "aliases": [],
+      "citation": "Zhao, J.; Zhang, S.; Li, X.; Kong, X.; Zhao, L.; Shen, J. Experimental Investigation of Thermal Response of Single-Glass Photovoltaic Modules with Different Inclination Angles. Fire 9(2), 62 (2026).",
+      "url": "https://doi.org/10.3390/fire9020062",
+      "locator": null,
+      "role": "selector/conditioner direction and zonal exposure architecture",
+      "tier": "T2",
+      "permitted": "front-glass integrity, flame-contact zone, and inclination materially affected burn-through and temperature response; cracked modules burned faster; tested response peaked at 15°",
+      "prohibited": "wildfire population fragility, replacement-cost ratio, universal stow credit",
+      "decision": "RETAINED_MECHANISM_ONLY",
+      "accessed_on": "2026-07-09",
+      "provenance": "register",
+      "doi": "10.3390/fire9020062",
+      "link": "https://doi.org/10.3390/fire9020062",
+      "link_kind": "doi",
+      "title": "Zhao, J.; Zhang, S.; Li, X.; Kong, X.; Zhao, L.; Shen, J",
+      "no_link_sentence": null
+     }
+    ],
+    "register_rows": [],
+    "source_scope": "curve"
+   }
+  ],
+  "additional_parameter_rows": [
+   {
+    "id": "module state-table ordinates",
+    "name": "module state-table ordinates",
+    "value": [
+     0,
+     0.002,
+     0.01,
+     0.04,
+     0.12,
+     0.32,
+     0.65
+    ],
+    "tier": "T4",
+    "source_ids": [
+     "WANG_2025_PV_THERMAL",
+     "ZHAO_2026_PV_POOL_FIRE",
+     "KIEE_JANG_2026_WILDFIRE_PV",
+     "DOE_FEMP_PV_WILDFIRE"
+    ],
+    "claim_ids": [],
+    "curve_id": "WSV1_MODULE_THERMAL",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Evidence constrains mechanism, selector sensitivity, and inspection endpoint; absolute class DR is engineering judgment.",
+    "update_trigger": "paired local exposure, inspection disposition, and module replacement cost"
+   }
+  ],
+  "sources": [
+   {
+    "id": "DOE_FEMP_PV_WILDFIRE",
+    "aliases": [],
+    "citation": "U.S. Department of Energy, Federal Energy Management Program. Solar Photovoltaic Hardening for Resilience – Wildfire.",
+    "url": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+    "locator": null,
+    "role": "site-field design / mechanism / inspection",
+    "tier": "T2",
+    "permitted": "vegetation management, undergrounding where practical, fire-resistant containers, access planning, noncombustible barriers, post-fire imaging",
+    "prohibited": "universal mitigation coefficient, fire-rating-to-DR conversion, component fragility or FIL mapping",
+    "decision": "RETAINED_QUALITATIVE",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+    "link_kind": "url",
+    "title": "U.S. Department of Energy, Federal Energy Management Program",
+    "no_link_sentence": null
+   },
+   {
+    "id": "KIEE_JANG_2026_WILDFIRE_PV",
+    "aliases": [],
+    "citation": "Jang, J.-H.; Kim, J.-M.; Oh, S.-J.; Kang, H.-G. Analysis of degradation diagnosis methods of PV modules depending on wildfires. Transactions of the Korean Institute of Electrical Engineers 75(2), 390-396 (2026).",
+    "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003300065",
+    "locator": null,
+    "role": "field diagnostic protocol and endpoint design",
+    "tier": "T3",
+    "permitted": "an actual wildfire-affected PV system exhibited degradation signals; EL and continued monitoring add information beyond performance or I-V alone",
+    "prohibited": "local wildfire dose, population fragility, affected/unaffected denominator, BOM transfer, replacement decision, or economic DR",
+    "decision": "RETAINED_ABSTRACT_ONLY",
+    "accessed_on": "2026-07-10",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003300065",
+    "link_kind": "url",
+    "title": "Jang, J.-H.; Kim, J.-M.; Oh, S.-J.; Kang, H.-G",
+    "no_link_sentence": null
+   },
+   {
+    "id": "WANG_2025_PV_THERMAL",
+    "aliases": [],
+    "citation": "Wang, Y.; Xiao, C.; Bedon, C. Performance of photovoltaic panels with different inclinations under uniform thermal loading. International Journal of Thermal Sciences 208 (2025) 109489.",
+    "url": "https://doi.org/10.1016/j.ijthermalsci.2024.109489",
+    "locator": null,
+    "role": "component mechanism / future flux-time constraint",
+    "tier": "T2",
+    "permitted": "15 four-edge-shielded 300 × 300 × 4.7 mm specimens; glass fracture/pyrolysis; primarily 8–15 kW/m² and 61–84 °C reported tolerance ranges; inclination sensitivity",
+    "prohibited": "universal PV threshold, modern utility-module population fragility, FIL ordinate, replacement-cost ratio",
+    "decision": "RETAINED_WITH_TRANSFER_LIMIT",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": "10.1016/j.ijthermalsci.2024.109489",
+    "link": "https://doi.org/10.1016/j.ijthermalsci.2024.109489",
+    "link_kind": "doi",
+    "title": "Wang, Y.; Xiao, C.; Bedon, C",
+    "no_link_sentence": null
+   },
+   {
+    "id": "ZHAO_2026_PV_POOL_FIRE",
+    "aliases": [],
+    "citation": "Zhao, J.; Zhang, S.; Li, X.; Kong, X.; Zhao, L.; Shen, J. Experimental Investigation of Thermal Response of Single-Glass Photovoltaic Modules with Different Inclination Angles. Fire 9(2), 62 (2026).",
+    "url": "https://doi.org/10.3390/fire9020062",
+    "locator": null,
+    "role": "selector/conditioner direction and zonal exposure architecture",
+    "tier": "T2",
+    "permitted": "front-glass integrity, flame-contact zone, and inclination materially affected burn-through and temperature response; cracked modules burned faster; tested response peaked at 15°",
+    "prohibited": "wildfire population fragility, replacement-cost ratio, universal stow credit",
+    "decision": "RETAINED_MECHANISM_ONLY",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": "10.3390/fire9020062",
+    "link": "https://doi.org/10.3390/fire9020062",
+    "link_kind": "doi",
+    "title": "Zhao, J.; Zhang, S.; Li, X.; Kong, X.; Zhao, L.; Shen, J",
+    "no_link_sentence": null
+   }
+  ],
+  "source_ids": [
+   "DOE_FEMP_PV_WILDFIRE",
+   "KIEE_JANG_2026_WILDFIRE_PV",
+   "WANG_2025_PV_THERMAL",
+   "ZHAO_2026_PV_POOL_FIRE"
+  ],
+  "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+  "evaluator": {
+   "module": "scripts/reference_helpers/damage_curve_eval.py",
+   "function": "evaluate_curve_record",
+   "note": "exact integer state lookup on the record's knots; no interpolation"
+  },
+  "production_use": {
+   "state": "runtime_indexed",
+   "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
+   "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
+  }
+ }
 }

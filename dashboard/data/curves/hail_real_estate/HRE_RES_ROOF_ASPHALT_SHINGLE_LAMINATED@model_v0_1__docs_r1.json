@@ -3615,5 +3615,1091 @@
   }
  },
  "versions": [],
- "data_path": "curves/hail_real_estate/HRE_RES_ROOF_ASPHALT_SHINGLE_LAMINATED@model_v0_1__docs_r1.json"
+ "data_path": "curves/hail_real_estate/HRE_RES_ROOF_ASPHALT_SHINGLE_LAMINATED@model_v0_1__docs_r1.json",
+ "construction_sources": [
+  {
+   "id": "HRE-S001",
+   "aliases": [],
+   "citation": "Marshall, T. P., R. F. Herzog, S. J. Morrison and S. R. Smith (Haag Engineering Co.). Hail damage threshold sizes for common roofing materials. Preprints, 21st Conference on Severe Local Storms, American Meteorological Society, 2002, paper P3.2.",
+   "url": "https://ams.confex.com/ams/pdfpapers/45858.pdf",
+   "locator": "p. 2 Table 1 (terminal velocity and impact energy by diameter, after Greenfeld 1969) and text (freezer ice harder and denser than natural hail; perpendicular impacts = worst case); p. 3 §4 (panels: asphalt and cedar shingles weathered about 11 years; ten impacts per size) and §4a (damage = diminished water-shedding or reduced expected life; for shingles punctures, tears, mat fractures or granules displaced to expose the bitumen); p. 3 Table 2 (percent of impacts damaging: 30-yr laminated 11 yr 0/0/60/90/100 and 3-tab fiberglass 0/60/90/100/100 at 1/1.25/1.5/1.75/2.0 in); p. 4 Table 3 (field thresholds: 3-tab 1.00 in, laminated 1.25 in, built-up gravel 2.50 in)",
+   "role": "curve_data_carrier;method_definition",
+   "tier": "T3",
+   "permitted": "Place the onset (field threshold) and the full-damage size (every lab impact damaging) of the laminated-shingle band; read the onset as the start of roof-cover replacement.",
+   "prohibited": "Read the lab percentages as a roof replacement probability or as a repair-cost ratio; transfer them to other roofing types.",
+   "decision": "adopt_with_limits",
+   "accessed_on": "2026-10-18",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://ams.confex.com/ams/pdfpapers/45858.pdf",
+   "link_kind": "url",
+   "title": "Marshall, T. P., R. F. Herzog, S. J. Morrison and S. R. Smith (Haag Engineering Co.). Hail damage threshold…",
+   "no_link_sentence": null
+  },
+  {
+   "id": "HRE-S006",
+   "aliases": [],
+   "citation": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+   "url": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+   "locator": "§8.1.2.2 Table 8-5 p. 8-5 (one-storey residential subassembly cost ratios: roofing 3%); Table 8-7 p. 8-6 (roofing $1.79 of $59.88/ft2); §8.1.3 pp. 8-7 to 8-8 (asphalt roof covering replaced above a 0.5% damage state; repair-and-remodel factor 1.25; explicit window cost functions); §8.1.7.1.1 Eq. 8-10 p. 8-21 (story adjustment for roofing); Table 8-11 pp. 8-23 to 8-24 (three-storey motel: roof covering 1.1%, insulation 0.7%, roofing 2.1%, windows and glazed walls 1.8%); §8.1.7.2 p. 8-25 (commercial loss: repair factor 1.25, overhead and profit 1.20)",
+   "role": "value_basis",
+   "tier": "T2",
+   "permitted": "Take the roof-cover share of replacement cost for the house (residential table) and the office (three-storey commercial example) with Hazus's own repair factors.",
+   "prohibited": "Read the Hazus hurricane damage functions as hail evidence (Hazus has no hail model); apply the motel example to the warehouse.",
+   "decision": "adopt_with_limits",
+   "accessed_on": "2026-10-18",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+   "link_kind": "url",
+   "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+   "no_link_sentence": null
+  },
+  {
+   "id": "HRE-S013",
+   "aliases": [],
+   "citation": "Smith, D. L. Asphalt composition shingle damage — hail or manufacturing defect? IIBEC Interface, February 2013.",
+   "url": "https://iibec.org/publication-post/2013-02-smith/",
+   "locator": "Web page, Table 1 'Hail thresholds for steep-sloped roof coverings': three-tab lightweight shingles 1 in; laminated heavyweight shingles 1 1/4 in; based on lab testing with simulated hail and field inspections; dense hail, perpendicular impacts, roofs in good condition; for shingles, puncture or fracture is functional damage, granule loss alone is not",
+   "role": "independent_verification",
+   "tier": "T3",
+   "permitted": "Corroborate the laminated (1.25 in) and three-tab (1.0 in) onsets.",
+   "prohibited": "Read the threshold as the size at which the whole roof is replaced.",
+   "decision": "adopt_with_limits",
+   "accessed_on": "2026-10-18",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://iibec.org/publication-post/2013-02-smith/",
+   "link_kind": "url",
+   "title": "Smith, D. L. Asphalt composition shingle damage — hail or manufacturing defect? IIBEC Interface, February…",
+   "no_link_sentence": null
+  }
+ ],
+ "construction": {
+  "curve_type": "piecewise linear",
+  "curve_form": "piecewise_linear",
+  "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+  "axis": {
+   "id": "HAIL_DIAMETER_MESH_EQUIV",
+   "label": "hazard's MESH75 hail diameter",
+   "unit": "mm",
+   "input_field": "mesh_diameter_mm",
+   "valid_range": [
+    0.0,
+    203.2
+   ],
+   "kind": "continuous",
+   "label_from_id": true
+  },
+  "parameters": [
+   {
+    "name": "points",
+    "definition": "ordered hazard-intensity and damage-ratio knots",
+    "value": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      1.0,
+      0.0
+     ],
+     [
+      2.0,
+      0.0
+     ],
+     [
+      3.0,
+      0.0
+     ],
+     [
+      4.0,
+      0.0
+     ],
+     [
+      5.0,
+      0.0
+     ],
+     [
+      6.0,
+      0.0
+     ],
+     [
+      7.0,
+      0.0
+     ],
+     [
+      8.0,
+      0.0
+     ],
+     [
+      9.0,
+      0.0
+     ],
+     [
+      10.0,
+      0.0
+     ],
+     [
+      11.0,
+      0.0
+     ],
+     [
+      12.0,
+      0.0
+     ],
+     [
+      13.0,
+      0.0
+     ],
+     [
+      14.0,
+      0.0
+     ],
+     [
+      15.0,
+      0.0
+     ],
+     [
+      16.0,
+      0.0
+     ],
+     [
+      17.0,
+      0.0
+     ],
+     [
+      18.0,
+      0.0
+     ],
+     [
+      19.0,
+      0.0
+     ],
+     [
+      20.0,
+      1e-06
+     ],
+     [
+      21.0,
+      3e-06
+     ],
+     [
+      22.0,
+      1.3e-05
+     ],
+     [
+      23.0,
+      4.8e-05
+     ],
+     [
+      24.0,
+      0.000157
+     ],
+     [
+      25.0,
+      0.000453
+     ],
+     [
+      26.0,
+      0.001169
+     ],
+     [
+      27.0,
+      0.002723
+     ],
+     [
+      28.0,
+      0.005788
+     ],
+     [
+      29.0,
+      0.011328
+     ],
+     [
+      30.0,
+      0.020582
+     ],
+     [
+      31.0,
+      0.034967
+     ],
+     [
+      32.0,
+      0.055906
+     ],
+     [
+      33.0,
+      0.084613
+     ],
+     [
+      34.0,
+      0.121862
+     ],
+     [
+      35.0,
+      0.167819
+     ],
+     [
+      36.0,
+      0.22195
+     ],
+     [
+      37.0,
+      0.283041
+     ],
+     [
+      38.0,
+      0.34932
+     ],
+     [
+      39.0,
+      0.418658
+     ],
+     [
+      40.0,
+      0.488789
+     ],
+     [
+      41.0,
+      0.557543
+     ],
+     [
+      42.0,
+      0.62302
+     ],
+     [
+      43.0,
+      0.683723
+     ],
+     [
+      44.0,
+      0.738608
+     ],
+     [
+      45.0,
+      0.787091
+     ],
+     [
+      46.0,
+      0.829
+     ],
+     [
+      47.0,
+      0.8645
+     ],
+     [
+      48.0,
+      0.894009
+     ],
+     [
+      49.0,
+      0.91811
+     ],
+     [
+      50.0,
+      0.937471
+     ],
+     [
+      51.0,
+      0.952788
+     ],
+     [
+      52.0,
+      0.96473
+     ],
+     [
+      53.0,
+      0.973917
+     ],
+     [
+      54.0,
+      0.980896
+     ],
+     [
+      55.0,
+      0.986134
+     ],
+     [
+      56.0,
+      0.990022
+     ],
+     [
+      57.0,
+      0.992879
+     ],
+     [
+      58.0,
+      0.994956
+     ],
+     [
+      59.0,
+      0.996454
+     ],
+     [
+      60.0,
+      0.997524
+     ],
+     [
+      61.0,
+      0.998282
+     ],
+     [
+      62.0,
+      0.998816
+     ],
+     [
+      63.0,
+      0.999188
+     ],
+     [
+      64.0,
+      0.999447
+     ],
+     [
+      65.0,
+      0.999625
+     ],
+     [
+      66.0,
+      0.999747
+     ],
+     [
+      67.0,
+      0.99983
+     ],
+     [
+      68.0,
+      0.999886
+     ],
+     [
+      69.0,
+      0.999924
+     ],
+     [
+      70.0,
+      0.99995
+     ],
+     [
+      71.0,
+      0.999967
+     ],
+     [
+      72.0,
+      0.999978
+     ],
+     [
+      73.0,
+      0.999986
+     ],
+     [
+      74.0,
+      0.999991
+     ],
+     [
+      75.0,
+      0.999994
+     ],
+     [
+      76.0,
+      0.999996
+     ],
+     [
+      77.0,
+      0.999997
+     ],
+     [
+      78.0,
+      0.999998
+     ],
+     [
+      79.0,
+      0.999999
+     ],
+     [
+      80.0,
+      0.999999
+     ],
+     [
+      81.0,
+      1.0
+     ],
+     [
+      82.0,
+      1.0
+     ],
+     [
+      83.0,
+      1.0
+     ],
+     [
+      84.0,
+      1.0
+     ],
+     [
+      85.0,
+      1.0
+     ],
+     [
+      86.0,
+      1.0
+     ],
+     [
+      87.0,
+      1.0
+     ],
+     [
+      88.0,
+      1.0
+     ],
+     [
+      89.0,
+      1.0
+     ],
+     [
+      90.0,
+      1.0
+     ],
+     [
+      91.0,
+      1.0
+     ],
+     [
+      92.0,
+      1.0
+     ],
+     [
+      93.0,
+      1.0
+     ],
+     [
+      94.0,
+      1.0
+     ],
+     [
+      95.0,
+      1.0
+     ],
+     [
+      96.0,
+      1.0
+     ],
+     [
+      97.0,
+      1.0
+     ],
+     [
+      98.0,
+      1.0
+     ],
+     [
+      99.0,
+      1.0
+     ],
+     [
+      100.0,
+      1.0
+     ],
+     [
+      101.0,
+      1.0
+     ],
+     [
+      102.0,
+      1.0
+     ],
+     [
+      103.0,
+      1.0
+     ],
+     [
+      104.0,
+      1.0
+     ],
+     [
+      105.0,
+      1.0
+     ],
+     [
+      106.0,
+      1.0
+     ],
+     [
+      107.0,
+      1.0
+     ],
+     [
+      108.0,
+      1.0
+     ],
+     [
+      109.0,
+      1.0
+     ],
+     [
+      110.0,
+      1.0
+     ],
+     [
+      111.0,
+      1.0
+     ],
+     [
+      112.0,
+      1.0
+     ],
+     [
+      113.0,
+      1.0
+     ],
+     [
+      114.0,
+      1.0
+     ],
+     [
+      115.0,
+      1.0
+     ],
+     [
+      116.0,
+      1.0
+     ],
+     [
+      117.0,
+      1.0
+     ],
+     [
+      118.0,
+      1.0
+     ],
+     [
+      119.0,
+      1.0
+     ],
+     [
+      120.0,
+      1.0
+     ],
+     [
+      121.0,
+      1.0
+     ],
+     [
+      122.0,
+      1.0
+     ],
+     [
+      123.0,
+      1.0
+     ],
+     [
+      124.0,
+      1.0
+     ],
+     [
+      125.0,
+      1.0
+     ],
+     [
+      126.0,
+      1.0
+     ],
+     [
+      127.0,
+      1.0
+     ],
+     [
+      128.0,
+      1.0
+     ],
+     [
+      129.0,
+      1.0
+     ],
+     [
+      130.0,
+      1.0
+     ],
+     [
+      131.0,
+      1.0
+     ],
+     [
+      132.0,
+      1.0
+     ],
+     [
+      133.0,
+      1.0
+     ],
+     [
+      134.0,
+      1.0
+     ],
+     [
+      135.0,
+      1.0
+     ],
+     [
+      136.0,
+      1.0
+     ],
+     [
+      137.0,
+      1.0
+     ],
+     [
+      138.0,
+      1.0
+     ],
+     [
+      139.0,
+      1.0
+     ],
+     [
+      140.0,
+      1.0
+     ],
+     [
+      141.0,
+      1.0
+     ],
+     [
+      142.0,
+      1.0
+     ],
+     [
+      143.0,
+      1.0
+     ],
+     [
+      144.0,
+      1.0
+     ],
+     [
+      145.0,
+      1.0
+     ],
+     [
+      146.0,
+      1.0
+     ],
+     [
+      147.0,
+      1.0
+     ],
+     [
+      148.0,
+      1.0
+     ],
+     [
+      149.0,
+      1.0
+     ],
+     [
+      150.0,
+      1.0
+     ],
+     [
+      151.0,
+      1.0
+     ],
+     [
+      152.0,
+      1.0
+     ],
+     [
+      153.0,
+      1.0
+     ],
+     [
+      154.0,
+      1.0
+     ],
+     [
+      155.0,
+      1.0
+     ],
+     [
+      156.0,
+      1.0
+     ],
+     [
+      157.0,
+      1.0
+     ],
+     [
+      158.0,
+      1.0
+     ],
+     [
+      159.0,
+      1.0
+     ],
+     [
+      160.0,
+      1.0
+     ],
+     [
+      161.0,
+      1.0
+     ],
+     [
+      162.0,
+      1.0
+     ],
+     [
+      163.0,
+      1.0
+     ],
+     [
+      164.0,
+      1.0
+     ],
+     [
+      165.0,
+      1.0
+     ],
+     [
+      166.0,
+      1.0
+     ],
+     [
+      167.0,
+      1.0
+     ],
+     [
+      168.0,
+      1.0
+     ],
+     [
+      169.0,
+      1.0
+     ],
+     [
+      170.0,
+      1.0
+     ],
+     [
+      171.0,
+      1.0
+     ],
+     [
+      172.0,
+      1.0
+     ],
+     [
+      173.0,
+      1.0
+     ],
+     [
+      174.0,
+      1.0
+     ],
+     [
+      175.0,
+      1.0
+     ],
+     [
+      176.0,
+      1.0
+     ],
+     [
+      177.0,
+      1.0
+     ],
+     [
+      178.0,
+      1.0
+     ],
+     [
+      179.0,
+      1.0
+     ],
+     [
+      180.0,
+      1.0
+     ],
+     [
+      181.0,
+      1.0
+     ],
+     [
+      182.0,
+      1.0
+     ],
+     [
+      183.0,
+      1.0
+     ],
+     [
+      184.0,
+      1.0
+     ],
+     [
+      185.0,
+      1.0
+     ],
+     [
+      186.0,
+      1.0
+     ],
+     [
+      187.0,
+      1.0
+     ],
+     [
+      188.0,
+      1.0
+     ],
+     [
+      189.0,
+      1.0
+     ],
+     [
+      190.0,
+      1.0
+     ],
+     [
+      191.0,
+      1.0
+     ],
+     [
+      192.0,
+      1.0
+     ],
+     [
+      193.0,
+      1.0
+     ],
+     [
+      194.0,
+      1.0
+     ],
+     [
+      195.0,
+      1.0
+     ],
+     [
+      196.0,
+      1.0
+     ],
+     [
+      197.0,
+      1.0
+     ],
+     [
+      198.0,
+      1.0
+     ],
+     [
+      199.0,
+      1.0
+     ],
+     [
+      200.0,
+      1.0
+     ],
+     [
+      201.0,
+      1.0
+     ],
+     [
+      202.0,
+      1.0
+     ],
+     [
+      203.0,
+      1.0
+     ],
+     [
+      203.2,
+      1.0
+     ]
+    ],
+    "value_path": "docs/cells/hail_real_estate/proposed/hail_real_estate__model_v0_1__docs_r1__curve_artifact.json::curve_id=HRE_RES_ROOF_ASPHALT_SHINGLE_LAMINATED::parameters.points",
+    "tier": null,
+    "tier_word": null,
+    "reasoning": [
+     "No parameter-specific register row; use the curve-level construction sources and artifact value path."
+    ],
+    "source_ids": [
+     "HRE-S001",
+     "HRE-S006",
+     "HRE-S013"
+    ],
+    "sources": [
+     {
+      "id": "HRE-S001",
+      "aliases": [],
+      "citation": "Marshall, T. P., R. F. Herzog, S. J. Morrison and S. R. Smith (Haag Engineering Co.). Hail damage threshold sizes for common roofing materials. Preprints, 21st Conference on Severe Local Storms, American Meteorological Society, 2002, paper P3.2.",
+      "url": "https://ams.confex.com/ams/pdfpapers/45858.pdf",
+      "locator": "p. 2 Table 1 (terminal velocity and impact energy by diameter, after Greenfeld 1969) and text (freezer ice harder and denser than natural hail; perpendicular impacts = worst case); p. 3 §4 (panels: asphalt and cedar shingles weathered about 11 years; ten impacts per size) and §4a (damage = diminished water-shedding or reduced expected life; for shingles punctures, tears, mat fractures or granules displaced to expose the bitumen); p. 3 Table 2 (percent of impacts damaging: 30-yr laminated 11 yr 0/0/60/90/100 and 3-tab fiberglass 0/60/90/100/100 at 1/1.25/1.5/1.75/2.0 in); p. 4 Table 3 (field thresholds: 3-tab 1.00 in, laminated 1.25 in, built-up gravel 2.50 in)",
+      "role": "curve_data_carrier;method_definition",
+      "tier": "T3",
+      "permitted": "Place the onset (field threshold) and the full-damage size (every lab impact damaging) of the laminated-shingle band; read the onset as the start of roof-cover replacement.",
+      "prohibited": "Read the lab percentages as a roof replacement probability or as a repair-cost ratio; transfer them to other roofing types.",
+      "decision": "adopt_with_limits",
+      "accessed_on": "2026-10-18",
+      "provenance": "register",
+      "doi": null,
+      "link": "https://ams.confex.com/ams/pdfpapers/45858.pdf",
+      "link_kind": "url",
+      "title": "Marshall, T. P., R. F. Herzog, S. J. Morrison and S. R. Smith (Haag Engineering Co.). Hail damage threshold…",
+      "no_link_sentence": null
+     },
+     {
+      "id": "HRE-S006",
+      "aliases": [],
+      "citation": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "url": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "locator": "§8.1.2.2 Table 8-5 p. 8-5 (one-storey residential subassembly cost ratios: roofing 3%); Table 8-7 p. 8-6 (roofing $1.79 of $59.88/ft2); §8.1.3 pp. 8-7 to 8-8 (asphalt roof covering replaced above a 0.5% damage state; repair-and-remodel factor 1.25; explicit window cost functions); §8.1.7.1.1 Eq. 8-10 p. 8-21 (story adjustment for roofing); Table 8-11 pp. 8-23 to 8-24 (three-storey motel: roof covering 1.1%, insulation 0.7%, roofing 2.1%, windows and glazed walls 1.8%); §8.1.7.2 p. 8-25 (commercial loss: repair factor 1.25, overhead and profit 1.20)",
+      "role": "value_basis",
+      "tier": "T2",
+      "permitted": "Take the roof-cover share of replacement cost for the house (residential table) and the office (three-storey commercial example) with Hazus's own repair factors.",
+      "prohibited": "Read the Hazus hurricane damage functions as hail evidence (Hazus has no hail model); apply the motel example to the warehouse.",
+      "decision": "adopt_with_limits",
+      "accessed_on": "2026-10-18",
+      "provenance": "register",
+      "doi": null,
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+      "link_kind": "url",
+      "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+      "no_link_sentence": null
+     },
+     {
+      "id": "HRE-S013",
+      "aliases": [],
+      "citation": "Smith, D. L. Asphalt composition shingle damage — hail or manufacturing defect? IIBEC Interface, February 2013.",
+      "url": "https://iibec.org/publication-post/2013-02-smith/",
+      "locator": "Web page, Table 1 'Hail thresholds for steep-sloped roof coverings': three-tab lightweight shingles 1 in; laminated heavyweight shingles 1 1/4 in; based on lab testing with simulated hail and field inspections; dense hail, perpendicular impacts, roofs in good condition; for shingles, puncture or fracture is functional damage, granule loss alone is not",
+      "role": "independent_verification",
+      "tier": "T3",
+      "permitted": "Corroborate the laminated (1.25 in) and three-tab (1.0 in) onsets.",
+      "prohibited": "Read the threshold as the size at which the whole roof is replaced.",
+      "decision": "adopt_with_limits",
+      "accessed_on": "2026-10-18",
+      "provenance": "register",
+      "doi": null,
+      "link": "https://iibec.org/publication-post/2013-02-smith/",
+      "link_kind": "url",
+      "title": "Smith, D. L. Asphalt composition shingle damage — hail or manufacturing defect? IIBEC Interface, February…",
+      "no_link_sentence": null
+     }
+    ],
+    "register_rows": [],
+    "source_scope": "curve"
+   }
+  ],
+  "additional_parameter_rows": [
+   {
+    "id": "house_roof_band",
+    "name": "house_roof_band",
+    "value": "1.25-2.0 in (31.75-50.8 mm)",
+    "tier": "T3",
+    "source_ids": [
+     "HRE-S001",
+     "HRE-S013"
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_RES_ROOF_ASPHALT_SHINGLE_LAMINATED",
+    "pathway_id": "hail_impact",
+    "role": "threshold",
+    "status": "proposed",
+    "reasoning": "HRE-C001, C002.",
+    "update_trigger": "Claims study by roof type."
+   },
+   {
+    "id": "house_roof_share",
+    "name": "house_roof_share",
+    "value": "0.0375 of structure RCN",
+    "tier": "T3",
+    "source_ids": [
+     "HRE-S006"
+    ],
+    "claim_ids": [],
+    "curve_id": "HRE_RES_ROOF_ASPHALT_SHINGLE_LAMINATED",
+    "pathway_id": "hail_impact",
+    "role": "value_share",
+    "status": "proposed",
+    "reasoning": "HRE-C008.",
+    "update_trigger": "Cost model."
+   }
+  ],
+  "sources": [
+   {
+    "id": "HRE-S001",
+    "aliases": [],
+    "citation": "Marshall, T. P., R. F. Herzog, S. J. Morrison and S. R. Smith (Haag Engineering Co.). Hail damage threshold sizes for common roofing materials. Preprints, 21st Conference on Severe Local Storms, American Meteorological Society, 2002, paper P3.2.",
+    "url": "https://ams.confex.com/ams/pdfpapers/45858.pdf",
+    "locator": "p. 2 Table 1 (terminal velocity and impact energy by diameter, after Greenfeld 1969) and text (freezer ice harder and denser than natural hail; perpendicular impacts = worst case); p. 3 §4 (panels: asphalt and cedar shingles weathered about 11 years; ten impacts per size) and §4a (damage = diminished water-shedding or reduced expected life; for shingles punctures, tears, mat fractures or granules displaced to expose the bitumen); p. 3 Table 2 (percent of impacts damaging: 30-yr laminated 11 yr 0/0/60/90/100 and 3-tab fiberglass 0/60/90/100/100 at 1/1.25/1.5/1.75/2.0 in); p. 4 Table 3 (field thresholds: 3-tab 1.00 in, laminated 1.25 in, built-up gravel 2.50 in)",
+    "role": "curve_data_carrier;method_definition",
+    "tier": "T3",
+    "permitted": "Place the onset (field threshold) and the full-damage size (every lab impact damaging) of the laminated-shingle band; read the onset as the start of roof-cover replacement.",
+    "prohibited": "Read the lab percentages as a roof replacement probability or as a repair-cost ratio; transfer them to other roofing types.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://ams.confex.com/ams/pdfpapers/45858.pdf",
+    "link_kind": "url",
+    "title": "Marshall, T. P., R. F. Herzog, S. J. Morrison and S. R. Smith (Haag Engineering Co.). Hail damage threshold…",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S006",
+    "aliases": [],
+    "citation": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+    "url": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+    "locator": "§8.1.2.2 Table 8-5 p. 8-5 (one-storey residential subassembly cost ratios: roofing 3%); Table 8-7 p. 8-6 (roofing $1.79 of $59.88/ft2); §8.1.3 pp. 8-7 to 8-8 (asphalt roof covering replaced above a 0.5% damage state; repair-and-remodel factor 1.25; explicit window cost functions); §8.1.7.1.1 Eq. 8-10 p. 8-21 (story adjustment for roofing); Table 8-11 pp. 8-23 to 8-24 (three-storey motel: roof covering 1.1%, insulation 0.7%, roofing 2.1%, windows and glazed walls 1.8%); §8.1.7.2 p. 8-25 (commercial loss: repair factor 1.25, overhead and profit 1.20)",
+    "role": "value_basis",
+    "tier": "T2",
+    "permitted": "Take the roof-cover share of replacement cost for the house (residential table) and the office (three-storey commercial example) with Hazus's own repair factors.",
+    "prohibited": "Read the Hazus hurricane damage functions as hail evidence (Hazus has no hail model); apply the motel example to the warehouse.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
+    "link_kind": "url",
+    "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
+    "no_link_sentence": null
+   },
+   {
+    "id": "HRE-S013",
+    "aliases": [],
+    "citation": "Smith, D. L. Asphalt composition shingle damage — hail or manufacturing defect? IIBEC Interface, February 2013.",
+    "url": "https://iibec.org/publication-post/2013-02-smith/",
+    "locator": "Web page, Table 1 'Hail thresholds for steep-sloped roof coverings': three-tab lightweight shingles 1 in; laminated heavyweight shingles 1 1/4 in; based on lab testing with simulated hail and field inspections; dense hail, perpendicular impacts, roofs in good condition; for shingles, puncture or fracture is functional damage, granule loss alone is not",
+    "role": "independent_verification",
+    "tier": "T3",
+    "permitted": "Corroborate the laminated (1.25 in) and three-tab (1.0 in) onsets.",
+    "prohibited": "Read the threshold as the size at which the whole roof is replaced.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://iibec.org/publication-post/2013-02-smith/",
+    "link_kind": "url",
+    "title": "Smith, D. L. Asphalt composition shingle damage — hail or manufacturing defect? IIBEC Interface, February…",
+    "no_link_sentence": null
+   }
+  ],
+  "source_ids": [
+   "HRE-S001",
+   "HRE-S006",
+   "HRE-S013"
+  ],
+  "artifact": "docs/cells/hail_real_estate/proposed/hail_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+  "evaluator": {
+   "module": "scripts/reference_helpers/hail_real_estate_curve_eval.py",
+   "function": "evaluate_damage_call",
+   "note": "request template from the cell's known-answer tests; the hazard axis field varied over the record's valid range"
+  },
+  "production_use": {
+   "state": "not_runtime_indexed",
+   "consumer_pin": null,
+   "sentence": "This curve is not in the runtime index."
+  }
+ }
 }

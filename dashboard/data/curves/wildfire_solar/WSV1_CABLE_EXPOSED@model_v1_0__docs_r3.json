@@ -468,5 +468,291 @@
    "source": "CHANGELOG.json"
   }
  ],
- "data_path": "curves/wildfire_solar/WSV1_CABLE_EXPOSED@model_v1_0__docs_r3.json"
+ "data_path": "curves/wildfire_solar/WSV1_CABLE_EXPOSED@model_v1_0__docs_r3.json",
+ "construction_sources": [
+  {
+   "id": "NEMA_GD2_2016",
+   "aliases": [],
+   "citation": "National Electrical Manufacturers Association. NEMA GD 2-2016: Evaluating Fire- and Heat-Damaged Electrical Equipment.",
+   "url": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+   "locator": null,
+   "role": "post-event failure/replacement endpoint design",
+   "tier": "T2",
+   "permitted": "fire- and heat-damaged electronic controls generally require replacement; some power and wiring equipment requires qualified evaluation or replacement",
+   "prohibited": "pre-event heat threshold, probability of failure, wildfire attack state, or economic fragility",
+   "decision": "RETAINED_FOR_ENDPOINT_PROTOCOL",
+   "accessed_on": "2026-07-10",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+   "link_kind": "url",
+   "title": "National Electrical Manufacturers Association",
+   "no_link_sentence": null
+  },
+  {
+   "id": "NREL_PV_OM_2018",
+   "aliases": [],
+   "citation": "Walker, H., et al. Best Practices for Operation and Maintenance of Photovoltaic and Energy Storage Systems; 3rd Edition. NREL/TP-7A40-73822 (2018).",
+   "url": "https://www.nrel.gov/docs/fy19osti/73822.pdf",
+   "locator": null,
+   "role": "asset decomposition / exposure-state design",
+   "tier": "T2",
+   "permitted": "open-air module/combiner wiring exposure; direct-burial/conduit distinctions; roads, access, vegetation and emergency planning",
+   "prohibited": "wildfire fragility or numeric protection factor",
+   "decision": "RETAINED_QUALITATIVE",
+   "accessed_on": "2026-07-09",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.nrel.gov/docs/fy19osti/73822.pdf",
+   "link_kind": "url",
+   "title": "Walker, H., et al. Best Practices for Operation and Maintenance of Photovoltaic and Energy Storage Systems; 3rd Edition",
+   "no_link_sentence": null
+  },
+  {
+   "id": "ZHANG_2022_XLPE",
+   "aliases": [],
+   "citation": "Zhang, H.; Yao, J.; Zhu, H.; Wang, X. Study on Combustion Characteristics of Cable Based on Cone Calorimeter. Energies 15(5), 1904 (2022).",
+   "url": "https://doi.org/10.3390/en15051904",
+   "locator": null,
+   "role": "cable-material ignition constraint",
+   "tier": "T2",
+   "permitted": "9 mm self-developed XLPE cable specimens; CHF 16.24 kW/m²; mean ignition times 83.5/25/13.3 s at 20/30/40 kW/m²",
+   "prohibited": "all PV cable types, installed cable systems, buried/conduit response, collection-bucket or economic DR",
+   "decision": "RETAINED_WITH_TRANSFER_LIMIT",
+   "accessed_on": "2026-07-09",
+   "provenance": "register",
+   "doi": "10.3390/en15051904",
+   "link": "https://doi.org/10.3390/en15051904",
+   "link_kind": "doi",
+   "title": "Zhang, H.; Yao, J.; Zhu, H.; Wang, X",
+   "no_link_sentence": null
+  }
+ ],
+ "construction": {
+  "curve_type": "piecewise linear",
+  "curve_form": "piecewise_linear",
+  "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+  "axis": {
+   "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE",
+   "label": "FSim conditional flame-length class (0 = no event)",
+   "unit": "class",
+   "input_field": "conditional_flame_length_class",
+   "kind": "categorical",
+   "valid_range": [
+    0,
+    6
+   ],
+   "classes": {
+    "1": "lt_2_ft",
+    "2": "gte_2_lt_4_ft",
+    "3": "gte_4_lt_6_ft",
+    "4": "gte_6_lt_8_ft",
+    "5": "gte_8_lt_12_ft",
+    "6": "gte_12_ft"
+   }
+  },
+  "parameters": [
+   {
+    "name": "points",
+    "definition": "ordered hazard-intensity and damage-ratio knots",
+    "value": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      0.005
+     ],
+     [
+      2,
+      0.02
+     ],
+     [
+      3,
+      0.08
+     ],
+     [
+      4,
+      0.25
+     ],
+     [
+      5,
+      0.6
+     ],
+     [
+      6,
+      0.9
+     ]
+    ],
+    "value_path": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json::curve_id=WSV1_CABLE_EXPOSED::parameters.points",
+    "tier": null,
+    "tier_word": null,
+    "reasoning": [
+     "No parameter-specific register row; use the curve-level construction sources and artifact value path."
+    ],
+    "source_ids": [
+     "NEMA_GD2_2016",
+     "NREL_PV_OM_2018",
+     "ZHANG_2022_XLPE"
+    ],
+    "sources": [
+     {
+      "id": "NEMA_GD2_2016",
+      "aliases": [],
+      "citation": "National Electrical Manufacturers Association. NEMA GD 2-2016: Evaluating Fire- and Heat-Damaged Electrical Equipment.",
+      "url": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+      "locator": null,
+      "role": "post-event failure/replacement endpoint design",
+      "tier": "T2",
+      "permitted": "fire- and heat-damaged electronic controls generally require replacement; some power and wiring equipment requires qualified evaluation or replacement",
+      "prohibited": "pre-event heat threshold, probability of failure, wildfire attack state, or economic fragility",
+      "decision": "RETAINED_FOR_ENDPOINT_PROTOCOL",
+      "accessed_on": "2026-07-10",
+      "provenance": "register",
+      "doi": null,
+      "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+      "link_kind": "url",
+      "title": "National Electrical Manufacturers Association",
+      "no_link_sentence": null
+     },
+     {
+      "id": "NREL_PV_OM_2018",
+      "aliases": [],
+      "citation": "Walker, H., et al. Best Practices for Operation and Maintenance of Photovoltaic and Energy Storage Systems; 3rd Edition. NREL/TP-7A40-73822 (2018).",
+      "url": "https://www.nrel.gov/docs/fy19osti/73822.pdf",
+      "locator": null,
+      "role": "asset decomposition / exposure-state design",
+      "tier": "T2",
+      "permitted": "open-air module/combiner wiring exposure; direct-burial/conduit distinctions; roads, access, vegetation and emergency planning",
+      "prohibited": "wildfire fragility or numeric protection factor",
+      "decision": "RETAINED_QUALITATIVE",
+      "accessed_on": "2026-07-09",
+      "provenance": "register",
+      "doi": null,
+      "link": "https://www.nrel.gov/docs/fy19osti/73822.pdf",
+      "link_kind": "url",
+      "title": "Walker, H., et al. Best Practices for Operation and Maintenance of Photovoltaic and Energy Storage Systems; 3rd Edition",
+      "no_link_sentence": null
+     },
+     {
+      "id": "ZHANG_2022_XLPE",
+      "aliases": [],
+      "citation": "Zhang, H.; Yao, J.; Zhu, H.; Wang, X. Study on Combustion Characteristics of Cable Based on Cone Calorimeter. Energies 15(5), 1904 (2022).",
+      "url": "https://doi.org/10.3390/en15051904",
+      "locator": null,
+      "role": "cable-material ignition constraint",
+      "tier": "T2",
+      "permitted": "9 mm self-developed XLPE cable specimens; CHF 16.24 kW/m²; mean ignition times 83.5/25/13.3 s at 20/30/40 kW/m²",
+      "prohibited": "all PV cable types, installed cable systems, buried/conduit response, collection-bucket or economic DR",
+      "decision": "RETAINED_WITH_TRANSFER_LIMIT",
+      "accessed_on": "2026-07-09",
+      "provenance": "register",
+      "doi": "10.3390/en15051904",
+      "link": "https://doi.org/10.3390/en15051904",
+      "link_kind": "doi",
+      "title": "Zhang, H.; Yao, J.; Zhu, H.; Wang, X",
+      "no_link_sentence": null
+     }
+    ],
+    "register_rows": [],
+    "source_scope": "curve"
+   }
+  ],
+  "additional_parameter_rows": [
+   {
+    "id": "exposed cable state-table ordinates",
+    "name": "exposed cable state-table ordinates",
+    "value": null,
+    "tier": "T4",
+    "source_ids": [
+     "ZHANG_2022_XLPE",
+     "NEMA_GD2_2016",
+     "NREL_PV_OM_2018"
+    ],
+    "claim_ids": [],
+    "curve_id": "WSV1_CABLE_EXPOSED",
+    "pathway_id": null,
+    "role": null,
+    "status": null,
+    "reasoning": "Material tests support high heat sensitivity but not installed-population economic DR.",
+    "update_trigger": "installed cable fire testing and routing-specific claims"
+   }
+  ],
+  "sources": [
+   {
+    "id": "NEMA_GD2_2016",
+    "aliases": [],
+    "citation": "National Electrical Manufacturers Association. NEMA GD 2-2016: Evaluating Fire- and Heat-Damaged Electrical Equipment.",
+    "url": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+    "locator": null,
+    "role": "post-event failure/replacement endpoint design",
+    "tier": "T2",
+    "permitted": "fire- and heat-damaged electronic controls generally require replacement; some power and wiring equipment requires qualified evaluation or replacement",
+    "prohibited": "pre-event heat threshold, probability of failure, wildfire attack state, or economic fragility",
+    "decision": "RETAINED_FOR_ENDPOINT_PROTOCOL",
+    "accessed_on": "2026-07-10",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+    "link_kind": "url",
+    "title": "National Electrical Manufacturers Association",
+    "no_link_sentence": null
+   },
+   {
+    "id": "NREL_PV_OM_2018",
+    "aliases": [],
+    "citation": "Walker, H., et al. Best Practices for Operation and Maintenance of Photovoltaic and Energy Storage Systems; 3rd Edition. NREL/TP-7A40-73822 (2018).",
+    "url": "https://www.nrel.gov/docs/fy19osti/73822.pdf",
+    "locator": null,
+    "role": "asset decomposition / exposure-state design",
+    "tier": "T2",
+    "permitted": "open-air module/combiner wiring exposure; direct-burial/conduit distinctions; roads, access, vegetation and emergency planning",
+    "prohibited": "wildfire fragility or numeric protection factor",
+    "decision": "RETAINED_QUALITATIVE",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.nrel.gov/docs/fy19osti/73822.pdf",
+    "link_kind": "url",
+    "title": "Walker, H., et al. Best Practices for Operation and Maintenance of Photovoltaic and Energy Storage Systems; 3rd Edition",
+    "no_link_sentence": null
+   },
+   {
+    "id": "ZHANG_2022_XLPE",
+    "aliases": [],
+    "citation": "Zhang, H.; Yao, J.; Zhu, H.; Wang, X. Study on Combustion Characteristics of Cable Based on Cone Calorimeter. Energies 15(5), 1904 (2022).",
+    "url": "https://doi.org/10.3390/en15051904",
+    "locator": null,
+    "role": "cable-material ignition constraint",
+    "tier": "T2",
+    "permitted": "9 mm self-developed XLPE cable specimens; CHF 16.24 kW/m²; mean ignition times 83.5/25/13.3 s at 20/30/40 kW/m²",
+    "prohibited": "all PV cable types, installed cable systems, buried/conduit response, collection-bucket or economic DR",
+    "decision": "RETAINED_WITH_TRANSFER_LIMIT",
+    "accessed_on": "2026-07-09",
+    "provenance": "register",
+    "doi": "10.3390/en15051904",
+    "link": "https://doi.org/10.3390/en15051904",
+    "link_kind": "doi",
+    "title": "Zhang, H.; Yao, J.; Zhu, H.; Wang, X",
+    "no_link_sentence": null
+   }
+  ],
+  "source_ids": [
+   "NEMA_GD2_2016",
+   "NREL_PV_OM_2018",
+   "ZHANG_2022_XLPE"
+  ],
+  "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+  "evaluator": {
+   "module": "scripts/reference_helpers/damage_curve_eval.py",
+   "function": "evaluate_curve_record",
+   "note": "exact integer state lookup on the record's knots; no interpolation"
+  },
+  "production_use": {
+   "state": "runtime_indexed",
+   "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
+   "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
+  }
+ }
 }

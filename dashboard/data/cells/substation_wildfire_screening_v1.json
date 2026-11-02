@@ -993,5 +993,1326 @@
    "cost": "our judgment"
   }
  },
- "build_findings": []
+ "build_findings": [],
+ "subcomponents": [
+  {
+   "key": "substation_hv_yard",
+   "label": "345 kV yard: breakers, disconnects, bus, instrument transformers, deadends",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "substation_wildfire_screening_v1",
+   "catalogue_status": "reused",
+   "cell_state": "partial",
+   "coverage": "curve",
+   "completeness": "incomplete",
+   "curve_ids": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "failure_unit_ids": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed · our judgment",
+   "construction": [
+    {
+     "curve_id": "WSV1_MV_EQUIPMENT_THERMAL",
+     "data_path": "curves/wildfire_solar/WSV1_MV_EQUIPMENT_THERMAL@model_v1_0__docs_r3.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "axis": {
+      "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE",
+      "label": "FSim conditional flame-length class (0 = no event)",
+      "unit": "class",
+      "input_field": "conditional_flame_length_class",
+      "kind": "categorical",
+      "valid_range": [
+       0,
+       6
+      ],
+      "classes": {
+       "1": "lt_2_ft",
+       "2": "gte_2_lt_4_ft",
+       "3": "gte_4_lt_6_ft",
+       "4": "gte_6_lt_8_ft",
+       "5": "gte_8_lt_12_ft",
+       "6": "gte_12_ft"
+      }
+     },
+     "parameters": [
+      {
+       "name": "points",
+       "definition": "ordered hazard-intensity and damage-ratio knots",
+       "value": [
+        [
+         0,
+         0
+        ],
+        [
+         1,
+         0.001
+        ],
+        [
+         2,
+         0.006
+        ],
+        [
+         3,
+         0.03
+        ],
+        [
+         4,
+         0.12
+        ],
+        [
+         5,
+         0.35
+        ],
+        [
+         6,
+         0.7
+        ]
+       ],
+       "value_path": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json::curve_id=WSV1_MV_EQUIPMENT_THERMAL::parameters.points",
+       "tier": null,
+       "tier_word": null,
+       "reasoning": [
+        "No parameter-specific register row; use the curve-level construction sources and artifact value path."
+       ],
+       "source_ids": [
+        "USFS_FSIM_RDS_2023",
+        "DOE_FEMP_PV_WILDFIRE",
+        "NEMA_GD2_2016",
+        "FM_DS_7_106_2026",
+        "NREL_NLR_Q1_2025_PV_BENCHMARK"
+       ],
+       "sources": [
+        {
+         "text": "USDA Forest Service, Spatial datasets of probabilistic wildfire risk components for the US, 3rd ed., RDS-2016-0034-3",
+         "ids": [
+          "USFS_FSIM_RDS_2023"
+         ],
+         "title": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition",
+         "link": "https://doi.org/10.2737/RDS-2016-0034-3",
+         "link_kind": "doi",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "USFS_FSIM_RDS_2023"
+        },
+        {
+         "text": "DOE/FEMP, Solar Photovoltaic Hardening for Resilience - Wildfire",
+         "ids": [
+          "DOE_FEMP_PV_WILDFIRE"
+         ],
+         "title": "U.S. Department of Energy, Federal Energy Management Program",
+         "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+         "link_kind": "url",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "DOE_FEMP_PV_WILDFIRE"
+        },
+        {
+         "text": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment",
+         "ids": [
+          "NEMA_GD2_2016"
+         ],
+         "title": "National Electrical Manufacturers Association",
+         "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+         "link_kind": "url",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "NEMA_GD2_2016"
+        },
+        {
+         "text": "FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026",
+         "ids": [
+          "FM_DS_7_106_2026"
+         ],
+         "title": "FM. Property Loss Prevention Data Sheet 7-106: Ground-Mounted Solar Power, April 2026.",
+         "link": "https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/07-hazards/fmds07106.pdf",
+         "link_kind": "url",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "FM_DS_7_106_2026"
+        },
+        {
+         "text": "NREL/NLR, Q1-2025 Solar PV System Cost Benchmarks",
+         "ids": [
+          "NREL_NLR_Q1_2025_PV_BENCHMARK"
+         ],
+         "title": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E",
+         "link": "https://doi.org/10.7799/3009689",
+         "link_kind": "doi",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "NREL_NLR_Q1_2025_PV_BENCHMARK"
+        }
+       ],
+       "register_rows": [],
+       "source_scope": "curve"
+      }
+     ],
+     "additional_parameter_rows": [],
+     "sources": [
+      {
+       "text": "USDA Forest Service, Spatial datasets of probabilistic wildfire risk components for the US, 3rd ed., RDS-2016-0034-3",
+       "ids": [
+        "USFS_FSIM_RDS_2023"
+       ],
+       "title": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition",
+       "link": "https://doi.org/10.2737/RDS-2016-0034-3",
+       "link_kind": "doi",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "USFS_FSIM_RDS_2023"
+      },
+      {
+       "text": "DOE/FEMP, Solar Photovoltaic Hardening for Resilience - Wildfire",
+       "ids": [
+        "DOE_FEMP_PV_WILDFIRE"
+       ],
+       "title": "U.S. Department of Energy, Federal Energy Management Program",
+       "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+       "link_kind": "url",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "DOE_FEMP_PV_WILDFIRE"
+      },
+      {
+       "text": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment",
+       "ids": [
+        "NEMA_GD2_2016"
+       ],
+       "title": "National Electrical Manufacturers Association",
+       "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+       "link_kind": "url",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "NEMA_GD2_2016"
+      },
+      {
+       "text": "FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026",
+       "ids": [
+        "FM_DS_7_106_2026"
+       ],
+       "title": "FM. Property Loss Prevention Data Sheet 7-106: Ground-Mounted Solar Power, April 2026.",
+       "link": "https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/07-hazards/fmds07106.pdf",
+       "link_kind": "url",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "FM_DS_7_106_2026"
+      },
+      {
+       "text": "NREL/NLR, Q1-2025 Solar PV System Cost Benchmarks",
+       "ids": [
+        "NREL_NLR_Q1_2025_PV_BENCHMARK"
+       ],
+       "title": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E",
+       "link": "https://doi.org/10.7799/3009689",
+       "link_kind": "doi",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "NREL_NLR_Q1_2025_PV_BENCHMARK"
+      }
+     ],
+     "source_ids": [
+      "USFS_FSIM_RDS_2023",
+      "DOE_FEMP_PV_WILDFIRE",
+      "NEMA_GD2_2016",
+      "FM_DS_7_106_2026",
+      "NREL_NLR_Q1_2025_PV_BENCHMARK"
+     ],
+     "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "evaluator": {
+      "module": "scripts/reference_helpers/damage_curve_eval.py",
+      "function": "evaluate_curve_record",
+      "note": "exact integer state lookup on the record's knots; no interpolation"
+     },
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
+      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
+     }
+    }
+   ],
+   "production_use": {
+    "state": "reused_binding",
+    "consumer_pin": null
+   },
+   "gap": {
+    "reason": "A curve covers only part of this expected subcomponent.",
+    "occurrence": null,
+    "register": null
+   }
+  },
+  {
+   "key": "substation_lv_yard",
+   "label": "138 kV yard: breakers, disconnects, bus, instrument transformers, deadends",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "substation_wildfire_screening_v1",
+   "catalogue_status": "reused",
+   "cell_state": "partial",
+   "coverage": "curve",
+   "completeness": "incomplete",
+   "curve_ids": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "failure_unit_ids": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed · our judgment",
+   "construction": [
+    {
+     "curve_id": "WSV1_MV_EQUIPMENT_THERMAL",
+     "data_path": "curves/wildfire_solar/WSV1_MV_EQUIPMENT_THERMAL@model_v1_0__docs_r3.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "axis": {
+      "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE",
+      "label": "FSim conditional flame-length class (0 = no event)",
+      "unit": "class",
+      "input_field": "conditional_flame_length_class",
+      "kind": "categorical",
+      "valid_range": [
+       0,
+       6
+      ],
+      "classes": {
+       "1": "lt_2_ft",
+       "2": "gte_2_lt_4_ft",
+       "3": "gte_4_lt_6_ft",
+       "4": "gte_6_lt_8_ft",
+       "5": "gte_8_lt_12_ft",
+       "6": "gte_12_ft"
+      }
+     },
+     "parameters": [
+      {
+       "name": "points",
+       "definition": "ordered hazard-intensity and damage-ratio knots",
+       "value": [
+        [
+         0,
+         0
+        ],
+        [
+         1,
+         0.001
+        ],
+        [
+         2,
+         0.006
+        ],
+        [
+         3,
+         0.03
+        ],
+        [
+         4,
+         0.12
+        ],
+        [
+         5,
+         0.35
+        ],
+        [
+         6,
+         0.7
+        ]
+       ],
+       "value_path": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json::curve_id=WSV1_MV_EQUIPMENT_THERMAL::parameters.points",
+       "tier": null,
+       "tier_word": null,
+       "reasoning": [
+        "No parameter-specific register row; use the curve-level construction sources and artifact value path."
+       ],
+       "source_ids": [
+        "USFS_FSIM_RDS_2023",
+        "DOE_FEMP_PV_WILDFIRE",
+        "NEMA_GD2_2016",
+        "FM_DS_7_106_2026",
+        "NREL_NLR_Q1_2025_PV_BENCHMARK"
+       ],
+       "sources": [
+        {
+         "text": "USDA Forest Service, Spatial datasets of probabilistic wildfire risk components for the US, 3rd ed., RDS-2016-0034-3",
+         "ids": [
+          "USFS_FSIM_RDS_2023"
+         ],
+         "title": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition",
+         "link": "https://doi.org/10.2737/RDS-2016-0034-3",
+         "link_kind": "doi",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "USFS_FSIM_RDS_2023"
+        },
+        {
+         "text": "DOE/FEMP, Solar Photovoltaic Hardening for Resilience - Wildfire",
+         "ids": [
+          "DOE_FEMP_PV_WILDFIRE"
+         ],
+         "title": "U.S. Department of Energy, Federal Energy Management Program",
+         "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+         "link_kind": "url",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "DOE_FEMP_PV_WILDFIRE"
+        },
+        {
+         "text": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment",
+         "ids": [
+          "NEMA_GD2_2016"
+         ],
+         "title": "National Electrical Manufacturers Association",
+         "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+         "link_kind": "url",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "NEMA_GD2_2016"
+        },
+        {
+         "text": "FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026",
+         "ids": [
+          "FM_DS_7_106_2026"
+         ],
+         "title": "FM. Property Loss Prevention Data Sheet 7-106: Ground-Mounted Solar Power, April 2026.",
+         "link": "https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/07-hazards/fmds07106.pdf",
+         "link_kind": "url",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "FM_DS_7_106_2026"
+        },
+        {
+         "text": "NREL/NLR, Q1-2025 Solar PV System Cost Benchmarks",
+         "ids": [
+          "NREL_NLR_Q1_2025_PV_BENCHMARK"
+         ],
+         "title": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E",
+         "link": "https://doi.org/10.7799/3009689",
+         "link_kind": "doi",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "NREL_NLR_Q1_2025_PV_BENCHMARK"
+        }
+       ],
+       "register_rows": [],
+       "source_scope": "curve"
+      }
+     ],
+     "additional_parameter_rows": [],
+     "sources": [
+      {
+       "text": "USDA Forest Service, Spatial datasets of probabilistic wildfire risk components for the US, 3rd ed., RDS-2016-0034-3",
+       "ids": [
+        "USFS_FSIM_RDS_2023"
+       ],
+       "title": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition",
+       "link": "https://doi.org/10.2737/RDS-2016-0034-3",
+       "link_kind": "doi",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "USFS_FSIM_RDS_2023"
+      },
+      {
+       "text": "DOE/FEMP, Solar Photovoltaic Hardening for Resilience - Wildfire",
+       "ids": [
+        "DOE_FEMP_PV_WILDFIRE"
+       ],
+       "title": "U.S. Department of Energy, Federal Energy Management Program",
+       "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+       "link_kind": "url",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "DOE_FEMP_PV_WILDFIRE"
+      },
+      {
+       "text": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment",
+       "ids": [
+        "NEMA_GD2_2016"
+       ],
+       "title": "National Electrical Manufacturers Association",
+       "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+       "link_kind": "url",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "NEMA_GD2_2016"
+      },
+      {
+       "text": "FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026",
+       "ids": [
+        "FM_DS_7_106_2026"
+       ],
+       "title": "FM. Property Loss Prevention Data Sheet 7-106: Ground-Mounted Solar Power, April 2026.",
+       "link": "https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/07-hazards/fmds07106.pdf",
+       "link_kind": "url",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "FM_DS_7_106_2026"
+      },
+      {
+       "text": "NREL/NLR, Q1-2025 Solar PV System Cost Benchmarks",
+       "ids": [
+        "NREL_NLR_Q1_2025_PV_BENCHMARK"
+       ],
+       "title": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E",
+       "link": "https://doi.org/10.7799/3009689",
+       "link_kind": "doi",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "NREL_NLR_Q1_2025_PV_BENCHMARK"
+      }
+     ],
+     "source_ids": [
+      "USFS_FSIM_RDS_2023",
+      "DOE_FEMP_PV_WILDFIRE",
+      "NEMA_GD2_2016",
+      "FM_DS_7_106_2026",
+      "NREL_NLR_Q1_2025_PV_BENCHMARK"
+     ],
+     "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "evaluator": {
+      "module": "scripts/reference_helpers/damage_curve_eval.py",
+      "function": "evaluate_curve_record",
+      "note": "exact integer state lookup on the record's knots; no interpolation"
+     },
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
+      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
+     }
+    }
+   ],
+   "production_use": {
+    "state": "reused_binding",
+    "consumer_pin": null
+   },
+   "gap": {
+    "reason": "A curve covers only part of this expected subcomponent.",
+    "occurrence": null,
+    "register": null
+   }
+  },
+  {
+   "key": "substation_transformation",
+   "label": "Autotransformers, oil containment and firewall",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "substation_wildfire_screening_v1",
+   "catalogue_status": "reused",
+   "cell_state": "partial",
+   "coverage": "curve",
+   "completeness": "incomplete",
+   "curve_ids": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "failure_unit_ids": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed · our judgment",
+   "construction": [
+    {
+     "curve_id": "WSV1_MV_EQUIPMENT_THERMAL",
+     "data_path": "curves/wildfire_solar/WSV1_MV_EQUIPMENT_THERMAL@model_v1_0__docs_r3.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "axis": {
+      "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE",
+      "label": "FSim conditional flame-length class (0 = no event)",
+      "unit": "class",
+      "input_field": "conditional_flame_length_class",
+      "kind": "categorical",
+      "valid_range": [
+       0,
+       6
+      ],
+      "classes": {
+       "1": "lt_2_ft",
+       "2": "gte_2_lt_4_ft",
+       "3": "gte_4_lt_6_ft",
+       "4": "gte_6_lt_8_ft",
+       "5": "gte_8_lt_12_ft",
+       "6": "gte_12_ft"
+      }
+     },
+     "parameters": [
+      {
+       "name": "points",
+       "definition": "ordered hazard-intensity and damage-ratio knots",
+       "value": [
+        [
+         0,
+         0
+        ],
+        [
+         1,
+         0.001
+        ],
+        [
+         2,
+         0.006
+        ],
+        [
+         3,
+         0.03
+        ],
+        [
+         4,
+         0.12
+        ],
+        [
+         5,
+         0.35
+        ],
+        [
+         6,
+         0.7
+        ]
+       ],
+       "value_path": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json::curve_id=WSV1_MV_EQUIPMENT_THERMAL::parameters.points",
+       "tier": null,
+       "tier_word": null,
+       "reasoning": [
+        "No parameter-specific register row; use the curve-level construction sources and artifact value path."
+       ],
+       "source_ids": [
+        "USFS_FSIM_RDS_2023",
+        "DOE_FEMP_PV_WILDFIRE",
+        "NEMA_GD2_2016",
+        "FM_DS_7_106_2026",
+        "NREL_NLR_Q1_2025_PV_BENCHMARK"
+       ],
+       "sources": [
+        {
+         "text": "USDA Forest Service, Spatial datasets of probabilistic wildfire risk components for the US, 3rd ed., RDS-2016-0034-3",
+         "ids": [
+          "USFS_FSIM_RDS_2023"
+         ],
+         "title": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition",
+         "link": "https://doi.org/10.2737/RDS-2016-0034-3",
+         "link_kind": "doi",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "USFS_FSIM_RDS_2023"
+        },
+        {
+         "text": "DOE/FEMP, Solar Photovoltaic Hardening for Resilience - Wildfire",
+         "ids": [
+          "DOE_FEMP_PV_WILDFIRE"
+         ],
+         "title": "U.S. Department of Energy, Federal Energy Management Program",
+         "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+         "link_kind": "url",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "DOE_FEMP_PV_WILDFIRE"
+        },
+        {
+         "text": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment",
+         "ids": [
+          "NEMA_GD2_2016"
+         ],
+         "title": "National Electrical Manufacturers Association",
+         "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+         "link_kind": "url",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "NEMA_GD2_2016"
+        },
+        {
+         "text": "FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026",
+         "ids": [
+          "FM_DS_7_106_2026"
+         ],
+         "title": "FM. Property Loss Prevention Data Sheet 7-106: Ground-Mounted Solar Power, April 2026.",
+         "link": "https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/07-hazards/fmds07106.pdf",
+         "link_kind": "url",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "FM_DS_7_106_2026"
+        },
+        {
+         "text": "NREL/NLR, Q1-2025 Solar PV System Cost Benchmarks",
+         "ids": [
+          "NREL_NLR_Q1_2025_PV_BENCHMARK"
+         ],
+         "title": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E",
+         "link": "https://doi.org/10.7799/3009689",
+         "link_kind": "doi",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "NREL_NLR_Q1_2025_PV_BENCHMARK"
+        }
+       ],
+       "register_rows": [],
+       "source_scope": "curve"
+      }
+     ],
+     "additional_parameter_rows": [],
+     "sources": [
+      {
+       "text": "USDA Forest Service, Spatial datasets of probabilistic wildfire risk components for the US, 3rd ed., RDS-2016-0034-3",
+       "ids": [
+        "USFS_FSIM_RDS_2023"
+       ],
+       "title": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition",
+       "link": "https://doi.org/10.2737/RDS-2016-0034-3",
+       "link_kind": "doi",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "USFS_FSIM_RDS_2023"
+      },
+      {
+       "text": "DOE/FEMP, Solar Photovoltaic Hardening for Resilience - Wildfire",
+       "ids": [
+        "DOE_FEMP_PV_WILDFIRE"
+       ],
+       "title": "U.S. Department of Energy, Federal Energy Management Program",
+       "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+       "link_kind": "url",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "DOE_FEMP_PV_WILDFIRE"
+      },
+      {
+       "text": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment",
+       "ids": [
+        "NEMA_GD2_2016"
+       ],
+       "title": "National Electrical Manufacturers Association",
+       "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+       "link_kind": "url",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "NEMA_GD2_2016"
+      },
+      {
+       "text": "FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026",
+       "ids": [
+        "FM_DS_7_106_2026"
+       ],
+       "title": "FM. Property Loss Prevention Data Sheet 7-106: Ground-Mounted Solar Power, April 2026.",
+       "link": "https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/07-hazards/fmds07106.pdf",
+       "link_kind": "url",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "FM_DS_7_106_2026"
+      },
+      {
+       "text": "NREL/NLR, Q1-2025 Solar PV System Cost Benchmarks",
+       "ids": [
+        "NREL_NLR_Q1_2025_PV_BENCHMARK"
+       ],
+       "title": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E",
+       "link": "https://doi.org/10.7799/3009689",
+       "link_kind": "doi",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "NREL_NLR_Q1_2025_PV_BENCHMARK"
+      }
+     ],
+     "source_ids": [
+      "USFS_FSIM_RDS_2023",
+      "DOE_FEMP_PV_WILDFIRE",
+      "NEMA_GD2_2016",
+      "FM_DS_7_106_2026",
+      "NREL_NLR_Q1_2025_PV_BENCHMARK"
+     ],
+     "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "evaluator": {
+      "module": "scripts/reference_helpers/damage_curve_eval.py",
+      "function": "evaluate_curve_record",
+      "note": "exact integer state lookup on the record's knots; no interpolation"
+     },
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
+      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
+     }
+    }
+   ],
+   "production_use": {
+    "state": "reused_binding",
+    "consumer_pin": null
+   },
+   "gap": {
+    "reason": "A curve covers only part of this expected subcomponent.",
+    "occurrence": null,
+    "register": null
+   }
+  },
+  {
+   "key": "substation_controls_auxiliaries",
+   "label": "Relays, control house, station battery, SCADA, station service, control cable",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "substation_wildfire_screening_v1",
+   "catalogue_status": "reused",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "failure_unit_ids": [],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed · our judgment",
+   "construction": [
+    {
+     "curve_id": "WSV1_MV_EQUIPMENT_THERMAL",
+     "data_path": "curves/wildfire_solar/WSV1_MV_EQUIPMENT_THERMAL@model_v1_0__docs_r3.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "axis": {
+      "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE",
+      "label": "FSim conditional flame-length class (0 = no event)",
+      "unit": "class",
+      "input_field": "conditional_flame_length_class",
+      "kind": "categorical",
+      "valid_range": [
+       0,
+       6
+      ],
+      "classes": {
+       "1": "lt_2_ft",
+       "2": "gte_2_lt_4_ft",
+       "3": "gte_4_lt_6_ft",
+       "4": "gte_6_lt_8_ft",
+       "5": "gte_8_lt_12_ft",
+       "6": "gte_12_ft"
+      }
+     },
+     "parameters": [
+      {
+       "name": "points",
+       "definition": "ordered hazard-intensity and damage-ratio knots",
+       "value": [
+        [
+         0,
+         0
+        ],
+        [
+         1,
+         0.001
+        ],
+        [
+         2,
+         0.006
+        ],
+        [
+         3,
+         0.03
+        ],
+        [
+         4,
+         0.12
+        ],
+        [
+         5,
+         0.35
+        ],
+        [
+         6,
+         0.7
+        ]
+       ],
+       "value_path": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json::curve_id=WSV1_MV_EQUIPMENT_THERMAL::parameters.points",
+       "tier": null,
+       "tier_word": null,
+       "reasoning": [
+        "No parameter-specific register row; use the curve-level construction sources and artifact value path."
+       ],
+       "source_ids": [
+        "USFS_FSIM_RDS_2023",
+        "DOE_FEMP_PV_WILDFIRE",
+        "NEMA_GD2_2016",
+        "FM_DS_7_106_2026",
+        "NREL_NLR_Q1_2025_PV_BENCHMARK"
+       ],
+       "sources": [
+        {
+         "text": "USDA Forest Service, Spatial datasets of probabilistic wildfire risk components for the US, 3rd ed., RDS-2016-0034-3",
+         "ids": [
+          "USFS_FSIM_RDS_2023"
+         ],
+         "title": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition",
+         "link": "https://doi.org/10.2737/RDS-2016-0034-3",
+         "link_kind": "doi",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "USFS_FSIM_RDS_2023"
+        },
+        {
+         "text": "DOE/FEMP, Solar Photovoltaic Hardening for Resilience - Wildfire",
+         "ids": [
+          "DOE_FEMP_PV_WILDFIRE"
+         ],
+         "title": "U.S. Department of Energy, Federal Energy Management Program",
+         "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+         "link_kind": "url",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "DOE_FEMP_PV_WILDFIRE"
+        },
+        {
+         "text": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment",
+         "ids": [
+          "NEMA_GD2_2016"
+         ],
+         "title": "National Electrical Manufacturers Association",
+         "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+         "link_kind": "url",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "NEMA_GD2_2016"
+        },
+        {
+         "text": "FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026",
+         "ids": [
+          "FM_DS_7_106_2026"
+         ],
+         "title": "FM. Property Loss Prevention Data Sheet 7-106: Ground-Mounted Solar Power, April 2026.",
+         "link": "https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/07-hazards/fmds07106.pdf",
+         "link_kind": "url",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "FM_DS_7_106_2026"
+        },
+        {
+         "text": "NREL/NLR, Q1-2025 Solar PV System Cost Benchmarks",
+         "ids": [
+          "NREL_NLR_Q1_2025_PV_BENCHMARK"
+         ],
+         "title": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E",
+         "link": "https://doi.org/10.7799/3009689",
+         "link_kind": "doi",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "NREL_NLR_Q1_2025_PV_BENCHMARK"
+        }
+       ],
+       "register_rows": [],
+       "source_scope": "curve"
+      }
+     ],
+     "additional_parameter_rows": [],
+     "sources": [
+      {
+       "text": "USDA Forest Service, Spatial datasets of probabilistic wildfire risk components for the US, 3rd ed., RDS-2016-0034-3",
+       "ids": [
+        "USFS_FSIM_RDS_2023"
+       ],
+       "title": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition",
+       "link": "https://doi.org/10.2737/RDS-2016-0034-3",
+       "link_kind": "doi",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "USFS_FSIM_RDS_2023"
+      },
+      {
+       "text": "DOE/FEMP, Solar Photovoltaic Hardening for Resilience - Wildfire",
+       "ids": [
+        "DOE_FEMP_PV_WILDFIRE"
+       ],
+       "title": "U.S. Department of Energy, Federal Energy Management Program",
+       "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+       "link_kind": "url",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "DOE_FEMP_PV_WILDFIRE"
+      },
+      {
+       "text": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment",
+       "ids": [
+        "NEMA_GD2_2016"
+       ],
+       "title": "National Electrical Manufacturers Association",
+       "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+       "link_kind": "url",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "NEMA_GD2_2016"
+      },
+      {
+       "text": "FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026",
+       "ids": [
+        "FM_DS_7_106_2026"
+       ],
+       "title": "FM. Property Loss Prevention Data Sheet 7-106: Ground-Mounted Solar Power, April 2026.",
+       "link": "https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/07-hazards/fmds07106.pdf",
+       "link_kind": "url",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "FM_DS_7_106_2026"
+      },
+      {
+       "text": "NREL/NLR, Q1-2025 Solar PV System Cost Benchmarks",
+       "ids": [
+        "NREL_NLR_Q1_2025_PV_BENCHMARK"
+       ],
+       "title": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E",
+       "link": "https://doi.org/10.7799/3009689",
+       "link_kind": "doi",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "NREL_NLR_Q1_2025_PV_BENCHMARK"
+      }
+     ],
+     "source_ids": [
+      "USFS_FSIM_RDS_2023",
+      "DOE_FEMP_PV_WILDFIRE",
+      "NEMA_GD2_2016",
+      "FM_DS_7_106_2026",
+      "NREL_NLR_Q1_2025_PV_BENCHMARK"
+     ],
+     "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "evaluator": {
+      "module": "scripts/reference_helpers/damage_curve_eval.py",
+      "function": "evaluate_curve_record",
+      "note": "exact integer state lookup on the record's knots; no interpolation"
+     },
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
+      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
+     }
+    }
+   ],
+   "production_use": {
+    "state": "reused_binding",
+    "consumer_pin": null
+   },
+   "gap": {
+    "reason": "withheld by the binding",
+    "occurrence": null,
+    "register": null
+   }
+  },
+  {
+   "key": "substation_civil_support",
+   "label": "Site work, access road, drainage and lightning shielding",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "substation_wildfire_screening_v1",
+   "catalogue_status": "reused",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "failure_unit_ids": [],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed · our judgment",
+   "construction": [
+    {
+     "curve_id": "WSV1_MV_EQUIPMENT_THERMAL",
+     "data_path": "curves/wildfire_solar/WSV1_MV_EQUIPMENT_THERMAL@model_v1_0__docs_r3.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "axis": {
+      "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE",
+      "label": "FSim conditional flame-length class (0 = no event)",
+      "unit": "class",
+      "input_field": "conditional_flame_length_class",
+      "kind": "categorical",
+      "valid_range": [
+       0,
+       6
+      ],
+      "classes": {
+       "1": "lt_2_ft",
+       "2": "gte_2_lt_4_ft",
+       "3": "gte_4_lt_6_ft",
+       "4": "gte_6_lt_8_ft",
+       "5": "gte_8_lt_12_ft",
+       "6": "gte_12_ft"
+      }
+     },
+     "parameters": [
+      {
+       "name": "points",
+       "definition": "ordered hazard-intensity and damage-ratio knots",
+       "value": [
+        [
+         0,
+         0
+        ],
+        [
+         1,
+         0.001
+        ],
+        [
+         2,
+         0.006
+        ],
+        [
+         3,
+         0.03
+        ],
+        [
+         4,
+         0.12
+        ],
+        [
+         5,
+         0.35
+        ],
+        [
+         6,
+         0.7
+        ]
+       ],
+       "value_path": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json::curve_id=WSV1_MV_EQUIPMENT_THERMAL::parameters.points",
+       "tier": null,
+       "tier_word": null,
+       "reasoning": [
+        "No parameter-specific register row; use the curve-level construction sources and artifact value path."
+       ],
+       "source_ids": [
+        "USFS_FSIM_RDS_2023",
+        "DOE_FEMP_PV_WILDFIRE",
+        "NEMA_GD2_2016",
+        "FM_DS_7_106_2026",
+        "NREL_NLR_Q1_2025_PV_BENCHMARK"
+       ],
+       "sources": [
+        {
+         "text": "USDA Forest Service, Spatial datasets of probabilistic wildfire risk components for the US, 3rd ed., RDS-2016-0034-3",
+         "ids": [
+          "USFS_FSIM_RDS_2023"
+         ],
+         "title": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition",
+         "link": "https://doi.org/10.2737/RDS-2016-0034-3",
+         "link_kind": "doi",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "USFS_FSIM_RDS_2023"
+        },
+        {
+         "text": "DOE/FEMP, Solar Photovoltaic Hardening for Resilience - Wildfire",
+         "ids": [
+          "DOE_FEMP_PV_WILDFIRE"
+         ],
+         "title": "U.S. Department of Energy, Federal Energy Management Program",
+         "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+         "link_kind": "url",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "DOE_FEMP_PV_WILDFIRE"
+        },
+        {
+         "text": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment",
+         "ids": [
+          "NEMA_GD2_2016"
+         ],
+         "title": "National Electrical Manufacturers Association",
+         "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+         "link_kind": "url",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "NEMA_GD2_2016"
+        },
+        {
+         "text": "FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026",
+         "ids": [
+          "FM_DS_7_106_2026"
+         ],
+         "title": "FM. Property Loss Prevention Data Sheet 7-106: Ground-Mounted Solar Power, April 2026.",
+         "link": "https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/07-hazards/fmds07106.pdf",
+         "link_kind": "url",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "FM_DS_7_106_2026"
+        },
+        {
+         "text": "NREL/NLR, Q1-2025 Solar PV System Cost Benchmarks",
+         "ids": [
+          "NREL_NLR_Q1_2025_PV_BENCHMARK"
+         ],
+         "title": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E",
+         "link": "https://doi.org/10.7799/3009689",
+         "link_kind": "doi",
+         "locator": null,
+         "no_link_sentence": null,
+         "source_id": "NREL_NLR_Q1_2025_PV_BENCHMARK"
+        }
+       ],
+       "register_rows": [],
+       "source_scope": "curve"
+      }
+     ],
+     "additional_parameter_rows": [],
+     "sources": [
+      {
+       "text": "USDA Forest Service, Spatial datasets of probabilistic wildfire risk components for the US, 3rd ed., RDS-2016-0034-3",
+       "ids": [
+        "USFS_FSIM_RDS_2023"
+       ],
+       "title": "Dillon, G.K., et al. Spatial datasets of probabilistic wildfire risk components for the conterminous United States, 3rd edition",
+       "link": "https://doi.org/10.2737/RDS-2016-0034-3",
+       "link_kind": "doi",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "USFS_FSIM_RDS_2023"
+      },
+      {
+       "text": "DOE/FEMP, Solar Photovoltaic Hardening for Resilience - Wildfire",
+       "ids": [
+        "DOE_FEMP_PV_WILDFIRE"
+       ],
+       "title": "U.S. Department of Energy, Federal Energy Management Program",
+       "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
+       "link_kind": "url",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "DOE_FEMP_PV_WILDFIRE"
+      },
+      {
+       "text": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment",
+       "ids": [
+        "NEMA_GD2_2016"
+       ],
+       "title": "National Electrical Manufacturers Association",
+       "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
+       "link_kind": "url",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "NEMA_GD2_2016"
+      },
+      {
+       "text": "FM, Data Sheet 7-106: Ground-Mounted Solar Power, April 2026",
+       "ids": [
+        "FM_DS_7_106_2026"
+       ],
+       "title": "FM. Property Loss Prevention Data Sheet 7-106: Ground-Mounted Solar Power, April 2026.",
+       "link": "https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/07-hazards/fmds07106.pdf",
+       "link_kind": "url",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "FM_DS_7_106_2026"
+      },
+      {
+       "text": "NREL/NLR, Q1-2025 Solar PV System Cost Benchmarks",
+       "ids": [
+        "NREL_NLR_Q1_2025_PV_BENCHMARK"
+       ],
+       "title": "Basore, P.; Dummit, K.; Thomas, A.; Taylor, M.; Benoliel, P.; Feldman, D.; Narayanaswami, M.; Ramasamy, V.; Woodhouse, M.; Zuboy, J.; Braid, J.; Jost, N.; Sproul, E",
+       "link": "https://doi.org/10.7799/3009689",
+       "link_kind": "doi",
+       "locator": null,
+       "no_link_sentence": null,
+       "source_id": "NREL_NLR_Q1_2025_PV_BENCHMARK"
+      }
+     ],
+     "source_ids": [
+      "USFS_FSIM_RDS_2023",
+      "DOE_FEMP_PV_WILDFIRE",
+      "NEMA_GD2_2016",
+      "FM_DS_7_106_2026",
+      "NREL_NLR_Q1_2025_PV_BENCHMARK"
+     ],
+     "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "evaluator": {
+      "module": "scripts/reference_helpers/damage_curve_eval.py",
+      "function": "evaluate_curve_record",
+      "note": "exact integer state lookup on the record's knots; no interpolation"
+     },
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
+      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
+     }
+    }
+   ],
+   "production_use": {
+    "state": "reused_binding",
+    "consumer_pin": null
+   },
+   "gap": {
+    "reason": "withheld by the binding",
+    "occurrence": null,
+    "register": null
+   }
+  }
+ ],
+ "subcomponent_rollup": {
+  "expected": 5,
+  "with_curve": 3,
+  "gap": 2,
+  "complete": 0,
+  "incomplete": 5,
+  "evidence_labels": {
+   "field-calibrated": 0,
+   "published": 0,
+   "borrowed": 5,
+   "our judgment": 5
+  }
+ }
 }
