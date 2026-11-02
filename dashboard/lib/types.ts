@@ -240,7 +240,7 @@ export interface Parameter { id: string; name: string; value: unknown; tier: str
 
 // ─── iteration 2: the plain layer (DCD-D19), written by the build ────────────────────────────────────────────
 
-export interface SourceLink { title?: string | null; link?: string | null; link_kind?: string; locator?: string | null; no_link_sentence?: string | null; doi?: string | null }
+export interface SourceLink { title?: string | null; link?: string | null; link_kind?: string; locator?: string | null; no_link_sentence?: string | null; link_note?: string | null; doi?: string | null }
 export type SourceRow = Source & Omit<SourceLink, "locator"> & {
   provenance?: string; kind?: string | null; aliases?: string[]; from?: { file?: string; sheet?: string; section?: string }; repo_path?: string; source_type?: string | null;
 };
@@ -261,7 +261,7 @@ export interface ExtractionInfo {
 }
 export interface StepChip { text: string; tone: "key" | "muted"; title?: string }
 export interface Step { id: string; name: string; meaning: string; fact: string; paragraphs: string[]; holds: string[]; written: boolean; chips: StepChip[]; why?: { label: string; text: string; source?: string }[]; why_note?: string }
-export interface HazardPath { id: string | null; title: string | null; path: string; state: "moved" | "on_branch"; moved_to?: string; link: string | null; words: string }
+export interface HazardPath { id: string | null; title: string | null; path: string; state: "moved" | "on_branch" | "not_found"; moved_to?: string; branch?: string; branches?: string[]; link: string | null; words: string }
 export interface Plain {
   rail: { exists: PlainChip; evidence: PlainChip; occurrence: PlainChip; review: PlainChip };
   main_logic: string[]; steps: Step[]; for_hazard: string[]; word: string | null; halves: string | null; hazard_paths: HazardPath[];

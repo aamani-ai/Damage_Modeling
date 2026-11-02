@@ -142,3 +142,13 @@ def test_real_estate_rows_are_what_the_curves_price_per_building():
         assert rollup["expected"] == sum(1 for r in re_["subcomponents"] if r["group"]["key"] == b)
     assert "retail" in re_["building_notes"]["office"]
 
+
+
+def test_hazard_links_not_on_main_say_so_and_only_missing_paths_fail():
+    """A Hazard file on a branch or archived on main is expected; it is listed as not on main. Only a path found
+    nowhere on Hazard fails the check."""
+    receipt = json.loads((DATA / "receipt.json").read_text())
+    check = next(c for c in receipt["checks"] if c["id"] == "hazard_links")
+    detail = check["detail"]
+    assert all("not on Hazard's main" in line for line in detail["off_main"])
+    assert check["ok"] == (not detail["not_found"])

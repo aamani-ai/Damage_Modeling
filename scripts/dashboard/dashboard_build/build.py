@@ -433,8 +433,8 @@ def build(write: bool = True) -> dict[str, Any]:
             "for_hazard": list(FOR_HAZARD),
             "word": one_word(rows_tiers["shape"], rows_tiers["cost"]) if e.kind != "gap" else None,
             "halves": halves(rows_tiers["shape"], rows_tiers["cost"]) if e.kind != "gap" else None,
-            "hazard_paths": [{"id": s_["id"], "title": s_.get("title"), **(s_.get("hazard") or {})} for s_ in regs.get("sources") or [] if (s_.get("hazard") or {}).get("state") in ("moved", "on_branch")]
-                            + [{"id": None, "title": c_["name"], **c_["hazard"]} for c_ in checks_resolved if (c_.get("hazard") or {}).get("state") in ("moved", "on_branch")],
+            "hazard_paths": [{"id": s_["id"], "title": s_.get("title"), **(s_.get("hazard") or {})} for s_ in regs.get("sources") or [] if (s_.get("hazard") or {}).get("state") in ("moved", "on_branch", "not_found")]
+                            + [{"id": None, "title": c_["name"], **c_["hazard"]} for c_ in checks_resolved if (c_.get("hazard") or {}).get("state") in ("moved", "on_branch", "not_found")],
             "capabilities": capabilities,
             "blocks": {
                 "covered": {"value": value, "not_covered": [plain_text(re.sub(r"\s*\(\$[\d.,]+\s*[MBk]?\)\s*$", "", x)) for x in e.data.get("not_covered") or []], "withheld": withheld_units},
@@ -565,9 +565,15 @@ def build(write: bool = True) -> dict[str, Any]:
     check("occurrence", "occurrence registers name their entries and use the shared bucket keys", not occ_problems, {"registers": len(registers), "problems": occ_problems})
 
     hz_off = sorted({f"{eid}: {h_['path']} — {h_['words']}" for eid, c_ in cells.items() for h_ in (c_.get("plain") or {}).get("hazard_paths") or []})
-    if (twin.get("hazard") or {}).get("state") in ("moved", "on_branch"):
+    hz_lost = sorted({f"{eid}: {h_['path']}" for eid, c_ in cells.items() for h_ in (c_.get("plain") or {}).get("hazard_paths") or [] if h_.get("state") == "not_found"})
+    if (twin.get("hazard") or {}).get("state") in ("moved", "on_branch", "not_found"):
         hz_off.append(f"flood_bess value binding: {twin['hazard']['path']} — {twin['hazard']['words']} (the committed copy is checked against the pin)")
-    check("hazard_links", "every Hazard file the pages name is on Hazard's main", not hz_off, {"off_main": hz_off, "hazard": hazard_main.state().get("sentence")}, severity="data")
+        if twin["hazard"]["state"] == "not_found":
+            hz_lost.append(f"flood_bess value binding: {twin['hazard']['path']}")
+    # not on main is expected (work on a branch, legacy citations of files Hazard later archived) and is listed; a path
+    # found nowhere on Hazard is a broken link and fails the check
+    check("hazard_links", "every Hazard file the pages name exists on Hazard; the ones not on its main are listed with where they are", not hz_lost,
+          {"off_main": hz_off, "not_found": hz_lost, "hazard": hazard_main.state().get("sentence")}, severity="data")
     faq = build_faq(f"{REPO_URL}/blob/{commit_full}")
     check("faq", "every FAQ question has its date, owner, a short answer and a Read more link that resolves", not faq["errors"], {"errors": faq["errors"], "questions": faq["n_questions"]}, severity="data")
     failed = [c for c in checks if not c["ok"]]
@@ -712,10 +718,13 @@ def build(write: bool = True) -> dict[str, Any]:
                 tasks.append({"kind": "known_answers", "text": f_["sentence"], "items": f_["items"], "href": f"/cells/{e.id}"})
         moved = [h_ for h_ in pl.get("hazard_paths") or [] if h_["state"] == "moved"]
         branch = [h_ for h_ in pl.get("hazard_paths") or [] if h_["state"] == "on_branch"]
+        lost = [h_ for h_ in pl.get("hazard_paths") or [] if h_["state"] == "not_found"]
         if moved:
-            tasks.append({"kind": "hazard_moved", "text": f"Update {len(moved)} Hazard path{'s' if len(moved) != 1 else ''}: moved on Hazard's main", "items": [f"{h_['path']} → {h_['moved_to']}" for h_ in moved], "href": f"/cells/{e.id}?step=numbers"})
+            tasks.append({"kind": "hazard_moved", "text": f"{len(moved)} Hazard path{'s are' if len(moved) != 1 else ' is'} not on Hazard's main at the path cited; moved on main", "items": [f"{h_['path']} → {h_['moved_to']}" for h_ in moved], "href": f"/cells/{e.id}?step=numbers"})
         if branch:
-            tasks.append({"kind": "hazard_branch", "text": f"{len(branch)} Hazard file{'s are' if len(branch) != 1 else ' is'} on a Hazard branch, not on its main yet", "items": sorted({h_["path"] for h_ in branch}), "href": f"/cells/{e.id}?step=numbers"})
+            tasks.append({"kind": "hazard_branch", "text": f"{len(branch)} Hazard file{'s are' if len(branch) != 1 else ' is'} not on Hazard's main, only on a Hazard branch", "items": sorted({f"{h_['path']} (branch {h_['branch']})" for h_ in branch}), "href": f"/cells/{e.id}?step=numbers"})
+        if lost:
+            tasks.append({"kind": "hazard_not_found", "text": f"Fix {len(lost)} Hazard path{'s' if len(lost) != 1 else ''} found nowhere on Hazard", "items": sorted({h_["path"] for h_ in lost}), "href": f"/cells/{e.id}?step=numbers"})
         to_confirm = coverage.get("to_confirm", {}).get(e.id) or []
         if to_confirm:
             tasks.append({"kind": "crosswalk_confirm", "text": f"Confirm {len(to_confirm)} part{'s' if len(to_confirm) != 1 else ''} of the coverage picture the cell does not name", "items": [f"{q['type']}: {q['name']} — {q['note']}" for q in to_confirm], "href": f"/cells/{e.id}?step=covers"})
@@ -897,7 +906,9 @@ def _check_summary(c: dict[str, Any]) -> str:
     if c["id"] == "twin_coverage":
         return "every twin part mapped" if c["ok"] else f"{len(d.get('unmapped') or [])} type × hazard pairs leave parts unmapped"
     if c["id"] == "hazard_links":
-        return "every Hazard file on its main" if c["ok"] else f"{len(d.get('off_main') or [])} Hazard paths not on Hazard's main ({d.get('hazard')})"
+        off = len(d.get("off_main") or [])
+        return ((f"every Hazard file found; {off} not on Hazard's main (on a branch or moved), listed" if off else "every Hazard file on its main")
+                if c["ok"] else f"{len(d.get('not_found') or [])} Hazard paths found nowhere on Hazard ({d.get('hazard')})")
     if c["id"] == "faq":
         return f"{d.get('questions')} questions, every link resolves" if c["ok"] else f"{len(d.get('errors') or [])} problems"
     return "ok" if c["ok"] else "failed"

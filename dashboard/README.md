@@ -98,8 +98,9 @@ finding. A *structural* failure writes nothing.
   no network it falls back to the gitignored `Hazard_modeling` symlink or a checkout beside this repository. The
   real-estate building profile is read the same way. A file not on Hazard's main falls back
   to the copy committed in `data/`, checked against the same pin, and the receipt says so. Every Hazard path a page
-  links to is looked up on Hazard's main too: kept, pointed at its new place when Hazard archived it, or shown
-  without a link as *on a Hazard branch, not on its main yet*.
+  links to is looked up on Hazard's main too: kept when it is there; otherwise it is said to be *not on Hazard's main*
+  and linked to where it is — its new place when Hazard archived it, or the Hazard branch that holds it (every branch
+  is named; the link goes to the one where the file last changed). A path found nowhere on Hazard has no link.
 - **The Digital Twin** is exported by `node scripts/dashboard/export_twin.mjs ["<Digital Twin checkout>"]`: the
   trees into `data/twin/trees.json` (an input the build keeps) and the viewer, models and three.js into
   `public/twin/` with a SHA manifest the build checks. Run it again when the twin changes.
@@ -131,7 +132,7 @@ and the *About this data* page (`/about`) lists them.
 | `twin_viewer` | The vendored twin viewer, models and three.js equal the SHA-256 their manifest records | structural | pass — 16 files, twin `d01abd0` |
 | `twin_crosswalks` | Every crosswalk row names a node of the pinned twin tree, a catalogue entry of its type and hazard, a known state and basis, and — for a curve — one of the entry's parts | structural | pass — 7 types |
 | `twin_coverage` | Every part of each twin reference model is mapped for every hazard with a curve | data | pass |
-| `hazard_links` | Every Hazard file the pages name is on Hazard's main | data | **fails** — 9 paths: the battery crosswalk folder, the hurricane substation binding and the wildfire substation module are on a Hazard branch; three notebooks were moved into `_archive/` on Hazard's main |
+| `hazard_links` | Every Hazard file the pages name exists on Hazard (main, archived on main, or a branch); the ones not on its main are listed with where they are | data | pass — 9 paths are not on Hazard's main and are listed: the battery crosswalk folder, the hurricane substation binding and the wildfire substation module are on Hazard branches (e.g. `codex/bess-conus`); three legacy notebooks cited in July were moved into `_archive/` on Hazard's main. It fails only for a path found nowhere on Hazard |
 | `faq` | Every FAQ question has its date, owner, an answer of at most four sentences, an example and a *Read more* link that resolves | data | pass — 14 questions |
 | `subcomponents` | Every expected subsystem × hazard has a curve/gap state, a completeness state, an evidence label, and its construction or the reason it has none | structural | pass |
 | `formula_keys` | Every curve has a formula, written from its evaluator, whose key names each of its parameters | data | pass — 104 curves |

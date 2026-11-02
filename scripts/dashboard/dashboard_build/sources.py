@@ -127,11 +127,12 @@ def resolve_link(src: dict[str, Any], repo_url: str, commit: str, base_dir: Path
     elif url:
         path = url.strip("/").split("#")[0].split(";")[0].strip()
         if path.startswith("Hazard_modeling/"):
-            # checked on Hazard's origin/main (G18): on main → a link at that commit; moved → the new place; else no link
+            # checked on Hazard's origin/main (G18): on main → a link at that commit; moved → the new place; on a branch → the file
+            # on that branch; found nowhere → no link
             from . import hazard_main
             h = hazard_main.lookup(path[len("Hazard_modeling/"):])
             src["hazard"] = h
-            link, kind = h["link"], {"on_main": "hazard_file", "moved": "hazard_moved", "on_branch": "hazard_branch", "unchecked": "hazard_file"}[h["state"]]
+            link, kind = h["link"], {"on_main": "hazard_file", "moved": "hazard_moved", "on_branch": "hazard_branch", "not_found": "hazard_not_found", "unchecked": "hazard_file"}[h["state"]]
         else:
             rp = _repo_path(path, base_dir)
             if rp is not None:
@@ -160,6 +161,8 @@ def resolve_link(src: dict[str, Any], repo_url: str, commit: str, base_dir: Path
     if MARKER_RE.match(src.get("id") or ""):
         src["kind"] = "marker"  # a provenance marker ("no direct source"), not a document: nothing to link
     src["no_link_sentence"] = None if (link or src.get("kind") == "marker") else (LOCAL_COPY if local else (src.get("hazard") or {}).get("words") or NO_LINK)
+    # a Hazard file linked off its main (moved, or on a branch) still says so beside the link
+    src["link_note"] = (src.get("hazard") or {}).get("words") if link and (src.get("hazard") or {}).get("state") in ("moved", "on_branch") else None
     return src
 
 

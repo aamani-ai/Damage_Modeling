@@ -16,6 +16,7 @@ export function SourceRef({ s, id, className = "", showLocator = true }: { s: So
       )}
       {showLocator && s.locator ? <span className="text-muted-foreground"> · {s.locator}</span> : null}
       {!s.link && s.no_link_sentence ? <span className="italic text-muted-foreground"> · {s.no_link_sentence}</span> : null}
+      {s.link && s.link_note ? <span className="italic text-muted-foreground"> · {s.link_note}</span> : null}
     </span>
   );
 }
