@@ -2,8 +2,11 @@
 
 The Hazard checkout on a machine may sit on a feature branch with uncommitted work; the dashboard shows what is
 merged. Every Hazard file the build reads, and every Hazard path a page links to, is looked up on Hazard's
-origin/main as last fetched on this machine (the build never fetches in Hazard). A path that is not there is
-either moved on main (into an `_archive/<name>/` folder) or on a Hazard branch, not on its main yet.
+origin/main. By default that is GitHub's main itself: the build keeps its own blobless clone of the remote under the
+gitignored `.cache/hazard_main/` and fetches it at each build (file contents download only when read). It never
+fetches in, or reads the working tree of, anyone's Hazard checkout; $HAZARD_MODELING points it at one instead. A
+path that is not there is either moved on main (into an `_archive/<name>/` folder) or on a Hazard branch, not on its
+main yet.
 """
 from __future__ import annotations
 
@@ -18,6 +21,7 @@ from .common import CHECKOUT
 
 REF = "origin/main"
 HAZARD_REPO_URL = "https://github.com/aamani-ai/Hazard_Modeling"
+CACHE = CHECKOUT / ".cache" / "hazard_main"
 ON_BRANCH_WORDS = "on a Hazard branch, not on its main yet"
 
 
@@ -26,10 +30,25 @@ def _run(repo: Path, *args: str) -> subprocess.CompletedProcess:
 
 
 @functools.lru_cache(maxsize=1)
+def _remote() -> dict[str, Any]:
+    """The build's own copy of GitHub's main: cloned blobless on first use, fetched on every build. When GitHub is not
+    reachable the copy last fetched here is used, and the state says so."""
+    if not (CACHE / ".git").exists():
+        CACHE.parent.mkdir(parents=True, exist_ok=True)
+        done = subprocess.run(["git", "clone", "-q", "--filter=blob:none", "--no-checkout", f"{HAZARD_REPO_URL}.git", str(CACHE)], capture_output=True, text=True)
+        return {"path": CACHE if done.returncode == 0 else None, "fetched": done.returncode == 0}
+    done = _run(CACHE, "fetch", "-q", "--filter=blob:none", "origin", "+refs/heads/main:refs/remotes/origin/main")
+    return {"path": CACHE, "fetched": done.returncode == 0}
+
+
+@functools.lru_cache(maxsize=1)
 def repo() -> Path | None:
-    """Where Hazard_modeling is on this machine: $HAZARD_MODELING, the gitignored repo-root symlink, or a sibling of the
-    main checkout (a worktree resolves it through git's common directory). None when no candidate is a git repository."""
+    """Where Hazard's main is read: $HAZARD_MODELING when set; else the build's copy of GitHub's main (`_remote`); else,
+    offline with no copy yet, the gitignored repo-root symlink or a sibling of the main checkout. None when none has
+    an origin/main."""
     candidates = [Path(os.environ["HAZARD_MODELING"])] if os.environ.get("HAZARD_MODELING") else []
+    if not candidates and _remote()["path"] is not None:
+        candidates.append(CACHE)
     candidates.append(CHECKOUT / "Hazard_modeling")
     done = _run(CHECKOUT, "rev-parse", "--git-common-dir")
     if done.returncode == 0:
@@ -45,13 +64,19 @@ def state() -> dict[str, Any]:
     """Hazard's origin/main commit here, and whether GitHub's main has moved past it (checked read-only, ls-remote)."""
     r = repo()
     if r is None:
-        return {"available": False, "ref": REF, "commit": None, "sentence": "Hazard_modeling was not found on this machine; Hazard links are not checked"}
+        return {"available": False, "ref": REF, "commit": None, "source": None,
+                "sentence": "Hazard's main could not be read (GitHub not reachable and no copy here); Hazard links are not checked"}
     commit = _run(r, "rev-parse", REF).stdout.strip()
+    if r == CACHE:
+        fetched = _remote()["fetched"]
+        return {"available": True, "ref": REF, "commit": commit, "remote_commit": commit if fetched else None, "behind": False if fetched else None,
+                "source": "github", "fetched": fetched,
+                "sentence": f"Hazard's main at {commit[:7]}, read from GitHub" + ("" if fetched else " (GitHub not reachable; the copy last fetched here)")}
     remote = _run(r, "ls-remote", "origin", "refs/heads/main")
     remote_sha = remote.stdout.split()[0] if remote.returncode == 0 and remote.stdout.strip() else None
     behind = (remote_sha != commit) if remote_sha else None
-    sentence = f"Hazard's main at {commit[:7]}" + ("" if behind is False else " (GitHub's main has moved on; fetch in Hazard to refresh)" if behind else " (GitHub not reachable; not compared)")
-    return {"available": True, "ref": REF, "commit": commit, "remote_commit": remote_sha, "behind": behind, "sentence": sentence}
+    sentence = f"Hazard's main at {commit[:7]}, read from a local Hazard checkout" + ("" if behind is False else " (GitHub's main has moved on; fetch in Hazard to refresh)" if behind else " (GitHub not reachable; not compared)")
+    return {"available": True, "ref": REF, "commit": commit, "remote_commit": remote_sha, "behind": behind, "source": "checkout", "sentence": sentence}
 
 
 @functools.lru_cache(maxsize=1)
@@ -89,7 +114,7 @@ def lookup(path: str) -> dict[str, Any]:
 
 
 def read(path: str) -> bytes | None:
-    """The file's bytes on Hazard's origin/main, or None when it is not there (or no Hazard checkout is found)."""
+    """The file's bytes on Hazard's origin/main, or None when it is not there (or Hazard's main cannot be read)."""
     r = repo()
     if r is None:
         return None

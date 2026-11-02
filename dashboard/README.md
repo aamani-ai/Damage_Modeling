@@ -92,8 +92,11 @@ finding. A *structural* failure writes nothing.
 - **In a git worktree** the venv lives in the main checkout: `<main checkout>/.venv/bin/python
   scripts/dashboard/build_dashboard_data.py`, run from the worktree root.
 - **Hazard's files** — its battery and substation twin crosswalks and the substation budget — are read through
-  git on Hazard's `origin/main`, never its working tree (`DCD-D30`); the checkout is found at `$HAZARD_MODELING`,
-  else the gitignored `Hazard_modeling` symlink, else beside this repository. A file not on Hazard's main falls back
+  git on Hazard's `origin/main`, never its working tree (`DCD-D30`). By default that is GitHub's main: the build keeps
+  a blobless clone of `aamani-ai/Hazard_Modeling` in the gitignored `.cache/hazard_main/` and fetches it at each build
+  (offline, it uses the copy last fetched). `$HAZARD_MODELING` points it at a local checkout instead; with no copy and
+  no network it falls back to the gitignored `Hazard_modeling` symlink or a checkout beside this repository. The
+  real-estate building profile is read the same way. A file not on Hazard's main falls back
   to the copy committed in `data/`, checked against the same pin, and the receipt says so. Every Hazard path a page
   links to is looked up on Hazard's main too: kept, pointed at its new place when Hazard archived it, or shown
   without a link as *on a Hazard branch, not on its main yet*.
