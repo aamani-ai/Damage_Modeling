@@ -18,7 +18,7 @@ def test_every_expected_part_has_a_reconciling_curve_or_gap_record():
         asset = json.loads(path.read_text())
         records = asset["subcomponents"]
         rollup = asset["subcomponent_rollup"]
-        assert len(records) == len(asset["rows"]) * len(manifest["hazards"])
+        assert len(records) == len(asset.get("subsystem_rows") or asset["rows"]) * len(manifest["hazards"])
         assert rollup["with_curve"] + rollup["gap"] == rollup["expected"] == len(records)
         assert rollup["complete"] + rollup["incomplete"] == rollup["expected"]
         assert all(r["coverage"] in ("curve", "gap") and r["completeness"] in ("complete", "incomplete") for r in records)
@@ -116,3 +116,29 @@ def test_the_disputed_convective_wind_label_is_flagged_not_renamed():
     flagged = {c["entry_id"] for c in manifest["review"]["cells"] for t in c["tasks"] if t["kind"] == "hazard_label"}
     assert flagged == {"strong_wind_solar", "wind_tornado_wind"}
     assert {h["label"] for h in manifest["hazards"] if h["slug"] == "convective_wind"} == {"Convective wind"}
+
+
+def test_real_estate_rows_are_what_the_curves_price_per_building():
+    """A house is priced by one whole-building curve per hazard; only hail prices slices, each with its own share."""
+    re_ = _asset("real_estate")
+    rows = {(r["key"], r["hazard"]["slug"]): r for r in re_["subcomponents"]}
+    assert {r["group"]["key"] for r in re_["subcomponents"]} == {"house", "warehouse", "office", "retail"}
+    assert {r["label"] for r in re_["subcomponents"]} == {"Whole building (structure)", "Roof cover", "Walls and windows", "Contents"}
+
+    flood_whole = rows[("house:building", "flood")]
+    assert flood_whole["coverage"] == "curve" and flood_whole["completeness"] == "complete" and flood_whole["curve_ids"] == ["FRE_RES_HAZUS_DF129"]
+    flood_roof = rows[("house:roof_cover", "flood")]
+    assert flood_roof["cell_state"] == "whole" and flood_roof["curve_ids"] == flood_whole["curve_ids"] and flood_roof["note"]
+
+    hail_roof = rows[("house:roof_cover", "hail")]
+    assert hail_roof["cell_state"] == "curve" and abs(hail_roof["share"] - 0.0375) < 1e-9
+    hail_whole = rows[("house:building", "hail")]
+    assert hail_whole["completeness"] == "incomplete" and "roof cover" in hail_whole["gap"]["reason"]
+    assert hail_whole["gap"]["basis"][0]["path"].endswith(".csv")
+
+    assert all(r["coverage"] == "gap" and r["gap"]["reason"] for (k, _), r in rows.items() if k.endswith(":contents"))
+    assert rows[("retail:building", "hail")]["coverage"] == "gap"
+    for b, rollup in re_["subsystem_groups"].items():
+        assert rollup["expected"] == sum(1 for r in re_["subcomponents"] if r["group"]["key"] == b)
+    assert "retail" in re_["building_notes"]["office"]
+

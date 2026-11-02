@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useUrlParam } from "@/lib/url-state";
 import type { CurveConstruction, Legend, Subcomponent, SubcomponentRollup } from "@/lib/types";
 import { ConstructionView, ProductionTag } from "./construction-view";
+import { fmtPct } from "@/lib/format";
 import { FileLink, Tag } from "./ui";
 
 export interface ConstructionCard { k: CurveConstruction; href: string; title: string }
@@ -27,7 +28,7 @@ function Counts({ r, legend }: { r: SubcomponentRollup; legend: Legend }) {
 }
 
 function coverageWord(s: Subcomponent, legend: Legend) {
-  const key = s.coverage === "gap" ? "gap" : s.completeness === "incomplete" ? "partial" : "curve";
+  const key = s.coverage === "gap" ? "gap" : s.completeness === "incomplete" ? "partial" : s.cell_state === "whole" ? "whole" : "curve";
   return legend.coverage.find((i) => i.key === key)?.word ?? key;
 }
 
@@ -74,6 +75,12 @@ function RowDetail({ s, cards, legend, blobBase }: { s: Subcomponent; cards: Rec
   const shown = s.construction.filter((c) => cards[c.curve_id]);
   return (
     <div className="space-y-3">
+      {s.note || s.share != null ? (
+        <p className="text-[11.5px]">
+          {s.note}{s.note && s.share != null ? " " : ""}
+          {s.share != null ? <span className="text-muted-foreground">Value: {fmtPct(s.share, 2)} ({s.share_basis}).</span> : null}
+        </p>
+      ) : null}
       {s.borrowed_from ? (
         <p className="rounded-md border border-border bg-muted/50 px-2 py-1 text-[11.5px]">
           <span className="font-medium">Borrowed.</span> Priced with {s.borrowed_from.curves.join(", ")} from{" "}
@@ -91,9 +98,9 @@ function RowDetail({ s, cards, legend, blobBase }: { s: Subcomponent; cards: Rec
   );
 }
 
-export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards, legend, blobBase, picker = true }: {
+export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards, legend, blobBase, picker = true, notes = [] }: {
   subs: Subcomponent[]; rollup: SubcomponentRollup; hazards: { slug: string; label: string }[]; defaultHazard: string;
-  cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string; picker?: boolean;
+  cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string; picker?: boolean; notes?: string[];
 }) {
   const [hzParam, setHz] = useUrlParam("hazard");
   const [open, setOpen] = useUrlParam("sub");
@@ -102,6 +109,7 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
   const hz = picker ? (hazards.find((h) => h.slug === hzParam)?.slug ?? defaultHazard) : defaultHazard;
   const rows = subs.filter((s) => s.hazard.slug === hz);
   const here = rollup.by_hazard?.[hz] ?? rollup;
+  const groups = new Set(rows.map((s) => s.group?.key).filter(Boolean));
   const evidence = (s: Subcomponent) => s.evidence_labels.length ? s.evidence_labels.join(" · ") : "—";
   return (
     <section id="subcomponents" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="Every subsystem, curve or gap">
@@ -128,6 +136,7 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
             </div>
           ) : null}
           <p className="px-3 pb-1.5 text-[11px] text-muted-foreground">{hazards.find((h) => h.slug === hz)?.label}: <Counts r={here} legend={legend} /></p>
+          {notes.map((n) => <p key={n} className="px-3 pb-1.5 text-[11px] text-muted-foreground">{n}</p>)}
           <div className="overflow-x-auto border-t border-border">
             <table className="w-full min-w-[720px] text-[11.5px]">
               <thead>
@@ -140,10 +149,16 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
                 </tr>
               </thead>
               <tbody>
-                {rows.map((s) => {
+                {rows.map((s, i) => {
                   const id = `${s.hazard.slug}:${s.key}`;
                   const isOpen = open === id;
+                  const heading = groups.size > 1 && s.group && s.group.key !== rows[i - 1]?.group?.key;
                   return [
+                    heading ? (
+                      <tr key={`${id}-group`} className="border-t border-border">
+                        <th scope="colgroup" colSpan={5} className="px-3 pt-2 pb-0.5 text-left text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{s.group!.label}</th>
+                      </tr>
+                    ) : null,
                     <tr key={id} className={`border-t border-border/60 align-top ${s.coverage === "gap" ? "text-muted-foreground" : ""}`}>
                       <th scope="row" className="px-3 py-1 text-left font-normal">
                         <button type="button" aria-expanded={isOpen} aria-controls={`sub-${id}`} onClick={() => setOpen(isOpen ? null : id)}
@@ -156,7 +171,7 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
                       <td className="px-2 py-1">{s.coverage === "gap" ? <span className="tile-gap rounded-sm px-1">{coverageWord(s, legend)}</span> : coverageWord(s, legend)}</td>
                       <td className="px-2 py-1">{s.completeness}</td>
                       <td className="px-2 py-1">{s.borrowed_from && !s.evidence_labels.includes("borrowed") ? "borrowed · " : ""}{evidence(s)}</td>
-                      <td className="px-2 py-1">{s.coverage === "gap" ? "—" : <ProductionTag state={s.production_use.state} legend={legend} />}</td>
+                      <td className="px-2 py-1">{s.coverage === "gap" || !s.curve_ids.length ? "—" : <ProductionTag state={s.production_use.state} legend={legend} />}</td>
                     </tr>,
                     isOpen ? (
                       <tr key={`${id}-detail`} id={`sub-${id}`} className="bg-muted/30">

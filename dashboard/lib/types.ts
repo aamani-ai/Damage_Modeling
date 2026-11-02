@@ -131,6 +131,8 @@ export interface Subcomponent {
   production_use: { state: ProductionState; consumer_pin: string | null };
   borrowed_from: { entry_id: string | null; title: string | null; curves: string[]; rationale: string | null; tier: string | null; tier_word: string | null } | null;
   scope_notes: ScopeNote[];
+  // real estate only: the building a row belongs to, the share of its structure value, and what the row means
+  group?: { key: string; label: string }; share?: number | null; share_basis?: string | null; note?: string | null;
   gap: {
     reason: string; occurrence: OccurrenceBucket | null; effect: string; basis: { label: string; path: string }[];
     register: { path: string; sha256: string; search_log: string | null; last_searched: string | null; question: string | null } | null;
@@ -310,6 +312,9 @@ export interface AssetViewV2 extends Omit<AssetView, "rows"> {
   rows: AssetRowV2[]; parts_by_cell: Record<string, PartsByCell>; split: Split; twin: TwinBlock; summary_v0: string;
   reference: (AssetView["reference"] & { note?: string; link?: string | null }) | null;
   value_source: { label: string; path: string; sha256?: string | null; pin_ok?: boolean | null } | null;
+  // real estate only: the subsystems per building, their counts, and the notes the building pages carry
+  subsystem_groups?: Record<string, SubcomponentRollup>; building_notes?: Record<string, string | null>;
+  anatomy_note?: { sentence: string; source: string | null } | null;
 }
 export interface ReviewQueueItem { kind: string; entry_id: string; text: string; href: string; words: string }
 export type ManifestV2 = Manifest & {

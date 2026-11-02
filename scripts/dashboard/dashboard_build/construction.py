@@ -245,6 +245,7 @@ def legend(cat_text: str) -> dict[str, Any]:
         "coverage": [
             {"key": "curve", "word": "has a curve", "meaning": "A curve covers the whole of this subsystem."},
             {"key": "partial", "word": "partial", "meaning": "A curve covers only part of this subsystem; the rest has none."},
+            {"key": "whole", "word": "in the whole-building curve", "meaning": "No curve of its own: a curve for the whole building prices it with the rest of the structure."},
             {"key": "gap", "word": "gap", "meaning": "No curve covers this subsystem; the row says why and links the research."},
         ],
         "completeness": [

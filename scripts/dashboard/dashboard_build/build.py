@@ -772,7 +772,8 @@ def build(write: bool = True) -> dict[str, Any]:
         assets_out[aslug] = {"asset": {**a_def, "href": f"/assets/{aslug}"}, "summary": asset_plain_sentence(a_def, view["rows"], sl["hazards"], status_by_hz),
                              "summary_v0": asset_sentence(a_def.get("noun", a_def["label"]), sorted([{"hazard": e.data["hazard"], "slug": hazard_slug(e.data["hazard"], sl), "status": e.status, "tiers": {"shape": cells[e.id]["rail"]["evidence"]["shape"], "cost": cells[e.id]["rail"]["evidence"]["cost"]}, "entry_id": e.id} for e in asset_entries], key=lambda c: hz_order.index(c["slug"])), searched_any),
                              "reference": reference, "hazards": hazards_cols, "rows": view["rows"], "parts_by_cell": view["parts_by_cell"],
-                             "subcomponents": view["subcomponents"], "subcomponent_rollup": view["subcomponent_rollup"], "split": view["split"], "twin": view["twin"],
+                             "subcomponents": view["subcomponents"], "subcomponent_rollup": view["subcomponent_rollup"],
+                             **{k: view[k] for k in ("subsystem_rows", "subsystem_groups", "building_notes", "anatomy_note") if k in view}, "split": view["split"], "twin": view["twin"],
                              "value_source": view["value_source"], "entries": [t for t in tiles if t["asset"]["slug"] == aslug], "has_buckets": aslug in ("bess", "substation"),
                              "twin_crosswalk": {"sha256": twin.get("sha256"), "rows": twin.get("rows")} if aslug == "bess" else ({"sha256": sub_xwalk.get("sha256"), "rows": len(sub_xwalk.get("rows") or [])} if aslug == "substation" and sub_xwalk.get("available") else None)}
     # ─── occurrence pages ───
@@ -797,7 +798,7 @@ def build(write: bool = True) -> dict[str, Any]:
 
     subcomponent_problems = []
     for aslug, asset in assets_out.items():
-        expected = len(asset["rows"]) * len(sl["hazards"])
+        expected = len(asset.get("subsystem_rows") or asset["rows"]) * len(sl["hazards"])
         if len(asset["subcomponents"]) != expected:
             subcomponent_problems.append(f"{aslug}: {len(asset['subcomponents'])} records, expected {expected}")
         for s_ in asset["subcomponents"]:

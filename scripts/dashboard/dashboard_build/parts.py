@@ -559,11 +559,144 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                                        "last_searched": reg["register"].get("last_searched"), "question": reg["register"].get("question")}
                                       if reg else None)} if gap_reason else None),
             })
+    re_extra: dict[str, Any] = {}
+    if aslug == "real_estate":
+        subcomponents, re_extra = _real_estate_subsystems(hz, by_hazard, parts_by_cell, cells, registers, all_curve_lookup)
     return {"rows": rows, "parts_by_cell": parts_by_cell, "subcomponents": subcomponents, "subcomponent_rollup": _rollup(subcomponents),
-            "split": split, "twin": twin_block,
+            **re_extra, "split": split, "twin": twin_block,
             "value_source": ({"label": "reference budget r1 (battery value binding)", "path": "docs/cells/flood_bess/current/value_binding.json"} if aslug == "bess"
                              else {"label": "Hazard's substation reference budget, pinned by the substation flood binding", "path": SUBSTATION_BUDGET_REL, "sha256": (sub_budget or {}).get("sha256"), "pin_ok": (sub_budget or {}).get("ok")} if aslug == "substation" and sub_budget and sub_budget.get("available")
                              else None)}
+
+
+# ─── real estate: the subsystems Damage prices, per building ────────────────────────────────────────────────
+
+RE_SUBSYSTEMS = [("building", "Whole building (structure)"), ("roof_cover", "Roof cover"), ("walls_windows", "Walls and windows"), ("contents", "Contents")]
+RE_PROFILE_REL = "docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml"
+
+
+def _lower_first(text: str) -> str:
+    return text if text[:2].isupper() else text[:1].lower() + text[1:]
+
+
+def _slice_of(part: dict[str, Any]) -> str | None:
+    comp = str(part.get("component") or "").lower()
+    return "roof_cover" if "roof" in comp else "walls_windows" if ("wall" in comp or "window" in comp) else None
+
+
+def _value_crosswalk(entry_id: str) -> tuple[str | None, list[dict[str, str]]]:
+    found = sorted((ROOT / "docs" / "cells" / entry_id).glob("*/VALUE_CROSSWALK_*.csv"))
+    return (rel(found[-1]), read_csv(found[-1])) if found else (None, [])
+
+
+def _anatomy_note() -> dict[str, Any] | None:
+    """Hazard's reference profile names the building's systems for anatomy only; read on Hazard's origin/main."""
+    from . import hazard_main
+    raw = hazard_main.read(RE_PROFILE_REL)
+    if raw is None:
+        return {"sentence": "The Digital Twin breaks each building into its systems (the table \u201cWhich hazard has a curve for which part\u201d); "
+                            "no system has a curve or a value share of its own except hail's roof cover and walls and windows, so the rows here are what the curves price.",
+                "source": None}
+    text = raw.decode("utf-8")
+    block = re.search(r"^inventory_groups:\n((?:- .+\n)+)", text, re.M)
+    rule = re.search(r"^inventory_rule:\s*(.+)$", text, re.M)
+    if not block or not rule:
+        return None
+    groups = [humanise(g.strip("- ").strip()).lower() for g in block.group(1).splitlines()]
+    return {"sentence": f"Hazard's reference profile describes each building as {len(groups)} systems ({_join(groups)}). "
+                        f"In its own words: \u201c{rule.group(1).strip()}\u201d Only hail prices parts of a building, so the rows here are what the curves price.",
+            "source": f"Hazard_modeling/{RE_PROFILE_REL} at origin/main"}
+
+
+def _real_estate_subsystems(hz: list[dict[str, Any]], by_hazard: dict[str, Any], parts_by_cell: dict[str, Any], cells: dict[str, dict[str, Any]],
+                            registers: dict[tuple[str, str], Any], all_curve_lookup: dict[str, dict[str, Any]]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Real estate's cells price one whole-building curve per building (hail: roof cover and walls/windows, each with a
+    share of the building's structure replacement cost). The records follow that: four subsystems per building, so a
+    building-type page shows what the loss actually multiplies, and the twin's anatomy stays a note."""
+    buildings = [(k, lab) for k, lab, _ in ROWS["real_estate"] if k != "contents"]
+    records: list[dict[str, Any]] = []
+    for bkey, blabel in buildings:
+        for skey, slabel in RE_SUBSYSTEMS:
+            for h in hz:
+                e = by_hazard.get(h["slug"]) if h["catalogue"] else None
+                reg = registers.get(("real_estate", h["slug"]))
+                pc = parts_by_cell.get(e.id) if e and e.kind != "gap" else None
+                mine = [p for p in (pc or {}).get("parts", []) if bkey in p["rows"]]
+                whole = [p for p in mine if p.get("whole_building")]
+                slices = [p for p in mine if not p.get("whole_building") and p["state"] == "curve"]
+                contents = [p for p in (pc or {}).get("parts", []) if "contents" in p["rows"]]
+                used: list[dict[str, Any]] = []
+                coverage, completeness, cell_state, reason, note, share, basis = "gap", "incomplete", "gap", None, None, None, []
+                if e is None:
+                    cell_state = "unassessed_gap"
+                    reason = ((f"{h['label']} changes how this asset performs rather than destroying it, and a damage curve prices physical destruction "
+                               "only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.")
+                              if h["effect"] != "damage" else "No catalogue entry or curve has been built for this asset \u00d7 hazard.")
+                elif e.kind == "gap":
+                    reason = e.data.get("reason") or "No curve yet."
+                elif skey == "contents":
+                    cell_state = "withheld"
+                    codes = sorted({c for p in contents for c in p.get("withheld_reasons") or []})
+                    reason = ("The cell declares contents as their own failure unit and withholds them (not zero): " + ", ".join(codes).lower().replace("_", " ") + "."
+                              if contents else "This cell does not name contents.")
+                elif skey == "building":
+                    if whole:
+                        used, coverage, completeness, cell_state = whole, "curve", "complete", "curve"
+                        note = "One curve for the whole structure: a single damage ratio applied to 100% of the building's structure replacement cost."
+                    elif slices:
+                        coverage, cell_state = "curve", "partial"
+                        cw_path, cw_rows = _value_crosswalk(e.id)
+                        left = [r for r in cw_rows if r.get("role_in_loss") in ("not_priced", "withheld")]
+                        priced = [lab.lower() for k, lab in RE_SUBSYSTEMS if any(_slice_of(p) == k for p in slices)]
+                        reason = (f"{h['label']} prices only this building's {_join(priced)} (the rows below), each with its own "
+                                  "share of the structure replacement cost. The rest has no curve here: "
+                                  + "; ".join(f"{_lower_first(r['row_or_bucket_label'])} ({r['role_in_loss'].replace('_', ' ')})" for r in left) + ".")
+                        if cw_path:
+                            basis = [{"label": "the cell's value crosswalk", "path": cw_path}]
+                    else:
+                        reason = "This cell has no curve for this building."
+                else:
+                    own = [p for p in slices if _slice_of(p) == skey]
+                    if own:
+                        used, coverage, completeness, cell_state = own, "curve", "complete", "curve"
+                        share = sum(p["share"] for p in own if p.get("share") is not None) or None
+                    elif whole:
+                        used, coverage, completeness, cell_state = whole, "curve", "complete", "whole"
+                        note = f"No curve of its own: the whole-building curve prices the {slabel.lower()} with the rest of the structure."
+                    elif slices:
+                        reason = f"{h['label']} prices other parts of this building, not its {slabel.lower()}."
+                    else:
+                        reason = "This cell has no curve for this building."
+                curve_ids = sorted({actual for p in used for pattern in p.get("curves") or [] for actual in all_curve_lookup if fnmatchcase(actual, pattern)})
+                construction = [_construction_ref(all_curve_lookup[cid]) for cid in curve_ids]
+                tier_codes = [x for p in used for x in (p.get("shape"), p.get("cost")) if x]
+                states = {x["production_use"]["state"] for x in construction if x.get("production_use")}
+                records.append({
+                    "key": f"{bkey}:{skey}", "label": slabel, "group": {"key": bkey, "label": blabel},
+                    "asset": {"slug": "real_estate", "label": "Real Estate"},
+                    "hazard": {"slug": h["slug"], "label": h["label"], "effect": h["effect"], "outside_the_five": h["outside_the_five"]},
+                    "entry_id": e.id if e else None, "catalogue_status": e.status if e else "missing", "cell_state": cell_state,
+                    "coverage": coverage, "completeness": completeness, "curve_ids": curve_ids,
+                    "failure_unit_ids": sorted({all_curve_lookup[c].get("failure_unit_id") for c in curve_ids if all_curve_lookup[c].get("failure_unit_id")}),
+                    "tier_span": _span(tier_codes), "evidence_labels": _tier_labels(tier_codes), "evidence_words": tier_words(_span(tier_codes)),
+                    "construction": construction, "borrowed_from": None, "scope_notes": [x["scope_note"] for x in construction if x.get("scope_note")],
+                    "production_use": {"state": "runtime_indexed" if "runtime_indexed" in states else "not_runtime_indexed",
+                                       "consumer_pin": (cells[e.id]["identity"].get("consumer_pin") if e and e.id in cells else None)},
+                    "share": share, "share_basis": "share of the building's structure replacement cost" if share is not None else None, "note": note,
+                    "gap": ({"reason": reason, "occurrence": None, "effect": h["effect"],
+                             "basis": basis or ([{"label": "the occurrence register's effect field", "path": reg["path"]},
+                                                 {"label": "the curve's scope: physical destruction only", "path": "docs/scope/SCOPE_AND_STORY.md"}]
+                                                if reg and e is None and h["effect"] != "damage" else []),
+                             "register": ({"path": reg["path"], "sha256": reg["sha256"], "search_log": reg["register"].get("search_log"),
+                                           "last_searched": reg["register"].get("last_searched"), "question": reg["register"].get("question")} if reg else None)}
+                            if reason else None),
+                })
+    groups = {b: _rollup([r for r in records if r["group"]["key"] == b]) for b, _ in buildings}
+    named = {b: sorted({r["hazard"]["label"] for r in records if r["group"]["key"] == b and r["coverage"] == "curve"}) for b, _ in buildings}
+    notes = {"office": (f"Commercial is built on the office. The cells also price a retail building ({_join([n.lower() for n in named['retail']])}); "
+                        "its rows show on those cells' pages, not on a building-type page.") if named.get("retail") else None}
+    return records, {"subsystem_rows": [{"key": f"{b}:{s}", "label": sl_, "group": {"key": b, "label": bl}} for b, bl in buildings for s, sl_ in RE_SUBSYSTEMS],
+                     "subsystem_groups": groups, "building_notes": notes, "anatomy_note": _anatomy_note()}
 
 
 def split_finding(aslug: str, a_def: dict[str, Any], rows: list[dict[str, Any]], parts_by_cell: dict[str, Any], hz: list[dict[str, Any]], sub_budget: dict[str, Any] | None) -> dict[str, Any]:

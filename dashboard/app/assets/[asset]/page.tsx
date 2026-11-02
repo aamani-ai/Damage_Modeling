@@ -56,10 +56,14 @@ function CurveList({ row, m }: { row: LibraryType; m: ManifestV3 }) {
   );
 }
 
-function Subcomponents({ v, m, defaultHazard }: { v: AssetViewV2; m: ManifestV3; defaultHazard?: string }) {
+function Subcomponents({ v, m, defaultHazard, building }: { v: AssetViewV2; m: ManifestV3; defaultHazard?: string; building?: string }) {
+  // a real-estate building type shows its own building's subsystems (the records carry the building as their group)
+  const subs = building ? v.subcomponents.filter((s) => s.group?.key === building) : v.subcomponents;
+  const rollup = (building ? v.subsystem_groups?.[building] : null) ?? v.subcomponent_rollup;
+  const notes = [v.anatomy_note?.sentence, building ? v.building_notes?.[building] : null].filter((n): n is string => !!n);
   const hazards = m.hazards.map((h) => ({ slug: h.slug, label: h.label }));
-  const first = defaultHazard ?? hazards.find((h) => (v.subcomponent_rollup.by_hazard?.[h.slug]?.with_curve ?? 0) > 0)?.slug ?? hazards[0].slug;
-  return <SubcomponentPanel subs={v.subcomponents} rollup={v.subcomponent_rollup} hazards={hazards} defaultHazard={first} cards={constructionCards(v.subcomponents)} legend={m.legend} blobBase={blobBase(m)} />;
+  const first = defaultHazard ?? hazards.find((h) => (rollup.by_hazard?.[h.slug]?.with_curve ?? 0) > 0)?.slug ?? hazards[0].slug;
+  return <SubcomponentPanel subs={subs} rollup={rollup} hazards={hazards} defaultHazard={first} cards={constructionCards(subs)} legend={m.legend} blobBase={blobBase(m)} notes={notes} />;
 }
 
 export default async function AssetPage({ params }: { params: Promise<{ asset: string }> }) {
@@ -143,7 +147,7 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
       <div className="mt-3 space-y-3">
         <ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} open />
         <CurveList row={row} m={m} />
-        {v && !sharedCell ? <Subcomponents v={v} m={m} defaultHazard={cov ? (cov.hazards.find((h) => !h.gap) ?? cov.hazards[0]).hazard.slug : undefined} /> : null}
+        {v ? <Subcomponents v={v} m={m} building={sharedCell ? type.building!.toLowerCase() : undefined} defaultHazard={cov ? (cov.hazards.find((h) => !h.gap) ?? cov.hazards[0]).hazard.slug : undefined} /> : null}
         {cov && viewer ? <AssetCoverage cov={cov} loadOrder={viewer.load_order} /> : <p className="text-[12px] text-muted-foreground">No twin coverage for this type yet.</p>}
         {cov ? <CoverageMatrix cov={cov} /> : null}
         {v && !sharedCell ? (
