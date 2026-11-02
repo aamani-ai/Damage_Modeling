@@ -109,3 +109,10 @@ def test_nothing_displayed_carries_a_machine_path():
         if "twin" in path.relative_to(DATA).parts:
             continue
         assert not path_leaks(json.loads(path.read_text())), path
+
+
+def test_the_disputed_convective_wind_label_is_flagged_not_renamed():
+    manifest = json.loads((DATA / "manifest.json").read_text())
+    flagged = {c["entry_id"] for c in manifest["review"]["cells"] for t in c["tasks"] if t["kind"] == "hazard_label"}
+    assert flagged == {"strong_wind_solar", "wind_tornado_wind"}
+    assert {h["label"] for h in manifest["hazards"] if h["slug"] == "convective_wind"} == {"Convective wind"}

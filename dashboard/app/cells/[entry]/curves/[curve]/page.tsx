@@ -4,13 +4,14 @@
 // "Show the numbers" keeps knots, known answers, tier codes and the record's parameters exactly as before.
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ConstructionView } from "@/components/construction-view";
 import { DossierPlot } from "@/components/dossier-plot";
 import { Eyebrow } from "@/components/ledger";
 import { PartPicture } from "@/components/part-picture";
 import { PlainRail } from "@/components/plain-rail";
 import { SourceRef } from "@/components/source-link";
 import { Card, CardTitle, EmptyState, FileLink, InfoHint, Kv, Mono, Tag } from "@/components/ui";
-import { blobUrl, cell, coverageSlice, curve, curvesOf, manifest, twinViewer } from "@/lib/data";
+import { blobBase, blobUrl, cell, coverageSlice, curve, curvesOf, manifest, twinViewer } from "@/lib/data";
 import { fmtDr, fmtNum, shortSha } from "@/lib/format";
 import { CATEGORY_SYMBOL_WORDS, LINE_STYLE_WORDS } from "@/lib/series";
 
@@ -35,7 +36,8 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
   const cap = k.caption;
   const nAnswers = k.known_answers.reduce((t, a) => t + (a.n ?? 1), 0);
   const plainParams = c.plain.parameters_plain.filter((p) => !p.curve_id || p.curve_id === k.curve_id || p.curve_id === "all" || p.curve_id === "all_three");
-  const formWords = k.summary.split(":")[1]?.split(", read against")[0]?.trim() ?? (k.form_label ?? k.curve_form?.replace(/_/g, " ") ?? "");
+  const constructed = new Set(k.construction.parameters.flatMap((p) => [p.name, ...p.register_rows]));
+  const otherRows = plainParams.filter((p) => !constructed.has(p.id) && !constructed.has(p.name));
   // the twin type whose picture holds this part: the type of this catalogue asset (for a shared real-estate cell, the
   // type whose building the part names)
   const catalogue = m.assets.find((a) => a.slug === c.asset.slug)?.catalogue ?? c.asset.label;
@@ -91,22 +93,28 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
           </div>
         </Card>
         <Card className="xl:col-span-3">
-          <CardTitle>What sets this curve</CardTitle>
-          <div className="px-3 pb-3 text-[11.5px] leading-snug">
-            <Kv label="form" value={<span className="text-left">{formWords || k.form_label || k.curve_form?.replace(/_/g, " ")}</span>} />
-            <Kv label="measured against" value={<span>{k.axis.label}{k.axis.unit && k.axis.unit !== "dimensionless" && k.axis.unit !== "class" ? ` (${k.axis.unit})` : ""}</span>} />
+          <CardTitle>How this curve is built</CardTitle>
+          <div className="px-3 pb-3">
+            <ConstructionView k={k.construction} legend={m.legend} blobBase={blobBase(m)} />
+          </div>
+          <div className="border-t border-border px-3 py-2 text-[11.5px] leading-snug">
+            <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">When it applies</div>
             <Kv label="answers for" value={<span className="font-mono">{k.domain ? `${k.domain[0] ?? "−∞"} … ${k.domain[1] ?? "∞"}` : "—"}</span>} />
             {k.withheld_zones.map((z) => <Kv key={`w${z.from}`} label="withheld" value={<span className="text-muted-foreground"><span className="font-mono">{z.from} … {z.to ?? "∞"}</span> — {z.reason}</span>} />)}
             {k.selected_by.length ? <Kv label="chosen when" value={<span>{k.selected_by.map((s) => <span key={s.by} className="block">{s.by}: {s.when.length > 2 ? <span className="text-muted-foreground">any of {s.when.length}{s.when.map((w) => <span key={w} className="block pl-2">{w}</span>)}</span> : s.when.join(" or ")}</span>)}</span>} /> : null}
             {k.variants && k.variants !== "none" ? <Kv label="variants" value={<span className="text-muted-foreground">{k.variants}</span>} /> : null}
-            <div className="mt-2"><Eyebrow>Parameters and their sources</Eyebrow></div>
-            {plainParams.length ? plainParams.map((p, i) => (
-              <div key={p.id + i} className="border-t border-border/60 py-1">
-                <span className="font-medium">{p.name}</span>{p.value_text ? <span className="tabular"> {p.value_text}</span> : null} · {p.tier_word}
-                {p.sources.length ? <span className="text-muted-foreground"> · from {p.sources.map((s, j) => <span key={s.id}>{j ? ", " : ""}{s.link ? <a href={s.link} target="_blank" rel="noreferrer" className="text-accent hover:underline">{s.title}</a> : <span>{s.title}</span>}</span>)}</span> : <span className="text-muted-foreground"> · our judgment, no source cited</span>}
-                {p.reasoning ? <span className="block text-[10.5px] text-muted-foreground">{p.reasoning}</span> : null}
-              </div>
-            )) : <p className="text-muted-foreground">no parameter tier rows for this curve; the cell page&apos;s “Where the numbers come from” has the registers</p>}
+            {otherRows.length ? (
+              <details className="mt-1.5">
+                <summary className="cursor-pointer text-[11px] text-muted-foreground hover:text-foreground">Other numbers the register keeps for this curve ({otherRows.length})</summary>
+                {otherRows.map((p, i) => (
+                  <div key={p.id + i} className="border-t border-border/60 py-1">
+                    <span className="font-medium">{p.name}</span>{p.value_text ? <span className="tabular"> {p.value_text}</span> : null} · {p.tier_word}
+                    {p.sources.length ? <span className="text-muted-foreground"> · from {p.sources.map((s, j) => <span key={s.id}>{j ? ", " : ""}{s.link ? <a href={s.link} target="_blank" rel="noreferrer" className="text-accent hover:underline">{s.title}</a> : <span>{s.title}</span>}</span>)}</span> : <span className="text-muted-foreground"> · our judgment, no source cited</span>}
+                    {p.reasoning ? <span className="block text-[10.5px] text-muted-foreground">{p.reasoning}</span> : null}
+                  </div>
+                ))}
+              </details>
+            ) : null}
             {k.row_notes.map((n) => <p key={n.text} className="mt-1 text-[10.5px] text-muted-foreground"><span className="italic">{n.type.replace(/_/g, " ")}:</span> {n.text}</p>)}
           </div>
         </Card>

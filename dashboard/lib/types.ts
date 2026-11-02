@@ -88,18 +88,39 @@ export interface Part {
   occurrence: { mark: string; state: string; sentence: string } | null; drawn: boolean;
 }
 
+export type ProductionState = "runtime_indexed" | "reused_binding" | "not_runtime_indexed";
+export type WhereFrom = "published" | "borrowed" | "our_judgment" | "curve_level";
+export interface ConstructionFile { role: string; path: string }
+export interface ScopeNote { note: string; basis: string }
+export type ConstructionSource = SourceLink & { id?: string; source_id?: string; citation?: string | null; repo_path?: string };
+
+export interface ConstructionParameter {
+  name: string; definition: string; value: unknown; value_path: string | null; tier: string | null; tier_word: string | null; reasoning: string[];
+  source_ids: string[]; sources: ConstructionSource[]; unresolved_source_ids: string[]; register_rows: string[]; source_scope: "parameter" | "curve";
+  where_from: WhereFrom; files: ConstructionFile[];
+}
+
 export interface CurveConstruction {
-  curve_id: string; data_path: string | null; curve_type: string; curve_form: string | null; formula: string | null;
-  axis: Axis | null; parameters: { name: string; definition: string; value: unknown; value_path: string | null; tier: string | null; tier_word: string | null; reasoning: string[]; source_ids: string[]; sources: Record<string, unknown>[]; register_rows: string[]; source_scope: "parameter" | "curve" }[];
-  additional_parameter_rows: Record<string, unknown>[]; sources: Record<string, unknown>[]; source_ids: string[];
-  artifact: string | null; evaluator: Record<string, unknown> | null;
-  production_use: { state: "runtime_indexed" | "reused_binding" | "not_runtime_indexed"; consumer_pin: string | null; sentence: string };
+  curve_type: string; curve_form: string | null; formula: string | null; formula_source: string | null;
+  variables: { symbol: string; meaning: string; parameter: string | null }[];
+  marks: { O: number | null; F: number | null; D_max: number; O_note: string | null } | null; unkeyed_parameters: string[];
+  curve_tiers: Record<"shape" | "cost", { tier: string | null; word: string }>;
+  axis: Axis | null; parameters: ConstructionParameter[];
+  additional_parameter_rows: Record<string, unknown>[]; sources: ConstructionSource[]; source_ids: string[];
+  artifact: string | null; evaluator: Record<string, unknown> | null; constructing_files: ConstructionFile[]; scope_note: ScopeNote | null;
+  production_use: { state: ProductionState; consumer_pin: string | null; sentence: string };
 }
 
 export interface SubcomponentConstructionRef {
   curve_id: string; data_path: string | null; curve_type: string; curve_form: string | null; formula: string | null; artifact: string | null;
-  parameter_count: number; source_ids: string[];
-  production_use: { state: "runtime_indexed" | "reused_binding" | "not_runtime_indexed"; consumer_pin: string | null; sentence: string };
+  parameter_count: number; source_ids: string[]; entry_id: string; part: string | null; scope_note: ScopeNote | null;
+  production_use: { state: ProductionState; consumer_pin: string | null; sentence: string };
+}
+
+export interface LegendItem { key: string; word: string; meaning: string }
+export interface Legend {
+  source: string; status: LegendItem[]; coverage: LegendItem[]; completeness: LegendItem[]; evidence: LegendItem[]; production: LegendItem[];
+  where_from: Record<WhereFrom, string>;
 }
 
 export interface Subcomponent {
@@ -107,8 +128,13 @@ export interface Subcomponent {
   cell_state: string; coverage: "curve" | "gap"; completeness: "complete" | "incomplete"; curve_ids: string[]; failure_unit_ids: string[];
   tier_span: string; evidence_labels: ("field-calibrated" | "published" | "borrowed" | "our judgment")[]; evidence_words: string;
   construction: SubcomponentConstructionRef[];
-  production_use: { state: "runtime_indexed" | "reused_binding" | "not_runtime_indexed"; consumer_pin: string | null };
-  gap: { reason: string; occurrence: OccurrenceBucket | null; register: { path: string; sha256: string; search_log: string | null; last_searched: string | null; question: string | null } | null } | null;
+  production_use: { state: ProductionState; consumer_pin: string | null };
+  borrowed_from: { entry_id: string | null; title: string | null; curves: string[]; rationale: string | null; tier: string | null; tier_word: string | null } | null;
+  scope_notes: ScopeNote[];
+  gap: {
+    reason: string; occurrence: OccurrenceBucket | null; effect: string; basis: { label: string; path: string }[];
+    register: { path: string; sha256: string; search_log: string | null; last_searched: string | null; question: string | null } | null;
+  } | null;
 }
 
 export interface SubcomponentRollup {
@@ -287,7 +313,7 @@ export interface AssetViewV2 extends Omit<AssetView, "rows"> {
 }
 export interface ReviewQueueItem { kind: string; entry_id: string; text: string; href: string; words: string }
 export type ManifestV2 = Manifest & {
-  tier_words: Record<string, string>; tier_plain: Record<string, string>; tier_meaning: Record<string, string>;
+  tier_words: Record<string, string>; tier_plain: Record<string, string>; tier_meaning: Record<string, string>; legend: Legend;
   stations: { id: string; label: string; gate: string; name: string; meaning: string }[];
   no_link_words: string; not_yet_extracted_sentence: string;
   review_queue: { items: ReviewQueueItem[]; counts: Record<string, number> };

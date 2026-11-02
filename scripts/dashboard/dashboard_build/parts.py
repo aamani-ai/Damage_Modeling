@@ -535,7 +535,7 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
             borrowed_from = None
             if e and e.kind == "binding":
                 b_ = cells[e.id].get("binding") or {}
-                borrowed_from = {"entry_id": b_.get("source_entry_id"), "curves": b_.get("reused_curves") or [], "rationale": b_.get("transfer_rationale"),
+                borrowed_from = {"entry_id": b_.get("source_entry_id"), "title": (cells.get(b_.get("source_entry_id") or "") or {}).get("title"), "curves": b_.get("reused_curves") or [], "rationale": b_.get("transfer_rationale"),
                                  "tier": b_.get("transfer_tier"), "tier_word": tier_words(b_.get("transfer_tier")) if b_.get("transfer_tier") else None}
             evidence_labels = _tier_labels(tier_codes)
             if e and e.kind == "binding" and "borrowed" not in evidence_labels:

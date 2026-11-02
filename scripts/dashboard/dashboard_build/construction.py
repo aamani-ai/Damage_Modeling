@@ -108,7 +108,7 @@ WHERE_FROM = {
     "published": "From a published source: the link opens it.",
     "borrowed": "Borrowed: taken from a similar asset or a related study and adapted; the link opens what it stands in for.",
     "our_judgment": "Our judgment: no source gives this number; the files that set it are linked.",
-    "curve_level": "No register row for this parameter alone; these are the curve's own sources.",
+    "curve_level": "No register row for this parameter alone, so it carries the curve's tiers; these are the curve's own sources.",
 }
 
 # A label in a cell's own files that reads wider than what the curve covers. The label is kept as written; this note
@@ -215,6 +215,7 @@ def construction_block(c: dict[str, Any], artifact_path: str | None, status: str
         "variables": [{"symbol": s, "meaning": m_, "parameter": p} for s, m_, p in (spec or {}).get("variables", [])],
         "marks": _piecewise_marks(params.get("points")) if spec is FORMS.get("piecewise_linear") else None,
         "unkeyed_parameters": sorted(set(params) - keyed),
+        "curve_tiers": {half: {"tier": (c.get("tiers") or {}).get(half), "word": tier_words((c.get("tiers") or {}).get(half))} for half in ("shape", "cost")},
         "axis": c.get("axis"), "parameters": parameter_docs, "additional_parameter_rows": unmatched_rows,
         "sources": construction_sources, "source_ids": c.get("sources_for_curve") or [s.get("id") or s.get("source_id") for s in construction_sources if s.get("id") or s.get("source_id")],
         "artifact": artifact_path, "evaluator": c.get("evaluator"), "constructing_files": files,
@@ -250,7 +251,7 @@ def legend(cat_text: str) -> dict[str, Any]:
             {"key": "complete", "word": "complete", "meaning": "Nothing left to build for this subcomponent and hazard."},
             {"key": "incomplete", "word": "incomplete", "meaning": "Something is still open: a gap, a part withheld, or a curve for only part of it."},
         ],
-        "evidence": [{"key": k, "word": TIER_SHORT[k], "meaning": TIER_MEANING[k]} for k in ("T1", "T2", "T3", "T4")],
+        "evidence": [{"key": k, "word": TIER_SHORT[k], "meaning": TIER_MEANING[k].removeprefix(f"{TIER_SHORT[k]}: ")} for k in ("T1", "T2", "T3", "T4")],
         "production": [
             {"key": "runtime_indexed", "word": "in production index", "meaning": "In the runtime artifact index: production can call it. It does not say a screening grid selected it."},
             {"key": "reused_binding", "word": "reused in production", "meaning": "Priced with another cell's indexed curve through a consumer binding."},

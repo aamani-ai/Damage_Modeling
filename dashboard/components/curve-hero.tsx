@@ -33,12 +33,15 @@ function optionsFor(curves: CurveV2[]): Option[] {
 
 /** The cell's main logic: two to four sentences the build writes from the axis, the method and the value basis. */
 export function MainLogic({ cell }: { cell: CellV2 }) {
-  if (!cell.plain.main_logic.length) return null;
+  // a step the summary under the title already says, word for word, is not said again
+  const said = (s: string) => (cell.summary ?? "").includes(s.trim().replace(/\.$/, ""));
+  const steps = cell.plain.main_logic.filter((s) => !said(s));
+  if (!steps.length) return null;
   return (
     <div>
       <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Main logic</div>
       <ol className="mt-0.5 space-y-1">
-        {cell.plain.main_logic.map((s, i) => (
+        {steps.map((s, i) => (
           <li key={i} className="grid grid-cols-[16px_1fr] gap-x-1"><span className="tabular text-muted-foreground">{i + 1}</span><span>{s}</span></li>
         ))}
       </ol>

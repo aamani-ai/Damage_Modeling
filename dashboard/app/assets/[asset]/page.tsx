@@ -6,9 +6,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AssetCoverage, CoverageMatrix } from "@/components/asset-coverage";
 import { AssetViewGrid } from "@/components/asset-view";
+import { ReviewLegend } from "@/components/review-legend";
+import { SubcomponentPanel } from "@/components/subcomponents";
 import { FileLink, Tag } from "@/components/ui";
-import { assetView, blobUrl, coverage, manifest, twinViewer } from "@/lib/data";
-import type { LibraryType, ManifestV3 } from "@/lib/types";
+import { assetView, blobBase, blobUrl, constructionCards, coverage, manifest, twinViewer } from "@/lib/data";
+import type { AssetViewV2, LibraryType, ManifestV3 } from "@/lib/types";
 
 export const dynamicParams = false;
 
@@ -53,6 +55,12 @@ function CurveList({ row, m }: { row: LibraryType; m: ManifestV3 }) {
   );
 }
 
+function Subcomponents({ v, m, defaultHazard }: { v: AssetViewV2; m: ManifestV3; defaultHazard?: string }) {
+  const hazards = m.hazards.map((h) => ({ slug: h.slug, label: h.label }));
+  const first = defaultHazard ?? hazards.find((h) => (v.subcomponent_rollup.by_hazard?.[h.slug]?.with_curve ?? 0) > 0)?.slug ?? hazards[0].slug;
+  return <SubcomponentPanel subs={v.subcomponents} rollup={v.subcomponent_rollup} hazards={hazards} defaultHazard={first} cards={constructionCards(v.subcomponents)} legend={m.legend} blobBase={blobBase(m)} />;
+}
+
 export default async function AssetPage({ params }: { params: Promise<{ asset: string }> }) {
   const { asset } = await params;
   const m = manifest();
@@ -90,6 +98,8 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
             </Link>
           ))}
         </div>
+        <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} open /></div>
+        {v ? <div className="mt-3"><Subcomponents v={v} m={m} /></div> : null}
         {v ? (
           <details className="mt-3 rounded-lg border border-border bg-card">
             <summary className="cursor-pointer px-3 py-2 text-[11.5px] font-medium text-muted-foreground hover:text-foreground">The cells&apos; own part lists, building by building and hazard by hazard</summary>
@@ -130,8 +140,10 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
         </p>
       </div>
       <div className="mt-3 space-y-3">
+        <ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} open />
         {cov && viewer ? <AssetCoverage cov={cov} loadOrder={viewer.load_order} /> : <p className="text-[12px] text-muted-foreground">No twin coverage for this type yet.</p>}
         <CurveList row={row} m={m} />
+        {v && !sharedCell ? <Subcomponents v={v} m={m} defaultHazard={cov ? (cov.hazards.find((h) => !h.gap) ?? cov.hazards[0]).hazard.slug : undefined} /> : null}
         {cov ? <CoverageMatrix cov={cov} /> : null}
         {v && !sharedCell ? (
           <details className="rounded-lg border border-border bg-card">

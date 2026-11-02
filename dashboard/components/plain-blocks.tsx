@@ -53,7 +53,7 @@ export function PlainBlocks({ cell, blob }: { cell: CellV2; blob: (p: string) =>
             {pl.blocks.covered.not_covered.length ? <p className="mt-1 text-muted-foreground">no curve yet: {pl.blocks.covered.not_covered.join(" · ")}</p> : null}
           </>
         )}
-        {withheld.length ? <p className="mt-1.5 text-[11px] text-muted-foreground">Named but withheld (a stated &quot;not zero&quot;, no response yet): {withheld.map((w) => w.subsystem ?? w.failure_unit_id).map((s) => s.replace(/_/g, " ").toLowerCase()).join(" · ")}</p> : null}
+        {withheld.length ? <p className="mt-1.5 text-[11px] text-muted-foreground">Named but withheld (a stated &quot;not zero&quot;, no response yet): {Object.entries(withheld.map((w) => (w.subsystem ?? w.failure_unit_id).replace(/_/g, " ").toLowerCase()).reduce<Record<string, number>>((n, s) => ({ ...n, [s]: (n[s] ?? 0) + 1 }), {})).map(([s, n]) => (n > 1 ? `${s} (${n} units)` : s)).join(" · ")}</p> : null}
         {v && v.left_out.length === 0 ? <p className="mt-1 text-[10.5px] italic text-muted-foreground">no part is marked left out on purpose</p> : null}
       </Block>
       <Block title="What we assumed" count={pl.blocks.assumed.length}>

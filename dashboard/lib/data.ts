@@ -2,7 +2,8 @@
 // prerendered from these files; nothing is fetched at runtime and nothing is evaluated in the browser (P6).
 import fs from "node:fs";
 import path from "node:path";
-import type { AssetViewV2, CellV2, Citations, Coverage, CurveV2, Faq, ManifestV3, OccurrencePage, TwinViewerManifest } from "./types";
+import type { ConstructionCard } from "@/components/subcomponents";
+import type { AssetViewV2, CellV2, Citations, Coverage, CurveV2, Faq, ManifestV3, OccurrencePage, Subcomponent, TwinViewerManifest } from "./types";
 
 const DATA = path.join(process.cwd(), "data");
 
@@ -59,4 +60,20 @@ export function receipt(): Record<string, unknown> | null {
 /** repository blob URL at the build commit — every file link opens the file the number came from */
 export function blobUrl(m: ManifestV3, repoPath: string): string {
   return `${m.repo.url}/blob/${m.commit_full}/${repoPath.replace(/^\/+/, "")}`;
+}
+
+/** the construction of every curve the subcomponents name, read from the exact curve file each one points at */
+export function constructionCards(subs: Subcomponent[]): Record<string, ConstructionCard> {
+  const out: Record<string, ConstructionCard> = {};
+  for (const ref of subs.flatMap((s) => s.construction)) {
+    if (out[ref.curve_id] || !ref.data_path) continue;
+    const c = readJson<CurveV2>(ref.data_path);
+    if (c) out[ref.curve_id] = { k: c.construction, href: `/cells/${c.entry_id}/curves/${c.curve_id}`, title: c.part ?? c.curve_id };
+  }
+  return out;
+}
+
+/** the repository at the build commit, as the start of a file link */
+export function blobBase(m: ManifestV3): string {
+  return `${m.repo.url}/blob/${m.commit_full}`;
 }

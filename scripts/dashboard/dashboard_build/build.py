@@ -719,6 +719,13 @@ def build(write: bool = True) -> dict[str, Any]:
         to_confirm = coverage.get("to_confirm", {}).get(e.id) or []
         if to_confirm:
             tasks.append({"kind": "crosswalk_confirm", "text": f"Confirm {len(to_confirm)} part{'s' if len(to_confirm) != 1 else ''} of the coverage picture the cell does not name", "items": [f"{q['type']}: {q['name']} — {q['note']}" for q in to_confirm], "href": f"/cells/{e.id}?step=covers"})
+        # "Convective wind" is a disputed label (the owner's call, not renamed here): flag a cell whose own name uses
+        # another word for its hazard
+        hz_slug = hazard_slug(e.data["hazard"], sl)
+        if hz_slug == "convective_wind" and not e.id.startswith(hz_slug) and e.kind == "cell":
+            own = re.sub(r"_(solar|wind|bess|substation|real_estate)$", "", e.id).replace("_", " ")
+            tasks.append({"kind": "hazard_label", "text": f"Confirm the hazard label: the catalogue files this cell under “{e.data['hazard']}”; the cell's own name says “{own}”",
+                          "items": [f"cell folder: {e.id}", "“Convective wind” is a disputed label; it is flagged here, not renamed"], "href": f"/cells/{e.id}"})
         rv = cell["rail"]["review"]
         occ = cell["rail"]["evidence"]["occurrence"]["label"]
         review_cells.append({

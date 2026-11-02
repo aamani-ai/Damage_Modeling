@@ -12,9 +12,11 @@ import { CellCrumbs } from "@/components/crumbs";
 import { CurveHero, MainLogic } from "@/components/curve-hero";
 import { PlainBlocks } from "@/components/plain-blocks";
 import { PlainRail } from "@/components/plain-rail";
+import { ReviewLegend } from "@/components/review-legend";
+import { SubcomponentPanel } from "@/components/subcomponents";
 import { StepsStrip } from "@/components/steps-strip";
 import { Card, EmptyState } from "@/components/ui";
-import { blobUrl, cell, citations, coverageSlice, curvesOf, manifest, twinViewer } from "@/lib/data";
+import { blobBase, blobUrl, cell, citations, constructionCards, coverageSlice, curvesOf, manifest, twinViewer } from "@/lib/data";
 
 export const dynamicParams = false;
 
@@ -47,6 +49,7 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
   return (
     <div>
       <PlainRail title={c.title} rail={c.plain.rail} summary={c.summary} crumbs={crumbs} tierMeaning={m.tier_meaning} tone={c.rail.review.tone} />
+      <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blob(m.legend.source)} /></div>
       {c.kind === "gap" ? (
         <div className="mt-3 space-y-3">
           <EmptyState>
@@ -55,6 +58,9 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
               <>The field-report register exists: <Link href={`/occurrence/${c.asset.slug}/${c.hazard.slug}`} className="text-accent hover:underline">open it ▸</Link></>
             ) : null}
           </EmptyState>
+{c.subcomponents.length && c.subcomponent_rollup ? (
+            <div><SubcomponentPanel subs={c.subcomponents} rollup={c.subcomponent_rollup} hazards={[{ slug: c.hazard.slug, label: c.hazard.label }]} defaultHazard={c.hazard.slug} cards={constructionCards(c.subcomponents)} legend={m.legend} blobBase={blobBase(m)} picker={false} /></div>
+          ) : null}
           {types.length ? <p className="px-1 text-[11.5px] text-muted-foreground">What the other hazards cover on this asset: {types.map((t, i) => <span key={t.slug}>{i ? " · " : ""}<Link href={t.href!} className="text-accent hover:underline">{t.label}</Link></span>)}.</p> : null}
         </div>
       ) : (
@@ -88,6 +94,9 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
             <EmptyState>No curve records in this artifact.</EmptyState>
           )}
           {covs.length && viewer ? <CellCoverage covs={covs} hazardSlug={c.hazard.slug} loadOrder={viewer.load_order} /> : null}
+          {c.subcomponents.length && c.subcomponent_rollup ? (
+            <div className="mt-3"><SubcomponentPanel subs={c.subcomponents} rollup={c.subcomponent_rollup} hazards={[{ slug: c.hazard.slug, label: c.hazard.label }]} defaultHazard={c.hazard.slug} cards={constructionCards(c.subcomponents)} legend={m.legend} blobBase={blobBase(m)} picker={false} /></div>
+          ) : null}
           <PlainBlocks cell={c} blob={blob} />
         </>
       )}
