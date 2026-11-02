@@ -1,6 +1,7 @@
 "use client";
 
-// Every expected subcomponent × hazard, including the ones with no curve (a missing cell, a part the cell withholds,
+// Every expected subsystem × hazard (the method's subsystem, standard 13 §6; the data keeps the field name
+// `subcomponents`), including the ones with no curve (a missing cell, a part the cell withholds,
 // a part it never names), so gaps are visible rather than absent. Each row opens to how its curve is built, back to
 // front, or to the research that shows why there is no curve. The hazard follows ?hazard= (shared with the
 // picture above); the open row is ?sub=. The panel folds away (?subs=hidden).
@@ -103,11 +104,11 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
   const here = rollup.by_hazard?.[hz] ?? rollup;
   const evidence = (s: Subcomponent) => s.evidence_labels.length ? s.evidence_labels.join(" · ") : "—";
   return (
-    <section id="subcomponents" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="Every subcomponent, curve or gap">
+    <section id="subcomponents" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="Every subsystem, curve or gap">
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-3 pt-2.5 pb-1">
         <button type="button" aria-expanded={shown} aria-controls="subcomponents-body" onClick={() => setFold(shown ? "hidden" : null)}
           className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold uppercase tracking-wide text-foreground hover:text-accent">
-          <span aria-hidden className="inline-block w-4 text-[15px] leading-none">{shown ? "▾" : "▸"}</span>Every subcomponent, curve or gap
+          <span aria-hidden className="inline-block w-4 text-[15px] leading-none">{shown ? "▾" : "▸"}</span>Every subsystem, curve or gap
         </button>
         {picker ? <span className="text-[11px]">all hazards: <Counts r={rollup} legend={legend} /></span> : null}
       </div>
@@ -131,7 +132,7 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
             <table className="w-full min-w-[720px] text-[11.5px]">
               <thead>
                 <tr className="text-left text-[10.5px] text-muted-foreground">
-                  <th scope="col" className="px-3 py-1 font-medium">Subcomponent</th>
+                  <th scope="col" className="px-3 py-1 font-medium">Subsystem</th>
                   <th scope="col" className="px-2 py-1 font-medium">Curve or gap</th>
                   <th scope="col" className="px-2 py-1 font-medium">Complete</th>
                   <th scope="col" className="px-2 py-1 font-medium">Evidence</th>

@@ -243,12 +243,12 @@ def legend(cat_text: str) -> dict[str, Any]:
         "source": "docs/cells/CATALOGUE.md",
         "status": [{"key": s, "word": {"gap": "no curve yet"}.get(s, s), "meaning": status_rows[s]} for s in ("live", "proposal", "reused", "gap")],
         "coverage": [
-            {"key": "curve", "word": "has a curve", "meaning": "A curve covers the whole of this subcomponent."},
-            {"key": "partial", "word": "partial", "meaning": "A curve covers only part of this subcomponent; the rest has none."},
-            {"key": "gap", "word": "gap", "meaning": "No curve covers this subcomponent; the row says why and links the research."},
+            {"key": "curve", "word": "has a curve", "meaning": "A curve covers the whole of this subsystem."},
+            {"key": "partial", "word": "partial", "meaning": "A curve covers only part of this subsystem; the rest has none."},
+            {"key": "gap", "word": "gap", "meaning": "No curve covers this subsystem; the row says why and links the research."},
         ],
         "completeness": [
-            {"key": "complete", "word": "complete", "meaning": "Nothing left to build for this subcomponent and hazard."},
+            {"key": "complete", "word": "complete", "meaning": "Nothing left to build for this subsystem and hazard."},
             {"key": "incomplete", "word": "incomplete", "meaning": "Something is still open: a gap, a part withheld, or a curve for only part of it."},
         ],
         "evidence": [{"key": k, "word": TIER_SHORT[k], "meaning": TIER_MEANING[k].removeprefix(f"{TIER_SHORT[k]}: ")} for k in ("T1", "T2", "T3", "T4")],

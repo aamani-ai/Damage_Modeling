@@ -1,5 +1,5 @@
-// An asset type's page (G14, DCD-D26; DCD-D21), in the order the owner set on reviewing the subcomponent panel: what
-// the words mean; the type's curves; every subcomponent, curve or gap; what each curve covers on the Digital Twin's
+// An asset type's page (G14, DCD-D26; DCD-D21), in the order the owner set on reviewing the subsystem panel: what
+// the words mean; the type's curves; every subsystem, curve or gap; what each curve covers on the Digital Twin's
 // reference model, hazard by hazard; which hazard has a curve for which system. The cells' own part lists and value rows
 // (iteration 2) stay one control away. A category whose types share one catalogue entry per hazard (real estate)
 // gets an index page instead.

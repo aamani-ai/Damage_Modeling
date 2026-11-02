@@ -808,7 +808,7 @@ def build(write: bool = True) -> dict[str, Any]:
         r_ = asset["subcomponent_rollup"]
         if r_["with_curve"] + r_["gap"] != r_["expected"] or r_["complete"] + r_["incomplete"] != r_["expected"]:
             subcomponent_problems.append(f"{aslug}: rollup does not reconcile")
-    check("subcomponents", "every expected subcomponent has a curve/gap state, completeness state, evidence label, and construction or gap lineage",
+    check("subcomponents", "every expected subsystem has a curve/gap state, completeness state, evidence label, and construction or gap lineage",
           not subcomponent_problems, {"records": sum(len(a["subcomponents"]) for a in assets_out.values()), "problems": subcomponent_problems})
     unkeyed = [f"{c_['entry_id']}/{c_['curve_id']}: {', '.join(c_['construction']['unkeyed_parameters']) or 'no formula'}"
                for c_ in curves_out.values() if c_["construction"]["unkeyed_parameters"] or not c_["construction"]["formula"]]

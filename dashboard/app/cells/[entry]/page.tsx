@@ -1,5 +1,5 @@
 // The cell page (G15, DCD-D27; the order the owner set on reviewing iteration 3, DCD-D33, then on reviewing the
-// subcomponent panel): what the words mean; every subcomponent, curve or gap; how the curve was made, in four steps
+// subsystem panel): what the words mean; every subsystem, curve or gap; how the curve was made, in four steps
 // with their key items; then the curve with its main logic, how sure in words and its main references; then what it
 // covers on the Digital Twin's reference model (DCD-D21, collapsible); then the open blocks; then a For Hazard footer
 // with the identity, the outputs, the files, the known answers and the pins. Every ledger fact earlier iterations

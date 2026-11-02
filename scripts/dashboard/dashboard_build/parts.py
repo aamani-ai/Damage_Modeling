@@ -514,13 +514,13 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                 if e and e.kind == "gap":
                     gap_reason = e.data.get("reason")
                 elif c.get("state") == "no_curve":
-                    gap_reason = c.get("no_curve_text") or "This expected subcomponent has no curve."
+                    gap_reason = c.get("no_curve_text") or "This expected subsystem has no curve."
                 elif c.get("state") == "withheld":
                     gap_reason = "; ".join(str(x) for p in mine for x in p.get("withheld_reasons") or []) or "The cell explicitly withholds this response."
                 elif c.get("state") == "partial":
-                    gap_reason = "A curve covers only part of this expected subcomponent."
+                    gap_reason = "A curve covers only part of this expected subsystem."
                 elif c.get("state") == "exposure_modifier":
-                    gap_reason = "This subcomponent takes another part's damage ratio and has no curve of its own."
+                    gap_reason = "This subsystem takes another part's damage ratio and has no curve of its own."
                 elif e is None and h["effect"] != "damage":
                     gap_reason = (f"{h['label']} changes how this asset performs rather than destroying it, and a damage curve prices "
                                   "physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field "
@@ -528,7 +528,7 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                 elif e is None:
                     gap_reason = "No catalogue entry or curve has been built for this asset × hazard."
                 else:
-                    gap_reason = "This expected subcomponent is not named by the cell."
+                    gap_reason = "This expected subsystem is not named by the cell."
             states = {x["production_use"]["state"] for x in construction if x.get("production_use")}
             production_state = ("reused_binding" if e and e.kind == "binding" and curve_ids else
                                 "runtime_indexed" if "runtime_indexed" in states else "not_runtime_indexed")
