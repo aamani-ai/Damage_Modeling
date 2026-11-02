@@ -13,6 +13,7 @@ from __future__ import annotations
 import csv
 import io
 import re
+from fnmatch import fnmatchcase
 from pathlib import Path
 from typing import Any
 
@@ -315,9 +316,28 @@ def _span(codes: list[str | None]) -> str:
     return tiers[0] if len(tiers) == 1 else f"{tiers[0]}–{tiers[-1][1]}"
 
 
+def _tier_labels(codes: list[str | None]) -> list[str]:
+    labels = {"T1": "field-calibrated", "T2": "published", "T3": "borrowed", "T4": "our judgment"}
+    return [labels[c] for c in ("T1", "T2", "T3", "T4") if c in set(codes)]
+
+
+def _rollup(subcomponents: list[dict[str, Any]]) -> dict[str, Any]:
+    def counts(rows: list[dict[str, Any]]) -> dict[str, Any]:
+        return {
+            "expected": len(rows),
+            "with_curve": sum(1 for r in rows if r["coverage"] == "curve"),
+            "gap": sum(1 for r in rows if r["coverage"] == "gap"),
+            "complete": sum(1 for r in rows if r["completeness"] == "complete"),
+            "incomplete": sum(1 for r in rows if r["completeness"] == "incomplete"),
+            "evidence_labels": {label: sum(1 for r in rows if label in r["evidence_labels"]) for label in ("field-calibrated", "published", "borrowed", "our judgment")},
+        }
+    hazards = sorted({r["hazard"]["slug"] for r in subcomponents})
+    return {**counts(subcomponents), "by_hazard": {h: counts([r for r in subcomponents if r["hazard"]["slug"] == h]) for h in hazards}}
+
+
 def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dict[str, dict[str, Any]], sl: dict[str, Any], registers: dict[tuple[str, str], Any],
                bess_values: dict[str, float] | None, fb_binding: dict[str, Any] | None, twin: dict[str, Any], sub_budget: dict[str, Any] | None,
-               sub_crosswalk: dict[str, Any] | None, resolve_state: Any) -> dict[str, Any]:
+               sub_crosswalk: dict[str, Any] | None, resolve_state: Any, all_curves: dict[str, dict[str, Any]] | None = None) -> dict[str, Any]:
     hz = [h for h in sl["hazards"]]
     by_hazard: dict[str, Any] = {}
     for e in entries:
@@ -355,7 +375,7 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
             cellv: dict[str, Any] = {"entry_id": e.id if e else None, "effect": h["effect"], "outside_the_five": h["outside_the_five"],
                                      "twin_lead": (bucket_reg or {}).get("twin_lead", {}).get("level") if bucket_reg else None,
                                      "twin_nodes": (bucket_reg or {}).get("twin_lead", {}).get("nodes", []) if bucket_reg else [],
-                                     "occurrence": occ, "state": None, "words": "—", "mark": "—", "parts": [], "tier_span": None, "share": None, "dollars": None}
+                                     "occurrence": occ, "state": None, "words": "—", "mark": "—", "parts": [], "curve_ids": [], "tier_span": None, "share": None, "dollars": None}
             if e is None:
                 row["cells"][h["slug"]] = cellv
                 continue
@@ -381,10 +401,12 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                     else:
                         st, words = "withheld", "in the station's value, withheld by this binding"
                     cellv.update({"state": st, "words": words, "mark": "▨" if st != "withheld" else "▢", "tier_span": span,
-                                  "dollars": sum(float(l["amount_usd"]) for l in modeled) if modeled else 0.0, "parts": [l["item"] for l in rows_here]})
+                                  "dollars": sum(float(l["amount_usd"]) for l in modeled) if modeled else 0.0, "parts": [l["item"] for l in rows_here],
+                                  "curve_ids": sorted({cid for r_ in e.data.get("rows") or [] for cid in r_.get("curves") or []})})
                 else:
                     cellv.update({"state": "whole", "words": _state_words("whole", span, whole_word) + f" · {tier_words(span)}", "mark": "▨", "tier_span": span,
-                                  "parts": [r["part"] for r in e.data.get("rows") or []], "dollars": row.get("value_usd")})
+                                  "parts": [r["part"] for r in e.data.get("rows") or []], "curve_ids": sorted({cid for r_ in e.data.get("rows") or [] for cid in r_.get("curves") or []}),
+                                  "dollars": row.get("value_usd")})
                 row["cells"][h["slug"]] = cellv
                 continue
             if aslug == "substation" or (aslug == "real_estate" and row["key"] != "contents"):
@@ -394,12 +416,14 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                     whole = [p for p in mine if p.get("whole_building")]
                 if whole and not [p for p in mine if not p.get("whole_building")] and aslug == "real_estate":
                     span = _span([whole[0].get("shape"), whole[0].get("cost")])
-                    cellv.update({"state": "whole", "words": _state_words("whole", span, whole_word) + f" · {tier_words(span)}", "mark": "■", "tier_span": span, "parts": [p["part"] for p in whole]})
+                    cellv.update({"state": "whole", "words": _state_words("whole", span, whole_word) + f" · {tier_words(span)}", "mark": "■", "tier_span": span, "parts": [p["part"] for p in whole],
+                                  "curve_ids": sorted({cid for p in whole for cid in p.get("curves") or []})})
                     row["cells"][h["slug"]] = cellv
                     continue
                 if aslug == "substation" and whole:
                     span = _span([whole[0].get("shape"), whole[0].get("cost")])
-                    cellv.update({"state": "whole", "words": _state_words("whole", span, whole_word) + f" · {tier_words(span)}", "mark": "■", "tier_span": span, "parts": [p["part"] for p in whole], "dollars": row.get("value_usd")})
+                    cellv.update({"state": "whole", "words": _state_words("whole", span, whole_word) + f" · {tier_words(span)}", "mark": "■", "tier_span": span, "parts": [p["part"] for p in whole],
+                                  "curve_ids": sorted({cid for p in whole for cid in p.get("curves") or []}), "dollars": row.get("value_usd")})
                     row["cells"][h["slug"]] = cellv
                     continue
             if mine:
@@ -415,6 +439,7 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                     if aslug == "real_estate" and st == "partial":
                         words = f"curve for {_join([str(p['component']).lower() for p in curves])} only · {tier_words(span)}"
                     cellv.update({"state": st, "words": words, "mark": "■" + ("◔" if partial else ""), "tier_span": span, "parts": [p["part"] for p in mine],
+                                  "curve_ids": sorted({cid for p in curves for cid in p.get("curves") or []}),
                                   "share": sum(p["share"] for p in curves if p.get("share") is not None) if any(p.get("share") is not None for p in curves) else None, "dollars": dollars,
                                   "spans": [p["part"] for p in mine if p["spans"]], "drawn": any(p["drawn"] for p in curves)})
                 elif withheld:
@@ -451,7 +476,66 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                       "sha256": sub_crosswalk.get("sha256"), "rows": len(sub_crosswalk["rows"]), "nodes": nodes, "leads": False}
     else:
         twin_block = {"available": False, "sentence": NO_TWIN, "sha256": None, "rows": None, "nodes": {}}
-    return {"rows": rows, "parts_by_cell": parts_by_cell, "split": split, "twin": twin_block,
+    # One normalized record per expected plant part × hazard. This deliberately includes catalogue gaps,
+    # occurrence-only hazards, withheld units, and parts a cell never names.
+    subcomponents: list[dict[str, Any]] = []
+    all_curve_lookup = {x["curve_id"]: x for x in (all_curves or {}).values()}
+    all_curve_lookup.update({x["curve_id"]: x for cell_ in cells.values() for x in cell_.get("_curves") or []})
+    for row in rows:
+        for h in hz:
+            c = row["cells"][h["slug"]]
+            e = by_hazard.get(h["slug"]) if h["catalogue"] else None
+            pc = parts_by_cell.get(e.id) if e else None
+            mine = [p for p in (pc or {}).get("parts", []) if row["key"] in p["rows"]]
+            tier_codes = [x for p in mine for x in (p.get("shape"), p.get("cost")) if x]
+            if e and e.kind == "binding":
+                tier_codes += [x for r_ in e.data.get("rows") or [] for x in (r_.get("shape"), r_.get("cost")) if x]
+            curve_ids = c.get("curve_ids") or sorted({cid for p in mine for cid in p.get("curves") or []})
+            curve_ids = sorted({actual for pattern in curve_ids for actual in all_curve_lookup if fnmatchcase(actual, pattern)})
+            construction = [{"curve_id": cid, "data_path": all_curve_lookup[cid].get("data_path"), **(all_curve_lookup[cid].get("construction") or {})}
+                            for cid in curve_ids if cid in all_curve_lookup]
+            curve_states = {"curve", "whole", "reused"}
+            coverage = "curve" if c.get("state") in curve_states | {"partial"} else "gap"
+            completeness = "complete" if c.get("state") in curve_states else "incomplete"
+            reg = registers.get((aslug, h["slug"]))
+            gap_reason = None
+            if coverage == "gap" or completeness == "incomplete":
+                if e and e.kind == "gap":
+                    gap_reason = e.data.get("reason")
+                elif c.get("state") == "no_curve":
+                    gap_reason = c.get("no_curve_text") or "This expected subcomponent has no curve."
+                elif c.get("state") == "withheld":
+                    gap_reason = "; ".join(str(x) for p in mine for x in p.get("withheld_reasons") or []) or "The cell explicitly withholds this response."
+                elif c.get("state") == "partial":
+                    gap_reason = "A curve covers only part of this expected subcomponent."
+                elif c.get("state") == "exposure_modifier":
+                    gap_reason = "This subcomponent takes another part's damage ratio and has no curve of its own."
+                elif e is None:
+                    gap_reason = "No catalogue entry or curve has been built for this asset × hazard."
+                else:
+                    gap_reason = "This expected subcomponent is not named by the cell."
+            production_state = ("runtime_indexed" if e and e.status == "live" and curve_ids else
+                                "reused_binding" if e and e.kind == "binding" and curve_ids else "not_runtime_indexed")
+            evidence_labels = _tier_labels(tier_codes)
+            if e and e.kind == "binding" and "borrowed" not in evidence_labels:
+                evidence_labels.insert(0, "borrowed")
+            subcomponents.append({
+                "key": row["key"], "label": row["label"], "asset": {"slug": aslug, "label": a_def["label"]},
+                "hazard": {"slug": h["slug"], "label": h["label"], "effect": h["effect"], "outside_the_five": h["outside_the_five"]},
+                "entry_id": e.id if e else None, "catalogue_status": e.status if e else "missing", "cell_state": c.get("state") or "unassessed_gap",
+                "coverage": coverage, "completeness": completeness, "curve_ids": curve_ids,
+                "failure_unit_ids": sorted({p["failure_unit_id"] for p in mine if p.get("failure_unit_id")}),
+                "tier_span": _span(tier_codes), "evidence_labels": evidence_labels,
+                "evidence_words": ("borrowed · " if e and e.kind == "binding" else "") + tier_words(_span(tier_codes)),
+                "construction": construction,
+                "production_use": {"state": production_state, "consumer_pin": (cells[e.id]["identity"].get("consumer_pin") if e else None)},
+                "gap": ({"reason": gap_reason, "occurrence": c.get("occurrence"),
+                         "register": ({"path": reg["path"], "sha256": reg["sha256"], "search_log": reg["register"].get("search_log"),
+                                       "last_searched": reg["register"].get("last_searched"), "question": reg["register"].get("question")}
+                                      if reg else None)} if gap_reason else None),
+            })
+    return {"rows": rows, "parts_by_cell": parts_by_cell, "subcomponents": subcomponents, "subcomponent_rollup": _rollup(subcomponents),
+            "split": split, "twin": twin_block,
             "value_source": ({"label": "reference budget r1 (battery value binding)", "path": "docs/cells/flood_bess/current/value_binding.json"} if aslug == "bess"
                              else {"label": "Hazard's substation reference budget, pinned by the substation flood binding", "path": SUBSTATION_BUDGET_REL, "sha256": (sub_budget or {}).get("sha256"), "pin_ok": (sub_budget or {}).get("ok")} if aslug == "substation" and sub_budget and sub_budget.get("available")
                              else None)}

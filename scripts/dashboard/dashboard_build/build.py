@@ -34,6 +34,74 @@ STATUS_LABEL = {"live": "LIVE", "proposal": "PROPOSAL", "reused": "REUSED", "gap
 SOURCE_ID_RE = re.compile(r"\(([A-Z]{1,4}-S\d{1,3})\)")
 
 
+FORMULAS = {
+    "logistic": "D(x) = max_DR / (1 + exp(-k × (x - x50)))",
+    "wind_tornado_logistic_ratio": "D(R) = max_DR / (1 + exp(-k_ratio × (R - D50_ratio)))",
+    "thresholded_logistic_demand": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(-k × (R - R50)))",
+    "piecewise_linear": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+    "ordered_damage_state_lognormal": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+    "thresholded_weibull_expected_damage": "D(V) = 0 for V ≤ V_zero; above it, a thresholded Weibull response rises toward max_dr using delta_V50 and rho.",
+}
+
+
+def _parameter_definition(name: str) -> str:
+    """Short, display-ready definitions; the source register remains authoritative for the value and reasoning."""
+    exact = {
+        "max_DR": "maximum damage ratio", "max_dr": "maximum damage ratio", "x50": "hazard intensity at 50% of the uncapped response",
+        "D50": "hazard intensity at 50% of the uncapped response", "D50_ratio": "demand ratio at 50% of the uncapped response",
+        "R0": "onset demand ratio below which damage is zero", "R50": "demand ratio at the logistic midpoint", "k": "logistic steepness",
+        "k_ratio": "logistic steepness on the demand-ratio axis", "V_zero_kmh": "wind speed at or below which damage is zero",
+        "delta_V50_kmh": "wind-speed increment from onset to the response midpoint", "V_at_DR50_kmh": "wind speed at the response midpoint",
+        "rho": "Weibull shape/steepness parameter", "points": "ordered hazard-intensity and damage-ratio knots",
+        "medians": "median intensity for each ordered damage state", "beta": "lognormal dispersion", "state_cost_ratios": "damage ratio assigned to each damage state",
+    }
+    if name in exact:
+        return exact[name]
+    return humanise(name).lower()
+
+
+def construction_block(c: dict[str, Any], artifact_path: str | None, status: str, consumer_pin: str | None) -> dict[str, Any]:
+    """A back-to-front curve recipe: runtime flag, form, formula, parameters, sources, and constructing files."""
+    rows = c.get("parameters_rows") or []
+    construction_sources = c.get("construction_sources") or c.get("sources_resolved") or []
+    sources_by_id = {(s.get("id") or s.get("source_id")): s for s in construction_sources if s.get("id") or s.get("source_id")}
+    params = c.get("parameters") or {}
+    if not isinstance(params, dict):
+        params = {"parameters": params}
+    parameter_docs = []
+    for name, value in params.items():
+        matched = [r for r in rows if r.get("id") == name or r.get("name") == name]
+        source_ids = sorted({sid for r in matched for sid in r.get("source_ids") or []})
+        parameter_docs.append({
+            "name": name, "definition": _parameter_definition(name), "value": value,
+            "value_path": f"{artifact_path}::curve_id={c.get('curve_id')}::parameters.{name}" if artifact_path else None,
+            "tier": tier_span([r.get("tier") for r in matched]) if matched else None,
+            "tier_word": tier_words(tier_span([r.get("tier") for r in matched])) if matched else None,
+            "reasoning": ([r.get("reasoning") for r in matched if r.get("reasoning")] or
+                          ["No parameter-specific register row; use the curve-level construction sources and artifact value path."]),
+            "source_ids": source_ids or [s.get("id") or s.get("source_id") for s in construction_sources if s.get("id") or s.get("source_id")],
+            "sources": [sources_by_id[sid] for sid in source_ids if sid in sources_by_id] if matched else construction_sources,
+            "register_rows": [r.get("id") for r in matched], "source_scope": "parameter" if matched else "curve",
+        })
+    unmatched_rows = [r for r in rows if r.get("id") not in params and r.get("name") not in params]
+    production_state = "runtime_indexed" if status == "live" and consumer_pin else ("reused_binding" if status == "reused" else "not_runtime_indexed")
+    return {
+        "curve_type": c.get("form_label") or humanise(c.get("curve_form") or "unspecified"),
+        "curve_form": c.get("curve_form"), "formula": FORMULAS.get(c.get("curve_form")),
+        "axis": c.get("axis"), "parameters": parameter_docs, "additional_parameter_rows": unmatched_rows,
+        "sources": construction_sources, "source_ids": c.get("sources_for_curve") or [s.get("id") or s.get("source_id") for s in construction_sources if s.get("id") or s.get("source_id")],
+        "artifact": artifact_path, "evaluator": c.get("evaluator"),
+        "production_use": {
+            "state": production_state, "consumer_pin": consumer_pin,
+            "sentence": ("This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
+                         if production_state == "runtime_indexed" else
+                         "This is a consumer binding that reuses a source curve; it is not a separate runtime-indexed curve."
+                         if production_state == "reused_binding" else
+                         "This curve is not in the runtime index."),
+        },
+    }
+
+
 # ─── per-entry facts ──────────────────────────────────────────────────────────────────────────────────────────
 
 def value_facts(e: Entry) -> dict[str, Any] | None:
@@ -505,6 +573,8 @@ def build(write: bool = True) -> dict[str, Any]:
             c["rail_plain"] = plain_rail(e.status, exists_chip(e).get("qualifier"), c["tiers"].get("shape") or "–", c["tiers"].get("cost") or "–", occ_row["state"] if occ_row else occ_state_overall, occ_row["state"].replace("_", " ") if occ_row else occ_label, review_block(e))
             c["versions"] = _versions(e)
             c["data_path"] = f"curves/{e.id}/{c['curve_id']}@{c['version_key']}.json"
+            c["construction_sources"] = c["sources_resolved"] or key_refs
+            c["construction"] = construction_block(c, e.artifact_path, e.status, e.identity.get("consumer_pin"))
             curves_out[f"{e.id}/{c['curve_id']}@{c['version_key']}"] = c
 
     # 3 · every curve sampled or listed
@@ -736,8 +806,10 @@ def build(write: bool = True) -> dict[str, Any]:
         for e in asset_entries:
             cells[e.id]["_curves"] = [c for c in curves_out.values() if c["entry_id"] == e.id]
         view = asset_view(aslug, a_def, asset_entries, cells, sl, registers, bess_values if aslug == "bess" else None, fb_binding if aslug == "bess" else None, twin,
-                          sub_budget if aslug == "substation" else None, sub_xwalk if aslug == "substation" else None, resolve_state)
+                          sub_budget if aslug == "substation" else None, sub_xwalk if aslug == "substation" else None, resolve_state, curves_out)
         for e in asset_entries:
+            cells[e.id]["subcomponents"] = [s for s in view["subcomponents"] if s["entry_id"] == e.id]
+            cells[e.id]["subcomponent_rollup"] = view["subcomponent_rollup"]["by_hazard"].get(hazard_slug(e.data["hazard"], sl))
             cells[e.id].pop("_curves", None)
         status_by_hz = {hazard_slug(e.data["hazard"], sl): e.status for e in asset_entries}
         reference = None
@@ -758,7 +830,8 @@ def build(write: bool = True) -> dict[str, Any]:
         searched_any = any(r["register"].get("last_searched") for (asl, _), r in registers.items() if asl == aslug)
         assets_out[aslug] = {"asset": {**a_def, "href": f"/assets/{aslug}"}, "summary": asset_plain_sentence(a_def, view["rows"], sl["hazards"], status_by_hz),
                              "summary_v0": asset_sentence(a_def.get("noun", a_def["label"]), sorted([{"hazard": e.data["hazard"], "slug": hazard_slug(e.data["hazard"], sl), "status": e.status, "tiers": {"shape": cells[e.id]["rail"]["evidence"]["shape"], "cost": cells[e.id]["rail"]["evidence"]["cost"]}, "entry_id": e.id} for e in asset_entries], key=lambda c: hz_order.index(c["slug"])), searched_any),
-                             "reference": reference, "hazards": hazards_cols, "rows": view["rows"], "parts_by_cell": view["parts_by_cell"], "split": view["split"], "twin": view["twin"],
+                             "reference": reference, "hazards": hazards_cols, "rows": view["rows"], "parts_by_cell": view["parts_by_cell"],
+                             "subcomponents": view["subcomponents"], "subcomponent_rollup": view["subcomponent_rollup"], "split": view["split"], "twin": view["twin"],
                              "value_source": view["value_source"], "entries": [t for t in tiles if t["asset"]["slug"] == aslug], "has_buckets": aslug in ("bess", "substation"),
                              "twin_crosswalk": {"sha256": twin.get("sha256"), "rows": twin.get("rows")} if aslug == "bess" else ({"sha256": sub_xwalk.get("sha256"), "rows": len(sub_xwalk.get("rows") or [])} if aslug == "substation" and sub_xwalk.get("available") else None)}
     # ─── occurrence pages ───
@@ -780,6 +853,24 @@ def build(write: bool = True) -> dict[str, Any]:
             "state_overall": "not_searched" if all(v["state"] == "not_searched" for v in buckets.values()) else "mixed",
             "suggested_next": "search first" if all(v["state"] == "not_searched" for v in buckets.values()) and reg.get("effect") == "damage" else None,
         }
+
+    subcomponent_problems = []
+    for aslug, asset in assets_out.items():
+        expected = len(asset["rows"]) * len(sl["hazards"])
+        if len(asset["subcomponents"]) != expected:
+            subcomponent_problems.append(f"{aslug}: {len(asset['subcomponents'])} records, expected {expected}")
+        for s_ in asset["subcomponents"]:
+            if s_["coverage"] == "curve" and s_["curve_ids"] and len(s_["construction"]) != len(s_["curve_ids"]):
+                subcomponent_problems.append(f"{aslug}/{s_['hazard']['slug']}/{s_['key']}: construction does not resolve every curve")
+            if s_["completeness"] == "incomplete" and not (s_.get("gap") or {}).get("reason"):
+                subcomponent_problems.append(f"{aslug}/{s_['hazard']['slug']}/{s_['key']}: incomplete without a reason")
+        r_ = asset["subcomponent_rollup"]
+        if r_["with_curve"] + r_["gap"] != r_["expected"] or r_["complete"] + r_["incomplete"] != r_["expected"]:
+            subcomponent_problems.append(f"{aslug}: rollup does not reconcile")
+    check("subcomponents", "every expected subcomponent has a curve/gap state, completeness state, evidence label, and construction or gap lineage",
+          not subcomponent_problems, {"records": sum(len(a["subcomponents"]) for a in assets_out.values()), "problems": subcomponent_problems})
+    # Include the coverage and subcomponent checks, which are assembled after the per-cell checks above.
+    failed = [c for c in checks if not c["ok"]]
 
     receipt = {
         "schema": "damage_dashboard_receipt.v1", "built_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "commit": manifest["commit"], "commit_full": manifest["commit_full"],

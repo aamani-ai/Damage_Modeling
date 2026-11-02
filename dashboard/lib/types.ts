@@ -88,6 +88,28 @@ export interface Part {
   occurrence: { mark: string; state: string; sentence: string } | null; drawn: boolean;
 }
 
+export interface SubcomponentConstruction {
+  curve_id: string; data_path: string | null; curve_type: string; curve_form: string | null; formula: string | null;
+  axis: Axis | null; parameters: { name: string; definition: string; value: unknown; value_path: string | null; tier: string | null; tier_word: string | null; reasoning: string[]; source_ids: string[]; sources: Record<string, unknown>[]; register_rows: string[]; source_scope: "parameter" | "curve" }[];
+  additional_parameter_rows: Record<string, unknown>[]; sources: Record<string, unknown>[]; source_ids: string[];
+  artifact: string | null; evaluator: Record<string, unknown> | null;
+  production_use: { state: "runtime_indexed" | "reused_binding" | "not_runtime_indexed"; consumer_pin: string | null; sentence: string };
+}
+
+export interface Subcomponent {
+  key: string; label: string; asset: Slug; hazard: Hazard; entry_id: string | null; catalogue_status: Status | "missing";
+  cell_state: string; coverage: "curve" | "gap"; completeness: "complete" | "incomplete"; curve_ids: string[]; failure_unit_ids: string[];
+  tier_span: string; evidence_labels: ("field-calibrated" | "published" | "borrowed" | "our judgment")[]; evidence_words: string;
+  construction: SubcomponentConstruction[];
+  production_use: { state: "runtime_indexed" | "reused_binding" | "not_runtime_indexed"; consumer_pin: string | null };
+  gap: { reason: string; occurrence: OccurrenceBucket | null; register: { path: string; sha256: string; search_log: string | null; last_searched: string | null; question: string | null } | null } | null;
+}
+
+export interface SubcomponentRollup {
+  expected: number; with_curve: number; gap: number; complete: number; incomplete: number;
+  evidence_labels: Record<string, number>; by_hazard?: Record<string, SubcomponentRollup>;
+}
+
 export interface OccurrenceBucket {
   bucket: string; label?: string; state: string; mark: string; sentence: string; reports: Record<string, unknown>[];
   twin_lead: { level: string | null; nodes: { node: string; name: string; level: number; why: string }[] } | null;
@@ -123,6 +145,7 @@ export interface Cell {
   files: Record<string, string | null>; folder_files: FileRef[]; gap_reason: string | null;
   binding: { source_cell_id: string | null; source_entry_id: string | null; reused_curves: string[]; transfer_rationale: string | null; transfer_tier: string | null; status: string | null; limitations: unknown } | null;
   sampling_notes: string[];
+  subcomponents: Subcomponent[]; subcomponent_rollup: SubcomponentRollup;
   build_findings: { check: string; severity: string; items: unknown[]; sentence: string }[];
 }
 
