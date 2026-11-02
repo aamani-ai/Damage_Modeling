@@ -2484,11 +2484,15 @@
  "build_findings": [],
  "subcomponents": [
   {
-   "key": "house",
-   "label": "House (single-family, slab)",
+   "key": "house:building",
+   "label": "Whole building (structure)",
+   "group": {
+    "key": "house",
+    "label": "House (single-family, slab)"
+   },
    "asset": {
     "slug": "real_estate",
-    "label": "Real estate"
+    "label": "Real Estate"
    },
    "hazard": {
     "slug": "convective_wind",
@@ -2498,14 +2502,16 @@
    },
    "entry_id": "convective_wind_real_estate",
    "catalogue_status": "proposal",
-   "cell_state": "whole",
+   "cell_state": "curve",
    "coverage": "curve",
    "completeness": "complete",
    "curve_ids": [
     "CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96",
     "CWRE_RES_EF_FR12_TORNADO"
    ],
-   "failure_unit_ids": [],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
    "tier_span": "T3–4",
    "evidence_labels": [
     "borrowed",
@@ -2566,14 +2572,21 @@
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
+   "share": null,
+   "share_basis": null,
+   "note": "One curve for the whole structure: a single damage ratio applied to 100% of the building's structure replacement cost.",
    "gap": null
   },
   {
-   "key": "warehouse",
-   "label": "Warehouse",
+   "key": "house:roof_cover",
+   "label": "Roof cover",
+   "group": {
+    "key": "house",
+    "label": "House (single-family, slab)"
+   },
    "asset": {
     "slug": "real_estate",
-    "label": "Real estate"
+    "label": "Real Estate"
    },
    "hazard": {
     "slug": "convective_wind",
@@ -2587,10 +2600,245 @@
    "coverage": "curve",
    "completeness": "complete",
    "curve_ids": [
+    "CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96",
+    "CWRE_RES_EF_FR12_TORNADO"
+   ],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
+   "tier_span": "T3–4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed and our judgment",
+   "construction": [
+    {
+     "curve_id": "CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96",
+     "data_path": "curves/convective_wind_real_estate/CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "House",
+     "scope_note": null
+    },
+    {
+     "curve_id": "CWRE_RES_EF_FR12_TORNADO",
+     "data_path": "curves/convective_wind_real_estate/CWRE_RES_EF_FR12_TORNADO@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "House",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": "No curve of its own: the whole-building curve prices the roof cover with the rest of the structure.",
+   "gap": null
+  },
+  {
+   "key": "house:walls_windows",
+   "label": "Walls and windows",
+   "group": {
+    "key": "house",
+    "label": "House (single-family, slab)"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "whole",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96",
+    "CWRE_RES_EF_FR12_TORNADO"
+   ],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
+   "tier_span": "T3–4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed and our judgment",
+   "construction": [
+    {
+     "curve_id": "CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96",
+     "data_path": "curves/convective_wind_real_estate/CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "House",
+     "scope_note": null
+    },
+    {
+     "curve_id": "CWRE_RES_EF_FR12_TORNADO",
+     "data_path": "curves/convective_wind_real_estate/CWRE_RES_EF_FR12_TORNADO@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "House",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": "No curve of its own: the whole-building curve prices the walls and windows with the rest of the structure.",
+   "gap": null
+  },
+  {
+   "key": "house:contents",
+   "label": "Contents",
+   "group": {
+    "key": "house",
+    "label": "House (single-family, slab)"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": null,
+   "gap": {
+    "reason": "The cell declares contents as their own failure unit and withholds them (not zero): contents deferred separate failure unit, no runtime curve for pathway unit.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null
+   }
+  },
+  {
+   "key": "warehouse:building",
+   "label": "Whole building (structure)",
+   "group": {
+    "key": "warehouse",
+    "label": "Warehouse"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
     "CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96",
     "CWRE_IND_EF_MBS_TORNADO"
    ],
-   "failure_unit_ids": [],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
    "tier_span": "T3–4",
    "evidence_labels": [
     "borrowed",
@@ -2651,14 +2899,21 @@
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
+   "share": null,
+   "share_basis": null,
+   "note": "One curve for the whole structure: a single damage ratio applied to 100% of the building's structure replacement cost.",
    "gap": null
   },
   {
-   "key": "office",
-   "label": "Office (three storeys)",
+   "key": "warehouse:roof_cover",
+   "label": "Roof cover",
+   "group": {
+    "key": "warehouse",
+    "label": "Warehouse"
+   },
    "asset": {
     "slug": "real_estate",
-    "label": "Real estate"
+    "label": "Real Estate"
    },
    "hazard": {
     "slug": "convective_wind",
@@ -2672,10 +2927,245 @@
    "coverage": "curve",
    "completeness": "complete",
    "curve_ids": [
+    "CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96",
+    "CWRE_IND_EF_MBS_TORNADO"
+   ],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
+   "tier_span": "T3–4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed and our judgment",
+   "construction": [
+    {
+     "curve_id": "CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96",
+     "data_path": "curves/convective_wind_real_estate/CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Warehouse",
+     "scope_note": null
+    },
+    {
+     "curve_id": "CWRE_IND_EF_MBS_TORNADO",
+     "data_path": "curves/convective_wind_real_estate/CWRE_IND_EF_MBS_TORNADO@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Warehouse",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": "No curve of its own: the whole-building curve prices the roof cover with the rest of the structure.",
+   "gap": null
+  },
+  {
+   "key": "warehouse:walls_windows",
+   "label": "Walls and windows",
+   "group": {
+    "key": "warehouse",
+    "label": "Warehouse"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "whole",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96",
+    "CWRE_IND_EF_MBS_TORNADO"
+   ],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
+   "tier_span": "T3–4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed and our judgment",
+   "construction": [
+    {
+     "curve_id": "CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96",
+     "data_path": "curves/convective_wind_real_estate/CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Warehouse",
+     "scope_note": null
+    },
+    {
+     "curve_id": "CWRE_IND_EF_MBS_TORNADO",
+     "data_path": "curves/convective_wind_real_estate/CWRE_IND_EF_MBS_TORNADO@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Warehouse",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": "No curve of its own: the whole-building curve prices the walls and windows with the rest of the structure.",
+   "gap": null
+  },
+  {
+   "key": "warehouse:contents",
+   "label": "Contents",
+   "group": {
+    "key": "warehouse",
+    "label": "Warehouse"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": null,
+   "gap": {
+    "reason": "The cell declares contents as their own failure unit and withholds them (not zero): contents deferred separate failure unit, no runtime curve for pathway unit.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null
+   }
+  },
+  {
+   "key": "office:building",
+   "label": "Whole building (structure)",
+   "group": {
+    "key": "office",
+    "label": "Office (three storeys)"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
     "CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96",
     "CWRE_OFF_EF_LRB_TORNADO"
    ],
-   "failure_unit_ids": [],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
    "tier_span": "T3–4",
    "evidence_labels": [
     "borrowed",
@@ -2736,14 +3226,21 @@
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
+   "share": null,
+   "share_basis": null,
+   "note": "One curve for the whole structure: a single damage ratio applied to 100% of the building's structure replacement cost.",
    "gap": null
   },
   {
-   "key": "retail",
-   "label": "Retail",
+   "key": "office:roof_cover",
+   "label": "Roof cover",
+   "group": {
+    "key": "office",
+    "label": "Office (three storeys)"
+   },
    "asset": {
     "slug": "real_estate",
-    "label": "Real estate"
+    "label": "Real Estate"
    },
    "hazard": {
     "slug": "convective_wind",
@@ -2753,7 +3250,195 @@
    },
    "entry_id": "convective_wind_real_estate",
    "catalogue_status": "proposal",
-   "cell_state": "not_named",
+   "cell_state": "whole",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96",
+    "CWRE_OFF_EF_LRB_TORNADO"
+   ],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
+   "tier_span": "T3–4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed and our judgment",
+   "construction": [
+    {
+     "curve_id": "CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96",
+     "data_path": "curves/convective_wind_real_estate/CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Office",
+     "scope_note": null
+    },
+    {
+     "curve_id": "CWRE_OFF_EF_LRB_TORNADO",
+     "data_path": "curves/convective_wind_real_estate/CWRE_OFF_EF_LRB_TORNADO@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Office",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": "No curve of its own: the whole-building curve prices the roof cover with the rest of the structure.",
+   "gap": null
+  },
+  {
+   "key": "office:walls_windows",
+   "label": "Walls and windows",
+   "group": {
+    "key": "office",
+    "label": "Office (three storeys)"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "whole",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96",
+    "CWRE_OFF_EF_LRB_TORNADO"
+   ],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
+   "tier_span": "T3–4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed and our judgment",
+   "construction": [
+    {
+     "curve_id": "CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96",
+     "data_path": "curves/convective_wind_real_estate/CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Office",
+     "scope_note": null
+    },
+    {
+     "curve_id": "CWRE_OFF_EF_LRB_TORNADO",
+     "data_path": "curves/convective_wind_real_estate/CWRE_OFF_EF_LRB_TORNADO@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Office",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": "No curve of its own: the whole-building curve prices the walls and windows with the rest of the structure.",
+   "gap": null
+  },
+  {
+   "key": "office:contents",
+   "label": "Contents",
+   "group": {
+    "key": "office",
+    "label": "Office (three storeys)"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "withheld",
    "coverage": "gap",
    "completeness": "incomplete",
    "curve_ids": [],
@@ -2768,8 +3453,11 @@
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
+   "share": null,
+   "share_basis": null,
+   "note": null,
    "gap": {
-    "reason": "This expected subsystem is not named by the cell.",
+    "reason": "The cell declares contents as their own failure unit and withholds them (not zero): contents deferred separate failure unit, no runtime curve for pathway unit.",
     "occurrence": null,
     "effect": "damage",
     "basis": [],
@@ -2777,11 +3465,150 @@
    }
   },
   {
-   "key": "contents",
-   "label": "Contents and inventory",
+   "key": "retail:building",
+   "label": "Whole building (structure)",
+   "group": {
+    "key": "retail",
+    "label": "Retail"
+   },
    "asset": {
     "slug": "real_estate",
-    "label": "Real estate"
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": null,
+   "gap": {
+    "reason": "This cell has no curve for this building.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null
+   }
+  },
+  {
+   "key": "retail:roof_cover",
+   "label": "Roof cover",
+   "group": {
+    "key": "retail",
+    "label": "Retail"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": null,
+   "gap": {
+    "reason": "This cell has no curve for this building.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null
+   }
+  },
+  {
+   "key": "retail:walls_windows",
+   "label": "Walls and windows",
+   "group": {
+    "key": "retail",
+    "label": "Retail"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": null,
+   "gap": {
+    "reason": "This cell has no curve for this building.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null
+   }
+  },
+  {
+   "key": "retail:contents",
+   "label": "Contents",
+   "group": {
+    "key": "retail",
+    "label": "Retail"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
    },
    "hazard": {
     "slug": "convective_wind",
@@ -2795,9 +3622,7 @@
    "coverage": "gap",
    "completeness": "incomplete",
    "curve_ids": [],
-   "failure_unit_ids": [
-    "CWRE_BUILDING_CONTENTS"
-   ],
+   "failure_unit_ids": [],
    "tier_span": "–",
    "evidence_labels": [],
    "evidence_words": "no tier stated",
@@ -2808,8 +3633,11 @@
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
+   "share": null,
+   "share_basis": null,
+   "note": null,
    "gap": {
-    "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT",
+    "reason": "The cell declares contents as their own failure unit and withholds them (not zero): contents deferred separate failure unit, no runtime curve for pathway unit.",
     "occurrence": null,
     "effect": "damage",
     "basis": [],
@@ -2818,16 +3646,16 @@
   }
  ],
  "subcomponent_rollup": {
-  "expected": 5,
-  "with_curve": 3,
-  "gap": 2,
-  "complete": 3,
-  "incomplete": 2,
+  "expected": 16,
+  "with_curve": 9,
+  "gap": 7,
+  "complete": 9,
+  "incomplete": 7,
   "evidence_labels": {
    "field-calibrated": 0,
    "published": 0,
-   "borrowed": 3,
-   "our judgment": 3
+   "borrowed": 9,
+   "our judgment": 9
   }
  }
 }
