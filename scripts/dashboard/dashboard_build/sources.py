@@ -28,6 +28,7 @@ except ImportError:  # pragma: no cover
 HAZARD_REPO_URL = "https://github.com/aamani-ai/Hazard_Modeling"
 DOI_RE = re.compile(r"\b(10\.\d{4,9}/[^\s\"'<>,;)\]]+)")
 URL_RE = re.compile(r"https?://[^\s\"'<>|]+")
+MD_LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
 GENERIC_TOKENS = {"e", "src", "ev", "evid", "the", "of", "and", "for", "a", "an", "to", "in", "on", "with", "by", "or",
                   "public", "result", "results", "context", "declared", "method", "guidance", "baseline", "page", "paper",
                   "report", "memo", "sheet", "data", "v1", "v2", "v0", "doc", "docs", "local", "url", "pdf", "www", "com",
@@ -438,8 +439,8 @@ def match_ids(ids: list[str], sources: list[dict[str, Any]], claims: list[dict[s
     return matched, unmatched
 
 
-def repo_file_sources(ids: list[str], repo_url: str, commit: str) -> list[dict[str, Any]]:
-    """Source IDs that name a file in this repository (e.g. SOLAR_WIND_VALUE_BREAKDOWN → docs/method/value_basis/…xlsx)."""
+def repo_file_sources(ids: list[str], repo_url: str, commit: str, entry_folder: Path | None = None) -> list[dict[str, Any]]:
+    """Source IDs that name a repository file or are explicitly documented in a cell construction document."""
     out = []
     candidates = list((ROOT / "docs" / "method" / "value_basis").glob("*")) if (ROOT / "docs" / "method" / "value_basis").is_dir() else []
     for sid in ids:
@@ -450,6 +451,34 @@ def repo_file_sources(ids: list[str], repo_url: str, commit: str) -> list[dict[s
                             "tier": None, "permitted": None, "prohibited": None, "decision": None, "accessed_on": None,
                             "provenance": "repository-file", "from": {"file": rel(p)}, "aliases": [sid]})
                 break
+        if any(source["id"] == sid for source in out) or entry_folder is None:
+            continue
+        cell_root = entry_folder.parent
+        docs = sorted((cell_root / "basics").glob("*.md")) if (cell_root / "basics").is_dir() else []
+        documented = None
+        for doc in docs:
+            line = next((line for line in doc.read_text(encoding="utf-8").splitlines() if sid in line), None)
+            if line is None:
+                continue
+            target = None
+            for raw in MD_LINK_RE.findall(line):
+                raw = raw.strip().strip("<>")
+                if raw.startswith("http"):
+                    target = raw
+                    break
+                candidate = _repo_path(raw, doc.parent)
+                if candidate is not None:
+                    target = rel(candidate)
+                    break
+            documented = {"doc": doc, "target": target or rel(doc)}
+            break
+        if documented:
+            target = documented["target"]
+            out.append({"id": sid, "title": sid.replace("_", " ").title(),
+                        "citation": f"{sid} — construction provenance documented in {rel(documented['doc'])}",
+                        "url": target, "locator": rel(documented["doc"]), "role": "construction provenance",
+                        "tier": None, "permitted": None, "prohibited": None, "decision": None, "accessed_on": None,
+                        "provenance": "repository-file", "from": {"file": rel(documented["doc"])}, "aliases": [sid]})
     return out
 
 
@@ -480,7 +509,8 @@ def extract_for_entry(entry: Any, registers: dict[str, Any], repo_url: str, comm
         sources.append(s)
     claims = list(wb["claims"]) + list(ds["claims"])
     ids = sorted({sid for p in registers.get("parameters") or [] for sid in p.get("source_ids", [])})
-    sources += repo_file_sources([i for i in ids], repo_url, commit)
+    known_ids = {source_id for source in sources for source_id in [source["id"], *source.get("aliases", [])]}
+    sources += repo_file_sources([i for i in ids if i not in known_ids], repo_url, commit, entry.folder)
     for s in sources:
         resolve_link(s, repo_url, commit, entry.folder)
     matched, unmatched = match_ids(ids, [s for s in sources if s.get("kind") not in ("placeholder",)], claims)

@@ -169,7 +169,7 @@ def exists_chip(e: Entry) -> dict[str, Any]:
 
 def source_id_check(e: Entry, regs: dict[str, Any]) -> list[str]:
     """Every source ID the cell displays must resolve in its register (only for register-backed cells)."""
-    ids = {s["id"] for s in regs.get("sources") or []}
+    ids = {source_id for s in regs.get("sources") or [] for source_id in [s["id"], *s.get("aliases", [])]}
     if not ids or regs.get("extraction"):
         return []
     unresolved = []
@@ -196,11 +196,13 @@ def citations_for(e: Entry, regs: dict[str, Any]) -> dict[str, Any]:
         for sid in c["source_ids"]:
             edges.append({"from": c["id"], "to": sid, "kind": "claim→source"})
     lineage = "extracted" if regs.get("extraction") and sources else ("machine_readable" if sources and (claims or params) else ("parameters_only" if params else "prose_only"))
-    known = {s["id"] for s in sources}
-    unresolved = sorted({ed["to"] for ed in edges if ed["kind"].endswith("source") and ed["to"] not in known}) if known else []
     ex = regs.get("extraction") or {}
+    known = {source_id for s in sources for source_id in [s["id"], *s.get("aliases", [])]}
+    aliases = {alias: s["id"] for s in sources for alias in s.get("aliases", [])}
+    aliases.update(ex.get("matched") or {})
+    unresolved = sorted({ed["to"] for ed in edges if ed["kind"].endswith("source") and ed["to"] not in known}) if known else []
     return {"entry_id": e.id, "lineage": lineage, "paths": regs.get("paths"), "sources": sources, "claims": claims, "parameters": params, "edges": edges,
-            "unresolved_source_ids": unresolved, "aliases": ex.get("matched") or {}, "unmatched_source_ids": ex.get("unmatched") or [],
+            "unresolved_source_ids": unresolved, "aliases": aliases, "unmatched_source_ids": ex.get("unmatched") or [],
             "provenance": ("extracted" if ex.get("status") == "extracted" else "not_yet_extracted" if ex else "register"),
             "extraction": {k: ex.get(k) for k in ("status", "sentence", "dossier", "workbook", "sheets_read", "dossier_sections", "files", "assumptions", "open_seams")} if ex else None,
             "link_counts": link_counts(sources),

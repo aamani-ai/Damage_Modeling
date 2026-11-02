@@ -10,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts" / "dashboard"))
 
-from dashboard_build import common, sources  # noqa: E402
+from dashboard_build import common, registers, sources  # noqa: E402
 
 REPO = "https://github.com/aamani-ai/Damage_Modeling"
 
@@ -57,3 +57,27 @@ def test_a_gitignored_link_to_another_checkout_is_refused(tmp_path, monkeypatch)
         assert _link(url="docs/kept.md")["link"] == f"{REPO}/blob/abc1234/docs/kept.md"
     finally:
         sources._git_visible.cache_clear()
+
+
+def test_all_declared_source_and_claim_registers_are_loaded(tmp_path, monkeypatch):
+    (tmp_path / "sources-1.csv").write_text("source_id,citation,url\nS-001,first,https://example.com/1\n")
+    (tmp_path / "sources-2.csv").write_text("source_id,citation,url\nS-002,second,https://example.com/2\n")
+    (tmp_path / "claims-1.csv").write_text("claim_id,claim_text,source_ids\nC-001,first claim,S-001\n")
+    (tmp_path / "claims-2.csv").write_text("claim_id,claim_text,source_ids\nC-002,second claim,S-002\n")
+    monkeypatch.setattr(registers, "ROOT", tmp_path)
+    loaded = registers.load_registers(
+        {
+            "source_registers": ["sources-1.csv", "sources-2.csv"],
+            "claim_registers": ["claims-1.csv", "claims-2.csv"],
+        },
+        None,
+    )
+    assert [source["id"] for source in loaded["sources"]] == ["S-001", "S-002"]
+    assert [claim["id"] for claim in loaded["claims"]] == ["C-001", "C-002"]
+
+
+def test_legacy_source_alias_is_explicit_and_resolvable():
+    normalized = registers.normalise_sources(
+        [{"source_id": "S-NEW", "citation": "source", "notes": "Legacy alias: S-OLD."}]
+    )
+    assert normalized[0]["aliases"] == ["S-OLD"]

@@ -1,6 +1,7 @@
 """Source, claim and parameter registers, normalised across the header variants the cells use."""
 from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import Any
 
@@ -21,9 +22,13 @@ def normalise_sources(rows: list[dict[str, str]]) -> list[dict[str, Any]]:
         sid = _first(r, "source_id")
         if not sid:
             continue
+        notes = _first(r, "notes") or ""
+        aliases = split_ids(_first(r, "aliases", "source_aliases", "legacy_source_ids"))
+        aliases.extend(re.findall(r"Legacy alias:\s*([A-Z0-9_-]+)", notes, flags=re.I))
         location = _first(r, "location")  # the substation register: a URL or a repository path, with the claim beside it
         out.append({
             "id": sid,
+            "aliases": list(dict.fromkeys(aliases)),
             "citation": _first(r, "citation", "full_citation", "claim", "use") or location or "",
             "url": _first(r, "url", "url_or_repo_path", "primary_url") or (location if location and ("/" in location or location.endswith((".md", ".json", ".csv"))) else None),
             "locator": _first(r, "exact_locator", "locator"),
@@ -83,13 +88,21 @@ def normalise_parameters(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 def load_registers(artifact: dict[str, Any], folder: Path | None) -> dict[str, Any]:
     """The cell's registers: paths from the artifact first, then well-known file names in the folder."""
-    paths: dict[str, str | None] = {"sources": None, "claims": None, "parameters": None}
+    paths: dict[str, Any] = {"sources": None, "claims": None, "parameters": None}
     src = artifact.get("source_register") or ((artifact.get("derivation_rationale") or {}).get("evidence_sources"))
     clm = artifact.get("claim_parameter_register") or ((artifact.get("derivation_rationale") or {}).get("evidence_claims"))
-    if isinstance(artifact.get("source_registers"), list) and not src:
-        src = next((s for s in artifact["source_registers"] if str(s).endswith(".csv")), None)
-    if isinstance(artifact.get("claim_registers"), list) and not clm:
-        clm = next((s for s in artifact["claim_registers"] if str(s).endswith(".csv")), None)
+    source_files = [str(s) for s in artifact.get("source_registers") or [] if str(s).endswith(".csv")]
+    claim_files = [str(s) for s in artifact.get("claim_registers") or [] if str(s).endswith(".csv")]
+    if src:
+        source_files.insert(0, str(src))
+    if clm:
+        claim_files.insert(0, str(clm))
+    source_files = list(dict.fromkeys(source_files))
+    claim_files = list(dict.fromkeys(claim_files))
+    if not src and source_files:
+        src = source_files[0]
+    if not clm and claim_files:
+        clm = claim_files[0]
     if folder is not None:
         if not src:
             src = next((str(p.relative_to(ROOT)) for p in sorted(folder.glob("SOURCE_REGISTER_*.csv"))), None)
@@ -100,11 +113,15 @@ def load_registers(artifact: dict[str, Any], folder: Path | None) -> dict[str, A
             ptt = str((folder / "parameter_register.csv").relative_to(ROOT))
         paths["parameters"] = ptt
     paths["sources"], paths["claims"] = src, clm
+    paths["source_registers"] = source_files
+    paths["claim_registers"] = claim_files
     out: dict[str, Any] = {"paths": paths, "sources": [], "claims": [], "parameters": []}
-    if src and (ROOT / src).exists():
-        out["sources"] = normalise_sources(read_csv(ROOT / src))
-    if clm and (ROOT / clm).exists():
-        out["claims"] = normalise_claims(read_csv(ROOT / clm))
+    for source_file in source_files or ([str(src)] if src else []):
+        if (ROOT / source_file).exists():
+            out["sources"].extend(normalise_sources(read_csv(ROOT / source_file)))
+    for claim_file in claim_files or ([str(clm)] if clm else []):
+        if (ROOT / claim_file).exists():
+            out["claims"].extend(normalise_claims(read_csv(ROOT / claim_file)))
     table = artifact.get("parameter_tier_table")
     if isinstance(table, list) and table:
         out["parameters"] = normalise_parameters(table)
