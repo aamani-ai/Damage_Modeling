@@ -166,44 +166,28 @@ def test_claims_sources_and_parameters_are_each_their_own_row():
         assert not repeated, (entry_id, "parameters", repeated)
 
 
-def test_hazard_use_says_what_hazard_pins_against_the_artifact_shown():
-    """Hazard's own copies of Damage artifacts decide the fact; a copy only on a Hazard branch says it is not on main."""
+def test_hazard_use_has_three_answers_and_says_what_differs():
+    """Used by Hazard / Differs in Hazard / Not used by Hazard's main: every differing cell says why, on its page, and
+    the one check fails for exactly those cells. A reference only on a Hazard branch says it is not on Hazard's main."""
     import pytest
     receipt = json.loads((DATA / "receipt.json").read_text())
-    check = next(c for c in receipt["checks"] if c["id"] == "hazard_versions")
+    check = next(c for c in receipt["checks"] if c["id"] == "hazard_match")
     if "could not be read" in str(check["detail"].get("hazard")):
-        pytest.skip("Hazard's main not readable in this build")
-    uses = {}
-    for path in sorted((DATA / "curves").glob("*/*.json")):
-        curve = json.loads(path.read_text())
-        uses.setdefault(curve["entry_id"], curve["construction"]["production_use"]["hazard"])
-    for use in uses.values():
-        for sentence in use["sentences"]:
-            assert "Hazard's main" in sentence or "No copy" in sentence
-            if not sentence.startswith("No copy") and "branch" in sentence.split(" pin")[0]:
-                assert "not on Hazard's main" in sentence
-    assert check["ok"] == (not check["detail"]["behind"])
-    assert check["ok"] == all(u["newer"] is None for u in uses.values())
-
-
-def test_hazard_use_reads_code_hashes_other_names_and_value_shares():
-    """Hazard's code pins and differently named copies count; a newer pin wins the tag; value shares are compared."""
-    import pytest
-    receipt = json.loads((DATA / "receipt.json").read_text())
-    versions = next(c for c in receipt["checks"] if c["id"] == "hazard_versions")
-    if "could not be read" in str(versions["detail"].get("hazard")):
-        pytest.skip("Hazard's main not readable in this build")
-    uses = {}
-    for path in sorted((DATA / "curves").glob("*/*.json")):
-        curve = json.loads(path.read_text())
-        uses.setdefault(curve["entry_id"], curve["construction"]["production_use"]["hazard"])
+        pytest.skip("Hazard's repository not readable in this build")
     legend = {i["key"] for i in json.loads((DATA / "manifest.json").read_text())["legend"]["hazard_use"]}
-    assert {u["state"] for u in uses.values()} <= legend | {"unchecked"}
+    assert legend == {"used", "differs", "not_main"}
+    uses = {}
+    for path in sorted((DATA / "curves").glob("*/*.json")):
+        curve = json.loads(path.read_text())
+        uses.setdefault(curve["entry_id"], curve["construction"]["production_use"]["hazard"])
     for entry_id, use in uses.items():
-        assert (use["state"] == "newer") == (use["newer"] is not None), entry_id
-    shares = next(c for c in receipt["checks"] if c["id"] == "hazard_value_shares")
-    flagged = {line.split(":")[0] for line in shares["detail"]["mismatches"]}
-    assert flagged == {e for e, u in uses.items() if u["value_mismatches"]}
-    for entry_id in flagged:
-        note = json.loads((DATA / "cells" / f"{entry_id}.json").read_text())["hazard_note"]
-        assert note and any("multiplies" in line for line in note["lines"])
+        assert use["state"] in legend, entry_id
+        assert bool(use["differences"]) == (use["state"] == "differs"), entry_id
+        for sentence in use["sentences"]:
+            if sentence.startswith("Hazard branch"):
+                assert "not on Hazard's main" in sentence
+        note = json.loads((DATA / "cells" / f"{entry_id}.json").read_text()).get("hazard_note")
+        assert bool(note) == (use["state"] == "differs"), entry_id
+    differing = {line.split(":")[0] for line in check["detail"]["differs"]}
+    assert differing == {e for e, u in uses.items() if u["state"] == "differs"}
+    assert check["ok"] == (not differing)

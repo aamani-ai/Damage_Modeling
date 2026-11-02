@@ -259,13 +259,9 @@ def legend(cat_text: str) -> dict[str, Any]:
             {"key": "not_runtime_indexed", "word": "not in production", "meaning": "Not in the runtime index; production cannot call it."},
         ],
         "hazard_use": [
-            {"key": "newer", "word": "Hazard uses a newer version", "meaning": "Hazard pins a newer model version of this cell than the one shown here; the row says how its curves compare."},
-            {"key": "main", "word": "pinned by Hazard's main", "meaning": "Hazard's main pins the artifact shown here by its hash: a copy beside a pin, or a hash in its code."},
-            {"key": "main_model", "word": "Hazard's main pins this model", "meaning": "Hazard's main pins the same model version by hash, at another documentation revision."},
-            {"key": "main_path", "word": "loaded by Hazard's main", "meaning": "Hazard's main code loads this file by path from a local Damage checkout and checks the model version, not the bytes."},
-            {"key": "branch", "word": "pinned on a Hazard branch", "meaning": "Only Hazard branches use this version; it is not on Hazard's main."},
-            {"key": "older", "word": "Hazard uses an older version", "meaning": "Hazard references only older versions of this cell than the one shown here."},
-            {"key": "none", "word": "no Hazard reference", "meaning": "No copy, hash or path of this cell's artifact was found in Hazard's repository; Hazard may still use curves of its own."},
+            {"key": "used", "word": "Used by Hazard", "meaning": "Hazard's main uses this file, or a revision identical to it in everything that can change a loss (curves, value shares, unit treatments)."},
+            {"key": "differs", "word": "Differs in Hazard", "meaning": "Hazard uses something that differs in a way that can change a loss: a newer model, a changed revision, or a different value share. The note says what."},
+            {"key": "not_main", "word": "Not used by Hazard's main", "meaning": "Hazard's main does not use it: only a Hazard branch holds it, or no reference was found."},
         ],
         "where_from": WHERE_FROM,
     }

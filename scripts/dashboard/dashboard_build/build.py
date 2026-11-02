@@ -576,13 +576,10 @@ def build(write: bool = True) -> dict[str, Any]:
     # found nowhere on Hazard is a broken link and fails the check
     check("hazard_links", "every Hazard file the pages name exists on Hazard; the ones not on its main are listed with where they are", not hz_lost,
           {"off_main": hz_off, "not_found": hz_lost, "hazard": hazard_main.state().get("sentence")}, severity="data")
-    behind = [f"{eid}: {u['newer']['words']}" for eid, u in sorted(hazard_uses.items()) if u.get("newer")]
-    check("hazard_versions", "no cell shows an older model version than the one Hazard pins", not behind,
-          {"behind": behind, "cells_used": sum(1 for u in hazard_uses.values() if u["pins"]), "hazard": hazard_main.state().get("sentence")}, severity="data")
-    shares_off = [f"{eid}: {v['unit']} — Hazard {v['share']:.4f} ({v['pin']}), artifact {v['declared']:.4f}"
-                  for eid, u in sorted(hazard_uses.items()) for v in u.get("value_mismatches") or []]
-    check("hazard_value_shares", "every value share Hazard multiplies a curve by matches the share the artifact declares on the same basis", not shares_off,
-          {"mismatches": shares_off, "compared": sum(1 for u in hazard_uses.values() for v in u.get("values") or [] if v.get("declared") is not None)}, severity="data")
+    differs = [f"{eid}: {' '.join(u['differences'])}" for eid, u in sorted(hazard_uses.items()) if u["state"] == "differs"]
+    check("hazard_match", "every curve Hazard uses matches what the page shows in everything that can change a loss", not differs,
+          {"differs": differs, "used": sorted(e for e, u in hazard_uses.items() if u["state"] == "used"),
+           "not_main": sorted(e for e, u in hazard_uses.items() if u["state"] == "not_main"), "hazard": hazard_main.state().get("sentence")}, severity="data")
     faq = build_faq(f"{REPO_URL}/blob/{commit_full}")
     check("faq", "every FAQ question has its date, owner, a short answer and a Read more link that resolves", not faq["errors"], {"errors": faq["errors"], "questions": faq["n_questions"]}, severity="data")
     failed = [c for c in checks if not c["ok"]]
@@ -593,15 +590,12 @@ def build(write: bool = True) -> dict[str, Any]:
     as_order = [a["slug"] for a in sl["assets"]]
     # what Hazard uses, where it differs from the page: a note at the top of the cell page and a word on its tile
     for eid, u in hazard_uses.items():
-        lines = ([u["newer"]["words"]] if u.get("newer") else []) + [s_ for s_ in u.get("sentences") or [] if "multiplies" in s_]
-        cells[eid]["hazard_note"] = {"title": "Hazard uses a newer version of this cell." if u.get("newer") else "Hazard prices this curve with a different value share.",
-                                     "lines": lines} if lines else None
+        cells[eid]["hazard_note"] = {"title": "Differs in Hazard", "lines": u["differences"]} if u["state"] == "differs" else None
     tiles = []
     for e in entries:
         c = cells[e.id]
         tiles.append({
-            "hazard_flag": ("Hazard: newer" if (hazard_uses.get(e.id) or {}).get("newer") else
-                            "Hazard: value share" if (hazard_uses.get(e.id) or {}).get("value_mismatches") else None),
+            "hazard_flag": "Differs in Hazard" if (hazard_uses.get(e.id) or {}).get("state") == "differs" else None,
             "entry_id": e.id, "kind": e.kind, "status": e.status, "title": c["title"], "asset": c["asset"], "hazard": c["hazard"],
             "exists": c["rail"]["exists"], "partial": bool(e.data.get("not_covered")), "tiers": c["rail"]["evidence"], "occurrence": c["rail"]["evidence"]["occurrence"],
             "review": c["rail"]["review"], "identity": c["identity"], "summary": c["summary"], "no_evaluator": c["no_evaluator"],
@@ -742,12 +736,8 @@ def build(write: bool = True) -> dict[str, Any]:
         if lost:
             tasks.append({"kind": "hazard_not_found", "text": f"Fix {len(lost)} Hazard path{'s' if len(lost) != 1 else ''} found nowhere on Hazard", "items": sorted({h_["path"] for h_ in lost}), "href": f"/cells/{e.id}?step=numbers"})
         use = hazard_uses.get(e.id) or {}
-        if use.get("newer"):
-            tasks.append({"kind": "hazard_newer", "text": f"Shown at an older version than Hazard uses: this page shows {use['newer']['shown']}, Hazard pins {use['newer']['model']}",
-                          "items": [use["newer"]["words"]], "href": f"/cells/{e.id}"})
-        if use.get("value_mismatches"):
-            tasks.append({"kind": "hazard_value_share", "text": "Hazard multiplies this curve by a different value share than the artifact declares",
-                          "items": [s_ for s_ in use.get("sentences") or [] if "multiplies" in s_], "href": f"/cells/{e.id}"})
+        if use.get("state") == "differs":
+            tasks.append({"kind": "hazard_differs", "text": "Differs in Hazard: what Hazard uses is not what this page shows", "items": use["differences"], "href": f"/cells/{e.id}"})
         to_confirm = coverage.get("to_confirm", {}).get(e.id) or []
         if to_confirm:
             tasks.append({"kind": "crosswalk_confirm", "text": f"Confirm {len(to_confirm)} part{'s' if len(to_confirm) != 1 else ''} of the coverage picture the cell does not name", "items": [f"{q['type']}: {q['name']} — {q['note']}" for q in to_confirm], "href": f"/cells/{e.id}?step=covers"})
@@ -932,11 +922,9 @@ def _check_summary(c: dict[str, Any]) -> str:
         off = len(d.get("off_main") or [])
         return ((f"every Hazard file found; {off} not on Hazard's main (on a branch or moved), listed" if off else "every Hazard file on its main")
                 if c["ok"] else f"{len(d.get('not_found') or [])} Hazard paths found nowhere on Hazard ({d.get('hazard')})")
-    if c["id"] == "hazard_versions":
-        return (f"{d.get('cells_used')} cells used by Hazard; none shown older than Hazard's pin" if c["ok"]
-                else f"{len(d.get('behind') or [])} cells shown at an older model version than Hazard pins")
-    if c["id"] == "hazard_value_shares":
-        return (f"{d.get('compared')} value shares compared; all match" if c["ok"] else f"{len(d.get('mismatches') or [])} value shares differ from the artifact's")
+    if c["id"] == "hazard_match":
+        return (f"{len(d.get('used') or [])} cells used by Hazard as shown" if c["ok"]
+                else f"{len(d.get('differs') or [])} cells differ in Hazard from what the page shows")
     if c["id"] == "faq":
         return f"{d.get('questions')} questions, every link resolves" if c["ok"] else f"{len(d.get('errors') or [])} problems"
     return "ok" if c["ok"] else "failed"

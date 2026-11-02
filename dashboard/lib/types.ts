@@ -119,7 +119,7 @@ export interface SubcomponentConstructionRef {
 
 export interface LegendItem { key: string; word: string; meaning: string }
 // what Hazard pins for a cell, against the artifact the page shows (hazard_use.py)
-export type HazardUseState = "newer" | "main" | "main_model" | "main_path" | "branch" | "older" | "none" | "unchecked";
+export type HazardUseState = "used" | "differs" | "not_main" | "unchecked";
 export interface HazardUse { state: HazardUseState; sentences: string[]; newer: { model: string; docs: string; shown: string | null; words: string } | null }
 export interface Legend {
   source: string; status: LegendItem[]; coverage: LegendItem[]; completeness: LegendItem[]; evidence: LegendItem[]; production: LegendItem[]; hazard_use: LegendItem[];

@@ -30,6 +30,9 @@ CODE_PATH = re.compile(r"damage_modeling/(docs/cells/([a-z0-9_]+)/[\w/.@-]*?curv
 HEX64 = re.compile(r"\b[0-9a-f]{64}\b")
 # the share fields an artifact declares, by the basis they are a share of
 INSTALLED_SHARE = "direct_hardware_value_share_installed_capex"
+SHARE_WORDS = {"direct_hardware_value_share_installed_capex": "value share of installed capex",
+               "direct_hardware_value_share_physical_base": "value share of the physical base",
+               "default_value_share_physical_base": "default value share of the physical base"}
 
 
 def _git(repo: Path, *args: str) -> subprocess.CompletedProcess:
@@ -50,6 +53,12 @@ def _records(d: dict[str, Any]) -> dict[str, Any]:
     for p in d.get("pathways") or []:
         out.update({r["curve_id"]: r.get("parameters") for r in p.get("curve_records") or [] if r.get("curve_id")})
     return out
+
+
+def _units(d: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    """What of each failure unit can change a loss: its treatment and its numeric value shares (wording does not)."""
+    return {u["id"]: {"treatment": u.get("treatment"), **{k: v for k, v in u.items() if "share" in k and isinstance(v, (int, float))}}
+            for u in d.get("failure_units") or [] if u.get("id")}
 
 
 def _pin_values(d: Any) -> list[dict[str, Any]]:
@@ -121,7 +130,7 @@ def copies() -> tuple[dict[str, Any], ...]:
         main = sorted({p for r, p in where if r == "main"})
         out.append({"cell_id": d["cell_id"], "model": d.get("semantic_damage_model_version"), "docs": d.get("documentation_revision"),
                     "sha256": hashlib.sha256(raw).hexdigest(), "on_main": bool(main), "main_paths": main,
-                    "branches": sorted({r for r, _ in where if r != "main"}), "records": _records(d), "values": values})
+                    "branches": sorted({r for r, _ in where if r != "main"}), "records": _records(d), "units": _units(d), "values": values})
     return tuple(sorted(out, key=lambda c: (c["cell_id"], _model(c["model"]), _model(c["docs"]))))
 
 
@@ -147,7 +156,8 @@ def _ours(cell_id: str) -> dict[str, dict[str, Any]]:
     for f in sorted((ROOT / "docs" / "cells" / cell_id).rglob("*curve_artifact.json")):
         raw = f.read_bytes()
         d = json.loads(raw)
-        out[hashlib.sha256(raw).hexdigest()] = {"path": rel(f), "model": d.get("semantic_damage_model_version"), "docs": d.get("documentation_revision")}
+        out[hashlib.sha256(raw).hexdigest()] = {"path": rel(f), "model": d.get("semantic_damage_model_version"), "docs": d.get("documentation_revision"),
+                                                "records": _records(d), "units": _units(d)}
     return out
 
 
@@ -176,81 +186,90 @@ def _where_words(on_main: bool, branches: list[str]) -> tuple[str, str]:
     return f"Hazard branch{'es' if len(branches) > 1 else ''} {shown} (not on Hazard's main)", ("pins" if len(branches) == 1 else "pin")
 
 
-def _curve_diff(pinned: dict[str, Any], shown: dict[str, Any]) -> str:
-    same = [k for k in shown if k in pinned and pinned[k] == shown[k]]
-    changed = [k for k in shown if k in pinned and pinned[k] != shown[k]]
-    dropped = [k for k in shown if k not in pinned]
-    added = [k for k in pinned if k not in shown]
-    if not changed and not dropped and not added:
-        return f"its {len(same)} curve{'s are' if len(same) != 1 else ' is'} identical to the ones shown here"
-    parts = [f"{len(same)} of the {len(shown)} curves shown here are identical"]
+def _loss_diff(pinned: dict[str, Any], shown: dict[str, Any]) -> list[str]:
+    """What differs between two artifacts in anything that can change a loss: curve parameters, curves dropped or
+    added, a unit's treatment, a unit's numeric value share."""
+    pr, sr = pinned.get("records") or {}, shown.get("records") or {}
+    out = []
+    changed = [k for k in sr if k in pr and pr[k] != sr[k]]
+    dropped, added = [k for k in sr if k not in pr], [k for k in pr if k not in sr]
     if changed:
-        parts.append(f"{len(changed)} {'have' if len(changed) != 1 else 'has'} different parameters ({', '.join(changed[:4])})")
+        out.append(f"{len(changed)} curve{'s have' if len(changed) != 1 else ' has'} different parameters ({', '.join(changed[:4])})")
     if dropped:
-        parts.append(f"it drops {len(dropped)} ({', '.join(dropped[:4])})")
+        out.append(f"Hazard's version drops {len(dropped)} curve{'s' if len(dropped) != 1 else ''} shown here ({', '.join(dropped[:4])})")
     if added:
-        parts.append(f"it adds {len(added)} ({', '.join(added[:4])})")
-    return "; ".join(parts)
+        out.append(f"Hazard's version adds {len(added)} curve{'s' if len(added) != 1 else ''} ({', '.join(added[:4])})")
+    pu, su = pinned.get("units") or {}, shown.get("units") or {}
+    for uid in sorted(set(pu) & set(su)):
+        a, b = pu[uid], su[uid]
+        if a.get("treatment") != b.get("treatment"):
+            out.append(f"{uid} is treated as {a.get('treatment')} in Hazard's version, {b.get('treatment')} here")
+        for k in sorted((set(a) | set(b)) - {"treatment"}):
+            if a.get(k) != b.get(k):
+                ha = f"{a[k]:.2%}" if k in a else "none"
+                hb = f"{b[k]:.2%}" if k in b else "none"
+                out.append(f"{uid}'s {SHARE_WORDS.get(k, k.replace('_', ' '))} is {ha} in Hazard's version, {hb} here")
+    return out
+
+
+def _same_curves(pinned: dict[str, Any], shown: dict[str, Any]) -> str:
+    n = len(shown.get("records") or {})
+    same = sum(1 for k, v in (shown.get("records") or {}).items() if (pinned.get("records") or {}).get(k) == v)
+    return f"{'all ' if same == n and n > 1 else ''}{same} of the {n} curve{'s' if n != 1 else ''} shown here {'are' if same != 1 else 'is'} identical" if same != n else \
+        (f"its {n} curve{'s are' if n != 1 else ' is'} identical to the ones shown here")
 
 
 def for_cell(cell_id: str, artifact_path: str | None) -> dict[str, Any]:
-    """What Hazard uses of this cell, against the artifact the page shows."""
+    """Does Hazard use what this page shows? One of three answers, and a sentence per reference saying what Hazard
+    uses, what the page shows, and what differs in anything that can change a loss.
+
+      used      Hazard's main uses this file, or a revision identical in every loss-relevant fact
+      differs   Hazard (main or a branch) uses a newer model, a revision that differs in a loss-relevant fact, or
+                multiplies the curve by a different value share
+      not_main  Hazard's main does not use it: only branches hold an identical copy, or nothing was found
+    """
     if hazard_main.repo() is None:
-        return {"state": "unchecked", "pins": [], "sentences": ["Hazard's main could not be read, so what Hazard uses is not checked."],
-                "newer": None, "values": [], "value_mismatches": []}
+        return {"state": "unchecked", "pins": [], "sentences": ["Hazard's repository could not be read, so whether Hazard uses this is not checked."],
+                "differences": [], "values": [], "value_mismatches": [], "newer": None}
     shown: dict[str, Any] = {}
     if artifact_path and (ROOT / artifact_path).exists():
         raw = (ROOT / artifact_path).read_bytes()
         d = json.loads(raw)
         shown = {"sha256": hashlib.sha256(raw).hexdigest(), "model": d.get("semantic_damage_model_version"), "docs": d.get("documentation_revision"),
-                 "records": _records(d), "path": artifact_path,
+                 "records": _records(d), "units": _units(d), "path": artifact_path,
                  "shares": {u.get("id"): u.get(INSTALLED_SHARE) for u in d.get("failure_units") or [] if isinstance(u.get(INSTALLED_SHARE), (int, float))}}
     pins: list[dict[str, Any]] = []
-    for c in (x for x in copies() if x["cell_id"] == cell_id):
-        subj, verb = _where_words(c["on_main"], c["branches"])
-        same, same_model = c["sha256"] == shown.get("sha256"), c["model"] == shown.get("model")
+
+    def add(kind: str, model: str | None, docs: str | None, sha: str | None, on_main: bool, branches: list[str], facts: dict[str, Any],
+            values: list[dict[str, Any]], code_file: str | None = None) -> None:
+        same = sha is not None and sha == shown.get("sha256")
+        same_model = model == shown.get("model")
+        diffs = [] if same else _loss_diff(facts, shown)
+        subj, verb = ("Hazard's main code (" + code_file + ")", "uses") if code_file else _where_words(on_main, branches)
         if same:
-            words = f"{subj} {verb} the artifact shown here by hash ({c['model']}, {c['docs']})."
-        elif same_model:
-            words = f"{subj} {verb} {c['model']} at {c['docs']} by hash; this page shows {shown.get('docs')} of the same model."
+            words = f"{subj} {verb} the file shown here ({model}, {docs})."
         else:
-            words = (f"{subj} {verb} {c['model']} ({c['docs']}) by hash, not the version shown here ({shown.get('model')}); "
-                     f"{_curve_diff(c['records'], shown.get('records') or {})}. That artifact is {_damage_where(cell_id, c['sha256'])}.")
-        pins.append({"kind": "copy", "model": c["model"], "docs": c["docs"], "same": same, "same_model": same_model, "on_main": c["on_main"],
-                     "branches": c["branches"], "hash": True, "words": words, "values": c["values"]})
+            head = f"{subj} {verb} {model}, {docs}; this page shows {shown.get('model')}, {shown.get('docs')}"
+            tail = (f"{_same_curves(facts, shown)}, and nothing else that can change a loss differs (the rest is wording)" if not diffs
+                    else f"{_same_curves(facts, shown)}; " + "; ".join(diffs))
+            where = f" Hazard's version is {_damage_where(cell_id, sha)}." if sha and not same_model else ""
+            words = f"{head}. {tail[0].upper() + tail[1:]}.{where}"
+        pins.append({"kind": kind, "model": model, "docs": docs, "same": same, "same_model": same_model, "on_main": on_main, "branches": branches,
+                     "differences": diffs, "words": words, "values": values})
+
+    for c in (x for x in copies() if x["cell_id"] == cell_id):
+        add("copy", c["model"], c["docs"], c["sha256"], c["on_main"], c["branches"], c, c["values"])
     ours = _ours(cell_id)
     for ref in code_refs():
-        hashed = [s for s in ref["shas"] if s in ours]
-        loaded = [p for p in ref["paths"] if f"docs/cells/{cell_id}/" in p]
-        if not hashed and not loaded:
+        hashed = [s_ for s_ in ref["shas"] if s_ in ours]
+        if hashed:
+            t = ours[hashed[0]]
+            add("code_hash", t["model"], t["docs"], hashed[0], True, [], t, [], ref["file"])
             continue
-        target = ours[hashed[0]] if hashed else None
-        path = target["path"] if target else loaded[0]
-        file_model = target["model"] if target else (lambda m: f"model v{m.group(1)}.{m.group(2)}" if m else None)(re.search(r"model_v(\d+)_(\d+)", path))
-        same = (hashed[0] == shown.get("sha256")) if hashed else (path == shown.get("path"))
-        same_model = file_model == shown.get("model")
-        how = "by hash" if hashed else "by path from a local Damage checkout, checking the model version but not the bytes"
-        if same:
-            words = f"Hazard's main code ({ref['file']}) loads the artifact shown here {how}."
-        else:
-            words = f"Hazard's main code ({ref['file']}) loads {path} {how}; this page shows {shown.get('path')}."
-        pins.append({"kind": "code_hash" if hashed else "code_path", "model": file_model, "docs": target["docs"] if target else None, "same": same,
-                     "same_model": same_model, "on_main": True, "branches": [], "hash": bool(hashed), "words": words, "values": []})
-    newer = max((p for p in pins if _model(p["model"]) > _model(shown.get("model"))), key=lambda p: _model(p["model"]), default=None)
-    if newer:
-        state = "newer"
-    elif any(p["on_main"] and p["same"] and p["hash"] for p in pins):
-        state = "main"
-    elif any(p["on_main"] and p["same_model"] and p["hash"] for p in pins):
-        state = "main_model"
-    elif any(p["on_main"] and (p["same"] or p["same_model"]) for p in pins):
-        state = "main_path"
-    elif any(p["same"] or p["same_model"] for p in pins):
-        state = "branch"
-    elif pins:
-        state = "older"
-    else:
-        state = "none"
+        loaded = [p for p in ref["paths"] if f"docs/cells/{cell_id}/" in p]
+        if loaded:  # by path only: the model version is checked, the bytes are not
+            t = next((v for v in ours.values() if v["path"] == loaded[0]), None)
+            add("code_path", t["model"] if t else None, t["docs"] if t else None, None, True, [], t or {}, [], ref["file"])
     # value shares: what Hazard's pins multiply a unit's curve by, against the installed-basis share the artifact declares
     values, mismatches = [], []
     for p in pins:
@@ -260,11 +279,22 @@ def for_cell(cell_id: str, artifact_path: str | None) -> dict[str, Any]:
             values.append(row)
             if declared is not None and "install" in v["basis"].lower() and abs(declared - v["share"]) > 1e-4:
                 mismatches.append(row)
-    sentences = [p["words"] for p in pins] or [
+    newer = max((p for p in pins if _model(p["model"]) > _model(shown.get("model"))), key=lambda p: _model(p["model"]), default=None)
+    main_same_model = [p for p in pins if p["on_main"] and (p["same"] or p["same_model"])]
+    differs_on_main = [p for p in main_same_model if p["differences"]]
+    if newer or mismatches or (differs_on_main and not any(p["same"] for p in main_same_model)):
+        state = "differs"
+    elif main_same_model:
+        state = "used"
+    else:
+        state = "not_main"
+    share_lines = [f"{v['where']} ({v['pin']}) multiplies {v['unit']} by {v['share']:.2%} of installed value"
+                   + (f" ({v['note']})" if v.get("note") else "") + f"; the artifact shown here declares {v['declared']:.2%} of installed capex."
+                   for v in mismatches]
+    sentences = [p["words"] for p in pins] + share_lines or [
         "No copy, hash or path of this cell's artifact was found in Hazard's repository; Hazard may still use curves of its own."]
-    for v in mismatches:
-        sentences.append(f"{v['where']} ({v['pin']}) multiplies {v['unit']} by {v['share']:.2%} of installed value"
-                         + (f" ({v['note']})" if v.get("note") else "") + f"; the artifact shown here declares {v['declared']:.2%} of installed capex.")
-    return {"state": state, "pins": [{k: p[k] for k in ("kind", "model", "docs", "same", "same_model", "on_main", "branches", "hash", "words")} for p in pins],
-            "sentences": sentences, "values": values, "value_mismatches": mismatches,
+    # the lines that say why a cell differs, for the note at the top of its page, its Review task and the build check
+    why = ([newer["words"]] if newer else []) + [p["words"] for p in differs_on_main if p is not newer] + share_lines
+    return {"state": state, "pins": [{k: p[k] for k in ("kind", "model", "docs", "same", "same_model", "on_main", "branches", "differences", "words")} for p in pins],
+            "sentences": sentences, "differences": why if state == "differs" else [], "values": values, "value_mismatches": mismatches,
             "newer": {"model": newer["model"], "docs": newer["docs"], "shown": shown.get("model"), "words": newer["words"]} if newer else None}
