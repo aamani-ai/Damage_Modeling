@@ -38,7 +38,7 @@ export interface Rail {
 }
 
 export interface Tile {
-  entry_id: string; kind: string; status: Status; title: string; asset: Slug; hazard: Slug;
+  entry_id: string; kind: string; status: Status; title: string; asset: Slug; hazard: Slug; hazard_flag?: string | null;
   exists: Rail["exists"]; partial: boolean; tiers: Rail["evidence"]; occurrence: { mark: string; label: string };
   review: Review; identity: Identity; summary: string; no_evaluator: boolean; share_covered: number | null;
   n_curves: number; n_drawn: number; outside_checks: number; chain_core_as_files: number; generation: string;
@@ -119,8 +119,8 @@ export interface SubcomponentConstructionRef {
 
 export interface LegendItem { key: string; word: string; meaning: string }
 // what Hazard pins for a cell, against the artifact the page shows (hazard_use.py)
-export type HazardUseState = "main" | "main_model" | "branch" | "other" | "none" | "unchecked";
-export interface HazardUse { state: HazardUseState; sentences: string[]; newer: { model: string; docs: string; shown: string | null; where: string } | null }
+export type HazardUseState = "newer" | "main" | "main_model" | "main_path" | "branch" | "older" | "none" | "unchecked";
+export interface HazardUse { state: HazardUseState; sentences: string[]; newer: { model: string; docs: string; shown: string | null; words: string } | null }
 export interface Legend {
   source: string; status: LegendItem[]; coverage: LegendItem[]; completeness: LegendItem[]; evidence: LegendItem[]; production: LegendItem[]; hazard_use: LegendItem[];
   where_from: Record<WhereFrom, string>;
@@ -288,7 +288,7 @@ export interface Caption {
   seen_in_field: { sentence: string; state: string; href: string | null; words: string };
   main_references: KeyReference[]; references_from: string;
 }
-export type CellV2 = Cell & { plain: Plain };
+export type CellV2 = Cell & { plain: Plain; hazard_note?: { title: string; lines: string[] } | null };
 export type CurveV2 = Curve & { caption: Caption; sources_resolved: SourceRow[]; plain_tiers: { shape: string; cost: string }; rail_plain: Plain["rail"] };
 
 export interface AssetCellV2 {

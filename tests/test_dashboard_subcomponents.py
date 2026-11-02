@@ -184,3 +184,26 @@ def test_hazard_use_says_what_hazard_pins_against_the_artifact_shown():
                 assert "not on Hazard's main" in sentence
     assert check["ok"] == (not check["detail"]["behind"])
     assert check["ok"] == all(u["newer"] is None for u in uses.values())
+
+
+def test_hazard_use_reads_code_hashes_other_names_and_value_shares():
+    """Hazard's code pins and differently named copies count; a newer pin wins the tag; value shares are compared."""
+    import pytest
+    receipt = json.loads((DATA / "receipt.json").read_text())
+    versions = next(c for c in receipt["checks"] if c["id"] == "hazard_versions")
+    if "could not be read" in str(versions["detail"].get("hazard")):
+        pytest.skip("Hazard's main not readable in this build")
+    uses = {}
+    for path in sorted((DATA / "curves").glob("*/*.json")):
+        curve = json.loads(path.read_text())
+        uses.setdefault(curve["entry_id"], curve["construction"]["production_use"]["hazard"])
+    legend = {i["key"] for i in json.loads((DATA / "manifest.json").read_text())["legend"]["hazard_use"]}
+    assert {u["state"] for u in uses.values()} <= legend | {"unchecked"}
+    for entry_id, use in uses.items():
+        assert (use["state"] == "newer") == (use["newer"] is not None), entry_id
+    shares = next(c for c in receipt["checks"] if c["id"] == "hazard_value_shares")
+    flagged = {line.split(":")[0] for line in shares["detail"]["mismatches"]}
+    assert flagged == {e for e, u in uses.items() if u["value_mismatches"]}
+    for entry_id in flagged:
+        note = json.loads((DATA / "cells" / f"{entry_id}.json").read_text())["hazard_note"]
+        assert note and any("multiplies" in line for line in note["lines"])

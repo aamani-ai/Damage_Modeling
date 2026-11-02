@@ -18,7 +18,7 @@ export function ProductionTag({ state, legend }: { state: ProductionState; legen
 export function HazardUseTag({ state, legend }: { state: HazardUseState; legend: Legend }) {
   const item = legend.hazard_use.find((p) => p.key === state);
   if (!item) return null;
-  return <Tag tone={state === "main" || state === "main_model" ? "accent" : state === "other" ? "warn" : "neutral"} title={item.meaning}>{item.word}</Tag>;
+  return <Tag tone={state === "newer" ? "warn" : state === "main" || state === "main_model" || state === "main_path" ? "accent" : "neutral"} title={item.meaning}>{item.word}</Tag>;
 }
 
 function value(v: unknown): string {

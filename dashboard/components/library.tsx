@@ -54,6 +54,7 @@ function TileBox({ t, lens, tabIndex, onKey, rc }: { t: LibraryTile; lens: strin
         <span className={gap ? "" : t.status === "live" ? "text-foreground" : "text-muted-foreground"}>{STATUS_WORD[t.status]}</span>
         {t.partial && !gap ? <span className="text-[10px] font-normal text-muted-foreground">· partial</span> : null}
         {t.no_evaluator ? <span className="ml-auto whitespace-nowrap text-[10px] font-normal text-muted-foreground">not drawn</span> : null}
+        {t.hazard_flag && !gap ? <span className="ml-auto whitespace-nowrap rounded-sm bg-warn-bg px-1 text-[10px] font-normal text-foreground">{t.hazard_flag}</span> : null}
       </span>
       <span className={`truncate text-[11px] ${gap ? "" : "text-muted-foreground"}`}>{second(t, lens)}</span>
     </Link>

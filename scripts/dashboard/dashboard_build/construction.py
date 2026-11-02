@@ -259,11 +259,13 @@ def legend(cat_text: str) -> dict[str, Any]:
             {"key": "not_runtime_indexed", "word": "not in production", "meaning": "Not in the runtime index; production cannot call it."},
         ],
         "hazard_use": [
-            {"key": "main", "word": "pinned by Hazard's main", "meaning": "Hazard's main keeps a copy of the artifact shown here and pins it."},
-            {"key": "main_model", "word": "Hazard's main pins this model", "meaning": "Hazard's main pins the same model version at another documentation revision."},
-            {"key": "branch", "word": "pinned on a Hazard branch", "meaning": "Only Hazard branches pin this version; it is not on Hazard's main."},
-            {"key": "other", "word": "Hazard pins another version", "meaning": "Hazard pins a different model version of this cell than the one shown here."},
-            {"key": "none", "word": "no Hazard pin", "meaning": "No copy of this cell's artifact was found on Hazard's main or its branches."},
+            {"key": "newer", "word": "Hazard uses a newer version", "meaning": "Hazard pins a newer model version of this cell than the one shown here; the row says how its curves compare."},
+            {"key": "main", "word": "pinned by Hazard's main", "meaning": "Hazard's main pins the artifact shown here by its hash: a copy beside a pin, or a hash in its code."},
+            {"key": "main_model", "word": "Hazard's main pins this model", "meaning": "Hazard's main pins the same model version by hash, at another documentation revision."},
+            {"key": "main_path", "word": "loaded by Hazard's main", "meaning": "Hazard's main code loads this file by path from a local Damage checkout and checks the model version, not the bytes."},
+            {"key": "branch", "word": "pinned on a Hazard branch", "meaning": "Only Hazard branches use this version; it is not on Hazard's main."},
+            {"key": "older", "word": "Hazard uses an older version", "meaning": "Hazard references only older versions of this cell than the one shown here."},
+            {"key": "none", "word": "no Hazard reference", "meaning": "No copy, hash or path of this cell's artifact was found in Hazard's repository; Hazard may still use curves of its own."},
         ],
         "where_from": WHERE_FROM,
     }

@@ -50,6 +50,12 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
   return (
     <div>
       <PlainRail title={c.title} rail={c.plain.rail} summary={c.summary} crumbs={crumbs} tierMeaning={m.tier_meaning} tone={c.rail.review.tone} />
+      {c.hazard_note ? (
+        <div className="mt-3 rounded-md border border-warn/40 bg-warn-bg px-3 py-2 text-[11.5px] leading-snug">
+          <span className="font-medium">{c.hazard_note.title}</span>
+          {c.hazard_note.lines.map((l) => <p key={l} className="mt-0.5">{l}</p>)}
+        </div>
+      ) : null}
       <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blob(m.legend.source)} /></div>
       {c.kind === "gap" ? (
         <div className="mt-3 space-y-3">
