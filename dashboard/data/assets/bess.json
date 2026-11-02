@@ -2154,6 +2154,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -2190,6 +2192,8 @@
      },
      "bucket": "battery_enclosures"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/hail.json",
      "sha256": "92c78e1b445872410e3f9eabce63c8278ab8430a6779186fa6cc42d848dac44f",
@@ -2234,7 +2238,7 @@
      "data_path": "curves/flood_bess/BESS_ACTIVE_CONTACT_STATE@model_v1_0__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_bess/current/curve_artifact.json",
      "parameter_count": 6,
      "source_ids": [
@@ -2253,10 +2257,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_bess",
+     "part": "Battery enclosure (active hardware)",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "flood_bess@model_v1_0__docs_r1"
@@ -2293,6 +2302,8 @@
      },
      "bucket": "battery_enclosures"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/flood.json",
      "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",
@@ -2338,7 +2349,7 @@
      "data_path": "curves/tropical_cyclone_wind_bess/BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1@model_v1_0__docs_r1.json",
      "curve_type": "ordered damage state lognormal",
      "curve_form": "ordered_damage_state_lognormal",
-     "formula": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
      "artifact": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
      "parameter_count": 12,
      "source_ids": [
@@ -2353,15 +2364,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
     },
     {
      "curve_id": "BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1",
      "data_path": "curves/tropical_cyclone_wind_bess/BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1@model_v1_0__docs_r1.json",
      "curve_type": "ordered damage state lognormal",
      "curve_form": "ordered_damage_state_lognormal",
-     "formula": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
      "artifact": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
      "parameter_count": 12,
      "source_ids": [
@@ -2376,10 +2390,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
@@ -2410,6 +2429,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -2434,6 +2455,8 @@
      },
      "bucket": "battery_enclosures"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/convective_wind.json",
      "sha256": "3a6845c97fd618dfb7929f3dbe74f1df1ec6d3e0e9eece87f47af774e50a805f",
@@ -2483,7 +2506,7 @@
      "data_path": "curves/wildfire_bess/BWF01_ENC_approved_replacement_electronics_ordinal@model_v1_0__docs_r1.json",
      "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
      "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
      "parameter_count": 5,
      "source_ids": [
@@ -2500,15 +2523,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
     },
     {
      "curve_id": "BWF01_ENC_approved_replacement_heavy_electrical_ordinal",
      "data_path": "curves/wildfire_bess/BWF01_ENC_approved_replacement_heavy_electrical_ordinal@model_v1_0__docs_r1.json",
      "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
      "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
      "parameter_count": 5,
      "source_ids": [
@@ -2525,15 +2551,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
     },
     {
      "curve_id": "BWF01_ENC_limited_repair_sensitivity_electronics_ordinal",
      "data_path": "curves/wildfire_bess/BWF01_ENC_limited_repair_sensitivity_electronics_ordinal@model_v1_0__docs_r1.json",
      "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
      "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
      "parameter_count": 5,
      "source_ids": [
@@ -2550,15 +2579,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
     },
     {
      "curve_id": "BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal",
      "data_path": "curves/wildfire_bess/BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal@model_v1_0__docs_r1.json",
      "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
      "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
      "parameter_count": 5,
      "source_ids": [
@@ -2575,15 +2607,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
     },
     {
      "curve_id": "BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal",
      "data_path": "curves/wildfire_bess/BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal@model_v1_0__docs_r1.json",
      "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
      "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
      "parameter_count": 5,
      "source_ids": [
@@ -2600,15 +2635,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
     },
     {
      "curve_id": "BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal",
      "data_path": "curves/wildfire_bess/BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal@model_v1_0__docs_r1.json",
      "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
      "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
      "parameter_count": 5,
      "source_ids": [
@@ -2625,10 +2663,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_bess@model_v1_0__docs_r1"
@@ -2659,12 +2702,14 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": {
      "state": "not_searched",
      "mark": "?",
@@ -2695,6 +2740,17 @@
      },
      "bucket": "battery_enclosures"
     },
+    "effect": "performance",
+    "basis": [
+     {
+      "label": "the occurrence register's effect field",
+      "path": "docs/evidence/occurrence/bess/heat.json"
+     },
+     {
+      "label": "the curve's scope: physical destruction only",
+      "path": "docs/scope/SCOPE_AND_STORY.md"
+     }
+    ],
     "register": {
      "path": "docs/evidence/occurrence/bess/heat.json",
      "sha256": "162d7e040fb47c4379871d081a0db2aa7aa57bc79a2e04cc537587f70a7135d6",
@@ -2728,6 +2784,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -2758,6 +2816,8 @@
      },
      "bucket": "battery_enclosures"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/icing.json",
      "sha256": "b3969b7bba941e9040bb8a2d97149e131e4d62215889b59a8c31748a983dbe3d",
@@ -2791,6 +2851,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -2815,6 +2877,8 @@
      },
      "bucket": "battery_enclosures"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/lightning.json",
      "sha256": "3da7d8de110fa3bd51b526ce2751d8ea9aa3448d63da864e39b21c7335a3f0c6",
@@ -2848,6 +2912,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -2865,6 +2931,8 @@
      },
      "bucket": "pcs"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/hail.json",
      "sha256": "92c78e1b445872410e3f9eabce63c8278ab8430a6779186fa6cc42d848dac44f",
@@ -2910,7 +2978,7 @@
      "data_path": "curves/flood_bess/BESS_PCS_INUNDATION_PROXY@model_v1_0__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_bess/current/curve_artifact.json",
      "parameter_count": 6,
      "source_ids": [
@@ -2929,15 +2997,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_bess",
+     "part": "Separate PCS",
+     "scope_note": null
     },
     {
      "curve_id": "BESS_PCS_SALINE_CONTACT_STATE",
      "data_path": "curves/flood_bess/BESS_PCS_SALINE_CONTACT_STATE@model_v1_0__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_bess/current/curve_artifact.json",
      "parameter_count": 6,
      "source_ids": [
@@ -2956,10 +3027,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_bess",
+     "part": "Separate PCS",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "flood_bess@model_v1_0__docs_r1"
@@ -3001,7 +3077,7 @@
      "data_path": "curves/tropical_cyclone_wind_bess/BESS_SEPARATE_PCS_TC_PROXY_V0_1@model_v1_0__docs_r1.json",
      "curve_type": "ordered damage state lognormal",
      "curve_form": "ordered_damage_state_lognormal",
-     "formula": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
      "artifact": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
      "parameter_count": 12,
      "source_ids": [
@@ -3016,10 +3092,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "part": "Separate PCS",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
@@ -3050,6 +3131,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3067,6 +3150,8 @@
      },
      "bucket": "pcs"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/convective_wind.json",
      "sha256": "3a6845c97fd618dfb7929f3dbe74f1df1ec6d3e0e9eece87f47af774e50a805f",
@@ -3111,7 +3196,7 @@
      "data_path": "curves/wildfire_bess/BWF01_PCS_ELECTRONICS@model_v1_0__docs_r1.json",
      "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
      "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
      "parameter_count": 5,
      "source_ids": [
@@ -3128,10 +3213,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Separate PCS",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_bess@model_v1_0__docs_r1"
@@ -3162,12 +3252,14 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": {
      "state": "not_searched",
      "mark": "?",
@@ -3186,6 +3278,17 @@
      },
      "bucket": "pcs"
     },
+    "effect": "performance",
+    "basis": [
+     {
+      "label": "the occurrence register's effect field",
+      "path": "docs/evidence/occurrence/bess/heat.json"
+     },
+     {
+      "label": "the curve's scope: physical destruction only",
+      "path": "docs/scope/SCOPE_AND_STORY.md"
+     }
+    ],
     "register": {
      "path": "docs/evidence/occurrence/bess/heat.json",
      "sha256": "162d7e040fb47c4379871d081a0db2aa7aa57bc79a2e04cc537587f70a7135d6",
@@ -3219,6 +3322,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3236,6 +3341,8 @@
      },
      "bucket": "pcs"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/icing.json",
      "sha256": "b3969b7bba941e9040bb8a2d97149e131e4d62215889b59a8c31748a983dbe3d",
@@ -3269,6 +3376,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3293,6 +3402,8 @@
      },
      "bucket": "pcs"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/lightning.json",
      "sha256": "3da7d8de110fa3bd51b526ce2751d8ea9aa3448d63da864e39b21c7335a3f0c6",
@@ -3326,6 +3437,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3343,6 +3456,8 @@
      },
      "bucket": "electrical_balance"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/hail.json",
      "sha256": "92c78e1b445872410e3f9eabce63c8278ab8430a6779186fa6cc42d848dac44f",
@@ -3376,6 +3491,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_bess@model_v1_0__docs_r1"
@@ -3430,6 +3547,8 @@
      },
      "bucket": "electrical_balance"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/flood.json",
      "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",
@@ -3465,6 +3584,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
@@ -3482,6 +3603,8 @@
      },
      "bucket": "electrical_balance"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/hurricane_wind.json",
      "sha256": "b0dba18f513768581c2d477d1c8135dec4adf68d8dd57088b9c6c0463871cdf7",
@@ -3515,6 +3638,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3532,6 +3657,8 @@
      },
      "bucket": "electrical_balance"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/convective_wind.json",
      "sha256": "3a6845c97fd618dfb7929f3dbe74f1df1ec6d3e0e9eece87f47af774e50a805f",
@@ -3567,6 +3694,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_bess@model_v1_0__docs_r1"
@@ -3584,6 +3713,8 @@
      },
      "bucket": "electrical_balance"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/wildfire.json",
      "sha256": "ce97039890a5431ab52190a69edac3435161e3957cf901793da111da5f481388",
@@ -3617,12 +3748,14 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": {
      "state": "not_searched",
      "mark": "?",
@@ -3653,6 +3786,17 @@
      },
      "bucket": "electrical_balance"
     },
+    "effect": "performance",
+    "basis": [
+     {
+      "label": "the occurrence register's effect field",
+      "path": "docs/evidence/occurrence/bess/heat.json"
+     },
+     {
+      "label": "the curve's scope: physical destruction only",
+      "path": "docs/scope/SCOPE_AND_STORY.md"
+     }
+    ],
     "register": {
      "path": "docs/evidence/occurrence/bess/heat.json",
      "sha256": "162d7e040fb47c4379871d081a0db2aa7aa57bc79a2e04cc537587f70a7135d6",
@@ -3686,6 +3830,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3703,6 +3849,8 @@
      },
      "bucket": "electrical_balance"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/icing.json",
      "sha256": "b3969b7bba941e9040bb8a2d97149e131e4d62215889b59a8c31748a983dbe3d",
@@ -3736,6 +3884,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3772,6 +3922,8 @@
      },
      "bucket": "electrical_balance"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/lightning.json",
      "sha256": "3da7d8de110fa3bd51b526ce2751d8ea9aa3448d63da864e39b21c7335a3f0c6",
@@ -3805,6 +3957,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3822,6 +3976,8 @@
      },
      "bucket": "civil_works"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/hail.json",
      "sha256": "92c78e1b445872410e3f9eabce63c8278ab8430a6779186fa6cc42d848dac44f",
@@ -3855,6 +4011,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_bess@model_v1_0__docs_r1"
@@ -3879,6 +4037,8 @@
      },
      "bucket": "civil_works"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/flood.json",
      "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",
@@ -3914,6 +4074,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
@@ -3931,6 +4093,8 @@
      },
      "bucket": "civil_works"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/hurricane_wind.json",
      "sha256": "b0dba18f513768581c2d477d1c8135dec4adf68d8dd57088b9c6c0463871cdf7",
@@ -3964,6 +4128,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3981,6 +4147,8 @@
      },
      "bucket": "civil_works"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/convective_wind.json",
      "sha256": "3a6845c97fd618dfb7929f3dbe74f1df1ec6d3e0e9eece87f47af774e50a805f",
@@ -4016,6 +4184,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_bess@model_v1_0__docs_r1"
@@ -4046,6 +4216,8 @@
      },
      "bucket": "civil_works"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/wildfire.json",
      "sha256": "ce97039890a5431ab52190a69edac3435161e3957cf901793da111da5f481388",
@@ -4079,12 +4251,14 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": {
      "state": "not_searched",
      "mark": "?",
@@ -4096,6 +4270,17 @@
      },
      "bucket": "civil_works"
     },
+    "effect": "performance",
+    "basis": [
+     {
+      "label": "the occurrence register's effect field",
+      "path": "docs/evidence/occurrence/bess/heat.json"
+     },
+     {
+      "label": "the curve's scope: physical destruction only",
+      "path": "docs/scope/SCOPE_AND_STORY.md"
+     }
+    ],
     "register": {
      "path": "docs/evidence/occurrence/bess/heat.json",
      "sha256": "162d7e040fb47c4379871d081a0db2aa7aa57bc79a2e04cc537587f70a7135d6",
@@ -4129,6 +4314,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4146,6 +4333,8 @@
      },
      "bucket": "civil_works"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/icing.json",
      "sha256": "b3969b7bba941e9040bb8a2d97149e131e4d62215889b59a8c31748a983dbe3d",
@@ -4179,6 +4368,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4196,6 +4387,8 @@
      },
      "bucket": "civil_works"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/lightning.json",
      "sha256": "3da7d8de110fa3bd51b526ce2751d8ea9aa3448d63da864e39b21c7335a3f0c6",
@@ -4229,6 +4422,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4246,6 +4441,8 @@
      },
      "bucket": "fieldwork"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/hail.json",
      "sha256": "92c78e1b445872410e3f9eabce63c8278ab8430a6779186fa6cc42d848dac44f",
@@ -4279,6 +4476,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_bess@model_v1_0__docs_r1"
@@ -4296,6 +4495,8 @@
      },
      "bucket": "fieldwork"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/flood.json",
      "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",
@@ -4331,6 +4532,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
@@ -4348,6 +4551,8 @@
      },
      "bucket": "fieldwork"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/hurricane_wind.json",
      "sha256": "b0dba18f513768581c2d477d1c8135dec4adf68d8dd57088b9c6c0463871cdf7",
@@ -4381,6 +4586,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4398,6 +4605,8 @@
      },
      "bucket": "fieldwork"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/convective_wind.json",
      "sha256": "3a6845c97fd618dfb7929f3dbe74f1df1ec6d3e0e9eece87f47af774e50a805f",
@@ -4433,6 +4642,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_bess@model_v1_0__docs_r1"
@@ -4450,6 +4661,8 @@
      },
      "bucket": "fieldwork"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/wildfire.json",
      "sha256": "ce97039890a5431ab52190a69edac3435161e3957cf901793da111da5f481388",
@@ -4483,12 +4696,14 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": {
      "state": "not_searched",
      "mark": "?",
@@ -4500,6 +4715,17 @@
      },
      "bucket": "fieldwork"
     },
+    "effect": "performance",
+    "basis": [
+     {
+      "label": "the occurrence register's effect field",
+      "path": "docs/evidence/occurrence/bess/heat.json"
+     },
+     {
+      "label": "the curve's scope: physical destruction only",
+      "path": "docs/scope/SCOPE_AND_STORY.md"
+     }
+    ],
     "register": {
      "path": "docs/evidence/occurrence/bess/heat.json",
      "sha256": "162d7e040fb47c4379871d081a0db2aa7aa57bc79a2e04cc537587f70a7135d6",
@@ -4533,6 +4759,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4550,6 +4778,8 @@
      },
      "bucket": "fieldwork"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/icing.json",
      "sha256": "b3969b7bba941e9040bb8a2d97149e131e4d62215889b59a8c31748a983dbe3d",
@@ -4583,6 +4813,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4600,6 +4832,8 @@
      },
      "bucket": "fieldwork"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/lightning.json",
      "sha256": "3da7d8de110fa3bd51b526ce2751d8ea9aa3448d63da864e39b21c7335a3f0c6",

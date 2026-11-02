@@ -1,14 +1,14 @@
 {
  "schema": "damage_dashboard_manifest.v1",
- "commit": "62b9713",
- "commit_full": "62b97133b5a6ee8445750a1e1a42d232c285dfad",
+ "commit": "02515df",
+ "commit_full": "02515df84c3c6d4ab583c723d6cd426a866b0465",
  "source": {
   "mode": "preview",
   "ref": "dashboard/traceability-completeness",
-  "commit": "62b9713",
-  "commit_full": "62b97133b5a6ee8445750a1e1a42d232c285dfad",
-  "dirty": false,
-  "label": "preview of branch dashboard/traceability-completeness at 62b9713 — not main"
+  "commit": "02515df",
+  "commit_full": "02515df84c3c6d4ab583c723d6cd426a866b0465",
+  "dirty": true,
+  "label": "preview of branch dashboard/traceability-completeness at 02515df with uncommitted changes — not main"
  },
  "hazard_main": {
   "available": false,
@@ -4953,6 +4953,66 @@
     ]
    },
    {
+    "entry_id": "strong_wind_solar",
+    "title": "Convective wind × Solar farm",
+    "status": "live",
+    "href": "/cells/strong_wind_solar",
+    "types": [
+     "Solar farm"
+    ],
+    "category": "Power plants",
+    "read": {
+     "kind": "agent",
+     "by": "Agent-drafted, from the cell's own tier table and capability declaration",
+     "on": "2026-10-19"
+    },
+    "review": null,
+    "release_review": null,
+    "field": "not searched",
+    "words": "Not yet reviewed by a person",
+    "tasks": [
+     {
+      "kind": "hazard_label",
+      "text": "Confirm the hazard label: the catalogue files this cell under “Convective wind”; the cell's own name says “strong wind”",
+      "items": [
+       "cell folder: strong_wind_solar",
+       "“Convective wind” is a disputed label; it is flagged here, not renamed"
+      ],
+      "href": "/cells/strong_wind_solar"
+     }
+    ]
+   },
+   {
+    "entry_id": "wind_tornado_wind",
+    "title": "Convective wind × Wind farm",
+    "status": "live",
+    "href": "/cells/wind_tornado_wind",
+    "types": [
+     "Wind farm"
+    ],
+    "category": "Power plants",
+    "read": {
+     "kind": "agent",
+     "by": "Agent-drafted, from the cell's own tier table and derivation write-up",
+     "on": "2026-10-19"
+    },
+    "review": null,
+    "release_review": null,
+    "field": "not searched",
+    "words": "Not yet reviewed by a person",
+    "tasks": [
+     {
+      "kind": "hazard_label",
+      "text": "Confirm the hazard label: the catalogue files this cell under “Convective wind”; the cell's own name says “wind tornado”",
+      "items": [
+       "cell folder: wind_tornado_wind",
+       "“Convective wind” is a disputed label; it is flagged here, not renamed"
+      ],
+      "href": "/cells/wind_tornado_wind"
+     }
+    ]
+   },
+   {
     "entry_id": "flood_bess",
     "title": "Flood × Battery storage",
     "status": "live",
@@ -5085,46 +5145,6 @@
     "read": {
      "kind": "agent",
      "by": "Agent-drafted, from the BESS plan and the BESS hurricane wind cell",
-     "on": "2026-10-19"
-    },
-    "review": null,
-    "release_review": null,
-    "field": "not searched",
-    "words": "Not yet reviewed by a person",
-    "tasks": []
-   },
-   {
-    "entry_id": "strong_wind_solar",
-    "title": "Convective wind × Solar farm",
-    "status": "live",
-    "href": "/cells/strong_wind_solar",
-    "types": [
-     "Solar farm"
-    ],
-    "category": "Power plants",
-    "read": {
-     "kind": "agent",
-     "by": "Agent-drafted, from the cell's own tier table and capability declaration",
-     "on": "2026-10-19"
-    },
-    "review": null,
-    "release_review": null,
-    "field": "not searched",
-    "words": "Not yet reviewed by a person",
-    "tasks": []
-   },
-   {
-    "entry_id": "wind_tornado_wind",
-    "title": "Convective wind × Wind farm",
-    "status": "live",
-    "href": "/cells/wind_tornado_wind",
-    "types": [
-     "Wind farm"
-    ],
-    "category": "Power plants",
-    "read": {
-     "kind": "agent",
-     "by": "Agent-drafted, from the cell's own tier table and derivation write-up",
      "on": "2026-10-19"
     },
     "review": null,
@@ -5513,13 +5533,113 @@
     "tasks": []
    }
   ],
-  "n_tasks": 16,
-  "n_cells_with_tasks": 12,
+  "n_tasks": 18,
+  "n_cells_with_tasks": 14,
   "n_person_reviews": 0,
   "kinds": [
    "crosswalk_confirm",
+   "hazard_label",
    "sources_locator_only"
   ]
+ },
+ "legend": {
+  "source": "docs/cells/CATALOGUE.md",
+  "status": [
+   {
+    "key": "live",
+    "word": "live",
+    "meaning": "In the runtime artifact index (docs/contracts/machine_readable_artifact_index.json); the platform can call it"
+   },
+   {
+    "key": "proposal",
+    "word": "proposal",
+    "meaning": "Built and validated in the repository but not in the runtime index; waiting for review"
+   },
+   {
+    "key": "reused",
+    "word": "reused",
+    "meaning": "No curve of its own; a consumer binding prices this asset with another cell's curve"
+   },
+   {
+    "key": "gap",
+    "word": "no curve yet",
+    "meaning": "No curve yet"
+   }
+  ],
+  "coverage": [
+   {
+    "key": "curve",
+    "word": "has a curve",
+    "meaning": "A curve covers the whole of this subcomponent."
+   },
+   {
+    "key": "partial",
+    "word": "partial",
+    "meaning": "A curve covers only part of this subcomponent; the rest has none."
+   },
+   {
+    "key": "gap",
+    "word": "gap",
+    "meaning": "No curve covers this subcomponent; the row says why and links the research."
+   }
+  ],
+  "completeness": [
+   {
+    "key": "complete",
+    "word": "complete",
+    "meaning": "Nothing left to build for this subcomponent and hazard."
+   },
+   {
+    "key": "incomplete",
+    "word": "incomplete",
+    "meaning": "Something is still open: a gap, a part withheld, or a curve for only part of it."
+   }
+  ],
+  "evidence": [
+   {
+    "key": "T1",
+    "word": "field-calibrated",
+    "meaning": "fitted to insurance claims or field damage surveys of the same kind of asset"
+   },
+   {
+    "key": "T2",
+    "word": "published",
+    "meaning": "taken from a published standard, a public model such as FEMA Hazus, lab tests or physics"
+   },
+   {
+    "key": "T3",
+    "word": "borrowed",
+    "meaning": "from a similar asset or a related study, with an engineering step to make it fit"
+   },
+   {
+    "key": "T4",
+    "word": "our judgment",
+    "meaning": "no source gives the number; a placeholder until evidence replaces it"
+   }
+  ],
+  "production": [
+   {
+    "key": "runtime_indexed",
+    "word": "in production index",
+    "meaning": "In the runtime artifact index: production can call it. It does not say a screening grid selected it."
+   },
+   {
+    "key": "reused_binding",
+    "word": "reused in production",
+    "meaning": "Priced with another cell's indexed curve through a consumer binding."
+   },
+   {
+    "key": "not_runtime_indexed",
+    "word": "not in production",
+    "meaning": "Not in the runtime index; production cannot call it."
+   }
+  ],
+  "where_from": {
+   "published": "From a published source: the link opens it.",
+   "borrowed": "Borrowed: taken from a similar asset or a related study and adapted; the link opens what it stands in for.",
+   "our_judgment": "Our judgment: no source gives this number; the files that set it are linked.",
+   "curve_level": "No register row for this parameter alone, so it carries the curve's tiers; these are the curve's own sources."
+  }
  },
  "build_checks": [
   {
@@ -5651,6 +5771,20 @@
   {
    "id": "subcomponents",
    "name": "every expected subcomponent has a curve/gap state, completeness state, evidence label, and construction or gap lineage",
+   "ok": true,
+   "severity": "hard",
+   "summary": "ok"
+  },
+  {
+   "id": "formula_keys",
+   "name": "every curve has a formula whose key names each of its parameters",
+   "ok": true,
+   "severity": "data",
+   "summary": "ok"
+  },
+  {
+   "id": "display_paths",
+   "name": "nothing displayed carries a path on someone's machine",
    "ok": true,
    "severity": "hard",
    "summary": "ok"

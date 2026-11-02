@@ -1493,7 +1493,7 @@
      "BF-S06"
     ],
     "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "link_kind": "repo_file",
     "locator": "flood_solar__model_v1_0__docs_r4__curve_artifact.json; flood_solar_curve_derivation_dossier_v1_0.md",
     "no_link_sentence": null,
@@ -1641,7 +1641,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "link_kind": "repo_file",
     "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
     "no_link_sentence": null
@@ -1661,7 +1661,7 @@
     "provenance": "register",
     "repo_path": "docs/method/shared_components/flood_electrical/binding_rules.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/method/shared_components/flood_electrical/binding_rules.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/method/shared_components/flood_electrical/binding_rules.md",
     "link_kind": "repo_file",
     "title": "Shared electrical Flood substrate and Wind reuse review",
     "no_link_sentence": null
@@ -2488,7 +2488,7 @@
      {
       "id": "BF-S06",
       "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
       "link_kind": "repo_file",
       "resolved": true
      },
@@ -2564,7 +2564,7 @@
      {
       "id": "BF-S06",
       "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2684,7 +2684,7 @@
      "data_path": "curves/flood_bess/BESS_ACTIVE_CONTACT_STATE@model_v1_0__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_bess/current/curve_artifact.json",
      "parameter_count": 6,
      "source_ids": [
@@ -2703,10 +2703,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_bess",
+     "part": "Battery enclosure (active hardware)",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "flood_bess@model_v1_0__docs_r1"
@@ -2743,6 +2748,8 @@
      },
      "bucket": "battery_enclosures"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/flood.json",
      "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",
@@ -2788,7 +2795,7 @@
      "data_path": "curves/flood_bess/BESS_PCS_INUNDATION_PROXY@model_v1_0__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_bess/current/curve_artifact.json",
      "parameter_count": 6,
      "source_ids": [
@@ -2807,15 +2814,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_bess",
+     "part": "Separate PCS",
+     "scope_note": null
     },
     {
      "curve_id": "BESS_PCS_SALINE_CONTACT_STATE",
      "data_path": "curves/flood_bess/BESS_PCS_SALINE_CONTACT_STATE@model_v1_0__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_bess/current/curve_artifact.json",
      "parameter_count": 6,
      "source_ids": [
@@ -2834,10 +2844,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_bess",
+     "part": "Separate PCS",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "flood_bess@model_v1_0__docs_r1"
@@ -2868,6 +2883,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_bess@model_v1_0__docs_r1"
@@ -2922,6 +2939,8 @@
      },
      "bucket": "electrical_balance"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/flood.json",
      "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",
@@ -2955,6 +2974,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_bess@model_v1_0__docs_r1"
@@ -2979,6 +3000,8 @@
      },
      "bucket": "civil_works"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/flood.json",
      "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",
@@ -3012,6 +3035,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_bess@model_v1_0__docs_r1"
@@ -3029,6 +3054,8 @@
      },
      "bucket": "fieldwork"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/flood.json",
      "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",

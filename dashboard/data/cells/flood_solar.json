@@ -1682,7 +1682,7 @@
     "source_type": null,
     "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "link_kind": "repo_file",
     "no_link_sentence": null
    },
@@ -1709,7 +1709,7 @@
     "source_type": null,
     "repo_path": "docs/source_drops/context/v2_5/substrate_decomposition.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/source_drops/context/v2_5/substrate_decomposition.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/source_drops/context/v2_5/substrate_decomposition.md",
     "link_kind": "repo_file",
     "no_link_sentence": null
    },
@@ -1734,7 +1734,7 @@
     ],
     "repo_path": "docs/cells/flood_solar/basics/HOW_THE_MODEL_IS_BUILT.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_solar/basics/HOW_THE_MODEL_IS_BUILT.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_solar/basics/HOW_THE_MODEL_IS_BUILT.md",
     "link_kind": "repo_file",
     "no_link_sentence": null
    }
@@ -2809,7 +2809,7 @@
      {
       "id": "ANZGEO_2023_SCOUR_CONTEXT",
       "title": "Anzgeo 2023 Scour Context",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_solar/basics/HOW_THE_MODEL_IS_BUILT.md",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_solar/basics/HOW_THE_MODEL_IS_BUILT.md",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -3034,7 +3034,7 @@
      "data_path": "curves/flood_solar/FS_PVMOD@model_v1_0__docs_r4.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -3045,10 +3045,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_solar@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_solar",
+     "part": "PV modules",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -3079,6 +3084,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -3086,6 +3093,8 @@
    "gap": {
     "reason": "Mounting and racking structure (debris and velocity load is a candidate mechanism; no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3124,7 +3133,7 @@
      "data_path": "curves/flood_solar/FS_FOUND@model_v1_0__docs_r4.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -3133,10 +3142,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_solar@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_solar",
+     "part": "Foundations",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -3180,7 +3194,7 @@
      "data_path": "curves/flood_solar/FS_COMB@model_v1_0__docs_r4.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -3191,15 +3205,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_solar@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_solar",
+     "part": "Combiner boxes and DC protection",
+     "scope_note": null
     },
     {
      "curve_id": "FS_INV",
      "data_path": "curves/flood_solar/FS_INV@model_v1_0__docs_r4.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -3210,10 +3227,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_solar@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_solar",
+     "part": "Inverters",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -3255,7 +3277,7 @@
      "data_path": "curves/flood_solar/FS_CABLE@model_v1_0__docs_r4.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -3266,10 +3288,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_solar@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_solar",
+     "part": "AC and DC collection cable",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -3313,7 +3340,7 @@
      "data_path": "curves/flood_solar/FS_SWG@model_v1_0__docs_r4.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -3324,15 +3351,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_solar@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_solar",
+     "part": "Switchgear",
+     "scope_note": null
     },
     {
      "curve_id": "FS_XFMR",
      "data_path": "curves/flood_solar/FS_XFMR@model_v1_0__docs_r4.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -3343,10 +3373,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_solar@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_solar",
+     "part": "Main transformer and controls",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -3388,7 +3423,7 @@
      "data_path": "curves/flood_solar/FS_SCADA@model_v1_0__docs_r4.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -3399,10 +3434,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_solar@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_solar",
+     "part": "SCADA and monitoring cabinets",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -3433,6 +3473,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -3440,6 +3482,8 @@
    "gap": {
     "reason": "Site drainage and flood defences (treated as protection state, not a damaged part)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3467,6 +3511,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -3474,6 +3520,8 @@
    "gap": {
     "reason": "Civil works: roads, access and fencing (reviewed in the write-up; no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3501,6 +3549,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -3508,6 +3558,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   }

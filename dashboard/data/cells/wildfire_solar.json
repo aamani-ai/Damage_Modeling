@@ -1954,7 +1954,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/wildfire_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_wildfire_solar__model_v0_1__docs_r1.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/wildfire_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_wildfire_solar__model_v0_1__docs_r1.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/wildfire_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_wildfire_solar__model_v0_1__docs_r1.md",
     "link_kind": "repo_file",
     "title": "Wildfire × solar bounded public-evidence review and reproducibility log; review date 2026-07-09.",
     "no_link_sentence": null
@@ -2259,7 +2259,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/wildfire_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_wildfire_solar__model_v0_1__docs_r2.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/wildfire_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_wildfire_solar__model_v0_1__docs_r2.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/wildfire_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_wildfire_solar__model_v0_1__docs_r2.md",
     "link_kind": "repo_file",
     "title": "Read-only audit of the local Hazard_modeling wildfire consumer implementation and documentation on 2026-07-10.",
     "no_link_sentence": null
@@ -2279,7 +2279,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/wildfire_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_wildfire_solar__model_v0_1__docs_r2.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/wildfire_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_wildfire_solar__model_v0_1__docs_r2.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/wildfire_solar/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_wildfire_solar__model_v0_1__docs_r2.md",
     "link_kind": "repo_file",
     "title": "Wildfire x solar deep bounded public-evidence review and reproducibility log; review date 2026-07-10.",
     "no_link_sentence": null
@@ -3752,7 +3752,7 @@
      "data_path": "curves/wildfire_solar/WSV1_MODULE_THERMAL@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -3764,10 +3764,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "PV modules",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -3810,7 +3815,7 @@
      "data_path": "curves/wildfire_solar/WSV1_RACKING_THERMAL@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -3823,10 +3828,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Tracker and racking",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -3869,7 +3879,7 @@
      "data_path": "curves/wildfire_solar/WSV1_FOUNDATION_THERMAL@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -3882,10 +3892,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Piles and inverter pads",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -3930,7 +3945,7 @@
      "data_path": "curves/wildfire_solar/WSV1_COMBINER_THERMAL@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -3943,15 +3958,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Combiner boxes",
+     "scope_note": null
     },
     {
      "curve_id": "WSV1_INVERTER_THERMAL",
      "data_path": "curves/wildfire_solar/WSV1_INVERTER_THERMAL@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -3964,10 +3982,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Central inverters",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -4010,7 +4033,7 @@
      "data_path": "curves/wildfire_solar/WSV1_CABLE_EXPOSED@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -4021,10 +4044,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Exposed AC and DC cable",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -4067,7 +4095,7 @@
      "data_path": "curves/wildfire_solar/WSV1_MV_EQUIPMENT_THERMAL@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -4080,10 +4108,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Transformers and switchgear",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -4126,7 +4159,7 @@
      "data_path": "curves/wildfire_solar/WSV1_SCADA_THERMAL@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -4139,10 +4172,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "SCADA and communications",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -4185,7 +4223,7 @@
      "data_path": "curves/wildfire_solar/WSV1_GROUNDING_THERMAL@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -4198,10 +4236,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Grounding and lightning protection",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -4244,7 +4287,7 @@
      "data_path": "curves/wildfire_solar/WSV1_CIVIL_DIRECT@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -4257,10 +4300,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Civil: fencing, roads, buildings, site prep",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -4291,6 +4339,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -4298,6 +4348,8 @@
    "gap": {
     "reason": "Replacement support and fieldwork: no own curve; allocated once at the aggregate direct-and-civil damage ratio (T4 rule)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   }

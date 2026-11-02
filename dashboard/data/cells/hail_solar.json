@@ -1513,7 +1513,7 @@
     "source_type": "local_doc",
     "repo_path": "docs/method/foundations/00_assembled_curve_record.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/method/foundations/00_assembled_curve_record.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/method/foundations/00_assembled_curve_record.md",
     "link_kind": "repo_file",
     "no_link_sentence": null
    },
@@ -1540,7 +1540,7 @@
     "source_type": "local_doc",
     "repo_path": "docs/method/foundations/questions/03_valuation_guide.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/method/foundations/questions/03_valuation_guide.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/method/foundations/questions/03_valuation_guide.md",
     "link_kind": "repo_file",
     "no_link_sentence": null
    },
@@ -1567,7 +1567,7 @@
     "source_type": "local_doc",
     "repo_path": "docs/source_drops/context/v2_5/substrate_decomposition.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/source_drops/context/v2_5/substrate_decomposition.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/source_drops/context/v2_5/substrate_decomposition.md",
     "link_kind": "repo_file",
     "no_link_sentence": null
    },
@@ -1594,7 +1594,7 @@
     "source_type": "local_xlsx",
     "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "link_kind": "repo_file",
     "no_link_sentence": null
    },
@@ -1699,7 +1699,7 @@
     "source_type": "local_xlsx",
     "repo_path": "docs/cells/hail_solar/archive/v1_1_site_adaptation/damage_curve_records_v1_1_hail_solar_site_adaptation.xlsx",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/hail_solar/archive/v1_1_site_adaptation/damage_curve_records_v1_1_hail_solar_site_adaptation.xlsx",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/hail_solar/archive/v1_1_site_adaptation/damage_curve_records_v1_1_hail_solar_site_adaptation.xlsx",
     "link_kind": "repo_file",
     "no_link_sentence": null
    },
@@ -3073,7 +3073,7 @@
      "data_path": "curves/hail_solar/HAIL_SOLAR_DEFAULT_3P2_GBS@model_v1_0__docs_r7.json",
      "curve_type": "logistic",
      "curve_form": "logistic",
-     "formula": "D(x) = max_DR / (1 + exp(-k × (x - x50)))",
+     "formula": "D(x) = max_DR / (1 + exp(−k_per_mm × (x − D50_mm)))",
      "artifact": "docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json",
      "parameter_count": 3,
      "source_ids": [
@@ -3083,15 +3083,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "hail_solar@model_v1_0__docs_r7",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "hail_solar",
+     "part": "PV modules (glass and cells)",
+     "scope_note": null
     },
     {
      "curve_id": "HAIL_SOLAR_FRAGILE_THIN_GG",
      "data_path": "curves/hail_solar/HAIL_SOLAR_FRAGILE_THIN_GG@model_v1_0__docs_r7.json",
      "curve_type": "logistic",
      "curve_form": "logistic",
-     "formula": "D(x) = max_DR / (1 + exp(-k × (x - x50)))",
+     "formula": "D(x) = max_DR / (1 + exp(−k_per_mm × (x − D50_mm)))",
      "artifact": "docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json",
      "parameter_count": 3,
      "source_ids": [
@@ -3101,15 +3104,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "hail_solar@model_v1_0__docs_r7",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "hail_solar",
+     "part": "PV modules (glass and cells)",
+     "scope_note": null
     },
     {
      "curve_id": "HAIL_SOLAR_HARDENED_THICKER",
      "data_path": "curves/hail_solar/HAIL_SOLAR_HARDENED_THICKER@model_v1_0__docs_r7.json",
      "curve_type": "logistic",
      "curve_form": "logistic",
-     "formula": "D(x) = max_DR / (1 + exp(-k × (x - x50)))",
+     "formula": "D(x) = max_DR / (1 + exp(−k_per_mm × (x − D50_mm)))",
      "artifact": "docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json",
      "parameter_count": 3,
      "source_ids": [
@@ -3119,10 +3125,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "hail_solar@model_v1_0__docs_r7",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "hail_solar",
+     "part": "PV modules (glass and cells)",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -3153,6 +3164,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -3160,6 +3173,8 @@
    "gap": {
     "reason": "Racking structure (secondary, open; no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3187,6 +3202,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -3194,6 +3211,8 @@
    "gap": {
     "reason": "Inverters, substation, foundations, civil works and drainage (treated as no direct hail damage by coverage decision; no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3221,6 +3240,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -3228,6 +3249,8 @@
    "gap": {
     "reason": "Inverters, substation, foundations, civil works and drainage (treated as no direct hail damage by coverage decision; no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3255,6 +3278,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -3262,6 +3287,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3289,6 +3316,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -3296,6 +3325,8 @@
    "gap": {
     "reason": "Inverters, substation, foundations, civil works and drainage (treated as no direct hail damage by coverage decision; no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3323,6 +3354,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -3330,6 +3363,8 @@
    "gap": {
     "reason": "SCADA and met instruments (optional secondary; no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3357,6 +3392,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -3364,6 +3401,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3391,6 +3430,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -3398,6 +3439,8 @@
    "gap": {
     "reason": "Inverters, substation, foundations, civil works and drainage (treated as no direct hail damage by coverage decision; no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3425,6 +3468,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -3432,6 +3477,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   }

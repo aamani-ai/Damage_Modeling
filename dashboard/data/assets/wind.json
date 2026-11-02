@@ -2807,6 +2807,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -2814,6 +2816,8 @@
    "gap": {
     "reason": "Model v0.1 is a fail-closed research scaffold with no curve records: no evidence yet links one hail event's impact on a blade to an inspected blade state and that blade's repair cost, and no hail-to-blade input axis is fixed (docs r2 deep curation kept it a strict no-go)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -2843,6 +2847,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_wind@model_v1_0__docs_r1"
@@ -2850,6 +2856,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; GEOMETRY_SCREENED_NOT_UNIVERSAL_ZERO",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -2879,6 +2887,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2"
@@ -2886,6 +2896,8 @@
    "gap": {
     "reason": "SOURCE_NATIVE_ATOM_NOT_HARMONIZED_TO_STANDARD_EQUIPMENT_ASSEMBLY; OMITTED_NON_TOWER_FAILURE_MODES",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -2925,7 +2937,7 @@
      "data_path": "curves/wind_tornado_wind/WT_BLADE_STRUCT@model_v1_0__docs_r4.json",
      "curve_type": "wind tornado logistic ratio",
      "curve_form": "wind_tornado_logistic_ratio",
-     "formula": "D(R) = max_DR / (1 + exp(-k_ratio × (R - D50_ratio)))",
+     "formula": "D(R) = max_DR / (1 + exp(−k_ratio × (R − D50))), with D50 = D50_ratio_straight_line, plus tornado_D50_shift for the tornado variant",
      "artifact": "docs/cells/wind_tornado_wind/current/wind_tornado_wind__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 4,
      "source_ids": [
@@ -2938,10 +2950,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wind_tornado_wind",
+     "part": "Blade",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4"
@@ -2974,6 +2991,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -2981,6 +3000,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; FULL_TURBINE_ECONOMIC_RESPONSE_NOT_CALIBRATED",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3008,13 +3029,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -3042,6 +3067,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3049,6 +3076,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3076,6 +3105,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3083,6 +3114,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3110,6 +3143,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3117,6 +3152,8 @@
    "gap": {
     "reason": "Model v0.1 is a fail-closed research scaffold with no curve records: no evidence yet links one hail event's impact on a blade to an inspected blade state and that blade's repair cost, and no hail-to-blade input axis is fixed (docs r2 deep curation kept it a strict no-go)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3146,6 +3183,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_wind@model_v1_0__docs_r1"
@@ -3153,6 +3192,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; GEOMETRY_SCREENED_NOT_UNIVERSAL_ZERO",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3196,7 +3237,7 @@
      "data_path": "curves/tropical_cyclone_wind_wind/TCWW_JAIMES_1MW_44M_SCREENING@model_v1_2__docs_r2.json",
      "curve_type": "thresholded weibull expected damage",
      "curve_form": "thresholded_weibull_expected_damage",
-     "formula": "D(V) = 0 for V ≤ V_zero; above it, a thresholded Weibull response rises toward max_dr using delta_V50 and rho.",
+     "formula": "D(V) = 0 for V ≤ V_zero_kmh; otherwise max_dr × (1 − exp(−ln 2 × ((V − V_zero_kmh) / delta_V50_kmh)^rho))",
      "artifact": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_2__docs_r2__curve_artifact.json",
      "parameter_count": 5,
      "source_ids": [
@@ -3209,15 +3250,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_wind",
+     "part": "Turbine tower",
+     "scope_note": null
     },
     {
      "curve_id": "TCWW_JAIMES_2P5MW_80M_SCREENING",
      "data_path": "curves/tropical_cyclone_wind_wind/TCWW_JAIMES_2P5MW_80M_SCREENING@model_v1_2__docs_r2.json",
      "curve_type": "thresholded weibull expected damage",
      "curve_form": "thresholded_weibull_expected_damage",
-     "formula": "D(V) = 0 for V ≤ V_zero; above it, a thresholded Weibull response rises toward max_dr using delta_V50 and rho.",
+     "formula": "D(V) = 0 for V ≤ V_zero_kmh; otherwise max_dr × (1 − exp(−ln 2 × ((V − V_zero_kmh) / delta_V50_kmh)^rho))",
      "artifact": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_2__docs_r2__curve_artifact.json",
      "parameter_count": 5,
      "source_ids": [
@@ -3230,15 +3274,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_wind",
+     "part": "Turbine tower",
+     "scope_note": null
     },
     {
      "curve_id": "TCWW_JAIMES_3P3MW_100M_SCREENING",
      "data_path": "curves/tropical_cyclone_wind_wind/TCWW_JAIMES_3P3MW_100M_SCREENING@model_v1_2__docs_r2.json",
      "curve_type": "thresholded weibull expected damage",
      "curve_form": "thresholded_weibull_expected_damage",
-     "formula": "D(V) = 0 for V ≤ V_zero; above it, a thresholded Weibull response rises toward max_dr using delta_V50 and rho.",
+     "formula": "D(V) = 0 for V ≤ V_zero_kmh; otherwise max_dr × (1 − exp(−ln 2 × ((V − V_zero_kmh) / delta_V50_kmh)^rho))",
      "artifact": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_2__docs_r2__curve_artifact.json",
      "parameter_count": 5,
      "source_ids": [
@@ -3251,15 +3298,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_wind",
+     "part": "Turbine tower",
+     "scope_note": null
     },
     {
      "curve_id": "TCWW_JAIMES_3P3MW_AS_CANONICAL_5MW_TOWER_PROXY_V1",
      "data_path": "curves/tropical_cyclone_wind_wind/TCWW_JAIMES_3P3MW_AS_CANONICAL_5MW_TOWER_PROXY_V1@model_v1_2__docs_r2.json",
      "curve_type": "thresholded weibull expected damage",
      "curve_form": "thresholded_weibull_expected_damage",
-     "formula": "D(V) = 0 for V ≤ V_zero; above it, a thresholded Weibull response rises toward max_dr using delta_V50 and rho.",
+     "formula": "D(V) = 0 for V ≤ V_zero_kmh; otherwise max_dr × (1 − exp(−ln 2 × ((V − V_zero_kmh) / delta_V50_kmh)^rho))",
      "artifact": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_2__docs_r2__curve_artifact.json",
      "parameter_count": 5,
      "source_ids": [
@@ -3272,10 +3322,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_wind",
+     "part": "Turbine tower",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2"
@@ -3318,7 +3373,7 @@
      "data_path": "curves/wind_tornado_wind/WT_TOWER_STRUCT@model_v1_0__docs_r4.json",
      "curve_type": "wind tornado logistic ratio",
      "curve_form": "wind_tornado_logistic_ratio",
-     "formula": "D(R) = max_DR / (1 + exp(-k_ratio × (R - D50_ratio)))",
+     "formula": "D(R) = max_DR / (1 + exp(−k_ratio × (R − D50))), with D50 = D50_ratio_straight_line, plus tornado_D50_shift for the tornado variant",
      "artifact": "docs/cells/wind_tornado_wind/current/wind_tornado_wind__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 4,
      "source_ids": [
@@ -3331,10 +3386,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wind_tornado_wind",
+     "part": "Tower",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4"
@@ -3367,6 +3427,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -3374,6 +3436,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; FULL_TURBINE_ECONOMIC_RESPONSE_NOT_CALIBRATED",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3401,13 +3465,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -3435,6 +3503,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3442,6 +3512,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3469,6 +3541,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3476,6 +3550,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3503,6 +3579,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3510,6 +3588,8 @@
    "gap": {
     "reason": "Model v0.1 is a fail-closed research scaffold with no curve records: no evidence yet links one hail event's impact on a blade to an inspected blade state and that blade's repair cost, and no hail-to-blade input axis is fixed (docs r2 deep curation kept it a strict no-go)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3539,6 +3619,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_wind@model_v1_0__docs_r1"
@@ -3546,6 +3628,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; GEOMETRY_SCREENED_NOT_UNIVERSAL_ZERO",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3575,6 +3659,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2"
@@ -3582,6 +3668,8 @@
    "gap": {
     "reason": "SOURCE_NATIVE_ATOM_NOT_HARMONIZED_TO_STANDARD_EQUIPMENT_ASSEMBLY; OMITTED_NON_TOWER_FAILURE_MODES",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3621,7 +3709,7 @@
      "data_path": "curves/wind_tornado_wind/WT_NACELLE_CONSEQ@model_v1_0__docs_r4.json",
      "curve_type": "wind tornado logistic ratio",
      "curve_form": "wind_tornado_logistic_ratio",
-     "formula": "D(R) = max_DR / (1 + exp(-k_ratio × (R - D50_ratio)))",
+     "formula": "D(R) = max_DR / (1 + exp(−k_ratio × (R − D50))), with D50 = D50_ratio_straight_line, plus tornado_D50_shift for the tornado variant",
      "artifact": "docs/cells/wind_tornado_wind/current/wind_tornado_wind__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 4,
      "source_ids": [
@@ -3634,10 +3722,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wind_tornado_wind",
+     "part": "Nacelle",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4"
@@ -3670,6 +3763,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -3677,6 +3772,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; FULL_TURBINE_ECONOMIC_RESPONSE_NOT_CALIBRATED",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3704,13 +3801,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -3738,6 +3839,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3745,6 +3848,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3772,6 +3877,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3779,6 +3886,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3806,6 +3915,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3813,6 +3924,8 @@
    "gap": {
     "reason": "Model v0.1 is a fail-closed research scaffold with no curve records: no evidence yet links one hail event's impact on a blade to an inspected blade state and that blade's repair cost, and no hail-to-blade input axis is fixed (docs r2 deep curation kept it a strict no-go)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3842,6 +3955,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_wind@model_v1_0__docs_r1"
@@ -3849,6 +3964,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; SEPARATE_FLOOD_SCOUR_EROSION_PATHWAY_REQUIRED",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3878,6 +3995,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2"
@@ -3885,6 +4004,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3924,7 +4045,7 @@
      "data_path": "curves/wind_tornado_wind/WT_FOUNDATION_OT@model_v1_0__docs_r4.json",
      "curve_type": "wind tornado logistic ratio",
      "curve_form": "wind_tornado_logistic_ratio",
-     "formula": "D(R) = max_DR / (1 + exp(-k_ratio × (R - D50_ratio)))",
+     "formula": "D(R) = max_DR / (1 + exp(−k_ratio × (R − D50))), with D50 = D50_ratio_straight_line, plus tornado_D50_shift for the tornado variant",
      "artifact": "docs/cells/wind_tornado_wind/current/wind_tornado_wind__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 4,
      "source_ids": [
@@ -3937,10 +4058,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wind_tornado_wind",
+     "part": "Foundation",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4"
@@ -3973,6 +4099,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -3980,6 +4108,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; DIRECT_THERMAL_RESPONSE_NOT_CALIBRATED",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4007,13 +4137,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -4041,6 +4175,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4048,6 +4184,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4075,6 +4213,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4082,6 +4222,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4109,6 +4251,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4116,6 +4260,8 @@
    "gap": {
     "reason": "Model v0.1 is a fail-closed research scaffold with no curve records: no evidence yet links one hail event's impact on a blade to an inspected blade state and that blade's repair cost, and no hail-to-blade input axis is fixed (docs r2 deep curation kept it a strict no-go)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4146,6 +4292,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_wind@model_v1_0__docs_r1"
@@ -4153,6 +4301,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; WIND_SPECIFIC_EQUIPMENT_DECOMPOSITION_REQUIRED; NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; PAD_TRANSFORMER_CONSTRUCTION_AND_VALUE_REQUIRED",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4182,6 +4332,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2"
@@ -4189,6 +4341,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; ELECTRICAL_VALUE_SPLIT_REQUIRED",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4227,7 +4381,7 @@
      "data_path": "curves/wind_tornado_wind/WT_POWER_ELEC_ACCEL@model_v1_0__docs_r4.json",
      "curve_type": "wind tornado logistic ratio",
      "curve_form": "wind_tornado_logistic_ratio",
-     "formula": "D(R) = max_DR / (1 + exp(-k_ratio × (R - D50_ratio)))",
+     "formula": "D(R) = max_DR / (1 + exp(−k_ratio × (R − D50))), with D50 = D50_ratio_straight_line, plus tornado_D50_shift for the tornado variant",
      "artifact": "docs/cells/wind_tornado_wind/current/wind_tornado_wind__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 4,
      "source_ids": [
@@ -4240,10 +4394,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wind_tornado_wind",
+     "part": "Power electronics",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4"
@@ -4285,7 +4444,7 @@
      "data_path": "curves/wildfire_wind/WWV1_PAD_ELECTRICAL_FSIM_T4@model_v1_0__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_wind/current/wildfire_wind__model_v1_0__docs_r1__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -4294,10 +4453,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_wind",
+     "part": "Pad electrical",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -4328,13 +4492,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -4362,6 +4530,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4369,6 +4539,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4396,6 +4568,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4403,6 +4577,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4430,6 +4606,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4437,6 +4615,8 @@
    "gap": {
     "reason": "Model v0.1 is a fail-closed research scaffold with no curve records: no evidence yet links one hail event's impact on a blade to an inspected blade state and that blade's repair cost, and no hail-to-blade input axis is fixed (docs r2 deep curation kept it a strict no-go)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4466,6 +4646,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_wind@model_v1_0__docs_r1"
@@ -4473,6 +4655,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; LINE_NETWORK_EXPOSURE_AND_VALUE_REQUIRED",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4502,6 +4686,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2"
@@ -4509,6 +4695,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; LINE_NETWORK_EXPOSURE_REQUIRED",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4536,6 +4724,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4"
@@ -4543,6 +4733,8 @@
    "gap": {
     "reason": "SCADA and controls, electrical collection, substation and civil infrastructure (reviewed secondary units, no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4572,6 +4764,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -4579,6 +4773,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; LINE_EXPOSURE_AND_CONSTRUCTION_STATE_REQUIRED",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4606,13 +4802,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -4640,6 +4840,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4647,6 +4849,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4674,6 +4878,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4681,6 +4887,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4708,6 +4916,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4715,6 +4925,8 @@
    "gap": {
     "reason": "Model v0.1 is a fail-closed research scaffold with no curve records: no evidence yet links one hail event's impact on a blade to an inspected blade state and that blade's repair cost, and no hail-to-blade input axis is fixed (docs r2 deep curation kept it a strict no-go)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4759,7 +4971,7 @@
      "data_path": "curves/flood_wind/FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL@model_v1_0__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_wind/current/flood_wind__model_v1_0__docs_r1__curve_artifact.json",
      "parameter_count": 6,
      "source_ids": [
@@ -4773,8 +4985,21 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_wind@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_wind",
+     "part": "GSU / substation (whole facility)",
+     "scope_note": {
+      "note": "“Whole facility” here means the whole GSU substation, not the whole wind farm: the curve is FEMA Hazus-MH 2.1 Table 7.9's whole-substation depth-damage table. Turbines, foundations, collection and civil works have no flood curve.",
+      "basis": "docs/cells/catalogue/flood_wind.json"
      }
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [
+    {
+     "note": "“Whole facility” here means the whole GSU substation, not the whole wind farm: the curve is FEMA Hazus-MH 2.1 Table 7.9's whole-substation depth-damage table. Turbines, foundations, collection and civil works have no flood curve.",
+     "basis": "docs/cells/catalogue/flood_wind.json"
     }
    ],
    "production_use": {
@@ -4809,6 +5034,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2"
@@ -4816,6 +5043,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; FACILITY_LEVEL_EXPOSURE_REQUIRED",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4843,6 +5072,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4"
@@ -4850,6 +5081,8 @@
    "gap": {
     "reason": "SCADA and controls, electrical collection, substation and civil infrastructure (reviewed secondary units, no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4891,7 +5124,7 @@
      "data_path": "curves/wildfire_wind/WWV1_GSU_PROTECTION_CONTROL_DC_FSIM_T4@model_v1_0__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_wind/current/wildfire_wind__model_v1_0__docs_r1__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -4900,10 +5133,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_wind",
+     "part": "GSU protection, control and DC",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -4934,13 +5172,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -4968,6 +5210,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4975,6 +5219,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5002,6 +5248,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -5009,6 +5257,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5036,6 +5286,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -5043,6 +5295,8 @@
    "gap": {
     "reason": "Model v0.1 is a fail-closed research scaffold with no curve records: no evidence yet links one hail event's impact on a blade to an inspected blade state and that blade's repair cost, and no hail-to-blade input axis is fixed (docs r2 deep curation kept it a strict no-go)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5070,6 +5324,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_wind@model_v1_0__docs_r1"
@@ -5077,6 +5333,8 @@
    "gap": {
     "reason": "GSU parts as separate units: switchgear, main transformer, transformer auxiliaries and controls, protection and SCADA, station service and DC, cable terminations (withheld, not zero)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5106,6 +5364,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2"
@@ -5113,6 +5373,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5140,6 +5402,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4"
@@ -5147,6 +5411,8 @@
    "gap": {
     "reason": "SCADA and controls, electrical collection, substation and civil infrastructure (reviewed secondary units, no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5176,6 +5442,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -5183,6 +5451,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; MIXED_BUILDING_AND_INSTRUMENT_INVENTORY_REQUIRES_SPLIT",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5210,13 +5480,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -5244,6 +5518,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -5251,6 +5527,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5278,6 +5556,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -5285,6 +5565,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5312,6 +5594,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -5319,6 +5603,8 @@
    "gap": {
     "reason": "Model v0.1 is a fail-closed research scaffold with no curve records: no evidence yet links one hail event's impact on a blade to an inspected blade state and that blade's repair cost, and no hail-to-blade input axis is fixed (docs r2 deep curation kept it a strict no-go)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5348,6 +5634,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_wind@model_v1_0__docs_r1"
@@ -5355,6 +5643,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; MIXED_CIVIL_BUCKET_REQUIRES_SPLIT",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5384,6 +5674,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2"
@@ -5391,6 +5683,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; MIXED_CIVIL_BUCKET_REQUIRES_SPLIT",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5418,6 +5712,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4"
@@ -5425,6 +5721,8 @@
    "gap": {
     "reason": "SCADA and controls, electrical collection, substation and civil infrastructure (reviewed secondary units, no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5454,6 +5752,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -5461,6 +5761,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; MIXED_CIVIL_BUCKET_REQUIRES_SPLIT",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5488,13 +5790,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -5522,6 +5828,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -5529,6 +5837,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5556,6 +5866,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -5563,6 +5875,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5590,6 +5904,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -5597,6 +5913,8 @@
    "gap": {
     "reason": "Model v0.1 is a fail-closed research scaffold with no curve records: no evidence yet links one hail event's impact on a blade to an inspected blade state and that blade's repair cost, and no hail-to-blade input axis is fixed (docs r2 deep curation kept it a strict no-go)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5627,6 +5945,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_wind@model_v1_0__docs_r1"
@@ -5634,6 +5954,8 @@
    "gap": {
     "reason": "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION; NO_INDEPENDENT_FRAGILITY; SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION; NO_INDEPENDENT_FRAGILITY",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5664,6 +5986,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2"
@@ -5671,6 +5995,8 @@
    "gap": {
     "reason": "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION; NO_INDEPENDENT_FRAGILITY; SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION; NO_INDEPENDENT_FRAGILITY",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5698,6 +6024,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4"
@@ -5705,6 +6033,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5735,6 +6065,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -5742,6 +6074,8 @@
    "gap": {
     "reason": "NO_INDEPENDENT_FRAGILITY; SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION; NO_INDEPENDENT_FRAGILITY; SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5769,13 +6103,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -5803,6 +6141,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -5810,6 +6150,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5837,6 +6179,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -5844,6 +6188,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   }

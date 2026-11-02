@@ -1508,7 +1508,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
     "link_kind": "repo_file",
     "title": "Damage Modeling wildfire_solar model v1.0/docs r3.",
     "no_link_sentence": null
@@ -1547,7 +1547,7 @@
     "provenance": "register",
     "repo_path": "docs/method/standards/00_index.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/method/standards/00_index.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/method/standards/00_index.md",
     "link_kind": "repo_file",
     "title": "Damage Modeling governed damage-curve standards and skill workflow.",
     "kind": "marker",
@@ -1844,7 +1844,7 @@
      {
       "id": "GOVERNANCE_CONTRACT",
       "title": "Damage Modeling governed damage-curve standards and skill workflow.",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/method/standards/00_index.md",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/method/standards/00_index.md",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -1907,6 +1907,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -1914,6 +1916,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; FULL_TURBINE_ECONOMIC_RESPONSE_NOT_CALIBRATED",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -1943,6 +1947,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -1950,6 +1956,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; FULL_TURBINE_ECONOMIC_RESPONSE_NOT_CALIBRATED",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -1979,6 +1987,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -1986,6 +1996,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; FULL_TURBINE_ECONOMIC_RESPONSE_NOT_CALIBRATED",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -2015,6 +2027,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -2022,6 +2036,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; DIRECT_THERMAL_RESPONSE_NOT_CALIBRATED",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -2060,7 +2076,7 @@
      "data_path": "curves/wildfire_wind/WWV1_PAD_ELECTRICAL_FSIM_T4@model_v1_0__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_wind/current/wildfire_wind__model_v1_0__docs_r1__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -2069,10 +2085,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_wind",
+     "part": "Pad electrical",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -2105,6 +2126,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -2112,6 +2135,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; LINE_EXPOSURE_AND_CONSTRUCTION_STATE_REQUIRED",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -2153,7 +2178,7 @@
      "data_path": "curves/wildfire_wind/WWV1_GSU_PROTECTION_CONTROL_DC_FSIM_T4@model_v1_0__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_wind/current/wildfire_wind__model_v1_0__docs_r1__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -2162,10 +2187,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_wind",
+     "part": "GSU protection, control and DC",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -2198,6 +2228,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -2205,6 +2237,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; MIXED_BUILDING_AND_INSTRUMENT_INVENTORY_REQUIRES_SPLIT",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -2234,6 +2268,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -2241,6 +2277,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; MIXED_CIVIL_BUCKET_REQUIRES_SPLIT",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -2271,6 +2309,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
@@ -2278,6 +2318,8 @@
    "gap": {
     "reason": "NO_INDEPENDENT_FRAGILITY; SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION; NO_INDEPENDENT_FRAGILITY; SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   }

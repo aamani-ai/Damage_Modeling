@@ -1753,7 +1753,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/hail_wind/proposed/LEGACY_EVIDENCE_INGESTION_hail_wind__model_v0_1__docs_r1.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/hail_wind/proposed/LEGACY_EVIDENCE_INGESTION_hail_wind__model_v0_1__docs_r1.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/hail_wind/proposed/LEGACY_EVIDENCE_INGESTION_hail_wind__model_v0_1__docs_r1.md",
     "link_kind": "repo_file",
     "title": "Damage_Modeling hail_wind proposal, legacy evidence audit:…",
     "no_link_sentence": null
@@ -2711,7 +2711,7 @@
      "data_path": "curves/hail_real_estate/HRE_RES_ROOF_ASPHALT_SHINGLE_LAMINATED@model_v0_1__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/hail_real_estate/proposed/hail_real_estate__model_v0_1__docs_r1__curve_artifact.json",
      "parameter_count": 3,
      "source_ids": [
@@ -2722,15 +2722,18 @@
      "production_use": {
       "state": "not_runtime_indexed",
       "consumer_pin": null,
-      "sentence": "This curve is not in the runtime index."
-     }
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "hail_real_estate",
+     "part": "House roof (asphalt shingles)",
+     "scope_note": null
     },
     {
      "curve_id": "HRE_RES_WALLS_WINDOWS_T4",
      "data_path": "curves/hail_real_estate/HRE_RES_WALLS_WINDOWS_T4@model_v0_1__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/hail_real_estate/proposed/hail_real_estate__model_v0_1__docs_r1__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -2739,10 +2742,15 @@
      "production_use": {
       "state": "not_runtime_indexed",
       "consumer_pin": null,
-      "sentence": "This curve is not in the runtime index."
-     }
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "hail_real_estate",
+     "part": "House walls and windows",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -2750,6 +2758,8 @@
    "gap": {
     "reason": "A curve covers only part of this expected subcomponent.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -2791,7 +2801,7 @@
      "data_path": "curves/hail_real_estate/HRE_IND_ROOF_STANDING_SEAM_STEEL@model_v0_1__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/hail_real_estate/proposed/hail_real_estate__model_v0_1__docs_r1__curve_artifact.json",
      "parameter_count": 3,
      "source_ids": [
@@ -2803,15 +2813,18 @@
      "production_use": {
       "state": "not_runtime_indexed",
       "consumer_pin": null,
-      "sentence": "This curve is not in the runtime index."
-     }
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "hail_real_estate",
+     "part": "Warehouse roof (standing-seam steel)",
+     "scope_note": null
     },
     {
      "curve_id": "HRE_IND_WINDOWS_T4",
      "data_path": "curves/hail_real_estate/HRE_IND_WINDOWS_T4@model_v0_1__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/hail_real_estate/proposed/hail_real_estate__model_v0_1__docs_r1__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -2824,10 +2837,15 @@
      "production_use": {
       "state": "not_runtime_indexed",
       "consumer_pin": null,
-      "sentence": "This curve is not in the runtime index."
-     }
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "hail_real_estate",
+     "part": "Warehouse windows",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -2835,6 +2853,8 @@
    "gap": {
     "reason": "A curve covers only part of this expected subcomponent.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -2876,7 +2896,7 @@
      "data_path": "curves/hail_real_estate/HRE_OFF_ROOF_TPO_MEMBRANE_AND_INSULATION@model_v0_1__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/hail_real_estate/proposed/hail_real_estate__model_v0_1__docs_r1__curve_artifact.json",
      "parameter_count": 3,
      "source_ids": [
@@ -2888,15 +2908,18 @@
      "production_use": {
       "state": "not_runtime_indexed",
       "consumer_pin": null,
-      "sentence": "This curve is not in the runtime index."
-     }
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "hail_real_estate",
+     "part": "Office roof (TPO membrane and insulation)",
+     "scope_note": null
     },
     {
      "curve_id": "HRE_OFF_WINDOWS_T4",
      "data_path": "curves/hail_real_estate/HRE_OFF_WINDOWS_T4@model_v0_1__docs_r1.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/hail_real_estate/proposed/hail_real_estate__model_v0_1__docs_r1__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -2909,10 +2932,15 @@
      "production_use": {
       "state": "not_runtime_indexed",
       "consumer_pin": null,
-      "sentence": "This curve is not in the runtime index."
-     }
+      "sentence": "Not in the runtime index: production cannot call this curve."
+     },
+     "entry_id": "hail_real_estate",
+     "part": "Office windows",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -2920,6 +2948,8 @@
    "gap": {
     "reason": "A curve covers only part of this expected subcomponent.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -2947,6 +2977,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -2954,6 +2986,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -2983,6 +3017,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -2990,6 +3026,8 @@
    "gap": {
     "reason": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   }

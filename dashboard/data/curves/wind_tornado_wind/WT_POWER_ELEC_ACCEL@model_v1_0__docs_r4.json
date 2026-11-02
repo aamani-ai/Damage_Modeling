@@ -2204,7 +2204,7 @@
      "AWN_15_DECLARED_BRIDGE"
     ],
     "title": "Awn 15 Declared Bridge",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/wind_tornado_wind/current/wind_tornado_wind_curve_derivation_dossier_v1_0.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/wind_tornado_wind/current/wind_tornado_wind_curve_derivation_dossier_v1_0.md",
     "link_kind": "repo_file",
     "locator": "docs/cells/wind_tornado_wind/basics/MODEL_REFERENCE.md",
     "no_link_sentence": null,
@@ -2451,7 +2451,7 @@
    ],
    "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
    "doi": null,
-   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
    "link_kind": "repo_file",
    "no_link_sentence": null
   }
@@ -2653,7 +2653,7 @@
    ],
    "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
    "doi": null,
-   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
    "link_kind": "repo_file",
    "no_link_sentence": null
   }
@@ -2661,7 +2661,52 @@
  "construction": {
   "curve_type": "wind tornado logistic ratio",
   "curve_form": "wind_tornado_logistic_ratio",
-  "formula": "D(R) = max_DR / (1 + exp(-k_ratio × (R - D50_ratio)))",
+  "formula": "D(R) = max_DR / (1 + exp(−k_ratio × (R − D50))), with D50 = D50_ratio_straight_line, plus tornado_D50_shift for the tornado variant",
+  "formula_source": "scripts/reference_helpers/damage_curve_eval.py",
+  "variables": [
+   {
+    "symbol": "D(R)",
+    "meaning": "damage ratio at demand ratio R",
+    "parameter": null
+   },
+   {
+    "symbol": "R",
+    "meaning": "the curve's x-axis: wind demand as a ratio of design capacity",
+    "parameter": null
+   },
+   {
+    "symbol": "max_DR",
+    "meaning": "the ceiling: the largest damage ratio the curve reaches",
+    "parameter": "max_DR"
+   },
+   {
+    "symbol": "k_ratio",
+    "meaning": "steepness: how fast damage rises around the midpoint, per unit of ratio",
+    "parameter": "k_ratio"
+   },
+   {
+    "symbol": "D50_ratio_straight_line",
+    "meaning": "the midpoint for straight-line wind: the ratio at which damage reaches half of max_DR",
+    "parameter": "D50_ratio_straight_line"
+   },
+   {
+    "symbol": "tornado_D50_shift",
+    "meaning": "added to the midpoint for the tornado variant",
+    "parameter": "tornado_D50_shift"
+   }
+  ],
+  "marks": null,
+  "unkeyed_parameters": [],
+  "curve_tiers": {
+   "shape": {
+    "tier": "T4",
+    "word": "our judgment"
+   },
+   "cost": {
+    "tier": "T4",
+    "word": "our judgment"
+   }
+  },
   "axis": {
    "id": "speed_ratio_to_iec",
    "label": "gust ratio V₃ₛ,hub / Ve50 (IEC class)",
@@ -2696,7 +2741,7 @@
   "parameters": [
    {
     "name": "max_DR",
-    "definition": "maximum damage ratio",
+    "definition": "the ceiling: the largest damage ratio the curve reaches",
     "value": 0.3,
     "value_path": "docs/cells/wind_tornado_wind/current/wind_tornado_wind__model_v1_0__docs_r4__curve_artifact.json::curve_id=WT_POWER_ELEC_ACCEL::parameters.max_DR",
     "tier": "T4",
@@ -2709,6 +2754,32 @@
      "SOLAR_WIND_VALUE_BREAKDOWN"
     ],
     "sources": [
+     {
+      "id": "SRC_NIST_FRAGILITY",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "citation": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "url": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "locator": null,
+      "role": "Supports fragility/damage-state methodology, multiple damage types, no double-counting, and conditional dependencies.",
+      "tier": null,
+      "permitted": null,
+      "prohibited": null,
+      "decision": null,
+      "accessed_on": null,
+      "provenance": "extracted-from-workbook",
+      "from": {
+       "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+       "sheet": "Sources"
+      },
+      "aliases": [
+       "SRC_NIST_FRAGILITY"
+      ],
+      "source_type": null,
+      "doi": null,
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "no_link_sentence": null
+     },
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
@@ -2730,19 +2801,27 @@
       ],
       "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "doi": null,
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "no_link_sentence": null
      }
     ],
+    "unresolved_source_ids": [],
     "register_rows": [
      "max_DR"
     ],
-    "source_scope": "parameter"
+    "source_scope": "parameter",
+    "where_from": "our_judgment",
+    "files": [
+     {
+      "role": "write-up",
+      "path": "docs/cells/wind_tornado_wind/current/wind_tornado_wind_curve_derivation_dossier_v1_0.md"
+     }
+    ]
    },
    {
     "name": "D50_ratio_straight_line",
-    "definition": "d50 ratio straight line",
+    "definition": "the midpoint for straight-line wind: the ratio at which damage reaches half of max_DR",
     "value": 1.2,
     "value_path": "docs/cells/wind_tornado_wind/current/wind_tornado_wind__model_v1_0__docs_r4__curve_artifact.json::curve_id=WT_POWER_ELEC_ACCEL::parameters.D50_ratio_straight_line",
     "tier": "T4",
@@ -2754,15 +2833,76 @@
      "DOE_SEVERE_WEATHER",
      "NIST_FRAGILITY_METHOD"
     ],
-    "sources": [],
+    "sources": [
+     {
+      "id": "SRC_DOE_WIND_STORMS",
+      "title": "Wind turbines severe weather controls and design context",
+      "citation": "Wind turbines severe weather controls and design context",
+      "url": "https://www.energy.gov/cmei/wind/articles/how-do-wind-turbines-survive-severe-weather-and-storms",
+      "locator": null,
+      "role": "Supports cut-out/shutdown, feathering, yaw behavior, typical IEC design gust context, and direct tornado-damage caveat.",
+      "tier": null,
+      "permitted": null,
+      "prohibited": null,
+      "decision": null,
+      "accessed_on": null,
+      "provenance": "extracted-from-workbook",
+      "from": {
+       "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+       "sheet": "Sources"
+      },
+      "aliases": [
+       "SRC_DOE_WIND_STORMS"
+      ],
+      "source_type": null,
+      "doi": null,
+      "link": "https://www.energy.gov/cmei/wind/articles/how-do-wind-turbines-survive-severe-weather-and-storms",
+      "link_kind": "url",
+      "no_link_sentence": null
+     },
+     {
+      "id": "SRC_NIST_FRAGILITY",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "citation": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "url": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "locator": null,
+      "role": "Supports fragility/damage-state methodology, multiple damage types, no double-counting, and conditional dependencies.",
+      "tier": null,
+      "permitted": null,
+      "prohibited": null,
+      "decision": null,
+      "accessed_on": null,
+      "provenance": "extracted-from-workbook",
+      "from": {
+       "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+       "sheet": "Sources"
+      },
+      "aliases": [
+       "SRC_NIST_FRAGILITY"
+      ],
+      "source_type": null,
+      "doi": null,
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "no_link_sentence": null
+     }
+    ],
+    "unresolved_source_ids": [],
     "register_rows": [
      "D50_ratio_straight_line"
     ],
-    "source_scope": "parameter"
+    "source_scope": "parameter",
+    "where_from": "our_judgment",
+    "files": [
+     {
+      "role": "write-up",
+      "path": "docs/cells/wind_tornado_wind/current/wind_tornado_wind_curve_derivation_dossier_v1_0.md"
+     }
+    ]
    },
    {
     "name": "k_ratio",
-    "definition": "logistic steepness on the demand-ratio axis",
+    "definition": "steepness: how fast damage rises around the midpoint, per unit of ratio",
     "value": 8.0,
     "value_path": "docs/cells/wind_tornado_wind/current/wind_tornado_wind__model_v1_0__docs_r4__curve_artifact.json::curve_id=WT_POWER_ELEC_ACCEL::parameters.k_ratio",
     "tier": "T4",
@@ -2773,15 +2913,50 @@
     "source_ids": [
      "NIST_FRAGILITY_METHOD"
     ],
-    "sources": [],
+    "sources": [
+     {
+      "id": "SRC_NIST_FRAGILITY",
+      "title": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "citation": "Fragility curves, damage matrices, and wind-induced loss estimation",
+      "url": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "locator": null,
+      "role": "Supports fragility/damage-state methodology, multiple damage types, no double-counting, and conditional dependencies.",
+      "tier": null,
+      "permitted": null,
+      "prohibited": null,
+      "decision": null,
+      "accessed_on": null,
+      "provenance": "extracted-from-workbook",
+      "from": {
+       "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+       "sheet": "Sources"
+      },
+      "aliases": [
+       "SRC_NIST_FRAGILITY"
+      ],
+      "source_type": null,
+      "doi": null,
+      "link": "https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation",
+      "link_kind": "url",
+      "no_link_sentence": null
+     }
+    ],
+    "unresolved_source_ids": [],
     "register_rows": [
      "k_ratio"
     ],
-    "source_scope": "parameter"
+    "source_scope": "parameter",
+    "where_from": "our_judgment",
+    "files": [
+     {
+      "role": "write-up",
+      "path": "docs/cells/wind_tornado_wind/current/wind_tornado_wind_curve_derivation_dossier_v1_0.md"
+     }
+    ]
    },
    {
     "name": "tornado_D50_shift",
-    "definition": "tornado d50 shift",
+    "definition": "added to the midpoint for the tornado variant",
     "value": -0.05,
     "value_path": "docs/cells/wind_tornado_wind/current/wind_tornado_wind__model_v1_0__docs_r4__curve_artifact.json::curve_id=WT_POWER_ELEC_ACCEL::parameters.tornado_D50_shift",
     "tier": "T4",
@@ -2793,11 +2968,72 @@
      "NASA_GREENFIELD_TORNADO",
      "NOAA_NWS_EF_SCALE"
     ],
-    "sources": [],
+    "sources": [
+     {
+      "id": "SRC_NASA_GREENFIELD",
+      "title": "2024 Greenfield tornado case",
+      "citation": "2024 Greenfield tornado case",
+      "url": "https://science.nasa.gov/earth/earth-observatory/tornado-damage-in-greenfield-152870/",
+      "locator": null,
+      "role": "Supports EF4 185 mph case evidence with downed wind turbines/power lines; used as high-severity case evidence, not a curve.",
+      "tier": null,
+      "permitted": null,
+      "prohibited": null,
+      "decision": null,
+      "accessed_on": null,
+      "provenance": "extracted-from-workbook",
+      "from": {
+       "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+       "sheet": "Sources"
+      },
+      "aliases": [
+       "SRC_NASA_GREENFIELD"
+      ],
+      "source_type": null,
+      "doi": null,
+      "link": "https://science.nasa.gov/earth/earth-observatory/tornado-damage-in-greenfield-152870/",
+      "link_kind": "url",
+      "no_link_sentence": null
+     },
+     {
+      "id": "SRC_NWS_EF",
+      "title": "Enhanced Fujita scale",
+      "citation": "Enhanced Fujita scale",
+      "url": "https://www.weather.gov/grb/efscale",
+      "locator": null,
+      "role": "Supports EF-scale 3-second gust ranges and warning that EF wind estimates are damage-based, not direct measurements.",
+      "tier": null,
+      "permitted": null,
+      "prohibited": null,
+      "decision": null,
+      "accessed_on": null,
+      "provenance": "extracted-from-workbook",
+      "from": {
+       "file": "docs/cells/wind_tornado_wind/current/damage_curve_records_v1_0_wind_tornado_wind.xlsx",
+       "sheet": "Sources"
+      },
+      "aliases": [
+       "SRC_NWS_EF"
+      ],
+      "source_type": null,
+      "doi": null,
+      "link": "https://www.weather.gov/grb/efscale",
+      "link_kind": "url",
+      "no_link_sentence": null
+     }
+    ],
+    "unresolved_source_ids": [],
     "register_rows": [
      "tornado_D50_shift"
     ],
-    "source_scope": "parameter"
+    "source_scope": "parameter",
+    "where_from": "our_judgment",
+    "files": [
+     {
+      "role": "write-up",
+      "path": "docs/cells/wind_tornado_wind/current/wind_tornado_wind_curve_derivation_dossier_v1_0.md"
+     }
+    ]
    }
   ],
   "additional_parameter_rows": [],
@@ -2927,7 +3163,7 @@
     ],
     "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "link_kind": "repo_file",
     "no_link_sentence": null
    }
@@ -2945,10 +3181,17 @@
    "function": "evaluate_curve_record",
    "note": "logistic on the gust ratio; the tornado variant shifts D50 by tornado_D50_shift"
   },
+  "constructing_files": [
+   {
+    "role": "write-up",
+    "path": "docs/cells/wind_tornado_wind/current/wind_tornado_wind_curve_derivation_dossier_v1_0.md"
+   }
+  ],
+  "scope_note": null,
   "production_use": {
    "state": "runtime_indexed",
    "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4",
-   "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
+   "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
   }
  }
 }

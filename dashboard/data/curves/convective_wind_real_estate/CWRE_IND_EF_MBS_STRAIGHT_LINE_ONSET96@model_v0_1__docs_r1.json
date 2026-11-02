@@ -4121,7 +4121,52 @@
  "construction": {
   "curve_type": "piecewise linear",
   "curve_form": "piecewise_linear",
-  "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+  "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+  "formula_source": "scripts/reference_helpers/damage_curve_eval.py",
+  "variables": [
+   {
+    "symbol": "D(x)",
+    "meaning": "damage ratio at intensity x",
+    "parameter": null
+   },
+   {
+    "symbol": "(x_i, D_i)",
+    "meaning": "the listed points: intensity and damage ratio",
+    "parameter": "points"
+   },
+   {
+    "symbol": "O",
+    "meaning": "onset: the last intensity with zero damage before damage starts (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "F",
+    "meaning": "full: the first intensity at which damage reaches its highest value (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "D_max",
+    "meaning": "the highest damage ratio among the points",
+    "parameter": null
+   }
+  ],
+  "marks": {
+   "O": 96.0,
+   "F": 233.0,
+   "D_max": 1.0,
+   "O_note": null
+  },
+  "unkeyed_parameters": [],
+  "curve_tiers": {
+   "shape": {
+    "tier": "T3",
+    "word": "borrowed"
+   },
+   "cost": {
+    "tier": "T4",
+    "word": "our judgment"
+   }
+  },
   "axis": {
    "id": "CONVECTIVE_GUST_3S_10M_OPEN_TERRAIN_MPH",
    "label": "convective gust 3s 10m open terrain mph",
@@ -4137,7 +4182,7 @@
   "parameters": [
    {
     "name": "points",
-    "definition": "ordered hazard-intensity and damage-ratio knots",
+    "definition": "the listed points: intensity and damage ratio",
     "value": [
      [
       0.0,
@@ -5167,9 +5212,7 @@
     "value_path": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json::curve_id=CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96::parameters.points",
     "tier": null,
     "tier_word": null,
-    "reasoning": [
-     "No parameter-specific register row; use the curve-level construction sources and artifact value path."
-    ],
+    "reasoning": [],
     "source_ids": [
      "CWRE-S001",
      "CWRE-S002",
@@ -5226,8 +5269,11 @@
       "source_id": "CWRE-S006"
      }
     ],
+    "unresolved_source_ids": [],
     "register_rows": [],
-    "source_scope": "curve"
+    "source_scope": "curve",
+    "where_from": "curve_level",
+    "files": []
    }
   ],
   "additional_parameter_rows": [],
@@ -5293,10 +5339,25 @@
    "function": "evaluate_damage_call",
    "note": "request template from the cell's known-answer tests; the hazard axis field varied over the record's valid range"
   },
+  "constructing_files": [
+   {
+    "role": "write-up",
+    "path": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate_curve_derivation_dossier__model_v0_1__docs_r1.md"
+   },
+   {
+    "role": "build script",
+    "path": "scripts/reference_helpers/build_convective_wind_real_estate_v0_1_package.py"
+   },
+   {
+    "role": "decision record",
+    "path": "docs/cells/convective_wind_real_estate/proposed/DECISION_LOG_convective_wind_real_estate__model_v0_1__docs_r1.md"
+   }
+  ],
+  "scope_note": null,
   "production_use": {
    "state": "not_runtime_indexed",
    "consumer_pin": null,
-   "sentence": "This curve is not in the runtime index."
+   "sentence": "Not in the runtime index: production cannot call this curve."
   }
  }
 }

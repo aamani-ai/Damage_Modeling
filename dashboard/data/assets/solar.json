@@ -2683,7 +2683,7 @@
      "data_path": "curves/hail_solar/HAIL_SOLAR_DEFAULT_3P2_GBS@model_v1_0__docs_r7.json",
      "curve_type": "logistic",
      "curve_form": "logistic",
-     "formula": "D(x) = max_DR / (1 + exp(-k × (x - x50)))",
+     "formula": "D(x) = max_DR / (1 + exp(−k_per_mm × (x − D50_mm)))",
      "artifact": "docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json",
      "parameter_count": 3,
      "source_ids": [
@@ -2693,15 +2693,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "hail_solar@model_v1_0__docs_r7",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "hail_solar",
+     "part": "PV modules (glass and cells)",
+     "scope_note": null
     },
     {
      "curve_id": "HAIL_SOLAR_FRAGILE_THIN_GG",
      "data_path": "curves/hail_solar/HAIL_SOLAR_FRAGILE_THIN_GG@model_v1_0__docs_r7.json",
      "curve_type": "logistic",
      "curve_form": "logistic",
-     "formula": "D(x) = max_DR / (1 + exp(-k × (x - x50)))",
+     "formula": "D(x) = max_DR / (1 + exp(−k_per_mm × (x − D50_mm)))",
      "artifact": "docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json",
      "parameter_count": 3,
      "source_ids": [
@@ -2711,15 +2714,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "hail_solar@model_v1_0__docs_r7",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "hail_solar",
+     "part": "PV modules (glass and cells)",
+     "scope_note": null
     },
     {
      "curve_id": "HAIL_SOLAR_HARDENED_THICKER",
      "data_path": "curves/hail_solar/HAIL_SOLAR_HARDENED_THICKER@model_v1_0__docs_r7.json",
      "curve_type": "logistic",
      "curve_form": "logistic",
-     "formula": "D(x) = max_DR / (1 + exp(-k × (x - x50)))",
+     "formula": "D(x) = max_DR / (1 + exp(−k_per_mm × (x − D50_mm)))",
      "artifact": "docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json",
      "parameter_count": 3,
      "source_ids": [
@@ -2729,10 +2735,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "hail_solar@model_v1_0__docs_r7",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "hail_solar",
+     "part": "PV modules (glass and cells)",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -2774,7 +2785,7 @@
      "data_path": "curves/flood_solar/FS_PVMOD@model_v1_0__docs_r4.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -2785,10 +2796,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_solar@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_solar",
+     "part": "PV modules",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -2835,7 +2851,7 @@
      "data_path": "curves/tropical_cyclone_wind_solar/TCWS2_FIXED_MODULE_SYNTHETIC_T4_ORDERED_STATES@model_v2_1__docs_r2.json",
      "curve_type": "ordered damage state lognormal",
      "curve_form": "ordered_damage_state_lognormal",
-     "formula": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
      "artifact": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
      "parameter_count": 8,
      "source_ids": [
@@ -2848,15 +2864,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_solar",
+     "part": "PV module field",
+     "scope_note": null
     },
     {
      "curve_id": "TCWS2_TRACKER_MODULE_SYNTHETIC_T4_ORDERED_STATES",
      "data_path": "curves/tropical_cyclone_wind_solar/TCWS2_TRACKER_MODULE_SYNTHETIC_T4_ORDERED_STATES@model_v2_1__docs_r2.json",
      "curve_type": "ordered damage state lognormal",
      "curve_form": "ordered_damage_state_lognormal",
-     "formula": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
      "artifact": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
      "parameter_count": 8,
      "source_ids": [
@@ -2869,15 +2888,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_solar",
+     "part": "PV module field",
+     "scope_note": null
     },
     {
      "curve_id": "TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1",
      "data_path": "curves/tropical_cyclone_wind_solar/TCWS_PERRY_GROUND_FIXED_VISIBLE_REPLACEMENT_PROXY_V1@model_v2_1__docs_r2.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
      "parameter_count": 6,
      "source_ids": [
@@ -2890,10 +2912,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_solar",
+     "part": "PV module hardware, satellite-data route",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2"
@@ -2935,7 +2962,7 @@
      "data_path": "curves/strong_wind_solar/SWS_MODULE_ATTACH@model_v1_0__docs_r3.json",
      "curve_type": "thresholded logistic demand",
      "curve_form": "thresholded_logistic_demand",
-     "formula": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(-k × (R - R50)))",
+     "formula": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(−k × (R − R50)))",
      "artifact": "docs/cells/strong_wind_solar/current/strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 5,
      "source_ids": [
@@ -2947,10 +2974,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "strong_wind_solar",
+     "part": "PV module attachment",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3"
@@ -2993,7 +3025,7 @@
      "data_path": "curves/wildfire_solar/WSV1_MODULE_THERMAL@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -3005,10 +3037,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "PV modules",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -3039,13 +3076,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -3073,6 +3114,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3080,6 +3123,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3107,6 +3152,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3114,6 +3161,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3141,6 +3190,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -3148,6 +3199,8 @@
    "gap": {
     "reason": "Racking structure (secondary, open; no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3175,6 +3228,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -3182,6 +3237,8 @@
    "gap": {
     "reason": "Mounting and racking structure (debris and velocity load is a candidate mechanism; no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3222,7 +3279,7 @@
      "data_path": "curves/tropical_cyclone_wind_solar/TCWS2_FIXED_STRUCTURE_SYNTHETIC_T4_ORDERED_STATES@model_v2_1__docs_r2.json",
      "curve_type": "ordered damage state lognormal",
      "curve_form": "ordered_damage_state_lognormal",
-     "formula": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
      "artifact": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
      "parameter_count": 8,
      "source_ids": [
@@ -3235,15 +3292,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_solar",
+     "part": "Mounting structure",
+     "scope_note": null
     },
     {
      "curve_id": "TCWS2_TRACKER_SBOS_SYNTHETIC_T4_ORDERED_STATES",
      "data_path": "curves/tropical_cyclone_wind_solar/TCWS2_TRACKER_SBOS_SYNTHETIC_T4_ORDERED_STATES@model_v2_1__docs_r2.json",
      "curve_type": "ordered damage state lognormal",
      "curve_form": "ordered_damage_state_lognormal",
-     "formula": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
      "artifact": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
      "parameter_count": 8,
      "source_ids": [
@@ -3256,10 +3316,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_solar",
+     "part": "Mounting structure",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2"
@@ -3303,7 +3368,7 @@
      "data_path": "curves/strong_wind_solar/SWS_RACKING_STRUCT@model_v1_0__docs_r3.json",
      "curve_type": "thresholded logistic demand",
      "curve_form": "thresholded_logistic_demand",
-     "formula": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(-k × (R - R50)))",
+     "formula": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(−k × (R − R50)))",
      "artifact": "docs/cells/strong_wind_solar/current/strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 5,
      "source_ids": [
@@ -3315,15 +3380,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "strong_wind_solar",
+     "part": "Racking structure",
+     "scope_note": null
     },
     {
      "curve_id": "SWS_TRACKER_STRUCT",
      "data_path": "curves/strong_wind_solar/SWS_TRACKER_STRUCT@model_v1_0__docs_r3.json",
      "curve_type": "thresholded logistic demand",
      "curve_form": "thresholded_logistic_demand",
-     "formula": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(-k × (R - R50)))",
+     "formula": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(−k × (R − R50)))",
      "artifact": "docs/cells/strong_wind_solar/current/strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 5,
      "source_ids": [
@@ -3335,10 +3403,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "strong_wind_solar",
+     "part": "Tracker structure",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3"
@@ -3381,7 +3454,7 @@
      "data_path": "curves/wildfire_solar/WSV1_RACKING_THERMAL@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -3394,10 +3467,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Tracker and racking",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -3428,13 +3506,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -3462,6 +3544,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3469,6 +3553,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3496,6 +3582,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3503,6 +3591,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3530,6 +3620,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -3537,6 +3629,8 @@
    "gap": {
     "reason": "Inverters, substation, foundations, civil works and drainage (treated as no direct hail damage by coverage decision; no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3575,7 +3669,7 @@
      "data_path": "curves/flood_solar/FS_FOUND@model_v1_0__docs_r4.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -3584,10 +3678,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_solar@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_solar",
+     "part": "Foundations",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -3629,7 +3728,7 @@
      "data_path": "curves/tropical_cyclone_wind_solar/TCWS21_FOUNDATION_SCREENING_T4_ORDERED_STATES@model_v2_1__docs_r2.json",
      "curve_type": "ordered damage state lognormal",
      "curve_form": "ordered_damage_state_lognormal",
-     "formula": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
      "artifact": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
      "parameter_count": 8,
      "source_ids": [
@@ -3642,10 +3741,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_solar",
+     "part": "Foundations",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2"
@@ -3687,7 +3791,7 @@
      "data_path": "curves/strong_wind_solar/SWS_FOUNDATION_UPLIFT@model_v1_0__docs_r3.json",
      "curve_type": "thresholded logistic demand",
      "curve_form": "thresholded_logistic_demand",
-     "formula": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(-k × (R - R50)))",
+     "formula": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(−k × (R − R50)))",
      "artifact": "docs/cells/strong_wind_solar/current/strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 5,
      "source_ids": [
@@ -3699,10 +3803,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "strong_wind_solar",
+     "part": "Foundations (uplift)",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3"
@@ -3745,7 +3854,7 @@
      "data_path": "curves/wildfire_solar/WSV1_FOUNDATION_THERMAL@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -3758,10 +3867,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Piles and inverter pads",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -3792,13 +3906,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -3826,6 +3944,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3833,6 +3953,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3860,6 +3982,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -3867,6 +3991,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3894,6 +4020,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -3901,6 +4029,8 @@
    "gap": {
     "reason": "Inverters, substation, foundations, civil works and drainage (treated as no direct hail damage by coverage decision; no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -3941,7 +4071,7 @@
      "data_path": "curves/flood_solar/FS_COMB@model_v1_0__docs_r4.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -3952,15 +4082,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_solar@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_solar",
+     "part": "Combiner boxes and DC protection",
+     "scope_note": null
     },
     {
      "curve_id": "FS_INV",
      "data_path": "curves/flood_solar/FS_INV@model_v1_0__docs_r4.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -3971,10 +4104,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_solar@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_solar",
+     "part": "Inverters",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -4016,7 +4154,7 @@
      "data_path": "curves/tropical_cyclone_wind_solar/TCWS21_POWER_COLLECTION_SCREENING_T4_ORDERED_STATES@model_v2_1__docs_r2.json",
      "curve_type": "ordered damage state lognormal",
      "curve_form": "ordered_damage_state_lognormal",
-     "formula": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
      "artifact": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
      "parameter_count": 8,
      "source_ids": [
@@ -4029,10 +4167,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_solar",
+     "part": "Power conversion and collection",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2"
@@ -4063,6 +4206,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3"
@@ -4070,6 +4215,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4111,7 +4258,7 @@
      "data_path": "curves/wildfire_solar/WSV1_COMBINER_THERMAL@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -4124,15 +4271,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Combiner boxes",
+     "scope_note": null
     },
     {
      "curve_id": "WSV1_INVERTER_THERMAL",
      "data_path": "curves/wildfire_solar/WSV1_INVERTER_THERMAL@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -4145,10 +4295,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Central inverters",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -4179,13 +4334,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -4213,6 +4372,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4220,6 +4381,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4247,6 +4410,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4254,6 +4419,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4281,6 +4448,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -4288,6 +4457,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4326,7 +4497,7 @@
      "data_path": "curves/flood_solar/FS_CABLE@model_v1_0__docs_r4.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -4337,10 +4508,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_solar@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_solar",
+     "part": "AC and DC collection cable",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -4382,7 +4558,7 @@
      "data_path": "curves/tropical_cyclone_wind_solar/TCWS21_POWER_COLLECTION_SCREENING_T4_ORDERED_STATES@model_v2_1__docs_r2.json",
      "curve_type": "ordered damage state lognormal",
      "curve_form": "ordered_damage_state_lognormal",
-     "formula": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
      "artifact": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
      "parameter_count": 8,
      "source_ids": [
@@ -4395,10 +4571,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_solar",
+     "part": "Power conversion and collection",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2"
@@ -4429,6 +4610,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3"
@@ -4436,6 +4619,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4475,7 +4660,7 @@
      "data_path": "curves/wildfire_solar/WSV1_CABLE_EXPOSED@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -4486,10 +4671,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Exposed AC and DC cable",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -4520,13 +4710,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -4554,6 +4748,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4561,6 +4757,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4588,6 +4786,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4595,6 +4795,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4622,6 +4824,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -4629,6 +4833,8 @@
    "gap": {
     "reason": "Inverters, substation, foundations, civil works and drainage (treated as no direct hail damage by coverage decision; no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4669,7 +4875,7 @@
      "data_path": "curves/flood_solar/FS_SWG@model_v1_0__docs_r4.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -4680,15 +4886,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_solar@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_solar",
+     "part": "Switchgear",
+     "scope_note": null
     },
     {
      "curve_id": "FS_XFMR",
      "data_path": "curves/flood_solar/FS_XFMR@model_v1_0__docs_r4.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -4699,10 +4908,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_solar@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_solar",
+     "part": "Main transformer and controls",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -4744,7 +4958,7 @@
      "data_path": "curves/tropical_cyclone_wind_solar/TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES@model_v2_1__docs_r2.json",
      "curve_type": "ordered damage state lognormal",
      "curve_form": "ordered_damage_state_lognormal",
-     "formula": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
      "artifact": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
      "parameter_count": 8,
      "source_ids": [
@@ -4757,10 +4971,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_solar",
+     "part": "GSU and substation",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2"
@@ -4791,6 +5010,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3"
@@ -4798,6 +5019,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4837,7 +5060,7 @@
      "data_path": "curves/wildfire_solar/WSV1_MV_EQUIPMENT_THERMAL@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -4850,10 +5073,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Transformers and switchgear",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -4884,13 +5112,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -4918,6 +5150,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4925,6 +5159,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4952,6 +5188,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -4959,6 +5197,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -4986,6 +5226,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -4993,6 +5235,8 @@
    "gap": {
     "reason": "SCADA and met instruments (optional secondary; no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5031,7 +5275,7 @@
      "data_path": "curves/flood_solar/FS_SCADA@model_v1_0__docs_r4.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
      "parameter_count": 2,
      "source_ids": [
@@ -5042,10 +5286,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "flood_solar@model_v1_0__docs_r4",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "flood_solar",
+     "part": "SCADA and monitoring cabinets",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -5087,7 +5336,7 @@
      "data_path": "curves/tropical_cyclone_wind_solar/TCWS21_SCADA_SCREENING_T4_ORDERED_STATES@model_v2_1__docs_r2.json",
      "curve_type": "ordered damage state lognormal",
      "curve_form": "ordered_damage_state_lognormal",
-     "formula": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
      "artifact": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
      "parameter_count": 8,
      "source_ids": [
@@ -5100,10 +5349,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_solar",
+     "part": "SCADA and communications",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2"
@@ -5145,7 +5399,7 @@
      "data_path": "curves/strong_wind_solar/SWS_SCADA_EXPOSED@model_v1_0__docs_r3.json",
      "curve_type": "thresholded logistic demand",
      "curve_form": "thresholded_logistic_demand",
-     "formula": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(-k × (R - R50)))",
+     "formula": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(−k × (R − R50)))",
      "artifact": "docs/cells/strong_wind_solar/current/strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 5,
      "source_ids": [
@@ -5157,10 +5411,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "strong_wind_solar",
+     "part": "Exposed SCADA and met station",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3"
@@ -5203,7 +5462,7 @@
      "data_path": "curves/wildfire_solar/WSV1_SCADA_THERMAL@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -5216,10 +5475,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "SCADA and communications",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -5250,13 +5514,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -5284,6 +5552,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -5291,6 +5561,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5318,6 +5590,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -5325,6 +5599,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5352,6 +5628,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -5359,6 +5637,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5386,6 +5666,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -5393,6 +5675,8 @@
    "gap": {
     "reason": "Site drainage and flood defences (treated as protection state, not a damaged part)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5420,6 +5704,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2"
@@ -5427,6 +5713,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5454,6 +5742,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3"
@@ -5461,6 +5751,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5500,7 +5792,7 @@
      "data_path": "curves/wildfire_solar/WSV1_GROUNDING_THERMAL@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -5513,10 +5805,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Grounding and lightning protection",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -5547,13 +5844,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -5581,6 +5882,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -5588,6 +5891,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5615,6 +5920,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -5622,6 +5929,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5649,6 +5958,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -5656,6 +5967,8 @@
    "gap": {
     "reason": "Inverters, substation, foundations, civil works and drainage (treated as no direct hail damage by coverage decision; no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5683,6 +5996,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -5690,6 +6005,8 @@
    "gap": {
     "reason": "Civil works: roads, access and fencing (reviewed in the write-up; no curve)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5728,7 +6045,7 @@
      "data_path": "curves/tropical_cyclone_wind_solar/TCWS21_CIVIL_SCREENING_T4_ORDERED_STATES@model_v2_1__docs_r2.json",
      "curve_type": "ordered damage state lognormal",
      "curve_form": "ordered_damage_state_lognormal",
-     "formula": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
      "artifact": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
      "parameter_count": 8,
      "source_ids": [
@@ -5741,10 +6058,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_solar",
+     "part": "Civil infrastructure",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2"
@@ -5775,6 +6097,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3"
@@ -5782,6 +6106,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5821,7 +6147,7 @@
      "data_path": "curves/wildfire_solar/WSV1_CIVIL_DIRECT@model_v1_0__docs_r3.json",
      "curve_type": "piecewise linear",
      "curve_form": "piecewise_linear",
-     "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
      "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
      "parameter_count": 1,
      "source_ids": [
@@ -5834,10 +6160,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Civil: fencing, roads, buildings, site prep",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -5868,13 +6199,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -5902,6 +6237,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -5909,6 +6246,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5936,6 +6275,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -5943,6 +6284,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -5970,6 +6313,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
@@ -5977,6 +6322,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -6004,6 +6351,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
@@ -6011,6 +6360,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -6040,6 +6391,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2"
@@ -6047,6 +6400,8 @@
    "gap": {
     "reason": "This subcomponent takes another part's damage ratio and has no curve of its own.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -6074,6 +6429,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3"
@@ -6081,6 +6438,8 @@
    "gap": {
     "reason": "This expected subcomponent is not named by the cell.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -6108,6 +6467,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
@@ -6115,6 +6476,8 @@
    "gap": {
     "reason": "Replacement support and fieldwork: no own curve; allocated once at the aggregate direct-and-civil damage ratio (T4 rule)",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -6142,13 +6505,17 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
    },
    "gap": {
-    "reason": "No catalogue entry or curve has been built for this asset × hazard.",
+    "reason": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
     "occurrence": null,
+    "effect": "performance",
+    "basis": [],
     "register": null
    }
   },
@@ -6176,6 +6543,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -6183,6 +6552,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   },
@@ -6210,6 +6581,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": null
@@ -6217,6 +6590,8 @@
    "gap": {
     "reason": "No catalogue entry or curve has been built for this asset × hazard.",
     "occurrence": null,
+    "effect": "damage",
+    "basis": [],
     "register": null
    }
   }

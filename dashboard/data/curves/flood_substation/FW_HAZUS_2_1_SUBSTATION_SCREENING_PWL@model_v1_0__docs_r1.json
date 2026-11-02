@@ -947,7 +947,7 @@
      "FW-S012"
     ],
     "title": "Hazus7 electric-power losses disabled; inherited pinned evidence",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
     "link_kind": "repo_file",
     "locator": null,
     "no_link_sentence": null,
@@ -959,7 +959,7 @@
      "SUB-A01"
     ],
     "title": "Existing canonical point/value selection",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
     "link_kind": "repo_file",
     "locator": null,
     "no_link_sentence": null,
@@ -971,7 +971,7 @@
      "SUB-A02"
     ],
     "title": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_substation/current/derivation.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_substation/current/derivation.md",
     "link_kind": "repo_file",
     "locator": null,
     "no_link_sentence": null,
@@ -1106,7 +1106,7 @@
    "provenance": "register",
    "repo_path": "docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
    "doi": null,
-   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
    "link_kind": "repo_file",
    "title": "Existing canonical point/value selection",
    "no_link_sentence": null
@@ -1126,7 +1126,7 @@
    "provenance": "register",
    "repo_path": "docs/cells/flood_substation/current/derivation.md",
    "doi": null,
-   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_substation/current/derivation.md",
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_substation/current/derivation.md",
    "link_kind": "repo_file",
    "title": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
    "no_link_sentence": null
@@ -1218,7 +1218,7 @@
    "provenance": "register",
    "repo_path": "docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
    "doi": null,
-   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
    "link_kind": "repo_file",
    "title": "Existing canonical point/value selection",
    "no_link_sentence": null
@@ -1238,7 +1238,7 @@
    "provenance": "register",
    "repo_path": "docs/cells/flood_substation/current/derivation.md",
    "doi": null,
-   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_substation/current/derivation.md",
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_substation/current/derivation.md",
    "link_kind": "repo_file",
    "title": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
    "no_link_sentence": null
@@ -1247,7 +1247,52 @@
  "construction": {
   "curve_type": "piecewise linear",
   "curve_form": "piecewise_linear",
-  "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+  "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+  "formula_source": "scripts/reference_helpers/damage_curve_eval.py",
+  "variables": [
+   {
+    "symbol": "D(x)",
+    "meaning": "damage ratio at intensity x",
+    "parameter": null
+   },
+   {
+    "symbol": "(x_i, D_i)",
+    "meaning": "the listed points: intensity and damage ratio",
+    "parameter": "points"
+   },
+   {
+    "symbol": "O",
+    "meaning": "onset: the last intensity with zero damage before damage starts (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "F",
+    "meaning": "full: the first intensity at which damage reaches its highest value (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "D_max",
+    "meaning": "the highest damage ratio among the points",
+    "parameter": null
+   }
+  ],
+  "marks": {
+   "O": 0.0,
+   "F": 10.0,
+   "D_max": 0.15,
+   "O_note": null
+  },
+  "unkeyed_parameters": [],
+  "curve_tiers": {
+   "shape": {
+    "tier": "T3",
+    "word": "borrowed"
+   },
+   "cost": {
+    "tier": "T4",
+    "word": "our judgment"
+   }
+  },
   "axis": {
    "id": "FLOOD_DEPTH_ABOVE_SUBSTATION_GRADE_FT_HAZUS",
    "label": "water depth above station grade (ft) at the facility point",
@@ -1263,7 +1308,7 @@
   "parameters": [
    {
     "name": "points",
-    "definition": "ordered hazard-intensity and damage-ratio knots",
+    "definition": "the listed points: intensity and damage ratio",
     "value": [
      [
       0,
@@ -1313,9 +1358,7 @@
     "value_path": "docs/cells/flood_substation/current/flood_substation__model_v1_0__docs_r1__curve_artifact.json::curve_id=FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL::parameters.points",
     "tier": null,
     "tier_word": null,
-    "reasoning": [
-     "No parameter-specific register row; use the curve-level construction sources and artifact value path."
-    ],
+    "reasoning": [],
     "source_ids": [
      "FW-S011",
      "SUB-A01",
@@ -1356,7 +1399,7 @@
       "provenance": "register",
       "repo_path": "docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
       "doi": null,
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
       "link_kind": "repo_file",
       "title": "Existing canonical point/value selection",
       "no_link_sentence": null
@@ -1376,14 +1419,17 @@
       "provenance": "register",
       "repo_path": "docs/cells/flood_substation/current/derivation.md",
       "doi": null,
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_substation/current/derivation.md",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_substation/current/derivation.md",
       "link_kind": "repo_file",
       "title": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
       "no_link_sentence": null
      }
     ],
+    "unresolved_source_ids": [],
     "register_rows": [],
-    "source_scope": "curve"
+    "source_scope": "curve",
+    "where_from": "curve_level",
+    "files": []
    }
   ],
   "additional_parameter_rows": [
@@ -1471,7 +1517,7 @@
     "provenance": "register",
     "repo_path": "docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/contracts/hazard_handoff/substation_flood_screening_v1/binding.json",
     "link_kind": "repo_file",
     "title": "Existing canonical point/value selection",
     "no_link_sentence": null
@@ -1491,7 +1537,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/flood_substation/current/derivation.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_substation/current/derivation.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_substation/current/derivation.md",
     "link_kind": "repo_file",
     "title": "Owner-selected screening scope; engineering-selected equal depth response for Coastal",
     "no_link_sentence": null
@@ -1508,10 +1554,21 @@
    "function": "evaluate_curve_record",
    "note": "generic piecewise-linear evaluator inside the record's valid range (0–10 ft); this cell has no per-cell evaluator in the repository"
   },
+  "constructing_files": [
+   {
+    "role": "write-up",
+    "path": "docs/cells/flood_substation/current/derivation.md"
+   },
+   {
+    "role": "decision record",
+    "path": "docs/plans/substation_damage/decisions.md"
+   }
+  ],
+  "scope_note": null,
   "production_use": {
    "state": "runtime_indexed",
    "consumer_pin": "flood_substation@model_v1_0__docs_r1",
-   "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
+   "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
   }
  }
 }

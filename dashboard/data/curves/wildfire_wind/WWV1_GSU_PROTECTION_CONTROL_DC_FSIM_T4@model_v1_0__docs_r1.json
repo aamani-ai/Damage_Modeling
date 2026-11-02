@@ -310,7 +310,7 @@
      "GOVERNANCE_CONTRACT"
     ],
     "title": "Damage Modeling governed damage-curve standards and skill workflow.",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/method/standards/00_index.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/method/standards/00_index.md",
     "link_kind": "repo_file",
     "locator": "cell package, provenance, pathway, capability, versioning, and fail-closed standards",
     "no_link_sentence": null,
@@ -472,7 +472,52 @@
  "construction": {
   "curve_type": "piecewise linear",
   "curve_form": "piecewise_linear",
-  "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+  "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+  "formula_source": "scripts/reference_helpers/damage_curve_eval.py",
+  "variables": [
+   {
+    "symbol": "D(x)",
+    "meaning": "damage ratio at intensity x",
+    "parameter": null
+   },
+   {
+    "symbol": "(x_i, D_i)",
+    "meaning": "the listed points: intensity and damage ratio",
+    "parameter": "points"
+   },
+   {
+    "symbol": "O",
+    "meaning": "onset: the last intensity with zero damage before damage starts (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "F",
+    "meaning": "full: the first intensity at which damage reaches its highest value (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "D_max",
+    "meaning": "the highest damage ratio among the points",
+    "parameter": null
+   }
+  ],
+  "marks": {
+   "O": 0.0,
+   "F": 6.0,
+   "D_max": 0.9,
+   "O_note": null
+  },
+  "unkeyed_parameters": [],
+  "curve_tiers": {
+   "shape": {
+    "tier": "T4",
+    "word": "our judgment"
+   },
+   "cost": {
+    "tier": "T4",
+    "word": "our judgment"
+   }
+  },
   "axis": {
    "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE_SCREENING",
    "label": "USFS FSim conditional flame-length class",
@@ -488,7 +533,7 @@
   "parameters": [
    {
     "name": "points",
-    "definition": "ordered hazard-intensity and damage-ratio knots",
+    "definition": "the listed points: intensity and damage ratio",
     "value": [
      [
       0,
@@ -522,9 +567,7 @@
     "value_path": "docs/cells/wildfire_wind/current/wildfire_wind__model_v1_0__docs_r1__curve_artifact.json::curve_id=WWV1_GSU_PROTECTION_CONTROL_DC_FSIM_T4::parameters.points",
     "tier": null,
     "tier_word": null,
-    "reasoning": [
-     "No parameter-specific register row; use the curve-level construction sources and artifact value path."
-    ],
+    "reasoning": [],
     "source_ids": [
      "WW1-A001"
     ],
@@ -549,8 +592,11 @@
       "no_link_sentence": "no link in the register"
      }
     ],
+    "unresolved_source_ids": [],
     "register_rows": [],
-    "source_scope": "curve"
+    "source_scope": "curve",
+    "where_from": "curve_level",
+    "files": []
    }
   ],
   "additional_parameter_rows": [
@@ -601,10 +647,25 @@
    "function": "evaluate_damage_call",
    "note": "request template from the cell's known-answer tests; the hazard axis field varied over the record's valid range"
   },
+  "constructing_files": [
+   {
+    "role": "write-up",
+    "path": "docs/cells/wildfire_wind/current/wildfire_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+   },
+   {
+    "role": "build script",
+    "path": "scripts/reference_helpers/build_wildfire_wind_v1_partial_screening_package.py"
+   },
+   {
+    "role": "decision record",
+    "path": "docs/cells/wildfire_wind/current/RELEASE_DECISION_wildfire_wind__model_v1_0__docs_r1.md"
+   }
+  ],
+  "scope_note": null,
   "production_use": {
    "state": "runtime_indexed",
    "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
-   "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
+   "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
   }
  }
 }

@@ -207,7 +207,7 @@
      "BF-S06"
     ],
     "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "link_kind": "repo_file",
     "locator": "flood_solar__model_v1_0__docs_r4__curve_artifact.json; flood_solar_curve_derivation_dossier_v1_0.md",
     "no_link_sentence": null,
@@ -483,7 +483,7 @@
    "provenance": "register",
    "repo_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
    "doi": null,
-   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
    "link_kind": "repo_file",
    "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
    "no_link_sentence": null
@@ -770,7 +770,7 @@
    "provenance": "register",
    "repo_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
    "doi": null,
-   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
    "link_kind": "repo_file",
    "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
    "no_link_sentence": null
@@ -912,7 +912,52 @@
  "construction": {
   "curve_type": "piecewise linear",
   "curve_form": "piecewise_linear",
-  "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+  "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+  "formula_source": "scripts/reference_helpers/damage_curve_eval.py",
+  "variables": [
+   {
+    "symbol": "D(x)",
+    "meaning": "damage ratio at intensity x",
+    "parameter": null
+   },
+   {
+    "symbol": "(x_i, D_i)",
+    "meaning": "the listed points: intensity and damage ratio",
+    "parameter": "points"
+   },
+   {
+    "symbol": "O",
+    "meaning": "onset: the last intensity with zero damage before damage starts (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "F",
+    "meaning": "full: the first intensity at which damage reaches its highest value (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "D_max",
+    "meaning": "the highest damage ratio among the points",
+    "parameter": null
+   }
+  ],
+  "marks": {
+   "O": 0.0,
+   "F": 1.0,
+   "D_max": 1.0,
+   "O_note": null
+  },
+  "unkeyed_parameters": [],
+  "curve_tiers": {
+   "shape": {
+    "tier": "T3",
+    "word": "borrowed"
+   },
+   "cost": {
+    "tier": "T3",
+    "word": "borrowed"
+   }
+  },
   "axis": {
    "id": "external_inundation_depth_above_local_grade_m",
    "label": "water depth above local grade",
@@ -932,7 +977,7 @@
   "parameters": [
    {
     "name": "points",
-    "definition": "ordered hazard-intensity and damage-ratio knots",
+    "definition": "the listed points: intensity and damage ratio",
     "value": [
      [
       0,
@@ -946,9 +991,7 @@
     "value_path": "docs/cells/flood_bess/current/curve_artifact.json::curve_id=BESS_PCS_SALINE_CONTACT_STATE::parameters.points",
     "tier": null,
     "tier_word": null,
-    "reasoning": [
-     "No parameter-specific register row; use the curve-level construction sources and artifact value path."
-    ],
+    "reasoning": [],
     "source_ids": [
      "BF-S01",
      "BF-S02",
@@ -1041,7 +1084,7 @@
       "provenance": "register",
       "repo_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
       "doi": null,
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
       "link_kind": "repo_file",
       "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
       "no_link_sentence": null
@@ -1180,8 +1223,11 @@
       "no_link_sentence": null
      }
     ],
+    "unresolved_source_ids": [],
     "register_rows": [],
-    "source_scope": "curve"
+    "source_scope": "curve",
+    "where_from": "curve_level",
+    "files": []
    }
   ],
   "additional_parameter_rows": [
@@ -1366,7 +1412,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "link_kind": "repo_file",
     "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
     "no_link_sentence": null
@@ -1524,10 +1570,21 @@
    "function": "evaluate_curve_record",
    "note": "state = int(depth > 0.3 m); saline replacement policy BF-Q02"
   },
+  "constructing_files": [
+   {
+    "role": "write-up",
+    "path": "docs/cells/flood_bess/current/derivation.md"
+   },
+   {
+    "role": "decision record",
+    "path": "docs/plans/bess_damage/decisions.md"
+   }
+  ],
+  "scope_note": null,
   "production_use": {
    "state": "runtime_indexed",
    "consumer_pin": "flood_bess@model_v1_0__docs_r1",
-   "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
+   "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
   }
  }
 }

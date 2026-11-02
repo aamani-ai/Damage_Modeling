@@ -1466,7 +1466,7 @@
      "BW-S02"
     ],
     "title": "Solar TC-wind model v2.1 docs r2",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/tropical_cyclone_wind_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/tropical_cyclone_wind_solar/current",
     "link_kind": "repo_file",
     "locator": "curve_artifact site-facility records and derivation dossier sections Curve architecture and Honest limitations",
     "no_link_sentence": null,
@@ -1550,7 +1550,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/tropical_cyclone_wind_solar/current",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/tropical_cyclone_wind_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/tropical_cyclone_wind_solar/current",
     "link_kind": "repo_file",
     "title": "Solar TC-wind model v2.1 docs r2",
     "no_link_sentence": null
@@ -2159,7 +2159,7 @@
      {
       "id": "BW-S02",
       "title": "Solar TC-wind model v2.1 docs r2",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/tropical_cyclone_wind_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/tropical_cyclone_wind_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      },
@@ -2188,7 +2188,7 @@
      {
       "id": "BW-S02",
       "title": "Solar TC-wind model v2.1 docs r2",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/tropical_cyclone_wind_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/tropical_cyclone_wind_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2326,7 +2326,7 @@
      {
       "id": "BW-S02",
       "title": "Solar TC-wind model v2.1 docs r2",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/tropical_cyclone_wind_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/tropical_cyclone_wind_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      },
@@ -2457,7 +2457,7 @@
      "data_path": "curves/tropical_cyclone_wind_bess/BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1@model_v1_0__docs_r1.json",
      "curve_type": "ordered damage state lognormal",
      "curve_form": "ordered_damage_state_lognormal",
-     "formula": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
      "artifact": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
      "parameter_count": 12,
      "source_ids": [
@@ -2472,15 +2472,18 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
     },
     {
      "curve_id": "BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1",
      "data_path": "curves/tropical_cyclone_wind_bess/BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1@model_v1_0__docs_r1.json",
      "curve_type": "ordered damage state lognormal",
      "curve_form": "ordered_damage_state_lognormal",
-     "formula": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
      "artifact": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
      "parameter_count": 12,
      "source_ids": [
@@ -2495,10 +2498,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
@@ -2540,7 +2548,7 @@
      "data_path": "curves/tropical_cyclone_wind_bess/BESS_SEPARATE_PCS_TC_PROXY_V0_1@model_v1_0__docs_r1.json",
      "curve_type": "ordered damage state lognormal",
      "curve_form": "ordered_damage_state_lognormal",
-     "formula": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
      "artifact": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
      "parameter_count": 12,
      "source_ids": [
@@ -2555,10 +2563,15 @@
      "production_use": {
       "state": "runtime_indexed",
       "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
-      "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-     }
+      "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "part": "Separate PCS",
+     "scope_note": null
     }
    ],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
@@ -2591,6 +2604,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
@@ -2608,6 +2623,8 @@
      },
      "bucket": "electrical_balance"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/hurricane_wind.json",
      "sha256": "b0dba18f513768581c2d477d1c8135dec4adf68d8dd57088b9c6c0463871cdf7",
@@ -2643,6 +2660,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
@@ -2660,6 +2679,8 @@
      },
      "bucket": "civil_works"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/hurricane_wind.json",
      "sha256": "b0dba18f513768581c2d477d1c8135dec4adf68d8dd57088b9c6c0463871cdf7",
@@ -2695,6 +2716,8 @@
    "evidence_labels": [],
    "evidence_words": "no tier stated",
    "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
    "production_use": {
     "state": "not_runtime_indexed",
     "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
@@ -2712,6 +2735,8 @@
      },
      "bucket": "fieldwork"
     },
+    "effect": "damage",
+    "basis": [],
     "register": {
      "path": "docs/evidence/occurrence/bess/hurricane_wind.json",
      "sha256": "b0dba18f513768581c2d477d1c8135dec4adf68d8dd57088b9c6c0463871cdf7",

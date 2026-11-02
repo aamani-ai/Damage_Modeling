@@ -320,7 +320,7 @@
      "BWF-S03"
     ],
     "title": "Canonical wildfire_solar model v1.0 docs r3",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/wildfire_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/wildfire_solar/current",
     "link_kind": "repo_file",
     "locator": "curve_artifact; ORDINATE_TABLE; dossier sections3-5; exact index pin",
     "no_link_sentence": null,
@@ -640,7 +640,7 @@
    "provenance": "register",
    "repo_path": "docs/cells/wildfire_solar/current",
    "doi": null,
-   "link": "https://github.com/aamani-ai/Damage_Modeling/tree/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/wildfire_solar/current",
+   "link": "https://github.com/aamani-ai/Damage_Modeling/tree/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/wildfire_solar/current",
    "link_kind": "repo_file",
    "title": "Canonical wildfire_solar model v1.0 docs r3",
    "no_link_sentence": null
@@ -717,7 +717,7 @@
    "provenance": "register",
    "repo_path": "docs/extra/discussion/bess_damage/evidence/r3",
    "doi": null,
-   "link": "https://github.com/aamani-ai/Damage_Modeling/tree/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/extra/discussion/bess_damage/evidence/r3",
+   "link": "https://github.com/aamani-ai/Damage_Modeling/tree/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/extra/discussion/bess_damage/evidence/r3",
    "link_kind": "repo_file",
    "title": "NREL-related same-budget battery hardware allocation from prior BESS review",
    "no_link_sentence": null
@@ -762,7 +762,7 @@
    "provenance": "register",
    "repo_path": "docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
    "doi": null,
-   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
    "link_kind": "repo_file",
    "title": "Owner BWF-Q01 ruling2026-10-19",
    "no_link_sentence": null
@@ -929,7 +929,7 @@
    "provenance": "register",
    "repo_path": "docs/cells/wildfire_solar/current",
    "doi": null,
-   "link": "https://github.com/aamani-ai/Damage_Modeling/tree/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/wildfire_solar/current",
+   "link": "https://github.com/aamani-ai/Damage_Modeling/tree/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/wildfire_solar/current",
    "link_kind": "repo_file",
    "title": "Canonical wildfire_solar model v1.0 docs r3",
    "no_link_sentence": null
@@ -1006,7 +1006,7 @@
    "provenance": "register",
    "repo_path": "docs/extra/discussion/bess_damage/evidence/r3",
    "doi": null,
-   "link": "https://github.com/aamani-ai/Damage_Modeling/tree/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/extra/discussion/bess_damage/evidence/r3",
+   "link": "https://github.com/aamani-ai/Damage_Modeling/tree/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/extra/discussion/bess_damage/evidence/r3",
    "link_kind": "repo_file",
    "title": "NREL-related same-budget battery hardware allocation from prior BESS review",
    "no_link_sentence": null
@@ -1051,7 +1051,7 @@
    "provenance": "register",
    "repo_path": "docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
    "doi": null,
-   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
+   "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
    "link_kind": "repo_file",
    "title": "Owner BWF-Q01 ruling2026-10-19",
    "no_link_sentence": null
@@ -1060,7 +1060,32 @@
  "construction": {
   "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
   "curve_form": "piecewise_linear",
-  "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+  "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
+  "formula_source": "scripts/reference_helpers/damage_curve_eval.py",
+  "variables": [
+   {
+    "symbol": "D(class)",
+    "meaning": "damage ratio for one hazard class",
+    "parameter": null
+   },
+   {
+    "symbol": "(class_i, D_i)",
+    "meaning": "the listed classes and their damage ratios",
+    "parameter": "points"
+   }
+  ],
+  "marks": null,
+  "unkeyed_parameters": [],
+  "curve_tiers": {
+   "shape": {
+    "tier": "T4",
+    "word": "our judgment"
+   },
+   "cost": {
+    "tier": "T4",
+    "word": "our judgment"
+   }
+  },
   "axis": {
    "id": "FSIM_CLASS_EXACT",
    "label": "FSim fire-intensity class at the unit, exact state",
@@ -1080,7 +1105,7 @@
   "parameters": [
    {
     "name": "points",
-    "definition": "ordered hazard-intensity and damage-ratio knots",
+    "definition": "the listed classes and their damage ratios",
     "value": [
      [
       0,
@@ -1114,9 +1139,7 @@
     "value_path": "docs/cells/wildfire_bess/current/curve_artifact.json::curve_id=BWF01_ENC_approved_replacement_heavy_electrical_ordinal::parameters.points",
     "tier": null,
     "tier_word": null,
-    "reasoning": [
-     "No parameter-specific register row; use the curve-level construction sources and artifact value path."
-    ],
+    "reasoning": [],
     "source_ids": [
      "BWF-S01",
      "BWF-S02",
@@ -1188,7 +1211,7 @@
       "provenance": "register",
       "repo_path": "docs/cells/wildfire_solar/current",
       "doi": null,
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/wildfire_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/wildfire_solar/current",
       "link_kind": "repo_file",
       "title": "Canonical wildfire_solar model v1.0 docs r3",
       "no_link_sentence": null
@@ -1265,7 +1288,7 @@
       "provenance": "register",
       "repo_path": "docs/extra/discussion/bess_damage/evidence/r3",
       "doi": null,
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/extra/discussion/bess_damage/evidence/r3",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/extra/discussion/bess_damage/evidence/r3",
       "link_kind": "repo_file",
       "title": "NREL-related same-budget battery hardware allocation from prior BESS review",
       "no_link_sentence": null
@@ -1310,14 +1333,17 @@
       "provenance": "register",
       "repo_path": "docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
       "doi": null,
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
       "link_kind": "repo_file",
       "title": "Owner BWF-Q01 ruling2026-10-19",
       "no_link_sentence": null
      }
     ],
+    "unresolved_source_ids": [],
     "register_rows": [],
-    "source_scope": "curve"
+    "source_scope": "curve",
+    "where_from": "curve_level",
+    "files": []
    }
   ],
   "additional_parameter_rows": [
@@ -1548,7 +1574,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/wildfire_solar/current",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/cells/wildfire_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/cells/wildfire_solar/current",
     "link_kind": "repo_file",
     "title": "Canonical wildfire_solar model v1.0 docs r3",
     "no_link_sentence": null
@@ -1625,7 +1651,7 @@
     "provenance": "register",
     "repo_path": "docs/extra/discussion/bess_damage/evidence/r3",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/extra/discussion/bess_damage/evidence/r3",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/extra/discussion/bess_damage/evidence/r3",
     "link_kind": "repo_file",
     "title": "NREL-related same-budget battery hardware allocation from prior BESS review",
     "no_link_sentence": null
@@ -1670,7 +1696,7 @@
     "provenance": "register",
     "repo_path": "docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/62b97133b5a6ee8445750a1e1a42d232c285dfad/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/02515df84c3c6d4ab583c723d6cd426a866b0465/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
     "link_kind": "repo_file",
     "title": "Owner BWF-Q01 ruling2026-10-19",
     "no_link_sentence": null
@@ -1693,10 +1719,21 @@
    "function": "evaluate_curve_record",
    "note": "exact lookup at the integer states 0–6; any other state is rejected (EXACT_FSIM_CLASS_STATE_REQUIRED), so nothing is drawn between states"
   },
+  "constructing_files": [
+   {
+    "role": "write-up",
+    "path": "docs/cells/wildfire_bess/current/derivation.md"
+   },
+   {
+    "role": "decision record",
+    "path": "docs/plans/bess_damage/decisions.md"
+   }
+  ],
+  "scope_note": null,
   "production_use": {
    "state": "runtime_indexed",
    "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
-   "sentence": "This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
+   "sentence": "In the runtime index: production can call this curve. The index does not say which screening grid selected it."
   }
  }
 }

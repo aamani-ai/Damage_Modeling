@@ -1524,7 +1524,52 @@
  "construction": {
   "curve_type": "piecewise linear",
   "curve_form": "piecewise_linear",
-  "formula": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
+  "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+  "formula_source": "scripts/reference_helpers/damage_curve_eval.py",
+  "variables": [
+   {
+    "symbol": "D(x)",
+    "meaning": "damage ratio at intensity x",
+    "parameter": null
+   },
+   {
+    "symbol": "(x_i, D_i)",
+    "meaning": "the listed points: intensity and damage ratio",
+    "parameter": "points"
+   },
+   {
+    "symbol": "O",
+    "meaning": "onset: the last intensity with zero damage before damage starts (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "F",
+    "meaning": "full: the first intensity at which damage reaches its highest value (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "D_max",
+    "meaning": "the highest damage ratio among the points",
+    "parameter": null
+   }
+  ],
+  "marks": {
+   "O": 55.0,
+   "F": 205.0,
+   "D_max": 1.0,
+   "O_note": null
+  },
+  "unkeyed_parameters": [],
+  "curve_tiers": {
+   "shape": {
+    "tier": "T2",
+    "word": "published"
+   },
+   "cost": {
+    "tier": "T2",
+    "word": "published"
+   }
+  },
   "axis": {
    "id": "TC_PEAK_GUST_3S_10M_OPEN_TERRAIN_MPH",
    "label": "peak 3-second gust at 10 m in open terrain",
@@ -1540,7 +1585,7 @@
   "parameters": [
    {
     "name": "points",
-    "definition": "ordered hazard-intensity and damage-ratio knots",
+    "definition": "the listed points: intensity and damage ratio",
     "value": [
      [
       50.0,
@@ -1710,9 +1755,7 @@
     "value_path": "docs/cells/tropical_cyclone_wind_real_estate/proposed/tropical_cyclone_wind_real_estate__model_v0_2__docs_r1__curve_artifact.json::curve_id=TCRE_RES_HAZUS_WSF1_LIGHT_SUBURBAN::parameters.points",
     "tier": null,
     "tier_word": null,
-    "reasoning": [
-     "No parameter-specific register row; use the curve-level construction sources and artifact value path."
-    ],
+    "reasoning": [],
     "source_ids": [
      "TCRE-S001",
      "TCRE-S002",
@@ -1769,8 +1812,11 @@
       "source_id": "TCRE-S010"
      }
     ],
+    "unresolved_source_ids": [],
     "register_rows": [],
-    "source_scope": "curve"
+    "source_scope": "curve",
+    "where_from": "curve_level",
+    "files": []
    }
   ],
   "additional_parameter_rows": [],
@@ -1836,10 +1882,25 @@
    "function": "evaluate_damage_call",
    "note": "request template from the cell's known-answer tests; the hazard axis field varied over the record's valid range"
   },
+  "constructing_files": [
+   {
+    "role": "write-up",
+    "path": "docs/cells/tropical_cyclone_wind_real_estate/proposed/tropical_cyclone_wind_real_estate_curve_derivation_dossier__model_v0_2__docs_r1.md"
+   },
+   {
+    "role": "build script",
+    "path": "scripts/reference_helpers/build_tropical_cyclone_wind_real_estate_v0_2_package.py"
+   },
+   {
+    "role": "decision record",
+    "path": "docs/cells/tropical_cyclone_wind_real_estate/proposed/DECISION_LOG_tropical_cyclone_wind_real_estate__model_v0_1__docs_r1.md"
+   }
+  ],
+  "scope_note": null,
   "production_use": {
    "state": "not_runtime_indexed",
    "consumer_pin": null,
-   "sentence": "This curve is not in the runtime index."
+   "sentence": "Not in the runtime index: production cannot call this curve."
   }
  }
 }
