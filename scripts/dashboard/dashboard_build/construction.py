@@ -172,7 +172,7 @@ def _where_kind(tier: str | None) -> str:
 
 
 def construction_block(c: dict[str, Any], artifact_path: str | None, status: str, consumer_pin: str | None,
-                       sources_by_id: dict[str, Any], aliases: dict[str, str], files: list[dict[str, str]]) -> dict[str, Any]:
+                       sources_by_id: dict[str, Any], aliases: dict[str, str], files: list[dict[str, str]], hazard_use: dict[str, Any] | None = None) -> dict[str, Any]:
     """A back-to-front curve recipe: runtime flag, form, formula and its key, parameters with where each came from,
     sources, and the constructing files."""
     rows = c.get("parameters_rows") or []
@@ -221,7 +221,7 @@ def construction_block(c: dict[str, Any], artifact_path: str | None, status: str
         "artifact": artifact_path, "evaluator": c.get("evaluator"), "constructing_files": files,
         "scope_note": scope_note(c.get("entry_id"), c.get("part")),
         "production_use": {
-            "state": production_state, "consumer_pin": consumer_pin,
+            "state": production_state, "consumer_pin": consumer_pin, "hazard": hazard_use,
             "sentence": ("In the runtime index: production can call this curve. The index does not say which screening grid selected it."
                          if production_state == "runtime_indexed" else
                          "A consumer binding that reuses another cell's curve; not a separate curve in the runtime index."
@@ -257,6 +257,13 @@ def legend(cat_text: str) -> dict[str, Any]:
             {"key": "runtime_indexed", "word": "in production index", "meaning": "In the runtime artifact index: production can call it. It does not say a screening grid selected it."},
             {"key": "reused_binding", "word": "reused in production", "meaning": "Priced with another cell's indexed curve through a consumer binding."},
             {"key": "not_runtime_indexed", "word": "not in production", "meaning": "Not in the runtime index; production cannot call it."},
+        ],
+        "hazard_use": [
+            {"key": "main", "word": "pinned by Hazard's main", "meaning": "Hazard's main keeps a copy of the artifact shown here and pins it."},
+            {"key": "main_model", "word": "Hazard's main pins this model", "meaning": "Hazard's main pins the same model version at another documentation revision."},
+            {"key": "branch", "word": "pinned on a Hazard branch", "meaning": "Only Hazard branches pin this version; it is not on Hazard's main."},
+            {"key": "other", "word": "Hazard pins another version", "meaning": "Hazard pins a different model version of this cell than the one shown here."},
+            {"key": "none", "word": "no Hazard pin", "meaning": "No copy of this cell's artifact was found on Hazard's main or its branches."},
         ],
         "where_from": WHERE_FROM,
     }

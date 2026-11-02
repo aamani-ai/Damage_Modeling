@@ -10,6 +10,7 @@ from typing import Any
 
 from . import chain as chain_mod
 from . import hazard_main
+from . import hazard_use
 from . import twin as twin_mod
 from .catalogue import Entry, curve_records, load_entries
 from .construction import construction_block, constructing_files, legend, path_leaks
@@ -294,6 +295,7 @@ def build(write: bool = True) -> dict[str, Any]:
     # per-entry work
     cells: dict[str, dict[str, Any]] = {}
     curves_out: dict[str, dict[str, Any]] = {}
+    hazard_uses: dict[str, dict[str, Any]] = {}  # per cell: what Hazard pins against the artifact shown (hazard_use)
     citations: dict[str, dict[str, Any]] = {}
     kat_failures, kat_totals = [], {"declared": 0, "run": 0, "reproduced": 0, "not_run": 0}
     unresolved_sources: list[str] = []
@@ -508,7 +510,7 @@ def build(write: bool = True) -> dict[str, Any]:
             c["data_path"] = f"curves/{e.id}/{c['curve_id']}@{c['version_key']}.json"
             c["construction_sources"] = c["sources_resolved"] or key_refs
             c["construction"] = construction_block(c, e.artifact_path, e.status, e.identity.get("consumer_pin"), sources_by_id, aliases,
-                                                   constructing_files(e.id, c["version_key"], files))
+                                                   constructing_files(e.id, c["version_key"], files), hazard_uses.setdefault(e.id, hazard_use.for_cell(e.id, e.artifact_path)))
             curves_out[f"{e.id}/{c['curve_id']}@{c['version_key']}"] = c
 
     # 3 · every curve sampled or listed
@@ -574,6 +576,10 @@ def build(write: bool = True) -> dict[str, Any]:
     # found nowhere on Hazard is a broken link and fails the check
     check("hazard_links", "every Hazard file the pages name exists on Hazard; the ones not on its main are listed with where they are", not hz_lost,
           {"off_main": hz_off, "not_found": hz_lost, "hazard": hazard_main.state().get("sentence")}, severity="data")
+    behind = [f"{eid}: {u['newer']['where']} {u['newer']['verb']} {u['newer']['model']} ({u['newer']['docs']}); this page shows {u['newer']['shown']}"
+              for eid, u in sorted(hazard_uses.items()) if u.get("newer")]
+    check("hazard_versions", "no cell shows an older model version than the one Hazard pins", not behind,
+          {"behind": behind, "cells_pinned": sum(1 for u in hazard_uses.values() if u["pins"]), "hazard": hazard_main.state().get("sentence")}, severity="data")
     faq = build_faq(f"{REPO_URL}/blob/{commit_full}")
     check("faq", "every FAQ question has its date, owner, a short answer and a Read more link that resolves", not faq["errors"], {"errors": faq["errors"], "questions": faq["n_questions"]}, severity="data")
     failed = [c for c in checks if not c["ok"]]
@@ -909,6 +915,9 @@ def _check_summary(c: dict[str, Any]) -> str:
         off = len(d.get("off_main") or [])
         return ((f"every Hazard file found; {off} not on Hazard's main (on a branch or moved), listed" if off else "every Hazard file on its main")
                 if c["ok"] else f"{len(d.get('not_found') or [])} Hazard paths found nowhere on Hazard ({d.get('hazard')})")
+    if c["id"] == "hazard_versions":
+        return (f"{d.get('cells_pinned')} cells pinned by Hazard; none shown older than Hazard's pin" if c["ok"]
+                else f"{len(d.get('behind') or [])} cells shown at an older model version than Hazard pins")
     if c["id"] == "faq":
         return f"{d.get('questions')} questions, every link resolves" if c["ok"] else f"{len(d.get('errors') or [])} problems"
     return "ok" if c["ok"] else "failed"

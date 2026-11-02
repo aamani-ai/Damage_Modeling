@@ -108,18 +108,21 @@ export interface CurveConstruction {
   axis: Axis | null; parameters: ConstructionParameter[];
   additional_parameter_rows: Record<string, unknown>[]; sources: ConstructionSource[]; source_ids: string[];
   artifact: string | null; evaluator: Record<string, unknown> | null; constructing_files: ConstructionFile[]; scope_note: ScopeNote | null;
-  production_use: { state: ProductionState; consumer_pin: string | null; sentence: string };
+  production_use: { state: ProductionState; consumer_pin: string | null; sentence: string; hazard?: HazardUse | null };
 }
 
 export interface SubcomponentConstructionRef {
   curve_id: string; data_path: string | null; curve_type: string; curve_form: string | null; formula: string | null; artifact: string | null;
   parameter_count: number; source_ids: string[]; entry_id: string; part: string | null; scope_note: ScopeNote | null;
-  production_use: { state: ProductionState; consumer_pin: string | null; sentence: string };
+  production_use: { state: ProductionState; consumer_pin: string | null; sentence: string; hazard?: HazardUse | null };
 }
 
 export interface LegendItem { key: string; word: string; meaning: string }
+// what Hazard pins for a cell, against the artifact the page shows (hazard_use.py)
+export type HazardUseState = "main" | "main_model" | "branch" | "other" | "none" | "unchecked";
+export interface HazardUse { state: HazardUseState; sentences: string[]; newer: { model: string; docs: string; shown: string | null; where: string } | null }
 export interface Legend {
-  source: string; status: LegendItem[]; coverage: LegendItem[]; completeness: LegendItem[]; evidence: LegendItem[]; production: LegendItem[];
+  source: string; status: LegendItem[]; coverage: LegendItem[]; completeness: LegendItem[]; evidence: LegendItem[]; production: LegendItem[]; hazard_use: LegendItem[];
   where_from: Record<WhereFrom, string>;
 }
 
@@ -128,7 +131,7 @@ export interface Subcomponent {
   cell_state: string; coverage: "curve" | "gap"; completeness: "complete" | "incomplete"; curve_ids: string[]; failure_unit_ids: string[];
   tier_span: string; evidence_labels: ("field-calibrated" | "published" | "borrowed" | "our judgment")[]; evidence_words: string;
   construction: SubcomponentConstructionRef[];
-  production_use: { state: ProductionState; consumer_pin: string | null };
+  production_use: { state: ProductionState; consumer_pin: string | null; hazard?: HazardUseState | null };
   borrowed_from: { entry_id: string | null; title: string | null; curves: string[]; rationale: string | null; tier: string | null; tier_word: string | null } | null;
   scope_notes: ScopeNote[];
   // real estate only: the building a row belongs to, the share of its structure value, and what the row means

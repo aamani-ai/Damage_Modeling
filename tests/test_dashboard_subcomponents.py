@@ -164,3 +164,23 @@ def test_claims_sources_and_parameters_are_each_their_own_row():
             assert not repeated, (entry_id, field, repeated)
         repeated = [k for k, n in Counter((p.get("curve_id"), p["id"]) for p in c["parameters"]).items() if n > 1]
         assert not repeated, (entry_id, "parameters", repeated)
+
+
+def test_hazard_use_says_what_hazard_pins_against_the_artifact_shown():
+    """Hazard's own copies of Damage artifacts decide the fact; a copy only on a Hazard branch says it is not on main."""
+    import pytest
+    receipt = json.loads((DATA / "receipt.json").read_text())
+    check = next(c for c in receipt["checks"] if c["id"] == "hazard_versions")
+    if "could not be read" in str(check["detail"].get("hazard")):
+        pytest.skip("Hazard's main not readable in this build")
+    uses = {}
+    for path in sorted((DATA / "curves").glob("*/*.json")):
+        curve = json.loads(path.read_text())
+        uses.setdefault(curve["entry_id"], curve["construction"]["production_use"]["hazard"])
+    for use in uses.values():
+        for sentence in use["sentences"]:
+            assert "Hazard's main" in sentence or "No copy" in sentence
+            if not sentence.startswith("No copy") and "branch" in sentence.split(" pin")[0]:
+                assert "not on Hazard's main" in sentence
+    assert check["ok"] == (not check["detail"]["behind"])
+    assert check["ok"] == all(u["newer"] is None for u in uses.values())

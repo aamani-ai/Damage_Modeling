@@ -29,6 +29,7 @@ export function ReviewLegend({ legend, sourceHref, open = false }: { legend: Leg
         <Group title="Where its numbers come from" items={legend.evidence} />
         <Group title="A subsystem" items={[...legend.coverage, ...legend.completeness]} />
         <Group title="Production" items={legend.production} />
+        <Group title="Used by Hazard" items={legend.hazard_use} />
         <p className="text-[10.5px] text-muted-foreground md:col-span-2 xl:col-span-4">
           Statuses as the catalogue defines them: <FileLink href={sourceHref}>{legend.source}</FileLink>
         </p>

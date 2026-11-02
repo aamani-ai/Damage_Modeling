@@ -3,7 +3,7 @@
 // that set it, or what a borrowed number stands in for); then the files that built it. No hooks and no file reads, so
 // the curve page and the subcomponent panel share it. Every sentence is the build's.
 import Link from "next/link";
-import type { ConstructionFile, ConstructionParameter, CurveConstruction, Legend, ProductionState } from "@/lib/types";
+import type { ConstructionFile, ConstructionParameter, CurveConstruction, HazardUseState, Legend, ProductionState } from "@/lib/types";
 import { fmtNum } from "@/lib/format";
 import { SourceRef } from "./source-link";
 import { FileLink, Tag } from "./ui";
@@ -13,6 +13,12 @@ const fileName = (p: string) => p.split("/").slice(-1)[0];
 export function ProductionTag({ state, legend }: { state: ProductionState; legend: Legend }) {
   const item = legend.production.find((p) => p.key === state);
   return <Tag tone={state === "not_runtime_indexed" ? "neutral" : "accent"} title={item?.meaning}>{item?.word ?? state}</Tag>;
+}
+
+export function HazardUseTag({ state, legend }: { state: HazardUseState; legend: Legend }) {
+  const item = legend.hazard_use.find((p) => p.key === state);
+  if (!item) return null;
+  return <Tag tone={state === "main" || state === "main_model" ? "accent" : state === "other" ? "warn" : "neutral"} title={item.meaning}>{item.word}</Tag>;
 }
 
 function value(v: unknown): string {
@@ -62,9 +68,13 @@ export function ConstructionView({ k, legend, blobBase, curveHref, title }: { k:
         {title ? <span className="font-medium">{title}</span> : null}
         <Tag>{k.curve_type}</Tag>
         <ProductionTag state={k.production_use.state} legend={legend} />
+        {k.production_use.hazard ? <HazardUseTag state={k.production_use.hazard.state} legend={legend} /> : null}
         {curveHref ? <Link href={curveHref} className="ml-auto text-accent hover:underline">open the curve ▸</Link> : null}
       </div>
       <p className="text-[10.5px] text-muted-foreground">{k.production_use.sentence}</p>
+      {k.production_use.hazard?.sentences.length ? (
+        <ul className="text-[10.5px] text-muted-foreground">{k.production_use.hazard.sentences.map((s) => <li key={s}>{s}</li>)}</ul>
+      ) : null}
       {k.scope_note ? <p className="rounded-md border border-warn/40 bg-warn-bg px-2 py-1 text-[11px]">{k.scope_note.note} <FileLink href={`${blobBase}/${k.scope_note.basis}`}>{fileName(k.scope_note.basis)}</FileLink></p> : null}
 
       <div>

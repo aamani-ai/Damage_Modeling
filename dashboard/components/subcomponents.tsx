@@ -8,7 +8,7 @@
 import Link from "next/link";
 import { useUrlParam } from "@/lib/url-state";
 import type { CurveConstruction, Legend, Subcomponent, SubcomponentRollup } from "@/lib/types";
-import { ConstructionView, ProductionTag } from "./construction-view";
+import { ConstructionView, HazardUseTag, ProductionTag } from "./construction-view";
 import { fmtPct } from "@/lib/format";
 import { FileLink, Tag } from "./ui";
 
@@ -171,7 +171,12 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
                       <td className="px-2 py-1">{s.coverage === "gap" ? <span className="tile-gap rounded-sm px-1">{coverageWord(s, legend)}</span> : coverageWord(s, legend)}</td>
                       <td className="px-2 py-1">{s.completeness}</td>
                       <td className="px-2 py-1">{s.borrowed_from && !s.evidence_labels.includes("borrowed") ? "borrowed · " : ""}{evidence(s)}</td>
-                      <td className="px-2 py-1">{s.coverage === "gap" || !s.curve_ids.length ? "—" : <ProductionTag state={s.production_use.state} legend={legend} />}</td>
+                      <td className="px-2 py-1">{s.coverage === "gap" || !s.curve_ids.length ? "—" : (
+                        <span className="inline-flex flex-wrap gap-1">
+                          <ProductionTag state={s.production_use.state} legend={legend} />
+                          {s.production_use.hazard ? <HazardUseTag state={s.production_use.hazard} legend={legend} /> : null}
+                        </span>
+                      )}</td>
                     </tr>,
                     isOpen ? (
                       <tr key={`${id}-detail`} id={`sub-${id}`} className="bg-muted/30">
