@@ -343,6 +343,7 @@ def _construction_ref(curve: dict[str, Any]) -> dict[str, Any]:
         "curve_form": block.get("curve_form"), "formula": block.get("formula"), "artifact": block.get("artifact"),
         "parameter_count": len(block.get("parameters") or []) + len(block.get("additional_parameter_rows") or []),
         "source_ids": block.get("source_ids") or [], "production_use": block.get("production_use"),
+        "entry_id": curve.get("entry_id"), "part": curve.get("part"), "scope_note": block.get("scope_note"),
     }
 
 
@@ -520,12 +521,22 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                     gap_reason = "A curve covers only part of this expected subcomponent."
                 elif c.get("state") == "exposure_modifier":
                     gap_reason = "This subcomponent takes another part's damage ratio and has no curve of its own."
+                elif e is None and h["effect"] != "damage":
+                    gap_reason = (f"{h['label']} changes how this asset performs rather than destroying it, and a damage curve prices "
+                                  "physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field "
+                                  "is the occurrence register's open question.")
                 elif e is None:
                     gap_reason = "No catalogue entry or curve has been built for this asset × hazard."
                 else:
                     gap_reason = "This expected subcomponent is not named by the cell."
-            production_state = ("runtime_indexed" if e and e.status == "live" and curve_ids else
-                                "reused_binding" if e and e.kind == "binding" and curve_ids else "not_runtime_indexed")
+            states = {x["production_use"]["state"] for x in construction if x.get("production_use")}
+            production_state = ("reused_binding" if e and e.kind == "binding" and curve_ids else
+                                "runtime_indexed" if "runtime_indexed" in states else "not_runtime_indexed")
+            borrowed_from = None
+            if e and e.kind == "binding":
+                b_ = cells[e.id].get("binding") or {}
+                borrowed_from = {"entry_id": b_.get("source_entry_id"), "curves": b_.get("reused_curves") or [], "rationale": b_.get("transfer_rationale"),
+                                 "tier": b_.get("transfer_tier"), "tier_word": tier_words(b_.get("transfer_tier")) if b_.get("transfer_tier") else None}
             evidence_labels = _tier_labels(tier_codes)
             if e and e.kind == "binding" and "borrowed" not in evidence_labels:
                 evidence_labels.insert(0, "borrowed")
@@ -537,9 +548,13 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                 "failure_unit_ids": sorted({p["failure_unit_id"] for p in mine if p.get("failure_unit_id")}),
                 "tier_span": _span(tier_codes), "evidence_labels": evidence_labels,
                 "evidence_words": ("borrowed · " if e and e.kind == "binding" else "") + tier_words(_span(tier_codes)),
-                "construction": construction,
+                "construction": construction, "borrowed_from": borrowed_from,
+                "scope_notes": [x["scope_note"] for x in construction if x.get("scope_note")],
                 "production_use": {"state": production_state, "consumer_pin": (cells[e.id]["identity"].get("consumer_pin") if e else None)},
-                "gap": ({"reason": gap_reason, "occurrence": c.get("occurrence"),
+                "gap": ({"reason": gap_reason, "occurrence": c.get("occurrence"), "effect": h["effect"],
+                         "basis": ([{"label": "the occurrence register's effect field", "path": reg["path"]},
+                                    {"label": "the curve's scope: physical destruction only", "path": "docs/scope/SCOPE_AND_STORY.md"}]
+                                   if reg and e is None and h["effect"] != "damage" else []),
                          "register": ({"path": reg["path"], "sha256": reg["sha256"], "search_log": reg["register"].get("search_log"),
                                        "last_searched": reg["register"].get("last_searched"), "question": reg["register"].get("question")}
                                       if reg else None)} if gap_reason else None),

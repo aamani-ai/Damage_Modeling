@@ -12,6 +12,7 @@ from . import chain as chain_mod
 from . import hazard_main
 from . import twin as twin_mod
 from .catalogue import Entry, curve_records, load_entries
+from .construction import construction_block, constructing_files, legend, path_leaks
 from .common import (OUT, ROOT, SENTENCES, SOURCE, STATION_ABSENT_SENTENCES, BuildError, fmt_pct, fmt_usd_compact, git,
                      humanise, load_json, rel, sha256, tier_span)
 from .faq import build_faq
@@ -32,74 +33,6 @@ SUBSTATION_BUDGET_SOURCE = "Hazard_modeling/docs/plans/_cross_cutting/substation
 STATUS_MARK = {"live": "■", "proposal": "▢", "reused": "▨", "gap": "┈"}
 STATUS_LABEL = {"live": "LIVE", "proposal": "PROPOSAL", "reused": "REUSED", "gap": "GAP"}
 SOURCE_ID_RE = re.compile(r"\(([A-Z]{1,4}-S\d{1,3})\)")
-
-
-FORMULAS = {
-    "logistic": "D(x) = max_DR / (1 + exp(-k × (x - x50)))",
-    "wind_tornado_logistic_ratio": "D(R) = max_DR / (1 + exp(-k_ratio × (R - D50_ratio)))",
-    "thresholded_logistic_demand": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(-k × (R - R50)))",
-    "piecewise_linear": "D(x) is linearly interpolated between the listed (hazard intensity, damage ratio) points.",
-    "ordered_damage_state_lognormal": "D(x) is the expected damage ratio from ordered lognormal damage-state exceedance probabilities and their state cost ratios.",
-    "thresholded_weibull_expected_damage": "D(V) = 0 for V ≤ V_zero; above it, a thresholded Weibull response rises toward max_dr using delta_V50 and rho.",
-}
-
-
-def _parameter_definition(name: str) -> str:
-    """Short, display-ready definitions; the source register remains authoritative for the value and reasoning."""
-    exact = {
-        "max_DR": "maximum damage ratio", "max_dr": "maximum damage ratio", "x50": "hazard intensity at 50% of the uncapped response",
-        "D50": "hazard intensity at 50% of the uncapped response", "D50_ratio": "demand ratio at 50% of the uncapped response",
-        "R0": "onset demand ratio below which damage is zero", "R50": "demand ratio at the logistic midpoint", "k": "logistic steepness",
-        "k_ratio": "logistic steepness on the demand-ratio axis", "V_zero_kmh": "wind speed at or below which damage is zero",
-        "delta_V50_kmh": "wind-speed increment from onset to the response midpoint", "V_at_DR50_kmh": "wind speed at the response midpoint",
-        "rho": "Weibull shape/steepness parameter", "points": "ordered hazard-intensity and damage-ratio knots",
-        "medians": "median intensity for each ordered damage state", "beta": "lognormal dispersion", "state_cost_ratios": "damage ratio assigned to each damage state",
-    }
-    if name in exact:
-        return exact[name]
-    return humanise(name).lower()
-
-
-def construction_block(c: dict[str, Any], artifact_path: str | None, status: str, consumer_pin: str | None) -> dict[str, Any]:
-    """A back-to-front curve recipe: runtime flag, form, formula, parameters, sources, and constructing files."""
-    rows = c.get("parameters_rows") or []
-    construction_sources = c.get("construction_sources") or c.get("sources_resolved") or []
-    sources_by_id = {(s.get("id") or s.get("source_id")): s for s in construction_sources if s.get("id") or s.get("source_id")}
-    params = c.get("parameters") or {}
-    if not isinstance(params, dict):
-        params = {"parameters": params}
-    parameter_docs = []
-    for name, value in params.items():
-        matched = [r for r in rows if r.get("id") == name or r.get("name") == name]
-        source_ids = sorted({sid for r in matched for sid in r.get("source_ids") or []})
-        parameter_docs.append({
-            "name": name, "definition": _parameter_definition(name), "value": value,
-            "value_path": f"{artifact_path}::curve_id={c.get('curve_id')}::parameters.{name}" if artifact_path else None,
-            "tier": tier_span([r.get("tier") for r in matched]) if matched else None,
-            "tier_word": tier_words(tier_span([r.get("tier") for r in matched])) if matched else None,
-            "reasoning": ([r.get("reasoning") for r in matched if r.get("reasoning")] or
-                          ["No parameter-specific register row; use the curve-level construction sources and artifact value path."]),
-            "source_ids": source_ids or [s.get("id") or s.get("source_id") for s in construction_sources if s.get("id") or s.get("source_id")],
-            "sources": [sources_by_id[sid] for sid in source_ids if sid in sources_by_id] if matched else construction_sources,
-            "register_rows": [r.get("id") for r in matched], "source_scope": "parameter" if matched else "curve",
-        })
-    unmatched_rows = [r for r in rows if r.get("id") not in params and r.get("name") not in params]
-    production_state = "runtime_indexed" if status == "live" and consumer_pin else ("reused_binding" if status == "reused" else "not_runtime_indexed")
-    return {
-        "curve_type": c.get("form_label") or humanise(c.get("curve_form") or "unspecified"),
-        "curve_form": c.get("curve_form"), "formula": FORMULAS.get(c.get("curve_form")),
-        "axis": c.get("axis"), "parameters": parameter_docs, "additional_parameter_rows": unmatched_rows,
-        "sources": construction_sources, "source_ids": c.get("sources_for_curve") or [s.get("id") or s.get("source_id") for s in construction_sources if s.get("id") or s.get("source_id")],
-        "artifact": artifact_path, "evaluator": c.get("evaluator"),
-        "production_use": {
-            "state": production_state, "consumer_pin": consumer_pin,
-            "sentence": ("This artifact is pinned in the runtime index; selector conditions determine when this curve is used."
-                         if production_state == "runtime_indexed" else
-                         "This is a consumer binding that reuses a source curve; it is not a separate runtime-indexed curve."
-                         if production_state == "reused_binding" else
-                         "This curve is not in the runtime index."),
-        },
-    }
 
 
 # ─── per-entry facts ──────────────────────────────────────────────────────────────────────────────────────────
@@ -574,7 +507,8 @@ def build(write: bool = True) -> dict[str, Any]:
             c["versions"] = _versions(e)
             c["data_path"] = f"curves/{e.id}/{c['curve_id']}@{c['version_key']}.json"
             c["construction_sources"] = c["sources_resolved"] or key_refs
-            c["construction"] = construction_block(c, e.artifact_path, e.status, e.identity.get("consumer_pin"))
+            c["construction"] = construction_block(c, e.artifact_path, e.status, e.identity.get("consumer_pin"), sources_by_id, aliases,
+                                                   constructing_files(e.id, c["version_key"], files))
             curves_out[f"{e.id}/{c['curve_id']}@{c['version_key']}"] = c
 
     # 3 · every curve sampled or listed
@@ -869,6 +803,13 @@ def build(write: bool = True) -> dict[str, Any]:
             subcomponent_problems.append(f"{aslug}: rollup does not reconcile")
     check("subcomponents", "every expected subcomponent has a curve/gap state, completeness state, evidence label, and construction or gap lineage",
           not subcomponent_problems, {"records": sum(len(a["subcomponents"]) for a in assets_out.values()), "problems": subcomponent_problems})
+    unkeyed = [f"{c_['entry_id']}/{c_['curve_id']}: {', '.join(c_['construction']['unkeyed_parameters']) or 'no formula'}"
+               for c_ in curves_out.values() if c_["construction"]["unkeyed_parameters"] or not c_["construction"]["formula"]]
+    check("formula_keys", "every curve has a formula whose key names each of its parameters", not unkeyed, {"curves": len(curves_out), "unkeyed": unkeyed}, severity="data")
+    manifest["legend"] = legend(cat_text)
+    leaks = path_leaks({"manifest": manifest, "cells": cells, "curves": curves_out, "assets": assets_out, "occurrence": list(occurrence_out.values()), "citations": citations,
+                        "coverage": coverage["types"], "faq": faq})
+    check("display_paths", "nothing displayed carries a path on someone's machine", not leaks, {"leaks": leaks[:40], "n": len(leaks)})
     # Include the coverage and subcomponent checks, which are assembled after the per-cell checks above.
     failed = [c for c in checks if not c["ok"]]
 

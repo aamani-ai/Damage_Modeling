@@ -18,7 +18,7 @@ import subprocess
 from pathlib import Path, PurePosixPath
 from typing import Any
 
-from .common import CHECKOUT, ROOT, rel, sha256
+from .common import CHECKOUT, LOCAL_PATH_RE, ROOT, redact_local, rel, sha256
 
 try:
     import openpyxl  # type: ignore
@@ -35,6 +35,7 @@ GENERIC_TOKENS = {"e", "src", "ev", "evid", "the", "of", "and", "for", "a", "an"
                   "gov", "org", "html", "http", "https", "en"}
 NOT_YET_EXTRACTED = "Sources are in the dossier prose and the workbook; not yet extracted — open the dossier."
 NO_LINK = "no link in the register"
+LOCAL_COPY = "a copy on one machine, not in a repository; no link"
 
 
 # ─── links ────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -108,8 +109,13 @@ def _repo_path(path: str, base_dir: Path | None) -> Path | None:
 
 
 def resolve_link(src: dict[str, Any], repo_url: str, commit: str, base_dir: Path | None = None) -> dict[str, Any]:
-    """Fill `title`, `doi`, `link`, `link_kind` on a source from its url / citation / locator; never drops a field."""
-    url = (src.get("url") or "").strip()
+    """Fill `title`, `doi`, `link`, `link_kind` on a source from its url / citation / locator; never drops a field.
+    A path on one person's machine is never shown: the file's name stays, the folders go, and there is no link."""
+    local = any(LOCAL_PATH_RE.search(str(src.get(k) or "")) for k in ("url", "citation", "locator"))
+    for k in ("url", "citation", "locator"):
+        if isinstance(src.get(k), str):
+            src[k] = redact_local(src[k])
+    url = "" if local else (src.get("url") or "").strip()
     citation = src.get("citation") or ""
     doi = None
     m = DOI_RE.search(url) or DOI_RE.search(citation)
@@ -153,7 +159,7 @@ def resolve_link(src: dict[str, Any], repo_url: str, commit: str, base_dir: Path
     src.setdefault("title", short_title(citation, src.get("id", "")))
     if MARKER_RE.match(src.get("id") or ""):
         src["kind"] = "marker"  # a provenance marker ("no direct source"), not a document: nothing to link
-    src["no_link_sentence"] = None if (link or src.get("kind") == "marker") else ((src.get("hazard") or {}).get("words") or NO_LINK)
+    src["no_link_sentence"] = None if (link or src.get("kind") == "marker") else (LOCAL_COPY if local else (src.get("hazard") or {}).get("words") or NO_LINK)
     return src
 
 

@@ -179,3 +179,11 @@ def section(text: str, heading_regex: str) -> str | None:
                 body.append(nxt)
             return "\n".join(body)
     return None
+
+
+# A path on one person's machine. The dashboard shows the file's name only; `path_leaks` guards the output.
+LOCAL_PATH_RE = re.compile(r"(?<![\w.:/~-])(?:~/|/Users/|/home/|/private/(?:tmp|var)/|[A-Za-z]:\\Users\\|file://)[^\s\"',;)]*")
+
+
+def redact_local(text: str) -> str:
+    return LOCAL_PATH_RE.sub(lambda m: re.split(r"[/\\]", m.group(0).rstrip("/\\"))[-1] or "a local folder", text)
