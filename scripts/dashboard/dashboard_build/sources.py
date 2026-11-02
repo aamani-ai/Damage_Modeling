@@ -348,6 +348,13 @@ def extract_workbook(wb_path: Path, cell_token: str) -> dict[str, Any]:
                                           "description": _first(r, "description"), "severity": _first(r, "severity", "materiality"), "status": _first(r, "status"),
                                           "resolution": _first(r, "proposed_resolution", "resolution_path"), "from": {"file": where, "sheet": name}})
             out["sheets_read"].append(name)
+    # a workbook with no claim-ID column names a claim by its sources, so two claims on the same sources share a name
+    # (flood × solar: switchgear and transformer, both on NEMA GD1); number the repeats so each stays its own row
+    seen: dict[str, int] = {}
+    for c in out["claims"]:
+        seen[c["id"]] = seen.get(c["id"], 0) + 1
+        if seen[c["id"]] > 1:
+            c["id"] = f"{c['id']} ·{seen[c['id']]}"
     return out
 
 

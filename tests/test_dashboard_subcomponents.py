@@ -152,3 +152,15 @@ def test_hazard_links_not_on_main_say_so_and_only_missing_paths_fail():
     detail = check["detail"]
     assert all("not on Hazard's main" in line for line in detail["off_main"])
     assert check["ok"] == (not detail["not_found"])
+
+
+def test_claims_sources_and_parameters_are_each_their_own_row():
+    """A page lists claims, sources and parameters by identity; a repeated one would be hidden behind its twin."""
+    from collections import Counter
+    cites = json.loads((DATA / "citations.json").read_text())["cells"]
+    for entry_id, c in cites.items():
+        for field in ("claims", "sources"):
+            repeated = [k for k, n in Counter(x["id"] for x in c[field]).items() if n > 1]
+            assert not repeated, (entry_id, field, repeated)
+        repeated = [k for k, n in Counter((p.get("curve_id"), p["id"]) for p in c["parameters"]).items() if n > 1]
+        assert not repeated, (entry_id, "parameters", repeated)

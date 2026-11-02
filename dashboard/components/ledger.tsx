@@ -136,6 +136,10 @@ export function EvidenceTable({ cites, blob }: { cites: Citations["cells"][strin
   const used = cites.sources.filter((s) => claimsBySource.has(s.id) || paramsBySource.has(s.id));
   const seenClaims = new Set<string>();
   const seenParams = new Set<string>();
+  // one parameter name can recur once per curve (flood × solar: depth_damage_points for each unit), so a row is its
+  // curve plus its id, and the curve is shown where the name repeats
+  const pk = (p: (typeof cites.parameters)[number]) => (p.curve_id ? `${p.curve_id}:${p.id}` : p.id);
+  const repeated = new Set(cites.parameters.map((p) => p.name).filter((n, i, all) => all.indexOf(n) !== i));
   const unused = cites.sources.filter((s) => !claimsBySource.has(s.id) && !paramsBySource.has(s.id));
   return (
     <div className="overflow-x-auto">
@@ -172,13 +176,13 @@ export function EvidenceTable({ cites, blob }: { cites: Citations["cells"][strin
                   {!claims.length ? <span className="text-muted-foreground">—</span> : null}
                 </td>
                 <td className="py-1.5">
-                  {[...claims.flatMap((c) => paramsByClaim.get(c.id) ?? []), ...direct].filter((p, i, arr) => arr.findIndex((q) => q.id === p.id) === i).map((p) => {
-                    const first = !seenParams.has(p.id);
-                    seenParams.add(p.id);
+                  {[...claims.flatMap((c) => paramsByClaim.get(c.id) ?? []), ...direct].filter((p, i, arr) => arr.findIndex((q) => pk(q) === pk(p)) === i).map((p) => {
+                    const first = !seenParams.has(pk(p));
+                    seenParams.add(pk(p));
                     return first ? (
-                      <div key={p.id} id={`param-${p.id}`} className="mb-1 last:mb-0"><span>{p.name}</span> <span className="font-mono text-[10px]">{p.tier ?? ""}</span>{p.value != null ? <span className="block font-mono text-[10px] text-muted-foreground">{typeof p.value === "string" ? p.value : JSON.stringify(p.value)}</span> : null}</div>
+                      <div key={pk(p)} id={`param-${pk(p)}`} className="mb-1 last:mb-0"><span>{p.name}</span>{repeated.has(p.name) && p.curve_id ? <span className="font-mono text-[10px] text-muted-foreground"> · {p.curve_id}</span> : null} <span className="font-mono text-[10px]">{p.tier ?? ""}</span>{p.value != null ? <span className="block font-mono text-[10px] text-muted-foreground">{typeof p.value === "string" ? p.value : JSON.stringify(p.value)}</span> : null}</div>
                     ) : (
-                      <a key={p.id} href={`#param-${p.id}`} title="shown in full above" className="mr-1.5 inline-block text-[10px] text-muted-foreground hover:text-accent">{p.name}↑</a>
+                      <a key={pk(p)} href={`#param-${pk(p)}`} title="shown in full above" className="mr-1.5 inline-block text-[10px] text-muted-foreground hover:text-accent">{p.name}{repeated.has(p.name) && p.curve_id ? ` · ${p.curve_id}` : ""}↑</a>
                     );
                   })}
                 </td>
@@ -297,7 +301,7 @@ export function SeamsLedger({ cell }: { cell: CellV2 }) {
     <div className="grid gap-3 text-[11px] md:grid-cols-2">
       <div>
         <Eyebrow>Update triggers <span className="font-normal normal-case tracking-normal">(T3 / T4 parameters)</span></Eyebrow>
-        {s.update_triggers.length ? s.update_triggers.map((t) => <div key={t.parameter} className="border-t border-border/60 py-0.5"><span className="font-mono text-[10px]">{t.tier}</span> {t.parameter} <span className="block text-[10px] text-muted-foreground">{t.update_trigger}</span></div>) : <p className="text-muted-foreground">none listed</p>}
+        {s.update_triggers.length ? s.update_triggers.map((t, i) => <div key={`${t.parameter}-${i}`} className="border-t border-border/60 py-0.5"><span className="font-mono text-[10px]">{t.tier}</span> {t.parameter} <span className="block text-[10px] text-muted-foreground">{t.update_trigger}</span></div>) : <p className="text-muted-foreground">none listed</p>}
       </div>
       <div>
         <Eyebrow>Next version</Eyebrow>
