@@ -704,7 +704,13 @@
   "paths": {
    "sources": "docs/cells/convective_wind_real_estate/proposed/SOURCE_REGISTER_convective_wind_real_estate__model_v0_1__docs_r1.csv",
    "claims": "docs/cells/convective_wind_real_estate/proposed/CLAIM_PARAMETER_REGISTER_convective_wind_real_estate__model_v0_1__docs_r1.csv",
-   "parameters": "docs/cells/convective_wind_real_estate/proposed/PARAMETER_TIER_TABLE_convective_wind_real_estate__model_v0_1__docs_r1.csv"
+   "parameters": "docs/cells/convective_wind_real_estate/proposed/PARAMETER_TIER_TABLE_convective_wind_real_estate__model_v0_1__docs_r1.csv",
+   "source_registers": [
+    "docs/cells/convective_wind_real_estate/proposed/SOURCE_REGISTER_convective_wind_real_estate__model_v0_1__docs_r1.csv"
+   ],
+   "claim_registers": [
+    "docs/cells/convective_wind_real_estate/proposed/CLAIM_PARAMETER_REGISTER_convective_wind_real_estate__model_v0_1__docs_r1.csv"
+   ]
   },
   "n_sources": 8,
   "n_claims": 19,
@@ -1393,6 +1399,7 @@
   "sources": [
    {
     "id": "CWRE-S001",
+    "aliases": [],
     "citation": "Wind Science and Engineering Center, Texas Tech University. A Recommendation for an Enhanced Fujita Scale (EF-Scale), submitted to the National Weather Service and other interested users. October 10, 2006, Revision 2.",
     "url": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
     "locator": "PDF p. 9 (report p. 4: expected, lower and upper bound wind speed per DOD; expected value under normal conditions — no weak links, traditional construction, code compliance; bounds account for deviation; expert elicitation, means of experts' estimates); PDF p. 15 (Fujita speeds converted to a 3-second gust frame); PDF pp. 17-18 (rating: evaluator judges within the bounds); Appendix A tables: FR12 PDF p. 25, LRB PDF p. 64, MBS PDF p. 74",
@@ -1411,6 +1418,7 @@
    },
    {
     "id": "CWRE-S002",
+    "aliases": [],
     "citation": "NOAA Storm Prediction Center. The Enhanced Fujita Scale (EF Scale): damage indicator pages 2 (FR12), 17 (LRB) and 21 (MBS), and the EF scale overview page.",
     "url": "https://www.spc.noaa.gov/efscale/ef-scale.html",
     "locator": "ef-scale.html (\"three-second gusts estimated at the point of damage\"; \"These estimates vary with height and exposure\"); efscale/2.html + 2.jpg (sha256 6c0d70ca1b77eb71ebadb00942d04fb2aa2d04971e359b45e5b55952cd8d7622); efscale/17.html + 17.jpg (sha256 f7d95f61c8e9c9fd3c539de5707b3f924b0f4f998276f3a9eb390c92500f7520); efscale/21.html + 21.jpg (sha256 f4becdda78dc9025be13fed82427ece6d5a57778e228e5799a58d983c72eed0d)",
@@ -1429,6 +1437,7 @@
    },
    {
     "id": "CWRE-S003",
+    "aliases": [],
     "citation": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
     "url": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
     "locator": "§8.1.4.3 p. 8-15 (None, Slight, Moderate, Extensive, Complete assumed to correspond to mean building loss ratios 0%, 2%, 10%, 50%, 100%, identified from the damage descriptions and expert judgment; linear interpolation over 0-2, 2-5, 5-10, 10-50, 50-100%); Table 5-44 pp. 5-185 to 5-186 (residential damage states); Table 5-74 p. 5-239 (metal buildings); Table 5-78 p. 5-242 (engineered steel buildings)",
@@ -1447,6 +1456,7 @@
    },
    {
     "id": "CWRE-S004",
+    "aliases": [],
     "citation": "Hazard reference profiles r1 (real-estate CONUS reference candidates), aamani-ai/Hazard_Modeling.",
     "url": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
     "locator": "commit 8b0d61c88fbcf85daa1c098516cee22398cdb524, reference_candidates.yml (git blob a74fb72b0a2edce593b5505e0fd8852f4c0253f8): re_house_1s_wood_slab, re_warehouse_1s_steel_slab, re_office_3s_slab",
@@ -1465,6 +1475,7 @@
    },
    {
     "id": "CWRE-S005",
+    "aliases": [],
     "citation": "Hazard convective-wind hazard layer (strong wind [W] from ASCE 7-22 gust maps; tornado [T] from the SPC record), aamani-ai/Hazard_Modeling.",
     "url": "https://github.com/aamani-ai/Hazard_Modeling/tree/f19c604830954a43e293749be390fd37b6eb6e11/perils/convective_wind",
     "locator": "main f19c604830954a43e293749be390fd37b6eb6e11, perils/convective_wind/src/convective_wind/config.py (blob a56ff98c53961f7201b63a84e5d96b93496d8078: MU_STRONG_WIND_MS 25.92, PHYSICAL_BOUND_L_MS 113.0, EF_GUST_LO/HI_MPH, TORNADO_POOL_RADIUS_KM 150), spc_m0.py (blob 1df31c92a95e84249bb62633ab7af4cdacebb425: national_path_geometry), m1_hazard_layer.py (blob 5fe515d465399f7e01bbb1508b335fda8de85de6); M1 parquet sha256 386e274d3c109915244c75a0852d3b41ae7aa348f2eb6cd73b050ada6cafa3c8; SPC csv sha256 2b2679ead1920ab96eaa390baeb41aeeaeef49d067f613dfcc5e233403b82d76",
@@ -1483,6 +1494,7 @@
    },
    {
     "id": "CWRE-S006",
+    "aliases": [],
     "citation": "FEMA National Risk Index, December 2025 edition, county building expected annual loss for strong wind and tornado (Hazard team's 0.25° CONUS copy).",
     "url": "gs://infrasure-benchmark/hazard_conus_grid/dev/reference/nri/nri_dec2025/raw/run_id=20260706T184931Z_nri_reference/nri_raw_conus.parquet",
     "locator": "columns swnd_ealb, swnd_expb, trnd_ealb, trnd_expb; 13,085 cells keyed by cell_id; sha256 bc4f8dff7ab9c465677d7a8b94f2fe3038ff03da4632d7b044bcff2afcb3d82b",
@@ -1501,6 +1513,7 @@
    },
    {
     "id": "CWRE-S007",
+    "aliases": [],
     "citation": "Damage_Modeling repository precedents: strong_wind_solar model v1.0 thresholded demand curves; wind_tornado_wind model v1.0 tornado shift; damage-curve skill common failure modes.",
     "url": "https://github.com/aamani-ai/Damage_Modeling/tree/81d5309313d53f37d6bac91e22dd55b498101d0f/docs",
     "locator": "main 81d5309: docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md §3.3 (R0 0.70-0.90 on a pressure ratio: zero damage below); docs/cells/wind_tornado_wind/basics/MODEL_REFERENCE.md (tornado = straight D50 shifted -0.05 to -0.12); docs/extra/damage_curve_skill/04_validation_qc/COMMON_FAILURE_MODES.md lines 35-40",
@@ -1519,6 +1532,7 @@
    },
    {
     "id": "CWRE-S008",
+    "aliases": [],
     "citation": "Damage_Modeling consumer binding: substation convective-wind screening v1 (hurricane station response reused for strong wind and tornado as a T4 cross-hazard proxy).",
     "url": "https://github.com/aamani-ai/Damage_Modeling/blob/81d5309313d53f37d6bac91e22dd55b498101d0f/docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md",
     "locator": "main 81d5309, README lines 13-31 (T4 cross-hazard proxy with exact source identity; no hurricane duration conversion; EF midpoint gust as an explicit T4 bridge; ASCE overlap with hurricane a downstream decision)",

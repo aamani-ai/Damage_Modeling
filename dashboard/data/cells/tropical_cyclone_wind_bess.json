@@ -732,7 +732,13 @@
   "paths": {
    "sources": "docs/cells/tropical_cyclone_wind_bess/current/source_register.csv",
    "claims": "docs/cells/tropical_cyclone_wind_bess/current/claim_parameter_register.csv",
-   "parameters": "docs/cells/tropical_cyclone_wind_bess/current/parameter_register.csv"
+   "parameters": "docs/cells/tropical_cyclone_wind_bess/current/parameter_register.csv",
+   "source_registers": [
+    "docs/cells/tropical_cyclone_wind_bess/current/source_register.csv"
+   ],
+   "claim_registers": [
+    "docs/cells/tropical_cyclone_wind_bess/current/claim_parameter_register.csv"
+   ]
   },
   "n_sources": 13,
   "n_claims": 16,
@@ -1168,9 +1174,9 @@
     "id": "numbers",
     "name": "Where the numbers come from",
     "meaning": "The sources, what each one gave, and how sure we are",
-    "fact": "13 sources, 12 linked · our judgment",
+    "fact": "13 sources, 13 linked · our judgment",
     "paragraphs": [
-     "13 sources set this cell: Hazard BESS r1 selected profile and budget, Solar TC-wind model v2.1 docs r2, SMA MVPS-S2-SCS-US system manual, storm mounting and anchorage and Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 and 9 more. Of the 9 parameters, 1 is borrowed and 8 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator)."
+     "13 sources set this cell: Hazard BESS r1 selected profile and budget, Solar TC-wind model v2.1 docs r2, SMA MVPS-S2-SCS-US system manual, storm mounting and anchorage and Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 and 9 more. Of the 9 parameters, 1 is borrowed and 8 are our judgment. The source and claim registers are machine-readable files in the cell folder."
     ],
     "holds": [
      "evidence"
@@ -1197,7 +1203,7 @@
       "tone": "muted"
      },
      {
-      "text": "13 sources, 12 linked",
+      "text": "13 sources, 13 linked",
       "tone": "muted"
      }
     ]
@@ -1238,24 +1244,7 @@
   ],
   "word": "our judgment",
   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment",
-  "hazard_paths": [
-   {
-    "id": "BW-S01",
-    "title": "Hazard BESS r1 selected profile and budget",
-    "path": "docs/plans/_cross_cutting/bess_conus",
-    "state": "on_branch",
-    "link": null,
-    "words": "on a Hazard branch, not on its main yet"
-   },
-   {
-    "id": "BW-S13",
-    "title": "Existing Hazard Substation Hurricane demand-reference binding",
-    "path": "perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
-    "state": "on_branch",
-    "link": null,
-    "words": "on a Hazard branch, not on its main yet"
-   }
-  ],
+  "hazard_paths": [],
   "capabilities": [
    {
     "key": "single_event",
@@ -1412,7 +1401,7 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "13 sources set this cell: Hazard BESS r1 selected profile and budget, Solar TC-wind model v2.1 docs r2, SMA MVPS-S2-SCS-US system manual, storm mounting and anchorage and Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 and 9 more. Of the 9 parameters, 1 is borrowed and 8 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "paragraph": "13 sources set this cell: Hazard BESS r1 selected profile and budget, Solar TC-wind model v2.1 docs r2, SMA MVPS-S2-SCS-US system manual, storm mounting and anchorage and Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 and 9 more. Of the 9 parameters, 1 is borrowed and 8 are our judgment. The source and claim registers are machine-readable files in the cell folder.",
     "plain_fact": "13 sources · our judgment"
    },
    {
@@ -1465,8 +1454,8 @@
      "BW-S01"
     ],
     "title": "Hazard BESS r1 selected profile and budget",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-    "link_kind": "repo_file",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+    "link_kind": "hazard_file",
     "locator": "asset_model.json; layout.csv; reference_budget.csv; 01_reference_profile_and_value.md",
     "no_link_sentence": null,
     "source_id": "BW-S01"
@@ -1477,7 +1466,7 @@
      "BW-S02"
     ],
     "title": "Solar TC-wind model v2.1 docs r2",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/tropical_cyclone_wind_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/0aad764a790c97014975656d1627776b157ccde4/docs/cells/tropical_cyclone_wind_solar/current",
     "link_kind": "repo_file",
     "locator": "curve_artifact site-facility records and derivation dossier sections Curve architecture and Honest limitations",
     "no_link_sentence": null,
@@ -1523,6 +1512,7 @@
   "sources": [
    {
     "id": "BW-S01",
+    "aliases": [],
     "citation": "Hazard BESS r1 selected profile and budget",
     "url": "Hazard_modeling/docs/plans/_cross_cutting/bess_conus/",
     "locator": "asset_model.json; layout.csv; reference_budget.csv; 01_reference_profile_and_value.md",
@@ -1535,19 +1525,19 @@
     "provenance": "register",
     "hazard": {
      "path": "docs/plans/_cross_cutting/bess_conus",
-     "state": "on_branch",
-     "link": null,
-     "words": "on a Hazard branch, not on its main yet"
+     "state": "unchecked",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+     "words": null
     },
-    "repo_path": "docs/plans/flood_wind_shared_electrical/asset_model.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-    "link_kind": "repo_file",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+    "link_kind": "hazard_file",
     "title": "Hazard BESS r1 selected profile and budget",
     "no_link_sentence": null
    },
    {
     "id": "BW-S02",
+    "aliases": [],
     "citation": "Solar TC-wind model v2.1 docs r2",
     "url": "docs/cells/tropical_cyclone_wind_solar/current/",
     "locator": "curve_artifact site-facility records and derivation dossier sections Curve architecture and Honest limitations",
@@ -1560,13 +1550,14 @@
     "provenance": "register",
     "repo_path": "docs/cells/tropical_cyclone_wind_solar/current",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/tropical_cyclone_wind_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/0aad764a790c97014975656d1627776b157ccde4/docs/cells/tropical_cyclone_wind_solar/current",
     "link_kind": "repo_file",
     "title": "Solar TC-wind model v2.1 docs r2",
     "no_link_sentence": null
    },
    {
     "id": "BW-S03",
+    "aliases": [],
     "citation": "SMA MVPS-S2-SCS-US-B8-SH-en-11 system manual",
     "url": "https://files.sma.de/downloads/MVPS-S2-SCS-US-B8-SH-en-11.pdf",
     "locator": "Section6.7 printed/PDF pp74-75; section17.14 p282; p75 rendered and inspected",
@@ -1585,6 +1576,7 @@
    },
    {
     "id": "BW-S04",
+    "aliases": [],
     "citation": "Sungrow ST2752UX system manual SEN-Ver21-202204",
     "url": "https://info-support.sungrowpower.com/application/pdf/2022/11/10/E049-ST2752UX-SEN-Ver21-202204-IEC.pdf",
     "locator": "Section4.2.1 printed p24 PDFp34; section4.2.2 printed p25 PDFp35",
@@ -1603,6 +1595,7 @@
    },
    {
     "id": "BW-S05",
+    "aliases": [],
     "citation": "Burns Engineering BESS Accel-Cheshire foundation drawing issued for permits 2025-08-29",
     "url": "https://portal.ct.gov/-/media/csc/3_petitions-medialibrary/petitions_medialibrary/mediapetitionnos1501-1600/pe1587/proceduralcorrespondence/pe1587_ack-conditions_staffchange_110325_a.pdf",
     "locator": "PDFp20 drawing S-102 sheet16 of19 details3-4; rendered and inspected",
@@ -1621,6 +1614,7 @@
    },
    {
     "id": "BW-S06",
+    "aliases": [],
     "citation": "SYL manufacturer specification submitted in CEC Enterprise air-quality filing TN268070",
     "url": "https://efiling.energy.ca.gov/GetDocument.aspx?DocumentContentId=105086&tn=268070",
     "locator": "PDFp193 supplier sheet printed28; wind-load row and battery/system parameters; rendered and inspected",
@@ -1639,6 +1633,7 @@
    },
    {
     "id": "BW-S07",
+    "aliases": [],
     "citation": "AES Dominicana operational press release 2017-10-17 on Fluence website",
     "url": "https://blog.fluenceenergy.com/dominican-republics-first-energy-storage-arrays-help-grid-operator-prevent-blackouts",
     "locator": "Body describing two10MW arrays at Andres and Los Mina during Irma/Maria",
@@ -1657,6 +1652,7 @@
    },
    {
     "id": "BW-S08",
+    "aliases": [],
     "citation": "Tesla Powerwall2 anchoring installation guidance",
     "url": "https://energylibrary.tesla.com/docs/Public/EnergyStorage/Powerwall/2/InstallManual/BackupGateway/2/en-us/GUID-EF498B4A-9E0A-4A04-9BE1-512C14DB415E.html",
     "locator": "AppendixA1 Table1 and exceptions below it",
@@ -1675,6 +1671,7 @@
    },
    {
     "id": "BW-S09",
+    "aliases": [],
     "citation": "Moradi-Sepahvand et al2023 hurricane resilient co-planning preprint",
     "url": "https://arxiv.org/abs/2310.05814",
     "locator": "Abstract only; full paper not reviewed in this pass",
@@ -1693,6 +1690,7 @@
    },
    {
     "id": "BW-S10",
+    "aliases": [],
     "citation": "Tesla Marshall Medical Center public permit drawing set 2022",
     "url": "https://evogov.s3.us-west-2.amazonaws.com/meetings/17/staff_reports/629.pdf",
     "locator": "PDFpp14 and29; S-101 PDFp29 rendered and inspected; structural criteria",
@@ -1711,6 +1709,7 @@
    },
    {
     "id": "BW-S11",
+    "aliases": [],
     "citation": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide revision2.8 2026-04-10",
     "url": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
     "locator": "Printedp13 section3.4 and p20 section8; PDFpp15 and22 rendered/inspected; p22 section10 text read",
@@ -1729,6 +1728,7 @@
    },
    {
     "id": "BW-S12",
+    "aliases": [],
     "citation": "PVSCM2024 original inputs and prior same-budget allocation",
     "url": "https://data.nlr.gov/system/files/307/1764611886-PVSCM%202024.zip",
     "locator": "UPV2024Q1.txt ESS.Li-IonCells BatteryPacks and Enclosure; prior evidence/r3/value_allocations.csv",
@@ -1747,6 +1747,7 @@
    },
    {
     "id": "BW-S13",
+    "aliases": [],
     "citation": "Existing Hazard Substation Hurricane demand-reference binding",
     "url": "Hazard_modeling/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
     "locator": "demand block; parent-cell ASCE MRI300 screening reference",
@@ -1759,15 +1760,15 @@
     "provenance": "register",
     "hazard": {
      "path": "perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
-     "state": "on_branch",
-     "link": null,
-     "words": "on a Hazard branch, not on its main yet"
+     "state": "unchecked",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
+     "words": null
     },
     "doi": null,
-    "link": null,
-    "link_kind": "hazard_branch",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
+    "link_kind": "hazard_file",
     "title": "Existing Hazard Substation Hurricane demand-reference binding",
-    "no_link_sentence": "on a Hazard branch, not on its main yet"
+    "no_link_sentence": null
    }
   ],
   "claims": [
@@ -2158,15 +2159,15 @@
      {
       "id": "BW-S02",
       "title": "Solar TC-wind model v2.1 docs r2",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/tropical_cyclone_wind_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/0aad764a790c97014975656d1627776b157ccde4/docs/cells/tropical_cyclone_wind_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "BW-S13",
       "title": "Existing Hazard Substation Hurricane demand-reference binding",
-      "link": null,
-      "link_kind": "hazard_branch",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
+      "link_kind": "hazard_file",
       "resolved": true
      }
     ],
@@ -2187,7 +2188,7 @@
      {
       "id": "BW-S02",
       "title": "Solar TC-wind model v2.1 docs r2",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/tropical_cyclone_wind_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/0aad764a790c97014975656d1627776b157ccde4/docs/cells/tropical_cyclone_wind_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2289,8 +2290,8 @@
      {
       "id": "BW-S01",
       "title": "Hazard BESS r1 selected profile and budget",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-      "link_kind": "repo_file",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+      "link_kind": "hazard_file",
       "resolved": true
      },
      {
@@ -2325,7 +2326,7 @@
      {
       "id": "BW-S02",
       "title": "Solar TC-wind model v2.1 docs r2",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/tropical_cyclone_wind_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/0aad764a790c97014975656d1627776b157ccde4/docs/cells/tropical_cyclone_wind_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      },
@@ -2361,8 +2362,8 @@
      {
       "id": "BW-S13",
       "title": "Existing Hazard Substation Hurricane demand-reference binding",
-      "link": null,
-      "link_kind": "hazard_branch",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
+      "link_kind": "hazard_file",
       "resolved": true
      }
     ],
@@ -2383,8 +2384,8 @@
      {
       "id": "BW-S01",
       "title": "Hazard BESS r1 selected profile and budget",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-      "link_kind": "repo_file",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+      "link_kind": "hazard_file",
       "resolved": true
      }
     ],
@@ -2406,8 +2407,8 @@
   },
   "link_counts": {
    "total": 13,
-   "linked": 12,
-   "locator_only": 1,
+   "linked": 13,
+   "locator_only": 0,
    "neither": 0,
    "markers": 0,
    "placeholders": 0

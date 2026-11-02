@@ -736,7 +736,13 @@
   "paths": {
    "sources": "docs/cells/flood_real_estate/proposed/SOURCE_REGISTER_flood_real_estate__model_v0_1__docs_r1.csv",
    "claims": "docs/cells/flood_real_estate/proposed/CLAIM_PARAMETER_REGISTER_flood_real_estate__model_v0_1__docs_r1.csv",
-   "parameters": "docs/cells/flood_real_estate/proposed/PARAMETER_TIER_TABLE_flood_real_estate__model_v0_1__docs_r1.csv"
+   "parameters": "docs/cells/flood_real_estate/proposed/PARAMETER_TIER_TABLE_flood_real_estate__model_v0_1__docs_r1.csv",
+   "source_registers": [
+    "docs/cells/flood_real_estate/proposed/SOURCE_REGISTER_flood_real_estate__model_v0_1__docs_r1.csv"
+   ],
+   "claim_registers": [
+    "docs/cells/flood_real_estate/proposed/CLAIM_PARAMETER_REGISTER_flood_real_estate__model_v0_1__docs_r1.csv"
+   ]
   },
   "n_sources": 13,
   "n_claims": 37,
@@ -1527,6 +1533,7 @@
   "sources": [
    {
     "id": "FRE-S001",
+    "aliases": [],
     "citation": "Pollack, A. (2023). Flood Depth-Damage Functions from HAZUS and 2015 North Atlantic Coast Comprehensive Study [Dataset]. Zenodo. CC-BY-4.0.",
     "url": "https://doi.org/10.5281/zenodo.10027236",
     "locator": "files haz_fl_dept.csv (md5 9557d9ffae387cb9e058667abb6ea941), naccs_ddfs.csv (md5 7b3e15aa7f6856e2b71120c4d5e22fc8), riverine_ids.csv (md5 9823ee845e81048758148c306a9f564a)",
@@ -1545,6 +1552,7 @@
    },
    {
     "id": "FRE-S002",
+    "aliases": [],
     "citation": "FEMA. Hazus Flood Model Technical Manual, Hazus 7.0 (June 2025), Table 5-2 Default Damage Functions for Estimation of Structure Damage in Riverine Flood Zones, Table 5-3 (Coastal V) and Table 5-4 (Coastal A); cross-checked against the Hazus 5.1 and 6.1 editions.",
     "url": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
     "locator": "Hazus 7.0 Table 5-2 pp. 5-3 to 5-6; Table 5-3 pp. 5-7 to 5-8 incl. note; Table 5-4 pp. 5-8 to 5-9 incl. notes; section 5.4.1.1.2.1 p. 5-10. Same Table 5-2 rows in Hazus 5.1 (pp. 5-4 to 5-5) and 6.1.",
@@ -1563,6 +1571,7 @@
    },
    {
     "id": "FRE-S003",
+    "aliases": [],
     "citation": "FEMA Hazus flood depth-damage function library, Hazus 5.1 (as distributed in the CRAN hazus R package, haz_fl_dept).",
     "url": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
     "locator": "DmgFnId 129, 217, 431, 341, 559 (structure, building)",
@@ -1581,6 +1590,7 @@
    },
    {
     "id": "FRE-S004",
+    "aliases": [],
     "citation": "U.S. Army Corps of Engineers (2015). North Atlantic Coast Comprehensive Study: Resilient Adaptation to Increasing Risk. Physical Depth Damage Function Summary Report (26 Jan 2015).",
     "url": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
     "locator": "Table 24 + Table 25 (pp. 61-62, Prototype 2 Commercial Engineered); Table 34 + Table 35 (pp. 67-68, Prototype 3 Commercial Non/Pre-Engineered); Table 55 + Table 56 (pp. 80-82, Prototype 5A Single-Story Residence No Basement); verification note pp. 80-81",
@@ -1599,6 +1609,7 @@
    },
    {
     "id": "FRE-S005",
+    "aliases": [],
     "citation": "U.S. Army Corps of Engineers, Hydrologic Engineering Center. go-consequences, structures/occtypes.json (commit dff647cabbc1abae3f084e80b7f6a166651d05d8, 2021-12-27).",
     "url": "https://github.com/USACE/go-consequences/blob/dff647cabbc1abae3f084e80b7f6a166651d05d8/structures/occtypes.json",
     "locator": "occupancytypes COM1, COM4, COM2, IND2, RES1-1SNB; structure damagefunctions default",
@@ -1617,6 +1628,7 @@
    },
    {
     "id": "FRE-S006",
+    "aliases": [],
     "citation": "U.S. Army Corps of Engineers. Economic Guidance Memorandum generic residential depth-damage relationships (one story, no basement), as carried in FRE-S005 (EGM number to be confirmed; likely EGM 01-03).",
     "url": "https://github.com/USACE/go-consequences/blob/dff647cabbc1abae3f084e80b7f6a166651d05d8/structures/occtypes.json",
     "locator": "RES1-1SNB structure default, -2 to +16 ft, mean and standard deviation per depth",
@@ -1635,6 +1647,7 @@
    },
    {
     "id": "FRE-S007",
+    "aliases": [],
     "citation": "U.S. Army Corps of Engineers, Galveston District. Commercial and industrial class depth-damage functions, as carried in Hazus (Source 'USACE - Galveston') and HEC-FIA.",
     "url": "https://rdrr.io/cran/hazus/man/haz_fl_dept.html",
     "locator": "DmgFnId 217 (average of 47 retail classes), 431 (average prof/tech services), 341 (average of 22 wholesale/warehouse classes), 559 (average of 14 light industrial classes)",
@@ -1653,6 +1666,7 @@
    },
    {
     "id": "FRE-S008",
+    "aliases": [],
     "citation": "Plymouth / Salem coastal flood trial, methodology trial 5 and fit catalogue (Hazard_Modeling branch feature/plymouth_trial @ 09b95acb); final trial 7 v0.7 artifacts in GCS (2026-10-05).",
     "url": "gs://flood-model-data/_asset_level_cache/plymouth_trial/",
     "locator": "plymouth_modelling_methodology.md sections 3, 6, 7; outputs/06_damage_curve_catalog",
@@ -1671,6 +1685,7 @@
    },
    {
     "id": "FRE-S009",
+    "aliases": [],
     "citation": "U.S. Army Corps of Engineers, Hydrologic Engineering Center. National Structure Inventory technical documentation, NSI 2026 Base (and the 2022 edition for comparison).",
     "url": "https://www.hec.usace.army.mil/confluence/nsi/technicalreferences/2026/technical-documentation",
     "locator": "sections Foundation Type and Height; Full Replacement Cost; field list (fullrep, val_struct, found_ht)",
@@ -1689,6 +1704,7 @@
    },
    {
     "id": "FRE-S010",
+    "aliases": [],
     "citation": "FEMA Hazus team. Hazus 6.1 flood damage-function extract, HazusFloodDamageFunctions_Hazus61.xlsx (FEMA-provided file, retrieved from the OS-Climate physrisk public mirror).",
     "url": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusFloodDamageFunctions_Hazus61.xlsx",
     "locator": "sheets flBldgStrucDmgFn (892 structure curves, IDs 105-999) and flBldgStructDmgFinal (default curve per occupancy-stories-basement for riverine, coastal A, coastal V)",
@@ -1707,6 +1723,7 @@
    },
    {
     "id": "FRE-S011",
+    "aliases": [],
     "citation": "U.S. Army Corps of Engineers. National Structure Inventory API, structure records for counties 25019 (Nantucket MA), 22075 (Plaquemines LA) and 19013 (Black Hawk IA).",
     "url": "https://nsi.sec.usace.army.mil/nsiapi/structures?fips=<county>",
     "locator": "properties occtype, found_type, found_ht, fullrep, sqft; summary in NSI_SAMPLE_flood_real_estate__model_v0_1__docs_r1.csv",
@@ -1725,6 +1742,7 @@
    },
    {
     "id": "FRE-S012",
+    "aliases": [],
     "citation": "FEMA. OpenFEMA FIMA NFIP Redacted Claims, dataset NfipClaims version 3 (API).",
     "url": "https://www.fema.gov/api/open/v3/NfipClaims",
     "locator": "Three filtered pulls (one-floor slab buildings with exterior water depth > 0): single-family with damage (95,435), non-residential with damage (10,180), single-family with zero damage (1,006). Filters, record counts and sha256 of the cached pulls in NFIP_CLAIMS_PULL_MANIFEST_flood_real_estate__model_v0_1__docs_r1.json",
@@ -1743,6 +1761,7 @@
    },
    {
     "id": "FRE-S013",
+    "aliases": [],
     "citation": "Hazard_Modeling. Real-estate reference profiles r1 (reference_candidates.yml and generated profile views), handoff of 2026-10-16.",
     "url": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
     "locator": "commit 8b0d61c88fbcf85daa1c098516cee22398cdb524; reference_candidates.yml git blob a74fb72b0a2edce593b5505e0fd8852f4c0253f8; profiles re_house_1s_wood_slab, re_warehouse_1s_steel_slab, re_office_3s_slab",

@@ -757,7 +757,13 @@
   "paths": {
    "sources": "docs/cells/wildfire_bess/current/source_register.csv",
    "claims": "docs/cells/wildfire_bess/current/claim_parameter_register.csv",
-   "parameters": "docs/cells/wildfire_bess/current/parameter_register.csv"
+   "parameters": "docs/cells/wildfire_bess/current/parameter_register.csv",
+   "source_registers": [
+    "docs/cells/wildfire_bess/current/source_register.csv"
+   ],
+   "claim_registers": [
+    "docs/cells/wildfire_bess/current/claim_parameter_register.csv"
+   ]
   },
   "n_sources": 12,
   "n_claims": 14,
@@ -1238,9 +1244,9 @@
     "id": "numbers",
     "name": "Where the numbers come from",
     "meaning": "The sources, what each one gave, and how sure we are",
-    "fact": "12 sources, 11 linked · our judgment",
+    "fact": "12 sources, 12 linked · our judgment",
     "paragraphs": [
-     "12 sources set this cell: Selected BESS r1 profile and fixed-2024 budget, USFS, A Wildfire Risk Assessment Framework, RMRS-GTR-315 (2013), FSim classes, Canonical wildfire_solar model v1.0 docs r3 and Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 and 8 more. Of the 4 parameters, 4 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator)."
+     "12 sources set this cell: Selected BESS r1 profile and fixed-2024 budget, USFS, A Wildfire Risk Assessment Framework, RMRS-GTR-315 (2013), FSim classes, Canonical wildfire_solar model v1.0 docs r3 and Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 and 8 more. Of the 4 parameters, 4 are our judgment. The source and claim registers are machine-readable files in the cell folder."
     ],
     "holds": [
      "evidence"
@@ -1267,7 +1273,7 @@
       "tone": "muted"
      },
      {
-      "text": "12 sources, 11 linked",
+      "text": "12 sources, 12 linked",
       "tone": "muted"
      }
     ]
@@ -1308,24 +1314,7 @@
   ],
   "word": "our judgment",
   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment",
-  "hazard_paths": [
-   {
-    "id": "BWF-S01",
-    "title": "Selected BESS r1 profile and fixed-2024 budget",
-    "path": "docs/plans/_cross_cutting/bess_conus",
-    "state": "on_branch",
-    "link": null,
-    "words": "on a Hazard branch, not on its main yet"
-   },
-   {
-    "id": "BWF-S10",
-    "title": "Current native Substation Wildfire Hazard route",
-    "path": "perils/wildfire/src/wildfire/substation.py",
-    "state": "on_branch",
-    "link": null,
-    "words": "on a Hazard branch, not on its main yet"
-   }
-  ],
+  "hazard_paths": [],
   "capabilities": [
    {
     "key": "single_event",
@@ -1483,7 +1472,7 @@
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "12 sources set this cell: Selected BESS r1 profile and fixed-2024 budget, USFS, A Wildfire Risk Assessment Framework, RMRS-GTR-315 (2013), FSim classes, Canonical wildfire_solar model v1.0 docs r3 and Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 and 8 more. Of the 4 parameters, 4 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "paragraph": "12 sources set this cell: Selected BESS r1 profile and fixed-2024 budget, USFS, A Wildfire Risk Assessment Framework, RMRS-GTR-315 (2013), FSim classes, Canonical wildfire_solar model v1.0 docs r3 and Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 and 8 more. Of the 4 parameters, 4 are our judgment. The source and claim registers are machine-readable files in the cell folder.",
     "plain_fact": "12 sources · our judgment"
    },
    {
@@ -1536,8 +1525,8 @@
      "BWF-S01"
     ],
     "title": "Selected BESS r1 profile and fixed-2024 budget",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-    "link_kind": "repo_file",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+    "link_kind": "hazard_file",
     "locator": "asset_model.json; layout.csv; reference_budget.csv",
     "no_link_sentence": null,
     "source_id": "BWF-S01"
@@ -1560,7 +1549,7 @@
      "BWF-S03"
     ],
     "title": "Canonical wildfire_solar model v1.0 docs r3",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/wildfire_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/0aad764a790c97014975656d1627776b157ccde4/docs/cells/wildfire_solar/current",
     "link_kind": "repo_file",
     "locator": "curve_artifact; ORDINATE_TABLE; dossier sections3-5; exact index pin",
     "no_link_sentence": null,
@@ -1594,6 +1583,7 @@
   "sources": [
    {
     "id": "BWF-S01",
+    "aliases": [],
     "citation": "Selected BESS r1 profile and fixed-2024 budget",
     "url": "Hazard_modeling/docs/plans/_cross_cutting/bess_conus/",
     "locator": "asset_model.json; layout.csv; reference_budget.csv",
@@ -1606,19 +1596,19 @@
     "provenance": "register",
     "hazard": {
      "path": "docs/plans/_cross_cutting/bess_conus",
-     "state": "on_branch",
-     "link": null,
-     "words": "on a Hazard branch, not on its main yet"
+     "state": "unchecked",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+     "words": null
     },
-    "repo_path": "docs/plans/flood_wind_shared_electrical/asset_model.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-    "link_kind": "repo_file",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+    "link_kind": "hazard_file",
     "title": "Selected BESS r1 profile and fixed-2024 budget",
     "no_link_sentence": null
    },
    {
     "id": "BWF-S02",
+    "aliases": [],
     "citation": "USFS A Wildfire Risk Assessment Framework RMRS-GTR-315 (2013)",
     "url": "https://www.fs.usda.gov/rm/pubs/rmrs_gtr315.pdf",
     "locator": "printed25 / PDF31 Table5 and Wildfire Likelihood; native catalog RDS-2016-0034-3",
@@ -1637,6 +1627,7 @@
    },
    {
     "id": "BWF-S03",
+    "aliases": [],
     "citation": "Canonical wildfire_solar model v1.0 docs r3",
     "url": "docs/cells/wildfire_solar/current/",
     "locator": "curve_artifact; ORDINATE_TABLE; dossier sections3-5; exact index pin",
@@ -1649,13 +1640,14 @@
     "provenance": "register",
     "repo_path": "docs/cells/wildfire_solar/current",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/wildfire_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/0aad764a790c97014975656d1627776b157ccde4/docs/cells/wildfire_solar/current",
     "link_kind": "repo_file",
     "title": "Canonical wildfire_solar model v1.0 docs r3",
     "no_link_sentence": null
    },
    {
     "id": "BWF-S04",
+    "aliases": [],
     "citation": "Tesla Industrial Lithium-Ion Battery ERG rev2.8 (existing captured bytes)",
     "url": "https://www.tesla.com/sites/default/files/downloads/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
     "locator": "printed13 / PDF15 section3.3; printed17 / PDF19 section5.2; printed20 / PDF22 section8",
@@ -1674,6 +1666,7 @@
    },
    {
     "id": "BWF-S05",
+    "aliases": [],
     "citation": "Sungrow A Holistic Approach to Safety whitepaper",
     "url": "https://info-support.sungrowpower.com/market-material/eeb93c64-dfba-4f4c-a481-b6853ec90cea.pdf",
     "locator": "printed24 / PDF25 Figures36-39; embedded test report cover 10522343-SHA-R-01 IssueE dated2025-04-22",
@@ -1692,6 +1685,7 @@
    },
    {
     "id": "BWF-S06",
+    "aliases": [],
     "citation": "UL Solutions large-scale fire testing announcement (2026-04-23)",
     "url": "https://www.ul.com/news/ul-solutions-launches-large-scale-fire-testing-battery-energy-storage-systems",
     "locator": "main body paragraphs test scope; internally initiated BESS enclosure fire and targets",
@@ -1710,6 +1704,7 @@
    },
    {
     "id": "BWF-S07",
+    "aliases": [],
     "citation": "CFA Victorian Big Battery incident account (2021-07-30; updates through2021-08-03)",
     "url": "https://news.cfa.vic.gov.au/news/firefighters-bring-large-battery-fire-near-geelong-under-control",
     "locator": "Original article and incident-controller statement; cause undetermined in this account",
@@ -1728,6 +1723,7 @@
    },
    {
     "id": "BWF-S08",
+    "aliases": [],
     "citation": "DOE FEMP Solar Photovoltaic Hardening for Resilience - Wildfire",
     "url": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
     "locator": "Physical Measures; containers; fuel removal; access and local fire-crew consultation",
@@ -1746,6 +1742,7 @@
    },
    {
     "id": "BWF-S09",
+    "aliases": [],
     "citation": "NREL-related same-budget battery hardware allocation from prior BESS review",
     "url": "docs/extra/discussion/bess_damage/evidence/r3/",
     "locator": "value_allocations.csv MMP_related_allocation; parent source and receipt in r3 README/audit",
@@ -1758,13 +1755,14 @@
     "provenance": "register",
     "repo_path": "docs/extra/discussion/bess_damage/evidence/r3",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/extra/discussion/bess_damage/evidence/r3",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/0aad764a790c97014975656d1627776b157ccde4/docs/extra/discussion/bess_damage/evidence/r3",
     "link_kind": "repo_file",
     "title": "NREL-related same-budget battery hardware allocation from prior BESS review",
     "no_link_sentence": null
    },
    {
     "id": "BWF-S10",
+    "aliases": [],
     "citation": "Current native Substation Wildfire Hazard route",
     "url": "Hazard_modeling/perils/wildfire/src/wildfire/substation.py",
     "locator": "station_fire_native_response; station_fire_annual; docs/hazards/wildfire/implementation/substation/conus_grid/version_1/m0.md through m4.md",
@@ -1777,18 +1775,19 @@
     "provenance": "register",
     "hazard": {
      "path": "perils/wildfire/src/wildfire/substation.py",
-     "state": "on_branch",
-     "link": null,
-     "words": "on a Hazard branch, not on its main yet"
+     "state": "unchecked",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/perils/wildfire/src/wildfire/substation.py",
+     "words": null
     },
     "doi": null,
-    "link": null,
-    "link_kind": "hazard_branch",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/perils/wildfire/src/wildfire/substation.py",
+    "link_kind": "hazard_file",
     "title": "Current native Substation Wildfire Hazard route",
-    "no_link_sentence": "on a Hazard branch, not on its main yet"
+    "no_link_sentence": null
    },
    {
     "id": "BWF-S11",
+    "aliases": [],
     "citation": "NEMA fire/heat equipment guide and2026 resource update",
     "url": "https://www.makeitelectric.org/newsroom/news/nema-issues-guidance-on-evaluating-damaged-electrical-equipment-after-natural-disasters-and-extreme-weather-events/",
     "locator": "May28,2026 announcement; CS70008-2026 metadata;2016 guide discovery",
@@ -1807,6 +1806,7 @@
    },
    {
     "id": "BWF-S12",
+    "aliases": [],
     "citation": "Owner BWF-Q01 ruling2026-10-19",
     "url": "docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
     "locator": "BWF-Q01; experiment_spec.json owner_ruling",
@@ -1819,7 +1819,7 @@
     "provenance": "register",
     "repo_path": "docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/0aad764a790c97014975656d1627776b157ccde4/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
     "link_kind": "repo_file",
     "title": "Owner BWF-Q01 ruling2026-10-19",
     "no_link_sentence": null
@@ -2207,7 +2207,7 @@
      {
       "id": "BWF-S03",
       "title": "Canonical wildfire_solar model v1.0 docs r3",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/wildfire_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/0aad764a790c97014975656d1627776b157ccde4/docs/cells/wildfire_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      },
@@ -2243,21 +2243,21 @@
      {
       "id": "BWF-S01",
       "title": "Selected BESS r1 profile and fixed-2024 budget",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-      "link_kind": "repo_file",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+      "link_kind": "hazard_file",
       "resolved": true
      },
      {
       "id": "BWF-S09",
       "title": "NREL-related same-budget battery hardware allocation from prior BESS review",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/extra/discussion/bess_damage/evidence/r3",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/0aad764a790c97014975656d1627776b157ccde4/docs/extra/discussion/bess_damage/evidence/r3",
       "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "BWF-S12",
       "title": "Owner BWF-Q01 ruling2026-10-19",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/0aad764a790c97014975656d1627776b157ccde4/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2279,14 +2279,14 @@
      {
       "id": "BWF-S01",
       "title": "Selected BESS r1 profile and fixed-2024 budget",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-      "link_kind": "repo_file",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+      "link_kind": "hazard_file",
       "resolved": true
      },
      {
       "id": "BWF-S03",
       "title": "Canonical wildfire_solar model v1.0 docs r3",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/wildfire_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/0aad764a790c97014975656d1627776b157ccde4/docs/cells/wildfire_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2308,8 +2308,8 @@
      {
       "id": "BWF-S01",
       "title": "Selected BESS r1 profile and fixed-2024 budget",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-      "link_kind": "repo_file",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/plans/_cross_cutting/bess_conus",
+      "link_kind": "hazard_file",
       "resolved": true
      },
      {
@@ -2329,8 +2329,8 @@
      {
       "id": "BWF-S10",
       "title": "Current native Substation Wildfire Hazard route",
-      "link": null,
-      "link_kind": "hazard_branch",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/main/perils/wildfire/src/wildfire/substation.py",
+      "link_kind": "hazard_file",
       "resolved": true
      }
     ],
@@ -2352,8 +2352,8 @@
   },
   "link_counts": {
    "total": 12,
-   "linked": 11,
-   "locator_only": 1,
+   "linked": 12,
+   "locator_only": 0,
    "neither": 0,
    "markers": 0,
    "placeholders": 0
