@@ -1,5 +1,6 @@
-// An asset type's page (G14, DCD-D26; DCD-D21): what each curve covers on the Digital Twin's reference model, hazard
-// by hazard; which hazard has a curve for which system; the type's curves. The cells' own part lists and value rows
+// An asset type's page (G14, DCD-D26; DCD-D21), in the order the owner set on reviewing the subcomponent panel: what
+// the words mean; the type's curves; every subcomponent, curve or gap; what each curve covers on the Digital Twin's
+// reference model, hazard by hazard; which hazard has a curve for which system. The cells' own part lists and value rows
 // (iteration 2) stay one control away. A category whose types share one catalogue entry per hazard (real estate)
 // gets an index page instead.
 import Link from "next/link";
@@ -86,6 +87,7 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
           </div>
           {v ? <p className="mt-1 max-w-[1100px] text-[12.5px] leading-snug">{v.summary}</p> : null}
         </div>
+        <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} open /></div>
         <div className="mt-3 grid gap-3 md:grid-cols-3">
           {lc.types.map((t) => (
             <Link key={t.slug} href={t.href} className="rounded-lg border border-border bg-card px-3 py-2.5 hover:border-accent/60">
@@ -98,7 +100,6 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
             </Link>
           ))}
         </div>
-        <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} open /></div>
         {v ? <div className="mt-3"><Subcomponents v={v} m={m} /></div> : null}
         {v ? (
           <details className="mt-3 rounded-lg border border-border bg-card">
@@ -141,9 +142,9 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
       </div>
       <div className="mt-3 space-y-3">
         <ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} open />
-        {cov && viewer ? <AssetCoverage cov={cov} loadOrder={viewer.load_order} /> : <p className="text-[12px] text-muted-foreground">No twin coverage for this type yet.</p>}
         <CurveList row={row} m={m} />
         {v && !sharedCell ? <Subcomponents v={v} m={m} defaultHazard={cov ? (cov.hazards.find((h) => !h.gap) ?? cov.hazards[0]).hazard.slug : undefined} /> : null}
+        {cov && viewer ? <AssetCoverage cov={cov} loadOrder={viewer.load_order} /> : <p className="text-[12px] text-muted-foreground">No twin coverage for this type yet.</p>}
         {cov ? <CoverageMatrix cov={cov} /> : null}
         {v && !sharedCell ? (
           <details className="rounded-lg border border-border bg-card">

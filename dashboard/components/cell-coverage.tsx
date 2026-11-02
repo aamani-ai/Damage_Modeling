@@ -30,8 +30,8 @@ export function CellCoverage({ covs, hazardSlug, loadOrder }: { covs: CellCov[];
   const title = (
     <>
       <button type="button" aria-expanded={open} aria-controls="card-coverage-body" onClick={() => setPicture(open ? "hidden" : null)}
-        className="font-semibold uppercase tracking-wide hover:text-accent">
-        <span aria-hidden className="mr-1 inline-block w-3">{open ? "▾" : "▸"}</span>What this curve covers
+        className="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 text-[12.5px] font-semibold uppercase tracking-wide text-foreground hover:border-accent/60 hover:text-accent">
+        <span aria-hidden className="inline-block w-4 text-[15px] leading-none">{open ? "▾" : "▸"}</span>What this curve covers
       </button>
       <Link href={`/assets/${current.slug}?hazard=${hazardSlug}`} className="ml-1 font-normal normal-case tracking-normal text-accent hover:underline">on the {current.label.toLowerCase()} page ▸</Link>
     </>
