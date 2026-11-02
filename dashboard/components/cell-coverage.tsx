@@ -1,7 +1,8 @@
 "use client";
 
 // The cell page's picture (DCD-D21): what this cell's curves cover on the Digital Twin's reference model. A cell shared
-// by several asset types (real estate) shows one building at a time; the choice lives in the URL (?building=).
+// by several asset types (real estate) shows one building at a time; the choice lives in the URL (?building=). The
+// section folds away (?picture=hidden), and a folded picture does not load the model.
 import Link from "next/link";
 import { useUrlParam } from "@/lib/url-state";
 import type { Coverage } from "@/lib/types";
@@ -12,6 +13,8 @@ export interface CellCov { slug: string; label: string; building: string | null;
 export function CellCoverage({ covs, hazardSlug, loadOrder }: { covs: CellCov[]; hazardSlug: string; loadOrder: string[] }) {
   const [bParam, setB] = useUrlParam("building");
   const [, setPart] = useUrlParam("part");
+  const [picture, setPicture] = useUrlParam("picture");
+  const open = picture !== "hidden";
   const current = covs.find((c) => c.slug === bParam) ?? covs[0];
   if (!current) return null;
   const picker = covs.length > 1 ? (
@@ -24,11 +27,24 @@ export function CellCoverage({ covs, hazardSlug, loadOrder }: { covs: CellCov[];
       ))}
     </div>
   ) : null;
+  const title = (
+    <>
+      <button type="button" aria-expanded={open} aria-controls="card-coverage-body" onClick={() => setPicture(open ? "hidden" : null)}
+        className="font-semibold uppercase tracking-wide hover:text-accent">
+        <span aria-hidden className="mr-1 inline-block w-3">{open ? "▾" : "▸"}</span>What this curve covers
+      </button>
+      <Link href={`/assets/${current.slug}?hazard=${hazardSlug}`} className="ml-1 font-normal normal-case tracking-normal text-accent hover:underline">on the {current.label.toLowerCase()} page ▸</Link>
+    </>
+  );
   return (
     <section id="card-coverage" className="mt-3 rounded-lg border border-border bg-card" aria-label="What this curve covers">
-      <TwinCoverage key={current.slug} cov={current.cov} loadOrder={loadOrder} hazardSlug={hazardSlug} mode="cell" height={400}
-        title={<>What this curve covers <Link href={`/assets/${current.slug}?hazard=${hazardSlug}`} className="ml-1 font-normal normal-case tracking-normal text-accent hover:underline">on the {current.label.toLowerCase()} page ▸</Link></>}
-        hazardPicker={picker} />
+      {open ? (
+        <div id="card-coverage-body">
+          <TwinCoverage key={current.slug} cov={current.cov} loadOrder={loadOrder} hazardSlug={hazardSlug} mode="cell" height={400} title={title} hazardPicker={picker} />
+        </div>
+      ) : (
+        <div className="px-3 py-2.5"><span className="text-[11px] text-muted-foreground">{title}</span></div>
+      )}
     </section>
   );
 }

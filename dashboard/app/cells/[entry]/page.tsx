@@ -1,9 +1,10 @@
-// The cell page (G15, DCD-D27; the order the owner set on reviewing iteration 3, DCD-D33): how the curve was made, in
-// four steps with their key items, on top; then the curve with its main logic, how sure in words and its main
-// references; then what it covers on the Digital Twin's reference model (DCD-D21); then the open blocks; then a For
-// Hazard footer with the identity, the outputs, the files, the known answers and the pins. Every
-// ledger fact earlier iterations showed is still here, one control away (DCD-D19): the steps' side panels with their
-// Details, "Show the numbers", the footer's details.
+// The cell page (G15, DCD-D27; the order the owner set on reviewing iteration 3, DCD-D33, then on reviewing the
+// subcomponent panel): what the words mean; every subcomponent, curve or gap; how the curve was made, in four steps
+// with their key items; then the curve with its main logic, how sure in words and its main references; then what it
+// covers on the Digital Twin's reference model (DCD-D21, collapsible); then the open blocks; then a For Hazard footer
+// with the identity, the outputs, the files, the known answers and the pins. Every ledger fact earlier iterations
+// showed is still here, one control away (DCD-D19): the steps' side panels with their Details, "Show the numbers",
+// the footer's details.
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CellCoverage, type CellCov } from "@/components/cell-coverage";
@@ -65,6 +66,9 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
         </div>
       ) : (
         <>
+          {c.subcomponents.length && c.subcomponent_rollup ? (
+            <div className="mt-3"><SubcomponentPanel subs={c.subcomponents} rollup={c.subcomponent_rollup} hazards={[{ slug: c.hazard.slug, label: c.hazard.label }]} defaultHazard={c.hazard.slug} cards={constructionCards(c.subcomponents)} legend={m.legend} blobBase={blobBase(m)} picker={false} /></div>
+          ) : null}
           <StepsStrip cell={c} cites={cites} curves={curves} m={m} />
           {c.binding ? (
             <Card id="card-curve" className="mt-3">
@@ -94,9 +98,6 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
             <EmptyState>No curve records in this artifact.</EmptyState>
           )}
           {covs.length && viewer ? <CellCoverage covs={covs} hazardSlug={c.hazard.slug} loadOrder={viewer.load_order} /> : null}
-          {c.subcomponents.length && c.subcomponent_rollup ? (
-            <div className="mt-3"><SubcomponentPanel subs={c.subcomponents} rollup={c.subcomponent_rollup} hazards={[{ slug: c.hazard.slug, label: c.hazard.label }]} defaultHazard={c.hazard.slug} cards={constructionCards(c.subcomponents)} legend={m.legend} blobBase={blobBase(m)} picker={false} /></div>
-          ) : null}
           <PlainBlocks cell={c} blob={blob} />
         </>
       )}
