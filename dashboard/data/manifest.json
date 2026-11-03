@@ -1,16 +1,16 @@
 {
  "schema": "damage_dashboard_manifest.v1",
- "commit": "3379cc6",
- "commit_full": "3379cc6452b5a384a4c884a363b9302b2c5351ed",
+ "commit": "44a24a3",
+ "commit_full": "44a24a326b211004c2e7564f733a72d15afc37ae",
  "link_commit": "092e7776c0cb72e7978d13a3ebaf1917ab0b754f",
- "link_note": "This build's commit 3379cc6 is not on GitHub yet, so file links open the files at 092e777, where this branch left main.",
+ "link_note": "This build's commit 44a24a3 is not on GitHub yet, so file links open the files at 092e777, where this branch left main.",
  "source": {
   "mode": "preview",
   "ref": "dashboard/traceability-completeness",
-  "commit": "3379cc6",
-  "commit_full": "3379cc6452b5a384a4c884a363b9302b2c5351ed",
+  "commit": "44a24a3",
+  "commit_full": "44a24a326b211004c2e7564f733a72d15afc37ae",
   "dirty": false,
-  "label": "preview of branch dashboard/traceability-completeness at 3379cc6 — not main"
+  "label": "preview of branch dashboard/traceability-completeness at 44a24a3 — not main"
  },
  "hazard_main": {
   "available": true,
@@ -5074,11 +5074,11 @@
  ],
  "scope_line": "across 7 asset types in 3 categories and 6 hazards",
  "state_words": {
-  "curve": "Has a damage curve",
-  "conditioner": "Changes the curve, no curve of its own",
-  "no_curve": "In the value, no curve yet",
-  "no_direct_damage": "Reviewed: no direct damage",
-  "outside": "Outside the value this curve prices"
+  "curve": "has a curve",
+  "conditioner": "changes another curve",
+  "no_curve": "no curve yet",
+  "no_direct_damage": "no direct damage",
+  "outside": "not priced by this curve"
  },
  "review": {
   "cells": [
@@ -5934,6 +5934,21 @@
     "key": "gap",
     "word": "no curve yet",
     "meaning": "No curve covers this subsystem; the row says why and links the research."
+   },
+   {
+    "key": "conditioner",
+    "word": "changes another curve",
+    "meaning": "No curve of its own: its condition (for example whether a protection is in place) changes another part's curve."
+   },
+   {
+    "key": "no_direct_damage",
+    "word": "no direct damage",
+    "meaning": "Looked at, and judged not to be damaged directly by this hazard."
+   },
+   {
+    "key": "outside",
+    "word": "not priced by this curve",
+    "meaning": "Left out of the value this curve prices (for example contents, modeled separately)."
    }
   ],
   "completeness": [
@@ -5969,7 +5984,7 @@
    {
     "key": "runtime_indexed",
     "word": "in production index",
-    "meaning": "The platform's loss calculations can use this curve. That does not mean a map or screening run has chosen it yet."
+    "meaning": "The platform's loss calculations can use this curve. Whether Hazard's maps already use it is a separate question, answered under Used by Hazard."
    },
    {
     "key": "reused_binding",
