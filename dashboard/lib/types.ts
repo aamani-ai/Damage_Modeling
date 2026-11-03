@@ -38,7 +38,7 @@ export interface Rail {
 }
 
 export interface Tile {
-  entry_id: string; kind: string; status: Status; title: string; asset: Slug; hazard: Slug; hazard_flag?: string | null;
+  entry_id: string; kind: string; status: Status; title: string; asset: Slug; hazard: Slug;
   exists: Rail["exists"]; partial: boolean; tiers: Rail["evidence"]; occurrence: { mark: string; label: string };
   review: Review; identity: Identity; summary: string; no_evaluator: boolean; share_covered: number | null;
   n_curves: number; n_drawn: number; outside_checks: number; chain_core_as_files: number; generation: string;

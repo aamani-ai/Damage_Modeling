@@ -588,14 +588,13 @@ def build(write: bool = True) -> dict[str, Any]:
     # ─── manifest ───
     hz_order = [h["slug"] for h in sl["hazards"]]
     as_order = [a["slug"] for a in sl["assets"]]
-    # what Hazard uses, where it differs from the page: a note at the top of the cell page and a word on its tile
+    # what Hazard uses, where it differs from the page: a note at the top of the cell page
     for eid, u in hazard_uses.items():
         cells[eid]["hazard_note"] = {"title": "Differs in Hazard", "lines": u["differences"]} if u["state"] == "differs" else None
     tiles = []
     for e in entries:
         c = cells[e.id]
         tiles.append({
-            "hazard_flag": "Differs in Hazard" if (hazard_uses.get(e.id) or {}).get("state") == "differs" else None,
             "entry_id": e.id, "kind": e.kind, "status": e.status, "title": c["title"], "asset": c["asset"], "hazard": c["hazard"],
             "exists": c["rail"]["exists"], "partial": bool(e.data.get("not_covered")), "tiers": c["rail"]["evidence"], "occurrence": c["rail"]["evidence"]["occurrence"],
             "review": c["rail"]["review"], "identity": c["identity"], "summary": c["summary"], "no_evaluator": c["no_evaluator"],
