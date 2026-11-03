@@ -11,7 +11,7 @@ from typing import Any
 from . import chain as chain_mod
 from . import hazard_main
 from . import hazard_use
-from .plain_reasons import plain as plain_reason
+from .plain_reasons import plain as plain_reason, source_doc
 from . import twin as twin_mod
 from .catalogue import Entry, curve_records, load_entries
 from .construction import construction_block, constructing_files, legend, path_leaks
@@ -485,6 +485,7 @@ def build(write: bool = True) -> dict[str, Any]:
                              "buckets": buckets_block, "review": review_block(e), "absent_sentence": None if occ else STATION_ABSENT_SENTENCES["field_review"]},
             "files": files, "folder_files": folder_files,
             "gap_reason": plain_reason(e.data.get("reason"))[0], "gap_reason_own": plain_reason(e.data.get("reason"))[1],
+            "gap_reason_source": source_doc(e.data.get("reason"), e.id, None, None) if e.kind == "gap" else None,
             "binding": {"source_cell_id": e.identity.get("source_cell_id"), "source_entry_id": e.identity.get("source_cell_id"), "reused_curves": [c for r in e.data.get("rows") or [] for c in r.get("curves", [])],
                         "transfer_rationale": plain_text(a.get("transfer_rationale")), "transfer_rationale_raw": a.get("transfer_rationale"), "transfer_tier": a.get("transfer_tier"), "status": a.get("status"), "limitations": a.get("limitations")} if e.kind == "binding" else None,
             "sampling_notes": sampled["notes"],

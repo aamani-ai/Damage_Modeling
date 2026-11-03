@@ -12,6 +12,7 @@ import { SubcomponentPanel } from "@/components/subcomponents";
 import { FileLink, Tag } from "@/components/ui";
 import { assetView, blobBase, blobUrl, constructionCards, coverage, manifest, twinViewer } from "@/lib/data";
 import type { AssetViewV2, LibraryType, ManifestV3 } from "@/lib/types";
+import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 export const dynamicParams = false;
 
@@ -35,8 +36,8 @@ function CurveList({ row, m }: { row: LibraryType; m: ManifestV3 }) {
   const hazards = m.hazards.filter((h) => !h.outside_the_five);
   return (
     <section className="rounded-lg border border-border bg-card" aria-label="The curves">
-      <div className="px-3 pt-2.5 pb-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">The curves</div>
-      <ul className="grid gap-1 px-3 pb-3 text-[11.5px] md:grid-cols-2 xl:grid-cols-5">
+      <div className="px-3 pt-2.5 pb-1 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">The curves</div>
+      <ul className="grid gap-1 px-3 pb-3 text-[12.5px] md:grid-cols-2 xl:grid-cols-5">
         {hazards.map((h) => {
           const t = row.tiles[h.slug];
           if (!t) return null;
@@ -45,8 +46,8 @@ function CurveList({ row, m }: { row: LibraryType; m: ManifestV3 }) {
               <Link href={t.href} title={[t.summary, t.halves].filter(Boolean).join("\n")} aria-label={t.aria_label}
                 className={`flex h-full flex-col rounded-md border px-2.5 py-1.5 hover:border-accent/60 ${t.status === "gap" ? "tile-gap border-border" : t.status === "proposal" ? "border-dashed border-foreground/30" : t.status === "reused" ? "hatch-reused border-border" : "border-border"}`}>
                 <span className="font-medium">{h.label}</span>
-                <span className="text-[10.5px] text-muted-foreground">{STATUS_WORD[t.status]}{t.status !== "gap" ? ` · ${t.word}` : ""}{t.partial && t.status !== "gap" ? " · partial" : ""}</span>
-                <span className="text-[10.5px] text-muted-foreground">{t.occurrence.label === "not searched" || t.occurrence.label === "no register" ? "field reports: not searched" : `field reports: ${t.occurrence.label}`}</span>
+                <span className="text-[11.5px] text-muted-foreground">{STATUS_WORD[t.status]}{t.status !== "gap" ? ` · ${t.word}` : ""}{t.partial && t.status !== "gap" ? " · partial" : ""}</span>
+                {SHOW_FIELD_REPORTS ? <span className="text-[11.5px] text-muted-foreground">{t.occurrence.label === "not searched" || t.occurrence.label === "no register" ? "field reports: not searched" : `field reports: ${t.occurrence.label}`}</span> : null}
               </Link>
             </li>
           );
@@ -85,29 +86,29 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
       <div>
         <div className="sticky top-0 z-20 -mx-4 border-b border-border bg-background/95 px-4 pb-2 pt-2 backdrop-blur">
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <Link href="/" className="text-[11px] text-muted-foreground hover:text-foreground">← Library</Link>
-            <h2 className="text-[15px] font-semibold tracking-tight">{indexCat.label}</h2>
+            <Link href="/" className="text-[12px] text-muted-foreground hover:text-foreground">← Library</Link>
+            <h2 className="text-[16px] font-semibold tracking-tight">{indexCat.label}</h2>
             {indexCat.rule ? <Tag>grouped by {indexCat.rule}</Tag> : null}
           </div>
-          {v ? <p className="mt-1 max-w-[1100px] text-[12.5px] leading-snug">{v.summary}</p> : null}
+          {v ? <p className="mt-1 max-w-[1100px] text-[13.5px] leading-snug">{v.summary}</p> : null}
         </div>
         <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} open groups={["status", "evidence", "lenses", "subsystem", "production", "hazard_use", "units"]} /></div>
         <div className="mt-3 grid gap-3 md:grid-cols-3">
           {lc.types.map((t) => (
             <Link key={t.slug} href={t.href} className="rounded-lg border border-border bg-card px-3 py-2.5 hover:border-accent/60">
-              <div className="text-[13px] font-semibold">{t.label}{t.building ? <span className="font-normal text-muted-foreground"> · {t.building.toLowerCase()}</span> : null}</div>
-              {t.profile ? <div className="text-[11px] text-muted-foreground">{t.profile}</div> : null}
+              <div className="text-[14px] font-semibold">{t.label}{t.building ? <span className="font-normal text-muted-foreground"> · {t.building.toLowerCase()}</span> : null}</div>
+              {t.profile ? <div className="text-[12px] text-muted-foreground">{t.profile}</div> : null}
               <div className="mt-1.5 flex flex-wrap gap-1">
                 {Object.entries(t.tiles).map(([h, tile]) => <Tag key={h} title={tile.halves ?? undefined}>{m.hazards.find((x) => x.slug === h)?.label}: {tile.status === "gap" ? "no curve yet" : `${STATUS_WORD[tile.status]} · ${tile.word}`}</Tag>)}
               </div>
-              <div className="mt-1.5 text-[11px] text-accent">what its curves cover ▸</div>
+              <div className="mt-1.5 text-[12px] text-accent">what its curves cover ▸</div>
             </Link>
           ))}
         </div>
         {v ? <div className="mt-3"><Subcomponents v={v} m={m} /></div> : null}
         {v ? (
           <details className="mt-3 rounded-lg border border-border bg-card">
-            <summary className="cursor-pointer px-3 py-2 text-[11.5px] font-medium text-muted-foreground hover:text-foreground">The cells&apos; own part lists, building by building and hazard by hazard</summary>
+            <summary className="cursor-pointer px-3 py-2 text-[12.5px] font-medium text-muted-foreground hover:text-foreground">The cells&apos; own part lists, building by building and hazard by hazard</summary>
             <div className="border-t border-border p-3"><AssetViewGrid v={v} m={m} /></div>
           </details>
         ) : null}
@@ -128,18 +129,18 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
       <div className="sticky top-0 z-20 -mx-4 border-b border-border bg-background/95 px-4 pb-2 pt-2 backdrop-blur">
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           {indexCategories(m).some((c) => c.slug === cat.slug) ? (
-            <Link href={`/assets/${cat.slug}`} className="text-[11px] text-muted-foreground hover:text-foreground">← {cat.label}</Link>
+            <Link href={`/assets/${cat.slug}`} className="text-[12px] text-muted-foreground hover:text-foreground">← {cat.label}</Link>
           ) : (
             <>
-              <Link href="/" className="text-[11px] text-muted-foreground hover:text-foreground">← Library</Link>
-              <span className="text-[11px] text-muted-foreground">{cat.label} ›</span>
+              <Link href="/" className="text-[12px] text-muted-foreground hover:text-foreground">← Library</Link>
+              <span className="text-[12px] text-muted-foreground">{cat.label} ›</span>
             </>
           )}
-          <h2 className="text-[15px] font-semibold tracking-tight">{type.label}{type.building ? <span className="font-normal text-muted-foreground"> · {type.building.toLowerCase()}</span> : null}</h2>
+          <h2 className="text-[16px] font-semibold tracking-tight">{type.label}{type.building ? <span className="font-normal text-muted-foreground"> · {type.building.toLowerCase()}</span> : null}</h2>
           <Tag>{tiles.length} hazards: {statusLine}</Tag>
           {v?.reference && !sharedCell ? <Tag title={v.reference.source}>{v.reference.label}</Tag> : null}
         </div>
-        <p className="mt-1 max-w-[1100px] text-[12.5px] leading-snug">
+        <p className="mt-1 max-w-[1100px] text-[13.5px] leading-snug">
           {type.profile ? <span className="text-muted-foreground">{type.profile[0].toUpperCase() + type.profile.slice(1)}. </span> : null}
           {sharedCell ? `Every hazard is one real-estate cell shared by the building types; the pages below show the ${type.building?.toLowerCase()} rows.` : v?.summary}
         </p>
@@ -148,20 +149,20 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
         <ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} open groups={["status", "evidence", "lenses", "subsystem", "production", "hazard_use", "units"]} />
         <CurveList row={row} m={m} />
         {v ? <Subcomponents v={v} m={m} building={sharedCell ? type.building!.toLowerCase() : undefined} defaultHazard={cov ? (cov.hazards.find((h) => !h.gap) ?? cov.hazards[0]).hazard.slug : undefined} /> : null}
-        {cov && viewer ? <AssetCoverage cov={cov} loadOrder={viewer.load_order} /> : <p className="text-[12px] text-muted-foreground">No twin coverage for this type yet.</p>}
+        {cov && viewer ? <AssetCoverage cov={cov} loadOrder={viewer.load_order} /> : <p className="text-[13px] text-muted-foreground">No twin coverage for this type yet.</p>}
         {cov ? <CoverageMatrix cov={cov} /> : null}
         {v && !sharedCell ? (
           <details className="rounded-lg border border-border bg-card">
-            <summary className="cursor-pointer px-3 py-2 text-[11.5px] font-medium text-muted-foreground hover:text-foreground">The cells&apos; own part lists and value rows, hazard by hazard</summary>
+            <summary className="cursor-pointer px-3 py-2 text-[12.5px] font-medium text-muted-foreground hover:text-foreground">The cells&apos; own part lists and value rows, hazard by hazard</summary>
             <div className="border-t border-border p-3"><AssetViewGrid v={v} m={m} /></div>
           </details>
         ) : sharedCell ? (
-          <p className="px-1 text-[11px] text-muted-foreground">The real-estate cells&apos; own part lists, building by building, are on the <Link href={`/assets/${cat.slug}`} className="text-accent hover:underline">{cat.label.toLowerCase()} page</Link>.</p>
+          <p className="px-1 text-[12px] text-muted-foreground">The real-estate cells&apos; own part lists, building by building, are on the <Link href={`/assets/${cat.slug}`} className="text-accent hover:underline">{cat.label.toLowerCase()} page</Link>.</p>
         ) : null}
       </div>
       {cov || (v?.reference && !sharedCell) ? (
-        <footer className="mt-4 border-t border-border pt-2 text-[10.5px] text-muted-foreground">
-          <span className="text-[10px] font-semibold uppercase tracking-wide">Sources of this page</span>{" "}
+        <footer className="mt-4 border-t border-border pt-2 text-[11.5px] text-muted-foreground">
+          <span className="text-[11px] font-semibold uppercase tracking-wide">Sources of this page</span>{" "}
           {cov ? <>the Digital Twin at <span className="font-mono">{cov.twin.commit.slice(0, 7)}</span> · crosswalk <FileLink href={blobUrl(m, cov.twin.crosswalk)}>{cov.twin.crosswalk.split("/").slice(-1)[0]}</FileLink></> : null}
           {cov && v?.reference && !sharedCell ? " · " : null}
           {v?.reference && !sharedCell ? <>reference value {v.reference.link || !v.reference.source.startsWith("Hazard_modeling/") ? <FileLink href={v.reference.link ?? blobUrl(m, v.reference.source)}>{v.reference.source.split("/").slice(-1)[0]}</FileLink> : <span>{v.reference.source.split("/").slice(-1)[0]} (on a Hazard branch, not on its main yet)</span>}{v.reference.note ? ` (${v.reference.note})` : ""}</> : null}

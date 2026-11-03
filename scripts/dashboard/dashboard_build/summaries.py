@@ -4,6 +4,7 @@ from __future__ import annotations
 from typing import Any
 
 from .common import fmt_pct, fmt_usd_compact
+from .common import SHOW_FIELD_REPORTS
 
 
 def _lower_first(s: str) -> str:
@@ -24,7 +25,9 @@ def library_sentence(counts: dict[str, int], assets: int | str, n_hazards: int, 
     where = f"{assets} assets" if isinstance(assets, int) else assets
     return (f"{counts['live']} live curve cells, {counts['proposal']} proposals, {counts['reused']} reused bindings and {counts['gap']} gaps "
             f"across {where} and {n_hazards} hazards; {agent_read} of {n_entries} catalogue entries have been read by an agent only; "
-            + ("no field-report search has been logged yet." if searched == 0 else f"{searched} field-report searches have been logged."))
+            + ("no field-report search has been logged yet." if searched == 0 else f"{searched} field-report searches have been logged.")) \
+        if SHOW_FIELD_REPORTS else (f"{counts['live']} live curve cells, {counts['proposal']} proposals, {counts['reused']} reused bindings and {counts['gap']} gaps "
+                                   f"across {where} and {n_hazards} hazards; {agent_read} of {n_entries} catalogue entries have been read by an agent only.")
 
 
 def _tier_phrase(tiers: set[str]) -> str:
@@ -65,6 +68,8 @@ def asset_sentence(noun: str, cells: list[dict[str, Any]], searched_any: bool) -
         parts.append(f"{_join([c['hazard'] for c in gaps])} {'have' if len(gaps) > 1 else 'has'} none")
     tail = "nobody has yet searched for field reports." if not searched_any else "field-report searches have begun."
     s = "; ".join(parts)
+    if not SHOW_FIELD_REPORTS:
+        return (s[0].upper() + s[1:] + ".") if s else f"No curves for {plural} yet."
     return (s[0].upper() + s[1:] + "; " + tail) if s else f"No curves for {plural} yet; {tail}"
 
 

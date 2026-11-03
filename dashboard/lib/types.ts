@@ -137,7 +137,7 @@ export interface Subcomponent {
   // the row's value share and its basis; real estate also: the building a row belongs to and what the row means
   group?: { key: string; label: string }; share?: number | null; share_basis?: string | null; note?: string | null;
   gap: {
-    reason: string; own_words?: string | null; occurrence: OccurrenceBucket | null; effect: string; basis: { label: string; path: string }[];
+    reason: string; own_words?: string | null; source?: { label: string; path: string } | null; occurrence: OccurrenceBucket | null; effect: string; basis: { label: string; path: string }[];
     register: { path: string; sha256: string; search_log: string | null; last_searched: string | null; question: string | null } | null;
   } | null;
 }
@@ -288,7 +288,7 @@ export interface Caption {
   seen_in_field: { sentence: string; state: string; href: string | null; words: string };
   main_references: KeyReference[]; references_from: string;
 }
-export type CellV2 = Cell & { plain: Plain; hazard_note?: { title: string; lines: string[] } | null; gap_reason_own?: string | null };
+export type CellV2 = Cell & { plain: Plain; hazard_note?: { title: string; lines: string[] } | null; gap_reason_own?: string | null; gap_reason_source?: { label: string; path: string } | null };
 export type CurveV2 = Curve & { caption: Caption; sources_resolved: SourceRow[]; plain_tiers: { shape: string; cost: string }; rail_plain: Plain["rail"] };
 
 export interface AssetCellV2 {

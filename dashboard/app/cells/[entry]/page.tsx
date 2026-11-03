@@ -18,6 +18,7 @@ import { SubcomponentPanel } from "@/components/subcomponents";
 import { StepsStrip } from "@/components/steps-strip";
 import { Card, EmptyState } from "@/components/ui";
 import { blobBase, blobUrl, cell, citations, constructionCards, coverageSlice, curvesOf, manifest, twinViewer } from "@/lib/data";
+import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 export const dynamicParams = false;
 
@@ -51,7 +52,7 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
     <div>
       <PlainRail title={c.title} rail={c.plain.rail} summary={c.summary} crumbs={crumbs} tierMeaning={m.tier_meaning} tone={c.rail.review.tone} />
       {c.hazard_note ? (
-        <div className="mt-3 rounded-md border border-warn/40 bg-warn-bg px-3 py-2 text-[11.5px] leading-snug">
+        <div className="mt-3 rounded-md border border-warn/40 bg-warn-bg px-3 py-2 text-[12.5px] leading-snug">
           <span className="font-medium">{c.hazard_note.title}</span>
           {c.hazard_note.lines.map((l) => <p key={l} className="mt-0.5">{l}</p>)}
         </div>
@@ -61,15 +62,15 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
         <div className="mt-3 space-y-3">
           <EmptyState>
             {c.gap_reason}{" "}
-            {c.gap_reason_own ? <details className="mt-1 text-[10.5px] text-muted-foreground"><summary className="cursor-pointer">In the cell&apos;s own words</summary><p className="mt-0.5">{c.gap_reason_own}</p></details> : null}
-            {c.field_review.register ? (
+            {c.gap_reason_source ? <span className="text-muted-foreground">The research behind this: {c.gap_reason_source.label}, <a href={blob(c.gap_reason_source.path)} target="_blank" rel="noreferrer" className="text-accent hover:underline">{c.gap_reason_source.path.split("/").slice(-1)[0]} ↗</a>.</span> : null}{" "}
+            {SHOW_FIELD_REPORTS && c.field_review.register ? (
               <>The field-report register exists: <Link href={`/occurrence/${c.asset.slug}/${c.hazard.slug}`} className="text-accent hover:underline">open it ▸</Link></>
             ) : null}
           </EmptyState>
 {c.subcomponents.length && c.subcomponent_rollup ? (
             <div><SubcomponentPanel subs={c.subcomponents} rollup={c.subcomponent_rollup} hazards={[{ slug: c.hazard.slug, label: c.hazard.label }]} defaultHazard={c.hazard.slug} cards={constructionCards(c.subcomponents)} legend={m.legend} blobBase={blobBase(m)} picker={false} /></div>
           ) : null}
-          {types.length ? <p className="px-1 text-[11.5px] text-muted-foreground">What the other hazards cover on this asset: {types.map((t, i) => <span key={t.slug}>{i ? " · " : ""}<Link href={t.href!} className="text-accent hover:underline">{t.label}</Link></span>)}.</p> : null}
+          {types.length ? <p className="px-1 text-[12.5px] text-muted-foreground">What the other hazards cover on this asset: {types.map((t, i) => <span key={t.slug}>{i ? " · " : ""}<Link href={t.href!} className="text-accent hover:underline">{t.label}</Link></span>)}.</p> : null}
         </div>
       ) : (
         <>
@@ -79,9 +80,9 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
           <StepsStrip cell={c} cites={cites} curves={curves} m={m} />
           {c.binding ? (
             <Card id="card-curve" className="mt-3">
-              <div className="grid gap-3 px-3 py-3 text-[11.5px] leading-snug xl:grid-cols-5">
+              <div className="grid gap-3 px-3 py-3 text-[12.5px] leading-snug xl:grid-cols-5">
                 <div className="xl:col-span-3">
-                  <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">The curve</div>
+                  <div className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">The curve</div>
                   <p className="mt-1">
                     This cell reuses another cell&apos;s curve: it prices {c.asset.label.toLowerCase()} with{" "}
                     {c.binding.reused_curves.map((id, i) => (
@@ -93,7 +94,7 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
                   {c.binding.transfer_rationale ? <p className="mt-1 text-muted-foreground">{c.binding.transfer_rationale}</p> : null}
                 </div>
                 <div className="space-y-2.5 xl:col-span-2">
-                  <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Why we believe it</div>
+                  <div className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">Why we believe it</div>
                   <MainLogic cell={c} />
                   {c.plain.halves ? <p className="text-muted-foreground">{c.plain.halves}.</p> : null}
                 </div>

@@ -17,9 +17,9 @@ from fnmatch import fnmatchcase
 from pathlib import Path
 from typing import Any
 
-from .common import ROOT, SENTENCES, fmt_pct, fmt_usd_compact, humanise, load_json, read_csv, rel, sha256
+from .common import ROOT, SENTENCES, SHOW_FIELD_REPORTS, fmt_pct, fmt_usd_compact, humanise, load_json, read_csv, rel, sha256
 from .plain import TIER_SHORT, _join, label_case, singular, tier_words
-from .plain_reasons import plain as plain_reason
+from .plain_reasons import plain as plain_reason, source_doc
 
 try:
     import openpyxl  # type: ignore
@@ -570,9 +570,17 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
     re_extra: dict[str, Any] = {}
     if aslug == "real_estate":
         subcomponents, re_extra = _real_estate_subsystems(hz, by_hazard, parts_by_cell, cells, registers, all_curve_lookup)
-    for rec in subcomponents:  # every reason in plain words; the cell's own words kept beside it
+    for rec in subcomponents:  # every reason in plain words, linked to the research that ends in no curve
         if rec.get("gap") and rec["gap"].get("reason"):
-            rec["gap"]["reason"], rec["gap"]["own_words"] = plain_reason(rec["gap"]["reason"])
+            original = rec["gap"]["reason"]
+            rec["gap"]["reason"], rec["gap"]["own_words"] = plain_reason(original)
+            cell_ = cells.get(rec["entry_id"] or "") or {}
+            rec["gap"]["source"] = source_doc(original, rec["entry_id"], (cell_.get("files") or {}).get("write_up"),
+                                              (rec["gap"].get("register") or {}).get("path") if SHOW_FIELD_REPORTS else None)
+            if rec["gap"]["source"] is None and rec["hazard"]["effect"] != "damage":  # performance, not damage: the scope says why
+                rec["gap"]["source"] = {"label": "the curve's scope (physical damage only)", "path": "docs/scope/SCOPE_AND_STORY.md"}
+            if not SHOW_FIELD_REPORTS:
+                rec["gap"]["basis"] = [b for b in rec["gap"].get("basis") or [] if "docs/evidence/occurrence/" not in b["path"]]
     return {"rows": rows, "parts_by_cell": parts_by_cell, "subcomponents": subcomponents, "subcomponent_rollup": _rollup(subcomponents),
             **re_extra, "split": split, "twin": twin_block,
             "value_source": ({"label": "reference budget r1 (battery value binding)", "path": "docs/cells/flood_bess/current/value_binding.json"} if aslug == "bess"

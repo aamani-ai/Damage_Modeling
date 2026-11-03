@@ -12,7 +12,7 @@ export function DossierPlot({ curve }: { curve: Curve }) {
   const set = (v: "linear" | "log") => setX(v === "log" ? "log" : null);
   return (
     <div>
-      <div className="flex items-center gap-2 px-3 text-[10.5px] text-muted-foreground">
+      <div className="flex items-center gap-2 px-3 text-[11.5px] text-muted-foreground">
         <span>damage ratio against {curve.axis.label}{curve.axis.unit ? ` (${curve.axis.unit})` : ""}</span>
         {curve.axis.kind !== "categorical" ? (
           <div role="radiogroup" aria-label="x axis scale" className="ml-auto inline-flex rounded border border-border bg-card p-0.5">

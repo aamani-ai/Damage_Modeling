@@ -13,7 +13,7 @@ export function ExistsMark({ status, className = "" }: { status: Status; classNa
 
 export function StationMark({ state, className = "" }: { state: StationState; className?: string }) {
   return (
-    <span aria-hidden className={`font-mono text-[15px] leading-none ${state === "absent" ? "text-muted-foreground" : ""} ${className}`}>
+    <span aria-hidden className={`font-mono text-[16px] leading-none ${state === "absent" ? "text-muted-foreground" : ""} ${className}`}>
       {STATION[state]}
     </span>
   );
@@ -30,7 +30,7 @@ export function TierText({ shape, cost, className = "" }: { shape: string | null
 
 export function TwinLead({ level }: { level: string | null | undefined }) {
   return (
-    <span className="font-mono text-[11px]" title={level ? `Digital Twin design-exposure lead: ${{ H: "High", M: "Medium", L: "Low" }[level] ?? level} — a lead, not evidence` : "no twin lead"}>
+    <span className="font-mono text-[12px]" title={level ? `Digital Twin design-exposure lead: ${{ H: "High", M: "Medium", L: "Low" }[level] ?? level} — a lead, not evidence` : "no twin lead"}>
       {level ?? "–"}
     </span>
   );
@@ -45,5 +45,5 @@ export function OccMark({ mark, label }: { mark: string; label: string }) {
 }
 
 export function GateWord({ status }: { status: "proven" | "human" | "n/a" }) {
-  return <span className={`font-mono text-[10px] ${status === "proven" ? "" : "text-muted-foreground"}`}>{status === "proven" ? "■ proven" : status === "human" ? "▢ human" : "– n/a"}</span>;
+  return <span className={`font-mono text-[11px] ${status === "proven" ? "" : "text-muted-foreground"}`}>{status === "proven" ? "■ proven" : status === "human" ? "▢ human" : "– n/a"}</span>;
 }

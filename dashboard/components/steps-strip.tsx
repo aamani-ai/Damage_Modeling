@@ -38,7 +38,7 @@ export function StepsStrip({ cell, cites, curves, m }: { cell: CellV2; cites: Ci
   const blob = (p: string) => `${m.repo.url}/blob/${m.commit_full}/${p.replace(/^\/+/, "")}`;
   return (
     <section aria-label="How this curve was made" className="mt-3">
-      <div className="mb-1 flex items-baseline gap-2 px-0.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+      <div className="mb-1 flex items-baseline gap-2 px-0.5 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">
         How this curve was made
         <span className="font-normal normal-case tracking-normal text-muted-foreground/80">four steps, with their key items · open one for the detail</span>
       </div>
@@ -55,19 +55,19 @@ export function StepsStrip({ cell, cites, curves, m }: { cell: CellV2; cites: Ci
             title={`${s.meaning} — open for the detail`}
             className={`flex min-w-0 flex-col items-start gap-1 border-b border-r border-border px-3 py-2 text-left hover:bg-muted xl:border-b-0 ${selected === s.id ? "bg-accent/10" : ""}`}
           >
-            <span className="flex w-full items-baseline gap-1.5 text-[12px] font-medium leading-tight">
+            <span className="flex w-full items-baseline gap-1.5 text-[13px] font-medium leading-tight">
               <span className="tabular text-muted-foreground">{i + 1}</span>
               <span>{s.name}</span>
-              <span aria-hidden className="ml-auto text-[10px] font-normal text-muted-foreground">open ▸</span>
+              <span aria-hidden className="ml-auto text-[11px] font-normal text-muted-foreground">open ▸</span>
             </span>
             {s.written && s.chips?.length ? (
               <span className="flex flex-wrap gap-1">
                 {s.chips.map((c, j) => (
-                  <span key={j} title={c.title} className={`max-w-full truncate rounded-sm px-1.5 py-px text-[10.5px] leading-4 ${c.tone === "key" ? "bg-muted text-foreground" : "border border-dashed border-border text-muted-foreground"}`}>{c.text}</span>
+                  <span key={j} title={c.title} className={`max-w-full truncate rounded-sm px-1.5 py-px text-[11.5px] leading-4 ${c.tone === "key" ? "bg-muted text-foreground" : "border border-dashed border-border text-muted-foreground"}`}>{c.text}</span>
                 ))}
               </span>
             ) : (
-              <span className={`line-clamp-2 text-[11px] leading-snug ${s.written ? "text-muted-foreground" : "italic text-muted-foreground/80"}`}>{s.fact}</span>
+              <span className={`line-clamp-2 text-[12px] leading-snug ${s.written ? "text-muted-foreground" : "italic text-muted-foreground/80"}`}>{s.fact}</span>
             )}
           </button>
         ))}
@@ -75,13 +75,13 @@ export function StepsStrip({ cell, cites, curves, m }: { cell: CellV2; cites: Ci
       <Drawer open={!!open} title={open ? open.name : ""} onClose={close} width={660}>
         {open ? (
           <div className="space-y-4">
-            <p className="text-[11px] text-muted-foreground">{open.meaning}.</p>
+            <p className="text-[12px] text-muted-foreground">{open.meaning}.</p>
             {open.id === "derived" ? (
               <section className="space-y-1.5">
-                <h3 className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Why this shape</h3>
-                {lead ? <p className="text-[12.5px] leading-snug">{lead.text}</p> : null}
+                <h3 className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">Why this shape</h3>
+                {lead ? <p className="text-[13.5px] leading-snug">{lead.text}</p> : null}
                 {more.length ? (
-                  <dl className="space-y-1.5 text-[12px] leading-snug">
+                  <dl className="space-y-1.5 text-[13px] leading-snug">
                     {more.map((w) => (
                       <div key={w.label}>
                         <dt className="font-medium">{w.label}</dt>
@@ -90,15 +90,15 @@ export function StepsStrip({ cell, cites, curves, m }: { cell: CellV2; cites: Ci
                     ))}
                   </dl>
                 ) : null}
-                {open.why_note ? <p className="text-[12px] text-muted-foreground">{open.why_note}</p> : null}
+                {open.why_note ? <p className="text-[13px] text-muted-foreground">{open.why_note}</p> : null}
               </section>
             ) : null}
             {open.id === "checked" ? (
               <section className="space-y-1.5">
-                <h3 className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Outside checks</h3>
-                <p className="text-[12.5px] leading-snug">{open.paragraphs[0]}</p>
+                <h3 className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">Outside checks</h3>
+                <p className="text-[13.5px] leading-snug">{open.paragraphs[0]}</p>
                 {cell.proof?.outside_checks.length ? (
-                  <ul className="space-y-0.5 text-[11.5px]">
+                  <ul className="space-y-0.5 text-[12.5px]">
                     {cell.proof.outside_checks.map((c) => (
                       <li key={c.name}>
                         {c.link ? <a href={/^https?:/.test(c.link) ? c.link : blob(c.link)} target="_blank" rel="noreferrer" className="text-accent hover:underline">{c.name} ↗</a> : <span>{c.name}</span>}
@@ -107,7 +107,7 @@ export function StepsStrip({ cell, cites, curves, m }: { cell: CellV2; cites: Ci
                     ))}
                   </ul>
                 ) : null}
-                {cell.proof?.validation ? <p className="text-[11px] text-muted-foreground">validation record: <FileLink href={blob(cell.proof.validation.path)}>{cell.proof.validation.path.split("/").slice(-1)[0]}</FileLink></p> : null}
+                {cell.proof?.validation ? <p className="text-[12px] text-muted-foreground">validation record: <FileLink href={blob(cell.proof.validation.path)}>{cell.proof.validation.path.split("/").slice(-1)[0]}</FileLink></p> : null}
               </section>
             ) : null}
             {open.holds.map((sid) => {
@@ -115,7 +115,7 @@ export function StepsStrip({ cell, cites, curves, m }: { cell: CellV2; cites: Ci
               if (!st) return null;
               return (
                 <section key={sid} className="space-y-1.5 border-t border-border pt-3 first:border-t-0 first:pt-0">
-                  <h3 className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{st.name}</h3>
+                  <h3 className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">{st.name}</h3>
                   <StationPanel station={st} cell={cell} cites={cites} curves={curves} m={m} />
                 </section>
               );

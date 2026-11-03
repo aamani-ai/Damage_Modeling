@@ -23,8 +23,8 @@ export default function AboutPage() {
   return (
     <div className="mx-auto max-w-[980px]">
       <div className="sticky top-0 z-20 -mx-4 border-b border-border bg-background/95 px-4 pb-2 pt-2 backdrop-blur">
-        <h2 className="text-[15px] font-semibold tracking-tight">About this data</h2>
-        <p className="mt-1 text-[12.5px] leading-snug">
+        <h2 className="text-[16px] font-semibold tracking-tight">About this data</h2>
+        <p className="mt-1 text-[13.5px] leading-snug">
           Every number on these pages traces to a file at the commit they were built from: {m.source.label}. The build reads the
           files, checks them and writes the data the pages show; nothing on a page is evaluated in the browser.
         </p>
@@ -47,11 +47,11 @@ export default function AboutPage() {
         </Card>
         <Card>
           <CardTitle right={<Tag tone={passing === checks.length ? "ok" : "neutral"}>{passing} of {checks.length} pass</Tag>}>The build checks</CardTitle>
-          <p className="px-3 pb-2 text-[11.5px] leading-snug text-muted-foreground">
+          <p className="px-3 pb-2 text-[12.5px] leading-snug text-muted-foreground">
             A structural check stops the build and writes nothing. A data check reports a fact about the files: it is never loosened to pass, and
             its items reach the cells&apos; owners as tasks on the Review page.
           </p>
-          <ul className="px-3 pb-3 text-[11.5px]">
+          <ul className="px-3 pb-3 text-[12.5px]">
             {checks.map((c) => (
               <li key={c.id} className="grid grid-cols-[64px_1fr] gap-x-2 border-t border-border/60 py-1.5">
                 <span><Tag tone={c.ok ? "ok" : "danger"}>{c.ok ? "passes" : "fails"}</Tag></span>
@@ -65,7 +65,7 @@ export default function AboutPage() {
         </Card>
         <Card>
           <CardTitle>The record</CardTitle>
-          <div className="space-y-1 px-3 pb-3 text-[11.5px] leading-snug">
+          <div className="space-y-1 px-3 pb-3 text-[12.5px] leading-snug">
             <p>
               The receipt holds every SHA, check and count, and is rebuilt with the data:{" "}
               <FileLink href={`${m.repo.url}/blob/${ref}/dashboard/data/receipt.json`}>dashboard/data/receipt.json</FileLink>.

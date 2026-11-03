@@ -63,7 +63,7 @@ export function ConstructionView({ k, legend, blobBase, curveHref, title }: { k:
   const params = Object.fromEntries(k.parameters.map((p) => [p.name, p]));
   const unit = k.axis?.unit && k.axis.unit !== "dimensionless" && k.axis.unit !== "class" ? ` ${k.axis.unit}` : "";
   return (
-    <div className="space-y-2.5 text-[11.5px] leading-snug">
+    <div className="space-y-2.5 text-[12.5px] leading-snug">
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
         {title ? <span className="font-medium">{title}</span> : null}
         <Tag>{k.curve_type}</Tag>
@@ -71,17 +71,17 @@ export function ConstructionView({ k, legend, blobBase, curveHref, title }: { k:
         {k.production_use.hazard ? <HazardUseTag state={k.production_use.hazard.state} legend={legend} /> : null}
         {curveHref ? <Link href={curveHref} className="ml-auto text-accent hover:underline">open the curve ▸</Link> : null}
       </div>
-      <p className="text-[10.5px] text-muted-foreground">{k.production_use.sentence}</p>
+      <p className="text-[11.5px] text-muted-foreground">{k.production_use.sentence}</p>
       {k.production_use.hazard?.sentences.length ? (
-        <ul className="text-[10.5px] text-muted-foreground">{k.production_use.hazard.sentences.map((s) => <li key={s}>{s}</li>)}</ul>
+        <ul className="text-[11.5px] text-muted-foreground">{k.production_use.hazard.sentences.map((s) => <li key={s}>{s}</li>)}</ul>
       ) : null}
-      {k.scope_note ? <p className="rounded-md border border-warn/40 bg-warn-bg px-2 py-1 text-[11px]">{k.scope_note.note} <FileLink href={`${blobBase}/${k.scope_note.basis}`}>{fileName(k.scope_note.basis)}</FileLink></p> : null}
+      {k.scope_note ? <p className="rounded-md border border-warn/40 bg-warn-bg px-2 py-1 text-[12px]">{k.scope_note.note} <FileLink href={`${blobBase}/${k.scope_note.basis}`}>{fileName(k.scope_note.basis)}</FileLink></p> : null}
 
       <div>
-        <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">The formula</div>
-        <p className="mt-0.5 rounded-md bg-muted px-2 py-1 font-mono text-[11px]">{k.formula ?? "—"}</p>
-        {k.axis ? <p className="mt-0.5 text-[10.5px] text-muted-foreground">x-axis: {k.axis.label}{unit ? ` (${unit.trim()})` : ""}</p> : null}
-        <table className="mt-1 w-full text-[11px]">
+        <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">The formula</div>
+        <p className="mt-0.5 rounded-md bg-muted px-2 py-1 font-mono text-[12px]">{k.formula ?? "—"}</p>
+        {k.axis ? <p className="mt-0.5 text-[11.5px] text-muted-foreground">x-axis: {k.axis.label}{unit ? ` (${unit.trim()})` : ""}</p> : null}
+        <table className="mt-1 w-full text-[12px]">
           <caption className="sr-only">What each symbol in the formula means</caption>
           <tbody>
             {k.variables.map((v) => {
@@ -99,11 +99,11 @@ export function ConstructionView({ k, legend, blobBase, curveHref, title }: { k:
             })}
           </tbody>
         </table>
-        {k.formula_source ? <p className="mt-0.5 text-[10.5px] text-muted-foreground">Written from the evaluator <FileLink href={`${blobBase}/${k.formula_source}`}>{fileName(k.formula_source)}</FileLink></p> : null}
+        {k.formula_source ? <p className="mt-0.5 text-[11.5px] text-muted-foreground">Written from the evaluator <FileLink href={`${blobBase}/${k.formula_source}`}>{fileName(k.formula_source)}</FileLink></p> : null}
       </div>
 
       <div>
-        <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Each parameter and where its number came from</div>
+        <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Each parameter and where its number came from</div>
         <ul className="mt-0.5">
           {k.parameters.map((p) => (
             <li key={p.name} className="border-t border-border/60 py-1">
@@ -111,16 +111,16 @@ export function ConstructionView({ k, legend, blobBase, curveHref, title }: { k:
                 <span className="font-mono">{p.name}</span>
                 <span className="font-mono tabular">{value(p.value)}</span>
                 <span className="text-muted-foreground">{p.definition}</span>
-                <span className="ml-auto">{p.tier_word ? <>{p.tier_word} <span className="font-mono text-[10px] text-muted-foreground">· {p.tier}</span></> : <span className="text-muted-foreground">curve: {k.curve_tiers.shape.word} shape · {k.curve_tiers.cost.word} cost</span>}</span>
+                <span className="ml-auto">{p.tier_word ? <>{p.tier_word} <span className="font-mono text-[11px] text-muted-foreground">· {p.tier}</span></> : <span className="text-muted-foreground">curve: {k.curve_tiers.shape.word} shape · {k.curve_tiers.cost.word} cost</span>}</span>
               </div>
               <WhereFrom p={p} legend={legend} blobBase={blobBase} />
               {p.reasoning.length || p.value_path ? (
-                <details className="mt-0.5 text-[10.5px]">
+                <details className="mt-0.5 text-[11.5px]">
                   <summary className="cursor-pointer text-muted-foreground hover:text-foreground">reasoning and exact location</summary>
                   {p.reasoning.map((r) => <p key={r} className="mt-0.5">{r}</p>)}
                   {p.register_rows.length ? <p className="mt-0.5 text-muted-foreground">register rows: <span className="font-mono">{p.register_rows.join(", ")}</span></p> : null}
                   {p.value_path ? <p className="mt-0.5 break-all font-mono text-muted-foreground">{p.value_path}</p> : null}
-                  {typeof p.value === "object" && p.value !== null ? <pre className="mt-0.5 max-h-48 overflow-auto rounded bg-muted p-1.5 font-mono text-[10px]">{JSON.stringify(p.value, null, 1)}</pre> : null}
+                  {typeof p.value === "object" && p.value !== null ? <pre className="mt-0.5 max-h-48 overflow-auto rounded bg-muted p-1.5 font-mono text-[11px]">{JSON.stringify(p.value, null, 1)}</pre> : null}
                 </details>
               ) : null}
             </li>
@@ -128,7 +128,7 @@ export function ConstructionView({ k, legend, blobBase, curveHref, title }: { k:
         </ul>
       </div>
 
-      <p className="text-[10.5px] text-muted-foreground">
+      <p className="text-[11.5px] text-muted-foreground">
         {k.constructing_files.length ? <>Built by: <Files files={k.constructing_files} blobBase={blobBase} />. </> : null}
         {k.artifact ? <>The numbers live in <FileLink href={`${blobBase}/${k.artifact}`} title={k.artifact}>{fileName(k.artifact)}</FileLink>.</> : null}
       </p>

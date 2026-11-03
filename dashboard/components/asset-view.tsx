@@ -10,6 +10,7 @@ import { fmtPct, fmtUsdCompact } from "@/lib/format";
 import { useUrlParam } from "@/lib/url-state";
 import type { AssetCellV2, AssetViewV2, ManifestV2 } from "@/lib/types";
 import { InfoHint } from "./ui";
+import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 const LENS_LABEL: Record<string, string> = { all: "All", curves: "Curves", occurrence: "Does it happen?", twin: "Twin" };
 const LEAD_WORD: Record<string, string> = { H: "high", M: "medium", L: "low" };
@@ -30,18 +31,18 @@ function CellWords({ c, lens }: { c: AssetCellV2; lens: string }) {
   const perf = c.effect === "performance";
   if (c.outside_the_five) {
     const occ = perf ? "works through performance, not damage" : c.occurrence ? c.occurrence.sentence.split(" — ")[0].toLowerCase() : "—";
-    return <span className="text-[10.5px] text-muted-foreground">{lens === "twin" ? (c.twin_lead ? `lead: ${LEAD_WORD[c.twin_lead]}` : "no lead") : occ}{lens === "all" && c.twin_lead ? ` · lead ${LEAD_WORD[c.twin_lead]}` : ""}</span>;
+    return <span className="text-[11.5px] text-muted-foreground">{lens === "twin" ? (c.twin_lead ? `lead: ${LEAD_WORD[c.twin_lead]}` : "no lead") : occ}{lens === "all" && c.twin_lead ? ` · lead ${LEAD_WORD[c.twin_lead]}` : ""}</span>;
   }
   const tone = c.state === "curve" || c.state === "whole" || c.state === "partial" || c.state === "reused" ? "text-foreground" : "text-muted-foreground";
   const words = c.words;
   const occ = c.occurrence ? (c.occurrence.state === "not_searched" ? "field reports: nobody has looked" : `field reports: ${c.occurrence.state.replace(/_/g, " ")}`) : null;
-  if (lens === "occurrence") return <span className="text-[10.5px] text-muted-foreground">{occ ?? "no field-report register"}</span>;
-  if (lens === "twin") return <span className="text-[10.5px] text-muted-foreground">{c.twin_lead ? `lead: ${LEAD_WORD[c.twin_lead]}` : "no lead"}</span>;
+  if (lens === "occurrence") return <span className="text-[11.5px] text-muted-foreground">{occ ?? "no field-report register"}</span>;
+  if (lens === "twin") return <span className="text-[11.5px] text-muted-foreground">{c.twin_lead ? `lead: ${LEAD_WORD[c.twin_lead]}` : "no lead"}</span>;
   return (
-    <span className={`block text-[10.5px] leading-tight ${tone}`}>
+    <span className={`block text-[11.5px] leading-tight ${tone}`}>
       {words}
       {lens === "all" && c.twin_lead ? <span className="block text-muted-foreground">lead: {LEAD_WORD[c.twin_lead]}</span> : null}
-      {c.spans?.length ? <span className="block text-[9.5px] text-muted-foreground">one unit spans several rows</span> : null}
+      {c.spans?.length ? <span className="block text-[10.5px] text-muted-foreground">one unit spans several rows</span> : null}
     </span>
   );
 }
@@ -49,7 +50,7 @@ function CellWords({ c, lens }: { c: AssetCellV2; lens: string }) {
 export function AssetViewGrid({ v }: { v: AssetViewV2; m: ManifestV2 }) {
   const [lensParam, setLens] = useUrlParam("lens");
   const [openRow, setRow] = useUrlParam("row");
-  const lenses = ["all", "curves", "occurrence", ...(v.twin.available && v.twin.leads !== false ? ["twin"] : [])];
+  const lenses = ["all", "curves", ...(SHOW_FIELD_REPORTS ? ["occurrence"] : []), ...(v.twin.available && v.twin.leads !== false ? ["twin"] : [])];
   const lens = lenses.includes(lensParam ?? "") ? (lensParam as string) : "all";
   const grid = useRef<HTMLTableElement>(null);
   const five = v.hazards.filter((h) => !h.outside_the_five);
@@ -72,7 +73,7 @@ export function AssetViewGrid({ v }: { v: AssetViewV2; m: ManifestV2 }) {
   const hrefFor = (h: (typeof v.hazards)[number], c: AssetCellV2) => (c.entry_id ? `/cells/${c.entry_id}` : h.occurrence_href);
   return (
     <div>
-      <div className="flex flex-wrap items-center gap-2 text-[11px]">
+      <div className="flex flex-wrap items-center gap-2 text-[12px]">
         <span className="text-muted-foreground">show</span>
         <div role="radiogroup" aria-label="Asset view lens" className="inline-flex rounded-md border border-border bg-card p-0.5">
           {lenses.map((l) => (
@@ -91,9 +92,9 @@ export function AssetViewGrid({ v }: { v: AssetViewV2; m: ManifestV2 }) {
         </InfoHint>
       </div>
       <div className="mt-2 overflow-x-auto rounded-lg border border-border bg-card">
-        <table ref={grid} role="grid" aria-label={`${v.asset.label}: parts of the plant by hazard`} className="w-full min-w-[920px] text-[11px]">
+        <table ref={grid} role="grid" aria-label={`${v.asset.label}: parts of the plant by hazard`} className="w-full min-w-[920px] text-[12px]">
           <thead>
-            <tr className="text-[10px] uppercase tracking-wide text-muted-foreground">
+            <tr className="text-[11px] uppercase tracking-wide text-muted-foreground">
               <th className="sticky left-0 z-10 bg-card px-2 pb-1.5 pt-2 text-left font-medium">Part of the plant{v.rows.some((r) => r.value_usd != null) ? " · value share" : ""}</th>
               {five.map((h) => (
                 <th key={h.slug} className="px-2 pb-1.5 pt-2 text-left font-medium">
@@ -122,7 +123,7 @@ export function AssetViewGrid({ v }: { v: AssetViewV2; m: ManifestV2 }) {
           </tbody>
         </table>
       </div>
-      <p className="mt-1.5 px-1 text-[10.5px] text-muted-foreground">
+      <p className="mt-1.5 px-1 text-[11.5px] text-muted-foreground">
         Each cell says whether this part has a curve under this hazard and how sure we are; hover for the cell&apos;s own part names and the field-report state.
         {hasNodes ? " ▸ opens a part's Digital Twin nodes." : ""} {v.twin.sentence}
       </p>
@@ -142,14 +143,14 @@ function RowGroup({ row, r, open, expandable, cols, five, lens, hrefFor, onKey, 
         <td className="sticky left-0 z-10 bg-card px-2 py-1.5">
           <div className="flex items-start gap-1.5">
             {expandable ? (
-              <button type="button" onClick={toggle} aria-expanded={open} aria-label={`${open ? "Collapse" : "Expand"} ${row.label} to its Digital Twin nodes`} className="w-4 shrink-0 font-mono text-[11px] text-muted-foreground hover:text-foreground">{open ? "▾" : "▸"}</button>
+              <button type="button" onClick={toggle} aria-expanded={open} aria-label={`${open ? "Collapse" : "Expand"} ${row.label} to its Digital Twin nodes`} className="w-4 shrink-0 font-mono text-[12px] text-muted-foreground hover:text-foreground">{open ? "▾" : "▸"}</button>
             ) : null}
             <span className="font-medium leading-tight">{row.label}</span>
           </div>
           {row.value_usd != null ? (
             <div className="mt-0.5 flex items-center gap-1.5 pl-5">
               <div className="h-1.5 w-20 overflow-hidden rounded-sm bg-muted" role="img" aria-label={`${fmtPct(row.share)} of the reference value`}><div className="h-full bg-foreground/55" style={{ width: `${(row.share ?? 0) * 100}%` }} /></div>
-              <span className="tabular text-[10px] text-muted-foreground">{fmtUsdCompact(row.value_usd)} · {fmtPct(row.share)}</span>
+              <span className="tabular text-[11px] text-muted-foreground">{fmtUsdCompact(row.value_usd)} · {fmtPct(row.share)}</span>
             </div>
           ) : null}
         </td>
@@ -170,7 +171,7 @@ function RowGroup({ row, r, open, expandable, cols, five, lens, hrefFor, onKey, 
         })}
       </tr>
       {open ? (
-        <tr className="bg-muted/40 text-[10.5px]">
+        <tr className="bg-muted/40 text-[11.5px]">
           <td className="sticky left-0 z-10 bg-muted/40 px-2 py-1.5 text-muted-foreground">Digital Twin nodes in this part (Hazard&apos;s crosswalk) · a lead is design exposure, not evidence</td>
           <td className="px-2 py-1.5" colSpan={cols.length}>
             {leadNodes.length ? (
@@ -197,15 +198,15 @@ function SplitBlock({ v }: { v: AssetViewV2 }) {
   const cols = s.columns;
   return (
     <section className="mt-3 rounded-lg border border-border bg-card" aria-label="These cells split the plant differently">
-      <div className="px-3 pt-2.5 pb-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{s.differs ? "These cells split the plant differently" : "These cells split the plant the same way"}</div>
-      <p className="px-3 pb-2 text-[11.5px] leading-snug">{s.sentence}</p>
-      {s.details.length > 6 ? <ul className="list-disc px-3 pb-2 pl-7 text-[11px] text-muted-foreground">{s.details.slice(6).map((d) => <li key={d}>{d}</li>)}</ul> : null}
+      <div className="px-3 pt-2.5 pb-1 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">{s.differs ? "These cells split the plant differently" : "These cells split the plant the same way"}</div>
+      <p className="px-3 pb-2 text-[12.5px] leading-snug">{s.sentence}</p>
+      {s.details.length > 6 ? <ul className="list-disc px-3 pb-2 pl-7 text-[12px] text-muted-foreground">{s.details.slice(6).map((d) => <li key={d}>{d}</li>)}</ul> : null}
       <details className="border-t border-border" open={s.differs}>
-        <summary className="cursor-pointer px-3 py-1.5 text-[11px] font-medium text-muted-foreground hover:text-foreground">Each cell&apos;s own part names, side by side</summary>
+        <summary className="cursor-pointer px-3 py-1.5 text-[12px] font-medium text-muted-foreground hover:text-foreground">Each cell&apos;s own part names, side by side</summary>
         <div className="overflow-x-auto px-3 pb-3">
-          <table className="w-full min-w-[760px] text-[10.5px]">
+          <table className="w-full min-w-[760px] text-[11.5px]">
             <thead>
-              <tr className="text-[10px] uppercase tracking-wide text-muted-foreground">
+              <tr className="text-[11px] uppercase tracking-wide text-muted-foreground">
                 <th className="py-1 pr-2 text-left font-medium">Row on this page</th>
                 {cols.map((c) => <th key={c.entry_id} className="py-1 pr-2 text-left font-medium"><Link href={`/cells/${c.entry_id}`} className="hover:text-accent hover:underline">{c.hazard.label}</Link><span className="block font-normal normal-case tracking-normal text-muted-foreground">{c.n_named} named · {c.n_curve} with a curve{c.n_withheld ? ` · ${c.n_withheld} withheld` : ""}</span></th>)}
               </tr>
@@ -223,7 +224,7 @@ function SplitBlock({ v }: { v: AssetViewV2 }) {
               </tr>
             </tbody>
           </table>
-          {v.value_source ? <p className="mt-1 text-[10px] text-muted-foreground">rows and dollars from {v.value_source.label}{v.value_source.pin_ok != null ? (v.value_source.pin_ok ? " · checked against its pin" : " · pin check failed") : ""}</p> : null}
+          {v.value_source ? <p className="mt-1 text-[11px] text-muted-foreground">rows and dollars from {v.value_source.label}{v.value_source.pin_ok != null ? (v.value_source.pin_ok ? " · checked against its pin" : " · pin check failed") : ""}</p> : null}
 
         </div>
       </details>

@@ -28,6 +28,9 @@ CATALOGUE_DIR = ROOT / "docs" / "cells" / "catalogue"
 INDEX = ROOT / "docs" / "contracts" / "machine_readable_artifact_index.json"
 OCCURRENCE = ROOT / "docs" / "evidence" / "occurrence"
 OUT = CHECKOUT / "dashboard" / "data"
+# Field reports (the occurrence registers) are hidden from the pages for now; the registers, their checks and the
+# occurrence pages are still built. Set True to show them again (and SHOW_FIELD_REPORTS in dashboard/lib/features.ts).
+SHOW_FIELD_REPORTS = False
 
 if str(HELPERS) not in sys.path:
     sys.path.insert(0, str(HELPERS))

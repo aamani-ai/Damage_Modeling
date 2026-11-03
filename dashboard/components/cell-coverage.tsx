@@ -18,7 +18,7 @@ export function CellCoverage({ covs, hazardSlug, loadOrder }: { covs: CellCov[];
   const current = covs.find((c) => c.slug === bParam) ?? covs[0];
   if (!current) return null;
   const picker = covs.length > 1 ? (
-    <div role="radiogroup" aria-label="Which building" className="inline-flex rounded-md border border-border bg-card p-0.5 text-[11px]">
+    <div role="radiogroup" aria-label="Which building" className="inline-flex rounded-md border border-border bg-card p-0.5 text-[12px]">
       {covs.map((c) => (
         <button key={c.slug} type="button" role="radio" aria-checked={c.slug === current.slug} onClick={() => { setB(c.slug === covs[0].slug ? null : c.slug); setPart(null); }}
           className={`rounded px-2 py-0.5 ${c.slug === current.slug ? "bg-accent/10 text-accent" : "text-muted-foreground hover:text-foreground"}`}>
@@ -30,8 +30,8 @@ export function CellCoverage({ covs, hazardSlug, loadOrder }: { covs: CellCov[];
   const title = (
     <>
       <button type="button" aria-expanded={open} aria-controls="card-coverage-body" onClick={() => setPicture(open ? "hidden" : null)}
-        className="inline-flex items-center gap-1.5 text-[12.5px] font-semibold uppercase tracking-wide text-foreground hover:text-accent">
-        <span aria-hidden className="inline-block w-4 text-[15px] leading-none">{open ? "▾" : "▸"}</span>What this curve covers
+        className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold uppercase tracking-wide text-foreground hover:text-accent">
+        <span aria-hidden className="inline-block w-4 text-[16px] leading-none">{open ? "▾" : "▸"}</span>What this curve covers
       </button>
       <Link href={`/assets/${current.slug}?hazard=${hazardSlug}`} className="ml-1 font-normal normal-case tracking-normal text-accent hover:underline">on the {current.label.toLowerCase()} page ▸</Link>
     </>
@@ -43,7 +43,7 @@ export function CellCoverage({ covs, hazardSlug, loadOrder }: { covs: CellCov[];
           <TwinCoverage key={current.slug} cov={current.cov} loadOrder={loadOrder} hazardSlug={hazardSlug} mode="cell" height={400} title={title} hazardPicker={picker} />
         </div>
       ) : (
-        <div className="px-3 py-2.5"><span className="text-[11px] text-muted-foreground">{title}</span></div>
+        <div className="px-3 py-2.5"><span className="text-[12px] text-muted-foreground">{title}</span></div>
       )}
     </section>
   );

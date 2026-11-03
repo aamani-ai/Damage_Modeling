@@ -80,6 +80,21 @@ SENTENCES = [
 ]
 
 
+def source_doc(text: str | None, entry_id: str | None, write_up: str | None, register: str | None) -> dict[str, str] | None:
+    """The research document that ends in this part having no curve: the one the reason cites, else the cell's
+    write-up, else its catalogue entry, else (a hazard with no cell) its field-report register."""
+    cited = re.search(r"(docs/[\w./-]+\.(?:md|json|csv))", text or "")
+    if cited:
+        return {"label": "the research note it cites", "path": cited.group(1).rstrip(".")}
+    if write_up:
+        return {"label": "the cell's write-up", "path": write_up}
+    if entry_id:
+        return {"label": "the cell's catalogue entry", "path": f"docs/cells/catalogue/{entry_id}.json"}
+    if register:
+        return {"label": "the field-report register", "path": register}
+    return None
+
+
 def _humanise_code(code: str) -> str:
     return code.lower().replace("_", " ").capitalize() + "."
 

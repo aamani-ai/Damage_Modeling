@@ -10,6 +10,7 @@ import { fmtPct } from "@/lib/format";
 import { useUrlParam } from "@/lib/url-state";
 import type { LibraryTile, ManifestV3 } from "@/lib/types";
 import { InfoHint } from "./ui";
+import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 const LENS_LABEL: Record<string, string> = { status: "Status", evidence: "Evidence", occurrence: "Field reports", value: "Value covered", review: "Read by" };
 const STATUS_WORD: Record<string, string> = { live: "live", proposal: "proposal", reused: "reused", gap: "gap" };
@@ -50,12 +51,12 @@ function TileBox({ t, lens, tabIndex, onKey, rc }: { t: LibraryTile; lens: strin
       title={title}
       className={`lens-fade flex h-[52px] w-full flex-col justify-center rounded-md border px-2 ${gap ? "tile-gap border-border text-muted-foreground" : `border-border bg-card ${shade(t, lens)}`} ${t.status === "reused" ? "hatch-reused" : ""} ${t.status === "proposal" ? "border-dashed border-foreground/30 bg-transparent" : ""} hover:border-accent/60`}
     >
-      <span className="flex items-baseline gap-1.5 text-[11px] font-medium">
+      <span className="flex items-baseline gap-1.5 text-[12px] font-medium">
         <span className={gap ? "" : t.status === "live" ? "text-foreground" : "text-muted-foreground"}>{STATUS_WORD[t.status]}</span>
-        {t.partial && !gap ? <span className="text-[10px] font-normal text-muted-foreground">· partial</span> : null}
-        {t.no_evaluator ? <span className="ml-auto whitespace-nowrap text-[10px] font-normal text-muted-foreground">not drawn</span> : null}
+        {t.partial && !gap ? <span className="text-[11px] font-normal text-muted-foreground">· partial</span> : null}
+        {t.no_evaluator ? <span className="ml-auto whitespace-nowrap text-[11px] font-normal text-muted-foreground">not drawn</span> : null}
       </span>
-      <span className={`truncate text-[11px] ${gap ? "" : "text-muted-foreground"}`}>{second(t, lens)}</span>
+      <span className={`truncate text-[12px] ${gap ? "" : "text-muted-foreground"}`}>{second(t, lens)}</span>
     </Link>
   );
 }
@@ -83,10 +84,10 @@ export function Library({ m }: { m: ManifestV3 }) {
   const planned = m.library.filter((c) => c.planned && !c.types.length).map((c) => c.label);
   return (
     <div>
-      <div className="flex flex-wrap items-center gap-2 text-[11px]">
+      <div className="flex flex-wrap items-center gap-2 text-[12px]">
         <span className="text-muted-foreground">Show</span>
         <div role="radiogroup" aria-label="Library lens" className="inline-flex rounded-md border border-border bg-card p-0.5">
-          {m.lenses.map((l) => (
+          {m.lenses.filter((l) => SHOW_FIELD_REPORTS || l !== "occurrence").map((l) => (
             <button key={l} type="button" role="radio" aria-checked={lens === l} onClick={() => setLens(l)} className={`rounded px-2 py-0.5 ${lens === l ? "bg-accent/10 text-accent" : "text-muted-foreground hover:text-foreground"}`}>
               {LENS_LABEL[l] ?? l}
             </button>
@@ -105,14 +106,14 @@ export function Library({ m }: { m: ManifestV3 }) {
       </div>
       <div ref={grid} role="grid" aria-label="Damage-curve library: asset types by hazard" className="mt-2 overflow-x-auto">
         <div className="grid min-w-[860px] gap-1" style={{ gridTemplateColumns: `200px repeat(${hazards.length}, minmax(128px, 1fr))` }}>
-          <div role="columnheader" className="px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Asset type</div>
+          <div role="columnheader" className="px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Asset type</div>
           {hazards.map((h) => (
-            <div key={h.slug} role="columnheader" className="px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{h.label}</div>
+            <div key={h.slug} role="columnheader" className="px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{h.label}</div>
           ))}
           {cats.map((c) => (
             <div key={c.slug} role="rowgroup" className="contents">
               <div role="row" className="contents">
-                <div role="rowheader" className="col-span-full mt-2 flex items-baseline gap-2 border-b border-border px-2 pb-1 text-[11px] font-semibold uppercase tracking-wide">
+                <div role="rowheader" className="col-span-full mt-2 flex items-baseline gap-2 border-b border-border px-2 pb-1 text-[12px] font-semibold uppercase tracking-wide">
                   {c.label}
                   {c.planned_types.length ? <span className="font-normal normal-case tracking-normal text-muted-foreground">planned: {c.planned_types.join(", ").toLowerCase()}</span> : null}
                 </div>
@@ -122,8 +123,8 @@ export function Library({ m }: { m: ManifestV3 }) {
                 return (
                   <div key={t.slug} role="row" className="contents">
                     <div role="rowheader" className="flex flex-col justify-center px-2 leading-tight">
-                      <Link href={t.href} className="text-[12px] font-medium hover:text-accent hover:underline" title={t.profile ?? `Open ${t.label}`}>{t.label}</Link>
-                      {t.building ? <span className="text-[10.5px] text-muted-foreground">{t.building.toLowerCase()}</span> : null}
+                      <Link href={t.href} className="text-[13px] font-medium hover:text-accent hover:underline" title={t.profile ?? `Open ${t.label}`}>{t.label}</Link>
+                      {t.building ? <span className="text-[11.5px] text-muted-foreground">{t.building.toLowerCase()}</span> : null}
                     </div>
                     {hazards.map((h, ci) => {
                       const tile = t.tiles[h.slug];
@@ -132,7 +133,7 @@ export function Library({ m }: { m: ManifestV3 }) {
                           {tile ? (
                             <TileBox t={tile} lens={lens} rc={`${r}-${ci}`} tabIndex={r === 0 && ci === 0 ? 0 : -1} onKey={onKey(r, ci)} />
                           ) : (
-                            <span className="flex h-[52px] items-center justify-center rounded-md border border-dashed border-border/60 text-[10.5px] text-muted-foreground">no entry</span>
+                            <span className="flex h-[52px] items-center justify-center rounded-md border border-dashed border-border/60 text-[11.5px] text-muted-foreground">no entry</span>
                           )}
                         </div>
                       );
@@ -144,8 +145,8 @@ export function Library({ m }: { m: ManifestV3 }) {
           ))}
         </div>
       </div>
-      <p className="mt-2 px-1 text-[11px] text-muted-foreground">
-        Heat, icing and lightning have no damage curve yet; battery storage keeps field-report registers for them.
+      <p className="mt-2 px-1 text-[12px] text-muted-foreground">
+        {SHOW_FIELD_REPORTS ? "Heat, icing and lightning have no damage curve yet; battery storage keeps field-report registers for them." : "Heat, icing and lightning have no damage curve yet."}
         {planned.length ? ` Planned categories: ${planned.join(", ").toLowerCase()}.` : ""}
       </p>
     </div>

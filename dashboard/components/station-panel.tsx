@@ -9,17 +9,18 @@ import type { CellV2, Citations, CurveV2, ManifestV3, PlainStation } from "@/lib
 import { AuditTable, CapabilityLedger, EvidenceLedger, Eyebrow, FieldReviewLedger, FilesList, GateChecklist, PartsTable, ProofLedger, ProseEvidence, SeamsLedger, StationFact, ValueLedger } from "./ledger";
 import { SourceRef } from "./source-link";
 import { EmptyState, FileLink, Mono } from "./ui";
+import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 const BLOB = "https://github.com/aamani-ai/Damage_Modeling/blob";
 
 function Words({ children }: { children: React.ReactNode }) {
-  return <div className="space-y-2 text-[11.5px] leading-snug">{children}</div>;
+  return <div className="space-y-2 text-[12.5px] leading-snug">{children}</div>;
 }
 
 function Line({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="grid grid-cols-[92px_1fr] gap-x-2 border-t border-border/60 py-1.5">
-      <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{label}</div>
+      <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{label}</div>
       <div className="min-w-0">{children}</div>
     </div>
   );
@@ -53,7 +54,7 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
             <Line key={p.part} label={p.part.length > 18 ? "Part" : p.part}>
               {p.part.length > 18 ? <span className="font-medium">{p.part} · </span> : null}
               {p.curves.length} curve{p.curves.length === 1 ? "" : "s"}{p.variants && p.variants !== "none" ? ` · ${p.variants}` : ""}
-              {p.occurrence ? <span className="block text-muted-foreground">{p.occurrence.sentence}</span> : null}
+              {SHOW_FIELD_REPORTS && p.occurrence ? <span className="block text-muted-foreground">{p.occurrence.sentence}</span> : null}
             </Line>
           ))}
           {cell.answer.withheld_units.map((w) => <Line key={w.failure_unit_id} label="Withheld">{w.sentence}</Line>)}
@@ -76,11 +77,11 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
         </Words>
       );
       details = (
-        <div className="text-[11px]">
+        <div className="text-[12px]">
           {curves.map((c) => (
             <div key={c.curve_id} className="border-t border-border/60 py-1">
-              <Mono>{c.curve_id}</Mono> · <span className="font-mono text-[10px] text-muted-foreground">{c.curve_form}{c.form_label ? ` (${c.form_label})` : ""} · x axis {c.x_axis_id}</span>
-              {c.axis.bridge ? <span className="block text-[10px] text-muted-foreground">bridge · {Object.entries(c.axis.bridge).filter(([, v]) => typeof v === "string").map(([k, v]) => `${k.replace(/_/g, " ")}: ${v}`).join(" · ")}</span> : null}
+              <Mono>{c.curve_id}</Mono> · <span className="font-mono text-[11px] text-muted-foreground">{c.curve_form}{c.form_label ? ` (${c.form_label})` : ""} · x axis {c.x_axis_id}</span>
+              {c.axis.bridge ? <span className="block text-[11px] text-muted-foreground">bridge · {Object.entries(c.axis.bridge).filter(([, v]) => typeof v === "string").map(([k, v]) => `${k.replace(/_/g, " ")}: ${v}`).join(" · ")}</span> : null}
             </div>
           ))}
         </div>
@@ -91,10 +92,10 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
         <Words>
           <Line label="Sources">
             {docs.length ? (
-              <ul className="space-y-0.5">{docs.map((s) => <li key={s.id}><SourceRef s={s} id={s.id} />{s.provenance && s.provenance !== "register" ? <span className="text-[10px] text-muted-foreground"> · {s.provenance.replace(/-/g, " ")}{s.from?.sheet ? ` (${s.from.sheet})` : s.from?.section ? ` (${s.from.section})` : ""}</span> : null}</li>)}</ul>
+              <ul className="space-y-0.5">{docs.map((s) => <li key={s.id}><SourceRef s={s} id={s.id} />{s.provenance && s.provenance !== "register" ? <span className="text-[11px] text-muted-foreground"> · {s.provenance.replace(/-/g, " ")}{s.from?.sheet ? ` (${s.from.sheet})` : s.from?.section ? ` (${s.from.section})` : ""}</span> : null}</li>)}</ul>
             ) : <span className="text-muted-foreground">{pl.evidence_provenance.sentence ?? m.not_yet_extracted_sentence}{pl.evidence_provenance.dossier ? <> — <FileLink href={blob(pl.evidence_provenance.dossier)}>open the dossier</FileLink></> : null}</span>}
-            {markers.length ? <p className="mt-1 text-[10.5px] text-muted-foreground">{markers.length} provenance marker{markers.length === 1 ? "" : "s"} in the register (a stated absence of a source, not a document): {markers.map((s) => s.id).join(", ")}</p> : null}
-            {placeholders.length ? <p className="mt-1 text-[10.5px] text-muted-foreground">{placeholders.length} input{placeholders.length === 1 ? "" : "s"} still to be supplied: {placeholders.map((s) => s.title).join(" · ")}</p> : null}
+            {markers.length ? <p className="mt-1 text-[11.5px] text-muted-foreground">{markers.length} provenance marker{markers.length === 1 ? "" : "s"} in the register (a stated absence of a source, not a document): {markers.map((s) => s.id).join(", ")}</p> : null}
+            {placeholders.length ? <p className="mt-1 text-[11.5px] text-muted-foreground">{placeholders.length} input{placeholders.length === 1 ? "" : "s"} still to be supplied: {placeholders.map((s) => s.title).join(" · ")}</p> : null}
           </Line>
           <Line label="Parameters">
             {pl.parameters_plain.length ? (
@@ -103,14 +104,14 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
                   <li key={p.id + i}>
                     <span className="font-medium">{p.name}</span>{p.value_text ? <span className="tabular"> {p.value_text}</span> : null} · {p.tier_word}
                     {p.sources.length ? <span className="text-muted-foreground"> · from {p.sources.map((s, j) => <span key={s.id}>{j ? ", " : ""}{s.link ? <a href={s.link} target="_blank" rel="noreferrer" className="text-accent hover:underline">{s.title}</a> : <span title={s.resolved ? undefined : "no document matched this source ID"}>{s.title}</span>}</span>)}</span> : <span className="text-muted-foreground"> · our judgment, no source cited</span>}
-                    {p.curve_id && p.curve_id !== "all" ? <span className="block text-[10px] text-muted-foreground">for {curves.find((c) => c.curve_id === p.curve_id)?.part ?? p.curve_id}{p.reasoning ? ` — ${p.reasoning}` : ""}</span> : p.reasoning ? <span className="block text-[10px] text-muted-foreground">{p.reasoning}</span> : null}
+                    {p.curve_id && p.curve_id !== "all" ? <span className="block text-[11px] text-muted-foreground">for {curves.find((c) => c.curve_id === p.curve_id)?.part ?? p.curve_id}{p.reasoning ? ` — ${p.reasoning}` : ""}</span> : p.reasoning ? <span className="block text-[11px] text-muted-foreground">{p.reasoning}</span> : null}
                   </li>
                 ))}
               </ul>
             ) : <span className="text-muted-foreground">no parameter tier rows in this cell</span>}
           </Line>
           {pl.evidence_provenance.kind === "extracted" ? <Line label="Read from">{pl.extraction?.workbook ? <><FileLink href={blob(pl.extraction.workbook)}>{pl.extraction.workbook.split("/").slice(-1)[0]}</FileLink> (sheets {pl.evidence_provenance.sheets.join(", ")})</> : null}{pl.extraction?.dossier ? <> · <FileLink href={blob(pl.extraction.dossier)}>{pl.extraction.dossier.split("/").slice(-1)[0]}</FileLink>{pl.evidence_provenance.sections.length ? ` (${pl.evidence_provenance.sections.join("; ")})` : ""}</> : null}</Line> : null}
-          {pl.evidence_provenance.unmatched.length ? <Line label="Unmatched">{pl.evidence_provenance.unmatched.length} source ID{pl.evidence_provenance.unmatched.length === 1 ? "" : "s"} in the tier table name no document in the workbook or dossier: <span className="font-mono text-[10px]">{pl.evidence_provenance.unmatched.join(" · ")}</span></Line> : null}
+          {pl.evidence_provenance.unmatched.length ? <Line label="Unmatched">{pl.evidence_provenance.unmatched.length} source ID{pl.evidence_provenance.unmatched.length === 1 ? "" : "s"} in the tier table name no document in the workbook or dossier: <span className="font-mono text-[11px]">{pl.evidence_provenance.unmatched.join(" · ")}</span></Line> : null}
           {pl.extraction?.assumptions?.length ? <Line label="Assumptions">{pl.extraction.assumptions.length} in the workbook&apos;s register: <ul className="list-disc pl-4 text-muted-foreground">{pl.extraction.assumptions.map((a) => <li key={a.id}>{a.text}{a.confidence ? ` (confidence ${a.confidence})` : a.status ? ` (${a.status})` : ""}</li>)}</ul></Line> : null}
           {pl.extraction?.open_seams?.length ? <Line label="Open seams">{pl.extraction.open_seams.length} in the workbook&apos;s index: <ul className="list-disc pl-4 text-muted-foreground">{pl.extraction.open_seams.map((o) => <li key={o.id}>{o.name}{o.severity ? ` · ${o.severity}` : ""}</li>)}</ul></Line> : null}
         </Words>
@@ -143,9 +144,9 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
         </Words>
       );
       details = (
-        <div className="text-[11px]">
+        <div className="text-[12px]">
           <Eyebrow>Every file in the cell folder, with its SHA at the build commit</Eyebrow>
-          {cell.folder_files.map((f) => <div key={f.path} className="flex justify-between gap-2 border-t border-border/60 py-0.5"><FileLink href={blob(f.path)}>{f.path.split("/").slice(-1)[0]}</FileLink><span className="font-mono text-[10px] text-muted-foreground">sha {f.sha256?.slice(0, 7)}</span></div>)}
+          {cell.folder_files.map((f) => <div key={f.path} className="flex justify-between gap-2 border-t border-border/60 py-0.5"><FileLink href={blob(f.path)}>{f.path.split("/").slice(-1)[0]}</FileLink><span className="font-mono text-[11px] text-muted-foreground">sha {f.sha256?.slice(0, 7)}</span></div>)}
         </div>
       );
       break;
@@ -174,10 +175,10 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
     case "field_review":
       words = (
         <Words>
-          {cell.field_review.register ? (
+          {!SHOW_FIELD_REPORTS ? null : cell.field_review.register ? (
             <>
-              {cell.field_review.buckets.map((b) => <Line key={b.bucket} label={b.label ?? b.bucket}>{b.sentence}{b.twin_lead?.level ? <span className="block text-[10.5px] text-muted-foreground">Digital Twin lead {({ H: "high", M: "medium", L: "low" } as Record<string, string>)[b.twin_lead.level] ?? b.twin_lead.level}: {b.twin_lead.nodes.map((n) => `${n.name} — ${n.why}`).join("; ")} (a lead, not evidence)</span> : null}</Line>)}
-              <p className="text-[11px]"><Link href={`/occurrence/${cell.asset.slug}/${cell.hazard.slug}`} className="text-accent hover:underline">open the search log ▸</Link></p>
+              {cell.field_review.buckets.map((b) => <Line key={b.bucket} label={b.label ?? b.bucket}>{b.sentence}{b.twin_lead?.level ? <span className="block text-[11.5px] text-muted-foreground">Digital Twin lead {({ H: "high", M: "medium", L: "low" } as Record<string, string>)[b.twin_lead.level] ?? b.twin_lead.level}: {b.twin_lead.nodes.map((n) => `${n.name} — ${n.why}`).join("; ")} (a lead, not evidence)</span> : null}</Line>)}
+              <p className="text-[12px]"><Link href={`/occurrence/${cell.asset.slug}/${cell.hazard.slug}`} className="text-accent hover:underline">open the search log ▸</Link></p>
             </>
           ) : <EmptyState>{cell.field_review.absent_sentence ?? m.sentences.not_searched.page}</EmptyState>}
           <Line label="Reviewed">{pl.rail.review.words}{cell.field_review.review.release_review ? <span className="block text-muted-foreground">the curve release carries its own state: {cell.field_review.review.release_review}</span> : null}</Line>
@@ -188,10 +189,10 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
   }
   return (
     <div className="space-y-3">
-      <p className="text-[12.5px] leading-snug">{station.paragraph}</p>
+      <p className="text-[13.5px] leading-snug">{station.paragraph}</p>
       {words}
       <details className="rounded-md border border-border">
-        <summary className="cursor-pointer px-2.5 py-1.5 text-[11px] font-medium text-muted-foreground hover:text-foreground">Details — register IDs, the gate checklist, files and SHAs</summary>
+        <summary className="cursor-pointer px-2.5 py-1.5 text-[12px] font-medium text-muted-foreground hover:text-foreground">Details — register IDs, the gate checklist, files and SHAs</summary>
         <div className="space-y-3 border-t border-border px-2.5 py-2">
           <StationFact station={ch} />
           {details}

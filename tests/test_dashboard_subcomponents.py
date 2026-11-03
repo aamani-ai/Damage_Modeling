@@ -93,7 +93,10 @@ def test_the_legend_reads_the_catalogue_status_table():
 def test_performance_hazard_gaps_and_whole_facility_labels_say_what_they_mean():
     heat = [r for r in _asset("bess")["subcomponents"] if r["hazard"]["slug"] == "heat"]
     assert all("physical damage only" in r["gap"]["reason"] and "physical destruction only" in r["gap"]["own_words"] for r in heat)
-    assert all({b["path"] for b in r["gap"]["basis"]} == {"docs/evidence/occurrence/bess/heat.json", "docs/scope/SCOPE_AND_STORY.md"} for r in heat)
+    # field reports are hidden for now, so the occurrence register drops out of the basis; the scope stays and is linked
+    assert all({b["path"] for b in r["gap"]["basis"]} <= {"docs/evidence/occurrence/bess/heat.json", "docs/scope/SCOPE_AND_STORY.md"} for r in heat)
+    assert all("docs/scope/SCOPE_AND_STORY.md" in {b["path"] for b in r["gap"]["basis"]} for r in heat)
+    assert all(r["gap"]["source"]["path"] == "docs/scope/SCOPE_AND_STORY.md" for r in heat)
     gsu = next(r for r in _asset("wind")["subcomponents"] if r["hazard"]["slug"] == "flood" and r["key"] == "gsu")
     assert gsu["scope_notes"] and "not the whole wind farm" in gsu["scope_notes"][0]["note"]
 

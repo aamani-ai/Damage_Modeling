@@ -13,7 +13,7 @@ export type LegendGroup = "status" | "evidence" | "lenses" | "marks" | "subsyste
 function Group({ title, items }: { title: string; items: LegendItem[] }) {
   return (
     <div>
-      <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{title}</div>
+      <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{title}</div>
       <dl className="mt-0.5 space-y-0.5">
         {items.map((i) => (
           <div key={i.key} className="leading-snug">
@@ -55,12 +55,12 @@ export function ReviewLegend({ legend, sourceHref, open = false, groups }: { leg
   const shown = groups.map((g) => (g === "marks" ? all[g] : { ...all[g], items: keep(all[g].items) })).filter((g) => g.items.length);
   return (
     <details ref={ref} data-legend open={open} className="rounded-lg border border-border bg-card">
-      <summary className="cursor-pointer px-3 py-2 text-[11.5px] font-medium hover:text-accent">
+      <summary className="cursor-pointer px-3 py-2 text-[12.5px] font-medium hover:text-accent">
         What the words mean <span className="font-normal text-muted-foreground">· {shown.map((g) => g.title.toLowerCase()).join(" · ")}</span>
       </summary>
-      <div className="grid gap-3 border-t border-border px-3 py-2.5 text-[11px] md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-3 border-t border-border px-3 py-2.5 text-[12px] md:grid-cols-2 xl:grid-cols-4">
         {shown.map((g) => <Group key={g.title} title={g.title} items={g.items} />)}
-        <p className="text-[10.5px] text-muted-foreground md:col-span-2 xl:col-span-4">
+        <p className="text-[11.5px] text-muted-foreground md:col-span-2 xl:col-span-4">
           Statuses as the catalogue defines them: <FileLink href={sourceHref}>{legend.source}</FileLink>
           {groups.includes("units") ? <>{" · "}units as the method defines them: <FileLink href={sourceHref.replace(legend.source, legend.units_source)}>{legend.units_source.split("/").slice(-1)[0]}</FileLink></> : null}
         </p>

@@ -5,6 +5,7 @@
 import Link from "next/link";
 import type { Plain } from "@/lib/types";
 import { InfoHint, Tag } from "./ui";
+import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 export function PlainRail({ title, rail, summary, back, crumbs, tierMeaning, children, tone = "neutral" }: {
   title: string; rail: Plain["rail"]; summary: string; back?: { href: string; label: string } | null; crumbs?: React.ReactNode;
@@ -13,8 +14,8 @@ export function PlainRail({ title, rail, summary, back, crumbs, tierMeaning, chi
   return (
     <div className="sticky top-0 z-20 -mx-4 border-b border-border bg-background/95 px-4 pb-2 pt-2 backdrop-blur">
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        {crumbs ?? (back ? <Link href={back.href} className="text-[11px] text-muted-foreground hover:text-foreground">← {back.label}</Link> : null)}
-        <h2 className="text-[15px] font-semibold tracking-tight">{title}</h2>
+        {crumbs ?? (back ? <Link href={back.href} className="text-[12px] text-muted-foreground hover:text-foreground">← {back.label}</Link> : null)}
+        <h2 className="text-[16px] font-semibold tracking-tight">{title}</h2>
         <div className="flex flex-wrap items-center gap-1.5">
           <Tag title={rail.exists.code}>{rail.exists.words}</Tag>
           <Tag title={rail.evidence.code}>{rail.evidence.words}</Tag>
@@ -24,17 +25,17 @@ export function PlainRail({ title, rail, summary, back, crumbs, tierMeaning, chi
                 <div className="font-semibold">How sure we are, in four words</div>
                 <div className="text-muted-foreground">Each curve has two grades: how damage rises with the hazard, and how that damage becomes dollars. A chip shows the weaker one; hover it for both.</div>
                 {Object.values(tierMeaning).map((v) => <div key={v}>{v}</div>)}
-                <div className="pt-1"><span className="font-semibold">Field reports</span> — whether anyone has looked for real cases of this damage: found · adjacent evidence only · none found after a search · nobody has looked yet.</div>
+                <div className={SHOW_FIELD_REPORTS ? "pt-1" : "hidden"}><span className="font-semibold">Field reports</span> — whether anyone has looked for real cases of this damage: found · adjacent evidence only · none found after a search · nobody has looked yet.</div>
                 <div className="pt-1 text-muted-foreground">A grade is not a verdict: none of these words uses the state colours. The files call the four grades T1 to T4.</div>
               </div>
             </InfoHint>
           ) : null}
-          <Tag title={rail.occurrence.code}>{rail.occurrence.words}</Tag>
+          {SHOW_FIELD_REPORTS ? <Tag title={rail.occurrence.code}>{rail.occurrence.words}</Tag> : null}
           <Tag tone={tone} title={rail.review.code}>{rail.review.words}</Tag>
         </div>
         {children}
       </div>
-      <p className="mt-1 max-w-[1100px] text-[12.5px] leading-snug text-foreground">{summary}</p>
+      <p className="mt-1 max-w-[1100px] text-[13.5px] leading-snug text-foreground">{summary}</p>
     </div>
   );
 }

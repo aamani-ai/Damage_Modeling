@@ -14,6 +14,7 @@ import re
 from typing import Any, Callable
 
 from .common import SENTENCES, fmt_pct, fmt_usd_compact, humanise
+from .common import SHOW_FIELD_REPORTS
 
 # G16 (DCD-D28): the catalogue's own words. "Published" fits all nine T2 rows (FEMA Hazus tables and lab tests are both
 # published); "borrowed" is the catalogue's word for T3. The codes stay in the ledger, under "Show the numbers".
@@ -849,7 +850,8 @@ STEPS = (
     ("covers", "What it covers", "The parts that have a curve, their share of the value, and what has none yet", ("scope", "units", "value")),
     ("derived", "How it was derived", "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments", ("axis_form", "audit")),
     ("numbers", "Where the numbers come from", "The sources, what each one gave, and how sure we are", ("evidence",)),
-    ("checked", "Has it been checked", "Outside checks, field reports of this damage, and who has read the entry", ("field_review",)),
+    ("checked", "Has it been checked", "Outside checks, field reports of this damage, and who has read the entry" if SHOW_FIELD_REPORTS
+     else "Outside checks, and who has read the entry", ("field_review",)),
 )
 FOR_HAZARD = ("artifact", "capability", "proof")
 
@@ -953,7 +955,7 @@ def steps4(ctx: dict[str, Any], stations_plain: list[dict[str, Any]], chain_stat
             rv = ctx["review"]
             fact = " · ".join([
                 f"{len(oc)} outside check{'s' if len(oc) != 1 else ''}" if oc else "no outside check yet",
-                "field reports not searched" if occ == "not_searched" else f"field reports: {occ.replace('_', ' ')}",
+                *(["field reports not searched" if occ == "not_searched" else f"field reports: {occ.replace('_', ' ')}"] if SHOW_FIELD_REPORTS else []),
                 f"reviewed by {rv['review']['by']}" if rv.get("review") else "read by an agent only",
             ])
             chips += [_chip(_short(c["name"], 30), "key", c["name"]) for c in oc[:2]]
@@ -961,7 +963,8 @@ def steps4(ctx: dict[str, Any], stations_plain: list[dict[str, Any]], chain_stat
                 chips.append(_chip(f"+{len(oc) - 2} more checks", "muted"))
             if not oc:
                 chips.append(_chip("no outside check yet", "muted"))
-            chips.append(_chip("field reports: not searched" if occ == "not_searched" else f"field reports: {occ.replace('_', ' ')}", "muted"))
+            if SHOW_FIELD_REPORTS:
+                chips.append(_chip("field reports: not searched" if occ == "not_searched" else f"field reports: {occ.replace('_', ' ')}", "muted"))
             chips.append(_chip(f"reviewed by {rv['review']['by']}" if rv.get("review") else "read by an agent only", "key" if rv.get("review") else "muted"))
             first = (f"{len(oc)} outside check{'s' if len(oc) != 1 else ''} compare{'' if len(oc) != 1 else 's'} this curve with an independent result: {_join([c['name'] for c in oc])}."
                      if oc else "No outside check has been made yet: nothing independent has been compared with this curve.")
