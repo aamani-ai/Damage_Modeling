@@ -91,7 +91,7 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
           </div>
           {v ? <p className="mt-1 max-w-[1100px] text-[12.5px] leading-snug">{v.summary}</p> : null}
         </div>
-        <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} open groups={["status", "evidence", "subsystem", "production", "hazard_use", "units"]} /></div>
+        <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} open groups={["status", "evidence", "lenses", "subsystem", "production", "hazard_use", "units"]} /></div>
         <div className="mt-3 grid gap-3 md:grid-cols-3">
           {lc.types.map((t) => (
             <Link key={t.slug} href={t.href} className="rounded-lg border border-border bg-card px-3 py-2.5 hover:border-accent/60">
@@ -145,7 +145,7 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
         </p>
       </div>
       <div className="mt-3 space-y-3">
-        <ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} open groups={["status", "evidence", "subsystem", "production", "hazard_use", "units"]} />
+        <ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} open groups={["status", "evidence", "lenses", "subsystem", "production", "hazard_use", "units"]} />
         <CurveList row={row} m={m} />
         {v ? <Subcomponents v={v} m={m} building={sharedCell ? type.building!.toLowerCase() : undefined} defaultHazard={cov ? (cov.hazards.find((h) => !h.gap) ?? cov.hazards[0]).hazard.slug : undefined} /> : null}
         {cov && viewer ? <AssetCoverage cov={cov} loadOrder={viewer.load_order} /> : <p className="text-[12px] text-muted-foreground">No twin coverage for this type yet.</p>}

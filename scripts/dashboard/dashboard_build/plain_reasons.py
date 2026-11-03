@@ -37,10 +37,12 @@ CODES = {
 # a bracketed qualifier in a catalogue part list, and what it means
 QUALIFIERS = [
     (r"^no curve$", None),
-    (r"^secondary$", "it is a secondary part for this hazard"),
-    (r"^open$", "the question is still open"),
-    (r"^optional secondary$", "it is an optional, secondary part"),
-    (r"^reviewed secondary units$", "they were reviewed and judged secondary"),
+    # the coverage standard's words (docs/method/standards/03): secondary = the value it puts at risk is too small to
+    # matter much next to the main parts; open = no source yet gives enough to build a curve, so it is left for later
+    (r"^secondary$", "the cell judged the damage it could take too small to matter much next to the main parts"),
+    (r"^open$", "no source yet gives enough to build a curve for it, so it is left as work for later"),
+    (r"^optional secondary$", "it is optional on a plant, and the cell judged the damage it could take too small to matter much"),
+    (r"^reviewed secondary units$", "they were reviewed and judged too small a share of the damage to need a curve"),
     (r"^treated as no direct hail damage by coverage decision$", "the cell decided hail does not damage them directly, so they count as having no hail damage"),
     (r"^debris and velocity load is a candidate mechanism$", "floating debris and fast-moving water might damage it, but this has not been modeled"),
     (r"^treated as protection state, not a damaged part$", "it is treated as something that protects the site, not as a part that gets damaged"),
@@ -54,7 +56,7 @@ SENTENCES = [
     (r"^No catalogue entry or curve has been built for this asset × hazard\.$",
      "No curve has been built for this hazard on this asset yet."),
     (r"^This expected subsystem is not named by the cell\.$",
-     "The work on this hazard does not mention this part, so it has no curve."),
+     "The cell for this hazard never mentions this part: it has no curve, and no reason is given. Whether it needs one has not been decided."),
     (r"^This expected subsystem has no curve\.$", "This part has no curve yet."),
     (r"^A curve covers only part of this expected subsystem\.$",
      "A curve covers some of this part's pieces; the rest have none yet."),
@@ -104,7 +106,9 @@ def plain(text: str | None) -> tuple[str | None, str | None]:
                 said.append(q)
             elif hit[1]:
                 said.append(hit[1])
-        body = ", ".join(dict.fromkeys(said))
+        body = ""
+        for part in dict.fromkeys(said):  # separate thoughts with ";", but let a "which …" clause run on
+            body += (", " if part.startswith("which") else "; ") + part if body else part
         return (f"{name}: no curve yet" + (f" — {body}." if body else ".")), t
     if re.fullmatch(r"[A-Z][\w ,/&-]*", t) and not t.endswith("."):  # a bare part name from a cell's "no curve yet" list
         return f"The cell lists {t if t[:2].isupper() else t[0].lower() + t[1:]} among the parts with no curve yet.", t

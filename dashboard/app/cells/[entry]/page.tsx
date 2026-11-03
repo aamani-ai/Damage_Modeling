@@ -56,7 +56,7 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
           {c.hazard_note.lines.map((l) => <p key={l} className="mt-0.5">{l}</p>)}
         </div>
       ) : null}
-      <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blob(m.legend.source)} groups={["status", "evidence", "subsystem", "production", "hazard_use", "units"]} /></div>
+      <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blob(m.legend.source)} groups={["status", "evidence", "lenses", "subsystem", "production", "hazard_use", "units"]} /></div>
       {c.kind === "gap" ? (
         <div className="mt-3 space-y-3">
           <EmptyState>
