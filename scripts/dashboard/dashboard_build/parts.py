@@ -540,8 +540,14 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
             evidence_labels = _tier_labels(tier_codes)
             if e and e.kind == "binding" and "borrowed" not in evidence_labels:
                 evidence_labels.insert(0, "borrowed")
+            # the row's share of the asset's value where the asset has a value split; else what the cell's own units
+            # declare for the parts of this row (a share of the cell's own basis, said with it)
+            unit_shares = [p for p in mine if p.get("share") is not None]
+            share, share_basis = (row["share"], "share of the asset's reference value") if row.get("share") is not None else (
+                (sum(p["share"] for p in unit_shares), unit_shares[0].get("share_basis")) if unit_shares else (None, None))
             subcomponents.append({
                 "key": row["key"], "label": row["label"], "asset": {"slug": aslug, "label": a_def["label"]},
+                "share": share, "share_basis": share_basis,
                 "hazard": {"slug": h["slug"], "label": h["label"], "effect": h["effect"], "outside_the_five": h["outside_the_five"]},
                 "entry_id": e.id if e else None, "catalogue_status": e.status if e else "missing", "cell_state": c.get("state") or "unassessed_gap",
                 "coverage": coverage, "completeness": completeness, "curve_ids": curve_ids,

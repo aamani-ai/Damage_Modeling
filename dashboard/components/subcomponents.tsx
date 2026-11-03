@@ -142,6 +142,7 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
               <thead>
                 <tr className="text-left text-[10.5px] text-muted-foreground">
                   <th scope="col" className="px-3 py-1 font-medium">Subsystem</th>
+                  <th scope="col" className="px-2 py-1 text-right font-medium">Value share</th>
                   <th scope="col" className="px-2 py-1 font-medium">Curve or gap</th>
                   <th scope="col" className="px-2 py-1 font-medium">Complete</th>
                   <th scope="col" className="px-2 py-1 font-medium">Evidence</th>
@@ -156,18 +157,19 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
                   return [
                     heading ? (
                       <tr key={`${id}-group`} className="border-t border-border">
-                        <th scope="colgroup" colSpan={5} className="px-3 pt-2 pb-0.5 text-left text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{s.group!.label}</th>
+                        <th scope="colgroup" colSpan={6} className="px-3 pt-2 pb-0.5 text-left text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{s.group!.label}</th>
                       </tr>
                     ) : null,
                     <tr key={id} className={`border-t border-border/60 align-top ${s.coverage === "gap" ? "text-muted-foreground" : ""}`}>
                       <th scope="row" className="px-3 py-1 text-left font-normal">
                         <button type="button" aria-expanded={isOpen} aria-controls={`sub-${id}`} onClick={() => setOpen(isOpen ? null : id)}
                           className="text-left hover:text-accent">
-                          <span aria-hidden className="mr-1 inline-block w-3 text-muted-foreground">{isOpen ? "▾" : "▸"}</span>
+                          <span aria-hidden className="mr-1 inline-block w-4 text-[13px] leading-none text-muted-foreground">{isOpen ? "▾" : "▸"}</span>
                           <span className={s.coverage === "gap" ? "" : "font-medium text-foreground"}>{s.label}</span>
                         </button>
                         {s.scope_notes.length ? <Tag tone="warn" className="ml-1" title={s.scope_notes[0].note}>scope note</Tag> : null}
                       </th>
+                      <td className="px-2 py-1 text-right font-mono tabular" title={s.share_basis ?? undefined}>{s.share != null ? fmtPct(s.share, 1) : "—"}</td>
                       <td className="px-2 py-1">{s.coverage === "gap" ? <span className="tile-gap rounded-sm px-1">{coverageWord(s, legend)}</span> : coverageWord(s, legend)}</td>
                       <td className="px-2 py-1">{s.completeness}</td>
                       <td className="px-2 py-1">{s.borrowed_from && !s.evidence_labels.includes("borrowed") ? "borrowed · " : ""}{evidence(s)}</td>
@@ -180,7 +182,7 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
                     </tr>,
                     isOpen ? (
                       <tr key={`${id}-detail`} id={`sub-${id}`} className="bg-muted/30">
-                        <td colSpan={5} className="px-3 py-2.5"><RowDetail s={s} cards={cards} legend={legend} blobBase={blobBase} /></td>
+                        <td colSpan={6} className="px-3 py-2.5"><RowDetail s={s} cards={cards} legend={legend} blobBase={blobBase} /></td>
                       </tr>
                     ) : null,
                   ];

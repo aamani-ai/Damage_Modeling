@@ -30,8 +30,10 @@ export function ReviewLegend({ legend, sourceHref, open = false }: { legend: Leg
         <Group title="A subsystem" items={[...legend.coverage, ...legend.completeness]} />
         <Group title="Production" items={legend.production} />
         <Group title="Used by Hazard" items={legend.hazard_use} />
+        <Group title="The units" items={legend.units} />
         <p className="text-[10.5px] text-muted-foreground md:col-span-2 xl:col-span-4">
           Statuses as the catalogue defines them: <FileLink href={sourceHref}>{legend.source}</FileLink>
+          {" · "}units as the method defines them: <FileLink href={sourceHref.replace(legend.source, legend.units_source)}>{legend.units_source.split("/").slice(-1)[0]}</FileLink>
         </p>
       </div>
     </details>
