@@ -35,6 +35,58 @@ function coverageWord(s: Subcomponent, legend: Legend) {
   return legend.coverage.find((i) => i.key === key)?.word ?? key;
 }
 
+// Every subsystem against every hazard, one word each; a cell opens that hazard's row with its curve or its reason.
+function AllHazards({ subs, hazards, legend, rollup, open }: {
+  subs: Subcomponent[]; hazards: { slug: string; label: string }[]; legend: Legend; rollup: SubcomponentRollup; open: (hazard: string, key: string) => void;
+}) {
+  const keys = [...new Map(subs.map((s) => [s.key, s])).values()];
+  const at = (h: string, key: string) => subs.find((s) => s.hazard.slug === h && s.key === key);
+  const cols = hazards.filter((h) => subs.some((s) => s.hazard.slug === h.slug));
+  const groups = new Set(keys.map((s) => s.group?.key).filter(Boolean));
+  return (
+    <div className="overflow-x-auto border-t border-border">
+      <table className="w-full min-w-[820px] text-[12.5px]">
+        <thead>
+          <tr className="text-left text-[11.5px] text-muted-foreground">
+            <th scope="col" className="px-3 py-1 font-medium">Subsystem</th>
+            {cols.map((h) => {
+              const r = rollup.by_hazard?.[h.slug];
+              return <th key={h.slug} scope="col" className="px-2 py-1 font-medium">{h.label}{r ? <span className="block font-normal tabular">{r.with_curve} of {r.expected} with a curve</span> : null}</th>;
+            })}
+          </tr>
+        </thead>
+        <tbody>
+          {keys.map((k, i) => [
+            groups.size > 1 && k.group && k.group.key !== keys[i - 1]?.group?.key ? (
+              <tr key={`${k.key}-group`} className="border-t border-border">
+                <th scope="colgroup" colSpan={cols.length + 1} className="px-3 pt-2 pb-0.5 text-left text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{k.group.label}</th>
+              </tr>
+            ) : null,
+            <tr key={k.key} className="border-t border-border/60 align-top">
+              <th scope="row" className="px-3 py-1 text-left font-medium">{k.label}</th>
+              {cols.map((h) => {
+                const s = at(h.slug, k.key);
+                if (!s) return <td key={h.slug} className="px-2 py-1 text-muted-foreground">—</td>;
+                const gap = s.coverage === "gap";
+                return (
+                  <td key={h.slug} className="px-1 py-0.5">
+                    <button type="button" onClick={() => open(h.slug, k.key)} title={`Open ${k.label} under ${h.label.toLowerCase()}`}
+                      className={`w-full rounded px-1 py-0.5 text-left hover:bg-muted ${gap ? "text-muted-foreground" : ""}`}>
+                      <span className={gap ? "tile-gap rounded-sm px-1" : ""}>{coverageWord(s, legend)}</span>
+                      {!gap && s.evidence_labels.length ? <span className="block text-[11.5px] text-muted-foreground">{s.evidence_labels.join(" · ")}</span> : null}
+                    </button>
+                  </td>
+                );
+              })}
+            </tr>,
+          ])}
+        </tbody>
+      </table>
+      <p className="px-3 py-1.5 text-[11.5px] text-muted-foreground">Click a cell to open that subsystem under that hazard: how its curve is built, or why it has none.</p>
+    </div>
+  );
+}
+
 function GapView({ s, blobBase }: { s: Subcomponent; blobBase: string }) {
   const g = s.gap!;
   const occ = g.occurrence;
@@ -91,7 +143,7 @@ function GapView({ s, blobBase }: { s: Subcomponent; blobBase: string }) {
   );
 }
 
-function RowDetail({ s, cards, legend, blobBase }: { s: Subcomponent; cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string }) {
+function RowDetail({ s, cards, legend, blobBase, names }: { s: Subcomponent; cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string; names?: string[] }) {
   const shown = s.construction.filter((c) => cards[c.curve_id]);
   // two curves for one part (fresh and salt water) carry the same part name: the condition tells them apart
   const titleOf = (id: string) => {
@@ -100,6 +152,8 @@ function RowDetail({ s, cards, legend, blobBase }: { s: Subcomponent; cards: Rec
   };
   return (
     <div className="space-y-3">
+      {/* the hazard team's own words for this subsystem, from its catalogue entry */}
+      {names?.length ? <p className="text-[12.5px]"><span className="text-muted-foreground">The {s.hazard.label.toLowerCase()} team calls it:</span> {names.join(" · ")}</p> : null}
       {s.note || s.share != null ? (
         <p className="text-[12.5px]">
           {s.note}{s.note && s.share != null ? " " : ""}
@@ -123,9 +177,11 @@ function RowDetail({ s, cards, legend, blobBase }: { s: Subcomponent; cards: Rec
   );
 }
 
-export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards, legend, blobBase, picker = true, notes = [] }: {
+// teamNames: hazard slug → subsystem key → the hazard team's own part names (asset pages; from the split table)
+export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards, legend, blobBase, picker = true, notes = [], overview = false, teamNames }: {
   subs: Subcomponent[]; rollup: SubcomponentRollup; hazards: { slug: string; label: string }[]; defaultHazard: string;
   cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string; picker?: boolean; notes?: string[];
+  overview?: boolean; teamNames?: Record<string, Record<string, string[]>>;
 }) {
   const [hzParam, setHz] = useUrlParam("hazard");
   const [open, setOpen] = useUrlParam("sub");
@@ -138,7 +194,9 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
   };
   const [fold, setFold] = useUrlParam("subs");
   const shown = fold !== "hidden";
-  const hz = picker ? (hazards.find((h) => h.slug === hzParam)?.slug ?? defaultHazard) : defaultHazard;
+  // "all" is the side-by-side view of every hazard; with no hazard in the URL an asset page opens on it
+  const hz = picker ? (hazards.find((h) => h.slug === hzParam)?.slug ?? (overview && (!hzParam || hzParam === "all") ? "all" : defaultHazard)) : defaultHazard;
+  const all = hz === "all";
   const rows = subs.filter((s) => s.hazard.slug === hz);
   const here = rollup.by_hazard?.[hz] ?? rollup;
   const groups = new Set(rows.map((s) => s.group?.key).filter(Boolean));
@@ -155,6 +213,10 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
         <div id="subcomponents-body">
           {picker ? (
             <div role="radiogroup" aria-label="Which hazard" className="mx-3 mb-1 inline-flex flex-wrap rounded-md border border-border bg-card p-0.5 text-[12px]">
+              {overview ? (
+                <button type="button" role="radio" aria-checked={all} onClick={() => { setHz("all"); setOpen(null); }}
+                  className={`rounded px-2 py-0.5 ${all ? "bg-accent/10 text-accent" : "text-muted-foreground hover:text-foreground"}`}>All hazards</button>
+              ) : null}
               {hazards.map((h) => {
                 const r = rollup.by_hazard?.[h.slug];
                 return (
@@ -166,8 +228,9 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
               })}
             </div>
           ) : null}
-          <p className="px-3 pb-1.5 text-[12px] text-muted-foreground">{hazards.find((h) => h.slug === hz)?.label}: <Counts r={here} legend={legend} /></p>
+          {all ? null : <p className="px-3 pb-1.5 text-[12px] text-muted-foreground">{hazards.find((h) => h.slug === hz)?.label}: <Counts r={here} legend={legend} /></p>}
           {notes.map((n) => <p key={n} className="px-3 pb-1.5 text-[12px] text-muted-foreground">{n}</p>)}
+          {all ? <AllHazards subs={subs} hazards={hazards} legend={legend} rollup={rollup} open={(h, key) => { setHz(h); setOpen(`${h}:${key}`); }} /> : (
           <div className="overflow-x-auto border-t border-border">
             <table className="w-full min-w-[720px] text-[12.5px]">
               <thead>
@@ -211,7 +274,7 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
                     </tr>,
                     isOpen ? (
                       <tr key={`${id}-detail`} id={`sub-${id}`} className="bg-muted/30">
-                        <td colSpan={5} className="px-3 py-2.5"><RowDetail s={s} cards={cards} legend={legend} blobBase={blobBase} /></td>
+                        <td colSpan={5} className="px-3 py-2.5"><RowDetail s={s} cards={cards} legend={legend} blobBase={blobBase} names={teamNames?.[s.hazard.slug]?.[s.key]} /></td>
                       </tr>
                     ) : null,
                   ];
@@ -219,6 +282,7 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
               </tbody>
             </table>
           </div>
+          )}
         </div>
       ) : <div className="pb-1" />}
     </section>

@@ -307,7 +307,7 @@ export interface PartOfCell {
 }
 export interface PartsByCell { entry_id: string; hazard: Slug; status: Status; title: string; parts: PartOfCell[]; share_basis: string | null; n_named: number; n_curve: number; n_withheld: number; not_covered: string[] }
 export interface Split {
-  differs: boolean; sentence: string; details: string[];
+  differs: boolean; sentence: string; note?: string; details: string[];
   columns: { entry_id: string; hazard: Slug; n_named: number; n_curve: number; n_withheld: number; share_basis: string | null; title: string }[];
   table: { key: string; label: string; by_cell: Record<string, string[]> }[];
 }

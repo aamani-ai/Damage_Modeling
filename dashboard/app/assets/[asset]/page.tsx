@@ -1,12 +1,11 @@
 // An asset type's page (G14, DCD-D26; DCD-D21), in the order the owner set on reviewing the subsystem panel: what
 // the words mean; the type's curves; every subsystem, curve or gap; what each curve covers on the Digital Twin's
-// reference model, hazard by hazard; which hazard has a curve for which system. The cells' own part lists and value rows
-// (iteration 2) stay one control away. A category whose types share one catalogue entry per hazard (real estate)
-// gets an index page instead.
+// reference model, hazard by hazard; which hazard has a curve for which system. The subsystem panel opens on every
+// hazard side by side and replaces iteration 2's part grid (each team's own part names are in an opened row). A
+// category whose types share one catalogue entry per hazard (real estate) gets an index page instead.
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AssetCoverage, CoverageMatrix } from "@/components/asset-coverage";
-import { AssetViewGrid } from "@/components/asset-view";
 import { CurveTiles } from "@/components/library";
 import { ReviewLegend } from "@/components/review-legend";
 import { SubcomponentPanel } from "@/components/subcomponents";
@@ -48,11 +47,15 @@ function Subcomponents({ v, m, defaultHazard, building }: { v: AssetViewV2; m: M
   // a real-estate building type shows its own building's subsystems (the records carry the building as their group)
   const subs = building ? v.subcomponents.filter((s) => s.group?.key === building) : v.subcomponents;
   const rollup = (building ? v.subsystem_groups?.[building] : null) ?? v.subcomponent_rollup;
-  const notes = [v.anatomy_note?.sentence, building ? v.building_notes?.[building] : null].filter((n): n is string => !!n);
+  // the note that the cells split the asset differently (once the part grid's own section) stays under the table
+  const notes = [v.anatomy_note?.sentence, building ? v.building_notes?.[building] : null, !building && v.split?.differs ? (v.split.note ?? v.split.sentence) : null].filter((n): n is string => !!n);
+  // each hazard team's own names for each subsystem, shown when a row is opened
+  const teamNames: Record<string, Record<string, string[]>> = {};
+  if (!building) for (const col of v.split?.columns ?? []) teamNames[col.hazard.slug] = Object.fromEntries((v.split?.table ?? []).map((r) => [r.key, r.by_cell[col.entry_id] ?? []]));
   // the five hazards and heat; icing and lightning (no curve, no research yet) only with the field reports
   const hazards = m.hazards.filter((h) => SHOW_FIELD_REPORTS || !h.outside_the_five || h.slug === "heat").map((h) => ({ slug: h.slug, label: h.label }));
   const first = defaultHazard ?? hazards.find((h) => (rollup.by_hazard?.[h.slug]?.with_curve ?? 0) > 0)?.slug ?? hazards[0].slug;
-  return <SubcomponentPanel subs={subs} rollup={rollup} hazards={hazards} defaultHazard={first} cards={constructionCards(subs)} legend={m.legend} blobBase={blobBase(m)} notes={notes} />;
+  return <SubcomponentPanel subs={subs} rollup={rollup} hazards={hazards} defaultHazard={first} cards={constructionCards(subs)} legend={m.legend} blobBase={blobBase(m)} notes={notes} overview teamNames={teamNames} />;
 }
 
 export default async function AssetPage({ params }: { params: Promise<{ asset: string }> }) {
@@ -94,12 +97,6 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
           ))}
         </div>
         {v ? <div className="mt-3"><Subcomponents v={v} m={m} /></div> : null}
-        {v ? (
-          <details className="mt-3 rounded-lg border border-border bg-card">
-            <summary className="cursor-pointer px-3 py-2 text-[12.5px] font-medium text-muted-foreground hover:text-foreground">The cells&apos; own part lists, building by building and hazard by hazard</summary>
-            <div className="border-t border-border p-3"><AssetViewGrid v={v} m={m} /></div>
-          </details>
-        ) : null}
       </div>
     );
   }
@@ -141,14 +138,6 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
         {v ? <Subcomponents v={v} m={m} building={sharedCell ? type.building!.toLowerCase() : undefined} defaultHazard={cov ? (cov.hazards.find((h) => !h.gap) ?? cov.hazards[0]).hazard.slug : undefined} /> : null}
         {cov && viewer ? <AssetCoverage cov={cov} loadOrder={viewer.load_order} /> : <p className="text-[13px] text-muted-foreground">No twin coverage for this type yet.</p>}
         {cov ? <CoverageMatrix cov={cov} /> : null}
-        {v && !sharedCell ? (
-          <details className="rounded-lg border border-border bg-card">
-            <summary className="cursor-pointer px-3 py-2 text-[12.5px] font-medium text-muted-foreground hover:text-foreground">The cells&apos; own part lists and value rows, hazard by hazard</summary>
-            <div className="border-t border-border p-3"><AssetViewGrid v={v} m={m} /></div>
-          </details>
-        ) : sharedCell ? (
-          <p className="px-1 text-[12px] text-muted-foreground">The real-estate cells&apos; own part lists, building by building, are on the <Link href={`/assets/${cat.slug}`} className="text-accent hover:underline">{cat.label.toLowerCase()} page</Link>.</p>
-        ) : null}
       </div>
       {cov || (v?.reference && !sharedCell) ? (
         <footer className="mt-4 border-t border-border pt-2 text-[11.5px] text-muted-foreground">

@@ -807,7 +807,9 @@ def split_finding(aslug: str, a_def: dict[str, Any], rows: list[dict[str, Any]],
     differs = bool(details)
     lead = f"These cells split the {singular(a_def.get('noun', a_def['label']))} differently" if differs else f"The cells split the {singular(a_def.get('noun', a_def['label']))} the same way"
     sentence = lead + (": " + "; ".join(details[:6]) + ("; and more below" if len(details) > 6 else "") + ". " if details else ". ") + no_budget.get(aslug, "")
-    return {"differs": differs, "sentence": sentence, "details": details, "columns": [{"entry_id": pc["entry_id"], "hazard": pc["hazard"], "n_named": pc["n_named"], "n_curve": pc["n_curve"], "n_withheld": pc["n_withheld"], "share_basis": pc.get("share_basis"), "title": pc["title"]} for pc in cols], "table": table}
+    # the asset page's short note under the subsystem table; each team's own names are in an opened row
+    note = (lead + ", so one team's single unit can be several rows here, or one row can be several of its units. Open a row to see that team's own names for it. " + no_budget.get(aslug, "")).strip()
+    return {"differs": differs, "sentence": sentence, "note": note, "details": details, "columns": [{"entry_id": pc["entry_id"], "hazard": pc["hazard"], "n_named": pc["n_named"], "n_curve": pc["n_curve"], "n_withheld": pc["n_withheld"], "share_basis": pc.get("share_basis"), "title": pc["title"]} for pc in cols], "table": table}
 
 
 def asset_plain_sentence(a_def: dict[str, Any], rows: list[dict[str, Any]], hz: list[dict[str, Any]], entries_status: dict[str, str]) -> str:
