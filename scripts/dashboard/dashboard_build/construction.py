@@ -106,9 +106,9 @@ EXACT_STATE = {
 
 # Where a parameter's number came from, by its tier. The words are the build's; components lay them out.
 WHERE_FROM = {
-    "published": "From a published source: the link opens it.",
-    "borrowed": "Borrowed: taken from a similar asset or a related study and adapted; the link opens what it stands in for.",
-    "our_judgment": "Our judgment: no source gives this number; the files that set it are linked.",
+    "published": "From a published source.",
+    "borrowed": "Borrowed: taken from a similar asset or a related study and adapted.",
+    "our_judgment": "Our judgment: no source gives this number.",
     "curve_level": "No source for this number alone: it rests on the curve's own sources.",
 }
 
