@@ -111,7 +111,7 @@ WHERE_FROM = {
     "our_judgment": "Our judgment: no source gives this number.",
     # a whole point list or table with no row of its own: the curve's sources are where those points come from
     "curve_level": "No source for this number alone: it rests on the curve's own sources.",
-    # one number with no row of its own (a ceiling such as max_DR = 1): nothing cites a source for it
+    # one number the register skips while citing the curve's other numbers (max_DR = 1 in hail × solar)
     "unsourced": "Set by the team; no source cited.",
 }
 
@@ -192,6 +192,8 @@ def construction_block(c: dict[str, Any], artifact_path: str | None, status: str
     spec = _form_spec(c, curve_type)
     meaning = {v[2]: v[1] for v in (spec or {}).get("variables", []) if v[2]}
     parameter_docs = []
+    # the register cites this curve's numbers one by one when any of them has a row of its own
+    cited_one_by_one = any(r.get("id") in params or r.get("name") in params for r in rows)
     for name, value in params.items():
         matched = [r for r in rows if r.get("id") == name or r.get("name") == name]
         source_ids = sorted({sid for r in matched for sid in r.get("source_ids") or []})
@@ -199,8 +201,9 @@ def construction_block(c: dict[str, Any], artifact_path: str | None, status: str
         tier = tier_span([r.get("tier") for r in matched]) if matched else None
         tier = None if tier == "–" else tier
         kind = _where_kind(tier)
-        # a single number no register row covers is not supported by the curve's sources: say so, not borrow them
-        unsourced = kind == "curve_level" and not isinstance(value, (list, dict))
+        # one number the register skips while citing the curve's other numbers one by one has no source: say so, not
+        # borrow the curve's (where the register has no per-number rows, the curve's sources are the numbers' sources)
+        unsourced = kind == "curve_level" and cited_one_by_one and not isinstance(value, (list, dict))
         if unsourced:
             kind = "unsourced"
         parameter_docs.append({

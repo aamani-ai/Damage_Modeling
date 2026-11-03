@@ -47,7 +47,7 @@ def test_curve_construction_traces_parameters_to_files_and_sources():
         assert construction["production_use"]["state"] in ("runtime_indexed", "not_runtime_indexed")
         for parameter in construction["parameters"]:
             assert parameter["value_path"] and parameter["source_scope"] in ("parameter", "curve")
-            assert parameter["reasoning"] or parameter["where_from"] == "curve_level"
+            assert parameter["reasoning"] or parameter["where_from"] in ("curve_level", "unsourced")
 
 
 def test_reused_subcomponents_name_both_the_transfer_and_numeric_tier():
