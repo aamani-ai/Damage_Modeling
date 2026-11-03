@@ -1,14 +1,14 @@
 {
  "schema": "damage_dashboard_manifest.v1",
- "commit": "e04c08f",
- "commit_full": "e04c08fd40f6dc065e692002c0077c0b8294e18f",
+ "commit": "584a9f7",
+ "commit_full": "584a9f753d54e7e74e2fa3e3d80747c3f3d8dd6a",
  "source": {
   "mode": "preview",
   "ref": "dashboard/traceability-completeness",
-  "commit": "e04c08f",
-  "commit_full": "e04c08fd40f6dc065e692002c0077c0b8294e18f",
+  "commit": "584a9f7",
+  "commit_full": "584a9f753d54e7e74e2fa3e3d80747c3f3d8dd6a",
   "dirty": false,
-  "label": "preview of branch dashboard/traceability-completeness at e04c08f — not main"
+  "label": "preview of branch dashboard/traceability-completeness at 584a9f7 — not main"
  },
  "hazard_main": {
   "available": true,
@@ -5783,7 +5783,76 @@
     "meaning": "Dollar bucket the DR applies to; e.g. Exposed PV module value; inverter value"
    }
   ],
-  "units_source": "docs/method/standards/13_end_to_end_damage_work_architecture.md"
+  "units_source": "docs/method/standards/13_end_to_end_damage_work_architecture.md",
+  "lenses": [
+   {
+    "key": "status",
+    "word": "Status",
+    "meaning": "What exists for this asset and hazard: a live curve, a proposal, a reused curve, or no curve yet."
+   },
+   {
+    "key": "evidence",
+    "word": "Evidence",
+    "meaning": "How well supported the curve's numbers are, in one word: the weaker of its shape and its cost (hover for both)."
+   },
+   {
+    "key": "occurrence",
+    "word": "Field reports",
+    "meaning": "Whether anyone has searched for real-world reports of this hazard damaging this asset, and what was found."
+   },
+   {
+    "key": "value",
+    "word": "Value covered",
+    "meaning": "How much of the asset's value the curves price; the rest has no curve for this hazard."
+   },
+   {
+    "key": "review",
+    "word": "Read by",
+    "meaning": "Whether a person has reviewed this entry, or only an agent has read it."
+   }
+  ],
+  "marks": [
+   {
+    "key": "solid",
+    "word": "Solid border, filled",
+    "meaning": "A live curve: in the runtime index, so the platform can call it."
+   },
+   {
+    "key": "dashed_dark",
+    "word": "Dashed dark border, no fill",
+    "meaning": "A proposal: built and checked here, not yet in the runtime index."
+   },
+   {
+    "key": "hatched",
+    "word": "Diagonal hatching",
+    "meaning": "Reused: priced with another cell's curve, not one of its own."
+   },
+   {
+    "key": "dashed_light",
+    "word": "Dashed light border, grey text",
+    "meaning": "No curve yet for this asset and hazard."
+   },
+   {
+    "key": "partial",
+    "word": "· partial",
+    "meaning": "The curves cover only part of the asset's value."
+   },
+   {
+    "key": "not_drawn",
+    "word": "not drawn",
+    "meaning": "The curve exists but this repository's code cannot draw it."
+   },
+   {
+    "key": "shade_evidence",
+    "word": "Grey shading (Evidence)",
+    "meaning": "Darker grey means weaker evidence: clear for field-calibrated or published, darkest for our judgment."
+   },
+   {
+    "key": "shade_review",
+    "word": "Grey fill (Read by)",
+    "meaning": "Only an agent has read the entry; no person has reviewed it yet."
+   }
+  ]
  },
  "build_checks": [
   {
