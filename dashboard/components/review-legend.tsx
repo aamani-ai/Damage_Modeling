@@ -69,7 +69,7 @@ export function ReviewLegend({ legend, sourceHref, open = false, groups }: { leg
   return (
     <details ref={ref} data-legend open={open} onToggle={(e) => setIsOpen(e.currentTarget.open)} className="rounded-lg border border-border bg-card">
       <summary className={`${TOGGLE_CLASS} flex list-none px-3 py-2 [&::-webkit-details-marker]:hidden`}>
-        <ToggleArrow open={isOpen} />What the words mean <span className="font-normal text-muted-foreground">· {shown.map((g) => g.title.toLowerCase()).join(" · ")}</span>
+        <ToggleArrow open={isOpen} />What the words mean <span className="font-normal normal-case tracking-normal text-muted-foreground">· {shown.map((g) => g.title.toLowerCase()).join(" · ")}</span>
       </summary>
       {/* one equal column per group shown, up to four */}
       <div className={`grid gap-3 border-t border-border px-3 py-2.5 text-[12px] ${COLS[Math.min(shown.length, 4)]}`}>

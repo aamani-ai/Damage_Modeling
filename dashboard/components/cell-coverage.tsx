@@ -30,7 +30,7 @@ export function CellCoverage({ covs, hazardSlug, loadOrder }: { covs: CellCov[];
   ) : null;
   const title = (
     <>
-      <button type="button" aria-expanded={open} aria-controls="card-coverage-body" onClick={() => setPicture(open ? "hidden" : null)} className={`${TOGGLE_CLASS} normal-case tracking-normal`}>
+      <button type="button" aria-expanded={open} aria-controls="card-coverage-body" onClick={() => setPicture(open ? "hidden" : null)} className={TOGGLE_CLASS}>
         <ToggleArrow open={open} />What this curve covers on the Digital Twin
       </button>
       <Link href={`/assets/${current.slug}?hazard=${hazardSlug}`} className="ml-1 font-normal normal-case tracking-normal text-accent hover:underline">on the {current.label.toLowerCase()} page ▸</Link>

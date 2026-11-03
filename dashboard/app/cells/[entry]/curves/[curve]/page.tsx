@@ -10,7 +10,7 @@ import { Eyebrow } from "@/components/ledger";
 import { PartPicture } from "@/components/part-picture";
 import { PlainRail } from "@/components/plain-rail";
 import { SourceRef } from "@/components/source-link";
-import { Card, CardTitle, EmptyState, FileLink, InfoHint, Kv, Mono, Tag } from "@/components/ui";
+import { Card, CardTitle, EmptyState, FileLink, InfoHint, Kv, Mono, SectionSummary, Tag } from "@/components/ui";
 import { blobBase, blobUrl, cell, coverageSlice, curve, curvesOf, manifest, twinViewer } from "@/lib/data";
 import { fmtDr, fmtNum, shortSha } from "@/lib/format";
 import { CATEGORY_SYMBOL_WORDS, LINE_STYLE_WORDS } from "@/lib/series";
@@ -133,8 +133,8 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
         </Card>
         <Card className="xl:col-span-5">
           <CardTitle>Show the numbers</CardTitle>
-          <details className="px-3 pb-3 text-[12px]">
-            <summary className="cursor-pointer text-muted-foreground hover:text-foreground">Knots, known answers, tier codes, the record&apos;s parameters and its ID</summary>
+          <details className="group px-3 pb-3 text-[12px]">
+            <SectionSummary><span className="font-normal normal-case tracking-normal">Knots, known answers, tier codes, the record&apos;s parameters and its ID</span></SectionSummary>
             <div className="mt-2 grid gap-3 md:grid-cols-2">
               <div>
                 <p className="font-mono text-[11.5px]">{k.curve_id}{k.pathway_id ? ` · ${k.pathway_id}` : ""} · {k.failure_unit_id} · {k.curve_form}{k.form_label ? ` (${k.form_label})` : ""} · x axis {k.x_axis_id}</p>

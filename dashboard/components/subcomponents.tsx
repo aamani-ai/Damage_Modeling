@@ -19,6 +19,17 @@ export interface ConstructionCard { k: CurveConstruction; href: string; title: s
 
 const fileName = (p: string) => p.split("/").slice(-1)[0];
 
+// counts for a filtered set of rows, in the shape the build writes
+function countsOf(xs: Subcomponent[]): SubcomponentRollup {
+  return { expected: xs.length, with_curve: xs.filter((s) => s.coverage === "curve").length, gap: xs.filter((s) => s.coverage === "gap").length,
+    complete: xs.filter((s) => s.completeness === "complete").length, incomplete: xs.filter((s) => s.completeness === "incomplete").length, evidence_labels: {} };
+}
+
+function rollupOf(subs: Subcomponent[]): SubcomponentRollup {
+  const byHazard = Object.fromEntries([...new Set(subs.map((s) => s.hazard.slug))].map((h) => [h, countsOf(subs.filter((s) => s.hazard.slug === h))]));
+  return { ...countsOf(subs), by_hazard: byHazard };
+}
+
 function Counts({ r, legend }: { r: SubcomponentRollup; legend: Legend }) {
   // "complete" is a part with a whole curve, so the counts say curve, partial and no curve yet and nothing more
   const word = (key: string) => legend.coverage.find((i) => i.key === key)?.word ?? key;
@@ -186,11 +197,18 @@ function RowDetail({ s, cards, legend, blobBase, names }: { s: Subcomponent; car
 }
 
 // teamNames: hazard slug → subsystem key → the hazard team's own part names (asset pages; from the split table)
-export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards, legend, blobBase, picker = true, notes = [], overview = false, teamNames }: {
+export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, defaultHazard, cards, legend, blobBase, picker = true, notes = [], overview = false, teamNames, buildings }: {
   subs: Subcomponent[]; rollup: SubcomponentRollup; hazards: { slug: string; label: string }[]; defaultHazard: string;
   cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string; picker?: boolean; notes?: string[];
   overview?: boolean; teamNames?: Record<string, Record<string, string[]>>;
+  // a shared real-estate cell page: type slug → building; ?building= keeps that building's rows only
+  buildings?: Record<string, string>;
 }) {
+  const [buildingParam] = useUrlParam("building");
+  const building = buildingParam && buildings?.[buildingParam] ? buildings[buildingParam].toLowerCase() : null;
+  const scoped = building != null && allSubs.some((s) => s.group?.key === building);
+  const subs = scoped ? allSubs.filter((s) => s.group?.key === building) : allSubs;
+  const rollup = scoped ? rollupOf(subs) : allRollup;
   const [hzParam, setHz] = useUrlParam("hazard");
   const [open, setOpen] = useUrlParam("sub");
   // several rows can be open at once: ?sub= lists them, comma-separated (a single id still works)

@@ -12,7 +12,7 @@ import { useUrlParam } from "@/lib/url-state";
 import type { Axis, CellV2, CurveV2, ManifestV3 } from "@/lib/types";
 import { CurvePlot } from "./curve-plot";
 import { SourceRef } from "./source-link";
-import { Card, Mono } from "./ui";
+import { Card, Mono, SectionSummary } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 interface Option { id: string; label: string; curve: CurveV2; series: string[] | null }
@@ -50,11 +50,15 @@ export function MainLogic({ cell }: { cell: CellV2 }) {
   );
 }
 
-export function CurveHero({ cell, curves, buildings }: { cell: CellV2; curves: CurveV2[]; m: ManifestV3; buildings?: Record<string, string> }) {
+export function CurveHero({ cell, curves: allCurves, buildings }: { cell: CellV2; curves: CurveV2[]; m: ManifestV3; buildings?: Record<string, string> }) {
   const [partParam, setPart] = useUrlParam("part");
   const [buildingParam] = useUrlParam("building");
   const [vParam, setV] = useUrlParam("v");
   const [compareParam, setCompare] = useUrlParam("compare");
+  // a shared real-estate cell opened for one building (?building=) shows that building's curves only
+  const building = buildingParam && buildings?.[buildingParam] ? buildings[buildingParam] : null;
+  const own = building ? allCurves.filter((c) => (c.part ?? "").startsWith(building)) : [];
+  const curves = own.length ? own : allCurves;
   const parts = useMemo(() => {
     const names: string[] = [];
     for (const c of curves) { const n = c.part ?? c.failure_unit_id ?? c.curve_id; if (!names.includes(n)) names.push(n); }
@@ -135,8 +139,8 @@ export function CurveHero({ cell, curves, buildings }: { cell: CellV2; curves: C
           </div>
           ) : null}
           <p><Link href={`/cells/${cell.entry_id}/curves/${k.curve_id}`} className="text-accent hover:underline">open this curve&apos;s own page ▸</Link></p>
-          <details className="rounded-md border border-border text-[12px]">
-            <summary className="cursor-pointer px-2 py-1 font-medium text-muted-foreground hover:text-foreground">Show the numbers — knots, known answers, tier codes, the record&apos;s ID</summary>
+          <details className="group rounded-md border border-border text-[12px]">
+            <SectionSummary className="px-2 py-1">Show the numbers <span className="font-normal normal-case tracking-normal">— knots, known answers, tier codes, the record&apos;s ID</span></SectionSummary>
             <div className="space-y-1.5 border-t border-border px-2 py-1.5">
               <p className="text-muted-foreground">{cap.how_sure.parameters}{cap.references_from ? ` · references from ${cap.references_from}` : ""}</p>
               <p className="font-mono text-[11.5px]">{k.curve_id}{k.pathway_id ? ` · ${k.pathway_id}` : ""} · {k.failure_unit_id} · {k.curve_form}{k.form_label ? ` (${k.form_label})` : ""} · x axis {k.x_axis_id}</p>

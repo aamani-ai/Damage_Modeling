@@ -4,7 +4,7 @@
 import { shortSha } from "@/lib/format";
 import type { CellV2, ManifestV3 } from "@/lib/types";
 import { CapabilityLedger, Eyebrow } from "./ledger";
-import { FileLink, Tag } from "./ui";
+import { FileLink, SectionSummary, Tag } from "./ui";
 
 export function CellFooter({ cell, m, blob }: { cell: CellV2; m: ManifestV3; blob: (p: string) => string }) {
   const id = cell.identity;
@@ -27,8 +27,8 @@ export function CellFooter({ cell, m, blob }: { cell: CellV2; m: ManifestV3; blo
         {k?.declared ? <span>{k.reproduced} of {k.run} known answers reproduced{k.not_run.length ? `, ${k.not_run.reduce((s, n) => s + n.n, 0)} not run` : ""}</span> : null}
       </div>
       {cell.kind !== "gap" ? (
-        <details className="mt-1.5">
-          <summary className="cursor-pointer font-medium hover:text-foreground">What it outputs · the files · known answers · pins</summary>
+        <details className="group mt-1.5">
+          <SectionSummary>What it outputs · the files · known answers · pins</SectionSummary>
           <div className="mt-2 grid gap-3 text-[12px] md:grid-cols-2 xl:grid-cols-4">
             <div>
               <Eyebrow>What it outputs</Eyebrow>

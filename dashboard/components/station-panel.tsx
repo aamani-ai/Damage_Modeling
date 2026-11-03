@@ -8,7 +8,7 @@ import { fmtPct, fmtUsdCompact } from "@/lib/format";
 import type { CellV2, Citations, CurveV2, ManifestV3, PlainStation } from "@/lib/types";
 import { AuditTable, CapabilityLedger, EvidenceLedger, Eyebrow, FieldReviewLedger, FilesList, GateChecklist, PartsTable, ProofLedger, ProseEvidence, SeamsLedger, StationFact, ValueLedger } from "./ledger";
 import { SourceRef } from "./source-link";
-import { EmptyState, FileLink, Mono } from "./ui";
+import { EmptyState, FileLink, Mono, SectionSummary } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 const BLOB = "https://github.com/aamani-ai/Damage_Modeling/blob";
@@ -191,8 +191,8 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
     <div className="space-y-3">
       <p className="text-[13.5px] leading-snug">{station.paragraph}</p>
       {words}
-      <details className="rounded-md border border-border">
-        <summary className="cursor-pointer px-2.5 py-1.5 text-[12px] font-medium text-muted-foreground hover:text-foreground">Details — register IDs, the gate checklist, files and SHAs</summary>
+      <details className="group rounded-md border border-border">
+        <SectionSummary className="px-2.5 py-1.5">Details <span className="font-normal normal-case tracking-normal">— register IDs, the gate checklist, files and SHAs</span></SectionSummary>
         <div className="space-y-3 border-t border-border px-2.5 py-2">
           <StationFact station={ch} />
           {details}

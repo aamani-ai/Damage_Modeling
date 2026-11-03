@@ -68,14 +68,14 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
             ) : null}
           </EmptyState>
 {c.subcomponents.length && c.subcomponent_rollup ? (
-            <div><SubcomponentPanel subs={c.subcomponents} rollup={c.subcomponent_rollup} hazards={[{ slug: c.hazard.slug, label: c.hazard.label }]} defaultHazard={c.hazard.slug} cards={constructionCards(c.subcomponents)} legend={m.legend} blobBase={blobBase(m)} picker={false} /></div>
+            <div><SubcomponentPanel subs={c.subcomponents} rollup={c.subcomponent_rollup} hazards={[{ slug: c.hazard.slug, label: c.hazard.label }]} defaultHazard={c.hazard.slug} cards={constructionCards(c.subcomponents)} legend={m.legend} blobBase={blobBase(m)} picker={false} buildings={buildings} /></div>
           ) : null}
           {types.length ? <p className="px-1 text-[12.5px] text-muted-foreground">What the other hazards cover on this asset: {types.map((t, i) => <span key={t.slug}>{i ? " · " : ""}<Link href={t.href!} className="text-accent hover:underline">{t.label}</Link></span>)}.</p> : null}
         </div>
       ) : (
         <>
           {c.subcomponents.length && c.subcomponent_rollup ? (
-            <div className="mt-3"><SubcomponentPanel subs={c.subcomponents} rollup={c.subcomponent_rollup} hazards={[{ slug: c.hazard.slug, label: c.hazard.label }]} defaultHazard={c.hazard.slug} cards={constructionCards(c.subcomponents)} legend={m.legend} blobBase={blobBase(m)} picker={false} /></div>
+            <div className="mt-3"><SubcomponentPanel subs={c.subcomponents} rollup={c.subcomponent_rollup} hazards={[{ slug: c.hazard.slug, label: c.hazard.label }]} defaultHazard={c.hazard.slug} cards={constructionCards(c.subcomponents)} legend={m.legend} blobBase={blobBase(m)} picker={false} buildings={buildings} /></div>
           ) : null}
           <StepsStrip cell={c} cites={cites} curves={curves} m={m} />
           {c.binding ? (

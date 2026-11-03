@@ -28,7 +28,7 @@ export function AssetCoverage({ cov, loadOrder }: { cov: Coverage; loadOrder: st
     </div>
   );
   const title = (
-    <button type="button" aria-expanded={open} aria-controls="asset-coverage-body" onClick={() => setPicture(open ? "hidden" : null)} className={`${TOGGLE_CLASS} normal-case tracking-normal`}>
+    <button type="button" aria-expanded={open} aria-controls="asset-coverage-body" onClick={() => setPicture(open ? "hidden" : null)} className={TOGGLE_CLASS}>
       <ToggleArrow open={open} />What each curve covers on the Digital Twin
     </button>
   );
@@ -60,6 +60,8 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
   const [, setView] = useUrlParam("view");
   const [, setSel] = useUrlParam("sel");
   const [, setPicture] = useUrlParam("picture");
+  const [tableParam, setTable] = useUrlParam("table");
+  const tableOpen = tableParam !== "hidden";
   // a cell shows that system on the picture above, for that hazard
   const show = (hazard: string | null, tree: string, node: string) => {
     if (hazard) setHz(hazard);
@@ -73,9 +75,16 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
   const withCurve = (slug: string) => cov.matrix.filter((r) => r.cells[slug]?.state === "curve").length;
   return (
     <section className="rounded-lg border border-border bg-card" aria-label="The Digital Twin's systems, hazard by hazard">
-      <div className="px-3 pt-2.5 pb-1 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">The Digital Twin&apos;s systems, hazard by hazard</div>
+      <div className="px-3 py-2">
+        <button type="button" aria-expanded={tableOpen} aria-controls="twin-table-body" onClick={() => setTable(tableOpen ? "hidden" : null)} className={TOGGLE_CLASS}>
+          <ToggleArrow open={tableOpen} />The Digital Twin&apos;s systems, hazard by hazard
+        </button>
+        <span className="ml-2 text-[12px] text-muted-foreground">the picture above, as a table, for every hazard at once</span>
+      </div>
+      {tableOpen ? (
+      <div id="twin-table-body">
       <p className="max-w-[1100px] px-3 pb-2 text-[12.5px] leading-snug">
-        Each row is a system of the Digital Twin&apos;s 3D model of the {(cov.type.building ?? cov.type.label).toLowerCase()}, with the parts it contains underneath; each column is a hazard. A cell says whether that hazard&apos;s curves cover the system. These rows are the picture&apos;s breakdown, not the subsystems (cost buckets) in &quot;Every subsystem, curve or gap&quot;, so the counts differ.
+        Each row is a system of the Digital Twin&apos;s 3D model of the {(cov.type.building ?? cov.type.label).toLowerCase()}, with the parts it contains underneath; each column is a hazard. A cell says whether that hazard&apos;s curves cover the system, with the picture&apos;s colours. These rows are the picture&apos;s breakdown, not the subsystems (cost buckets) in &quot;Every subsystem, curve or gap&quot;, so the counts differ.
       </p>
       <div className="overflow-x-auto px-3 pb-3">
         <table className="w-full min-w-[860px] text-[12px]">
@@ -101,6 +110,8 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
           <span className="font-mono">{cov.twin.crosswalk.split("/").slice(-1)[0]}</span>, a draft co-owned with Hazard.
         </p>
       </div>
+      </div>
+      ) : null}
     </section>
   );
 }

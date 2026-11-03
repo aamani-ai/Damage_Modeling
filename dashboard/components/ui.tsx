@@ -127,7 +127,16 @@ export function Dl({ rows, labelWidth = 92 }: { rows: [ReactNode, ReactNode][]; 
 
 // One look for every fold-out section header ("What the words mean", "Every subsystem, curve or gap", "What this
 // curve covers"): the same weight, size and arrow.
-export const TOGGLE_CLASS = "inline-flex cursor-pointer items-center gap-1.5 text-[12.5px] font-medium text-foreground hover:text-accent";
+export const TOGGLE_CLASS = "inline-flex cursor-pointer items-center gap-1.5 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground hover:text-foreground";
+
+// The same look for a native <details> fold (put `group` on the <details>): the arrow turns with the open state, no hooks.
+export function SectionSummary({ children, className = "" }: { children: ReactNode; className?: string }) {
+  return (
+    <summary className={`${TOGGLE_CLASS} flex list-none [&::-webkit-details-marker]:hidden ${className}`}>
+      <span aria-hidden className="inline-block w-4 text-[16px] leading-none text-muted-foreground transition-transform group-open:rotate-90">▸</span>{children}
+    </summary>
+  );
+}
 
 export function ToggleArrow({ open }: { open: boolean }) {
   return <span aria-hidden className="inline-block w-4 text-[16px] leading-none text-muted-foreground">{open ? "▾" : "▸"}</span>;
