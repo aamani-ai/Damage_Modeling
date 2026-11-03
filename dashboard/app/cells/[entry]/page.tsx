@@ -9,7 +9,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CellCoverage, type CellCov } from "@/components/cell-coverage";
 import { CellFooter } from "@/components/cell-footer";
-import { CellCrumbs } from "@/components/crumbs";
+import { CellCrumbs, CellTitle } from "@/components/crumbs";
 import { CurveHero, MainLogic } from "@/components/curve-hero";
 import { PlainBlocks } from "@/components/plain-blocks";
 import { PlainRail } from "@/components/plain-rail";
@@ -50,7 +50,7 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
   const buildings = Object.fromEntries(types.filter((t) => t.building).map((t) => [t.slug, t.building!]));
   return (
     <div>
-      <PlainRail title={c.title} rail={c.plain.rail} summary={c.summary} crumbs={crumbs} tierMeaning={m.tier_meaning} tone={c.rail.review.tone} />
+      <PlainRail title={<CellTitle title={c.title} hazard={c.hazard.label} types={types.map((t) => ({ slug: t.slug, label: t.label, href: t.href!, building: t.building ?? null }))} />} rail={c.plain.rail} summary={c.summary} crumbs={crumbs} tierMeaning={m.tier_meaning} tone={c.rail.review.tone} />
       {c.hazard_note ? (
         <div className="mt-3 rounded-md border border-warn/40 bg-warn-bg px-3 py-2 text-[12.5px] leading-snug">
           <span className="font-medium">{c.hazard_note.title}</span>

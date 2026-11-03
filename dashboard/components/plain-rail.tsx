@@ -8,7 +8,7 @@ import { InfoHint, Tag } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 export function PlainRail({ title, rail, summary, back, crumbs, tierMeaning, children, tone = "neutral" }: {
-  title: string; rail: Plain["rail"]; summary: string; back?: { href: string; label: string } | null; crumbs?: React.ReactNode;
+  title: React.ReactNode; rail: Plain["rail"]; summary: string; back?: { href: string; label: string } | null; crumbs?: React.ReactNode;
   tierMeaning?: Record<string, string>; children?: React.ReactNode; tone?: "neutral" | "ok" | "warn";
 }) {
   return (

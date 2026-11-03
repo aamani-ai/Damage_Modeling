@@ -7,6 +7,14 @@ import { useUrlParam } from "@/lib/url-state";
 
 export interface Crumb { slug: string; label: string; href: string }
 
+// A shared cell's name follows ?building=: "Hail × Residential · house" when the page is opened for one building type,
+// "Hail × Real estate" when it shows them all.
+export function CellTitle({ title, hazard, types }: { title: string; hazard: string; types: (Crumb & { building?: string | null })[] }) {
+  const [b] = useUrlParam("building");
+  const t = types.length > 1 ? types.find((x) => x.slug === b) : null;
+  return <>{t ? `${hazard} × ${t.label}${t.building ? ` · ${t.building.toLowerCase()}` : ""}` : title}</>;
+}
+
 export function CellCrumbs({ category, types, hazard }: { category: { label: string; href: string | null }; types: Crumb[]; hazard: string }) {
   const [b] = useUrlParam("building");
   const t = types.find((x) => x.slug === b) ?? (types.length === 1 ? types[0] : null);
