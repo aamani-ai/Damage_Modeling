@@ -14,7 +14,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-from .common import HELPERS, LOCAL_PATH_RE, humanise, parse_markdown_table, rel, tier_span
+from .common import HELPERS, LOCAL_PATH_RE, ROOT, humanise, parse_markdown_table, rel, tier_span
 from .plain import TIER_MEANING, TIER_SHORT, tier_words
 
 # symbol → (meaning, the artifact parameter it reads, or None for an axis or a derived quantity)
@@ -231,6 +231,25 @@ def construction_block(c: dict[str, Any], artifact_path: str | None, status: str
     }
 
 
+UNITS_SOURCE = "docs/method/standards/13_end_to_end_damage_work_architecture.md"
+
+
+def _units() -> list[dict[str, str]]:
+    """The method's four units, read from standard 13 §6's table: cell, failure unit, subsystem/component, value bucket."""
+    text = (ROOT / UNITS_SOURCE).read_text(encoding="utf-8")
+    start = text.find("## 6. The core unit hierarchy")
+    table = parse_markdown_table(text[start:]) if start >= 0 else None
+    if not table:
+        raise ValueError(f"{UNITS_SOURCE} has no unit table under §6")
+    out = []
+    for row in table[1]:
+        word = row[0].replace("*", "").replace("-", " ").strip()
+        example = row[2].replace("`", "").strip()
+        out.append({"key": re.sub(r"[^a-z]+", "_", word.lower()).strip("_"), "word": word[0].upper() + word[1:].lower(),
+                    "meaning": f"{row[1].rstrip('.')}; e.g. {example}"})
+    return out
+
+
 def legend(cat_text: str) -> dict[str, Any]:
     """The words every page opens with. Catalogue statuses are read from CATALOGUE.md's own status table."""
     start = cat_text.find("**Status.**")
@@ -259,11 +278,12 @@ def legend(cat_text: str) -> dict[str, Any]:
             {"key": "not_runtime_indexed", "word": "not in production", "meaning": "Not in the runtime index; production cannot call it."},
         ],
         "hazard_use": [
-            {"key": "used", "word": "Used by Hazard", "meaning": "Hazard's main uses this file, or a revision identical to it in everything that can change a loss (curves, value shares, unit treatments)."},
-            {"key": "differs", "word": "Differs in Hazard", "meaning": "Hazard uses something that differs in a way that can change a loss: a newer model, a changed revision, or a different value share. The note says what."},
-            {"key": "not_main", "word": "Not used by Hazard's main", "meaning": "Hazard's main does not use it: only a Hazard branch holds it, or no reference was found."},
+            {"key": "used", "word": "Used by Hazard's dashboard", "meaning": "A layer on Hazard's internal dashboard was computed with this file, or one identical to it in everything that can change a loss (curves, value shares, unit treatments)."},
+            {"key": "differs", "word": "Differs in Hazard's dashboard", "meaning": "A layer on Hazard's dashboard was computed with something that differs in a way that can change a loss: a newer model, a changed revision, or a different value share. The note says what."},
+            {"key": "not_on", "word": "Not on Hazard's dashboard", "meaning": "No layer on Hazard's dashboard uses this cell; the row says whether any Hazard branch holds it."},
         ],
         "where_from": WHERE_FROM,
+        "units": _units(), "units_source": UNITS_SOURCE,
     }
 
 

@@ -1,15 +1,13 @@
-"""Which of this repository's curve artifacts Hazard itself uses, and how surely.
+"""Which of this repository's curve artifacts Hazard uses, judged against what Hazard's dashboard serves.
 
-Hazard references a Damage artifact in three ways, each read here from Hazard's git (main and branches):
-  - a copy: Hazard keeps our artifact (any `*artifact.json`) beside its consumption, source or binding pin;
-  - a hash in its code: a SHA-256 literal in Hazard's source equal to one of our artifacts;
-  - a path in its code: Hazard's source loads `damage_modeling/docs/cells/...` from a local Damage checkout, which
-    checks the model version but not the bytes.
-Each is matched to a cell and compared with the artifact this dashboard shows: by SHA-256, and by model version and
-documentation revision apart (a consumer pins the model version, standard 17). A reference only on Hazard branches
-is always said to be not on Hazard's main. A newer pinned version has its curves compared with the ones shown, and
-is looked for in Damage (this tree, then Damage's branches). The value shares Hazard's pins multiply a curve by are
-compared with the share the artifact declares on the same basis.
+The answer per cell comes from the snapshot of Hazard's internal dashboard (scripts/dashboard/snapshots/
+hazard_dashboard.json, written by hazard_dashboard_snapshot.py while signed in to GCS): which Damage artifact each of
+its layers was computed with. Hazard's git (below) adds what the snapshot cannot: the value shares Hazard's pins
+multiply a curve by, and, for a cell with no layer, whether any Hazard branch holds it. It reads Hazard's references
+three ways (main and branches): a copy of our artifact (any `*artifact.json`) beside a pin; a SHA-256 literal in
+Hazard's source; a `damage_modeling/docs/cells/...` path its source loads. An artifact a layer used is compared with
+the one this page shows by SHA-256, and by model version and documentation revision apart (standard 17); a differing
+one has its curves and loss-relevant unit facts compared, and is looked for in Damage (this tree, then its branches).
 """
 from __future__ import annotations
 
@@ -134,21 +132,6 @@ def copies() -> tuple[dict[str, Any], ...]:
     return tuple(sorted(out, key=lambda c: (c["cell_id"], _model(c["model"]), _model(c["docs"]))))
 
 
-@functools.lru_cache(maxsize=1)
-def code_refs() -> tuple[dict[str, Any], ...]:
-    """Hazard's main source files that name a Damage artifact path or carry a SHA-256 literal."""
-    out = []
-    for oid, path in _trees().get("main", []):
-        if not CODE_FILES.match(path):
-            continue
-        text = _blob(oid).decode("utf-8", "replace")
-        paths = sorted({m.group(1) for m in CODE_PATH.finditer(text)})
-        shas = sorted(set(HEX64.findall(text)))
-        if paths or shas:
-            out.append({"file": path, "paths": paths, "shas": shas})
-    return tuple(out)
-
-
 @functools.lru_cache(maxsize=None)
 def _ours(cell_id: str) -> dict[str, dict[str, Any]]:
     """This tree's artifacts of a cell, by SHA-256."""
@@ -219,17 +202,60 @@ def _same_curves(pinned: dict[str, Any], shown: dict[str, Any]) -> str:
         (f"its {n} curve{'s are' if n != 1 else ' is'} identical to the ones shown here")
 
 
-def for_cell(cell_id: str, artifact_path: str | None) -> dict[str, Any]:
-    """Does Hazard use what this page shows? One of three answers, and a sentence per reference saying what Hazard
-    uses, what the page shows, and what differs in anything that can change a loss.
+SNAPSHOT = CHECKOUT / "scripts" / "dashboard" / "snapshots" / "hazard_dashboard.json"
+HOW_WORDS = {
+    "layer_record": "the layer's own record names the artifact",
+    "run_receipt": "the receipt of the run behind the layer pins the artifact's hash",
+    "producer_code": "the Hazard commit that produced the layer's run pins the artifact's hash",
+    "release_runs": "the stored release runs for this asset and hazard pin the artifact's hash",
+}
 
-      used      Hazard's main uses this file, or a revision identical in every loss-relevant fact
-      differs   Hazard (main or a branch) uses a newer model, a revision that differs in a loss-relevant fact, or
-                multiplies the curve by a different value share
-      not_main  Hazard's main does not use it: only branches hold an identical copy, or nothing was found
+
+@functools.lru_cache(maxsize=1)
+def snapshot() -> dict[str, Any] | None:
+    return json.loads(SNAPSHOT.read_text(encoding="utf-8")) if SNAPSHOT.exists() else None
+
+
+@functools.lru_cache(maxsize=None)
+def _facts(cell_id: str, sha: str) -> dict[str, Any]:
+    """Curves and loss-relevant unit facts of an artifact by hash: this tree, Hazard's copies, then Damage's branches."""
+    for f in sorted((ROOT / "docs" / "cells" / cell_id).rglob("*curve_artifact.json")):
+        raw = f.read_bytes()
+        if hashlib.sha256(raw).hexdigest() == sha:
+            d = json.loads(raw)
+            return {"records": _records(d), "units": _units(d)}
+    for c in copies():
+        if c["sha256"] == sha:
+            return c
+    for ref in _refs(CHECKOUT):
+        for line in _git(CHECKOUT, "ls-tree", "-r", ref, f"docs/cells/{cell_id}/").stdout.decode().splitlines():
+            meta, path = line.split("\t", 1)
+            if path.endswith("curve_artifact.json"):
+                raw = _git(CHECKOUT, "cat-file", "blob", meta.split()[2]).stdout
+                if hashlib.sha256(raw).hexdigest() == sha:
+                    d = json.loads(raw)
+                    return {"records": _records(d), "units": _units(d)}
+    return {}
+
+
+def _labels(layers: list[dict[str, Any]]) -> str:
+    names = [str(l.get("label") or l["id"]) for l in layers]
+    return (f"Hazard's dashboard layer {names[0]}" if len(names) == 1
+            else f"Hazard's dashboard layers {', '.join(names[:3])}" + (f" and {len(names) - 3} more" if len(names) > 3 else ""))
+
+
+def for_cell(cell_id: str, artifact_path: str | None) -> dict[str, Any]:
+    """Does Hazard's dashboard use what this page shows? One of three answers, and sentences saying what its layers
+    used, what the page shows, what differs in anything that can change a loss, and how that is known.
+
+      used     a layer on Hazard's dashboard was computed with this file, or one identical in every loss-relevant fact
+      differs  a layer was computed with a newer model, a revision that differs in a loss-relevant fact, or Hazard
+               multiplies the curve by a different value share
+      not_on   no layer on Hazard's dashboard uses this cell
     """
-    if hazard_main.repo() is None:
-        return {"state": "unchecked", "pins": [], "sentences": ["Hazard's repository could not be read, so whether Hazard uses this is not checked."],
+    snap = snapshot()
+    if snap is None:
+        return {"state": "unchecked", "sentences": ["No snapshot of Hazard's dashboard has been taken, so whether it uses this is not checked."],
                 "differences": [], "values": [], "value_mismatches": [], "newer": None}
     shown: dict[str, Any] = {}
     if artifact_path and (ROOT / artifact_path).exists():
@@ -238,63 +264,55 @@ def for_cell(cell_id: str, artifact_path: str | None) -> dict[str, Any]:
         shown = {"sha256": hashlib.sha256(raw).hexdigest(), "model": d.get("semantic_damage_model_version"), "docs": d.get("documentation_revision"),
                  "records": _records(d), "units": _units(d), "path": artifact_path,
                  "shares": {u.get("id"): u.get(INSTALLED_SHARE) for u in d.get("failure_units") or [] if isinstance(u.get(INSTALLED_SHARE), (int, float))}}
-    pins: list[dict[str, Any]] = []
-
-    def add(kind: str, model: str | None, docs: str | None, sha: str | None, on_main: bool, branches: list[str], facts: dict[str, Any],
-            values: list[dict[str, Any]], code_file: str | None = None) -> None:
-        same = sha is not None and sha == shown.get("sha256")
-        same_model = model == shown.get("model")
-        diffs = [] if same else _loss_diff(facts, shown)
-        subj, verb = ("Hazard's main code (" + code_file + ")", "uses") if code_file else _where_words(on_main, branches)
+    checked = f"Checked against Hazard's internal dashboard ({snap['dashboard']}) on {snap['checked_on']}."
+    entry = (snap.get("cells") or {}).get(cell_id)
+    if not entry:
+        refs = [c for c in copies() if c["cell_id"] == cell_id]
+        held = sorted({b for c in refs for b in c["branches"]}) + (["main"] if any(c["on_main"] for c in refs) else [])
+        why = (f"Hazard branch{'es' if len(held) > 1 else ''} {', '.join(held[:3])}{' and more' if len(held) > 3 else ''} hold a copy of this cell's artifact, "
+               "but no layer on Hazard's dashboard uses it." if held else "Hazard's repository has no reference to this cell's artifact.")
+        return {"state": "not_on", "sentences": [f"No layer on Hazard's dashboard uses this cell. {why}", checked],
+                "differences": [], "values": [], "value_mismatches": [], "newer": None}
+    subject = _labels(entry["layers"])
+    verb = "uses" if len(entry["layers"]) == 1 else "use"
+    sentences, why, values, mismatches = [], [], [], []
+    newer = None
+    for a in entry["artifacts"]:
+        same = a["sha256"] == shown.get("sha256")
         if same:
-            words = f"{subj} {verb} the file shown here ({model}, {docs})."
-        else:
-            head = f"{subj} {verb} {model}, {docs}; this page shows {shown.get('model')}, {shown.get('docs')}"
-            tail = (f"{_same_curves(facts, shown)}, and nothing else that can change a loss differs (the rest is wording)" if not diffs
-                    else f"{_same_curves(facts, shown)}; " + "; ".join(diffs))
-            where = f" Hazard's version is {_damage_where(cell_id, sha)}." if sha and not same_model else ""
-            words = f"{head}. {tail[0].upper() + tail[1:]}.{where}"
-        pins.append({"kind": kind, "model": model, "docs": docs, "same": same, "same_model": same_model, "on_main": on_main, "branches": branches,
-                     "differences": diffs, "words": words, "values": values})
-
-    for c in (x for x in copies() if x["cell_id"] == cell_id):
-        add("copy", c["model"], c["docs"], c["sha256"], c["on_main"], c["branches"], c, c["values"])
-    ours = _ours(cell_id)
-    for ref in code_refs():
-        hashed = [s_ for s_ in ref["shas"] if s_ in ours]
-        if hashed:
-            t = ours[hashed[0]]
-            add("code_hash", t["model"], t["docs"], hashed[0], True, [], t, [], ref["file"])
+            sentences.append(f"{subject} {verb} the file shown here ({a.get('model')}, {a.get('docs')}).")
             continue
-        loaded = [p for p in ref["paths"] if f"docs/cells/{cell_id}/" in p]
-        if loaded:  # by path only: the model version is checked, the bytes are not
-            t = next((v for v in ours.values() if v["path"] == loaded[0]), None)
-            add("code_path", t["model"] if t else None, t["docs"] if t else None, None, True, [], t or {}, [], ref["file"])
-    # value shares: what Hazard's pins multiply a unit's curve by, against the installed-basis share the artifact declares
-    values, mismatches = [], []
-    for p in pins:
-        for v in p["values"]:
+        facts = _facts(cell_id, a["sha256"])
+        diffs = _loss_diff(facts, shown) if facts else ["its curves could not be read to compare"]
+        tail = (f"{_same_curves(facts, shown)}, and nothing else that can change a loss differs (the rest is wording)" if not diffs
+                else f"{_same_curves(facts, shown)}; " + "; ".join(diffs)) if facts else diffs[0]
+        where = f" Hazard's version is {a['where']}." if a.get("where") and a.get("model") != shown.get("model") else ""
+        words = (f"{subject} {verb} {a.get('model')}, {a.get('docs')}; this page shows {shown.get('model')}, {shown.get('docs')}. "
+                 f"{tail[0].upper() + tail[1:]}.{where}")
+        sentences.append(words)
+        if _model(a.get("model")) > _model(shown.get("model")):
+            newer = newer if newer and _model(newer["model"]) >= _model(a.get("model")) else {"model": a.get("model"), "docs": a.get("docs"), "shown": shown.get("model"), "words": words}
+            why.append(words)
+        elif diffs:
+            why.append(words)
+    # value shares: what Hazard's pins beside the artifacts its layers used multiply a unit's curve by
+    used = {a["sha256"] for a in entry["artifacts"]}
+    for c in copies():
+        if c["sha256"] not in used:
+            continue
+        for v in c["values"]:
             declared = (shown.get("shares") or {}).get(v["unit"])
             row = {**v, "declared": declared, "where": _where_words("main" in v["refs"], sorted(r for r in v["refs"] if r != "main"))[0]}
             values.append(row)
             if declared is not None and "install" in v["basis"].lower() and abs(declared - v["share"]) > 1e-4:
                 mismatches.append(row)
-    newer = max((p for p in pins if _model(p["model"]) > _model(shown.get("model"))), key=lambda p: _model(p["model"]), default=None)
-    main_same_model = [p for p in pins if p["on_main"] and (p["same"] or p["same_model"])]
-    differs_on_main = [p for p in main_same_model if p["differences"]]
-    if newer or mismatches or (differs_on_main and not any(p["same"] for p in main_same_model)):
-        state = "differs"
-    elif main_same_model:
-        state = "used"
-    else:
-        state = "not_main"
-    share_lines = [f"{v['where']} ({v['pin']}) multiplies {v['unit']} by {v['share']:.2%} of installed value"
-                   + (f" ({v['note']})" if v.get("note") else "") + f"; the artifact shown here declares {v['declared']:.2%} of installed capex."
-                   for v in mismatches]
-    sentences = [p["words"] for p in pins] + share_lines or [
-        "No copy, hash or path of this cell's artifact was found in Hazard's repository; Hazard may still use curves of its own."]
-    # the lines that say why a cell differs, for the note at the top of its page, its Review task and the build check
-    why = ([newer["words"]] if newer else []) + [p["words"] for p in differs_on_main if p is not newer] + share_lines
-    return {"state": state, "pins": [{k: p[k] for k in ("kind", "model", "docs", "same", "same_model", "on_main", "branches", "differences", "words")} for p in pins],
-            "sentences": sentences, "differences": why if state == "differs" else [], "values": values, "value_mismatches": mismatches,
-            "newer": {"model": newer["model"], "docs": newer["docs"], "shown": shown.get("model"), "words": newer["words"]} if newer else None}
+    for v in mismatches:
+        line = (f"Hazard multiplies {v['unit']} by {v['share']:.2%} of installed value" + (f" ({v['note']})" if v.get("note") else "")
+                + f"; the artifact shown here declares {v['declared']:.2%} of installed capex.")
+        sentences.append(line)
+        why.append(line)
+    how = "; ".join(HOW_WORDS.get(h, h) for h in entry["how"])
+    sentences.append(f"How this is known: {how}.")  # Hazard-side record gaps (entry["notes"]) stay in the snapshot, not on the page
+    sentences.append(checked)
+    state = "differs" if why else "used"
+    return {"state": state, "sentences": sentences, "differences": why, "values": values, "value_mismatches": mismatches, "newer": newer}

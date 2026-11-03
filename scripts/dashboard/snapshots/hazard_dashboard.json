@@ -1,0 +1,390 @@
+{
+ "schema": "hazard-dashboard-snapshot/v1",
+ "checked_on": "2026-11-03",
+ "dashboard": "hazard-grid-resiliency-internal",
+ "hazard_main": "ee41b829f51485283d5a3540de7c34ccfa846e95",
+ "manifest": {
+  "uri": "dev/dashboard/hazard-grid-resiliency-internal/releases/20261102_real_estate_v1/manifest.json",
+  "sha256": "309260fc4256bc34adbd2b21772b378b08560caa67975b4976626ab530df6117",
+  "layers": 26
+ },
+ "cells": {
+  "convective_wind_real_estate": {
+   "layers": [
+    {
+     "id": "real_estate_warehouse_convective_wind",
+     "label": "Warehouse \u00b7 Convective Wind",
+     "how": "layer_record"
+    },
+    {
+     "id": "real_estate_office_convective_wind",
+     "label": "Office \u00b7 Convective Wind",
+     "how": "layer_record"
+    },
+    {
+     "id": "real_estate_house_convective_wind",
+     "label": "Detached house \u00b7 Convective Wind",
+     "how": "layer_record"
+    }
+   ],
+   "artifacts": [
+    {
+     "model": "model v1.0",
+     "docs": "docs r2",
+     "where": "on Damage branch codex/warehouse-flood-admission, not on Damage's main",
+     "sha256": "891114053febb90a3c69968f87e5834732b9902e0b80feeaf76436863bd09ba3"
+    }
+   ],
+   "how": [
+    "layer_record"
+   ],
+   "notes": []
+  },
+  "flood_bess": {
+   "layers": [
+    {
+     "id": "bess_flood",
+     "label": "BESS Flood \u00b7 screening",
+     "how": "release_runs"
+    }
+   ],
+   "artifacts": [
+    {
+     "model": "model v1.0",
+     "docs": "docs r1",
+     "where": "in this repository at docs/cells/flood_bess/current/curve_artifact.json",
+     "sha256": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24"
+    }
+   ],
+   "how": [
+    "release_runs"
+   ],
+   "notes": [
+    "The layer's own record names only a local file and run bess-typical-site-20261101_v2; the stored release runs for this asset and hazard pin the artifact."
+   ]
+  },
+  "flood_real_estate": {
+   "layers": [
+    {
+     "id": "real_estate_warehouse_flood",
+     "label": "Warehouse \u00b7 Flood",
+     "how": "layer_record"
+    },
+    {
+     "id": "real_estate_office_flood",
+     "label": "Office \u00b7 Flood",
+     "how": "layer_record"
+    },
+    {
+     "id": "real_estate_house_flood",
+     "label": "Detached house \u00b7 Flood",
+     "how": "layer_record"
+    }
+   ],
+   "artifacts": [
+    {
+     "model": "model v1.0",
+     "docs": "docs r1",
+     "where": "on Damage branch codex/warehouse-flood-admission, not on Damage's main",
+     "sha256": "810555bada83f04a9aa92dcf1e185ee990b2e840d055805facdc559f928c0102"
+    },
+    {
+     "model": "model v1.1",
+     "docs": "docs r1",
+     "where": "on Damage branch codex/warehouse-flood-admission, not on Damage's main",
+     "sha256": "01091c67570c156ae94afc0e34bb8e9675dd10e86bd032810219de89146857d0"
+    }
+   ],
+   "how": [
+    "layer_record"
+   ],
+   "notes": []
+  },
+  "flood_solar": {
+   "layers": [
+    {
+     "id": "flood_solar",
+     "label": "Flood \u00d7 Solar (national \u00b7 R1.2/F1.1/C1.2 \u00b7 Combined 1.4 \u00b7 screening)",
+     "how": "layer_record"
+    }
+   ],
+   "artifacts": [
+    {
+     "model": "model v1.0",
+     "docs": "docs r4",
+     "where": "in this repository at docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+     "sha256": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d"
+    }
+   ],
+   "how": [
+    "layer_record"
+   ],
+   "notes": []
+  },
+  "hail_real_estate": {
+   "layers": [
+    {
+     "id": "real_estate_warehouse_hail",
+     "label": "Warehouse \u00b7 Hail",
+     "how": "layer_record"
+    },
+    {
+     "id": "real_estate_office_hail",
+     "label": "Office \u00b7 Hail",
+     "how": "layer_record"
+    },
+    {
+     "id": "real_estate_house_hail",
+     "label": "Detached house \u00b7 Hail",
+     "how": "layer_record"
+    }
+   ],
+   "artifacts": [
+    {
+     "model": "model v1.0",
+     "docs": "docs r1",
+     "where": "on Damage branch codex/warehouse-flood-admission, not on Damage's main",
+     "sha256": "643b235d11727d5efc7336ca0839b49135a06ef4b9c3f9d1b8d8821aaf1096c3"
+    }
+   ],
+   "how": [
+    "layer_record"
+   ],
+   "notes": []
+  },
+  "hail_solar": {
+   "layers": [
+    {
+     "id": "hail_solar",
+     "label": "Hail \u00d7 Solar",
+     "how": "run_receipt"
+    }
+   ],
+   "artifacts": [
+    {
+     "model": "model v1.0",
+     "docs": "docs r5",
+     "where": "not found in Damage",
+     "sha256": "759a4888c5ebe41fae3112ed31cd6aba5912cdb1a0d933c66c12cbd2ec05b1eb"
+    }
+   ],
+   "how": [
+    "run_receipt"
+   ],
+   "notes": []
+  },
+  "strong_wind_solar": {
+   "layers": [
+    {
+     "id": "convective_wind_solar",
+     "label": "Convective wind \u00d7 Solar",
+     "how": "producer_code"
+    }
+   ],
+   "artifacts": [
+    {
+     "model": "model v1.0",
+     "docs": "docs r3",
+     "where": "in this repository at docs/cells/strong_wind_solar/current/strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "sha256": "832f47d69372ec54723a61b8a956addccef07bb39338c3ec99907e116f1855ca"
+    }
+   ],
+   "how": [
+    "producer_code"
+   ],
+   "notes": []
+  },
+  "tropical_cyclone_wind_bess": {
+   "layers": [
+    {
+     "id": "bess_hurricane",
+     "label": "BESS Hurricane \u00b7 screening",
+     "how": "release_runs"
+    }
+   ],
+   "artifacts": [
+    {
+     "model": "model v1.0",
+     "docs": "docs r1",
+     "where": "in this repository at docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
+     "sha256": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed"
+    }
+   ],
+   "how": [
+    "release_runs"
+   ],
+   "notes": [
+    "The layer's own record names only a local file and run bess-typical-site-20261101_v2; the stored release runs for this asset and hazard pin the artifact."
+   ]
+  },
+  "tropical_cyclone_wind_real_estate": {
+   "layers": [
+    {
+     "id": "real_estate_warehouse_hurricane",
+     "label": "Warehouse \u00b7 Hurricane",
+     "how": "layer_record"
+    },
+    {
+     "id": "real_estate_office_hurricane",
+     "label": "Office \u00b7 Hurricane",
+     "how": "layer_record"
+    },
+    {
+     "id": "real_estate_house_hurricane",
+     "label": "Detached house \u00b7 Hurricane",
+     "how": "layer_record"
+    }
+   ],
+   "artifacts": [
+    {
+     "model": "model v1.0",
+     "docs": "docs r1",
+     "where": "on Damage branch codex/warehouse-flood-admission, not on Damage's main",
+     "sha256": "dfee46103b6239b962085be77c6dd0f4a82634d93774acc57c1de43583582998"
+    }
+   ],
+   "how": [
+    "layer_record"
+   ],
+   "notes": []
+  },
+  "tropical_cyclone_wind_solar": {
+   "layers": [
+    {
+     "id": "hurricane_solar",
+     "label": "Hurricane \u00d7 Solar Scientific Version 2 (STORM RP \u00b7 real placements)",
+     "how": "layer_record"
+    }
+   ],
+   "artifacts": [
+    {
+     "model": "model v2.1",
+     "docs": "docs r1",
+     "where": "in this repository at docs/cells/tropical_cyclone_wind_solar/archive/model_v2_1__docs_r1/tropical_cyclone_wind_solar__model_v2_1__docs_r1__curve_artifact.json",
+     "sha256": "3ddb4834e691b481125159c61b90f9b383b6dbf65a56774907768becc4232c02"
+    }
+   ],
+   "how": [
+    "layer_record"
+   ],
+   "notes": []
+  },
+  "tropical_cyclone_wind_wind": {
+   "layers": [
+    {
+     "id": "hurricane_wind_farm",
+     "label": "Hurricane \u00d7 Wind Farm Scientific Version 2 (tower-only \u00b7 16% modeled)",
+     "how": "layer_record"
+    }
+   ],
+   "artifacts": [
+    {
+     "model": "model v1.2",
+     "docs": "docs r2",
+     "where": "in this repository at docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_2__docs_r2__curve_artifact.json",
+     "sha256": "009996c07eb8150f79f11741d42b6cd37562d655ee336f82f178ccdeb987c992"
+    }
+   ],
+   "how": [
+    "layer_record"
+   ],
+   "notes": []
+  },
+  "wildfire_bess": {
+   "layers": [
+    {
+     "id": "bess_wildfire",
+     "label": "BESS Wildfire \u00b7 screening",
+     "how": "release_runs"
+    }
+   ],
+   "artifacts": [
+    {
+     "model": "model v1.0",
+     "docs": "docs r1",
+     "where": "in this repository at docs/cells/wildfire_bess/current/curve_artifact.json",
+     "sha256": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491"
+    }
+   ],
+   "how": [
+    "release_runs"
+   ],
+   "notes": [
+    "The layer's own record names only a local file and run bess-typical-site-20261101_v2; the stored release runs for this asset and hazard pin the artifact."
+   ]
+  },
+  "wildfire_real_estate": {
+   "layers": [
+    {
+     "id": "real_estate_warehouse_wildfire",
+     "label": "Warehouse \u00b7 Wildfire",
+     "how": "layer_record"
+    },
+    {
+     "id": "real_estate_office_wildfire",
+     "label": "Office \u00b7 Wildfire",
+     "how": "layer_record"
+    },
+    {
+     "id": "real_estate_house_wildfire",
+     "label": "Detached house \u00b7 Wildfire",
+     "how": "layer_record"
+    }
+   ],
+   "artifacts": [
+    {
+     "model": "model v1.0",
+     "docs": "docs r1",
+     "where": "on Damage branch codex/warehouse-flood-admission, not on Damage's main",
+     "sha256": "0ffdd7cd0645d56e8d4c942a4a65e0a2cc4c6e3dbc09408df20d4b09d3e01b7f"
+    }
+   ],
+   "how": [
+    "layer_record"
+   ],
+   "notes": []
+  },
+  "wildfire_solar": {
+   "layers": [
+    {
+     "id": "wildfire_solar",
+     "label": "Wildfire \u00d7 Solar",
+     "how": "layer_record"
+    }
+   ],
+   "artifacts": [
+    {
+     "model": "model v1.0",
+     "docs": "docs r3",
+     "where": "in this repository at docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8"
+    }
+   ],
+   "how": [
+    "layer_record"
+   ],
+   "notes": []
+  },
+  "wind_tornado_wind": {
+   "layers": [
+    {
+     "id": "convective_wind_wind_farm",
+     "label": "Convective wind \u00d7 Wind farm",
+     "how": "producer_code"
+    }
+   ],
+   "artifacts": [
+    {
+     "model": "model v1.0",
+     "docs": "docs r4",
+     "where": "in this repository at docs/cells/wind_tornado_wind/current/wind_tornado_wind__model_v1_0__docs_r4__curve_artifact.json",
+     "sha256": "908f386953d062a62a33b6714020374b9b9d8a4538006e80d37047686c2c127a"
+    }
+   ],
+   "how": [
+    "producer_code"
+   ],
+   "notes": []
+  }
+ }
+}

@@ -577,9 +577,11 @@ def build(write: bool = True) -> dict[str, Any]:
     check("hazard_links", "every Hazard file the pages name exists on Hazard; the ones not on its main are listed with where they are", not hz_lost,
           {"off_main": hz_off, "not_found": hz_lost, "hazard": hazard_main.state().get("sentence")}, severity="data")
     differs = [f"{eid}: {' '.join(u['differences'])}" for eid, u in sorted(hazard_uses.items()) if u["state"] == "differs"]
-    check("hazard_match", "every curve Hazard uses matches what the page shows in everything that can change a loss", not differs,
-          {"differs": differs, "used": sorted(e for e, u in hazard_uses.items() if u["state"] == "used"),
-           "not_main": sorted(e for e, u in hazard_uses.items() if u["state"] == "not_main"), "hazard": hazard_main.state().get("sentence")}, severity="data")
+    snap = hazard_use.snapshot() or {}
+    check("hazard_match", "every curve a layer on Hazard's dashboard was computed with matches what the page shows in everything that can change a loss",
+          not differs, {"differs": differs, "used": sorted(e for e, u in hazard_uses.items() if u["state"] == "used"),
+                        "not_on": sorted(e for e, u in hazard_uses.items() if u["state"] == "not_on"),
+                        "checked_on": snap.get("checked_on"), "dashboard": snap.get("dashboard"), "hazard": hazard_main.state().get("sentence")}, severity="data")
     faq = build_faq(f"{REPO_URL}/blob/{commit_full}")
     check("faq", "every FAQ question has its date, owner, a short answer and a Read more link that resolves", not faq["errors"], {"errors": faq["errors"], "questions": faq["n_questions"]}, severity="data")
     failed = [c for c in checks if not c["ok"]]
@@ -590,7 +592,7 @@ def build(write: bool = True) -> dict[str, Any]:
     as_order = [a["slug"] for a in sl["assets"]]
     # what Hazard uses, where it differs from the page: a note at the top of the cell page
     for eid, u in hazard_uses.items():
-        cells[eid]["hazard_note"] = {"title": "Differs in Hazard", "lines": u["differences"]} if u["state"] == "differs" else None
+        cells[eid]["hazard_note"] = {"title": "Differs in Hazard's dashboard", "lines": u["differences"]} if u["state"] == "differs" else None
     tiles = []
     for e in entries:
         c = cells[e.id]
@@ -736,7 +738,7 @@ def build(write: bool = True) -> dict[str, Any]:
             tasks.append({"kind": "hazard_not_found", "text": f"Fix {len(lost)} Hazard path{'s' if len(lost) != 1 else ''} found nowhere on Hazard", "items": sorted({h_["path"] for h_ in lost}), "href": f"/cells/{e.id}?step=numbers"})
         use = hazard_uses.get(e.id) or {}
         if use.get("state") == "differs":
-            tasks.append({"kind": "hazard_differs", "text": "Differs in Hazard: what Hazard uses is not what this page shows", "items": use["differences"], "href": f"/cells/{e.id}"})
+            tasks.append({"kind": "hazard_differs", "text": "Differs in Hazard's dashboard: what its layers used is not what this page shows", "items": use["differences"], "href": f"/cells/{e.id}"})
         to_confirm = coverage.get("to_confirm", {}).get(e.id) or []
         if to_confirm:
             tasks.append({"kind": "crosswalk_confirm", "text": f"Confirm {len(to_confirm)} part{'s' if len(to_confirm) != 1 else ''} of the coverage picture the cell does not name", "items": [f"{q['type']}: {q['name']} — {q['note']}" for q in to_confirm], "href": f"/cells/{e.id}?step=covers"})
@@ -922,8 +924,8 @@ def _check_summary(c: dict[str, Any]) -> str:
         return ((f"every Hazard file found; {off} not on Hazard's main (on a branch or moved), listed" if off else "every Hazard file on its main")
                 if c["ok"] else f"{len(d.get('not_found') or [])} Hazard paths found nowhere on Hazard ({d.get('hazard')})")
     if c["id"] == "hazard_match":
-        return (f"{len(d.get('used') or [])} cells used by Hazard as shown" if c["ok"]
-                else f"{len(d.get('differs') or [])} cells differ in Hazard from what the page shows")
+        return (f"{len(d.get('used') or [])} cells used by Hazard's dashboard as shown (checked {d.get('checked_on')})" if c["ok"]
+                else f"{len(d.get('differs') or [])} cells differ in Hazard's dashboard (checked {d.get('checked_on')})")
     if c["id"] == "faq":
         return f"{d.get('questions')} questions, every link resolves" if c["ok"] else f"{len(d.get('errors') or [])} problems"
     return "ok" if c["ok"] else "failed"

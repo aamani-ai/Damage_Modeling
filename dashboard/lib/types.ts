@@ -119,10 +119,10 @@ export interface SubcomponentConstructionRef {
 
 export interface LegendItem { key: string; word: string; meaning: string }
 // what Hazard pins for a cell, against the artifact the page shows (hazard_use.py)
-export type HazardUseState = "used" | "differs" | "not_main" | "unchecked";
+export type HazardUseState = "used" | "differs" | "not_on" | "unchecked";
 export interface HazardUse { state: HazardUseState; sentences: string[]; newer: { model: string; docs: string; shown: string | null; words: string } | null }
 export interface Legend {
-  source: string; status: LegendItem[]; coverage: LegendItem[]; completeness: LegendItem[]; evidence: LegendItem[]; production: LegendItem[]; hazard_use: LegendItem[];
+  source: string; status: LegendItem[]; coverage: LegendItem[]; completeness: LegendItem[]; evidence: LegendItem[]; production: LegendItem[]; hazard_use: LegendItem[]; units: LegendItem[]; units_source: string;
   where_from: Record<WhereFrom, string>;
 }
 
@@ -134,7 +134,7 @@ export interface Subcomponent {
   production_use: { state: ProductionState; consumer_pin: string | null; hazard?: HazardUseState | null };
   borrowed_from: { entry_id: string | null; title: string | null; curves: string[]; rationale: string | null; tier: string | null; tier_word: string | null } | null;
   scope_notes: ScopeNote[];
-  // real estate only: the building a row belongs to, the share of its structure value, and what the row means
+  // the row's value share and its basis; real estate also: the building a row belongs to and what the row means
   group?: { key: string; label: string }; share?: number | null; share_basis?: string | null; note?: string | null;
   gap: {
     reason: string; occurrence: OccurrenceBucket | null; effect: string; basis: { label: string; path: string }[];

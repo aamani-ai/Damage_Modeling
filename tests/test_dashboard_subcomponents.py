@@ -167,15 +167,15 @@ def test_claims_sources_and_parameters_are_each_their_own_row():
 
 
 def test_hazard_use_has_three_answers_and_says_what_differs():
-    """Used by Hazard / Differs in Hazard / Not used by Hazard's main: every differing cell says why, on its page, and
-    the one check fails for exactly those cells. A reference only on a Hazard branch says it is not on Hazard's main."""
+    """Used by / Differs in / Not on Hazard's dashboard: every differing cell says why, on its page, and the one check
+    fails for exactly those cells. Every answer says when Hazard's dashboard was checked."""
     import pytest
     receipt = json.loads((DATA / "receipt.json").read_text())
     check = next(c for c in receipt["checks"] if c["id"] == "hazard_match")
     if "could not be read" in str(check["detail"].get("hazard")):
         pytest.skip("Hazard's repository not readable in this build")
     legend = {i["key"] for i in json.loads((DATA / "manifest.json").read_text())["legend"]["hazard_use"]}
-    assert legend == {"used", "differs", "not_main"}
+    assert legend == {"used", "differs", "not_on"}
     uses = {}
     for path in sorted((DATA / "curves").glob("*/*.json")):
         curve = json.loads(path.read_text())
@@ -183,11 +183,20 @@ def test_hazard_use_has_three_answers_and_says_what_differs():
     for entry_id, use in uses.items():
         assert use["state"] in legend, entry_id
         assert bool(use["differences"]) == (use["state"] == "differs"), entry_id
-        for sentence in use["sentences"]:
-            if sentence.startswith("Hazard branch"):
-                assert "not on Hazard's main" in sentence
+        assert any(s.startswith("Checked against Hazard's internal dashboard") for s in use["sentences"]), entry_id
         note = json.loads((DATA / "cells" / f"{entry_id}.json").read_text()).get("hazard_note")
         assert bool(note) == (use["state"] == "differs"), entry_id
     differing = {line.split(":")[0] for line in check["detail"]["differs"]}
     assert differing == {e for e, u in uses.items() if u["state"] == "differs"}
     assert check["ok"] == (not differing)
+
+
+def test_legend_units_come_from_the_method_and_rows_carry_value_shares():
+    legend = json.loads((DATA / "manifest.json").read_text())["legend"]
+    assert [u["key"] for u in legend["units"]] == ["cell", "failure_unit", "subsystem_component", "value_bucket"]
+    assert legend["units_source"].endswith("13_end_to_end_damage_work_architecture.md")
+    bess = {r["key"]: r for r in _asset("bess")["subcomponents"] if r["hazard"]["slug"] == "flood"}
+    assert abs(sum(r["share"] for r in bess.values()) - 1.0) < 1e-6
+    for path in sorted((DATA / "assets").glob("*.json")):
+        for r in json.loads(path.read_text())["subcomponents"]:
+            assert (r["share"] is None) == (r["share_basis"] is None), (path.name, r["key"])
