@@ -19,16 +19,25 @@ VIEWER = OUT.parent / "public" / "twin"
 STATES = ("curve", "conditioner", "no_curve", "no_direct_damage", "outside")
 BASES = ("part", "not_covered", "out_of_scope", "coverage_decision", "not_named", "inferred")
 # The fixed words for each state (06 §2.4): shown in the legend, the systems list and every tooltip; never typed in a component.
+# One word per state, the same words the subsystem table uses ("has a curve", "no curve yet"); what each means is in
+# STATE_MEANING, shown on hover and in "What the words mean".
 STATE_WORDS = {
-    "curve": "Has a damage curve",
-    "conditioner": "Changes the curve, no curve of its own",
-    "no_curve": "In the value, no curve yet",
-    "no_direct_damage": "Reviewed: no direct damage",
-    "outside": "Outside the value this curve prices",
+    "curve": "has a curve",
+    "conditioner": "changes another curve",
+    "no_curve": "no curve yet",
+    "no_direct_damage": "no direct damage",
+    "outside": "not priced by this curve",
 }
-STATE_SHORT = {"curve": "curve", "conditioner": "changes the curve", "no_curve": "no curve yet", "no_direct_damage": "no direct damage", "outside": "outside"}
+STATE_MEANING = {
+    "curve": "A curve prices this hazard's damage to this part.",
+    "conditioner": "No curve of its own: its condition (for example whether a protection is in place) changes another part's curve.",
+    "no_curve": "Part of the asset's value, but no curve prices it yet.",
+    "no_direct_damage": "Looked at, and judged not to be damaged directly by this hazard.",
+    "outside": "Left out of the value this curve prices (for example contents, modeled separately).",
+}
+STATE_SHORT = STATE_WORDS
 ORDER = {s: i for i, s in enumerate(STATES)}
-GAP_NOTE = "No curve for this hazard yet: the catalogue lists it as a gap."
+GAP_NOTE = "No curve for this hazard yet."
 
 
 def _parts(cell: str | None) -> list[str]:
@@ -209,7 +218,7 @@ def build_coverage(entries: list[Any], sl: dict[str, Any], hazard_slug_of, cell_
                      "plant_name": tw.get("plant_name"), "commit": trees["twin_commit"], "crosswalk": f"docs/contracts/twin_crosswalks/{t['twin']['crosswalk']}"},
             "trees": {k: {"root": _root(ns), "nodes": ns} for k, ns in tree_sets.items()},
             "hazards": cov_h, "matrix": matrix,
-            "state_words": STATE_WORDS, "state_short": STATE_SHORT,
+            "state_words": STATE_WORDS, "state_short": STATE_SHORT, "state_meaning": STATE_MEANING,
         }
     return {"types": out, "findings": findings, "errors": errors, "to_confirm": to_confirm, "twin_commit": trees["twin_commit"], "twin_dirty": trees.get("twin_dirty", False)}
 

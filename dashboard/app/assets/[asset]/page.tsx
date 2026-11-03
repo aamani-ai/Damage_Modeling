@@ -7,6 +7,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AssetCoverage, CoverageMatrix } from "@/components/asset-coverage";
 import { AssetViewGrid } from "@/components/asset-view";
+import { CurveTiles } from "@/components/library";
 import { ReviewLegend } from "@/components/review-legend";
 import { SubcomponentPanel } from "@/components/subcomponents";
 import { FileLink, Tag } from "@/components/ui";
@@ -33,26 +34,12 @@ export function generateStaticParams() {
 const STATUS_WORD: Record<string, string> = { live: "live", proposal: "proposal", reused: "reused", gap: "no curve yet" };
 
 function CurveList({ row, m }: { row: LibraryType; m: ManifestV3 }) {
-  const hazards = m.hazards.filter((h) => !h.outside_the_five);
+  // the library's columns: the five hazards, then heat
+  const hazards = m.hazards.filter((h) => !h.outside_the_five || h.slug === "heat");
   return (
     <section className="rounded-lg border border-border bg-card" aria-label="The curves">
-      <div className="px-3 pt-2.5 pb-1 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">The curves</div>
-      <ul className="grid gap-1 px-3 pb-3 text-[12.5px] md:grid-cols-2 xl:grid-cols-5">
-        {hazards.map((h) => {
-          const t = row.tiles[h.slug];
-          if (!t) return null;
-          return (
-            <li key={h.slug}>
-              <Link href={t.href} title={[t.summary, t.halves].filter(Boolean).join("\n")} aria-label={t.aria_label}
-                className={`flex h-full flex-col rounded-md border px-2.5 py-1.5 hover:border-accent/60 ${t.status === "gap" ? "tile-gap border-border" : t.status === "proposal" ? "border-dashed border-foreground/30" : t.status === "reused" ? "hatch-reused border-border" : "border-border"}`}>
-                <span className="font-medium">{h.label}</span>
-                <span className="text-[11.5px] text-muted-foreground">{STATUS_WORD[t.status]}{t.status !== "gap" ? ` · ${t.word}` : ""}{t.partial && t.status !== "gap" ? " · partial" : ""}</span>
-                {SHOW_FIELD_REPORTS ? <span className="text-[11.5px] text-muted-foreground">{t.occurrence.label === "not searched" || t.occurrence.label === "no register" ? "field reports: not searched" : `field reports: ${t.occurrence.label}`}</span> : null}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="px-3 pt-2.5 pb-1.5 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">The curves</div>
+      <CurveTiles tiles={row.tiles} hazards={hazards} />
     </section>
   );
 }
@@ -141,9 +128,11 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
           <Tag>{tiles.length} hazards: {statusLine}</Tag>
           {v?.reference && !sharedCell ? <Tag title={v.reference.source}>{v.reference.label}</Tag> : null}
         </div>
+        {/* the profile, and the one finding the sections below do not state in one place; what each hazard has is in
+            "The curves" */}
         <p className="mt-1 max-w-[1100px] text-[13.5px] leading-snug">
           {type.profile ? <span className="text-muted-foreground">{type.profile[0].toUpperCase() + type.profile.slice(1)}. </span> : null}
-          {sharedCell ? `Every hazard is one real-estate cell shared by the building types; the pages below show the ${type.building?.toLowerCase()} rows.` : v?.summary}
+          {sharedCell ? `Every hazard is one real-estate cell shared by the building types; the pages below show the ${type.building?.toLowerCase()} rows.` : v?.uncovered}
         </p>
       </div>
       <div className="mt-3 space-y-3">

@@ -67,13 +67,13 @@ export function Swatch({ state, className = "" }: { state: CoverageState; classN
   return <span aria-hidden className={`inline-block h-2.5 w-2.5 shrink-0 rounded-[3px] border border-black/15 ${className}`} style={{ background: STATE_CSS[state] }} />;
 }
 
-export function CoverageLegend({ words, counts }: { words: Record<CoverageState, string>; counts?: Partial<Record<CoverageState, number>> }) {
+export function CoverageLegend({ words, meaning, counts }: { words: Record<CoverageState, string>; meaning?: Record<CoverageState, string>; counts?: Partial<Record<CoverageState, number>> }) {
   return (
     <ul className="space-y-1 text-[12.5px]" aria-label="What the colours mean">
       {STATE_ORDER.map((s) => {
         const n = counts?.[s];
         return (
-          <li key={s} className={`flex items-center gap-2 ${counts && !n ? "opacity-45" : ""}`}>
+          <li key={s} title={meaning?.[s]} className={`flex items-center gap-2 ${counts && !n ? "opacity-45" : ""}`}>
             <Swatch state={s} />
             <span className="leading-tight">{words[s]}</span>
             {counts ? <span className="tabular ml-auto text-[11.5px] text-muted-foreground">{n ?? 0}</span> : null}
@@ -417,11 +417,11 @@ export function TwinCoverage({
           <div className="flex flex-col gap-3 lg:absolute lg:inset-0">
             <div className="shrink-0">
               <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">What the colours mean <span className="font-normal normal-case tracking-normal">· parts counted</span></div>
-              <CoverageLegend words={cov.state_words} counts={counts} />
+              <CoverageLegend words={cov.state_words} meaning={cov.state_meaning} counts={counts} />
             </div>
             <div className="flex min-h-0 flex-1 flex-col">
               <div className="mb-1 shrink-0 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{treeName(treeKey)}, as the twin breaks it down</div>
-              {hz.gap ? <p className="mb-1 shrink-0 text-[12px] text-muted-foreground">No curve for {hz.hazard.label.toLowerCase()} yet: every part is in the value with no curve.</p> : null}
+              {hz.gap ? <p className="mb-1 shrink-0 text-[12px] text-muted-foreground">No curve for {hz.hazard.label.toLowerCase()} yet: no part has a curve yet.</p> : null}
               <ul className="thin-scroll max-h-[360px] min-h-0 flex-1 space-y-0.5 overflow-y-auto pr-1 lg:max-h-none">
                 {systems.map((row) => (
                   <li key={row.node} className={`rounded px-1.5 py-1 ${selected === row.node ? "bg-muted" : "hover:bg-muted/60"}`}>

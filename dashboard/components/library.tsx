@@ -36,7 +36,7 @@ function second(t: LibraryTile, lens: string): string {
   return t.word ?? "no tier stated";
 }
 
-function TileBox({ t, lens, tabIndex, onKey, rc }: { t: LibraryTile; lens: string; tabIndex: number; onKey: (e: React.KeyboardEvent<HTMLAnchorElement>) => void; rc: string }) {
+function TileBox({ t, lens, tabIndex, onKey, rc }: { t: LibraryTile; lens: string; tabIndex?: number; onKey?: (e: React.KeyboardEvent<HTMLAnchorElement>) => void; rc?: string }) {
   const gap = t.status === "gap";
   const title = [t.summary, t.halves, t.building_parts?.length ? `${t.building} rows: ${t.building_parts.join(", ")}` : null].filter(Boolean).join("\n");
   return (
@@ -56,6 +56,21 @@ function TileBox({ t, lens, tabIndex, onKey, rc }: { t: LibraryTile; lens: strin
       </span>
       <span className="truncate text-[12px] text-[var(--tile-muted)]">{second(t, lens)}</span>
     </Link>
+  );
+}
+
+// An asset page's curves: one tile per hazard, the library's own tile (Status / Evidence view) under the hazard's name.
+export function CurveTiles({ tiles, hazards }: { tiles: Record<string, LibraryTile>; hazards: { slug: string; label: string }[] }) {
+  const shown = hazards.filter((h) => tiles[h.slug]);
+  return (
+    <ul className="grid gap-1.5 px-3 pb-3 sm:grid-cols-3 xl:grid-cols-6">
+      {shown.map((h) => (
+        <li key={h.slug}>
+          <div className="px-0.5 pb-0.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{h.label}</div>
+          <TileBox t={tiles[h.slug]} lens="evidence" />
+        </li>
+      ))}
+    </ul>
   );
 }
 

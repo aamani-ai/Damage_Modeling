@@ -130,5 +130,5 @@ export function Dl({ rows, labelWidth = 92 }: { rows: [ReactNode, ReactNode][]; 
 export const TOGGLE_CLASS = "inline-flex cursor-pointer items-center gap-1.5 text-[12.5px] font-medium text-foreground hover:text-accent";
 
 export function ToggleArrow({ open }: { open: boolean }) {
-  return <span aria-hidden className="inline-block w-3 text-[11px] leading-none text-muted-foreground">{open ? "▾" : "▸"}</span>;
+  return <span aria-hidden className="inline-block w-4 text-[16px] leading-none text-muted-foreground">{open ? "▾" : "▸"}</span>;
 }

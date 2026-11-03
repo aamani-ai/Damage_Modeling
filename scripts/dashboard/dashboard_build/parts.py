@@ -297,15 +297,16 @@ def substation_crosswalk(out_dir: Path) -> dict[str, Any]:
 
 def _state_words(state: str, tier_span: str | None, extra: str | None = None) -> str:
     words = {
-        "curve": "curve · " + tier_words(tier_span) if tier_span and tier_span != "–" else "curve",
-        "partial": "curve for part of it · " + tier_words(tier_span) if tier_span and tier_span != "–" else "curve for part of it",
-        "whole": "one curve for the whole " + (extra or "asset"),
+        # the same words as the subsystem table and the picture: has a curve · partial · in the whole-… curve · no curve yet
+        "curve": "has a curve · " + tier_words(tier_span) if tier_span and tier_span != "–" else "has a curve",
+        "partial": "partial · " + tier_words(tier_span) if tier_span and tier_span != "–" else "partial",
+        "whole": "in the whole-" + (extra or "asset") + " curve",
         "reused": "reused curve · " + tier_words(tier_span) if tier_span and tier_span != "–" else "reused curve",
-        "withheld": "named, no response yet (withheld)",
-        "no_curve": "no curve",
+        "withheld": "named, left out for now",
+        "no_curve": "no curve yet",
         "not_named": "not named by this cell",
-        "gap": "no cell yet",
-        "exposure_modifier": "no own curve; takes the other parts' damage ratio",
+        "gap": "no curve yet",
+        "exposure_modifier": "no curve of its own; takes other parts' damage",
     }
     return words.get(state, state)
 
@@ -416,7 +417,7 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                     if rows_here and len(modeled) == len(rows_here):
                         st, words = "reused", _state_words("reused", span)
                     elif modeled:
-                        st, words = "partial", f"curve for part of it: {_join([l['item'].lower() for l in modeled])} · {tier_words(span)}"
+                        st, words = "partial", f"partial: {_join([l['item'].lower() for l in modeled])} · {tier_words(span)}"
                     else:
                         st, words = "withheld", "in the station's value, withheld by this binding"
                     cellv.update({"state": st, "words": words, "mark": "▨" if st != "withheld" else "▢", "tier_span": span,
@@ -852,12 +853,21 @@ def asset_plain_sentence(a_def: dict[str, Any], rows: list[dict[str, Any]], hz: 
         detail = (whats[0] + (" each" if len(hs) > 1 and not whats[0].endswith("only") else "")) if len(set(whats)) == 1 and whats else (_join([f"{h}: {w}" for h, w in hs if w]) if len(hs) > 1 else (hs[0][1] if hs[0][1] else ""))
         bits.append(f"{names} {verb} {evidence}" + (f" ({detail})" if detail else ""))
     if gaps:
-        bits.append(f"{_join(gaps)} {'has' if len(gaps) == 1 else 'have'} no cell yet")
+        bits.append(f"{_join(gaps)} {'has' if len(gaps) == 1 else 'have'} no curve yet")
     s = "; ".join(bits)
     s = s[:1].upper() + s[1:] + "."
     if quals and len(set(quals)) == 1 and quals[0] != "live":
         s += " All of them are " + ("proposals, not in use yet." if quals[0] == "proposal" else "borrowed from another asset's curve.")
+    u = uncovered_sentence(a_def, rows, hz)
+    return s + (f" {u}" if u else "")
+
+
+def uncovered_sentence(a_def: dict[str, Any], rows: list[dict[str, Any]], hz: list[dict[str, Any]]) -> str | None:
+    """'4 parts of the wind farm have no curve under any hazard: …' — the one finding the per-hazard sections below
+    do not state in one place."""
+    noun = singular(a_def.get("noun", a_def["label"]))
+    five = [h for h in hz if not h["outside_the_five"]]
     none_any = [label_case(row["label"].split(":")[0]) for row in rows if all(row["cells"].get(h["slug"], {}).get("state") in (None, "gap", "no_curve", "not_named", "withheld", "exposure_modifier") for h in five)]
-    if none_any:
-        s += f" {len(none_any)} part{'s' if len(none_any) != 1 else ''} of the {noun} {'have' if len(none_any) != 1 else 'has'} no curve under any hazard: {_join(none_any)}."
-    return s
+    if not none_any:
+        return None
+    return f"{len(none_any)} part{'s' if len(none_any) != 1 else ''} of the {noun} {'have' if len(none_any) != 1 else 'has'} no curve under any hazard: {_join(none_any)}."

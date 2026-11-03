@@ -2,16 +2,20 @@
 
 // The asset page's picture (DCD-D21): one reference model, hazard by hazard — the same plant coloured by what each
 // cell does with it — and the table that lines every hazard up against the twin's systems, so a reader sees where
-// the cells split the plant differently (09 §3, row 5).
+// the cells split the plant differently (09 §3, row 5). The picture folds away (?picture=hidden) like the cell page's,
+// and a folded picture does not load the model.
 import Link from "next/link";
 import { useUrlParam } from "@/lib/url-state";
 import type { Coverage, CoverageState } from "@/lib/types";
 import { Swatch, TwinCoverage, hazardOf } from "./twin-coverage";
+import { ToggleArrow, TOGGLE_CLASS } from "./ui";
 
 const STATUS_WORD: Record<string, string> = { live: "live", proposal: "proposal", reused: "reused", gap: "no curve yet" };
 
 export function AssetCoverage({ cov, loadOrder }: { cov: Coverage; loadOrder: string[] }) {
   const [hzParam, setHz] = useUrlParam("hazard");
+  const [picture, setPicture] = useUrlParam("picture");
+  const open = picture !== "hidden";
   const hz = hazardOf(cov, hzParam);
   const picker = (
     <div role="radiogroup" aria-label="Which hazard" className="inline-flex flex-wrap rounded-md border border-border bg-card p-0.5 text-[12px]">
@@ -23,12 +27,25 @@ export function AssetCoverage({ cov, loadOrder }: { cov: Coverage; loadOrder: st
       ))}
     </div>
   );
+  const title = (
+    <button type="button" aria-expanded={open} aria-controls="asset-coverage-body" onClick={() => setPicture(open ? "hidden" : null)} className={`${TOGGLE_CLASS} normal-case tracking-normal`}>
+      <ToggleArrow open={open} />What each curve covers
+    </button>
+  );
+  if (!open) {
+    return (
+      <section id="asset-coverage" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="What each curve covers">
+        <div className="px-3 py-2">{title}</div>
+      </section>
+    );
+  }
   return (
     <section id="asset-coverage" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="What each curve covers">
-      <TwinCoverage cov={cov} loadOrder={loadOrder} hazardSlug={hz.hazard.slug} mode="asset" title="What each curve covers" hazardPicker={picker} height={480} />
+      <div id="asset-coverage-body">
+      <TwinCoverage cov={cov} loadOrder={loadOrder} hazardSlug={hz.hazard.slug} mode="asset" title={title} hazardPicker={picker} height={480} />
       <div className="flex flex-wrap items-center gap-x-3 border-t border-border px-3 py-2 text-[12.5px]">
         {hz.gap ? (
-          <span className="text-muted-foreground">{hz.hazard.label}: no curve for this asset yet{hz.href ? "" : "; the catalogue lists it as a gap"}.</span>
+          <span className="text-muted-foreground">{hz.hazard.label}: no curve for this asset yet.</span>
         ) : (
           <>
             <span>
@@ -37,6 +54,7 @@ export function AssetCoverage({ cov, loadOrder }: { cov: Coverage; loadOrder: st
             {hz.href ? <Link href={hz.href} className="ml-auto text-accent hover:underline">open the {hz.hazard.label.toLowerCase()} curve ▸</Link> : null}
           </>
         )}
+      </div>
       </div>
     </section>
   );
@@ -47,11 +65,13 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
   const [, setHz] = useUrlParam("hazard");
   const [, setView] = useUrlParam("view");
   const [, setSel] = useUrlParam("sel");
+  const [, setPicture] = useUrlParam("picture");
   // a cell shows that system on the picture above, for that hazard
   const show = (hazard: string | null, tree: string, node: string) => {
     if (hazard) setHz(hazard);
     setView(tree === trees[0] ? null : tree);
     setSel(node);
+    setPicture(null);
     document.getElementById("asset-coverage")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
   const name = (k: string) => cov.trees[k].nodes[cov.trees[k].root]?.n ?? k;
@@ -111,7 +131,7 @@ function MatrixGroup({ label, rows, cov, show }: { label: string | null; rows: C
             const c = r.cells[h.hazard.slug];
             if (!c) return <td key={h.hazard.slug} className="py-1 pr-2 text-muted-foreground">—</td>;
             return (
-              <td key={h.hazard.slug} className="py-0.5 pr-1.5" title={c.states.map((s) => cov.state_words[s as CoverageState]).join(" · ")}>
+              <td key={h.hazard.slug} className="py-0.5 pr-1.5" title={c.states.map((s) => cov.state_meaning?.[s as CoverageState] ?? cov.state_words[s as CoverageState]).join("\n")}>
                 <button type="button" onClick={() => show(h.hazard.slug, r.tree, r.node)} className="flex w-full items-start gap-1.5 rounded px-1 py-0.5 text-left hover:bg-muted" aria-label={`${r.name} × ${h.hazard.label}: ${c.words}${c.mixed ? " for some parts" : ""} — show it on the picture`}>
                   <Swatch state={c.state} className="mt-[3px]" />
                   <span className="leading-snug">

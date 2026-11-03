@@ -282,7 +282,7 @@ export function CapabilityLedger({ cell }: { cell: CellV2 }) {
   const flags = (cap.limitation_flags ?? []) as string[];
   return (
     <div className="text-[12px]">
-      <Eyebrow>The capability declaration, as the artifact writes it</Eyebrow>
+      <Eyebrow>What the curve file allows it to be used for</Eyebrow>
       <Kv label="failure-unit DR" value={<CapValue v={cap.failure_unit_scalar_dr} />} />
       <Kv label="scenario loss" value={<CapValue v={cap.scenario_loss_given_value_basis} />} />
       <Kv label="intrinsic spread" value={<CapValue v={cap.curve_intrinsic_spread} />} />

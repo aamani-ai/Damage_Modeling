@@ -313,7 +313,7 @@ export interface Split {
 }
 export interface TwinBlock { available: boolean; sentence: string; sha256: string | null; rows: number | null; nodes: Record<string, { node: string; name: string; disposition: string; why: string }[]>; leads?: boolean }
 export interface AssetViewV2 extends Omit<AssetView, "rows"> {
-  rows: AssetRowV2[]; parts_by_cell: Record<string, PartsByCell>; split: Split; twin: TwinBlock; summary_v0: string;
+  rows: AssetRowV2[]; parts_by_cell: Record<string, PartsByCell>; split: Split; twin: TwinBlock; summary_v0: string; uncovered?: string | null;
   reference: (AssetView["reference"] & { note?: string; link?: string | null }) | null;
   value_source: { label: string; path: string; sha256?: string | null; pin_ok?: boolean | null } | null;
   // real estate only: the subsystems per building, their counts, and the notes the building pages carry
@@ -372,7 +372,7 @@ export interface Coverage {
   type: { slug: string; label: string; category: string; category_label: string; profile: string | null; building: string | null; also_buildings: string[] | null; picture_note: string | null; catalogue_asset: string };
   twin: { asset: string; name: string; model: string; root: string; plant_model: string | null; plant_root: string | null; plant_name: string | null; commit: string; crosswalk: string };
   trees: Record<string, TwinTree>; hazards: CoverageHazard[]; matrix: MatrixRow[];
-  state_words: Record<CoverageState, string>; state_short: Record<CoverageState, string>;
+  state_words: Record<CoverageState, string>; state_short: Record<CoverageState, string>; state_meaning?: Record<CoverageState, string>;
 }
 export interface TwinViewerManifest { twin_repo: string; twin_commit: string; three: string; load_order: string[] }
 

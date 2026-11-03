@@ -82,11 +82,11 @@ export function AssetViewGrid({ v }: { v: AssetViewV2; m: ManifestV2 }) {
         </div>
         <InfoHint label="How to read a cell">
           <div className="space-y-1">
-            <div><span className="font-medium">curve · published</span> — this part has a curve under this hazard; the words say how sure we are (field-calibrated · published · borrowed · our judgment)</div>
-            <div><span className="font-medium">curve for part of it</span> — some of the part&apos;s value has a curve, the rest has none</div>
-            <div><span className="font-medium">one curve for the whole …</span> — the cell prices the whole asset with one curve, so every part is inside it</div>
-            <div><span className="font-medium">named, no response yet</span> — the cell lists the part but withholds a number (a stated &quot;not zero&quot;)</div>
-            <div><span className="font-medium">no curve</span> — the cell says this part has no curve yet · <span className="font-medium">not named by this cell</span> — the cell is silent about it · <span className="font-medium">no cell yet</span> — no entry exists</div>
+            <div><span className="font-medium">has a curve · published</span> — this part has a curve under this hazard; the words say how sure we are (field-calibrated · published · borrowed · our judgment)</div>
+            <div><span className="font-medium">partial</span> — some of the part&apos;s value has a curve, the rest has none</div>
+            <div><span className="font-medium">in the whole-… curve</span> — the cell prices the whole asset with one curve, so every part is inside it</div>
+            <div><span className="font-medium">named, left out for now</span> — the cell lists the part but withholds a number (a stated &quot;not zero&quot;)</div>
+            <div><span className="font-medium">no curve yet</span> — no curve prices this part · <span className="font-medium">not named by this cell</span> — the cell is silent about it</div>
             <div className="text-muted-foreground">Hover a cell for the cell&apos;s own part names and the field-report state. Arrow keys move; Enter opens the cell.</div>
           </div>
         </InfoHint>
@@ -99,7 +99,7 @@ export function AssetViewGrid({ v }: { v: AssetViewV2; m: ManifestV2 }) {
               {five.map((h) => (
                 <th key={h.slug} className="px-2 pb-1.5 pt-2 text-left font-medium">
                   {h.entry_id ? <Link href={`/cells/${h.entry_id}`} className="hover:text-accent hover:underline">{h.label}</Link> : h.label}
-                  {h.status ? <span className="ml-1 font-normal normal-case tracking-normal text-muted-foreground/80">{h.status === "live" ? "" : h.status === "proposal" ? "· proposal" : h.status === "reused" ? "· reused" : "· gap"}</span> : null}
+                  {h.status ? <span className="ml-1 font-normal normal-case tracking-normal text-muted-foreground/80">{h.status === "live" ? "" : h.status === "proposal" ? "· proposal" : h.status === "reused" ? "· reused" : "· no curve yet"}</span> : null}
                 </th>
               ))}
               {showOutside ? outside.map((h, i) => (

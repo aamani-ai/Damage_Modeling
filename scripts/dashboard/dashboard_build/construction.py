@@ -16,6 +16,7 @@ from typing import Any
 
 from .common import HELPERS, LOCAL_PATH_RE, ROOT, SHOW_FIELD_REPORTS, humanise, parse_markdown_table, rel, tier_span
 from .plain import TIER_MEANING, TIER_SHORT, tier_words
+from .twin import STATE_MEANING as twin_meaning, STATE_WORDS as twin_words
 
 # symbol → (meaning, the artifact parameter it reads, or None for an axis or a derived quantity)
 Var = tuple[str, str, str | None]
@@ -222,7 +223,7 @@ def construction_block(c: dict[str, Any], artifact_path: str | None, status: str
         "scope_note": scope_note(c.get("entry_id"), c.get("part")),
         "production_use": {
             "state": production_state, "consumer_pin": consumer_pin, "hazard": hazard_use,
-            "sentence": ("In use: the platform's loss calculations can use this curve. That does not mean a map or screening run has chosen it yet."
+            "sentence": ("In use: the platform's loss calculations can use this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
                          if production_state == "runtime_indexed" else
                          "Borrowed: the platform prices this asset with a curve built for another asset; it has no curve of its own."
                          if production_state == "reused_binding" else
@@ -279,13 +280,15 @@ def legend(cat_text: str) -> dict[str, Any]:
             {"key": "partial", "word": "partial", "meaning": "A curve covers only part of this subsystem; the rest has none."},
             {"key": "whole", "word": "in the whole-building curve", "meaning": "No curve of its own: a curve for the whole building prices it with the rest of the structure."},
             {"key": "gap", "word": "no curve yet", "meaning": "No curve covers this subsystem; the row says why and links the research."},
+            # the picture's other states (twin.STATE_MEANING), in the same words
+            *({"key": k, "word": twin_words[k], "meaning": twin_meaning[k]} for k in ("conditioner", "no_direct_damage", "outside")),
         ],
         "completeness": [
             {"key": "value_share", "word": "Value share", "meaning": "This part's share of the asset's value: of its reference value where the asset has one, else the share the cell's own units declare (hover for the basis)."},
         ],
         "evidence": [{"key": k, "word": TIER_SHORT[k], "meaning": TIER_MEANING[k].removeprefix(f"{TIER_SHORT[k]}: ")} for k in ("T1", "T2", "T3", "T4")],
         "production": [
-            {"key": "runtime_indexed", "word": "in production index", "meaning": "The platform's loss calculations can use this curve. That does not mean a map or screening run has chosen it yet."},
+            {"key": "runtime_indexed", "word": "in production index", "meaning": "The platform's loss calculations can use this curve. Whether Hazard's maps already use it is a separate question, answered under Used by Hazard."},
             {"key": "reused_binding", "word": "reused in production", "meaning": "The platform prices it with a curve built for another asset."},
             {"key": "not_runtime_indexed", "word": "not in production", "meaning": "The platform's loss calculations cannot use it yet."},
         ],
