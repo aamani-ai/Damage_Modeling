@@ -12,11 +12,18 @@ import type { LibraryTile, ManifestV3 } from "@/lib/types";
 import { InfoHint } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
-const LENS_LABEL: Record<string, string> = { status: "Status", evidence: "Evidence", occurrence: "Field reports", value: "Value covered", review: "Read by" };
-const STATUS_WORD: Record<string, string> = { live: "live", proposal: "proposal", reused: "reused", gap: "gap" };
+const LENS_LABEL: Record<string, string> = { evidence: "Evidence", occurrence: "Field reports", value: "Value covered", review: "Read by" };
+const STATUS_WORD: Record<string, string> = { live: "live", proposal: "proposal", reused: "reused", gap: "no curve yet" };
+// a tile's status is its shade, in every view: live white, proposal grey, reused dashed, no curve yet dark grey
+const STATUS_TILE: Record<string, string> = {
+  live: "border-border bg-[var(--tile-live)]",
+  proposal: "border-border bg-[var(--tile-proposal)]",
+  reused: "border-dashed border-[var(--tile-reused-border)] bg-[var(--tile-live)]",
+  gap: "border-border bg-[var(--tile-gap)]",
+};
 
 function second(t: LibraryTile, lens: string): string {
-  if (t.status === "gap") return t.gap_line ?? "no curve yet";
+  if (t.status === "gap") return t.gap_line ?? "see why";
   if (lens === "occurrence") return t.occurrence.label === "not searched" || t.occurrence.label === "no register" ? "field reports: not searched" : `field reports: ${t.occurrence.label}`;
   if (lens === "value") return t.share_covered != null ? `${fmtPct(t.share_covered)} of value covered` : "share not stated";
   if (lens === "review") return t.review.review ? `reviewed by ${t.review.review.by}` : `read by an agent ${t.review.entry_read_on?.slice(5) ?? ""}`;
@@ -32,25 +39,26 @@ function TileBox({ t, lens, tabIndex, onKey, rc }: { t: LibraryTile; lens: strin
       data-rc={rc}
       tabIndex={tabIndex}
       onKeyDown={onKey}
-      aria-label={lens === "status" || lens === "evidence" ? t.aria_label : `${t.aria_label}; ${second(t, lens)}`}
+      aria-label={lens === "evidence" ? t.aria_label : `${t.aria_label}; ${second(t, lens)}`}
       title={title}
-      // every tile looks the same: its words say what it is (status, evidence, value, who read it)
-      className="flex h-[52px] w-full flex-col justify-center rounded-md border border-border bg-card px-2 hover:border-accent/60"
+      className={`flex h-[52px] w-full flex-col justify-center rounded-md border px-2 hover:border-accent/60 ${STATUS_TILE[t.status]}`}
     >
       <span className="flex items-baseline gap-1.5 text-[12px] font-medium">
         <span className="text-foreground">{STATUS_WORD[t.status]}</span>
         {t.partial && !gap ? <span className="text-[11px] font-normal text-muted-foreground">· partial</span> : null}
         {t.no_evaluator ? <span className="ml-auto whitespace-nowrap text-[11px] font-normal text-muted-foreground">not drawn</span> : null}
       </span>
-      <span className="truncate text-[12px] text-muted-foreground">{second(t, lens)}</span>
+      <span className="truncate text-[12px] text-[var(--tile-muted)]">{second(t, lens)}</span>
     </Link>
   );
 }
 
 export function Library({ m }: { m: ManifestV3 }) {
   const [lensParam, setLensParam] = useUrlParam("lens");
-  const lens = m.lenses.includes(lensParam ?? "") ? (lensParam as string) : "status";
-  const setLens = (l: string) => setLensParam(l === "status" ? null : l);
+  // the status is the tile's first line and shade in every view, so the views are only for the second line
+  const lenses = m.lenses.filter((l) => l !== "status" && (SHOW_FIELD_REPORTS || l !== "occurrence"));
+  const lens = lenses.includes(lensParam ?? "") ? (lensParam as string) : "evidence";
+  const setLens = (l: string) => setLensParam(l === "evidence" ? null : l);
   // the five catalogue hazards, then heat: no cell, but its research so far is linked from the tile
   const hazards = m.hazards.filter((h) => !h.outside_the_five || h.slug === "heat");
   const grid = useRef<HTMLDivElement>(null);
@@ -74,18 +82,17 @@ export function Library({ m }: { m: ManifestV3 }) {
       <div className="flex flex-wrap items-center gap-2 text-[12px]">
         <span className="text-muted-foreground">Show</span>
         <div role="radiogroup" aria-label="Library lens" className="inline-flex rounded-md border border-border bg-card p-0.5">
-          {m.lenses.filter((l) => SHOW_FIELD_REPORTS || l !== "occurrence").map((l) => (
+          {lenses.map((l) => (
             <button key={l} type="button" role="radio" aria-checked={lens === l} onClick={() => setLens(l)} className={`rounded px-2 py-0.5 ${lens === l ? "bg-accent/10 text-accent" : "text-muted-foreground hover:text-foreground"}`}>
               {LENS_LABEL[l] ?? l}
             </button>
           ))}
         </div>
         <InfoHint label="How to read a tile">
+          {/* the words themselves are in "What the words mean" above; this says only how to use the grid */}
           <div className="space-y-1">
-            <div><span className="font-medium">live</span> — finished and in use · <span className="font-medium">proposal</span> — built and checked, not in use yet · <span className="font-medium">reused</span> — borrows another asset&apos;s curve · <span className="font-medium">gap</span> — no curve yet</div>
-            <div>The second line says how sure we are, in one word: the weaker of <span className="italic">how damage rises</span> and <span className="italic">how it becomes dollars</span>. Hover a tile for both.</div>
-            {Object.entries(m.tier_meaning).map(([k, v]) => <div key={k} className="text-muted-foreground">{v}</div>)}
-            <div><span className="font-medium">partial</span> — part of the asset&apos;s value has no curve yet.</div>
+            <div>A tile&apos;s first line and shade say what exists; the second line is the view chosen here.</div>
+            <div>Hover a tile for both halves of its evidence: <span className="italic">how damage rises</span> and <span className="italic">how it becomes dollars</span>.</div>
             <div className="text-muted-foreground">Arrow keys move between tiles; Enter opens the curve.</div>
           </div>
         </InfoHint>
@@ -133,7 +140,7 @@ export function Library({ m }: { m: ManifestV3 }) {
         </div>
       </div>
       <p className="mt-2 px-1 text-[12px] text-muted-foreground">
-        {SHOW_FIELD_REPORTS ? "Heat, icing and lightning have no damage curve yet; battery storage keeps field-report registers for them." : "Heat, icing and lightning have no damage curve yet."}
+        {SHOW_FIELD_REPORTS ? "Heat, icing and lightning have no damage curve yet; battery storage keeps field-report registers for them." : "Icing and lightning are not shown: no curve and no research yet."}
         {planned.length ? ` Planned categories: ${planned.join(", ").toLowerCase()}.` : ""}
       </p>
     </div>

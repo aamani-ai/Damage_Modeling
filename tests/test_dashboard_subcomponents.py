@@ -18,7 +18,7 @@ def test_every_expected_part_has_a_reconciling_curve_or_gap_record():
         asset = json.loads(path.read_text())
         records = asset["subcomponents"]
         rollup = asset["subcomponent_rollup"]
-        assert len(records) == len(asset.get("subsystem_rows") or asset["rows"]) * len(manifest["hazards"])
+        assert len(records) == len(asset.get("subsystem_rows") or asset["rows"]) * len([h for h in manifest["hazards"] if not h["outside_the_five"] or h["slug"] == "heat"])
         assert rollup["with_curve"] + rollup["gap"] == rollup["expected"] == len(records)
         assert rollup["complete"] + rollup["incomplete"] == rollup["expected"]
         assert all(r["coverage"] in ("curve", "gap") and r["completeness"] in ("complete", "incomplete") for r in records)
@@ -86,8 +86,11 @@ def test_where_each_number_came_from_follows_its_tier():
 def test_the_legend_reads_the_catalogue_status_table():
     legend = json.loads((DATA / "manifest.json").read_text())["legend"]
     assert legend["source"] == "docs/cells/CATALOGUE.md"
-    assert [s["key"] for s in legend["status"]] == ["live", "proposal", "reused", "gap"]
+    # the four catalogue statuses, each with the catalogue's own words kept, then the tile's "partial"
+    assert [s["key"] for s in legend["status"]] == ["live", "proposal", "reused", "gap", "partial"]
     assert all(s["meaning"] and "`" not in s["meaning"] for s in legend["status"])
+    assert all(s["catalogue"] for s in legend["status"][:4])
+    assert not any("runtime" in s["meaning"] or "binding" in s["meaning"] for s in legend["status"])
 
 
 def test_performance_hazard_gaps_and_whole_facility_labels_say_what_they_mean():

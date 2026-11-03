@@ -81,7 +81,7 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
           </tbody>
         </table>
         <p className="mt-1.5 text-[11.5px] text-muted-foreground">
-          A system shows its strongest state; &quot;and more&quot; means some of its parts are in another state. Click a cell to see that system on the picture above; a part&apos;s name opens its curve. Mapped from{" "}
+          A system shows its strongest state; &quot;for some parts&quot; means only some of its parts are in that state. Click a cell to see that system on the picture above; a part&apos;s name opens its curve. Mapped from{" "}
           <span className="font-mono">{cov.twin.crosswalk.split("/").slice(-1)[0]}</span>, a draft co-owned with Hazard.
         </p>
       </div>
@@ -112,11 +112,11 @@ function MatrixGroup({ label, rows, cov, show }: { label: string | null; rows: C
             if (!c) return <td key={h.hazard.slug} className="py-1 pr-2 text-muted-foreground">—</td>;
             return (
               <td key={h.hazard.slug} className="py-0.5 pr-1.5" title={c.states.map((s) => cov.state_words[s as CoverageState]).join(" · ")}>
-                <button type="button" onClick={() => show(h.hazard.slug, r.tree, r.node)} className="flex w-full items-start gap-1.5 rounded px-1 py-0.5 text-left hover:bg-muted" aria-label={`${r.name} × ${h.hazard.label}: ${c.words}${c.mixed ? " and more" : ""} — show it on the picture`}>
+                <button type="button" onClick={() => show(h.hazard.slug, r.tree, r.node)} className="flex w-full items-start gap-1.5 rounded px-1 py-0.5 text-left hover:bg-muted" aria-label={`${r.name} × ${h.hazard.label}: ${c.words}${c.mixed ? " for some parts" : ""} — show it on the picture`}>
                   <Swatch state={c.state} className="mt-[3px]" />
                   <span className="leading-snug">
                     <span>{c.words}</span>
-                    {c.mixed ? <span className="text-muted-foreground"> and more</span> : null}
+                    {c.mixed ? <span className="text-muted-foreground"> for some parts</span> : null}
                   </span>
                 </button>
                 {c.curve_parts.length ? (

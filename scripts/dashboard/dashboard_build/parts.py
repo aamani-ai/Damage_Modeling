@@ -348,10 +348,16 @@ def _construction_ref(curve: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def shown_hazards(hazards: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """The hazards an asset page lists: the five and heat. Icing and lightning have no curve and no research yet, so
+    they are listed only with the field reports."""
+    return [h for h in hazards if SHOW_FIELD_REPORTS or not h["outside_the_five"] or h["slug"] == "heat"]
+
+
 def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dict[str, dict[str, Any]], sl: dict[str, Any], registers: dict[tuple[str, str], Any],
                bess_values: dict[str, float] | None, fb_binding: dict[str, Any] | None, twin: dict[str, Any], sub_budget: dict[str, Any] | None,
                sub_crosswalk: dict[str, Any] | None, resolve_state: Any, all_curves: dict[str, dict[str, Any]] | None = None) -> dict[str, Any]:
-    hz = [h for h in sl["hazards"]]
+    hz = shown_hazards(sl["hazards"])
     by_hazard: dict[str, Any] = {}
     for e in entries:
         by_hazard[next(h["slug"] for h in hz if h["catalogue"] == e.data["hazard"])] = e

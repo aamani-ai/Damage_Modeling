@@ -21,7 +21,7 @@ from .common import (OUT, ROOT, SENTENCES, SHOW_FIELD_REPORTS, SOURCE, STATION_A
 from .faq import build_faq
 from .occurrence import (all_registers, asset_slug, bess_bucket_values, hazard_slug, register_for, resolve_state, slugs,
                          twin_crosswalk_pin)
-from .parts import asset_plain_sentence, asset_view, substation_budget, substation_crosswalk
+from .parts import asset_plain_sentence, asset_view, shown_hazards, substation_budget, substation_crosswalk
 from .plain import (FOR_HAZARD, STATION_NAMES, STEPS, TIER_MEANING, TIER_PLAIN, TIER_SHORT, ShapeSource, capability_sentences, curve_caption, halves,
                     main_logic, one_word, parameters_plain, plain_rail, plain_text, resolve_key_sources, station_plain, steps4, tier_words)
 from .registers import load_registers
@@ -726,7 +726,7 @@ def build(write: bool = True) -> dict[str, Any]:
     n_types = sum(len(c_["types"]) for c_ in library_rows)
     n_cats = sum(1 for c_ in library_rows if c_["types"])
     manifest["summary"] = library_sentence(counts, f"{n_types} asset types in {n_cats} categories", len(five), agent_read, len(entries), searched)
-    manifest["scope_line"] = f"across {n_types} asset types in {n_cats} categories and {len(five)} hazards (heat, the sixth column, has no curves)"
+    manifest["scope_line"] = f"across {n_types} asset types in {n_cats} categories and {len(five) + 1} hazards"
     manifest["state_words"] = twin_mod.STATE_WORDS
     # ─── the Review page (G17): about curves only, one card per cell — who has read it, field reports, what is open
     review_cells = []
@@ -851,7 +851,7 @@ def build(write: bool = True) -> dict[str, Any]:
 
     subcomponent_problems = []
     for aslug, asset in assets_out.items():
-        expected = len(asset.get("subsystem_rows") or asset["rows"]) * len(sl["hazards"])
+        expected = len(asset.get("subsystem_rows") or asset["rows"]) * len(shown_hazards(sl["hazards"]))
         if len(asset["subcomponents"]) != expected:
             subcomponent_problems.append(f"{aslug}: {len(asset['subcomponents'])} records, expected {expected}")
         for s_ in asset["subcomponents"]:

@@ -45,7 +45,8 @@ export function ReviewLegend({ legend, sourceHref, open = false, groups }: { leg
   }, []);
   const keep = (items: LegendItem[]) => (pageText == null ? items : items.filter((i) => variants(i.word).some((v) => pageText.includes(v))));
   const all: Record<LegendGroup, { title: string; items: LegendItem[] }> = {
-    status: { title: "A curve's status", items: legend.status },
+    // where the subsystem words are shown, their own "partial" says it for a subsystem
+    status: { title: "A curve's status", items: groups.includes("subsystem") ? legend.status.filter((i) => i.key !== "partial") : legend.status },
     evidence: { title: "Where its numbers come from", items: legend.evidence },
     lenses: { title: "How a curve is described", items: legend.lenses },
     marks: { title: "How a tile is drawn", items: legend.marks },

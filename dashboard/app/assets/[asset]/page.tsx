@@ -62,7 +62,8 @@ function Subcomponents({ v, m, defaultHazard, building }: { v: AssetViewV2; m: M
   const subs = building ? v.subcomponents.filter((s) => s.group?.key === building) : v.subcomponents;
   const rollup = (building ? v.subsystem_groups?.[building] : null) ?? v.subcomponent_rollup;
   const notes = [v.anatomy_note?.sentence, building ? v.building_notes?.[building] : null].filter((n): n is string => !!n);
-  const hazards = m.hazards.map((h) => ({ slug: h.slug, label: h.label }));
+  // the five hazards and heat; icing and lightning (no curve, no research yet) only with the field reports
+  const hazards = m.hazards.filter((h) => SHOW_FIELD_REPORTS || !h.outside_the_five || h.slug === "heat").map((h) => ({ slug: h.slug, label: h.label }));
   const first = defaultHazard ?? hazards.find((h) => (rollup.by_hazard?.[h.slug]?.with_curve ?? 0) > 0)?.slug ?? hazards[0].slug;
   return <SubcomponentPanel subs={subs} rollup={rollup} hazards={hazards} defaultHazard={first} cards={constructionCards(subs)} legend={m.legend} blobBase={blobBase(m)} notes={notes} />;
 }

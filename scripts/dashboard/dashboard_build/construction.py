@@ -253,9 +253,9 @@ def _units() -> list[dict[str, str]]:
 PLAIN_STATUS = {
     "live": "Finished and in use: the platform's loss calculations can use this curve today.",
     "proposal": "Built and checked, but not in use yet: it waits for an owner's review before the platform can use it.",
-    "reused": "No curve of its own: it borrows a curve already built for another asset, which its page names (for example, "
+    "reused": "No curve of its own: it borrows a live curve built for another asset, which its page names (for example, "
               "a substation borrows the substation part of a solar farm's curve).",
-    "gap": "No curve yet.",
+    "gap": "Nothing has been built for this asset and hazard yet; its page says why and lists the research so far.",
 }
 
 
@@ -271,13 +271,14 @@ def legend(cat_text: str) -> dict[str, Any]:
         "source": "docs/cells/CATALOGUE.md",
         # the catalogue's own definitions are for modelers (runtime index, consumer binding); the page says the same in
         # plain words and links the catalogue for the exact ones
-        "status": [{"key": s, "word": {"gap": "no curve yet"}.get(s, s), "meaning": PLAIN_STATUS[s], "catalogue": status_rows[s]}
-                   for s in ("live", "proposal", "reused", "gap")],
+        "status": [*({"key": s, "word": {"gap": "no curve yet"}.get(s, s), "meaning": PLAIN_STATUS[s], "catalogue": status_rows[s]}
+                     for s in ("live", "proposal", "reused", "gap")),
+                   {"key": "partial", "word": "partial", "meaning": "Part of the asset's value has no curve yet."}],
         "coverage": [
             {"key": "curve", "word": "has a curve", "meaning": "A curve covers the whole of this subsystem."},
             {"key": "partial", "word": "partial", "meaning": "A curve covers only part of this subsystem; the rest has none."},
             {"key": "whole", "word": "in the whole-building curve", "meaning": "No curve of its own: a curve for the whole building prices it with the rest of the structure."},
-            {"key": "gap", "word": "gap", "meaning": "No curve covers this subsystem; the row says why and links the research."},
+            {"key": "gap", "word": "no curve yet", "meaning": "No curve covers this subsystem; the row says why and links the research."},
         ],
         "completeness": [
             {"key": "complete", "word": "complete", "meaning": "Nothing left to build for this subsystem and hazard."},
@@ -299,7 +300,7 @@ def legend(cat_text: str) -> dict[str, Any]:
         "units": _units(), "units_source": UNITS_SOURCE,
         # the library's five views of a tile, and what its borders and fills mean
         "lenses": [
-            {"key": "status", "word": "Status", "meaning": "What exists for this asset and hazard: a live curve, a proposal, a reused curve, or no curve yet."},
+            {"key": "status", "word": "Status", "meaning": "The first line of every tile, and its shade: what exists for this asset and hazard."},
             {"key": "evidence", "word": "Evidence", "meaning": "How well supported the curve's numbers are, in one word: the weaker of its shape and its cost (hover for both)."},
             # field reports are hidden for now (SHOW_FIELD_REPORTS); the entry returns with them
             *([{"key": "occurrence", "word": "Field reports", "meaning": "Whether anyone has searched for real-world reports of this hazard damaging this asset, and what was found."}]
