@@ -133,7 +133,7 @@ export function ConstructionView({ k, legend, blobBase, curveHref, title }: { k:
                 <span className="font-mono">{p.name}</span>
                 <span className="font-mono tabular">{value(p.value)}</span>
                 <span className="text-muted-foreground">{p.definition}</span>
-                <span className="ml-auto">{p.tier_word ? <>{p.tier_word} <span className="font-mono text-[11px] text-muted-foreground">· {p.tier}</span></> : <span className="text-muted-foreground">{p.where_from === "unsourced" ? "no source cited" : `curve: ${k.curve_tiers.shape.word} shape · ${k.curve_tiers.cost.word} cost`}</span>}</span>
+                <span className="ml-auto">{p.tier_word ? <>{p.tier_word} <span className="font-mono text-[11px] text-muted-foreground">· {p.tier}</span></> : p.where_from === "unsourced" ? null : <span className="text-muted-foreground">curve: {k.curve_tiers.shape.word} shape · {k.curve_tiers.cost.word} cost</span>}</span>
               </div>
               <WhereFrom p={p} legend={legend} blobBase={blobBase} />
             </li>
