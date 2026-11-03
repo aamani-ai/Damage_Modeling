@@ -281,8 +281,6 @@ def legend(cat_text: str) -> dict[str, Any]:
             {"key": "gap", "word": "no curve yet", "meaning": "No curve covers this subsystem; the row says why and links the research."},
         ],
         "completeness": [
-            {"key": "complete", "word": "complete", "meaning": "Nothing left to build for this subsystem and hazard."},
-            {"key": "incomplete", "word": "incomplete", "meaning": "Something is still open: a gap, a part withheld, or a curve for only part of it."},
             {"key": "value_share", "word": "Value share", "meaning": "This part's share of the asset's value: of its reference value where the asset has one, else the share the cell's own units declare (hover for the basis)."},
         ],
         "evidence": [{"key": k, "word": TIER_SHORT[k], "meaning": TIER_MEANING[k].removeprefix(f"{TIER_SHORT[k]}: ")} for k in ("T1", "T2", "T3", "T4")],

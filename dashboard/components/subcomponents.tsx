@@ -10,7 +10,7 @@ import { useUrlParam } from "@/lib/url-state";
 import type { CurveConstruction, Legend, Subcomponent, SubcomponentRollup } from "@/lib/types";
 import { ConstructionView, HazardUseTag, ProductionTag } from "./construction-view";
 import { fmtPct } from "@/lib/format";
-import { FileLink, Tag } from "./ui";
+import { FileLink, Tag, ToggleArrow, TOGGLE_CLASS } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 export interface ConstructionCard { k: CurveConstruction; href: string; title: string }
@@ -18,12 +18,13 @@ export interface ConstructionCard { k: CurveConstruction; href: string; title: s
 const fileName = (p: string) => p.split("/").slice(-1)[0];
 
 function Counts({ r, legend }: { r: SubcomponentRollup; legend: Legend }) {
-  const word = (group: "coverage" | "completeness", key: string) => legend[group].find((i) => i.key === key)?.word ?? key;
+  // "complete" is a part with a whole curve, so the counts say curve, partial and no curve yet and nothing more
+  const word = (key: string) => legend.coverage.find((i) => i.key === key)?.word ?? key;
+  const partial = r.incomplete - r.gap;
   return (
     <span className="tabular">
-      <span className="font-medium">{r.expected}</span> expected · <span className="font-medium">{r.with_curve}</span> {word("coverage", "curve")} ·{" "}
-      <span className="font-medium">{r.gap}</span> {word("coverage", "gap")} · <span className="font-medium">{r.complete}</span> {word("completeness", "complete")} ·{" "}
-      <span className="font-medium">{r.incomplete}</span> {word("completeness", "incomplete")}
+      <span className="font-medium">{r.expected}</span> expected · <span className="font-medium">{r.with_curve}</span> {word("curve")}
+      {partial ? <> (<span className="font-medium">{partial}</span> {word("partial")})</> : null} · <span className="font-medium">{r.gap}</span> {word("gap")}
     </span>
   );
 }
@@ -138,10 +139,9 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
   const evidence = (s: Subcomponent) => s.evidence_labels.length ? s.evidence_labels.join(" · ") : "—";
   return (
     <section id="subcomponents" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="Every subsystem, curve or gap">
-      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-3 pt-2.5 pb-1">
-        <button type="button" aria-expanded={shown} aria-controls="subcomponents-body" onClick={() => setFold(shown ? "hidden" : null)}
-          className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold uppercase tracking-wide text-foreground hover:text-accent">
-          <span aria-hidden className="inline-block w-4 text-[16px] leading-none">{shown ? "▾" : "▸"}</span>Every subsystem, curve or gap
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-3 py-2">
+        <button type="button" aria-expanded={shown} aria-controls="subcomponents-body" onClick={() => setFold(shown ? "hidden" : null)} className={TOGGLE_CLASS}>
+          <ToggleArrow open={shown} />Every subsystem, curve or gap
         </button>
         {picker ? <span className="text-[12px]">all hazards: <Counts r={rollup} legend={legend} /></span> : null}
       </div>
@@ -169,7 +169,6 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
                   <th scope="col" className="px-3 py-1 font-medium">Subsystem</th>
                   <th scope="col" className="px-2 py-1 text-right font-medium">Value share</th>
                   <th scope="col" className="px-2 py-1 font-medium">Curve or gap</th>
-                  <th scope="col" className="px-2 py-1 font-medium">Complete</th>
                   <th scope="col" className="px-2 py-1 font-medium">Evidence</th>
                   <th scope="col" className="px-2 py-1 font-medium">Production</th>
                 </tr>
@@ -182,7 +181,7 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
                   return [
                     heading ? (
                       <tr key={`${id}-group`} className="border-t border-border">
-                        <th scope="colgroup" colSpan={6} className="px-3 pt-2 pb-0.5 text-left text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{s.group!.label}</th>
+                        <th scope="colgroup" colSpan={5} className="px-3 pt-2 pb-0.5 text-left text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{s.group!.label}</th>
                       </tr>
                     ) : null,
                     <tr key={id} className={`border-t border-border/60 align-top ${s.coverage === "gap" ? "text-muted-foreground" : ""}`}>
@@ -196,7 +195,6 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
                       </th>
                       <td className="px-2 py-1 text-right font-mono tabular" title={s.share_basis ?? undefined}>{s.share != null ? fmtPct(s.share, 1) : "—"}</td>
                       <td className="px-2 py-1">{s.coverage === "gap" ? <span className="tile-gap rounded-sm px-1">{coverageWord(s, legend)}</span> : coverageWord(s, legend)}</td>
-                      <td className="px-2 py-1">{s.completeness}</td>
                       <td className="px-2 py-1">{s.borrowed_from && !s.evidence_labels.includes("borrowed") ? "borrowed · " : ""}{evidence(s)}</td>
                       <td className="px-2 py-1">{s.coverage === "gap" || !s.curve_ids.length ? "—" : (
                         <span className="inline-flex flex-wrap gap-1">
@@ -207,7 +205,7 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
                     </tr>,
                     isOpen ? (
                       <tr key={`${id}-detail`} id={`sub-${id}`} className="bg-muted/30">
-                        <td colSpan={6} className="px-3 py-2.5"><RowDetail s={s} cards={cards} legend={legend} blobBase={blobBase} /></td>
+                        <td colSpan={5} className="px-3 py-2.5"><RowDetail s={s} cards={cards} legend={legend} blobBase={blobBase} /></td>
                       </tr>
                     ) : null,
                   ];

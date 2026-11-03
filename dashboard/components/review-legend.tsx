@@ -6,7 +6,7 @@
 // its word appears on the page (the drawn tile marks always stay where asked for). Every word comes from the build.
 import { useEffect, useRef, useState } from "react";
 import type { Legend, LegendItem } from "@/lib/types";
-import { FileLink } from "./ui";
+import { FileLink, ToggleArrow, TOGGLE_CLASS } from "./ui";
 
 export type LegendGroup = "status" | "evidence" | "lenses" | "marks" | "subsystem" | "production" | "hazard_use" | "units";
 
@@ -42,6 +42,7 @@ const COLS = ["", "", "md:grid-cols-2", "md:grid-cols-3", "md:grid-cols-2 xl:gri
 export function ReviewLegend({ legend, sourceHref, open = false, groups }: { legend: Legend; sourceHref: string; open?: boolean; groups: LegendGroup[] }) {
   const ref = useRef<HTMLDetailsElement>(null);
   const [pageText, setPageText] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState(open);
   useEffect(() => {
     // read the rendered page once it has rendered (a timer, which also runs in a background tab): its text, without
     // the legend's own
@@ -66,9 +67,9 @@ export function ReviewLegend({ legend, sourceHref, open = false, groups }: { leg
   };
   const shown = groups.map((g) => (g === "marks" ? all[g] : { ...all[g], items: keep(all[g].items) })).filter((g) => g.items.length);
   return (
-    <details ref={ref} data-legend open={open} className="rounded-lg border border-border bg-card">
-      <summary className="cursor-pointer px-3 py-2 text-[12.5px] font-medium hover:text-accent">
-        What the words mean <span className="font-normal text-muted-foreground">· {shown.map((g) => g.title.toLowerCase()).join(" · ")}</span>
+    <details ref={ref} data-legend open={open} onToggle={(e) => setIsOpen(e.currentTarget.open)} className="rounded-lg border border-border bg-card">
+      <summary className={`${TOGGLE_CLASS} flex list-none px-3 py-2 [&::-webkit-details-marker]:hidden`}>
+        <ToggleArrow open={isOpen} />What the words mean <span className="font-normal text-muted-foreground">· {shown.map((g) => g.title.toLowerCase()).join(" · ")}</span>
       </summary>
       {/* one equal column per group shown, up to four */}
       <div className={`grid gap-3 border-t border-border px-3 py-2.5 text-[12px] ${COLS[Math.min(shown.length, 4)]}`}>

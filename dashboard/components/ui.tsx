@@ -124,3 +124,11 @@ export function Dl({ rows, labelWidth = 92 }: { rows: [ReactNode, ReactNode][]; 
     </dl>
   );
 }
+
+// One look for every fold-out section header ("What the words mean", "Every subsystem, curve or gap", "What this
+// curve covers"): the same weight, size and arrow.
+export const TOGGLE_CLASS = "inline-flex cursor-pointer items-center gap-1.5 text-[12.5px] font-medium text-foreground hover:text-accent";
+
+export function ToggleArrow({ open }: { open: boolean }) {
+  return <span aria-hidden className="inline-block w-3 text-[11px] leading-none text-muted-foreground">{open ? "▾" : "▸"}</span>;
+}

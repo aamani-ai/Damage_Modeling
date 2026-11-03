@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useUrlParam } from "@/lib/url-state";
 import type { Coverage } from "@/lib/types";
 import { TwinCoverage } from "./twin-coverage";
+import { ToggleArrow, TOGGLE_CLASS } from "./ui";
 
 export interface CellCov { slug: string; label: string; building: string | null; cov: Coverage }
 
@@ -29,9 +30,8 @@ export function CellCoverage({ covs, hazardSlug, loadOrder }: { covs: CellCov[];
   ) : null;
   const title = (
     <>
-      <button type="button" aria-expanded={open} aria-controls="card-coverage-body" onClick={() => setPicture(open ? "hidden" : null)}
-        className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold uppercase tracking-wide text-foreground hover:text-accent">
-        <span aria-hidden className="inline-block w-4 text-[16px] leading-none">{open ? "▾" : "▸"}</span>What this curve covers
+      <button type="button" aria-expanded={open} aria-controls="card-coverage-body" onClick={() => setPicture(open ? "hidden" : null)} className={`${TOGGLE_CLASS} normal-case tracking-normal`}>
+        <ToggleArrow open={open} />What this curve covers
       </button>
       <Link href={`/assets/${current.slug}?hazard=${hazardSlug}`} className="ml-1 font-normal normal-case tracking-normal text-accent hover:underline">on the {current.label.toLowerCase()} page ▸</Link>
     </>
@@ -43,7 +43,7 @@ export function CellCoverage({ covs, hazardSlug, loadOrder }: { covs: CellCov[];
           <TwinCoverage key={current.slug} cov={current.cov} loadOrder={loadOrder} hazardSlug={hazardSlug} mode="cell" height={400} title={title} hazardPicker={picker} />
         </div>
       ) : (
-        <div className="px-3 py-2.5"><span className="text-[12px] text-muted-foreground">{title}</span></div>
+        <div className="px-3 py-2"><span className="text-[12px] text-muted-foreground">{title}</span></div>
       )}
     </section>
   );
