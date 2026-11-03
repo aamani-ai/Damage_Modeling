@@ -92,7 +92,7 @@ def test_the_legend_reads_the_catalogue_status_table():
 
 def test_performance_hazard_gaps_and_whole_facility_labels_say_what_they_mean():
     heat = [r for r in _asset("bess")["subcomponents"] if r["hazard"]["slug"] == "heat"]
-    assert all("physical destruction only" in r["gap"]["reason"] for r in heat)
+    assert all("physical damage only" in r["gap"]["reason"] and "physical destruction only" in r["gap"]["own_words"] for r in heat)
     assert all({b["path"] for b in r["gap"]["basis"]} == {"docs/evidence/occurrence/bess/heat.json", "docs/scope/SCOPE_AND_STORY.md"} for r in heat)
     gsu = next(r for r in _asset("wind")["subcomponents"] if r["hazard"]["slug"] == "flood" and r["key"] == "gsu")
     assert gsu["scope_notes"] and "not the whole wind farm" in gsu["scope_notes"][0]["note"]
@@ -200,3 +200,21 @@ def test_legend_units_come_from_the_method_and_rows_carry_value_shares():
     for path in sorted((DATA / "assets").glob("*.json")):
         for r in json.loads(path.read_text())["subcomponents"]:
             assert (r["share"] is None) == (r["share_basis"] is None), (path.name, r["key"])
+
+
+def test_gap_reasons_are_plain_words_with_the_cells_own_words_kept():
+    """A reason shown on a page has no internal codes or bracketed shorthand; the cell's own words stay beside it."""
+    import re
+    for path in sorted((DATA / "assets").glob("*.json")):
+        for r in json.loads(path.read_text())["subcomponents"]:
+            gap = r.get("gap") or {}
+            reason = gap.get("reason")
+            if not reason:
+                continue
+            assert not re.search(r"\b[A-Z]{3,}_[A-Z_]{3,}\b", reason), (path.name, r["key"], reason)
+            assert "no curve)" not in reason and "secondary, open" not in reason, reason
+            if gap.get("own_words"):
+                assert gap["own_words"] != reason
+    legend = json.loads((DATA / "manifest.json").read_text())["legend"]
+    assert [l["key"] for l in legend["lenses"]] == ["status", "evidence", "occurrence", "value", "review"]
+    assert legend["marks"]

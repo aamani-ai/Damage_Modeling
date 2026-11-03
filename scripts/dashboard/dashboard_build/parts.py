@@ -19,6 +19,7 @@ from typing import Any
 
 from .common import ROOT, SENTENCES, fmt_pct, fmt_usd_compact, humanise, load_json, read_csv, rel, sha256
 from .plain import TIER_SHORT, _join, label_case, singular, tier_words
+from .plain_reasons import plain as plain_reason
 
 try:
     import openpyxl  # type: ignore
@@ -569,6 +570,9 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
     re_extra: dict[str, Any] = {}
     if aslug == "real_estate":
         subcomponents, re_extra = _real_estate_subsystems(hz, by_hazard, parts_by_cell, cells, registers, all_curve_lookup)
+    for rec in subcomponents:  # every reason in plain words; the cell's own words kept beside it
+        if rec.get("gap") and rec["gap"].get("reason"):
+            rec["gap"]["reason"], rec["gap"]["own_words"] = plain_reason(rec["gap"]["reason"])
     return {"rows": rows, "parts_by_cell": parts_by_cell, "subcomponents": subcomponents, "subcomponent_rollup": _rollup(subcomponents),
             **re_extra, "split": split, "twin": twin_block,
             "value_source": ({"label": "reference budget r1 (battery value binding)", "path": "docs/cells/flood_bess/current/value_binding.json"} if aslug == "bess"
@@ -657,7 +661,7 @@ def _real_estate_subsystems(hz: list[dict[str, Any]], by_hazard: dict[str, Any],
                         priced = [lab.lower() for k, lab in RE_SUBSYSTEMS if any(_slice_of(p) == k for p in slices)]
                         reason = (f"{h['label']} prices only this building's {_join(priced)} (the rows below), each with its own "
                                   "share of the structure replacement cost. The rest has no curve here: "
-                                  + "; ".join(f"{_lower_first(r['row_or_bucket_label'])} ({r['role_in_loss'].replace('_', ' ')})" for r in left) + ".")
+                                  + "; ".join(f"{_lower_first(r['row_or_bucket_label'])} ({ {'withheld': 'left out for now', 'not_priced': 'no hail curve covers it'}.get(r['role_in_loss'], r['role_in_loss'].replace('_', ' ')) })" for r in left) + ".")
                         if cw_path:
                             basis = [{"label": "the cell's value crosswalk", "path": cw_path}]
                     else:

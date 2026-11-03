@@ -56,11 +56,12 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
           {c.hazard_note.lines.map((l) => <p key={l} className="mt-0.5">{l}</p>)}
         </div>
       ) : null}
-      <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blob(m.legend.source)} /></div>
+      <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blob(m.legend.source)} groups={["status", "evidence", "subsystem", "production", "hazard_use", "units"]} /></div>
       {c.kind === "gap" ? (
         <div className="mt-3 space-y-3">
           <EmptyState>
-            {c.gap_reason} — no artifact, no curve, no evidence registers.{" "}
+            {c.gap_reason}{" "}
+            {c.gap_reason_own ? <details className="mt-1 text-[10.5px] text-muted-foreground"><summary className="cursor-pointer">In the cell&apos;s own words</summary><p className="mt-0.5">{c.gap_reason_own}</p></details> : null}
             {c.field_review.register ? (
               <>The field-report register exists: <Link href={`/occurrence/${c.asset.slug}/${c.hazard.slug}`} className="text-accent hover:underline">open it ▸</Link></>
             ) : null}

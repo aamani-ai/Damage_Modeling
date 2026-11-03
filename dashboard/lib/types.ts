@@ -122,7 +122,7 @@ export interface LegendItem { key: string; word: string; meaning: string }
 export type HazardUseState = "used" | "differs" | "not_on" | "unchecked";
 export interface HazardUse { state: HazardUseState; sentences: string[]; newer: { model: string; docs: string; shown: string | null; words: string } | null }
 export interface Legend {
-  source: string; status: LegendItem[]; coverage: LegendItem[]; completeness: LegendItem[]; evidence: LegendItem[]; production: LegendItem[]; hazard_use: LegendItem[]; units: LegendItem[]; units_source: string;
+  source: string; status: LegendItem[]; coverage: LegendItem[]; completeness: LegendItem[]; evidence: LegendItem[]; production: LegendItem[]; hazard_use: LegendItem[]; units: LegendItem[]; units_source: string; lenses: LegendItem[]; marks: LegendItem[];
   where_from: Record<WhereFrom, string>;
 }
 
@@ -137,7 +137,7 @@ export interface Subcomponent {
   // the row's value share and its basis; real estate also: the building a row belongs to and what the row means
   group?: { key: string; label: string }; share?: number | null; share_basis?: string | null; note?: string | null;
   gap: {
-    reason: string; occurrence: OccurrenceBucket | null; effect: string; basis: { label: string; path: string }[];
+    reason: string; own_words?: string | null; occurrence: OccurrenceBucket | null; effect: string; basis: { label: string; path: string }[];
     register: { path: string; sha256: string; search_log: string | null; last_searched: string | null; question: string | null } | null;
   } | null;
 }
@@ -288,7 +288,7 @@ export interface Caption {
   seen_in_field: { sentence: string; state: string; href: string | null; words: string };
   main_references: KeyReference[]; references_from: string;
 }
-export type CellV2 = Cell & { plain: Plain; hazard_note?: { title: string; lines: string[] } | null };
+export type CellV2 = Cell & { plain: Plain; hazard_note?: { title: string; lines: string[] } | null; gap_reason_own?: string | null };
 export type CurveV2 = Curve & { caption: Caption; sources_resolved: SourceRow[]; plain_tiers: { shape: string; cost: string }; rail_plain: Plain["rail"] };
 
 export interface AssetCellV2 {

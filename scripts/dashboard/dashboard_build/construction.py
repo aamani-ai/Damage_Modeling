@@ -284,6 +284,24 @@ def legend(cat_text: str) -> dict[str, Any]:
         ],
         "where_from": WHERE_FROM,
         "units": _units(), "units_source": UNITS_SOURCE,
+        # the library's five views of a tile, and what its borders and fills mean
+        "lenses": [
+            {"key": "status", "word": "Status", "meaning": "What exists for this asset and hazard: a live curve, a proposal, a reused curve, or no curve yet."},
+            {"key": "evidence", "word": "Evidence", "meaning": "How well supported the curve's numbers are, in one word: the weaker of its shape and its cost (hover for both)."},
+            {"key": "occurrence", "word": "Field reports", "meaning": "Whether anyone has searched for real-world reports of this hazard damaging this asset, and what was found."},
+            {"key": "value", "word": "Value covered", "meaning": "How much of the asset's value the curves price; the rest has no curve for this hazard."},
+            {"key": "review", "word": "Read by", "meaning": "Whether a person has reviewed this entry, or only an agent has read it."},
+        ],
+        "marks": [
+            {"key": "solid", "word": "Solid border, filled", "meaning": "A live curve: in the runtime index, so the platform can call it."},
+            {"key": "dashed_dark", "word": "Dashed dark border, no fill", "meaning": "A proposal: built and checked here, not yet in the runtime index."},
+            {"key": "hatched", "word": "Diagonal hatching", "meaning": "Reused: priced with another cell's curve, not one of its own."},
+            {"key": "dashed_light", "word": "Dashed light border, grey text", "meaning": "No curve yet for this asset and hazard."},
+            {"key": "partial", "word": "· partial", "meaning": "The curves cover only part of the asset's value."},
+            {"key": "not_drawn", "word": "not drawn", "meaning": "The curve exists but this repository's code cannot draw it."},
+            {"key": "shade_evidence", "word": "Grey shading (Evidence)", "meaning": "Darker grey means weaker evidence: clear for field-calibrated or published, darkest for our judgment."},
+            {"key": "shade_review", "word": "Grey fill (Read by)", "meaning": "Only an agent has read the entry; no person has reviewed it yet."},
+        ],
     }
 
 

@@ -40,6 +40,12 @@ function GapView({ s, blobBase }: { s: Subcomponent; blobBase: string }) {
       <div>
         <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Why there is no curve</div>
         <p className="mt-0.5">{g.reason}</p>
+        {g.own_words ? (
+          <details className="mt-0.5 text-[10.5px] text-muted-foreground">
+            <summary className="cursor-pointer hover:text-foreground">In the cell&apos;s own words</summary>
+            <p className="mt-0.5 font-mono">{g.own_words}</p>
+          </details>
+        ) : null}
         {g.basis.length ? <p className="mt-0.5 text-[10.5px] text-muted-foreground">From {g.basis.map((b, i) => <span key={b.path}>{i ? " and " : ""}{b.label} (<FileLink href={`${blobBase}/${b.path}`}>{fileName(b.path)}</FileLink>)</span>)}.</p> : null}
       </div>
       {g.register || occ ? (
