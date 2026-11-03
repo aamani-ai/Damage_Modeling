@@ -59,7 +59,7 @@ export function receipt(): Record<string, unknown> | null {
 
 /** repository blob URL at the build commit — every file link opens the file the number came from */
 export function blobUrl(m: ManifestV3, repoPath: string): string {
-  return `${m.repo.url}/blob/${m.commit_full}/${repoPath.replace(/^\/+/, "")}`;
+  return `${m.repo.url}/blob/${m.link_commit}/${repoPath.replace(/^\/+/, "")}`;
 }
 
 /** the construction of every curve the subcomponents name, read from the exact curve file each one points at */
@@ -75,5 +75,5 @@ export function constructionCards(subs: Subcomponent[]): Record<string, Construc
 
 /** the repository at the build commit, as the start of a file link */
 export function blobBase(m: ManifestV3): string {
-  return `${m.repo.url}/blob/${m.commit_full}`;
+  return `${m.repo.url}/blob/${m.link_commit}`;
 }

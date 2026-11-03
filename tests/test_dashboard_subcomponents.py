@@ -219,5 +219,5 @@ def test_gap_reasons_are_plain_words_with_the_cells_own_words_kept():
             if gap.get("own_words"):
                 assert gap["own_words"] != reason
     legend = json.loads((DATA / "manifest.json").read_text())["legend"]
-    assert [l["key"] for l in legend["lenses"]] == ["status", "evidence", "occurrence", "value", "review"]
+    assert [l["key"] for l in legend["lenses"]] in (["status", "evidence", "occurrence", "value", "review"], ["status", "evidence", "value", "review"])
     assert legend["marks"]

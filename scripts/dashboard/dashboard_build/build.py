@@ -15,7 +15,7 @@ from .plain_reasons import plain as plain_reason, source_doc
 from . import twin as twin_mod
 from .catalogue import Entry, curve_records, load_entries
 from .construction import construction_block, constructing_files, legend, path_leaks
-from .common import (OUT, ROOT, SENTENCES, SOURCE, STATION_ABSENT_SENTENCES, BuildError, fmt_pct, fmt_usd_compact, git,
+from .common import (OUT, ROOT, SENTENCES, SHOW_FIELD_REPORTS, SOURCE, STATION_ABSENT_SENTENCES, BuildError, fmt_pct, fmt_usd_compact, git,
                      humanise, load_json, rel, sha256, tier_span)
 from .faq import build_faq
 from .occurrence import (all_registers, asset_slug, bess_bucket_values, hazard_slug, register_for, resolve_state, slugs,
@@ -282,6 +282,10 @@ def build(write: bool = True) -> dict[str, Any]:
     check("twin_crosswalk", "Hazard's twin crosswalk SHA equals the value binding's pin", twin.get("ok") is True, {k: v for k, v in twin.items() if k not in ("text", "crosswalk")})
     bess_values = bess_bucket_values(fb_binding)
     commit_full = SOURCE["commit_full"] or git("rev-parse", "HEAD")
+    # links must open on GitHub: the build's own commit when GitHub has it, else the newest commit it does have (where
+    # this branch left origin/main), so a local-only commit never makes every file link a 404
+    pushed = git("branch", "-r", "--contains", commit_full)
+    link_commit = commit_full if pushed else (git("merge-base", commit_full, "origin/main") or commit_full)
     # the vendored 3D viewer equals its manifest (DCD-D21); the twin trees and the spine are read below
     viewer = twin_mod.viewer_check()
     check("twin_viewer", "the vendored Digital Twin viewer files equal the SHA-256 their manifest records", viewer.get("ok") is True,
@@ -310,8 +314,8 @@ def build(write: bool = True) -> dict[str, Any]:
             base_dir = (ROOT / regs["paths"]["sources"]).parent if regs["paths"].get("sources") else e.folder
             for src in regs["sources"]:
                 src["provenance"] = "register"
-                resolve_link(src, REPO_URL, commit_full, base_dir)
-            ex = extract_for_entry(e, regs, REPO_URL, commit_full)
+                resolve_link(src, REPO_URL, link_commit, base_dir)
+            ex = extract_for_entry(e, regs, REPO_URL, link_commit)
             if ex:
                 regs["extraction"] = ex
                 if ex["status"] == "extracted":
@@ -584,7 +588,7 @@ def build(write: bool = True) -> dict[str, Any]:
           not differs, {"differs": differs, "used": sorted(e for e, u in hazard_uses.items() if u["state"] == "used"),
                         "not_on": sorted(e for e, u in hazard_uses.items() if u["state"] == "not_on"),
                         "checked_on": snap.get("checked_on"), "dashboard": snap.get("dashboard"), "hazard": hazard_main.state().get("sentence")}, severity="data")
-    faq = build_faq(f"{REPO_URL}/blob/{commit_full}")
+    faq = build_faq(f"{REPO_URL}/blob/{link_commit}")
     check("faq", "every FAQ question has its date, owner, a short answer and a Read more link that resolves", not faq["errors"], {"errors": faq["errors"], "questions": faq["n_questions"]}, severity="data")
     failed = [c for c in checks if not c["ok"]]
     for cid, cell in cells.items():
@@ -619,7 +623,8 @@ def build(write: bool = True) -> dict[str, Any]:
     searched = sum(1 for r in registers.values() for b in r["register"].get("buckets", {}).values() if b.get("state") != "not_searched")
     manifest = {
         "schema": "damage_dashboard_manifest.v1",
-        "commit": commit_full[:7], "commit_full": commit_full,
+        "commit": commit_full[:7], "commit_full": commit_full, "link_commit": link_commit,
+        "link_note": None if link_commit == commit_full else f"This build's commit {commit_full[:7]} is not on GitHub yet, so file links open the files at {link_commit[:7]}, where this branch left main.",
         "source": source_block(commit_full),
         "hazard_main": {k: v for k, v in hazard_main.state().items() if k in ("available", "ref", "commit", "behind", "sentence")},
         "catalogue_commit_note": "catalogue entries and artifacts read at this commit; every number traces to a file at it",
@@ -637,7 +642,7 @@ def build(write: bool = True) -> dict[str, Any]:
         "tier_words": TIER_SHORT, "tier_plain": TIER_PLAIN, "tier_meaning": TIER_MEANING,
         "stations": [{"id": s["id"], "label": s["label"], "gate": s["gate"], "name": STATION_NAMES[s["id"]][0], "meaning": STATION_NAMES[s["id"]][1]} for s in chain_mod.STATIONS],
         "no_link_words": NO_LINK, "not_yet_extracted_sentence": NOT_YET_EXTRACTED,
-        "lenses": ["status", "evidence", "occurrence", "value", "review"],
+        "lenses": ["status", "evidence", *(["occurrence"] if SHOW_FIELD_REPORTS else []), "value", "review"],
         "repo": {"url": REPO_URL, "blob": f"{REPO_URL}/blob/main"},
     }
     # ─── the spine (G13/G14): coverage per asset type, the nav, the library rows ───
@@ -702,6 +707,7 @@ def build(write: bool = True) -> dict[str, Any]:
     n_types = sum(len(c_["types"]) for c_ in library_rows)
     n_cats = sum(1 for c_ in library_rows if c_["types"])
     manifest["summary"] = library_sentence(counts, f"{n_types} asset types in {n_cats} categories", len(five), agent_read, len(entries), searched)
+    manifest["scope_line"] = f"across {n_types} asset types in {n_cats} categories and {len(five)} hazards"
     manifest["state_words"] = twin_mod.STATE_WORDS
     # ─── the Review page (G17): about curves only, one card per cell — who has read it, field reports, what is open
     review_cells = []

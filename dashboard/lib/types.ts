@@ -50,7 +50,7 @@ export interface Tile {
 export interface BuildCheck { id: string; name: string; ok: boolean; severity: "hard" | "data"; summary: string }
 
 export interface Manifest {
-  commit: string; commit_full: string;
+  commit: string; commit_full: string; link_commit: string; link_note: string | null; scope_line?: string;
   counts: Record<string, number>; summary: string;
   assets: (Slug & { n_entries: number })[]; hazards: Hazard[]; entries: Tile[];
   codes: Record<string, { entry_id: string; version_key: string | null; status: Status; sha256: string | null; model: string | null; docs: string | null }[]>;

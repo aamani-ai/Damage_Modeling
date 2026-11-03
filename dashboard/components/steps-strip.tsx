@@ -35,7 +35,7 @@ export function StepsStrip({ cell, cites, curves, m }: { cell: CellV2; cites: Ci
     e.preventDefault();
     buttons.current[(next + n) % n]?.focus();
   };
-  const blob = (p: string) => `${m.repo.url}/blob/${m.commit_full}/${p.replace(/^\/+/, "")}`;
+  const blob = (p: string) => `${m.repo.url}/blob/${m.link_commit}/${p.replace(/^\/+/, "")}`;
   return (
     <section aria-label="How this curve was made" className="mt-3">
       <div className="mb-1 flex items-baseline gap-2 px-0.5 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">

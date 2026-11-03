@@ -37,7 +37,7 @@ export function CellFooter({ cell, m, blob }: { cell: CellV2; m: ManifestV3; blo
             <div>
               <Eyebrow>Files at the build commit</Eyebrow>
               {Object.entries(cell.files).filter(([, v]) => v).map(([key, v]) => <div key={key}><FileLink href={blob(v!)}>{key.replace("_", "-")}</FileLink> <span className="text-muted-foreground">{v!.split("/").slice(-1)[0]}</span></div>)}
-              {cell.folder_files.length ? <div><FileLink href={`${m.repo.url}/tree/${m.commit_full}/${cell.folder_files[0].path.split("/").slice(0, -1).join("/")}`}>folder</FileLink> <span className="text-muted-foreground">{cell.folder_files[0].path.split("/").slice(-2, -1)[0]}/ · {cell.folder_files.length} files, each with its SHA in the step panels</span></div> : null}
+              {cell.folder_files.length ? <div><FileLink href={`${m.repo.url}/tree/${m.link_commit}/${cell.folder_files[0].path.split("/").slice(0, -1).join("/")}`}>folder</FileLink> <span className="text-muted-foreground">{cell.folder_files[0].path.split("/").slice(-2, -1)[0]}/ · {cell.folder_files.length} files, each with its SHA in the step panels</span></div> : null}
             </div>
             <div>
               <Eyebrow>Registers</Eyebrow>

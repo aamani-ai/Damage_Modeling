@@ -14,7 +14,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-from .common import HELPERS, LOCAL_PATH_RE, ROOT, humanise, parse_markdown_table, rel, tier_span
+from .common import HELPERS, LOCAL_PATH_RE, ROOT, SHOW_FIELD_REPORTS, humanise, parse_markdown_table, rel, tier_span
 from .plain import TIER_MEANING, TIER_SHORT, tier_words
 
 # symbol → (meaning, the artifact parameter it reads, or None for an axis or a derived quantity)
@@ -289,7 +289,9 @@ def legend(cat_text: str) -> dict[str, Any]:
         "lenses": [
             {"key": "status", "word": "Status", "meaning": "What exists for this asset and hazard: a live curve, a proposal, a reused curve, or no curve yet."},
             {"key": "evidence", "word": "Evidence", "meaning": "How well supported the curve's numbers are, in one word: the weaker of its shape and its cost (hover for both)."},
-            {"key": "occurrence", "word": "Field reports", "meaning": "Whether anyone has searched for real-world reports of this hazard damaging this asset, and what was found."},
+            # field reports are hidden for now (SHOW_FIELD_REPORTS); the entry returns with them
+            *([{"key": "occurrence", "word": "Field reports", "meaning": "Whether anyone has searched for real-world reports of this hazard damaging this asset, and what was found."}]
+              if SHOW_FIELD_REPORTS else []),
             {"key": "value", "word": "Value covered", "meaning": "How much of the asset's value the curves price; the rest has no curve for this hazard."},
             {"key": "review", "word": "Read by", "meaning": "Whether a person has reviewed this entry, or only an agent has read it."},
         ],

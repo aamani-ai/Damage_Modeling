@@ -27,7 +27,7 @@ function Line({ label, children }: { label: string; children: React.ReactNode })
 }
 
 export function StationPanel({ station, cell, cites, curves, m }: { station: PlainStation; cell: CellV2; cites: Citations["cells"][string] | null; curves: CurveV2[]; m: ManifestV3 }) {
-  const blob = (p: string) => `${BLOB}/${m.commit_full}/${p.replace(/^\/+/, "")}`;
+  const blob = (p: string) => `${BLOB}/${m.link_commit}/${p.replace(/^\/+/, "")}`;
   const ch = cell.chain.stations.find((s) => s.id === station.id)!;
   const pl = cell.plain;
   const docs = pl.sources.filter((s) => s.kind !== "marker" && s.kind !== "placeholder");
@@ -140,7 +140,7 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
         <Words>
           {Object.entries(cell.files).filter(([, v]) => v).map(([k, v]) => <Line key={k} label={k.replace("_", " ")}><FileLink href={blob(v!)}>{v!.split("/").slice(-1)[0]}</FileLink></Line>)}
           {cell.chain.workbook ? <Line label="Workbook"><FileLink href={blob(cell.chain.workbook.path)}>{cell.chain.workbook.path.split("/").slice(-1)[0]}</FileLink></Line> : null}
-          {cell.folder_files.length ? <Line label="Folder"><FileLink href={`${m.repo.url}/tree/${m.commit_full}/${cell.folder_files[0].path.split("/").slice(0, -1).join("/")}`}>{cell.folder_files[0].path.split("/").slice(-2, -1)[0]}/ ({cell.folder_files.length} files)</FileLink></Line> : null}
+          {cell.folder_files.length ? <Line label="Folder"><FileLink href={`${m.repo.url}/tree/${m.link_commit}/${cell.folder_files[0].path.split("/").slice(0, -1).join("/")}`}>{cell.folder_files[0].path.split("/").slice(-2, -1)[0]}/ ({cell.folder_files.length} files)</FileLink></Line> : null}
         </Words>
       );
       details = (

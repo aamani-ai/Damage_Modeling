@@ -36,7 +36,7 @@ export default function AboutPage() {
             <Dl
               labelWidth={128}
               rows={[
-                ["This repository", <span key="repo">{m.source.label} · <a href={`${m.repo.url}/tree/${m.commit_full}`} target="_blank" rel="noreferrer" className="text-accent hover:underline">the files at that commit ↗</a></span>],
+                ["This repository", <span key="repo">{m.source.label} · <a href={`${m.repo.url}/tree/${m.link_commit}`} target="_blank" rel="noreferrer" className="text-accent hover:underline">the files at that commit ↗</a></span>],
                 ["Hazard", <span key="hz">{m.hazard_main.sentence}. Its files and the links into it are read on its main, never on the branch checked out on this machine.</span>],
                 ["Digital Twin", tw ? <span key="tw">The 3D viewer and models at <span className="font-mono">{tw.viewer.twin_commit.slice(0, 7)}</span>: {tw.viewer.files} files, each equal to the SHA its manifest records{tw.viewer.three ? `, three.js ${tw.viewer.three}` : ""}; the reference models of {tw.types.length} asset types.</span> : <span key="tw">not read</span>],
                 ["Catalogue", <span key="cat">{m.counts.entries} entries: {m.counts.live} live, {m.counts.proposal} proposals, {m.counts.reused} reused, {m.counts.gap} gaps; {n(r.pins_checked)} pins checked against the files.</span>],

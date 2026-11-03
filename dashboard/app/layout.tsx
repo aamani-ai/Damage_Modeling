@@ -35,7 +35,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <Link href="/faq" className="rounded px-1.5 py-0.5 text-[12px] font-medium text-muted-foreground hover:text-foreground" title="What the words and colours mean, and how a curve is made">
                   FAQ
                 </Link>
-                <a href={`${m.repo.url}/tree/${m.commit_full}`} target="_blank" rel="noreferrer" title="The repository at the commit this dashboard was built from" className="rounded border border-border px-1.5 py-0.5 text-[11px] font-medium text-muted-foreground hover:text-foreground">
+                <a href={`${m.repo.url}/tree/${m.link_commit}`} target="_blank" rel="noreferrer" title="The repository at the commit this dashboard was built from" className="rounded border border-border px-1.5 py-0.5 text-[11px] font-medium text-muted-foreground hover:text-foreground">
                   GitHub ↗
                 </a>
                 <ThemeToggle />
