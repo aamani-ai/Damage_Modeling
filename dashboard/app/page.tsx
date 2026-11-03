@@ -13,7 +13,7 @@ export default function LibraryPage() {
         <p className="mt-1 max-w-[1100px] text-[13.5px] leading-snug">{m.summary}</p> */}
       </div>
       <div className="mt-3">
-        <ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} open groups={["status", "evidence", "lenses", "marks"]} />
+        <ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} open groups={["status", "evidence", "lenses"]} />
       </div>
       <div className="mt-3">
         <KpiRow m={m} />

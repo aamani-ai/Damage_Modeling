@@ -15,23 +15,8 @@ import { SHOW_FIELD_REPORTS } from "@/lib/features";
 const LENS_LABEL: Record<string, string> = { status: "Status", evidence: "Evidence", occurrence: "Field reports", value: "Value covered", review: "Read by" };
 const STATUS_WORD: Record<string, string> = { live: "live", proposal: "proposal", reused: "reused", gap: "gap" };
 
-function weakerTier(t: LibraryTile): number {
-  return [t.tiers.shape, t.tiers.cost].map((s) => (s === "–" ? 0 : Math.max(...(s.match(/\d/g) ?? ["0"]).map(Number)))).reduce((a, b) => Math.max(a, b), 0);
-}
-
-function shade(t: LibraryTile, lens: string): string {
-  // a grade is not a verdict: the evidence lens uses --muted tints, never the state colours
-  if (t.status === "gap") return "";
-  if (lens === "evidence") {
-    const w = weakerTier(t);
-    return w === 0 ? "" : w <= 2 ? "bg-muted/30" : w === 3 ? "bg-muted" : "bg-muted shadow-[inset_0_0_0_9999px_color-mix(in_srgb,var(--muted-foreground)_14%,transparent)]";
-  }
-  if (lens === "review") return t.review.entry_read_kind === "agent" ? "bg-muted/60" : "";
-  return "";
-}
-
 function second(t: LibraryTile, lens: string): string {
-  if (t.status === "gap") return "no curve yet";
+  if (t.status === "gap") return t.gap_line ?? "no curve yet";
   if (lens === "occurrence") return t.occurrence.label === "not searched" || t.occurrence.label === "no register" ? "field reports: not searched" : `field reports: ${t.occurrence.label}`;
   if (lens === "value") return t.share_covered != null ? `${fmtPct(t.share_covered)} of value covered` : "share not stated";
   if (lens === "review") return t.review.review ? `reviewed by ${t.review.review.by}` : `read by an agent ${t.review.entry_read_on?.slice(5) ?? ""}`;
@@ -49,14 +34,15 @@ function TileBox({ t, lens, tabIndex, onKey, rc }: { t: LibraryTile; lens: strin
       onKeyDown={onKey}
       aria-label={lens === "status" || lens === "evidence" ? t.aria_label : `${t.aria_label}; ${second(t, lens)}`}
       title={title}
-      className={`lens-fade flex h-[52px] w-full flex-col justify-center rounded-md border px-2 ${gap ? "tile-gap border-border text-muted-foreground" : `border-border bg-card ${shade(t, lens)}`} ${t.status === "reused" ? "hatch-reused" : ""} ${t.status === "proposal" ? "border-dashed border-foreground/30 bg-transparent" : ""} hover:border-accent/60`}
+      // every tile looks the same: its words say what it is (status, evidence, value, who read it)
+      className="flex h-[52px] w-full flex-col justify-center rounded-md border border-border bg-card px-2 hover:border-accent/60"
     >
       <span className="flex items-baseline gap-1.5 text-[12px] font-medium">
-        <span className={gap ? "" : t.status === "live" ? "text-foreground" : "text-muted-foreground"}>{STATUS_WORD[t.status]}</span>
+        <span className="text-foreground">{STATUS_WORD[t.status]}</span>
         {t.partial && !gap ? <span className="text-[11px] font-normal text-muted-foreground">· partial</span> : null}
         {t.no_evaluator ? <span className="ml-auto whitespace-nowrap text-[11px] font-normal text-muted-foreground">not drawn</span> : null}
       </span>
-      <span className={`truncate text-[12px] ${gap ? "" : "text-muted-foreground"}`}>{second(t, lens)}</span>
+      <span className="truncate text-[12px] text-muted-foreground">{second(t, lens)}</span>
     </Link>
   );
 }
@@ -65,7 +51,8 @@ export function Library({ m }: { m: ManifestV3 }) {
   const [lensParam, setLensParam] = useUrlParam("lens");
   const lens = m.lenses.includes(lensParam ?? "") ? (lensParam as string) : "status";
   const setLens = (l: string) => setLensParam(l === "status" ? null : l);
-  const hazards = m.hazards.filter((h) => !h.outside_the_five);
+  // the five catalogue hazards, then heat: no cell, but its research so far is linked from the tile
+  const hazards = m.hazards.filter((h) => !h.outside_the_five || h.slug === "heat");
   const grid = useRef<HTMLDivElement>(null);
   const cats = m.library.filter((c) => c.types.length);
   const rowsFlat = cats.flatMap((c) => c.types);

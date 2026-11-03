@@ -66,7 +66,7 @@ SENTENCES = [
      "Contents (furniture, equipment and stock) are left out of this curve and will be modeled separately; that is not the same as no damage."),
     (r"^withheld by the binding$", "Left out by the reused curve: it prices only some of this asset's parts."),
     (r"^(\w[\w ]*?) changes how this asset performs rather than destroying it",
-     r"\1 makes this asset work less well but is not known to break it, and a damage curve covers physical damage only, so there is no curve. Whether it has ever physically damaged one is still being researched (below)."),
+     r"\1 is treated here as changing how this asset works (derating, ageing) rather than breaking it, and a damage curve covers physical damage only, so there is no curve. The research so far is listed below."),
     (r"^Model v0\.1 is a fail-closed research scaffold with no curve records",
      "A first research version exists but has no curve yet: no evidence so far links a hailstorm's impact on a blade to the damage found on inspection and its repair cost, and no hail measure for blades has been chosen."),
     (r"^No curve and no documented plan yet \(the BESS plan only lists other hazards as later work",

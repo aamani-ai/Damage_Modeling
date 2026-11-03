@@ -21,15 +21,12 @@ function Kpi({ label, value, sub, title, href }: { label: string; value: React.R
 
 export function KpiRow({ m }: { m: ManifestV3 }) {
   const c = m.counts;
-  const n = (v: number) => v.toLocaleString("en-US");
   return (
-    <div className={`grid grid-cols-2 gap-2 ${SHOW_FIELD_REPORTS ? "md:grid-cols-5" : "md:grid-cols-4"}`}>
+    <div className={`grid grid-cols-2 gap-2 ${SHOW_FIELD_REPORTS ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
       <Kpi label="Curve cells" value={<>{c.live} <span className="text-[13px] font-normal text-muted-foreground">live</span></>}
         sub={<>{c.proposal} proposals · {c.reused} reused · {c.gap} gaps {m.scope_line}</>} title="live: in the runtime index Hazard reads · proposal: built, not yet in the index · reused: borrows another cell's curve · gap: no curve yet" />
-      <Kpi label="Curves drawn" value={<>{c.curves_drawn} <span className="text-[13px] font-normal text-muted-foreground">of {c.curves_declared}</span></>}
-        sub={c.curves_no_evaluator ? <>{c.curves_no_evaluator} curves: {m.sentences.no_evaluator.page}</> : <>each curve plotted from its own formula by this repository&apos;s code, not copied from a picture</>} title="every curve record sampled through a Python evaluator, or listed as not drawn" />
-      <Kpi label="Known answers" value={<>{n(c.known_answers_reproduced)} <span className="text-[13px] font-normal text-muted-foreground">of {n(c.known_answers_run)} run</span></>}
-        sub={<>test inputs whose expected damage the build re-computed and got right · {n(c.known_answers_not_run)} not run, each with its reason</>} title="the cells' own known-answer tests, re-run by the data build: they prove the code computes the curve as written, not that the curve is right" />
+      {/* Curves drawn: on the About page with the other build checks */}
+      {/* Known answers: on the About page with the other build checks */}
       {SHOW_FIELD_REPORTS ? <Kpi label="Field reports" value={<>{c.field_searches_logged} <span className="text-[13px] font-normal text-muted-foreground">searches logged</span></>}
         sub={<>{m.sentences.not_searched.page} {c.occurrence_registers} battery registers seeded.</>} title="does it happen? — the occurrence register" /> : null}
       <Kpi label="Review" href="/review" value={<>{c.owner_reviews} <span className="text-[13px] font-normal text-muted-foreground">person reviews</span></>}

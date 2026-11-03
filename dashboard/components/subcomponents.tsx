@@ -41,7 +41,19 @@ function GapView({ s, blobBase }: { s: Subcomponent; blobBase: string }) {
       <div>
         <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Why there is no curve</div>
         <p className="mt-0.5">{g.reason}</p>
-        {g.source ? (
+        {g.research?.length ? (
+          <div className="mt-1.5">
+            <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">The research so far</div>
+            <ul className="mt-0.5 space-y-1">
+              {g.research.map((r) => (
+                <li key={r.path}>
+                  {r.link ? <a href={r.link} target="_blank" rel="noreferrer" className="text-accent hover:underline">{r.title} ↗</a> : <span>{r.title}</span>}
+                  <span className="block text-[11.5px] text-muted-foreground">{r.finding} <span className="italic">({r.repo === "hazard" ? "Hazard repository, " : ""}{r.where})</span></span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : g.source ? (
           <p className="mt-0.5 text-[11.5px] text-muted-foreground">
             The research behind this: {g.source.label}, <FileLink href={`${blobBase}/${g.source.path}`} title={g.source.path}>{fileName(g.source.path)}</FileLink>
           </p>

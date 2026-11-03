@@ -137,7 +137,8 @@ export interface Subcomponent {
   // the row's value share and its basis; real estate also: the building a row belongs to and what the row means
   group?: { key: string; label: string }; share?: number | null; share_basis?: string | null; note?: string | null;
   gap: {
-    reason: string; own_words?: string | null; source?: { label: string; path: string } | null; occurrence: OccurrenceBucket | null; effect: string; basis: { label: string; path: string }[];
+    reason: string; own_words?: string | null; source?: { label: string; path: string } | null;
+    research?: { title: string; finding: string; link: string | null; where: string; repo: string; path: string }[]; occurrence: OccurrenceBucket | null; effect: string; basis: { label: string; path: string }[];
     register: { path: string; sha256: string; search_log: string | null; last_searched: string | null; question: string | null } | null;
   } | null;
 }
@@ -335,7 +336,7 @@ export interface SpineType {
   planned?: boolean | null; catalogue_asset?: string | null; href: string | null; entries: Record<string, string>;
 }
 export interface SpineCategory { slug: string; label: string; rule?: string | null; planned: boolean; types: SpineType[] }
-export type LibraryTile = Tile & { building?: string; building_parts?: string[] };
+export type LibraryTile = Tile & { building?: string; building_parts?: string[]; gap_line?: string };
 export interface LibraryType { slug: string; label: string; building: string | null; profile: string | null; picture_note: string | null; href: string; tiles: Record<string, LibraryTile> }
 export interface LibraryCategory { slug: string; label: string; rule: string | null; planned: boolean; planned_types: string[]; types: LibraryType[] }
 export interface ReviewTask { kind: string; text: string; items: string[]; href: string }

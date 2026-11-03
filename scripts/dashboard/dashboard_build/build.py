@@ -11,6 +11,7 @@ from typing import Any
 from . import chain as chain_mod
 from . import hazard_main
 from . import hazard_use
+from . import research
 from .plain_reasons import plain as plain_reason, source_doc
 from . import twin as twin_mod
 from .catalogue import Entry, curve_records, load_entries
@@ -583,6 +584,9 @@ def build(write: bool = True) -> dict[str, Any]:
     check("hazard_links", "every Hazard file the pages name exists on Hazard; the ones not on its main are listed with where they are", not hz_lost,
           {"off_main": hz_off, "not_found": hz_lost, "hazard": hazard_main.state().get("sentence")}, severity="data")
     differs = [f"{eid}: {' '.join(u['differences'])}" for eid, u in sorted(hazard_uses.items()) if u["state"] == "differs"]
+    missing_research = research.problems(link_commit)
+    check("research_links", "every document the research index names exists where it says (this repository, or Hazard's main or a branch)",
+          not missing_research, {"missing": missing_research}, severity="data")
     snap = hazard_use.snapshot() or {}
     check("hazard_match", "every curve a layer on Hazard's dashboard was computed with matches what the page shows in everything that can change a loss",
           not differs, {"differs": differs, "used": sorted(e for e, u in hazard_uses.items() if u["state"] == "used"),
@@ -700,6 +704,21 @@ def build(write: bool = True) -> dict[str, Any]:
                     tile["href"] = f"/cells/{e_.id}?building={t_def['slug']}"
                     tile["aria_label"] = f"{tile['aria_label']}, {t_def['building'].lower()} rows"
                 row["tiles"][h["slug"]] = tile
+            # heat has no catalogue cell: its tile says why there is no curve and how much research there is so far
+            heat = next((h for h in sl["hazards"] if h["slug"] == "heat"), None)
+            if heat:
+                a_slug = asset_slug(t_def["catalogue_asset"], sl)
+                found = research.for_pair(a_slug, "heat", link_commit)
+                outside = [r_ for r_ in found if r_["repo"] == "hazard"]
+                row["tiles"]["heat"] = {
+                    "entry_id": None, "kind": "gap", "status": "gap", "title": f"Heat × {t_def['label']}", "hazard": {"slug": "heat", "label": "Heat"},
+                    "asset": {"slug": a_slug, "label": t_def["label"]}, "tiers": {"shape": "–", "cost": "–"}, "partial": False, "no_evaluator": False,
+                    "occurrence": {"mark": "—", "label": "no register"}, "review": {"review": None, "entry_read_kind": None, "entry_read_on": None},
+                    "word": None, "share_covered": None, "href": f"/assets/{t_def['slug']}?hazard=heat",
+                    "gap_line": f"{len(outside)} research note{'s' if len(outside) != 1 else ''} in Hazard" if outside else "performance, not damage",
+                    "summary": " ".join(f"{r_['title']}: {r_['finding']}" for r_ in found),
+                    "aria_label": f"{t_def['label']}, heat: no curve yet; " + (f"{len(outside)} research notes in Hazard" if outside else "treated as performance, not damage"),
+                }
             rows_out.append(row)
         library_rows.append({"slug": c_def["slug"], "label": c_def["label"], "rule": c_def.get("rule"), "planned": bool(c_def.get("planned")),
                              "planned_types": [t_["label"] for t_ in c_def["types"] if t_.get("planned")], "types": rows_out})
@@ -779,6 +798,9 @@ def build(write: bool = True) -> dict[str, Any]:
             cells[e.id]["_curves"] = [c for c in curves_out.values() if c["entry_id"] == e.id]
         view = asset_view(aslug, a_def, asset_entries, cells, sl, registers, bess_values if aslug == "bess" else None, fb_binding if aslug == "bess" else None, twin,
                           sub_budget if aslug == "substation" else None, sub_xwalk if aslug == "substation" else None, resolve_state, curves_out)
+        for s_ in view["subcomponents"]:  # the research so far behind a hazard with no curve (research_index.json)
+            if s_.get("gap"):
+                s_["gap"]["research"] = research.for_pair(aslug, s_["hazard"]["slug"], link_commit)
         for e in asset_entries:
             cells[e.id]["subcomponents"] = [s for s in view["subcomponents"] if s["entry_id"] == e.id]
             cells[e.id]["subcomponent_rollup"] = view["subcomponent_rollup"]["by_hazard"].get(hazard_slug(e.data["hazard"], sl))
