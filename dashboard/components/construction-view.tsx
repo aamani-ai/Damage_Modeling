@@ -56,17 +56,26 @@ function Fold({ label, small = false, children }: { label: string; small?: boole
   );
 }
 
+// Where a parameter's number came from: one line in the open (the build's sentence for its tier), then one closed
+// fold, the same for every parameter, with its sources (or the files that set it), the cell's reasoning and the file
+// the number is read from. The value itself is on the line above, so the fold does not repeat it.
 function WhereFrom({ p, legend, blobBase }: { p: ConstructionParameter; legend: Legend; blobBase: string }) {
+  const files = p.where_from === "our_judgment" ? p.files : [];
+  const label = [p.sources.length ? `sources (${p.sources.length})` : files.length ? "the files that set it" : null, p.reasoning.length ? "why this number" : null].filter(Boolean).join(" · ") || "where it is in the files";
   return (
     <div>
       <span className="text-muted-foreground">{legend.where_from[p.where_from]}</span>
-      {p.where_from === "our_judgment" ? (
-        <div><Files files={p.files} blobBase={blobBase} /></div>
-      ) : null}
-      {p.sources.length && p.where_from !== "curve_level" ? (
-        <ul className="mt-0.5 space-y-0.5">
-          {p.sources.map((s, i) => <li key={(s.id ?? s.source_id ?? "") + i}><SourceRef s={s} id={s.id ?? s.source_id} /></li>)}
-        </ul>
+      {p.sources.length || files.length || p.reasoning.length || p.value_path ? (
+        <Fold label={label} small>
+          {p.sources.length ? (
+            <ul className="mt-0.5 space-y-0.5">
+              {p.sources.map((s, i) => <li key={(s.id ?? s.source_id ?? "") + i}><SourceRef s={s} id={s.id ?? s.source_id} /></li>)}
+            </ul>
+          ) : null}
+          {files.length ? <div className="mt-0.5"><Files files={files} blobBase={blobBase} /></div> : null}
+          {p.reasoning.map((r) => <p key={r} className="mt-0.5">{r}</p>)}
+          {p.value_path ? <p className="mt-0.5 text-muted-foreground">read from <FileLink href={`${blobBase}/${p.value_path.split("::")[0]}`} title={p.value_path}>{fileName(p.value_path.split("::")[0])}</FileLink>{p.register_rows.length ? <> · register rows <span className="font-mono">{p.register_rows.join(", ")}</span></> : null}</p> : null}
+        </Fold>
       ) : null}
     </div>
   );
@@ -74,8 +83,6 @@ function WhereFrom({ p, legend, blobBase }: { p: ConstructionParameter; legend: 
 
 export function ConstructionView({ k, legend, blobBase, curveHref, title }: { k: CurveConstruction; legend: Legend; blobBase: string; curveHref?: string; title?: string }) {
   const params = Object.fromEntries(k.parameters.map((p) => [p.name, p]));
-  // the curve's sources, once, for every parameter that rests on them (each such parameter lists the same ones)
-  const curveSources = [...new Map(k.parameters.filter((p) => p.where_from === "curve_level").flatMap((p) => p.sources).map((s) => [s.id ?? s.source_id ?? JSON.stringify(s), s])).values()];
   const unit = k.axis?.unit && k.axis.unit !== "dimensionless" && k.axis.unit !== "class" ? ` ${k.axis.unit}` : "";
   return (
     <div className="space-y-2.5 text-[12.5px] leading-snug">
@@ -129,26 +136,9 @@ export function ConstructionView({ k, legend, blobBase, curveHref, title }: { k:
                 <span className="ml-auto">{p.tier_word ? <>{p.tier_word} <span className="font-mono text-[11px] text-muted-foreground">· {p.tier}</span></> : <span className="text-muted-foreground">curve: {k.curve_tiers.shape.word} shape · {k.curve_tiers.cost.word} cost</span>}</span>
               </div>
               <WhereFrom p={p} legend={legend} blobBase={blobBase} />
-              {/* the cell's reasoning for the number where it gives one, and the file it is read from (the value itself is
-                  on the line above, so it is not repeated) */}
-              {p.reasoning.length || p.value_path ? (
-                <Fold label={p.reasoning.length ? "why this number" : "where it is in the files"} small>
-                  {p.reasoning.map((r) => <p key={r} className="mt-0.5">{r}</p>)}
-                  {p.value_path ? <p className="mt-0.5 text-muted-foreground">read from <FileLink href={`${blobBase}/${p.value_path.split("::")[0]}`} title={p.value_path}>{fileName(p.value_path.split("::")[0])}</FileLink>{p.register_rows.length ? <> · register rows <span className="font-mono">{p.register_rows.join(", ")}</span></> : null}</p> : null}
-                </Fold>
-              ) : null}
             </li>
           ))}
         </ul>
-        {curveSources.length ? (
-          <div className="border-t border-border/60 pt-1">
-            <Fold label={`${legend.where_from.curve_level_list} (${curveSources.length})`}>
-              <ul className="mt-0.5 space-y-0.5">
-                {curveSources.map((s, i) => <li key={(s.id ?? s.source_id ?? "") + i}><SourceRef s={s} id={s.id ?? s.source_id} /></li>)}
-              </ul>
-            </Fold>
-          </div>
-        ) : null}
       </div>
 
       <p className="text-[11.5px] text-muted-foreground">
