@@ -109,7 +109,9 @@ WHERE_FROM = {
     "published": "From a published source: the link opens it.",
     "borrowed": "Borrowed: taken from a similar asset or a related study and adapted; the link opens what it stands in for.",
     "our_judgment": "Our judgment: no source gives this number; the files that set it are linked.",
-    "curve_level": "No register row for this parameter alone, so it carries the curve's tiers; these are the curve's own sources.",
+    # a curve_level parameter has no sources of its own: the page lists the curve's sources once, after the parameters
+    "curve_level": "No source for this number alone: it rests on the curve's sources, listed once below.",
+    "curve_level_list": "The curve's sources",
 }
 
 # A label in a cell's own files that reads wider than what the curve covers. The label is kept as written; this note

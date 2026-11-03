@@ -13,7 +13,8 @@ import { fmtPct } from "@/lib/format";
 import { FileLink, Tag, ToggleArrow, TOGGLE_CLASS } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
-export interface ConstructionCard { k: CurveConstruction; href: string; title: string }
+// `when` is the condition the curve is chosen under ("freshwater screening"), from the curve's selected_by
+export interface ConstructionCard { k: CurveConstruction; href: string; title: string; when: string | null }
 
 const fileName = (p: string) => p.split("/").slice(-1)[0];
 
@@ -92,6 +93,11 @@ function GapView({ s, blobBase }: { s: Subcomponent; blobBase: string }) {
 
 function RowDetail({ s, cards, legend, blobBase }: { s: Subcomponent; cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string }) {
   const shown = s.construction.filter((c) => cards[c.curve_id]);
+  // two curves for one part (fresh and salt water) carry the same part name: the condition tells them apart
+  const titleOf = (id: string) => {
+    const t = cards[id].title;
+    return shown.filter((c) => cards[c.curve_id].title === t).length > 1 && cards[id].when ? `${t} · ${cards[id].when}` : t;
+  };
   return (
     <div className="space-y-3">
       {s.note || s.share != null ? (
@@ -109,7 +115,7 @@ function RowDetail({ s, cards, legend, blobBase }: { s: Subcomponent; cards: Rec
       ) : null}
       {shown.map((c) => (
         <div key={c.curve_id} className="rounded-md border border-border p-2.5">
-          <ConstructionView k={cards[c.curve_id].k} legend={legend} blobBase={blobBase} curveHref={cards[c.curve_id].href} title={cards[c.curve_id].title} />
+          <ConstructionView k={cards[c.curve_id].k} legend={legend} blobBase={blobBase} curveHref={cards[c.curve_id].href} title={titleOf(c.curve_id)} />
         </div>
       ))}
       {s.gap ? <GapView s={s} blobBase={blobBase} /> : null}

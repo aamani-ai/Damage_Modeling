@@ -50,7 +50,7 @@ function WhereFrom({ p, legend, blobBase }: { p: ConstructionParameter; legend: 
       {p.where_from === "our_judgment" ? (
         <div><Files files={p.files} blobBase={blobBase} /></div>
       ) : null}
-      {p.sources.length ? (
+      {p.sources.length && p.where_from !== "curve_level" ? (
         <ul className="mt-0.5 space-y-0.5">
           {p.sources.map((s, i) => <li key={(s.id ?? s.source_id ?? "") + i}><SourceRef s={s} id={s.id ?? s.source_id} /></li>)}
         </ul>
@@ -61,6 +61,8 @@ function WhereFrom({ p, legend, blobBase }: { p: ConstructionParameter; legend: 
 
 export function ConstructionView({ k, legend, blobBase, curveHref, title }: { k: CurveConstruction; legend: Legend; blobBase: string; curveHref?: string; title?: string }) {
   const params = Object.fromEntries(k.parameters.map((p) => [p.name, p]));
+  // the curve's sources, once, for every parameter that rests on them (each such parameter lists the same ones)
+  const curveSources = [...new Map(k.parameters.filter((p) => p.where_from === "curve_level").flatMap((p) => p.sources).map((s) => [s.id ?? s.source_id ?? JSON.stringify(s), s])).values()];
   const unit = k.axis?.unit && k.axis.unit !== "dimensionless" && k.axis.unit !== "class" ? ` ${k.axis.unit}` : "";
   return (
     <div className="space-y-2.5 text-[12.5px] leading-snug">
@@ -126,6 +128,14 @@ export function ConstructionView({ k, legend, blobBase, curveHref, title }: { k:
             </li>
           ))}
         </ul>
+        {curveSources.length ? (
+          <div className="border-t border-border/60 pt-1">
+            <span className="text-muted-foreground">{legend.where_from.curve_level_list}</span>
+            <ul className="mt-0.5 space-y-0.5">
+              {curveSources.map((s, i) => <li key={(s.id ?? s.source_id ?? "") + i}><SourceRef s={s} id={s.id ?? s.source_id} /></li>)}
+            </ul>
+          </div>
+        ) : null}
       </div>
 
       <p className="text-[11.5px] text-muted-foreground">
