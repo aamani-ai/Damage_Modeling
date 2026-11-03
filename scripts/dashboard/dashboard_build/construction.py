@@ -300,12 +300,12 @@ def legend(cat_text: str) -> dict[str, Any]:
         "units": _units(), "units_source": UNITS_SOURCE,
         # the library's five views of a tile, and what its borders and fills mean
         "lenses": [
-            {"key": "status", "word": "Status", "meaning": "The first line of every tile, and its shade: what exists for this asset and hazard."},
-            {"key": "evidence", "word": "Evidence", "meaning": "How well supported the curve's numbers are, in one word: the weaker of its shape and its cost (hover for both)."},
+            {"key": "status", "word": "Status", "meaning": "The first line of every tile, and its shade (see a curve's status): what exists for this asset and hazard."},
+            {"key": "evidence", "word": "Evidence", "meaning": "How well supported the curve's numbers are, in one word: the weaker of how damage rises with the hazard and how that damage becomes dollars (hover a tile for both)."},
             # field reports are hidden for now (SHOW_FIELD_REPORTS); the entry returns with them
             *([{"key": "occurrence", "word": "Field reports", "meaning": "Whether anyone has searched for real-world reports of this hazard damaging this asset, and what was found."}]
               if SHOW_FIELD_REPORTS else []),
-            {"key": "value", "word": "Value covered", "meaning": "How much of the asset's value the curves price; the rest has no curve for this hazard."},
+            {"key": "value", "word": "Value covered", "meaning": "Of everything the asset is worth, the share that has a damage curve for this hazard: 75% means a quarter of its value has none. \"No total stated\" means the cell gives each part's share but never their total, so none is shown."},
             {"key": "review", "word": "Read by", "meaning": "Whether a person has reviewed this entry, or only an agent has read it."},
         ],
         "marks": [

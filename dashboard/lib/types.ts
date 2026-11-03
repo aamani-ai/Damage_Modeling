@@ -336,7 +336,7 @@ export interface SpineType {
   planned?: boolean | null; catalogue_asset?: string | null; href: string | null; entries: Record<string, string>;
 }
 export interface SpineCategory { slug: string; label: string; rule?: string | null; planned: boolean; types: SpineType[] }
-export type LibraryTile = Tile & { building?: string; building_parts?: string[]; gap_line?: string };
+export type LibraryTile = Tile & { building?: string; building_parts?: string[] };
 export interface LibraryType { slug: string; label: string; building: string | null; profile: string | null; picture_note: string | null; href: string; tiles: Record<string, LibraryTile> }
 export interface LibraryCategory { slug: string; label: string; rule: string | null; planned: boolean; planned_types: string[]; types: LibraryType[] }
 export interface ReviewTask { kind: string; text: string; items: string[]; href: string }

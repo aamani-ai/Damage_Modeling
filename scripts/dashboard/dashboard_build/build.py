@@ -715,7 +715,6 @@ def build(write: bool = True) -> dict[str, Any]:
                     "asset": {"slug": a_slug, "label": t_def["label"]}, "tiers": {"shape": "–", "cost": "–"}, "partial": False, "no_evaluator": False,
                     "occurrence": {"mark": "—", "label": "no register"}, "review": {"review": None, "entry_read_kind": None, "entry_read_on": None},
                     "word": None, "share_covered": None, "href": f"/assets/{t_def['slug']}?hazard=heat",
-                    "gap_line": f"{len(outside)} research note{'s' if len(outside) != 1 else ''} in Hazard" if outside else "performance, not damage",
                     "summary": " ".join(f"{r_['title']}: {r_['finding']}" for r_ in found),
                     "aria_label": f"{t_def['label']}, heat: no curve yet; " + (f"{len(outside)} research notes in Hazard" if outside else "treated as performance, not damage"),
                 }

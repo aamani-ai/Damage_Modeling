@@ -12,7 +12,7 @@ import type { LibraryTile, ManifestV3 } from "@/lib/types";
 import { InfoHint } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
-const LENS_LABEL: Record<string, string> = { evidence: "Evidence", occurrence: "Field reports", value: "Value covered", review: "Read by" };
+const LENS_LABEL: Record<string, string> = { evidence: "Status / Evidence", occurrence: "Field reports", value: "Value covered", review: "Read by" };
 const STATUS_WORD: Record<string, string> = { live: "live", proposal: "proposal", reused: "reused", gap: "no curve yet" };
 // a tile's status is its shade, in every view: live white, proposal grey, reused dashed, no curve yet dark grey
 const STATUS_TILE: Record<string, string> = {
@@ -22,11 +22,17 @@ const STATUS_TILE: Record<string, string> = {
   gap: "border-border bg-[var(--tile-gap)]",
 };
 
+// "2026-10-19" → "19 Oct"
+function dayMonth(iso: string): string {
+  const d = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
+  return d ? `${Number(d[3])} ${["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][Number(d[2]) - 1]}` : iso;
+}
+
 function second(t: LibraryTile, lens: string): string {
-  if (t.status === "gap") return t.gap_line ?? "see why";
+  if (t.status === "gap") return "see why";
   if (lens === "occurrence") return t.occurrence.label === "not searched" || t.occurrence.label === "no register" ? "field reports: not searched" : `field reports: ${t.occurrence.label}`;
-  if (lens === "value") return t.share_covered != null ? `${fmtPct(t.share_covered)} of value covered` : "share not stated";
-  if (lens === "review") return t.review.review ? `reviewed by ${t.review.review.by}` : `read by an agent ${t.review.entry_read_on?.slice(5) ?? ""}`;
+  if (lens === "value") return t.share_covered != null ? `${fmtPct(t.share_covered)} of value covered` : "no total stated";
+  if (lens === "review") return t.review.review ? `reviewed by ${t.review.review.by}` : t.review.entry_read_on ? `read by an agent on ${dayMonth(t.review.entry_read_on)}` : "read by an agent";
   return t.word ?? "no tier stated";
 }
 
@@ -93,7 +99,6 @@ export function Library({ m }: { m: ManifestV3 }) {
           <div className="space-y-1">
             <div>A tile&apos;s first line and shade say what exists; the second line is the view chosen here.</div>
             <div>Hover a tile for both halves of its evidence: <span className="italic">how damage rises</span> and <span className="italic">how it becomes dollars</span>.</div>
-            <div className="text-muted-foreground">Arrow keys move between tiles; Enter opens the curve.</div>
           </div>
         </InfoHint>
         <span className="ml-auto text-muted-foreground">a type&apos;s name opens what its curves cover · a tile opens the curve</span>
