@@ -31,13 +31,13 @@ export function CellCoverage({ covs, hazardSlug, loadOrder }: { covs: CellCov[];
   const title = (
     <>
       <button type="button" aria-expanded={open} aria-controls="card-coverage-body" onClick={() => setPicture(open ? "hidden" : null)} className={`${TOGGLE_CLASS} normal-case tracking-normal`}>
-        <ToggleArrow open={open} />What this curve covers
+        <ToggleArrow open={open} />What this curve covers on the Digital Twin
       </button>
       <Link href={`/assets/${current.slug}?hazard=${hazardSlug}`} className="ml-1 font-normal normal-case tracking-normal text-accent hover:underline">on the {current.label.toLowerCase()} page ▸</Link>
     </>
   );
   return (
-    <section id="card-coverage" className="mt-3 rounded-lg border border-border bg-card" aria-label="What this curve covers">
+    <section id="card-coverage" className="mt-3 rounded-lg border border-border bg-card" aria-label="What this curve covers on the Digital Twin">
       {open ? (
         <div id="card-coverage-body">
           <TwinCoverage key={current.slug} cov={current.cov} loadOrder={loadOrder} hazardSlug={hazardSlug} mode="cell" height={400} title={title} hazardPicker={picker} />

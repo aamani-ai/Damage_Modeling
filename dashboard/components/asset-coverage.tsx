@@ -29,18 +29,18 @@ export function AssetCoverage({ cov, loadOrder }: { cov: Coverage; loadOrder: st
   );
   const title = (
     <button type="button" aria-expanded={open} aria-controls="asset-coverage-body" onClick={() => setPicture(open ? "hidden" : null)} className={`${TOGGLE_CLASS} normal-case tracking-normal`}>
-      <ToggleArrow open={open} />What each curve covers
+      <ToggleArrow open={open} />What each curve covers on the Digital Twin
     </button>
   );
   if (!open) {
     return (
-      <section id="asset-coverage" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="What each curve covers">
+      <section id="asset-coverage" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="What each curve covers on the Digital Twin">
         <div className="px-3 py-2">{title}</div>
       </section>
     );
   }
   return (
-    <section id="asset-coverage" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="What each curve covers">
+    <section id="asset-coverage" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="What each curve covers on the Digital Twin">
       <div id="asset-coverage-body">
       <TwinCoverage cov={cov} loadOrder={loadOrder} hazardSlug={hz.hazard.slug} mode="asset" title={title} hazardPicker={picker} height={480} />
       <div className="flex flex-wrap items-center gap-x-3 border-t border-border px-3 py-2 text-[12.5px]">

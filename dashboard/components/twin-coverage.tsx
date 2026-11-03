@@ -345,7 +345,7 @@ export function TwinCoverage({
   const link = (p: string) => <CurveLink key={p} part={p} spark={hz.sparks?.[p]} href={curveHref(p)} onShow={mode === "cell" && hz.href ? showCurve : undefined} />;
 
   return (
-    <div className={full ? "fixed inset-0 z-50 overflow-auto bg-background p-3" : ""} role={full ? "dialog" : undefined} aria-modal={full || undefined} aria-label={full ? "What the curve covers, full screen" : undefined}>
+    <div className={full ? "fixed inset-0 z-50 overflow-auto bg-background p-3" : ""} role={full ? "dialog" : undefined} aria-modal={full || undefined} aria-label={full ? "What the curve covers on the Digital Twin, full screen" : undefined}>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 px-3 pb-2 pt-2">
         {/* a plain title is a heading; a fold-out title (the cell page's) brings its own toggle look */}
         {typeof title === "string" ? <span className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">{title}</span> : title ? <span className="text-[12px] text-muted-foreground">{title}</span> : null}

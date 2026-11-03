@@ -13,8 +13,9 @@ import { fmtPct } from "@/lib/format";
 import { FileLink, Tag, ToggleArrow, TOGGLE_CLASS } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
-// `when` is the condition the curve is chosen under ("freshwater screening"), from the curve's selected_by
-export interface ConstructionCard { k: CurveConstruction; href: string; title: string; when: string | null }
+// `when` is the condition the curve is chosen under ("freshwater screening"), from the curve's selected_by; `unit` and
+// `subsystem` are the failure unit ID and subsystem code the curve file attaches it to (what Hazard's code reads)
+export interface ConstructionCard { k: CurveConstruction; href: string; title: string; when: string | null; unit: string | null; subsystem: string | null }
 
 const fileName = (p: string) => p.split("/").slice(-1)[0];
 
@@ -145,6 +146,7 @@ function GapView({ s, blobBase }: { s: Subcomponent; blobBase: string }) {
 
 function RowDetail({ s, cards, legend, blobBase, names }: { s: Subcomponent; cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string; names?: string[] }) {
   const shown = s.construction.filter((c) => cards[c.curve_id]);
+  const ids = [...new Map(shown.filter((c) => cards[c.curve_id].unit).map((c) => [cards[c.curve_id].unit!, cards[c.curve_id].subsystem])).entries()];
   // two curves for one part (fresh and salt water) carry the same part name: the condition tells them apart
   const titleOf = (id: string) => {
     const t = cards[id].title;
@@ -152,8 +154,14 @@ function RowDetail({ s, cards, legend, blobBase, names }: { s: Subcomponent; car
   };
   return (
     <div className="space-y-3">
-      {/* the hazard team's own words for this subsystem, from its catalogue entry */}
-      {names?.length ? <p className="text-[12.5px]"><span className="text-muted-foreground">The {s.hazard.label.toLowerCase()} team calls it:</span> {names.join(" · ")}</p> : null}
+      {/* three names for one part: the label in the cell's catalogue entry (for people), and the failure unit ID and
+          subsystem code in its curve file (what Hazard's code reads) */}
+      {names?.length || ids.length ? (
+        <p className="text-[12.5px]">
+          {names?.length ? <><span className="text-muted-foreground">In the {s.hazard.label.toLowerCase()} catalogue entry:</span> {names.join(" · ")}</> : null}
+          {ids.map(([u, ss], i) => <span key={u} className="text-muted-foreground">{names?.length || i ? " · " : ""}failure unit <span className="font-mono text-[11.5px] text-foreground">{u}</span>{ss ? <> · subsystem code <span className="font-mono text-[11.5px] text-foreground">{ss}</span></> : null}</span>)}
+        </p>
+      ) : null}
       {s.note || s.share != null ? (
         <p className="text-[12.5px]">
           {s.note}{s.note && s.share != null ? " " : ""}
