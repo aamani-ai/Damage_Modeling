@@ -416,7 +416,7 @@ export function TwinCoverage({
         <div className="min-w-0 lg:relative">
           <div className="flex flex-col gap-3 lg:absolute lg:inset-0">
             <div className="shrink-0">
-              <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">What the colours mean <span className="font-normal normal-case tracking-normal">· parts counted</span></div>
+              <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">What the colours mean <span className="font-normal normal-case tracking-normal">· number of twin parts</span></div>
               <CoverageLegend words={cov.state_words} meaning={cov.state_meaning} counts={counts} />
             </div>
             <div className="flex min-h-0 flex-1 flex-col">

@@ -219,6 +219,7 @@ export function SubcomponentPanel({ subs, rollup, hazards, defaultHazard, cards,
       </div>
       {shown ? (
         <div id="subcomponents-body">
+          <p className="max-w-[1100px] px-3 pb-1.5 text-[12px] text-muted-foreground">Each row is a subsystem: one of the cost buckets the asset&apos;s value is split into.{overview ? " The Digital Twin's parts are further down, with the 3D picture." : ""}</p>
           {picker ? (
             <div role="radiogroup" aria-label="Which hazard" className="mx-3 mb-1 inline-flex flex-wrap rounded-md border border-border bg-card p-0.5 text-[12px]">
               {overview ? (

@@ -43,18 +43,12 @@ export function AssetCoverage({ cov, loadOrder }: { cov: Coverage; loadOrder: st
     <section id="asset-coverage" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="What each curve covers on the Digital Twin">
       <div id="asset-coverage-body">
       <TwinCoverage cov={cov} loadOrder={loadOrder} hazardSlug={hz.hazard.slug} mode="asset" title={title} hazardPicker={picker} height={480} />
-      <div className="flex flex-wrap items-center gap-x-3 border-t border-border px-3 py-2 text-[12.5px]">
-        {hz.gap ? (
-          <span className="text-muted-foreground">{hz.hazard.label}: no curve for this asset yet.</span>
-        ) : (
-          <>
-            <span>
-              {hz.hazard.label}: {hz.curve_parts.length ? <>curves for <span className="font-medium">{hz.curve_parts.join(", ")}</span></> : "no part has a curve"}.
-            </span>
-            {hz.href ? <Link href={hz.href} className="ml-auto text-accent hover:underline">open the {hz.hazard.label.toLowerCase()} curve ▸</Link> : null}
-          </>
-        )}
-      </div>
+      {/* which parts have a curve is in the list beside the picture; only the way to the curve stays here */}
+      {!hz.gap && hz.href ? (
+        <div className="flex border-t border-border px-3 py-2 text-[12.5px]">
+          <Link href={hz.href} className="ml-auto text-accent hover:underline">open the {hz.hazard.label.toLowerCase()} curve ▸</Link>
+        </div>
+      ) : null}
       </div>
     </section>
   );
@@ -78,10 +72,10 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
   // counted in this table's own rows (the twin's systems), not in the cell's part names
   const withCurve = (slug: string) => cov.matrix.filter((r) => r.cells[slug]?.state === "curve").length;
   return (
-    <section className="rounded-lg border border-border bg-card" aria-label="Which hazard has a curve for which system">
-      <div className="px-3 pt-2.5 pb-1 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">Which hazard has a curve for which part</div>
-      <p className="px-3 pb-2 text-[12.5px] leading-snug">
-        The twin&apos;s systems down the side, the hazards across. Each cell was built on its own, so each names the parts in its own words and splits the {(cov.type.building ?? cov.type.label).toLowerCase()} differently; this table puts them on one breakdown.
+    <section className="rounded-lg border border-border bg-card" aria-label="The Digital Twin's systems, hazard by hazard">
+      <div className="px-3 pt-2.5 pb-1 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">The Digital Twin&apos;s systems, hazard by hazard</div>
+      <p className="max-w-[1100px] px-3 pb-2 text-[12.5px] leading-snug">
+        Each row is a system of the Digital Twin&apos;s 3D model of the {(cov.type.building ?? cov.type.label).toLowerCase()}, with the parts it contains underneath; each column is a hazard. A cell says whether that hazard&apos;s curves cover the system. These rows are the picture&apos;s breakdown, not the subsystems (cost buckets) in &quot;Every subsystem, curve or gap&quot;, so the counts differ.
       </p>
       <div className="overflow-x-auto px-3 pb-3">
         <table className="w-full min-w-[860px] text-[12px]">
@@ -103,7 +97,7 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
           </tbody>
         </table>
         <p className="mt-1.5 text-[11.5px] text-muted-foreground">
-          A system shows its strongest state; &quot;for some parts&quot; means only some of its parts are in that state. Click a cell to see that system on the picture above; a part&apos;s name opens its curve. Mapped from{" "}
+          When a system&apos;s parts differ, the cell gives the best state first and &quot;also …&quot; for the rest. Click a cell to see that system on the picture above; a curve&apos;s name opens it. Mapped from{" "}
           <span className="font-mono">{cov.twin.crosswalk.split("/").slice(-1)[0]}</span>, a draft co-owned with Hazard.
         </p>
       </div>
@@ -119,6 +113,7 @@ function withPart(href: string, part: string): string {
 }
 
 function MatrixGroup({ label, rows, cov, show }: { label: string | null; rows: Coverage["matrix"]; cov: Coverage; show: (hazard: string | null, tree: string, node: string) => void }) {
+  const contents = (tree: string, node: string) => Object.values(cov.trees[tree].nodes).filter((n) => n.p === node).map((n) => n.n);
   return (
     <>
       {label ? (
@@ -128,17 +123,19 @@ function MatrixGroup({ label, rows, cov, show }: { label: string | null; rows: C
         <tr key={r.node} className="border-t border-border/60 align-top">
           <td className="py-1 pr-2 font-medium">
             <button type="button" onClick={() => show(null, r.tree, r.node)} className="text-left hover:text-accent hover:underline" title={`show ${r.name} on the picture`}>{r.name}</button>
+            {/* the parts this system contains, from the twin's own tree */}
+            {contents(r.tree, r.node).length ? <span className="block max-w-[16rem] text-[11px] font-normal leading-snug text-muted-foreground">{contents(r.tree, r.node).join(", ")}</span> : null}
           </td>
           {cov.hazards.map((h) => {
             const c = r.cells[h.hazard.slug];
             if (!c) return <td key={h.hazard.slug} className="py-1 pr-2 text-muted-foreground">—</td>;
             return (
               <td key={h.hazard.slug} className="py-0.5 pr-1.5" title={c.states.map((s) => cov.state_meaning?.[s as CoverageState] ?? cov.state_words[s as CoverageState]).join("\n")}>
-                <button type="button" onClick={() => show(h.hazard.slug, r.tree, r.node)} className="flex w-full items-start gap-1.5 rounded px-1 py-0.5 text-left hover:bg-muted" aria-label={`${r.name} × ${h.hazard.label}: ${c.words}${c.mixed ? " for some parts" : ""} — show it on the picture`}>
+                <button type="button" onClick={() => show(h.hazard.slug, r.tree, r.node)} className="flex w-full items-start gap-1.5 rounded px-1 py-0.5 text-left hover:bg-muted" aria-label={`${r.name} × ${h.hazard.label}: ${c.words}${c.mixed ? ", and other parts in other states" : ""} — show it on the picture`}>
                   <Swatch state={c.state} className="mt-[3px]" />
                   <span className="leading-snug">
                     <span>{c.words}</span>
-                    {c.mixed ? <span className="text-muted-foreground"> for some parts</span> : null}
+                    {c.mixed ? <span className="text-muted-foreground"> · also {c.states.filter((s) => s !== c.state).map((s) => cov.state_short[s as CoverageState]).join(", ")}</span> : null}
                   </span>
                 </button>
                 {c.curve_parts.length ? (
