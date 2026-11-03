@@ -110,7 +110,7 @@ WHERE_FROM = {
     "borrowed": "Borrowed: taken from a similar asset or a related study and adapted; the link opens what it stands in for.",
     "our_judgment": "Our judgment: no source gives this number; the files that set it are linked.",
     # a curve_level parameter has no sources of its own: the page lists the curve's sources once, after the parameters
-    "curve_level": "No source for this number alone: it rests on the curve's sources, listed once below.",
+    "curve_level": "No source for this number alone: it rests on the curve's sources (below).",
     "curve_level_list": "The curve's sources",
 }
 

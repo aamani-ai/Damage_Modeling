@@ -1,18 +1,16 @@
 "use client";
 
 // The cells' own part lists, asset by asset (brief §3.4; one control away on the asset page since iteration 3): the
-// parts of the plant × the hazards, in words — "curve · published", "curve for part of it", "named, no response yet",
-// "no curve", "not named by this cell", "no cell yet" — a lens for curves, field reports or the twin; the Digital
-// Twin's nodes where Hazard's crosswalk exists; and the finding that the cells split the plant differently.
+// parts of the plant × the hazards, in the coverage words ("has a curve · published", "partial", "no curve yet", "not
+// named by this cell"); the Digital Twin's nodes where Hazard's crosswalk exists; and the finding that the cells split
+// the plant differently.
 import Link from "next/link";
 import { useRef } from "react";
 import { fmtPct, fmtUsdCompact } from "@/lib/format";
 import { useUrlParam } from "@/lib/url-state";
 import type { AssetCellV2, AssetViewV2, ManifestV2 } from "@/lib/types";
 import { InfoHint } from "./ui";
-import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
-const LENS_LABEL: Record<string, string> = { all: "All", curves: "Curves", occurrence: "Does it happen?", twin: "Twin" };
 const LEAD_WORD: Record<string, string> = { H: "high", M: "medium", L: "low" };
 
 function cellTitle(c: AssetCellV2): string {
@@ -48,10 +46,9 @@ function CellWords({ c, lens }: { c: AssetCellV2; lens: string }) {
 }
 
 export function AssetViewGrid({ v }: { v: AssetViewV2; m: ManifestV2 }) {
-  const [lensParam, setLens] = useUrlParam("lens");
   const [openRow, setRow] = useUrlParam("row");
-  const lenses = ["all", "curves", ...(SHOW_FIELD_REPORTS ? ["occurrence"] : []), ...(v.twin.available && v.twin.leads !== false ? ["twin"] : [])];
-  const lens = lenses.includes(lensParam ?? "") ? (lensParam as string) : "all";
+  // one view: every cell shows its words (the "curves only" and "twin" views showed a subset of the same words)
+  const lens = "all";
   const grid = useRef<HTMLTableElement>(null);
   const five = v.hazards.filter((h) => !h.outside_the_five);
   const outside = v.hazards.filter((h) => h.outside_the_five);
@@ -74,12 +71,6 @@ export function AssetViewGrid({ v }: { v: AssetViewV2; m: ManifestV2 }) {
   return (
     <div>
       <div className="flex flex-wrap items-center gap-2 text-[12px]">
-        <span className="text-muted-foreground">show</span>
-        <div role="radiogroup" aria-label="Asset view lens" className="inline-flex rounded-md border border-border bg-card p-0.5">
-          {lenses.map((l) => (
-            <button key={l} type="button" role="radio" aria-checked={lens === l} onClick={() => setLens(l === "all" ? null : l)} className={`rounded px-2 py-0.5 ${lens === l ? "bg-accent/10 text-accent" : "text-muted-foreground hover:text-foreground"}`}>{LENS_LABEL[l]}</button>
-          ))}
-        </div>
         <InfoHint label="How to read a cell">
           <div className="space-y-1">
             <div><span className="font-medium">has a curve · published</span> — this part has a curve under this hazard; the words say how sure we are (field-calibrated · published · borrowed · our judgment)</div>

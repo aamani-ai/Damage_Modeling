@@ -3,6 +3,7 @@
 // that set it, or what a borrowed number stands in for); then the files that built it. No hooks and no file reads, so
 // the curve page and the subcomponent panel share it. Every sentence is the build's.
 import Link from "next/link";
+import type { ReactNode } from "react";
 import type { ConstructionFile, ConstructionParameter, CurveConstruction, HazardUseState, Legend, ProductionState } from "@/lib/types";
 import { fmtNum } from "@/lib/format";
 import { SourceRef } from "./source-link";
@@ -40,6 +41,18 @@ function Files({ files, blobBase }: { files: ConstructionFile[]; blobBase: strin
         <span key={f.path}>{i ? " · " : ""}{f.role} <FileLink href={`${blobBase}/${f.path}`} title={f.path}>{fileName(f.path)}</FileLink></span>
       ))}
     </span>
+  );
+}
+
+// a closed-by-default fold with the dashboard's arrow, without hooks (the open state is the element's own)
+function Fold({ label, small = false, children }: { label: string; small?: boolean; children: ReactNode }) {
+  return (
+    <details className={`group mt-0.5 ${small ? "text-[11.5px]" : ""}`}>
+      <summary className="inline-flex cursor-pointer list-none items-center gap-1 text-muted-foreground hover:text-foreground [&::-webkit-details-marker]:hidden">
+        <span aria-hidden className="inline-block w-3 text-[13px] leading-none transition-transform group-open:rotate-90">▸</span>{label}
+      </summary>
+      <div className="pl-4">{children}</div>
+    </details>
   );
 }
 
@@ -116,24 +129,24 @@ export function ConstructionView({ k, legend, blobBase, curveHref, title }: { k:
                 <span className="ml-auto">{p.tier_word ? <>{p.tier_word} <span className="font-mono text-[11px] text-muted-foreground">· {p.tier}</span></> : <span className="text-muted-foreground">curve: {k.curve_tiers.shape.word} shape · {k.curve_tiers.cost.word} cost</span>}</span>
               </div>
               <WhereFrom p={p} legend={legend} blobBase={blobBase} />
+              {/* the cell's reasoning for the number where it gives one, and the file it is read from (the value itself is
+                  on the line above, so it is not repeated) */}
               {p.reasoning.length || p.value_path ? (
-                <details className="mt-0.5 text-[11.5px]">
-                  <summary className="cursor-pointer text-muted-foreground hover:text-foreground">reasoning and exact location</summary>
+                <Fold label={p.reasoning.length ? "why this number" : "where it is in the files"} small>
                   {p.reasoning.map((r) => <p key={r} className="mt-0.5">{r}</p>)}
-                  {p.register_rows.length ? <p className="mt-0.5 text-muted-foreground">register rows: <span className="font-mono">{p.register_rows.join(", ")}</span></p> : null}
-                  {p.value_path ? <p className="mt-0.5 break-all font-mono text-muted-foreground">{p.value_path}</p> : null}
-                  {typeof p.value === "object" && p.value !== null ? <pre className="mt-0.5 max-h-48 overflow-auto rounded bg-muted p-1.5 font-mono text-[11px]">{JSON.stringify(p.value, null, 1)}</pre> : null}
-                </details>
+                  {p.value_path ? <p className="mt-0.5 text-muted-foreground">read from <FileLink href={`${blobBase}/${p.value_path.split("::")[0]}`} title={p.value_path}>{fileName(p.value_path.split("::")[0])}</FileLink>{p.register_rows.length ? <> · register rows <span className="font-mono">{p.register_rows.join(", ")}</span></> : null}</p> : null}
+                </Fold>
               ) : null}
             </li>
           ))}
         </ul>
         {curveSources.length ? (
           <div className="border-t border-border/60 pt-1">
-            <span className="text-muted-foreground">{legend.where_from.curve_level_list}</span>
-            <ul className="mt-0.5 space-y-0.5">
-              {curveSources.map((s, i) => <li key={(s.id ?? s.source_id ?? "") + i}><SourceRef s={s} id={s.id ?? s.source_id} /></li>)}
-            </ul>
+            <Fold label={`${legend.where_from.curve_level_list} (${curveSources.length})`}>
+              <ul className="mt-0.5 space-y-0.5">
+                {curveSources.map((s, i) => <li key={(s.id ?? s.source_id ?? "") + i}><SourceRef s={s} id={s.id ?? s.source_id} /></li>)}
+              </ul>
+            </Fold>
           </div>
         ) : null}
       </div>

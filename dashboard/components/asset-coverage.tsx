@@ -75,6 +75,8 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
     document.getElementById("asset-coverage")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
   const name = (k: string) => cov.trees[k].nodes[cov.trees[k].root]?.n ?? k;
+  // counted in this table's own rows (the twin's systems), not in the cell's part names
+  const withCurve = (slug: string) => cov.matrix.filter((r) => r.cells[slug]?.state === "curve").length;
   return (
     <section className="rounded-lg border border-border bg-card" aria-label="Which hazard has a curve for which system">
       <div className="px-3 pt-2.5 pb-1 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">Which hazard has a curve for which part</div>
@@ -89,7 +91,7 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
               {cov.hazards.map((h) => (
                 <th key={h.hazard.slug} className="py-1 pr-2 text-left font-medium">
                   {h.href ? <Link href={h.href} className="hover:text-accent hover:underline">{h.hazard.label}</Link> : h.hazard.label}
-                  <span className="block font-normal normal-case tracking-normal text-muted-foreground/80">{h.gap ? "no curve yet" : `${h.curve_parts.length} part${h.curve_parts.length === 1 ? "" : "s"} with a curve`}</span>
+                  <span className="block font-normal normal-case tracking-normal text-muted-foreground/80">{h.gap ? "no curve yet" : `${withCurve(h.hazard.slug)} of ${cov.matrix.length} with a curve`}</span>
                 </th>
               ))}
             </tr>
