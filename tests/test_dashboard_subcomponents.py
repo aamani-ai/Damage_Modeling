@@ -74,6 +74,10 @@ def test_where_each_number_came_from_follows_its_tier():
     judged = 0
     for path in sorted((DATA / "curves").glob("*/*.json")):
         for parameter in json.loads(path.read_text())["construction"]["parameters"]:
+            # a single number with no register row says it has no source; a whole point list rests on the curve's
+            if parameter["where_from"] == "unsourced":
+                assert parameter["tier"] is None and not parameter["sources"] and not isinstance(parameter["value"], (list, dict))
+                continue
             assert parameter["where_from"] == expected[parameter["tier"]]
             if parameter["where_from"] == "our_judgment":
                 judged += 1

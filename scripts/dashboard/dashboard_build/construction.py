@@ -109,7 +109,10 @@ WHERE_FROM = {
     "published": "From a published source.",
     "borrowed": "Borrowed: taken from a similar asset or a related study and adapted.",
     "our_judgment": "Our judgment: no source gives this number.",
+    # a whole point list or table with no row of its own: the curve's sources are where those points come from
     "curve_level": "No source for this number alone: it rests on the curve's own sources.",
+    # one number with no row of its own (a ceiling such as max_DR = 1): nothing cites a source for it
+    "unsourced": "Set by the team; no source cited.",
 }
 
 # A label in a cell's own files that reads wider than what the curve covers. The label is kept as written; this note
@@ -196,13 +199,17 @@ def construction_block(c: dict[str, Any], artifact_path: str | None, status: str
         tier = tier_span([r.get("tier") for r in matched]) if matched else None
         tier = None if tier == "–" else tier
         kind = _where_kind(tier)
+        # a single number no register row covers is not supported by the curve's sources: say so, not borrow them
+        unsourced = kind == "curve_level" and not isinstance(value, (list, dict))
+        if unsourced:
+            kind = "unsourced"
         parameter_docs.append({
             "name": name, "definition": meaning.get(name) or humanise(name).lower(), "value": value,
             "value_path": f"{artifact_path}::curve_id={c.get('curve_id')}::parameters.{name}" if artifact_path else None,
             "tier": tier, "tier_word": tier_words(tier) if tier else None,
             "reasoning": [r.get("reasoning") for r in matched if r.get("reasoning")],
-            "source_ids": source_ids or [s.get("id") or s.get("source_id") for s in construction_sources if s.get("id") or s.get("source_id")],
-            "sources": resolved if matched else construction_sources,
+            "source_ids": source_ids or ([] if unsourced else [s.get("id") or s.get("source_id") for s in construction_sources if s.get("id") or s.get("source_id")]),
+            "sources": resolved if matched else ([] if unsourced else construction_sources),
             "unresolved_source_ids": [sid for sid in source_ids if not resolve(sid)],
             "register_rows": [r.get("id") for r in matched], "source_scope": "parameter" if matched else "curve",
             "where_from": kind, "files": files if kind == "our_judgment" else [],

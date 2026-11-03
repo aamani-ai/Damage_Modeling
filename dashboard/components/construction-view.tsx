@@ -61,7 +61,7 @@ function Fold({ label, small = false, children }: { label: string; small?: boole
 // the number is read from. The value itself is on the line above, so the fold does not repeat it.
 function WhereFrom({ p, legend, blobBase }: { p: ConstructionParameter; legend: Legend; blobBase: string }) {
   const files = p.where_from === "our_judgment" ? p.files : [];
-  const label = [p.sources.length ? `sources (${p.sources.length})` : files.length ? "the files that set it" : null, p.reasoning.length ? "why this number" : null].filter(Boolean).join(" · ") || "where it is in the files";
+  const label = [p.sources.length ? `sources (${p.sources.length})` : files.length ? "the files that set it" : null, p.reasoning.length ? "why this number" : null].filter(Boolean).join(" · ") || (p.where_from === "unsourced" ? "where it is set" : "where it is in the files");
   return (
     <div>
       <span className="text-muted-foreground">{legend.where_from[p.where_from]}</span>
@@ -133,7 +133,7 @@ export function ConstructionView({ k, legend, blobBase, curveHref, title }: { k:
                 <span className="font-mono">{p.name}</span>
                 <span className="font-mono tabular">{value(p.value)}</span>
                 <span className="text-muted-foreground">{p.definition}</span>
-                <span className="ml-auto">{p.tier_word ? <>{p.tier_word} <span className="font-mono text-[11px] text-muted-foreground">· {p.tier}</span></> : <span className="text-muted-foreground">curve: {k.curve_tiers.shape.word} shape · {k.curve_tiers.cost.word} cost</span>}</span>
+                <span className="ml-auto">{p.tier_word ? <>{p.tier_word} <span className="font-mono text-[11px] text-muted-foreground">· {p.tier}</span></> : <span className="text-muted-foreground">{p.where_from === "unsourced" ? "no source cited" : `curve: ${k.curve_tiers.shape.word} shape · ${k.curve_tiers.cost.word} cost`}</span>}</span>
               </div>
               <WhereFrom p={p} legend={legend} blobBase={blobBase} />
             </li>

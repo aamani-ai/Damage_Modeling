@@ -89,7 +89,7 @@ export interface Part {
 }
 
 export type ProductionState = "runtime_indexed" | "reused_binding" | "not_runtime_indexed";
-export type WhereFrom = "published" | "borrowed" | "our_judgment" | "curve_level";
+export type WhereFrom = "published" | "borrowed" | "our_judgment" | "curve_level" | "unsourced";
 export interface ConstructionFile { role: string; path: string }
 export interface ScopeNote { note: string; basis: string }
 export type ConstructionSource = SourceLink & { id?: string; source_id?: string; citation?: string | null; repo_path?: string };
