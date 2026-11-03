@@ -850,7 +850,7 @@ def asset_plain_sentence(a_def: dict[str, Any], rows: list[dict[str, Any]], hz: 
     s = "; ".join(bits)
     s = s[:1].upper() + s[1:] + "."
     if quals and len(set(quals)) == 1 and quals[0] != "live":
-        s += " All of them are " + ("proposals, not in the runtime index yet." if quals[0] == "proposal" else "reused bindings.")
+        s += " All of them are " + ("proposals, not in use yet." if quals[0] == "proposal" else "borrowed from another asset's curve.")
     none_any = [label_case(row["label"].split(":")[0]) for row in rows if all(row["cells"].get(h["slug"], {}).get("state") in (None, "gap", "no_curve", "not_named", "withheld", "exposure_modifier") for h in five)]
     if none_any:
         s += f" {len(none_any)} part{'s' if len(none_any) != 1 else ''} of the {noun} {'have' if len(none_any) != 1 else 'has'} no curve under any hazard: {_join(none_any)}."

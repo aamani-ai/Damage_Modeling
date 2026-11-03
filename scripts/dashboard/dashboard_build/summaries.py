@@ -61,9 +61,9 @@ def asset_sentence(noun: str, cells: list[dict[str, Any]], searched_any: bool) -
                         tiers.add("T" + hi)
         parts.append(f"{_join([c['hazard'] for c in live])} {'have curves' if len(live) > 1 else 'has a curve'} for {plural}, {_tier_phrase(tiers)}")
     if proposals:
-        parts.append(f"{_join([c['hazard'] for c in proposals])} {'are proposals' if len(proposals) > 1 else 'is a proposal'} not yet in the runtime index")
+        parts.append(f"{_join([c['hazard'] for c in proposals])} {'are proposals' if len(proposals) > 1 else 'is a proposal'} not in use yet")
     if reused:
-        parts.append(f"{_join([c['hazard'] for c in reused])} {'reuse' if len(reused) > 1 else 'reuses'} another cell's curve")
+        parts.append(f"{_join([c['hazard'] for c in reused])} {'reuse' if len(reused) > 1 else 'reuses'} another asset's curve")
     if gaps:
         parts.append(f"{_join([c['hazard'] for c in gaps])} {'have' if len(gaps) > 1 else 'has'} none")
     tail = "nobody has yet searched for field reports." if not searched_any else "field-report searches have begun."
@@ -92,7 +92,7 @@ def cell_sentence(entry: dict[str, Any], status: str, value: dict[str, Any] | No
     elif entry.get("not_covered"):
         s += f"; {len(entry['not_covered'])} part{'s' if len(entry['not_covered']) != 1 else ''} of the asset's value {'have' if len(entry['not_covered']) != 1 else 'has'} no curve"
     if status == "proposal":
-        s = "Proposal, not in the runtime index — " + s
+        s = "Proposal, not in use yet — " + s
     s += "."
     return s
 

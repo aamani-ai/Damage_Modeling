@@ -28,6 +28,8 @@ function Group({ title, items }: { title: string; items: LegendItem[] }) {
 // an entry's word as it may appear on a page: "Subsystem / component" is on the page as either half
 const variants = (word: string) => word.toLowerCase().split(" / ").map((w) => w.replace(/^·\s*/, "").trim()).filter(Boolean);
 
+const COLS = ["", "", "md:grid-cols-2", "md:grid-cols-3", "md:grid-cols-2 xl:grid-cols-4"];
+
 export function ReviewLegend({ legend, sourceHref, open = false, groups }: { legend: Legend; sourceHref: string; open?: boolean; groups: LegendGroup[] }) {
   const ref = useRef<HTMLDetailsElement>(null);
   const [pageText, setPageText] = useState<string | null>(null);
@@ -58,10 +60,11 @@ export function ReviewLegend({ legend, sourceHref, open = false, groups }: { leg
       <summary className="cursor-pointer px-3 py-2 text-[12.5px] font-medium hover:text-accent">
         What the words mean <span className="font-normal text-muted-foreground">· {shown.map((g) => g.title.toLowerCase()).join(" · ")}</span>
       </summary>
-      <div className="grid gap-3 border-t border-border px-3 py-2.5 text-[12px] md:grid-cols-2 xl:grid-cols-4">
+      {/* one equal column per group shown, up to four */}
+      <div className={`grid gap-3 border-t border-border px-3 py-2.5 text-[12px] ${COLS[Math.min(shown.length, 4)]}`}>
         {shown.map((g) => <Group key={g.title} title={g.title} items={g.items} />)}
-        <p className="text-[11.5px] text-muted-foreground md:col-span-2 xl:col-span-4">
-          Statuses as the catalogue defines them: <FileLink href={sourceHref}>{legend.source}</FileLink>
+        <p className="text-[11.5px] text-muted-foreground col-span-full">
+          The catalogue&apos;s own definitions, in its terms: <FileLink href={sourceHref}>{legend.source}</FileLink>
           {groups.includes("units") ? <>{" · "}units as the method defines them: <FileLink href={sourceHref.replace(legend.source, legend.units_source)}>{legend.units_source.split("/").slice(-1)[0]}</FileLink></> : null}
         </p>
       </div>

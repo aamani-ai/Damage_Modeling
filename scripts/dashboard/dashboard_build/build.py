@@ -726,7 +726,7 @@ def build(write: bool = True) -> dict[str, Any]:
     n_types = sum(len(c_["types"]) for c_ in library_rows)
     n_cats = sum(1 for c_ in library_rows if c_["types"])
     manifest["summary"] = library_sentence(counts, f"{n_types} asset types in {n_cats} categories", len(five), agent_read, len(entries), searched)
-    manifest["scope_line"] = f"across {n_types} asset types in {n_cats} categories and {len(five)} hazards"
+    manifest["scope_line"] = f"across {n_types} asset types in {n_cats} categories and {len(five)} hazards (heat, the sixth column, has no curves)"
     manifest["state_words"] = twin_mod.STATE_WORDS
     # ─── the Review page (G17): about curves only, one card per cell — who has read it, field reports, what is open
     review_cells = []

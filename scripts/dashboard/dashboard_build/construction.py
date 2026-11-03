@@ -222,11 +222,11 @@ def construction_block(c: dict[str, Any], artifact_path: str | None, status: str
         "scope_note": scope_note(c.get("entry_id"), c.get("part")),
         "production_use": {
             "state": production_state, "consumer_pin": consumer_pin, "hazard": hazard_use,
-            "sentence": ("In the runtime index: production can call this curve. The index does not say which screening grid selected it."
+            "sentence": ("In use: the platform's loss calculations can use this curve. That does not mean a map or screening run has chosen it yet."
                          if production_state == "runtime_indexed" else
-                         "A consumer binding that reuses another cell's curve; not a separate curve in the runtime index."
+                         "Borrowed: the platform prices this asset with a curve built for another asset; it has no curve of its own."
                          if production_state == "reused_binding" else
-                         "Not in the runtime index: production cannot call this curve."),
+                         "Not in use yet: the platform's loss calculations cannot use this curve."),
         },
     }
 
@@ -250,6 +250,15 @@ def _units() -> list[dict[str, str]]:
     return out
 
 
+PLAIN_STATUS = {
+    "live": "Finished and in use: the platform's loss calculations can use this curve today.",
+    "proposal": "Built and checked, but not in use yet: it waits for an owner's review before the platform can use it.",
+    "reused": "No curve of its own: it borrows a curve already built for another asset, which its page names (for example, "
+              "a substation borrows the substation part of a solar farm's curve).",
+    "gap": "No curve yet.",
+}
+
+
 def legend(cat_text: str) -> dict[str, Any]:
     """The words every page opens with. Catalogue statuses are read from CATALOGUE.md's own status table."""
     start = cat_text.find("**Status.**")
@@ -260,7 +269,10 @@ def legend(cat_text: str) -> dict[str, Any]:
             raise ValueError(f"CATALOGUE.md status table has no row for {s!r}")
     return {
         "source": "docs/cells/CATALOGUE.md",
-        "status": [{"key": s, "word": {"gap": "no curve yet"}.get(s, s), "meaning": status_rows[s]} for s in ("live", "proposal", "reused", "gap")],
+        # the catalogue's own definitions are for modelers (runtime index, consumer binding); the page says the same in
+        # plain words and links the catalogue for the exact ones
+        "status": [{"key": s, "word": {"gap": "no curve yet"}.get(s, s), "meaning": PLAIN_STATUS[s], "catalogue": status_rows[s]}
+                   for s in ("live", "proposal", "reused", "gap")],
         "coverage": [
             {"key": "curve", "word": "has a curve", "meaning": "A curve covers the whole of this subsystem."},
             {"key": "partial", "word": "partial", "meaning": "A curve covers only part of this subsystem; the rest has none."},
@@ -274,9 +286,9 @@ def legend(cat_text: str) -> dict[str, Any]:
         ],
         "evidence": [{"key": k, "word": TIER_SHORT[k], "meaning": TIER_MEANING[k].removeprefix(f"{TIER_SHORT[k]}: ")} for k in ("T1", "T2", "T3", "T4")],
         "production": [
-            {"key": "runtime_indexed", "word": "in production index", "meaning": "In the runtime artifact index: production can call it. It does not say a screening grid selected it."},
-            {"key": "reused_binding", "word": "reused in production", "meaning": "Priced with another cell's indexed curve through a consumer binding."},
-            {"key": "not_runtime_indexed", "word": "not in production", "meaning": "Not in the runtime index; production cannot call it."},
+            {"key": "runtime_indexed", "word": "in production index", "meaning": "The platform's loss calculations can use this curve. That does not mean a map or screening run has chosen it yet."},
+            {"key": "reused_binding", "word": "reused in production", "meaning": "The platform prices it with a curve built for another asset."},
+            {"key": "not_runtime_indexed", "word": "not in production", "meaning": "The platform's loss calculations cannot use it yet."},
         ],
         "hazard_use": [
             {"key": "used", "word": "Used by Hazard's dashboard", "meaning": "A layer on Hazard's internal dashboard was computed with this file, or one identical to it in everything that can change a loss (curves, value shares, unit treatments)."},
@@ -296,8 +308,8 @@ def legend(cat_text: str) -> dict[str, Any]:
             {"key": "review", "word": "Read by", "meaning": "Whether a person has reviewed this entry, or only an agent has read it."},
         ],
         "marks": [
-            {"key": "solid", "word": "Solid border, filled", "meaning": "A live curve: in the runtime index, so the platform can call it."},
-            {"key": "dashed_dark", "word": "Dashed dark border, no fill", "meaning": "A proposal: built and checked here, not yet in the runtime index."},
+            {"key": "solid", "word": "Solid border, filled", "meaning": "A live curve: the platform can use it."},
+            {"key": "dashed_dark", "word": "Dashed dark border, no fill", "meaning": "A proposal: built and checked, not in use yet."},
             {"key": "hatched", "word": "Diagonal hatching", "meaning": "Reused: priced with another cell's curve, not one of its own."},
             {"key": "dashed_light", "word": "Dashed light border, grey text", "meaning": "No curve yet for this asset and hazard."},
             {"key": "partial", "word": "· partial", "meaning": "The curves cover only part of the asset's value."},

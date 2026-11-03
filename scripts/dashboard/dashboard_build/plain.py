@@ -178,9 +178,9 @@ def _strip_amount(s: str) -> str:
 
 def plain_rail(status: str, qualifier: str | None, shape: str, cost: str, occ_state: str | None, occ_label: str, review: dict[str, Any]) -> dict[str, Any]:
     exists_words = {
-        "live": "Live · " + ("a screening model" if (qualifier or "").startswith("screening") else "in the runtime index"),
-        "proposal": "Proposal · not in the runtime index yet",
-        "reused": "Reused · borrows another cell's curve",
+        "live": "Live · " + ("a screening model" if (qualifier or "").startswith("screening") else "in use"),
+        "proposal": "Proposal · built, not in use yet",
+        "reused": "Reused · borrows another asset's curve",
         "gap": "Gap · no curve yet",
     }[status]
     worst = tier_max(shape, cost)

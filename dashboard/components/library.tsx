@@ -82,7 +82,7 @@ export function Library({ m }: { m: ManifestV3 }) {
         </div>
         <InfoHint label="How to read a tile">
           <div className="space-y-1">
-            <div><span className="font-medium">live</span> — in the runtime index Hazard reads · <span className="font-medium">proposal</span> — built, not yet in the index (dashed) · <span className="font-medium">reused</span> — borrows another cell&apos;s curve (hatched) · <span className="font-medium">gap</span> — no curve yet</div>
+            <div><span className="font-medium">live</span> — finished and in use · <span className="font-medium">proposal</span> — built and checked, not in use yet · <span className="font-medium">reused</span> — borrows another asset&apos;s curve · <span className="font-medium">gap</span> — no curve yet</div>
             <div>The second line says how sure we are, in one word: the weaker of <span className="italic">how damage rises</span> and <span className="italic">how it becomes dollars</span>. Hover a tile for both.</div>
             {Object.entries(m.tier_meaning).map(([k, v]) => <div key={k} className="text-muted-foreground">{v}</div>)}
             <div><span className="font-medium">partial</span> — part of the asset&apos;s value has no curve yet.</div>
