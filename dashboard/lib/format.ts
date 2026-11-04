@@ -44,3 +44,16 @@ export function shortDate(iso: string | null | undefined): string {
   const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
   return m ? `${m[2]}-${m[3]}` : iso;
 }
+
+/** Curves sharing a part name ("PV module field") but on different failure units: the words of each unit's ID the others
+ * lack, in plain case ("fixed tilt" / "tracker"); null where the units are the same. */
+export function unitTells(items: { id: string; unit: string | null }[]): Record<string, string | null> {
+  const toks = items.map((i) => (i.unit ?? "").split("_").filter(Boolean));
+  const common = toks.length ? toks.reduce((a, t) => a.filter((x) => t.includes(x))) : [];
+  const out: Record<string, string | null> = {};
+  items.forEach((i, n) => {
+    const own = toks[n].filter((x) => !common.includes(x));
+    out[i.id] = new Set(items.map((x) => x.unit)).size > 1 && own.length ? own.join(" ").toLowerCase() : null;
+  });
+  return out;
+}

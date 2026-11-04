@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useUrlParam } from "@/lib/url-state";
 import type { CurveConstruction, Legend, Subcomponent, SubcomponentRollup } from "@/lib/types";
 import { HazardUseTag, ProductionTag } from "./construction-view";
-import { fmtPct } from "@/lib/format";
+import { fmtPct, unitTells } from "@/lib/format";
 import { FileLink, Tag, ToggleArrow, TOGGLE_CLASS } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
@@ -166,8 +166,11 @@ function RowDetail({ s, cards, legend, blobBase, names, curveHere = false, build
   // two curves for one part (fresh and salt water) carry the same part name: the condition tells them apart
   const titleOf = (id: string) => {
     const t = cards[id].title;
-    const tell = cards[id].when ?? cards[id].variant;
-    return shown.filter((c) => cards[c.curve_id].title === t).length > 1 && tell ? `${t} · ${tell}` : t;
+    const same = shown.filter((c) => cards[c.curve_id].title === t);
+    // what tells same-name curves apart: a different failure unit (fixed tilt / tracker), else the condition it is
+    // chosen under (fresh / salt water), else its own series name (the module type)
+    const tell = unitTells(same.map((c) => ({ id: c.curve_id, unit: cards[c.curve_id].unit })))[id] ?? cards[id].when ?? cards[id].variant;
+    return same.length > 1 && tell ? `${t} · ${tell}` : t;
   };
   return (
     <div className="space-y-3">
@@ -227,7 +230,8 @@ function RowDetail({ s, cards, legend, blobBase, names, curveHere = false, build
           </ul>
           {/* the Hazard comparison once for the row (its curves share it) */}
           {cards[shown[0].curve_id].k.production_use.hazard?.sentences.length ? (
-            <div className="rounded-md border border-warn/40 bg-warn-bg px-2 py-1 text-[12px] leading-snug">
+            // yellow only when Hazard's copy differs from this one; a match or no layer is plain information
+            <div className={`rounded-md border px-2 py-1 text-[12px] leading-snug ${cards[shown[0].curve_id].k.production_use.hazard!.state === "differs" ? "border-warn/40 bg-warn-bg" : "border-border bg-muted/40 text-muted-foreground"}`}>
               {cards[shown[0].curve_id].k.production_use.hazard!.sentences.map((l) => <p key={l}>{l}</p>)}
             </div>
           ) : null}

@@ -7,7 +7,7 @@
 // "Show the numbers" keeps the ledger: knots, known answers, the tier codes, parameter rows, the record's ID.
 import Link from "next/link";
 import { useMemo } from "react";
-import { fmtDr, fmtNum } from "@/lib/format";
+import { fmtDr, fmtNum, unitTells } from "@/lib/format";
 import { useUrlParam } from "@/lib/url-state";
 import type { Axis, CellV2, CurveV2, ManifestV3 } from "@/lib/types";
 import { CurvePlot } from "./curve-plot";
@@ -19,14 +19,17 @@ interface Option { id: string; label: string; curve: CurveV2; series: string[] |
 
 function optionsFor(curves: CurveV2[]): Option[] {
   const out: Option[] = [];
+  // curves of one part on different failure units (fixed tilt / tracker) carry that difference in front of each label
+  const tells = unitTells(curves.map((c) => ({ id: c.curve_id, unit: c.failure_unit_id })));
   for (const c of curves) {
+    const pre = tells[c.curve_id] ? `${tells[c.curve_id]} · ` : "";
     const main = c.series.filter((s) => !s.continuation);
     const perSeries = main.length > 1 && main.every((s) => s.variant || s.scenario);
     if (perSeries) {
-      for (const s of main) out.push({ id: `${c.curve_id}::${s.label}`, label: s.legend_col ? `${s.legend_row ? s.legend_row + " · " : ""}${s.legend_col}` : (s.scenario ? s.scenario.replace(/_/g, " ") : s.variant ?? s.label), curve: c, series: [s.label, ...c.series.filter((o) => o.continuation && o.label.startsWith(s.label)).map((o) => o.label)] });
+      for (const s of main) out.push({ id: `${c.curve_id}::${s.label}`, label: pre + (s.legend_col ? `${s.legend_row ? s.legend_row + " · " : ""}${s.legend_col}` : (s.scenario ? s.scenario.replace(/_/g, " ") : s.variant ?? s.label)), curve: c, series: [s.label, ...c.series.filter((o) => o.continuation && o.label.startsWith(s.label)).map((o) => o.label)] });
     } else {
       const first = main[0];
-      out.push({ id: c.curve_id, label: first ? (first.legend_row && first.legend_col ? `${first.legend_row} · ${first.legend_col}` : first.label) : c.curve_id, curve: c, series: null });
+      out.push({ id: c.curve_id, label: pre + (first ? (first.legend_row && first.legend_col ? `${first.legend_row} · ${first.legend_col}` : first.label) : c.curve_id), curve: c, series: null });
     }
   }
   return out;
