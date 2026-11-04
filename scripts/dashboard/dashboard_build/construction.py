@@ -299,7 +299,7 @@ def legend(cat_text: str) -> dict[str, Any]:
         # the Value covered view's parts, which add up to all of the asset's value for one hazard
         "value": [
             {"key": "priced", "word": "priced", "meaning": "A curve prices this hazard's damage to these parts, or the cell adds their cost in step with the other parts' damage (replacement labour)."},
-            {"key": "partly", "word": "partly priced", "meaning": "A curve covers only some of these parts (for example the active hardware of a battery enclosure, not its shell)."},
+            {"key": "partly", "word": "partly priced", "meaning": "A curve covers only some of these parts (for example wildfire on a substation, whose curve covers the yard equipment but not the rest of each subsystem)."},
             {"key": "no_damage", "word": "no direct damage", "meaning": "The cell judged this hazard does not damage these parts directly, so a loss of $0 there is right, not missing."},
             {"key": "not_priced", "word": "not priced", "meaning": "No curve, so any damage to these parts is not counted in the loss."},
             {"key": "no_budget", "word": "no value budget for buildings yet", "meaning": "Real estate has no budget splitting a building's value into its parts, so the split cannot be worked out; each curve is a share of the building's replacement cost, which the consumer supplies."},
