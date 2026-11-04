@@ -152,7 +152,6 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 
 - **Value covered and the solar and wind value budgets are still in progress**; they can be reviewed, but the figures
   and wording may change.
-
 - Not merged to `main`, so the live dashboard does not show any of this yet.
 - The catalogue's part names were drafted per cell and are not one agreed vocabulary; the Twin crosswalks match on
   them by name.
