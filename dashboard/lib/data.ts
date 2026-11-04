@@ -69,7 +69,9 @@ export function constructionCards(subs: Subcomponent[]): Record<string, Construc
     if (out[ref.curve_id] || !ref.data_path) continue;
     const c = readJson<CurveV2>(ref.data_path);
     if (c) out[ref.curve_id] = { k: c.construction, href: `/cells/${c.entry_id}/curves/${c.curve_id}`, title: c.part ?? c.curve_id,
-      when: (c.selected_by ?? []).map((b) => b.when.join(" / ")).join(" · ") || null, unit: c.failure_unit_id ?? null, subsystem: c.subsystem ?? null };
+      when: (c.selected_by ?? []).map((b) => b.when.join(" / ")).join(" · ") || null, unit: c.failure_unit_id ?? null, subsystem: c.subsystem ?? null,
+      // the curve's own series name ("fragile thin glass-glass"), which tells same-part curves apart when no condition does
+      variant: (() => { const s = c.series.find((x) => !x.continuation); return s ? (s.legend_row && s.legend_col ? `${s.legend_row} · ${s.legend_col}` : s.label) : null; })() };
   }
   return out;
 }

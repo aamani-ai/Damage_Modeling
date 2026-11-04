@@ -15,7 +15,7 @@ import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 // `when` is the condition the curve is chosen under ("freshwater screening"), from the curve's selected_by; `unit` and
 // `subsystem` are the failure unit ID and subsystem code the curve file attaches it to (what Hazard's code reads)
-export interface ConstructionCard { k: CurveConstruction; href: string; title: string; when: string | null; unit: string | null; subsystem: string | null }
+export interface ConstructionCard { k: CurveConstruction; href: string; title: string; when: string | null; unit: string | null; subsystem: string | null; variant?: string | null }
 
 const fileName = (p: string) => p.split("/").slice(-1)[0];
 
@@ -166,7 +166,8 @@ function RowDetail({ s, cards, legend, blobBase, names, curveHere = false, build
   // two curves for one part (fresh and salt water) carry the same part name: the condition tells them apart
   const titleOf = (id: string) => {
     const t = cards[id].title;
-    return shown.filter((c) => cards[c.curve_id].title === t).length > 1 && cards[id].when ? `${t} · ${cards[id].when}` : t;
+    const tell = cards[id].when ?? cards[id].variant;
+    return shown.filter((c) => cards[c.curve_id].title === t).length > 1 && tell ? `${t} · ${tell}` : t;
   };
   return (
     <div className="space-y-3">
