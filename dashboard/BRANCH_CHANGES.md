@@ -63,7 +63,7 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 
 ### Asset pages (for example Power plants › Solar farm)
 
-- **The curves**: the library's own tiles, one per hazard including heat.
+- **The curves** (folded): the library's own tiles, one per hazard including heat.
 - **View by subsystem**: every subsystem (cost bucket) against the hazards. It opens on Hail and has an **All
   hazards** tab. An opened row gives its value share, the cell's own name for the part, its failure unit and subsystem
   code, and its curves in brief, with a link to them on the curve page. The old part-list grid is removed.
@@ -78,8 +78,10 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 
 ### Curve pages (each hazard × asset, for example Hail × Solar farm)
 
-- **The curve** picks subsystem → part → curve. Curves that share a name say what sets them apart (fixed tilt /
-  tracker, fresh / salt water, module type, terrain).
+- **The curve** picks subsystem → part → curve. Its "How sure" names the two grades plainly: *damage at each hazard
+  level* and *the dollar value it is applied to* (were "how damage rises" and "how it becomes dollars", renamed
+  everywhere). Its main references are counted and lead to the sources in step 3 instead of being listed twice.
+  Curves that share a name say what sets them apart (fixed tilt / tracker, fresh / salt water, module type, terrain).
 - **How this curve was made**, four steps. Each panel is complete on its own and ends with **Read from:** links to the
   GitHub files it was written from (folded), next to **Details** for reviewers (method checks, source IDs, file
   fingerprints). Each list starts with its count.
@@ -87,6 +89,7 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
     in words with their reasons.
   - *How it was derived*: each hazard measure with the parts read against it, the curve shapes, what Hazard has to
     supply; seven-step audits are found wherever the cell keeps them, or an earlier version's is named.
+    Whether a site-condition adapter exists is said once, under the audit, with what one is.
   - *Where the numbers come from*: what we assumed (the cell's judgment calls), then the sources and the parameters,
     each list starting with its count ("21 sources (1 with no link…)", "8 parameters (4 published, 2 borrowed, 2 our
     judgment)"). Each parameter appears once with the parts it applies to; a number with no source says "our judgment,

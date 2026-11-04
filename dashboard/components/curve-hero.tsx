@@ -169,7 +169,7 @@ export function CurveHero({ cell, curves: allCurves, buildings, order }: { cell:
             <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">How sure</div>
             <p><span className="text-muted-foreground">Damage at each hazard level: </span><span className="font-medium">{cap.how_sure.shape.word}</span>{cap.how_sure.shape.basis ? <span className="text-muted-foreground"> — {cap.how_sure.shape.basis}</span> : null}</p>
             <p><span className="text-muted-foreground">The dollar value it is applied to: </span><span className="font-medium">{cap.how_sure.cost.word}</span>{cap.how_sure.cost.basis ? <span className="text-muted-foreground"> — {cap.how_sure.cost.basis}</span> : null}</p>
-            <p className="text-[11.5px] text-muted-foreground">Two separate questions: how well supported the damage ratio is at each hazard level, and how well supported the dollar value it is multiplied by is (loss = damage ratio × value).</p>
+            <p className="text-[11.5px] text-muted-foreground">Two separate grades: one for the damage ratio at each hazard level, one for the dollar value it is multiplied by (loss = damage ratio × value).</p>
           </div>
           <div>
             <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Main references</div>
