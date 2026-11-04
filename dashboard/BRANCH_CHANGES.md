@@ -90,10 +90,13 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 
 ### Curve pages (each hazard × asset, for example Hail × Solar farm)
 
-- **The curve** picks subsystem → part → curve. Its "How sure" names the two grades plainly: *damage at each hazard
-  level* and *the dollar value it is applied to* (were "how damage rises" and "how it becomes dollars", renamed
-  everywhere). It folds (open by default); a "see the curve" link opens it if folded. Its References line links to the sources in step 3 instead of listing them twice.
-  Curves that share a name say what sets them apart (fixed tilt / tracker, fresh / salt water, module type, terrain).
+- **The curve** picks subsystem → part → curve. Curves that share a name say what sets them apart (fixed tilt /
+  tracker, fresh / salt water, module type, terrain). It folds (open by default); a "see the curve" link opens it if
+  folded.
+  - Its "How sure" names the two grades plainly: *damage at each hazard level* and *the dollar value it is applied
+    to* (were "how damage rises" and "how it becomes dollars", renamed everywhere), with one line saying loss = damage
+    ratio × value.
+  - Its **References** line is only a link to the sources in step 3, so they are listed once.
 - **How this curve was made**, four steps. Each panel is complete on its own and ends with **Read from:** links to the
   GitHub files it was written from (folded), next to **Details** for reviewers (method checks, source IDs, file
   fingerprints). Each list starts with its count.
@@ -140,6 +143,10 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 - New research index entries for the no-curve pairs; plain words for the cells' reason codes; withheld units named.
 - Seven-step audits matched by model version across `current/` and `proposed/`.
 - `docs/contracts/twin_crosswalks/spine.json` records where the Digital Twin defines each asset (`twin_defined_in`).
+- Reads the solar and wind value ledger (`parts.py`, `ledger_budget`) and works out each tile's value split
+  (`value_split`): a subsystem whose cost follows the other parts' damage (replacement labour) counts as priced; a
+  partly covered subsystem whose cell states its covered dollars on the same budget is split by them (flood × battery
+  comes to 75%, the cell's own figure).
 
 ## Still open
 
@@ -147,5 +154,10 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 - The catalogue's part names were drafted per cell and are not one agreed vocabulary; the Twin crosswalks match on
   them by name.
 - Real estate has no value budget, so its tiles give no value split.
+- Wind's ledger prices collection and the GSU substation as one line (counted once, under Collection network) and has
+  no line for the control building.
+- The catalogue's "partial" flag and Value covered can disagree: wildfire × solar is flagged partial because its
+  replacement labour has no curve of its own, yet it is 100% priced because that labour follows the other parts'
+  damage.
 - The solar ledger is a 100 MWdc plant; the profile is described as 100 MWac. The shares are unaffected, the dollar
   total is the ledger's.
