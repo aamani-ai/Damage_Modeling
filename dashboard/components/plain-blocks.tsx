@@ -3,13 +3,16 @@
 // only lay them out. The ledgers behind them live in the station panels.
 import { fmtPct, fmtUsdCompact } from "@/lib/format";
 import type { CellV2 } from "@/lib/types";
-import { Card, FileLink } from "./ui";
+import { Card, FileLink, SectionSummary } from "./ui";
 
-function Block({ title, count, children, className = "" }: { title: string; count?: number | null; children: React.ReactNode; className?: string }) {
+// each block folds; only "What it can be used for" starts open
+function Block({ title, count, children, className = "", open = false }: { title: string; count?: number | null; children: React.ReactNode; className?: string; open?: boolean }) {
   return (
-    <Card className={className}>
-      <div className="px-3 pt-2.5 pb-1 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">{title}{count != null ? <span className="font-normal normal-case tracking-normal"> ({count})</span> : null}</div>
-      <div className="px-3 pb-3 text-[12.5px] leading-snug">{children}</div>
+    <Card className={`self-start ${className}`}>
+      <details className="group" open={open}>
+        <SectionSummary className="px-3 py-2.5">{title}{count != null ? <span className="ml-1 font-normal normal-case tracking-normal">({count})</span> : null}</SectionSummary>
+        <div className="px-3 pb-3 text-[12.5px] leading-snug">{children}</div>
+      </details>
     </Card>
   );
 }
@@ -20,7 +23,7 @@ export function PlainBlocks({ cell, blob }: { cell: CellV2; blob: (p: string) =>
   const withheld = pl.blocks.covered.withheld;
   return (
     <div className="mt-3 grid gap-3 xl:grid-cols-2">
-      <Block title="What it can be used for">
+      <Block title="What it can be used for" open>
         <ul className="space-y-1">
           {pl.capabilities.map((c) => (
             <li key={c.key} className="grid grid-cols-[96px_1fr] gap-x-2">

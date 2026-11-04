@@ -15,7 +15,8 @@ const STATUS_WORD: Record<string, string> = { live: "live", proposal: "proposal"
 export function AssetCoverage({ cov, loadOrder }: { cov: Coverage; loadOrder: string[] }) {
   const [hzParam, setHz] = useUrlParam("hazard");
   const [picture, setPicture] = useUrlParam("picture");
-  const open = picture !== "hidden";
+  // folded until asked for: a folded picture does not load the model
+  const open = picture === "open";
   const hz = hazardOf(cov, hzParam);
   const picker = (
     <div role="radiogroup" aria-label="Which hazard" className="inline-flex flex-wrap rounded-md border border-border bg-card p-0.5 text-[12px]">
@@ -28,19 +29,19 @@ export function AssetCoverage({ cov, loadOrder }: { cov: Coverage; loadOrder: st
     </div>
   );
   const title = (
-    <button type="button" aria-expanded={open} aria-controls="asset-coverage-body" onClick={() => setPicture(open ? "hidden" : null)} className={TOGGLE_CLASS}>
-      <ToggleArrow open={open} />What each curve covers on the Digital Twin
+    <button type="button" aria-expanded={open} aria-controls="asset-coverage-body" onClick={() => setPicture(open ? null : "open")} className={TOGGLE_CLASS}>
+      <ToggleArrow open={open} />3D model
     </button>
   );
   if (!open) {
     return (
-      <section id="asset-coverage" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="What each curve covers on the Digital Twin">
-        <div className="px-3 py-2">{title}</div>
+      <section id="asset-coverage" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="3D model">
+        <div className="px-3 py-2">{title} <span className="ml-2 text-[12px] text-muted-foreground">what each hazard&apos;s curves cover, one hazard at a time</span></div>
       </section>
     );
   }
   return (
-    <section id="asset-coverage" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="What each curve covers on the Digital Twin">
+    <section id="asset-coverage" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="3D model">
       <div id="asset-coverage-body">
       <TwinCoverage cov={cov} loadOrder={loadOrder} hazardSlug={hz.hazard.slug} mode="asset" title={title} hazardPicker={picker} height={480} />
       {/* where the twin defines this breakdown, and the way to the curve (which parts have one is in the list beside the picture) */}
@@ -74,30 +75,30 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
   const [, setSel] = useUrlParam("sel");
   const [, setPicture] = useUrlParam("picture");
   const [tableParam, setTable] = useUrlParam("table");
-  const tableOpen = tableParam !== "hidden";
+  const tableOpen = tableParam === "open";
   // a cell shows that system on the picture above, for that hazard
   const show = (hazard: string | null, tree: string, node: string) => {
     if (hazard) setHz(hazard);
     setView(tree === trees[0] ? null : tree);
     setSel(node);
-    setPicture(null);
+    setPicture("open");
     document.getElementById("asset-coverage")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
   const name = (k: string) => cov.trees[k].nodes[cov.trees[k].root]?.n ?? k;
   // counted in this table's own rows (the twin's systems), not in the cell's part names
   const withCurve = (slug: string) => cov.matrix.filter((r) => r.cells[slug]?.state === "curve").length;
   return (
-    <section className="rounded-lg border border-border bg-card" aria-label="The Digital Twin's systems, hazard by hazard">
+    <section className="rounded-lg border border-border bg-card" aria-label="Table">
       <div className="px-3 py-2">
-        <button type="button" aria-expanded={tableOpen} aria-controls="twin-table-body" onClick={() => setTable(tableOpen ? "hidden" : null)} className={TOGGLE_CLASS}>
-          <ToggleArrow open={tableOpen} />The Digital Twin&apos;s systems, hazard by hazard
+        <button type="button" aria-expanded={tableOpen} aria-controls="twin-table-body" onClick={() => setTable(tableOpen ? null : "open")} className={TOGGLE_CLASS}>
+          <ToggleArrow open={tableOpen} />Table
         </button>
-        <span className="ml-2 text-[12px] text-muted-foreground">the picture above, as a table, for every hazard at once</span>
+        <span className="ml-2 text-[12px] text-muted-foreground">the same parts and colours as the 3D model, every hazard at once</span>
       </div>
       {tableOpen ? (
       <div id="twin-table-body">
       <p className="max-w-[1100px] px-3 pb-2 text-[12.5px] leading-snug">
-        Each row is a system of the Digital Twin&apos;s 3D model of the {(cov.type.building ?? cov.type.label).toLowerCase()}, with the parts it contains underneath; each column is a hazard. A cell says whether that hazard&apos;s curves cover the system, with the picture&apos;s colours. These rows are the picture&apos;s breakdown, not the subsystems (cost buckets) in &quot;Every subsystem, curve or gap&quot;, so the counts differ.
+        Each row is a system of the Digital Twin&apos;s 3D model of the {(cov.type.building ?? cov.type.label).toLowerCase()}, with the parts it contains underneath; each column is a hazard. A cell says whether that hazard&apos;s curves cover the system, with the picture&apos;s colours. These rows are the 3D model&apos;s breakdown, not the subsystems (cost buckets) in &quot;View by subsystem&quot;, so the counts differ.
       </p>
       <div className="overflow-x-auto px-3 pb-3">
         <table className="w-full min-w-[860px] text-[12px]">
@@ -119,7 +120,7 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
           </tbody>
         </table>
         <p className="mt-1.5 text-[11.5px] text-muted-foreground">
-          When a system&apos;s parts differ, the cell counts them: &quot;has a curve for 1 of 2 parts&quot;, with the other parts underneath. Click a cell to see that system on the picture above; a curve&apos;s name opens it. Mapped from{" "}
+          When a system&apos;s parts differ, the cell counts them: &quot;has a curve for 1 of 2 parts&quot;, with the other parts underneath. Click a cell to see that system on the 3D model above; a curve&apos;s name opens it. Mapped from{" "}
           <span className="font-mono">{cov.twin.crosswalk.split("/").slice(-1)[0]}</span>, a draft co-owned with Hazard. <TwinDefinedIn cov={cov} />
         </p>
       </div>

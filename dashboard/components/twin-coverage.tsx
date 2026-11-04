@@ -349,6 +349,7 @@ export function TwinCoverage({
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 px-3 pb-2 pt-2">
         {/* a plain title is a heading; a fold-out title (the cell page's) brings its own toggle look */}
         {typeof title === "string" ? <span className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">{title}</span> : title ? <span className="text-[12px] text-muted-foreground">{title}</span> : null}
+        <span className="basis-full text-[12px] text-muted-foreground lg:basis-auto">Click a part in the picture, or a system in the list, to see what {hz.gap ? "this hazard" : "the curve"} does with it.</span>
         {hazardPicker}
         <div className="ml-auto flex items-center gap-2">
           {treeKeys.length > 1 ? (
@@ -390,7 +391,7 @@ export function TwinCoverage({
               drag to turn · {full ? "scroll" : "click, then scroll"} to zoom · click a part · the Digital Twin&apos;s reference {treeKey === "plant" ? "site" : "model"}
             </div>
           </div>
-          <div className="mt-1.5 min-h-[34px] rounded-md border border-border bg-card px-2.5 py-1.5 text-[12.5px]" aria-live="polite">
+          <div className={sel ? "mt-1.5 min-h-[34px] rounded-md border border-border bg-card px-2.5 py-1.5 text-[12.5px]" : "sr-only"} aria-live="polite">
             {sel ? (
               <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
                 {sel.row ? <Swatch state={sel.row.s} /> : sel.group?.length ? <Swatch state={sel.group[0].state} /> : null}
@@ -406,9 +407,7 @@ export function TwinCoverage({
                 {!sel.row && groupCurveParts(tree, hz, treeKey, sel.id).length ? <span className="ml-auto flex flex-wrap gap-1">{groupCurveParts(tree, hz, treeKey, sel.id).map(link)}</span> : null}
                 <button type="button" onClick={clearSel} className="text-[11.5px] text-muted-foreground hover:text-foreground" title="Clear the selection">clear</button>
               </span>
-            ) : (
-              <span className="text-muted-foreground">Click a part in the picture, or a system in the list, to see what {hz.gap ? "this hazard" : "the curve"} does with it.</span>
-            )}
+            ) : null}
           </div>
           {cov.type.picture_note ? <p className="mt-1 px-0.5 text-[11.5px] text-muted-foreground">{cov.type.picture_note}</p> : null}
         </div>

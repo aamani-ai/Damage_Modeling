@@ -60,10 +60,10 @@ function AllHazards({ subs, hazards, legend, rollup, open }: {
       <table className="w-full min-w-[820px] text-[12.5px]">
         <thead>
           <tr className="text-left text-[11.5px] text-muted-foreground">
-            <th scope="col" className="px-3 py-1 font-medium">Subsystem</th>
+            <th scope="col" className="px-3 py-1 text-[12.5px] font-medium text-foreground">Subsystem</th>
             {cols.map((h) => {
               const r = rollup.by_hazard?.[h.slug];
-              return <th key={h.slug} scope="col" className="px-2 py-1 font-medium">{h.label}{r ? <span className="block font-normal tabular">{r.with_curve} of {r.expected} with a curve</span> : null}</th>;
+              return <th key={h.slug} scope="col" className="px-2 py-1 text-[12.5px] font-medium text-foreground">{h.label}{r ? <span className="block text-[11.5px] font-normal tabular text-muted-foreground">{r.with_curve} of {r.expected} with a curve</span> : null}</th>;
             })}
           </tr>
         </thead>
@@ -197,10 +197,10 @@ function RowDetail({ s, cards, legend, blobBase, names }: { s: Subcomponent; car
 }
 
 // teamNames: hazard slug → subsystem key → the hazard team's own part names (asset pages; from the split table)
-export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, defaultHazard, cards, legend, blobBase, picker = true, notes = [], overview = false, teamNames, buildings }: {
+export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, defaultHazard, cards, legend, blobBase, picker = true, notes = [], overview = false, teamNames, buildings, title = "Every subsystem, curve or gap", twinBelow = false }: {
   subs: Subcomponent[]; rollup: SubcomponentRollup; hazards: { slug: string; label: string }[]; defaultHazard: string;
   cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string; picker?: boolean; notes?: string[];
-  overview?: boolean; teamNames?: Record<string, Record<string, string[]>>;
+  overview?: boolean; teamNames?: Record<string, Record<string, string[]>>; title?: string; twinBelow?: boolean;
   // a shared real-estate cell page: type slug → building; ?building= keeps that building's rows only
   buildings?: Record<string, string>;
 }) {
@@ -228,22 +228,18 @@ export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, d
   const groups = new Set(rows.map((s) => s.group?.key).filter(Boolean));
   const evidence = (s: Subcomponent) => s.evidence_labels.length ? s.evidence_labels.join(" · ") : "—";
   return (
-    <section id="subcomponents" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="Every subsystem, curve or gap">
+    <section id="subcomponents" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label={title}>
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-3 py-2">
         <button type="button" aria-expanded={shown} aria-controls="subcomponents-body" onClick={() => setFold(shown ? "hidden" : null)} className={TOGGLE_CLASS}>
-          <ToggleArrow open={shown} />Every subsystem, curve or gap
+          <ToggleArrow open={shown} />{title}
         </button>
         {picker ? <span className="text-[12px]">all hazards: <Counts r={rollup} legend={legend} /></span> : null}
       </div>
       {shown ? (
         <div id="subcomponents-body">
-          <p className="max-w-[1100px] px-3 pb-1.5 text-[12px] text-muted-foreground">Each row is a subsystem: one of the cost buckets the asset&apos;s value is split into.{overview ? " The Digital Twin's parts are further down, with the 3D picture." : ""}</p>
+          <p className="max-w-[1100px] px-3 pb-1.5 text-[12px] text-muted-foreground">Each row is a subsystem: one of the cost buckets the asset&apos;s value is split into.{twinBelow ? " The Digital Twin's parts are in “View by Digital Twin part” below." : ""}</p>
           {picker ? (
             <div role="radiogroup" aria-label="Which hazard" className="mx-3 mb-1 inline-flex flex-wrap rounded-md border border-border bg-card p-0.5 text-[12px]">
-              {overview ? (
-                <button type="button" role="radio" aria-checked={all} onClick={() => { setHz("all"); setOpen(null); }}
-                  className={`rounded px-2 py-0.5 ${all ? "bg-accent/10 text-accent" : "text-muted-foreground hover:text-foreground"}`}>All hazards</button>
-              ) : null}
               {hazards.map((h) => {
                 const r = rollup.by_hazard?.[h.slug];
                 return (
@@ -253,6 +249,10 @@ export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, d
                   </button>
                 );
               })}
+              {overview ? (
+                <button type="button" role="radio" aria-checked={all} onClick={() => { setHz("all"); setOpen(null); }}
+                  className={`rounded px-2 py-0.5 ${all ? "bg-accent/10 text-accent" : "text-muted-foreground hover:text-foreground"}`}>All hazards</button>
+              ) : null}
             </div>
           ) : null}
           {all ? null : <p className="px-3 pb-1.5 text-[12px] text-muted-foreground">{hazards.find((h) => h.slug === hz)?.label}: <Counts r={here} legend={legend} /></p>}

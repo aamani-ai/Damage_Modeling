@@ -9,7 +9,7 @@ import { AssetCoverage, CoverageMatrix } from "@/components/asset-coverage";
 import { CurveTiles } from "@/components/library";
 import { ReviewLegend } from "@/components/review-legend";
 import { SubcomponentPanel } from "@/components/subcomponents";
-import { FileLink, Tag } from "@/components/ui";
+import { FileLink, SectionSummary, Tag } from "@/components/ui";
 import { assetView, blobBase, blobUrl, constructionCards, coverage, manifest, twinViewer } from "@/lib/data";
 import type { AssetViewV2, LibraryType, ManifestV3 } from "@/lib/types";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
@@ -37,13 +37,15 @@ function CurveList({ row, m }: { row: LibraryType; m: ManifestV3 }) {
   const hazards = m.hazards.filter((h) => !h.outside_the_five || h.slug === "heat");
   return (
     <section className="rounded-lg border border-border bg-card" aria-label="The curves">
-      <div className="px-3 pt-2.5 pb-1.5 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">The curves</div>
-      <CurveTiles tiles={row.tiles} hazards={hazards} />
+      <details className="group" open>
+        <SectionSummary className="px-3 py-2">The curves</SectionSummary>
+        <CurveTiles tiles={row.tiles} hazards={hazards} />
+      </details>
     </section>
   );
 }
 
-function Subcomponents({ v, m, defaultHazard, building }: { v: AssetViewV2; m: ManifestV3; defaultHazard?: string; building?: string }) {
+function Subcomponents({ v, m, defaultHazard, building, twinBelow = false }: { v: AssetViewV2; m: ManifestV3; defaultHazard?: string; building?: string; twinBelow?: boolean }) {
   // a real-estate building type shows its own building's subsystems (the records carry the building as their group)
   const subs = building ? v.subcomponents.filter((s) => s.group?.key === building) : v.subcomponents;
   const rollup = (building ? v.subsystem_groups?.[building] : null) ?? v.subcomponent_rollup;
@@ -55,7 +57,7 @@ function Subcomponents({ v, m, defaultHazard, building }: { v: AssetViewV2; m: M
   // the five hazards and heat; icing and lightning (no curve, no research yet) only with the field reports
   const hazards = m.hazards.filter((h) => SHOW_FIELD_REPORTS || !h.outside_the_five || h.slug === "heat").map((h) => ({ slug: h.slug, label: h.label }));
   const first = defaultHazard ?? hazards.find((h) => (rollup.by_hazard?.[h.slug]?.with_curve ?? 0) > 0)?.slug ?? hazards[0].slug;
-  return <SubcomponentPanel subs={subs} rollup={rollup} hazards={hazards} defaultHazard={first} cards={constructionCards(subs)} legend={m.legend} blobBase={blobBase(m)} notes={notes} overview teamNames={teamNames} />;
+  return <SubcomponentPanel subs={subs} rollup={rollup} hazards={hazards} defaultHazard={first} cards={constructionCards(subs)} legend={m.legend} blobBase={blobBase(m)} notes={notes} overview teamNames={teamNames} title="View by subsystem" twinBelow={twinBelow} />;
 }
 
 export default async function AssetPage({ params }: { params: Promise<{ asset: string }> }) {
@@ -83,7 +85,7 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
           </div>
           {v ? <p className="mt-1 max-w-[1100px] text-[13.5px] leading-snug">{v.summary}</p> : null}
         </div>
-        <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} open groups={["status", "evidence", "lenses", "subsystem", "production", "hazard_use", "units"]} /></div>
+        <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} groups={["status", "evidence", "lenses", "subsystem", "production", "hazard_use", "units"]} /></div>
         <div className="mt-3 grid gap-3 md:grid-cols-3">
           {lc.types.map((t) => (
             <Link key={t.slug} href={t.href} className="rounded-lg border border-border bg-card px-3 py-2.5 hover:border-accent/60">
@@ -133,11 +135,19 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
         </p>
       </div>
       <div className="mt-3 space-y-3">
-        <ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} open groups={["status", "evidence", "lenses", "subsystem", "production", "hazard_use", "units"]} />
+        <ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} groups={["status", "evidence", "lenses", "subsystem", "production", "hazard_use", "units"]} />
         <CurveList row={row} m={m} />
-        {v ? <Subcomponents v={v} m={m} building={sharedCell ? type.building!.toLowerCase() : undefined} defaultHazard={cov ? (cov.hazards.find((h) => !h.gap) ?? cov.hazards[0]).hazard.slug : undefined} /> : null}
-        {cov && viewer ? <AssetCoverage cov={cov} loadOrder={viewer.load_order} /> : <p className="text-[13px] text-muted-foreground">No twin coverage for this type yet.</p>}
-        {cov ? <CoverageMatrix cov={cov} /> : null}
+        {v ? <Subcomponents v={v} m={m} building={sharedCell ? type.building!.toLowerCase() : undefined} defaultHazard={cov ? (cov.hazards.find((h) => !h.gap) ?? cov.hazards[0]).hazard.slug : undefined} twinBelow={!!cov} /> : null}
+        {/* the second way in: the Digital Twin's own parts, as the 3D model and as a table, both folded until asked for */}
+        <section className="rounded-lg border border-border bg-card" aria-label="View by Digital Twin part">
+          <details className="group" open>
+            <SectionSummary className="px-3 py-2">View by Digital Twin part <span className="ml-2 font-normal normal-case tracking-normal">the parts of the Digital Twin&apos;s 3D model, and which have a curve</span></SectionSummary>
+            <div className="space-y-2 border-t border-border p-2">
+              {cov && viewer ? <AssetCoverage cov={cov} loadOrder={viewer.load_order} /> : <p className="px-1 text-[13px] text-muted-foreground">No twin coverage for this type yet.</p>}
+              {cov ? <CoverageMatrix cov={cov} /> : null}
+            </div>
+          </details>
+        </section>
       </div>
       {cov || (v?.reference && !sharedCell) ? (
         <footer className="mt-4 border-t border-border pt-2 text-[11.5px] text-muted-foreground">
