@@ -233,11 +233,11 @@ def construction_block(c: dict[str, Any], artifact_path: str | None, status: str
         "scope_note": scope_note(c.get("entry_id"), c.get("part")),
         "production_use": {
             "state": production_state, "consumer_pin": consumer_pin, "hazard": hazard_use,
-            "sentence": ("In use: the platform's loss calculations can use this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+            "sentence": ("Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
                          if production_state == "runtime_indexed" else
-                         "Borrowed: the platform prices this asset with a curve built for another asset; it has no curve of its own."
+                         "Released as a borrowed curve: the platform prices this asset with a curve built for another asset; it has no curve of its own."
                          if production_state == "reused_binding" else
-                         "Not in use yet: the platform's loss calculations cannot use this curve."),
+                         "Not released yet: Hazard's loss calculations cannot load this curve."),
         },
     }
 
@@ -298,9 +298,9 @@ def legend(cat_text: str) -> dict[str, Any]:
         ],
         "evidence": [{"key": k, "word": TIER_SHORT[k], "meaning": TIER_MEANING[k].removeprefix(f"{TIER_SHORT[k]}: ")} for k in ("T1", "T2", "T3", "T4")],
         "production": [
-            {"key": "runtime_indexed", "word": "in production index", "meaning": "The platform's loss calculations can use this curve. Whether Hazard's maps already use it is a separate question, answered under Used by Hazard."},
-            {"key": "reused_binding", "word": "reused in production", "meaning": "The platform prices it with a curve built for another asset."},
-            {"key": "not_runtime_indexed", "word": "not in production", "meaning": "The platform's loss calculations cannot use it yet."},
+            {"key": "runtime_indexed", "word": "released for Hazard", "meaning": "Released: this repository's index lists it as a curve Hazard's loss calculations may load. Whether Hazard's maps already use it is shown under Used by Hazard."},
+            {"key": "reused_binding", "word": "released, borrowed curve", "meaning": "Released, but as another asset's curve: the platform prices this asset with a curve built for something else."},
+            {"key": "not_runtime_indexed", "word": "not released yet", "meaning": "Not in this repository's index of released curves, so Hazard's loss calculations cannot load it yet."},
         ],
         "hazard_use": [
             {"key": "used", "word": "Used by Hazard's dashboard", "meaning": "A layer on Hazard's internal dashboard was computed with this file, or one identical to it in everything that can change a loss (curves, value shares, unit treatments)."},

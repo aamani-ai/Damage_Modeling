@@ -61,7 +61,7 @@ export function ReviewLegend({ legend, sourceHref, open = false, groups }: { leg
     lenses: { title: "How a curve is described", items: legend.lenses },
     marks: { title: "How a tile is drawn", items: legend.marks },
     subsystem: { title: "A subsystem", items: [...legend.coverage, ...legend.completeness] },
-    production: { title: "Production", items: legend.production },
+    production: { title: "Released for Hazard", items: legend.production },
     hazard_use: { title: "Used by Hazard", items: legend.hazard_use },
     units: { title: "The units", items: legend.units },
   };

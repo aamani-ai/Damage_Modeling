@@ -58,7 +58,7 @@ function Subcomponents({ v, m, defaultHazard, building, twinBelow = false, build
   const hazards = m.hazards.filter((h) => SHOW_FIELD_REPORTS || !h.outside_the_five || h.slug === "heat").map((h) => ({ slug: h.slug, label: h.label }));
   // the first hazard in the library's order (hail), whether or not it has a curve
   const first = defaultHazard ?? hazards[0].slug;
-  return <SubcomponentPanel subs={subs} rollup={rollup} hazards={hazards} defaultHazard={first} cards={constructionCards(subs)} legend={m.legend} blobBase={blobBase(m)} notes={notes} overview teamNames={teamNames} title="View by subsystem" twinBelow={twinBelow} compact buildingSlug={buildingSlug} />;
+  return <SubcomponentPanel subs={subs} rollup={rollup} hazards={hazards} defaultHazard={first} cards={constructionCards(subs)} legend={m.legend} blobBase={blobBase(m)} notes={notes} overview teamNames={teamNames} title="View by subsystem" twinBelow={twinBelow} buildingSlug={buildingSlug} />;
 }
 
 export default async function AssetPage({ params }: { params: Promise<{ asset: string }> }) {

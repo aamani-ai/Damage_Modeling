@@ -8,7 +8,7 @@
 import Link from "next/link";
 import { useUrlParam } from "@/lib/url-state";
 import type { CurveConstruction, Legend, Subcomponent, SubcomponentRollup } from "@/lib/types";
-import { ConstructionView, HazardUseTag, ProductionTag } from "./construction-view";
+import { HazardUseTag, ProductionTag } from "./construction-view";
 import { fmtPct } from "@/lib/format";
 import { FileLink, Tag, ToggleArrow, TOGGLE_CLASS } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
@@ -157,8 +157,10 @@ function GapView({ s, blobBase }: { s: Subcomponent; blobBase: string }) {
   );
 }
 
-// compact (the asset page): name the curves and link to them on the curve page instead of building each one here
-function RowDetail({ s, cards, legend, blobBase, names, compact = false, buildingSlug }: { s: Subcomponent; cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string; names?: string[]; compact?: boolean; buildingSlug?: string | null }) {
+// The row's curves in brief, with the way to them: on the curve page itself (curveHere) the link opens "The curve" there
+function RowDetail({ s, cards, legend, blobBase, names, curveHere = false, buildingSlug }: { s: Subcomponent; cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string; names?: string[]; curveHere?: boolean; buildingSlug?: string | null }) {
+  const [, setPart] = useUrlParam("part");
+  const [, setV] = useUrlParam("v");
   const shown = s.construction.filter((c) => cards[c.curve_id]);
   const ids = [...new Map(shown.filter((c) => cards[c.curve_id].unit).map((c) => [cards[c.curve_id].unit!, cards[c.curve_id].subsystem])).entries()];
   // two curves for one part (fresh and salt water) carry the same part name: the condition tells them apart
@@ -189,42 +191,58 @@ function RowDetail({ s, cards, legend, blobBase, names, compact = false, buildin
           {s.borrowed_from.tier_word ? ` (the transfer is ${s.borrowed_from.tier_word})` : ""}.{s.borrowed_from.rationale ? <span className="text-muted-foreground"> {s.borrowed_from.rationale}</span> : null}
         </p>
       ) : null}
-      {/* the Hazard comparison once for the row (its curves share it), where the curves are built */}
-      {!compact && shown.length && cards[shown[0].curve_id].k.production_use.hazard?.sentences.length ? (
-        <div className="rounded-md border border-warn/40 bg-warn-bg px-2.5 py-1.5 text-[12px] leading-snug">
-          <HazardUseTag state={cards[shown[0].curve_id].k.production_use.hazard!.state} legend={legend} />
-          {cards[shown[0].curve_id].k.production_use.hazard!.sentences.map((l) => <p key={l} className="mt-0.5">{l}</p>)}
-        </div>
-      ) : null}
-      {compact && shown.length ? (
-        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-md border border-border px-2.5 py-2 text-[12.5px]">
-          <span>
+      {/* the row's curves in brief — each one's name, form and axis — and the way to them in "The curve"; the full
+          build of each curve is on the curve page and its own page */}
+      {shown.length ? (
+        <div className="space-y-1.5 rounded-md border border-border px-2.5 py-2 text-[12.5px]">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
             <span className="font-medium">{shown.length} curve{shown.length === 1 ? "" : "s"}</span>
-            <span className="text-muted-foreground"> · {[...new Set(shown.map((c) => titleOf(c.curve_id)))].join(" · ")}{s.evidence_labels.length ? ` · ${s.evidence_labels.join(" · ")}` : ""}</span>
-          </span>
-          {s.production_use.hazard ? <HazardUseTag state={s.production_use.hazard} legend={legend} /> : null}
-          {s.entry_id ? (
-            <Link href={`/cells/${s.entry_id}?${new URLSearchParams({ ...(buildingSlug ? { building: buildingSlug } : {}), part: cards[shown[0].curve_id].title }).toString()}#card-curve`} className="ml-auto text-accent hover:underline">
-              see {shown.length === 1 ? "the curve" : "the curves"} on the {s.hazard.label.toLowerCase()} page ▸
-            </Link>
+            {s.evidence_labels.length ? <span className="text-muted-foreground">· {s.evidence_labels.join(" · ")}</span> : null}
+            <ProductionTag state={s.production_use.state} legend={legend} />
+            {s.production_use.hazard ? <HazardUseTag state={s.production_use.hazard} legend={legend} /> : null}
+            {s.entry_id ? (
+              curveHere ? (
+                <button type="button" onClick={() => { setPart(cards[shown[0].curve_id].title); setV(null); document.getElementById("card-curve")?.scrollIntoView({ behavior: "smooth", block: "start" }); }} className="ml-auto text-accent hover:underline">
+                  see {shown.length === 1 ? "the curve" : "the curves"} in “The curve” ▸
+                </button>
+              ) : (
+                <Link href={`/cells/${s.entry_id}?${new URLSearchParams({ ...(buildingSlug ? { building: buildingSlug } : {}), part: cards[shown[0].curve_id].title }).toString()}#card-curve`} className="ml-auto text-accent hover:underline">
+                  see {shown.length === 1 ? "the curve" : "the curves"} on the {s.hazard.label.toLowerCase()} page ▸
+                </Link>
+              )
+            ) : null}
+          </div>
+          <ul className="space-y-0.5">
+            {shown.map((c) => {
+              const k = cards[c.curve_id].k;
+              const unit = k.axis?.unit && k.axis.unit !== "dimensionless" && k.axis.unit !== "class" ? ` (${k.axis.unit})` : "";
+              return (
+                <li key={c.curve_id} className="leading-snug">
+                  <span className="font-medium">{titleOf(c.curve_id)}</span>
+                  <span className="text-muted-foreground"> — {k.curve_type}{k.axis ? `, against ${k.axis.label}${unit}` : ""}; how damage rises: {k.curve_tiers.shape.word}, how it becomes dollars: {k.curve_tiers.cost.word}</span>
+                </li>
+              );
+            })}
+          </ul>
+          {/* the Hazard comparison once for the row (its curves share it) */}
+          {cards[shown[0].curve_id].k.production_use.hazard?.sentences.length ? (
+            <div className="rounded-md border border-warn/40 bg-warn-bg px-2 py-1 text-[12px] leading-snug">
+              {cards[shown[0].curve_id].k.production_use.hazard!.sentences.map((l) => <p key={l}>{l}</p>)}
+            </div>
           ) : null}
         </div>
-      ) : shown.map((c) => (
-        <div key={c.curve_id} className="rounded-md border border-border p-2.5">
-          <ConstructionView k={cards[c.curve_id].k} legend={legend} blobBase={blobBase} curveHref={cards[c.curve_id].href} title={titleOf(c.curve_id)} hazardDetail={false} />
-        </div>
-      ))}
+      ) : null}
       {s.gap ? <GapView s={s} blobBase={blobBase} /> : null}
     </div>
   );
 }
 
 // teamNames: hazard slug → subsystem key → the hazard team's own part names (asset pages; from the split table)
-export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, defaultHazard, cards, legend, blobBase, picker = true, notes = [], overview = false, teamNames, buildings, title = "Every subsystem, curve or gap", twinBelow = false, compact = false, buildingSlug = null }: {
+export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, defaultHazard, cards, legend, blobBase, picker = true, notes = [], overview = false, teamNames, buildings, title = "Every subsystem, curve or gap", twinBelow = false, buildingSlug = null }: {
   subs: Subcomponent[]; rollup: SubcomponentRollup; hazards: { slug: string; label: string }[]; defaultHazard: string;
   cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string; picker?: boolean; notes?: string[];
   overview?: boolean; teamNames?: Record<string, Record<string, string[]>>; title?: string; twinBelow?: boolean;
-  compact?: boolean; buildingSlug?: string | null;
+  buildingSlug?: string | null;
   // a shared real-estate cell page: type slug → building; ?building= keeps that building's rows only
   buildings?: Record<string, string>;
 }) {
@@ -290,7 +308,7 @@ export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, d
                   <th scope="col" className="px-2 py-1 text-right font-medium">Value share</th>
                   <th scope="col" className="px-2 py-1 font-medium">Curve or gap</th>
                   <th scope="col" className="px-2 py-1 font-medium">Evidence</th>
-                  <th scope="col" className="px-2 py-1 font-medium">Production</th>
+                  <th scope="col" className="px-2 py-1 font-medium">Released</th>
                 </tr>
               </thead>
               <tbody>
@@ -311,7 +329,7 @@ export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, d
                           <span aria-hidden className="mr-1 inline-block w-4 text-[14px] leading-none text-muted-foreground">{isOpen ? "▾" : "▸"}</span>
                           <span className={s.coverage === "gap" ? "" : "font-medium text-foreground"}>{s.label}</span>
                         </button>
-                        {s.scope_notes.length ? <Tag tone="warn" className="ml-1" title={s.scope_notes[0].note}>scope note</Tag> : null}
+                        {s.scope_notes.length ? <Tag tone="warn" className="ml-1" title={s.scope_notes[0].note}>about the name</Tag> : null}
                       </th>
                       <td className="px-2 py-1 text-right font-mono tabular" title={s.share_basis ?? undefined}>{s.share != null ? fmtPct(s.share, 1) : "—"}</td>
                       <td className="px-2 py-1">{s.coverage === "gap" ? <span className="tile-gap rounded-sm px-1">{coverageWord(s, legend)}</span> : coverageWord(s, legend)}</td>
@@ -325,7 +343,7 @@ export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, d
                     </tr>,
                     isOpen ? (
                       <tr key={`${id}-detail`} id={`sub-${id}`} className="bg-muted/30">
-                        <td colSpan={5} className="px-3 py-2.5"><RowDetail s={s} cards={cards} legend={legend} blobBase={blobBase} names={teamNames?.[s.hazard.slug]?.[s.key]} compact={compact} buildingSlug={buildingSlug} /></td>
+                        <td colSpan={5} className="px-3 py-2.5"><RowDetail s={s} cards={cards} legend={legend} blobBase={blobBase} names={teamNames?.[s.hazard.slug]?.[s.key]} curveHere={!picker} buildingSlug={buildingSlug} /></td>
                       </tr>
                     ) : null,
                   ];
