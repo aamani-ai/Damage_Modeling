@@ -238,7 +238,9 @@ export function StationPanel({ station, cell: fullCell, cites, curves: allCurves
       {/* the GitHub files this panel's words are written from: the step's own files, the write-up sections and workbook
           sheets it matched, the cell's catalogue entry, and an earlier version's audit where that is what exists */}
       {(() => {
-        const paths = [...new Set([...ch.files.map((f) => f.path), ...ch.evidence.map((e) => e.file?.path), `docs/cells/catalogue/${fullCell.entry_id}.json`, ...(ch.earlier ?? []).map((e) => e.path)].filter((x): x is string => !!x))];
+        // the curve file too: the parts, axes, forms and value shares every step reads come from it
+        const artifact = fullCell.chain.stations.find((x) => x.id === "artifact")?.files.find((f) => /curve_artifact\.json$|binding\.json$/.test(f.path))?.path;
+        const paths = [...new Set([...ch.files.map((f) => f.path), ...ch.evidence.map((e) => e.file?.path), station.id !== "field_review" ? artifact : null, `docs/cells/catalogue/${fullCell.entry_id}.json`, ...(ch.earlier ?? []).map((e) => e.path)].filter((x): x is string => !!x))];
         return <p className="text-[12px] text-muted-foreground">Read from: {paths.map((p, i) => <span key={p}>{i ? " · " : ""}<FileLink href={blob(p)} title={p}>{p.split("/").slice(-1)[0]}</FileLink></span>)}</p>;
       })()}
       <details className="group rounded-md border border-border">
