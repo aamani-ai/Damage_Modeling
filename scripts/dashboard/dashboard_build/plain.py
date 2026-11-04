@@ -556,12 +556,15 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
             lab = f"{ax.get('label')}" + (f" ({ax['unit']})" if ax.get("unit") and ax["unit"] not in ("dimensionless", "class") else "")
             if lab not in axes:
                 axes.append(lab)
-        p = f"Damage is read against {_join(axes)}." if axes else "No hazard axis is declared."
+        # the measures and the input are each listed once below this paragraph (Axis lines, What Hazard supplies); the
+        # paragraph only says how many measures and what shape the curves take
+        p = ((f"Damage is read against one hazard measure: {axes[0]}." if len(axes) == 1 else
+              f"Damage is read against {len(axes)} hazard measures, listed below with the parts read each way.") if axes else "No hazard axis is declared.")
         form = _form_sentence(curves)
         if form:
             p += " " + form
         if e.get("input"):
-            p += f" The input, in the catalogue's words: {_lower_first(plain_text(e['input'].rstrip('.')))}."
+            p += " What Hazard has to supply for each event is below."
         short = {"binary_state": "a step", "piecewise_linear": "a line through points", "logistic": "an S-curve", "thresholded_logistic": "a threshold, then an S-curve",
                  "exact_state_table": "exact classes", "ordered_damage_state_lognormal": "damage states", "thresholded_weibull_expected_damage": "a threshold, then a rise"}
         fact = " + ".join(dict.fromkeys(short.get(k_, k_.replace("_", " ")) for k_ in _form_keys(curves))) or "—"

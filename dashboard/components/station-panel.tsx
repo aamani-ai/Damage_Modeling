@@ -105,7 +105,8 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
               {g.axis.note ? <span className="block text-muted-foreground">{g.axis.note}</span> : null}
             </Line>
           ))}
-          {cell.answer.input ? <Line label="The input">{cell.answer.input}</Line> : null}
+          {/* the hazard value Hazard must give the curves for each event: which measure, its unit and the range accepted */}
+          {cell.answer.input ? <Line label="What Hazard supplies">{cell.answer.input} <span className="block text-[11px] text-muted-foreground">the hazard value Hazard gives the curves for each event, in the catalogue&apos;s words: which measure, its unit and the range the curves accept</span></Line> : null}
         </Words>
       );
       details = (

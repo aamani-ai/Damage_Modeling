@@ -287,6 +287,10 @@ def for_cell(cell_id: str, artifact_path: str | None) -> dict[str, Any]:
         tail = (f"{_same_curves(facts, shown)}, and nothing else that can change a loss differs (the rest is wording)" if not diffs
                 else f"{_same_curves(facts, shown)}; " + "; ".join(diffs)) if facts else diffs[0]
         where = f" Hazard's version is {a['where']}." if a.get("where") and a.get("model") != shown.get("model") else ""
+        # same numbers, newer release in Hazard: say why it is still flagged (a version gap, not a different loss)
+        if not diffs and facts and _model(a.get("model")) > _model(shown.get("model")):
+            where += (" The loss is the same; it is flagged because Hazard runs a newer release than this page shows,"
+                      " so the release Hazard uses should be merged here (or Hazard re-pinned).")
         words = (f"{subject} {verb} {a.get('model')}, {a.get('docs')}; this page shows {shown.get('model')}, {shown.get('docs')}. "
                  f"{tail[0].upper() + tail[1:]}.{where}")
         sentences.append(words)
