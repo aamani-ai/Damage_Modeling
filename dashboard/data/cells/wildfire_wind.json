@@ -92,7 +92,8 @@
     ],
     "evidence": [],
     "fact": "2 deferred",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "units",
@@ -108,7 +109,8 @@
     ],
     "evidence": [],
     "fact": "12 units · 10 withheld",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "axis_form",
@@ -119,7 +121,8 @@
     "files": [],
     "evidence": [],
     "fact": "exact classes",
-    "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section."
+    "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section.",
+    "earlier": []
    },
    {
     "id": "evidence",
@@ -143,7 +146,8 @@
     ],
     "evidence": [],
     "fact": "7 src · T2–4",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "value",
@@ -159,18 +163,30 @@
     ],
     "evidence": [],
     "fact": "crosswalk",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "audit",
     "label": "Audit",
     "full_label": "Audit",
     "gate": "B2",
-    "state": "absent",
-    "files": [],
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/wildfire_wind/proposed/SEVEN_STEP_AUDIT_wildfire_wind__model_v1_0__docs_r1.md",
+      "sha256": "7962ac54ae70bea13f837b80ba362e6e7868d93838c7d60aa85bb5b00cb083b9"
+     }
+    ],
     "evidence": [],
-    "fact": "no file · no prose",
-    "absent_sentence": "No seven-step audit or site-condition adapter found as a file or a dossier section."
+    "fact": "7-step file",
+    "absent_sentence": null,
+    "earlier": [
+     {
+      "path": "docs/cells/wildfire_wind/proposed/SEVEN_STEP_AUDIT_wildfire_wind__model_v0_1__docs_r1.md",
+      "model": "v0.1"
+     }
+    ]
    },
    {
     "id": "artifact",
@@ -198,7 +214,8 @@
     ],
     "evidence": [],
     "fact": "v1.0 · docs r1",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "capability",
@@ -214,7 +231,8 @@
     ],
     "evidence": [],
     "fact": "DR conditional · EAL withheld",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "proof",
@@ -249,7 +267,8 @@
     ],
     "evidence": [],
     "fact": "20 of 20 KAT reproduced",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "field_review",
@@ -260,11 +279,12 @@
     "files": [],
     "evidence": [],
     "fact": "not searched · agent-read 10-19",
-    "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only."
+    "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only.",
+    "earlier": []
    }
   ],
   "generation": "skill",
-  "core_as_files": 5,
+  "core_as_files": 6,
   "core_total": 6,
   "dossier": {
    "path": "docs/cells/wildfire_wind/current/wildfire_wind_curve_derivation_dossier__model_v1_0__docs_r1.md",
@@ -372,7 +392,7 @@
     "items": [
      {
       "item": "seven-step audit records a status and blocking seam for every step",
-      "status": "human",
+      "status": "proven",
       "basis": "SEVEN_STEP_AUDIT file"
      },
      {
@@ -785,9 +805,54 @@
   }
  },
  "audit": {
-  "table": null,
-  "state": "absent",
-  "absent_sentence": "No seven-step audit or site-condition adapter found as a file or a dossier section.",
+  "table": {
+   "source": "docs/cells/wildfire_wind/proposed/SEVEN_STEP_AUDIT_wildfire_wind__model_v1_0__docs_r1.md",
+   "columns": [
+    "Step",
+    "Decision",
+    "Result"
+   ],
+   "rows": [
+    [
+     "1. Intended decision",
+     "Make some wildfire-wind physical risk visible without claiming whole-farm calibration",
+     "Two named electrical-unit DRs only"
+    ],
+    [
+     "2. Grain",
+     "One physical pad-electrical unit; one physical shared GSU protection-control-DC package",
+     "Correct point/small-footprint grain; no lease-polygon or turbine-count shortcut"
+    ],
+    [
+     "3. Hazard x-axis",
+     "Exact FSim conditional flame-length class state",
+     "Screening ordinal only; class is not local heat flux or duration"
+    ],
+    [
+     "4. Curve form",
+     "Exact categorical table represented in bundle-v3 piecewise record",
+     "Noninteger values reject before lookup; no physical interpolation"
+    ],
+    [
+     "5. Parameters",
+     "Two monotone state tables",
+     "All ordinates Tier 4 under `WW1-A001`; mechanism/ordering evidence kept separate"
+    ],
+    [
+     "6. Value link",
+     "Same named failure-unit direct replacement value",
+     "DR emitted; scenario loss withheld because the 72 USD/kW row is mixed"
+    ],
+    [
+     "7. Test/release",
+     "14 formula KATs and 6 negative KATs pass",
+     "Noncanonical proposal; independent review and cutover blocked"
+    ]
+   ],
+   "kind": "file"
+  },
+  "state": "artifact",
+  "absent_sentence": null,
   "site_adapter": null
  },
  "proof": {
@@ -1028,16 +1093,16 @@
     "id": "derived",
     "name": "How it was derived",
     "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
-    "fact": "not written yet",
+    "fact": "USFS FSim conditional flame-length class → exact classes",
     "paragraphs": [
      "Damage is read against one hazard measure: USFS FSim conditional flame-length class. The curve is a table of damage ratios at exact classes, nothing in between. What Hazard has to supply for each event is below.",
-     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell."
+     "The seven-step audit is a file in the cell folder with 7 rows. A site-condition adapter has not been written for this cell."
     ],
     "holds": [
      "axis_form",
      "audit"
     ],
-    "written": false,
+    "written": true,
     "chips": [
      {
       "text": "USFS FSim conditional…",
@@ -1340,8 +1405,8 @@
     "id": "audit",
     "name": "The audit",
     "meaning": "The seven checks a curve passes before release",
-    "paragraph": "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell.",
-    "plain_fact": "no audit found"
+    "paragraph": "The seven-step audit is a file in the cell folder with 7 rows. A site-condition adapter has not been written for this cell.",
+    "plain_fact": "7-step audit as a file"
    },
    {
     "id": "artifact",
