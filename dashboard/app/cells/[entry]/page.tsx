@@ -76,7 +76,7 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
           {c.subcomponents.length && c.subcomponent_rollup ? (
             <div className="mt-3"><SubcomponentPanel subs={c.subcomponents} rollup={c.subcomponent_rollup} hazards={[{ slug: c.hazard.slug, label: c.hazard.label }]} defaultHazard={c.hazard.slug} cards={constructionCards(c.subcomponents)} legend={m.legend} blobBase={blobBase(m)} picker={false} buildings={buildings} /></div>
           ) : null}
-          <StepsStrip cell={c} cites={cites} curves={curves} m={m} />
+          <StepsStrip cell={c} cites={cites} curves={curves} m={m} buildings={buildings} />
           {c.binding ? (
             <Card id="card-curve" className="mt-3">
               <div className="grid gap-3 px-3 py-3 text-[12.5px] leading-snug xl:grid-cols-5">

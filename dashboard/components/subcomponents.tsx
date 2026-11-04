@@ -169,7 +169,10 @@ function RowDetail({ s, cards, blobBase, names, curveHere = false, buildingSlug 
     const same = shown.filter((c) => cards[c.curve_id].title === t);
     // what tells same-name curves apart: a different failure unit (fixed tilt / tracker), else the condition it is
     // chosen under (fresh / salt water), else its own series name (the module type)
-    const tell = unitTells(same.map((c) => ({ id: c.curve_id, unit: cards[c.curve_id].unit })))[id] ?? cards[id].when ?? cards[id].variant;
+    // …else, when those are alike too, the words its curve ID has and the others lack (the terrain: "open", "trees")
+    const variantsDiffer = new Set(same.map((c) => cards[c.curve_id].variant)).size === same.length;
+    const tell = unitTells(same.map((c) => ({ id: c.curve_id, unit: cards[c.curve_id].unit })))[id] ?? cards[id].when
+      ?? (variantsDiffer ? cards[id].variant : unitTells(same.map((c) => ({ id: c.curve_id, unit: c.curve_id })))[id]);
     return same.length > 1 && tell ? `${t} · ${tell}` : t;
   };
   return (

@@ -13,7 +13,7 @@ import { Drawer } from "./drawer";
 import { StationPanel } from "./station-panel";
 import { FileLink, SectionSummary } from "./ui";
 
-export function StepsStrip({ cell, cites, curves, m }: { cell: CellV2; cites: Citations["cells"][string] | null; curves: CurveV2[]; m: ManifestV3 }) {
+export function StepsStrip({ cell, cites, curves, m, buildings }: { cell: CellV2; cites: Citations["cells"][string] | null; curves: CurveV2[]; m: ManifestV3; buildings?: Record<string, string> }) {
   const [selected, setStep] = useUrlParam("step");
   const steps = cell.plain.steps;
   const open = steps.find((s) => s.id === selected) ?? null;
@@ -115,7 +115,7 @@ export function StepsStrip({ cell, cites, curves, m }: { cell: CellV2; cites: Ci
               return (
                 <section key={sid} className="space-y-1.5 border-t border-border pt-3 first:border-t-0 first:pt-0">
                   <h3 className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">{st.name}</h3>
-                  <StationPanel station={st} cell={cell} cites={cites} curves={curves} m={m} />
+                  <StationPanel station={st} cell={cell} cites={cites} curves={curves} m={m} buildings={buildings} />
                 </section>
               );
             })}

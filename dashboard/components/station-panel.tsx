@@ -6,6 +6,7 @@
 import Link from "next/link";
 import { fmtPct, fmtUsdCompact } from "@/lib/format";
 import type { CellV2, Citations, CurveV2, ManifestV3, PlainStation } from "@/lib/types";
+import { useUrlParam } from "@/lib/url-state";
 import { AuditTable, CapabilityLedger, EvidenceLedger, Eyebrow, FieldReviewLedger, FilesList, GateChecklist, PartsTable, ProofLedger, ProseEvidence, SeamsLedger, StationFact, ValueLedger } from "./ledger";
 import { SourceRef } from "./source-link";
 import { EmptyState, FileLink, Mono, SectionSummary } from "./ui";
@@ -55,7 +56,14 @@ function groupParams(rows: ParamPlain[]): { p: ParamPlain; curveIds: string[] }[
   return out;
 }
 
-export function StationPanel({ station, cell, cites, curves, m }: { station: PlainStation; cell: CellV2; cites: Citations["cells"][string] | null; curves: CurveV2[]; m: ManifestV3 }) {
+// buildings: on a shared real-estate cell, type slug → building; ?building= keeps that building's parts and curves
+export function StationPanel({ station, cell: fullCell, cites, curves: allCurves, m, buildings }: { station: PlainStation; cell: CellV2; cites: Citations["cells"][string] | null; curves: CurveV2[]; m: ManifestV3; buildings?: Record<string, string> }) {
+  const [buildingParam] = useUrlParam("building");
+  const bName = buildingParam && buildings?.[buildingParam] ? buildings[buildingParam] : null;
+  const ownParts = bName ? fullCell.parts.filter((p) => p.part.startsWith(bName)) : [];
+  const cell: CellV2 = ownParts.length ? { ...fullCell, parts: ownParts } : fullCell;
+  const ownCurves = bName ? allCurves.filter((c) => (c.part ?? "").startsWith(bName)) : [];
+  const curves = ownCurves.length ? ownCurves : allCurves;
   const blob = (p: string) => `${BLOB}/${m.link_commit}/${p.replace(/^\/+/, "")}`;
   const ch = cell.chain.stations.find((s) => s.id === station.id)!;
   const pl = cell.plain;
@@ -68,6 +76,7 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
     case "scope":
       words = (
         <Words>
+          {ownParts.length ? <Line label="Building">{bName!.toLowerCase()} only: the paragraph describes the whole shared cell (every building); the rows below are this building&apos;s</Line> : null}
           {cell.parts.length ? <Line label="Parts">{cell.parts.map((p) => p.part).join(" · ")}</Line> : null}
           {pl.blocks.missing.out_of_scope.length ? <Line label="Outside its scope">{pl.blocks.missing.out_of_scope.join(" · ")}</Line> : null}
           {pl.blocks.missing.mechanisms.length ? <Line label="Not included">{pl.blocks.missing.mechanisms.join(" · ")}</Line> : null}
@@ -79,6 +88,7 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
     case "units":
       words = (
         <Words>
+          {ownParts.length ? <Line label="Building">{bName!.toLowerCase()} only: the paragraph describes the whole shared cell (every building); the rows below are this building&apos;s</Line> : null}
           {cell.parts.map((p) => (
             // every part the same way: "Part" on the left, its name first on the right (a long name no longer changes the layout)
             <Line key={p.part} label="Part">
@@ -102,7 +112,7 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
               {g.axis.label}{g.axis.unit && g.axis.unit !== "dimensionless" && g.axis.unit !== "class" ? ` (${g.axis.unit})` : ""}
               {/* the curves read this way, one line per subsystem (in its order) with the cell's own part names after › */}
               <ul className="text-muted-foreground">
-                {axisLines(g.curve_ids, cell, curves).map((l) => <li key={l}>{l}</li>)}
+                {axisLines(g.curve_ids.filter((id) => curves.some((c) => c.curve_id === id)), cell, curves).map((l) => <li key={l}>{l}</li>)}
               </ul>
               {g.axis.note ? <span className="block text-muted-foreground">{g.axis.note}</span> : null}
             </Line>

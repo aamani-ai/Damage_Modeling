@@ -32,7 +32,9 @@ function optionsFor(curves: CurveV2[]): Option[] {
       out.push({ id: c.curve_id, label: pre + (first ? (first.legend_row && first.legend_col ? `${first.legend_row} · ${first.legend_col}` : first.label) : c.curve_id), curve: c, series: null });
     }
   }
-  return out;
+  // labels still alike (five "House" curves, one per terrain): name each by the words its curve ID has and the others lack
+  const idTells = unitTells(out.map((o) => ({ id: o.id, unit: o.curve.curve_id })));
+  return out.map((o) => (out.filter((x) => x.label === o.label).length > 1 && idTells[o.id] ? { ...o, label: idTells[o.id]! } : o));
 }
 
 /** The cell's main logic: two to four sentences the build writes from the axis, the method and the value basis. */
