@@ -80,8 +80,10 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
       words = (
         <Words>
           {cell.parts.map((p) => (
-            <Line key={p.part} label={p.part.length > 18 ? "Part" : p.part}>
-              {p.part.length > 18 ? <span className="font-medium">{p.part} · </span> : null}
+            // every part the same way: "Part" on the left, its name first on the right (a long name no longer changes the layout)
+            <Line key={p.part} label="Part">
+              {(() => { const sub = cell.subcomponents.find((x) => x.curve_ids.some((id) => p.curves.includes(id)))?.label; return sub && sub.toLowerCase() !== p.part.toLowerCase() ? <span className="text-muted-foreground">{sub} › </span> : null; })()}
+              <span className="font-medium">{p.part} · </span>
               {p.curves.length} curve{p.curves.length === 1 ? "" : "s"}{p.variants && p.variants !== "none" ? ` · ${p.variants}` : ""}
               {SHOW_FIELD_REPORTS && p.occurrence ? <span className="block text-muted-foreground">{p.occurrence.sentence}</span> : null}
             </Line>

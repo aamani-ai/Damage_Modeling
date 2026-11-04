@@ -542,7 +542,9 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
         fact = f"{len(names)} part{'s' if len(names) != 1 else ''}" + (f" · {len(e.get('out_of_scope') or [])} left out" if e.get("out_of_scope") else "")
     elif sid == "units":
         names = [pt["part"] for pt in parts]
-        p = f"This hazard's curves cover {len(names)} part{'s' if len(names) != 1 else ''} of the {singular(noun)}, named as the catalogue entry writes them: {_join(names)}." if names else "No part rows are listed in the catalogue entry."
+        # the parts themselves are the rows below (subsystem › part as the catalogue names it); the paragraph counts them
+        p = (f"This hazard's curves cover {len(names)} part{'s' if len(names) != 1 else ''} of the {singular(noun)}, listed below after the subsystem each belongs to"
+             " and named as the catalogue entry writes them." if names else "No part rows are listed in the catalogue entry.")
         # the withheld units and the parts with no curve are each listed once, below this paragraph
         if withheld:
             p += (f" {len(withheld)} further unit{'s are' if len(withheld) != 1 else ' is'} named but withheld (below): the cell says they can be damaged"
