@@ -78,7 +78,7 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
           ) : null}
           <StepsStrip cell={c} cites={cites} curves={curves} m={m} buildings={buildings} />
           {c.binding ? (
-            <Card id="card-curve" className="mt-3">
+            <Card id="card-curve" className="mt-3 scroll-mt-28">
               <div className="grid gap-3 px-3 py-3 text-[12.5px] leading-snug xl:grid-cols-5">
                 <div className="xl:col-span-3">
                   <div className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">The curve</div>

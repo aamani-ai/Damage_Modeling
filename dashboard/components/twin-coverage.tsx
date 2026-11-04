@@ -332,7 +332,8 @@ export function TwinCoverage({
   const showCurve = (part: string) => {
     setPart(part);
     setFull(false);
-    document.getElementById("card-curve")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    // an instant jump: a smooth scroll can be dropped (a busy page, a background tab) and the click then seems to do nothing
+    window.setTimeout(() => document.getElementById("card-curve")?.scrollIntoView({ block: "start" }), 0);
   };
   const systems = hz.systems[treeKey] ?? [];
   const counts: Partial<Record<CoverageState, number>> = {};

@@ -102,7 +102,7 @@ export function CurveHero({ cell, curves: allCurves, buildings, order }: { cell:
   const chip = (active: boolean, extra = "") => `rounded px-2 py-0.5 text-[12px] ${active ? "bg-accent/10 text-accent" : "text-muted-foreground hover:text-foreground"} ${extra}`;
   const axisGroupsOther = cell.answer.axis_groups.filter((g) => g.axis.id !== axis.id);
   return (
-    <Card id="card-curve" className="mt-3">
+    <Card id="card-curve" className="mt-3 scroll-mt-28">
       <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 px-3 pb-1 pt-2.5">
         <span className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">The curve</span>
         {parts.length > 1 ? (
