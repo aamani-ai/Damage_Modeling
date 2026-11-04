@@ -535,10 +535,10 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
         p = f"{hazard} on {noun}: {_lower_first(method)}." if method else f"{hazard} on {noun}."
         if names:
             p += f" It names {len(names)} part{'s' if len(names) != 1 else ''}: {_join(names)}."
-        # what it leaves out is listed once, below this paragraph and in "What is missing"; the paragraph only counts it
+        # what it leaves out is listed once, in the page's "What is missing"; the paragraph only counts it
         left = len(e.get("out_of_scope") or []) + len(e.get("missing_mechanisms") or [])
         if left:
-            p += f" It also lists {left} thing{'s' if left != 1 else ''} it leaves out (below)."
+            p += f" It also lists {left} thing{'s' if left != 1 else ''} it leaves out, under “What is missing” on this page."
         fact = f"{len(names)} part{'s' if len(names) != 1 else ''}" + (f" · {len(e.get('out_of_scope') or [])} left out" if e.get("out_of_scope") else "")
     elif sid == "units":
         names = [pt["part"] for pt in parts]

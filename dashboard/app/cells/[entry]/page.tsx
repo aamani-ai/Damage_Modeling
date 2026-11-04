@@ -10,6 +10,7 @@ import { notFound } from "next/navigation";
 import { CellCoverage, type CellCov } from "@/components/cell-coverage";
 import { CellFooter } from "@/components/cell-footer";
 import { NoCurveView, researchOf } from "@/components/no-curve";
+import { NamesTable } from "@/components/names-table";
 import { CellCrumbs, CellTitle } from "@/components/crumbs";
 import { CurveHero, MainLogic } from "@/components/curve-hero";
 import { PlainBlocks } from "@/components/plain-blocks";
@@ -105,6 +106,8 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
             <EmptyState>No curve records in this artifact.</EmptyState>
           )}
           {covs.length && viewer ? <CellCoverage covs={covs} hazardSlug={c.hazard.slug} loadOrder={viewer.load_order} /> : null}
+          {c.subcomponents.length ? <NamesTable cell={c} curves={curves} covs={covs} hazardSlug={c.hazard.slug} buildings={buildings}
+            words={{ gap: m.legend.coverage.find((i) => i.key === "gap")?.word ?? "no curve yet", no_direct_damage: m.legend.coverage.find((i) => i.key === "no_direct_damage")?.word ?? "no direct damage" }} /> : null}
           <PlainBlocks cell={c} blob={blob} />
       </>
       <CellFooter cell={c} m={m} blob={blob} hazardUse={Object.values(constructionCards(c.subcomponents)).map((x) => x.k.production_use.hazard).find(Boolean) ?? null} />

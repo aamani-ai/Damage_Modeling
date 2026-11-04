@@ -19,7 +19,8 @@ export function CellCoverage({ covs, hazardSlug, loadOrder }: { covs: CellCov[];
   const open = picture === "open";
   const current = covs.find((c) => c.slug === bParam) ?? covs[0];
   if (!current) return null;
-  const picker = covs.length > 1 ? (
+  // a page opened for one building type (?building=) shows that building only; the picker is for the shared view
+  const picker = covs.length > 1 && !covs.some((c) => c.slug === bParam) ? (
     <div role="radiogroup" aria-label="Which building" className="inline-flex rounded-md border border-border bg-card p-0.5 text-[12px]">
       {covs.map((c) => (
         <button key={c.slug} type="button" role="radio" aria-checked={c.slug === current.slug} onClick={() => { setB(c.slug === covs[0].slug ? null : c.slug); setPart(null); }}

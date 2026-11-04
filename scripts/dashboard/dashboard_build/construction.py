@@ -286,9 +286,9 @@ def legend(cat_text: str) -> dict[str, Any]:
                      for s in ("live", "proposal", "reused", "gap")),
                    {"key": "partial", "word": "partial", "meaning": "Part of the asset's value has no curve yet."}],
         "coverage": [
-            {"key": "curve", "word": "has a curve", "meaning": "A curve covers the whole of this subsystem."},
+            {"key": "curve", "word": "has a curve", "meaning": "A curve is built for this subsystem itself."},
             {"key": "partial", "word": "partial", "meaning": "A curve covers only part of this subsystem; the rest has none."},
-            {"key": "whole", "word": "in the whole-building curve", "meaning": "No curve of its own: a curve for the whole building prices it with the rest of the structure."},
+            {"key": "whole", "word": "in the whole-building curve", "meaning": "No curve of its own, but not left out: the hazard prices the whole building with one curve, and this subsystem's damage is inside it (hail is the exception, with its own roof and walls curves)."},
             {"key": "gap", "word": "no curve yet", "meaning": "No curve covers this subsystem; the row says why and links the research."},
             # the picture's other states (twin.STATE_MEANING), in the same words
             *({"key": k, "word": twin_words[k], "meaning": twin_meaning[k]} for k in ("conditioner", "no_direct_damage", "outside")),

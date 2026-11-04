@@ -78,8 +78,6 @@ export function StationPanel({ station, cell: fullCell, cites, curves: allCurves
         <Words>
           {ownParts.length ? <Line label="Building">{bName!.toLowerCase()} only: the paragraph describes the whole shared cell (every building); the rows below are this building&apos;s</Line> : null}
           {cell.parts.length ? <Line label="Parts">{cell.parts.map((p) => p.part).join(" · ")}</Line> : null}
-          {pl.blocks.missing.out_of_scope.length ? <Line label="Outside its scope">{pl.blocks.missing.out_of_scope.join(" · ")}</Line> : null}
-          {pl.blocks.missing.mechanisms.length ? <Line label="Not included">{pl.blocks.missing.mechanisms.join(" · ")}</Line> : null}
         </Words>
       );
       details = <SeamsLedger cell={cell} />;
