@@ -32,6 +32,16 @@ CODES = {
     "LINE_EXPOSURE_AND_CONSTRUCTION_STATE_REQUIRED": "How the lines are built and how exposed they are need defining first.",
     "FACILITY_LEVEL_EXPOSURE_REQUIRED": "How exposed the whole facility is needs defining first.",
     "MIXED_BUILDING_AND_INSTRUMENT_INVENTORY_REQUIRES_SPLIT": "Its value mixes buildings and instruments, which would need separating first.",
+    "COMPONENT_LEVEL_ECONOMIC_RESPONSE_NOT_CALIBRATED": "What it costs to repair this part on its own has not been worked out; the source prices the station only as a whole.",
+    "TRANSFORMER_MAIN_AUXILIARY_STATE_MODEL_REQUIRED": "The main transformer and its auxiliaries would need modelling separately first.",
+    "DEPENDENCY_SAFE_VALUE_SPLIT_REQUIRED": "Its value would need splitting from the parts it depends on, without counting anything twice.",
+    "PROTECTION_CONTROL_ECONOMIC_RESPONSE_NOT_CALIBRATED": "What protection and control equipment costs to repair after this hazard has not been worked out.",
+    "STATION_SERVICE_DC_DECOMPOSITION_REQUIRED": "The station's own power and DC supply would need splitting into parts first.",
+    "CABLE_BODY_TERMINATION_PATHWAY_SPLIT_REQUIRED": "A cable's run and its end connections are damaged differently and would need separating first.",
+    "CABLE_BODY_TERMINATION_AND_INGRESS_SPLIT_REQUIRED": "A cable's run, its end connections and water getting in would need separating first.",
+    "FUNCTIONAL_EQUIPMENT_HAIL_EVIDENCE_NOT_FOUND": "No evidence was found of hail damaging this working equipment.",
+    "SWITCHGEAR_RECONDITION_OR_REPLACE_MODEL_REQUIRED": "Whether switchgear is reconditioned or replaced after this hazard would need modelling first.",
+    "TRANSFORMER_THERMAL_STATE_AND_DISPOSITION_MODEL_REQUIRED": "How heat leaves a transformer, and whether it is repaired or replaced, would need modelling first.",
 }
 
 # a bracketed qualifier in a catalogue part list, and what it means
