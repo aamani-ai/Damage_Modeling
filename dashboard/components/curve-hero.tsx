@@ -105,7 +105,8 @@ export function CurveHero({ cell, curves: allCurves, buildings, order }: { cell:
         <span className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">The curve</span>
         {parts.length > 1 ? (
           <div className="flex flex-wrap items-center gap-1.5 text-[12px]">
-            {/* two steps: the subsystem, then (when it has several) which of its curves */}
+            {/* subsystem (the cost bucket) → part (the cell's catalogue label) → curve (below: the individual curves, when a
+                part has several) */}
             {(() => {
               const labelOf = (p: string) => order?.[curves.find((c) => (c.part ?? c.failure_unit_id ?? c.curve_id) === p)?.curve_id ?? ""]?.label ?? p;
               const groups = groupsOf(parts, labelOf);
@@ -120,8 +121,9 @@ export function CurveHero({ cell, curves: allCurves, buildings, order }: { cell:
                   </div>
                   {current.parts.length > 1 ? (
                     <div className="flex flex-wrap items-center gap-1.5">
-                      <span className="w-16 text-muted-foreground">curve</span>
-                      <div role="radiogroup" aria-label="Curve" className="inline-flex flex-wrap rounded-md border border-border bg-card p-0.5">
+                      {/* the cell's own catalogue label for what it prices (one failure unit in words) */}
+                      <span className="w-16 text-muted-foreground">part</span>
+                      <div role="radiogroup" aria-label="Part, as the cell's catalogue names it" className="inline-flex flex-wrap rounded-md border border-border bg-card p-0.5">
                         {current.parts.map((p) => <button key={p} type="button" role="radio" aria-checked={p === part} onClick={() => { setPart(p); setV(null); }} className={chip(p === part)}>{p}</button>)}
                       </div>
                     </div>
@@ -133,7 +135,8 @@ export function CurveHero({ cell, curves: allCurves, buildings, order }: { cell:
         ) : <span className="rounded bg-muted px-2 py-0.5 text-[12px]">{part}</span>}
         {options.length > 1 ? (
           <div className="flex flex-wrap items-center gap-1.5 text-[12px]">
-            <span className="text-muted-foreground">{partCurves.length > 1 && options.length === partCurves.length ? "curve" : "variant"}</span>
+            {/* "curve" when the part has several curves; "variant" when one curve carries several versions (resistance bands) */}
+            <span className="text-muted-foreground">{partCurves.length > 1 ? "curve" : "variant"}</span>
             <div role="radiogroup" aria-label="Variant" className="inline-flex flex-wrap rounded-md border border-border bg-card p-0.5">
               {options.map((o) => <button key={o.id} type="button" role="radio" aria-checked={o.id === selected.id} onClick={() => setV(o.id === options[0].id ? null : o.id)} className={chip(o.id === selected.id)}>{o.label}</button>)}
             </div>
