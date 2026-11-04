@@ -46,7 +46,7 @@ export function PlainBlocks({ cell }: { cell: CellV2 }) {
             </div>
           </>
         ) : (
-          <p>Curves for {cell.parts.length} part{cell.parts.length === 1 ? "" : "s"}{pl.blocks.covered.not_covered.length ? `; ${pl.blocks.covered.not_covered.length} part${pl.blocks.covered.not_covered.length === 1 ? " has" : "s have"} no curve yet` : ""}{withheld.length ? `; ${withheld.length} named but withheld` : ""}. The files state no plant-level dollar figure for this asset.</p>
+          <p>Curves for {cell.parts.length} part{cell.parts.length === 1 ? "" : "s"}{pl.blocks.covered.not_covered.length ? `; ${pl.blocks.covered.not_covered.length} part${pl.blocks.covered.not_covered.length === 1 ? " has" : "s have"} no curve yet` : ""}{withheld.length ? `; ${withheld.length} named but withheld` : ""}. The cell gives no total value for the plant, so the share of value its curves cover cannot be worked out.</p>
         )}
         <p className="mt-1.5 text-[12px]"><OpenStep step="covers">See every part in “What it covers” ▸</OpenStep></p>
       </Block>
@@ -60,10 +60,6 @@ export function PlainBlocks({ cell }: { cell: CellV2 }) {
             <p>{[pl.blocks.missing.mechanisms.length ? `${pl.blocks.missing.mechanisms.length} kind${pl.blocks.missing.mechanisms.length === 1 ? "" : "s"} of damage not in the curve` : null, pl.blocks.missing.out_of_scope.length ? `${pl.blocks.missing.out_of_scope.length} thing${pl.blocks.missing.out_of_scope.length === 1 ? "" : "s"} outside the cell's scope` : null].filter(Boolean).join(" and ")}.</p>
           ) : <p className="text-muted-foreground">nothing listed as missing</p>}
           {pl.blocks.missing.mechanisms.length || pl.blocks.missing.out_of_scope.length ? <p className="mt-1.5 text-[12px]"><OpenStep step="covers">See them in “What it covers” ▸</OpenStep></p> : null}
-        </Block>
-        <Block title="Open questions" count={pl.blocks.open_questions.length}>
-          {pl.blocks.open_questions.length ? <p>{pl.blocks.open_questions.length} question{pl.blocks.open_questions.length === 1 ? " is" : "s are"} still open{pl.blocks.next_version ? ", and the next version is named" : ""}.</p> : <p className="text-muted-foreground">none listed</p>}
-          {pl.blocks.open_questions.length ? <p className="mt-1.5 text-[12px]"><OpenStep step="covers">See them in “What it covers” ▸</OpenStep></p> : null}
         </Block>
       </div>
     </div>

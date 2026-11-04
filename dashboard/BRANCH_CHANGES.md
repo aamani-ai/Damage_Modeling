@@ -77,7 +77,8 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 - **The curve** picks subsystem → part → curve. Curves that share a name say what sets them apart (fixed tilt /
   tracker, fresh / salt water, module type, terrain).
 - **How this curve was made**, four steps. Each panel is complete on its own and ends with **Read from:** links to the
-  GitHub files it was written from.
+  GitHub files it was written from (folded), next to **Details** for reviewers (method checks, source IDs, file
+  fingerprints). Each list starts with its count.
   - *What it covers*: scope, what it leaves out, open questions, each part as subsystem › part, withheld units named
     in words with their reasons.
   - *How it was derived*: each hazard measure with the parts read against it, the curve shapes, what Hazard has to
@@ -88,7 +89,8 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 - **Every subsystem, curve or gap**: an opened row gives the curve's name, form, axis and evidence, and jumps to The
   curve.
 - **How the names connect** (folded): subsystem → the cell's part → failure unit and curves → Digital Twin parts.
-- **What is covered, What is missing, Open questions** at the bottom are one-line summaries that open What it covers.
+- **What is covered** and **What is missing** at the bottom are one-line summaries that open What it covers; open
+  questions are listed in What it covers only.
 - **For Hazard** (footer) says once whether Hazard's dashboard uses this exact file.
 - A real-estate curve page opened for one building (`?building=residential`) is titled for it and shows only its
   parts, curves and 3D model.

@@ -534,7 +534,7 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
         names = [pt["part"] for pt in parts]
         p = f"{hazard} on {noun}: {_lower_first(method)}." if method else f"{hazard} on {noun}."
         if names:
-            p += f" It names {len(names)} part{'s' if len(names) != 1 else ''}: {_join(names)}."
+            p += f" It names {len(names)} part{'s' if len(names) != 1 else ''} (listed below)."
         # what it leaves out is listed in full below this paragraph (the page's What is missing only summarises it)
         left = len(e.get("out_of_scope") or []) + len(e.get("missing_mechanisms") or [])
         if left:

@@ -18,6 +18,11 @@ function Words({ children }: { children: React.ReactNode }) {
   return <div className="space-y-2 text-[12.5px] leading-snug">{children}</div>;
 }
 
+// "8 parts: " in front of a list
+function Count({ n, one, many, note }: { n: number; one: string; many?: string; note?: string }) {
+  return <span className="font-medium">{n} {n === 1 ? one : (many ?? `${one}s`)}{note ? <span className="font-normal text-muted-foreground"> ({note})</span> : null}: </span>;
+}
+
 function Line({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="grid grid-cols-[92px_1fr] gap-x-2 border-t border-border/60 py-1.5">
@@ -77,10 +82,11 @@ export function StationPanel({ station, cell: fullCell, cites, curves: allCurves
       words = (
         <Words>
           {ownParts.length ? <Line label="Building">{bName!.toLowerCase()} only: the paragraph describes the whole shared cell (every building); the rows below are this building&apos;s</Line> : null}
-          {cell.parts.length ? <Line label="Parts">{cell.parts.map((p) => p.part).join(" · ")}</Line> : null}
-          {pl.blocks.missing.out_of_scope.length ? <Line label="Outside its scope">{pl.blocks.missing.out_of_scope.join(" · ")}</Line> : null}
-          {pl.blocks.missing.mechanisms.length ? <Line label="Not included">{pl.blocks.missing.mechanisms.join(" · ")}</Line> : null}
-          {pl.blocks.open_questions.length ? <Line label="Open questions"><ul className="list-disc pl-4">{pl.blocks.open_questions.map((o) => <li key={o}>{o}</li>)}</ul>{pl.blocks.next_version ? <span className="block text-muted-foreground">next version · {pl.blocks.next_version}</span> : null}</Line> : null}
+          {/* each list starts with how many it holds, so nobody has to count */}
+          {cell.parts.length ? <Line label="Parts"><Count n={cell.parts.length} one="part" />{cell.parts.map((p) => p.part).join(" · ")}</Line> : null}
+          {pl.blocks.missing.out_of_scope.length ? <Line label="Outside its scope"><Count n={pl.blocks.missing.out_of_scope.length} one="item" note="done by someone else, or deliberately left out; not a missing curve" />{pl.blocks.missing.out_of_scope.join(" · ")}</Line> : null}
+          {pl.blocks.missing.mechanisms.length ? <Line label="Not included"><Count n={pl.blocks.missing.mechanisms.length} one="kind" many="kinds" note="of damage the curve does not model" />{pl.blocks.missing.mechanisms.join(" · ")}</Line> : null}
+          {pl.blocks.open_questions.length ? <Line label="Open questions"><Count n={pl.blocks.open_questions.length} one="question" /><ul className="list-disc pl-4">{pl.blocks.open_questions.map((o) => <li key={o}>{o}</li>)}</ul>{pl.blocks.next_version ? <span className="block text-muted-foreground">next version · {pl.blocks.next_version}</span> : null}</Line> : null}
         </Words>
       );
       details = <SeamsLedger cell={cell} />;
@@ -242,7 +248,15 @@ export function StationPanel({ station, cell: fullCell, cites, curves: allCurves
         // the curve file too: the parts, axes, forms and value shares every step reads come from it
         const artifact = fullCell.chain.stations.find((x) => x.id === "artifact")?.files.find((f) => /curve_artifact\.json$|binding\.json$/.test(f.path))?.path;
         const paths = [...new Set([...ch.files.map((f) => f.path), ...ch.evidence.map((e) => e.file?.path), station.id !== "field_review" ? artifact : null, `docs/cells/catalogue/${fullCell.entry_id}.json`, ...(ch.earlier ?? []).map((e) => e.path)].filter((x): x is string => !!x))];
-        return <p className="text-[12px] text-muted-foreground">Read from: {paths.map((p, i) => <span key={p}>{i ? " · " : ""}<FileLink href={blob(p)} title={p}>{p.split("/").slice(-1)[0]}</FileLink></span>)}</p>;
+        return (
+          <details className="group text-[12px]">
+            <SectionSummary className="text-[11.5px]">Read from <span className="ml-1 font-normal normal-case tracking-normal">{paths.length} file{paths.length === 1 ? "" : "s"} on GitHub</span></SectionSummary>
+            <div className="mt-1 space-y-1 pl-5">
+              <p className="text-muted-foreground">The files these words were written from: open one to read the original. Details, below, is for checking the work: the list of method checks this step passes, the source IDs behind each number, and each file&apos;s fingerprint, which proves exactly which version was read.</p>
+              <p>{paths.map((p, i) => <span key={p}>{i ? " · " : ""}<FileLink href={blob(p)} title={p}>{p.split("/").slice(-1)[0]}</FileLink></span>)}</p>
+            </div>
+          </details>
+        );
       })()}
       <details className="group rounded-md border border-border">
         <SectionSummary className="px-2.5 py-1.5">Details <span className="font-normal normal-case tracking-normal">— register IDs, the gate checklist, files and SHAs</span></SectionSummary>
