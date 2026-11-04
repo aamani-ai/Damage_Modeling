@@ -11,7 +11,7 @@ import { useUrlParam } from "@/lib/url-state";
 import type { CellV2, Citations, CurveV2, ManifestV3 } from "@/lib/types";
 import { Drawer } from "./drawer";
 import { StationPanel } from "./station-panel";
-import { FileLink } from "./ui";
+import { FileLink, SectionSummary } from "./ui";
 
 export function StepsStrip({ cell, cites, curves, m }: { cell: CellV2; cites: Citations["cells"][string] | null; curves: CurveV2[]; m: ManifestV3 }) {
   const [selected, setStep] = useUrlParam("step");
@@ -38,10 +38,8 @@ export function StepsStrip({ cell, cites, curves, m }: { cell: CellV2; cites: Ci
   const blob = (p: string) => `${m.repo.url}/blob/${m.link_commit}/${p.replace(/^\/+/, "")}`;
   return (
     <section aria-label="How this curve was made" className="mt-3">
-      <div className="mb-1 flex items-baseline gap-2 px-0.5 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">
-        How this curve was made
-        <span className="font-normal normal-case tracking-normal text-muted-foreground/80">four steps, with their key items · open one for the detail</span>
-      </div>
+      <details className="group" open>
+      <SectionSummary className="mb-1 px-0.5">How this curve was made <span className="ml-2 font-normal normal-case tracking-normal text-muted-foreground/80">four steps, with their key items · open one for the detail</span></SectionSummary>
       <div role="group" aria-label="How this curve was made — four steps" className="grid overflow-hidden rounded-lg border border-border bg-card sm:grid-cols-2 xl:grid-cols-4">
         {steps.map((s, i) => (
           <button
@@ -72,6 +70,7 @@ export function StepsStrip({ cell, cites, curves, m }: { cell: CellV2; cites: Ci
           </button>
         ))}
       </div>
+      </details>
       <Drawer open={!!open} title={open ? open.name : ""} onClose={close} width={660}>
         {open ? (
           <div className="space-y-4">

@@ -50,7 +50,19 @@ export function MainLogic({ cell }: { cell: CellV2 }) {
   );
 }
 
-export function CurveHero({ cell, curves: allCurves, buildings }: { cell: CellV2; curves: CurveV2[]; m: ManifestV3; buildings?: Record<string, string> }) {
+// order: curve_id → the subsystem row it belongs to (its place in "Every subsystem" and its label), so the parts read in
+// the subsystem order and under the subsystem's name
+function groupsOf(parts: string[], labelOf: (p: string) => string | null): { label: string | null; parts: string[] }[] {
+  const out: { label: string | null; parts: string[] }[] = [];
+  for (const p of parts) {
+    const l = labelOf(p);
+    const g = out.find((x) => x.label === l);
+    if (g) g.parts.push(p); else out.push({ label: l, parts: [p] });
+  }
+  return out;
+}
+
+export function CurveHero({ cell, curves: allCurves, buildings, order }: { cell: CellV2; curves: CurveV2[]; m: ManifestV3; buildings?: Record<string, string>; order?: Record<string, { idx: number; label: string }> }) {
   const [partParam, setPart] = useUrlParam("part");
   const [buildingParam] = useUrlParam("building");
   const [vParam, setV] = useUrlParam("v");
@@ -58,7 +70,8 @@ export function CurveHero({ cell, curves: allCurves, buildings }: { cell: CellV2
   // a shared real-estate cell opened for one building (?building=) shows that building's curves only
   const building = buildingParam && buildings?.[buildingParam] ? buildings[buildingParam] : null;
   const own = building ? allCurves.filter((c) => (c.part ?? "").startsWith(building)) : [];
-  const curves = own.length ? own : allCurves;
+  const rank = (c: CurveV2) => order?.[c.curve_id]?.idx ?? 999;
+  const curves = [...(own.length ? own : allCurves)].sort((a, b) => rank(a) - rank(b));
   const parts = useMemo(() => {
     const names: string[] = [];
     for (const c of curves) { const n = c.part ?? c.failure_unit_id ?? c.curve_id; if (!names.includes(n)) names.push(n); }
@@ -89,9 +102,16 @@ export function CurveHero({ cell, curves: allCurves, buildings }: { cell: CellV2
         <span className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">The curve</span>
         {parts.length > 1 ? (
           <div className="flex flex-wrap items-center gap-1.5 text-[12px]">
-            <span className="text-muted-foreground">part</span>
-            <div role="radiogroup" aria-label="Part of the plant" className="inline-flex flex-wrap rounded-md border border-border bg-card p-0.5">
-              {parts.map((p, i) => <button key={p} type="button" role="radio" aria-checked={i === partIdx} onClick={() => { setPart(p); setV(null); }} className={chip(i === partIdx)}>{p}</button>)}
+            {/* each part under the subsystem it belongs to, in the subsystem order */}
+            <div role="radiogroup" aria-label="Part of the plant" className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              {groupsOf(parts, (p) => order?.[curves.find((c) => (c.part ?? c.failure_unit_id ?? c.curve_id) === p)?.curve_id ?? ""]?.label ?? null).map((g) => (
+                <span key={g.label ?? "_"} className="inline-flex flex-wrap items-center gap-1">
+                  {g.label && !(g.parts.length === 1 && g.parts[0].toLowerCase() === g.label.toLowerCase()) ? <span className="text-[11.5px] text-muted-foreground">{g.label}</span> : null}
+                  <span className="inline-flex flex-wrap rounded-md border border-border bg-card p-0.5">
+                    {g.parts.map((p) => { const i = parts.indexOf(p); return <button key={p} type="button" role="radio" aria-checked={i === partIdx} onClick={() => { setPart(p); setV(null); }} className={chip(i === partIdx)}>{p}</button>; })}
+                  </span>
+                </span>
+              ))}
             </div>
           </div>
         ) : <span className="rounded bg-muted px-2 py-0.5 text-[12px]">{part}</span>}

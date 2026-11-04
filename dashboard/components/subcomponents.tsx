@@ -7,7 +7,8 @@
 // picture above); the open rows are ?sub= (any number, comma-separated). The panel folds away (?subs=hidden).
 import Link from "next/link";
 import { useUrlParam } from "@/lib/url-state";
-import type { CurveConstruction, Legend, Subcomponent, SubcomponentRollup } from "@/lib/types";
+import type { CurveConstruction, CurveV2, Legend, Subcomponent, SubcomponentRollup } from "@/lib/types";
+import { CurvePlot } from "./curve-plot";
 import { ConstructionView, HazardUseTag, ProductionTag } from "./construction-view";
 import { fmtPct } from "@/lib/format";
 import { FileLink, Tag, ToggleArrow, TOGGLE_CLASS } from "./ui";
@@ -15,7 +16,7 @@ import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 // `when` is the condition the curve is chosen under ("freshwater screening"), from the curve's selected_by; `unit` and
 // `subsystem` are the failure unit ID and subsystem code the curve file attaches it to (what Hazard's code reads)
-export interface ConstructionCard { k: CurveConstruction; href: string; title: string; when: string | null; unit: string | null; subsystem: string | null }
+export interface ConstructionCard { k: CurveConstruction; href: string; title: string; when: string | null; unit: string | null; subsystem: string | null; curve?: CurveV2 | null }
 
 const fileName = (p: string) => p.split("/").slice(-1)[0];
 
@@ -188,7 +189,8 @@ function RowDetail({ s, cards, legend, blobBase, names }: { s: Subcomponent; car
       ) : null}
       {shown.map((c) => (
         <div key={c.curve_id} className="rounded-md border border-border p-2.5">
-          <ConstructionView k={cards[c.curve_id].k} legend={legend} blobBase={blobBase} curveHref={cards[c.curve_id].href} title={titleOf(c.curve_id)} />
+          {cards[c.curve_id].curve ? <div className="mb-2"><CurvePlot curves={[cards[c.curve_id].curve!]} axis={cards[c.curve_id].curve!.axis} height={220} legend={false} ariaLabel={`${titleOf(c.curve_id)}: the curve`} /></div> : null}
+          <ConstructionView k={cards[c.curve_id].k} legend={legend} blobBase={blobBase} curveHref={cards[c.curve_id].href} title={titleOf(c.curve_id)} hazardDetail={false} />
         </div>
       ))}
       {s.gap ? <GapView s={s} blobBase={blobBase} /> : null}
@@ -220,8 +222,8 @@ export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, d
   };
   const [fold, setFold] = useUrlParam("subs");
   const shown = fold !== "hidden";
-  // "all" is the side-by-side view of every hazard; with no hazard in the URL an asset page opens on it
-  const hz = picker ? (hazards.find((h) => h.slug === hzParam)?.slug ?? (overview && (!hzParam || hzParam === "all") ? "all" : defaultHazard)) : defaultHazard;
+  // "all" is the side-by-side view of every hazard, one tab of the asset page; with no hazard in the URL it opens on defaultHazard
+  const hz = picker ? (hazards.find((h) => h.slug === hzParam)?.slug ?? (overview && hzParam === "all" ? "all" : defaultHazard)) : defaultHazard;
   const all = hz === "all";
   const rows = subs.filter((s) => s.hazard.slug === hz);
   const here = rollup.by_hazard?.[hz] ?? rollup;

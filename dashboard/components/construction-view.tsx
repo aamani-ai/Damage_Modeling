@@ -81,7 +81,8 @@ function WhereFrom({ p, legend, blobBase }: { p: ConstructionParameter; legend: 
   );
 }
 
-export function ConstructionView({ k, legend, blobBase, curveHref, title }: { k: CurveConstruction; legend: Legend; blobBase: string; curveHref?: string; title?: string }) {
+// hazardDetail: the Hazard comparison in full (the curve page); a subsystem row keeps only the tag, its words on hover
+export function ConstructionView({ k, legend, blobBase, curveHref, title, hazardDetail = true }: { k: CurveConstruction; legend: Legend; blobBase: string; curveHref?: string; title?: string; hazardDetail?: boolean }) {
   const params = Object.fromEntries(k.parameters.map((p) => [p.name, p]));
   const unit = k.axis?.unit && k.axis.unit !== "dimensionless" && k.axis.unit !== "class" ? ` ${k.axis.unit}` : "";
   return (
@@ -94,7 +95,7 @@ export function ConstructionView({ k, legend, blobBase, curveHref, title }: { k:
         {curveHref ? <Link href={curveHref} className="ml-auto text-accent hover:underline">open the curve ▸</Link> : null}
       </div>
       <p className="text-[11.5px] text-muted-foreground">{k.production_use.sentence}</p>
-      {k.production_use.hazard?.sentences.length ? (
+      {hazardDetail && k.production_use.hazard?.sentences.length ? (
         <ul className="text-[11.5px] text-muted-foreground">{k.production_use.hazard.sentences.map((s) => <li key={s}>{s}</li>)}</ul>
       ) : null}
       {k.scope_note ? <p className="rounded-md border border-warn/40 bg-warn-bg px-2 py-1 text-[12px]">{k.scope_note.note} <FileLink href={`${blobBase}/${k.scope_note.basis}`}>{fileName(k.scope_note.basis)}</FileLink></p> : null}

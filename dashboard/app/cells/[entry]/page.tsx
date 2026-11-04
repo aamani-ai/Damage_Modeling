@@ -48,6 +48,9 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
     return cov ? [{ slug: t.slug, label: t.label, building: t.building ?? null, cov }] : [];
   });
   const buildings = Object.fromEntries(types.filter((t) => t.building).map((t) => [t.slug, t.building!]));
+  // each curve's subsystem row (first one it appears in), in the subsystem panel's order
+  const curveOrder: Record<string, { idx: number; label: string }> = {};
+  c.subcomponents.forEach((s, i) => { for (const id of s.curve_ids) curveOrder[id] ??= { idx: i, label: s.label }; });
   // a catalogue gap is a no-curve page, the same one heat's tiles open (NoCurveView)
   if (c.kind === "gap") {
     const lib = m.library.flatMap((x) => x.types).find((t) => types.some((u) => u.slug === t.slug)) ?? null;
@@ -102,7 +105,7 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
               </div>
             </Card>
           ) : curves.length ? (
-            <CurveHero cell={c} curves={curves} m={m} buildings={buildings} />
+            <CurveHero cell={c} curves={curves} m={m} buildings={buildings} order={curveOrder} />
           ) : (
             <EmptyState>No curve records in this artifact.</EmptyState>
           )}

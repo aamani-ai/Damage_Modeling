@@ -15,7 +15,8 @@ export function CellCoverage({ covs, hazardSlug, loadOrder }: { covs: CellCov[];
   const [bParam, setB] = useUrlParam("building");
   const [, setPart] = useUrlParam("part");
   const [picture, setPicture] = useUrlParam("picture");
-  const open = picture !== "hidden";
+  // folded until asked for: a folded picture does not load the model
+  const open = picture === "open";
   const current = covs.find((c) => c.slug === bParam) ?? covs[0];
   if (!current) return null;
   const picker = covs.length > 1 ? (
@@ -30,7 +31,7 @@ export function CellCoverage({ covs, hazardSlug, loadOrder }: { covs: CellCov[];
   ) : null;
   const title = (
     <>
-      <button type="button" aria-expanded={open} aria-controls="card-coverage-body" onClick={() => setPicture(open ? "hidden" : null)} className={TOGGLE_CLASS}>
+      <button type="button" aria-expanded={open} aria-controls="card-coverage-body" onClick={() => setPicture(open ? null : "open")} className={TOGGLE_CLASS}>
         <ToggleArrow open={open} />What this curve covers on the Digital Twin
       </button>
       <Link href={`/assets/${current.slug}?hazard=${hazardSlug}`} className="ml-1 font-normal normal-case tracking-normal text-accent hover:underline">on the {current.label.toLowerCase()} page ▸</Link>

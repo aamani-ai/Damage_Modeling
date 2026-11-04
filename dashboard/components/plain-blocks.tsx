@@ -5,7 +5,7 @@ import { fmtPct, fmtUsdCompact } from "@/lib/format";
 import type { CellV2 } from "@/lib/types";
 import { Card, FileLink, SectionSummary } from "./ui";
 
-// each block folds; only "What it can be used for" starts open
+// each block folds, and starts closed
 function Block({ title, count, children, className = "", open = false }: { title: string; count?: number | null; children: React.ReactNode; className?: string; open?: boolean }) {
   return (
     <Card className={`self-start ${className}`}>
@@ -23,7 +23,7 @@ export function PlainBlocks({ cell, blob }: { cell: CellV2; blob: (p: string) =>
   const withheld = pl.blocks.covered.withheld;
   return (
     <div className="mt-3 grid gap-3 xl:grid-cols-2">
-      <Block title="What it can be used for" open>
+      <Block title="What it can be used for">
         <ul className="space-y-1">
           {pl.capabilities.map((c) => (
             <li key={c.key} className="grid grid-cols-[96px_1fr] gap-x-2">
