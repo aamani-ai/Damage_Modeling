@@ -627,6 +627,11 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
         elif st.get("state") == "prose":
             p = "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file."
             fact = "adjustments in the write-up"
+        elif st.get("earlier"):
+            vs = sorted({x["model"] for x in st["earlier"]})
+            p = (f"No seven-step audit was written for the version shown; the cell has one for an earlier version ({_join(vs)}), "
+                 "from its proposal stage.")
+            fact = f"audit for {_join(vs)} only"
         else:
             p = "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page."
             fact = "no audit found"

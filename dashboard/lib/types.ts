@@ -68,6 +68,7 @@ export interface FileRef { path: string; sha256: string | null; note?: string; p
 export interface Station {
   id: string; label: string; full_label?: string; gate: string; state: StationState; files: FileRef[];
   evidence: { kind: string; file: FileRef; matched: string[] }[]; fact: string; absent_sentence: string | null;
+  earlier?: { path: string; model: string }[];
 }
 export interface GateItem { item: string; status: "proven" | "human" | "n/a"; basis: string | null }
 export interface Chain {

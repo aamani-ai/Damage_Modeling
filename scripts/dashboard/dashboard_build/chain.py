@@ -159,6 +159,19 @@ def detect(entry: Entry, registers: dict[str, Any], kat_summary: dict[str, Any],
             pass  # the index pin is added below as its own file
         if sid == "field_review":
             hit_files = []
+        earlier: list[dict[str, str]] = []
+        if sid == "audit" and entry.cell_root:
+            # a seven-step audit written at the proposal stage stays in proposed/ (or archive/) when the curve goes live:
+            # the one for the version shown counts; one for another version is named, not counted
+            v = str(a.get("semantic_damage_model_version") or "").strip()
+            tag = f"model_v{v.replace('.', '_')}" if v else None
+            for p in sorted(entry.cell_root.rglob("*")):
+                if p.is_file() and "seven_step" in p.name.lower() and p not in hit_files:
+                    m_ = re.search(r"model_v(\d+)_(\d+)", p.name)
+                    if tag and tag in p.name.lower():
+                        hit_files = sorted(set(hit_files) | {p})
+                    elif m_:
+                        earlier.append({"path": rel(p), "model": f"v{m_.group(1)}.{m_.group(2)}"})
         state, evidence = None, []
         if entry.kind == "gap":
             state = "not_applicable"
@@ -201,6 +214,7 @@ def detect(entry: Entry, registers: dict[str, Any], kat_summary: dict[str, Any],
             "files": file_entries, "evidence": evidence,
             "fact": _fact(sid, entry, a, registers, kat_summary, occurrence, value_facts, file_entries, state),
             "absent_sentence": STATION_ABSENT_SENTENCES[sid] if state == "absent" else None,
+            "earlier": earlier if sid == "audit" else [],
         })
     for s in stations:
         if s["id"] == "audit" and s["state"] == "prose":
