@@ -370,7 +370,8 @@ export interface TwinTree { root: string; nodes: Record<string, { n: string; p?:
 export interface MatrixRow { tree: string; node: string; name: string; cells: Record<string, { state: CoverageState; words: string; curve_parts: string[]; mixed: boolean; states: CoverageState[] }> }
 export interface Coverage {
   type: { slug: string; label: string; category: string; category_label: string; profile: string | null; building: string | null; also_buildings: string[] | null; picture_note: string | null; catalogue_asset: string };
-  twin: { asset: string; name: string; model: string; root: string; plant_model: string | null; plant_root: string | null; plant_name: string | null; commit: string; crosswalk: string };
+  twin: { asset: string; name: string; model: string; root: string; plant_model: string | null; plant_root: string | null; plant_name: string | null; commit: string; crosswalk: string;
+    defined_in?: { tree: string; name: string | null; path: string; line: number; href: string }[] };
   trees: Record<string, TwinTree>; hazards: CoverageHazard[]; matrix: MatrixRow[];
   state_words: Record<CoverageState, string>; state_short: Record<CoverageState, string>; state_meaning?: Record<CoverageState, string>;
 }

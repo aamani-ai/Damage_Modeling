@@ -43,14 +43,27 @@ export function AssetCoverage({ cov, loadOrder }: { cov: Coverage; loadOrder: st
     <section id="asset-coverage" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label="What each curve covers on the Digital Twin">
       <div id="asset-coverage-body">
       <TwinCoverage cov={cov} loadOrder={loadOrder} hazardSlug={hz.hazard.slug} mode="asset" title={title} hazardPicker={picker} height={480} />
-      {/* which parts have a curve is in the list beside the picture; only the way to the curve stays here */}
-      {!hz.gap && hz.href ? (
-        <div className="flex border-t border-border px-3 py-2 text-[12.5px]">
-          <Link href={hz.href} className="ml-auto text-accent hover:underline">open the {hz.hazard.label.toLowerCase()} curve ▸</Link>
-        </div>
-      ) : null}
+      {/* where the twin defines this breakdown, and the way to the curve (which parts have one is in the list beside the picture) */}
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t border-border px-3 py-2 text-[12.5px]">
+        <TwinDefinedIn cov={cov} />
+        {!hz.gap && hz.href ? <Link href={hz.href} className="ml-auto text-accent hover:underline">open the {hz.hazard.label.toLowerCase()} curve ▸</Link> : null}
+      </div>
       </div>
     </section>
+  );
+}
+
+// "The Digital Twin defines this breakdown in subsystem-data.js (Tracker Block) and twin-data.js (Solar Plant)", linked
+export function TwinDefinedIn({ cov }: { cov: Coverage }) {
+  const d = cov.twin.defined_in ?? [];
+  if (!d.length) return null;
+  return (
+    <span className="text-[12px] text-muted-foreground">
+      The Digital Twin defines this breakdown in{" "}
+      {d.map((x, i) => (
+        <span key={x.tree}>{i ? (i === d.length - 1 ? " and " : ", ") : ""}<a href={x.href} target="_blank" rel="noreferrer" className="text-accent hover:underline">{x.path.split("/").slice(-1)[0]} ↗</a>{x.name ? ` (${x.name})` : ""}</span>
+      ))}, at commit <span className="font-mono">{cov.twin.commit.slice(0, 7)}</span>.
+    </span>
   );
 }
 
@@ -107,7 +120,7 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
         </table>
         <p className="mt-1.5 text-[11.5px] text-muted-foreground">
           When a system&apos;s parts differ, the cell counts them: &quot;has a curve for 1 of 2 parts&quot;, with the other parts underneath. Click a cell to see that system on the picture above; a curve&apos;s name opens it. Mapped from{" "}
-          <span className="font-mono">{cov.twin.crosswalk.split("/").slice(-1)[0]}</span>, a draft co-owned with Hazard.
+          <span className="font-mono">{cov.twin.crosswalk.split("/").slice(-1)[0]}</span>, a draft co-owned with Hazard. <TwinDefinedIn cov={cov} />
         </p>
       </div>
       </div>

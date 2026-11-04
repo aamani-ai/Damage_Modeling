@@ -215,7 +215,11 @@ def build_coverage(entries: list[Any], sl: dict[str, Any], hazard_slug_of, cell_
         out[t["slug"]] = {
             "type": {k: t.get(k) for k in ("slug", "label", "category", "category_label", "profile", "building", "also_buildings", "picture_note", "catalogue_asset")},
             "twin": {"asset": tw_id, "name": tw["name"], "model": tw["model"], "root": tw["root"], "plant_model": tw.get("plant_model"), "plant_root": tw.get("plant_root"),
-                     "plant_name": tw.get("plant_name"), "commit": trees["twin_commit"], "crosswalk": f"docs/contracts/twin_crosswalks/{t['twin']['crosswalk']}"},
+                     "plant_name": tw.get("plant_name"), "commit": trees["twin_commit"], "crosswalk": f"docs/contracts/twin_crosswalks/{t['twin']['crosswalk']}",
+                     # where the twin repository defines this breakdown (spine.json's twin_defined_in), linked at the pinned commit
+                     "defined_in": [{"tree": d["tree"], "name": tw["name"] if d["tree"] == "asset" else tw.get("plant_name"), "path": d["path"], "line": d["line"],
+                                     "href": f"https://github.com/{trees['twin_repo']}/blob/{trees['twin_commit']}/{d['path']}#L{d['line']}"}
+                                    for d in sp.get("twin_defined_in", {}).get(tw_id, [])]},
             "trees": {k: {"root": _root(ns), "nodes": ns} for k, ns in tree_sets.items()},
             "hazards": cov_h, "matrix": matrix,
             "state_words": STATE_WORDS, "state_short": STATE_SHORT, "state_meaning": STATE_MEANING,
