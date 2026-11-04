@@ -567,21 +567,23 @@
   "withheld_units": [
    {
     "failure_unit_id": "HRE_EXPOSED_EQUIPMENT",
+    "name": "Exposed equipment",
     "subsystem": "BUILDING",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "FUNCTIONAL_EQUIPMENT_HAIL_EVIDENCE_NOT_FOUND"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; functional equipment hail evidence not found."
+    "sentence": "The cell has no curve for this part. No evidence was found of hail damaging this working equipment."
    },
    {
     "failure_unit_id": "HRE_BUILDING_CONTENTS",
+    "name": "Building contents",
     "subsystem": "BUILDING",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; contents deferred separate failure unit."
+    "sentence": "The cell has no curve for this part. Contents are set aside to be modeled separately later."
    }
   ],
   "hazard_axis": [
@@ -1117,8 +1119,8 @@
     "meaning": "The parts that have a curve, their share of the value, and what has none yet",
     "fact": "6 parts with a curve · 1 without one yet",
     "paragraphs": [
-     "Hail on buildings: published hail-damage thresholds by roofing material (onset and full failure) turned into a replacement probability, times the roof's share of building cost. It names 6 parts: House roof (asphalt shingles), Warehouse roof (standing-seam steel), Office roof (TPO membrane and insulation), House walls and windows, Warehouse windows and Office windows. Outside its scope: contents (declared as a withheld placeholder part) and wind and flooding from the same storm (other cells). Kinds of damage it does not include: rain entering after a roof breach, cosmetic denting and wear from repeated small hail.",
-     "This hazard's curves cover 6 parts of the building, named as the catalogue entry writes them: House roof (asphalt shingles), Warehouse roof (standing-seam steel), Office roof (TPO membrane and insulation), House walls and windows, Warehouse windows and Office windows. 2 further units are named but withheld — hre exposed equipment and hre building contents — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: outdoor equipment: AC condenser, rooftop units (whether it sits in the profile value is an open question).",
+     "Hail on buildings: published hail-damage thresholds by roofing material (onset and full failure) turned into a replacement probability, times the roof's share of building cost. It names 6 parts: House roof (asphalt shingles), Warehouse roof (standing-seam steel), Office roof (TPO membrane and insulation), House walls and windows, Warehouse windows and Office windows. It also lists 5 things it leaves out (below).",
+     "This hazard's curves cover 6 parts of the building, named as the catalogue entry writes them: House roof (asphalt shingles), Warehouse roof (standing-seam steel), Office roof (TPO membrane and insulation), House walls and windows, Warehouse windows and Office windows. 2 further units are named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
      "The damage ratio is a share of each part's own replacement value (roof cover; walls and windows); building share = unit damage x the part's share of structure replacement cost. The files state no plant-level dollar figure for this asset."
     ],
     "holds": [
@@ -1311,21 +1313,23 @@
     "withheld": [
      {
       "failure_unit_id": "HRE_EXPOSED_EQUIPMENT",
+      "name": "Exposed equipment",
       "subsystem": "BUILDING",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "FUNCTIONAL_EQUIPMENT_HAIL_EVIDENCE_NOT_FOUND"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; functional equipment hail evidence not found."
+      "sentence": "The cell has no curve for this part. No evidence was found of hail damaging this working equipment."
      },
      {
       "failure_unit_id": "HRE_BUILDING_CONTENTS",
+      "name": "Building contents",
       "subsystem": "BUILDING",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; contents deferred separate failure unit."
+      "sentence": "The cell has no curve for this part. Contents are set aside to be modeled separately later."
      }
     ]
    },
@@ -1359,14 +1363,14 @@
     "id": "scope",
     "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Hail on buildings: published hail-damage thresholds by roofing material (onset and full failure) turned into a replacement probability, times the roof's share of building cost. It names 6 parts: House roof (asphalt shingles), Warehouse roof (standing-seam steel), Office roof (TPO membrane and insulation), House walls and windows, Warehouse windows and Office windows. Outside its scope: contents (declared as a withheld placeholder part) and wind and flooding from the same storm (other cells). Kinds of damage it does not include: rain entering after a roof breach, cosmetic denting and wear from repeated small hail.",
+    "paragraph": "Hail on buildings: published hail-damage thresholds by roofing material (onset and full failure) turned into a replacement probability, times the roof's share of building cost. It names 6 parts: House roof (asphalt shingles), Warehouse roof (standing-seam steel), Office roof (TPO membrane and insulation), House walls and windows, Warehouse windows and Office windows. It also lists 5 things it leaves out (below).",
     "plain_fact": "6 parts · 2 left out"
    },
    {
     "id": "units",
     "name": "What breaks",
     "meaning": "The parts of the plant the hazard damages, each with its own curve",
-    "paragraph": "This hazard's curves cover 6 parts of the building, named as the catalogue entry writes them: House roof (asphalt shingles), Warehouse roof (standing-seam steel), Office roof (TPO membrane and insulation), House walls and windows, Warehouse windows and Office windows. 2 further units are named but withheld — hre exposed equipment and hre building contents — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: outdoor equipment: AC condenser, rooftop units (whether it sits in the profile value is an open question).",
+    "paragraph": "This hazard's curves cover 6 parts of the building, named as the catalogue entry writes them: House roof (asphalt shingles), Warehouse roof (standing-seam steel), Office roof (TPO membrane and insulation), House walls and windows, Warehouse windows and Office windows. 2 further units are named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
     "plain_fact": "6 parts · 2 withheld"
    },
    {

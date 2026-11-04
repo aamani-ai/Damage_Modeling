@@ -597,82 +597,91 @@
   "withheld_units": [
    {
     "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+    "name": "Turbine equipment assembly",
     "subsystem": "REPEATED_TURBINE",
     "reasons": [
      "SOURCE_NATIVE_ATOM_NOT_HARMONIZED_TO_STANDARD_EQUIPMENT_ASSEMBLY",
      "OMITTED_NON_TOWER_FAILURE_MODES"
     ],
-    "sentence": "Withheld: source native atom not harmonized to standard equipment assembly; omitted non tower failure modes."
+    "sentence": "The published source treats it as one block, which has not been split into the standard parts. The source covers only the tower, so other ways it can fail are left out."
    },
    {
     "failure_unit_id": "WT_FOUNDATION",
+    "name": "Foundation",
     "subsystem": "FOUNDATION",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit."
+    "sentence": "The cell has no curve for this part."
    },
    {
     "failure_unit_id": "WT_PAD_MOUNTED_ELECTRICAL",
+    "name": "Pad mounted electrical",
     "subsystem": "PLANT_ELECTRICAL",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "ELECTRICAL_VALUE_SPLIT_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; electrical value split required."
+    "sentence": "The cell has no curve for this part. The electrical value would first need splitting by part."
    },
    {
     "failure_unit_id": "WT_COLLECTION_SYSTEM",
+    "name": "Collection system",
     "subsystem": "PLANT_ELECTRICAL",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "LINE_NETWORK_EXPOSURE_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; line network exposure required."
+    "sentence": "The cell has no curve for this part. Where the cable network runs and how exposed it is need defining first."
    },
    {
     "failure_unit_id": "WT_GSU_SUBSTATION",
+    "name": "GSU substation",
     "subsystem": "SUBSTATION",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "FACILITY_LEVEL_EXPOSURE_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; facility level exposure required."
+    "sentence": "The cell has no curve for this part. How exposed the whole facility is needs defining first."
    },
    {
     "failure_unit_id": "WT_CONTROL_BUILDING_AND_SCADA",
+    "name": "Control building and SCADA",
     "subsystem": "CONTROL",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit."
+    "sentence": "The cell has no curve for this part."
    },
    {
     "failure_unit_id": "WT_CIVIL_INFRA",
+    "name": "Civil infra",
     "subsystem": "PLANT_CIVIL",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; mixed civil bucket requires split."
+    "sentence": "The cell has no curve for this part. Its value mixes roads, pads, buildings and fences, which would need separating first."
    },
    {
     "failure_unit_id": "SUPPORT_FIELDWORK",
+    "name": "Support fieldwork",
     "subsystem": "SUPPORT",
     "reasons": [
      "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
      "NO_INDEPENDENT_FRAGILITY"
     ],
-    "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+    "sentence": "Its cost (crews, cranes, transport) is added once, after the other parts' damage is known. It does not break on its own; its cost follows the damage to other parts."
    },
    {
     "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+    "name": "Support transport logistics",
     "subsystem": "SUPPORT",
     "reasons": [
      "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
      "NO_INDEPENDENT_FRAGILITY"
     ],
-    "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+    "sentence": "Its cost (crews, cranes, transport) is added once, after the other parts' damage is known. It does not break on its own; its cost follows the damage to other parts."
    }
   ],
   "hazard_axis": [
@@ -1002,8 +1011,8 @@
     "meaning": "The parts that have a curve, their share of the value, and what has none yet",
     "fact": "1 part with a curve · 16 % of the value · 1 without one yet",
     "paragraphs": [
-     "Hurricane wind on wind farms: published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; the 3.3 MW / 100 m curve stands in for the canonical 5 MW turbine, tower value only. It names 1 part: Turbine tower. Outside its scope: storm surge, flood, scour, debris, rain ingress, lightning and fire and business interruption. Kinds of damage it does not include: blade and other non-tower turbine failure modes (the curve is driven by tower damage states only).",
-     "This hazard's curves cover 1 part of the wind farm, named as the catalogue entry writes them: Turbine tower. 9 further units are named but withheld — wt turbine equipment assembly, wt foundation, wt pad mounted electrical, wt collection system, wt gsu substation, wt control building and scada, wt civil infra, support fieldwork and support transport logistics — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil, fieldwork and transport (withheld, not zero).",
+     "Hurricane wind on wind farms: published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; the 3.3 MW / 100 m curve stands in for the canonical 5 MW turbine, tower value only. It names 1 part: Turbine tower. It also lists 3 things it leaves out (below).",
+     "This hazard's curves cover 1 part of the wind farm, named as the catalogue entry writes them: Turbine tower. 9 further units are named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
      "16 % of the project's value has a curve. No curve yet for rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil, fieldwork and transport (withheld, not zero) (84 % of the value)."
     ],
     "holds": [
@@ -1211,82 +1220,91 @@
     "withheld": [
      {
       "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "name": "Turbine equipment assembly",
       "subsystem": "REPEATED_TURBINE",
       "reasons": [
        "SOURCE_NATIVE_ATOM_NOT_HARMONIZED_TO_STANDARD_EQUIPMENT_ASSEMBLY",
        "OMITTED_NON_TOWER_FAILURE_MODES"
       ],
-      "sentence": "Withheld: source native atom not harmonized to standard equipment assembly; omitted non tower failure modes."
+      "sentence": "The published source treats it as one block, which has not been split into the standard parts. The source covers only the tower, so other ways it can fail are left out."
      },
      {
       "failure_unit_id": "WT_FOUNDATION",
+      "name": "Foundation",
       "subsystem": "FOUNDATION",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit."
+      "sentence": "The cell has no curve for this part."
      },
      {
       "failure_unit_id": "WT_PAD_MOUNTED_ELECTRICAL",
+      "name": "Pad mounted electrical",
       "subsystem": "PLANT_ELECTRICAL",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "ELECTRICAL_VALUE_SPLIT_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; electrical value split required."
+      "sentence": "The cell has no curve for this part. The electrical value would first need splitting by part."
      },
      {
       "failure_unit_id": "WT_COLLECTION_SYSTEM",
+      "name": "Collection system",
       "subsystem": "PLANT_ELECTRICAL",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "LINE_NETWORK_EXPOSURE_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; line network exposure required."
+      "sentence": "The cell has no curve for this part. Where the cable network runs and how exposed it is need defining first."
      },
      {
       "failure_unit_id": "WT_GSU_SUBSTATION",
+      "name": "GSU substation",
       "subsystem": "SUBSTATION",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "FACILITY_LEVEL_EXPOSURE_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; facility level exposure required."
+      "sentence": "The cell has no curve for this part. How exposed the whole facility is needs defining first."
      },
      {
       "failure_unit_id": "WT_CONTROL_BUILDING_AND_SCADA",
+      "name": "Control building and SCADA",
       "subsystem": "CONTROL",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit."
+      "sentence": "The cell has no curve for this part."
      },
      {
       "failure_unit_id": "WT_CIVIL_INFRA",
+      "name": "Civil infra",
       "subsystem": "PLANT_CIVIL",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; mixed civil bucket requires split."
+      "sentence": "The cell has no curve for this part. Its value mixes roads, pads, buildings and fences, which would need separating first."
      },
      {
       "failure_unit_id": "SUPPORT_FIELDWORK",
+      "name": "Support fieldwork",
       "subsystem": "SUPPORT",
       "reasons": [
        "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
        "NO_INDEPENDENT_FRAGILITY"
       ],
-      "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+      "sentence": "Its cost (crews, cranes, transport) is added once, after the other parts' damage is known. It does not break on its own; its cost follows the damage to other parts."
      },
      {
       "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+      "name": "Support transport logistics",
       "subsystem": "SUPPORT",
       "reasons": [
        "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
        "NO_INDEPENDENT_FRAGILITY"
       ],
-      "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+      "sentence": "Its cost (crews, cranes, transport) is added once, after the other parts' damage is known. It does not break on its own; its cost follows the damage to other parts."
      }
     ]
    },
@@ -1318,14 +1336,14 @@
     "id": "scope",
     "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Hurricane wind on wind farms: published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; the 3.3 MW / 100 m curve stands in for the canonical 5 MW turbine, tower value only. It names 1 part: Turbine tower. Outside its scope: storm surge, flood, scour, debris, rain ingress, lightning and fire and business interruption. Kinds of damage it does not include: blade and other non-tower turbine failure modes (the curve is driven by tower damage states only).",
+    "paragraph": "Hurricane wind on wind farms: published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; the 3.3 MW / 100 m curve stands in for the canonical 5 MW turbine, tower value only. It names 1 part: Turbine tower. It also lists 3 things it leaves out (below).",
     "plain_fact": "1 part · 2 left out"
    },
    {
     "id": "units",
     "name": "What breaks",
     "meaning": "The parts of the plant the hazard damages, each with its own curve",
-    "paragraph": "This hazard's curves cover 1 part of the wind farm, named as the catalogue entry writes them: Turbine tower. 9 further units are named but withheld — wt turbine equipment assembly, wt foundation, wt pad mounted electrical, wt collection system, wt gsu substation, wt control building and scada, wt civil infra, support fieldwork and support transport logistics — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil, fieldwork and transport (withheld, not zero).",
+    "paragraph": "This hazard's curves cover 1 part of the wind farm, named as the catalogue entry writes them: Turbine tower. 9 further units are named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
     "plain_fact": "1 part · 9 withheld"
    },
    {

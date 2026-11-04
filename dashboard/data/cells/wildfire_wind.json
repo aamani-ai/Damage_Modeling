@@ -570,93 +570,103 @@
   "withheld_units": [
    {
     "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+    "name": "Turbine fire assembly",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "FULL_TURBINE_ECONOMIC_RESPONSE_NOT_CALIBRATED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; full turbine economic response not calibrated."
+    "sentence": "The cell has no curve for this part. What a whole turbine costs to repair after this hazard has not been worked out."
    },
    {
     "failure_unit_id": "WT_COLLECTION_NETWORK",
+    "name": "Collection network",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "LINE_EXPOSURE_AND_CONSTRUCTION_STATE_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; line exposure and construction state required."
+    "sentence": "The cell has no curve for this part. How the lines are built and how exposed they are need defining first."
    },
    {
     "failure_unit_id": "WT_GSU_MAIN_TRANSFORMER",
+    "name": "GSU main transformer",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "TRANSFORMER_THERMAL_STATE_AND_DISPOSITION_MODEL_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; transformer thermal state and disposition model required."
+    "sentence": "The cell has no curve for this part. How heat leaves a transformer, and whether it is repaired or replaced, would need modelling first."
    },
    {
     "failure_unit_id": "WT_GSU_SWITCHGEAR_BUS",
+    "name": "GSU switchgear bus",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "SWITCHGEAR_RECONDITION_OR_REPLACE_MODEL_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; switchgear recondition or replace model required."
+    "sentence": "The cell has no curve for this part. Whether switchgear is reconditioned or replaced after this hazard would need modelling first."
    },
    {
     "failure_unit_id": "WT_GSU_CABLE_TERMINATIONS",
+    "name": "GSU cable terminations",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "CABLE_BODY_TERMINATION_AND_INGRESS_SPLIT_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; cable body termination and ingress split required."
+    "sentence": "The cell has no curve for this part. A cable's run, its end connections and water getting in would need separating first."
    },
    {
     "failure_unit_id": "WT_CONTROL_MET_OM",
+    "name": "Control met OM",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "MIXED_BUILDING_AND_INSTRUMENT_INVENTORY_REQUIRES_SPLIT"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; mixed building and instrument inventory requires split."
+    "sentence": "The cell has no curve for this part. Its value mixes buildings and instruments, which would need separating first."
    },
    {
     "failure_unit_id": "WT_FOUNDATION",
+    "name": "Foundation",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "DIRECT_THERMAL_RESPONSE_NOT_CALIBRATED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; direct thermal response not calibrated."
+    "sentence": "The cell has no curve for this part. How heat directly damages it has not been worked out."
    },
    {
     "failure_unit_id": "WT_CIVIL_INFRA",
+    "name": "Civil infra",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; mixed civil bucket requires split."
+    "sentence": "The cell has no curve for this part. Its value mixes roads, pads, buildings and fences, which would need separating first."
    },
    {
     "failure_unit_id": "SUPPORT_FIELDWORK",
+    "name": "Support fieldwork",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_INDEPENDENT_FRAGILITY",
      "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION"
     ],
-    "sentence": "Withheld: no independent fragility; support cost allocate once after disposition."
+    "sentence": "It does not break on its own; its cost follows the damage to other parts. Its cost (crews, cranes, transport) is added once, after the other parts' damage is known."
    },
    {
     "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+    "name": "Support transport logistics",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_INDEPENDENT_FRAGILITY",
      "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION"
     ],
-    "sentence": "Withheld: no independent fragility; support cost allocate once after disposition."
+    "sentence": "It does not break on its own; its cost follows the damage to other parts. Its cost (crews, cranes, transport) is added once, after the other parts' damage is known."
    }
   ],
   "hazard_axis": [
@@ -982,8 +992,8 @@
     "meaning": "The parts that have a curve, their share of the value, and what has none yet",
     "fact": "2 parts with a curve · 4 without one yet",
     "paragraphs": [
-     "Wildfire on wind farms: cell-local judgment-based screening points per FSim flame-length class, adopted under owner direction; research supports the mechanism and relative ordering, not the numbers. It names 2 parts: Pad electrical and GSU protection, control and DC. Outside its scope: internal turbine or electrical fire, lightning and maintenance fires, business interruption, revenue, PSPS and shutdown, post-fire erosion, flood and landslide and soft, sunk and non-physical costs. Kinds of damage it does not include: firebrand attack and destructive residue or soot (separate deferred pathways) and mitigation or clearance credit and operating state (captured, no numeric effect).",
-     "This hazard's curves cover 2 parts of the wind farm, named as the catalogue entry writes them: Pad electrical and GSU protection, control and DC. 10 further units are named but withheld — wt turbine fire assembly, wt collection network, wt gsu main transformer, wt gsu switchgear bus, wt gsu cable terminations, wt control met om, wt foundation, wt civil infra, support fieldwork and support transport logistics — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: turbine fire assembly: blades, nacelle, tower (withheld, not zero), collection network, GSU main transformer, GSU switchgear and bus, GSU cable terminations (withheld), control, met-station and O&M buildings; foundation; civil (withheld) and fieldwork and transport support (allocated once after repair scope; no fragility).",
+     "Wildfire on wind farms: cell-local judgment-based screening points per FSim flame-length class, adopted under owner direction; research supports the mechanism and relative ordering, not the numbers. It names 2 parts: Pad electrical and GSU protection, control and DC. It also lists 6 things it leaves out (below).",
+     "This hazard's curves cover 2 parts of the wind farm, named as the catalogue entry writes them: Pad electrical and GSU protection, control and DC. 10 further units are named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
      "The damage ratio is a share of direct replacement value of the same named unit (one pad's electrical equipment, or the one shared GSU protection-control-DC package). The files state no plant-level dollar figure for this asset."
     ],
     "holds": [
@@ -1164,93 +1174,103 @@
     "withheld": [
      {
       "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+      "name": "Turbine fire assembly",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "FULL_TURBINE_ECONOMIC_RESPONSE_NOT_CALIBRATED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; full turbine economic response not calibrated."
+      "sentence": "The cell has no curve for this part. What a whole turbine costs to repair after this hazard has not been worked out."
      },
      {
       "failure_unit_id": "WT_COLLECTION_NETWORK",
+      "name": "Collection network",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "LINE_EXPOSURE_AND_CONSTRUCTION_STATE_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; line exposure and construction state required."
+      "sentence": "The cell has no curve for this part. How the lines are built and how exposed they are need defining first."
      },
      {
       "failure_unit_id": "WT_GSU_MAIN_TRANSFORMER",
+      "name": "GSU main transformer",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "TRANSFORMER_THERMAL_STATE_AND_DISPOSITION_MODEL_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; transformer thermal state and disposition model required."
+      "sentence": "The cell has no curve for this part. How heat leaves a transformer, and whether it is repaired or replaced, would need modelling first."
      },
      {
       "failure_unit_id": "WT_GSU_SWITCHGEAR_BUS",
+      "name": "GSU switchgear bus",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "SWITCHGEAR_RECONDITION_OR_REPLACE_MODEL_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; switchgear recondition or replace model required."
+      "sentence": "The cell has no curve for this part. Whether switchgear is reconditioned or replaced after this hazard would need modelling first."
      },
      {
       "failure_unit_id": "WT_GSU_CABLE_TERMINATIONS",
+      "name": "GSU cable terminations",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "CABLE_BODY_TERMINATION_AND_INGRESS_SPLIT_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; cable body termination and ingress split required."
+      "sentence": "The cell has no curve for this part. A cable's run, its end connections and water getting in would need separating first."
      },
      {
       "failure_unit_id": "WT_CONTROL_MET_OM",
+      "name": "Control met OM",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "MIXED_BUILDING_AND_INSTRUMENT_INVENTORY_REQUIRES_SPLIT"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; mixed building and instrument inventory requires split."
+      "sentence": "The cell has no curve for this part. Its value mixes buildings and instruments, which would need separating first."
      },
      {
       "failure_unit_id": "WT_FOUNDATION",
+      "name": "Foundation",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "DIRECT_THERMAL_RESPONSE_NOT_CALIBRATED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; direct thermal response not calibrated."
+      "sentence": "The cell has no curve for this part. How heat directly damages it has not been worked out."
      },
      {
       "failure_unit_id": "WT_CIVIL_INFRA",
+      "name": "Civil infra",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; mixed civil bucket requires split."
+      "sentence": "The cell has no curve for this part. Its value mixes roads, pads, buildings and fences, which would need separating first."
      },
      {
       "failure_unit_id": "SUPPORT_FIELDWORK",
+      "name": "Support fieldwork",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_INDEPENDENT_FRAGILITY",
        "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION"
       ],
-      "sentence": "Withheld: no independent fragility; support cost allocate once after disposition."
+      "sentence": "It does not break on its own; its cost follows the damage to other parts. Its cost (crews, cranes, transport) is added once, after the other parts' damage is known."
      },
      {
       "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+      "name": "Support transport logistics",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_INDEPENDENT_FRAGILITY",
        "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION"
       ],
-      "sentence": "Withheld: no independent fragility; support cost allocate once after disposition."
+      "sentence": "It does not break on its own; its cost follows the damage to other parts. Its cost (crews, cranes, transport) is added once, after the other parts' damage is known."
      }
     ]
    },
@@ -1285,14 +1305,14 @@
     "id": "scope",
     "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Wildfire on wind farms: cell-local judgment-based screening points per FSim flame-length class, adopted under owner direction; research supports the mechanism and relative ordering, not the numbers. It names 2 parts: Pad electrical and GSU protection, control and DC. Outside its scope: internal turbine or electrical fire, lightning and maintenance fires, business interruption, revenue, PSPS and shutdown, post-fire erosion, flood and landslide and soft, sunk and non-physical costs. Kinds of damage it does not include: firebrand attack and destructive residue or soot (separate deferred pathways) and mitigation or clearance credit and operating state (captured, no numeric effect).",
+    "paragraph": "Wildfire on wind farms: cell-local judgment-based screening points per FSim flame-length class, adopted under owner direction; research supports the mechanism and relative ordering, not the numbers. It names 2 parts: Pad electrical and GSU protection, control and DC. It also lists 6 things it leaves out (below).",
     "plain_fact": "2 parts · 4 left out"
    },
    {
     "id": "units",
     "name": "What breaks",
     "meaning": "The parts of the plant the hazard damages, each with its own curve",
-    "paragraph": "This hazard's curves cover 2 parts of the wind farm, named as the catalogue entry writes them: Pad electrical and GSU protection, control and DC. 10 further units are named but withheld — wt turbine fire assembly, wt collection network, wt gsu main transformer, wt gsu switchgear bus, wt gsu cable terminations, wt control met om, wt foundation, wt civil infra, support fieldwork and support transport logistics — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: turbine fire assembly: blades, nacelle, tower (withheld, not zero), collection network, GSU main transformer, GSU switchgear and bus, GSU cable terminations (withheld), control, met-station and O&M buildings; foundation; civil (withheld) and fieldwork and transport support (allocated once after repair scope; no fragility).",
+    "paragraph": "This hazard's curves cover 2 parts of the wind farm, named as the catalogue entry writes them: Pad electrical and GSU protection, control and DC. 10 further units are named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
     "plain_fact": "2 parts · 10 withheld"
    },
    {
