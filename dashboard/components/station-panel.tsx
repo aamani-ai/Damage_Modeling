@@ -147,13 +147,18 @@ export function StationPanel({ station, cell: fullCell, cites, curves: allCurves
           </Line>
           <Line label="Sources">
             {docs.length ? (
+              <>
+              <Count n={docs.length} one="source" note={(() => { const lc = pl.link_counts; const n = lc.locator_only + lc.neither; return n ? `${n} with no link in the register${lc.locator_only ? `, ${lc.locator_only} of them with a locator` : ""}` : undefined; })()} />
               <ul className="space-y-0.5">{docs.map((s) => <li key={s.id}><SourceRef s={s} id={s.id} />{s.provenance && s.provenance !== "register" ? <span className="text-[11px] text-muted-foreground"> · {s.provenance.replace(/-/g, " ")}{s.from?.sheet ? ` (${s.from.sheet})` : s.from?.section ? ` (${s.from.section})` : ""}</span> : null}</li>)}</ul>
+              </>
             ) : <span className="text-muted-foreground">{pl.evidence_provenance.sentence ?? m.not_yet_extracted_sentence}{pl.evidence_provenance.dossier ? <> — <FileLink href={blob(pl.evidence_provenance.dossier)}>open the dossier</FileLink></> : null}</span>}
             {markers.length ? <p className="mt-1 text-[11.5px] text-muted-foreground">{markers.length} provenance marker{markers.length === 1 ? "" : "s"} in the register (a stated absence of a source, not a document): {markers.map((s) => s.id).join(", ")}</p> : null}
             {placeholders.length ? <p className="mt-1 text-[11.5px] text-muted-foreground">{placeholders.length} input{placeholders.length === 1 ? "" : "s"} still to be supplied: {placeholders.map((s) => s.title).join(" · ")}</p> : null}
           </Line>
           <Line label="Parameters">
             {pl.parameters_plain.length ? (
+              <>
+              <Count n={pl.parameters_plain.length} one="parameter" note={Object.entries(pl.parameters_plain.reduce<Record<string, number>>((t, x) => ({ ...t, [x.tier_word]: (t[x.tier_word] ?? 0) + 1 }), {})).map(([w, n]) => `${n} ${w}`).join(", ")} />
               <ul className="space-y-1">
                 {groupParams(pl.parameters_plain).map(({ p, curveIds }, i) => (
                   <li key={p.id + i}>
@@ -163,6 +168,7 @@ export function StationPanel({ station, cell: fullCell, cites, curves: allCurves
                   </li>
                 ))}
               </ul>
+              </>
             ) : <span className="text-muted-foreground">no parameter tier rows in this cell</span>}
           </Line>
           {pl.evidence_provenance.kind === "extracted" ? <Line label="Read from">{pl.extraction?.workbook ? <><FileLink href={blob(pl.extraction.workbook)}>{pl.extraction.workbook.split("/").slice(-1)[0]}</FileLink> (sheets {pl.evidence_provenance.sheets.join(", ")})</> : null}{pl.extraction?.dossier ? <> · <FileLink href={blob(pl.extraction.dossier)}>{pl.extraction.dossier.split("/").slice(-1)[0]}</FileLink>{pl.evidence_provenance.sections.length ? ` (${pl.evidence_provenance.sections.join("; ")})` : ""}</> : null}</Line> : null}

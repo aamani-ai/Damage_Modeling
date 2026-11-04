@@ -16,7 +16,7 @@ export function CellFooter({ cell, m, blob, hazardUse }: { cell: CellV2; m: Mani
   const caps = cell.plain.capabilities;
   const allowed = caps.filter((c) => c.mark === "✓").length;
   return (
-    <footer className="mt-4 rounded-lg border border-border bg-card px-3 py-2 text-[11.5px] text-muted-foreground">
+    <footer id="for-hazard" className="mt-4 scroll-mt-28 rounded-lg border border-border bg-card px-3 py-2 text-[11.5px] text-muted-foreground">
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <span className="text-[11px] font-semibold uppercase tracking-wide text-foreground/80">For Hazard</span>
         {id.kind === "binding" ? (
@@ -38,7 +38,7 @@ export function CellFooter({ cell, m, blob, hazardUse }: { cell: CellV2; m: Mani
       {cell.kind !== "gap" ? (
         <details className="group mt-1.5">
           <SectionSummary>What it outputs · the files · known answers · pins</SectionSummary>
-          <div className="mt-2 grid gap-3 text-[12px] md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-2 grid gap-3 text-[12px] [overflow-wrap:anywhere] md:grid-cols-2 xl:grid-cols-4 [&>div]:min-w-0">
             <div className="md:col-span-2">
               <Eyebrow>What it outputs</Eyebrow>
               <PlainCapabilities cell={cell} />

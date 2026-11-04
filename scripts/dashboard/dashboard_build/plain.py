@@ -576,27 +576,18 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
         params = ctx["parameters"]
         prov = ctx["evidence_provenance"]
         top = [r["text"] for r in ctx.get("key_references") or [] if r.get("text")] or [s.get("title") or s["id"] for s in docs[:5]]
-        if docs:
-            p = f"{len(docs)} source{'s' if len(docs) != 1 else ''} set this cell" + (f": {_join(top[:4])}" + (f" and {len(docs) - 4} more" if len(docs) > 4 else "") if top else "") + "."
-        else:
+        # the counts, the sources, the parameters by tier, the files read and the unmatched IDs are each listed once
+        # below this paragraph (Sources, Parameters, Read from, Unmatched); the paragraph only says where they are kept
+        if prov["kind"] == "not_yet_extracted":
+            p = prov["sentence"] or "No source list could be read for this cell."
+        elif not docs:
             p = "No source list could be read for this cell."
-        by_tier: dict[str, int] = {}
-        for pr in params:
-            if pr.get("tier"):
-                by_tier[pr["tier"]] = by_tier.get(pr["tier"], 0) + 1
-        if params:
-            p += f" Of the {len(params)} parameter{'s' if len(params) != 1 else ''}, " + _join([f"{n} {'are' if n != 1 else 'is'} {TIER_SHORT.get(k, k)}" for k, n in sorted(by_tier.items())]) + "."
-        if prov["kind"] == "register":
-            p += " The source and claim registers are machine-readable files in the cell folder."
+        elif prov["kind"] == "register":
+            p = "The sources and claims below are kept as machine-readable register files in the cell folder."
         elif prov["kind"] == "extracted":
-            p += f" The sources were read from the workbook's {_join(prov['sheets'])} sheet{'s' if len(prov['sheets']) != 1 else ''}" + (f" and the dossier's {_join(prov['sections'])}" if prov.get("sections") else "") + ", because this older cell keeps them there rather than in register files."
-        elif prov["kind"] == "not_yet_extracted":
-            p += " " + prov["sentence"]
-        if prov.get("unmatched"):
-            p += f" {len(prov['unmatched'])} source ID{'s' if len(prov['unmatched']) != 1 else ''} in the tier table ({_join(prov['unmatched'])}) {'match' if len(prov['unmatched']) != 1 else 'matches'} no document in the workbook or dossier."
-        lc = ctx["link_counts"]
-        if lc["locator_only"] or lc["neither"]:
-            p += f" {lc['locator_only'] + lc['neither']} source{'s have' if lc['locator_only'] + lc['neither'] != 1 else ' has'} no link in the register" + (f" ({lc['locator_only']} with a locator)" if lc["locator_only"] else "") + "."
+            p = "This older cell keeps its sources in its workbook and dossier rather than in register files; the sources below were read from there."
+        else:
+            p = ""
         fact = f"{len(docs)} source{'s' if len(docs) != 1 else ''}" + (f" · {tier_words(ctx['tier_span'])}" if ctx.get("tier_span") and ctx["tier_span"] != "–" else "")
     elif sid == "value":
         hu = e.get("how_to_use") or {}

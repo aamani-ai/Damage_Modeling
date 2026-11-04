@@ -12,6 +12,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useUrlParam } from "@/lib/url-state";
 import type { Coverage, CoverageHazard, CoverageState, Spark } from "@/lib/types";
 import { Sparkline } from "./sparkline";
+import { InfoHint } from "./ui";
 
 export const STATE_ORDER: CoverageState[] = ["curve", "conditioner", "no_curve", "no_direct_damage", "outside"];
 // Data colours, the same in both themes: the legend explains a picture whose scene is always lit the same way.
@@ -75,7 +76,7 @@ export function CoverageLegend({ words, meaning, counts }: { words: Record<Cover
         return (
           <li key={s} title={meaning?.[s]} className={`flex items-center gap-2 ${counts && !n ? "opacity-45" : ""}`}>
             <Swatch state={s} />
-            <span className="leading-tight">{words[s]}</span>
+            <span className="leading-tight">{words[s]}{meaning?.[s] ? <> <InfoHint label={`What “${words[s]}” means`}>{meaning[s]}</InfoHint></> : null}</span>
             {counts ? <span className="tabular ml-auto text-[11.5px] text-muted-foreground">{n ?? 0}</span> : null}
           </li>
         );

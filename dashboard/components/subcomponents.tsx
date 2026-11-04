@@ -338,7 +338,16 @@ export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, d
                       <td className="px-2 py-1">{s.borrowed_from && !s.evidence_labels.includes("borrowed") ? "borrowed · " : ""}{evidence(s)}</td>
                       <td className="px-2 py-1">{s.coverage === "gap" || !s.curve_ids.length ? "—" : (
                         <span className="inline-flex flex-wrap gap-1">
-                          {s.production_use.hazard ? <HazardUseTag state={s.production_use.hazard} legend={legend} /> : null}
+                          {/* the tag opens what it summarises: the For Hazard footer of the curve page */}
+                          {s.production_use.hazard ? (!picker ? (
+                            <button type="button" title="see the details in For Hazard" className="rounded hover:opacity-80" onClick={() => window.setTimeout(() => document.getElementById("for-hazard")?.scrollIntoView({ block: "start" }), 0)}>
+                              <HazardUseTag state={s.production_use.hazard} legend={legend} />
+                            </button>
+                          ) : s.entry_id ? (
+                            <Link href={`/cells/${s.entry_id}${buildingSlug ? `?building=${buildingSlug}` : ""}#for-hazard`} title="see the details in For Hazard on the curve page" className="rounded hover:opacity-80">
+                              <HazardUseTag state={s.production_use.hazard} legend={legend} />
+                            </Link>
+                          ) : <HazardUseTag state={s.production_use.hazard} legend={legend} />) : null}
                         </span>
                       )}</td>
                     </tr>,
