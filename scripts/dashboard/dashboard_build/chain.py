@@ -163,8 +163,9 @@ def detect(entry: Entry, registers: dict[str, Any], kat_summary: dict[str, Any],
         if sid == "audit" and entry.cell_root:
             # a seven-step audit written at the proposal stage stays in proposed/ (or archive/) when the curve goes live:
             # the one for the version shown counts; one for another version is named, not counted
-            v = str(a.get("semantic_damage_model_version") or "").strip()
-            tag = f"model_v{v.replace('.', '_')}" if v else None
+            # the version is written "model v1.0" (or "1.0"): its numbers make the file-name tag model_v1_0
+            vm = re.search(r"(\d+)\.(\d+)", str(a.get("semantic_damage_model_version") or ""))
+            tag = f"model_v{vm.group(1)}_{vm.group(2)}" if vm else None
             for p in sorted(entry.cell_root.rglob("*")):
                 if p.is_file() and "seven_step" in p.name.lower() and p not in hit_files:
                     m_ = re.search(r"model_v(\d+)_(\d+)", p.name)
