@@ -107,7 +107,7 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
           {covs.length && viewer ? <CellCoverage covs={covs} hazardSlug={c.hazard.slug} loadOrder={viewer.load_order} /> : null}
           <PlainBlocks cell={c} blob={blob} />
       </>
-      <CellFooter cell={c} m={m} blob={blob} />
+      <CellFooter cell={c} m={m} blob={blob} hazardUse={Object.values(constructionCards(c.subcomponents)).map((x) => x.k.production_use.hazard).find(Boolean) ?? null} />
     </div>
   );
 }

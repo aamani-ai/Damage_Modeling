@@ -228,13 +228,7 @@ function RowDetail({ s, cards, legend, blobBase, names, curveHere = false, build
               );
             })}
           </ul>
-          {/* the Hazard comparison once for the row (its curves share it) */}
-          {cards[shown[0].curve_id].k.production_use.hazard?.sentences.length ? (
-            // yellow only when Hazard's copy differs from this one; a match or no layer is plain information
-            <div className={`rounded-md border px-2 py-1 text-[12px] leading-snug ${cards[shown[0].curve_id].k.production_use.hazard!.state === "differs" ? "border-warn/40 bg-warn-bg" : "border-border bg-muted/40 text-muted-foreground"}`}>
-              {cards[shown[0].curve_id].k.production_use.hazard!.sentences.map((l) => <p key={l}>{l}</p>)}
-            </div>
-          ) : null}
+          {/* the Hazard comparison is about the whole curve file, not this part: it is said once, in For Hazard */}
         </div>
       ) : null}
       {s.gap ? <GapView s={s} blobBase={blobBase} /> : null}

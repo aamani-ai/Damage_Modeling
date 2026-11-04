@@ -298,9 +298,9 @@ def legend(cat_text: str) -> dict[str, Any]:
         ],
         "evidence": [{"key": k, "word": TIER_SHORT[k], "meaning": TIER_MEANING[k].removeprefix(f"{TIER_SHORT[k]}: ")} for k in ("T1", "T2", "T3", "T4")],
         "production": [
-            {"key": "runtime_indexed", "word": "released for Hazard", "meaning": "Released: this repository's index lists it as a curve Hazard's loss calculations may load. Whether Hazard's maps already use it is shown under Used by Hazard."},
+            {"key": "runtime_indexed", "word": "released for Hazard", "meaning": "Damage has signed this curve off for Hazard: it is on Damage's list of released curves, so Hazard's software is allowed to load it. Whether Hazard's maps already use it is the next tag, Used by Hazard."},
             {"key": "reused_binding", "word": "released, borrowed curve", "meaning": "Released, but as another asset's curve: the platform prices this asset with a curve built for something else."},
-            {"key": "not_runtime_indexed", "word": "not released yet", "meaning": "Not in this repository's index of released curves, so Hazard's loss calculations cannot load it yet."},
+            {"key": "not_runtime_indexed", "word": "not released yet", "meaning": "Not signed off for Hazard yet (a proposal): it is not on Damage's list of released curves, so Hazard's software should not load it."},
         ],
         "hazard_use": [
             {"key": "used", "word": "Used by Hazard's dashboard", "meaning": "A layer on Hazard's internal dashboard was computed with this file, or one identical to it in everything that can change a loss (curves, value shares, unit treatments)."},

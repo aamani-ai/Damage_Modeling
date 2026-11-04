@@ -2,11 +2,13 @@
 // the cell may output, its files, registers, known answers and pins. Known answers prove the code computes the curve
 // as written, not that the curve is right, so they live here and not in the reader's four steps.
 import { shortSha } from "@/lib/format";
-import type { CellV2, ManifestV3 } from "@/lib/types";
+import type { CellV2, HazardUse, ManifestV3 } from "@/lib/types";
+import { HazardUseTag } from "./construction-view";
 import { CapabilityLedger, Eyebrow } from "./ledger";
 import { FileLink, SectionSummary, Tag } from "./ui";
 
-export function CellFooter({ cell, m, blob }: { cell: CellV2; m: ManifestV3; blob: (p: string) => string }) {
+// hazardUse: whether Hazard's dashboard computed a layer with this curve file (the same for every curve in it)
+export function CellFooter({ cell, m, blob, hazardUse }: { cell: CellV2; m: ManifestV3; blob: (p: string) => string; hazardUse?: HazardUse | null }) {
   const id = cell.identity;
   const pinsOk = cell.pins.length ? cell.pins.every((p) => p.ok) : null;
   const k = cell.proof?.known_answers;
@@ -26,6 +28,12 @@ export function CellFooter({ cell, m, blob }: { cell: CellV2; m: ManifestV3; blo
         {cell.kind !== "gap" ? <span>{allowed} of {caps.length} outputs allowed outright</span> : null}
         {k?.declared ? <span>{k.reproduced} of {k.run} known answers reproduced{k.not_run.length ? `, ${k.not_run.reduce((s, n) => s + n.n, 0)} not run` : ""}</span> : null}
       </div>
+      {hazardUse?.sentences.length ? (
+        <div className={`mt-1.5 rounded-md border px-2 py-1 leading-snug ${hazardUse.state === "differs" ? "border-warn/40 bg-warn-bg text-foreground" : "border-border"}`}>
+          <HazardUseTag state={hazardUse.state} legend={m.legend} />
+          {hazardUse.sentences.map((l) => <p key={l} className="mt-0.5">{l}</p>)}
+        </div>
+      ) : null}
       {cell.kind !== "gap" ? (
         <details className="group mt-1.5">
           <SectionSummary>What it outputs · the files · known answers · pins</SectionSummary>

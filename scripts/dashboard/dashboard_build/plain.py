@@ -542,7 +542,7 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
         fact = f"{len(names)} part{'s' if len(names) != 1 else ''}" + (f" · {len(e.get('out_of_scope') or [])} left out" if e.get("out_of_scope") else "")
     elif sid == "units":
         names = [pt["part"] for pt in parts]
-        p = f"For this hazard the {singular(noun)} is split into {len(names)} part{'s' if len(names) != 1 else ''}: {_join(names)}." if names else "No part rows are listed in the catalogue entry."
+        p = f"This hazard's curves cover {len(names)} part{'s' if len(names) != 1 else ''} of the {singular(noun)}, named as the catalogue entry writes them: {_join(names)}." if names else "No part rows are listed in the catalogue entry."
         if withheld:
             p += f" {len(withheld)} further unit{'s are' if len(withheld) != 1 else ' is'} named but withheld — {_join([humanise(w['failure_unit_id']).lower() for w in withheld])} — a stated 'not zero', not a curve."
         nc = [plain_text(_strip_amount(x)) for x in e.get("not_covered") or []]
