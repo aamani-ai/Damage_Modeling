@@ -4,7 +4,8 @@
 import { shortSha } from "@/lib/format";
 import type { CellV2, HazardUse, ManifestV3 } from "@/lib/types";
 import { HazardUseTag } from "./construction-view";
-import { CapabilityLedger, Eyebrow } from "./ledger";
+import { CapabilityExtras, Eyebrow } from "./ledger";
+import { PlainCapabilities } from "./plain-blocks";
 import { FileLink, SectionSummary, Tag } from "./ui";
 
 // hazardUse: whether Hazard's dashboard computed a layer with this curve file (the same for every curve in it)
@@ -38,9 +39,10 @@ export function CellFooter({ cell, m, blob, hazardUse }: { cell: CellV2; m: Mani
         <details className="group mt-1.5">
           <SectionSummary>What it outputs · the files · known answers · pins</SectionSummary>
           <div className="mt-2 grid gap-3 text-[12px] md:grid-cols-2 xl:grid-cols-4">
-            <div>
+            <div className="md:col-span-2">
               <Eyebrow>What it outputs</Eyebrow>
-              <CapabilityLedger cell={cell} />
+              <PlainCapabilities cell={cell} />
+              <CapabilityExtras cell={cell} />
             </div>
             <div>
               <Eyebrow>Files at the build commit</Eyebrow>

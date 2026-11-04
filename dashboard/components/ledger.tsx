@@ -295,6 +295,19 @@ export function CapabilityLedger({ cell }: { cell: CellV2 }) {
   );
 }
 
+// what the curve file declares beyond the plain list of uses: the output formats it fills and its limitation flags
+export function CapabilityExtras({ cell }: { cell: CellV2 }) {
+  const cap = cell.proof?.capability;
+  if (!cap) return null;
+  const flags = (cap.limitation_flags ?? []) as string[];
+  return (
+    <div className="mt-2 text-[12px]">
+      <Kv label="emit modes" value={<span className="font-mono">{((cap.populated_emit_modes as string[] | null) ?? []).join(", ") || "—"}</span>} />
+      <Kv label="limitation flags" value={<span>{flags.length} <InfoHint label="Limitation flags" align="right"><ul className="list-disc pl-4 font-mono text-[11px]">{flags.map((f) => <li key={f}>{f}</li>)}</ul></InfoHint></span>} />
+    </div>
+  );
+}
+
 export function SeamsLedger({ cell }: { cell: CellV2 }) {
   const s = cell.seams;
   return (
