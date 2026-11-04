@@ -27,6 +27,7 @@ export function NamesTable({ cell, curves, covs, hazardSlug, buildings, words }:
     }
     return out;
   };
+  const wholeWord = words.whole;
   const rows: Row[] = [];
   for (const s of subs) {
     // a subsystem priced inside the whole-building curve has no curve of its own: say so instead of repeating that curve
@@ -63,9 +64,16 @@ export function NamesTable({ cell, curves, covs, hazardSlug, buildings, words }:
               {rows.map((r, i) => (
                 <tr key={`${r.subsystem}-${r.part ?? "gap"}-${i}`} className={`border-t border-border/60 align-top ${r.gap ? "text-muted-foreground" : ""}`}>
                   <td className="px-3 py-1">{rows[i - 1]?.subsystem === r.subsystem ? "" : r.subsystem}</td>
-                  <td className="px-2 py-1">{r.part ?? r.gap}</td>
-                  <td className="px-2 py-1">{r.units.length ? <><span className="font-mono text-[11.5px]">{r.units.join(", ")}</span>{r.curves > 1 ? <span className="text-muted-foreground"> · {r.curves} curves</span> : null}</> : null}</td>
-                  <td className="px-2 py-1 text-muted-foreground">{r.part ? (r.twin.length ? r.twin.slice(0, 8).join(" · ") + (r.twin.length > 8 ? ` and ${r.twin.length - 8} more` : "") : "not placed on the twin") : ""}</td>
+                  {/* a subsystem with no part of its own says why across the other columns, not as if it were a part's name */}
+                  {r.part ? (
+                    <>
+                      <td className="px-2 py-1">{r.part}</td>
+                      <td className="px-2 py-1"><span className="font-mono text-[11.5px]">{r.units.join(", ")}</span>{r.curves > 1 ? <span className="text-muted-foreground"> · {r.curves} curves</span> : null}</td>
+                      <td className="px-2 py-1 text-muted-foreground">{r.twin.length ? r.twin.slice(0, 8).join(" · ") + (r.twin.length > 8 ? ` and ${r.twin.length - 8} more` : "") : "not placed on the twin"}</td>
+                    </>
+                  ) : (
+                    <td colSpan={3} className="px-2 py-1 italic">{r.gap === wholeWord ? `no part of its own: its damage is priced inside the whole-building curve above (${rows.find((x) => x.part && x.subsystem !== r.subsystem)?.part ?? "the building"})` : r.gap}</td>
+                  )}
                 </tr>
               ))}
             </tbody>
