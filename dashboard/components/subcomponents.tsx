@@ -226,7 +226,7 @@ function RowDetail({ s, cards, blobBase, names, curveHere = false, buildingSlug 
               return (
                 <li key={c.curve_id} className="leading-snug">
                   <span className="font-medium">{titleOf(c.curve_id)}</span>
-                  <span className="text-muted-foreground"> — {k.curve_type}{k.axis ? `, against ${k.axis.label}${unit}` : ""}; how damage rises: {k.curve_tiers.shape.word}, how it becomes dollars: {k.curve_tiers.cost.word}</span>
+                  <span className="text-muted-foreground"> — {k.curve_type}{k.axis ? `, against ${k.axis.label}${unit}` : ""}; damage at each hazard level: {k.curve_tiers.shape.word}, the dollar value it is applied to: {k.curve_tiers.cost.word}</span>
                 </li>
               );
             })}

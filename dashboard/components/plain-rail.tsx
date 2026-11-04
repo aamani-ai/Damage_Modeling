@@ -23,7 +23,7 @@ export function PlainRail({ title, rail, summary, back, crumbs, tierMeaning, chi
             <InfoHint label="What the evidence words mean">
               <div className="space-y-1">
                 <div className="font-semibold">How sure we are, in four words</div>
-                <div className="text-muted-foreground">Each curve has two grades: how damage rises with the hazard, and how that damage becomes dollars. A chip shows the weaker one; hover it for both.</div>
+                <div className="text-muted-foreground">Each curve has two grades: the damage at each hazard level, and the dollar value that damage is applied to. A chip shows the weaker one; hover it for both.</div>
                 {Object.values(tierMeaning).map((v) => <div key={v}>{v}</div>)}
                 <div className={SHOW_FIELD_REPORTS ? "pt-1" : "hidden"}><span className="font-semibold">Field reports</span> — whether anyone has looked for real cases of this damage: found · adjacent evidence only · none found after a search · nobody has looked yet.</div>
                 <div className="pt-1 text-muted-foreground">A grade is not a verdict: none of these words uses the state colours. The files call the four grades T1 to T4.</div>

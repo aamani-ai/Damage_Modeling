@@ -37,7 +37,7 @@ function CurveList({ row, m }: { row: LibraryType; m: ManifestV3 }) {
   const hazards = m.hazards.filter((h) => !h.outside_the_five || h.slug === "heat");
   return (
     <section className="rounded-lg border border-border bg-card" aria-label="The curves">
-      <details className="group" open>
+      <details className="group">
         <SectionSummary className="px-3 py-2">The curves</SectionSummary>
         <CurveTiles tiles={row.tiles} hazards={hazards} />
       </details>

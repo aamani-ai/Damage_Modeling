@@ -11,7 +11,7 @@ import { fmtDr, fmtNum, unitTells } from "@/lib/format";
 import { useUrlParam } from "@/lib/url-state";
 import type { Axis, CellV2, CurveV2, ManifestV3 } from "@/lib/types";
 import { CurvePlot } from "./curve-plot";
-import { SourceRef } from "./source-link";
+import { OpenStep } from "./steps-strip";
 import { Card, Mono, SectionSummary } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
@@ -167,12 +167,14 @@ export function CurveHero({ cell, curves: allCurves, buildings, order }: { cell:
           <MainLogic cell={cell} />
           <div>
             <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">How sure</div>
-            <p><span className="text-muted-foreground">How damage rises: </span><span className="font-medium">{cap.how_sure.shape.word}</span>{cap.how_sure.shape.basis ? <span className="text-muted-foreground"> — {cap.how_sure.shape.basis}</span> : null}</p>
-            <p><span className="text-muted-foreground">How it becomes dollars: </span><span className="font-medium">{cap.how_sure.cost.word}</span>{cap.how_sure.cost.basis ? <span className="text-muted-foreground"> — {cap.how_sure.cost.basis}</span> : null}</p>
+            <p><span className="text-muted-foreground">Damage at each hazard level: </span><span className="font-medium">{cap.how_sure.shape.word}</span>{cap.how_sure.shape.basis ? <span className="text-muted-foreground"> — {cap.how_sure.shape.basis}</span> : null}</p>
+            <p><span className="text-muted-foreground">The dollar value it is applied to: </span><span className="font-medium">{cap.how_sure.cost.word}</span>{cap.how_sure.cost.basis ? <span className="text-muted-foreground"> — {cap.how_sure.cost.basis}</span> : null}</p>
+            <p className="text-[11.5px] text-muted-foreground">Two separate questions: how well supported the damage ratio is at each hazard level, and how well supported the dollar value it is multiplied by is (loss = damage ratio × value).</p>
           </div>
           <div>
             <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Main references</div>
-            <ul className="space-y-0.5">{cap.main_references.map((r, i) => <li key={(r.source_id ?? r.text) + i}><SourceRef s={{ ...r, title: r.text }} id={r.source_id} showLocator={false} /></li>)}</ul>
+            {/* the references are listed once, with every other source, in step 3 */}
+            <p>{cap.main_references.length ? `${cap.main_references.length} main reference${cap.main_references.length === 1 ? "" : "s"}` : "No main reference named"} · <OpenStep step="numbers">see all the sources in step 3, Where the numbers come from ▸</OpenStep></p>
           </div>
           {SHOW_FIELD_REPORTS ? (
             <div>

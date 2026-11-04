@@ -234,7 +234,7 @@ export function AuditTable({ cell, blob }: { cell: CellV2; blob: (p: string) => 
       ) : (
         <EmptyState>{cell.audit.absent_sentence ?? "No seven-step audit found as a file or a dossier section."}</EmptyState>
       )}
-      <p className="mt-2 text-[11.5px] text-muted-foreground">site-condition adapter · {cell.audit.site_adapter ? <FileLink href={blob(cell.audit.site_adapter.path)}>{cell.audit.site_adapter.path.split("/").slice(-1)[0]}</FileLink> : <span className="font-mono">▢ no file</span>}</p>
+      <p className="mt-2 text-[11.5px] text-muted-foreground"><span className="text-foreground">Site-condition adapter</span> (a short file, written for newer cells, on how a site&apos;s hazard reading becomes this curve&apos;s input at each part, and which site facts change the curve): {cell.audit.site_adapter ? <FileLink href={blob(cell.audit.site_adapter.path)}>{cell.audit.site_adapter.path.split("/").slice(-1)[0]}</FileLink> : "not written for this cell"}</p>
     </div>
   );
 }

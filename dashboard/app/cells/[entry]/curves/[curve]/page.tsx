@@ -77,8 +77,9 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
             <p>{cap.what_it_says}</p>
             <div>
               <Eyebrow>How sure</Eyebrow>
-              <p><span className="text-muted-foreground">How damage rises: </span><span className="font-medium">{cap.how_sure.shape.word}</span>{cap.how_sure.shape.basis ? <span className="text-muted-foreground"> — {cap.how_sure.shape.basis}</span> : null}</p>
-              <p><span className="text-muted-foreground">How it becomes dollars: </span><span className="font-medium">{cap.how_sure.cost.word}</span>{cap.how_sure.cost.basis ? <span className="text-muted-foreground"> — {cap.how_sure.cost.basis}</span> : null}</p>
+              <p><span className="text-muted-foreground">Damage at each hazard level: </span><span className="font-medium">{cap.how_sure.shape.word}</span>{cap.how_sure.shape.basis ? <span className="text-muted-foreground"> — {cap.how_sure.shape.basis}</span> : null}</p>
+              <p><span className="text-muted-foreground">The dollar value it is applied to: </span><span className="font-medium">{cap.how_sure.cost.word}</span>{cap.how_sure.cost.basis ? <span className="text-muted-foreground"> — {cap.how_sure.cost.basis}</span> : null}</p>
+            <p className="text-[11.5px] text-muted-foreground">Two separate questions: how well supported the damage ratio is at each hazard level, and how well supported the dollar value it is multiplied by is (loss = damage ratio × value).</p>
               <p className="text-muted-foreground">{cap.how_sure.parameters}</p>
             </div>
             {SHOW_FIELD_REPORTS ? (

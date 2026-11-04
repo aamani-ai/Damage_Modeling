@@ -96,8 +96,8 @@ def one_word(shape: str | None, cost: str | None) -> str:
 
 
 def halves(shape: str | None, cost: str | None) -> str:
-    """Both halves in words, for a tooltip or a caption: 'How damage rises: our judgment · how it becomes dollars: published'."""
-    return f"How damage rises: {tier_words(shape)} · how it becomes dollars: {tier_words(cost)}"
+    """Both halves in words, for a tooltip or a caption: 'Damage at each hazard level: our judgment · the dollar value it is applied to: published'."""
+    return f"Damage at each hazard level: {tier_words(shape)} · the dollar value it is applied to: {tier_words(cost)}"
 
 
 def tier_phrase(code: str | None) -> str:
@@ -626,7 +626,7 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
         else:
             p = "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page."
             fact = "no audit found"
-        p += " A site-condition adapter " + ("exists as a file." if ctx.get("site_adapter") else "has not been written for this cell.")
+        # whether a site-condition adapter exists is said once, with what it is, under the audit table
     elif sid == "artifact":
         ident = ctx["identity"]
         n = len(ctx["curves"])

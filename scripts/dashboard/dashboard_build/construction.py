@@ -312,7 +312,7 @@ def legend(cat_text: str) -> dict[str, Any]:
         # the library's five views of a tile, and what its borders and fills mean
         "lenses": [
             {"key": "status", "word": "Status", "meaning": "The first line of every tile, and its shade (see a curve's status): what exists for this asset and hazard."},
-            {"key": "evidence", "word": "Evidence", "meaning": "How well supported the curve's numbers are, in one word: the weaker of how damage rises with the hazard and how that damage becomes dollars (hover a tile for both)."},
+            {"key": "evidence", "word": "Evidence", "meaning": "How well supported the curve's numbers are, in one word: the weaker of two grades: the damage at each hazard level, and the dollar value that damage is applied to (hover a tile for both)."},
             # field reports are hidden for now (SHOW_FIELD_REPORTS); the entry returns with them
             *([{"key": "occurrence", "word": "Field reports", "meaning": "Whether anyone has searched for real-world reports of this hazard damaging this asset, and what was found."}]
               if SHOW_FIELD_REPORTS else []),

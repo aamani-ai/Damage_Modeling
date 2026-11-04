@@ -121,7 +121,7 @@ def dossier_sentence(curve: dict[str, Any], hazard_label: str, occurrence_state_
     tiers = curve.get("tiers") or {}
     s = f"{part}: {form}, read against {curve['axis'].get('label', 'its native axis')}"
     if tiers.get("shape") or tiers.get("cost"):
-        s += f"; how damage rises is {tier_words(tiers.get('shape'))}, how it becomes dollars {tier_words(tiers.get('cost'))}"
+        s += f"; damage at each hazard level is {tier_words(tiers.get('shape'))}, the dollar value it is applied to {tier_words(tiers.get('cost'))}"
     if not curve.get("drawn"):
         s += "; not drawn here"
     if occurrence_state_sentence:

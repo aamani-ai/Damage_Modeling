@@ -113,7 +113,7 @@ export function Library({ m }: { m: ManifestV3 }) {
           {/* the words themselves are in "What the words mean" above; this says only how to use the grid */}
           <div className="space-y-1">
             <div>A tile&apos;s first line and shade say what exists; the second line is the view chosen here.</div>
-            <div>Hover a tile for both halves of its evidence: <span className="italic">how damage rises</span> and <span className="italic">how it becomes dollars</span>.</div>
+            <div>Hover a tile for both halves of its evidence: <span className="italic">damage at each hazard level</span> and <span className="italic">the dollar value it is applied to</span>.</div>
           </div>
         </InfoHint>
         <span className="ml-auto text-muted-foreground">a type&apos;s name opens what its curves cover · a tile opens the curve</span>
