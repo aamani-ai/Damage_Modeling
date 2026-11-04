@@ -316,7 +316,7 @@ def legend(cat_text: str) -> dict[str, Any]:
             # field reports are hidden for now (SHOW_FIELD_REPORTS); the entry returns with them
             *([{"key": "occurrence", "word": "Field reports", "meaning": "Whether anyone has searched for real-world reports of this hazard damaging this asset, and what was found."}]
               if SHOW_FIELD_REPORTS else []),
-            {"key": "value", "word": "Value covered", "meaning": "Of everything the asset is worth, the share that has a damage curve for this hazard: 75% means a quarter of its value has none. \"No total stated\" means the cell gives each part's share but never their total, so none is shown."},
+            {"key": "value", "word": "Value covered", "meaning": "Of everything the asset is worth (its reference plant's value budget), how much this hazard's curves price, in parts that add up to all of it: priced (a curve, or a cost the cell adds in step with the other parts' damage); partly priced; no direct damage (the cell judged the hazard does not damage it, so $0 is right); not priced (no curve, so any damage there is not counted). Real estate has no value budget yet."},
             {"key": "review", "word": "Read by", "meaning": "Whether a person has reviewed this entry, or only an agent has read it."},
         ],
         "marks": [

@@ -41,6 +41,8 @@ export interface Tile {
   entry_id: string; kind: string; status: Status; title: string; asset: Slug; hazard: Slug;
   exists: Rail["exists"]; partial: boolean; tiers: Rail["evidence"]; occurrence: { mark: string; label: string };
   review: Review; identity: Identity; summary: string; no_evaluator: boolean; share_covered: number | null;
+  /** of the profile's value budget: what the curves price, partly price, judge not damaged, and leave unpriced; or why not */
+  value_split?: ValueSplit | null;
   n_curves: number; n_drawn: number; outside_checks: number; chain_core_as_files: number; generation: string;
   aria_label: string; href: string;
   /** G16: the one word a tile carries (the weaker half's), and both halves in words for its tooltip */
@@ -320,6 +322,7 @@ export interface AssetViewV2 extends Omit<AssetView, "rows"> {
   // real estate only: the subsystems per building, their counts, and the notes the building pages carry
   subsystem_groups?: Record<string, SubcomponentRollup>; building_notes?: Record<string, string | null>;
   anatomy_note?: { sentence: string; source: string | null } | null;
+  labour_note?: string | null;
 }
 export interface ReviewQueueItem { kind: string; entry_id: string; text: string; href: string; words: string }
 export type ManifestV2 = Manifest & {
@@ -380,3 +383,5 @@ export interface TwinViewerManifest { twin_repo: string; twin_commit: string; th
 
 export interface FaqQuestion { id: string; q: string; updated: string | null; owner: string | null; answer: string[]; example: string | null; read_more: { label: string; path: string | null; href: string | null } | null }
 export interface Faq { sections: { title: string; questions: FaqQuestion[] }[]; n_questions: number; source: string; errors: string[] }
+
+export type ValueSplit = { priced: number; partly: number; no_damage: number; not_priced: number; basis: string; reason?: undefined } | { reason: string };

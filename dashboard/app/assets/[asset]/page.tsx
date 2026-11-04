@@ -50,7 +50,7 @@ function Subcomponents({ v, m, defaultHazard, building, twinBelow = false, build
   const subs = building ? v.subcomponents.filter((s) => s.group?.key === building) : v.subcomponents;
   const rollup = (building ? v.subsystem_groups?.[building] : null) ?? v.subcomponent_rollup;
   // the note that the cells split the asset differently (once the part grid's own section) stays under the table
-  const notes = [v.anatomy_note?.sentence, building ? v.building_notes?.[building] : null, !building && v.split?.differs ? (v.split.note ?? v.split.sentence) : null].filter((n): n is string => !!n);
+  const notes = [v.anatomy_note?.sentence, building ? v.building_notes?.[building] : null, !building && v.split?.differs ? (v.split.note ?? v.split.sentence) : null, building ? null : v.labour_note].filter((n): n is string => !!n);
   // each hazard team's own names for each subsystem, shown when a row is opened
   const teamNames: Record<string, Record<string, string[]>> = {};
   if (!building) for (const col of v.split?.columns ?? []) teamNames[col.hazard.slug] = Object.fromEntries((v.split?.table ?? []).map((r) => [r.key, r.by_cell[col.entry_id] ?? []]));

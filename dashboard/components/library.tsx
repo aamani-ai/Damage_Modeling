@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import { fmtPct } from "@/lib/format";
 import { useUrlParam } from "@/lib/url-state";
-import type { LibraryTile, ManifestV3 } from "@/lib/types";
+import type { LibraryTile, ManifestV3, ValueSplit } from "@/lib/types";
 import { InfoHint } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
@@ -28,17 +28,26 @@ function dayMonth(iso: string): string {
   return d ? `${Number(d[3])} ${["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][Number(d[2]) - 1]}` : iso;
 }
 
+// the profile's value, in up to four parts that add up to all of it; a part under half a percent is left out
+export function valueWords(v: ValueSplit | null | undefined, long = false): string {
+  if (!v) return "no value budget";
+  if (v.reason !== undefined) return v.reason;
+  const parts: [number, string][] = [[v.priced, "priced"], [v.partly, "partly priced"], [v.no_damage, "no direct damage"], [v.not_priced, "not priced"]];
+  const shown = parts.filter(([n]) => n >= 0.005).map(([n, w]) => `${fmtPct(n)} ${w}`).join(" · ");
+  return long ? `${shown} (${v.basis})` : shown;
+}
+
 function second(t: LibraryTile, lens: string): string {
   if (t.status === "gap") return "see why";
   if (lens === "occurrence") return t.occurrence.label === "not searched" || t.occurrence.label === "no register" ? "field reports: not searched" : `field reports: ${t.occurrence.label}`;
-  if (lens === "value") return t.share_covered != null ? `${fmtPct(t.share_covered)} of value covered` : "no total stated";
+  if (lens === "value") return valueWords(t.value_split);
   if (lens === "review") return t.review.review ? `reviewed by ${t.review.review.by}` : t.review.entry_read_on ? `read by an agent on ${dayMonth(t.review.entry_read_on)}` : "read by an agent";
   return t.word ?? "no tier stated";
 }
 
 function TileBox({ t, lens, tabIndex, onKey, rc }: { t: LibraryTile; lens: string; tabIndex?: number; onKey?: (e: React.KeyboardEvent<HTMLAnchorElement>) => void; rc?: string }) {
   const gap = t.status === "gap";
-  const title = [t.summary, t.halves, t.building_parts?.length ? `${t.building} rows: ${t.building_parts.join(", ")}` : null].filter(Boolean).join("\n");
+  const title = [t.summary, t.halves, lens === "value" && t.value_split ? valueWords(t.value_split, true) : null, t.building_parts?.length ? `${t.building} rows: ${t.building_parts.join(", ")}` : null].filter(Boolean).join("\n");
   return (
     <Link
       href={t.href}

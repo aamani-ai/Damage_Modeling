@@ -21,7 +21,7 @@ from .common import (OUT, ROOT, SENTENCES, SHOW_FIELD_REPORTS, SOURCE, STATION_A
 from .faq import build_faq
 from .occurrence import (all_registers, asset_slug, bess_bucket_values, hazard_slug, register_for, resolve_state, slugs,
                          twin_crosswalk_pin)
-from .parts import asset_plain_sentence, asset_view, uncovered_sentence, shown_hazards, substation_budget, substation_crosswalk
+from .parts import value_split, asset_plain_sentence, asset_view, uncovered_sentence, shown_hazards, substation_budget, substation_crosswalk
 from .plain import (FOR_HAZARD, STATION_NAMES, STEPS, TIER_MEANING, TIER_PLAIN, TIER_SHORT, ShapeSource, capability_sentences, curve_caption, halves,
                     main_logic, one_word, parameters_plain, plain_rail, plain_text, resolve_key_sources, station_plain, steps4, tier_words)
 from .registers import load_registers
@@ -807,10 +807,30 @@ def build(write: bool = True) -> dict[str, Any]:
             cells[e.id]["subcomponent_rollup"] = view["subcomponent_rollup"]["by_hazard"].get(hazard_slug(e.data["hazard"], sl))
             cells[e.id].pop("_curves", None)
         status_by_hz = {hazard_slug(e.data["hazard"], sl): e.status for e in asset_entries}
+        # how much of the profile's value each hazard's curves price: priced · partly · no direct damage · not priced
+        budget_total = (view.get("budget") or {}).get("total_usd") or (fb_binding["reference_tiv_usd"] if aslug == "bess" else None)
+        basis_words = {"bess": "of the reference plant's value", "substation": "of the reference station's budget"}.get(aslug, "of the reference plant's physical value")
+        for e in asset_entries:
+            if e.kind == "gap":
+                continue
+            hs = hazard_slug(e.data["hazard"], sl)
+            v_ = cells[e.id]["answer"].get("value") or {}
+            stated = ({c_["bucket"]: c_["value_usd"] / budget_total for c_ in v_.get("covered") or [] if c_.get("bucket") and c_.get("value_usd") is not None}
+                      if budget_total and v_.get("total_usd") and abs(v_["total_usd"] - budget_total) < 1 else None)
+            split_ = None if aslug == "real_estate" else value_split([x for x in view["subcomponents"] if x["hazard"]["slug"] == hs and x["entry_id"] == e.id],
+                                 [g["rows"] for g in (view.get("budget") or {}).get("groups", [])], stated)
+            vs = ({**split_, "basis": basis_words} if split_ else
+                  {"reason": "no value split for this asset type yet" if aslug == "real_estate" else "no value shares for this asset"})
+            cells[e.id]["value_split"] = vs
+            for t_ in tiles:
+                if t_["entry_id"] == e.id:
+                    t_["value_split"] = vs
         reference = None
         if aslug == "bess":
             u = fb_binding["units"]
             reference = {"label": f"{u['battery_enclosures']['count']} enclosures · {u['pcs']['count']} PCS · {fmt_usd_compact(fb_binding['reference_tiv_usd'])} reference value ({humanise(fb_binding.get('currency_basis'))})", "source": fb.artifact["value_linkage"]["value_binding_path"], "total_usd": fb_binding["reference_tiv_usd"]}
+        elif view.get("budget"):
+            reference = {"label": view["budget"]["label"], "source": view["budget"]["path"], "total_usd": view["budget"]["total_usd"]}
         elif aslug == "substation" and sub_budget.get("available"):
             total = sum(float(r["amount_usd"]) for r in sub_budget["rows"] if r.get("amount_usd"))
             reference = {"label": f"one 345/138 kV station · {fmt_usd_compact(total)} reference budget (Hazard, MISO MTEP24 rates)", "source": SUBSTATION_BUDGET_SOURCE, "total_usd": total,
@@ -827,10 +847,17 @@ def build(write: bool = True) -> dict[str, Any]:
                              "uncovered": uncovered_sentence(a_def, view["rows"], sl["hazards"]),
                              "summary_v0": asset_sentence(a_def.get("noun", a_def["label"]), sorted([{"hazard": e.data["hazard"], "slug": hazard_slug(e.data["hazard"], sl), "status": e.status, "tiers": {"shape": cells[e.id]["rail"]["evidence"]["shape"], "cost": cells[e.id]["rail"]["evidence"]["cost"]}, "entry_id": e.id} for e in asset_entries], key=lambda c: hz_order.index(c["slug"])), searched_any),
                              "reference": reference, "hazards": hazards_cols, "rows": view["rows"], "parts_by_cell": view["parts_by_cell"],
-                             "subcomponents": view["subcomponents"], "subcomponent_rollup": view["subcomponent_rollup"],
+                             "subcomponents": view["subcomponents"], "subcomponent_rollup": view["subcomponent_rollup"], "labour_note": view.get("labour_note"),
                              **{k: view[k] for k in ("subsystem_rows", "subsystem_groups", "building_notes", "anatomy_note") if k in view}, "split": view["split"], "twin": view["twin"],
                              "value_source": view["value_source"], "entries": [t for t in tiles if t["asset"]["slug"] == aslug], "has_buckets": aslug in ("bess", "substation"),
                              "twin_crosswalk": {"sha256": twin.get("sha256"), "rows": twin.get("rows")} if aslug == "bess" else ({"sha256": sub_xwalk.get("sha256"), "rows": len(sub_xwalk.get("rows") or [])} if aslug == "substation" and sub_xwalk.get("available") else None)}
+    # the library was drawn before the asset views: its tiles take each cell's value split now
+    split_by_id = {t_["entry_id"]: t_.get("value_split") for t_ in tiles}
+    for c_ in manifest["library"]:
+        for t_row in c_["types"]:
+            for t_ in t_row["tiles"].values():
+                if t_.get("entry_id") in split_by_id:
+                    t_["value_split"] = split_by_id[t_["entry_id"]]
     # ─── occurrence pages ───
     occurrence_out: dict[tuple[str, str], dict[str, Any]] = {}
     for (aslug, hslug), r in registers.items():
