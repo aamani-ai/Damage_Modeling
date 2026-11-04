@@ -86,7 +86,7 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
           </div>
           {v ? <p className="mt-1 max-w-[1100px] text-[13.5px] leading-snug">{v.summary}</p> : null}
         </div>
-        <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} groups={["status", "evidence", "lenses", "subsystem", "production", "hazard_use", "units"]} /></div>
+        <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} groups={["status", "evidence", "lenses", "subsystem", "hazard_use", "units"]} /></div>
         <div className="mt-3 grid gap-3 md:grid-cols-3">
           {lc.types.map((t) => (
             <Link key={t.slug} href={t.href} className="rounded-lg border border-border bg-card px-3 py-2.5 hover:border-accent/60">
@@ -136,7 +136,7 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
         </p>
       </div>
       <div className="mt-3 space-y-3">
-        <ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} groups={["status", "evidence", "lenses", "subsystem", "production", "hazard_use", "units"]} />
+        <ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} groups={["status", "evidence", "lenses", "subsystem", "hazard_use", "units"]} />
         <CurveList row={row} m={m} />
         {v ? <Subcomponents v={v} m={m} building={sharedCell ? type.building!.toLowerCase() : undefined} buildingSlug={sharedCell ? type.slug : null} twinBelow={!!cov} /> : null}
         {/* the second way in: the Digital Twin's own parts, as the 3D model and as a table, both folded until asked for */}

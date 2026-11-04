@@ -8,7 +8,7 @@
 import Link from "next/link";
 import { useUrlParam } from "@/lib/url-state";
 import type { CurveConstruction, Legend, Subcomponent, SubcomponentRollup } from "@/lib/types";
-import { HazardUseTag, ProductionTag } from "./construction-view";
+import { HazardUseTag } from "./construction-view";
 import { fmtPct, unitTells } from "@/lib/format";
 import { FileLink, ToggleArrow, TOGGLE_CLASS } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
@@ -310,7 +310,7 @@ export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, d
                   <th scope="col" className="px-2 py-1 text-right font-medium">Value share</th>
                   <th scope="col" className="px-2 py-1 font-medium">Curve or gap</th>
                   <th scope="col" className="px-2 py-1 font-medium">Evidence</th>
-                  <th scope="col" className="px-2 py-1 font-medium">Released</th>
+                  <th scope="col" className="px-2 py-1 font-medium">Used by Hazard</th>
                 </tr>
               </thead>
               <tbody>
@@ -338,7 +338,6 @@ export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, d
                       <td className="px-2 py-1">{s.borrowed_from && !s.evidence_labels.includes("borrowed") ? "borrowed · " : ""}{evidence(s)}</td>
                       <td className="px-2 py-1">{s.coverage === "gap" || !s.curve_ids.length ? "—" : (
                         <span className="inline-flex flex-wrap gap-1">
-                          <ProductionTag state={s.production_use.state} legend={legend} />
                           {s.production_use.hazard ? <HazardUseTag state={s.production_use.hazard} legend={legend} /> : null}
                         </span>
                       )}</td>

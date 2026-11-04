@@ -4,17 +4,12 @@
 // the curve page and the subcomponent panel share it. Every sentence is the build's.
 import Link from "next/link";
 import type { ReactNode } from "react";
-import type { ConstructionFile, ConstructionParameter, CurveConstruction, HazardUseState, Legend, ProductionState } from "@/lib/types";
+import type { ConstructionFile, ConstructionParameter, CurveConstruction, HazardUseState, Legend } from "@/lib/types";
 import { fmtNum } from "@/lib/format";
 import { SourceRef } from "./source-link";
 import { FileLink, Tag } from "./ui";
 
 const fileName = (p: string) => p.split("/").slice(-1)[0];
-
-export function ProductionTag({ state, legend }: { state: ProductionState; legend: Legend }) {
-  const item = legend.production.find((p) => p.key === state);
-  return <Tag tone={state === "not_runtime_indexed" ? "neutral" : "accent"} title={item?.meaning}>{item?.word ?? state}</Tag>;
-}
 
 export function HazardUseTag({ state, legend }: { state: HazardUseState; legend: Legend }) {
   const item = legend.hazard_use.find((p) => p.key === state);
@@ -90,11 +85,9 @@ export function ConstructionView({ k, legend, blobBase, curveHref, title, hazard
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
         {title ? <span className="font-medium">{title}</span> : null}
         <Tag>{k.curve_type}</Tag>
-        <ProductionTag state={k.production_use.state} legend={legend} />
         {k.production_use.hazard ? <HazardUseTag state={k.production_use.hazard.state} legend={legend} /> : null}
         {curveHref ? <Link href={curveHref} className="ml-auto text-accent hover:underline">open the curve ▸</Link> : null}
       </div>
-      <p className="text-[11.5px] text-muted-foreground">{k.production_use.sentence}</p>
       {hazardDetail && k.production_use.hazard?.sentences.length ? (
         <ul className="text-[11.5px] text-muted-foreground">{k.production_use.hazard.sentences.map((s) => <li key={s}>{s}</li>)}</ul>
       ) : null}

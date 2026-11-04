@@ -71,7 +71,7 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
     <div>
       <PlainRail title={<CellTitle title={c.title} hazard={c.hazard.label} types={types.map((t) => ({ slug: t.slug, label: t.label, href: t.href!, building: t.building ?? null }))} />} rail={c.plain.rail} summary={c.summary} crumbs={crumbs} tierMeaning={m.tier_meaning} tone={c.rail.review.tone} />
       {/* the Hazard comparison is said in each opened subsystem row's curve, not as a banner */}
-      <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blob(m.legend.source)} groups={["status", "evidence", "lenses", "subsystem", "production", "hazard_use", "units"]} /></div>
+      <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blob(m.legend.source)} groups={["status", "evidence", "lenses", "subsystem", "hazard_use", "units"]} /></div>
       <>
           {c.subcomponents.length && c.subcomponent_rollup ? (
             <div className="mt-3"><SubcomponentPanel subs={c.subcomponents} rollup={c.subcomponent_rollup} hazards={[{ slug: c.hazard.slug, label: c.hazard.label }]} defaultHazard={c.hazard.slug} cards={constructionCards(c.subcomponents)} legend={m.legend} blobBase={blobBase(m)} picker={false} buildings={buildings} /></div>

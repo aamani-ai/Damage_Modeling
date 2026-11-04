@@ -137,8 +137,8 @@ export function CurveHero({ cell, curves: allCurves, buildings, order }: { cell:
         ) : <span className="rounded bg-muted px-2 py-0.5 text-[12px]">{part}</span>}
         {options.length > 1 ? (
           <div className="flex flex-wrap items-center gap-1.5 text-[12px]">
-            {/* "curve" when the part has several curves; "variant" when one curve carries several versions (resistance bands) */}
-            <span className="text-muted-foreground">{partCurves.length > 1 ? "curve" : "variant"}</span>
+            {/* always "curve": whether these are separate curves or versions of one, each is a curve the reader can pick */}
+            <span className="text-muted-foreground">curve</span>
             <div role="radiogroup" aria-label="Variant" className="inline-flex flex-wrap rounded-md border border-border bg-card p-0.5">
               {options.map((o) => <button key={o.id} type="button" role="radio" aria-checked={o.id === selected.id} onClick={() => setV(o.id === options[0].id ? null : o.id)} className={chip(o.id === selected.id)}>{o.label}</button>)}
             </div>
