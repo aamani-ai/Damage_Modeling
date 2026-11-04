@@ -62,8 +62,8 @@ export function PlainBlocks({ cell }: { cell: CellV2 }) {
           {pl.blocks.missing.mechanisms.length || pl.blocks.missing.out_of_scope.length ? <p className="mt-1.5 text-[12px]"><OpenStep step="covers">See them in “What it covers” ▸</OpenStep></p> : null}
         </Block>
         <Block title="Open questions" count={pl.blocks.open_questions.length}>
-          {pl.blocks.open_questions.length ? <ul className="list-disc space-y-0.5 pl-4">{pl.blocks.open_questions.map((s) => <li key={s}>{s}</li>)}</ul> : <p className="text-muted-foreground">none listed</p>}
-          {pl.blocks.next_version ? <p className="mt-1.5"><span className="text-muted-foreground">next version · </span>{pl.blocks.next_version}</p> : null}
+          {pl.blocks.open_questions.length ? <p>{pl.blocks.open_questions.length} question{pl.blocks.open_questions.length === 1 ? " is" : "s are"} still open{pl.blocks.next_version ? ", and the next version is named" : ""}.</p> : <p className="text-muted-foreground">none listed</p>}
+          {pl.blocks.open_questions.length ? <p className="mt-1.5 text-[12px]"><OpenStep step="covers">See them in “What it covers” ▸</OpenStep></p> : null}
         </Block>
       </div>
     </div>

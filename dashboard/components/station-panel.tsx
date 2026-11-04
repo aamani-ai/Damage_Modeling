@@ -80,6 +80,7 @@ export function StationPanel({ station, cell: fullCell, cites, curves: allCurves
           {cell.parts.length ? <Line label="Parts">{cell.parts.map((p) => p.part).join(" · ")}</Line> : null}
           {pl.blocks.missing.out_of_scope.length ? <Line label="Outside its scope">{pl.blocks.missing.out_of_scope.join(" · ")}</Line> : null}
           {pl.blocks.missing.mechanisms.length ? <Line label="Not included">{pl.blocks.missing.mechanisms.join(" · ")}</Line> : null}
+          {pl.blocks.open_questions.length ? <Line label="Open questions"><ul className="list-disc pl-4">{pl.blocks.open_questions.map((o) => <li key={o}>{o}</li>)}</ul>{pl.blocks.next_version ? <span className="block text-muted-foreground">next version · {pl.blocks.next_version}</span> : null}</Line> : null}
         </Words>
       );
       details = <SeamsLedger cell={cell} />;
