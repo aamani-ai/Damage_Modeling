@@ -103,8 +103,9 @@ export function CurveHero({ cell, curves: allCurves, buildings, order }: { cell:
   const axisGroupsOther = cell.answer.axis_groups.filter((g) => g.axis.id !== axis.id);
   return (
     <Card id="card-curve" className="mt-3 scroll-mt-28">
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 px-3 pb-1 pt-2.5">
-        <span className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">The curve</span>
+      {/* top-aligned, so "The curve" stays put when a part row opens below the subsystem row */}
+      <div className="flex flex-wrap items-start gap-x-4 gap-y-1.5 px-3 pb-1 pt-2.5">
+        <span className="pt-1 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">The curve</span>
         {parts.length > 1 ? (
           <div className="flex flex-wrap items-center gap-1.5 text-[12px]">
             {/* subsystem (the cost bucket) → part (the cell's catalogue label) → curve (below: the individual curves, when a

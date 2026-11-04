@@ -89,8 +89,8 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 - **Every subsystem, curve or gap**: an opened row gives the curve's name, form, axis and evidence, and jumps to The
   curve.
 - **How the names connect** (folded): subsystem → the cell's part → failure unit and curves → Digital Twin parts.
-- **What is covered** and **What is missing** at the bottom are one-line summaries that open What it covers; open
-  questions are listed in What it covers only.
+- What is covered, What is missing and Open questions are listed once, in the What it covers step; the page keeps
+  only **What it can be used for** and **What we assumed** at the bottom.
 - **For Hazard** (footer) says once whether Hazard's dashboard uses this exact file.
 - A real-estate curve page opened for one building (`?building=residential`) is titled for it and shows only its
   parts, curves and 3D model.

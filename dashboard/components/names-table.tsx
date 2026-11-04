@@ -63,8 +63,8 @@ export function NamesTable({ cell, curves, covs, hazardSlug, buildings, words }:
               <p className="text-muted-foreground">Three ways of counting appear on this page, and they are not meant to match:</p>
               <ul className="list-disc pl-5 text-muted-foreground">
                 <li><span className="text-foreground">{subs.length} subsystems</span>: the cost buckets the asset&apos;s value is split into. This is the list a curve should cover; the counts in &ldquo;Every subsystem, curve or gap&rdquo; use it.</li>
-                <li><span className="text-foreground">{nParts} part{nParts === 1 ? "" : "s"}</span>: how this hazard&apos;s research team split what it prices, in its own words. One subsystem can hold several parts, so this is not a target to reach.</li>
-                {nTwin ? <li><span className="text-foreground">{nTwin} Digital Twin systems</span>: how the 3D model breaks the asset down, used for the picture above. Also not a target.</li> : null}
+                <li><span className="text-foreground">{nParts} part{nParts === 1 ? "" : "s"}</span>: the names this curve&apos;s catalogue entry (in this Damage repository) gives to what it prices. One subsystem can hold several parts, so there is no right number of parts: completeness is judged on subsystems, not on this count.</li>
+                {nTwin ? <li><span className="text-foreground">{nTwin} Digital Twin systems</span>: how the Digital Twin&apos;s 3D model breaks the asset down, used for the picture above. Completeness is not judged on this count either.</li> : null}
               </ul>
             </div>
           );
