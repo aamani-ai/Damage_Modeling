@@ -26,6 +26,22 @@ function Line({ label, children }: { label: string; children: React.ReactNode })
   );
 }
 
+type ParamPlain = CellV2["plain"]["parameters_plain"][number];
+
+// parameter rows that differ only in the curve they belong to (flood × solar's nine-point depth tables, one per part)
+// are one entry listing the parts
+function groupParams(rows: ParamPlain[]): { p: ParamPlain; curveIds: string[] }[] {
+  const out: { key: string; p: ParamPlain; curveIds: string[] }[] = [];
+  for (const p of rows) {
+    const key = [p.name, p.value_text, p.tier_word, p.reasoning, p.sources.map((s) => s.id).join("|")].join("¦");
+    const g = out.find((x) => x.key === key);
+    const id = p.curve_id && p.curve_id !== "all" ? p.curve_id : null;
+    if (g) { if (id) g.curveIds.push(id); }
+    else out.push({ key, p, curveIds: id ? [id] : [] });
+  }
+  return out;
+}
+
 export function StationPanel({ station, cell, cites, curves, m }: { station: PlainStation; cell: CellV2; cites: Citations["cells"][string] | null; curves: CurveV2[]; m: ManifestV3 }) {
   const blob = (p: string) => `${BLOB}/${m.link_commit}/${p.replace(/^\/+/, "")}`;
   const ch = cell.chain.stations.find((s) => s.id === station.id)!;
@@ -100,11 +116,11 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
           <Line label="Parameters">
             {pl.parameters_plain.length ? (
               <ul className="space-y-1">
-                {pl.parameters_plain.map((p, i) => (
+                {groupParams(pl.parameters_plain).map(({ p, curveIds }, i) => (
                   <li key={p.id + i}>
-                    <span className="font-medium">{p.name}</span>{p.value_text ? <span className="tabular"> {p.value_text}</span> : null} · {p.tier_word}
+                    <span className="font-medium">{p.name}</span>{p.value_text ? <span className="tabular"> {p.value_text}{curveIds.length > 1 ? " each" : ""}</span> : null} · {p.tier_word}
                     {p.sources.length ? <span className="text-muted-foreground"> · from {p.sources.map((s, j) => <span key={s.id}>{j ? ", " : ""}{s.link ? <a href={s.link} target="_blank" rel="noreferrer" className="text-accent hover:underline">{s.title}</a> : <span title={s.resolved ? undefined : "no document matched this source ID"}>{s.title}</span>}</span>)}</span> : <span className="text-muted-foreground"> · our judgment, no source cited</span>}
-                    {p.curve_id && p.curve_id !== "all" ? <span className="block text-[11px] text-muted-foreground">for {curves.find((c) => c.curve_id === p.curve_id)?.part ?? p.curve_id}{p.reasoning ? ` — ${p.reasoning}` : ""}</span> : p.reasoning ? <span className="block text-[11px] text-muted-foreground">{p.reasoning}</span> : null}
+                    {curveIds.length ? <span className="block text-[11px] text-muted-foreground">for {curveIds.map((id) => curves.find((c) => c.curve_id === id)?.part ?? id.replace(/_/g, " ")).join(", ")}{p.reasoning ? ` — ${p.reasoning}` : ""}</span> : p.reasoning ? <span className="block text-[11px] text-muted-foreground">{p.reasoning}</span> : null}
                   </li>
                 ))}
               </ul>
@@ -126,7 +142,7 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
               <Line label="Covered">{cell.answer.value.covered_label}{cell.answer.value.share_covered != null ? ` (${fmtPct(cell.answer.value.share_covered)})` : ""}: {cell.answer.value.covered.map((c) => `${c.label}${c.value_usd != null ? ` ${fmtUsdCompact(c.value_usd)}` : c.share != null ? ` ${fmtPct(c.share)}` : ""}`).join(" · ")}</Line>
               <Line label="No curve yet">{cell.answer.value.no_curve.map((n) => `${n.label}${n.value_usd != null ? ` ${fmtUsdCompact(n.value_usd)}` : ""}`).join(" · ") || "nothing left out"}</Line>
             </>
-          ) : <Line label="Basis">{cell.answer.how_to_use?.share_of ?? "see the write-up"}</Line>}
+          ) : null}
         </Words>
       );
       details = <ValueLedger cell={cell} blob={blob} />;

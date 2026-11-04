@@ -183,7 +183,7 @@ function RowDetail({ s, cards, blobBase, names, curveHere = false, buildingSlug 
         </p>
       ) : null}
       {/* a part name in the cell's files that reads wider than what the curve covers, and what it really covers */}
-      {s.scope_notes.map((n) => <p key={n.note} className="rounded-md border border-warn/40 bg-warn-bg px-2 py-1 text-[12px] leading-snug"><span className="font-medium">About the name:</span> {n.note}</p>)}
+      {s.scope_notes.map((n) => <p key={n.note} className="text-[12.5px] leading-snug"><span className="text-muted-foreground">About the name:</span> {n.note}</p>)}
       {s.note || s.share != null ? (
         <p className="text-[12.5px]">
           {s.note}{s.note && s.share != null ? " " : ""}
