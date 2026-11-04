@@ -1,5 +1,5 @@
-// The cell page's two plain blocks: what it can be used for · what we assumed. What it covers, what is missing and
-// the open questions are in the What it covers step, once. Every sentence is the build's or the catalogue's.
+// The cell page's plain block: what it can be used for. What it covers, what is missing and the open questions are in
+// the What it covers step; what we assumed is in Where the numbers come from. Every sentence is the build's or the catalogue's.
 import type { CellV2 } from "@/lib/types";
 import { Card, SectionSummary } from "./ui";
 
@@ -29,10 +29,6 @@ export function PlainBlocks({ cell }: { cell: CellV2 }) {
           ))}
         </ul>
         <p className="mt-1.5 text-[11.5px] text-muted-foreground">&quot;With conditions&quot; means only when the consumer checks them. Yearly loss and tail metrics are always Hazard&apos;s to compute.</p>
-      </Block>
-      <Block title="What we assumed" count={pl.blocks.assumed.length}>
-        {pl.blocks.assumed.length ? <ul className="list-disc space-y-0.5 pl-4">{pl.blocks.assumed.map((s) => <li key={s}>{s}</li>)}</ul> : <p className="text-muted-foreground">no judgment items listed in the catalogue entry</p>}
-        <p className="mt-1.5 text-[11.5px] text-muted-foreground">These are the items the cell rates as our judgment: placeholders until evidence replaces them.</p>
       </Block>
     </div>
   );

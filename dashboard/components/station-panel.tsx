@@ -141,6 +141,10 @@ export function StationPanel({ station, cell: fullCell, cites, curves: allCurves
     case "evidence":
       words = (
         <Words>
+          {/* the cell's own short list of judgment calls (its catalogue entry); the workbook's full register is under Assumptions */}
+          <Line label="What we assumed">
+            {pl.blocks.assumed.length ? <><Count n={pl.blocks.assumed.length} one="judgment call" note="set by engineering judgment, not taken from a source; placeholders until evidence replaces them" /><ul className="list-disc pl-4">{pl.blocks.assumed.map((x) => <li key={x}>{x}</li>)}</ul></> : <span className="text-muted-foreground">no judgment items listed in the catalogue entry</span>}
+          </Line>
           <Line label="Sources">
             {docs.length ? (
               <ul className="space-y-0.5">{docs.map((s) => <li key={s.id}><SourceRef s={s} id={s.id} />{s.provenance && s.provenance !== "register" ? <span className="text-[11px] text-muted-foreground"> · {s.provenance.replace(/-/g, " ")}{s.from?.sheet ? ` (${s.from.sheet})` : s.from?.section ? ` (${s.from.section})` : ""}</span> : null}</li>)}</ul>

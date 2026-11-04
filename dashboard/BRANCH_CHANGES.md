@@ -90,7 +90,7 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
   curve.
 - **How the names connect** (folded): subsystem → the cell's part → failure unit and curves → Digital Twin parts.
 - What is covered, What is missing and Open questions are listed once, in the What it covers step; the page keeps
-  only **What it can be used for** and **What we assumed** at the bottom.
+  only **What it can be used for** at the bottom. What we assumed is in Where the numbers come from.
 - **For Hazard** (footer) says once whether Hazard's dashboard uses this exact file.
 - A real-estate curve page opened for one building (`?building=residential`) is titled for it and shows only its
   parts, curves and 3D model.
