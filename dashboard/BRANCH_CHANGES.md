@@ -71,6 +71,9 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
   table lists the parts each system contains and counts mixed systems ("has a curve for 1 of 2 parts"). Links say
   where the Digital Twin repository defines each asset's breakdown.
 - Parts a hazard does not damage by the cell's decision read **no direct damage**, not "no curve yet".
+- The 3D model's colour key defines each word with an (i), for example **changes another curve**: no curve of its
+  own, but its condition (such as whether a protection is in place) changes another part's curve.
+- In View by subsystem, a curve's **Used by Hazard** tag opens the curve page at its For Hazard footer.
 
 ### Curve pages (each hazard × asset, for example Hail × Solar farm)
 
@@ -83,17 +86,20 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
     in words with their reasons.
   - *How it was derived*: each hazard measure with the parts read against it, the curve shapes, what Hazard has to
     supply; seven-step audits are found wherever the cell keeps them, or an earlier version's is named.
-  - *Where the numbers come from*: each parameter once, with the parts it applies to; a number with no source says
-    "set by the team; no source cited".
+  - *Where the numbers come from*: what we assumed (the cell's judgment calls), then the sources and the parameters,
+    each list starting with its count ("21 sources (1 with no link…)", "8 parameters (4 published, 2 borrowed, 2 our
+    judgment)"). Each parameter appears once with the parts it applies to; a number with no source says "our judgment,
+    no source cited". The paragraph above only says where the sources are kept, so nothing is said twice.
   - *Has it been checked*: outside checks and who has read the entry.
 - **Every subsystem, curve or gap**: an opened row gives the curve's name, form, axis and evidence, and jumps to The
-  curve.
+  curve. Its **Used by Hazard** tag jumps to the For Hazard footer.
 - **How the names connect** (folded): subsystem → the cell's part → failure unit and curves → Digital Twin system ›
   part, grouped by the twin's view (for solar: tracker block and solar plant), as the 3D model's side panel names them.
 - What is covered, What is missing and Open questions are listed once, in the What it covers step. What we assumed is
   in Where the numbers come from.
 - **For Hazard** (footer) says once whether Hazard's dashboard uses this exact file. Its **What it outputs** gives
-  what the curve may be used for in plain words (once on the page), then the emit modes and limitation flags.
+  what the curve may be used for in plain words (once on the page), then the emit modes and limitation flags. Long
+  file names wrap inside their column.
 - A real-estate curve page opened for one building (`?building=residential`) is titled for it and shows only its
   parts, curves and 3D model.
 
