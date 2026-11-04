@@ -106,7 +106,7 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
           </tbody>
         </table>
         <p className="mt-1.5 text-[11.5px] text-muted-foreground">
-          When a system&apos;s parts differ, the cell gives the best state first and &quot;also …&quot; for the rest. Click a cell to see that system on the picture above; a curve&apos;s name opens it. Mapped from{" "}
+          When a system&apos;s parts differ, the cell counts them: &quot;has a curve for 1 of 2 parts&quot;, with the other parts underneath. Click a cell to see that system on the picture above; a curve&apos;s name opens it. Mapped from{" "}
           <span className="font-mono">{cov.twin.crosswalk.split("/").slice(-1)[0]}</span>, a draft co-owned with Hazard.
         </p>
       </div>
@@ -140,13 +140,19 @@ function MatrixGroup({ label, rows, cov, show }: { label: string | null; rows: C
           {cov.hazards.map((h) => {
             const c = r.cells[h.hazard.slug];
             if (!c) return <td key={h.hazard.slug} className="py-1 pr-2 text-muted-foreground">—</td>;
+            // a system whose parts differ: how many of its parts are in each state, best first
+            const split = (h.systems[r.tree]?.find((x) => x.node === r.node)?.by_state ?? []).map((b) => ({ state: b.state, n: b.parts.length }));
+            const total = split.reduce((t, b) => t + b.n, 0);
+            const first = split.find((b) => b.state === c.state);
+            const rest = split.filter((b) => b.state !== c.state);
+            const words = c.mixed && first ? `${c.words} for ${first.n} of ${total} parts` : c.words;
             return (
               <td key={h.hazard.slug} className="py-0.5 pr-1.5" title={c.states.map((s) => cov.state_meaning?.[s as CoverageState] ?? cov.state_words[s as CoverageState]).join("\n")}>
-                <button type="button" onClick={() => show(h.hazard.slug, r.tree, r.node)} className="flex w-full items-start gap-1.5 rounded px-1 py-0.5 text-left hover:bg-muted" aria-label={`${r.name} × ${h.hazard.label}: ${c.words}${c.mixed ? ", and other parts in other states" : ""} — show it on the picture`}>
+                <button type="button" onClick={() => show(h.hazard.slug, r.tree, r.node)} className="flex w-full items-start gap-1.5 rounded px-1 py-0.5 text-left hover:bg-muted" aria-label={`${r.name} × ${h.hazard.label}: ${words}${rest.length ? `; ${rest.map((b) => `${b.n} ${cov.state_short[b.state]}`).join(", ")}` : ""} — show it on the picture`}>
                   <Swatch state={c.state} className="mt-[3px]" />
                   <span className="leading-snug">
-                    <span>{c.words}</span>
-                    {c.mixed ? <span className="text-muted-foreground"> · also {c.states.filter((s) => s !== c.state).map((s) => cov.state_short[s as CoverageState]).join(", ")}</span> : null}
+                    <span>{words}</span>
+                    {c.mixed && rest.length ? <span className="block text-[11px] text-muted-foreground">{rest.map((b) => `${b.n} ${cov.state_short[b.state]}`).join(" · ")}</span> : null}
                   </span>
                 </button>
                 {c.curve_parts.length ? (
