@@ -125,7 +125,7 @@ export interface LegendItem { key: string; word: string; meaning: string }
 export type HazardUseState = "used" | "differs" | "not_on" | "unchecked";
 export interface HazardUse { state: HazardUseState; sentences: string[]; newer: { model: string; docs: string; shown: string | null; words: string } | null }
 export interface Legend {
-  source: string; status: LegendItem[]; coverage: LegendItem[]; completeness: LegendItem[]; evidence: LegendItem[]; production: LegendItem[]; hazard_use: LegendItem[]; units: LegendItem[]; units_source: string; lenses: LegendItem[]; marks: LegendItem[];
+  source: string; status: LegendItem[]; coverage: LegendItem[]; completeness: LegendItem[]; evidence: LegendItem[]; production: LegendItem[]; hazard_use: LegendItem[]; units: LegendItem[]; units_source: string; lenses: LegendItem[]; marks: LegendItem[]; value?: LegendItem[];
   where_from: Record<WhereFrom, string>;
 }
 

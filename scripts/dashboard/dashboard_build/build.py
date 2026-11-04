@@ -820,7 +820,7 @@ def build(write: bool = True) -> dict[str, Any]:
             split_ = None if aslug == "real_estate" else value_split([x for x in view["subcomponents"] if x["hazard"]["slug"] == hs and x["entry_id"] == e.id],
                                  [g["rows"] for g in (view.get("budget") or {}).get("groups", [])], stated)
             vs = ({**split_, "basis": basis_words} if split_ else
-                  {"reason": "no value split for this asset type yet" if aslug == "real_estate" else "no value shares for this asset"})
+                  {"reason": "no value budget for buildings yet" if aslug == "real_estate" else "no value budget for this asset"})
             cells[e.id]["value_split"] = vs
             for t_ in tiles:
                 if t_["entry_id"] == e.id:

@@ -30,7 +30,7 @@ function dayMonth(iso: string): string {
 
 // the profile's value, in up to four parts that add up to all of it; a part under half a percent is left out
 export function valueWords(v: ValueSplit | null | undefined, long = false): string {
-  if (!v) return "no value budget";
+  if (!v) return "no value budget for this asset";
   if (v.reason !== undefined) return v.reason;
   const parts: [number, string][] = [[v.priced, "priced"], [v.partly, "partly priced"], [v.no_damage, "no direct damage"], [v.not_priced, "not priced"]];
   const shown = parts.filter(([n]) => n >= 0.005).map(([n, w]) => `${fmtPct(n)} ${w}`).join(" · ");

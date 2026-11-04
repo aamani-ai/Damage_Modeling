@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Legend, LegendItem } from "@/lib/types";
 import { FileLink, ToggleArrow, TOGGLE_CLASS } from "./ui";
 
-export type LegendGroup = "status" | "evidence" | "lenses" | "marks" | "subsystem" | "production" | "hazard_use" | "units";
+export type LegendGroup = "status" | "evidence" | "lenses" | "marks" | "value" | "subsystem" | "production" | "hazard_use" | "units";
 
 const SWATCH: Record<string, string> = {
   live: "border-border bg-[var(--tile-live)]",
@@ -64,8 +64,9 @@ export function ReviewLegend({ legend, sourceHref, open = false, groups }: { leg
     production: { title: "Released for Hazard", items: legend.production },
     hazard_use: { title: "Used by Hazard", items: legend.hazard_use },
     units: { title: "The units", items: legend.units },
+    value: { title: "Value covered", items: legend.value ?? [] },
   };
-  const shown = groups.map((g) => (g === "marks" ? all[g] : { ...all[g], items: keep(all[g].items) })).filter((g) => g.items.length);
+  const shown = groups.map((g) => (g === "marks" || g === "value" ? all[g] : { ...all[g], items: keep(all[g].items) })).filter((g) => g.items.length);
   return (
     <details ref={ref} data-legend open={open} onToggle={(e) => setIsOpen(e.currentTarget.open)} className="rounded-lg border border-border bg-card">
       <summary className={`${TOGGLE_CLASS} flex list-none px-3 py-2 [&::-webkit-details-marker]:hidden`}>

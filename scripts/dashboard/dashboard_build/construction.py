@@ -294,7 +294,15 @@ def legend(cat_text: str) -> dict[str, Any]:
             *({"key": k, "word": twin_words[k], "meaning": twin_meaning[k]} for k in ("conditioner", "no_direct_damage", "outside")),
         ],
         "completeness": [
-            {"key": "value_share", "word": "Value share", "meaning": "This part's share of the asset's value: of its reference value where the asset has one, else the share the cell's own units declare (hover for the basis)."},
+            {"key": "value_share", "word": "Value share", "meaning": "This part's share of the asset's value: of its reference plant's value budget where the asset has one, else the share the cell's own units declare (hover for the basis)."},
+        ],
+        # the Value covered view's parts, which add up to all of the asset's value for one hazard
+        "value": [
+            {"key": "priced", "word": "priced", "meaning": "A curve prices this hazard's damage to these parts, or the cell adds their cost in step with the other parts' damage (replacement labour)."},
+            {"key": "partly", "word": "partly priced", "meaning": "A curve covers only some of these parts (for example the active hardware of a battery enclosure, not its shell)."},
+            {"key": "no_damage", "word": "no direct damage", "meaning": "The cell judged this hazard does not damage these parts directly, so a loss of $0 there is right, not missing."},
+            {"key": "not_priced", "word": "not priced", "meaning": "No curve, so any damage to these parts is not counted in the loss."},
+            {"key": "no_budget", "word": "no value budget for buildings yet", "meaning": "Real estate has no budget splitting a building's value into its parts, so the split cannot be worked out; each curve is a share of the building's replacement cost, which the consumer supplies."},
         ],
         "evidence": [{"key": k, "word": TIER_SHORT[k], "meaning": TIER_MEANING[k].removeprefix(f"{TIER_SHORT[k]}: ")} for k in ("T1", "T2", "T3", "T4")],
         "production": [
@@ -316,7 +324,7 @@ def legend(cat_text: str) -> dict[str, Any]:
             # field reports are hidden for now (SHOW_FIELD_REPORTS); the entry returns with them
             *([{"key": "occurrence", "word": "Field reports", "meaning": "Whether anyone has searched for real-world reports of this hazard damaging this asset, and what was found."}]
               if SHOW_FIELD_REPORTS else []),
-            {"key": "value", "word": "Value covered", "meaning": "Of everything the asset is worth (its reference plant's value budget), how much this hazard's curves price, in parts that add up to all of it: priced (a curve, or a cost the cell adds in step with the other parts' damage); partly priced; no direct damage (the cell judged the hazard does not damage it, so $0 is right); not priced (no curve, so any damage there is not counted). Real estate has no value budget yet."},
+            {"key": "value", "word": "Value covered", "meaning": "Of everything the asset is worth (its reference plant's value budget), how much this hazard's curves price; the parts it is split into are under Value covered below."},
             {"key": "review", "word": "Read by", "meaning": "Whether a person has reviewed this entry, or only an agent has read it."},
         ],
         "marks": [
