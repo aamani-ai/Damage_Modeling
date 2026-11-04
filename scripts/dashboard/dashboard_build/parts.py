@@ -156,6 +156,8 @@ def labour_note(aslug: str, subs: list[dict[str, Any]], hz: list[dict[str, Any]]
         assumed = [a for a in cells[s["entry_id"]]["plain"]["blocks"]["assumed"] if "fieldwork" in a.lower() or "labour" in a.lower() or "labor" in a.lower()]
         if assumed:
             parts_.append(f"{h['label']}: no separate item; the cell's assumption: “{assumed[0]}”.")
+        elif s.get("cost_follows"):
+            parts_.append(f"{h['label']}: a separate item with no curve of its own; its cost follows the other parts' damage and is added once.")
         elif s["cell_state"] == "not_named":
             parts_.append(f"{h['label']}: not mentioned by the cell, so replacement labour is not priced.")
         elif (s.get("gap") or {}).get("reason"):
@@ -930,8 +932,8 @@ def split_finding(aslug: str, a_def: dict[str, Any], rows: list[dict[str, Any]],
                 bound = sum(amount.get(i_, 0.0) for i_ in ids)
                 fenced = sum(v for k_, v in amount.items() if sys_of.get(k_) and k_ != "road")
                 details.append(f"{pc['hazard']['label'].lower()} binds {len(ids)} equipment rows ({fmt_usd_compact(bound)}, {fmt_pct(bound / fenced) if fenced else '—'} of the fenced station) and withholds the rest; the other hazards use one curve for the whole station")
-    no_budget = {"solar": "No reference plant budget exists for solar farms in this repository (Hazard has one for batteries and substations); each cell states its own shares, on its own basis.",
-                 "wind": "No reference plant budget exists for wind farms in this repository; the hurricane cell carries the only plant value (the canonical 100 MW farm, $140M, of which the tower share is 0.16).",
+    no_budget = {"solar": "The value shares are the repository's value ledger for a 100 MWdc plant (NREL benchmarks), grouped by subsystem with installation labour beside its hardware; a cell's own value lines, on its own basis, are in each row's hover.",
+                 "wind": "The value shares are the repository's value ledger for a 200 MW plant (NREL benchmarks), grouped by subsystem; the ledger prices collection and the GSU substation as one line, counted once under Collection network, and has no line of its own for the control building.",
                  "real_estate": "Buildings carry no dollar value here: every curve is a share of the building's structure replacement cost, which the consumer supplies.",
                  "substation": "Hazard's substation reference budget ($27.35M fenced station) sets the rows; three hazards use one curve for the whole station, wildfire binds the equipment rows only.",
                  "bess": "Hazard's battery reference budget ($109.8M) sets the rows."}
