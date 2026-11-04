@@ -9,7 +9,11 @@
  "summary": "Wildfire has curves that are our judgment (2 parts); flood has curves built from borrowed evidence (GSU substation only); hurricane wind and convective wind have curves built from borrowed and our judgment evidence (hurricane wind: tower only and convective wind: 5 parts); hail has no curve yet. 4 parts of the wind farm have no curve under any hazard: collection network, control building, SCADA, met and O&M, civil and fieldwork and transport support.",
  "uncovered": "4 parts of the wind farm have no curve under any hazard: collection network, control building, SCADA, met and O&M, civil and fieldwork and transport support.",
  "summary_v0": "Flood, hurricane wind, convective wind and wildfire have curves for wind farms, all on borrowed evidence or our judgment; hail has none.",
- "reference": null,
+ "reference": {
+  "label": "200 MW reference plant · $324.6M physical replacement value (NREL benchmarks, value ledger)",
+  "source": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+  "total_usd": 324600000.0
+ },
  "hazards": [
   {
    "slug": "hail",
@@ -160,8 +164,9 @@
   {
    "key": "rotor",
    "label": "Rotor and blades",
-   "value_usd": null,
-   "share": null,
+   "value_usd": 67400000.0,
+   "share": 0.20764017252002465,
+   "shared_with": [],
    "twin_targets": [],
    "subsystems": [
     "ROTOR_ASSEMBLY"
@@ -289,8 +294,9 @@
   {
    "key": "tower",
    "label": "Tower",
-   "value_usd": null,
-   "share": null,
+   "value_usd": 55200000.0,
+   "share": 0.17005545286506468,
+   "shared_with": [],
    "twin_targets": [],
    "subsystems": [
     "TOWER",
@@ -426,8 +432,9 @@
   {
    "key": "nacelle",
    "label": "Nacelle: gearbox, generator, yaw",
-   "value_usd": null,
-   "share": null,
+   "value_usd": 68000000.0,
+   "share": 0.20948860135551448,
+   "shared_with": [],
    "twin_targets": [],
    "subsystems": [
     "NACELLE"
@@ -555,8 +562,9 @@
   {
    "key": "foundation",
    "label": "Turbine foundation",
-   "value_usd": null,
-   "share": null,
+   "value_usd": 24000000.0,
+   "share": 0.07393715341959335,
+   "shared_with": [],
    "twin_targets": [],
    "subsystems": [
     "FOUNDATION"
@@ -678,8 +686,9 @@
   {
    "key": "turbine_electrical",
    "label": "Turbine-base and pad electrical",
-   "value_usd": null,
-   "share": null,
+   "value_usd": 27400000.0,
+   "share": 0.08441158348736907,
+   "shared_with": [],
    "twin_targets": [],
    "subsystems": [
     "POWER_ELECTRONICS",
@@ -807,8 +816,11 @@
   {
    "key": "collection",
    "label": "Collection network",
-   "value_usd": null,
-   "share": null,
+   "value_usd": 14400000.0,
+   "share": 0.04436229205175601,
+   "shared_with": [
+    "gsu"
+   ],
    "twin_targets": [],
    "subsystems": [
     "PLANT_COLLECTION"
@@ -884,7 +896,7 @@
      "share": null,
      "dollars": null,
      "no_curve_text": "SCADA and controls, electrical collection, substation and civil infrastructure (reviewed secondary units, no curve)",
-     "sentence": "No curve — Collection network, an unstated share of the reference value, has no damage response yet."
+     "sentence": "No curve — Collection network, $14.4M of the reference value, has no damage response yet."
     },
     "wildfire": {
      "entry_id": "wildfire_wind",
@@ -928,6 +940,9 @@
    "label": "GSU substation",
    "value_usd": null,
    "share": null,
+   "shared_with": [
+    "collection"
+   ],
    "twin_targets": [],
    "subsystems": [
     "FACILITY_GSU_SUBSTATION",
@@ -1064,6 +1079,7 @@
    "label": "Control building, SCADA, met and O&M",
    "value_usd": null,
    "share": null,
+   "shared_with": [],
    "twin_targets": [],
    "subsystems": [
     "CONTROL"
@@ -1180,8 +1196,9 @@
   {
    "key": "civil",
    "label": "Civil: roads, pads, buildings, fences",
-   "value_usd": null,
-   "share": null,
+   "value_usd": 9400000.0,
+   "share": 0.02895871842267406,
+   "shared_with": [],
    "twin_targets": [],
    "subsystems": [
     "PLANT_CIVIL"
@@ -1257,7 +1274,7 @@
      "share": null,
      "dollars": null,
      "no_curve_text": "SCADA and controls, electrical collection, substation and civil infrastructure (reviewed secondary units, no curve)",
-     "sentence": "No curve — Civil: roads, pads, buildings, fences, an unstated share of the reference value, has no damage response yet."
+     "sentence": "No curve — Civil: roads, pads, buildings, fences, $9.4M of the reference value, has no damage response yet."
     },
     "wildfire": {
      "entry_id": "wildfire_wind",
@@ -1299,8 +1316,9 @@
   {
    "key": "support",
    "label": "Fieldwork and transport support",
-   "value_usd": null,
-   "share": null,
+   "value_usd": 58800000.0,
+   "share": 0.18114602587800369,
+   "shared_with": [],
    "twin_targets": [],
    "subsystems": [
     "SUPPORT"
@@ -2471,8 +2489,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.20764017252002465,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "hail",
     "label": "Hail",
@@ -2574,8 +2593,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.20764017252002465,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "flood",
     "label": "Flood",
@@ -2624,8 +2644,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.20764017252002465,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "hurricane_wind",
     "label": "Hurricane wind",
@@ -2674,8 +2695,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": 0.173,
-   "share_basis": "share of the physical replaceable base (artifact default)",
+   "share": 0.20764017252002465,
+   "share_basis": "share of the asset's reference value. This cell's own value lines here (share of the physical replaceable base (artifact default)): Blade 17 %",
+   "cost_follows": false,
    "hazard": {
     "slug": "convective_wind",
     "label": "Convective wind",
@@ -2753,8 +2775,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.20764017252002465,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "wildfire",
     "label": "Wildfire",
@@ -2803,8 +2826,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.20764017252002465,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "heat",
     "label": "Heat",
@@ -2870,8 +2894,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.17005545286506468,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "hail",
     "label": "Hail",
@@ -2973,8 +2998,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.17005545286506468,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "flood",
     "label": "Flood",
@@ -3023,8 +3049,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": 0.16,
-   "share_basis": "share of project TIV (owner-approved tower proxy basis)",
+   "share": 0.17005545286506468,
+   "share_basis": "share of the asset's reference value. This cell's own value lines here (share of project TIV (owner-approved tower proxy basis)): Turbine tower 16 %",
+   "cost_follows": false,
    "hazard": {
     "slug": "hurricane_wind",
     "label": "Hurricane wind",
@@ -3214,8 +3241,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": 0.169,
-   "share_basis": "share of the physical replaceable base (artifact default)",
+   "share": 0.17005545286506468,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "convective_wind",
     "label": "Convective wind",
@@ -3293,8 +3321,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.17005545286506468,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "wildfire",
     "label": "Wildfire",
@@ -3343,8 +3372,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.17005545286506468,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "heat",
     "label": "Heat",
@@ -3410,8 +3440,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.20948860135551448,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "hail",
     "label": "Hail",
@@ -3513,8 +3544,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.20948860135551448,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "flood",
     "label": "Flood",
@@ -3563,8 +3595,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.20948860135551448,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "hurricane_wind",
     "label": "Hurricane wind",
@@ -3613,8 +3646,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": 0.345,
-   "share_basis": "share of the physical replaceable base (artifact default)",
+   "share": 0.20948860135551448,
+   "share_basis": "share of the asset's reference value. This cell's own value lines here (share of the physical replaceable base (artifact default)): Nacelle 34 %",
+   "cost_follows": false,
    "hazard": {
     "slug": "convective_wind",
     "label": "Convective wind",
@@ -3692,8 +3726,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.20948860135551448,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "wildfire",
     "label": "Wildfire",
@@ -3742,8 +3777,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.20948860135551448,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "heat",
     "label": "Heat",
@@ -3809,8 +3845,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.07393715341959335,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "hail",
     "label": "Hail",
@@ -3912,8 +3949,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.07393715341959335,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "flood",
     "label": "Flood",
@@ -3962,8 +4000,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.07393715341959335,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "hurricane_wind",
     "label": "Hurricane wind",
@@ -4012,8 +4051,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": 0.062,
-   "share_basis": "share of the physical replaceable base (artifact default)",
+   "share": 0.07393715341959335,
+   "share_basis": "share of the asset's reference value. This cell's own value lines here (share of the physical replaceable base (artifact default)): Foundation 6 %",
+   "cost_follows": false,
    "hazard": {
     "slug": "convective_wind",
     "label": "Convective wind",
@@ -4091,8 +4131,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.07393715341959335,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "wildfire",
     "label": "Wildfire",
@@ -4141,8 +4182,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.07393715341959335,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "heat",
     "label": "Heat",
@@ -4208,8 +4250,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.08441158348736907,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "hail",
     "label": "Hail",
@@ -4311,8 +4354,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.08441158348736907,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "flood",
     "label": "Flood",
@@ -4362,8 +4406,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.08441158348736907,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "hurricane_wind",
     "label": "Hurricane wind",
@@ -4412,8 +4457,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": 0.037,
-   "share_basis": "share of the physical replaceable base (artifact default)",
+   "share": 0.08441158348736907,
+   "share_basis": "share of the asset's reference value. This cell's own value lines here (share of the physical replaceable base (artifact default)): Power electronics 4 %",
+   "cost_follows": false,
    "hazard": {
     "slug": "convective_wind",
     "label": "Convective wind",
@@ -4490,8 +4536,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.08441158348736907,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "wildfire",
     "label": "Wildfire",
@@ -4563,8 +4610,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.08441158348736907,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "heat",
     "label": "Heat",
@@ -4630,8 +4678,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.04436229205175601,
+   "share_basis": "share of the asset's reference value; one line of the value budget, shared with GSU substation",
+   "cost_follows": false,
    "hazard": {
     "slug": "hail",
     "label": "Hail",
@@ -4733,8 +4782,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.04436229205175601,
+   "share_basis": "share of the asset's reference value; one line of the value budget, shared with GSU substation",
+   "cost_follows": false,
    "hazard": {
     "slug": "flood",
     "label": "Flood",
@@ -4783,8 +4833,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.04436229205175601,
+   "share_basis": "share of the asset's reference value; one line of the value budget, shared with GSU substation",
+   "cost_follows": false,
    "hazard": {
     "slug": "hurricane_wind",
     "label": "Hurricane wind",
@@ -4833,8 +4884,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.04436229205175601,
+   "share_basis": "share of the asset's reference value; one line of the value budget, shared with GSU substation",
+   "cost_follows": false,
    "hazard": {
     "slug": "convective_wind",
     "label": "Convective wind",
@@ -4881,8 +4933,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.04436229205175601,
+   "share_basis": "share of the asset's reference value; one line of the value budget, shared with GSU substation",
+   "cost_follows": false,
    "hazard": {
     "slug": "wildfire",
     "label": "Wildfire",
@@ -4931,8 +4984,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.04436229205175601,
+   "share_basis": "share of the asset's reference value; one line of the value budget, shared with GSU substation",
+   "cost_follows": false,
    "hazard": {
     "slug": "heat",
     "label": "Heat",
@@ -4999,7 +5053,8 @@
     "label": "Wind farm"
    },
    "share": null,
-   "share_basis": null,
+   "share_basis": "counted with Collection network: one line of the value budget covers both",
+   "cost_follows": false,
    "hazard": {
     "slug": "hail",
     "label": "Hail",
@@ -5102,7 +5157,8 @@
     "label": "Wind farm"
    },
    "share": null,
-   "share_basis": null,
+   "share_basis": "counted with Collection network: one line of the value budget covers both",
+   "cost_follows": false,
    "hazard": {
     "slug": "flood",
     "label": "Flood",
@@ -5194,7 +5250,8 @@
     "label": "Wind farm"
    },
    "share": null,
-   "share_basis": null,
+   "share_basis": "counted with Collection network: one line of the value budget covers both",
+   "cost_follows": false,
    "hazard": {
     "slug": "hurricane_wind",
     "label": "Hurricane wind",
@@ -5244,7 +5301,8 @@
     "label": "Wind farm"
    },
    "share": null,
-   "share_basis": null,
+   "share_basis": "counted with Collection network: one line of the value budget covers both",
+   "cost_follows": false,
    "hazard": {
     "slug": "convective_wind",
     "label": "Convective wind",
@@ -5292,7 +5350,8 @@
     "label": "Wind farm"
    },
    "share": null,
-   "share_basis": null,
+   "share_basis": "counted with Collection network: one line of the value budget covers both",
+   "cost_follows": false,
    "hazard": {
     "slug": "wildfire",
     "label": "Wildfire",
@@ -5368,7 +5427,8 @@
     "label": "Wind farm"
    },
    "share": null,
-   "share_basis": null,
+   "share_basis": "counted with Collection network: one line of the value budget covers both",
+   "cost_follows": false,
    "hazard": {
     "slug": "heat",
     "label": "Heat",
@@ -5436,6 +5496,7 @@
    },
    "share": null,
    "share_basis": null,
+   "cost_follows": false,
    "hazard": {
     "slug": "hail",
     "label": "Hail",
@@ -5539,6 +5600,7 @@
    },
    "share": null,
    "share_basis": null,
+   "cost_follows": false,
    "hazard": {
     "slug": "flood",
     "label": "Flood",
@@ -5587,6 +5649,7 @@
    },
    "share": null,
    "share_basis": null,
+   "cost_follows": false,
    "hazard": {
     "slug": "hurricane_wind",
     "label": "Hurricane wind",
@@ -5637,6 +5700,7 @@
    },
    "share": null,
    "share_basis": null,
+   "cost_follows": false,
    "hazard": {
     "slug": "convective_wind",
     "label": "Convective wind",
@@ -5685,6 +5749,7 @@
    },
    "share": null,
    "share_basis": null,
+   "cost_follows": false,
    "hazard": {
     "slug": "wildfire",
     "label": "Wildfire",
@@ -5735,6 +5800,7 @@
    },
    "share": null,
    "share_basis": null,
+   "cost_follows": false,
    "hazard": {
     "slug": "heat",
     "label": "Heat",
@@ -5800,8 +5866,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.02895871842267406,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "hail",
     "label": "Hail",
@@ -5903,8 +5970,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.02895871842267406,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "flood",
     "label": "Flood",
@@ -5953,8 +6021,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.02895871842267406,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "hurricane_wind",
     "label": "Hurricane wind",
@@ -6003,8 +6072,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.02895871842267406,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "convective_wind",
     "label": "Convective wind",
@@ -6051,8 +6121,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.02895871842267406,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "wildfire",
     "label": "Wildfire",
@@ -6101,8 +6172,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.02895871842267406,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "heat",
     "label": "Heat",
@@ -6168,8 +6240,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.18114602587800369,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "hail",
     "label": "Hail",
@@ -6271,8 +6344,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.18114602587800369,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": true,
    "hazard": {
     "slug": "flood",
     "label": "Flood",
@@ -6322,8 +6396,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.18114602587800369,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": true,
    "hazard": {
     "slug": "hurricane_wind",
     "label": "Hurricane wind",
@@ -6373,8 +6448,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.18114602587800369,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "convective_wind",
     "label": "Convective wind",
@@ -6421,8 +6497,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.18114602587800369,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": true,
    "hazard": {
     "slug": "wildfire",
     "label": "Wildfire",
@@ -6472,8 +6549,9 @@
     "slug": "wind",
     "label": "Wind farm"
    },
-   "share": null,
-   "share_basis": null,
+   "share": 0.18114602587800369,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
    "hazard": {
     "slug": "heat",
     "label": "Heat",
@@ -6626,10 +6704,11 @@
    }
   }
  },
+ "labour_note": "Replacement labour (installation, inspection, logistics; 18 % of the plant in the value ledger) is treated differently by each hazard's cell — Flood: a separate item with no curve of its own; its cost follows the other parts' damage and is added once. Hurricane wind: a separate item with no curve of its own; its cost follows the other parts' damage and is added once. Convective wind: not mentioned by the cell, so replacement labour is not priced. Wildfire: a separate item with no curve of its own; its cost follows the other parts' damage and is added once.",
  "split": {
   "differs": true,
-  "sentence": "These cells split the wind farm differently: the cells name different numbers of parts: flood 15, hurricane wind 10, wildfire 12 and convective wind 5; collection network is a unit under flood, hurricane wind and wildfire; convective wind lists it as no curve yet; GSU substation is a unit under flood, hurricane wind and wildfire; convective wind lists it as no curve yet; control building, SCADA, met and O&M is a unit under hurricane wind and wildfire; flood and convective wind list it as no curve yet; civil: roads, pads, buildings, fences is a unit under flood, hurricane wind and wildfire; convective wind lists it as no curve yet; fieldwork and transport support is a unit under flood, hurricane wind and wildfire; convective wind does not mention it; and more below. No reference plant budget exists for wind farms in this repository; the hurricane cell carries the only plant value (the canonical 100 MW farm, $140M, of which the tower share is 0.16).",
-  "note": "These cells split the wind farm differently, so one team's single unit can be several rows here, or one row can be several of its units. Open a row to see that team's own names for it. No reference plant budget exists for wind farms in this repository; the hurricane cell carries the only plant value (the canonical 100 MW farm, $140M, of which the tower share is 0.16).",
+  "sentence": "These cells split the wind farm differently: the cells name different numbers of parts: flood 15, hurricane wind 10, wildfire 12 and convective wind 5; collection network is a unit under flood, hurricane wind and wildfire; convective wind lists it as no curve yet; GSU substation is a unit under flood, hurricane wind and wildfire; convective wind lists it as no curve yet; control building, SCADA, met and O&M is a unit under hurricane wind and wildfire; flood and convective wind list it as no curve yet; civil: roads, pads, buildings, fences is a unit under flood, hurricane wind and wildfire; convective wind lists it as no curve yet; fieldwork and transport support is a unit under flood, hurricane wind and wildfire; convective wind does not mention it; and more below. The value shares are the repository's value ledger for a 200 MW plant (NREL benchmarks), grouped by subsystem; the ledger prices collection and the GSU substation as one line, counted once under Collection network, and has no line of its own for the control building.",
+  "note": "These cells split the wind farm differently, so one team's single unit can be several rows here, or one row can be several of its units. Open a row to see that team's own names for it. The value shares are the repository's value ledger for a 200 MW plant (NREL benchmarks), grouped by subsystem; the ledger prices collection and the GSU substation as one line, counted once under Collection network, and has no line of its own for the control building.",
   "details": [
    "the cells name different numbers of parts: flood 15, hurricane wind 10, wildfire 12 and convective wind 5",
    "collection network is a unit under flood, hurricane wind and wildfire; convective wind lists it as no curve yet",
@@ -6884,7 +6963,11 @@
   "rows": null,
   "nodes": {}
  },
- "value_source": null,
+ "value_source": {
+  "label": "the solar and wind value ledger (NREL benchmarks)",
+  "path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+  "sha256": "9edb7a64cf36df6c6e7a95f5b3d06aa5b50cb502792b9012b95af4692b542d52"
+ },
  "entries": [
   {
    "entry_id": "flood_wind",
@@ -6949,7 +7032,14 @@
    "aria_label": "Flood × Wind farm, live, partial, evidence: borrowed, field reports not searched",
    "href": "/cells/flood_wind",
    "word": "borrowed",
-   "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: borrowed"
+   "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: borrowed",
+   "value_split": {
+    "priced": 0.18114602587800369,
+    "partly": 0.04436229205175601,
+    "no_damage": 0.0,
+    "not_priced": 0.7744916820702403,
+    "basis": "of the reference plant's physical value"
+   }
   },
   {
    "entry_id": "hail_wind",
@@ -7077,7 +7167,14 @@
    "aria_label": "Hurricane wind × Wind farm, live, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/tropical_cyclone_wind_wind",
    "word": "our judgment",
-   "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment"
+   "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
+   "value_split": {
+    "priced": 0.3512014787430684,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.6487985212569316,
+    "basis": "of the reference plant's physical value"
+   }
   },
   {
    "entry_id": "wildfire_wind",
@@ -7142,7 +7239,14 @@
    "aria_label": "Wildfire × Wind farm, live, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/wildfire_wind",
    "word": "our judgment",
-   "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment"
+   "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+   "value_split": {
+    "priced": 0.26555760936537276,
+    "partly": 0.04436229205175601,
+    "no_damage": 0.0,
+    "not_priced": 0.6900800985828712,
+    "basis": "of the reference plant's physical value"
+   }
   },
   {
    "entry_id": "wind_tornado_wind",
@@ -7207,7 +7311,14 @@
    "aria_label": "Convective wind × Wind farm, live, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/wind_tornado_wind",
    "word": "our judgment",
-   "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: borrowed and our judgment"
+   "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: borrowed and our judgment",
+   "value_split": {
+    "priced": 0.7455329636475663,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.25446703635243373,
+    "basis": "of the reference plant's physical value"
+   }
   }
  ],
  "has_buckets": false,

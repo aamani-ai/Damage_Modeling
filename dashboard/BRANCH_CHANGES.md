@@ -58,12 +58,24 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 
 - Tiles are shaded by status (live white, proposal grey, reused dashed, no curve yet dark grey); one view shows status
   and evidence together; the other views are Value covered and Read by.
+- **Value covered** now says, for every solar, wind, battery and substation tile, how the asset's value splits for
+  that hazard, in parts that add up to all of it: *priced* (a curve, or a cost the cell adds in step with the other
+  parts' damage) · *partly priced* · *no direct damage* · *not priced*. It is worked out from the profile's value
+  budget and each subsystem's state. `main` showed a figure for only 4 tiles and "share not stated" elsewhere. Real
+  estate says it has no value split yet.
 - **Heat** has a column with the research so far. Icing and lightning are hidden (no curve, no research).
 - The header gives the counts; the KPI cards are gone.
 
 ### Asset pages (for example Power plants › Solar farm)
 
 - **The curves** (a fold, open by default): the library's own tiles, one per hazard including heat.
+- **Value budgets for solar and wind**: the subsystem shares come from the repository's value ledger
+  (`docs/method/value_basis/solar_wind_value_breakdown.xlsx`, NREL benchmarks: a 100 MWdc solar plant, a 200 MW wind
+  plant), grouped by subsystem with installation labour beside its hardware, as the battery and substation budgets
+  are. Before, each row added up its cell's own value lines, so hurricane × solar counted the fixed-tilt and tracker
+  lines together (PV modules 66%). A cell's own value lines are now in each row's hover, listed, not added up.
+- **Replacement labour** is treated differently by each cell (hail adds it to the modules, hurricane and wildfire let
+  it follow the other parts' damage, flood and convective wind leave it out); the subsystem view says so.
 - **View by subsystem**: every subsystem (cost bucket) against the hazards. It opens on Hail and has an **All
   hazards** tab. An opened row gives its value share, the cell's own name for the part, its failure unit and subsystem
   code, and its curves in brief, with a link to them on the curve page. The old part-list grid is removed.
@@ -134,4 +146,6 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 - Not merged to `main`, so the live dashboard does not show any of this yet.
 - The catalogue's part names were drafted per cell and are not one agreed vocabulary; the Twin crosswalks match on
   them by name.
-- For most assets the dashboard says which parts have no curve but not how much value that leaves out.
+- Real estate has no value budget, so its tiles give no value split.
+- The solar ledger is a 100 MWdc plant; the profile is described as 100 MWac. The shares are unaffected, the dollar
+  total is the ledger's.
