@@ -62,7 +62,7 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
   that hazard, in parts that add up to all of it: *priced* (a curve, or a cost the cell adds in step with the other
   parts' damage) · *partly priced* · *no direct damage* · *not priced*. It is worked out from the profile's value
   budget and each subsystem's state. `main` showed a figure for only 4 tiles and "share not stated" elsewhere. Real
-  estate says it has no value split yet.
+  estate says "no value budget for buildings yet". What the words mean on the library page explains each part.
 - **Heat** has a column with the research so far. Icing and lightning are hidden (no curve, no research).
 - The header gives the counts; the KPI cards are gone.
 
