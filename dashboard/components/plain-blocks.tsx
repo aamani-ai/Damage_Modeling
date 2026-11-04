@@ -1,9 +1,10 @@
 // The five open plain blocks of the cell page (brief §3.1): what it can be used for · what is covered · what we
 // assumed · what is missing · open questions. Every sentence is the build's or the catalogue's; the components
 // only lay them out. The ledgers behind them live in the station panels.
-import { fmtPct, fmtUsdCompact } from "@/lib/format";
+import { fmtPct } from "@/lib/format";
 import type { CellV2 } from "@/lib/types";
-import { Card, FileLink, SectionSummary } from "./ui";
+import { Card, SectionSummary } from "./ui";
+import { OpenStep } from "./steps-strip";
 
 // each block folds, and starts closed
 function Block({ title, count, children, className = "", open = false }: { title: string; count?: number | null; children: React.ReactNode; className?: string; open?: boolean }) {
@@ -17,7 +18,7 @@ function Block({ title, count, children, className = "", open = false }: { title
   );
 }
 
-export function PlainBlocks({ cell, blob }: { cell: CellV2; blob: (p: string) => string }) {
+export function PlainBlocks({ cell }: { cell: CellV2 }) {
   const pl = cell.plain;
   const v = pl.blocks.covered.value;
   const withheld = pl.blocks.covered.withheld;
@@ -34,6 +35,7 @@ export function PlainBlocks({ cell, blob }: { cell: CellV2; blob: (p: string) =>
         </ul>
         <p className="mt-1.5 text-[11.5px] text-muted-foreground">&quot;With conditions&quot; means only when the consumer checks them. Yearly loss and tail metrics are always Hazard&apos;s to compute.</p>
       </Block>
+      {/* a summary; the full lists (each part, what has no curve, what is withheld, the dollars) are in the What it covers step */}
       <Block title="What is covered">
         {v && v.share_covered != null ? (
           <>
@@ -42,22 +44,11 @@ export function PlainBlocks({ cell, blob }: { cell: CellV2; blob: (p: string) =>
               <div style={{ width: `${v.share_covered * 100}%` }} className="bg-foreground/60" title="has a curve" />
               <div style={{ width: `${(1 - v.share_covered) * 100}%` }} className="hatch-reused bg-transparent" title="no curve yet" />
             </div>
-            <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-0.5 text-[12px]">
-              {v.covered.map((c) => <span key={c.label} className="tabular">has a curve: {c.label} {c.value_usd != null ? fmtUsdCompact(c.value_usd) : c.share != null ? fmtPct(c.share) : ""}</span>)}
-            </div>
-            <div className="mt-1 flex flex-wrap gap-x-4 gap-y-0.5 text-[12px] text-muted-foreground">
-              {v.no_curve.map((n) => <span key={n.label} className="tabular" title={n.sentence}>no curve yet: {n.label} {n.value_usd != null ? fmtUsdCompact(n.value_usd) : ""}</span>)}
-            </div>
-            <p className="mt-1 text-[11.5px] text-muted-foreground">{v.basis} · <FileLink href={blob(v.source)}>{v.source.split("/").slice(-1)[0]}</FileLink></p>
           </>
         ) : (
-          <>
-            <p>{cell.parts.length ? <>Curves for {cell.parts.map((p) => p.part).join(", ")}.</> : "No part rows."} The files state no plant-level dollar figure for this asset{cell.answer.how_to_use?.share_of ? <>; each damage ratio is a share of {cell.answer.how_to_use.share_of[0].toLowerCase() + cell.answer.how_to_use.share_of.slice(1)}</> : null}.</p>
-            {pl.blocks.covered.not_covered.length ? <p className="mt-1 text-muted-foreground">no curve yet: {pl.blocks.covered.not_covered.join(" · ")}</p> : null}
-          </>
+          <p>Curves for {cell.parts.length} part{cell.parts.length === 1 ? "" : "s"}{pl.blocks.covered.not_covered.length ? `; ${pl.blocks.covered.not_covered.length} part${pl.blocks.covered.not_covered.length === 1 ? " has" : "s have"} no curve yet` : ""}{withheld.length ? `; ${withheld.length} named but withheld` : ""}. The files state no plant-level dollar figure for this asset.</p>
         )}
-        {withheld.length ? <p className="mt-1.5 text-[12px] text-muted-foreground">Named but withheld (a stated &quot;not zero&quot;, no response yet): {Object.entries(withheld.map((w) => (w.subsystem ?? w.failure_unit_id).replace(/_/g, " ").toLowerCase()).reduce<Record<string, number>>((n, s) => ({ ...n, [s]: (n[s] ?? 0) + 1 }), {})).map(([s, n]) => (n > 1 ? `${s} (${n} units)` : s)).join(" · ")}</p> : null}
-        {v && v.left_out.length === 0 ? <p className="mt-1 text-[11.5px] italic text-muted-foreground">no part is marked left out on purpose</p> : null}
+        <p className="mt-1.5 text-[12px]"><OpenStep step="covers">See every part in “What it covers” ▸</OpenStep></p>
       </Block>
       <Block title="What we assumed" count={pl.blocks.assumed.length}>
         {pl.blocks.assumed.length ? <ul className="list-disc space-y-0.5 pl-4">{pl.blocks.assumed.map((s) => <li key={s}>{s}</li>)}</ul> : <p className="text-muted-foreground">no judgment items listed in the catalogue entry</p>}
@@ -65,9 +56,10 @@ export function PlainBlocks({ cell, blob }: { cell: CellV2; blob: (p: string) =>
       </Block>
       <div className="grid gap-3">
         <Block title="What is missing">
-          {pl.blocks.missing.mechanisms.length ? <p><span className="text-muted-foreground">kinds of damage not in the curve · </span>{pl.blocks.missing.mechanisms.join(" · ")}</p> : null}
-          {pl.blocks.missing.out_of_scope.length ? <p className={pl.blocks.missing.mechanisms.length ? "mt-1" : ""}><span className="text-muted-foreground">outside the cell&apos;s scope · </span>{pl.blocks.missing.out_of_scope.join(" · ")}</p> : null}
-          {!pl.blocks.missing.mechanisms.length && !pl.blocks.missing.out_of_scope.length ? <p className="text-muted-foreground">nothing listed as missing</p> : null}
+          {pl.blocks.missing.mechanisms.length || pl.blocks.missing.out_of_scope.length ? (
+            <p>{[pl.blocks.missing.mechanisms.length ? `${pl.blocks.missing.mechanisms.length} kind${pl.blocks.missing.mechanisms.length === 1 ? "" : "s"} of damage not in the curve` : null, pl.blocks.missing.out_of_scope.length ? `${pl.blocks.missing.out_of_scope.length} thing${pl.blocks.missing.out_of_scope.length === 1 ? "" : "s"} outside the cell's scope` : null].filter(Boolean).join(" and ")}.</p>
+          ) : <p className="text-muted-foreground">nothing listed as missing</p>}
+          {pl.blocks.missing.mechanisms.length || pl.blocks.missing.out_of_scope.length ? <p className="mt-1.5 text-[12px]"><OpenStep step="covers">See them in “What it covers” ▸</OpenStep></p> : null}
         </Block>
         <Block title="Open questions" count={pl.blocks.open_questions.length}>
           {pl.blocks.open_questions.length ? <ul className="list-disc space-y-0.5 pl-4">{pl.blocks.open_questions.map((s) => <li key={s}>{s}</li>)}</ul> : <p className="text-muted-foreground">none listed</p>}

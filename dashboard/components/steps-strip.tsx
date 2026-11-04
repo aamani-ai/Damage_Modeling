@@ -125,3 +125,9 @@ export function StepsStrip({ cell, cites, curves, m, buildings }: { cell: CellV2
     </section>
   );
 }
+
+/** A link that opens one of the four steps' panels on this page (?step=), so a summary elsewhere can lead to the full list. */
+export function OpenStep({ step, children }: { step: string; children: React.ReactNode }) {
+  const [, setStep] = useUrlParam("step");
+  return <button type="button" onClick={() => setStep(step)} className="text-accent hover:underline">{children}</button>;
+}
