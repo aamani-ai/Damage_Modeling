@@ -58,7 +58,7 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 
 - Tiles are shaded by status (live white, proposal grey, reused dashed, no curve yet dark grey); one view shows status
   and evidence together; the other views are Value covered and Read by.
-- **Value covered** now says, for every solar, wind, battery and substation tile, how the asset's value splits for
+- **Value covered** (still in progress; open to review) now says, for every solar, wind, battery and substation tile, how the asset's value splits for
   that hazard, in parts that add up to all of it: *priced* (a curve, or a cost the cell adds in step with the other
   parts' damage) · *partly priced* · *no direct damage* · *not priced*. It is worked out from the profile's value
   budget and each subsystem's state. `main` showed a figure for only 4 tiles and "share not stated" elsewhere. Real
@@ -69,7 +69,7 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 ### Asset pages (for example Power plants › Solar farm)
 
 - **The curves** (a fold, open by default): the library's own tiles, one per hazard including heat.
-- **Value budgets for solar and wind**: the subsystem shares come from the repository's value ledger
+- **Value budgets for solar and wind** (still in progress, with Value covered): the subsystem shares come from the repository's value ledger
   (`docs/method/value_basis/solar_wind_value_breakdown.xlsx`, NREL benchmarks: a 100 MWdc solar plant, a 200 MW wind
   plant), grouped by subsystem with installation labour beside its hardware, as the battery and substation budgets
   are. Before, each row added up its cell's own value lines, so hurricane × solar counted the fixed-tilt and tracker
@@ -149,6 +149,9 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
   comes to 75%, the cell's own figure).
 
 ## Still open
+
+- **Value covered and the solar and wind value budgets are still in progress**; they can be reviewed, but the figures
+  and wording may change.
 
 - Not merged to `main`, so the live dashboard does not show any of this yet.
 - The catalogue's part names were drafted per cell and are not one agreed vocabulary; the Twin crosswalks match on
