@@ -71,8 +71,9 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
   table lists the parts each system contains and counts mixed systems ("has a curve for 1 of 2 parts"). Links say
   where the Digital Twin repository defines each asset's breakdown.
 - Parts a hazard does not damage by the cell's decision read **no direct damage**, not "no curve yet".
-- The 3D model's colour key defines each word with an (i), for example **changes another curve**: no curve of its
-  own, but its condition (such as whether a protection is in place) changes another part's curve.
+- The 3D model's colour key defines each word with an (i), and the Twin table lists the words it uses with their
+  meanings above its rows, for example **changes another curve**: no curve of its own, but its condition (such as
+  whether a protection is in place) changes another part's curve.
 - In View by subsystem, a curve's **Used by Hazard** tag opens the curve page at its For Hazard footer.
 
 ### Curve pages (each hazard × asset, for example Hail × Solar farm)

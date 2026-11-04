@@ -7,7 +7,7 @@
 import Link from "next/link";
 import { useUrlParam } from "@/lib/url-state";
 import type { Coverage, CoverageState } from "@/lib/types";
-import { Swatch, TwinCoverage, hazardOf } from "./twin-coverage";
+import { STATE_ORDER, Swatch, TwinCoverage, hazardOf } from "./twin-coverage";
 import { ToggleArrow, TOGGLE_CLASS } from "./ui";
 
 const STATUS_WORD: Record<string, string> = { live: "live", proposal: "proposal", reused: "reused", gap: "no curve yet" };
@@ -100,6 +100,15 @@ export function CoverageMatrix({ cov }: { cov: Coverage }) {
       <p className="max-w-[1100px] px-3 pb-2 text-[12.5px] leading-snug">
         Each row is a system of the Digital Twin&apos;s 3D model of the {(cov.type.building ?? cov.type.label).toLowerCase()}, with the parts it contains underneath; each column is a hazard. A cell says whether that hazard&apos;s curves cover the system, with the picture&apos;s colours. These rows are the 3D model&apos;s breakdown, not the subsystems (cost buckets) in &quot;View by subsystem&quot;, so the counts differ.
       </p>
+      {/* what each word in the table means, for the words the table uses (the picture's key says the same) */}
+      <ul className="max-w-[1100px] space-y-0.5 px-3 pb-2 text-[12px] leading-snug" aria-label="What the words in the table mean">
+        {STATE_ORDER.filter((st) => cov.matrix.some((r) => Object.values(r.cells).some((c) => c.states.includes(st)))).map((st) => (
+          <li key={st} className="flex items-start gap-1.5">
+            <Swatch state={st} className="mt-[3px]" />
+            <span><span className="font-medium">{cov.state_words[st]}</span>{cov.state_meaning?.[st] ? <span className="text-muted-foreground"> — {cov.state_meaning[st]}</span> : null}</span>
+          </li>
+        ))}
+      </ul>
       <div className="overflow-x-auto px-3 pb-3">
         <table className="w-full min-w-[860px] text-[12px]">
           <thead>
