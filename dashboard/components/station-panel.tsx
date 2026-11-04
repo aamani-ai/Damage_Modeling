@@ -26,6 +26,19 @@ function Line({ label, children }: { label: string; children: React.ReactNode })
   );
 }
 
+// "Inverters and combiners › Inverters, Combiner boxes and DC protection": the subsystem, then its parts on this axis
+function axisLines(ids: string[], cell: CellV2, curves: CurveV2[]): string[] {
+  const groups: { idx: number; sub: string | null; parts: string[] }[] = [];
+  for (const id of ids) {
+    const part = curves.find((c) => c.curve_id === id)?.part ?? id;
+    const idx = cell.subcomponents.findIndex((x) => x.curve_ids.includes(id));
+    const sub = idx >= 0 ? cell.subcomponents[idx].label : null;
+    const g = groups.find((x) => x.sub === sub) ?? (groups.push({ idx: idx < 0 ? 999 : idx, sub, parts: [] }), groups[groups.length - 1]);
+    if (!g.parts.includes(part)) g.parts.push(part);
+  }
+  return groups.sort((a, b) => a.idx - b.idx).map((g) => (g.sub && !(g.parts.length === 1 && g.parts[0].toLowerCase() === g.sub.toLowerCase()) ? `${g.sub} › ${g.parts.join(", ")}` : g.parts.join(", ")));
+}
+
 type ParamPlain = CellV2["plain"]["parameters_plain"][number];
 
 // parameter rows that differ only in the curve they belong to (flood × solar's nine-point depth tables, one per part)
@@ -85,7 +98,10 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
           {cell.answer.axis_groups.map((g) => (
             <Line key={g.axis.id} label="Axis">
               {g.axis.label}{g.axis.unit && g.axis.unit !== "dimensionless" && g.axis.unit !== "class" ? ` (${g.axis.unit})` : ""}
-              <span className="block text-muted-foreground">{g.curve_ids.map((id) => curves.find((c) => c.curve_id === id)?.part ?? id).filter((v, i, a) => a.indexOf(v) === i).join(" · ")}</span>
+              {/* the curves read this way, one line per subsystem (in its order) with the cell's own part names after › */}
+              <ul className="text-muted-foreground">
+                {axisLines(g.curve_ids, cell, curves).map((l) => <li key={l}>{l}</li>)}
+              </ul>
               {g.axis.note ? <span className="block text-muted-foreground">{g.axis.note}</span> : null}
             </Line>
           ))}
