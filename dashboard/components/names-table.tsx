@@ -11,7 +11,7 @@ import { SectionSummary } from "./ui";
 interface Row { subsystem: string; part: string | null; units: string[]; curves: number; twin: string[]; gap: string | null }
 
 export function NamesTable({ cell, curves, covs, hazardSlug, buildings, words }: {
-  cell: CellV2; curves: CurveV2[]; covs: CellCov[]; hazardSlug: string; buildings: Record<string, string>; words: { gap: string; no_direct_damage: string };
+  cell: CellV2; curves: CurveV2[]; covs: CellCov[]; hazardSlug: string; buildings: Record<string, string>; words: { gap: string; no_direct_damage: string; whole: string };
 }) {
   const [b] = useUrlParam("building");
   const building = b && buildings[b] ? buildings[b] : null;
@@ -29,6 +29,11 @@ export function NamesTable({ cell, curves, covs, hazardSlug, buildings, words }:
   };
   const rows: Row[] = [];
   for (const s of subs) {
+    // a subsystem priced inside the whole-building curve has no curve of its own: say so instead of repeating that curve
+    if (s.coverage !== "gap" && s.cell_state === "whole" && rows.some((r) => r.part && s.curve_ids.length)) {
+      rows.push({ subsystem: s.label, part: null, units: [], curves: 0, twin: [], gap: words.whole });
+      continue;
+    }
     if (s.coverage === "gap" || !s.curve_ids.length) {
       rows.push({ subsystem: s.label, part: null, units: [], curves: 0, twin: [], gap: s.gap?.no_direct_damage ? words.no_direct_damage : words.gap });
       continue;
@@ -60,7 +65,7 @@ export function NamesTable({ cell, curves, covs, hazardSlug, buildings, words }:
                   <td className="px-3 py-1">{rows[i - 1]?.subsystem === r.subsystem ? "" : r.subsystem}</td>
                   <td className="px-2 py-1">{r.part ?? r.gap}</td>
                   <td className="px-2 py-1">{r.units.length ? <><span className="font-mono text-[11.5px]">{r.units.join(", ")}</span>{r.curves > 1 ? <span className="text-muted-foreground"> · {r.curves} curves</span> : null}</> : null}</td>
-                  <td className="px-2 py-1 text-muted-foreground">{r.part ? (r.twin.join(" · ") || "not placed on the twin") : ""}</td>
+                  <td className="px-2 py-1 text-muted-foreground">{r.part ? (r.twin.length ? r.twin.slice(0, 8).join(" · ") + (r.twin.length > 8 ? ` and ${r.twin.length - 8} more` : "") : "not placed on the twin") : ""}</td>
                 </tr>
               ))}
             </tbody>
