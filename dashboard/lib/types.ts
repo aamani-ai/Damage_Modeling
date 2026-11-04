@@ -137,7 +137,7 @@ export interface Subcomponent {
   // the row's value share and its basis; real estate also: the building a row belongs to and what the row means
   group?: { key: string; label: string }; share?: number | null; share_basis?: string | null; note?: string | null;
   gap: {
-    reason: string; own_words?: string | null; source?: { label: string; path: string } | null;
+    reason: string; own_words?: string | null; no_direct_damage?: boolean; source?: { label: string; path: string } | null;
     research?: { title: string; finding: string; link: string | null; where: string; repo: string; path: string }[]; occurrence: OccurrenceBucket | null; effect: string; basis: { label: string; path: string }[];
     register: { path: string; sha256: string; search_log: string | null; last_searched: string | null; question: string | null } | null;
   } | null;

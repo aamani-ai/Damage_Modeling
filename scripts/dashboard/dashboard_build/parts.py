@@ -581,6 +581,8 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
         if rec.get("gap") and rec["gap"].get("reason"):
             original = rec["gap"]["reason"]
             rec["gap"]["reason"], rec["gap"]["own_words"] = plain_reason(original)
+            # the cell decided this hazard does not damage the part directly: no curve, on purpose (not a missing one)
+            rec["gap"]["no_direct_damage"] = bool(re.search(r"no direct [\w ]*damage|DR\s*≈\s*0", original, re.I))
             cell_ = cells.get(rec["entry_id"] or "") or {}
             rec["gap"]["source"] = source_doc(original, rec["entry_id"], (cell_.get("files") or {}).get("write_up"),
                                               (rec["gap"].get("register") or {}).get("path") if SHOW_FIELD_REPORTS else None)

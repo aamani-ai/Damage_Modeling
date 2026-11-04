@@ -70,11 +70,13 @@ SENTENCES = [
     (r"^Model v0\.1 is a fail-closed research scaffold with no curve records",
      "A first research version exists but has no curve yet: no evidence so far links a hailstorm's impact on a blade to the damage found on inspection and its repair cost, and no hail measure for blades has been chosen."),
     (r"^No curve and no documented plan yet \(the BESS plan only lists other hazards as later work",
-     "No curve yet, and no plan to build one: the battery plan lists other hazards only as later work."),
+     # Hazard's battery decisions (DD-BESS25, on a Hazard branch) later deferred the other hazards by owner direction
+     "No curve yet: the owner deferred hail for batteries (Hazard's battery decisions; this repository's battery plan lists other hazards only as later work). No evidence search has been run, and deferred does not mean zero risk."),
     (r"^No curve yet: the BESS hurricane wind cell leaves convective wind and tornado as a separate scope",
-     "No curve yet: the battery hurricane work leaves convective wind and tornadoes for separate work, which the battery plan lists as later."),
+     "No curve yet: the battery hurricane work leaves convective wind and tornadoes for separate work, and the owner has since deferred them (Hazard's battery decisions). No evidence search has been run, and deferred does not mean zero risk."),
     (r"^Hail was excluded from the first substation delivery",
-     "No curve yet: hail was left out of the first substation work, and no published hail damage data for substations was found. Not finding data does not mean there is no risk."),
+     # the inventory checked only this repository's own curves (05_cross_hazard_reuse_inventory.md); no outside search
+     "No curve yet: the owner left hail out of the first substation work. Only the curves already in this repository were checked, and none fits a substation; no outside search has been done. That is not a finding of no risk."),
     (r"^Replacement support and fieldwork: no own curve; allocated once at the aggregate direct-and-civil damage ratio",
      "Replacement support and fieldwork has no curve of its own: its cost is added once, in proportion to the damage to the equipment and civil works (a judgment rule)."),
 ]

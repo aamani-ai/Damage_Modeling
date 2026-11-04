@@ -45,7 +45,7 @@ function CurveList({ row, m }: { row: LibraryType; m: ManifestV3 }) {
   );
 }
 
-function Subcomponents({ v, m, defaultHazard, building, twinBelow = false }: { v: AssetViewV2; m: ManifestV3; defaultHazard?: string; building?: string; twinBelow?: boolean }) {
+function Subcomponents({ v, m, defaultHazard, building, twinBelow = false, buildingSlug = null }: { v: AssetViewV2; m: ManifestV3; defaultHazard?: string; building?: string; twinBelow?: boolean; buildingSlug?: string | null }) {
   // a real-estate building type shows its own building's subsystems (the records carry the building as their group)
   const subs = building ? v.subcomponents.filter((s) => s.group?.key === building) : v.subcomponents;
   const rollup = (building ? v.subsystem_groups?.[building] : null) ?? v.subcomponent_rollup;
@@ -58,7 +58,7 @@ function Subcomponents({ v, m, defaultHazard, building, twinBelow = false }: { v
   const hazards = m.hazards.filter((h) => SHOW_FIELD_REPORTS || !h.outside_the_five || h.slug === "heat").map((h) => ({ slug: h.slug, label: h.label }));
   // the first hazard in the library's order (hail), whether or not it has a curve
   const first = defaultHazard ?? hazards[0].slug;
-  return <SubcomponentPanel subs={subs} rollup={rollup} hazards={hazards} defaultHazard={first} cards={constructionCards(subs)} legend={m.legend} blobBase={blobBase(m)} notes={notes} overview teamNames={teamNames} title="View by subsystem" twinBelow={twinBelow} />;
+  return <SubcomponentPanel subs={subs} rollup={rollup} hazards={hazards} defaultHazard={first} cards={constructionCards(subs)} legend={m.legend} blobBase={blobBase(m)} notes={notes} overview teamNames={teamNames} title="View by subsystem" twinBelow={twinBelow} compact buildingSlug={buildingSlug} />;
 }
 
 export default async function AssetPage({ params }: { params: Promise<{ asset: string }> }) {
@@ -138,7 +138,7 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
       <div className="mt-3 space-y-3">
         <ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} groups={["status", "evidence", "lenses", "subsystem", "production", "hazard_use", "units"]} />
         <CurveList row={row} m={m} />
-        {v ? <Subcomponents v={v} m={m} building={sharedCell ? type.building!.toLowerCase() : undefined} twinBelow={!!cov} /> : null}
+        {v ? <Subcomponents v={v} m={m} building={sharedCell ? type.building!.toLowerCase() : undefined} buildingSlug={sharedCell ? type.slug : null} twinBelow={!!cov} /> : null}
         {/* the second way in: the Digital Twin's own parts, as the 3D model and as a table, both folded until asked for */}
         <section className="rounded-lg border border-border bg-card" aria-label="View by Digital Twin part">
           <details className="group" open>

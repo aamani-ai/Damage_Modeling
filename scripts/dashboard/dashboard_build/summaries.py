@@ -75,7 +75,9 @@ def asset_sentence(noun: str, cells: list[dict[str, Any]], searched_any: bool) -
 
 def cell_sentence(entry: dict[str, Any], status: str, value: dict[str, Any] | None, hazard_label: str, asset_label: str, drawn: bool | None) -> str:
     if entry["kind"] == "gap":
-        reason = entry.get("reason", "").rstrip(".")
+        # the plain reason the gap page shows (plain_reasons), so the tile's hover and the page say the same
+        from .plain_reasons import plain as plain_reason
+        reason = (plain_reason(entry.get("reason", ""))[0] or "").rstrip(".")
         for prefix in ("No curve and ", "No curve yet: ", "No curve yet, ", "No curve: "):
             if reason.startswith(prefix):
                 reason = reason[len(prefix):]

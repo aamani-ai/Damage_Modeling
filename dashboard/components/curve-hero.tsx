@@ -102,17 +102,30 @@ export function CurveHero({ cell, curves: allCurves, buildings, order }: { cell:
         <span className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">The curve</span>
         {parts.length > 1 ? (
           <div className="flex flex-wrap items-center gap-1.5 text-[12px]">
-            {/* each part under the subsystem it belongs to, in the subsystem order */}
-            <div role="radiogroup" aria-label="Part of the plant" className="flex flex-wrap items-center gap-x-3 gap-y-1">
-              {groupsOf(parts, (p) => order?.[curves.find((c) => (c.part ?? c.failure_unit_id ?? c.curve_id) === p)?.curve_id ?? ""]?.label ?? null).map((g) => (
-                <span key={g.label ?? "_"} className="inline-flex flex-wrap items-center gap-1">
-                  {g.label && !(g.parts.length === 1 && g.parts[0].toLowerCase() === g.label.toLowerCase()) ? <span className="text-[11.5px] text-muted-foreground">{g.label}</span> : null}
-                  <span className="inline-flex flex-wrap rounded-md border border-border bg-card p-0.5">
-                    {g.parts.map((p) => { const i = parts.indexOf(p); return <button key={p} type="button" role="radio" aria-checked={i === partIdx} onClick={() => { setPart(p); setV(null); }} className={chip(i === partIdx)}>{p}</button>; })}
-                  </span>
-                </span>
-              ))}
-            </div>
+            {/* two steps: the subsystem, then (when it has several) which of its curves */}
+            {(() => {
+              const labelOf = (p: string) => order?.[curves.find((c) => (c.part ?? c.failure_unit_id ?? c.curve_id) === p)?.curve_id ?? ""]?.label ?? p;
+              const groups = groupsOf(parts, labelOf);
+              const current = groups.find((g) => g.parts.includes(part)) ?? groups[0];
+              return (
+                <div className="flex flex-col gap-1">
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <span className="w-16 text-muted-foreground">subsystem</span>
+                    <div role="radiogroup" aria-label="Subsystem" className="inline-flex flex-wrap rounded-md border border-border bg-card p-0.5">
+                      {groups.map((g) => <button key={g.label ?? "_"} type="button" role="radio" aria-checked={g === current} onClick={() => { setPart(g.parts[0]); setV(null); }} className={chip(g === current)}>{g.label}</button>)}
+                    </div>
+                  </div>
+                  {current.parts.length > 1 ? (
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <span className="w-16 text-muted-foreground">curve</span>
+                      <div role="radiogroup" aria-label="Curve" className="inline-flex flex-wrap rounded-md border border-border bg-card p-0.5">
+                        {current.parts.map((p) => <button key={p} type="button" role="radio" aria-checked={p === part} onClick={() => { setPart(p); setV(null); }} className={chip(p === part)}>{p}</button>)}
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })()}
           </div>
         ) : <span className="rounded bg-muted px-2 py-0.5 text-[12px]">{part}</span>}
         {options.length > 1 ? (

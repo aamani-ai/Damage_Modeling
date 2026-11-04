@@ -7,8 +7,7 @@
 // picture above); the open rows are ?sub= (any number, comma-separated). The panel folds away (?subs=hidden).
 import Link from "next/link";
 import { useUrlParam } from "@/lib/url-state";
-import type { CurveConstruction, CurveV2, Legend, Subcomponent, SubcomponentRollup } from "@/lib/types";
-import { CurvePlot } from "./curve-plot";
+import type { CurveConstruction, Legend, Subcomponent, SubcomponentRollup } from "@/lib/types";
 import { ConstructionView, HazardUseTag, ProductionTag } from "./construction-view";
 import { fmtPct } from "@/lib/format";
 import { FileLink, Tag, ToggleArrow, TOGGLE_CLASS } from "./ui";
@@ -16,7 +15,7 @@ import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 // `when` is the condition the curve is chosen under ("freshwater screening"), from the curve's selected_by; `unit` and
 // `subsystem` are the failure unit ID and subsystem code the curve file attaches it to (what Hazard's code reads)
-export interface ConstructionCard { k: CurveConstruction; href: string; title: string; when: string | null; unit: string | null; subsystem: string | null; curve?: CurveV2 | null }
+export interface ConstructionCard { k: CurveConstruction; href: string; title: string; when: string | null; unit: string | null; subsystem: string | null }
 
 const fileName = (p: string) => p.split("/").slice(-1)[0];
 
@@ -31,20 +30,22 @@ function rollupOf(subs: Subcomponent[]): SubcomponentRollup {
   return { ...countsOf(subs), by_hazard: byHazard };
 }
 
-function Counts({ r, legend }: { r: SubcomponentRollup; legend: Legend }) {
+// ndd: how many of the "no curve yet" rows are no direct damage by the cell's decision
+function Counts({ r, legend, ndd = 0 }: { r: SubcomponentRollup; legend: Legend; ndd?: number }) {
   // "complete" is a part with a whole curve, so the counts say curve, partial and no curve yet and nothing more
   const word = (key: string) => legend.coverage.find((i) => i.key === key)?.word ?? key;
   const partial = r.incomplete - r.gap;
   return (
     <span className="tabular">
       <span className="font-medium">{r.expected}</span> expected · <span className="font-medium">{r.with_curve}</span> {word("curve")}
-      {partial ? <> (<span className="font-medium">{partial}</span> {word("partial")})</> : null} · <span className="font-medium">{r.gap}</span> {word("gap")}
+      {partial ? <> (<span className="font-medium">{partial}</span> {word("partial")})</> : null} · <span className="font-medium">{r.gap - ndd}</span> {word("gap")}{ndd ? <> · <span className="font-medium">{ndd}</span> {word("no_direct_damage")}</> : null}
     </span>
   );
 }
 
 function coverageWord(s: Subcomponent, legend: Legend) {
-  const key = s.coverage === "gap" ? "gap" : s.completeness === "incomplete" ? "partial" : s.cell_state === "whole" ? "whole" : "curve";
+  // a part the cell decided this hazard does not damage directly has no curve on purpose: say so, not "no curve yet"
+  const key = s.coverage === "gap" ? (s.gap?.no_direct_damage ? "no_direct_damage" : "gap") : s.completeness === "incomplete" ? "partial" : s.cell_state === "whole" ? "whole" : "curve";
   return legend.coverage.find((i) => i.key === key)?.word ?? key;
 }
 
@@ -156,7 +157,8 @@ function GapView({ s, blobBase }: { s: Subcomponent; blobBase: string }) {
   );
 }
 
-function RowDetail({ s, cards, legend, blobBase, names }: { s: Subcomponent; cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string; names?: string[] }) {
+// compact (the asset page): name the curves and link to them on the curve page instead of building each one here
+function RowDetail({ s, cards, legend, blobBase, names, compact = false, buildingSlug }: { s: Subcomponent; cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string; names?: string[]; compact?: boolean; buildingSlug?: string | null }) {
   const shown = s.construction.filter((c) => cards[c.curve_id]);
   const ids = [...new Map(shown.filter((c) => cards[c.curve_id].unit).map((c) => [cards[c.curve_id].unit!, cards[c.curve_id].subsystem])).entries()];
   // two curves for one part (fresh and salt water) carry the same part name: the condition tells them apart
@@ -187,9 +189,28 @@ function RowDetail({ s, cards, legend, blobBase, names }: { s: Subcomponent; car
           {s.borrowed_from.tier_word ? ` (the transfer is ${s.borrowed_from.tier_word})` : ""}.{s.borrowed_from.rationale ? <span className="text-muted-foreground"> {s.borrowed_from.rationale}</span> : null}
         </p>
       ) : null}
-      {shown.map((c) => (
+      {/* the Hazard comparison once for the row (its curves share it), where the curves are built */}
+      {!compact && shown.length && cards[shown[0].curve_id].k.production_use.hazard?.sentences.length ? (
+        <div className="rounded-md border border-warn/40 bg-warn-bg px-2.5 py-1.5 text-[12px] leading-snug">
+          <HazardUseTag state={cards[shown[0].curve_id].k.production_use.hazard!.state} legend={legend} />
+          {cards[shown[0].curve_id].k.production_use.hazard!.sentences.map((l) => <p key={l} className="mt-0.5">{l}</p>)}
+        </div>
+      ) : null}
+      {compact && shown.length ? (
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-md border border-border px-2.5 py-2 text-[12.5px]">
+          <span>
+            <span className="font-medium">{shown.length} curve{shown.length === 1 ? "" : "s"}</span>
+            <span className="text-muted-foreground"> · {[...new Set(shown.map((c) => titleOf(c.curve_id)))].join(" · ")}{s.evidence_labels.length ? ` · ${s.evidence_labels.join(" · ")}` : ""}</span>
+          </span>
+          {s.production_use.hazard ? <HazardUseTag state={s.production_use.hazard} legend={legend} /> : null}
+          {s.entry_id ? (
+            <Link href={`/cells/${s.entry_id}?${new URLSearchParams({ ...(buildingSlug ? { building: buildingSlug } : {}), part: cards[shown[0].curve_id].title }).toString()}#card-curve`} className="ml-auto text-accent hover:underline">
+              see {shown.length === 1 ? "the curve" : "the curves"} on the {s.hazard.label.toLowerCase()} page ▸
+            </Link>
+          ) : null}
+        </div>
+      ) : shown.map((c) => (
         <div key={c.curve_id} className="rounded-md border border-border p-2.5">
-          {cards[c.curve_id].curve ? <div className="mb-2"><CurvePlot curves={[cards[c.curve_id].curve!]} axis={cards[c.curve_id].curve!.axis} height={220} legend={false} ariaLabel={`${titleOf(c.curve_id)}: the curve`} /></div> : null}
           <ConstructionView k={cards[c.curve_id].k} legend={legend} blobBase={blobBase} curveHref={cards[c.curve_id].href} title={titleOf(c.curve_id)} hazardDetail={false} />
         </div>
       ))}
@@ -199,10 +220,11 @@ function RowDetail({ s, cards, legend, blobBase, names }: { s: Subcomponent; car
 }
 
 // teamNames: hazard slug → subsystem key → the hazard team's own part names (asset pages; from the split table)
-export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, defaultHazard, cards, legend, blobBase, picker = true, notes = [], overview = false, teamNames, buildings, title = "Every subsystem, curve or gap", twinBelow = false }: {
+export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, defaultHazard, cards, legend, blobBase, picker = true, notes = [], overview = false, teamNames, buildings, title = "Every subsystem, curve or gap", twinBelow = false, compact = false, buildingSlug = null }: {
   subs: Subcomponent[]; rollup: SubcomponentRollup; hazards: { slug: string; label: string }[]; defaultHazard: string;
   cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string; picker?: boolean; notes?: string[];
   overview?: boolean; teamNames?: Record<string, Record<string, string[]>>; title?: string; twinBelow?: boolean;
+  compact?: boolean; buildingSlug?: string | null;
   // a shared real-estate cell page: type slug → building; ?building= keeps that building's rows only
   buildings?: Record<string, string>;
 }) {
@@ -257,7 +279,7 @@ export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, d
               ) : null}
             </div>
           ) : null}
-          {all ? null : <p className="px-3 pb-1.5 text-[12px] text-muted-foreground">{hazards.find((h) => h.slug === hz)?.label}: <Counts r={here} legend={legend} /></p>}
+          {all ? null : <p className="px-3 pb-1.5 text-[12px] text-muted-foreground">{hazards.find((h) => h.slug === hz)?.label}: <Counts r={here} legend={legend} ndd={rows.filter((s) => s.coverage === "gap" && s.gap?.no_direct_damage).length} /></p>}
           {notes.map((n) => <p key={n} className="px-3 pb-1.5 text-[12px] text-muted-foreground">{n}</p>)}
           {all ? <AllHazards subs={subs} hazards={hazards} legend={legend} rollup={rollup} open={(h, key) => { setHz(h); setOpen(`${h}:${key}`); }} /> : (
           <div className="overflow-x-auto border-t border-border">
@@ -303,7 +325,7 @@ export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, d
                     </tr>,
                     isOpen ? (
                       <tr key={`${id}-detail`} id={`sub-${id}`} className="bg-muted/30">
-                        <td colSpan={5} className="px-3 py-2.5"><RowDetail s={s} cards={cards} legend={legend} blobBase={blobBase} names={teamNames?.[s.hazard.slug]?.[s.key]} /></td>
+                        <td colSpan={5} className="px-3 py-2.5"><RowDetail s={s} cards={cards} legend={legend} blobBase={blobBase} names={teamNames?.[s.hazard.slug]?.[s.key]} compact={compact} buildingSlug={buildingSlug} /></td>
                       </tr>
                     ) : null,
                   ];
