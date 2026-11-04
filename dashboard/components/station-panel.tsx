@@ -57,7 +57,7 @@ export function StationPanel({ station, cell, cites, curves, m }: { station: Pla
               {SHOW_FIELD_REPORTS && p.occurrence ? <span className="block text-muted-foreground">{p.occurrence.sentence}</span> : null}
             </Line>
           ))}
-          {cell.answer.withheld_units.map((w) => <Line key={w.failure_unit_id} label="Withheld">{w.sentence}</Line>)}
+          {cell.answer.withheld_units.map((w) => <Line key={w.failure_unit_id} label="Withheld"><span className="font-medium">{w.name ?? w.failure_unit_id}</span> <span className="text-muted-foreground">— {w.sentence}</span></Line>)}
           {pl.blocks.covered.not_covered.length ? <Line label="No curve yet">{pl.blocks.covered.not_covered.join(" · ")}</Line> : null}
         </Words>
       );

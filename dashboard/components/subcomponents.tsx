@@ -10,7 +10,7 @@ import { useUrlParam } from "@/lib/url-state";
 import type { CurveConstruction, Legend, Subcomponent, SubcomponentRollup } from "@/lib/types";
 import { HazardUseTag, ProductionTag } from "./construction-view";
 import { fmtPct, unitTells } from "@/lib/format";
-import { FileLink, Tag, ToggleArrow, TOGGLE_CLASS } from "./ui";
+import { FileLink, ToggleArrow, TOGGLE_CLASS } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 // `when` is the condition the curve is chosen under ("freshwater screening"), from the curve's selected_by; `unit` and
@@ -158,7 +158,7 @@ function GapView({ s, blobBase }: { s: Subcomponent; blobBase: string }) {
 }
 
 // The row's curves in brief, with the way to them: on the curve page itself (curveHere) the link opens "The curve" there
-function RowDetail({ s, cards, legend, blobBase, names, curveHere = false, buildingSlug }: { s: Subcomponent; cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string; names?: string[]; curveHere?: boolean; buildingSlug?: string | null }) {
+function RowDetail({ s, cards, blobBase, names, curveHere = false, buildingSlug }: { s: Subcomponent; cards: Record<string, ConstructionCard>; blobBase: string; names?: string[]; curveHere?: boolean; buildingSlug?: string | null }) {
   const [, setPart] = useUrlParam("part");
   const [, setV] = useUrlParam("v");
   const shown = s.construction.filter((c) => cards[c.curve_id]);
@@ -182,6 +182,8 @@ function RowDetail({ s, cards, legend, blobBase, names, curveHere = false, build
           {ids.map(([u, ss], i) => <span key={u} className="text-muted-foreground">{names?.length || i ? " · " : ""}failure unit <span className="font-mono text-[11.5px] text-foreground">{u}</span>{ss ? <> · subsystem code <span className="font-mono text-[11.5px] text-foreground">{ss}</span></> : null}</span>)}
         </p>
       ) : null}
+      {/* a part name in the cell's files that reads wider than what the curve covers, and what it really covers */}
+      {s.scope_notes.map((n) => <p key={n.note} className="rounded-md border border-warn/40 bg-warn-bg px-2 py-1 text-[12px] leading-snug"><span className="font-medium">About the name:</span> {n.note}</p>)}
       {s.note || s.share != null ? (
         <p className="text-[12.5px]">
           {s.note}{s.note && s.share != null ? " " : ""}
@@ -202,8 +204,6 @@ function RowDetail({ s, cards, legend, blobBase, names, curveHere = false, build
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
             <span className="font-medium">{shown.length} curve{shown.length === 1 ? "" : "s"}</span>
             {s.evidence_labels.length ? <span className="text-muted-foreground">· {s.evidence_labels.join(" · ")}</span> : null}
-            <ProductionTag state={s.production_use.state} legend={legend} />
-            {s.production_use.hazard ? <HazardUseTag state={s.production_use.hazard} legend={legend} /> : null}
             {s.entry_id ? (
               curveHere ? (
                 <button type="button" onClick={() => { setPart(cards[shown[0].curve_id].title); setV(null); document.getElementById("card-curve")?.scrollIntoView({ behavior: "smooth", block: "start" }); }} className="ml-auto text-accent hover:underline">
@@ -328,7 +328,7 @@ export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, d
                           <span aria-hidden className="mr-1 inline-block w-4 text-[14px] leading-none text-muted-foreground">{isOpen ? "▾" : "▸"}</span>
                           <span className={s.coverage === "gap" ? "" : "font-medium text-foreground"}>{s.label}</span>
                         </button>
-                        {s.scope_notes.length ? <Tag tone="warn" className="ml-1" title={s.scope_notes[0].note}>about the name</Tag> : null}
+                        
                       </th>
                       <td className="px-2 py-1 text-right font-mono tabular" title={s.share_basis ?? undefined}>{s.share != null ? fmtPct(s.share, 1) : "—"}</td>
                       <td className="px-2 py-1">{s.coverage === "gap" ? <span className="tile-gap rounded-sm px-1">{coverageWord(s, legend)}</span> : coverageWord(s, legend)}</td>
@@ -342,7 +342,7 @@ export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, d
                     </tr>,
                     isOpen ? (
                       <tr key={`${id}-detail`} id={`sub-${id}`} className="bg-muted/30">
-                        <td colSpan={5} className="px-3 py-2.5"><RowDetail s={s} cards={cards} legend={legend} blobBase={blobBase} names={teamNames?.[s.hazard.slug]?.[s.key]} curveHere={!picker} buildingSlug={buildingSlug} /></td>
+                        <td colSpan={5} className="px-3 py-2.5"><RowDetail s={s} cards={cards} blobBase={blobBase} names={teamNames?.[s.hazard.slug]?.[s.key]} curveHere={!picker} buildingSlug={buildingSlug} /></td>
                       </tr>
                     ) : null,
                   ];

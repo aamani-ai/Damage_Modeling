@@ -12,7 +12,7 @@ from . import chain as chain_mod
 from . import hazard_main
 from . import hazard_use
 from . import research
-from .plain_reasons import plain as plain_reason, source_doc
+from .plain_reasons import plain as plain_reason, source_doc, unit_name
 from . import twin as twin_mod
 from .catalogue import Entry, curve_records, load_entries
 from .construction import construction_block, constructing_files, legend, path_leaks
@@ -373,7 +373,9 @@ def build(write: bool = True) -> dict[str, Any]:
                           "shape": r.get("shape"), "shape_basis": r.get("shape_basis"), "cost": r.get("cost"), "cost_basis": r.get("cost_basis"),
                           "notes": r.get("notes") or [], "occurrence": {"mark": occ_row["mark"], "state": occ_row["state"], "sentence": occ_row["sentence"]} if occ_row else None,
                           "drawn": any(c["drawn"] for c in sampled["curves"] if c["part"] == r["part"])})
-        withheld_units = [{"failure_unit_id": f.get("id"), "subsystem": f.get("subsystem"), "reasons": f.get("withheld_reason_codes") or [], "sentence": SENTENCES["withheld"]["page"].format(condition="; ".join(humanise(r).lower() for r in (f.get("withheld_reason_codes") or ["no reason code in the artifact"])))}
+        # each withheld unit named in words, with its reason codes in words (plain_reasons), not the codes humanised
+        withheld_units = [{"failure_unit_id": f.get("id"), "name": unit_name(f.get("id")), "subsystem": f.get("subsystem"), "reasons": f.get("withheld_reason_codes") or [],
+                           "sentence": (plain_reason("; ".join(f.get("withheld_reason_codes") or []))[0] if f.get("withheld_reason_codes") else "The curve file gives no reason code.")}
                           for f in a.get("failure_units") or [] if str(f.get("treatment", "")).startswith("withheld")]
         title = f"{e.data['hazard']} × {e.data['asset']}"
         noun = next((a.get("noun") for a in sl["assets"] if a["slug"] == aslug), e.data["asset"])

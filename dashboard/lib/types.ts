@@ -161,7 +161,7 @@ export interface Cell {
     axis_groups: { axis: Axis; curve_ids: string[] }[]; curve_ids: string[]; input: string | null;
     how_to_use: { share_of?: string; outputs?: Record<string, string>; conditions?: string[] } | null;
     value: ValueBlock | null; not_covered: string[];
-    withheld_units: { failure_unit_id: string; subsystem: string; reasons: string[]; sentence: string }[];
+    withheld_units: { failure_unit_id: string; name?: string; subsystem: string; reasons: string[]; sentence: string }[];
     hazard_axis: unknown;
   };
   parts: Part[];

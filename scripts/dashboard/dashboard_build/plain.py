@@ -535,19 +535,18 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
         p = f"{hazard} on {noun}: {_lower_first(method)}." if method else f"{hazard} on {noun}."
         if names:
             p += f" It names {len(names)} part{'s' if len(names) != 1 else ''}: {_join(names)}."
-        if e.get("out_of_scope"):
-            p += f" Outside its scope: {_join([_lower_first(plain_text(x)) for x in e['out_of_scope']], 'and')}."
-        if e.get("missing_mechanisms"):
-            p += f" Kinds of damage it does not include: {_join([_lower_first(plain_text(x)) for x in e['missing_mechanisms']])}."
+        # what it leaves out is listed once, below this paragraph and in "What is missing"; the paragraph only counts it
+        left = len(e.get("out_of_scope") or []) + len(e.get("missing_mechanisms") or [])
+        if left:
+            p += f" It also lists {left} thing{'s' if left != 1 else ''} it leaves out (below)."
         fact = f"{len(names)} part{'s' if len(names) != 1 else ''}" + (f" · {len(e.get('out_of_scope') or [])} left out" if e.get("out_of_scope") else "")
     elif sid == "units":
         names = [pt["part"] for pt in parts]
         p = f"This hazard's curves cover {len(names)} part{'s' if len(names) != 1 else ''} of the {singular(noun)}, named as the catalogue entry writes them: {_join(names)}." if names else "No part rows are listed in the catalogue entry."
+        # the withheld units and the parts with no curve are each listed once, below this paragraph
         if withheld:
-            p += f" {len(withheld)} further unit{'s are' if len(withheld) != 1 else ' is'} named but withheld — {_join([humanise(w['failure_unit_id']).lower() for w in withheld])} — a stated 'not zero', not a curve."
-        nc = [plain_text(_strip_amount(x)) for x in e.get("not_covered") or []]
-        if nc:
-            p += f" Parts of the plant's value with no curve yet: {_join([_lower_first(x) for x in nc])}."
+            p += (f" {len(withheld)} further unit{'s are' if len(withheld) != 1 else ' is'} named but withheld (below): the cell says they can be damaged"
+                  " (\"not zero\") but gives no curve for them yet.")
         fact = f"{len(names)} part{'s' if len(names) != 1 else ''}" + (f" · {len(withheld)} withheld" if withheld else "")
     elif sid == "axis_form":
         curves = ctx["curves"]

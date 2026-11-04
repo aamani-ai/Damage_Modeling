@@ -82,6 +82,19 @@ SENTENCES = [
 ]
 
 
+ACRONYMS = {"gsu", "scada", "dc", "ac", "pcs", "mv", "hv", "bess", "pv", "om", "sbos"}
+
+
+def unit_name(failure_unit_id: str | None) -> str:
+    """'FW_GSU_SWITCHGEAR' → 'GSU switchgear': the cell's short prefix dropped, acronyms kept upper case."""
+    toks = [t for t in (failure_unit_id or "").split("_") if t]
+    if len(toks) > 1 and len(toks[0]) <= 3 and toks[0].lower() not in ("pv", "gsu", "mv"):
+        toks = toks[1:]
+    words = [t.upper() if t.lower() in ACRONYMS else t.lower() for t in toks]
+    s = " ".join(words)
+    return s[:1].upper() + s[1:] if s else "a unit"
+
+
 def source_doc(text: str | None, entry_id: str | None, write_up: str | None, register: str | None) -> dict[str, str] | None:
     """The research document that ends in this part having no curve: the one the reason cites, else the cell's
     write-up, else its catalogue entry, else (a hazard with no cell) its field-report register."""
