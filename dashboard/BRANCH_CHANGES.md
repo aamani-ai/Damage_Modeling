@@ -63,7 +63,7 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 
 ### Asset pages (for example Power plants › Solar farm)
 
-- **The curves** (folded): the library's own tiles, one per hazard including heat.
+- **The curves** (a fold, open by default): the library's own tiles, one per hazard including heat.
 - **View by subsystem**: every subsystem (cost bucket) against the hazards. It opens on Hail and has an **All
   hazards** tab. An opened row gives its value share, the cell's own name for the part, its failure unit and subsystem
   code, and its curves in brief, with a link to them on the curve page. The old part-list grid is removed.
@@ -80,7 +80,7 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 
 - **The curve** picks subsystem → part → curve. Its "How sure" names the two grades plainly: *damage at each hazard
   level* and *the dollar value it is applied to* (were "how damage rises" and "how it becomes dollars", renamed
-  everywhere). Its main references are counted and lead to the sources in step 3 instead of being listed twice.
+  everywhere). It folds (open by default). Its References line links to the sources in step 3 instead of listing them twice.
   Curves that share a name say what sets them apart (fixed tilt / tracker, fresh / salt water, module type, terrain).
 - **How this curve was made**, four steps. Each panel is complete on its own and ends with **Read from:** links to the
   GitHub files it was written from (folded), next to **Details** for reviewers (method checks, source IDs, file

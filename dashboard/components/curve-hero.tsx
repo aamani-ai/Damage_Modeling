@@ -6,13 +6,13 @@
 // words (G16, DCD-D28: how damage rises · how it becomes dollars), the main references and the field reports.
 // "Show the numbers" keeps the ledger: knots, known answers, the tier codes, parameter rows, the record's ID.
 import Link from "next/link";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { fmtDr, fmtNum, unitTells } from "@/lib/format";
 import { useUrlParam } from "@/lib/url-state";
 import type { Axis, CellV2, CurveV2, ManifestV3 } from "@/lib/types";
 import { CurvePlot } from "./curve-plot";
 import { OpenStep } from "./steps-strip";
-import { Card, Mono, SectionSummary } from "./ui";
+import { Card, Mono, SectionSummary, ToggleArrow, TOGGLE_CLASS } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 interface Option { id: string; label: string; curve: CurveV2; series: string[] | null }
@@ -72,6 +72,7 @@ export function CurveHero({ cell, curves: allCurves, buildings, order }: { cell:
   const [buildingParam] = useUrlParam("building");
   const [vParam, setV] = useUrlParam("v");
   const [compareParam, setCompare] = useUrlParam("compare");
+  const [folded, setFolded] = useState(false);
   // a shared real-estate cell opened for one building (?building=) shows that building's curves only
   const building = buildingParam && buildings?.[buildingParam] ? buildings[buildingParam] : null;
   const own = building ? allCurves.filter((c) => (c.part ?? "").startsWith(building)) : [];
@@ -102,10 +103,11 @@ export function CurveHero({ cell, curves: allCurves, buildings, order }: { cell:
   const chip = (active: boolean, extra = "") => `rounded px-2 py-0.5 text-[12px] ${active ? "bg-accent/10 text-accent" : "text-muted-foreground hover:text-foreground"} ${extra}`;
   const axisGroupsOther = cell.answer.axis_groups.filter((g) => g.axis.id !== axis.id);
   return (
-    <Card id="card-curve" className="mt-3 scroll-mt-28">
+    // folds like the page's other sections, open by default: folded, only its heading shows
+    <Card id="card-curve" className={`mt-3 scroll-mt-28 ${folded ? "[&>*:not(:first-child)]:hidden" : ""}`}>
       {/* top-aligned, so "The curve" stays put when a part row opens below the subsystem row */}
-      <div className="flex flex-wrap items-start gap-x-4 gap-y-1.5 px-3 pb-1 pt-2.5">
-        <span className="pt-1 text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">The curve</span>
+      <div className={`flex flex-wrap items-start gap-x-4 gap-y-1.5 px-3 pb-1 pt-2.5 ${folded ? "[&>*:not(:first-child)]:hidden" : ""}`}>
+        <button type="button" aria-expanded={!folded} onClick={() => setFolded(!folded)} className={`${TOGGLE_CLASS} pt-1`}><ToggleArrow open={!folded} />The curve</button>
         {parts.length > 1 ? (
           <div className="flex flex-wrap items-center gap-1.5 text-[12px]">
             {/* subsystem (the cost bucket) → part (the cell's catalogue label) → curve (below: the individual curves, when a
@@ -172,9 +174,9 @@ export function CurveHero({ cell, curves: allCurves, buildings, order }: { cell:
             <p className="text-[11.5px] text-muted-foreground">Two separate grades: one for the damage ratio at each hazard level, one for the dollar value it is multiplied by (loss = damage ratio × value).</p>
           </div>
           <div>
-            <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Main references</div>
+            <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">References</div>
             {/* the references are listed once, with every other source, in step 3 */}
-            <p>{cap.main_references.length ? `${cap.main_references.length} main reference${cap.main_references.length === 1 ? "" : "s"}` : "No main reference named"} · <OpenStep step="numbers">see all the sources in step 3, Where the numbers come from ▸</OpenStep></p>
+            <p><OpenStep step="numbers">see all the sources in step 3, Where the numbers come from ▸</OpenStep></p>
           </div>
           {SHOW_FIELD_REPORTS ? (
             <div>
