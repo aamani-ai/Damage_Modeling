@@ -209,7 +209,7 @@ function RowDetail({ s, cards, blobBase, names, curveHere = false, buildingSlug 
             {s.evidence_labels.length ? <span className="text-muted-foreground">· {s.evidence_labels.join(" · ")}</span> : null}
             {s.entry_id ? (
               curveHere ? (
-                <button type="button" onClick={() => { setPart(cards[shown[0].curve_id].title); setV(null); window.setTimeout(() => document.getElementById("card-curve")?.scrollIntoView({ block: "start" }), 0); }} className="ml-auto text-accent hover:underline">
+                <button type="button" onClick={() => { setPart(cards[shown[0].curve_id].title); setV(null); window.dispatchEvent(new Event("open-curve")); window.setTimeout(() => document.getElementById("card-curve")?.scrollIntoView({ block: "start" }), 0); }} className="ml-auto text-accent hover:underline">
                   see {shown.length === 1 ? "the curve" : "the curves"} in “The curve” ▸
                 </button>
               ) : (

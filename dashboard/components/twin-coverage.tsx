@@ -334,7 +334,7 @@ export function TwinCoverage({
     setPart(part);
     setFull(false);
     // an instant jump: a smooth scroll can be dropped (a busy page, a background tab) and the click then seems to do nothing
-    window.setTimeout(() => document.getElementById("card-curve")?.scrollIntoView({ block: "start" }), 0);
+    window.dispatchEvent(new Event("open-curve")); window.setTimeout(() => document.getElementById("card-curve")?.scrollIntoView({ block: "start" }), 0);
   };
   const systems = hz.systems[treeKey] ?? [];
   const counts: Partial<Record<CoverageState, number>> = {};

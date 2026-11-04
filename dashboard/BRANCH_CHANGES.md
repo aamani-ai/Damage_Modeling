@@ -80,7 +80,7 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 
 - **The curve** picks subsystem → part → curve. Its "How sure" names the two grades plainly: *damage at each hazard
   level* and *the dollar value it is applied to* (were "how damage rises" and "how it becomes dollars", renamed
-  everywhere). It folds (open by default). Its References line links to the sources in step 3 instead of listing them twice.
+  everywhere). It folds (open by default); a "see the curve" link opens it if folded. Its References line links to the sources in step 3 instead of listing them twice.
   Curves that share a name say what sets them apart (fixed tilt / tracker, fresh / salt water, module type, terrain).
 - **How this curve was made**, four steps. Each panel is complete on its own and ends with **Read from:** links to the
   GitHub files it was written from (folded), next to **Details** for reviewers (method checks, source IDs, file

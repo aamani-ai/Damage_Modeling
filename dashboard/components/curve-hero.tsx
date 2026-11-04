@@ -6,7 +6,7 @@
 // words (G16, DCD-D28: how damage rises · how it becomes dollars), the main references and the field reports.
 // "Show the numbers" keeps the ledger: knots, known answers, the tier codes, parameter rows, the record's ID.
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { fmtDr, fmtNum, unitTells } from "@/lib/format";
 import { useUrlParam } from "@/lib/url-state";
 import type { Axis, CellV2, CurveV2, ManifestV3 } from "@/lib/types";
@@ -73,6 +73,12 @@ export function CurveHero({ cell, curves: allCurves, buildings, order }: { cell:
   const [vParam, setV] = useUrlParam("v");
   const [compareParam, setCompare] = useUrlParam("compare");
   const [folded, setFolded] = useState(false);
+  // a link elsewhere on the page that jumps to the curve ("see the curve") opens it first
+  useEffect(() => {
+    const open = () => setFolded(false);
+    window.addEventListener("open-curve", open);
+    return () => window.removeEventListener("open-curve", open);
+  }, []);
   // a shared real-estate cell opened for one building (?building=) shows that building's curves only
   const building = buildingParam && buildings?.[buildingParam] ? buildings[buildingParam] : null;
   const own = building ? allCurves.filter((c) => (c.part ?? "").startsWith(building)) : [];
