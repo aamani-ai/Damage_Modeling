@@ -50,6 +50,25 @@ export function NamesTable({ cell, curves, covs, hazardSlug, buildings, words }:
     <section className="mt-3 rounded-lg border border-border bg-card" aria-label="How the names connect">
       <details className="group">
         <SectionSummary className="px-3 py-2">How the names connect <span className="ml-2 font-normal normal-case tracking-normal">subsystem → the cell&apos;s part → failure unit and curves → Digital Twin parts</span></SectionSummary>
+        {/* the three ways of counting, said once in plain words before the table */}
+        {(() => {
+          const withCurve = subs.filter((x) => x.coverage !== "gap" && x.curve_ids.length).length;
+          const nParts = new Set(rows.filter((r) => r.part).map((r) => r.part)).size;
+          // the twin's systems: the children of each tree's root (the asset, and the plant or site)
+          const nTwin = Object.values(cov?.trees ?? {}).reduce((n, t) => n + Object.values(t.nodes).filter((x) => x.p === t.root).length, 0);
+          const noun = cell.asset.label.toLowerCase();
+          return (
+            <div className="max-w-[1100px] space-y-1 border-t border-border px-3 py-2 text-[12.5px] leading-snug">
+              <p><span className="font-medium">{cell.hazard.label} × {noun}{building ? ` (${building.toLowerCase()})` : ""} has a curve for {withCurve} of {subs.length} subsystems, through {nParts} part{nParts === 1 ? "" : "s"}.</span> {subs.length - withCurve ? `The other ${subs.length - withCurve} have no curve of their own (each row below says why).` : ""}</p>
+              <p className="text-muted-foreground">Three ways of counting appear on this page, and they are not meant to match:</p>
+              <ul className="list-disc pl-5 text-muted-foreground">
+                <li><span className="text-foreground">{subs.length} subsystems</span>: the cost buckets the asset&apos;s value is split into. This is the list a curve should cover; the counts in &ldquo;Every subsystem, curve or gap&rdquo; use it.</li>
+                <li><span className="text-foreground">{nParts} part{nParts === 1 ? "" : "s"}</span>: how this hazard&apos;s research team split what it prices, in its own words. One subsystem can hold several parts, so this is not a target to reach.</li>
+                {nTwin ? <li><span className="text-foreground">{nTwin} Digital Twin systems</span>: how the 3D model breaks the asset down, used for the picture above. Also not a target.</li> : null}
+              </ul>
+            </div>
+          );
+        })()}
         <div className="overflow-x-auto border-t border-border">
           <table className="w-full min-w-[760px] text-[12.5px]">
             <thead>
