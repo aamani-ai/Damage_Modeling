@@ -28,6 +28,10 @@ def _resolve(e: dict[str, Any], link_commit: str) -> dict[str, Any]:
     if e["repo"] == "damage":
         ok = (ROOT / e["path"]).exists()
         return {**e, "found": ok, "link": f"{REPO_URL}/blob/{link_commit}/{e['path']}" if ok else None, "where": "in this repository"}
+    if e.get("branch"):  # the content is only on that branch, even where main has a file at the same path
+        hit = next(((name, sha) for name, sha, files in hazard_main._branches() if name == e["branch"] and e["path"] in files), None)
+        if hit:
+            return {**e, "found": True, "link": f"{hazard_main.HAZARD_REPO_URL}/blob/{hit[1]}/{e['path']}", "where": f"not on Hazard's main; on Hazard branch {hit[0]}"}
     h = hazard_main.lookup(e["path"])
     where = {"on_main": "on Hazard's main", "moved": h.get("words"), "on_branch": h.get("words"), "not_found": h.get("words"),
              "unchecked": "in Hazard's repository (not checked)"}.get(h["state"], h.get("words"))
