@@ -1,23 +1,23 @@
 {
  "schema": "damage_dashboard_manifest.v1",
- "commit": "905a83d",
- "commit_full": "905a83dc84851e868e9b4d64d083546cb94291a3",
- "link_commit": "905a83dc84851e868e9b4d64d083546cb94291a3",
+ "commit": "f05a7b7",
+ "commit_full": "f05a7b723a7521f86487e74af5684d8b69472c2a",
+ "link_commit": "f05a7b723a7521f86487e74af5684d8b69472c2a",
  "link_note": null,
  "source": {
   "mode": "main",
   "ref": "origin/main",
-  "commit": "905a83d",
-  "commit_full": "905a83dc84851e868e9b4d64d083546cb94291a3",
+  "commit": "f05a7b7",
+  "commit_full": "f05a7b723a7521f86487e74af5684d8b69472c2a",
   "dirty": false,
-  "label": "main at 905a83d"
+  "label": "main at f05a7b7"
  },
  "hazard_main": {
   "available": true,
   "ref": "origin/main",
-  "commit": "7cf8121498fb77db20902434759af89f5d845e1a",
+  "commit": "9bc79cdcb2684f849011d3493c83b70b1ee1b241",
   "behind": false,
-  "sentence": "Hazard's main at 7cf8121, read from GitHub"
+  "sentence": "Hazard's main at 9bc79cd, read from GitHub"
  },
  "catalogue_commit_note": "catalogue entries and artifacts read at this commit; every number traces to a file at it",
  "counts": {
@@ -6238,12 +6238,12 @@
    {
     "key": "no_direct_damage",
     "word": "no direct damage",
-    "meaning": "Judged not to be damaged directly by this hazard: by the cell's own coverage decision, or, where the cell is silent, read from how the hazard acts (to confirm with the cell owner; the part's note says which)."
+    "meaning": "Not a gap: judged not to be damaged directly by this hazard: by the cell's own coverage decision, or, where the cell is silent, read from how the hazard acts (to confirm with the cell owner; the part's note says which)."
    },
    {
     "key": "outside",
     "word": "not priced by this curve",
-    "meaning": "Left out of the value this curve prices (for example contents, modeled separately)."
+    "meaning": "Not a gap: not part of the value this cell prices, by design (the land around a building, a resilience measure such as a floodwall, the export line)."
    }
   ],
   "completeness": [
@@ -6277,7 +6277,7 @@
    {
     "key": "no_budget",
     "word": "no value budget for buildings yet",
-    "meaning": "Real estate has no budget splitting a building's value into its parts, so the split cannot be worked out; each curve is a share of the building's replacement cost, which the consumer supplies."
+    "meaning": "Buildings have subsystem rows (structure, roof, contents and so on) but no budget saying what share of the building each row is worth, so the split cannot be worked out. Each curve is a share of the whole building's replacement cost, which Hazard supplies."
    }
   ],
   "evidence": [
@@ -6380,7 +6380,7 @@
    {
     "key": "value",
     "word": "Value covered",
-    "meaning": "Of everything the asset is worth (its reference plant's value budget), how much this hazard's curves price; the parts it is split into are under Value covered below."
+    "meaning": "The asset's value is split into its subsystems (for solar: PV modules, mounting, inverters, labour and so on), using its value budget: the NREL cost ledger for solar and wind, Hazard's reference budgets for the battery and the substation, none yet for buildings. Value covered is the share of that value in subsystems this hazard's curves price. It measures coverage only: Hazard's loss multiplies each curve by its own value on its own plant, which can differ. The parts are under Value covered below."
    },
    {
     "key": "review",
