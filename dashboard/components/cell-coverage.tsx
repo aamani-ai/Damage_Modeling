@@ -35,7 +35,7 @@ export function CellCoverage({ covs, hazardSlug, loadOrder }: { covs: CellCov[];
       <button type="button" aria-expanded={open} aria-controls="card-coverage-body" onClick={() => setPicture(open ? null : "open")} className={TOGGLE_CLASS}>
         <ToggleArrow open={open} />What this curve covers on the Digital Twin
       </button>
-      <Link href={`/assets/${current.slug}?hazard=${hazardSlug}`} className="ml-1 font-normal normal-case tracking-normal text-accent hover:underline">on the {current.label.toLowerCase()} page ▸</Link>
+      <Link href={`/assets/${current.slug}?hazard=${hazardSlug}`} className="ml-1 text-[12px] font-normal normal-case tracking-normal text-accent hover:underline">on the {current.label.toLowerCase()} page ▸</Link>
     </>
   );
   return (
@@ -45,7 +45,7 @@ export function CellCoverage({ covs, hazardSlug, loadOrder }: { covs: CellCov[];
           <TwinCoverage key={current.slug} cov={current.cov} loadOrder={loadOrder} hazardSlug={hazardSlug} mode="cell" height={400} title={title} hazardPicker={picker} />
         </div>
       ) : (
-        <div className="px-3 py-2"><span className="text-[12px] text-muted-foreground">{title}</span></div>
+        <div className="flex flex-wrap items-center px-3 py-2 text-[12px] text-muted-foreground">{title}</div>
       )}
     </section>
   );

@@ -296,7 +296,7 @@ export interface Caption {
   seen_in_field: { sentence: string; state: string; href: string | null; words: string };
   main_references: KeyReference[]; references_from: string;
 }
-export type CellV2 = Cell & { plain: Plain; hazard_note?: { title: string; lines: string[] } | null; gap_reason_own?: string | null; gap_reason_source?: { label: string; path: string } | null };
+export type CellV2 = Cell & { plain: Plain; hazard_note?: { title: string; lines: string[] } | null; gap_reason_own?: string | null; gap_reason_source?: { label: string; path: string } | null; cell_notes?: string[] };
 export type CurveV2 = Curve & { caption: Caption; sources_resolved: SourceRow[]; plain_tiers: { shape: string; cost: string }; rail_plain: Plain["rail"] };
 
 export interface AssetCellV2 {

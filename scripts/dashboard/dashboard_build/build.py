@@ -919,6 +919,18 @@ def build(write: bool = True) -> dict[str, Any]:
     # each cell's one-line summary (the tile's hover and the line under the cell's title), in plain words from the
     # cell's own data: how many curves for which parts, what they are read against, how sure the numbers are, and how
     # much of the plant's value is priced. The catalogue's own method wording stays in the step panels.
+    # notes a reviewer asked for (SJ, 30 Oct), shown under the cell's subsystem list; how Hazard combines convective
+    # wind read from Hazard's perils/convective_wind (event_losses.py, damage.py, solar_damage.py) on 5 Nov 2026
+    CELL_NOTES = {
+        "flood_wind": ["The one curve here is FEMA Hazus's flood curve for a standalone substation: \"whole facility\" means the whole substation, not the whole wind farm. "
+                       "It prices only the wind farm's GSU substation. The turbines, collection network, civil works and control building have no flood curve yet. "
+                       "The value shown as priced is the fieldwork and transport support, which the cell adds in step with the substation's damage; the substation itself sits inside the ledger's one line for collection and the GSU substation (partly priced)."],
+        "wind_tornado_wind": ["How Hazard uses these curves: its convective-wind loss adds two kinds of event. Strong-wind (straight-line) events are priced with these curves as drawn; "
+                              "tornado events with the same curves shifted to start at lower speeds (the tornado shift). The two yearly losses are added under one cap. "
+                              "Hazard leaves the power-electronics curve out."],
+        "strong_wind_solar": ["How Hazard uses these curves: one set of curves for both strong-wind (straight-line) and tornado events, because both are read as a 3-second gust; "
+                              "the two kinds of event are added into one convective-wind loss under one cap."],
+    }
     whole_word = {"substation": "the station's", "real_estate": "the building's"}
     for e in entries:
         c_ = cells.get(e.id) or {}
@@ -945,19 +957,38 @@ def build(write: bool = True) -> dict[str, Any]:
                 + (f" ({_join([label_case(x) for x in parts_])})" if len(parts_) <= 3 else "")]
         if e.kind == "binding":
             bits[0] += f", borrowed from {cells.get(src, {}).get('title', src)}"
+        # each clause says what it means (SJ's review: a reader should not need the legend for the header line)
+        sents = [f"{lead}: " + bits[0] + "."]
         if axes_:
-            bits.append(f"read against {axes_[0]}" if len(axes_) == 1 else f"read against {len(axes_)} hazard measures")
+            sents.append(f"Each curve reads {axes_[0]}." if len(axes_) == 1 else
+                         f"The curves read {len(axes_)} different hazard measures: {_join(axes_)}.")
         word = (c_.get("plain") or {}).get("word")
         if word:
-            bits.append(f"the numbers are {word}")
+            sents.append({"our judgment": "The numbers are our judgment: no published source gives them; they were built by reasoning from the references.",
+                          "borrowed": "The numbers are borrowed: taken from a similar asset or a related study and adapted.",
+                          "published": "The numbers are published: taken from a published source."}.get(word, f"The numbers are {word}."))
         vs = c_.get("value_split") or {}
         if vs.get("priced") is not None:
             whose = whole_word.get(asset_slug(e.data["asset"], sl), "the plant's")
-            bits.append(f"{fmt_pct(vs['priced'])} of {whose} value is priced" + (f", {fmt_pct(vs['partly'])} partly" if vs.get("partly", 0) >= 0.005 else ""))
-        text = f"{lead}: " + "; ".join(bits) + "."
+            sent = f"{fmt_pct(vs['priced'])} of {whose} value is priced" + (f", {fmt_pct(vs['partly'])} partly" if vs.get("partly", 0) >= 0.005 else "")
+            if vs.get("no_damage", 0) >= 0.005:
+                sent += f"; {fmt_pct(vs['no_damage'])} is not damaged directly by this hazard"
+            if vs.get("not_priced", 0) >= 0.005:
+                # the unpriced rows by name, when they add up to the split's own figure
+                rows_ = [s_ for s_ in (c_.get("subcomponents") or []) if s_["coverage"] == "gap" and not (s_.get("gap") or {}).get("no_direct_damage")
+                         and not s_.get("cost_follows") and s_.get("share")]
+                named = [s_ for s_ in rows_ if s_["share"] >= 0.005]
+                named = sorted(named, key=lambda s_: -s_["share"])
+                ok = abs(sum(s_["share"] for s_ in rows_) - vs["not_priced"]) < 0.005
+                sent += (f"; {fmt_pct(vs['not_priced'])} could be damaged but has no curve, so it is left out of the loss"
+                         + (" (" + ", ".join(f"{label_case(s_['label'])} {fmt_pct(s_['share'])}" for s_ in named[:4]) + (", and more" if len(named) > 4 else "") + ")" if ok and named else ""))
+            sents.append(sent + ".")
+        text = " ".join(sents)
         if e.status == "proposal":
             text = "Proposal, not in use yet. " + text
         c_["summary"] = text
+        if e.id in CELL_NOTES:
+            c_["cell_notes"] = CELL_NOTES[e.id]
         for t_ in tiles:
             if t_["entry_id"] == e.id:
                 t_["summary"] = text
