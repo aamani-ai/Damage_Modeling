@@ -97,6 +97,12 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 
 ### Curve pages (each hazard × asset, for example Hail × Solar farm)
 
+- **One plain line under the title** (also the library tile's hover), written from the cell's own data: how many
+  curves for which parts, what they are read against, how sure the numbers are, and how much of the plant's value is
+  priced. For example: "Flood on batteries: 3 curves for 2 parts (battery enclosure (active hardware) and separate
+  PCS); read against water depth above local grade (m); the numbers are our judgment; 75 % of the plant's value is
+  priced." The catalogue's own method wording stays in the step panels.
+
 - **The curve** picks subsystem → part → curve. Curves that share a name say what sets them apart (fixed tilt /
   tracker, fresh / salt water, module type, terrain). It folds (open by default); a "see the curve" link opens it if
   folded.
