@@ -273,7 +273,7 @@ def for_binding(binding_id: str, shown_model: str | None, shown_docs: str | None
     on_layer = bool(snap and binding_id in (snap.get("cells") or {}))
     lines = []
     if not on_layer:
-        lines.append("No layer on Hazard's dashboard uses this binding yet (the hurricane-on-solar layer is a different run, of the solar plant).")
+        lines.append("No layer on Hazard's dashboard uses this binding yet. The source cell's layer is a different run, of the asset that cell prices.")
     if found:
         branches = sorted({f[0] for f in found})
         src = found[0]
