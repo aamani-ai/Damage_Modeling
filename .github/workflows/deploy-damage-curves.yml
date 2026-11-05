@@ -1,7 +1,7 @@
-# The damage-curve dashboard on Cloud Run, behind IAP for aamani.ai accounts (plan DCD-D36). It deploys when the
-# deploy/damage-curves branch moves; main stays non-deploying, so the team sees a new version only when the branch is
-# moved to main (team runbook: gt_models docs/deployment/cloud-run-deploy-runbook.md). The page data must have been
-# built from main (DCD-D30): a branch preview never ships.
+# The damage-curve dashboard on Cloud Run, behind IAP for the Google accounts of IAP_DOMAINS (plan DCD-D36, D37). It
+# deploys when the deploy/damage-curves branch moves; main stays non-deploying, so the team sees a new version only when
+# the branch is moved to main (team runbook: gt_models docs/deployment/cloud-run-deploy-runbook.md). The page data must
+# have been built from main (DCD-D30): a branch preview never ships.
 name: Build and deploy damage-curves to Cloud Run
 
 on:
@@ -35,6 +35,8 @@ env:
   AR_HOST: us-central1-docker.pkg.dev
   AR_REPO: infrasuremodelingdocker
   APP_PATH: dashboard
+  # IAP admits every Google account of these domains (DCD-D36, D37)
+  IAP_DOMAINS: aamani.ai infrasure.ai
 
 jobs:
   build-and-deploy:
@@ -98,21 +100,25 @@ jobs:
             --max-instances 2 \
             --port 8080
 
-      - name: Let IAP reach the service, and aamani.ai accounts through IAP
+      - name: Let IAP reach the service, and the accounts of IAP_DOMAINS through IAP
+        # a grant only adds: a domain taken out of IAP_DOMAINS keeps its access until
+        # `gcloud iap web remove-iam-policy-binding` removes it
         run: |
           gcloud run services add-iam-policy-binding "$SERVICE" \
             --project "$GCP_PROJECT" \
             --region "$REGION" \
             --member "serviceAccount:service-952205173464@gcp-sa-iap.iam.gserviceaccount.com" \
             --role roles/run.invoker
-          gcloud iap web add-iam-policy-binding \
-            --project "$GCP_PROJECT" \
-            --resource-type=cloud-run \
-            --service="$SERVICE" \
-            --region="$REGION" \
-            --member='domain:aamani.ai' \
-            --role='roles/iap.httpsResourceAccessor' \
-            --condition=None
+          for domain in $IAP_DOMAINS; do
+            gcloud iap web add-iam-policy-binding \
+              --project "$GCP_PROJECT" \
+              --resource-type=cloud-run \
+              --service="$SERVICE" \
+              --region="$REGION" \
+              --member="domain:$domain" \
+              --role='roles/iap.httpsResourceAccessor' \
+              --condition=None
+          done
 
       - name: Verify the deployed boundary
         run: |
@@ -125,5 +131,5 @@ jobs:
             302|401|403) ;;
             *) echo "Expected IAP to refuse or redirect an anonymous request; got HTTP $STATUS"; exit 1 ;;
           esac
-          echo "damage-curves is live at $URL: sign in with an aamani.ai Google account"
-          echo "### damage-curves: $URL (sign in with an aamani.ai Google account)" >> "$GITHUB_STEP_SUMMARY"
+          echo "damage-curves is live at $URL: sign in with a Google account of ${IAP_DOMAINS// / or }"
+          echo "### damage-curves: $URL (sign in with a Google account of ${IAP_DOMAINS// / or })" >> "$GITHUB_STEP_SUMMARY"

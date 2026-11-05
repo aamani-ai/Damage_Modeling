@@ -63,7 +63,7 @@
    "label": "entry agent-read 2026-10-19 · release reviewed owner approved tower only screening release"
   }
  },
- "summary": "Hurricane wind on wind farms: published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; 16 % of the reference value has a curve and 84 % has none.",
+ "summary": "Hurricane wind on wind farms: 4 curves for 1 part (turbine tower); read against peak 3-second gust at 10 m (km/h); the numbers are our judgment; 35 % of the plant's value is priced.",
  "chain": {
   "stations": [
    {
@@ -96,7 +96,8 @@
     ],
     "evidence": [],
     "fact": "1 deferred",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "units",
@@ -112,7 +113,8 @@
     ],
     "evidence": [],
     "fact": "10 units · 9 withheld",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "axis_form",
@@ -123,7 +125,8 @@
     "files": [],
     "evidence": [],
     "fact": "thresholded weibull expected damage",
-    "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section."
+    "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section.",
+    "earlier": []
    },
    {
     "id": "evidence",
@@ -142,12 +145,13 @@
      },
      {
       "path": "docs/cells/tropical_cyclone_wind_wind/current/SOURCE_REGISTER_tropical_cyclone_wind_wind__model_v1_2__docs_r2.csv",
-      "sha256": "a9871e6a74cbcadc1fdb5228edd135cc5661c41b4c5c260ea41ec6ad64a9b8af"
+      "sha256": "e929f5fffe81ec0758e79b647d2083f648e44635c7c113c7d375e28f002287fe"
      }
     ],
     "evidence": [],
-    "fact": "4 src · T3–4",
-    "absent_sentence": null
+    "fact": "8 src · T3–4",
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "value",
@@ -163,7 +167,8 @@
     ],
     "evidence": [],
     "fact": "16 % · 16 % of project value",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "audit",
@@ -174,7 +179,13 @@
     "files": [],
     "evidence": [],
     "fact": "no file · no prose",
-    "absent_sentence": "No seven-step audit or site-condition adapter found as a file or a dossier section."
+    "absent_sentence": "No seven-step audit or site-condition adapter found as a file or a dossier section.",
+    "earlier": [
+     {
+      "path": "docs/cells/tropical_cyclone_wind_wind/proposed/SEVEN_STEP_AUDIT_tropical_cyclone_wind_wind__model_v0_1__docs_r1.md",
+      "model": "v0.1"
+     }
+    ]
    },
    {
     "id": "artifact",
@@ -198,7 +209,8 @@
     ],
     "evidence": [],
     "fact": "v1.2 · docs r2",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "capability",
@@ -214,7 +226,8 @@
     ],
     "evidence": [],
     "fact": "DR conditional · EAL conditional",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "proof",
@@ -253,7 +266,8 @@
     ],
     "evidence": [],
     "fact": "39 of 39 KAT reproduced",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "field_review",
@@ -264,7 +278,8 @@
     "files": [],
     "evidence": [],
     "fact": "not searched · agent-read 10-19",
-    "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only."
+    "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only.",
+    "earlier": []
    }
   ],
   "generation": "skill",
@@ -597,82 +612,91 @@
   "withheld_units": [
    {
     "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+    "name": "Turbine equipment assembly",
     "subsystem": "REPEATED_TURBINE",
     "reasons": [
      "SOURCE_NATIVE_ATOM_NOT_HARMONIZED_TO_STANDARD_EQUIPMENT_ASSEMBLY",
      "OMITTED_NON_TOWER_FAILURE_MODES"
     ],
-    "sentence": "Withheld: source native atom not harmonized to standard equipment assembly; omitted non tower failure modes."
+    "sentence": "The published source treats it as one block, which has not been split into the standard parts. The source covers only the tower, so other ways it can fail are left out."
    },
    {
     "failure_unit_id": "WT_FOUNDATION",
+    "name": "Foundation",
     "subsystem": "FOUNDATION",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit."
+    "sentence": "The cell has no curve for this part."
    },
    {
     "failure_unit_id": "WT_PAD_MOUNTED_ELECTRICAL",
+    "name": "Pad mounted electrical",
     "subsystem": "PLANT_ELECTRICAL",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "ELECTRICAL_VALUE_SPLIT_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; electrical value split required."
+    "sentence": "The cell has no curve for this part. The electrical value would first need splitting by part."
    },
    {
     "failure_unit_id": "WT_COLLECTION_SYSTEM",
+    "name": "Collection system",
     "subsystem": "PLANT_ELECTRICAL",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "LINE_NETWORK_EXPOSURE_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; line network exposure required."
+    "sentence": "The cell has no curve for this part. Where the cable network runs and how exposed it is need defining first."
    },
    {
     "failure_unit_id": "WT_GSU_SUBSTATION",
+    "name": "GSU substation",
     "subsystem": "SUBSTATION",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "FACILITY_LEVEL_EXPOSURE_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; facility level exposure required."
+    "sentence": "The cell has no curve for this part. How exposed the whole facility is needs defining first."
    },
    {
     "failure_unit_id": "WT_CONTROL_BUILDING_AND_SCADA",
+    "name": "Control building and SCADA",
     "subsystem": "CONTROL",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit."
+    "sentence": "The cell has no curve for this part."
    },
    {
     "failure_unit_id": "WT_CIVIL_INFRA",
+    "name": "Civil infra",
     "subsystem": "PLANT_CIVIL",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; mixed civil bucket requires split."
+    "sentence": "The cell has no curve for this part. Its value mixes roads, pads, buildings and fences, which would need separating first."
    },
    {
     "failure_unit_id": "SUPPORT_FIELDWORK",
+    "name": "Support fieldwork",
     "subsystem": "SUPPORT",
     "reasons": [
      "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
      "NO_INDEPENDENT_FRAGILITY"
     ],
-    "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+    "sentence": "Its cost (crews, cranes, transport) is added once, after the other parts' damage is known. It does not break on its own; its cost follows the damage to other parts."
    },
    {
     "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+    "name": "Support transport logistics",
     "subsystem": "SUPPORT",
     "reasons": [
      "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
      "NO_INDEPENDENT_FRAGILITY"
     ],
-    "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+    "sentence": "Its cost (crews, cranes, transport) is added once, after the other parts' damage is known. It does not break on its own; its cost follows the damage to other parts."
    }
   ],
   "hazard_axis": [
@@ -734,9 +758,15 @@
   "paths": {
    "sources": "docs/cells/tropical_cyclone_wind_wind/current/SOURCE_REGISTER_tropical_cyclone_wind_wind__model_v1_2__docs_r2.csv",
    "claims": "docs/cells/tropical_cyclone_wind_wind/current/CLAIM_PARAMETER_REGISTER_tropical_cyclone_wind_wind__model_v1_2__docs_r2.csv",
-   "parameters": "docs/cells/tropical_cyclone_wind_wind/current/PARAMETER_TIER_TABLE_tropical_cyclone_wind_wind__model_v1_2__docs_r2.csv"
+   "parameters": "docs/cells/tropical_cyclone_wind_wind/current/PARAMETER_TIER_TABLE_tropical_cyclone_wind_wind__model_v1_2__docs_r2.csv",
+   "source_registers": [
+    "docs/cells/tropical_cyclone_wind_wind/current/SOURCE_REGISTER_tropical_cyclone_wind_wind__model_v1_2__docs_r2.csv"
+   ],
+   "claim_registers": [
+    "docs/cells/tropical_cyclone_wind_wind/current/CLAIM_PARAMETER_REGISTER_tropical_cyclone_wind_wind__model_v1_2__docs_r2.csv"
+   ]
   },
-  "n_sources": 4,
+  "n_sources": 8,
   "n_claims": 5,
   "n_parameters": 6,
   "key_sources": [
@@ -792,11 +822,11 @@
    {
     "kind": "result",
     "name": "Financial range check (Hazard repo): tower-value ceiling for wind-farm hurricane loss (shared lineage; no open industry loss figures found)",
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/docs/data_sources/financial_range_wind_farm_hurricane/profile.md",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/ee41b829f51485283d5a3540de7c34ccfa846e95/docs/data_sources/financial_range_wind_farm_hurricane/profile.md",
     "hazard": {
      "path": "docs/data_sources/financial_range_wind_farm_hurricane/profile.md",
      "state": "on_main",
-     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/docs/data_sources/financial_range_wind_farm_hurricane/profile.md",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/ee41b829f51485283d5a3540de7c34ccfa846e95/docs/data_sources/financial_range_wind_farm_hurricane/profile.md",
      "words": null
     }
    }
@@ -924,7 +954,7 @@
   },
   {
    "path": "docs/cells/tropical_cyclone_wind_wind/current/SOURCE_REGISTER_tropical_cyclone_wind_wind__model_v1_2__docs_r2.csv",
-   "sha256": "a9871e6a74cbcadc1fdb5228edd135cc5661c41b4c5c260ea41ec6ad64a9b8af"
+   "sha256": "e929f5fffe81ec0758e79b647d2083f648e44635c7c113c7d375e28f002287fe"
   },
   {
    "path": "docs/cells/tropical_cyclone_wind_wind/current/VALIDATION_REPORT_tropical_cyclone_wind_wind__model_v1_2__docs_r2.md",
@@ -956,6 +986,8 @@
   }
  ],
  "gap_reason": null,
+ "gap_reason_own": null,
+ "gap_reason_source": null,
  "binding": null,
  "sampling_notes": [],
  "plain": {
@@ -966,7 +998,7 @@
    },
    "evidence": {
     "words": "Evidence: our judgment",
-    "code": "How damage rises: borrowed · how it becomes dollars: our judgment",
+    "code": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
     "tiers": [
      "T4"
     ],
@@ -992,10 +1024,10 @@
     "id": "covers",
     "name": "What it covers",
     "meaning": "The parts that have a curve, their share of the value, and what has none yet",
-    "fact": "1 part with a curve · 16 % of the value · 1 without one yet",
+    "fact": "1 part with a curve · 16 % of the value · 1 of 10 subsystems with a curve",
     "paragraphs": [
-     "Hurricane wind on wind farms: published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; the 3.3 MW / 100 m curve stands in for the canonical 5 MW turbine, tower value only. It names 1 part: Turbine tower. Outside its scope: storm surge, flood, scour, debris, rain ingress, lightning and fire and business interruption. Kinds of damage it does not include: blade and other non-tower turbine failure modes (the curve is driven by tower damage states only).",
-     "For this hazard the wind farm is split into 1 part: Turbine tower. 9 further units are named but withheld — wt turbine equipment assembly, wt foundation, wt pad mounted electrical, wt collection system, wt gsu substation, wt control building and scada, wt civil infra, support fieldwork and support transport logistics — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil, fieldwork and transport (withheld, not zero).",
+     "Hurricane wind on wind farms: published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; the 3.3 MW / 100 m curve stands in for the canonical 5 MW turbine, tower value only. It names 1 part (listed below). It also lists 3 things it leaves out (below).",
+     "This hazard's curves cover 1 part of the wind farm, listed below after the subsystem each belongs to and named as the catalogue entry writes them. 9 further units are named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
      "16 % of the project's value has a curve. No curve yet for rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil, fieldwork and transport (withheld, not zero) (84 % of the value)."
     ],
     "holds": [
@@ -1015,13 +1047,13 @@
       "tone": "key"
      },
      {
-      "text": "1 without a curve yet",
-      "tone": "muted",
-      "title": "Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil, fieldwork and transport (withheld, not zero)"
-     },
-     {
       "text": "9 withheld",
       "tone": "muted"
+     },
+     {
+      "text": "1 of 10 subsystems with a curve · 9 no curve yet",
+      "tone": "muted",
+      "title": "The catalogue's own list: Rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil, fieldwork and transport (withheld, not zero)"
      }
     ]
    },
@@ -1031,8 +1063,8 @@
     "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "not written yet",
     "paragraphs": [
-     "Damage is read against peak 3-second gust at 10 m (km/h). The curve is nothing below a threshold, then a Weibull-shaped rise (thresholded Weibull). The input, in the catalogue's words: peak 3-second gust at 10 m (km/h); zero at or below 90, evaluated 108 to 252; for the canonical 5 MW proxy 90 to 108 returns zero and above 252 returns the maximum (both flagged).",
-     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell."
+     "Damage is read against one hazard measure: peak 3-second gust at 10 m (km/h). The curve is nothing below a threshold, then a Weibull-shaped rise (thresholded Weibull). What Hazard has to supply for each event is below.",
+     "No seven-step audit was written for the version shown; the cell has one for an earlier version (v0.1), from its proposal stage."
     ],
     "holds": [
      "axis_form",
@@ -1074,9 +1106,9 @@
     "id": "numbers",
     "name": "Where the numbers come from",
     "meaning": "The sources, what each one gave, and how sure we are",
-    "fact": "4 sources, 0 linked · our judgment",
+    "fact": "7 sources, 7 linked · our judgment",
     "paragraphs": [
-     "4 sources set this cell: Probabilistic risk assessment on wind turbine towers subjected to cyclone-induced wind loads, Wind Energy 23(3), 528-546 (2020), Canonical wind-farm reference profile: 20 x 5 MW, $140M, tower share 0.16, Owner scope correction authorizing the tower-only 0.16 binding (governance, not evidence) and Hazard hurricane wind-farm EAL review that found the 0.63 value mismatch. Of the 6 parameters, 2 are borrowed and 4 are our judgment. The source and claim registers are machine-readable files in the cell folder. 4 sources have no link in the register."
+     "The sources and claims below are kept as machine-readable register files in the cell folder."
     ],
     "holds": [
      "evidence"
@@ -1086,7 +1118,7 @@
      {
       "text": "our judgment",
       "tone": "key",
-      "title": "How damage rises: borrowed · how it becomes dollars: our judgment"
+      "title": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment"
      },
      {
       "text": "Probabilistic risk assessment…",
@@ -1103,7 +1135,7 @@
       "tone": "muted"
      },
      {
-      "text": "4 sources, 0 linked",
+      "text": "7 sources, 7 linked",
       "tone": "muted"
      }
     ]
@@ -1111,8 +1143,8 @@
    {
     "id": "checked",
     "name": "Has it been checked",
-    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
-    "fact": "1 outside check · field reports not searched · read by an agent only",
+    "meaning": "Outside checks, and who has read the entry",
+    "fact": "1 outside check · read by an agent only",
     "paragraphs": [
      "1 outside check compares this curve with an independent result: Financial range check (Hazard repo): tower-value ceiling for wind-farm hurricane loss (shared lineage; no open industry loss figures found). The validation record says report.",
      "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: reviewed owner approved tower only screening release."
@@ -1123,13 +1155,9 @@
     "written": true,
     "chips": [
      {
-      "text": "Financial range check (Hazard…",
+      "text": "1 outside check",
       "tone": "key",
       "title": "Financial range check (Hazard repo): tower-value ceiling for wind-farm hurricane loss (shared lineage; no open industry loss figures found)"
-     },
-     {
-      "text": "field reports: not searched",
-      "tone": "muted"
      },
      {
       "text": "read by an agent only",
@@ -1144,7 +1172,7 @@
    "proof"
   ],
   "word": "our judgment",
-  "halves": "How damage rises: borrowed · how it becomes dollars: our judgment",
+  "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
   "hazard_paths": [],
   "capabilities": [
    {
@@ -1207,82 +1235,91 @@
     "withheld": [
      {
       "failure_unit_id": "WT_TURBINE_EQUIPMENT_ASSEMBLY",
+      "name": "Turbine equipment assembly",
       "subsystem": "REPEATED_TURBINE",
       "reasons": [
        "SOURCE_NATIVE_ATOM_NOT_HARMONIZED_TO_STANDARD_EQUIPMENT_ASSEMBLY",
        "OMITTED_NON_TOWER_FAILURE_MODES"
       ],
-      "sentence": "Withheld: source native atom not harmonized to standard equipment assembly; omitted non tower failure modes."
+      "sentence": "The published source treats it as one block, which has not been split into the standard parts. The source covers only the tower, so other ways it can fail are left out."
      },
      {
       "failure_unit_id": "WT_FOUNDATION",
+      "name": "Foundation",
       "subsystem": "FOUNDATION",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit."
+      "sentence": "The cell has no curve for this part."
      },
      {
       "failure_unit_id": "WT_PAD_MOUNTED_ELECTRICAL",
+      "name": "Pad mounted electrical",
       "subsystem": "PLANT_ELECTRICAL",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "ELECTRICAL_VALUE_SPLIT_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; electrical value split required."
+      "sentence": "The cell has no curve for this part. The electrical value would first need splitting by part."
      },
      {
       "failure_unit_id": "WT_COLLECTION_SYSTEM",
+      "name": "Collection system",
       "subsystem": "PLANT_ELECTRICAL",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "LINE_NETWORK_EXPOSURE_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; line network exposure required."
+      "sentence": "The cell has no curve for this part. Where the cable network runs and how exposed it is need defining first."
      },
      {
       "failure_unit_id": "WT_GSU_SUBSTATION",
+      "name": "GSU substation",
       "subsystem": "SUBSTATION",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "FACILITY_LEVEL_EXPOSURE_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; facility level exposure required."
+      "sentence": "The cell has no curve for this part. How exposed the whole facility is needs defining first."
      },
      {
       "failure_unit_id": "WT_CONTROL_BUILDING_AND_SCADA",
+      "name": "Control building and SCADA",
       "subsystem": "CONTROL",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit."
+      "sentence": "The cell has no curve for this part."
      },
      {
       "failure_unit_id": "WT_CIVIL_INFRA",
+      "name": "Civil infra",
       "subsystem": "PLANT_CIVIL",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; mixed civil bucket requires split."
+      "sentence": "The cell has no curve for this part. Its value mixes roads, pads, buildings and fences, which would need separating first."
      },
      {
       "failure_unit_id": "SUPPORT_FIELDWORK",
+      "name": "Support fieldwork",
       "subsystem": "SUPPORT",
       "reasons": [
        "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
        "NO_INDEPENDENT_FRAGILITY"
       ],
-      "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+      "sentence": "Its cost (crews, cranes, transport) is added once, after the other parts' damage is known. It does not break on its own; its cost follows the damage to other parts."
      },
      {
       "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+      "name": "Support transport logistics",
       "subsystem": "SUPPORT",
       "reasons": [
        "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
        "NO_INDEPENDENT_FRAGILITY"
       ],
-      "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+      "sentence": "Its cost (crews, cranes, transport) is added once, after the other parts' damage is known. It does not break on its own; its cost follows the damage to other parts."
      }
     ]
    },
@@ -1314,29 +1351,29 @@
     "id": "scope",
     "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Hurricane wind on wind farms: published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; the 3.3 MW / 100 m curve stands in for the canonical 5 MW turbine, tower value only. It names 1 part: Turbine tower. Outside its scope: storm surge, flood, scour, debris, rain ingress, lightning and fire and business interruption. Kinds of damage it does not include: blade and other non-tower turbine failure modes (the curve is driven by tower damage states only).",
+    "paragraph": "Hurricane wind on wind farms: published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; the 3.3 MW / 100 m curve stands in for the canonical 5 MW turbine, tower value only. It names 1 part (listed below). It also lists 3 things it leaves out (below).",
     "plain_fact": "1 part · 2 left out"
    },
    {
     "id": "units",
     "name": "What breaks",
     "meaning": "The parts of the plant the hazard damages, each with its own curve",
-    "paragraph": "For this hazard the wind farm is split into 1 part: Turbine tower. 9 further units are named but withheld — wt turbine equipment assembly, wt foundation, wt pad mounted electrical, wt collection system, wt gsu substation, wt control building and scada, wt civil infra, support fieldwork and support transport logistics — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: rotor, nacelle, foundation, pad electrical, collection, GSU/substation, control building and SCADA, civil, fieldwork and transport (withheld, not zero).",
+    "paragraph": "This hazard's curves cover 1 part of the wind farm, listed below after the subsystem each belongs to and named as the catalogue entry writes them. 9 further units are named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
     "plain_fact": "1 part · 9 withheld"
    },
    {
     "id": "axis_form",
     "name": "How damage is measured",
     "meaning": "The hazard intensity on the x-axis and the shape of the curve",
-    "paragraph": "Damage is read against peak 3-second gust at 10 m (km/h). The curve is nothing below a threshold, then a Weibull-shaped rise (thresholded Weibull). The input, in the catalogue's words: peak 3-second gust at 10 m (km/h); zero at or below 90, evaluated 108 to 252; for the canonical 5 MW proxy 90 to 108 returns zero and above 252 returns the maximum (both flagged).",
+    "paragraph": "Damage is read against one hazard measure: peak 3-second gust at 10 m (km/h). The curve is nothing below a threshold, then a Weibull-shaped rise (thresholded Weibull). What Hazard has to supply for each event is below.",
     "plain_fact": "a threshold, then a rise"
    },
    {
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "4 sources set this cell: Probabilistic risk assessment on wind turbine towers subjected to cyclone-induced wind loads, Wind Energy 23(3), 528-546 (2020), Canonical wind-farm reference profile: 20 x 5 MW, $140M, tower share 0.16, Owner scope correction authorizing the tower-only 0.16 binding (governance, not evidence) and Hazard hurricane wind-farm EAL review that found the 0.63 value mismatch. Of the 6 parameters, 2 are borrowed and 4 are our judgment. The source and claim registers are machine-readable files in the cell folder. 4 sources have no link in the register.",
-    "plain_fact": "4 sources · borrowed and our judgment"
+    "paragraph": "The sources and claims below are kept as machine-readable register files in the cell folder.",
+    "plain_fact": "7 sources · borrowed and our judgment"
    },
    {
     "id": "value",
@@ -1349,8 +1386,8 @@
     "id": "audit",
     "name": "The audit",
     "meaning": "The seven checks a curve passes before release",
-    "paragraph": "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell.",
-    "plain_fact": "no audit found"
+    "paragraph": "No seven-step audit was written for the version shown; the cell has one for an earlier version (v0.1), from its proposal stage.",
+    "plain_fact": "audit for v0.1 only"
    },
    {
     "id": "artifact",
@@ -1388,11 +1425,11 @@
      "JAIMES_2020_TC_WIND_TURBINE",
      "TCWW-S005"
     ],
-    "title": "unchanged 3.3 MW/100 m curve and source-native axis",
-    "link": null,
-    "link_kind": "none",
-    "locator": null,
-    "no_link_sentence": "no link in the register",
+    "title": "Jaimes, M. A.; García-Soto, A",
+    "link": "https://doi.org/10.1002/we.2436",
+    "link_kind": "doi",
+    "locator": "§§2.3.1-2.3.2 and 3.2-3.3.5; Tables 2-3; Figures 5-6; Eqs. 1 and 11-13",
+    "no_link_sentence": null,
     "source_id": "JAIMES_2020_TC_WIND_TURBINE"
    },
    {
@@ -1400,11 +1437,11 @@
     "ids": [
      "CONUS_WIND_FARM_REFERENCE_V1"
     ],
-    "title": "20×5 MW, 100 MW, $140M; tower share 0.16",
-    "link": null,
-    "link_kind": "none",
-    "locator": null,
-    "no_link_sentence": "no link in the register",
+    "title": "Canonical wind-farm screening reference profile.",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/tropical_cyclone_wind_wind/current/VALUE_CROSSWALK_tropical_cyclone_wind_wind__model_v1_2__docs_r2.csv",
+    "link_kind": "repo_file",
+    "locator": "CONUS_WIND_FARM_TOWER_16PCT_V1 rows",
+    "no_link_sentence": null,
     "source_id": "CONUS_WIND_FARM_REFERENCE_V1"
    },
    {
@@ -1412,11 +1449,11 @@
     "ids": [
      "OWNER_SCOPE_CORRECTION_2026_08_14"
     ],
-    "title": "authorizes a tower-only 0.16 value binding",
-    "link": null,
-    "link_kind": "none",
-    "locator": null,
-    "no_link_sentence": "no link in the register",
+    "title": "Tower-only scope correction for model v1.2.",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/tropical_cyclone_wind_wind/current/DECISION_LOG_tropical_cyclone_wind_wind__model_v1_2__docs_r2.md",
+    "link_kind": "repo_file",
+    "locator": "TCWW12-D01 and TCWW12-D02",
+    "no_link_sentence": null,
     "source_id": "OWNER_SCOPE_CORRECTION_2026_08_14"
    },
    {
@@ -1424,11 +1461,11 @@
     "ids": [
      "HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14"
     ],
-    "title": "diagnoses 0.63 failure-unit/value mismatch",
-    "link": null,
-    "link_kind": "none",
-    "locator": null,
-    "no_link_sentence": "no link in the register",
+    "title": "Consumer review that identified the failure-unit/value mismatch.",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_2__docs_r2.md",
+    "link_kind": "repo_file",
+    "locator": "What changed",
+    "no_link_sentence": null,
     "source_id": "HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14"
    },
    {
@@ -1436,20 +1473,23 @@
     "ids": [
      "TCWW-S010"
     ],
-    "title": "NREL, Cost of Wind Energy Review 2024 (comparison only)",
-    "link": null,
-    "link_kind": "none",
-    "locator": null,
-    "no_link_sentence": "not in the register",
-    "source_id": null
+    "title": "Stehly, T.; Duffy, P.; Mulas Hernando, D. Cost of Wind Energy Review: 2024 Edition. NREL/TP-5000-91775.",
+    "link": "https://www.nrel.gov/docs/fy25osti/91775.pdf",
+    "link_kind": "url",
+    "locator": "land-based reference capital-cost breakdown",
+    "no_link_sentence": null,
+    "source_id": "TCWW-S010"
    }
   ],
   "sources": [
    {
     "id": "JAIMES_2020_TC_WIND_TURBINE",
-    "citation": "unchanged 3.3 MW/100 m curve and source-native axis",
-    "url": null,
-    "locator": null,
+    "aliases": [
+     "TCWW-S005"
+    ],
+    "citation": "Jaimes, M. A.; García-Soto, A. D.; Martín del Campo, J. O.; Pozos-Estrada, A. Probabilistic risk assessment on wind turbine towers subjected to cyclone-induced wind loads. Wind Energy 23(3), 528-546 (2020). DOI 10.1002/we.2436.",
+    "url": "https://doi.org/10.1002/we.2436",
+    "locator": "§§2.3.1-2.3.2 and 3.2-3.3.5; Tables 2-3; Figures 5-6; Eqs. 1 and 11-13",
     "role": "numeric source",
     "tier": null,
     "permitted": null,
@@ -1457,17 +1497,19 @@
     "decision": null,
     "accessed_on": null,
     "provenance": "register",
-    "doi": null,
-    "link": null,
-    "link_kind": "none",
-    "title": "unchanged 3.3 MW/100 m curve and source-native axis",
-    "no_link_sentence": "no link in the register"
+    "doi": "10.1002/we.2436",
+    "link": "https://doi.org/10.1002/we.2436",
+    "link_kind": "doi",
+    "title": "Jaimes, M. A.; García-Soto, A",
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "OWNER_SCOPE_CORRECTION_2026_08_14",
-    "citation": "authorizes a tower-only 0.16 value binding",
-    "url": null,
-    "locator": null,
+    "aliases": [],
+    "citation": "Tower-only scope correction for model v1.2.",
+    "url": "DECISION_LOG_tropical_cyclone_wind_wind__model_v1_2__docs_r2.md",
+    "locator": "TCWW12-D01 and TCWW12-D02",
     "role": "governance",
     "tier": null,
     "permitted": null,
@@ -1475,17 +1517,20 @@
     "decision": null,
     "accessed_on": null,
     "provenance": "register",
+    "repo_path": "docs/cells/tropical_cyclone_wind_wind/current/DECISION_LOG_tropical_cyclone_wind_wind__model_v1_2__docs_r2.md",
     "doi": null,
-    "link": null,
-    "link_kind": "none",
-    "title": "authorizes a tower-only 0.16 value binding",
-    "no_link_sentence": "no link in the register"
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/tropical_cyclone_wind_wind/current/DECISION_LOG_tropical_cyclone_wind_wind__model_v1_2__docs_r2.md",
+    "link_kind": "repo_file",
+    "title": "Tower-only scope correction for model v1.2.",
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "CONUS_WIND_FARM_REFERENCE_V1",
-    "citation": "20×5 MW, 100 MW, $140M; tower share 0.16",
-    "url": null,
-    "locator": null,
+    "aliases": [],
+    "citation": "Canonical wind-farm screening reference profile.",
+    "url": "VALUE_CROSSWALK_tropical_cyclone_wind_wind__model_v1_2__docs_r2.csv",
+    "locator": "CONUS_WIND_FARM_TOWER_16PCT_V1 rows",
     "role": "consumer asset profile",
     "tier": null,
     "permitted": null,
@@ -1493,17 +1538,20 @@
     "decision": null,
     "accessed_on": null,
     "provenance": "register",
+    "repo_path": "docs/cells/tropical_cyclone_wind_wind/current/VALUE_CROSSWALK_tropical_cyclone_wind_wind__model_v1_2__docs_r2.csv",
     "doi": null,
-    "link": null,
-    "link_kind": "none",
-    "title": "20×5 MW, 100 MW, $140M; tower share 0.16",
-    "no_link_sentence": "no link in the register"
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/tropical_cyclone_wind_wind/current/VALUE_CROSSWALK_tropical_cyclone_wind_wind__model_v1_2__docs_r2.csv",
+    "link_kind": "repo_file",
+    "title": "Canonical wind-farm screening reference profile.",
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14",
-    "citation": "diagnoses 0.63 failure-unit/value mismatch",
-    "url": null,
-    "locator": null,
+    "aliases": [],
+    "citation": "Consumer review that identified the failure-unit/value mismatch.",
+    "url": "tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_2__docs_r2.md",
+    "locator": "What changed",
     "role": "consumer measurement",
     "tier": null,
     "permitted": null,
@@ -1511,11 +1559,95 @@
     "decision": null,
     "accessed_on": null,
     "provenance": "register",
+    "repo_path": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_2__docs_r2.md",
     "doi": null,
-    "link": null,
-    "link_kind": "none",
-    "title": "diagnoses 0.63 failure-unit/value mismatch",
-    "no_link_sentence": "no link in the register"
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_2__docs_r2.md",
+    "link_kind": "repo_file",
+    "title": "Consumer review that identified the failure-unit/value mismatch.",
+    "no_link_sentence": null,
+    "link_note": null
+   },
+   {
+    "id": "TCWW-S008",
+    "aliases": [],
+    "citation": "Chen, X.; Xu, J. Z. Structural failure analysis of wind turbines impacted by super typhoon Usagi. Engineering Failure Analysis 60, 391-404 (2016). DOI 10.1016/j.engfailanal.2015.11.028.",
+    "url": "https://www.sciencedirect.com/science/article/pii/S1350630715301552",
+    "locator": "Wind farm damage overview; Design wind speed; Conclusions",
+    "role": "case-study evidence",
+    "tier": null,
+    "permitted": null,
+    "prohibited": "not a transferable damage-ratio curve",
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": "10.1016/j.engfailanal.2015.11.028",
+    "link": "https://www.sciencedirect.com/science/article/pii/S1350630715301552",
+    "link_kind": "url",
+    "title": "Chen, X.; Xu, J. Z. Structural failure analysis of wind turbines impacted by super typhoon Usagi",
+    "no_link_sentence": null,
+    "link_note": null
+   },
+   {
+    "id": "TCWW-S010",
+    "aliases": [],
+    "citation": "Stehly, T.; Duffy, P.; Mulas Hernando, D. Cost of Wind Energy Review: 2024 Edition. NREL/TP-5000-91775.",
+    "url": "https://www.nrel.gov/docs/fy25osti/91775.pdf",
+    "locator": "land-based reference capital-cost breakdown",
+    "role": "value comparison",
+    "tier": null,
+    "permitted": null,
+    "prohibited": "not the runtime denominator without an approved crosswalk",
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.nrel.gov/docs/fy25osti/91775.pdf",
+    "link_kind": "url",
+    "title": "Stehly, T.; Duffy, P.; Mulas Hernando, D. Cost of Wind Energy Review: 2024 Edition. NREL/TP-5000-91775.",
+    "no_link_sentence": null,
+    "link_note": null
+   },
+   {
+    "id": "TCWW-S014",
+    "aliases": [],
+    "citation": "Chen, X.; Li, C.; Xu, J. Failure investigation on a coastal wind farm damaged by super typhoon: A forensic engineering study. Journal of Wind Engineering and Industrial Aerodynamics 147, 132-142 (2015). DOI 10.1016/j.jweia.2015.10.007.",
+    "url": "https://doi.org/10.1016/j.jweia.2015.10.007",
+    "locator": "pp. 132-136; Tables 1-2",
+    "role": "coverage-boundary evidence",
+    "tier": null,
+    "permitted": null,
+    "prohibited": "not a transferable cost calibration",
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "register",
+    "doi": "10.1016/j.jweia.2015.10.007",
+    "link": "https://doi.org/10.1016/j.jweia.2015.10.007",
+    "link_kind": "doi",
+    "title": "Chen, X.; Li, C.; Xu, J. Failure investigation on a coastal wind farm damaged by super typhoon: A forensic…",
+    "no_link_sentence": null,
+    "link_note": null
+   },
+   {
+    "id": "GOVERNANCE_CONTRACT",
+    "aliases": [],
+    "citation": "Damage Modeling foundations and standards.",
+    "url": "docs/method/standards/00_index.md",
+    "locator": "standards 02, 06-10, 17, 20-23 and contracts 20-21",
+    "role": "governance",
+    "tier": null,
+    "permitted": null,
+    "prohibited": "not scientific calibration",
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "register",
+    "repo_path": "docs/method/standards/00_index.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/standards/00_index.md",
+    "link_kind": "repo_file",
+    "title": "Damage Modeling foundations and standards.",
+    "kind": "marker",
+    "no_link_sentence": null,
+    "link_note": null
    }
   ],
   "claims": [
@@ -1688,10 +1820,10 @@
     "sources": [
      {
       "id": "TCWW-S005",
-      "title": "TCWW-S005",
-      "link": null,
-      "link_kind": "none",
-      "resolved": false
+      "title": "Jaimes, M. A.; García-Soto, A",
+      "link": "https://doi.org/10.1002/we.2436",
+      "link_kind": "doi",
+      "resolved": true
      }
     ],
     "claim_ids": [],
@@ -1710,10 +1842,10 @@
     "sources": [
      {
       "id": "TCWW-S005",
-      "title": "TCWW-S005",
-      "link": null,
-      "link_kind": "none",
-      "resolved": false
+      "title": "Jaimes, M. A.; García-Soto, A",
+      "link": "https://doi.org/10.1002/we.2436",
+      "link_kind": "doi",
+      "resolved": true
      }
     ],
     "claim_ids": [],
@@ -1732,10 +1864,10 @@
     "sources": [
      {
       "id": "TCWW-S005",
-      "title": "TCWW-S005",
-      "link": null,
-      "link_kind": "none",
-      "resolved": false
+      "title": "Jaimes, M. A.; García-Soto, A",
+      "link": "https://doi.org/10.1002/we.2436",
+      "link_kind": "doi",
+      "resolved": true
      }
     ],
     "claim_ids": [],
@@ -1754,10 +1886,10 @@
     "sources": [
      {
       "id": "TCWW-S005",
-      "title": "TCWW-S005",
-      "link": null,
-      "link_kind": "none",
-      "resolved": false
+      "title": "Jaimes, M. A.; García-Soto, A",
+      "link": "https://doi.org/10.1002/we.2436",
+      "link_kind": "doi",
+      "resolved": true
      }
     ],
     "claim_ids": [],
@@ -1776,24 +1908,24 @@
     "sources": [
      {
       "id": "TCWW-S005",
-      "title": "TCWW-S005",
-      "link": null,
-      "link_kind": "none",
-      "resolved": false
+      "title": "Jaimes, M. A.; García-Soto, A",
+      "link": "https://doi.org/10.1002/we.2436",
+      "link_kind": "doi",
+      "resolved": true
      },
      {
       "id": "TCWW-S010",
-      "title": "TCWW-S010",
-      "link": null,
-      "link_kind": "none",
-      "resolved": false
+      "title": "Stehly, T.; Duffy, P.; Mulas Hernando, D. Cost of Wind Energy Review: 2024 Edition. NREL/TP-5000-91775.",
+      "link": "https://www.nrel.gov/docs/fy25osti/91775.pdf",
+      "link_kind": "url",
+      "resolved": true
      },
      {
       "id": "GOVERNANCE_CONTRACT",
-      "title": "GOVERNANCE_CONTRACT",
-      "link": null,
-      "link_kind": "none",
-      "resolved": false
+      "title": "Damage Modeling foundations and standards.",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/standards/00_index.md",
+      "link_kind": "repo_file",
+      "resolved": true
      }
     ],
     "claim_ids": [],
@@ -1812,24 +1944,24 @@
     "sources": [
      {
       "id": "TCWW-S008",
-      "title": "TCWW-S008",
-      "link": null,
-      "link_kind": "none",
-      "resolved": false
+      "title": "Chen, X.; Xu, J. Z. Structural failure analysis of wind turbines impacted by super typhoon Usagi",
+      "link": "https://www.sciencedirect.com/science/article/pii/S1350630715301552",
+      "link_kind": "url",
+      "resolved": true
      },
      {
       "id": "TCWW-S014",
-      "title": "TCWW-S014",
-      "link": null,
-      "link_kind": "none",
-      "resolved": false
+      "title": "Chen, X.; Li, C.; Xu, J. Failure investigation on a coastal wind farm damaged by super typhoon: A forensic…",
+      "link": "https://doi.org/10.1016/j.jweia.2015.10.007",
+      "link_kind": "doi",
+      "resolved": true
      },
      {
       "id": "GOVERNANCE_CONTRACT",
-      "title": "GOVERNANCE_CONTRACT",
-      "link": null,
-      "link_kind": "none",
-      "resolved": false
+      "title": "Damage Modeling foundations and standards.",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/standards/00_index.md",
+      "link_kind": "repo_file",
+      "resolved": true
      }
     ],
     "claim_ids": [],
@@ -1849,11 +1981,11 @@
    "workbook": null
   },
   "link_counts": {
-   "total": 4,
-   "linked": 0,
+   "total": 7,
+   "linked": 7,
    "locator_only": 0,
-   "neither": 4,
-   "markers": 0,
+   "neither": 0,
+   "markers": 1,
    "placeholders": 0
   },
   "extraction": null,
@@ -1862,34 +1994,680 @@
    "cost": "our judgment"
   }
  },
- "build_findings": [
+ "build_findings": [],
+ "hazard_note": null,
+ "subcomponents": [
   {
-   "check": "source_ids",
-   "severity": "data",
-   "items": [
-    "parameter Eq. 1 structural-response shape and fitted archetype parameters → TCWW-S005",
-    "parameter V_zero_kmh = 90 → TCWW-S005",
-    "parameter DS1/DS2/DS3 economic consequence ratios → TCWW-S005",
-    "parameter source model assumption set → TCWW-S005",
-    "parameter source-native denominator quarantine → TCWW-S005",
-    "parameter source-native denominator quarantine → TCWW-S010",
-    "parameter source-native denominator quarantine → GOVERNANCE_CONTRACT",
-    "parameter all non-source-native failure units → TCWW-S008",
-    "parameter all non-source-native failure units → TCWW-S014",
-    "parameter all non-source-native failure units → GOVERNANCE_CONTRACT"
+   "key": "rotor",
+   "label": "Rotor and blades",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.20764017252002465,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "WT_TURBINE_EQUIPMENT_ASSEMBLY"
    ],
-   "sentence": "10 source ID references in this cell do not resolve in its current source register."
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The published source treats it as one block, which has not been split into the standard parts. The source covers only the tower, so other ways it can fail are left out.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "SOURCE_NATIVE_ATOM_NOT_HARMONIZED_TO_STANDARD_EQUIPMENT_ASSEMBLY; OMITTED_NON_TOWER_FAILURE_MODES",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_2__docs_r2.md"
+    },
+    "research": []
+   }
   },
   {
-   "check": "source_links",
-   "severity": "data",
-   "items": [
-    "JAIMES_2020_TC_WIND_TURBINE — unchanged 3.3 MW/100 m curve and source-native axis",
-    "OWNER_SCOPE_CORRECTION_2026_08_14 — authorizes a tower-only 0.16 value binding",
-    "CONUS_WIND_FARM_REFERENCE_V1 — 20×5 MW, 100 MW, $140M; tower share 0.16",
-    "HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14 — diagnoses 0.63 failure-unit/value mismatch"
+   "key": "tower",
+   "label": "Tower",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.17005545286506468,
+   "share_basis": "share of the asset's reference value. This cell's own value lines here (share of project TIV (owner-approved tower proxy basis)): Turbine tower 16 %",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_wind",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "TCWW_JAIMES_1MW_44M_SCREENING",
+    "TCWW_JAIMES_2P5MW_80M_SCREENING",
+    "TCWW_JAIMES_3P3MW_100M_SCREENING",
+    "TCWW_JAIMES_3P3MW_AS_CANONICAL_5MW_TOWER_PROXY_V1"
    ],
-   "sentence": "4 sources in this cell's register have neither a link nor a locator."
+   "failure_unit_ids": [
+    "WT_JAIMES_TURBINE_TOWER_EXPOSURE_UNIT",
+    "WT_TURBINE_EQUIPMENT_ASSEMBLY"
+   ],
+   "tier_span": "T3–4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed and our judgment",
+   "construction": [
+    {
+     "curve_id": "TCWW_JAIMES_1MW_44M_SCREENING",
+     "data_path": "curves/tropical_cyclone_wind_wind/TCWW_JAIMES_1MW_44M_SCREENING@model_v1_2__docs_r2.json",
+     "curve_type": "thresholded weibull expected damage",
+     "curve_form": "thresholded_weibull_expected_damage",
+     "formula": "D(V) = 0 for V ≤ V_zero_kmh; otherwise max_dr × (1 − exp(−ln 2 × ((V − V_zero_kmh) / delta_V50_kmh)^rho))",
+     "artifact": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_2__docs_r2__curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "JAIMES_2020_TC_WIND_TURBINE",
+      "CONUS_WIND_FARM_REFERENCE_V1",
+      "OWNER_SCOPE_CORRECTION_2026_08_14",
+      "HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14",
+      "TCWW-S010"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer Hurricane × Wind Farm Scientific Version 2 (tower-only · 16% modeled) uses the file shown here (model v1.2, docs r2).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "tropical_cyclone_wind_wind",
+     "part": "Turbine tower",
+     "scope_note": null
+    },
+    {
+     "curve_id": "TCWW_JAIMES_2P5MW_80M_SCREENING",
+     "data_path": "curves/tropical_cyclone_wind_wind/TCWW_JAIMES_2P5MW_80M_SCREENING@model_v1_2__docs_r2.json",
+     "curve_type": "thresholded weibull expected damage",
+     "curve_form": "thresholded_weibull_expected_damage",
+     "formula": "D(V) = 0 for V ≤ V_zero_kmh; otherwise max_dr × (1 − exp(−ln 2 × ((V − V_zero_kmh) / delta_V50_kmh)^rho))",
+     "artifact": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_2__docs_r2__curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "JAIMES_2020_TC_WIND_TURBINE",
+      "CONUS_WIND_FARM_REFERENCE_V1",
+      "OWNER_SCOPE_CORRECTION_2026_08_14",
+      "HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14",
+      "TCWW-S010"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer Hurricane × Wind Farm Scientific Version 2 (tower-only · 16% modeled) uses the file shown here (model v1.2, docs r2).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "tropical_cyclone_wind_wind",
+     "part": "Turbine tower",
+     "scope_note": null
+    },
+    {
+     "curve_id": "TCWW_JAIMES_3P3MW_100M_SCREENING",
+     "data_path": "curves/tropical_cyclone_wind_wind/TCWW_JAIMES_3P3MW_100M_SCREENING@model_v1_2__docs_r2.json",
+     "curve_type": "thresholded weibull expected damage",
+     "curve_form": "thresholded_weibull_expected_damage",
+     "formula": "D(V) = 0 for V ≤ V_zero_kmh; otherwise max_dr × (1 − exp(−ln 2 × ((V − V_zero_kmh) / delta_V50_kmh)^rho))",
+     "artifact": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_2__docs_r2__curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "JAIMES_2020_TC_WIND_TURBINE",
+      "CONUS_WIND_FARM_REFERENCE_V1",
+      "OWNER_SCOPE_CORRECTION_2026_08_14",
+      "HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14",
+      "TCWW-S010"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer Hurricane × Wind Farm Scientific Version 2 (tower-only · 16% modeled) uses the file shown here (model v1.2, docs r2).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "tropical_cyclone_wind_wind",
+     "part": "Turbine tower",
+     "scope_note": null
+    },
+    {
+     "curve_id": "TCWW_JAIMES_3P3MW_AS_CANONICAL_5MW_TOWER_PROXY_V1",
+     "data_path": "curves/tropical_cyclone_wind_wind/TCWW_JAIMES_3P3MW_AS_CANONICAL_5MW_TOWER_PROXY_V1@model_v1_2__docs_r2.json",
+     "curve_type": "thresholded weibull expected damage",
+     "curve_form": "thresholded_weibull_expected_damage",
+     "formula": "D(V) = 0 for V ≤ V_zero_kmh; otherwise max_dr × (1 − exp(−ln 2 × ((V − V_zero_kmh) / delta_V50_kmh)^rho))",
+     "artifact": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind__model_v1_2__docs_r2__curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "JAIMES_2020_TC_WIND_TURBINE",
+      "CONUS_WIND_FARM_REFERENCE_V1",
+      "OWNER_SCOPE_CORRECTION_2026_08_14",
+      "HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14",
+      "TCWW-S010"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer Hurricane × Wind Farm Scientific Version 2 (tower-only · 16% modeled) uses the file shown here (model v1.2, docs r2).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "tropical_cyclone_wind_wind",
+     "part": "Turbine tower",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
+    "hazard": "used"
+   },
+   "gap": null
+  },
+  {
+   "key": "nacelle",
+   "label": "Nacelle: gearbox, generator, yaw",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.20948860135551448,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "WT_TURBINE_EQUIPMENT_ASSEMBLY"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The published source treats it as one block, which has not been split into the standard parts. The source covers only the tower, so other ways it can fail are left out.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "SOURCE_NATIVE_ATOM_NOT_HARMONIZED_TO_STANDARD_EQUIPMENT_ASSEMBLY; OMITTED_NON_TOWER_FAILURE_MODES",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_2__docs_r2.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "foundation",
+   "label": "Turbine foundation",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.07393715341959335,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "WT_FOUNDATION"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_2__docs_r2.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "turbine_electrical",
+   "label": "Turbine-base and pad electrical",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.08441158348736907,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "WT_PAD_MOUNTED_ELECTRICAL"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. The electrical value would first need splitting by part.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; ELECTRICAL_VALUE_SPLIT_REQUIRED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_2__docs_r2.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "collection",
+   "label": "Collection network",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.04436229205175601,
+   "share_basis": "share of the asset's reference value; one line of the value budget, shared with GSU substation",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "WT_COLLECTION_SYSTEM"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. Where the cable network runs and how exposed it is need defining first.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; LINE_NETWORK_EXPOSURE_REQUIRED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_2__docs_r2.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "gsu",
+   "label": "GSU substation",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": null,
+   "share_basis": "counted with Collection network: one line of the value budget covers both",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "WT_GSU_SUBSTATION"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. How exposed the whole facility is needs defining first.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; FACILITY_LEVEL_EXPOSURE_REQUIRED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_2__docs_r2.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "control",
+   "label": "Control building, SCADA, met and O&M",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": null,
+   "share_basis": null,
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "WT_CONTROL_BUILDING_AND_SCADA"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_2__docs_r2.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "civil",
+   "label": "Civil: roads, pads, buildings, fences",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.02895871842267406,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "WT_CIVIL_INFRA"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. Its value mixes roads, pads, buildings and fences, which would need separating first.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; MIXED_CIVIL_BUCKET_REQUIRES_SPLIT",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_2__docs_r2.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "support",
+   "label": "Fieldwork and transport support",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.18114602587800369,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": true,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "SUPPORT_FIELDWORK",
+    "SUPPORT_TRANSPORT_LOGISTICS"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "Its cost (crews, cranes, transport) is added once, after the other parts' damage is known. It does not break on its own; its cost follows the damage to other parts.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION; NO_INDEPENDENT_FRAGILITY; SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION; NO_INDEPENDENT_FRAGILITY",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/tropical_cyclone_wind_wind/current/tropical_cyclone_wind_wind_curve_derivation_dossier__model_v1_2__docs_r2.md"
+    },
+    "research": []
+   }
   }
- ]
+ ],
+ "subcomponent_rollup": {
+  "expected": 10,
+  "with_curve": 1,
+  "gap": 9,
+  "complete": 1,
+  "incomplete": 9,
+  "evidence_labels": {
+   "field-calibrated": 0,
+   "published": 0,
+   "borrowed": 1,
+   "our judgment": 1
+  }
+ },
+ "value_split": {
+  "priced": 0.3512014787430684,
+  "partly": 0.0,
+  "no_damage": 0.0,
+  "not_priced": 0.6487985212569316,
+  "basis": "of the reference plant's physical value"
+ }
 }

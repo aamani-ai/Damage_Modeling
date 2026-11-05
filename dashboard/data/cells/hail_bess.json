@@ -46,7 +46,7 @@
    "label": "entry agent-read 2026-10-19 · release —"
   }
  },
- "summary": "Hail on batteries has no curve yet — no documented plan yet (the BESS plan only lists other hazards as later work, step 6).",
+ "summary": "Hail on batteries has no curve yet — the owner deferred hail for batteries (Hazard's battery decisions; this repository's battery plan lists other hazards only as later work). No evidence search has been run, and deferred does not mean zero risk.",
  "chain": {
   "stations": [
    {
@@ -58,7 +58,8 @@
     "files": [],
     "evidence": [],
     "fact": "gap entry",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "units",
@@ -69,7 +70,8 @@
     "files": [],
     "evidence": [],
     "fact": "–",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "axis_form",
@@ -80,7 +82,8 @@
     "files": [],
     "evidence": [],
     "fact": "–",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "evidence",
@@ -91,7 +94,8 @@
     "files": [],
     "evidence": [],
     "fact": "–",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "value",
@@ -102,7 +106,8 @@
     "files": [],
     "evidence": [],
     "fact": "–",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "audit",
@@ -113,7 +118,8 @@
     "files": [],
     "evidence": [],
     "fact": "–",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "artifact",
@@ -124,7 +130,8 @@
     "files": [],
     "evidence": [],
     "fact": "–",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "capability",
@@ -135,7 +142,8 @@
     "files": [],
     "evidence": [],
     "fact": "–",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "proof",
@@ -146,7 +154,8 @@
     "files": [],
     "evidence": [],
     "fact": "–",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "field_review",
@@ -162,7 +171,8 @@
     ],
     "evidence": [],
     "fact": "not searched",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    }
   ],
   "generation": "gap",
@@ -347,7 +357,12 @@
  },
  "files": {},
  "folder_files": [],
- "gap_reason": "No curve and no documented plan yet (the BESS plan only lists other hazards as later work, step 6)",
+ "gap_reason": "No curve yet: the owner deferred hail for batteries (Hazard's battery decisions; this repository's battery plan lists other hazards only as later work). No evidence search has been run, and deferred does not mean zero risk.",
+ "gap_reason_own": "No curve and no documented plan yet (the BESS plan only lists other hazards as later work, step 6)",
+ "gap_reason_source": {
+  "label": "the cell's catalogue entry",
+  "path": "docs/cells/catalogue/hail_bess.json"
+ },
  "binding": null,
  "sampling_notes": [],
  "plain": {
@@ -496,5 +511,549 @@
    "cost": "no tier stated"
   }
  },
- "build_findings": []
+ "build_findings": [],
+ "subcomponents": [
+  {
+   "key": "battery_enclosures",
+   "label": "Battery enclosures",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.7650273224043715,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "hail_bess",
+   "catalogue_status": "gap",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No curve yet: the owner deferred hail for batteries (Hazard's battery decisions; this repository's battery plan lists other hazards only as later work). No evidence search has been run, and deferred does not mean zero risk.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": "L",
+      "nodes": [
+       {
+        "node": "be_enc",
+        "name": "Enclosure Shell",
+        "level": 1,
+        "why": "Panel denting"
+       },
+       {
+        "node": "be_hvac",
+        "name": "Chiller & Liquid Loop",
+        "level": 1,
+        "why": "Condenser coil damage"
+       },
+       {
+        "node": "be_vent",
+        "name": "Explosion Venting",
+        "level": 1,
+        "why": "Panel damage"
+       }
+      ]
+     },
+     "bucket": "battery_enclosures"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/hail.json",
+     "sha256": "92c78e1b445872410e3f9eabce63c8278ab8430a6779186fa6cc42d848dac44f",
+     "search_log": "docs/evidence/occurrence/bess/hail.md",
+     "last_searched": null,
+     "question": "Has hail physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "No curve and no documented plan yet (the BESS plan only lists other hazards as later work, step 6)",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's catalogue entry",
+     "path": "docs/cells/catalogue/hail_bess.json"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+      "finding": "Owner direction: defer strong wind, tornado and the other additional hazards. \"This is a scope direction, not a finding that omitted hazards are negligible or have zero loss.\"",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "title": "Hazard's battery multi-hazard roadmap",
+      "finding": "Hail: \"Deferred; outside the completed first pass.\" Deferred does not mean negligible, safe or zero loss.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/evidence/occurrence/bess/hail.md",
+      "title": "Battery hail: the field-report register",
+      "finding": "Not searched for any part: nobody has looked for field reports yet. This is the default, not a finding.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/evidence/occurrence/bess/hail.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "title": "Does it happen? Leads from the battery's design (hail row)",
+      "finding": "Design leads only (panel denting, condenser coils, both rated low); the recommended next step, \"search first; park if nothing\", has not been run.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "pcs",
+   "label": "PCS",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.0947176684881603,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "hail_bess",
+   "catalogue_status": "gap",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No curve yet: the owner deferred hail for batteries (Hazard's battery decisions; this repository's battery plan lists other hazards only as later work). No evidence search has been run, and deferred does not mean zero risk.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "pcs"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/hail.json",
+     "sha256": "92c78e1b445872410e3f9eabce63c8278ab8430a6779186fa6cc42d848dac44f",
+     "search_log": "docs/evidence/occurrence/bess/hail.md",
+     "last_searched": null,
+     "question": "Has hail physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "No curve and no documented plan yet (the BESS plan only lists other hazards as later work, step 6)",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's catalogue entry",
+     "path": "docs/cells/catalogue/hail_bess.json"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+      "finding": "Owner direction: defer strong wind, tornado and the other additional hazards. \"This is a scope direction, not a finding that omitted hazards are negligible or have zero loss.\"",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "title": "Hazard's battery multi-hazard roadmap",
+      "finding": "Hail: \"Deferred; outside the completed first pass.\" Deferred does not mean negligible, safe or zero loss.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/evidence/occurrence/bess/hail.md",
+      "title": "Battery hail: the field-report register",
+      "finding": "Not searched for any part: nobody has looked for field reports yet. This is the default, not a finding.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/evidence/occurrence/bess/hail.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "title": "Does it happen? Leads from the battery's design (hail row)",
+      "finding": "Design leads only (panel denting, condenser coils, both rated low); the recommended next step, \"search first; park if nothing\", has not been run.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "electrical_balance",
+   "label": "MV, collection and controls",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.12021857923497267,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "hail_bess",
+   "catalogue_status": "gap",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No curve yet: the owner deferred hail for batteries (Hazard's battery decisions; this repository's battery plan lists other hazards only as later work). No evidence search has been run, and deferred does not mean zero risk.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "electrical_balance"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/hail.json",
+     "sha256": "92c78e1b445872410e3f9eabce63c8278ab8430a6779186fa6cc42d848dac44f",
+     "search_log": "docs/evidence/occurrence/bess/hail.md",
+     "last_searched": null,
+     "question": "Has hail physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "No curve and no documented plan yet (the BESS plan only lists other hazards as later work, step 6)",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's catalogue entry",
+     "path": "docs/cells/catalogue/hail_bess.json"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+      "finding": "Owner direction: defer strong wind, tornado and the other additional hazards. \"This is a scope direction, not a finding that omitted hazards are negligible or have zero loss.\"",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "title": "Hazard's battery multi-hazard roadmap",
+      "finding": "Hail: \"Deferred; outside the completed first pass.\" Deferred does not mean negligible, safe or zero loss.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/evidence/occurrence/bess/hail.md",
+      "title": "Battery hail: the field-report register",
+      "finding": "Not searched for any part: nobody has looked for field reports yet. This is the default, not a finding.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/evidence/occurrence/bess/hail.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "title": "Does it happen? Leads from the battery's design (hail row)",
+      "finding": "Design leads only (panel denting, condenser coils, both rated low); the recommended next step, \"search first; park if nothing\", has not been run.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "civil_works",
+   "label": "Civil works",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.014571948998178506,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "hail_bess",
+   "catalogue_status": "gap",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No curve yet: the owner deferred hail for batteries (Hazard's battery decisions; this repository's battery plan lists other hazards only as later work). No evidence search has been run, and deferred does not mean zero risk.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "civil_works"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/hail.json",
+     "sha256": "92c78e1b445872410e3f9eabce63c8278ab8430a6779186fa6cc42d848dac44f",
+     "search_log": "docs/evidence/occurrence/bess/hail.md",
+     "last_searched": null,
+     "question": "Has hail physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "No curve and no documented plan yet (the BESS plan only lists other hazards as later work, step 6)",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's catalogue entry",
+     "path": "docs/cells/catalogue/hail_bess.json"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+      "finding": "Owner direction: defer strong wind, tornado and the other additional hazards. \"This is a scope direction, not a finding that omitted hazards are negligible or have zero loss.\"",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "title": "Hazard's battery multi-hazard roadmap",
+      "finding": "Hail: \"Deferred; outside the completed first pass.\" Deferred does not mean negligible, safe or zero loss.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/evidence/occurrence/bess/hail.md",
+      "title": "Battery hail: the field-report register",
+      "finding": "Not searched for any part: nobody has looked for field reports yet. This is the default, not a finding.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/evidence/occurrence/bess/hail.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "title": "Does it happen? Leads from the battery's design (hail row)",
+      "finding": "Design leads only (panel denting, condenser coils, both rated low); the recommended next step, \"search first; park if nothing\", has not been run.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "fieldwork",
+   "label": "Fieldwork",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.00546448087431694,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "hail_bess",
+   "catalogue_status": "gap",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No curve yet: the owner deferred hail for batteries (Hazard's battery decisions; this repository's battery plan lists other hazards only as later work). No evidence search has been run, and deferred does not mean zero risk.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "fieldwork"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/hail.json",
+     "sha256": "92c78e1b445872410e3f9eabce63c8278ab8430a6779186fa6cc42d848dac44f",
+     "search_log": "docs/evidence/occurrence/bess/hail.md",
+     "last_searched": null,
+     "question": "Has hail physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "No curve and no documented plan yet (the BESS plan only lists other hazards as later work, step 6)",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's catalogue entry",
+     "path": "docs/cells/catalogue/hail_bess.json"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+      "finding": "Owner direction: defer strong wind, tornado and the other additional hazards. \"This is a scope direction, not a finding that omitted hazards are negligible or have zero loss.\"",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "title": "Hazard's battery multi-hazard roadmap",
+      "finding": "Hail: \"Deferred; outside the completed first pass.\" Deferred does not mean negligible, safe or zero loss.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/evidence/occurrence/bess/hail.md",
+      "title": "Battery hail: the field-report register",
+      "finding": "Not searched for any part: nobody has looked for field reports yet. This is the default, not a finding.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/evidence/occurrence/bess/hail.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "title": "Does it happen? Leads from the battery's design (hail row)",
+      "finding": "Design leads only (panel denting, condenser coils, both rated low); the recommended next step, \"search first; park if nothing\", has not been run.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  }
+ ],
+ "subcomponent_rollup": {
+  "expected": 5,
+  "with_curve": 0,
+  "gap": 5,
+  "complete": 0,
+  "incomplete": 5,
+  "evidence_labels": {
+   "field-calibrated": 0,
+   "published": 0,
+   "borrowed": 0,
+   "our judgment": 0
+  }
+ }
 }

@@ -53,12 +53,12 @@ export function PartPicture({ cov, loadOrder, part, typeLabel, typeHref }: { cov
   if (!hz || !nodes.length) return null;
   return (
     <div>
-      <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Where this part sits</div>
+      <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Where this part sits</div>
       <div ref={stage} className="relative mt-1 overflow-hidden rounded-md border border-border bg-[#dde4e8]" style={{ height: 210 }}>
         <div ref={host} className="absolute inset-0" />
-        {status !== "ready" || !canDraw ? <div className="absolute inset-0 grid place-items-center text-[11px] text-slate-600">{status === "failed" || !canDraw ? "The 3D model could not be drawn here." : "Loading the Digital Twin's model…"}</div> : null}
+        {status !== "ready" || !canDraw ? <div className="absolute inset-0 grid place-items-center text-[12px] text-slate-600">{status === "failed" || !canDraw ? "The 3D model could not be drawn here." : "Loading the Digital Twin's model…"}</div> : null}
       </div>
-      <p className="mt-1 flex flex-wrap items-center gap-1.5 text-[11px] text-muted-foreground">
+      <p className="mt-1 flex flex-wrap items-center gap-1.5 text-[12px] text-muted-foreground">
         <Swatch state="curve" /> this curve, on the twin: {named.join(", ")}
         {typeHref ? <Link href={typeHref} className="ml-auto text-accent hover:underline">all of the {typeLabel.toLowerCase()} ▸</Link> : null}
       </p>

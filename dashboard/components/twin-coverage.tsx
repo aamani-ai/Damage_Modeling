@@ -12,6 +12,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useUrlParam } from "@/lib/url-state";
 import type { Coverage, CoverageHazard, CoverageState, Spark } from "@/lib/types";
 import { Sparkline } from "./sparkline";
+import { InfoHint } from "./ui";
 
 export const STATE_ORDER: CoverageState[] = ["curve", "conditioner", "no_curve", "no_direct_damage", "outside"];
 // Data colours, the same in both themes: the legend explains a picture whose scene is always lit the same way.
@@ -67,16 +68,16 @@ export function Swatch({ state, className = "" }: { state: CoverageState; classN
   return <span aria-hidden className={`inline-block h-2.5 w-2.5 shrink-0 rounded-[3px] border border-black/15 ${className}`} style={{ background: STATE_CSS[state] }} />;
 }
 
-export function CoverageLegend({ words, counts }: { words: Record<CoverageState, string>; counts?: Partial<Record<CoverageState, number>> }) {
+export function CoverageLegend({ words, meaning, counts }: { words: Record<CoverageState, string>; meaning?: Record<CoverageState, string>; counts?: Partial<Record<CoverageState, number>> }) {
   return (
-    <ul className="space-y-1 text-[11.5px]" aria-label="What the colours mean">
+    <ul className="space-y-1 text-[12.5px]" aria-label="What the colours mean">
       {STATE_ORDER.map((s) => {
         const n = counts?.[s];
         return (
-          <li key={s} className={`flex items-center gap-2 ${counts && !n ? "opacity-45" : ""}`}>
+          <li key={s} title={meaning?.[s]} className={`flex items-center gap-2 ${counts && !n ? "opacity-45" : ""}`}>
             <Swatch state={s} />
-            <span className="leading-tight">{words[s]}</span>
-            {counts ? <span className="tabular ml-auto text-[10.5px] text-muted-foreground">{n ?? 0}</span> : null}
+            <span className="leading-tight">{words[s]}{meaning?.[s] ? <> <InfoHint label={`What “${words[s]}” means`}>{meaning[s]}</InfoHint></> : null}</span>
+            {counts ? <span className="tabular ml-auto text-[11.5px] text-muted-foreground">{n ?? 0}</span> : null}
           </li>
         );
       })}
@@ -184,7 +185,7 @@ export function useWheelGate(ref: React.RefObject<HTMLElement | null>, always = 
 function Tool({ label, onClick, active = false, disabled = false, title }: { label: string; onClick: () => void; active?: boolean; disabled?: boolean; title: string }) {
   return (
     <button type="button" onClick={onClick} disabled={disabled} aria-pressed={active} title={title}
-      className={`rounded px-1.5 py-0.5 text-[11px] font-medium transition-colors ${active ? "bg-[#1b8a6b] text-white" : "text-slate-700 hover:bg-black/5"} disabled:cursor-not-allowed disabled:opacity-40`}>
+      className={`rounded px-1.5 py-0.5 text-[12px] font-medium transition-colors ${active ? "bg-[#1b8a6b] text-white" : "text-slate-700 hover:bg-black/5"} disabled:cursor-not-allowed disabled:opacity-40`}>
       {label}
     </button>
   );
@@ -198,7 +199,7 @@ function CurveLink({ part, spark, href, onShow }: { part: string; spark?: Spark;
       <span aria-hidden className="text-accent">{onShow ? "▲" : "▸"}</span>
     </>
   );
-  const cls = "inline-flex max-w-full items-center gap-1 rounded border border-border bg-card px-1 py-px text-[10.5px] text-foreground hover:border-accent/60";
+  const cls = "inline-flex max-w-full items-center gap-1 rounded border border-border bg-card px-1 py-px text-[11.5px] text-foreground hover:border-accent/60";
   if (onShow) return <button type="button" onClick={() => onShow(part)} className={cls} title={`show the curve for ${part}`}>{inner}</button>;
   if (href) return <Link href={href} className={cls} title={`open the curve for ${part}`}>{inner}</Link>;
   return <span className={cls}>{inner}</span>;
@@ -332,7 +333,8 @@ export function TwinCoverage({
   const showCurve = (part: string) => {
     setPart(part);
     setFull(false);
-    document.getElementById("card-curve")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    // an instant jump: a smooth scroll can be dropped (a busy page, a background tab) and the click then seems to do nothing
+    window.dispatchEvent(new Event("open-curve")); window.setTimeout(() => document.getElementById("card-curve")?.scrollIntoView({ block: "start" }), 0);
   };
   const systems = hz.systems[treeKey] ?? [];
   const counts: Partial<Record<CoverageState, number>> = {};
@@ -345,13 +347,15 @@ export function TwinCoverage({
   const link = (p: string) => <CurveLink key={p} part={p} spark={hz.sparks?.[p]} href={curveHref(p)} onShow={mode === "cell" && hz.href ? showCurve : undefined} />;
 
   return (
-    <div className={full ? "fixed inset-0 z-50 overflow-auto bg-background p-3" : ""} role={full ? "dialog" : undefined} aria-modal={full || undefined} aria-label={full ? "What the curve covers, full screen" : undefined}>
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 px-3 pb-2 pt-2.5">
-        {title ? <span className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{title}</span> : null}
+    <div className={full ? "fixed inset-0 z-50 overflow-auto bg-background p-3" : ""} role={full ? "dialog" : undefined} aria-modal={full || undefined} aria-label={full ? "What the curve covers on the Digital Twin, full screen" : undefined}>
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 px-3 pb-2 pt-2">
+        {/* a plain title is a heading; a fold-out title (the cell page's) brings its own toggle look */}
+        {typeof title === "string" ? <span className="text-[12px] font-semibold uppercase tracking-wide text-muted-foreground">{title}</span> : title ? <span className="text-[12px] text-muted-foreground">{title}</span> : null}
+        <span className="basis-full text-[12px] text-muted-foreground lg:basis-auto">Click a part in the picture, or a system in the list, to see what {hz.gap ? "this hazard" : "the curve"} does with it.</span>
         {hazardPicker}
         <div className="ml-auto flex items-center gap-2">
           {treeKeys.length > 1 ? (
-            <div role="radiogroup" aria-label="Which reference model" className="inline-flex rounded-md border border-border bg-card p-0.5 text-[11px]">
+            <div role="radiogroup" aria-label="Which reference model" className="inline-flex rounded-md border border-border bg-card p-0.5 text-[12px]">
               {treeKeys.map((k) => (
                 <button key={k} type="button" role="radio" aria-checked={k === treeKey} onClick={() => { setView(k === treeKeys[0] ? null : k); clearSel(); }}
                   className={`rounded px-2 py-0.5 ${k === treeKey ? "bg-accent/10 text-accent" : "text-muted-foreground hover:text-foreground"}`}>
@@ -360,7 +364,7 @@ export function TwinCoverage({
               ))}
             </div>
           ) : null}
-          <button type="button" onClick={() => setFull((f) => !f)} aria-pressed={full} className="rounded-md border border-border bg-card px-2 py-0.5 text-[11px] text-muted-foreground hover:text-foreground" title={full ? "Leave full screen (Esc)" : "Show the picture full screen"}>
+          <button type="button" onClick={() => setFull((f) => !f)} aria-pressed={full} className="rounded-md border border-border bg-card px-2 py-0.5 text-[12px] text-muted-foreground hover:text-foreground" title={full ? "Leave full screen (Esc)" : "Show the picture full screen"}>
             {full ? "✕ Close full screen" : "⤢ Full screen"}
           </button>
         </div>
@@ -369,9 +373,9 @@ export function TwinCoverage({
         <div className="min-w-0">
           <div ref={stage} className="relative overflow-hidden rounded-md border border-border bg-[#dde4e8]" style={{ height: full ? "calc(100vh - 170px)" : height }}>
             <div ref={host} className="absolute inset-0" />
-            {shown === "loading" ? <div className="absolute inset-0 grid place-items-center text-[12px] text-slate-600">Loading the Digital Twin&apos;s model…</div> : null}
+            {shown === "loading" ? <div className="absolute inset-0 grid place-items-center text-[13px] text-slate-600">Loading the Digital Twin&apos;s model…</div> : null}
             {shown === "failed" || shown === "no_webgl" ? (
-              <div className="absolute inset-0 grid place-items-center px-6 text-center text-[12px] text-slate-700">
+              <div className="absolute inset-0 grid place-items-center px-6 text-center text-[13px] text-slate-700">
                 {shown === "no_webgl" ? "This browser cannot draw 3D here." : "The 3D model could not be loaded."} The list beside it says the same in words.
               </div>
             ) : null}
@@ -385,11 +389,11 @@ export function TwinCoverage({
                 <Tool label="Reset" title="Reset the camera and the tools" onClick={resetView} />
               </div>
             ) : null}
-            <div className="pointer-events-none absolute bottom-2 left-2 rounded border border-black/10 bg-white/85 px-2 py-1 text-[10.5px] text-slate-600">
+            <div className="pointer-events-none absolute bottom-2 left-2 rounded border border-black/10 bg-white/85 px-2 py-1 text-[11.5px] text-slate-600">
               drag to turn · {full ? "scroll" : "click, then scroll"} to zoom · click a part · the Digital Twin&apos;s reference {treeKey === "plant" ? "site" : "model"}
             </div>
           </div>
-          <div className="mt-1.5 min-h-[34px] rounded-md border border-border bg-card px-2.5 py-1.5 text-[11.5px]" aria-live="polite">
+          <div className={sel ? "mt-1.5 min-h-[34px] rounded-md border border-border bg-card px-2.5 py-1.5 text-[12.5px]" : "sr-only"} aria-live="polite">
             {sel ? (
               <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
                 {sel.row ? <Swatch state={sel.row.s} /> : sel.group?.length ? <Swatch state={sel.group[0].state} /> : null}
@@ -403,34 +407,32 @@ export function TwinCoverage({
                 )}
                 {sel.row?.s === "curve" ? <span className="ml-auto flex flex-wrap gap-1">{partsOf(sel.row).map(link)}</span> : null}
                 {!sel.row && groupCurveParts(tree, hz, treeKey, sel.id).length ? <span className="ml-auto flex flex-wrap gap-1">{groupCurveParts(tree, hz, treeKey, sel.id).map(link)}</span> : null}
-                <button type="button" onClick={clearSel} className="text-[10.5px] text-muted-foreground hover:text-foreground" title="Clear the selection">clear</button>
+                <button type="button" onClick={clearSel} className="text-[11.5px] text-muted-foreground hover:text-foreground" title="Clear the selection">clear</button>
               </span>
-            ) : (
-              <span className="text-muted-foreground">Click a part in the picture, or a system in the list, to see what {hz.gap ? "this hazard" : "the curve"} does with it.</span>
-            )}
+            ) : null}
           </div>
-          {cov.type.picture_note ? <p className="mt-1 px-0.5 text-[10.5px] text-muted-foreground">{cov.type.picture_note}</p> : null}
+          {cov.type.picture_note && mode === "cell" ? <p className="mt-1 px-0.5 text-[11.5px] text-muted-foreground">{cov.type.picture_note}</p> : null}
         </div>
         {/* the list takes the picture's height on a wide screen, so the two columns end together */}
         <div className="min-w-0 lg:relative">
           <div className="flex flex-col gap-3 lg:absolute lg:inset-0">
             <div className="shrink-0">
-              <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">What the colours mean <span className="font-normal normal-case tracking-normal">· parts counted</span></div>
-              <CoverageLegend words={cov.state_words} counts={counts} />
+              <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">What the colours mean <span className="font-normal normal-case tracking-normal">· number of twin parts</span></div>
+              <CoverageLegend words={cov.state_words} meaning={cov.state_meaning} counts={counts} />
             </div>
             <div className="flex min-h-0 flex-1 flex-col">
-              <div className="mb-1 shrink-0 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{treeName(treeKey)}, as the twin breaks it down</div>
-              {hz.gap ? <p className="mb-1 shrink-0 text-[11px] text-muted-foreground">No curve for {hz.hazard.label.toLowerCase()} yet: every part is in the value with no curve.</p> : null}
+              <div className="mb-1 shrink-0 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{treeName(treeKey)}, as the twin breaks it down</div>
+              {hz.gap ? <p className="mb-1 shrink-0 text-[12px] text-muted-foreground">No curve for {hz.hazard.label.toLowerCase()} yet: no part has a curve yet.</p> : null}
               <ul className="thin-scroll max-h-[360px] min-h-0 flex-1 space-y-0.5 overflow-y-auto pr-1 lg:max-h-none">
                 {systems.map((row) => (
                   <li key={row.node} className={`rounded px-1.5 py-1 ${selected === row.node ? "bg-muted" : "hover:bg-muted/60"}`}>
-                    <button type="button" onClick={() => pick(row.node)} aria-pressed={selected === row.node} className="flex w-full items-center gap-1.5 text-left text-[11.5px] font-medium">
+                    <button type="button" onClick={() => pick(row.node)} aria-pressed={selected === row.node} className="flex w-full items-center gap-1.5 text-left text-[12.5px] font-medium">
                       <Swatch state={row.state} />{row.name}
                     </button>
                     {row.by_state.map((b) => {
                       const curveParts = b.state === "curve" ? [...new Set(b.parts.flatMap((p) => p.parts ?? (p.part ? [p.part] : [])))] : [];
                       return (
-                        <div key={b.state} className="pl-4 text-[10.5px] leading-snug text-muted-foreground">
+                        <div key={b.state} className="pl-4 text-[11.5px] leading-snug text-muted-foreground">
                           <span className="font-medium text-foreground/80">{cov.state_short[b.state]}</span> — {b.parts.map((p) => p.name).join(", ")}
                           {curveParts.length ? <div className="mt-0.5 flex flex-wrap gap-1">{curveParts.map(link)}</div> : null}
                         </div>

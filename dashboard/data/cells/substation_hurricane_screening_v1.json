@@ -64,7 +64,7 @@
    "label": "entry agent-read 2026-10-19 · release —"
   }
  },
- "summary": "Hurricane wind on substations reuses another cell's curve: the canonical solar TC-wind GSU/substation assembly curve is already separate from the solar array, so it is reused for the standalone station without inventing a solar plant (see docs/contracts/hazard_handoff/substation_hurricane_screening_v1/README.md).",
+ "summary": "Hurricane wind on substations: 1 curve for 1 part (GSU and substation), borrowed from Hurricane wind × Solar farm; read against site-facility demand ratio (event / design pressure); the numbers are our judgment; 100 % of the station's value is priced.",
  "chain": {
   "stations": [
    {
@@ -81,7 +81,8 @@
     ],
     "evidence": [],
     "fact": "2 deferred",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "units",
@@ -92,7 +93,8 @@
     "files": [],
     "evidence": [],
     "fact": "source cell",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "axis_form",
@@ -103,7 +105,8 @@
     "files": [],
     "evidence": [],
     "fact": "—",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "evidence",
@@ -114,7 +117,8 @@
     "files": [],
     "evidence": [],
     "fact": "no register",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "value",
@@ -130,7 +134,8 @@
     ],
     "evidence": [],
     "fact": "crosswalk",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "audit",
@@ -141,7 +146,8 @@
     "files": [],
     "evidence": [],
     "fact": "—",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "artifact",
@@ -157,7 +163,8 @@
     ],
     "evidence": [],
     "fact": "v2.1 · docs r2",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "capability",
@@ -168,7 +175,8 @@
     "files": [],
     "evidence": [],
     "fact": "—",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "proof",
@@ -184,7 +192,8 @@
     ],
     "evidence": [],
     "fact": "validation",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "field_review",
@@ -195,7 +204,8 @@
     "files": [],
     "evidence": [],
     "fact": "not searched · agent-read 10-19",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    }
   ],
   "generation": "binding",
@@ -621,6 +631,8 @@
   }
  ],
  "gap_reason": null,
+ "gap_reason_own": null,
+ "gap_reason_source": null,
  "binding": {
   "source_cell_id": "tropical_cyclone_wind_solar",
   "source_entry_id": "tropical_cyclone_wind_solar",
@@ -647,12 +659,12 @@
  "plain": {
   "rail": {
    "exists": {
-    "words": "Reused · borrows another cell's curve",
+    "words": "Reused · borrows another asset's curve",
     "code": "REUSED"
    },
    "evidence": {
     "words": "Evidence: our judgment",
-    "code": "How damage rises: our judgment · how it becomes dollars: our judgment",
+    "code": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
     "tiers": [
      "T4"
     ],
@@ -677,10 +689,10 @@
     "id": "covers",
     "name": "What it covers",
     "meaning": "The parts that have a curve, their share of the value, and what has none yet",
-    "fact": "1 part with a curve",
+    "fact": "1 part with a curve · 5 of 5 subsystems with a curve",
     "paragraphs": [
-     "Hurricane wind on substations: the canonical solar TC-wind GSU/substation assembly curve is already separate from the solar array, so it is reused for the standalone station without inventing a solar plant (see docs/contracts/hazard_handoff/substation_hurricane_screening_v1/README.md). It names 1 part: Whole station (fenced assembly). Outside its scope: external access road and project support allowances ($3.06M, outside the fenced value; unmodeled, not zero), storm surge and rain flooding (Flood entry), tornado (convective wind binding) and business interruption, revenue and insured interest. Kinds of damage it does not include: wind-driven rain and windborne debris.",
-     "For this hazard the substation is split into 1 part: Whole station (fenced assembly).",
+     "Hurricane wind on substations: the canonical solar TC-wind GSU/substation assembly curve is already separate from the solar array, so it is reused for the standalone station without inventing a solar plant (see docs/contracts/hazard_handoff/substation_hurricane_screening_v1/README.md). It names 1 part (listed below). It also lists 6 things it leaves out (below).",
+     "This hazard's curves cover 1 part of the substation, listed below after the subsystem each belongs to and named as the catalogue entry writes them.",
      "The damage ratio is a share of replacement value of the same fenced station, $27,353,236.37 (MISO MTEP24 published table amounts), applied once. The files state no plant-level dollar figure for this asset."
     ],
     "holds": [
@@ -694,6 +706,10 @@
       "text": "Whole station (fenced…",
       "tone": "key",
       "title": "Whole station (fenced assembly)"
+     },
+     {
+      "text": "5 of 5 subsystems with a curve",
+      "tone": "muted"
      }
     ]
    },
@@ -703,8 +719,8 @@
     "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "not written yet",
     "paragraphs": [
-     "No hazard axis is declared. The input, in the catalogue's words: pressure ratio: (event 3-second gust / ASCE MRI300 reference design gust, 10 m, Exposure C) squared, valid 0 to 2; STORM 10-minute wind converted by (1/0.88) x 1.20; outside the range is unavailable, not clamped.",
-     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell."
+     "No hazard axis is declared. What Hazard has to supply for each event is below.",
+     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page."
     ],
     "holds": [
      "axis_form",
@@ -733,7 +749,7 @@
     "meaning": "The sources, what each one gave, and how sure we are",
     "fact": "not written yet",
     "paragraphs": [
-     "No source list could be read for this cell. The source and claim registers are machine-readable files in the cell folder."
+     "No source list could be read for this cell."
     ],
     "holds": [
      "evidence"
@@ -743,7 +759,7 @@
      {
       "text": "our judgment",
       "tone": "key",
-      "title": "How damage rises: our judgment · how it becomes dollars: our judgment"
+      "title": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment"
      },
      {
       "text": "Canonical…",
@@ -764,8 +780,8 @@
    {
     "id": "checked",
     "name": "Has it been checked",
-    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
-    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "meaning": "Outside checks, and who has read the entry",
+    "fact": "no outside check yet · read by an agent only",
     "paragraphs": [
      "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says passed.",
      "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet."
@@ -777,10 +793,6 @@
     "chips": [
      {
       "text": "no outside check yet",
-      "tone": "muted"
-     },
-     {
-      "text": "field reports: not searched",
       "tone": "muted"
      },
      {
@@ -796,7 +808,7 @@
    "proof"
   ],
   "word": "our judgment",
-  "halves": "How damage rises: our judgment · how it becomes dollars: our judgment",
+  "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
   "hazard_paths": [],
   "capabilities": [
    {
@@ -863,28 +875,28 @@
     "id": "scope",
     "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Hurricane wind on substations: the canonical solar TC-wind GSU/substation assembly curve is already separate from the solar array, so it is reused for the standalone station without inventing a solar plant (see docs/contracts/hazard_handoff/substation_hurricane_screening_v1/README.md). It names 1 part: Whole station (fenced assembly). Outside its scope: external access road and project support allowances ($3.06M, outside the fenced value; unmodeled, not zero), storm surge and rain flooding (Flood entry), tornado (convective wind binding) and business interruption, revenue and insured interest. Kinds of damage it does not include: wind-driven rain and windborne debris.",
+    "paragraph": "Hurricane wind on substations: the canonical solar TC-wind GSU/substation assembly curve is already separate from the solar array, so it is reused for the standalone station without inventing a solar plant (see docs/contracts/hazard_handoff/substation_hurricane_screening_v1/README.md). It names 1 part (listed below). It also lists 6 things it leaves out (below).",
     "plain_fact": "1 part · 4 left out"
    },
    {
     "id": "units",
     "name": "What breaks",
     "meaning": "The parts of the plant the hazard damages, each with its own curve",
-    "paragraph": "For this hazard the substation is split into 1 part: Whole station (fenced assembly).",
+    "paragraph": "This hazard's curves cover 1 part of the substation, listed below after the subsystem each belongs to and named as the catalogue entry writes them.",
     "plain_fact": "1 part"
    },
    {
     "id": "axis_form",
     "name": "How damage is measured",
     "meaning": "The hazard intensity on the x-axis and the shape of the curve",
-    "paragraph": "No hazard axis is declared. The input, in the catalogue's words: pressure ratio: (event 3-second gust / ASCE MRI300 reference design gust, 10 m, Exposure C) squared, valid 0 to 2; STORM 10-minute wind converted by (1/0.88) x 1.20; outside the range is unavailable, not clamped.",
+    "paragraph": "No hazard axis is declared. What Hazard has to supply for each event is below.",
     "plain_fact": "—"
    },
    {
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "No source list could be read for this cell. The source and claim registers are machine-readable files in the cell folder.",
+    "paragraph": "No source list could be read for this cell.",
     "plain_fact": "0 sources · our judgment"
    },
    {
@@ -898,7 +910,7 @@
     "id": "audit",
     "name": "The audit",
     "meaning": "The seven checks a curve passes before release",
-    "paragraph": "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell.",
+    "paragraph": "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page.",
     "plain_fact": "no audit found"
    },
    {
@@ -999,5 +1011,473 @@
    "cost": "our judgment"
   }
  },
- "build_findings": []
+ "build_findings": [],
+ "hazard_note": null,
+ "subcomponents": [
+  {
+   "key": "substation_hv_yard",
+   "label": "345 kV yard: breakers, disconnects, bus, instrument transformers, deadends",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "share": 0.35273388144155027,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "substation_hurricane_screening_v1",
+   "catalogue_status": "reused",
+   "cell_state": "whole",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+   ],
+   "failure_unit_ids": [
+    "PV_GSU_SUBSTATION"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed · our judgment",
+   "construction": [
+    {
+     "curve_id": "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES",
+     "data_path": "curves/tropical_cyclone_wind_solar/TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES@model_v2_1__docs_r2.json",
+     "curve_type": "ordered damage state lognormal",
+     "curve_form": "ordered_damage_state_lognormal",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
+     "artifact": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
+     "parameter_count": 8,
+     "source_ids": [
+      "GOVERNANCE_CONTRACT",
+      "NO_DIRECT_TC_CALIBRATION_SOURCE",
+      "TCWS-S020",
+      "TCWS-S021",
+      "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",
+      "hazard": {
+       "state": "not_on",
+       "sentences": [
+        "No layer on Hazard's dashboard uses this binding yet. The source cell's layer is a different run, of the asset that cell prices.",
+        "Hazard runs it from perils/hurricane/src/hurricane/resources/substation_screening/binding.json on branch claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration, not on Hazard's main; that binding pins tropical_cyclone_wind_solar model v2.1, docs r2, the release this page shows.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "tropical_cyclone_wind_solar",
+     "part": "GSU and substation",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": {
+    "entry_id": "tropical_cyclone_wind_solar",
+    "title": "Hurricane wind × Solar farm",
+    "curves": [
+     "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+    ],
+    "rationale": null,
+    "tier": null,
+    "tier_word": null
+   },
+   "scope_notes": [],
+   "production_use": {
+    "state": "reused_binding",
+    "consumer_pin": null,
+    "hazard": "not_on"
+   },
+   "gap": null
+  },
+  {
+   "key": "substation_lv_yard",
+   "label": "138 kV yard: breakers, disconnects, bus, instrument transformers, deadends",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "share": 0.10270641648651485,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "substation_hurricane_screening_v1",
+   "catalogue_status": "reused",
+   "cell_state": "whole",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+   ],
+   "failure_unit_ids": [
+    "PV_GSU_SUBSTATION"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed · our judgment",
+   "construction": [
+    {
+     "curve_id": "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES",
+     "data_path": "curves/tropical_cyclone_wind_solar/TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES@model_v2_1__docs_r2.json",
+     "curve_type": "ordered damage state lognormal",
+     "curve_form": "ordered_damage_state_lognormal",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
+     "artifact": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
+     "parameter_count": 8,
+     "source_ids": [
+      "GOVERNANCE_CONTRACT",
+      "NO_DIRECT_TC_CALIBRATION_SOURCE",
+      "TCWS-S020",
+      "TCWS-S021",
+      "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",
+      "hazard": {
+       "state": "not_on",
+       "sentences": [
+        "No layer on Hazard's dashboard uses this binding yet. The source cell's layer is a different run, of the asset that cell prices.",
+        "Hazard runs it from perils/hurricane/src/hurricane/resources/substation_screening/binding.json on branch claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration, not on Hazard's main; that binding pins tropical_cyclone_wind_solar model v2.1, docs r2, the release this page shows.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "tropical_cyclone_wind_solar",
+     "part": "GSU and substation",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": {
+    "entry_id": "tropical_cyclone_wind_solar",
+    "title": "Hurricane wind × Solar farm",
+    "curves": [
+     "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+    ],
+    "rationale": null,
+    "tier": null,
+    "tier_word": null
+   },
+   "scope_notes": [],
+   "production_use": {
+    "state": "reused_binding",
+    "consumer_pin": null,
+    "hazard": "not_on"
+   },
+   "gap": null
+  },
+  {
+   "key": "substation_transformation",
+   "label": "Autotransformers, oil containment and firewall",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "share": 0.1925262037016385,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "substation_hurricane_screening_v1",
+   "catalogue_status": "reused",
+   "cell_state": "whole",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+   ],
+   "failure_unit_ids": [
+    "PV_GSU_SUBSTATION"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed · our judgment",
+   "construction": [
+    {
+     "curve_id": "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES",
+     "data_path": "curves/tropical_cyclone_wind_solar/TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES@model_v2_1__docs_r2.json",
+     "curve_type": "ordered damage state lognormal",
+     "curve_form": "ordered_damage_state_lognormal",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
+     "artifact": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
+     "parameter_count": 8,
+     "source_ids": [
+      "GOVERNANCE_CONTRACT",
+      "NO_DIRECT_TC_CALIBRATION_SOURCE",
+      "TCWS-S020",
+      "TCWS-S021",
+      "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",
+      "hazard": {
+       "state": "not_on",
+       "sentences": [
+        "No layer on Hazard's dashboard uses this binding yet. The source cell's layer is a different run, of the asset that cell prices.",
+        "Hazard runs it from perils/hurricane/src/hurricane/resources/substation_screening/binding.json on branch claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration, not on Hazard's main; that binding pins tropical_cyclone_wind_solar model v2.1, docs r2, the release this page shows.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "tropical_cyclone_wind_solar",
+     "part": "GSU and substation",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": {
+    "entry_id": "tropical_cyclone_wind_solar",
+    "title": "Hurricane wind × Solar farm",
+    "curves": [
+     "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+    ],
+    "rationale": null,
+    "tier": null,
+    "tier_word": null
+   },
+   "scope_notes": [],
+   "production_use": {
+    "state": "reused_binding",
+    "consumer_pin": null,
+    "hazard": "not_on"
+   },
+   "gap": null
+  },
+  {
+   "key": "substation_controls_auxiliaries",
+   "label": "Relays, control house, station battery, SCADA, station service, control cable",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "share": 0.23777503298992608,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "substation_hurricane_screening_v1",
+   "catalogue_status": "reused",
+   "cell_state": "whole",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+   ],
+   "failure_unit_ids": [
+    "PV_GSU_SUBSTATION"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed · our judgment",
+   "construction": [
+    {
+     "curve_id": "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES",
+     "data_path": "curves/tropical_cyclone_wind_solar/TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES@model_v2_1__docs_r2.json",
+     "curve_type": "ordered damage state lognormal",
+     "curve_form": "ordered_damage_state_lognormal",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
+     "artifact": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
+     "parameter_count": 8,
+     "source_ids": [
+      "GOVERNANCE_CONTRACT",
+      "NO_DIRECT_TC_CALIBRATION_SOURCE",
+      "TCWS-S020",
+      "TCWS-S021",
+      "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",
+      "hazard": {
+       "state": "not_on",
+       "sentences": [
+        "No layer on Hazard's dashboard uses this binding yet. The source cell's layer is a different run, of the asset that cell prices.",
+        "Hazard runs it from perils/hurricane/src/hurricane/resources/substation_screening/binding.json on branch claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration, not on Hazard's main; that binding pins tropical_cyclone_wind_solar model v2.1, docs r2, the release this page shows.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "tropical_cyclone_wind_solar",
+     "part": "GSU and substation",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": {
+    "entry_id": "tropical_cyclone_wind_solar",
+    "title": "Hurricane wind × Solar farm",
+    "curves": [
+     "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+    ],
+    "rationale": null,
+    "tier": null,
+    "tier_word": null
+   },
+   "scope_notes": [],
+   "production_use": {
+    "state": "reused_binding",
+    "consumer_pin": null,
+    "hazard": "not_on"
+   },
+   "gap": null
+  },
+  {
+   "key": "substation_civil_support",
+   "label": "Site work, access road, drainage and lightning shielding",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "share": 0.11425846538037024,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "substation_hurricane_screening_v1",
+   "catalogue_status": "reused",
+   "cell_state": "whole",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+   ],
+   "failure_unit_ids": [
+    "PV_GSU_SUBSTATION"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed · our judgment",
+   "construction": [
+    {
+     "curve_id": "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES",
+     "data_path": "curves/tropical_cyclone_wind_solar/TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES@model_v2_1__docs_r2.json",
+     "curve_type": "ordered damage state lognormal",
+     "curve_form": "ordered_damage_state_lognormal",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
+     "artifact": "docs/cells/tropical_cyclone_wind_solar/current/tropical_cyclone_wind_solar__model_v2_1__docs_r2__curve_artifact.json",
+     "parameter_count": 8,
+     "source_ids": [
+      "GOVERNANCE_CONTRACT",
+      "NO_DIRECT_TC_CALIBRATION_SOURCE",
+      "TCWS-S020",
+      "TCWS-S021",
+      "TCWS2_CELL_LOCAL_SYNTHETIC_DECISION"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2",
+      "hazard": {
+       "state": "not_on",
+       "sentences": [
+        "No layer on Hazard's dashboard uses this binding yet. The source cell's layer is a different run, of the asset that cell prices.",
+        "Hazard runs it from perils/hurricane/src/hurricane/resources/substation_screening/binding.json on branch claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration, not on Hazard's main; that binding pins tropical_cyclone_wind_solar model v2.1, docs r2, the release this page shows.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "tropical_cyclone_wind_solar",
+     "part": "GSU and substation",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": {
+    "entry_id": "tropical_cyclone_wind_solar",
+    "title": "Hurricane wind × Solar farm",
+    "curves": [
+     "TCWS21_GSU_SUBSTATION_SCREENING_T4_ORDERED_STATES"
+    ],
+    "rationale": null,
+    "tier": null,
+    "tier_word": null
+   },
+   "scope_notes": [],
+   "production_use": {
+    "state": "reused_binding",
+    "consumer_pin": null,
+    "hazard": "not_on"
+   },
+   "gap": null
+  }
+ ],
+ "subcomponent_rollup": {
+  "expected": 5,
+  "with_curve": 5,
+  "gap": 0,
+  "complete": 5,
+  "incomplete": 0,
+  "evidence_labels": {
+   "field-calibrated": 0,
+   "published": 0,
+   "borrowed": 5,
+   "our judgment": 5
+  }
+ },
+ "value_split": {
+  "priced": 0.9999999999999999,
+  "partly": 0.0,
+  "no_damage": 0.0,
+  "not_priced": 0.0,
+  "basis": "of the reference station's budget"
+ }
 }

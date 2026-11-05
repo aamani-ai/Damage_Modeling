@@ -18,7 +18,7 @@ import subprocess
 from pathlib import Path, PurePosixPath
 from typing import Any
 
-from .common import CHECKOUT, ROOT, rel, sha256
+from .common import CHECKOUT, LOCAL_PATH_RE, ROOT, redact_local, rel, sha256
 
 try:
     import openpyxl  # type: ignore
@@ -28,12 +28,14 @@ except ImportError:  # pragma: no cover
 HAZARD_REPO_URL = "https://github.com/aamani-ai/Hazard_Modeling"
 DOI_RE = re.compile(r"\b(10\.\d{4,9}/[^\s\"'<>,;)\]]+)")
 URL_RE = re.compile(r"https?://[^\s\"'<>|]+")
+MD_LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
 GENERIC_TOKENS = {"e", "src", "ev", "evid", "the", "of", "and", "for", "a", "an", "to", "in", "on", "with", "by", "or",
                   "public", "result", "results", "context", "declared", "method", "guidance", "baseline", "page", "paper",
                   "report", "memo", "sheet", "data", "v1", "v2", "v0", "doc", "docs", "local", "url", "pdf", "www", "com",
                   "gov", "org", "html", "http", "https", "en"}
 NOT_YET_EXTRACTED = "Sources are in the dossier prose and the workbook; not yet extracted — open the dossier."
 NO_LINK = "no link in the register"
+LOCAL_COPY = "a copy on one machine, not in a repository; no link"
 
 
 # ─── links ────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -107,8 +109,13 @@ def _repo_path(path: str, base_dir: Path | None) -> Path | None:
 
 
 def resolve_link(src: dict[str, Any], repo_url: str, commit: str, base_dir: Path | None = None) -> dict[str, Any]:
-    """Fill `title`, `doi`, `link`, `link_kind` on a source from its url / citation / locator; never drops a field."""
-    url = (src.get("url") or "").strip()
+    """Fill `title`, `doi`, `link`, `link_kind` on a source from its url / citation / locator; never drops a field.
+    A path on one person's machine is never shown: the file's name stays, the folders go, and there is no link."""
+    local = any(LOCAL_PATH_RE.search(str(src.get(k) or "")) for k in ("url", "citation", "locator"))
+    for k in ("url", "citation", "locator"):
+        if isinstance(src.get(k), str):
+            src[k] = redact_local(src[k])
+    url = "" if local else (src.get("url") or "").strip()
     citation = src.get("citation") or ""
     doi = None
     m = DOI_RE.search(url) or DOI_RE.search(citation)
@@ -120,11 +127,12 @@ def resolve_link(src: dict[str, Any], repo_url: str, commit: str, base_dir: Path
     elif url:
         path = url.strip("/").split("#")[0].split(";")[0].strip()
         if path.startswith("Hazard_modeling/"):
-            # checked on Hazard's origin/main (G18): on main → a link at that commit; moved → the new place; else no link
+            # checked on Hazard's origin/main (G18): on main → a link at that commit; moved → the new place; on a branch → the file
+            # on that branch; found nowhere → no link
             from . import hazard_main
             h = hazard_main.lookup(path[len("Hazard_modeling/"):])
             src["hazard"] = h
-            link, kind = h["link"], {"on_main": "hazard_file", "moved": "hazard_moved", "on_branch": "hazard_branch", "unchecked": "hazard_file"}[h["state"]]
+            link, kind = h["link"], {"on_main": "hazard_file", "moved": "hazard_moved", "on_branch": "hazard_branch", "not_found": "hazard_not_found", "unchecked": "hazard_file"}[h["state"]]
         else:
             rp = _repo_path(path, base_dir)
             if rp is not None:
@@ -152,7 +160,9 @@ def resolve_link(src: dict[str, Any], repo_url: str, commit: str, base_dir: Path
     src.setdefault("title", short_title(citation, src.get("id", "")))
     if MARKER_RE.match(src.get("id") or ""):
         src["kind"] = "marker"  # a provenance marker ("no direct source"), not a document: nothing to link
-    src["no_link_sentence"] = None if (link or src.get("kind") == "marker") else ((src.get("hazard") or {}).get("words") or NO_LINK)
+    src["no_link_sentence"] = None if (link or src.get("kind") == "marker") else (LOCAL_COPY if local else (src.get("hazard") or {}).get("words") or NO_LINK)
+    # a Hazard file linked off its main (moved, or on a branch) still says so beside the link
+    src["link_note"] = (src.get("hazard") or {}).get("words") if link and (src.get("hazard") or {}).get("state") in ("moved", "on_branch") else None
     return src
 
 
@@ -338,6 +348,13 @@ def extract_workbook(wb_path: Path, cell_token: str) -> dict[str, Any]:
                                           "description": _first(r, "description"), "severity": _first(r, "severity", "materiality"), "status": _first(r, "status"),
                                           "resolution": _first(r, "proposed_resolution", "resolution_path"), "from": {"file": where, "sheet": name}})
             out["sheets_read"].append(name)
+    # a workbook with no claim-ID column names a claim by its sources, so two claims on the same sources share a name
+    # (flood × solar: switchgear and transformer, both on NEMA GD1); number the repeats so each stays its own row
+    seen: dict[str, int] = {}
+    for c in out["claims"]:
+        seen[c["id"]] = seen.get(c["id"], 0) + 1
+        if seen[c["id"]] > 1:
+            c["id"] = f"{c['id']} ·{seen[c['id']]}"
     return out
 
 
@@ -438,8 +455,8 @@ def match_ids(ids: list[str], sources: list[dict[str, Any]], claims: list[dict[s
     return matched, unmatched
 
 
-def repo_file_sources(ids: list[str], repo_url: str, commit: str) -> list[dict[str, Any]]:
-    """Source IDs that name a file in this repository (e.g. SOLAR_WIND_VALUE_BREAKDOWN → docs/method/value_basis/…xlsx)."""
+def repo_file_sources(ids: list[str], repo_url: str, commit: str, entry_folder: Path | None = None) -> list[dict[str, Any]]:
+    """Source IDs that name a repository file or are explicitly documented in a cell construction document."""
     out = []
     candidates = list((ROOT / "docs" / "method" / "value_basis").glob("*")) if (ROOT / "docs" / "method" / "value_basis").is_dir() else []
     for sid in ids:
@@ -450,6 +467,34 @@ def repo_file_sources(ids: list[str], repo_url: str, commit: str) -> list[dict[s
                             "tier": None, "permitted": None, "prohibited": None, "decision": None, "accessed_on": None,
                             "provenance": "repository-file", "from": {"file": rel(p)}, "aliases": [sid]})
                 break
+        if any(source["id"] == sid for source in out) or entry_folder is None:
+            continue
+        cell_root = entry_folder.parent
+        docs = sorted((cell_root / "basics").glob("*.md")) if (cell_root / "basics").is_dir() else []
+        documented = None
+        for doc in docs:
+            line = next((line for line in doc.read_text(encoding="utf-8").splitlines() if sid in line), None)
+            if line is None:
+                continue
+            target = None
+            for raw in MD_LINK_RE.findall(line):
+                raw = raw.strip().strip("<>")
+                if raw.startswith("http"):
+                    target = raw
+                    break
+                candidate = _repo_path(raw, doc.parent)
+                if candidate is not None:
+                    target = rel(candidate)
+                    break
+            documented = {"doc": doc, "target": target or rel(doc)}
+            break
+        if documented:
+            target = documented["target"]
+            out.append({"id": sid, "title": sid.replace("_", " ").title(),
+                        "citation": f"{sid} — construction provenance documented in {rel(documented['doc'])}",
+                        "url": target, "locator": rel(documented["doc"]), "role": "construction provenance",
+                        "tier": None, "permitted": None, "prohibited": None, "decision": None, "accessed_on": None,
+                        "provenance": "repository-file", "from": {"file": rel(documented["doc"])}, "aliases": [sid]})
     return out
 
 
@@ -480,7 +525,8 @@ def extract_for_entry(entry: Any, registers: dict[str, Any], repo_url: str, comm
         sources.append(s)
     claims = list(wb["claims"]) + list(ds["claims"])
     ids = sorted({sid for p in registers.get("parameters") or [] for sid in p.get("source_ids", [])})
-    sources += repo_file_sources([i for i in ids], repo_url, commit)
+    known_ids = {source_id for source in sources for source_id in [source["id"], *source.get("aliases", [])]}
+    sources += repo_file_sources([i for i in ids if i not in known_ids], repo_url, commit, entry.folder)
     for s in sources:
         resolve_link(s, repo_url, commit, entry.folder)
     matched, unmatched = match_ids(ids, [s for s in sources if s.get("kind") not in ("placeholder",)], claims)

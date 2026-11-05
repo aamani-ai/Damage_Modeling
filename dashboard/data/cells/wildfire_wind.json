@@ -63,7 +63,7 @@
    "label": "entry agent-read 2026-10-19 · release reviewed screening release"
   }
  },
- "summary": "Wildfire on wind farms: cell-local judgment-based screening points per FSim flame-length class, adopted under owner direction; 4 parts of the asset's value have no curve.",
+ "summary": "Wildfire on wind farms: 2 curves for 2 parts (pad electrical and GSU protection, control and DC); read against USFS FSim conditional flame-length class; the numbers are our judgment; 27 % of the plant's value is priced, 4 % partly.",
  "chain": {
   "stations": [
    {
@@ -92,7 +92,8 @@
     ],
     "evidence": [],
     "fact": "2 deferred",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "units",
@@ -108,7 +109,8 @@
     ],
     "evidence": [],
     "fact": "12 units · 10 withheld",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "axis_form",
@@ -119,7 +121,8 @@
     "files": [],
     "evidence": [],
     "fact": "exact classes",
-    "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section."
+    "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section.",
+    "earlier": []
    },
    {
     "id": "evidence",
@@ -143,7 +146,8 @@
     ],
     "evidence": [],
     "fact": "7 src · T2–4",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "value",
@@ -159,18 +163,30 @@
     ],
     "evidence": [],
     "fact": "crosswalk",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "audit",
     "label": "Audit",
     "full_label": "Audit",
     "gate": "B2",
-    "state": "absent",
-    "files": [],
+    "state": "artifact",
+    "files": [
+     {
+      "path": "docs/cells/wildfire_wind/proposed/SEVEN_STEP_AUDIT_wildfire_wind__model_v1_0__docs_r1.md",
+      "sha256": "7962ac54ae70bea13f837b80ba362e6e7868d93838c7d60aa85bb5b00cb083b9"
+     }
+    ],
     "evidence": [],
-    "fact": "no file · no prose",
-    "absent_sentence": "No seven-step audit or site-condition adapter found as a file or a dossier section."
+    "fact": "7-step file",
+    "absent_sentence": null,
+    "earlier": [
+     {
+      "path": "docs/cells/wildfire_wind/proposed/SEVEN_STEP_AUDIT_wildfire_wind__model_v0_1__docs_r1.md",
+      "model": "v0.1"
+     }
+    ]
    },
    {
     "id": "artifact",
@@ -198,7 +214,8 @@
     ],
     "evidence": [],
     "fact": "v1.0 · docs r1",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "capability",
@@ -214,7 +231,8 @@
     ],
     "evidence": [],
     "fact": "DR conditional · EAL withheld",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "proof",
@@ -249,7 +267,8 @@
     ],
     "evidence": [],
     "fact": "20 of 20 KAT reproduced",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "field_review",
@@ -260,11 +279,12 @@
     "files": [],
     "evidence": [],
     "fact": "not searched · agent-read 10-19",
-    "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only."
+    "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only.",
+    "earlier": []
    }
   ],
   "generation": "skill",
-  "core_as_files": 5,
+  "core_as_files": 6,
   "core_total": 6,
   "dossier": {
    "path": "docs/cells/wildfire_wind/current/wildfire_wind_curve_derivation_dossier__model_v1_0__docs_r1.md",
@@ -372,7 +392,7 @@
     "items": [
      {
       "item": "seven-step audit records a status and blocking seam for every step",
-      "status": "human",
+      "status": "proven",
       "basis": "SEVEN_STEP_AUDIT file"
      },
      {
@@ -570,93 +590,103 @@
   "withheld_units": [
    {
     "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+    "name": "Turbine fire assembly",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "FULL_TURBINE_ECONOMIC_RESPONSE_NOT_CALIBRATED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; full turbine economic response not calibrated."
+    "sentence": "The cell has no curve for this part. What a whole turbine costs to repair after this hazard has not been worked out."
    },
    {
     "failure_unit_id": "WT_COLLECTION_NETWORK",
+    "name": "Collection network",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "LINE_EXPOSURE_AND_CONSTRUCTION_STATE_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; line exposure and construction state required."
+    "sentence": "The cell has no curve for this part. How the lines are built and how exposed they are need defining first."
    },
    {
     "failure_unit_id": "WT_GSU_MAIN_TRANSFORMER",
+    "name": "GSU main transformer",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "TRANSFORMER_THERMAL_STATE_AND_DISPOSITION_MODEL_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; transformer thermal state and disposition model required."
+    "sentence": "The cell has no curve for this part. How heat leaves a transformer, and whether it is repaired or replaced, would need modelling first."
    },
    {
     "failure_unit_id": "WT_GSU_SWITCHGEAR_BUS",
+    "name": "GSU switchgear bus",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "SWITCHGEAR_RECONDITION_OR_REPLACE_MODEL_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; switchgear recondition or replace model required."
+    "sentence": "The cell has no curve for this part. Whether switchgear is reconditioned or replaced after this hazard would need modelling first."
    },
    {
     "failure_unit_id": "WT_GSU_CABLE_TERMINATIONS",
+    "name": "GSU cable terminations",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "CABLE_BODY_TERMINATION_AND_INGRESS_SPLIT_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; cable body termination and ingress split required."
+    "sentence": "The cell has no curve for this part. A cable's run, its end connections and water getting in would need separating first."
    },
    {
     "failure_unit_id": "WT_CONTROL_MET_OM",
+    "name": "Control met OM",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "MIXED_BUILDING_AND_INSTRUMENT_INVENTORY_REQUIRES_SPLIT"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; mixed building and instrument inventory requires split."
+    "sentence": "The cell has no curve for this part. Its value mixes buildings and instruments, which would need separating first."
    },
    {
     "failure_unit_id": "WT_FOUNDATION",
+    "name": "Foundation",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "DIRECT_THERMAL_RESPONSE_NOT_CALIBRATED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; direct thermal response not calibrated."
+    "sentence": "The cell has no curve for this part. How heat directly damages it has not been worked out."
    },
    {
     "failure_unit_id": "WT_CIVIL_INFRA",
+    "name": "Civil infra",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; mixed civil bucket requires split."
+    "sentence": "The cell has no curve for this part. Its value mixes roads, pads, buildings and fences, which would need separating first."
    },
    {
     "failure_unit_id": "SUPPORT_FIELDWORK",
+    "name": "Support fieldwork",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_INDEPENDENT_FRAGILITY",
      "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION"
     ],
-    "sentence": "Withheld: no independent fragility; support cost allocate once after disposition."
+    "sentence": "It does not break on its own; its cost follows the damage to other parts. Its cost (crews, cranes, transport) is added once, after the other parts' damage is known."
    },
    {
     "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+    "name": "Support transport logistics",
     "subsystem": "WITHHELD_OR_SUPPORT",
     "reasons": [
      "NO_INDEPENDENT_FRAGILITY",
      "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION"
     ],
-    "sentence": "Withheld: no independent fragility; support cost allocate once after disposition."
+    "sentence": "It does not break on its own; its cost follows the damage to other parts. Its cost (crews, cranes, transport) is added once, after the other parts' damage is known."
    }
   ],
   "hazard_axis": [
@@ -742,7 +772,13 @@
   "paths": {
    "sources": "docs/cells/wildfire_wind/current/SOURCE_REGISTER_wildfire_wind__model_v1_0__docs_r1.csv",
    "claims": "docs/cells/wildfire_wind/current/CLAIM_PARAMETER_REGISTER_wildfire_wind__model_v1_0__docs_r1.csv",
-   "parameters": "docs/cells/wildfire_wind/current/PARAMETER_TIER_TABLE_wildfire_wind__model_v1_0__docs_r1.csv"
+   "parameters": "docs/cells/wildfire_wind/current/PARAMETER_TIER_TABLE_wildfire_wind__model_v1_0__docs_r1.csv",
+   "source_registers": [
+    "docs/cells/wildfire_wind/current/SOURCE_REGISTER_wildfire_wind__model_v1_0__docs_r1.csv"
+   ],
+   "claim_registers": [
+    "docs/cells/wildfire_wind/current/CLAIM_PARAMETER_REGISTER_wildfire_wind__model_v1_0__docs_r1.csv"
+   ]
   },
   "n_sources": 7,
   "n_claims": 6,
@@ -769,9 +805,54 @@
   }
  },
  "audit": {
-  "table": null,
-  "state": "absent",
-  "absent_sentence": "No seven-step audit or site-condition adapter found as a file or a dossier section.",
+  "table": {
+   "source": "docs/cells/wildfire_wind/proposed/SEVEN_STEP_AUDIT_wildfire_wind__model_v1_0__docs_r1.md",
+   "columns": [
+    "Step",
+    "Decision",
+    "Result"
+   ],
+   "rows": [
+    [
+     "1. Intended decision",
+     "Make some wildfire-wind physical risk visible without claiming whole-farm calibration",
+     "Two named electrical-unit DRs only"
+    ],
+    [
+     "2. Grain",
+     "One physical pad-electrical unit; one physical shared GSU protection-control-DC package",
+     "Correct point/small-footprint grain; no lease-polygon or turbine-count shortcut"
+    ],
+    [
+     "3. Hazard x-axis",
+     "Exact FSim conditional flame-length class state",
+     "Screening ordinal only; class is not local heat flux or duration"
+    ],
+    [
+     "4. Curve form",
+     "Exact categorical table represented in bundle-v3 piecewise record",
+     "Noninteger values reject before lookup; no physical interpolation"
+    ],
+    [
+     "5. Parameters",
+     "Two monotone state tables",
+     "All ordinates Tier 4 under `WW1-A001`; mechanism/ordering evidence kept separate"
+    ],
+    [
+     "6. Value link",
+     "Same named failure-unit direct replacement value",
+     "DR emitted; scenario loss withheld because the 72 USD/kW row is mixed"
+    ],
+    [
+     "7. Test/release",
+     "14 formula KATs and 6 negative KATs pass",
+     "Noncanonical proposal; independent review and cutover blocked"
+    ]
+   ],
+   "kind": "file"
+  },
+  "state": "artifact",
+  "absent_sentence": null,
   "site_adapter": null
  },
  "proof": {
@@ -936,6 +1017,8 @@
   }
  ],
  "gap_reason": null,
+ "gap_reason_own": null,
+ "gap_reason_source": null,
  "binding": null,
  "sampling_notes": [],
  "plain": {
@@ -946,7 +1029,7 @@
    },
    "evidence": {
     "words": "Evidence: our judgment",
-    "code": "How damage rises: our judgment · how it becomes dollars: our judgment",
+    "code": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
     "tiers": [
      "T4"
     ],
@@ -972,10 +1055,10 @@
     "id": "covers",
     "name": "What it covers",
     "meaning": "The parts that have a curve, their share of the value, and what has none yet",
-    "fact": "2 parts with a curve · 4 without one yet",
+    "fact": "2 parts with a curve · 2 of 10 subsystems with a curve",
     "paragraphs": [
-     "Wildfire on wind farms: cell-local judgment-based screening points per FSim flame-length class, adopted under owner direction; research supports the mechanism and relative ordering, not the numbers. It names 2 parts: Pad electrical and GSU protection, control and DC. Outside its scope: internal turbine or electrical fire, lightning and maintenance fires, business interruption, revenue, PSPS and shutdown, post-fire erosion, flood and landslide and soft, sunk and non-physical costs. Kinds of damage it does not include: firebrand attack and destructive residue or soot (separate deferred pathways) and mitigation or clearance credit and operating state (captured, no numeric effect).",
-     "For this hazard the wind farm is split into 2 parts: Pad electrical and GSU protection, control and DC. 10 further units are named but withheld — wt turbine fire assembly, wt collection network, wt gsu main transformer, wt gsu switchgear bus, wt gsu cable terminations, wt control met om, wt foundation, wt civil infra, support fieldwork and support transport logistics — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: turbine fire assembly: blades, nacelle, tower (withheld, not zero), collection network, GSU main transformer, GSU switchgear and bus, GSU cable terminations (withheld), control, met-station and O&M buildings; foundation; civil (withheld) and fieldwork and transport support (allocated once after repair scope; no fragility).",
+     "Wildfire on wind farms: cell-local judgment-based screening points per FSim flame-length class, adopted under owner direction; research supports the mechanism and relative ordering, not the numbers. It names 2 parts (listed below). It also lists 6 things it leaves out (below).",
+     "This hazard's curves cover 2 parts of the wind farm, listed below after the subsystem each belongs to and named as the catalogue entry writes them. 10 further units are named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
      "The damage ratio is a share of direct replacement value of the same named unit (one pad's electrical equipment, or the one shared GSU protection-control-DC package). The files state no plant-level dollar figure for this asset."
     ],
     "holds": [
@@ -996,13 +1079,13 @@
       "title": "GSU protection, control and DC"
      },
      {
-      "text": "4 without a curve yet",
-      "tone": "muted",
-      "title": "Turbine fire assembly: blades, nacelle, tower (withheld, not zero); Collection network, GSU main transformer, GSU switchgear and bus, GSU cable terminations (withheld); Control, met-station and O&M buildings; foundation; civil (withheld); Fieldwork and transport support (allocated once after repair scope; no fragility)"
-     },
-     {
       "text": "10 withheld",
       "tone": "muted"
+     },
+     {
+      "text": "2 of 10 subsystems with a curve · 8 no curve yet",
+      "tone": "muted",
+      "title": "The catalogue's own list: Turbine fire assembly: blades, nacelle, tower (withheld, not zero); Collection network, GSU main transformer, GSU switchgear and bus, GSU cable terminations (withheld); Control, met-station and O&M buildings; foundation; civil (withheld); Fieldwork and transport support (allocated once after repair scope; no fragility)"
      }
     ]
    },
@@ -1010,16 +1093,16 @@
     "id": "derived",
     "name": "How it was derived",
     "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
-    "fact": "not written yet",
+    "fact": "USFS FSim conditional flame-length class → exact classes",
     "paragraphs": [
-     "Damage is read against USFS FSim conditional flame-length class. The curve is a table of damage ratios at exact classes, nothing in between. The input, in the catalogue's words: USFS FSim conditional flame-length class (RDS-2016-0034-3, 270 m), exact integer 1 to 6 (0 = no-event control); a class, not equipment heat flux.",
-     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell."
+     "Damage is read against one hazard measure: USFS FSim conditional flame-length class. The curve is a table of damage ratios at exact classes, nothing in between. What Hazard has to supply for each event is below.",
+     "The seven-step audit is a file in the cell folder with 7 rows."
     ],
     "holds": [
      "axis_form",
      "audit"
     ],
-    "written": false,
+    "written": true,
     "chips": [
      {
       "text": "USFS FSim conditional…",
@@ -1049,7 +1132,7 @@
     "meaning": "The sources, what each one gave, and how sure we are",
     "fact": "6 sources, 5 linked · our judgment",
     "paragraphs": [
-     "6 sources set this cell: USFS, Spatial datasets of probabilistic wildfire risk components for the US (270 m), 3rd ed., RDS-2016-0034-3 (2023), Assessing wildfire risk to critical infrastructure in central Chile: an electrical substation, Int. J. Wildland Fire (2024), NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment and USFS, Wildfire vulnerability of power transmission and distribution infrastructure (2015) and 2 more. Of the 5 parameters, 1 is published, 1 is borrowed and 3 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator)."
+     "The sources and claims below are kept as machine-readable register files in the cell folder."
     ],
     "holds": [
      "evidence"
@@ -1059,7 +1142,7 @@
      {
       "text": "our judgment",
       "tone": "key",
-      "title": "How damage rises: our judgment · how it becomes dollars: our judgment"
+      "title": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment"
      },
      {
       "text": "USFS, Spatial datasets of…",
@@ -1084,8 +1167,8 @@
    {
     "id": "checked",
     "name": "Has it been checked",
-    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
-    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "meaning": "Outside checks, and who has read the entry",
+    "fact": "no outside check yet · read by an agent only",
     "paragraphs": [
      "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says report.",
      "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: reviewed screening release."
@@ -1097,10 +1180,6 @@
     "chips": [
      {
       "text": "no outside check yet",
-      "tone": "muted"
-     },
-     {
-      "text": "field reports: not searched",
       "tone": "muted"
      },
      {
@@ -1116,7 +1195,7 @@
    "proof"
   ],
   "word": "our judgment",
-  "halves": "How damage rises: our judgment · how it becomes dollars: our judgment",
+  "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
   "hazard_paths": [],
   "capabilities": [
    {
@@ -1160,93 +1239,103 @@
     "withheld": [
      {
       "failure_unit_id": "WT_TURBINE_FIRE_ASSEMBLY",
+      "name": "Turbine fire assembly",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "FULL_TURBINE_ECONOMIC_RESPONSE_NOT_CALIBRATED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; full turbine economic response not calibrated."
+      "sentence": "The cell has no curve for this part. What a whole turbine costs to repair after this hazard has not been worked out."
      },
      {
       "failure_unit_id": "WT_COLLECTION_NETWORK",
+      "name": "Collection network",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "LINE_EXPOSURE_AND_CONSTRUCTION_STATE_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; line exposure and construction state required."
+      "sentence": "The cell has no curve for this part. How the lines are built and how exposed they are need defining first."
      },
      {
       "failure_unit_id": "WT_GSU_MAIN_TRANSFORMER",
+      "name": "GSU main transformer",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "TRANSFORMER_THERMAL_STATE_AND_DISPOSITION_MODEL_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; transformer thermal state and disposition model required."
+      "sentence": "The cell has no curve for this part. How heat leaves a transformer, and whether it is repaired or replaced, would need modelling first."
      },
      {
       "failure_unit_id": "WT_GSU_SWITCHGEAR_BUS",
+      "name": "GSU switchgear bus",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "SWITCHGEAR_RECONDITION_OR_REPLACE_MODEL_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; switchgear recondition or replace model required."
+      "sentence": "The cell has no curve for this part. Whether switchgear is reconditioned or replaced after this hazard would need modelling first."
      },
      {
       "failure_unit_id": "WT_GSU_CABLE_TERMINATIONS",
+      "name": "GSU cable terminations",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "CABLE_BODY_TERMINATION_AND_INGRESS_SPLIT_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; cable body termination and ingress split required."
+      "sentence": "The cell has no curve for this part. A cable's run, its end connections and water getting in would need separating first."
      },
      {
       "failure_unit_id": "WT_CONTROL_MET_OM",
+      "name": "Control met OM",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "MIXED_BUILDING_AND_INSTRUMENT_INVENTORY_REQUIRES_SPLIT"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; mixed building and instrument inventory requires split."
+      "sentence": "The cell has no curve for this part. Its value mixes buildings and instruments, which would need separating first."
      },
      {
       "failure_unit_id": "WT_FOUNDATION",
+      "name": "Foundation",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "DIRECT_THERMAL_RESPONSE_NOT_CALIBRATED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; direct thermal response not calibrated."
+      "sentence": "The cell has no curve for this part. How heat directly damages it has not been worked out."
      },
      {
       "failure_unit_id": "WT_CIVIL_INFRA",
+      "name": "Civil infra",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; mixed civil bucket requires split."
+      "sentence": "The cell has no curve for this part. Its value mixes roads, pads, buildings and fences, which would need separating first."
      },
      {
       "failure_unit_id": "SUPPORT_FIELDWORK",
+      "name": "Support fieldwork",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_INDEPENDENT_FRAGILITY",
        "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION"
       ],
-      "sentence": "Withheld: no independent fragility; support cost allocate once after disposition."
+      "sentence": "It does not break on its own; its cost follows the damage to other parts. Its cost (crews, cranes, transport) is added once, after the other parts' damage is known."
      },
      {
       "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+      "name": "Support transport logistics",
       "subsystem": "WITHHELD_OR_SUPPORT",
       "reasons": [
        "NO_INDEPENDENT_FRAGILITY",
        "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION"
       ],
-      "sentence": "Withheld: no independent fragility; support cost allocate once after disposition."
+      "sentence": "It does not break on its own; its cost follows the damage to other parts. Its cost (crews, cranes, transport) is added once, after the other parts' damage is known."
      }
     ]
    },
@@ -1281,28 +1370,28 @@
     "id": "scope",
     "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Wildfire on wind farms: cell-local judgment-based screening points per FSim flame-length class, adopted under owner direction; research supports the mechanism and relative ordering, not the numbers. It names 2 parts: Pad electrical and GSU protection, control and DC. Outside its scope: internal turbine or electrical fire, lightning and maintenance fires, business interruption, revenue, PSPS and shutdown, post-fire erosion, flood and landslide and soft, sunk and non-physical costs. Kinds of damage it does not include: firebrand attack and destructive residue or soot (separate deferred pathways) and mitigation or clearance credit and operating state (captured, no numeric effect).",
+    "paragraph": "Wildfire on wind farms: cell-local judgment-based screening points per FSim flame-length class, adopted under owner direction; research supports the mechanism and relative ordering, not the numbers. It names 2 parts (listed below). It also lists 6 things it leaves out (below).",
     "plain_fact": "2 parts · 4 left out"
    },
    {
     "id": "units",
     "name": "What breaks",
     "meaning": "The parts of the plant the hazard damages, each with its own curve",
-    "paragraph": "For this hazard the wind farm is split into 2 parts: Pad electrical and GSU protection, control and DC. 10 further units are named but withheld — wt turbine fire assembly, wt collection network, wt gsu main transformer, wt gsu switchgear bus, wt gsu cable terminations, wt control met om, wt foundation, wt civil infra, support fieldwork and support transport logistics — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: turbine fire assembly: blades, nacelle, tower (withheld, not zero), collection network, GSU main transformer, GSU switchgear and bus, GSU cable terminations (withheld), control, met-station and O&M buildings; foundation; civil (withheld) and fieldwork and transport support (allocated once after repair scope; no fragility).",
+    "paragraph": "This hazard's curves cover 2 parts of the wind farm, listed below after the subsystem each belongs to and named as the catalogue entry writes them. 10 further units are named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
     "plain_fact": "2 parts · 10 withheld"
    },
    {
     "id": "axis_form",
     "name": "How damage is measured",
     "meaning": "The hazard intensity on the x-axis and the shape of the curve",
-    "paragraph": "Damage is read against USFS FSim conditional flame-length class. The curve is a table of damage ratios at exact classes, nothing in between. The input, in the catalogue's words: USFS FSim conditional flame-length class (RDS-2016-0034-3, 270 m), exact integer 1 to 6 (0 = no-event control); a class, not equipment heat flux.",
+    "paragraph": "Damage is read against one hazard measure: USFS FSim conditional flame-length class. The curve is a table of damage ratios at exact classes, nothing in between. What Hazard has to supply for each event is below.",
     "plain_fact": "exact classes"
    },
    {
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "6 sources set this cell: USFS, Spatial datasets of probabilistic wildfire risk components for the US (270 m), 3rd ed., RDS-2016-0034-3 (2023), Assessing wildfire risk to critical infrastructure in central Chile: an electrical substation, Int. J. Wildland Fire (2024), NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment and USFS, Wildfire vulnerability of power transmission and distribution infrastructure (2015) and 2 more. Of the 5 parameters, 1 is published, 1 is borrowed and 3 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "paragraph": "The sources and claims below are kept as machine-readable register files in the cell folder.",
     "plain_fact": "6 sources · our judgment"
    },
    {
@@ -1316,8 +1405,8 @@
     "id": "audit",
     "name": "The audit",
     "meaning": "The seven checks a curve passes before release",
-    "paragraph": "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell.",
-    "plain_fact": "no audit found"
+    "paragraph": "The seven-step audit is a file in the cell folder with 7 rows.",
+    "plain_fact": "7-step audit as a file"
    },
    {
     "id": "artifact",
@@ -1413,6 +1502,7 @@
   "sources": [
    {
     "id": "WW1-S001",
+    "aliases": [],
     "citation": "Dillon et al. Spatial datasets of probabilistic wildfire risk components for the United States (270 m), 3rd ed., USFS RDS-2016-0034-3 (2023).",
     "url": "https://www.fs.usda.gov/rds/archive/products/RDS-2016-0034-3/_metadata_RDS-2016-0034-3.html",
     "locator": "conditional flame-length probability class definitions and 270 m support",
@@ -1427,10 +1517,12 @@
     "link": "https://www.fs.usda.gov/rds/archive/products/RDS-2016-0034-3/_metadata_RDS-2016-0034-3.html",
     "link_kind": "url",
     "title": "Dillon et al. Spatial datasets of probabilistic wildfire risk components for the United States (270 m), 3rd…",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "WW1-S002",
+    "aliases": [],
     "citation": "Severino et al. Assessing wildfire risk to critical infrastructure in central Chile: application to an electrical substation. International Journal of Wildland Fire (2024). DOI 10.1071/WF22113.",
     "url": "https://doi.org/10.1071/WF22113",
     "locator": "substation target inventory; PMMA proxy-fuel radiant-flux probit; case heat-flux results",
@@ -1445,10 +1537,12 @@
     "link": "https://doi.org/10.1071/WF22113",
     "link_kind": "doi",
     "title": "Severino et al. Assessing wildfire risk to critical infrastructure in central Chile: application to an electrical substation",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "WW1-S003",
+    "aliases": [],
     "citation": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment.",
     "url": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
     "locator": "sections on switchgear, transformers, wire/cable, protective relays/meters, communications, UPS and residue",
@@ -1463,10 +1557,12 @@
     "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf",
     "link_kind": "url",
     "title": "NEMA GD 2-2016, Evaluating Fire- and Heat-Damaged Electrical Equipment.",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "WW1-S004",
+    "aliases": [],
     "citation": "Butler, Wallace, and Hogge. Wildfire vulnerability of power transmission and distribution infrastructure (USFS, 2015).",
     "url": "https://research.fs.usda.gov/treesearch/49452",
     "locator": "preliminary steel-tower and transformer/junction-enclosure simulations",
@@ -1481,10 +1577,12 @@
     "link": "https://research.fs.usda.gov/treesearch/49452",
     "link_kind": "url",
     "title": "Butler, Wallace, and Hogge",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "WW1-S005",
+    "aliases": [],
     "citation": "Damage Modeling wildfire_solar model v1.0/docs r3.",
     "url": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
     "locator": "WSV1_MV_EQUIPMENT_THERMAL and WSV1_SCADA_THERMAL point arrays",
@@ -1497,13 +1595,15 @@
     "provenance": "register",
     "repo_path": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
     "link_kind": "repo_file",
     "title": "Damage Modeling wildfire_solar model v1.0/docs r3.",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "WW1-A001",
+    "aliases": [],
     "citation": "Owner direction in Damage Modeling task, 2026-08-08: represent wildfire-wind risk even if only one or two subsystems can be supported.",
     "url": "conversation_record",
     "locator": "explicit coverage-first Tier-4 business decision",
@@ -1518,10 +1618,12 @@
     "link": null,
     "link_kind": "none",
     "title": "Owner direction in Damage Modeling task, 2026-08-08: represent wildfire-wind risk even if only one or two…",
-    "no_link_sentence": "no link in the register"
+    "no_link_sentence": "no link in the register",
+    "link_note": null
    },
    {
     "id": "GOVERNANCE_CONTRACT",
+    "aliases": [],
     "citation": "Damage Modeling governed damage-curve standards and skill workflow.",
     "url": "docs/method/standards/00_index.md",
     "locator": "cell package, provenance, pathway, capability, versioning, and fail-closed standards",
@@ -1534,11 +1636,12 @@
     "provenance": "register",
     "repo_path": "docs/method/standards/00_index.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/method/standards/00_index.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/standards/00_index.md",
     "link_kind": "repo_file",
     "title": "Damage Modeling governed damage-curve standards and skill workflow.",
     "kind": "marker",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    }
   ],
   "claims": [
@@ -1831,7 +1934,7 @@
      {
       "id": "GOVERNANCE_CONTRACT",
       "title": "Damage Modeling governed damage-curve standards and skill workflow.",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/method/standards/00_index.md",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/standards/00_index.md",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -1866,5 +1969,588 @@
    "cost": "our judgment"
   }
  },
- "build_findings": []
+ "build_findings": [],
+ "hazard_note": null,
+ "subcomponents": [
+  {
+   "key": "rotor",
+   "label": "Rotor and blades",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.20764017252002465,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "WT_TURBINE_FIRE_ASSEMBLY"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. What a whole turbine costs to repair after this hazard has not been worked out.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; FULL_TURBINE_ECONOMIC_RESPONSE_NOT_CALIBRATED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/wildfire_wind/current/wildfire_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "tower",
+   "label": "Tower",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.17005545286506468,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "WT_TURBINE_FIRE_ASSEMBLY"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. What a whole turbine costs to repair after this hazard has not been worked out.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; FULL_TURBINE_ECONOMIC_RESPONSE_NOT_CALIBRATED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/wildfire_wind/current/wildfire_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "nacelle",
+   "label": "Nacelle: gearbox, generator, yaw",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.20948860135551448,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "WT_TURBINE_FIRE_ASSEMBLY"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. What a whole turbine costs to repair after this hazard has not been worked out.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; FULL_TURBINE_ECONOMIC_RESPONSE_NOT_CALIBRATED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/wildfire_wind/current/wildfire_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "foundation",
+   "label": "Turbine foundation",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.07393715341959335,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "WT_FOUNDATION"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. How heat directly damages it has not been worked out.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; DIRECT_THERMAL_RESPONSE_NOT_CALIBRATED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/wildfire_wind/current/wildfire_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "turbine_electrical",
+   "label": "Turbine-base and pad electrical",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.08441158348736907,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_wind",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "WWV1_PAD_ELECTRICAL_FSIM_T4"
+   ],
+   "failure_unit_ids": [
+    "WT_PAD_ELECTRICAL"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "our judgment"
+   ],
+   "evidence_words": "our judgment",
+   "construction": [
+    {
+     "curve_id": "WWV1_PAD_ELECTRICAL_FSIM_T4",
+     "data_path": "curves/wildfire_wind/WWV1_PAD_ELECTRICAL_FSIM_T4@model_v1_0__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/wildfire_wind/current/wildfire_wind__model_v1_0__docs_r1__curve_artifact.json",
+     "parameter_count": 2,
+     "source_ids": [
+      "WW1-A001"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "not_on",
+       "sentences": [
+        "No layer on Hazard's dashboard uses this cell. Hazard's repository has no reference to this cell's artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_wind",
+     "part": "Pad electrical",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
+    "hazard": "not_on"
+   },
+   "gap": null
+  },
+  {
+   "key": "collection",
+   "label": "Collection network",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.04436229205175601,
+   "share_basis": "share of the asset's reference value; one line of the value budget, shared with GSU substation",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "WT_COLLECTION_NETWORK"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. How the lines are built and how exposed they are need defining first.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; LINE_EXPOSURE_AND_CONSTRUCTION_STATE_REQUIRED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/wildfire_wind/current/wildfire_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "gsu",
+   "label": "GSU substation",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": null,
+   "share_basis": "counted with Collection network: one line of the value budget covers both",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_wind",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "WWV1_GSU_PROTECTION_CONTROL_DC_FSIM_T4"
+   ],
+   "failure_unit_ids": [
+    "WT_GSU_CABLE_TERMINATIONS",
+    "WT_GSU_MAIN_TRANSFORMER",
+    "WT_GSU_PROTECTION_CONTROL_DC",
+    "WT_GSU_SWITCHGEAR_BUS"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "our judgment"
+   ],
+   "evidence_words": "our judgment",
+   "construction": [
+    {
+     "curve_id": "WWV1_GSU_PROTECTION_CONTROL_DC_FSIM_T4",
+     "data_path": "curves/wildfire_wind/WWV1_GSU_PROTECTION_CONTROL_DC_FSIM_T4@model_v1_0__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/wildfire_wind/current/wildfire_wind__model_v1_0__docs_r1__curve_artifact.json",
+     "parameter_count": 2,
+     "source_ids": [
+      "WW1-A001"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "not_on",
+       "sentences": [
+        "No layer on Hazard's dashboard uses this cell. Hazard's repository has no reference to this cell's artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_wind",
+     "part": "GSU protection, control and DC",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
+    "hazard": "not_on"
+   },
+   "gap": null
+  },
+  {
+   "key": "control",
+   "label": "Control building, SCADA, met and O&M",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": null,
+   "share_basis": null,
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "WT_CONTROL_MET_OM"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. Its value mixes buildings and instruments, which would need separating first.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; MIXED_BUILDING_AND_INSTRUMENT_INVENTORY_REQUIRES_SPLIT",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/wildfire_wind/current/wildfire_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "civil",
+   "label": "Civil: roads, pads, buildings, fences",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.02895871842267406,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "WT_CIVIL_INFRA"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. Its value mixes roads, pads, buildings and fences, which would need separating first.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; MIXED_CIVIL_BUCKET_REQUIRES_SPLIT",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/wildfire_wind/current/wildfire_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "support",
+   "label": "Fieldwork and transport support",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.18114602587800369,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": true,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "SUPPORT_FIELDWORK",
+    "SUPPORT_TRANSPORT_LOGISTICS"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "wildfire_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "It does not break on its own; its cost follows the damage to other parts. Its cost (crews, cranes, transport) is added once, after the other parts' damage is known.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_INDEPENDENT_FRAGILITY; SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION; NO_INDEPENDENT_FRAGILITY; SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/wildfire_wind/current/wildfire_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  }
+ ],
+ "subcomponent_rollup": {
+  "expected": 10,
+  "with_curve": 2,
+  "gap": 8,
+  "complete": 2,
+  "incomplete": 8,
+  "evidence_labels": {
+   "field-calibrated": 0,
+   "published": 0,
+   "borrowed": 0,
+   "our judgment": 2
+  }
+ },
+ "value_split": {
+  "priced": 0.26555760936537276,
+  "partly": 0.04436229205175601,
+  "no_damage": 0.0,
+  "not_priced": 0.6900800985828712,
+  "basis": "of the reference plant's physical value"
+ }
 }

@@ -570,6 +570,7 @@ catalogs.
 | DOE severe-weather article | Protection states, direct-hit caveats, design context | [DOE](https://www.energy.gov/cmei/wind/articles/how-do-wind-turbines-survive-severe-weather-and-storms) |
 | DTU IEC explainer | IEC class/load framing | [DTU](https://wasp.dtu.dk/software/windfarm-assessment-tool/iec-61400-1) |
 | IEC extreme-events equations | `Ve50 = 1.4 x Vref` | [Ashes documentation](https://www.simis.io/docs/wind-iec-extreme-events) |
+| `AWN_15_DECLARED_BRIDGE` | Declared power-law or log-law bridge from a documented 10 m gust to hub height; the exponent or roughness remains a site input, not a sourced universal constant | [Current derivation dossier](../current/wind_tornado_wind_curve_derivation_dossier_v1_0.md) |
 | NOAA/NWS EF scale | Damage-estimated gust ranges and caveats | [NOAA/NWS](https://www.weather.gov/grb/efscale) |
 | NASA Greenfield case | High-severity tornado/turbine collapse plausibility | [NASA](https://science.nasa.gov/earth/earth-observatory/tornado-damage-in-greenfield-152870/) |
 | NIST fragility method | Fragility/damage-matrix framing and dependency discipline | [NIST](https://www.nist.gov/publications/fragility-curves-damage-matrices-and-wind-induced-loss-estimation) |

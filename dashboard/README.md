@@ -39,7 +39,8 @@ was revised the same day (`DCD-D33`, `D34`); it was accepted and merged into `ma
   link in every page's footer (`DCD-D31`, `D32`).
 - **Built from `main`** (`DCD-D30`): the data on `main` is built from `main`, at `01dbf18` since PR #9 merged. A branch
   carries a labelled preview of its own data until it merges.
-- **Hosted** (`DCD-D36`): the Cloud Run service `damage-curves`, behind IAP for aamani.ai accounts ([below](#hosted)).
+- **Hosted** (`DCD-D36`, `D37`): the Cloud Run service `damage-curves`, behind IAP for aamani.ai and infrasure.ai
+  accounts ([below](#hosted)).
 
 Earlier records: iteration 2 at [`evidence/b0ff718/REVIEW.md`](../docs/plans/damage_curve_dashboard/evidence/b0ff718/REVIEW.md),
 V0 (accepted 2026-10-20, `DCD-D17`) at [`evidence/3f9d516/`](../docs/plans/damage_curve_dashboard/evidence/3f9d516/REVIEW.md)
@@ -47,16 +48,20 @@ and the first V1 step at [`evidence/3ea7e02/`](../docs/plans/damage_curve_dashbo
 
 ## Hosted
 
-**<https://damage-curves-wsd6lcl64q-uc.a.run.app>**. Sign in with an **aamani.ai** Google account; no one else gets in (`DCD-D36`, gate H1).
+**<https://damage-curves-wsd6lcl64q-uc.a.run.app>**. Sign in with an **aamani.ai** or **infrasure.ai** Google account; no one else gets in (`DCD-D36`, gate H1;
+`DCD-D37`).
 It runs on the team's Cloud Run as the service `damage-curves` (project `modeling-nonprod-svc-db5x`, `us-central1`)
-behind IAP, live since 2026-10-22 (revision `damage-curves-00001-65t`, from `7d7434a`).
+behind IAP, live since 2026-10-22 (revision `damage-curves-00002-88l` from `e02fac8` since 2026-10-23).
 
 - **What runs.** [`Dockerfile`](Dockerfile) builds the static export from the committed `data/` and serves `out/` with
   [`scripts/serve-static.mjs`](scripts/serve-static.mjs), on Cloud Run's `PORT`. The server gzips text, lets browsers
   keep Next's hashed files under `/_next/static/`, and never serves a file outside `out/`.
 - **How it deploys.** [`.github/workflows/deploy-damage-curves.yml`](../.github/workflows/deploy-damage-curves.yml) runs on
   a push to the `deploy/damage-curves` branch, never on `main`. It refuses data not built from `main`, then builds and
-  pushes the image, deploys it behind IAP, admits aamani.ai and checks that an anonymous request is refused.
+  pushes the image, deploys it behind IAP, admits the accounts of the domains in `IAP_DOMAINS` and checks that an anonymous request is refused.
+- **Who gets in.** Every Google account of the domains in the workflow's `IAP_DOMAINS`: `aamani.ai` and `infrasure.ai`
+  (`DCD-D37`). Each deploy grants them IAP's web-app access. A grant only adds: to take a domain out, drop it from the
+  list and remove its grant with `gcloud iap web remove-iam-policy-binding`.
 - **Showing the team a new version.** Merge to `main`, then rebuild the data from `main` and commit it there
   (`DCD-D30`). Then move the deploy branch to `main`:
   `git push origin main:deploy/damage-curves`.
@@ -92,11 +97,15 @@ finding. A *structural* failure writes nothing.
 - **In a git worktree** the venv lives in the main checkout: `<main checkout>/.venv/bin/python
   scripts/dashboard/build_dashboard_data.py`, run from the worktree root.
 - **Hazard's files** — its battery and substation twin crosswalks and the substation budget — are read through
-  git on Hazard's `origin/main`, never its working tree (`DCD-D30`); the checkout is found at `$HAZARD_MODELING`,
-  else the gitignored `Hazard_modeling` symlink, else beside this repository. A file not on Hazard's main falls back
+  git on Hazard's `origin/main`, never its working tree (`DCD-D30`). By default that is GitHub's main: the build keeps
+  a blobless clone of `aamani-ai/Hazard_Modeling` in the gitignored `.cache/hazard_main/` and fetches it at each build
+  (offline, it uses the copy last fetched). `$HAZARD_MODELING` points it at a local checkout instead; with no copy and
+  no network it falls back to the gitignored `Hazard_modeling` symlink or a checkout beside this repository. The
+  real-estate building profile is read the same way. A file not on Hazard's main falls back
   to the copy committed in `data/`, checked against the same pin, and the receipt says so. Every Hazard path a page
-  links to is looked up on Hazard's main too: kept, pointed at its new place when Hazard archived it, or shown
-  without a link as *on a Hazard branch, not on its main yet*.
+  links to is looked up on Hazard's main too: kept when it is there; otherwise it is said to be *not on Hazard's main*
+  and linked to where it is — its new place when Hazard archived it, or the Hazard branch that holds it (every branch
+  is named; the link goes to the one where the file last changed). A path found nowhere on Hazard has no link.
 - **The Digital Twin** is exported by `node scripts/dashboard/export_twin.mjs ["<Digital Twin checkout>"]`: the
   trees into `data/twin/trees.json` (an input the build keeps) and the viewer, models and three.js into
   `public/twin/` with a SHA manifest the build checks. Run it again when the twin changes.
@@ -128,8 +137,12 @@ and the *About this data* page (`/about`) lists them.
 | `twin_viewer` | The vendored twin viewer, models and three.js equal the SHA-256 their manifest records | structural | pass — 16 files, twin `d01abd0` |
 | `twin_crosswalks` | Every crosswalk row names a node of the pinned twin tree, a catalogue entry of its type and hazard, a known state and basis, and — for a curve — one of the entry's parts | structural | pass — 7 types |
 | `twin_coverage` | Every part of each twin reference model is mapped for every hazard with a curve | data | pass |
-| `hazard_links` | Every Hazard file the pages name is on Hazard's main | data | **fails** — 9 paths: the battery crosswalk folder, the hurricane substation binding and the wildfire substation module are on a Hazard branch; three notebooks were moved into `_archive/` on Hazard's main |
+| `hazard_links` | Every Hazard file the pages name exists on Hazard (main, archived on main, or a branch); the ones not on its main are listed with where they are | data | pass — 9 paths are not on Hazard's main and are listed: the battery crosswalk folder, the hurricane substation binding and the wildfire substation module are on Hazard branches (e.g. `codex/bess-conus`); three legacy notebooks cited in July were moved into `_archive/` on Hazard's main. It fails only for a path found nowhere on Hazard |
+| `hazard_match` | Every curve a layer on Hazard's internal dashboard was computed with matches what the page shows in everything that can change a loss — curves, value shares, unit treatments (read from `scripts/dashboard/snapshots/hazard_dashboard.json`, refreshed by `hazard_dashboard_snapshot.py` while signed in to GCS) | data | **fails** for the six cells marked *Differs in Hazard's dashboard*: the five real-estate cells (layers computed with v1.0, flood v1.0/v1.1, from Damage branch `codex/warehouse-flood-admission`; curves identical except flood's four retail curves) and hail × solar (Hazard multiplies the module curve by 35.54% of installed value; the artifact declares 26.00%) |
 | `faq` | Every FAQ question has its date, owner, an answer of at most four sentences, an example and a *Read more* link that resolves | data | pass — 14 questions |
+| `subcomponents` | Every expected subsystem × hazard has a curve/gap state, a completeness state, an evidence label, and its construction or the reason it has none | structural | pass |
+| `formula_keys` | Every curve has a formula, written from its evaluator, whose key names each of its parameters | data | pass — 104 curves |
+| `display_paths` | Nothing displayed carries a path on someone's machine; source rows that point at a local copy show the file's name only, with no link | structural | pass |
 
 A data check is never loosened to make it pass: the failure is listed on *About this data*, its items reach the
 cells' owners as tasks on the Review page (`/review`), and the affected cell's "Where the numbers come from" step
@@ -178,7 +191,9 @@ step's: [`evidence/3ea7e02/REVIEW.md`](../docs/plans/damage_curve_dashboard/evid
 | Path | What |
 |---|---|
 | `app/` | The routes: `/`, `/assets/[asset]` (a type, or the real-estate index), `/cells/[entry]`, `/cells/[entry]/curves/[curve]`, `/occurrence/[asset]/[hazard]`, `/code/[code]`, `/review`, `/faq` and `/about` — all prerendered from `data/` |
-| `components/` | `nav` (the category menus), `library`, `twin-coverage` (the 3D picture, its tools, full screen, legend and systems list), `sparkline` (a curve in miniature), `asset-coverage` (the hazard picker and the systems × hazards table), `cell-coverage`, `part-picture`, `plain-rail` + `crumbs`, `curve-hero` (the curve and *Why we believe it*), `steps-strip` + `station-panel` (the four steps and their side panels), `ledger` (the pieces under Details), `plain-blocks`, `cell-footer` (*For Hazard*), `asset-view` (the cells' own part lists), `source-link`, the plots |
+> **Field reports are hidden for now.** `SHOW_FIELD_REPORTS` in `dashboard/lib/features.ts` and in `scripts/dashboard/dashboard_build/common.py` switch every field-report section off (the library's KPI and lens, header chips, the curve's *Seen in the field*, the research block under a gap, the Review line); the registers, their checks and the `/occurrence` pages are still built. Set both to `true` to show them again.
+
+| `components/` | `nav` (the category menus), `library`, `twin-coverage` (the 3D picture, its tools, full screen, legend and systems list), `sparkline` (a curve in miniature), `asset-coverage` (the hazard picker and the systems × hazards table), `cell-coverage`, `part-picture`, `plain-rail` + `crumbs`, `curve-hero` (the curve and *Why we believe it*), `steps-strip` + `station-panel` (the four steps and their side panels), `ledger` (the pieces under Details), `plain-blocks`, `cell-footer` (*For Hazard*), `source-link`, `review-legend` (what the status, evidence, subcomponent and production words mean, read from the catalogue), `subcomponents` (every subsystem × hazard, curve or gap, with an *All hazards* side-by-side view on asset pages and each team's own part names in an opened row; real estate shows the four subsystems its curves price for each building — whole building, roof cover, walls and windows, contents — opening to its construction or the research behind the gap), `construction-view` (a curve back to front: formula and its key, each parameter and where its number came from, the files that built it), the plots |
 | `public/twin/` | The Digital Twin's viewer, models and three.js r147, copied unchanged by `scripts/dashboard/export_twin.mjs` with a SHA manifest; not linted, never edited |
 | `lib/` | Readers for `data/`, types, number formats, the series palette and line styles, URL state |
 | `data/` | Written only by the build step ([README](data/README.md)) |

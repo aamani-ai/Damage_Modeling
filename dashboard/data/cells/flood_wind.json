@@ -63,7 +63,7 @@
    "label": "entry agent-read 2026-10-19 · release reviewed screening release"
   }
  },
- "summary": "Flood on wind farms: FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points; 6 parts of the asset's value have no curve.",
+ "summary": "Flood on wind farms: 1 curve for 1 part (GSU / substation (whole facility)); read against freshwater flood depth above substation grade (ft); the numbers are borrowed; 18 % of the plant's value is priced, 4 % partly.",
  "chain": {
   "stations": [
    {
@@ -92,7 +92,8 @@
     ],
     "evidence": [],
     "fact": "2 deferred",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "units",
@@ -108,7 +109,8 @@
     ],
     "evidence": [],
     "fact": "15 units · 14 withheld",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "axis_form",
@@ -150,7 +152,8 @@
      }
     ],
     "fact": "piecewise linear",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "evidence",
@@ -174,7 +177,8 @@
     ],
     "evidence": [],
     "fact": "18 src · T2–4",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "value",
@@ -190,29 +194,30 @@
     ],
     "evidence": [],
     "fact": "crosswalk",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "audit",
     "label": "Audit",
     "full_label": "Audit",
     "gate": "B2",
-    "state": "prose",
-    "files": [],
-    "evidence": [
+    "state": "artifact",
+    "files": [
      {
-      "kind": "basics_headings",
-      "file": {
-       "path": "docs/cells/flood_wind/basics/HOW_THE_MODEL_IS_BUILT.md",
-       "sha256": "1b2921f968439e61f4844ae22bc5c37ebf8c4ad39c4e09f84e15ddfaf8563536"
-      },
-      "matched": [
-       "Seven-step build"
-      ]
+      "path": "docs/cells/flood_wind/proposed/SEVEN_STEP_AUDIT_flood_wind__model_v1_0__docs_r1.md",
+      "sha256": "b07b871ce65fac1a46413a3b92fab64ab6f745a5b879be177e2d6b667788d4d6"
      }
     ],
-    "fact": "7 steps in the dossier",
-    "absent_sentence": null
+    "evidence": [],
+    "fact": "7-step file",
+    "absent_sentence": null,
+    "earlier": [
+     {
+      "path": "docs/cells/flood_wind/proposed/SEVEN_STEP_AUDIT_flood_wind__model_v0_1__docs_r1.md",
+      "model": "v0.1"
+     }
+    ]
    },
    {
     "id": "artifact",
@@ -240,7 +245,8 @@
     ],
     "evidence": [],
     "fact": "v1.0 · docs r1",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "capability",
@@ -256,7 +262,8 @@
     ],
     "evidence": [],
     "fact": "DR conditional · EAL withheld",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "proof",
@@ -291,7 +298,8 @@
     ],
     "evidence": [],
     "fact": "37 of 37 KAT reproduced · 6 not run",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "field_review",
@@ -302,11 +310,12 @@
     "files": [],
     "evidence": [],
     "fact": "not searched · agent-read 10-19",
-    "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only."
+    "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only.",
+    "earlier": []
    }
   ],
   "generation": "skill",
-  "core_as_files": 5,
+  "core_as_files": 6,
   "core_total": 6,
   "dossier": {
    "path": "docs/cells/flood_wind/current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md",
@@ -414,7 +423,7 @@
     "items": [
      {
       "item": "seven-step audit records a status and blocking seam for every step",
-      "status": "human",
+      "status": "proven",
       "basis": "SEVEN_STEP_AUDIT file"
      },
      {
@@ -613,129 +622,143 @@
   "withheld_units": [
    {
     "failure_unit_id": "FW_GSU_SWITCHGEAR",
+    "name": "GSU switchgear",
     "subsystem": "FACILITY_GSU_SUBSTATION",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "COMPONENT_LEVEL_ECONOMIC_RESPONSE_NOT_CALIBRATED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; component level economic response not calibrated."
+    "sentence": "The cell has no curve for this part. What it costs to repair this part on its own has not been worked out; the source prices the station only as a whole."
    },
    {
     "failure_unit_id": "FW_GSU_TRANSFORMER_MAIN",
+    "name": "GSU transformer main",
     "subsystem": "FACILITY_GSU_SUBSTATION",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "TRANSFORMER_MAIN_AUXILIARY_STATE_MODEL_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; transformer main auxiliary state model required."
+    "sentence": "The cell has no curve for this part. The main transformer and its auxiliaries would need modelling separately first."
    },
    {
     "failure_unit_id": "FW_GSU_TRANSFORMER_AUX_CONTROLS",
+    "name": "GSU transformer aux controls",
     "subsystem": "FACILITY_GSU_SUBSTATION",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "DEPENDENCY_SAFE_VALUE_SPLIT_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; dependency safe value split required."
+    "sentence": "The cell has no curve for this part. Its value would need splitting from the parts it depends on, without counting anything twice."
    },
    {
     "failure_unit_id": "FW_GSU_PROTECTION_SCADA",
+    "name": "GSU protection SCADA",
     "subsystem": "FACILITY_GSU_SUBSTATION",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "PROTECTION_CONTROL_ECONOMIC_RESPONSE_NOT_CALIBRATED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; protection control economic response not calibrated."
+    "sentence": "The cell has no curve for this part. What protection and control equipment costs to repair after this hazard has not been worked out."
    },
    {
     "failure_unit_id": "FW_GSU_STATION_SERVICE_DC",
+    "name": "GSU station service DC",
     "subsystem": "FACILITY_GSU_SUBSTATION",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "STATION_SERVICE_DC_DECOMPOSITION_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; station service dc decomposition required."
+    "sentence": "The cell has no curve for this part. The station's own power and DC supply would need splitting into parts first."
    },
    {
     "failure_unit_id": "FW_GSU_CABLE_TERMINATIONS",
+    "name": "GSU cable terminations",
     "subsystem": "FACILITY_GSU_SUBSTATION",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "CABLE_BODY_TERMINATION_PATHWAY_SPLIT_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; cable body termination pathway split required."
+    "sentence": "The cell has no curve for this part. A cable's run and its end connections are damaged differently and would need separating first."
    },
    {
     "failure_unit_id": "FW_TURBINE_BASE_ELECTRICAL",
+    "name": "Turbine base electrical",
     "subsystem": "REPEATED_TURBINE_ELECTRICAL",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "WIND_SPECIFIC_EQUIPMENT_DECOMPOSITION_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; wind specific equipment decomposition required."
+    "sentence": "The cell has no curve for this part. The wind farm's equipment would first need splitting into its own parts."
    },
    {
     "failure_unit_id": "FW_PADMOUNT_STEPUP_TRANSFORMER",
+    "name": "Padmount stepup transformer",
     "subsystem": "REPEATED_TURBINE_ELECTRICAL",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "PAD_TRANSFORMER_CONSTRUCTION_AND_VALUE_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; pad transformer construction and value required."
+    "sentence": "The cell has no curve for this part. How the pad transformer is built and what it is worth need defining first."
    },
    {
     "failure_unit_id": "FW_COLLECTION_CABLE_TERMINATIONS",
+    "name": "Collection cable terminations",
     "subsystem": "PLANT_COLLECTION",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "LINE_NETWORK_EXPOSURE_AND_VALUE_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; line network exposure and value required."
+    "sentence": "The cell has no curve for this part. Where the cable network runs, how exposed it is and what it is worth need defining first."
    },
    {
     "failure_unit_id": "FW_TURBINE_FOUNDATION",
+    "name": "Turbine foundation",
     "subsystem": "FOUNDATION",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "SEPARATE_FLOOD_SCOUR_EROSION_PATHWAY_REQUIRED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; separate flood scour erosion pathway required."
+    "sentence": "The cell has no curve for this part. Damage by scour and erosion needs its own treatment, which has not been built."
    },
    {
     "failure_unit_id": "FW_CIVIL_ACCESS_DRAINAGE",
+    "name": "Civil access drainage",
     "subsystem": "PLANT_CIVIL",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; mixed civil bucket requires split."
+    "sentence": "The cell has no curve for this part. Its value mixes roads, pads, buildings and fences, which would need separating first."
    },
    {
     "failure_unit_id": "FW_ELEVATED_TURBINE_EQUIPMENT",
+    "name": "Elevated turbine equipment",
     "subsystem": "REPEATED_TURBINE",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "GEOMETRY_SCREENED_NOT_UNIVERSAL_ZERO"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; geometry screened not universal zero."
+    "sentence": "The cell has no curve for this part. The cell judged it unlikely to be reached in most layouts, which is not the same as no damage."
    },
    {
     "failure_unit_id": "SUPPORT_FIELDWORK",
+    "name": "Support fieldwork",
     "subsystem": "SUPPORT",
     "reasons": [
      "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
      "NO_INDEPENDENT_FRAGILITY"
     ],
-    "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+    "sentence": "Its cost (crews, cranes, transport) is added once, after the other parts' damage is known. It does not break on its own; its cost follows the damage to other parts."
    },
    {
     "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+    "name": "Support transport logistics",
     "subsystem": "SUPPORT",
     "reasons": [
      "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
      "NO_INDEPENDENT_FRAGILITY"
     ],
-    "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+    "sentence": "Its cost (crews, cranes, transport) is added once, after the other parts' damage is known. It does not break on its own; its cost follows the damage to other parts."
    }
   ],
   "hazard_axis": [
@@ -805,7 +828,13 @@
   "paths": {
    "sources": "docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
    "claims": "docs/cells/flood_wind/current/CLAIM_PARAMETER_REGISTER_flood_wind__model_v1_0__docs_r1.csv",
-   "parameters": "docs/cells/flood_wind/current/PARAMETER_TIER_TABLE_flood_wind__model_v1_0__docs_r1.csv"
+   "parameters": "docs/cells/flood_wind/current/PARAMETER_TIER_TABLE_flood_wind__model_v1_0__docs_r1.csv",
+   "source_registers": [
+    "docs/cells/flood_wind/current/SOURCE_REGISTER_flood_wind__model_v1_0__docs_r1.csv"
+   ],
+   "claim_registers": [
+    "docs/cells/flood_wind/current/CLAIM_PARAMETER_REGISTER_flood_wind__model_v1_0__docs_r1.csv"
+   ]
   },
   "n_sources": 18,
   "n_claims": 27,
@@ -835,7 +864,7 @@
  },
  "audit": {
   "table": null,
-  "state": "prose",
+  "state": "artifact",
   "absent_sentence": null,
   "site_adapter": null
  },
@@ -997,6 +1026,8 @@
   }
  ],
  "gap_reason": null,
+ "gap_reason_own": null,
+ "gap_reason_source": null,
  "binding": null,
  "sampling_notes": [],
  "plain": {
@@ -1007,7 +1038,7 @@
    },
    "evidence": {
     "words": "Evidence: borrowed",
-    "code": "How damage rises: borrowed · how it becomes dollars: borrowed",
+    "code": "Damage at each hazard level: borrowed · the dollar value it is applied to: borrowed",
     "tiers": [
      "T3"
     ],
@@ -1033,10 +1064,10 @@
     "id": "covers",
     "name": "What it covers",
     "meaning": "The parts that have a curve, their share of the value, and what has none yet",
-    "fact": "1 part with a curve · 6 without one yet",
+    "fact": "1 part with a curve · 1 of 10 subsystems with a curve",
     "paragraphs": [
-     "Flood on wind farms: FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points. It names 1 part: GSU / substation (whole facility). Outside its scope: outage restoration, business interruption, curtailment, revenue and insurance, soft, sunk and non-physical costs (excluded from the physical base) and other hazards in the same event (tropical-cyclone wind, tornado); one event must not charge the same value twice. Kinds of damage it does not include: scour, erosion, saturated-soil support loss, debris impact and wave loading and flood duration (captured but has no effect on the result).",
-     "For this hazard the wind farm is split into 1 part: GSU / substation (whole facility). 14 further units are named but withheld — fw gsu switchgear, fw gsu transformer main, fw gsu transformer aux controls, fw gsu protection scada, fw gsu station service dc, fw gsu cable terminations, fw turbine base electrical, fw padmount stepup transformer, fw collection cable terminations, fw turbine foundation, fw civil access drainage, fw elevated turbine equipment, support fieldwork and support transport logistics — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: GSU parts as separate units: switchgear, main transformer, transformer auxiliaries and controls, protection and SCADA, station service and DC, cable terminations (withheld, not zero), turbine-base electrical and pad or turbine step-up transformers (withheld), collection cable joints and terminations (withheld), turbine foundation (needs a separate scour and erosion pathway) and civil access and drainage (needs a split), elevated turbine equipment: rotor, nacelle, tower (geometry-screened, not declared zero) and fieldwork and transport support (allocated once after repair scope; no fragility).",
+     "Flood on wind farms: FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points. It names 1 part (listed below). It also lists 5 things it leaves out (below).",
+     "This hazard's curves cover 1 part of the wind farm, listed below after the subsystem each belongs to and named as the catalogue entry writes them. 14 further units are named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
      "The damage ratio is a share of full direct replacement value of the same facility-level GSU/substation (not project TIV, not the mixed 72 USD/kW electrical row). The files state no plant-level dollar figure for this asset."
     ],
     "holds": [
@@ -1052,13 +1083,13 @@
       "title": "GSU / substation (whole facility)"
      },
      {
-      "text": "6 without a curve yet",
-      "tone": "muted",
-      "title": "GSU parts as separate units: switchgear, main transformer, transformer auxiliaries and controls, protection and SCADA, station service and DC, cable terminations (withheld, not zero); Turbine-base electrical and pad or turbine step-up transformers (withheld); Collection cable joints and terminations (withheld); Turbine foundation (needs a separate scour and erosion pathway) and civil access and drainage (needs a split); Elevated turbine equipment: rotor, nacelle, tower (geometry-screened, not declared zero); Fieldwork and transport support (allocated once after repair scope; no fragility)"
-     },
-     {
       "text": "14 withheld",
       "tone": "muted"
+     },
+     {
+      "text": "1 of 10 subsystems with a curve · 9 no curve yet",
+      "tone": "muted",
+      "title": "The catalogue's own list: GSU parts as separate units: switchgear, main transformer, transformer auxiliaries and controls, protection and SCADA, station service and DC, cable terminations (withheld, not zero); Turbine-base electrical and pad or turbine step-up transformers (withheld); Collection cable joints and terminations (withheld); Turbine foundation (needs a separate scour and erosion pathway) and civil access and drainage (needs a split); Elevated turbine equipment: rotor, nacelle, tower (geometry-screened, not declared zero); Fieldwork and transport support (allocated once after repair scope; no fragility)"
      }
     ]
    },
@@ -1068,8 +1099,8 @@
     "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "freshwater flood depth above substation grade → a line through points",
     "paragraphs": [
-     "Damage is read against freshwater flood depth above substation grade (ft). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: freshwater flood depth above substation grade (ft), 0 to 10 ft; or water-surface and grade elevations (m) on the same vertical datum.",
-     "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file. A site-condition adapter has not been written for this cell."
+     "Damage is read against one hazard measure: freshwater flood depth above substation grade (ft). The curve is a line through fixed points (piecewise linear). What Hazard has to supply for each event is below.",
+     "No seven-step audit was written for the version shown; the cell has one for an earlier version (v0.1), from its proposal stage."
     ],
     "holds": [
      "axis_form",
@@ -1113,7 +1144,7 @@
     "meaning": "The sources, what each one gave, and how sure we are",
     "fact": "17 sources, 17 linked · borrowed",
     "paragraphs": [
-     "17 sources set this cell: FEMA, Hazus-MH Flood Model Technical Manual 2.1, Table 7.9, FEMA, Hazus 7.0 Flood Technical Manual (2025), electric-power status, USACE, HEC-FIA Technical Reference, depth-percent damage relationships and NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment (historical context) and 13 more. Of the 5 parameters, 3 are published, 1 is borrowed and 1 is our judgment. The source and claim registers are machine-readable files in the cell folder."
+     "The sources and claims below are kept as machine-readable register files in the cell folder."
     ],
     "holds": [
      "evidence"
@@ -1123,7 +1154,7 @@
      {
       "text": "borrowed",
       "tone": "key",
-      "title": "How damage rises: borrowed · how it becomes dollars: borrowed"
+      "title": "Damage at each hazard level: borrowed · the dollar value it is applied to: borrowed"
      },
      {
       "text": "FEMA, Hazus-MH Flood Model…",
@@ -1148,8 +1179,8 @@
    {
     "id": "checked",
     "name": "Has it been checked",
-    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
-    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "meaning": "Outside checks, and who has read the entry",
+    "fact": "no outside check yet · read by an agent only",
     "paragraphs": [
      "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says report.",
      "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: reviewed screening release."
@@ -1161,10 +1192,6 @@
     "chips": [
      {
       "text": "no outside check yet",
-      "tone": "muted"
-     },
-     {
-      "text": "field reports: not searched",
       "tone": "muted"
      },
      {
@@ -1180,7 +1207,7 @@
    "proof"
   ],
   "word": "borrowed",
-  "halves": "How damage rises: borrowed · how it becomes dollars: borrowed",
+  "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: borrowed",
   "hazard_paths": [
    {
     "id": "LEG-FW-001",
@@ -1188,8 +1215,8 @@
     "path": "Notebooks/flood/wind_farm/m3_damage/01_damage.py",
     "state": "moved",
     "moved_to": "Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
-    "words": "moved on Hazard's main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py"
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/ee41b829f51485283d5a3540de7c34ccfa846e95/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
+    "words": "not on Hazard's main at this path; moved on main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py"
    },
    {
     "id": "LEG-FW-002",
@@ -1197,8 +1224,8 @@
     "path": "Notebooks/flood/wind_farm/m4_loss_metrics/01_loss_metrics.py",
     "state": "moved",
     "moved_to": "Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
-    "words": "moved on Hazard's main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py"
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/ee41b829f51485283d5a3540de7c34ccfa846e95/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+    "words": "not on Hazard's main at this path; moved on main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py"
    }
   ],
   "capabilities": [
@@ -1245,129 +1272,143 @@
     "withheld": [
      {
       "failure_unit_id": "FW_GSU_SWITCHGEAR",
+      "name": "GSU switchgear",
       "subsystem": "FACILITY_GSU_SUBSTATION",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "COMPONENT_LEVEL_ECONOMIC_RESPONSE_NOT_CALIBRATED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; component level economic response not calibrated."
+      "sentence": "The cell has no curve for this part. What it costs to repair this part on its own has not been worked out; the source prices the station only as a whole."
      },
      {
       "failure_unit_id": "FW_GSU_TRANSFORMER_MAIN",
+      "name": "GSU transformer main",
       "subsystem": "FACILITY_GSU_SUBSTATION",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "TRANSFORMER_MAIN_AUXILIARY_STATE_MODEL_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; transformer main auxiliary state model required."
+      "sentence": "The cell has no curve for this part. The main transformer and its auxiliaries would need modelling separately first."
      },
      {
       "failure_unit_id": "FW_GSU_TRANSFORMER_AUX_CONTROLS",
+      "name": "GSU transformer aux controls",
       "subsystem": "FACILITY_GSU_SUBSTATION",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "DEPENDENCY_SAFE_VALUE_SPLIT_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; dependency safe value split required."
+      "sentence": "The cell has no curve for this part. Its value would need splitting from the parts it depends on, without counting anything twice."
      },
      {
       "failure_unit_id": "FW_GSU_PROTECTION_SCADA",
+      "name": "GSU protection SCADA",
       "subsystem": "FACILITY_GSU_SUBSTATION",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "PROTECTION_CONTROL_ECONOMIC_RESPONSE_NOT_CALIBRATED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; protection control economic response not calibrated."
+      "sentence": "The cell has no curve for this part. What protection and control equipment costs to repair after this hazard has not been worked out."
      },
      {
       "failure_unit_id": "FW_GSU_STATION_SERVICE_DC",
+      "name": "GSU station service DC",
       "subsystem": "FACILITY_GSU_SUBSTATION",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "STATION_SERVICE_DC_DECOMPOSITION_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; station service dc decomposition required."
+      "sentence": "The cell has no curve for this part. The station's own power and DC supply would need splitting into parts first."
      },
      {
       "failure_unit_id": "FW_GSU_CABLE_TERMINATIONS",
+      "name": "GSU cable terminations",
       "subsystem": "FACILITY_GSU_SUBSTATION",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "CABLE_BODY_TERMINATION_PATHWAY_SPLIT_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; cable body termination pathway split required."
+      "sentence": "The cell has no curve for this part. A cable's run and its end connections are damaged differently and would need separating first."
      },
      {
       "failure_unit_id": "FW_TURBINE_BASE_ELECTRICAL",
+      "name": "Turbine base electrical",
       "subsystem": "REPEATED_TURBINE_ELECTRICAL",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "WIND_SPECIFIC_EQUIPMENT_DECOMPOSITION_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; wind specific equipment decomposition required."
+      "sentence": "The cell has no curve for this part. The wind farm's equipment would first need splitting into its own parts."
      },
      {
       "failure_unit_id": "FW_PADMOUNT_STEPUP_TRANSFORMER",
+      "name": "Padmount stepup transformer",
       "subsystem": "REPEATED_TURBINE_ELECTRICAL",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "PAD_TRANSFORMER_CONSTRUCTION_AND_VALUE_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; pad transformer construction and value required."
+      "sentence": "The cell has no curve for this part. How the pad transformer is built and what it is worth need defining first."
      },
      {
       "failure_unit_id": "FW_COLLECTION_CABLE_TERMINATIONS",
+      "name": "Collection cable terminations",
       "subsystem": "PLANT_COLLECTION",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "LINE_NETWORK_EXPOSURE_AND_VALUE_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; line network exposure and value required."
+      "sentence": "The cell has no curve for this part. Where the cable network runs, how exposed it is and what it is worth need defining first."
      },
      {
       "failure_unit_id": "FW_TURBINE_FOUNDATION",
+      "name": "Turbine foundation",
       "subsystem": "FOUNDATION",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "SEPARATE_FLOOD_SCOUR_EROSION_PATHWAY_REQUIRED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; separate flood scour erosion pathway required."
+      "sentence": "The cell has no curve for this part. Damage by scour and erosion needs its own treatment, which has not been built."
      },
      {
       "failure_unit_id": "FW_CIVIL_ACCESS_DRAINAGE",
+      "name": "Civil access drainage",
       "subsystem": "PLANT_CIVIL",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "MIXED_CIVIL_BUCKET_REQUIRES_SPLIT"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; mixed civil bucket requires split."
+      "sentence": "The cell has no curve for this part. Its value mixes roads, pads, buildings and fences, which would need separating first."
      },
      {
       "failure_unit_id": "FW_ELEVATED_TURBINE_EQUIPMENT",
+      "name": "Elevated turbine equipment",
       "subsystem": "REPEATED_TURBINE",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "GEOMETRY_SCREENED_NOT_UNIVERSAL_ZERO"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; geometry screened not universal zero."
+      "sentence": "The cell has no curve for this part. The cell judged it unlikely to be reached in most layouts, which is not the same as no damage."
      },
      {
       "failure_unit_id": "SUPPORT_FIELDWORK",
+      "name": "Support fieldwork",
       "subsystem": "SUPPORT",
       "reasons": [
        "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
        "NO_INDEPENDENT_FRAGILITY"
       ],
-      "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+      "sentence": "Its cost (crews, cranes, transport) is added once, after the other parts' damage is known. It does not break on its own; its cost follows the damage to other parts."
      },
      {
       "failure_unit_id": "SUPPORT_TRANSPORT_LOGISTICS",
+      "name": "Support transport logistics",
       "subsystem": "SUPPORT",
       "reasons": [
        "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION",
        "NO_INDEPENDENT_FRAGILITY"
       ],
-      "sentence": "Withheld: support cost allocate once after disposition; no independent fragility."
+      "sentence": "Its cost (crews, cranes, transport) is added once, after the other parts' damage is known. It does not break on its own; its cost follows the damage to other parts."
      }
     ]
    },
@@ -1403,28 +1444,28 @@
     "id": "scope",
     "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Flood on wind farms: FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points. It names 1 part: GSU / substation (whole facility). Outside its scope: outage restoration, business interruption, curtailment, revenue and insurance, soft, sunk and non-physical costs (excluded from the physical base) and other hazards in the same event (tropical-cyclone wind, tornado); one event must not charge the same value twice. Kinds of damage it does not include: scour, erosion, saturated-soil support loss, debris impact and wave loading and flood duration (captured but has no effect on the result).",
+    "paragraph": "Flood on wind farms: FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points. It names 1 part (listed below). It also lists 5 things it leaves out (below).",
     "plain_fact": "1 part · 3 left out"
    },
    {
     "id": "units",
     "name": "What breaks",
     "meaning": "The parts of the plant the hazard damages, each with its own curve",
-    "paragraph": "For this hazard the wind farm is split into 1 part: GSU / substation (whole facility). 14 further units are named but withheld — fw gsu switchgear, fw gsu transformer main, fw gsu transformer aux controls, fw gsu protection scada, fw gsu station service dc, fw gsu cable terminations, fw turbine base electrical, fw padmount stepup transformer, fw collection cable terminations, fw turbine foundation, fw civil access drainage, fw elevated turbine equipment, support fieldwork and support transport logistics — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: GSU parts as separate units: switchgear, main transformer, transformer auxiliaries and controls, protection and SCADA, station service and DC, cable terminations (withheld, not zero), turbine-base electrical and pad or turbine step-up transformers (withheld), collection cable joints and terminations (withheld), turbine foundation (needs a separate scour and erosion pathway) and civil access and drainage (needs a split), elevated turbine equipment: rotor, nacelle, tower (geometry-screened, not declared zero) and fieldwork and transport support (allocated once after repair scope; no fragility).",
+    "paragraph": "This hazard's curves cover 1 part of the wind farm, listed below after the subsystem each belongs to and named as the catalogue entry writes them. 14 further units are named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
     "plain_fact": "1 part · 14 withheld"
    },
    {
     "id": "axis_form",
     "name": "How damage is measured",
     "meaning": "The hazard intensity on the x-axis and the shape of the curve",
-    "paragraph": "Damage is read against freshwater flood depth above substation grade (ft). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: freshwater flood depth above substation grade (ft), 0 to 10 ft; or water-surface and grade elevations (m) on the same vertical datum.",
+    "paragraph": "Damage is read against one hazard measure: freshwater flood depth above substation grade (ft). The curve is a line through fixed points (piecewise linear). What Hazard has to supply for each event is below.",
     "plain_fact": "a line through points"
    },
    {
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "17 sources set this cell: FEMA, Hazus-MH Flood Model Technical Manual 2.1, Table 7.9, FEMA, Hazus 7.0 Flood Technical Manual (2025), electric-power status, USACE, HEC-FIA Technical Reference, depth-percent damage relationships and NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment (historical context) and 13 more. Of the 5 parameters, 3 are published, 1 is borrowed and 1 is our judgment. The source and claim registers are machine-readable files in the cell folder.",
+    "paragraph": "The sources and claims below are kept as machine-readable register files in the cell folder.",
     "plain_fact": "17 sources · borrowed"
    },
    {
@@ -1438,8 +1479,8 @@
     "id": "audit",
     "name": "The audit",
     "meaning": "The seven checks a curve passes before release",
-    "paragraph": "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file. A site-condition adapter has not been written for this cell.",
-    "plain_fact": "adjustments in the write-up"
+    "paragraph": "No seven-step audit was written for the version shown; the cell has one for an earlier version (v0.1), from its proposal stage.",
+    "plain_fact": "audit for v0.1 only"
    },
    {
     "id": "artifact",
@@ -1535,6 +1576,7 @@
   "sources": [
    {
     "id": "FW-S001",
+    "aliases": [],
     "citation": "Federal Energy Regulatory Commission, Order on accounting for renewable generating assets, 174 FERC 61,033 (2021).",
     "url": "https://www.ferc.gov/sites/default/files/2021-01/E-7-011921.pdf",
     "locator": "pp. 2-3, wind items a-e and solar items a-g",
@@ -1549,10 +1591,12 @@
     "link": "https://www.ferc.gov/sites/default/files/2021-01/E-7-011921.pdf",
     "link_kind": "url",
     "title": "Federal Energy Regulatory Commission, Order on accounting for renewable generating assets, 174 FERC 61,033…",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "FW-S002",
+    "aliases": [],
     "citation": "National Electrical Manufacturers Association, NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment (historical edition).",
     "url": "https://www.nema.org/docs/default-source/secure-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
     "locator": "sections 4.3 Power Equipment and 4.4 Transformers",
@@ -1567,10 +1611,12 @@
     "link": "https://www.nema.org/docs/default-source/secure-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
     "link_kind": "url",
     "title": "National Electrical Manufacturers Association, NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment…",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "FW-S003",
+    "aliases": [],
     "citation": "North American Electric Reliability Corporation, Substation Flooding Events Highlight Potential Design Deficiencies (2022).",
     "url": "https://www.nerc.com/pa/rrm/ea/Lessons%20Learned%20Document%20Library/LL20220404_Substation_Flooding_Events_Highlight_Potential_Design_Deficiencies.pdf",
     "locator": "p. 1, approximately 8 inches at 250 VDC control connections and resulting operations",
@@ -1585,10 +1631,12 @@
     "link": "https://www.nerc.com/pa/rrm/ea/Lessons%20Learned%20Document%20Library/LL20220404_Substation_Flooding_Events_Highlight_Potential_Design_Deficiencies.pdf",
     "link_kind": "url",
     "title": "North American Electric Reliability Corporation, Substation Flooding Events Highlight Potential Design…",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "FW-S004",
+    "aliases": [],
     "citation": "North American Electric Reliability Corporation, Severe Flooding Damages Transformer Substations (2015).",
     "url": "https://www.nerc.com/pa/rrm/ea/Lessons%20Learned%20Document%20Library/LL20150402_Severe_Flooding_Damages_Transformer_Substations_final.pdf",
     "locator": "problem statement, details, and corrective actions",
@@ -1603,10 +1651,12 @@
     "link": "https://www.nerc.com/pa/rrm/ea/Lessons%20Learned%20Document%20Library/LL20150402_Severe_Flooding_Damages_Transformer_Substations_final.pdf",
     "link_kind": "url",
     "title": "North American Electric Reliability Corporation, Severe Flooding Damages Transformer Substations (2015).",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "FW-S005",
+    "aliases": [],
     "citation": "Federal Emergency Management Agency, FEMA P-348, Protecting Building Utility Systems From Flood Damage, 2nd ed. (2017).",
     "url": "https://www.fema.gov/sites/default/files/2020-07/fema_p-348_protecting_building_utility_systems_from_flood_damage_2017.pdf",
     "locator": "section 5.2, electrical-system flood risk and mitigation",
@@ -1621,10 +1671,12 @@
     "link": "https://www.fema.gov/sites/default/files/2020-07/fema_p-348_protecting_building_utility_systems_from_flood_damage_2017.pdf",
     "link_kind": "url",
     "title": "Federal Emergency Management Agency, FEMA P-348, Protecting Building Utility Systems From Flood Damage, 2nd…",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "FW-S006",
+    "aliases": [],
     "citation": "U.S. Army Corps of Engineers, HEC-FIA Technical Reference, Depth-Percent Damage Relationships.",
     "url": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
     "locator": "direct damage, depth-percent relationship and linear interpolation",
@@ -1639,10 +1691,12 @@
     "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
     "link_kind": "url",
     "title": "U.S. Army Corps of Engineers, HEC-FIA Technical Reference, Depth-Percent Damage Relationships.",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "FW-S007",
+    "aliases": [],
     "citation": "U.S. Department of Energy FEMP, Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems.",
     "url": "https://www.energy.gov/cmei/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
     "locator": "total submersion, equipment elevation, conduit-water pathway, and electrical enclosure sections",
@@ -1657,10 +1711,12 @@
     "link": "https://www.energy.gov/cmei/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
     "link_kind": "url",
     "title": "U.S. Department of Energy FEMP, Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems.",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "FW-S008",
+    "aliases": [],
     "citation": "Stehly, T.; Duffy, P.; Mulas Hernando, D. Cost of Wind Energy Review: 2024 Edition. NREL/TP-5000-91775.",
     "url": "https://www.nrel.gov/docs/fy25osti/91775.pdf",
     "locator": "land-based reference plant capital-cost breakdown",
@@ -1675,10 +1731,12 @@
     "link": "https://www.nrel.gov/docs/fy25osti/91775.pdf",
     "link_kind": "url",
     "title": "Stehly, T.; Duffy, P.; Mulas Hernando, D. Cost of Wind Energy Review: 2024 Edition. NREL/TP-5000-91775.",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "FW-S009",
+    "aliases": [],
     "citation": "Federal Energy Regulatory Commission, pro forma Large Generator Interconnection Agreement.",
     "url": "https://www.ferc.gov/sites/default/files/2020-04/LGIA.pdf",
     "locator": "definitions of Point of Change of Ownership and Point of Interconnection; Appendix A dependency",
@@ -1693,10 +1751,12 @@
     "link": "https://www.ferc.gov/sites/default/files/2020-04/LGIA.pdf",
     "link_kind": "url",
     "title": "Federal Energy Regulatory Commission, pro forma Large Generator Interconnection Agreement.",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "FW-S010",
+    "aliases": [],
     "citation": "Canonical Damage Modeling flood_solar artifact, flood_solar@model_v1_0__docs_r4.",
     "url": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "locator": "FS_SWG, FS_XFMR, FS_SCADA, FS_CABLE; artifact SHA a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
@@ -1709,13 +1769,15 @@
     "provenance": "register",
     "repo_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "link_kind": "repo_file",
     "title": "Canonical Damage Modeling flood_solar artifact, flood_solar@model_v1_0__docs_r4.",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "FW-S011",
+    "aliases": [],
     "citation": "Federal Emergency Management Agency, Hazus-MH Flood Model Technical Manual, version 2.1.",
     "url": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
     "locator": "sections 7.2.2, 7.2.4, and 7.2.6; Table 7.9, pp. 7-20 through 7-21; Table 7.9 footnote 2 and comments",
@@ -1730,10 +1792,12 @@
     "link": "https://www.fema.gov/sites/default/files/2020-09/fema_hazus_flood-model_technical-manual_2.1.pdf",
     "link_kind": "url",
     "title": "Federal Emergency Management Agency, Hazus-MH Flood Model Technical Manual, version 2.1.",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "FW-S012",
+    "aliases": [],
     "citation": "Federal Emergency Management Agency, Hazus 7.0 Flood Technical Manual (2025).",
     "url": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
     "locator": "Table 9-1, pp. 9-1 through 9-2; section 9.4.1 footnote 21, p. 9-3",
@@ -1748,10 +1812,12 @@
     "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
     "link_kind": "url",
     "title": "Federal Emergency Management Agency, Hazus 7.0 Flood Technical Manual (2025).",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "FW-S013",
+    "aliases": [],
     "citation": "National Electrical Manufacturers Association, NEMA Standards Action, April 6, 2026.",
     "url": "https://www.nema.org/docs/default-source/default-document-library/public/standards-actions/nema-standards-action-april-2026.pdf?sfvrsn=73934d20_2",
     "locator": "Recently Published Documents, p. 5: Evaluating Water-Damaged Electrical Equipment, NEMA CS 70006-2026, Guide",
@@ -1766,10 +1832,12 @@
     "link": "https://www.nema.org/docs/default-source/default-document-library/public/standards-actions/nema-standards-action-april-2026.pdf?sfvrsn=73934d20_2",
     "link_kind": "url",
     "title": "National Electrical Manufacturers Association, NEMA Standards Action, April 6, 2026.",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "LEG-FW-001",
+    "aliases": [],
     "citation": "Hazard Modeling flood/wind M3 greenfield consumer implementation.",
     "url": "Hazard_modeling/Notebooks/flood/wind_farm/m3_damage/01_damage.py",
     "locator": "lines 65-84, dr(), loss assembly, vendored object",
@@ -1784,17 +1852,19 @@
      "path": "Notebooks/flood/wind_farm/m3_damage/01_damage.py",
      "state": "moved",
      "moved_to": "Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
-     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
-     "words": "moved on Hazard's main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py"
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/ee41b829f51485283d5a3540de7c34ccfa846e95/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
+     "words": "not on Hazard's main at this path; moved on main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py"
     },
     "doi": null,
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/ee41b829f51485283d5a3540de7c34ccfa846e95/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
     "link_kind": "hazard_moved",
     "title": "Hazard Modeling flood/wind M3 greenfield consumer implementation.",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": "not on Hazard's main at this path; moved on main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py"
    },
    {
     "id": "LEG-FW-002",
+    "aliases": [],
     "citation": "Hazard Modeling flood/wind M4 independent coastal flood reconstruction.",
     "url": "Hazard_modeling/Notebooks/flood/wind_farm/m4_loss_metrics/01_loss_metrics.py",
     "locator": "lines 204-245 and output/compound sections",
@@ -1809,17 +1879,19 @@
      "path": "Notebooks/flood/wind_farm/m4_loss_metrics/01_loss_metrics.py",
      "state": "moved",
      "moved_to": "Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
-     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
-     "words": "moved on Hazard's main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py"
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/ee41b829f51485283d5a3540de7c34ccfa846e95/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+     "words": "not on Hazard's main at this path; moved on main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py"
     },
     "doi": null,
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/ee41b829f51485283d5a3540de7c34ccfa846e95/Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py",
     "link_kind": "hazard_moved",
     "title": "Hazard Modeling flood/wind M4 independent coastal flood reconstruction.",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": "not on Hazard's main at this path; moved on main to Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py"
    },
    {
     "id": "GOVERNANCE_CONTRACT",
+    "aliases": [],
     "citation": "Damage Modeling method, contracts, and damage-curve skill governance.",
     "url": "docs/method/standards/00_index.md",
     "locator": "standards 02, 07, 08, 18, 20; versioning and capability contracts; fail-closed workflow",
@@ -1832,14 +1904,16 @@
     "provenance": "register",
     "repo_path": "docs/method/standards/00_index.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/method/standards/00_index.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/standards/00_index.md",
     "link_kind": "repo_file",
     "title": "Damage Modeling method, contracts, and damage-curve skill governance.",
     "kind": "marker",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "SHARED_SUBSTRATE",
+    "aliases": [],
     "citation": "Flood-electrical non-runtime shared component substrate v0.1.",
     "url": "docs/method/shared_components/flood_electrical/README.md",
     "locator": "catalog and binding rules",
@@ -1852,13 +1926,15 @@
     "provenance": "register",
     "repo_path": "docs/method/shared_components/flood_electrical/README.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/method/shared_components/flood_electrical/README.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/shared_components/flood_electrical/README.md",
     "link_kind": "repo_file",
     "title": "Flood-electrical non-runtime shared component substrate v0.1.",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BOUNDED_SEARCH_LOG",
+    "aliases": [],
     "citation": "Bounded evidence search log for flood_wind model v0.1/docs r1.",
     "url": "docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
     "locator": "search surfaces endpoint tests limitations and refresh triggers",
@@ -1871,10 +1947,11 @@
     "provenance": "register",
     "repo_path": "docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
     "link_kind": "repo_file",
     "title": "Bounded evidence search log for flood_wind model v0.1/docs r1.",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    }
   ],
   "claims": [
@@ -2539,5 +2616,580 @@
    "cost": "borrowed"
   }
  },
- "build_findings": []
+ "build_findings": [],
+ "hazard_note": null,
+ "subcomponents": [
+  {
+   "key": "rotor",
+   "label": "Rotor and blades",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.20764017252002465,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "FW_ELEVATED_TURBINE_EQUIPMENT"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "flood_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. The cell judged it unlikely to be reached in most layouts, which is not the same as no damage.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; GEOMETRY_SCREENED_NOT_UNIVERSAL_ZERO",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_wind/current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "tower",
+   "label": "Tower",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.17005545286506468,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "FW_ELEVATED_TURBINE_EQUIPMENT"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "flood_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. The cell judged it unlikely to be reached in most layouts, which is not the same as no damage.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; GEOMETRY_SCREENED_NOT_UNIVERSAL_ZERO",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_wind/current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "nacelle",
+   "label": "Nacelle: gearbox, generator, yaw",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.20948860135551448,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "FW_ELEVATED_TURBINE_EQUIPMENT"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "flood_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. The cell judged it unlikely to be reached in most layouts, which is not the same as no damage.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; GEOMETRY_SCREENED_NOT_UNIVERSAL_ZERO",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_wind/current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "foundation",
+   "label": "Turbine foundation",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.07393715341959335,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "FW_TURBINE_FOUNDATION"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "flood_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. Damage by scour and erosion needs its own treatment, which has not been built.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; SEPARATE_FLOOD_SCOUR_EROSION_PATHWAY_REQUIRED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_wind/current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "turbine_electrical",
+   "label": "Turbine-base and pad electrical",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.08441158348736907,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "FW_PADMOUNT_STEPUP_TRANSFORMER",
+    "FW_TURBINE_BASE_ELECTRICAL"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "flood_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. The wind farm's equipment would first need splitting into its own parts. How the pad transformer is built and what it is worth need defining first.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; WIND_SPECIFIC_EQUIPMENT_DECOMPOSITION_REQUIRED; NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; PAD_TRANSFORMER_CONSTRUCTION_AND_VALUE_REQUIRED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_wind/current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "collection",
+   "label": "Collection network",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.04436229205175601,
+   "share_basis": "share of the asset's reference value; one line of the value budget, shared with GSU substation",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "FW_COLLECTION_CABLE_TERMINATIONS"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "flood_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. Where the cable network runs, how exposed it is and what it is worth need defining first.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; LINE_NETWORK_EXPOSURE_AND_VALUE_REQUIRED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_wind/current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "gsu",
+   "label": "GSU substation",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": null,
+   "share_basis": "counted with Collection network: one line of the value budget covers both",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_wind",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL"
+   ],
+   "failure_unit_ids": [
+    "FW_GSU_CABLE_TERMINATIONS",
+    "FW_GSU_PROTECTION_SCADA",
+    "FW_GSU_STATION_SERVICE_DC",
+    "FW_GSU_SWITCHGEAR",
+    "FW_GSU_TRANSFORMER_AUX_CONTROLS",
+    "FW_GSU_TRANSFORMER_MAIN",
+    "FW_HAZUS_GSU_SUBSTATION_ASSEMBLY"
+   ],
+   "tier_span": "T3",
+   "evidence_labels": [
+    "borrowed"
+   ],
+   "evidence_words": "borrowed",
+   "construction": [
+    {
+     "curve_id": "FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL",
+     "data_path": "curves/flood_wind/FW_HAZUS_2_1_SUBSTATION_SCREENING_PWL@model_v1_0__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/flood_wind/current/flood_wind__model_v1_0__docs_r1__curve_artifact.json",
+     "parameter_count": 6,
+     "source_ids": [
+      "FW-S002",
+      "FW-S005",
+      "FW-S006",
+      "FW-S011",
+      "FW-S012",
+      "FW-S013"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "flood_wind@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "not_on",
+       "sentences": [
+        "No layer on Hazard's dashboard uses this cell. Hazard branches claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration and more hold a copy of this cell's artifact, but no layer on Hazard's dashboard uses it.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "flood_wind",
+     "part": "GSU / substation (whole facility)",
+     "scope_note": {
+      "note": "“Whole facility” here means the whole GSU substation, not the whole wind farm: the curve is FEMA Hazus-MH 2.1 Table 7.9's whole-substation depth-damage table. Turbines, foundations, collection and civil works have no flood curve.",
+      "basis": "docs/cells/catalogue/flood_wind.json"
+     }
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [
+    {
+     "note": "“Whole facility” here means the whole GSU substation, not the whole wind farm: the curve is FEMA Hazus-MH 2.1 Table 7.9's whole-substation depth-damage table. Turbines, foundations, collection and civil works have no flood curve.",
+     "basis": "docs/cells/catalogue/flood_wind.json"
+    }
+   ],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "flood_wind@model_v1_0__docs_r1",
+    "hazard": "not_on"
+   },
+   "gap": null
+  },
+  {
+   "key": "control",
+   "label": "Control building, SCADA, met and O&M",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": null,
+   "share_basis": null,
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_wind",
+   "catalogue_status": "live",
+   "cell_state": "no_curve",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "flood_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "GSU parts as separate units: switchgear, main transformer, transformer auxiliaries and controls, protection and SCADA, station service and DC, cable terminations: no curve yet — left out for now, which is not the same as no damage.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "GSU parts as separate units: switchgear, main transformer, transformer auxiliaries and controls, protection and SCADA, station service and DC, cable terminations (withheld, not zero)",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_wind/current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "civil",
+   "label": "Civil: roads, pads, buildings, fences",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.02895871842267406,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "FW_CIVIL_ACCESS_DRAINAGE"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "flood_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. Its value mixes roads, pads, buildings and fences, which would need separating first.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; MIXED_CIVIL_BUCKET_REQUIRES_SPLIT",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_wind/current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "support",
+   "label": "Fieldwork and transport support",
+   "asset": {
+    "slug": "wind",
+    "label": "Wind farm"
+   },
+   "share": 0.18114602587800369,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": true,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_wind",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "SUPPORT_FIELDWORK",
+    "SUPPORT_TRANSPORT_LOGISTICS"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "flood_wind@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "Its cost (crews, cranes, transport) is added once, after the other parts' damage is known. It does not break on its own; its cost follows the damage to other parts.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION; NO_INDEPENDENT_FRAGILITY; SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION; NO_INDEPENDENT_FRAGILITY",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_wind/current/flood_wind_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  }
+ ],
+ "subcomponent_rollup": {
+  "expected": 10,
+  "with_curve": 1,
+  "gap": 9,
+  "complete": 1,
+  "incomplete": 9,
+  "evidence_labels": {
+   "field-calibrated": 0,
+   "published": 0,
+   "borrowed": 1,
+   "our judgment": 0
+  }
+ },
+ "value_split": {
+  "priced": 0.18114602587800369,
+  "partly": 0.04436229205175601,
+  "no_damage": 0.0,
+  "not_priced": 0.7744916820702403,
+  "basis": "of the reference plant's physical value"
+ }
 }

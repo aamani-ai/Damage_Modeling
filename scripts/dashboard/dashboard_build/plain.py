@@ -14,6 +14,7 @@ import re
 from typing import Any, Callable
 
 from .common import SENTENCES, fmt_pct, fmt_usd_compact, humanise
+from .common import SHOW_FIELD_REPORTS
 
 # G16 (DCD-D28): the catalogue's own words. "Published" fits all nine T2 rows (FEMA Hazus tables and lab tests are both
 # published); "borrowed" is the catalogue's word for T3. The codes stay in the ledger, under "Show the numbers".
@@ -95,8 +96,8 @@ def one_word(shape: str | None, cost: str | None) -> str:
 
 
 def halves(shape: str | None, cost: str | None) -> str:
-    """Both halves in words, for a tooltip or a caption: 'How damage rises: our judgment · how it becomes dollars: published'."""
-    return f"How damage rises: {tier_words(shape)} · how it becomes dollars: {tier_words(cost)}"
+    """Both halves in words, for a tooltip or a caption: 'Damage at each hazard level: our judgment · the dollar value it is applied to: published'."""
+    return f"Damage at each hazard level: {tier_words(shape)} · the dollar value it is applied to: {tier_words(cost)}"
 
 
 def tier_phrase(code: str | None) -> str:
@@ -177,9 +178,9 @@ def _strip_amount(s: str) -> str:
 
 def plain_rail(status: str, qualifier: str | None, shape: str, cost: str, occ_state: str | None, occ_label: str, review: dict[str, Any]) -> dict[str, Any]:
     exists_words = {
-        "live": "Live · " + ("a screening model" if (qualifier or "").startswith("screening") else "in the runtime index"),
-        "proposal": "Proposal · not in the runtime index yet",
-        "reused": "Reused · borrows another cell's curve",
+        "live": "Live · " + ("a screening model" if (qualifier or "").startswith("screening") else "in use"),
+        "proposal": "Proposal · built, not in use yet",
+        "reused": "Reused · borrows another asset's curve",
         "gap": "Gap · no curve yet",
     }[status]
     worst = tier_max(shape, cost)
@@ -533,20 +534,21 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
         names = [pt["part"] for pt in parts]
         p = f"{hazard} on {noun}: {_lower_first(method)}." if method else f"{hazard} on {noun}."
         if names:
-            p += f" It names {len(names)} part{'s' if len(names) != 1 else ''}: {_join(names)}."
-        if e.get("out_of_scope"):
-            p += f" Outside its scope: {_join([_lower_first(plain_text(x)) for x in e['out_of_scope']], 'and')}."
-        if e.get("missing_mechanisms"):
-            p += f" Kinds of damage it does not include: {_join([_lower_first(plain_text(x)) for x in e['missing_mechanisms']])}."
+            p += f" It names {len(names)} part{'s' if len(names) != 1 else ''} (listed below)."
+        # what it leaves out is listed in full below this paragraph (the page's What is missing only summarises it)
+        left = len(e.get("out_of_scope") or []) + len(e.get("missing_mechanisms") or [])
+        if left:
+            p += f" It also lists {left} thing{'s' if left != 1 else ''} it leaves out (below)."
         fact = f"{len(names)} part{'s' if len(names) != 1 else ''}" + (f" · {len(e.get('out_of_scope') or [])} left out" if e.get("out_of_scope") else "")
     elif sid == "units":
         names = [pt["part"] for pt in parts]
-        p = f"For this hazard the {singular(noun)} is split into {len(names)} part{'s' if len(names) != 1 else ''}: {_join(names)}." if names else "No part rows are listed in the catalogue entry."
+        # the parts themselves are the rows below (subsystem › part as the catalogue names it); the paragraph counts them
+        p = (f"This hazard's curves cover {len(names)} part{'s' if len(names) != 1 else ''} of the {singular(noun)}, listed below after the subsystem each belongs to"
+             " and named as the catalogue entry writes them." if names else "No part rows are listed in the catalogue entry.")
+        # the withheld units and the parts with no curve are each listed once, below this paragraph
         if withheld:
-            p += f" {len(withheld)} further unit{'s are' if len(withheld) != 1 else ' is'} named but withheld — {_join([humanise(w['failure_unit_id']).lower() for w in withheld])} — a stated 'not zero', not a curve."
-        nc = [plain_text(_strip_amount(x)) for x in e.get("not_covered") or []]
-        if nc:
-            p += f" Parts of the plant's value with no curve yet: {_join([_lower_first(x) for x in nc])}."
+            p += (f" {len(withheld)} further unit{'s are' if len(withheld) != 1 else ' is'} named but withheld (below): the cell says they can be damaged"
+                  " (\"not zero\") but gives no curve for them yet.")
         fact = f"{len(names)} part{'s' if len(names) != 1 else ''}" + (f" · {len(withheld)} withheld" if withheld else "")
     elif sid == "axis_form":
         curves = ctx["curves"]
@@ -556,12 +558,15 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
             lab = f"{ax.get('label')}" + (f" ({ax['unit']})" if ax.get("unit") and ax["unit"] not in ("dimensionless", "class") else "")
             if lab not in axes:
                 axes.append(lab)
-        p = f"Damage is read against {_join(axes)}." if axes else "No hazard axis is declared."
+        # the measures and the input are each listed once below this paragraph (Axis lines, What Hazard supplies); the
+        # paragraph only says how many measures and what shape the curves take
+        p = ((f"Damage is read against one hazard measure: {axes[0]}." if len(axes) == 1 else
+              f"Damage is read against {len(axes)} hazard measures, listed below with the parts read each way.") if axes else "No hazard axis is declared.")
         form = _form_sentence(curves)
         if form:
             p += " " + form
         if e.get("input"):
-            p += f" The input, in the catalogue's words: {_lower_first(plain_text(e['input'].rstrip('.')))}."
+            p += " What Hazard has to supply for each event is below."
         short = {"binary_state": "a step", "piecewise_linear": "a line through points", "logistic": "an S-curve", "thresholded_logistic": "a threshold, then an S-curve",
                  "exact_state_table": "exact classes", "ordered_damage_state_lognormal": "damage states", "thresholded_weibull_expected_damage": "a threshold, then a rise"}
         fact = " + ".join(dict.fromkeys(short.get(k_, k_.replace("_", " ")) for k_ in _form_keys(curves))) or "—"
@@ -571,27 +576,18 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
         params = ctx["parameters"]
         prov = ctx["evidence_provenance"]
         top = [r["text"] for r in ctx.get("key_references") or [] if r.get("text")] or [s.get("title") or s["id"] for s in docs[:5]]
-        if docs:
-            p = f"{len(docs)} source{'s' if len(docs) != 1 else ''} set this cell" + (f": {_join(top[:4])}" + (f" and {len(docs) - 4} more" if len(docs) > 4 else "") if top else "") + "."
-        else:
+        # the counts, the sources, the parameters by tier, the files read and the unmatched IDs are each listed once
+        # below this paragraph (Sources, Parameters, Read from, Unmatched); the paragraph only says where they are kept
+        if prov["kind"] == "not_yet_extracted":
+            p = prov["sentence"] or "No source list could be read for this cell."
+        elif not docs:
             p = "No source list could be read for this cell."
-        by_tier: dict[str, int] = {}
-        for pr in params:
-            if pr.get("tier"):
-                by_tier[pr["tier"]] = by_tier.get(pr["tier"], 0) + 1
-        if params:
-            p += f" Of the {len(params)} parameter{'s' if len(params) != 1 else ''}, " + _join([f"{n} {'are' if n != 1 else 'is'} {TIER_SHORT.get(k, k)}" for k, n in sorted(by_tier.items())]) + "."
-        if prov["kind"] == "register":
-            p += " The source and claim registers are machine-readable files in the cell folder."
+        elif prov["kind"] == "register":
+            p = "The sources and claims below are kept as machine-readable register files in the cell folder."
         elif prov["kind"] == "extracted":
-            p += f" The sources were read from the workbook's {_join(prov['sheets'])} sheet{'s' if len(prov['sheets']) != 1 else ''}" + (f" and the dossier's {_join(prov['sections'])}" if prov.get("sections") else "") + ", because this older cell keeps them there rather than in register files."
-        elif prov["kind"] == "not_yet_extracted":
-            p += " " + prov["sentence"]
-        if prov.get("unmatched"):
-            p += f" {len(prov['unmatched'])} source ID{'s' if len(prov['unmatched']) != 1 else ''} in the tier table ({_join(prov['unmatched'])}) {'match' if len(prov['unmatched']) != 1 else 'matches'} no document in the workbook or dossier."
-        lc = ctx["link_counts"]
-        if lc["locator_only"] or lc["neither"]:
-            p += f" {lc['locator_only'] + lc['neither']} source{'s have' if lc['locator_only'] + lc['neither'] != 1 else ' has'} no link in the register" + (f" ({lc['locator_only']} with a locator)" if lc["locator_only"] else "") + "."
+            p = "This older cell keeps its sources in its workbook and dossier rather than in register files; the sources below were read from there."
+        else:
+            p = ""
         fact = f"{len(docs)} source{'s' if len(docs) != 1 else ''}" + (f" · {tier_words(ctx['tier_span'])}" if ctx.get("tier_span") and ctx["tier_span"] != "–" else "")
     elif sid == "value":
         hu = e.get("how_to_use") or {}
@@ -622,10 +618,15 @@ def station_plain(sid: str, ctx: dict[str, Any]) -> dict[str, Any]:
         elif st.get("state") == "prose":
             p = "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file."
             fact = "adjustments in the write-up"
+        elif st.get("earlier"):
+            vs = sorted({x["model"] for x in st["earlier"]})
+            p = (f"No seven-step audit was written for the version shown; the cell has one for an earlier version ({_join(vs)}), "
+                 "from its proposal stage.")
+            fact = f"audit for {_join(vs)} only"
         else:
             p = "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page."
             fact = "no audit found"
-        p += " A site-condition adapter " + ("exists as a file." if ctx.get("site_adapter") else "has not been written for this cell.")
+        # whether a site-condition adapter exists is said once, with what it is, under the audit table
     elif sid == "artifact":
         ident = ctx["identity"]
         n = len(ctx["curves"])
@@ -849,7 +850,8 @@ STEPS = (
     ("covers", "What it covers", "The parts that have a curve, their share of the value, and what has none yet", ("scope", "units", "value")),
     ("derived", "How it was derived", "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments", ("axis_form", "audit")),
     ("numbers", "Where the numbers come from", "The sources, what each one gave, and how sure we are", ("evidence",)),
-    ("checked", "Has it been checked", "Outside checks, field reports of this damage, and who has read the entry", ("field_review",)),
+    ("checked", "Has it been checked", "Outside checks, field reports of this damage, and who has read the entry" if SHOW_FIELD_REPORTS
+     else "Outside checks, and who has read the entry", ("field_review",)),
 )
 FOR_HAZARD = ("artifact", "capability", "proof")
 
@@ -953,15 +955,16 @@ def steps4(ctx: dict[str, Any], stations_plain: list[dict[str, Any]], chain_stat
             rv = ctx["review"]
             fact = " · ".join([
                 f"{len(oc)} outside check{'s' if len(oc) != 1 else ''}" if oc else "no outside check yet",
-                "field reports not searched" if occ == "not_searched" else f"field reports: {occ.replace('_', ' ')}",
+                *(["field reports not searched" if occ == "not_searched" else f"field reports: {occ.replace('_', ' ')}"] if SHOW_FIELD_REPORTS else []),
                 f"reviewed by {rv['review']['by']}" if rv.get("review") else "read by an agent only",
             ])
-            chips += [_chip(_short(c["name"], 30), "key", c["name"]) for c in oc[:2]]
-            if len(oc) > 2:
-                chips.append(_chip(f"+{len(oc) - 2} more checks", "muted"))
-            if not oc:
+            # the count of outside checks; their names are in the hover and the panel
+            if oc:
+                chips.append(_chip(f"{len(oc)} outside check{'s' if len(oc) != 1 else ''}", "key", "; ".join(c["name"] for c in oc)))
+            else:
                 chips.append(_chip("no outside check yet", "muted"))
-            chips.append(_chip("field reports: not searched" if occ == "not_searched" else f"field reports: {occ.replace('_', ' ')}", "muted"))
+            if SHOW_FIELD_REPORTS:
+                chips.append(_chip("field reports: not searched" if occ == "not_searched" else f"field reports: {occ.replace('_', ' ')}", "muted"))
             chips.append(_chip(f"reviewed by {rv['review']['by']}" if rv.get("review") else "read by an agent only", "key" if rv.get("review") else "muted"))
             first = (f"{len(oc)} outside check{'s' if len(oc) != 1 else ''} compare{'' if len(oc) != 1 else 's'} this curve with an independent result: {_join([c['name'] for c in oc])}."
                      if oc else "No outside check has been made yet: nothing independent has been compared with this curve.")

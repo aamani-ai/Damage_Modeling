@@ -33,10 +33,10 @@ export function Drawer({ open, title, onClose, children, width = 460 }: { open: 
   return (
     <>
       <div className="fixed inset-0 z-30 bg-black/30" onClick={onClose} aria-hidden />
-      <aside ref={panelRef} role="dialog" aria-modal="true" aria-label={typeof title === "string" ? title : "Details"} style={{ width }} className="drawer-slide thin-scroll fixed inset-y-0 right-0 z-40 max-w-full overflow-y-auto border-l border-border bg-card text-xs shadow-2xl">
+      <aside ref={panelRef} role="dialog" aria-modal="true" aria-label={typeof title === "string" ? title : "Details"} style={{ width }} className="drawer-slide thin-scroll fixed inset-y-0 right-0 z-40 max-w-full overflow-y-auto border-l border-border bg-card text-[13px] shadow-2xl">
         <div className="sticky top-0 z-10 flex items-start gap-2 border-b border-border bg-card px-3.5 py-2.5">
-          <div className="text-[12.5px] font-semibold">{title}</div>
-          <button ref={closeRef} type="button" onClick={onClose} aria-label="Close" className="ml-auto shrink-0 rounded border border-border bg-muted px-1.5 py-0.5 text-[11px] text-muted-foreground hover:text-foreground">
+          <div className="text-[13.5px] font-semibold">{title}</div>
+          <button ref={closeRef} type="button" onClick={onClose} aria-label="Close" className="ml-auto shrink-0 rounded border border-border bg-muted px-1.5 py-0.5 text-[12px] text-muted-foreground hover:text-foreground">
             ✕
           </button>
         </div>

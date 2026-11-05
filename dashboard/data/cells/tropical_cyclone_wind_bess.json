@@ -77,7 +77,7 @@
    "label": "entry agent-read 2026-10-19 · release same author with independent numerical methods"
   }
  },
- "summary": "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a judgment-based hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage; 86 % of the reference value has a curve and 14 % has none.",
+ "summary": "Hurricane wind on batteries: 3 curves for 2 parts (integrated battery enclosure and separate PCS); read against pressure ratio, (event 3-s gust ÷ declared reference 3-s gust)²; the numbers are our judgment; 86 % of the plant's value is priced.",
  "chain": {
   "stations": [
    {
@@ -102,7 +102,8 @@
     ],
     "evidence": [],
     "fact": "3 deferred",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "units",
@@ -118,7 +119,8 @@
     ],
     "evidence": [],
     "fact": "5 units · 3 withheld",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "axis_form",
@@ -129,7 +131,8 @@
     "files": [],
     "evidence": [],
     "fact": "ordered damage state lognormal",
-    "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section."
+    "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section.",
+    "earlier": []
    },
    {
     "id": "evidence",
@@ -153,7 +156,8 @@
     ],
     "evidence": [],
     "fact": "13 src · T3–4",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "value",
@@ -173,7 +177,8 @@
     ],
     "evidence": [],
     "fact": "86 % · $94.4M of $109.8M",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "audit",
@@ -184,7 +189,8 @@
     "files": [],
     "evidence": [],
     "fact": "no file · no prose",
-    "absent_sentence": "No seven-step audit or site-condition adapter found as a file or a dossier section."
+    "absent_sentence": "No seven-step audit or site-condition adapter found as a file or a dossier section.",
+    "earlier": []
    },
    {
     "id": "artifact",
@@ -212,7 +218,8 @@
     ],
     "evidence": [],
     "fact": "v1.0 · docs r1",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "capability",
@@ -228,7 +235,8 @@
     ],
     "evidence": [],
     "fact": "DR conditional · EAL conditional",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "proof",
@@ -263,7 +271,8 @@
     ],
     "evidence": [],
     "fact": "20 of 20 KAT reproduced",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "field_review",
@@ -279,7 +288,8 @@
     ],
     "evidence": [],
     "fact": "not searched · agent-read 10-19",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    }
   ],
   "generation": "plain",
@@ -627,27 +637,30 @@
   "withheld_units": [
    {
     "failure_unit_id": "BESS_MV_AND_SHARED_ELECTRICAL",
+    "name": "BESS MV and shared electrical",
     "subsystem": "BESS_MV_AND_SHARED_ELECTRICAL",
     "reasons": [
      "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION"
     ],
-    "sentence": "Withheld: no qualified wind response or allocation."
+    "sentence": "No checked damage response or value share exists for it yet."
    },
    {
     "failure_unit_id": "BESS_CIVIL",
+    "name": "BESS civil",
     "subsystem": "BESS_CIVIL",
     "reasons": [
      "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION"
     ],
-    "sentence": "Withheld: no qualified wind response or allocation."
+    "sentence": "No checked damage response or value share exists for it yet."
    },
    {
     "failure_unit_id": "BESS_FIELDWORK",
+    "name": "BESS fieldwork",
     "subsystem": "BESS_FIELDWORK",
     "reasons": [
      "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION"
     ],
-    "sentence": "Withheld: no qualified wind response or allocation."
+    "sentence": "No checked damage response or value share exists for it yet."
    }
   ],
   "hazard_axis": [
@@ -732,7 +745,13 @@
   "paths": {
    "sources": "docs/cells/tropical_cyclone_wind_bess/current/source_register.csv",
    "claims": "docs/cells/tropical_cyclone_wind_bess/current/claim_parameter_register.csv",
-   "parameters": "docs/cells/tropical_cyclone_wind_bess/current/parameter_register.csv"
+   "parameters": "docs/cells/tropical_cyclone_wind_bess/current/parameter_register.csv",
+   "source_registers": [
+    "docs/cells/tropical_cyclone_wind_bess/current/source_register.csv"
+   ],
+   "claim_registers": [
+    "docs/cells/tropical_cyclone_wind_bess/current/claim_parameter_register.csv"
+   ]
   },
   "n_sources": 13,
   "n_claims": 16,
@@ -1035,6 +1054,8 @@
   }
  ],
  "gap_reason": null,
+ "gap_reason_own": null,
+ "gap_reason_source": null,
  "binding": null,
  "sampling_notes": [
   "Sampled through the cell's reference evaluator (tropical_cyclone_wind_bess_curve_eval.py) at 161 pressure ratios in 0–2 for every record × resistance scenario; nothing averaged.",
@@ -1049,7 +1070,7 @@
    },
    "evidence": {
     "words": "Evidence: our judgment",
-    "code": "How damage rises: our judgment · how it becomes dollars: our judgment",
+    "code": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
     "tiers": [
      "T4"
     ],
@@ -1075,10 +1096,10 @@
     "id": "covers",
     "name": "What it covers",
     "meaning": "The parts that have a curve, their share of the value, and what has none yet",
-    "fact": "2 parts with a curve · 86 % of the value · 3 without one yet",
+    "fact": "2 parts with a curve · 86 % of the value · 2 of 5 subsystems with a curve",
     "paragraphs": [
-     "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a judgment-based hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage. It names 2 parts: Integrated battery enclosure and Separate PCS. Outside its scope: storm surge and rain flooding (Flood cell), convective wind and tornado (separate scope), autonomous internal failures, collector station and export line and business interruption. Kinds of damage it does not include: windborne debris, wind-driven rain ingress and triggered propagation between units.",
-     "For this hazard the battery plant is split into 2 parts: Integrated battery enclosure and Separate PCS. 3 further units are named but withheld — bess mv and shared electrical, bess civil and bess fieldwork — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: unit MV and shared electrical, civil works and fieldwork.",
+     "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a judgment-based hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage. It names 2 parts (listed below). It also lists 8 things it leaves out (below).",
+     "This hazard's curves cover 2 parts of the battery plant, listed below after the subsystem each belongs to and named as the catalogue entry writes them. 3 further units are named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
      "$94.4M of $109.8M of the reference plant has a curve (86 %). No curve yet for unit MV and shared electrical, civil works and fieldwork (14 % of the value)."
     ],
     "holds": [
@@ -1107,13 +1128,13 @@
       "tone": "key"
      },
      {
-      "text": "3 without a curve yet",
-      "tone": "muted",
-      "title": "Unit MV and shared electrical; Civil works; Fieldwork"
-     },
-     {
       "text": "3 withheld",
       "tone": "muted"
+     },
+     {
+      "text": "2 of 5 subsystems with a curve · 3 no curve yet",
+      "tone": "muted",
+      "title": "The catalogue's own list: Unit MV and shared electrical; Civil works; Fieldwork"
      }
     ]
    },
@@ -1123,8 +1144,8 @@
     "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "not written yet",
     "paragraphs": [
-     "Damage is read against pressure ratio, (event 3-s gust ÷ declared reference 3-s gust)². The curve is ordered damage states, each reached with a lognormal chance as demand rises. The input, in the catalogue's words: pressure ratio: (event 3-second gust / declared reference gust) squared, dimensionless, valid 0 to 2; outside the range is withheld, not clamped.",
-     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell."
+     "Damage is read against one hazard measure: pressure ratio, (event 3-s gust ÷ declared reference 3-s gust)². The curve is ordered damage states, each reached with a lognormal chance as demand rises. What Hazard has to supply for each event is below.",
+     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page."
     ],
     "holds": [
      "axis_form",
@@ -1168,9 +1189,9 @@
     "id": "numbers",
     "name": "Where the numbers come from",
     "meaning": "The sources, what each one gave, and how sure we are",
-    "fact": "13 sources, 12 linked · our judgment",
+    "fact": "13 sources, 13 linked · our judgment",
     "paragraphs": [
-     "13 sources set this cell: Hazard BESS r1 selected profile and budget, Solar TC-wind model v2.1 docs r2, SMA MVPS-S2-SCS-US system manual, storm mounting and anchorage and Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 and 9 more. Of the 9 parameters, 1 is borrowed and 8 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator)."
+     "The sources and claims below are kept as machine-readable register files in the cell folder."
     ],
     "holds": [
      "evidence"
@@ -1180,7 +1201,7 @@
      {
       "text": "our judgment",
       "tone": "key",
-      "title": "How damage rises: our judgment · how it becomes dollars: our judgment"
+      "title": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment"
      },
      {
       "text": "Hazard BESS r1 selected…",
@@ -1197,7 +1218,7 @@
       "tone": "muted"
      },
      {
-      "text": "13 sources, 12 linked",
+      "text": "13 sources, 13 linked",
       "tone": "muted"
      }
     ]
@@ -1205,8 +1226,8 @@
    {
     "id": "checked",
     "name": "Has it been checked",
-    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
-    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "meaning": "Outside checks, and who has read the entry",
+    "fact": "no outside check yet · read by an agent only",
     "paragraphs": [
      "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says passed conditional annual screening.",
      "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: same author with independent numerical methods."
@@ -1218,10 +1239,6 @@
     "chips": [
      {
       "text": "no outside check yet",
-      "tone": "muted"
-     },
-     {
-      "text": "field reports: not searched",
       "tone": "muted"
      },
      {
@@ -1237,23 +1254,37 @@
    "proof"
   ],
   "word": "our judgment",
-  "halves": "How damage rises: our judgment · how it becomes dollars: our judgment",
+  "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
   "hazard_paths": [
    {
     "id": "BW-S01",
     "title": "Hazard BESS r1 selected profile and budget",
     "path": "docs/plans/_cross_cutting/bess_conus",
     "state": "on_branch",
-    "link": null,
-    "words": "on a Hazard branch, not on its main yet"
+    "branch": "codex/bess-conus",
+    "branches": [
+     "codex/bess-conus",
+     "codex/bess-release-integration",
+     "codex/real-estate-conus"
+    ],
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
+    "words": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
    },
    {
     "id": "BW-S13",
     "title": "Existing Hazard Substation Hurricane demand-reference binding",
     "path": "perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
     "state": "on_branch",
-    "link": null,
-    "words": "on a Hazard branch, not on its main yet"
+    "branch": "claude/policy-preview-hosted",
+    "branches": [
+     "claude/policy-preview-hosted",
+     "codex/bess-conus",
+     "codex/bess-release-integration",
+     "codex/real-estate-conus",
+     "codex/substation-conus"
+    ],
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/03f7999473f719c4e986e6cb84ac420dbe9e08c9/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
+    "words": "not on Hazard's main; on Hazard branches claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration and 2 more (linked: claude/policy-preview-hosted)"
    }
   ],
   "capabilities": [
@@ -1334,27 +1365,30 @@
     "withheld": [
      {
       "failure_unit_id": "BESS_MV_AND_SHARED_ELECTRICAL",
+      "name": "BESS MV and shared electrical",
       "subsystem": "BESS_MV_AND_SHARED_ELECTRICAL",
       "reasons": [
        "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION"
       ],
-      "sentence": "Withheld: no qualified wind response or allocation."
+      "sentence": "No checked damage response or value share exists for it yet."
      },
      {
       "failure_unit_id": "BESS_CIVIL",
+      "name": "BESS civil",
       "subsystem": "BESS_CIVIL",
       "reasons": [
        "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION"
       ],
-      "sentence": "Withheld: no qualified wind response or allocation."
+      "sentence": "No checked damage response or value share exists for it yet."
      },
      {
       "failure_unit_id": "BESS_FIELDWORK",
+      "name": "BESS fieldwork",
       "subsystem": "BESS_FIELDWORK",
       "reasons": [
        "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION"
       ],
-      "sentence": "Withheld: no qualified wind response or allocation."
+      "sentence": "No checked damage response or value share exists for it yet."
      }
     ]
    },
@@ -1391,28 +1425,28 @@
     "id": "scope",
     "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a judgment-based hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage. It names 2 parts: Integrated battery enclosure and Separate PCS. Outside its scope: storm surge and rain flooding (Flood cell), convective wind and tornado (separate scope), autonomous internal failures, collector station and export line and business interruption. Kinds of damage it does not include: windborne debris, wind-driven rain ingress and triggered propagation between units.",
+    "paragraph": "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a judgment-based hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage. It names 2 parts (listed below). It also lists 8 things it leaves out (below).",
     "plain_fact": "2 parts · 5 left out"
    },
    {
     "id": "units",
     "name": "What breaks",
     "meaning": "The parts of the plant the hazard damages, each with its own curve",
-    "paragraph": "For this hazard the battery plant is split into 2 parts: Integrated battery enclosure and Separate PCS. 3 further units are named but withheld — bess mv and shared electrical, bess civil and bess fieldwork — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: unit MV and shared electrical, civil works and fieldwork.",
+    "paragraph": "This hazard's curves cover 2 parts of the battery plant, listed below after the subsystem each belongs to and named as the catalogue entry writes them. 3 further units are named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
     "plain_fact": "2 parts · 3 withheld"
    },
    {
     "id": "axis_form",
     "name": "How damage is measured",
     "meaning": "The hazard intensity on the x-axis and the shape of the curve",
-    "paragraph": "Damage is read against pressure ratio, (event 3-s gust ÷ declared reference 3-s gust)². The curve is ordered damage states, each reached with a lognormal chance as demand rises. The input, in the catalogue's words: pressure ratio: (event 3-second gust / declared reference gust) squared, dimensionless, valid 0 to 2; outside the range is withheld, not clamped.",
+    "paragraph": "Damage is read against one hazard measure: pressure ratio, (event 3-s gust ÷ declared reference 3-s gust)². The curve is ordered damage states, each reached with a lognormal chance as demand rises. What Hazard has to supply for each event is below.",
     "plain_fact": "damage states"
    },
    {
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "13 sources set this cell: Hazard BESS r1 selected profile and budget, Solar TC-wind model v2.1 docs r2, SMA MVPS-S2-SCS-US system manual, storm mounting and anchorage and Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 and 9 more. Of the 9 parameters, 1 is borrowed and 8 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "paragraph": "The sources and claims below are kept as machine-readable register files in the cell folder.",
     "plain_fact": "13 sources · our judgment"
    },
    {
@@ -1426,7 +1460,7 @@
     "id": "audit",
     "name": "The audit",
     "meaning": "The seven checks a curve passes before release",
-    "paragraph": "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell.",
+    "paragraph": "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page.",
     "plain_fact": "no audit found"
    },
    {
@@ -1465,8 +1499,8 @@
      "BW-S01"
     ],
     "title": "Hazard BESS r1 selected profile and budget",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-    "link_kind": "repo_file",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
+    "link_kind": "hazard_branch",
     "locator": "asset_model.json; layout.csv; reference_budget.csv; 01_reference_profile_and_value.md",
     "no_link_sentence": null,
     "source_id": "BW-S01"
@@ -1477,7 +1511,7 @@
      "BW-S02"
     ],
     "title": "Solar TC-wind model v2.1 docs r2",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/tropical_cyclone_wind_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/tropical_cyclone_wind_solar/current",
     "link_kind": "repo_file",
     "locator": "curve_artifact site-facility records and derivation dossier sections Curve architecture and Honest limitations",
     "no_link_sentence": null,
@@ -1523,6 +1557,7 @@
   "sources": [
    {
     "id": "BW-S01",
+    "aliases": [],
     "citation": "Hazard BESS r1 selected profile and budget",
     "url": "Hazard_modeling/docs/plans/_cross_cutting/bess_conus/",
     "locator": "asset_model.json; layout.csv; reference_budget.csv; 01_reference_profile_and_value.md",
@@ -1536,18 +1571,25 @@
     "hazard": {
      "path": "docs/plans/_cross_cutting/bess_conus",
      "state": "on_branch",
-     "link": null,
-     "words": "on a Hazard branch, not on its main yet"
+     "branch": "codex/bess-conus",
+     "branches": [
+      "codex/bess-conus",
+      "codex/bess-release-integration",
+      "codex/real-estate-conus"
+     ],
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
+     "words": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
     },
-    "repo_path": "docs/plans/flood_wind_shared_electrical/asset_model.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-    "link_kind": "repo_file",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
+    "link_kind": "hazard_branch",
     "title": "Hazard BESS r1 selected profile and budget",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
    },
    {
     "id": "BW-S02",
+    "aliases": [],
     "citation": "Solar TC-wind model v2.1 docs r2",
     "url": "docs/cells/tropical_cyclone_wind_solar/current/",
     "locator": "curve_artifact site-facility records and derivation dossier sections Curve architecture and Honest limitations",
@@ -1560,13 +1602,15 @@
     "provenance": "register",
     "repo_path": "docs/cells/tropical_cyclone_wind_solar/current",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/tropical_cyclone_wind_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/tropical_cyclone_wind_solar/current",
     "link_kind": "repo_file",
     "title": "Solar TC-wind model v2.1 docs r2",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BW-S03",
+    "aliases": [],
     "citation": "SMA MVPS-S2-SCS-US-B8-SH-en-11 system manual",
     "url": "https://files.sma.de/downloads/MVPS-S2-SCS-US-B8-SH-en-11.pdf",
     "locator": "Section6.7 printed/PDF pp74-75; section17.14 p282; p75 rendered and inspected",
@@ -1581,10 +1625,12 @@
     "link": "https://files.sma.de/downloads/MVPS-S2-SCS-US-B8-SH-en-11.pdf",
     "link_kind": "url",
     "title": "SMA MVPS-S2-SCS-US-B8-SH-en-11 system manual",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BW-S04",
+    "aliases": [],
     "citation": "Sungrow ST2752UX system manual SEN-Ver21-202204",
     "url": "https://info-support.sungrowpower.com/application/pdf/2022/11/10/E049-ST2752UX-SEN-Ver21-202204-IEC.pdf",
     "locator": "Section4.2.1 printed p24 PDFp34; section4.2.2 printed p25 PDFp35",
@@ -1599,10 +1645,12 @@
     "link": "https://info-support.sungrowpower.com/application/pdf/2022/11/10/E049-ST2752UX-SEN-Ver21-202204-IEC.pdf",
     "link_kind": "url",
     "title": "Sungrow ST2752UX system manual SEN-Ver21-202204",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BW-S05",
+    "aliases": [],
     "citation": "Burns Engineering BESS Accel-Cheshire foundation drawing issued for permits 2025-08-29",
     "url": "https://portal.ct.gov/-/media/csc/3_petitions-medialibrary/petitions_medialibrary/mediapetitionnos1501-1600/pe1587/proceduralcorrespondence/pe1587_ack-conditions_staffchange_110325_a.pdf",
     "locator": "PDFp20 drawing S-102 sheet16 of19 details3-4; rendered and inspected",
@@ -1617,10 +1665,12 @@
     "link": "https://portal.ct.gov/-/media/csc/3_petitions-medialibrary/petitions_medialibrary/mediapetitionnos1501-1600/pe1587/proceduralcorrespondence/pe1587_ack-conditions_staffchange_110325_a.pdf",
     "link_kind": "url",
     "title": "Burns Engineering BESS Accel-Cheshire foundation drawing issued for permits 2025-08-29",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BW-S06",
+    "aliases": [],
     "citation": "SYL manufacturer specification submitted in CEC Enterprise air-quality filing TN268070",
     "url": "https://efiling.energy.ca.gov/GetDocument.aspx?DocumentContentId=105086&tn=268070",
     "locator": "PDFp193 supplier sheet printed28; wind-load row and battery/system parameters; rendered and inspected",
@@ -1635,10 +1685,12 @@
     "link": "https://efiling.energy.ca.gov/GetDocument.aspx?DocumentContentId=105086&tn=268070",
     "link_kind": "url",
     "title": "SYL manufacturer specification submitted in CEC Enterprise air-quality filing TN268070",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BW-S07",
+    "aliases": [],
     "citation": "AES Dominicana operational press release 2017-10-17 on Fluence website",
     "url": "https://blog.fluenceenergy.com/dominican-republics-first-energy-storage-arrays-help-grid-operator-prevent-blackouts",
     "locator": "Body describing two10MW arrays at Andres and Los Mina during Irma/Maria",
@@ -1653,10 +1705,12 @@
     "link": "https://blog.fluenceenergy.com/dominican-republics-first-energy-storage-arrays-help-grid-operator-prevent-blackouts",
     "link_kind": "url",
     "title": "AES Dominicana operational press release 2017-10-17 on Fluence website",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BW-S08",
+    "aliases": [],
     "citation": "Tesla Powerwall2 anchoring installation guidance",
     "url": "https://energylibrary.tesla.com/docs/Public/EnergyStorage/Powerwall/2/InstallManual/BackupGateway/2/en-us/GUID-EF498B4A-9E0A-4A04-9BE1-512C14DB415E.html",
     "locator": "AppendixA1 Table1 and exceptions below it",
@@ -1671,10 +1725,12 @@
     "link": "https://energylibrary.tesla.com/docs/Public/EnergyStorage/Powerwall/2/InstallManual/BackupGateway/2/en-us/GUID-EF498B4A-9E0A-4A04-9BE1-512C14DB415E.html",
     "link_kind": "url",
     "title": "Tesla Powerwall2 anchoring installation guidance",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BW-S09",
+    "aliases": [],
     "citation": "Moradi-Sepahvand et al2023 hurricane resilient co-planning preprint",
     "url": "https://arxiv.org/abs/2310.05814",
     "locator": "Abstract only; full paper not reviewed in this pass",
@@ -1689,10 +1745,12 @@
     "link": "https://arxiv.org/abs/2310.05814",
     "link_kind": "url",
     "title": "Moradi-Sepahvand et al2023 hurricane resilient co-planning preprint",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BW-S10",
+    "aliases": [],
     "citation": "Tesla Marshall Medical Center public permit drawing set 2022",
     "url": "https://evogov.s3.us-west-2.amazonaws.com/meetings/17/staff_reports/629.pdf",
     "locator": "PDFpp14 and29; S-101 PDFp29 rendered and inspected; structural criteria",
@@ -1707,10 +1765,12 @@
     "link": "https://evogov.s3.us-west-2.amazonaws.com/meetings/17/staff_reports/629.pdf",
     "link_kind": "url",
     "title": "Tesla Marshall Medical Center public permit drawing set 2022",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BW-S11",
+    "aliases": [],
     "citation": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide revision2.8 2026-04-10",
     "url": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
     "locator": "Printedp13 section3.4 and p20 section8; PDFpp15 and22 rendered/inspected; p22 section10 text read",
@@ -1725,10 +1785,12 @@
     "link": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
     "link_kind": "url",
     "title": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide revision2.8 2026-04-10",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BW-S12",
+    "aliases": [],
     "citation": "PVSCM2024 original inputs and prior same-budget allocation",
     "url": "https://data.nlr.gov/system/files/307/1764611886-PVSCM%202024.zip",
     "locator": "UPV2024Q1.txt ESS.Li-IonCells BatteryPacks and Enclosure; prior evidence/r3/value_allocations.csv",
@@ -1743,10 +1805,12 @@
     "link": "https://data.nlr.gov/system/files/307/1764611886-PVSCM%202024.zip",
     "link_kind": "url",
     "title": "PVSCM2024 original inputs and prior same-budget allocation",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BW-S13",
+    "aliases": [],
     "citation": "Existing Hazard Substation Hurricane demand-reference binding",
     "url": "Hazard_modeling/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
     "locator": "demand block; parent-cell ASCE MRI300 screening reference",
@@ -1760,14 +1824,23 @@
     "hazard": {
      "path": "perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
      "state": "on_branch",
-     "link": null,
-     "words": "on a Hazard branch, not on its main yet"
+     "branch": "claude/policy-preview-hosted",
+     "branches": [
+      "claude/policy-preview-hosted",
+      "codex/bess-conus",
+      "codex/bess-release-integration",
+      "codex/real-estate-conus",
+      "codex/substation-conus"
+     ],
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/03f7999473f719c4e986e6cb84ac420dbe9e08c9/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
+     "words": "not on Hazard's main; on Hazard branches claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration and 2 more (linked: claude/policy-preview-hosted)"
     },
     "doi": null,
-    "link": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/03f7999473f719c4e986e6cb84ac420dbe9e08c9/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
     "link_kind": "hazard_branch",
     "title": "Existing Hazard Substation Hurricane demand-reference binding",
-    "no_link_sentence": "on a Hazard branch, not on its main yet"
+    "no_link_sentence": null,
+    "link_note": "not on Hazard's main; on Hazard branches claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration and 2 more (linked: claude/policy-preview-hosted)"
    }
   ],
   "claims": [
@@ -2158,14 +2231,14 @@
      {
       "id": "BW-S02",
       "title": "Solar TC-wind model v2.1 docs r2",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/tropical_cyclone_wind_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/tropical_cyclone_wind_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "BW-S13",
       "title": "Existing Hazard Substation Hurricane demand-reference binding",
-      "link": null,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/03f7999473f719c4e986e6cb84ac420dbe9e08c9/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
       "link_kind": "hazard_branch",
       "resolved": true
      }
@@ -2187,7 +2260,7 @@
      {
       "id": "BW-S02",
       "title": "Solar TC-wind model v2.1 docs r2",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/tropical_cyclone_wind_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/tropical_cyclone_wind_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2289,8 +2362,8 @@
      {
       "id": "BW-S01",
       "title": "Hazard BESS r1 selected profile and budget",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-      "link_kind": "repo_file",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
+      "link_kind": "hazard_branch",
       "resolved": true
      },
      {
@@ -2325,7 +2398,7 @@
      {
       "id": "BW-S02",
       "title": "Solar TC-wind model v2.1 docs r2",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/tropical_cyclone_wind_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/tropical_cyclone_wind_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      },
@@ -2361,7 +2434,7 @@
      {
       "id": "BW-S13",
       "title": "Existing Hazard Substation Hurricane demand-reference binding",
-      "link": null,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/03f7999473f719c4e986e6cb84ac420dbe9e08c9/perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
       "link_kind": "hazard_branch",
       "resolved": true
      }
@@ -2383,8 +2456,8 @@
      {
       "id": "BW-S01",
       "title": "Hazard BESS r1 selected profile and budget",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-      "link_kind": "repo_file",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
+      "link_kind": "hazard_branch",
       "resolved": true
      }
     ],
@@ -2406,8 +2479,8 @@
   },
   "link_counts": {
    "total": 13,
-   "linked": 12,
-   "locator_only": 1,
+   "linked": 13,
+   "locator_only": 0,
    "neither": 0,
    "markers": 0,
    "placeholders": 0
@@ -2418,5 +2491,430 @@
    "cost": "our judgment"
   }
  },
- "build_findings": []
+ "build_findings": [],
+ "hazard_note": null,
+ "subcomponents": [
+  {
+   "key": "battery_enclosures",
+   "label": "Battery enclosures",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.7650273224043715,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_bess",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1",
+    "BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1"
+   ],
+   "failure_unit_ids": [
+    "BESS_INTEGRATED_ENCLOSURE"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "our judgment"
+   ],
+   "evidence_words": "our judgment",
+   "construction": [
+    {
+     "curve_id": "BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1",
+     "data_path": "curves/tropical_cyclone_wind_bess/BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1@model_v1_0__docs_r1.json",
+     "curve_type": "ordered damage state lognormal",
+     "curve_form": "ordered_damage_state_lognormal",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
+     "artifact": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
+     "parameter_count": 12,
+     "source_ids": [
+      "BW-S01",
+      "BW-S02",
+      "BW-S03",
+      "BW-S10",
+      "BW-S11",
+      "BW-S12",
+      "BW-S13"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Hurricane · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
+    },
+    {
+     "curve_id": "BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1",
+     "data_path": "curves/tropical_cyclone_wind_bess/BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1@model_v1_0__docs_r1.json",
+     "curve_type": "ordered damage state lognormal",
+     "curve_form": "ordered_damage_state_lognormal",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
+     "artifact": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
+     "parameter_count": 12,
+     "source_ids": [
+      "BW-S01",
+      "BW-S02",
+      "BW-S03",
+      "BW-S10",
+      "BW-S11",
+      "BW-S12",
+      "BW-S13"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Hurricane · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
+    "hazard": "used"
+   },
+   "gap": null
+  },
+  {
+   "key": "pcs",
+   "label": "PCS",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.0947176684881603,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_bess",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "BESS_SEPARATE_PCS_TC_PROXY_V0_1"
+   ],
+   "failure_unit_ids": [
+    "BESS_SEPARATE_PCS"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "our judgment"
+   ],
+   "evidence_words": "our judgment",
+   "construction": [
+    {
+     "curve_id": "BESS_SEPARATE_PCS_TC_PROXY_V0_1",
+     "data_path": "curves/tropical_cyclone_wind_bess/BESS_SEPARATE_PCS_TC_PROXY_V0_1@model_v1_0__docs_r1.json",
+     "curve_type": "ordered damage state lognormal",
+     "curve_form": "ordered_damage_state_lognormal",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
+     "artifact": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
+     "parameter_count": 12,
+     "source_ids": [
+      "BW-S01",
+      "BW-S02",
+      "BW-S03",
+      "BW-S10",
+      "BW-S11",
+      "BW-S12",
+      "BW-S13"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Hurricane · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "part": "Separate PCS",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
+    "hazard": "used"
+   },
+   "gap": null
+  },
+  {
+   "key": "electrical_balance",
+   "label": "MV, collection and controls",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.12021857923497267,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_bess",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "BESS_MV_AND_SHARED_ELECTRICAL"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No checked damage response or value share exists for it yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "electrical_balance"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/hurricane_wind.json",
+     "sha256": "b0dba18f513768581c2d477d1c8135dec4adf68d8dd57088b9c6c0463871cdf7",
+     "search_log": "docs/evidence/occurrence/bess/hurricane_wind.md",
+     "last_searched": null,
+     "question": "Has hurricane wind physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/tropical_cyclone_wind_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "civil_works",
+   "label": "Civil works",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.014571948998178506,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_bess",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "BESS_CIVIL"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No checked damage response or value share exists for it yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "civil_works"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/hurricane_wind.json",
+     "sha256": "b0dba18f513768581c2d477d1c8135dec4adf68d8dd57088b9c6c0463871cdf7",
+     "search_log": "docs/evidence/occurrence/bess/hurricane_wind.md",
+     "last_searched": null,
+     "question": "Has hurricane wind physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/tropical_cyclone_wind_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "fieldwork",
+   "label": "Fieldwork",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.00546448087431694,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_bess",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "BESS_FIELDWORK"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No checked damage response or value share exists for it yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "fieldwork"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/hurricane_wind.json",
+     "sha256": "b0dba18f513768581c2d477d1c8135dec4adf68d8dd57088b9c6c0463871cdf7",
+     "search_log": "docs/evidence/occurrence/bess/hurricane_wind.md",
+     "last_searched": null,
+     "question": "Has hurricane wind physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/tropical_cyclone_wind_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  }
+ ],
+ "subcomponent_rollup": {
+  "expected": 5,
+  "with_curve": 2,
+  "gap": 3,
+  "complete": 2,
+  "incomplete": 3,
+  "evidence_labels": {
+   "field-calibrated": 0,
+   "published": 0,
+   "borrowed": 0,
+   "our judgment": 2
+  }
+ },
+ "value_split": {
+  "priced": 0.8597449908925319,
+  "partly": 0.0,
+  "no_damage": 0.0,
+  "not_priced": 0.14025500910746813,
+  "basis": "of the reference plant's value"
+ }
 }

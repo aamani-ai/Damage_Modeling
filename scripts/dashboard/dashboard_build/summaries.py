@@ -4,6 +4,7 @@ from __future__ import annotations
 from typing import Any
 
 from .common import fmt_pct, fmt_usd_compact
+from .common import SHOW_FIELD_REPORTS
 
 
 def _lower_first(s: str) -> str:
@@ -24,7 +25,9 @@ def library_sentence(counts: dict[str, int], assets: int | str, n_hazards: int, 
     where = f"{assets} assets" if isinstance(assets, int) else assets
     return (f"{counts['live']} live curve cells, {counts['proposal']} proposals, {counts['reused']} reused bindings and {counts['gap']} gaps "
             f"across {where} and {n_hazards} hazards; {agent_read} of {n_entries} catalogue entries have been read by an agent only; "
-            + ("no field-report search has been logged yet." if searched == 0 else f"{searched} field-report searches have been logged."))
+            + ("no field-report search has been logged yet." if searched == 0 else f"{searched} field-report searches have been logged.")) \
+        if SHOW_FIELD_REPORTS else (f"{counts['live']} live curve cells, {counts['proposal']} proposals, {counts['reused']} reused bindings and {counts['gap']} gaps "
+                                   f"across {where} and {n_hazards} hazards; {agent_read} of {n_entries} catalogue entries have been read by an agent only.")
 
 
 def _tier_phrase(tiers: set[str]) -> str:
@@ -58,19 +61,23 @@ def asset_sentence(noun: str, cells: list[dict[str, Any]], searched_any: bool) -
                         tiers.add("T" + hi)
         parts.append(f"{_join([c['hazard'] for c in live])} {'have curves' if len(live) > 1 else 'has a curve'} for {plural}, {_tier_phrase(tiers)}")
     if proposals:
-        parts.append(f"{_join([c['hazard'] for c in proposals])} {'are proposals' if len(proposals) > 1 else 'is a proposal'} not yet in the runtime index")
+        parts.append(f"{_join([c['hazard'] for c in proposals])} {'are proposals' if len(proposals) > 1 else 'is a proposal'} not in use yet")
     if reused:
-        parts.append(f"{_join([c['hazard'] for c in reused])} {'reuse' if len(reused) > 1 else 'reuses'} another cell's curve")
+        parts.append(f"{_join([c['hazard'] for c in reused])} {'reuse' if len(reused) > 1 else 'reuses'} another asset's curve")
     if gaps:
         parts.append(f"{_join([c['hazard'] for c in gaps])} {'have' if len(gaps) > 1 else 'has'} none")
     tail = "nobody has yet searched for field reports." if not searched_any else "field-report searches have begun."
     s = "; ".join(parts)
+    if not SHOW_FIELD_REPORTS:
+        return (s[0].upper() + s[1:] + ".") if s else f"No curves for {plural} yet."
     return (s[0].upper() + s[1:] + "; " + tail) if s else f"No curves for {plural} yet; {tail}"
 
 
 def cell_sentence(entry: dict[str, Any], status: str, value: dict[str, Any] | None, hazard_label: str, asset_label: str, drawn: bool | None) -> str:
     if entry["kind"] == "gap":
-        reason = entry.get("reason", "").rstrip(".")
+        # the plain reason the gap page shows (plain_reasons), so the tile's hover and the page say the same
+        from .plain_reasons import plain as plain_reason
+        reason = (plain_reason(entry.get("reason", ""))[0] or "").rstrip(".")
         for prefix in ("No curve and ", "No curve yet: ", "No curve yet, ", "No curve: "):
             if reason.startswith(prefix):
                 reason = reason[len(prefix):]
@@ -87,7 +94,7 @@ def cell_sentence(entry: dict[str, Any], status: str, value: dict[str, Any] | No
     elif entry.get("not_covered"):
         s += f"; {len(entry['not_covered'])} part{'s' if len(entry['not_covered']) != 1 else ''} of the asset's value {'have' if len(entry['not_covered']) != 1 else 'has'} no curve"
     if status == "proposal":
-        s = "Proposal, not in the runtime index — " + s
+        s = "Proposal, not in use yet — " + s
     s += "."
     return s
 
@@ -114,7 +121,7 @@ def dossier_sentence(curve: dict[str, Any], hazard_label: str, occurrence_state_
     tiers = curve.get("tiers") or {}
     s = f"{part}: {form}, read against {curve['axis'].get('label', 'its native axis')}"
     if tiers.get("shape") or tiers.get("cost"):
-        s += f"; how damage rises is {tier_words(tiers.get('shape'))}, how it becomes dollars {tier_words(tiers.get('cost'))}"
+        s += f"; damage at each hazard level is {tier_words(tiers.get('shape'))}, the dollar value it is applied to {tier_words(tiers.get('cost'))}"
     if not curve.get("drawn"):
         s += "; not drawn here"
     if occurrence_state_sentence:

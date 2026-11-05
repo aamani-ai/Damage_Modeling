@@ -64,7 +64,7 @@
    "label": "entry agent-read 2026-10-19 · release —"
   }
  },
- "summary": "Wildfire on substations reuses another cell's curve: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md); 1 part of the asset's value has no curve.",
+ "summary": "Wildfire on substations: 1 curve for 1 part (transformers and switchgear), borrowed from Wildfire × Solar farm; read against FSim conditional flame-length class (0 = no event); the numbers are our judgment; 0 % of the station's value is priced, 65 % partly.",
  "chain": {
   "stations": [
    {
@@ -81,7 +81,8 @@
     ],
     "evidence": [],
     "fact": "README",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "units",
@@ -92,7 +93,8 @@
     "files": [],
     "evidence": [],
     "fact": "source cell",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "axis_form",
@@ -103,7 +105,8 @@
     "files": [],
     "evidence": [],
     "fact": "—",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "evidence",
@@ -114,7 +117,8 @@
     "files": [],
     "evidence": [],
     "fact": "no register",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "value",
@@ -130,7 +134,8 @@
     ],
     "evidence": [],
     "fact": "crosswalk",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "audit",
@@ -141,7 +146,8 @@
     "files": [],
     "evidence": [],
     "fact": "—",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "artifact",
@@ -157,7 +163,8 @@
     ],
     "evidence": [],
     "fact": "v1.0 · docs r3",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "capability",
@@ -168,7 +175,8 @@
     "files": [],
     "evidence": [],
     "fact": "—",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "proof",
@@ -184,7 +192,8 @@
     ],
     "evidence": [],
     "fact": "validation",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "field_review",
@@ -195,7 +204,8 @@
     "files": [],
     "evidence": [],
     "fact": "not searched · agent-read 10-19",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    }
   ],
   "generation": "binding",
@@ -617,6 +627,8 @@
   }
  ],
  "gap_reason": null,
+ "gap_reason_own": null,
+ "gap_reason_source": null,
  "binding": {
   "source_cell_id": "wildfire_solar",
   "source_entry_id": "wildfire_solar",
@@ -639,12 +651,12 @@
  "plain": {
   "rail": {
    "exists": {
-    "words": "Reused · borrows another cell's curve",
+    "words": "Reused · borrows another asset's curve",
     "code": "REUSED"
    },
    "evidence": {
     "words": "Evidence: our judgment",
-    "code": "How damage rises: our judgment · how it becomes dollars: our judgment",
+    "code": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
     "tiers": [
      "T4"
     ],
@@ -670,10 +682,10 @@
     "id": "covers",
     "name": "What it covers",
     "meaning": "The parts that have a curve, their share of the value, and what has none yet",
-    "fact": "1 part with a curve · 1 without one yet",
+    "fact": "1 part with a curve · 3 of 5 subsystems with a curve",
     "paragraphs": [
-     "Wildfire on substations: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md). It names 1 part: Electrical equipment (transformers and switchgear). Outside its scope: external access road and project support allowances ($3.06M, outside the fenced value) and business interruption, revenue and insurance terms.",
-     "For this hazard the substation is split into 1 part: Electrical equipment (transformers and switchgear). Parts of the plant's value with no curve yet: rest of the fenced station ($14,327,879.37, 52.38%): bus supports, dead-ends, oil containment and firewall, relay panels, control house, station battery, SCADA, station service, control cable, conduit and trench, site work, drainage and lightning shielding.",
+     "Wildfire on substations: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md). It names 1 part (listed below). It also lists 2 things it leaves out (below).",
+     "This hazard's curves cover 1 part of the substation, listed below after the subsystem each belongs to and named as the catalogue entry writes them.",
      "The damage ratio is a share of bound electrical equipment value of the station, $13,025,357 (eight equipment rows); % of TIV divides by the full fenced value $27,353,236.37. The files state no plant-level dollar figure for this asset."
     ],
     "holds": [
@@ -689,9 +701,9 @@
       "title": "Electrical equipment (transformers and switchgear)"
      },
      {
-      "text": "1 without a curve yet",
+      "text": "3 of 5 subsystems with a curve · 2 no curve yet",
       "tone": "muted",
-      "title": "Rest of the fenced station ($14,327,879.37, 52.38%): bus supports, dead-ends, oil containment and firewall, relay panels, control house, station battery, SCADA, station service, control cable, conduit and trench, site work, drainage and lightning shielding"
+      "title": "The catalogue's own list: Rest of the fenced station ($14,327,879.37, 52.38%): bus supports, dead-ends, oil containment and firewall, relay panels, control house, station battery, SCADA, station service, control cable, conduit and trench, site work, drainage and lightning shielding"
      }
     ]
    },
@@ -701,8 +713,8 @@
     "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "not written yet",
     "paragraphs": [
-     "No hazard axis is declared. The input, in the catalogue's words: FSim fire intensity class at the station reference point, exact integer 1 to 6 (0 = no event); no interpolation or heat-flux conversion.",
-     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell."
+     "No hazard axis is declared. What Hazard has to supply for each event is below.",
+     "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page."
     ],
     "holds": [
      "axis_form",
@@ -731,7 +743,7 @@
     "meaning": "The sources, what each one gave, and how sure we are",
     "fact": "not written yet",
     "paragraphs": [
-     "No source list could be read for this cell. The source and claim registers are machine-readable files in the cell folder."
+     "No source list could be read for this cell."
     ],
     "holds": [
      "evidence"
@@ -741,7 +753,7 @@
      {
       "text": "our judgment",
       "tone": "key",
-      "title": "How damage rises: our judgment · how it becomes dollars: our judgment"
+      "title": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment"
      },
      {
       "text": "Canonical wildfire_solar…",
@@ -762,8 +774,8 @@
    {
     "id": "checked",
     "name": "Has it been checked",
-    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
-    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "meaning": "Outside checks, and who has read the entry",
+    "fact": "no outside check yet · read by an agent only",
     "paragraphs": [
      "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says passed.",
      "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet."
@@ -775,10 +787,6 @@
     "chips": [
      {
       "text": "no outside check yet",
-      "tone": "muted"
-     },
-     {
-      "text": "field reports: not searched",
       "tone": "muted"
      },
      {
@@ -794,7 +802,7 @@
    "proof"
   ],
   "word": "our judgment",
-  "halves": "How damage rises: our judgment · how it becomes dollars: our judgment",
+  "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
   "hazard_paths": [],
   "capabilities": [
    {
@@ -857,28 +865,28 @@
     "id": "scope",
     "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Wildfire on substations: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md). It names 1 part: Electrical equipment (transformers and switchgear). Outside its scope: external access road and project support allowances ($3.06M, outside the fenced value) and business interruption, revenue and insurance terms.",
+    "paragraph": "Wildfire on substations: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md). It names 1 part (listed below). It also lists 2 things it leaves out (below).",
     "plain_fact": "1 part · 2 left out"
    },
    {
     "id": "units",
     "name": "What breaks",
     "meaning": "The parts of the plant the hazard damages, each with its own curve",
-    "paragraph": "For this hazard the substation is split into 1 part: Electrical equipment (transformers and switchgear). Parts of the plant's value with no curve yet: rest of the fenced station ($14,327,879.37, 52.38%): bus supports, dead-ends, oil containment and firewall, relay panels, control house, station battery, SCADA, station service, control cable, conduit and trench, site work, drainage and lightning shielding.",
+    "paragraph": "This hazard's curves cover 1 part of the substation, listed below after the subsystem each belongs to and named as the catalogue entry writes them.",
     "plain_fact": "1 part"
    },
    {
     "id": "axis_form",
     "name": "How damage is measured",
     "meaning": "The hazard intensity on the x-axis and the shape of the curve",
-    "paragraph": "No hazard axis is declared. The input, in the catalogue's words: FSim fire intensity class at the station reference point, exact integer 1 to 6 (0 = no event); no interpolation or heat-flux conversion.",
+    "paragraph": "No hazard axis is declared. What Hazard has to supply for each event is below.",
     "plain_fact": "—"
    },
    {
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "No source list could be read for this cell. The source and claim registers are machine-readable files in the cell folder.",
+    "paragraph": "No source list could be read for this cell.",
     "plain_fact": "0 sources · our judgment"
    },
    {
@@ -892,7 +900,7 @@
     "id": "audit",
     "name": "The audit",
     "meaning": "The seven checks a curve passes before release",
-    "paragraph": "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page. A site-condition adapter has not been written for this cell.",
+    "paragraph": "No seven-step audit was found as a file or as a section of the dossier. That is a finding, not an omission of the page.",
     "plain_fact": "no audit found"
    },
    {
@@ -993,5 +1001,534 @@
    "cost": "our judgment"
   }
  },
- "build_findings": []
+ "build_findings": [],
+ "hazard_note": null,
+ "subcomponents": [
+  {
+   "key": "substation_hv_yard",
+   "label": "345 kV yard: breakers, disconnects, bus, instrument transformers, deadends",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "share": 0.35273388144155027,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "substation_wildfire_screening_v1",
+   "catalogue_status": "reused",
+   "cell_state": "partial",
+   "coverage": "curve",
+   "completeness": "incomplete",
+   "curve_ids": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "failure_unit_ids": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed · our judgment",
+   "construction": [
+    {
+     "curve_id": "WSV1_MV_EQUIPMENT_THERMAL",
+     "data_path": "curves/wildfire_solar/WSV1_MV_EQUIPMENT_THERMAL@model_v1_0__docs_r3.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "USFS_FSIM_RDS_2023",
+      "DOE_FEMP_PV_WILDFIRE",
+      "NEMA_GD2_2016",
+      "FM_DS_7_106_2026",
+      "NREL_NLR_Q1_2025_PV_BENCHMARK"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
+      "hazard": {
+       "state": "not_on",
+       "sentences": [
+        "No layer on Hazard's dashboard uses this binding yet. The source cell's layer is a different run, of the asset that cell prices.",
+        "Hazard runs it from perils/wildfire/src/wildfire/resources/substation_screening/binding.json on branch claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration, not on Hazard's main; that binding pins wildfire_solar model v1.0, docs r3, the release this page shows.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Transformers and switchgear",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": {
+    "entry_id": "wildfire_solar",
+    "title": "Wildfire × Solar farm",
+    "curves": [
+     "WSV1_MV_EQUIPMENT_THERMAL"
+    ],
+    "rationale": null,
+    "tier": null,
+    "tier_word": null
+   },
+   "scope_notes": [],
+   "production_use": {
+    "state": "reused_binding",
+    "consumer_pin": null,
+    "hazard": "not_on"
+   },
+   "gap": {
+    "reason": "A curve covers some of this part's pieces; the rest have none yet.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "A curve covers only part of this expected subsystem.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "substation_lv_yard",
+   "label": "138 kV yard: breakers, disconnects, bus, instrument transformers, deadends",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "share": 0.10270641648651485,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "substation_wildfire_screening_v1",
+   "catalogue_status": "reused",
+   "cell_state": "partial",
+   "coverage": "curve",
+   "completeness": "incomplete",
+   "curve_ids": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "failure_unit_ids": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed · our judgment",
+   "construction": [
+    {
+     "curve_id": "WSV1_MV_EQUIPMENT_THERMAL",
+     "data_path": "curves/wildfire_solar/WSV1_MV_EQUIPMENT_THERMAL@model_v1_0__docs_r3.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "USFS_FSIM_RDS_2023",
+      "DOE_FEMP_PV_WILDFIRE",
+      "NEMA_GD2_2016",
+      "FM_DS_7_106_2026",
+      "NREL_NLR_Q1_2025_PV_BENCHMARK"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
+      "hazard": {
+       "state": "not_on",
+       "sentences": [
+        "No layer on Hazard's dashboard uses this binding yet. The source cell's layer is a different run, of the asset that cell prices.",
+        "Hazard runs it from perils/wildfire/src/wildfire/resources/substation_screening/binding.json on branch claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration, not on Hazard's main; that binding pins wildfire_solar model v1.0, docs r3, the release this page shows.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Transformers and switchgear",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": {
+    "entry_id": "wildfire_solar",
+    "title": "Wildfire × Solar farm",
+    "curves": [
+     "WSV1_MV_EQUIPMENT_THERMAL"
+    ],
+    "rationale": null,
+    "tier": null,
+    "tier_word": null
+   },
+   "scope_notes": [],
+   "production_use": {
+    "state": "reused_binding",
+    "consumer_pin": null,
+    "hazard": "not_on"
+   },
+   "gap": {
+    "reason": "A curve covers some of this part's pieces; the rest have none yet.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "A curve covers only part of this expected subsystem.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "substation_transformation",
+   "label": "Autotransformers, oil containment and firewall",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "share": 0.1925262037016385,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "substation_wildfire_screening_v1",
+   "catalogue_status": "reused",
+   "cell_state": "partial",
+   "coverage": "curve",
+   "completeness": "incomplete",
+   "curve_ids": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "failure_unit_ids": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed · our judgment",
+   "construction": [
+    {
+     "curve_id": "WSV1_MV_EQUIPMENT_THERMAL",
+     "data_path": "curves/wildfire_solar/WSV1_MV_EQUIPMENT_THERMAL@model_v1_0__docs_r3.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "USFS_FSIM_RDS_2023",
+      "DOE_FEMP_PV_WILDFIRE",
+      "NEMA_GD2_2016",
+      "FM_DS_7_106_2026",
+      "NREL_NLR_Q1_2025_PV_BENCHMARK"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
+      "hazard": {
+       "state": "not_on",
+       "sentences": [
+        "No layer on Hazard's dashboard uses this binding yet. The source cell's layer is a different run, of the asset that cell prices.",
+        "Hazard runs it from perils/wildfire/src/wildfire/resources/substation_screening/binding.json on branch claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration, not on Hazard's main; that binding pins wildfire_solar model v1.0, docs r3, the release this page shows.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Transformers and switchgear",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": {
+    "entry_id": "wildfire_solar",
+    "title": "Wildfire × Solar farm",
+    "curves": [
+     "WSV1_MV_EQUIPMENT_THERMAL"
+    ],
+    "rationale": null,
+    "tier": null,
+    "tier_word": null
+   },
+   "scope_notes": [],
+   "production_use": {
+    "state": "reused_binding",
+    "consumer_pin": null,
+    "hazard": "not_on"
+   },
+   "gap": {
+    "reason": "A curve covers some of this part's pieces; the rest have none yet.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "A curve covers only part of this expected subsystem.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "substation_controls_auxiliaries",
+   "label": "Relays, control house, station battery, SCADA, station service, control cable",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "share": 0.23777503298992608,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "substation_wildfire_screening_v1",
+   "catalogue_status": "reused",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "failure_unit_ids": [],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed · our judgment",
+   "construction": [
+    {
+     "curve_id": "WSV1_MV_EQUIPMENT_THERMAL",
+     "data_path": "curves/wildfire_solar/WSV1_MV_EQUIPMENT_THERMAL@model_v1_0__docs_r3.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "USFS_FSIM_RDS_2023",
+      "DOE_FEMP_PV_WILDFIRE",
+      "NEMA_GD2_2016",
+      "FM_DS_7_106_2026",
+      "NREL_NLR_Q1_2025_PV_BENCHMARK"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
+      "hazard": {
+       "state": "not_on",
+       "sentences": [
+        "No layer on Hazard's dashboard uses this binding yet. The source cell's layer is a different run, of the asset that cell prices.",
+        "Hazard runs it from perils/wildfire/src/wildfire/resources/substation_screening/binding.json on branch claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration, not on Hazard's main; that binding pins wildfire_solar model v1.0, docs r3, the release this page shows.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Transformers and switchgear",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": {
+    "entry_id": "wildfire_solar",
+    "title": "Wildfire × Solar farm",
+    "curves": [
+     "WSV1_MV_EQUIPMENT_THERMAL"
+    ],
+    "rationale": null,
+    "tier": null,
+    "tier_word": null
+   },
+   "scope_notes": [],
+   "production_use": {
+    "state": "reused_binding",
+    "consumer_pin": null,
+    "hazard": "not_on"
+   },
+   "gap": {
+    "reason": "Left out by the reused curve: it prices only some of this asset's parts.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "withheld by the binding",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "substation_civil_support",
+   "label": "Site work, access road, drainage and lightning shielding",
+   "asset": {
+    "slug": "substation",
+    "label": "Substation"
+   },
+   "share": 0.11425846538037024,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "substation_wildfire_screening_v1",
+   "catalogue_status": "reused",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [
+    "WSV1_MV_EQUIPMENT_THERMAL"
+   ],
+   "failure_unit_ids": [],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed · our judgment",
+   "construction": [
+    {
+     "curve_id": "WSV1_MV_EQUIPMENT_THERMAL",
+     "data_path": "curves/wildfire_solar/WSV1_MV_EQUIPMENT_THERMAL@model_v1_0__docs_r3.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/wildfire_solar/current/wildfire_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "USFS_FSIM_RDS_2023",
+      "DOE_FEMP_PV_WILDFIRE",
+      "NEMA_GD2_2016",
+      "FM_DS_7_106_2026",
+      "NREL_NLR_Q1_2025_PV_BENCHMARK"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_solar@model_v1_0__docs_r3",
+      "hazard": {
+       "state": "not_on",
+       "sentences": [
+        "No layer on Hazard's dashboard uses this binding yet. The source cell's layer is a different run, of the asset that cell prices.",
+        "Hazard runs it from perils/wildfire/src/wildfire/resources/substation_screening/binding.json on branch claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration, not on Hazard's main; that binding pins wildfire_solar model v1.0, docs r3, the release this page shows.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_solar",
+     "part": "Transformers and switchgear",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": {
+    "entry_id": "wildfire_solar",
+    "title": "Wildfire × Solar farm",
+    "curves": [
+     "WSV1_MV_EQUIPMENT_THERMAL"
+    ],
+    "rationale": null,
+    "tier": null,
+    "tier_word": null
+   },
+   "scope_notes": [],
+   "production_use": {
+    "state": "reused_binding",
+    "consumer_pin": null,
+    "hazard": "not_on"
+   },
+   "gap": {
+    "reason": "Left out by the reused curve: it prices only some of this asset's parts.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "withheld by the binding",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md"
+    },
+    "research": []
+   }
+  }
+ ],
+ "subcomponent_rollup": {
+  "expected": 5,
+  "with_curve": 3,
+  "gap": 2,
+  "complete": 0,
+  "incomplete": 5,
+  "evidence_labels": {
+   "field-calibrated": 0,
+   "published": 0,
+   "borrowed": 5,
+   "our judgment": 5
+  }
+ },
+ "value_split": {
+  "priced": 0.0,
+  "partly": 0.6479665016297036,
+  "no_damage": 0.0,
+  "not_priced": 0.3520334983702963,
+  "basis": "of the reference station's budget"
+ }
 }

@@ -9,13 +9,14 @@ export function SourceRef({ s, id, className = "", showLocator = true }: { s: So
     <span className={className}>
       {s.link ? (
         <a href={s.link} target="_blank" rel="noreferrer" title={kindWord ? `Opens ${kindWord}` : undefined} className="text-accent hover:underline">
-          {title} <span aria-hidden className="text-[10px]">↗</span>
+          {title} <span aria-hidden className="text-[11px]">↗</span>
         </a>
       ) : (
         <span>{title}</span>
       )}
       {showLocator && s.locator ? <span className="text-muted-foreground"> · {s.locator}</span> : null}
       {!s.link && s.no_link_sentence ? <span className="italic text-muted-foreground"> · {s.no_link_sentence}</span> : null}
+      {s.link && s.link_note ? <span className="italic text-muted-foreground"> · {s.link_note}</span> : null}
     </span>
   );
 }
@@ -25,7 +26,7 @@ export function TierWord({ code, words, className = "" }: { code: string | null 
   if (!code || code === "–") return <span className={`text-muted-foreground ${className}`}>no tier stated</span>;
   return (
     <span className={className}>
-      {words[code] ?? code} <span className="font-mono text-[10px] text-muted-foreground">· {code}</span>
+      {words[code] ?? code} <span className="font-mono text-[11px] text-muted-foreground">· {code}</span>
     </span>
   );
 }

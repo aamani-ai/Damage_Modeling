@@ -77,7 +77,7 @@
    "label": "entry agent-read 2026-10-19 · release same author with independent numerical methods"
   }
  },
- "summary": "Wildfire on batteries: solar wildfire electrical class tables reused as judgment-based ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities); 86 % of the reference value has a curve and 14 % has none.",
+ "summary": "Wildfire on batteries: 7 curves for 2 parts (integrated battery enclosure and separate PCS); read against FSim fire-intensity class at the unit, exact state; the numbers are our judgment; 86 % of the plant's value is priced.",
  "chain": {
   "stations": [
    {
@@ -98,7 +98,8 @@
     ],
     "evidence": [],
     "fact": "3 deferred",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "units",
@@ -114,7 +115,8 @@
     ],
     "evidence": [],
     "fact": "5 units · 3 withheld",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "axis_form",
@@ -125,7 +127,8 @@
     "files": [],
     "evidence": [],
     "fact": "exact classes",
-    "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section."
+    "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section.",
+    "earlier": []
    },
    {
     "id": "evidence",
@@ -149,7 +152,8 @@
     ],
     "evidence": [],
     "fact": "12 src · T4",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "value",
@@ -169,7 +173,8 @@
     ],
     "evidence": [],
     "fact": "86 % · $94.4M of $109.8M",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "audit",
@@ -192,7 +197,8 @@
      }
     ],
     "fact": "7 steps in the dossier",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "artifact",
@@ -220,7 +226,8 @@
     ],
     "evidence": [],
     "fact": "v1.0 · docs r1",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "capability",
@@ -236,7 +243,8 @@
     ],
     "evidence": [],
     "fact": "DR conditional · EAL conditional",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "proof",
@@ -271,7 +279,8 @@
     ],
     "evidence": [],
     "fact": "84 of 84 KAT reproduced",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "field_review",
@@ -287,7 +296,8 @@
     ],
     "evidence": [],
     "fact": "not searched · agent-read 10-19",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    }
   ],
   "generation": "plain",
@@ -641,30 +651,33 @@
   "withheld_units": [
    {
     "failure_unit_id": "BESS_MV_AND_SHARED_ELECTRICAL",
+    "name": "BESS MV and shared electrical",
     "subsystem": "BESS_MV_AND_SHARED_ELECTRICAL",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; value allocation or response unqualified."
+    "sentence": "The cell has no curve for this part. Neither its share of the asset's value nor how this hazard damages it has been worked out yet."
    },
    {
     "failure_unit_id": "BESS_CIVIL",
+    "name": "BESS civil",
     "subsystem": "BESS_CIVIL",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; value allocation or response unqualified."
+    "sentence": "The cell has no curve for this part. Neither its share of the asset's value nor how this hazard damages it has been worked out yet."
    },
    {
     "failure_unit_id": "BESS_FIELDWORK",
+    "name": "BESS fieldwork",
     "subsystem": "BESS_FIELDWORK",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; value allocation or response unqualified."
+    "sentence": "The cell has no curve for this part. Neither its share of the asset's value nor how this hazard damages it has been worked out yet."
    }
   ],
   "hazard_axis": [
@@ -757,7 +770,13 @@
   "paths": {
    "sources": "docs/cells/wildfire_bess/current/source_register.csv",
    "claims": "docs/cells/wildfire_bess/current/claim_parameter_register.csv",
-   "parameters": "docs/cells/wildfire_bess/current/parameter_register.csv"
+   "parameters": "docs/cells/wildfire_bess/current/parameter_register.csv",
+   "source_registers": [
+    "docs/cells/wildfire_bess/current/source_register.csv"
+   ],
+   "claim_registers": [
+    "docs/cells/wildfire_bess/current/claim_parameter_register.csv"
+   ]
   },
   "n_sources": 12,
   "n_claims": 14,
@@ -1105,6 +1124,8 @@
   }
  ],
  "gap_reason": null,
+ "gap_reason_own": null,
+ "gap_reason_source": null,
  "binding": null,
  "sampling_notes": [
   "Each record looked up through the cell's reference evaluator (wildfire_bess_curve_eval.py) at the exact states 0–6; marks only, since the evaluator rejects any state between two classes (confirmed on every record).",
@@ -1119,7 +1140,7 @@
    },
    "evidence": {
     "words": "Evidence: our judgment",
-    "code": "How damage rises: our judgment · how it becomes dollars: our judgment",
+    "code": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
     "tiers": [
      "T4"
     ],
@@ -1145,10 +1166,10 @@
     "id": "covers",
     "name": "What it covers",
     "meaning": "The parts that have a curve, their share of the value, and what has none yet",
-    "fact": "2 parts with a curve · 86 % of the value · 3 without one yet",
+    "fact": "2 parts with a curve · 86 % of the value · 2 of 5 subsystems with a curve",
     "paragraphs": [
-     "Wildfire on batteries: solar wildfire electrical class tables reused as judgment-based ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities). It names 2 parts: Integrated battery enclosure and Separate PCS. Outside its scope: autonomous equipment fire, collector station and export line and business interruption and performance. Kinds of damage it does not include: fire spread between units, post-fire erosion and remediation.",
-     "For this hazard the battery plant is split into 2 parts: Integrated battery enclosure and Separate PCS. 3 further units are named but withheld — bess mv and shared electrical, bess civil and bess fieldwork — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: unit MV and shared electrical, civil works and fieldwork.",
+     "Wildfire on batteries: solar wildfire electrical class tables reused as judgment-based ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities). It names 2 parts (listed below). It also lists 6 things it leaves out (below).",
+     "This hazard's curves cover 2 parts of the battery plant, listed below after the subsystem each belongs to and named as the catalogue entry writes them. 3 further units are named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
      "$94.4M of $109.8M of the reference plant has a curve (86 %). No curve yet for unit MV and shared electrical, civil works and fieldwork (14 % of the value)."
     ],
     "holds": [
@@ -1177,13 +1198,13 @@
       "tone": "key"
      },
      {
-      "text": "3 without a curve yet",
-      "tone": "muted",
-      "title": "Unit MV and shared electrical; Civil works; Fieldwork"
-     },
-     {
       "text": "3 withheld",
       "tone": "muted"
+     },
+     {
+      "text": "2 of 5 subsystems with a curve · 3 no curve yet",
+      "tone": "muted",
+      "title": "The catalogue's own list: Unit MV and shared electrical; Civil works; Fieldwork"
      }
     ]
    },
@@ -1193,8 +1214,8 @@
     "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "FSim fire-intensity class at the unit → exact classes",
     "paragraphs": [
-     "Damage is read against FSim fire-intensity class at the unit, exact state. The curve is a table of damage ratios at exact classes, nothing in between. The input, in the catalogue's words: FSim fire intensity class at the unit, exact integer 1 to 6 (0 = no event); no interpolation, heat-flux conversion or burn probability in the Damage call.",
-     "The seven-step audit is written in the dossier with 7 rows. A site-condition adapter has not been written for this cell."
+     "Damage is read against one hazard measure: FSim fire-intensity class at the unit, exact state. The curve is a table of damage ratios at exact classes, nothing in between. What Hazard has to supply for each event is below.",
+     "The seven-step audit is written in the dossier with 7 rows."
     ],
     "holds": [
      "axis_form",
@@ -1238,9 +1259,9 @@
     "id": "numbers",
     "name": "Where the numbers come from",
     "meaning": "The sources, what each one gave, and how sure we are",
-    "fact": "12 sources, 11 linked · our judgment",
+    "fact": "12 sources, 12 linked · our judgment",
     "paragraphs": [
-     "12 sources set this cell: Selected BESS r1 profile and fixed-2024 budget, USFS, A Wildfire Risk Assessment Framework, RMRS-GTR-315 (2013), FSim classes, Canonical wildfire_solar model v1.0 docs r3 and Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 and 8 more. Of the 4 parameters, 4 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator)."
+     "The sources and claims below are kept as machine-readable register files in the cell folder."
     ],
     "holds": [
      "evidence"
@@ -1250,7 +1271,7 @@
      {
       "text": "our judgment",
       "tone": "key",
-      "title": "How damage rises: our judgment · how it becomes dollars: our judgment"
+      "title": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment"
      },
      {
       "text": "Selected BESS r1 profile and…",
@@ -1267,7 +1288,7 @@
       "tone": "muted"
      },
      {
-      "text": "12 sources, 11 linked",
+      "text": "12 sources, 12 linked",
       "tone": "muted"
      }
     ]
@@ -1275,8 +1296,8 @@
    {
     "id": "checked",
     "name": "Has it been checked",
-    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
-    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "meaning": "Outside checks, and who has read the entry",
+    "fact": "no outside check yet · read by an agent only",
     "paragraphs": [
      "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says passed conditional annual screening.",
      "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: same author with independent numerical methods."
@@ -1288,10 +1309,6 @@
     "chips": [
      {
       "text": "no outside check yet",
-      "tone": "muted"
-     },
-     {
-      "text": "field reports: not searched",
       "tone": "muted"
      },
      {
@@ -1307,23 +1324,37 @@
    "proof"
   ],
   "word": "our judgment",
-  "halves": "How damage rises: our judgment · how it becomes dollars: our judgment",
+  "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
   "hazard_paths": [
    {
     "id": "BWF-S01",
     "title": "Selected BESS r1 profile and fixed-2024 budget",
     "path": "docs/plans/_cross_cutting/bess_conus",
     "state": "on_branch",
-    "link": null,
-    "words": "on a Hazard branch, not on its main yet"
+    "branch": "codex/bess-conus",
+    "branches": [
+     "codex/bess-conus",
+     "codex/bess-release-integration",
+     "codex/real-estate-conus"
+    ],
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
+    "words": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
    },
    {
     "id": "BWF-S10",
     "title": "Current native Substation Wildfire Hazard route",
     "path": "perils/wildfire/src/wildfire/substation.py",
     "state": "on_branch",
-    "link": null,
-    "words": "on a Hazard branch, not on its main yet"
+    "branch": "claude/policy-preview-hosted",
+    "branches": [
+     "claude/policy-preview-hosted",
+     "codex/bess-conus",
+     "codex/bess-release-integration",
+     "codex/real-estate-conus",
+     "codex/substation-conus"
+    ],
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/03f7999473f719c4e986e6cb84ac420dbe9e08c9/perils/wildfire/src/wildfire/substation.py",
+    "words": "not on Hazard's main; on Hazard branches claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration and 2 more (linked: claude/policy-preview-hosted)"
    }
   ],
   "capabilities": [
@@ -1404,30 +1435,33 @@
     "withheld": [
      {
       "failure_unit_id": "BESS_MV_AND_SHARED_ELECTRICAL",
+      "name": "BESS MV and shared electrical",
       "subsystem": "BESS_MV_AND_SHARED_ELECTRICAL",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; value allocation or response unqualified."
+      "sentence": "The cell has no curve for this part. Neither its share of the asset's value nor how this hazard damages it has been worked out yet."
      },
      {
       "failure_unit_id": "BESS_CIVIL",
+      "name": "BESS civil",
       "subsystem": "BESS_CIVIL",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; value allocation or response unqualified."
+      "sentence": "The cell has no curve for this part. Neither its share of the asset's value nor how this hazard damages it has been worked out yet."
      },
      {
       "failure_unit_id": "BESS_FIELDWORK",
+      "name": "BESS fieldwork",
       "subsystem": "BESS_FIELDWORK",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; value allocation or response unqualified."
+      "sentence": "The cell has no curve for this part. Neither its share of the asset's value nor how this hazard damages it has been worked out yet."
      }
     ]
    },
@@ -1462,28 +1496,28 @@
     "id": "scope",
     "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Wildfire on batteries: solar wildfire electrical class tables reused as judgment-based ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities). It names 2 parts: Integrated battery enclosure and Separate PCS. Outside its scope: autonomous equipment fire, collector station and export line and business interruption and performance. Kinds of damage it does not include: fire spread between units, post-fire erosion and remediation.",
+    "paragraph": "Wildfire on batteries: solar wildfire electrical class tables reused as judgment-based ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities). It names 2 parts (listed below). It also lists 6 things it leaves out (below).",
     "plain_fact": "2 parts · 3 left out"
    },
    {
     "id": "units",
     "name": "What breaks",
     "meaning": "The parts of the plant the hazard damages, each with its own curve",
-    "paragraph": "For this hazard the battery plant is split into 2 parts: Integrated battery enclosure and Separate PCS. 3 further units are named but withheld — bess mv and shared electrical, bess civil and bess fieldwork — a stated 'not zero', not a curve. Parts of the plant's value with no curve yet: unit MV and shared electrical, civil works and fieldwork.",
+    "paragraph": "This hazard's curves cover 2 parts of the battery plant, listed below after the subsystem each belongs to and named as the catalogue entry writes them. 3 further units are named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
     "plain_fact": "2 parts · 3 withheld"
    },
    {
     "id": "axis_form",
     "name": "How damage is measured",
     "meaning": "The hazard intensity on the x-axis and the shape of the curve",
-    "paragraph": "Damage is read against FSim fire-intensity class at the unit, exact state. The curve is a table of damage ratios at exact classes, nothing in between. The input, in the catalogue's words: FSim fire intensity class at the unit, exact integer 1 to 6 (0 = no event); no interpolation, heat-flux conversion or burn probability in the Damage call.",
+    "paragraph": "Damage is read against one hazard measure: FSim fire-intensity class at the unit, exact state. The curve is a table of damage ratios at exact classes, nothing in between. What Hazard has to supply for each event is below.",
     "plain_fact": "exact classes"
    },
    {
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "12 sources set this cell: Selected BESS r1 profile and fixed-2024 budget, USFS, A Wildfire Risk Assessment Framework, RMRS-GTR-315 (2013), FSim classes, Canonical wildfire_solar model v1.0 docs r3 and Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev 2.8 and 8 more. Of the 4 parameters, 4 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "paragraph": "The sources and claims below are kept as machine-readable register files in the cell folder.",
     "plain_fact": "12 sources · our judgment"
    },
    {
@@ -1497,7 +1531,7 @@
     "id": "audit",
     "name": "The audit",
     "meaning": "The seven checks a curve passes before release",
-    "paragraph": "The seven-step audit is written in the dossier with 7 rows. A site-condition adapter has not been written for this cell.",
+    "paragraph": "The seven-step audit is written in the dossier with 7 rows.",
     "plain_fact": "7 steps in the write-up"
    },
    {
@@ -1536,8 +1570,8 @@
      "BWF-S01"
     ],
     "title": "Selected BESS r1 profile and fixed-2024 budget",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-    "link_kind": "repo_file",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
+    "link_kind": "hazard_branch",
     "locator": "asset_model.json; layout.csv; reference_budget.csv",
     "no_link_sentence": null,
     "source_id": "BWF-S01"
@@ -1560,7 +1594,7 @@
      "BWF-S03"
     ],
     "title": "Canonical wildfire_solar model v1.0 docs r3",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/wildfire_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/wildfire_solar/current",
     "link_kind": "repo_file",
     "locator": "curve_artifact; ORDINATE_TABLE; dossier sections3-5; exact index pin",
     "no_link_sentence": null,
@@ -1594,6 +1628,7 @@
   "sources": [
    {
     "id": "BWF-S01",
+    "aliases": [],
     "citation": "Selected BESS r1 profile and fixed-2024 budget",
     "url": "Hazard_modeling/docs/plans/_cross_cutting/bess_conus/",
     "locator": "asset_model.json; layout.csv; reference_budget.csv",
@@ -1607,18 +1642,25 @@
     "hazard": {
      "path": "docs/plans/_cross_cutting/bess_conus",
      "state": "on_branch",
-     "link": null,
-     "words": "on a Hazard branch, not on its main yet"
+     "branch": "codex/bess-conus",
+     "branches": [
+      "codex/bess-conus",
+      "codex/bess-release-integration",
+      "codex/real-estate-conus"
+     ],
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
+     "words": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
     },
-    "repo_path": "docs/plans/flood_wind_shared_electrical/asset_model.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-    "link_kind": "repo_file",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
+    "link_kind": "hazard_branch",
     "title": "Selected BESS r1 profile and fixed-2024 budget",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
    },
    {
     "id": "BWF-S02",
+    "aliases": [],
     "citation": "USFS A Wildfire Risk Assessment Framework RMRS-GTR-315 (2013)",
     "url": "https://www.fs.usda.gov/rm/pubs/rmrs_gtr315.pdf",
     "locator": "printed25 / PDF31 Table5 and Wildfire Likelihood; native catalog RDS-2016-0034-3",
@@ -1633,10 +1675,12 @@
     "link": "https://www.fs.usda.gov/rm/pubs/rmrs_gtr315.pdf",
     "link_kind": "url",
     "title": "USFS A Wildfire Risk Assessment Framework RMRS-GTR-315 (2013)",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BWF-S03",
+    "aliases": [],
     "citation": "Canonical wildfire_solar model v1.0 docs r3",
     "url": "docs/cells/wildfire_solar/current/",
     "locator": "curve_artifact; ORDINATE_TABLE; dossier sections3-5; exact index pin",
@@ -1649,13 +1693,15 @@
     "provenance": "register",
     "repo_path": "docs/cells/wildfire_solar/current",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/wildfire_solar/current",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/wildfire_solar/current",
     "link_kind": "repo_file",
     "title": "Canonical wildfire_solar model v1.0 docs r3",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BWF-S04",
+    "aliases": [],
     "citation": "Tesla Industrial Lithium-Ion Battery ERG rev2.8 (existing captured bytes)",
     "url": "https://www.tesla.com/sites/default/files/downloads/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
     "locator": "printed13 / PDF15 section3.3; printed17 / PDF19 section5.2; printed20 / PDF22 section8",
@@ -1670,10 +1716,12 @@
     "link": "https://www.tesla.com/sites/default/files/downloads/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
     "link_kind": "url",
     "title": "Tesla Industrial Lithium-Ion Battery ERG rev2.8 (existing captured bytes)",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BWF-S05",
+    "aliases": [],
     "citation": "Sungrow A Holistic Approach to Safety whitepaper",
     "url": "https://info-support.sungrowpower.com/market-material/eeb93c64-dfba-4f4c-a481-b6853ec90cea.pdf",
     "locator": "printed24 / PDF25 Figures36-39; embedded test report cover 10522343-SHA-R-01 IssueE dated2025-04-22",
@@ -1688,10 +1736,12 @@
     "link": "https://info-support.sungrowpower.com/market-material/eeb93c64-dfba-4f4c-a481-b6853ec90cea.pdf",
     "link_kind": "url",
     "title": "Sungrow A Holistic Approach to Safety whitepaper",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BWF-S06",
+    "aliases": [],
     "citation": "UL Solutions large-scale fire testing announcement (2026-04-23)",
     "url": "https://www.ul.com/news/ul-solutions-launches-large-scale-fire-testing-battery-energy-storage-systems",
     "locator": "main body paragraphs test scope; internally initiated BESS enclosure fire and targets",
@@ -1706,10 +1756,12 @@
     "link": "https://www.ul.com/news/ul-solutions-launches-large-scale-fire-testing-battery-energy-storage-systems",
     "link_kind": "url",
     "title": "UL Solutions large-scale fire testing announcement (2026-04-23)",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BWF-S07",
+    "aliases": [],
     "citation": "CFA Victorian Big Battery incident account (2021-07-30; updates through2021-08-03)",
     "url": "https://news.cfa.vic.gov.au/news/firefighters-bring-large-battery-fire-near-geelong-under-control",
     "locator": "Original article and incident-controller statement; cause undetermined in this account",
@@ -1724,10 +1776,12 @@
     "link": "https://news.cfa.vic.gov.au/news/firefighters-bring-large-battery-fire-near-geelong-under-control",
     "link_kind": "url",
     "title": "CFA Victorian Big Battery incident account (2021-07-30; updates through2021-08-03)",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BWF-S08",
+    "aliases": [],
     "citation": "DOE FEMP Solar Photovoltaic Hardening for Resilience - Wildfire",
     "url": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
     "locator": "Physical Measures; containers; fuel removal; access and local fire-crew consultation",
@@ -1742,10 +1796,12 @@
     "link": "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire",
     "link_kind": "url",
     "title": "DOE FEMP Solar Photovoltaic Hardening for Resilience - Wildfire",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BWF-S09",
+    "aliases": [],
     "citation": "NREL-related same-budget battery hardware allocation from prior BESS review",
     "url": "docs/extra/discussion/bess_damage/evidence/r3/",
     "locator": "value_allocations.csv MMP_related_allocation; parent source and receipt in r3 README/audit",
@@ -1758,13 +1814,15 @@
     "provenance": "register",
     "repo_path": "docs/extra/discussion/bess_damage/evidence/r3",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/extra/discussion/bess_damage/evidence/r3",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/tree/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/bess_damage/evidence/r3",
     "link_kind": "repo_file",
     "title": "NREL-related same-budget battery hardware allocation from prior BESS review",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BWF-S10",
+    "aliases": [],
     "citation": "Current native Substation Wildfire Hazard route",
     "url": "Hazard_modeling/perils/wildfire/src/wildfire/substation.py",
     "locator": "station_fire_native_response; station_fire_annual; docs/hazards/wildfire/implementation/substation/conus_grid/version_1/m0.md through m4.md",
@@ -1778,17 +1836,27 @@
     "hazard": {
      "path": "perils/wildfire/src/wildfire/substation.py",
      "state": "on_branch",
-     "link": null,
-     "words": "on a Hazard branch, not on its main yet"
+     "branch": "claude/policy-preview-hosted",
+     "branches": [
+      "claude/policy-preview-hosted",
+      "codex/bess-conus",
+      "codex/bess-release-integration",
+      "codex/real-estate-conus",
+      "codex/substation-conus"
+     ],
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/03f7999473f719c4e986e6cb84ac420dbe9e08c9/perils/wildfire/src/wildfire/substation.py",
+     "words": "not on Hazard's main; on Hazard branches claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration and 2 more (linked: claude/policy-preview-hosted)"
     },
     "doi": null,
-    "link": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/03f7999473f719c4e986e6cb84ac420dbe9e08c9/perils/wildfire/src/wildfire/substation.py",
     "link_kind": "hazard_branch",
     "title": "Current native Substation Wildfire Hazard route",
-    "no_link_sentence": "on a Hazard branch, not on its main yet"
+    "no_link_sentence": null,
+    "link_note": "not on Hazard's main; on Hazard branches claude/policy-preview-hosted, codex/bess-conus, codex/bess-release-integration and 2 more (linked: claude/policy-preview-hosted)"
    },
    {
     "id": "BWF-S11",
+    "aliases": [],
     "citation": "NEMA fire/heat equipment guide and2026 resource update",
     "url": "https://www.makeitelectric.org/newsroom/news/nema-issues-guidance-on-evaluating-damaged-electrical-equipment-after-natural-disasters-and-extreme-weather-events/",
     "locator": "May28,2026 announcement; CS70008-2026 metadata;2016 guide discovery",
@@ -1803,10 +1871,12 @@
     "link": "https://www.makeitelectric.org/newsroom/news/nema-issues-guidance-on-evaluating-damaged-electrical-equipment-after-natural-disasters-and-extreme-weather-events/",
     "link_kind": "url",
     "title": "NEMA fire/heat equipment guide and2026 resource update",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BWF-S12",
+    "aliases": [],
     "citation": "Owner BWF-Q01 ruling2026-10-19",
     "url": "docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
     "locator": "BWF-Q01; experiment_spec.json owner_ruling",
@@ -1819,10 +1889,11 @@
     "provenance": "register",
     "repo_path": "docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
     "link_kind": "repo_file",
     "title": "Owner BWF-Q01 ruling2026-10-19",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    }
   ],
   "claims": [
@@ -2207,7 +2278,7 @@
      {
       "id": "BWF-S03",
       "title": "Canonical wildfire_solar model v1.0 docs r3",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/wildfire_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/wildfire_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      },
@@ -2243,21 +2314,21 @@
      {
       "id": "BWF-S01",
       "title": "Selected BESS r1 profile and fixed-2024 budget",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-      "link_kind": "repo_file",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
+      "link_kind": "hazard_branch",
       "resolved": true
      },
      {
       "id": "BWF-S09",
       "title": "NREL-related same-budget battery hardware allocation from prior BESS review",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/extra/discussion/bess_damage/evidence/r3",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/bess_damage/evidence/r3",
       "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "BWF-S12",
       "title": "Owner BWF-Q01 ruling2026-10-19",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/bess_damage/09_wildfire_damage_intake.md",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2279,14 +2350,14 @@
      {
       "id": "BWF-S01",
       "title": "Selected BESS r1 profile and fixed-2024 budget",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-      "link_kind": "repo_file",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
+      "link_kind": "hazard_branch",
       "resolved": true
      },
      {
       "id": "BWF-S03",
       "title": "Canonical wildfire_solar model v1.0 docs r3",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/wildfire_solar/current",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/tree/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/wildfire_solar/current",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2308,8 +2379,8 @@
      {
       "id": "BWF-S01",
       "title": "Selected BESS r1 profile and fixed-2024 budget",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/plans/flood_wind_shared_electrical/asset_model.json",
-      "link_kind": "repo_file",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
+      "link_kind": "hazard_branch",
       "resolved": true
      },
      {
@@ -2329,7 +2400,7 @@
      {
       "id": "BWF-S10",
       "title": "Current native Substation Wildfire Hazard route",
-      "link": null,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/03f7999473f719c4e986e6cb84ac420dbe9e08c9/perils/wildfire/src/wildfire/substation.py",
       "link_kind": "hazard_branch",
       "resolved": true
      }
@@ -2352,8 +2423,8 @@
   },
   "link_counts": {
    "total": 12,
-   "linked": 11,
-   "locator_only": 1,
+   "linked": 12,
+   "locator_only": 0,
    "neither": 0,
    "markers": 0,
    "placeholders": 0
@@ -2364,5 +2435,613 @@
    "cost": "our judgment"
   }
  },
- "build_findings": []
+ "build_findings": [],
+ "hazard_note": null,
+ "subcomponents": [
+  {
+   "key": "battery_enclosures",
+   "label": "Battery enclosures",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.7650273224043715,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_bess",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "BWF01_ENC_approved_replacement_electronics_ordinal",
+    "BWF01_ENC_approved_replacement_heavy_electrical_ordinal",
+    "BWF01_ENC_limited_repair_sensitivity_electronics_ordinal",
+    "BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal",
+    "BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal",
+    "BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal"
+   ],
+   "failure_unit_ids": [
+    "BESS_INTEGRATED_ENCLOSURE"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "our judgment"
+   ],
+   "evidence_words": "our judgment",
+   "construction": [
+    {
+     "curve_id": "BWF01_ENC_approved_replacement_electronics_ordinal",
+     "data_path": "curves/wildfire_bess/BWF01_ENC_approved_replacement_electronics_ordinal@model_v1_0__docs_r1.json",
+     "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
+     "curve_form": "piecewise_linear",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
+     "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "BWF-S01",
+      "BWF-S02",
+      "BWF-S03",
+      "BWF-S04",
+      "BWF-S05",
+      "BWF-S08",
+      "BWF-S09",
+      "BWF-S10",
+      "BWF-S12"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Wildfire · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
+    },
+    {
+     "curve_id": "BWF01_ENC_approved_replacement_heavy_electrical_ordinal",
+     "data_path": "curves/wildfire_bess/BWF01_ENC_approved_replacement_heavy_electrical_ordinal@model_v1_0__docs_r1.json",
+     "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
+     "curve_form": "piecewise_linear",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
+     "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "BWF-S01",
+      "BWF-S02",
+      "BWF-S03",
+      "BWF-S04",
+      "BWF-S05",
+      "BWF-S08",
+      "BWF-S09",
+      "BWF-S10",
+      "BWF-S12"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Wildfire · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
+    },
+    {
+     "curve_id": "BWF01_ENC_limited_repair_sensitivity_electronics_ordinal",
+     "data_path": "curves/wildfire_bess/BWF01_ENC_limited_repair_sensitivity_electronics_ordinal@model_v1_0__docs_r1.json",
+     "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
+     "curve_form": "piecewise_linear",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
+     "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "BWF-S01",
+      "BWF-S02",
+      "BWF-S03",
+      "BWF-S04",
+      "BWF-S05",
+      "BWF-S08",
+      "BWF-S09",
+      "BWF-S10",
+      "BWF-S12"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Wildfire · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
+    },
+    {
+     "curve_id": "BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal",
+     "data_path": "curves/wildfire_bess/BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal@model_v1_0__docs_r1.json",
+     "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
+     "curve_form": "piecewise_linear",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
+     "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "BWF-S01",
+      "BWF-S02",
+      "BWF-S03",
+      "BWF-S04",
+      "BWF-S05",
+      "BWF-S08",
+      "BWF-S09",
+      "BWF-S10",
+      "BWF-S12"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Wildfire · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
+    },
+    {
+     "curve_id": "BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal",
+     "data_path": "curves/wildfire_bess/BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal@model_v1_0__docs_r1.json",
+     "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
+     "curve_form": "piecewise_linear",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
+     "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "BWF-S01",
+      "BWF-S02",
+      "BWF-S03",
+      "BWF-S04",
+      "BWF-S05",
+      "BWF-S08",
+      "BWF-S09",
+      "BWF-S10",
+      "BWF-S12"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Wildfire · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
+    },
+    {
+     "curve_id": "BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal",
+     "data_path": "curves/wildfire_bess/BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal@model_v1_0__docs_r1.json",
+     "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
+     "curve_form": "piecewise_linear",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
+     "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "BWF-S01",
+      "BWF-S02",
+      "BWF-S03",
+      "BWF-S04",
+      "BWF-S05",
+      "BWF-S08",
+      "BWF-S09",
+      "BWF-S10",
+      "BWF-S12"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Wildfire · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+    "hazard": "used"
+   },
+   "gap": null
+  },
+  {
+   "key": "pcs",
+   "label": "PCS",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.0947176684881603,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_bess",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "BWF01_PCS_ELECTRONICS"
+   ],
+   "failure_unit_ids": [
+    "BESS_SEPARATE_PCS"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "our judgment"
+   ],
+   "evidence_words": "our judgment",
+   "construction": [
+    {
+     "curve_id": "BWF01_PCS_ELECTRONICS",
+     "data_path": "curves/wildfire_bess/BWF01_PCS_ELECTRONICS@model_v1_0__docs_r1.json",
+     "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
+     "curve_form": "piecewise_linear",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
+     "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "BWF-S01",
+      "BWF-S02",
+      "BWF-S03",
+      "BWF-S04",
+      "BWF-S05",
+      "BWF-S08",
+      "BWF-S09",
+      "BWF-S10",
+      "BWF-S12"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Wildfire · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Separate PCS",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+    "hazard": "used"
+   },
+   "gap": null
+  },
+  {
+   "key": "electrical_balance",
+   "label": "MV, collection and controls",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.12021857923497267,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_bess",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "BESS_MV_AND_SHARED_ELECTRICAL"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. Neither its share of the asset's value nor how this hazard damages it has been worked out yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "electrical_balance"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/wildfire.json",
+     "sha256": "ce97039890a5431ab52190a69edac3435161e3957cf901793da111da5f481388",
+     "search_log": "docs/evidence/occurrence/bess/wildfire.md",
+     "last_searched": null,
+     "question": "Has wildfire physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/wildfire_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "civil_works",
+   "label": "Civil works",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.014571948998178506,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_bess",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "BESS_CIVIL"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. Neither its share of the asset's value nor how this hazard damages it has been worked out yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": "M",
+      "nodes": [
+       {
+        "node": "bv_yard",
+        "name": "Yard & Fence",
+        "level": 2,
+        "why": "Vegetation clearance is a fire-code requirement"
+       },
+       {
+        "node": "bpl_yard",
+        "name": "Yard & Fence",
+        "level": 2,
+        "why": "Vegetation clearance"
+       }
+      ]
+     },
+     "bucket": "civil_works"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/wildfire.json",
+     "sha256": "ce97039890a5431ab52190a69edac3435161e3957cf901793da111da5f481388",
+     "search_log": "docs/evidence/occurrence/bess/wildfire.md",
+     "last_searched": null,
+     "question": "Has wildfire physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/wildfire_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "fieldwork",
+   "label": "Fieldwork",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.00546448087431694,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_bess",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "BESS_FIELDWORK"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. Neither its share of the asset's value nor how this hazard damages it has been worked out yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "fieldwork"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/wildfire.json",
+     "sha256": "ce97039890a5431ab52190a69edac3435161e3957cf901793da111da5f481388",
+     "search_log": "docs/evidence/occurrence/bess/wildfire.md",
+     "last_searched": null,
+     "question": "Has wildfire physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/wildfire_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  }
+ ],
+ "subcomponent_rollup": {
+  "expected": 5,
+  "with_curve": 2,
+  "gap": 3,
+  "complete": 2,
+  "incomplete": 3,
+  "evidence_labels": {
+   "field-calibrated": 0,
+   "published": 0,
+   "borrowed": 0,
+   "our judgment": 2
+  }
+ },
+ "value_split": {
+  "priced": 0.8597449908925319,
+  "partly": 0.0,
+  "no_damage": 0.0,
+  "not_priced": 0.14025500910746813,
+  "basis": "of the reference plant's value"
+ }
 }

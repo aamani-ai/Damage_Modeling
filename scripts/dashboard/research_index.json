@@ -1,0 +1,183 @@
+{
+ "schema": "damage-dashboard-research-index/v1",
+ "about": "The research so far behind a hazard that has no damage curve, in this repository or in Hazard's. One entry per document; 'asset' is an asset slug or '*' for every asset; 'finding' is the document's own conclusion, kept short and quoted or closely paraphrased from it. The build checks every path and links it where it is (Damage: this repository; Hazard: its main, else the branch that holds it). 'branch' names the Hazard branch that holds the content when main has a different version of the file.",
+ "entries": [
+  {
+   "asset": "*",
+   "hazard": "heat",
+   "repo": "damage",
+   "path": "docs/scope/SCOPE_AND_STORY.md",
+   "title": "Damage's scope: a damage curve prices physical destruction only",
+   "finding": "Heat is treated as changing how an asset performs (derating, ageing), which sits outside a damage curve; disruption and derating are a separate stage."
+  },
+  {
+   "asset": "bess",
+   "hazard": "heat",
+   "repo": "hazard",
+   "path": "docs/discussion/research/_cross_cutting/bess_heat_temperature_feasibility.md",
+   "title": "BESS heat: physical effects and first-screen feasibility (Hazard, 21 Oct 2026)",
+   "finding": "Heat can cause lasting physical harm to batteries (an EPRI field case, LFP lab studies), but the reviewed sources do not yet support an outdoor-temperature-to-repair-cost curve for the reference plant."
+  },
+  {
+   "asset": "bess",
+   "hazard": "heat",
+   "repo": "hazard",
+   "path": "docs/discussion/_cross_cutting/bess_conus/05_heat_scope_and_research_plan.md",
+   "title": "Heat: define the consequence before building the model (Hazard, 21 Oct 2026)",
+   "finding": "Parked by the owner on 21 Oct: temporary derating, permanent ageing and acute failure need separate definitions, and working cooling should be compared with impaired cooling. No owner ruling yet."
+  },
+  {
+   "asset": "wind",
+   "hazard": "hail",
+   "repo": "damage",
+   "path": "docs/cells/hail_wind/proposed/DEEP_CURATION_DECISION_hail_wind__model_v0_1__docs_r2.md",
+   "title": "Hail × wind farm: the no-go decision (docs r2)",
+   "finding": "\"No candidate exposes a source-native fractional economic endpoint comparable to the cell's y-axis\": every source stops before repair cost, so no curve ships."
+  },
+  {
+   "asset": "wind",
+   "hazard": "hail",
+   "repo": "damage",
+   "path": "docs/cells/hail_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_hail_wind__model_v0_1__docs_r2.md",
+   "title": "Hail × wind farm: evidence search, second pass (cut-off 29 Jul 2026)",
+   "finding": "24 sources registered across DOE/OSTI, NREL, Sandia, NOAA, IEC, DNV and theses; of 73 NOAA turbine reports, the only one typed as hail was a 1995 rooftop turbine blown off by winds."
+  },
+  {
+   "asset": "wind",
+   "hazard": "hail",
+   "repo": "damage",
+   "path": "docs/cells/hail_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_hail_wind__model_v0_1__docs_r1.md",
+   "title": "Hail × wind farm: evidence search, first pass (cut-off 28 Jul 2026)",
+   "finding": "Lab tests, simulations and erosion models were found; none links a hail event to a blade's repair cost."
+  },
+  {
+   "asset": "wind",
+   "hazard": "hail",
+   "repo": "damage",
+   "path": "docs/cells/hail_wind/proposed/LEGACY_EVIDENCE_INGESTION_hail_wind__model_v0_1__docs_r1.md",
+   "title": "Hail × wind farm: why the old curve was rejected",
+   "finding": "The legacy wind-turbine hail curve is a buildings-and-cars hail curve relabelled for wind, with a centimetre/inch unit error."
+  },
+  {
+   "asset": "wind",
+   "hazard": "hail",
+   "repo": "damage",
+   "path": "docs/plans/hazard_asset_coverage/DECISIONS.md",
+   "title": "Hazard × asset coverage plan: decisions D-004, D-006, D-012",
+   "finding": "Hail × wind farm was reopened first, closed as a zero-curve v0.1 placeholder, and kept so after the deeper review. It reopens only on paired blade inspections with repair costs, a final ISO 19392-7 hail standard, or an owner-approved expert-judgment curve."
+  },
+  {
+   "asset": "wind",
+   "hazard": "hail",
+   "repo": "damage",
+   "path": "docs/contracts/hazard_handoff/hail_wind_model_v0_1_boundary.md",
+   "title": "Hail × wind farm: what Hazard must do (handoff)",
+   "finding": "Fail closed with no runtime curve; do not reuse solar, erosion or legacy real-estate curves."
+  },
+  {
+   "asset": "substation",
+   "hazard": "hail",
+   "repo": "damage",
+   "path": "docs/extra/discussion/substation_damage/05_cross_hazard_reuse_inventory.md",
+   "title": "Substation: which existing curves could be reused (16 Oct 2026)",
+   "finding": "Only the curves already in this repository were checked; no outside search was run. \"No station response found in this reviewed current/proposed inventory. Missing evidence is not proof of zero station damage.\""
+  },
+  {
+   "asset": "substation",
+   "hazard": "hail",
+   "repo": "damage",
+   "path": "docs/plans/substation_damage/decisions.md",
+   "title": "Substation damage plan: decision SD-D12",
+   "finding": "Hail is a recorded gap: missing coverage is never zero."
+  },
+  {
+   "asset": "substation",
+   "hazard": "hail",
+   "repo": "hazard",
+   "path": "docs/plans/_cross_cutting/substation_conus/decisions.md",
+   "title": "Hazard's substation decisions: DD-SUB26 (17 Oct 2026)",
+   "finding": "Owner decision: hail is an explicit scope exclusion for this delivery, not a negligible-risk claim or a numerical zero; revisit only if scope or evidence changes.",
+   "branch": "codex/substation-conus"
+  },
+  {
+   "asset": "substation",
+   "hazard": "hail",
+   "repo": "hazard",
+   "path": "docs/plans/_cross_cutting/substation_conus/01_reference_profile_and_binding.md",
+   "title": "Hazard's substation reference profile: the hail research lead",
+   "finding": "Hail is flagged as a bounded research lead (\"do not infer zero risk or borrow PV fragility\"); that research has not been done."
+  },
+  {
+   "asset": "bess",
+   "hazard": "hail",
+   "repo": "hazard",
+   "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+   "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+   "finding": "Owner direction: defer strong wind, tornado and the other additional hazards. \"This is a scope direction, not a finding that omitted hazards are negligible or have zero loss.\""
+  },
+  {
+   "asset": "bess",
+   "hazard": "hail",
+   "repo": "hazard",
+   "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+   "title": "Hazard's battery multi-hazard roadmap",
+   "finding": "Hail: \"Deferred; outside the completed first pass.\" Deferred does not mean negligible, safe or zero loss."
+  },
+  {
+   "asset": "bess",
+   "hazard": "hail",
+   "repo": "damage",
+   "path": "docs/evidence/occurrence/bess/hail.md",
+   "title": "Battery hail: the field-report register",
+   "finding": "Not searched for any part: nobody has looked for field reports yet. This is the default, not a finding."
+  },
+  {
+   "asset": "bess",
+   "hazard": "hail",
+   "repo": "damage",
+   "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+   "title": "Does it happen? Leads from the battery's design (hail row)",
+   "finding": "Design leads only (panel denting, condenser coils, both rated low); the recommended next step, \"search first; park if nothing\", has not been run."
+  },
+  {
+   "asset": "bess",
+   "hazard": "convective_wind",
+   "repo": "hazard",
+   "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+   "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+   "finding": "Owner direction: defer strong wind and tornado after the first pass. A scope direction, not a finding of zero loss."
+  },
+  {
+   "asset": "bess",
+   "hazard": "convective_wind",
+   "repo": "hazard",
+   "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+   "title": "Hazard's battery multi-hazard roadmap (step 4)",
+   "finding": "Convective wind was in the planned sequence, then deferred by owner direction; no qualification or execution now."
+  },
+  {
+   "asset": "bess",
+   "hazard": "convective_wind",
+   "repo": "damage",
+   "path": "docs/cells/tropical_cyclone_wind_bess/README.md",
+   "title": "Battery hurricane wind cell: its scope",
+   "finding": "Treats convective wind and tornado as a separate scope from the hurricane wind curve."
+  },
+  {
+   "asset": "bess",
+   "hazard": "convective_wind",
+   "repo": "damage",
+   "path": "docs/evidence/occurrence/bess/convective_wind.md",
+   "title": "Battery convective wind: the field-report register",
+   "finding": "Not searched: nobody has looked for field reports yet."
+  },
+  {
+   "asset": "*",
+   "hazard": "heat",
+   "repo": "damage",
+   "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+   "title": "Does it happen? Leads from the battery's design (heat row, 19 Oct 2026)",
+   "finding": "Heat is the strongest design lead (ageing doubles per +10 °C, chiller and converter derating) but works through performance: \"Performance, not damage — no curve.\" No field evidence was searched."
+  }
+ ]
+}

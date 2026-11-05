@@ -998,7 +998,8 @@
    "doi": null,
    "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
    "link_kind": "url",
-   "no_link_sentence": null
+   "no_link_sentence": null,
+   "link_note": null
   },
   {
    "id": "NEMA_GD1_2019",
@@ -1024,7 +1025,8 @@
    "doi": null,
    "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
    "link_kind": "url",
-   "no_link_sentence": null
+   "no_link_sentence": null,
+   "link_note": null
   },
   {
    "id": "USACE_HEC_FIA",
@@ -1050,7 +1052,8 @@
    "doi": null,
    "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
    "link_kind": "url",
-   "no_link_sentence": null
+   "no_link_sentence": null,
+   "link_note": null
   }
  ],
  "plain_tiers": {
@@ -1068,15 +1071,15 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release —"
  },
- "summary": "Combiner boxes and DC protection: a line through fixed points (piecewise linear), read against local depth above component datum; how damage rises is borrowed, how it becomes dollars borrowed.",
+ "summary": "Combiner boxes and DC protection: a line through fixed points (piecewise linear), read against local depth above component datum; damage at each hazard level is borrowed, the dollar value it is applied to borrowed.",
  "rail_plain": {
   "exists": {
-   "words": "Live · in the runtime index",
+   "words": "Live · in use",
    "code": "LIVE"
   },
   "evidence": {
    "words": "Evidence: borrowed",
-   "code": "How damage rises: borrowed · how it becomes dollars: borrowed",
+   "code": "Damage at each hazard level: borrowed · the dollar value it is applied to: borrowed",
    "tiers": [
     "T3"
    ],
@@ -1123,5 +1126,909 @@
    "source": "CHANGELOG.json"
   }
  ],
- "data_path": "curves/flood_solar/FS_COMB@model_v1_0__docs_r4.json"
+ "data_path": "curves/flood_solar/FS_COMB@model_v1_0__docs_r4.json",
+ "construction_sources": [
+  {
+   "id": "DOE_FEMP_PV_FLOOD",
+   "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+   "citation": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+   "url": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+   "locator": null,
+   "role": "Solar-specific flood pathways: total submersion, raising equipment, conduit water paths, enclosure ratings, stormwater/scour measures.",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+    "sheet": "Sources"
+   },
+   "aliases": [
+    "DOE_FEMP_PV_FLOOD"
+   ],
+   "source_type": null,
+   "doi": null,
+   "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+   "link_kind": "url",
+   "no_link_sentence": null,
+   "link_note": null
+  },
+  {
+   "id": "NEMA_GD1_2019",
+   "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+   "citation": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+   "url": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+   "locator": null,
+   "role": "Replacement/reconditioning logic for water-exposed electrical distribution, power equipment, transformers, cables, electronic products.",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+    "sheet": "Sources"
+   },
+   "aliases": [
+    "NEMA_GD1_2019"
+   ],
+   "source_type": null,
+   "doi": null,
+   "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+   "link_kind": "url",
+   "no_link_sentence": null,
+   "link_note": null
+  },
+  {
+   "id": "USACE_HEC_FIA",
+   "title": "Depth-Percent Damage Relationships",
+   "citation": "Depth-Percent Damage Relationships",
+   "url": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+   "locator": null,
+   "role": "Supports tabular depth-percent damage relationship and interpolation approach.",
+   "tier": null,
+   "permitted": null,
+   "prohibited": null,
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+    "sheet": "Sources"
+   },
+   "aliases": [
+    "USACE_HEC_FIA"
+   ],
+   "source_type": null,
+   "doi": null,
+   "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+   "link_kind": "url",
+   "no_link_sentence": null,
+   "link_note": null
+  }
+ ],
+ "construction": {
+  "curve_type": "piecewise linear",
+  "curve_form": "piecewise_linear",
+  "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+  "formula_source": "scripts/reference_helpers/damage_curve_eval.py",
+  "variables": [
+   {
+    "symbol": "D(x)",
+    "meaning": "damage ratio at intensity x",
+    "parameter": null
+   },
+   {
+    "symbol": "(x_i, D_i)",
+    "meaning": "the listed points: intensity and damage ratio",
+    "parameter": "points"
+   },
+   {
+    "symbol": "O",
+    "meaning": "onset: the last intensity with zero damage before damage starts (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "F",
+    "meaning": "full: the first intensity at which damage reaches its highest value (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "D_max",
+    "meaning": "the highest damage ratio among the points",
+    "parameter": null
+   }
+  ],
+  "marks": {
+   "O": 0.0,
+   "F": 0.3,
+   "D_max": 1.0,
+   "O_note": null
+  },
+  "unkeyed_parameters": [],
+  "curve_tiers": {
+   "shape": {
+    "tier": "T3",
+    "word": "borrowed"
+   },
+   "cost": {
+    "tier": "T3",
+    "word": "borrowed"
+   }
+  },
+  "axis": {
+   "id": "local_depth_above_component_datum_m",
+   "label": "local depth above component datum",
+   "unit": "m",
+   "input_field": "water_surface_elevation_m",
+   "kind": "continuous",
+   "valid_range": [
+    0,
+    2.0
+   ],
+   "bridge": {
+    "formula": "h_i = max(0, WSE - z_i_crit)"
+   }
+  },
+  "parameters": [
+   {
+    "name": "points",
+    "definition": "the listed points: intensity and damage ratio",
+    "value": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.02,
+      0.1
+     ],
+     [
+      0.05,
+      0.35
+     ],
+     [
+      0.15,
+      0.8
+     ],
+     [
+      0.3,
+      1.0
+     ],
+     [
+      0.6,
+      1.0
+     ],
+     [
+      1.0,
+      1.0
+     ],
+     [
+      1.5,
+      1.0
+     ],
+     [
+      2.0,
+      1.0
+     ]
+    ],
+    "value_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json::curve_id=FS_COMB::parameters.points",
+    "tier": null,
+    "tier_word": null,
+    "reasoning": [],
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD",
+     "NEMA_GD1_2019",
+     "USACE_HEC_FIA"
+    ],
+    "sources": [
+     {
+      "id": "DOE_FEMP_PV_FLOOD",
+      "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+      "citation": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+      "url": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+      "locator": null,
+      "role": "Solar-specific flood pathways: total submersion, raising equipment, conduit water paths, enclosure ratings, stormwater/scour measures.",
+      "tier": null,
+      "permitted": null,
+      "prohibited": null,
+      "decision": null,
+      "accessed_on": null,
+      "provenance": "extracted-from-workbook",
+      "from": {
+       "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+       "sheet": "Sources"
+      },
+      "aliases": [
+       "DOE_FEMP_PV_FLOOD"
+      ],
+      "source_type": null,
+      "doi": null,
+      "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+      "link_kind": "url",
+      "no_link_sentence": null,
+      "link_note": null
+     },
+     {
+      "id": "NEMA_GD1_2019",
+      "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+      "citation": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+      "url": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+      "locator": null,
+      "role": "Replacement/reconditioning logic for water-exposed electrical distribution, power equipment, transformers, cables, electronic products.",
+      "tier": null,
+      "permitted": null,
+      "prohibited": null,
+      "decision": null,
+      "accessed_on": null,
+      "provenance": "extracted-from-workbook",
+      "from": {
+       "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+       "sheet": "Sources"
+      },
+      "aliases": [
+       "NEMA_GD1_2019"
+      ],
+      "source_type": null,
+      "doi": null,
+      "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+      "link_kind": "url",
+      "no_link_sentence": null,
+      "link_note": null
+     },
+     {
+      "id": "USACE_HEC_FIA",
+      "title": "Depth-Percent Damage Relationships",
+      "citation": "Depth-Percent Damage Relationships",
+      "url": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+      "locator": null,
+      "role": "Supports tabular depth-percent damage relationship and interpolation approach.",
+      "tier": null,
+      "permitted": null,
+      "prohibited": null,
+      "decision": null,
+      "accessed_on": null,
+      "provenance": "extracted-from-workbook",
+      "from": {
+       "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+       "sheet": "Sources"
+      },
+      "aliases": [
+       "USACE_HEC_FIA"
+      ],
+      "source_type": null,
+      "doi": null,
+      "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+      "link_kind": "url",
+      "no_link_sentence": null,
+      "link_note": null
+     }
+    ],
+    "unresolved_source_ids": [],
+    "register_rows": [],
+    "source_scope": "curve",
+    "where_from": "curve_level",
+    "files": []
+   }
+  ],
+  "additional_parameter_rows": [
+   {
+    "id": "depth_damage_points",
+    "name": "depth_damage_points",
+    "value": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.02,
+      0.1
+     ],
+     [
+      0.05,
+      0.35
+     ],
+     [
+      0.15,
+      0.8
+     ],
+     [
+      0.3,
+      1.0
+     ],
+     [
+      0.6,
+      1.0
+     ],
+     [
+      1.0,
+      1.0
+     ],
+     [
+      1.5,
+      1.0
+     ],
+     [
+      2.0,
+      1.0
+     ]
+    ],
+    "tier": "T3",
+    "source_ids": [
+     "DOE_FEMP_PV_FLOOD",
+     "NEMA_GD1_2019",
+     "USACE_HEC_FIA"
+    ],
+    "claim_ids": [],
+    "curve_id": "FS_COMB",
+    "pathway_id": null,
+    "role": "curve_fit_shape",
+    "status": null,
+    "reasoning": "Mechanism and curve form are source-supported; exact percentages are engineering parameterization.",
+    "update_trigger": "claims/OEM/forensic depth-damage data"
+   }
+  ],
+  "sources": [
+   {
+    "id": "DOE_FEMP_PV_FLOOD",
+    "title": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+    "citation": "Preventing and Mitigating Flood Damage to Solar Photovoltaic Systems",
+    "url": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+    "locator": null,
+    "role": "Solar-specific flood pathways: total submersion, raising equipment, conduit water paths, enclosure ratings, stormwater/scour measures.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "DOE_FEMP_PV_FLOOD"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.energy.gov/femp/preventing-and-mitigating-flood-damage-solar-photovoltaic-systems",
+    "link_kind": "url",
+    "no_link_sentence": null,
+    "link_note": null
+   },
+   {
+    "id": "NEMA_GD1_2019",
+    "title": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+    "citation": "Evaluating Water-Damaged Electrical Equipment (GD 1-2019)",
+    "url": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+    "locator": null,
+    "role": "Replacement/reconditioning logic for water-exposed electrical distribution, power equipment, transformers, cables, electronic products.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "NEMA_GD1_2019"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.nema.org/standards/view/evaluating-water-damaged-electrical-equipment",
+    "link_kind": "url",
+    "no_link_sentence": null,
+    "link_note": null
+   },
+   {
+    "id": "USACE_HEC_FIA",
+    "title": "Depth-Percent Damage Relationships",
+    "citation": "Depth-Percent Damage Relationships",
+    "url": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+    "locator": null,
+    "role": "Supports tabular depth-percent damage relationship and interpolation approach.",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx",
+     "sheet": "Sources"
+    },
+    "aliases": [
+     "USACE_HEC_FIA"
+    ],
+    "source_type": null,
+    "doi": null,
+    "link": "https://www.hec.usace.army.mil/confluence/fiadocs/fiatechref/latest/direct-damage/depth-percent-damage-relationships-direct-damage",
+    "link_kind": "url",
+    "no_link_sentence": null,
+    "link_note": null
+   }
+  ],
+  "source_ids": [
+   "DOE_FEMP_PV_FLOOD",
+   "NEMA_GD1_2019",
+   "USACE_HEC_FIA"
+  ],
+  "artifact": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+  "evaluator": {
+   "module": "scripts/reference_helpers/damage_curve_eval.py",
+   "function": "evaluate_curve_record",
+   "note": "generic piecewise-linear evaluator; sampled inside the record's valid range"
+  },
+  "constructing_files": [
+   {
+    "role": "write-up",
+    "path": "docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md"
+   }
+  ],
+  "scope_note": null,
+  "production_use": {
+   "state": "runtime_indexed",
+   "consumer_pin": "flood_solar@model_v1_0__docs_r4",
+   "hazard": {
+    "state": "used",
+    "sentences": [
+     "Hazard's dashboard layer Flood × Solar (national · R1.2/F1.1/C1.2 · Combined 1.4 · screening) uses the file shown here (model v1.0, docs r4).",
+     "How this is known: the layer's own record names the artifact.",
+     "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+    ],
+    "differences": [],
+    "values": [
+     {
+      "unit": "FS_CABLE",
+      "share": 0.06189295708955223,
+      "basis": "installed_TIV (share of installed $; the %TIV frame)",
+      "note": null,
+      "pin": "perils/flood/src/flood/resources/damage/flood_solar/consumption_pin.json",
+      "refs": [
+       "claude/measure-policy-sizing",
+       "claude/policy-preview-hosted",
+       "claude/policy-preview-in-memory",
+       "codex/bess-conus",
+       "codex/bess-release-integration",
+       "codex/bess-v1-payload",
+       "codex/deep-resiliency-variant-workflow",
+       "codex/flood-coastal-method-review",
+       "codex/hazard-reference-refresh",
+       "codex/modeling-db-change-guide",
+       "codex/real-estate-conus",
+       "codex/real-estate-internal",
+       "codex/scr-transition-scenario-guide",
+       "codex/substation-conus",
+       "codex/wind-total-coverage",
+       "deep/hail_experiments",
+       "deploy/hazard-grid-qc",
+       "feature/plymouth_trial",
+       "fix/flood-hazard-view-asset-free",
+       "gen1_5/improvements",
+       "gen1_5/improvements-fsm_integration",
+       "investigation/coverage-handoff-2026-10",
+       "job/flood-pluvial-fsm",
+       "main",
+       "measure-peril-copy",
+       "measure-policy-pairs",
+       "riverine_explore/large_modeled_zeros",
+       "total-reads-measure-pairs",
+       "workspace-deep-pair-workflow"
+      ],
+      "declared": null,
+      "where": "Hazard's main"
+     },
+     {
+      "unit": "FS_COMB",
+      "share": 0.006094866071428572,
+      "basis": "installed_TIV (share of installed $; the %TIV frame)",
+      "note": null,
+      "pin": "perils/flood/src/flood/resources/damage/flood_solar/consumption_pin.json",
+      "refs": [
+       "claude/measure-policy-sizing",
+       "claude/policy-preview-hosted",
+       "claude/policy-preview-in-memory",
+       "codex/bess-conus",
+       "codex/bess-release-integration",
+       "codex/bess-v1-payload",
+       "codex/deep-resiliency-variant-workflow",
+       "codex/flood-coastal-method-review",
+       "codex/hazard-reference-refresh",
+       "codex/modeling-db-change-guide",
+       "codex/real-estate-conus",
+       "codex/real-estate-internal",
+       "codex/scr-transition-scenario-guide",
+       "codex/substation-conus",
+       "codex/wind-total-coverage",
+       "deep/hail_experiments",
+       "deploy/hazard-grid-qc",
+       "feature/plymouth_trial",
+       "fix/flood-hazard-view-asset-free",
+       "gen1_5/improvements",
+       "gen1_5/improvements-fsm_integration",
+       "investigation/coverage-handoff-2026-10",
+       "job/flood-pluvial-fsm",
+       "main",
+       "measure-peril-copy",
+       "measure-policy-pairs",
+       "riverine_explore/large_modeled_zeros",
+       "total-reads-measure-pairs",
+       "workspace-deep-pair-workflow"
+      ],
+      "declared": null,
+      "where": "Hazard's main"
+     },
+     {
+      "unit": "FS_FOUND",
+      "share": 0.02778972067256672,
+      "basis": "installed_TIV (share of installed $; the %TIV frame)",
+      "note": null,
+      "pin": "perils/flood/src/flood/resources/damage/flood_solar/consumption_pin.json",
+      "refs": [
+       "claude/measure-policy-sizing",
+       "claude/policy-preview-hosted",
+       "claude/policy-preview-in-memory",
+       "codex/bess-conus",
+       "codex/bess-release-integration",
+       "codex/bess-v1-payload",
+       "codex/deep-resiliency-variant-workflow",
+       "codex/flood-coastal-method-review",
+       "codex/hazard-reference-refresh",
+       "codex/modeling-db-change-guide",
+       "codex/real-estate-conus",
+       "codex/real-estate-internal",
+       "codex/scr-transition-scenario-guide",
+       "codex/substation-conus",
+       "codex/wind-total-coverage",
+       "deep/hail_experiments",
+       "deploy/hazard-grid-qc",
+       "feature/plymouth_trial",
+       "fix/flood-hazard-view-asset-free",
+       "gen1_5/improvements",
+       "gen1_5/improvements-fsm_integration",
+       "investigation/coverage-handoff-2026-10",
+       "job/flood-pluvial-fsm",
+       "main",
+       "measure-peril-copy",
+       "measure-policy-pairs",
+       "riverine_explore/large_modeled_zeros",
+       "total-reads-measure-pairs",
+       "workspace-deep-pair-workflow"
+      ],
+      "declared": null,
+      "where": "Hazard's main"
+     },
+     {
+      "unit": "FS_INV",
+      "share": 0.02884497000926106,
+      "basis": "installed_TIV (share of installed $; the %TIV frame)",
+      "note": null,
+      "pin": "perils/flood/src/flood/resources/damage/flood_solar/consumption_pin.json",
+      "refs": [
+       "claude/measure-policy-sizing",
+       "claude/policy-preview-hosted",
+       "claude/policy-preview-in-memory",
+       "codex/bess-conus",
+       "codex/bess-release-integration",
+       "codex/bess-v1-payload",
+       "codex/deep-resiliency-variant-workflow",
+       "codex/flood-coastal-method-review",
+       "codex/hazard-reference-refresh",
+       "codex/modeling-db-change-guide",
+       "codex/real-estate-conus",
+       "codex/real-estate-internal",
+       "codex/scr-transition-scenario-guide",
+       "codex/substation-conus",
+       "codex/wind-total-coverage",
+       "deep/hail_experiments",
+       "deploy/hazard-grid-qc",
+       "feature/plymouth_trial",
+       "fix/flood-hazard-view-asset-free",
+       "gen1_5/improvements",
+       "gen1_5/improvements-fsm_integration",
+       "investigation/coverage-handoff-2026-10",
+       "job/flood-pluvial-fsm",
+       "main",
+       "measure-peril-copy",
+       "measure-policy-pairs",
+       "riverine_explore/large_modeled_zeros",
+       "total-reads-measure-pairs",
+       "workspace-deep-pair-workflow"
+      ],
+      "declared": null,
+      "where": "Hazard's main"
+     },
+     {
+      "unit": "FS_PVMOD",
+      "share": 0.26001326021421867,
+      "basis": "installed_TIV (share of installed $; the %TIV frame)",
+      "note": null,
+      "pin": "perils/flood/src/flood/resources/damage/flood_solar/consumption_pin.json",
+      "refs": [
+       "claude/measure-policy-sizing",
+       "claude/policy-preview-hosted",
+       "claude/policy-preview-in-memory",
+       "codex/bess-conus",
+       "codex/bess-release-integration",
+       "codex/bess-v1-payload",
+       "codex/deep-resiliency-variant-workflow",
+       "codex/flood-coastal-method-review",
+       "codex/hazard-reference-refresh",
+       "codex/modeling-db-change-guide",
+       "codex/real-estate-conus",
+       "codex/real-estate-internal",
+       "codex/scr-transition-scenario-guide",
+       "codex/substation-conus",
+       "codex/wind-total-coverage",
+       "deep/hail_experiments",
+       "deploy/hazard-grid-qc",
+       "feature/plymouth_trial",
+       "fix/flood-hazard-view-asset-free",
+       "gen1_5/improvements",
+       "gen1_5/improvements-fsm_integration",
+       "investigation/coverage-handoff-2026-10",
+       "job/flood-pluvial-fsm",
+       "main",
+       "measure-peril-copy",
+       "measure-policy-pairs",
+       "riverine_explore/large_modeled_zeros",
+       "total-reads-measure-pairs",
+       "workspace-deep-pair-workflow"
+      ],
+      "declared": null,
+      "where": "Hazard's main"
+     },
+     {
+      "unit": "FS_SCADA",
+      "share": 0.0011696428571428574,
+      "basis": "installed_TIV (share of installed $; the %TIV frame)",
+      "note": null,
+      "pin": "perils/flood/src/flood/resources/damage/flood_solar/consumption_pin.json",
+      "refs": [
+       "claude/measure-policy-sizing",
+       "claude/policy-preview-hosted",
+       "claude/policy-preview-in-memory",
+       "codex/bess-conus",
+       "codex/bess-release-integration",
+       "codex/bess-v1-payload",
+       "codex/deep-resiliency-variant-workflow",
+       "codex/flood-coastal-method-review",
+       "codex/hazard-reference-refresh",
+       "codex/modeling-db-change-guide",
+       "codex/real-estate-conus",
+       "codex/real-estate-internal",
+       "codex/scr-transition-scenario-guide",
+       "codex/substation-conus",
+       "codex/wind-total-coverage",
+       "deep/hail_experiments",
+       "deploy/hazard-grid-qc",
+       "feature/plymouth_trial",
+       "fix/flood-hazard-view-asset-free",
+       "gen1_5/improvements",
+       "gen1_5/improvements-fsm_integration",
+       "investigation/coverage-handoff-2026-10",
+       "job/flood-pluvial-fsm",
+       "main",
+       "measure-peril-copy",
+       "measure-policy-pairs",
+       "riverine_explore/large_modeled_zeros",
+       "total-reads-measure-pairs",
+       "workspace-deep-pair-workflow"
+      ],
+      "declared": null,
+      "where": "Hazard's main"
+     },
+     {
+      "unit": "FS_SWG",
+      "share": 0.06105826892324095,
+      "basis": "installed_TIV (share of installed $; the %TIV frame)",
+      "note": null,
+      "pin": "perils/flood/src/flood/resources/damage/flood_solar/consumption_pin.json",
+      "refs": [
+       "claude/measure-policy-sizing",
+       "claude/policy-preview-hosted",
+       "claude/policy-preview-in-memory",
+       "codex/bess-conus",
+       "codex/bess-release-integration",
+       "codex/bess-v1-payload",
+       "codex/deep-resiliency-variant-workflow",
+       "codex/flood-coastal-method-review",
+       "codex/hazard-reference-refresh",
+       "codex/modeling-db-change-guide",
+       "codex/real-estate-conus",
+       "codex/real-estate-internal",
+       "codex/scr-transition-scenario-guide",
+       "codex/substation-conus",
+       "codex/wind-total-coverage",
+       "deep/hail_experiments",
+       "deploy/hazard-grid-qc",
+       "feature/plymouth_trial",
+       "fix/flood-hazard-view-asset-free",
+       "gen1_5/improvements",
+       "gen1_5/improvements-fsm_integration",
+       "investigation/coverage-handoff-2026-10",
+       "job/flood-pluvial-fsm",
+       "main",
+       "measure-peril-copy",
+       "measure-policy-pairs",
+       "riverine_explore/large_modeled_zeros",
+       "total-reads-measure-pairs",
+       "workspace-deep-pair-workflow"
+      ],
+      "declared": null,
+      "where": "Hazard's main"
+     },
+     {
+      "unit": "FS_XFMR",
+      "share": 0.03403518123667377,
+      "basis": "installed_TIV (share of installed $; the %TIV frame)",
+      "note": null,
+      "pin": "perils/flood/src/flood/resources/damage/flood_solar/consumption_pin.json",
+      "refs": [
+       "claude/measure-policy-sizing",
+       "claude/policy-preview-hosted",
+       "claude/policy-preview-in-memory",
+       "codex/bess-conus",
+       "codex/bess-release-integration",
+       "codex/bess-v1-payload",
+       "codex/deep-resiliency-variant-workflow",
+       "codex/flood-coastal-method-review",
+       "codex/hazard-reference-refresh",
+       "codex/modeling-db-change-guide",
+       "codex/real-estate-conus",
+       "codex/real-estate-internal",
+       "codex/scr-transition-scenario-guide",
+       "codex/substation-conus",
+       "codex/wind-total-coverage",
+       "deep/hail_experiments",
+       "deploy/hazard-grid-qc",
+       "feature/plymouth_trial",
+       "fix/flood-hazard-view-asset-free",
+       "gen1_5/improvements",
+       "gen1_5/improvements-fsm_integration",
+       "investigation/coverage-handoff-2026-10",
+       "job/flood-pluvial-fsm",
+       "main",
+       "measure-peril-copy",
+       "measure-policy-pairs",
+       "riverine_explore/large_modeled_zeros",
+       "total-reads-measure-pairs",
+       "workspace-deep-pair-workflow"
+      ],
+      "declared": null,
+      "where": "Hazard's main"
+     },
+     {
+      "unit": "FS_CABLE",
+      "share": 0.06189295708955223,
+      "basis": "installed_TIV (share of installed $; the %TIV frame)",
+      "note": null,
+      "pin": "pipelines/flood/curves/flood_solar_grid_consumption_pin_v1_0.json",
+      "refs": [
+       "investigation/hurricane-storm-vs-raft",
+       "job/flood-handfim-snapshot",
+       "proposal/resiliency-alt-curve-support",
+       "review"
+      ],
+      "declared": null,
+      "where": "Hazard branches investigation/hurricane-storm-vs-raft, job/flood-handfim-snapshot, proposal/resiliency-alt-curve-support and 1 more (not on Hazard's main)"
+     },
+     {
+      "unit": "FS_COMB",
+      "share": 0.006094866071428572,
+      "basis": "installed_TIV (share of installed $; the %TIV frame)",
+      "note": null,
+      "pin": "pipelines/flood/curves/flood_solar_grid_consumption_pin_v1_0.json",
+      "refs": [
+       "investigation/hurricane-storm-vs-raft",
+       "job/flood-handfim-snapshot",
+       "proposal/resiliency-alt-curve-support",
+       "review"
+      ],
+      "declared": null,
+      "where": "Hazard branches investigation/hurricane-storm-vs-raft, job/flood-handfim-snapshot, proposal/resiliency-alt-curve-support and 1 more (not on Hazard's main)"
+     },
+     {
+      "unit": "FS_FOUND",
+      "share": 0.02778972067256672,
+      "basis": "installed_TIV (share of installed $; the %TIV frame)",
+      "note": null,
+      "pin": "pipelines/flood/curves/flood_solar_grid_consumption_pin_v1_0.json",
+      "refs": [
+       "investigation/hurricane-storm-vs-raft",
+       "job/flood-handfim-snapshot",
+       "proposal/resiliency-alt-curve-support",
+       "review"
+      ],
+      "declared": null,
+      "where": "Hazard branches investigation/hurricane-storm-vs-raft, job/flood-handfim-snapshot, proposal/resiliency-alt-curve-support and 1 more (not on Hazard's main)"
+     },
+     {
+      "unit": "FS_INV",
+      "share": 0.02884497000926106,
+      "basis": "installed_TIV (share of installed $; the %TIV frame)",
+      "note": null,
+      "pin": "pipelines/flood/curves/flood_solar_grid_consumption_pin_v1_0.json",
+      "refs": [
+       "investigation/hurricane-storm-vs-raft",
+       "job/flood-handfim-snapshot",
+       "proposal/resiliency-alt-curve-support",
+       "review"
+      ],
+      "declared": null,
+      "where": "Hazard branches investigation/hurricane-storm-vs-raft, job/flood-handfim-snapshot, proposal/resiliency-alt-curve-support and 1 more (not on Hazard's main)"
+     },
+     {
+      "unit": "FS_PVMOD",
+      "share": 0.26001326021421867,
+      "basis": "installed_TIV (share of installed $; the %TIV frame)",
+      "note": null,
+      "pin": "pipelines/flood/curves/flood_solar_grid_consumption_pin_v1_0.json",
+      "refs": [
+       "investigation/hurricane-storm-vs-raft",
+       "job/flood-handfim-snapshot",
+       "proposal/resiliency-alt-curve-support",
+       "review"
+      ],
+      "declared": null,
+      "where": "Hazard branches investigation/hurricane-storm-vs-raft, job/flood-handfim-snapshot, proposal/resiliency-alt-curve-support and 1 more (not on Hazard's main)"
+     },
+     {
+      "unit": "FS_SCADA",
+      "share": 0.0011696428571428574,
+      "basis": "installed_TIV (share of installed $; the %TIV frame)",
+      "note": null,
+      "pin": "pipelines/flood/curves/flood_solar_grid_consumption_pin_v1_0.json",
+      "refs": [
+       "investigation/hurricane-storm-vs-raft",
+       "job/flood-handfim-snapshot",
+       "proposal/resiliency-alt-curve-support",
+       "review"
+      ],
+      "declared": null,
+      "where": "Hazard branches investigation/hurricane-storm-vs-raft, job/flood-handfim-snapshot, proposal/resiliency-alt-curve-support and 1 more (not on Hazard's main)"
+     },
+     {
+      "unit": "FS_SWG",
+      "share": 0.06105826892324095,
+      "basis": "installed_TIV (share of installed $; the %TIV frame)",
+      "note": null,
+      "pin": "pipelines/flood/curves/flood_solar_grid_consumption_pin_v1_0.json",
+      "refs": [
+       "investigation/hurricane-storm-vs-raft",
+       "job/flood-handfim-snapshot",
+       "proposal/resiliency-alt-curve-support",
+       "review"
+      ],
+      "declared": null,
+      "where": "Hazard branches investigation/hurricane-storm-vs-raft, job/flood-handfim-snapshot, proposal/resiliency-alt-curve-support and 1 more (not on Hazard's main)"
+     },
+     {
+      "unit": "FS_XFMR",
+      "share": 0.03403518123667377,
+      "basis": "installed_TIV (share of installed $; the %TIV frame)",
+      "note": null,
+      "pin": "pipelines/flood/curves/flood_solar_grid_consumption_pin_v1_0.json",
+      "refs": [
+       "investigation/hurricane-storm-vs-raft",
+       "job/flood-handfim-snapshot",
+       "proposal/resiliency-alt-curve-support",
+       "review"
+      ],
+      "declared": null,
+      "where": "Hazard branches investigation/hurricane-storm-vs-raft, job/flood-handfim-snapshot, proposal/resiliency-alt-curve-support and 1 more (not on Hazard's main)"
+     }
+    ],
+    "value_mismatches": [],
+    "newer": null
+   },
+   "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+  }
+ }
 }

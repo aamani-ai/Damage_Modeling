@@ -1082,6 +1082,7 @@
  "sources_resolved": [
   {
    "id": "FRE-S004",
+   "aliases": [],
    "citation": "U.S. Army Corps of Engineers (2015). North Atlantic Coast Comprehensive Study: Resilient Adaptation to Increasing Risk. Physical Depth Damage Function Summary Report (26 Jan 2015).",
    "url": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
    "locator": "Table 24 + Table 25 (pp. 61-62, Prototype 2 Commercial Engineered); Table 34 + Table 35 (pp. 67-68, Prototype 3 Commercial Non/Pre-Engineered); Table 55 + Table 56 (pp. 80-82, Prototype 5A Single-Story Residence No Basement); verification note pp. 80-81",
@@ -1096,7 +1097,8 @@
    "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
    "link_kind": "url",
    "title": "U.S. Army Corps of Engineers (2015)",
-   "no_link_sentence": null
+   "no_link_sentence": null,
+   "link_note": null
   }
  ],
  "plain_tiers": {
@@ -1114,15 +1116,15 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release not yet reviewed"
  },
- "summary": "Retail: a line through fixed points (piecewise linear), read against water depth above the first floor; how damage rises is published, how it becomes dollars published.",
+ "summary": "Retail: a line through fixed points (piecewise linear), read against water depth above the first floor; damage at each hazard level is published, the dollar value it is applied to published.",
  "rail_plain": {
   "exists": {
-   "words": "Proposal · not in the runtime index yet",
+   "words": "Proposal · built, not in use yet",
    "code": "PROPOSAL · screening"
   },
   "evidence": {
    "words": "Evidence: published",
-   "code": "How damage rises: published · how it becomes dollars: published",
+   "code": "Damage at each hazard level: published · the dollar value it is applied to: published",
    "tiers": [
     "T2"
    ],
@@ -1138,5 +1140,261 @@
   }
  },
  "versions": [],
- "data_path": "curves/flood_real_estate/FRE_COM_COAST_NACCS_P2@model_v0_2__docs_r1.json"
+ "data_path": "curves/flood_real_estate/FRE_COM_COAST_NACCS_P2@model_v0_2__docs_r1.json",
+ "construction_sources": [
+  {
+   "id": "FRE-S004",
+   "aliases": [],
+   "citation": "U.S. Army Corps of Engineers (2015). North Atlantic Coast Comprehensive Study: Resilient Adaptation to Increasing Risk. Physical Depth Damage Function Summary Report (26 Jan 2015).",
+   "url": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+   "locator": "Table 24 + Table 25 (pp. 61-62, Prototype 2 Commercial Engineered); Table 34 + Table 35 (pp. 67-68, Prototype 3 Commercial Non/Pre-Engineered); Table 55 + Table 56 (pp. 80-82, Prototype 5A Single-Story Residence No Basement); verification note pp. 80-81",
+   "role": "curve_form;selector_archetype",
+   "tier": "T2",
+   "permitted": "Adopt published inundation-structure knots for coastal-surge water; use the prototype most-likely characteristics as reference-building defaults.",
+   "prohibited": "Use values between published knots that the report did not publish; treat Min/Max as a probabilistic spread; transfer to riverine or pluvial freshwater; use erosion or wave tables in the inundation pathway.",
+   "decision": "adopt_with_limits",
+   "accessed_on": "2026-10-11",
+   "provenance": "register",
+   "doi": null,
+   "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+   "link_kind": "url",
+   "title": "U.S. Army Corps of Engineers (2015)",
+   "no_link_sentence": null,
+   "link_note": null
+  }
+ ],
+ "construction": {
+  "curve_type": "piecewise linear",
+  "curve_form": "piecewise_linear",
+  "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+  "formula_source": "scripts/reference_helpers/damage_curve_eval.py",
+  "variables": [
+   {
+    "symbol": "D(x)",
+    "meaning": "damage ratio at intensity x",
+    "parameter": null
+   },
+   {
+    "symbol": "(x_i, D_i)",
+    "meaning": "the listed points: intensity and damage ratio",
+    "parameter": "points"
+   },
+   {
+    "symbol": "O",
+    "meaning": "onset: the last intensity with zero damage before damage starts (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "F",
+    "meaning": "full: the first intensity at which damage reaches its highest value (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "D_max",
+    "meaning": "the highest damage ratio among the points",
+    "parameter": null
+   }
+  ],
+  "marks": {
+   "O": -0.5,
+   "F": 10.0,
+   "D_max": 0.58,
+   "O_note": null
+  },
+  "unkeyed_parameters": [],
+  "curve_tiers": {
+   "shape": {
+    "tier": "T2",
+    "word": "published"
+   },
+   "cost": {
+    "tier": "T2",
+    "word": "published"
+   }
+  },
+  "axis": {
+   "id": "FLOOD_DEPTH_ABOVE_FIRST_FINISHED_FLOOR_FT",
+   "label": "water depth above the first floor",
+   "unit": "ft",
+   "input_field": "flood_depth_above_first_floor_ft",
+   "valid_range": [
+    -4.0,
+    24.0
+   ],
+   "kind": "continuous",
+   "label_from_id": true
+  },
+  "parameters": [
+   {
+    "name": "points",
+    "definition": "the listed points: intensity and damage ratio",
+    "value": [
+     [
+      -1.0,
+      0.0
+     ],
+     [
+      -0.5,
+      0.0
+     ],
+     [
+      0.0,
+      0.05
+     ],
+     [
+      0.5,
+      0.1
+     ],
+     [
+      1.0,
+      0.2
+     ],
+     [
+      2.0,
+      0.3
+     ],
+     [
+      3.0,
+      0.35
+     ],
+     [
+      5.0,
+      0.4
+     ],
+     [
+      7.0,
+      0.53
+     ],
+     [
+      10.0,
+      0.58
+     ]
+    ],
+    "value_path": "docs/cells/flood_real_estate/proposed/flood_real_estate__model_v0_2__docs_r1__curve_artifact.json::curve_id=FRE_COM_COAST_NACCS_P2::parameters.points",
+    "tier": null,
+    "tier_word": null,
+    "reasoning": [],
+    "source_ids": [
+     "FRE-S004"
+    ],
+    "sources": [
+     {
+      "id": "FRE-S004",
+      "aliases": [],
+      "citation": "U.S. Army Corps of Engineers (2015). North Atlantic Coast Comprehensive Study: Resilient Adaptation to Increasing Risk. Physical Depth Damage Function Summary Report (26 Jan 2015).",
+      "url": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "locator": "Table 24 + Table 25 (pp. 61-62, Prototype 2 Commercial Engineered); Table 34 + Table 35 (pp. 67-68, Prototype 3 Commercial Non/Pre-Engineered); Table 55 + Table 56 (pp. 80-82, Prototype 5A Single-Story Residence No Basement); verification note pp. 80-81",
+      "role": "curve_form;selector_archetype",
+      "tier": "T2",
+      "permitted": "Adopt published inundation-structure knots for coastal-surge water; use the prototype most-likely characteristics as reference-building defaults.",
+      "prohibited": "Use values between published knots that the report did not publish; treat Min/Max as a probabilistic spread; transfer to riverine or pluvial freshwater; use erosion or wave tables in the inundation pathway.",
+      "decision": "adopt_with_limits",
+      "accessed_on": "2026-10-11",
+      "provenance": "register",
+      "doi": null,
+      "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "link_kind": "url",
+      "title": "U.S. Army Corps of Engineers (2015)",
+      "no_link_sentence": null,
+      "link_note": null
+     }
+    ],
+    "unresolved_source_ids": [],
+    "register_rows": [],
+    "source_scope": "curve",
+    "where_from": "curve_level",
+    "files": []
+   }
+  ],
+  "additional_parameter_rows": [
+   {
+    "id": "RE_COM_LOWRISE.coastal.ordinates",
+    "name": "RE_COM_LOWRISE.coastal.ordinates",
+    "value": "NACCS COM-ENG Min/ML/Max at the ten published depths",
+    "tier": "T2",
+    "source_ids": [
+     "FRE-S004"
+    ],
+    "claim_ids": [],
+    "curve_id": "FRE_COM_COAST_NACCS_P2",
+    "pathway_id": "flood_inundation_contact",
+    "role": "curve_fit_shape",
+    "status": "proposed",
+    "reasoning": "Prototype 2 steel-framed commercial matches the reference building (FRE-C008). T3 transfer outside the North Atlantic.",
+    "update_trigger": "Commercial reference redefined as masonry (then COM-PRE) or NFIP comparison."
+   }
+  ],
+  "sources": [
+   {
+    "id": "FRE-S004",
+    "aliases": [],
+    "citation": "U.S. Army Corps of Engineers (2015). North Atlantic Coast Comprehensive Study: Resilient Adaptation to Increasing Risk. Physical Depth Damage Function Summary Report (26 Jan 2015).",
+    "url": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+    "locator": "Table 24 + Table 25 (pp. 61-62, Prototype 2 Commercial Engineered); Table 34 + Table 35 (pp. 67-68, Prototype 3 Commercial Non/Pre-Engineered); Table 55 + Table 56 (pp. 80-82, Prototype 5A Single-Story Residence No Basement); verification note pp. 80-81",
+    "role": "curve_form;selector_archetype",
+    "tier": "T2",
+    "permitted": "Adopt published inundation-structure knots for coastal-surge water; use the prototype most-likely characteristics as reference-building defaults.",
+    "prohibited": "Use values between published knots that the report did not publish; treat Min/Max as a probabilistic spread; transfer to riverine or pluvial freshwater; use erosion or wave tables in the inundation pathway.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-11",
+    "provenance": "register",
+    "doi": null,
+    "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+    "link_kind": "url",
+    "title": "U.S. Army Corps of Engineers (2015)",
+    "no_link_sentence": null,
+    "link_note": null
+   }
+  ],
+  "source_ids": [
+   "FRE-S004"
+  ],
+  "artifact": "docs/cells/flood_real_estate/proposed/flood_real_estate__model_v0_2__docs_r1__curve_artifact.json",
+  "evaluator": {
+   "module": "scripts/reference_helpers/flood_real_estate_curve_eval.py",
+   "function": "evaluate_damage_call",
+   "note": "request template from the cell's known-answer tests; the hazard axis field varied over the record's valid range"
+  },
+  "constructing_files": [
+   {
+    "role": "write-up",
+    "path": "docs/cells/flood_real_estate/proposed/flood_real_estate_curve_derivation_dossier__model_v0_2__docs_r1.md"
+   },
+   {
+    "role": "build script",
+    "path": "scripts/reference_helpers/build_flood_real_estate_v0_2_package.py"
+   },
+   {
+    "role": "decision record",
+    "path": "docs/cells/flood_real_estate/proposed/DECISION_LOG_flood_real_estate__model_v0_1__docs_r1.md"
+   }
+  ],
+  "scope_note": null,
+  "production_use": {
+   "state": "not_runtime_indexed",
+   "consumer_pin": null,
+   "hazard": {
+    "state": "differs",
+    "sentences": [
+     "Hazard's dashboard layers Warehouse · Flood, Office · Flood, Detached house · Flood use model v1.0, docs r1; this page shows model v0.2, docs r1. 1 of the 7 curves shown here is identical; Hazard's version drops 6 curves shown here (FRE_RES_HAZUS_DF129, FRE_COM_FRESH_HAZUS_DF217, FRE_COM_COAST_NACCS_P2, FRE_COM_COAST_NACCS_P2_MIN). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main.",
+     "Hazard's dashboard layers Warehouse · Flood, Office · Flood, Detached house · Flood use model v1.1, docs r1; this page shows model v0.2, docs r1. 3 of the 7 curves shown here are identical; Hazard's version drops 4 curves shown here (FRE_COM_FRESH_HAZUS_DF217, FRE_COM_COAST_NACCS_P2, FRE_COM_COAST_NACCS_P2_MIN, FRE_COM_COAST_NACCS_P2_MAX). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main.",
+     "How this is known: the layer's own record names the artifact.",
+     "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+    ],
+    "differences": [
+     "Hazard's dashboard layers Warehouse · Flood, Office · Flood, Detached house · Flood use model v1.0, docs r1; this page shows model v0.2, docs r1. 1 of the 7 curves shown here is identical; Hazard's version drops 6 curves shown here (FRE_RES_HAZUS_DF129, FRE_COM_FRESH_HAZUS_DF217, FRE_COM_COAST_NACCS_P2, FRE_COM_COAST_NACCS_P2_MIN). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main.",
+     "Hazard's dashboard layers Warehouse · Flood, Office · Flood, Detached house · Flood use model v1.1, docs r1; this page shows model v0.2, docs r1. 3 of the 7 curves shown here are identical; Hazard's version drops 4 curves shown here (FRE_COM_FRESH_HAZUS_DF217, FRE_COM_COAST_NACCS_P2, FRE_COM_COAST_NACCS_P2_MIN, FRE_COM_COAST_NACCS_P2_MAX). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main."
+    ],
+    "values": [],
+    "value_mismatches": [],
+    "newer": {
+     "model": "model v1.1",
+     "docs": "docs r1",
+     "shown": "model v0.2",
+     "words": "Hazard's dashboard layers Warehouse · Flood, Office · Flood, Detached house · Flood use model v1.1, docs r1; this page shows model v0.2, docs r1. 3 of the 7 curves shown here are identical; Hazard's version drops 4 curves shown here (FRE_COM_FRESH_HAZUS_DF217, FRE_COM_COAST_NACCS_P2, FRE_COM_COAST_NACCS_P2_MIN, FRE_COM_COAST_NACCS_P2_MAX). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main."
+    }
+   },
+   "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+  }
+ }
 }

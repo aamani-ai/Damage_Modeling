@@ -369,6 +369,7 @@
  "sources_resolved": [
   {
    "id": "WFRE-S001",
+   "aliases": [],
    "citation": "Dillon, G.K.; Scott, J.H.; Jaffe, M.R.; et al. 2024. Wildfire Risk to Communities: Spatial datasets of landscape-wide wildfire risk components for the United States. 2nd Edition. Fort Collins, CO: Forest Service Research Data Archive. doi:10.2737/RDS-2020-0016-2 (metadata record).",
    "url": "https://www.fs.usda.gov/rds/archive/products/RDS-2020-0016-2/_metadata_RDS-2020-0016-2.html",
    "locator": "Process_Step 5 (cRPS: 'one of three response functions representing the relative effect of wildfire on structures (i.e., relative degree of damage or loss)'; 'essentially conditional Net Value Change ... if each pixel were to have a house'; values 25/40/55/70/85/100 tree, 20/35/50/65/80/95 shrub, 10/25/40/55/70/85 grass for FLP1-FLP6; 'A value of 0 means no damage to a structure, and a value of -100 means complete loss'; lifeform from LANDFIRE EVT); Process_Steps 2, 6, 7 (BP oozed into developed areas; FLEP4/FLEP8 as sums of FLP classes above 4 and 8 ft); Logical_Consistency_Report (cRPS 0-100)",
@@ -383,7 +384,8 @@
    "link": "https://www.fs.usda.gov/rds/archive/products/RDS-2020-0016-2/_metadata_RDS-2020-0016-2.html",
    "link_kind": "url",
    "title": "Dillon, G.K.; Scott, J.H.; Jaffe, M.R.; et al. 2024",
-   "no_link_sentence": null
+   "no_link_sentence": null,
+   "link_note": null
   }
  ],
  "plain_tiers": {
@@ -401,15 +403,15 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release not yet reviewed"
  },
- "summary": "House: a line through fixed points (piecewise linear), read against FSim conditional flame-length class state; how damage rises is borrowed, how it becomes dollars our judgment.",
+ "summary": "House: a line through fixed points (piecewise linear), read against FSim conditional flame-length class state; damage at each hazard level is borrowed, the dollar value it is applied to our judgment.",
  "rail_plain": {
   "exists": {
-   "words": "Proposal · not in the runtime index yet",
+   "words": "Proposal · built, not in use yet",
    "code": "PROPOSAL · screening"
   },
   "evidence": {
    "words": "Evidence: our judgment",
-   "code": "How damage rises: borrowed · how it becomes dollars: our judgment",
+   "code": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
    "tiers": [
     "T4"
    ],
@@ -425,5 +427,247 @@
   }
  },
  "versions": [],
- "data_path": "curves/wildfire_real_estate/WFRE_RES_WRC_SHRUB@model_v0_1__docs_r1.json"
+ "data_path": "curves/wildfire_real_estate/WFRE_RES_WRC_SHRUB@model_v0_1__docs_r1.json",
+ "construction_sources": [
+  {
+   "id": "WFRE-S001",
+   "aliases": [],
+   "citation": "Dillon, G.K.; Scott, J.H.; Jaffe, M.R.; et al. 2024. Wildfire Risk to Communities: Spatial datasets of landscape-wide wildfire risk components for the United States. 2nd Edition. Fort Collins, CO: Forest Service Research Data Archive. doi:10.2737/RDS-2020-0016-2 (metadata record).",
+   "url": "https://www.fs.usda.gov/rds/archive/products/RDS-2020-0016-2/_metadata_RDS-2020-0016-2.html",
+   "locator": "Process_Step 5 (cRPS: 'one of three response functions representing the relative effect of wildfire on structures (i.e., relative degree of damage or loss)'; 'essentially conditional Net Value Change ... if each pixel were to have a house'; values 25/40/55/70/85/100 tree, 20/35/50/65/80/95 shrub, 10/25/40/55/70/85 grass for FLP1-FLP6; 'A value of 0 means no damage to a structure, and a value of -100 means complete loss'; lifeform from LANDFIRE EVT); Process_Steps 2, 6, 7 (BP oozed into developed areas; FLEP4/FLEP8 as sums of FLP classes above 4 and 8 ft); Logical_Consistency_Report (cRPS 0-100)",
+   "role": "curve_data_carrier;method_definition",
+   "tier": "T3",
+   "permitted": "Use the shrub response values as the house's expected loss per flame-length class; use tree and grass as sensitivity.",
+   "prohibited": "Read the values as measured or claims-calibrated repair costs; apply them to non-residential buildings without a transfer step; treat the lifeform split as observed.",
+   "decision": "adopt_with_limits",
+   "accessed_on": "2026-10-18",
+   "provenance": "register",
+   "doi": "10.2737/RDS-2020-0016-2",
+   "link": "https://www.fs.usda.gov/rds/archive/products/RDS-2020-0016-2/_metadata_RDS-2020-0016-2.html",
+   "link_kind": "url",
+   "title": "Dillon, G.K.; Scott, J.H.; Jaffe, M.R.; et al. 2024",
+   "no_link_sentence": null,
+   "link_note": null
+  }
+ ],
+ "construction": {
+  "curve_type": "piecewise linear",
+  "curve_form": "piecewise_linear",
+  "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+  "formula_source": "scripts/reference_helpers/damage_curve_eval.py",
+  "variables": [
+   {
+    "symbol": "D(x)",
+    "meaning": "damage ratio at intensity x",
+    "parameter": null
+   },
+   {
+    "symbol": "(x_i, D_i)",
+    "meaning": "the listed points: intensity and damage ratio",
+    "parameter": "points"
+   },
+   {
+    "symbol": "O",
+    "meaning": "onset: the last intensity with zero damage before damage starts (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "F",
+    "meaning": "full: the first intensity at which damage reaches its highest value (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "D_max",
+    "meaning": "the highest damage ratio among the points",
+    "parameter": null
+   }
+  ],
+  "marks": {
+   "O": 0.0,
+   "F": 6.0,
+   "D_max": 0.95,
+   "O_note": null
+  },
+  "unkeyed_parameters": [],
+  "curve_tiers": {
+   "shape": {
+    "tier": "T3",
+    "word": "borrowed"
+   },
+   "cost": {
+    "tier": "T4",
+    "word": "our judgment"
+   }
+  },
+  "axis": {
+   "id": "FSIM_CONDITIONAL_FLAME_LENGTH_CLASS_STATE_SCREENING",
+   "label": "FSim conditional flame-length class state",
+   "unit": "class",
+   "input_field": "conditional_flame_length_class_state",
+   "valid_range": [
+    0,
+    6
+   ],
+   "kind": "categorical",
+   "label_from_id": true
+  },
+  "parameters": [
+   {
+    "name": "points",
+    "definition": "the listed points: intensity and damage ratio",
+    "value": [
+     [
+      0,
+      0.0
+     ],
+     [
+      1,
+      0.2
+     ],
+     [
+      2,
+      0.35
+     ],
+     [
+      3,
+      0.5
+     ],
+     [
+      4,
+      0.65
+     ],
+     [
+      5,
+      0.8
+     ],
+     [
+      6,
+      0.95
+     ]
+    ],
+    "value_path": "docs/cells/wildfire_real_estate/proposed/wildfire_real_estate__model_v0_1__docs_r1__curve_artifact.json::curve_id=WFRE_RES_WRC_SHRUB::parameters.points",
+    "tier": null,
+    "tier_word": null,
+    "reasoning": [],
+    "source_ids": [
+     "WFRE-S001"
+    ],
+    "sources": [
+     {
+      "id": "WFRE-S001",
+      "aliases": [],
+      "citation": "Dillon, G.K.; Scott, J.H.; Jaffe, M.R.; et al. 2024. Wildfire Risk to Communities: Spatial datasets of landscape-wide wildfire risk components for the United States. 2nd Edition. Fort Collins, CO: Forest Service Research Data Archive. doi:10.2737/RDS-2020-0016-2 (metadata record).",
+      "url": "https://www.fs.usda.gov/rds/archive/products/RDS-2020-0016-2/_metadata_RDS-2020-0016-2.html",
+      "locator": "Process_Step 5 (cRPS: 'one of three response functions representing the relative effect of wildfire on structures (i.e., relative degree of damage or loss)'; 'essentially conditional Net Value Change ... if each pixel were to have a house'; values 25/40/55/70/85/100 tree, 20/35/50/65/80/95 shrub, 10/25/40/55/70/85 grass for FLP1-FLP6; 'A value of 0 means no damage to a structure, and a value of -100 means complete loss'; lifeform from LANDFIRE EVT); Process_Steps 2, 6, 7 (BP oozed into developed areas; FLEP4/FLEP8 as sums of FLP classes above 4 and 8 ft); Logical_Consistency_Report (cRPS 0-100)",
+      "role": "curve_data_carrier;method_definition",
+      "tier": "T3",
+      "permitted": "Use the shrub response values as the house's expected loss per flame-length class; use tree and grass as sensitivity.",
+      "prohibited": "Read the values as measured or claims-calibrated repair costs; apply them to non-residential buildings without a transfer step; treat the lifeform split as observed.",
+      "decision": "adopt_with_limits",
+      "accessed_on": "2026-10-18",
+      "provenance": "register",
+      "doi": "10.2737/RDS-2020-0016-2",
+      "link": "https://www.fs.usda.gov/rds/archive/products/RDS-2020-0016-2/_metadata_RDS-2020-0016-2.html",
+      "link_kind": "url",
+      "title": "Dillon, G.K.; Scott, J.H.; Jaffe, M.R.; et al. 2024",
+      "no_link_sentence": null,
+      "link_note": null
+     }
+    ],
+    "unresolved_source_ids": [],
+    "register_rows": [],
+    "source_scope": "curve",
+    "where_from": "curve_level",
+    "files": []
+   }
+  ],
+  "additional_parameter_rows": [
+   {
+    "id": "house_response",
+    "name": "house_response",
+    "value": "0.20/0.35/0.50/0.65/0.80/0.95 for states 1-6",
+    "tier": "T3",
+    "source_ids": [
+     "WFRE-S001"
+    ],
+    "claim_ids": [],
+    "curve_id": "WFRE_RES_WRC_SHRUB",
+    "pathway_id": "wildfire_building_exposure",
+    "role": "curve_ordinate",
+    "status": "proposed",
+    "reasoning": "USFS response for a home, shrub (WFRE-C001 to C003); level consistent with DINS (WFRE-C008).",
+    "update_trigger": "Revised WRC response; flame-intensity-stratified loss data."
+   }
+  ],
+  "sources": [
+   {
+    "id": "WFRE-S001",
+    "aliases": [],
+    "citation": "Dillon, G.K.; Scott, J.H.; Jaffe, M.R.; et al. 2024. Wildfire Risk to Communities: Spatial datasets of landscape-wide wildfire risk components for the United States. 2nd Edition. Fort Collins, CO: Forest Service Research Data Archive. doi:10.2737/RDS-2020-0016-2 (metadata record).",
+    "url": "https://www.fs.usda.gov/rds/archive/products/RDS-2020-0016-2/_metadata_RDS-2020-0016-2.html",
+    "locator": "Process_Step 5 (cRPS: 'one of three response functions representing the relative effect of wildfire on structures (i.e., relative degree of damage or loss)'; 'essentially conditional Net Value Change ... if each pixel were to have a house'; values 25/40/55/70/85/100 tree, 20/35/50/65/80/95 shrub, 10/25/40/55/70/85 grass for FLP1-FLP6; 'A value of 0 means no damage to a structure, and a value of -100 means complete loss'; lifeform from LANDFIRE EVT); Process_Steps 2, 6, 7 (BP oozed into developed areas; FLEP4/FLEP8 as sums of FLP classes above 4 and 8 ft); Logical_Consistency_Report (cRPS 0-100)",
+    "role": "curve_data_carrier;method_definition",
+    "tier": "T3",
+    "permitted": "Use the shrub response values as the house's expected loss per flame-length class; use tree and grass as sensitivity.",
+    "prohibited": "Read the values as measured or claims-calibrated repair costs; apply them to non-residential buildings without a transfer step; treat the lifeform split as observed.",
+    "decision": "adopt_with_limits",
+    "accessed_on": "2026-10-18",
+    "provenance": "register",
+    "doi": "10.2737/RDS-2020-0016-2",
+    "link": "https://www.fs.usda.gov/rds/archive/products/RDS-2020-0016-2/_metadata_RDS-2020-0016-2.html",
+    "link_kind": "url",
+    "title": "Dillon, G.K.; Scott, J.H.; Jaffe, M.R.; et al. 2024",
+    "no_link_sentence": null,
+    "link_note": null
+   }
+  ],
+  "source_ids": [
+   "WFRE-S001"
+  ],
+  "artifact": "docs/cells/wildfire_real_estate/proposed/wildfire_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+  "evaluator": {
+   "module": "scripts/reference_helpers/wildfire_real_estate_curve_eval.py",
+   "function": "evaluate_damage_call",
+   "note": "request template from the cell's known-answer tests; the hazard axis field varied over the record's valid range"
+  },
+  "constructing_files": [
+   {
+    "role": "write-up",
+    "path": "docs/cells/wildfire_real_estate/proposed/wildfire_real_estate_curve_derivation_dossier__model_v0_1__docs_r1.md"
+   },
+   {
+    "role": "build script",
+    "path": "scripts/reference_helpers/build_wildfire_real_estate_v0_1_package.py"
+   },
+   {
+    "role": "decision record",
+    "path": "docs/cells/wildfire_real_estate/proposed/DECISION_LOG_wildfire_real_estate__model_v0_1__docs_r1.md"
+   }
+  ],
+  "scope_note": null,
+  "production_use": {
+   "state": "not_runtime_indexed",
+   "consumer_pin": null,
+   "hazard": {
+    "state": "differs",
+    "sentences": [
+     "Hazard's dashboard layers Warehouse · Wildfire, Office · Wildfire, Detached house · Wildfire use model v1.0, docs r1; this page shows model v0.1, docs r1. Its 3 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+     "How this is known: the layer's own record names the artifact.",
+     "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+    ],
+    "differences": [
+     "Hazard's dashboard layers Warehouse · Wildfire, Office · Wildfire, Detached house · Wildfire use model v1.0, docs r1; this page shows model v0.1, docs r1. Its 3 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+    ],
+    "values": [],
+    "value_mismatches": [],
+    "newer": {
+     "model": "model v1.0",
+     "docs": "docs r1",
+     "shown": "model v0.1",
+     "words": "Hazard's dashboard layers Warehouse · Wildfire, Office · Wildfire, Detached house · Wildfire use model v1.0, docs r1; this page shows model v0.1, docs r1. Its 3 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+    }
+   },
+   "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+  }
+ }
 }

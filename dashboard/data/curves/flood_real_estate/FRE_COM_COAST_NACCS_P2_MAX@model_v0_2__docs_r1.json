@@ -1001,15 +1001,15 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release not yet reviewed"
  },
- "summary": "Retail: a line through fixed points (piecewise linear), read against water depth above the first floor; how damage rises is published, how it becomes dollars published.",
+ "summary": "Retail: a line through fixed points (piecewise linear), read against water depth above the first floor; damage at each hazard level is published, the dollar value it is applied to published.",
  "rail_plain": {
   "exists": {
-   "words": "Proposal · not in the runtime index yet",
+   "words": "Proposal · built, not in use yet",
    "code": "PROPOSAL · screening"
   },
   "evidence": {
    "words": "Evidence: published",
-   "code": "How damage rises: published · how it becomes dollars: published",
+   "code": "Damage at each hazard level: published · the dollar value it is applied to: published",
    "tiers": [
     "T2"
    ],
@@ -1025,5 +1025,372 @@
   }
  },
  "versions": [],
- "data_path": "curves/flood_real_estate/FRE_COM_COAST_NACCS_P2_MAX@model_v0_2__docs_r1.json"
+ "data_path": "curves/flood_real_estate/FRE_COM_COAST_NACCS_P2_MAX@model_v0_2__docs_r1.json",
+ "construction_sources": [
+  {
+   "text": "FEMA, Hazus Flood Model Technical Manual 7.0 (2025), Table 5-2",
+   "ids": [
+    "FRE-S002"
+   ],
+   "title": "FEMA. Hazus Flood Model Technical Manual, Hazus 7.0 (June 2025), Table 5-2 Default Damage Functions for…",
+   "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+   "link_kind": "url",
+   "locator": "Hazus 7.0 Table 5-2 pp. 5-3 to 5-6; Table 5-3 pp. 5-7 to 5-8 incl. note; Table 5-4 pp. 5-8 to 5-9 incl. notes; section 5.4.1.1.2.1 p. 5-10. Same Table 5-2 rows in Hazus 5.1 (pp. 5-4 to 5-5) and 6.1.",
+   "no_link_sentence": null,
+   "source_id": "FRE-S002"
+  },
+  {
+   "text": "FEMA Hazus 6.1 flood damage-function extract",
+   "ids": [
+    "FRE-S010"
+   ],
+   "title": "FEMA Hazus team. Hazus 6.1 flood damage-function extract, HazusFloodDamageFunctions_Hazus61.xlsx…",
+   "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusFloodDamageFunctions_Hazus61.xlsx",
+   "link_kind": "url",
+   "locator": "sheets flBldgStrucDmgFn (892 structure curves, IDs 105-999) and flBldgStructDmgFinal (default curve per occupancy-stories-basement for riverine, coastal A, coastal V)",
+   "no_link_sentence": null,
+   "source_id": "FRE-S010"
+  },
+  {
+   "text": "USACE, North Atlantic Coast Comprehensive Study (2015), depth-damage functions",
+   "ids": [
+    "FRE-S004"
+   ],
+   "title": "U.S. Army Corps of Engineers (2015)",
+   "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+   "link_kind": "url",
+   "locator": "Table 24 + Table 25 (pp. 61-62, Prototype 2 Commercial Engineered); Table 34 + Table 35 (pp. 67-68, Prototype 3 Commercial Non/Pre-Engineered); Table 55 + Table 56 (pp. 80-82, Prototype 5A Single-Story Residence No Basement); verification note pp. 80-81",
+   "no_link_sentence": null,
+   "source_id": "FRE-S004"
+  },
+  {
+   "text": "FEMA OpenFEMA NFIP redacted claims, v3 (check only)",
+   "ids": [
+    "FRE-S012"
+   ],
+   "title": "FEMA. OpenFEMA FIMA NFIP Redacted Claims, dataset NfipClaims version 3 (API).",
+   "link": "https://www.fema.gov/api/open/v3/NfipClaims",
+   "link_kind": "url",
+   "locator": "Three filtered pulls (one-floor slab buildings with exterior water depth > 0): single-family with damage (95,435), non-residential with damage (10,180), single-family with zero damage (1,006). Filters, record counts and sha256 of the cached pulls in NFIP_CLAIMS_PULL_MANIFEST_flood_real_estate__model_v0_1__docs_r1.json",
+   "no_link_sentence": null,
+   "source_id": "FRE-S012"
+  },
+  {
+   "text": "Hazard reference profiles r1",
+   "ids": [
+    "FRE-S013"
+   ],
+   "title": "Hazard_Modeling. Real-estate reference profiles r1 (reference_candidates.yml and generated profile views),…",
+   "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+   "link_kind": "url",
+   "locator": "commit 8b0d61c88fbcf85daa1c098516cee22398cdb524; reference_candidates.yml git blob a74fb72b0a2edce593b5505e0fd8852f4c0253f8; profiles re_house_1s_wood_slab, re_warehouse_1s_steel_slab, re_office_3s_slab",
+   "no_link_sentence": null,
+   "source_id": "FRE-S013"
+  }
+ ],
+ "construction": {
+  "curve_type": "piecewise linear",
+  "curve_form": "piecewise_linear",
+  "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+  "formula_source": "scripts/reference_helpers/damage_curve_eval.py",
+  "variables": [
+   {
+    "symbol": "D(x)",
+    "meaning": "damage ratio at intensity x",
+    "parameter": null
+   },
+   {
+    "symbol": "(x_i, D_i)",
+    "meaning": "the listed points: intensity and damage ratio",
+    "parameter": "points"
+   },
+   {
+    "symbol": "O",
+    "meaning": "onset: the last intensity with zero damage before damage starts (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "F",
+    "meaning": "full: the first intensity at which damage reaches its highest value (read from the points)",
+    "parameter": null
+   },
+   {
+    "symbol": "D_max",
+    "meaning": "the highest damage ratio among the points",
+    "parameter": null
+   }
+  ],
+  "marks": {
+   "O": -0.5,
+   "F": 10.0,
+   "D_max": 0.69,
+   "O_note": null
+  },
+  "unkeyed_parameters": [],
+  "curve_tiers": {
+   "shape": {
+    "tier": "T2",
+    "word": "published"
+   },
+   "cost": {
+    "tier": "T2",
+    "word": "published"
+   }
+  },
+  "axis": {
+   "id": "FLOOD_DEPTH_ABOVE_FIRST_FINISHED_FLOOR_FT",
+   "label": "water depth above the first floor",
+   "unit": "ft",
+   "input_field": "flood_depth_above_first_floor_ft",
+   "valid_range": [
+    -4.0,
+    24.0
+   ],
+   "kind": "continuous",
+   "label_from_id": true
+  },
+  "parameters": [
+   {
+    "name": "points",
+    "definition": "the listed points: intensity and damage ratio",
+    "value": [
+     [
+      -1.0,
+      0.0
+     ],
+     [
+      -0.5,
+      0.0
+     ],
+     [
+      0.0,
+      0.09
+     ],
+     [
+      0.5,
+      0.17
+     ],
+     [
+      1.0,
+      0.27
+     ],
+     [
+      2.0,
+      0.36
+     ],
+     [
+      3.0,
+      0.43
+     ],
+     [
+      5.0,
+      0.48
+     ],
+     [
+      7.0,
+      0.6
+     ],
+     [
+      10.0,
+      0.69
+     ]
+    ],
+    "value_path": "docs/cells/flood_real_estate/proposed/flood_real_estate__model_v0_2__docs_r1__curve_artifact.json::curve_id=FRE_COM_COAST_NACCS_P2_MAX::parameters.points",
+    "tier": null,
+    "tier_word": null,
+    "reasoning": [],
+    "source_ids": [
+     "FRE-S002",
+     "FRE-S010",
+     "FRE-S004",
+     "FRE-S012",
+     "FRE-S013"
+    ],
+    "sources": [
+     {
+      "text": "FEMA, Hazus Flood Model Technical Manual 7.0 (2025), Table 5-2",
+      "ids": [
+       "FRE-S002"
+      ],
+      "title": "FEMA. Hazus Flood Model Technical Manual, Hazus 7.0 (June 2025), Table 5-2 Default Damage Functions for…",
+      "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+      "link_kind": "url",
+      "locator": "Hazus 7.0 Table 5-2 pp. 5-3 to 5-6; Table 5-3 pp. 5-7 to 5-8 incl. note; Table 5-4 pp. 5-8 to 5-9 incl. notes; section 5.4.1.1.2.1 p. 5-10. Same Table 5-2 rows in Hazus 5.1 (pp. 5-4 to 5-5) and 6.1.",
+      "no_link_sentence": null,
+      "source_id": "FRE-S002"
+     },
+     {
+      "text": "FEMA Hazus 6.1 flood damage-function extract",
+      "ids": [
+       "FRE-S010"
+      ],
+      "title": "FEMA Hazus team. Hazus 6.1 flood damage-function extract, HazusFloodDamageFunctions_Hazus61.xlsx…",
+      "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusFloodDamageFunctions_Hazus61.xlsx",
+      "link_kind": "url",
+      "locator": "sheets flBldgStrucDmgFn (892 structure curves, IDs 105-999) and flBldgStructDmgFinal (default curve per occupancy-stories-basement for riverine, coastal A, coastal V)",
+      "no_link_sentence": null,
+      "source_id": "FRE-S010"
+     },
+     {
+      "text": "USACE, North Atlantic Coast Comprehensive Study (2015), depth-damage functions",
+      "ids": [
+       "FRE-S004"
+      ],
+      "title": "U.S. Army Corps of Engineers (2015)",
+      "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+      "link_kind": "url",
+      "locator": "Table 24 + Table 25 (pp. 61-62, Prototype 2 Commercial Engineered); Table 34 + Table 35 (pp. 67-68, Prototype 3 Commercial Non/Pre-Engineered); Table 55 + Table 56 (pp. 80-82, Prototype 5A Single-Story Residence No Basement); verification note pp. 80-81",
+      "no_link_sentence": null,
+      "source_id": "FRE-S004"
+     },
+     {
+      "text": "FEMA OpenFEMA NFIP redacted claims, v3 (check only)",
+      "ids": [
+       "FRE-S012"
+      ],
+      "title": "FEMA. OpenFEMA FIMA NFIP Redacted Claims, dataset NfipClaims version 3 (API).",
+      "link": "https://www.fema.gov/api/open/v3/NfipClaims",
+      "link_kind": "url",
+      "locator": "Three filtered pulls (one-floor slab buildings with exterior water depth > 0): single-family with damage (95,435), non-residential with damage (10,180), single-family with zero damage (1,006). Filters, record counts and sha256 of the cached pulls in NFIP_CLAIMS_PULL_MANIFEST_flood_real_estate__model_v0_1__docs_r1.json",
+      "no_link_sentence": null,
+      "source_id": "FRE-S012"
+     },
+     {
+      "text": "Hazard reference profiles r1",
+      "ids": [
+       "FRE-S013"
+      ],
+      "title": "Hazard_Modeling. Real-estate reference profiles r1 (reference_candidates.yml and generated profile views),…",
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+      "link_kind": "url",
+      "locator": "commit 8b0d61c88fbcf85daa1c098516cee22398cdb524; reference_candidates.yml git blob a74fb72b0a2edce593b5505e0fd8852f4c0253f8; profiles re_house_1s_wood_slab, re_warehouse_1s_steel_slab, re_office_3s_slab",
+      "no_link_sentence": null,
+      "source_id": "FRE-S013"
+     }
+    ],
+    "unresolved_source_ids": [],
+    "register_rows": [],
+    "source_scope": "curve",
+    "where_from": "curve_level",
+    "files": []
+   }
+  ],
+  "additional_parameter_rows": [],
+  "sources": [
+   {
+    "text": "FEMA, Hazus Flood Model Technical Manual 7.0 (2025), Table 5-2",
+    "ids": [
+     "FRE-S002"
+    ],
+    "title": "FEMA. Hazus Flood Model Technical Manual, Hazus 7.0 (June 2025), Table 5-2 Default Damage Functions for…",
+    "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-fltm_06272025_0.pdf",
+    "link_kind": "url",
+    "locator": "Hazus 7.0 Table 5-2 pp. 5-3 to 5-6; Table 5-3 pp. 5-7 to 5-8 incl. note; Table 5-4 pp. 5-8 to 5-9 incl. notes; section 5.4.1.1.2.1 p. 5-10. Same Table 5-2 rows in Hazus 5.1 (pp. 5-4 to 5-5) and 6.1.",
+    "no_link_sentence": null,
+    "source_id": "FRE-S002"
+   },
+   {
+    "text": "FEMA Hazus 6.1 flood damage-function extract",
+    "ids": [
+     "FRE-S010"
+    ],
+    "title": "FEMA Hazus team. Hazus 6.1 flood damage-function extract, HazusFloodDamageFunctions_Hazus61.xlsx…",
+    "link": "https://os-climate-physical-risk.s3.amazonaws.com/vulnerability/HazusFloodDamageFunctions_Hazus61.xlsx",
+    "link_kind": "url",
+    "locator": "sheets flBldgStrucDmgFn (892 structure curves, IDs 105-999) and flBldgStructDmgFinal (default curve per occupancy-stories-basement for riverine, coastal A, coastal V)",
+    "no_link_sentence": null,
+    "source_id": "FRE-S010"
+   },
+   {
+    "text": "USACE, North Atlantic Coast Comprehensive Study (2015), depth-damage functions",
+    "ids": [
+     "FRE-S004"
+    ],
+    "title": "U.S. Army Corps of Engineers (2015)",
+    "link": "https://www.nad.usace.army.mil/Portals/40/docs/NACCS/10A_PhysicalDepthDmgFxSummary_26Jan2015.pdf",
+    "link_kind": "url",
+    "locator": "Table 24 + Table 25 (pp. 61-62, Prototype 2 Commercial Engineered); Table 34 + Table 35 (pp. 67-68, Prototype 3 Commercial Non/Pre-Engineered); Table 55 + Table 56 (pp. 80-82, Prototype 5A Single-Story Residence No Basement); verification note pp. 80-81",
+    "no_link_sentence": null,
+    "source_id": "FRE-S004"
+   },
+   {
+    "text": "FEMA OpenFEMA NFIP redacted claims, v3 (check only)",
+    "ids": [
+     "FRE-S012"
+    ],
+    "title": "FEMA. OpenFEMA FIMA NFIP Redacted Claims, dataset NfipClaims version 3 (API).",
+    "link": "https://www.fema.gov/api/open/v3/NfipClaims",
+    "link_kind": "url",
+    "locator": "Three filtered pulls (one-floor slab buildings with exterior water depth > 0): single-family with damage (95,435), non-residential with damage (10,180), single-family with zero damage (1,006). Filters, record counts and sha256 of the cached pulls in NFIP_CLAIMS_PULL_MANIFEST_flood_real_estate__model_v0_1__docs_r1.json",
+    "no_link_sentence": null,
+    "source_id": "FRE-S012"
+   },
+   {
+    "text": "Hazard reference profiles r1",
+    "ids": [
+     "FRE-S013"
+    ],
+    "title": "Hazard_Modeling. Real-estate reference profiles r1 (reference_candidates.yml and generated profile views),…",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "link_kind": "url",
+    "locator": "commit 8b0d61c88fbcf85daa1c098516cee22398cdb524; reference_candidates.yml git blob a74fb72b0a2edce593b5505e0fd8852f4c0253f8; profiles re_house_1s_wood_slab, re_warehouse_1s_steel_slab, re_office_3s_slab",
+    "no_link_sentence": null,
+    "source_id": "FRE-S013"
+   }
+  ],
+  "source_ids": [
+   "FRE-S002",
+   "FRE-S010",
+   "FRE-S004",
+   "FRE-S012",
+   "FRE-S013"
+  ],
+  "artifact": "docs/cells/flood_real_estate/proposed/flood_real_estate__model_v0_2__docs_r1__curve_artifact.json",
+  "evaluator": {
+   "module": "scripts/reference_helpers/damage_curve_eval.py",
+   "function": "evaluate_curve_record",
+   "note": "generic piecewise-linear evaluator; sampled inside the record's valid range"
+  },
+  "constructing_files": [
+   {
+    "role": "write-up",
+    "path": "docs/cells/flood_real_estate/proposed/flood_real_estate_curve_derivation_dossier__model_v0_2__docs_r1.md"
+   },
+   {
+    "role": "build script",
+    "path": "scripts/reference_helpers/build_flood_real_estate_v0_2_package.py"
+   },
+   {
+    "role": "decision record",
+    "path": "docs/cells/flood_real_estate/proposed/DECISION_LOG_flood_real_estate__model_v0_1__docs_r1.md"
+   }
+  ],
+  "scope_note": null,
+  "production_use": {
+   "state": "not_runtime_indexed",
+   "consumer_pin": null,
+   "hazard": {
+    "state": "differs",
+    "sentences": [
+     "Hazard's dashboard layers Warehouse · Flood, Office · Flood, Detached house · Flood use model v1.0, docs r1; this page shows model v0.2, docs r1. 1 of the 7 curves shown here is identical; Hazard's version drops 6 curves shown here (FRE_RES_HAZUS_DF129, FRE_COM_FRESH_HAZUS_DF217, FRE_COM_COAST_NACCS_P2, FRE_COM_COAST_NACCS_P2_MIN). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main.",
+     "Hazard's dashboard layers Warehouse · Flood, Office · Flood, Detached house · Flood use model v1.1, docs r1; this page shows model v0.2, docs r1. 3 of the 7 curves shown here are identical; Hazard's version drops 4 curves shown here (FRE_COM_FRESH_HAZUS_DF217, FRE_COM_COAST_NACCS_P2, FRE_COM_COAST_NACCS_P2_MIN, FRE_COM_COAST_NACCS_P2_MAX). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main.",
+     "How this is known: the layer's own record names the artifact.",
+     "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+    ],
+    "differences": [
+     "Hazard's dashboard layers Warehouse · Flood, Office · Flood, Detached house · Flood use model v1.0, docs r1; this page shows model v0.2, docs r1. 1 of the 7 curves shown here is identical; Hazard's version drops 6 curves shown here (FRE_RES_HAZUS_DF129, FRE_COM_FRESH_HAZUS_DF217, FRE_COM_COAST_NACCS_P2, FRE_COM_COAST_NACCS_P2_MIN). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main.",
+     "Hazard's dashboard layers Warehouse · Flood, Office · Flood, Detached house · Flood use model v1.1, docs r1; this page shows model v0.2, docs r1. 3 of the 7 curves shown here are identical; Hazard's version drops 4 curves shown here (FRE_COM_FRESH_HAZUS_DF217, FRE_COM_COAST_NACCS_P2, FRE_COM_COAST_NACCS_P2_MIN, FRE_COM_COAST_NACCS_P2_MAX). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main."
+    ],
+    "values": [],
+    "value_mismatches": [],
+    "newer": {
+     "model": "model v1.1",
+     "docs": "docs r1",
+     "shown": "model v0.2",
+     "words": "Hazard's dashboard layers Warehouse · Flood, Office · Flood, Detached house · Flood use model v1.1, docs r1; this page shows model v0.2, docs r1. 3 of the 7 curves shown here are identical; Hazard's version drops 4 curves shown here (FRE_COM_FRESH_HAZUS_DF217, FRE_COM_COAST_NACCS_P2, FRE_COM_COAST_NACCS_P2_MIN, FRE_COM_COAST_NACCS_P2_MAX). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main."
+    }
+   },
+   "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+  }
+ }
 }

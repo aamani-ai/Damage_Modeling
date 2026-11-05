@@ -770,6 +770,13 @@ def build_workbook(
 def main() -> int:
     artifact, capability, new_records = build_artifact()
     sources = v20_builder.consolidated_sources()
+    for source in sources:
+        if source["source_id"] == "TCWS-S013":
+            source["notes"] = (
+                "Reference-value evidence only. Legacy alias: TCWS2-S013. The exact parent-ledger alias is "
+                "value_source_id NLR_Q1_2025_UPV_PV_ONLY_2024_USD; that ledger governs rows, units, vintage, "
+                "and support allocation."
+            )
     claims = v21_claims()
     parameters = v21_parameter_rows(
         [*artifact["pathways"][0]["curve_records"][1:5], *new_records]

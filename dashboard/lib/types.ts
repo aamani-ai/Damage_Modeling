@@ -41,6 +41,8 @@ export interface Tile {
   entry_id: string; kind: string; status: Status; title: string; asset: Slug; hazard: Slug;
   exists: Rail["exists"]; partial: boolean; tiers: Rail["evidence"]; occurrence: { mark: string; label: string };
   review: Review; identity: Identity; summary: string; no_evaluator: boolean; share_covered: number | null;
+  /** of the profile's value budget: what the curves price, partly price, judge not damaged, and leave unpriced; or why not */
+  value_split?: ValueSplit | null;
   n_curves: number; n_drawn: number; outside_checks: number; chain_core_as_files: number; generation: string;
   aria_label: string; href: string;
   /** G16: the one word a tile carries (the weaker half's), and both halves in words for its tooltip */
@@ -50,7 +52,7 @@ export interface Tile {
 export interface BuildCheck { id: string; name: string; ok: boolean; severity: "hard" | "data"; summary: string }
 
 export interface Manifest {
-  commit: string; commit_full: string;
+  commit: string; commit_full: string; link_commit: string; link_note: string | null; scope_line?: string;
   counts: Record<string, number>; summary: string;
   assets: (Slug & { n_entries: number })[]; hazards: Hazard[]; entries: Tile[];
   codes: Record<string, { entry_id: string; version_key: string | null; status: Status; sha256: string | null; model: string | null; docs: string | null }[]>;
@@ -68,6 +70,7 @@ export interface FileRef { path: string; sha256: string | null; note?: string; p
 export interface Station {
   id: string; label: string; full_label?: string; gate: string; state: StationState; files: FileRef[];
   evidence: { kind: string; file: FileRef; matched: string[] }[]; fact: string; absent_sentence: string | null;
+  earlier?: { path: string; model: string }[];
 }
 export interface GateItem { item: string; status: "proven" | "human" | "n/a"; basis: string | null }
 export interface Chain {
@@ -88,6 +91,66 @@ export interface Part {
   occurrence: { mark: string; state: string; sentence: string } | null; drawn: boolean;
 }
 
+export type ProductionState = "runtime_indexed" | "reused_binding" | "not_runtime_indexed";
+export type WhereFrom = "published" | "borrowed" | "our_judgment" | "curve_level" | "unsourced";
+export interface ConstructionFile { role: string; path: string }
+export interface ScopeNote { note: string; basis: string }
+export type ConstructionSource = SourceLink & { id?: string; source_id?: string; citation?: string | null; repo_path?: string };
+
+export interface ConstructionParameter {
+  name: string; definition: string; value: unknown; value_path: string | null; tier: string | null; tier_word: string | null; reasoning: string[];
+  source_ids: string[]; sources: ConstructionSource[]; unresolved_source_ids: string[]; register_rows: string[]; source_scope: "parameter" | "curve";
+  where_from: WhereFrom; files: ConstructionFile[];
+}
+
+export interface CurveConstruction {
+  curve_type: string; curve_form: string | null; formula: string | null; formula_source: string | null;
+  variables: { symbol: string; meaning: string; parameter: string | null }[];
+  marks: { O: number | null; F: number | null; D_max: number; O_note: string | null } | null; unkeyed_parameters: string[];
+  curve_tiers: Record<"shape" | "cost", { tier: string | null; word: string }>;
+  axis: Axis | null; parameters: ConstructionParameter[];
+  additional_parameter_rows: Record<string, unknown>[]; sources: ConstructionSource[]; source_ids: string[];
+  artifact: string | null; evaluator: Record<string, unknown> | null; constructing_files: ConstructionFile[]; scope_note: ScopeNote | null;
+  production_use: { state: ProductionState; consumer_pin: string | null; sentence: string; hazard?: HazardUse | null };
+}
+
+export interface SubcomponentConstructionRef {
+  curve_id: string; data_path: string | null; curve_type: string; curve_form: string | null; formula: string | null; artifact: string | null;
+  parameter_count: number; source_ids: string[]; entry_id: string; part: string | null; scope_note: ScopeNote | null;
+  production_use: { state: ProductionState; consumer_pin: string | null; sentence: string; hazard?: HazardUse | null };
+}
+
+export interface LegendItem { key: string; word: string; meaning: string }
+// what Hazard pins for a cell, against the artifact the page shows (hazard_use.py)
+export type HazardUseState = "used" | "differs" | "not_on" | "unchecked";
+export interface HazardUse { state: HazardUseState; sentences: string[]; newer: { model: string; docs: string; shown: string | null; words: string } | null }
+export interface Legend {
+  source: string; status: LegendItem[]; coverage: LegendItem[]; completeness: LegendItem[]; evidence: LegendItem[]; production: LegendItem[]; hazard_use: LegendItem[]; units: LegendItem[]; units_source: string; lenses: LegendItem[]; marks: LegendItem[]; value?: LegendItem[];
+  where_from: Record<WhereFrom, string>;
+}
+
+export interface Subcomponent {
+  key: string; label: string; asset: Slug; hazard: Hazard; entry_id: string | null; catalogue_status: Status | "missing";
+  cell_state: string; coverage: "curve" | "gap"; completeness: "complete" | "incomplete"; curve_ids: string[]; failure_unit_ids: string[];
+  tier_span: string; evidence_labels: ("field-calibrated" | "published" | "borrowed" | "our judgment")[]; evidence_words: string;
+  construction: SubcomponentConstructionRef[];
+  production_use: { state: ProductionState; consumer_pin: string | null; hazard?: HazardUseState | null };
+  borrowed_from: { entry_id: string | null; title: string | null; curves: string[]; rationale: string | null; tier: string | null; tier_word: string | null } | null;
+  scope_notes: ScopeNote[];
+  // the row's value share and its basis; real estate also: the building a row belongs to and what the row means
+  group?: { key: string; label: string }; share?: number | null; share_basis?: string | null; note?: string | null;
+  gap: {
+    reason: string; own_words?: string | null; no_direct_damage?: boolean; source?: { label: string; path: string } | null;
+    research?: { title: string; finding: string; link: string | null; where: string; repo: string; path: string }[]; occurrence: OccurrenceBucket | null; effect: string; basis: { label: string; path: string }[];
+    register: { path: string; sha256: string; search_log: string | null; last_searched: string | null; question: string | null } | null;
+  } | null;
+}
+
+export interface SubcomponentRollup {
+  expected: number; with_curve: number; gap: number; complete: number; incomplete: number;
+  evidence_labels: Record<string, number>; by_hazard?: Record<string, SubcomponentRollup>;
+}
+
 export interface OccurrenceBucket {
   bucket: string; label?: string; state: string; mark: string; sentence: string; reports: Record<string, unknown>[];
   twin_lead: { level: string | null; nodes: { node: string; name: string; level: number; why: string }[] } | null;
@@ -101,7 +164,7 @@ export interface Cell {
     axis_groups: { axis: Axis; curve_ids: string[] }[]; curve_ids: string[]; input: string | null;
     how_to_use: { share_of?: string; outputs?: Record<string, string>; conditions?: string[] } | null;
     value: ValueBlock | null; not_covered: string[];
-    withheld_units: { failure_unit_id: string; subsystem: string; reasons: string[]; sentence: string }[];
+    withheld_units: { failure_unit_id: string; name?: string; subsystem: string; reasons: string[]; sentence: string }[];
     hazard_axis: unknown;
   };
   parts: Part[];
@@ -123,6 +186,7 @@ export interface Cell {
   files: Record<string, string | null>; folder_files: FileRef[]; gap_reason: string | null;
   binding: { source_cell_id: string | null; source_entry_id: string | null; reused_curves: string[]; transfer_rationale: string | null; transfer_tier: string | null; status: string | null; limitations: unknown } | null;
   sampling_notes: string[];
+  subcomponents: Subcomponent[]; subcomponent_rollup: SubcomponentRollup;
   build_findings: { check: string; severity: string; items: unknown[]; sentence: string }[];
 }
 
@@ -151,7 +215,7 @@ export interface Curve {
   title: string; asset: Slug; hazard: Slug; status: Status; rail: Rail;
   parameters_rows: { id: string; name: string; value: unknown; tier: string | null; source_ids: string[]; claim_ids: string[]; curve_id: string | null; role: string | null; status: string | null; reasoning: string | null; update_trigger: string | null }[];
   sources_for_curve: string[]; occurrence: (OccurrenceBucket & { bucket: string | null }) | null; review: Review; summary: string;
-  versions: Record<string, unknown>[]; data_path: string;
+  versions: Record<string, unknown>[]; data_path: string; construction: CurveConstruction;
 }
 
 export interface AssetCell {
@@ -163,7 +227,8 @@ export interface AssetRow { key: string; label: string; value_usd: number | null
 export interface AssetView {
   asset: Slug; summary: string; reference: { label: string; source: string; total_usd: number } | null;
   hazards: (Hazard & { entry_id: string | null; status: Status | null; cell_title: string | null; occurrence_href: string | null; has_register: boolean })[];
-  rows: AssetRow[]; entries: Tile[]; has_buckets: boolean; twin_crosswalk: { sha256: string | null; rows: number | null } | null;
+  rows: AssetRow[]; subcomponents: Subcomponent[]; subcomponent_rollup: SubcomponentRollup;
+  entries: Tile[]; has_buckets: boolean; twin_crosswalk: { sha256: string | null; rows: number | null } | null;
 }
 
 export interface OccurrencePage {
@@ -182,7 +247,7 @@ export interface Parameter { id: string; name: string; value: unknown; tier: str
 
 // ─── iteration 2: the plain layer (DCD-D19), written by the build ────────────────────────────────────────────
 
-export interface SourceLink { title?: string | null; link?: string | null; link_kind?: string; locator?: string | null; no_link_sentence?: string | null; doi?: string | null }
+export interface SourceLink { title?: string | null; link?: string | null; link_kind?: string; locator?: string | null; no_link_sentence?: string | null; link_note?: string | null; doi?: string | null }
 export type SourceRow = Source & Omit<SourceLink, "locator"> & {
   provenance?: string; kind?: string | null; aliases?: string[]; from?: { file?: string; sheet?: string; section?: string }; repo_path?: string; source_type?: string | null;
 };
@@ -203,7 +268,7 @@ export interface ExtractionInfo {
 }
 export interface StepChip { text: string; tone: "key" | "muted"; title?: string }
 export interface Step { id: string; name: string; meaning: string; fact: string; paragraphs: string[]; holds: string[]; written: boolean; chips: StepChip[]; why?: { label: string; text: string; source?: string }[]; why_note?: string }
-export interface HazardPath { id: string | null; title: string | null; path: string; state: "moved" | "on_branch"; moved_to?: string; link: string | null; words: string }
+export interface HazardPath { id: string | null; title: string | null; path: string; state: "moved" | "on_branch" | "not_found"; moved_to?: string; branch?: string; branches?: string[]; link: string | null; words: string }
 export interface Plain {
   rail: { exists: PlainChip; evidence: PlainChip; occurrence: PlainChip; review: PlainChip };
   main_logic: string[]; steps: Step[]; for_hazard: string[]; word: string | null; halves: string | null; hazard_paths: HazardPath[];
@@ -220,6 +285,10 @@ export interface Plain {
   link_counts: { total: number; linked: number; locator_only: number; neither: number; markers: number; placeholders: number };
   extraction: ExtractionInfo | null;
   tier_words: { shape: string; cost: string };
+  /** an input the curve file leaves undefined, with the files read */
+  axis_notes?: { text: string; paths: string[] }[];
+  /** what Hazard multiplies a unit by, where the curve file declares another share */
+  hazard_values?: { unit: string; share: number; declared: number; note: string | null; expected: boolean }[];
 }
 export interface Caption {
   what_it_says: string;
@@ -227,7 +296,7 @@ export interface Caption {
   seen_in_field: { sentence: string; state: string; href: string | null; words: string };
   main_references: KeyReference[]; references_from: string;
 }
-export type CellV2 = Cell & { plain: Plain };
+export type CellV2 = Cell & { plain: Plain; hazard_note?: { title: string; lines: string[] } | null; gap_reason_own?: string | null; gap_reason_source?: { label: string; path: string } | null };
 export type CurveV2 = Curve & { caption: Caption; sources_resolved: SourceRow[]; plain_tiers: { shape: string; cost: string }; rail_plain: Plain["rail"] };
 
 export interface AssetCellV2 {
@@ -245,19 +314,23 @@ export interface PartOfCell {
 }
 export interface PartsByCell { entry_id: string; hazard: Slug; status: Status; title: string; parts: PartOfCell[]; share_basis: string | null; n_named: number; n_curve: number; n_withheld: number; not_covered: string[] }
 export interface Split {
-  differs: boolean; sentence: string; details: string[];
+  differs: boolean; sentence: string; note?: string; details: string[];
   columns: { entry_id: string; hazard: Slug; n_named: number; n_curve: number; n_withheld: number; share_basis: string | null; title: string }[];
   table: { key: string; label: string; by_cell: Record<string, string[]> }[];
 }
 export interface TwinBlock { available: boolean; sentence: string; sha256: string | null; rows: number | null; nodes: Record<string, { node: string; name: string; disposition: string; why: string }[]>; leads?: boolean }
 export interface AssetViewV2 extends Omit<AssetView, "rows"> {
-  rows: AssetRowV2[]; parts_by_cell: Record<string, PartsByCell>; split: Split; twin: TwinBlock; summary_v0: string;
-  reference: (AssetView["reference"] & { note?: string; link?: string | null }) | null;
+  rows: AssetRowV2[]; parts_by_cell: Record<string, PartsByCell>; split: Split; twin: TwinBlock; summary_v0: string; uncovered?: string | null;
+  reference: (AssetView["reference"] & { note?: string; link?: string | null; also?: { label: string; link: string } | null }) | null;
   value_source: { label: string; path: string; sha256?: string | null; pin_ok?: boolean | null } | null;
+  // real estate only: the subsystems per building, their counts, and the notes the building pages carry
+  subsystem_groups?: Record<string, SubcomponentRollup>; building_notes?: Record<string, string | null>;
+  anatomy_note?: { sentence: string; source: string | null } | null;
+  labour_note?: string | null;
 }
 export interface ReviewQueueItem { kind: string; entry_id: string; text: string; href: string; words: string }
 export type ManifestV2 = Manifest & {
-  tier_words: Record<string, string>; tier_plain: Record<string, string>; tier_meaning: Record<string, string>;
+  tier_words: Record<string, string>; tier_plain: Record<string, string>; tier_meaning: Record<string, string>; legend: Legend;
   stations: { id: string; label: string; gate: string; name: string; meaning: string }[];
   no_link_words: string; not_yet_extracted_sentence: string;
   review_queue: { items: ReviewQueueItem[]; counts: Record<string, number> };
@@ -282,6 +355,8 @@ export interface ReviewCell {
 }
 export interface SourceInfo { mode: "main" | "preview"; ref: string; commit: string; commit_full: string; dirty: boolean; label: string }
 export type ManifestV3 = ManifestV2 & {
+  /** the library grid: one tile per asset type × hazard (heat included) */
+  grid_counts?: { pairs: number; live: number; proposal: number; reused: number; gap: number };
   source: SourceInfo;
   hazard_main: { available: boolean; ref: string; commit: string | null; behind: boolean | null; sentence: string };
   spine: { categories: SpineCategory[]; source: string };
@@ -305,11 +380,14 @@ export interface TwinTree { root: string; nodes: Record<string, { n: string; p?:
 export interface MatrixRow { tree: string; node: string; name: string; cells: Record<string, { state: CoverageState; words: string; curve_parts: string[]; mixed: boolean; states: CoverageState[] }> }
 export interface Coverage {
   type: { slug: string; label: string; category: string; category_label: string; profile: string | null; building: string | null; also_buildings: string[] | null; picture_note: string | null; catalogue_asset: string };
-  twin: { asset: string; name: string; model: string; root: string; plant_model: string | null; plant_root: string | null; plant_name: string | null; commit: string; crosswalk: string };
+  twin: { asset: string; name: string; model: string; root: string; plant_model: string | null; plant_root: string | null; plant_name: string | null; commit: string; crosswalk: string;
+    defined_in?: { tree: string; name: string | null; path: string; line: number; href: string }[] };
   trees: Record<string, TwinTree>; hazards: CoverageHazard[]; matrix: MatrixRow[];
-  state_words: Record<CoverageState, string>; state_short: Record<CoverageState, string>;
+  state_words: Record<CoverageState, string>; state_short: Record<CoverageState, string>; state_meaning?: Record<CoverageState, string>;
 }
 export interface TwinViewerManifest { twin_repo: string; twin_commit: string; three: string; load_order: string[] }
 
 export interface FaqQuestion { id: string; q: string; updated: string | null; owner: string | null; answer: string[]; example: string | null; read_more: { label: string; path: string | null; href: string | null } | null }
 export interface Faq { sections: { title: string; questions: FaqQuestion[] }[]; n_questions: number; source: string; errors: string[] }
+
+export type ValueSplit = { priced: number; partly: number; no_damage: number; not_priced: number; basis: string; reason?: undefined } | { reason: string };

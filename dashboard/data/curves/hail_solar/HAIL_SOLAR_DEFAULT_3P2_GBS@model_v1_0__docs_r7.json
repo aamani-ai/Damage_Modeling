@@ -1107,7 +1107,8 @@
    "doi": null,
    "link": "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems",
    "link_kind": "url",
-   "no_link_sentence": null
+   "no_link_sentence": null,
+   "link_note": null
   },
   {
    "id": "EV_PVEL_2023_HSS",
@@ -1134,7 +1135,8 @@
    "doi": null,
    "link": "https://2023modulescorecard.pvel.com/hail-stress-sequence/",
    "link_kind": "url",
-   "no_link_sentence": null
+   "no_link_sentence": null,
+   "link_note": null
   }
  ],
  "plain_tiers": {
@@ -1152,15 +1154,15 @@
   "tone": "neutral",
   "label": "entry agent-read 2026-10-19 · release —"
  },
- "summary": "PV modules (glass and cells): an S-shaped curve: little damage, then a steep rise, then a plateau (logistic), read against hail diameter, MESH equivalent; how damage rises is published, how it becomes dollars published.",
+ "summary": "PV modules (glass and cells): an S-shaped curve: little damage, then a steep rise, then a plateau (logistic), read against hail diameter, MESH equivalent; damage at each hazard level is published, the dollar value it is applied to published.",
  "rail_plain": {
   "exists": {
-   "words": "Live · in the runtime index",
+   "words": "Live · in use",
    "code": "LIVE"
   },
   "evidence": {
    "words": "Evidence: published",
-   "code": "How damage rises: published · how it becomes dollars: published",
+   "code": "Damage at each hazard level: published · the dollar value it is applied to: published",
    "tiers": [
     "T2"
    ],
@@ -1217,5 +1219,492 @@
    "source": "CHANGELOG.json"
   }
  ],
- "data_path": "curves/hail_solar/HAIL_SOLAR_DEFAULT_3P2_GBS@model_v1_0__docs_r7.json"
+ "data_path": "curves/hail_solar/HAIL_SOLAR_DEFAULT_3P2_GBS@model_v1_0__docs_r7.json",
+ "construction_sources": [
+  {
+   "id": "EV_DOE_FEMP_PV_HAIL",
+   "title": "DOE/FEMP Hail Damage Mitigation for Solar PV Systems",
+   "citation": "DOE/FEMP Hail Damage Mitigation for Solar PV Systems",
+   "url": "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems",
+   "locator": null,
+   "role": "Supports KE bridge and PV hail selectors",
+   "tier": null,
+   "permitted": null,
+   "prohibited": "Certification tests are anchors/boundary conditions, not full damage curves.",
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/hail_solar/current/damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx",
+    "sheet": "Evidence_Log"
+   },
+   "aliases": [
+    "EV_DOE_FEMP_PV_HAIL",
+    "E_DOE_HAIL_STOW",
+    "E_DOE_MODULE_SELECTION",
+    "E_IEC_DOE_TABLE",
+    "SRC_DOE_FEMP_PV_HAIL"
+   ],
+   "doi": null,
+   "link": "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems",
+   "link_kind": "url",
+   "no_link_sentence": null,
+   "link_note": null
+  },
+  {
+   "id": "EV_PVEL_2023_HSS",
+   "title": "PVEL 2023 PV Module Reliability Scorecard - Hail Stress Sequence",
+   "citation": "PVEL 2023 PV Module Reliability Scorecard - Hail Stress Sequence",
+   "url": "https://2023modulescorecard.pvel.com/hail-stress-sequence/",
+   "locator": null,
+   "role": "Supports fragile and default curves",
+   "tier": null,
+   "permitted": null,
+   "prohibited": "Aggregate testing, not field claims; older than 2026 but more detailed public anchor list.",
+   "decision": null,
+   "accessed_on": null,
+   "provenance": "extracted-from-workbook",
+   "from": {
+    "file": "docs/cells/hail_solar/current/damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx",
+    "sheet": "Evidence_Log"
+   },
+   "aliases": [
+    "EV_PVEL_2023_HSS",
+    "E_PVEL_2023_HSS",
+    "PVEL_2023_HSS"
+   ],
+   "doi": null,
+   "link": "https://2023modulescorecard.pvel.com/hail-stress-sequence/",
+   "link_kind": "url",
+   "no_link_sentence": null,
+   "link_note": null
+  }
+ ],
+ "construction": {
+  "curve_type": "logistic",
+  "curve_form": "logistic",
+  "formula": "D(x) = max_DR / (1 + exp(−k_per_mm × (x − D50_mm)))",
+  "formula_source": "scripts/reference_helpers/damage_curve_eval.py",
+  "variables": [
+   {
+    "symbol": "D(x)",
+    "meaning": "damage ratio: repair cost ÷ replacement value at intensity x",
+    "parameter": null
+   },
+   {
+    "symbol": "x",
+    "meaning": "hazard intensity on the curve's x-axis",
+    "parameter": null
+   },
+   {
+    "symbol": "max_DR",
+    "meaning": "the ceiling: the largest damage ratio the curve reaches",
+    "parameter": "max_DR"
+   },
+   {
+    "symbol": "D50_mm",
+    "meaning": "the midpoint: intensity at which damage reaches half of max_DR",
+    "parameter": "D50_mm"
+   },
+   {
+    "symbol": "k_per_mm",
+    "meaning": "steepness: how fast damage rises around the midpoint, per mm",
+    "parameter": "k_per_mm"
+   }
+  ],
+  "marks": null,
+  "unkeyed_parameters": [],
+  "curve_tiers": {
+   "shape": {
+    "tier": "T2",
+    "word": "published"
+   },
+   "cost": {
+    "tier": "T2",
+    "word": "published"
+   }
+  },
+  "axis": {
+   "id": "HAIL_DIAMETER_MESH_EQUIV",
+   "label": "hail diameter, MESH equivalent",
+   "unit": "mm",
+   "input_field": "mesh_diameter_mm",
+   "kind": "continuous",
+   "valid_range": [
+    0,
+    100
+   ]
+  },
+  "parameters": [
+   {
+    "name": "D50_mm",
+    "definition": "the midpoint: intensity at which damage reaches half of max_DR",
+    "value": 52.696,
+    "value_path": "docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json::curve_id=HAIL_SOLAR_DEFAULT_3P2_GBS::parameters.D50_mm",
+    "tier": "T2",
+    "tier_word": "published",
+    "reasoning": [
+     "Two-anchor fit using IEC near-zero baseline and public PVEL 50mm glass/backsheet aggregate."
+    ],
+    "source_ids": [
+     "IEC_61215_BASELINE",
+     "PVEL_2023_HSS"
+    ],
+    "sources": [
+     {
+      "id": "EV_DOE_FEMP_PV_HAIL",
+      "title": "DOE/FEMP Hail Damage Mitigation for Solar PV Systems",
+      "citation": "DOE/FEMP Hail Damage Mitigation for Solar PV Systems",
+      "url": "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems",
+      "locator": null,
+      "role": "Supports KE bridge and PV hail selectors",
+      "tier": null,
+      "permitted": null,
+      "prohibited": "Certification tests are anchors/boundary conditions, not full damage curves.",
+      "decision": null,
+      "accessed_on": null,
+      "provenance": "extracted-from-workbook",
+      "from": {
+       "file": "docs/cells/hail_solar/current/damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx",
+       "sheet": "Evidence_Log"
+      },
+      "aliases": [
+       "EV_DOE_FEMP_PV_HAIL",
+       "E_DOE_HAIL_STOW",
+       "E_DOE_MODULE_SELECTION",
+       "E_IEC_DOE_TABLE",
+       "SRC_DOE_FEMP_PV_HAIL"
+      ],
+      "doi": null,
+      "link": "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems",
+      "link_kind": "url",
+      "no_link_sentence": null,
+      "link_note": null
+     },
+     {
+      "id": "EV_PVEL_2023_HSS",
+      "title": "PVEL 2023 PV Module Reliability Scorecard - Hail Stress Sequence",
+      "citation": "PVEL 2023 PV Module Reliability Scorecard - Hail Stress Sequence",
+      "url": "https://2023modulescorecard.pvel.com/hail-stress-sequence/",
+      "locator": null,
+      "role": "Supports fragile and default curves",
+      "tier": null,
+      "permitted": null,
+      "prohibited": "Aggregate testing, not field claims; older than 2026 but more detailed public anchor list.",
+      "decision": null,
+      "accessed_on": null,
+      "provenance": "extracted-from-workbook",
+      "from": {
+       "file": "docs/cells/hail_solar/current/damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx",
+       "sheet": "Evidence_Log"
+      },
+      "aliases": [
+       "EV_PVEL_2023_HSS",
+       "E_PVEL_2023_HSS",
+       "PVEL_2023_HSS"
+      ],
+      "doi": null,
+      "link": "https://2023modulescorecard.pvel.com/hail-stress-sequence/",
+      "link_kind": "url",
+      "no_link_sentence": null,
+      "link_note": null
+     }
+    ],
+    "unresolved_source_ids": [],
+    "register_rows": [
+     "D50_mm"
+    ],
+    "source_scope": "parameter",
+    "where_from": "published",
+    "files": []
+   },
+   {
+    "name": "k_per_mm",
+    "definition": "steepness: how fast damage rises around the midpoint, per mm",
+    "value": 0.165912,
+    "value_path": "docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json::curve_id=HAIL_SOLAR_DEFAULT_3P2_GBS::parameters.k_per_mm",
+    "tier": "T2",
+    "tier_word": "published",
+    "reasoning": [
+     "Two-anchor logistic slope."
+    ],
+    "source_ids": [
+     "IEC_61215_BASELINE",
+     "PVEL_2023_HSS"
+    ],
+    "sources": [
+     {
+      "id": "EV_DOE_FEMP_PV_HAIL",
+      "title": "DOE/FEMP Hail Damage Mitigation for Solar PV Systems",
+      "citation": "DOE/FEMP Hail Damage Mitigation for Solar PV Systems",
+      "url": "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems",
+      "locator": null,
+      "role": "Supports KE bridge and PV hail selectors",
+      "tier": null,
+      "permitted": null,
+      "prohibited": "Certification tests are anchors/boundary conditions, not full damage curves.",
+      "decision": null,
+      "accessed_on": null,
+      "provenance": "extracted-from-workbook",
+      "from": {
+       "file": "docs/cells/hail_solar/current/damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx",
+       "sheet": "Evidence_Log"
+      },
+      "aliases": [
+       "EV_DOE_FEMP_PV_HAIL",
+       "E_DOE_HAIL_STOW",
+       "E_DOE_MODULE_SELECTION",
+       "E_IEC_DOE_TABLE",
+       "SRC_DOE_FEMP_PV_HAIL"
+      ],
+      "doi": null,
+      "link": "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems",
+      "link_kind": "url",
+      "no_link_sentence": null,
+      "link_note": null
+     },
+     {
+      "id": "EV_PVEL_2023_HSS",
+      "title": "PVEL 2023 PV Module Reliability Scorecard - Hail Stress Sequence",
+      "citation": "PVEL 2023 PV Module Reliability Scorecard - Hail Stress Sequence",
+      "url": "https://2023modulescorecard.pvel.com/hail-stress-sequence/",
+      "locator": null,
+      "role": "Supports fragile and default curves",
+      "tier": null,
+      "permitted": null,
+      "prohibited": "Aggregate testing, not field claims; older than 2026 but more detailed public anchor list.",
+      "decision": null,
+      "accessed_on": null,
+      "provenance": "extracted-from-workbook",
+      "from": {
+       "file": "docs/cells/hail_solar/current/damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx",
+       "sheet": "Evidence_Log"
+      },
+      "aliases": [
+       "EV_PVEL_2023_HSS",
+       "E_PVEL_2023_HSS",
+       "PVEL_2023_HSS"
+      ],
+      "doi": null,
+      "link": "https://2023modulescorecard.pvel.com/hail-stress-sequence/",
+      "link_kind": "url",
+      "no_link_sentence": null,
+      "link_note": null
+     }
+    ],
+    "unresolved_source_ids": [],
+    "register_rows": [
+     "k_per_mm"
+    ],
+    "source_scope": "parameter",
+    "where_from": "published",
+    "files": []
+   },
+   {
+    "name": "max_DR",
+    "definition": "the ceiling: the largest damage ratio the curve reaches",
+    "value": 1.0,
+    "value_path": "docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json::curve_id=HAIL_SOLAR_DEFAULT_3P2_GBS::parameters.max_DR",
+    "tier": null,
+    "tier_word": null,
+    "reasoning": [],
+    "source_ids": [],
+    "sources": [],
+    "unresolved_source_ids": [],
+    "register_rows": [],
+    "source_scope": "curve",
+    "where_from": "unsourced",
+    "files": []
+   }
+  ],
+  "additional_parameter_rows": [],
+  "sources": [
+   {
+    "id": "EV_DOE_FEMP_PV_HAIL",
+    "title": "DOE/FEMP Hail Damage Mitigation for Solar PV Systems",
+    "citation": "DOE/FEMP Hail Damage Mitigation for Solar PV Systems",
+    "url": "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems",
+    "locator": null,
+    "role": "Supports KE bridge and PV hail selectors",
+    "tier": null,
+    "permitted": null,
+    "prohibited": "Certification tests are anchors/boundary conditions, not full damage curves.",
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/hail_solar/current/damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx",
+     "sheet": "Evidence_Log"
+    },
+    "aliases": [
+     "EV_DOE_FEMP_PV_HAIL",
+     "E_DOE_HAIL_STOW",
+     "E_DOE_MODULE_SELECTION",
+     "E_IEC_DOE_TABLE",
+     "SRC_DOE_FEMP_PV_HAIL"
+    ],
+    "doi": null,
+    "link": "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems",
+    "link_kind": "url",
+    "no_link_sentence": null,
+    "link_note": null
+   },
+   {
+    "id": "EV_PVEL_2023_HSS",
+    "title": "PVEL 2023 PV Module Reliability Scorecard - Hail Stress Sequence",
+    "citation": "PVEL 2023 PV Module Reliability Scorecard - Hail Stress Sequence",
+    "url": "https://2023modulescorecard.pvel.com/hail-stress-sequence/",
+    "locator": null,
+    "role": "Supports fragile and default curves",
+    "tier": null,
+    "permitted": null,
+    "prohibited": "Aggregate testing, not field claims; older than 2026 but more detailed public anchor list.",
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "extracted-from-workbook",
+    "from": {
+     "file": "docs/cells/hail_solar/current/damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx",
+     "sheet": "Evidence_Log"
+    },
+    "aliases": [
+     "EV_PVEL_2023_HSS",
+     "E_PVEL_2023_HSS",
+     "PVEL_2023_HSS"
+    ],
+    "doi": null,
+    "link": "https://2023modulescorecard.pvel.com/hail-stress-sequence/",
+    "link_kind": "url",
+    "no_link_sentence": null,
+    "link_note": null
+   }
+  ],
+  "source_ids": [
+   "IEC_61215_BASELINE",
+   "PVEL_2023_HSS"
+  ],
+  "artifact": "docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json",
+  "evaluator": {
+   "module": "scripts/reference_helpers/damage_curve_eval.py",
+   "function": "evaluate_curve_record",
+   "note": "logistic DR(D) = max_DR / (1 + exp(−k (D − D50)))"
+  },
+  "constructing_files": [
+   {
+    "role": "write-up",
+    "path": "docs/cells/hail_solar/current/hail_solar_curve_derivation_dossier_v1_3.md"
+   }
+  ],
+  "scope_note": null,
+  "production_use": {
+   "state": "runtime_indexed",
+   "consumer_pin": "hail_solar@model_v1_0__docs_r7",
+   "hazard": {
+    "state": "differs",
+    "sentences": [
+     "Hazard's dashboard layer Hail × Solar uses model v1.0, docs r5; this page shows model v1.0, docs r7. Its 3 curves are identical to the ones shown here; PV_MODULE_GLASS_CELL's value share of installed capex is none in Hazard's version, 26.00% here; PV_MODULE_GLASS_CELL's value share of the physical base is none in Hazard's version, 33.18% here.",
+     "Hazard multiplies PV_MODULE_GLASS_CELL by 35.54% of installed value (PV module hardware plus replacement fieldwork: $398,084 / $1,120,000, runtime-rounded to 0.3554); the artifact shown here declares 26.00% of installed capex.",
+     "How this is known: the receipt of the run behind the layer pins the artifact's hash.",
+     "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+    ],
+    "differences": [
+     "Hazard's dashboard layer Hail × Solar uses model v1.0, docs r5; this page shows model v1.0, docs r7. Its 3 curves are identical to the ones shown here; PV_MODULE_GLASS_CELL's value share of installed capex is none in Hazard's version, 26.00% here; PV_MODULE_GLASS_CELL's value share of the physical base is none in Hazard's version, 33.18% here.",
+     "Hazard multiplies PV_MODULE_GLASS_CELL by 35.54% of installed value (PV module hardware plus replacement fieldwork: $398,084 / $1,120,000, runtime-rounded to 0.3554); the artifact shown here declares 26.00% of installed capex."
+    ],
+    "values": [
+     {
+      "unit": "PV_MODULE_GLASS_CELL",
+      "share": 0.3554,
+      "basis": "installed_TIV",
+      "note": "PV module hardware plus replacement fieldwork: $398,084 / $1,120,000, runtime-rounded to 0.3554",
+      "pin": "data/hazard_conus_grid/hail/solar/damage_curves/HAIL_SOLAR_PV_MODULE_V1@v2_5/consumption_pin.json",
+      "refs": [
+       "claude/measure-policy-sizing",
+       "claude/policy-preview-hosted",
+       "claude/policy-preview-in-memory",
+       "codex/bess-conus",
+       "codex/bess-release-integration",
+       "codex/bess-v1-payload",
+       "codex/deep-resiliency-variant-workflow",
+       "codex/flood-coastal-method-review",
+       "codex/hazard-reference-refresh",
+       "codex/modeling-db-change-guide",
+       "codex/real-estate-conus",
+       "codex/real-estate-internal",
+       "codex/scr-transition-scenario-guide",
+       "codex/substation-conus",
+       "codex/wind-total-coverage",
+       "deep/hail_experiments",
+       "deploy/hazard-grid-qc",
+       "feature/plymouth_trial",
+       "fix/flood-hazard-view-asset-free",
+       "gen1_5/improvements",
+       "gen1_5/improvements-fsm_integration",
+       "investigation/coverage-handoff-2026-10",
+       "investigation/hurricane-storm-vs-raft",
+       "job/flood-handfim-snapshot",
+       "job/flood-pluvial-fsm",
+       "main",
+       "measure-peril-copy",
+       "measure-policy-pairs",
+       "proposal/resiliency-alt-curve-support",
+       "review",
+       "riverine_explore/large_modeled_zeros",
+       "total-reads-measure-pairs",
+       "workspace-deep-pair-workflow"
+      ],
+      "declared": 0.2600132602142186,
+      "where": "Hazard's main"
+     }
+    ],
+    "value_mismatches": [
+     {
+      "unit": "PV_MODULE_GLASS_CELL",
+      "share": 0.3554,
+      "basis": "installed_TIV",
+      "note": "PV module hardware plus replacement fieldwork: $398,084 / $1,120,000, runtime-rounded to 0.3554",
+      "pin": "data/hazard_conus_grid/hail/solar/damage_curves/HAIL_SOLAR_PV_MODULE_V1@v2_5/consumption_pin.json",
+      "refs": [
+       "claude/measure-policy-sizing",
+       "claude/policy-preview-hosted",
+       "claude/policy-preview-in-memory",
+       "codex/bess-conus",
+       "codex/bess-release-integration",
+       "codex/bess-v1-payload",
+       "codex/deep-resiliency-variant-workflow",
+       "codex/flood-coastal-method-review",
+       "codex/hazard-reference-refresh",
+       "codex/modeling-db-change-guide",
+       "codex/real-estate-conus",
+       "codex/real-estate-internal",
+       "codex/scr-transition-scenario-guide",
+       "codex/substation-conus",
+       "codex/wind-total-coverage",
+       "deep/hail_experiments",
+       "deploy/hazard-grid-qc",
+       "feature/plymouth_trial",
+       "fix/flood-hazard-view-asset-free",
+       "gen1_5/improvements",
+       "gen1_5/improvements-fsm_integration",
+       "investigation/coverage-handoff-2026-10",
+       "investigation/hurricane-storm-vs-raft",
+       "job/flood-handfim-snapshot",
+       "job/flood-pluvial-fsm",
+       "main",
+       "measure-peril-copy",
+       "measure-policy-pairs",
+       "proposal/resiliency-alt-curve-support",
+       "review",
+       "riverine_explore/large_modeled_zeros",
+       "total-reads-measure-pairs",
+       "workspace-deep-pair-workflow"
+      ],
+      "declared": 0.2600132602142186,
+      "where": "Hazard's main"
+     }
+    ],
+    "newer": null
+   },
+   "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+  }
+ }
 }

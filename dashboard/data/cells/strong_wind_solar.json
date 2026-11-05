@@ -63,7 +63,7 @@
    "label": "entry agent-read 2026-10-19 · release —"
   }
  },
- "summary": "Convective wind on solar farms: thresholded logistic curves on a design-normalised demand ratio; 1 part of the asset's value has no curve.",
+ "summary": "Convective wind on solar farms: 5 curves for 5 parts; read against effective demand ratio R_eff; the numbers are our judgment; 54 % of the plant's value is priced.",
  "chain": {
   "stations": [
    {
@@ -88,7 +88,8 @@
     ],
     "evidence": [],
     "fact": "1 deferred",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "units",
@@ -112,7 +113,8 @@
     ],
     "evidence": [],
     "fact": "5 units",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "axis_form",
@@ -158,7 +160,8 @@
      }
     ],
     "fact": "thresholded logistic demand",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "evidence",
@@ -205,8 +208,9 @@
       ]
      }
     ],
-    "fact": "10 src · T2–4",
-    "absent_sentence": null
+    "fact": "14 src · T2–4",
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "value",
@@ -249,7 +253,8 @@
      }
     ],
     "fact": "in prose",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "audit",
@@ -291,7 +296,13 @@
      }
     ],
     "fact": "adjustments in prose",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": [
+     {
+      "path": "docs/cells/strong_wind_solar/proposed/SEVEN_STEP_AUDIT_strong_wind_solar__model_v2_0__docs_r1.md",
+      "model": "v2.0"
+     }
+    ]
    },
    {
     "id": "artifact",
@@ -319,7 +330,8 @@
     ],
     "evidence": [],
     "fact": "v1.0 · docs r3",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "capability",
@@ -335,7 +347,8 @@
     ],
     "evidence": [],
     "fact": "DR supported · EAL conditional",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "proof",
@@ -358,7 +371,8 @@
     ],
     "evidence": [],
     "fact": "no KAT declared",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "field_review",
@@ -369,7 +383,8 @@
     "files": [],
     "evidence": [],
     "fact": "not searched · agent-read 10-19",
-    "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only."
+    "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only.",
+    "earlier": []
    }
   ],
   "generation": "skill",
@@ -818,9 +833,11 @@
   "paths": {
    "sources": null,
    "claims": null,
-   "parameters": null
+   "parameters": null,
+   "source_registers": [],
+   "claim_registers": []
   },
-  "n_sources": 10,
+  "n_sources": 14,
   "n_claims": 6,
   "n_parameters": 26,
   "key_sources": [
@@ -1076,6 +1093,8 @@
   }
  ],
  "gap_reason": null,
+ "gap_reason_own": null,
+ "gap_reason_source": null,
  "binding": null,
  "sampling_notes": [
   "No known-answer tests declared by this artifact."
@@ -1083,12 +1102,12 @@
  "plain": {
   "rail": {
    "exists": {
-    "words": "Live · in the runtime index",
+    "words": "Live · in use",
     "code": "LIVE"
    },
    "evidence": {
     "words": "Evidence: our judgment",
-    "code": "How damage rises: our judgment · how it becomes dollars: our judgment",
+    "code": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
     "tiers": [
      "T4"
     ],
@@ -1114,10 +1133,10 @@
     "id": "covers",
     "name": "What it covers",
     "meaning": "The parts that have a curve, their share of the value, and what has none yet",
-    "fact": "5 parts with a curve · 1 without one yet",
+    "fact": "5 parts with a curve · 4 of 10 subsystems with a curve",
     "paragraphs": [
-     "Convective wind on solar farms: thresholded logistic curves on a design-normalised demand ratio; axis from wind-pressure physics, all numeric parameters set by engineering judgment from PV wind-load and storm-resilience sources. It names 5 parts: Tracker structure, Racking structure, PV module attachment, Foundations (uplift) and Exposed SCADA and met station. Outside its scope: tornado and windborne debris (deferred to a separate pathway) and yearly and tail loss metrics (computed by the consumer, not the cell). Kinds of damage it does not include: cascade between racking or tracker failure and module detachment (no dependency rule).",
-     "For this hazard the solar farm is split into 5 parts: Tracker structure, Racking structure, PV module attachment, Foundations (uplift) and Exposed SCADA and met station. Parts of the plant's value with no curve yet: the other 36% of the reference physical base (parts not named by the cell) has no curve or value share; the cell says this is not an automatic zero.",
+     "Convective wind on solar farms: thresholded logistic curves on a design-normalised demand ratio; axis from wind-pressure physics, all numeric parameters set by engineering judgment from PV wind-load and storm-resilience sources. It names 5 parts (listed below). It also lists 3 things it leaves out (below).",
+     "This hazard's curves cover 5 parts of the solar farm, listed below after the subsystem each belongs to and named as the catalogue entry writes them.",
      "The damage ratio is a share of replacement value of the same part, as a share of the physical replaceable base (default shares are illustrative). The files state no plant-level dollar figure for this asset. Shares of the plant's physical value, as the cell states them: Tracker structure 8 %, Racking structure 6 %, PV module attachment 40 %, Foundations (uplift) 8 % and Exposed SCADA and met station 2 %."
     ],
     "holds": [
@@ -1152,9 +1171,9 @@
       "tone": "key"
      },
      {
-      "text": "1 without a curve yet",
+      "text": "4 of 10 subsystems with a curve · 6 no curve yet",
       "tone": "muted",
-      "title": "The other 36% of the reference physical base (parts not named by the cell) has no curve or value share; the cell says this is not an automatic zero"
+      "title": "The catalogue's own list: The other 36% of the reference physical base (parts not named by the cell) has no curve or value share; the cell says this is not an automatic zero"
      }
     ]
    },
@@ -1164,8 +1183,8 @@
     "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "effective demand ratio R_eff → a threshold, then an S-curve",
     "paragraphs": [
-     "Damage is read against effective demand ratio R_eff = (V₃ₛ / V_design)² × demand multipliers. The curve is nothing below a threshold, then an S-shaped rise to a plateau (thresholded logistic). The input, in the catalogue's words: 3-second gust at array height (mph), 0 to 200 (warn or clamp), turned into a demand ratio: (gust / design gust) squared times stow and zone multipliers.",
-     "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file. A site-condition adapter has not been written for this cell."
+     "Damage is read against one hazard measure: effective demand ratio R_eff = (V₃ₛ / V_design)² × demand multipliers. The curve is nothing below a threshold, then an S-shaped rise to a plateau (thresholded logistic). What Hazard has to supply for each event is below.",
+     "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file."
     ],
     "holds": [
      "axis_form",
@@ -1203,9 +1222,9 @@
     "id": "numbers",
     "name": "Where the numbers come from",
     "meaning": "The sources, what each one gave, and how sure we are",
-    "fact": "10 sources, 10 linked · our judgment",
+    "fact": "14 sources, 14 linked · our judgment",
     "paragraphs": [
-     "10 sources set this cell: Wind-pressure physics, pressure scales with speed squared, CPP, utility-scale PV wind-load paper, CPP, torsional instability of single-axis trackers and DOE/FEMP, severe-weather PV design guidance and 6 more. Of the 26 parameters, 1 is published and 25 are our judgment. The sources were read from the workbook's Evidence_Params, Assumption_Register and Sources sheets, because this older cell keeps them there rather than in register files. 1 source ID in the tier table (WIND_PRESSURE_PHYSICS) matches no document in the workbook or dossier."
+     "This older cell keeps its sources in its workbook and dossier rather than in register files; the sources below were read from there."
     ],
     "holds": [
      "evidence"
@@ -1215,7 +1234,7 @@
      {
       "text": "our judgment",
       "tone": "key",
-      "title": "How damage rises: our judgment · how it becomes dollars: our judgment"
+      "title": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment"
      },
      {
       "text": "Wind-pressure physics…",
@@ -1232,7 +1251,7 @@
       "tone": "muted"
      },
      {
-      "text": "10 sources, 10 linked",
+      "text": "14 sources, 14 linked",
       "tone": "muted"
      }
     ]
@@ -1240,8 +1259,8 @@
    {
     "id": "checked",
     "name": "Has it been checked",
-    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
-    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "meaning": "Outside checks, and who has read the entry",
+    "fact": "no outside check yet · read by an agent only",
     "paragraphs": [
      "No outside check has been made yet: nothing independent has been compared with this curve.",
      "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet."
@@ -1253,10 +1272,6 @@
     "chips": [
      {
       "text": "no outside check yet",
-      "tone": "muted"
-     },
-     {
-      "text": "field reports: not searched",
       "tone": "muted"
      },
      {
@@ -1272,7 +1287,7 @@
    "proof"
   ],
   "word": "our judgment",
-  "halves": "How damage rises: our judgment · how it becomes dollars: our judgment",
+  "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
   "hazard_paths": [],
   "capabilities": [
    {
@@ -1339,29 +1354,29 @@
     "id": "scope",
     "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Convective wind on solar farms: thresholded logistic curves on a design-normalised demand ratio; axis from wind-pressure physics, all numeric parameters set by engineering judgment from PV wind-load and storm-resilience sources. It names 5 parts: Tracker structure, Racking structure, PV module attachment, Foundations (uplift) and Exposed SCADA and met station. Outside its scope: tornado and windborne debris (deferred to a separate pathway) and yearly and tail loss metrics (computed by the consumer, not the cell). Kinds of damage it does not include: cascade between racking or tracker failure and module detachment (no dependency rule).",
+    "paragraph": "Convective wind on solar farms: thresholded logistic curves on a design-normalised demand ratio; axis from wind-pressure physics, all numeric parameters set by engineering judgment from PV wind-load and storm-resilience sources. It names 5 parts (listed below). It also lists 3 things it leaves out (below).",
     "plain_fact": "5 parts · 2 left out"
    },
    {
     "id": "units",
     "name": "What breaks",
     "meaning": "The parts of the plant the hazard damages, each with its own curve",
-    "paragraph": "For this hazard the solar farm is split into 5 parts: Tracker structure, Racking structure, PV module attachment, Foundations (uplift) and Exposed SCADA and met station. Parts of the plant's value with no curve yet: the other 36% of the reference physical base (parts not named by the cell) has no curve or value share; the cell says this is not an automatic zero.",
+    "paragraph": "This hazard's curves cover 5 parts of the solar farm, listed below after the subsystem each belongs to and named as the catalogue entry writes them.",
     "plain_fact": "5 parts"
    },
    {
     "id": "axis_form",
     "name": "How damage is measured",
     "meaning": "The hazard intensity on the x-axis and the shape of the curve",
-    "paragraph": "Damage is read against effective demand ratio R_eff = (V₃ₛ / V_design)² × demand multipliers. The curve is nothing below a threshold, then an S-shaped rise to a plateau (thresholded logistic). The input, in the catalogue's words: 3-second gust at array height (mph), 0 to 200 (warn or clamp), turned into a demand ratio: (gust / design gust) squared times stow and zone multipliers.",
+    "paragraph": "Damage is read against one hazard measure: effective demand ratio R_eff = (V₃ₛ / V_design)² × demand multipliers. The curve is nothing below a threshold, then an S-shaped rise to a plateau (thresholded logistic). What Hazard has to supply for each event is below.",
     "plain_fact": "a threshold, then an S-curve"
    },
    {
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "10 sources set this cell: Wind-pressure physics, pressure scales with speed squared, CPP, utility-scale PV wind-load paper, CPP, torsional instability of single-axis trackers and DOE/FEMP, severe-weather PV design guidance and 6 more. Of the 26 parameters, 1 is published and 25 are our judgment. The sources were read from the workbook's Evidence_Params, Assumption_Register and Sources sheets, because this older cell keeps them there rather than in register files. 1 source ID in the tier table (WIND_PRESSURE_PHYSICS) matches no document in the workbook or dossier.",
-    "plain_fact": "10 sources · our judgment"
+    "paragraph": "This older cell keeps its sources in its workbook and dossier rather than in register files; the sources below were read from there.",
+    "plain_fact": "14 sources · our judgment"
    },
    {
     "id": "value",
@@ -1374,7 +1389,7 @@
     "id": "audit",
     "name": "The audit",
     "meaning": "The seven checks a curve passes before release",
-    "paragraph": "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file. A site-condition adapter has not been written for this cell.",
+    "paragraph": "The adjustments — which selectors and conditioners change the curve — are written in the dossier; no seven-step audit table exists as a file.",
     "plain_fact": "adjustments in the write-up"
    },
    {
@@ -1412,24 +1427,24 @@
     "ids": [
      "WIND_PRESSURE_PHYSICS"
     ],
-    "title": "Wind-pressure physics, pressure scales with speed squared",
-    "link": null,
-    "link_kind": "none",
-    "locator": null,
-    "no_link_sentence": "not in the register",
-    "source_id": null
+    "title": "Wind Pressure Physics",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "link_kind": "repo_file",
+    "locator": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "no_link_sentence": null,
+    "source_id": "WIND_PRESSURE_PHYSICS"
    },
    {
     "text": "CPP, utility-scale PV wind-load paper",
     "ids": [
      "CPP_PV_WIND_LOAD"
     ],
-    "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-    "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-    "link_kind": "url",
-    "locator": null,
+    "title": "Cpp Pv Wind Load",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "link_kind": "repo_file",
+    "locator": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
     "no_link_sentence": null,
-    "source_id": "SRC_CPP_WIND_LOADS_UTILITY_PV"
+    "source_id": "CPP_PV_WIND_LOAD"
    },
    {
     "text": "CPP, torsional instability of single-axis trackers",
@@ -1448,24 +1463,24 @@
     "ids": [
      "DOE_FEMP_SEVERE_WEATHER_PV"
     ],
-    "title": "Severe Weather Resilience in Solar Photovoltaic System Design",
-    "link": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
-    "link_kind": "url",
-    "locator": null,
+    "title": "Doe Femp Severe Weather Pv",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "link_kind": "repo_file",
+    "locator": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
     "no_link_sentence": null,
-    "source_id": "SRC_DOE_FEMP_PV_SEVERE_WEATHER"
+    "source_id": "DOE_FEMP_SEVERE_WEATHER_PV"
    },
    {
     "text": "NREL, storm-resilience and storm-hardening reports",
     "ids": [
      "NREL_STORM_RESILIENCE"
     ],
-    "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
-    "link": "https://www.osti.gov/servlets/purl/2448530",
-    "link_kind": "url",
-    "locator": null,
+    "title": "Nrel Storm Resilience",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "link_kind": "repo_file",
+    "locator": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
     "no_link_sentence": null,
-    "source_id": "SRC_NREL_STORM_RESILIENCE"
+    "source_id": "NREL_STORM_RESILIENCE"
    }
   ],
   "sources": [
@@ -1493,7 +1508,8 @@
     "doi": null,
     "link": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
     "link_kind": "url",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "SRC_NREL_STORM_RESILIENCE",
@@ -1519,7 +1535,8 @@
     "doi": null,
     "link": "https://www.osti.gov/servlets/purl/2448530",
     "link_kind": "url",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "SRC_NREL_STORM_HARDENING_COST",
@@ -1545,7 +1562,8 @@
     "doi": null,
     "link": "https://docs.nrel.gov/docs/fy20osti/75804.pdf",
     "link_kind": "url",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "SRC_CPP_WIND_LOADS_UTILITY_PV",
@@ -1571,7 +1589,8 @@
     "doi": null,
     "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
     "link_kind": "url",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "SRC_CPP_TORSIONAL_TRACKERS",
@@ -1597,7 +1616,8 @@
     "doi": null,
     "link": "https://cppwind.com/wp-content/uploads/2014/01/Torsional-Instability-of-Single-Axis-Solar-Tracking-Systems-Rohr-Bourke-Banks-2015.pdf",
     "link_kind": "url",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "SRC_DURAMAT_AEROELASTIC",
@@ -1623,7 +1643,8 @@
     "doi": null,
     "link": "https://www.duramat.org/projects/aero-elastic-modeling",
     "link_kind": "url",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "SRC_DURAMAT_PVADE",
@@ -1649,7 +1670,8 @@
     "doi": null,
     "link": "https://www.duramat.org/projects/wind-driven-pv-system-simulation",
     "link_kind": "url",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "SRC_SEAC_ASCE_7_22_PV",
@@ -1675,7 +1697,8 @@
     "doi": null,
     "link": "https://sustainableenergyaction.org/resources/updates-asce-7-standard-solar-pv-systems/",
     "link_kind": "url",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "SRC_ASCE_TORNADO_CHAPTER",
@@ -1701,7 +1724,86 @@
     "doi": null,
     "link": "https://www.asce.org/publications-and-news/civil-engineering-source/civil-engineering-magazine/article/2022/02/asce-7-22-wind-load-standard-adds-tornado-chapter",
     "link_kind": "url",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
+   },
+   {
+    "id": "CPP_PV_WIND_LOAD",
+    "title": "Cpp Pv Wind Load",
+    "citation": "CPP_PV_WIND_LOAD — construction provenance documented in docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "url": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "locator": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "role": "construction provenance",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "repository-file",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md"
+    },
+    "aliases": [
+     "CPP_PV_WIND_LOAD"
+    ],
+    "repo_path": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "link_kind": "repo_file",
+    "no_link_sentence": null,
+    "link_note": null
+   },
+   {
+    "id": "DOE_FEMP_SEVERE_WEATHER_PV",
+    "title": "Doe Femp Severe Weather Pv",
+    "citation": "DOE_FEMP_SEVERE_WEATHER_PV — construction provenance documented in docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "url": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "locator": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "role": "construction provenance",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "repository-file",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md"
+    },
+    "aliases": [
+     "DOE_FEMP_SEVERE_WEATHER_PV"
+    ],
+    "repo_path": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "link_kind": "repo_file",
+    "no_link_sentence": null,
+    "link_note": null
+   },
+   {
+    "id": "NREL_STORM_RESILIENCE",
+    "title": "Nrel Storm Resilience",
+    "citation": "NREL_STORM_RESILIENCE — construction provenance documented in docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "url": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "locator": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "role": "construction provenance",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "repository-file",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md"
+    },
+    "aliases": [
+     "NREL_STORM_RESILIENCE"
+    ],
+    "repo_path": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "link_kind": "repo_file",
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "SOLAR_WIND_VALUE_BREAKDOWN",
@@ -1724,9 +1826,36 @@
     ],
     "repo_path": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
     "link_kind": "repo_file",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
+   },
+   {
+    "id": "WIND_PRESSURE_PHYSICS",
+    "title": "Wind Pressure Physics",
+    "citation": "WIND_PRESSURE_PHYSICS — construction provenance documented in docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "url": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "locator": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "role": "construction provenance",
+    "tier": null,
+    "permitted": null,
+    "prohibited": null,
+    "decision": null,
+    "accessed_on": null,
+    "provenance": "repository-file",
+    "from": {
+     "file": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md"
+    },
+    "aliases": [
+     "WIND_PRESSURE_PHYSICS"
+    ],
+    "repo_path": "docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "doi": null,
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+    "link_kind": "repo_file",
+    "no_link_sentence": null,
+    "link_note": null
    }
   ],
   "claims": [
@@ -2308,16 +2437,16 @@
     "sources": [
      {
       "id": "WIND_PRESSURE_PHYSICS",
-      "title": "WIND_PRESSURE_PHYSICS",
-      "link": null,
-      "link_kind": "none",
-      "resolved": false
+      "title": "Wind Pressure Physics",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
+      "resolved": true
      },
      {
       "id": "CPP_PV_WIND_LOAD",
-      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-      "link_kind": "url",
+      "title": "Cpp Pv Wind Load",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2337,22 +2466,22 @@
     "sources": [
      {
       "id": "DOE_FEMP_SEVERE_WEATHER_PV",
-      "title": "Severe Weather Resilience in Solar Photovoltaic System Design",
-      "link": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
-      "link_kind": "url",
+      "title": "Doe Femp Severe Weather Pv",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "NREL_STORM_RESILIENCE",
-      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
-      "link": "https://www.osti.gov/servlets/purl/2448530",
-      "link_kind": "url",
+      "title": "Nrel Storm Resilience",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2373,9 +2502,9 @@
     "sources": [
      {
       "id": "CPP_PV_WIND_LOAD",
-      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-      "link_kind": "url",
+      "title": "Cpp Pv Wind Load",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2395,16 +2524,16 @@
     "sources": [
      {
       "id": "CPP_PV_WIND_LOAD",
-      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-      "link_kind": "url",
+      "title": "Cpp Pv Wind Load",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "NREL_STORM_RESILIENCE",
-      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
-      "link": "https://www.osti.gov/servlets/purl/2448530",
-      "link_kind": "url",
+      "title": "Nrel Storm Resilience",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2424,9 +2553,9 @@
     "sources": [
      {
       "id": "CPP_PV_WIND_LOAD",
-      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-      "link_kind": "url",
+      "title": "Cpp Pv Wind Load",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2447,7 +2576,7 @@
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2468,22 +2597,22 @@
     "sources": [
      {
       "id": "DOE_FEMP_SEVERE_WEATHER_PV",
-      "title": "Severe Weather Resilience in Solar Photovoltaic System Design",
-      "link": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
-      "link_kind": "url",
+      "title": "Doe Femp Severe Weather Pv",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "NREL_STORM_RESILIENCE",
-      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
-      "link": "https://www.osti.gov/servlets/purl/2448530",
-      "link_kind": "url",
+      "title": "Nrel Storm Resilience",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2504,9 +2633,9 @@
     "sources": [
      {
       "id": "CPP_PV_WIND_LOAD",
-      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-      "link_kind": "url",
+      "title": "Cpp Pv Wind Load",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2526,16 +2655,16 @@
     "sources": [
      {
       "id": "CPP_PV_WIND_LOAD",
-      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-      "link_kind": "url",
+      "title": "Cpp Pv Wind Load",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "NREL_STORM_RESILIENCE",
-      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
-      "link": "https://www.osti.gov/servlets/purl/2448530",
-      "link_kind": "url",
+      "title": "Nrel Storm Resilience",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2555,9 +2684,9 @@
     "sources": [
      {
       "id": "CPP_PV_WIND_LOAD",
-      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-      "link_kind": "url",
+      "title": "Cpp Pv Wind Load",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2578,7 +2707,7 @@
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2599,22 +2728,22 @@
     "sources": [
      {
       "id": "DOE_FEMP_SEVERE_WEATHER_PV",
-      "title": "Severe Weather Resilience in Solar Photovoltaic System Design",
-      "link": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
-      "link_kind": "url",
+      "title": "Doe Femp Severe Weather Pv",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "NREL_STORM_RESILIENCE",
-      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
-      "link": "https://www.osti.gov/servlets/purl/2448530",
-      "link_kind": "url",
+      "title": "Nrel Storm Resilience",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2635,9 +2764,9 @@
     "sources": [
      {
       "id": "CPP_PV_WIND_LOAD",
-      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-      "link_kind": "url",
+      "title": "Cpp Pv Wind Load",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2657,16 +2786,16 @@
     "sources": [
      {
       "id": "CPP_PV_WIND_LOAD",
-      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-      "link_kind": "url",
+      "title": "Cpp Pv Wind Load",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "NREL_STORM_RESILIENCE",
-      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
-      "link": "https://www.osti.gov/servlets/purl/2448530",
-      "link_kind": "url",
+      "title": "Nrel Storm Resilience",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2686,9 +2815,9 @@
     "sources": [
      {
       "id": "CPP_PV_WIND_LOAD",
-      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-      "link_kind": "url",
+      "title": "Cpp Pv Wind Load",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2709,7 +2838,7 @@
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2730,22 +2859,22 @@
     "sources": [
      {
       "id": "DOE_FEMP_SEVERE_WEATHER_PV",
-      "title": "Severe Weather Resilience in Solar Photovoltaic System Design",
-      "link": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
-      "link_kind": "url",
+      "title": "Doe Femp Severe Weather Pv",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "NREL_STORM_RESILIENCE",
-      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
-      "link": "https://www.osti.gov/servlets/purl/2448530",
-      "link_kind": "url",
+      "title": "Nrel Storm Resilience",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2766,9 +2895,9 @@
     "sources": [
      {
       "id": "CPP_PV_WIND_LOAD",
-      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-      "link_kind": "url",
+      "title": "Cpp Pv Wind Load",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2788,16 +2917,16 @@
     "sources": [
      {
       "id": "CPP_PV_WIND_LOAD",
-      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-      "link_kind": "url",
+      "title": "Cpp Pv Wind Load",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "NREL_STORM_RESILIENCE",
-      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
-      "link": "https://www.osti.gov/servlets/purl/2448530",
-      "link_kind": "url",
+      "title": "Nrel Storm Resilience",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2817,9 +2946,9 @@
     "sources": [
      {
       "id": "CPP_PV_WIND_LOAD",
-      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-      "link_kind": "url",
+      "title": "Cpp Pv Wind Load",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2840,7 +2969,7 @@
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2861,22 +2990,22 @@
     "sources": [
      {
       "id": "DOE_FEMP_SEVERE_WEATHER_PV",
-      "title": "Severe Weather Resilience in Solar Photovoltaic System Design",
-      "link": "https://www.energy.gov/cmei/femp/severe-weather-resilience-solar-photovoltaic-system-design",
-      "link_kind": "url",
+      "title": "Doe Femp Severe Weather Pv",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "NREL_STORM_RESILIENCE",
-      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
-      "link": "https://www.osti.gov/servlets/purl/2448530",
-      "link_kind": "url",
+      "title": "Nrel Storm Resilience",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2897,9 +3026,9 @@
     "sources": [
      {
       "id": "CPP_PV_WIND_LOAD",
-      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-      "link_kind": "url",
+      "title": "Cpp Pv Wind Load",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2919,16 +3048,16 @@
     "sources": [
      {
       "id": "CPP_PV_WIND_LOAD",
-      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-      "link_kind": "url",
+      "title": "Cpp Pv Wind Load",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      },
      {
       "id": "NREL_STORM_RESILIENCE",
-      "title": "Toward Solar Photovoltaic Storm Resilience / storm-hardening observations",
-      "link": "https://www.osti.gov/servlets/purl/2448530",
-      "link_kind": "url",
+      "title": "Nrel Storm Resilience",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2948,9 +3077,9 @@
     "sources": [
      {
       "id": "CPP_PV_WIND_LOAD",
-      "title": "Wind Loads on Utility Scale Solar PV Power Plants",
-      "link": "https://cppwind.com/wp-content/uploads/2020/12/Wind-Loads-on-Utility-Scale-Solar-PV-Power-Plants_DBanks_2015.pdf",
-      "link_kind": "url",
+      "title": "Cpp Pv Wind Load",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md",
+      "link_kind": "repo_file",
       "resolved": true
      }
     ],
@@ -2971,7 +3100,7 @@
      {
       "id": "SOLAR_WIND_VALUE_BREAKDOWN",
       "title": "solar_wind_value_breakdown.xlsx",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/value_basis/solar_wind_value_breakdown.xlsx",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2991,16 +3120,14 @@
     "Sources"
    ],
    "sections": [],
-   "unmatched": [
-    "WIND_PRESSURE_PHYSICS"
-   ],
+   "unmatched": [],
    "sentence": null,
    "dossier": "docs/cells/strong_wind_solar/current/strong_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md",
    "workbook": "docs/cells/strong_wind_solar/current/damage_curve_records_model_v1_0_docs_r1_strong_wind_solar.xlsx"
   },
   "link_counts": {
-   "total": 10,
-   "linked": 10,
+   "total": 14,
+   "linked": 14,
    "locator_only": 0,
    "neither": 0,
    "markers": 0,
@@ -3103,28 +3230,684 @@
    ],
    "open_seams": [],
    "matched": {
-    "CPP_PV_WIND_LOAD": "SRC_CPP_WIND_LOADS_UTILITY_PV",
-    "DOE_FEMP_SEVERE_WEATHER_PV": "SRC_DOE_FEMP_PV_SEVERE_WEATHER",
-    "NREL_STORM_RESILIENCE": "SRC_NREL_STORM_RESILIENCE",
-    "SOLAR_WIND_VALUE_BREAKDOWN": "SOLAR_WIND_VALUE_BREAKDOWN"
+    "CPP_PV_WIND_LOAD": "CPP_PV_WIND_LOAD",
+    "DOE_FEMP_SEVERE_WEATHER_PV": "DOE_FEMP_SEVERE_WEATHER_PV",
+    "NREL_STORM_RESILIENCE": "NREL_STORM_RESILIENCE",
+    "SOLAR_WIND_VALUE_BREAKDOWN": "SOLAR_WIND_VALUE_BREAKDOWN",
+    "WIND_PRESSURE_PHYSICS": "WIND_PRESSURE_PHYSICS"
    },
-   "unmatched": [
-    "WIND_PRESSURE_PHYSICS"
-   ]
+   "unmatched": []
   },
   "tier_words": {
    "shape": "our judgment",
    "cost": "our judgment"
   }
  },
- "build_findings": [
+ "build_findings": [],
+ "hazard_note": null,
+ "subcomponents": [
   {
-   "check": "extracted_sources",
-   "severity": "data",
-   "items": [
-    "tier-table source ID WIND_PRESSURE_PHYSICS matches no document in the workbook or dossier"
+   "key": "pv_modules",
+   "label": "PV modules",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "share": 0.33175698019037186,
+   "share_basis": "share of the asset's reference value. This cell's own value lines here (share of the physical replaceable base (artifact default)): PV module attachment 40 %",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "strong_wind_solar",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "SWS_MODULE_ATTACH"
    ],
-   "sentence": "1 source ID in this cell's tier table matches no document in the workbook or dossier."
+   "failure_unit_ids": [
+    "SWS_MODULE_ATTACH"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "our judgment"
+   ],
+   "evidence_words": "our judgment",
+   "construction": [
+    {
+     "curve_id": "SWS_MODULE_ATTACH",
+     "data_path": "curves/strong_wind_solar/SWS_MODULE_ATTACH@model_v1_0__docs_r3.json",
+     "curve_type": "thresholded logistic demand",
+     "curve_form": "thresholded_logistic_demand",
+     "formula": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(−k × (R − R50)))",
+     "artifact": "docs/cells/strong_wind_solar/current/strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "CPP_PV_WIND_LOAD",
+      "DOE_FEMP_SEVERE_WEATHER_PV",
+      "NREL_STORM_RESILIENCE",
+      "SOLAR_WIND_VALUE_BREAKDOWN"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer Convective wind × Solar uses the file shown here (model v1.0, docs r3).",
+        "How this is known: the Hazard commit that produced the layer's run pins the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "strong_wind_solar",
+     "part": "PV module attachment",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
+    "hazard": "used"
+   },
+   "gap": null
+  },
+  {
+   "key": "mounting",
+   "label": "Mounting: trackers and racking",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "share": 0.17460064821189464,
+   "share_basis": "share of the asset's reference value. This cell's own value lines here (share of the physical replaceable base (artifact default)): Tracker structure 8 %; Racking structure 6 % — listed as the cell gives them, not added up",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "strong_wind_solar",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "SWS_RACKING_STRUCT",
+    "SWS_TRACKER_STRUCT"
+   ],
+   "failure_unit_ids": [
+    "SWS_RACKING_STRUCT",
+    "SWS_TRACKER_STRUCT"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "our judgment"
+   ],
+   "evidence_words": "our judgment",
+   "construction": [
+    {
+     "curve_id": "SWS_RACKING_STRUCT",
+     "data_path": "curves/strong_wind_solar/SWS_RACKING_STRUCT@model_v1_0__docs_r3.json",
+     "curve_type": "thresholded logistic demand",
+     "curve_form": "thresholded_logistic_demand",
+     "formula": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(−k × (R − R50)))",
+     "artifact": "docs/cells/strong_wind_solar/current/strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "CPP_PV_WIND_LOAD",
+      "DOE_FEMP_SEVERE_WEATHER_PV",
+      "NREL_STORM_RESILIENCE",
+      "SOLAR_WIND_VALUE_BREAKDOWN"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer Convective wind × Solar uses the file shown here (model v1.0, docs r3).",
+        "How this is known: the Hazard commit that produced the layer's run pins the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "strong_wind_solar",
+     "part": "Racking structure",
+     "scope_note": null
+    },
+    {
+     "curve_id": "SWS_TRACKER_STRUCT",
+     "data_path": "curves/strong_wind_solar/SWS_TRACKER_STRUCT@model_v1_0__docs_r3.json",
+     "curve_type": "thresholded logistic demand",
+     "curve_form": "thresholded_logistic_demand",
+     "formula": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(−k × (R − R50)))",
+     "artifact": "docs/cells/strong_wind_solar/current/strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "CPP_PV_WIND_LOAD",
+      "DOE_FEMP_SEVERE_WEATHER_PV",
+      "NREL_STORM_RESILIENCE",
+      "SOLAR_WIND_VALUE_BREAKDOWN"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer Convective wind × Solar uses the file shown here (model v1.0, docs r3).",
+        "How this is known: the Hazard commit that produced the layer's run pins the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "strong_wind_solar",
+     "part": "Tracker structure",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
+    "hazard": "used"
+   },
+   "gap": null
+  },
+  {
+   "key": "foundations",
+   "label": "Foundations",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "share": 0.035457552445859936,
+   "share_basis": "share of the asset's reference value. This cell's own value lines here (share of the physical replaceable base (artifact default)): Foundations (uplift) 8 %",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "strong_wind_solar",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "SWS_FOUNDATION_UPLIFT"
+   ],
+   "failure_unit_ids": [
+    "SWS_FOUNDATION_UPLIFT"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "our judgment"
+   ],
+   "evidence_words": "our judgment",
+   "construction": [
+    {
+     "curve_id": "SWS_FOUNDATION_UPLIFT",
+     "data_path": "curves/strong_wind_solar/SWS_FOUNDATION_UPLIFT@model_v1_0__docs_r3.json",
+     "curve_type": "thresholded logistic demand",
+     "curve_form": "thresholded_logistic_demand",
+     "formula": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(−k × (R − R50)))",
+     "artifact": "docs/cells/strong_wind_solar/current/strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "CPP_PV_WIND_LOAD",
+      "DOE_FEMP_SEVERE_WEATHER_PV",
+      "NREL_STORM_RESILIENCE",
+      "SOLAR_WIND_VALUE_BREAKDOWN"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer Convective wind × Solar uses the file shown here (model v1.0, docs r3).",
+        "How this is known: the Hazard commit that produced the layer's run pins the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "strong_wind_solar",
+     "part": "Foundations (uplift)",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
+    "hazard": "used"
+   },
+   "gap": null
+  },
+  {
+   "key": "inverters",
+   "label": "Inverters and combiners",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "share": 0.04458055138005733,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "strong_wind_solar",
+   "catalogue_status": "live",
+   "cell_state": "not_named",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell for this hazard never mentions this part: it has no curve, and no reason is given. Whether it needs one has not been decided.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "This expected subsystem is not named by the cell.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/strong_wind_solar/current/strong_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "collection",
+   "label": "Collection cable",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "share": 0.12391023656366706,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "strong_wind_solar",
+   "catalogue_status": "live",
+   "cell_state": "not_named",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell for this hazard never mentions this part: it has no curve, and no reason is given. Whether it needs one has not been decided.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "This expected subsystem is not named by the cell.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/strong_wind_solar/current/strong_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "substation",
+   "label": "Transformers, switchgear and the GSU substation",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "share": 0.12133194989726823,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "strong_wind_solar",
+   "catalogue_status": "live",
+   "cell_state": "not_named",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell for this hazard never mentions this part: it has no curve, and no reason is given. Whether it needs one has not been decided.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "This expected subsystem is not named by the cell.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/strong_wind_solar/current/strong_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "scada",
+   "label": "SCADA and communications",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "share": 0.0014923745883854477,
+   "share_basis": "share of the asset's reference value. This cell's own value lines here (share of the physical replaceable base (artifact default)): Exposed SCADA and met station 2 %",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "strong_wind_solar",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "SWS_SCADA_EXPOSED"
+   ],
+   "failure_unit_ids": [
+    "SWS_SCADA_EXPOSED"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "our judgment"
+   ],
+   "evidence_words": "our judgment",
+   "construction": [
+    {
+     "curve_id": "SWS_SCADA_EXPOSED",
+     "data_path": "curves/strong_wind_solar/SWS_SCADA_EXPOSED@model_v1_0__docs_r3.json",
+     "curve_type": "thresholded logistic demand",
+     "curve_form": "thresholded_logistic_demand",
+     "formula": "D(R) = 0 for R < R0; otherwise max_DR / (1 + exp(−k × (R − R50)))",
+     "artifact": "docs/cells/strong_wind_solar/current/strong_wind_solar__model_v1_0__docs_r3__curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "CPP_PV_WIND_LOAD",
+      "DOE_FEMP_SEVERE_WEATHER_PV",
+      "NREL_STORM_RESILIENCE",
+      "SOLAR_WIND_VALUE_BREAKDOWN"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer Convective wind × Solar uses the file shown here (model v1.0, docs r3).",
+        "How this is known: the Hazard commit that produced the layer's run pins the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "strong_wind_solar",
+     "part": "Exposed SCADA and met station",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
+    "hazard": "used"
+   },
+   "gap": null
+  },
+  {
+   "key": "grounding",
+   "label": "Grounding and lightning protection",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "share": 0.009552336582909908,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "strong_wind_solar",
+   "catalogue_status": "live",
+   "cell_state": "not_named",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell for this hazard never mentions this part: it has no curve, and no reason is given. Whether it needs one has not been decided.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "This expected subsystem is not named by the cell.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/strong_wind_solar/current/strong_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "civil",
+   "label": "Civil works: roads, fencing, buildings",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "share": 0.03557062789006132,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "strong_wind_solar",
+   "catalogue_status": "live",
+   "cell_state": "not_named",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell for this hazard never mentions this part: it has no curve, and no reason is given. Whether it needs one has not been decided.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "This expected subsystem is not named by the cell.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/strong_wind_solar/current/strong_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "support",
+   "label": "Replacement support and fieldwork",
+   "asset": {
+    "slug": "solar",
+    "label": "Solar farm"
+   },
+   "share": 0.1217467422495242,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "strong_wind_solar",
+   "catalogue_status": "live",
+   "cell_state": "not_named",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell for this hazard never mentions this part: it has no curve, and no reason is given. Whether it needs one has not been decided.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "This expected subsystem is not named by the cell.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/strong_wind_solar/current/strong_wind_solar_curve_derivation_dossier__model_v1_0__docs_r1.md"
+    },
+    "research": []
+   }
   }
- ]
+ ],
+ "subcomponent_rollup": {
+  "expected": 10,
+  "with_curve": 4,
+  "gap": 6,
+  "complete": 4,
+  "incomplete": 6,
+  "evidence_labels": {
+   "field-calibrated": 0,
+   "published": 0,
+   "borrowed": 0,
+   "our judgment": 4
+  }
+ },
+ "value_split": {
+  "priced": 0.5433075554365119,
+  "partly": 0.0,
+  "no_damage": 0.0,
+  "not_priced": 0.45669244456348806,
+  "basis": "of the reference plant's physical value"
+ }
 }

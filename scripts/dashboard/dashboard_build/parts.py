@@ -13,11 +13,13 @@ from __future__ import annotations
 import csv
 import io
 import re
+from fnmatch import fnmatchcase
 from pathlib import Path
 from typing import Any
 
-from .common import ROOT, SENTENCES, fmt_pct, fmt_usd_compact, humanise, load_json, read_csv, rel, sha256
+from .common import ROOT, SENTENCES, SHOW_FIELD_REPORTS, fmt_pct, fmt_usd_compact, humanise, load_json, read_csv, rel, sha256
 from .plain import TIER_SHORT, _join, label_case, singular, tier_words
+from .plain_reasons import plain as plain_reason, source_doc
 
 try:
     import openpyxl  # type: ignore
@@ -62,6 +64,117 @@ ROWS: dict[str, list[tuple[str, str, list[str]]]] = {
         ("contents", "Contents and inventory", ["CONTENTS"]),
     ],
 }
+# The solar and wind profiles' value budget: the repository's sourced value ledger (NREL benchmarks), read from its
+# Solar_Map / Wind_Map sheets and grouped by the subsystem each line is filed under (installation labour stays with the
+# hardware it installs, as in the battery and substation budgets). Each ledger subsystem names the rows it belongs to;
+# a line filed under two rows (wind's "ELECTRICAL_COLLECTION + SUBSTATION") is counted once, on the first of them.
+LEDGER_REL = "docs/method/value_basis/solar_wind_value_breakdown.xlsx"
+LEDGER_ROWS: dict[str, dict[str, list[str]]] = {
+    "solar": {"PV_ARRAY": ["pv_modules"], "MOUNTING": ["mounting"], "FOUNDATION": ["foundations"], "INVERTER_SYSTEM": ["inverters"],
+              "ELECTRICAL_COLLECTION": ["collection"], "SUBSTATION": ["substation"], "GROUNDING_LIGHTNING": ["grounding"], "SCADA": ["scada"],
+              "CIVIL_INFRA": ["civil"], "REPLACEMENT_FIELDWORK": ["support"], "SUNK_SOFT_NONPHYSICAL": []},
+    "wind": {"ROTOR_ASSEMBLY": ["rotor"], "PITCH_SYSTEM": ["rotor"], "NACELLE": ["nacelle"], "POWER_ELECTRONICS": ["turbine_electrical"], "TOWER": ["tower"],
+             "FOUNDATION": ["foundation"], "CIVIL_INFRA": ["civil"], "ELECTRICAL_COLLECTION + SUBSTATION": ["collection", "gsu"],
+             "REPLACEMENT_FIELDWORK": ["support"], "REPLACEMENT_LOGISTICS": ["support"], "SUNK_SOFT_NONPHYSICAL": []},
+}
+LEDGER_SHEET = {"solar": ("Solar_Map", "Solar asset DC capacity", "MWdc"), "wind": ("Wind_Map", "Wind asset nameplate capacity", "MW")}
+# the plant the ledger's $/kW is multiplied by: Hazard's settled reference (06_settled_reference_design.md, settled
+# 2026-09-30), not the ledger's own editable default size, so the dashboard and Hazard name the same plant
+SETTLED_REL = "docs/plans/_cross_cutting/canonical_asset_profile/06_settled_reference_design.md"
+SETTLED_PLANT = {"solar": (120.0, "MWdc", "100 MWac / 120 MWdc single-axis tracker"), "wind": (100.0, "MW", "100 MW, twenty 5 MW turbines")}
+
+
+def ledger_budget(aslug: str) -> dict[str, Any] | None:
+    """The asset's value budget from the ledger: physical value per row, the groups of rows that share one line, the source."""
+    if aslug not in LEDGER_ROWS or openpyxl is None:
+        return None
+    path = ROOT / LEDGER_REL
+    wb = openpyxl.load_workbook(path, data_only=True, read_only=True)
+    sheet, cap_label, cap_unit = LEDGER_SHEET[aslug]
+    capacity = next(r[1] for r in wb["Inputs"].iter_rows(values_only=True) if r and r[0] == cap_label)
+    rows_ = list(wb[sheet].iter_rows(values_only=True))
+    hdr = list(rows_[0])
+    by_group: dict[tuple[str, ...], float] = {}
+    for r in rows_[1:]:
+        d = dict(zip(hdr, r))
+        if not d.get("subsystem"):
+            continue
+        if d["subsystem"] not in LEDGER_ROWS[aslug]:
+            raise ValueError(f"{LEDGER_REL} {sheet}: subsystem {d['subsystem']!r} has no dashboard row; add it to LEDGER_ROWS")
+        keys = tuple(LEDGER_ROWS[aslug][d["subsystem"]])
+        if keys and d.get("physical_usd_per_kw"):
+            by_group[keys] = by_group.get(keys, 0.0) + float(d["physical_usd_per_kw"])
+    total = sum(by_group.values())
+    plant_mw, plant_unit, plant_words = SETTLED_PLANT[aslug]
+    return {"groups": [{"rows": list(k), "usd_per_kw": v, "share": v / total} for k, v in by_group.items()], "total_usd_per_kw": total,
+            "capacity": plant_mw, "capacity_unit": plant_unit, "total_usd": total * plant_mw * 1000, "path": LEDGER_REL, "sha256": sha256(path),
+            "ledger_default": f"{capacity:g} {cap_unit}",
+            "label": f"{plant_words} (Hazard's settled reference) · {fmt_usd_compact(total * plant_mw * 1000)} physical replacement value",
+            "note": f"the value ledger's ${total:,.0f}/kW × Hazard's settled plant of {plant_mw:g} {plant_unit}, not the ledger's own default size ({capacity:g} {cap_unit})"}
+
+
+# how much of the asset's value each hazard's curves price, from the profile's budget and each subsystem's state
+PRICED_STATES = {"curve", "whole"}
+
+
+def value_split(subs: list[dict[str, Any]], groups: list[list[str]] | None, stated_partial: dict[str, float] | None = None) -> dict[str, Any] | None:
+    """{priced, partly, no_damage, not_priced} as shares of the budget, for one hazard's subsystem rows; None without a budget.
+    A row filed with others under one budget line is judged with them; a partly covered row whose cell states the covered
+    dollars (stated_partial: row key -> share of the same budget) is split by them."""
+    by_key = {s["key"]: s for s in subs}
+    if not by_key or all(s.get("share") is None for s in subs):
+        return None
+    any_priced = any(s.get("cell_state") in ("curve", "whole", "partial") for s in subs)
+    def kind(s: dict[str, Any]) -> str:
+        if (s.get("gap") or {}).get("no_direct_damage"):
+            return "no_damage"
+        st = s.get("cell_state")
+        if s.get("cost_follows"):
+            return "priced" if any_priced else "not_priced"
+        return "priced" if st in PRICED_STATES else "partly" if st == "partial" else "not_priced"
+    out = {"priced": 0.0, "partly": 0.0, "no_damage": 0.0, "not_priced": 0.0}
+    seen: set[str] = set()
+    for key, s in by_key.items():
+        if key in seen or s.get("share") is None:
+            continue
+        group = next((g for g in (groups or []) if key in g), [key])
+        seen.update(group)
+        kinds = {kind(by_key[k]) for k in group if k in by_key}
+        k = kinds.pop() if len(kinds) == 1 else "partly"
+        share = float(s["share"])
+        if k == "partly" and stated_partial and key in stated_partial:
+            out["priced"] += stated_partial[key]
+            out["not_priced"] += max(0.0, share - stated_partial[key])
+        else:
+            out[k] += share
+    return out
+
+
+def labour_note(aslug: str, subs: list[dict[str, Any]], hz: list[dict[str, Any]], cells: dict[str, dict[str, Any]], budget: dict[str, Any] | None) -> str | None:
+    """How each hazard's cell treats replacement labour (the 'support' row): they differ, and it changes what is priced."""
+    if not budget:
+        return None
+    share = next((g["share"] for g in budget["groups"] if g["rows"] == ["support"]), None)
+    parts_ = []
+    for h in hz:
+        s = next((x for x in subs if x["key"] == "support" and x["hazard"]["slug"] == h["slug"]), None)
+        if not s or not s.get("entry_id") or s.get("cell_state") in (None, "gap", "unassessed_gap"):
+            continue
+        assumed = [a for a in cells[s["entry_id"]]["plain"]["blocks"]["assumed"] if "fieldwork" in a.lower() or "labour" in a.lower() or "labor" in a.lower()]
+        if assumed:
+            parts_.append(f"{h['label']}: no separate item; the cell's assumption: “{assumed[0]}”.")
+        elif s.get("cost_follows"):
+            parts_.append(f"{h['label']}: a separate item with no curve of its own; its cost follows the other parts' damage and is added once.")
+        elif s["cell_state"] == "not_named":
+            parts_.append(f"{h['label']}: not mentioned by the cell, so replacement labour is not priced.")
+        elif (s.get("gap") or {}).get("reason"):
+            parts_.append(f"{h['label']}: {s['gap']['reason']}")
+    if not parts_:
+        return None
+    return ("Replacement labour (installation, inspection, logistics" + (f"; {fmt_pct(share)} of the plant in the value ledger" if share else "") +
+            ") is treated differently by each hazard's cell — " + " ".join(parts_))
+
+
 # a unit whose component names several rows: it is listed under each of them
 SPANS: dict[str, list[str]] = {
     "power conversion and collection": ["inverters", "collection"],
@@ -295,15 +408,16 @@ def substation_crosswalk(out_dir: Path) -> dict[str, Any]:
 
 def _state_words(state: str, tier_span: str | None, extra: str | None = None) -> str:
     words = {
-        "curve": "curve · " + tier_words(tier_span) if tier_span and tier_span != "–" else "curve",
-        "partial": "curve for part of it · " + tier_words(tier_span) if tier_span and tier_span != "–" else "curve for part of it",
-        "whole": "one curve for the whole " + (extra or "asset"),
+        # the same words as the subsystem table and the picture: has a curve · partial · in the whole-… curve · no curve yet
+        "curve": "has a curve · " + tier_words(tier_span) if tier_span and tier_span != "–" else "has a curve",
+        "partial": "partial · " + tier_words(tier_span) if tier_span and tier_span != "–" else "partial",
+        "whole": "in the whole-" + (extra or "asset") + " curve",
         "reused": "reused curve · " + tier_words(tier_span) if tier_span and tier_span != "–" else "reused curve",
-        "withheld": "named, no response yet (withheld)",
-        "no_curve": "no curve",
+        "withheld": "named, left out for now",
+        "no_curve": "no curve yet",
         "not_named": "not named by this cell",
-        "gap": "no cell yet",
-        "exposure_modifier": "no own curve; takes the other parts' damage ratio",
+        "gap": "no curve yet",
+        "exposure_modifier": "no curve of its own; takes other parts' damage",
     }
     return words.get(state, state)
 
@@ -315,14 +429,52 @@ def _span(codes: list[str | None]) -> str:
     return tiers[0] if len(tiers) == 1 else f"{tiers[0]}–{tiers[-1][1]}"
 
 
+def _tier_labels(codes: list[str | None]) -> list[str]:
+    labels = {"T1": "field-calibrated", "T2": "published", "T3": "borrowed", "T4": "our judgment"}
+    return [labels[c] for c in ("T1", "T2", "T3", "T4") if c in set(codes)]
+
+
+def _rollup(subcomponents: list[dict[str, Any]]) -> dict[str, Any]:
+    def counts(rows: list[dict[str, Any]]) -> dict[str, Any]:
+        return {
+            "expected": len(rows),
+            "with_curve": sum(1 for r in rows if r["coverage"] == "curve"),
+            "gap": sum(1 for r in rows if r["coverage"] == "gap"),
+            "complete": sum(1 for r in rows if r["completeness"] == "complete"),
+            "incomplete": sum(1 for r in rows if r["completeness"] == "incomplete"),
+            "evidence_labels": {label: sum(1 for r in rows if label in r["evidence_labels"]) for label in ("field-calibrated", "published", "borrowed", "our judgment")},
+        }
+    hazards = sorted({r["hazard"]["slug"] for r in subcomponents})
+    return {**counts(subcomponents), "by_hazard": {h: counts([r for r in subcomponents if r["hazard"]["slug"] == h]) for h in hazards}}
+
+
+def _construction_ref(curve: dict[str, Any]) -> dict[str, Any]:
+    """Compact pointer for the matrix; the curve JSON is the one detailed construction document."""
+    block = curve.get("construction") or {}
+    return {
+        "curve_id": curve["curve_id"], "data_path": curve.get("data_path"), "curve_type": block.get("curve_type"),
+        "curve_form": block.get("curve_form"), "formula": block.get("formula"), "artifact": block.get("artifact"),
+        "parameter_count": len(block.get("parameters") or []) + len(block.get("additional_parameter_rows") or []),
+        "source_ids": block.get("source_ids") or [], "production_use": block.get("production_use"),
+        "entry_id": curve.get("entry_id"), "part": curve.get("part"), "scope_note": block.get("scope_note"),
+    }
+
+
+def shown_hazards(hazards: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """The hazards an asset page lists: the five and heat. Icing and lightning have no curve and no research yet, so
+    they are listed only with the field reports."""
+    return [h for h in hazards if SHOW_FIELD_REPORTS or not h["outside_the_five"] or h["slug"] == "heat"]
+
+
 def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dict[str, dict[str, Any]], sl: dict[str, Any], registers: dict[tuple[str, str], Any],
                bess_values: dict[str, float] | None, fb_binding: dict[str, Any] | None, twin: dict[str, Any], sub_budget: dict[str, Any] | None,
-               sub_crosswalk: dict[str, Any] | None, resolve_state: Any) -> dict[str, Any]:
-    hz = [h for h in sl["hazards"]]
+               sub_crosswalk: dict[str, Any] | None, resolve_state: Any, all_curves: dict[str, dict[str, Any]] | None = None) -> dict[str, Any]:
+    hz = shown_hazards(sl["hazards"])
     by_hazard: dict[str, Any] = {}
     for e in entries:
         by_hazard[next(h["slug"] for h in hz if h["catalogue"] == e.data["hazard"])] = e
     parts_by_cell = {e.id: cell_parts(e, cells[e.id], aslug, bess_values, fb_binding) for e in entries if e.kind != "gap"}
+    budget: dict[str, Any] | None = None
     # ── rows
     rows: list[dict[str, Any]] = []
     if aslug == "bess":
@@ -342,8 +494,13 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
             v = by_sys.get(key)
             rows.append({"key": key, "label": label, "value_usd": v, "share": (v / total) if v is not None and total else None, "twin_targets": [f"phy:substation:{key}"], "subsystems": [key], "cells": {}})
     else:
+        budget = ledger_budget(aslug)
         for key, label, words in ROWS.get(aslug, []):
-            rows.append({"key": key, "label": label, "value_usd": None, "share": None, "twin_targets": [], "subsystems": words, "cells": {}})
+            g = next((g for g in (budget or {}).get("groups", []) if key in g["rows"]), None)
+            first = bool(g) and g["rows"][0] == key
+            rows.append({"key": key, "label": label, "value_usd": g["usd_per_kw"] * float(budget["capacity"]) * 1000 if first else None,
+                         "share": g["share"] if first else None, "shared_with": [r for r in g["rows"] if r != key] if g and len(g["rows"]) > 1 else [],
+                         "twin_targets": [], "subsystems": words, "cells": {}})
     # ── cells
     whole_word = {"substation": "fenced station", "real_estate": "building"}.get(aslug, "asset")
     for row in rows:
@@ -355,7 +512,7 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
             cellv: dict[str, Any] = {"entry_id": e.id if e else None, "effect": h["effect"], "outside_the_five": h["outside_the_five"],
                                      "twin_lead": (bucket_reg or {}).get("twin_lead", {}).get("level") if bucket_reg else None,
                                      "twin_nodes": (bucket_reg or {}).get("twin_lead", {}).get("nodes", []) if bucket_reg else [],
-                                     "occurrence": occ, "state": None, "words": "—", "mark": "—", "parts": [], "tier_span": None, "share": None, "dollars": None}
+                                     "occurrence": occ, "state": None, "words": "—", "mark": "—", "parts": [], "curve_ids": [], "tier_span": None, "share": None, "dollars": None}
             if e is None:
                 row["cells"][h["slug"]] = cellv
                 continue
@@ -377,14 +534,16 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                     if rows_here and len(modeled) == len(rows_here):
                         st, words = "reused", _state_words("reused", span)
                     elif modeled:
-                        st, words = "partial", f"curve for part of it: {_join([l['item'].lower() for l in modeled])} · {tier_words(span)}"
+                        st, words = "partial", f"partial: {_join([l['item'].lower() for l in modeled])} · {tier_words(span)}"
                     else:
                         st, words = "withheld", "in the station's value, withheld by this binding"
                     cellv.update({"state": st, "words": words, "mark": "▨" if st != "withheld" else "▢", "tier_span": span,
-                                  "dollars": sum(float(l["amount_usd"]) for l in modeled) if modeled else 0.0, "parts": [l["item"] for l in rows_here]})
+                                  "dollars": sum(float(l["amount_usd"]) for l in modeled) if modeled else 0.0, "parts": [l["item"] for l in rows_here],
+                                  "curve_ids": sorted({cid for r_ in e.data.get("rows") or [] for cid in r_.get("curves") or []})})
                 else:
                     cellv.update({"state": "whole", "words": _state_words("whole", span, whole_word) + f" · {tier_words(span)}", "mark": "▨", "tier_span": span,
-                                  "parts": [r["part"] for r in e.data.get("rows") or []], "dollars": row.get("value_usd")})
+                                  "parts": [r["part"] for r in e.data.get("rows") or []], "curve_ids": sorted({cid for r_ in e.data.get("rows") or [] for cid in r_.get("curves") or []}),
+                                  "dollars": row.get("value_usd")})
                 row["cells"][h["slug"]] = cellv
                 continue
             if aslug == "substation" or (aslug == "real_estate" and row["key"] != "contents"):
@@ -394,12 +553,14 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                     whole = [p for p in mine if p.get("whole_building")]
                 if whole and not [p for p in mine if not p.get("whole_building")] and aslug == "real_estate":
                     span = _span([whole[0].get("shape"), whole[0].get("cost")])
-                    cellv.update({"state": "whole", "words": _state_words("whole", span, whole_word) + f" · {tier_words(span)}", "mark": "■", "tier_span": span, "parts": [p["part"] for p in whole]})
+                    cellv.update({"state": "whole", "words": _state_words("whole", span, whole_word) + f" · {tier_words(span)}", "mark": "■", "tier_span": span, "parts": [p["part"] for p in whole],
+                                  "curve_ids": sorted({cid for p in whole for cid in p.get("curves") or []})})
                     row["cells"][h["slug"]] = cellv
                     continue
                 if aslug == "substation" and whole:
                     span = _span([whole[0].get("shape"), whole[0].get("cost")])
-                    cellv.update({"state": "whole", "words": _state_words("whole", span, whole_word) + f" · {tier_words(span)}", "mark": "■", "tier_span": span, "parts": [p["part"] for p in whole], "dollars": row.get("value_usd")})
+                    cellv.update({"state": "whole", "words": _state_words("whole", span, whole_word) + f" · {tier_words(span)}", "mark": "■", "tier_span": span, "parts": [p["part"] for p in whole],
+                                  "curve_ids": sorted({cid for p in whole for cid in p.get("curves") or []}), "dollars": row.get("value_usd")})
                     row["cells"][h["slug"]] = cellv
                     continue
             if mine:
@@ -415,6 +576,7 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                     if aslug == "real_estate" and st == "partial":
                         words = f"curve for {_join([str(p['component']).lower() for p in curves])} only · {tier_words(span)}"
                     cellv.update({"state": st, "words": words, "mark": "■" + ("◔" if partial else ""), "tier_span": span, "parts": [p["part"] for p in mine],
+                                  "curve_ids": sorted({cid for p in curves for cid in p.get("curves") or []}),
                                   "share": sum(p["share"] for p in curves if p.get("share") is not None) if any(p.get("share") is not None for p in curves) else None, "dollars": dollars,
                                   "spans": [p["part"] for p in mine if p["spans"]], "drawn": any(p["drawn"] for p in curves)})
                 elif withheld:
@@ -451,10 +613,260 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                       "sha256": sub_crosswalk.get("sha256"), "rows": len(sub_crosswalk["rows"]), "nodes": nodes, "leads": False}
     else:
         twin_block = {"available": False, "sentence": NO_TWIN, "sha256": None, "rows": None, "nodes": {}}
-    return {"rows": rows, "parts_by_cell": parts_by_cell, "split": split, "twin": twin_block,
+    # One normalized record per expected plant part × hazard. This deliberately includes catalogue gaps,
+    # occurrence-only hazards, withheld units, and parts a cell never names.
+    subcomponents: list[dict[str, Any]] = []
+    all_curve_lookup = {x["curve_id"]: x for x in (all_curves or {}).values()}
+    all_curve_lookup.update({x["curve_id"]: x for cell_ in cells.values() for x in cell_.get("_curves") or []})
+    for row in rows:
+        for h in hz:
+            c = row["cells"][h["slug"]]
+            e = by_hazard.get(h["slug"]) if h["catalogue"] else None
+            pc = parts_by_cell.get(e.id) if e else None
+            mine = [p for p in (pc or {}).get("parts", []) if row["key"] in p["rows"]]
+            tier_codes = [x for p in mine for x in (p.get("shape"), p.get("cost")) if x]
+            if e and e.kind == "binding":
+                tier_codes += [x for r_ in e.data.get("rows") or [] for x in (r_.get("shape"), r_.get("cost")) if x]
+            curve_ids = c.get("curve_ids") or sorted({cid for p in mine for cid in p.get("curves") or []})
+            curve_ids = sorted({actual for pattern in curve_ids for actual in all_curve_lookup if fnmatchcase(actual, pattern)})
+            construction = [_construction_ref(all_curve_lookup[cid]) for cid in curve_ids if cid in all_curve_lookup]
+            curve_states = {"curve", "whole", "reused"}
+            coverage = "curve" if c.get("state") in curve_states | {"partial"} else "gap"
+            completeness = "complete" if c.get("state") in curve_states else "incomplete"
+            reg = registers.get((aslug, h["slug"]))
+            gap_reason = None
+            if coverage == "gap" or completeness == "incomplete":
+                if e and e.kind == "gap":
+                    gap_reason = e.data.get("reason")
+                elif c.get("state") == "no_curve":
+                    gap_reason = c.get("no_curve_text") or "This expected subsystem has no curve."
+                elif c.get("state") == "withheld":
+                    gap_reason = "; ".join(str(x) for p in mine for x in p.get("withheld_reasons") or []) or "The cell explicitly withholds this response."
+                elif c.get("state") == "partial":
+                    gap_reason = "A curve covers only part of this expected subsystem."
+                elif c.get("state") == "exposure_modifier":
+                    gap_reason = "This subsystem takes another part's damage ratio and has no curve of its own."
+                elif e is None and h["effect"] != "damage":
+                    gap_reason = (f"{h['label']} changes how this asset performs rather than destroying it, and a damage curve prices "
+                                  "physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field "
+                                  "is the occurrence register's open question.")
+                elif e is None:
+                    gap_reason = "No catalogue entry or curve has been built for this asset × hazard."
+                else:
+                    gap_reason = "This expected subsystem is not named by the cell."
+            states = {x["production_use"]["state"] for x in construction if x.get("production_use")}
+            production_state = ("reused_binding" if e and e.kind == "binding" and curve_ids else
+                                "runtime_indexed" if "runtime_indexed" in states else "not_runtime_indexed")
+            borrowed_from = None
+            if e and e.kind == "binding":
+                b_ = cells[e.id].get("binding") or {}
+                borrowed_from = {"entry_id": b_.get("source_entry_id"), "title": (cells.get(b_.get("source_entry_id") or "") or {}).get("title"), "curves": b_.get("reused_curves") or [], "rationale": b_.get("transfer_rationale"),
+                                 "tier": b_.get("transfer_tier"), "tier_word": tier_words(b_.get("transfer_tier")) if b_.get("transfer_tier") else None}
+            evidence_labels = _tier_labels(tier_codes)
+            if e and e.kind == "binding" and "borrowed" not in evidence_labels:
+                evidence_labels.insert(0, "borrowed")
+            # the row's share of the asset's value where the asset has a value split; else what the cell's own units
+            # declare for the parts of this row (a share of the cell's own basis, said with it)
+            unit_shares = [p for p in mine if p.get("share") is not None]
+            cell_share = sum(p["share"] for p in unit_shares) if unit_shares else None
+            if row.get("share") is not None or row.get("shared_with"):
+                labels = {r_["key"]: r_["label"] for r_ in rows}
+                share = row.get("share")
+                share_basis = ("share of the asset's reference value" if share is not None else
+                               f"counted with {_join([labels[k] for k in row['shared_with']])}: one line of the value budget covers both")
+                if share is not None and row.get("shared_with"):
+                    share_basis += f"; one line of the value budget, shared with {_join([labels[k] for k in row['shared_with']])}"
+                # the cell's own figure, where it states one on another basis: said beside the budget's, not instead of it
+                if cell_share is not None and (share is None or abs(cell_share - share) > 0.005):
+                    lines_ = [f"{p['part']}{' (' + p['failure_unit_id'] + ')' if p.get('failure_unit_id') and sum(1 for q in unit_shares if q['part'] == p['part']) > 1 else ''} {fmt_pct(p['share'])}" for p in unit_shares]
+                    share_basis += (f". This cell's own value lines here ({unit_shares[0].get('share_basis')}): " + "; ".join(lines_[:4]) +
+                                    (f"; and {len(lines_) - 4} more" if len(lines_) > 4 else "") + (" — listed as the cell gives them, not added up" if len(lines_) > 1 else ""))
+            else:
+                share, share_basis = (cell_share, unit_shares[0].get("share_basis")) if unit_shares else (None, None)
+            # a part with no damage of its own whose cost the cell adds in proportion to the other parts' damage (replacement
+            # support): priced through them, not left out
+            cost_follows = (c.get("state") == "exposure_modifier"
+                            or (c.get("state") == "withheld" and mine and all("SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION" in (p.get("withheld_reasons") or []) for p in mine))
+                            or (c.get("state") == "no_curve" and re.search(r"allocated once|added once", str(c.get("no_curve_text") or ""), re.I) is not None)
+                            # a cell that folds general replacement fieldwork into another part's value (hail × solar: the modules)
+                            or (row["key"] == "support" and e is not None and e.kind != "gap" and any(re.search(r"fieldwork|labou?r", a_, re.I) and re.search(r"assign|allocat|add", a_, re.I)
+                                                                     for a_ in (cells[e.id].get("plain") or {}).get("blocks", {}).get("assumed", []))))
+            subcomponents.append({
+                "key": row["key"], "label": row["label"], "asset": {"slug": aslug, "label": a_def["label"]},
+                "share": share, "share_basis": share_basis, "cost_follows": cost_follows,
+                "hazard": {"slug": h["slug"], "label": h["label"], "effect": h["effect"], "outside_the_five": h["outside_the_five"]},
+                "entry_id": e.id if e else None, "catalogue_status": e.status if e else "missing", "cell_state": c.get("state") or "unassessed_gap",
+                "coverage": coverage, "completeness": completeness, "curve_ids": curve_ids,
+                "failure_unit_ids": sorted({p["failure_unit_id"] for p in mine if p.get("failure_unit_id")}),
+                "tier_span": _span(tier_codes), "evidence_labels": evidence_labels,
+                "evidence_words": ("borrowed · " if e and e.kind == "binding" else "") + tier_words(_span(tier_codes)),
+                "construction": construction, "borrowed_from": borrowed_from,
+                "scope_notes": [x["scope_note"] for x in construction if x.get("scope_note")],
+                "production_use": {"state": production_state, "consumer_pin": (cells[e.id]["identity"].get("consumer_pin") if e else None),
+                                   "hazard": next((x["production_use"].get("hazard", {}).get("state") for x in construction if x.get("production_use")), None)},
+                "gap": ({"reason": gap_reason, "occurrence": c.get("occurrence"), "effect": h["effect"],
+                         "basis": ([{"label": "the occurrence register's effect field", "path": reg["path"]},
+                                    {"label": "the curve's scope: physical destruction only", "path": "docs/scope/SCOPE_AND_STORY.md"}]
+                                   if reg and e is None and h["effect"] != "damage" else []),
+                         "register": ({"path": reg["path"], "sha256": reg["sha256"], "search_log": reg["register"].get("search_log"),
+                                       "last_searched": reg["register"].get("last_searched"), "question": reg["register"].get("question")}
+                                      if reg else None)} if gap_reason else None),
+            })
+    re_extra: dict[str, Any] = {}
+    if aslug == "real_estate":
+        subcomponents, re_extra = _real_estate_subsystems(hz, by_hazard, parts_by_cell, cells, registers, all_curve_lookup)
+    for rec in subcomponents:  # every reason in plain words, linked to the research that ends in no curve
+        if rec.get("gap") and rec["gap"].get("reason"):
+            original = rec["gap"]["reason"]
+            rec["gap"]["reason"], rec["gap"]["own_words"] = plain_reason(original)
+            # the cell decided this hazard does not damage the part directly: no curve, on purpose (not a missing one)
+            rec["gap"]["no_direct_damage"] = bool(re.search(r"no direct [\w ]*damage|DR\s*≈\s*0", original, re.I))
+            cell_ = cells.get(rec["entry_id"] or "") or {}
+            rec["gap"]["source"] = source_doc(original, rec["entry_id"], (cell_.get("files") or {}).get("write_up"),
+                                              (rec["gap"].get("register") or {}).get("path") if SHOW_FIELD_REPORTS else None)
+            if rec["gap"]["source"] is None and rec["hazard"]["effect"] != "damage":  # performance, not damage: the scope says why
+                rec["gap"]["source"] = {"label": "the curve's scope (physical damage only)", "path": "docs/scope/SCOPE_AND_STORY.md"}
+            if not SHOW_FIELD_REPORTS:
+                rec["gap"]["basis"] = [b for b in rec["gap"].get("basis") or [] if "docs/evidence/occurrence/" not in b["path"]]
+    return {"rows": rows, "parts_by_cell": parts_by_cell, "subcomponents": subcomponents, "subcomponent_rollup": _rollup(subcomponents),
+            **re_extra, "split": split, "twin": twin_block,
+            "budget": {k: budget[k] for k in ("groups", "label", "path", "sha256", "total_usd", "note")} if budget else None,
+            "labour_note": labour_note(aslug, subcomponents, hz, cells, budget),
             "value_source": ({"label": "reference budget r1 (battery value binding)", "path": "docs/cells/flood_bess/current/value_binding.json"} if aslug == "bess"
+                             else {"label": "the solar and wind value ledger (NREL benchmarks)", "path": LEDGER_REL, "sha256": ledger_budget(aslug)["sha256"]} if aslug in LEDGER_ROWS
                              else {"label": "Hazard's substation reference budget, pinned by the substation flood binding", "path": SUBSTATION_BUDGET_REL, "sha256": (sub_budget or {}).get("sha256"), "pin_ok": (sub_budget or {}).get("ok")} if aslug == "substation" and sub_budget and sub_budget.get("available")
                              else None)}
+
+
+# ─── real estate: the subsystems Damage prices, per building ────────────────────────────────────────────────
+
+RE_SUBSYSTEMS = [("building", "Whole building (structure)"), ("roof_cover", "Roof cover"), ("walls_windows", "Walls and windows"), ("contents", "Contents")]
+RE_PROFILE_REL = "docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml"
+
+
+def _lower_first(text: str) -> str:
+    return text if text[:2].isupper() else text[:1].lower() + text[1:]
+
+
+def _slice_of(part: dict[str, Any]) -> str | None:
+    comp = str(part.get("component") or "").lower()
+    return "roof_cover" if "roof" in comp else "walls_windows" if ("wall" in comp or "window" in comp) else None
+
+
+def _value_crosswalk(entry_id: str) -> tuple[str | None, list[dict[str, str]]]:
+    found = sorted((ROOT / "docs" / "cells" / entry_id).glob("*/VALUE_CROSSWALK_*.csv"))
+    return (rel(found[-1]), read_csv(found[-1])) if found else (None, [])
+
+
+def _anatomy_note() -> dict[str, Any] | None:
+    """Hazard's reference profile names the building's systems for anatomy only; read on Hazard's origin/main."""
+    from . import hazard_main
+    raw = hazard_main.read(RE_PROFILE_REL)
+    if raw is None:
+        return {"sentence": "The Digital Twin breaks each building into its systems (the table \u201cWhich hazard has a curve for which part\u201d); "
+                            "no system has a curve or a value share of its own except hail's roof cover and walls and windows, so the rows here are what the curves price.",
+                "source": None}
+    text = raw.decode("utf-8")
+    block = re.search(r"^inventory_groups:\n((?:- .+\n)+)", text, re.M)
+    rule = re.search(r"^inventory_rule:\s*(.+)$", text, re.M)
+    if not block or not rule:
+        return None
+    groups = [humanise(g.strip("- ").strip()).lower() for g in block.group(1).splitlines()]
+    return {"sentence": f"Hazard's reference profile describes each building as {len(groups)} systems ({_join(groups)}). "
+                        f"In its own words: \u201c{rule.group(1).strip()}\u201d Only hail prices parts of a building, so the rows here are what the curves price.",
+            "source": f"Hazard_modeling/{RE_PROFILE_REL} at origin/main"}
+
+
+def _real_estate_subsystems(hz: list[dict[str, Any]], by_hazard: dict[str, Any], parts_by_cell: dict[str, Any], cells: dict[str, dict[str, Any]],
+                            registers: dict[tuple[str, str], Any], all_curve_lookup: dict[str, dict[str, Any]]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Real estate's cells price one whole-building curve per building (hail: roof cover and walls/windows, each with a
+    share of the building's structure replacement cost). The records follow that: four subsystems per building, so a
+    building-type page shows what the loss actually multiplies, and the twin's anatomy stays a note."""
+    buildings = [(k, lab) for k, lab, _ in ROWS["real_estate"] if k != "contents"]
+    records: list[dict[str, Any]] = []
+    for bkey, blabel in buildings:
+        for skey, slabel in RE_SUBSYSTEMS:
+            for h in hz:
+                e = by_hazard.get(h["slug"]) if h["catalogue"] else None
+                reg = registers.get(("real_estate", h["slug"]))
+                pc = parts_by_cell.get(e.id) if e and e.kind != "gap" else None
+                mine = [p for p in (pc or {}).get("parts", []) if bkey in p["rows"]]
+                whole = [p for p in mine if p.get("whole_building")]
+                slices = [p for p in mine if not p.get("whole_building") and p["state"] == "curve"]
+                contents = [p for p in (pc or {}).get("parts", []) if "contents" in p["rows"]]
+                used: list[dict[str, Any]] = []
+                coverage, completeness, cell_state, reason, note, share, basis = "gap", "incomplete", "gap", None, None, None, []
+                if e is None:
+                    cell_state = "unassessed_gap"
+                    reason = ((f"{h['label']} changes how this asset performs rather than destroying it, and a damage curve prices physical destruction "
+                               "only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.")
+                              if h["effect"] != "damage" else "No catalogue entry or curve has been built for this asset \u00d7 hazard.")
+                elif e.kind == "gap":
+                    reason = e.data.get("reason") or "No curve yet."
+                elif skey == "contents":
+                    cell_state = "withheld"
+                    codes = sorted({c for p in contents for c in p.get("withheld_reasons") or []})
+                    reason = ("The cell declares contents as their own failure unit and withholds them (not zero): " + ", ".join(codes).lower().replace("_", " ") + "."
+                              if contents else "This cell does not name contents.")
+                elif skey == "building":
+                    if whole:
+                        used, coverage, completeness, cell_state = whole, "curve", "complete", "curve"
+                        note = "One curve for the whole structure: a single damage ratio applied to 100% of the building's structure replacement cost."
+                    elif slices:
+                        coverage, cell_state = "curve", "partial"
+                        cw_path, cw_rows = _value_crosswalk(e.id)
+                        left = [r for r in cw_rows if r.get("role_in_loss") in ("not_priced", "withheld")]
+                        priced = [lab.lower() for k, lab in RE_SUBSYSTEMS if any(_slice_of(p) == k for p in slices)]
+                        reason = (f"{h['label']} prices only this building's {_join(priced)} (the rows below), each with its own "
+                                  "share of the structure replacement cost. The rest has no curve here: "
+                                  + "; ".join(f"{_lower_first(r['row_or_bucket_label'])} ({ {'withheld': 'left out for now', 'not_priced': 'no hail curve covers it'}.get(r['role_in_loss'], r['role_in_loss'].replace('_', ' ')) })" for r in left) + ".")
+                        if cw_path:
+                            basis = [{"label": "the cell's value crosswalk", "path": cw_path}]
+                    else:
+                        reason = "This cell has no curve for this building."
+                else:
+                    own = [p for p in slices if _slice_of(p) == skey]
+                    if own:
+                        used, coverage, completeness, cell_state = own, "curve", "complete", "curve"
+                        share = sum(p["share"] for p in own if p.get("share") is not None) or None
+                    elif whole:
+                        used, coverage, completeness, cell_state = whole, "curve", "complete", "whole"
+                        note = f"No curve of its own: the whole-building curve prices the {slabel.lower()} with the rest of the structure."
+                    elif slices:
+                        reason = f"{h['label']} prices other parts of this building, not its {slabel.lower()}."
+                    else:
+                        reason = "This cell has no curve for this building."
+                curve_ids = sorted({actual for p in used for pattern in p.get("curves") or [] for actual in all_curve_lookup if fnmatchcase(actual, pattern)})
+                construction = [_construction_ref(all_curve_lookup[cid]) for cid in curve_ids]
+                tier_codes = [x for p in used for x in (p.get("shape"), p.get("cost")) if x]
+                states = {x["production_use"]["state"] for x in construction if x.get("production_use")}
+                records.append({
+                    "key": f"{bkey}:{skey}", "label": slabel, "group": {"key": bkey, "label": blabel},
+                    "asset": {"slug": "real_estate", "label": "Real Estate"},
+                    "hazard": {"slug": h["slug"], "label": h["label"], "effect": h["effect"], "outside_the_five": h["outside_the_five"]},
+                    "entry_id": e.id if e else None, "catalogue_status": e.status if e else "missing", "cell_state": cell_state,
+                    "coverage": coverage, "completeness": completeness, "curve_ids": curve_ids,
+                    "failure_unit_ids": sorted({all_curve_lookup[c].get("failure_unit_id") for c in curve_ids if all_curve_lookup[c].get("failure_unit_id")}),
+                    "tier_span": _span(tier_codes), "evidence_labels": _tier_labels(tier_codes), "evidence_words": tier_words(_span(tier_codes)),
+                    "construction": construction, "borrowed_from": None, "scope_notes": [x["scope_note"] for x in construction if x.get("scope_note")],
+                    "production_use": {"state": "runtime_indexed" if "runtime_indexed" in states else "not_runtime_indexed",
+                                       "consumer_pin": (cells[e.id]["identity"].get("consumer_pin") if e and e.id in cells else None),
+                                       "hazard": next((x["production_use"].get("hazard", {}).get("state") for x in construction if x.get("production_use")), None)},
+                    "share": share, "share_basis": "share of the building's structure replacement cost" if share is not None else None, "note": note,
+                    "gap": ({"reason": reason, "occurrence": None, "effect": h["effect"],
+                             "basis": basis or ([{"label": "the occurrence register's effect field", "path": reg["path"]},
+                                                 {"label": "the curve's scope: physical destruction only", "path": "docs/scope/SCOPE_AND_STORY.md"}]
+                                                if reg and e is None and h["effect"] != "damage" else []),
+                             "register": ({"path": reg["path"], "sha256": reg["sha256"], "search_log": reg["register"].get("search_log"),
+                                           "last_searched": reg["register"].get("last_searched"), "question": reg["register"].get("question")} if reg else None)}
+                            if reason else None),
+                })
+    groups = {b: _rollup([r for r in records if r["group"]["key"] == b]) for b, _ in buildings}
+    named = {b: sorted({r["hazard"]["label"] for r in records if r["group"]["key"] == b and r["coverage"] == "curve"}) for b, _ in buildings}
+    notes = {"office": (f"Commercial is built on the office. The cells also price a retail building ({_join([n.lower() for n in named['retail']])}); "
+                        "its rows show on those cells' pages, not on a building-type page.") if named.get("retail") else None}
+    return records, {"subsystem_rows": [{"key": f"{b}:{s}", "label": sl_, "group": {"key": b, "label": bl}} for b, bl in buildings for s, sl_ in RE_SUBSYSTEMS],
+                     "subsystem_groups": groups, "building_notes": notes, "anatomy_note": _anatomy_note()}
 
 
 def split_finding(aslug: str, a_def: dict[str, Any], rows: list[dict[str, Any]], parts_by_cell: dict[str, Any], hz: list[dict[str, Any]], sub_budget: dict[str, Any] | None) -> dict[str, Any]:
@@ -527,8 +939,8 @@ def split_finding(aslug: str, a_def: dict[str, Any], rows: list[dict[str, Any]],
                 bound = sum(amount.get(i_, 0.0) for i_ in ids)
                 fenced = sum(v for k_, v in amount.items() if sys_of.get(k_) and k_ != "road")
                 details.append(f"{pc['hazard']['label'].lower()} binds {len(ids)} equipment rows ({fmt_usd_compact(bound)}, {fmt_pct(bound / fenced) if fenced else '—'} of the fenced station) and withholds the rest; the other hazards use one curve for the whole station")
-    no_budget = {"solar": "No reference plant budget exists for solar farms in this repository (Hazard has one for batteries and substations); each cell states its own shares, on its own basis.",
-                 "wind": "No reference plant budget exists for wind farms in this repository; the hurricane cell carries the only plant value (the canonical 100 MW farm, $140M, of which the tower share is 0.16).",
+    no_budget = {"solar": "The value shares are the repository's value ledger (NREL benchmarks, priced per kW), grouped by subsystem with installation labour beside its hardware; the dollars are for Hazard's settled 120 MWdc plant. A cell's own value lines, on its own basis, are in each row's hover.",
+                 "wind": "The value shares are the repository's value ledger (NREL benchmarks, priced per kW), grouped by subsystem, with the dollars for Hazard's settled 100 MW plant; the ledger prices collection and the GSU substation as one line, counted once under Collection network, and has no line of its own for the control building.",
                  "real_estate": "Buildings carry no dollar value here: every curve is a share of the building's structure replacement cost, which the consumer supplies.",
                  "substation": "Hazard's substation reference budget ($27.35M fenced station) sets the rows; three hazards use one curve for the whole station, wildfire binds the equipment rows only.",
                  "bess": "Hazard's battery reference budget ($109.8M) sets the rows."}
@@ -538,7 +950,9 @@ def split_finding(aslug: str, a_def: dict[str, Any], rows: list[dict[str, Any]],
     differs = bool(details)
     lead = f"These cells split the {singular(a_def.get('noun', a_def['label']))} differently" if differs else f"The cells split the {singular(a_def.get('noun', a_def['label']))} the same way"
     sentence = lead + (": " + "; ".join(details[:6]) + ("; and more below" if len(details) > 6 else "") + ". " if details else ". ") + no_budget.get(aslug, "")
-    return {"differs": differs, "sentence": sentence, "details": details, "columns": [{"entry_id": pc["entry_id"], "hazard": pc["hazard"], "n_named": pc["n_named"], "n_curve": pc["n_curve"], "n_withheld": pc["n_withheld"], "share_basis": pc.get("share_basis"), "title": pc["title"]} for pc in cols], "table": table}
+    # the asset page's short note under the subsystem table; each team's own names are in an opened row
+    note = (lead + ", so one team's single unit can be several rows here, or one row can be several of its units. Open a row to see that team's own names for it. " + no_budget.get(aslug, "")).strip()
+    return {"differs": differs, "sentence": sentence, "note": note, "details": details, "columns": [{"entry_id": pc["entry_id"], "hazard": pc["hazard"], "n_named": pc["n_named"], "n_curve": pc["n_curve"], "n_withheld": pc["n_withheld"], "share_basis": pc.get("share_basis"), "title": pc["title"]} for pc in cols], "table": table}
 
 
 def asset_plain_sentence(a_def: dict[str, Any], rows: list[dict[str, Any]], hz: list[dict[str, Any]], entries_status: dict[str, str]) -> str:
@@ -584,12 +998,21 @@ def asset_plain_sentence(a_def: dict[str, Any], rows: list[dict[str, Any]], hz: 
         detail = (whats[0] + (" each" if len(hs) > 1 and not whats[0].endswith("only") else "")) if len(set(whats)) == 1 and whats else (_join([f"{h}: {w}" for h, w in hs if w]) if len(hs) > 1 else (hs[0][1] if hs[0][1] else ""))
         bits.append(f"{names} {verb} {evidence}" + (f" ({detail})" if detail else ""))
     if gaps:
-        bits.append(f"{_join(gaps)} {'has' if len(gaps) == 1 else 'have'} no cell yet")
+        bits.append(f"{_join(gaps)} {'has' if len(gaps) == 1 else 'have'} no curve yet")
     s = "; ".join(bits)
     s = s[:1].upper() + s[1:] + "."
     if quals and len(set(quals)) == 1 and quals[0] != "live":
-        s += " All of them are " + ("proposals, not in the runtime index yet." if quals[0] == "proposal" else "reused bindings.")
+        s += " All of them are " + ("proposals, not in use yet." if quals[0] == "proposal" else "borrowed from another asset's curve.")
+    u = uncovered_sentence(a_def, rows, hz)
+    return s + (f" {u}" if u else "")
+
+
+def uncovered_sentence(a_def: dict[str, Any], rows: list[dict[str, Any]], hz: list[dict[str, Any]]) -> str | None:
+    """'4 parts of the wind farm have no curve under any hazard: …' — the one finding the per-hazard sections below
+    do not state in one place."""
+    noun = singular(a_def.get("noun", a_def["label"]))
+    five = [h for h in hz if not h["outside_the_five"]]
     none_any = [label_case(row["label"].split(":")[0]) for row in rows if all(row["cells"].get(h["slug"], {}).get("state") in (None, "gap", "no_curve", "not_named", "withheld", "exposure_modifier") for h in five)]
-    if none_any:
-        s += f" {len(none_any)} part{'s' if len(none_any) != 1 else ''} of the {noun} {'have' if len(none_any) != 1 else 'has'} no curve under any hazard: {_join(none_any)}."
-    return s
+    if not none_any:
+        return None
+    return f"{len(none_any)} part{'s' if len(none_any) != 1 else ''} of the {noun} {'have' if len(none_any) != 1 else 'has'} no curve under any hazard: {_join(none_any)}."

@@ -6,8 +6,9 @@
   "noun": "batteries",
   "href": "/assets/bess"
  },
- "summary": "Hurricane wind and wildfire have curves that are our judgment (2 parts each); flood has curves built from borrowed and our judgment evidence (2 parts); hail and convective wind have no cell yet. 3 parts of the battery plant have no curve under any hazard: MV, collection and controls, civil works and fieldwork.",
- "summary_v0": "Flood, hurricane wind and wildfire have curves for batteries, all on borrowed evidence or our judgment; hail and convective wind have none; nobody has yet searched for field reports.",
+ "summary": "Hurricane wind and wildfire have curves that are our judgment (2 parts each); flood has curves built from borrowed and our judgment evidence (2 parts); hail and convective wind have no curve yet. 3 parts of the battery plant have no curve under any hazard: MV, collection and controls, civil works and fieldwork.",
+ "uncovered": "3 parts of the battery plant have no curve under any hazard: MV, collection and controls, civil works and fieldwork.",
+ "summary_v0": "Flood, hurricane wind and wildfire have curves for batteries, all on borrowed evidence or our judgment; hail and convective wind have none.",
  "reference": {
   "label": "80 enclosures · 20 PCS · $109.8M reference value (real 2024)",
   "source": "docs/cells/flood_bess/current/value_binding.json",
@@ -228,9 +229,10 @@
       "bucket": "battery_enclosures"
      },
      "state": "gap",
-     "words": "no cell yet",
+     "words": "no curve yet",
      "mark": "┈",
      "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null
@@ -291,10 +293,13 @@
       "bucket": "battery_enclosures"
      },
      "state": "partial",
-     "words": "curve for part of it · our judgment",
+     "words": "partial · our judgment",
      "mark": "■◔",
      "parts": [
       "Battery enclosure (active hardware)"
+     ],
+     "curve_ids": [
+      "BESS_ACTIVE_CONTACT_STATE"
      ],
      "tier_span": "T4",
      "share": 0.6567432003372276,
@@ -334,10 +339,14 @@
       "bucket": "battery_enclosures"
      },
      "state": "curve",
-     "words": "curve · our judgment",
+     "words": "has a curve · our judgment",
      "mark": "■",
      "parts": [
       "Integrated battery enclosure"
+     ],
+     "curve_ids": [
+      "BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1",
+      "BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1"
      ],
      "tier_span": "T4",
      "share": 0.7650273224043715,
@@ -377,9 +386,10 @@
       "bucket": "battery_enclosures"
      },
      "state": "gap",
-     "words": "no cell yet",
+     "words": "no curve yet",
      "mark": "┈",
      "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null
@@ -440,10 +450,18 @@
       "bucket": "battery_enclosures"
      },
      "state": "curve",
-     "words": "curve · our judgment",
+     "words": "has a curve · our judgment",
      "mark": "■",
      "parts": [
       "Integrated battery enclosure"
+     ],
+     "curve_ids": [
+      "BWF01_ENC_approved_replacement_electronics_ordinal",
+      "BWF01_ENC_approved_replacement_heavy_electrical_ordinal",
+      "BWF01_ENC_limited_repair_sensitivity_electronics_ordinal",
+      "BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal",
+      "BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal",
+      "BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal"
      ],
      "tier_span": "T4",
      "share": 0.7650273224043715,
@@ -510,96 +528,7 @@
      "words": "—",
      "mark": "—",
      "parts": [],
-     "tier_span": null,
-     "share": null,
-     "dollars": null
-    },
-    "icing": {
-     "entry_id": null,
-     "effect": "damage",
-     "outside_the_five": true,
-     "twin_lead": "L",
-     "twin_nodes": [
-      {
-       "node": "be_modules",
-       "name": "Battery Modules",
-       "level": 1,
-       "why": "Cold limits charge rate until heated"
-      },
-      {
-       "node": "be_vent",
-       "name": "Explosion Venting",
-       "level": 1,
-       "why": "Snow load on panels"
-      }
-     ],
-     "occurrence": {
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": {
-       "level": "L",
-       "nodes": [
-        {
-         "node": "be_modules",
-         "name": "Battery Modules",
-         "level": 1,
-         "why": "Cold limits charge rate until heated"
-        },
-        {
-         "node": "be_vent",
-         "name": "Explosion Venting",
-         "level": 1,
-         "why": "Snow load on panels"
-        }
-       ]
-      },
-      "bucket": "battery_enclosures"
-     },
-     "state": null,
-     "words": "—",
-     "mark": "—",
-     "parts": [],
-     "tier_span": null,
-     "share": null,
-     "dollars": null
-    },
-    "lightning": {
-     "entry_id": null,
-     "effect": "damage",
-     "outside_the_five": true,
-     "twin_lead": "M",
-     "twin_nodes": [
-      {
-       "node": "be_bms",
-       "name": "Battery Management System",
-       "level": 2,
-       "why": "Surges on comms and auxiliary power"
-      }
-     ],
-     "occurrence": {
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": {
-       "level": "M",
-       "nodes": [
-        {
-         "node": "be_bms",
-         "name": "Battery Management System",
-         "level": 2,
-         "why": "Surges on comms and auxiliary power"
-        }
-       ]
-      },
-      "bucket": "battery_enclosures"
-     },
-     "state": null,
-     "words": "—",
-     "mark": "—",
-     "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null
@@ -637,9 +566,10 @@
       "bucket": "pcs"
      },
      "state": "gap",
-     "words": "no cell yet",
+     "words": "no curve yet",
      "mark": "┈",
      "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null
@@ -676,10 +606,14 @@
       "bucket": "pcs"
      },
      "state": "curve",
-     "words": "curve · borrowed",
+     "words": "has a curve · borrowed",
      "mark": "■",
      "parts": [
       "Separate PCS"
+     ],
+     "curve_ids": [
+      "BESS_PCS_INUNDATION_PROXY",
+      "BESS_PCS_SALINE_CONTACT_STATE"
      ],
      "tier_span": "T3",
      "share": 0.0947176684881603,
@@ -705,10 +639,13 @@
       "bucket": "pcs"
      },
      "state": "curve",
-     "words": "curve · our judgment",
+     "words": "has a curve · our judgment",
      "mark": "■",
      "parts": [
       "Separate PCS"
+     ],
+     "curve_ids": [
+      "BESS_SEPARATE_PCS_TC_PROXY_V0_1"
      ],
      "tier_span": "T4",
      "share": 0.0947176684881603,
@@ -734,9 +671,10 @@
       "bucket": "pcs"
      },
      "state": "gap",
-     "words": "no cell yet",
+     "words": "no curve yet",
      "mark": "┈",
      "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null
@@ -759,10 +697,13 @@
       "bucket": "pcs"
      },
      "state": "curve",
-     "words": "curve · our judgment",
+     "words": "has a curve · our judgment",
      "mark": "■",
      "parts": [
       "Separate PCS"
+     ],
+     "curve_ids": [
+      "BWF01_PCS_ELECTRONICS"
      ],
      "tier_span": "T4",
      "share": 0.0947176684881603,
@@ -805,70 +746,7 @@
      "words": "—",
      "mark": "—",
      "parts": [],
-     "tier_span": null,
-     "share": null,
-     "dollars": null
-    },
-    "icing": {
-     "entry_id": null,
-     "effect": "damage",
-     "outside_the_five": true,
-     "twin_lead": null,
-     "twin_nodes": [],
-     "occurrence": {
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": {
-       "level": null,
-       "nodes": []
-      },
-      "bucket": "pcs"
-     },
-     "state": null,
-     "words": "—",
-     "mark": "—",
-     "parts": [],
-     "tier_span": null,
-     "share": null,
-     "dollars": null
-    },
-    "lightning": {
-     "entry_id": null,
-     "effect": "damage",
-     "outside_the_five": true,
-     "twin_lead": "M",
-     "twin_nodes": [
-      {
-       "node": "bp_pcs",
-       "name": "Bidirectional PCS",
-       "level": 2,
-       "why": "Surges"
-      }
-     ],
-     "occurrence": {
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": {
-       "level": "M",
-       "nodes": [
-        {
-         "node": "bp_pcs",
-         "name": "Bidirectional PCS",
-         "level": 2,
-         "why": "Surges"
-        }
-       ]
-      },
-      "bucket": "pcs"
-     },
-     "state": null,
-     "words": "—",
-     "mark": "—",
-     "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null
@@ -908,9 +786,10 @@
       "bucket": "electrical_balance"
      },
      "state": "gap",
-     "words": "no cell yet",
+     "words": "no curve yet",
      "mark": "┈",
      "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null
@@ -1007,9 +886,10 @@
       "bucket": "electrical_balance"
      },
      "state": "no_curve",
-     "words": "no curve",
+     "words": "no curve yet",
      "mark": "✕",
      "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null,
@@ -1034,11 +914,12 @@
       "bucket": "electrical_balance"
      },
      "state": "withheld",
-     "words": "named, no response yet (withheld)",
+     "words": "named, left out for now",
      "mark": "▢",
      "parts": [
       "mv and shared electrical"
      ],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null,
@@ -1062,9 +943,10 @@
       "bucket": "electrical_balance"
      },
      "state": "gap",
-     "words": "no cell yet",
+     "words": "no curve yet",
      "mark": "┈",
      "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null
@@ -1087,11 +969,12 @@
       "bucket": "electrical_balance"
      },
      "state": "withheld",
-     "words": "named, no response yet (withheld)",
+     "words": "named, left out for now",
      "mark": "▢",
      "parts": [
       "mv and shared electrical"
      ],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null,
@@ -1156,94 +1039,7 @@
      "words": "—",
      "mark": "—",
      "parts": [],
-     "tier_span": null,
-     "share": null,
-     "dollars": null
-    },
-    "icing": {
-     "entry_id": null,
-     "effect": "damage",
-     "outside_the_five": true,
-     "twin_lead": null,
-     "twin_nodes": [],
-     "occurrence": {
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": {
-       "level": null,
-       "nodes": []
-      },
-      "bucket": "electrical_balance"
-     },
-     "state": null,
-     "words": "—",
-     "mark": "—",
-     "parts": [],
-     "tier_span": null,
-     "share": null,
-     "dollars": null
-    },
-    "lightning": {
-     "entry_id": null,
-     "effect": "damage",
-     "outside_the_five": true,
-     "twin_lead": "M",
-     "twin_nodes": [
-      {
-       "node": "bp_mvt",
-       "name": "MV Transformer",
-       "level": 1,
-       "why": "Surges"
-      },
-      {
-       "node": "bg_grid",
-       "name": "Ground Grid",
-       "level": 2,
-       "why": "Dissipates strike and fault current"
-      },
-      {
-       "node": "bk_ems",
-       "name": "EMS / Plant Controller",
-       "level": 2,
-       "why": "Surges on comms"
-      }
-     ],
-     "occurrence": {
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": {
-       "level": "M",
-       "nodes": [
-        {
-         "node": "bp_mvt",
-         "name": "MV Transformer",
-         "level": 1,
-         "why": "Surges"
-        },
-        {
-         "node": "bg_grid",
-         "name": "Ground Grid",
-         "level": 2,
-         "why": "Dissipates strike and fault current"
-        },
-        {
-         "node": "bk_ems",
-         "name": "EMS / Plant Controller",
-         "level": 2,
-         "why": "Surges on comms"
-        }
-       ]
-      },
-      "bucket": "electrical_balance"
-     },
-     "state": null,
-     "words": "—",
-     "mark": "—",
-     "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null
@@ -1280,9 +1076,10 @@
       "bucket": "civil_works"
      },
      "state": "gap",
-     "words": "no cell yet",
+     "words": "no curve yet",
      "mark": "┈",
      "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null
@@ -1319,9 +1116,10 @@
       "bucket": "civil_works"
      },
      "state": "no_curve",
-     "words": "no curve",
+     "words": "no curve yet",
      "mark": "✕",
      "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null,
@@ -1346,11 +1144,12 @@
       "bucket": "civil_works"
      },
      "state": "withheld",
-     "words": "named, no response yet (withheld)",
+     "words": "named, left out for now",
      "mark": "▢",
      "parts": [
       "civil"
      ],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null,
@@ -1374,9 +1173,10 @@
       "bucket": "civil_works"
      },
      "state": "gap",
-     "words": "no cell yet",
+     "words": "no curve yet",
      "mark": "┈",
      "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null
@@ -1425,11 +1225,12 @@
       "bucket": "civil_works"
      },
      "state": "withheld",
-     "words": "named, no response yet (withheld)",
+     "words": "named, left out for now",
      "mark": "▢",
      "parts": [
       "civil"
      ],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null,
@@ -1456,56 +1257,7 @@
      "words": "—",
      "mark": "—",
      "parts": [],
-     "tier_span": null,
-     "share": null,
-     "dollars": null
-    },
-    "icing": {
-     "entry_id": null,
-     "effect": "damage",
-     "outside_the_five": true,
-     "twin_lead": null,
-     "twin_nodes": [],
-     "occurrence": {
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": {
-       "level": null,
-       "nodes": []
-      },
-      "bucket": "civil_works"
-     },
-     "state": null,
-     "words": "—",
-     "mark": "—",
-     "parts": [],
-     "tier_span": null,
-     "share": null,
-     "dollars": null
-    },
-    "lightning": {
-     "entry_id": null,
-     "effect": "damage",
-     "outside_the_five": true,
-     "twin_lead": null,
-     "twin_nodes": [],
-     "occurrence": {
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": {
-       "level": null,
-       "nodes": []
-      },
-      "bucket": "civil_works"
-     },
-     "state": null,
-     "words": "—",
-     "mark": "—",
-     "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null
@@ -1540,9 +1292,10 @@
       "bucket": "fieldwork"
      },
      "state": "gap",
-     "words": "no cell yet",
+     "words": "no curve yet",
      "mark": "┈",
      "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null
@@ -1565,9 +1318,10 @@
       "bucket": "fieldwork"
      },
      "state": "no_curve",
-     "words": "no curve",
+     "words": "no curve yet",
      "mark": "✕",
      "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null,
@@ -1592,11 +1346,12 @@
       "bucket": "fieldwork"
      },
      "state": "withheld",
-     "words": "named, no response yet (withheld)",
+     "words": "named, left out for now",
      "mark": "▢",
      "parts": [
       "fieldwork"
      ],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null,
@@ -1620,9 +1375,10 @@
       "bucket": "fieldwork"
      },
      "state": "gap",
-     "words": "no cell yet",
+     "words": "no curve yet",
      "mark": "┈",
      "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null
@@ -1645,11 +1401,12 @@
       "bucket": "fieldwork"
      },
      "state": "withheld",
-     "words": "named, no response yet (withheld)",
+     "words": "named, left out for now",
      "mark": "▢",
      "parts": [
       "fieldwork"
      ],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null,
@@ -1676,56 +1433,7 @@
      "words": "—",
      "mark": "—",
      "parts": [],
-     "tier_span": null,
-     "share": null,
-     "dollars": null
-    },
-    "icing": {
-     "entry_id": null,
-     "effect": "damage",
-     "outside_the_five": true,
-     "twin_lead": null,
-     "twin_nodes": [],
-     "occurrence": {
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": {
-       "level": null,
-       "nodes": []
-      },
-      "bucket": "fieldwork"
-     },
-     "state": null,
-     "words": "—",
-     "mark": "—",
-     "parts": [],
-     "tier_span": null,
-     "share": null,
-     "dollars": null
-    },
-    "lightning": {
-     "entry_id": null,
-     "effect": "damage",
-     "outside_the_five": true,
-     "twin_lead": null,
-     "twin_nodes": [],
-     "occurrence": {
-      "state": "not_searched",
-      "mark": "?",
-      "sentence": "Not searched — nobody has looked for field reports yet.",
-      "reports": [],
-      "twin_lead": {
-       "level": null,
-       "nodes": []
-      },
-      "bucket": "fieldwork"
-     },
-     "state": null,
-     "words": "—",
-     "mark": "—",
-     "parts": [],
+     "curve_ids": [],
      "tier_span": null,
      "share": null,
      "dollars": null
@@ -2070,9 +1778,3219 @@
    ]
   }
  },
+ "subcomponents": [
+  {
+   "key": "battery_enclosures",
+   "label": "Battery enclosures",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.7650273224043715,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "hail_bess",
+   "catalogue_status": "gap",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No curve yet: the owner deferred hail for batteries (Hazard's battery decisions; this repository's battery plan lists other hazards only as later work). No evidence search has been run, and deferred does not mean zero risk.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": "L",
+      "nodes": [
+       {
+        "node": "be_enc",
+        "name": "Enclosure Shell",
+        "level": 1,
+        "why": "Panel denting"
+       },
+       {
+        "node": "be_hvac",
+        "name": "Chiller & Liquid Loop",
+        "level": 1,
+        "why": "Condenser coil damage"
+       },
+       {
+        "node": "be_vent",
+        "name": "Explosion Venting",
+        "level": 1,
+        "why": "Panel damage"
+       }
+      ]
+     },
+     "bucket": "battery_enclosures"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/hail.json",
+     "sha256": "92c78e1b445872410e3f9eabce63c8278ab8430a6779186fa6cc42d848dac44f",
+     "search_log": "docs/evidence/occurrence/bess/hail.md",
+     "last_searched": null,
+     "question": "Has hail physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "No curve and no documented plan yet (the BESS plan only lists other hazards as later work, step 6)",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's catalogue entry",
+     "path": "docs/cells/catalogue/hail_bess.json"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+      "finding": "Owner direction: defer strong wind, tornado and the other additional hazards. \"This is a scope direction, not a finding that omitted hazards are negligible or have zero loss.\"",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "title": "Hazard's battery multi-hazard roadmap",
+      "finding": "Hail: \"Deferred; outside the completed first pass.\" Deferred does not mean negligible, safe or zero loss.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/evidence/occurrence/bess/hail.md",
+      "title": "Battery hail: the field-report register",
+      "finding": "Not searched for any part: nobody has looked for field reports yet. This is the default, not a finding.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/evidence/occurrence/bess/hail.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "title": "Does it happen? Leads from the battery's design (hail row)",
+      "finding": "Design leads only (panel denting, condenser coils, both rated low); the recommended next step, \"search first; park if nothing\", has not been run.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "battery_enclosures",
+   "label": "Battery enclosures",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.7650273224043715,
+   "share_basis": "share of the asset's reference value. This cell's own value lines here (share of the reference plant ($109.8M, reference budget r1)): Battery enclosure (active hardware) 66 %",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_bess",
+   "catalogue_status": "live",
+   "cell_state": "partial",
+   "coverage": "curve",
+   "completeness": "incomplete",
+   "curve_ids": [
+    "BESS_ACTIVE_CONTACT_STATE"
+   ],
+   "failure_unit_ids": [
+    "BESS_ACTIVE_ENCLOSURE"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "our judgment"
+   ],
+   "evidence_words": "our judgment",
+   "construction": [
+    {
+     "curve_id": "BESS_ACTIVE_CONTACT_STATE",
+     "data_path": "curves/flood_bess/BESS_ACTIVE_CONTACT_STATE@model_v1_0__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/flood_bess/current/curve_artifact.json",
+     "parameter_count": 6,
+     "source_ids": [
+      "BF-S01",
+      "BF-S02",
+      "BF-S03",
+      "BF-S06",
+      "BF-S09",
+      "BF-S10",
+      "BF-S12",
+      "BF-S13",
+      "BF-S14",
+      "BF-S15",
+      "BF-S16"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "flood_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Flood · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "flood_bess",
+     "part": "Battery enclosure (active hardware)",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "flood_bess@model_v1_0__docs_r1",
+    "hazard": "used"
+   },
+   "gap": {
+    "reason": "A curve covers some of this part's pieces; the rest have none yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": "H",
+      "nodes": [
+       {
+        "node": "be_enc",
+        "name": "Enclosure Shell",
+        "level": 3,
+        "why": "Water at the racks shorts modules and can trigger thermal events"
+       },
+       {
+        "node": "be_modules",
+        "name": "Battery Modules",
+        "level": 3,
+        "why": "Submersion shorts modules"
+       },
+       {
+        "node": "be_dccab",
+        "name": "DC Combiner & Disconnect",
+        "level": 2,
+        "why": "Low-mounted DC gear"
+       }
+      ]
+     },
+     "bucket": "battery_enclosures"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/flood.json",
+     "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",
+     "search_log": "docs/evidence/occurrence/bess/flood.md",
+     "last_searched": null,
+     "question": "Has flood physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "A curve covers only part of this expected subsystem.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "battery_enclosures",
+   "label": "Battery enclosures",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.7650273224043715,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_bess",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1",
+    "BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1"
+   ],
+   "failure_unit_ids": [
+    "BESS_INTEGRATED_ENCLOSURE"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "our judgment"
+   ],
+   "evidence_words": "our judgment",
+   "construction": [
+    {
+     "curve_id": "BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1",
+     "data_path": "curves/tropical_cyclone_wind_bess/BESS_ENCLOSURE_TC_REPAIR_SENSITIVITY_V0_1@model_v1_0__docs_r1.json",
+     "curve_type": "ordered damage state lognormal",
+     "curve_form": "ordered_damage_state_lognormal",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
+     "artifact": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
+     "parameter_count": 12,
+     "source_ids": [
+      "BW-S01",
+      "BW-S02",
+      "BW-S03",
+      "BW-S10",
+      "BW-S11",
+      "BW-S12",
+      "BW-S13"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Hurricane · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
+    },
+    {
+     "curve_id": "BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1",
+     "data_path": "curves/tropical_cyclone_wind_bess/BESS_ENCLOSURE_TC_REPLACE_MAJOR_V0_1@model_v1_0__docs_r1.json",
+     "curve_type": "ordered damage state lognormal",
+     "curve_form": "ordered_damage_state_lognormal",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
+     "artifact": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
+     "parameter_count": 12,
+     "source_ids": [
+      "BW-S01",
+      "BW-S02",
+      "BW-S03",
+      "BW-S10",
+      "BW-S11",
+      "BW-S12",
+      "BW-S13"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Hurricane · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
+    "hazard": "used"
+   },
+   "gap": null
+  },
+  {
+   "key": "battery_enclosures",
+   "label": "Battery enclosures",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.7650273224043715,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_bess",
+   "catalogue_status": "gap",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No curve yet: the battery hurricane work leaves convective wind and tornadoes for separate work, and the owner has since deferred them (Hazard's battery decisions). No evidence search has been run, and deferred does not mean zero risk.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": "L",
+      "nodes": [
+       {
+        "node": "be_enc",
+        "name": "Enclosure Shell",
+        "level": 1,
+        "why": "Anchorage loads"
+       }
+      ]
+     },
+     "bucket": "battery_enclosures"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/convective_wind.json",
+     "sha256": "3a6845c97fd618dfb7929f3dbe74f1df1ec6d3e0e9eece87f47af774e50a805f",
+     "search_log": "docs/evidence/occurrence/bess/convective_wind.md",
+     "last_searched": null,
+     "question": "Has convective wind physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "No curve yet: the BESS hurricane wind cell leaves convective wind and tornado as a separate scope, and the BESS plan lists other hazards as later work (docs/plans/bess_damage/README.md, step 6)",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the research note it cites",
+     "path": "docs/plans/bess_damage/README.md"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+      "finding": "Owner direction: defer strong wind and tornado after the first pass. A scope direction, not a finding of zero loss.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "title": "Hazard's battery multi-hazard roadmap (step 4)",
+      "finding": "Convective wind was in the planned sequence, then deferred by owner direction; no qualification or execution now.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/cells/tropical_cyclone_wind_bess/README.md",
+      "title": "Battery hurricane wind cell: its scope",
+      "finding": "Treats convective wind and tornado as a separate scope from the hurricane wind curve.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/tropical_cyclone_wind_bess/README.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/evidence/occurrence/bess/convective_wind.md",
+      "title": "Battery convective wind: the field-report register",
+      "finding": "Not searched: nobody has looked for field reports yet.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/evidence/occurrence/bess/convective_wind.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "battery_enclosures",
+   "label": "Battery enclosures",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.7650273224043715,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_bess",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "BWF01_ENC_approved_replacement_electronics_ordinal",
+    "BWF01_ENC_approved_replacement_heavy_electrical_ordinal",
+    "BWF01_ENC_limited_repair_sensitivity_electronics_ordinal",
+    "BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal",
+    "BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal",
+    "BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal"
+   ],
+   "failure_unit_ids": [
+    "BESS_INTEGRATED_ENCLOSURE"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "our judgment"
+   ],
+   "evidence_words": "our judgment",
+   "construction": [
+    {
+     "curve_id": "BWF01_ENC_approved_replacement_electronics_ordinal",
+     "data_path": "curves/wildfire_bess/BWF01_ENC_approved_replacement_electronics_ordinal@model_v1_0__docs_r1.json",
+     "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
+     "curve_form": "piecewise_linear",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
+     "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "BWF-S01",
+      "BWF-S02",
+      "BWF-S03",
+      "BWF-S04",
+      "BWF-S05",
+      "BWF-S08",
+      "BWF-S09",
+      "BWF-S10",
+      "BWF-S12"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Wildfire · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
+    },
+    {
+     "curve_id": "BWF01_ENC_approved_replacement_heavy_electrical_ordinal",
+     "data_path": "curves/wildfire_bess/BWF01_ENC_approved_replacement_heavy_electrical_ordinal@model_v1_0__docs_r1.json",
+     "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
+     "curve_form": "piecewise_linear",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
+     "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "BWF-S01",
+      "BWF-S02",
+      "BWF-S03",
+      "BWF-S04",
+      "BWF-S05",
+      "BWF-S08",
+      "BWF-S09",
+      "BWF-S10",
+      "BWF-S12"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Wildfire · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
+    },
+    {
+     "curve_id": "BWF01_ENC_limited_repair_sensitivity_electronics_ordinal",
+     "data_path": "curves/wildfire_bess/BWF01_ENC_limited_repair_sensitivity_electronics_ordinal@model_v1_0__docs_r1.json",
+     "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
+     "curve_form": "piecewise_linear",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
+     "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "BWF-S01",
+      "BWF-S02",
+      "BWF-S03",
+      "BWF-S04",
+      "BWF-S05",
+      "BWF-S08",
+      "BWF-S09",
+      "BWF-S10",
+      "BWF-S12"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Wildfire · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
+    },
+    {
+     "curve_id": "BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal",
+     "data_path": "curves/wildfire_bess/BWF01_ENC_limited_repair_sensitivity_heavy_electrical_ordinal@model_v1_0__docs_r1.json",
+     "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
+     "curve_form": "piecewise_linear",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
+     "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "BWF-S01",
+      "BWF-S02",
+      "BWF-S03",
+      "BWF-S04",
+      "BWF-S05",
+      "BWF-S08",
+      "BWF-S09",
+      "BWF-S10",
+      "BWF-S12"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Wildfire · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
+    },
+    {
+     "curve_id": "BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal",
+     "data_path": "curves/wildfire_bess/BWF01_ENC_noncell_repair_sensitivity_electronics_ordinal@model_v1_0__docs_r1.json",
+     "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
+     "curve_form": "piecewise_linear",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
+     "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "BWF-S01",
+      "BWF-S02",
+      "BWF-S03",
+      "BWF-S04",
+      "BWF-S05",
+      "BWF-S08",
+      "BWF-S09",
+      "BWF-S10",
+      "BWF-S12"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Wildfire · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
+    },
+    {
+     "curve_id": "BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal",
+     "data_path": "curves/wildfire_bess/BWF01_ENC_noncell_repair_sensitivity_heavy_electrical_ordinal@model_v1_0__docs_r1.json",
+     "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
+     "curve_form": "piecewise_linear",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
+     "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "BWF-S01",
+      "BWF-S02",
+      "BWF-S03",
+      "BWF-S04",
+      "BWF-S05",
+      "BWF-S08",
+      "BWF-S09",
+      "BWF-S10",
+      "BWF-S12"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Wildfire · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Integrated battery enclosure",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+    "hazard": "used"
+   },
+   "gap": null
+  },
+  {
+   "key": "battery_enclosures",
+   "label": "Battery enclosures",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.7650273224043715,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "heat",
+    "label": "Heat",
+    "effect": "performance",
+    "outside_the_five": true
+   },
+   "entry_id": null,
+   "catalogue_status": "missing",
+   "cell_state": "unassessed_gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "Heat is treated here as changing how this asset works (derating, ageing) rather than breaking it, and a damage curve covers physical damage only, so there is no curve. The research so far is listed below.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": "H",
+      "nodes": [
+       {
+        "node": "be_modules",
+        "name": "Battery Modules",
+        "level": 3,
+        "why": "Every +10 °C roughly doubles calendar ageing; cooling load rises"
+       },
+       {
+        "node": "be_bms",
+        "name": "Battery Management System",
+        "level": 1,
+        "why": "Electronics"
+       },
+       {
+        "node": "be_hvac",
+        "name": "Chiller & Liquid Loop",
+        "level": 3,
+        "why": "Chiller capacity sets derating in heat waves"
+       }
+      ]
+     },
+     "bucket": "battery_enclosures"
+    },
+    "effect": "performance",
+    "basis": [
+     {
+      "label": "the curve's scope: physical destruction only",
+      "path": "docs/scope/SCOPE_AND_STORY.md"
+     }
+    ],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/heat.json",
+     "sha256": "162d7e040fb47c4379871d081a0db2aa7aa57bc79a2e04cc537587f70a7135d6",
+     "search_log": "docs/evidence/occurrence/bess/heat.md",
+     "last_searched": null,
+     "question": "Has heat physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the curve's scope (physical damage only)",
+     "path": "docs/scope/SCOPE_AND_STORY.md"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/discussion/research/_cross_cutting/bess_heat_temperature_feasibility.md",
+      "title": "BESS heat: physical effects and first-screen feasibility (Hazard, 21 Oct 2026)",
+      "finding": "Heat can cause lasting physical harm to batteries (an EPRI field case, LFP lab studies), but the reviewed sources do not yet support an outdoor-temperature-to-repair-cost curve for the reference plant.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/discussion/research/_cross_cutting/bess_heat_temperature_feasibility.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/discussion/_cross_cutting/bess_conus/05_heat_scope_and_research_plan.md",
+      "title": "Heat: define the consequence before building the model (Hazard, 21 Oct 2026)",
+      "finding": "Parked by the owner on 21 Oct: temporary derating, permanent ageing and acute failure need separate definitions, and working cooling should be compared with impaired cooling. No owner ruling yet.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/discussion/_cross_cutting/bess_conus/05_heat_scope_and_research_plan.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/scope/SCOPE_AND_STORY.md",
+      "title": "Damage's scope: a damage curve prices physical destruction only",
+      "finding": "Heat is treated as changing how an asset performs (derating, ageing), which sits outside a damage curve; disruption and derating are a separate stage.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/scope/SCOPE_AND_STORY.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "title": "Does it happen? Leads from the battery's design (heat row, 19 Oct 2026)",
+      "finding": "Heat is the strongest design lead (ageing doubles per +10 °C, chiller and converter derating) but works through performance: \"Performance, not damage — no curve.\" No field evidence was searched.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "pcs",
+   "label": "PCS",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.0947176684881603,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "hail_bess",
+   "catalogue_status": "gap",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No curve yet: the owner deferred hail for batteries (Hazard's battery decisions; this repository's battery plan lists other hazards only as later work). No evidence search has been run, and deferred does not mean zero risk.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "pcs"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/hail.json",
+     "sha256": "92c78e1b445872410e3f9eabce63c8278ab8430a6779186fa6cc42d848dac44f",
+     "search_log": "docs/evidence/occurrence/bess/hail.md",
+     "last_searched": null,
+     "question": "Has hail physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "No curve and no documented plan yet (the BESS plan only lists other hazards as later work, step 6)",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's catalogue entry",
+     "path": "docs/cells/catalogue/hail_bess.json"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+      "finding": "Owner direction: defer strong wind, tornado and the other additional hazards. \"This is a scope direction, not a finding that omitted hazards are negligible or have zero loss.\"",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "title": "Hazard's battery multi-hazard roadmap",
+      "finding": "Hail: \"Deferred; outside the completed first pass.\" Deferred does not mean negligible, safe or zero loss.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/evidence/occurrence/bess/hail.md",
+      "title": "Battery hail: the field-report register",
+      "finding": "Not searched for any part: nobody has looked for field reports yet. This is the default, not a finding.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/evidence/occurrence/bess/hail.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "title": "Does it happen? Leads from the battery's design (hail row)",
+      "finding": "Design leads only (panel denting, condenser coils, both rated low); the recommended next step, \"search first; park if nothing\", has not been run.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "pcs",
+   "label": "PCS",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.0947176684881603,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_bess",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "BESS_PCS_INUNDATION_PROXY",
+    "BESS_PCS_SALINE_CONTACT_STATE"
+   ],
+   "failure_unit_ids": [
+    "BESS_SEPARATE_PCS"
+   ],
+   "tier_span": "T3",
+   "evidence_labels": [
+    "borrowed"
+   ],
+   "evidence_words": "borrowed",
+   "construction": [
+    {
+     "curve_id": "BESS_PCS_INUNDATION_PROXY",
+     "data_path": "curves/flood_bess/BESS_PCS_INUNDATION_PROXY@model_v1_0__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/flood_bess/current/curve_artifact.json",
+     "parameter_count": 6,
+     "source_ids": [
+      "BF-S01",
+      "BF-S02",
+      "BF-S03",
+      "BF-S06",
+      "BF-S09",
+      "BF-S10",
+      "BF-S12",
+      "BF-S13",
+      "BF-S14",
+      "BF-S15",
+      "BF-S16"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "flood_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Flood · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "flood_bess",
+     "part": "Separate PCS",
+     "scope_note": null
+    },
+    {
+     "curve_id": "BESS_PCS_SALINE_CONTACT_STATE",
+     "data_path": "curves/flood_bess/BESS_PCS_SALINE_CONTACT_STATE@model_v1_0__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/flood_bess/current/curve_artifact.json",
+     "parameter_count": 6,
+     "source_ids": [
+      "BF-S01",
+      "BF-S02",
+      "BF-S03",
+      "BF-S06",
+      "BF-S09",
+      "BF-S10",
+      "BF-S12",
+      "BF-S13",
+      "BF-S14",
+      "BF-S15",
+      "BF-S16"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "flood_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Flood · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "flood_bess",
+     "part": "Separate PCS",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "flood_bess@model_v1_0__docs_r1",
+    "hazard": "used"
+   },
+   "gap": null
+  },
+  {
+   "key": "pcs",
+   "label": "PCS",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.0947176684881603,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_bess",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "BESS_SEPARATE_PCS_TC_PROXY_V0_1"
+   ],
+   "failure_unit_ids": [
+    "BESS_SEPARATE_PCS"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "our judgment"
+   ],
+   "evidence_words": "our judgment",
+   "construction": [
+    {
+     "curve_id": "BESS_SEPARATE_PCS_TC_PROXY_V0_1",
+     "data_path": "curves/tropical_cyclone_wind_bess/BESS_SEPARATE_PCS_TC_PROXY_V0_1@model_v1_0__docs_r1.json",
+     "curve_type": "ordered damage state lognormal",
+     "curve_form": "ordered_damage_state_lognormal",
+     "formula": "P(state ≥ i | x) = Φ(ln(x / median_i) / beta_ln); D(x) = Σ_i P(exactly state i | x) × cost_ratio_i",
+     "artifact": "docs/cells/tropical_cyclone_wind_bess/current/curve_artifact.json",
+     "parameter_count": 12,
+     "source_ids": [
+      "BW-S01",
+      "BW-S02",
+      "BW-S03",
+      "BW-S10",
+      "BW-S11",
+      "BW-S12",
+      "BW-S13"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Hurricane · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "tropical_cyclone_wind_bess",
+     "part": "Separate PCS",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
+    "hazard": "used"
+   },
+   "gap": null
+  },
+  {
+   "key": "pcs",
+   "label": "PCS",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.0947176684881603,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_bess",
+   "catalogue_status": "gap",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No curve yet: the battery hurricane work leaves convective wind and tornadoes for separate work, and the owner has since deferred them (Hazard's battery decisions). No evidence search has been run, and deferred does not mean zero risk.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "pcs"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/convective_wind.json",
+     "sha256": "3a6845c97fd618dfb7929f3dbe74f1df1ec6d3e0e9eece87f47af774e50a805f",
+     "search_log": "docs/evidence/occurrence/bess/convective_wind.md",
+     "last_searched": null,
+     "question": "Has convective wind physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "No curve yet: the BESS hurricane wind cell leaves convective wind and tornado as a separate scope, and the BESS plan lists other hazards as later work (docs/plans/bess_damage/README.md, step 6)",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the research note it cites",
+     "path": "docs/plans/bess_damage/README.md"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+      "finding": "Owner direction: defer strong wind and tornado after the first pass. A scope direction, not a finding of zero loss.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "title": "Hazard's battery multi-hazard roadmap (step 4)",
+      "finding": "Convective wind was in the planned sequence, then deferred by owner direction; no qualification or execution now.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/cells/tropical_cyclone_wind_bess/README.md",
+      "title": "Battery hurricane wind cell: its scope",
+      "finding": "Treats convective wind and tornado as a separate scope from the hurricane wind curve.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/tropical_cyclone_wind_bess/README.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/evidence/occurrence/bess/convective_wind.md",
+      "title": "Battery convective wind: the field-report register",
+      "finding": "Not searched: nobody has looked for field reports yet.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/evidence/occurrence/bess/convective_wind.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "pcs",
+   "label": "PCS",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.0947176684881603,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_bess",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "BWF01_PCS_ELECTRONICS"
+   ],
+   "failure_unit_ids": [
+    "BESS_SEPARATE_PCS"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "our judgment"
+   ],
+   "evidence_words": "our judgment",
+   "construction": [
+    {
+     "curve_id": "BWF01_PCS_ELECTRONICS",
+     "data_path": "curves/wildfire_bess/BWF01_PCS_ELECTRONICS@model_v1_0__docs_r1.json",
+     "curve_type": "exact-state table, carried in the schema's piecewise-linear container",
+     "curve_form": "piecewise_linear",
+     "formula": "D(class) = the listed damage ratio for that class; nothing is interpolated between classes",
+     "artifact": "docs/cells/wildfire_bess/current/curve_artifact.json",
+     "parameter_count": 5,
+     "source_ids": [
+      "BWF-S01",
+      "BWF-S02",
+      "BWF-S03",
+      "BWF-S04",
+      "BWF-S05",
+      "BWF-S08",
+      "BWF-S09",
+      "BWF-S10",
+      "BWF-S12"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Wildfire · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "wildfire_bess",
+     "part": "Separate PCS",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+    "hazard": "used"
+   },
+   "gap": null
+  },
+  {
+   "key": "pcs",
+   "label": "PCS",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.0947176684881603,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "heat",
+    "label": "Heat",
+    "effect": "performance",
+    "outside_the_five": true
+   },
+   "entry_id": null,
+   "catalogue_status": "missing",
+   "cell_state": "unassessed_gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "Heat is treated here as changing how this asset works (derating, ageing) rather than breaking it, and a damage curve covers physical damage only, so there is no curve. The research so far is listed below.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": "H",
+      "nodes": [
+       {
+        "node": "bp_pcs",
+        "name": "Bidirectional PCS",
+        "level": 3,
+        "why": "Derates above ~40–45 °C"
+       }
+      ]
+     },
+     "bucket": "pcs"
+    },
+    "effect": "performance",
+    "basis": [
+     {
+      "label": "the curve's scope: physical destruction only",
+      "path": "docs/scope/SCOPE_AND_STORY.md"
+     }
+    ],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/heat.json",
+     "sha256": "162d7e040fb47c4379871d081a0db2aa7aa57bc79a2e04cc537587f70a7135d6",
+     "search_log": "docs/evidence/occurrence/bess/heat.md",
+     "last_searched": null,
+     "question": "Has heat physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the curve's scope (physical damage only)",
+     "path": "docs/scope/SCOPE_AND_STORY.md"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/discussion/research/_cross_cutting/bess_heat_temperature_feasibility.md",
+      "title": "BESS heat: physical effects and first-screen feasibility (Hazard, 21 Oct 2026)",
+      "finding": "Heat can cause lasting physical harm to batteries (an EPRI field case, LFP lab studies), but the reviewed sources do not yet support an outdoor-temperature-to-repair-cost curve for the reference plant.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/discussion/research/_cross_cutting/bess_heat_temperature_feasibility.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/discussion/_cross_cutting/bess_conus/05_heat_scope_and_research_plan.md",
+      "title": "Heat: define the consequence before building the model (Hazard, 21 Oct 2026)",
+      "finding": "Parked by the owner on 21 Oct: temporary derating, permanent ageing and acute failure need separate definitions, and working cooling should be compared with impaired cooling. No owner ruling yet.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/discussion/_cross_cutting/bess_conus/05_heat_scope_and_research_plan.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/scope/SCOPE_AND_STORY.md",
+      "title": "Damage's scope: a damage curve prices physical destruction only",
+      "finding": "Heat is treated as changing how an asset performs (derating, ageing), which sits outside a damage curve; disruption and derating are a separate stage.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/scope/SCOPE_AND_STORY.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "title": "Does it happen? Leads from the battery's design (heat row, 19 Oct 2026)",
+      "finding": "Heat is the strongest design lead (ageing doubles per +10 °C, chiller and converter derating) but works through performance: \"Performance, not damage — no curve.\" No field evidence was searched.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "electrical_balance",
+   "label": "MV, collection and controls",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.12021857923497267,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "hail_bess",
+   "catalogue_status": "gap",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No curve yet: the owner deferred hail for batteries (Hazard's battery decisions; this repository's battery plan lists other hazards only as later work). No evidence search has been run, and deferred does not mean zero risk.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "electrical_balance"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/hail.json",
+     "sha256": "92c78e1b445872410e3f9eabce63c8278ab8430a6779186fa6cc42d848dac44f",
+     "search_log": "docs/evidence/occurrence/bess/hail.md",
+     "last_searched": null,
+     "question": "Has hail physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "No curve and no documented plan yet (the BESS plan only lists other hazards as later work, step 6)",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's catalogue entry",
+     "path": "docs/cells/catalogue/hail_bess.json"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+      "finding": "Owner direction: defer strong wind, tornado and the other additional hazards. \"This is a scope direction, not a finding that omitted hazards are negligible or have zero loss.\"",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "title": "Hazard's battery multi-hazard roadmap",
+      "finding": "Hail: \"Deferred; outside the completed first pass.\" Deferred does not mean negligible, safe or zero loss.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/evidence/occurrence/bess/hail.md",
+      "title": "Battery hail: the field-report register",
+      "finding": "Not searched for any part: nobody has looked for field reports yet. This is the default, not a finding.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/evidence/occurrence/bess/hail.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "title": "Does it happen? Leads from the battery's design (hail row)",
+      "finding": "Design leads only (panel denting, condenser coils, both rated low); the recommended next step, \"search first; park if nothing\", has not been run.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "electrical_balance",
+   "label": "MV, collection and controls",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.12021857923497267,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_bess",
+   "catalogue_status": "live",
+   "cell_state": "no_curve",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "flood_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell lists MV, collection and controls among the parts with no curve yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": "M",
+      "nodes": [
+       {
+        "node": "bp_rmu",
+        "name": "MV Switchgear (RMU)",
+        "level": 2,
+        "why": "Cable compartment flooding"
+       },
+       {
+        "node": "bp_skid",
+        "name": "Skid & Piers",
+        "level": 2,
+        "why": "Skid height is the main mitigation"
+       },
+       {
+        "node": "bc_dc",
+        "name": "DC Cables",
+        "level": 2,
+        "why": "Ground faults"
+       },
+       {
+        "node": "bc_mv",
+        "name": "MV Cable",
+        "level": 2,
+        "why": "Water treeing"
+       },
+       {
+        "node": "bpl_feeders",
+        "name": "34.5 kV Feeders",
+        "level": 2,
+        "why": "Water treeing"
+       },
+       {
+        "node": "bk_fiber",
+        "name": "Control Network",
+        "level": 1,
+        "why": "Vault flooding"
+       }
+      ]
+     },
+     "bucket": "electrical_balance"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/flood.json",
+     "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",
+     "search_log": "docs/evidence/occurrence/bess/flood.md",
+     "last_searched": null,
+     "question": "Has flood physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "MV, collection and controls",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "electrical_balance",
+   "label": "MV, collection and controls",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.12021857923497267,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_bess",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "BESS_MV_AND_SHARED_ELECTRICAL"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No checked damage response or value share exists for it yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "electrical_balance"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/hurricane_wind.json",
+     "sha256": "b0dba18f513768581c2d477d1c8135dec4adf68d8dd57088b9c6c0463871cdf7",
+     "search_log": "docs/evidence/occurrence/bess/hurricane_wind.md",
+     "last_searched": null,
+     "question": "Has hurricane wind physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/tropical_cyclone_wind_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "electrical_balance",
+   "label": "MV, collection and controls",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.12021857923497267,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_bess",
+   "catalogue_status": "gap",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No curve yet: the battery hurricane work leaves convective wind and tornadoes for separate work, and the owner has since deferred them (Hazard's battery decisions). No evidence search has been run, and deferred does not mean zero risk.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "electrical_balance"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/convective_wind.json",
+     "sha256": "3a6845c97fd618dfb7929f3dbe74f1df1ec6d3e0e9eece87f47af774e50a805f",
+     "search_log": "docs/evidence/occurrence/bess/convective_wind.md",
+     "last_searched": null,
+     "question": "Has convective wind physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "No curve yet: the BESS hurricane wind cell leaves convective wind and tornado as a separate scope, and the BESS plan lists other hazards as later work (docs/plans/bess_damage/README.md, step 6)",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the research note it cites",
+     "path": "docs/plans/bess_damage/README.md"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+      "finding": "Owner direction: defer strong wind and tornado after the first pass. A scope direction, not a finding of zero loss.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "title": "Hazard's battery multi-hazard roadmap (step 4)",
+      "finding": "Convective wind was in the planned sequence, then deferred by owner direction; no qualification or execution now.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/cells/tropical_cyclone_wind_bess/README.md",
+      "title": "Battery hurricane wind cell: its scope",
+      "finding": "Treats convective wind and tornado as a separate scope from the hurricane wind curve.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/tropical_cyclone_wind_bess/README.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/evidence/occurrence/bess/convective_wind.md",
+      "title": "Battery convective wind: the field-report register",
+      "finding": "Not searched: nobody has looked for field reports yet.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/evidence/occurrence/bess/convective_wind.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "electrical_balance",
+   "label": "MV, collection and controls",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.12021857923497267,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_bess",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "BESS_MV_AND_SHARED_ELECTRICAL"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. Neither its share of the asset's value nor how this hazard damages it has been worked out yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "electrical_balance"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/wildfire.json",
+     "sha256": "ce97039890a5431ab52190a69edac3435161e3957cf901793da111da5f481388",
+     "search_log": "docs/evidence/occurrence/bess/wildfire.md",
+     "last_searched": null,
+     "question": "Has wildfire physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/wildfire_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "electrical_balance",
+   "label": "MV, collection and controls",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.12021857923497267,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "heat",
+    "label": "Heat",
+    "effect": "performance",
+    "outside_the_five": true
+   },
+   "entry_id": null,
+   "catalogue_status": "missing",
+   "cell_state": "unassessed_gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "Heat is treated here as changing how this asset works (derating, ageing) rather than breaking it, and a damage curve covers physical damage only, so there is no curve. The research so far is listed below.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": "M",
+      "nodes": [
+       {
+        "node": "bp_mvt",
+        "name": "MV Transformer",
+        "level": 2,
+        "why": "Hot-spot ageing"
+       },
+       {
+        "node": "bp_aux",
+        "name": "Auxiliary Supply",
+        "level": 1,
+        "why": "Load peaks on hot afternoons"
+       },
+       {
+        "node": "bk_ems",
+        "name": "EMS / Plant Controller",
+        "level": 1,
+        "why": "Electronics"
+       }
+      ]
+     },
+     "bucket": "electrical_balance"
+    },
+    "effect": "performance",
+    "basis": [
+     {
+      "label": "the curve's scope: physical destruction only",
+      "path": "docs/scope/SCOPE_AND_STORY.md"
+     }
+    ],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/heat.json",
+     "sha256": "162d7e040fb47c4379871d081a0db2aa7aa57bc79a2e04cc537587f70a7135d6",
+     "search_log": "docs/evidence/occurrence/bess/heat.md",
+     "last_searched": null,
+     "question": "Has heat physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the curve's scope (physical damage only)",
+     "path": "docs/scope/SCOPE_AND_STORY.md"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/discussion/research/_cross_cutting/bess_heat_temperature_feasibility.md",
+      "title": "BESS heat: physical effects and first-screen feasibility (Hazard, 21 Oct 2026)",
+      "finding": "Heat can cause lasting physical harm to batteries (an EPRI field case, LFP lab studies), but the reviewed sources do not yet support an outdoor-temperature-to-repair-cost curve for the reference plant.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/discussion/research/_cross_cutting/bess_heat_temperature_feasibility.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/discussion/_cross_cutting/bess_conus/05_heat_scope_and_research_plan.md",
+      "title": "Heat: define the consequence before building the model (Hazard, 21 Oct 2026)",
+      "finding": "Parked by the owner on 21 Oct: temporary derating, permanent ageing and acute failure need separate definitions, and working cooling should be compared with impaired cooling. No owner ruling yet.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/discussion/_cross_cutting/bess_conus/05_heat_scope_and_research_plan.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/scope/SCOPE_AND_STORY.md",
+      "title": "Damage's scope: a damage curve prices physical destruction only",
+      "finding": "Heat is treated as changing how an asset performs (derating, ageing), which sits outside a damage curve; disruption and derating are a separate stage.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/scope/SCOPE_AND_STORY.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "title": "Does it happen? Leads from the battery's design (heat row, 19 Oct 2026)",
+      "finding": "Heat is the strongest design lead (ageing doubles per +10 °C, chiller and converter derating) but works through performance: \"Performance, not damage — no curve.\" No field evidence was searched.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "civil_works",
+   "label": "Civil works",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.014571948998178506,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "hail_bess",
+   "catalogue_status": "gap",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No curve yet: the owner deferred hail for batteries (Hazard's battery decisions; this repository's battery plan lists other hazards only as later work). No evidence search has been run, and deferred does not mean zero risk.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "civil_works"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/hail.json",
+     "sha256": "92c78e1b445872410e3f9eabce63c8278ab8430a6779186fa6cc42d848dac44f",
+     "search_log": "docs/evidence/occurrence/bess/hail.md",
+     "last_searched": null,
+     "question": "Has hail physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "No curve and no documented plan yet (the BESS plan only lists other hazards as later work, step 6)",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's catalogue entry",
+     "path": "docs/cells/catalogue/hail_bess.json"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+      "finding": "Owner direction: defer strong wind, tornado and the other additional hazards. \"This is a scope direction, not a finding that omitted hazards are negligible or have zero loss.\"",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "title": "Hazard's battery multi-hazard roadmap",
+      "finding": "Hail: \"Deferred; outside the completed first pass.\" Deferred does not mean negligible, safe or zero loss.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/evidence/occurrence/bess/hail.md",
+      "title": "Battery hail: the field-report register",
+      "finding": "Not searched for any part: nobody has looked for field reports yet. This is the default, not a finding.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/evidence/occurrence/bess/hail.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "title": "Does it happen? Leads from the battery's design (hail row)",
+      "finding": "Design leads only (panel denting, condenser coils, both rated low); the recommended next step, \"search first; park if nothing\", has not been run.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "civil_works",
+   "label": "Civil works",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.014571948998178506,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_bess",
+   "catalogue_status": "live",
+   "cell_state": "no_curve",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "flood_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell lists civil works among the parts with no curve yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": "M",
+      "nodes": [
+       {
+        "node": "bs_found",
+        "name": "Enclosure Foundations",
+        "level": 2,
+        "why": "Pad elevation sets ingress risk"
+       }
+      ]
+     },
+     "bucket": "civil_works"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/flood.json",
+     "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",
+     "search_log": "docs/evidence/occurrence/bess/flood.md",
+     "last_searched": null,
+     "question": "Has flood physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "Civil works",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "civil_works",
+   "label": "Civil works",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.014571948998178506,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_bess",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "BESS_CIVIL"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No checked damage response or value share exists for it yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "civil_works"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/hurricane_wind.json",
+     "sha256": "b0dba18f513768581c2d477d1c8135dec4adf68d8dd57088b9c6c0463871cdf7",
+     "search_log": "docs/evidence/occurrence/bess/hurricane_wind.md",
+     "last_searched": null,
+     "question": "Has hurricane wind physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/tropical_cyclone_wind_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "civil_works",
+   "label": "Civil works",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.014571948998178506,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_bess",
+   "catalogue_status": "gap",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No curve yet: the battery hurricane work leaves convective wind and tornadoes for separate work, and the owner has since deferred them (Hazard's battery decisions). No evidence search has been run, and deferred does not mean zero risk.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "civil_works"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/convective_wind.json",
+     "sha256": "3a6845c97fd618dfb7929f3dbe74f1df1ec6d3e0e9eece87f47af774e50a805f",
+     "search_log": "docs/evidence/occurrence/bess/convective_wind.md",
+     "last_searched": null,
+     "question": "Has convective wind physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "No curve yet: the BESS hurricane wind cell leaves convective wind and tornado as a separate scope, and the BESS plan lists other hazards as later work (docs/plans/bess_damage/README.md, step 6)",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the research note it cites",
+     "path": "docs/plans/bess_damage/README.md"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+      "finding": "Owner direction: defer strong wind and tornado after the first pass. A scope direction, not a finding of zero loss.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "title": "Hazard's battery multi-hazard roadmap (step 4)",
+      "finding": "Convective wind was in the planned sequence, then deferred by owner direction; no qualification or execution now.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/cells/tropical_cyclone_wind_bess/README.md",
+      "title": "Battery hurricane wind cell: its scope",
+      "finding": "Treats convective wind and tornado as a separate scope from the hurricane wind curve.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/tropical_cyclone_wind_bess/README.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/evidence/occurrence/bess/convective_wind.md",
+      "title": "Battery convective wind: the field-report register",
+      "finding": "Not searched: nobody has looked for field reports yet.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/evidence/occurrence/bess/convective_wind.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "civil_works",
+   "label": "Civil works",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.014571948998178506,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_bess",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "BESS_CIVIL"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. Neither its share of the asset's value nor how this hazard damages it has been worked out yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": "M",
+      "nodes": [
+       {
+        "node": "bv_yard",
+        "name": "Yard & Fence",
+        "level": 2,
+        "why": "Vegetation clearance is a fire-code requirement"
+       },
+       {
+        "node": "bpl_yard",
+        "name": "Yard & Fence",
+        "level": 2,
+        "why": "Vegetation clearance"
+       }
+      ]
+     },
+     "bucket": "civil_works"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/wildfire.json",
+     "sha256": "ce97039890a5431ab52190a69edac3435161e3957cf901793da111da5f481388",
+     "search_log": "docs/evidence/occurrence/bess/wildfire.md",
+     "last_searched": null,
+     "question": "Has wildfire physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/wildfire_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "civil_works",
+   "label": "Civil works",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.014571948998178506,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "heat",
+    "label": "Heat",
+    "effect": "performance",
+    "outside_the_five": true
+   },
+   "entry_id": null,
+   "catalogue_status": "missing",
+   "cell_state": "unassessed_gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "Heat is treated here as changing how this asset works (derating, ageing) rather than breaking it, and a damage curve covers physical damage only, so there is no curve. The research so far is listed below.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "civil_works"
+    },
+    "effect": "performance",
+    "basis": [
+     {
+      "label": "the curve's scope: physical destruction only",
+      "path": "docs/scope/SCOPE_AND_STORY.md"
+     }
+    ],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/heat.json",
+     "sha256": "162d7e040fb47c4379871d081a0db2aa7aa57bc79a2e04cc537587f70a7135d6",
+     "search_log": "docs/evidence/occurrence/bess/heat.md",
+     "last_searched": null,
+     "question": "Has heat physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the curve's scope (physical damage only)",
+     "path": "docs/scope/SCOPE_AND_STORY.md"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/discussion/research/_cross_cutting/bess_heat_temperature_feasibility.md",
+      "title": "BESS heat: physical effects and first-screen feasibility (Hazard, 21 Oct 2026)",
+      "finding": "Heat can cause lasting physical harm to batteries (an EPRI field case, LFP lab studies), but the reviewed sources do not yet support an outdoor-temperature-to-repair-cost curve for the reference plant.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/discussion/research/_cross_cutting/bess_heat_temperature_feasibility.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/discussion/_cross_cutting/bess_conus/05_heat_scope_and_research_plan.md",
+      "title": "Heat: define the consequence before building the model (Hazard, 21 Oct 2026)",
+      "finding": "Parked by the owner on 21 Oct: temporary derating, permanent ageing and acute failure need separate definitions, and working cooling should be compared with impaired cooling. No owner ruling yet.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/discussion/_cross_cutting/bess_conus/05_heat_scope_and_research_plan.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/scope/SCOPE_AND_STORY.md",
+      "title": "Damage's scope: a damage curve prices physical destruction only",
+      "finding": "Heat is treated as changing how an asset performs (derating, ageing), which sits outside a damage curve; disruption and derating are a separate stage.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/scope/SCOPE_AND_STORY.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "title": "Does it happen? Leads from the battery's design (heat row, 19 Oct 2026)",
+      "finding": "Heat is the strongest design lead (ageing doubles per +10 °C, chiller and converter derating) but works through performance: \"Performance, not damage — no curve.\" No field evidence was searched.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "fieldwork",
+   "label": "Fieldwork",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.00546448087431694,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hail",
+    "label": "Hail",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "hail_bess",
+   "catalogue_status": "gap",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No curve yet: the owner deferred hail for batteries (Hazard's battery decisions; this repository's battery plan lists other hazards only as later work). No evidence search has been run, and deferred does not mean zero risk.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "fieldwork"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/hail.json",
+     "sha256": "92c78e1b445872410e3f9eabce63c8278ab8430a6779186fa6cc42d848dac44f",
+     "search_log": "docs/evidence/occurrence/bess/hail.md",
+     "last_searched": null,
+     "question": "Has hail physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "No curve and no documented plan yet (the BESS plan only lists other hazards as later work, step 6)",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's catalogue entry",
+     "path": "docs/cells/catalogue/hail_bess.json"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+      "finding": "Owner direction: defer strong wind, tornado and the other additional hazards. \"This is a scope direction, not a finding that omitted hazards are negligible or have zero loss.\"",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "title": "Hazard's battery multi-hazard roadmap",
+      "finding": "Hail: \"Deferred; outside the completed first pass.\" Deferred does not mean negligible, safe or zero loss.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/evidence/occurrence/bess/hail.md",
+      "title": "Battery hail: the field-report register",
+      "finding": "Not searched for any part: nobody has looked for field reports yet. This is the default, not a finding.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/evidence/occurrence/bess/hail.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "title": "Does it happen? Leads from the battery's design (hail row)",
+      "finding": "Design leads only (panel denting, condenser coils, both rated low); the recommended next step, \"search first; park if nothing\", has not been run.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "fieldwork",
+   "label": "Fieldwork",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.00546448087431694,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_bess",
+   "catalogue_status": "live",
+   "cell_state": "no_curve",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "flood_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell lists unallocated fieldwork among the parts with no curve yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "fieldwork"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/flood.json",
+     "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",
+     "search_log": "docs/evidence/occurrence/bess/flood.md",
+     "last_searched": null,
+     "question": "Has flood physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "Unallocated fieldwork",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "fieldwork",
+   "label": "Fieldwork",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.00546448087431694,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "hurricane_wind",
+    "label": "Hurricane wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "tropical_cyclone_wind_bess",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "BESS_FIELDWORK"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No checked damage response or value share exists for it yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "fieldwork"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/hurricane_wind.json",
+     "sha256": "b0dba18f513768581c2d477d1c8135dec4adf68d8dd57088b9c6c0463871cdf7",
+     "search_log": "docs/evidence/occurrence/bess/hurricane_wind.md",
+     "last_searched": null,
+     "question": "Has hurricane wind physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "NO_QUALIFIED_WIND_RESPONSE_OR_ALLOCATION",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/tropical_cyclone_wind_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "fieldwork",
+   "label": "Fieldwork",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.00546448087431694,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_bess",
+   "catalogue_status": "gap",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "No curve yet: the battery hurricane work leaves convective wind and tornadoes for separate work, and the owner has since deferred them (Hazard's battery decisions). No evidence search has been run, and deferred does not mean zero risk.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "fieldwork"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/convective_wind.json",
+     "sha256": "3a6845c97fd618dfb7929f3dbe74f1df1ec6d3e0e9eece87f47af774e50a805f",
+     "search_log": "docs/evidence/occurrence/bess/convective_wind.md",
+     "last_searched": null,
+     "question": "Has convective wind physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "No curve yet: the BESS hurricane wind cell leaves convective wind and tornado as a separate scope, and the BESS plan lists other hazards as later work (docs/plans/bess_damage/README.md, step 6)",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the research note it cites",
+     "path": "docs/plans/bess_damage/README.md"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "title": "Hazard's battery decisions: DD-BESS25 (20 Oct 2026)",
+      "finding": "Owner direction: defer strong wind and tornado after the first pass. A scope direction, not a finding of zero loss.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/decisions.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "title": "Hazard's battery multi-hazard roadmap (step 4)",
+      "finding": "Convective wind was in the planned sequence, then deferred by owner direction; no qualification or execution now.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus/11_multi_hazard_roadmap.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/cells/tropical_cyclone_wind_bess/README.md",
+      "title": "Battery hurricane wind cell: its scope",
+      "finding": "Treats convective wind and tornado as a separate scope from the hurricane wind curve.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/tropical_cyclone_wind_bess/README.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/evidence/occurrence/bess/convective_wind.md",
+      "title": "Battery convective wind: the field-report register",
+      "finding": "Not searched: nobody has looked for field reports yet.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/evidence/occurrence/bess/convective_wind.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  },
+  {
+   "key": "fieldwork",
+   "label": "Fieldwork",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.00546448087431694,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "wildfire",
+    "label": "Wildfire",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "wildfire_bess",
+   "catalogue_status": "live",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [
+    "BESS_FIELDWORK"
+   ],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "wildfire_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell has no curve for this part. Neither its share of the asset's value nor how this hazard damages it has been worked out yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "fieldwork"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/wildfire.json",
+     "sha256": "ce97039890a5431ab52190a69edac3435161e3957cf901793da111da5f481388",
+     "search_log": "docs/evidence/occurrence/bess/wildfire.md",
+     "last_searched": null,
+     "question": "Has wildfire physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT; VALUE_ALLOCATION_OR_RESPONSE_UNQUALIFIED",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/wildfire_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "fieldwork",
+   "label": "Fieldwork",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.00546448087431694,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "heat",
+    "label": "Heat",
+    "effect": "performance",
+    "outside_the_five": true
+   },
+   "entry_id": null,
+   "catalogue_status": "missing",
+   "cell_state": "unassessed_gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "gap": {
+    "reason": "Heat is treated here as changing how this asset works (derating, ageing) rather than breaking it, and a damage curve covers physical damage only, so there is no curve. The research so far is listed below.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "fieldwork"
+    },
+    "effect": "performance",
+    "basis": [
+     {
+      "label": "the curve's scope: physical destruction only",
+      "path": "docs/scope/SCOPE_AND_STORY.md"
+     }
+    ],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/heat.json",
+     "sha256": "162d7e040fb47c4379871d081a0db2aa7aa57bc79a2e04cc537587f70a7135d6",
+     "search_log": "docs/evidence/occurrence/bess/heat.md",
+     "last_searched": null,
+     "question": "Has heat physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "Heat changes how this asset performs rather than destroying it, and a damage curve prices physical destruction only, so no curve is in scope. Whether it has ever physically damaged one in the field is the occurrence register's open question.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the curve's scope (physical damage only)",
+     "path": "docs/scope/SCOPE_AND_STORY.md"
+    },
+    "research": [
+     {
+      "repo": "hazard",
+      "path": "docs/discussion/research/_cross_cutting/bess_heat_temperature_feasibility.md",
+      "title": "BESS heat: physical effects and first-screen feasibility (Hazard, 21 Oct 2026)",
+      "finding": "Heat can cause lasting physical harm to batteries (an EPRI field case, LFP lab studies), but the reviewed sources do not yet support an outdoor-temperature-to-repair-cost curve for the reference plant.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/discussion/research/_cross_cutting/bess_heat_temperature_feasibility.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "hazard",
+      "path": "docs/discussion/_cross_cutting/bess_conus/05_heat_scope_and_research_plan.md",
+      "title": "Heat: define the consequence before building the model (Hazard, 21 Oct 2026)",
+      "finding": "Parked by the owner on 21 Oct: temporary derating, permanent ageing and acute failure need separate definitions, and working cooling should be compared with impaired cooling. No owner ruling yet.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/discussion/_cross_cutting/bess_conus/05_heat_scope_and_research_plan.md",
+      "where": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/scope/SCOPE_AND_STORY.md",
+      "title": "Damage's scope: a damage curve prices physical destruction only",
+      "finding": "Heat is treated as changing how an asset performs (derating, ageing), which sits outside a damage curve; disruption and derating are a separate stage.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/scope/SCOPE_AND_STORY.md",
+      "where": "in this repository"
+     },
+     {
+      "repo": "damage",
+      "path": "docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "title": "Does it happen? Leads from the battery's design (heat row, 19 Oct 2026)",
+      "finding": "Heat is the strongest design lead (ageing doubles per +10 °C, chiller and converter derating) but works through performance: \"Performance, not damage — no curve.\" No field evidence was searched.",
+      "found": true,
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/extra/discussion/damage_curve_dashboard/04_does_it_happen_evidence.md",
+      "where": "in this repository"
+     }
+    ]
+   }
+  }
+ ],
+ "subcomponent_rollup": {
+  "expected": 30,
+  "with_curve": 6,
+  "gap": 24,
+  "complete": 5,
+  "incomplete": 25,
+  "evidence_labels": {
+   "field-calibrated": 0,
+   "published": 0,
+   "borrowed": 1,
+   "our judgment": 5
+  },
+  "by_hazard": {
+   "convective_wind": {
+    "expected": 5,
+    "with_curve": 0,
+    "gap": 5,
+    "complete": 0,
+    "incomplete": 5,
+    "evidence_labels": {
+     "field-calibrated": 0,
+     "published": 0,
+     "borrowed": 0,
+     "our judgment": 0
+    }
+   },
+   "flood": {
+    "expected": 5,
+    "with_curve": 2,
+    "gap": 3,
+    "complete": 1,
+    "incomplete": 4,
+    "evidence_labels": {
+     "field-calibrated": 0,
+     "published": 0,
+     "borrowed": 1,
+     "our judgment": 1
+    }
+   },
+   "hail": {
+    "expected": 5,
+    "with_curve": 0,
+    "gap": 5,
+    "complete": 0,
+    "incomplete": 5,
+    "evidence_labels": {
+     "field-calibrated": 0,
+     "published": 0,
+     "borrowed": 0,
+     "our judgment": 0
+    }
+   },
+   "heat": {
+    "expected": 5,
+    "with_curve": 0,
+    "gap": 5,
+    "complete": 0,
+    "incomplete": 5,
+    "evidence_labels": {
+     "field-calibrated": 0,
+     "published": 0,
+     "borrowed": 0,
+     "our judgment": 0
+    }
+   },
+   "hurricane_wind": {
+    "expected": 5,
+    "with_curve": 2,
+    "gap": 3,
+    "complete": 2,
+    "incomplete": 3,
+    "evidence_labels": {
+     "field-calibrated": 0,
+     "published": 0,
+     "borrowed": 0,
+     "our judgment": 2
+    }
+   },
+   "wildfire": {
+    "expected": 5,
+    "with_curve": 2,
+    "gap": 3,
+    "complete": 2,
+    "incomplete": 3,
+    "evidence_labels": {
+     "field-calibrated": 0,
+     "published": 0,
+     "borrowed": 0,
+     "our judgment": 2
+    }
+   }
+  }
+ },
+ "labour_note": null,
  "split": {
   "differs": true,
   "sentence": "These cells split the battery plant differently: the cells name different numbers of parts: flood 2, hurricane wind 5 and wildfire 5; MV, collection and controls is a unit under hurricane wind and wildfire; flood lists it as no curve yet; civil works is a unit under hurricane wind and wildfire; flood lists it as no curve yet; fieldwork is a unit under hurricane wind and wildfire; flood lists it as no curve yet; battery enclosures: flood covers $72.1M, hurricane wind covers $84.0M and wildfire covers $84.0M. Hazard's battery reference budget ($109.8M) sets the rows.",
+  "note": "These cells split the battery plant differently, so one team's single unit can be several rows here, or one row can be several of its units. Open a row to see that team's own names for it. Hazard's battery reference budget ($109.8M) sets the rows.",
   "details": [
    "the cells name different numbers of parts: flood 2, hurricane wind 5 and wildfire 5",
    "MV, collection and controls is a unit under hurricane wind and wildfire; flood lists it as no curve yet",
@@ -2252,7 +5170,7 @@
     "version_key": null,
     "sha256": null
    },
-   "summary": "Convective wind on batteries has no curve yet — the BESS hurricane wind cell leaves convective wind and tornado as a separate scope, and the BESS plan lists other hazards as later work (docs/plans/bess_damage/README.md, step 6).",
+   "summary": "Convective wind on batteries has no curve yet — the battery hurricane work leaves convective wind and tornadoes for separate work, and the owner has since deferred them (Hazard's battery decisions). No evidence search has been run, and deferred does not mean zero risk.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 0,
@@ -2317,7 +5235,7 @@
     "sha256": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24",
     "consumer_pin": "flood_bess@model_v1_0__docs_r1"
    },
-   "summary": "Flood on batteries: conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; 75 % of the reference value has a curve and 25 % has none.",
+   "summary": "Flood on batteries: 3 curves for 2 parts (battery enclosure (active hardware) and separate PCS); read against water depth above local grade (m); the numbers are our judgment; 75 % of the plant's value is priced.",
    "no_evaluator": false,
    "share_covered": 0.7514608688253878,
    "n_curves": 3,
@@ -2328,7 +5246,14 @@
    "aria_label": "Flood × Battery storage, live, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/flood_bess",
    "word": "our judgment",
-   "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment"
+   "halves": "Damage at each hazard level: borrowed and our judgment · the dollar value it is applied to: borrowed and our judgment",
+   "value_split": {
+    "priced": 0.7514608688253879,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.24853913117461213,
+    "basis": "of the reference plant's value"
+   }
   },
   {
    "entry_id": "hail_bess",
@@ -2380,7 +5305,7 @@
     "version_key": null,
     "sha256": null
    },
-   "summary": "Hail on batteries has no curve yet — no documented plan yet (the BESS plan only lists other hazards as later work, step 6).",
+   "summary": "Hail on batteries has no curve yet — the owner deferred hail for batteries (Hazard's battery decisions; this repository's battery plan lists other hazards only as later work). No evidence search has been run, and deferred does not mean zero risk.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 0,
@@ -2445,7 +5370,7 @@
     "sha256": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed",
     "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
    },
-   "summary": "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a judgment-based hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage; 86 % of the reference value has a curve and 14 % has none.",
+   "summary": "Hurricane wind on batteries: 3 curves for 2 parts (integrated battery enclosure and separate PCS); read against pressure ratio, (event 3-s gust ÷ declared reference 3-s gust)²; the numbers are our judgment; 86 % of the plant's value is priced.",
    "no_evaluator": false,
    "share_covered": 0.8597449908925319,
    "n_curves": 3,
@@ -2456,7 +5381,14 @@
    "aria_label": "Hurricane wind × Battery storage, live, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/tropical_cyclone_wind_bess",
    "word": "our judgment",
-   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
+   "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+   "value_split": {
+    "priced": 0.8597449908925319,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.14025500910746813,
+    "basis": "of the reference plant's value"
+   }
   },
   {
    "entry_id": "wildfire_bess",
@@ -2510,7 +5442,7 @@
     "sha256": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491",
     "consumer_pin": "wildfire_bess@model_v1_0__docs_r1"
    },
-   "summary": "Wildfire on batteries: solar wildfire electrical class tables reused as judgment-based ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities); 86 % of the reference value has a curve and 14 % has none.",
+   "summary": "Wildfire on batteries: 7 curves for 2 parts (integrated battery enclosure and separate PCS); read against FSim fire-intensity class at the unit, exact state; the numbers are our judgment; 86 % of the plant's value is priced.",
    "no_evaluator": false,
    "share_covered": 0.8597449908925319,
    "n_curves": 7,
@@ -2521,7 +5453,14 @@
    "aria_label": "Wildfire × Battery storage, live, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/wildfire_bess",
    "word": "our judgment",
-   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
+   "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+   "value_split": {
+    "priced": 0.8597449908925319,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.14025500910746813,
+    "basis": "of the reference plant's value"
+   }
   }
  ],
  "has_buckets": true,

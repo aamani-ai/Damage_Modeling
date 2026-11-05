@@ -77,7 +77,7 @@
    "label": "entry agent-read 2026-10-19 · release —"
   }
  },
- "summary": "Flood on batteries: conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; 75 % of the reference value has a curve and 25 % has none.",
+ "summary": "Flood on batteries: 3 curves for 2 parts (battery enclosure (active hardware) and separate PCS); read against water depth above local grade (m); the numbers are our judgment; 75 % of the plant's value is priced.",
  "chain": {
   "stations": [
    {
@@ -102,7 +102,8 @@
     ],
     "evidence": [],
     "fact": "3 deferred",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "units",
@@ -118,7 +119,8 @@
     ],
     "evidence": [],
     "fact": "2 units",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "axis_form",
@@ -129,7 +131,8 @@
     "files": [],
     "evidence": [],
     "fact": "binary step + piecewise linear",
-    "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section."
+    "absent_sentence": "No x-axis or curve-form decision found as a file or a dossier section.",
+    "earlier": []
    },
    {
     "id": "evidence",
@@ -149,7 +152,8 @@
     ],
     "evidence": [],
     "fact": "19 src · T3–4",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "value",
@@ -169,7 +173,8 @@
     ],
     "evidence": [],
     "fact": "75 % · $82.5M of $109.8M",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "audit",
@@ -191,7 +196,8 @@
      }
     ],
     "fact": "7 steps in the dossier",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "artifact",
@@ -219,7 +225,8 @@
     ],
     "evidence": [],
     "fact": "v1.0 · docs r1",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "capability",
@@ -235,7 +242,8 @@
     ],
     "evidence": [],
     "fact": "DR supported · EAL conditional",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "proof",
@@ -278,7 +286,8 @@
     ],
     "evidence": [],
     "fact": "30 of 30 KAT reproduced",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "field_review",
@@ -294,7 +303,8 @@
     ],
     "evidence": [],
     "fact": "not searched · agent-read 10-19",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    }
   ],
   "generation": "plain",
@@ -730,7 +740,13 @@
   "paths": {
    "sources": "docs/extra/discussion/bess_damage/evidence/sources.csv",
    "claims": "docs/extra/discussion/bess_damage/evidence/claims.csv",
-   "parameters": null
+   "parameters": null,
+   "source_registers": [
+    "docs/extra/discussion/bess_damage/evidence/sources.csv"
+   ],
+   "claim_registers": [
+    "docs/extra/discussion/bess_damage/evidence/claims.csv"
+   ]
   },
   "n_sources": 19,
   "n_claims": 30,
@@ -1074,6 +1090,8 @@
   }
  ],
  "gap_reason": null,
+ "gap_reason_own": null,
+ "gap_reason_source": null,
  "binding": null,
  "sampling_notes": [],
  "plain": {
@@ -1084,7 +1102,7 @@
    },
    "evidence": {
     "words": "Evidence: our judgment",
-    "code": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment",
+    "code": "Damage at each hazard level: borrowed and our judgment · the dollar value it is applied to: borrowed and our judgment",
     "tiers": [
      "T4"
     ],
@@ -1110,10 +1128,10 @@
     "id": "covers",
     "name": "What it covers",
     "meaning": "The parts that have a curve, their share of the value, and what has none yet",
-    "fact": "2 parts with a curve · 75 % of the value · 4 without one yet",
+    "fact": "2 parts with a curve · 75 % of the value · 2 of 5 subsystems with a curve",
     "paragraphs": [
-     "Flood on batteries: conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; unit values from market cost shares of the fixed Hazard reference budget. It names 2 parts: Battery enclosure (active hardware) and Separate PCS. Outside its scope: collector station and export line, autonomous internal failures (not caused by the flood) and business interruption. Kinds of damage it does not include: wave impact, scour and debris.",
-     "For this hazard the battery plant is split into 2 parts: Battery enclosure (active hardware) and Separate PCS. Parts of the plant's value with no curve yet: enclosure racks and fire suppression, electrical balance including unit transformers and cables, civil works and unallocated fieldwork.",
+     "Flood on batteries: conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; unit values from market cost shares of the fixed Hazard reference budget. It names 2 parts (listed below). It also lists 6 things it leaves out (below).",
+     "This hazard's curves cover 2 parts of the battery plant, listed below after the subsystem each belongs to and named as the catalogue entry writes them.",
      "$82.5M of $109.8M of the reference plant has a curve (75 %). No curve yet for enclosure racks and fire suppression, electrical balance (unit transformers, cables), civil works and unallocated fieldwork (25 % of the value)."
     ],
     "holds": [
@@ -1142,9 +1160,9 @@
       "tone": "key"
      },
      {
-      "text": "4 without a curve yet",
+      "text": "2 of 5 subsystems with a curve · 3 no curve yet",
       "tone": "muted",
-      "title": "Enclosure racks and fire suppression; Electrical balance including unit transformers and cables; Civil works; Unallocated fieldwork"
+      "title": "The catalogue's own list: Enclosure racks and fire suppression; Electrical balance including unit transformers and cables; Civil works; Unallocated fieldwork"
      }
     ]
    },
@@ -1154,8 +1172,8 @@
     "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "water depth above local grade → a step + a line through points",
     "paragraphs": [
-     "Damage is read against water depth above local grade (m). The curves take 2 forms: an on/off step: nothing, then full replacement; a line through fixed points (piecewise linear). The input, in the catalogue's words: water depth above local grade (m), finite and 0 or more; water type must be stated as fresh or saline; the PCS freshwater curve reads depth above the assumed 0.30 m entry (0 to 2 m knots, flat at full replacement beyond 0.6 m).",
-     "The seven-step audit is written in the dossier with 7 rows. A site-condition adapter has not been written for this cell."
+     "Damage is read against one hazard measure: water depth above local grade (m). The curves take 2 forms: an on/off step: nothing, then full replacement; a line through fixed points (piecewise linear). What Hazard has to supply for each event is below.",
+     "The seven-step audit is written in the dossier with 7 rows."
     ],
     "holds": [
      "axis_form",
@@ -1203,9 +1221,9 @@
     "id": "numbers",
     "name": "Where the numbers come from",
     "meaning": "The sources, what each one gave, and how sure we are",
-    "fact": "19 sources, 17 linked · our judgment",
+    "fact": "19 sources, 18 linked · our judgment",
     "paragraphs": [
-     "19 sources set this cell: Hazard BESS reference r1: profile, layout and 2024 budget, NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment, Flood Solar model v1.0 docs r4 canonical artifact and SMA MV Power Station with Sunny Central Storage system manual and 15 more. Of the 5 parameters, 2 are borrowed and 3 are our judgment. The source and claim registers are machine-readable files in the cell folder. 2 sources have no link in the register (2 with a locator)."
+     "The sources and claims below are kept as machine-readable register files in the cell folder."
     ],
     "holds": [
      "evidence"
@@ -1215,7 +1233,7 @@
      {
       "text": "our judgment",
       "tone": "key",
-      "title": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment"
+      "title": "Damage at each hazard level: borrowed and our judgment · the dollar value it is applied to: borrowed and our judgment"
      },
      {
       "text": "Hazard BESS reference r1…",
@@ -1232,7 +1250,7 @@
       "tone": "muted"
      },
      {
-      "text": "19 sources, 17 linked",
+      "text": "19 sources, 18 linked",
       "tone": "muted"
      }
     ]
@@ -1240,8 +1258,8 @@
    {
     "id": "checked",
     "name": "Has it been checked",
-    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
-    "fact": "no outside check yet · field reports not searched · read by an agent only",
+    "meaning": "Outside checks, and who has read the entry",
+    "fact": "no outside check yet · read by an agent only",
     "paragraphs": [
      "No outside check has been made yet: nothing independent has been compared with this curve. The validation record says passed conditional annual screening (2026-10-18).",
      "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet."
@@ -1253,10 +1271,6 @@
     "chips": [
      {
       "text": "no outside check yet",
-      "tone": "muted"
-     },
-     {
-      "text": "field reports: not searched",
       "tone": "muted"
      },
      {
@@ -1272,15 +1286,21 @@
    "proof"
   ],
   "word": "our judgment",
-  "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment",
+  "halves": "Damage at each hazard level: borrowed and our judgment · the dollar value it is applied to: borrowed and our judgment",
   "hazard_paths": [
    {
     "id": "BF-S01",
     "title": "Hazard BESS reference r1",
     "path": "docs/plans/_cross_cutting/bess_conus",
     "state": "on_branch",
-    "link": null,
-    "words": "on a Hazard branch, not on its main yet"
+    "branch": "codex/bess-conus",
+    "branches": [
+     "codex/bess-conus",
+     "codex/bess-release-integration",
+     "codex/real-estate-conus"
+    ],
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
+    "words": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
    }
   ],
   "capabilities": [
@@ -1398,28 +1418,28 @@
     "id": "scope",
     "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Flood on batteries: conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; unit values from market cost shares of the fixed Hazard reference budget. It names 2 parts: Battery enclosure (active hardware) and Separate PCS. Outside its scope: collector station and export line, autonomous internal failures (not caused by the flood) and business interruption. Kinds of damage it does not include: wave impact, scour and debris.",
+    "paragraph": "Flood on batteries: conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; unit values from market cost shares of the fixed Hazard reference budget. It names 2 parts (listed below). It also lists 6 things it leaves out (below).",
     "plain_fact": "2 parts · 3 left out"
    },
    {
     "id": "units",
     "name": "What breaks",
     "meaning": "The parts of the plant the hazard damages, each with its own curve",
-    "paragraph": "For this hazard the battery plant is split into 2 parts: Battery enclosure (active hardware) and Separate PCS. Parts of the plant's value with no curve yet: enclosure racks and fire suppression, electrical balance including unit transformers and cables, civil works and unallocated fieldwork.",
+    "paragraph": "This hazard's curves cover 2 parts of the battery plant, listed below after the subsystem each belongs to and named as the catalogue entry writes them.",
     "plain_fact": "2 parts"
    },
    {
     "id": "axis_form",
     "name": "How damage is measured",
     "meaning": "The hazard intensity on the x-axis and the shape of the curve",
-    "paragraph": "Damage is read against water depth above local grade (m). The curves take 2 forms: an on/off step: nothing, then full replacement; a line through fixed points (piecewise linear). The input, in the catalogue's words: water depth above local grade (m), finite and 0 or more; water type must be stated as fresh or saline; the PCS freshwater curve reads depth above the assumed 0.30 m entry (0 to 2 m knots, flat at full replacement beyond 0.6 m).",
+    "paragraph": "Damage is read against one hazard measure: water depth above local grade (m). The curves take 2 forms: an on/off step: nothing, then full replacement; a line through fixed points (piecewise linear). What Hazard has to supply for each event is below.",
     "plain_fact": "a step + a line through points"
    },
    {
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "19 sources set this cell: Hazard BESS reference r1: profile, layout and 2024 budget, NEMA GD 1-2016, Evaluating Water-Damaged Electrical Equipment, Flood Solar model v1.0 docs r4 canonical artifact and SMA MV Power Station with Sunny Central Storage system manual and 15 more. Of the 5 parameters, 2 are borrowed and 3 are our judgment. The source and claim registers are machine-readable files in the cell folder. 2 sources have no link in the register (2 with a locator).",
+    "paragraph": "The sources and claims below are kept as machine-readable register files in the cell folder.",
     "plain_fact": "19 sources · borrowed and our judgment"
    },
    {
@@ -1433,7 +1453,7 @@
     "id": "audit",
     "name": "The audit",
     "meaning": "The seven checks a curve passes before release",
-    "paragraph": "The seven-step audit is written in the dossier with 7 rows. A site-condition adapter has not been written for this cell.",
+    "paragraph": "The seven-step audit is written in the dossier with 7 rows.",
     "plain_fact": "7 steps in the write-up"
    },
    {
@@ -1472,10 +1492,10 @@
      "BF-S01"
     ],
     "title": "Hazard BESS reference r1",
-    "link": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
     "link_kind": "hazard_branch",
     "locator": "01_reference_profile_and_value.md; reference_budget.csv; layout.csv",
-    "no_link_sentence": "on a Hazard branch, not on its main yet",
+    "no_link_sentence": null,
     "source_id": "BF-S01"
    },
    {
@@ -1496,7 +1516,7 @@
      "BF-S06"
     ],
     "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "link_kind": "repo_file",
     "locator": "flood_solar__model_v1_0__docs_r4__curve_artifact.json; flood_solar_curve_derivation_dossier_v1_0.md",
     "no_link_sentence": null,
@@ -1530,6 +1550,7 @@
   "sources": [
    {
     "id": "BF-S01",
+    "aliases": [],
     "citation": "Hazard BESS reference r1; commit 23e1aac4d",
     "url": "Hazard_modeling/docs/plans/_cross_cutting/bess_conus/",
     "locator": "01_reference_profile_and_value.md; reference_budget.csv; layout.csv",
@@ -1543,17 +1564,25 @@
     "hazard": {
      "path": "docs/plans/_cross_cutting/bess_conus",
      "state": "on_branch",
-     "link": null,
-     "words": "on a Hazard branch, not on its main yet"
+     "branch": "codex/bess-conus",
+     "branches": [
+      "codex/bess-conus",
+      "codex/bess-release-integration",
+      "codex/real-estate-conus"
+     ],
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
+     "words": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
     },
     "doi": null,
-    "link": null,
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
     "link_kind": "hazard_branch",
     "title": "Hazard BESS reference r1",
-    "no_link_sentence": "on a Hazard branch, not on its main yet"
+    "no_link_sentence": null,
+    "link_note": "not on Hazard's main; on Hazard branches codex/bess-conus, codex/bess-release-integration, codex/real-estate-conus (linked: codex/bess-conus)"
    },
    {
     "id": "BF-S02",
+    "aliases": [],
     "citation": "NEMA GD 1-2016 Evaluating Water-Damaged Electrical Equipment",
     "url": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
     "locator": "Printed pp1-4 equipment table; pp5-8 sections 4.2.1 4.4 4.6 4.11 4.12; p4 table visually reviewed",
@@ -1568,10 +1597,12 @@
     "link": "https://www.nema.org/docs/default-source/standards-document-library/nema-gd-1-2016-evaluating-water-damaged-electrical-equipment-guide.pdf",
     "link_kind": "url",
     "title": "NEMA GD 1-2016 Evaluating Water-Damaged Electrical Equipment",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S03",
+    "aliases": [],
     "citation": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev2.8 2026-04-10",
     "url": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
     "locator": "Printed p2 scope; p17 firefighting; p18 shutdown/flood; p20 damaged product; p22 repair; p24 revision",
@@ -1586,10 +1617,12 @@
     "link": "https://digitalassets.tesla.com/tesla-contents/image/upload/Lithium-Ion_Battery_Emergency_Response_Guide_en.pdf",
     "link_kind": "url",
     "title": "Tesla Industrial Lithium-Ion Battery Emergency Response Guide rev2.8 2026-04-10",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S04",
+    "aliases": [],
     "citation": "Chen et al. 2025 Risk Assessment Method for Power Distribution Systems Based on Spatiotemporal Characteristics of the Typhoon Disaster Chain; Processes 13 699",
     "url": "https://doi.org/10.3390/pr13030699",
     "locator": "Section3.3 Eq28 PDFp9; section5.1 PDFp12 400mm design assumption",
@@ -1604,10 +1637,12 @@
     "link": "https://doi.org/10.3390/pr13030699",
     "link_kind": "doi",
     "title": "Chen et al. 2025 Risk Assessment Method for Power Distribution Systems Based on Spatiotemporal…",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S05",
+    "aliases": [],
     "citation": "Southern California Edison Tehachapi Wind Energy Storage Project Technology Performance Report 3",
     "url": "https://www.osti.gov/servlets/purl/1349233",
     "locator": "Term search of complete pdftotext output: flood; mudslide; inundat; water damage",
@@ -1622,10 +1657,12 @@
     "link": "https://www.osti.gov/servlets/purl/1349233",
     "link_kind": "url",
     "title": "Southern California Edison Tehachapi Wind Energy Storage Project Technology Performance Report 3",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S06",
+    "aliases": [],
     "citation": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
     "url": "damage_modeling/docs/cells/flood_solar/current/",
     "locator": "flood_solar__model_v1_0__docs_r4__curve_artifact.json; flood_solar_curve_derivation_dossier_v1_0.md",
@@ -1638,13 +1675,15 @@
     "provenance": "register",
     "repo_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "link_kind": "repo_file",
     "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S07",
+    "aliases": [],
     "citation": "Shared electrical Flood substrate and Wind reuse review",
     "url": "damage_modeling/docs/method/shared_components/flood_electrical/",
     "locator": "binding_rules.md; failure_unit_catalog.csv; docs/cells/flood_wind/current/SHARED_COMPONENT_REUSE_CROSSWALK_flood_wind__model_v1_0__docs_r1.csv",
@@ -1657,13 +1696,15 @@
     "provenance": "register",
     "repo_path": "docs/method/shared_components/flood_electrical/binding_rules.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/method/shared_components/flood_electrical/binding_rules.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/method/shared_components/flood_electrical/binding_rules.md",
     "link_kind": "repo_file",
     "title": "Shared electrical Flood substrate and Wind reuse review",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S08",
+    "aliases": [],
     "citation": "Hazard existing Pluvial ponding method",
     "url": "Hazard_modeling/perils/flood/src/flood/pluvial/ponding.py",
     "locator": "CAP_M = 0.30; exact bytes pinned in audit_receipt.json",
@@ -1677,17 +1718,19 @@
     "hazard": {
      "path": "perils/flood/src/flood/pluvial/ponding.py",
      "state": "on_main",
-     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/perils/flood/src/flood/pluvial/ponding.py",
+     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/ee41b829f51485283d5a3540de7c34ccfa846e95/perils/flood/src/flood/pluvial/ponding.py",
      "words": null
     },
     "doi": null,
-    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/c83e83b007e548b5a130038cc50be6d6985715ff/perils/flood/src/flood/pluvial/ponding.py",
+    "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/ee41b829f51485283d5a3540de7c34ccfa846e95/perils/flood/src/flood/pluvial/ponding.py",
     "link_kind": "hazard_file",
     "title": "Hazard existing Pluvial ponding method",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S09",
+    "aliases": [],
     "citation": "Sungrow PowerTitan-ST2752UX System Manual; ST2752UX-SEN-Ver21-202204",
     "url": "https://info-support.sungrowpower.com/application/pdf/2022/11/10/E049-ST2752UX-SEN-Ver21-202204-IEC.pdf",
     "locator": "Printed pp8-13 internal anatomy and module data; pp25-26 foundation/drainage; p35 Fig5-1; p42 DC connections. PDF pages are printed+10.",
@@ -1702,10 +1745,12 @@
     "link": "https://info-support.sungrowpower.com/application/pdf/2022/11/10/E049-ST2752UX-SEN-Ver21-202204-IEC.pdf",
     "link_kind": "url",
     "title": "Sungrow PowerTitan-ST2752UX System Manual; ST2752UX-SEN-Ver21-202204",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S10",
+    "aliases": [],
     "citation": "Rask et al.; NHTSA/Argonne DOT HS 813 136; Li-Ion Battery Pack Immersion Exploratory Investigation; August2021",
     "url": "https://rosap.ntl.bts.gov/view/dot/57013/dot_57013_DS1.pdf",
     "locator": "Printed pp15-17 procedure and Table1; pp19-24 findings; p27 conclusions. PDF page=printed+4. Table1 and p20 visually checked.",
@@ -1720,10 +1765,12 @@
     "link": "https://rosap.ntl.bts.gov/view/dot/57013/dot_57013_DS1.pdf",
     "link_kind": "url",
     "title": "Rask et al.; NHTSA/Argonne DOT HS 813 136; Li-Ion Battery Pack Immersion Exploratory Investigation; August2021",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S11",
+    "aliases": [],
     "citation": "Orendorff Lamb Steele; Sandia SAND2017-6925; Recommended Practices for Abuse Testing Rechargeable Energy Storage Systems; July2017",
     "url": "https://www.sandia.gov/app/uploads/sites/163/2021/09/SNL-Abuse-Testing-Manual_July2017_FINAL.pdf",
     "locator": "p36 section4.4 Water Immersion",
@@ -1738,10 +1785,12 @@
     "link": "https://www.sandia.gov/app/uploads/sites/163/2021/09/SNL-Abuse-Testing-Manual_July2017_FINAL.pdf",
     "link_kind": "url",
     "title": "Orendorff Lamb Steele; Sandia SAND2017-6925; Recommended Practices for Abuse Testing Rechargeable Energy…",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S12",
+    "aliases": [],
     "citation": "SMA System Manual MV Power Station with Sunny Central Storage US; MVPS-S2-SCS-US-B8-SH-en-11",
     "url": "https://files.sma.de/downloads/MVPS-S2-SCS-US-B8-SH-en-11.pdf",
     "locator": "p22 environmental disturbance; p267 electronics/air/connection ratings; pp274-275 section17.5 and Fig99 visually checked",
@@ -1756,10 +1805,12 @@
     "link": "https://files.sma.de/downloads/MVPS-S2-SCS-US-B8-SH-en-11.pdf",
     "link_kind": "url",
     "title": "SMA System Manual MV Power Station with Sunny Central Storage US; MVPS-S2-SCS-US-B8-SH-en-11",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S13",
+    "aliases": [],
     "citation": "PVSCM 2024 Q1 archive; NLR data catalog DOI 10.7799/3007269",
     "url": "https://data.nlr.gov/submissions/307",
     "locator": "UPV 2024Q1.txt lines1-7 50-66 153 172-173; ESS rows and tariff factor; workbook ESS columns D-H inspected read-only",
@@ -1774,10 +1825,12 @@
     "link": "https://data.nlr.gov/submissions/307",
     "link_kind": "url",
     "title": "PVSCM 2024 Q1 archive; NLR data catalog DOI 10.7799/3007269",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S14",
+    "aliases": [],
     "citation": "Cole et al.; NREL/TP-6A40-93281 Cost Projections for Utility-Scale Battery Storage: 2025 Update",
     "url": "https://www.osti.gov/servlets/purl/2583471",
     "locator": "Printed p4 PVSCM method; p18 Table3 visually reviewed (PDFp26); p19 mixed BOS",
@@ -1792,10 +1845,12 @@
     "link": "https://www.osti.gov/servlets/purl/2583471",
     "link_kind": "url",
     "title": "Cole et al.; NREL/TP-6A40-93281 Cost Projections for Utility-Scale Battery Storage: 2025 Update",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S15",
+    "aliases": [],
     "citation": "Sungrow High Voltage LFP Battery SBS050 User Manual; SBS050-UEN-Ver13-202504",
     "url": "https://uk.sungrowpower.com/upload/file/20250603/EN_UM_SBS050_User_Manual.pdf",
     "locator": "Printed p6 sections1.3.3-1.3.4 (PDFp14) visually reviewed; scope pII",
@@ -1810,10 +1865,12 @@
     "link": "https://uk.sungrowpower.com/upload/file/20250603/EN_UM_SBS050_User_Manual.pdf",
     "link_kind": "url",
     "title": "Sungrow High Voltage LFP Battery SBS050 User Manual; SBS050-UEN-Ver13-202504",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S16",
+    "aliases": [],
     "citation": "Schneider Electric bulletin 0110DB0401R07/11 August2011; linked by FAQ FA123082 last modified2026-02-04",
     "url": "https://ckm-content.se.com/ckmContent/sfc/servlet.shepherd/document/download/0691H00000EDoYrQAL",
     "locator": "pp1-2 replacement and reconditioning lists; p3 non-submerged equipment",
@@ -1828,10 +1885,12 @@
     "link": "https://ckm-content.se.com/ckmContent/sfc/servlet.shepherd/document/download/0691H00000EDoYrQAL",
     "link_kind": "url",
     "title": "Schneider Electric bulletin 0110DB0401R07/11 August2011; linked by FAQ FA123082 last modified2026-02-04",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S17",
+    "aliases": [],
     "citation": "EIA / Sargent & Lundy Capital Cost and Performance Characteristics; January2024 report / SL-018001 RevA December2023",
     "url": "https://www.eia.gov/analysis/studies/powerplants/capitalcost/pdf/capital_cost_AEO2025.pdf",
     "locator": "Case19 pp113-116; Table19-1; printedp116 PDFp158 visually reviewed",
@@ -1846,10 +1905,12 @@
     "link": "https://www.eia.gov/analysis/studies/powerplants/capitalcost/pdf/capital_cost_AEO2025.pdf",
     "link_kind": "url",
     "title": "EIA / Sargent & Lundy Capital Cost and Performance Characteristics; January2024 report / SL-018001 RevA…",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S18",
+    "aliases": [],
     "citation": "NEMA updated equipment-damage guides announcement May28 2026",
     "url": "https://www.makeitelectric.org/newsroom/news/nema-issues-guidance-on-evaluating-damaged-electrical-equipment-after-natural-disasters-and-extreme-weather-events/",
     "locator": "Announcement names CS70006-2026; new full guide unavailable in bounded retrieval",
@@ -1864,10 +1925,12 @@
     "link": "https://www.makeitelectric.org/newsroom/news/nema-issues-guidance-on-evaluating-damaged-electrical-equipment-after-natural-disasters-and-extreme-weather-events/",
     "link_kind": "url",
     "title": "NEMA updated equipment-damage guides announcement May28 2026",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "BF-S19",
+    "aliases": [],
     "citation": "Illustrative Digital Twin BESS cost model and equipment cards",
     "url": "infrasure-digital-twin/public/engine/",
     "locator": "cost-basis.js BESS estimated rows; bess-data.js bp_mvt bp_rmu bk_ems cost fields; exact local hashes in r4/source_captures.json",
@@ -1882,7 +1945,8 @@
     "link": null,
     "link_kind": "none",
     "title": "Illustrative Digital Twin BESS cost model and equipment cards",
-    "no_link_sentence": "no link in the register"
+    "no_link_sentence": "no link in the register",
+    "link_note": null
    }
   ],
   "claims": [
@@ -2427,7 +2491,7 @@
      {
       "id": "BF-S01",
       "title": "Hazard BESS reference r1",
-      "link": null,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
       "link_kind": "hazard_branch",
       "resolved": true
      },
@@ -2472,7 +2536,7 @@
      {
       "id": "BF-S06",
       "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
       "link_kind": "repo_file",
       "resolved": true
      },
@@ -2503,7 +2567,7 @@
      {
       "id": "BF-S01",
       "title": "Hazard BESS reference r1",
-      "link": null,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
       "link_kind": "hazard_branch",
       "resolved": true
      },
@@ -2541,14 +2605,14 @@
      {
       "id": "BF-S01",
       "title": "Hazard BESS reference r1",
-      "link": null,
+      "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/d12718f713925ebc75f6efcc82285e5bc11e0458/docs/plans/_cross_cutting/bess_conus",
       "link_kind": "hazard_branch",
       "resolved": true
      },
      {
       "id": "BF-S06",
       "title": "Flood Solar model v1.0 docs r4 canonical artifact and derivation dossier",
-      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/01dbf18578c24ada91b4770c5ab6e4caa0a53de4/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+      "link": "https://github.com/aamani-ai/Damage_Modeling/blob/23fb423faa4a06687e590c1a6351e6a8d9d45bd0/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
       "link_kind": "repo_file",
       "resolved": true
      }
@@ -2619,8 +2683,8 @@
   },
   "link_counts": {
    "total": 19,
-   "linked": 17,
-   "locator_only": 2,
+   "linked": 18,
+   "locator_only": 1,
    "neither": 0,
    "markers": 0,
    "placeholders": 0
@@ -2631,5 +2695,528 @@
    "cost": "borrowed and our judgment"
   }
  },
- "build_findings": []
+ "build_findings": [],
+ "hazard_note": null,
+ "subcomponents": [
+  {
+   "key": "battery_enclosures",
+   "label": "Battery enclosures",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.7650273224043715,
+   "share_basis": "share of the asset's reference value. This cell's own value lines here (share of the reference plant ($109.8M, reference budget r1)): Battery enclosure (active hardware) 66 %",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_bess",
+   "catalogue_status": "live",
+   "cell_state": "partial",
+   "coverage": "curve",
+   "completeness": "incomplete",
+   "curve_ids": [
+    "BESS_ACTIVE_CONTACT_STATE"
+   ],
+   "failure_unit_ids": [
+    "BESS_ACTIVE_ENCLOSURE"
+   ],
+   "tier_span": "T4",
+   "evidence_labels": [
+    "our judgment"
+   ],
+   "evidence_words": "our judgment",
+   "construction": [
+    {
+     "curve_id": "BESS_ACTIVE_CONTACT_STATE",
+     "data_path": "curves/flood_bess/BESS_ACTIVE_CONTACT_STATE@model_v1_0__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/flood_bess/current/curve_artifact.json",
+     "parameter_count": 6,
+     "source_ids": [
+      "BF-S01",
+      "BF-S02",
+      "BF-S03",
+      "BF-S06",
+      "BF-S09",
+      "BF-S10",
+      "BF-S12",
+      "BF-S13",
+      "BF-S14",
+      "BF-S15",
+      "BF-S16"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "flood_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Flood · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "flood_bess",
+     "part": "Battery enclosure (active hardware)",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "flood_bess@model_v1_0__docs_r1",
+    "hazard": "used"
+   },
+   "gap": {
+    "reason": "A curve covers some of this part's pieces; the rest have none yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": "H",
+      "nodes": [
+       {
+        "node": "be_enc",
+        "name": "Enclosure Shell",
+        "level": 3,
+        "why": "Water at the racks shorts modules and can trigger thermal events"
+       },
+       {
+        "node": "be_modules",
+        "name": "Battery Modules",
+        "level": 3,
+        "why": "Submersion shorts modules"
+       },
+       {
+        "node": "be_dccab",
+        "name": "DC Combiner & Disconnect",
+        "level": 2,
+        "why": "Low-mounted DC gear"
+       }
+      ]
+     },
+     "bucket": "battery_enclosures"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/flood.json",
+     "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",
+     "search_log": "docs/evidence/occurrence/bess/flood.md",
+     "last_searched": null,
+     "question": "Has flood physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "A curve covers only part of this expected subsystem.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "pcs",
+   "label": "PCS",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.0947176684881603,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_bess",
+   "catalogue_status": "live",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "BESS_PCS_INUNDATION_PROXY",
+    "BESS_PCS_SALINE_CONTACT_STATE"
+   ],
+   "failure_unit_ids": [
+    "BESS_SEPARATE_PCS"
+   ],
+   "tier_span": "T3",
+   "evidence_labels": [
+    "borrowed"
+   ],
+   "evidence_words": "borrowed",
+   "construction": [
+    {
+     "curve_id": "BESS_PCS_INUNDATION_PROXY",
+     "data_path": "curves/flood_bess/BESS_PCS_INUNDATION_PROXY@model_v1_0__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/flood_bess/current/curve_artifact.json",
+     "parameter_count": 6,
+     "source_ids": [
+      "BF-S01",
+      "BF-S02",
+      "BF-S03",
+      "BF-S06",
+      "BF-S09",
+      "BF-S10",
+      "BF-S12",
+      "BF-S13",
+      "BF-S14",
+      "BF-S15",
+      "BF-S16"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "flood_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Flood · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "flood_bess",
+     "part": "Separate PCS",
+     "scope_note": null
+    },
+    {
+     "curve_id": "BESS_PCS_SALINE_CONTACT_STATE",
+     "data_path": "curves/flood_bess/BESS_PCS_SALINE_CONTACT_STATE@model_v1_0__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/flood_bess/current/curve_artifact.json",
+     "parameter_count": 6,
+     "source_ids": [
+      "BF-S01",
+      "BF-S02",
+      "BF-S03",
+      "BF-S06",
+      "BF-S09",
+      "BF-S10",
+      "BF-S12",
+      "BF-S13",
+      "BF-S14",
+      "BF-S15",
+      "BF-S16"
+     ],
+     "production_use": {
+      "state": "runtime_indexed",
+      "consumer_pin": "flood_bess@model_v1_0__docs_r1",
+      "hazard": {
+       "state": "used",
+       "sentences": [
+        "Hazard's dashboard layer BESS Flood · screening uses the file shown here (model v1.0, docs r1).",
+        "How this is known: the stored release runs for this asset and hazard pin the artifact's hash.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [],
+       "values": [],
+       "value_mismatches": [],
+       "newer": null
+      },
+      "sentence": "Released for Hazard: Hazard's loss calculations may load this curve. Whether Hazard's maps already use it is shown under “Used by Hazard”."
+     },
+     "entry_id": "flood_bess",
+     "part": "Separate PCS",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "runtime_indexed",
+    "consumer_pin": "flood_bess@model_v1_0__docs_r1",
+    "hazard": "used"
+   },
+   "gap": null
+  },
+  {
+   "key": "electrical_balance",
+   "label": "MV, collection and controls",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.12021857923497267,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_bess",
+   "catalogue_status": "live",
+   "cell_state": "no_curve",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "flood_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell lists MV, collection and controls among the parts with no curve yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": "M",
+      "nodes": [
+       {
+        "node": "bp_rmu",
+        "name": "MV Switchgear (RMU)",
+        "level": 2,
+        "why": "Cable compartment flooding"
+       },
+       {
+        "node": "bp_skid",
+        "name": "Skid & Piers",
+        "level": 2,
+        "why": "Skid height is the main mitigation"
+       },
+       {
+        "node": "bc_dc",
+        "name": "DC Cables",
+        "level": 2,
+        "why": "Ground faults"
+       },
+       {
+        "node": "bc_mv",
+        "name": "MV Cable",
+        "level": 2,
+        "why": "Water treeing"
+       },
+       {
+        "node": "bpl_feeders",
+        "name": "34.5 kV Feeders",
+        "level": 2,
+        "why": "Water treeing"
+       },
+       {
+        "node": "bk_fiber",
+        "name": "Control Network",
+        "level": 1,
+        "why": "Vault flooding"
+       }
+      ]
+     },
+     "bucket": "electrical_balance"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/flood.json",
+     "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",
+     "search_log": "docs/evidence/occurrence/bess/flood.md",
+     "last_searched": null,
+     "question": "Has flood physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "MV, collection and controls",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "civil_works",
+   "label": "Civil works",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.014571948998178506,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_bess",
+   "catalogue_status": "live",
+   "cell_state": "no_curve",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "flood_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell lists civil works among the parts with no curve yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": "M",
+      "nodes": [
+       {
+        "node": "bs_found",
+        "name": "Enclosure Foundations",
+        "level": 2,
+        "why": "Pad elevation sets ingress risk"
+       }
+      ]
+     },
+     "bucket": "civil_works"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/flood.json",
+     "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",
+     "search_log": "docs/evidence/occurrence/bess/flood.md",
+     "last_searched": null,
+     "question": "Has flood physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "Civil works",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "fieldwork",
+   "label": "Fieldwork",
+   "asset": {
+    "slug": "bess",
+    "label": "Battery storage"
+   },
+   "share": 0.00546448087431694,
+   "share_basis": "share of the asset's reference value",
+   "cost_follows": false,
+   "hazard": {
+    "slug": "flood",
+    "label": "Flood",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "flood_bess",
+   "catalogue_status": "live",
+   "cell_state": "no_curve",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": "flood_bess@model_v1_0__docs_r1",
+    "hazard": null
+   },
+   "gap": {
+    "reason": "The cell lists unallocated fieldwork among the parts with no curve yet.",
+    "occurrence": {
+     "state": "not_searched",
+     "mark": "?",
+     "sentence": "Not searched — nobody has looked for field reports yet.",
+     "reports": [],
+     "twin_lead": {
+      "level": null,
+      "nodes": []
+     },
+     "bucket": "fieldwork"
+    },
+    "effect": "damage",
+    "basis": [],
+    "register": {
+     "path": "docs/evidence/occurrence/bess/flood.json",
+     "sha256": "979e4c2c81c66ffefcdc02eef64dbdb715a42e11b16e2b3c59e5751d9f42a07d",
+     "search_log": "docs/evidence/occurrence/bess/flood.md",
+     "last_searched": null,
+     "question": "Has flood physically damaged a battery storage subsystem in the field, outside a test?"
+    },
+    "own_words": "Unallocated fieldwork",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/flood_bess/current/derivation.md"
+    },
+    "research": []
+   }
+  }
+ ],
+ "subcomponent_rollup": {
+  "expected": 5,
+  "with_curve": 2,
+  "gap": 3,
+  "complete": 1,
+  "incomplete": 4,
+  "evidence_labels": {
+   "field-calibrated": 0,
+   "published": 0,
+   "borrowed": 1,
+   "our judgment": 1
+  }
+ },
+ "value_split": {
+  "priced": 0.7514608688253879,
+  "partly": 0.0,
+  "no_damage": 0.0,
+  "not_priced": 0.24853913117461213,
+  "basis": "of the reference plant's value"
+ }
 }

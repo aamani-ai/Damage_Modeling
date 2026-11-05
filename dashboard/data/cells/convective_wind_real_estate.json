@@ -56,7 +56,7 @@
    "label": "entry agent-read 2026-10-19 · release not yet reviewed"
   }
  },
- "summary": "Proposal, not in the runtime index — Convective wind on buildings: EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder.",
+ "summary": "Proposal, not in use yet. Convective wind on buildings: 6 curves for 3 parts (house, warehouse and office); read against 2 hazard measures; the numbers are our judgment.",
  "chain": {
   "stations": [
    {
@@ -77,7 +77,8 @@
     ],
     "evidence": [],
     "fact": "README",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "units",
@@ -93,7 +94,8 @@
     ],
     "evidence": [],
     "fact": "2 units · 1 withheld",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "axis_form",
@@ -116,7 +118,8 @@
      }
     ],
     "fact": "piecewise linear",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "evidence",
@@ -140,7 +143,8 @@
     ],
     "evidence": [],
     "fact": "8 src · T2–4",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "value",
@@ -160,7 +164,8 @@
     ],
     "evidence": [],
     "fact": "crosswalk",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "audit",
@@ -183,7 +188,8 @@
      }
     ],
     "fact": "7 steps in the dossier",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "artifact",
@@ -211,7 +217,8 @@
     ],
     "evidence": [],
     "fact": "v0.1 · docs r1",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "capability",
@@ -227,7 +234,8 @@
     ],
     "evidence": [],
     "fact": "DR conditional · EAL withheld",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "proof",
@@ -247,7 +255,8 @@
     ],
     "evidence": [],
     "fact": "166 of 166 KAT reproduced · 4 not run",
-    "absent_sentence": null
+    "absent_sentence": null,
+    "earlier": []
    },
    {
     "id": "field_review",
@@ -258,7 +267,8 @@
     "files": [],
     "evidence": [],
     "fact": "not searched · agent-read 10-19",
-    "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only."
+    "absent_sentence": "No occurrence register for this asset × hazard; the catalogue entry has been read by an agent only.",
+    "earlier": []
    }
   ],
   "generation": "skill",
@@ -582,12 +592,13 @@
   "withheld_units": [
    {
     "failure_unit_id": "CWRE_BUILDING_CONTENTS",
+    "name": "Cwre building contents",
     "subsystem": "BUILDING",
     "reasons": [
      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
      "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
     ],
-    "sentence": "Withheld: no runtime curve for pathway unit; contents deferred separate failure unit."
+    "sentence": "The cell has no curve for this part. Contents are set aside to be modeled separately later."
    }
   ],
   "hazard_axis": [
@@ -704,7 +715,13 @@
   "paths": {
    "sources": "docs/cells/convective_wind_real_estate/proposed/SOURCE_REGISTER_convective_wind_real_estate__model_v0_1__docs_r1.csv",
    "claims": "docs/cells/convective_wind_real_estate/proposed/CLAIM_PARAMETER_REGISTER_convective_wind_real_estate__model_v0_1__docs_r1.csv",
-   "parameters": "docs/cells/convective_wind_real_estate/proposed/PARAMETER_TIER_TABLE_convective_wind_real_estate__model_v0_1__docs_r1.csv"
+   "parameters": "docs/cells/convective_wind_real_estate/proposed/PARAMETER_TIER_TABLE_convective_wind_real_estate__model_v0_1__docs_r1.csv",
+   "source_registers": [
+    "docs/cells/convective_wind_real_estate/proposed/SOURCE_REGISTER_convective_wind_real_estate__model_v0_1__docs_r1.csv"
+   ],
+   "claim_registers": [
+    "docs/cells/convective_wind_real_estate/proposed/CLAIM_PARAMETER_REGISTER_convective_wind_real_estate__model_v0_1__docs_r1.csv"
+   ]
   },
   "n_sources": 8,
   "n_claims": 19,
@@ -996,17 +1013,19 @@
   }
  ],
  "gap_reason": null,
+ "gap_reason_own": null,
+ "gap_reason_source": null,
  "binding": null,
  "sampling_notes": [],
  "plain": {
   "rail": {
    "exists": {
-    "words": "Proposal · not in the runtime index yet",
+    "words": "Proposal · built, not in use yet",
     "code": "PROPOSAL · screening"
    },
    "evidence": {
     "words": "Evidence: our judgment",
-    "code": "How damage rises: borrowed · how it becomes dollars: our judgment",
+    "code": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
     "tiers": [
      "T4"
     ],
@@ -1034,8 +1053,8 @@
     "meaning": "The parts that have a curve, their share of the value, and what has none yet",
     "fact": "3 parts with a curve · 1 withheld",
     "paragraphs": [
-     "Convective wind on buildings: EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder; tornado used directly, storm wind as a transfer starting at 96 mph. It names 3 parts: House, Warehouse and Office. Outside its scope: contents (declared as a withheld placeholder part), land, site works, business interruption and hurricane wind (hurricane cell).",
-     "For this hazard the building is split into 3 parts: House, Warehouse and Office. 1 further unit is named but withheld — cwre building contents — a stated 'not zero', not a curve.",
+     "Convective wind on buildings: EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder; tornado used directly, storm wind as a transfer starting at 96 mph. It names 3 parts (listed below). It also lists 3 things it leaves out (below).",
+     "This hazard's curves cover 3 parts of the building, listed below after the subsystem each belongs to and named as the catalogue entry writes them. 1 further unit is named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
      "The damage ratio is a share of structure replacement cost new of the same building. The files state no plant-level dollar figure for this asset."
     ],
     "holds": [
@@ -1076,8 +1095,8 @@
     "meaning": "How the hazard is measured, the shape of the curve and why that shape, and the site adjustments",
     "fact": "2 hazard measures → a line through points",
     "paragraphs": [
-     "Damage is read against convective gust 3s 10m open terrain mph (mph) and tornado gust 3s 10m mph (mph). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: 3-second gust at 10 m (mph), 0 to 255 mph; separate fields for storm wind and tornado (tornado: Hazard's EF band midpoint gust).",
-     "The seven-step audit is written in the dossier with 7 rows; the statuses it records: Gust at 10 m open terrain as delivered; no terrain or height bridge; EF midpoint bridge flagged., Numeric per building and pathway; above 255 mph, contents and unknown inputs withhold or fail., One row, 100% of structure value; components not itemized by the source., One whole-building unit; contents withheld., Repair cost / structure replacement cost new., Three reference buildings (profiles r1); structure only. and Whole building; no zones.. A site-condition adapter has not been written for this cell."
+     "Damage is read against 2 hazard measures, listed below with the parts read each way. The curve is a line through fixed points (piecewise linear). What Hazard has to supply for each event is below.",
+     "The seven-step audit is written in the dossier with 7 rows; the statuses it records: Gust at 10 m open terrain as delivered; no terrain or height bridge; EF midpoint bridge flagged., Numeric per building and pathway; above 255 mph, contents and unknown inputs withhold or fail., One row, 100% of structure value; components not itemized by the source., One whole-building unit; contents withheld., Repair cost / structure replacement cost new., Three reference buildings (profiles r1); structure only. and Whole building; no zones.."
     ],
     "holds": [
      "axis_form",
@@ -1130,7 +1149,7 @@
     "meaning": "The sources, what each one gave, and how sure we are",
     "fact": "8 sources, 7 linked · our judgment",
     "paragraphs": [
-     "8 sources set this cell: Texas Tech WSEC, A Recommendation for an Enhanced Fujita Scale, Rev 2 (2006), NOAA Storm Prediction Center, EF scale damage indicators FR12, MBS, LRB, FEMA, Hazus 7.0 Hurricane Technical Manual, damage-state costs and definitions and FEMA National Risk Index, Dec 2025 (check only) and 4 more. Of the 15 parameters, 2 are published, 4 are borrowed and 9 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator)."
+     "The sources and claims below are kept as machine-readable register files in the cell folder."
     ],
     "holds": [
      "evidence"
@@ -1140,7 +1159,7 @@
      {
       "text": "our judgment",
       "tone": "key",
-      "title": "How damage rises: borrowed · how it becomes dollars: our judgment"
+      "title": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment"
      },
      {
       "text": "Texas Tech WSEC, A…",
@@ -1165,8 +1184,8 @@
    {
     "id": "checked",
     "name": "Has it been checked",
-    "meaning": "Outside checks, field reports of this damage, and who has read the entry",
-    "fact": "1 outside check · field reports not searched · read by an agent only",
+    "meaning": "Outside checks, and who has read the entry",
+    "fact": "1 outside check · read by an agent only",
     "paragraphs": [
      "1 outside check compares this curve with an independent result: FEMA National Risk Index: yearly loss on Hazard's grid (storm wind and tornado). The validation record says report.",
      "Not searched — nobody has looked for field reports yet. The catalogue entry has been read by an agent only (2026-10-19); no person has reviewed it yet. The curve release carries its own review state: not yet reviewed."
@@ -1177,13 +1196,9 @@
     "written": true,
     "chips": [
      {
-      "text": "FEMA National Risk Index…",
+      "text": "1 outside check",
       "tone": "key",
       "title": "FEMA National Risk Index: yearly loss on Hazard's grid (storm wind and tornado)"
-     },
-     {
-      "text": "field reports: not searched",
-      "tone": "muted"
      },
      {
       "text": "read by an agent only",
@@ -1198,7 +1213,7 @@
    "proof"
   ],
   "word": "our judgment",
-  "halves": "How damage rises: borrowed · how it becomes dollars: our judgment",
+  "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
   "hazard_paths": [],
   "capabilities": [
    {
@@ -1237,12 +1252,13 @@
     "withheld": [
      {
       "failure_unit_id": "CWRE_BUILDING_CONTENTS",
+      "name": "Cwre building contents",
       "subsystem": "BUILDING",
       "reasons": [
        "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
        "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
       ],
-      "sentence": "Withheld: no runtime curve for pathway unit; contents deferred separate failure unit."
+      "sentence": "The cell has no curve for this part. Contents are set aside to be modeled separately later."
      }
     ]
    },
@@ -1273,28 +1289,28 @@
     "id": "scope",
     "name": "Scope",
     "meaning": "Which hazard, which asset, which parts; what is left out",
-    "paragraph": "Convective wind on buildings: EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder; tornado used directly, storm wind as a transfer starting at 96 mph. It names 3 parts: House, Warehouse and Office. Outside its scope: contents (declared as a withheld placeholder part), land, site works, business interruption and hurricane wind (hurricane cell).",
+    "paragraph": "Convective wind on buildings: EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder; tornado used directly, storm wind as a transfer starting at 96 mph. It names 3 parts (listed below). It also lists 3 things it leaves out (below).",
     "plain_fact": "3 parts · 3 left out"
    },
    {
     "id": "units",
     "name": "What breaks",
     "meaning": "The parts of the plant the hazard damages, each with its own curve",
-    "paragraph": "For this hazard the building is split into 3 parts: House, Warehouse and Office. 1 further unit is named but withheld — cwre building contents — a stated 'not zero', not a curve.",
+    "paragraph": "This hazard's curves cover 3 parts of the building, listed below after the subsystem each belongs to and named as the catalogue entry writes them. 1 further unit is named but withheld (below): the cell says they can be damaged (\"not zero\") but gives no curve for them yet.",
     "plain_fact": "3 parts · 1 withheld"
    },
    {
     "id": "axis_form",
     "name": "How damage is measured",
     "meaning": "The hazard intensity on the x-axis and the shape of the curve",
-    "paragraph": "Damage is read against convective gust 3s 10m open terrain mph (mph) and tornado gust 3s 10m mph (mph). The curve is a line through fixed points (piecewise linear). The input, in the catalogue's words: 3-second gust at 10 m (mph), 0 to 255 mph; separate fields for storm wind and tornado (tornado: Hazard's EF band midpoint gust).",
+    "paragraph": "Damage is read against 2 hazard measures, listed below with the parts read each way. The curve is a line through fixed points (piecewise linear). What Hazard has to supply for each event is below.",
     "plain_fact": "a line through points"
    },
    {
     "id": "evidence",
     "name": "Where the numbers come from",
     "meaning": "The sources, what was taken from each, and how sure we are",
-    "paragraph": "8 sources set this cell: Texas Tech WSEC, A Recommendation for an Enhanced Fujita Scale, Rev 2 (2006), NOAA Storm Prediction Center, EF scale damage indicators FR12, MBS, LRB, FEMA, Hazus 7.0 Hurricane Technical Manual, damage-state costs and definitions and FEMA National Risk Index, Dec 2025 (check only) and 4 more. Of the 15 parameters, 2 are published, 4 are borrowed and 9 are our judgment. The source and claim registers are machine-readable files in the cell folder. 1 source has no link in the register (1 with a locator).",
+    "paragraph": "The sources and claims below are kept as machine-readable register files in the cell folder.",
     "plain_fact": "8 sources · borrowed and our judgment"
    },
    {
@@ -1308,7 +1324,7 @@
     "id": "audit",
     "name": "The audit",
     "meaning": "The seven checks a curve passes before release",
-    "paragraph": "The seven-step audit is written in the dossier with 7 rows; the statuses it records: Gust at 10 m open terrain as delivered; no terrain or height bridge; EF midpoint bridge flagged., Numeric per building and pathway; above 255 mph, contents and unknown inputs withhold or fail., One row, 100% of structure value; components not itemized by the source., One whole-building unit; contents withheld., Repair cost / structure replacement cost new., Three reference buildings (profiles r1); structure only. and Whole building; no zones.. A site-condition adapter has not been written for this cell.",
+    "paragraph": "The seven-step audit is written in the dossier with 7 rows; the statuses it records: Gust at 10 m open terrain as delivered; no terrain or height bridge; EF midpoint bridge flagged., Numeric per building and pathway; above 255 mph, contents and unknown inputs withhold or fail., One row, 100% of structure value; components not itemized by the source., One whole-building unit; contents withheld., Repair cost / structure replacement cost new., Three reference buildings (profiles r1); structure only. and Whole building; no zones..",
     "plain_fact": "7 steps in the write-up"
    },
    {
@@ -1393,6 +1409,7 @@
   "sources": [
    {
     "id": "CWRE-S001",
+    "aliases": [],
     "citation": "Wind Science and Engineering Center, Texas Tech University. A Recommendation for an Enhanced Fujita Scale (EF-Scale), submitted to the National Weather Service and other interested users. October 10, 2006, Revision 2.",
     "url": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
     "locator": "PDF p. 9 (report p. 4: expected, lower and upper bound wind speed per DOD; expected value under normal conditions — no weak links, traditional construction, code compliance; bounds account for deviation; expert elicitation, means of experts' estimates); PDF p. 15 (Fujita speeds converted to a 3-second gust frame); PDF pp. 17-18 (rating: evaluator judges within the bounds); Appendix A tables: FR12 PDF p. 25, LRB PDF p. 64, MBS PDF p. 74",
@@ -1407,10 +1424,12 @@
     "link": "https://www.spc.noaa.gov/efscale/ef-ttu.pdf",
     "link_kind": "url",
     "title": "Wind Science and Engineering Center, Texas Tech University",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "CWRE-S002",
+    "aliases": [],
     "citation": "NOAA Storm Prediction Center. The Enhanced Fujita Scale (EF Scale): damage indicator pages 2 (FR12), 17 (LRB) and 21 (MBS), and the EF scale overview page.",
     "url": "https://www.spc.noaa.gov/efscale/ef-scale.html",
     "locator": "ef-scale.html (\"three-second gusts estimated at the point of damage\"; \"These estimates vary with height and exposure\"); efscale/2.html + 2.jpg (sha256 6c0d70ca1b77eb71ebadb00942d04fb2aa2d04971e359b45e5b55952cd8d7622); efscale/17.html + 17.jpg (sha256 f7d95f61c8e9c9fd3c539de5707b3f924b0f4f998276f3a9eb390c92500f7520); efscale/21.html + 21.jpg (sha256 f4becdda78dc9025be13fed82427ece6d5a57778e228e5799a58d983c72eed0d)",
@@ -1425,10 +1444,12 @@
     "link": "https://www.spc.noaa.gov/efscale/ef-scale.html",
     "link_kind": "url",
     "title": "NOAA Storm Prediction Center",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "CWRE-S003",
+    "aliases": [],
     "citation": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
     "url": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
     "locator": "§8.1.4.3 p. 8-15 (None, Slight, Moderate, Extensive, Complete assumed to correspond to mean building loss ratios 0%, 2%, 10%, 50%, 100%, identified from the damage descriptions and expert judgment; linear interpolation over 0-2, 2-5, 5-10, 10-50, 50-100%); Table 5-44 pp. 5-185 to 5-186 (residential damage states); Table 5-74 p. 5-239 (metal buildings); Table 5-78 p. 5-242 (engineered steel buildings)",
@@ -1443,10 +1464,12 @@
     "link": "https://www.fema.gov/sites/default/files/documents/fema_rsl_hazus-7-hutm_06272025_0.pdf",
     "link_kind": "url",
     "title": "FEMA. Hazus 7.0 Hurricane Model Technical Manual (June 2025).",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "CWRE-S004",
+    "aliases": [],
     "citation": "Hazard reference profiles r1 (real-estate CONUS reference candidates), aamani-ai/Hazard_Modeling.",
     "url": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
     "locator": "commit 8b0d61c88fbcf85daa1c098516cee22398cdb524, reference_candidates.yml (git blob a74fb72b0a2edce593b5505e0fd8852f4c0253f8): re_house_1s_wood_slab, re_warehouse_1s_steel_slab, re_office_3s_slab",
@@ -1461,10 +1484,12 @@
     "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/8b0d61c88fbcf85daa1c098516cee22398cdb524/docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
     "link_kind": "url",
     "title": "Hazard reference profiles r1 (real-estate CONUS reference candidates), aamani-ai/Hazard_Modeling.",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "CWRE-S005",
+    "aliases": [],
     "citation": "Hazard convective-wind hazard layer (strong wind [W] from ASCE 7-22 gust maps; tornado [T] from the SPC record), aamani-ai/Hazard_Modeling.",
     "url": "https://github.com/aamani-ai/Hazard_Modeling/tree/f19c604830954a43e293749be390fd37b6eb6e11/perils/convective_wind",
     "locator": "main f19c604830954a43e293749be390fd37b6eb6e11, perils/convective_wind/src/convective_wind/config.py (blob a56ff98c53961f7201b63a84e5d96b93496d8078: MU_STRONG_WIND_MS 25.92, PHYSICAL_BOUND_L_MS 113.0, EF_GUST_LO/HI_MPH, TORNADO_POOL_RADIUS_KM 150), spc_m0.py (blob 1df31c92a95e84249bb62633ab7af4cdacebb425: national_path_geometry), m1_hazard_layer.py (blob 5fe515d465399f7e01bbb1508b335fda8de85de6); M1 parquet sha256 386e274d3c109915244c75a0852d3b41ae7aa348f2eb6cd73b050ada6cafa3c8; SPC csv sha256 2b2679ead1920ab96eaa390baeb41aeeaeef49d067f613dfcc5e233403b82d76",
@@ -1479,10 +1504,12 @@
     "link": "https://github.com/aamani-ai/Hazard_Modeling/tree/f19c604830954a43e293749be390fd37b6eb6e11/perils/convective_wind",
     "link_kind": "url",
     "title": "Hazard convective-wind hazard layer (strong wind [W] from ASCE 7-22 gust maps; tornado [T] from the SPC…",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "CWRE-S006",
+    "aliases": [],
     "citation": "FEMA National Risk Index, December 2025 edition, county building expected annual loss for strong wind and tornado (Hazard team's 0.25° CONUS copy).",
     "url": "gs://infrasure-benchmark/hazard_conus_grid/dev/reference/nri/nri_dec2025/raw/run_id=20260706T184931Z_nri_reference/nri_raw_conus.parquet",
     "locator": "columns swnd_ealb, swnd_expb, trnd_ealb, trnd_expb; 13,085 cells keyed by cell_id; sha256 bc4f8dff7ab9c465677d7a8b94f2fe3038ff03da4632d7b044bcff2afcb3d82b",
@@ -1497,10 +1524,12 @@
     "link": null,
     "link_kind": "none",
     "title": "FEMA National Risk Index, December 2025 edition, county building expected annual loss for strong wind and…",
-    "no_link_sentence": "no link in the register"
+    "no_link_sentence": "no link in the register",
+    "link_note": null
    },
    {
     "id": "CWRE-S007",
+    "aliases": [],
     "citation": "Damage_Modeling repository precedents: strong_wind_solar model v1.0 thresholded demand curves; wind_tornado_wind model v1.0 tornado shift; damage-curve skill common failure modes.",
     "url": "https://github.com/aamani-ai/Damage_Modeling/tree/81d5309313d53f37d6bac91e22dd55b498101d0f/docs",
     "locator": "main 81d5309: docs/cells/strong_wind_solar/basics/MODEL_REFERENCE.md §3.3 (R0 0.70-0.90 on a pressure ratio: zero damage below); docs/cells/wind_tornado_wind/basics/MODEL_REFERENCE.md (tornado = straight D50 shifted -0.05 to -0.12); docs/extra/damage_curve_skill/04_validation_qc/COMMON_FAILURE_MODES.md lines 35-40",
@@ -1515,10 +1544,12 @@
     "link": "https://github.com/aamani-ai/Damage_Modeling/tree/81d5309313d53f37d6bac91e22dd55b498101d0f/docs",
     "link_kind": "url",
     "title": "Damage_Modeling repository precedents: strong_wind_solar model v1.0 thresholded demand curves;…",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    },
    {
     "id": "CWRE-S008",
+    "aliases": [],
     "citation": "Damage_Modeling consumer binding: substation convective-wind screening v1 (hurricane station response reused for strong wind and tornado as a T4 cross-hazard proxy).",
     "url": "https://github.com/aamani-ai/Damage_Modeling/blob/81d5309313d53f37d6bac91e22dd55b498101d0f/docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md",
     "locator": "main 81d5309, README lines 13-31 (T4 cross-hazard proxy with exact source identity; no hurricane duration conversion; EF midpoint gust as an explicit T4 bridge; ASCE overlap with hurricane a downstream decision)",
@@ -1533,7 +1564,8 @@
     "link": "https://github.com/aamani-ai/Damage_Modeling/blob/81d5309313d53f37d6bac91e22dd55b498101d0f/docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md",
     "link_kind": "url",
     "title": "Damage_Modeling consumer binding: substation convective-wind screening v1 (hurricane station response reused…",
-    "no_link_sentence": null
+    "no_link_sentence": null,
+    "link_note": null
    }
   ],
   "claims": [
@@ -2467,5 +2499,1597 @@
    "cost": "our judgment"
   }
  },
- "build_findings": []
+ "build_findings": [],
+ "hazard_note": {
+  "title": "Differs in Hazard's dashboard",
+  "lines": [
+   "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+  ]
+ },
+ "subcomponents": [
+  {
+   "key": "house:building",
+   "label": "Whole building (structure)",
+   "group": {
+    "key": "house",
+    "label": "House (single-family, slab)"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96",
+    "CWRE_RES_EF_FR12_TORNADO"
+   ],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
+   "tier_span": "T3–4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed and our judgment",
+   "construction": [
+    {
+     "curve_id": "CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96",
+     "data_path": "curves/convective_wind_real_estate/CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "House",
+     "scope_note": null
+    },
+    {
+     "curve_id": "CWRE_RES_EF_FR12_TORNADO",
+     "data_path": "curves/convective_wind_real_estate/CWRE_RES_EF_FR12_TORNADO@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "House",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": "differs"
+   },
+   "share": null,
+   "share_basis": null,
+   "note": "One curve for the whole structure: a single damage ratio applied to 100% of the building's structure replacement cost.",
+   "gap": null
+  },
+  {
+   "key": "house:roof_cover",
+   "label": "Roof cover",
+   "group": {
+    "key": "house",
+    "label": "House (single-family, slab)"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "whole",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96",
+    "CWRE_RES_EF_FR12_TORNADO"
+   ],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
+   "tier_span": "T3–4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed and our judgment",
+   "construction": [
+    {
+     "curve_id": "CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96",
+     "data_path": "curves/convective_wind_real_estate/CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "House",
+     "scope_note": null
+    },
+    {
+     "curve_id": "CWRE_RES_EF_FR12_TORNADO",
+     "data_path": "curves/convective_wind_real_estate/CWRE_RES_EF_FR12_TORNADO@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "House",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": "differs"
+   },
+   "share": null,
+   "share_basis": null,
+   "note": "No curve of its own: the whole-building curve prices the roof cover with the rest of the structure.",
+   "gap": null
+  },
+  {
+   "key": "house:walls_windows",
+   "label": "Walls and windows",
+   "group": {
+    "key": "house",
+    "label": "House (single-family, slab)"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "whole",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96",
+    "CWRE_RES_EF_FR12_TORNADO"
+   ],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
+   "tier_span": "T3–4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed and our judgment",
+   "construction": [
+    {
+     "curve_id": "CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96",
+     "data_path": "curves/convective_wind_real_estate/CWRE_RES_EF_FR12_STRAIGHT_LINE_ONSET96@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "House",
+     "scope_note": null
+    },
+    {
+     "curve_id": "CWRE_RES_EF_FR12_TORNADO",
+     "data_path": "curves/convective_wind_real_estate/CWRE_RES_EF_FR12_TORNADO@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "House",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": "differs"
+   },
+   "share": null,
+   "share_basis": null,
+   "note": "No curve of its own: the whole-building curve prices the walls and windows with the rest of the structure.",
+   "gap": null
+  },
+  {
+   "key": "house:contents",
+   "label": "Contents",
+   "group": {
+    "key": "house",
+    "label": "House (single-family, slab)"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": null,
+   "gap": {
+    "reason": "Contents (furniture, equipment and stock) are left out of this curve and will be modeled separately; that is not the same as no damage.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "The cell declares contents as their own failure unit and withholds them (not zero): contents deferred separate failure unit, no runtime curve for pathway unit.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate_curve_derivation_dossier__model_v0_1__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "warehouse:building",
+   "label": "Whole building (structure)",
+   "group": {
+    "key": "warehouse",
+    "label": "Warehouse"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96",
+    "CWRE_IND_EF_MBS_TORNADO"
+   ],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
+   "tier_span": "T3–4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed and our judgment",
+   "construction": [
+    {
+     "curve_id": "CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96",
+     "data_path": "curves/convective_wind_real_estate/CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Warehouse",
+     "scope_note": null
+    },
+    {
+     "curve_id": "CWRE_IND_EF_MBS_TORNADO",
+     "data_path": "curves/convective_wind_real_estate/CWRE_IND_EF_MBS_TORNADO@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Warehouse",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": "differs"
+   },
+   "share": null,
+   "share_basis": null,
+   "note": "One curve for the whole structure: a single damage ratio applied to 100% of the building's structure replacement cost.",
+   "gap": null
+  },
+  {
+   "key": "warehouse:roof_cover",
+   "label": "Roof cover",
+   "group": {
+    "key": "warehouse",
+    "label": "Warehouse"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "whole",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96",
+    "CWRE_IND_EF_MBS_TORNADO"
+   ],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
+   "tier_span": "T3–4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed and our judgment",
+   "construction": [
+    {
+     "curve_id": "CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96",
+     "data_path": "curves/convective_wind_real_estate/CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Warehouse",
+     "scope_note": null
+    },
+    {
+     "curve_id": "CWRE_IND_EF_MBS_TORNADO",
+     "data_path": "curves/convective_wind_real_estate/CWRE_IND_EF_MBS_TORNADO@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Warehouse",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": "differs"
+   },
+   "share": null,
+   "share_basis": null,
+   "note": "No curve of its own: the whole-building curve prices the roof cover with the rest of the structure.",
+   "gap": null
+  },
+  {
+   "key": "warehouse:walls_windows",
+   "label": "Walls and windows",
+   "group": {
+    "key": "warehouse",
+    "label": "Warehouse"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "whole",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96",
+    "CWRE_IND_EF_MBS_TORNADO"
+   ],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
+   "tier_span": "T3–4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed and our judgment",
+   "construction": [
+    {
+     "curve_id": "CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96",
+     "data_path": "curves/convective_wind_real_estate/CWRE_IND_EF_MBS_STRAIGHT_LINE_ONSET96@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Warehouse",
+     "scope_note": null
+    },
+    {
+     "curve_id": "CWRE_IND_EF_MBS_TORNADO",
+     "data_path": "curves/convective_wind_real_estate/CWRE_IND_EF_MBS_TORNADO@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Warehouse",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": "differs"
+   },
+   "share": null,
+   "share_basis": null,
+   "note": "No curve of its own: the whole-building curve prices the walls and windows with the rest of the structure.",
+   "gap": null
+  },
+  {
+   "key": "warehouse:contents",
+   "label": "Contents",
+   "group": {
+    "key": "warehouse",
+    "label": "Warehouse"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": null,
+   "gap": {
+    "reason": "Contents (furniture, equipment and stock) are left out of this curve and will be modeled separately; that is not the same as no damage.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "The cell declares contents as their own failure unit and withholds them (not zero): contents deferred separate failure unit, no runtime curve for pathway unit.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate_curve_derivation_dossier__model_v0_1__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "office:building",
+   "label": "Whole building (structure)",
+   "group": {
+    "key": "office",
+    "label": "Office (three storeys)"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "curve",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96",
+    "CWRE_OFF_EF_LRB_TORNADO"
+   ],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
+   "tier_span": "T3–4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed and our judgment",
+   "construction": [
+    {
+     "curve_id": "CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96",
+     "data_path": "curves/convective_wind_real_estate/CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Office",
+     "scope_note": null
+    },
+    {
+     "curve_id": "CWRE_OFF_EF_LRB_TORNADO",
+     "data_path": "curves/convective_wind_real_estate/CWRE_OFF_EF_LRB_TORNADO@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Office",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": "differs"
+   },
+   "share": null,
+   "share_basis": null,
+   "note": "One curve for the whole structure: a single damage ratio applied to 100% of the building's structure replacement cost.",
+   "gap": null
+  },
+  {
+   "key": "office:roof_cover",
+   "label": "Roof cover",
+   "group": {
+    "key": "office",
+    "label": "Office (three storeys)"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "whole",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96",
+    "CWRE_OFF_EF_LRB_TORNADO"
+   ],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
+   "tier_span": "T3–4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed and our judgment",
+   "construction": [
+    {
+     "curve_id": "CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96",
+     "data_path": "curves/convective_wind_real_estate/CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Office",
+     "scope_note": null
+    },
+    {
+     "curve_id": "CWRE_OFF_EF_LRB_TORNADO",
+     "data_path": "curves/convective_wind_real_estate/CWRE_OFF_EF_LRB_TORNADO@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Office",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": "differs"
+   },
+   "share": null,
+   "share_basis": null,
+   "note": "No curve of its own: the whole-building curve prices the roof cover with the rest of the structure.",
+   "gap": null
+  },
+  {
+   "key": "office:walls_windows",
+   "label": "Walls and windows",
+   "group": {
+    "key": "office",
+    "label": "Office (three storeys)"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "whole",
+   "coverage": "curve",
+   "completeness": "complete",
+   "curve_ids": [
+    "CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96",
+    "CWRE_OFF_EF_LRB_TORNADO"
+   ],
+   "failure_unit_ids": [
+    "CWRE_BUILDING_STRUCTURE"
+   ],
+   "tier_span": "T3–4",
+   "evidence_labels": [
+    "borrowed",
+    "our judgment"
+   ],
+   "evidence_words": "borrowed and our judgment",
+   "construction": [
+    {
+     "curve_id": "CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96",
+     "data_path": "curves/convective_wind_real_estate/CWRE_OFF_EF_LRB_STRAIGHT_LINE_ONSET96@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Office",
+     "scope_note": null
+    },
+    {
+     "curve_id": "CWRE_OFF_EF_LRB_TORNADO",
+     "data_path": "curves/convective_wind_real_estate/CWRE_OFF_EF_LRB_TORNADO@model_v0_1__docs_r1.json",
+     "curve_type": "piecewise linear",
+     "curve_form": "piecewise_linear",
+     "formula": "D(x) is read off a straight line between neighbouring points (x_i, D_i); flat beyond the last point",
+     "artifact": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate__model_v0_1__docs_r1__curve_artifact.json",
+     "parameter_count": 1,
+     "source_ids": [
+      "CWRE-S001",
+      "CWRE-S002",
+      "CWRE-S003",
+      "CWRE-S006"
+     ],
+     "production_use": {
+      "state": "not_runtime_indexed",
+      "consumer_pin": null,
+      "hazard": {
+       "state": "differs",
+       "sentences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned).",
+        "How this is known: the layer's own record names the artifact.",
+        "Checked against Hazard's internal dashboard (hazard-grid-resiliency-internal) on 2026-11-03."
+       ],
+       "differences": [
+        "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       ],
+       "values": [],
+       "value_mismatches": [],
+       "newer": {
+        "model": "model v1.0",
+        "docs": "docs r2",
+        "shown": "model v0.1",
+        "words": "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+       }
+      },
+      "sentence": "Not released yet: Hazard's loss calculations cannot load this curve."
+     },
+     "entry_id": "convective_wind_real_estate",
+     "part": "Office",
+     "scope_note": null
+    }
+   ],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": "differs"
+   },
+   "share": null,
+   "share_basis": null,
+   "note": "No curve of its own: the whole-building curve prices the walls and windows with the rest of the structure.",
+   "gap": null
+  },
+  {
+   "key": "office:contents",
+   "label": "Contents",
+   "group": {
+    "key": "office",
+    "label": "Office (three storeys)"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": null,
+   "gap": {
+    "reason": "Contents (furniture, equipment and stock) are left out of this curve and will be modeled separately; that is not the same as no damage.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "The cell declares contents as their own failure unit and withholds them (not zero): contents deferred separate failure unit, no runtime curve for pathway unit.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate_curve_derivation_dossier__model_v0_1__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "retail:building",
+   "label": "Whole building (structure)",
+   "group": {
+    "key": "retail",
+    "label": "Retail"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": null,
+   "gap": {
+    "reason": "This cell has no curve for this building.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": null,
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate_curve_derivation_dossier__model_v0_1__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "retail:roof_cover",
+   "label": "Roof cover",
+   "group": {
+    "key": "retail",
+    "label": "Retail"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": null,
+   "gap": {
+    "reason": "This cell has no curve for this building.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": null,
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate_curve_derivation_dossier__model_v0_1__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "retail:walls_windows",
+   "label": "Walls and windows",
+   "group": {
+    "key": "retail",
+    "label": "Retail"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "gap",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": null,
+   "gap": {
+    "reason": "This cell has no curve for this building.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": null,
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate_curve_derivation_dossier__model_v0_1__docs_r1.md"
+    },
+    "research": []
+   }
+  },
+  {
+   "key": "retail:contents",
+   "label": "Contents",
+   "group": {
+    "key": "retail",
+    "label": "Retail"
+   },
+   "asset": {
+    "slug": "real_estate",
+    "label": "Real Estate"
+   },
+   "hazard": {
+    "slug": "convective_wind",
+    "label": "Convective wind",
+    "effect": "damage",
+    "outside_the_five": false
+   },
+   "entry_id": "convective_wind_real_estate",
+   "catalogue_status": "proposal",
+   "cell_state": "withheld",
+   "coverage": "gap",
+   "completeness": "incomplete",
+   "curve_ids": [],
+   "failure_unit_ids": [],
+   "tier_span": "–",
+   "evidence_labels": [],
+   "evidence_words": "no tier stated",
+   "construction": [],
+   "borrowed_from": null,
+   "scope_notes": [],
+   "production_use": {
+    "state": "not_runtime_indexed",
+    "consumer_pin": null,
+    "hazard": null
+   },
+   "share": null,
+   "share_basis": null,
+   "note": null,
+   "gap": {
+    "reason": "Contents (furniture, equipment and stock) are left out of this curve and will be modeled separately; that is not the same as no damage.",
+    "occurrence": null,
+    "effect": "damage",
+    "basis": [],
+    "register": null,
+    "own_words": "The cell declares contents as their own failure unit and withholds them (not zero): contents deferred separate failure unit, no runtime curve for pathway unit.",
+    "no_direct_damage": false,
+    "source": {
+     "label": "the cell's write-up",
+     "path": "docs/cells/convective_wind_real_estate/proposed/convective_wind_real_estate_curve_derivation_dossier__model_v0_1__docs_r1.md"
+    },
+    "research": []
+   }
+  }
+ ],
+ "subcomponent_rollup": {
+  "expected": 16,
+  "with_curve": 9,
+  "gap": 7,
+  "complete": 9,
+  "incomplete": 7,
+  "evidence_labels": {
+   "field-calibrated": 0,
+   "published": 0,
+   "borrowed": 9,
+   "our judgment": 9
+  }
+ },
+ "value_split": {
+  "reason": "no value budget for buildings yet"
+ }
 }

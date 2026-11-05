@@ -165,12 +165,12 @@ function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette,
         name: s.label, type: "line", data: pts, showSymbol: false, smooth: false, connectNulls: false, z: band ? 1 : s.continuation ? 2 : 3,
         lineStyle: band ? { color, width: 8, opacity: 0.3, type: "solid", cap: "round", join: "round" } : { color, width: s.continuation ? 1.5 : 1.75, type: (st.dash ?? "solid") as never, cap: "round" },
         itemStyle: { color },
-        endLabel: { show: showEnd, formatter: endText, color: p.fg, fontSize: 10.5, lineHeight: 13, fontFamily: MONO, distance: 6,
+        endLabel: { show: showEnd, formatter: endText, color: p.fg, fontSize: 11.5, lineHeight: 13, fontFamily: MONO, distance: 6,
           ...(openZone ? { backgroundColor: p.card, padding: [0, 3], borderRadius: 2 } : {}) }, // legible over the withheld hatch
         labelLayout: { moveOverlap: "shiftY" },
         markPoint: s.continuation && mid ? {
           silent: true, symbol: "circle", symbolSize: 0,
-          label: { show: true, position: "top", distance: 4, formatter: "beyond the data: our judgment", color: p.muted, fontSize: 10, fontFamily: MONO },
+          label: { show: true, position: "top", distance: 4, formatter: "beyond the data: our judgment", color: p.muted, fontSize: 11, fontFamily: MONO },
           data: [{ name: "beyond the data: our judgment", coord: [(pts[0][0] + pts[pts.length - 1][0]) / 2, pts[0][1]] }],
         } : undefined,
         emphasis: { focus: "series", lineStyle: { width: 2.5 } },
@@ -229,12 +229,12 @@ function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette,
       name: "_reference", type: "line", data: [], silent: true,
       markArea: showZones ? {
         silent: true, itemStyle: { color: hatch(p.muted) as never },
-        label: { show: true, position: "insideTop", color: p.muted, fontSize: 10.5, fontFamily: MONO },
+        label: { show: true, position: "insideTop", color: p.muted, fontSize: 11.5, fontFamily: MONO },
         data: zones.map((z) => [{ xAxis: xOf(z.from), name: z.label, ...(z.low ? { label: { position: "insideBottom" } } : {}) }, { xAxis: z.to == null ? (xMaxShown ?? "max") : xOf(z.to) }]) as never,
       } : undefined,
       markLine: refLines.length ? {
         silent: true, symbol: "none", lineStyle: { color: p.muted, type: [3, 3] as never, width: 1 },
-        label: { show: true, position: "insideEndTop", formatter: "{b}", color: p.muted, fontSize: 10, fontFamily: MONO },
+        label: { show: true, position: "insideEndTop", formatter: "{b}", color: p.muted, fontSize: 11, fontFamily: MONO },
         data: refLines.map((r) => ({ xAxis: r.x, name: r.label })),
       } : undefined,
     });
@@ -248,17 +248,17 @@ function buildOption(curves: Curve[], axis: Axis, logX: boolean, p: PlotPalette,
     grid: { ...GRID },
     tooltip: {
       trigger: categorical ? "item" : "axis", confine: true,
-      axisPointer: { type: "cross", lineStyle: { color: p.muted }, crossStyle: { color: p.muted }, label: { backgroundColor: p.card, color: p.fg, borderColor: p.border, borderWidth: 1, fontFamily: MONO, fontSize: 10 } },
-      backgroundColor: p.card, borderColor: p.border, textStyle: { color: p.fg, fontSize: 11 },
+      axisPointer: { type: "cross", lineStyle: { color: p.muted }, crossStyle: { color: p.muted }, label: { backgroundColor: p.card, color: p.fg, borderColor: p.border, borderWidth: 1, fontFamily: MONO, fontSize: 11 } },
+      backgroundColor: p.card, borderColor: p.border, textStyle: { color: p.fg, fontSize: 12 },
       valueFormatter: (v: unknown) => (Array.isArray(v) ? fmtDr(v[1] as number) : fmtDr(typeof v === "number" ? v : null)),
     },
     xAxis: categorical
-      ? { type: "category", data: categories, name: xName, nameLocation: "middle", nameGap: 28, nameTextStyle: { color: p.muted, fontSize: 10.5 }, boundaryGap: true,
-          axisLine: { lineStyle: { color: p.hairline } }, axisTick: { show: false }, splitLine: { show: true, lineStyle: { color: p.hairline } }, axisLabel: { color: p.muted, fontFamily: MONO, fontSize: 10, formatter: classLabel } }
-      : { type: logX ? "log" : "value", name: xName, nameLocation: "middle", nameGap: 28, nameTextStyle: { color: p.muted, fontSize: 10.5 }, min: logX ? undefined : 0, max: xMaxShown,
-          axisLine: { lineStyle: { color: p.hairline } }, axisTick: { show: false }, splitLine: { lineStyle: { color: p.hairline } }, axisLabel: { color: p.muted, fontFamily: MONO, fontSize: 10.5 } },
-    yAxis: { type: "value", name: "damage ratio", nameLocation: "middle", nameGap: 34, nameTextStyle: { color: p.muted, fontSize: 10.5 }, min: 0, max: 1, interval: 0.25,
-      axisLine: { show: false }, axisTick: { show: false }, splitLine: { lineStyle: { color: p.hairline } }, axisLabel: { color: p.muted, fontFamily: MONO, fontSize: 10.5 } },
+      ? { type: "category", data: categories, name: xName, nameLocation: "middle", nameGap: 28, nameTextStyle: { color: p.muted, fontSize: 11.5 }, boundaryGap: true,
+          axisLine: { lineStyle: { color: p.hairline } }, axisTick: { show: false }, splitLine: { show: true, lineStyle: { color: p.hairline } }, axisLabel: { color: p.muted, fontFamily: MONO, fontSize: 11, formatter: classLabel } }
+      : { type: logX ? "log" : "value", name: xName, nameLocation: "middle", nameGap: 28, nameTextStyle: { color: p.muted, fontSize: 11.5 }, min: logX ? undefined : 0, max: xMaxShown,
+          axisLine: { lineStyle: { color: p.hairline } }, axisTick: { show: false }, splitLine: { lineStyle: { color: p.hairline } }, axisLabel: { color: p.muted, fontFamily: MONO, fontSize: 11.5 } },
+    yAxis: { type: "value", name: "damage ratio", nameLocation: "middle", nameGap: 34, nameTextStyle: { color: p.muted, fontSize: 11.5 }, min: 0, max: 1, interval: 0.25,
+      axisLine: { show: false }, axisTick: { show: false }, splitLine: { lineStyle: { color: p.hairline } }, axisLabel: { color: p.muted, fontFamily: MONO, fontSize: 11.5 } },
     series,
   };
 }
@@ -348,7 +348,7 @@ export function CurvePlot({ curves, axis, logX = false, height = 340, ariaLabel,
     const off = hidden.has(it.name);
     return (
       <button key={key} type="button" aria-pressed={!off} aria-label={text ? undefined : it.name} onClick={() => toggle(it.name)} title={off ? `Show ${it.name}` : `Hide ${it.name}`}
-        className={`inline-flex items-center gap-1.5 rounded px-1 py-0.5 text-[10.5px] hover:bg-muted ${off ? "text-muted-foreground line-through opacity-40" : "text-foreground"}`}>
+        className={`inline-flex items-center gap-1.5 rounded px-1 py-0.5 text-[11.5px] hover:bg-muted ${off ? "text-muted-foreground line-through opacity-40" : "text-foreground"}`}>
         <Swatch item={it} />
         {text ? <span>{text}</span> : null}
       </button>
@@ -358,7 +358,7 @@ export function CurvePlot({ curves, axis, logX = false, height = 340, ariaLabel,
     <div>
       {legend ? <div role="group" aria-label="Legend — show or hide a series" className="px-1 pb-1">
         {grid ? (
-          <table className="mb-1 text-[10.5px] leading-tight">
+          <table className="mb-1 text-[11.5px] leading-tight">
             <thead>
               <tr>
                 <td />

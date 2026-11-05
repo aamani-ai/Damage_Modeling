@@ -1,21 +1,23 @@
 {
  "schema": "damage_dashboard_manifest.v1",
- "commit": "01dbf18",
- "commit_full": "01dbf18578c24ada91b4770c5ab6e4caa0a53de4",
+ "commit": "23fb423",
+ "commit_full": "23fb423faa4a06687e590c1a6351e6a8d9d45bd0",
+ "link_commit": "23fb423faa4a06687e590c1a6351e6a8d9d45bd0",
+ "link_note": null,
  "source": {
-  "mode": "main",
-  "ref": "origin/main",
-  "commit": "01dbf18",
-  "commit_full": "01dbf18578c24ada91b4770c5ab6e4caa0a53de4",
-  "dirty": false,
-  "label": "main at 01dbf18"
+  "mode": "preview",
+  "ref": "dashboard/traceability-completeness",
+  "commit": "23fb423",
+  "commit_full": "23fb423faa4a06687e590c1a6351e6a8d9d45bd0",
+  "dirty": true,
+  "label": "preview of branch dashboard/traceability-completeness at 23fb423 with uncommitted changes — not main"
  },
  "hazard_main": {
   "available": true,
   "ref": "origin/main",
-  "commit": "c83e83b007e548b5a130038cc50be6d6985715ff",
+  "commit": "ee41b829f51485283d5a3540de7c34ccfa846e95",
   "behind": false,
-  "sentence": "Hazard's main at c83e83b"
+  "sentence": "Hazard's main at ee41b82, read from GitHub"
  },
  "catalogue_commit_note": "catalogue entries and artifacts read at this commit; every number traces to a file at it",
  "counts": {
@@ -37,7 +39,7 @@
   "outside_checks": 10,
   "cells_with_rows": 21
  },
- "summary": "13 live curve cells, 5 proposals, 3 reused bindings and 4 gaps across 7 asset types in 3 categories and 5 hazards; 25 of 25 catalogue entries have been read by an agent only; no field-report search has been logged yet.",
+ "summary": "13 live curve cells, 5 proposals, 3 reused bindings and 4 gaps across 7 asset types in 3 categories and 5 hazards; 25 of 25 catalogue entries have been read by an agent only.",
  "assets": [
   {
    "slug": "solar",
@@ -237,7 +239,7 @@
     "version_key": null,
     "sha256": null
    },
-   "summary": "Convective wind on batteries has no curve yet — the BESS hurricane wind cell leaves convective wind and tornado as a separate scope, and the BESS plan lists other hazards as later work (docs/plans/bess_damage/README.md, step 6).",
+   "summary": "Convective wind on batteries has no curve yet — the battery hurricane work leaves convective wind and tornadoes for separate work, and the owner has since deferred them (Hazard's battery decisions). No evidence search has been run, and deferred does not mean zero risk.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 0,
@@ -302,7 +304,7 @@
     "sha256": "e676fb077ca3fb96a1d0efce7b1e408c2a82265ec97ea2eb4ebbef7e5aeeef3d",
     "consumer_pin": null
    },
-   "summary": "Proposal, not in the runtime index — Convective wind on buildings: EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder.",
+   "summary": "Proposal, not in use yet. Convective wind on buildings: 6 curves for 3 parts (house, warehouse and office); read against 2 hazard measures; the numbers are our judgment.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 6,
@@ -313,7 +315,10 @@
    "aria_label": "Convective wind × Real estate, proposal, evidence: our judgment, field reports not searched",
    "href": "/cells/convective_wind_real_estate",
    "word": "our judgment",
-   "halves": "How damage rises: borrowed · how it becomes dollars: our judgment"
+   "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
+   "value_split": {
+    "reason": "no value budget for buildings yet"
+   }
   },
   {
    "entry_id": "flood_bess",
@@ -367,7 +372,7 @@
     "sha256": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24",
     "consumer_pin": "flood_bess@model_v1_0__docs_r1"
    },
-   "summary": "Flood on batteries: conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; 75 % of the reference value has a curve and 25 % has none.",
+   "summary": "Flood on batteries: 3 curves for 2 parts (battery enclosure (active hardware) and separate PCS); read against water depth above local grade (m); the numbers are our judgment; 75 % of the plant's value is priced.",
    "no_evaluator": false,
    "share_covered": 0.7514608688253878,
    "n_curves": 3,
@@ -378,7 +383,14 @@
    "aria_label": "Flood × Battery storage, live, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/flood_bess",
    "word": "our judgment",
-   "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment"
+   "halves": "Damage at each hazard level: borrowed and our judgment · the dollar value it is applied to: borrowed and our judgment",
+   "value_split": {
+    "priced": 0.7514608688253879,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.24853913117461213,
+    "basis": "of the reference plant's value"
+   }
   },
   {
    "entry_id": "flood_real_estate",
@@ -432,7 +444,7 @@
     "sha256": "99fe3f1f6430caada7943a4a83fe74a2f94895c8c454d7789fda97fabfafe9af",
     "consumer_pin": null
    },
-   "summary": "Proposal, not in the runtime index — Flood on buildings: FEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water).",
+   "summary": "Proposal, not in use yet. Flood on buildings: 7 curves for 4 parts; read against water depth above the first floor (ft); the numbers are published.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 7,
@@ -443,7 +455,10 @@
    "aria_label": "Flood × Real estate, proposal, evidence: published, field reports not searched",
    "href": "/cells/flood_real_estate",
    "word": "published",
-   "halves": "How damage rises: published · how it becomes dollars: published"
+   "halves": "Damage at each hazard level: published · the dollar value it is applied to: published",
+   "value_split": {
+    "reason": "no value budget for buildings yet"
+   }
   },
   {
    "entry_id": "flood_solar",
@@ -497,7 +512,7 @@
     "sha256": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
     "consumer_pin": "flood_solar@model_v1_0__docs_r4"
    },
-   "summary": "Flood on solar farms: piecewise depth-damage points per part, set by engineering judgment from DOE/FEMP solar flood guidance and NEMA water-damaged equipment guidance, in the USACE depth-percent table form; 3 parts of the asset's value have no curve.",
+   "summary": "Flood on solar farms: 8 curves for 8 parts; read against 4 hazard measures; the numbers are our judgment; 66 % of the plant's value is priced.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 8,
@@ -508,7 +523,14 @@
    "aria_label": "Flood × Solar farm, live, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/flood_solar",
    "word": "our judgment",
-   "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment"
+   "halves": "Damage at each hazard level: borrowed and our judgment · the dollar value it is applied to: borrowed and our judgment",
+   "value_split": {
+    "priced": 0.65852964506561,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.34147035493439004,
+    "basis": "of the reference plant's physical value"
+   }
   },
   {
    "entry_id": "flood_substation",
@@ -562,7 +584,7 @@
     "sha256": "f001eb0191439a1345a7a794995c684ef731f777c4b3e1eff0298de592999f30",
     "consumer_pin": "flood_substation@model_v1_0__docs_r1"
    },
-   "summary": "Flood on substations: FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage ratios used as published (0 to 15% over 0 to 10 ft), the same table already carried by the flood_wind cell.",
+   "summary": "Flood on substations: 1 curve for 1 part (whole station (fenced assembly)); read against water depth above station grade (ft) at the facility point; the numbers are our judgment; 100 % of the station's value is priced.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 1,
@@ -573,7 +595,14 @@
    "aria_label": "Flood × Substation, live, evidence: our judgment, field reports not searched",
    "href": "/cells/flood_substation",
    "word": "our judgment",
-   "halves": "How damage rises: borrowed · how it becomes dollars: our judgment"
+   "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
+   "value_split": {
+    "priced": 0.9999999999999999,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.0,
+    "basis": "of the reference station's budget"
+   }
   },
   {
    "entry_id": "flood_wind",
@@ -627,18 +656,25 @@
     "sha256": "37da745d87a4722e13118319bd30d9d2bcfd18dabc2a198ac6b8b1422bc3e1c1",
     "consumer_pin": "flood_wind@model_v1_0__docs_r1"
    },
-   "summary": "Flood on wind farms: FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points; 6 parts of the asset's value have no curve.",
+   "summary": "Flood on wind farms: 1 curve for 1 part (GSU / substation (whole facility)); read against freshwater flood depth above substation grade (ft); the numbers are borrowed; 18 % of the plant's value is priced, 4 % partly.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 1,
    "n_drawn": 1,
    "outside_checks": 0,
-   "chain_core_as_files": 5,
+   "chain_core_as_files": 6,
    "generation": "skill",
    "aria_label": "Flood × Wind farm, live, partial, evidence: borrowed, field reports not searched",
    "href": "/cells/flood_wind",
    "word": "borrowed",
-   "halves": "How damage rises: borrowed · how it becomes dollars: borrowed"
+   "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: borrowed",
+   "value_split": {
+    "priced": 0.18114602587800369,
+    "partly": 0.04436229205175601,
+    "no_damage": 0.0,
+    "not_priced": 0.7744916820702403,
+    "basis": "of the reference plant's physical value"
+   }
   },
   {
    "entry_id": "hail_bess",
@@ -690,7 +726,7 @@
     "version_key": null,
     "sha256": null
    },
-   "summary": "Hail on batteries has no curve yet — no documented plan yet (the BESS plan only lists other hazards as later work, step 6).",
+   "summary": "Hail on batteries has no curve yet — the owner deferred hail for batteries (Hazard's battery decisions; this repository's battery plan lists other hazards only as later work). No evidence search has been run, and deferred does not mean zero risk.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 0,
@@ -755,7 +791,7 @@
     "sha256": "52cf865d4dfb8b4c593736fb05b5d3e7c341bad2a2441b89499d7e88605fef20",
     "consumer_pin": null
    },
-   "summary": "Proposal, not in the runtime index — Hail on buildings: published hail-damage thresholds by roofing material (onset and full failure) turned into a replacement probability, times the roof's share of building cost; 1 part of the asset's value has no curve.",
+   "summary": "Proposal, not in use yet. Hail on buildings: 6 curves for 6 parts; read against hazard's MESH75 hail diameter (mm); the numbers are our judgment.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 6,
@@ -766,7 +802,10 @@
    "aria_label": "Hail × Real estate, proposal, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/hail_real_estate",
    "word": "our judgment",
-   "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment"
+   "halves": "Damage at each hazard level: borrowed and our judgment · the dollar value it is applied to: borrowed and our judgment",
+   "value_split": {
+    "reason": "no value budget for buildings yet"
+   }
   },
   {
    "entry_id": "hail_solar",
@@ -820,7 +859,7 @@
     "sha256": "8c52f3442eb606f55aa0502fbb2738df70076f8a181de463c029061020b3cf32",
     "consumer_pin": "hail_solar@model_v1_0__docs_r7"
    },
-   "summary": "Hail on solar farms: logistic curves per module type fitted to public PVEL/Kiwa hail-test breakage anchors and the IEC baseline; 4 parts of the asset's value have no curve.",
+   "summary": "Hail on solar farms: 3 curves for 1 part (PV modules (glass and cells)); read against hail diameter, MESH equivalent (mm); the numbers are published; 45 % of the plant's value is priced.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 3,
@@ -831,7 +870,14 @@
    "aria_label": "Hail × Solar farm, live, partial, evidence: published, field reports not searched",
    "href": "/cells/hail_solar",
    "word": "published",
-   "halves": "How damage rises: published · how it becomes dollars: published"
+   "halves": "Damage at each hazard level: published · the dollar value it is applied to: published",
+   "value_split": {
+    "priced": 0.45350372243989606,
+    "partly": 0.0,
+    "no_damage": 0.23694068161324683,
+    "not_priced": 0.30955559594685705,
+    "basis": "of the reference plant's physical value"
+   }
   },
   {
    "entry_id": "hail_substation",
@@ -883,7 +929,7 @@
     "version_key": null,
     "sha256": null
    },
-   "summary": "Hail on substations has no curve yet — hail was excluded from the first substation delivery and no station hail response was found in the reviewed curves; missing evidence is not zero risk (docs/extra/discussion/substation_damage/05_cross_hazard_reuse_inventory.md).",
+   "summary": "Hail on substations has no curve yet — the owner left hail out of the first substation work. Only the curves already in this repository were checked, and none fits a substation; no outside search has been done. That is not a finding of no risk.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 0,
@@ -946,7 +992,7 @@
     "version_key": null,
     "sha256": null
    },
-   "summary": "Hail on wind farms has no curve yet — model v0.1 is a fail-closed research scaffold with no curve records: no evidence yet links one hail event's impact on a blade to an inspected blade state and that blade's repair cost, and no hail-to-blade input axis is fixed (docs r2 deep curation kept it a strict no-go).",
+   "summary": "Hail on wind farms has no curve yet — A first research version exists but has no curve yet: no evidence so far links a hailstorm's impact on a blade to the damage found on inspection and its repair cost, and no hail measure for blades has been chosen.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 0,
@@ -1011,7 +1057,7 @@
     "sha256": "832f47d69372ec54723a61b8a956addccef07bb39338c3ec99907e116f1855ca",
     "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3"
    },
-   "summary": "Convective wind on solar farms: thresholded logistic curves on a design-normalised demand ratio; 1 part of the asset's value has no curve.",
+   "summary": "Convective wind on solar farms: 5 curves for 5 parts; read against effective demand ratio R_eff; the numbers are our judgment; 54 % of the plant's value is priced.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 5,
@@ -1022,7 +1068,14 @@
    "aria_label": "Convective wind × Solar farm, live, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/strong_wind_solar",
    "word": "our judgment",
-   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
+   "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+   "value_split": {
+    "priced": 0.5433075554365119,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.45669244456348806,
+    "basis": "of the reference plant's physical value"
+   }
   },
   {
    "entry_id": "substation_convective_wind_screening_v1",
@@ -1077,7 +1130,7 @@
     "source_artifact_sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
     "sha256": "5afa3f9cd31ee52092762bdb505fbc4c24c02ed2420d1be67c448e6441383be0"
    },
-   "summary": "Convective wind on substations reuses another cell's curve: same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a judgment-based cross-hazard proxy for direct wind only (see docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md).",
+   "summary": "Convective wind on substations: 1 curve for 1 part (GSU and substation), borrowed from Hurricane wind × Solar farm; read against site-facility demand ratio (event / design pressure); the numbers are our judgment; 100 % of the station's value is priced.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 0,
@@ -1088,7 +1141,14 @@
    "aria_label": "Convective wind × Substation, reused, evidence: our judgment, field reports not searched",
    "href": "/cells/substation_convective_wind_screening_v1",
    "word": "our judgment",
-   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
+   "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+   "value_split": {
+    "priced": 0.9999999999999999,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.0,
+    "basis": "of the reference station's budget"
+   }
   },
   {
    "entry_id": "substation_hurricane_screening_v1",
@@ -1143,7 +1203,7 @@
     "source_artifact_sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
     "sha256": "4a5e994b4ef8cde8629bba765f1643190ce49e31cf045dbcf36adaf05a8f4773"
    },
-   "summary": "Hurricane wind on substations reuses another cell's curve: the canonical solar TC-wind GSU/substation assembly curve is already separate from the solar array, so it is reused for the standalone station without inventing a solar plant (see docs/contracts/hazard_handoff/substation_hurricane_screening_v1/README.md).",
+   "summary": "Hurricane wind on substations: 1 curve for 1 part (GSU and substation), borrowed from Hurricane wind × Solar farm; read against site-facility demand ratio (event / design pressure); the numbers are our judgment; 100 % of the station's value is priced.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 0,
@@ -1154,7 +1214,14 @@
    "aria_label": "Hurricane wind × Substation, reused, evidence: our judgment, field reports not searched",
    "href": "/cells/substation_hurricane_screening_v1",
    "word": "our judgment",
-   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
+   "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+   "value_split": {
+    "priced": 0.9999999999999999,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.0,
+    "basis": "of the reference station's budget"
+   }
   },
   {
    "entry_id": "substation_wildfire_screening_v1",
@@ -1209,7 +1276,7 @@
     "source_artifact_sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
     "sha256": "10742caaf6e4622f72b2572db08d3fc4cc4dc92ca58746ad0928cabad4be5e48"
    },
-   "summary": "Wildfire on substations reuses another cell's curve: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md); 1 part of the asset's value has no curve.",
+   "summary": "Wildfire on substations: 1 curve for 1 part (transformers and switchgear), borrowed from Wildfire × Solar farm; read against FSim conditional flame-length class (0 = no event); the numbers are our judgment; 0 % of the station's value is priced, 65 % partly.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 0,
@@ -1220,7 +1287,14 @@
    "aria_label": "Wildfire × Substation, reused, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/substation_wildfire_screening_v1",
    "word": "our judgment",
-   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
+   "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+   "value_split": {
+    "priced": 0.0,
+    "partly": 0.6479665016297036,
+    "no_damage": 0.0,
+    "not_priced": 0.3520334983702963,
+    "basis": "of the reference station's budget"
+   }
   },
   {
    "entry_id": "tropical_cyclone_wind_bess",
@@ -1274,7 +1348,7 @@
     "sha256": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed",
     "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
    },
-   "summary": "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a judgment-based hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage; 86 % of the reference value has a curve and 14 % has none.",
+   "summary": "Hurricane wind on batteries: 3 curves for 2 parts (integrated battery enclosure and separate PCS); read against pressure ratio, (event 3-s gust ÷ declared reference 3-s gust)²; the numbers are our judgment; 86 % of the plant's value is priced.",
    "no_evaluator": false,
    "share_covered": 0.8597449908925319,
    "n_curves": 3,
@@ -1285,7 +1359,14 @@
    "aria_label": "Hurricane wind × Battery storage, live, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/tropical_cyclone_wind_bess",
    "word": "our judgment",
-   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
+   "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+   "value_split": {
+    "priced": 0.8597449908925319,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.14025500910746813,
+    "basis": "of the reference plant's value"
+   }
   },
   {
    "entry_id": "tropical_cyclone_wind_real_estate",
@@ -1339,7 +1420,7 @@
     "sha256": "99487ff5812e6b1017eeaaeea14d469bcb15ae2265e9d6cf107ce5ca41c85753",
     "consumer_pin": null
    },
-   "summary": "Proposal, not in the runtime index — Hurricane wind on buildings: FEMA Hazus hurricane building-loss rows used as published (every 5 mph, five terrain classes) for the Hazus building type and wind characteristics matching each building.",
+   "summary": "Proposal, not in use yet. Hurricane wind on buildings: 20 curves for 4 parts; read against peak 3-second gust at 10 m in open terrain (mph); the numbers are published.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 20,
@@ -1350,7 +1431,10 @@
    "aria_label": "Hurricane wind × Real estate, proposal, evidence: published, field reports not searched",
    "href": "/cells/tropical_cyclone_wind_real_estate",
    "word": "published",
-   "halves": "How damage rises: published · how it becomes dollars: published"
+   "halves": "Damage at each hazard level: published · the dollar value it is applied to: published",
+   "value_split": {
+    "reason": "no value budget for buildings yet"
+   }
   },
   {
    "entry_id": "tropical_cyclone_wind_solar",
@@ -1404,7 +1488,7 @@
     "sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
     "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2"
    },
-   "summary": "Hurricane wind on solar farms: ordered damage-state curves with judgment-based synthetic resistance medians and cost ratios (cell-local decision, no direct TC calibration source); 1 part of the asset's value has no curve.",
+   "summary": "Hurricane wind on solar farms: 10 curves for 8 parts; read against 3 hazard measures; the numbers are our judgment; 99 % of the plant's value is priced.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 10,
@@ -1415,7 +1499,14 @@
    "aria_label": "Hurricane wind × Solar farm, live, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/tropical_cyclone_wind_solar",
    "word": "our judgment",
-   "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: our judgment"
+   "halves": "Damage at each hazard level: borrowed and our judgment · the dollar value it is applied to: our judgment",
+   "value_split": {
+    "priced": 0.99044766341709,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.009552336582909908,
+    "basis": "of the reference plant's physical value"
+   }
   },
   {
    "entry_id": "tropical_cyclone_wind_wind",
@@ -1469,7 +1560,7 @@
     "sha256": "009996c07eb8150f79f11741d42b6cd37562d655ee336f82f178ccdeb987c992",
     "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2"
    },
-   "summary": "Hurricane wind on wind farms: published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; 16 % of the reference value has a curve and 84 % has none.",
+   "summary": "Hurricane wind on wind farms: 4 curves for 1 part (turbine tower); read against peak 3-second gust at 10 m (km/h); the numbers are our judgment; 35 % of the plant's value is priced.",
    "no_evaluator": false,
    "share_covered": 0.16,
    "n_curves": 4,
@@ -1480,7 +1571,14 @@
    "aria_label": "Hurricane wind × Wind farm, live, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/tropical_cyclone_wind_wind",
    "word": "our judgment",
-   "halves": "How damage rises: borrowed · how it becomes dollars: our judgment"
+   "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
+   "value_split": {
+    "priced": 0.3512014787430684,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.6487985212569316,
+    "basis": "of the reference plant's physical value"
+   }
   },
   {
    "entry_id": "wildfire_bess",
@@ -1534,7 +1632,7 @@
     "sha256": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491",
     "consumer_pin": "wildfire_bess@model_v1_0__docs_r1"
    },
-   "summary": "Wildfire on batteries: solar wildfire electrical class tables reused as judgment-based ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities); 86 % of the reference value has a curve and 14 % has none.",
+   "summary": "Wildfire on batteries: 7 curves for 2 parts (integrated battery enclosure and separate PCS); read against FSim fire-intensity class at the unit, exact state; the numbers are our judgment; 86 % of the plant's value is priced.",
    "no_evaluator": false,
    "share_covered": 0.8597449908925319,
    "n_curves": 7,
@@ -1545,7 +1643,14 @@
    "aria_label": "Wildfire × Battery storage, live, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/wildfire_bess",
    "word": "our judgment",
-   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
+   "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+   "value_split": {
+    "priced": 0.8597449908925319,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.14025500910746813,
+    "basis": "of the reference plant's value"
+   }
   },
   {
    "entry_id": "wildfire_real_estate",
@@ -1599,7 +1704,7 @@
     "sha256": "6b7c771d88b46d60e2c0b1339009ab06753f93f6376e8c8f30e40c91f31474ee",
     "consumer_pin": null
    },
-   "summary": "Proposal, not in the runtime index — Wildfire on buildings: US Forest Service home loss by flame-length class (shrub vegetation) for the house.",
+   "summary": "Proposal, not in use yet. Wildfire on buildings: 3 curves for 3 parts (house, warehouse and office); read against FSim conditional flame-length class state; the numbers are our judgment.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 3,
@@ -1610,7 +1715,10 @@
    "aria_label": "Wildfire × Real estate, proposal, evidence: our judgment, field reports not searched",
    "href": "/cells/wildfire_real_estate",
    "word": "our judgment",
-   "halves": "How damage rises: borrowed · how it becomes dollars: our judgment"
+   "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
+   "value_split": {
+    "reason": "no value budget for buildings yet"
+   }
   },
   {
    "entry_id": "wildfire_solar",
@@ -1664,7 +1772,7 @@
     "sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
     "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
    },
-   "summary": "Wildfire on solar farms: exact-class state tables per part on FSim flame-length classes; 1 part of the asset's value has no curve.",
+   "summary": "Wildfire on solar farms: 10 curves for 10 parts; read against FSim conditional flame-length class (0 = no event); the numbers are our judgment; 100 % of the plant's value is priced.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 10,
@@ -1675,7 +1783,14 @@
    "aria_label": "Wildfire × Solar farm, live, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/wildfire_solar",
    "word": "our judgment",
-   "halves": "How damage rises: our judgment · how it becomes dollars: published"
+   "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: published",
+   "value_split": {
+    "priced": 0.9999999999999999,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.0,
+    "basis": "of the reference plant's physical value"
+   }
   },
   {
    "entry_id": "wildfire_wind",
@@ -1729,18 +1844,25 @@
     "sha256": "3f923f506a2082dd2f074c8b3cc3d696288097072eb8b6f803f3eb7d3f2b4e0d",
     "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
    },
-   "summary": "Wildfire on wind farms: cell-local judgment-based screening points per FSim flame-length class, adopted under owner direction; 4 parts of the asset's value have no curve.",
+   "summary": "Wildfire on wind farms: 2 curves for 2 parts (pad electrical and GSU protection, control and DC); read against USFS FSim conditional flame-length class; the numbers are our judgment; 27 % of the plant's value is priced, 4 % partly.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 2,
    "n_drawn": 2,
    "outside_checks": 0,
-   "chain_core_as_files": 5,
+   "chain_core_as_files": 6,
    "generation": "skill",
    "aria_label": "Wildfire × Wind farm, live, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/wildfire_wind",
    "word": "our judgment",
-   "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
+   "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+   "value_split": {
+    "priced": 0.26555760936537276,
+    "partly": 0.04436229205175601,
+    "no_damage": 0.0,
+    "not_priced": 0.6900800985828712,
+    "basis": "of the reference plant's physical value"
+   }
   },
   {
    "entry_id": "wind_tornado_wind",
@@ -1794,7 +1916,7 @@
     "sha256": "908f386953d062a62a33b6714020374b9b9d8a4538006e80d37047686c2c127a",
     "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4"
    },
-   "summary": "Convective wind on wind farms: engineering-fit logistic curves on hub gust over the IEC 50-year gust, built from IEC design speeds, the NIST fragility method and EF4 case evidence; 1 part of the asset's value has no curve.",
+   "summary": "Convective wind on wind farms: 5 curves for 5 parts; read against gust ratio V₃ₛ,hub / Ve50 (IEC class); the numbers are our judgment; 75 % of the plant's value is priced.",
    "no_evaluator": false,
    "share_covered": null,
    "n_curves": 5,
@@ -1805,7 +1927,14 @@
    "aria_label": "Convective wind × Wind farm, live, partial, evidence: our judgment, field reports not searched",
    "href": "/cells/wind_tornado_wind",
    "word": "our judgment",
-   "halves": "How damage rises: our judgment · how it becomes dollars: borrowed and our judgment"
+   "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: borrowed and our judgment",
+   "value_split": {
+    "priced": 0.7455329636475663,
+    "partly": 0.0,
+    "no_damage": 0.0,
+    "not_priced": 0.25446703635243373,
+    "basis": "of the reference plant's physical value"
+   }
   }
  ],
  "codes": {
@@ -2179,7 +2308,6 @@
  "lenses": [
   "status",
   "evidence",
-  "occurrence",
   "value",
   "review"
  ],
@@ -2198,10 +2326,10 @@
      {
       "slug": "solar",
       "label": "Solar farm",
-      "profile": "100 MWac single-axis tracker plant; the picture shows one tracker block and the plant",
+      "profile": "100 MWac / 120 MWdc single-axis tracker plant",
       "building": null,
       "also_buildings": null,
-      "picture_note": null,
+      "picture_note": "The picture is the Digital Twin's model: one tracker block and the plant.",
       "planned": null,
       "catalogue_asset": "Solar farm",
       "href": "/assets/solar",
@@ -2216,10 +2344,10 @@
      {
       "slug": "wind",
       "label": "Wind farm",
-      "profile": "2.8 MW geared turbine; the picture shows one turbine and the farm",
+      "profile": "100 MW, twenty 5 MW turbines",
       "building": null,
       "also_buildings": null,
-      "picture_note": null,
+      "picture_note": "The picture is the Digital Twin's model: one 2.8 MW turbine and the farm (Hazard's plant uses 5 MW turbines).",
       "planned": null,
       "catalogue_asset": "Wind farm",
       "href": "/assets/wind",
@@ -2234,10 +2362,10 @@
      {
       "slug": "bess",
       "label": "Battery storage",
-      "profile": "100 MW / 400 MWh LFP; the picture shows one 5 MW block and the plant",
+      "profile": "100 MW / 400 MWh LFP",
       "building": null,
       "also_buildings": null,
-      "picture_note": null,
+      "picture_note": "The picture is the Digital Twin's model: one 5 MW battery block and the plant.",
       "planned": null,
       "catalogue_asset": "Battery storage",
       "href": "/assets/bess",
@@ -2275,7 +2403,7 @@
       "profile": "one-storey single-family house",
       "building": "House",
       "also_buildings": null,
-      "picture_note": null,
+      "picture_note": "The picture is the Digital Twin's model of the house and its site.",
       "planned": null,
       "catalogue_asset": "Real estate",
       "href": "/assets/residential",
@@ -2290,12 +2418,12 @@
      {
       "slug": "commercial",
       "label": "Commercial",
-      "profile": "three-storey office (the curves); retail building (the picture)",
+      "profile": "three-storey office",
       "building": "Office",
       "also_buildings": [
        "Retail"
       ],
-      "picture_note": "The picture is the twin's retail building; the curves are for the three-storey office.",
+      "picture_note": "The picture is the Digital Twin's model of a retail building and its site; the curves are for the three-storey office.",
       "planned": null,
       "catalogue_asset": "Real estate",
       "href": "/assets/commercial",
@@ -2313,7 +2441,7 @@
       "profile": "one-storey distribution warehouse",
       "building": "Warehouse",
       "also_buildings": null,
-      "picture_note": null,
+      "picture_note": "The picture is the Digital Twin's model of the warehouse and its site.",
       "planned": null,
       "catalogue_asset": "Real estate",
       "href": "/assets/industrial",
@@ -2351,7 +2479,7 @@
       "profile": "345/138 kV transmission substation, the fenced station",
       "building": null,
       "also_buildings": null,
-      "picture_note": null,
+      "picture_note": "The picture is the Digital Twin's model of the fenced station.",
       "planned": null,
       "catalogue_asset": "Substation",
       "href": "/assets/substation",
@@ -2401,8 +2529,8 @@
      "slug": "solar",
      "label": "Solar farm",
      "building": null,
-     "profile": "100 MWac single-axis tracker plant; the picture shows one tracker block and the plant",
-     "picture_note": null,
+     "profile": "100 MWac / 120 MWdc single-axis tracker plant",
+     "picture_note": "The picture is the Digital Twin's model: one tracker block and the plant.",
      "href": "/assets/solar",
      "tiles": {
       "hail": {
@@ -2457,7 +2585,7 @@
         "sha256": "8c52f3442eb606f55aa0502fbb2738df70076f8a181de463c029061020b3cf32",
         "consumer_pin": "hail_solar@model_v1_0__docs_r7"
        },
-       "summary": "Hail on solar farms: logistic curves per module type fitted to public PVEL/Kiwa hail-test breakage anchors and the IEC baseline; 4 parts of the asset's value have no curve.",
+       "summary": "Hail on solar farms: 3 curves for 1 part (PV modules (glass and cells)); read against hail diameter, MESH equivalent (mm); the numbers are published; 45 % of the plant's value is priced.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 3,
@@ -2468,7 +2596,14 @@
        "aria_label": "Hail × Solar farm, live, partial, evidence: published, field reports not searched",
        "href": "/cells/hail_solar",
        "word": "published",
-       "halves": "How damage rises: published · how it becomes dollars: published"
+       "halves": "Damage at each hazard level: published · the dollar value it is applied to: published",
+       "value_split": {
+        "priced": 0.45350372243989606,
+        "partly": 0.0,
+        "no_damage": 0.23694068161324683,
+        "not_priced": 0.30955559594685705,
+        "basis": "of the reference plant's physical value"
+       }
       },
       "flood": {
        "entry_id": "flood_solar",
@@ -2522,7 +2657,7 @@
         "sha256": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
         "consumer_pin": "flood_solar@model_v1_0__docs_r4"
        },
-       "summary": "Flood on solar farms: piecewise depth-damage points per part, set by engineering judgment from DOE/FEMP solar flood guidance and NEMA water-damaged equipment guidance, in the USACE depth-percent table form; 3 parts of the asset's value have no curve.",
+       "summary": "Flood on solar farms: 8 curves for 8 parts; read against 4 hazard measures; the numbers are our judgment; 66 % of the plant's value is priced.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 8,
@@ -2533,7 +2668,14 @@
        "aria_label": "Flood × Solar farm, live, partial, evidence: our judgment, field reports not searched",
        "href": "/cells/flood_solar",
        "word": "our judgment",
-       "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment"
+       "halves": "Damage at each hazard level: borrowed and our judgment · the dollar value it is applied to: borrowed and our judgment",
+       "value_split": {
+        "priced": 0.65852964506561,
+        "partly": 0.0,
+        "no_damage": 0.0,
+        "not_priced": 0.34147035493439004,
+        "basis": "of the reference plant's physical value"
+       }
       },
       "hurricane_wind": {
        "entry_id": "tropical_cyclone_wind_solar",
@@ -2587,7 +2729,7 @@
         "sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
         "consumer_pin": "tropical_cyclone_wind_solar@model_v2_1__docs_r2"
        },
-       "summary": "Hurricane wind on solar farms: ordered damage-state curves with judgment-based synthetic resistance medians and cost ratios (cell-local decision, no direct TC calibration source); 1 part of the asset's value has no curve.",
+       "summary": "Hurricane wind on solar farms: 10 curves for 8 parts; read against 3 hazard measures; the numbers are our judgment; 99 % of the plant's value is priced.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 10,
@@ -2598,7 +2740,14 @@
        "aria_label": "Hurricane wind × Solar farm, live, partial, evidence: our judgment, field reports not searched",
        "href": "/cells/tropical_cyclone_wind_solar",
        "word": "our judgment",
-       "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: our judgment"
+       "halves": "Damage at each hazard level: borrowed and our judgment · the dollar value it is applied to: our judgment",
+       "value_split": {
+        "priced": 0.99044766341709,
+        "partly": 0.0,
+        "no_damage": 0.0,
+        "not_priced": 0.009552336582909908,
+        "basis": "of the reference plant's physical value"
+       }
       },
       "convective_wind": {
        "entry_id": "strong_wind_solar",
@@ -2652,7 +2801,7 @@
         "sha256": "832f47d69372ec54723a61b8a956addccef07bb39338c3ec99907e116f1855ca",
         "consumer_pin": "strong_wind_solar@model_v1_0__docs_r3"
        },
-       "summary": "Convective wind on solar farms: thresholded logistic curves on a design-normalised demand ratio; 1 part of the asset's value has no curve.",
+       "summary": "Convective wind on solar farms: 5 curves for 5 parts; read against effective demand ratio R_eff; the numbers are our judgment; 54 % of the plant's value is priced.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 5,
@@ -2663,7 +2812,14 @@
        "aria_label": "Convective wind × Solar farm, live, partial, evidence: our judgment, field reports not searched",
        "href": "/cells/strong_wind_solar",
        "word": "our judgment",
-       "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
+       "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+       "value_split": {
+        "priced": 0.5433075554365119,
+        "partly": 0.0,
+        "no_damage": 0.0,
+        "not_priced": 0.45669244456348806,
+        "basis": "of the reference plant's physical value"
+       }
       },
       "wildfire": {
        "entry_id": "wildfire_solar",
@@ -2717,7 +2873,7 @@
         "sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
         "consumer_pin": "wildfire_solar@model_v1_0__docs_r3"
        },
-       "summary": "Wildfire on solar farms: exact-class state tables per part on FSim flame-length classes; 1 part of the asset's value has no curve.",
+       "summary": "Wildfire on solar farms: 10 curves for 10 parts; read against FSim conditional flame-length class (0 = no event); the numbers are our judgment; 100 % of the plant's value is priced.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 10,
@@ -2728,7 +2884,48 @@
        "aria_label": "Wildfire × Solar farm, live, partial, evidence: our judgment, field reports not searched",
        "href": "/cells/wildfire_solar",
        "word": "our judgment",
-       "halves": "How damage rises: our judgment · how it becomes dollars: published"
+       "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: published",
+       "value_split": {
+        "priced": 0.9999999999999999,
+        "partly": 0.0,
+        "no_damage": 0.0,
+        "not_priced": 0.0,
+        "basis": "of the reference plant's physical value"
+       }
+      },
+      "heat": {
+       "entry_id": null,
+       "kind": "gap",
+       "status": "gap",
+       "title": "Heat × Solar farm",
+       "hazard": {
+        "slug": "heat",
+        "label": "Heat"
+       },
+       "asset": {
+        "slug": "solar",
+        "label": "Solar farm"
+       },
+       "tiers": {
+        "shape": "–",
+        "cost": "–"
+       },
+       "partial": false,
+       "no_evaluator": false,
+       "occurrence": {
+        "mark": "—",
+        "label": "no register"
+       },
+       "review": {
+        "review": null,
+        "entry_read_kind": null,
+        "entry_read_on": null
+       },
+       "word": null,
+       "share_covered": null,
+       "href": "/hazards/heat/solar",
+       "summary": "Damage's scope: a damage curve prices physical destruction only: Heat is treated as changing how an asset performs (derating, ageing), which sits outside a damage curve; disruption and derating are a separate stage. Does it happen? Leads from the battery's design (heat row, 19 Oct 2026): Heat is the strongest design lead (ageing doubles per +10 °C, chiller and converter derating) but works through performance: \"Performance, not damage — no curve.\" No field evidence was searched.",
+       "aria_label": "Solar farm, heat: no curve yet; treated as performance, not damage"
       }
      }
     },
@@ -2736,8 +2933,8 @@
      "slug": "wind",
      "label": "Wind farm",
      "building": null,
-     "profile": "2.8 MW geared turbine; the picture shows one turbine and the farm",
-     "picture_note": null,
+     "profile": "100 MW, twenty 5 MW turbines",
+     "picture_note": "The picture is the Digital Twin's model: one 2.8 MW turbine and the farm (Hazard's plant uses 5 MW turbines).",
      "href": "/assets/wind",
      "tiles": {
       "hail": {
@@ -2790,7 +2987,7 @@
         "version_key": null,
         "sha256": null
        },
-       "summary": "Hail on wind farms has no curve yet — model v0.1 is a fail-closed research scaffold with no curve records: no evidence yet links one hail event's impact on a blade to an inspected blade state and that blade's repair cost, and no hail-to-blade input axis is fixed (docs r2 deep curation kept it a strict no-go).",
+       "summary": "Hail on wind farms has no curve yet — A first research version exists but has no curve yet: no evidence so far links a hailstorm's impact on a blade to the damage found on inspection and its repair cost, and no hail measure for blades has been chosen.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 0,
@@ -2801,7 +2998,8 @@
        "aria_label": "Hail × Wind farm, gap, field reports not searched",
        "href": "/cells/hail_wind",
        "word": null,
-       "halves": null
+       "halves": null,
+       "value_split": null
       },
       "flood": {
        "entry_id": "flood_wind",
@@ -2855,18 +3053,25 @@
         "sha256": "37da745d87a4722e13118319bd30d9d2bcfd18dabc2a198ac6b8b1422bc3e1c1",
         "consumer_pin": "flood_wind@model_v1_0__docs_r1"
        },
-       "summary": "Flood on wind farms: FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage table used exactly as published (0 to 10 ft, damage 0 to 0.15), linear between one-foot points; 6 parts of the asset's value have no curve.",
+       "summary": "Flood on wind farms: 1 curve for 1 part (GSU / substation (whole facility)); read against freshwater flood depth above substation grade (ft); the numbers are borrowed; 18 % of the plant's value is priced, 4 % partly.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 1,
        "n_drawn": 1,
        "outside_checks": 0,
-       "chain_core_as_files": 5,
+       "chain_core_as_files": 6,
        "generation": "skill",
        "aria_label": "Flood × Wind farm, live, partial, evidence: borrowed, field reports not searched",
        "href": "/cells/flood_wind",
        "word": "borrowed",
-       "halves": "How damage rises: borrowed · how it becomes dollars: borrowed"
+       "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: borrowed",
+       "value_split": {
+        "priced": 0.18114602587800369,
+        "partly": 0.04436229205175601,
+        "no_damage": 0.0,
+        "not_priced": 0.7744916820702403,
+        "basis": "of the reference plant's physical value"
+       }
       },
       "hurricane_wind": {
        "entry_id": "tropical_cyclone_wind_wind",
@@ -2920,7 +3125,7 @@
         "sha256": "009996c07eb8150f79f11741d42b6cd37562d655ee336f82f178ccdeb987c992",
         "consumer_pin": "tropical_cyclone_wind_wind@model_v1_2__docs_r2"
        },
-       "summary": "Hurricane wind on wind farms: published fitted expected-damage curves for generic steel turbine towers (Wind Energy, 2020) used as published; 16 % of the reference value has a curve and 84 % has none.",
+       "summary": "Hurricane wind on wind farms: 4 curves for 1 part (turbine tower); read against peak 3-second gust at 10 m (km/h); the numbers are our judgment; 35 % of the plant's value is priced.",
        "no_evaluator": false,
        "share_covered": 0.16,
        "n_curves": 4,
@@ -2931,7 +3136,14 @@
        "aria_label": "Hurricane wind × Wind farm, live, partial, evidence: our judgment, field reports not searched",
        "href": "/cells/tropical_cyclone_wind_wind",
        "word": "our judgment",
-       "halves": "How damage rises: borrowed · how it becomes dollars: our judgment"
+       "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
+       "value_split": {
+        "priced": 0.3512014787430684,
+        "partly": 0.0,
+        "no_damage": 0.0,
+        "not_priced": 0.6487985212569316,
+        "basis": "of the reference plant's physical value"
+       }
       },
       "convective_wind": {
        "entry_id": "wind_tornado_wind",
@@ -2985,7 +3197,7 @@
         "sha256": "908f386953d062a62a33b6714020374b9b9d8a4538006e80d37047686c2c127a",
         "consumer_pin": "wind_tornado_wind@model_v1_0__docs_r4"
        },
-       "summary": "Convective wind on wind farms: engineering-fit logistic curves on hub gust over the IEC 50-year gust, built from IEC design speeds, the NIST fragility method and EF4 case evidence; 1 part of the asset's value has no curve.",
+       "summary": "Convective wind on wind farms: 5 curves for 5 parts; read against gust ratio V₃ₛ,hub / Ve50 (IEC class); the numbers are our judgment; 75 % of the plant's value is priced.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 5,
@@ -2996,7 +3208,14 @@
        "aria_label": "Convective wind × Wind farm, live, partial, evidence: our judgment, field reports not searched",
        "href": "/cells/wind_tornado_wind",
        "word": "our judgment",
-       "halves": "How damage rises: our judgment · how it becomes dollars: borrowed and our judgment"
+       "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: borrowed and our judgment",
+       "value_split": {
+        "priced": 0.7455329636475663,
+        "partly": 0.0,
+        "no_damage": 0.0,
+        "not_priced": 0.25446703635243373,
+        "basis": "of the reference plant's physical value"
+       }
       },
       "wildfire": {
        "entry_id": "wildfire_wind",
@@ -3050,18 +3269,59 @@
         "sha256": "3f923f506a2082dd2f074c8b3cc3d696288097072eb8b6f803f3eb7d3f2b4e0d",
         "consumer_pin": "wildfire_wind@model_v1_0__docs_r1"
        },
-       "summary": "Wildfire on wind farms: cell-local judgment-based screening points per FSim flame-length class, adopted under owner direction; 4 parts of the asset's value have no curve.",
+       "summary": "Wildfire on wind farms: 2 curves for 2 parts (pad electrical and GSU protection, control and DC); read against USFS FSim conditional flame-length class; the numbers are our judgment; 27 % of the plant's value is priced, 4 % partly.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 2,
        "n_drawn": 2,
        "outside_checks": 0,
-       "chain_core_as_files": 5,
+       "chain_core_as_files": 6,
        "generation": "skill",
        "aria_label": "Wildfire × Wind farm, live, partial, evidence: our judgment, field reports not searched",
        "href": "/cells/wildfire_wind",
        "word": "our judgment",
-       "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
+       "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+       "value_split": {
+        "priced": 0.26555760936537276,
+        "partly": 0.04436229205175601,
+        "no_damage": 0.0,
+        "not_priced": 0.6900800985828712,
+        "basis": "of the reference plant's physical value"
+       }
+      },
+      "heat": {
+       "entry_id": null,
+       "kind": "gap",
+       "status": "gap",
+       "title": "Heat × Wind farm",
+       "hazard": {
+        "slug": "heat",
+        "label": "Heat"
+       },
+       "asset": {
+        "slug": "wind",
+        "label": "Wind farm"
+       },
+       "tiers": {
+        "shape": "–",
+        "cost": "–"
+       },
+       "partial": false,
+       "no_evaluator": false,
+       "occurrence": {
+        "mark": "—",
+        "label": "no register"
+       },
+       "review": {
+        "review": null,
+        "entry_read_kind": null,
+        "entry_read_on": null
+       },
+       "word": null,
+       "share_covered": null,
+       "href": "/hazards/heat/wind",
+       "summary": "Damage's scope: a damage curve prices physical destruction only: Heat is treated as changing how an asset performs (derating, ageing), which sits outside a damage curve; disruption and derating are a separate stage. Does it happen? Leads from the battery's design (heat row, 19 Oct 2026): Heat is the strongest design lead (ageing doubles per +10 °C, chiller and converter derating) but works through performance: \"Performance, not damage — no curve.\" No field evidence was searched.",
+       "aria_label": "Wind farm, heat: no curve yet; treated as performance, not damage"
       }
      }
     },
@@ -3069,8 +3329,8 @@
      "slug": "bess",
      "label": "Battery storage",
      "building": null,
-     "profile": "100 MW / 400 MWh LFP; the picture shows one 5 MW block and the plant",
-     "picture_note": null,
+     "profile": "100 MW / 400 MWh LFP",
+     "picture_note": "The picture is the Digital Twin's model: one 5 MW battery block and the plant.",
      "href": "/assets/bess",
      "tiles": {
       "hail": {
@@ -3123,7 +3383,7 @@
         "version_key": null,
         "sha256": null
        },
-       "summary": "Hail on batteries has no curve yet — no documented plan yet (the BESS plan only lists other hazards as later work, step 6).",
+       "summary": "Hail on batteries has no curve yet — the owner deferred hail for batteries (Hazard's battery decisions; this repository's battery plan lists other hazards only as later work). No evidence search has been run, and deferred does not mean zero risk.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 0,
@@ -3134,7 +3394,8 @@
        "aria_label": "Hail × Battery storage, gap, field reports not searched",
        "href": "/cells/hail_bess",
        "word": null,
-       "halves": null
+       "halves": null,
+       "value_split": null
       },
       "flood": {
        "entry_id": "flood_bess",
@@ -3188,7 +3449,7 @@
         "sha256": "c9bc9194accb3adbc2c05a9720b4945dd5a969bd7288eb600d5e901aa0185d24",
         "consumer_pin": "flood_bess@model_v1_0__docs_r1"
        },
-       "summary": "Flood on batteries: conservative entry policy (replace once water is above 0.30 m) for battery enclosures, plus the Flood Solar inverter curve reused for the separate PCS; 75 % of the reference value has a curve and 25 % has none.",
+       "summary": "Flood on batteries: 3 curves for 2 parts (battery enclosure (active hardware) and separate PCS); read against water depth above local grade (m); the numbers are our judgment; 75 % of the plant's value is priced.",
        "no_evaluator": false,
        "share_covered": 0.7514608688253878,
        "n_curves": 3,
@@ -3199,7 +3460,14 @@
        "aria_label": "Flood × Battery storage, live, partial, evidence: our judgment, field reports not searched",
        "href": "/cells/flood_bess",
        "word": "our judgment",
-       "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment"
+       "halves": "Damage at each hazard level: borrowed and our judgment · the dollar value it is applied to: borrowed and our judgment",
+       "value_split": {
+        "priced": 0.7514608688253879,
+        "partly": 0.0,
+        "no_damage": 0.0,
+        "not_priced": 0.24853913117461213,
+        "basis": "of the reference plant's value"
+       }
       },
       "hurricane_wind": {
        "entry_id": "tropical_cyclone_wind_bess",
@@ -3253,7 +3521,7 @@
         "sha256": "0a99b2f0efbe1628d1f0500e0801a24251cab9d3bc7c22f32de0a5c758945fed",
         "consumer_pin": "tropical_cyclone_wind_bess@model_v1_0__docs_r1"
        },
-       "summary": "Hurricane wind on batteries: solar TC-wind ordered damage-state curves reused as a judgment-based hypothesis, with BESS enclosure state costs from a related NREL cost split and full replacement at major damage; 86 % of the reference value has a curve and 14 % has none.",
+       "summary": "Hurricane wind on batteries: 3 curves for 2 parts (integrated battery enclosure and separate PCS); read against pressure ratio, (event 3-s gust ÷ declared reference 3-s gust)²; the numbers are our judgment; 86 % of the plant's value is priced.",
        "no_evaluator": false,
        "share_covered": 0.8597449908925319,
        "n_curves": 3,
@@ -3264,7 +3532,14 @@
        "aria_label": "Hurricane wind × Battery storage, live, partial, evidence: our judgment, field reports not searched",
        "href": "/cells/tropical_cyclone_wind_bess",
        "word": "our judgment",
-       "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
+       "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+       "value_split": {
+        "priced": 0.8597449908925319,
+        "partly": 0.0,
+        "no_damage": 0.0,
+        "not_priced": 0.14025500910746813,
+        "basis": "of the reference plant's value"
+       }
       },
       "convective_wind": {
        "entry_id": "convective_wind_bess",
@@ -3316,7 +3591,7 @@
         "version_key": null,
         "sha256": null
        },
-       "summary": "Convective wind on batteries has no curve yet — the BESS hurricane wind cell leaves convective wind and tornado as a separate scope, and the BESS plan lists other hazards as later work (docs/plans/bess_damage/README.md, step 6).",
+       "summary": "Convective wind on batteries has no curve yet — the battery hurricane work leaves convective wind and tornadoes for separate work, and the owner has since deferred them (Hazard's battery decisions). No evidence search has been run, and deferred does not mean zero risk.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 0,
@@ -3327,7 +3602,8 @@
        "aria_label": "Convective wind × Battery storage, gap, field reports not searched",
        "href": "/cells/convective_wind_bess",
        "word": null,
-       "halves": null
+       "halves": null,
+       "value_split": null
       },
       "wildfire": {
        "entry_id": "wildfire_bess",
@@ -3381,7 +3657,7 @@
         "sha256": "e2d5e817c6c5334ff6176a02f2e1edbf563195254239dd9eb9be530c85cdd491",
         "consumer_pin": "wildfire_bess@model_v1_0__docs_r1"
        },
-       "summary": "Wildfire on batteries: solar wildfire electrical class tables reused as judgment-based ordinal weights on FSim class, times an owner-selected consequence ($1.05M enclosure replacement, with two repair sensitivities); 86 % of the reference value has a curve and 14 % has none.",
+       "summary": "Wildfire on batteries: 7 curves for 2 parts (integrated battery enclosure and separate PCS); read against FSim fire-intensity class at the unit, exact state; the numbers are our judgment; 86 % of the plant's value is priced.",
        "no_evaluator": false,
        "share_covered": 0.8597449908925319,
        "n_curves": 7,
@@ -3392,7 +3668,48 @@
        "aria_label": "Wildfire × Battery storage, live, partial, evidence: our judgment, field reports not searched",
        "href": "/cells/wildfire_bess",
        "word": "our judgment",
-       "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
+       "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+       "value_split": {
+        "priced": 0.8597449908925319,
+        "partly": 0.0,
+        "no_damage": 0.0,
+        "not_priced": 0.14025500910746813,
+        "basis": "of the reference plant's value"
+       }
+      },
+      "heat": {
+       "entry_id": null,
+       "kind": "gap",
+       "status": "gap",
+       "title": "Heat × Battery storage",
+       "hazard": {
+        "slug": "heat",
+        "label": "Heat"
+       },
+       "asset": {
+        "slug": "bess",
+        "label": "Battery storage"
+       },
+       "tiers": {
+        "shape": "–",
+        "cost": "–"
+       },
+       "partial": false,
+       "no_evaluator": false,
+       "occurrence": {
+        "mark": "—",
+        "label": "no register"
+       },
+       "review": {
+        "review": null,
+        "entry_read_kind": null,
+        "entry_read_on": null
+       },
+       "word": null,
+       "share_covered": null,
+       "href": "/hazards/heat/bess",
+       "summary": "BESS heat: physical effects and first-screen feasibility (Hazard, 21 Oct 2026): Heat can cause lasting physical harm to batteries (an EPRI field case, LFP lab studies), but the reviewed sources do not yet support an outdoor-temperature-to-repair-cost curve for the reference plant. Heat: define the consequence before building the model (Hazard, 21 Oct 2026): Parked by the owner on 21 Oct: temporary derating, permanent ageing and acute failure need separate definitions, and working cooling should be compared with impaired cooling. No owner ruling yet. Damage's scope: a damage curve prices physical destruction only: Heat is treated as changing how an asset performs (derating, ageing), which sits outside a damage curve; disruption and derating are a separate stage. Does it happen? Leads from the battery's design (heat row, 19 Oct 2026): Heat is the strongest design lead (ageing doubles per +10 °C, chiller and converter derating) but works through performance: \"Performance, not damage — no curve.\" No field evidence was searched.",
+       "aria_label": "Battery storage, heat: no curve yet; 2 research notes in Hazard"
       }
      }
     }
@@ -3412,7 +3729,7 @@
      "label": "Residential",
      "building": "House",
      "profile": "one-storey single-family house",
-     "picture_note": null,
+     "picture_note": "The picture is the Digital Twin's model of the house and its site.",
      "href": "/assets/residential",
      "tiles": {
       "hail": {
@@ -3467,7 +3784,7 @@
         "sha256": "52cf865d4dfb8b4c593736fb05b5d3e7c341bad2a2441b89499d7e88605fef20",
         "consumer_pin": null
        },
-       "summary": "Proposal, not in the runtime index — Hail on buildings: published hail-damage thresholds by roofing material (onset and full failure) turned into a replacement probability, times the roof's share of building cost; 1 part of the asset's value has no curve.",
+       "summary": "Proposal, not in use yet. Hail on buildings: 6 curves for 6 parts; read against hazard's MESH75 hail diameter (mm); the numbers are our judgment.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 6,
@@ -3478,12 +3795,15 @@
        "aria_label": "Hail × Real estate, proposal, partial, evidence: our judgment, field reports not searched, house rows",
        "href": "/cells/hail_real_estate?building=residential",
        "word": "our judgment",
-       "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment",
+       "halves": "Damage at each hazard level: borrowed and our judgment · the dollar value it is applied to: borrowed and our judgment",
        "building": "House",
        "building_parts": [
         "House roof (asphalt shingles)",
         "House walls and windows"
-       ]
+       ],
+       "value_split": {
+        "reason": "no value budget for buildings yet"
+       }
       },
       "flood": {
        "entry_id": "flood_real_estate",
@@ -3537,7 +3857,7 @@
         "sha256": "99fe3f1f6430caada7943a4a83fe74a2f94895c8c454d7789fda97fabfafe9af",
         "consumer_pin": null
        },
-       "summary": "Proposal, not in the runtime index — Flood on buildings: FEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water).",
+       "summary": "Proposal, not in use yet. Flood on buildings: 7 curves for 4 parts; read against water depth above the first floor (ft); the numbers are published.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 7,
@@ -3548,11 +3868,14 @@
        "aria_label": "Flood × Real estate, proposal, evidence: published, field reports not searched, house rows",
        "href": "/cells/flood_real_estate?building=residential",
        "word": "published",
-       "halves": "How damage rises: published · how it becomes dollars: published",
+       "halves": "Damage at each hazard level: published · the dollar value it is applied to: published",
        "building": "House",
        "building_parts": [
         "House"
-       ]
+       ],
+       "value_split": {
+        "reason": "no value budget for buildings yet"
+       }
       },
       "hurricane_wind": {
        "entry_id": "tropical_cyclone_wind_real_estate",
@@ -3606,7 +3929,7 @@
         "sha256": "99487ff5812e6b1017eeaaeea14d469bcb15ae2265e9d6cf107ce5ca41c85753",
         "consumer_pin": null
        },
-       "summary": "Proposal, not in the runtime index — Hurricane wind on buildings: FEMA Hazus hurricane building-loss rows used as published (every 5 mph, five terrain classes) for the Hazus building type and wind characteristics matching each building.",
+       "summary": "Proposal, not in use yet. Hurricane wind on buildings: 20 curves for 4 parts; read against peak 3-second gust at 10 m in open terrain (mph); the numbers are published.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 20,
@@ -3617,11 +3940,14 @@
        "aria_label": "Hurricane wind × Real estate, proposal, evidence: published, field reports not searched, house rows",
        "href": "/cells/tropical_cyclone_wind_real_estate?building=residential",
        "word": "published",
-       "halves": "How damage rises: published · how it becomes dollars: published",
+       "halves": "Damage at each hazard level: published · the dollar value it is applied to: published",
        "building": "House",
        "building_parts": [
         "House"
-       ]
+       ],
+       "value_split": {
+        "reason": "no value budget for buildings yet"
+       }
       },
       "convective_wind": {
        "entry_id": "convective_wind_real_estate",
@@ -3675,7 +4001,7 @@
         "sha256": "e676fb077ca3fb96a1d0efce7b1e408c2a82265ec97ea2eb4ebbef7e5aeeef3d",
         "consumer_pin": null
        },
-       "summary": "Proposal, not in the runtime index — Convective wind on buildings: EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder.",
+       "summary": "Proposal, not in use yet. Convective wind on buildings: 6 curves for 3 parts (house, warehouse and office); read against 2 hazard measures; the numbers are our judgment.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 6,
@@ -3686,11 +4012,14 @@
        "aria_label": "Convective wind × Real estate, proposal, evidence: our judgment, field reports not searched, house rows",
        "href": "/cells/convective_wind_real_estate?building=residential",
        "word": "our judgment",
-       "halves": "How damage rises: borrowed · how it becomes dollars: our judgment",
+       "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
        "building": "House",
        "building_parts": [
         "House"
-       ]
+       ],
+       "value_split": {
+        "reason": "no value budget for buildings yet"
+       }
       },
       "wildfire": {
        "entry_id": "wildfire_real_estate",
@@ -3744,7 +4073,7 @@
         "sha256": "6b7c771d88b46d60e2c0b1339009ab06753f93f6376e8c8f30e40c91f31474ee",
         "consumer_pin": null
        },
-       "summary": "Proposal, not in the runtime index — Wildfire on buildings: US Forest Service home loss by flame-length class (shrub vegetation) for the house.",
+       "summary": "Proposal, not in use yet. Wildfire on buildings: 3 curves for 3 parts (house, warehouse and office); read against FSim conditional flame-length class state; the numbers are our judgment.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 3,
@@ -3755,11 +4084,48 @@
        "aria_label": "Wildfire × Real estate, proposal, evidence: our judgment, field reports not searched, house rows",
        "href": "/cells/wildfire_real_estate?building=residential",
        "word": "our judgment",
-       "halves": "How damage rises: borrowed · how it becomes dollars: our judgment",
+       "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
        "building": "House",
        "building_parts": [
         "House"
-       ]
+       ],
+       "value_split": {
+        "reason": "no value budget for buildings yet"
+       }
+      },
+      "heat": {
+       "entry_id": null,
+       "kind": "gap",
+       "status": "gap",
+       "title": "Heat × Residential",
+       "hazard": {
+        "slug": "heat",
+        "label": "Heat"
+       },
+       "asset": {
+        "slug": "real_estate",
+        "label": "Residential"
+       },
+       "tiers": {
+        "shape": "–",
+        "cost": "–"
+       },
+       "partial": false,
+       "no_evaluator": false,
+       "occurrence": {
+        "mark": "—",
+        "label": "no register"
+       },
+       "review": {
+        "review": null,
+        "entry_read_kind": null,
+        "entry_read_on": null
+       },
+       "word": null,
+       "share_covered": null,
+       "href": "/hazards/heat/residential",
+       "summary": "Damage's scope: a damage curve prices physical destruction only: Heat is treated as changing how an asset performs (derating, ageing), which sits outside a damage curve; disruption and derating are a separate stage. Does it happen? Leads from the battery's design (heat row, 19 Oct 2026): Heat is the strongest design lead (ageing doubles per +10 °C, chiller and converter derating) but works through performance: \"Performance, not damage — no curve.\" No field evidence was searched.",
+       "aria_label": "Residential, heat: no curve yet; treated as performance, not damage"
       }
      }
     },
@@ -3767,8 +4133,8 @@
      "slug": "commercial",
      "label": "Commercial",
      "building": "Office",
-     "profile": "three-storey office (the curves); retail building (the picture)",
-     "picture_note": "The picture is the twin's retail building; the curves are for the three-storey office.",
+     "profile": "three-storey office",
+     "picture_note": "The picture is the Digital Twin's model of a retail building and its site; the curves are for the three-storey office.",
      "href": "/assets/commercial",
      "tiles": {
       "hail": {
@@ -3823,7 +4189,7 @@
         "sha256": "52cf865d4dfb8b4c593736fb05b5d3e7c341bad2a2441b89499d7e88605fef20",
         "consumer_pin": null
        },
-       "summary": "Proposal, not in the runtime index — Hail on buildings: published hail-damage thresholds by roofing material (onset and full failure) turned into a replacement probability, times the roof's share of building cost; 1 part of the asset's value has no curve.",
+       "summary": "Proposal, not in use yet. Hail on buildings: 6 curves for 6 parts; read against hazard's MESH75 hail diameter (mm); the numbers are our judgment.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 6,
@@ -3834,12 +4200,15 @@
        "aria_label": "Hail × Real estate, proposal, partial, evidence: our judgment, field reports not searched, office rows",
        "href": "/cells/hail_real_estate?building=commercial",
        "word": "our judgment",
-       "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: borrowed and our judgment",
+       "halves": "Damage at each hazard level: borrowed and our judgment · the dollar value it is applied to: borrowed and our judgment",
        "building": "Office",
        "building_parts": [
         "Office roof (TPO membrane and insulation)",
         "Office windows"
-       ]
+       ],
+       "value_split": {
+        "reason": "no value budget for buildings yet"
+       }
       },
       "flood": {
        "entry_id": "flood_real_estate",
@@ -3893,7 +4262,7 @@
         "sha256": "99fe3f1f6430caada7943a4a83fe74a2f94895c8c454d7789fda97fabfafe9af",
         "consumer_pin": null
        },
-       "summary": "Proposal, not in the runtime index — Flood on buildings: FEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water).",
+       "summary": "Proposal, not in use yet. Flood on buildings: 7 curves for 4 parts; read against water depth above the first floor (ft); the numbers are published.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 7,
@@ -3904,11 +4273,14 @@
        "aria_label": "Flood × Real estate, proposal, evidence: published, field reports not searched, office rows",
        "href": "/cells/flood_real_estate?building=commercial",
        "word": "published",
-       "halves": "How damage rises: published · how it becomes dollars: published",
+       "halves": "Damage at each hazard level: published · the dollar value it is applied to: published",
        "building": "Office",
        "building_parts": [
         "Office"
-       ]
+       ],
+       "value_split": {
+        "reason": "no value budget for buildings yet"
+       }
       },
       "hurricane_wind": {
        "entry_id": "tropical_cyclone_wind_real_estate",
@@ -3962,7 +4334,7 @@
         "sha256": "99487ff5812e6b1017eeaaeea14d469bcb15ae2265e9d6cf107ce5ca41c85753",
         "consumer_pin": null
        },
-       "summary": "Proposal, not in the runtime index — Hurricane wind on buildings: FEMA Hazus hurricane building-loss rows used as published (every 5 mph, five terrain classes) for the Hazus building type and wind characteristics matching each building.",
+       "summary": "Proposal, not in use yet. Hurricane wind on buildings: 20 curves for 4 parts; read against peak 3-second gust at 10 m in open terrain (mph); the numbers are published.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 20,
@@ -3973,11 +4345,14 @@
        "aria_label": "Hurricane wind × Real estate, proposal, evidence: published, field reports not searched, office rows",
        "href": "/cells/tropical_cyclone_wind_real_estate?building=commercial",
        "word": "published",
-       "halves": "How damage rises: published · how it becomes dollars: published",
+       "halves": "Damage at each hazard level: published · the dollar value it is applied to: published",
        "building": "Office",
        "building_parts": [
         "Office"
-       ]
+       ],
+       "value_split": {
+        "reason": "no value budget for buildings yet"
+       }
       },
       "convective_wind": {
        "entry_id": "convective_wind_real_estate",
@@ -4031,7 +4406,7 @@
         "sha256": "e676fb077ca3fb96a1d0efce7b1e408c2a82265ec97ea2eb4ebbef7e5aeeef3d",
         "consumer_pin": null
        },
-       "summary": "Proposal, not in the runtime index — Convective wind on buildings: EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder.",
+       "summary": "Proposal, not in use yet. Convective wind on buildings: 6 curves for 3 parts (house, warehouse and office); read against 2 hazard measures; the numbers are our judgment.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 6,
@@ -4042,11 +4417,14 @@
        "aria_label": "Convective wind × Real estate, proposal, evidence: our judgment, field reports not searched, office rows",
        "href": "/cells/convective_wind_real_estate?building=commercial",
        "word": "our judgment",
-       "halves": "How damage rises: borrowed · how it becomes dollars: our judgment",
+       "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
        "building": "Office",
        "building_parts": [
         "Office"
-       ]
+       ],
+       "value_split": {
+        "reason": "no value budget for buildings yet"
+       }
       },
       "wildfire": {
        "entry_id": "wildfire_real_estate",
@@ -4100,7 +4478,7 @@
         "sha256": "6b7c771d88b46d60e2c0b1339009ab06753f93f6376e8c8f30e40c91f31474ee",
         "consumer_pin": null
        },
-       "summary": "Proposal, not in the runtime index — Wildfire on buildings: US Forest Service home loss by flame-length class (shrub vegetation) for the house.",
+       "summary": "Proposal, not in use yet. Wildfire on buildings: 3 curves for 3 parts (house, warehouse and office); read against FSim conditional flame-length class state; the numbers are our judgment.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 3,
@@ -4111,11 +4489,48 @@
        "aria_label": "Wildfire × Real estate, proposal, evidence: our judgment, field reports not searched, office rows",
        "href": "/cells/wildfire_real_estate?building=commercial",
        "word": "our judgment",
-       "halves": "How damage rises: borrowed · how it becomes dollars: our judgment",
+       "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
        "building": "Office",
        "building_parts": [
         "Office"
-       ]
+       ],
+       "value_split": {
+        "reason": "no value budget for buildings yet"
+       }
+      },
+      "heat": {
+       "entry_id": null,
+       "kind": "gap",
+       "status": "gap",
+       "title": "Heat × Commercial",
+       "hazard": {
+        "slug": "heat",
+        "label": "Heat"
+       },
+       "asset": {
+        "slug": "real_estate",
+        "label": "Commercial"
+       },
+       "tiers": {
+        "shape": "–",
+        "cost": "–"
+       },
+       "partial": false,
+       "no_evaluator": false,
+       "occurrence": {
+        "mark": "—",
+        "label": "no register"
+       },
+       "review": {
+        "review": null,
+        "entry_read_kind": null,
+        "entry_read_on": null
+       },
+       "word": null,
+       "share_covered": null,
+       "href": "/hazards/heat/commercial",
+       "summary": "Damage's scope: a damage curve prices physical destruction only: Heat is treated as changing how an asset performs (derating, ageing), which sits outside a damage curve; disruption and derating are a separate stage. Does it happen? Leads from the battery's design (heat row, 19 Oct 2026): Heat is the strongest design lead (ageing doubles per +10 °C, chiller and converter derating) but works through performance: \"Performance, not damage — no curve.\" No field evidence was searched.",
+       "aria_label": "Commercial, heat: no curve yet; treated as performance, not damage"
       }
      }
     },
@@ -4124,7 +4539,7 @@
      "label": "Industrial",
      "building": "Warehouse",
      "profile": "one-storey distribution warehouse",
-     "picture_note": null,
+     "picture_note": "The picture is the Digital Twin's model of the warehouse and its site.",
      "href": "/assets/industrial",
      "tiles": {
       "hail": {
@@ -4179,7 +4594,7 @@
         "sha256": "52cf865d4dfb8b4c593736fb05b5d3e7c341bad2a2441b89499d7e88605fef20",
         "consumer_pin": null
        },
-       "summary": "Proposal, not in the runtime index — Hail on buildings: published hail-damage thresholds by roofing material (onset and full failure) turned into a replacement probability, times the roof's share of building cost; 1 part of the asset's value has no curve.",
+       "summary": "Proposal, not in use yet. Hail on buildings: 6 curves for 6 parts; read against hazard's MESH75 hail diameter (mm); the numbers are our judgment.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 6,
@@ -4190,12 +4605,15 @@
        "aria_label": "Hail × Real estate, proposal, partial, evidence: our judgment, field reports not searched, warehouse rows",
        "href": "/cells/hail_real_estate?building=industrial",
        "word": "our judgment",
-       "halves": "How damage rises: borrowed and our judgment · how it becomes dollars: our judgment",
+       "halves": "Damage at each hazard level: borrowed and our judgment · the dollar value it is applied to: our judgment",
        "building": "Warehouse",
        "building_parts": [
         "Warehouse roof (standing-seam steel)",
         "Warehouse windows"
-       ]
+       ],
+       "value_split": {
+        "reason": "no value budget for buildings yet"
+       }
       },
       "flood": {
        "entry_id": "flood_real_estate",
@@ -4249,7 +4667,7 @@
         "sha256": "99fe3f1f6430caada7943a4a83fe74a2f94895c8c454d7789fda97fabfafe9af",
         "consumer_pin": null
        },
-       "summary": "Proposal, not in the runtime index — Flood on buildings: FEMA Hazus depth-damage functions used as published, one per building (house DF 129, warehouse DF 341, office DF 431, each for river and coastal still water).",
+       "summary": "Proposal, not in use yet. Flood on buildings: 7 curves for 4 parts; read against water depth above the first floor (ft); the numbers are published.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 7,
@@ -4260,11 +4678,14 @@
        "aria_label": "Flood × Real estate, proposal, evidence: published, field reports not searched, warehouse rows",
        "href": "/cells/flood_real_estate?building=industrial",
        "word": "published",
-       "halves": "How damage rises: published · how it becomes dollars: published",
+       "halves": "Damage at each hazard level: published · the dollar value it is applied to: published",
        "building": "Warehouse",
        "building_parts": [
         "Warehouse"
-       ]
+       ],
+       "value_split": {
+        "reason": "no value budget for buildings yet"
+       }
       },
       "hurricane_wind": {
        "entry_id": "tropical_cyclone_wind_real_estate",
@@ -4318,7 +4739,7 @@
         "sha256": "99487ff5812e6b1017eeaaeea14d469bcb15ae2265e9d6cf107ce5ca41c85753",
         "consumer_pin": null
        },
-       "summary": "Proposal, not in the runtime index — Hurricane wind on buildings: FEMA Hazus hurricane building-loss rows used as published (every 5 mph, five terrain classes) for the Hazus building type and wind characteristics matching each building.",
+       "summary": "Proposal, not in use yet. Hurricane wind on buildings: 20 curves for 4 parts; read against peak 3-second gust at 10 m in open terrain (mph); the numbers are published.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 20,
@@ -4329,11 +4750,14 @@
        "aria_label": "Hurricane wind × Real estate, proposal, evidence: published, field reports not searched, warehouse rows",
        "href": "/cells/tropical_cyclone_wind_real_estate?building=industrial",
        "word": "published",
-       "halves": "How damage rises: published · how it becomes dollars: published",
+       "halves": "Damage at each hazard level: published · the dollar value it is applied to: published",
        "building": "Warehouse",
        "building_parts": [
         "Warehouse"
-       ]
+       ],
+       "value_split": {
+        "reason": "no value budget for buildings yet"
+       }
       },
       "convective_wind": {
        "entry_id": "convective_wind_real_estate",
@@ -4387,7 +4811,7 @@
         "sha256": "e676fb077ca3fb96a1d0efce7b1e408c2a82265ec97ea2eb4ebbef7e5aeeef3d",
         "consumer_pin": null
        },
-       "summary": "Proposal, not in the runtime index — Convective wind on buildings: EF tornado-scale damage steps for each building type, each priced on FEMA's Hazus damage-state cost ladder.",
+       "summary": "Proposal, not in use yet. Convective wind on buildings: 6 curves for 3 parts (house, warehouse and office); read against 2 hazard measures; the numbers are our judgment.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 6,
@@ -4398,11 +4822,14 @@
        "aria_label": "Convective wind × Real estate, proposal, evidence: our judgment, field reports not searched, warehouse rows",
        "href": "/cells/convective_wind_real_estate?building=industrial",
        "word": "our judgment",
-       "halves": "How damage rises: borrowed · how it becomes dollars: our judgment",
+       "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
        "building": "Warehouse",
        "building_parts": [
         "Warehouse"
-       ]
+       ],
+       "value_split": {
+        "reason": "no value budget for buildings yet"
+       }
       },
       "wildfire": {
        "entry_id": "wildfire_real_estate",
@@ -4456,7 +4883,7 @@
         "sha256": "6b7c771d88b46d60e2c0b1339009ab06753f93f6376e8c8f30e40c91f31474ee",
         "consumer_pin": null
        },
-       "summary": "Proposal, not in the runtime index — Wildfire on buildings: US Forest Service home loss by flame-length class (shrub vegetation) for the house.",
+       "summary": "Proposal, not in use yet. Wildfire on buildings: 3 curves for 3 parts (house, warehouse and office); read against FSim conditional flame-length class state; the numbers are our judgment.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 3,
@@ -4467,11 +4894,48 @@
        "aria_label": "Wildfire × Real estate, proposal, evidence: our judgment, field reports not searched, warehouse rows",
        "href": "/cells/wildfire_real_estate?building=industrial",
        "word": "our judgment",
-       "halves": "How damage rises: borrowed · how it becomes dollars: our judgment",
+       "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
        "building": "Warehouse",
        "building_parts": [
         "Warehouse"
-       ]
+       ],
+       "value_split": {
+        "reason": "no value budget for buildings yet"
+       }
+      },
+      "heat": {
+       "entry_id": null,
+       "kind": "gap",
+       "status": "gap",
+       "title": "Heat × Industrial",
+       "hazard": {
+        "slug": "heat",
+        "label": "Heat"
+       },
+       "asset": {
+        "slug": "real_estate",
+        "label": "Industrial"
+       },
+       "tiers": {
+        "shape": "–",
+        "cost": "–"
+       },
+       "partial": false,
+       "no_evaluator": false,
+       "occurrence": {
+        "mark": "—",
+        "label": "no register"
+       },
+       "review": {
+        "review": null,
+        "entry_read_kind": null,
+        "entry_read_on": null
+       },
+       "word": null,
+       "share_covered": null,
+       "href": "/hazards/heat/industrial",
+       "summary": "Damage's scope: a damage curve prices physical destruction only: Heat is treated as changing how an asset performs (derating, ageing), which sits outside a damage curve; disruption and derating are a separate stage. Does it happen? Leads from the battery's design (heat row, 19 Oct 2026): Heat is the strongest design lead (ageing doubles per +10 °C, chiller and converter derating) but works through performance: \"Performance, not damage — no curve.\" No field evidence was searched.",
+       "aria_label": "Industrial, heat: no curve yet; treated as performance, not damage"
       }
      }
     }
@@ -4491,7 +4955,7 @@
      "label": "Substation",
      "building": null,
      "profile": "345/138 kV transmission substation, the fenced station",
-     "picture_note": null,
+     "picture_note": "The picture is the Digital Twin's model of the fenced station.",
      "href": "/assets/substation",
      "tiles": {
       "hail": {
@@ -4544,7 +5008,7 @@
         "version_key": null,
         "sha256": null
        },
-       "summary": "Hail on substations has no curve yet — hail was excluded from the first substation delivery and no station hail response was found in the reviewed curves; missing evidence is not zero risk (docs/extra/discussion/substation_damage/05_cross_hazard_reuse_inventory.md).",
+       "summary": "Hail on substations has no curve yet — the owner left hail out of the first substation work. Only the curves already in this repository were checked, and none fits a substation; no outside search has been done. That is not a finding of no risk.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 0,
@@ -4555,7 +5019,8 @@
        "aria_label": "Hail × Substation, gap, field reports not searched",
        "href": "/cells/hail_substation",
        "word": null,
-       "halves": null
+       "halves": null,
+       "value_split": null
       },
       "flood": {
        "entry_id": "flood_substation",
@@ -4609,7 +5074,7 @@
         "sha256": "f001eb0191439a1345a7a794995c684ef731f777c4b3e1eff0298de592999f30",
         "consumer_pin": "flood_substation@model_v1_0__docs_r1"
        },
-       "summary": "Flood on substations: FEMA Hazus-MH 2.1 Table 7.9 whole-substation depth-damage ratios used as published (0 to 15% over 0 to 10 ft), the same table already carried by the flood_wind cell.",
+       "summary": "Flood on substations: 1 curve for 1 part (whole station (fenced assembly)); read against water depth above station grade (ft) at the facility point; the numbers are our judgment; 100 % of the station's value is priced.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 1,
@@ -4620,7 +5085,14 @@
        "aria_label": "Flood × Substation, live, evidence: our judgment, field reports not searched",
        "href": "/cells/flood_substation",
        "word": "our judgment",
-       "halves": "How damage rises: borrowed · how it becomes dollars: our judgment"
+       "halves": "Damage at each hazard level: borrowed · the dollar value it is applied to: our judgment",
+       "value_split": {
+        "priced": 0.9999999999999999,
+        "partly": 0.0,
+        "no_damage": 0.0,
+        "not_priced": 0.0,
+        "basis": "of the reference station's budget"
+       }
       },
       "hurricane_wind": {
        "entry_id": "substation_hurricane_screening_v1",
@@ -4675,7 +5147,7 @@
         "source_artifact_sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
         "sha256": "4a5e994b4ef8cde8629bba765f1643190ce49e31cf045dbcf36adaf05a8f4773"
        },
-       "summary": "Hurricane wind on substations reuses another cell's curve: the canonical solar TC-wind GSU/substation assembly curve is already separate from the solar array, so it is reused for the standalone station without inventing a solar plant (see docs/contracts/hazard_handoff/substation_hurricane_screening_v1/README.md).",
+       "summary": "Hurricane wind on substations: 1 curve for 1 part (GSU and substation), borrowed from Hurricane wind × Solar farm; read against site-facility demand ratio (event / design pressure); the numbers are our judgment; 100 % of the station's value is priced.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 0,
@@ -4686,7 +5158,14 @@
        "aria_label": "Hurricane wind × Substation, reused, evidence: our judgment, field reports not searched",
        "href": "/cells/substation_hurricane_screening_v1",
        "word": "our judgment",
-       "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
+       "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+       "value_split": {
+        "priced": 0.9999999999999999,
+        "partly": 0.0,
+        "no_damage": 0.0,
+        "not_priced": 0.0,
+        "basis": "of the reference station's budget"
+       }
       },
       "convective_wind": {
        "entry_id": "substation_convective_wind_screening_v1",
@@ -4741,7 +5220,7 @@
         "source_artifact_sha256": "2fbc34fbf8f91df408fe1b3c8d01d260d013119cbcba594b6a9a60044cd2113e",
         "sha256": "5afa3f9cd31ee52092762bdb505fbc4c24c02ed2420d1be67c448e6441383be0"
        },
-       "summary": "Convective wind on substations reuses another cell's curve: same station assembly and same direct aerodynamic loading on a squared 3-second gust ratio, so the hurricane GSU/substation curve is reused as a judgment-based cross-hazard proxy for direct wind only (see docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/README.md).",
+       "summary": "Convective wind on substations: 1 curve for 1 part (GSU and substation), borrowed from Hurricane wind × Solar farm; read against site-facility demand ratio (event / design pressure); the numbers are our judgment; 100 % of the station's value is priced.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 0,
@@ -4752,7 +5231,14 @@
        "aria_label": "Convective wind × Substation, reused, evidence: our judgment, field reports not searched",
        "href": "/cells/substation_convective_wind_screening_v1",
        "word": "our judgment",
-       "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
+       "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+       "value_split": {
+        "priced": 0.9999999999999999,
+        "partly": 0.0,
+        "no_damage": 0.0,
+        "not_priced": 0.0,
+        "basis": "of the reference station's budget"
+       }
       },
       "wildfire": {
        "entry_id": "substation_wildfire_screening_v1",
@@ -4807,7 +5293,7 @@
         "source_artifact_sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
         "sha256": "10742caaf6e4622f72b2572db08d3fc4cc4dc92ca58746ad0928cabad4be5e48"
        },
-       "summary": "Wildfire on substations reuses another cell's curve: the canonical solar wildfire transformer/switchgear (MV equipment) response is reused once for the station's transformer and switchgear equipment as a judgment-based assembly transfer (see docs/contracts/hazard_handoff/substation_wildfire_screening_v1/README.md); 1 part of the asset's value has no curve.",
+       "summary": "Wildfire on substations: 1 curve for 1 part (transformers and switchgear), borrowed from Wildfire × Solar farm; read against FSim conditional flame-length class (0 = no event); the numbers are our judgment; 0 % of the station's value is priced, 65 % partly.",
        "no_evaluator": false,
        "share_covered": null,
        "n_curves": 0,
@@ -4818,7 +5304,48 @@
        "aria_label": "Wildfire × Substation, reused, partial, evidence: our judgment, field reports not searched",
        "href": "/cells/substation_wildfire_screening_v1",
        "word": "our judgment",
-       "halves": "How damage rises: our judgment · how it becomes dollars: our judgment"
+       "halves": "Damage at each hazard level: our judgment · the dollar value it is applied to: our judgment",
+       "value_split": {
+        "priced": 0.0,
+        "partly": 0.6479665016297036,
+        "no_damage": 0.0,
+        "not_priced": 0.3520334983702963,
+        "basis": "of the reference station's budget"
+       }
+      },
+      "heat": {
+       "entry_id": null,
+       "kind": "gap",
+       "status": "gap",
+       "title": "Heat × Substation",
+       "hazard": {
+        "slug": "heat",
+        "label": "Heat"
+       },
+       "asset": {
+        "slug": "substation",
+        "label": "Substation"
+       },
+       "tiers": {
+        "shape": "–",
+        "cost": "–"
+       },
+       "partial": false,
+       "no_evaluator": false,
+       "occurrence": {
+        "mark": "—",
+        "label": "no register"
+       },
+       "review": {
+        "review": null,
+        "entry_read_kind": null,
+        "entry_read_on": null
+       },
+       "word": null,
+       "share_covered": null,
+       "href": "/hazards/heat/substation",
+       "summary": "Damage's scope: a damage curve prices physical destruction only: Heat is treated as changing how an asset performs (derating, ageing), which sits outside a damage curve; disruption and derating are a separate stage. Does it happen? Leads from the battery's design (heat row, 19 Oct 2026): Heat is the strongest design lead (ageing doubles per +10 °C, chiller and converter derating) but works through performance: \"Performance, not damage — no curve.\" No field evidence was searched.",
+       "aria_label": "Substation, heat: no curve yet; treated as performance, not damage"
       }
      }
     }
@@ -4833,240 +5360,16 @@
    "types": []
   }
  ],
+ "scope_line": "across 7 asset types in 3 categories and 6 hazards",
  "state_words": {
-  "curve": "Has a damage curve",
-  "conditioner": "Changes the curve, no curve of its own",
-  "no_curve": "In the value, no curve yet",
-  "no_direct_damage": "Reviewed: no direct damage",
-  "outside": "Outside the value this curve prices"
+  "curve": "has a curve",
+  "conditioner": "changes another curve",
+  "no_curve": "no curve yet",
+  "no_direct_damage": "no direct damage",
+  "outside": "not priced by this curve"
  },
  "review": {
   "cells": [
-   {
-    "entry_id": "tropical_cyclone_wind_solar",
-    "title": "Hurricane wind × Solar farm",
-    "status": "live",
-    "href": "/cells/tropical_cyclone_wind_solar",
-    "types": [
-     "Solar farm"
-    ],
-    "category": "Power plants",
-    "read": {
-     "kind": "agent",
-     "by": "Agent-drafted, from the cell's own tier table, source register and decision log",
-     "on": "2026-10-19"
-    },
-    "review": null,
-    "release_review": "reviewed owner approved screening release",
-    "field": "not searched",
-    "words": "Not yet reviewed by a person",
-    "tasks": [
-     {
-      "kind": "sources_locator_only",
-      "text": "Add a link to 1 source that only has a locator",
-      "items": [],
-      "href": "/cells/tropical_cyclone_wind_solar?step=numbers"
-     },
-     {
-      "kind": "source_ids",
-      "text": "Fix 2 source-ID references that point at nothing in the register",
-      "items": [
-       "claim TCWS21-C002 → TCWS2-S013",
-       "claim TCWS21-C004 → TCWS2-S013"
-      ],
-      "href": "/cells/tropical_cyclone_wind_solar?step=numbers"
-     },
-     {
-      "kind": "hazard_moved",
-      "text": "Update 1 Hazard path: moved on Hazard's main",
-      "items": [
-       "Notebooks/hurricane/solar/m3_damage/01_damage.py → Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py"
-      ],
-      "href": "/cells/tropical_cyclone_wind_solar?step=numbers"
-     },
-     {
-      "kind": "crosswalk_confirm",
-      "text": "Confirm 3 parts of the coverage picture the cell does not name",
-      "items": [
-       "Solar farm: Grounding — Grounding is not named by the cell",
-       "Solar farm: Gen-Tie Line — The gen-tie line is not named by the cell",
-       "Solar farm: POI Switchyard — The point-of-interconnection switchyard is not named by the cell"
-      ],
-      "href": "/cells/tropical_cyclone_wind_solar?step=covers"
-     }
-    ]
-   },
-   {
-    "entry_id": "wildfire_solar",
-    "title": "Wildfire × Solar farm",
-    "status": "live",
-    "href": "/cells/wildfire_solar",
-    "types": [
-     "Solar farm"
-    ],
-    "category": "Power plants",
-    "read": {
-     "kind": "agent",
-     "by": "Agent-drafted, from the cell's own tier table, source registers and capability declaration",
-     "on": "2026-10-19"
-    },
-    "review": null,
-    "release_review": "reviewed",
-    "field": "not searched",
-    "words": "Not yet reviewed by a person",
-    "tasks": [
-     {
-      "kind": "source_without_link",
-      "text": "Give 1 source a link or a locator",
-      "items": [
-       "SOURCE_REVIEW_2026_07_09 — Wildfire × solar bounded public-evidence review and reproducibility log; review date 2026-07-09."
-      ],
-      "href": "/cells/wildfire_solar?step=numbers"
-     },
-     {
-      "kind": "source_ids",
-      "text": "Fix 10 source-ID references that point at nothing in the register",
-      "items": [
-       "parameter relative radiant/convective severity ordering → FRANKMAN_2012_WILDLAND_HEAT",
-       "parameter relative radiant/convective severity ordering → BUTLER_2010_CROWN_HEAT",
-       "parameter relative radiant/convective severity ordering → MUELLER_2018_FIELD_FIRE",
-       "parameter module state-table ordinates → KIEE_JANG_2026_WILDFIRE_PV",
-       "parameter racking and foundation state-table ordinates → FRANKMAN_2012_WILDLAND_HEAT",
-       "parameter electrical and control state-table ordinates → NEMA_GD2_2016",
-       "parameter electrical and control state-table ordinates → YONHAP_UISEONG_PV_2025",
-       "parameter exposed cable state-table ordinates → NEMA_GD2_2016",
-       "parameter grounding and civil state-table ordinates → NEMA_GD2_2016",
-       "parameter grounding and civil state-table ordinates → FM_DS_7_106_2026"
-      ],
-      "href": "/cells/wildfire_solar?step=numbers"
-     },
-     {
-      "kind": "crosswalk_confirm",
-      "text": "Confirm 2 parts of the coverage picture the cell does not name",
-      "items": [
-       "Solar farm: Gen-Tie Line — The gen-tie line is not named by the cell",
-       "Solar farm: POI Switchyard — The point-of-interconnection switchyard is not named by the cell"
-      ],
-      "href": "/cells/wildfire_solar?step=covers"
-     }
-    ]
-   },
-   {
-    "entry_id": "flood_bess",
-    "title": "Flood × Battery storage",
-    "status": "live",
-    "href": "/cells/flood_bess",
-    "types": [
-     "Battery storage"
-    ],
-    "category": "Power plants",
-    "read": {
-     "kind": "agent",
-     "by": "Agent-drafted, from the cell's own tier table, capability and decision log",
-     "on": "2026-10-19"
-    },
-    "review": null,
-    "release_review": null,
-    "field": "not searched",
-    "words": "Not yet reviewed by a person",
-    "tasks": [
-     {
-      "kind": "sources_locator_only",
-      "text": "Add a link to 2 sources that only have a locator",
-      "items": [],
-      "href": "/cells/flood_bess?step=numbers"
-     },
-     {
-      "kind": "hazard_branch",
-      "text": "1 Hazard file is on a Hazard branch, not on its main yet",
-      "items": [
-       "docs/plans/_cross_cutting/bess_conus"
-      ],
-      "href": "/cells/flood_bess?step=numbers"
-     }
-    ]
-   },
-   {
-    "entry_id": "flood_solar",
-    "title": "Flood × Solar farm",
-    "status": "live",
-    "href": "/cells/flood_solar",
-    "types": [
-     "Solar farm"
-    ],
-    "category": "Power plants",
-    "read": {
-     "kind": "agent",
-     "by": "Agent-drafted, from the cell's own tier table and capability declaration",
-     "on": "2026-10-19"
-    },
-    "review": null,
-    "release_review": null,
-    "field": "not searched",
-    "words": "Not yet reviewed by a person",
-    "tasks": [
-     {
-      "kind": "tier_id_unmatched",
-      "text": "Match 1 tier-table source ID to a document",
-      "items": [
-       "ANZGEO_2023_SCOUR_CONTEXT"
-      ],
-      "href": "/cells/flood_solar?step=numbers"
-     },
-     {
-      "kind": "crosswalk_confirm",
-      "text": "Confirm 6 parts of the coverage picture the cell does not name",
-      "items": [
-       "Solar farm: Drive & Control — Tracker drives and controllers are not named by the cell",
-       "Solar farm: Grounding — Grounding is not named by the cell",
-       "Solar farm: Met Station — The met station is not named by the cell",
-       "Solar farm: Fiber Network — The fibre network is not named by the cell",
-       "Solar farm: Gen-Tie Line — The gen-tie line is not named by the cell",
-       "Solar farm: POI Switchyard — The point-of-interconnection switchyard is not named by the cell"
-      ],
-      "href": "/cells/flood_solar?step=covers"
-     }
-    ]
-   },
-   {
-    "entry_id": "flood_wind",
-    "title": "Flood × Wind farm",
-    "status": "live",
-    "href": "/cells/flood_wind",
-    "types": [
-     "Wind farm"
-    ],
-    "category": "Power plants",
-    "read": {
-     "kind": "agent",
-     "by": "Agent-drafted, from the cell's own tier table and release decision",
-     "on": "2026-10-19"
-    },
-    "review": null,
-    "release_review": "reviewed screening release",
-    "field": "not searched",
-    "words": "Not yet reviewed by a person",
-    "tasks": [
-     {
-      "kind": "hazard_moved",
-      "text": "Update 2 Hazard paths: moved on Hazard's main",
-      "items": [
-       "Notebooks/flood/wind_farm/m3_damage/01_damage.py → Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
-       "Notebooks/flood/wind_farm/m4_loss_metrics/01_loss_metrics.py → Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py"
-      ],
-      "href": "/cells/flood_wind?step=numbers"
-     },
-     {
-      "kind": "crosswalk_confirm",
-      "text": "Confirm 2 parts of the coverage picture the cell does not name",
-      "items": [
-       "Wind farm: Gen-Tie Line — The gen-tie line is not named by the cell",
-       "Wind farm: POI Switchyard — The point-of-interconnection switchyard is not named by the cell"
-      ],
-      "href": "/cells/flood_wind?step=covers"
-     }
-    ]
-   },
    {
     "entry_id": "hail_solar",
     "title": "Hail × Solar farm",
@@ -5093,6 +5396,15 @@
       "href": "/cells/hail_solar?step=numbers"
      },
      {
+      "kind": "hazard_differs",
+      "text": "Differs in Hazard's dashboard: what its layers used is not what this page shows",
+      "items": [
+       "Hazard's dashboard layer Hail × Solar uses model v1.0, docs r5; this page shows model v1.0, docs r7. Its 3 curves are identical to the ones shown here; PV_MODULE_GLASS_CELL's value share of installed capex is none in Hazard's version, 26.00% here; PV_MODULE_GLASS_CELL's value share of the physical base is none in Hazard's version, 33.18% here.",
+       "Hazard multiplies PV_MODULE_GLASS_CELL by 35.54% of installed value (PV module hardware plus replacement fieldwork: $398,084 / $1,120,000, runtime-rounded to 0.3554); the artifact shown here declares 26.00% of installed capex."
+      ],
+      "href": "/cells/hail_solar"
+     },
+     {
       "kind": "crosswalk_confirm",
       "text": "Confirm 4 parts of the coverage picture the cell does not name",
       "items": [
@@ -5106,10 +5418,55 @@
     ]
    },
    {
-    "entry_id": "tropical_cyclone_wind_bess",
-    "title": "Hurricane wind × Battery storage",
+    "entry_id": "tropical_cyclone_wind_solar",
+    "title": "Hurricane wind × Solar farm",
     "status": "live",
-    "href": "/cells/tropical_cyclone_wind_bess",
+    "href": "/cells/tropical_cyclone_wind_solar",
+    "types": [
+     "Solar farm"
+    ],
+    "category": "Power plants",
+    "read": {
+     "kind": "agent",
+     "by": "Agent-drafted, from the cell's own tier table, source register and decision log",
+     "on": "2026-10-19"
+    },
+    "review": null,
+    "release_review": "reviewed owner approved screening release",
+    "field": "not searched",
+    "words": "Not yet reviewed by a person",
+    "tasks": [
+     {
+      "kind": "sources_locator_only",
+      "text": "Add a link to 1 source that only has a locator",
+      "items": [],
+      "href": "/cells/tropical_cyclone_wind_solar?step=numbers"
+     },
+     {
+      "kind": "hazard_moved",
+      "text": "1 Hazard path is not on Hazard's main at the path cited; moved on main",
+      "items": [
+       "Notebooks/hurricane/solar/m3_damage/01_damage.py → Notebooks/hurricane/solar/_archive/pre_structured_deep_m2_m4/m3_damage/01_damage.py"
+      ],
+      "href": "/cells/tropical_cyclone_wind_solar?step=numbers"
+     },
+     {
+      "kind": "crosswalk_confirm",
+      "text": "Confirm 3 parts of the coverage picture the cell does not name",
+      "items": [
+       "Solar farm: Grounding — Grounding is not named by the cell",
+       "Solar farm: Gen-Tie Line — The gen-tie line is not named by the cell",
+       "Solar farm: POI Switchyard — The point-of-interconnection switchyard is not named by the cell"
+      ],
+      "href": "/cells/tropical_cyclone_wind_solar?step=covers"
+     }
+    ]
+   },
+   {
+    "entry_id": "flood_bess",
+    "title": "Flood × Battery storage",
+    "status": "live",
+    "href": "/cells/flood_bess",
     "types": [
      "Battery storage"
     ],
@@ -5120,7 +5477,7 @@
      "on": "2026-10-19"
     },
     "review": null,
-    "release_review": "same author with independent numerical methods",
+    "release_review": null,
     "field": "not searched",
     "words": "Not yet reviewed by a person",
     "tasks": [
@@ -5128,101 +5485,54 @@
       "kind": "sources_locator_only",
       "text": "Add a link to 1 source that only has a locator",
       "items": [],
-      "href": "/cells/tropical_cyclone_wind_bess?step=numbers"
+      "href": "/cells/flood_bess?step=numbers"
      },
      {
       "kind": "hazard_branch",
-      "text": "2 Hazard files are on a Hazard branch, not on its main yet",
+      "text": "1 Hazard file is not on Hazard's main, only on a Hazard branch",
       "items": [
-       "docs/plans/_cross_cutting/bess_conus",
-       "perils/hurricane/src/hurricane/resources/substation_screening/binding.json"
+       "docs/plans/_cross_cutting/bess_conus (branch codex/bess-conus)"
       ],
-      "href": "/cells/tropical_cyclone_wind_bess?step=numbers"
+      "href": "/cells/flood_bess?step=numbers"
      }
     ]
    },
    {
-    "entry_id": "tropical_cyclone_wind_wind",
-    "title": "Hurricane wind × Wind farm",
+    "entry_id": "flood_wind",
+    "title": "Flood × Wind farm",
     "status": "live",
-    "href": "/cells/tropical_cyclone_wind_wind",
+    "href": "/cells/flood_wind",
     "types": [
      "Wind farm"
     ],
     "category": "Power plants",
     "read": {
      "kind": "agent",
-     "by": "Agent-drafted, from the cell's own tier table and decision log",
+     "by": "Agent-drafted, from the cell's own tier table and release decision",
      "on": "2026-10-19"
     },
     "review": null,
-    "release_review": "reviewed owner approved tower only screening release",
+    "release_review": "reviewed screening release",
     "field": "not searched",
     "words": "Not yet reviewed by a person",
     "tasks": [
      {
-      "kind": "source_without_link",
-      "text": "Give 4 sources a link or a locator",
+      "kind": "hazard_moved",
+      "text": "2 Hazard paths are not on Hazard's main at the path cited; moved on main",
       "items": [
-       "JAIMES_2020_TC_WIND_TURBINE — unchanged 3.3 MW/100 m curve and source-native axis",
-       "OWNER_SCOPE_CORRECTION_2026_08_14 — authorizes a tower-only 0.16 value binding",
-       "CONUS_WIND_FARM_REFERENCE_V1 — 20×5 MW, 100 MW, $140M; tower share 0.16",
-       "HAZARD_HURRICANE_WIND_FARM_EAL_REVIEW_2026_08_14 — diagnoses 0.63 failure-unit/value mismatch"
+       "Notebooks/flood/wind_farm/m3_damage/01_damage.py → Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m3_damage/01_damage.py",
+       "Notebooks/flood/wind_farm/m4_loss_metrics/01_loss_metrics.py → Notebooks/flood/_archive/legacy_multi_subperil/wind_farm/m4_loss_metrics/01_loss_metrics.py"
       ],
-      "href": "/cells/tropical_cyclone_wind_wind?step=numbers"
+      "href": "/cells/flood_wind?step=numbers"
      },
      {
-      "kind": "source_ids",
-      "text": "Fix 10 source-ID references that point at nothing in the register",
+      "kind": "crosswalk_confirm",
+      "text": "Confirm 2 parts of the coverage picture the cell does not name",
       "items": [
-       "parameter Eq. 1 structural-response shape and fitted archetype parameters → TCWW-S005",
-       "parameter V_zero_kmh = 90 → TCWW-S005",
-       "parameter DS1/DS2/DS3 economic consequence ratios → TCWW-S005",
-       "parameter source model assumption set → TCWW-S005",
-       "parameter source-native denominator quarantine → TCWW-S005",
-       "parameter source-native denominator quarantine → TCWW-S010",
-       "parameter source-native denominator quarantine → GOVERNANCE_CONTRACT",
-       "parameter all non-source-native failure units → TCWW-S008",
-       "parameter all non-source-native failure units → TCWW-S014",
-       "parameter all non-source-native failure units → GOVERNANCE_CONTRACT"
+       "Wind farm: Gen-Tie Line — The gen-tie line is not named by the cell",
+       "Wind farm: POI Switchyard — The point-of-interconnection switchyard is not named by the cell"
       ],
-      "href": "/cells/tropical_cyclone_wind_wind?step=numbers"
-     }
-    ]
-   },
-   {
-    "entry_id": "wildfire_bess",
-    "title": "Wildfire × Battery storage",
-    "status": "live",
-    "href": "/cells/wildfire_bess",
-    "types": [
-     "Battery storage"
-    ],
-    "category": "Power plants",
-    "read": {
-     "kind": "agent",
-     "by": "Agent-drafted, from the cell's own tier table, capability and decision log",
-     "on": "2026-10-19"
-    },
-    "review": null,
-    "release_review": "same author with independent numerical methods",
-    "field": "not searched",
-    "words": "Not yet reviewed by a person",
-    "tasks": [
-     {
-      "kind": "sources_locator_only",
-      "text": "Add a link to 1 source that only has a locator",
-      "items": [],
-      "href": "/cells/wildfire_bess?step=numbers"
-     },
-     {
-      "kind": "hazard_branch",
-      "text": "2 Hazard files are on a Hazard branch, not on its main yet",
-      "items": [
-       "docs/plans/_cross_cutting/bess_conus",
-       "perils/wildfire/src/wildfire/substation.py"
-      ],
-      "href": "/cells/wildfire_bess?step=numbers"
+      "href": "/cells/flood_wind?step=covers"
      }
     ]
    },
@@ -5282,12 +5592,13 @@
     "words": "Not yet reviewed by a person",
     "tasks": [
      {
-      "kind": "tier_id_unmatched",
-      "text": "Match 1 tier-table source ID to a document",
+      "kind": "hazard_label",
+      "text": "Confirm the hazard label: the catalogue files this cell under “Convective wind”; the cell's own name says “strong wind”",
       "items": [
-       "WIND_PRESSURE_PHYSICS"
+       "cell folder: strong_wind_solar",
+       "“Convective wind” is a disputed label; it is flagged here, not renamed"
       ],
-      "href": "/cells/strong_wind_solar?step=numbers"
+      "href": "/cells/strong_wind_solar"
      }
     ]
    },
@@ -5311,12 +5622,137 @@
     "words": "Not yet reviewed by a person",
     "tasks": [
      {
-      "kind": "tier_id_unmatched",
-      "text": "Match 1 tier-table source ID to a document",
+      "kind": "hazard_label",
+      "text": "Confirm the hazard label: the catalogue files this cell under “Convective wind”; the cell's own name says “wind tornado”",
       "items": [
-       "AWN_15_DECLARED_BRIDGE"
+       "cell folder: wind_tornado_wind",
+       "“Convective wind” is a disputed label; it is flagged here, not renamed"
       ],
-      "href": "/cells/wind_tornado_wind?step=numbers"
+      "href": "/cells/wind_tornado_wind"
+     }
+    ]
+   },
+   {
+    "entry_id": "flood_solar",
+    "title": "Flood × Solar farm",
+    "status": "live",
+    "href": "/cells/flood_solar",
+    "types": [
+     "Solar farm"
+    ],
+    "category": "Power plants",
+    "read": {
+     "kind": "agent",
+     "by": "Agent-drafted, from the cell's own tier table and capability declaration",
+     "on": "2026-10-19"
+    },
+    "review": null,
+    "release_review": null,
+    "field": "not searched",
+    "words": "Not yet reviewed by a person",
+    "tasks": [
+     {
+      "kind": "crosswalk_confirm",
+      "text": "Confirm 6 parts of the coverage picture the cell does not name",
+      "items": [
+       "Solar farm: Drive & Control — Tracker drives and controllers are not named by the cell",
+       "Solar farm: Grounding — Grounding is not named by the cell",
+       "Solar farm: Met Station — The met station is not named by the cell",
+       "Solar farm: Fiber Network — The fibre network is not named by the cell",
+       "Solar farm: Gen-Tie Line — The gen-tie line is not named by the cell",
+       "Solar farm: POI Switchyard — The point-of-interconnection switchyard is not named by the cell"
+      ],
+      "href": "/cells/flood_solar?step=covers"
+     }
+    ]
+   },
+   {
+    "entry_id": "tropical_cyclone_wind_bess",
+    "title": "Hurricane wind × Battery storage",
+    "status": "live",
+    "href": "/cells/tropical_cyclone_wind_bess",
+    "types": [
+     "Battery storage"
+    ],
+    "category": "Power plants",
+    "read": {
+     "kind": "agent",
+     "by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+     "on": "2026-10-19"
+    },
+    "review": null,
+    "release_review": "same author with independent numerical methods",
+    "field": "not searched",
+    "words": "Not yet reviewed by a person",
+    "tasks": [
+     {
+      "kind": "hazard_branch",
+      "text": "2 Hazard files are not on Hazard's main, only on a Hazard branch",
+      "items": [
+       "docs/plans/_cross_cutting/bess_conus (branch codex/bess-conus)",
+       "perils/hurricane/src/hurricane/resources/substation_screening/binding.json (branch claude/policy-preview-hosted)"
+      ],
+      "href": "/cells/tropical_cyclone_wind_bess?step=numbers"
+     }
+    ]
+   },
+   {
+    "entry_id": "wildfire_bess",
+    "title": "Wildfire × Battery storage",
+    "status": "live",
+    "href": "/cells/wildfire_bess",
+    "types": [
+     "Battery storage"
+    ],
+    "category": "Power plants",
+    "read": {
+     "kind": "agent",
+     "by": "Agent-drafted, from the cell's own tier table, capability and decision log",
+     "on": "2026-10-19"
+    },
+    "review": null,
+    "release_review": "same author with independent numerical methods",
+    "field": "not searched",
+    "words": "Not yet reviewed by a person",
+    "tasks": [
+     {
+      "kind": "hazard_branch",
+      "text": "2 Hazard files are not on Hazard's main, only on a Hazard branch",
+      "items": [
+       "docs/plans/_cross_cutting/bess_conus (branch codex/bess-conus)",
+       "perils/wildfire/src/wildfire/substation.py (branch claude/policy-preview-hosted)"
+      ],
+      "href": "/cells/wildfire_bess?step=numbers"
+     }
+    ]
+   },
+   {
+    "entry_id": "wildfire_solar",
+    "title": "Wildfire × Solar farm",
+    "status": "live",
+    "href": "/cells/wildfire_solar",
+    "types": [
+     "Solar farm"
+    ],
+    "category": "Power plants",
+    "read": {
+     "kind": "agent",
+     "by": "Agent-drafted, from the cell's own tier table, source registers and capability declaration",
+     "on": "2026-10-19"
+    },
+    "review": null,
+    "release_review": "reviewed",
+    "field": "not searched",
+    "words": "Not yet reviewed by a person",
+    "tasks": [
+     {
+      "kind": "crosswalk_confirm",
+      "text": "Confirm 2 parts of the coverage picture the cell does not name",
+      "items": [
+       "Solar farm: Gen-Tie Line — The gen-tie line is not named by the cell",
+       "Solar farm: POI Switchyard — The point-of-interconnection switchyard is not named by the cell"
+      ],
+      "href": "/cells/wildfire_solar?step=covers"
      }
     ]
    },
@@ -5381,6 +5817,26 @@
     "tasks": []
    },
    {
+    "entry_id": "tropical_cyclone_wind_wind",
+    "title": "Hurricane wind × Wind farm",
+    "status": "live",
+    "href": "/cells/tropical_cyclone_wind_wind",
+    "types": [
+     "Wind farm"
+    ],
+    "category": "Power plants",
+    "read": {
+     "kind": "agent",
+     "by": "Agent-drafted, from the cell's own tier table and decision log",
+     "on": "2026-10-19"
+    },
+    "review": null,
+    "release_review": "reviewed owner approved tower only screening release",
+    "field": "not searched",
+    "words": "Not yet reviewed by a person",
+    "tasks": []
+   },
+   {
     "entry_id": "hail_real_estate",
     "title": "Hail × Real estate",
     "status": "proposal",
@@ -5406,6 +5862,14 @@
       "text": "Add a link to 1 source that only has a locator",
       "items": [],
       "href": "/cells/hail_real_estate?step=numbers"
+     },
+     {
+      "kind": "hazard_differs",
+      "text": "Differs in Hazard's dashboard: what its layers used is not what this page shows",
+      "items": [
+       "Hazard's dashboard layers Warehouse · Hail, Office · Hail, Detached house · Hail use model v1.0, docs r1; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+      ],
+      "href": "/cells/hail_real_estate"
      },
      {
       "kind": "crosswalk_confirm",
@@ -5469,6 +5933,14 @@
       "text": "Add a link to 1 source that only has a locator",
       "items": [],
       "href": "/cells/convective_wind_real_estate?step=numbers"
+     },
+     {
+      "kind": "hazard_differs",
+      "text": "Differs in Hazard's dashboard: what its layers used is not what this page shows",
+      "items": [
+       "Hazard's dashboard layers Warehouse · Convective Wind, Office · Convective Wind, Detached house · Convective Wind use model v1.0, docs r2; this page shows model v0.1, docs r1. Its 6 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+      ],
+      "href": "/cells/convective_wind_real_estate"
      }
     ]
    },
@@ -5498,6 +5970,15 @@
       "text": "Add a link to 1 source that only has a locator",
       "items": [],
       "href": "/cells/flood_real_estate?step=numbers"
+     },
+     {
+      "kind": "hazard_differs",
+      "text": "Differs in Hazard's dashboard: what its layers used is not what this page shows",
+      "items": [
+       "Hazard's dashboard layers Warehouse · Flood, Office · Flood, Detached house · Flood use model v1.0, docs r1; this page shows model v0.2, docs r1. 1 of the 7 curves shown here is identical; Hazard's version drops 6 curves shown here (FRE_RES_HAZUS_DF129, FRE_COM_FRESH_HAZUS_DF217, FRE_COM_COAST_NACCS_P2, FRE_COM_COAST_NACCS_P2_MIN). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main.",
+       "Hazard's dashboard layers Warehouse · Flood, Office · Flood, Detached house · Flood use model v1.1, docs r1; this page shows model v0.2, docs r1. 3 of the 7 curves shown here are identical; Hazard's version drops 4 curves shown here (FRE_COM_FRESH_HAZUS_DF217, FRE_COM_COAST_NACCS_P2, FRE_COM_COAST_NACCS_P2_MIN, FRE_COM_COAST_NACCS_P2_MAX). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main."
+      ],
+      "href": "/cells/flood_real_estate"
      }
     ]
    },
@@ -5527,6 +6008,14 @@
       "text": "Add a link to 5 sources that only have a locator",
       "items": [],
       "href": "/cells/tropical_cyclone_wind_real_estate?step=numbers"
+     },
+     {
+      "kind": "hazard_differs",
+      "text": "Differs in Hazard's dashboard: what its layers used is not what this page shows",
+      "items": [
+       "Hazard's dashboard layers Warehouse · Hurricane, Office · Hurricane, Detached house · Hurricane use model v1.0, docs r1; this page shows model v0.2, docs r1. Its 20 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+      ],
+      "href": "/cells/tropical_cyclone_wind_real_estate"
      }
     ]
    },
@@ -5556,6 +6045,14 @@
       "text": "Add a link to 1 source that only has a locator",
       "items": [],
       "href": "/cells/wildfire_real_estate?step=numbers"
+     },
+     {
+      "kind": "hazard_differs",
+      "text": "Differs in Hazard's dashboard: what its layers used is not what this page shows",
+      "items": [
+       "Hazard's dashboard layers Warehouse · Wildfire, Office · Wildfire, Detached house · Wildfire use model v1.0, docs r1; this page shows model v0.1, docs r1. Its 3 curves are identical to the ones shown here, and nothing else that can change a loss differs (the rest is wording). Hazard's version is on Damage branch codex/warehouse-flood-admission, not on Damage's main. The loss is the same; it is flagged because Hazard runs a newer release than this page shows, so the release Hazard uses should be merged here (or Hazard re-pinned)."
+      ],
+      "href": "/cells/wildfire_real_estate"
      }
     ]
    },
@@ -5660,17 +6157,278 @@
     "tasks": []
    }
   ],
-  "n_tasks": 31,
-  "n_cells_with_tasks": 17,
+  "n_tasks": 29,
+  "n_cells_with_tasks": 16,
   "n_person_reviews": 0,
   "kinds": [
    "crosswalk_confirm",
    "hazard_branch",
+   "hazard_differs",
+   "hazard_label",
    "hazard_moved",
-   "source_ids",
-   "source_without_link",
-   "sources_locator_only",
-   "tier_id_unmatched"
+   "sources_locator_only"
+  ]
+ },
+ "grid_counts": {
+  "pairs": 42,
+  "live": 13,
+  "proposal": 15,
+  "reused": 3,
+  "gap": 11
+ },
+ "legend": {
+  "source": "docs/cells/CATALOGUE.md",
+  "status": [
+   {
+    "key": "live",
+    "word": "live",
+    "meaning": "Finished and in use: the platform's loss calculations can use this curve today.",
+    "catalogue": "In the runtime artifact index (docs/contracts/machine_readable_artifact_index.json); the platform can call it"
+   },
+   {
+    "key": "proposal",
+    "word": "proposal",
+    "meaning": "Built and checked, but not in use yet: it waits for an owner's review before the platform can use it.",
+    "catalogue": "Built and validated in the repository but not in the runtime index; waiting for review"
+   },
+   {
+    "key": "reused",
+    "word": "reused",
+    "meaning": "No curve of its own: it borrows a live curve built for another asset, which its page names (for example, a substation borrows the substation part of a solar farm's curve).",
+    "catalogue": "No curve of its own; a consumer binding prices this asset with another cell's curve"
+   },
+   {
+    "key": "gap",
+    "word": "no curve yet",
+    "meaning": "Nothing has been built for this asset and hazard yet; its page says why and lists the research so far.",
+    "catalogue": "No curve yet"
+   },
+   {
+    "key": "partial",
+    "word": "partial",
+    "meaning": "Part of the asset's value has no curve yet."
+   }
+  ],
+  "coverage": [
+   {
+    "key": "curve",
+    "word": "has a curve",
+    "meaning": "A curve is built for this subsystem itself."
+   },
+   {
+    "key": "partial",
+    "word": "partial",
+    "meaning": "A curve covers only part of this subsystem; the rest has none."
+   },
+   {
+    "key": "whole",
+    "word": "in the whole-building curve",
+    "meaning": "No curve of its own, but not left out: the hazard prices the whole building with one curve, and this subsystem's damage is inside it (hail is the exception, with its own roof and walls curves)."
+   },
+   {
+    "key": "gap",
+    "word": "no curve yet",
+    "meaning": "No curve covers this subsystem; the row says why and links the research."
+   },
+   {
+    "key": "conditioner",
+    "word": "changes another curve",
+    "meaning": "No curve of its own: its condition (for example whether a protection is in place) changes another part's curve."
+   },
+   {
+    "key": "no_direct_damage",
+    "word": "no direct damage",
+    "meaning": "Judged not to be damaged directly by this hazard: by the cell's own coverage decision, or, where the cell is silent, read from how the hazard acts (to confirm with the cell owner; the part's note says which)."
+   },
+   {
+    "key": "outside",
+    "word": "not priced by this curve",
+    "meaning": "Left out of the value this curve prices (for example contents, modeled separately)."
+   }
+  ],
+  "completeness": [
+   {
+    "key": "value_share",
+    "word": "Value share",
+    "meaning": "This part's share of the asset's value: of its reference plant's value budget where the asset has one, else the share the cell's own units declare (hover for the basis)."
+   }
+  ],
+  "value": [
+   {
+    "key": "priced",
+    "word": "priced",
+    "meaning": "A curve prices this hazard's damage to these parts, or the cell adds their cost in step with the other parts' damage (replacement labour)."
+   },
+   {
+    "key": "partly",
+    "word": "partly priced",
+    "meaning": "A curve covers only some of these parts (for example wildfire on a substation, whose curve covers the yard equipment but not the rest of each subsystem)."
+   },
+   {
+    "key": "no_damage",
+    "word": "no direct damage",
+    "meaning": "The cell judged this hazard does not damage these parts directly, so a loss of $0 there is right, not missing."
+   },
+   {
+    "key": "not_priced",
+    "word": "not priced",
+    "meaning": "No curve, so any damage to these parts is not counted in the loss."
+   },
+   {
+    "key": "no_budget",
+    "word": "no value budget for buildings yet",
+    "meaning": "Real estate has no budget splitting a building's value into its parts, so the split cannot be worked out; each curve is a share of the building's replacement cost, which the consumer supplies."
+   }
+  ],
+  "evidence": [
+   {
+    "key": "T1",
+    "word": "field-calibrated",
+    "meaning": "fitted to insurance claims or field damage surveys of the same kind of asset"
+   },
+   {
+    "key": "T2",
+    "word": "published",
+    "meaning": "taken from a published standard, a public model such as FEMA Hazus, lab tests or physics"
+   },
+   {
+    "key": "T3",
+    "word": "borrowed",
+    "meaning": "from a similar asset or a related study, with an engineering step to make it fit"
+   },
+   {
+    "key": "T4",
+    "word": "our judgment",
+    "meaning": "no source gives the number; a placeholder until evidence replaces it"
+   }
+  ],
+  "production": [
+   {
+    "key": "runtime_indexed",
+    "word": "released for Hazard",
+    "meaning": "Damage has signed this curve off for Hazard: it is on Damage's list of released curves, so Hazard's software is allowed to load it. Whether Hazard's maps already use it is the next tag, Used by Hazard."
+   },
+   {
+    "key": "reused_binding",
+    "word": "released, borrowed curve",
+    "meaning": "Released, but as another asset's curve: the platform prices this asset with a curve built for something else."
+   },
+   {
+    "key": "not_runtime_indexed",
+    "word": "not released yet",
+    "meaning": "Not signed off for Hazard yet (a proposal): it is not on Damage's list of released curves, so Hazard's software should not load it."
+   }
+  ],
+  "hazard_use": [
+   {
+    "key": "used",
+    "word": "Used by Hazard's dashboard",
+    "meaning": "A layer on Hazard's internal dashboard was computed with this file, or one identical to it in everything that can change a loss (curves, value shares, unit treatments)."
+   },
+   {
+    "key": "differs",
+    "word": "Differs in Hazard's dashboard",
+    "meaning": "A layer on Hazard's dashboard was computed with something that differs in a way that can change a loss: a newer model, a changed revision, or a different value share. The note says what."
+   },
+   {
+    "key": "not_on",
+    "word": "Not on Hazard's dashboard",
+    "meaning": "No layer on Hazard's dashboard uses this cell; the row says whether any Hazard branch holds it."
+   }
+  ],
+  "where_from": {
+   "published": "From a published source.",
+   "borrowed": "Borrowed: taken from a similar asset or a related study and adapted.",
+   "our_judgment": "Our judgment: no source gives this number.",
+   "curve_level": "No source for this number alone: it rests on the curve's own sources.",
+   "unsourced": "Set by the team; no source cited."
+  },
+  "units": [
+   {
+    "key": "cell",
+    "word": "Cell",
+    "meaning": "Hazard × asset pair; project-management unit; e.g. hail × solar, flood × solar"
+   },
+   {
+    "key": "failure_unit",
+    "word": "Failure unit",
+    "meaning": "Thing that actually fails; curve-record unit; e.g. PV module glass/cell trigger; inverter inundation"
+   },
+   {
+    "key": "subsystem_component",
+    "word": "Subsystem / component",
+    "meaning": "Engineering vocabulary and value-link unit; e.g. PV_ARRAY / PV_MODULE; INVERTER_SYSTEM / INVERTER"
+   },
+   {
+    "key": "value_bucket",
+    "word": "Value bucket",
+    "meaning": "Dollar bucket the DR applies to; e.g. Exposed PV module value; inverter value"
+   }
+  ],
+  "units_source": "docs/method/standards/13_end_to_end_damage_work_architecture.md",
+  "lenses": [
+   {
+    "key": "status",
+    "word": "Status",
+    "meaning": "The first line of every tile, and its shade (see a curve's status): what exists for this asset and hazard."
+   },
+   {
+    "key": "evidence",
+    "word": "Evidence",
+    "meaning": "How well supported the curve's numbers are, in one word: the weaker of two grades: the damage at each hazard level, and the dollar value that damage is applied to (hover a tile for both)."
+   },
+   {
+    "key": "value",
+    "word": "Value covered",
+    "meaning": "Of everything the asset is worth (its reference plant's value budget), how much this hazard's curves price; the parts it is split into are under Value covered below."
+   },
+   {
+    "key": "review",
+    "word": "Read by",
+    "meaning": "Whether a person has reviewed this entry, or only an agent has read it."
+   }
+  ],
+  "marks": [
+   {
+    "key": "solid",
+    "word": "Solid border, filled",
+    "meaning": "A live curve: the platform can use it."
+   },
+   {
+    "key": "dashed_dark",
+    "word": "Dashed dark border, no fill",
+    "meaning": "A proposal: built and checked, not in use yet."
+   },
+   {
+    "key": "hatched",
+    "word": "Diagonal hatching",
+    "meaning": "Reused: priced with another cell's curve, not one of its own."
+   },
+   {
+    "key": "dashed_light",
+    "word": "Dashed light border, grey text",
+    "meaning": "No curve yet for this asset and hazard."
+   },
+   {
+    "key": "partial",
+    "word": "· partial",
+    "meaning": "The curves cover only part of the asset's value."
+   },
+   {
+    "key": "not_drawn",
+    "word": "not drawn",
+    "meaning": "The curve exists but this repository's code cannot draw it."
+   },
+   {
+    "key": "shade_evidence",
+    "word": "Grey shading (Evidence)",
+    "meaning": "Darker grey means weaker evidence: clear for field-calibrated or published, darkest for our judgment."
+   },
+   {
+    "key": "shade_review",
+    "word": "Grey fill (Read by)",
+    "meaning": "Only an agent has read the entry; no person has reviewed it yet."
+   }
   ]
  },
  "build_checks": [
@@ -5726,23 +6484,23 @@
   {
    "id": "source_ids",
    "name": "every displayed source ID resolves in the cell's register",
-   "ok": false,
+   "ok": true,
    "severity": "data",
-   "summary": "22 unresolved in tropical_cyclone_wind_solar, tropical_cyclone_wind_wind, wildfire_solar"
+   "summary": "all resolve"
   },
   {
    "id": "source_links",
    "name": "every source has either a link or a locator",
-   "ok": false,
+   "ok": true,
    "severity": "data",
-   "summary": "5 sources with neither, in tropical_cyclone_wind_wind, wildfire_solar"
+   "summary": "every source linked or located"
   },
   {
    "id": "extracted_sources",
    "name": "every tier-table source ID of an older cell matches an extracted source",
-   "ok": false,
+   "ok": true,
    "severity": "data",
-   "summary": "3 unmatched in flood_solar, strong_wind_solar, wind_tornado_wind"
+   "summary": "every tier-table ID matched"
   },
   {
    "id": "plain_layer",
@@ -5774,10 +6532,24 @@
   },
   {
    "id": "hazard_links",
-   "name": "every Hazard file the pages name is on Hazard's main",
+   "name": "every Hazard file the pages name exists on Hazard; the ones not on its main are listed with where they are",
+   "ok": true,
+   "severity": "data",
+   "summary": "every Hazard file found; 9 not on Hazard's main (on a branch or moved), listed"
+  },
+  {
+   "id": "research_links",
+   "name": "every document the research index names exists where it says (this repository, or Hazard's main or a branch)",
+   "ok": true,
+   "severity": "data",
+   "summary": "ok"
+  },
+  {
+   "id": "hazard_match",
+   "name": "every curve a layer on Hazard's dashboard was computed with matches what the page shows in everything that can change a loss",
    "ok": false,
    "severity": "data",
-   "summary": "9 Hazard paths not on Hazard's main (Hazard's main at c83e83b)"
+   "summary": "6 cells differ in Hazard's dashboard (checked 2026-11-03)"
   },
   {
    "id": "faq",
@@ -5799,6 +6571,27 @@
    "ok": true,
    "severity": "data",
    "summary": "every twin part mapped"
+  },
+  {
+   "id": "subcomponents",
+   "name": "every expected subsystem has a curve/gap state, completeness state, evidence label, and construction or gap lineage",
+   "ok": true,
+   "severity": "hard",
+   "summary": "ok"
+  },
+  {
+   "id": "formula_keys",
+   "name": "every curve has a formula whose key names each of its parameters",
+   "ok": true,
+   "severity": "data",
+   "summary": "ok"
+  },
+  {
+   "id": "display_paths",
+   "name": "nothing displayed carries a path on someone's machine",
+   "ok": true,
+   "severity": "hard",
+   "summary": "ok"
   }
  ],
  "all_checks_pass": false

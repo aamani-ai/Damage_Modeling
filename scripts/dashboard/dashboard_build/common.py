@@ -28,6 +28,9 @@ CATALOGUE_DIR = ROOT / "docs" / "cells" / "catalogue"
 INDEX = ROOT / "docs" / "contracts" / "machine_readable_artifact_index.json"
 OCCURRENCE = ROOT / "docs" / "evidence" / "occurrence"
 OUT = CHECKOUT / "dashboard" / "data"
+# Field reports (the occurrence registers) are hidden from the pages for now; the registers, their checks and the
+# occurrence pages are still built. Set True to show them again (and SHOW_FIELD_REPORTS in dashboard/lib/features.ts).
+SHOW_FIELD_REPORTS = False
 
 if str(HELPERS) not in sys.path:
     sys.path.insert(0, str(HELPERS))
@@ -179,3 +182,11 @@ def section(text: str, heading_regex: str) -> str | None:
                 body.append(nxt)
             return "\n".join(body)
     return None
+
+
+# A path on one person's machine. The dashboard shows the file's name only; `path_leaks` guards the output.
+LOCAL_PATH_RE = re.compile(r"(?<![\w.:/~-])(?:~/|/Users/|/home/|/private/(?:tmp|var)/|[A-Za-z]:\\Users\\|file://)[^\s\"',;)]*")
+
+
+def redact_local(text: str) -> str:
+    return LOCAL_PATH_RE.sub(lambda m: re.split(r"[/\\]", m.group(0).rstrip("/\\"))[-1] or "a local folder", text)
