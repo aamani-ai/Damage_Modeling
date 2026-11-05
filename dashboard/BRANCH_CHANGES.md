@@ -41,6 +41,19 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 
 ## What changed
 
+### Since the 5 Nov deploy (SJ's checklist, round 2)
+
+- **The line under each pair's title says what it means**: which hazard measures the curves read, what "our
+  judgment" / "borrowed" / "published" means, and which subsystems could be damaged but have no curve (left out of
+  the loss), with their shares.
+- **Flood × wind** says its one curve is FEMA Hazus's standalone-substation curve ("whole facility" = the whole
+  substation), that it prices only the GSU substation, and what the priced share is (checklist B2–B3).
+- **Convective wind** on wind and solar says how Hazard uses the curves: strong-wind and tornado events added into one
+  loss under one cap; on wind, tornado events use the same curves started at lower speeds (checklist D2).
+- **References** on a curve built by reasoning say they are the evidence it was reasoned from, not the curve
+  (checklist F5).
+- **Every fold-out section** on a pair's page has the same box, arrow position and folded height.
+
 ### Words and layout everywhere
 
 - **Plain words.** Statuses read live · proposal · reused · no curve yet (was "gap"). Evidence reads field-calibrated

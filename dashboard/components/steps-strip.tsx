@@ -38,9 +38,9 @@ export function StepsStrip({ cell, cites, curves, m, buildings }: { cell: CellV2
   const blob = (p: string) => `${m.repo.url}/blob/${m.link_commit}/${p.replace(/^\/+/, "")}`;
   return (
     <section aria-label="How this curve was made" className="mt-3">
-      <details className="group" open>
-      <SectionSummary className="mb-1 px-0.5">How this curve was made <span className="ml-2 font-normal normal-case tracking-normal text-muted-foreground/80">four steps, with their key items · open one for the detail</span></SectionSummary>
-      <div role="group" aria-label="How this curve was made — four steps" className="grid overflow-hidden rounded-lg border border-border bg-card sm:grid-cols-2 xl:grid-cols-4">
+      <details className="group rounded-lg border border-border bg-card" open>
+      <SectionSummary className="px-3 py-2">How this curve was made <span className="ml-2 font-normal normal-case tracking-normal text-muted-foreground/80">four steps, with their key items · open one for the detail</span></SectionSummary>
+      <div role="group" aria-label="How this curve was made — four steps" className="grid overflow-hidden rounded-b-lg border-t border-border sm:grid-cols-2 xl:grid-cols-4">
         {steps.map((s, i) => (
           <button
             key={s.id}

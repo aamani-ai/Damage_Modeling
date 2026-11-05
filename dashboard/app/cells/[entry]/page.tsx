@@ -74,7 +74,7 @@ export default async function CellPage({ params }: { params: Promise<{ entry: st
       <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blob(m.legend.source)} groups={["status", "evidence", "lenses", "subsystem", "hazard_use", "units"]} /></div>
       <>
           {c.subcomponents.length && c.subcomponent_rollup ? (
-            <div className="mt-3"><SubcomponentPanel subs={c.subcomponents} rollup={c.subcomponent_rollup} hazards={[{ slug: c.hazard.slug, label: c.hazard.label }]} defaultHazard={c.hazard.slug} cards={constructionCards(c.subcomponents)} legend={m.legend} blobBase={blobBase(m)} picker={false} buildings={buildings} /></div>
+            <div className="mt-3"><SubcomponentPanel subs={c.subcomponents} rollup={c.subcomponent_rollup} hazards={[{ slug: c.hazard.slug, label: c.hazard.label }]} defaultHazard={c.hazard.slug} cards={constructionCards(c.subcomponents)} legend={m.legend} blobBase={blobBase(m)} picker={false} buildings={buildings} notes={c.cell_notes ?? []} /></div>
           ) : null}
           <StepsStrip cell={c} cites={cites} curves={curves} m={m} buildings={buildings} />
           {c.binding ? (

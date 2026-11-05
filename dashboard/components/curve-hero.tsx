@@ -112,8 +112,8 @@ export function CurveHero({ cell, curves: allCurves, buildings, order }: { cell:
     // folds like the page's other sections, open by default: folded, only its heading shows
     <Card id="card-curve" className={`mt-3 scroll-mt-28 ${folded ? "[&>*:not(:first-child)]:hidden" : ""}`}>
       {/* top-aligned, so "The curve" stays put when a part row opens below the subsystem row */}
-      <div className={`flex flex-wrap items-start gap-x-4 gap-y-1.5 px-3 pb-1 pt-2.5 ${folded ? "[&>*:not(:first-child)]:hidden" : ""}`}>
-        <button type="button" aria-expanded={!folded} onClick={() => setFolded(!folded)} className={`${TOGGLE_CLASS} pt-1`}><ToggleArrow open={!folded} />The curve</button>
+      <div className={`flex flex-wrap items-start gap-x-4 gap-y-1.5 px-3 pt-2 ${folded ? "pb-2 [&>*:not(:first-child)]:hidden" : "pb-1"}`}>
+        <button type="button" aria-expanded={!folded} onClick={() => setFolded(!folded)} className={TOGGLE_CLASS}><ToggleArrow open={!folded} />The curve</button>
         {parts.length > 1 ? (
           <div className="flex flex-wrap items-center gap-1.5 text-[12px]">
             {/* subsystem (the cost bucket) → part (the cell's catalogue label) → curve (below: the individual curves, when a
@@ -183,6 +183,8 @@ export function CurveHero({ cell, curves: allCurves, buildings, order }: { cell:
             <div className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">References</div>
             {/* the references are listed once, with every other source, in step 3 */}
             <p><OpenStep step="numbers">see all the sources in step 3, Where the numbers come from ▸</OpenStep></p>
+            {/* SJ's review: references on a curve built by reasoning are the evidence it was reasoned from, not a published curve */}
+            <p className="text-[11.5px] text-muted-foreground">{/published/i.test(cap.how_sure.shape.word) ? "The curve's damage numbers are taken from the published source listed there." : "None of them is this curve: they are the evidence (standards, tests, damage reports) the curve was reasoned from. No published source gives these numbers."}</p>
           </div>
           {SHOW_FIELD_REPORTS ? (
             <div>
