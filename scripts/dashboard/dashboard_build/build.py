@@ -23,7 +23,8 @@ from .occurrence import (all_registers, asset_slug, bess_bucket_values, hazard_s
                          twin_crosswalk_pin)
 from .parts import SETTLED_REL, value_split, asset_plain_sentence, asset_view, uncovered_sentence, shown_hazards, substation_budget, substation_crosswalk
 from .plain import (FOR_HAZARD, STATION_NAMES, STEPS, TIER_MEANING, TIER_PLAIN, TIER_SHORT, ShapeSource, capability_sentences, curve_caption, halves,
-                    main_logic, one_word, parameters_plain, plain_rail, plain_text, resolve_key_sources, station_plain, steps4, tier_words)
+                    main_logic, one_word, parameters_plain, plain_rail, plain_text, resolve_key_sources, station_plain, steps4, tier_words,
+                    _join, label_case)
 from .registers import load_registers
 from .sampling import NO_EVALUATOR, sample_entry
 from .sources import NO_LINK, NOT_YET_EXTRACTED, extract_for_entry, link_counts, resolve_link
@@ -915,6 +916,57 @@ def build(write: bool = True) -> dict[str, Any]:
     # entries: a real-estate entry fills three building types, and heat has no entry
     grid = [t_ for c_ in manifest["library"] for t_row in c_["types"] for t_ in t_row["tiles"].values()]
     manifest["grid_counts"] = {"pairs": len(grid), **{k: sum(1 for t_ in grid if t_["status"] == k) for k in ("live", "proposal", "reused", "gap")}}
+    # each cell's one-line summary (the tile's hover and the line under the cell's title), in plain words from the
+    # cell's own data: how many curves for which parts, what they are read against, how sure the numbers are, and how
+    # much of the plant's value is priced. The catalogue's own method wording stays in the step panels.
+    whole_word = {"substation": "the station's", "real_estate": "the building's"}
+    for e in entries:
+        c_ = cells.get(e.id) or {}
+        if e.kind == "gap" or not c_:
+            continue
+        src = (c_.get("binding") or {}).get("source_entry_id") or e.id
+        ids = set((c_.get("binding") or {}).get("reused_curves") or c_.get("answer", {}).get("curve_ids") or [])
+        cv = [x for x in curves_out.values() if x["entry_id"] == src and (not ids or x["curve_id"] in ids)]
+        if not cv:
+            continue
+        parts_ = list(dict.fromkeys((x.get("part") or x["curve_id"]) for x in cv))
+        def _axis_words(ax: dict[str, Any]) -> str:
+            # the measure's name without a formula after it, and its unit once
+            full = str(ax.get("label"))
+            label = full.split(" = ")[0].strip()
+            if label.count("(") != label.count(")"):  # the "=" sat inside brackets ("(0 = no event)"): keep it whole
+                label = full
+            unit = ax.get("unit")
+            return label + (f" ({unit})" if unit not in (None, "dimensionless", "class") and f"({unit})" not in label else "")
+        axes_ = list(dict.fromkeys(_axis_words(x.get("axis") or {}) for x in cv if (x.get("axis") or {}).get("label")))
+        a_def = next((a for a in sl["assets"] if a["slug"] == asset_slug(e.data["asset"], sl)), {})
+        lead = f"{c_['hazard']['label']} on {(a_def.get('noun') or c_['asset']['label']).lower()}"
+        bits = [f"{len(cv)} curve{'s' if len(cv) != 1 else ''} for {len(parts_)} part{'s' if len(parts_) != 1 else ''}"
+                + (f" ({_join([label_case(x) for x in parts_])})" if len(parts_) <= 3 else "")]
+        if e.kind == "binding":
+            bits[0] += f", borrowed from {cells.get(src, {}).get('title', src)}"
+        if axes_:
+            bits.append(f"read against {axes_[0]}" if len(axes_) == 1 else f"read against {len(axes_)} hazard measures")
+        word = (c_.get("plain") or {}).get("word")
+        if word:
+            bits.append(f"the numbers are {word}")
+        vs = c_.get("value_split") or {}
+        if vs.get("priced") is not None:
+            whose = whole_word.get(asset_slug(e.data["asset"], sl), "the plant's")
+            bits.append(f"{fmt_pct(vs['priced'])} of {whose} value is priced" + (f", {fmt_pct(vs['partly'])} partly" if vs.get("partly", 0) >= 0.005 else ""))
+        text = f"{lead}: " + "; ".join(bits) + "."
+        if e.status == "proposal":
+            text = "Proposal, not in use yet. " + text
+        c_["summary"] = text
+        for t_ in tiles:
+            if t_["entry_id"] == e.id:
+                t_["summary"] = text
+    sum_by_id = {t_["entry_id"]: t_["summary"] for t_ in tiles}
+    for c_cat in manifest["library"]:
+        for t_row in c_cat["types"]:
+            for t_ in t_row["tiles"].values():
+                if t_.get("entry_id") in sum_by_id and t_.get("kind") != "gap":
+                    t_["summary"] = sum_by_id[t_["entry_id"]]
     # the library was drawn before the asset views: its tiles take each cell's value split now
     split_by_id = {t_["entry_id"]: t_.get("value_split") for t_ in tiles}
     for c_ in manifest["library"]:
