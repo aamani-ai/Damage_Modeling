@@ -1,8 +1,8 @@
 # Dashboard changes on `dashboard-traceability-completeness`, compared with `main`
 
 This branch reworks the damage-curve dashboard so a reader can follow every number to its source and see what is
-complete and what is still open, in plain words. Nothing here is merged into `main` or deployed yet: the live
-dashboard still shows `main`.
+complete and what is still open, in plain words. Merged into `main` on 2026-11-05 as PR #13 (merge commit
+`aaea050`) and deployed to the live dashboard from `deploy/damage-curves`.
 
 ## Run this branch locally and compare it with the live dashboard
 
