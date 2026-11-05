@@ -209,7 +209,9 @@ def test_legend_units_come_from_the_method_and_rows_carry_value_shares():
     assert abs(sum(r["share"] for r in bess.values()) - 1.0) < 1e-6
     for path in sorted((DATA / "assets").glob("*.json")):
         for r in json.loads(path.read_text())["subcomponents"]:
-            assert (r["share"] is None) == (r["share_basis"] is None), (path.name, r["key"])
+            # a row with no share of its own may still say why: one value-budget line covers it and another row
+            counted_with = r["share"] is None and str(r["share_basis"] or "").startswith("counted with ")
+            assert counted_with or (r["share"] is None) == (r["share_basis"] is None), (path.name, r["key"])
 
 
 def test_gap_reasons_are_plain_words_with_the_cells_own_words_kept():
