@@ -63,6 +63,11 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
   parts' damage) · *partly priced* · *no direct damage* · *not priced*. It is worked out from the profile's value
   budget and each subsystem's state. `main` showed a figure for only 4 tiles and "share not stated" elsewhere. Real
   estate says "no value budget for buildings yet". What the words mean on the library page explains each part.
+  Its definition now says the value is split into subsystems, names each asset's budget, and says it measures
+  coverage only (Hazard's loss uses each curve's own value on its own plant). On wind, the ledger's one figure for
+  the collection network and the GSU substation together is said to have no split between them. The labour note
+  says Damage has no shared rule for labour yet (each cell decided when it was written). The Twin colour words
+  now say which are gaps: "no curve yet" is a gap; "no direct damage" and "not priced by this curve" are not.
 - **Heat** has a column with the research so far. Icing and lightning are hidden (no curve, no research).
 - The header counts the grid it shows, one tile per asset type × hazard with heat included (42 pairs), not catalogue
   entries; the KPI cards are gone.
@@ -171,10 +176,14 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 
 - **Value covered and the solar and wind value budgets are still in progress**; they can be reviewed, but the figures
   and wording may change.
-- Not merged to `main`, so the live dashboard does not show any of this yet.
 - The catalogue's part names were drafted per cell and are not one agreed vocabulary; the Twin crosswalks match on
   them by name.
 - Real estate has no value budget, so its tiles give no value split.
+- Whether a cell adds replacement labour in step with the other damage is read from its wording (phrases such as
+  "allocated once"), because the cell files have no yes/no field for it. Right for today's cells; a cell that says it
+  in other words would be counted "not priced". A field in the cell files would fix it. Damage also has no shared
+  rule on labour yet: hurricane, wildfire and the wind cells add it; hail × solar folds it into the modules; flood ×
+  solar and convective wind × solar leave it out.
 - Wind's ledger prices collection and the GSU substation as one line (counted once, under Collection network) and has
   no line for the control building.
 - The catalogue's "partial" flag and Value covered can disagree: wildfire × solar is flagged partial because its

@@ -172,7 +172,7 @@ def labour_note(aslug: str, subs: list[dict[str, Any]], hz: list[dict[str, Any]]
     if not parts_:
         return None
     return ("Replacement labour (installation, inspection, logistics" + (f"; {fmt_pct(share)} of the plant in the value ledger" if share else "") +
-            ") is treated differently by each hazard's cell — " + " ".join(parts_))
+            ") is treated differently by each hazard's cell, because Damage has no shared rule for it yet: each cell decided when it was written. " + " ".join(parts_))
 
 
 # a unit whose component names several rows: it is listed under each of them
@@ -673,9 +673,9 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                 labels = {r_["key"]: r_["label"] for r_ in rows}
                 share = row.get("share")
                 share_basis = ("share of the asset's reference value" if share is not None else
-                               f"counted with {_join([labels[k] for k in row['shared_with']])}: one line of the value budget covers both")
+                               f"counted with {_join([labels[k] for k in row['shared_with']])}: the value budget gives one figure for both, with no split between them")
                 if share is not None and row.get("shared_with"):
-                    share_basis += f"; one line of the value budget, shared with {_join([labels[k] for k in row['shared_with']])}"
+                    share_basis += f"; the value budget gives one figure for this and {_join([labels[k] for k in row['shared_with']])}, with no split between them"
                 # the cell's own figure, where it states one on another basis: said beside the budget's, not instead of it
                 if cell_share is not None and (share is None or abs(cell_share - share) > 0.005):
                     lines_ = [f"{p['part']}{' (' + p['failure_unit_id'] + ')' if p.get('failure_unit_id') and sum(1 for q in unit_shares if q['part'] == p['part']) > 1 else ''} {fmt_pct(p['share'])}" for p in unit_shares]
@@ -940,7 +940,7 @@ def split_finding(aslug: str, a_def: dict[str, Any], rows: list[dict[str, Any]],
                 fenced = sum(v for k_, v in amount.items() if sys_of.get(k_) and k_ != "road")
                 details.append(f"{pc['hazard']['label'].lower()} binds {len(ids)} equipment rows ({fmt_usd_compact(bound)}, {fmt_pct(bound / fenced) if fenced else '—'} of the fenced station) and withholds the rest; the other hazards use one curve for the whole station")
     no_budget = {"solar": "The value shares are the repository's value ledger (NREL benchmarks, priced per kW), grouped by subsystem with installation labour beside its hardware; the dollars are for Hazard's settled 120 MWdc plant. A cell's own value lines, on its own basis, are in each row's hover.",
-                 "wind": "The value shares are the repository's value ledger (NREL benchmarks, priced per kW), grouped by subsystem, with the dollars for Hazard's settled 100 MW plant; the ledger prices collection and the GSU substation as one line, counted once under Collection network, and has no line of its own for the control building.",
+                 "wind": "The value shares are the repository's value ledger (NREL benchmarks, priced per kW), grouped by subsystem, with the dollars for Hazard's settled 100 MW plant; the ledger gives the collection network and the GSU substation one figure together (NREL's \"electrical infrastructure\"), with no split between them, so the whole figure is shown under Collection network and the GSU substation row points there; it has no line of its own for the control building.",
                  "real_estate": "Buildings carry no dollar value here: every curve is a share of the building's structure replacement cost, which the consumer supplies.",
                  "substation": "Hazard's substation reference budget ($27.35M fenced station) sets the rows; three hazards use one curve for the whole station, wildfire binds the equipment rows only.",
                  "bess": "Hazard's battery reference budget ($109.8M) sets the rows."}
