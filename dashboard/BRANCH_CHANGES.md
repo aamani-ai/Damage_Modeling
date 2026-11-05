@@ -69,7 +69,8 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 ### Asset pages (for example Power plants › Solar farm)
 
 - **The header** names the plant in one tag: its value budget where it has one (solar, wind, battery, substation),
-  otherwise its profile (the buildings). What the picture shows is said in View by Digital Twin part.
+  otherwise its profile (the buildings). What the picture shows is said in View by Digital Twin part. Which parts have
+  no curve under any hazard is left to View by subsystem.
 - **The curves** (a fold, open by default): the library's own tiles, one per hazard including heat.
 - **The plant behind the dollars** is Hazard's settled reference (`06_settled_reference_design.md`, linked from the
   page): solar 100 MWac / 120 MWdc single-axis tracker, $105.3M; wind twenty 5 MW turbines, $162.3M. The value
@@ -102,11 +103,11 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
     to* (were "how damage rises" and "how it becomes dollars", renamed everywhere), with one line saying loss = damage
     ratio × value.
   - Its **References** line is only a link to the sources in step 3, so they are listed once.
-- **How this curve was made**, four steps. Each panel is complete on its own and ends with **Read from:** links to the
+- **How this curve was made**, four steps. The first three boxes say what each step holds; the fourth names the
+  outside checks and who has read the entry. Each panel is complete on its own and ends with **Read from:** links to the
   GitHub files it was written from (folded), next to **Details** for reviewers (method checks, source IDs, file
   fingerprints). Each list starts with its count.
-  - *What it covers*: its summary counts subsystems as the subsystem table does ("1 of 10 subsystems with a curve · 5
-    no curve yet · 4 no direct damage"), with the catalogue's own list in the hover; scope, what it leaves out, open questions, each part as subsystem › part, withheld units named
+  - *What it covers*: scope, what it leaves out, open questions, each part as subsystem › part, withheld units named
     in words with their reasons.
   - *How it was derived*: each hazard measure with the parts read against it, the curve shapes, what Hazard has to
     supply; seven-step audits are found wherever the cell keeps them, or an earlier version's is named.
