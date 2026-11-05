@@ -1251,7 +1251,7 @@
     "id": "covers",
     "name": "What it covers",
     "meaning": "The parts that have a curve, their share of the value, and what has none yet",
-    "fact": "8 parts with a curve · 1 without one yet",
+    "fact": "8 parts with a curve · 8 of 10 subsystems with a curve",
     "paragraphs": [
      "Hurricane wind on solar farms: ordered damage-state curves with judgment-based synthetic resistance medians and cost ratios (cell-local decision, no direct TC calibration source); one module route fitted to NREL satellite storm-damage records. It names 8 parts (listed below). It also lists 6 things it leaves out (below).",
      "This hazard's curves cover 8 parts of the solar farm, listed below after the subsystem each belongs to and named as the catalogue entry writes them.",
@@ -1293,9 +1293,9 @@
       "tone": "key"
      },
      {
-      "text": "1 without a curve yet",
+      "text": "8 of 10 subsystems with a curve · 2 no curve yet",
       "tone": "muted",
-      "title": "Replacement support (inspection, labour, rental, logistics, removal): no own curve; takes the value-weighted damage ratio of the other parts and is counted once"
+      "title": "The catalogue's own list: Replacement support (inspection, labour, rental, logistics, removal): no own curve; takes the value-weighted damage ratio of the other parts and is counted once"
      }
     ]
    },
@@ -4633,7 +4633,7 @@
   },
   "axis_notes": [
    {
-    "text": "The array and site-facility axes are pressure ratios (event ÷ design pressure), but this curve file does not say how to form them from the two gusts it also accepts: the gust ratio itself, or its square. This repository's substation bindings, which reuse its GSU curve, state (event gust ÷ design gust)²; Hazard's runs do both.",
+    "text": "How to turn wind speeds into this curve's input is not written down. The curve reads a pressure ratio: how hard the wind pushes, compared with what the plant was designed for. From two gust speeds that is (event gust ÷ design gust)², because the push grows with the square of the speed. This curve file does not say so, but this repository's substation bindings that reuse its GSU curve do. Hazard's solar run uses the gust ratio without squaring it.",
     "paths": [
      "docs/contracts/hazard_handoff/substation_hurricane_screening_v1/binding.json",
      "docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/binding.json"

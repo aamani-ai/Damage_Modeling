@@ -68,6 +68,8 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 
 ### Asset pages (for example Power plants › Solar farm)
 
+- **The header** names the plant in one tag: its value budget where it has one (solar, wind, battery, substation),
+  otherwise its profile (the buildings). What the picture shows is said in View by Digital Twin part.
 - **The curves** (a fold, open by default): the library's own tiles, one per hazard including heat.
 - **The plant behind the dollars** is Hazard's settled reference (`06_settled_reference_design.md`, linked from the
   page): solar 100 MWac / 120 MWdc single-axis tracker, $105.3M; wind twenty 5 MW turbines, $162.3M. The value
@@ -103,11 +105,12 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 - **How this curve was made**, four steps. Each panel is complete on its own and ends with **Read from:** links to the
   GitHub files it was written from (folded), next to **Details** for reviewers (method checks, source IDs, file
   fingerprints). Each list starts with its count.
-  - *What it covers*: scope, what it leaves out, open questions, each part as subsystem › part, withheld units named
+  - *What it covers*: its summary counts subsystems as the subsystem table does ("1 of 10 subsystems with a curve · 5
+    no curve yet · 4 no direct damage"), with the catalogue's own list in the hover; scope, what it leaves out, open questions, each part as subsystem › part, withheld units named
     in words with their reasons.
   - *How it was derived*: each hazard measure with the parts read against it, the curve shapes, what Hazard has to
     supply; seven-step audits are found wherever the cell keeps them, or an earlier version's is named.
-    Hurricane × solar adds a *To settle* line: its pressure-ratio axes do not say how to form them from gusts (the
+    Hurricane × solar adds an *Open question* line: its pressure-ratio axes do not say how to form them from gusts (the
     ratio or its square); this repository's substation bindings square it.
     Whether a site-condition adapter exists is said once, under the audit, with what one is.
   - *Where the numbers come from*: what we assumed (the cell's judgment calls; where Hazard multiplies a unit by a
@@ -132,8 +135,8 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 
 ### Pages for pairs with no curve
 
-- Every no-curve pair (the four catalogue gaps and heat on each asset) opens the same page: why there is no curve, the
-  research so far with links, each subsystem's row, and the asset's other hazards.
+- Every no-curve pair (the four catalogue gaps and heat on each asset) opens the same page: each subsystem's row
+  (folded, first), why there is no curve, the research so far with links, and the asset's other hazards.
 - The research follows the no-curve research audit of 4 Nov 2026: hail × wind farm links its no-go decision and both
   evidence searches; hail × substation and the battery hail and convective-wind pages name the owner deferrals (on
   Hazard branches) and say no evidence search has been run.
