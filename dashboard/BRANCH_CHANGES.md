@@ -53,13 +53,20 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 - **References** on a curve built by reasoning say they are the evidence it was reasoned from, not the curve
   (checklist F5).
 - **Every fold-out section** on a pair's page has the same box, arrow position and folded height.
+- **Fixed: the three wind cells' labour was counted as priced.** They withhold it ("withheld_not_zero": the cost
+  should be added once after the other damage, but is not added yet), so it is now not priced: flood × wind goes from
+  18% priced to 0% (4% partly), hurricane × wind from 35% to 17%, wildfire × wind from 26% to 8%.
+- **A subsystem row whose money is not where its word suggests says so**: labour with no curve whose cost follows
+  the other damage (or is folded into the modules) is priced; wind's collection network shares one value line with
+  the GSU substation, so it is partly priced; wind's control building has no value line. The rest of "no curve yet"
+  is exactly the "not priced" share.
 
 ### Words and layout everywhere
 
 - **Plain words.** Statuses read live · proposal · reused · no curve yet (was "gap"). Evidence reads field-calibrated
   · published · borrowed · our judgment. Codes and file names stay one click away, never in the main text.
 - **One set of coverage words** across the subsystem table, the 3D model and its table: has a curve · partial · in
-  the whole-building curve · no curve yet · no direct damage · changes another curve · not priced by this curve.
+  the whole-building curve · no curve yet · no direct damage · changes another curve · outside this curve's value (renamed from "not priced by this curve", so "not priced" only ever means a gap).
   "What the words mean" explains each, and shows only the words on that page.
 - **Release status is the curve's status.** Live and reused curves are released for Hazard; proposals are not. The
   separate "in production index" tag is gone.
@@ -80,7 +87,7 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
   coverage only (Hazard's loss uses each curve's own value on its own plant). On wind, the ledger's one figure for
   the collection network and the GSU substation together is said to have no split between them. The labour note
   says Damage has no shared rule for labour yet (each cell decided when it was written). The Twin colour words
-  now say which are gaps: "no curve yet" is a gap; "no direct damage" and "not priced by this curve" are not.
+  now say which are gaps: "no curve yet" is a gap; "no direct damage" and "outside this curve's value" are not.
 - **Heat** has a column with the research so far. Icing and lightning are hidden (no curve, no research).
 - The header counts the grid it shows, one tile per asset type × hazard with heat included (42 pairs), not catalogue
   entries; the KPI cards are gone.

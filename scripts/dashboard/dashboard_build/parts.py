@@ -133,6 +133,9 @@ def value_split(subs: list[dict[str, Any]], groups: list[list[str]] | None, stat
             return "priced" if any_priced else "not_priced"
         return "priced" if st in PRICED_STATES else "partly" if st == "partial" else "not_priced"
     out = {"priced": 0.0, "partly": 0.0, "no_damage": 0.0, "not_priced": 0.0}
+    # where each row's money ends up, so a row's colour matches the bar: priced / partly / no_damage / not_priced,
+    # or no_value for a row the budget gives no line of its own
+    rows: dict[str, str] = {}
     seen: set[str] = set()
     for key, s in by_key.items():
         if key in seen or s.get("share") is None:
@@ -141,12 +144,17 @@ def value_split(subs: list[dict[str, Any]], groups: list[list[str]] | None, stat
         seen.update(group)
         kinds = {kind(by_key[k]) for k in group if k in by_key}
         k = kinds.pop() if len(kinds) == 1 else "partly"
+        for k_ in group:
+            rows[k_] = k
         share = float(s["share"])
         if k == "partly" and stated_partial and key in stated_partial:
             out["priced"] += stated_partial[key]
             out["not_priced"] += max(0.0, share - stated_partial[key])
         else:
             out[k] += share
+    for key in by_key:
+        rows.setdefault(key, "no_value")
+    out["rows"] = rows
     return out
 
 
@@ -165,6 +173,8 @@ def labour_note(aslug: str, subs: list[dict[str, Any]], hz: list[dict[str, Any]]
             parts_.append(f"{h['label']}: no separate item; the cell's assumption: “{assumed[0]}”.")
         elif s.get("cost_follows"):
             parts_.append(f"{h['label']}: a separate item with no curve of its own; its cost follows the other parts' damage and is added once.")
+        elif s["cell_state"] == "withheld":
+            parts_.append(f"{h['label']}: withheld. The cell says labour should be added once, after the other parts' damage is known, but it does not add it yet, so replacement labour is not priced.")
         elif s["cell_state"] == "not_named":
             parts_.append(f"{h['label']}: not mentioned by the cell, so replacement labour is not priced.")
         elif (s.get("gap") or {}).get("reason"):
@@ -686,7 +696,8 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
             # a part with no damage of its own whose cost the cell adds in proportion to the other parts' damage (replacement
             # support): priced through them, not left out
             cost_follows = (c.get("state") == "exposure_modifier"
-                            or (c.get("state") == "withheld" and mine and all("SUPPORT_COST_ALLOCATE_ONCE_AFTER_DISPOSITION" in (p.get("withheld_reasons") or []) for p in mine))
+                            # a withheld support row ("withheld_not_zero", the wind cells) is NOT priced: the cell says its
+                            # cost will be allocated once when that is qualified, but emits nothing for it today
                             or (c.get("state") == "no_curve" and re.search(r"allocated once|added once", str(c.get("no_curve_text") or ""), re.I) is not None)
                             # a cell that folds general replacement fieldwork into another part's value (hail × solar: the modules)
                             or (row["key"] == "support" and e is not None and e.kind != "gap" and any(re.search(r"fieldwork|labou?r", a_, re.I) and re.search(r"assign|allocat|add", a_, re.I)

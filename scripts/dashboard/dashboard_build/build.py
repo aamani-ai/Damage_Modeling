@@ -852,6 +852,24 @@ def build(write: bool = True) -> dict[str, Any]:
                       if budget_total and v_.get("total_usd") and abs(v_["total_usd"] - budget_total) < 1 else None)
             split_ = None if aslug == "real_estate" else value_split([x for x in view["subcomponents"] if x["hazard"]["slug"] == hs and x["entry_id"] == e.id],
                                  [g["rows"] for g in (view.get("budget") or {}).get("groups", [])], stated)
+            row_kind = (split_ or {}).pop("rows", {}) if split_ else {}
+            if row_kind:
+                labels_ = {x["key"]: x["label"] for x in view["subcomponents"] if x["hazard"]["slug"] == hs and x["entry_id"] == e.id}
+                groups_ = [g["rows"] for g in (view.get("budget") or {}).get("groups", [])]
+                for x in list(view["subcomponents"]) + list(cells[e.id].get("subcomponents") or []):
+                    if x["hazard"]["slug"] != hs or x.get("entry_id") != e.id or x["key"] not in row_kind:
+                        continue
+                    k_ = row_kind[x["key"]]
+                    x["value_kind"] = k_
+                    others = [labels_.get(o, o) for g in groups_ if x["key"] in g for o in g if o != x["key"]]
+                    if x.get("cost_follows") and k_ == "priced" and x.get("cell_state") == "not_named":
+                        x["value_note"] = "no curve of its own; the cell folds its cost into another part's value, so it is priced"
+                    elif x.get("cost_follows") and k_ == "priced":
+                        x["value_note"] = "no curve of its own; its cost follows the other parts' damage, so it is priced"
+                    elif k_ == "partly" and others and x["coverage"] == "gap":
+                        x["value_note"] = f"shares one value line with {_join(others)}, which has a curve, so the line is partly priced"
+                    elif k_ == "no_value":
+                        x["value_note"] = "no value line of its own in the budget, so it adds nothing to the split"
             vs = ({**split_, "basis": basis_words} if split_ else
                   {"reason": "no value budget for buildings yet" if aslug == "real_estate" else "no value budget for this asset"})
             cells[e.id]["value_split"] = vs
@@ -924,7 +942,7 @@ def build(write: bool = True) -> dict[str, Any]:
     CELL_NOTES = {
         "flood_wind": ["The one curve here is FEMA Hazus's flood curve for a standalone substation: \"whole facility\" means the whole substation, not the whole wind farm. "
                        "It prices only the wind farm's GSU substation. The turbines, collection network, civil works and control building have no flood curve yet. "
-                       "The value shown as priced is the fieldwork and transport support, which the cell adds in step with the substation's damage; the substation itself sits inside the ledger's one line for collection and the GSU substation (partly priced)."],
+                       "The substation sits inside the ledger's one line for collection and the GSU substation, so that line is partly priced; fieldwork and transport labour is withheld (the cell does not add it yet), so nothing else is priced."],
         "wind_tornado_wind": ["How Hazard uses these curves: its convective-wind loss adds two kinds of event. Strong-wind (straight-line) events are priced with these curves as drawn; "
                               "tornado events with the same curves shifted to start at lower speeds (the tornado shift). The two yearly losses are added under one cap. "
                               "Hazard leaves the power-electronics curve out."],

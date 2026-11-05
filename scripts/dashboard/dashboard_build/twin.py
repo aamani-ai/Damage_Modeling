@@ -26,7 +26,7 @@ STATE_WORDS = {
     "conditioner": "changes another curve",
     "no_curve": "no curve yet",
     "no_direct_damage": "no direct damage",
-    "outside": "not priced by this curve",
+    "outside": "outside this curve's value",
 }
 STATE_MEANING = {
     "curve": "A curve prices this hazard's damage to this part.",

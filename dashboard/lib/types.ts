@@ -139,6 +139,8 @@ export interface Subcomponent {
   scope_notes: ScopeNote[];
   // the row's value share and its basis; real estate also: the building a row belongs to and what the row means
   group?: { key: string; label: string }; share?: number | null; share_basis?: string | null; note?: string | null;
+  // where the row's money ends up in Value covered, and why when it is not what the coverage word suggests
+  value_kind?: "priced" | "partly" | "no_damage" | "not_priced" | "no_value"; value_note?: string;
   gap: {
     reason: string; own_words?: string | null; no_direct_damage?: boolean; source?: { label: string; path: string } | null;
     research?: { title: string; finding: string; link: string | null; where: string; repo: string; path: string }[]; occurrence: OccurrenceBucket | null; effect: string; basis: { label: string; path: string }[];
