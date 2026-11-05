@@ -335,7 +335,9 @@ export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, d
                         
                       </th>
                       <td className="px-2 py-1 text-right font-mono tabular" title={s.share_basis ?? undefined}>{s.share != null ? fmtPct(s.share, 1) : "—"}</td>
-                      <td className="px-2 py-1">{s.coverage === "gap" ? <span className="tile-gap rounded-sm px-1">{coverageWord(s, legend)}</span> : coverageWord(s, legend)}</td>
+                      <td className="px-2 py-1">{s.coverage === "gap" && (!s.value_kind || s.value_kind === "not_priced") ? <span className="tile-gap rounded-sm px-1">{coverageWord(s, legend)}</span> : coverageWord(s, legend)}
+                        {/* a row whose money is not where its word suggests (labour that follows, a shared value line, no value line) says so */}
+                        {s.value_note ? <span className="block text-[11.5px] text-muted-foreground">{s.value_note}</span> : null}</td>
                       <td className="px-2 py-1">{s.borrowed_from && !s.evidence_labels.includes("borrowed") ? "borrowed · " : ""}{evidence(s)}</td>
                       <td className="px-2 py-1">{s.coverage === "gap" || !s.curve_ids.length ? "—" : (
                         <span className="inline-flex flex-wrap gap-1">
