@@ -64,7 +64,8 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
   budget and each subsystem's state. `main` showed a figure for only 4 tiles and "share not stated" elsewhere. Real
   estate says "no value budget for buildings yet". What the words mean on the library page explains each part.
 - **Heat** has a column with the research so far. Icing and lightning are hidden (no curve, no research).
-- The header gives the counts; the KPI cards are gone.
+- The header counts the grid it shows, one tile per asset type × hazard with heat included (42 pairs), not catalogue
+  entries; the KPI cards are gone.
 
 ### Asset pages (for example Power plants › Solar farm)
 
@@ -103,8 +104,8 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
     to* (were "how damage rises" and "how it becomes dollars", renamed everywhere), with one line saying loss = damage
     ratio × value.
   - Its **References** line is only a link to the sources in step 3, so they are listed once.
-- **How this curve was made**, four steps. The first three boxes say what each step holds; the fourth names the
-  outside checks and who has read the entry. Each panel is complete on its own and ends with **Read from:** links to the
+- **How this curve was made**, four steps. The first three boxes say what each step holds; the fourth counts the
+  outside checks (their names on hover and in the panel) and says who has read the entry. Each panel is complete on its own and ends with **Read from:** links to the
   GitHub files it was written from (folded), next to **Details** for reviewers (method checks, source IDs, file
   fingerprints). Each list starts with its count.
   - *What it covers*: scope, what it leaves out, open questions, each part as subsystem › part, withheld units named
