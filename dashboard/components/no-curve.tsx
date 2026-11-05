@@ -32,7 +32,7 @@ export function NoCurveView({ m, crumbs, title, hazard, reason, why, basis, rese
       <div className="mt-3 space-y-3">
         {/* every subsystem first (folded), then why there is no curve and the research so far */}
         {subs.length && rollup ? (
-          <SubcomponentPanel subs={subs} rollup={rollup} hazards={[hazard]} defaultHazard={hazard.slug} cards={constructionCards(subs)} legend={m.legend} blobBase={blobBase(m)} picker={false} />
+          <SubcomponentPanel subs={subs} rollup={rollup} hazards={[hazard]} defaultHazard={hazard.slug} cards={constructionCards(subs)} legend={m.legend} blobBase={blobBase(m)} picker={false} startFolded />
         ) : null}
         <EmptyState>
           <div className="space-y-2 text-left">

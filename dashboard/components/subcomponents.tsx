@@ -240,11 +240,11 @@ function RowDetail({ s, cards, blobBase, names, curveHere = false, buildingSlug 
 }
 
 // teamNames: hazard slug → subsystem key → the hazard team's own part names (asset pages; from the split table)
-export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, defaultHazard, cards, legend, blobBase, picker = true, notes = [], overview = false, teamNames, buildings, title = "Every subsystem, curve or gap", twinBelow = false, buildingSlug = null }: {
+export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, defaultHazard, cards, legend, blobBase, picker = true, notes = [], overview = false, teamNames, buildings, title = "Every subsystem, curve or gap", twinBelow = false, buildingSlug = null, startFolded = false }: {
   subs: Subcomponent[]; rollup: SubcomponentRollup; hazards: { slug: string; label: string }[]; defaultHazard: string;
   cards: Record<string, ConstructionCard>; legend: Legend; blobBase: string; picker?: boolean; notes?: string[];
   overview?: boolean; teamNames?: Record<string, Record<string, string[]>>; title?: string; twinBelow?: boolean;
-  buildingSlug?: string | null;
+  buildingSlug?: string | null; startFolded?: boolean;
   // a shared real-estate cell page: type slug → building; ?building= keeps that building's rows only
   buildings?: Record<string, string>;
 }) {
@@ -263,7 +263,8 @@ export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, d
     setOpen(next.size ? [...next].join(",") : null);
   };
   const [fold, setFold] = useUrlParam("subs");
-  const shown = fold !== "hidden";
+  // open unless folded; a panel that starts folded opens only when asked (?subs=open)
+  const shown = startFolded ? fold === "open" : fold !== "hidden";
   // "all" is the side-by-side view of every hazard, one tab of the asset page; with no hazard in the URL it opens on defaultHazard
   const hz = picker ? (hazards.find((h) => h.slug === hzParam)?.slug ?? (overview && hzParam === "all" ? "all" : defaultHazard)) : defaultHazard;
   const all = hz === "all";
@@ -274,7 +275,7 @@ export function SubcomponentPanel({ subs: allSubs, rollup: allRollup, hazards, d
   return (
     <section id="subcomponents" className="scroll-mt-20 rounded-lg border border-border bg-card" aria-label={title}>
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-3 py-2">
-        <button type="button" aria-expanded={shown} aria-controls="subcomponents-body" onClick={() => setFold(shown ? "hidden" : null)} className={TOGGLE_CLASS}>
+        <button type="button" aria-expanded={shown} aria-controls="subcomponents-body" onClick={() => setFold(startFolded ? (shown ? null : "open") : (shown ? "hidden" : null))} className={TOGGLE_CLASS}>
           <ToggleArrow open={shown} />{title}
         </button>
         {picker ? <span className="text-[12px]">all hazards: <Counts r={rollup} legend={legend} /></span> : null}

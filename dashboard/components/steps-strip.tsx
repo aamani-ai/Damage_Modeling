@@ -58,7 +58,9 @@ export function StepsStrip({ cell, cites, curves, m, buildings }: { cell: CellV2
               <span>{s.name}</span>
               <span aria-hidden className="ml-auto text-[11px] font-normal text-muted-foreground">open ▸</span>
             </span>
-            {s.written && s.chips?.length ? (
+            {s.written && ["covers", "derived", "numbers"].includes(s.id) ? (
+              <span className="text-[12px] leading-snug text-muted-foreground">{s.meaning}.</span>
+            ) : s.written && s.chips?.length ? (
               <span className="flex flex-wrap gap-1">
                 {s.chips.map((c, j) => (
                   <span key={j} title={c.title} className={`max-w-full truncate rounded-sm px-1.5 py-px text-[11.5px] leading-4 ${c.tone === "key" ? "bg-muted text-foreground" : "border border-dashed border-border text-muted-foreground"}`}>{c.text}</span>

@@ -130,9 +130,7 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
         </div>
         {/* the profile, and the one finding the sections below do not state in one place; what each hazard has is in
             "The curves" */}
-        <p className="mt-1 max-w-[1100px] text-[13.5px] leading-snug">
-          {sharedCell ? `Every hazard is one real-estate cell shared by the building types; the pages below show the ${type.building?.toLowerCase()} rows.` : v?.uncovered}
-        </p>
+        {sharedCell ? <p className="mt-1 max-w-[1100px] text-[13.5px] leading-snug">Every hazard is one real-estate cell shared by the building types; the pages below show the {type.building?.toLowerCase()} rows.</p> : null}
       </div>
       <div className="mt-3 space-y-3">
         <ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} groups={["status", "evidence", "lenses", "subsystem", "hazard_use", "units"]} />
