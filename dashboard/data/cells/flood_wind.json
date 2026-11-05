@@ -63,7 +63,7 @@
    "label": "entry agent-read 2026-10-19 · release reviewed screening release"
   }
  },
- "summary": "Flood on wind farms: 1 curve for 1 part (GSU / substation (whole facility)); read against freshwater flood depth above substation grade (ft); the numbers are borrowed; 18 % of the plant's value is priced, 4 % partly.",
+ "summary": "Flood on wind farms: 1 curve for 1 part (GSU / substation (whole facility)). Each curve reads freshwater flood depth above substation grade (ft). The numbers are borrowed: taken from a similar asset or a related study and adapted. 18 % of the plant's value is priced, 4 % partly; 77 % could be damaged but has no curve, so it is left out of the loss.",
  "chain": {
   "stations": [
    {
@@ -1769,7 +1769,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f05a7b723a7521f86487e74af5684d8b69472c2a/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/235a263469bc77a41c7b2ec30d8062f61208f4ad/docs/cells/flood_solar/current/flood_solar__model_v1_0__docs_r4__curve_artifact.json",
     "link_kind": "repo_file",
     "title": "Canonical Damage Modeling flood_solar artifact, flood_solar@model_v1_0__docs_r4.",
     "no_link_sentence": null,
@@ -1904,7 +1904,7 @@
     "provenance": "register",
     "repo_path": "docs/method/standards/00_index.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f05a7b723a7521f86487e74af5684d8b69472c2a/docs/method/standards/00_index.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/235a263469bc77a41c7b2ec30d8062f61208f4ad/docs/method/standards/00_index.md",
     "link_kind": "repo_file",
     "title": "Damage Modeling method, contracts, and damage-curve skill governance.",
     "kind": "marker",
@@ -1926,7 +1926,7 @@
     "provenance": "register",
     "repo_path": "docs/method/shared_components/flood_electrical/README.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f05a7b723a7521f86487e74af5684d8b69472c2a/docs/method/shared_components/flood_electrical/README.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/235a263469bc77a41c7b2ec30d8062f61208f4ad/docs/method/shared_components/flood_electrical/README.md",
     "link_kind": "repo_file",
     "title": "Flood-electrical non-runtime shared component substrate v0.1.",
     "no_link_sentence": null,
@@ -1947,7 +1947,7 @@
     "provenance": "register",
     "repo_path": "docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
     "doi": null,
-    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/f05a7b723a7521f86487e74af5684d8b69472c2a/docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
+    "link": "https://github.com/aamani-ai/Damage_Modeling/blob/235a263469bc77a41c7b2ec30d8062f61208f4ad/docs/cells/flood_wind/proposed/BOUNDED_EVIDENCE_SEARCH_LOG_flood_wind__model_v0_1__docs_r1.md",
     "link_kind": "repo_file",
     "title": "Bounded evidence search log for flood_wind model v0.1/docs r1.",
     "no_link_sentence": null,
@@ -3191,5 +3191,8 @@
   "no_damage": 0.0,
   "not_priced": 0.7744916820702403,
   "basis": "of the reference plant's physical value"
- }
+ },
+ "cell_notes": [
+  "The one curve here is FEMA Hazus's flood curve for a standalone substation: \"whole facility\" means the whole substation, not the whole wind farm. It prices only the wind farm's GSU substation. The turbines, collection network, civil works and control building have no flood curve yet. The value shown as priced is the fieldwork and transport support, which the cell adds in step with the substation's damage; the substation itself sits inside the ledger's one line for collection and the GSU substation (partly priced)."
+ ]
 }
