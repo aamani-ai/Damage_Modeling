@@ -126,7 +126,7 @@ export function StationPanel({ station, cell: fullCell, cites, curves: allCurves
           {/* the hazard value Hazard must give the curves for each event: which measure, its unit and the range accepted */}
           {cell.answer.input ? <Line label="What Hazard supplies">{cell.answer.input} <span className="block text-[11px] text-muted-foreground">the hazard value Hazard gives the curves for each event, in the catalogue&apos;s words: which measure, its unit and the range the curves accept</span></Line> : null}
           {/* an input the curve file leaves undefined: said here, with the files it was read from */}
-          {pl.axis_notes?.length ? <Line label="To settle">{pl.axis_notes.map((n) => <span key={n.text} className="block">{n.text} <span className="text-[11px] text-muted-foreground">({n.paths.map((x, i) => <span key={x}>{i ? ", " : ""}<FileLink href={blob(x)}>{x.split("/").slice(-2).join("/")}</FileLink></span>)})</span></span>)}</Line> : null}
+          {pl.axis_notes?.length ? <Line label="Open question">{pl.axis_notes.map((n) => <span key={n.text} className="block">{n.text} <span className="text-[11px] text-muted-foreground">({n.paths.map((x, i) => <span key={x}>{i ? ", " : ""}<FileLink href={blob(x)}>{x.split("/").slice(-2).join("/")}</FileLink></span>)})</span></span>)}</Line> : null}
         </Words>
       );
       details = (

@@ -126,12 +126,11 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
           )}
           <h2 className="text-[16px] font-semibold tracking-tight">{type.label}{type.building ? <span className="font-normal text-muted-foreground"> · {type.building.toLowerCase()}</span> : null}</h2>
           <Tag>{tiles.length} hazards: {statusLine}</Tag>
-          {v?.reference && !sharedCell ? <Tag title={v.reference.source}>{v.reference.label}</Tag> : null}
+          {v?.reference && !sharedCell ? <Tag title={v.reference.source}>{v.reference.label}</Tag> : type.profile ? <Tag>{type.profile[0].toUpperCase() + type.profile.slice(1)}</Tag> : null}
         </div>
         {/* the profile, and the one finding the sections below do not state in one place; what each hazard has is in
             "The curves" */}
         <p className="mt-1 max-w-[1100px] text-[13.5px] leading-snug">
-          {type.profile ? <span className="text-muted-foreground">{type.profile[0].toUpperCase() + type.profile.slice(1)}. </span> : null}
           {sharedCell ? `Every hazard is one real-estate cell shared by the building types; the pages below show the ${type.building?.toLowerCase()} rows.` : v?.uncovered}
         </p>
       </div>
@@ -144,6 +143,7 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
           <details className="group" open>
             <SectionSummary className="px-3 py-2">View by Digital Twin part <span className="ml-2 font-normal normal-case tracking-normal">the parts of the Digital Twin&apos;s 3D model, and which have a curve</span></SectionSummary>
             <div className="space-y-2 border-t border-border p-2">
+              {type.picture_note ? <p className="px-1 text-[12.5px] text-muted-foreground">{type.picture_note}</p> : null}
               {cov && viewer ? <AssetCoverage cov={cov} loadOrder={viewer.load_order} /> : <p className="px-1 text-[13px] text-muted-foreground">No twin coverage for this type yet.</p>}
               {cov ? <CoverageMatrix cov={cov} /> : null}
             </div>

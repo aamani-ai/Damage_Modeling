@@ -30,6 +30,10 @@ export function NoCurveView({ m, crumbs, title, hazard, reason, why, basis, rese
       </div>
       <div className="mt-3"><ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} groups={["status", "subsystem"]} /></div>
       <div className="mt-3 space-y-3">
+        {/* every subsystem first (folded), then why there is no curve and the research so far */}
+        {subs.length && rollup ? (
+          <SubcomponentPanel subs={subs} rollup={rollup} hazards={[hazard]} defaultHazard={hazard.slug} cards={constructionCards(subs)} legend={m.legend} blobBase={blobBase(m)} picker={false} />
+        ) : null}
         <EmptyState>
           <div className="space-y-2 text-left">
             {/* the header already gives the reason; this block adds the fuller words and their basis when there are any */}
@@ -55,9 +59,6 @@ export function NoCurveView({ m, crumbs, title, hazard, reason, why, basis, rese
             </div>
           </div>
         </EmptyState>
-        {subs.length && rollup ? (
-          <SubcomponentPanel subs={subs} rollup={rollup} hazards={[hazard]} defaultHazard={hazard.slug} cards={constructionCards(subs)} legend={m.legend} blobBase={blobBase(m)} picker={false} />
-        ) : null}
         {after}
         {type && others.length ? (
           <p className="px-1 text-[12.5px] text-muted-foreground">

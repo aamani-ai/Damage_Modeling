@@ -533,9 +533,11 @@ def build(write: bool = True) -> dict[str, Any]:
     # names the files it was read from.
     axis_notes = {
         "tropical_cyclone_wind_solar": {
-            "text": ("The array and site-facility axes are pressure ratios (event ÷ design pressure), but this curve file does not say "
-                     "how to form them from the two gusts it also accepts: the gust ratio itself, or its square. This repository's "
-                     "substation bindings, which reuse its GSU curve, state (event gust ÷ design gust)²; Hazard's runs do both."),
+            "text": ("How to turn wind speeds into this curve's input is not written down. The curve reads a pressure ratio: how hard "
+                     "the wind pushes, compared with what the plant was designed for. From two gust speeds that is (event gust ÷ "
+                     "design gust)², because the push grows with the square of the speed. This curve file does not say so, but this "
+                     "repository's substation bindings that reuse its GSU curve do. Hazard's solar run uses the gust ratio without "
+                     "squaring it."),
             "paths": ["docs/contracts/hazard_handoff/substation_hurricane_screening_v1/binding.json",
                       "docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/binding.json"],
         },
@@ -893,6 +895,22 @@ def build(write: bool = True) -> dict[str, Any]:
                 s_["construction"] = [{**k_, "production_use": {**(k_.get("production_use") or {}), "hazard": hu}} if k_.get("production_use") else k_
                                       for k_ in s_.get("construction") or []]
             cells[e.id]["hazard_note"] = None
+    # step 1 ("What it covers") counts subsystems, the list a curve should cover, as the subsystem table does; the
+    # catalogue's own not-covered lines (which can bundle several subsystems) stay in the chip's hover
+    for e in entries:
+        c_ = cells.get(e.id) or {}
+        subs_ = c_.get("subcomponents") or []
+        step = next((st for st in (c_.get("plain") or {}).get("steps") or [] if st["id"] == "covers"), None)
+        if not subs_ or not step or e.kind == "gap" or any(s_.get("group") for s_ in subs_):
+            continue
+        with_c = sum(1 for s_ in subs_ if s_["coverage"] != "gap" and s_["curve_ids"])
+        nd = sum(1 for s_ in subs_ if s_["coverage"] == "gap" and (s_.get("gap") or {}).get("no_direct_damage"))
+        gap = len(subs_) - with_c - nd
+        words = [f"{with_c} of {len(subs_)} subsystems with a curve"] + ([f"{gap} no curve yet"] if gap else []) + ([f"{nd} no direct damage"] if nd else [])
+        old = next((ch for ch in step["chips"] if ch["text"].endswith("without a curve yet")), None)
+        title = ("The catalogue's own list: " + old["title"]) if old and old.get("title") else None
+        step["chips"] = [ch for ch in step["chips"] if ch is not old] + [{"text": " · ".join(words), "tone": "muted", **({"title": title} if title else {})}]
+        step["fact"] = re.sub(r" · \d+ without one yet", "", step["fact"]) + f" · {words[0]}"
     # the library was drawn before the asset views: its tiles take each cell's value split now
     split_by_id = {t_["entry_id"]: t_.get("value_split") for t_ in tiles}
     for c_ in manifest["library"]:

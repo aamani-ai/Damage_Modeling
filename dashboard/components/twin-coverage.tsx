@@ -411,7 +411,7 @@ export function TwinCoverage({
               </span>
             ) : null}
           </div>
-          {cov.type.picture_note ? <p className="mt-1 px-0.5 text-[11.5px] text-muted-foreground">{cov.type.picture_note}</p> : null}
+          {cov.type.picture_note && mode === "cell" ? <p className="mt-1 px-0.5 text-[11.5px] text-muted-foreground">{cov.type.picture_note}</p> : null}
         </div>
         {/* the list takes the picture's height on a wide screen, so the two columns end together */}
         <div className="min-w-0 lg:relative">
