@@ -958,10 +958,10 @@ def steps4(ctx: dict[str, Any], stations_plain: list[dict[str, Any]], chain_stat
                 *(["field reports not searched" if occ == "not_searched" else f"field reports: {occ.replace('_', ' ')}"] if SHOW_FIELD_REPORTS else []),
                 f"reviewed by {rv['review']['by']}" if rv.get("review") else "read by an agent only",
             ])
-            chips += [_chip(_short(c["name"], 30), "key", c["name"]) for c in oc[:2]]
-            if len(oc) > 2:
-                chips.append(_chip(f"+{len(oc) - 2} more checks", "muted"))
-            if not oc:
+            # the count of outside checks; their names are in the hover and the panel
+            if oc:
+                chips.append(_chip(f"{len(oc)} outside check{'s' if len(oc) != 1 else ''}", "key", "; ".join(c["name"] for c in oc)))
+            else:
                 chips.append(_chip("no outside check yet", "muted"))
             if SHOW_FIELD_REPORTS:
                 chips.append(_chip("field reports: not searched" if occ == "not_searched" else f"field reports: {occ.replace('_', ' ')}", "muted"))

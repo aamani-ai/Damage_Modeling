@@ -911,6 +911,10 @@ def build(write: bool = True) -> dict[str, Any]:
         title = ("The catalogue's own list: " + old["title"]) if old and old.get("title") else None
         step["chips"] = [ch for ch in step["chips"] if ch is not old] + [{"text": " · ".join(words), "tone": "muted", **({"title": title} if title else {})}]
         step["fact"] = re.sub(r" · \d+ without one yet", "", step["fact"]) + f" · {words[0]}"
+    # the library's header counts the grid it shows (one tile per asset type × hazard, heat included), not catalogue
+    # entries: a real-estate entry fills three building types, and heat has no entry
+    grid = [t_ for c_ in manifest["library"] for t_row in c_["types"] for t_ in t_row["tiles"].values()]
+    manifest["grid_counts"] = {"pairs": len(grid), **{k: sum(1 for t_ in grid if t_["status"] == k) for k in ("live", "proposal", "reused", "gap")}}
     # the library was drawn before the asset views: its tiles take each cell's value split now
     split_by_id = {t_["entry_id"]: t_.get("value_split") for t_ in tiles}
     for c_ in manifest["library"]:

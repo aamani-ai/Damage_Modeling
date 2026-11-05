@@ -355,6 +355,8 @@ export interface ReviewCell {
 }
 export interface SourceInfo { mode: "main" | "preview"; ref: string; commit: string; commit_full: string; dirty: boolean; label: string }
 export type ManifestV3 = ManifestV2 & {
+  /** the library grid: one tile per asset type × hazard (heat included) */
+  grid_counts?: { pairs: number; live: number; proposal: number; reused: number; gap: number };
   source: SourceInfo;
   hazard_main: { available: boolean; ref: string; commit: string | null; behind: boolean | null; sentence: string };
   spine: { categories: SpineCategory[]; source: string };

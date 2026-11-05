@@ -13,7 +13,8 @@ export default function LibraryPage() {
         {/* the one-sentence summary is hidden for now; the two lines below carry its counts
         <p className="mt-1 max-w-[1100px] text-[13.5px] leading-snug">{m.summary}</p> */}
         <p className="mt-1 max-w-[1100px] text-[13.5px] leading-snug">
-          <span className="font-medium">{c.live} live</span> · {c.proposal} proposals · {c.reused} reused · {c.gap} with no curve yet, {m.scope_line}.
+          {/* the grid below: one tile per asset type and hazard */}
+          {m.grid_counts ? <>{m.grid_counts.pairs} asset × hazard pairs: <span className="font-medium">{m.grid_counts.live} live</span> · {m.grid_counts.proposal} proposals · {m.grid_counts.reused} reused · {m.grid_counts.gap} with no curve yet, {m.scope_line}.</> : null}
         </p>
         <p className="text-[13.5px] leading-snug text-muted-foreground">
           <Link href="/review" className="text-accent hover:underline">Review</Link>: {c.owner_reviews} reviewed by a person · {c.agent_read_only} of {c.entries} entries read by an agent only · {m.review.n_tasks} open items for owners.
