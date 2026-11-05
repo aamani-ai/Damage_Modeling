@@ -125,6 +125,8 @@ export function StationPanel({ station, cell: fullCell, cites, curves: allCurves
           ))}
           {/* the hazard value Hazard must give the curves for each event: which measure, its unit and the range accepted */}
           {cell.answer.input ? <Line label="What Hazard supplies">{cell.answer.input} <span className="block text-[11px] text-muted-foreground">the hazard value Hazard gives the curves for each event, in the catalogue&apos;s words: which measure, its unit and the range the curves accept</span></Line> : null}
+          {/* an input the curve file leaves undefined: said here, with the files it was read from */}
+          {pl.axis_notes?.length ? <Line label="To settle">{pl.axis_notes.map((n) => <span key={n.text} className="block">{n.text} <span className="text-[11px] text-muted-foreground">({n.paths.map((x, i) => <span key={x}>{i ? ", " : ""}<FileLink href={blob(x)}>{x.split("/").slice(-2).join("/")}</FileLink></span>)})</span></span>)}</Line> : null}
         </Words>
       );
       details = (
@@ -144,6 +146,8 @@ export function StationPanel({ station, cell: fullCell, cites, curves: allCurves
           {/* the cell's own short list of judgment calls (its catalogue entry); the workbook's full register is under Assumptions */}
           <Line label="What we assumed">
             {pl.blocks.assumed.length ? <><Count n={pl.blocks.assumed.length} one="judgment call" note="set by engineering judgment, not taken from a source; placeholders until evidence replaces them" /><ul className="list-disc pl-4">{pl.blocks.assumed.map((x) => <li key={x}>{x}</li>)}</ul></> : <span className="text-muted-foreground">no judgment items listed in the catalogue entry</span>}
+            {/* Hazard's value share beside the assumption that expects it, where the curve file declares another */}
+            {pl.hazard_values?.map((v) => <p key={v.unit} className="mt-1 text-[12px]"><span className="font-medium">Hazard&apos;s value:</span> Hazard multiplies {v.unit} by {(v.share * 100).toFixed(1)}%{v.note ? ` (${v.note})` : ""}{v.expected ? ", as the assumption above expects" : ""}; the curve file still declares {(v.declared * 100).toFixed(1)}%. The For Hazard footer below says where this is recorded.</p>)}
           </Line>
           <Line label="Sources">
             {docs.length ? (

@@ -285,6 +285,10 @@ export interface Plain {
   link_counts: { total: number; linked: number; locator_only: number; neither: number; markers: number; placeholders: number };
   extraction: ExtractionInfo | null;
   tier_words: { shape: string; cost: string };
+  /** an input the curve file leaves undefined, with the files read */
+  axis_notes?: { text: string; paths: string[] }[];
+  /** what Hazard multiplies a unit by, where the curve file declares another share */
+  hazard_values?: { unit: string; share: number; declared: number; note: string | null; expected: boolean }[];
 }
 export interface Caption {
   what_it_says: string;
@@ -317,7 +321,7 @@ export interface Split {
 export interface TwinBlock { available: boolean; sentence: string; sha256: string | null; rows: number | null; nodes: Record<string, { node: string; name: string; disposition: string; why: string }[]>; leads?: boolean }
 export interface AssetViewV2 extends Omit<AssetView, "rows"> {
   rows: AssetRowV2[]; parts_by_cell: Record<string, PartsByCell>; split: Split; twin: TwinBlock; summary_v0: string; uncovered?: string | null;
-  reference: (AssetView["reference"] & { note?: string; link?: string | null }) | null;
+  reference: (AssetView["reference"] & { note?: string; link?: string | null; also?: { label: string; link: string } | null }) | null;
   value_source: { label: string; path: string; sha256?: string | null; pin_ok?: boolean | null } | null;
   // real estate only: the subsystems per building, their counts, and the notes the building pages carry
   subsystem_groups?: Record<string, SubcomponentRollup>; building_notes?: Record<string, string | null>;

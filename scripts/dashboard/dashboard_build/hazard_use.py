@@ -244,6 +244,50 @@ def _labels(layers: list[dict[str, Any]]) -> str:
             else f"Hazard's dashboard layers {', '.join(names[:3])}" + (f" and {len(names) - 3} more" if len(names) > 3 else ""))
 
 
+# A binding reuses another cell's curve, but Hazard runs it as its own consumer, with its own binding file; the
+# source cell's layer is a different run. Where Hazard keeps each binding (the files name the source cell, not the
+# binding, so they cannot be found by the binding's id).
+HAZARD_BINDINGS = {
+    "substation_hurricane_screening_v1": "perils/hurricane/src/hurricane/resources/substation_screening/binding.json",
+    "substation_convective_wind_screening_v1": "perils/convective_wind/src/convective_wind/resources/substation_screening/binding.json",
+    "substation_wildfire_screening_v1": "perils/wildfire/src/wildfire/resources/substation_screening/binding.json",
+}
+
+
+def for_binding(binding_id: str, shown_model: str | None, shown_docs: str | None) -> dict[str, Any]:
+    """Does Hazard run this binding, where, and with which release of the source curve? Says so in words; a binding
+    is never reported through its source cell's dashboard layer."""
+    snap = snapshot()
+    checked = f"Checked against Hazard's internal dashboard ({snap['dashboard']}) on {snap['checked_on']}." if snap else None
+    path = HAZARD_BINDINGS.get(binding_id)
+    found = []
+    for ref, rows in (_trees() if path else {}).items():
+        for oid, pth in rows:
+            if pth == path:
+                try:
+                    d = json.loads(_blob(oid))
+                except ValueError:
+                    d = {}
+                pin = d.get("source_pin") or {}
+                found.append((ref, pin.get("cell_id"), pin.get("semantic_damage_model_version"), pin.get("documentation_revision")))
+    on_layer = bool(snap and binding_id in (snap.get("cells") or {}))
+    lines = []
+    if not on_layer:
+        lines.append("No layer on Hazard's dashboard uses this binding yet (the hurricane-on-solar layer is a different run, of the solar plant).")
+    if found:
+        branches = sorted({f[0] for f in found})
+        src = found[0]
+        same = src[2] == shown_model and src[3] == shown_docs
+        lines.append(f"Hazard runs it from {path} on {'its main' if 'main' in branches else 'branch ' + ', '.join(branches[:3])}"
+                     + ("" if "main" in branches else ", not on Hazard's main") + f"; that binding pins {src[1]} {src[2]}, {src[3]}"
+                     + (", the release this page shows." if same else f"; this page shows {shown_model}, {shown_docs}."))
+    elif path:
+        lines.append(f"Hazard's binding file {path} was not found on any Hazard branch.")
+    if checked:
+        lines.append(checked)
+    return {"state": "used" if on_layer else "not_on", "sentences": lines, "differences": [], "values": [], "value_mismatches": [], "newer": None}
+
+
 def for_cell(cell_id: str, artifact_path: str | None) -> dict[str, Any]:
     """Does Hazard's dashboard use what this page shows? One of three answers, and sentences saying what its layers
     used, what the page shows, what differs in anything that can change a loss, and how that is known.

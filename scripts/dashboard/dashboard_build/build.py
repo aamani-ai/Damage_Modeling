@@ -21,7 +21,7 @@ from .common import (OUT, ROOT, SENTENCES, SHOW_FIELD_REPORTS, SOURCE, STATION_A
 from .faq import build_faq
 from .occurrence import (all_registers, asset_slug, bess_bucket_values, hazard_slug, register_for, resolve_state, slugs,
                          twin_crosswalk_pin)
-from .parts import value_split, asset_plain_sentence, asset_view, uncovered_sentence, shown_hazards, substation_budget, substation_crosswalk
+from .parts import SETTLED_REL, value_split, asset_plain_sentence, asset_view, uncovered_sentence, shown_hazards, substation_budget, substation_crosswalk
 from .plain import (FOR_HAZARD, STATION_NAMES, STEPS, TIER_MEANING, TIER_PLAIN, TIER_SHORT, ShapeSource, capability_sentences, curve_caption, halves,
                     main_logic, one_word, parameters_plain, plain_rail, plain_text, resolve_key_sources, station_plain, steps4, tier_words)
 from .registers import load_registers
@@ -522,6 +522,36 @@ def build(write: bool = True) -> dict[str, Any]:
                                                    constructing_files(e.id, c["version_key"], files), hazard_uses.setdefault(e.id, hazard_use.for_cell(e.id, e.artifact_path)))
             curves_out[f"{e.id}/{c['curve_id']}@{c['version_key']}"] = c
 
+    # a binding's Hazard record is its own run, not its source cell's layer (hazard_use.for_binding)
+    for e in entries:
+        if e.kind == "binding":
+            ident = cells[e.id]["identity"]
+            src = (cells[e.id].get("binding") or {}).get("source_entry_id")
+            shown = cells.get(src or "", {}).get("identity", {}) if src else {}
+            hazard_uses[e.id] = hazard_use.for_binding(e.id, shown.get("model") or ident.get("model"), shown.get("docs") or ident.get("docs"))
+    # an input a curve file leaves undefined, said where the cell's inputs are listed (How it was derived). Each note
+    # names the files it was read from.
+    axis_notes = {
+        "tropical_cyclone_wind_solar": {
+            "text": ("The array and site-facility axes are pressure ratios (event ÷ design pressure), but this curve file does not say "
+                     "how to form them from the two gusts it also accepts: the gust ratio itself, or its square. This repository's "
+                     "substation bindings, which reuse its GSU curve, state (event gust ÷ design gust)²; Hazard's runs do both."),
+            "paths": ["docs/contracts/hazard_handoff/substation_hurricane_screening_v1/binding.json",
+                      "docs/contracts/hazard_handoff/substation_convective_wind_screening_v1/binding.json"],
+        },
+    }
+    for cid, note in axis_notes.items():
+        if cid in cells:
+            cells[cid]["plain"]["axis_notes"] = [note]
+    # what Hazard multiplies a unit by where it is not what the curve file declares: shown beside the cell's assumptions
+    for e in entries:
+        mm = (hazard_uses.get(e.id) or {}).get("value_mismatches") or []
+        if mm and e.id in cells:
+            assumed = cells[e.id]["plain"]["blocks"].get("assumed") or []
+            cells[e.id]["plain"]["hazard_values"] = [{
+                "unit": v["unit"], "share": v["share"], "declared": v["declared"], "note": v.get("note"),
+                "expected": any("fieldwork" in a.lower() for a in assumed) and "fieldwork" in str(v.get("note") or "").lower()} for v in mm]
+
     # 3 · every curve sampled or listed
     all_curves = list(curves_out.values())
     bad_curves = [c["curve_id"] for c in all_curves if (c["drawn"] and not any(s["points"] for s in c["series"])) or (not c["drawn"] and not c["no_evaluator_sentence"])]
@@ -830,7 +860,9 @@ def build(write: bool = True) -> dict[str, Any]:
             u = fb_binding["units"]
             reference = {"label": f"{u['battery_enclosures']['count']} enclosures · {u['pcs']['count']} PCS · {fmt_usd_compact(fb_binding['reference_tiv_usd'])} reference value ({humanise(fb_binding.get('currency_basis'))})", "source": fb.artifact["value_linkage"]["value_binding_path"], "total_usd": fb_binding["reference_tiv_usd"]}
         elif view.get("budget"):
-            reference = {"label": view["budget"]["label"], "source": view["budget"]["path"], "total_usd": view["budget"]["total_usd"]}
+            reference = {"label": view["budget"]["label"], "source": view["budget"]["path"], "total_usd": view["budget"]["total_usd"],
+                         "note": view["budget"]["note"],
+                         "also": {"label": "Hazard's settled reference", "link": hazard_main.lookup(SETTLED_REL)["link"]}}
         elif aslug == "substation" and sub_budget.get("available"):
             total = sum(float(r["amount_usd"]) for r in sub_budget["rows"] if r.get("amount_usd"))
             reference = {"label": f"one 345/138 kV station · {fmt_usd_compact(total)} reference budget (Hazard, MISO MTEP24 rates)", "source": SUBSTATION_BUDGET_SOURCE, "total_usd": total,
@@ -851,6 +883,16 @@ def build(write: bool = True) -> dict[str, Any]:
                              **{k: view[k] for k in ("subsystem_rows", "subsystem_groups", "building_notes", "anatomy_note") if k in view}, "split": view["split"], "twin": view["twin"],
                              "value_source": view["value_source"], "entries": [t for t in tiles if t["asset"]["slug"] == aslug], "has_buckets": aslug in ("bess", "substation"),
                              "twin_crosswalk": {"sha256": twin.get("sha256"), "rows": twin.get("rows")} if aslug == "bess" else ({"sha256": sub_xwalk.get("sha256"), "rows": len(sub_xwalk.get("rows") or [])} if aslug == "substation" and sub_xwalk.get("available") else None)}
+    # a binding's subsystem rows carry its source cell's curve cards: give them the binding's own Hazard record (copies,
+    # so the source cell's cards keep theirs)
+    for e in entries:
+        if e.kind == "binding" and e.id in hazard_uses:
+            hu = hazard_uses[e.id]
+            for s_ in cells[e.id].get("subcomponents") or []:
+                s_["production_use"] = {**(s_.get("production_use") or {}), "hazard": hu["state"]}
+                s_["construction"] = [{**k_, "production_use": {**(k_.get("production_use") or {}), "hazard": hu}} if k_.get("production_use") else k_
+                                      for k_ in s_.get("construction") or []]
+            cells[e.id]["hazard_note"] = None
     # the library was drawn before the asset views: its tiles take each cell's value split now
     split_by_id = {t_["entry_id"]: t_.get("value_split") for t_ in tiles}
     for c_ in manifest["library"]:

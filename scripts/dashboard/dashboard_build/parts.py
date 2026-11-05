@@ -78,6 +78,10 @@ LEDGER_ROWS: dict[str, dict[str, list[str]]] = {
              "REPLACEMENT_FIELDWORK": ["support"], "REPLACEMENT_LOGISTICS": ["support"], "SUNK_SOFT_NONPHYSICAL": []},
 }
 LEDGER_SHEET = {"solar": ("Solar_Map", "Solar asset DC capacity", "MWdc"), "wind": ("Wind_Map", "Wind asset nameplate capacity", "MW")}
+# the plant the ledger's $/kW is multiplied by: Hazard's settled reference (06_settled_reference_design.md, settled
+# 2026-09-30), not the ledger's own editable default size, so the dashboard and Hazard name the same plant
+SETTLED_REL = "docs/plans/_cross_cutting/canonical_asset_profile/06_settled_reference_design.md"
+SETTLED_PLANT = {"solar": (120.0, "MWdc", "100 MWac / 120 MWdc single-axis tracker"), "wind": (100.0, "MW", "100 MW, twenty 5 MW turbines")}
 
 
 def ledger_budget(aslug: str) -> dict[str, Any] | None:
@@ -101,9 +105,12 @@ def ledger_budget(aslug: str) -> dict[str, Any] | None:
         if keys and d.get("physical_usd_per_kw"):
             by_group[keys] = by_group.get(keys, 0.0) + float(d["physical_usd_per_kw"])
     total = sum(by_group.values())
+    plant_mw, plant_unit, plant_words = SETTLED_PLANT[aslug]
     return {"groups": [{"rows": list(k), "usd_per_kw": v, "share": v / total} for k, v in by_group.items()], "total_usd_per_kw": total,
-            "capacity": capacity, "capacity_unit": cap_unit, "total_usd": total * float(capacity) * 1000, "path": LEDGER_REL, "sha256": sha256(path),
-            "label": f"{capacity:g} {cap_unit} reference plant · {fmt_usd_compact(total * float(capacity) * 1000)} physical replacement value (NREL benchmarks, value ledger)"}
+            "capacity": plant_mw, "capacity_unit": plant_unit, "total_usd": total * plant_mw * 1000, "path": LEDGER_REL, "sha256": sha256(path),
+            "ledger_default": f"{capacity:g} {cap_unit}",
+            "label": f"{plant_words} (Hazard's settled reference) · {fmt_usd_compact(total * plant_mw * 1000)} physical replacement value",
+            "note": f"the value ledger's ${total:,.0f}/kW × Hazard's settled plant of {plant_mw:g} {plant_unit}, not the ledger's own default size ({capacity:g} {cap_unit})"}
 
 
 # how much of the asset's value each hazard's curves price, from the profile's budget and each subsystem's state
@@ -723,7 +730,7 @@ def asset_view(aslug: str, a_def: dict[str, Any], entries: list[Any], cells: dic
                 rec["gap"]["basis"] = [b for b in rec["gap"].get("basis") or [] if "docs/evidence/occurrence/" not in b["path"]]
     return {"rows": rows, "parts_by_cell": parts_by_cell, "subcomponents": subcomponents, "subcomponent_rollup": _rollup(subcomponents),
             **re_extra, "split": split, "twin": twin_block,
-            "budget": {k: budget[k] for k in ("groups", "label", "path", "sha256", "total_usd")} if budget else None,
+            "budget": {k: budget[k] for k in ("groups", "label", "path", "sha256", "total_usd", "note")} if budget else None,
             "labour_note": labour_note(aslug, subcomponents, hz, cells, budget),
             "value_source": ({"label": "reference budget r1 (battery value binding)", "path": "docs/cells/flood_bess/current/value_binding.json"} if aslug == "bess"
                              else {"label": "the solar and wind value ledger (NREL benchmarks)", "path": LEDGER_REL, "sha256": ledger_budget(aslug)["sha256"]} if aslug in LEDGER_ROWS
@@ -932,8 +939,8 @@ def split_finding(aslug: str, a_def: dict[str, Any], rows: list[dict[str, Any]],
                 bound = sum(amount.get(i_, 0.0) for i_ in ids)
                 fenced = sum(v for k_, v in amount.items() if sys_of.get(k_) and k_ != "road")
                 details.append(f"{pc['hazard']['label'].lower()} binds {len(ids)} equipment rows ({fmt_usd_compact(bound)}, {fmt_pct(bound / fenced) if fenced else '—'} of the fenced station) and withholds the rest; the other hazards use one curve for the whole station")
-    no_budget = {"solar": "The value shares are the repository's value ledger for a 100 MWdc plant (NREL benchmarks), grouped by subsystem with installation labour beside its hardware; a cell's own value lines, on its own basis, are in each row's hover.",
-                 "wind": "The value shares are the repository's value ledger for a 200 MW plant (NREL benchmarks), grouped by subsystem; the ledger prices collection and the GSU substation as one line, counted once under Collection network, and has no line of its own for the control building.",
+    no_budget = {"solar": "The value shares are the repository's value ledger (NREL benchmarks, priced per kW), grouped by subsystem with installation labour beside its hardware; the dollars are for Hazard's settled 120 MWdc plant. A cell's own value lines, on its own basis, are in each row's hover.",
+                 "wind": "The value shares are the repository's value ledger (NREL benchmarks, priced per kW), grouped by subsystem, with the dollars for Hazard's settled 100 MW plant; the ledger prices collection and the GSU substation as one line, counted once under Collection network, and has no line of its own for the control building.",
                  "real_estate": "Buildings carry no dollar value here: every curve is a share of the building's structure replacement cost, which the consumer supplies.",
                  "substation": "Hazard's substation reference budget ($27.35M fenced station) sets the rows; three hazards use one curve for the whole station, wildfire binds the equipment rows only.",
                  "bess": "Hazard's battery reference budget ($109.8M) sets the rows."}

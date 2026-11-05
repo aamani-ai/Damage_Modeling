@@ -155,7 +155,7 @@ export default async function AssetPage({ params }: { params: Promise<{ asset: s
           <span className="text-[11px] font-semibold uppercase tracking-wide">Sources of this page</span>{" "}
           {cov ? <>the Digital Twin at <span className="font-mono">{cov.twin.commit.slice(0, 7)}</span> · crosswalk <FileLink href={blobUrl(m, cov.twin.crosswalk)}>{cov.twin.crosswalk.split("/").slice(-1)[0]}</FileLink></> : null}
           {cov && v?.reference && !sharedCell ? " · " : null}
-          {v?.reference && !sharedCell ? <>reference value {v.reference.link || !v.reference.source.startsWith("Hazard_modeling/") ? <FileLink href={v.reference.link ?? blobUrl(m, v.reference.source)}>{v.reference.source.split("/").slice(-1)[0]}</FileLink> : <span>{v.reference.source.split("/").slice(-1)[0]} (on a Hazard branch, not on its main yet)</span>}{v.reference.note ? ` (${v.reference.note})` : ""}</> : null}
+          {v?.reference && !sharedCell ? <>reference value {v.reference.link || !v.reference.source.startsWith("Hazard_modeling/") ? <FileLink href={v.reference.link ?? blobUrl(m, v.reference.source)}>{v.reference.source.split("/").slice(-1)[0]}</FileLink> : <span>{v.reference.source.split("/").slice(-1)[0]} (on a Hazard branch, not on its main yet)</span>}{v.reference.note ? ` (${v.reference.note})` : ""}{v.reference.also ? <> · plant from <FileLink href={v.reference.also.link}>{v.reference.also.label}</FileLink></> : null}</> : null}
         </footer>
       ) : null}
     </div>
