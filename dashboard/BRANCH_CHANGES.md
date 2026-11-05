@@ -69,6 +69,9 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
 ### Asset pages (for example Power plants › Solar farm)
 
 - **The curves** (a fold, open by default): the library's own tiles, one per hazard including heat.
+- **The plant behind the dollars** is Hazard's settled reference (`06_settled_reference_design.md`, linked from the
+  page): solar 100 MWac / 120 MWdc single-axis tracker, $105.3M; wind twenty 5 MW turbines, $162.3M. The value
+  ledger's per-kW prices are multiplied by that plant, not by the ledger's own default size (100 MWdc, 200 MW).
 - **Value budgets for solar and wind** (still in progress, with Value covered): the subsystem shares come from the repository's value ledger
   (`docs/method/value_basis/solar_wind_value_breakdown.xlsx`, NREL benchmarks: a 100 MWdc solar plant, a 200 MW wind
   plant), grouped by subsystem with installation labour beside its hardware, as the battery and substation budgets
@@ -104,8 +107,11 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
     in words with their reasons.
   - *How it was derived*: each hazard measure with the parts read against it, the curve shapes, what Hazard has to
     supply; seven-step audits are found wherever the cell keeps them, or an earlier version's is named.
+    Hurricane × solar adds a *To settle* line: its pressure-ratio axes do not say how to form them from gusts (the
+    ratio or its square); this repository's substation bindings square it.
     Whether a site-condition adapter exists is said once, under the audit, with what one is.
-  - *Where the numbers come from*: what we assumed (the cell's judgment calls), then the sources and the parameters,
+  - *Where the numbers come from*: what we assumed (the cell's judgment calls; where Hazard multiplies a unit by a
+    different share, that share is given beside them, as for hail × solar's 35.5% against the curve file's 26%), then the sources and the parameters,
     each list starting with its count ("21 sources (1 with no link…)", "8 parameters (4 published, 2 borrowed, 2 our
     judgment)"). Each parameter appears once with the parts it applies to; a number with no source says "our judgment,
     no source cited". The paragraph above only says where the sources are kept, so nothing is said twice.
@@ -116,7 +122,9 @@ failed data check, `hazard_match`; that is expected (see "Hazard" below).
   part, grouped by the twin's view (for solar: tracker block and solar plant), as the 3D model's side panel names them.
 - What is covered, What is missing and Open questions are listed once, in the What it covers step. What we assumed is
   in Where the numbers come from.
-- **For Hazard** (footer) says once whether Hazard's dashboard uses this exact file. Its **What it outputs** gives
+- **For Hazard** (footer) says once whether Hazard's dashboard uses this exact file. A binding (the substation
+  screening bindings) reports its own run in Hazard, with the branch and the release it pins, not its source cell's
+  layer. Its **What it outputs** gives
   what the curve may be used for in plain words (once on the page), then the emit modes and limitation flags. Long
   file names wrap inside their column.
 - A real-estate curve page opened for one building (`?building=residential`) is titled for it and shows only its

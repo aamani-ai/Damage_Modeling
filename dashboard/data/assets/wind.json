@@ -10,9 +10,14 @@
  "uncovered": "4 parts of the wind farm have no curve under any hazard: collection network, control building, SCADA, met and O&M, civil and fieldwork and transport support.",
  "summary_v0": "Flood, hurricane wind, convective wind and wildfire have curves for wind farms, all on borrowed evidence or our judgment; hail has none.",
  "reference": {
-  "label": "200 MW reference plant · $324.6M physical replacement value (NREL benchmarks, value ledger)",
+  "label": "100 MW, twenty 5 MW turbines (Hazard's settled reference) · $162.3M physical replacement value",
   "source": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
-  "total_usd": 324600000.0
+  "total_usd": 162300000.0,
+  "note": "the value ledger's $1,623/kW × Hazard's settled plant of 100 MW, not the ledger's own default size (200 MW)",
+  "also": {
+   "label": "Hazard's settled reference",
+   "link": "https://github.com/aamani-ai/Hazard_Modeling/blob/ee41b829f51485283d5a3540de7c34ccfa846e95/docs/plans/_cross_cutting/canonical_asset_profile/06_settled_reference_design.md"
+  }
  },
  "hazards": [
   {
@@ -164,7 +169,7 @@
   {
    "key": "rotor",
    "label": "Rotor and blades",
-   "value_usd": 67400000.0,
+   "value_usd": 33700000.0,
    "share": 0.20764017252002465,
    "shared_with": [],
    "twin_targets": [],
@@ -294,7 +299,7 @@
   {
    "key": "tower",
    "label": "Tower",
-   "value_usd": 55200000.0,
+   "value_usd": 27600000.0,
    "share": 0.17005545286506468,
    "shared_with": [],
    "twin_targets": [],
@@ -432,7 +437,7 @@
   {
    "key": "nacelle",
    "label": "Nacelle: gearbox, generator, yaw",
-   "value_usd": 68000000.0,
+   "value_usd": 34000000.0,
    "share": 0.20948860135551448,
    "shared_with": [],
    "twin_targets": [],
@@ -562,7 +567,7 @@
   {
    "key": "foundation",
    "label": "Turbine foundation",
-   "value_usd": 24000000.0,
+   "value_usd": 12000000.0,
    "share": 0.07393715341959335,
    "shared_with": [],
    "twin_targets": [],
@@ -686,7 +691,7 @@
   {
    "key": "turbine_electrical",
    "label": "Turbine-base and pad electrical",
-   "value_usd": 27400000.0,
+   "value_usd": 13700000.0,
    "share": 0.08441158348736907,
    "shared_with": [],
    "twin_targets": [],
@@ -816,7 +821,7 @@
   {
    "key": "collection",
    "label": "Collection network",
-   "value_usd": 14400000.0,
+   "value_usd": 7200000.0,
    "share": 0.04436229205175601,
    "shared_with": [
     "gsu"
@@ -896,7 +901,7 @@
      "share": null,
      "dollars": null,
      "no_curve_text": "SCADA and controls, electrical collection, substation and civil infrastructure (reviewed secondary units, no curve)",
-     "sentence": "No curve — Collection network, $14.4M of the reference value, has no damage response yet."
+     "sentence": "No curve — Collection network, $7.2M of the reference value, has no damage response yet."
     },
     "wildfire": {
      "entry_id": "wildfire_wind",
@@ -1196,7 +1201,7 @@
   {
    "key": "civil",
    "label": "Civil: roads, pads, buildings, fences",
-   "value_usd": 9400000.0,
+   "value_usd": 4700000.0,
    "share": 0.02895871842267406,
    "shared_with": [],
    "twin_targets": [],
@@ -1274,7 +1279,7 @@
      "share": null,
      "dollars": null,
      "no_curve_text": "SCADA and controls, electrical collection, substation and civil infrastructure (reviewed secondary units, no curve)",
-     "sentence": "No curve — Civil: roads, pads, buildings, fences, $9.4M of the reference value, has no damage response yet."
+     "sentence": "No curve — Civil: roads, pads, buildings, fences, $4.7M of the reference value, has no damage response yet."
     },
     "wildfire": {
      "entry_id": "wildfire_wind",
@@ -1316,7 +1321,7 @@
   {
    "key": "support",
    "label": "Fieldwork and transport support",
-   "value_usd": 58800000.0,
+   "value_usd": 29400000.0,
    "share": 0.18114602587800369,
    "shared_with": [],
    "twin_targets": [],
@@ -6707,8 +6712,8 @@
  "labour_note": "Replacement labour (installation, inspection, logistics; 18 % of the plant in the value ledger) is treated differently by each hazard's cell — Flood: a separate item with no curve of its own; its cost follows the other parts' damage and is added once. Hurricane wind: a separate item with no curve of its own; its cost follows the other parts' damage and is added once. Convective wind: not mentioned by the cell, so replacement labour is not priced. Wildfire: a separate item with no curve of its own; its cost follows the other parts' damage and is added once.",
  "split": {
   "differs": true,
-  "sentence": "These cells split the wind farm differently: the cells name different numbers of parts: flood 15, hurricane wind 10, wildfire 12 and convective wind 5; collection network is a unit under flood, hurricane wind and wildfire; convective wind lists it as no curve yet; GSU substation is a unit under flood, hurricane wind and wildfire; convective wind lists it as no curve yet; control building, SCADA, met and O&M is a unit under hurricane wind and wildfire; flood and convective wind list it as no curve yet; civil: roads, pads, buildings, fences is a unit under flood, hurricane wind and wildfire; convective wind lists it as no curve yet; fieldwork and transport support is a unit under flood, hurricane wind and wildfire; convective wind does not mention it; and more below. The value shares are the repository's value ledger for a 200 MW plant (NREL benchmarks), grouped by subsystem; the ledger prices collection and the GSU substation as one line, counted once under Collection network, and has no line of its own for the control building.",
-  "note": "These cells split the wind farm differently, so one team's single unit can be several rows here, or one row can be several of its units. Open a row to see that team's own names for it. The value shares are the repository's value ledger for a 200 MW plant (NREL benchmarks), grouped by subsystem; the ledger prices collection and the GSU substation as one line, counted once under Collection network, and has no line of its own for the control building.",
+  "sentence": "These cells split the wind farm differently: the cells name different numbers of parts: flood 15, hurricane wind 10, wildfire 12 and convective wind 5; collection network is a unit under flood, hurricane wind and wildfire; convective wind lists it as no curve yet; GSU substation is a unit under flood, hurricane wind and wildfire; convective wind lists it as no curve yet; control building, SCADA, met and O&M is a unit under hurricane wind and wildfire; flood and convective wind list it as no curve yet; civil: roads, pads, buildings, fences is a unit under flood, hurricane wind and wildfire; convective wind lists it as no curve yet; fieldwork and transport support is a unit under flood, hurricane wind and wildfire; convective wind does not mention it; and more below. The value shares are the repository's value ledger (NREL benchmarks, priced per kW), grouped by subsystem, with the dollars for Hazard's settled 100 MW plant; the ledger prices collection and the GSU substation as one line, counted once under Collection network, and has no line of its own for the control building.",
+  "note": "These cells split the wind farm differently, so one team's single unit can be several rows here, or one row can be several of its units. Open a row to see that team's own names for it. The value shares are the repository's value ledger (NREL benchmarks, priced per kW), grouped by subsystem, with the dollars for Hazard's settled 100 MW plant; the ledger prices collection and the GSU substation as one line, counted once under Collection network, and has no line of its own for the control building.",
   "details": [
    "the cells name different numbers of parts: flood 15, hurricane wind 10, wildfire 12 and convective wind 5",
    "collection network is a unit under flood, hurricane wind and wildfire; convective wind lists it as no curve yet",
