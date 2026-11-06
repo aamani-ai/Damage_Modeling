@@ -1,0 +1,82 @@
+{
+  "schema_version": "capability_declaration.v3",
+  "cell_id": "tropical_cyclone_wind_real_estate",
+  "canonical_runtime_artifact": true,
+  "pathway_capabilities": [
+    {
+      "pathway_id": "tropical_cyclone_wind",
+      "failure_unit_scalar_dr": "conditional",
+      "scenario_loss_given_value_basis": "conditional",
+      "curve_intrinsic_spread": "not_carried",
+      "populated_emit_modes": [
+        "scalar_mean"
+      ],
+      "conditions": [
+        "reference_building_id must be one of the four proposed reference buildings",
+        "hazus_terrain_class is required (open, light_suburban, suburban, light_trees, trees); no default, no interpolation",
+        "tc_peak_gust_3s_10m_mph is the open-terrain 3-second gust at 10 m; terrain is applied only by the record choice",
+        "records are valid from 50 to 250 mph; below 50 returns 0, above 250 withholds",
+        "only the reference wind building characteristics are published (the Hazard profile value where it states one, else the most common); other values withhold",
+        "the damage ratio includes wind pressure, windborne debris and rain entering through wind damage; no separate debris or rain pathway may be added",
+        "scenario dollars stay withheld until the consumer qualifies the building value",
+        "Canonical scope: exact warehouse, office and house bindings; retail remains conditional source evidence without annual binding."
+      ],
+      "limitation_flags": [
+        "SCREENING_SOURCE_NATIVE_ADOPTED_TABLE",
+        "WHOLE_BUILDING_SOURCE_ATOM",
+        "HAZUS_COMBINED_PRESSURE_DEBRIS_RAIN_INGRESS",
+        "REFERENCE_BUILDING_ASSUMPTIONS_NOT_OBSERVED",
+        "NOT_FIELD_OR_CLAIMS_CALIBRATED",
+        "PLATFORM_CODES_PROPOSED_NOT_ISSUED",
+        "TREE_FALL_ADDITIVE_TERM_DEFERRED",
+        "VALUE_COVERAGE_NOT_ITEMIZED_BY_SOURCE",
+        "HOUSE_CONNECTIONS_NATIONAL_MOST_COMMON_NOT_CODE_ZONE",
+        "TERRAIN_CLASS_MAPPING_CONSUMER_OWNED",
+        "WIND_AND_FLOOD_SAME_BUILDING_COMBINATION_CONSUMER_OWNED",
+        "THREE_EXPLICIT_TERRAIN_CONDITIONS_NOT_LOCAL_MAPPING"
+      ],
+      "withheld_failure_units": [
+        {
+          "failure_unit_id": "TCRE_BUILDING_CONTENTS",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumer_annual_metrics": {
+    "computation_owner": "downstream_consumer",
+    "status_before_promotion": "withheld_noncanonical_proposal",
+    "status_after_promotion": "consumer_computable_from_validated_frequency_intensity_coupling_value_and_cap_model",
+    "prerequisites": [
+      "Exact per-profile whole-building value and source pin",
+      "Explicit open, suburban or trees condition; no local mapping or probability weight asserted",
+      "Native current STORM parent; open-terrain three-second gust at 10 m converted exactly once",
+      "Native spatial mixture before annual metrics; original source/unresolved-tail mass retained",
+      "Installed annual frequency/cap/tail/convergence proof and national readback before delivery"
+    ],
+    "limitation_flags": [
+      "ANNUAL_AND_TAIL_METRICS_CONSUMER_OWNED",
+      "VALUE_COVERAGE_NOT_ITEMIZED_BY_SOURCE"
+    ]
+  },
+  "cap_binding": {
+    "policy": "consumer_enforced_fail_closed",
+    "enforcement_owner": "downstream_consumer",
+    "checks_required": [
+      "exact model/docs/schema/SHA pin",
+      "record routing by reference_building_id and hazus_terrain_class",
+      "terrain never defaulted and never also applied to the gust",
+      "wind and flood damage on one building in one storm together at most 100% of structure value"
+    ],
+    "action_if_fail": "withhold the affected DR or downstream metric; do not substitute another record or clamp"
+  },
+  "promotion_gate": {
+    "status": "passed",
+    "required_before_canonical_use": [
+      "Unchanged source response admission for owner-requested warehouse/office/house reference scope and three explicit terrain conditions; annual use remains conditional on consumer prerequisites."
+    ]
+  }
+}

@@ -9,6 +9,7 @@ the canonical files and explain the normal process.
 
 | Guide | Use when |
 |---|---|
+| [`flood_real_estate_curve_request_guide.md`](flood_real_estate_curve_request_guide.md) | Request the accepted warehouse-only Flood response, exact pin and qualified building-value boundary. |
 | [`hail_solar_curve_request_guide.md`](hail_solar_curve_request_guide.md) | Someone asks for the current solar hail curve or how Hazard should consume it. |
 | [`flood_solar_curve_request_guide.md`](flood_solar_curve_request_guide.md) | Someone needs to bridge event water level and component datum into the current flood × solar failure-unit curves. |
 | [`wildfire_solar_curve_request_guide.md`](wildfire_solar_curve_request_guide.md) | Someone asks for a wildfire x solar curve, multi-subsystem damage treatment, or why the current scaffold must withhold numerical outputs. |
@@ -33,3 +34,11 @@ names a curve, contract, manifest, or artifact, it should link back to the canon
 
 Every repository-current artifact-index cell must have one canonical request guide. Proposal-only guides may
 also exist, but they do not satisfy or alter that current-cell mapping.
+
+- [Building Convective Wind request guide](convective_wind_real_estate_curve_request_guide.md): exact source pin, three reference selectors, separate pathways, value and annual-use gates.
+
+- [Hail building request guide](hail_real_estate_curve_request_guide.md): material/unit selectors, explicit screening acknowledgement and partial value.
+
+- [Hurricane building request guide](tropical_cyclone_wind_real_estate_curve_request_guide.md): explicit terrain, characteristic refusals and whole-building value.
+
+- [Wildfire building request guide](wildfire_real_estate_curve_request_guide.md): exact classes and explicit potential-structure proxy scope.

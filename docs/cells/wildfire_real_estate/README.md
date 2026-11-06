@@ -1,64 +1,16 @@
-<!--
-author: owner-directed (JL) · agent-drafted
-created: 2026-10-18
-updated: 2026-10-18
-status: draft
--->
+---
+author: "owner-directed (Divy) · Codex"
+created: 2026-10-26
+updated: 2026-10-26
+status: active
+---
 
-# wildfire_real_estate
+# Wildfire potential-structure screening admission
 
-Current cell: **wildfire × real estate**, a new **scaffold** whose proposal is semantic damage-model `model v0.1`,
-documentation revision `docs r1`. It publishes **no runtime curve yet**. It is not in the artifact index, not in a
-package release, and does not change any Hazard pin.
+Current `wildfire_real_estate@model_v1_0__docs_r1`, SHA `0ffdd7cd0645d56e8d4c942a4a65e0a2cc4c6e3dbc09408df20d4b09d3e01b7f`, preserves all three returned v0.1 class tables, selectors and refusals. [Artifact](current/wildfire_real_estate__model_v1_0__docs_r1__curve_artifact.json); [bindings](../../contracts/hazard_handoff/real_estate_wildfire_screening_v1/README.md). Class 0 is no event; classes 1–6 are exact FSim categories. Frequency never enters the Damage call. Contents are withheld.
 
-## What this cell is for
+The agent accepts the source agency-judgment response, fixed shrub lifeform, cost-ratio reading and warehouse 0.8 / office 0.9 factors as explicitly labeled T4 screening transfers within Divy's requested reference scope. The house uses the source response directly. These are not causal material effects or observed roof/vent/defensible-space attributes. Neither intrinsic variability nor mitigation credit is invented. The fixed budgets are USD 11M / 10.8M / 405k of included building RCN, not appraisals.
 
-Direct physical damage to the **structure** of the Hazard reference profiles r1 — a one-storey house, a one-storey
-steel warehouse and a three-storey office, the same buildings as the flood, hurricane and convective real-estate
-cells — when a wildfire burns at the building's location. Damage is a fraction of the structure's **replacement cost
-new**, looked up at the exact FSim flame-length class Hazard delivers. The house uses the USFS Wildfire Risk to
-Communities structure response (shrub: 20% for flames under 2 ft up to 95% for 12 ft and above); the warehouse and
-office use 0.8 and 0.9 times the house, from CAL FIRE post-fire inspections that compare building types inside the
-same fires.
+Annual scope is a hypothetical unmitigated **potential structure under direct landscape-pixel exposure**. USFS uses potential-home counterfactuals for national relative planning ([primary metadata](https://www.fs.usda.gov/rds/archive/products/RDS-2020-0016-2/_metadata_RDS-2020-0016-2.html)). This supports the screening framing, not a calibrated monetary model or proof that inserting a building leaves local fuels unchanged. Our frozen geographic FSim capture is a separate, older configured product; WRC's developed-area spreading or newer 30-m intensity is not silently consumed. Burn probability at a landscape pixel does not establish observed building ignition probability. Pixels without complete source support remain unavailable at original location weight; nonburnable/developed does not mean safe. Actual urban ember exposure, local ignition, suppression and rebuilding needs require future qualification.
 
-## Start here
-
-- [Scope, change classification and coverage check](proposed/README_wildfire_real_estate__model_v0_1__docs_r1.md)
-- [Decision log](proposed/DECISION_LOG_wildfire_real_estate__model_v0_1__docs_r1.md)
-- [Derivation dossier](proposed/wildfire_real_estate_curve_derivation_dossier__model_v0_1__docs_r1.md) (includes the seven-step audit and the NRI check)
-- [**Return package for Hazard**](proposed/RETURN_PACKAGE_wildfire_real_estate__model_v0_1__docs_r1.md) (one card per profile)
-- [Curves chart](previews/wildfire_real_estate_v0_1_curves.png)
-
-**Package — model v0.1:**
-[curve artifact](proposed/wildfire_real_estate__model_v0_1__docs_r1__curve_artifact.json),
-[capability](proposed/wildfire_real_estate__model_v0_1__docs_r1__capability.json),
-[USFS response table](proposed/WRC_RESPONSE_FUNCTION_TABLE_wildfire_real_estate__model_v0_1__docs_r1.csv),
-[building factors](proposed/BUILDING_FACTOR_TABLE_wildfire_real_estate__model_v0_1__docs_r1.csv),
-[CAL FIRE comparison](proposed/DINS_BUILDING_COMPARISON_wildfire_real_estate__model_v0_1__docs_r1.csv) (with its [receipt](proposed/DINS_CHECK_RECEIPT_wildfire_real_estate__model_v0_1__docs_r1.json)),
-[ordinates](proposed/CURVE_ORDINATES_wildfire_real_estate__model_v0_1__docs_r1.csv),
-[sensitivity](proposed/SENSITIVITY_wildfire_real_estate__model_v0_1__docs_r1.csv),
-[NRI check](proposed/NRI_CHECK_wildfire_real_estate__model_v0_1__docs_r1.csv) (with its [receipt](proposed/NRI_CHECK_RECEIPT_wildfire_real_estate__model_v0_1__docs_r1.json)),
-[known-answer tests](proposed/known_answer_tests_wildfire_real_estate__model_v0_1__docs_r1.json),
-[workbook](proposed/damage_curve_records_wildfire_real_estate__model_v0_1__docs_r1.xlsx),
-[metadata spec](proposed/wildfire_real_estate_damage_code_metadata_spec__model_v0_1__docs_r1.md),
-[profile binding](proposed/PROFILE_BINDING_wildfire_real_estate__model_v0_1__docs_r1.csv),
-[validation report](proposed/VALIDATION_REPORT_wildfire_real_estate__model_v0_1__docs_r1.md)
-
-Registers: [sources](proposed/SOURCE_REGISTER_wildfire_real_estate__model_v0_1__docs_r1.csv),
-[claims](proposed/CLAIM_PARAMETER_REGISTER_wildfire_real_estate__model_v0_1__docs_r1.csv),
-[parameter tiers](proposed/PARAMETER_TIER_TABLE_wildfire_real_estate__model_v0_1__docs_r1.csv),
-[value crosswalk](proposed/VALUE_CROSSWALK_wildfire_real_estate__model_v0_1__docs_r1.csv).
-
-## Rebuild
-
-```bash
-python scripts/reference_helpers/wildfire_real_estate_dins_check.py --dins <dins_master.csv>
-python scripts/reference_helpers/derive_wildfire_real_estate_curves.py --chart
-python scripts/reference_helpers/wildfire_real_estate_nri_check.py --m1 <wildfire M1 parquet> --nri <NRI parquet>
-python scripts/reference_helpers/build_wildfire_real_estate_v0_1_package.py
-python scripts/reference_helpers/wildfire_real_estate_profile_binding.py
-python scripts/reference_helpers/validate_wildfire_real_estate_v0_1_package.py
-```
-
-The CAL FIRE CSV, the Hazard wildfire M1 parquet and the NRI parquet are not committed; their sources and SHA-256
-are in the receipts.
+No separate ember/radiant/spread response is added to the combined source atom. Smoke-only contamination, post-fire flood/debris flow, contents, BI, PSPS, landscape/site works and complete-property risk remain outside. Annual use still requires Hazard's native rate/class coupling, BP-to-Poisson convention, same-building cap, exact spatial mixture and independent distribution/financial readback. This admission does not assert that the owner explicitly ruled on each historical D-WFRE proposal item.

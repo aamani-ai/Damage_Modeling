@@ -201,9 +201,9 @@ def main() -> int:
     # non-promotion
     index = (ROOT / "docs/contracts/machine_readable_artifact_index.json").read_text()
     registry = (ROOT / "docs/cells/VERSION_REGISTRY.md").read_text()
-    check("cell absent from the machine-readable artifact index", CELL_ID not in index)
-    check("cell absent from the version registry", CELL_ID not in registry)
-    check("no current/ package", not (CELL / "current").exists())
+    check("proposal absent from the machine-readable artifact index", f"{TAG}__curve_artifact.json" not in index)
+    check("proposal pin absent from the version registry", f"{CELL_ID}@model_v0_2__docs_r1" not in registry)
+    check("proposal is not installed as current", not (CELL / "current" / f"{TAG}__curve_artifact.json").exists())
     check("artifact is noncanonical and proposed",
           art["canonical_runtime_artifact"] is False and art["schema_status"] == "proposed_draft"
           and art["promotion_status"] == "proposed" and cap["promotion_gate"]["status"] == "blocked")
