@@ -1,0 +1,18 @@
+/* Shared by both pages: full width, the header toggles, and what "Less detail" hides. */
+.wrap { max-width: none !important; padding: 16px 24px !important; }
+.bar { padding-left: 24px !important; padding-right: 24px !important; }
+.toggles { display: flex; align-items: center; gap: 8px; }
+.themebtn { height: 30px; padding: 0 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--background); color: var(--foreground); font: inherit; font-size: .79rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.dark body { background: var(--background); color: var(--foreground); }
+.dark .a-water { fill: color-mix(in srgb, #4a90d9 35%, var(--background)); } .dark .a-stone { fill: color-mix(in srgb, #7fa6c9 45%, var(--background)); }
+.dark .m-text-boundary, .dark .rule-text { filter: brightness(1.35); }
+/* Long names and paths wrap inside their card instead of running into the next one */
+.fc code, .fc a, .fc span, .pn-links a, .trail .tc b { overflow-wrap: anywhere; word-break: break-word; }
+.fc code { white-space: normal; }
+/* Less detail: the descriptions go, the structure and numbers stay. The lead sentence under each heading stays. */
+.brief .tdesc, .brief .mutd, .brief .tiles small, .brief .a-note, .brief .dq, .brief .how-lead, .brief .how-steps p, .brief .cl-test, .brief .cl-alias,
+.brief .detail ul, .brief .evl p, .brief .as p, .brief .pn-grid p, .brief .banner span.more, .brief .none, .brief .foot,
+.brief .produces, .brief .idea, .brief .ins, .brief .said small, .brief .key, .brief .fk-body p:not(.why), .brief .srcline, .brief p.sub, .brief .lead { display: none !important; }
+/* Framework page, less detail: the decision cards keep their name and their result; the questions, the
+   takes-and-gives table and the rule sentences open with "More detail" */
+.brief .node .q, .brief .said, .brief .side .io, .brief .fk-body p { display: none !important; }

@@ -1,0 +1,310 @@
+/* InfraSure Design System — Colors & Type
+ * Source: infrasure/src/styles.css (Tailwind v4 + shadcn/ui theme tokens)
+ * All values mirror the production app. Use oklch where present so dark-mode
+ * derivations stay perceptually correct.
+ */
+
+/* Brand sans — Inter (variable) self-hosted from fonts/ */
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/Inter-VariableFont_opsz_wght.ttf") format("truetype-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("fonts/Inter-Italic-VariableFont_opsz_wght.ttf") format("truetype-variations");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Mono + serif still come from Google Fonts — no files provided. */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&family=Source+Serif+4:wght@200..900&display=swap");
+
+:root {
+  /* ---------- Type stacks ---------- */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-serif: "Source Serif 4", serif;
+
+  /* ---------- Surfaces & text (light) ---------- */
+  --background:           oklch(1 0 0);              /* page */
+  --foreground:           oklch(0.145 0 0);          /* body text */
+  --card:                 oklch(1 0 0);
+  --card-foreground:      oklch(0.145 0 0);
+  --popover:              oklch(1 0 0);
+  --popover-foreground:   oklch(0.145 0 0);
+  --muted:                oklch(0.97 0 0);
+  --muted-foreground:     oklch(0.556 0 0);
+  --accent:               oklch(0.97 0 0);
+  --accent-foreground:    oklch(0.205 0 0);
+  --border:               oklch(0.922 0 0);
+  --input:                oklch(0.922 0 0);
+  --ring:                 oklch(0.708 0 0);
+
+  /* ---------- Brand / actions ---------- */
+  --primary:              oklch(0.55 0.145 151.5712); /* InfraSure green — Green 55, AA pass on white text (4.56:1) */
+  --primary-foreground:   oklch(1 0 0);
+  --secondary:            oklch(0.95 0 0);              /* Gray 95 — neutral secondary button */
+  --secondary-foreground: var(--foreground);            /* same ink as body text */
+  --destructive:          oklch(0.577 0.245 27.325);
+  --success:              oklch(0.62 0.17 150);
+  --success-foreground:   oklch(1 0 0);
+  --warning:              oklch(0.75 0.15 75);
+  --warning-foreground:   oklch(0.27 0.05 75);  /* dark ink — amber needs it for contrast */
+  --danger:               oklch(0.66 0.19 45);
+  --danger-foreground:    oklch(1 0 0);
+
+  /* ---------- Sidebar ---------- */
+  --sidebar:                       oklch(0.985 0 0);
+  --sidebar-foreground:            oklch(0.145 0 0);
+  --sidebar-primary:               oklch(0.627 0.194 149.214);
+  --sidebar-primary-foreground:    oklch(0.982 0.018 155.826);
+  --sidebar-accent:                oklch(0.97 0 0);
+  --sidebar-accent-foreground:     oklch(0.205 0 0);
+  --sidebar-border:                oklch(0.922 0 0);
+  --sidebar-ring:                  oklch(0.708 0 0);
+
+  /* ---------- Chart palette (balanced saturation) ---------- */
+  --chart-1: oklch(0.7012 0.1596 151.5712); /* brand teal */
+  --chart-2: oklch(0.62   0.12   215);      /* soft blue */
+  --chart-3: oklch(0.48   0.14   285);      /* indigo */
+  --chart-4: oklch(0.72   0.14    65);      /* muted orange */
+  --chart-5: oklch(0.65   0.16    15);      /* rose */
+
+  /* ---------- Covenant / bankability risk coloring ---------- */
+  --cov-deep-green:       #d1f7dc;
+  --cov-deep-green-text:  #14532d;
+  --cov-light-green:      #eaf9ee;
+  --cov-light-green-text: #166534;
+  --cov-amber:            #fff8c5;
+  --cov-amber-text:       #92400e;
+  --cov-red:              #ffebe9;
+  --cov-red-text:         #991b1b;
+
+  /* ---------- Category palette (neutral domain lenses) ----------
+   * Answers "what domain is this?" — NOT "is this good/bad?" (that's the
+   * status family: --success/--warning/--danger/--destructive).
+   * Hue-named primitives, hand-authored bg/text/border triplets. Hues are
+   * kept clear of every status hue (warning 75 / danger 45 / destructive 27 /
+   * success 150) so a category lens can never be misread as a status.
+   * Use for KpiCard accents, context badges, and other "color = label" UI.
+   * (e.g. Insurance → indigo, Debt → violet.) */
+  --category-teal-bg:      oklch(0.95 0.04 151);   /* brand-adjacent lens */
+  --category-teal-text:    oklch(0.45 0.12 151);
+  --category-teal-border:  oklch(0.85 0.08 151);
+  --category-indigo-bg:    oklch(0.95 0.04 285);
+  --category-indigo-text:  oklch(0.48 0.14 285);
+  --category-indigo-border:oklch(0.85 0.08 285);
+  --category-violet-bg:    oklch(0.95 0.04 320);
+  --category-violet-text:  oklch(0.50 0.15 320);
+  --category-violet-border:oklch(0.85 0.08 320);
+  --category-slate-bg:     oklch(0.96 0.008 250);
+  --category-slate-text:   oklch(0.45 0.025 250);
+  --category-slate-border: oklch(0.86 0.015 250);
+
+  /* Deprecated --badge-* aliases (kept so existing consumers don't break).
+   * Migrate references to --category-*. amber is retired — it collided with
+   * status-warning (hue 75); it now resolves to the violet category lens. */
+  --badge-teal-bg:      var(--category-teal-bg);
+  --badge-teal-text:    var(--category-teal-text);
+  --badge-teal-border:  var(--category-teal-border);
+  --badge-indigo-bg:    var(--category-indigo-bg);
+  --badge-indigo-text:  var(--category-indigo-text);
+  --badge-indigo-border:var(--category-indigo-border);
+  --badge-amber-bg:     var(--category-violet-bg);
+  --badge-amber-text:   var(--category-violet-text);
+  --badge-amber-border: var(--category-violet-border);
+
+  /* ---------- Radius scale ---------- */
+  --radius:      0.375rem;            /* 6px — shadcn base */
+  --radius-sm:   calc(var(--radius) * 0.6);
+  --radius-md:   calc(var(--radius) * 0.8);
+  --radius-lg:   var(--radius);
+  --radius-xl:   calc(var(--radius) * 1.4);
+  --radius-2xl:  calc(var(--radius) * 1.8);
+  --radius-3xl:  calc(var(--radius) * 2.2);
+  --radius-4xl:  calc(var(--radius) * 2.6);
+
+  /* ---------- Shadows (Tailwind-ish) ---------- */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+  --shadow-overlay: 0 12px 32px -8px rgb(0 0 0 / 0.18);  /* map floating cards */
+
+  /* ---------- Spacing scale (Tailwind 4 default) ---------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  /* ---------- Semantic text aliases ---------- */
+  --fg-1: var(--foreground);
+  --fg-2: var(--muted-foreground);
+  --fg-3: oklch(0.708 0 0);
+}
+
+.dark {
+  --background:           oklch(0.145 0 0);
+  --foreground:           oklch(0.985 0 0);
+  --card:                 oklch(0.205 0 0);
+  --card-foreground:      oklch(0.985 0 0);
+  --popover:              oklch(0.205 0 0);
+  --popover-foreground:   oklch(0.985 0 0);
+  --muted:                oklch(0.269 0 0);
+  --muted-foreground:     oklch(0.78 0 0);
+  --accent:               oklch(0.269 0 0);
+  --accent-foreground:    oklch(0.985 0 0);
+  --border:               oklch(1 0 0 / 10%);
+  --input:                oklch(1 0 0 / 15%);
+  --ring:                 oklch(0.556 0 0);
+
+  --primary:              oklch(0.55 0.145 151.5712); /* Green 55 — AA pass on white text */
+  --primary-foreground:   oklch(1 0 0);
+  --secondary:            oklch(0.27 0 0);              /* dark neutral secondary button */
+  --secondary-foreground: oklch(0.985 0 0);
+  --destructive:          oklch(0.704 0.191 22.216);
+  --success:              oklch(0.72 0.17 150);
+  --success-foreground:   oklch(0.18 0.03 150);
+  --warning:              oklch(0.83 0.15 75);
+  --warning-foreground:   oklch(0.22 0.05 75);
+  --danger:               oklch(0.74 0.18 45);
+  --danger-foreground:    oklch(0.18 0.04 45);
+  --sidebar-foreground:         oklch(0.985 0 0);
+  --sidebar-primary:            oklch(0.723 0.219 149.579);
+  --sidebar-primary-foreground: oklch(0.982 0.018 155.826);
+  --sidebar-accent:             oklch(0.269 0 0);
+  --sidebar-accent-foreground:  oklch(0.985 0 0);
+  --sidebar-border:             oklch(1 0 0 / 10%);
+  --sidebar-ring:               oklch(0.556 0 0);
+
+  --chart-1: oklch(0.75 0.15 151.5712);
+  --chart-2: oklch(0.72 0.12 215);
+  --chart-3: oklch(0.65 0.14 285);
+  --chart-4: oklch(0.82 0.14 65);
+  --chart-5: oklch(0.75 0.16 15);
+
+  --cov-deep-green:       #0f2b14;
+  --cov-deep-green-text:  #bbf7d0;
+  --cov-light-green:      #122118;
+  --cov-light-green-text: #dcfce7;
+  --cov-amber:            #272115;
+  --cov-amber-text:       #fef3c7;
+  --cov-red:              #2d0f0e;
+  --cov-red-text:         #fecaca;
+
+  --category-teal-bg:     oklch(0.25 0.04 151);
+  --category-teal-text:   oklch(0.75 0.15 151);
+  --category-teal-border: oklch(0.4  0.10 151);
+  --category-indigo-bg:   oklch(0.25 0.04 285);
+  --category-indigo-text: oklch(0.65 0.14 285);
+  --category-indigo-border: oklch(0.4 0.10 285);
+  --category-violet-bg:   oklch(0.25 0.04 320);
+  --category-violet-text: oklch(0.72 0.14 320);
+  --category-violet-border:oklch(0.42 0.10 320);
+  --category-slate-bg:    oklch(0.27 0.008 250);
+  --category-slate-text:  oklch(0.72 0.02 250);
+  --category-slate-border:oklch(0.4  0.015 250);
+
+  --badge-teal-bg:     var(--category-teal-bg);
+  --badge-teal-text:   var(--category-teal-text);
+  --badge-teal-border: var(--category-teal-border);
+  --badge-indigo-bg:   var(--category-indigo-bg);
+  --badge-indigo-text: var(--category-indigo-text);
+  --badge-indigo-border: var(--category-indigo-border);
+  --badge-amber-bg:    var(--category-violet-bg);
+  --badge-amber-text:  var(--category-violet-text);
+  --badge-amber-border:var(--category-violet-border);
+}
+
+/* =========================================================================
+ *  Semantic type styles — Major Second scale (ratio 1.125), base 16px
+ *  step n => round(16 × 1.125^n, 2)  ·  root font-size 16px
+ *  A roomier base than the production app's 14px; hierarchy still steps in
+ *  small 1.125× jumps rather than dramatic display sizes.
+ * ========================================================================= */
+
+body {
+  font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss01";
+  color: var(--foreground);
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Display & headings — InfraSure rarely uses oversized display type.
+ * Page titles ~23px semibold; section eyebrows ~13px uppercase. */
+
+.ids-display {
+  font-size: 1.602rem;   /* 25.63px — step +4 */
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  line-height: 1.15;
+}
+
+.ids-h1, h1 {
+  font-size: 1.424rem;   /* 22.78px — step +3 */
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.ids-h2, h2 {
+  font-size: 1.266rem;   /* 20.25px — step +2 */
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.ids-h3, h3 {
+  font-size: 1.125rem;   /* 18px — step +1 */
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.ids-eyebrow {
+  font-size: 0.79rem;    /* 12.64px — step -2 */
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.ids-body, p {
+  font-size: 1rem;       /* 16px — base */
+  line-height: 1.5;
+  color: var(--foreground);
+}
+
+.ids-small {
+  font-size: 0.889rem;   /* 14.22px — step -1 */
+  color: var(--muted-foreground);
+}
+
+.ids-caption, .ids-xs {
+  font-size: 0.79rem;    /* 12.64px — step -2 */
+  color: var(--muted-foreground);
+}
+
+.ids-stat-value {
+  font-size: 1.266rem;   /* 20.25px — step +2 (StatBadge "large") */
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.ids-stat-label {
+  font-size: 0.889rem;   /* 14.22px — step -1 */
+  color: var(--muted-foreground);
+}
+
+code, .ids-mono {
+  font-family: var(--font-mono);
+  font-size: 0.889rem;   /* 14.22px — step -1 */
+}

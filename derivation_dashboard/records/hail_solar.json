@@ -1,0 +1,684 @@
+{
+ "schema": "derivation_record.v2",
+ "status": "draft",
+ "case_id": "hail_solar",
+ "cell_id": "hail_solar",
+ "curve_id": "HAIL_SOLAR_DEFAULT_3P2_GBS",
+ "artifact_sha256": "8c52f3442eb606f55aa0502fbb2738df70076f8a181de463c029061020b3cf32",
+ "written_from": "Drafted in the infrastructure playground from this cell's derivation dossier and runtime artifact (12 Nov 2026); moved here as the record. Prose is a reading of the dossier, not a new source.",
+ "curves": [
+  {
+   "id": "HAIL_SOLAR_DEFAULT_3P2_GBS",
+   "name": "Default · 3.2 mm glass on backsheet",
+   "role": "adopted",
+   "tier": "T2"
+  },
+  {
+   "id": "HAIL_SOLAR_FRAGILE_THIN_GG",
+   "name": "Fragile · 2.0 mm glass on glass (fitted to five lab points)",
+   "role": "neighbour",
+   "tier": "T2",
+   "data": [
+    [
+     35,
+     0.18
+    ],
+    [
+     40,
+     0.57
+    ],
+    [
+     40,
+     0.43
+    ],
+    [
+     45,
+     0.61
+    ],
+    [
+     50,
+     0.89
+    ]
+   ]
+  },
+  {
+   "id": "HAIL_SOLAR_HARDENED_THICKER",
+   "name": "Hail-hardened · thicker glass (two sparse anchors, extrapolated)",
+   "role": "neighbour",
+   "tier": "T3",
+   "data": [
+    [
+     25,
+     0.005
+    ],
+    [
+     45,
+     0.07
+    ]
+   ]
+  }
+ ],
+ "case": {
+  "title": "Hail on a solar plant",
+  "part": "PV module",
+  "hazard": "hail",
+  "type": "fitted",
+  "weakest": "T2",
+  "weakestNote": "the stow adjustment is T4",
+  "says": "The share of modules whose glass breaks, and so are replaced, at a given hail size.",
+  "typeNote": "A logistic curve drawn through two anchors for this one part: a test standard at 25 mm and a lab result at 50 mm. Trust it between them; past 50 mm it is the shape continuing.",
+  "pinnedBy": "One boundary and one measured point",
+  "use": "Hail up to about 50 mm on standard 3.2 mm glass modules",
+  "notFor": "Above 50 mm, where it is the shape and not data; a specific module make",
+  "question": {
+   "not": [
+    "Hail size",
+    "Whole-plant loss"
+   ],
+   "yes": [
+    "Hail diameter, mm",
+    "Share of module glass broken"
+   ]
+  },
+  "trail": [
+   [
+    "IEC 61215 hail test, as summarised by DOE/FEMP",
+    "A qualified module withstands a 25 mm ice ball",
+    "boundary",
+    "The curve leaves zero at 25 mm: about 1%",
+    "form"
+   ],
+   [
+    "PVEL 2023 Hail Stress Sequence",
+    "39% of 3.2 mm glass-on-backsheet modules broke at 50 mm",
+    "data",
+    "The point at 50 mm, 0.39. With the boundary it gives D50 = 52.70 mm and k = 0.1659",
+    "form"
+   ],
+   [
+    "Storm reports and radar (MESH)",
+    "Hail size, converted to diameter",
+    "bridge",
+    "The horizontal axis: hail diameter, 0 to 100 mm",
+    "axis"
+   ],
+   [
+    "VDE hail stow memo, DOE/FEMP guidance",
+    "Stowed trackers take less damage; no size given",
+    "rule",
+    "The stow shift, +8 mm and a 0.90 cap: a placeholder",
+    "adjust"
+   ]
+  ],
+  "marks": [
+   {
+    "tag": "boundary",
+    "x": 25,
+    "y": 0.01,
+    "label": "IEC 61215 test · 25 mm · about 1%",
+    "dx": -10,
+    "dy": -12,
+    "end": true
+   },
+   {
+    "tag": "data",
+    "x": 50,
+    "y": 0.39,
+    "label": "PVEL 2023 · 50 mm · 39% broken",
+    "at": [
+     61,
+     0.1
+    ]
+   }
+  ],
+  "ground": [
+   [
+    0,
+    25,
+    "pinned",
+    "Below the tested size: held near zero by the IEC boundary"
+   ],
+   [
+    25,
+    50,
+    "pinned",
+    "Between the two anchors"
+   ],
+   [
+    50,
+    100,
+    "shape",
+    "Past the last measured point: the shape continuing"
+   ]
+  ],
+  "empty": {
+   "reference": "No published hail curve is drawn: field and claims studies are kept for validation, not fitted.",
+   "rule": "The base curve needs no rule: two points and the shape define it. One rule, direction only, sits behind the stow adjustment."
+  },
+  "flow": {
+   "columns": [
+    "EVIDENCE",
+    "DECISIONS",
+    "THE RESULT",
+    "WHAT IT GIVES"
+   ],
+   "nodes": [
+    {
+     "id": "e0",
+     "label": "DOE/FEMP hail guidance\nhail breaks module glass",
+     "col": 0,
+     "row": 0,
+     "tone": "input",
+     "step": "grain"
+    },
+    {
+     "id": "e1",
+     "label": "Storm reports and radar\nhail size, as diameter",
+     "col": 0,
+     "row": 1,
+     "tone": "input",
+     "step": "axis"
+    },
+    {
+     "id": "e2",
+     "label": "IEC test and PVEL lab data\n25 mm ≈ 1% · 50 mm 39%",
+     "col": 0,
+     "row": 2,
+     "tone": "input",
+     "step": "form"
+    },
+    {
+     "id": "e3",
+     "label": "Stow guidance\ndirection only",
+     "col": 0,
+     "row": 3,
+     "tone": "input",
+     "step": "adjust",
+     "dashed": true
+    },
+    {
+     "id": "d0",
+     "label": "What fails\nmodule glass and cells",
+     "col": 1,
+     "row": 0,
+     "tone": "model",
+     "step": "grain"
+    },
+    {
+     "id": "d1",
+     "label": "What drives it\nhail diameter, mm",
+     "col": 1,
+     "row": 1,
+     "tone": "model",
+     "step": "axis"
+    },
+    {
+     "id": "d2",
+     "label": "The shape\nlogistic through two points",
+     "col": 1,
+     "row": 2,
+     "tone": "model",
+     "step": "form"
+    },
+    {
+     "id": "d3",
+     "label": "What shifts it\nmodule type, stow",
+     "col": 1,
+     "row": 3,
+     "tone": "model",
+     "step": "adjust"
+    },
+    {
+     "id": "r",
+     "label": "Fitted curve\nhalf broken at 52.7 mm",
+     "col": 2,
+     "row": 0,
+     "span": 4,
+     "tone": "result",
+     "step": "form"
+    },
+    {
+     "id": "o0",
+     "label": "Damage ratio per event\nshare of modules replaced",
+     "col": 3,
+     "row": 1,
+     "tone": "use",
+     "step": "emit"
+    },
+    {
+     "id": "o1",
+     "label": "Withheld\nspread around the curve",
+     "col": 3,
+     "row": 2,
+     "tone": "held",
+     "step": "emit"
+    }
+   ],
+   "edges": [
+    {
+     "from": "e0",
+     "to": "d0"
+    },
+    {
+     "from": "e1",
+     "to": "d1"
+    },
+    {
+     "from": "e2",
+     "to": "d2"
+    },
+    {
+     "from": "e3",
+     "to": "d3",
+     "dashed": true
+    },
+    {
+     "from": "d0",
+     "to": "r"
+    },
+    {
+     "from": "d1",
+     "to": "r"
+    },
+    {
+     "from": "d2",
+     "to": "r"
+    },
+    {
+     "from": "d3",
+     "to": "r"
+    },
+    {
+     "from": "r",
+     "to": "o0"
+    },
+    {
+     "from": "r",
+     "to": "o1",
+     "dashed": true
+    }
+   ]
+  },
+  "assumptions": [
+   {
+    "step": "grain",
+    "t": "Broken glass stands in for replacement cost",
+    "d": "The ratio is the share of modules with broken glass. Cells that crack under intact glass lose output later and are left out.",
+    "tier": "T2",
+    "trigger": "Claims with replacement counts"
+   },
+   {
+    "step": "form",
+    "t": "Two anchors define the whole curve",
+    "d": "About 1% at 25 mm and 39% at 50 mm. Everything above 50 mm is the logistic shape continuing, not a measurement.",
+    "tier": "T2",
+    "trigger": "Claims, maker or bill-of-materials calibration"
+   },
+   {
+    "step": "axis",
+    "t": "Lab ice balls stand in for real hail",
+    "d": "A controlled size and speed, striking square on. Strong as physics, weak as a field loss curve.",
+    "tier": "T2",
+    "trigger": "Field campaigns with hail size recorded"
+   },
+   {
+    "step": "adjust",
+    "t": "Stowing moves the curve by 8 mm and caps it at 0.90",
+    "d": "Sources support the direction (steeper tilt, less damage). The size of the effect is a placeholder.",
+    "tier": "T4",
+    "trigger": "Tracker stow-angle impact testing"
+   }
+  ],
+  "steps": {
+   "question": {
+    "a": "Hail size against the share of module glass broken. Not hail size against whole-plant loss.",
+    "points": [
+     "One failure unit carries the cell: PV module glass and cells.",
+     "The curve is physical destruction only: repair cost ÷ replacement value. Lost output during repair is outside it."
+    ]
+   },
+   "evidence": {
+    "a": "Four sources, each allowed one job.",
+    "table": [
+     [
+      "IEC 61215 hail test, via DOE/FEMP",
+      "boundary",
+      "The near-zero start: a qualified module at 25 mm",
+      "A field loss curve",
+      "T2"
+     ],
+     [
+      "PVEL 2023 and Kiwa PVEL Hail Stress Sequence",
+      "data",
+      "Breakage share at each tested size, by module type",
+      "A guarantee for one module make",
+      "T2"
+     ],
+     [
+      "NREL and field studies",
+      "reference",
+      "Thresholds and caveats, for checking",
+      "Numbers fitted into the curve",
+      "T3"
+     ],
+     [
+      "VDE hail stow memo, DOE/FEMP guidance",
+      "rule",
+      "That stowing reduces damage",
+      "By how much",
+      "T4"
+     ]
+    ]
+   },
+   "grain": {
+    "a": "One unit takes the damage; the rest are reviewed and stay near zero.",
+    "units": [
+     [
+      "PV module glass and cells",
+      "primary"
+     ],
+     [
+      "Mounting and trackers",
+      "zero"
+     ],
+     [
+      "Inverters",
+      "zero"
+     ],
+     [
+      "Racking",
+      "zero"
+     ],
+     [
+      "Substation",
+      "zero"
+     ],
+     [
+      "Civil works",
+      "zero"
+     ]
+    ],
+    "points": [
+     "A part with no direct-hail mechanism is kept as a reviewed record at about 0, not dropped."
+    ]
+   },
+   "axis": {
+    "a": "Hail diameter in millimetres: what hits the glass.",
+    "chain": [
+     [
+      "Radar reflectivity",
+      "what the hazard source reports"
+     ],
+     [
+      "MESH → diameter",
+      "the bridge"
+     ],
+     [
+      "Hail diameter, mm",
+      "what hits the module: the axis"
+     ]
+    ],
+    "points": [
+     "Valid from 0 to 100 mm. Outside it the curve clamps and warns.",
+     "One variable only. Stone speed, wind and tilt are not on the axis; tilt enters as the stow adjustment."
+    ]
+   },
+   "form": {
+    "a": "A logistic curve through two anchors.",
+    "formula": "share broken = 1 ÷ (1 + e^(−k × (D − D50)))\nD50 = 52.70 mm     k = 0.1659 per mm",
+    "points": [
+     "D50 is the size at which half the modules break; k is how sharply it turns.",
+     "Solved, not fitted by search: two anchors give two unknowns. k = (logit 0.39 − logit 0.01) ÷ (50 − 25).",
+     "The fragile type is a least-squares fit to five lab points; the hardened type rests on two sparse anchors and is extrapolated."
+    ],
+    "rejected": [
+     [
+      "A straight line",
+      "Breakage has a threshold and a ceiling"
+     ],
+     [
+      "A curve fitted to claims",
+      "Claims are kept for validation; they mix module types and stow states"
+     ]
+    ]
+   },
+   "adjust": {
+    "a": "Module type picks the curve; stow shifts it; exposed share scales the dollars.",
+    "table3": [
+     [
+      "Selector",
+      "Module type",
+      "Chooses one of three curves. Missing: the default, with a flag",
+      "T2"
+     ],
+     [
+      "Conditioner",
+      "Stow state when the storm arrives",
+      "Blends the stowed and unstowed curves by the share stowed",
+      "T4"
+     ],
+     [
+      "Exposure",
+      "Share of the array touched",
+      "Scales module value; 1.0 today",
+      "—"
+     ]
+    ]
+   },
+   "emit": {
+    "a": "A mean damage ratio per event, with a list of what it cannot support.",
+    "yes": [
+     "Damage ratio for the module unit",
+     "Loss for an event, with a stated value basis",
+     "Expected annual loss, computed downstream"
+    ],
+    "no": [
+     "Spread around the curve (not carried)",
+     "A tail figure from the curve alone"
+    ]
+   }
+  },
+  "evid": [
+   {
+    "reports": "Hail damages a PV plant mainly by breaking module glass. The guidance also summarises the IEC hail test.",
+    "supports": "That the module is the part hail damages",
+    "not": "A loss curve",
+    "tier": "T2",
+    "links": [
+     [
+      "DOE/FEMP hail damage mitigation",
+      "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems"
+     ]
+    ]
+   },
+   {
+    "reports": "Hail size at a place, estimated from radar (MESH) and storm reports.",
+    "supports": "Hail diameter in millimetres as the measure of intensity",
+    "not": "Stone speed, wind or the angle of impact",
+    "tier": "T2",
+    "links": []
+   },
+   {
+    "reports": "IEC 61215: a qualified module withstands a 25 mm ice ball. PVEL 2023: 39% of 3.2 mm glass-on-backsheet modules broke at 50 mm.",
+    "supports": "Two anchors: 25 mm at about 1%, and 50 mm at 39%",
+    "not": "Behaviour above 50 mm, or one module make",
+    "tier": "T2",
+    "links": [
+     [
+      "PVEL 2023 Hail Stress Sequence",
+      "https://2023modulescorecard.pvel.com/hail-stress-sequence/"
+     ],
+     [
+      "DOE/FEMP summary of the IEC test",
+      "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems"
+     ]
+    ]
+   },
+   {
+    "reports": "Trackers stowed at a steep tilt take less hail damage.",
+    "supports": "The direction of the stow effect",
+    "not": "Its size: the +8 mm shift and the 0.90 cap are placeholders",
+    "tier": "T4",
+    "links": [
+     [
+      "DOE/FEMP hail damage mitigation",
+      "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems"
+     ]
+    ]
+   }
+  ],
+  "how": {
+   "lead": "Two anchors and a shape. No number on this curve was picked by eye: one anchor comes from a test standard, one from a lab result, and the two numbers that define the curve are solved from them.",
+   "steps": [
+    {
+     "t": "What counts as damage: broken glass",
+     "d": "A module is counted as lost when its glass breaks. PVEL’s tests show that modules with intact glass lose little power after hail, while broken glass is a clear failure, so the share of glass broken stands in for the share replaced.",
+     "tier": "T2",
+     "refs": [
+      [
+       "PVEL, Hail Stress Sequence white paper",
+       "https://www.pvel.com/wp-content/uploads/PVEL_White-Paper_Hail-Stress-Sequence-for-PV-Modules.pdf"
+      ]
+     ]
+    },
+    {
+     "t": "The low anchor: about 1% at 25 mm",
+     "d": "IEC 61215 certifies modules against a 25 mm ice ball. A certified module should not need replacing at that size, so the curve is held near zero there. The exact 1% is the cell’s stand-in for “near zero”.",
+     "tier": "T2",
+     "refs": [
+      [
+       "DOE/FEMP, Hail Damage Mitigation for Solar PV (summarises the IEC test)",
+       "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems"
+      ]
+     ]
+    },
+    {
+     "t": "The measured anchor: 39% at 50 mm",
+     "d": "PVEL’s 2023 Hail Stress Sequence reports 39% glass breakage for 3.2 mm glass-on-backsheet modules tested at 50 mm.",
+     "tier": "T2",
+     "refs": [
+      [
+       "PVEL 2023 Module Scorecard, Hail Stress Sequence",
+       "https://2023modulescorecard.pvel.com/hail-stress-sequence/"
+      ]
+     ]
+    },
+    {
+     "t": "The shape: a logistic curve",
+     "d": "Breakage has a threshold and a ceiling, and there are only two anchors. A logistic curve stays between 0 and 1, always rises, and is fully defined by two points, so nothing is left to tune.",
+     "tier": "T2",
+     "refs": [
+      [
+       "Hail × solar derivation dossier, section 7",
+       "https://github.com/aamani-ai/Damage_Modeling/blob/main/docs/cells/hail_solar/current/hail_solar_curve_derivation_dossier_v1_3.md"
+      ]
+     ]
+    },
+    {
+     "t": "Field and claims studies: kept for checking",
+     "d": "Field and insurer studies are used to check the result afterwards, not to fit it: they mix module types and stow states.",
+     "tier": "T3",
+     "refs": [
+      [
+       "NREL, Extreme Weather and PV Performance",
+       "https://research-hub.nrel.gov/en/publications/extreme-weather-and-pv-performance-2"
+      ]
+     ]
+    }
+   ],
+   "cols": [
+    "The number",
+    "Value",
+    "How it was set",
+    "What backs it"
+   ],
+   "rows": [
+    [
+     "At 25 mm",
+     "0.01",
+     "Anchor: the IEC 61215 test size",
+     "A test standard. The 1% is a stand-in for near zero",
+     "T2"
+    ],
+    [
+     "At 50 mm",
+     "0.39",
+     "Anchor: PVEL’s 2023 lab result",
+     "A lab measurement",
+     "T2"
+    ],
+    [
+     "Steepness, k",
+     "0.1659 per mm",
+     "Solved: (logit 0.39 − logit 0.01) ÷ (50 − 25)",
+     "Arithmetic on the two anchors",
+     "T2"
+    ],
+    [
+     "Half-broken size, D50",
+     "52.70 mm",
+     "Solved: 25 − logit 0.01 ÷ k",
+     "Arithmetic on the two anchors",
+     "T2"
+    ],
+    [
+     "Above 50 mm",
+     "rising to 1.00",
+     "The logistic curve continuing",
+     "The shape only: no test above 50 mm",
+     "T3"
+    ]
+   ],
+   "checks": [
+    "Checked afterwards against insurers’ published hail claim figures, as a range check on the loss it produces. That is a check on the result, not a fit."
+   ]
+  },
+  "stow": {
+   "shift": 8,
+   "cap": 0.9,
+   "tier": "T4",
+   "name": "Default, trackers stowed (placeholder: +8 mm, capped at 0.90)"
+  },
+  "dossier": [
+   "Hail × solar derivation dossier",
+   "https://github.com/aamani-ai/Damage_Modeling/blob/main/docs/cells/hail_solar/current/hail_solar_curve_derivation_dossier_v1_3.md"
+  ],
+  "sources": [
+   [
+    "DOE/FEMP, Hail Damage Mitigation for Solar Photovoltaic Systems",
+    "https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems"
+   ],
+   [
+    "PVEL 2023 Module Scorecard, Hail Stress Sequence",
+    "https://2023modulescorecard.pvel.com/hail-stress-sequence/"
+   ],
+   [
+    "damage_modeling · hail × solar cell: derivation dossier v1.3 and runtime artifact",
+    "https://github.com/aamani-ai/Damage_Modeling/tree/main/docs/cells/hail_solar"
+   ]
+  ],
+  "level": {
+   "kind": "Failure unit",
+   "path": [
+    "Solar plant",
+    "PV array",
+    "PV module"
+   ],
+   "of": "The one part hail damages directly. Five other parts were reviewed and stay at about zero."
+  },
+  "axis": {
+   "label": "Hail diameter at the module, mm",
+   "ticks": [
+    0,
+    25,
+    50,
+    75,
+    100
+   ],
+   "step": 1,
+   "start": 45,
+   "dp": 0,
+   "unit": "mm"
+  }
+ }
+}

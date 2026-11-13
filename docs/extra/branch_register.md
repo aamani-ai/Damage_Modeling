@@ -1,7 +1,7 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
-updated: 2026-10-23
+updated: 2026-11-12
 status: active
 scope: The branch register — every branch of aamani-ai/Damage_Modeling with who created it, when, when it was last touched, how it stands against main and what should happen to it — plus the branch policy proposed for the owner's confirmation. Refreshed with scripts/reference_helpers/branch_register.py in the same commit as any branch action.
 -->
@@ -30,6 +30,8 @@ deploy branch is the one exception: a push to it deploys the dashboard, so it st
 | `main` = `origin/main` | — | Divi-patel · 2026-10-23 | 0 | — | — | — | The line of record; pushed directly by the owner | — |
 | `origin/dashboard` | Divi-patel (agent session) · 2026-10-23 | Divi-patel · 2026-10-23 | 0 | 2 / 0 | no | 9 | **The one dashboard branch** (`DCD-D25`), new from `main` at `092e777`: infrasure.ai accounts admitted to the hosted dashboard (`DCD-D37`). **PR #11**; the deploy branch points at its first commit (`e02fac8`) | **Active.** Merge PR #11 with a merge commit when the owner agrees (a squash would leave the deploy branch off `main`), then delete |
 | `origin/deploy/damage-curves` | Divi-patel (agent session) · 2026-10-22 | Divi-patel · 2026-10-23 | 0 | 1 / 0 | no | 9 | **The dashboard's deploy branch** (`DCD-D36`): a push that touches the dashboard's files or the workflow deploys the Cloud Run service `damage-curves`. A release pointer, not a work branch. Its files reached `main` through **PR #10** (merge commit `54bcf28`, 2026-10-23). It now points at PR #11's first commit (`e02fac8`), which admits infrasure.ai accounts (`DCD-D37`), deployed ahead of `main` until PR #11 merges | **Keep.** Show the team a new version with `git push origin main:deploy/damage-curves`, which fast-forwards once PR #11 is merged with a merge commit |
+| `origin/derivation-dashboard` | Divi-patel (agent session) · 2026-11-12 | Divi-patel · 2026-11-12 | 0 | 1 / 0 | no | — | **The derivation dashboard** (owner, 2026-11-12: a new, separate dashboard explaining how each damage curve was derived; `derivation_dashboard/` only, `dashboard/` untouched), from `main` at `b0dc82b` | Keep while the dashboard is built; merge to `main` when the owner accepts it |
+| `origin/deploy/derivation-dashboard` | Divi-patel (agent session) · 2026-11-12 | Divi-patel · 2026-11-12 | 0 | 1 / 0 | no | — | **Its deploy branch**: a push deploys `derivation-dashboard` to Cloud Run behind IAP (`.github/workflows/deploy-derivation-dashboard.yml`) | Keep: the deploy trigger, as for `deploy/damage-curves` |
 | `origin/cell/real-estate` | jll-l · (fully contained) | jll-l · 2026-10-19 | 4 | 0 / — | **yes** | 0 | Jung A's working branch for the five Real Estate cells; merged into `main` on 2026-10-19 | **Merged — safe to delete whenever Jung A is done pushing to it.** Nothing is lost |
 | `origin/cell/flood-real-estate` | jll-l · (fully contained) | jll-l · 2026-10-12 | 11 | 0 / — | **yes** | 0 | The first Real Estate cell, superseded by `cell/real-estate` | **Delete** (merged; with Jung A's OK) |
 | `origin/cell/winter-storm-solar-wind` | jll-l · 2026-10-12 | jll-l · 2026-10-15 | 8 | 2 / — | no | 55 | Two proposed cells (`winter_storm_solar` screening proxy, `winter_storm_wind` fail-closed), five notebooks, five scripts | **Decision needed (RO3):** rebase onto `main` and merge as proposals, or close with a note. It falls further behind every day |

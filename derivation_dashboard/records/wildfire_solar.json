@@ -1,0 +1,662 @@
+{
+ "schema": "derivation_record.v2",
+ "status": "draft",
+ "case_id": "wildfire_solar",
+ "cell_id": "wildfire_solar",
+ "curve_id": "WSV1_MODULE_THERMAL",
+ "artifact_sha256": "598512fbe2f0a3c8db48df69fdb2cd00ca5e0cc8e7ef761555837a3d76d166d8",
+ "written_from": "Drafted in the infrastructure playground from this cell's derivation dossier and runtime artifact (12 Nov 2026); moved here as the record. Prose is a reading of the dossier, not a new source.",
+ "curves": [
+  {
+   "id": "WSV1_MODULE_THERMAL",
+   "name": "PV module",
+   "role": "adopted",
+   "tier": "T4"
+  },
+  {
+   "id": "WSV1_CABLE_EXPOSED",
+   "name": "Exposed cable",
+   "role": "neighbour",
+   "tier": "T4"
+  },
+  {
+   "id": "WSV1_INVERTER_THERMAL",
+   "name": "Central inverter",
+   "role": "neighbour",
+   "tier": "T4"
+  },
+  {
+   "id": "WSV1_RACKING_THERMAL",
+   "name": "Racking and trackers",
+   "role": "neighbour",
+   "tier": "T4"
+  }
+ ],
+ "case": {
+  "title": "Wildfire on a solar plant",
+  "part": "PV module",
+  "hazard": "wildfire",
+  "type": "table",
+  "weakest": "T4",
+  "weakestNote": "every value",
+  "says": "A screening share of each part’s value lost, for each of six flame-length classes. Not a curve.",
+  "typeNote": "The fire data comes as six flame-length classes, not a continuous measure. So this part has one value for each class, and nothing in between. Every value was chosen by reasoning; none was measured.",
+  "pinnedBy": "One boundary and seven rules",
+  "use": "Screening and ranking sites",
+  "notFor": "A calibrated loss; any value between two classes",
+  "question": {
+   "not": [
+    "Fire intensity",
+    "One whole-site curve"
+   ],
+   "yes": [
+    "Flame-length class",
+    "Screening share of each part’s value"
+   ]
+  },
+  "trail": [
+   [
+    "US Forest Service FSim",
+    "Six conditional flame-length classes",
+    "bridge",
+    "The axis: classes 1 to 6, used as supplied",
+    "axis"
+   ],
+   [
+    "Forest Service field heat measurements",
+    "Heat at a point depends strongly on fuel, distance and geometry",
+    "rule",
+    "No conversion from class to heat; values rise with class",
+    "form"
+   ],
+   [
+    "DOE/FEMP PV wildfire guidance, PV fire tests",
+    "What burns, and which materials are sensitive",
+    "rule",
+    "Which units get a value; electronics and plastics above metal",
+    "grain"
+   ],
+   [
+    "No source",
+    "No public loss by flame-length class for a solar plant",
+    "chosen",
+    "Every value in the table, for example the module: 0.002 to 0.65",
+    "form"
+   ]
+  ],
+  "marks": [
+   {
+    "tag": "boundary",
+    "x": 0,
+    "y": 0,
+    "label": "No fire: no damage",
+    "at": [
+     0,
+     0.16
+    ]
+   },
+   {
+    "tag": "rule",
+    "kind": "cap",
+    "y": 0.9,
+    "label": "Rule: no value above 0.90"
+   }
+  ],
+  "ground": [
+   [
+    1,
+    6,
+    "chosen",
+    "An engineering proxy at every class: ordering from evidence, sizes chosen"
+   ]
+  ],
+  "empty": {
+   "data": "No data point exists: no public source gives loss by flame-length class for a solar plant.",
+   "reference": "No reference curve is used. An earlier continuous curve was rejected and is kept in the cell’s history."
+  },
+  "flow": {
+   "columns": [
+    "EVIDENCE",
+    "DECISIONS",
+    "THE RESULT",
+    "WHAT IT GIVES"
+   ],
+   "nodes": [
+    {
+     "id": "e0",
+     "label": "DOE/FEMP PV wildfire guide\nwhat burns, what is inspected",
+     "col": 0,
+     "row": 0,
+     "tone": "input",
+     "step": "grain"
+    },
+    {
+     "id": "e1",
+     "label": "US Forest Service FSim\nsix flame-length classes",
+     "col": 0,
+     "row": 1,
+     "tone": "input",
+     "step": "axis"
+    },
+    {
+     "id": "e2",
+     "label": "Field heat studies, PV fire tests\nordering, not numbers",
+     "col": 0,
+     "row": 2,
+     "tone": "input",
+     "step": "form"
+    },
+    {
+     "id": "e3",
+     "label": "Fuel breaks, vegetation\nno credit without evidence",
+     "col": 0,
+     "row": 3,
+     "tone": "input",
+     "step": "adjust",
+     "dashed": true
+    },
+    {
+     "id": "d0",
+     "label": "What fails\nten units; the module shown",
+     "col": 1,
+     "row": 0,
+     "tone": "model",
+     "step": "grain"
+    },
+    {
+     "id": "d1",
+     "label": "What drives it\nthe class itself, as supplied",
+     "col": 1,
+     "row": 1,
+     "tone": "model",
+     "step": "axis"
+    },
+    {
+     "id": "d2",
+     "label": "The shape\na table by class, no curve",
+     "col": 1,
+     "row": 2,
+     "tone": "model",
+     "step": "form"
+    },
+    {
+     "id": "d3",
+     "label": "What shifts it\nwhether cable is exposed",
+     "col": 1,
+     "row": 3,
+     "tone": "model",
+     "step": "adjust"
+    },
+    {
+     "id": "r",
+     "label": "Table by class\nevery value chosen",
+     "col": 2,
+     "row": 0,
+     "span": 4,
+     "tone": "result",
+     "step": "form"
+    },
+    {
+     "id": "o0",
+     "label": "Screening ratio per class\nflagged not calibrated",
+     "col": 3,
+     "row": 1,
+     "tone": "use",
+     "step": "emit"
+    },
+    {
+     "id": "o1",
+     "label": "Withheld\nvalues between classes",
+     "col": 3,
+     "row": 2,
+     "tone": "held",
+     "step": "emit"
+    }
+   ],
+   "edges": [
+    {
+     "from": "e0",
+     "to": "d0"
+    },
+    {
+     "from": "e1",
+     "to": "d1"
+    },
+    {
+     "from": "e2",
+     "to": "d2"
+    },
+    {
+     "from": "e3",
+     "to": "d3",
+     "dashed": true
+    },
+    {
+     "from": "d0",
+     "to": "r"
+    },
+    {
+     "from": "d1",
+     "to": "r"
+    },
+    {
+     "from": "d2",
+     "to": "r"
+    },
+    {
+     "from": "d3",
+     "to": "r"
+    },
+    {
+     "from": "r",
+     "to": "o0"
+    },
+    {
+     "from": "r",
+     "to": "o1",
+     "dashed": true
+    }
+   ]
+  },
+  "assumptions": [
+   {
+    "step": "form",
+    "t": "Every number in the table is an engineering proxy",
+    "d": "Evidence supports the direction, the ordering and what gets inspected. It does not fit any of the values.",
+    "tier": "T4",
+    "trigger": "A forensic inspection and cost cohort"
+   },
+   {
+    "step": "axis",
+    "t": "The flame-length class is used as it comes",
+    "d": "No conversion to heat at the equipment. Each step of that chain would need its own calibrated model, and none exists.",
+    "tier": "T2",
+    "trigger": "A validated regional-to-site heat model"
+   },
+   {
+    "step": "axis",
+    "t": "No value exists between two classes",
+    "d": "Class 3.5 is rejected, not interpolated. The top class is open-ended, so a midpoint would be invented.",
+    "tier": "T2",
+    "trigger": "A continuous, site-level hazard input"
+   },
+   {
+    "step": "emit",
+    "t": "Released for screening only",
+    "d": "It ships because it is explicit, bounded, monotone, replaceable and tested, and every output must carry its not-calibrated flags.",
+    "tier": "T4",
+    "trigger": "Claims or field calibration"
+   }
+  ],
+  "steps": {
+   "question": {
+    "a": "Flame-length class against a screening share of each part’s value. Not one whole-site curve.",
+    "points": [
+     "Ten units are modeled; this page shows the PV module.",
+     "Direct physical damage only. How often a fire occurs (burn probability) is kept out of the damage call."
+    ]
+   },
+   "evidence": {
+    "a": "Evidence gives direction and ordering. No source gives a value.",
+    "table": [
+     [
+      "US Forest Service FSim",
+      "bridge",
+      "Six conditional flame-length classes",
+      "Heat at an inverter, duration, or a damage value",
+      "T2"
+     ],
+     [
+      "Forest Service field heat measurements",
+      "rule",
+      "That heat depends strongly on fuel, distance and geometry",
+      "One conversion from class to heat",
+      "T2"
+     ],
+     [
+      "DOE/FEMP PV wildfire guidance",
+      "rule",
+      "What burns, and what is inspected or rebuilt",
+      "Values by class",
+      "T3"
+     ],
+     [
+      "PV thermal and fire tests",
+      "rule",
+      "Which materials are sensitive",
+      "A population loss rate",
+      "T3"
+     ]
+    ]
+   },
+   "grain": {
+    "a": "Ten units, because fire reaches almost everything, each differently.",
+    "units": [
+     [
+      "PV module",
+      "primary"
+     ],
+     [
+      "Central inverter",
+      "other"
+     ],
+     [
+      "Combiner box",
+      "other"
+     ],
+     [
+      "Exposed cable",
+      "other"
+     ],
+     [
+      "Transformer and switchgear",
+      "other"
+     ],
+     [
+      "SCADA",
+      "other"
+     ],
+     [
+      "Racking and trackers",
+      "cond"
+     ],
+     [
+      "Civil works",
+      "cond"
+     ],
+     [
+      "Foundations",
+      "low"
+     ],
+     [
+      "Grounding",
+      "low"
+     ]
+    ],
+    "points": [
+     "Metal, concrete and buried parts are kept low but not zero: no part is assumed immune."
+    ]
+   },
+   "axis": {
+    "a": "The fire simulation’s class, used exactly as supplied.",
+    "chain": [
+     [
+      "FSim flame-length class",
+      "what the hazard source reports"
+     ],
+     [
+      "No conversion",
+      "the bridge: the class is the key"
+     ],
+     [
+      "Class 1 to 6",
+      "the axis: six steps, nothing between"
+     ]
+    ],
+    "struck": [
+     "class → an invented midpoint",
+     "midpoint → fireline intensity",
+     "intensity → heat at the equipment",
+     "heat → a generic duration",
+     "heat and duration → a smooth curve"
+    ],
+    "points": [
+     "Each struck step would need a calibrated model. The cell’s audit found no complete chain, so it stopped at the class."
+    ]
+   },
+   "form": {
+    "a": "One value per class for each unit. Seven rules set the values.",
+    "formula": "class            none   <2 ft   2–4    4–6    6–8    8–12   ≥12 ft\nPV module        0      0.002   0.01   0.04   0.12   0.32   0.65",
+    "rulesList": true,
+    "rejected": [
+     [
+      "A smooth curve on fireline intensity",
+      "No validated bridge from the class to local heat"
+     ],
+     [
+      "Midpoints of each class",
+      "Invents values, worst for the open-ended top class"
+     ],
+     [
+      "Low, base and high versions",
+      "No sample or elicitation to give them probabilities"
+     ],
+     [
+      "Zero for metal and concrete",
+      "Ignores severe local damage and inspection cost"
+     ]
+    ]
+   },
+   "adjust": {
+    "a": "Almost nothing shifts it, on purpose.",
+    "table3": [
+     [
+      "Selector",
+      "Whether cable is exposed",
+      "Chooses the exposed-cable profile",
+      "T4"
+     ],
+     [
+      "Conditioner",
+      "Fuel breaks, vegetation, response",
+      "No credit without evidence, and never counted twice",
+      "—"
+     ],
+     [
+      "Exposure",
+      "Value in each unit’s bucket",
+      "Each unit applies to its own value; support cost once",
+      "T2"
+     ]
+    ]
+   },
+   "emit": {
+    "a": "A screening ratio per class, with mandatory flags.",
+    "yes": [
+     "A ratio for one exact class",
+     "A ratio for a probability over the six classes",
+     "Loss for an event, with a stated value basis"
+    ],
+    "no": [
+     "Any value between classes",
+     "A claim of calibration",
+     "A confidence interval (the 0.6× and 1.5× stress is a sensitivity only)"
+    ]
+   }
+  },
+  "evid": [
+   {
+    "reports": "What burns in a PV plant, and what is inspected or rebuilt afterwards.",
+    "supports": "Which ten parts get a value",
+    "not": "Values by class",
+    "tier": "T3",
+    "links": []
+   },
+   {
+    "reports": "For a place, the chance of each of six flame-length classes, given that a fire occurs.",
+    "supports": "The six classes as the axis, used as supplied",
+    "not": "Heat at the equipment, or how long it lasts",
+    "tier": "T2",
+    "links": []
+   },
+   {
+    "reports": "Heat at a point depends strongly on fuel, distance and geometry; some materials are far more sensitive than others.",
+    "supports": "The ordering: values rise with class, electronics and plastics above metal",
+    "not": "The size of any value",
+    "tier": "T2",
+    "links": []
+   },
+   {
+    "reports": "Site measures that can help, do nothing or hurt, depending on conditions.",
+    "supports": "Nothing numeric",
+    "not": "Any credit without evidence",
+    "tier": "T4",
+    "links": []
+   }
+  ],
+  "how": {
+   "lead": "No source gives a damage percentage for a flame-length class. So the six values were set in three moves: evidence fixes the direction and the ordering, written rules say what each class means, and a judged number is put on each meaning. The table was then checked against published evidence, without being fitted to it.",
+   "steps": [
+    {
+     "t": "Damage rises with the class",
+     "d": "The US Forest Service fire simulation (FSim) orders its six classes by flame length. It supports the order. It does not say how much heat reaches a panel, or for how long.",
+     "tier": "T2",
+     "refs": [
+      [
+       "USDA Forest Service, FSim wildfire risk components, RDS-2016-0034-3 (2023)",
+       "https://doi.org/10.2737/RDS-2016-0034-3"
+      ]
+     ]
+    },
+    {
+     "t": "A panel can be damaged by fire heat, and may need replacing",
+     "d": "Lab tests show panel glass cracking and burning through under heat (Wang 2025 reports tolerance mostly in the range of 8 to 15 kW/m² of radiant heat; Zhao 2026 shows tilt and glass condition change the result). A field study of a wildfire-affected plant found hot spots and degradation. These show the mechanism. None says how many panels are lost in a given class.",
+     "tier": "T2",
+     "refs": [
+      [
+       "Wang, Xiao and Bedon (2025), PV panels under thermal loading",
+       "https://doi.org/10.1016/j.ijthermalsci.2024.109489"
+      ],
+      [
+       "Zhao et al. (2026), single-glass PV modules in pool fire",
+       "https://doi.org/10.3390/fire9020062"
+      ],
+      [
+       "Jang et al. (2026), PV modules after wildfire, field diagnostics",
+       "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003300065"
+      ]
+     ]
+    },
+    {
+     "t": "Why the lab numbers cannot set the values",
+     "d": "The lab results are in heat at the panel. The fire data is in flame-length classes. Field measurements show the heat from a wildland fire varies widely with fuel, distance and geometry, so there is no defensible conversion from a class to heat at a panel. Without it, a lab threshold cannot be placed on the class scale.",
+     "tier": "T2",
+     "refs": [
+      [
+       "Frankman et al. (2012), convective and radiative heating in wildland fires",
+       "https://doi.org/10.1071/WF11097"
+      ],
+      [
+       "Butler (2010), convective heating in full-scale crown fires",
+       "https://research.fs.usda.gov/treesearch/39348"
+      ]
+     ]
+    },
+    {
+     "t": "So rules say what each class means, and a number is judged for it",
+     "d": "The cell writes down what each class stands for, from “near zero” to “major loss, but not automatic total loss”, keeps every value below 0.90, and keeps the table rising. The number put on each meaning is engineering judgement.",
+     "tier": "T4",
+     "refs": [
+      [
+       "Wildfire × solar derivation dossier, section 5.2",
+       "https://github.com/aamani-ai/Damage_Modeling/blob/main/docs/cells/wildfire_solar/current/wildfire_solar_curve_derivation_dossier__model_v1_0__docs_r3.md"
+      ]
+     ]
+    }
+   ],
+   "cols": [
+    "Flame-length class",
+    "PV module",
+    "What the class is taken to mean",
+    "What backs the number"
+   ],
+   "rows": [
+    [
+     "Under 2 ft",
+     "0.002",
+     "Near zero, but not zero for exposed plastics and electronics",
+     "Judged",
+     "T4"
+    ],
+    [
+     "2 to 4 ft",
+     "0.01",
+     "No meaning of its own: set between its neighbours, rising",
+     "Judged",
+     "T4"
+    ],
+    [
+     "4 to 6 ft",
+     "0.04",
+     "First detectable damage across several parts, without broad replacement",
+     "Judged",
+     "T4"
+    ],
+    [
+     "6 to 8 ft",
+     "0.12",
+     "Material local replacement",
+     "Judged",
+     "T4"
+    ],
+    [
+     "8 to 12 ft",
+     "0.32",
+     "Substantial replacement of exposed and electronic parts",
+     "Judged",
+     "T4"
+    ],
+    [
+     "12 ft and over",
+     "0.65",
+     "Major loss across subsystems, but not automatic total loss",
+     "Judged",
+     "T4"
+    ]
+   ],
+   "checks": [
+    "Forest Service field measurements show severe fires can deliver large, short bursts of heat, so heavy damage in the top classes is physically possible.",
+    "PV fire tests show the outcome depends on the panel’s build, its glass, its tilt and the duration, which supports a gradual rise and not one sharp threshold.",
+    "DOE/FEMP guidance says burned sections are generally rebuilt, and heat-affected panels need infrared and electroluminescence inspection.",
+    "The cell also runs every value at 0.6 and 1.5 times: a stress test, not a confidence range."
+   ],
+   "checkRefs": [
+    [
+     "DOE/FEMP, Solar PV Hardening for Resilience: Wildfire",
+     "https://www.energy.gov/cmei/femp/solar-photovoltaic-hardening-resilience-wildfire"
+    ]
+   ]
+  },
+  "rules": [
+   "The lowest class stays near zero, a little above it for exposed plastics and electronics.",
+   "The 4 to 6 ft class is the first with detectable damage to several parts, without broad replacement.",
+   "The 6 to 8 ft class means material local replacement.",
+   "The 8 to 12 ft class allows substantial replacement of exposed and electronic parts.",
+   "The top class allows major loss across subsystems, but not automatic total loss.",
+   "No value above 0.90.",
+   "Metal and buried parts stay below electronics and plastics."
+  ],
+  "dossier": [
+   "Wildfire × solar: how the model is built",
+   "https://github.com/aamani-ai/Damage_Modeling/blob/main/docs/cells/wildfire_solar/basics/HOW_THE_MODEL_IS_BUILT.md"
+  ],
+  "sources": [
+   [
+    "damage_modeling · wildfire × solar cell: how the model is built, model reference and runtime artifact",
+    "https://github.com/aamani-ai/Damage_Modeling/tree/main/docs/cells/wildfire_solar"
+   ]
+  ],
+  "level": {
+   "kind": "Failure unit",
+   "path": [
+    "Solar plant",
+    "PV array",
+    "PV module"
+   ],
+   "of": "One of ten parts, each with its own table."
+  },
+  "axis": {
+   "label": "Flame-length class from the US Forest Service fire simulation (FSim)",
+   "start": 4,
+   "states": [
+    "No fire",
+    "Under 2 ft",
+    "2 to 4 ft",
+    "4 to 6 ft",
+    "6 to 8 ft",
+    "8 to 12 ft",
+    "12 ft and over"
+   ]
+  }
+ }
+}

@@ -1,0 +1,651 @@
+{
+ "schema": "derivation_record.v2",
+ "status": "draft",
+ "case_id": "flood_solar_xfmr",
+ "cell_id": "flood_solar",
+ "curve_id": "FS_XFMR",
+ "artifact_sha256": "a08e77ef034e1ecea3e7cd05d13c825921b54d610fca9de8651ebda8e857082d",
+ "written_from": "Drafted in the infrastructure playground from this cell's derivation dossier and runtime artifact (12 Nov 2026); moved here as the record. Prose is a reading of the dossier, not a new source.",
+ "curves": [
+  {
+   "id": "FS_XFMR",
+   "name": "Transformer and control area",
+   "role": "adopted",
+   "tier": "T3"
+  },
+  {
+   "id": "FS_SWG",
+   "name": "Switchgear (same cell)",
+   "role": "neighbour",
+   "tier": "T3"
+  },
+  {
+   "id": "FS_INV",
+   "name": "Inverter (same cell)",
+   "role": "neighbour",
+   "tier": "T3"
+  }
+ ],
+ "case": {
+  "title": "Flood on a solar plant",
+  "part": "Main power transformer",
+  "hazard": "flood",
+  "type": "engineered",
+  "weakest": "T3",
+  "weakestNote": "no measured point",
+  "says": "The share of the transformer’s value spent on repair, by how deep the water stands above it.",
+  "typeNote": "A table of nine depths for this one part. Its two ends are fixed; the seven values between were chosen by reasoning, because no flooded-transformer outcome with its depth has been found.",
+  "pinnedBy": "Two boundaries and one rule",
+  "use": "Screening direct repair cost by depth",
+  "notFor": "How long the plant is out; a specific transformer after a specific flood",
+  "question": {
+   "not": [
+    "Flood depth at the site",
+    "Whole-plant damage"
+   ],
+   "yes": [
+    "Water depth at the transformer",
+    "Share of its value spent on repair"
+   ]
+  },
+  "trail": [
+   [
+    "Water level at the site, and the part’s height",
+    "How far the water stands above the part",
+    "bridge",
+    "The horizontal axis, and zero damage below the part",
+    "axis"
+   ],
+   [
+    "NEMA GD 1, water-damaged equipment",
+    "Which equipment is replaced and which is evaluated",
+    "rule",
+    "The transformer’s curve is drawn flatter than switchgear’s",
+    "form"
+   ],
+   [
+    "USACE HEC-FIA depth–percent tables",
+    "Damage as a table of depths, joined by straight lines",
+    "reference",
+    "The form only: nine depths. None of its values",
+    "form"
+   ],
+   [
+    "No source",
+    "No flooded-transformer outcome with its depth has been found",
+    "chosen",
+    "All seven values between 0 and 1.00: 0.03, 0.10, 0.25, 0.45, 0.65, 0.80, 0.95",
+    "form"
+   ]
+  ],
+  "marks": [
+   {
+    "tag": "boundary",
+    "x": 0,
+    "y": 0,
+    "label": "No damage until water reaches the part",
+    "at": [
+     0.42,
+     0.1
+    ]
+   },
+   {
+    "tag": "boundary",
+    "x": 2,
+    "y": 1,
+    "label": "End of the valid range: total loss",
+    "at": [
+     1.98,
+     0.8
+    ],
+    "end": true
+   },
+   {
+    "tag": "rule",
+    "kind": "arrow",
+    "x": 0.15,
+    "from": 0.85,
+    "to": 0.25,
+    "label": "Rule: flatter than switchgear",
+    "ly": 0.72
+   }
+  ],
+  "ground": [
+   [
+    0,
+    2,
+    "chosen",
+    "Chosen values between two boundaries: no measurement anywhere"
+   ]
+  ],
+  "empty": {
+   "data": "No data point exists for this curve: no flooded-transformer outcome with its depth has been found.",
+   "reference": "No reference curve read yet. HEC-FIA’s depth tables gave the table form only, not values."
+  },
+  "flow": {
+   "columns": [
+    "EVIDENCE",
+    "DECISIONS",
+    "THE RESULT",
+    "WHAT IT GIVES"
+   ],
+   "nodes": [
+    {
+     "id": "e0",
+     "label": "DOE/FEMP PV flood guide\nwater reaches the electrics",
+     "col": 0,
+     "row": 0,
+     "tone": "input",
+     "step": "grain"
+    },
+    {
+     "id": "e1",
+     "label": "Water level and part height\nthe twin: 0.30 m above grade",
+     "col": 0,
+     "row": 1,
+     "tone": "input",
+     "step": "axis"
+    },
+    {
+     "id": "e2",
+     "label": "NEMA GD 1 and HEC-FIA\nreplace or evaluate · table form",
+     "col": 0,
+     "row": 2,
+     "tone": "input",
+     "step": "form"
+    },
+    {
+     "id": "e3",
+     "label": "Enclosure, duration, salt\nnot numeric yet",
+     "col": 0,
+     "row": 3,
+     "tone": "input",
+     "step": "adjust",
+     "dashed": true
+    },
+    {
+     "id": "d0",
+     "label": "What fails\ntransformer and its controls",
+     "col": 1,
+     "row": 0,
+     "tone": "model",
+     "step": "grain"
+    },
+    {
+     "id": "d1",
+     "label": "What drives it\ndepth above the part",
+     "col": 1,
+     "row": 1,
+     "tone": "model",
+     "step": "axis"
+    },
+    {
+     "id": "d2",
+     "label": "The shape\na depth table, no data",
+     "col": 1,
+     "row": 2,
+     "tone": "model",
+     "step": "form"
+    },
+    {
+     "id": "d3",
+     "label": "What shifts it\nnothing numeric yet",
+     "col": 1,
+     "row": 3,
+     "tone": "model",
+     "step": "adjust"
+    },
+    {
+     "id": "r",
+     "label": "Engineered curve\n0.45 at 0.30 m of water",
+     "col": 2,
+     "row": 0,
+     "span": 4,
+     "tone": "result",
+     "step": "form"
+    },
+    {
+     "id": "o0",
+     "label": "Damage ratio per event\nrepair ÷ replacement",
+     "col": 3,
+     "row": 1,
+     "tone": "use",
+     "step": "emit"
+    },
+    {
+     "id": "o1",
+     "label": "Withheld\nspread · time out of service",
+     "col": 3,
+     "row": 2,
+     "tone": "held",
+     "step": "emit"
+    }
+   ],
+   "edges": [
+    {
+     "from": "e0",
+     "to": "d0"
+    },
+    {
+     "from": "e1",
+     "to": "d1"
+    },
+    {
+     "from": "e2",
+     "to": "d2"
+    },
+    {
+     "from": "e3",
+     "to": "d3",
+     "dashed": true
+    },
+    {
+     "from": "d0",
+     "to": "r"
+    },
+    {
+     "from": "d1",
+     "to": "r"
+    },
+    {
+     "from": "d2",
+     "to": "r"
+    },
+    {
+     "from": "d3",
+     "to": "r"
+    },
+    {
+     "from": "r",
+     "to": "o0"
+    },
+    {
+     "from": "r",
+     "to": "o1",
+     "dashed": true
+    }
+   ]
+  },
+  "assumptions": [
+   {
+    "step": "form",
+    "t": "Every value between the ends is chosen, not measured",
+    "d": "The cell lists the “exact DR percentages at intermediate depths” among its engineering assumptions.",
+    "tier": "T3",
+    "trigger": "Claims, maker or forensic evidence"
+   },
+   {
+    "step": "form",
+    "t": "A transformer is damaged more gradually than switchgear",
+    "d": "The one rule that shapes the curve, from reading NEMA as allowing evaluation of liquid-filled units. NEMA GD 1-2019 lists them under Replace, with fluid analysis required to evaluate: worth a check.",
+    "tier": "T3",
+    "trigger": "Maker service guidance; utility post-flood reports"
+   },
+   {
+    "step": "axis",
+    "t": "Depth alone drives it",
+    "d": "How long the water stands, how dirty and how salty it is are named as open and not modeled.",
+    "tier": "T3",
+    "trigger": "Events with duration and salinity recorded"
+   },
+   {
+    "step": "axis",
+    "t": "One height stands for the whole unit",
+    "d": "The twin’s lowest critical point, 0.30 m. The cabinet, the lowest gasket and the bushings really sit at different heights.",
+    "tier": "T3",
+    "trigger": "A site survey or drawings"
+   }
+  ],
+  "steps": {
+   "question": {
+    "a": "Depth at the transformer against the share of its value spent on repair. Not site flood depth against plant loss.",
+    "points": [
+     "Two parts on one site see different depths, so each gets its own curve and its own height.",
+     "Physical destruction only. The outage is a separate question, answered on the Damage to recovery tab."
+    ]
+   },
+   "evidence": {
+    "a": "Sources fix the mechanism and the table form. None fixes a number.",
+    "table": [
+     [
+      "DOE/FEMP PV flood guidance",
+      "rule",
+      "Submersion, raising equipment, water paths through conduit",
+      "Damage values for each component",
+      "T2"
+     ],
+     [
+      "NEMA GD 1-2019, water-damaged equipment",
+      "rule",
+      "Which equipment is replaced and which evaluated",
+      "A continuous depth curve",
+      "T3"
+     ],
+     [
+      "USACE HEC-FIA depth–percent tables",
+      "reference",
+      "That a depth table with interpolation is a sound form",
+      "Solar or transformer values",
+      "T3"
+     ],
+     [
+      "Water level minus part height",
+      "bridge",
+      "The depth at the part, and zero below it",
+      "—",
+      "T2"
+     ]
+    ]
+   },
+   "grain": {
+    "a": "Flood spreads damage over many units, each with its own height.",
+    "units": [
+     [
+      "Transformer and controls",
+      "primary"
+     ],
+     [
+      "Inverter",
+      "other"
+     ],
+     [
+      "Switchgear",
+      "other"
+     ],
+     [
+      "Combiner boxes",
+      "other"
+     ],
+     [
+      "SCADA",
+      "other"
+     ],
+     [
+      "Cable paths",
+      "cond"
+     ],
+     [
+      "PV modules",
+      "cond"
+     ],
+     [
+      "Foundations",
+      "cond"
+     ]
+    ],
+    "points": [
+     "This page shows the transformer’s curve; the other units have their own in the same cell."
+    ]
+   },
+   "axis": {
+    "a": "Depth of water above the part’s own lowest critical point.",
+    "chain": [
+     [
+      "Water surface at the site",
+      "what the hazard source reports"
+     ],
+     [
+      "Minus the part’s height",
+      "the bridge: h = max(0, level − height)"
+     ],
+     [
+      "Depth at the part, m",
+      "what reaches the transformer: the axis"
+     ]
+    ],
+    "points": [
+     "Below the part’s height the depth is zero and so is the damage.",
+     "Valid from 0 to 2 m."
+    ]
+   },
+   "form": {
+    "a": "A table of nine depths, joined by straight lines.",
+    "formula": "depth, m      0     0.02   0.05   0.15   0.30   0.60   1.00   1.50   2.00\nratio         0     0.03   0.10   0.25   0.45   0.65   0.80   0.95   1.00",
+    "points": [
+     "The first centimetres matter: water in a control section can trigger replacement before deep submersion.",
+     "Same depths as the switchgear and inverter tables, with lower values: the rule drawn on the chart."
+    ],
+    "rejected": [
+     [
+      "A logistic curve",
+      "Suggests a smooth transition; flood guidance is threshold-like"
+     ],
+     [
+      "States only, no table",
+      "Kept compatible: the table can be read as states later"
+     ]
+    ]
+   },
+   "adjust": {
+    "a": "Fields exist; none changes the number yet.",
+    "table3": [
+     [
+      "Selector",
+      "Enclosure rating, transformer type",
+      "Would choose a different curve. Numeric form deferred",
+      "T3"
+     ],
+     [
+      "Conditioner",
+      "Conduit water path, shutdown state",
+      "Named, not numeric",
+      "T3"
+     ],
+     [
+      "Exposure",
+      "Site geometry and height",
+      "Sets the depth at the part, through the bridge",
+      "T2"
+     ]
+    ]
+   },
+   "emit": {
+    "a": "A mean damage ratio per event. Nothing about time.",
+    "yes": [
+     "Damage ratio for the transformer unit",
+     "Loss for an event, with a stated value basis"
+    ],
+    "no": [
+     "Spread around the curve (not carried)",
+     "Which state the unit is left in",
+     "How long the plant is out"
+    ]
+   }
+  },
+  "evid": [
+   {
+    "reports": "Submersion damages electrical equipment, water also travels through conduit, and equipment should be raised.",
+    "supports": "That the transformer and its controls are a part flood can damage",
+    "not": "Damage values",
+    "tier": "T2",
+    "links": []
+   },
+   {
+    "reports": "The twin puts the transformer’s lowest critical point 0.30 m above grade.",
+    "supports": "Depth at the part = water level − the part’s height",
+    "not": "Flow speed, how long the water stands, or salt",
+    "tier": "T2",
+    "links": []
+   },
+   {
+    "reports": "NEMA: which water-damaged equipment is replaced and which is evaluated. HEC-FIA: damage written as a table of depths.",
+    "supports": "The one rule that shapes the curve, and the table form",
+    "not": "Any of the nine values",
+    "tier": "T3",
+    "links": [
+     [
+      "NEMA GD 1-2019",
+      "https://www.nj.gov/dca/codes/publications/pdf_other/NEMA_GD_1__2019.pdf"
+     ]
+    ]
+   },
+   {
+    "reports": "Named in the cell as things that change flood damage.",
+    "supports": "Fields kept for later",
+    "not": "A number today",
+    "tier": "T3",
+    "links": []
+   }
+  ],
+  "how": {
+   "lead": "Only the two ends are fixed. The seven values between were chosen by reasoning from guidance on wet electrical equipment, so that the transformer is damaged more gradually than switchgear. No measured outcome sits behind them.",
+   "steps": [
+    {
+     "t": "Where it starts: no water, no damage",
+     "d": "Depth is measured at the part itself, so below the part’s lowest critical point the damage is zero.",
+     "tier": "T2",
+     "refs": [
+      [
+       "Flood × solar derivation dossier",
+       "https://github.com/aamani-ai/Damage_Modeling/blob/main/docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md"
+      ]
+     ]
+    },
+    {
+     "t": "Why the first centimetres already count",
+     "d": "Water entering a control section, a cable entry or a low vent can trigger replacement or evaluation before deep submersion. So the table has values at 2 cm and 5 cm.",
+     "tier": "T3",
+     "refs": [
+      [
+       "Flood × solar derivation dossier, section 7.1",
+       "https://github.com/aamani-ai/Damage_Modeling/blob/main/docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md"
+      ]
+     ]
+    },
+    {
+     "t": "Why it is gentler than switchgear",
+     "d": "The cell reads NEMA’s guidance as treating liquid-filled transformers differently: the fluid can be analysed and the unit evaluated, not always replaced. So at every depth the transformer’s value sits below the switchgear’s. NEMA GD 1-2019’s own table lists liquid-filled transformers under Replace, with fluid analysis required to evaluate, so this reading is worth a check.",
+     "tier": "T3",
+     "refs": [
+      [
+       "NEMA GD 1-2019, Evaluating Water-Damaged Electrical Equipment, p. 4",
+       "https://www.nj.gov/dca/codes/publications/pdf_other/NEMA_GD_1__2019.pdf"
+      ]
+     ]
+    },
+    {
+     "t": "Why a table of depths, and not a smooth curve",
+     "d": "Flood guidance is threshold-like: water is in the equipment, or it is not. The US Army Corps’ HEC-FIA depth tables are the precedent for writing damage as a table of depths joined by straight lines. Only the form is taken, none of the values.",
+     "tier": "T3",
+     "refs": [
+      [
+       "Flood × solar derivation dossier, section 6",
+       "https://github.com/aamani-ai/Damage_Modeling/blob/main/docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md"
+      ]
+     ]
+    }
+   ],
+   "cols": [
+    "Water at the part",
+    "Transformer",
+    "How it was set",
+    "For comparison"
+   ],
+   "rows": [
+    [
+     "0.00 m",
+     "0",
+     "Fixed: no water at the part",
+     "Switchgear 0",
+     "T2"
+    ],
+    [
+     "0.02 m",
+     "0.03",
+     "Chosen: first water in the controls",
+     "Switchgear 0.10",
+     "T3"
+    ],
+    [
+     "0.05 m",
+     "0.10",
+     "Chosen: below switchgear",
+     "Switchgear 0.40",
+     "T3"
+    ],
+    [
+     "0.15 m",
+     "0.25",
+     "Chosen: below switchgear",
+     "Switchgear 0.85",
+     "T3"
+    ],
+    [
+     "0.30 m",
+     "0.45",
+     "Chosen: below switchgear",
+     "Switchgear 1.00",
+     "T3"
+    ],
+    [
+     "0.60 m",
+     "0.65",
+     "Chosen: below switchgear",
+     "Switchgear 1.00",
+     "T3"
+    ],
+    [
+     "1.00 m",
+     "0.80",
+     "Chosen: below switchgear",
+     "Switchgear 1.00",
+     "T3"
+    ],
+    [
+     "1.50 m",
+     "0.95",
+     "Chosen: below switchgear",
+     "Switchgear 1.00",
+     "T3"
+    ],
+    [
+     "2.00 m",
+     "1.00",
+     "Fixed: the end of the valid range",
+     "Switchgear 1.00",
+     "T3"
+    ]
+   ],
+   "checks": [
+    "The cell lists the “exact DR percentages at intermediate depths” among its engineering assumptions, to be replaced by claims, maker or forensic evidence when it exists."
+   ]
+  },
+  "dossier": [
+   "Flood × solar derivation dossier",
+   "https://github.com/aamani-ai/Damage_Modeling/blob/main/docs/cells/flood_solar/current/flood_solar_curve_derivation_dossier_v1_0.md"
+  ],
+  "sources": [
+   [
+    "NEMA GD 1-2019, Evaluating Water-Damaged Electrical Equipment (read 12 Nov 2026, pp. 1, 4, 7)",
+    "https://www.nj.gov/dca/codes/publications/pdf_other/NEMA_GD_1__2019.pdf"
+   ],
+   [
+    "damage_modeling · flood × solar cell: derivation dossier v1.0 and runtime artifact",
+    "https://github.com/aamani-ai/Damage_Modeling/tree/main/docs/cells/flood_solar"
+   ]
+  ],
+  "level": {
+   "kind": "Failure unit",
+   "path": [
+    "Solar plant",
+    "Substation",
+    "Main power transformer"
+   ],
+   "of": "One of eight parts with a flood curve of their own, each at its own height."
+  },
+  "axis": {
+   "label": "Water above the part’s lowest critical point, m",
+   "ticks": [
+    0,
+    0.5,
+    1,
+    1.5,
+    2
+   ],
+   "step": 0.05,
+   "start": 0.3,
+   "dp": 2,
+   "unit": "m"
+  }
+ }
+}
