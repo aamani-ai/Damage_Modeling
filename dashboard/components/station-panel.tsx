@@ -73,6 +73,7 @@ export function StationPanel({ station, cell: fullCell, cites, curves: allCurves
   const ch = cell.chain.stations.find((s) => s.id === station.id)!;
   const pl = cell.plain;
   const docs = pl.sources.filter((s) => s.kind !== "marker" && s.kind !== "placeholder");
+  const sourceNo = new Map(docs.map((s, i) => [s.id, i + 1])); // a parameter cites a source by its number in the Sources list
   const markers = pl.sources.filter((s) => s.kind === "marker");
   const placeholders = pl.sources.filter((s) => s.kind === "placeholder");
   let words: React.ReactNode = null;
@@ -153,7 +154,7 @@ export function StationPanel({ station, cell: fullCell, cites, curves: allCurves
             {docs.length ? (
               <>
               <Count n={docs.length} one="source" note={(() => { const lc = pl.link_counts; const n = lc.locator_only + lc.neither; return n ? `${n} with no link in the register${lc.locator_only ? `, ${lc.locator_only} of them with a locator` : ""}` : undefined; })()} />
-              <ul className="space-y-0.5">{docs.map((s) => <li key={s.id}><SourceRef s={s} id={s.id} />{s.provenance && s.provenance !== "register" ? <span className="text-[11px] text-muted-foreground"> · {s.provenance.replace(/-/g, " ")}{s.from?.sheet ? ` (${s.from.sheet})` : s.from?.section ? ` (${s.from.section})` : ""}</span> : null}</li>)}</ul>
+              <ol className="list-decimal space-y-0.5 pl-7 marker:text-[11px] marker:tabular-nums marker:text-muted-foreground">{docs.map((s, i) => <li key={s.id} id={`source-${i + 1}`} className="scroll-mt-4"><SourceRef s={s} id={s.id} />{s.provenance && s.provenance !== "register" ? <span className="text-[11px] text-muted-foreground"> · {s.provenance.replace(/-/g, " ")}{s.from?.sheet ? ` (${s.from.sheet})` : s.from?.section ? ` (${s.from.section})` : ""}</span> : null}</li>)}</ol>
               </>
             ) : <span className="text-muted-foreground">{pl.evidence_provenance.sentence ?? m.not_yet_extracted_sentence}{pl.evidence_provenance.dossier ? <> — <FileLink href={blob(pl.evidence_provenance.dossier)}>open the dossier</FileLink></> : null}</span>}
             {markers.length ? <p className="mt-1 text-[11.5px] text-muted-foreground">{markers.length} provenance marker{markers.length === 1 ? "" : "s"} in the register (a stated absence of a source, not a document): {markers.map((s) => s.id).join(", ")}</p> : null}
@@ -167,7 +168,7 @@ export function StationPanel({ station, cell: fullCell, cites, curves: allCurves
                 {groupParams(pl.parameters_plain).map(({ p, curveIds }, i) => (
                   <li key={p.id + i}>
                     <span className="font-medium">{p.name}</span>{p.value_text ? <span className="tabular"> {p.value_text}{curveIds.length > 1 ? " each" : ""}</span> : null} · {p.tier_word}
-                    {p.sources.length ? <span className="text-muted-foreground"> · from {p.sources.map((s, j) => <span key={s.id}>{j ? ", " : ""}{s.link ? <a href={s.link} target="_blank" rel="noreferrer" className="text-accent hover:underline">{s.title}</a> : <span title={s.resolved ? undefined : "no document matched this source ID"}>{s.title}</span>}</span>)}</span> : <span className="text-muted-foreground"> · our judgment, no source cited</span>}
+                    {p.sources.length ? <span className="text-muted-foreground"> · from {p.sources.map((s, j) => <span key={s.id}>{j ? ", " : ""}{sourceNo.has(s.id) ? <a href={`#source-${sourceNo.get(s.id)}`} title={s.title ?? undefined} className="tabular text-accent hover:underline">[{sourceNo.get(s.id)}]</a> : s.link ? <a href={s.link} target="_blank" rel="noreferrer" className="text-accent hover:underline">{s.title}</a> : <span title={s.resolved ? undefined : "no document matched this source ID"}>{s.title}</span>}</span>)}</span> : <span className="text-muted-foreground"> · our judgment, no source cited</span>}
                     {curveIds.length ? <span className="block text-[11px] text-muted-foreground">for {curveIds.map((id) => curves.find((c) => c.curve_id === id)?.part ?? id.replace(/_/g, " ")).join(", ")}{p.reasoning ? ` — ${p.reasoning}` : ""}</span> : p.reasoning ? <span className="block text-[11px] text-muted-foreground">{p.reasoning}</span> : null}
                   </li>
                 ))}
