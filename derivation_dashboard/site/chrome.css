@@ -9,10 +9,10 @@
 /* Long names and paths wrap inside their card instead of running into the next one */
 .fc code, .fc a, .fc span, .pn-links a, .trail .tc b { overflow-wrap: anywhere; word-break: break-word; }
 .fc code { white-space: normal; }
-/* Less detail: the descriptions go, the structure and numbers stay. The lead sentence under each heading stays. */
-.brief .tdesc, .brief .mutd, .brief .tiles small, .brief .a-note, .brief .dq, .brief .how-lead, .brief .how-steps p, .brief .cl-test, .brief .cl-alias,
-.brief .detail ul, .brief .evl p, .brief .as p, .brief .pn-grid p, .brief .banner span.more, .brief .none, .brief .foot,
-.brief .produces, .brief .idea, .brief .ins, .brief .said small, .brief .key, .brief .fk-body p:not(.why), .brief .srcline, .brief p.sub, .brief .lead { display: none !important; }
-/* Framework page, less detail: the decision cards keep their name and their result; the questions, the
-   takes-and-gives table and the rule sentences open with "More detail" */
-.brief .node .q, .brief .said, .brief .side .io, .brief .fk-body p { display: none !important; }
+/* Less detail hides only secondary prose. Everything that explains the curve stays by default: the lead sentences,
+   what pins the curve, the evidence and what each source supports, the assumptions, the reasoning, the tag explainers,
+   the chart keys. */
+.brief .a-note, .brief .foot, .brief .cl-alias, .brief .mutd { display: none !important; }
+/* Framework page: the decision cards keep their name and their result, and the chart keys stay; the questions on the
+   cards and the long asides open with "More detail" */
+.brief .produces, .brief .idea, .brief .ins, .brief .said small, .brief .srcline, .brief p.sub, .brief .node .q, .brief .fk-body p:not(.why) { display: none !important; }
