@@ -1,5 +1,5 @@
-# The derivation dashboard on Cloud Run, behind IAP for the Google accounts of IAP_DOMAINS, like damage-curves
-# (DCD-D36, D37). It deploys when the deploy/derivation-dashboard branch moves. The page data is generated here from
+# The derivation dashboard on Cloud Run. Public, no sign-in (owner, 13 Nov 2026: open it to anyone for now, so outside
+# reviewers can read it). Earlier it was behind IAP for aamani.ai and infrasure.ai, like damage-curves (DCD-D36, D37). It deploys when the deploy/derivation-dashboard branch moves. The page data is generated here from
 # the branch's own docs/cells, and the build stops if any derivation record disagrees with its curve file.
 name: Build and deploy derivation-dashboard to Cloud Run
 
@@ -23,7 +23,6 @@ env:
   AR_HOST: us-central1-docker.pkg.dev
   AR_REPO: infrasuremodelingdocker
   APP_PATH: derivation_dashboard
-  IAP_DOMAINS: aamani.ai infrasure.ai
 
 jobs:
   build-and-deploy:
@@ -63,15 +62,14 @@ jobs:
           docker push "$IMAGE"
           echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
 
-      - name: Deploy behind IAP
+      - name: Deploy, open to anyone with the link
         run: |
           gcloud beta run deploy "$SERVICE" \
             --project "$GCP_PROJECT" \
             --image "$IMAGE" \
             --platform managed \
             --region "$REGION" \
-            --iap \
-            --no-allow-unauthenticated \
+            --no-iap \
             --service-account project-service-account@modeling-nonprod-svc-db5x.iam.gserviceaccount.com \
             --memory 256Mi \
             --cpu 1 \
@@ -79,23 +77,14 @@ jobs:
             --max-instances 2 \
             --port 8080
 
-      - name: Let IAP reach the service, and the accounts of IAP_DOMAINS through IAP
+      - name: Let anyone open it (allUsers; if an org policy refuses that, skip the invoker check instead)
         run: |
-          gcloud run services add-iam-policy-binding "$SERVICE" \
-            --project "$GCP_PROJECT" \
-            --region "$REGION" \
-            --member "serviceAccount:service-952205173464@gcp-sa-iap.iam.gserviceaccount.com" \
-            --role roles/run.invoker
-          for domain in $IAP_DOMAINS; do
-            gcloud iap web add-iam-policy-binding \
-              --project "$GCP_PROJECT" \
-              --resource-type=cloud-run \
-              --service="$SERVICE" \
-              --region="$REGION" \
-              --member="domain:$domain" \
-              --role='roles/iap.httpsResourceAccessor' \
-              --condition=None
-          done
+          if ! gcloud run services add-iam-policy-binding "$SERVICE" \
+              --project "$GCP_PROJECT" --region "$REGION" \
+              --member allUsers --role roles/run.invoker; then
+            gcloud beta run services update "$SERVICE" \
+              --project "$GCP_PROJECT" --region "$REGION" --no-invoker-iam-check
+          fi
 
       - name: Verify the deployed boundary
         run: |
@@ -104,9 +93,6 @@ jobs:
           gcloud run services describe "$SERVICE" --project "$GCP_PROJECT" --region "$REGION" \
             --format='value(status.conditions[0].status)' | grep -qx True
           STATUS="$(curl --silent --show-error --max-time 30 --output /dev/null --write-out '%{http_code}' "$URL/" || true)"
-          case "$STATUS" in
-            302|401|403) ;;
-            *) echo "Expected IAP to refuse or redirect an anonymous request; got HTTP $STATUS"; exit 1 ;;
-          esac
-          echo "derivation-dashboard is live at $URL: sign in with a Google account of ${IAP_DOMAINS// / or }"
-          echo "### derivation-dashboard: $URL (sign in with a Google account of ${IAP_DOMAINS// / or })" >> "$GITHUB_STEP_SUMMARY"
+          [ "$STATUS" = 200 ] || { echo "Expected the page to open without sign-in; got HTTP $STATUS"; exit 1; }
+          echo "derivation-dashboard is live and public at $URL"
+          echo "### derivation-dashboard: $URL (public, no sign-in)" >> "$GITHUB_STEP_SUMMARY"
