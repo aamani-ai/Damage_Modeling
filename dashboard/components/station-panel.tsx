@@ -153,7 +153,7 @@ export function StationPanel({ station, cell: fullCell, cites, curves: allCurves
             {docs.length ? (
               <>
               <Count n={docs.length} one="source" note={(() => { const lc = pl.link_counts; const n = lc.locator_only + lc.neither; return n ? `${n} with no link in the register${lc.locator_only ? `, ${lc.locator_only} of them with a locator` : ""}` : undefined; })()} />
-              <ul className="space-y-0.5">{docs.map((s) => <li key={s.id}><SourceRef s={s} id={s.id} />{s.provenance && s.provenance !== "register" ? <span className="text-[11px] text-muted-foreground"> · {s.provenance.replace(/-/g, " ")}{s.from?.sheet ? ` (${s.from.sheet})` : s.from?.section ? ` (${s.from.section})` : ""}</span> : null}</li>)}</ul>
+              <ol className="list-decimal space-y-0.5 pl-7 marker:text-[11px] marker:tabular-nums marker:text-muted-foreground">{docs.map((s) => <li key={s.id}><SourceRef s={s} id={s.id} />{s.provenance && s.provenance !== "register" ? <span className="text-[11px] text-muted-foreground"> · {s.provenance.replace(/-/g, " ")}{s.from?.sheet ? ` (${s.from.sheet})` : s.from?.section ? ` (${s.from.section})` : ""}</span> : null}</li>)}</ol>
               </>
             ) : <span className="text-muted-foreground">{pl.evidence_provenance.sentence ?? m.not_yet_extracted_sentence}{pl.evidence_provenance.dossier ? <> — <FileLink href={blob(pl.evidence_provenance.dossier)}>open the dossier</FileLink></> : null}</span>}
             {markers.length ? <p className="mt-1 text-[11.5px] text-muted-foreground">{markers.length} provenance marker{markers.length === 1 ? "" : "s"} in the register (a stated absence of a source, not a document): {markers.map((s) => s.id).join(", ")}</p> : null}
