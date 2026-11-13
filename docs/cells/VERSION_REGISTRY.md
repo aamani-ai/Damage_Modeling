@@ -45,6 +45,7 @@ artifact index, the cell changelog, package releases, and Hazard runtime remain 
 
 | Cell folder | Current semantic damage-model version | Human / runtime docs revision | Current status | Repository-current contract note |
 |---|---:|---:|---|---|
+| `flood_real_estate` | **model v1.1** | docs r1 | Current three-profile still-water screening | Exact DF341/DF431/DF129; floors 0.25/0.25/0.75 ft and building RCN $11M/$10.8M/$405k; DD-RE9 source wet/dry semantics. Published warehouse retains immutable 1.0 pin; retail unadmitted. |
 | `flood_substation` | **model v1.0** | docs r1 | Current standalone depth-only screening | Exact inherited assembly response; explicit Coastal T4 transfer; conditional consumer annual metrics, full same-station value cap and unavailable-depth tags. |
 | `hail_solar` | **model v1.0** | human docs r8; runtime docs r7 | Current; source docs retain `v1_3` labels | Docs r8 adds the three-file basics set. Runtime docs r7 still own the denominator/value profiles, strict logistic payload validation, KATs, and consumer-scoped tail capability. |
 | `flood_solar` | **model v1.0** | human docs r5; runtime docs r4 | Current | Docs r5 adds the three-file flood/elevation basics set; runtime docs r4 remain canonical. |
@@ -155,3 +156,11 @@ Documentation revision changed = proof trail / contract / implementation wrapper
 v0.1 scaffold = structure accepted but runtime DR not yet parameterized.
 v1.0 = first derived runtime curve package for the cell.
 ```
+
+| convective_wind_real_estate | model v1.0 | docs r2 | 2026-10-26 | Three reference-building screening admission; unchanged source EF/Hazus-cost records, separate pathways, explicit value bindings; annual gates consumer-owned |
+
+| hail_real_estate | model v1.0 | docs r1 | 2026-10-26 | Three-reference roof/walls screening admission; exact own-unit shares; conditional annual consumer gates |
+
+| tropical_cyclone_wind_real_estate | model v1.0 | docs r1 | 2026-10-26 | Unchanged Hazus three-building screening bindings; three explicit terrain conditions; annual gates conditional |
+
+| wildfire_real_estate | model v1.0 | docs r1 | 2026-10-26 | Unchanged three-building class tables; explicit potential-structure proxy, not observed exposure |

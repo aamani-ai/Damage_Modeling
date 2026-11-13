@@ -1,0 +1,67 @@
+{
+  "schema": "building-hurricane-screening-binding/v1",
+  "profile_key": "house",
+  "profile_id": "re_house_1s_wood_slab",
+  "reference_building_id": "RE_RES_SFD_1S_SLAB",
+  "asset_type": "Real Estate House",
+  "dimensions_m": [
+    9.144,
+    18.288
+  ],
+  "physical_profile": {
+    "repository": "Hazard_Modeling",
+    "path": "docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "sha256": "b952c4e5e8bcae8fd0fa4d9612223bc0b6c2c5e0eafaffc5a1c89620ff4de33f"
+  },
+  "source_pin": {
+    "cell_id": "tropical_cyclone_wind_real_estate",
+    "semantic_damage_model_version": "model v1.0",
+    "documentation_revision": "docs r1",
+    "schema_version": "damage_curve_record_bundle.v3",
+    "artifact_sha256": "dfee46103b6239b962085be77c6dd0f4a82634d93774acc57c1de43583582998",
+    "source_proposal_sha256": "99487ff5812e6b1017eeaaeea14d469bcb15ae2265e9d6cf107ce5ca41c85753"
+  },
+  "value": {
+    "currency": "USD",
+    "replacement_cost_new_usd": "405000",
+    "basis": "Q3 2025 Dallas included building RCN",
+    "scope_transfer_tier": "T4_explicit_screening_reference_scope_transfer",
+    "included": [
+      "foundation_and_floor",
+      "structural_frame",
+      "roof",
+      "walls_and_openings",
+      "fixed_services",
+      "fixed_interiors"
+    ],
+    "excluded": [
+      "land",
+      "site_works",
+      "contents",
+      "process_equipment",
+      "business_interruption",
+      "finance",
+      "code_upgrades",
+      "demand_surge"
+    ],
+    "component_responses_added": false
+  },
+  "annual_aggregate_cap_usd": "405000",
+  "demand": {
+    "axis": "tc_peak_gust_3s_10m_mph",
+    "definition": "open-terrain peak 3-second gust at 10 m; source terrain only selects response; no second gust correction"
+  },
+  "overlap_policy": "standalone Hurricane wind; no cross-hazard Total or additive debris/rain ingress",
+  "full_physical_risk_complete": false,
+  "authority": {
+    "owner_request_date": "2026-10-26",
+    "scope": "Complete remaining three-profile hazards with qualification; fixed design details delegated DD-RE7; not claims calibration"
+  },
+  "terrain_conditions": [
+    "open",
+    "suburban",
+    "trees"
+  ],
+  "terrain_policy": "Explicit reference condition; not observed local terrain, a default, an ordered loss bound or a probability mixture",
+  "location_support": "625 regular reference-point centers in each 0.25-degree parent; no DEM or parcel eligibility; native 0.1-degree STORM samples mixed before annual metrics"
+}

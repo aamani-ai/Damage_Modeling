@@ -1,0 +1,60 @@
+{
+  "profile_key": "house",
+  "profile_id": "re_house_1s_wood_slab",
+  "reference_building_id": "RE_RES_SFD_1S_SLAB",
+  "asset_type": "Real Estate House",
+  "dimensions_m": [
+    9.144,
+    18.288
+  ],
+  "physical_profile": {
+    "repository": "Hazard_Modeling",
+    "path": "docs/plans/_cross_cutting/real_estate_conus/reference_candidates.yml",
+    "sha256": "b952c4e5e8bcae8fd0fa4d9612223bc0b6c2c5e0eafaffc5a1c89620ff4de33f"
+  },
+  "schema": "building-hail-screening-binding/v1",
+  "screening_assumption_set_id": "HRE_T4_WALLS_WINDOWS_SCREENING_2026_10_18",
+  "source_pin": {
+    "cell_id": "hail_real_estate",
+    "semantic_damage_model_version": "model v1.0",
+    "documentation_revision": "docs r1",
+    "schema_version": "damage_curve_record_bundle.v3",
+    "artifact_sha256": "643b235d11727d5efc7336ca0839b49135a06ef4b9c3f9d1b8d8821aaf1096c3",
+    "source_proposal_sha256": "52cf865d4dfb8b4c593736fb05b5d3e7c341bad2a2441b89499d7e88605fef20"
+  },
+  "value": {
+    "currency": "USD",
+    "building_rcn_usd": "405000",
+    "modeled_value_usd": "39766.545000",
+    "withheld_building_value_usd": "365233.455000",
+    "price_basis": "Q3 2025 Dallas included-building hard-cost reference",
+    "scope_transfer_tier": "T4_screening_reference_value_and_source_unit_shares",
+    "ledger": [
+      {
+        "failure_unit_id": "HRE_ROOF_COVER",
+        "share_of_building_rcn": "0.0375",
+        "replacement_value_usd": "15187.5000",
+        "role": "modeled_own_unit_value",
+        "denominator": "replacement cost of the same building's roof cover (house shingles; warehouse steel panels; office TPO membrane and insulation)"
+      },
+      {
+        "failure_unit_id": "HRE_WALLS_AND_WINDOWS",
+        "share_of_building_rcn": "0.060689",
+        "replacement_value_usd": "24579.045000",
+        "role": "modeled_own_unit_value",
+        "denominator": "replacement cost of the same building's hail-vulnerable wall cladding and windows (house vinyl siding and windows; warehouse and office windows)"
+      },
+      {
+        "failure_unit_id": null,
+        "replacement_value_usd": "365233.455000",
+        "role": "withheld_building_value",
+        "reason": "No response/value coverage for the remaining building assemblies; not zero vulnerability"
+      }
+    ],
+    "uncovered_value_renormalized": false
+  },
+  "annual_aggregate_cap_usd": "39766.545000",
+  "annual_unit_caps": "each modeled failure unit at its own replacement value; sum capped unit losses once",
+  "location_support": "625 equally weighted source-native pixel-center reference locations; one location fixed per year; no DEM siting mask or observed building inventory",
+  "full_physical_risk_complete": false
+}
