@@ -29,6 +29,8 @@ not claims- or field-calibrated and must carry the screening flags in every cons
 Docs r4 adds the cell-owned basics set only. Runtime remains pinned to
 `wildfire_solar@model_v1_0__docs_r3`; curves, contract, and screening flags are unchanged.
 
+[Sources to curves](SOURCES_TO_CURVES.md): which source gives which number on which curve, in plain words; the dashboard links to it above the Sources list.
+
 ## Start here
 
 - [`basics/README.md`](basics/README.md) — first-reader wildfire/FSim terminology, categorical-state
