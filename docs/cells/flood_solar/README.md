@@ -6,6 +6,7 @@ only and does not change runtime behavior.
 
 ## Start here
 
+- [Sources to curves](SOURCES_TO_CURVES.md): which source gives which number on which curve, in plain words; the dashboard links to it above the Sources list.
 - [`../../extra/guides/flood_solar_curve_request_guide.md`](../../extra/guides/flood_solar_curve_request_guide.md) — practical Hazard request, datum bridge, and same-unit assembly rules.
 - [`basics/README.md`](basics/README.md) — first-reader flood/elevation terminology, ASCII diagrams, datum
   rules, worked local-depth examples, and common mistakes.

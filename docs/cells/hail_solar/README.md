@@ -6,6 +6,7 @@ changing the logistic curves, contract, or failure-unit DRs.
 
 ## Start here
 
+- [Sources to curves](SOURCES_TO_CURVES.md): which source gives which number on which curve, in plain words; the dashboard links to it above the Sources list.
 - [`basics/README.md`](basics/README.md) — first-reader hail/MESH terminology, physical picture, logistic
   intuition, and a complete stow/exposure/value example.
 - [`basics/HOW_THE_MODEL_IS_BUILT.md`](basics/HOW_THE_MODEL_IS_BUILT.md) — the seven-stage reasoning chain
