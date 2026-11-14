@@ -11,6 +11,7 @@ import { AuditTable, CapabilityLedger, EvidenceLedger, Eyebrow, FieldReviewLedge
 import { SourceRef } from "./source-link";
 import { EmptyState, FileLink, Mono, SectionSummary } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
+import { SOURCES_TO_CURVES } from "@/lib/sources-to-curves";
 
 const BLOB = "https://github.com/aamani-ai/Damage_Modeling/blob";
 
@@ -151,6 +152,8 @@ export function StationPanel({ station, cell: fullCell, cites, curves: allCurves
             {pl.hazard_values?.map((v) => <p key={v.unit} className="mt-1 text-[12px]"><span className="font-medium">Hazard&apos;s value:</span> Hazard multiplies {v.unit} by {(v.share * 100).toFixed(1)}%{v.note ? ` (${v.note})` : ""}{v.expected ? ", as the assumption above expects" : ""}; the curve file still declares {(v.declared * 100).toFixed(1)}%. The For Hazard footer below says where this is recorded.</p>)}
           </Line>
           <Line label="Sources">
+            {/* the cell's sources-to-curves page, where it has one: opens on GitHub at main */}
+            {SOURCES_TO_CURVES[fullCell.entry_id] ? <p className="mb-1"><a href={`${m.repo.url}/blob/main/${SOURCES_TO_CURVES[fullCell.entry_id]}`} target="_blank" rel="noreferrer" title="Open the sources-to-curves page on GitHub" className="font-medium text-accent hover:underline">Check how each sources link to each curve ↗</a></p> : null}
             {docs.length ? (
               <>
               <Count n={docs.length} one="source" note={(() => { const lc = pl.link_counts; const n = lc.locator_only + lc.neither; return n ? `${n} with no link in the register${lc.locator_only ? `, ${lc.locator_only} of them with a locator` : ""}` : undefined; })()} />

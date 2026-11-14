@@ -23,6 +23,7 @@ solar and wind cells were.
 
 ## Start here
 
+- [Sources to curves](SOURCES_TO_CURVES.md): which source gives which number on which curve, in plain words; the dashboard links to it above the Sources list.
 - [Scope and cell definition (step 0/1)](proposed/README_flood_real_estate__model_v0_1__docs_r1.md)
 - [Change classification](proposed/CHANGE_CLASSIFICATION_flood_real_estate__model_v0_1__docs_r1.md)
 - [Decision log](proposed/DECISION_LOG_flood_real_estate__model_v0_1__docs_r1.md) (D-FRE-01 to D-FRE-28)

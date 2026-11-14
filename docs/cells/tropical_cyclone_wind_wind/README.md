@@ -23,6 +23,8 @@ project TIV. The other 0.84 is withheld, not treated as zero.
 Start with the [current package](current/README.md) or the
 [request guide](../../extra/guides/tropical_cyclone_wind_wind_curve_request_guide.md).
 
+[Sources to curves](SOURCES_TO_CURVES.md): which source gives which number on which curve, in plain words; the dashboard links to it above the Sources list.
+
 ## The corrected contract
 
 ```text
