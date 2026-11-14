@@ -33,7 +33,7 @@ Withheld means no number is given, because nobody knows; it is not the same as z
 
 Two laboratories fired ice balls at thin-glass panels and counted how many cracked. PVEL reported three results in 2023: at 35 mm, 18 % of panels cracked; at 40 mm, 57 %; at 50 mm, 89 %. Kiwa PVEL reported two results in 2026: at 40 mm, 43 % cracked, and at 45 mm, 61 %. Those five counts are the five dots. The Damage team drew one S-shaped line as close as possible to all five.
 
-Half the panels crack at 41 mm, about the size of a golf ball: if hail that size hits a plant with these panels, about half of them are expected to crack. Smaller hail cracks fewer and bigger hail cracks more. Every dot is a laboratory count, so the curve is marked published (T2).
+Half the panels crack at 41 mm, a little smaller than a golf ball: if hail that size hits a plant with these panels, about half of them are expected to crack. Smaller hail cracks fewer and bigger hail cracks more. Every dot is a laboratory count, so the curve is marked published (T2).
 
 ## Curve 2 · ordinary 3.2 mm glass-on-backsheet modules (the default)
 
@@ -48,9 +48,9 @@ Half the panels crack at 41 mm, about the size of a golf ball: if hail that size
 
 **On the Damage dashboard:** [2 · ordinary 3.2 mm glass (default)](https://damage-curves-wsd6lcl64q-uc.a.run.app/cells/hail_solar/curves/HAIL_SOLAR_DEFAULT_3P2_GBS)
 
-This is the kind of panel most plants have, so it is the default curve. It has only two dots. The dot at 25 mm, about the size of a large marble, is not a count. Every panel sold must survive a 25 mm ice ball to be certified, and the DOE guide describes that test.
+This is the kind of panel most plants have, so it is the default curve. It has only two dots. The dot at 25 mm, about the size of a quarter coin, is not a count. Every panel sold must survive a 25 mm ice ball to be certified, and the DOE guide describes that test.
 
-"Survives" is a word rather than a number, and a line cannot be drawn through a word, so the Damage team chose 1 % to stand for "almost none break". That 1 % is the Damage team's choice, not a figure from any laboratory. The dot at 50 mm, about the size of a tennis ball, is PVEL's 2023 count: 39 % of these panels cracked.
+"Survives" is a word rather than a number, and a line cannot be drawn through a word, so the Damage team chose 1 % to stand for "almost none break". That 1 % is the Damage team's choice, not a figure from any laboratory. The dot at 50 mm, about the size of a hen's egg, is PVEL's 2023 count: 39 % of these panels cracked.
 
 The Damage team drew one S-shaped line through the two dots; half the panels crack at 53 mm. The 50 mm count is published. The 25 mm dot is a published test read as near zero. The line is the Damage team's.
 
@@ -69,14 +69,14 @@ The Damage team drew one S-shaped line through the two dots; half the panels cra
 
 Some panels are built to be extra tough. This curve also has two dots. The dot at 25 mm is set at 0.5 %, which is half of the ordinary curve's 1 %. The dossier's reason is that hardened panels should be no worse than ordinary certified panels, and 0.5 % is a chosen number rather than a count. The other dot is Kiwa PVEL's 2026 count that only 7 % of hardened panels cracked at 45 mm.
 
-Both dots sit at the easy end of the curve, and nothing was tested at a size large enough to crack most of these panels. The line is therefore stretched to the right until half the panels crack at 64 mm, about the size of a baseball, a point that no laboratory has measured. That stretch is why it is marked borrowed (T3) rather than published (T2).
+Both dots sit at the easy end of the curve, and nothing was tested at a size large enough to crack most of these panels. The line is therefore stretched to the right until half the panels crack at 64 mm, about the size of a tennis ball, a point that no laboratory has measured. That stretch is why it is marked borrowed (T3) rather than published (T2).
 
 The curve is used only when a plant can prove that its panels are the hardened kind.
 
 ## Stow adjustment · applied to all three curves when trackers can tilt
 
-- **Before:** Curve 1 · thin glass-on-glass modules, as published (reference)
-- **After:** Curve 1 with stow · moved 8 mm to the right and capped at 90 % (our judgment)
+- **Before:** Curve 2 · standard glass-backsheet modules, the default, as published (reference)
+- **After:** Curve 2 with stow · moved 8 mm to the right and capped at 90 % (our judgment). The same rule applies to curves 1 and 3.
 
 **What each source says, and what that means for the line**
 
@@ -88,7 +88,7 @@ The curve is used only when a plant can prove that its panels are the hardened k
   - So: backs the idea; no number on the curve
 - **[Damage team (dossier section 13.3)](https://github.com/aamani-ai/damage_modeling/blob/main/docs/cells/hail_solar/current/hail_solar_curve_derivation_dossier_v1_3.md#133-current-stow-adjustment)** (the Damage team’s own choice)
   - Did: chose 8 mm and 90 % as round placeholder values
-  - So: the 'after' line is curve 1 moved 8 mm to the right and capped at 90 %
+  - So: the 'after' line is curve 2 moved 8 mm to the right and capped at 90 %
 
 **On the Damage dashboard:** [the cell page (the stow adjustment has no curve page of its own)](https://damage-curves-wsd6lcl64q-uc.a.run.app/cells/hail_solar)
 
@@ -130,7 +130,7 @@ Two things on the Hazard side set the loss level more than the curve does. Hazar
 
 Insurer claims by hail size for utility solar plants would test both the rule that a broken module glass means a replaced module and the effect of the radar floor.
 
-In short: two laboratories (group B) supply every measured dot. One guide (group C) supplies the pass or fail test that the dossier turned into the 1 % and 0.5 % dots. One memo and that same guide (group D) justify the stow rule, whose numbers were chosen by the Damage team. The other fourteen sources set the axis (group E), turn the curve into dollars (group F), describe the method (group H), give background (group I), or are not used (group J). All eight dots were checked against their source pages on 12 November, and the PVEL 2023 and Kiwa 2026 percentages are where the table says they are.
+In short: two laboratories (group B) supply every measured dot. One guide (group C) supplies the pass or fail test that the dossier turned into the 1 % and 0.5 % dots. A memo, that same guide and a tracker maker's announcement (group D) justify the stow rule, whose numbers were chosen by the Damage team. The other fifteen sources set the axis (group E), turn the curve into dollars (group F), describe the method (group H), give background (group I), or are not used (group J).
 
 ## All 21 sources, sorted by what each one does: with links and where each number sits
 
@@ -144,7 +144,7 @@ Each source has the same number here as on the Damage dashboard, in the ‘Sourc
 | **C · Puts a dot whose height we chose** | | |
 | 1 / 14 | **DOE/FEMP Hail Damage Mitigation guide (logged in two sheets)**<br>[energy.gov … hail-damage-mitigation-solar-photovoltaic-systems](https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems)<br>Where to look: The IEC 61215 test table (25 mm 7.54 g 23 m/s … 76 mm 203 g 39.5 m/s) and the module-selection and hail-stow guidance paragraphs. The 1 % and 0.5 % are not on the page; they are the dossier’s reading of “passes”. | Gives the 25 mm hail test that every certified panel must pass. The Damage team turned ‘passes’ into 1 % for curve 2 and 0.5 % for curve 3; those dot heights are chosen, not measured. |
 | **D · Explains the curve’s shape or a choice behind it, gives no number (the Damage team’s own numbers are here too)** | | |
-| 18 | **VDE Americas hail-stow memo**<br>[vde.com … hail-stow-tech-memo](https://www.vde.com/en/vde-americas/newsroom/hail-stow-tech-memo)<br>Where to look: Quoted in the workbook: maximum tracker tilt reduces exposed glass area and the normal element of kinetic energy; typical maximum tilt 50–75°. No percentage reduction given. | Gives no number. It says tilting panels steeply cuts breakage, which is why the stow adjustment exists and moves curve 1 to the right. The 8 mm and 90 % are not from it. |
+| 18 | **VDE Americas hail-stow memo**<br>[vde.com … hail-stow-tech-memo](https://www.vde.com/en/vde-americas/newsroom/hail-stow-tech-memo)<br>Where to look: Quoted in the workbook: maximum tracker tilt reduces exposed glass area and the normal element of kinetic energy; typical maximum tilt 50–75°. No percentage reduction given. | Gives no number. It says tilting panels steeply cuts breakage, which is why the stow adjustment exists and moves each curve to the right. The 8 mm and 90 % are not from it. |
 | 1 / 14 | **DOE/FEMP guide (again)**<br>[energy.gov … hail-damage-mitigation-solar-photovoltaic-systems](https://www.energy.gov/femp/hail-damage-mitigation-solar-photovoltaic-systems)<br>Where to look: The IEC 61215 test table (25 mm 7.54 g 23 m/s … 76 mm 203 g 39.5 m/s) and the module-selection and hail-stow guidance paragraphs. The 1 % and 0.5 % are not on the page; they are the dossier’s reading of “passes”. | Gives no number. It recommends stowing trackers before hail, which backs the stow adjustment. |
 | 19 | **FTC Solar 80° hail-stow release**<br>[investor.ftcsolar.com … ftc-solar-launches-automated-80deg-high-angle-stow-1p-pioneer](https://investor.ftcsolar.com/news-releases/news-release-details/ftc-solar-launches-automated-80deg-high-angle-stow-1p-pioneer/)<br>Where to look: Press release headline and body: automated 80° stow. | Gives no number. It shows trackers really can tilt to 80°, so the stow adjustment is realistic. |
 | — | **Damage team, v1.3 workbook (dossier §13.3)**<br>[github.com … hail\_solar\_curve\_derivation\_dossier\_v1\_3.md](https://github.com/aamani-ai/damage_modeling/blob/main/docs/cells/hail_solar/current/hail_solar_curve_derivation_dossier_v1_3.md)<br>Where to look: dossier section 13.3, and the audit workbook sheet Hail\_Adjustment\_Rules in the same folder. | Chose the 8 mm shift and the 90 % cap for the stow adjustment as placeholders. It has no number in the list because no document gives these values. |

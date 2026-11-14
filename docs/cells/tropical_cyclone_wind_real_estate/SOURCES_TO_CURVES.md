@@ -6,6 +6,8 @@ A hurricane curve for a building answers one question: **when a gust of a given 
 
 FEMA's Hazus program publishes a loss table for each type of building, at every 5 mph from 50 to 250 mph and for five kinds of surrounding terrain. The Damage team copies the right table for each of Hazard's buildings exactly.
 
+These curves have not been formally released yet: in the Damage repository they are still marked as a proposal (model v0.2). Hazard already uses the same curves, through a newer release (model v1.0) on a Damage branch.
+
 The table already covers everything the wind does to a building: roof covering, roof deck, roof-to-wall ties, windows, flying debris and the rain that gets in afterwards. Nothing is added on top.
 
 The Damage team's part is choosing which of FEMA's building types matches each Hazard building. No source gives a measured storm loss, so there are no dots on these curves.

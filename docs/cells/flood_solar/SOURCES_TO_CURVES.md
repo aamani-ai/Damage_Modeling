@@ -6,7 +6,7 @@ A flood curve for a solar plant answers one question: **when water stands at a g
 
 No laboratory has measured this for solar equipment, so there are no dots. What the sources give instead are rules about behaviour: which parts fail when they get wet, whether they are repaired or replaced, and how quickly. Each rule forces the line to do something, such as start early, climb fast or stop short of 100 %, and the Damage team then chose percentages that follow those rules.
 
-Each source box on the left says what the document says and then, in bold, what that forces the line to do. Seven parts of the plant get a depth curve and the foundations get a flow-speed curve; together the covered parts are about half of the plant's value (48 %), and the rest is withheld.
+Each source box on the left says what the document says and then, in bold, what that forces the line to do. Seven parts of the plant get a depth curve and the foundations get a flow-speed curve; together the covered parts are about two-thirds of the reference plant's value (66 %), and the rest is withheld.
 
 ### What the labels on this page mean
 
@@ -91,9 +91,9 @@ The review read the printed NEMA table differently: it lists switchgear as somet
 
 **On the Damage dashboard:** [3 · transformer](https://damage-curves-wsd6lcl64q-uc.a.run.app/cells/flood_solar/curves/FS_XFMR)
 
-A large transformer is a steel tank full of oil, not a box of circuit boards. NEMA says that a flooded transformer can often be drained, tested and put back into service, so it should not be written off the moment it gets wet. The Damage team therefore drew a slow, slanting curve: about a third of the value is gone at knee depth, and all of it only when the transformer is fully under water.
+A large transformer is a steel tank full of oil, not a box of circuit boards. NEMA says that a flooded transformer can often be drained, tested and put back into service, so it should not be written off the moment it gets wet. The Damage team therefore drew a slow, slanting curve: 45 % of the value is gone at 30 cm of water, and all of it only at 2 m, when the transformer is fully under water.
 
-How steeply the line climbs is a judgment about how often a flooded transformer can be dried out and used again; no source gives a figure for that. The review also reads the printed NEMA table differently here: it says every type of transformer should be replaced, which would make this curve too gentle.
+How steeply the line climbs is a judgment about how often a flooded transformer can be dried out and used again; no source gives a figure for that. The review reads the printed NEMA table as saying transformers should be replaced, which would make this curve too gentle. The table says that for dry-type and cast-resin transformers; for oil-filled ones, the usual kind at a solar plant, it asks for a test of the oil before deciding.
 
 ## Curves 6 and 7 · collection cables and PV modules
 
@@ -141,7 +141,7 @@ The damage-curve review judged every curve by one question: is it good enough fo
 
 ### What was checked
 
-The review read NEMA's printed table on electrical equipment that has been under water. It says switchgear (the large breaker cabinets) can often be cleaned and reconditioned, while every type of transformer should be replaced. The cell does the opposite: it gives switchgear the steepest curve (all lost at 30 cm of water) and the transformer a gentle one (45 % at 30 cm, all lost only at 2 m). So these two curves look the wrong way round.
+The review read NEMA's printed table on electrical equipment that has been under water. It reads it as saying that switchgear (the large breaker cabinets) can often be cleaned and reconditioned, while transformers should be replaced. (The table says replace for dry-type and cast-resin transformers; for oil-filled ones it asks for a test of the oil first.) The cell does the opposite: it gives switchgear the steepest curve (all lost at 30 cm of water) and the transformer a gentle one (45 % at 30 cm, all lost only at 2 m). So these two curves look the wrong way round.
 
 Switchgear and the transformer are small parts of the plant's value, so swapping the two curves would move the plant's total by only one or two percentage points. They still need to be swapped: switchgear should get the gentler curve and the transformer the steeper one. Until that is done, neither curve should be used on its own, for example to price a substation or a transformer.
 
@@ -161,11 +161,11 @@ Deeper water always means more loss, so sites rank in a sensible order by flood 
 
 Use the plant total for screening, but not the switchgear or transformer curve on its own: both are flagged to be swapped.
 
-Only about half the plant's value has a curve (48 % on the review's value split). Racking and civil works have none.
+Only part of the plant's value has a curve: 66 % on the cell's own value split, 58 % on the plant Hazard uses for the grid, and 48 % on the review's older split. Racking and civil works have none.
 
 The curves only know depth, not water speed, so fast coastal and channel floods come out too low compared with slow ponding.
 
-The lower edge of the panels is assumed to sit 1.0 m above the ground. The modules are the biggest share of value and go from no loss to full loss between 1.0 and 1.5 m of water, so a plant in medium-depth water can read two or three times higher or lower if that height is wrong.
+The lower edge of the panels is assumed to sit 1.0 m above the ground. The modules are the biggest share of value and go from no loss at 1.0 m of water to full loss at 2.0 m (about three-quarters lost at 1.5 m), so a plant in medium-depth water can read two or three times higher or lower if that height is wrong.
 
 ### What would change the verdict
 

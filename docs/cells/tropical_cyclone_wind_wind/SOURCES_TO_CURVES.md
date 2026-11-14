@@ -94,7 +94,7 @@ The review also checked which curve Hazard runs. Hazard's map grid runs Curve 2a
 
 The review compared the curve with two real wind farms hit by Hurricane María in Puerto Rico in 2017. Santa Isabel (101 MW) was on the weak edge of the storm and reported no real damage, which matches the curve: at those wind speeds it predicts little or no tower damage.
 
-Punta Lima (13 turbines of 2 MW) was inside the strongest winds: the blades broke on most turbines, one tower buckled, and the farm was written off at about $50 million. The tower curve cannot show that, because blades have no curve.
+Punta Lima (13 turbines of 1.8 MW) was inside the strongest winds: all 13 were badly damaged, most losing their blades, one tower snapped, and the loss was put at about $50 million. The tower curve cannot show that, because blades have no curve.
 
 ### Why it is usable for screening
 
