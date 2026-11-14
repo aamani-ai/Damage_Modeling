@@ -78,7 +78,7 @@ Every one of those numbers is the Damage team's choice ([section 5.2 of the doss
 
 In a lab test on one 9 mm cable [[#7](https://doi.org/10.3390/en15051904)], the cable caught fire at about 16 kW/m², lower than the 26 kW/m² for module material [[#6](https://doi.org/10.3390/ma8074210)]. The test is not about solar plants or wildfire, but it backs the dossier's rule that plastic-covered cable is among the most heat-sensitive parts, so cable is set at the top, level with the monitoring kit.
 
-NEMA's guide to electrical equipment after a fire [[#29](https://research.fs.usda.gov/treesearch/39348)] says heat-damaged electronics should be replaced, while some heavier power equipment can be checked and repaired. That helped set the electronics above the transformers and switchgear. The transformers still reach 70 % because the dossier says protected heavy equipment can need major replacement when flames reach it directly. The guide does not mention inverters by name, and the cell gives no written reason for the exact order among the monitoring kit, combiner boxes and inverters.
+NEMA's guide to electrical equipment after a fire [[#26](https://www.nema.org/docs/default-source/standards-document-library/nema-gd-2-2016-evaluating-fire-and-heat-damaged-electrical-equipment-guide.pdf)] says heat-damaged electronics should be replaced, while some heavier power equipment can be checked and repaired. That helped set the electronics above the transformers and switchgear. The transformers still reach 70 % because the dossier says protected heavy equipment can need major replacement when flames reach it directly. The guide does not mention inverters by name, and the cell gives no written reason for the exact order among the monitoring kit, combiner boxes and inverters.
 
 Exposed cable, the monitoring kit and the combiner boxes are half lost once flames reach 8 to 12 ft; inverters and transformers pass half only at 12 ft and up. The cell treats all cable as exposed, which the review notes pushes the result up wherever cable is buried. These tables are used for every plant, together with curves 1 and 3.
 
@@ -103,16 +103,16 @@ Exposed cable, the monitoring kit and the combiner boxes are half lost once flam
 
 **On the Damage dashboard:** [3a · fences, roads, buildings](https://damage-curves-wsd6lcl64q-uc.a.run.app/cells/wildfire_solar/curves/WSV1_CIVIL_DIRECT) · [3b · racking](https://damage-curves-wsd6lcl64q-uc.a.run.app/cells/wildfire_solar/curves/WSV1_RACKING_THERMAL) · [3c · grounding and lightning](https://damage-curves-wsd6lcl64q-uc.a.run.app/cells/wildfire_solar/curves/WSV1_GROUNDING_THERMAL) · [3d · foundations](https://damage-curves-wsd6lcl64q-uc.a.run.app/cells/wildfire_solar/curves/WSV1_FOUNDATION_THERMAL)
 
-Steel, concrete and buried parts get low tables that never reach zero, because the cell does not call any part immune. From the smallest flame class to the largest, they lose:
+Steel, concrete and buried parts get low tables. Some lose nothing in the smallest one or two flame classes, but the cell does not call any part immune, so every one of them loses something in the larger classes. From the smallest flame class to the largest, they lose:
 
 - fences, roads and buildings: 0.1, 0.5, 2, 7, 18, 40 %
 - racking and trackers: 0, 0.1, 0.5, 2, 8, 25 %
 - grounding and lightning protection: 0, 0.1, 0.4, 1.5, 5, 12 %
 - foundations: 0, 0, 0.1, 0.3, 1, 4 %
 
-These are the Damage team's choices ([section 5.2 of the dossier](https://github.com/aamani-ai/damage_modeling/blob/main/docs/cells/wildfire_solar/current/wildfire_solar_curve_derivation_dossier__model_v1_0__docs_r3.md#52-absolute-anchors)), our judgment (T4), and nothing was measured. Field measurements of wildland fires [[#31](https://doi.org/10.1016/j.firesaf.2024.104205)] show heat that varies about tenfold with fuel and setting, which supports giving the severe classes some damage but gives no number. None of these tables reaches half, even at the top class: on this curve a wildfire never destroys most of the racking or foundations.
+These are the Damage team's choices ([section 5.2 of the dossier](https://github.com/aamani-ai/damage_modeling/blob/main/docs/cells/wildfire_solar/current/wildfire_solar_curve_derivation_dossier__model_v1_0__docs_r3.md#52-absolute-anchors)), our judgment (T4), and nothing was measured. Field measurements of wildland fires [[#28](https://doi.org/10.1071/WF11097)] show heat that varies about tenfold with fuel and setting, which supports giving the severe classes some damage but gives no number. None of these tables reaches half, even at the top class: on this curve a wildfire never destroys most of the racking or foundations.
 
-The FM data sheet [[#30](https://doi.org/10.1016/j.combustflame.2018.05.028)] lists the site controls that would matter, such as cleared buffers. The current version gives no credit for them, which is the review's main caveat: a cleared, gravelled plant scores the same as an overgrown one on the same patch of land.
+The FM data sheet [[#27](https://www.fm.com/-/media/project/publicwebsites/fmglobal/documentum-new/data-sheet-individual/07-hazards/fmds07106.pdf)] lists the site controls that would matter, such as cleared buffers. The current version gives no credit for them, which is the review's main caveat: a cleared, gravelled plant scores the same as an overgrown one on the same patch of land.
 
 ## Curves 4a and 4b: the whole plant, all ten parts added up by value
 
