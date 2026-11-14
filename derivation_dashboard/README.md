@@ -1,14 +1,14 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-11-12
-updated: 2026-11-12
+updated: 2026-11-13
 status: draft
-scope: A second, separate dashboard for this repository that explains how each damage curve was derived. Its own folder, its own branch (`derivation-dashboard`), not hosted yet. It does not change `dashboard/`.
+scope: A second, separate dashboard for this repository that explains how each damage curve was derived. Its own folder, its own branch (`derivation-dashboard`). It does not change `dashboard/`.
 -->
 
 # Derivation dashboard
 
-**Status: the whole solar and wind library (10 cells, 48 curves) on one page design, three curves with a full derivation record. Not hosted. `dashboard/` is not touched.**
+**Status: the whole solar and wind library (10 cells, 48 curves) on one page design, three curves with a full derivation record. Live and public at <https://derivation-dashboard-wsd6lcl64q-uc.a.run.app> (a push to `deploy/derivation-dashboard` deploys). `dashboard/` is not touched.**
 
 ## Why it exists
 
