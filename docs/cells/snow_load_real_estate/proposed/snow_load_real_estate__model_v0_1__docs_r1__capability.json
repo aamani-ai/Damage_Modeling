@@ -1,0 +1,92 @@
+{
+  "schema_version": "capability_declaration.v3",
+  "cell_id": "snow_load_real_estate",
+  "canonical_runtime_artifact": false,
+  "pathway_capabilities": [
+    {
+      "pathway_id": "snow_load_roof",
+      "failure_unit_scalar_dr": "conditional",
+      "scenario_loss_given_value_basis": "withheld",
+      "curve_intrinsic_spread": "not_carried",
+      "populated_emit_modes": [
+        "scalar_mean"
+      ],
+      "conditions": [
+        "reference_building_id must be one of the three Hazard reference profiles r1 buildings",
+        "ground_snow_load_kpa is the event ground snow load in kPa at the building, = 0.00980665 x snow water equivalent in mm",
+        "records are valid from 0 to 20 kPa; above 20 withholds; a negative load is rejected",
+        "office and warehouse need design_ground_snow_load_kpa (the building's design ground snow load; ASCE 7-22 Risk Category II layer by default) and the screening acknowledgement; the record of the band whose lower edge is the largest edge at or below the input is used",
+        "office and warehouse: ground_to_roof_case nsls2020_central (default) or kl047_severe; report both",
+        "house: house_fragility_variant printed_table4_r1 (default, central) or rebuild_65psf_r1 (lower sensitivity)",
+        "the damage ratio is a share of the whole structure's replacement cost new (sources state building value)",
+        "contents and interior water beyond the state definitions are withheld, never zero",
+        "scenario dollars stay withheld until the consumer qualifies the building value",
+        "SJ must confirm the per-cell design snow-load layer before office/warehouse records can run on the grid"
+      ],
+      "limitation_flags": [
+        "NONCANONICAL_PROPOSAL",
+        "SCREENING_GRADE",
+        "UNIFORM_ROOF_SNOW_ONLY_NO_DRIFT_NO_SLIDING",
+        "RAIN_ON_SNOW_SURCHARGE_NOT_APPLIED",
+        "DEFECTS_AND_AGE_NOT_MODELLED",
+        "NO_US_CLAIMS_CALIBRATION",
+        "DR_IS_SHARE_OF_WHOLE_STRUCTURE_RCN",
+        "CONTENTS_WITHHELD",
+        "COMPOUND_UNCERTAINTY_NOT_PROPAGATED",
+        "REFERENCE_BUILDING_ASSUMPTIONS_NOT_OBSERVED",
+        "PLATFORM_CODES_PROPOSED_NOT_ISSUED"
+      ],
+      "withheld_failure_units": [
+        {
+          "failure_unit_id": "SRE_BUILDING_CONTENTS",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
+          ]
+        },
+        {
+          "failure_unit_id": "SRE_INTERIOR_WATER_AFTER_BREACH",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "INTERIOR_WATER_BEYOND_STATE_DEFINITIONS_NOT_SOURCED"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumer_annual_metrics": {
+    "computation_owner": "downstream_consumer",
+    "status_before_promotion": "withheld_noncanonical_proposal",
+    "status_after_promotion": "withheld",
+    "prerequisites": [
+      "owner acceptance of D-SRE decisions",
+      "Hazard event ground-snow-load and design-load layers",
+      "consumer-qualified replacement cost new",
+      "exact model/docs/schema/SHA pin"
+    ],
+    "limitation_flags": [
+      "ANNUAL_AND_TAIL_METRICS_CONSUMER_OWNED"
+    ]
+  },
+  "cap_binding": {
+    "policy": "consumer_enforced_fail_closed",
+    "enforcement_owner": "downstream_consumer",
+    "checks_required": [
+      "exact model/docs/schema/SHA pin",
+      "record routing by building, edition, conversion case and design band",
+      "DR multiplied by the whole structure RCN, once",
+      "all perils on one building in one event at most 100 % of structure value"
+    ],
+    "action_if_fail": "withhold the affected DR; do not substitute another record or clamp"
+  },
+  "promotion_gate": {
+    "status": "blocked",
+    "required_before_canonical_use": [
+      "owner accepts the D-SRE decisions",
+      "SJ confirms the per-cell design snow-load layer (ASCE 7-22 RC II) and the SWE product",
+      "ASCE 7-22 Chapter 7 and Strobel & Liel 2013 read, or their absence accepted",
+      "reviewer traces the per-curve methodology files",
+      "independent review of the package"
+    ]
+  }
+}

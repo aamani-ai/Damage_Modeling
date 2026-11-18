@@ -1,0 +1,85 @@
+{
+  "schema_version": "capability_declaration.v3",
+  "cell_id": "freeze_pipes_real_estate",
+  "canonical_runtime_artifact": false,
+  "pathway_capabilities": [
+    {
+      "pathway_id": "freeze_pipe_burst",
+      "failure_unit_scalar_dr": "conditional",
+      "scenario_loss_given_value_basis": "withheld",
+      "curve_intrinsic_spread": "not_carried",
+      "populated_emit_modes": [
+        "scalar_mean"
+      ],
+      "conditions": [
+        "every parameter is T4 (judgment); every record answers only with the screening acknowledgement",
+        "freezing_degree_hours_degc_h is the freezing degree-hours of one cold spell from outdoor 2 m air below 0 degC",
+        "climate_band is the IECC / DOE climate zone of the cell, grouped 1-2, 3, 4-5, 6-8",
+        "outage fraction = outage hours / spell hours, rounded up to 0, 0.25, 0.5, 0.75 or 1",
+        "DR is a share of the structure's replacement cost new; contents and sprinkler piping withheld",
+        "not calibrated: county claim counts for Uri, Elliott and Fern are the calibration path"
+      ],
+      "limitation_flags": [
+        "NONCANONICAL_PROPOSAL",
+        "JUDGMENT_GRADE_SCREENING_EVERY_PARAMETER_T4",
+        "NOT_CALIBRATED_TO_CLAIMS",
+        "DOSE_FROM_OUTDOOR_AIR_NOT_PIPE_SURROUNDINGS",
+        "CLIMATE_RELATIVE_MEDIAN_T4",
+        "OUTAGE_MODIFIER_T4",
+        "LOSS_GIVEN_BURST_FROM_CLAIM_SEVERITY_INCLUDES_NON_STRUCTURE_COVERAGES",
+        "DR_IS_SHARE_OF_STRUCTURE_RCN",
+        "COMPOUND_UNCERTAINTY_NOT_PROPAGATED",
+        "REFERENCE_BUILDING_ASSUMPTIONS_NOT_OBSERVED",
+        "PLATFORM_CODES_PROPOSED_NOT_ISSUED"
+      ],
+      "withheld_failure_units": [
+        {
+          "failure_unit_id": "FPR_FIRE_SPRINKLER_PIPING",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "SPRINKLER_FREEZE_EVIDENCE_NOT_SEPARATED"
+          ]
+        },
+        {
+          "failure_unit_id": "FPR_BUILDING_CONTENTS",
+          "reason_codes": [
+            "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+            "CONTENTS_DEFERRED_SEPARATE_FAILURE_UNIT"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumer_annual_metrics": {
+    "computation_owner": "downstream_consumer",
+    "status_before_promotion": "withheld_noncanonical_proposal",
+    "status_after_promotion": "withheld",
+    "prerequisites": [
+      "claims calibration",
+      "Hazard spell and climate-zone layers",
+      "exact pin"
+    ],
+    "limitation_flags": [
+      "ANNUAL_AND_TAIL_METRICS_CONSUMER_OWNED"
+    ]
+  },
+  "cap_binding": {
+    "policy": "consumer_enforced_fail_closed",
+    "enforcement_owner": "downstream_consumer",
+    "checks_required": [
+      "exact pin",
+      "routing by building, climate band and outage band",
+      "DR x structure RCN once; all perils in one event at most 100 %"
+    ],
+    "action_if_fail": "withhold; do not substitute another record or clamp"
+  },
+  "promotion_gate": {
+    "status": "blocked",
+    "required_before_canonical_use": [
+      "claims calibration (Uri, Elliott, Fern county counts)",
+      "owner acceptance of D-FPR decisions",
+      "Hazard spell layer and climate-zone index (SJ)",
+      "independent review"
+    ]
+  }
+}
