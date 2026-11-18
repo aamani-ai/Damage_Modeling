@@ -105,8 +105,8 @@ The compliant branch keeps β 0.47, so some failure below design remains: the sh
 collapse onset below r = 1 is **27.7%** (median 1.32) and **9.0%** (median 1.88). SJ's 9–46% read: the 46% end
 was Φ(ln(1/1.05)/0.47) = 45.9% from the ×0.56 scenario (1.88 × 0.56 ≈ 1.05), now gone. A tighter compliant
 spread is a reasonable alternative reading for code-compliant racks and is carried as sensitivity, not served:
-from 0.09 (steel member-resistance variability, Bartlett et al. 2003, WSS-S042) to 0.20 (the smallest component
-fragility dispersion FEMA P-58 fitting allows, Cremen & Baker 2019, WSS-S043), both T3, the compliant below-design
+from 0.09 (a single-member value: steel beam resistance, Bartlett et al. 2003, WSS-S042) to 0.20 (a procedural floor:
+the smallest component fragility dispersion FEMA P-58 fitting allows, Cremen & Baker 2019, WSS-S043), both T3, the compliant below-design
 share would be 0.1 % to 8.3 % (central median 1.32) instead of 27.7 %; neither value is a rack test, so β 0.47 stays.
 Every result says `COMPLIANT_RACK_BRANCH_ONLY`.
 

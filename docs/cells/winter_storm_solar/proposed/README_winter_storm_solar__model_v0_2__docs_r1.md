@@ -36,6 +36,7 @@ model v0.2 answers SJ's eight objections (v8 §4.1) as decided in review v5 W3 a
 4. Racks split **compliant / under-designed**; the share has **no default**; the curve runs on the
    **compliant branch only**. Compliant racks reaching collapse onset below design: **27.7%** (median 1.32)
    and **9.0%** (median 1.88). The old 46% came from 0.56 and is gone.
+   A tighter compliant spread is carried as a sensitivity only, not served: over β 0.09 to 0.20 the compliant below-design share is 0.1 % to 8 %, against 27.7 % at the served β 0.47. The low end, 0.09, is a **single-member value** (steel beam flexural resistance, Bartlett et al. 2003, AISC Engineering Journal 40(1), Table 9; WSS-S042); the high end, 0.20, is a **procedural floor** (the smallest dispersion the FEMA P-58 fitting procedure allows a component fragility, Cremen & Baker 2019, p. 4; WSS-S043). Neither is a rack measurement.
 5. **Exposed fraction** defaults to 1.0 with a plant-size-class selector; NITE's 73 / 45 / 4% damaged shares
    are the calibration target, not the fraction (medium + large rest on 23 accidents).
 6. **Module curve split by mounting**: tracker keeps the r1 curve; fixed-tilt gets an IEC 61215 MQT 16
