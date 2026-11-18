@@ -21,8 +21,9 @@ office). One priced failure unit, the roof system, whose loss is a share of the 
 - **Office and warehouse:** constructed from Kozak & Liel (2015)'s reliability model; three states (deflection beyond
   span/240, leak or partial failure, collapse); two ground-to-roof cases (2020 National Snow Load Study, central; 0.47 /
   COV 0.44, severe). Inputs: event ground snow load and the building's design ground snow load (ASCE 7-22 Risk Category
-  II by default). Loss per state from the Strobel & Liel (2013) repair-cost survey (T3): sag 0 (unpriced), leak or
-  partial 0.9 % / 1.7 %, collapse 5.3 % / 10.1 % of the office / warehouse rebuild cost. 98 records.
+  II by default). Loss per state from the Strobel & Liel (2013) repair-cost survey, brought to 2025 prices with the
+  Turner Building Cost Index (×1.859): sag 0 (unpriced, T4); leak or partial 1.6 % / 3.1 % (T4: no published figure
+  for this state); collapse 57 % / 100 % (capped) of the office / warehouse rebuild cost (T3). 98 records.
 
 Contents and interior water beyond the state definitions are withheld, not zero. Every number has a source row or a T4
 grade; compounded uncertainty is not propagated.

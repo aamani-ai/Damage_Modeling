@@ -17,7 +17,7 @@ constructed; needs the acknowledgement `SRE_T4_COMMERCIAL_LOSS_STATES_SCREENING_
 
 Give it the event ground snow load (kPa) and the building's design ground snow load (kPa; ASCE 7-22 Risk Category II
 by default). It returns the expected loss as a share of the office's structure replacement cost new. Example (pg 30 psf,
-ASCE 7-22, central conversion): 2 kPa → 0.03 %; 4 kPa → 0.50 %; 6 kPa → 1.36 %. Severe conversion: 0.10 %, 1.45 %, 3.11 %.
+ASCE 7-22, central conversion): 2 kPa → 0.29 %; 4 kPa → 4.93 %; 6 kPa → 14.0 %. Severe conversion: 0.90 %, 14.65 %, 32.6 %.
 
 ## 2. Where the shape comes from
 
@@ -41,7 +41,7 @@ model reproduces the paper's own published 50-year safety indices (U 1.86 vs 1.8
 | State 1: span/240 | κ = 0.5238 | **fitted** to U's β_serv = −1.55 (SRE-S002 Table 6) — T4 |
 | State 2: leak or partial | κ = 0.885 (= 1/1.13) | value from SRE-S002 Table 1; the reading is ours — **T4** |
 | State 3: collapse | κ = 1 | SRE-S002 |
-| Loss given state | 0 / 0.0087 / 0.0526 | sag: unpriced, 0 (**T4**, D-SRE-10); leak or partial and collapse: Strobel & Liel 2013 repair cost per gross m² ($27.5 lowest-band midpoint; $166 mean) over NSI replacement cost $3,154 per m² (**T3**, published, transferred; SRE-S007, SRE-S016) |
+| Loss given state | 0 / 0.0162 / 0.571 | sag: unpriced, 0 (**T4**, D-SRE-10). Leak or partial: Strobel & Liel lowest repair-cost band ($0–55, midpoint $27.5) (**T4**: no published figure for this state, the paper gives the band). Collapse: the paper's upper bands ($324–538 and >$538 per gross m², count-weighted midpoint $969, open band closed at $1,400) (**T3**). Both × 1.8586 (Turner Building Cost Index 2010 → 2025, SRE-S017) over NSI replacement cost $3,154 per m² (SRE-S016). Bands: 0 to 0.032; 0.191 to 0.825 |
 | Design bands | 0 … 300 psf, lower edge used | our choice (T4) |
 
 ## 4. The chain, step by step
@@ -53,15 +53,16 @@ model reproduces the paper's own published 50-year safety indices (U 1.86 vs 1.8
 | 3 | Ground load → roof load (C) | modelled by someone else (NSLS or Ellingwood & O'Rourke); case choice is ours (both reported) |
 | 4 | Design load → resistance (demand × Ω, scatter) | modelled by someone else (Kozak & Liel), with our 20 psf floor (T4) |
 | 5 | Roof load vs κ·resistance → P(state) | κ_serv fitted by us; κ_partial **our assumption** |
-| 6 | State → loss share | measured by someone else (a 40-building survey), transferred to our office by us; sag state unpriced (our assumption) |
+| 6 | State → loss share | measured by someone else (a 40-building survey, costs not tagged by state), mapped to our states and brought to 2025 prices by us; sag state unpriced (our assumption) |
 | 7 | Share × structure RCN | our reading of building value |
 
-## 5. Uncertainty and sensitivity (at 4 kPa, pg 30 psf; central 0.50 %)
+## 5. Uncertainty and sensitivity (at 4 kPa, pg 30 psf; central 4.93 %)
 
-Severe conversion 1.45 %; no live-load floor 1.15 %; Ω 1.12 → 1.01 %, 1.88 → 0.05 %; dead load 15 / 30 psf → 0.64 / 0.46 %;
-COV 0.09 / 0.20 → 0.41 / 0.61 %; κ_partial 0.80 / 0.95 → 0.57 / 0.47 %; Strobel & Liel band low / high → 0.29 / 1.56 %;
-sag priced at 1 % → 1.02 %; replacement cost county range → 0.47 to 0.55 %; price year ×1.5 → 0.75 %; ASCE 7-10 design
-0.44 %; +50 mm rain on snow 0.97 %. **No compounded uncertainty is propagated.**
+Severe conversion 14.65 %; no live-load floor 11.60 %; Ω 1.12 → 10.12 %, 1.88 → 0.43 %; dead load 15 / 30 psf →
+6.44 / 4.51 %; COV 0.09 / 0.20 → 3.95 / 6.13 %; κ_partial 0.80 / 0.95 → 5.05 / 4.86 %; Strobel & Liel band edges →
+1.61 / 7.18 %; top band at its lower edge ($538) → 2.79 %; no inflation → 2.65 %; 2009–11 index base → 4.84 %; sag priced
+at 1 % → 5.45 %; replacement-cost county range → 4.63 to 5.35 %; ASCE 7-10 design 4.33 %; +50 mm rain on snow 9.67 %.
+**No compounded uncertainty is propagated.**
 
 ## 6. Checks done
 
@@ -73,9 +74,10 @@ sag priced at 1 % → 1.02 %; replacement cost county range → 0.47 to 0.55 %; 
 
 - The deflection state is reached often (39 % at 2 kPa, 67 % at 4 kPa); it is kept as an unpriced state (loss 0) until a
   repair-cost source for deflection-only damage exists (D-SRE-10, closed 17 Nov).
-- The loss shares come from 40 surveyed buildings, mostly single-storey and timber-roofed, with no respondent reporting
-  the roof structure as "some damage"; only one was an office. The 2008–11 costs are set against 2025 replacement costs,
-  so the shares are on the low side.
+- The loss shares come from 40 surveyed buildings, mostly single-storey and timber-roofed; the paper does not tag costs
+  by damage state, so reading its upper cost bands as collapse is our mapping, and no respondent reported the roof
+  structure as "some damage" (so the leak-or-partial share is T4). Costs are brought from 2010 to 2025 prices with the
+  Turner Building Cost Index (×1.859).
 - Under ASCE 7-22 the roof live load governs design up to pg ≈ 46 psf, so pg 0–40 psf records are the same.
 - The reliability paper's buildings are single-storey Colorado buildings; our office is three storeys. The survey's cost
   is per gross floor area of the whole building, which carries the storey count into the share.

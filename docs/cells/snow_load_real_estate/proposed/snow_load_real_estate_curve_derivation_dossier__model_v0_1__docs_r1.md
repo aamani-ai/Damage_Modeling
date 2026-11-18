@@ -62,6 +62,7 @@ In the dashboard's subsystem-table terms: **BUILDING / structure: priced (100 % 
 | SRE-S006 ASCE 7-22 Ch. 7 | design-side formulas | **not obtained** (paywalled; absence recorded) |
 | SRE-S007 Strobel & Liel 2013 | repair-cost survey (only dataset): office and warehouse loss shares (T3) | PDF supplied 17 Nov; read in full (Table 2, Figure 8, p. 126) |
 | SRE-S016 NSI 2026 replacement cost per floor area | denominator of the loss shares | internal note quoting NSI (FRE-S011) |
+| SRE-S017 Turner Building Cost Index | price-year factor 2010 → 2025 (799 → 1485, ×1.8586) | Q4 2022 and Q4 2025 releases read 17 Nov |
 | SRE-S008 Geis 2011; SRE-S009 O'Rourke & Wikoff 2013 | collapse area, rates, causes | via SJ v8; validation only |
 | SRE-S010 roof live load 20 psf | floor on design demand | secondary quotations; T4 |
 | SRE-S011–S015 | internal: reference buildings, review runs, SJ v8, brief, ASCE GIS listing | — |
@@ -106,7 +107,7 @@ C the ground-to-roof factor (capped at 1), D the dead load (normal, mean 1.05 Dn
 | State 1: deflection > span/240 | κ = 0.5238 (fitted to U, Boulder, β_serv −1.55) | κ = 0.3495 × elastic capacity (fitted to WU, β_serv −1.87) |
 | State 2: leak or partial failure | κ = 1/1.13 = 0.885 (T4 reading) | κ = 1/1.12 = 0.893 (T4) |
 | State 3: collapse | κ = 1 | κ = 1 |
-| Loss given state | 0 (unpriced, T4) / 0.0087 / 0.0526 (T3) | 0 (unpriced, T4) / 0.0168 / 0.1015 (T3) |
+| Loss given state | 0 (unpriced, T4) / 0.0162 (T4) / 0.571 (T3) | 0 (unpriced, T4) / 0.0312 (T4) / 1.0, capped (T3) |
 
 **Ground-to-roof, two cases (brief §1.1, v5 Q14):**
 - **Central — 2020 National Snow Load Study** (SRE-C023): √C normal, mean 0.9865 − 0.1192 ln(s psf) with s capped at
@@ -124,34 +125,41 @@ the exceptions are both Telluride: U3 0.03, WU3 0.29). Our threshold κ is fitte
 gets Lamar's sign right (−1.62 vs −2.38; −3.12 vs −6.27) but **not Telluride's** (−0.67 vs 0.03; −2.10 vs 0.29) (SRE-C026).
 So state 1 is graded T4 and flagged `SERVICEABILITY_FIT_FAILS_HIGH_DESIGN_LOAD_SITE`.
 
-**Loss given state (17 Nov, from Strobel & Liel 2013, T3: published, transferred).** The survey of 40 snow-damaged US
-buildings (SRE-S007) reports the cost to repair or rebuild the structure per gross floor area. Divided by the building's
-replacement cost new per m² (NSI 2026 medians: office $3,154, warehouse $1,636; SRE-S016, SRE-C038):
+**Loss given state (re-derived 17 Nov, D-SRE-22).** Strobel & Liel (2013) report the cost to repair or rebuild the
+structure per gross floor area for 40 snow-damaged US buildings, as a histogram (Figure 8, bars read by eye, ±1):
+$0–55: 4; $56–162: 5; $163–323: 6; $324–538: 0; >$538: 6; not reported: 19. **The paper does not tag these costs by
+damage state**, so the mapping of bands to our states is ours (A15, A16). Costs are 2008–11 dollars, brought to 2025
+prices with the Turner Building Cost Index (2010 average 799, 2025 average 1485: ×1.8586; SRE-S017), and divided by
+the NSI 2026 replacement cost per m² (office $3,154, warehouse $1,636; SRE-S016). A share never exceeds 1.0.
 
-| State | Mapping to the paper | Cost per gross m² | Office | Warehouse | Band (office / warehouse) |
-|---|---|---:|---:|---:|---|
-| Deflection beyond span/240 | none: kept as an **unpriced state**, loss 0 (T4); 1 % "ceilings and finishes count" is a sensitivity (D-SRE-10 closed) | — | 0 | 0 | 0 to 0.01 (sensitivity) |
-| Leak or partial failure | paper's "some damage" roof structure: **0 of 40 respondents**, so mapped to the lowest repair-cost band of Figure 8 ($0–55, 4 buildings), midpoint $27.5 | 27.5 | 0.0087 | 0.0168 | 0 to 0.0174 / 0 to 0.0336 |
-| Collapse | paper's "failed" roof structure: 27 of 40 respondents (67.5 %), so the sample mean $166 per gross m² is read as the collapse state | 166 | 0.0526 | 0.1015 | 0.0346 to 0.1706 / 0.0666 to 0.3288 |
+| State | Mapping to the paper | 2010 $ per gross m² | × 1.8586 | Office | Warehouse | Tier | Band (office / warehouse) |
+|---|---|---:|---:|---:|---:|---|---|
+| Deflection beyond span/240 | none: kept as an **unpriced state** (D-SRE-10 closed); 1 % "ceilings and finishes count" is a sensitivity | — | — | 0 | 0 | T4 | 0 to 0.01 (sensitivity) |
+| Leak or partial failure | lowest band $0–55 (midpoint $27.5). Table 2 has **zero** "some damage" roof-structure responses, so no published figure exists for this state; the paper is cited only for the band | 27.5 | 51.1 | 0.0162 | 0.0312 | **T4** | 0 to 0.0324 / 0 to 0.0625 |
+| Collapse | upper bands $324–538 (0) and >$538 (6), count-weighted midpoint; the open top band closed at the paper's $1,400 per unusable m² (T4 closure) | 969 | 1,801 | 0.571 | 1.10 → **1.0** (capped) | T3 | 0.191 to 0.825 / 0.368 to 1.0 |
 
-The band is the paper's own repair-cost distribution (Figure 8: $0–55: 4; $56–162: 5; $163–323: 6; $324–538: 0;
->$538: 6; 19 not reported): collapse low = midpoint of the 25th-percentile band ($109), high = lower edge of the top band
-($538). These replace the 16 Nov T4 judgments (office 0.01 / 0.05 / 0.20; warehouse 0.01 / 0.10 / 0.50), which were 2 to
-5 times higher. Limits carried in the assumption register (A15 to A21): 40 responses (12 % of 332 contacted), 21 to 22
-repair-cost answers, media-identified incidents, two outliers excluded by the authors, mostly single-storey timber
-roofs, and 2008–11 costs against 2025 replacement costs (the shares are low by roughly the construction-cost growth).
+What changed and why: the morning version used the all-building mean ($166) for collapse and no price-year
+adjustment, giving office 0.053 and warehouse 0.101. The mean mixes buildings with minor and major damage, and the
+2008–11 costs set against 2025 replacement costs understate every share. The un-inflated case and the lower-edge
+reading of the top band ($538) are now sensitivities. Limits carried in the assumption register: 40 responses (12 % of
+332 contacted), 21–22 repair-cost answers, media-identified incidents, two outliers excluded by the authors, mostly
+single-storey timber roofs, only one office and six industrial buildings.
 
 **The deflection state.** State 1 is reached often (office at pg 30 psf, central conversion: 39 % at 2 kPa, 67 % at
 4 kPa; warehouse 72 % and 87 %), as SJ predicted ("a deflection state would then fire too often to carry a loss without a
 mapping", v8 §3.1 item 6). It stays in the output as a state but carries no loss until a repair-cost source for
 deflection-only damage exists (update trigger, D-SRE-10).
 
-**Expected DR**, ASCE 7-22, pg 30 psf (central / severe conversion), with the Strobel & Liel loss shares:
+**Expected DR**, ASCE 7-22, design load 0 to 50 psf (the roof live load governs; includes 30 psf), central / severe
+conversion, with the 17 Nov re-derived loss shares:
 
 | Load (kPa) | 1 | 2 | 3 | 4 | 6 | 8 |
 |---|---:|---:|---:|---:|---:|---:|
-| Office | 0.00 / 0.00 % | 0.03 / 0.10 % | 0.18 / 0.62 % | 0.50 / 1.45 % | 1.36 / 3.11 % | 2.17 / 4.18 % |
-| Warehouse | 0.00 / 0.00 % | 0.01 / 0.06 % | 0.27 / 1.12 % | 0.93 / 2.88 % | 2.75 / 6.40 % | 4.40 / 8.48 % |
+| Office | 0.02 / 0.03 % | 0.29 / 0.90 % | 1.70 / 5.96 % | 4.93 / 14.65 % | 14.0 / 32.6 % | 22.8 / 44.6 % |
+| Warehouse | 0.00 / 0.00 % | 0.09 / 0.41 % | 2.40 / 10.15 % | 8.48 / 26.95 % | 26.1 / 61.6 % | 42.3 / 82.7 % |
+
+At 4 kPa (central): office 0.50 % → **4.93 %**, warehouse 0.93 % → **8.48 %** against the morning version; the 16 Nov T4
+draft gave 2.5 % and 5.4 %.
 
 **The roof-live-load floor.** Under ASCE 7-22 (γS = 1.0) the 20 psf roof live load governs the design demand up to
 pg ≈ 46 psf, so pg 0 to 40 psf records are identical. Removing the floor (T4, SRE-C022) roughly doubles to triples DR at
@@ -178,32 +186,33 @@ real-estate cells). See the [value crosswalk](VALUE_CROSSWALK_snow_load_real_est
 | A3 | House R1 (minimum standard) | our choice (brief) | R2 row | house 11.5 % |
 | A4 | Test house transfers to one-storey reference | our assumption | none possible | — |
 | A5 | No scaling of house capacity by local design load | our assumption | none possible | — |
-| A6 | Office = joist roof, warehouse = beam roof | our assumption | warehouse with joist statistics | warehouse 0.93 → 1.42 % |
-| A7 | Ω office 1.31, warehouse 1.17 | from source (median) | range ends | office 0.05–1.01 %; warehouse 0.53–1.56 % |
-| A8 | Dead loads 26 / 9 psf | from source (adjacent buildings) | 15 / 30 psf | office 0.46–0.64 %; warehouse 0.41–0.73 % |
-| A9 | Joist resistance COV 0.15 | source's own judgment | 0.09 / 0.20 | office 0.41–0.61 % |
+| A6 | Office = joist roof, warehouse = beam roof | our assumption | warehouse with joist statistics | warehouse 8.48 → 13.22 % |
+| A7 | Ω office 1.31, warehouse 1.17 | from source (median) | range ends | office 0.43–10.12 %; warehouse 4.82–14.48 % |
+| A8 | Dead loads 26 / 9 psf | from source (adjacent buildings) | 15 / 30 psf | office 4.51–6.44 %; warehouse 3.57–6.58 % |
+| A9 | Joist resistance COV 0.15 | source's own judgment | 0.09 / 0.20 | office 3.95–6.13 % |
 | A10 | φ = 0.90 for beams | our assumption (reproduction) | — | — |
-| A11 | 20 psf roof-live-load floor | our assumption (T4) | floor removed | office 0.50 → 1.15 %; warehouse 0.93 → 2.53 % |
-| A12 | Conversion: NSLS central, 0.47 severe | brief | severe records | office 0.50 → 1.45 %; warehouse 0.93 → 2.88 % |
+| A11 | 20 psf roof-live-load floor | our assumption (T4) | floor removed | office 4.93 → 11.60 %; warehouse 8.48 → 23.91 % |
+| A12 | Conversion: NSLS central, 0.47 severe | brief | severe records | office 4.93 → 14.65 %; warehouse 8.48 → 26.95 % |
 | A13 | κ_serv fitted to the basic building | our assumption (fitted) | ±20 % | no effect on DR (sag state unpriced) |
-| A14 | κ_partial 0.885 / 0.893 | our assumption (T4) | 0.80 / 0.95 | office 0.47–0.57 %; warehouse 0.88–1.02 % |
-| A15 | Strobel & Liel "failed" roof structure → our collapse state; sample mean $166 per gross m² | our mapping of a published value (T3) | Figure 8 band ($109 to $538) | office 0.29–1.56 %; warehouse 0.55–2.90 % |
-| A16 | "Some damage" roof structure → leak or partial; **no respondent chose it**, so the lowest cost band ($0–55) is used | our mapping (T3, weak) | band ends $0 / $55 | included in A15 rows |
-| A17 | 40 responses (12 % of 332), 21–22 repair-cost answers, media-identified incidents, two outliers excluded, mostly timber roofs | the source's sample | — | not testable; stated |
-| A18 | Replacement cost per m²: NSI 2026 medians of three counties | from source (T3) | county range | office 0.47–0.55 %; warehouse 0.83–0.94 % |
-| A19 | 2008–11 repair costs against 2025 replacement costs (no price-year adjustment) | our assumption | ×1.5 (T4, illustration) | office 0.50 → 0.75 %; warehouse 0.93 → 1.39 % |
-| A20 | Deflection state unpriced (loss 0) | our assumption (T4, D-SRE-10) | 1 % "ceilings and finishes count" | office 0.50 → 1.02 %; warehouse 0.93 → 1.67 % |
-| A21 | Warehouse uses the all-building mean, not the industrial-usage mean ($150) | our choice | industrial $150 | warehouse 0.93 → 0.84 % |
-| A22 | Design band lower edge; identical bands merged | our assumption (conservative) | pg 15 vs 60 psf rows | — |
-| A23 | ASCE 7-22 design basis for existing buildings | our assumption | legacy records | office 0.50 → 0.44 % |
-| A24 | Rain-on-snow not applied | brief (optional input) | +0.49 kPa | office 0.50 → 0.97 %; warehouse 0.93 → 1.88 % |
+| A14 | κ_partial 0.885 / 0.893 | our assumption (T4) | 0.80 / 0.95 | office 4.86–5.05 %; warehouse 8.39–8.66 % |
+| A15 | **Mapping (ours):** the paper does not tag costs by damage state; its upper Figure 8 bands ($324–538 and >$538) are read as our collapse state; bar counts read by eye (±1) | our mapping of a published distribution (T3) | band edges $324 / $1,400 | office 1.61–7.18 %; warehouse 3.07–8.63 % |
+| A16 | **Mapping (ours):** lowest band ($0–55) read as leak or partial; no "some damage" roof-structure response exists (Table 2), so this share is T4 | our assumption (T4) | band edges $0 / $55 | included in A15 rows |
+| A17 | Open top band (>$538) closed at $1,400 (paper's mean per unusable m²) | our assumption (T4) | top band read at $538 | office 4.93 → 2.79 %; warehouse 8.48 → 5.24 % |
+| A18 | Price year: Turner Building Cost Index 2010 → 2025, ×1.8586 | from source (T3) | no inflation; 2009–11 base (×1.824) | office 2.65 / 4.84 %; warehouse 5.01 / 8.47 % |
+| A19 | 40 responses (12 % of 332), 21–22 repair-cost answers, media-identified incidents, two outliers excluded, mostly timber roofs | the source's sample | — | not testable; stated |
+| A20 | Replacement cost per m²: NSI 2026 medians of three counties | from source (T3) | county range | office 4.63–5.35 %; warehouse 8.38–8.48 % |
+| A21 | Collapse share capped at 1.0 (warehouse raw 1.10) | our assumption | — | warehouse collapse fixed at the whole structure |
+| A22 | Deflection state unpriced (loss 0) | our assumption (T4, D-SRE-10) | 1 % "ceilings and finishes count" | office 4.93 → 5.45 %; warehouse 8.48 → 9.22 % |
+| A23 | Design band lower edge; identical bands merged | our assumption (conservative) | pg 15 vs 60 psf rows | — |
+| A24 | ASCE 7-22 design basis for existing buildings | our assumption | legacy records | office 4.93 → 4.33 % |
+| A25 | Rain-on-snow not applied | brief (optional input) | +0.49 kPa | office 4.93 → 9.67 %; warehouse 8.48 → 17.36 % |
 
 All values: [SENSITIVITY](SENSITIVITY_snow_load_real_estate__model_v0_1__docs_r1.csv).
 
 ## 9. Uncertainty statement (gate 7)
 
 - **Bands kept:** the printed Table 4 versus the rebuild (two house records); the paper's loss ranges (sensitivity);
-  the Strobel & Liel repair-cost distribution for the office and warehouse loss shares (sensitivity);
+  the Strobel & Liel repair-cost band edges, the un-inflated price year and the open-band closure (sensitivity);
   the NSLS versus 0.47 conversion (two commercial record sets); ASCE 7-22 versus 7-10 design (two record sets).
 - **Sensitivity on every assumption that is ours:** §8, one at a time.
 - **Not done: no compounded uncertainty is propagated.** The records carry no spread; the sensitivities are one at a
@@ -228,8 +237,9 @@ Contents and interior water: withheld, never zero.
 1. SJ: the per-cell design snow-load layer (RC II); the SWE product; rain-on-snow surcharge (REQUEST file, not sent).
 2. Texts: ASCE 7-22 Ch. 7 (and Ch. 2, Ch. 4). Absence recorded; no purchase. (Strobel & Liel 2013 obtained 17 Nov.)
 3. The NSLS model's primary text re-read (SRE-S003 pending).
-4. A repair-cost source for deflection-only damage (D-SRE-10 trigger); a larger repair-cost dataset by damage state
-   (Strobel & Liel has no "some damage" roof-structure response).
+4. A repair-cost source for deflection-only damage (D-SRE-10 trigger); a repair-cost dataset tagged by damage state
+   (Strobel & Liel does not tag costs by state and has no "some damage" roof-structure response); a per-building cost
+   listing to replace the open-band closure; a repair-specific cost index.
 5. Serviceability at high design loads (Telluride mismatch).
 6. A drift branch; rain-on-snow; defects and age (SJ v8 §3.1 items 1–3).
 7. US claims or forensic calibration (none in hand).

@@ -104,7 +104,7 @@ def curve_records(pts, meta) -> list[dict]:
             src = ["SRE-S002#Eq_1", "SRE-S002#Tables_1_2_4_5", "SRE-S002#Tables_6_7", "SRE-S012#kozak_liel_reproduction",
                    "SRE-S003#NSLS_sqrtGr_model" if m["conversion_case"] == "nsls2020_central" else "SRE-S002#Table_4_conversion",
                    "SRE-S005#gamma_S_1.0" if m["design_edition"] == "asce7_22" else "SRE-S002#p46_load_combination",
-                   "SRE-S010#roof_live_load", "SRE-S007#Fig_8_p125_mean_166_p126", "SRE-S016#NSI_fullrep_per_m2"]
+                   "SRE-S010#roof_live_load", "SRE-S007#Fig_8_p125_upper_bands_p126_1400", "SRE-S016#NSI_fullrep_per_m2", "SRE-S017#Turner_BCI_2010_2025"]
             flags = COMM_FLAGS + B_FLAGS[b] + (["CENTRAL_CONVERSION_NSLS2020"] if m["conversion_case"] == "nsls2020_central"
                                                else ["SEVERE_CONVERSION_047_COV044"])
         out.append({
@@ -221,7 +221,7 @@ def artifact(pts, meta) -> dict:
                 {"field": "ground_to_roof_case", "required": False, "default": "nsls2020_central",
                  "allowed": ["nsls2020_central", "kl047_severe"], "effect": "office/warehouse: conversion model"},
                 {"field": ACK, "required": False, "required_when": "reference_building_id in office, warehouse",
-                 "allowed": [ACK_ID], "effect": "acknowledges the T4 partial-failure threshold, fitted sag point and archetype readings (loss shares are T3, transferred)"},
+                 "allowed": [ACK_ID], "effect": "acknowledges the T4 partial-failure threshold, fitted sag point, archetype readings and leak-or-partial loss (collapse loss is T3)"},
             ],
             "conditioner_logic": [
                 {"field": "design_ground_snow_load_kpa", "required_when": "reference_building_id in office, warehouse",

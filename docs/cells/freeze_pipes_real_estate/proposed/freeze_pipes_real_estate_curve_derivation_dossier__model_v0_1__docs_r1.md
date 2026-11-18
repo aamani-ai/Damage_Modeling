@@ -72,10 +72,11 @@ and no claims comparison has been made ([ILLUSTRATION](ILLUSTRATION_freeze_pipes
 
 **Sanity check at Uri-like conditions in Houston (added 2026-11-17).** For a warm-zone house (IECC 1–2) at roughly
 600 to 800 °C·h with power out for about half the spell, the curve gives a burst chance of 23 % to 35 % (expected loss
-1.8 % to 2.8 % of the rebuild cost): a burst in about a quarter to a third of houses. That is several times the rate
-the owner reads from the Uri claim counts (JL, 17 Nov; the counts themselves are not yet in the source register). The
-curve is uncalibrated and is likely high at this point; county claim counts for Uri, Elliott and Fern are the fix
-(calibration path, §8). The probable causes are the steepness of the outage blend (θ_out = 400 °C·h) and β = 0.8, both T4.
+1.8 % to 2.8 % of the rebuild cost): a burst in about a quarter to a third of houses. An unsourced order-of-magnitude
+comparison made during review puts the burst rate implied by public reporting on Uri at a few percent of insured homes,
+several times lower. That comparison has no source row and is to be replaced by county claim counts when they are
+obtained. The curve is uncalibrated and is likely high at this point; county claim counts for Uri, Elliott and Fern are
+the fix (calibration path, §8). The probable causes are the steepness of the outage blend (θ_out = 400 °C·h) and β = 0.8, both T4.
 
 ## 5. Assumption register (every step is ours)
 

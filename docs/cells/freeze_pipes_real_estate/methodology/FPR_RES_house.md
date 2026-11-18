@@ -63,8 +63,10 @@ uncertainty is propagated**; none of these is fitted.
 ## 7. What a reader should know
 
 **Likely high at Uri-like conditions.** At roughly 600 to 800 °C·h with the power out for about half the spell, a
-warm-zone house gets a 23 % to 35 % burst chance, several times what the Uri claim counts imply (owner's reading,
-17 Nov). The curve is uncalibrated; claims data are the fix.
+warm-zone house gets a 23 % to 35 % burst chance. An unsourced order-of-magnitude comparison made during review
+(burst rates of a few percent of insured homes implied by public reporting on Uri) suggests this is several times too
+high; it has no source row and is to be replaced by county claim counts when obtained. The curve is uncalibrated;
+claims data are the fix.
 
 
 The insurer average includes contents and other coverages, so the structure loss is overstated by that share. The curve's

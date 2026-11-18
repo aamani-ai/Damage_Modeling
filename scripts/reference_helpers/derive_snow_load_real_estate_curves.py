@@ -93,35 +93,56 @@ ARCHETYPE = {
     # (1.17); resistance = req x over x Fy x Z / phi with Fy lognormal (1.10, 0.11), Z normal (1.01, 0.05) (Table 5).
     WAREHOUSE: {"roof": "W-section", "dead_psf": 9.0, "omega": 1.17, "r_cov": None, "kappa_partial": 1 / 1.12},
 }
-# Loss given state (fraction of structure replacement cost new).
-# Leak-or-partial and collapse: Strobel & Liel (2013) repair cost of the structure per GROSS m2 (2008-11 dollars)
-# divided by the building's replacement cost new per m2 (NSI 2026 fullrep median of three counties, August 2025
-# prices; flood_real_estate REFERENCE_BUILDINGS §4). T3: published, transferred.
-#   collapse         = mean repair cost 166 $/gross m2 (p. 126; 27 of 40 respondents reported the roof structure failed)
-#   leak or partial  = midpoint of the lowest repair-cost band of Figure 8, $0-55/m2 (no respondent reported the roof
-#                      structure as "some damage", Table 2, so the state is mapped to the low-cost tail, not a category)
-#   band             = Figure 8 repair-cost distribution: collapse low = midpoint of the 25th-percentile band
-#                      ($56-162 -> 109), high = lower edge of the top band ($538); partial low 0, high 55.
+# Loss given state (fraction of structure replacement cost new), re-derived 2026-11-17 (D-SRE-22).
+# Source: Strobel & Liel (2013) repair cost of the structure per GROSS m2, Figure 8 bands (2008-11 dollars; counts read
+# from the bars by eye, +/-1): $0-55: 4, $56-162: 5, $163-323: 6, $324-538: 0, >$538: 6, not reported: 19.
+# The paper does not tag costs by damage state, so the mapping of bands to our states is ours:
+#   collapse        = the upper bands ($324-538 and >$538), count-weighted midpoint; the open top band is closed at
+#                     the paper's mean repair cost per UNUSABLE m2, $1,400 (p. 126) (T4 closure). Band = 324 to 1,400.
+#                     Graded T3 (published distribution, transferred).
+#   leak or partial = lowest band $0-55, midpoint 27.5, band 0 to 55. Graded T4: Table 2 has zero "some damage"
+#                     roof-structure responses, so no published figure exists for this state; the paper is cited only
+#                     as the source of the band.
+#   price year      = Turner Building Cost Index (nationwide, non-residential), 2010 annual average 799 (Q4 2022
+#                     release) to 2025 annual average 1485 (Q4 2025 release): factor 1485 / 799 = 1.8586 (central).
+#   denominator     = NSI 2026 replacement cost per m2 (August 2025 prices), medians of three counties.
+#   cap             = a share never exceeds 1.0 (the whole structure).
 # Deflection (sag past span/240): unpriced, 0, T4 (D-SRE-10 closed); 1 % "ceilings and finishes count" is a sensitivity.
-SL_MEAN_REPAIR = 166.0                      # $/gross m2, Strobel & Liel p. 126 (two outliers excluded by the authors)
-SL_LOW_BAND = (0.0, 55.0)                   # $/m2, Figure 8 lowest bin (4 buildings)
-SL_Q1_BAND_MID = (56.0 + 162.0) / 2         # $/m2, Figure 8 second bin (5 buildings)
-SL_TOP_EDGE = 538.0                         # $/m2, Figure 8 top bin lower edge (6 buildings, open-ended)
+SL_BANDS = [((0.0, 55.0), 4), ((56.0, 162.0), 5), ((163.0, 323.0), 6), ((324.0, 538.0), 0), ((538.0, None), 6)]
+SL_OPEN_BAND_TOP = 1400.0                   # $/unusable m2, Strobel & Liel p. 126 (closes the open >$538 band)
+SL_MEAN_REPAIR = 166.0                      # $/gross m2, p. 126 (cross-check only, no longer used for a state)
+TURNER_2010, TURNER_2025 = 799.0, 1485.0    # Turner Building Cost Index annual averages
+PRICE_FACTOR = TURNER_2025 / TURNER_2010    # 1.8586
 FT2_PER_M2 = 10.7639104
 RCN_PER_M2 = {OFFICE: 293.0 * FT2_PER_M2, WAREHOUSE: 152.0 * FT2_PER_M2}   # NSI 2026 COM4, COM2 medians ($/ft2 -> $/m2)
 RCN_RANGE_FT2 = {OFFICE: (270.0, 312.0), WAREHOUSE: (150.0, 169.0)}
 
 
-def _sl_losses(b, rcn=None, partial_cost=None, collapse_cost=None, sag=0.0):
+def _band_mid(lo, hi):
+    return (lo + (SL_OPEN_BAND_TOP if hi is None else hi)) / 2
+
+
+def _upper_band_mid():
+    upper = [b for b in SL_BANDS if b[0][0] >= 324.0]
+    n = sum(c for _, c in upper)
+    return sum(_band_mid(*rng) * c for rng, c in upper) / n     # count-weighted midpoint
+
+
+SL_PARTIAL = {"central": 27.5, "low": 0.0, "high": 55.0}
+SL_COLLAPSE = {"central": _upper_band_mid(), "low": 324.0, "high": SL_OPEN_BAND_TOP}
+
+
+def _sl_losses(b, rcn=None, partial_cost=None, collapse_cost=None, sag=0.0, factor=None):
     r = rcn or RCN_PER_M2[b]
-    pc = sum(SL_LOW_BAND) / 2 if partial_cost is None else partial_cost
-    cc = SL_MEAN_REPAIR if collapse_cost is None else collapse_cost
-    return [sag, pc / r, cc / r]
+    f = PRICE_FACTOR if factor is None else factor
+    pc = SL_PARTIAL["central"] if partial_cost is None else partial_cost
+    cc = SL_COLLAPSE["central"] if collapse_cost is None else collapse_cost
+    return [sag, min(pc * f / r, 1.0), min(cc * f / r, 1.0)]
 
 
 COMMERCIAL_LOSS = {b: {"central": _sl_losses(b),
-                       "low": _sl_losses(b, partial_cost=SL_LOW_BAND[0], collapse_cost=SL_Q1_BAND_MID),
-                       "high": _sl_losses(b, partial_cost=SL_LOW_BAND[1], collapse_cost=SL_TOP_EDGE),
+                       "low": _sl_losses(b, partial_cost=SL_PARTIAL["low"], collapse_cost=SL_COLLAPSE["low"]),
+                       "high": _sl_losses(b, partial_cost=SL_PARTIAL["high"], collapse_cost=SL_COLLAPSE["high"]),
                        "sag_1pct": _sl_losses(b, sag=0.01)} for b in (OFFICE, WAREHOUSE)}
 COMMERCIAL_STATES = ["deflection_over_span_240", "leak_or_partial_failure", "collapse"]
 HOUSE_STATES = ["loss_5_10_water_leakage", "loss_10_30_local_collapse", "loss_30_50", "loss_50_100_global_roof_collapse"]
@@ -443,19 +464,20 @@ def sensitivity(kappa_serv: dict) -> list[dict]:
         add(b, "kappa_partial", "partial failure at 0.95 x R", run(over={"kappa_partial": 0.95}), "T4")
         add(b, "kappa_serv", f"serviceability at {kap * 0.8:.3f} x R (-20 %)", run(kap=kap * 0.8), "fitted value +/- 20 %")
         add(b, "kappa_serv", f"serviceability at {kap * 1.2:.3f} x R (+20 %)", run(kap=min(kap * 1.2, 1.0)), "")
-        add(b, "loss_points", "Strobel & Liel band low (partial $0, collapse $109/m2)", run(loss="low"), "Figure 8 distribution, T3")
-        add(b, "loss_points", "Strobel & Liel band high (partial $55, collapse $538/m2)", run(loss="high"), "Figure 8 distribution, T3")
+        add(b, "loss_points", "Strobel & Liel bands low edges (partial $0, collapse $324/m2)", run(loss="low"), "Figure 8 band edges")
+        add(b, "loss_points", "Strobel & Liel bands high edges (partial $55, collapse $1,400/m2)", run(loss="high"), "Figure 8 band edges; capped at 1.0")
         add(b, "deflection_loss", "ceilings and finishes count: sag state 1 %", run(loss="sag_1pct"), "D-SRE-10: T4; served value is 0")
         lo_r, hi_r = RCN_RANGE_FT2[b]
         for rr, lab in ((lo_r, "low"), (hi_r, "high")):
             COMMERCIAL_LOSS[b]["_rcn"] = _sl_losses(b, rcn=rr * FT2_PER_M2)
-            add(b, "replacement_cost", f"NSI county {lab} ${rr:.0f}/ft2", run(loss="_rcn"), "three-county range, FRE-S011")
-        COMMERCIAL_LOSS[b]["_py"] = _sl_losses(b, partial_cost=27.5 * 1.5, collapse_cost=SL_MEAN_REPAIR * 1.5)
-        add(b, "price_year", "2008-11 costs x 1.5 to 2025 prices", run(loss="_py"), "T4 factor, unsourced; shows direction only")
-        if b == WAREHOUSE:
-            COMMERCIAL_LOSS[b]["_ind"] = _sl_losses(b, collapse_cost=150.0)
-            add(b, "usage_specific_cost", "industrial buildings $150/gross m2", run(loss="_ind"), "Strobel & Liel p. 126")
-        for k in ("_rcn", "_py", "_ind"):
+            add(b, "replacement_cost", f"NSI county {lab} ${rr:.0f}/ft2", run(loss="_rcn"), "three-county range, SRE-S016")
+        COMMERCIAL_LOSS[b]["_py"] = _sl_losses(b, factor=1.0)
+        add(b, "price_year", "no inflation (2008-11 dollars over 2025 replacement cost)", run(loss="_py"), "factor 1.0")
+        COMMERCIAL_LOSS[b]["_ind"] = _sl_losses(b, factor=TURNER_2025 / ((832.0 + 799.0 + 812.0) / 3))
+        add(b, "price_year", "Turner 2009-11 average 814 as base (factor 1.824)", run(loss="_ind"), "2009 = 799 / 0.96")
+        COMMERCIAL_LOSS[b]["_cl"] = _sl_losses(b, collapse_cost=538.0)
+        add(b, "open_band_closure", "top band read at its lower edge $538 (no closure)", run(loss="_cl"), "T4 closure removed")
+        for k in ("_rcn", "_py", "_ind", "_cl"):
             COMMERCIAL_LOSS[b].pop(k, None)
         add(b, "rain_on_snow", "0.49 kPa retained rain (50 mm)", run(over={"surcharge_psf": 0.49 / KPA_PER_PSF}),
             "optional surcharge; not applied in records")

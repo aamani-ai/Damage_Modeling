@@ -16,8 +16,8 @@ constructed; needs the acknowledgement `SRE_T4_COMMERCIAL_LOSS_STATES_SCREENING_
 ## 1. What the curve says
 
 Event ground snow load (kPa) and design ground snow load (kPa) in; expected loss as a share of the warehouse's structure
-replacement cost new out. Example (pg 30 psf, ASCE 7-22): central 0.01 % at 2 kPa, 0.93 % at 4 kPa, 2.75 % at 6 kPa;
-severe 0.06 %, 2.88 %, 6.40 %.
+replacement cost new out. Example (pg 30 psf, ASCE 7-22): central 0.09 % at 2 kPa, 8.48 % at 4 kPa, 26.1 % at 6 kPa;
+severe 0.41 %, 26.95 %, 61.6 %.
 
 ## 2. Where the shape comes from
 
@@ -39,18 +39,18 @@ reproduces the paper's beam-roof safety indices (WU 2.04 vs 2.11; WU1 1.81 vs 1.
 | Conversion | NSLS central / 0.47 severe | as office |
 | State 1: span/240 | κ = 0.3495 × elastic capacity (E normal 0.99, COV 0.076) | **fitted** to WU's β_serv = −1.87 (SRE-S002 Table 7) — T4 |
 | State 2: leak or partial | κ = 0.893 (= 1/1.12) | **no source**, T4 |
-| Loss given state | 0 / 0.0168 / 0.1015 | sag: unpriced, 0 (**T4**, D-SRE-10); leak or partial and collapse: Strobel & Liel 2013 repair cost per gross m² ($27.5; $166) over NSI replacement cost $1,636 per m² (**T3**, published, transferred) |
+| Loss given state | 0 / 0.0312 / 1.0 | sag: unpriced, 0 (**T4**). Leak or partial: lowest band $27.5 (**T4**). Collapse: upper bands, midpoint $969 (**T3**). Both × 1.8586 (Turner BCI) over NSI $1,636 per m²; collapse = 1.10, **capped at 1.0** (the whole structure). Bands: 0 to 0.0625; 0.368 to 1.0 |
 
 ## 4. The chain, step by step
 
 Same seven steps as the office file; step 4 adds the archetype transfer (PEMB → beam roof, **our assumption**).
 
-## 5. Uncertainty and sensitivity (at 4 kPa, pg 30 psf; central 0.93 %)
+## 5. Uncertainty and sensitivity (at 4 kPa, pg 30 psf; central 8.48 %)
 
-Severe conversion 2.88 %; no live-load floor 2.53 %; overstrength 1.02 / 1.32 → 1.56 / 0.53 %; joist statistics
-instead of beam statistics 1.42 %; dead load 15 / 30 psf → 0.73 / 0.41 %; κ_partial 0.80 / 0.95 → 1.02 / 0.88 %;
-Strobel & Liel band low / high → 0.55 / 2.90 %; industrial-usage mean $150 → 0.84 %; sag priced at 1 % → 1.67 %;
-price year ×1.5 → 1.39 %; +50 mm rain on snow 1.88 %. **No compounded uncertainty is propagated.**
+Severe conversion 26.95 %; no live-load floor 23.91 %; overstrength 1.02 / 1.32 → 14.48 / 4.82 %; joist statistics
+instead of beam statistics 13.22 %; dead load 15 / 30 psf → 6.58 / 3.57 %; κ_partial 0.80 / 0.95 → 8.66 / 8.39 %;
+Strobel & Liel band edges → 3.07 / 8.63 %; top band at its lower edge ($538) → 5.24 %; no inflation → 5.01 %; sag priced
+at 1 % → 9.22 %; +50 mm rain on snow 17.36 %. **No compounded uncertainty is propagated.**
 
 ## 6. Checks done
 
@@ -61,6 +61,7 @@ Safety reproduction (above); serviceability out of sample: Lamar sign right (−
 
 - The deflection state is reached very often (72 % at 2 kPa for pg 30 psf), consistent with the paper's strongly
   negative beam-roof serviceability indices; it is kept as an unpriced state (loss 0, D-SRE-10 closed 17 Nov).
-- The loss shares come from 40 surveyed buildings (six industrial, mean $150 per gross m² for that usage), with no
-  "some damage" roof-structure response; costs are 2008–11 against 2025 replacement costs.
+- The collapse share reaches the whole structure (raw 1.10, capped at 1.0): the inflated midpoint of the paper's upper
+  cost bands exceeds the warehouse's replacement cost per m². The band runs from 0.368 to 1.0. The paper does not tag
+  costs by state, so this is our mapping; the leak-or-partial share is T4.
 - The purlin system, standing-seam restraint and drift at roof steps are not modelled.

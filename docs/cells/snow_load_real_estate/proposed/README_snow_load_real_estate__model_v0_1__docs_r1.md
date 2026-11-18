@@ -34,8 +34,8 @@ the roof system (serviceability damage, partial failure, collapse)?
 | ID | Profile | Roof read as | Curve |
 |---|---|---|---|
 | `RE_RES_SFD_1S_SLAB` | re_house_1s_wood_slab | light-frame wood (Li & van de Lindt test house, R1) | adopted |
-| `RE_IND_WAREHOUSE` | re_warehouse_1s_steel_slab | wide-flange beam roof (Kozak & Liel), T4 reading of a PEMB | constructed; losses from Strobel & Liel (T3) |
-| `RE_COM_OFFICE_3S_SLAB` | re_office_3s_slab | open-web steel joists under membrane (Kozak & Liel) | constructed; losses from Strobel & Liel (T3) |
+| `RE_IND_WAREHOUSE` | re_warehouse_1s_steel_slab | wide-flange beam roof (Kozak & Liel), T4 reading of a PEMB | constructed; collapse loss from Strobel & Liel upper bands (T3), leak or partial T4 |
+| `RE_COM_OFFICE_3S_SLAB` | re_office_3s_slab | open-web steel joists under membrane (Kozak & Liel) | constructed; collapse loss from Strobel & Liel upper bands (T3), leak or partial T4 |
 
 ## 4. Coverage (gate 9)
 
@@ -56,8 +56,8 @@ No snow cell exists on `main` or `cell/real-estate`. The `winter_storm_solar` pr
 | Gate | State |
 |---|---|
 | 1 Search log | present |
-| 2 Source and claim registers | present (16 sources, 39 claims) |
-| 3 Parameter tier table | present (43 parameters: 3 T2, 18 T3, 22 T4) |
+| 2 Source and claim registers | present (17 sources, 42 claims) |
+| 3 Parameter tier table | present (45 parameters: 3 T2, 19 T3, 23 T4) |
 | 4 Artifact, capability, KATs, evidence chain | present; 98 records; 942 / 942 KATs pass |
 | 5 Dossier with assumption register and decision log | present |
 | 6 Methodology file per curve | present (3) |
