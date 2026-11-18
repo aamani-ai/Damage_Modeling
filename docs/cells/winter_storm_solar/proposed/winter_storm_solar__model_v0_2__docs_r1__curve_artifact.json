@@ -1,0 +1,1508 @@
+{
+  "schema_version": "damage_curve_record_bundle.v3",
+  "schema_status": "proposed_draft",
+  "cell_id": "winter_storm_solar",
+  "damage_code_id": "WINTER_STORM_SOLAR_SNOW_LOAD_V0_2_PROPOSED",
+  "semantic_damage_model_version": "model v0.2",
+  "documentation_revision": "docs r1",
+  "lifecycle_state": "candidate",
+  "promotion_status": "proposed",
+  "review_status": "revised_per_reviewer_objections_screening_proxy",
+  "model_grade": "screening_engineering_proxy",
+  "package_release": "unreleased",
+  "package_baseline": "library v2.5",
+  "package_inclusion_status": "not_included",
+  "canonical_runtime_artifact": false,
+  "version_label_history": "Built on 2026-11-16/17 as model v0.1 / docs r2; renamed to model v0.2 / docs r1 on 2026-11-17 (JL) because the revision changes runtime outputs for the same inputs (standard 17).",
+  "supersedes_proposal": "docs/cells/winter_storm_solar/proposed/winter_storm_solar__model_v0_1__docs_r1__curve_artifact.json (kept unchanged)",
+  "source_dossier": "docs/cells/winter_storm_solar/proposed/winter_storm_solar_curve_derivation_dossier__model_v0_2__docs_r1.md",
+  "source_workbook": "docs/cells/winter_storm_solar/proposed/damage_curve_records_winter_storm_solar__model_v0_2__docs_r1.xlsx",
+  "known_answer_tests": "docs/cells/winter_storm_solar/proposed/known_answer_tests_winter_storm_solar__model_v0_2__docs_r1.json",
+  "source_register": "docs/cells/winter_storm_solar/proposed/SOURCE_REGISTER_winter_storm_solar__model_v0_2__docs_r1.csv",
+  "claim_parameter_register": "docs/cells/winter_storm_solar/proposed/CLAIM_PARAMETER_REGISTER_winter_storm_solar__model_v0_2__docs_r1.csv",
+  "value_crosswalk": "docs/cells/winter_storm_solar/proposed/VALUE_CROSSWALK_winter_storm_solar__model_v0_2__docs_r1.csv",
+  "methodology_files": [
+    "docs/cells/winter_storm_solar/methodology/WSS1_SUPPORT_STRUCTURE_ORDERED_STATES.md",
+    "docs/cells/winter_storm_solar/methodology/WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES.md",
+    "docs/cells/winter_storm_solar/methodology/WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES.md"
+  ],
+  "failure_units": [
+    {
+      "id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+      "subsystem": "MOUNTING",
+      "component": "TRACKER + RACKING_STRUCTURE excluding foundations",
+      "treatment": "primary_nonzero",
+      "y_axis": "same-unit direct repair or replacement cost divided by support-structure replacement value",
+      "denominator": "explicit site structure value; repository reference 109.98972602739727 2024 USD/kWdc is informational only",
+      "mapping": "subsystem_only"
+    },
+    {
+      "id": "WSS1_MODULE_FIELD_BREAKAGE",
+      "subsystem": "PV_ARRAY",
+      "component": "PV_MODULE (modules, frames, clamps)",
+      "treatment": "primary_nonzero",
+      "y_axis": "same-unit direct replacement cost divided by module-field replacement value",
+      "denominator": "explicit site module value; repository reference 291.21485143992487 2024 USD/kWdc is informational only",
+      "mapping": "exact_component"
+    },
+    {
+      "id": "WSS1_FOUNDATION",
+      "subsystem": "FOUNDATION",
+      "component": "FOUNDATION_BASE",
+      "treatment": "withheld",
+      "y_axis": "no runtime curve",
+      "denominator": "not applicable",
+      "withheld_reason_codes": [
+        "NO_SNOW_LOAD_FOUNDATION_RESPONSE_EVIDENCE",
+        "FROST_HEAVE_IS_SEPARATE_CHRONIC_PATHWAY"
+      ]
+    },
+    {
+      "id": "WSS1_POWER_CONVERSION_AND_ELECTRICAL",
+      "subsystem": "INVERTER_SYSTEM; ELECTRICAL_COLLECTION; SUBSTATION; GROUNDING_LIGHTNING",
+      "component": "INVERTER; COMBINER_BOX; CABLE_AC_DC; TRANSFORMER_MAIN; SWITCHGEAR; GROUNDING_GRID",
+      "treatment": "withheld",
+      "y_axis": "no runtime curve",
+      "denominator": "not applicable",
+      "withheld_reason_codes": [
+        "NO_SNOW_LOAD_RESPONSE_EVIDENCE",
+        "ICE_ON_YARD_EQUIPMENT_IS_SEPARATE_PATHWAY"
+      ]
+    },
+    {
+      "id": "WSS1_SCADA_COMMUNICATIONS",
+      "subsystem": "SCADA",
+      "component": "MONITORING_SYSTEM",
+      "treatment": "withheld",
+      "y_axis": "no runtime curve",
+      "denominator": "not applicable",
+      "withheld_reason_codes": [
+        "NO_SNOW_LOAD_RESPONSE_EVIDENCE"
+      ]
+    },
+    {
+      "id": "WSS1_CIVIL_INFRA",
+      "subsystem": "CIVIL_INFRA",
+      "component": "SITE_PREP; buildings; fencing; roads",
+      "treatment": "withheld",
+      "y_axis": "no runtime curve",
+      "denominator": "not applicable",
+      "withheld_reason_codes": [
+        "MIXED_ASSET_BUCKET_REQUIRES_SPLIT",
+        "BUILDING_ROOF_SNOW_IS_SEPARATE_ASSET_CLASS"
+      ]
+    },
+    {
+      "id": "WSS1_REPLACEMENT_SUPPORT",
+      "subsystem": "replacement support",
+      "component": "SBOS/EBOS field labor, site management, equipment rental",
+      "treatment": "exposure_modifier",
+      "y_axis": "no intrinsic damage ratio",
+      "denominator": "189.59050092005725 2024 USD/kWdc reference pool; allocate once after direct damage",
+      "withheld_reason_codes": [
+        "ALLOCATION_ONLY_NO_INTRINSIC_DR",
+        "ALLOCATE_ONCE_AFTER_DIRECT_DAMAGE"
+      ]
+    }
+  ],
+  "pathways": [
+    {
+      "pathway_id": "snow_gravity_load",
+      "hazard_scope": {
+        "included": [
+          "accumulated snowpack weight on the array, including snow already on the ground",
+          "rain-on-snow water retained in the pack (carried by SWE)",
+          "glaze ice weight on module surfaces, ONLY as a separate flagged upper-bound scenario"
+        ],
+        "excluded": [
+          "snowmelt or rain-on-snow flooding",
+          "blizzard or synoptic wind loading",
+          "ice plus concurrent wind",
+          "ice or snow shedding impact",
+          "snow drift and sliding impact on neighbouring equipment",
+          "frost heave and chronic foundation movement",
+          "extreme cold, freeze-off, derating",
+          "hail",
+          "business interruption or downtime"
+        ],
+        "event_partition_rule": "one parent winter event_family_id; evaluate the peak snowpack reached during the event once"
+      },
+      "hazard_axis": {
+        "id": "winter_snow_gravity_demand",
+        "preferred_input_field": "event_to_design_snow_demand_ratio",
+        "permitted_proxy_fields": [
+          "snow_water_equivalent_peak_mm",
+          "ice_radial_thickness_mm",
+          "design_ground_snow_load_kpa",
+          "racking_rated_array_snow_load_kpa"
+        ],
+        "unit": "dimensionless",
+        "valid_range": [
+          0.0,
+          4.0
+        ],
+        "extrapolation_policy": "structure ratio: flag above 3.3, withhold above 4.0; module array load: flag above 4.5 kPa, withhold above 6.0 kPa",
+        "axis_contracts": {
+          "structure": {
+            "axis_field": "event_to_design_snow_demand_ratio",
+            "unit": "dimensionless",
+            "valid_range": [
+              0.0,
+              4.0
+            ],
+            "flag_above": 3.3,
+            "definition": "event ground snow load from SWE / design ground snow load (site_code_assumed) or event array load / rated array snow load (project_rated); glaze excluded"
+          },
+          "module": {
+            "axis_field": "array_snow_load_kpa",
+            "unit": "kPa",
+            "valid_range": [
+              0.0,
+              6.0
+            ],
+            "flag_above": 4.5,
+            "definition": "Cs x 0.7 x Ce x Ct x event ground snow load from SWE; glaze excluded"
+          }
+        },
+        "load_bridge": {
+          "swe_to_kpa_per_mm": 0.00980665,
+          "flat_roof_factor": 0.7,
+          "exposure_factor_ce": 0.9,
+          "thermal_factor_ct": 1.2,
+          "default_slope_factor_cs": 1.0,
+          "source_ids": [
+            "WSS-S031",
+            "WSS-S002",
+            "WSS-S025"
+          ],
+          "snow_depth_policy": "reject snow depth without SWE (SNOW_DEPTH_WITHOUT_SWE_UNSUPPORTED); with SWE, snow_depth_m is used only for the clearance flag",
+          "glaze_policy": "not summed with SWE; see glaze_upper_bound_scenario"
+        },
+        "glaze_upper_bound_scenario": {
+          "edition": "ASCE/SEI 7-10 Sec 10.4.1, Eq. 10.4-2 (flat plates)",
+          "formula": "V_i = pi x t_d x A_s (A_s = area of one side of the plate; no member-diameter term); load per plate area = pi x t_d x 900 kg/m3 x g x plate factor",
+          "full_plate_kpa_per_mm": 0.02772764963669371,
+          "plate_factors": {
+            "horizontal_0_6": 0.6,
+            "vertical_0_8": 0.8
+          },
+          "midpoint": "none chosen (a tilted module lies between the horizontal and vertical factors)",
+          "load_application": "plate load applied directly to the array; snow roof factors (0.7 Ce Ct) not applied; event radial ice thickness used as t_d",
+          "structure_ratio": "glaze plate load / design array snow load (Cs x 0.7 x Ce x Ct x pg, or the rated array load)",
+          "not_summed_reason": "ERA5 (IFS Cy41r2) SWE can hold rain that fell on the pack (WSS-S037); which SWE product the grid uses is open (review v5 Q4); no rack or module test under ice and no freezing-rain damage case at a ground-mount plant (SJ v8 Sec 4.1)",
+          "source_ids": [
+            "WSS-S033",
+            "WSS-S031",
+            "WSS-S037",
+            "WSS-S038"
+          ]
+        }
+      },
+      "selector_logic": [
+        {
+          "field": "array_architecture",
+          "required": true,
+          "allowed": [
+            "fixed_tilt_ground_mount",
+            "single_axis_tracker"
+          ],
+          "no_default": true,
+          "numeric_effect": "selects the module curve (tracker: tracker-clamp TtF curve; fixed-tilt: IEC 61215 MQT 16 judgment anchor); tracker adds TRACKER_TRANSFER_FROM_FIXED_RACK_TESTS"
+        },
+        {
+          "field": "racking_design_basis",
+          "required": true,
+          "allowed": [
+            "site_code_assumed",
+            "project_rated"
+          ],
+          "no_default": true,
+          "numeric_effect": "selects the structure-ratio denominator"
+        },
+        {
+          "field": "design_ground_snow_load_kpa",
+          "required_when": "racking_design_basis=site_code_assumed",
+          "numeric_effect": "structure ratio denominator (ASCE 7-22 strength-level pg)"
+        },
+        {
+          "field": "racking_rated_array_snow_load_kpa",
+          "required_when": "racking_design_basis=project_rated",
+          "numeric_effect": "structure ratio denominator on the array-load basis"
+        },
+        {
+          "field": "design_risk_category",
+          "required": false,
+          "allowed": [
+            "I",
+            "II",
+            "unknown"
+          ],
+          "default": "I",
+          "numeric_effect": "none inside the curve; tells Hazard which ASCE 7-22 map supplies pg (Risk Category I screening default for racks; override where the design basis is known)"
+        },
+        {
+          "field": "plant_size_class",
+          "required": false,
+          "allowed": [
+            "small_10_to_50_kw",
+            "medium_50_to_2000_kw",
+            "large_ge_2000_kw",
+            "unknown"
+          ],
+          "numeric_effect": "loss view only: selects a governed exposed fraction; none governed in model v0.2, so 1.0 is used and flagged"
+        }
+      ],
+      "conditioner_logic": [
+        {
+          "field": "ice_component_basis",
+          "required": true,
+          "allowed": [
+            "supplied",
+            "not_in_hazard_product"
+          ],
+          "numeric_effect": "supplied ice > 0 adds the separate glaze upper-bound scenario; never summed with SWE"
+        },
+        {
+          "field": "slope_factor_cs",
+          "required": false,
+          "default": 1.0,
+          "numeric_effect": "array axis; a value below 1 is flagged"
+        },
+        {
+          "field": "snow_depth_m",
+          "required": "capture_or_unknown",
+          "numeric_effect": "none; clearance-versus-depth flag only"
+        },
+        {
+          "field": "leading_edge_clearance_m",
+          "required": "capture_or_unknown",
+          "numeric_effect": "none; clearance-versus-depth flag only"
+        },
+        {
+          "field": "under_designed_share",
+          "required": false,
+          "no_default": true,
+          "allowed_range": [
+            0.0,
+            1.0
+          ],
+          "numeric_effect": "none in model v0.2; captured and flagged; the under-designed branch is parked"
+        },
+        {
+          "field": "snow_stow_state",
+          "required": "capture_or_unknown",
+          "allowed": [
+            "confirmed_max_tilt",
+            "not_confirmed",
+            "unknown",
+            "not_applicable_fixed_tilt"
+          ],
+          "numeric_effect": "none; no stow credit"
+        },
+        {
+          "field": "snow_removal_performed",
+          "required": "capture_or_unknown",
+          "numeric_effect": "none; no removal credit"
+        }
+      ],
+      "exposure_contract": {
+        "required_for_loss": [
+          "event_id",
+          "event_family_id",
+          "array_zone_id_or_group",
+          "explicit_failure_unit_values"
+        ],
+        "screening_default_exposed_fraction": 1.0,
+        "exposed_fraction_by_plant_size_class": {
+          "small_10_to_50_kw": null,
+          "medium_50_to_2000_kw": null,
+          "large_ge_2000_kw": null,
+          "unknown": null
+        },
+        "calibration_target": {
+          "metric": "exposed fraction x conditional failure (damaged share per snow accident)",
+          "nite_2023_12_22_fig4": {
+            "small_10_to_50_kw": 0.73,
+            "medium_50_to_2000_kw": 0.45,
+            "large_ge_2000_kw": 0.04
+          },
+          "sample": "small 43 accidents; medium and large 23 together (the 4% is thin)",
+          "use": "calibration target only; not the exposed fraction",
+          "source_ids": [
+            "WSS-S034"
+          ]
+        },
+        "rules": [
+          "evaluate each array zone once per event",
+          "do not multiply by installed TIV",
+          "do not reuse array exposure for foundations, electrical, SCADA or civil units",
+          "reconcile shared module disposition with hail and wind loss atoms before summing"
+        ]
+      },
+      "failure_unit_coverage": [
+        {
+          "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+          "status": "conditional_screening_curve"
+        },
+        {
+          "failure_unit_id": "WSS1_MODULE_FIELD_BREAKAGE",
+          "status": "conditional_screening_curve"
+        },
+        {
+          "failure_unit_id": "WSS1_FOUNDATION",
+          "status": "withheld"
+        },
+        {
+          "failure_unit_id": "WSS1_POWER_CONVERSION_AND_ELECTRICAL",
+          "status": "withheld"
+        },
+        {
+          "failure_unit_id": "WSS1_SCADA_COMMUNICATIONS",
+          "status": "withheld"
+        },
+        {
+          "failure_unit_id": "WSS1_CIVIL_INFRA",
+          "status": "withheld"
+        },
+        {
+          "failure_unit_id": "WSS1_REPLACEMENT_SUPPORT",
+          "status": "allocation_only"
+        }
+      ],
+      "curve_records": [
+        {
+          "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+          "pathway_id": "snow_gravity_load",
+          "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+          "curve_form": "ordered_damage_state_lognormal",
+          "x_axis": "event_to_design_snow_demand_ratio",
+          "y_axis": "failure_unit_damage_ratio",
+          "parameters": {
+            "beta_ln": 0.47,
+            "damage_states": [
+              {
+                "state_id": "STRUCT_DS0_NO_STRUCTURAL_DAMAGE",
+                "cost_ratio": 0.0,
+                "affected_subsystems": [],
+                "description": "no structural repair",
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "WSS-S022"
+                ]
+              },
+              {
+                "state_id": "STRUCT_DS1_PARTIAL_ARRAY_COLLAPSE",
+                "cost_ratio": 0.4,
+                "affected_subsystems": [
+                  "racking or tracker members",
+                  "joints"
+                ],
+                "description": "member buckling or joint failure collapsing part of the array (~37% field case)",
+                "tier": "T3_engineering_proxy_or_adjacent_empirical",
+                "source_ids": [
+                  "WSS-S030",
+                  "WSS-S023"
+                ]
+              },
+              {
+                "state_id": "STRUCT_DS2_EXTENSIVE_COLLAPSE",
+                "cost_ratio": 1.0,
+                "affected_subsystems": [
+                  "racking or tracker support structure"
+                ],
+                "description": "extensive to total collapse (~80% and total field cases)",
+                "tier": "T3_engineering_proxy_or_adjacent_empirical",
+                "source_ids": [
+                  "WSS-S030",
+                  "WSS-S013"
+                ]
+              }
+            ],
+            "capacity_scenarios": [
+              {
+                "scenario_id": "central_screening",
+                "state_medians": [
+                  1.32,
+                  1.584
+                ],
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "WSS-S022",
+                  "WSS-S023",
+                  "WSS-S002"
+                ],
+                "interpretation": "compliant racks; judgment test ratio 1.88 (six wind downforce tests + one snow test) x mapping 0.7 (ASD 0.7 pg); not a percentile"
+              },
+              {
+                "scenario_id": "upper_resistance",
+                "state_medians": [
+                  1.88,
+                  2.256
+                ],
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "WSS-S022",
+                  "WSS-S023"
+                ],
+                "interpretation": "compliant racks; judgment test ratio 1.88 x mapping 1.0 (test design = ASCE 7-22 pg); not a percentile"
+              }
+            ]
+          }
+        },
+        {
+          "curve_id": "WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES",
+          "pathway_id": "snow_gravity_load",
+          "failure_unit_id": "WSS1_MODULE_FIELD_BREAKAGE",
+          "curve_form": "ordered_damage_state_lognormal",
+          "x_axis": "array_snow_load_kpa",
+          "y_axis": "failure_unit_damage_ratio",
+          "parameters": {
+            "beta_ln": 0.25,
+            "damage_states": [
+              {
+                "state_id": "MODULE_DS0_NO_BREAKAGE",
+                "cost_ratio": 0.0,
+                "affected_subsystems": [],
+                "description": "no direct module breakage on surviving racks",
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "WSS-S011"
+                ]
+              },
+              {
+                "state_id": "MODULE_DS1_BREAKAGE_OR_FRAME_FAILURE",
+                "cost_ratio": 1.0,
+                "affected_subsystems": [
+                  "modules",
+                  "frames",
+                  "clamps"
+                ],
+                "description": "glass breakage or frame bending/pull-out requiring replacement of the affected modules",
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "WSS-S003",
+                  "WSS-S030"
+                ]
+              }
+            ],
+            "capacity_scenarios": [
+              {
+                "scenario_id": "lower_resistance",
+                "state_medians": [
+                  1.53
+                ],
+                "tier": "T3_engineering_proxy_or_adjacent_empirical",
+                "source_ids": [
+                  "WSS-S011",
+                  "WSS-S010",
+                  "WSS-S003"
+                ],
+                "interpretation": "tracker-clamp module failure load 1.8 kPa x 0.85 lower-edge knock-down (UNSOURCED, T4); not a percentile"
+              },
+              {
+                "scenario_id": "central_screening",
+                "state_medians": [
+                  1.9549999999999998
+                ],
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "WSS-S011",
+                  "WSS-S010",
+                  "WSS-S003"
+                ],
+                "interpretation": "tracker-clamp module failure load 2.3 kPa x 0.85 lower-edge knock-down (UNSOURCED, T4); not a percentile"
+              },
+              {
+                "scenario_id": "upper_resistance",
+                "state_medians": [
+                  2.38
+                ],
+                "tier": "T3_engineering_proxy_or_adjacent_empirical",
+                "source_ids": [
+                  "WSS-S011",
+                  "WSS-S010",
+                  "WSS-S003"
+                ],
+                "interpretation": "tracker-clamp module failure load 2.8 kPa x 0.85 lower-edge knock-down (UNSOURCED, T4); not a percentile"
+              }
+            ]
+          }
+        },
+        {
+          "curve_id": "WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+          "pathway_id": "snow_gravity_load",
+          "failure_unit_id": "WSS1_MODULE_FIELD_BREAKAGE",
+          "curve_form": "ordered_damage_state_lognormal",
+          "x_axis": "array_snow_load_kpa",
+          "y_axis": "failure_unit_damage_ratio",
+          "parameters": {
+            "beta_ln": 0.25,
+            "damage_states": [
+              {
+                "state_id": "MODULE_DS0_NO_BREAKAGE",
+                "cost_ratio": 0.0,
+                "affected_subsystems": [],
+                "description": "no direct module breakage on surviving racks",
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "WSS-S011"
+                ]
+              },
+              {
+                "state_id": "MODULE_DS1_BREAKAGE_OR_FRAME_FAILURE",
+                "cost_ratio": 1.0,
+                "affected_subsystems": [
+                  "modules",
+                  "frames",
+                  "clamps"
+                ],
+                "description": "glass breakage or frame bending/pull-out requiring replacement of the affected modules",
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "WSS-S003",
+                  "WSS-S030"
+                ]
+              }
+            ],
+            "capacity_scenarios": [
+              {
+                "scenario_id": "central_screening",
+                "state_medians": [
+                  2.04
+                ],
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "WSS-S005",
+                  "WSS-S036",
+                  "WSS-S004"
+                ],
+                "interpretation": "IEC 61215 MQT 16 test load 2.4 kPa (minimum) read as the median failure load (pass level; UNCHECKED, T4) x 0.85 knock-down (UNSOURCED, T4)"
+              },
+              {
+                "scenario_id": "upper_resistance",
+                "state_medians": [
+                  4.59
+                ],
+                "tier": "T4_placeholder_or_expert_judgment",
+                "source_ids": [
+                  "WSS-S005",
+                  "WSS-S036",
+                  "WSS-S004"
+                ],
+                "interpretation": "IEC 61215 MQT 16 test load 5.4 kPa (commonly declared) read as the median failure load (pass level; UNCHECKED, T4) x 0.85 knock-down (UNSOURCED, T4)"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "deferred_pathways": [
+    {
+      "pathway_id": "ice_with_concurrent_wind",
+      "reason": "combined case (WSS-S027); no evidence chain"
+    },
+    {
+      "pathway_id": "ice_shedding_impact",
+      "reason": "no evidence chain"
+    },
+    {
+      "pathway_id": "snow_drift_and_sliding_impact",
+      "reason": "no evidence chain"
+    }
+  ],
+  "value_linkage": {
+    "implicit_default_profile": null,
+    "primary_reference_basis": {
+      "basis_id": "NLR_Q1_2025_UPV_PV_ONLY_2024_USD",
+      "source": "docs/method/value_basis/solar_wind_value_breakdown.xlsx",
+      "installed_capex_usd_per_kwdc": 1120.0,
+      "physical_replaceable_usd_per_kwdc": 877.7957023626668,
+      "direct_hardware_usd_per_kwdc": 656.9814571503722,
+      "replacement_support_usd_per_kwdc": 189.59050092005725,
+      "module_reference_usd_per_kwdc": 291.21485143992487,
+      "structure_reference_usd_per_kwdc": 109.98972602739727,
+      "currency_basis": "2024 USD"
+    },
+    "support_allocation_rule": {
+      "pool_usd_per_kwdc": 189.59050092005725,
+      "direct_hardware_basis_usd_per_kwdc": 656.9814571503722,
+      "rule": "support_once_loss = pool x (direct snow loss / direct hardware basis); applied once after direct damage",
+      "tier": "T4_placeholder_or_expert_judgment"
+    },
+    "value_coverage_by_failure_unit": [
+      {
+        "failure_unit_id": "WSS1_MODULE_FIELD_BREAKAGE",
+        "usd_per_kwdc_2024": 291.21485143992487,
+        "share_of_physical_value": 0.3317569801903719,
+        "status": "curve (tracker or fixed-tilt by mounting)"
+      },
+      {
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "usd_per_kwdc_2024": 109.98972602739727,
+        "share_of_physical_value": 0.12530219244791235,
+        "status": "curve (compliant branch)"
+      },
+      {
+        "failure_unit_id": "WSS1_FOUNDATION",
+        "usd_per_kwdc_2024": 31.12448715327472,
+        "share_of_physical_value": 0.03545755244585994,
+        "status": "withheld (not zero)"
+      },
+      {
+        "failure_unit_id": "WSS1_POWER_CONVERSION_AND_ELECTRICAL",
+        "usd_per_kwdc_2024": 223.34239252977537,
+        "share_of_physical_value": 0.2544355046722478,
+        "status": "withheld (not zero)"
+      },
+      {
+        "failure_unit_id": "WSS1_SCADA_COMMUNICATIONS",
+        "usd_per_kwdc_2024": 1.31,
+        "share_of_physical_value": 0.0014923745883854479,
+        "status": "withheld (not zero)"
+      },
+      {
+        "failure_unit_id": "OUTSIDE_PHYSICAL_CELL",
+        "usd_per_kwdc_2024": 242.20429763733293,
+        "share_of_physical_value": null,
+        "status": "excluded (nonphysical)"
+      },
+      {
+        "failure_unit_id": "WSS1_REPLACEMENT_SUPPORT",
+        "usd_per_kwdc_2024": 189.59050092005725,
+        "share_of_physical_value": 0.21598476776516132,
+        "status": "allocated once from direct loss"
+      },
+      {
+        "failure_unit_id": "WSS1_CIVIL_INFRA",
+        "usd_per_kwdc_2024": 31.223744292237445,
+        "share_of_physical_value": 0.035570627890061324,
+        "status": "withheld (not zero)"
+      }
+    ],
+    "priced_share_of_physical_value": {
+      "direct": 0.4570591726382843,
+      "ceiling_with_support_allocation": 0.5889564682886933
+    },
+    "loss_requirements": [
+      "explicit module and structure values with currency and price year",
+      "no installed-TIV ratio",
+      "exposed fraction per array zone, else 1.0 flagged"
+    ]
+  },
+  "parameter_tier_table": [
+    {
+      "parameter": "pathway_id",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES;WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "snow_gravity_load; no default",
+      "param_role": "axis_bridge",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S019",
+      "reasoning": "Pathway identity is required.",
+      "status": "adopt",
+      "update_trigger": "Governed pathway redesign."
+    },
+    {
+      "parameter": "swe_to_kpa",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES;WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "0.00980665 kPa per mm SWE",
+      "param_role": "axis_bridge",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": "WSS-S031",
+      "reasoning": "Physics of water-equivalent mass.",
+      "status": "adopt",
+      "update_trigger": "None."
+    },
+    {
+      "parameter": "design_risk_category_default",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES;WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "I (screening default for racks; override where known)",
+      "param_role": "selector_default",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S025;WSS-S039",
+      "reasoning": "Tolerable screening error direction (v5 Q3).",
+      "status": "adopt",
+      "update_trigger": "Per-plant design basis."
+    },
+    {
+      "parameter": "flat_roof_factor",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES;WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "0.7",
+      "param_role": "axis_bridge",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": "WSS-S002",
+      "reasoning": "ASCE 7-22 Eq 7.3-1 (secondary). Module axis; structure axis in project_rated mode.",
+      "status": "adopt",
+      "update_trigger": "ASCE 7-22 text."
+    },
+    {
+      "parameter": "exposure_factor_ce",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES;WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "0.9",
+      "param_role": "selector_default",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": "WSS-S025",
+      "reasoning": "Practitioner ground-mount calc.",
+      "status": "adopt",
+      "update_trigger": "Site exposure."
+    },
+    {
+      "parameter": "thermal_factor_ct",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES;WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "1.2",
+      "param_role": "selector_default",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": "WSS-S025",
+      "reasoning": "Unheated array.",
+      "status": "adopt",
+      "update_trigger": "ASCE 7-22 text."
+    },
+    {
+      "parameter": "default_slope_factor_cs",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES;WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "1.0",
+      "param_role": "conditioner_adjustment",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S006;WSS-S025;WSS-S020",
+      "reasoning": "No slope credit without verified clearance/stow.",
+      "status": "adopt",
+      "update_trigger": "Verified clearance and stow."
+    },
+    {
+      "parameter": "snow_depth_vs_clearance_flag",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES;WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "flag when snow_depth_m >= leading_edge_clearance_m; no numeric effect",
+      "param_role": "conditioner_adjustment",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S020;WSS-S041",
+      "reasoning": "Brief item 7; needs grid snow depth.",
+      "status": "adopt",
+      "update_trigger": "Depth and clearance input."
+    },
+    {
+      "parameter": "structure_test_ratio_median",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+      "value": "1.88 (unrounded 1.8803)",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S022;WSS-S023",
+      "reasoning": "Six wind downforce tests + one snow test; judgment, not measured snow capacity.",
+      "status": "adopt",
+      "update_trigger": "NEDO/JPEA answer; snow tests."
+    },
+    {
+      "parameter": "structure_beta_ln",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+      "value": "0.47 (unrounded 0.4767; 95% CI 0.307-1.050)",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S022;WSS-S023",
+      "reasoning": "Judgment spread from n=7; screening label kept.",
+      "status": "adopt",
+      "update_trigger": "More tests."
+    },
+    {
+      "parameter": "structure_beta_ln_compliant_tight_sensitivity",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+      "value": "0.09 to 0.20 (sensitivity only; served value stays 0.47)",
+      "param_role": "curve_fit_shape",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": "WSS-S042;WSS-S043",
+      "reasoning": "Tighter compliant spread carried as an alternative reading; not served.",
+      "status": "sensitivity_only",
+      "update_trigger": "A compliant-rack fragility study."
+    },
+    {
+      "parameter": "mapping_k_central",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+      "value": "0.7",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S002",
+      "reasoning": "ASD D + 0.7S reading of the test design load.",
+      "status": "adopt",
+      "update_trigger": "US test vs ASCE 7-22."
+    },
+    {
+      "parameter": "mapping_k_upper",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+      "value": "1.0",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S022;WSS-S023",
+      "reasoning": "Test design read as pg.",
+      "status": "adopt",
+      "update_trigger": "US test vs ASCE 7-22."
+    },
+    {
+      "parameter": "structure_DS1_median_central_compliant",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+      "value": "1.32",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S022;WSS-S023;WSS-S002",
+      "reasoning": "1.88 x 0.7.",
+      "status": "adopt",
+      "update_trigger": "US test vs ASCE 7-22."
+    },
+    {
+      "parameter": "structure_DS1_median_upper_compliant",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+      "value": "1.88",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S022;WSS-S023",
+      "reasoning": "1.88 x 1.0.",
+      "status": "adopt",
+      "update_trigger": "US test vs ASCE 7-22."
+    },
+    {
+      "parameter": "structure_DS2_to_DS1_median_ratio",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+      "value": "1.2",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S023;WSS-S014",
+      "reasoning": "Brittle collapse after first buckling.",
+      "status": "adopt",
+      "update_trigger": "Buckling-to-collapse data."
+    },
+    {
+      "parameter": "structure_DS1_cost_ratio",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+      "value": "0.40",
+      "param_role": "exposure_or_value",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": "WSS-S030",
+      "reasoning": "~37% case.",
+      "status": "adopt",
+      "update_trigger": "Larger case set."
+    },
+    {
+      "parameter": "structure_DS2_cost_ratio",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+      "value": "1.00",
+      "param_role": "exposure_or_value",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": "WSS-S030;WSS-S013",
+      "reasoning": "~80% and total cases.",
+      "status": "adopt",
+      "update_trigger": "Larger case set."
+    },
+    {
+      "parameter": "structure_axis_valid_range",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+      "value": "0.0-4.0; flag above 3.3",
+      "param_role": "extrapolation_guard",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S022",
+      "reasoning": "Highest tested ratio 3.28.",
+      "status": "adopt",
+      "update_trigger": "Higher-ratio tests."
+    },
+    {
+      "parameter": "under_designed_share",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+      "value": "input; no default; no numeric effect in model v0.2",
+      "param_role": "exposure_or_value",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S030;WSS-S039",
+      "reasoning": "NITE shows the population exists, not its size.",
+      "status": "withhold",
+      "update_trigger": "Population compliance data."
+    },
+    {
+      "parameter": "under_designed_DS1_median",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+      "value": "1.05 (1.88 x 0.56; 0.56 = 1/1.8 unsourced; possible 1.6 x 1.12, unverified)",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S001;WSS-S038",
+      "reasoning": "Parked: used in no result until a source exists.",
+      "status": "parked",
+      "update_trigger": "A source for 1.8 or the share."
+    },
+    {
+      "parameter": "module_capacity_lower_upper_kpa_tracker",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES",
+      "value": "1.8 / 2.8 (before knock-down)",
+      "param_role": "curve_fit_shape",
+      "tier": "T3_engineering_proxy_or_adjacent_empirical",
+      "source_ids": "WSS-S011;WSS-S010",
+      "reasoning": "Derived from reported tracker-clamp TtF reductions.",
+      "status": "adopt",
+      "update_trigger": "Snow TtF data."
+    },
+    {
+      "parameter": "module_capacity_central_kpa_tracker",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES",
+      "value": "2.3 (before knock-down; midpoint chosen)",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S011",
+      "reasoning": "Midpoint chosen by the dossier.",
+      "status": "adopt",
+      "update_trigger": "A population median."
+    },
+    {
+      "parameter": "module_capacity_central_kpa_fixed_tilt",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "2.4 (IEC 61215 MQT 16 minimum test load read as median; UNCHECKED)",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S005;WSS-S036",
+      "reasoning": "Pass load read as median: pessimistic reading.",
+      "status": "adopt",
+      "update_trigger": "Fixed-tilt TtF; IEC text."
+    },
+    {
+      "parameter": "module_capacity_upper_kpa_fixed_tilt",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "5.4 (commonly declared manufacturer test load read as median; UNCHECKED)",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S005;WSS-S036",
+      "reasoning": "Declared test load, not a class.",
+      "status": "adopt",
+      "update_trigger": "Fixed-tilt TtF; IEC text."
+    },
+    {
+      "parameter": "lower_edge_knockdown",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "0.85 (UNSOURCED; interim)",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S003;WSS-S006;WSS-S016",
+      "reasoning": "No source anywhere; kept interim.",
+      "status": "adopt",
+      "update_trigger": "IEC 62938 table; AIST values; depth/clearance input."
+    },
+    {
+      "parameter": "module_beta_ln",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "0.25",
+      "param_role": "curve_fit_shape",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S011;WSS-S010",
+      "reasoning": "Spread across BOMs (judgment); carried to fixed-tilt.",
+      "status": "adopt",
+      "update_trigger": "Snow TtF data."
+    },
+    {
+      "parameter": "module_DS1_cost_ratio",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "1.00",
+      "param_role": "exposure_or_value",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S030;WSS-S028",
+      "reasoning": "Broken modules replaced.",
+      "status": "adopt",
+      "update_trigger": "Repair data."
+    },
+    {
+      "parameter": "module_axis_valid_range",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "0.0-6.0 kPa; flag above 4.5",
+      "param_role": "extrapolation_guard",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S011",
+      "reasoning": "About 1.6 x highest TtF.",
+      "status": "adopt",
+      "update_trigger": "Higher-capacity data."
+    },
+    {
+      "parameter": "cascade_nonsalvage",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "0.8 (bounds 0.0, 1.0)",
+      "param_role": "conditioner_adjustment",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S030;WSS-S028",
+      "reasoning": "Modules on collapsed rows mostly lost.",
+      "status": "adopt",
+      "update_trigger": "Salvage records."
+    },
+    {
+      "parameter": "cascade_rule_conditional_on_rack_survival",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "module DR = n x s + (1 - s) x d",
+      "param_role": "conditioner_adjustment",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S038;WSS-S041",
+      "reasoning": "Brief item 6.",
+      "status": "adopt",
+      "update_trigger": "Field records."
+    },
+    {
+      "parameter": "cascade_scenario_pairing",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "tracker lower->structure central; central->central; upper->upper; fixed central->central; upper->upper",
+      "param_role": "conditioner_adjustment",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S041",
+      "reasoning": "Two compliant structure scenarios remain.",
+      "status": "adopt",
+      "update_trigger": "Joint capacity data."
+    },
+    {
+      "parameter": "tilt_shedding",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "not modelled (no parameter, no source)",
+      "param_role": "conditioner_adjustment",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S038",
+      "reasoning": "Only shedding would move the 38%; none sourced.",
+      "status": "withhold",
+      "update_trigger": "Shedding measurements."
+    },
+    {
+      "parameter": "northern_design_flag_threshold",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "central direct breakage at design array load >= 0.05",
+      "param_role": "extrapolation_guard",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S038;WSS-S041",
+      "reasoning": "Chosen; sensitivity 0.01 and 0.10.",
+      "status": "adopt",
+      "update_trigger": "Module snow field data."
+    },
+    {
+      "parameter": "snow_stow_credit",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES;WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "none",
+      "param_role": "conditioner_adjustment",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S018",
+      "reasoning": "No efficacy evidence.",
+      "status": "adopt",
+      "update_trigger": "Stow efficacy data."
+    },
+    {
+      "parameter": "glaze_volume_rule",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "GLAZE_UPPER_BOUND_SCENARIO",
+      "value": "Vi = pi x t_d x A_s (flat plate; ASCE 7-10 Sec 10.4.1)",
+      "param_role": "axis_bridge",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": "WSS-S033",
+      "reasoning": "Text read; no diameter term.",
+      "status": "adopt",
+      "update_trigger": "ASCE 7-22 Ch.10."
+    },
+    {
+      "parameter": "glaze_ice_density",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "GLAZE_UPPER_BOUND_SCENARIO",
+      "value": "900 kg/m3",
+      "param_role": "axis_bridge",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": "WSS-S033;WSS-S031",
+      "reasoning": "Both sources.",
+      "status": "adopt",
+      "update_trigger": "None."
+    },
+    {
+      "parameter": "glaze_plate_factor_horizontal",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "GLAZE_UPPER_BOUND_SCENARIO",
+      "value": "0.6",
+      "param_role": "axis_bridge",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": "WSS-S033",
+      "reasoning": "ASCE 7-10 Sec 10.4.1.",
+      "status": "adopt",
+      "update_trigger": "ASCE 7-22 Ch.10."
+    },
+    {
+      "parameter": "glaze_plate_factor_vertical",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "GLAZE_UPPER_BOUND_SCENARIO",
+      "value": "0.8",
+      "param_role": "axis_bridge",
+      "tier": "T2_public_lab_standard_or_physics",
+      "source_ids": "WSS-S033",
+      "reasoning": "ASCE 7-10 Sec 10.4.1; no midpoint chosen.",
+      "status": "adopt",
+      "update_trigger": "ASCE 7-22 Ch.10."
+    },
+    {
+      "parameter": "glaze_as_array_plate_load",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "GLAZE_UPPER_BOUND_SCENARIO",
+      "value": "plate load on array; no 0.7 Ce Ct; event radial thickness used as t_d",
+      "param_role": "axis_bridge",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S033",
+      "reasoning": "Our conversion.",
+      "status": "adopt",
+      "update_trigger": "Flat-surface glaze product."
+    },
+    {
+      "parameter": "glaze_not_summed_with_swe",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "GLAZE_UPPER_BOUND_SCENARIO",
+      "value": "separate upper-bound scenario until the SWE product question (v5 Q4) is resolved",
+      "param_role": "conditioner_adjustment",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S037;WSS-S039",
+      "reasoning": "Possible double count.",
+      "status": "adopt",
+      "update_trigger": "SJ names the product."
+    },
+    {
+      "parameter": "exposed_fraction_default",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES;WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "1.0 (screening default; flagged)",
+      "param_role": "exposure_or_value",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S039;WSS-S041",
+      "reasoning": "Brief item 5.",
+      "status": "adopt",
+      "update_trigger": "Governed per-class fractions."
+    },
+    {
+      "parameter": "exposed_fraction_by_plant_size_class",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES;WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "small / medium / large: not governed (null -> 1.0)",
+      "param_role": "exposure_or_value",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S034;WSS-S039",
+      "reasoning": "NITE shares are a calibration target, not the fraction.",
+      "status": "withhold",
+      "update_trigger": "Calibration to NITE targets."
+    },
+    {
+      "parameter": "nite_calibration_target_damaged_share",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES;WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES;WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+      "value": "73% small / 45% medium / 4% large (>=2 MW); medium+large n = 23",
+      "param_role": "validation_only",
+      "tier": "T1_claims_or_field_calibrated",
+      "source_ids": "WSS-S034",
+      "reasoning": "Target for exposed fraction x conditional failure; not used numerically.",
+      "status": "adopt",
+      "update_trigger": "More accidents."
+    },
+    {
+      "parameter": "support_allocation_rule",
+      "pathway_id": "snow_gravity_load",
+      "curve_id": "WSS1_REPLACEMENT_SUPPORT",
+      "value": "pool 189.59 x direct loss / 656.98",
+      "param_role": "exposure_or_value",
+      "tier": "T4_placeholder_or_expert_judgment",
+      "source_ids": "WSS-S032",
+      "reasoning": "Allocate once after direct damage.",
+      "status": "adopt",
+      "update_trigger": "Qualified support-cost data."
+    }
+  ],
+  "evaluation_contract": {
+    "pathway_id_required": true,
+    "architecture_required": true,
+    "no_cross_pathway_fallback": true,
+    "no_cross_asset_proxy": true,
+    "central_scenario_id": "central_screening",
+    "structure_curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+    "module_curve_by_architecture": {
+      "single_axis_tracker": "WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES",
+      "fixed_tilt_ground_mount": "WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES"
+    },
+    "scenario_semantics": "unweighted epistemic scenarios, not percentiles or a probability distribution; compound uncertainty is not propagated",
+    "population_branches": {
+      "compliant": {
+        "runtime": true,
+        "structure_scenarios": [
+          "central_screening",
+          "upper_resistance"
+        ],
+        "beta_ln": 0.47,
+        "below_design_failure_share": {
+          "central_screening": 0.27735877299567985,
+          "upper_resistance": 0.0896147083658429
+        }
+      },
+      "under_designed": {
+        "runtime": false,
+        "status": "parked_no_default_share_no_sourced_capacity",
+        "share_input": "under_designed_share (no default)",
+        "parked_state_medians": [
+          1.05,
+          1.26
+        ],
+        "parked_mapping": "0.56 = 1/1.8, unsourced; possible derivation 1.8 = 1.6 x 1.12 (SJ v8; unverified)",
+        "use": "used in no result"
+      }
+    },
+    "module_structure_cascade": {
+      "rule": "module DR = nonsalvage x s + (1 - s) x direct DR, with s the paired structure DR (breakage conditional on rack survival)",
+      "central_nonsalvage_fraction": 0.8,
+      "bounds": {
+        "full_salvage": 0.0,
+        "no_salvage": 1.0
+      },
+      "scenario_pairing": {
+        "single_axis_tracker": {
+          "lower_resistance": "central_screening",
+          "central_screening": "central_screening",
+          "upper_resistance": "upper_resistance"
+        },
+        "fixed_tilt_ground_mount": {
+          "central_screening": "central_screening",
+          "upper_resistance": "upper_resistance"
+        }
+      },
+      "tilt_shedding": "not modelled (no parameter, no source)",
+      "tier": "T4_placeholder_or_expert_judgment"
+    },
+    "northern_design_flag": {
+      "flag": "NORTHERN_DESIGN_MODULE_RESULT_UNVERIFIED",
+      "threshold_central_direct_breakage_at_design": 0.05,
+      "design_array_load": "Cs x 0.7 x Ce x Ct x pg, or the rated array load",
+      "numeric_effect": "none",
+      "tier": "T4_placeholder_or_expert_judgment"
+    },
+    "unsupported_architectures": [
+      "roof_mount",
+      "carport_or_canopy",
+      "floating_pv",
+      "dual_axis_tracker",
+      "agrivoltaic_elevated_or_vertical",
+      "concentrating_solar"
+    ],
+    "failure_codes": [
+      "PATHWAY_ID_REQUIRED",
+      "PATHWAY_ID_UNKNOWN",
+      "PATHWAY_DEFERRED_NOT_IMPLEMENTED",
+      "ARRAY_ARCHITECTURE_REQUIRED",
+      "ARRAY_ARCHITECTURE_UNSUPPORTED",
+      "FAILURE_UNIT_ID_UNKNOWN",
+      "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+      "AXIS_PAYLOAD_REQUIRED",
+      "AXIS_PAYLOAD_INVALID",
+      "SNOW_DEPTH_WITHOUT_SWE_UNSUPPORTED",
+      "ICE_COMPONENT_BASIS_REQUIRED",
+      "RACKING_DESIGN_BASIS_REQUIRED",
+      "DESIGN_SNOW_LOAD_REQUIRED",
+      "AXIS_OUTSIDE_VALID_RANGE",
+      "CONDITIONER_VALUE_UNSUPPORTED",
+      "EXPLICIT_VALUE_REQUIRED"
+    ]
+  },
+  "emit_contract": {
+    "schema_version": "damage_emit.v2",
+    "populated_emit_modes_for_this_cell": [
+      "scalar_mean_plus_bounds",
+      "state_ensemble"
+    ],
+    "result_grain": "pathway_id x array_architecture x failure_unit_id x array_zone",
+    "required_metadata": [
+      "pathway_id",
+      "array_architecture",
+      "racking_design_basis",
+      "design_risk_category",
+      "ice_component_basis",
+      "rack_population_branch",
+      "axis values and bridge",
+      "scenario identities",
+      "glaze_upper_bound_scenario when present",
+      "failure-unit denominator",
+      "limitation flags"
+    ],
+    "prohibited_outputs": [
+      "full-plant physical DR",
+      "installed-TIV DR",
+      "snow plus glaze summed DR",
+      "frequency",
+      "EAL",
+      "PML",
+      "VaR",
+      "TVaR",
+      "business interruption",
+      "downtime"
+    ]
+  },
+  "capability_declaration": {
+    "schema_version": "capability_declaration.v3",
+    "cell_id": "winter_storm_solar",
+    "canonical_runtime_artifact": false,
+    "pathway_capabilities": [
+      {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_scalar_dr": "conditional",
+        "scenario_loss_given_value_basis": "conditional",
+        "curve_intrinsic_spread": "nonprobabilistic_epistemic_envelope",
+        "populated_emit_modes": [
+          "scalar_mean_plus_bounds",
+          "state_ensemble"
+        ],
+        "conditions": [
+          "pathway_id snow_gravity_load and a supported ground-mount architecture supplied (selects the module curve)",
+          "snowpack water equivalent (not depth) supplied with an explicit ice_component_basis, or a direct demand ratio",
+          "racking design basis declared: site_code_assumed with the cell design ground snow load (Risk Category I map by default), or project_rated",
+          "evaluated on the compliant rack branch only; under_designed_share is captured with no numeric effect",
+          "glaze is returned as a separate flagged upper-bound scenario and is never summed with SWE",
+          "module and structure values supplied for monetary loss; exposed fraction defaults to 1.0 (flagged)",
+          "module breakage conditional on rack survival; support allocation applied once"
+        ],
+        "limitation_flags": [
+          "SCREENING_ENGINEERING_PROXY",
+          "NONPROBABILISTIC_EPISTEMIC_ENVELOPE",
+          "COMPOUND_UNCERTAINTY_NOT_PROPAGATED",
+          "STRUCTURE_PRIOR_FROM_SIX_WIND_DOWNFORCE_TESTS_AND_ONE_SNOW_TEST",
+          "STRUCTURE_TEST_RATIO_AND_SPREAD_T4_JUDGMENT",
+          "COMPLIANT_RACK_BRANCH_ONLY",
+          "UNDER_DESIGNED_BRANCH_PARKED_NO_DEFAULT_SHARE",
+          "JAPANESE_TO_ASCE_DESIGN_LOAD_MAPPING_UNRESOLVED",
+          "TRACKER_TRANSFER_FROM_FIXED_RACK_TESTS",
+          "FIXED_TILT_MODULE_ANCHOR_IEC61215_UNCHECKED_T4",
+          "LOWER_EDGE_KNOCKDOWN_0_85_UNSOURCED",
+          "TILT_SHEDDING_NOT_MODELLED",
+          "NORTHERN_DESIGN_MODULE_RESULT_UNVERIFIED",
+          "GLAZE_SEPARATE_UPPER_BOUND_NOT_SUMMED_WITH_SWE",
+          "EXPOSED_FRACTION_SCREENING_DEFAULT_1_0",
+          "SNOW_STOW_AND_SNOW_REMOVAL_NO_CREDIT",
+          "MODULE_SALVAGE_T4_ASSUMPTION",
+          "NO_US_CALIBRATION",
+          "FULL_PLANT_PHYSICAL_LOSS_INCOMPLETE"
+        ],
+        "withheld_failure_units": [
+          {
+            "failure_unit_id": "WSS1_FOUNDATION",
+            "reason_codes": [
+              "NO_SNOW_LOAD_FOUNDATION_RESPONSE_EVIDENCE",
+              "FROST_HEAVE_IS_SEPARATE_CHRONIC_PATHWAY"
+            ]
+          },
+          {
+            "failure_unit_id": "WSS1_POWER_CONVERSION_AND_ELECTRICAL",
+            "reason_codes": [
+              "NO_SNOW_LOAD_RESPONSE_EVIDENCE",
+              "ICE_ON_YARD_EQUIPMENT_IS_SEPARATE_PATHWAY"
+            ]
+          },
+          {
+            "failure_unit_id": "WSS1_SCADA_COMMUNICATIONS",
+            "reason_codes": [
+              "NO_SNOW_LOAD_RESPONSE_EVIDENCE"
+            ]
+          },
+          {
+            "failure_unit_id": "WSS1_CIVIL_INFRA",
+            "reason_codes": [
+              "MIXED_ASSET_BUCKET_REQUIRES_SPLIT",
+              "BUILDING_ROOF_SNOW_IS_SEPARATE_ASSET_CLASS"
+            ]
+          },
+          {
+            "failure_unit_id": "WSS1_REPLACEMENT_SUPPORT",
+            "reason_codes": [
+              "ALLOCATION_ONLY_NO_INTRINSIC_DR",
+              "ALLOCATE_ONCE_AFTER_DIRECT_DAMAGE"
+            ]
+          }
+        ]
+      }
+    ],
+    "consumer_annual_metrics": {
+      "computation_owner": "downstream_consumer",
+      "status_before_promotion": "withheld_noncanonical_proposal",
+      "status_after_promotion": "consumer_computable_from_validated_frequency_intensity_coupling_value_and_cap_model",
+      "prerequisites": [
+        "canonical promotion and exact model/docs/schema/SHA pin",
+        "winter event catalog with peak snowpack SWE, ice thickness and parent event_family_id",
+        "per-cell design snow load (ASCE 7-22 Risk Category I map for racks by default)",
+        "SWE product named (ERA5 or ERA5-Land) before any glaze is combined with SWE",
+        "architecture-aware exposure and value basis",
+        "consumer cap-binding validation"
+      ],
+      "limitation_flags": [
+        "FREQUENCY_DRIVEN_TAIL_IS_CONSUMER_OWNED",
+        "ENGINEERING_SCENARIOS_ARE_NOT_A_PROBABILITY_DISTRIBUTION",
+        "FULL_PLANT_LOSS_REQUIRES_SEPARATELY_QUALIFIED_FAILURE_UNITS",
+        "COMPOUND_UNCERTAINTY_NOT_PROPAGATED"
+      ]
+    },
+    "cap_binding": {
+      "policy": "consumer_enforced_fail_closed",
+      "enforcement_owner": "downstream_consumer",
+      "checks_required": [
+        "exact model/docs/schema/SHA pin",
+        "pathway and architecture match",
+        "SWE and ice basis provenance",
+        "declared racking design basis and risk category",
+        "glaze scenario never summed with SWE",
+        "module-structure cascade applied once",
+        "support costs not embedded and re-added",
+        "withheld units remain null"
+      ],
+      "action_if_fail": "withhold the affected DR, loss, or annual metric; do not substitute another winter, wind or asset pathway"
+    },
+    "promotion_gate": {
+      "status": "blocked",
+      "required_before_canonical_use": [
+        "independent engineering review of axis, bridge, scenarios, cascade and glaze bracket",
+        "NEDO/JPEA answer on which load governed each tested rack (query drafted, not sent)",
+        "a source for the under-designed share and its capacity, or an owner decision to keep the branch parked",
+        "ASCE 7-22 Ch.7 and Ch.10, the ASCE 2025 ground-mount snow guidance and IEC 61215-2 / IEC 62938 read",
+        "a source for the 0.85 lower-edge knock-down or a depth-and-clearance input",
+        "SWE product named by Hazard (ERA5 or ERA5-Land) and snow depth / clearance available",
+        "US field, forensic or claims evidence",
+        "Hazard dual-read and rejection-path tests",
+        "owner decision on the model v0.2 label (renamed from docs r2 on 17 Nov) (CHANGE_CLASSIFICATION model v0.2)",
+        "explicit maintainer promotion decision and atomic registry/index/changelog update"
+      ]
+    }
+  },
+  "derivation_rationale": {
+    "summary": "Six wind downforce design-pressure tests and one snow design test give a judgment prior (T4) on rack capacity over design (median 1.88, spread 0.47; unrounded 0.4767, 95% chi-square interval 0.307-1.050). The curve runs on compliant racks only with two mapping medians (1.32, 1.88); the 0.56 mapping is parked in an under-designed branch with no default share. Module breakage is split by mounting and conditional on rack survival. Glaze is a separate upper bound. No US calibration. Compound uncertainty is not propagated.",
+    "rejected_models": [
+      "raw kPa axis without design normalisation",
+      "snow-depth axis without SWE",
+      "glaze summed with SWE",
+      "0.56 mapping in the mapping-uncertainty set",
+      "tracker module curve applied to fixed-tilt modules",
+      "stow or snow-removal credit",
+      "single logistic whole-plant curve",
+      "any cross-asset proxy curve"
+    ]
+  },
+  "legacy_comparison": {
+    "status": "no legacy winter x solar material exists in the legacy library or this repository"
+  }
+}

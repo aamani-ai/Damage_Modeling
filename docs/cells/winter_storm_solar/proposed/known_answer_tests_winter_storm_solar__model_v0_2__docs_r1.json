@@ -1,0 +1,746 @@
+{
+  "schema_version": "known_answer_tests.v3",
+  "cell_id": "winter_storm_solar",
+  "semantic_damage_model_version": "model v0.2",
+  "documentation_revision": "docs r1",
+  "artifact_schema_version": "damage_curve_record_bundle.v3",
+  "absolute_tolerance": 1e-12,
+  "monetary_absolute_tolerance": 1e-06,
+  "runtime_curve_known_answer_tests": [
+    {
+      "test_id": "structure_direct_ratio_1_compliant",
+      "pathway_id": "snow_gravity_load",
+      "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "event_to_design_snow_demand_ratio": 1.0
+      },
+      "expected": {
+        "status": "conditional",
+        "axis_ratio": 1.0,
+        "rack_population_branch": "compliant",
+        "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+        "scenario_drs": {
+          "central_screening": 0.20927324386957916,
+          "upper_resistance": 0.060878756395000545
+        },
+        "scalar_central_dr": 0.20927324386957916,
+        "metadata_flags_include": [
+          "COMPLIANT_RACK_BRANCH_ONLY",
+          "NO_US_CALIBRATION",
+          "RISK_CATEGORY_I_SCREENING_DEFAULT",
+          "EAVE_BURIAL_UNCHECKED_NO_DEPTH_OR_CLEARANCE"
+        ]
+      },
+      "source": "closed-form equation fixture independent of the reference evaluator"
+    },
+    {
+      "test_id": "structure_swe150_no_ice_product_tracker",
+      "pathway_id": "snow_gravity_load",
+      "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "single_axis_tracker",
+        "snow_water_equivalent_peak_mm": 150,
+        "ice_component_basis": "not_in_hazard_product",
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 0.96,
+        "design_risk_category": "I"
+      },
+      "expected": {
+        "status": "conditional",
+        "axis_ratio": 1.5322890625,
+        "rack_population_branch": "compliant",
+        "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+        "scenario_drs": {
+          "central_screening": 0.5329072906419603,
+          "upper_resistance": 0.2558391717903985
+        },
+        "scalar_central_dr": 0.5329072906419603,
+        "metadata_flags_include": [
+          "ICE_COMPONENT_NOT_SUPPLIED_NO_GLAZE_SCENARIO",
+          "DESIGN_BASIS_ASSUMED_SITE_CODE",
+          "TRACKER_TRANSFER_FROM_FIXED_RACK_TESTS"
+        ]
+      },
+      "source": "closed-form equation fixture independent of the reference evaluator"
+    },
+    {
+      "test_id": "structure_swe120_ice12_glaze_separate_fixed",
+      "pathway_id": "snow_gravity_load",
+      "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 120,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 12,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 0.96
+      },
+      "expected": {
+        "status": "conditional",
+        "axis_ratio": 1.2258312500000001,
+        "rack_population_branch": "compliant",
+        "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+        "scenario_drs": {
+          "central_screening": 0.35061957645205416,
+          "upper_resistance": 0.13088017484522044
+        },
+        "scalar_central_dr": 0.35061957645205416,
+        "metadata_flags_include": [
+          "GLAZE_SEPARATE_UPPER_BOUND_NOT_SUMMED_WITH_SWE"
+        ],
+        "glaze_upper_bound_scenario": {
+          "horizontal_0_6": {
+            "glaze_plate_load_kpa": 0.1996390773841947,
+            "structure_ratio": 0.27507588925291376,
+            "scenario_drs": {
+              "central_screening": 0.0002280790391684384,
+              "upper_resistance": 1.0921276152098258e-05
+            }
+          },
+          "vertical_0_8": {
+            "glaze_plate_load_kpa": 0.2661854365122596,
+            "structure_ratio": 0.3667678523372184,
+            "scenario_drs": {
+              "central_screening": 0.0018429040860784341,
+              "upper_resistance": 0.00013463128357715792
+            }
+          }
+        }
+      },
+      "source": "closed-form equation fixture independent of the reference evaluator"
+    },
+    {
+      "test_id": "module_tracker_swe150_cascade",
+      "pathway_id": "snow_gravity_load",
+      "failure_unit_id": "WSS1_MODULE_FIELD_BREAKAGE",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_MODULE_FIELD_BREAKAGE",
+        "array_architecture": "single_axis_tracker",
+        "snow_water_equivalent_peak_mm": 150,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 0.96
+      },
+      "expected": {
+        "status": "conditional",
+        "axis_ratio": 1.5322890625,
+        "rack_population_branch": "compliant",
+        "curve_id": "WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES",
+        "axis_array_load_kpa": 1.11207411,
+        "scenario_drs": {
+          "lower_resistance": 0.47347830400769253,
+          "central_screening": 0.43193789064404947,
+          "upper_resistance": 0.20554143871074548
+        },
+        "scalar_central_dr": 0.43193789064404947,
+        "metadata_flags_include": [
+          "MODULE_SALVAGE_T4_ASSUMPTION",
+          "LOWER_EDGE_KNOCKDOWN_0_85_UNSOURCED",
+          "TILT_SHEDDING_NOT_MODELLED"
+        ]
+      },
+      "source": "closed-form equation fixture independent of the reference evaluator"
+    },
+    {
+      "test_id": "module_fixed_tilt_swe150_cascade",
+      "pathway_id": "snow_gravity_load",
+      "failure_unit_id": "WSS1_MODULE_FIELD_BREAKAGE",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_MODULE_FIELD_BREAKAGE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 150,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 0.96
+      },
+      "expected": {
+        "status": "conditional",
+        "axis_ratio": 1.5322890625,
+        "rack_population_branch": "compliant",
+        "curve_id": "WSS1_MODULE_FIXED_TILT_DIRECT_ORDERED_STATES",
+        "axis_array_load_kpa": 1.11207411,
+        "scenario_drs": {
+          "central_screening": 0.4298824617872763,
+          "upper_resistance": 0.20467134272656543
+        },
+        "scalar_central_dr": 0.4298824617872763,
+        "metadata_flags_include": [
+          "FIXED_TILT_MODULE_ANCHOR_IEC61215_UNCHECKED_T4",
+          "LOWER_EDGE_KNOCKDOWN_0_85_UNSOURCED"
+        ]
+      },
+      "source": "closed-form equation fixture independent of the reference evaluator"
+    },
+    {
+      "test_id": "module_tracker_minnesota_design_load_northern_flag",
+      "pathway_id": "snow_gravity_load",
+      "failure_unit_id": "WSS1_MODULE_FIELD_BREAKAGE",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_MODULE_FIELD_BREAKAGE",
+        "array_architecture": "single_axis_tracker",
+        "snow_water_equivalent_peak_mm": 243.71217490172486,
+        "ice_component_basis": "not_in_hazard_product",
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 2.39
+      },
+      "expected": {
+        "status": "conditional",
+        "axis_ratio": 1.0,
+        "rack_population_branch": "compliant",
+        "curve_id": "WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES",
+        "axis_array_load_kpa": 1.80684,
+        "scenario_drs": {
+          "lower_resistance": 0.7581339516746814,
+          "central_screening": 0.4649600667590823,
+          "upper_resistance": 0.17568398884065894
+        },
+        "scalar_central_dr": 0.4649600667590823,
+        "metadata_flags_include": [
+          "NORTHERN_DESIGN_MODULE_RESULT_UNVERIFIED"
+        ]
+      },
+      "source": "closed-form equation fixture independent of the reference evaluator"
+    },
+    {
+      "test_id": "module_tracker_direct_ratio_and_load",
+      "pathway_id": "snow_gravity_load",
+      "failure_unit_id": "WSS1_MODULE_FIELD_BREAKAGE",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_MODULE_FIELD_BREAKAGE",
+        "array_architecture": "single_axis_tracker",
+        "event_to_design_snow_demand_ratio": 0.8,
+        "array_snow_load_kpa": 2.0
+      },
+      "expected": {
+        "status": "conditional",
+        "axis_ratio": 0.8,
+        "rack_population_branch": "compliant",
+        "curve_id": "WSS1_MODULE_TRACKER_DIRECT_ORDERED_STATES",
+        "axis_array_load_kpa": 2.0,
+        "scenario_drs": {
+          "lower_resistance": 0.852160838453539,
+          "central_screening": 0.5629457996247048,
+          "upper_resistance": 0.255540187195697
+        },
+        "scalar_central_dr": 0.5629457996247048,
+        "metadata_flags_include": [
+          "MODULE_SALVAGE_T4_ASSUMPTION"
+        ]
+      },
+      "source": "closed-form equation fixture independent of the reference evaluator"
+    },
+    {
+      "test_id": "structure_tracker_project_rated_5psf",
+      "pathway_id": "snow_gravity_load",
+      "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "single_axis_tracker",
+        "snow_water_equivalent_peak_mm": 60,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "project_rated",
+        "racking_rated_array_snow_load_kpa": 0.2394
+      },
+      "expected": {
+        "status": "conditional",
+        "axis_ratio": 1.8581021052631579,
+        "rack_population_branch": "compliant",
+        "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+        "scenario_drs": {
+          "central_screening": 0.6863637622049095,
+          "upper_resistance": 0.3999382484013363
+        },
+        "scalar_central_dr": 0.6863637622049095,
+        "metadata_flags_include": [
+          "TRACKER_TRANSFER_FROM_FIXED_RACK_TESTS"
+        ]
+      },
+      "source": "closed-form equation fixture independent of the reference evaluator"
+    },
+    {
+      "test_id": "structure_zero_snow",
+      "pathway_id": "snow_gravity_load",
+      "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 0,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 0.96
+      },
+      "expected": {
+        "status": "conditional",
+        "axis_ratio": 0.0,
+        "rack_population_branch": "compliant",
+        "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+        "scenario_drs": {
+          "central_screening": 0.0,
+          "upper_resistance": 0.0
+        },
+        "scalar_central_dr": 0.0,
+        "metadata_flags_include": []
+      },
+      "source": "closed-form equation fixture independent of the reference evaluator"
+    },
+    {
+      "test_id": "structure_ratio_above_tested_flag",
+      "pathway_id": "snow_gravity_load",
+      "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "event_to_design_snow_demand_ratio": 3.5
+      },
+      "expected": {
+        "status": "conditional",
+        "axis_ratio": 3.5,
+        "rack_population_branch": "compliant",
+        "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+        "scenario_drs": {
+          "central_screening": 0.9649071421105945,
+          "upper_resistance": 0.8577590477607376
+        },
+        "scalar_central_dr": 0.9649071421105945,
+        "metadata_flags_include": [
+          "EVENT_TO_DESIGN_SNOW_DEMAND_RATIO_ABOVE_TESTED_RANGE"
+        ]
+      },
+      "source": "closed-form equation fixture independent of the reference evaluator"
+    },
+    {
+      "test_id": "structure_clearance_flag_depth_ge_clearance",
+      "pathway_id": "snow_gravity_load",
+      "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 150,
+        "ice_component_basis": "not_in_hazard_product",
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 0.96,
+        "snow_depth_m": 1.2,
+        "leading_edge_clearance_m": 0.8
+      },
+      "expected": {
+        "status": "conditional",
+        "axis_ratio": 1.5322890625,
+        "rack_population_branch": "compliant",
+        "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+        "scenario_drs": {
+          "central_screening": 0.5329072906419603,
+          "upper_resistance": 0.2558391717903985
+        },
+        "scalar_central_dr": 0.5329072906419603,
+        "metadata_flags_include": [
+          "EAVE_BURIAL_LIKELY_DEPTH_GE_CLEARANCE"
+        ]
+      },
+      "source": "closed-form equation fixture independent of the reference evaluator"
+    },
+    {
+      "test_id": "structure_under_designed_share_captured_no_effect",
+      "pathway_id": "snow_gravity_load",
+      "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 150,
+        "ice_component_basis": "not_in_hazard_product",
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 0.96,
+        "under_designed_share": 0.3
+      },
+      "expected": {
+        "status": "conditional",
+        "axis_ratio": 1.5322890625,
+        "rack_population_branch": "compliant",
+        "curve_id": "WSS1_SUPPORT_STRUCTURE_ORDERED_STATES",
+        "scenario_drs": {
+          "central_screening": 0.5329072906419603,
+          "upper_resistance": 0.2558391717903985
+        },
+        "scalar_central_dr": 0.5329072906419603,
+        "metadata_flags_include": [
+          "UNDER_DESIGNED_SHARE_CAPTURED_BRANCH_PARKED_NO_NUMERIC_EFFECT"
+        ]
+      },
+      "source": "closed-form equation fixture independent of the reference evaluator"
+    }
+  ],
+  "loss_assembly_known_answer_tests": [
+    {
+      "test_id": "loss_swe150_central_default_exposure",
+      "source_runtime_test_id": "module_tracker_swe150_cascade",
+      "input_values": {
+        "currency": "USD",
+        "price_year": 2024,
+        "value_unit": "currency_per_kwdc",
+        "module_value": 291.21485143992487,
+        "structure_value": 109.98972602739727,
+        "capacity_kwdc": 120000.0,
+        "support_pool_value": 189.59050092005725,
+        "plant_size_class": "large_ge_2000_kw"
+      },
+      "structure_dr_central": 0.5329072906419603,
+      "module_dr_central": 0.43193789064404947,
+      "expected": {
+        "exposed_fraction_used": 1.0,
+        "module_loss": 15094407.438621765,
+        "structure_loss": 7033719.227485414,
+        "direct_array_loss": 22128126.666107178,
+        "support_once_loss": 6385694.106568225,
+        "total_loss": 28513820.772675402
+      },
+      "expected_flags_include": [
+        "EXPOSED_FRACTION_SCREENING_DEFAULT_1_0"
+      ]
+    },
+    {
+      "test_id": "loss_swe150_central_explicit_half_exposure",
+      "source_runtime_test_id": "module_tracker_swe150_cascade",
+      "input_values": {
+        "currency": "USD",
+        "price_year": 2024,
+        "value_unit": "currency_per_kwdc",
+        "module_value": 291.21485143992487,
+        "structure_value": 109.98972602739727,
+        "capacity_kwdc": 120000.0,
+        "support_pool_value": 189.59050092005725,
+        "exposed_fraction": 0.5
+      },
+      "structure_dr_central": 0.5329072906419603,
+      "module_dr_central": 0.43193789064404947,
+      "expected": {
+        "exposed_fraction_used": 0.5,
+        "module_loss": 7547203.7193108825,
+        "structure_loss": 3516859.613742707,
+        "direct_array_loss": 11064063.333053589,
+        "support_once_loss": 3192847.0532841124,
+        "total_loss": 14256910.386337701
+      },
+      "expected_flags_include": []
+    }
+  ],
+  "loss_assembly_rejection_tests": [
+    {
+      "test_id": "loss_reject_missing_currency",
+      "input_values": {
+        "price_year": 2024,
+        "value_unit": "currency_per_kwdc",
+        "module_value": 291.21485143992487,
+        "structure_value": 109.98972602739727,
+        "capacity_kwdc": 120000.0,
+        "support_pool_value": 189.59050092005725
+      },
+      "expected_error_code": "EXPLICIT_VALUE_REQUIRED",
+      "notes": "Currency is part of the value basis."
+    },
+    {
+      "test_id": "loss_reject_bad_size_class",
+      "input_values": {
+        "currency": "USD",
+        "price_year": 2024,
+        "value_unit": "currency_per_kwdc",
+        "module_value": 291.21485143992487,
+        "structure_value": 109.98972602739727,
+        "capacity_kwdc": 120000.0,
+        "support_pool_value": 189.59050092005725,
+        "plant_size_class": "utility"
+      },
+      "expected_error_code": "CONDITIONER_VALUE_UNSUPPORTED",
+      "notes": "Size class must be one of the NITE classes or unknown."
+    },
+    {
+      "test_id": "loss_reject_exposure_above_one",
+      "input_values": {
+        "currency": "USD",
+        "price_year": 2024,
+        "value_unit": "currency_per_kwdc",
+        "module_value": 291.21485143992487,
+        "structure_value": 109.98972602739727,
+        "capacity_kwdc": 120000.0,
+        "support_pool_value": 189.59050092005725,
+        "exposed_fraction": 1.2
+      },
+      "expected_error_code": "EXPLICIT_VALUE_REQUIRED",
+      "notes": "Exposed fraction in [0, 1]."
+    }
+  ],
+  "contract_rejection_tests": [
+    {
+      "test_id": "reject_missing_pathway",
+      "input": {
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 100,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 1.0
+      },
+      "expected_error_code": "PATHWAY_ID_REQUIRED",
+      "notes": "Pathway has no default."
+    },
+    {
+      "test_id": "reject_deferred_ice_wind",
+      "input": {
+        "pathway_id": "ice_with_concurrent_wind",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 100,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 1.0
+      },
+      "expected_error_code": "PATHWAY_DEFERRED_NOT_IMPLEMENTED",
+      "notes": "Deferred pathway never falls back."
+    },
+    {
+      "test_id": "reject_unknown_pathway",
+      "input": {
+        "pathway_id": "hail_impact",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 100,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 1.0
+      },
+      "expected_error_code": "PATHWAY_ID_UNKNOWN",
+      "notes": "Neighbouring pathway rejected."
+    },
+    {
+      "test_id": "reject_missing_architecture",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "snow_water_equivalent_peak_mm": 100,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 1.0
+      },
+      "expected_error_code": "ARRAY_ARCHITECTURE_REQUIRED",
+      "notes": "Architecture has no default."
+    },
+    {
+      "test_id": "reject_roof_mount",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "roof_mount",
+        "snow_water_equivalent_peak_mm": 100,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 1.0
+      },
+      "expected_error_code": "ARRAY_ARCHITECTURE_UNSUPPORTED",
+      "notes": "Ground mount only."
+    },
+    {
+      "test_id": "reject_withheld_foundation",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_FOUNDATION",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 100,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 1.0
+      },
+      "expected_error_code": "NO_RUNTIME_CURVE_FOR_PATHWAY_UNIT",
+      "notes": "Withheld is not zero."
+    },
+    {
+      "test_id": "reject_unknown_unit",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "PV_INVERTER",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 100,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 1.0
+      },
+      "expected_error_code": "FAILURE_UNIT_ID_UNKNOWN",
+      "notes": "No alias mapping."
+    },
+    {
+      "test_id": "reject_snow_depth_mm_only",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 1.0,
+        "snow_depth_mm": 400
+      },
+      "expected_error_code": "SNOW_DEPTH_WITHOUT_SWE_UNSUPPORTED",
+      "notes": "Density unknown."
+    },
+    {
+      "test_id": "reject_snow_depth_m_only",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 1.0,
+        "snow_depth_m": 0.4
+      },
+      "expected_error_code": "SNOW_DEPTH_WITHOUT_SWE_UNSUPPORTED",
+      "notes": "Depth is for the clearance flag only."
+    },
+    {
+      "test_id": "reject_missing_ice_basis",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 100,
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 1.0
+      },
+      "expected_error_code": "ICE_COMPONENT_BASIS_REQUIRED",
+      "notes": "Ice scope must be explicit."
+    },
+    {
+      "test_id": "reject_missing_design_basis",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 100,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "design_ground_snow_load_kpa": 1.0
+      },
+      "expected_error_code": "RACKING_DESIGN_BASIS_REQUIRED",
+      "notes": "Design basis has no default."
+    },
+    {
+      "test_id": "reject_site_code_without_load",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 100,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed"
+      },
+      "expected_error_code": "DESIGN_SNOW_LOAD_REQUIRED",
+      "notes": "Denominator required."
+    },
+    {
+      "test_id": "reject_negative_swe",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": -5,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 1.0
+      },
+      "expected_error_code": "AXIS_OUTSIDE_VALID_RANGE",
+      "notes": "Non-negative demand."
+    },
+    {
+      "test_id": "reject_ratio_above_range",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 100,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 1.0,
+        "event_to_design_snow_demand_ratio": 4.5
+      },
+      "expected_error_code": "AXIS_OUTSIDE_VALID_RANGE",
+      "notes": "Withhold above 4.0."
+    },
+    {
+      "test_id": "reject_slope_factor_invalid",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 100,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 1.0,
+        "slope_factor_cs": 1.5
+      },
+      "expected_error_code": "CONDITIONER_VALUE_UNSUPPORTED",
+      "notes": "Cs in (0, 1]."
+    },
+    {
+      "test_id": "reject_under_designed_share_out_of_range",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 100,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 1.0,
+        "under_designed_share": 1.4
+      },
+      "expected_error_code": "CONDITIONER_VALUE_UNSUPPORTED",
+      "notes": "Share in [0, 1]."
+    },
+    {
+      "test_id": "reject_risk_category_invalid",
+      "input": {
+        "pathway_id": "snow_gravity_load",
+        "failure_unit_id": "WSS1_SUPPORT_STRUCTURE_COLLAPSE",
+        "array_architecture": "fixed_tilt_ground_mount",
+        "snow_water_equivalent_peak_mm": 100,
+        "ice_component_basis": "supplied",
+        "ice_radial_thickness_mm": 0,
+        "racking_design_basis": "site_code_assumed",
+        "design_ground_snow_load_kpa": 1.0,
+        "design_risk_category": "IV"
+      },
+      "expected_error_code": "CONDITIONER_VALUE_UNSUPPORTED",
+      "notes": "I, II or unknown."
+    }
+  ]
+}

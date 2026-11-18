@@ -1,0 +1,132 @@
+{
+  "schema_version": "capability_declaration.v3",
+  "cell_id": "winter_storm_solar",
+  "canonical_runtime_artifact": false,
+  "pathway_capabilities": [
+    {
+      "pathway_id": "snow_gravity_load",
+      "failure_unit_scalar_dr": "conditional",
+      "scenario_loss_given_value_basis": "conditional",
+      "curve_intrinsic_spread": "nonprobabilistic_epistemic_envelope",
+      "populated_emit_modes": [
+        "scalar_mean_plus_bounds",
+        "state_ensemble"
+      ],
+      "conditions": [
+        "pathway_id snow_gravity_load and a supported ground-mount architecture supplied (selects the module curve)",
+        "snowpack water equivalent (not depth) supplied with an explicit ice_component_basis, or a direct demand ratio",
+        "racking design basis declared: site_code_assumed with the cell design ground snow load (Risk Category I map by default), or project_rated",
+        "evaluated on the compliant rack branch only; under_designed_share is captured with no numeric effect",
+        "glaze is returned as a separate flagged upper-bound scenario and is never summed with SWE",
+        "module and structure values supplied for monetary loss; exposed fraction defaults to 1.0 (flagged)",
+        "module breakage conditional on rack survival; support allocation applied once"
+      ],
+      "limitation_flags": [
+        "SCREENING_ENGINEERING_PROXY",
+        "NONPROBABILISTIC_EPISTEMIC_ENVELOPE",
+        "COMPOUND_UNCERTAINTY_NOT_PROPAGATED",
+        "STRUCTURE_PRIOR_FROM_SIX_WIND_DOWNFORCE_TESTS_AND_ONE_SNOW_TEST",
+        "STRUCTURE_TEST_RATIO_AND_SPREAD_T4_JUDGMENT",
+        "COMPLIANT_RACK_BRANCH_ONLY",
+        "UNDER_DESIGNED_BRANCH_PARKED_NO_DEFAULT_SHARE",
+        "JAPANESE_TO_ASCE_DESIGN_LOAD_MAPPING_UNRESOLVED",
+        "TRACKER_TRANSFER_FROM_FIXED_RACK_TESTS",
+        "FIXED_TILT_MODULE_ANCHOR_IEC61215_UNCHECKED_T4",
+        "LOWER_EDGE_KNOCKDOWN_0_85_UNSOURCED",
+        "TILT_SHEDDING_NOT_MODELLED",
+        "NORTHERN_DESIGN_MODULE_RESULT_UNVERIFIED",
+        "GLAZE_SEPARATE_UPPER_BOUND_NOT_SUMMED_WITH_SWE",
+        "EXPOSED_FRACTION_SCREENING_DEFAULT_1_0",
+        "SNOW_STOW_AND_SNOW_REMOVAL_NO_CREDIT",
+        "MODULE_SALVAGE_T4_ASSUMPTION",
+        "NO_US_CALIBRATION",
+        "FULL_PLANT_PHYSICAL_LOSS_INCOMPLETE"
+      ],
+      "withheld_failure_units": [
+        {
+          "failure_unit_id": "WSS1_FOUNDATION",
+          "reason_codes": [
+            "NO_SNOW_LOAD_FOUNDATION_RESPONSE_EVIDENCE",
+            "FROST_HEAVE_IS_SEPARATE_CHRONIC_PATHWAY"
+          ]
+        },
+        {
+          "failure_unit_id": "WSS1_POWER_CONVERSION_AND_ELECTRICAL",
+          "reason_codes": [
+            "NO_SNOW_LOAD_RESPONSE_EVIDENCE",
+            "ICE_ON_YARD_EQUIPMENT_IS_SEPARATE_PATHWAY"
+          ]
+        },
+        {
+          "failure_unit_id": "WSS1_SCADA_COMMUNICATIONS",
+          "reason_codes": [
+            "NO_SNOW_LOAD_RESPONSE_EVIDENCE"
+          ]
+        },
+        {
+          "failure_unit_id": "WSS1_CIVIL_INFRA",
+          "reason_codes": [
+            "MIXED_ASSET_BUCKET_REQUIRES_SPLIT",
+            "BUILDING_ROOF_SNOW_IS_SEPARATE_ASSET_CLASS"
+          ]
+        },
+        {
+          "failure_unit_id": "WSS1_REPLACEMENT_SUPPORT",
+          "reason_codes": [
+            "ALLOCATION_ONLY_NO_INTRINSIC_DR",
+            "ALLOCATE_ONCE_AFTER_DIRECT_DAMAGE"
+          ]
+        }
+      ]
+    }
+  ],
+  "consumer_annual_metrics": {
+    "computation_owner": "downstream_consumer",
+    "status_before_promotion": "withheld_noncanonical_proposal",
+    "status_after_promotion": "consumer_computable_from_validated_frequency_intensity_coupling_value_and_cap_model",
+    "prerequisites": [
+      "canonical promotion and exact model/docs/schema/SHA pin",
+      "winter event catalog with peak snowpack SWE, ice thickness and parent event_family_id",
+      "per-cell design snow load (ASCE 7-22 Risk Category I map for racks by default)",
+      "SWE product named (ERA5 or ERA5-Land) before any glaze is combined with SWE",
+      "architecture-aware exposure and value basis",
+      "consumer cap-binding validation"
+    ],
+    "limitation_flags": [
+      "FREQUENCY_DRIVEN_TAIL_IS_CONSUMER_OWNED",
+      "ENGINEERING_SCENARIOS_ARE_NOT_A_PROBABILITY_DISTRIBUTION",
+      "FULL_PLANT_LOSS_REQUIRES_SEPARATELY_QUALIFIED_FAILURE_UNITS",
+      "COMPOUND_UNCERTAINTY_NOT_PROPAGATED"
+    ]
+  },
+  "cap_binding": {
+    "policy": "consumer_enforced_fail_closed",
+    "enforcement_owner": "downstream_consumer",
+    "checks_required": [
+      "exact model/docs/schema/SHA pin",
+      "pathway and architecture match",
+      "SWE and ice basis provenance",
+      "declared racking design basis and risk category",
+      "glaze scenario never summed with SWE",
+      "module-structure cascade applied once",
+      "support costs not embedded and re-added",
+      "withheld units remain null"
+    ],
+    "action_if_fail": "withhold the affected DR, loss, or annual metric; do not substitute another winter, wind or asset pathway"
+  },
+  "promotion_gate": {
+    "status": "blocked",
+    "required_before_canonical_use": [
+      "independent engineering review of axis, bridge, scenarios, cascade and glaze bracket",
+      "NEDO/JPEA answer on which load governed each tested rack (query drafted, not sent)",
+      "a source for the under-designed share and its capacity, or an owner decision to keep the branch parked",
+      "ASCE 7-22 Ch.7 and Ch.10, the ASCE 2025 ground-mount snow guidance and IEC 61215-2 / IEC 62938 read",
+      "a source for the 0.85 lower-edge knock-down or a depth-and-clearance input",
+      "SWE product named by Hazard (ERA5 or ERA5-Land) and snow depth / clearance available",
+      "US field, forensic or claims evidence",
+      "Hazard dual-read and rejection-path tests",
+      "owner decision on the model v0.2 label (renamed from docs r2 on 17 Nov) (CHANGE_CLASSIFICATION model v0.2)",
+      "explicit maintainer promotion decision and atomic registry/index/changelog update"
+    ]
+  }
+}
