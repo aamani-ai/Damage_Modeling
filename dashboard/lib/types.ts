@@ -47,6 +47,15 @@ export interface Tile {
   aria_label: string; href: string;
   /** G16: the one word a tile carries (the weaker half's), and both halves in words for its tooltip */
   word: string | null; halves: string | null;
+  team?: TeamCell;
+}
+
+export type TeamColor = "white" | "yellow" | "green" | "red" | "not_counted";
+export interface TeamCell {
+  color: Exclude<TeamColor, "not_counted">;
+  agreed: number; total: number; agreed_value: number | null; problem: string | null;
+  rows: { key: string; label: string; share: number | null; wording: string; source: string | null;
+          color: TeamColor; curves: { id: string; color: TeamColor; source: string | null }[] }[];
 }
 
 export interface BuildCheck { id: string; name: string; ok: boolean; severity: "hard" | "data"; summary: string }

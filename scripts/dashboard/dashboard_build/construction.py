@@ -326,6 +326,7 @@ def legend(cat_text: str) -> dict[str, Any]:
               if SHOW_FIELD_REPORTS else []),
             {"key": "value", "word": "Value covered", "meaning": "The asset's value is split into its subsystems (for solar: PV modules, mounting, inverters, labour and so on), using its value budget: the NREL cost ledger for solar and wind, Hazard's reference budgets for the battery and the substation, none yet for buildings. Value covered is the share of that value in subsystems this hazard's curves price. It measures coverage only: Hazard's loss multiplies each curve by its own value on its own plant, which can differ. The parts are under Value covered below."},
             {"key": "review", "word": "Read by", "meaning": "Whether a person has reviewed this entry, or only an agent has read it."},
+            {"key": "team", "word": "Team view", "meaning": "How far Damage and Hazard have agreed on the curves or calls for each subsystem. White means no team review is recorded, yellow means work is in progress, green means both teams agreed, and red means both teams agreed it is wrong with no fix ready."},
         ],
         "marks": [
             {"key": "solid", "word": "Solid border, filled", "meaning": "A live curve: the platform can use it."},

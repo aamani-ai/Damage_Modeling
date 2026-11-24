@@ -5,14 +5,31 @@
 // what exists and how sure we are in words (G16, DCD-D28): one word, the weaker half's — both halves on hover. One
 // lens at a time in the URL; arrow keys move between tiles.
 import Link from "next/link";
-import { useRef } from "react";
+import { Fragment, useRef, useState } from "react";
 import { fmtPct } from "@/lib/format";
 import { useUrlParam } from "@/lib/url-state";
-import type { LibraryTile, ManifestV3, ValueSplit } from "@/lib/types";
+import type { LibraryTile, ManifestV3, TeamCell, TeamColor, ValueSplit } from "@/lib/types";
 import { InfoHint } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
-const LENS_LABEL: Record<string, string> = { evidence: "Status / Evidence", occurrence: "Field reports", value: "Value covered", review: "Read by" };
+const LENS_LABEL: Record<string, string> = { evidence: "Status / Evidence", occurrence: "Field reports", value: "Value covered", review: "Read by", team: "Team view" };
+const TEAM_WORD: Record<TeamColor, string> = { white: "not in review yet", yellow: "in progress", green: "agreed by both", red: "agreed wrong", not_counted: "not counted" };
+const TEAM_TILE: Record<Exclude<TeamColor, "not_counted">, string> = {
+  white: "border-[#B8C1BC] bg-[#FFFFFF] text-[#17251D]",
+  yellow: "border-[#D4A017] bg-[#D4A017] text-[#17251D]",
+  green: "border-[#1F6E43] bg-[#1F6E43] text-white",
+  red: "border-[#A3302F] bg-[#A3302F] text-white",
+};
+function teamPct(value: number, digits = 0): string {
+  return `${(value * 100).toFixed(digits).replace(/\.0$/, "")}%`;
+}
+function teamSource(source: string | null): string {
+  if (!source) return "none";
+  const file = source.split("/").at(-1) ?? source;
+  if (source.includes("hail_solar_curve_derivation_dossier")) return source.includes("§15") ? "hail solar dossier §15" : "hail solar dossier §16";
+  if (source.includes("Hail_Solar_Coverage")) return `hail solar workbook · ${source.split(" · ").at(-1)}`;
+  return file;
+}
 const STATUS_WORD: Record<string, string> = { live: "live", proposal: "proposal", reused: "reused", gap: "no curve yet" };
 // a tile's status is its shade, in every view: live white, proposal grey, reused dashed, no curve yet dark grey
 const STATUS_TILE: Record<string, string> = {
@@ -45,7 +62,7 @@ function second(t: LibraryTile, lens: string): string {
   return t.word ?? "no tier stated";
 }
 
-function TileBox({ t, lens, tabIndex, onKey, rc }: { t: LibraryTile; lens: string; tabIndex?: number; onKey?: (e: React.KeyboardEvent<HTMLAnchorElement>) => void; rc?: string }) {
+function TileBox({ t, lens, tabIndex, onKey, rc }: { t: LibraryTile; lens: string; tabIndex?: number; onKey?: (e: React.KeyboardEvent<HTMLElement>) => void; rc?: string }) {
   const gap = t.status === "gap";
   const title = [t.summary, t.halves, lens === "value" && t.value_split ? valueWords(t.value_split, true) : null, t.building_parts?.length ? `${t.building} rows: ${t.building_parts.join(", ")}` : null].filter(Boolean).join("\n");
   return (
@@ -68,6 +85,42 @@ function TileBox({ t, lens, tabIndex, onKey, rc }: { t: LibraryTile; lens: strin
   );
 }
 
+function TeamTile({ t, team, open, onClick, rc, tabIndex, onKey }: { t: LibraryTile; team: TeamCell; open: boolean; onClick: () => void; rc: string; tabIndex: number; onKey: (e: React.KeyboardEvent<HTMLElement>) => void }) {
+  const priced = t.value_split && "priced" in t.value_split ? t.value_split.priced : null;
+  const detail = team.color === "white" ? `Damage curve: ${priced == null ? "unknown" : teamPct(priced)}`
+    : team.color === "yellow" ? `${team.agreed} of ${team.total} agreed · ${team.agreed_value == null ? "unknown" : teamPct(team.agreed_value)} of value`
+    : team.color === "red" ? `problem: ${team.problem ?? "unknown"}` : null;
+  return <button type="button" data-rc={rc} tabIndex={tabIndex} onKeyDown={onKey} onClick={onClick} aria-expanded={open}
+    aria-label={`${t.title}: ${TEAM_WORD[team.color]}. Open subsystem review.`}
+    className={`flex h-[52px] w-full flex-col justify-center rounded-md border px-2 text-left hover:brightness-95 ${TEAM_TILE[team.color]}`}>
+    <span className="truncate text-[12px] font-semibold">{TEAM_WORD[team.color]}{team.color === "white" ? "" : " ▾"}</span>
+    {detail ? <span className="truncate text-[11px]">{detail}</span> : null}
+  </button>;
+}
+
+function TeamPanel({ team, title, href }: { team: TeamCell; title: string; href: string }) {
+  const [open, setOpen] = useState<string | null>(null);
+  return <div className="rounded-md border border-border bg-card p-3 text-[12px]">
+    <div className="mb-2 flex items-center justify-between"><strong>{title}</strong><Link href={href} className="text-accent underline">Open Damage cell</Link></div>
+    <div className="grid grid-cols-[minmax(150px,1.2fr)_90px_minmax(250px,2fr)_120px] gap-x-3 border-b border-border pb-1 font-semibold">
+      <span>Subsystem</span><span>Share</span><span>What the Damage cell says · where</span><span>Color</span>
+    </div>
+    {team.rows.map((row) => <Fragment key={row.key}>
+      <div className="grid grid-cols-[minmax(150px,1.2fr)_90px_minmax(250px,2fr)_120px] gap-x-3 border-b border-border/60 py-1.5">
+        <span>{row.curves.length ? <button type="button" onClick={() => setOpen(open === row.key ? null : row.key)} aria-expanded={open === row.key} className="text-left hover:underline">{row.label} ▾</button> : row.label}</span>
+        <span>{row.share == null ? "unknown" : teamPct(row.share, 1)}</span>
+        <span title={row.source ?? "none"}>{row.wording} · {teamSource(row.source)}</span>
+        <span><span className={`rounded border px-1.5 py-0.5 ${row.color === "not_counted" ? "border-gray-200 bg-gray-200 text-gray-700" : TEAM_TILE[row.color]}`}>{TEAM_WORD[row.color]}</span></span>
+      </div>
+      {open === row.key && row.curves.map((curve) => <div key={curve.id} className="grid grid-cols-[minmax(150px,1.2fr)_90px_minmax(250px,2fr)_120px] gap-x-3 border-b border-border/40 bg-muted/30 py-1 pl-4">
+        <Link href={`${href}/curves/${curve.id}`} className="break-all text-accent hover:underline">{curve.id}</Link>
+        <span>{row.curves.length > 1 ? "alternative" : row.share == null ? "unknown" : teamPct(row.share, 1)}</span><span title={curve.source ?? "none"}>Curve record · {teamSource(curve.source)}</span>
+        <span><span className={`rounded border px-1.5 py-0.5 ${TEAM_TILE[curve.color === "not_counted" ? "white" : curve.color]}`}>{TEAM_WORD[curve.color]}</span></span>
+      </div>)}
+    </Fragment>)}
+  </div>;
+}
+
 // An asset page's curves: one tile per hazard, the library's own tile (Status / Evidence view) under the hazard's name.
 export function CurveTiles({ tiles, hazards }: { tiles: Record<string, LibraryTile>; hazards: { slug: string; label: string }[] }) {
   const shown = hazards.filter((h) => tiles[h.slug]);
@@ -85,6 +138,7 @@ export function CurveTiles({ tiles, hazards }: { tiles: Record<string, LibraryTi
 
 export function Library({ m }: { m: ManifestV3 }) {
   const [lensParam, setLensParam] = useUrlParam("lens");
+  const [openTeam, setOpenTeam] = useState<string | null>(null);
   // the status is the tile's first line and shade in every view, so the views are only for the second line
   const lenses = m.lenses.filter((l) => l !== "status" && (SHOW_FIELD_REPORTS || l !== "occurrence"));
   const lens = lenses.includes(lensParam ?? "") ? (lensParam as string) : "evidence";
@@ -94,7 +148,7 @@ export function Library({ m }: { m: ManifestV3 }) {
   const grid = useRef<HTMLDivElement>(null);
   const cats = m.library.filter((c) => c.types.length);
   const rowsFlat = cats.flatMap((c) => c.types);
-  const onKey = (r: number, c: number) => (e: React.KeyboardEvent<HTMLAnchorElement>) => {
+  const onKey = (r: number, c: number) => (e: React.KeyboardEvent<HTMLElement>) => {
     const d: Record<string, [number, number]> = { ArrowRight: [0, 1], ArrowLeft: [0, -1], ArrowDown: [1, 0], ArrowUp: [-1, 0] };
     const mv = d[e.key];
     if (!mv) return;
@@ -120,12 +174,12 @@ export function Library({ m }: { m: ManifestV3 }) {
         </div>
         <InfoHint label="How to read a tile">
           {/* the words themselves are in "What the words mean" above; this says only how to use the grid */}
-          <div className="space-y-1">
+          {lens === "team" ? <div>Click a tile to see its subsystems. Click a subsystem to see its curves. Replacement support and fieldwork is listed but not counted.</div> : <div className="space-y-1">
             <div>A tile&apos;s first line and shade say what exists; the second line is the view chosen here.</div>
             <div>Hover a tile for both halves of its evidence: <span className="italic">damage at each hazard level</span> and <span className="italic">the dollar value it is applied to</span>.</div>
-          </div>
+          </div>}
         </InfoHint>
-        <span className="ml-auto text-muted-foreground">a type&apos;s name opens what its curves cover · a tile opens the curve</span>
+        <span className="ml-auto text-muted-foreground">{lens === "team" ? "a type's name opens what its curves cover · a tile opens the team review" : "a type's name opens what its curves cover · a tile opens the curve"}</span>
       </div>
       <div ref={grid} role="grid" aria-label="Damage-curve library: asset types by hazard" className="mt-2 overflow-x-auto">
         <div className="grid min-w-[860px] gap-1" style={{ gridTemplateColumns: `200px repeat(${hazards.length}, minmax(128px, 1fr))` }}>
@@ -144,7 +198,8 @@ export function Library({ m }: { m: ManifestV3 }) {
               {c.types.map((t) => {
                 const r = rowsFlat.indexOf(t);
                 return (
-                  <div key={t.slug} role="row" className="contents">
+                  <Fragment key={t.slug}>
+                  <div role="row" className="contents">
                     <div role="rowheader" className="flex flex-col justify-center px-2 leading-tight">
                       <Link href={t.href} className="text-[13px] font-medium hover:text-accent hover:underline" title={t.profile ?? `Open ${t.label}`}>{t.label}</Link>
                       {t.building ? <span className="text-[11.5px] text-muted-foreground">{t.building.toLowerCase()}</span> : null}
@@ -154,7 +209,8 @@ export function Library({ m }: { m: ManifestV3 }) {
                       return (
                         <div key={h.slug} role="gridcell" className="contents">
                           {tile ? (
-                            <TileBox t={tile} lens={lens} rc={`${r}-${ci}`} tabIndex={r === 0 && ci === 0 ? 0 : -1} onKey={onKey(r, ci)} />
+                            lens === "team" && tile.team ? <TeamTile t={tile} team={tile.team} open={openTeam === `${r}-${ci}`} onClick={() => setOpenTeam(openTeam === `${r}-${ci}` ? null : `${r}-${ci}`)} rc={`${r}-${ci}`} tabIndex={r === 0 && ci === 0 ? 0 : -1} onKey={onKey(r, ci)} />
+                            : <TileBox t={tile} lens={lens} rc={`${r}-${ci}`} tabIndex={r === 0 && ci === 0 ? 0 : -1} onKey={onKey(r, ci)} />
                           ) : (
                             <span className="flex h-[52px] items-center justify-center rounded-md border border-dashed border-border/60 text-[11.5px] text-muted-foreground">no entry</span>
                           )}
@@ -162,6 +218,12 @@ export function Library({ m }: { m: ManifestV3 }) {
                       );
                     })}
                   </div>
+                  {lens === "team" && openTeam?.startsWith(`${r}-`) ? (() => {
+                    const h = hazards[Number(openTeam.split("-")[1])];
+                    const tile = t.tiles[h?.slug];
+                    return tile?.team ? <div role="row" className="col-span-full"><TeamPanel team={tile.team} title={tile.title} href={tile.href} /></div> : null;
+                  })() : null}
+                  </Fragment>
                 );
               })}
             </div>

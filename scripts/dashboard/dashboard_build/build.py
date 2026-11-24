@@ -12,6 +12,7 @@ from . import chain as chain_mod
 from . import hazard_main
 from . import hazard_use
 from . import research
+from . import team
 from .plain_reasons import plain as plain_reason, source_doc, unit_name
 from . import twin as twin_mod
 from .catalogue import Entry, curve_records, load_entries
@@ -681,7 +682,7 @@ def build(write: bool = True) -> dict[str, Any]:
         "tier_words": TIER_SHORT, "tier_plain": TIER_PLAIN, "tier_meaning": TIER_MEANING,
         "stations": [{"id": s["id"], "label": s["label"], "gate": s["gate"], "name": STATION_NAMES[s["id"]][0], "meaning": STATION_NAMES[s["id"]][1]} for s in chain_mod.STATIONS],
         "no_link_words": NO_LINK, "not_yet_extracted_sentence": NOT_YET_EXTRACTED,
-        "lenses": ["status", "evidence", *(["occurrence"] if SHOW_FIELD_REPORTS else []), "value", "review"],
+        "lenses": ["status", "evidence", *(["occurrence"] if SHOW_FIELD_REPORTS else []), "value", "review", "team"],
         "repo": {"url": REPO_URL, "blob": f"{REPO_URL}/blob/main"},
     }
     # ─── the spine (G13/G14): coverage per asset type, the nav, the library rows ───
@@ -1023,6 +1024,7 @@ def build(write: bool = True) -> dict[str, Any]:
             for t_ in t_row["tiles"].values():
                 if t_.get("entry_id") in split_by_id:
                     t_["value_split"] = split_by_id[t_["entry_id"]]
+    team.build(assets_out, tiles, manifest["library"])
     # ─── occurrence pages ───
     occurrence_out: dict[tuple[str, str], dict[str, Any]] = {}
     for (aslug, hslug), r in registers.items():
@@ -1217,7 +1219,7 @@ def _dump(path, obj) -> str:
 def _write_all(manifest, cells, curves, assets, occurrence, citations, receipt, twin, sub_budget=None, sub_xwalk=None, coverage=None, faq=None) -> None:
     if OUT.exists():
         for child in OUT.iterdir():
-            if child.name in ("README.md", ".gitkeep", "twin"):  # twin/ is an input: the twin export (scripts/dashboard/export_twin.mjs)
+            if child.name in ("README.md", ".gitkeep", "twin", "team_review.json"):  # twin/ and team_review.json are inputs
                 continue
             shutil.rmtree(child) if child.is_dir() else child.unlink()
     written: dict[str, str] = {}
