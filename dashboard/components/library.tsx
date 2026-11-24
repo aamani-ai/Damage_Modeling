@@ -119,17 +119,19 @@ function TeamPanel({ team, title, href, repo, commit }: { team: TeamCell; title:
       <span>Subsystem</span><span>Share</span><span>Damage and curve status · cell wording</span><span>Color</span>
     </div>
     {team.rows.map((row) => <Fragment key={row.key}>
-      <div className="grid grid-cols-[minmax(150px,1.2fr)_90px_minmax(250px,2fr)_120px] gap-x-3 border-b border-border/60 py-1.5">
-        <span>{row.curves.length ? <button type="button" onClick={() => setOpen(open === row.key ? null : row.key)} aria-expanded={open === row.key} className="text-left hover:underline">{row.label} ▾</button> : row.label}</span>
-        <span>{row.share == null ? "unknown" : teamPct(row.share, 1)}</span>
-        <span><span className="block font-medium">{DAMAGE_CALL[row.damage_call]}</span>
-          <span className="block text-[11px] text-muted-foreground">Cell wording: {teamSourceUrl(repo, commit, row.source)
-            ? <a href={teamSourceUrl(repo, commit, row.source)!} target="_blank" rel="noopener noreferrer" title={row.source ?? undefined} className="text-accent underline hover:text-accent/80">{row.wording}</a>
-            : row.wording}</span></span>
-        <span><span className={`rounded border px-1.5 py-0.5 ${row.color === "not_counted" ? "border-gray-200 bg-gray-200 text-gray-700" : TEAM_TILE[row.color]}`}>{TEAM_WORD[row.color]}</span></span>
+      <div className="grid grid-cols-[minmax(150px,1.2fr)_90px_minmax(250px,2fr)_120px] items-center gap-x-3 border-b border-border/60 py-1.5">
+        <span className="min-w-0 truncate" title={row.label}>{row.curves.length ? <button type="button" onClick={() => setOpen(open === row.key ? null : row.key)} aria-expanded={open === row.key} className="max-w-full truncate text-left hover:underline">{row.label} ▾</button> : row.label}</span>
+        <span className="whitespace-nowrap">{row.share == null ? "unknown" : teamPct(row.share, 1)}</span>
+        <span className="flex min-w-0 items-baseline gap-1 overflow-hidden whitespace-nowrap" title={`${DAMAGE_CALL[row.damage_call]} · ${row.wording}`}>
+          <span className="shrink-0 font-medium">{DAMAGE_CALL[row.damage_call]}</span><span aria-hidden="true">·</span>
+          {teamSourceUrl(repo, commit, row.source)
+            ? <a href={teamSourceUrl(repo, commit, row.source)!} target="_blank" rel="noopener noreferrer" className="min-w-0 truncate text-accent underline hover:text-accent/80">{row.wording}</a>
+            : <span className="min-w-0 truncate text-muted-foreground">{row.wording}</span>}
+        </span>
+        <span className="whitespace-nowrap"><span className={`rounded border px-1.5 py-0.5 ${row.color === "not_counted" ? "border-gray-200 bg-gray-200 text-gray-700" : TEAM_TILE[row.color]}`}>{TEAM_WORD[row.color]}</span></span>
       </div>
       {open === row.key && row.curves.map((curve) => <div key={curve.id} className="grid grid-cols-[minmax(150px,1.2fr)_90px_minmax(250px,2fr)_120px] gap-x-3 border-b border-border/40 bg-muted/30 py-1 pl-4">
-        <Link href={`${href}/curves/${curve.id}`} className="break-all text-accent hover:underline">{curve.id}</Link>
+        <Link href={`${href}/curves/${curve.id}`} title={curve.id} className="min-w-0 truncate text-accent hover:underline">{curve.id}</Link>
         <span>{row.curves.length > 1 ? "alternative" : row.share == null ? "unknown" : teamPct(row.share, 1)}</span>
         <span>{teamSourceUrl(repo, commit, curve.source)
           ? <a href={teamSourceUrl(repo, commit, curve.source)!} target="_blank" rel="noopener noreferrer" title={curve.source ?? undefined} className="text-accent underline hover:text-accent/80">Curve record</a>

@@ -27,7 +27,8 @@ Open <http://localhost:3211/?lens=team>. The built data are committed, so the Py
 - In the Team lens, the tile body opens the cell page and a separate triangle opens the subsystem panel. Sourced statements in the panel use their own wording as the GitHub link text; the link targets the exact repository file, with a line anchor where available. Rows without a source remain plain text.
 - Real estate Team panels now follow their matrix row: Residential shows house subsystems, Commercial shows office subsystems, and Industrial shows warehouse subsystems. Each tile's Team rollup uses only those visible rows.
 - Team view is the first and default library lens. Its panel leads each subsystem with a damage/curve call, then links the cell's own wording; gaps say possible or unknown unless the cell explicitly assumes no direct damage. Green says `agreed`. The Team color meanings appear in `What the words mean` while Team view is active. Building tiles say `No value budget` when a curve-value percentage cannot be computed.
-- Screenshots are in `dashboard/screenshots/team-view/`: `matrix.jpg`, `hail-solar-subsystems.jpg`, `pv-module-curves.jpg`, `real-estate-residential.jpg`, and `wording-and-colors.jpg`.
+- Team subsystem rows keep the damage/curve call and linked cell wording on one visible line. Long wording is shortened with an ellipsis; hovering reveals the full statement.
+- Screenshots are in `dashboard/screenshots/team-view/`: `matrix.jpg`, `hail-solar-subsystems.jpg`, `pv-module-curves.jpg`, `real-estate-residential.jpg`, `wording-and-colors.jpg`, and `compact-subsystems.jpg`.
 
 ## Open points
 
