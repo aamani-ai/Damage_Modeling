@@ -225,8 +225,8 @@ def select_hail_record(
 def validate_hail_known_answers(artifact: dict) -> tuple[int, int, int]:
     kat_path = ROOT / artifact["known_answer_tests"]
     tests = load(kat_path)
-    require(tests["semantic_damage_model_version"] == "model v1.0", "hail model changed")
-    require(tests["documentation_revision"] == "docs r7", "hail KAT docs mismatch")
+    require(tests["semantic_damage_model_version"] == artifact["semantic_damage_model_version"], "hail KAT model mismatch")
+    require(tests["documentation_revision"] == artifact["documentation_revision"], "hail KAT docs mismatch")
     tolerance = tests["absolute_tolerance"]
     records_by_selector = {
         record["selector_match"]["module_archetype"]: record

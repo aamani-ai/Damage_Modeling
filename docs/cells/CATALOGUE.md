@@ -1,7 +1,7 @@
 ---
 author: owner-directed (JL) · agent-drafted
 created: 2026-10-19
-updated: 2026-10-19
+updated: 2026-11-24
 status: draft
 ---
 
@@ -55,7 +55,7 @@ Cell text: status · shape tier / cost tier. *Partial* means some parts of the a
 
 | Cell | Status | Version | Method | Curves | Shape | Cost | Outside checks |
 |---|---|---|---|---:|---|---|---|
-| [Hail](#hail-solar) | Live | model v1.0, docs r7 | Fitted to data | 3 | T2 | T2 | 1 |
+| [Hail](#hail-solar) | Live | model v1.1, docs r10 | Fitted to data | 3 | T2 | T2 | 2 |
 | [Flood](#flood-solar) | Live | model v1.0, docs r4 | Built from references | 8 | T3–T4 | T3–T4 | 1 |
 | [Hurricane wind](#tropical-cyclone-wind-solar) | Live | model v2.1, docs r2 | Built from references | 10 | T3–T4 | T4 | 1 |
 | [Convective wind](#strong-wind-solar) | Live | model v1.0, docs r3 | Built from references | 5 | T4 | T4 | none yet |
@@ -107,11 +107,11 @@ Cell text: status · shape tier / cost tier. *Partial* means some parts of the a
 
 ### Solar farm × Hail
 
-**Live** · model v1.0, docs r7 · `hail_solar` · [curve file](hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json) · 2026-10-19: Agent-drafted, from the cell's own tier table, value profiles and capability declaration
+**Live** · model v1.1, docs r10 · `hail_solar` · [curve file](hail_solar/current/hail_solar__model_v1_1__docs_r10__curve_artifact.json) · 2026-11-24: Agent-drafted, from the cell's own tier table, value profiles and capability declaration
 
 **Input:** MESH-equivalent maximum hail diameter (mm; inches are converted), 0 to 100 mm (clamp or warn)
 
-**Method:** Fitted to data. Logistic curves per module type fitted to public PVEL/Kiwa hail-test breakage anchors and the IEC baseline; glass-breakage probability used as the module replacement ratio.
+**Method:** Fitted to data. Logistic curves per module type fitted to public PVEL/Kiwa hail-test breakage results and the IEC baseline; glass-breakage probability used as the module replacement ratio. docs r10 (24 Nov 2026): the default 3.2 mm curve refit to PVEL 2023-2026 (D50 51.5653 mm, slope 0.303422/mm).
 
 | Part | Curves | Variants | Shape | Cost | Notes |
 |---|---|---|---|---|---|
@@ -151,6 +151,7 @@ Cell text: status · shape tier / cost tier. *Partial* means some parts of the a
 **Outside checks**
 
 - Result check, Hazard repo: Financial range check (Hazard repo): industry loss figures for solar hail ([link](https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/data_sources/financial_range_solar_hail/profile.md))
+- Result check, Hazard repo: Default-curve refit and plant check (Hazard repo, 24 Nov 2026) ([link](https://github.com/aamani-ai/Hazard_Modeling/blob/main/docs/hazards/hail/implementation/solar/deep/evidence/2026-11-24_damage_band/README.md))
 
 **Open items**
 

@@ -5,10 +5,12 @@ Hazard M3 should use for hail x solar.
 
 ## Short Answer
 
-The current solar hail curve is the `hail_solar` cell's canonical runtime artifact:
+The current solar hail curve is the `hail_solar` cell's canonical runtime artifact (docs r10, 24 Nov 2026: the default
+curve refit as a smooth logistic to the PVEL 2023–2026 hail results; the docs r7 artifact stays published and active for
+the consumers that pin it — see the cell [changelog](../../cells/hail_solar/CHANGELOG.json)):
 
 ```text
-docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json
+docs/cells/hail_solar/current/hail_solar__model_v1_1__docs_r10__curve_artifact.json
 ```
 
 It is indexed from:
@@ -24,10 +26,10 @@ damage_code_id: HAIL_SOLAR_PV_MODULE_V1
 curve_id:       HAIL_SOLAR_DEFAULT_3P2_GBS
 hazard axis:    mesh_diameter_mm
 failure unit:   PV_MODULE_GLASS_CELL
-model version:  model v1.0
-docs revision:  docs r7
-consumer pin:   hail_solar@model_v1_0__docs_r7
-artifact SHA:   8c52f3442eb606f55aa0502fbb2738df70076f8a181de463c029061020b3cf32
+model version:  model v1.1
+docs revision:  docs r10
+consumer pin:   hail_solar@model_v1_1__docs_r10
+artifact SHA:   294057f3dce6995c6bb98264bee52f1f91f7292d4342992e9af6b273d85ebe53
 ```
 
 ## Where The Current Curve Is Stored
@@ -36,8 +38,8 @@ artifact SHA:   8c52f3442eb606f55aa0502fbb2738df70076f8a181de463c029061020b3cf32
 docs/cells/hail_solar/
   README.md
   current/
-    hail_solar__model_v1_0__docs_r7__curve_artifact.json   # runtime contract
-    known_answer_tests_hail_solar__model_v1_0__docs_r7.json
+    hail_solar__model_v1_1__docs_r10__curve_artifact.json   # runtime contract
+    known_answer_tests_hail_solar__model_v1_1__docs_r10.json
     damage_curve_records_v1_3_hail_solar_derivation_audit.xlsx
     hail_solar_curve_derivation_dossier_v1_3.md
     damage_code_metadata_spec_hail_solar_v1_3.md
@@ -62,7 +64,7 @@ open artifact index
   |
   v
 select current canonical artifact
-  docs/cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json
+  docs/cells/hail_solar/current/hail_solar__model_v1_1__docs_r10__curve_artifact.json
   |
   v
 verify artifact
@@ -196,8 +198,8 @@ DR(D) = max_DR / (1 + exp(-k * (D - D50)))
 For `HAIL_SOLAR_DEFAULT_3P2_GBS`:
 
 ```text
-D50_mm   = 52.696
-k_per_mm = 0.165912
+D50_mm   = 51.5653
+k_per_mm = 0.303422
 max_DR   = 1.0
 ```
 
@@ -205,13 +207,13 @@ Example values:
 
 | MESH-equivalent hail diameter | Default DR |
 |---:|---:|
-| 25 mm | 0.010 |
-| 35 mm | 0.050 |
-| 45 mm | 0.218 |
-| 50 mm | 0.390 |
-| 55 mm | 0.594 |
-| 65 mm | 0.885 |
-| 75 mm | 0.976 |
+| 25 mm | 0.000 |
+| 35 mm | 0.007 |
+| 45 mm | 0.120 |
+| 50 mm | 0.383 |
+| 55 mm | 0.739 |
+| 65 mm | 0.983 |
+| 75 mm | 0.999 |
 
 ## Example Requests
 
@@ -231,7 +233,7 @@ Resulting base curve:
 
 ```text
 curve_id = HAIL_SOLAR_DEFAULT_3P2_GBS
-DR_50mm  ~= 0.390
+DR_50mm  ~= 0.383
 flags    = generic/default selector if module data was missing
 ```
 
@@ -251,7 +253,7 @@ Result:
 
 ```text
 curve_id = HAIL_SOLAR_DEFAULT_3P2_GBS
-DR_50mm  ~= 0.390
+DR_50mm  ~= 0.383
 ```
 
 The tracker mounting type matters for metadata, but without stow the event curve is the unstowed base curve.
@@ -273,8 +275,8 @@ array_exposure_fraction: 1.00
 Result with current placeholder adjustment:
 
 ```text
-base DR_50mm       ~= 0.390
-stowed DR_50mm     ~= 0.130
+base DR_50mm       ~= 0.383
+stowed DR_50mm     ~= 0.128
 flags              = stow_adjustment_placeholder
 ```
 
@@ -295,7 +297,7 @@ Result with current placeholder adjustment:
 
 ```text
 DR_50mm ~= 0.60 * stowed_DR + 0.40 * unstowed_DR
-        ~= 0.234
+        ~= 0.230
 flags   = stow_unknown, stow_adjustment_placeholder
 ```
 
@@ -340,7 +342,7 @@ value_bucket: PV_ARRAY_MODULE_EXPOSED
 Interpretation:
 
 ```text
-base failure-unit DR ~= 0.390
+base failure-unit DR ~= 0.383
 array exposure       = 72% of array value touched
 value profile        = module hardware + named support-cost allocation
 ```
@@ -354,10 +356,10 @@ portable package baseline v2.5
   = latest assembled library/package delivery
   = not the repository-current cell pin
 
-semantic damage-model version model v1.0
+semantic damage-model version model v1.1
   = damage behavior version
 
-documentation revision docs r7
+documentation revision docs r10
   = proof trail / contract / wrapper revision
 ```
 
@@ -405,8 +407,8 @@ waits until artifact publishing, version pinning, cloud/storage layout, and Haza
 ## Canonical Files
 
 - Cell entrypoint: [`../../cells/hail_solar/README.md`](../../cells/hail_solar/README.md)
-- Runtime artifact: [`../../cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json`](../../cells/hail_solar/current/hail_solar__model_v1_0__docs_r7__curve_artifact.json)
-- Known-answer tests: [`../../cells/hail_solar/current/known_answer_tests_hail_solar__model_v1_0__docs_r7.json`](../../cells/hail_solar/current/known_answer_tests_hail_solar__model_v1_0__docs_r7.json)
+- Runtime artifact: [`../../cells/hail_solar/current/hail_solar__model_v1_1__docs_r10__curve_artifact.json`](../../cells/hail_solar/current/hail_solar__model_v1_1__docs_r10__curve_artifact.json)
+- Known-answer tests: [`../../cells/hail_solar/current/known_answer_tests_hail_solar__model_v1_1__docs_r10.json`](../../cells/hail_solar/current/known_answer_tests_hail_solar__model_v1_1__docs_r10.json)
 - Cell changelog: [`../../cells/hail_solar/CHANGELOG.json`](../../cells/hail_solar/CHANGELOG.json)
 - Metadata spec: [`../../cells/hail_solar/current/damage_code_metadata_spec_hail_solar_v1_3.md`](../../cells/hail_solar/current/damage_code_metadata_spec_hail_solar_v1_3.md)
 - Artifact index: [`../../contracts/machine_readable_artifact_index.json`](../../contracts/machine_readable_artifact_index.json)
