@@ -13,7 +13,16 @@ import { InfoHint } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 const LENS_LABEL: Record<string, string> = { evidence: "Status / Evidence", occurrence: "Field reports", value: "Value covered", review: "Read by", team: "Team view" };
-const TEAM_WORD: Record<TeamColor, string> = { white: "not in review yet", yellow: "in progress", green: "agreed by both", red: "agreed wrong", not_counted: "not counted" };
+const TEAM_WORD: Record<TeamColor, string> = { white: "not in review yet", yellow: "in progress", green: "agreed", red: "agreed wrong", not_counted: "not counted" };
+const DAMAGE_CALL: Record<TeamCell["rows"][number]["damage_call"], string> = {
+  has_curve: "Damage modeled · curve exists",
+  possible_no_curve: "Damage possible · no curve",
+  no_direct_damage: "Cell assumes no direct damage · no curve",
+  not_damage_unit: "Not a damaged part in this cell · no curve",
+  unknown: "Damage unknown · no curve",
+  partly_covered: "Some damage modeled · no whole-part curve",
+  cost_follows: "Cost follows other damage · no separate curve",
+};
 const TEAM_TILE: Record<Exclude<TeamColor, "not_counted">, string> = {
   white: "border-[#B8C1BC] bg-[#FFFFFF] text-[#17251D]",
   yellow: "border-[#D4A017] bg-[#D4A017] text-[#17251D]",
@@ -85,7 +94,7 @@ function TileBox({ t, lens, tabIndex, onKey, rc }: { t: LibraryTile; lens: strin
 
 function TeamTile({ t, team, open, onClick, rc, tabIndex, onKey }: { t: LibraryTile; team: TeamCell; open: boolean; onClick: () => void; rc: string; tabIndex: number; onKey: (e: React.KeyboardEvent<HTMLElement>) => void }) {
   const priced = t.value_split && "priced" in t.value_split ? t.value_split.priced : null;
-  const detail = team.color === "white" ? `Damage curve: ${priced == null ? "unknown" : teamPct(priced)}`
+  const detail = team.color === "white" ? priced == null ? "No value budget" : `Damage curve: ${teamPct(priced)}`
     : team.color === "yellow" ? `${team.agreed} of ${team.total} agreed · ${team.agreed_value == null ? "unknown" : teamPct(team.agreed_value)} of value`
     : team.color === "red" ? `problem: ${team.problem ?? "unknown"}` : null;
   return <div className={`flex h-[52px] w-full items-stretch overflow-hidden rounded-md border ${TEAM_TILE[team.color]}`}>
@@ -107,15 +116,16 @@ function TeamPanel({ team, title, href, repo, commit }: { team: TeamCell; title:
   return <div className="rounded-md border border-border bg-card p-3 text-[12px]">
     <div className="mb-2 flex items-center justify-between"><strong>{title}</strong><Link href={href} className="text-accent underline">Open Damage cell</Link></div>
     <div className="grid grid-cols-[minmax(150px,1.2fr)_90px_minmax(250px,2fr)_120px] gap-x-3 border-b border-border pb-1 font-semibold">
-      <span>Subsystem</span><span>Share</span><span>What the Damage cell says</span><span>Color</span>
+      <span>Subsystem</span><span>Share</span><span>Damage and curve status · cell wording</span><span>Color</span>
     </div>
     {team.rows.map((row) => <Fragment key={row.key}>
       <div className="grid grid-cols-[minmax(150px,1.2fr)_90px_minmax(250px,2fr)_120px] gap-x-3 border-b border-border/60 py-1.5">
         <span>{row.curves.length ? <button type="button" onClick={() => setOpen(open === row.key ? null : row.key)} aria-expanded={open === row.key} className="text-left hover:underline">{row.label} ▾</button> : row.label}</span>
         <span>{row.share == null ? "unknown" : teamPct(row.share, 1)}</span>
-        <span>{teamSourceUrl(repo, commit, row.source)
-          ? <a href={teamSourceUrl(repo, commit, row.source)!} target="_blank" rel="noopener noreferrer" title={row.source ?? undefined} className="text-accent underline hover:text-accent/80">{row.wording}</a>
-          : row.wording}</span>
+        <span><span className="block font-medium">{DAMAGE_CALL[row.damage_call]}</span>
+          <span className="block text-[11px] text-muted-foreground">Cell wording: {teamSourceUrl(repo, commit, row.source)
+            ? <a href={teamSourceUrl(repo, commit, row.source)!} target="_blank" rel="noopener noreferrer" title={row.source ?? undefined} className="text-accent underline hover:text-accent/80">{row.wording}</a>
+            : row.wording}</span></span>
         <span><span className={`rounded border px-1.5 py-0.5 ${row.color === "not_counted" ? "border-gray-200 bg-gray-200 text-gray-700" : TEAM_TILE[row.color]}`}>{TEAM_WORD[row.color]}</span></span>
       </div>
       {open === row.key && row.curves.map((curve) => <div key={curve.id} className="grid grid-cols-[minmax(150px,1.2fr)_90px_minmax(250px,2fr)_120px] gap-x-3 border-b border-border/40 bg-muted/30 py-1 pl-4">
@@ -149,9 +159,9 @@ export function Library({ m }: { m: ManifestV3 }) {
   const [lensParam, setLensParam] = useUrlParam("lens");
   const [openTeam, setOpenTeam] = useState<string | null>(null);
   // the status is the tile's first line and shade in every view, so the views are only for the second line
-  const lenses = m.lenses.filter((l) => l !== "status" && (SHOW_FIELD_REPORTS || l !== "occurrence"));
-  const lens = lenses.includes(lensParam ?? "") ? (lensParam as string) : "evidence";
-  const setLens = (l: string) => setLensParam(l === "evidence" ? null : l);
+  const lenses = ["team", ...m.lenses.filter((l) => l !== "status" && l !== "team" && (SHOW_FIELD_REPORTS || l !== "occurrence"))];
+  const lens = lenses.includes(lensParam ?? "") ? (lensParam as string) : "team";
+  const setLens = (l: string) => setLensParam(l === "team" ? null : l);
   // the five catalogue hazards, then heat: no cell, but its research so far is linked from the tile
   const hazards = m.hazards.filter((h) => !h.outside_the_five || h.slug === "heat");
   const grid = useRef<HTMLDivElement>(null);

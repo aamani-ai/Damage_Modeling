@@ -21,7 +21,7 @@ export default function LibraryPage() {
         </p>
       </div>
       <div className="mt-3">
-        <ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} groups={["status", "evidence", "lenses", "value"]} />
+        <ReviewLegend legend={m.legend} sourceHref={blobUrl(m, m.legend.source)} groups={["team", "status", "evidence", "lenses", "value"]} libraryLens />
       </div>
       <div className="mt-3">
         <Library m={m} />

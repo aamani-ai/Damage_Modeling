@@ -26,7 +26,8 @@ Open <http://localhost:3211/?lens=team>. The built data are committed, so the Py
 - The Team panel reads the hail workbook sheet `Hail_Solar_Coverage` for collection cable and the combiner box treatment. It shows each subsystem's source. The existing coverage view and its colors are unchanged.
 - In the Team lens, the tile body opens the cell page and a separate triangle opens the subsystem panel. Sourced statements in the panel use their own wording as the GitHub link text; the link targets the exact repository file, with a line anchor where available. Rows without a source remain plain text.
 - Real estate Team panels now follow their matrix row: Residential shows house subsystems, Commercial shows office subsystems, and Industrial shows warehouse subsystems. Each tile's Team rollup uses only those visible rows.
-- Screenshots are in `dashboard/screenshots/team-view/`: `matrix.jpg`, `hail-solar-subsystems.jpg`, `pv-module-curves.jpg`, and `real-estate-residential.jpg`.
+- Team view is the first and default library lens. Its panel leads each subsystem with a damage/curve call, then links the cell's own wording; gaps say possible or unknown unless the cell explicitly assumes no direct damage. Green says `agreed`. The Team color meanings appear in `What the words mean` while Team view is active. Building tiles say `No value budget` when a curve-value percentage cannot be computed.
+- Screenshots are in `dashboard/screenshots/team-view/`: `matrix.jpg`, `hail-solar-subsystems.jpg`, `pv-module-curves.jpg`, `real-estate-residential.jpg`, and `wording-and-colors.jpg`.
 
 ## Open points
 

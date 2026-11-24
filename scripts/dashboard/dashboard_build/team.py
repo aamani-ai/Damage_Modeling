@@ -144,8 +144,22 @@ def build(assets: dict, tiles: list[dict], library: list[dict]) -> None:
                 color = "not_counted"
             else:
                 color = rollup([c["color"] for c in curves]) if curves else _color(events[(tile["entry_id"], "call", sub["key"])], False)
+            if curves:
+                damage_call = "has_curve"
+            elif sub.get("cost_follows"):
+                damage_call = "cost_follows"
+            elif gap.get("no_direct_damage") or (sub["entry_id"] == "hail_solar" and sub["key"] == "collection"):
+                damage_call = "no_direct_damage"
+            elif "not a damaged part" in (gap.get("own_words") or ""):
+                damage_call = "not_damage_unit"
+            elif sub["cell_state"] == "partial":
+                damage_call = "partly_covered"
+            elif sub["cell_state"] == "not_named":
+                damage_call = "unknown"
+            else:
+                damage_call = "possible_no_curve"
             rows.append({"key": sub["key"], "label": sub["label"], "share": sub["share"], "wording": wording,
-                         "source": source, "color": color, "curves": curves})
+                         "source": source, "damage_call": damage_call, "color": color, "curves": curves})
         tile["team"] = _summary(rows)
     by_id = {t["entry_id"]: t.get("team") for t in tiles}
     for cat in library:

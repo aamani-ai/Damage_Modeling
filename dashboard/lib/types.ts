@@ -55,6 +55,7 @@ export interface TeamCell {
   color: Exclude<TeamColor, "not_counted">;
   agreed: number; total: number; agreed_value: number | null; problem: string | null;
   rows: { key: string; label: string; share: number | null; wording: string; source: string | null;
+          damage_call: "has_curve" | "possible_no_curve" | "no_direct_damage" | "not_damage_unit" | "unknown" | "partly_covered" | "cost_follows";
           color: TeamColor; curves: { id: string; color: TeamColor; source: string | null }[] }[];
 }
 
