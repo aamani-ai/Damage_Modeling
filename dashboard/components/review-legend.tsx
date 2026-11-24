@@ -28,6 +28,7 @@ const TEAM_COLORS: LegendItem[] = [
   { key: "team_green", word: "Green · agreed", meaning: "Damage and Hazard have both accepted the curve or call." },
   { key: "team_red", word: "Red · agreed wrong", meaning: "Both teams agree it is wrong and no accepted fix is ready." },
   { key: "team_gray", word: "Gray · not counted", meaning: "A supporting cost or row is listed but excluded from the Team rollup." },
+  { key: "agreed_value", word: "Value agreed", meaning: "The share of counted subsystem value whose curves and calls are all agreed. If one curve is in review, that subsystem's value is not yet counted as agreed." },
   { key: "no_budget", word: "No value budget", meaning: "The asset has no subsystem value shares, so a curve coverage percentage cannot be calculated. This does not mean there is no curve." },
 ];
 

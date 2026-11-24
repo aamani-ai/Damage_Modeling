@@ -108,11 +108,12 @@ function TileBox({ t, lens, tabIndex, onKey, rc }: { t: LibraryTile; lens: strin
 function TeamTile({ t, team, open, onClick, rc, tabIndex, onKey }: { t: LibraryTile; team: TeamCell; open: boolean; onClick: () => void; rc: string; tabIndex: number; onKey: (e: React.KeyboardEvent<HTMLElement>) => void }) {
   const priced = t.value_split && "priced" in t.value_split ? t.value_split.priced : null;
   const detail = team.color === "white" ? priced == null ? "No value budget" : `Damage curve: ${teamPct(priced)}`
-    : team.color === "yellow" ? `${team.agreed} of ${team.total} agreed · ${team.agreed_value == null ? "unknown" : teamPct(team.agreed_value)} of value`
+    : team.color === "yellow" ? `${team.agreed}/${team.total} · ${team.agreed_value == null ? "unknown" : teamPct(team.agreed_value)} value agreed`
     : team.color === "red" ? `problem: ${team.problem ?? "unknown"}` : null;
   return <div className={`flex h-[52px] w-full items-stretch overflow-hidden rounded-md border ${TEAM_TILE[team.color]}`}>
     <Link href={t.href} data-rc={rc} tabIndex={tabIndex} onKeyDown={onKey}
       aria-label={`Open ${t.title} cell page`}
+      title={team.color === "yellow" ? `${team.agreed} of ${team.total} subsystems fully agreed. ${team.agreed_value == null ? "Value share unknown" : `${teamPct(team.agreed_value)} of counted subsystem value is fully agreed`}. Every curve in a subsystem must be agreed before its value counts.` : undefined}
       className="flex min-w-0 flex-1 flex-col justify-center px-1.5 text-left hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px]">
       <span className="truncate text-[12px] font-semibold">{TEAM_WORD[team.color]}</span>
       {detail ? <span className="truncate text-[10.5px]">{detail}</span> : null}
