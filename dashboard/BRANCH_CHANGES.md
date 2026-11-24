@@ -1,3 +1,40 @@
+# Dashboard changes on `dashboard-team-view`, compared with `main`
+
+This branch adds a fifth library lens for recorded Damage and Hazard agreement. It does not change the Status / Evidence, Field reports, Value covered, or Read by views. The sole hand-edited sign-off source is `dashboard/data/team_review.json`. It contains the six team-by-curve acceptances for the three hail × solar PV module curves, all sourced to the 19 November 2026 Damage Curve Review transcript at 00:07:57 and 00:32:12. Every other curve and call starts without an event.
+
+## Run this branch locally
+
+```bash
+git switch dashboard-team-view
+python3.12 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+cd dashboard
+npm ci
+npm run data -- --source worktree
+npm run typecheck
+npm run lint
+npm run build -- --webpack
+npm run start
+```
+
+Open <http://localhost:3211/?lens=team>. The built data are committed, so the Python setup and data rebuild are optional for viewing. The branch preview build may fail the existing `hazard_match` data check because Hazard's real estate releases differ from Damage's `main`; the Team view reports no new failed data check. The default Turbopack build hit a process-binding error in this environment. The webpack production build passed.
+
+## What changed
+
+- Team colors roll up from curve or call events to subsystems, then to cells: red if any child is red, green if all are green, white if all are white, otherwise yellow. A breakable part without a curve cannot become green. Replacement support and fieldwork appears as not counted.
+- Tiles without a curve retain the existing gray appearance. With the seeded events, hail × solar is the only yellow tile. Its panel shows PV modules green, three green alternative curves, and the other nine listed rows white except for replacement support. The tile shows `1 of 9 agreed · 38% of value`: the module share is 33.1757% and the counted share is 87.8253% of the $105.3M reference plant. The exact ratio is 37.7746%.
+- The Team panel reads the hail workbook sheet `Hail_Solar_Coverage` for collection cable and the combiner box treatment. It shows each subsystem's source. The existing coverage view and its colors are unchanged.
+- Screenshots are in `dashboard/screenshots/team-view/`: `matrix.jpg`, `hail-solar-subsystems.jpg`, and `pv-module-curves.jpg`.
+
+## Open points
+
+- Hail × solar grounding is not mentioned in the cell's current dossier, workbook coverage sheet, or curve artifact. The Team panel says `not mentioned · none`.
+- The existing hail × solar coverage data say the DC harness, combiner boxes, collection cable, and collection feeders are not named. The workbook says `DR≈0 / optional secondary` for the inverter row containing `COMBINER_BOX`, and `DR≈0 for direct hail` for `CABLE_DC / CABLE_AC`. The coverage view was left unchanged as requested.
+- Nine other subsystem rows across flood × solar, hurricane wind × solar, convective wind × solar, and convective wind × wind are marked `not checked against the cell's workbook` because their workbook wording has not been mapped to those dashboard rows. Real estate has additional rows whose cell wording is unknown. These remain white.
+- A fuller sign-off system would need review scope tied to exact curve versions, durable evidence links, a workflow for proposed fixes and re-review, and validation of event provenance. This branch keeps the requested single hand-edited event file.
+
+---
+
 # Dashboard changes on `dashboard-traceability-completeness`, compared with `main`
 
 This branch reworks the damage-curve dashboard so a reader can follow every number to its source and see what is
