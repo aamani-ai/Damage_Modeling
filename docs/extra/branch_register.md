@@ -1,7 +1,7 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
-updated: 2026-10-23
+updated: 2026-11-24
 status: active
 scope: The branch register — every branch of aamani-ai/Damage_Modeling with who created it, when, when it was last touched, how it stands against main and what should happen to it — plus the branch policy proposed for the owner's confirmation. Refreshed with scripts/reference_helpers/branch_register.py in the same commit as any branch action.
 -->
@@ -35,6 +35,16 @@ deploy branch is the one exception: a push to it deploys the dashboard, so it st
 | `origin/cell/winter-storm-solar-wind` | jll-l · 2026-10-12 | jll-l · 2026-10-15 | 8 | 2 / — | no | 55 | Two proposed cells (`winter_storm_solar` screening proxy, `winter_storm_wind` fail-closed), five notebooks, five scripts | **Decision needed (RO3):** rebase onto `main` and merge as proposals, or close with a note. It falls further behind every day |
 | `origin/validation/damage-core` | jll-l · 2026-09-15 | jll-l · 2026-09-15 | 38 | 1 / — | no | 1 | `docs/extra/learning_logs/damage_core/VALIDATION_REPORT.md` — docs only | **Merge as a doc, then delete.** No model change; review evidence that only lives on a branch is invisible |
 | `origin/review/cell-curation-audit` | jll-l · 2026-08-27 | jll-l · 2026-08-27 | 57 | 1 / — | no | 2 | Standard-10 review scorecards and summary (2026-08-27) under `docs/extra/learning_logs/` — docs only | **Merge as docs, then delete.** Same reason |
+
+### Current local work (2026-11-24)
+
+The register above is the 2026-10-23 historical snapshot. The branch inventory was refreshed with
+`python3 scripts/reference_helpers/branch_register.py --fetch` on 2026-11-24. This task created one local-only
+branch from `main` at `a4867ec`:
+
+| Branch | Last commit | Created · last touched | Ahead / behind `main` | Merged | Files vs main | What to do |
+|---|---|---|---|---|---|---|
+| `dashboard-team-view` | This register update (prior commit `fd72069`) | 2026-11-24 · 2026-11-24 | 3 / 0 | no | 12 | Keep local for Damage team review. Do not push, merge, or open a PR without the user's instruction. |
 
 *"Behind" is left blank for Jung A's rows because `main` moved by six merge commits on 2026-10-20; the script
 prints the current number.* Tags: none. Pull requests on `origin`: #1 (`codex/publish-v2-5-implementation`,
