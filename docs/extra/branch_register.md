@@ -38,13 +38,13 @@ deploy branch is the one exception: a push to it deploys the dashboard, so it st
 
 ### Current local work (2026-11-24)
 
-The register above is the 2026-10-23 historical snapshot. The branch inventory was refreshed with
-`python3 scripts/reference_helpers/branch_register.py --fetch` on 2026-11-24. This task created one local-only
-branch from `main` at `a4867ec`:
+The register above is the 2026-10-23 historical snapshot. The branch inventory was refreshed from
+`origin` on 2026-11-24. This task created `dashboard-team-view` from `main` at `a4867ec` and the owner
+directed that the finished branch be pushed to `origin` on 2026-11-24:
 
 | Branch | Last commit | Created · last touched | Ahead / behind `main` | Merged | Files vs main | What to do |
 |---|---|---|---|---|---|---|
-| `dashboard-team-view` | This register update (prior commit `fd72069`) | 2026-11-24 · 2026-11-24 | 3 / 0 | no | 12 | Keep local for Damage team review. Do not push, merge, or open a PR without the user's instruction. |
+| `dashboard-team-view` | This register update (prior commit `5c4a7cb`) | 2026-11-24 · 2026-11-24 | 8 / 0 | no | 18 | Pushed for Damage team review on the owner's instruction. Keep open; no PR or merge requested. |
 
 *"Behind" is left blank for Jung A's rows because `main` moved by six merge commits on 2026-10-20; the script
 prints the current number.* Tags: none. Pull requests on `origin`: #1 (`codex/publish-v2-5-implementation`,
