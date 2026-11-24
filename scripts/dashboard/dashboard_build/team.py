@@ -90,6 +90,16 @@ def _color(events: list[dict], has_curve: bool) -> str:
     return "yellow"
 
 
+def _summary(rows: list[dict]) -> dict:
+    counted = [r for r in rows if r["color"] != "not_counted"]
+    denominator = sum(r["share"] or 0 for r in counted)
+    green = sum(r["share"] or 0 for r in counted if r["color"] == "green")
+    return {"color": rollup([r["color"] for r in counted]), "rows": rows,
+            "agreed": sum(r["color"] == "green" for r in counted), "total": len(counted),
+            "agreed_value": green / denominator if denominator else None,
+            "problem": next((r["label"] for r in counted if r["color"] == "red"), None)}
+
+
 def build(assets: dict, tiles: list[dict], library: list[dict]) -> None:
     log = load_json(REVIEW)
     events = defaultdict(list)
@@ -136,18 +146,19 @@ def build(assets: dict, tiles: list[dict], library: list[dict]) -> None:
                 color = rollup([c["color"] for c in curves]) if curves else _color(events[(tile["entry_id"], "call", sub["key"])], False)
             rows.append({"key": sub["key"], "label": sub["label"], "share": sub["share"], "wording": wording,
                          "source": source, "color": color, "curves": curves})
-        counted = [r for r in rows if r["color"] != "not_counted"]
-        denominator = sum(r["share"] or 0 for r in counted)
-        green = sum(r["share"] or 0 for r in counted if r["color"] == "green")
-        tile["team"] = {"color": rollup([r["color"] for r in counted]), "rows": rows,
-                        "agreed": sum(r["color"] == "green" for r in counted), "total": len(counted),
-                        "agreed_value": green / denominator if denominator else None,
-                        "problem": next((r["label"] for r in counted if r["color"] == "red"), None)}
+        tile["team"] = _summary(rows)
     by_id = {t["entry_id"]: t.get("team") for t in tiles}
     for cat in library:
         for row in cat["types"]:
             for t in row["tiles"].values():
                 if t["entry_id"] in by_id:
-                    t["team"] = by_id[t["entry_id"]]
+                    team = by_id[t["entry_id"]]
+                    if team and t.get("building"):
+                        building = t["building"].lower()
+                        scoped = [r for r in team["rows"] if r["key"].split(":", 1)[0] == building]
+                        if not scoped:
+                            raise BuildError(f"No Team rows for {t['entry_id']} building {building}")
+                        team = _summary(scoped)
+                    t["team"] = team
     for tile in tiles:
         tile.pop("team", None)
