@@ -37,7 +37,7 @@ def test_version_tag_grammar():
 def test_prefix_and_registry_mapping():
     plans = {p.cell_id: p for p in plan_publications()}
     hail = plans["hail_solar"]
-    assert hail.prefix == "damage_artifacts/dev/hail_solar/model_v1_0__docs_r7"
+    assert hail.prefix == "damage_artifacts/dev/hail_solar/model_v1_1__docs_r10"
     assert hail.damage_code_id == "HAIL_SOLAR_PV_MODULE_V1"
     assert _hazard_type("wind_tornado_wind") == "convective_wind"
     assert _hazard_type("strong_wind_solar") == "convective_wind"
