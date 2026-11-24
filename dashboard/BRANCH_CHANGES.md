@@ -24,6 +24,7 @@ Open <http://localhost:3211/?lens=team>. The built data are committed, so the Py
 - Team colors roll up from curve or call events to subsystems, then to cells: red if any child is red, green if all are green, white if all are white, otherwise yellow. A breakable part without a curve cannot become green. Replacement support and fieldwork appears as not counted.
 - Tiles without a curve retain the existing gray appearance. With the seeded events, hail × solar is the only yellow tile. Its panel shows PV modules green, three green alternative curves, and the other nine listed rows white except for replacement support. The tile shows `1 of 9 agreed · 38% of value`: the module share is 33.1757% and the counted share is 87.8253% of the $105.3M reference plant. The exact ratio is 37.7746%.
 - The Team panel reads the hail workbook sheet `Hail_Solar_Coverage` for collection cable and the combiner box treatment. It shows each subsystem's source. The existing coverage view and its colors are unchanged.
+- In the Team lens, the tile body opens the cell page and a separate triangle opens the subsystem panel. Sourced statements in the panel use their own wording as the GitHub link text; the link targets the exact repository file, with a line anchor where available. Rows without a source remain plain text.
 - Screenshots are in `dashboard/screenshots/team-view/`: `matrix.jpg`, `hail-solar-subsystems.jpg`, and `pv-module-curves.jpg`.
 
 ## Open points

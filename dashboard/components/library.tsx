@@ -23,12 +23,10 @@ const TEAM_TILE: Record<Exclude<TeamColor, "not_counted">, string> = {
 function teamPct(value: number, digits = 0): string {
   return `${(value * 100).toFixed(digits).replace(/\.0$/, "")}%`;
 }
-function teamSource(source: string | null): string {
-  if (!source) return "none";
-  const file = source.split("/").at(-1) ?? source;
-  if (source.includes("hail_solar_curve_derivation_dossier")) return source.includes("§15") ? "hail solar dossier §15" : "hail solar dossier §16";
-  if (source.includes("Hail_Solar_Coverage")) return `hail solar workbook · ${source.split(" · ").at(-1)}`;
-  return file;
+function teamSourceUrl(repo: string, commit: string, source: string | null): string | null {
+  if (!source) return null;
+  const path = source.split(" · ")[0].split(" §")[0];
+  return path.startsWith("docs/") && !path.includes("..") ? `${repo}/blob/${commit}/${path}` : null;
 }
 const STATUS_WORD: Record<string, string> = { live: "live", proposal: "proposal", reused: "reused", gap: "no curve yet" };
 // a tile's status is its shade, in every view: live white, proposal grey, reused dashed, no curve yet dark grey
@@ -90,31 +88,42 @@ function TeamTile({ t, team, open, onClick, rc, tabIndex, onKey }: { t: LibraryT
   const detail = team.color === "white" ? `Damage curve: ${priced == null ? "unknown" : teamPct(priced)}`
     : team.color === "yellow" ? `${team.agreed} of ${team.total} agreed · ${team.agreed_value == null ? "unknown" : teamPct(team.agreed_value)} of value`
     : team.color === "red" ? `problem: ${team.problem ?? "unknown"}` : null;
-  return <button type="button" data-rc={rc} tabIndex={tabIndex} onKeyDown={onKey} onClick={onClick} aria-expanded={open}
-    aria-label={`${t.title}: ${TEAM_WORD[team.color]}. Open subsystem review.`}
-    className={`flex h-[52px] w-full flex-col justify-center rounded-md border px-2 text-left hover:brightness-95 ${TEAM_TILE[team.color]}`}>
-    <span className="truncate text-[12px] font-semibold">{TEAM_WORD[team.color]}{team.color === "white" ? "" : " ▾"}</span>
-    {detail ? <span className="truncate text-[11px]">{detail}</span> : null}
-  </button>;
+  return <div className={`flex h-[52px] w-full items-stretch overflow-hidden rounded-md border ${TEAM_TILE[team.color]}`}>
+    <Link href={t.href} data-rc={rc} tabIndex={tabIndex} onKeyDown={onKey}
+      aria-label={`Open ${t.title} cell page`}
+      className="flex min-w-0 flex-1 flex-col justify-center px-1.5 text-left hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px]">
+      <span className="truncate text-[12px] font-semibold">{TEAM_WORD[team.color]}</span>
+      {detail ? <span className="truncate text-[10.5px]">{detail}</span> : null}
+    </Link>
+    <button type="button" onClick={onClick} aria-expanded={open} aria-label={`${open ? "Close" : "Open"} ${t.title} subsystem review`}
+      className="flex w-6 shrink-0 items-center justify-center border-l border-current/20 text-[12px] hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px]">
+      <span aria-hidden="true">{open ? "▴" : "▾"}</span>
+    </button>
+  </div>;
 }
 
-function TeamPanel({ team, title, href }: { team: TeamCell; title: string; href: string }) {
+function TeamPanel({ team, title, href, repo, commit }: { team: TeamCell; title: string; href: string; repo: string; commit: string }) {
   const [open, setOpen] = useState<string | null>(null);
   return <div className="rounded-md border border-border bg-card p-3 text-[12px]">
     <div className="mb-2 flex items-center justify-between"><strong>{title}</strong><Link href={href} className="text-accent underline">Open Damage cell</Link></div>
     <div className="grid grid-cols-[minmax(150px,1.2fr)_90px_minmax(250px,2fr)_120px] gap-x-3 border-b border-border pb-1 font-semibold">
-      <span>Subsystem</span><span>Share</span><span>What the Damage cell says · where</span><span>Color</span>
+      <span>Subsystem</span><span>Share</span><span>What the Damage cell says</span><span>Color</span>
     </div>
     {team.rows.map((row) => <Fragment key={row.key}>
       <div className="grid grid-cols-[minmax(150px,1.2fr)_90px_minmax(250px,2fr)_120px] gap-x-3 border-b border-border/60 py-1.5">
         <span>{row.curves.length ? <button type="button" onClick={() => setOpen(open === row.key ? null : row.key)} aria-expanded={open === row.key} className="text-left hover:underline">{row.label} ▾</button> : row.label}</span>
         <span>{row.share == null ? "unknown" : teamPct(row.share, 1)}</span>
-        <span title={row.source ?? "none"}>{row.wording} · {teamSource(row.source)}</span>
+        <span>{teamSourceUrl(repo, commit, row.source)
+          ? <a href={teamSourceUrl(repo, commit, row.source)!} target="_blank" rel="noopener noreferrer" title={row.source ?? undefined} className="text-accent underline hover:text-accent/80">{row.wording}</a>
+          : row.wording}</span>
         <span><span className={`rounded border px-1.5 py-0.5 ${row.color === "not_counted" ? "border-gray-200 bg-gray-200 text-gray-700" : TEAM_TILE[row.color]}`}>{TEAM_WORD[row.color]}</span></span>
       </div>
       {open === row.key && row.curves.map((curve) => <div key={curve.id} className="grid grid-cols-[minmax(150px,1.2fr)_90px_minmax(250px,2fr)_120px] gap-x-3 border-b border-border/40 bg-muted/30 py-1 pl-4">
         <Link href={`${href}/curves/${curve.id}`} className="break-all text-accent hover:underline">{curve.id}</Link>
-        <span>{row.curves.length > 1 ? "alternative" : row.share == null ? "unknown" : teamPct(row.share, 1)}</span><span title={curve.source ?? "none"}>Curve record · {teamSource(curve.source)}</span>
+        <span>{row.curves.length > 1 ? "alternative" : row.share == null ? "unknown" : teamPct(row.share, 1)}</span>
+        <span>{teamSourceUrl(repo, commit, curve.source)
+          ? <a href={teamSourceUrl(repo, commit, curve.source)!} target="_blank" rel="noopener noreferrer" title={curve.source ?? undefined} className="text-accent underline hover:text-accent/80">Curve record</a>
+          : "Curve record"}</span>
         <span><span className={`rounded border px-1.5 py-0.5 ${TEAM_TILE[curve.color === "not_counted" ? "white" : curve.color]}`}>{TEAM_WORD[curve.color]}</span></span>
       </div>)}
     </Fragment>)}
@@ -174,12 +183,12 @@ export function Library({ m }: { m: ManifestV3 }) {
         </div>
         <InfoHint label="How to read a tile">
           {/* the words themselves are in "What the words mean" above; this says only how to use the grid */}
-          {lens === "team" ? <div>Click a tile to see its subsystems. Click a subsystem to see its curves. Replacement support and fieldwork is listed but not counted.</div> : <div className="space-y-1">
+          {lens === "team" ? <div>Click a tile to open its cell page. Click its triangle to see subsystems, then click a subsystem to see its curves. Replacement support and fieldwork is listed but not counted.</div> : <div className="space-y-1">
             <div>A tile&apos;s first line and shade say what exists; the second line is the view chosen here.</div>
             <div>Hover a tile for both halves of its evidence: <span className="italic">damage at each hazard level</span> and <span className="italic">the dollar value it is applied to</span>.</div>
           </div>}
         </InfoHint>
-        <span className="ml-auto text-muted-foreground">{lens === "team" ? "a type's name opens what its curves cover · a tile opens the team review" : "a type's name opens what its curves cover · a tile opens the curve"}</span>
+        <span className="ml-auto text-muted-foreground">{lens === "team" ? "a tile opens the cell page · its triangle opens the team review" : "a type's name opens what its curves cover · a tile opens the curve"}</span>
       </div>
       <div ref={grid} role="grid" aria-label="Damage-curve library: asset types by hazard" className="mt-2 overflow-x-auto">
         <div className="grid min-w-[860px] gap-1" style={{ gridTemplateColumns: `200px repeat(${hazards.length}, minmax(128px, 1fr))` }}>
@@ -221,7 +230,7 @@ export function Library({ m }: { m: ManifestV3 }) {
                   {lens === "team" && openTeam?.startsWith(`${r}-`) ? (() => {
                     const h = hazards[Number(openTeam.split("-")[1])];
                     const tile = t.tiles[h?.slug];
-                    return tile?.team ? <div role="row" className="col-span-full"><TeamPanel team={tile.team} title={tile.title} href={tile.href} /></div> : null;
+                    return tile?.team ? <div role="row" className="col-span-full"><TeamPanel team={tile.team} title={tile.title} href={tile.href} repo={m.repo.url} commit={m.link_commit} /></div> : null;
                   })() : null}
                   </Fragment>
                 );

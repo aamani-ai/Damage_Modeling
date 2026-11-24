@@ -65,6 +65,17 @@ def _hail_calls() -> dict[str, tuple[str, str]]:
             "collection": (rows[18]["C"], HAIL_BOOK + " · Hail_Solar_Coverage!C18")}
 
 
+def _catalogue_source(cell: str, wording: str) -> str | None:
+    """Link to the catalogue line only when it contains the displayed wording."""
+    path = f"docs/cells/catalogue/{cell}.json"
+    file = ROOT / path
+    if file.is_file():
+        for line, content in enumerate(file.read_text(encoding="utf-8").splitlines(), 1):
+            if wording in content:
+                return f"{path}#L{line}"
+    return None
+
+
 def _color(events: list[dict], has_curve: bool) -> str:
     if not events:
         return "white"
@@ -108,15 +119,17 @@ def build(assets: dict, tiles: list[dict], library: list[dict]) -> None:
             elif sub["entry_id"] == "hail_solar" and sub["key"] == "grounding":
                 wording, source = "not mentioned", None
             elif sub["entry_id"] == "hail_solar" and sub["key"] == "support":
-                wording, source = "Module hardware plus all general replacement fieldwork", HAIL_DOSSIER + " §15"
+                wording, source = "Module hardware plus all general replacement fieldwork", HAIL_DOSSIER + "#L842"
             elif sub["entry_id"] == "hail_solar" and sub["key"] in ("mounting", "foundations", "substation", "scada", "civil"):
-                wording, source = gap.get("own_words") or "unknown", HAIL_DOSSIER
+                wording = gap.get("own_words") or "unknown"
+                source = _catalogue_source(sub["entry_id"], wording)
             elif sub["cell_state"] == "not_named":
                 cell_dir = ROOT / "docs" / "cells" / sub["entry_id"]
                 wording = "not checked against the cell's workbook" if list(cell_dir.glob("current/*.xlsx")) else "not mentioned"
                 source = None
             else:
-                wording, source = gap.get("own_words") or "unknown", (gap.get("source") or {}).get("path")
+                wording = gap.get("own_words") or "unknown"
+                source = _catalogue_source(sub["entry_id"], wording) or (gap.get("source") or {}).get("path")
             if sub.get("cost_follows"):
                 color = "not_counted"
             else:
