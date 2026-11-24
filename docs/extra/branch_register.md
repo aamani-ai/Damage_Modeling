@@ -44,7 +44,7 @@ directed that the finished branch be pushed to `origin` on 2026-11-24:
 
 | Branch | Last commit | Created · last touched | Ahead / behind `main` | Merged | Files vs main | What to do |
 |---|---|---|---|---|---|---|
-| `dashboard-team-view` | This register update (prior commit `5c4a7cb`) | 2026-11-24 · 2026-11-24 | 8 / 0 | no | 18 | Pushed for Damage team review on the owner's instruction. Keep open; no PR or merge requested. |
+| `dashboard-team-view` | This register update (prior commit `d5aaf98`) | 2026-11-24 · 2026-11-24 | 9 / 0 | no | 19 | Pushed for Damage team review on the owner's instruction. Keep open; no PR or merge requested. |
 
 *"Behind" is left blank for Jung A's rows because `main` moved by six merge commits on 2026-10-20; the script
 prints the current number.* Tags: none. Pull requests on `origin`: #1 (`codex/publish-v2-5-implementation`,

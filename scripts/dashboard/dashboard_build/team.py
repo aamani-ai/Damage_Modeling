@@ -107,6 +107,15 @@ def build(assets: dict, tiles: list[dict], library: list[dict]) -> None:
         if event["team"] not in ("Damage", "Hazard") or event["kind"] not in ("curve", "call") or event["event"] not in ("accepted", "wrong", "review_started", "question", "problem", "fix_posted"):
             raise BuildError("Invalid Team view event")
         events[(event["cell"], event["kind"], event["id"])].append(event)
+    overrides = {}
+    for item in log.get("status_overrides", []):
+        if item["kind"] != "curve" or item["status"] != "in_review":
+            raise BuildError("Invalid Team view status override")
+        key = (item["cell"], item["kind"], item["id"])
+        if key in overrides:
+            raise BuildError(f"Duplicate Team view status override: {key}")
+        overrides[key] = "yellow"
+    used_overrides = set()
     hail = _hail_calls()
     by_cell = defaultdict(list)
     for asset in assets.values():
@@ -117,9 +126,13 @@ def build(assets: dict, tiles: list[dict], library: list[dict]) -> None:
             continue
         rows = []
         for sub in by_cell[tile["entry_id"]]:
-            curves = [{"id": cid, "color": _color(events[(tile["entry_id"], "curve", cid)], True),
-                       "source": next((c["artifact"] for c in sub.get("construction", []) if c["curve_id"] == cid), None)}
-                      for cid in sub["curve_ids"]]
+            curves = []
+            for cid in sub["curve_ids"]:
+                key = (tile["entry_id"], "curve", cid)
+                if key in overrides:
+                    used_overrides.add(key)
+                curves.append({"id": cid, "color": overrides.get(key, _color(events[key], True)),
+                               "source": next((c["artifact"] for c in sub.get("construction", []) if c["curve_id"] == cid), None)})
             gap = sub.get("gap") or {}
             if sub["entry_id"] == "hail_solar" and sub["key"] in hail:
                 wording, source = hail[sub["key"]]
@@ -176,3 +189,5 @@ def build(assets: dict, tiles: list[dict], library: list[dict]) -> None:
                     t["team"] = team
     for tile in tiles:
         tile.pop("team", None)
+    if unknown := overrides.keys() - used_overrides:
+        raise BuildError(f"Team view status override names no curve: {sorted(unknown)}")

@@ -24,7 +24,7 @@ const SWATCH: Record<string, string> = {
 };
 const TEAM_COLORS: LegendItem[] = [
   { key: "team_white", word: "White · not in review yet", meaning: "No team review is recorded for this curve or call." },
-  { key: "team_yellow", word: "Yellow · in progress", meaning: "Review has started, or the teams have not reached the same conclusion." },
+  { key: "team_yellow", word: "Yellow · in review", meaning: "Review has started, or the teams have not reached the same conclusion." },
   { key: "team_green", word: "Green · agreed", meaning: "Damage and Hazard have both accepted the curve or call." },
   { key: "team_red", word: "Red · agreed wrong", meaning: "Both teams agree it is wrong and no accepted fix is ready." },
   { key: "team_gray", word: "Gray · not counted", meaning: "A supporting cost or row is listed but excluded from the Team rollup." },

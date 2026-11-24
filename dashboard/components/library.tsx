@@ -13,16 +13,29 @@ import { InfoHint } from "./ui";
 import { SHOW_FIELD_REPORTS } from "@/lib/features";
 
 const LENS_LABEL: Record<string, string> = { evidence: "Status / Evidence", occurrence: "Field reports", value: "Value covered", review: "Read by", team: "Team view" };
-const TEAM_WORD: Record<TeamColor, string> = { white: "not in review yet", yellow: "in progress", green: "agreed", red: "agreed wrong", not_counted: "not counted" };
+const TEAM_WORD: Record<TeamColor, string> = { white: "not in review yet", yellow: "in review", green: "agreed", red: "agreed wrong", not_counted: "not counted" };
 const DAMAGE_CALL: Record<TeamCell["rows"][number]["damage_call"], string> = {
-  has_curve: "Damage modeled · curve exists",
+  has_curve: "Curve models damage",
   possible_no_curve: "Damage possible · no curve",
-  no_direct_damage: "Cell assumes no direct damage · no curve",
-  not_damage_unit: "Not a damaged part in this cell · no curve",
+  no_direct_damage: "No direct damage assumed · no curve",
+  not_damage_unit: "Not a damage unit · no curve",
   unknown: "Damage unknown · no curve",
-  partly_covered: "Some damage modeled · no whole-part curve",
-  cost_follows: "Cost follows other damage · no separate curve",
+  partly_covered: "Partly covered · no own curve",
+  cost_follows: "Cost follows damage · no separate curve",
 };
+type TeamRow = TeamCell["rows"][number];
+const BUILDING_WORDS = new Set(["House", "Office", "Warehouse", "Retail"]);
+function teamDamageCall(row: TeamRow): string {
+  if (row.curves.length && BUILDING_WORDS.has(row.wording) && !row.key.endsWith(":building")) return "Covered by whole-building curve";
+  return DAMAGE_CALL[row.damage_call];
+}
+function teamEvidenceLabel(row: TeamRow): string {
+  if (BUILDING_WORDS.has(row.wording)) {
+    return row.key.endsWith(":building") ? `${row.wording} whole-building curve` : `${row.wording} curve covers ${row.label.toLowerCase()}`;
+  }
+  if (row.wording.length <= 55) return row.wording;
+  return row.damage_call === "no_direct_damage" ? "Read cell's no-damage rationale" : "Read cell note";
+}
 const TEAM_TILE: Record<Exclude<TeamColor, "not_counted">, string> = {
   white: "border-[#B8C1BC] bg-[#FFFFFF] text-[#17251D]",
   yellow: "border-[#D4A017] bg-[#D4A017] text-[#17251D]",
@@ -122,11 +135,11 @@ function TeamPanel({ team, title, href, repo, commit }: { team: TeamCell; title:
       <div className="grid grid-cols-[minmax(150px,1.2fr)_90px_minmax(250px,2fr)_120px] items-center gap-x-3 border-b border-border/60 py-1.5">
         <span className="min-w-0 truncate" title={row.label}>{row.curves.length ? <button type="button" onClick={() => setOpen(open === row.key ? null : row.key)} aria-expanded={open === row.key} className="max-w-full truncate text-left hover:underline">{row.label} ▾</button> : row.label}</span>
         <span className="whitespace-nowrap">{row.share == null ? "unknown" : teamPct(row.share, 1)}</span>
-        <span className="flex min-w-0 items-baseline gap-1 overflow-hidden whitespace-nowrap" title={`${DAMAGE_CALL[row.damage_call]} · ${row.wording}`}>
-          <span className="shrink-0 font-medium">{DAMAGE_CALL[row.damage_call]}</span><span aria-hidden="true">·</span>
+        <span className="flex min-w-0 items-baseline gap-1 overflow-hidden whitespace-nowrap" title={`${teamDamageCall(row)} · ${row.wording}`}>
+          <span className="shrink-0 font-medium">{teamDamageCall(row)}</span><span aria-hidden="true">·</span>
           {teamSourceUrl(repo, commit, row.source)
-            ? <a href={teamSourceUrl(repo, commit, row.source)!} target="_blank" rel="noopener noreferrer" className="min-w-0 truncate text-accent underline hover:text-accent/80">{row.wording}</a>
-            : <span className="min-w-0 truncate text-muted-foreground">{row.wording}</span>}
+            ? <a href={teamSourceUrl(repo, commit, row.source)!} target="_blank" rel="noopener noreferrer" aria-label={row.wording} className="min-w-0 truncate text-accent underline hover:text-accent/80">{teamEvidenceLabel(row)}</a>
+            : <span className="min-w-0 truncate text-muted-foreground">{teamEvidenceLabel(row)}</span>}
         </span>
         <span className="whitespace-nowrap"><span className={`rounded border px-1.5 py-0.5 ${row.color === "not_counted" ? "border-gray-200 bg-gray-200 text-gray-700" : TEAM_TILE[row.color]}`}>{TEAM_WORD[row.color]}</span></span>
       </div>

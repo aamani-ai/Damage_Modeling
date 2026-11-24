@@ -1,6 +1,6 @@
 # Dashboard changes on `dashboard-team-view`, compared with `main`
 
-This branch adds a fifth library lens for recorded Damage and Hazard agreement. It does not change the Status / Evidence, Field reports, Value covered, or Read by views. The sole hand-edited sign-off source is `dashboard/data/team_review.json`. It contains the six team-by-curve acceptances for the three hail × solar PV module curves, all sourced to the 19 November 2026 Damage Curve Review transcript at 00:07:57 and 00:32:12. Every other curve and call starts without an event.
+This branch adds a fifth library lens for recorded Damage and Hazard agreement. It does not change the Status / Evidence, Field reports, Value covered, or Read by views. The sole hand-edited sign-off source is `dashboard/data/team_review.json`. It retains the six team-by-curve acceptances for the three hail × solar PV module curves, sourced to the 19 November 2026 Damage Curve Review transcript at 00:07:57 and 00:32:12. An owner-directed current-status override puts `HAIL_SOLAR_DEFAULT_3P2_GBS` back in review. Every other curve and call starts without an event.
 
 ## Run this branch locally
 
@@ -17,22 +17,22 @@ npm run build -- --webpack
 npm run start
 ```
 
-Open <http://localhost:3211/?lens=team>. The built data are committed, so the Python setup and data rebuild are optional for viewing. The branch preview build may fail the existing `hazard_match` data check because Hazard's real estate releases differ from Damage's `main`; the Team view reports no new failed data check. The default Turbopack build hit a process-binding error in this environment. The webpack production build passed.
+Open <http://localhost:3211/>. The built data are committed, so the Python setup and data rebuild are optional for viewing. The branch preview build may fail the existing `hazard_match` data check because Hazard's real estate releases differ from Damage's `main`; the Team view reports no new failed data check. The default Turbopack build hit a process-binding error in this environment. The webpack production build passed.
 
 ## What changed
 
 - Team colors roll up from curve or call events to subsystems, then to cells: red if any child is red, green if all are green, white if all are white, otherwise yellow. A breakable part without a curve cannot become green. Replacement support and fieldwork appears as not counted.
-- Tiles without a curve retain the existing gray appearance. With the seeded events, hail × solar is the only yellow tile. Its panel shows PV modules green, three green alternative curves, and the other nine listed rows white except for replacement support. The tile shows `1 of 9 agreed · 38% of value`: the module share is 33.1757% and the counted share is 87.8253% of the $105.3M reference plant. The exact ratio is 37.7746%.
+- Tiles without a curve retain the existing gray appearance. Hail × solar is the only yellow tile. Its panel shows PV modules in review: the default curve is in review, while the two alternative curves remain agreed. The other listed rows are white except for replacement support. Because the PV module subsystem is not fully agreed, the tile now shows `0 of 9 agreed · 0% of value`.
 - The Team panel reads the hail workbook sheet `Hail_Solar_Coverage` for collection cable and the combiner box treatment. It shows each subsystem's source. The existing coverage view and its colors are unchanged.
-- In the Team lens, the tile body opens the cell page and a separate triangle opens the subsystem panel. Sourced statements in the panel use their own wording as the GitHub link text; the link targets the exact repository file, with a line anchor where available. Rows without a source remain plain text.
+- In the Team lens, the tile body opens the cell page and a separate triangle opens the subsystem panel. Sourced statements link to the exact GitHub file, with a line anchor where available. The visible link text is concise; the full cell wording remains in its tooltip and accessible name. Rows without a source remain plain text.
 - Real estate Team panels now follow their matrix row: Residential shows house subsystems, Commercial shows office subsystems, and Industrial shows warehouse subsystems. Each tile's Team rollup uses only those visible rows.
 - Team view is the first and default library lens. Its panel leads each subsystem with a damage/curve call, then links the cell's own wording; gaps say possible or unknown unless the cell explicitly assumes no direct damage. Green says `agreed`. The Team color meanings appear in `What the words mean` while Team view is active. Building tiles say `No value budget` when a curve-value percentage cannot be computed.
-- Team subsystem rows keep the damage/curve call and linked cell wording on one visible line. Long wording is shortened with an ellipsis; hovering reveals the full statement.
-- Screenshots are in `dashboard/screenshots/team-view/`: `matrix.jpg`, `hail-solar-subsystems.jpg`, `pv-module-curves.jpg`, `real-estate-residential.jpg`, `wording-and-colors.jpg`, and `compact-subsystems.jpg`.
+- Team subsystem rows keep the damage/curve call and source link on one visible line. Long wording becomes a short rationale or note link; generic building words identify the whole-building curve and the part it covers. Hovering reveals the full cell statement.
+- Screenshots are in `dashboard/screenshots/team-view/`: `matrix.jpg`, `hail-solar-subsystems.jpg`, `pv-module-curves.jpg`, `real-estate-residential.jpg`, `wording-and-colors.jpg`, `compact-subsystems.jpg`, `real-estate-evidence-labels.jpg`, and `solar-in-review.jpg`.
 
 ## Open points
 
-- Hail × solar grounding is not mentioned in the cell's current dossier, workbook coverage sheet, or curve artifact. The Team panel says `not mentioned · none`.
+- Hail × solar grounding is not mentioned in the cell's current dossier, workbook coverage sheet, or curve artifact. The Team panel says damage is unknown and no curve is present.
 - The existing hail × solar coverage data say the DC harness, combiner boxes, collection cable, and collection feeders are not named. The workbook says `DR≈0 / optional secondary` for the inverter row containing `COMBINER_BOX`, and `DR≈0 for direct hail` for `CABLE_DC / CABLE_AC`. The coverage view was left unchanged as requested.
 - Nine other subsystem rows across flood × solar, hurricane wind × solar, convective wind × solar, and convective wind × wind are marked `not checked against the cell's workbook` because their workbook wording has not been mapped to those dashboard rows. Real estate has additional rows whose cell wording is unknown. These remain white.
 - A fuller sign-off system would need review scope tied to exact curve versions, durable evidence links, a workflow for proposed fixes and re-review, and validation of event provenance. This branch keeps the requested single hand-edited event file.
