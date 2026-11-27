@@ -1,7 +1,7 @@
 <!--
 author: owner-directed (Divy) · agent-drafted
 created: 2026-10-20
-updated: 2026-11-24
+updated: 2026-11-27
 status: active
 scope: The branch register — every branch of aamani-ai/Damage_Modeling with who created it, when, when it was last touched, how it stands against main and what should happen to it — plus the branch policy proposed for the owner's confirmation. Refreshed with scripts/reference_helpers/branch_register.py in the same commit as any branch action.
 -->
@@ -36,21 +36,25 @@ deploy branch is the one exception: a push to it deploys the dashboard, so it st
 | `origin/validation/damage-core` | jll-l · 2026-09-15 | jll-l · 2026-09-15 | 38 | 1 / — | no | 1 | `docs/extra/learning_logs/damage_core/VALIDATION_REPORT.md` — docs only | **Merge as a doc, then delete.** No model change; review evidence that only lives on a branch is invisible |
 | `origin/review/cell-curation-audit` | jll-l · 2026-08-27 | jll-l · 2026-08-27 | 57 | 1 / — | no | 2 | Standard-10 review scorecards and summary (2026-08-27) under `docs/extra/learning_logs/` — docs only | **Merge as docs, then delete.** Same reason |
 
-### Current local work (2026-11-24)
+### Current local work (2026-11-27)
 
 The register above is the 2026-10-23 historical snapshot. The branch inventory was refreshed from
-`origin` on 2026-11-24. This task created `dashboard-team-view` from `main` at `a4867ec` and the owner
-directed that the finished branch be pushed to `origin` on 2026-11-24:
+`origin` on 2026-11-27. `dashboard-team-view` was created from `main` at `a4867ec` and pushed on
+2026-11-24. On 2026-11-27, the owner requested a local commit of the review dashboard work and a merge
+of the newer `main` (`646836a`). The dashboard data remains pinned to hail × solar model v1.0, docs r7;
+the merged repository-current hail × solar artifact is model v1.1, docs r10. These new commits are local only.
 
 | Branch | Last commit | Created · last touched | Ahead / behind `main` | Merged | Files vs main | What to do |
 |---|---|---|---|---|---|---|
-| `dashboard-team-view` | This register update (prior commit `bf6dff0`) | 2026-11-24 · 2026-11-24 | 11 / 0 | no | 22 | Pushed for Damage team review on the owner's instruction. Keep open; no PR or merge requested. |
+| `dashboard-team-view` | This register update (prior commit `e03b3af`) | 2026-11-24 · 2026-11-27 | 14 / 0 | no | 25 | Keep open for Damage team review. The new local commits have not been pushed. |
+| `origin/dashboard-team-view` | `a566e66` | 2026-11-24 · 2026-11-24 | 11 / 2 | no | 22 | Remote branch has not received the local review work or the `main` merge. |
+| `origin/deploy/damage-curves` | `a4867ec` | 2026-10-22 · 2026-11-14 | 0 / 2 | yes | 0 | Deployment pointer; it has not received the hail × solar r10 release. |
 
 *"Behind" is left blank for Jung A's rows because `main` moved by six merge commits on 2026-10-20; the script
 prints the current number.* Tags: none. Pull requests on `origin`: #1 (`codex/publish-v2-5-implementation`,
 merged 2026-06-25); #2, #3, #4, #5 and #6 merged 2026-10-20 (below); #7 closed when its branch was renamed to `dashboard`, its commits carried by #8; #8 and #9 merged 2026-10-22, and #10 on 2026-10-23 (below); #11 open (2026-10-23), from `dashboard`. Remotes: `origin` only
 (`aamani-ai/Damage_Modeling`); the personal fork `Divi-patel/Damage_Modeling` is a dormant mirror at
-`a71ac72`, not a remote. No local-only branches or extra worktrees remain (cleaned 2026-10-20 and 2026-10-21).
+`a71ac72`, not a remote. No extra worktrees remain from the October cleanup.
 
 ### Recently closed
 
