@@ -17,18 +17,20 @@ const SWATCH: Record<string, string> = {
   reused: "border-dashed border-[var(--tile-reused-border)] bg-[var(--tile-live)]",
   gap: "border-border bg-[var(--tile-gap)]",
   team_white: "border-[#B8C1BC] bg-white",
-  team_yellow: "border-[#D4A017] bg-[#D4A017]",
-  team_green: "border-[#1F6E43] bg-[#1F6E43]",
-  team_red: "border-[#A3302F] bg-[#A3302F]",
+  team_yellow: "border-[var(--team-yellow)] bg-[var(--team-yellow)]",
+  team_green: "border-[var(--team-green)] bg-[var(--team-green)]",
+  team_red: "border-[var(--team-red)] bg-[var(--team-red)]",
   team_gray: "border-gray-200 bg-gray-200",
 };
 const TEAM_COLORS: LegendItem[] = [
-  { key: "team_white", word: "White · not in review yet", meaning: "No team review is recorded for this curve or call." },
-  { key: "team_yellow", word: "Yellow · in review", meaning: "Review has started, or the teams have not reached the same conclusion." },
-  { key: "team_green", word: "Green · agreed", meaning: "Damage and Hazard have both accepted the curve or call." },
-  { key: "team_red", word: "Red · agreed wrong", meaning: "Both teams agree it is wrong and no accepted fix is ready." },
+  { key: "team_white", word: "White · not in review yet", meaning: "No team review is recorded for this curve or subsystem decision." },
+  { key: "team_yellow", word: "Yellow · in review", meaning: "Damage has reviewed the cell, a target review has started, or the teams have not reached the same conclusion. A cell-wide review does not mean each curve is agreed." },
+  { key: "team_green", word: "Green · agreed", meaning: "Damage and Hazard have both accepted the curve or no-direct-damage decision." },
+  { key: "team_red", word: "Red · flagged wrong", meaning: "At least one team currently marks it wrong; a posted fix does not clear the flag until that team accepts it." },
   { key: "team_gray", word: "Gray · not counted", meaning: "A supporting cost or row is listed but excluded from the Team rollup." },
-  { key: "agreed_value", word: "Value agreed", meaning: "The share of counted subsystem value whose curves and calls are all agreed. If one curve is in review, that subsystem's value is not yet counted as agreed." },
+  { key: "damage_assessment", word: "Damage assessment", meaning: "Damage's cell-wide screening conclusion: fine, conditional, not fine, or can't tell. It appears beside the Team decision and does not itself mean the teams agreed." },
+  { key: "open_subsystems", word: "Open subsystems", meaning: "Counted subsystems that are not fully agreed, including those in review, not started, or flagged wrong. A subsystem is agreed only when every curve or subsystem decision in it is agreed." },
+  { key: "model_coverage", word: "Model coverage", meaning: "A separate value split: priced, partly priced, assumed no direct damage, and not priced. Assumed no direct damage is a cell decision, not proof that damage cannot happen." },
   { key: "no_budget", word: "No value budget", meaning: "The asset has no subsystem value shares, so a curve coverage percentage cannot be calculated. This does not mean there is no curve." },
 ];
 

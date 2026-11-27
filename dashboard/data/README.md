@@ -1,7 +1,9 @@
-# dashboard/data — written only by the build step
+# dashboard/data — built data and the Team review input
 
-Every file here is written by `scripts/dashboard/build_dashboard_data.py` (python3.12 venv) and read by the
-app; nothing is edited by hand. `receipt.json` names the commit, every artifact SHA, every check and its
+`team_review.json` is the one hand-edited review input. Its dated `events` and `status_overrides` determine target-level Team colors. `cell_reviews` records a first-round Damage review of a whole cell. It marks otherwise white curve and subsystem rows yellow as "in review"; it does not imply agreement on any target. An optional `assessment` records Damage's later cell-wide screening verdict and finding from the status matrix. Its green/amber/red screening grade is displayed as review content, never used as a Team color. An event may also carry `reviewer`, `review_type`, `discussion`, `next_action`, and an HTTPS `source` link; the dashboard shows these fields in a right-side review panel when someone clicks a colored status badge. The older `note` field remains supported as discussion text. Keep earlier events when a decision changes so the log remains a history. A future Google Sheet sync should validate and update this file, then rebuild the dashboard. Editing the Sheet alone cannot change the static site.
+
+The other files here are written by `scripts/dashboard/build_dashboard_data.py` (python3.12 venv) and read by the
+app. `receipt.json` names the commit, every artifact SHA, every check and its
 result. Regenerate after any change under `docs/cells/`, `docs/evidence/occurrence/` or the evaluators:
 
 ```bash

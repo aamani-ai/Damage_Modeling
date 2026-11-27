@@ -83,18 +83,21 @@ def _color(events: list[dict], has_curve: bool) -> str:
     for event in sorted(events, key=lambda x: x["date"]):
         latest[event["team"]] = event["event"]
     states = set(latest.values())
+    if "wrong" in states:
+        return "red"
     if states == {"accepted"} and len(latest) == 2:
         return "green" if has_curve or all(e.get("call") == "no_direct_damage" for e in events) else "yellow"
-    if states == {"wrong"} and len(latest) == 2:
-        return "red"
     return "yellow"
 
 
-def _summary(rows: list[dict]) -> dict:
+def _summary(rows: list[dict], cell_review: dict | None = None) -> dict:
     counted = [r for r in rows if r["color"] != "not_counted"]
     denominator = sum(r["share"] or 0 for r in counted)
     green = sum(r["share"] or 0 for r in counted if r["color"] == "green")
-    return {"color": rollup([r["color"] for r in counted]), "rows": rows,
+    color = rollup([r["color"] for r in counted])
+    if color == "white" and cell_review:
+        color = "yellow"
+    return {"color": color, "rows": rows, "cell_review": cell_review,
             "agreed": sum(r["color"] == "green" for r in counted), "total": len(counted),
             "agreed_value": green / denominator if denominator else None,
             "problem": next((r["label"] for r in counted if r["color"] == "red"), None)}
@@ -102,6 +105,9 @@ def _summary(rows: list[dict]) -> dict:
 
 def build(assets: dict, tiles: list[dict], library: list[dict]) -> None:
     log = load_json(REVIEW)
+    cell_reviews = {item["cell"]: item for item in log.get("cell_reviews", [])}
+    if len(cell_reviews) != len(log.get("cell_reviews", [])):
+        raise BuildError("Duplicate cell-level Team review")
     events = defaultdict(list)
     for event in log["events"]:
         if event["team"] not in ("Damage", "Hazard") or event["kind"] not in ("curve", "call") or event["event"] not in ("accepted", "wrong", "review_started", "question", "problem", "fix_posted"):
@@ -124,6 +130,7 @@ def build(assets: dict, tiles: list[dict], library: list[dict]) -> None:
     for tile in tiles:
         if tile["status"] == "gap":
             continue
+        cell_review = cell_reviews.get(tile["entry_id"])
         rows = []
         for sub in by_cell[tile["entry_id"]]:
             curves = []
@@ -131,7 +138,10 @@ def build(assets: dict, tiles: list[dict], library: list[dict]) -> None:
                 key = (tile["entry_id"], "curve", cid)
                 if key in overrides:
                     used_overrides.add(key)
-                curves.append({"id": cid, "color": overrides.get(key, _color(events[key], True)),
+                reviewed_color = _color(events[key], True)
+                review_basis = "cell" if reviewed_color == "white" and cell_review and key not in overrides else None
+                curves.append({"id": cid, "color": "red" if reviewed_color == "red" else overrides.get(key, "yellow" if review_basis else reviewed_color),
+                               "review_basis": review_basis,
                                "source": next((c["artifact"] for c in sub.get("construction", []) if c["curve_id"] == cid), None)})
             gap = sub.get("gap") or {}
             if sub["entry_id"] == "hail_solar" and sub["key"] in hail:
@@ -143,6 +153,9 @@ def build(assets: dict, tiles: list[dict], library: list[dict]) -> None:
                 wording, source = "not mentioned", None
             elif sub["entry_id"] == "hail_solar" and sub["key"] == "support":
                 wording, source = "Module hardware plus all general replacement fieldwork", HAIL_DOSSIER + "#L842"
+            elif sub["entry_id"] == "flood_solar" and sub["key"] == "support":
+                wording = "Replacement fieldwork is not allocated to a flood curve in the workbook's Value_Link sheet"
+                source = "docs/cells/flood_solar/current/damage_curve_records_v1_0_flood_solar.xlsx · Value_Link!K5"
             elif sub["entry_id"] == "hail_solar" and sub["key"] in ("mounting", "foundations", "substation", "scada", "civil"):
                 wording = gap.get("own_words") or "unknown"
                 source = _catalogue_source(sub["entry_id"], wording)
@@ -155,12 +168,20 @@ def build(assets: dict, tiles: list[dict], library: list[dict]) -> None:
                 source = _catalogue_source(sub["entry_id"], wording) or (gap.get("source") or {}).get("path")
             if sub.get("cost_follows"):
                 color = "not_counted"
+                review_basis = None
+            elif curves:
+                color = rollup([c["color"] for c in curves])
+                review_basis = "cell" if all(c["review_basis"] == "cell" for c in curves) else None
             else:
-                color = rollup([c["color"] for c in curves]) if curves else _color(events[(tile["entry_id"], "call", sub["key"])], False)
+                recorded_color = _color(events[(tile["entry_id"], "call", sub["key"])], False)
+                review_basis = "cell" if recorded_color == "white" and cell_review else None
+                color = "yellow" if review_basis else recorded_color
             if curves:
                 damage_call = "has_curve"
             elif sub.get("cost_follows"):
                 damage_call = "cost_follows"
+            elif sub["entry_id"] == "flood_solar" and sub["key"] == "support":
+                damage_call = "cost_unallocated"
             elif gap.get("no_direct_damage") or (sub["entry_id"] == "hail_solar" and sub["key"] == "collection"):
                 damage_call = "no_direct_damage"
             elif "not a damaged part" in (gap.get("own_words") or ""):
@@ -172,8 +193,8 @@ def build(assets: dict, tiles: list[dict], library: list[dict]) -> None:
             else:
                 damage_call = "possible_no_curve"
             rows.append({"key": sub["key"], "label": sub["label"], "share": sub["share"], "wording": wording,
-                         "source": source, "damage_call": damage_call, "color": color, "curves": curves})
-        tile["team"] = _summary(rows)
+                         "source": source, "damage_call": damage_call, "color": color, "review_basis": review_basis, "curves": curves})
+        tile["team"] = _summary(rows, cell_review)
     by_id = {t["entry_id"]: t.get("team") for t in tiles}
     for cat in library:
         for row in cat["types"]:
@@ -185,7 +206,7 @@ def build(assets: dict, tiles: list[dict], library: list[dict]) -> None:
                         scoped = [r for r in team["rows"] if r["key"].split(":", 1)[0] == building]
                         if not scoped:
                             raise BuildError(f"No Team rows for {t['entry_id']} building {building}")
-                        team = _summary(scoped)
+                        team = _summary(scoped, team.get("cell_review"))
                     t["team"] = team
     for tile in tiles:
         tile.pop("team", None)

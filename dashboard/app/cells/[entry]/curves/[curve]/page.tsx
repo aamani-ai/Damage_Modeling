@@ -46,6 +46,18 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
   const type = types.find((t) => t.building && (k.part ?? "").startsWith(t.building)) ?? types[0];
   const cov = type ? coverageSlice(type.slug, c.hazard.slug) : null;
   const viewer = twinViewer();
+  const teamTile = m.library.flatMap((category) => category.types)
+    .flatMap((assetType) => Object.values(assetType.tiles))
+    .find((tile) => tile.entry_id === entry && tile.team?.rows.some((row) => row.curves.some((item) => item.id === curveId)));
+  const teamCurve = teamTile?.team?.rows.flatMap((row) => row.curves).find((item) => item.id === curveId);
+  const teamStatus = teamCurve?.color === "green" ? "agreed"
+    : teamCurve?.color === "yellow" ? "in review"
+    : teamCurve?.color === "red" ? "flagged wrong"
+    : "no curve-level decision logged";
+  const teamStatusClass = teamCurve?.color === "green" ? "bg-[var(--team-green)] text-[var(--team-green-text)]"
+    : teamCurve?.color === "yellow" ? "bg-[var(--team-yellow)] text-[var(--team-yellow-text)]"
+    : teamCurve?.color === "red" ? "bg-[var(--team-red)] text-[var(--team-red-text)]"
+    : "border border-[#B8C1BC] bg-card text-foreground";
   return (
     <div>
       <PlainRail title={title} rail={k.rail_plain} summary={k.summary} back={{ href: `/cells/${entry}`, label: c.title }} tierMeaning={m.tier_meaning} tone={c.rail.review.tone} />
@@ -123,8 +135,10 @@ export default async function DossierPage({ params }: { params: Promise<{ entry:
           </div>
         </Card>
         <Card className="xl:col-span-2">
-          <CardTitle>Reviewed</CardTitle>
+          <CardTitle>Review records</CardTitle>
           <div className="px-3 pb-3 text-[12.5px] leading-snug">
+            <Kv label="Team curve decision" value={<span className={`inline-block rounded px-1.5 py-0.5 text-[11.5px] ${teamStatusClass}`}>{teamStatus}</span>} />
+            {teamTile?.team?.cell_review?.assessment ? <Kv label="Damage assessment of the cell" value={<span>{teamTile.team.cell_review.assessment.verdict} {teamTile.team.cell_review.assessment.finding} <span className="text-muted-foreground">This is a cell-wide screening assessment; curve agreement is tracked separately.</span></span>} /> : null}
             <p>{k.rail_plain.review.words}.</p>
             <Kv label="catalogue entry" value={<span>{k.review.entry_read_kind === "agent" ? "read by an agent" : "read"} {k.review.entry_read_on}</span>} />
             <Kv label="curve release" value={k.review.release_review ? <span>{k.review.release_review}</span> : <span className="text-muted-foreground">no review field in this artifact</span>} />
