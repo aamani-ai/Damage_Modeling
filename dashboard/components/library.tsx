@@ -27,35 +27,25 @@ const DAMAGE_CALL: Record<TeamCell["rows"][number]["damage_call"], string> = {
   cost_unallocated: "Replacement cost unallocated · no curve",
 };
 type TeamRow = TeamCell["rows"][number];
-type ReviewDetails = { reviewer?: string; review_type?: string; discussion?: string; note?: string; next_action?: string; source?: string };
+type ReviewDetails = { reviewer?: string; review_type?: string; discussion?: string; note?: string; next_action?: string; source?: string; model_pin?: string };
 type ReviewEvent = ReviewDetails & { cell: string; kind: "curve" | "call"; id: string; event: string; team: string; date: string };
 type ReviewOverride = ReviewDetails & { cell: string; kind: "curve"; id: string; status: "in_review"; date: string };
-type LogEntry = { id: string; date: string; actor: string; action: string; reviewType?: string; discussion?: string; nextAction?: string; sourceUrl?: string };
+type LogEntry = { id: string; date: string; actor: string; action: string; reviewType?: string; discussion?: string; nextAction?: string; sourceUrl?: string; modelPin?: string };
 type ReviewSelection = { key: string; label: string; color: TeamColor; entries: LogEntry[]; showCurveId: boolean };
-const REVIEW_LOG = teamReview as { events: ReviewEvent[]; status_overrides: ReviewOverride[]; cell_reviews: NonNullable<TeamCell["cell_review"]>[] };
+const REVIEW_LOG = teamReview as { events: ReviewEvent[]; status_overrides: ReviewOverride[] };
 const REVIEW_ACTION: Record<string, string> = { accepted: "accepted", wrong: "marked wrong", review_started: "started review", question: "asked a question", problem: "reported a problem", fix_posted: "posted a fix" };
-function cellReviewEntries(cellReview: NonNullable<TeamCell["cell_review"]>, target?: "curve" | "subsystem"): LogEntry[] {
-  const assessment = cellReview.assessment;
-  const findings: LogEntry[] = assessment ? [{ id: cellReview.cell, date: assessment.date, actor: `${cellReview.reviewer} · Damage`,
-    action: "recorded screening assessment", reviewType: "Cell-wide Damage assessment",
-    discussion: `Verdict: ${assessment.verdict}\nWhy: ${assessment.finding}\nDamage side: ${assessment.damage_side}. Hazard side: ${assessment.hazard_side}.\nSource: ${assessment.source}. This screening grade (${assessment.grade}) is separate from the Team review color${target ? `; it is not a separate ${target} sign-off` : ""}.` }] : [];
-  return [...findings, { id: cellReview.cell, date: cellReview.date, actor: `${cellReview.reviewer} · Damage`, action: "reviewed the cell",
-    reviewType: "First-round cell review", discussion: `${cellReview.source} §${cellReview.section}. ${cellReview.note ?? "This is a cell-wide review, not a separate decision on every curve or subsystem."}` }];
-}
 function reviewEntries(cell: string, row: TeamRow, curveId?: string): LogEntry[] {
   const ids = curveId ? [curveId] : row.curves.length ? row.curves.map((curve) => curve.id) : [row.key];
   const kind = row.curves.length ? "curve" : "call";
   const events = REVIEW_LOG.events.filter((event) => event.cell === cell && event.kind === kind && ids.includes(event.id))
     .map((event) => ({ id: event.id, date: event.date, actor: event.reviewer ? `${event.reviewer} · ${event.team}` : event.team,
-      action: REVIEW_ACTION[event.event] ?? event.event, reviewType: event.review_type, discussion: event.discussion ?? event.note,
+      action: REVIEW_ACTION[event.event] ?? event.event, reviewType: event.review_type, discussion: event.discussion ?? event.note, modelPin: event.model_pin,
       nextAction: event.next_action, sourceUrl: event.source?.startsWith("https://") ? event.source : undefined }));
   const overrides = REVIEW_LOG.status_overrides.filter((item) => item.cell === cell && item.kind === kind && ids.includes(item.id))
     .map((item) => ({ id: item.id, date: item.date, actor: item.reviewer ?? "Owner", action: "reopened for review",
-      reviewType: item.review_type, discussion: item.discussion ?? item.note ?? (item.source?.startsWith("https://") ? undefined : item.source),
+      reviewType: item.review_type, discussion: item.discussion ?? item.note ?? (item.source?.startsWith("https://") ? undefined : item.source), modelPin: item.model_pin,
       nextAction: item.next_action, sourceUrl: item.source?.startsWith("https://") ? item.source : undefined }));
-  const cellReview = REVIEW_LOG.cell_reviews.find((item) => item.cell === cell);
-  const inherited = cellReview ? cellReviewEntries(cellReview, curveId ? "curve" : "subsystem") : [];
-  return [...events, ...overrides, ...inherited].sort((a, b) => b.date.localeCompare(a.date));
+  return [...events, ...overrides].sort((a, b) => b.date.localeCompare(a.date));
 }
 function ReviewLog({ id, label, entries, showCurveId }: { id: string; label: string; entries: LogEntry[]; showCurveId: boolean }) {
   return <div id={id} className="space-y-2 text-[12px]">
@@ -71,6 +61,7 @@ function ReviewLog({ id, label, entries, showCurveId }: { id: string; label: str
             <span className={`inline-block max-w-full rounded-full px-1.5 py-0.5 text-[10px] font-semibold ${tone}`}>{entry.actor} · {entry.action}</span>
             <time dateTime={entry.date} className="mt-1 block text-[11px] font-semibold text-foreground">{dayMonth(entry.date)} {entry.date.slice(0, 4)}</time>
             {showCurveId ? <div className="mt-0.5 break-all text-[10.5px] text-muted-foreground">{entry.id}</div> : null}
+            {entry.modelPin ? <div className="mt-0.5 break-all text-[10.5px] text-muted-foreground">{entry.modelPin}</div> : null}
             {entry.reviewType ? <div className="mt-0.5 text-[11px] text-muted-foreground">{entry.reviewType}</div> : null}
             {entry.discussion ? <p className="mt-1 whitespace-pre-wrap break-words">{entry.discussion}</p> : null}
             {entry.nextAction ? <p className="mt-1 break-words"><span className="font-medium">Next:</span> {entry.nextAction}</p> : null}
@@ -78,7 +69,7 @@ function ReviewLog({ id, label, entries, showCurveId }: { id: string; label: str
           </div>
         </li>;
       })}
-    </ol> : <p className="text-muted-foreground">No Team review log has been recorded yet.</p>}
+    </ol> : <p className="text-muted-foreground">No target-specific Team review has been logged yet.</p>}
     {entries.some((entry) => !entry.discussion) ? <p className="text-[11px] text-muted-foreground">Some earlier decisions have no discussion note.</p> : null}
   </div>;
 }
@@ -135,11 +126,15 @@ function damageVerdictTone(assessment: DamageAssessment): string {
   if (assessment.grade.startsWith("green")) return "border-[var(--team-green)] bg-[var(--team-green)] text-[var(--team-green-text)]";
   return "border-border bg-muted text-foreground";
 }
-function teamTileDetail(team: TeamCell): string {
+function teamTileDetail(team: TeamCell, currentPin?: string | null): string {
   const counts = teamCounts(team);
   const open = counts.total - counts.agreed;
   if (!counts.total) return "No counted subsystems";
-  if (team.cell_review?.assessment) return `Damage: ${damageVerdictWord(team.cell_review.assessment)}`;
+  if (team.cell_review?.assessment) {
+    const assessment = team.cell_review.assessment;
+    if (assessment.model_pin && currentPin && assessment.model_pin !== currentPin) return `${counts.inReview} in review · earlier Damage assessment`;
+    return `Damage: ${damageVerdictWord(assessment)}`;
+  }
   if (team.color === "green") return `${counts.agreed}/${counts.total} agreed`;
   if (team.color === "red") return `${open} open · ${counts.wrong} flagged wrong`;
   if (team.cell_review && !counts.inReview) return "Damage review recorded · target decisions unlogged";
@@ -208,11 +203,11 @@ function TileBox({ t, lens, tabIndex, onKey, rc }: { t: LibraryTile; lens: strin
 
 function TeamTile({ t, team, open, onClick, rc, tabIndex, onKey }: { t: LibraryTile; team: TeamCell; open: boolean; onClick: () => void; rc: string; tabIndex: number; onKey: (e: React.KeyboardEvent<HTMLElement>) => void }) {
   const counts = teamCounts(team);
-  const detail = teamTileDetail(team);
+  const detail = teamTileDetail(team, t.identity.consumer_pin);
   return <div className={`flex h-[52px] w-full items-stretch overflow-hidden rounded-md border ${TEAM_TILE[team.color]}`}>
     <Link href={t.href} data-rc={rc} tabIndex={tabIndex} onKeyDown={onKey}
       aria-label={`Open ${t.title} cell page; ${TEAM_WORD[team.color]}; ${detail}`}
-      title={`${team.cell_review?.assessment ? `Damage cell assessment: ${team.cell_review.assessment.verdict} ${team.cell_review.assessment.finding} This is separate from Team agreement. ` : ""}${counts.agreed} agreed · ${counts.inReview} in review · ${counts.notStarted} target decisions unlogged · ${counts.wrong} flagged wrong, of ${counts.total} counted subsystems. Model coverage is separate from Team review.`}
+      title={`${team.cell_review?.assessment ? `Damage cell assessment${team.cell_review.assessment.model_pin ? ` on ${team.cell_review.assessment.model_pin}` : ""}: ${team.cell_review.assessment.verdict} ${team.cell_review.assessment.finding} This is separate from Team agreement. ` : ""}${counts.agreed} agreed · ${counts.inReview} in review · ${counts.notStarted} target decisions unlogged · ${counts.wrong} flagged wrong, of ${counts.total} counted subsystems. Model coverage is separate from Team review.`}
       className="flex min-w-0 flex-1 flex-col justify-center px-1.5 text-left hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px]">
       <span className="truncate text-[12px] font-semibold">{TEAM_WORD[team.color]}</span>
       {detail ? <span className="truncate text-[10.5px]">{detail}</span> : null}
@@ -224,7 +219,7 @@ function TeamTile({ t, team, open, onClick, rc, tabIndex, onKey }: { t: LibraryT
   </div>;
 }
 
-function TeamPanel({ team, title, href, repo, commit, valueSplit, entryId }: { team: TeamCell; title: string; href: string; repo: string; commit: string; valueSplit: ValueSplit | null | undefined; entryId: string }) {
+function TeamPanel({ team, title, href, repo, commit, valueSplit, entryId, currentPin }: { team: TeamCell; title: string; href: string; repo: string; commit: string; valueSplit: ValueSplit | null | undefined; entryId: string; currentPin?: string | null }) {
   const [open, setOpen] = useState<string | null>(null);
   const [openLog, setOpenLog] = useState<ReviewSelection | null>(null);
   const logTrigger = useRef<HTMLButtonElement | null>(null);
@@ -253,16 +248,13 @@ function TeamPanel({ team, title, href, repo, commit, valueSplit, entryId }: { t
       {openLog ? <div className="space-y-3">
         <div className="flex flex-wrap gap-x-5 gap-y-2">
           <div><span className="text-[11px] text-muted-foreground">Team decision for this {openLog.key.startsWith("curve:") ? "curve" : openLog.key.startsWith("row:") ? "subsystem" : "cell"}</span><div className="mt-1"><span className={`inline-block rounded border px-1.5 py-0.5 text-[12px] ${openLog.color === "not_counted" ? "bg-muted" : TEAM_TILE[openLog.color]}`}>{TEAM_WORD[openLog.color]}</span></div></div>
-          {assessment ? <div><span className="text-[11px] text-muted-foreground">Damage assessment · cell-wide</span><div className="mt-1"><span className={`inline-block rounded border px-1.5 py-0.5 text-[12px] ${damageVerdictTone(assessment)}`}>{damageVerdictWord(assessment)}</span></div></div> : null}
+          {assessment ? <div><span className="text-[11px] text-muted-foreground">{assessment.model_pin && assessment.model_pin !== currentPin ? "Earlier Damage assessment" : "Damage assessment"} · cell-wide</span><div className="mt-1"><span className={`inline-block rounded border px-1.5 py-0.5 text-[12px] ${damageVerdictTone(assessment)}`}>{damageVerdictWord(assessment)}</span></div></div> : null}
         </div>
+        {assessment ? <p className="text-[11px] leading-snug text-muted-foreground">{assessment.model_pin ? `${assessment.model_pin} · ` : ""}{assessment.finding} This cell-wide assessment is separate from the Team decision for this target.</p> : null}
         <ReviewLog id={`review-log-${entryId}`} label={openLog.label} entries={openLog.entries} showCurveId={openLog.showCurveId} />
       </div> : null}
     </Drawer>
     <div className="mb-2 flex items-center justify-between"><strong>{title}</strong><Link href={href} className="text-accent underline">Open Damage cell</Link></div>
-    {team.cell_review ? <button type="button" className="mb-2 text-left text-accent underline" onClick={(event) => showLog(event.currentTarget, {
-      key: `cell-${entryId}`, label: `${title} · Damage first-round review`, color: "yellow", showCurveId: false,
-      entries: cellReviewEntries(team.cell_review!),
-    })}>Damage assessment: {assessment ? damageVerdictWord(assessment) : "review recorded"} · {team.cell_review.reviewer} · {dayMonth(assessment?.date ?? team.cell_review.date)} · read finding</button> : null}
     <div className="mb-2 flex flex-wrap gap-x-6 gap-y-1 rounded-md border border-border bg-muted/30 px-2 py-1.5">
       <p><strong>Review:</strong> {reviewSummary || "No counted subsystems"}{counts.notCounted ? <span className="text-muted-foreground"> · {counts.notCounted} supporting cost {counts.notCounted === 1 ? "row" : "rows"} excluded</span> : null}</p>
       <p><strong>Asset value:</strong> {valueSummary}</p>
@@ -394,7 +386,7 @@ export function Library({ m }: { m: ManifestV3 }) {
                   {lens === "team" && openTeam?.startsWith(`${r}-`) ? (() => {
                     const h = hazards[Number(openTeam.split("-")[1])];
                     const tile = t.tiles[h?.slug];
-                    return tile?.team ? <div role="row" className="col-span-full"><TeamPanel team={tile.team} title={tile.title} href={tile.href} repo={m.repo.url} commit={m.link_commit} valueSplit={tile.value_split} entryId={tile.entry_id} /></div> : null;
+                    return tile?.team ? <div role="row" className="col-span-full"><TeamPanel team={tile.team} title={tile.title} href={tile.href} repo={m.repo.url} commit={m.link_commit} valueSplit={tile.value_split} entryId={tile.entry_id} currentPin={tile.identity.consumer_pin} /></div> : null;
                   })() : null}
                   </Fragment>
                 );

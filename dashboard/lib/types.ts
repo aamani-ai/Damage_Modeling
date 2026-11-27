@@ -55,7 +55,7 @@ export interface TeamCell {
   color: Exclude<TeamColor, "not_counted">;
   agreed: number; total: number; agreed_value: number | null; problem: string | null;
   cell_review?: { cell: string; team: "Damage"; reviewer: string; date: string; source: string; section: string; note?: string;
-    assessment?: { date: string; source: string; grade: string; verdict: string; finding: string; damage_side: string; hazard_side: string } } | null;
+    assessment?: { date: string; source: string; model_pin?: string; grade: string; verdict: string; finding: string; damage_side: string; hazard_side: string } } | null;
   rows: { key: string; label: string; share: number | null; wording: string; source: string | null;
           damage_call: "has_curve" | "possible_no_curve" | "no_direct_damage" | "not_damage_unit" | "unknown" | "partly_covered" | "cost_follows" | "cost_unallocated";
           color: TeamColor; review_basis?: "cell" | null; curves: { id: string; color: TeamColor; review_basis?: "cell" | null; source: string | null }[] }[];
