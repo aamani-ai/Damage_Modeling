@@ -45,12 +45,11 @@ of the newer `main` (`646836a`). Later that day, the owner corrected the dashboa
 model v1.1, docs r10, requested that the repeated cell review link be removed, and asked for the 13
 cell-folder sources-to-curves pages in the 27 November prompt. Those changes are in local commits
 `b682441` and `384912b`. The owner chose to leave the three reused substation binding pages out for now.
-None of these new commits has been pushed.
+The owner requested that the finished branch be pushed to `origin` on 2026-11-27.
 
 | Branch | Last commit | Created · last touched | Ahead / behind `main` | Merged | Files vs main | What to do |
 |---|---|---|---|---|---|---|
-| `dashboard-team-view` | This register update (prior commit `384912b`) | 2026-11-24 · 2026-11-27 | 17 / 0 | no | 133 | Keep open for Damage team review. The new local commits have not been pushed. |
-| `origin/dashboard-team-view` | `a566e66` | 2026-11-24 · 2026-11-24 | 11 / 2 | no | 22 | Remote branch has not received the local review work or the `main` merge. |
+| `dashboard-team-view` = `origin/dashboard-team-view` | This register update (prior commit `ad87325`) | 2026-11-24 · 2026-11-27 | 18 / 0 | no | 133 | Pushed for Damage team review on the owner's instruction; keep open. |
 | `origin/deploy/damage-curves` | `a4867ec` | 2026-10-22 · 2026-11-14 | 0 / 2 | yes | 0 | Deployment pointer; it has not received the hail × solar r10 release. |
 
 *"Behind" is left blank for Jung A's rows because `main` moved by six merge commits on 2026-10-20; the script
