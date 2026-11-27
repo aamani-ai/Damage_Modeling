@@ -21,10 +21,14 @@ changing the logistic curves, contract, or failure-unit DRs.
 - Failure-unit grain: `PV_MODULE_GLASS_CELL`
 - Curve form: logistic module-archetype curves
 - Canonical JSON:
-  [`hail_solar__model_v1_0__docs_r7__curve_artifact.json`](current/hail_solar__model_v1_0__docs_r7__curve_artifact.json)
+  [`hail_solar__model_v1_1__docs_r10__curve_artifact.json`](current/hail_solar__model_v1_1__docs_r10__curve_artifact.json)
+  (24 Nov 2026: the standard 3.2 mm curve refit as a smooth logistic, D50 51.5653 mm, k 0.303422; see the
+  [changelog](CHANGELOG.json))
 - Known-answer tests:
-  [`known_answer_tests_hail_solar__model_v1_0__docs_r7.json`](current/known_answer_tests_hail_solar__model_v1_0__docs_r7.json)
-- Canonical runtime pin: `hail_solar@model_v1_0__docs_r7`
+  [`known_answer_tests_hail_solar__model_v1_1__docs_r10.json`](current/known_answer_tests_hail_solar__model_v1_1__docs_r10.json)
+- Canonical runtime pin: `hail_solar@model_v1_1__docs_r10`. The previous pin `hail_solar@model_v1_0__docs_r7`
+  ([artifact](current/hail_solar__model_v1_0__docs_r7__curve_artifact.json)) stays published and active for Hazard
+  Deep Versions 1–1.5 and the CONUS grid until their own versioned rerun
 - Pollable cell changelog:
   [`CHANGELOG.json`](CHANGELOG.json)
 

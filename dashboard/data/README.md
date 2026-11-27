@@ -6,6 +6,11 @@ The other files here are written by `scripts/dashboard/build_dashboard_data.py` 
 app. `receipt.json` names the commit, every artifact SHA, every check and its
 result. Regenerate after any change under `docs/cells/`, `docs/evidence/occurrence/` or the evaluators:
 
+On `dashboard-team-view`, the committed dashboard data deliberately shows hail × solar at
+`hail_solar@model_v1_0__docs_r7`, even after merging the repository's model v1.1 / docs r10 release.
+The cell page and all three sampled curve files use r7. A dashboard data rebuild from the updated
+catalogue will select r10, so that change requires a deliberate dashboard pin decision.
+
 ```bash
 .venv/bin/python scripts/dashboard/build_dashboard_data.py                    # from origin/main
 .venv/bin/python scripts/dashboard/build_dashboard_data.py --source worktree  # a labelled preview of this branch
