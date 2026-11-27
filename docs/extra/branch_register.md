@@ -41,12 +41,15 @@ deploy branch is the one exception: a push to it deploys the dashboard, so it st
 The register above is the 2026-10-23 historical snapshot. The branch inventory was refreshed from
 `origin` on 2026-11-27. `dashboard-team-view` was created from `main` at `a4867ec` and pushed on
 2026-11-24. On 2026-11-27, the owner requested a local commit of the review dashboard work and a merge
-of the newer `main` (`646836a`). The dashboard data remains pinned to hail × solar model v1.0, docs r7;
-the merged repository-current hail × solar artifact is model v1.1, docs r10. These new commits are local only.
+of the newer `main` (`646836a`). Later that day, the owner corrected the dashboard target to hail × solar
+model v1.1, docs r10, requested that the repeated cell review link be removed, and asked for the 13
+cell-folder sources-to-curves pages in the 27 November prompt. Those changes are in local commits
+`b682441` and `384912b`. The owner chose to leave the three reused substation binding pages out for now.
+None of these new commits has been pushed.
 
 | Branch | Last commit | Created · last touched | Ahead / behind `main` | Merged | Files vs main | What to do |
 |---|---|---|---|---|---|---|
-| `dashboard-team-view` | This register update (prior commit `e03b3af`) | 2026-11-24 · 2026-11-27 | 14 / 0 | no | 25 | Keep open for Damage team review. The new local commits have not been pushed. |
+| `dashboard-team-view` | This register update (prior commit `384912b`) | 2026-11-24 · 2026-11-27 | 17 / 0 | no | 133 | Keep open for Damage team review. The new local commits have not been pushed. |
 | `origin/dashboard-team-view` | `a566e66` | 2026-11-24 · 2026-11-24 | 11 / 2 | no | 22 | Remote branch has not received the local review work or the `main` merge. |
 | `origin/deploy/damage-curves` | `a4867ec` | 2026-10-22 · 2026-11-14 | 0 / 2 | yes | 0 | Deployment pointer; it has not received the hail × solar r10 release. |
 
