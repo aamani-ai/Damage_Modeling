@@ -8,6 +8,8 @@ scope: Canonical partial-property BESS Flood screening response
 
 # Flood × BESS
 
+- [Sources to curves](SOURCES_TO_CURVES.md): which source gives which number on which curve, in plain words; the dashboard links to it above the Sources list.
+
 **Current: canonical conditional model v1.0 / docs r1.** The response and values
 are identical to the tested local v0.2 package. Annual screening is permitted
 only when the declared frequency, coupling, unit-cap and support checks pass.

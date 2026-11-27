@@ -1,5 +1,7 @@
 # Flood × onshore wind
 
+- [Sources to curves](SOURCES_TO_CURVES.md): which source gives which number on which curve, in plain words; the dashboard links to it above the Sources list.
+
 ## Cell identity
 
 ```yaml

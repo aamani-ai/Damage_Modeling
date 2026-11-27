@@ -8,6 +8,8 @@ scope: BESS Wildfire current conditional screening release and retained proposal
 
 # Wildfire × BESS
 
+- [Sources to curves](SOURCES_TO_CURVES.md): which source gives which number on which curve, in plain words; the dashboard links to it above the Sources list.
+
 Current: [model v1.0 / docs r1](current/README.md), repository-canonical
 conditional screening after the [annual consumer proof](../../extra/discussion/bess_damage/11_wildfire_annual_qualification.md).
 The T4 response and partial-property limits remain explicit. The

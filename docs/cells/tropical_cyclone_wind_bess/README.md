@@ -8,6 +8,8 @@ scope: BESS Hurricane-wind cell entry; proposed local-test candidate only
 
 # Tropical-cyclone wind × BESS
 
+- [Sources to curves](SOURCES_TO_CURVES.md): which source gives which number on which curve, in plain words; the dashboard links to it above the Sources list.
+
 **Repository-canonical model v1.0 / docs r1: conditional partial-scope screening.**
 The [current package](current/README.md) preserves the v0.1 conditional response
 and values after the [annual qualification](../../extra/discussion/bess_damage/08_hurricane_annual_qualification.md).

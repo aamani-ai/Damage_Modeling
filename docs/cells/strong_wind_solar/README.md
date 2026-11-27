@@ -6,6 +6,8 @@ without changing runtime behavior.
 
 ## Start here
 
+- [Sources to curves](SOURCES_TO_CURVES.md): which source gives which number on which curve, in plain words; the dashboard links to it above the Sources list.
+
 - [`basics/README.md`](basics/README.md) — first-reader gust, height/reference, demand-ratio, stow, and damage
   terminology with a worked event example.
 - [`basics/HOW_THE_MODEL_IS_BUILT.md`](basics/HOW_THE_MODEL_IS_BUILT.md) — the seven-stage reasoning chain

@@ -26,6 +26,8 @@ or judgment (warehouse). Cosmetic denting is not counted.
 
 ## Start here
 
+- [Sources to curves](SOURCES_TO_CURVES.md): which source gives which number on which curve, in plain words; the dashboard links to it above the Sources list.
+
 - [Scope, change classification and coverage check](proposed/README_hail_real_estate__model_v0_1__docs_r1.md)
 - [Decision log](proposed/DECISION_LOG_hail_real_estate__model_v0_1__docs_r1.md)
 - [Derivation dossier](proposed/hail_real_estate_curve_derivation_dossier__model_v0_1__docs_r1.md) (includes the seven-step audit and the NRI check)
